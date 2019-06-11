@@ -194,12 +194,19 @@ $(function(){
 	 /* Note: this might be improved in the future using a new builder or extension */
 	 function mark_toc_nodes_with_class(node_list, class_name){
 		 var regex;
+		 var cur_location = location.href.split('#')[0];
 		 node_list.forEach(function(toc_node){
 			 empty_node = '/' + toc_node + '.html';
 			 regex = new RegExp( '[a-zA-Z09-_]+' + empty_node, 'g');
 			 $('.globaltoc a').each(function(){
-				 if ( regex.test($(this).prop('href')) ) {
+				 var href = $(this).prop('href').split('#')[0];
+				 var is_current = (href === cur_location);
+         /* The selected menu link in the globaltoc acts as the toggle button, showing on an off its subtree */
+				 if ( regex.test(href) || is_current ) {
 					 $(this).addClass(class_name);
+				 }
+				 if ( is_current ) {
+					 $(this).addClass('current-toc-node');
 				 }
 			 });
 		 });
@@ -209,6 +216,14 @@ $(function(){
 		 $(this).on('click', function(e){
 			 e.preventDefault();
 			 $(this).find('.toc-toggle-btn').click();
+		 });
+	 });
+
+	 /* Scrolls up when clicking current toctree node */
+	 $('.globaltoc .current-toc-node').each(function(){
+		 $(this).on('click', function(e){
+			 e.preventDefault();
+			 $("html, body").animate({ scrollTop: 0 }, "500");
 		 });
 	 });
 
@@ -247,8 +262,6 @@ $(function(){
 			vSelector.appendTo($('#main-navbar'));
 		}
 	}
-
-
 
   function changeSearchPosition (currentWidth){
     if (currentWidth >= breakpoint) {
