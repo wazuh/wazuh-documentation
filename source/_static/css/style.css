@@ -506,7 +506,7 @@ li.toctree-l4 > a {
 	border: none;
   top: 0;
   right: 0.8rem;
-  width: 1.5rem;
+  width: 1.2rem;
   height: 100%;
   display: flex;
   align-content: center;
@@ -2572,6 +2572,8 @@ div.highlight pre {
       aside.help {
         flex: 0 0 auto;
         padding-right: 0;
+        margin-left: 0;
+        margin-right: auto;
       }
 
       .central-page-area {
@@ -2589,7 +2591,7 @@ div.highlight pre {
       }
 
       #main-content.order-1 {
-        padding-left: 30px;
+        padding-left: 50px;
       }
 
 			.central-page-area a img {
@@ -2681,6 +2683,8 @@ div.highlight pre {
 				max-height: calc(100vh - 55px);
 				height: 100%;
         flex-direction: column;
+        padding-right: 20px;
+        width: 380px;
       }
 
 			.scrolled .side-scroll {
@@ -2688,7 +2692,7 @@ div.highlight pre {
 			}
 
       .side-scroll:hover{
-        overflow: auto;
+        overflow-y: auto;
       }
 
       .no-latest-docs .side-scroll {
@@ -2700,7 +2704,9 @@ div.highlight pre {
       }
 
       #globaltoc {
-        width: 100%;
+        width: 360px;
+        margin-left: 0;
+        margin-right: auto;
       }
 
 			.scrolled #search-lg {
