@@ -102,3 +102,8 @@ b) Debian/Ubuntu:
 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
     # apt-get update
+
+Next steps
+----------
+
+Once you have updated the manager and API you are ready to upgrade the Elastic Stack. To do it you may check the :ref:`upgrading elastic stack <upgrading-elastic-stack>` section.
