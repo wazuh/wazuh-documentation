@@ -2591,7 +2591,7 @@ div.highlight pre {
       }
 
       #main-content.order-1 {
-        padding-left: 50px;
+        padding-left: 45px;
       }
 
 			.central-page-area a img {
@@ -2683,8 +2683,8 @@ div.highlight pre {
 				max-height: calc(100vh - 55px);
 				height: 100%;
         flex-direction: column;
-        padding-right: 20px;
-        width: 380px;
+        padding-right: 15px;
+        width: 375px;
       }
 
 			.scrolled .side-scroll {
