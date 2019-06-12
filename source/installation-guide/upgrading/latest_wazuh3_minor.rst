@@ -106,4 +106,6 @@ b) Debian/Ubuntu:
 Next steps
 ----------
 
-Once you have updated the manager and API you are ready to :ref:`upgrade the elastic stack <upgrading-elastic-stack>`.
+Once you have updated the manager and API you are ready to :ref:`upgrade the elastic stack<upgrading-elastic-stack>`.
+
+You might also want to check our :ref:`compatibility matrix <compatibility-matrix>` in order to determine which Elastic stack version you need to use.
