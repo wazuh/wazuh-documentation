@@ -8,7 +8,7 @@ Grouping agents
 .. versionadded:: 3.0.0
 
 There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
-the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process.
+the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process. Read the `Agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration//>`_ document for more information.
 
 Unless otherwise assigned, all new agents automatically belong to the **'default'** group. This group is created during the installation process with the configuration files placed in the ``/var/ossec/etc/shared/default/`` folder. These files will be pushed from the manager to all agents belonging to this group.
 

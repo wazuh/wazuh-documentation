@@ -51,7 +51,7 @@ These logs are obtained through Windows API calls and sent to the manager where 
 Monitor the Windows Event Channel with Wazuh
 --------------------------------------------
 
-Windows event channels can be monitored by placing their name at the location field from the localfile block and "eventchannel" as the log format.
+Windows event channels can be monitored by placing their name at the location field from the localfile block and "eventchannel" as the log format.  Read the `How to collect Windows events with Wazuh <https://wazuh.com/blog/how-to-collect-windows-events-with-wazuh//>`_ document for more information.
 
 .. note::
 
