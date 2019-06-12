@@ -1252,9 +1252,6 @@ select, option {
   position: relative;
 }
 
-#select-version {
-}
-
 #select-version .dropdown-toggle {
   cursor: pointer;
   position: relative;
@@ -1263,13 +1260,29 @@ select, option {
   color: #fff;
   font-size: 0.85rem;
   text-align: left;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid transparent;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+  transition: .2s all ease;
+}
+
+#select-version .dropdown-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#select-version .dropdown-toggle:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255,255,255,0.6);
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0 transparent;
+  -moz-box-shadow: 0 0 0 0 transparent;
+  -ms-box-shadow: 0 0 0 0 transparent;
+  -o-box-shadow: 0 0 0 0 transparent;
+  box-shadow: 0 0 0 0 transparent;
 }
 
 #select-version .dropdown-toggle::after {
