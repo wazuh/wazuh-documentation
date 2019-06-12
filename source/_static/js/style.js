@@ -1,4 +1,5 @@
 $(function(){
+
   var searchbar,
       mainmenu,
       form_control,
@@ -136,6 +137,32 @@ $(function(){
 		 }
    }
  }
+
+ /* -- Same scroll in navbar ------------------------------------------------------------------------------- */
+
+ $(window).on('scroll', function(e){
+
+	// Get data of scroll and positions
+	var document_height = $('.central-page-area').height();
+	var footer_height = $('#main-footer').height();
+	var document_scroll = $(window).scrollTop();
+	var nav_height = $('#globaltoc').height() + $('#search-lg').height();
+	var nav_scroll = $('.side-scroll').scrollTop();
+
+	if(document_scroll > 80){
+		
+		// Calculate navbar end scroll position
+		document_scroll -= 110;
+		document_height += footer_height;
+		var proporcion = document_height/nav_height;
+		var nav_scroll_end = (document_scroll/proporcion).toFixed();
+
+		// Set navbar end scroll position
+		$('.side-scroll').scrollTop(nav_scroll_end);
+
+	}
+
+ });
 
 	/* Global toc --------------------------------------------------------------------------------------------------*/
   function currentToc(){
@@ -312,4 +339,5 @@ $(function(){
 			window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
     }, 10);
 	}
+
 });
