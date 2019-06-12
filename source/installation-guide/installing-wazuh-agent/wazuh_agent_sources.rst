@@ -42,8 +42,13 @@ Installing Linux agent
     # cd wazuh-*
     # ./install.sh
 
-  .. note::
-  If you have previously compiled for another platform, you must clean the build using the command below: ``# make clean; make clean deps``
+  If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+  .. code-block:: console
+
+    # cd wazuh-*
+    # make -C src clean
+    # make -C src clean-deps
 
 .. note::
   During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
