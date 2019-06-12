@@ -11,14 +11,12 @@ Wazuh packages
 .. toctree::
     :maxdepth: 1
     
-    linux/linux-index
-    windows-index
-    macos-index
     aix-index
-    solaris/solaris-index
     hpux-index
-      
-
+    linux/linux-index
+    macos-index
+    solaris/solaris-index
+    windows-index
 
 Kibana and Splunk app
 ---------------------

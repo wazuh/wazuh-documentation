@@ -8,12 +8,13 @@ Linux packages
 .. toctree::
     :maxdepth: 1
     
-    linux-debian
-    linux-ubuntu
-    linux-centos
-    linux-rhel
     linux-amazon
-    linux-oracle
+    linux-centos
+    linux-debian
     linux-fedora
     linux-opensuse
+    linux-oracle
+    linux-rhel
     linux-suse
+    linux-ubuntu
+
