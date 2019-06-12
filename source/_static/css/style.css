@@ -2711,18 +2711,19 @@ div.highlight pre {
 
 			.scrolled #search-lg {
 				min-height: 0;
+				opacity: 0;
 				overflow: hidden;
-				transition: min-height 0.3s;
+				transition: min-height 0.5s, opacity 0.3s;
 				margin: 0;
       }
 
       #search-lg {
-        min-height: 45px;
+        min-height: 52px;
+				opacity: 1;
         padding: 0;
         display: block;
 				flex: unset;
-				transition: min-height 0.3s;
-				margin-bottom: 8px;
+				transition: min-height 0.3s, opacity 0.3s 0.2s;
       }
 }
 
