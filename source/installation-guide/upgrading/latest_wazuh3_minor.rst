@@ -48,6 +48,12 @@ b) Debian/Ubuntu:
 Upgrade the Wazuh agent
 -----------------------
 
+Since the Wazuh 3 version it is possible to upgrade the agents from the manager or locally.
+
+To upgrade the agents remotely from the manager check the :ref:`Upgrading agent<upgrading-agent>`.
+
+To perform the upgrade locally you have to follow the next steps:
+
 a) CentOS/RHEL/Fedora:
 
   .. code-block:: console
