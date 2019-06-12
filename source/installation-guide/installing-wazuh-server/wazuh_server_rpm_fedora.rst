@@ -59,19 +59,20 @@ Once the process is complete, you can check the service status with:
 Installing the Wazuh API
 ------------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
-
-  .. code-block:: console
-
-    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-
-  and then, install NodeJS:
+1. Install NodeJS:
 
   .. code-block:: console
 
     # dnf install nodejs
 
-2. Install the Wazuh API. It will update NodeJS if it is required:
+.. note::
+  If you have Fedora v24 or lower, you need to add the official NodeJS repository previously. Download and install NodeJS by using these commands:
+
+  .. code-block:: console
+
+   # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - && dnf install nodejs
+
+2. Install the Wazuh API:
 
   .. code-block:: console
 
