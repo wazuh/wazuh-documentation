@@ -162,6 +162,7 @@ $(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
+		$('.globaltoc li.initial').removeClass('initial');
 		if( li.hasClass('show')){
 			li.removeClass('show');
 		} else {
@@ -179,10 +180,10 @@ $(function(){
 		 }
 		 var currentLeaf = $('.globaltoc a.current.leaf');
 		 if (currentLeaf.length == 0){
-			 currentLeaf = $('.globaltoc [href="#"].current');
+			currentLeaf = $('.globaltoc [href="#"].current');
 		 }
 		 currentLeaf.parents('li').each(function(){
-			 $(this).addClass('show');
+			$(this).addClass('initial').addClass('show');
 		 });
 	 }
 

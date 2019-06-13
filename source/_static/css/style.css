@@ -538,6 +538,10 @@ li.toctree-l4 > a {
 	transition: max-height ease .3s, opacity ease 0.3s;
 }
 
+#globaltoc > ul .show.initial > ul > li:not(.show){
+  transition: none !important;
+}
+
 #globaltoc > ul li:not(.show) > ul > li {
 	max-height: 0;
 	opacity: 0;
