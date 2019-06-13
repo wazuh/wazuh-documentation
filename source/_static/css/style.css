@@ -466,8 +466,19 @@ li.toctree-l4 > a {
   position: relative;
 }
 
+#navbar-globaltoc {
+  visibility: visible;
+  right: -20px;
+  overflow-y: scroll;
+  transition: .3s all;
+}
+
+#navbar-globaltoc.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
-  right: 0;
   left: 0;
   background-color: #f8f8f8;
   overflow: auto;
@@ -477,7 +488,9 @@ li.toctree-l4 > a {
 
 #navbar-globaltoc.show {
   height: calc(100vh - 44px);
-  top: 88px;
+  top: 44px;
+  padding-top: 44px;
+  overflow-y: scroll;
   transition: top .3s;
 }
 
@@ -497,6 +510,7 @@ li.toctree-l4 > a {
 .scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
   top: 44px;
   position: fixed;
+  padding-top: 0;
   transition: top .3s;
 }
 
@@ -508,6 +522,7 @@ li.toctree-l4 > a {
   right: 0.8rem;
   width: 1.2rem;
   height: 100%;
+  padding: 0 25px;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -563,7 +578,7 @@ li.toctree-l4 > a {
 }
 
 #globaltoc li.toctree-l1 a {
-  width: 360px;
+  width: 100%;
 }
 
 #globaltoc li.toctree-l1 a:hover {
@@ -1178,7 +1193,7 @@ footer .contact-info .fa-paper-plane-o {
 
 .navbar-toggler.btn-close.collapsed::before {
   opacity: 1;
-  top: 22px;
+  top: 24px;
   transition: all ease .4s;
 }
 
@@ -1826,7 +1841,13 @@ footer a {
 .menu-sub .navbar-toggler {
   margin: 6px 3px 0;
   border: none;
-  padding: 4px 13px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  outline: 0;
+}
+
+.menu-sub .navbar-toggler:focus {
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .menu-sub .navbar-toggler .navbar-toggler-icon {
@@ -1836,8 +1857,9 @@ footer a {
 .menu-sub .navbar-toggler {
   border-color: transparent;
 	position: unset;
-	height: 40px;
-	width: 40px;
+	height: 38px;
+  width: 38px;
+  margin-bottom: 3px;
 }
 
 #main-navbar .navbar-nav>li>a {
@@ -1976,18 +1998,6 @@ div.highlight pre {
 		top: 107px;
 		height: calc(100vh - 107px);
 	}
-
-  .edit-repo-wrapper {
-    position: absolute;
-    right: 0;
-    background: #cbcbcb;
-    border-radius: 0 0 0 10px;
-    color: #ffffff;
-    z-index: 1;
-  }
-  .edit-repo-wrapper a{
-    color: #ffffff;
-  }
 
   ul#breadcrumbs {
     max-width: 80%;
@@ -2326,10 +2336,18 @@ div.highlight pre {
 			.admonition::before  {
 				padding-top: 0;
 				align-items: center;
-			}
+      }
+      
+      #navbar-globaltoc {
+        overflow-y: hidden;
+      }
+      
+      #navbar-globaltoc:hover {
+        overflow-y: auto;
+      }
 
 			#navbar-globaltoc.show, #navbar-globaltoc.collapsing {
-				right: auto;
+				right: -20px;
 				left: auto;
 			}
 
@@ -2606,6 +2624,18 @@ div.highlight pre {
         display: flex;
         width: 100%;
 				height: 40px;
+      }
+
+      .edit-repo-wrapper {
+        position: absolute;
+        right: 0;
+        background: #cbcbcb;
+        border-radius: 0 0 0 10px;
+        color: #ffffff;
+        z-index: 1;
+      }
+      .edit-repo-wrapper a{
+        color: #ffffff;
       }
 
 			.breadcrumbs-wrapper {

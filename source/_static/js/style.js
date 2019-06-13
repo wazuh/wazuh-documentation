@@ -208,6 +208,7 @@ $(function(){
 		 currentLeaf.parents('li').each(function(){
 			$(this).addClass('initial').addClass('show');
 		 });
+		 $('#navbar-globaltoc').removeClass('hidden');
 	 }
 
 	 /* Note: this might be improved in the future using a new builder or extension */
