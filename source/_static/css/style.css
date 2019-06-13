@@ -466,8 +466,19 @@ li.toctree-l4 > a {
   position: relative;
 }
 
+#navbar-globaltoc {
+  visibility: visible;
+  right: -20px;
+  overflow-y: scroll;
+  transition: .3s all;
+}
+
+#navbar-globaltoc.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
-  right: 0;
   left: 0;
   background-color: #f8f8f8;
   overflow: auto;
@@ -477,7 +488,9 @@ li.toctree-l4 > a {
 
 #navbar-globaltoc.show {
   height: calc(100vh - 44px);
-  top: 88px;
+  top: 44px;
+  padding-top: 44px;
+  overflow-y: scroll;
   transition: top .3s;
 }
 
@@ -497,6 +510,7 @@ li.toctree-l4 > a {
 .scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
   top: 44px;
   position: fixed;
+  padding-top: 0;
   transition: top .3s;
 }
 
@@ -506,8 +520,9 @@ li.toctree-l4 > a {
 	border: none;
   top: 0;
   right: 0.8rem;
-  width: 1.5rem;
+  width: 1.2rem;
   height: 100%;
+  padding: 0 25px;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -538,6 +553,10 @@ li.toctree-l4 > a {
 	transition: max-height ease .3s, opacity ease 0.3s;
 }
 
+#globaltoc > ul .show.initial > ul > li:not(.show){
+  transition: none !important;
+}
+
 #globaltoc > ul li:not(.show) > ul > li {
 	max-height: 0;
 	opacity: 0;
@@ -556,6 +575,10 @@ li.toctree-l4 > a {
 
 #globaltoc li:last-child {
 	border-bottom: 1px solid rgba(59, 59, 59, 0.0);
+}
+
+#globaltoc li.toctree-l1 a {
+  width: 100%;
 }
 
 #globaltoc li.toctree-l1 a:hover {
@@ -1174,7 +1197,7 @@ footer .contact-info .fa-paper-plane-o {
 
 .navbar-toggler.btn-close.collapsed::before {
   opacity: 1;
-  top: 22px;
+  top: 24px;
   transition: all ease .4s;
 }
 
@@ -1713,23 +1736,6 @@ blockquote {
   overflow: auto;
 }
 
-.admonition.note > p:nth-of-type(2)::before {
-    content: 'Note:';
-}
-
-.admonition.warning > p:nth-of-type(2)::before {
-    content: 'Warning:';
-
-}
-
-.admonition > p:nth-of-type(2)::before {
-    display: inline-block;
-    font: normal normal normal 1em/.5 'Open Sans';
-    margin-right: 0.75em;
-		margin-right: 0.4em;
-    font-weight: bold;
-}
-
 .admonition::before {
 	position: absolute;
   top: 0;
@@ -1745,32 +1751,22 @@ blockquote {
 	color: #ffffff;
 }
 
-.admonition.note::before {
-	content: '\f06a';
-  background-color: #00a9e5;
-}
-
-.admonition.warning::before {
-	content: '\f071';
-  background-color: #ffb600;
-}
-
 .admonition {
   margin-bottom: 1.3rem;
   overflow: auto;
-	padding: 0 1em 0 calc(50px + 1em);
+	padding: 0;
 	position: relative;
 }
 
 .admonition p {
-  padding: 1em 0;
+  padding: 1rem;
   margin: 0;
 }
 
 p.admonition-title {
-  color: #333333;
-  font-size: 1.2em;
-	display: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+	padding: 0.25rem 1rem;
 }
 
 p.first.admonition-title::before,
@@ -1782,31 +1778,30 @@ p.first.admonition-title::before,
 }
 
 .note {
-	border: 1px solid #00a9e5;
+	background-color: rgba(0, 169, 229, 0.2);
 }
 
 .warning {
-	border: 1px solid #ffb600;
-}
-
-.note, .warning {
-  background-color: #ffffff;
-  border-radius: 3px;
+	background-color: rgba(255, 183, 0, 0.2);
 }
 
 .note .admonition-title {
-  background-color: #ffffff;
+  background-color: #00a9e5;
+}
+
+.warning .admonition-title {
+  background-color: #ffb600;
 }
 
 .note p.first.admonition-title::before {
   content: '\f06a';
-  color: #00a9e5;
+  color: #ffffff;
 }
 
 .warning p.first.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
-  color: #ffb600;
+  color: #ffffff;
 }
 
 .admonition .highlight-console {
@@ -1908,7 +1903,13 @@ footer a {
 .menu-sub .navbar-toggler {
   margin: 6px 3px 0;
   border: none;
-  padding: 4px 13px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  outline: 0;
+}
+
+.menu-sub .navbar-toggler:focus {
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .menu-sub .navbar-toggler .navbar-toggler-icon {
@@ -1918,8 +1919,9 @@ footer a {
 .menu-sub .navbar-toggler {
   border-color: transparent;
 	position: unset;
-	height: 40px;
-	width: 40px;
+	height: 38px;
+  width: 38px;
+  margin-bottom: 3px;
 }
 
 #main-navbar .navbar-nav>li>a {
@@ -2058,18 +2060,6 @@ div.highlight pre {
 		top: 107px;
 		height: calc(100vh - 107px);
 	}
-
-  .edit-repo-wrapper {
-    position: absolute;
-    right: 0;
-    background: #cbcbcb;
-    border-radius: 0 0 0 10px;
-    color: #ffffff;
-    z-index: 1;
-  }
-  .edit-repo-wrapper a{
-    color: #ffffff;
-  }
 
   ul#breadcrumbs {
     max-width: 80%;
@@ -2408,10 +2398,18 @@ div.highlight pre {
 			.admonition::before  {
 				padding-top: 0;
 				align-items: center;
-			}
+      }
+      
+      #navbar-globaltoc {
+        overflow-y: hidden;
+      }
+      
+      #navbar-globaltoc:hover {
+        overflow-y: auto;
+      }
 
 			#navbar-globaltoc.show, #navbar-globaltoc.collapsing {
-				right: auto;
+				right: -20px;
 				left: auto;
 			}
 
@@ -2658,6 +2656,8 @@ div.highlight pre {
       aside.help {
         flex: 0 0 auto;
         padding-right: 0;
+        margin-left: 0;
+        margin-right: auto;
       }
 
       .central-page-area {
@@ -2675,7 +2675,7 @@ div.highlight pre {
       }
 
       #main-content.order-1 {
-        padding-left: 30px;
+        padding-left: 45px;
       }
 
 			.central-page-area a img {
@@ -2686,6 +2686,18 @@ div.highlight pre {
         display: flex;
         width: 100%;
 				height: 40px;
+      }
+
+      .edit-repo-wrapper {
+        position: absolute;
+        right: 0;
+        background: #cbcbcb;
+        border-radius: 0 0 0 10px;
+        color: #ffffff;
+        z-index: 1;
+      }
+      .edit-repo-wrapper a{
+        color: #ffffff;
       }
 
 			.breadcrumbs-wrapper {
@@ -2767,6 +2779,8 @@ div.highlight pre {
 				max-height: calc(100vh - 55px);
 				height: 100%;
         flex-direction: column;
+        padding-right: 15px;
+        width: 375px;
       }
 
 			.scrolled .side-scroll {
@@ -2774,7 +2788,7 @@ div.highlight pre {
 			}
 
       .side-scroll:hover{
-        overflow: auto;
+        overflow-y: auto;
       }
 
       .no-latest-docs .side-scroll {
@@ -2786,23 +2800,26 @@ div.highlight pre {
       }
 
       #globaltoc {
-        width: 100%;
+        width: 360px;
+        margin-left: 0;
+        margin-right: auto;
       }
 
 			.scrolled #search-lg {
 				min-height: 0;
+				opacity: 0;
 				overflow: hidden;
-				transition: min-height 0.3s;
+				transition: min-height 0.5s, opacity 0.3s;
 				margin: 0;
       }
 
       #search-lg {
-        min-height: 45px;
+        min-height: 52px;
+				opacity: 1;
         padding: 0;
         display: block;
 				flex: unset;
-				transition: min-height 0.3s;
-				margin-bottom: 8px;
+				transition: min-height 0.3s, opacity 0.3s 0.2s;
       }
 }
 

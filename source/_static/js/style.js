@@ -1,4 +1,5 @@
 $(function(){
+
   var searchbar,
       mainmenu,
       form_control,
@@ -93,11 +94,6 @@ $(function(){
     });
   }
 
-  // Toggle globaltoc in small devices
-   $('.menu-sub .navbar-expand-lg').click(function (){
-
-	 });
-
   /* Page scroll event --------------------------------------------------------------------------------------------------*/
   $('#btn-scroll').on('click', function(){
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -137,6 +133,28 @@ $(function(){
    }
  }
 
+ /* -- Same scroll in navbar ------------------------------------------------------------------------------- */
+
+ $(window).on('scroll', function(e){
+
+	// Get data of scroll and positions
+	var document_height = $('.central-page-area').height();
+	var footer_height = $('#main-footer').height();
+	var document_scroll = $(window).scrollTop();
+	var nav_height = $('#globaltoc').height() + $('#search-lg').height();
+	var nav_scroll = $('.side-scroll').scrollTop();
+
+	// Calculate navbar end scroll position
+	//document_scroll -= 110;
+	//document_height += footer_height;
+	var proporcion = document_height/nav_height;
+	var nav_scroll_end = (document_scroll/proporcion).toFixed();
+
+	// Set navbar end scroll position
+	$('.side-scroll').scrollTop(nav_scroll_end);
+
+ });
+
 	/* Global toc --------------------------------------------------------------------------------------------------*/
   function currentToc(){
     var href;
@@ -167,6 +185,7 @@ $(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
+		$('.globaltoc li.initial').removeClass('initial');
 		if( li.hasClass('show')){
 			li.removeClass('show');
 		} else {
@@ -184,11 +203,12 @@ $(function(){
 		 }
 		 var currentLeaf = $('.globaltoc a.current.leaf');
 		 if (currentLeaf.length == 0){
-			 currentLeaf = $('.globaltoc [href="#"].current');
+			currentLeaf = $('.globaltoc [href="#"].current');
 		 }
 		 currentLeaf.parents('li').each(function(){
-			 $(this).addClass('show');
+			$(this).addClass('initial').addClass('show');
 		 });
+		 $('#navbar-globaltoc').removeClass('hidden');
 	 }
 
 	 /* Note: this might be improved in the future using a new builder or extension */
@@ -312,4 +332,5 @@ $(function(){
 			window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
     }, 10);
 	}
+
 });
