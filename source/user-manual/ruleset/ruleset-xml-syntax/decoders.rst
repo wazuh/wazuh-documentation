@@ -76,6 +76,23 @@ Before making a custom decoder, the first step should always be running the even
 Options
 -------
 
+There is many options to configure the decoders:
+
+- `decoder`_
+- `parent`_
+- `accumulate`_
+- `program_name`_
+- `prematch`_
+- `regex`_
+- `order`_
+- `fts`_
+- `ftscomment`_
+- `plugin_decoder`_
+- `use_own_name`_
+- `json_null_field`_
+- `var`_
+- `type`_
+
 decoder
 ^^^^^^^
 
@@ -87,27 +104,16 @@ The attributes listed below define a decoder.
 +===========+===========================+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
-| type      | The type of the decoder   |
-+-----------+---------------------------+
 
 Example:
 
-Sets name and type of decoder to *ossec*:
+Set name of decoder to *ossec*:
 
 .. code-block:: xml
 
-  <decoder name="ossec" type ="ossec">
-    ...
-  </decoder>
-
-*Type* can also be defined later in the decoder:
-
-.. code-block:: xml
-
-  <decoder name="ossec">
-   <type>ossec</type>
-    ...
-  </decoder>
+    <decoder name="ossec">
+      ...
+    </decoder>
 
 parent
 ^^^^^^
@@ -415,9 +421,25 @@ Example:
     <prematch>^$header</prematch>
   </decoder>
 
-  <decoder name="syscall-child">
-    <parent>syscall</parent>
-    <prematch offset="$offset">^: $type </prematch>
-    <regex offset="after_prematch">(\S+)</regex>
-    <order>syscall</order>
-  </decoder>
+    <decoder name="syscall-child">
+      <parent>syscall</parent>
+      <prematch offset="$offset">^: $type </prematch>
+      <regex offset="after_prematch">(\S+)</regex>
+      <order>syscall</order>
+    </decoder>
+
+type
+^^^^
+
+It sets the type of log that the decoder is going to match.
+
+Example:
+
+Set type of decoder to *syslog*:
+
+.. code-block:: xml
+
+    <decoder>
+      <type>syslog</type>
+      ...
+    </decoder>
