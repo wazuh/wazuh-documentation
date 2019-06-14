@@ -97,7 +97,7 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-3. (Optional) Disable the Wazuh repository:
+4. (Optional) Disable the Wazuh repository:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
