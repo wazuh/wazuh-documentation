@@ -59,11 +59,11 @@ Once the process is complete, you can check the service status with:
 Installing the Wazuh API
 ------------------------
 
-1. Install NodeJS:
+1. Install the Wazuh API:
 
   .. code-block:: console
 
-    # dnf install nodejs
+    # dnf install wazuh-api
 
 .. note::
   If you have Fedora v24 or lower, you need to add the official NodeJS repository previously. Download and install NodeJS by using these commands:
@@ -72,13 +72,7 @@ Installing the Wazuh API
 
    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - && dnf install nodejs
 
-2. Install the Wazuh API:
-
-  .. code-block:: console
-
-    # dnf install wazuh-api
-
-3. Once the process is complete, you can check the service status with:
+2. Once the process is complete, you can check the service status with:
 
   * For Systemd:
 
@@ -95,7 +89,7 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-4. (Optional) Disable the Wazuh repository:
+3. (Optional) Disable the Wazuh repository:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
