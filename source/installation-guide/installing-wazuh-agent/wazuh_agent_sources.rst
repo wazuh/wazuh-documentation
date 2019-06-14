@@ -47,7 +47,7 @@ Installing Linux agent
 
 .. warning::
   When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
-  
+
 .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
@@ -77,16 +77,16 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
 2. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
-* `WiX Toolset <http://wixtoolset.org/>`_.
-* .NET framework 3.5.1.
-* Microsoft Windows SDK.
+  - `WiX Toolset <http://wixtoolset.org/>`_.
+  - .NET framework 3.5.1.
+  - Microsoft Windows SDK.
 
 3. Download the Wazuh source code and unzip it:
 
   .. code-block:: console
 
     # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
-    # cd wazuh-*/src
+    # cd wazuh-3.9.2/src
 
 4. Compile the agent by running the ``make`` command:
 
@@ -102,14 +102,23 @@ The following output will appear at the end of the building process:
    Done building winagent
 
 
-5. Once the agent has been compiled, transfer the Wazuh folder to the target Windows system. It is recommended that this folder be compressed at first to speed up the process.
+5. Moves the entire repository to the Windows machine. It is recommended to compress it to speed up the process.
 
   .. code-block:: console
 
     # zip -r wazuh.zip ../../wazuh-3.9.2
 
-6. Once in Windows, run the ``wazuh-3.9.2/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
+6. Decompress the repository the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
-.. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
+  .. code-block:: console
 
-.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+    cd wazuh-3.9.2\src\win32
+    .\wazuh-installer-build-msi.bat
+
+  If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
+
+  .. code-block:: console
+
+    :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
+
+.. note:: Once the agent is deployed :doc:`with a normal or unattended installation<./wazuh_agent_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :doc:`the registering section<../../user-manual/registering/index>`.
