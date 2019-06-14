@@ -26,6 +26,7 @@ There is many options to configure the decoders:
 - `use_own_name`_
 - `json_null_field`_
 - `var`_
+- `type`_
 
 decoder
 ^^^^^^^
@@ -37,16 +38,14 @@ The attributes listed below define a decoder.
 +===========+===========================+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
-| type      | The type of the decoder   |
-+-----------+---------------------------+
 
 Example:
 
-Set name and type of decoder to *ossec*:
+Set name of decoder to *ossec*:
 
   .. code-block:: xml
 
-    <decoder name="ossec" type ="ossec">
+    <decoder name="ossec">
       ...
     </decoder>
 
@@ -352,4 +351,20 @@ Example:
       <prematch offset="$offset">^: $type </prematch>
       <regex offset="after_prematch">(\S+)</regex>
       <order>syscall</order>
+    </decoder>
+
+type
+^^^^
+
+It sets the type of log that the decoder is going to match.
+
+Example:
+
+Set type of decoder to *syslog*:
+
+.. code-block:: xml
+
+    <decoder>
+      <type>syslog</type>
+      ...
     </decoder>
