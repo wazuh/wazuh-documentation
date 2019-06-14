@@ -2,8 +2,8 @@
  
 .. _solaris_index:
  
-Solaris packages
-================
+Solaris
+=======
 
 .. toctree::
     :maxdepth: 1

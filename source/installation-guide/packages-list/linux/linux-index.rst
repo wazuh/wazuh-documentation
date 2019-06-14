@@ -2,8 +2,8 @@
  
 .. _linux_index:
  
-Linux packages
-==============
+Linux
+=====
 
 .. toctree::
     :maxdepth: 1

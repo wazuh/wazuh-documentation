@@ -2,8 +2,8 @@
  
 .. _linux_centos:
  
-CentOS packages
-===============
+CentOS
+======
 
 Please, select your CentOS version:
 

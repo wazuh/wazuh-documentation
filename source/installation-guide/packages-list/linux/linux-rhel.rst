@@ -2,8 +2,8 @@
  
 .. _linux_rhel:
  
-Red Hat Enterprise Linux packages
-=================================
+Red Hat Enterprise Linux
+========================
 
 Please, select your Red Hat Enterprise Linux version:
 

@@ -2,8 +2,8 @@
  
 .. _linux_ubuntu:
  
-Ubuntu package
-==============
+Ubuntu
+======
 
 The following packages are able to install in Ubuntu 12.04 or greater: 
 

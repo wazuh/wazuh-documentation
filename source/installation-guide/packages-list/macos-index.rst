@@ -2,8 +2,8 @@
  
 .. _macos_index:
  
-macOS package
-=============
+macOS
+=====
 
 Agent
 -----

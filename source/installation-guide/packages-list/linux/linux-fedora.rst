@@ -2,8 +2,8 @@
  
 .. _linux_fedora:
  
-Fedora packages
-===============
+Fedora
+======
 
 The following packages are able to install in Fedora 22 or greater: 
 

@@ -2,8 +2,8 @@
  
 .. _aix_index:
  
-AIX package
-===========
+AIX
+===
 
 Agent
 -----

@@ -2,8 +2,8 @@
  
 .. _linux_suse:
  
-SUSE packages
-=============
+SUSE
+====
 
 Please, select your SUSE version:
 

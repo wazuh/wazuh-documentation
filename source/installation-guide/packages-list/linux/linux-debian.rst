@@ -2,8 +2,8 @@
  
 .. _linux_debian:
  
-Debian packages
-===============
+Debian
+======
 
 The following packages are able to install in Debian 7 or greater: 
 

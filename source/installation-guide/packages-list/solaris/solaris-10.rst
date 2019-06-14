@@ -2,8 +2,8 @@
  
 .. _solaris_10:
  
-Solaris 10 packages
-===================
+Solaris 10
+==========
 
 Agent
 -----

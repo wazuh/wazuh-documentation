@@ -2,8 +2,8 @@
  
 .. _linux_amazon:
  
-Amazon Linux packages
-=====================
+Amazon Linux
+============
 
 The following packages are able to install in Amazon Linux 1 and 2: 
 

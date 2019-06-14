@@ -2,8 +2,8 @@
  
 .. _hpux_index:
  
-HP-UX package
-=============
+HP-UX
+=====
 
 Agent
 -----

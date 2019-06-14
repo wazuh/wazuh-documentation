@@ -2,8 +2,8 @@
  
 .. _solaris_11:
  
-Solaris 11 packages
-===================
+Solaris 11
+==========
 
 Agent
 -----

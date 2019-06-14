@@ -2,8 +2,8 @@
  
 .. _linux_oracle:
  
-Oracle Linux packages
-=====================
+Oracle Linux
+============
 
 Please, select your Oracle Linux version:
 

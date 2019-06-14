@@ -2,8 +2,8 @@
  
 .. _windows_index:
  
-Windows package
-===============
+Windows
+=======
 
 Agent
 -----
