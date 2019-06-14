@@ -2,8 +2,8 @@
  
 .. _elastic_stack_index:
  
-Kibana WazuhApp plugin
-======================
+Kibana app
+==========
 
 The following package is able to install as plugin in Kibana: 
 

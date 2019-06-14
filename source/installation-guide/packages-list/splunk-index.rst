@@ -2,8 +2,8 @@
  
 .. _splunk_index:
  
-Splunk WazuhApp app
-===================
+Splunk app
+==========
 
 The following package is able to install as plugin in Splunk: 
 
