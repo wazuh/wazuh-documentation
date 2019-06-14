@@ -19,7 +19,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
   .. code-block:: console
 
     # apt-get update
-    # apt-get install curl apt-transport-https lsb-release
+    # apt-get install curl apt-transport-https lsb-release gnupg2
 
 2. Install the GPG key:
 
