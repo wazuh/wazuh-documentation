@@ -41,6 +41,7 @@ Installing Wazuh manager
     .. code-block:: console
 
       # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get update
       # apt-get build-dep python3.6 -y
 
   * For Debian based system:
@@ -48,6 +49,7 @@ Installing Wazuh manager
     .. code-block:: console
 
       # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get update
       # apt-get build-dep python3.5 -y
 
   .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
