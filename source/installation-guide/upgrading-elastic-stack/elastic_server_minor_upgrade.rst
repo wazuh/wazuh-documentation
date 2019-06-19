@@ -152,10 +152,7 @@ Upgrade Filebeat
 
   .. code-block:: yaml
 
-    output.elasticsearch:
-      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    output.elasticsearch.hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
 
 5. Restart Filebeat.
 

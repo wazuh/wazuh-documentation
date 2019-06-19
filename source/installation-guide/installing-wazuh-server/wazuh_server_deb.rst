@@ -160,10 +160,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: yaml
 
-    output.elasticsearch:
-      hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
 6. Enable and start the Filebeat service:
 

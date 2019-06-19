@@ -125,6 +125,12 @@ Upgrade Elasticsearch
     curl -X GET "localhost:9200/_cat/health?v"
 
 10. Repeat it for every Elasticsearch node.
+11. Once finished, then insert the Wazuh ingesting pipeline:
+
+  .. code-block:: console
+
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-pipeline.json | curl -X PUT "http://<ELASTICSEARCH_IP>:9200/_ingest/pipeline/wazuh" -H 'Content-Type: application/json' -d @-
+
 
 Field migration: From @timestamp to timestamp
 ----------------------------------------------
@@ -194,10 +200,7 @@ Upgrade Filebeat
 
   .. code-block:: yaml
 
-    output.elasticsearch:
-      hosts: ['http://10.0.0.2:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    output.elasticsearch.hosts: ['http://10.0.0.2:9200']
 
 5. Restart Filebeat.
 

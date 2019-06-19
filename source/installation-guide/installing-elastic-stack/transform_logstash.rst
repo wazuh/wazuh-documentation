@@ -90,11 +90,10 @@ them to Elasticsearch.
 
     .. code-block:: yaml
 
-      #output.elasticsearch:
-      #    hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      #    pipeline: geoip
-      #    indices:
-      #        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+      #output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
+      #output.elasticsearch.pipeline: wazuh
+      #output.elasticsearch.indices:
+      #  - index: '%{[fields.index_prefix]}%{+yyyy.MM.dd}'
 
   * Add the Logstash output in ``/etc/filebeat/filebeat.yml``.
 

@@ -56,6 +56,12 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # chkconfig --add elasticsearch
     # service elasticsearch start
 
+3. Once Elasticsearch is ready, then insert the Wazuh ingesting pipeline:
+
+  .. code-block:: console
+
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-pipeline.json | curl -X PUT "http://<ELASTICSEARCH_IP>:9200/_ingest/pipeline/wazuh" -H 'Content-Type: application/json' -d @-
+
 .. _install_kibana_app_rpm:
 
 Kibana
