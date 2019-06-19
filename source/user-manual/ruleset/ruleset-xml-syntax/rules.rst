@@ -32,6 +32,7 @@ Available options
 - `if_level`_
 - `if_matched_sid`_
 - `if_matched_group`_
+- `if_fts`_
 - `same_id`_
 - `same_source_ip`_
 - `same_src_port`_
@@ -413,6 +414,16 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | Any Group |
 +--------------------+-----------+
 
+if_fts
+^^^^^^
+
+Means "if first time seen". Some decoders look for first time seen information by using the option <fts>
+
+If the rule has <if_fts />, it takes the <fts> line into consideration.
+
++--------------------+--------------------+
+| **Example of use** | <if_fts />         |
++--------------------+--------------------+
 
 same_id
 ^^^^^^^
