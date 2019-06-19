@@ -49,7 +49,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
 3. Configure ``inputs.conf`` and ``indexes.conf``
 
- Splunk needs the `indexes.conf` file to create Wazuh indexes and the `inputs.conf` file to listen to forwarded data on port 9997. To create these file please execute the following commands:
+ Splunk needs the `indexes.conf` file to create Wazuh indexes and the `inputs.conf` file to listen to forwarded data on port 9997. To create these files please execute the following commands:
 
  a) Create ``indexes.conf``:
  
