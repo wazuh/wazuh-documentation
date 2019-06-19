@@ -754,7 +754,7 @@ The rule will trigger when the group ``virus`` has been matched 8 times in the l
 if_fts
 ^^^^^^
 
-Means "if first time seen". Some decoders look for first time seen information by using the option <fts>
+Means "if first time seen". Some decoders look for first time seen information by using the option <fts>.
 
 If the rule has <if_fts />, it takes the <fts> line into consideration.
 
