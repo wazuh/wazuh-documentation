@@ -754,7 +754,7 @@ The rule will trigger when the group ``virus`` has been matched 8 times in the l
 if_fts
 ^^^^^^
 
-Makes the decoder that processed the event to take the <fts> line into consideration.
+Makes the decoder that processed the event to take the `fts <decoders.html#fts>`_ line into consideration.
 
 +--------------------+--------------------+
 | **Example of use** | <if_fts />         |
