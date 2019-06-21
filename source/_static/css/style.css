@@ -26,7 +26,7 @@ img {
 }
 
 table {
-  border: 1px solid #00a9e5;
+  border: 1px solid #e1e4e5;
 }
 
 table.docutils col {
@@ -36,17 +36,18 @@ table.docutils col {
 th, td {
   padding: 7px;
   padding-left: 12px;
-  border-color: #00a9e5;
+  border-color: #e1e4e5;
   vertical-align: middle;
 }
 
-table tr:nth-child(2n+0){
-  background: #f4f4f4;
+table tr:nth-child(2n+1){
+  background: #f3f6f6;
 }
 
 th {
-  background-color: #00a9e5;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
+  border-bottom: solid 2px #e1e4e5;
 }
 
 .no-bullets li::before {
@@ -400,6 +401,7 @@ ol.arabic li {
   margin-left: 2em;
 }
 ol.arabic li::before {
+  float: left;
   display: inline-block;
   content: counter(item) ". ";
   counter-increment: item;
@@ -436,11 +438,12 @@ ol.arabic li::before {
 #main-content .toctree-wrapper > ul > li::before,
 #main-content ul.simple > li::before {
   content: '\f111';
+  float: left;
   font: normal normal normal 8px/1 FontAwesome;
-  color: #00a9e5;
+  color: #404040;
   padding-left: 0.5rem;
   position: relative;
-  bottom: 0.25rem;
+  bottom: -0.45rem;
   left: -0.5rem;
 }
 
@@ -658,7 +661,7 @@ main ul.simple li {
 
 main li.toctree-l1 ul {
   list-style: circle;
-  color: #00a9e5;
+  color: #404040;
   padding-left: 2.3em;
 }
 
@@ -1612,7 +1615,7 @@ h1, h2, h3, h4, h5, h6,
 #page .topic .topic-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  color: #0094ce;
+  color: #404040;
   text-align: left;
   line-height: 1.2;
   display: inline-block;
@@ -1643,7 +1646,10 @@ h1 {
 h2 {
   font-size: 24px;
   width: 100%;
-  border-bottom: 1px solid rgba(0, 169, 229, 0.4);
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  /*border-bottom: 1px solid rgba(0, 169, 229, 0.4);*/
+  border-bottom: 1px solid rgba(40, 40, 40, 0.2);
 }
 
 h3,
@@ -1778,19 +1784,20 @@ p.first.admonition-title::before,
 }
 
 .note {
-	background-color: rgba(0, 169, 229, 0.2);
+	background-color: rgba(0, 169, 229, 0.1);
 }
 
 .warning {
-	background-color: rgba(255, 183, 0, 0.2);
+	background-color: rgba(255, 183, 0, 0.1);
 }
 
 .note .admonition-title {
-  background-color: #00a9e5;
+  background-color: rgba(0, 169, 229, 0.5);
 }
 
 .warning .admonition-title {
-  background-color: #ffb600;
+  color: rgba(51,51,51,0.9);
+  background-color: rgba(255, 183, 0, 0.5);
 }
 
 .note p.first.admonition-title::before {
@@ -1801,7 +1808,7 @@ p.first.admonition-title::before,
 .warning p.first.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
-  color: #ffffff;
+  color: rgba(51,51,51,0.8);
 }
 
 .admonition .highlight-console {
@@ -1836,7 +1843,7 @@ a {
 }
 
 table a {
-  color: #333;
+  color: #0094ce;
 }
 
 a:hover,
@@ -2027,6 +2034,11 @@ table.highlighttable {
 
 div.highlight pre {
   padding: 0.5em 1em;
+}
+
+.note pre,
+.warning pre {
+  background-color: #f4f4f4;
 }
 
 .linenos {
@@ -2391,6 +2403,13 @@ div.highlight pre {
       nav.social-bar {
         display: inline-block;
       }
+
+      .toctree-wrapper > ul,
+      ul.simple,
+      main ol > li > ul {
+        padding-left: 10px;
+      }
+
 }
 
 @media (min-width: 992px){

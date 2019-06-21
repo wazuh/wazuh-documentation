@@ -29,9 +29,7 @@ Find more information about how to scale your environments using Splunk Enterpri
   The Wazuh app for Splunk requires the installation of a **Wazuh manager** and **Wazuh API** in order to work properly. Check out the :ref:`installation guide <installation>` before proceeding with Splunk.
 
 .. note::
-  On Linux systems, the Splunk software **requires a 64-bit version** of the operating system.
-
-  Although Splunk can be installed on different OS, the Splunk app is **only compatible with Linux systems**.
+  On Linux systems, the Splunk software **requires a 64-bit version** of the operating system. Although Splunk can be installed on different OS, the Splunk app is **only compatible with Linux systems**.
 
 .. topic:: Contents
 

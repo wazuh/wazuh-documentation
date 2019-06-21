@@ -146,10 +146,9 @@ Deploy
 2. Create domains to access the services
 
     We recommend creating domains and certificates to access the services. Examples:
-
-        - wazuh-master.your-domain.com: Wazuh API and authd registration service.
-        - wazuh-manager.your-domain.com: Reporting service.
-        - wazuh.your-domain.com: Kibana and Wazuh app.
+    - wazuh-master.your-domain.com: Wazuh API and authd registration service.
+    - wazuh-manager.your-domain.com: Reporting service.
+    - wazuh.your-domain.com: Kibana and Wazuh app.
 
     .. note::
         You can skip this step and the services will be accessible using the Load balancer DNS from the VPC.
@@ -163,16 +162,16 @@ Deploy
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git
         $ cd wazuh-kubernetes
 
-3.1. Wazuh namespace and StorageClass
+    3.1. Wazuh namespace and StorageClass
 
-    The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our *StatefulSet* applications.
+        The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our *StatefulSet* applications.
 
         .. code-block:: console
 
             $ kubectl apply -f base/wazuh-ns.yaml
             $ kubectl apply -f base/aws-gp2-storage-class.yaml
 
-3.2. Deploy Elasticsearch
+    3.2. Deploy Elasticsearch
 
         .. code-block:: console
 
@@ -180,9 +179,9 @@ Deploy
             $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-api-svc.yaml
             $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
 
-3.3. Deploy Kibana and Nginx
+    3.3. Deploy Kibana and Nginx
 
-    In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
+        In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
 
         .. code-block:: console
 
@@ -192,13 +191,13 @@ Deploy
             $ kubectl apply -f elastic_stack/kibana/kibana-deploy.yaml
             $ kubectl apply -f elastic_stack/kibana/nginx-deploy.yaml
 
-3.4. Deploy Logstash
+    3.4. Deploy Logstash
 
         .. code-block:: console
 
             $ kubectl apply -f elastic_stack/logstash/logstash-svc.yaml
             $ kubectl apply -f elastic_stack/logstash/logstash-deploy.yaml
-
+        
 4. Deploy Wazuh
 
     .. code-block:: console

@@ -64,6 +64,9 @@ $(function(){
 
 	show_current_subtree();
 
+	// Show the hidden menu
+	setTimeout(function(){ $('#navbar-globaltoc').removeClass('hidden'); }, 500);
+
 	$(window).on('hashchange', function(){
 		updateFromHash();
 		correctScrollTo(spaceBeforeAnchor);

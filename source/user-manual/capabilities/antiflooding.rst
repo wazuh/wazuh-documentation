@@ -138,12 +138,12 @@ At this point, two possible things could happen:
 
 1. The use of the buffer decreases to below the ``warning level`` before the timer reaches the ``tolerance time``.  If this occurs, no alert about flooding appears on the manager.
 
-This graphic illustrates this situation.
+    This graphic illustrates this situation.
 
-.. thumbnail:: /images/manual/internal-capabilities/graphic_without_flooding.png
-    :title: buffer usage without flooding
-    :align: center
-    :width: 70%
+    .. thumbnail:: /images/manual/internal-capabilities/graphic_without_flooding.png
+        :title: buffer usage without flooding
+        :align: center
+        :width: 70%
 
 2. The use of the buffer stays above the ``warning level`` until the specified ``tolerance time`` has elapsed.  Now, it appears that the buffer may not come back to a normal status by itself. For that reason, a more severe ``Flooding status`` alert is triggered on the manager.
 
