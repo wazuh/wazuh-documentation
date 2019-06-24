@@ -2038,7 +2038,7 @@ div.highlight pre {
 
 .note pre,
 .warning pre {
-  background-color: #f4f4f4;
+  background-color: #f4f4f4 !important;
 }
 
 .linenos {
@@ -2939,7 +2939,6 @@ div[class^='highlight'] td.code {
 div[class^='highlight'] pre {
   white-space: pre;
   margin: 0;
-  padding: 12px 12px;
   line-height: 1.5;
   display: block;
   overflow: auto;
