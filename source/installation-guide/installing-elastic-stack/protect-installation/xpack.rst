@@ -83,8 +83,6 @@ This section describes how to secure the communications between the involved com
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --out certs.zip
 
-3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step.
-
 .. code-block:: console
 
     certs.zip
@@ -99,6 +97,12 @@ This section describes how to secure the communications between the involved com
     |-- kibana
         |-- kibana.crt
         |-- kibana.key
+
+3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
+
+.. code-block:: console
+
+    # unzip /usr/share/elasticsearch/certs.zip -d /usr/share/elasticsearch/
 
 .. note::
 
