@@ -1762,6 +1762,7 @@ blockquote {
   overflow: auto;
 	padding: 0;
 	position: relative;
+  border-radius: 4px;
 }
 
 .admonition p {
@@ -2418,11 +2419,11 @@ div.highlight pre {
 				padding-top: 0;
 				align-items: center;
       }
-      
+
       #navbar-globaltoc {
         overflow-y: hidden;
       }
-      
+
       #navbar-globaltoc:hover {
         overflow-y: auto;
       }
