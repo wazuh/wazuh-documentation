@@ -115,7 +115,7 @@ html_theme = 'wazuh_doc_theme'
 # documentation.
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
-    'globaltoc_depth': 4,
+    'globaltoc_depth': 5,
     'includehidden': True,
     'collapse_navigation': False,
     'prev_next_buttons_location': 'bottom'

@@ -20,7 +20,6 @@ for Kibana if you don't want to use X-Pack neither Search Guard.
 +----------------------------------------------------+------------------------------------------------------+
 
 .. toctree::
-   :hidden:
    :maxdepth: 2
 
    xpack

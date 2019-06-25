@@ -45,7 +45,6 @@ Daemons
 
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
 
     ossec-agentd

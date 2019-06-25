@@ -10,6 +10,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
 .. topic:: Simple registration method in Wazuh Agents
 
     .. toctree::
+        :hidden:
         :maxdepth: 2
         
         linux-unix-simple-registration

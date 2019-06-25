@@ -21,13 +21,13 @@ Installing Linux agent
 
     .. code-block:: console
 
-        # yum install make gcc policycoreutils-python automake autoconf libtool
+      # yum install make gcc policycoreutils-python automake autoconf libtool
 
     b) For Debian-based distributions:
 
     .. code-block:: console
 
-        # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool
 
 2. Download and extract the latest version:
 
@@ -71,9 +71,9 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
     .. code-block:: console
 
-    # apt-get install gcc-mingw-w64
-    # apt-get install nsis
-    # apt-get install make
+      # apt-get install gcc-mingw-w64
+      # apt-get install nsis
+      # apt-get install make
 
 2. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
@@ -99,7 +99,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
     .. code-block:: console
 
-    Done building winagent
+      Done building winagent
 
 
 5. Once the agent has been compiled, transfer the Wazuh folder to the target Windows system. It is recommended that this folder be compressed at first to speed up the process.

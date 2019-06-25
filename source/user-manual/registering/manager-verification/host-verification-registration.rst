@@ -26,6 +26,7 @@ Available options to verify the hosts
 After creating your *CA*, now you have these options to register the Wazuh Agents verifying the hosts:
 
 .. toctree::
+    :hidden:
     :maxdepth: 2
 
     manager-verification-registration
