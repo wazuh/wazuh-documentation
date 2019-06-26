@@ -15,13 +15,13 @@ Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. W
 Installation
 ------------
 
-1. Download the latest Splunk app for Wazuh:
+1. Download the latest Wazuh app for Splunk:
 
   .. code-block:: console
 
     # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.9.2_7.3.0.tar.gz
 
-2. Install the Splunk app for Wazuh:
+2. Install the Wazuh app for Splunk:
 
   a. CLI mode:
 
@@ -67,7 +67,7 @@ Installation
     :align: center
     :width: 100%
 
-Now that you've finished installing Splunk app for Wazuh, you can install and setup Splunk forwarders on the :ref:`Splunk forwarder section <splunk_forwarder>`.
+Now that you've finished installing Wazuh app for Splunk, you can install and setup Splunk forwarders on the :ref:`Splunk forwarder section <splunk_forwarder>`.
 
 Installing the Wazuh App in a Splunk cluster
 --------------------------------------------
