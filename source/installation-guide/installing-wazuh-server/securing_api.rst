@@ -14,7 +14,7 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
   .. code-block:: console
 
     # cd /var/ossec/api/configuration/auth
-    # node htpasswd -c user myUserName
+    # node htpasswd -Bc -C 12 user myUserName
  
 You will then need to restart the ``wazuh-api`` and ``wazuh-manager`` services for the change to take effect.
 
