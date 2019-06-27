@@ -112,10 +112,11 @@ If we continue with our example, the command to launch would be the following on
 Mount custom Wazuh configuration files
 --------------------------------------
 
-To use you custom Wazuh configuration files in the Wazuh manager container you have to create a folder called ``/wazuh-config-mount`` inside the container and then restart the container by using ``docker-compose restart wazuh``. 
-Place the files inside the folder before restarting the container.
+It is possible to use your own Wazuh configuration files, mount then in the Wazuh manager container inside a folder called ``/wazuh-config-mount`. It is recommended to use a volume.
+Once this has been done you have to restart the container, it can be done by using ``docker-compose restart wazuh`` from the host.
+The files must be at the right place before restarting the container.
 
-The Wazuh docker container has a script called **entrypoint.sh** that copy the files at the right place on boot while respecting the destination file permissions.
+The Wazuh docker container contains a script called **entrypoint.sh** that copies the files at the right place on boot while respecting the destination file permissions.
 
 Here is an example of a ``/wazuh-config-mount`` folder used to mount some common custom configuration files:
 
