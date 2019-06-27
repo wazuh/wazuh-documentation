@@ -88,12 +88,14 @@ An example of how to build a Linux WPK would be:
 
 To build a WPK for Windows you need to first download a msi package of the desired version:
 
- .. code-block:: console
+  .. code-block:: console
+
     # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-3.9.2-1.msi --output wazuh-agent-3.9.2-1.msi
 
-An example of how to build a linux WPK package would be:
+An example of how to build a Windows WPK package would be:
 
   .. code-block:: console
+
     # /generate_wpk_package.sh -t windows -b branch_tag -d output/path -k path/to/keys -o myagent.wpk -pd path/to/wazuhagent.msi
 
 Definitions:

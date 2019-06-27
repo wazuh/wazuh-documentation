@@ -98,6 +98,7 @@ Linux WPK package example
 5. Delete the files that are no longer needed, this step can be skipped but the size of the  WPK will be considerably larger:
 
   .. code-block:: console
+
     rm -rf doc wodles/oscap/content/* gen_ossec.sh add_localfiles.sh Jenkinsfile*
     rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbdos_execd}
     rm -rf src/{os_integrator,os_maild,os_netos_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,tests,update,wazuh_db,wazuh_modules}
@@ -174,4 +175,4 @@ Definitions:
     - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 .. note::
-    This are only examples. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.
+    This are only examples. If you want to distribute a WPK package using this methods, it's important to begin with an empty directory.
