@@ -99,7 +99,7 @@ Usage
 
       $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.9.0_6.7.1 --single-branch
 
-2. Start the docker service:
+2. Start the Docker service:
 
   a) For Systemd::
 
