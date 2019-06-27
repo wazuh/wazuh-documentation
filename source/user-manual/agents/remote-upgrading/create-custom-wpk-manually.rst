@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-wpk:
+.. _create-custom-wpk-manually:
 
-Creating custom WPK packages
+Manual custom WPK packages creation
 ============================
 
 1. Get a X509 certificate and CA
@@ -40,7 +40,7 @@ Sign this certificate with the root CA
 
 WPK packages will generally contain the complete agent code, however, this is not required.
 
-A WPK package must contain an installation program in binary form or a script in any language supported by the agent (Bash, Python, etc). Canonical WPK packages must contain a Bash script named ``upgrade.sh`` for UNIX or ``upgrade.bat`` for Windows. This program must:
+A WPK package must contain an installation program in binary form or a script in any language supported by the agent (Bash, Python, etc). Linux WPK packages must contain a Bash script named ``upgrade.sh`` for UNIX or ``upgrade.bat`` for Windows. This program must:
 
     * fork itself, as the parent will return 0 immediately,
     * restart the agent, and
@@ -54,9 +54,9 @@ Requirements
 
     .. code-block:: console
 
-        pip install cryptography
+      pip install cryptography
 
-Canonical WPK package example
+Linux WPK package example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
@@ -108,13 +108,60 @@ Canonical WPK package example
 
       # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
+In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
+
+Windows WPK package example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+
+  a) For RPM-based distributions:
+
+  .. code-block:: console
+
+      # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+
+  b) For Debian-based distributions:
+
+  .. code-block:: console
+
+      # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
+2. Download and extract the latest version of wazuh sources:
+
+  .. code-block:: console
+
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
+
+3. Download and extract the latest version of wazuh msi:
+
+  .. code-block:: console
+
+    # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-3.9.2-1.msi --output wazuh-agent-3.9.2-1.msi
+
+4. Install the root CA if you want to overwrite the root CA with the file you created previously:
+
+  .. code-block:: console
+
+      # cd ../
+      # cp path/to/wpk_root.pem etc/wpk_root.pem
+
+5. Compile the WPK package using your SSL certificate and key:
+
+  .. code-block:: console
+
+      # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
+
+
 Definitions:
     - **output/myagent.wpk** is the name of the output WPK package.
     - **path/to/wpkcert.pem** is the path to your SSL certificate.
     - **path/to/wpkcert.key** is the path to your SSL certificate's key.
     - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
+    - **path/to/upgrade.bat** is the path to the upgrade.bat file you can finde an example at src/win32 within the wazuh repository or write your own.
+    - **path/to/do_upgrade.ps1** is the path to the do_upgrade.ps1 file you can finde an example at src/win32 within the wazuh repository or write your own.
+    - **path/to/wazuhagent.msi** is the path to the msi you have sownloaded in step 3.
 
-In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
 .. note::
     This is only an example. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.
