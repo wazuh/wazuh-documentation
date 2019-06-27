@@ -164,11 +164,13 @@ Let's see what happens when we execute the following commands:
 New File
   Command:
 
- .. code-block:: console
+  .. code-block:: console
 
-      # touch /home/malware.py
+    # touch /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891161.28457: - audit,audit_watch_write,audit_watch_create,
     2017 Feb 23 15:06:01 localhost->/var/log/audit/audit.log
@@ -216,9 +218,11 @@ Write Access
 
   .. code-block:: console
 
-      # nano /home/malware.py
+    # nano /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891353.48010: - audit,audit_watch_write,
     2017 Feb 23 15:09:13 localhost->/var/log/audit/audit.log
@@ -264,11 +268,13 @@ Write Access
 Change Permissions
   Command:
 
- .. code-block:: console
+  .. code-block:: console
 
-      # chmod u+x /home/malware.py
+    # chmod u+x /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891409.49498: - audit,audit_watch_attribute,
     2017 Feb 23 15:10:09 localhost->/var/log/audit/audit.log
@@ -312,9 +318,11 @@ Read access
 
   .. code-block:: console
 
-      # /home/malware.py
+    # /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891459.53222: - audit,audit_watch_read,
     2017 Feb 23 15:10:59 localhost->/var/log/audit/audit.log
@@ -335,7 +343,7 @@ Read access
     audit.pid: 60821
     audit.auid: 1000
     audit.uid: 0
-    audit.gid: 0
+    audit.gid: 0q
     audit.euid: 0
     audit.suid: 0
     audit.fsuid: 0
@@ -357,9 +365,11 @@ Delete file
 
   .. code-block:: console
 
-      # rm /home/malware.py
+    # rm /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891497.54463: - audit,audit_watch_write,audit_watch_delete,
     2017 Feb 23 15:11:37 localhost->/var/log/audit/audit.log
