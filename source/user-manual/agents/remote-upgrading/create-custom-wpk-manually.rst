@@ -174,4 +174,4 @@ Definitions:
     - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 .. note::
-    This are only an examples. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.
+    This are only examples. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.
