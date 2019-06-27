@@ -95,7 +95,7 @@ Linux WPK package example
       # make deps
       # make TARGET=agent
 
-5. Delete the files that are no longer needed, this step can be skipped but the size of the  WPK will be considerably larger:
+5. Delete the files that are no longer needed, this step can be skipped but the size of the WPK will be considerably larger:
 
   .. code-block:: console
 
@@ -145,7 +145,7 @@ Windows WPK package example
 
     # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
 
-3. Download the latest version of wazuh msi package:
+3. Download the latest version of the wazuh msi package:
 
   .. code-block:: console
 
@@ -158,21 +158,20 @@ Windows WPK package example
       # cd ../
       # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-5. Compile the WPK package using your SSL certificate and key:
+5. Compile the WPK package using the msi package and, your SSL certificate and key:
 
   .. code-block:: console
 
       # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
 
-
 Definitions:
     - **output/myagent.wpk** is the name of the output WPK package.
     - **path/to/wpkcert.pem** is the path to your SSL certificate.
     - **path/to/wpkcert.key** is the path to your SSL certificate's key.
-    - **path/to/upgrade.bat** is the path to the upgrade.bat file you can finde an example at src/win32 within the wazuh repository or write your own.
-    - **path/to/do_upgrade.ps1** is the path to the do_upgrade.ps1 file you can finde an example at src/win32 within the wazuh repository or write your own.
-    - **path/to/wazuhagent.msi** is the path to the msi you have sownloaded in step 3.
+    - **path/to/upgrade.bat** is the path to the upgrade.bat file you can find an example at src/win32 within the wazuh repository or write your own.
+    - **path/to/do_upgrade.ps1** is the path to the do_upgrade.ps1 file you can find an example at src/win32 within the wazuh repository or write your own.
+    - **path/to/wazuhagent.msi** is the path to the msi you have downloaded in step 3.
     - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 .. note::
-    This are only examples. If you want to distribute a WPK package using this methods, it's important to begin with an empty directory.
+    These are only examples. If you want to distribute a WPK package using these methods, it's important to begin with an empty directory.
