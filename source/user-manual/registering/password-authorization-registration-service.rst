@@ -59,8 +59,7 @@ Agents
 Now, follow the instructions to register the agent depending on the OS of the host:
 
 .. toctree::
-    :hidden:
-    :maxdepth: 2
+    :maxdepth: 1
 
     password/linux-unix-password-registration
     password/windows-password-registration

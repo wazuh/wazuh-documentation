@@ -13,7 +13,6 @@ Registering the Agents
 ^^^^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
-    :hidden:
     :maxdepth: 2
 
     api/api-register-linux-unix

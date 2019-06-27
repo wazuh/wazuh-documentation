@@ -31,8 +31,6 @@ Adding authentication for Elasticsearch
 
 4. Note down at least the password for the ``elastic`` user.
 
-    
-
 5. Setting up credentials for Filebeat. Add the next two lines to ``/etc/filebeat/filebeat.yml``.
 
 .. code-block:: yaml
@@ -46,7 +44,7 @@ Adding authentication for Elasticsearch
 
     # systemctl restart filebeat
 
-6. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
+7. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
 
 .. code-block:: yaml
 

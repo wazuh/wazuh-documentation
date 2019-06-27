@@ -322,7 +322,6 @@ header .menuweb-bar .menu-item a {
 }
 
 .navigation-buttons .btn:focus {
-  text-decoration: underline;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   -ms-box-shadow: none;
@@ -391,13 +390,24 @@ footer .logo a:focus {
   opacity: 1;
 }
 
-footer a:focus img,
-footer a:focus .fa {
-  outline: 1px dotted #ffffff;
+ul, ol, dl {
+	padding-left: 1.7rem;
 }
 
-ul, ol, dl {
-	padding-left: 1rem;
+blockquote {
+  background-color: #fff;
+  margin-bottom: 1rem;
+  overflow: auto;
+  padding-left: 1rem;
+}
+
+/*blockquote ul,
+blockquote dl {
+	padding-left: 0;
+}*/
+
+ol blockquote {
+	padding-left: 0;
 }
 
 .footer-column:not(.white-bullets) ul {
@@ -426,6 +436,13 @@ ul, ol, dl {
   width: 12px;
 }
 
+.toctree-wrapper > ul,
+ul.simple,
+main ol > li > ul {
+  font-size: 1rem;
+}
+
+/*
 #main-content .toctree-wrapper > ul > li.toctree-l1::before,
 #main-content ul > li.toctree-l1::before {
   content: '\f111';
@@ -436,13 +453,6 @@ ul, ol, dl {
   position: relative;
   bottom: -0.45rem;
   left: -0.5rem;
-}
-
-.toctree-wrapper > ul,
-ul.simple,
-main ol > li > ul {
-    font-size: 1rem;
-}
 
 main ul > li::before {
   content: '\f111';
@@ -469,6 +479,16 @@ main ol ul > li::before {
 
 main blockquote ul > li::before {
   content: '\f111' !important;
+}
+
+main ul > li::before {
+  content: '\f111' !important;
+}*/
+
+ol ol, ol ul, ul ol, ul ul {
+  margin-bottom: 1rem;
+  padding-left: 1.3rem;
+  list-style-type: disc;
 }
 
 ol.loweralpha {
@@ -548,7 +568,16 @@ li.toctree-l5 > a {
   display: flex;
   align-content: center;
   justify-content: center;
-	cursor: pointer;
+  cursor: pointer;
+  transition: .2s all ease;
+}
+
+#globaltoc .toc-toggle-btn:focus {
+  outline: 0;
+}
+
+#globaltoc .toc-toggle-btn:focus span {
+  color: #0094ce;
 }
 
 #globaltoc .toc-toggle-btn .toc-toggle-icon {
@@ -588,11 +617,11 @@ li.toctree-l5 > a {
 
 #globaltoc li {
 	overflow: hidden;
-	border-bottom: 1px solid rgba(59, 59, 59, 0.2);
+	border-bottom: 1px solid rgba(59, 59, 59, 0.08);
 }
 
 #globaltoc li:first-child {
-	border-top: 1px solid rgba(59, 59, 59, 0.2);
+	border-top: 1px solid rgba(59, 59, 59, 0.08);
 }
 
 #globaltoc li:last-child {
@@ -603,7 +632,8 @@ li.toctree-l5 > a {
   width: 100%;
 }
 
-#globaltoc li.toctree-l1 a:hover {
+#globaltoc li.toctree-l1 a:hover,
+#globaltoc li.toctree-l1 a:focus {
 	color: #0094ce;
 	background: rgba(255, 255, 255, 0.7);
 }
@@ -676,13 +706,13 @@ ul li.toctree-l1 .current > .current.leaf {
   left: 4em
 }
 
-li.toctree-l1 a,
-ul.simple a {
+li.toctree-l1 a {
   color: #333333;
 }
 
-main li.toctree-l1 a:hover {
-  color: #00a9e5;
+main li.toctree-l1 a:hover,
+main li.toctree-l1 a:focus {
+  color: #0094ce;
 }
 
 main li.toctree-l1,
@@ -694,6 +724,7 @@ main ul.simple li {
 main li.toctree-l1 ul {
   list-style: circle;
   color: #404040;
+  margin-bottom: 0;
   padding-left: 2.3em;
 }
 
@@ -701,7 +732,6 @@ main .simple > li > dl > dd > ul > li:before {
     content: '\f10c ';
     display: inline-block;
     font: normal normal normal 8px/1em FontAwesome;
-    /*bottom: 0.2rem;*/
     position: relative;
     width: 14px;
 }
@@ -810,6 +840,7 @@ h6:active > a.headerlink {
 
 footer a:hover,
 footer a:active,
+footer a:focus,
 .footer-column ul li:hover a,
 .footer-column ul li:active a,
 .footer-column ul li:focus a {
@@ -925,6 +956,13 @@ footer a:active,
   top: 3px;
   right: 3px;
 	cursor: pointer;
+}
+
+.search_main .btn-search:focus {
+  outline: 0;
+  color: #fff;
+  background-color: #00a9e5;
+  box-shadow: none;
 }
 
 .search_main .btn-search {
@@ -1071,13 +1109,12 @@ footer a:active,
   border: none;
 }
 
-main li.toctree-l1 > a,
-ul.simple > li > a {
+main li.toctree-l1 > a {
   color: #333;
 }
 
 main li.toctree-l1 > a:hover,
-ul.simple > li > a:hover {
+main li.toctree-l1 > a:focus {
   color: #0094ce;
 }
 
@@ -1474,6 +1511,13 @@ form [type=submit]:disabled {
   padding: 5px 0;
 }
 
+.central-page-area main ul li.toctree-l2::before,
+.central-page-area main ul li.toctree-l3::before,
+.central-page-area main ul li.toctree-l4::before,
+.central-page-area main ul li.toctree-l5::before {
+  content: '';
+}
+
 p,
 ul {
   color: #333333;
@@ -1522,6 +1566,10 @@ h4, h5, h6 {
   color: #ffffff;
 }
 
+#main-footer a:focus .fa {
+  outline: 0;
+}
+
 #subfooter a:hover,
 #subfooter a:focus,
 #subfooter a:active,
@@ -1534,15 +1582,9 @@ h4, h5, h6 {
   opacity: 0.8;
 }
 
-.breadcrumb .fa {
+/*.breadcrumb .fa {
   color: #00a9e5;
-}
-
-blockquote code,
-blockquote pre {
-  color: #333 !important;
-  background: rgba(0, 169, 229, 0) !important;
-}
+}*/
 
 .results-quantity {
   font-size: 14px;
@@ -1716,9 +1758,9 @@ p {
 }
 
 ul {
-  list-style-type: none;
   text-align: left;
   margin-bottom: 1rem;
+  padding-left: 2rem;
 }
 
 li {
@@ -1737,8 +1779,15 @@ pre {
 }
 
 code {
-  color: #000000;
-  background: #f4f4f4;
+  display: inline-flex;
+  white-space: nowrap;
+  max-width: 100%;
+  background: #fff;
+  border: solid 1px #e1e4e5;
+  font-size: 75%;
+  padding: 1px 5px;
+  color: #E74C3C;
+  overflow-x: auto;
 }
 
 .nav > li > a:focus,
@@ -1769,12 +1818,6 @@ header li.menu-item > a.nav-link:hover {
 
 label {
   font-weight: 400;
-}
-
-blockquote {
-  background-color: #fff;
-  margin-bottom: 1rem;
-  overflow: auto;
 }
 
 .admonition::before {
@@ -1894,6 +1937,7 @@ p.first.admonition-title::before,
 
 a {
   color: #0094ce;
+  transition: .2s all ease;
 }
 
 table a {
@@ -1904,6 +1948,46 @@ a:hover,
 a:active {
   color: #0094ce;
   text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+#main-content a {
+  position: relative;
+  border-bottom: 1px solid transparent;
+}
+
+#main-content a:hover,
+#main-content a:focus {
+  border-color: rgba(0, 148, 206, 0.8);
+}
+
+#main-content .edit-repo-wrapper a:hover,
+#main-content .edit-repo-wrapper a:focus {
+  border-color: transparent;
+}
+
+#main-content .navigation-buttons a:hover, 
+#main-content .navigation-buttons a:focus {
+  border-color: transparent;
+}
+
+#main-content .navigation-buttons a::after {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 14px;
+  border-bottom: 1px solid rgba(0, 148, 206, 0.8);
+  transition: .2s all ease;
+}
+
+#main-content .navigation-buttons a:hover::after, 
+#main-content .navigation-buttons a:focus::after {
+  opacity: 1;
 }
 
 nav a,
@@ -2048,6 +2132,7 @@ ul#breadcrumbs {
   padding-top: 1em;
   padding-left: 0;
   max-width: 100%;
+  list-style-type: none;
 }
 
 ul#breadcrumbs .fa {
@@ -2085,6 +2170,14 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
 	margin-bottom: 1em;
+}
+
+blockquote ul li > div[class^='highlight'] {
+  margin-bottom: 0.5rem;
+}
+
+blockquote blockquote {
+  margin-bottom: 0;
 }
 
 table.highlighttable {
@@ -2464,11 +2557,11 @@ div.highlight pre {
         display: inline-block;
       }
 
-      .toctree-wrapper > ul,
+      /*.toctree-wrapper > ul,
       ul.simple,
       main ol > li > ul {
         padding-left: 10px;
-      }
+      }*/
 
 }
 
@@ -2581,14 +2674,15 @@ div.highlight pre {
       }
 
       #globaltoc > ul {
-        border-bottom: 1px solid rgba(59, 59, 59, 0.2);
+        border-bottom: 1px solid rgba(59, 59, 59, 0.08);
       }
 
 			#globaltoc .toc-toggle-btn {
 				display: none;
 			}
-
-			#globaltoc .toc-toggle > a:hover  > .toc-toggle-btn {
+      
+			#globaltoc .toc-toggle > a:hover > .toc-toggle-btn,
+			#globaltoc .toc-toggle > a:focus > .toc-toggle-btn {
 				display: flex;
 			}
 
@@ -2612,7 +2706,7 @@ div.highlight pre {
         margin-right: 15px;
 			}
 
-      aside.help .btn-help{
+      aside.help .btn-help {
         border-radius: 5px;
         font-size: 1rem;
         font-family: 'Montserrat', sans-serif;
@@ -2625,6 +2719,12 @@ div.highlight pre {
         border: none;
         background: #ffb600;
         color: #ffffff;
+      }
+
+      aside.help .btn-help:hover,
+      aside.help .btn-help:focus {
+        background-color: #0094ce;
+        border-color: #0094ce;
       }
 
       #main-navbar {
@@ -2671,11 +2771,6 @@ div.highlight pre {
 
 			#search-lg .search_main .searchform {
 				padding: 0;
-			}
-
-
-			blockquote {
-				padding-left: 1rem;
 			}
 
       #carouselWazuhDocu{
@@ -3007,6 +3102,10 @@ div[class^='highlight'] pre {
   display: block;
   overflow: auto;
 }
+
+/*ul > li > div[class^='highlight'] {
+  margin-left: 1rem;
+}*/
 
 @media print {
   .codeblock,pre.literal-block,.rst-content .literal-block,.rst-content pre.literal-block,div[class^='highlight'],div[class^='highlight'] pre {

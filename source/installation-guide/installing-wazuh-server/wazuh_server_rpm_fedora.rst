@@ -16,18 +16,18 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
 To set up the repository, run this command:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-  # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-  [wazuh_repo]
-  gpgcheck=1
-  gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-  enabled=1
-  name=Wazuh repository
-  baseurl=https://packages.wazuh.com/3.x/yum/
-  protect=1
-  EOF
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    [wazuh_repo]
+    gpgcheck=1
+    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    enabled=1
+    name=Wazuh repository
+    baseurl=https://packages.wazuh.com/3.x/yum/
+    protect=1
+    EOF
 
 .. note::
 
@@ -38,9 +38,9 @@ Installing the Wazuh Manager
 
 The next step is to install the Wazuh Manager on your system:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # dnf install wazuh-manager
+    # dnf install wazuh-manager
 
 Once the process is complete, you can check the service status with:
 
@@ -183,14 +183,14 @@ Uninstall
 
 To uninstall the Wazuh Manager and Wazuh API:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # dnf remove wazuh-manager wazuh-api
+    # dnf remove wazuh-manager wazuh-api
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 
 To uninstall filebeat:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # dnf remove filebeat
+    # dnf remove filebeat
