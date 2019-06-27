@@ -95,14 +95,25 @@ Linux WPK package example
       # make deps
       # make TARGET=agent
 
-5. Install the root CA if you want to overwrite the root CA with the file you created previously:
+5. Delete the files that are no longer needed, this step can be skipped but the size of the  WPK will be considerably larger:
+
+  .. code-block:: console
+    rm -rf doc wodles/oscap/content/* gen_ossec.sh add_localfiles.sh Jenkinsfile*
+    rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbdos_execd}
+    rm -rf src/{os_integrator,os_maild,os_netos_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,tests,update,wazuh_db,wazuh_modules}
+    rm -rf src/win32
+    rm -rf src/*.a
+    rm -rf etc/{decoders,lists,rules}
+    find etc/templates/* -maxdepth 0 -not -name "en" | xargs rm -rf
+
+6. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
   .. code-block:: console
 
       # cd ../
       # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-6. Compile the WPK package using your SSL certificate and key:
+7. Compile the WPK package using your SSL certificate and key:
 
   .. code-block:: console
 
@@ -133,7 +144,7 @@ Windows WPK package example
 
     # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
 
-3. Download and extract the latest version of wazuh msi:
+3. Download the latest version of wazuh msi package:
 
   .. code-block:: console
 
@@ -157,11 +168,10 @@ Definitions:
     - **output/myagent.wpk** is the name of the output WPK package.
     - **path/to/wpkcert.pem** is the path to your SSL certificate.
     - **path/to/wpkcert.key** is the path to your SSL certificate's key.
-    - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
     - **path/to/upgrade.bat** is the path to the upgrade.bat file you can finde an example at src/win32 within the wazuh repository or write your own.
     - **path/to/do_upgrade.ps1** is the path to the do_upgrade.ps1 file you can finde an example at src/win32 within the wazuh repository or write your own.
     - **path/to/wazuhagent.msi** is the path to the msi you have sownloaded in step 3.
-
+    - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 .. note::
-    This is only an example. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.
+    This are only an examples. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.
