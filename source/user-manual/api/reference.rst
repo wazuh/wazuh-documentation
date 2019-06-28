@@ -557,7 +557,7 @@ Removes a list of groups.
 
 Delete agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes agents, using a list of them or a criterion based on the status or time of the last connection. The Wazuh API must be restarted after removing an agent.
+Removes agents, using a list of them or a criterion based on the status or time of the last connection.
 
 **Request**:
 

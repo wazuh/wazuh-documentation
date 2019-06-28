@@ -116,14 +116,14 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to *yes* to collect only events generated after the Wazuh starts.
+Set it to *no* to collect events generated since Wazuh agent was stopped.
 
-By default, when Wazuh starts it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+By default, when Wazuh starts it will only read all log content from a given Windows Event Channel since the agent started.
 
-Only compatible with `eventchannel` log format.
+This feature is only compatible with `eventchannel` log format.
 
 +--------------------+-----------+
-| **Default value**  | n/a       |
+| **Default value**  | yes       |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+

@@ -52,6 +52,12 @@ Adding authentication for Elasticsearch
     elasticsearch.username: "elastic"
     elasticsearch.password: "elastic_password"
 
+8. Restart Kibana.
+
+.. code-block:: console
+
+    # systemctl restart kibana
+
 Configure Elastic Stack to use encrypted connections 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

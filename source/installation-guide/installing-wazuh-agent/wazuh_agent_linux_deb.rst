@@ -16,7 +16,7 @@ Adding the Wazuh repository
 
   .. code-block:: console
 
-    # apt-get install curl apt-transport-https lsb-release
+    # apt-get install curl apt-transport-https lsb-release gnupg2
 
 2. Install the Wazuh repository GPG key:
 

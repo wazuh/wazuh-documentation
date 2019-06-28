@@ -40,7 +40,6 @@ Access to containers and services
 Where ``service name `` is the name of each service in the ``docker-compose.yml`` file. By default:
 
 - wazuh
-- logstash
 - elasticsearch
 - kibana
 - nginx
