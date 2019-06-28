@@ -58,7 +58,6 @@ Tools
 
 
   .. toctree::
-    :hidden:
     :maxdepth: 1
 
     agent-auth

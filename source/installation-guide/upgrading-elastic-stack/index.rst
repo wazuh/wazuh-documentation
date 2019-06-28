@@ -25,7 +25,6 @@ In addition to Elastic Stack components, you will also find the instructions to 
 +----------------------------------------------------------+----------------------------------------------------+
 
 .. toctree::
-   :hidden:
    :maxdepth: 4
 
    elastic_server_minor_upgrade

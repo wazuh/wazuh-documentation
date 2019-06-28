@@ -31,7 +31,6 @@ The Wazuh Manager can be installed in the most of Linux Distribution. It's possi
 +-------------------------------+------------------------------------------------------+
 
 .. toctree::
-    :hidden:
     :maxdepth: 2
 
     wazuh_server_rpm_amazon

@@ -44,41 +44,41 @@ To uninstall the agent in macOS:
 
 1. Stop the Wazuh Agent service 
 
-  .. code-block:: console
-    
-    # /Library/Ossec/bin/ossec-control stop
+    .. code-block:: console
+      
+      # /Library/Ossec/bin/ossec-control stop
 
 2. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file 
 
-  .. code-block:: console
-    
-    # /bin/rm -r /Library/Ossec
-    # /bin/rm /etc/ossec-init.conf
+    .. code-block:: console
+      
+      # /bin/rm -r /Library/Ossec
+      # /bin/rm /etc/ossec-init.conf
 
 3. Stop and unload dispatcher
 
-  .. code-block:: console
-    
-    # /bin/launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
+    .. code-block:: console
+      
+      # /bin/launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
 
 4. Remove ``launchdaemons`` and ``StartupItems``
 
-  .. code-block:: console
-    
-    # /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
-    # /bin/rm -rf /Library/StartupItems/WAZUH
+    .. code-block:: console
+      
+      # /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
+      # /bin/rm -rf /Library/StartupItems/WAZUH
 
 5. Remove User and Groups
 
-  .. code-block:: console
-    
-    # /usr/bin/dscl . -delete "/Users/ossec"
-    # /usr/bin/dscl . -delete "/Groups/ossec"
+    .. code-block:: console
+      
+      # /usr/bin/dscl . -delete "/Users/ossec"
+      # /usr/bin/dscl . -delete "/Groups/ossec"
 
 6. Remove from ``pkgutil``
 
-  .. code-block:: console
-    
-    # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-    # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
+    .. code-block:: console
+      
+      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
+      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
 

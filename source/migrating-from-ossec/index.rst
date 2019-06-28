@@ -111,7 +111,6 @@ The migration of Elastic stack, in the case that you already have it installed, 
     OSSEC agents are compatible with Wazuh server. You can even have different versions of Wazuh and OSSEC agents reporting to a centralized Wazuh server. Having said that, it is recommended to keep both server and agents updated to the latest version. For interactive help, our `mailing list <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
 
 .. toctree::
-   :hidden:
    :maxdepth: 2
 
    ossec-server

@@ -161,14 +161,17 @@ Now we start getting alerts on account of the new audit rules::
 
 Let's see what happens when we execute the following commands:
 
-New File
+**New File**
+
   Command:
 
- .. code-block:: console
+  .. code-block:: console
 
-      # touch /home/malware.py
+    # touch /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891161.28457: - audit,audit_watch_write,audit_watch_create,
     2017 Feb 23 15:06:01 localhost->/var/log/audit/audit.log
@@ -211,14 +214,17 @@ New File
     audit.file.inode: 18369115
     audit.file.mode: 0100644
 
-Write Access
+**Write Access**
+
   Command:
 
   .. code-block:: console
 
-      # nano /home/malware.py
+    # nano /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891353.48010: - audit,audit_watch_write,
     2017 Feb 23 15:09:13 localhost->/var/log/audit/audit.log
@@ -261,14 +267,17 @@ Write Access
     audit.file.inode: 18369115
     audit.file.mode: 0100644
 
-Change Permissions
+**Change Permissions**
+
   Command:
 
- .. code-block:: console
+  .. code-block:: console
 
-      # chmod u+x /home/malware.py
+    # chmod u+x /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891409.49498: - audit,audit_watch_attribute,
     2017 Feb 23 15:10:09 localhost->/var/log/audit/audit.log
@@ -307,14 +316,17 @@ Change Permissions
     audit.file.mode: 0100644
 
 
-Read access
+**Read access**
+
   Command:
 
   .. code-block:: console
 
-      # /home/malware.py
+    # /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891459.53222: - audit,audit_watch_read,
     2017 Feb 23 15:10:59 localhost->/var/log/audit/audit.log
@@ -352,14 +364,17 @@ Read access
     audit.file.inode: 18369115
     audit.file.mode: 0100744
 
-Delete file
+**Delete file**
+
   Command:
 
   .. code-block:: console
 
-      # rm /home/malware.py
+    # rm /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: default
 
     ** Alert 1487891497.54463: - audit,audit_watch_write,audit_watch_delete,
     2017 Feb 23 15:11:37 localhost->/var/log/audit/audit.log

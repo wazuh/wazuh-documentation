@@ -57,36 +57,36 @@ Installation on Windows
 
 1. Download the Windows `puppet-agent <https://downloads.puppetlabs.com/windows/puppet5/puppet-agent-5.1.0-x86.msi>`_ package.
 
-  This package bundle all of Puppet's prerequisites.
+    This package bundle all of Puppet's prerequisites.
 
-  .. note::
-    This is the package for a Puppet 5.1 version agent. If another package is needed, go to the `official directory <https://downloads.puppetlabs.com/windows/puppet5>`_ where all packages are available for download.
+    .. note::
+      This is the package for a Puppet 5.1 version agent. If another package is needed, go to the `official directory <https://downloads.puppetlabs.com/windows/puppet5>`_ where all packages are available for download.
 
 2. Install Puppet.
   
-  a. Using command line:
+    a. Using command line:
 
-    .. code-block:: bash
-      
-      msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
-
-    Optionally, you can specify ``/l*v install.txt`` to log the installation’s progress to a file.
-
-    You can also set several MSI properties to pre-configure Puppet as you install it. For example:
+      .. code-block:: bash
         
-    .. code-block:: bash
+        msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
 
-      msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi PUPPET_MASTER_SERVER=puppet.example.com
+      Optionally, you can specify ``/l*v install.txt`` to log the installation’s progress to a file.
 
-  b. Using the Windows GUI:
+      You can also set several MSI properties to pre-configure Puppet as you install it. For example:
+          
+      .. code-block:: bash
 
-    - Execute the GUI with elevated privileges.
+        msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi PUPPET_MASTER_SERVER=puppet.example.com
 
-    - During installation, Puppet asks you for the hostname of your Puppet master server.
+    b. Using the Windows GUI:
 
-    - For standalone Puppet nodes that won’t connect to a master, use the default hostname (*puppet*). You might also want to install on the command line and set the agent startup mode to *Disabled*.
-    
-    - Once the installer finishes, Puppet will be installed and running.
+      - Execute the GUI with elevated privileges.
+
+      - During installation, Puppet asks you for the hostname of your Puppet master server.
+
+      - For standalone Puppet nodes that won’t connect to a master, use the default hostname (*puppet*). You might also want to install on the command line and set the agent startup mode to *Disabled*.
+      
+      - Once the installer finishes, Puppet will be installed and running.
 
 Configuration
 ^^^^^^^^^^^^^

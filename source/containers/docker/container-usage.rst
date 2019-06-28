@@ -19,28 +19,27 @@ Access to containers and services
 
 1. We can list the containers we have created as follows. From the directory where you have the ``docker-compose.yml`` file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  $ docker-compose ps
-           Name                 Command                         State    Ports
+      $ docker-compose ps
+              Name                 Command                         State    Ports
 
-  wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
-  wazuhdocker_kibana_1          /bin/sh -c /entrypoint.sh        Up      5601/tcp
-  wazuhdocker_logstash_1        /usr/local/bin/docker-entr ...   Up      0.0.0.0:5000->5000/tcp, 5044/tcp, 9600/tcp
-  wazuhdocker_nginx_1           /bin/sh -c /entrypoint.sh        Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
-  wazuhdocker_wazuh_1           /entrypoint.sh                   Up      0.0.0.0:1514->1514/udp, 0.0.0.0:1515->1515/tcp, 1516/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp
+      wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
+      wazuhdocker_kibana_1          /bin/sh -c /entrypoint.sh        Up      5601/tcp
+      wazuhdocker_logstash_1        /usr/local/bin/docker-entr ...   Up      0.0.0.0:5000->5000/tcp, 5044/tcp, 9600/tcp
+      wazuhdocker_nginx_1           /bin/sh -c /entrypoint.sh        Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
+      wazuhdocker_wazuh_1           /entrypoint.sh                   Up      0.0.0.0:1514->1514/udp, 0.0.0.0:1515->1515/tcp, 1516/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp
 
 2. We can get access to each container with the following command. From the directory where you have the ``docker-compose.yml`` file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  docker-compose exec <service name> /bin/bash
+      docker-compose exec <service name> /bin/bash
 
 
 Where ``service name `` is the name of each service in the ``docker-compose.yml`` file. By default:
 
 - wazuh
-- logstash
 - elasticsearch
 - kibana
 - nginx
@@ -59,55 +58,55 @@ Registering agents in a Wazuh manager deployed through Docker is quite simple, w
 
 1. Adapt the agent configuration file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  <ossec_config>
-    <client>
-      <server>
-        <address>MANAGER_IP</address>
-        <port>1514</port>
-        <protocol>udp</protocol>
-      </server>
-      <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
-      <notify_time>10</notify_time>
-      <time-reconnect>60</time-reconnect>
-      <auto_restart>yes</auto_restart>
-      <crypto_method>aes</crypto_method>
-    </client>
-    . . .
+      <ossec_config>
+        <client>
+          <server>
+            <address>MANAGER_IP</address>
+            <port>1514</port>
+            <protocol>udp</protocol>
+          </server>
+          <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
+          <notify_time>10</notify_time>
+          <time-reconnect>60</time-reconnect>
+          <auto_restart>yes</auto_restart>
+          <crypto_method>aes</crypto_method>
+        </client>
+        . . .
 
-If for example we had launched the command ``docker-compose up`` on host with IP address **192.168.50.75**, we would have the following configuration:
+    If for example we had launched the command ``docker-compose up`` on host with IP address **192.168.50.75**, we would have the following configuration:
 
-.. code-block:: console
+    .. code-block:: console
 
-  <ossec_config>
-    <client>
-      <server>
-        <address>192.168.50.75</address>
-        <port>1514</port>
-        <protocol>udp</protocol>
-      </server>
-      <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
-      <notify_time>10</notify_time>
-      <time-reconnect>60</time-reconnect>
-      <auto_restart>yes</auto_restart>
-      <crypto_method>aes</crypto_method>
-    </client>
-    . . .
+      <ossec_config>
+        <client>
+          <server>
+            <address>192.168.50.75</address>
+            <port>1514</port>
+            <protocol>udp</protocol>
+          </server>
+          <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
+          <notify_time>10</notify_time>
+          <time-reconnect>60</time-reconnect>
+          <auto_restart>yes</auto_restart>
+          <crypto_method>aes</crypto_method>
+        </client>
+        . . .
 
 2. Agent registration:
 
-Register the agent using ``authd``:
+    Register the agent using ``authd``:
 
-.. code-block:: console
+    .. code-block:: console
 
-  $ /var/ossec/bin/agent-auth -m MANAGER_IP
+      $ /var/ossec/bin/agent-auth -m MANAGER_IP
 
-If we continue with our example, the command to launch would be the following one:
+    If we continue with our example, the command to launch would be the following one:
 
-.. code-block:: console
+    .. code-block:: console
 
-  $ /var/ossec/bin/agent-auth -m 192.168.50.75
+      $ /var/ossec/bin/agent-auth -m 192.168.50.75
 
 Mount custom Wazuh configuration files
 --------------------------------------

@@ -30,6 +30,7 @@ Adding authentication for Elasticsearch
     # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
 
 4. Note down at least the password for the ``elastic`` user.
+
 5. Setting up credentials for Filebeat. Add the next two lines to ``/etc/filebeat/filebeat.yml``.
 
 .. code-block:: yaml
@@ -43,13 +44,19 @@ Adding authentication for Elasticsearch
 
     # systemctl restart filebeat
 
-6. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
+7. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
 
 .. code-block:: yaml
 
     xpack.security.enabled: true
     elasticsearch.username: "elastic"
     elasticsearch.password: "elastic_password"
+
+8. Restart Kibana.
+
+.. code-block:: console
+
+    # systemctl restart kibana
 
 Configure Elastic Stack to use encrypted connections 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

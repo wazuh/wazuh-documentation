@@ -59,19 +59,22 @@ Once the process is complete, you can check the service status with:
 Installing the Wazuh API
 ------------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
+.. note::
+  
+  If you have Fedora v24 or lower, you need to add the official NodeJS repository previously: 
 
-  .. code-block:: console
 
-    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+    .. code-block:: console
 
-  and then, install NodeJS:
+      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - 
+
+1. Install NodeJS:
 
   .. code-block:: console
 
     # dnf install nodejs
 
-2. Install the Wazuh API. It will update NodeJS if it is required:
+2. Install the Wazuh API:
 
   .. code-block:: console
 
@@ -183,14 +186,14 @@ Uninstall
 
 To uninstall the Wazuh Manager and Wazuh API:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # dnf remove wazuh-manager wazuh-api
+    # dnf remove wazuh-manager wazuh-api
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 
 To uninstall filebeat:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # dnf remove filebeat
+    # dnf remove filebeat
