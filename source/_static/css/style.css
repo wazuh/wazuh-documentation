@@ -50,6 +50,10 @@ th {
   border-bottom: solid 2px #e1e4e5;
 }
 
+dt {
+  padding-bottom: 10px;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -410,10 +414,10 @@ blockquote {
   padding-left: 1.7rem;
 }
 
-/*blockquote ul,
+blockquote ul,
 blockquote dl {
 	padding-left: 0;
-}*/
+}
 
 ol blockquote {
 	padding-left: 0;
@@ -1544,6 +1548,10 @@ a[data-lightbox] img {
   margin-bottom: 2em;
 }
 
+a-lightbox] img {
+  border: 1px solid #eee;
+}
+
 .central-page-area #main-content {
   margin-bottom: 1.5rem;
 	transition: max-width 0.3s, flex 0.3s;
@@ -1793,7 +1801,8 @@ pre {
 }
 
 code {
-  display: inline-flex;
+  display: inline-block;
+  vertical-align: middle;
   white-space: nowrap;
   max-width: 100%;
   background: #fff;
@@ -1857,9 +1866,15 @@ label {
   border-radius: 4px;
 }
 
-.admonition p {
+.admonition p,
+.admonition.note [class*="highlight-"],
+.admonition.warning [class*="highlight-"] {
   padding: 1rem;
   margin: 0;
+}
+
+.admonition ul, .admonition ol {
+  padding: 1em 1em 0;
 }
 
 p.admonition-title {
@@ -1996,7 +2011,7 @@ a:focus {
   border-color: transparent;
 }
 
-#main-content .navigation-buttons a:hover, 
+#main-content .navigation-buttons a:hover,
 #main-content .navigation-buttons a:focus {
   border-color: transparent;
 }
@@ -2012,7 +2027,7 @@ a:focus {
   transition: .2s all ease;
 }
 
-#main-content .navigation-buttons a:hover::after, 
+#main-content .navigation-buttons a:hover::after,
 #main-content .navigation-buttons a:focus::after {
   opacity: 1;
 }
@@ -2206,6 +2221,12 @@ blockquote ul li > div[class^='highlight'] {
 
 blockquote blockquote {
   margin-bottom: 0;
+  padding-left: 0;
+}
+
+.line-block {
+  border-left: 2px solid #ddd;
+  padding-left: 10px;
 }
 
 table.highlighttable {
@@ -2708,7 +2729,7 @@ div.highlight pre {
 			#globaltoc .toc-toggle-btn {
 				display: none;
 			}
-      
+
 			#globaltoc .toc-toggle > a:hover > .toc-toggle-btn,
 			#globaltoc .toc-toggle > a:focus > .toc-toggle-btn {
 				display: flex;

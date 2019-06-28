@@ -49,7 +49,7 @@ Get the appropriate Puppet apt repository, and then the "puppet-agent" package. 
 Create a symbolic link between the installed binary file and your default binary file:
 
   .. code-block:: bash
-    
+
     # ln -s /opt/puppetlabs/bin/puppet /bin
 
 Installation on Windows
@@ -63,17 +63,17 @@ Installation on Windows
       This is the package for a Puppet 5.1 version agent. If another package is needed, go to the `official directory <https://downloads.puppetlabs.com/windows/puppet5>`_ where all packages are available for download.
 
 2. Install Puppet.
-  
+
     a. Using command line:
 
       .. code-block:: bash
-        
+
         msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
 
       Optionally, you can specify ``/l*v install.txt`` to log the installation’s progress to a file.
 
       You can also set several MSI properties to pre-configure Puppet as you install it. For example:
-          
+
       .. code-block:: bash
 
         msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi PUPPET_MASTER_SERVER=puppet.example.com
@@ -85,7 +85,7 @@ Installation on Windows
       - During installation, Puppet asks you for the hostname of your Puppet master server.
 
       - For standalone Puppet nodes that won’t connect to a master, use the default hostname (*puppet*). You might also want to install on the command line and set the agent startup mode to *Disabled*.
-      
+
       - Once the installer finishes, Puppet will be installed and running.
 
 Configuration
@@ -98,6 +98,6 @@ Add the server value to the ``[main]`` section of the node’s ``/etc/puppetlabs
 
 Restart the Puppet service:
 
-  .. code-block:: console
+.. code-block:: console
 
     # puppet resource service puppet ensure=running enable=true
