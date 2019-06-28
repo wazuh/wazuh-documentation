@@ -7,5 +7,5 @@ Kibana app
 
 The following package is able to install as plugin in Kibana: 
 
-    - Elastic Stack 7.1.1: `wazuhapp-3.9.2_7.1.1.zip <https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_7.1.1.zip>`_ (`sha512 <https://packages.wazuh.com/3.x/checksums/3.9.2/wazuhapp-3.9.2_7.1.1.zip.sha512>`__) 
+    - Elastic Stack 7.2.0: `wazuhapp-3.9.3_7.2.0.zip <https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.3_7.2.0.zip>`_ (`sha512 <https://packages.wazuh.com/3.x/checksums/3.9.3/wazuhapp-3.9.3_7.2.0.zip.sha512>`__) 
 

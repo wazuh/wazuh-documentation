@@ -24,7 +24,7 @@ Installing Wazuh manager
 
       # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
-  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.2, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
+  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.3, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
   To install the build dependencies of CPython, follow these steps:
 
@@ -59,7 +59,7 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -154,7 +154,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.2/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.3/install_api.sh && bash ./install_api.sh download
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 

@@ -77,13 +77,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
       
-      # yum install elasticsearch-7.1.1
+      # yum install elasticsearch-7.2.0
 
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.1.1
+      # apt-get install elasticsearch=7.2.0
       # systemctl restart elasticsearch
 
 5. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
@@ -125,12 +125,6 @@ Upgrade Elasticsearch
     curl -X GET "localhost:9200/_cat/health?v"
 
 10. Repeat it for every Elasticsearch node.
-11. Once finished, then insert the Wazuh ingesting pipeline:
-
-  .. code-block:: console
-
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-pipeline.json | curl -X PUT "http://<ELASTICSEARCH_IP>:9200/_ingest/pipeline/wazuh" -H 'Content-Type: application/json' -d @-
-
 
 Field migration: From @timestamp to timestamp
 ----------------------------------------------
@@ -173,36 +167,42 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-7.1.1
+      # yum install filebeat-7.2.0
   
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.1.1  
+      # apt-get install filebeat=7.2.0  
 
 2. Update the configuration file.
 
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 3. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+4. Download the Wazuh module for Filebeat:
+
+  .. code-block:: console
+
+    # curl -s TBD_PATH.tar.gz | tar -xvz --no-same-owner -C /usr/share/filebeat/module --owner=0
+
+5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
     output.elasticsearch.hosts: ['http://10.0.0.2:9200']
 
-5. Restart Filebeat.
+6. Restart Filebeat.
 
   .. code-block:: console
 
@@ -225,19 +225,19 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-7.1.1
+      # yum install kibana-7.2.0
   
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.1.1  
+      # apt-get install kibana=7.2.0  
 
 4. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_7.1.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.3_7.2.0.zip
 
 5. Restart Kibana.
 
