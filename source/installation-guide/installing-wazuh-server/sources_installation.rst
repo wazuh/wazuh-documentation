@@ -71,6 +71,14 @@ Installing Wazuh manager
     # cd wazuh-*
     # ./install.sh
 
+  If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+  .. code-block:: console
+
+    # cd wazuh-*
+    # make -C src clean
+    # make -C src clean-deps
+
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
   .. code-block:: none
