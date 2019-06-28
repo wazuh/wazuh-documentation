@@ -44,11 +44,11 @@ Example:
 
 Set name and type of decoder to *ossec*:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <decoder name="ossec" type ="ossec">
-      ...
-    </decoder>
+  <decoder name="ossec" type ="ossec">
+    ...
+  </decoder>
 
 parent
 ^^^^^^
@@ -65,12 +65,12 @@ Example:
 
 Assign the decoder which father it belongs:
 
-  .. code-block:: xml
-    
-    <decoder name="decoder_junior">
-      <parent>decoder_father</parent>
-      ...
-    </decoder>
+.. code-block:: xml
+  
+  <decoder name="decoder_junior">
+    <parent>decoder_father</parent>
+    ...
+  </decoder>
 
 accumulate
 ^^^^^^^^^^^
@@ -100,12 +100,12 @@ Example:
 
 Define that the decoder is related with the ``syslogd`` process:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <decoder name="syslogd_decoder">
-      <program_name>syslogd</program_name>
-      ...
-    </decoder>
+  <decoder name="syslogd_decoder">
+    <program_name>syslogd</program_name>
+    ...
+  </decoder>
 
 prematch
 ^^^^^^^^^
@@ -134,7 +134,8 @@ Decoders use them to find words or other patterns into the rules.
 
 An example is this regex that matches any numeral:
 
-  ..code-block:: xml
+  .. code-block:: xml
+  
     <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
 
 
@@ -249,12 +250,12 @@ Example:
 
 The following decoder will extract the user who generated the alert and the location from where it comes:
 
-  .. code-block:: xml
-  
-    </decoder>
-      <fts>srcuser, location</fts>
-      ...
-    </decoder>
+.. code-block:: xml
+
+  </decoder>
+    <fts>srcuser, location</fts>
+    ...
+  </decoder>
 
 ftscomment
 ^^^^^^^^^^^
@@ -339,17 +340,17 @@ Example:
 
 .. code-block:: xml
 
-    <var name="header">myprog</var>
-    <var name="offset">after_parent</var>
-    <var name="type">syscall</var>
+  <var name="header">myprog</var>
+  <var name="offset">after_parent</var>
+  <var name="type">syscall</var>
 
-    <decoder name="syscall">
-      <prematch>^$header</prematch>
-    </decoder>
+  <decoder name="syscall">
+    <prematch>^$header</prematch>
+  </decoder>
 
-    <decoder name="syscall-child">
-      <parent>syscall</parent>
-      <prematch offset="$offset">^: $type </prematch>
-      <regex offset="after_prematch">(\S+)</regex>
-      <order>syscall</order>
-    </decoder>
+  <decoder name="syscall-child">
+    <parent>syscall</parent>
+    <prematch offset="$offset">^: $type </prematch>
+    <regex offset="after_prematch">(\S+)</regex>
+    <order>syscall</order>
+  </decoder>

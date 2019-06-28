@@ -39,7 +39,6 @@ The Wazuh agent can be installed in the most of Linux Distribution. It's possibl
 +-------------------------------+------------------------------------------------------+
 
 .. toctree::
-    :hidden:
     :maxdepth: 0
 
     wazuh_agent_linux_rpm

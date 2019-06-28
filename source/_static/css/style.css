@@ -390,15 +390,24 @@ footer .logo a:focus {
   opacity: 1;
 }
 
-ul, ol, dl {
+ul, ol {
 	padding-left: 1.7rem;
+}
+
+ul.simple dl dd {
+  margin-bottom: 0;
+}
+
+ul.simple dl ul {
+  list-style-type: circle;
+  margin-bottom: 0;
 }
 
 blockquote {
   background-color: #fff;
   margin-bottom: 1rem;
   overflow: auto;
-  padding-left: 1rem;
+  padding-left: 1.7rem;
 }
 
 /*blockquote ul,
@@ -728,13 +737,13 @@ main li.toctree-l1 ul {
   padding-left: 2.3em;
 }
 
-main .simple > li > dl > dd > ul > li:before {
+/*main .simple > li > dl > dd > ul > li:before {
     content: '\f10c ';
     display: inline-block;
     font: normal normal normal 8px/1em FontAwesome;
     position: relative;
     width: 14px;
-}
+}*/
 
 main li.toctree-l1 a {
   padding: 1px 0;
@@ -806,6 +815,7 @@ a.headerlink:hover,
 a.headerlink:active {
   color: transparent;
   text-decoration: none;
+  border-color: transparent !important;
 }
 
 h1:hover > a.headerlink,
@@ -2169,7 +2179,8 @@ ul#breadcrumbs a {
 blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
+  padding-left: 1.7rem;
 }
 
 blockquote ul li > div[class^='highlight'] {

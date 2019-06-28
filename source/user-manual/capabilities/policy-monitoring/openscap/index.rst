@@ -15,7 +15,6 @@ The **OpenSCAP wodle** is an integration of `OpenSCAP <https://www.open-scap.org
 
 
 .. toctree::
-    :hidden:
     :maxdepth: 2
 
     how-it-works
