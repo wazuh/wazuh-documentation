@@ -56,9 +56,11 @@ Increase max_map_count on your host (Windows)
       $ docker-machine ssh default
       # vi /var/lib/boot2docker/bootlocal.sh
 
-2.2 Add the following line into the profile file::
+2.2 Add the following line into the profile file:
 
-    sysctl -w vm.max_map_count=262144
+    .. code-block:: console
+
+      sysctl -w vm.max_map_count=262144
 
 2.3 Make the script runnable:
 

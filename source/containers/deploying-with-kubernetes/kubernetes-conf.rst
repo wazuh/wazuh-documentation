@@ -146,6 +146,7 @@ Deploy
 2. Create domains to access the services
 
     We recommend creating domains and certificates to access the services. Examples:
+    
     - wazuh-master.your-domain.com: Wazuh API and authd registration service.
     - wazuh-manager.your-domain.com: Reporting service.
     - wazuh.your-domain.com: Kibana and Wazuh app.

@@ -500,6 +500,10 @@ ol ol, ol ul, ul ol, ul ul {
   list-style-type: disc;
 }
 
+ul ul {
+  list-style-type: circle;
+}
+
 ol.loweralpha {
   list-style-type: lower-latin;
 }
@@ -1912,6 +1916,19 @@ p.first.admonition-title::before,
   margin-right: 1rem;
 }
 
+.note blockquote,
+.warning blockquote {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: transparent;
+}
+
+.note div[class^='highlight'],
+.warning div[class^='highlight'] {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .warning p.first.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
@@ -1920,7 +1937,7 @@ p.first.admonition-title::before,
 
 .admonition .highlight-console {
   background-color: transparent;
-  padding: 5px;
+  /*padding: 5px;*/
   margin-bottom: 0.5em;
 }
 
@@ -2180,7 +2197,7 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
-  padding-left: 1.7rem;
+  margin-left: 1.7rem; /*padding-left: 1.7rem;*/
 }
 
 blockquote ul li > div[class^='highlight'] {
