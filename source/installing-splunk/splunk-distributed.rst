@@ -120,9 +120,9 @@ Now, restart the Splunk Service:
 
   Check the state of the cluster executing:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # /opt/splunk/bin/splunk show cluster-bundle-status
+    # /opt/splunk/bin/splunk show cluster-bundle-status
 
 
 Next step is installing the :ref:`Wazuh App <splunk_app>` into the search heads instances to start using the services.

@@ -500,7 +500,7 @@ main ul > li::before {
 
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 1rem;
-  padding-left: 1.3rem;
+  padding-left: 1rem;
   list-style-type: disc;
 }
 
@@ -1375,7 +1375,7 @@ select, option {
 #select-version .dropdown-toggle {
   cursor: pointer;
   position: relative;
-  min-width: 130px;
+  min-width: 120px;
   padding: 2px 8px;
   color: #fff;
   font-size: 0.85rem;
@@ -1867,8 +1867,8 @@ label {
 }
 
 .admonition p,
-.admonition.note [class*="highlight-"],
-.admonition.warning [class*="highlight-"] {
+.admonition.note > [class*="highlight-"],
+.admonition.warning > [class*="highlight-"] {
   padding: 1rem;
   margin: 0;
 }
@@ -2214,7 +2214,7 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
-  margin-left: 1.7rem; /*padding-left: 1.7rem;*/
+  margin-left: 0.7rem;
 }
 
 blockquote ul li > div[class^='highlight'] {
@@ -2227,7 +2227,6 @@ blockquote blockquote {
 }
 
 .line-block {
-  border-left: 2px solid #dddddd;
   padding-left: 10px;
 }
 
@@ -2254,7 +2253,7 @@ div.highlight pre {
 
 	.no-latest-notice {
 		height: 60px;
-	}
+  }
 
 	.no-latest-docs .menu-sub,
 	.no-latest-docs header	{
@@ -2275,6 +2274,19 @@ div.highlight pre {
 	.scrolled .no-latest-docs #navbar-globaltoc.collapsing {
 		top: 107px;
 		height: calc(100vh - 107px);
+  }
+
+  .edit-repo-wrapper {
+    position: absolute;
+    right: 0;
+    background: #cbcbcb;
+    border-radius: 0 0 0 10px;
+    color: #ffffff;
+    z-index: 1;
+  }
+
+  .edit-repo-wrapper a{
+    color: #ffffff;
 	}
 
   blockquote {
@@ -2917,19 +2929,7 @@ div.highlight pre {
 				height: 40px;
       }
 
-      .edit-repo-wrapper {
-        position: absolute;
-        right: 0;
-        background: #cbcbcb;
-        border-radius: 0 0 0 10px;
-        color: #ffffff;
-        z-index: 1;
-      }
-      .edit-repo-wrapper a{
-        color: #ffffff;
-      }
-
-			.breadcrumbs-wrapper {
+      .breadcrumbs-wrapper {
         display: inline-block;
         width: calc(100% - 60px);
       }
