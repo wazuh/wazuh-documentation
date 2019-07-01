@@ -411,7 +411,7 @@ blockquote {
   background-color: #fff;
   margin-bottom: 1rem;
   overflow: auto;
-  padding-left: 1.7rem;
+  padding-left: 0.7rem;
 }
 
 blockquote ul,
@@ -1548,7 +1548,7 @@ a[data-lightbox] img {
   margin-bottom: 2em;
 }
 
-a-lightbox] img {
+[data-lightbox] img {
   border: 1px solid #eee;
 }
 
@@ -1874,7 +1874,9 @@ label {
 }
 
 .admonition ul, .admonition ol {
-  padding: 1em 1em 0;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0;
 }
 
 p.admonition-title {
@@ -2224,9 +2226,9 @@ blockquote blockquote {
   padding-left: 0;
 }
 
-.line-block {
-  border-left: 2px solid #ddd;
-  padding-left: 10px;
+.line-block {
+  border-left: 2px solid #dddddd;
+  padding-left: 10px;
 }
 
 table.highlighttable {
@@ -2274,6 +2276,10 @@ div.highlight pre {
 		top: 107px;
 		height: calc(100vh - 107px);
 	}
+
+  blockquote {
+    padding-left: 1.7rem;
+  }
 
   ul#breadcrumbs {
     max-width: 80%;

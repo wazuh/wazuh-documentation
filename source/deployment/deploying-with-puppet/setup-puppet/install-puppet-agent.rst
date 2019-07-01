@@ -14,7 +14,7 @@ Installation on CentOS/RHEL/Fedora
 
 Install the Puppet yum repository and then the "puppet-agent" package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 5 for CentOS 7 or RHEL 7, do the following:
 
-  .. code-block:: console
+.. code-block:: console
 
     # rpm -ivh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
     # yum -y install puppet-agent
@@ -32,14 +32,14 @@ Installation on Debian/Ubuntu
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
-  .. code-block:: console
+.. code-block:: console
 
     # apt-get update
     # apt-get install curl apt-transport-https lsb-release
 
 Get the appropriate Puppet apt repository, and then the "puppet-agent" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.
 
-  .. code-block:: console
+.. code-block:: console
 
     # wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
     # dpkg -i puppet5-release-xenial.deb
@@ -48,7 +48,7 @@ Get the appropriate Puppet apt repository, and then the "puppet-agent" package. 
 
 Create a symbolic link between the installed binary file and your default binary file:
 
-  .. code-block:: bash
+.. code-block:: bash
 
     # ln -s /opt/puppetlabs/bin/puppet /bin
 
