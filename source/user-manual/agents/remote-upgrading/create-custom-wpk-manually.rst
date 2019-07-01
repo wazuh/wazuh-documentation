@@ -3,20 +3,18 @@
 .. _create-custom-wpk-manually:
 
 Manual custom WPK packages creation
-============================
+====================================
 
 1. Get a X509 certificate and CA
 --------------------------------
 
 Create root CA
-^^^^^^^^^^^^^^
 
 .. code-block:: console
 
     # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
 
 Create a certificate and key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
@@ -29,7 +27,6 @@ Set the location as follows:
     - /O=Wazuh is the organization's name.
 
 Sign this certificate with the root CA
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
@@ -56,8 +53,8 @@ Requirements
 
       pip install cryptography
 
-Linux WPK package example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.1. Linux WPK 
+^^^^^^^^^^^^^^^
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
@@ -122,8 +119,8 @@ Linux WPK package example
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
-Windows WPK package example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.2. Windows WPK 
+^^^^^^^^^^^^^^^^^
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
