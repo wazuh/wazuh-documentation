@@ -22,9 +22,9 @@ Create a certificate and key
 
 Set the location as follows:
 
-    - /C=US is the country.
-    - /ST=CA is the state.
-    - /O=Wazuh is the organization's name.
+    - ``/C=US`` is the country.
+    - ``/ST=CA`` is the state.
+    - ``/O=Wazuh`` is the organization's name.
 
 Sign this certificate with the root CA
 

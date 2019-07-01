@@ -5,7 +5,9 @@
 Automated custom WPK packages creation
 =======================================
 
-Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency, to create a WPK package this way only docker and a X509 certificate are needed, in the case of Windows WPK a msi package is needed.
+Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency.
+
+To create a WPK package this way only docker and a X509 certificate are needed, in the case of Windows WPK a msi package is needed.
 
 1. Get a X509 certificate and CA
 --------------------------------
@@ -24,9 +26,9 @@ Wazuh provides an automated way of building WPK packages using docker so there i
 
 3. Set the location as follows:
 
-    - /C=US is the country.
-    - /ST=CA is the state.
-    - /O=Wazuh is the organization's name.
+    - ``/C=US`` is the country.
+    - ``/ST=CA`` is the state.
+    - ``/O=Wazuh`` is the organization's name.
 
 4. Sign this certificate with the root CA
 
