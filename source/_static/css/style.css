@@ -34,8 +34,7 @@ table.docutils col {
 }
 
 th, td {
-  padding: 7px;
-  padding-left: 12px;
+  padding: 7px 18px;
   border-color: #e1e4e5;
   vertical-align: middle;
 }
