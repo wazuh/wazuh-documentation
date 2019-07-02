@@ -343,7 +343,6 @@ $(function(){
     var ulSearch = $('ul.search');
     var lastResult = null;
     var splitURL;
-    var n_excludedResults;
 
     /* Detects every result that is added to the list */
     ulSearch.on('DOMSubtreeModified', function(){
@@ -354,7 +353,7 @@ $(function(){
       $.each(excludedSearchFolders, function(index, value){
         if ( $.inArray(value, splitURL) !== -1 ) {
           lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
-          lastResult.addClass('hidden-result'); /* Hides the excluded result */
+					lastResult.addClass('hidden-result'); /* Hides the excluded result */
           return false; // breaks the $.each loop
         }
       });
@@ -364,7 +363,49 @@ $(function(){
     $('#search-results > p:first').one('DOMSubtreeModified', function(){
       var totalResults = $('ul.search li').length;
       var excludedResults = $('ul.search li.excluded-search-result').length;
-      $(this).text( "Showing " + (totalResults-excludedResults) + " page(s) matching the search query.");
+      var resultText = '';
+      if ( excludedResults > 0 ) {
+        resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+      } else {
+        resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+      }
+      $(this).html(resultText);
     });
+
+    /* Click that allows showing excluded results */
+    $(document).delegate('#search-results #toggle-results.include', 'click', function(){
+			var toggleButton = $(this);
+			var excludedResults = $('ul.search li.excluded-search-result');
+
+      toggleButton.text(toggleButton.text().replace('Include', 'Exclude'));
+      toggleButton.removeClass('include').addClass('exclude');
+			$('#search-results #n-results').text($('ul.search li').length);
+
+			excludedResults.each(function(e){
+				currResult = $(this);
+				currResult.hide(0, function(){
+					$(this).removeClass('hidden-result');
+				})
+				currResult.show('fast');
+			});
+    });
+
+    /* Click that allows hiding excluded results */
+    $(document).delegate('#search-results #toggle-results.exclude', 'click', function(){
+			var toggleButton = $(this);
+			var excludedResults = $('ul.search li.excluded-search-result');
+
+      toggleButton.text(toggleButton.text().replace('Exclude', 'Include'));
+      toggleButton.removeClass('exclude').addClass('include');
+			$('#search-results #n-results').text($('ul.search li').length - excludedResults.length);
+
+			excludedResults.each(function(e){
+				currResult = $(this);
+				currResult.hide('fast', function(){
+					$(this).addClass('hidden-result');
+				});
+			});
+    });
+    
   }
 });
