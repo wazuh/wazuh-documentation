@@ -30,6 +30,8 @@ $(function(){
 		'development/index',
 		'docker-monitor/index',
 		'installation-guide/upgrading/legacy/index',
+    'installation-guide/packages-list/linux/linux-index',
+    'installation-guide/packages-list/solaris/solaris-index',
 		'monitoring',
 		'release-notes/index',
 		'user-manual/index',
@@ -406,6 +408,6 @@ $(function(){
 				});
 			});
     });
-    
+
   }
 });
