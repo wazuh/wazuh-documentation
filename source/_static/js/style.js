@@ -366,12 +366,14 @@ $(function(){
       var totalResults = $('ul.search li').length;
       var excludedResults = $('ul.search li.excluded-search-result').length;
       var resultText = '';
-      if ( excludedResults > 0 ) {
-        resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
-      } else {
-        resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+      if ( totalResults > 0 ){
+        if ( excludedResults > 0 ) {
+          resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+        } else {
+          resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+        }
+        $(this).html(resultText);
       }
-      $(this).html(resultText);
     });
 
     /* Click that allows showing excluded results */
