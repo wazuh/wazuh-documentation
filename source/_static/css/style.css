@@ -1118,6 +1118,10 @@ footer a:focus,
   line-height: 1.2;
 }
 
+#search-results li.excluded-search-result.hidden-result {
+	display: none!important;
+}
+
 .search_main .form-control:focus {
   box-shadow: none;
   border: none;
@@ -1996,7 +2000,7 @@ a:focus {
   border-color: transparent;
 }
 
-#main-content .navigation-buttons a:hover, 
+#main-content .navigation-buttons a:hover,
 #main-content .navigation-buttons a:focus {
   border-color: transparent;
 }
@@ -2012,7 +2016,7 @@ a:focus {
   transition: .2s all ease;
 }
 
-#main-content .navigation-buttons a:hover::after, 
+#main-content .navigation-buttons a:hover::after,
 #main-content .navigation-buttons a:focus::after {
   opacity: 1;
 }
@@ -2708,7 +2712,7 @@ div.highlight pre {
 			#globaltoc .toc-toggle-btn {
 				display: none;
 			}
-      
+
 			#globaltoc .toc-toggle > a:hover > .toc-toggle-btn,
 			#globaltoc .toc-toggle > a:focus > .toc-toggle-btn {
 				display: flex;

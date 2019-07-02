@@ -19,6 +19,7 @@ $(function(){
       gTocSpaceTop = $('#search-lg').height();
   var breakpoint = 992,
 			spaceBeforeAnchor = 60;
+	var excludedSearchFolders = ['release-notes']; // List of folders that will be excluded from search
 
 	// List of empty nodes, containing only a toctree
 	var empty_toc_nodes = [
@@ -336,4 +337,34 @@ $(function(){
     }, 10);
 	}
 
+  /* Search results --------------------------------------------------------------------------------------------------*/
+
+  if ( $('#search-results').length > 0 ) {
+    var ulSearch = $('ul.search');
+    var lastResult = null;
+    var splitURL;
+    var n_excludedResults;
+
+    /* Detects every result that is added to the list */
+    ulSearch.on('DOMSubtreeModified', function(){
+      lastResult = $('ul.search li:last-child');
+      splitURL = lastResult.children('a').prop('href').split('/');
+
+      /* Checks the URL to mark the results found in excludedSearchFolders */
+      $.each(excludedSearchFolders, function(index, value){
+        if ( $.inArray(value, splitURL) !== -1 ) {
+          lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
+          lastResult.addClass('hidden-result'); /* Hides the excluded result */
+          return false; // breaks the $.each loop
+        }
+      });
+    });
+
+    /* Replaces the result message */
+    $('#search-results > p:first').one('DOMSubtreeModified', function(){
+      var totalResults = $('ul.search li').length;
+      var excludedResults = $('ul.search li.excluded-search-result').length;
+      $(this).text( "Showing " + (totalResults-excludedResults) + " page(s) matching the search query.");
+    });
+  }
 });
