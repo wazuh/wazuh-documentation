@@ -39,3 +39,5 @@ Where are the policies?
 -----------------------
 
 Each agent must have its policies in ``/var/ossec/wodles/oscap/content``.
+
+.. note:: If ``/var/ossec/wodles/oscap/content`` is empty after installation, none of the policies included by default on Wazuh is compatible with the operating system. In this case it is necessary to manually find and add the appropriate policy file.
