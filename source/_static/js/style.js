@@ -336,4 +336,36 @@ $(function(){
     }, 10);
 	}
 
+	// Funcionability for the capabilities of the home
+	$('#capabilities .left .topic').click(function(){
+		capabilitiesHome(this);
+	});
+
+	$(window).resize(function(){
+		var ele = $('#capabilities .left .topic.active');
+		capabilitiesHome(ele);
+	});
+
+	function capabilitiesHome(ele){
+		$('#capabilities .left .topic.active').removeClass('active');
+		var class_name = $(ele).attr('class');
+		class_name = class_name.replace(' topic','');
+		class_name = class_name.replace(' select','');
+		$(ele).addClass('active');
+		$('#capabilities .right .topic.active').removeClass('active');
+		$('#capabilities .right .topic.'+class_name).addClass('active');
+		var window_w = $(window).width();
+		var pos_box = $('#capabilities .left').offset();
+		var pos_topic = $(ele).offset();
+		var pos_text = $('#capabilities .right .topic.'+class_name).offset();
+		if(window_w < 1200){
+			var pos = pos_topic.top - pos_box.top + 43;
+			var height = pos_text.top - pos_topic.top - 4;
+			$('#capabilities .line').css({'top':pos+'px','height':height+'px'});
+		} else {
+			var pos = pos_topic.top - pos_box.top - 4;
+			$('#capabilities .line2').css({'height':pos+'px'});
+		}
+	}
+
 });
