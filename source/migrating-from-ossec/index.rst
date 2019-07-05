@@ -112,6 +112,7 @@ The migration of Elastic stack, in the case that you already have it installed, 
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    ossec-server
    ossec-agent

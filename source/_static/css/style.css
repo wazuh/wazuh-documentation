@@ -50,6 +50,10 @@ th {
   border-bottom: solid 2px #e1e4e5;
 }
 
+dt {
+  padding-bottom: 10px;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -407,13 +411,13 @@ blockquote {
   background-color: #fff;
   margin-bottom: 1rem;
   overflow: auto;
-  padding-left: 1.7rem;
+  padding-left: 0.7rem;
 }
 
-/*blockquote ul,
+blockquote ul,
 blockquote dl {
 	padding-left: 0;
-}*/
+}
 
 ol blockquote {
 	padding-left: 0;
@@ -496,7 +500,7 @@ main ul > li::before {
 
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 1rem;
-  padding-left: 1.3rem;
+  padding-left: 1rem;
   list-style-type: disc;
 }
 
@@ -1371,7 +1375,7 @@ select, option {
 #select-version .dropdown-toggle {
   cursor: pointer;
   position: relative;
-  min-width: 130px;
+  min-width: 120px;
   padding: 2px 8px;
   color: #fff;
   font-size: 0.85rem;
@@ -1542,6 +1546,10 @@ ul {
 table,
 a[data-lightbox] img {
   margin-bottom: 2em;
+}
+
+[data-lightbox] img {
+  border: 1px solid #eee;
 }
 
 .central-page-area #main-content {
@@ -1793,7 +1801,8 @@ pre {
 }
 
 code {
-  display: inline-flex;
+  display: inline-block;
+  vertical-align: middle;
   white-space: nowrap;
   max-width: 100%;
   background: #fff;
@@ -1857,9 +1866,17 @@ label {
   border-radius: 4px;
 }
 
-.admonition p {
+.admonition p,
+.admonition.note > [class*="highlight-"],
+.admonition.warning > [class*="highlight-"] {
   padding: 1rem;
   margin: 0;
+}
+
+.admonition ul, .admonition ol {
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0;
 }
 
 p.admonition-title {
@@ -1996,7 +2013,7 @@ a:focus {
   border-color: transparent;
 }
 
-#main-content .navigation-buttons a:hover, 
+#main-content .navigation-buttons a:hover,
 #main-content .navigation-buttons a:focus {
   border-color: transparent;
 }
@@ -2012,7 +2029,7 @@ a:focus {
   transition: .2s all ease;
 }
 
-#main-content .navigation-buttons a:hover::after, 
+#main-content .navigation-buttons a:hover::after,
 #main-content .navigation-buttons a:focus::after {
   opacity: 1;
 }
@@ -2197,7 +2214,7 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
-  margin-left: 1.7rem; /*padding-left: 1.7rem;*/
+  margin-left: 0.7rem;
 }
 
 blockquote ul li > div[class^='highlight'] {
@@ -2206,6 +2223,11 @@ blockquote ul li > div[class^='highlight'] {
 
 blockquote blockquote {
   margin-bottom: 0;
+  padding-left: 0;
+}
+
+.line-block {
+  padding-left: 10px;
 }
 
 table.highlighttable {
@@ -2231,7 +2253,7 @@ div.highlight pre {
 
 	.no-latest-notice {
 		height: 60px;
-	}
+  }
 
 	.no-latest-docs .menu-sub,
 	.no-latest-docs header	{
@@ -2252,7 +2274,24 @@ div.highlight pre {
 	.scrolled .no-latest-docs #navbar-globaltoc.collapsing {
 		top: 107px;
 		height: calc(100vh - 107px);
+  }
+
+  .edit-repo-wrapper {
+    position: absolute;
+    right: 0;
+    background: #cbcbcb;
+    border-radius: 0 0 0 10px;
+    color: #ffffff;
+    z-index: 1;
+  }
+
+  .edit-repo-wrapper a{
+    color: #ffffff;
 	}
+
+  blockquote {
+    padding-left: 1.7rem;
+  }
 
   ul#breadcrumbs {
     max-width: 80%;
@@ -2708,7 +2747,7 @@ div.highlight pre {
 			#globaltoc .toc-toggle-btn {
 				display: none;
 			}
-      
+
 			#globaltoc .toc-toggle > a:hover > .toc-toggle-btn,
 			#globaltoc .toc-toggle > a:focus > .toc-toggle-btn {
 				display: flex;
@@ -2890,19 +2929,7 @@ div.highlight pre {
 				height: 40px;
       }
 
-      .edit-repo-wrapper {
-        position: absolute;
-        right: 0;
-        background: #cbcbcb;
-        border-radius: 0 0 0 10px;
-        color: #ffffff;
-        z-index: 1;
-      }
-      .edit-repo-wrapper a{
-        color: #ffffff;
-      }
-
-			.breadcrumbs-wrapper {
+      .breadcrumbs-wrapper {
         display: inline-block;
         width: calc(100% - 60px);
       }

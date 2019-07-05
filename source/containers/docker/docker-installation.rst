@@ -52,14 +52,14 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
       # chmod +x /usr/local/bin/docker-compose
 
-    .. note:: 
+    .. note::
       If the command *docker-compose* fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.
-      
+
     For example:
 
-      .. code-block:: bash
-        
-        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    .. code-block:: bash
+
+      sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 3. Test the installation to ensure everything went properly:
 
