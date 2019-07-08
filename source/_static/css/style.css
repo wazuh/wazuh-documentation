@@ -308,7 +308,7 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .line {
-  z-index: 1;
+  display: none;
   position: absolute;
   top: 43px;
   right: 0;
@@ -318,7 +318,7 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .left {
-  padding-right: 20px;
+  padding-right: 0;
   padding-left: 0;
 }
 
@@ -327,7 +327,7 @@ header .menuweb-bar .menu-item a {
   z-index: 1;
   position: absolute;
   top: 43px;
-  right: -7px;
+  right: -27px;
   width: 4px;
   height: 0;
   background-color: #00a9e5;
@@ -335,8 +335,7 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .left .topic {
   position: relative;
-  display: table;
-  height: 85px;
+  min-height: 80px;
   width: 100%;
   margin-bottom: 10px;
   padding: 0 12px 0 5px !important;
@@ -352,8 +351,11 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .left .topic .topic-title {
-  display: table-cell;
-  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 75px;
+  margin-bottom: 5px;
   padding-left: 80px;
   font-size: 20px !important;
   font-weight: normal !important;
@@ -374,6 +376,7 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .left .topic.active::before {
   content: '';
+  display: none;
   position: absolute;
   top: 30px;
   right: -10px;
@@ -386,6 +389,7 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .left .topic.active::after {
   content: '';
+  display: none;
   position: absolute;
   top: 38px;
   right: -21px;
@@ -400,6 +404,13 @@ header .menuweb-bar .menu-item a {
   border-color: #00a9e5;
 }
 
+#capabilities .left .topic p:not(.topic-title) {
+  display: none;
+  margin: 0 0 0 15px;
+  color: #fff;
+  transition: .2s all ease;
+}
+
 #capabilities .left .topic.active .topic-title {
   color: #fff;
 }
@@ -409,8 +420,12 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .right {
-  padding-right: 20px;
+  padding-right: 0;
   padding-left: 0;
+}
+          
+#capabilities .right .info {
+  display: none;
 }
 
 #capabilities .right .topic {
@@ -438,10 +453,6 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .right .topic .topic-title::before {
-  display: none;
-}
-
-#capabilities .left .topic p:last-child {
   display: none;
 }
 
@@ -3209,8 +3220,25 @@ div.highlight pre {
             border-bottom-right-radius: 5px;
           }
 
+          #capabilities .left .topic.active p:not(.topic-title) {
+            display: none;
+          }
+
+          #capabilities .left .topic.active::before {
+            display: block;
+          }
+
+          #capabilities .left .topic.active::after {
+            display: block;
+          }
+
           #capabilities .right {
-            padding-left: 30px;
+            padding-right: 10px;
+            padding-left: 50px;
+          }
+          
+          #capabilities .right .info {
+            display: block;
           }
 
           #capabilities .right .topic.active::before {
