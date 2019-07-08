@@ -63,9 +63,14 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
    Wazuh provides some of the necessary security controls to become compliant with industry standards and regulations. These features, combined with its scalability and multi-platform support help organizations meet technical compliance requirements.
 
 .. topic:: Cloud Security Monitoring
-   :class: cloud col-md-12
+   :class: cloud col-md-6
 
    Wazuh helps monitoring cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers, such as Amazon AWS, Azure or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
+
+.. topic:: Docker Security Monitoring
+   :class: docker col-md-6
+
+   Wazuh provides security visibility into your Docker hosts and containers, monitoring their behavior and detecting threats, vulnerabilities and anomalies. The Wazuh agent has native integration with the Docker engine allowing users to monitor images, volumes, network settings, and running containers. Wazuh continuously collects and analyzes detailed runtime information. For example, alerting for containers running in privileged mode, vulnerable applications, a shell running in a container, changes to persistent volumes or images, and other possible threats.
 
 .. raw:: html
 

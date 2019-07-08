@@ -19,6 +19,7 @@ $(function(){
       gTocSpaceTop = $('#search-lg').height();
   var breakpoint = 992,
 			spaceBeforeAnchor = 60;
+	var excludedSearchFolders = ['release-notes']; // List of folders that will be excluded from search
 
 	// List of empty nodes, containing only a toctree
 	var empty_toc_nodes = [
@@ -29,6 +30,8 @@ $(function(){
 		'development/index',
 		'docker-monitor/index',
 		'installation-guide/upgrading/legacy/index',
+    'installation-guide/packages-list/linux/linux-index',
+    'installation-guide/packages-list/solaris/solaris-index',
 		'monitoring',
 		'release-notes/index',
 		'user-manual/index',
@@ -336,4 +339,77 @@ $(function(){
     }, 10);
 	}
 
+  /* Search results --------------------------------------------------------------------------------------------------*/
+
+  if ( $('#search-results').length > 0 ) {
+    var ulSearch = $('ul.search');
+    var lastResult = null;
+    var splitURL;
+
+    /* Detects every result that is added to the list */
+    ulSearch.on('DOMSubtreeModified', function(){
+      lastResult = $('ul.search li:last-child');
+      splitURL = lastResult.children('a').prop('href').split('/');
+
+      /* Checks the URL to mark the results found in excludedSearchFolders */
+      $.each(excludedSearchFolders, function(index, value){
+        if ( $.inArray(value, splitURL) !== -1 ) {
+          lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
+					lastResult.addClass('hidden-result'); /* Hides the excluded result */
+          return false; // breaks the $.each loop
+        }
+      });
+    });
+
+    /* Replaces the result message */
+    $('#search-results > p:first').one('DOMSubtreeModified', function(){
+      var totalResults = $('ul.search li').length;
+      var excludedResults = $('ul.search li.excluded-search-result').length;
+      var resultText = '';
+      if ( totalResults > 0 ){
+        if ( excludedResults > 0 ) {
+          resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+        } else {
+          resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+        }
+        $(this).html(resultText);
+      }
+    });
+
+    /* Click that allows showing excluded results */
+    $(document).delegate('#search-results #toggle-results.include', 'click', function(){
+			var toggleButton = $(this);
+			var excludedResults = $('ul.search li.excluded-search-result');
+
+      toggleButton.text(toggleButton.text().replace('Include', 'Exclude'));
+      toggleButton.removeClass('include').addClass('exclude');
+			$('#search-results #n-results').text($('ul.search li').length);
+
+			excludedResults.each(function(e){
+				currResult = $(this);
+				currResult.hide(0, function(){
+					$(this).removeClass('hidden-result');
+				})
+				currResult.show('fast');
+			});
+    });
+
+    /* Click that allows hiding excluded results */
+    $(document).delegate('#search-results #toggle-results.exclude', 'click', function(){
+			var toggleButton = $(this);
+			var excludedResults = $('ul.search li.excluded-search-result');
+
+      toggleButton.text(toggleButton.text().replace('Exclude', 'Include'));
+      toggleButton.removeClass('exclude').addClass('include');
+			$('#search-results #n-results').text($('ul.search li').length - excludedResults.length);
+
+			excludedResults.each(function(e){
+				currResult = $(this);
+				currResult.hide('fast', function(){
+					$(this).addClass('hidden-result');
+				});
+			});
+    });
+
+  }
 });
