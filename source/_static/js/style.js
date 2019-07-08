@@ -339,6 +339,76 @@ $(function(){
     }, 10);
 	}
 
+	// Funcionability for the capabilities of the home
+	$('#capabilities .left .topic').click(function(){
+		capabilitiesHome(this);
+	});
+
+	$(window).resize(function(){
+		var ele = $('#capabilities .left .topic.active');
+		capabilitiesHome(ele);
+	});
+
+	setTimeout(function(){
+		var window_w = $(window).width();
+		if(window_w < 1200){
+			var ele = $('#capabilities .left .topic').first();
+			$(ele).find('p').not('.topic-title').slideDown(300);
+			$(ele).find('p').not('.topic-title').animate({'margin-bottom':'15px'}, 1);
+		}
+	}, 300);
+
+	function capabilitiesHome(ele){
+
+		if(!$(ele).hasClass('active')){
+			
+			var window_w = $(window).width();
+			var class_name = $(ele).attr('class');
+			class_name = class_name.replace(' topic','');
+			class_name = class_name.replace(' select','');
+			
+			if(window_w >= 1200){
+				
+				$('#capabilities .left .topic.active').removeClass('active');
+				$(ele).addClass('active');
+				$('#capabilities .right .topic.active').removeClass('active');
+				var pos_box = $('#capabilities .left').offset();
+				var pos_topic = $(ele).offset();
+				$('#capabilities .right .topic.'+class_name).addClass('active');
+				var pos = pos_topic.top - pos_box.top - 4;
+				$('#capabilities .line2').css({'height':pos+'px'});
+
+			} else {
+				
+				if($('#capabilities .left .topic.active').length > 0){
+					$('#capabilities .left .topic.active p').not('.topic-title').slideUp(300);
+					$('#capabilities .left .topic.active p').not('.topic-title').animate({'margin-bottom':'0'}, 100);
+					setTimeout(function(){
+						$('#capabilities .left .topic.active').removeClass('active');
+						$(ele).addClass('active');
+						$(ele).find('p').not('.topic-title').slideDown(300);
+						$(ele).find('p').not('.topic-title').animate({'margin-bottom':'15px'}, 1);
+					}, 300);
+				} else {
+					$(ele).addClass('active');
+					$(ele).find('p').not('.topic-title').slideDown(300);
+					$(ele).find('p').not('.topic-title').animate({'margin-bottom':'15px'}, 1);
+				}
+
+			}
+
+		} else {
+			
+			$(ele).find('p').not('.topic-title').slideUp(300);
+			$(ele).find('p').not('.topic-title').animate({'margin-bottom':'0'}, 100);
+			setTimeout(function(){
+				$(ele).removeClass('active');
+			}, 300);
+
+		}
+
+	}
+
   /* Search results --------------------------------------------------------------------------------------------------*/
 
   if ( $('#search-results').length > 0 ) {
