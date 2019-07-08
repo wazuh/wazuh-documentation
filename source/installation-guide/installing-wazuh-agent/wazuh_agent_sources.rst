@@ -33,7 +33,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -93,8 +93,8 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
-    # cd wazuh-3.9.2/src
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
+    # cd wazuh-3.9.3/src
 
 4. Compile the agent by running the ``make`` command:
 
@@ -114,13 +114,13 @@ The following output will appear at the end of the building process:
 
   .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.9.2
+    # zip -r wazuh.zip ../../wazuh-3.9.3
 
 6. Decompress the repository the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
   .. code-block:: console
 
-    cd wazuh-3.9.2\src\win32
+    cd wazuh-3.9.3\src\win32
     .\wazuh-installer-build-msi.bat
 
   If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.

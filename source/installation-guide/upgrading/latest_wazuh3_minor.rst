@@ -78,7 +78,7 @@ c) Windows:
 
   .. code-block:: console
 
-    # wazuh-agent-3.9.2-1.msi /q
+    # wazuh-agent-3.9.3-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
