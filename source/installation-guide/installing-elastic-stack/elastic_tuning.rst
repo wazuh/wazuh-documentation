@@ -247,7 +247,6 @@ In a cluster with one node, the number of replicas should be set to zero:
       "number_of_replicas" : 0
     }
   }
-  '
 
 Reference:
 
