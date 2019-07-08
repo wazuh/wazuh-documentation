@@ -239,14 +239,14 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with one node, the number of replicas should be set to zero:
 
-.. code-block:: console
+.. code-block:: none
 
-  # curl -X PUT "http://localhost:9200/wazuh-alerts-*/_settings?pretty" -H 'Content-Type: application/json' -d'
+  # curl -X PUT "http://localhost:9200/wazuh-alerts-\*/_settings?pretty" -H 'Content-Type: application/json' -d'
   {
     "settings" : {
       "number_of_replicas" : 0
     }
-  }
+  }'
 
 Reference:
 
