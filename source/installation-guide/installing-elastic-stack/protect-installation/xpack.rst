@@ -67,9 +67,9 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/elasticsearch/certs/ca -p
-    # cp certs/ca/ca.crt /etc/elasticsearch/certs/ca
-    # cp certs/elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
-    # cp certs/elasticsearch/elasticsearch.key /etc/elasticsearch/certs
+    # cp ca/ca.crt /etc/elasticsearch/certs/ca
+    # cp elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
+    # cp elasticsearch/elasticsearch.key /etc/elasticsearch/certs
     # chown -R elasticsearch: /etc/elasticsearch/certs
     # chmod -R 770 /etc/elasticsearch/certs
 
