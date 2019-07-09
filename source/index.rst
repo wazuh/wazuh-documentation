@@ -21,12 +21,11 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
 .. raw:: html
 
    <div class="items row">
-      <div class="line"></div>
 
 .. raw:: html
 
    <div class="capab left col-xl-4">
-      <div class="line2"></div>
+      <div class="line"></div>
 
 .. topic:: Security Analytics
   :class: security active
@@ -187,7 +186,7 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
 .. raw:: html
 
    <div class="screenshots">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="slider" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
 
           <div class="carousel-item active">
@@ -249,6 +248,15 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
 .. raw:: html
 
           </div>
+
+          <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
 
         </div>
       </div>

@@ -311,7 +311,7 @@ header .menuweb-bar .menu-item a {
   display: none;
   position: absolute;
   top: 43px;
-  right: 0;
+  right: -27px;
   width: 4px;
   height: 0;
   background-color: #00a9e5;
@@ -320,17 +320,6 @@ header .menuweb-bar .menu-item a {
 #capabilities .left {
   padding-right: 0;
   padding-left: 0;
-}
-
-#capabilities .line2 {
-  display: none;
-  z-index: 1;
-  position: absolute;
-  top: 43px;
-  right: -27px;
-  width: 4px;
-  height: 0;
-  background-color: #00a9e5;
 }
 
 #capabilities .left .topic {
@@ -406,9 +395,8 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .left .topic p:not(.topic-title) {
   display: none;
-  margin: 0 0 0 15px;
+  margin: 0 0 15px 15px;
   color: #fff;
-  transition: .2s all ease;
 }
 
 #capabilities .left .topic.active .topic-title {
@@ -481,6 +469,44 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .right .screenshots a {
   border: 0;
+}
+
+#capabilities .right .screenshots a img {
+  margin-bottom: 0;
+}
+
+#capabilities .right .screenshots .carousel-control-prev {
+  position: absolute !important;
+  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.15)),to(rgba(0,0,0,0.0001)));
+  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.15) 0),color-stop(rgba(0,0,0,0.0001) 100%));
+  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.0001) 100%);
+  background-image: linear-gradient(to right,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.0001) 100%);
+  background-repeat: repeat-x;
+}
+
+#capabilities .right .screenshots .carousel-control-prev:hover {
+  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.2)),to(rgba(0,0,0,0.0001)));
+  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.2) 0),color-stop(rgba(0,0,0,0.0001) 100%));
+  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.0001) 100%);
+  background-image: linear-gradient(to right,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.0001) 100%);
+  background-repeat: repeat-x;
+}
+
+#capabilities .right .screenshots .carousel-control-next {
+  position: absolute !important;
+  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.0001)),to(rgba(0,0,0,0.15)));
+  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.0001) 0),color-stop(rgba(0,0,0,0.15) 100%));
+  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.15) 100%);
+  background-image: linear-gradient(to right,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.15) 100%);
+  background-repeat: repeat-x;
+}
+
+#capabilities .right .screenshots .carousel-control-next:hover {
+  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.0001)),to(rgba(0,0,0,0.2)));
+  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.0001) 0),color-stop(rgba(0,0,0,0.2) 100%));
+  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.2) 100%);
+  background-image: linear-gradient(to right,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.2) 100%);
+  background-repeat: repeat-x;
 }
 
 .content-card {
@@ -631,49 +657,6 @@ ul.simple,
 main ol > li > ul {
   font-size: 1rem;
 }
-
-/*
-#main-content .toctree-wrapper > ul > li.toctree-l1::before,
-#main-content ul > li.toctree-l1::before {
-  content: '\f111';
-  float: left;
-  font: normal normal normal 8px/1 FontAwesome;
-  color: #404040;
-  padding-left: 0.5rem;
-  position: relative;
-  bottom: -0.45rem;
-  left: -0.5rem;
-
-main ul > li::before {
-  content: '\f111';
-  float: left;
-  font: normal normal normal 8px/1 FontAwesome;
-  color: #404040;
-  padding-left: 0.5rem;
-  position: relative;
-  bottom: -0.45rem;
-  left: -0.5rem;
-}
-
-main ul > li:not(.toctree-l1)::before {
-  content: '';
-}
-
-main ul.simple > li::before {
-  content: '\f111';
-}
-
-main ol ul > li::before {
-  content: '\f111' !important;
-}
-
-main blockquote ul > li::before {
-  content: '\f111' !important;
-}
-
-main ul > li::before {
-  content: '\f111' !important;
-}*/
 
 ol ol, ol ul, ul ol, ul ul {
   margin-bottom: 1rem;
@@ -921,14 +904,6 @@ main li.toctree-l1 ul {
   margin-bottom: 0;
   padding-left: 2.3em;
 }
-
-/*main .simple > li > dl > dd > ul > li:before {
-    content: '\f10c ';
-    display: inline-block;
-    font: normal normal normal 8px/1em FontAwesome;
-    position: relative;
-    width: 14px;
-}*/
 
 main li.toctree-l1 a {
   padding: 1px 0;
@@ -1781,10 +1756,6 @@ h4, h5, h6 {
   opacity: 0.8;
 }
 
-/*.breadcrumb .fa {
-  color: #00a9e5;
-}*/
-
 .results-quantity {
   font-size: 14px;
   line-height: 1.9em;
@@ -1894,7 +1865,6 @@ h2 {
   width: 100%;
   margin-bottom: 20px;
   padding-bottom: 8px;
-  /*border-bottom: 1px solid rgba(0, 169, 229, 0.4);*/
   border-bottom: 1px solid rgba(40, 40, 40, 0.2);
 }
 
@@ -2102,7 +2072,6 @@ p.first.admonition-title::before,
 
 .admonition .highlight-console {
   background-color: transparent;
-  /*padding: 5px;*/
   margin-bottom: 0.5em;
 }
 
@@ -2776,12 +2745,6 @@ div.highlight pre {
         display: inline-block;
       }
 
-      /*.toctree-wrapper > ul,
-      ul.simple,
-      main ol > li > ul {
-        padding-left: 10px;
-      }*/
-
 }
 
 @media (min-width: 992px){
@@ -2849,7 +2812,6 @@ div.highlight pre {
 			}
 
 			.menu-sub {
-				/*overflow: hidden;*/
 				background: transparent;
 				background: #0000;
 				position: absolute;
@@ -3207,10 +3169,6 @@ div.highlight pre {
 @media (min-width: 1200px) {
 
           #capabilities .line {
-            display: none;
-          }
-
-          #capabilities .line2 {
             display: block;
           }
 
@@ -3355,10 +3313,6 @@ div[class^='highlight'] pre {
   display: block;
   overflow: auto;
 }
-
-/*ul > li > div[class^='highlight'] {
-  margin-left: 1rem;
-}*/
 
 @media print {
   .codeblock,pre.literal-block,.rst-content .literal-block,.rst-content pre.literal-block,div[class^='highlight'],div[class^='highlight'] pre {

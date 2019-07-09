@@ -25,122 +25,125 @@
 }
 
 .wico-clock:before {
-  content: "\e925";
-}
-.wico-coffee:before {
   content: "\e926";
 }
-.wico-moving-up:before {
+.wico-coffee:before {
   content: "\e927";
 }
-.wico-docs:before {
-  content: "\e91f";
+.wico-moving-up:before {
+  content: "\e928";
 }
-.wico-github:before {
+.wico-docs:before {
   content: "\e920";
 }
-.wico-maillist:before {
+.wico-github:before {
   content: "\e921";
 }
-.wico-slack:before {
+.wico-maillist:before {
   content: "\e922";
 }
-.wico-team:before {
+.wico-slack:before {
   content: "\e923";
 }
-.wico-training-hat:before {
+.wico-team:before {
   content: "\e924";
 }
-.wico-agent:before {
-  content: "\e900";
+.wico-training-hat:before {
+  content: "\e925";
 }
-.wico-analytic:before {
+.wico-agent:before {
   content: "\e901";
 }
-.wico-aresponse:before {
+.wico-analytic:before {
   content: "\e902";
 }
-.wico-branch:before {
+.wico-aresponse:before {
   content: "\e903";
 }
-.wico-cloud:before {
+.wico-branch:before {
   content: "\e904";
 }
-.wico-compliance-full:before {
+.wico-cloud:before {
   content: "\e905";
 }
-.wico-compliance:before {
+.wico-compliance-full:before {
   content: "\e906";
 }
-.wico-config:before {
+.wico-compliance:before {
   content: "\e907";
 }
-.wico-deploy:before {
+.wico-config:before {
   content: "\e908";
 }
-.wico-fileint:before {
+.wico-deploy:before {
   content: "\e909";
 }
-.wico-help-hands:before {
+.wico-fileint:before {
   content: "\e90a";
 }
-.wico-help:before {
+.wico-help-hands:before {
   content: "\e90b";
 }
-.wico-incident-full:before {
+.wico-help:before {
   content: "\e90c";
 }
-.wico-incident:before {
+.wico-incident-full:before {
   content: "\e90d";
 }
-.wico-integr:before {
+.wico-incident:before {
   content: "\e90e";
 }
-.wico-intrusion-full:before {
+.wico-integr:before {
   content: "\e90f";
 }
-.wico-intrusion:before {
+.wico-intrusion-full:before {
   content: "\e910";
 }
-.wico-log:before {
+.wico-intrusion:before {
   content: "\e911";
 }
-.wico-logdata:before {
+.wico-log:before {
   content: "\e912";
 }
-.wico-manager:before {
+.wico-logdata:before {
   content: "\e913";
 }
-.wico-policy:before {
+.wico-manager:before {
   content: "\e914";
 }
-.wico-saas:before {
+.wico-policy:before {
   content: "\e915";
 }
-.wico-siem:before {
+.wico-saas:before {
   content: "\e916";
 }
-.wico-start:before {
+.wico-siem:before {
   content: "\e917";
 }
-.wico-support:before {
+.wico-start:before {
   content: "\e918";
 }
-.wico-training:before {
+.wico-support:before {
   content: "\e919";
 }
-.wico-trojan:before {
+.wico-training:before {
   content: "\e91a";
 }
-.wico-vulne-full:before {
+.wico-trojan:before {
   content: "\e91b";
 }
-.wico-vulne:before {
+.wico-vulne-full:before {
   content: "\e91c";
 }
-.wico-wazuh:before {
+.wico-vulne:before {
   content: "\e91d";
 }
-.wico-whitelist:before {
+.wico-wazuh:before {
   content: "\e91e";
+}
+.wico-whitelist:before {
+  content: "\e91f";
+}
+.wico-docker:before {
+  content: "\e900";
 }
