@@ -163,11 +163,6 @@ This section describes how to secure the communications between the involved com
 
     # systemctl restart kibana
 
-.. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
-  :align: center
-  :width: 100%
-
-
 
 Adding authentication for Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -178,11 +173,12 @@ Adding authentication for Elasticsearch
 
     xpack.security.enabled: true
 
-2. Restart Elasticsearch.
+2. Restart Elasticsearch and wait for the service to be ready.
 
 .. code-block:: console
 
     # systemctl restart elasticsearch
+
 
 3. Generate credentials for all the Elastic Stack pre-built roles and users.
 
@@ -217,3 +213,8 @@ Adding authentication for Elasticsearch
 .. code-block:: console
 
     # systemctl restart kibana
+
+You may now login to your Kibana web interface and use the elastic user credentials to login:
+.. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
+  :align: center
+  :width: 100%
