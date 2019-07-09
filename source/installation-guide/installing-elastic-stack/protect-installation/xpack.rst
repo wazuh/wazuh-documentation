@@ -104,9 +104,9 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/filebeat/certs/ca -p
-    # cp certs/ca/ca.crt /etc/filebeat/certs/ca
-    # cp certs/wazuh-manager/wazuh-manager.crt /etc/filebeat/certs
-    # cp certs/wazuh-manager/wazuh-manager.key /etc/filebeat/certs
+    # cp ca/ca.crt /etc/filebeat/certs/ca
+    # cp wazuh-manager/wazuh-manager.crt /etc/filebeat/certs
+    # cp wazuh-manager/wazuh-manager.key /etc/filebeat/certs
     # chmod 770 -R /etc/filebeat/certs
 
 2. Add the proper settings in ``/etc/filebeat/filebeat.yml``.
@@ -136,9 +136,9 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/kibana/certs/ca -p
-    # cp certs/ca/ca.crt /etc/kibana/certs/ca
-    # cp certs/kibana/kibana.crt /etc/kibana/certs
-    # cp certs/kibana/kibana.key /etc/kibana/certs
+    # cp ca/ca.crt /etc/kibana/certs/ca
+    # cp kibana/kibana.crt /etc/kibana/certs
+    # cp kibana/kibana.key /etc/kibana/certs
     # chown -R kibana: /etc/kibana/certs
     # chmod -R 770 /etc/kibana/certs
 
