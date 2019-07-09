@@ -24,18 +24,17 @@ Each policy check can contain an optional **compliance** field that is used to s
 
 .. code-block:: yaml
 
-   id: 6512
-   title: "Ensure noexec option set on removable media partitions"
+   id: 3010
+   title: "Ensure noexec option set on /var/tmp partition"
    description: "The noexec mount option specifies that the filesystem cannot contain executable binaries."
    rationale: "Setting this option on a file system prevents users from executing programs from the removable media. This deters users from being able to introduce potentially malicious software on the system."
    remediation: "Edit the /etc/fstab file and add noexec to the fourth field (mounting options) of all removable media partitions. Look for entries that have mount points that contain words such as floppy or cdrom."
    compliance:
-    - cis: "1.1.20"
-    - cis_csc: "8"
-    - pci_dss: "2.2.4"
-   condition: any
+      - cis: ["1.1.10"]
+      - cis_csc: ["2.6"]
+   condition: all
    rules:
-     - 'f:/etc/fstab -> NIN !r:^# && r:/media && r:noexec;'
+      - 'c:mount -> r:\s/var/tmp\s && r:noexec'
 
 SCA scan results
 ^^^^^^^^^^^^^^^^
@@ -78,12 +77,12 @@ Every scanned policy should contain a header to provide its overview information
 .. code-block:: yaml
 
     policy:
-      id: "system_audit_ssh"
-      file: "system_audit_ssh.yml"
-      name: "System audit for SSH hardening"
-      description: "Guidance for establishing a secure configuration for SSH service vulnerabilities."
+      id: "cis_debian9_L1"
+      file: "cis_debian9_L1.yml"
+      name: "CIS benchmark for Debian/Linux 9 L1"
+      description: "This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux 9."
       references:
-        - https://www.ssh.com/ssh/
+        - https://www.cisecurity.org/cis-benchmarks/
 
 Fields like `id` are mandatory to identify and classify policies.
 
@@ -112,23 +111,23 @@ all the default policy files available for the Operating Systems officially supp
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 | Policy                      | Name                                                       | Requirement                   |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| acsc_office2016_rcl         |  System audit for Office 2016 vulnerabilities              | Microsoft Office 2016         |
+| acsc_office2016             |  System audit for Office 2016 vulnerabilities              | Microsoft Office 2016         |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_apache2224_rcl          |  CIS Apache HTTP Server 2.2/2.4 Benchmark                  | Apache configuration files    |
+| cis_apache2224              |  CIS Apache HTTP Server 2.2/2.4 Benchmark                  | Apache configuration files    |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_win2012r2_domainL1_rcl  |  CIS benchmark for Windows 2012 R2 Domain Controller L1    | Windows Server 2012 R2        |
+| cis_win2012r2_domainL1      |  CIS benchmark for Windows 2012 R2 Domain Controller L1    | Windows Server 2012 R2        |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_win2012r2_domainL2_rcl  |  CIS benchmark for Windows 2012 R2 Domain Controller L2    | Windows Server 2012 R2        |
+| cis_win2012r2_domainL2      |  CIS benchmark for Windows 2012 R2 Domain Controller L2    | Windows Server 2012 R2        |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_win2012r2_memberL1_rcl  |  CIS benchmark for Windows 2012 R2 Member Server L1        | Windows Server 2012 R2        |
+| cis_win2012r2_memberL1      |  CIS benchmark for Windows 2012 R2 Member Server L1        | Windows Server 2012 R2        |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_win2012r2_memberL2_rcl  |  CIS benchmark for Windows 2012 R2 Member Server L2        | Windows Server 2012 R2        |
+| cis_win2012r2_memberL2      |  CIS benchmark for Windows 2012 R2 Member Server L2        | Windows Server 2012 R2        |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_rhel5_linux_rcl         |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Systems               |
+| cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Systems               |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_rhel6_linux_rcl         |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Systems               |
+| cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Systems               |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_rhel7_linux_rcl         |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Systems               |
+| cis_rhel7_linux             |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Systems               |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 | cis_apple_macOS_10.11       |  CIS Apple OSX 10.11 Benchmark                             | MAC OS X 10.11 (El Capitan)   |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -136,35 +135,37 @@ all the default policy files available for the Operating Systems officially supp
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 | cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | MAC OS X 10.13 (High Sierra)  |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_debianlinux7-8_L1_rcl   |  CIS benchmark for Debian/Linux 7 and 8 L1                 | Debian 7 and 8                |
+| cis_debian7_L1              |  CIS benchmark for Debian/Linux 7 L1                       | Debian 7                      |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_debianlinux7-8_L2_rcl   |  CIS benchmark for Debian/Linux 7 and 8 L2                 | Debian 7 and 8                |
+| cis_debian7_L2              |  CIS benchmark for Debian/Linux 7 L2                       | Debian 7                      |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_debian_linux_rcl        |  CIS benchmark for Debian/Linux                            | Debian systems                |
+| cis_debian8_L1              |  CIS benchmark for Debian/Linux 8 L1                       | Debian 8                      |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_sles11_linux_rcl        |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
+| cis_debian8_L2              |  CIS benchmark for Debian/Linux 8 L2                       | Debian 8                      |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_sles12_linux_rcl        |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
+| cis_debian9_L1              |  CIS benchmark for Debian/Linux 9 L1                       | Debian 9                      |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_solaris11_rcl           |  CIS benchmark for Oracle Solaris 11                       | Solaris 11                    |
+| cis_debian9_L2              |  CIS benchmark for Debian/Linux 9 L2                       | Debian 9                      |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| system_audit_pw             |  System audit for password-related vulnerabilities         | Password files                |
+| cis_debian_linux            |  CIS benchmark for Debian/Linux                            | Debian systems                |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| system_audit_rcl_mac        |  System audit for web-related vulnerabilities              | N/A                           |
+| cis_sles11_linux            |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| system_audit_rcl            |  System audit for web-related vulnerabilities              | N/A                           |
+| cis_sles12_linux            |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| system_audit_ssh            |  System audit for SSH hardening                            | SSH configuration files       |
+| cis_solaris11               |  CIS benchmark for Oracle Solaris 11                       | Solaris 11                    |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| win_audit_rcl               |  Benchmark for Windows audit                               | Windows                       |
+| sca_unix_audit              |  System audit for web-related vulnerabilities              | N/A                           |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_win10_enterprise_L1_rcl |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+| sca_win_audit               |  Benchmark for Windows audit                               | Windows                       |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_win10_enterprise_L2_rcl |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+| cis_win10_enterprise_L1     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_mysql5-6_community_rcl  |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
+| cis_win10_enterprise_L2     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
-| cis_mysql5-6_enterprise_rcl |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
+| cis_mysql5-6_community      |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_mysql5-6_enterprise     |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 
 Policy files location
@@ -220,40 +221,42 @@ Current policy files configured to be run on the agent (either by default or by 
 Creating custom SCA policies
 ----------------------------
 
-As mentioned previously, the policy files have a YAML format. In order to illustrate shown below is a section of the policy file for SSH hardening:
+As mentioned previously, the policy files have a YAML format. In order to illustrate shown below is a section of the policy file for Unix auditing:
 
 .. code-block:: yaml
 
     policy:
-      id: "system_audit_ssh"
-      file: "system_audit_ssh.yml"
-      name: "System audit for SSH hardening"
-      description: "Guidance for establishing a secure configuration for SSH service vulnerabilities."
-      references:
+    id: "unix_audit"
+    file: "unix_audit.yml"
+    name: "System audit for Unix based systems"
+    description: "Guidance for establishing a secure configuration for Unix based systems."
+    references:
         - https://www.ssh.com/ssh/
 
-    requirements:
-      title: "Check that the SSH service is installed on the system"
-      description: "Requirements for running the SCA scan against the SSH policy."
-      condition: "all required"
-      rules:
-        - 'f:/etc/ssh/sshd_config;'
-
     variables:
-     $sshd_file: /etc/ssh/sshd_config;
+    $sshd_file: /etc/ssh/sshd_config,/opt/ssh/etc/sshd_config
+    $pam_d_files: /etc/pam.d/common-password,/etc/pam.d/password-auth,/etc/pam.d/system-auth,/etc/pam.d/system-auth-ac,/etc/pam.d/passwd
+
+    requirements:
+    title: "Check that the SSH service is installed on the system and password-related files are present on the system"
+    description: "Requirements for running the SCA scan against the Unix based systems policy."
+    condition: any
+    rules:
+        - 'f:$sshd_file'
+        - 'f:/etc/passwd'
+        - 'f:/etc/shadow'
 
     checks:
-     - id: 1500
-       title: "SSH Hardening - 1: Port 22"
-       description: "The ssh daemon should not be listening on port 22 (the default value) for incoming connections."
-       rationale: "Changing the default port you may reduce the number of successful attacks from zombie bots, an attacker or bot doing port-scanning can quickly identify your SSH port."
-       remediation: "Change the Port option value in the sshd_config file."
-       compliance:
-        - pci_dss: "2.2.4"
-       condition: any
-       rules:
-        - 'f:$sshd_file -> IN !r:^# && r:Port\.+22;'
-
+    - id: 4000
+        title: "SSH Hardening - 1: Port should not be 22"
+        description: "The ssh daemon should not be listening on port 22 (the default value) for incoming connections."
+        rationale: "Changing the default port you may reduce the number of successful attacks from zombie bots, an attacker or bot doing port-scanning can quickly identify your SSH port."
+        remediation: "Change the Port option value in the sshd_config file."
+        compliance:
+        - pci_dss: ["2.2.4"]
+        condition: all
+        rules:
+          - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22\s\t*$'
 
 As shown in this example, there are four sections, not all of them are required for a policy file:
 
@@ -344,9 +347,7 @@ Each section has their own fields that can be mandatory as described below:
 It is recommended that new policy files be placed under the `ruleset/sca` directory.
 
 .. note::
-  - Remember that the **policy** id field must be unique, not existing in other policy files.
-  - Remember that the **checks** id field must be unique within the same policy.
-
+  - Remember that fields id from **policy** and **checks** must be unique, not existing in other policy files.
 
 Information about variables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -354,9 +355,8 @@ Information about variables
 When setting variables in the **variables** section:
 
 - Make sure they start with ``$`` character
-- Make sure they end with ``;`` character
 
-Example: ``$sshd_file: /etc/ssh/sshd_config;``
+Example: ``$sshd_file: /etc/ssh/sshd_config``
 
 
 Information about rules
@@ -388,89 +388,84 @@ In order to better understand the syntax of the rules it is important to note th
 
 - The location is commonly followed by the content to look for. It is accepted a literal string or a regular expression preceded by ``r:`` (the supported Regex syntax can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
 
-- As explained before, the most common rules have the format ``type:location -> r:REGEX;``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
-
-- Each rule must end with the semicolon ``;`` character.
+- As explained before, the most common rules have the format ``type:location -> r:REGEX``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
 
 The following examples illustrate this logic:
 
 **Rule syntax for files**
 
 - Checking that a file exists
-  - ``'f:/path/to/file;'``
+  - ``'f:/path/to/file'``
 
 - Checking file content (whole line match)
-  - ``'f:/path/to/file -> content;'``
+  - ``'f:/path/to/file -> content'``
 
 - Checking file content with regex
-  - ``'f:/path/to/file -> r:REGEX;'``
+  - ``'f:/path/to/file -> r:REGEX'``
 
+- Checking a numeric value
+  - ``'f:/path/to/file -> n:REGEX(\d+) compare <= Number'``
 
 **Rule syntax for directories**
 
 - Checking that a directory exists
-  - ``'d:/path/to/directory;'``
+  - ``'d:/path/to/directory'``
 
 - Checking that a directory contains a file
-  - ``'d:/path/to/directory -> file;'``
+  - ``'d:/path/to/directory -> file'``
 
 - Checking that a directory contains files with regex
-  - ``'d:/path/to/directory -> r:^files;'``
+  - ``'d:/path/to/directory -> r:^files'``
 
 - Checking that a directory contains files and its content
-  - ``'d:/path/to/directory -> file -> content;'``
+  - ``'d:/path/to/directory -> file -> content'``
 
 
 **Rule syntax for processes**
 
 - Checking that a process is running
-  - ``'p:process_name;'``
+  - ``'p:process_name'``
 
 
 **Rule syntax for commands**
 
 - Checking the output of a command
-  - ``'c:command -> output;'``
+  - ``'c:command -> output'``
 
 - Checking the output of a command with regex
-  - ``'c:command -> r:REGEX;'``
+  - ``'c:command -> r:REGEX'``
 
+- Checking a numeric value
+  - ``'c:command -> n:REGEX(\d+) compare <= Number'``
 
 **Rule syntax for registries (Windows only).**
 
 - Checking that a registry exists
-  - ``'r:path/to/registry ;'``
+  - ``'r:path/to/registry '``
 
 - Checking that a registry key exists
-  - ``'r:path/to/registry -> key;'``
+  - ``'r:path/to/registry -> key;``
 
 - Checking a registry key content
-  - ``'r:path/to/registry  -> key -> content;'``
-
-**Global operators for composed rules**
-
-When more than one term is necessary, two logical operators can be used to determine the accumulated result of a check (terms are separated by ``&&`` inside a rule).
-
-- IN (included): This operator means that both the terms should be matched. 
-- NIN (not included): The opposite operator, it means the rule is triggered if both terms are not matched.
+  - ``'r:path/to/registry  -> key -> content'``
 
 **Use cases**
 
 Composed rules:
 
 - Alert when there is a line that does not begin with ``#`` and contains ``Port 22``
-  - ``'f:/etc/ssh/sshd_config -> IN !r:^# && r:Port\.+22;'``
+  - ``'f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22'``
 
 - Alert when there is no line that does not begin with ``#`` and contains ``Port 2222``
-  - ``'f:/etc/ssh/sshd_config -> NIN !r:^# && r:Port\.+2222;'``
+  - ``'f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+2222'``
 
 Other examples:
 
-- Looking at the value inside a file: ``'f:/proc/sys/net/ipv4/ip_forward -> 1;'``
-- Checking if a file exists: ``'f:/proc/sys/net/ipv4/ip_forward;'``
-- Checking if a process is running: ``'p:avahi-daemon;'``
-- Looking at the value of a registry: ``'r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;'``
-- Looking if a directory contains files: ``'d:/home/* -> ^.mysql_history$;'``
-- Checking if a directory exists: ``'d:/etc/mysql;``
-- Check the running configuration of ssh to check the maximum authentication tries: ``'c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$;'``
-- Check if root is the only UID 0 account ``'f:/etc/passwd -> IN !r:^# && !r:^root: && r:^\w+:\w+:0:;'``
+- Looking at the value inside a file: ``'f:/proc/sys/net/ipv4/ip_forward -> 1'``
+- Checking if a file exists: ``'f:/proc/sys/net/ipv4/ip_forward'``
+- Checking if a process is running: ``'p:avahi-daemon'``
+- Looking at the value of a registry: ``'r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0'``
+- Looking if a directory contains files: ``'d:/home/* -> ^.mysql_history$'``
+- Checking if a directory exists: ``'d:/etc/mysql'``
+- Check the running configuration of ssh to check the maximum authentication tries: ``'c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$'``
+- Check if root is the only UID 0 account ``'f:/etc/passwd -> IN !r:^# && !r:^root: && r:^\w+:\w+:0:'``
