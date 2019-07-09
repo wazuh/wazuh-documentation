@@ -97,6 +97,8 @@ The following screenshot of the *SCA* tab shows an overview of scanned policies 
 Available policies
 ------------------
 
+The Wazuh agent will scan every policy in ``/ruleset/sca`` by default.
+
 Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability, 
 which allows the user to quickly understand and write their own policy files or extend the existing ones.
 
@@ -172,7 +174,8 @@ Policy files location
 ^^^^^^^^^^^^^^^^^^^^^
 
 - On Linux platforms, the default policy files are located under the default installation directory at ``/var/ossec/ruleset/sca``.
-- On Windows platformss, the policy files are located under the default installation directory at ``C:\\Program files (x86)\\ossec-agent\\ruleset\\sca``.
+- On Windows platforms, the policy files are located under the default installation directory at ``C:\\Program files (x86)\\ossec-agent\\ruleset\\sca``.
+- In the Wazuh manager, all the policies available are located under the default installation directory at ``path/manager/all-policies``.
 
 How to share policy files with agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -256,7 +259,7 @@ As mentioned previously, the policy files have a YAML format. In order to illust
         - pci_dss: ["2.2.4"]
         condition: all
         rules:
-          - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22\s\t*$'
+          - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22\s*\t*$'
 
 As shown in this example, there are four sections, not all of them are required for a policy file:
 
