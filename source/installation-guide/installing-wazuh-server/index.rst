@@ -11,15 +11,13 @@ There are two components that are usually installed on a Wazuh server: the manag
 
 There are several options for installing the Wazuh server depending on the operating system and whether or not you wish to build from sources. Consult the table below and choose how to proceed:
 
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| Type                                                                   | Description                                                 |
-+========================================================================+=============================================================+
-| :ref:`RPM packages <wazuh_server_rpm>`                                 | Install Wazuh server on CentOS/RHEL/Fedora.                 |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`DEB packages <wazuh_server_deb>`                                 | Install Wazuh server on Debian/Ubuntu.                      |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Sources <sources_installation>`                                  | Install Wazuh server from source code.                      |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
++-----------------------------------------------------------+---------------------------------------------------------------+
+| Type                                                      | Description                                                   |
++===========================================================+===============================================================+
+| :ref:`Linux packages<wazuh_server_linux>`                 | Install Wazuh Manager from Linux packages.                    |
++-----------------------------------------------------------+---------------------------------------------------------------+
+| :ref:`Sources <sources_installation>`                     | Install Wazuh Manager from source code.                       |
++-----------------------------------------------------------+---------------------------------------------------------------+
 
 There are some related additional configurations that can be applied:
 
@@ -34,8 +32,7 @@ There are some related additional configurations that can be applied:
    :hidden:
    :maxdepth: 2
 
-   wazuh_server_rpm
-   wazuh_server_deb
+   wazuh_server_linux
    sources_installation
    securing_api
    automatic_api

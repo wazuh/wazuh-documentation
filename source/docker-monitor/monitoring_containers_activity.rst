@@ -16,6 +16,7 @@ The following dependencies are required by the wodle:
 - Linux system.
 - Python 2.7 or newer.
 - `Python Docker library <https://pypi.org/project/docker/>`_: It can be installed with ``pip install docker`` command.
+- Starting with Wazuh v3.9.0 this requirement is met by default by the Wazuh manager and must only be installed in previous versions or Wazuh agents.
 
 
 Configuration
@@ -23,10 +24,10 @@ Configuration
 
 .. note::
 
-    In the following examples, the configuration is done in the manager instance (*Docker host*) that collects the events sent from the agents (*Docker containers*).
+    In the following examples, the configuration is done in the *Docker host* that collects the events sent from the *Docker containers*. This may be either a server with a Wazuh Agent or Manager installed.
 
 
-The configuration is pretty straightforward, it is only necessary to enable the ``wodle`` in the manager instance in the ``/var/ossec/etc/ossec.conf`` file. It will start a new thread to listen to Docker events.
+In order to use the Docker listener module it is only necessary to enable the ``wodle`` in the ``/var/ossec/etc/ossec.conf`` file of the server running docker, or this can also be done through :doc:`Centralized Configuration <../user-manual/reference/centralized-configuration>`. It will start a new thread to listen to Docker events.
 
 .. code-block:: xml
 
@@ -35,19 +36,8 @@ The configuration is pretty straightforward, it is only necessary to enable the 
     </wodle>
 
 
-Then, restart the service:
-
-    a. For Systemd:
-
-        .. code-block:: console
-
-            # systemctl restart wazuh-manager
-
-     b. For SysV Init:
-
-        .. code-block:: console
-
-            # service wazuh-manager restart
+Then, it is necessary to restart the Wazuh service (where the listener will be running).
+            
 
 Use cases
 ^^^^^^^^^

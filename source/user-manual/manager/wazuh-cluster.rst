@@ -153,7 +153,15 @@ The following must be considered when configuring a Wazuh app:
     +------------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                                   | Description                                                 |
     +========================================================================+=============================================================+
-    | :ref:`RPM packages <wazuh_server_rpm_filebeat>`                        | Install Filebeat on CentOS/RHEL/Fedora.                     |
+    | :ref:`RPM packages <wazuh_server_rpm_centos_filebeat>`                 | Install Filebeat on CentOS.                                 |
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+    | :ref:`RPM packages <wazuh_server_rpm_fedora_filebeat>`                 | Install Filebeat on Fedora.                                 |
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+    | :ref:`RPM packages <wazuh_server_rpm_oracle_filebeat>`                 | Install Filebeat on Oracle Linux.                           |
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+    | :ref:`RPM packages <wazuh_server_rpm_rhel_filebeat>`                   | Install Filebeat on Red Hat Enterprise Linux.               |
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+    | :ref:`RPM packages <wazuh_server_rpm_suse_opensuse_filebeat>`          | Install Filebeat on CentOS/RHEL/Fedora.                     |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
     | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
@@ -325,9 +333,9 @@ For example, the following snippet shows the connected nodes in the cluster:
 
     # /var/ossec/bin/cluster_control -l
     NAME      TYPE    VERSION  ADDRESS
-    worker-1  worker  3.9.1    172.17.0.101
-    worker-2  worker  3.9.1    172.17.0.102
-    master    master  3.9.1    172.17.0.100
+    worker-1  worker  3.9.3    172.17.0.101
+    worker-2  worker  3.9.3    172.17.0.102
+    master    master  3.9.3    172.17.0.100
 
 This information can also be obtained using the Restful API:
 
@@ -341,19 +349,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.9.1",
+                "version": "3.9.3",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.9.1",
+                "version": "3.9.3",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.9.1",
+                "version": "3.9.3",
                 "type": "master",
                 "name": "node01"
              }

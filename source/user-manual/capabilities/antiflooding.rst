@@ -19,7 +19,7 @@ Why an anti-flooding mechanism is needed
 
 In the Wazuh architecture, Wazuh agents collect information from log files, command outputs, different kinds of scans, etc. They then send all the collected information to their manager, separated into individual events. Without any congestion control, an agent could potentially send events at a rate as high as the system is physically capable of transmitting, which could be hundreds or thousands of events per second.
 
-Due to this fact, a incorrect configuration in an agent may generate enough events to saturate a network or its manager. Here are some misconfiguration scenarios that could lead to this problem:
+Due to this fact, an incorrect configuration in an agent may generate enough events to saturate a network or its manager. Here are some misconfiguration scenarios that could lead to this problem:
 
 - Realtime FIM (Syscheck) of a directory with files that keep changing:
 

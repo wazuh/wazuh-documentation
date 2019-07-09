@@ -24,7 +24,7 @@ Installing Wazuh manager
 
       # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
-  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.1, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
+  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
   To install the build dependencies of CPython, follow these steps:
 
@@ -41,6 +41,7 @@ Installing Wazuh manager
     .. code-block:: console
 
       # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get update
       # apt-get build-dep python3.6 -y
 
   * For Debian based system:
@@ -48,6 +49,7 @@ Installing Wazuh manager
     .. code-block:: console
 
       # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get update
       # apt-get build-dep python3.5 -y
 
   .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
@@ -57,7 +59,7 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -68,6 +70,14 @@ Installing Wazuh manager
 
     # cd wazuh-*
     # ./install.sh
+
+  If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+  .. code-block:: console
+
+    # cd wazuh-*
+    # make -C src clean
+    # make -C src clean-deps
 
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
@@ -144,7 +154,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.1/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.3/install_api.sh && bash ./install_api.sh download
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 

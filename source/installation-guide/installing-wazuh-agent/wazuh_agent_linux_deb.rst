@@ -16,7 +16,7 @@ Adding the Wazuh repository
 
   .. code-block:: console
 
-    # apt-get install curl apt-transport-https lsb-release
+    # apt-get install curl apt-transport-https lsb-release gnupg2
 
 2. Install the Wazuh repository GPG key:
 
@@ -69,3 +69,18 @@ Installing Wazuh agent
     # apt-get update
 
 Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
+
+Uninstall
+---------
+
+To uninstall the agent:
+
+    .. code-block:: console
+
+      # apt-get remove wazuh-agent
+
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
+
+    .. code-block:: console
+
+      # apt-get remove --purge wazuh-agent
