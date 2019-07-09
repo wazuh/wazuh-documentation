@@ -47,4 +47,4 @@ Wazuh ruleset
 - Changed NGINX decoder to make the field "server" optional. (Credits to `@iasdeoupxe <https://github.com/iasdeoupxe>`_).
 - Remove unwanted tailing single quote in Audit decoder. (Credits to `@branchnetconsulting <https://github.com/branchnetconsulting>`_).
 - Avoid conflicts between the "uid" and "auid" fields in the Audit decoder. (Credits to `@tokibi <https://github.com/tokibi>`_).
-- Exclude the full log field from rules for AWS, Suricata, VirusTotal, OwnCloud, Vuls, CIS-CAT, Vulnerability Detector, MySQL, Osquery y Azure.
+- Exclude the full log field from rules for AWS, Suricata, VirusTotal, OwnCloud, Vuls, CIS-CAT, Vulnerability Detector, MySQL, Osquery and Azure.
