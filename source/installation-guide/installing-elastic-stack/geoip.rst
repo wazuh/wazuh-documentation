@@ -24,16 +24,18 @@ Making use of Elasticsearch ingest pipelines, it is possible to add the geolocat
                         "ignore_missing": true,
                         "ignore_failure" : true
                     }
-                },
-                {
-                    "remove": {
-                        "field": "@src_ip",
-                        "ignore_missing": true,
-                        "ignore_failure" : true
-                    }
-                }
-            ]
-        }
+                },               
+				{
+					"geoip" : {
+						"field" : "@dst_ip",
+						"target_field": "GeoLocation",
+						"properties": ["city_name", "country_name", "region_name", "location"],
+						"ignore_missing": true,
+						"ignore_failure" : true
+					}
+				}
+			]
+		}
         '
 
 2. Locate in the Wazuh manager server and modify Filebeat configuration (``/etc/filebeat/filebeat.yml``). Uncomment the ``pipeline: geoip``  setting. The configuration block should look as follow:
