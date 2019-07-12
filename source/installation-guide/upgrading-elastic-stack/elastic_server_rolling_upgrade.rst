@@ -131,7 +131,7 @@ Field migration: From @timestamp to timestamp
 
 In previous Elastic search versions, the Elastic documents were indexed using the field *@timestamp* as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. Wazuh time-based indices now make use of field *timestamp* instead.
 
-Due to this change, previous alerts won't be visible in Wazuh indices, an update must be perform to all previous indices in order to complete the upgrade.
+Due to this change, previous alerts won't be visible in Wazuh indices, an update must be performed to all previous indices in order to complete the upgrade.
 
 Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
 
