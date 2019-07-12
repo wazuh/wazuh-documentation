@@ -135,7 +135,7 @@ Due to this change, previous alerts won't be visible in Wazuh indices, an update
 
 Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
 
-Here is an example of how run the request using the index *wazuh-alerts-3.x-2019.05.16*. 
+Here is an example of how to run the request using the index *wazuh-alerts-3.x-2019.05.16*. 
 
 .. code-block:: bash
 
