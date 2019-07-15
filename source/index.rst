@@ -188,7 +188,6 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
    <div class="screenshots">
       <div id="slider" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-
           <div class="carousel-item active">
 
 .. thumbnail:: images/screenshots/ag-welcome.png
