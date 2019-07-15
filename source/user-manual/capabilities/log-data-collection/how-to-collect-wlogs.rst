@@ -53,6 +53,8 @@ Monitor the Windows Event Channel with Wazuh
 
 Windows event channels can be monitored by placing their name at the location field from the localfile block and "eventchannel" as the log format.
 
+.. note:: Read the `How to collect Windows events with Wazuh <https://wazuh.com/blog/how-to-collect-windows-events-with-wazuh//>`_ document for more information.
+
 .. note::
 
     If the channel name contains a ``%`` it is necessary to replace it with ``/``. For example, replace Microsoft-Windows-PrintService%Operational with Microsoft-Windows-PrintService/Operational.
@@ -282,11 +284,11 @@ Users can filter events with different severity levels.
         <location>System</location>
         <log_format>eventchannel</log_format>
         <query>
-            \<QueryList>
-                \<Query Id="0"\ Path="System">
-                    \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
-                \</Query>
-            \</QueryList>
+            <QueryList>
+                <Query Id="0" Path="System">
+                    <Select Path="System">*[System[(Level&lt;=3)]]</Select>
+                </Query>
+            </QueryList>
         </query>
     </localfile>
 

@@ -7,20 +7,25 @@ Securing the Wazuh API
 
 By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. It is highly recommended that you secure the Wazuh API by following the steps below:
 
-1. Change the default credentials:
+1. Enable HTTPS:
 
-  By default, you can access the Wazuh API by typing user "foo" and password "bar", however, you can create new credentials as follows:
+  In order to enable HTTPS, you can generate your own certificate or generate it automatically by using the script ``/var/ossec/api/scripts/configure_api.sh``.
+  
+  .. note::
+    This script allows you to change the port used by the Wazuh API to handle the incoming HTTP requests. The port 55000 is used by default.
 
-  .. code-block:: console
+    **Change the default credentials:**
 
-    # cd /var/ossec/api/configuration/auth
-    # node htpasswd -Bc -C 10 user myUserName
+    The ``configure_api.sh`` script allows you to change the API's user. If you did not use the script you can still change it as follows:
+    
+    .. code-block:: console
+
+      # cd /var/ossec/api/configuration/auth
+      # node htpasswd -Bc -C 10 user myUserName
+      
+    By default, you can access the Wazuh API by typing user "foo" and password "bar".
  
 You will then need to restart the ``wazuh-api`` and ``wazuh-manager`` services for the change to take effect.
-
-2. Enable HTTPS:
-
-  In order to enable HTTPS, you need to generate or provide a certificate. You can learn how to generate your own certificate or generate it automatically using the script ``/var/ossec/api/scripts/configure_api.sh``.
 
 3. Bind to localhost:
 

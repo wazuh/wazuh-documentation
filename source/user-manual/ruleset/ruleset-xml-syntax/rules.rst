@@ -477,6 +477,8 @@ This option is used in conjunction with frequency and timeframe.
 same_field
 ^^^^^^^^^^
 
+.. versionadded:: 3.9.0
+
 Specifies that the decoded field must be the same as the previous one.
 This option is used in conjunction with frequency and timeframe.
 
@@ -506,6 +508,8 @@ As an example of this option, check this rule:
 
 not_same_field
 ^^^^^^^^^^^^^^
+
+.. versionadded:: 3.9.0
 
 Specifies that the decoded field must be different than the previous one.
 This option is used in conjunction with frequency and timeframe.

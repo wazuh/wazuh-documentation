@@ -2,7 +2,7 @@
 
 .. _elastic_server_rolling_upgrade:
 
-Upgrading Elastic Stack from 6.7 to 7.x
+Upgrading Elastic Stack from 6.8 to 7.x
 =======================================
 
 Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7 has Java embedded, so unless you decide to use Logstash, Java is not longer required.
@@ -77,13 +77,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
       
-      # yum install elasticsearch-7.1.0
+      # yum install elasticsearch-7.2.0
 
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.1.0
+      # apt-get install elasticsearch=7.2.0
       # systemctl restart elasticsearch
 
 5. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
@@ -139,7 +139,7 @@ Here is an example of how run the request using the index *wazuh-alerts-3.x-2019
 
 .. code-block:: bash
 
-  curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query" -H 'Content-Type: application/json' -d'
+  curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query?wait_for_completion=true" -H 'Content-Type: application/json' -d'
   {
     "query": {
       "bool": {
@@ -150,7 +150,7 @@ Here is an example of how run the request using the index *wazuh-alerts-3.x-2019
         }
       }
     },
-    "script": "ctx._source.timestamp = ctx._source['@timestamp']"
+    "script": "ctx._source.timestamp = ctx._source[\"@timestamp\"]"
   }
   '
 
@@ -167,27 +167,27 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-7.1.0
+      # yum install filebeat-7.2.0
   
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.1.0  
+      # apt-get install filebeat=7.2.0  
 
 2. Update the configuration file.
 
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 3. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
@@ -222,19 +222,19 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-7.1.0
+      # yum install kibana-7.2.0
   
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.1.0  
+      # apt-get install kibana=7.2.0  
 
 4. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.1_7.1.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.3_7.2.0.zip
 
 5. Restart Kibana.
 
