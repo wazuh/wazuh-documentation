@@ -339,75 +339,84 @@ $(function(){
     }, 10);
 	}
 
-	// Funcionability for the capabilities of the home
+	/* -- Add funcionability for cloud-info ---------------------------------------------------------------------------------- */
+
+	if($(window).width() < 1200){
+		$('#capabilities .left .topic.active p').not('.topic-title').slideDown(300);
+	}
+
+	$(window).resize(function(){
+		if($(window).width() >= 1200){
+			$('#capabilities .left .topic p').not('.topic-title').css({'display':'none'});
+			if($('#capabilities .left .topic.active').length > 0){
+				capabilitiesHome($('#capabilities .left .topic.active'));
+			} else {
+				capabilitiesHome($('#capabilities .left .topic').first());
+			}
+		} else {
+			$('#capabilities .left .topic.active p').not('.topic-title').css({'display':'block'});
+		}
+	});
+
 	$('#capabilities .left .topic').click(function(){
 		capabilitiesHome(this);
 	});
 
-	$(window).resize(function(){
-		var ele = $('#capabilities .left .topic.active');
-		capabilitiesHome(ele);
-	});
-
-	setTimeout(function(){
-		var window_w = $(window).width();
-		if(window_w < 1200){
-			var ele = $('#capabilities .left .topic').first();
-			$(ele).find('p').not('.topic-title').slideDown(300);
-			$(ele).find('p').not('.topic-title').animate({'margin-bottom':'15px'}, 1);
-		}
-	}, 300);
-
 	function capabilitiesHome(ele){
 
-		if(!$(ele).hasClass('active')){
-			
-			var window_w = $(window).width();
-			var class_name = $(ele).attr('class');
+		var ele_other = ele;
+		var active = false;
+		if($(ele).hasClass('active')){
+			active = true;
+		} else {
+			ele_other = $('#capabilities .left .topic.active');
+		}
+		if($('#capabilities .left .topic.active').length <= 0){
+			ele_other = false;
+		}
+		
+		if($(window).width() >= 1200){
+
+			var class_name = '';
+			class_name = $(ele).attr('class');
 			class_name = class_name.replace(' topic','');
-			class_name = class_name.replace(' select','');
-			
-			if(window_w >= 1200){
-				
-				$('#capabilities .left .topic.active').removeClass('active');
-				$(ele).addClass('active');
-				$('#capabilities .right .topic.active').removeClass('active');
-				var pos_box = $('#capabilities .left').offset();
-				var pos_topic = $(ele).offset();
-				$('#capabilities .right .topic.'+class_name).addClass('active');
-				var pos = pos_topic.top - pos_box.top - 4;
-				$('#capabilities .line2').css({'height':pos+'px'});
-
-			} else {
-				
-				if($('#capabilities .left .topic.active').length > 0){
-					$('#capabilities .left .topic.active p').not('.topic-title').slideUp(300);
-					$('#capabilities .left .topic.active p').not('.topic-title').animate({'margin-bottom':'0'}, 100);
-					setTimeout(function(){
-						$('#capabilities .left .topic.active').removeClass('active');
-						$(ele).addClass('active');
-						$(ele).find('p').not('.topic-title').slideDown(300);
-						$(ele).find('p').not('.topic-title').animate({'margin-bottom':'15px'}, 1);
-					}, 300);
-				} else {
-					$(ele).addClass('active');
-					$(ele).find('p').not('.topic-title').slideDown(300);
-					$(ele).find('p').not('.topic-title').animate({'margin-bottom':'15px'}, 1);
-				}
-
-			}
+			class_name = class_name.replace(' active','');
+			var pos_box = $('#capabilities .left').offset();
+			var pos_topic = $(ele).offset();
+			$('#capabilities .topic').removeClass('active');
+			$('#capabilities .right .topic.'+class_name).addClass('active');
+			var pos = pos_topic.top - pos_box.top - 4;
+			if(pos <= 0){ pos = 0; }
+			$('#capabilities .line').css({'height':pos+'px'});
+			$(ele).addClass('active');
 
 		} else {
+
+			if(ele_other != false){
 			
-			$(ele).find('p').not('.topic-title').slideUp(300);
-			$(ele).find('p').not('.topic-title').animate({'margin-bottom':'0'}, 100);
-			setTimeout(function(){
-				$(ele).removeClass('active');
-			}, 300);
+			$(ele_other).find('p').not('.topic-title').slideUp(300, function(){
+				setTimeout(function(){
+					$(ele_other).removeClass('active');
+				},100);
+				setTimeout(function(){
+					if(!active){
+						$(ele).addClass('active');
+						$(ele).find('p').not('.topic-title').slideDown(300);
+					}
+				},100);
+			});
+			
+			} else {
+			
+				$(ele).addClass('active');
+				$(ele).find('p').not('.topic-title').slideDown(300);
+
+			}
 
 		}
 
 	}
+
 
   /* Search results --------------------------------------------------------------------------------------------------*/
 
