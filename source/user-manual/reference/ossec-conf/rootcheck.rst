@@ -63,13 +63,13 @@ ignore
 
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
 
-+--------------------+---------------------------------+
-| **Allowed values** | Any directory or file name.     |
-+--------------------+---------------------------------+
-| **Valid for**      | check_sys, check_dev, check_dev |
-+--------------------+---------------------------------+
-| **Example**        | /etc                            |
-+--------------------+---------------------------------+
++--------------------+-----------------------------------+
+| **Allowed values** | Any directory or file name.       |
++--------------------+-----------------------------------+
+| **Valid for**      | check_sys, check_dev, check_files |
++--------------------+-----------------------------------+
+| **Example**        | /etc                              |
++--------------------+-----------------------------------+
 
 Attributes:
 

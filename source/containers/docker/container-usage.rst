@@ -22,11 +22,10 @@ Access to containers and services
     .. code-block:: console
 
       $ docker-compose ps
-              Name                 Command                         State    Ports
+              Name                  Command                        State     Ports
 
       wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
       wazuhdocker_kibana_1          /bin/sh -c /entrypoint.sh        Up      5601/tcp
-      wazuhdocker_logstash_1        /usr/local/bin/docker-entr ...   Up      0.0.0.0:5000->5000/tcp, 5044/tcp, 9600/tcp
       wazuhdocker_nginx_1           /bin/sh -c /entrypoint.sh        Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
       wazuhdocker_wazuh_1           /entrypoint.sh                   Up      0.0.0.0:1514->1514/udp, 0.0.0.0:1515->1515/tcp, 1516/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp
 

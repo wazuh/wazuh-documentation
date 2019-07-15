@@ -33,7 +33,7 @@ Installing Linux agent
 
     .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -41,6 +41,14 @@ Installing Linux agent
 
       # cd wazuh-*
       # ./install.sh
+
+  If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+  .. code-block:: console
+
+    # cd wazuh-*
+    # make -C src clean
+    # make -C src clean-deps
 
 .. note::
   During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
@@ -77,16 +85,16 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
 2. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
-    * `WiX Toolset <http://wixtoolset.org/>`_.
-    * .NET framework 3.5.1.
-    * Microsoft Windows SDK.
+  - `WiX Toolset <http://wixtoolset.org/>`_.
+  - .NET framework 3.5.1.
+  - Microsoft Windows SDK.
 
 3. Download the Wazuh source code and unzip it:
 
     .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.2.tar.gz | tar zx
-      # cd wazuh-*/src
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
+      # cd wazuh-3.9.3/src
 
 4. Compile the agent by running the ``make`` command:
 
@@ -106,14 +114,14 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
     .. code-block:: console
 
-      # zip -r wazuh.zip ../../wazuh-3.9.2
+      # zip -r wazuh.zip ../../wazuh-3.9.3
 
 6. Decompress the repository the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
-  .. code-block:: console
+    .. code-block:: console
 
-    cd wazuh-3.9.2\src\win32
-    .\wazuh-installer-build-msi.bat
+      cd wazuh-3.9.3\src\win32
+      .\wazuh-installer-build-msi.bat
 
   If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
 

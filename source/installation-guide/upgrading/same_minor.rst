@@ -5,7 +5,7 @@
 Upgrade from the same minor version
 ===================================
 
-Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 3.9.0 to 3.9.2.
+Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 3.9.0 to 3.9.3.
 
 Upgrade the Wazuh manager and Wazuh API
 ---------------------------------------

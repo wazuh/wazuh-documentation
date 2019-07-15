@@ -347,7 +347,7 @@ Let's see what happens when we execute the following commands:
     audit.pid: 60821
     audit.auid: 1000
     audit.uid: 0
-    audit.gid: 0
+    audit.gid: 0q
     audit.euid: 0
     audit.suid: 0
     audit.fsuid: 0

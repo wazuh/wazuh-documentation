@@ -166,7 +166,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 
@@ -239,15 +239,14 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with one node, the number of replicas should be set to zero:
 
-.. code-block:: console
+.. code-block:: none
 
-  # curl -X PUT "http://localhost:9200/wazuh-alerts-*/_settings?pretty" -H 'Content-Type: application/json' -d'
+  # curl -X PUT "http://localhost:9200/wazuh-alerts-\*/_settings?pretty" -H 'Content-Type: application/json' -d'
   {
     "settings" : {
       "number_of_replicas" : 0
     }
-  }
-  '
+  }'
 
 Reference:
 

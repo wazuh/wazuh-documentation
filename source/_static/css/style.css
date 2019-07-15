@@ -411,7 +411,7 @@ header .menuweb-bar .menu-item a {
   padding-right: 0;
   padding-left: 0;
 }
-          
+
 #capabilities .right .info {
   display: none;
 }
@@ -1988,11 +1988,15 @@ label {
   border-radius: 4px;
 }
 
-.admonition p,
-.admonition.note > [class*="highlight-"],
-.admonition.warning > [class*="highlight-"] {
+.admonition p {
   padding: 1rem;
   margin: 0;
+}
+
+.admonition.note > [class*="highlight-"],
+.admonition.warning > [class*="highlight-"] {
+	margin: 1rem;
+  padding: 0;
 }
 
 .admonition ul, .admonition ol {
@@ -3198,7 +3202,7 @@ div.highlight pre {
             padding-right: 10px;
             padding-left: 50px;
           }
-          
+
           #capabilities .right .info {
             display: block;
           }

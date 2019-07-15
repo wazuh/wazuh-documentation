@@ -66,7 +66,7 @@ Example:
 Assign the decoder which father it belongs:
 
 .. code-block:: xml
-  
+
   <decoder name="decoder_junior">
     <parent>decoder_father</parent>
     ...
@@ -134,9 +134,9 @@ Decoders use them to find words or other patterns into the rules.
 
 An example is this regex that matches any numeral:
 
-  .. code-block:: xml
-  
-    <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
+.. code-block:: xml
+
+  <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
 
 
 +--------------------+--------------------------------------------------------------------+
