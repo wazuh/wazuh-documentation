@@ -203,7 +203,7 @@ For agents with unrestricted address (address ``any`` or netmask different from 
 
     .. code-block:: console
 
-        "!" <ID> "!#AES:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+        "!" <ID> "!#Blowfish:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
     b) AES encryption
 
