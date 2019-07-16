@@ -202,7 +202,7 @@ $(function(){
 
 	 function show_current_subtree(){
 		 updateFromHash();
-		 if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') ){
+		 if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('error404') ){
 			 /* Shows the selected style for the parent document of pages that don't appear in the globaltoc */
 				$('.globaltoc :contains("'+ $('#breadcrumbs li:nth-last-child(2) a').text() +'")').addClass('show').addClass('current');
 			 return true;
@@ -374,7 +374,7 @@ $(function(){
 		if($('#capabilities .left .topic.active').length <= 0){
 			ele_other = false;
 		}
-		
+
 		if($(window).width() >= 1200){
 
 			var class_name = '';
@@ -393,7 +393,7 @@ $(function(){
 		} else {
 
 			if(ele_other != false){
-			
+
 			$(ele_other).find('p').not('.topic-title').slideUp(300, function(){
 				setTimeout(function(){
 					$(ele_other).removeClass('active');
@@ -405,9 +405,9 @@ $(function(){
 					}
 				},100);
 			});
-			
+
 			} else {
-			
+
 				$(ele).addClass('active');
 				$(ele).find('p').not('.topic-title').slideDown(300);
 
