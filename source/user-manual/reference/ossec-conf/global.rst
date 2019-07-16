@@ -141,11 +141,11 @@ This sets the maximum number of email alerts that can be sent per hour. All emai
 
   At the end of the hour, the queued emails will be sent together in one email whether mail grouping is turned on or not.
 
-+--------------------+---------------------------+
-| **Default value**  | 12                        |
-+--------------------+---------------------------+
-| **Allowed values** | Any number from 1 to 9999 |
-+--------------------+---------------------------+
++--------------------+--------------------------------+
+| **Default value**  | 12                             |
++--------------------+--------------------------------+
+| **Allowed values** | Any number from 1 to 1000000   |
++--------------------+--------------------------------+
 
 email_idsname
 ^^^^^^^^^^^^^
