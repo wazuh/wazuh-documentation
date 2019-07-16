@@ -40,7 +40,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
-    'sphinx.ext.imgmath',
     'sphinxprettysearchresults',
 ]
 

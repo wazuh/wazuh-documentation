@@ -25,7 +25,7 @@ Wazuh's main workload is processing events from the agents and raise alerts. Thi
 * The custom decoders, rules and CDB lists so the nodes can correctly process events from the agents.
 * The agents' last keep alive and OS information, which is received once the agents connect to a node and it's necessary to know whether an agent is reporting or not.
 
-Having all this information synchronized, any cluster node is capable of processing and raising alerts from the agents, making it possible to horizontally scale a Wazuh environment when new agents are added. 
+Having all this information synchronized, any cluster node is capable of processing and raising alerts from the agents, making it possible to horizontally scale a Wazuh environment when new agents are added.
 
 Architecture Overview
 ---------------------
@@ -191,9 +191,10 @@ Protocol definition
 
 The communication protocol used in all communications (both cluster and API) is defined in the ``wazuh.cluster.common.Handler``. Each message in the protocol has the following structure:
 
-.. math::
-
-    \underbrace{\underbrace{counter}_{integer} \underbrace{payload~length}_{integer} \underbrace{command}_{12~characters}}_{header~(22~bytes)} \underbrace{payload}_{5242880~bytes}
+.. thumbnail:: ../images/development/structure_message_protocol.png
+    :title: Structure for each message in the protocol
+    :align: center
+    :width: 80%
 
 The protocol message has two parts: a header and a payload. The payload will be 5242880 bytes long at maximum and the header will be exactly 22 bytes long.
 
