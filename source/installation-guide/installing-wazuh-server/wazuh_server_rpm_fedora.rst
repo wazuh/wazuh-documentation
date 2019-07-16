@@ -154,7 +154,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # curl -s TBD_PATH.tar.gz | tar -xvz --no-same-owner -C /usr/share/filebeat/module --owner=0
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-module.tar.gz | tar -xvz --no-same-owner -C /usr/share/filebeat/module --owner=0
 
 6. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 

@@ -152,7 +152,7 @@ Upgrade Filebeat
 
   .. code-block:: console
 
-    # curl -s TBD_PATH.tar.gz | tar -xvz --no-same-owner -C /usr/share/filebeat/module --owner=0
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-module.tar.gz | tar -xvz --no-same-owner -C /usr/share/filebeat/module --owner=0
 
 5. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
 
