@@ -310,7 +310,7 @@ header .menuweb-bar .menu-item a {
 #capabilities .line {
   display: none;
   position: absolute;
-  top: 43px;
+  top: 38px;
   right: -27px;
   width: 4px;
   height: 0;
@@ -324,7 +324,7 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .left .topic {
   position: relative;
-  min-height: 80px;
+  min-height: 60px;
   width: 100%;
   margin-bottom: 10px;
   padding: 0 12px 0 5px !important;
@@ -343,10 +343,10 @@ header .menuweb-bar .menu-item a {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-height: 75px;
+  min-height: 60px;
   margin-bottom: 5px;
-  padding-left: 80px;
-  font-size: 20px !important;
+  padding-left: 54px;
+  font-size: 1.1rem;
   font-weight: normal !important;
   transition: .2s all ease;
 }
@@ -354,11 +354,10 @@ header .menuweb-bar .menu-item a {
 #capabilities .left .topic .topic-title::before {
   position: absolute;
     width: auto !important;
-    top: 12px;
-    left: 12px;
+    top: 13px;
+    left: 8px;
     color: #00a9e5;
-    font-size: 60px !important;
-    font: normal normal normal 1.5rem/1 'wazuh-icons';
+    font: normal normal normal 39px/1 'wazuh-icons';
     vertical-align: middle;
     transition: .2s all ease;
 }
@@ -367,7 +366,7 @@ header .menuweb-bar .menu-item a {
   content: '';
   display: none;
   position: absolute;
-  top: 30px;
+  top: 25px;
   right: -10px;
   width: 20px;
   height: 20px;
@@ -380,7 +379,7 @@ header .menuweb-bar .menu-item a {
   content: '';
   display: none;
   position: absolute;
-  top: 38px;
+  top: 33px;
   right: -21px;
   width: 25px;
   height: 4px;
@@ -420,7 +419,7 @@ header .menuweb-bar .menu-item a {
   display: none;
   visibility: hidden;
   opacity: 0;
-  min-height: 400px;
+  min-height: 280px;
   margin-bottom: 40px;
   padding: 20px 30px 10px 30px !important;
   background-color: #eee;
@@ -435,7 +434,7 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .right .topic .topic-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: normal;
   font-family: 'Montserrat', sans-serif;
 }
@@ -447,7 +446,7 @@ header .menuweb-bar .menu-item a {
 #capabilities .right .topic.active::before {
   content: '';
   position: absolute;
-  top: 30px;
+  top: 25px;
   right: 13px;
   width: 22px;
   height: 22px;
@@ -459,7 +458,7 @@ header .menuweb-bar .menu-item a {
 #capabilities .right .topic.active::after {
   content: '';
   position: absolute;
-  top: 39px;
+  top: 34px;
   right: 0;
   width: 25px;
   height: 4px;
@@ -1704,6 +1703,13 @@ a[data-lightbox] img {
   margin-bottom: 2em;
 }
 
+[data-lightbox] {
+  max-width: 800px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 [data-lightbox] img {
   border: 1px solid #eee;
 }
@@ -2377,7 +2383,7 @@ div.highlight pre {
 @media (min-width:576px){
 
   #capabilities .right .topic p:not(.topic-title) {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
 	.no-latest-notice {
@@ -3270,6 +3276,22 @@ div.highlight pre {
           .page-404 #errorpage-content .button-area {
             padding-bottom: 0;
           }
+}
+
+@media (min-width: 1440px) {
+	#capabilities .left .topic .topic-title {
+		font-size: 1.1rem;
+	}
+
+	#capabilities .capab {
+		max-width: 315px;
+	}
+
+	#capabilities .right.col-xl-8 {
+		width: 100%;
+		max-width: calc(100% - 340px);
+		flex: none;
+	}
 }
 
 @media (min-width: 1921px) {
