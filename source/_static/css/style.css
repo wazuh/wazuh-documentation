@@ -2134,9 +2134,13 @@ a:focus {
   border-bottom: 1px solid transparent;
 }
 
-#main-content a:hover,
-#main-content a:focus {
+#main-content a:not([data-lightbox]):hover,
+#main-content a:not([data-lightbox]):focus {
   border-color: rgba(0, 148, 206, 0.8);
+}
+
+#main-content a[data-lightbox]:focus img {
+	border-color: rgba(0, 148, 206, 0.8);
 }
 
 #main-content .edit-repo-wrapper a:hover,
