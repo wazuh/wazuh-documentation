@@ -340,7 +340,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 
 .. image:: ../images/development/sync_integrity_diagram.png
 
-* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/3.9/framework/wazuh/cluster/cluster.json#L108>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``sync_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
+* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/stable/framework/wazuh/cluster/cluster.json#L108>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``sync_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
 * **2**: The worker starts the synchronization process using ``sync_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
 * **3**: The worker starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
@@ -348,7 +348,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 * **6**: The master sends all information to the worker using the sending file process.
 * **7**: The master notifies the worker that the integrity information has already been sent using the ``sync_m_c_e`` command. The worker wakes the previously created task up to process and update the required files. In this example, no extra valid files were required by the master so the worker doesn't send any more requests to the master and the synchronization process ends.
 
-To sum up, asynchronous tasks are created only when the received request needs to wait for some data to be available (for example, synchronization tasks waiting for the zip file from the other peer). If the request can be solved instanly, no asynchronous tasks are created for it.
+To sum up, asynchronous tasks are created only when the received request needs to wait for some data to be available (for example, synchronization tasks waiting for the zip file from the other peer). If the request can be solved instantly, no asynchronous tasks are created for it.
 
 Distributed API requests
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -359,7 +359,7 @@ Another example that can show how asynchronous tasks are used is Distributed API
 * ``local_master``: The request can be solved by the master node. These requests are usually information about the global status/management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
 * ``distributed_master``: The master must forward the request to the most suitable node to solve it.
 
-The type association with every endpoint can be found in the `requests_list.py <https://github.com/wazuh/wazuh/blob/3.9/framework/wazuh/cluster/dapi/requests_list.py>`_ file.
+The type association with every endpoint can be found in the `requests_list.py <https://github.com/wazuh/wazuh/blob/stable/framework/wazuh/cluster/dapi/requests_list.py>`_ file.
 
 Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
 
