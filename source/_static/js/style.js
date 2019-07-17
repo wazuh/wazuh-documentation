@@ -222,8 +222,8 @@ $(function(){
 		 var regex;
 		 var cur_location = location.href.split('#')[0];
 		 node_list.forEach(function(toc_node){
-			 empty_node = '/' + toc_node + '.html';
-			 regex = new RegExp( '[a-zA-Z09-_]+' + empty_node, 'g');
+			 empty_node = '.+\/' + toc_node + '.html';
+			 regex = new RegExp( empty_node, 'g');
 			 $('.globaltoc a').each(function(){
 				 var href = $(this).prop('href').split('#')[0];
 				 var is_current = (href === cur_location);

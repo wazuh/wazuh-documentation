@@ -6,7 +6,7 @@ jQuery(function($){
     */
 
     var versions = [
-        {name: "3.9 (current)", url: "/new-docu-01"},
+        {name: "3.9 (current)", url: "/3.9"},
         {name: "3.8", url: "/3.8"},
         {name: "3.7", url: "/3.7"},
         {name: "3.6", url: "/3.6"},
@@ -19,9 +19,10 @@ jQuery(function($){
         {name: "2.1", url: "/2.1"},
     ];
 
-    var current_version = "new-docu-01";
+    var current_version = "3.9";
 
     addVersions();
+		checkLatestDocs();
 
     function addVersions() {
         var version = $(".version");
@@ -29,7 +30,6 @@ jQuery(function($){
         var select_version_current = $("#select-version .current");
         var select_version_ul = $("#select-version .dropdown-menu");
         var path = document.location.pathname.split('/')[1];
-
         if (version == null) {
             console.error("No such element of class 'version'");
             return;
@@ -40,7 +40,7 @@ jQuery(function($){
             return;
         }
 
-        if (path == "current" || path == "3.x" || path == "new-docu-01") {
+        if (path == "current" || path == "3.x" ) {
             path = current_version;
         }
 
@@ -52,5 +52,20 @@ jQuery(function($){
         select_version_current.html(versions[0].name);
 
     }
+
+		function checkLatestDocs(){
+			/* Shows a warning message to the user if current doc version is not the latest version */
+			/* Note: For this to work, it requires the documentation version variable (in file conf.py) and the array of versions (in this script) to be updated */
+			var currentVersion = document.querySelector('.no-latest-notice').getAttribute('data-version');
+			var latestVersion = versions[0].url.replace('/','');
+			if ( currentVersion !== latestVersion ){
+				var page = document.querySelector('#page');
+				page.classList.add('no-latest-docs');
+			}
+
+			// Updates link to the latest version with the correct path (documentation's home)
+			var link = document.querySelector('.link-latest');
+			link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + '/index.html');
+		}
 
 });
