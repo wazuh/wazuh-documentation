@@ -6,6 +6,7 @@ jQuery(function($){
     */
 
     var versions = [
+        {name: "3.9 (dev)", url: "/3.9-new-design"},
         {name: "3.9 (current)", url: "/3.9"},
         {name: "3.8", url: "/3.8"},
         {name: "3.7", url: "/3.7"},
@@ -19,12 +20,14 @@ jQuery(function($){
         {name: "2.1", url: "/2.1"},
     ];
 
-    var current_version = "3.9";
+    var current_version = "3.9-new-design";
 
     addVersions();
 		checkLatestDocs();
 
     function addVersions() {
+        var ele = '';
+        var selected = -1;
         var version = $(".version");
         var select_version = $("#select-version");
         var select_version_current = $("#select-version .current");
@@ -45,11 +48,13 @@ jQuery(function($){
         }
 
         for (var i = 0; i < versions.length; i++) {
-            var ele = "<li><a href='"+versions[i].url+"'>"+versions[i].name+"</a></li>";
-            select_version_ul.append(ele);
+            ele += "<li><a href='"+versions[i].url+"'>"+versions[i].name+"</a></li>";
+            if ( versions[i].url == '/' + current_version ) {
+              selected = i;
+            }
         }
-
-        select_version_current.html(versions[0].name);
+        select_version_ul.append(ele);
+        select_version_current.html(versions[selected].name);
 
     }
 
