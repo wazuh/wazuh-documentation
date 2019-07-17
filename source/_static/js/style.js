@@ -364,8 +364,10 @@ $(function(){
 
 	function capabilitiesHome(ele){
 
-		var ele_other = ele;
-		var active = false;
+    var ele_other = ele;
+    var active = false;
+
+    if ( $('#page.index').lenght > 0 ){
 		if($(ele).hasClass('active')){
 			active = true;
 		} else {
@@ -414,7 +416,7 @@ $(function(){
 			}
 
 		}
-
+  }
 	}
 
 

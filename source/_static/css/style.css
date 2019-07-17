@@ -1381,9 +1381,12 @@ footer .contact-info .fa-paper-plane-o {
   font-weight: 400;
 }
 
+#page.page-404 {
+	background-color: #0094ce;
+}
+
 #page.page-404 #main-content {
   position: relative;
-	background-color: #0094ce;
   background-image: url('../img/wazuh_404_bg_xs.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -3053,7 +3056,7 @@ div.highlight pre {
       }
 
       nav.full-toctree-nav {
-        min-height: 100vh;
+        min-height: calc(100vh - 410px);
 				z-index: 3;
         width: 360px;
 				position: static;
@@ -3195,9 +3198,18 @@ div.highlight pre {
           span.long-text-btn {
             display: inline-block;
           }
+
+					#page.page-404 #main-content {
+						min-height: 680px;
+					}
 }
 
 @media (min-width: 1440px) {
+
+	#page.page-404 #main-content {
+		min-height: 800px;
+	}
+
 	#capabilities .left .topic .topic-title {
 		font-size: 1.1rem;
 	}
@@ -3217,7 +3229,7 @@ div.highlight pre {
   #page.page-404 #main-content {
 		background-image: url('../img/wazuh_404_bg_4k.png');
     background-position-y: top;
-    padding-top: calc(100% *  0.41);
+		min-height: 900px;
     max-height: 100%;
    }
 }
