@@ -1402,6 +1402,10 @@ footer .contact-info .fa-paper-plane-o {
 	color: #ffffff;
 }
 
+#page.page-404 #main-content h2 a.headerlink,
+#page.page-404 #main-content h1 a.headerlink {
+  display: none;
+}
 
 #page.page-404 #main-content h2 {
 	font-size: 2rem;
@@ -1417,13 +1421,10 @@ footer .contact-info .fa-paper-plane-o {
   font-weight: 500;
   display: inline-block;
   text-align: center;
-  margin: 0 auto 20px calc(50% - 76px);
   padding: 10px 15px;
   border: none;
   background: #ffb600;
   color: #ffffff;
-	position: absolute;
-	bottom:10px;
 }
 
 #page.page-404 p {
