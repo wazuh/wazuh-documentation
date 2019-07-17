@@ -367,7 +367,7 @@ $(function(){
     var ele_other = ele;
     var active = false;
 
-    if ( $('#page.index').lenght > 0 ){
+    if ( $('#page.index').length > 0 ){
 		if($(ele).hasClass('active')){
 			active = true;
 		} else {

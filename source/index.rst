@@ -10,13 +10,11 @@ Welcome to Wazuh
   :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+Wazuh is a free and open source platform for threat detection, security monitoring, incident response and regulatory compliance. It can be used to monitor endpoints, cloud services and containers, and to aggregate and analyze data from other external sources. Wazuh provides the following capabilities:
 
-------------
-Capabilities
-------------
+.. raw:: html
 
-Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level. This solution, based on lightweight multi-platform agents, provides the following capabilities:
+  <div class="section" id="capabilities">
 
 .. raw:: html
 
@@ -270,18 +268,8 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
 
 .. raw:: html
 
-   </div>
-
-This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack into a unified solution and simplifying their configuration and management.
-
-Wazuh provides an updated log analysis ruleset and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
-
-Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
-
-
------------------------
-Available documentation
------------------------
+   </div></div>
+   <div class="section" id="available-documentation">
 
 .. toctree::
    :titlesonly:
@@ -297,3 +285,7 @@ Available documentation
    installing-splunk/index
    migrating-from-ossec/index
    release-notes/index
+
+.. raw:: html
+
+   </div>
