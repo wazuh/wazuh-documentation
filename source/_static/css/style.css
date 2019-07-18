@@ -3144,7 +3144,6 @@ div.highlight pre {
           }
 
           #capabilities .right {
-            padding-right: 10px;
             padding-left: 50px;
           }
 
@@ -3174,6 +3173,10 @@ div.highlight pre {
           #main-content {
             padding-left: 30px;
           }
+
+					#main-content.order-1 {
+						padding-right: 30px;
+					}
 
           #welcome-to-wazuh .topic,
           #welcome-to-wazuh .topic:nth-of-type(even) {
@@ -3214,7 +3217,7 @@ div.highlight pre {
 
 	#capabilities .right.col-xl-8 {
 		width: 100%;
-		max-width: calc(100% - 340px);
+		max-width: calc(100% - 316px);
 		flex: none;
 	}
 }
