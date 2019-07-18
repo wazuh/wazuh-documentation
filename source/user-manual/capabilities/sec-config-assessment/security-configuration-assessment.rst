@@ -99,10 +99,10 @@ Available policies
 
 The Wazuh agent will scan every policy in ``/ruleset/sca`` by default.
 
-Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability, 
+Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability,
 which allows the user to quickly understand and write their own policy files or extend the existing ones.
 
-Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check. 
+Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check.
 
 Available policies list
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -112,7 +112,7 @@ all the default policy files available for the Operating Systems officially supp
 
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 | Policy                      | Name                                                       | Requirement                   |
-+-----------------------------+------------------------------------------------------------+-------------------------------+
++=============================+============================================================+===============================+
 | acsc_office2016             |  System audit for Office 2016 vulnerabilities              | Microsoft Office 2016         |
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 | cis_apache2224              |  CIS Apache HTTP Server 2.2/2.4 Benchmark                  | Apache configuration files    |
@@ -183,7 +183,7 @@ How to share policy files with agents
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager has the ability to push files and
 configurations to connected agents.
 
-This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example. 
+This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example.
 
 In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``
 , ensure the policy owner is `ossec` and then add the following block to the ``/var/ossec/etc/shared/default/agent.conf`` file:
@@ -265,7 +265,7 @@ As shown in this example, there are four sections, not all of them are required 
 
 +--------------------+----------------+
 | Section            | Required       |
-+--------------------+----------------+
++====================+================+
 | policy             | Yes            |
 +--------------------+----------------+
 | requirements       | No             |
@@ -286,7 +286,7 @@ Each section has their own fields that can be mandatory as described below:
 
 +--------------------+----------------+-------------------+------------------------+
 | Field              | Mandatory      | Type              | Allowed values         |
-+--------------------+----------------+-------------------+------------------------+
++====================+================+===================+========================+
 | id                 | Yes            | String            | Any string             |
 +--------------------+----------------+-------------------+------------------------+
 | file               | Yes            | String            | Any string             |
@@ -303,7 +303,7 @@ Each section has their own fields that can be mandatory as described below:
 
 +--------------------+----------------+-------------------+------------------------+
 | Field              | Mandatory      | Type              | Allowed values         |
-+--------------------+----------------+-------------------+------------------------+
++====================+================+===================+========================+
 | title              | Yes            | String            | Any string             |
 +--------------------+----------------+-------------------+------------------------+
 | description        | Yes            | String            | Any string             |
@@ -318,78 +318,140 @@ Each section has their own fields that can be mandatory as described below:
 
 +--------------------+----------------+-------------------+------------------------+
 | Field              | Mandatory      | Type              | Allowed values         |
-+--------------------+----------------+-------------------+------------------------+
-| variable_name      | Yes            | String            | Any string             |
++====================+================+===================+========================+
+| variable_name      | Yes            | Array of strings  | Any string             |
 +--------------------+----------------+-------------------+------------------------+
 
 
 **Checks section**
 
-+--------------------+----------------+-------------------+--------------------------------------+
-| Field              | Mandatory      | Type              | Allowed values                       |
-+--------------------+----------------+-------------------+--------------------------------------+
-| id                 | Yes            | Numeric           | Any integer number                   |
-+--------------------+----------------+-------------------+--------------------------------------+
-| title              | Yes            | String            | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
-| description        | No             | String            | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
-| rationale          | No             | String            | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
-| remediation        | No             | String            | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
-| compliance         | No             | Array of strings  | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
-| references         | No             | Array of strings  | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
-| condition          | Yes            | String            | all, any, any required, all required |
-+--------------------+----------------+-------------------+--------------------------------------+
-| rules              | Yes            | Array of strings  | Any string                           |
-+--------------------+----------------+-------------------+--------------------------------------+
++-------------+-----------+----------------------------+--------------------+
+|    Field    | Mandatory |            Type            |   Allowed values   |
++=============+===========+============================+====================+
+|      id     |    Yes    |           Numeric          | Any integer number |
++-------------+-----------+----------------------------+--------------------+
+|    title    |    Yes    |           String           |     Any string     |
++-------------+-----------+----------------------------+--------------------+
+| description |     No    |           String           |     Any string     |
++-------------+-----------+----------------------------+--------------------+
+|  rationale  |     No    |           String           |     Any string     |
++-------------+-----------+----------------------------+--------------------+
+| remediation |     No    |           String           |     Any string     |
++-------------+-----------+----------------------------+--------------------+
+|  compliance |     No    | Array of arrays of strings |     Any string     |
++-------------+-----------+----------------------------+--------------------+
+|  references |     No    |      Array of strings      |     Any string     |
++-------------+-----------+----------------------------+--------------------+
+|  condition  |    Yes    |           String           |   all, any, none   |
++-------------+-----------+----------------------------+--------------------+
+|    rules    |    Yes    |      Array of strings      |     Any string     |
++-------------+-----------+----------------------------+--------------------+
 
 It is recommended that new policy files be placed under the `ruleset/sca` directory.
 
 .. note::
   - Remember that fields id from **policy** and **checks** must be unique, not existing in other policy files.
 
-Information about variables
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Variables
+^^^^^^^^^
 
-When setting variables in the **variables** section:
+Variables are set in the **variables** section. Variable names start by ``$``. For instance,
 
-- Make sure they start with ``$`` character
+.. code-block:: yaml
 
-Example: ``$sshd_file: /etc/ssh/sshd_config``
+    $list_of_files: /etc/ssh/sshd_config,/etc/sysctl.conf,/var/log/dmesg
+    $list_of_folders: /etc,/var,/tmp
 
 
-Information about rules
+Condition
+#########
+
+The condition field specifies how rule results are aggregated in order to calculate the value of the check, there are three options:
+
+- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied, and as **failed** as soon as on evaluates to ***failed**,
+
+- ``any``: the check will be evaluated as **passed** as soon as **any** of its rules is satisfied,
+
+- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied, and as **failed** as soon as one evaluates to **passed**.
+
+Special mention deserves the how how rules evaluated as Non-applicable are treated by the aforementioned operators.
+
+- ``all``: If any rule returns **non-applicable**, and no rule returns **failed**, the result will be **non-applicable**.
+
+- ``any``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+
+- ``none``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+
+.. table:: Truth table for condition
+    :widths: auto
+
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    | Condition \\ Rule evaluation |  passed(s)  |  failed(s)  | non-applicable(s) |     Result         |
+    +==============================+=============+=============+===================+====================+
+    |            ``all``           |     yes     |      no     |         no        |     **passed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``all``           | indifferent |      no     |        yes        | **non-applicable** |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``all``           | indifferent |     yes     |    indifferent    |     **failed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``any``           |     yes     | indifferent |    indifferent    |     **passed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``any``           |      no     |     yes     |         no        |     **failed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``any``           |      no     | indifferent |        yes        | **non-applicable** |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |           ``none``           |     yes     | indifferent |    indifferent    |     **failed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |           ``none``           |      no     | indifferent |        yes        | **non-applicable** |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |           ``none``           |      no     |     yes     |         no        |     **passed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+
+
+Rules
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 **General rule syntax**
 
-The *rules* field is where ``SCA`` dictates if a *check* is marked as *passed* or *failed*.
-
 There are five main types of rules as described below:
+.. table:: Rule types
+    :widths: auto
 
-+------------------------------+----------------+
-| Type                         | Character      |
-+------------------------------+----------------+
-| File                         | f              |
-+------------------------------+----------------+
-| Directory                    | d              |
-+------------------------------+----------------+
-| Process                      | p              |
-+------------------------------+----------------+
-| Commands                     | c              |
-+------------------------------+----------------+
-| Registry (Windows Only)      | r              |
-+------------------------------+----------------+
+    +------------------------------+------------------+
+    | Type                         | Character        |
+    +==============================+==================+
+    | File                         | ``f``            |
+    +------------------------------+------------------+
+    | Directory                    | ``d``            |
+    +------------------------------+------------------+
+    | Process                      | ``p``            |
+    +------------------------------+------------------+
+    | Commands                     | ``c``            |
+    +------------------------------+------------------+
+    | Registry (Windows Only)      | ``r``            |
+    +------------------------------+------------------+
 
-In order to better understand the syntax of the rules it is important to note that:
 
-- The *type* of a rule references the location where the rule will look for the content of the check. Every rule has to start with a location.
+The operators for content checking are:
+.. table:: Content comparison operators
+    :widths: auto
 
-- The location is commonly followed by the content to look for. It is accepted a literal string or a regular expression preceded by ``r:`` (the supported Regex syntax can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
+    +---------------------------------------+-----------------+-------------------------------------------------+
+    | Operation                             | Operator        | Example                                         |
+    +=======================================+=================+=================================================+
+    | Literal comparison, exact match       | *by omision*    | ``f:/file -> file_content``                     |
+    +---------------------------------------+-----------------+-------------------------------------------------+
+    | Regular expression                    | ``r:``          | ``f:/file -> r:file_content``                   |
+    +---------------------------------------+-----------------+-------------------------------------------------+
+    | Numeric comparison (integers)         | ``n:``          | ``f:/file -> n:(regex_capture_group) <= VALUE`` |
+    +---------------------------------------+-----------------+-------------------------------------------------+
+
+
+In order to better understand the syntax of the rules is important to note that:
+
+- The *type* of a rule references the `location` (i.e, a file or a command output) where the rule will look for the content of the check. Every rule has to start with a location.
+
+- The location is commonly followed by the content to look for. It is accepted a literal string or a lightweight regular expression preceded by ``r:`` (the supported Regex syntax can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
 
 - As explained before, the most common rules have the format ``type:location -> r:REGEX``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
 
@@ -398,77 +460,73 @@ The following examples illustrate this logic:
 **Rule syntax for files**
 
 - Checking that a file exists
-  - ``'f:/path/to/file'``
+  - ``f:/path/to/file``
 
 - Checking file content (whole line match)
-  - ``'f:/path/to/file -> content'``
+  - ``f:/path/to/file -> content``
 
 - Checking file content with regex
-  - ``'f:/path/to/file -> r:REGEX'``
+  - ``f:/path/to/file -> r:REGEX``
 
 - Checking a numeric value
-  - ``'f:/path/to/file -> n:REGEX(\d+) compare <= Number'``
+  - ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
 
 **Rule syntax for directories**
 
-- Checking that a directory exists
-  - ``'d:/path/to/directory'``
+- Checking that a directory exists: ``d:/path/to/directory``
 
-- Checking that a directory contains a file
-  - ``'d:/path/to/directory -> file'``
+- Checking that a directory contains a file: ``d:/path/to/directory -> file``
 
-- Checking that a directory contains files with regex
-  - ``'d:/path/to/directory -> r:^files'``
+- Checking that a directory contains files that match a regex: ``d:/path/to/directory -> r:^files``
 
-- Checking that a directory contains files and its content
-  - ``'d:/path/to/directory -> file -> content'``
+- Checking files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
 
 
 **Rule syntax for processes**
 
 - Checking that a process is running
-  - ``'p:process_name'``
+  - ``p:process_name``
 
 
 **Rule syntax for commands**
 
 - Checking the output of a command
-  - ``'c:command -> output'``
+  - ``c:command -> output``
 
 - Checking the output of a command with regex
-  - ``'c:command -> r:REGEX'``
+  - ``c:command -> r:REGEX``
 
 - Checking a numeric value
-  - ``'c:command -> n:REGEX(\d+) compare <= Number'``
+  - ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare <= Number``
 
 **Rule syntax for registries (Windows only).**
 
 - Checking that a registry exists
-  - ``'r:path/to/registry '``
+  - ``r:path/to/registry``
 
 - Checking that a registry key exists
-  - ``'r:path/to/registry -> key;``
+  - ``r:path/to/registry -> key``
 
 - Checking a registry key content
-  - ``'r:path/to/registry  -> key -> content'``
+  - ``r:path/to/registry  -> key -> content``
 
 **Use cases**
 
 Composed rules:
 
 - Alert when there is a line that does not begin with ``#`` and contains ``Port 22``
-  - ``'f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22'``
+  - ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
 - Alert when there is no line that does not begin with ``#`` and contains ``Port 2222``
-  - ``'f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+2222'``
+  - ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+2222``
 
 Other examples:
 
-- Looking at the value inside a file: ``'f:/proc/sys/net/ipv4/ip_forward -> 1'``
-- Checking if a file exists: ``'f:/proc/sys/net/ipv4/ip_forward'``
-- Checking if a process is running: ``'p:avahi-daemon'``
-- Looking at the value of a registry: ``'r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0'``
-- Looking if a directory contains files: ``'d:/home/* -> ^.mysql_history$'``
-- Checking if a directory exists: ``'d:/etc/mysql'``
-- Check the running configuration of ssh to check the maximum authentication tries: ``'c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$'``
-- Check if root is the only UID 0 account ``'f:/etc/passwd -> IN !r:^# && !r:^root: && r:^\w+:\w+:0:'``
+- Looking at the value inside a file: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
+- Checking if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
+- Checking if a process is running: ``p:avahi-daemon``
+- Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0``
+- Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$``
+- Checking if a directory exists: ``d:/etc/mysql``
+- Check the running configuration of ssh to check the maximum authentication tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
+- Check if root is the only UID 0 account ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``
