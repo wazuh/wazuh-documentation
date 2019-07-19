@@ -6,8 +6,7 @@ jQuery(function($){
     */
 
     var versions = [
-        {name: "3.9 (dev)", url: "/3.9-new-design"},
-        {name: "3.9 (current)", url: "/3.9"},
+        {name: "3.9 (current)", url: "/3.9-new-design"},
         {name: "3.8", url: "/3.8"},
         {name: "3.7", url: "/3.7"},
         {name: "3.6", url: "/3.6"},
