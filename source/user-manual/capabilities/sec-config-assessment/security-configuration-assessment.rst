@@ -456,8 +456,11 @@ The operators for content checking are:
     | Numeric comparison (integers)         | ``n:``          | ``f:/file -> n:(regex_capture_group) <= VALUE`` |
     +---------------------------------------+-----------------+-------------------------------------------------+
 
-A whole rule can be negated using the operator ``not``, which is placed at the beginng of the rule.
-``not f:/file -> file_content``
+A whole rule can be negated using the operator ``not``, which is placed at the beginng the rule to be negated.
+
+.. code-block:: yaml
+
+    not RULE
 
 By combining the aforementioned rule types and operators, both existence and content checking can be perform.
 
@@ -475,7 +478,7 @@ Existence checks are created by setting rules without a content operator, the ge
     RULE_TYPE:target
 
 - ``f:/etc/sshd_config`` checks the existence of file */etc/ssh_config*
-- ``p:sshd`` will test the presence of processes called *sshd*
+- ``not p:sshd`` will test the presence of processes called *sshd* and fail if it is found.
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of key *HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa*
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse`` checks for the existence of value *LimitBlankPasswordUse* in the key *HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa*
 
@@ -487,12 +490,39 @@ The general form of a rule testing for contents is as follows:
 
 .. code-block:: yaml
 
-    RULE_TYPE:/target -> CONTENT_OPERATOR:value
+    RULE_TYPE:target -> CONTENT_OPERATOR:value
 
 .. attention::
     - The context of a content check is limited to a **line**.
     - It is **mandatory** to respect the spaces arround the ``->`` separator.
 
+Content check operator results can be negated by adding a ``!`` before then, for example:
+
+.. code-block:: yaml
+
+    f:/etc/ssh_config -> !r:PermitRootLogin
+
+.. attention::
+    Be carefull when negating content operators as that will make then evaluate as  **passed** for **anything** that does not match with the check you specified.
+    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evalauted as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
+
+Content check operators can be chained by ussing the operator ``&&`` (AND) as follows:
+
+.. code-block:: yaml
+
+    f:/etc/ssh_config -> !r:^# && r:Protocol && r:2
+
+This test reads as `Pass if there's a line whose first character is no "#" and contains "Protocol" and "2"`.
+
+.. attention::
+    - It is **mandatory** to respect the spaces arround the ``&&`` operator.
+    - There's no particular order of evaluation between tests chained using the ``&&`` operator.
+
+
+WIPWIPWIP
+WIPWIPWIP
+WIPWIPWIP
+WIPWIPWIP
 
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that the value data of *LimitBlankPasswordUse* is *1*
 
