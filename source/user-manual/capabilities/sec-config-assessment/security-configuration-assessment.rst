@@ -3,6 +3,10 @@
 Security Configuration Assessment
 =================================
 
+.. contents:: Table of Contents
+   :depth: 10
+
+
 This section attempts to introduce how this module can help us to securize our systems.
 
 - `The configuration assessment scope`_
@@ -263,17 +267,19 @@ As mentioned previously, the policy files have a YAML format. In order to illust
 
 As shown in this example, there are four sections, not all of them are required for a policy file:
 
-+--------------------+----------------+
-| Section            | Required       |
-+====================+================+
-| policy             | Yes            |
-+--------------------+----------------+
-| requirements       | No             |
-+--------------------+----------------+
-| variables          | No             |
-+--------------------+----------------+
-| checks             | Yes            |
-+--------------------+----------------+
+.. table:: Policy file section
+
+    +--------------------+----------------+
+    | Section            | Required       |
+    +====================+================+
+    | policy             | Yes            |
+    +--------------------+----------------+
+    | requirements       | No             |
+    +--------------------+----------------+
+    | variables          | No             |
+    +--------------------+----------------+
+    | checks             | Yes            |
+    +--------------------+----------------+
 
 
 .. note::
@@ -282,99 +288,98 @@ As shown in this example, there are four sections, not all of them are required 
 
 Each section has their own fields that can be mandatory as described below:
 
-**Policy section**
+.. table:: Policy section
 
-+--------------------+----------------+-------------------+------------------------+
-| Field              | Mandatory      | Type              | Allowed values         |
-+====================+================+===================+========================+
-| id                 | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| file               | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| name               | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| description        | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| references         | No             | Array of strings  | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-
-
-**Requirements section**
-
-+--------------------+----------------+-------------------+------------------------+
-| Field              | Mandatory      | Type              | Allowed values         |
-+====================+================+===================+========================+
-| title              | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| description        | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| condition          | Yes            | String            | Any string             |
-+--------------------+----------------+-------------------+------------------------+
-| rules              | Yes            | Array of strings  | Any string             |
-+--------------------+----------------+-------------------+------------------------+
+    +--------------------+----------------+-------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         |
+    +====================+================+===================+========================+
+    | id                 | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | file               | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | name               | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | description        | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | references         | No             | Array of strings  | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
 
 
-**Variables section**
+.. table:: Requirements section
 
-+--------------------+----------------+-------------------+------------------------+
-| Field              | Mandatory      | Type              | Allowed values         |
-+====================+================+===================+========================+
-| variable_name      | Yes            | Array of strings  | Any string             |
-+--------------------+----------------+-------------------+------------------------+
+    +--------------------+----------------+-------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         |
+    +====================+================+===================+========================+
+    | title              | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | description        | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | condition          | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | rules              | Yes            | Array of strings  | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
 
 
-**Checks section**
+.. table:: Variables section
 
-+-------------+-----------+----------------------------+--------------------+
-|    Field    | Mandatory |            Type            |   Allowed values   |
-+=============+===========+============================+====================+
-|      id     |    Yes    |           Numeric          | Any integer number |
-+-------------+-----------+----------------------------+--------------------+
-|    title    |    Yes    |           String           |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
-| description |     No    |           String           |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
-|  rationale  |     No    |           String           |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
-| remediation |     No    |           String           |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
-|  compliance |     No    | Array of arrays of strings |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
-|  references |     No    |      Array of strings      |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
-|  condition  |    Yes    |           String           |   all, any, none   |
-+-------------+-----------+----------------------------+--------------------+
-|    rules    |    Yes    |      Array of strings      |     Any string     |
-+-------------+-----------+----------------------------+--------------------+
+    +--------------------+----------------+-------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         |
+    +====================+================+===================+========================+
+    | variable_name      | Yes            | Array of strings  | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
 
-It is recommended that new policy files be placed under the `ruleset/sca` directory.
+
+.. table:: Checks section
+
+    +-------------+-----------+----------------------------+--------------------+
+    |    Field    | Mandatory |            Type            |   Allowed values   |
+    +=============+===========+============================+====================+
+    |      id     |    Yes    |           Numeric          | Any integer number |
+    +-------------+-----------+----------------------------+--------------------+
+    |    title    |    Yes    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    | description |     No    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  rationale  |     No    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    | remediation |     No    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  compliance |     No    | Array of arrays of strings |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  references |     No    |      Array of strings      |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  condition  |    Yes    |           String           |   all, any, none   |
+    +-------------+-----------+----------------------------+--------------------+
+    |    rules    |    Yes    |      Array of strings      |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+
+It is recommended that new policy files are stored under the `ruleset/sca` directory.
 
 .. note::
-  - Remember that fields id from **policy** and **checks** must be unique, not existing in other policy files.
+  - Remember that fields id from **policy** and **checks** must be unique across policy files.
 
 Variables
 ^^^^^^^^^
 
-Variables are set in the **variables** section. Variable names start by ``$``. For instance,
+Variables are set in the **variables** section. Variable names are preceded by ``$``. For instance,
 
 .. code-block:: yaml
 
     $list_of_files: /etc/ssh/sshd_config,/etc/sysctl.conf,/var/log/dmesg
     $list_of_folders: /etc,/var,/tmp
 
-
 Condition
-#########
+^^^^^^^^^
 
 The condition field specifies how rule results are aggregated in order to calculate the value of the check, there are three options:
 
-- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied, and as **failed** as soon as on evaluates to ***failed**,
+- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied, and as **failed** as soon as one evaluates to **failed**,
 
 - ``any``: the check will be evaluated as **passed** as soon as **any** of its rules is satisfied,
 
-- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied, and as **failed** as soon as one evaluates to **passed**.
+- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied, and as **failed* as soon as one evaluates to **passed**.
 
-Special mention deserves the how how rules evaluated as Non-applicable are treated by the aforementioned operators.
+Special mention deserves the how how rules evaluated as **non-applicable** are treated by the aforementioned operators.
 
 - ``all``: If any rule returns **non-applicable**, and no rule returns **failed**, the result will be **non-applicable**.
 
@@ -409,11 +414,16 @@ Special mention deserves the how how rules evaluated as Non-applicable are treat
 
 
 Rules
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^
 
-**General rule syntax**
+Rules can check for existence of files, directories, registry keys and values, running processes, and recursively test for the existence of files inside directories.
+When it comes to content checking, they are able to check for file contents, recursively check for the contents of files inside directories, command output and registry value data.
+
+General rule syntax
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are five main types of rules as described below:
+
 .. table:: Rule types
     :widths: auto
 
@@ -431,8 +441,8 @@ There are five main types of rules as described below:
     | Registry (Windows Only)      | ``r``            |
     +------------------------------+------------------+
 
-
 The operators for content checking are:
+
 .. table:: Content comparison operators
     :widths: auto
 
@@ -446,6 +456,45 @@ The operators for content checking are:
     | Numeric comparison (integers)         | ``n:``          | ``f:/file -> n:(regex_capture_group) <= VALUE`` |
     +---------------------------------------+-----------------+-------------------------------------------------+
 
+A whole rule can be negated using the operator ``not``, which is placed at the beginng of the rule.
+``not f:/file -> file_content``
+
+By combining the aforementioned rule types and operators, both existence and content checking can be perform.
+
+.. attention::
+    - **Process** rules only allow existence checks.
+    - **Command** rules only allow content (output) checks.
+
+Existence checking
+###################
+
+Existence checks are created by setting rules without a content operator, the general form is as follows:
+
+.. code-block:: yaml
+
+    RULE_TYPE:target
+
+- ``f:/etc/sshd_config`` checks the existence of file */etc/ssh_config*
+- ``p:sshd`` will test the presence of processes called *sshd*
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of key *HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa*
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse`` checks for the existence of value *LimitBlankPasswordUse* in the key *HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa*
+
+
+Content checking
+###################
+
+The general form of a rule testing for contents is as follows:
+
+.. code-block:: yaml
+
+    RULE_TYPE:/target -> CONTENT_OPERATOR:value
+
+.. attention::
+    - The context of a content check is limited to a **line**.
+    - It is **mandatory** to respect the spaces arround the ``->`` separator.
+
+
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that the value data of *LimitBlankPasswordUse* is *1*
 
 In order to better understand the syntax of the rules is important to note that:
 
@@ -455,9 +504,12 @@ In order to better understand the syntax of the rules is important to note that:
 
 - As explained before, the most common rules have the format ``type:location -> r:REGEX``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
 
-The following examples illustrate this logic:
+Content operators can be aggregated using the ``&&`` (AND) operator, for example
 
-**Rule syntax for files**
+The following sections cover each rule types illustrating them with several examples.
+
+Rule syntax for files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Checking that a file exists
   - ``f:/path/to/file``
@@ -471,7 +523,8 @@ The following examples illustrate this logic:
 - Checking a numeric value
   - ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
 
-**Rule syntax for directories**
+Rule syntax for directories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Checking that a directory exists: ``d:/path/to/directory``
 
@@ -482,13 +535,14 @@ The following examples illustrate this logic:
 - Checking files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
 
 
-**Rule syntax for processes**
+Rule syntax for processes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Checking that a process is running
   - ``p:process_name``
 
-
-**Rule syntax for commands**
+Rule syntax for commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Checking the output of a command
   - ``c:command -> output``
@@ -499,7 +553,8 @@ The following examples illustrate this logic:
 - Checking a numeric value
   - ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare <= Number``
 
-**Rule syntax for registries (Windows only).**
+Rule syntax for Windows Registry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Checking that a registry exists
   - ``r:path/to/registry``
@@ -510,7 +565,8 @@ The following examples illustrate this logic:
 - Checking a registry key content
   - ``r:path/to/registry  -> key -> content``
 
-**Use cases**
+Use cases
+~~~~~~~~~~~~~~~~~~~
 
 Composed rules:
 
