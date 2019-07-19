@@ -7,55 +7,6 @@ X-Pack
 
 Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intentioned users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
-Adding authentication for Elasticsearch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1. Add the next lines to ``/etc/elasticsearch/elasticsearch.yml``.
-
-.. code-block:: yaml
-
-    xpack.security.enabled: true
-    xpack.security.transport.ssl.enabled: true
-
-2. Restart Elasticsearch.
-
-.. code-block:: console
-
-    # systemctl restart elasticsearch
-
-3. Generate credentials for all the Elastic Stack pre-built roles and users.
-
-.. code-block:: console
-
-    # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
-
-4. Note down at least the password for the ``elastic`` user.
-5. Setting up credentials for Filebeat. Add the next two lines to ``/etc/filebeat/filebeat.yml``.
-
-.. code-block:: yaml
-
-    output.elasticsearch.username: "elastic"
-    output.elasticsearch.password: "elastic_password"
-
-6. Restart Filebeat.
-
-.. code-block:: console
-
-    # systemctl restart filebeat
-
-7. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
-
-.. code-block:: yaml
-
-    xpack.security.enabled: true
-    elasticsearch.username: "elastic"
-    elasticsearch.password: "elastic_password"
-
-8. Restart Kibana.
-
-.. code-block:: console
-
-    # systemctl restart kibana
 
 Configure Elastic Stack to use encrypted connections 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -202,6 +153,55 @@ This section describes how to secure the communications between the involved com
     server.ssl.key: "/etc/kibana/certs/kibana.key"
 
 3. Restart the service:
+
+.. code-block:: console
+
+    # systemctl restart kibana
+
+Adding authentication for Elasticsearch
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Add the next line to ``/etc/elasticsearch/elasticsearch.yml``.
+
+.. code-block:: yaml
+
+    xpack.security.transport.ssl.enabled: true
+
+2. Restart Elasticsearch.
+
+.. code-block:: console
+
+    # systemctl restart elasticsearch
+
+3. Generate credentials for all the Elastic Stack pre-built roles and users.
+
+.. code-block:: console
+
+    # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
+
+4. Note down at least the password for the ``elastic`` user.
+5. Setting up credentials for Filebeat. Add the next two lines to ``/etc/filebeat/filebeat.yml``.
+
+.. code-block:: yaml
+
+    output.elasticsearch.username: "elastic"
+    output.elasticsearch.password: "elastic_password_generated"
+
+6. Restart Filebeat.
+
+.. code-block:: console
+
+    # systemctl restart filebeat
+
+7. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
+
+.. code-block:: yaml
+
+    xpack.security.enabled: true
+    elasticsearch.username: "elastic"
+    elasticsearch.password: "elastic_password_generated"
+
+8. Restart Kibana.
 
 .. code-block:: console
 
