@@ -19,7 +19,7 @@ jQuery(function($){
         {name: "2.1", url: "/2.1"},
     ];
 
-    var current_version = "3.9-new-design";
+    var current_version = "3.9";
 
     addVersions();
 		checkLatestDocs();
