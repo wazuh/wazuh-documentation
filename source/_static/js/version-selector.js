@@ -32,6 +32,7 @@ jQuery(function($){
         var select_version_current = $("#select-version .current");
         var select_version_ul = $("#select-version .dropdown-menu");
         var path = document.location.pathname.split('/')[1];
+				var page = "";
         if (version == null) {
             console.error("No such element of class 'version'");
             return;
@@ -46,8 +47,10 @@ jQuery(function($){
             path = current_version;
         }
 
+				page = document.location.pathname.split('/'+path)[1]; // Gets the page of the documentation that it's been visited
+
         for (var i = 0; i < versions.length; i++) {
-            ele += "<li><a href='"+versions[i].url+"'>"+versions[i].name+"</a></li>";
+            ele += "<li><a href='" + versions[i].url + page + "'>"+versions[i].name+"</a></li>";
             if ( versions[i].url == '/' + path ) {
               selected = i;
             }
@@ -62,14 +65,16 @@ jQuery(function($){
 			/* Note: For this to work, it requires the documentation version variable (in file conf.py) and the array of versions (in this script) to be updated */
 			var currentVersion = document.querySelector('.no-latest-notice').getAttribute('data-version');
 			var latestVersion = versions[0].url.replace('/','');
+			var page = "";
 			if ( currentVersion !== latestVersion ){
-				var page = document.querySelector('#page');
-				page.classList.add('no-latest-docs');
+				var pageID = document.querySelector('#page');
+				pageID.classList.add('no-latest-docs');
 			}
 
 			// Updates link to the latest version with the correct path (documentation's home)
+			page = document.location.pathname.split('/'+currentVersion)[1];
 			var link = document.querySelector('.link-latest');
-			link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + '/index.html');
+			link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
 		}
 
 });
