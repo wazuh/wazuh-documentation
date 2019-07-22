@@ -24,9 +24,9 @@ $(function(){
 	// List of empty nodes, containing only a toctree
 	var empty_toc_nodes = [
 		'amazon/configuration/index',
-		'compliance/index',
-		'containers/index',
-		'deployment/index',
+		'compliance',
+		'containers',
+		'deployment',
 		'development/index',
 		'docker-monitor/index',
 		'installation-guide/upgrading/legacy/index',
