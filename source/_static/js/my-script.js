@@ -5,8 +5,11 @@ jQuery(function($){
     * Copyright (C) 2019 Wazuh, Inc.
     */
 
+
+    var current_version = "3.9-new-design";
+
     var versions = [
-        {name: "3.9 (current)", url: "/3.9-new-design"},
+        {name: "3.9 (current)", url: "/"+current_version},
         {name: "3.8", url: "/3.8"},
         {name: "3.7", url: "/3.7"},
         {name: "3.6", url: "/3.6"},
@@ -16,10 +19,7 @@ jQuery(function($){
         {name: "3.2", url: "/3.2"},
         {name: "3.1", url: "/3.1"},
         {name: "3.0", url: "/3.0"},
-        {name: "2.1", url: "/2.1"},
-    ];
-
-    var current_version = "3.9-new-design";
+        {name: "2.1", url: "/2.1"},];
 
     addVersions();
 		checkLatestDocs();
