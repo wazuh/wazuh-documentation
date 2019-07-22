@@ -11,7 +11,6 @@
 {% set script_files = script_files + ["_static/js/popper.min.js"] %}
 {% set script_files = script_files + ["_static/js/bootstrap.min.js"] %}
 {% set script_files = script_files + ["_static/js/style.js"] %}
-{% set script_files = script_files + ["_static/js/my-script.js"] %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 {%- if not embedded and docstitle %}
   {%- set titlesuffix = " &middot; "|safe + docstitle|e %}
@@ -189,7 +188,8 @@
           };
       </script>
       {{- js() }}
-    {% endif %}
+      {% endif %}
+      <script type="text/javascript" src="{{ pathto('_static/js/version-selector.js', 1) }}"></script>
   {% endif %}
   {%- endblock footer_js %}
 
