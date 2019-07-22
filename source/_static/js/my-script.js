@@ -48,7 +48,7 @@ jQuery(function($){
 
         for (var i = 0; i < versions.length; i++) {
             ele += "<li><a href='"+versions[i].url+"'>"+versions[i].name+"</a></li>";
-            if ( versions[i].url == '/' + current_version ) {
+            if ( versions[i].url == '/' + path ) {
               selected = i;
             }
         }
