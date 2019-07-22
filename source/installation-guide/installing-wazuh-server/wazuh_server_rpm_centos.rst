@@ -143,16 +143,19 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
-5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+5. Download the Wazuh module for Filebeat:
+
+  .. code-block:: console
+
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-module.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
+6. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
-    output.elasticsearch:
-      hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-6. Enable and start the Filebeat service:
+7. Enable and start the Filebeat service:
 
   * For Systemd:
 
