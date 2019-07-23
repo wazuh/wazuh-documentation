@@ -3447,7 +3447,7 @@ Returns a summary of the current analysisd stats on the node.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/analysisd/stats?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats/analysisd?pretty"
 
 **Example Response:**
 ::
