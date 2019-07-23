@@ -42,6 +42,12 @@ $(function(){
 		'user-manual/ruleset/ruleset-xml-syntax/index'
 	];
 
+  /* list of nodes (by title) which will not show their subtree */
+  var hide_subtree_nodes = [
+    'Install Wazuh manager on Linux',
+    'Install Wazuh agent on Linux'
+  ].map(item =>item.toLowerCase());
+
   changeVerionPosition($(window).outerWidth());
   changeSearchPosition($(window).outerWidth());
 	mark_toc_nodes_with_class(empty_toc_nodes, 'empty-toc-node');
@@ -66,6 +72,7 @@ $(function(){
 	});
 
 	show_current_subtree();
+	hide_subtree(hide_subtree_nodes);
 
 	// Show the hidden menu
 	setTimeout(function(){ $('#navbar-globaltoc').removeClass('hidden'); }, 500);
@@ -235,6 +242,15 @@ $(function(){
 					 $(this).addClass('current-toc-node');
 				 }
 			 });
+		 });
+	 }
+
+	 function hide_subtree(node_list){
+		 $("#globaltoc a").each(function(){
+			 if ( jQuery.inArray( $(this).text().toLowerCase(), node_list ) !== -1 ) {
+				 $(this).siblings().hide();
+				 $(this).children("button").hide();
+			 }
 		 });
 	 }
 
