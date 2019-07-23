@@ -206,6 +206,7 @@ This configuration will send an email every time rule 502 is triggered regardles
 
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
    smtp_authentication

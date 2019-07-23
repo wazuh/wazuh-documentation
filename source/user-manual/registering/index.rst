@@ -53,7 +53,8 @@ You can use the method that better suits with your need. We recommend: :ref:`sim
 
 .. toctree::
     :maxdepth: 2
-    
+    :hidden:
+
     registration-process
     using-command-line
     simple-registration-method

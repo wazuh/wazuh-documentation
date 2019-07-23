@@ -100,6 +100,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
 
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
 

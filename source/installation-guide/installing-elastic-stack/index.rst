@@ -30,6 +30,7 @@ After the installation, find below optional steps you may find interesting:
     Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
 
    elastic_server_rpm

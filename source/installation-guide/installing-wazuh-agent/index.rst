@@ -41,6 +41,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 .. rst-class:: d-none
 
 .. toctree::
+    :hidden:
     :maxdepth: 2
 
     wazuh_agent_linux
