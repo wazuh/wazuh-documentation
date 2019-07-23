@@ -257,7 +257,7 @@ and this configuration in the ``agent.conf`` file.
     </policies>
   </sca>
 
-The final configuration will enabled the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
+The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
 In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
 
 How to ignore shared configuration
