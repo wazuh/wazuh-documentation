@@ -1,9 +1,5 @@
 .. _amazon:
 
-.. warning::
-
-    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/amazon/index.html>`_.
-
 Using Wazuh for AWS
 ==========================================
 

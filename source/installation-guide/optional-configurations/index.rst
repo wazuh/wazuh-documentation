@@ -1,9 +1,5 @@
 .. _optional_configurations:
 
-.. warning::
-
-    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/installation-guide/optional-configurations/index.html>`_.
-
 Optional configurations
 ===============================
 
