@@ -451,6 +451,9 @@ Rules can check for existence of files, directories, registry keys and values, r
 existence of files inside directories. When it comes to content checking, they are able to check for file contents, recursively
 check for the contents of files inside directories, command output and registry value data.
 
+In an abstract manner, rules start by a location (and a `type` of location), that will be the target of the test, followed by the actual
+the test specification. Such tests fall into two categories: existence and content checks.
+
 General rule syntax
 ###################
 
@@ -478,17 +481,17 @@ The operators for content checking are:
 .. table:: Content comparison operators
     :widths: auto
 
-    +---------------------------------------+-----------------+-------------------------------------------------+
-    | Operation                             | Operator        | Example                                         |
-    +=======================================+=================+=================================================+
-    | Literal comparison, exact match       | *by omision*    | ``f:/file -> file_content``                     |
-    +---------------------------------------+-----------------+-------------------------------------------------+
-    | Regular expression                    | ``r:``          | ``f:/file -> r:file_content``                   |
-    +---------------------------------------+-----------------+-------------------------------------------------+
-    | Numeric comparison (integers)         | ``n:``          | ``f:/file -> n:(regex_capture_group) <= VALUE`` |
-    +---------------------------------------+-----------------+-------------------------------------------------+
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    | Operation                                                                            | Operator        | Example                                                    |
+    +======================================================================================+=================+============================================================+
+    | Literal comparison, exact match                                                      | *by omision*    | ``f:/file -> CONTENT``                                     |
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``          | ``f:/file -> r:REGEX``                                     |
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    | Numeric comparison (integers)                                                        | ``n:``          | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
 
-A whole rule can be negated using the operator ``not``, which is placed at the beginng the rule to be negated.
+A whole rule can be negated using the operator ``not``, which is placed at the begining of the rule.
 
 .. code-block:: yaml
 
@@ -501,6 +504,9 @@ By combining the aforementioned rule types and operators, both existence and con
 .. attention::
     - **Process** rules only allow existence checks.
     - **Command** rules only allow content (output) checks.
+
+
+
 
 Existence checking rules
 ######################################
@@ -530,7 +536,8 @@ The general form of a rule testing for contents is as follows:
 
 .. attention::
     - The context of a content check is limited to a **line**.
-    - It is **mandatory** to respect the spaces arround the ``->`` separator.
+    - Content checks are case sensitive.
+    - It is **mandatory** to respect the spaces arround the ``->`` and ``compare`` separators.
     - If the **target** of a rule that checks for contents does not exist, the result will be **non-applicable** as it could not be checked.
 
 Content check operator results can be negated by adding a ``!`` before then, for example:
@@ -549,7 +556,7 @@ Content check operators can be chained ussing the operator ``&&`` (AND) as follo
 
     f:/etc/ssh_config -> !r:^# && r:Protocol && r:2
 
-This test reads as `Pass if there's a line whose first character is no "#" and contains "Protocol" and "2"`.
+This rule reads as `Pass if there's a line whose first character is no "#" and contains "Protocol" and "2"`.
 
 .. attention::
     - It is **mandatory** to respect the spaces arround the ``&&`` operator.
@@ -557,25 +564,12 @@ This test reads as `Pass if there's a line whose first character is no "#" and c
 
 Examples of content checks:
 
-- ``d:/etc/`` checks the existence of directory */etc*
-- ``not p:sshd`` will test the presence of processes called *sshd* and fail if one is found.
-- Checking a numeric value ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare >= number``
-- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of *LimitBlankPasswordUse* is 1.
+    - ``systemctl is-enabled cups -> r:^enabled``` checks that the output of the command contains a line starting by `enabled`.
+    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4'`` checks that value of MaxAuthTries is less or equal to 4.
+    - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of *LimitBlankPasswordUse* is 1.
 
 Examples
 ###################
-
-- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that the value data of *LimitBlankPasswordUse* is *1*
-
-In order to better understand the syntax of the rules is important to note that:
-
-- The *type* of a rule references the `location` (i.e, a file or a command output) where the rule will look for the content of the check. Every rule has to start with a location.
-
-- The location is commonly followed by the content to look for. It is accepted a literal string or a lightweight regular expression preceded by ``r:`` (the supported Regex syntax can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
-
-- As explained before, the most common rules have the format ``type:location -> r:REGEX``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
-
-Content operators can be aggregated using the ``&&`` (AND) operator, for example
 
 The following sections cover each rule type, illustrating them with several examples.
 
@@ -619,11 +613,9 @@ Rule syntax for Windows Registry
 Composed rules:
 :::::::::::::::::::::::::::::::::::
 
-- Checking that there is a line that does not begin with ``#`` and contains ``Port 22``
-  | ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+- Checking that there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
-- Checking that there is **no** line that does not begin with ``#`` and contains ``Port 22``
-  | ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+- Checking that there is **no** line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
 Other examples:
 :::::::::::::::::::::::::::::::::::
