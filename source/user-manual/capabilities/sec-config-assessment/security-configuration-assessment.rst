@@ -610,14 +610,14 @@ Rule syntax for Windows Registry
 - Checking that a registry key exists ``r:path/to/registry -> key``
 - Checking a registry key content ``r:path/to/registry -> key -> content``
 
-Composite rules:
+Composite rules
 :::::::::::::::::::::::::::::::::::
 
 - Checking that there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
 - Checking that there is **no** line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
-Other examples:
+Other examples
 :::::::::::::::::::::::::::::::::::
 
 - Looking at the value inside a file: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
