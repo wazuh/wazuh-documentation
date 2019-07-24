@@ -39,7 +39,7 @@ b) Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-manager wazuh-api
 
 .. note::
@@ -58,7 +58,7 @@ b) Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-agent
 
 c) Windows:
