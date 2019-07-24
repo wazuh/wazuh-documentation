@@ -2756,6 +2756,11 @@ div.highlight pre {
 				top: 1px;
 			}
 
+			.scrolled .no-latest-docs #links-to-home .wazuh-logo-link {
+				position: fixed;
+				top: 2.6rem;
+			}
+
       .header > .container-fluid {
         padding-top: 8px;
         padding-bottom: 0;
@@ -3072,7 +3077,7 @@ div.highlight pre {
 				position: sticky;
 				top: 50px;
 				overflow: hidden;
-				max-height: calc(100vh - 55px);
+				max-height: calc(100vh - 95px);
 				height: 100%;
         flex-direction: column;
         padding-right: 15px;
@@ -3081,6 +3086,7 @@ div.highlight pre {
 
 			.scrolled .side-scroll {
 				top: 40px;
+				max-height: calc(100vh - 40px);
 			}
 
       .side-scroll:hover{
@@ -3088,11 +3094,13 @@ div.highlight pre {
       }
 
       .no-latest-docs .side-scroll {
-        top: 90px;
+        top: 80px;
+				max-height: calc(100vh - 140px);
       }
 
 			.scrolled .no-latest-docs .side-scroll {
-        top: 90px;
+        top: 80px;
+				max-height: calc(100vh - 80px);
       }
 
       #globaltoc {
