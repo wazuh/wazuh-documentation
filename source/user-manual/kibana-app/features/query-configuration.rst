@@ -7,13 +7,13 @@ Query configuration
 
 The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the active configuration in real time.
 
-.. image:: ../../../images/kibana-app/features/query-configuration/tab-agent.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/tab-agent.png
   :align: center
   :width: 100%
 
 From here you can query the configuration section:
 
-.. image:: ../../../images/kibana-app/features/query-configuration/configuration-section.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/configuration-section.png
   :align: center
   :width: 100%
 
@@ -63,23 +63,23 @@ A list of the avaiable configurations to query on *Agent* is shown bellow:
 
 By clicking on the *Log collection* configuration, the active configuration is shown:
 
-.. image:: ../../../images/kibana-app/features/query-configuration/logcollector-query.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/logcollector-query.png
   :align: center
   :width: 100%
 
 It also has the capability to show the configuration in JSON or XML formats for better readability:
 
-.. image:: ../../../images/kibana-app/features/query-configuration/logcollector-json.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/logcollector-json.png
   :align: center
   :width: 100%
 
-.. image:: ../../../images/kibana-app/features/query-configuration/logcollector-xml.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/logcollector-xml.png
   :align: center
   :width: 100%
 
 Now for example, if you want to know the current cluster configuration from the **Manager**, click on the *Management > Configuration* tab and then click on the *Cluster* section:
 
-.. image:: ../../../images/kibana-app/features/query-configuration/cluster.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/cluster.png
   :align: center
   :width: 100%
 

@@ -9,13 +9,13 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
 
 1. Open a web browser and go to the Kibana's IP address on port 5601 (default Kibana port). Then, from the left menu, click on the Wazuh app icon.
 
-  .. image:: ../../images/kibana-app/connect-api/starting-app.png
+  .. thumbnail:: ../../images/kibana-app/connect-api/starting-app.png
     :align: center
     :width: 100%
 
 2. Open the *Settings* page with the gear icon on the top right corner (the first time you open the app, you’ll be automatically redirected to Settings). Click on the ``Add new API`` button to open the form.
 
-  .. image:: ../../images/kibana-app/connect-api/add-api-button.png
+  .. thumbnail:: ../../images/kibana-app/connect-api/add-api-button.png
     :align: center
     :width: 100%
 
@@ -36,7 +36,7 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
 
 4. Fill in the *Username* and *Password* fields with the credentials you created in the previous step. Enter ``http://MANAGER_IP`` for the *URL* field where ``MANAGER_IP`` is the real IP address of the Wazuh manager and enter "55000" for the *Port* field.
 
-  .. image:: ../../images/kibana-app/connect-api/add-api-form.png
+  .. thumbnail:: ../../images/kibana-app/connect-api/add-api-form.png
     :align: center
     :width: 100%
 
@@ -46,7 +46,7 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
 
 6. Click on the ``Save API`` button to store it. Now you can navigate to the other app sections, like *Overview*, and start visualizing your alerts.
 
-  .. image:: ../../images/kibana-app/connect-api/overview-general.png
+  .. thumbnail:: ../../images/kibana-app/connect-api/overview-general.png
     :align: center
     :width: 100%
 
