@@ -225,32 +225,32 @@ Default configuration
 
 .. code-block:: xml
 
-  <logging>
-    <log>
-      <enabled>yes</enabled>
-      <format>json,plain</format>
-      <rotation>
+    <logging>
+      <log>
         <enabled>yes</enabled>
-        <interval>1d</interval>
-        <compress>yes</compress>
-      </rotation>
-    </log>
-    <alerts>
-      <enabled>yes</enabled>
-      <format>json,plain</format>
-      <rotation>
+        <format>json,plain</format>
+        <rotation>
+          <enabled>yes</enabled>
+          <max_size>512M</max_size>
+          <compress>yes</compress>
+        </rotation>
+      </log>
+      <alerts>
         <enabled>yes</enabled>
-        <interval>1d</interval>
-        <compress>yes</compress>
-      </rotation>
-    </alerts>
-    <archives>
-      <enabled>yes</enabled>
-      <format>json,plain</format>
-      <rotation>
+        <format>json,plain</format>
+        <rotation>
+          <enabled>yes</enabled>
+          <max_size>512M</max_size>
+          <compress>yes</compress>
+        </rotation>
+      </alerts>
+      <archives>
         <enabled>yes</enabled>
-        <interval>1d</interval>
-        <compress>yes</compress>
-      </rotation>
-    </archives>
-  </logging>
+        <format>json,plain</format>
+        <rotation>
+          <enabled>yes</enabled>
+          <max_size>512M</max_size>
+          <compress>yes</compress>
+        </rotation>
+      </archives>
+    </logging>
