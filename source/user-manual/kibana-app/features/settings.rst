@@ -18,7 +18,7 @@ API
 
 In this section, you can list all your inserted API credentials. The yellow star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed in order to add or edit an entry. Check your API connection status prior to adding them to the app.
 
-.. image:: ../../../images/kibana-app/features/settings/api.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/api.png
   :align: center
   :width: 100%
 
@@ -57,7 +57,7 @@ The app provides the following extensions:
 - :ref:`AWS <amazon>`
 - :ref:`VirusTotal <virustotal-scan>`
 
-.. image:: ../../../images/kibana-app/features/settings/extensions.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/extensions.png
   :align: center
   :width: 100%
 
@@ -74,7 +74,7 @@ Index pattern
 
 The index pattern functionality is completely described at the :ref:`kibana_index_pattern` section.
 
-.. image:: ../../../images/kibana-app/features/settings/pattern.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/pattern.png
   :align: center
   :width: 100%
 
@@ -83,7 +83,7 @@ Configuration
 
 You can take a quick look to the full Wazuh app configuration file here. The documentation for the ``config.yml`` file can be found on the :ref:`kibana_config_file` section.
 
-.. image:: ../../../images/kibana-app/features/settings/configuration.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/configuration.png
   :align: center
   :width: 100%
 
@@ -92,7 +92,7 @@ Logs
 
 The Wazuh app stores log information on the ``/usr/share/kibana/optimize/wazuh-logs/wazuhapp.log`` file. This logs can be helpful for troubleshooting purposes. The *Logs* section allows you to check the last 20 log messages along with its date and severity level.
 
-.. image:: ../../../images/kibana-app/features/settings/logs.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/logs.png
   :align: center
   :width: 100%
 
@@ -105,6 +105,6 @@ About
 
 This section provides information about your currently installed Wazuh app package, such as version, revision, and installation date. If you want to discover what's new on each app release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
 
-.. image:: ../../../images/kibana-app/features/settings/about.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/about.png
   :align: center
   :width: 100%
