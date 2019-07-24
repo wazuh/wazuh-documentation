@@ -40,7 +40,7 @@ Options
 log_format
 ^^^^^^^^^^
 
-.. deprecated:: 3.10.0
+.. note:: This option is deprecated since Wazuh 3.9.0. Use ``logs`` instead.
 
 Specifies the log format between JSON output (.json) or plain text (.log). It also can be set to output both formats at the same time, when both are formats are entered, separated by a comma.
 
@@ -53,8 +53,6 @@ Depending on the given format, the output file will be ``/var/ossec/logs/ossec.l
 |                    | - json         |
 |                    | - plain, json  |
 +--------------------+----------------+
-
-.. note:: Use the ``logs`` instead.
 
 log
 ^^^
