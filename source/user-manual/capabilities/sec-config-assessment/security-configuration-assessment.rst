@@ -171,9 +171,8 @@ Enabling and disabling policies
 
 By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` files) present in their ruleset folder:
 
-- Wazuh manager: ``path/manager/all-policies``.
-- Linux agents: ``/var/ossec/ruleset/sca``.
-- Windows agents: ``C:\Program files (x86)\ossec-agent\ruleset\sca``.
+- Linux agents: ``<ossec-agent-installation-folder>/ruleset/sca``.
+- Windows agents: ``<ossec-agent-installation-folder>\ruleset\sca``.
 
 To enable a policy file that's outside the default folder, add a line like
 
