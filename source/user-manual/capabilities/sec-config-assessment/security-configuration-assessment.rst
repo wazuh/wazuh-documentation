@@ -555,7 +555,8 @@ Examples of content checks:
 Examples
 ###################
 
-The following sections cover each rule type, illustrating them with several examples.
+The following sections cover each rule type, illustrating them with several examples. It is also recomended to check the actual
+policies and, for minimalistic although complete examples, the `SCA test suite policies <https://github.com/wazuh/wazuh-qa/tree/master/integration_tests/sca/3.10>`_.
 
 Rule syntax for files
 :::::::::::::::::::::::::::::::::::
@@ -612,5 +613,3 @@ Other examples
 - Checking if a directory exists: ``d:/etc/mysql``
 - Check the running configuration of ssh to check the maximum authentication tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
 - Check if root is the only UID 0 account ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``
-
-For additional examples, please check the available policies and, for minimalistic although complete examples, check the `SCA test suite policies <https://github.com/wazuh/wazuh-qa/tree/master/integration_tests/sca/3.10>`_.
