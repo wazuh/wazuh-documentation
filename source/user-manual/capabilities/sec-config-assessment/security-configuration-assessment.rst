@@ -202,8 +202,8 @@ the Wazuh manager has the ability to push files and configurations to connected 
 This feature con be used to push policy files to agents in defined groups. By default, every agent belongs to the
 *default* group, so we can use this group as example.
 
-In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``,
-ensure the policy owner is `ossec`.
+In order to push a new policy from the manager it should be placed in the directory ``/var/ossec/etc/shared/default``,
+and be owned by user `ossec`.
 
 In addition, to push configuration, the same strategy applies. For instance, in order to add a policy, add a block like the following to the ``/var/ossec/etc/shared/default/agent.conf`` as per the
 :ref:`example<ossec_conf_enable_policy>`.
