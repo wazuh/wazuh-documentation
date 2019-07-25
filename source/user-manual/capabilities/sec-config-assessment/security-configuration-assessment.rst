@@ -15,49 +15,54 @@ Security Configuration Assessment
    :local:
    :depth: 10
 
-One of the most certain ways to avoid hosts from being compromised is to secure them by reducing their vulnerabiliy surface.
-That process is commonly known as hardening, and the configuration assessment is the most effective way to determine where
-the hosts may have their hardening improved.
+One of the most certain ways to avoid hosts from being compromised is to secure them by reducing their vulnerability surface.
+That process is commonly known as hardening, and configuration assessment is an effective way to determine where
+the hosts might have their attack surface reduced.
 
-The SCA will perform scans using policy files as templates to discover the exposures or misconfiguration of the monitored hosts.
-For example it will determine if it is necessary to change default passwords, remove unnecessary software, unnecessary usernames
-or logins, and disable or remove of unnecessary services.
-The target of those policies can be an Operating System such as Debian or Windows, or a particular software like the SSH server.
+The SCA module performs scans using policy files in order to discover exposures or misconfigurations in monitored hosts.
+For example it could determine if it is necessary to change password configuration, remove unnecessary software, and disable
+or remove of unnecessary services among others assessments.
+The target of those policies can be an Operating System such as Debian or Windows, or a particular software such as the SSH server.
 
-Policies for the SCA module are written using YAML format. Such format was chosen due to its focus on human readability,
-which allows the user to quickly understand and write their own policy files or extend the existing ones.
+Policies for the SCA module are written in YAML format. Format that was chosen due having human readability in mind, which allows
+users to quickly understand and write their own policies or extend the existing ones to fit their needs.
 
-Security compliance
+Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well establish standard for host hardening.
+
+Overview of a SCA check
 ----------------------------------
 
-Each policy check can contain an optional **compliance** field that is used to specify how the check is relevant to different
-compliance standard specifications. Many of the default policies available with Wazuh, specially CIS policies, already have the
-CIS and PCI-DSS controls mapped. Here we can see an example:
+Each check comprises some metadata information, a description of the purpose of the check, and its logical description
+(fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
+if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, specially CIS policies, already have their
+CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` below.
+
 
 .. code-block:: yaml
+    :name: check_overview
+    :caption: Check example
 
-   id: 3010
-   title: "Ensure noexec option set on /var/tmp partition"
-   description: "The noexec mount option specifies that the filesystem cannot contain executable binaries."
-   rationale: "Setting this option on a file system prevents users from executing programs from the removable media. This deters users from being able to introduce potentially malicious software on the system."
-   remediation: "Edit the /etc/fstab file and add noexec to the fourth field (mounting options) of all removable media partitions. Look for entries that have mount points that contain words such as floppy or cdrom."
-   compliance:
-      - cis: ["1.1.10"]
-      - cis_csc: ["2.6"]
-   condition: all
-   rules:
-      - 'c:mount -> r:\s/var/tmp\s && r:noexec'
+    - id: 3006
+      title: "Ensure nodev option set on /tmp partition"
+      description: "The nodev mount option specifies that the filesystem cannot contain special devices."
+      rationale: "Since the /tmp filesystem is not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices in /tmp."
+      remediation: "Edit /etc/systemd/system/local-fs.target.wants/tmp.mount to configure the /tmp mount and run the following commands to enable systemd /tmp mounting: systemctl unmask tmp.mount systemctl enable tmp.mount"
+      compliance:
+        - cis: ["1.1.3"]
+        - cis_csc: ["5.1"]
+      condition: all
+      rules:
+        - 'c:mount -> r:\s/tmp\s && r:nodev'
 
-SCA scan results
+Interpreting SCA scan results
 ----------------------------------
 
-SCA scan results appear as alerts when a check has changed its status between scans.
-Only the events that are necessary to keep the global status of the scan updated are sent by agents,
-avoiding flooding with unnecessary events in each scan.
-
-An alert example can be seen here:
+SCA scan results appear as :ref:`alerts<alert_example>` whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events
+necessary to keep the global status of the scan updated, avoiding potential event flooding.
 
 .. code-block:: none
+    :name: alert_example
+    :caption: Alert example
 
     ** Alert 1556643969.400529: - sca,gdpr_IV_35.7.d
     2019 Apr 30 10:06:09 (centos) 192.168.0.97->sca
@@ -76,51 +81,30 @@ An alert example can be seen here:
     sca.check.file: ["/proc/sys/kernel/randomize_va_space"]
     sca.check.result: passed
 
-On the Wazuh App, within the *SCA* tab we can see the result for each check of the scanned policies.
-In addition, each check can be expanded to display further information.
-
-.. thumbnail:: ../../../images/sca/sca-check.png
-    :title: SCA check list
-    :align: center
-    :width: 100%
-
-Scanned policies overview
-----------------------------------
-
-Every scanned policy should contain a header to provide its overview information. Here we can see a header example:
-
-.. code-block:: yaml
-
-    policy:
-      id: "cis_debian9_L1"
-      file: "cis_debian9_L1.yml"
-      name: "CIS benchmark for Debian/Linux 9 L1"
-      description: "This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux 9."
-      references:
-        - https://www.cisecurity.org/cis-benchmarks/
-
-Fields like `id` are mandatory to identify and classify policies.
-
-The following screenshot of the *SCA* tab shows an overview of scanned policies for an agent:
+Scan results summaries are then shown on the Wazuh App, within the *SCA* tab.
 
 .. thumbnail:: ../../../images/sca/sca-agent.png
     :title: SCA summary
     :align: center
     :width: 100%
 
+In addition, each result can be expanded to display additional information.
+
+.. thumbnail:: ../../../images/sca/sca-check.png
+    :title: SCA check list
+    :align: center
+    :width: 100%
 
 Available policies
 ------------------
 
 When a Wazuh agent is installed, the system will only include the policy files supported by that particular Operating System.
-The table :ref:`available_sca_policies` sumarizes the policy files officially supported by Wazuh.
+The :ref:`table<available_sca_policies>` lists the policy file set officially supported by Wazuh.
 These policies are included with the Wazuh manager installation so they can be easily enabled.
-
-.. _available_sca_policies:
 
 .. table:: Available SCA policies
     :widths: auto
-
+    :name: available_sca_policies
 
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | Policy                      | Name                                                       | Requirement                   |
@@ -182,66 +166,67 @@ These policies are included with the Wazuh manager installation so they can be e
     | cis_mysql5-6_enterprise     |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
 
-Policy files location
-^^^^^^^^^^^^^^^^^^^^^
+Enabling and disabling policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` files) present in their ruleset folder:
+
 - Wazuh manager: ``path/manager/all-policies``.
 - Linux agents: ``/var/ossec/ruleset/sca``.
 - Windows agents: ``C:\Program files (x86)\ossec-agent\ruleset\sca``.
 
-.. note::
-    By default, the Wazuh Agent will run every policy (`.yaml` or `.yml` files) present in ``/ruleset/sca``.
+To enable a policy file that's outside the default folder, add a line like
 
-How to share policy files with agents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: xml
+
+    <policy>/var/ossec/etc/shared/policy_file_to_enable.yml</policy>
+
+in the **policies section** of the **SCA** module.
+
+There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disable``
+(or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
+the `ossec.conf` by adding a line like
+
+.. code-block:: xml
+
+    <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
+
+in the **policies section** of the **SCA** module.
+
+How to share policy files and configuration with agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section,
 the Wazuh manager has the ability to push files and configurations to connected agents.
 
-This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs
-to the *default* group, so we can use this group as an example.
+This feature con be used to push policy files to agents in defined groups. By default, every agent belongs to the
+*default* group, so we can use this group as example.
 
-In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``
-, ensure the policy owner is `ossec` and then add the following block to the ``/var/ossec/etc/shared/default/agent.conf`` file:
+In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``,
+ensure the policy owner is `ossec`.
+
+In addition, to push configuration, the same strategy applies. For instance, in order to add a policy, add a block like the following to the ``/var/ossec/etc/shared/default/agent.conf`` as per the
+:ref:`example<ossec_conf_enable_policy>`.
 
 .. code-block:: xml
+    :name: ossec_conf_enable_policy
+    :caption: Enabling a policy from the ``ossec.conf``
 
     <agent_config>
-
         <!-- Shared agent configuration here -->
         <sca>
             <policies>
                 <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
             </policies>
         </sca>
-
     </agent_config>
 
-The ``<sca>`` block will be merged with the current ``<sca>`` block on the agent side and the new policy file will be added.
-
-Current policy files configured to be run on the agent (either by default or by local configuration) can be disabled via the
-centralized configuration file ``/var/ossec/etc/shared/default/agent.conf`` as follows:
-
-.. code-block:: xml
-
-    <agent_config>
-
-        <!-- Shared agent configuration here -->
-        <sca>
-            <policies>
-                <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
-            </policies>
-        </sca>
-
-    </agent_config>
-
-.. note::
-    Remote policies are not allowed to run commands by default for security reasons. To enable it, change the ``sca.remote_commands`` of the internal options.
+This ``<sca>`` block will be merged with the ``<sca>`` block on the agent side and the new configuration will be added.
 
 Creating custom SCA policies
 ----------------------------
 
-As mentioned previously, the policy files have a YAML format. In order to illustrate shown below is a section of the policy
-file for Unix auditing:
+As stated before, policy files are written using YAML syntax. In order to illustrate this, an excerpt of a policy file is included below.
 
 .. code-block:: yaml
 
@@ -410,7 +395,7 @@ The condition field specifies how rule results are aggregated in order to calcul
 
 - ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied, and as **failed** as soon as one evaluates to **passed**.
 
-Special mention deserves the how how rules evaluated as **non-applicable** are treated by the aforementioned aggregators.
+Special mention deserves how rules evaluated as **non-applicable** are treated by the aforementioned aggregators.
 
 - ``all``: If any rule returns **non-applicable**, and no rule returns **failed**, the result will be **non-applicable**.
 
@@ -536,8 +521,8 @@ The general form of a rule testing for contents is as follows:
 
 .. attention::
     - The context of a content check is limited to a **line**.
-    - Content checks are case sensitive.
-    - It is **mandatory** to respect the spaces arround the ``->`` and ``compare`` separators.
+    - Content checks are case-sensitive.
+    - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
     - If the **target** of a rule that checks for contents does not exist, the result will be **non-applicable** as it could not be checked.
 
 Content check operator results can be negated by adding a ``!`` before then, for example:
@@ -547,10 +532,10 @@ Content check operator results can be negated by adding a ``!`` before then, for
     f:/etc/ssh_config -> !r:PermitRootLogin
 
 .. attention::
-    Be carefull when negating content operators as that will make then evaluate as  **passed** for **anything** that does not match with the check specified.
-    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evalauted as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
+    Be careful when negating content operators as that will make then evaluate as  **passed** for **anything** that does not match with the check specified.
+    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
 
-Content check operators can be chained ussing the operator ``&&`` (AND) as follows:
+Content check operators can be chained using the operator ``&&`` (AND) as follows:
 
 .. code-block:: yaml
 
@@ -559,7 +544,7 @@ Content check operators can be chained ussing the operator ``&&`` (AND) as follo
 This rule reads as `Pass if there's a line whose first character is no "#" and contains "Protocol" and "2"`.
 
 .. attention::
-    - It is **mandatory** to respect the spaces arround the ``&&`` operator.
+    - It is **mandatory** to respect the spaces around the ``&&`` operator.
     - There's no particular order of evaluation between tests chained using the ``&&`` operator.
 
 Examples of content checks:
