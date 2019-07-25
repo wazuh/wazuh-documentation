@@ -111,8 +111,6 @@ These policies are included with the Wazuh manager installation so they can be e
     +=============================+============================================================+===============================+
     | acsc_office2016             |  System audit for Office 2016 vulnerabilities              | Microsoft Office 2016         |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apache2224              |  CIS Apache HTTP Server 2.2/2.4 Benchmark                  | Apache configuration files    |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2012r2_domainL1      |  CIS benchmark for Windows 2012 R2 Domain Controller L1    | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2012r2_domainL2      |  CIS benchmark for Windows 2012 R2 Domain Controller L2    | Windows Server 2012 R2        |
@@ -121,17 +119,17 @@ These policies are included with the Wazuh manager installation so they can be e
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2012r2_memberL2      |  CIS benchmark for Windows 2012 R2 Member Server L2        | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win10_enterprise_L1     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win10_enterprise_L2     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Systems               |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Systems               |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel7_linux             |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Systems               |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apple_macOS_10.11       |  CIS Apple OSX 10.11 Benchmark                             | MAC OS X 10.11 (El Capitan)   |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apple_macOS_10.12       |  CIS Apple macOS 10.12 Benchmark                           | MAC OS X 10.12 (Sierra)       |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | MAC OS X 10.13 (High Sierra)  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian7_L1              |  CIS benchmark for Debian/Linux 7 L1                       | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -145,21 +143,23 @@ These policies are included with the Wazuh manager installation so they can be e
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian9_L2              |  CIS benchmark for Debian/Linux 9 L2                       | Debian 9                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian_linux            |  CIS benchmark for Debian/Linux                            | Debian systems                |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles11_linux            |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles12_linux            |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_solaris11               |  CIS benchmark for Oracle Solaris 11                       | Solaris 11                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | sca_unix_audit              |  System audit for web-related vulnerabilities              | N/A                           |
+    | sca_unix_audit              |  Benchmark for Linux auditing                              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
+    | cis_apple_macOS_10.11       |  CIS Apple OSX 10.11 Benchmark                             | MAC OS X 10.11 (El Capitan)   |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win10_enterprise_L1     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+    | cis_apple_macOS_10.12       |  CIS Apple macOS 10.12 Benchmark                           | MAC OS X 10.12 (Sierra)       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win10_enterprise_L2     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+    | cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | MAC OS X 10.13 (High Sierra)  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | web_vulnerabilites          |  System audit for web-related vulnerabilities              | N/A                           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apache2_4               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_mysql5-6_community      |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -199,7 +199,7 @@ How to share policy files and configuration with agents
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section,
 the Wazuh manager has the ability to push files and configurations to connected agents.
 
-This feature con be used to push policy files to agents in defined groups. By default, every agent belongs to the
+This feature can be used to push policy files to agents in defined groups. By default, every agent belongs to the
 *default* group, so we can use this group as example.
 
 In order to push a new policy from the manager it should be placed in the directory ``/var/ossec/etc/shared/default``,
