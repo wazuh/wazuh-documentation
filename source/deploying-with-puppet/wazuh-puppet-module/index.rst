@@ -104,7 +104,7 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP
 
     node "client.yourhost.com" {
 
-      class { "wazuh::client":
+      class { "wazuh::agent":
         wazuh_register_ip => "192.168.209.166",
         wazuh_reporting_ip => "192.168.209.167"
       }
