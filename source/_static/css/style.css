@@ -1592,6 +1592,8 @@ select, option {
   display: block;
   padding: 2px 10px;
   transition: .1s all ease;
+	color: #00a9e5;
+  text-align: left;
 }
 
 #select-version .dropdown-menu li:hover a {
