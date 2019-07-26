@@ -174,6 +174,10 @@ By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` f
 - Linux agents: ``<ossec-agent-installation-folder>/ruleset/sca``.
 - Windows agents: ``<ossec-agent-installation-folder>\ruleset\sca``.
 
+.. danger::
+    The contents of the aformentioned **default ruleset folders are neither kept accross installations nor updates**.
+    If you wish to modify or add new policies, place then under an alternative folder of your choice.
+
 To enable a policy file that's outside the default folder, add a line like
 
 .. code-block:: xml
@@ -488,8 +492,6 @@ By combining the aforementioned rule types and operators, both existence and con
 .. attention::
     - **Process** rules only allow existence checks.
     - **Command** rules only allow content (output) checks.
-
-
 
 
 Existence checking rules
