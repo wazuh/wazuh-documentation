@@ -44,8 +44,9 @@ Set up data forwarding
 
 1. Point Forwarder output to Wazuh's Indexer with the following command:
 
-  .. image:: ../images/splunk-app/simple-distributed-arch.png
+  .. thumbnail:: ../images/splunk-app/simple-distributed-arch.png
     :align: center
+
 
   .. code-block:: console
 
