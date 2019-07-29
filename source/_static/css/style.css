@@ -1592,9 +1592,9 @@ select, option {
   display: block;
   padding: 2px 10px;
   transition: .1s all ease;
-  color: #00a9e5;
+	color: #00a9e5;
   text-align: left;
- }
+}
 
 #select-version .dropdown-menu li:hover a {
   color: #fff;
@@ -2374,11 +2374,6 @@ div.highlight pre {
   padding: 0.5em 1em;
 }
 
-.scrolled .side-scroll {
-  top: 40px;
-  max-height: calc(100vh - 40px);
-}
-
 .note pre,
 .warning pre {
   background-color: #f4f4f4 !important;
@@ -3075,17 +3070,6 @@ div.highlight pre {
         transition: all 0.3s;
       }
 
-      div.highlight pre {
-        position: sticky;
-        top: 50px;
-        overflow: hidden;
-        max-height: calc(100vh - 95px);
-        height: 100%;
-        flex-direction: column;
-        padding-right: 15px;
-        width: 375px;
-      }
-
 			nav.full-toctree-nav.reached-top {
         top: 0px;
       }
@@ -3095,11 +3079,17 @@ div.highlight pre {
 				position: sticky;
 				top: 50px;
 				overflow: hidden;
+				max-height: calc(100vh - 95px);
 				height: 100%;
         flex-direction: column;
         padding-right: 15px;
         width: 375px;
       }
+
+			.scrolled .side-scroll {
+				top: 40px;
+				max-height: calc(100vh - 40px);
+			}
 
       .side-scroll:hover{
         overflow-y: auto;
@@ -3122,18 +3112,11 @@ div.highlight pre {
       }
 
 			.scrolled #search-lg {
+				min-height: 0;
 				opacity: 0;
 				overflow: hidden;
-        min-height: 0;
-        margin: 0;
-      }
-      
-      div.highlight pre {
-        opacity: 1;
-        padding: 0;
-        display: block;
-        flex: unset;
-        transition: opacity .2s;
+				transition: min-height 0.5s, opacity 0.3s;
+				margin: 0;
       }
 
       #search-lg {
@@ -3142,7 +3125,7 @@ div.highlight pre {
         padding: 0;
         display: block;
 				flex: unset;
-				transition: opacity .2s;
+				transition: min-height 0.3s, opacity 0.3s 0.2s;
       }
 }
 
