@@ -176,7 +176,7 @@ By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` f
 
 .. danger::
     The contents of the aformentioned **default ruleset folders are neither kept accross installations nor updates**.
-    If you wish to modify or add new policies, place then under an alternative folder of your choice.
+    If you wish to modify or add new policies, place then under an alternative folder.
 
 To enable a policy file that's outside the default folder, add a line like
 
@@ -479,6 +479,25 @@ The operators for content checking are:
     | Numeric comparison (integers)                                                        | ``n:``          | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
     +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
 
+.. table:: Numeric comparison operators
+    :widths: auto
+
+    +--------------------------------+----------+----------------------------------+
+    | Arithmetic relational operator | Operator | Example                          |
+    +--------------------------------+----------+----------------------------------+
+    | less than                      | **<**    | n:SomeProperty (\d) compare < 5  |
+    +--------------------------------+----------+----------------------------------+
+    | less than or equal to          | **>=**   | n:SomeProperty (\d) compare <= 5 |
+    +--------------------------------+----------+----------------------------------+
+    | equal to                       | **==**   | n:SomeProperty (\d) compare == 5 |
+    +--------------------------------+----------+----------------------------------+
+    | not equal to                   | **!=**   | n:SomeProperty (\d) compare != 5 |
+    +--------------------------------+----------+----------------------------------+
+    | greater than or equal to       | **>=**   | n:SomeProperty (\d) compare >= 5 |
+    +--------------------------------+----------+----------------------------------+
+    | greater than                   | **>**    | n:SomeProperty (\d) compare > 5  |
+    +--------------------------------+----------+----------------------------------+
+
 A whole rule can be negated using the operator ``not``, which is placed at the begining of the rule.
 
 .. code-block:: yaml
@@ -489,7 +508,7 @@ Example: ``not f:/some_file -> some_text`` will **fail** if `some_text` is found
 
 By combining the aforementioned rule types and operators, both existence and content checking can be performed.
 
-.. attention::
+.. note::
     - **Process** rules only allow existence checks.
     - **Command** rules only allow content (output) checks.
 
