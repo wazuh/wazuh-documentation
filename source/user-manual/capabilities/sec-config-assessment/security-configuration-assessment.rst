@@ -186,7 +186,7 @@ To enable a policy file that's outside the default folder, add a line like
 
 in the **policies section** of the **SCA** module.
 
-There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disable``
+There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
 the `ossec.conf` by adding a line like
 
