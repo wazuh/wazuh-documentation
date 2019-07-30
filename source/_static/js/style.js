@@ -148,17 +148,6 @@ $(function(){
 
 	/* -- Same scroll in navbar ------------------------------------------------------------------------------- */
 
-	/* Set the navbar height like the content height  */
-	navbarHeight();
-	function navbarHeight(){
-		var main_height = $('.central-page-area').height();
-		//$('nav.full-toctree-nav').css({'height':'calc('+main_height+'px)'});
-	}
-
-	$(window).on('resize', function(){
-		navbarHeight();
-	});
-
 	var nav_scroll = 0;
 	var last_scroll = 0;
 	var direction = 'bottom';
@@ -171,9 +160,6 @@ $(function(){
 		var l_s = $(this).scrollTop();
 		if(l_s > last_scroll){ direction = 'bottom'; } else { direction = 'top'; }
 		last_scroll = l_s;
-
-		/* Update the navbar height */
-		navbarHeight();
 
 		/* Set the new scroll of navbar */
 		scrollNavbar();
@@ -198,13 +184,17 @@ $(function(){
 		var percentage_nav = nav_scroll/nav_scroll_real;
 		var nav_scroll_end = (percentage*nav_scroll_real).toFixed();
 
-		if(((percentage+0.3) > percentage_nav && (percentage-0.3) < percentage_nav)){
+		if(document_scroll > 500){
 			$('.side-scroll').scrollTop(nav_scroll_end);
+			if(percentage == 0){
+				$('.side-scroll').scrollTop(0);
+			}
+		} else {
+			if(direction == 'top'){
+				$('.side-scroll').scrollTop(nav_scroll_end);
+			}
 		}
-		if(percentage == 0 && percentage_nav < 0.3){
-			$('.side-scroll').scrollTop(0);
-		}
-
+ 
 	}
 
 	$('#navbar-globaltoc').on('scroll', function(e){
