@@ -130,7 +130,7 @@ $(function(){
 
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
-   var headerHeight = Math.round($('.header').height());
+   var headerHeight = 100; // Math.round($('#header').height());
    if (scrollTop > headerHeight ) {
      $('body').addClass('scrolled');
 		 /* Move searchbar to .menu-sub on scroll down if desktop size */
@@ -152,7 +152,7 @@ $(function(){
 	navbarHeight();
 	function navbarHeight(){
 		var main_height = $('.central-page-area').height();
-		$('nav.full-toctree-nav').css({'height':'calc('+main_height+'px)'});
+		//$('nav.full-toctree-nav').css({'height':'calc('+main_height+'px)'});
 	}
 
 	$(window).on('resize', function(){
@@ -189,25 +189,20 @@ $(function(){
 		var container_nav_height = parseInt($('#navbar-globaltoc').height());
 		container_nav_height -= parseInt($('#search-lg').height());
 		var nav_height = parseInt($('#globaltoc').height());
-		nav_height += parseInt($('#navbar-globaltoc aside.help').height());
+		nav_height += parseInt($('#navbar-globaltoc aside.help').height() + 20);
 
 		/* Calculate navbar end scroll position */
 		var scroll_real = document_height-window_height;
 		var nav_scroll_real = nav_height-container_nav_height;
-		if(scroll_real >= nav_scroll_real){
-			var percentage = document_scroll/nav_scroll_real;
-			var nav_scroll_end = (percentage*scroll_real).toFixed();
-		} else {
-			var percentage = document_scroll/scroll_real;
-			var nav_scroll_end = (percentage*nav_scroll_real).toFixed();
-		}
+		var percentage = document_scroll/scroll_real;
+		var percentage_nav = nav_scroll/nav_scroll_real;
+		var nav_scroll_end = (percentage*nav_scroll_real).toFixed();
 
-		if(
-			(direction == 'bottom' && nav_scroll <= nav_scroll_end && (nav_scroll+200) > nav_scroll_end)
-			||
-			(direction == 'top' && nav_scroll >= nav_scroll_end && (nav_scroll-200) < nav_scroll_end)
-		){
+		if(((percentage+0.3) > percentage_nav && (percentage-0.3) < percentage_nav)){
 			$('.side-scroll').scrollTop(nav_scroll_end);
+		}
+		if(percentage == 0 && percentage_nav < 0.3){
+			$('.side-scroll').scrollTop(0);
 		}
 
 	}
@@ -245,6 +240,10 @@ $(function(){
 
 		e.stopPropagation();
 		e.preventDefault();
+
+		if(!li.parents().hasClass('show')){
+			$('.globaltoc li.show').removeClass('show');
+		}
 
 		$('.globaltoc li.initial').removeClass('initial');
 		if( li.hasClass('show')){
