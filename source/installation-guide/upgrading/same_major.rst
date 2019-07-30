@@ -22,6 +22,12 @@ b) Upgrade on Debian/Ubuntu:
 
     # apt-get update 
     # apt-get install wazuh-manager wazuh-api
+    
+c) Upgrade on OpenSUSE:
+
+.. code-block:: console
+
+    # zypper update wazuh-manager wazuh-api
 
 
 Upgrade the Wazuh agent
@@ -39,3 +45,9 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
     # apt-get update 
     # apt-get install wazuh-agent
+    
+c) Upgrade the Wazuh agent on OpenSUSE:
+
+.. code-block:: console
+
+    # zypper update wazuh-agent
