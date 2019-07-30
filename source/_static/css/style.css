@@ -7,7 +7,7 @@ Author: Wazuh Inc.
   -webkit-font-smoothing: antialiased; /* Correct font weight error in light fonts produced in some browsers */
   word-wrap: break-word;
 }
-      
+
 @-webkit-keyframes showMenuSticky {
   0% {
     -webkit-transform: translateY(0);
@@ -28,7 +28,7 @@ Author: Wazuh Inc.
             transform: translateY(44px);
   }
 }
-      
+
 @-webkit-keyframes showMenuStickyMobile {
   0% {
     -webkit-transform: translateY(0);
@@ -231,7 +231,7 @@ a .docs-link {
   color: #ffffff;
   vertical-align: text-top;
   display: inline-block;
-  line-height: 1.7em;
+  line-height: 1.9em;
   font-size: 1.2rem;
 }
 
@@ -295,7 +295,7 @@ header .menuweb-bar .menu-item a {
   top: -1px;
   width: 100%;
 }
-  
+
 .scrolled .menu-sub {
   position: fixed;
   top: -50px;
@@ -2800,7 +2800,7 @@ div.highlight pre {
       .scrolled .central-page-area {
         margin-top: 100px;
       }
-      
+
       .header #navbarWebMenu {
         margin-top: -10px;
       }
@@ -2880,7 +2880,7 @@ div.highlight pre {
 				margin-left: 376px;
 				padding: 5px 30px;
 			}
-      
+
 			.scrolled .menu-sub .search_main {
         margin-top: 3px;
 				padding: 4px 30px;
