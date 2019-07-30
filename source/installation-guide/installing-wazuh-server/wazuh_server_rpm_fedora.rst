@@ -162,7 +162,13 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
     output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-7. Enable and start the Filebeat service:
+7. Just in case you are planning to use third party modules for Filebeat, please insert the Filebeat template manually. A connection to Elasticsearch is required.
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E setup.template.json.enabled=false
+
+8. Enable and start the Filebeat service:
 
   * For Systemd:
 
