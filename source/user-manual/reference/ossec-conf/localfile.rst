@@ -40,8 +40,6 @@ For instance, a log file named ``file.log-2019-07-30`` could be referenced with 
 
 Wildcards could be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
-Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
-
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
 In the following example we can see two configurations showing a channel filtering for firewall and Sysmon events.
@@ -85,8 +83,10 @@ Below we have some Windows wildcard examples.
 +--------------------+--------------------------+
 
 .. note::
-  On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example could be ``*.log`` this will match any log file.
-  The maximum amount of files monitored at same time is limited to 200.
+  * ``strftime`` format strings and wildcards cannot be used on the same entry.
+
+  * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example could be ``*.log`` this will match any log file.
+  * The maximum amount of files monitored at same time is limited to 200.
 
 command
 ^^^^^^^
