@@ -3161,17 +3161,6 @@ div.highlight pre {
         transition: all 0.3s;
       }
 
-      div.highlight pre {
-        position: sticky;
-        top: 50px;
-        overflow: hidden;
-        max-height: calc(100vh - 95px);
-        height: 100%;
-        flex-direction: column;
-        padding-right: 15px;
-        width: 375px;
-      }
-
 			nav.full-toctree-nav.reached-top {
         top: 0px;
       }
@@ -3205,14 +3194,6 @@ div.highlight pre {
         width: 360px;
         margin-left: 0;
         margin-right: auto;
-      }
-      
-      div.highlight pre {
-        opacity: 1;
-        padding: 0;
-        display: block;
-        flex: unset;
-        transition: opacity .2s;
       }
 
       #search-lg {
