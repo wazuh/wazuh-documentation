@@ -42,6 +42,16 @@ b) For Debian/Ubuntu:
 .. code-block:: console
 
   # apt-get update && apt-get install openjdk-8-jre
+  
+c) For Windows:
+
+  1. Create an `Oracle account <https://www.oracle.com/index.html>`_.
+  
+  2. Download the `Java JRE 8 <https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html>`_ installer.
+  
+  3. Install Java JRE 8:
+  
+    - Execute the installer with elevated privileges.
 
 .. note::
   If the version 8 of the Java Runtime Environment is not available for your operating system, use the version 7 or 6 instead.
