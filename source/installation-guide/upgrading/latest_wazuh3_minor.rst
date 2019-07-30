@@ -48,7 +48,7 @@ b) Debian/Ubuntu:
     # apt-get update 
     # apt-get install wazuh-manager wazuh-api
     
- c) OpenSUSE:
+c) OpenSUSE:
 
 .. code-block:: console
 
