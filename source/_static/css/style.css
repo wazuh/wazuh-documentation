@@ -8,6 +8,48 @@ Author: Wazuh Inc.
   word-wrap: break-word;
 }
 
+@-webkit-keyframes showMenuSticky {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(44px);
+            transform: translateY(44px);
+  }
+}
+@keyframes showMenuSticky {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(44px);
+            transform: translateY(44px);
+  }
+}
+
+@-webkit-keyframes showMenuStickyMobile {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(44px);
+            transform: translateY(44px);
+  }
+}
+@keyframes showMenuStickyMobile {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(44px);
+            transform: translateY(44px);
+  }
+}
+
 html {
   height: 100%;
 }
@@ -106,23 +148,21 @@ dt {
   top: 80px;
 }
 
-#page::before {
+#header {
+  z-index: 999999;
+  width: 100%;
   background: url(../img/wazuh_bg_head.png), no-repeat center center;
   background-size: cover;
-  height: 40px;
-  width: 100%;
-	content: '';
-  display: block;
-  position: -webkit-sticky;
-  position: sticky;
-	top: -64px;
-	z-index: 2;
+}
+
+.scrolled .central-page-area {
+  margin-top: 44px;
 }
 
 .header {
+  position: relative;
   color: #fff;
-  z-index: 3;
-  position: absolute;
+  z-index: 9;
 	top: 0;
   width: 100%;
 }
@@ -191,7 +231,7 @@ a .docs-link {
   color: #ffffff;
   vertical-align: text-top;
   display: inline-block;
-  line-height: 1.7em;
+  line-height: 1.9em;
   font-size: 1.2rem;
 }
 
@@ -252,9 +292,15 @@ header .menuweb-bar .menu-item a {
 .menu-sub {
   background: #00a9e5;
   z-index: 2;
-  position: -webkit-sticky;
-  position: sticky;
   top: -1px;
+  width: 100%;
+}
+
+.scrolled .menu-sub {
+  position: fixed;
+  top: -50px;
+  -webkit-animation: showMenuStickyMobile 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
+          animation: showMenuStickyMobile 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
 }
 
 .no-latest-docs .menu-sub {
@@ -263,7 +309,6 @@ header .menuweb-bar .menu-item a {
 
 #search-lg {
   display: none;
-  min-height: 45px;
 }
 
 .menu-sub #search-lg .no-searchbox {
@@ -688,7 +733,6 @@ li.toctree-l5 > a {
   visibility: visible;
   right: -20px;
   overflow-y: scroll;
-  transition: .3s all;
 }
 
 #navbar-globaltoc.hidden {
@@ -706,8 +750,6 @@ li.toctree-l5 > a {
 
 #navbar-globaltoc.show {
   height: calc(100vh - 44px);
-  top: 44px;
-  padding-top: 44px;
   overflow-y: scroll;
   transition: top .3s;
 }
@@ -1100,9 +1142,13 @@ footer a:focus,
 
 .search_main {
   position: absolute;
-  top: 8px;
+  top: 50px;
   right: 0;
   z-index: 4;
+}
+
+.scrolled .search_main {
+  top: 14px;
 }
 
 #search-form .form-control {
@@ -1225,7 +1271,7 @@ footer a:focus,
 :not(.collapsed).btn-close .x::before {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
-  width: 22px;
+  width: 21px;
   left: 1px;
   -webkit-transform-origin: top left;
           transform-origin: top left;
@@ -1242,7 +1288,7 @@ footer a:focus,
 :not(.collapsed).btn-close .x::after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
-  width: 22px;
+  width: 21px;
   left: 1px;
   -webkit-transform-origin: bottom left;
           transform-origin: bottom left;
@@ -1447,7 +1493,7 @@ footer .contact-info .fa-paper-plane-o {
 
 .navbar-toggler.btn-close.collapsed::before {
   opacity: 1;
-  top: 24px;
+  top: 17px;
   transition: all ease .4s;
 }
 
@@ -1592,9 +1638,9 @@ select, option {
   display: block;
   padding: 2px 10px;
   transition: .1s all ease;
-	color: #00a9e5;
+  color: #00a9e5;
   text-align: left;
-}
+ }
 
 #select-version .dropdown-menu li:hover a {
   color: #fff;
@@ -2225,11 +2271,12 @@ footer a {
 }
 
 .menu-sub .navbar-toggler {
-  margin: 6px 3px 0;
   border: none;
   padding: 5px 10px;
   border: 1px solid transparent;
   outline: 0;
+  margin-bottom: 6px;
+  margin-left: 6px;
 }
 
 .menu-sub .navbar-toggler:focus {
@@ -2242,10 +2289,13 @@ footer a {
 
 .menu-sub .navbar-toggler {
   border-color: transparent;
-	position: unset;
+	position: relative;
 	height: 38px;
   width: 38px;
-  margin-bottom: 3px;
+}
+
+.scrolled .menu-sub .navbar-toggler {
+  margin-top: 6px;
 }
 
 #main-navbar .navbar-nav>li>a {
@@ -2372,6 +2422,15 @@ table.highlighttable {
 
 div.highlight pre {
   padding: 0.5em 1em;
+}
+
+.scrolled .side-scroll {
+  top: 40px;
+  max-height: calc(100vh - 40px);
+}
+
+.scrolled .header #navbarWebMenu {
+  display: none;
 }
 
 .note pre,
@@ -2722,6 +2781,43 @@ div.highlight pre {
 
 @media (min-width: 992px){
 
+      #header {
+        height: 100px;
+      }
+
+      .header {
+        height: 0;
+      }
+
+      .scrolled #header {
+        top: -44px;
+        position: fixed;
+        height: 44px;
+        -webkit-animation: showMenuSticky 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
+                animation: showMenuSticky 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
+      }
+
+      .scrolled .central-page-area {
+        margin-top: 100px;
+      }
+
+      .header #navbarWebMenu {
+        margin-top: -10px;
+      }
+
+      .release-selector-wrapper {
+        margin-top: -15px;
+      }
+
+      .scrolled .release-selector-wrapper {
+        margin-top: 7px;
+      }
+
+      #navbar-globaltoc.show {
+        top: 44px;
+        padding-top: 44px;
+      }
+
 			.admonition::before  {
 				padding-top: 0;
 				align-items: center;
@@ -2755,7 +2851,7 @@ div.highlight pre {
 
 			.scrolled #links-to-home .wazuh-logo-link {
 				position: fixed;
-				top: 1px;
+				top: 4px;
 			}
 
 			.scrolled .no-latest-docs #links-to-home .wazuh-logo-link {
@@ -2779,14 +2875,15 @@ div.highlight pre {
         border-bottom: 3px solid transparent;
       }
 
-			#page::before {
-				height: 100px;
-			}
-
 			.menu-sub .search_main {
 				max-width: 360px;
-				margin-left: 360px;
-				padding: 6px 30px;
+				margin-left: 376px;
+				padding: 5px 30px;
+			}
+
+			.scrolled .menu-sub .search_main {
+        margin-top: 3px;
+				padding: 4px 30px;
 			}
 
 			.menu-sub {
@@ -2800,7 +2897,7 @@ div.highlight pre {
 			.scrolled .menu-sub {
 		    display: block;
         position: fixed;
-				top: 0px;
+				top: -44px;
 			}
 
 			.no-latest-docs .menu-sub {
@@ -2809,10 +2906,6 @@ div.highlight pre {
 
 			.scrolled .no-latest-docs .menu-sub {
 				 top: 40px;
-			}
-
-			.scrolled #page::before {
-				 top: -60px;
 			}
 
 			.scrolled #page.no-latest-docs::before {
@@ -2904,13 +2997,11 @@ div.highlight pre {
 
       .scrolled #links-to-home .wazuh-logo-link img {
         max-height: 34px;
-				transition: max-height 0.2s;
       }
 
 			#links-to-home .wazuh-logo-link img {
         max-height: 40px;
         max-width: unset;
-				transition: max-height 0.2s;
       }
 
 			.search_main {
@@ -3079,17 +3170,11 @@ div.highlight pre {
 				position: sticky;
 				top: 50px;
 				overflow: hidden;
-				max-height: calc(100vh - 95px);
 				height: 100%;
         flex-direction: column;
         padding-right: 15px;
         width: 375px;
       }
-
-			.scrolled .side-scroll {
-				top: 40px;
-				max-height: calc(100vh - 40px);
-			}
 
       .side-scroll:hover{
         overflow-y: auto;
@@ -3111,21 +3196,12 @@ div.highlight pre {
         margin-right: auto;
       }
 
-			.scrolled #search-lg {
-				min-height: 0;
-				opacity: 0;
-				overflow: hidden;
-				transition: min-height 0.5s, opacity 0.3s;
-				margin: 0;
-      }
-
       #search-lg {
-        min-height: 52px;
 				opacity: 1;
         padding: 0;
         display: block;
 				flex: unset;
-				transition: min-height 0.3s, opacity 0.3s 0.2s;
+				transition: opacity .2s;
       }
 }
 

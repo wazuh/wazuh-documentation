@@ -130,7 +130,7 @@ $(function(){
 
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
-   var headerHeight = Math.round($('.header').height());
+   var headerHeight = 100; // Math.round($('#header').height());
    if (scrollTop > headerHeight ) {
      $('body').addClass('scrolled');
 		 /* Move searchbar to .menu-sub on scroll down if desktop size */
@@ -146,27 +146,60 @@ $(function(){
    }
  }
 
- /* -- Same scroll in navbar ------------------------------------------------------------------------------- */
+	/* -- Same scroll in navbar ------------------------------------------------------------------------------- */
 
- $(window).on('scroll', function(e){
+	var nav_scroll = 0;
+	var last_scroll = 0;
+	var direction = 'bottom';
 
-	// Get data of scroll and positions
-	var document_height = $('.central-page-area').height();
-	var footer_height = $('#main-footer').height();
-	var document_scroll = $(window).scrollTop();
-	var nav_height = $('#globaltoc').height() + $('#search-lg').height();
-	var nav_scroll = $('.side-scroll').scrollTop();
+	scrollNavbar();
+	
+	$(window).on('scroll', function(e){
+		
+		/* Know the scroll direction */
+		var l_s = $(this).scrollTop();
+		if(l_s > last_scroll){ direction = 'bottom'; } else { direction = 'top'; }
+		last_scroll = l_s;
 
-	// Calculate navbar end scroll position
-	//document_scroll -= 110;
-	//document_height += footer_height;
-	var proporcion = document_height/nav_height;
-	var nav_scroll_end = (document_scroll/proporcion).toFixed();
+		/* Set the new scroll of navbar */
+		scrollNavbar();
+		
+	});
 
-	// Set navbar end scroll position
-	$('.side-scroll').scrollTop(nav_scroll_end);
+ 	function scrollNavbar(){
 
- });
+		/* Get data of scroll and positions */
+		var window_height = window.innerHeight;
+		var document_height = $(document).height();
+		var document_scroll = $(window).scrollTop();
+		var container_nav_height = parseInt($('#navbar-globaltoc').height());
+		container_nav_height -= parseInt($('#search-lg').height());
+		var nav_height = parseInt($('#globaltoc').height());
+		nav_height += parseInt($('#navbar-globaltoc aside.help').height() + 20);
+
+		/* Calculate navbar end scroll position */
+		var scroll_real = document_height-window_height;
+		var nav_scroll_real = nav_height-container_nav_height;
+		var percentage = document_scroll/scroll_real;
+		var percentage_nav = nav_scroll/nav_scroll_real;
+		var nav_scroll_end = (percentage*nav_scroll_real).toFixed();
+
+		if(document_scroll > 500){
+			$('.side-scroll').scrollTop(nav_scroll_end);
+			if(percentage == 0){
+				$('.side-scroll').scrollTop(0);
+			}
+		} else {
+			if(direction == 'top'){
+				$('.side-scroll').scrollTop(nav_scroll_end);
+			}
+		}
+ 
+	}
+
+	$('#navbar-globaltoc').on('scroll', function(e){
+		nav_scroll = $('#navbar-globaltoc').scrollTop();
+	});
 
 	/* Global toc --------------------------------------------------------------------------------------------------*/
   function currentToc(){
@@ -197,6 +230,10 @@ $(function(){
 
 		e.stopPropagation();
 		e.preventDefault();
+
+		if(!li.parents().hasClass('show')){
+			$('.globaltoc li.show').removeClass('show');
+		}
 
 		$('.globaltoc li.initial').removeClass('initial');
 		if( li.hasClass('show')){
