@@ -15,15 +15,15 @@ This section shows the most relevant improvements and fixes in version 3.9.4. Mo
 Wazuh core
 ----------
 
-- The attributes of FIM alerts will no longer depend on race conditions between realtime and whodata modes.
-- Wazuh-DB will delete all information stored about an agent immediately after its removal.
-- Avoided critical errors in Remoted when handling invalid connections
-- Fixed a bug when processing maximum length IPs in agents.
-- Logcollector will prioritize the file monitoring options specified in the shared configuration.
+- Fixed bug when applying the parent directory options to FIM alerts.
+- Prevented the manager from blocking when WazuhDB ignores agent deletion requests.
+- Remoted will no longer handle messages from disconnected agents.
+- Fixed a bug that overwrites agent information with certain IPs.
+- Logcollector will allow overwriting the <localfile> blocks indicated in the shared configuration over those indicated in ossec.conf if they have the same <location> value.
 - Analysisd will not break due to a race condition when handling JSON objects.
-- SCA wodle will not generate inconsistencies in the database when policy IDs are duplicated.
+- SCA will not generate inconsistencies in the database on the manager side when policy IDs are duplicated.
 - The cluster engine will not have a race condition with Remoted when synchronizing some files.
-- Avoided the possibility of generating a handler leak when using whodata mode for Windows.
+- A handler leaking hazard has been fixed in the FIM who-data engine on Windows.
 
 Wazuh apps
 ----------
