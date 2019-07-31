@@ -96,7 +96,7 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 Install agent via Puppet
 ------------------------
 
-The agent is configured by installing the ``wazuh::client`` class.
+The agent is configured by installing the ``wazuh::agent`` class.
 
 Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP address)
 
@@ -104,9 +104,10 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP
 
     node "client.yourhost.com" {
 
-    class { "wazuh::client":
-      ossec_server_ip => "192.168.209.166"
-    }
+      class { "wazuh::agent":
+        wazuh_register_endpoint => "192.168.209.166",
+        wazuh_reporting_endpoint => "192.168.209.167"
+      }
 
     }
 
