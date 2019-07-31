@@ -28,4 +28,19 @@ Wazuh core
 Wazuh apps
 ----------
 
--
+- Allowed filtering by clicking a column in rules/decoders tables.
+- Allowed open file in rules table clicking on the file column.
+- Improved Kibana app performance.
+- Removed path filter from custom rules and decoders.
+- Now path column in rules and decoders is shown.
+- Removed SCA overview dashboard.
+- Disabled last custom column removal.
+- Agents messages across sections have been unificated.
+- Fixed check storeded APIs.
+- Improved wz-table performance.
+- Fixed inconsistent data between visualizations and tables in Overview Security Events.
+- Timezone applied in cluster status.
+- Fixed Overview Security Events report when wazuh.monitoring is disabled.
+- Now duplicated visualization toast errors are handled.
+- Fixed not properly updated breadcrumb in ruleset section.
+- Implicit filters can't be destroyed now.
