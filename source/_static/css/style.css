@@ -736,7 +736,6 @@ li.toctree-l5 > a {
 
 #navbar-globaltoc {
   visibility: visible;
-  right: -20px;
   overflow-y: scroll;
 }
 
@@ -747,6 +746,7 @@ li.toctree-l5 > a {
 
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
   top: 90px;
+  right: 0;
   left: 0;
   background-color: #f8f8f8;
   overflow: auto;
@@ -2320,6 +2320,7 @@ body {
   color: #333333;
   line-height: 1.4;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 #page {
