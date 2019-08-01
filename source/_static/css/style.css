@@ -872,7 +872,7 @@ li.toctree-l2 > a {
 
 li.toctree-l3 > a {
   display: block;
-  padding: 0.6em 1em 0.6em 3.3rem;
+  padding: 0.6em 3em 0.6em 3.3rem;
 }
 
 li.toctree-l4 > a {
