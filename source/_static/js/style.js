@@ -128,8 +128,22 @@ $(function(){
 
  });
 
- var vh = $(window).height()+7;
+ var header_h = $('#header').height() + $('.search_main').height() +20;
+ var vh = $(window).height()-header_h;
  $('.side-scroll').css({'max-height':vh});
+
+ $(window).on('scroll', function(e){
+
+	if(!$('body').hasClass('scrolled')){
+		header_h = $('#header').height() + $('.search_main').height() + 20 - $(document).scrollTop();
+	} else {
+		header_h = $('#header').height();
+	}
+	
+	var vh = $(window).height()-header_h;
+	$('.side-scroll').css({'max-height':vh});
+	
+});
 
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
@@ -142,8 +156,6 @@ $(function(){
 		 /* Move searchbar to .menu-sub on scroll down if desktop size */
 		 if ( $(window).outerWidth() >= breakpoint ) {
 			 searcbarToHorizontal();
-			 var vh = $(window).height()+7;
-			 $('.scrolled .side-scroll').css({'max-height':vh});
 		 }
    } else {
      $('body').removeClass('scrolled');
