@@ -2336,13 +2336,6 @@ body {
   color: #000;
 }
 
-nav.collapse.navbar-collapse.navbar-main-collapse {
-  /* position: absolute;
-  top: 59px;
-  left: 0;
-  right: 0; */
-}
-
 #main-navbar .navbar-collapse,
 #main-navbar .navbar-form {
   border: none;
@@ -2436,7 +2429,6 @@ div.highlight pre {
 
 .scrolled .side-scroll {
   top: 40px;
-  max-height: calc(100vh - 40px);
 }
 
 .scrolled .header #navbarWebMenu {
@@ -3197,12 +3189,11 @@ div.highlight pre {
       .side-scroll {
 				position: -webkit-sticky;
 				position: sticky;
-				top: 50px;
 				overflow: hidden;
 				height: 100%;
         flex-direction: column;
         padding-right: 15px;
-        width: 375px;
+        width: 360px;
       }
 
       .side-scroll:hover{

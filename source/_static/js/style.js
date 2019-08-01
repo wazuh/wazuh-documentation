@@ -128,6 +128,9 @@ $(function(){
 
  });
 
+ var vh = $(window).height() - 40;
+ $('.side-scroll').css({'max-height':vh});
+
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
 	 var headerHeight = 110;
@@ -139,6 +142,8 @@ $(function(){
 		 /* Move searchbar to .menu-sub on scroll down if desktop size */
 		 if ( $(window).outerWidth() >= breakpoint ) {
 			 searcbarToHorizontal();
+			 var vh = $(window).height() - 40;
+			 $('.scrolled .side-scroll').css({'max-height':vh});
 		 }
    } else {
      $('body').removeClass('scrolled');
