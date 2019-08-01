@@ -18,7 +18,6 @@ To turn on Wazuh agent and syscheck debug logging on windows-agent, start Notepa
     .. code-block:: console
 
         windows.debug=2
-        syscheck.debug=2
         rootcheck.sleep=0
         syscheck.sleep=0
 
@@ -119,27 +118,48 @@ the FILE INTEGRITY tab, which would look something like this:
     The default time windows in Kibana is only "Last 15 minutes" which may be too small to encompass your activities in this lab.  Click on
     the time window value and change it to something broader if needed.
 
-Where FIM data is stored
-------------------------
+A look under the hood of syscheck
+---------------------------------
 
-Each time a Wazuh agent runs a periodic syscheck FIM scan, the monitored file attributes are sent back to the Wazuh
-Manager where they are stored in an agent-specific flat file so that the results of the next scan can be compared to
-the results of the previous scan in order to detect changes.  Change history is also stored in the same flat flat.
-A real-time monitoring event on an agent conveys the same kind of information about an individual changed file back
-to the Wazuh Manager.
+What has actually happened in the background? How does Wazuh track file state between scans so it can know when a file has changed and what about that file changed?
 
-On wazuh-manager, use the text viewer of your choice to peruse the FIM history file for windows-agent.  The file
-will be called "/var/ossec/queue/syscheck/(windows-agent) any->syscheck", and if you look at the end of the file
-you should see records relevant to the c:\\apple and c:\\orange lab activities you just went through, looking like
-this:
+On the manager in the /var/ossec/queue/db/ directory we see files like 000.db, 001.db, 002.db, 003.db.  These are SQLite files for the manager and each agent (by ID#), each containing multiple tables related to a system including one related to syscheck.
 
 .. code-block:: console
 
-    #++17:33206:0:0:ccdec1000582555c84420bbddcdd2cf5:4f6e15564d234f8d0f101699076716fed2755d34:Administrators::1516855210:0 !1516855210 c:/apple/gala.txt
-    #++17:33206:0:0:ccdec1000582555c84420bbddcdd2cf5:4f6e15564d234f8d0f101699076716fed2755d34:Administrators::1516855213:0 !1516855213 c:/apple/gala.txt
-    #!+34:33206:0:0:e4d6f3b0b20976413417dbf5c1242e94:d30cd5fa0ef7515d943864a86c2b7baa0861a2c4:Administrators::1516855660:0 !1516855662 c:/apple/gala.txt
-    +++4:33206:0:0:098f6bcd4621d373cade4e832627b4f6:a94a8fe5ccb19ba61c4c0873d391e987982fbbd3:Administrators::1516855730:0 !1516855964 c:/orange/mandarin.txt
-    !!!-1 !1516856176 c:/apple/gala.txt
-    +++34:33206:0:0:e4d6f3b0b20976413417dbf5c1242e94:d30cd5fa0ef7515d943864a86c2b7baa0861a2c4:Administrators::1516855660:0 !1516856177 c:/apple/mcintosh.txt
-    #++8:33206:0:0:fd33e2e8ad3cb1bdd3ea8f5633fcf5c7:56170f5429b35dea081bb659b884b475ca9329a9:Administrators::1516856328:0 !1516856354 c:/orange/navel.txt
-    !++111:33206:0:0:07d8a44e6b114be112d9f72b6fd0482e:3f6229df0cf025b93bb8a8648944c794159958e0:Administrators::1516856438:0 !1516856514 c:/orange/navel.txt
+    # sqlite3 /var/ossec/queue/db/000.db ".tables"
+    ciscat_results  pm_event        sys_netaddr     sys_osinfo      sys_programs
+    fim_entry       scan_info       sys_netiface    sys_ports
+    metadata        sys_hwinfo      sys_netproto    sys_processes
+
+The following command shows the schema of the fim_entry table where the manager stores syscheck scan results for itself and its agents:
+
+.. code-block:: console
+
+    # sqlite3 /var/ossec/queue/db/000.db ".schema fim_entry" | sed 's/,/\n/g;s/(    /(\n    /' 
+    CREATE TABLE fim_entry (
+        file TEXT PRIMARY KEY
+        type TEXT NOT NULL CHECK (type IN ('file'
+     'registry'))
+        date INTEGER NOT NULL DEFAULT (strftime('%s'
+     'now'))
+        changes INTEGER NOT NULL DEFAULT 1
+        size INTEGER
+        perm TEXT
+        uid TEXT
+        gid TEXT
+        md5 TEXT
+        sha1 TEXT
+        uname TEXT
+        gname TEXT
+        mtime INTEGER
+        inode INTEGER
+        sha256 TEXT);
+        
+This file contains syscheck scan results including file hashes and other metadata, plus a count of how many times a given file has been seen to change.
+
+The following command shows the syscheck-monitored files for the windows-agent (ID #006):
+
+.. code-block:: console
+
+    # sqlite3 /var/ossec/queue/db/006.db 'select * from fim_entry where file like "%apple%"';
