@@ -130,7 +130,10 @@ $(function(){
 
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
-   var headerHeight = 100; // Math.round($('#header').height());
+	 var headerHeight = 110;
+	 if($(window).width() < 992){
+		headerHeight = 44;
+	 }
    if (scrollTop > headerHeight ) {
      $('body').addClass('scrolled');
 		 /* Move searchbar to .menu-sub on scroll down if desktop size */
@@ -169,6 +172,7 @@ $(function(){
  	function scrollNavbar(){
 
 		/* Get data of scroll and positions */
+		var delay = 400;
 		var window_height = window.innerHeight;
 		var document_height = $(document).height();
 		var document_scroll = $(window).scrollTop();
@@ -178,20 +182,17 @@ $(function(){
 		nav_height += parseInt($('#navbar-globaltoc aside.help').height() + 20);
 
 		/* Calculate navbar end scroll position */
-		var scroll_real = document_height-window_height;
+		var scroll_real = document_height-window_height-delay;
 		var nav_scroll_real = nav_height-container_nav_height;
-		var percentage = document_scroll/scroll_real;
+		var percentage = (document_scroll-delay)/scroll_real;
 		var percentage_nav = nav_scroll/nav_scroll_real;
 		var nav_scroll_end = (percentage*nav_scroll_real).toFixed();
 
-		if(document_scroll > 500){
+		if(document_scroll >= delay){
 			$('.side-scroll').scrollTop(nav_scroll_end);
-			if(percentage == 0){
-				$('.side-scroll').scrollTop(0);
-			}
 		} else {
 			if(direction == 'top'){
-				$('.side-scroll').scrollTop(nav_scroll_end);
+				$('.side-scroll').scrollTop(0);
 			}
 		}
  
@@ -199,6 +200,14 @@ $(function(){
 
 	$('#navbar-globaltoc').on('scroll', function(e){
 		nav_scroll = $('#navbar-globaltoc').scrollTop();
+	});
+
+	$('.navbar-toggler').click(function(){
+		if($(this).hasClass('collapsed')){
+			$('body').css({'overflow':'hidden'});
+		} else {
+			$('body').css({'overflow':'auto'});
+		}
 	});
 
 	/* Global toc --------------------------------------------------------------------------------------------------*/
