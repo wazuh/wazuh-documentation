@@ -149,7 +149,7 @@ dt {
 }
 
 #header {
-  z-index: 999999;
+  z-index: 9999;
   position: absolute;
   width: 100%;
   background: url(../img/wazuh_bg_head.png), no-repeat center center;
@@ -1764,6 +1764,22 @@ a[data-lightbox] img {
   border: 1px solid #eee;
 }
 
+/* Fix lightbox styles */
+#lightbox .lb-data {
+	position: relative;
+}
+
+#lightbox .lb-data .lb-details {
+   width: 96%;
+}
+
+#lightbox .lb-closeContainer {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+/* Fix lightbox styles end here */
+
 .central-page-area #main-content {
   min-height: calc(105vh);
   margin-top: 90px;
@@ -2617,6 +2633,8 @@ div.highlight pre {
       #main-footer {
         padding-top: 20px;
         padding-bottom: 20px;
+				position: relative;
+				z-index: 1;
       }
 
       .footer-title {
@@ -2792,7 +2810,7 @@ div.highlight pre {
       .header {
         height: 0;
       }
-      
+
       .scrolled .header {
         display: block;
       }

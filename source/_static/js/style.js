@@ -156,7 +156,7 @@ $(function(){
  });
 
  function menuHeight(){
-	 
+
 	if($(window).width() < 992){
 
 		if(!$('body').hasClass('scrolled')){
@@ -178,8 +178,10 @@ $(function(){
 
 		var vh = window.innerHeight-header_h;
 		$('.side-scroll').css({'max-height':vh});
-		
+
 	}
+
+ }
 
 	$(window).on('scroll', function(e){
 
@@ -201,16 +203,14 @@ $(function(){
 			} else {
 				header_h = $('#header').height();
 			}
-			
+
 			var vh = window.innerHeight-header_h;
 			$('.side-scroll').css({'max-height':vh});
 
 		}
-		
+
 	});
 
- }
- 
   $('#navbar-globaltoc').on('mouseenter', function(){
     winScroll = $(document).scrollTop();
  });
@@ -218,7 +218,7 @@ $(function(){
  $('#navbar-globaltoc').on('mouseover', function(){
   $(document).scrollTop(winScroll);
  });
- 
+
 	$('#navbar-globaltoc').bind('mousewheel DOMMouseScroll', function(e) {
 		var scrollTo = null;
 		if (e.type == 'mousewheel') {
@@ -242,9 +242,9 @@ $(function(){
 	var direction = 'bottom';
 
 	scrollNavbar();
-	
+
 	$(window).on('scroll', function(e){
-		
+
 		/* Know the scroll direction */
 		var l_s = $(this).scrollTop();
 		if(l_s > last_scroll){ direction = 'bottom'; } else { direction = 'top'; }
@@ -252,7 +252,7 @@ $(function(){
 
 		/* Set the new scroll of navbar */
 		scrollNavbar();
-		
+
 	});
 
  	function scrollNavbar(){
@@ -281,7 +281,7 @@ $(function(){
 				$('.side-scroll').scrollTop(0);
 			}
 		}
- 
+
 	}
 
 	$('#navbar-globaltoc').on('scroll', function(e){
@@ -641,4 +641,31 @@ $(function(){
     });
 
   }
+
+  /* Lightbox style fix */
+  $('a[data-lightbox]').on('click', function(){
+    var topheight = $('body').hasClass('scrolled') ? 101 : 152;
+    var top_value = $('.side-scroll').offset().top;
+    $('html, body').css('overflow', 'hidden');
+    $('#lightboxOverlay').width('100%');
+    $('.side-scroll').attr('style',$('.side-scroll').attr('style')+'position: relative; top: '+(top_value-topheight)+'px');
+  });
+
+  $('#lightboxOverlay, #lightbox, #lightbox .lb-close').on('click', function(e){
+    $('html, body').css('overflow', '');
+    $('.side-scroll').removeAttr('style');
+    menuHeight();
+  });
+
+  $('#lightbox .lb-details span, #lightbox .lb-dataContainer :not(.lb-close)').on('click', function(e){
+    e.stopPropagation();
+    $('html, body').css('overflow', 'hidden');
+  });
+
+  /* Restore overflow when pressing key 'Esc' */
+  $(document).on('keydown', function(e){
+    if( e.keyCode == 27 ){
+      $('html, body').css('overflow', '');
+    }
+  });
 });
