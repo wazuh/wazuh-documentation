@@ -149,7 +149,8 @@ dt {
 }
 
 #header {
-  z-index: 999999;
+  z-index: 9999;
+  position: absolute;
   width: 100%;
   background: url(../img/wazuh_bg_head.png), no-repeat center center;
   background-size: cover;
@@ -165,6 +166,10 @@ dt {
   z-index: 9;
 	top: 0;
   width: 100%;
+}
+
+.scrolled .header {
+  display: none;
 }
 
 .header > div {
@@ -299,8 +304,8 @@ header .menuweb-bar .menu-item a {
 .scrolled .menu-sub {
   position: fixed;
   top: -50px;
-  -webkit-animation: showMenuStickyMobile 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
-          animation: showMenuStickyMobile 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
+  -webkit-animation: showMenuStickyMobile 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
+          animation: showMenuStickyMobile 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
 }
 
 .no-latest-docs .menu-sub {
@@ -731,7 +736,6 @@ li.toctree-l5 > a {
 
 #navbar-globaltoc {
   visibility: visible;
-  right: -20px;
   overflow-y: scroll;
 }
 
@@ -741,17 +745,18 @@ li.toctree-l5 > a {
 }
 
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
+  top: 90px;
+  right: 0;
   left: 0;
   background-color: #f8f8f8;
   overflow: auto;
-  position: fixed;
+  position: absolute;
   z-index: 2;
 }
 
 #navbar-globaltoc.show {
-  height: calc(100vh - 44px);
+  height: calc(100vh);
   overflow-y: scroll;
-  transition: top .3s;
 }
 
 .no-latest-docs #navbar-globaltoc.show,
@@ -771,7 +776,6 @@ li.toctree-l5 > a {
   top: 44px;
   position: fixed;
   padding-top: 0;
-  transition: top .3s;
 }
 
 #globaltoc .toc-toggle-btn {
@@ -868,7 +872,7 @@ li.toctree-l2 > a {
 
 li.toctree-l3 > a {
   display: block;
-  padding: 0.6em 1em 0.6em 3.3rem;
+  padding: 0.6em 3em 0.6em 3.3rem;
 }
 
 li.toctree-l4 > a {
@@ -1142,7 +1146,7 @@ footer a:focus,
 
 .search_main {
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 0;
   z-index: 4;
 }
@@ -1760,9 +1764,31 @@ a[data-lightbox] img {
   border: 1px solid #eee;
 }
 
+/* Fix lightbox styles */
+#lightbox .lb-data {
+	position: relative;
+}
+
+#lightbox .lb-data .lb-details {
+   width: 96%;
+}
+
+#lightbox .lb-closeContainer {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+/* Fix lightbox styles end here */
+
 .central-page-area #main-content {
+  min-height: calc(105vh);
+  margin-top: 90px;
   margin-bottom: 1.5rem;
 	transition: max-width 0.3s, flex 0.3s;
+}
+
+.scrolled .central-page-area #main-content {
+  margin-top: 47px;
 }
 
 .central-page-area p strong,
@@ -2310,6 +2336,7 @@ body {
   color: #333333;
   line-height: 1.4;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 #page {
@@ -2324,13 +2351,6 @@ body {
 ::selection {
   background: hsla(196, 100%, 50%, .9);
   color: #000;
-}
-
-nav.collapse.navbar-collapse.navbar-main-collapse {
-  /* position: absolute;
-  top: 59px;
-  left: 0;
-  right: 0; */
 }
 
 #main-navbar .navbar-collapse,
@@ -2426,7 +2446,6 @@ div.highlight pre {
 
 .scrolled .side-scroll {
   top: 40px;
-  max-height: calc(100vh - 40px);
 }
 
 .scrolled .header #navbarWebMenu {
@@ -2614,6 +2633,8 @@ div.highlight pre {
       #main-footer {
         padding-top: 20px;
         padding-bottom: 20px;
+				position: relative;
+				z-index: 1;
       }
 
       .footer-title {
@@ -2782,6 +2803,7 @@ div.highlight pre {
 @media (min-width: 992px){
 
       #header {
+        position: relative;
         height: 100px;
       }
 
@@ -2789,12 +2811,17 @@ div.highlight pre {
         height: 0;
       }
 
+      .scrolled .header {
+        display: block;
+      }
+
+
       .scrolled #header {
         top: -44px;
         position: fixed;
         height: 44px;
-        -webkit-animation: showMenuSticky 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
-                animation: showMenuSticky 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 300ms both;
+        -webkit-animation: showMenuSticky 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
+                animation: showMenuSticky 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
       }
 
       .scrolled .central-page-area {
@@ -2816,6 +2843,14 @@ div.highlight pre {
       #navbar-globaltoc.show {
         top: 44px;
         padding-top: 44px;
+      }
+
+      .central-page-area #main-content {
+        margin-top: 0;
+      }
+
+      .scrolled .central-page-area #main-content {
+        margin-top: 0;
       }
 
 			.admonition::before  {
@@ -2865,6 +2900,11 @@ div.highlight pre {
         flex-direction: row;
         display: inline-flex;
         justify-content: space-between;
+      }
+
+      .scrolled .header > .container-fluid {
+        height: 0;
+        padding-top: 0;
       }
 
       .blue-bar {
@@ -3168,12 +3208,11 @@ div.highlight pre {
       .side-scroll {
 				position: -webkit-sticky;
 				position: sticky;
-				top: 50px;
 				overflow: hidden;
 				height: 100%;
         flex-direction: column;
         padding-right: 15px;
-        width: 375px;
+        width: 360px;
       }
 
       .side-scroll:hover{
