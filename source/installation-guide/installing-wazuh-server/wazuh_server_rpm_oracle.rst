@@ -173,6 +173,14 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
       # chkconfig --add filebeat
       # service filebeat start
 
+8. (Optional) Disable the Elastic repository:
+
+  It is recommended that the Elastic repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+    
 Next steps
 ----------
 
