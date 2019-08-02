@@ -326,16 +326,18 @@ $(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
-		if(!li.parents().hasClass('show')){
-			$('.globaltoc li.show').removeClass('show');
-		}
-
-		$('.globaltoc li.initial').removeClass('initial');
 		if( li.hasClass('show')){
 			li.removeClass('show');
 		} else {
+			li.siblings('li').removeClass('show');
 			li.addClass('show');
 		}
+
+		if(!li.parents().hasClass('show')){
+			$('.globaltoc li.show').addClass('show');
+		}
+
+		$('.globaltoc li.initial').removeClass('initial');
 		return false;
    });
 
