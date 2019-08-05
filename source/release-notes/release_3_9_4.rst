@@ -11,18 +11,23 @@ This section shows the most relevant improvements and fixes in version 3.9.4. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.9.4-7.2.0/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.9.4-7.3.0/CHANGELOG.md>`_
 
-Wazuh core
-----------
+Wazuh agent
+-----------
 
 - FIM could apply incorrect options for ``<directories>`` entries if there is another entry for a child directory.
-- Wazuh DB did not remove a database file until it's commited. Now, the database will be closed immediately.
-- Let Remoted clean the incoming buffer for closed connections. This will prevent Remoted from handling invalid connections.
-- Fixed a bug in the agent that could made it truncate its IP address within the control message.
 - Logcollector could remove duplicate ``<localfile>`` stanzas incorrectly.
-- Fix a bug in Analysisd that could potentially make it crash while handling JSON objects.
+- Fixed a bug in the agent that could made it truncate its IP address within the control message.
+- Fixed a handler leaking hazard in the FIM who-data engine on Windows.
+
+Wazuh manager
+-------------
+
+- Fix a bug in Analysisd that could potentially make it crash while handling JSON objects due to a race condition.
+- Fix a bug in Wazuh DB that could make it crash when closing database files due to a double free.
+- Let Remoted clean the incoming buffer for closed connections. This will prevent Remoted from handling invalid connections.
 - Prevent SCA from producing inconsistencies in the database on the manager side when policy IDs are duplicated.
 - Fixed a race condition hazard between Clusterd and Remoted while synchronizing agent-related files.
-- Fixed a handler leaking hazard in the FIM who-data engine on Windows.
+- Wazuh DB did not remove a database file until it's commited. Now, the database will be closed immediately.
 
 Wazuh apps
 ----------
