@@ -11,19 +11,18 @@ This section shows the most relevant improvements and fixes in version 3.9.4. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.9.4-7.2.0/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.9.4-7.3.0/CHANGELOG.md>`_
 
-
 Wazuh core
 ----------
 
-- Fixed bug when applying the parent directory options to FIM alerts.
-- Prevented the manager from blocking when WazuhDB ignores agent deletion requests.
-- Remoted will no longer handle messages from disconnected agents.
-- Fixed a bug that overwrites agent information with certain IPs.
-- Logcollector will allow overwriting the <localfile> blocks indicated in the shared configuration over those indicated in ossec.conf if they have the same <location> value.
-- Analysisd will not break due to a race condition when handling JSON objects.
-- SCA will not generate inconsistencies in the database on the manager side when policy IDs are duplicated.
-- The cluster engine will not have a race condition with Remoted when synchronizing some files.
-- A handler leaking hazard has been fixed in the FIM who-data engine on Windows.
+- FIM could apply incorrect options for ``<directories>`` entries if there is another entry for a child directory.
+- Wazuh DB did not remove a database file until it's commited. Now, the database will be closed immediately.
+- Let Remoted clean the incoming buffer for closed connections. This will prevent Remoted from handling invalid connections.
+- Fixed a bug in the agent that could made it truncate its IP address within the control message.
+- Logcollector could remove duplicate ``<localfile>`` stanzas incorrectly.
+- Fix a bug in Analysisd that could potentially make it crash while handling JSON objects.
+- Prevent SCA from producing inconsistencies in the database on the manager side when policy IDs are duplicated.
+- Fixed a race condition hazard between Clusterd and Remoted while synchronizing agent-related files.
+- Fixed a handler leaking hazard in the FIM who-data engine on Windows.
 
 Wazuh apps
 ----------
