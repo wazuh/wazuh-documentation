@@ -48,3 +48,8 @@ Wazuh apps
 - Now duplicated visualization toast errors are handled.
 - Fixed not properly updated breadcrumb in ruleset section.
 - Implicit filters can't be destroyed now.
+- Fixed windows agent dashboard that didn't show failure logon access.
+- Scrollbar in file viewers have been fixed on Firefox.
+- Fixed agent search filters lost when refreshing.
+- Number of agents is now properly updated.
+- Alerts of level 12 are now displayed on Security Events table.
