@@ -92,7 +92,7 @@ The other option store the logs in a plaintext file and monitor that file with W
     <location>/custom/file/path</location>
   </localfile>
 
-- ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
+- ``<log_format>syslog</log_format>`` indicates the source log format, in this case, syslog format.
 - ``<location>/custom/file/path</location>`` indicates where we have stored the syslog logs.
 
 Analysis
