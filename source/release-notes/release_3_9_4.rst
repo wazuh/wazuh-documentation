@@ -11,25 +11,25 @@ This section shows the most relevant improvements and fixes in version 3.9.4. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.9.4-7.2.0/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.9.4-7.3.0/CHANGELOG.md>`_
 
-Wazuh agent
+Wazuh Agent
 -----------
 
 - FIM could apply incorrect options for ``<directories>`` entries if there is another entry for a child directory.
 - Logcollector could remove duplicate ``<localfile>`` stanzas incorrectly.
-- Fixed a bug in the agent that could made it truncate its IP address within the control message.
+- Fixed a bug in the agent that could make it truncate its IP address within the control message.
 - Fixed a handler leaking hazard in the FIM who-data engine on Windows.
 
-Wazuh manager
+Wazuh Manager
 -------------
 
-- Fix a bug in Analysisd that could potentially make it crash while handling JSON objects due to a race condition.
-- Fix a bug in Wazuh DB that could make it crash when closing database files due to a double free.
+- Fixed a bug in Analysisd that could potentially make it crash while handling JSON objects due to a race condition.
+- Fixed a bug in Wazuh DB that could make it crash when closing database files due to a double free.
 - Let Remoted clean the incoming buffer for closed connections. This will prevent Remoted from handling invalid connections.
 - Prevent SCA from producing inconsistencies in the database on the manager side when policy IDs are duplicated.
 - Fixed a race condition hazard between Clusterd and Remoted while synchronizing agent-related files.
-- Wazuh DB did not remove a database file until it's commited. Now, the database will be closed immediately.
+- Wazuh DB did not remove a database file until it's committed. Now, the database will be closed immediately.
 
-Wazuh apps
+Wazuh Apps
 ----------
 
 - Allowed filtering by clicking a column in rules/decoders tables.
@@ -39,8 +39,8 @@ Wazuh apps
 - Now path column in rules and decoders is shown.
 - Removed SCA overview dashboard.
 - Disabled last custom column removal.
-- Agents messages across sections have been unificated.
-- Fixed check storeded APIs.
+- Agents messages across sections have been unified.
+- Fixed check stored APIs.
 - Improved wz-table performance.
 - Fixed inconsistent data between visualizations and tables in Overview Security Events.
 - Timezone applied in cluster status.
@@ -49,7 +49,7 @@ Wazuh apps
 - Fixed not properly updated breadcrumb in ruleset section.
 - Implicit filters can't be destroyed now.
 - Fixed windows agent dashboard that didn't show failure logon access.
-- Scrollbar in file viewers have been fixed on Firefox.
+- Scrollbars in file viewers have been fixed on Firefox.
 - Fixed agent search filters lost when refreshing.
 - Number of agents is now properly updated.
-- Alerts of level 12 are now displayed on Security Events table.
+- Alerts of level 12 are now displayed on the Security Events table.
