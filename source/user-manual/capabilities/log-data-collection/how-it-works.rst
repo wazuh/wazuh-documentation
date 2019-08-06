@@ -63,15 +63,17 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
 Remote syslog
 ^^^^^^^^^^^^^
 
-On other devices, like firewalls, for instance, the log analysis component can be configured to receive log events through syslog.
+In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. We have available two methods:
 
-- Sample configuration:
+One option is for Wazuh to receive syslog logs by a specified port:
 
   .. code-block:: xml
 
     <ossec_config>
       <remote>
         <connection>syslog</connection>
+        <port>513</port>
+        <protocol>udp</protocol>
         <allowed-ips>192.168.2.0/24</allowed-ips>
       </remote>
     <ossec_config>
@@ -79,15 +81,7 @@ On other devices, like firewalls, for instance, the log analysis component can b
 
 ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
 
-Log example:
-
-::
-
-  2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
-  1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
-  [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
-
-If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
+The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
 
 .. code-block:: xml
 
