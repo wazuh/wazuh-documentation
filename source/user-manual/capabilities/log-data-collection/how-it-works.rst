@@ -63,9 +63,9 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
 Remote syslog
 ^^^^^^^^^^^^^
 
-In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. We have available two methods:
+In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that we have two methods available:
 
-One option is for Wazuh to receive syslog logs by a specified port:
+One option is for Wazuh to receive syslog logs by a custom port:
 
   .. code-block:: xml
 
@@ -78,10 +78,12 @@ One option is for Wazuh to receive syslog logs by a specified port:
       </remote>
     <ossec_config>
 
+- ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
+- ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
+- ``<protocol>udp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
+- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP from which syslog messages will be accepted.
 
-``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
-
-The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
+The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
 
 .. code-block:: xml
 
@@ -90,6 +92,8 @@ The other option store the logs in a plaintext file and monitor that file with W
     <location>/custom/file/path</location>
   </localfile>
 
+- ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
+- ``<location>/custom/file/path</location>`` indicates where we have stored the syslog logs.
 
 Analysis
 --------
