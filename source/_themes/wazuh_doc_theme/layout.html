@@ -119,31 +119,42 @@
   {% else %}
   <div id="page">
   {% endif %}
+
     {% include "header.html" %} {%- block header %}{% endblock header %}
+
     <section  class="container-fluid central-page-area">
       <div class="row">
-        <nav class="full-toctree-nav navbar-expand-lg navbar-light order-0">
+
+        <div id="navbar" class="full-toctree-nav navbar-expand-lg navbar-light order-0">
+
           <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
             {% include "searchbar.html" %}
           </div> <!-- // #search-lg -->
-          <div class="side-scroll collapse navbar-collapse hidden" id="navbar-globaltoc">
-            <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
-              {% block menu %}
-              {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
-              {% if toctree %}
-              {{ toctree }}
-              {% endif %}
-              {% endblock %}
+
+          <div id="navbar-globaltoc" class="side-scroll collapse navbar-collapse hidden">
+            <div id="globaltoc" class="globaltoc" role="navigation" aria-label="main navigation">
+
+              <nav>
+                {% block menu %}
+                {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
+                {% if toctree %}
+                {{ toctree }}
+                {% endif %}
+                {% endblock %}
+              </nav>
+
+              <aside class="help col-12">
+                <a class="btn-help" title="Open source community" href="https://wazuh.com/community/">Open source community</a>
+                <a class="btn-help" title="Professional services" href="https://wazuh.com/professional-services/">Professional services</a>
+              </aside>
+
             </div>
-            <aside class="help col-12">
-              <a class="btn-help" title="Open source community" href="https://wazuh.com/community/">Open source community</a>
-              <a class="btn-help" title="Professional services" href="https://wazuh.com/professional-services/">Professional services</a>
-            </aside>
           </div>
 
-        </nav>
+        </div>
 
-        <div id="main-content" class="col-12 order-1">
+        <div id="main-content" class="order-1">
+
           {% if pagename != 'index' and pagename != 'not_found' %}
           <div class="edit-repo-wrapper">
             {% include "editrepo.html" %}
@@ -161,11 +172,15 @@
           {% if pagename != 'index' %}
             {% include "navigation.html" %}
           {% endif %}
+
         </div>
+
       </div>
 
     </section>
+
     {% include "footer.html" %} {%- block footer %} {% endblock %}
+    
   </div> <!-- // #page -->
   {# Footer's scripts #}
   {%- block footer_js %}
