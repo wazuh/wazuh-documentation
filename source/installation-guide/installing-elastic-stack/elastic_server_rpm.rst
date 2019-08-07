@@ -56,6 +56,12 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # chkconfig --add elasticsearch
     # service elasticsearch start
 
+3. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E setup.template.json.enabled=false
+
 .. _install_kibana_app_rpm:
 
 Kibana
