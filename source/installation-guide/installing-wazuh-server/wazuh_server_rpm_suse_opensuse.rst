@@ -96,7 +96,7 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
 .. _wazuh_server_rpm_suse_opensuse_filebeat:
 
@@ -112,7 +112,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
   .. code-block:: console
 
     # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-    # cat > /etc/yum.repos.d/elastic.repo << EOF
+    # cat > /etc/zypp/repos.d/elastic.repo << EOF
     [elasticsearch-7.x]
     name=Elasticsearch repository for 7.x packages
     baseurl=https://artifacts.elastic.co/packages/7.x/yum
@@ -177,6 +177,14 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
       # chkconfig --add filebeat
       # service filebeat start
+      
+8. (Optional) Disable the Elastic repository:
+
+  It is recommended that the Elastic repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
 
 Next steps
 ----------
