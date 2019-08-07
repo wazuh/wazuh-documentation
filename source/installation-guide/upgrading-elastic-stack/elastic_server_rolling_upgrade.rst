@@ -35,7 +35,7 @@ Prepare the Elastic Stack
       autorefresh=1
       type=rpm-md
       EOF
-  
+
   * Debian/Ubuntu:
 
     .. code-block:: console
@@ -68,7 +68,7 @@ Upgrade Elasticsearch
 3. Shut down a single node.
 
   .. code-block:: console
-    
+
     # systemctl stop elasticsearch
 
 4. Upgrade the node you shut down.
@@ -76,14 +76,14 @@ Upgrade Elasticsearch
   * CentOS/RHEL/Fedora:
 
     .. code-block:: console
-      
-      # yum install elasticsearch-7.2.0
+
+      # yum install elasticsearch-7.3.0
 
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.2.0
+      # apt-get install elasticsearch=7.3.0
       # systemctl restart elasticsearch
 
 5. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
@@ -118,7 +118,7 @@ Upgrade Elasticsearch
     }
     '
 
-9. Before upgrading the next node, wait for the cluster to finish shard allocation. 
+9. Before upgrading the next node, wait for the cluster to finish shard allocation.
 
   .. code-block:: bash
 
@@ -135,7 +135,7 @@ Due to this change, previous alerts won't be visible in Wazuh indices, an update
 
 Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
 
-Here is an example of how to run the request using the index *wazuh-alerts-3.x-2019.05.16*. 
+Here is an example of how to run the request using the index *wazuh-alerts-3.x-2019.05.16*.
 
 .. code-block:: bash
 
@@ -167,13 +167,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-7.2.0
-  
+      # yum install filebeat-7.3.0
+
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.2.0  
+      # apt-get install filebeat=7.3.0
 
 2. Update the configuration file.
 
@@ -225,19 +225,19 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-7.2.0
-  
+      # yum install kibana-7.3.0
+
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.2.0  
+      # apt-get install kibana=7.3.0
 
 4. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.4_7.2.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.4_7.3.0.zip
 
 5. Restart Kibana.
 
@@ -245,4 +245,3 @@ Upgrade Kibana
 
     # systemctl daemon-reload
     # systemctl restart kibana
-

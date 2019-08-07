@@ -9,7 +9,7 @@ Logstash is an open source data collection engine with real-time pipelining capa
 from disparate sources and normalize the data into destinations of your choice. Cleanse and democratize all your data for diverse
 advanced downstream analytics and visualization use cases.
 
-This guide describes how to configure Logstash for receiving events from one or more Filebeat instances, parse the events, and then send 
+This guide describes how to configure Logstash for receiving events from one or more Filebeat instances, parse the events, and then send
 them to Elasticsearch.
 
 1. Install Java 8.
@@ -60,7 +60,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # yum install logstash-7.2.0
+      # yum install logstash-7.3.0
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -68,7 +68,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # apt-get install logstash=1:7.2.0-1
+      # apt-get install logstash=1:7.3.0-1
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -113,7 +113,7 @@ them to Elasticsearch.
   .. code-block:: console
 
     # filebeat test output
-  
+
   Example output:
 
   .. code-block:: console

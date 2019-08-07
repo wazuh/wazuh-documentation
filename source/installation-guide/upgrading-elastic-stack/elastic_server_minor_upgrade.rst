@@ -32,7 +32,7 @@ Prepare the Elastic Stack
       autorefresh=1
       type=rpm-md
       EOF
-  
+
   * For Debian/Ubuntu:
 
     .. code-block:: console
@@ -65,7 +65,7 @@ Upgrade Elasticsearch
 3. Shut down a single node.
 
   .. code-block:: console
-    
+
     # systemctl stop elasticsearch
 
 4. Upgrade the node you shut down.
@@ -73,16 +73,16 @@ Upgrade Elasticsearch
   * For CentOS/RHEL/Fedora:
 
     .. code-block:: console
-      
-      # yum install elasticsearch-7.2.0
+
+      # yum install elasticsearch-7.3.0
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.2.0
+      # apt-get install elasticsearch=7.3.0
       # systemctl restart elasticsearch
-      
+
 5. Restart the service.
 
   .. code-block:: console
@@ -108,7 +108,7 @@ Upgrade Elasticsearch
     }
     '
 
-8. Before upgrading the next node, wait for the cluster to finish shard allocation. 
+8. Before upgrading the next node, wait for the cluster to finish shard allocation.
 
   .. code-block:: bash
 
@@ -125,13 +125,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-7.2.0
-  
+      # yum install filebeat-7.3.0
+
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.2.0  
+      # apt-get install filebeat=7.3.0
 
 2. Update the configuration file.
 
@@ -182,19 +182,19 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-7.2.0
-  
+      # yum install kibana-7.3.0
+
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.2.0  
+      # apt-get install kibana=7.3.0
 
 3. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.4_7.2.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.4_7.3.0.zip
 
 4. Restart Kibana.
 
@@ -202,4 +202,3 @@ Upgrade Kibana
 
     # systemctl daemon-reload
     # systemctl restart kibana
-
