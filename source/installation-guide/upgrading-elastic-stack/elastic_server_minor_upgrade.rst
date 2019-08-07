@@ -160,13 +160,7 @@ Upgrade Filebeat
 
     output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-6. Just in case you are planning to use third party modules for Filebeat, please insert the Filebeat template manually. A connection to Elasticsearch is required.
-
-  .. code-block:: console
-
-    # filebeat setup --index-management -E setup.template.json.enabled=false
-
-7. Restart Filebeat.
+6. Restart Filebeat.
 
   .. code-block:: console
 
