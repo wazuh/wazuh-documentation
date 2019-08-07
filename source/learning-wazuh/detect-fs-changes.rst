@@ -154,7 +154,9 @@ The following command shows the schema of the fim_entry table where the manager 
         gname TEXT
         mtime INTEGER
         inode INTEGER
-        sha256 TEXT);
+        sha256 TEXT
+        attributes INTEGER DEFAULT 0
+        symbolic_path TEXT);
         
 This file contains syscheck scan results including file hashes and other metadata, plus a count of how many times a given file has been seen to change.
 
