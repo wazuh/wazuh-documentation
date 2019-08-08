@@ -14,20 +14,20 @@ This section shows the most relevant improvements and fixes in version 3.9.4. Mo
 Wazuh Agent
 -----------
 
-- FIM could apply incorrect options for ``<directories>`` entries if there is another entry for a child directory.
-- Logcollector could remove duplicate ``<localfile>`` stanzas incorrectly.
+- Fixed a bug in FIM that made it apply a wrong configuration. This occurred when defining different options for nested directories.
+- Fixed a bug in Logcollector that made it apply a wrong configuration. This happened when defining multiple stanzas for the same file with different options.
 - Fixed a bug in the agent that could make it truncate its IP address within the control message.
-- Fixed a handler leaking hazard in the FIM who-data engine on Windows.
+- Fixed a bug in the Windows agent that produced a resource leak when monitoring directories in who-data mode.
 
 Wazuh Manager
 -------------
 
 - Fixed a bug in Analysisd that could potentially make it crash while handling JSON objects due to a race condition.
 - Fixed a bug in Wazuh DB that could make it crash when closing database files due to a double free.
-- Let Remoted clean the incoming buffer for closed connections. This will prevent Remoted from handling invalid connections.
+- Fixed a bug in Remoted that made it send data to an agent that has just disconnected in TCP mode.
 - Prevent SCA from producing inconsistencies in the database on the manager side when policy IDs are duplicated.
 - Fixed a race condition hazard between Clusterd and Remoted while synchronizing agent-related files.
-- Wazuh DB did not remove a database file until it's committed. Now, the database will be closed immediately.
+- Wazuh DB did not remove a database file until was committed. Now, the database will be closed immediately.
 
 Wazuh Apps
 ----------
