@@ -25,11 +25,11 @@ b) Debian/Ubuntu:
   .. code-block:: console
 
     # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
-    
+
 c) OpenSUSE:
 
   .. code-block:: console
-  
+
     # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
 Upgrade the Wazuh manager and API
@@ -45,9 +45,9 @@ b) Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-manager wazuh-api
-    
+
 c) OpenSUSE:
 
 .. code-block:: console
@@ -70,9 +70,9 @@ b) Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-agent
-    
+
 c) OpenSUSE:
 
   .. code-block:: console
@@ -96,7 +96,7 @@ d) Windows:
 
   .. code-block:: console
 
-    # wazuh-agent-3.9.4-1.msi /q
+    # wazuh-agent-3.9.5-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -120,7 +120,7 @@ b) Debian/Ubuntu:
 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
     # apt-get update
-    
+
 c) OpenSUSE:
 
   .. code-block:: console

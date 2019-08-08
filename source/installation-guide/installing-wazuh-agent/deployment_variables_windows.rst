@@ -5,7 +5,7 @@
 Deployment variables for Windows
 ================================
 
-For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning. 
+For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning.
 
 Below you can find a table describing the variables used by Wazuh installers on Windows, and a few examples on how to use them.
 
@@ -50,19 +50,19 @@ Below there are some examples to install and register a Windows agent.
 
 Registration with password::
 
-    wazuh-agent-3.9.4-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" PASSWORD="TopSecret" AGENT_NAME="W2012"
+    wazuh-agent-3.9.5-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" PASSWORD="TopSecret" AGENT_NAME="W2012"
 
 Registration with password and assigning a group::
 
-    wazuh-agent-3.9.4-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" PASSWORD="TopSecret" GROUP="my-group"
+    wazuh-agent-3.9.5-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" PASSWORD="TopSecret" GROUP="my-group"
 
 Registration with relative path to CA. It will be searched at your `APPLICATIONFOLDER` folder::
 
-    wazuh-agent-3.9.4-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" AGENT_NAME="W2019" CERTIFICATE="rootCA.pem"
+    wazuh-agent-3.9.5-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" AGENT_NAME="W2019" CERTIFICATE="rootCA.pem"
 
 Absolute paths to CA, certificate or key that contain spaces can be written as shown below::
 
-    wazuh-agent-3.9.4-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" KEY="C:\Progra~2\sslagent.key" PEM="C:\Progra~2\sslagent.cert"
+    wazuh-agent-3.9.5-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" KEY="C:\Progra~2\sslagent.key" PEM="C:\Progra~2\sslagent.cert"
 
 The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
 
@@ -71,7 +71,7 @@ The number "2" means that the file will be searched at the second occurrence of 
 
 Registration with protocol::
 
-    wazuh-agent-3.9.4-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" AGENT_NAME="W2016" PROTOCOL="TCP"
+    wazuh-agent-3.9.5-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" AGENT_NAME="W2016" PROTOCOL="TCP"
 
 .. warning::
     In Windows versions older than Windows Server 2008 or Windows 7, it's necessary to run the ``ossec-authd`` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.
