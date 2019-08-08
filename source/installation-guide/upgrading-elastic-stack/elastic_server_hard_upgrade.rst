@@ -40,7 +40,7 @@ Upgrade Elasticsearch
 3. Shut down a single node.
 
   .. code-block:: console
-    
+
     # systemctl stop elasticsearch
 
 4. Upgrade the node you shut down.
@@ -48,14 +48,14 @@ Upgrade Elasticsearch
   * For CentOS/RHEL/Fedora:
 
     .. code-block:: console
-      
-      # yum install elasticsearch-6.8.1
+
+      # yum install elasticsearch-6.8.2
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=6.8.1
+      # apt-get install elasticsearch=6.8.2
       # systemctl restart elasticsearch
 
 5. Restart the service.
@@ -83,7 +83,7 @@ Upgrade Elasticsearch
     }
     '
 
-8. Before upgrading the next node, wait for the cluster to finish shard allocation. 
+8. Before upgrading the next node, wait for the cluster to finish shard allocation.
 
   .. code-block:: bash
 
@@ -94,7 +94,7 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.4/extensions/elasticsearch/6.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/6.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
 ^^^^^^^^^^^^^^^^
@@ -105,13 +105,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.8.1
+    # yum install logstash-6.8.2
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.8.1-1
+    # apt-get install logstash=1:6.8.2-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -120,7 +120,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.4/extensions/logstash/6.x/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/logstash/6.x/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -128,7 +128,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.4/extensions/logstash/6.x/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/logstash/6.x/01-wazuh-remote.conf
 
 3. Start the Logstash service:
 
@@ -146,20 +146,20 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.8.1
-  
+      # yum install filebeat-6.8.2
+
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.8.1
+      # apt-get install filebeat=6.8.2
 
 2. Update the configuration file.
 
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.4/extensions/filebeat/6.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/6.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 3. Restart Filebeat.
@@ -181,13 +181,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.8.1
+    # yum install kibana-6.8.2
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.8.1
+    # apt-get install kibana=6.8.2
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -209,7 +209,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.4_6.8.1.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_6.8.2.zip
 
   .. warning::
 
