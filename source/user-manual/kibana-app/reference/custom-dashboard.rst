@@ -37,9 +37,8 @@ Next step will be selecting the index that will be used as data source.
 We can work with any index that we created previously, but generally, we
 will be working with **wazuh-alerts-3.x-\***.
 
-.. thumbnail:: ../../../images/kibana-app/custom-dashboard/choose-a-source.png
+.. image:: ../../../images/kibana-app/custom-dashboard/choose-a-source.png
    :align: center
-   :width: 100%
 
 At this point, a graph will be generated. You can select a lapse of time
 to display the information related to that period. Click on the
