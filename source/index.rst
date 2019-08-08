@@ -74,6 +74,7 @@ Available documentation
    getting-started/index
    installation-guide/index
    user-manual/index
+   faq/index
    development/index
    docker/index
    deploying-with-kubernetes/index
