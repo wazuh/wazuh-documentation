@@ -1496,7 +1496,7 @@ footer .contact-info .fa-paper-plane-o {
 	background-color: #0094ce;
 }
 
-#page.page-404 #main-content {
+#page.page-404 #main-content #rst-content {
   position: relative;
   background-image: url('../img/wazuh_404_bg_xs.png');
   background-repeat: no-repeat;
@@ -1524,7 +1524,7 @@ footer .contact-info .fa-paper-plane-o {
 	border: none;
 }
 
-#page.page-404 #main-content #page-not-found a:not(#header-defaultlink) {
+#page.page-404 #main-content #page-not-found a:not(.headerlink) {
   border-radius: 5px;
   font-size: 1rem;
   font-family: 'Montserrat', sans-serif;
@@ -1848,11 +1848,16 @@ a[data-lightbox] img {
 }
 /* Fix lightbox styles end here */
 
-.central-page-area #main-content {
+.central-page-area #main-content #rst-content {
   min-height: calc(105vh);
-  margin-bottom: 1.5rem;
   padding: 0 15px;
 	transition: max-width 0.3s, flex 0.3s;
+}
+
+.central-page-area #main-content footer {
+  background-color: #f4f4f4;
+  padding: 15px;
+  color: #333;
 }
 
 .central-page-area p strong,
@@ -2563,7 +2568,7 @@ div.highlight pre {
     margin: 1.5em 0;
   }
 
-	#page.page-404 #main-content {
+	#page.page-404 #main-content #rst-content {
     min-height: 500px;
 		padding-left: 2rem;
 	}
@@ -2702,7 +2707,7 @@ div.highlight pre {
         background-color: #00a9e5;
       }
 
-      #page.page-404 #main-content {
+      #page.page-404 #main-content #rst-content {
         background-image: url('../img/wazuh_404_bg_desktop.png');
         height: 100%;
         min-height: 600px;
@@ -2888,6 +2893,10 @@ div.highlight pre {
 
       .central-page-area #main-content {
         margin-top: 0;
+      }
+
+      .central-page-area #main-content footer {
+        padding: 30px 45px;
       }
 
 			.admonition::before  {
@@ -3125,7 +3134,7 @@ div.highlight pre {
 
 			#main-content {
         width: calc(100% - 350px);
-        min-height: 100vh;
+        min-height: calc(100vh - 100px);
         margin-top: 90px;
         margin-left: 360px;
         padding: 0;
@@ -3135,7 +3144,7 @@ div.highlight pre {
         padding-right: 30px;
       }
 
-      #main-content.order-1 {
+      #main-content.order-1 #rst-content {
         padding-left: 45px;
       }
 
@@ -3285,11 +3294,11 @@ div.highlight pre {
             padding: 0 30px;
           }
 
-          #main-content {
+          #main-content #rst-content {
             padding-left: 30px;
           }
 
-					#main-content.order-1 {
+					#main-content.order-1 #rst-content {
 						padding-right: 30px;
 					}
 
@@ -3311,14 +3320,14 @@ div.highlight pre {
             display: inline-block;
           }
 
-					#page.page-404 #main-content {
+					#page.page-404 #main-content #rst-content {
 						min-height: 680px;
 					}
 }
 
 @media (min-width: 1440px) {
 
-	#page.page-404 #main-content {
+	#page.page-404 #main-content #rst-content {
 		min-height: 800px;
 	}
 
@@ -3338,7 +3347,7 @@ div.highlight pre {
 }
 
 @media (min-width: 1921px) {
-  #page.page-404 #main-content {
+  #page.page-404 #main-content #rst-content {
 		background-image: url('../img/wazuh_404_bg_4k.png');
     background-position-y: top;
 		min-height: 900px;
