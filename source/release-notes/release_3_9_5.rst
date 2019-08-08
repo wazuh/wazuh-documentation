@@ -16,3 +16,8 @@ Wazuh Manager
 
 - Fixed a bug in the Framework that prevented Cluster and API from handling the file *client.keys* if it's mounted as a volume on Docker.
 - Fixed a bug in Analysisd that printed the millisecond part of the alerts' timestamp without zero-padding. That prevented Elasticsearch 7 from indexing those alerts.
+
+Wazuh Kibana app
+----------------
+
+- Fixed a bug present in Kibana v7.3.0, affecting Firefox browser, which creates an endless loop if two or more query filters are added.
