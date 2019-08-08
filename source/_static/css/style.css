@@ -3097,7 +3097,7 @@ div.highlight pre {
 
       #header-default .version-zone {
         padding: 8px 15px;
-        margin-top: -12px;
+        /* margin-top: -12px; */
         display: -ms-flex;
         display: flex;
         -ms-align-items: center;

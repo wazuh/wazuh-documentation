@@ -5,16 +5,19 @@ $(function(){
       form_control,
       querystr = '',
 			loc = location.hash;
+	/* var mainElement = $('.central-page-area'),
+			tocWrapperElement = $('nav.full-toctree-nav'),
+			gTocElement = $('nav.full-toctree-nav .globaltoc'),
+			footerElement = $('#main-footer'); */
   var mainElement = $('.central-page-area'),
       tocWrapperElement = $('nav.full-toctree-nav'),
-			gTocElement = $('nav.full-toctree-nav .globaltoc'),
-      footerElement = $('#main-footer');
+			gTocElement = $('nav.full-toctree-nav .globaltoc');
   var winScroll = 0,
       gTocScroll = 0,
       pageHeight = $('body').height(),
       windowHeight = $(window).height(),
       mainTop = mainElement.offset().top,
-      mainBottom = footerElement.offset().top
+      /* mainBottom = footerElement.offset().top */
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
   var breakpoint = 992,
@@ -152,7 +155,7 @@ $(function(){
 	var document_scroll = $(window).scrollTop();
 	var container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 	var nav_height = parseInt($('#globaltoc').outerHeight());
-	var footer_height = parseInt($('#main-footer').outerHeight());
+	/* var footer_height = parseInt($('#main-footer').outerHeight()); */
 	var page_hover = 'document';
 
 	heightNavbar();
@@ -163,7 +166,8 @@ $(function(){
 		page_hover = 'nav';
 	});
 
-	$('#header, #main-content, #main-footer').on('mousemove', function(e){
+	/* $('#header, #main-content, #main-footer').on('mousemove', function(e){ */
+	$('#header, #main-content').on('mousemove', function(e){
 		page_hover = 'document';
 	});
 
@@ -174,6 +178,9 @@ $(function(){
 		document_scroll = $(window).scrollTop();
 		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 		nav_height = parseInt($('#globaltoc').outerHeight());
+		if ($('body').hasClass('no-latest-docs')) {
+			notice_height = parseInt($('.no-latest-notice').outerHeight());
+		}
 
 		if ($(window).width() >= 992) {
 			$('html').css({'overflow-y':'auto'});
@@ -191,6 +198,17 @@ $(function(){
 		document_scroll = $(window).scrollTop();
 		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 		nav_height = parseInt($('#globaltoc').outerHeight());
+
+		/* console.log('navbar_top: '+ navbar_top);
+		console.log('notice_height: '+ notice_height);
+		console.log('delay: '+ delay);
+		console.log('page_hover: '+ page_hover);
+		console.log('window_height: '+ window_height);
+		console.log('document_height: '+ document_height);
+		console.log('document_scroll: '+ document_scroll);
+		console.log('container_nav_height: '+ container_nav_height);
+		console.log('nav_height: '+ nav_height);
+		console.log('__________________________'); */
 
 		/* Update height of navbar */
 		heightNavbar();
@@ -213,18 +231,13 @@ $(function(){
 		}
 	});
 
-	function heightNavbar() { //  class="no-latest-docs"
-
-		scroll_real_bottom = document_height-window_height-footer_height;
+	function heightNavbar() {
 
 		if ($(window).width() >= 992) {
 
 			if (document_scroll <= navbar_top) {
 				$('#navbar').css({'padding-top':(notice_height+navbar_top-document_scroll)+'px'});
 				$('#navbar-globaltoc').css({'height':'calc(100vh - 152px - '+ notice_height +'px + '+document_scroll+'px)'});
-			} else if (document_scroll >= scroll_real_bottom) {
-				$('#navbar').css({'padding-top':notice_height});
-				$('#navbar-globaltoc').css({'height':'calc(100vh - 152px - '+ notice_height +'px + '+navbar_top+'px - '+(document_scroll-scroll_real_bottom)+'px)'});
 			} else {
 				$('#navbar').css({'padding-top':notice_height});
 				$('#navbar-globaltoc').css({'height':'calc(100vh - 152px - '+ notice_height +'px + '+navbar_top+'px)'});
@@ -248,11 +261,20 @@ $(function(){
 	function scrollNavbar() {
 
 		scroll_real = document_height-window_height-delay;
+		if(scroll_real < 0){
+			scroll_real += delay;
+			delay = 0;
+		}
 		nav_scroll_real = nav_height-container_nav_height;
 		percentage = ((document_scroll-delay)/scroll_real).toFixed(3);
 		nav_scroll_end = (percentage*nav_scroll_real).toFixed();
 		if (percentage == 0) { nav_scroll_end = 0; }
 		if (percentage == 1) { nav_scroll_end += 20; }
+
+		/* console.log('scroll_real: '+ scroll_real);
+		console.log('nav_scroll_real: '+ nav_scroll_real);
+		console.log('percentage: '+ percentage);
+		console.log('=========================='); */
 
 		if (nav_scroll_real >= 0) {
 			$('#navbar-globaltoc').scrollTop(nav_scroll_end);
