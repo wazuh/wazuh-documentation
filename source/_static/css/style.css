@@ -1496,8 +1496,14 @@ footer .contact-info .fa-paper-plane-o {
 	background-color: #0094ce;
 }
 
+#page.page-404 #main-content {
+  width: 100%;
+}
+
 #page.page-404 #main-content #rst-content {
   position: relative;
+  width: 100%;
+  height: calc(100vh - 149px);
   background-image: url('../img/wazuh_404_bg_xs.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -2569,7 +2575,6 @@ div.highlight pre {
   }
 
 	#page.page-404 #main-content #rst-content {
-    min-height: 500px;
 		padding-left: 2rem;
 	}
 }
@@ -2709,8 +2714,6 @@ div.highlight pre {
 
       #page.page-404 #main-content #rst-content {
         background-image: url('../img/wazuh_404_bg_desktop.png');
-        height: 100%;
-        min-height: 600px;
       }
 
 			#page.page-404 #main-content h1 {
@@ -3134,7 +3137,7 @@ div.highlight pre {
 
 			#main-content {
         width: calc(100% - 350px);
-        min-height: calc(100vh - 100px);
+        min-height: 100vh;
         margin-top: 90px;
         margin-left: 360px;
         padding: 0;
@@ -3241,6 +3244,14 @@ div.highlight pre {
       #main-footer {
         z-index: 4;
       }
+
+      #page.page-404 #main-content {
+        min-height: calc(100vh - 180px);
+      }
+
+      #page.page-404 #main-content #rst-content {
+        height: 100%;
+      }
 }
 
 @media (min-width: 1200px) {
@@ -3319,17 +3330,9 @@ div.highlight pre {
           span.long-text-btn {
             display: inline-block;
           }
-
-					#page.page-404 #main-content #rst-content {
-						min-height: 680px;
-					}
 }
 
 @media (min-width: 1440px) {
-
-	#page.page-404 #main-content #rst-content {
-		min-height: 800px;
-	}
 
 	#capabilities .left .topic .topic-title {
 		font-size: 1.1rem;
@@ -3350,8 +3353,6 @@ div.highlight pre {
   #page.page-404 #main-content #rst-content {
 		background-image: url('../img/wazuh_404_bg_4k.png');
     background-position-y: top;
-		min-height: 900px;
-    max-height: 100%;
    }
 }
 
