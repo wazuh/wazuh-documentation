@@ -164,7 +164,7 @@ $(function(){
 	scrollNavbar();
 	headerSticky();
 
-	$('#navbar-globaltoc').on('mousemove', function(e){
+	$('#navbar').on('mousemove', function(e){
 		page_hover = 'nav';
 	});
 
@@ -182,7 +182,7 @@ $(function(){
 		}
 	});
 
-	$('#navbar-globaltoc a').focus(function(){
+	$('#navbar a').focus(function(){
 		navbar_click = true;
 	});
 
@@ -210,7 +210,7 @@ $(function(){
 		
 	});
 
-	$('#navbar-globaltoc').on('scroll',function(e) {
+	$('#navbar').on('scroll',function(e) {
 		page_focus = 'nav';
 	});
 
