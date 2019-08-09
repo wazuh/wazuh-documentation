@@ -210,7 +210,7 @@ $(function(){
 		
 	});
 
-	$('#navbar').on('scroll',function(e) {
+	$('#navbar-globaltoc').on('scroll',function(e) {
 		page_focus = 'nav';
 	});
 
