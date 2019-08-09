@@ -155,8 +155,10 @@ $(function(){
 	var document_scroll = $(window).scrollTop();
 	var container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 	var nav_height = parseInt($('#globaltoc').outerHeight());
-	/* var footer_height = parseInt($('#main-footer').outerHeight()); */
+	var page_focus = 'document';
 	var page_hover = 'document';
+	var page_mouse_wheel = false;
+	var navbar_click = false;
 
 	heightNavbar();
 	scrollNavbar();
@@ -166,9 +168,26 @@ $(function(){
 		page_hover = 'nav';
 	});
 
-	/* $('#header, #main-content, #main-footer').on('mousemove', function(e){ */
 	$('#header, #main-content').on('mousemove', function(e){
 		page_hover = 'document';
+	});
+
+	$(window).bind('mousewheel DOMMouseScroll', function(e){
+		page_mouse_wheel = true;
+	}); 
+
+	$(document).keydown(function(e) {
+		if (e.which == 38 || e.which == 40) {
+			page_mouse_wheel = false;
+		}
+	});
+
+	$('#navbar-globaltoc a').focus(function(){
+		navbar_click = true;
+	});
+
+	$('#header, #main-content').click(function(){
+		navbar_click = false;
 	});
 
 	$(window).on('resize', function(e) {
@@ -191,7 +210,13 @@ $(function(){
 		
 	});
 
+	$('#navbar-globaltoc').on('scroll',function(e) {
+		page_focus = 'nav';
+	});
+
 	$(window).on('scroll',function(e) {
+		
+		page_focus = 'document';
 
 		window_height = window.innerHeight;
 		document_height = $(document).outerHeight();
@@ -199,22 +224,13 @@ $(function(){
 		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 		nav_height = parseInt($('#globaltoc').outerHeight());
 
-		/* console.log('navbar_top: '+ navbar_top);
-		console.log('notice_height: '+ notice_height);
-		console.log('delay: '+ delay);
-		console.log('page_hover: '+ page_hover);
-		console.log('window_height: '+ window_height);
-		console.log('document_height: '+ document_height);
-		console.log('document_scroll: '+ document_scroll);
-		console.log('container_nav_height: '+ container_nav_height);
-		console.log('nav_height: '+ nav_height);
-		console.log('__________________________'); */
-
 		/* Update height of navbar */
 		heightNavbar();
-			
 		/* If the coursor isn't in the navbar */
-		if (page_hover == 'document' && $(window).width() >= 992) {
+		if (((page_focus == 'document' && page_hover == 'document') || 
+				(page_mouse_wheel && page_focus == 'nav' && page_hover == 'nav') ||
+				(!navbar_click && !page_mouse_wheel && page_focus == 'document' && page_hover == 'nav')
+			) && $(window).width() >= 992) {
 			/* Set the new scroll of navbar */
 			scrollNavbar();
 		}
@@ -270,11 +286,6 @@ $(function(){
 		nav_scroll_end = (percentage*nav_scroll_real).toFixed();
 		if (percentage == 0) { nav_scroll_end = 0; }
 		if (percentage == 1) { nav_scroll_end += 20; }
-
-		/* console.log('scroll_real: '+ scroll_real);
-		console.log('nav_scroll_real: '+ nav_scroll_real);
-		console.log('percentage: '+ percentage);
-		console.log('=========================='); */
 
 		if (nav_scroll_real >= 0) {
 			$('#navbar-globaltoc').scrollTop(nav_scroll_end);

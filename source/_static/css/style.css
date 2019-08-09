@@ -762,7 +762,7 @@ li.toctree-l5 > a {
 }
 
 #navbar {
-  z-index: 2;
+  z-index: 3;
   visibility: hidden;
   position: fixed;
   top: 0;
