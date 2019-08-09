@@ -154,6 +154,7 @@
         </div>
 
         <div id="main-content" class="order-1">
+          <div id="rst-content">
 
           {% if pagename != 'index' and pagename != 'not_found' %}
           <div class="edit-repo-wrapper">
@@ -173,6 +174,11 @@
             {% include "navigation.html" %}
           {% endif %}
 
+          </div>
+          <footer>
+            {{copyright}}
+          </footer>
+
         </div>
 
       </div>
@@ -180,7 +186,7 @@
     </section>
 
     <!-- {% include "footer.html" %} --> {%- block footer %} {% endblock %}
-    
+
   </div> <!-- // #page -->
   {# Footer's scripts #}
   {%- block footer_js %}
