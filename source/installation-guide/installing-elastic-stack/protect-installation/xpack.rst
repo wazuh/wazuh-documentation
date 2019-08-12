@@ -192,7 +192,7 @@ Adding authentication for Elasticsearch
 .. code-block:: yaml
 
     output.elasticsearch.username: "elastic"
-    output.elasticsearch.password: "elastic_password"
+    output.elasticsearch.password: "password_generated_for_elastic"
 
 6. Restart Filebeat.
 
@@ -206,7 +206,7 @@ Adding authentication for Elasticsearch
 
     xpack.security.enabled: true
     elasticsearch.username: "elastic"
-    elasticsearch.password: "elastic_password"
+    elasticsearch.password: "password_generated_for_elastic"
 
 8. Restart Kibana.
 
