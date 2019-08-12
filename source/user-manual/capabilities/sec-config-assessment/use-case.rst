@@ -3,6 +3,9 @@
 Use case: Getting an alert when a check changes its result value
 ================================================================
 
+.. contents:: Table of Contents
+   :depth: 10
+
 Let's see a simple use case to understand how the SCA scanner detects and reports changes in the check results.
 
 To configure the execution of the *SCA* module with a policy file, it is necessary to set up a block as follows:
@@ -23,7 +26,7 @@ To configure the execution of the *SCA* module with a policy file, it is necessa
 The default path for policies is */var/ossec/ruleset/sca* on Unix environments and *C:\\Program files (x86)\\ossec-agent\\ruleset\\sca* on Windows.
 
 In this case, just the Debian Linux ``cis_debian_rcl.yml`` policy file has been set.
-After starting Wazuh, the module starts to work. 
+After starting Wazuh, the module starts to work.
 
 First of all, the first scan results are reported and alerts like the following one are fired for every check:
 
@@ -99,7 +102,7 @@ The next SCA scan for that policy generates the following alert:
     sca.check.result: failed
     sca.check.previous_result: passed
 
-The level 9 alert shows how the check has changed from **passed** to **failed**. This state is updated on the manager side and the last result scanned is 
+The level 9 alert shows how the check has changed from **passed** to **failed**. This state is updated on the manager side and the last result scanned is
 available from the SCA tab in the Wazuh app.
 
 .. thumbnail:: ../../../images/sca/SCA-ip-forward-check.png

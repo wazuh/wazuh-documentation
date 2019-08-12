@@ -1,0 +1,634 @@
+.. Copyright (C) 2019 Wazuh, Inc.
+
+.. Section marks used on this document:
+.. h0 ======================================
+.. h1 --------------------------------------
+.. h2 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. h3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. h4 ######################################
+.. h5 ::::::::::::::::::::::::::::::::::::::
+
+Security Configuration Assessment
+=================================
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 10
+
+One of the most certain ways to avoid hosts from being compromised is to secure them by reducing their vulnerability surface.
+That process is commonly known as hardening, and configuration assessment is an effective way to determine where
+the hosts might have their attack surface reduced.
+
+The SCA module performs scans using policy files in order to discover exposures or misconfigurations in monitored hosts.
+For example it could determine if it is necessary to change password configuration, remove unnecessary software, and disable
+or remove of unnecessary services among others assessments.
+The target of those policies can be an Operating System such as Debian or Windows, or a particular software such as the SSH server.
+
+Policies for the SCA module are written in YAML format. Format that was chosen due having human readability in mind, which allows
+users to quickly understand and write their own policies or extend the existing ones to fit their needs.
+
+Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well establish standard for host hardening.
+
+Overview of a SCA check
+----------------------------------
+
+Each check comprises some metadata information, a description of the purpose of the check, and its logical description
+(fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
+if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, specially CIS policies, already have their
+CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` below.
+
+
+.. code-block:: yaml
+    :name: check_overview
+    :caption: Check example
+
+    - id: 3006
+      title: "Ensure nodev option set on /tmp partition"
+      description: "The nodev mount option specifies that the filesystem cannot contain special devices."
+      rationale: "Since the /tmp filesystem is not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices in /tmp."
+      remediation: "Edit /etc/systemd/system/local-fs.target.wants/tmp.mount to configure the /tmp mount and run the following commands to enable systemd /tmp mounting: systemctl unmask tmp.mount systemctl enable tmp.mount"
+      compliance:
+        - cis: ["1.1.3"]
+        - cis_csc: ["5.1"]
+      condition: all
+      rules:
+        - 'c:mount -> r:\s/tmp\s && r:nodev'
+
+Interpreting SCA scan results
+----------------------------------
+
+SCA scan results appear as :ref:`alerts<alert_example>` whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events
+necessary to keep the global status of the scan updated, avoiding potential event flooding.
+
+.. code-block:: none
+    :name: alert_example
+    :caption: Alert example
+
+    ** Alert 1556643969.400529: - sca,gdpr_IV_35.7.d
+    2019 Apr 30 10:06:09 (centos) 192.168.0.97->sca
+    Rule: 19008 (level 3) -> 'CIS Benchmark for Red Hat Enterprise Linux 7: Ensure address space layout randomization (ASLR) is enabled'
+    {"type":"check","id":645241598,"policy":"CIS Benchmark for Red Hat Enterprise Linux 7","policy_id":"cis_rhel7","check":{"id":6523,"title":"Ensure address space layout randomization (ASLR) is enabled","description":"Address space layout randomization (ASLR) is an exploit mitigation technique which randomly arranges the address space of key data areas of a process.","rationale":"Randomly placing virtual memory regions will make it difficult to write memory page exploits as the memory placement will be consistently shifting.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: kernel.randomize_va_space = 2 and set the active kernel parameter","compliance":{"cis":"1.5.3","cis_csc":"8.4"},"rules":["f:/proc/sys/kernel/randomize_va_space -> !r:^2$;"],"file":"/proc/sys/kernel/randomize_va_space","result":"passed"}}
+    sca.type: check
+    sca.scan_id: 645241598
+    sca.policy: CIS Benchmark for Red Hat Enterprise Linux 7
+    sca.check.id: 6523
+    sca.check.title: Ensure address space layout randomization (ASLR) is enabled
+    sca.check.description: Address space layout randomization (ASLR) is an exploit mitigation technique which randomly arranges the address space of key data areas of a process.
+    sca.check.rationale: Randomly placing virtual memory regions will make it difficult to write memory page exploits as the memory placement will be consistently shifting.
+    sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: kernel.randomize_va_space = 2 and set the active kernel parameter
+    sca.check.compliance.cis: 1.5.3
+    sca.check.compliance.cis_csc: 8.4
+    sca.check.file: ["/proc/sys/kernel/randomize_va_space"]
+    sca.check.result: passed
+
+Scan results summaries are then shown on the Wazuh App, within the *SCA* tab.
+
+.. thumbnail:: ../../../images/sca/sca-agent.png
+    :title: SCA summary
+    :align: center
+    :width: 100%
+
+In addition, each result can be expanded to display additional information.
+
+.. thumbnail:: ../../../images/sca/sca-check.png
+    :title: SCA check list
+    :align: center
+    :width: 100%
+
+Available policies
+------------------
+
+When a Wazuh agent is installed, the system will only include the policy files supported by that particular Operating System.
+The :ref:`table<available_sca_policies>` lists the policy file set officially supported by Wazuh.
+These policies are included with the Wazuh manager installation so they can be easily enabled.
+
+.. table:: Available SCA policies
+    :widths: auto
+    :name: available_sca_policies
+
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | Policy                      | Name                                                       | Requirement                   |
+    +=============================+============================================================+===============================+
+    | cis_win2012r2_domainL1      |  CIS benchmark for Windows 2012 R2 Domain Controller L1    | Windows Server 2012 R2        |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2012r2_domainL2      |  CIS benchmark for Windows 2012 R2 Domain Controller L2    | Windows Server 2012 R2        |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2012r2_memberL1      |  CIS benchmark for Windows 2012 R2 Member Server L1        | Windows Server 2012 R2        |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2012r2_memberL2      |  CIS benchmark for Windows 2012 R2 Member Server L2        | Windows Server 2012 R2        |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win10_enterprise_L1     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win10_enterprise_L2     |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Systems               |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Systems               |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel7_linux             |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Systems               |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian7_L1              |  CIS benchmark for Debian/Linux 7 L1                       | Debian 7                      |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian7_L2              |  CIS benchmark for Debian/Linux 7 L2                       | Debian 7                      |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian8_L1              |  CIS benchmark for Debian/Linux 8 L1                       | Debian 8                      |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian8_L2              |  CIS benchmark for Debian/Linux 8 L2                       | Debian 8                      |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian9_L1              |  CIS benchmark for Debian/Linux 9 L1                       | Debian 9                      |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian9_L2              |  CIS benchmark for Debian/Linux 9 L2                       | Debian 9                      |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_sles11_linux            |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_sles12_linux            |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_solaris11               |  CIS benchmark for Oracle Solaris 11                       | Solaris 11                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | sca_unix_audit              |  Benchmark for Linux auditing                              | N/A                           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_10.11       |  CIS Apple OSX 10.11 Benchmark                             | MAC OS X 10.11 (El Capitan)   |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_10.12       |  CIS Apple macOS 10.12 Benchmark                           | MAC OS X 10.12 (Sierra)       |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | MAC OS X 10.13 (High Sierra)  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | web_vulnerabilites          |  System audit for web-related vulnerabilities              | N/A                           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apache2_4               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_mysql5-6_community      |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_mysql5-6_enterprise     |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+
+Enabling and disabling policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` files) present in their ruleset folder:
+
+- Linux agents: ``<ossec-agent-installation-folder>/ruleset/sca``.
+- Windows agents: ``<ossec-agent-installation-folder>\ruleset\sca``.
+
+.. danger::
+    The contents of the aformentioned **default ruleset folders are neither kept accross installations nor updates**.
+    If you wish to modify or add new policies, place then under an alternative folder.
+
+To enable a policy file that's outside the default folder, add a line like
+
+.. code-block:: xml
+
+    <policy>/var/ossec/etc/shared/policy_file_to_enable.yml</policy>
+
+in the **policies section** of the **SCA** module.
+
+There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
+(or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
+the `ossec.conf` by adding a line like
+
+.. code-block:: xml
+
+    <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
+
+in the **policies section** of the **SCA** module.
+
+How to share policy files and configuration with agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section,
+the Wazuh manager has the ability to push files and configurations to connected agents.
+
+This feature can be used to push policy files to agents in defined groups. By default, every agent belongs to the
+*default* group, so we can use this group as example.
+
+In order to push a new policy from the manager it should be placed in the directory ``/var/ossec/etc/shared/default``,
+and be owned by user `ossec`.
+
+In addition, to push configuration, the same strategy applies. For instance, in order to add a policy, add a block like the following to the ``/var/ossec/etc/shared/default/agent.conf`` as per the
+:ref:`example<ossec_conf_enable_policy>`.
+
+.. code-block:: xml
+    :name: ossec_conf_enable_policy
+    :caption: Enabling a policy from the ``ossec.conf``
+
+    <agent_config>
+        <!-- Shared agent configuration here -->
+        <sca>
+            <policies>
+                <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
+            </policies>
+        </sca>
+    </agent_config>
+
+This ``<sca>`` block will be merged with the ``<sca>`` block on the agent side and the new configuration will be added.
+
+Creating custom SCA policies
+----------------------------
+
+As stated before, policy files are written using YAML syntax. In order to illustrate this, an excerpt of a policy file is included below.
+
+.. code-block:: yaml
+
+    policy:
+      id: "unix_audit"
+      file: "sca_unix_audit.yml"
+      name: "System audit for Unix based systems"
+      description: "Guidance for establishing a secure configuration for Unix based systems."
+      references:
+        - https://www.ssh.com/ssh/
+
+    variables:
+      $sshd_file: /etc/ssh/sshd_config,/opt/ssh/etc/sshd_config
+      $pam_d_files: /etc/pam.d/common-password,/etc/pam.d/password-auth,/etc/pam.d/system-auth,/etc/pam.d/system-auth-ac,/etc/pam.d/passwd
+
+    requirements:
+      title: "Check that the SSH service is installed on the system and password-related files are present on the system"
+      description: "Requirements for running the SCA scan against the Unix based systems policy."
+      condition: any
+      rules:
+        - 'f:$sshd_file'
+        - 'f:/etc/passwd'
+        - 'f:/etc/shadow'
+
+    checks:
+      - id: 4004
+        title: "SSH Hardening - 5: Password Authentication should be disabled"
+        description: "The option PasswordAuthentication should be set to no."
+        rationale: "The option PasswordAuthentication specifies whether we should use password-based authentication. Use public key authentication instead of passwords."
+        remediation: "Change the PasswordAuthentication option value in the sshd_config file."
+        compliance:
+          - pci_dss: ["2.2.4"]
+          - nist_800_53: ["CM.1"]
+        condition: all
+        rules:
+         - 'f:$sshd_file -> r:^\s*PasswordAuthentication\s*\t*no'
+
+      - id: [...]
+
+As shown in this example, policy files are comprised by four sections, although not all of them are required, as
+detailed in the :ref:`sca_policy_file_sections` table.
+
+.. _sca_policy_file_sections:
+.. table:: Policy file Sections
+    :widths: auto
+
+    +--------------------+----------------+
+    | Section            | Required       |
+    +====================+================+
+    | policy             | Yes            |
+    +--------------------+----------------+
+    | requirements       | No             |
+    +--------------------+----------------+
+    | variables          | No             |
+    +--------------------+----------------+
+    | checks             | Yes            |
+    +--------------------+----------------+
+
+
+.. note::
+  If the *requirements* aren't satisfied for a specific policy file, the scan for that file won't start.
+
+
+Each section has their own fields as described in the as described in tables
+:ref:`sca_policy_file_policy_section`,
+:ref:`sca_policy_file_requirements_section`,
+:ref:`sca_policy_file_variables_section`,
+:ref:`sca_policy_file_checks_section`.
+
+.. _sca_policy_file_policy_section:
+.. table:: Policy section
+
+    +--------------------+----------------+-------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         |
+    +====================+================+===================+========================+
+    | id                 | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | file               | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | name               | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | description        | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | references         | No             | Array of strings  | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+
+.. _sca_policy_file_requirements_section:
+.. table:: Requirements section
+
+    +--------------------+----------------+-------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         |
+    +====================+================+===================+========================+
+    | title              | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | description        | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | condition          | Yes            | String            | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+    | rules              | Yes            | Array of strings  | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+
+.. _sca_policy_file_variables_section:
+.. table:: Variables section
+
+    +--------------------+----------------+-------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         |
+    +====================+================+===================+========================+
+    | variable_name      | Yes            | Array of strings  | Any string             |
+    +--------------------+----------------+-------------------+------------------------+
+
+.. note::
+  - Fields id from **policy** and **checks** must be unique across policy files.
+
+Variables
+^^^^^^^^^
+
+Variables are set in the **variables** section. Their names are preceded by ``$``. For instance,
+
+.. code-block:: yaml
+
+    $list_of_files: /etc/ssh/sshd_config,/etc/sysctl.conf,/var/log/dmesg
+    $list_of_folders: /etc,/var,/tmp
+
+Checks
+^^^^^^^^^
+Checks are the core of a SCA policy, as they describe the checks to be performed in the system.
+Each check is comprised by several fields as described in table :ref:`sca_policy_file_checks_section`.
+
+
+.. _sca_policy_file_checks_section:
+.. table:: Checks section
+
+    +-------------+-----------+----------------------------+--------------------+
+    |    Field    | Mandatory |            Type            |   Allowed values   |
+    +=============+===========+============================+====================+
+    |      id     |    Yes    |           Numeric          | Any integer number |
+    +-------------+-----------+----------------------------+--------------------+
+    |    title    |    Yes    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    | description |     No    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  rationale  |     No    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    | remediation |     No    |           String           |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  compliance |     No    | Array of arrays of strings |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  references |     No    |      Array of strings      |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+    |  condition  |    Yes    |           String           |   all, any, none   |
+    +-------------+-----------+----------------------------+--------------------+
+    |    rules    |    Yes    |      Array of strings      |     Any string     |
+    +-------------+-----------+----------------------------+--------------------+
+
+Check evaluation is governed by its `rule result aggregation strategy`, as set in its ``condition`` field, and the results of
+the evaluation of its rules.
+
+Condition
+~~~~~~~~~~~~~~~~~~~
+
+The condition field specifies how rule results are aggregated in order to calculate the final value of a check, there are three options:
+
+- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied, and as **failed** as soon as one evaluates to **failed**,
+
+- ``any``: the check will be evaluated as **passed** as soon as **any** of its rules is satisfied,
+
+- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied, and as **failed** as soon as one evaluates to **passed**.
+
+Special mention deserves how rules evaluated as **non-applicable** are treated by the aforementioned aggregators.
+
+- ``all``: If any rule returns **non-applicable**, and no rule returns **failed**, the result will be **non-applicable**.
+
+- ``any``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+
+- ``none``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+
+.. table:: Truth table for condition
+    :widths: auto
+
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    | Condition \\ Rule evaluation |  passed(s)  |  failed(s)  | non-applicable(s) |     Result         |
+    +==============================+=============+=============+===================+====================+
+    |            ``all``           |     yes     |      no     |         no        |     **passed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``all``           | indifferent |      no     |        yes        | **non-applicable** |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``all``           | indifferent |     yes     |    indifferent    |     **failed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``any``           |     yes     | indifferent |    indifferent    |     **passed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``any``           |      no     |     yes     |         no        |     **failed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |            ``any``           |      no     | indifferent |        yes        | **non-applicable** |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |           ``none``           |     yes     | indifferent |    indifferent    |     **failed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |           ``none``           |      no     | indifferent |        yes        | **non-applicable** |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+    |           ``none``           |      no     |     yes     |         no        |     **passed**     |
+    +------------------------------+-------------+-------------+-------------------+--------------------+
+
+
+Rules
+~~~~~~~~~~~~~~~~~~~
+
+Rules can check for existence of files, directories, registry keys and values, running processes, and recursively test for
+existence of files inside directories. When it comes to content checking, they are able to check for file contents, recursively
+check for the contents of files inside directories, command output and registry value data.
+
+In an abstract manner, rules start by a location (and a `type` of location), that will be the target of the test, followed by the actual
+the test specification. Such tests fall into two categories: existence and content checks.
+
+General rule syntax
+###################
+
+There are five main types of rules as described below:
+
+.. table:: Rule types
+    :widths: auto
+
+    +------------------------------+------------------+
+    | Type                         | Character        |
+    +==============================+==================+
+    | File                         | ``f``            |
+    +------------------------------+------------------+
+    | Directory                    | ``d``            |
+    +------------------------------+------------------+
+    | Process                      | ``p``            |
+    +------------------------------+------------------+
+    | Commands                     | ``c``            |
+    +------------------------------+------------------+
+    | Registry (Windows Only)      | ``r``            |
+    +------------------------------+------------------+
+
+The operators for content checking are:
+
+.. table:: Content comparison operators
+    :widths: auto
+
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    | Operation                                                                            | Operator        | Example                                                    |
+    +======================================================================================+=================+============================================================+
+    | Literal comparison, exact match                                                      | *by omision*    | ``f:/file -> CONTENT``                                     |
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``          | ``f:/file -> r:REGEX``                                     |
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    | Numeric comparison (integers)                                                        | ``n:``          | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
+    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+
+.. table:: Numeric comparison operators
+    :widths: auto
+
+    +--------------------------------+----------+---------------------------------------+
+    | Arithmetic relational operator | Operator | Example                               |
+    +--------------------------------+----------+---------------------------------------+
+    | less than                      | ``<``    | ``n:SomeProperty (\d) compare < 42``  |
+    +--------------------------------+----------+---------------------------------------+
+    | less than or equal to          | ``>=``   | ``n:SomeProperty (\d) compare <= 42`` |
+    +--------------------------------+----------+---------------------------------------+
+    | equal to                       | ``==``   | ``n:SomeProperty (\d) compare == 42`` |
+    +--------------------------------+----------+---------------------------------------+
+    | not equal to                   | ``!=``   | ``n:SomeProperty (\d) compare != 42`` |
+    +--------------------------------+----------+---------------------------------------+
+    | greater than or equal to       | ``>=``   | ``n:SomeProperty (\d) compare >= 42`` |
+    +--------------------------------+----------+---------------------------------------+
+    | greater than                   | ``>``    | ``n:SomeProperty (\d) compare > 42``  |
+    +--------------------------------+----------+---------------------------------------+
+
+A whole rule can be negated using the operator ``not``, which is placed at the begining of the rule.
+
+.. code-block:: yaml
+
+    not RULE
+
+Example: ``not f:/some_file -> some_text`` will **fail** if `some_text` is found within the contents of `some_file`.
+
+By combining the aforementioned rule types and operators, both existence and content checking can be performed.
+
+.. note::
+    - **Process** rules only allow existence checks.
+    - **Command** rules only allow content (output) checks.
+
+
+Existence checking rules
+######################################
+
+Existence checks are created by setting rules without a content operator, the general form is as follows:
+
+.. code-block:: yaml
+
+    RULE_TYPE:target
+
+Examples of existence checks:
+
+- ``f:/etc/sshd_config`` checks the existence of file */etc/ssh_config*
+- ``d:/etc`` checks the existence of directory */etc*
+- ``not p:sshd`` will test the presence of processes called *sshd* and fail if one is found.
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of that key.
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse`` checks for the existence of value *LimitBlankPasswordUse* in the key.
+
+Content checking rules
+######################################
+
+The general form of a rule testing for contents is as follows:
+
+.. code-block:: yaml
+
+    RULE_TYPE:target -> CONTENT_OPERATOR:value
+
+.. attention::
+    - The context of a content check is limited to a **line**.
+    - Content checks are case-sensitive.
+    - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
+    - If the **target** of a rule that checks for contents does not exist, the result will be **non-applicable** as it could not be checked.
+
+Content check operator results can be negated by adding a ``!`` before then, for example:
+
+.. code-block:: yaml
+
+    f:/etc/ssh_config -> !r:PermitRootLogin
+
+.. attention::
+    Be careful when negating content operators as that will make then evaluate as  **passed** for **anything** that does not match with the check specified.
+    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
+
+Content check operators can be chained using the operator ``&&`` (AND) as follows:
+
+.. code-block:: yaml
+
+    f:/etc/ssh_config -> !r:^# && r:Protocol && r:2
+
+This rule reads as `Pass if there's a line whose first character is no "#" and contains "Protocol" and "2"`.
+
+.. attention::
+    - It is **mandatory** to respect the spaces around the ``&&`` operator.
+    - There's no particular order of evaluation between tests chained using the ``&&`` operator.
+
+Examples of content checks:
+
+    - ``systemctl is-enabled cups -> r:^enabled``` checks that the output of the command contains a line starting by `enabled`.
+    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4'`` checks that value of MaxAuthTries is less or equal to 4.
+    - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of *LimitBlankPasswordUse* is 1.
+
+Examples
+###################
+
+The following sections cover each rule type, illustrating them with several examples. It is also recomended to check the actual
+policies and, for minimalistic although complete examples, the `SCA test suite policies <https://github.com/wazuh/wazuh-qa/tree/master/integration_tests/sca/3.10>`_.
+
+Rule syntax for files
+:::::::::::::::::::::::::::::::::::
+
+- Checking that a file exists: ``f:/path/to/file``
+- Checking that a file does not exists: ``not f:/path/to/file``
+- Checking file contains (whole line literal match): ``f:/path/to/file -> content``
+- Checking file contents against regex: ``f:/path/to/file -> r:REGEX``
+- Checking a numeric value: ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
+
+Rule syntax for directories
+:::::::::::::::::::::::::::::::::::
+
+- Checking that a directory exists: ``d:/path/to/directory``
+- Checking that a directory contains a file: ``d:/path/to/directory -> file``
+- Checking that a directory contains files that match a regex: ``d:/path/to/directory -> r:^files``
+- Checking files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
+
+Rule syntax for processes
+:::::::::::::::::::::::::::::::::::
+
+- Checking that a process is running ``p:process_name``
+- Checking that a process is **not** running ``not p:process_name``
+
+Rule syntax for commands
+:::::::::::::::::::::::::::::::::::
+
+- Checking the output of a command ``c:command -> output``
+- Checking the output of a command using regex ``c:command -> r:REGEX``
+- Checking a numeric value ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare >= number``
+
+Rule syntax for Windows Registry
+:::::::::::::::::::::::::::::::::::
+
+- Checking that a registry exists ``r:path/to/registry``
+- Checking that a registry key exists ``r:path/to/registry -> key``
+- Checking a registry key content ``r:path/to/registry -> key -> content``
+
+Composite rules
+:::::::::::::::::::::::::::::::::::
+
+- Checking that there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+
+- Checking that there is **no** line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+
+Other examples
+:::::::::::::::::::::::::::::::::::
+
+- Looking at the value inside a file: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
+- Checking if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
+- Checking if a process is running: ``p:avahi-daemon``
+- Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0``
+- Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$``
+- Checking if a directory exists: ``d:/etc/mysql``
+- Check the running configuration of ssh to check the maximum authentication tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
+- Check if root is the only UID 0 account ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``

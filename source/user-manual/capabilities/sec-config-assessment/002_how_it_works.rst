@@ -1,7 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-How it works
-============
+
+How SCA works
+=============
+
+.. contents:: Table of Contents
+   :depth: 10
 
 - `State vs alerts`_
 - `Available information of scans`_
@@ -20,7 +24,7 @@ Available information of scans
 Queriable information of the scans
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Every scan provides useful information about its result. The JSON format is used to send the agents events to the manager.
+Every scan provides useful information about its result. The JSON format is used to send agent events to the manager.
 There are basically three types of events:
 
 - Check event
@@ -32,21 +36,21 @@ Example of a check event:
 
 .. code-block:: json
 
-    {  
+    {
         "type":"check",
         "id":1479401170,
         "policy":"System audit for SSH hardening",
         "policy_id":"system_audit_ssh",
-        "check":{  
+        "check":{
             "id":1507,
             "title":"SSH Hardening - 8: Wrong Grace Time.",
             "description":"The option LoginGraceTime should be set to 30.",
             "rationale":"The option LoginGraceTime specifies how long in seconds after a connection request the server will wait before disconnecting if the user has not successfully logged in. 30 seconds is the recommended time for avoiding open connections without authenticate.",
             "remediation":"Change the LoginGraceTime option value in the sshd_config file.",
-            "compliance":{  
+            "compliance":{
                 "pci_dss":"2.2.4"
             },
-            "rules":[  
+            "rules":[
                 "f:$sshd_file -> !r:^\\s*LoginGraceTime\\s+30\\s*$;"
             ],
             "file":"/etc/ssh/sshd_config",
@@ -59,7 +63,7 @@ Example of a summary event:
 
 .. code-block:: json
 
-    {  
+    {
         "type":"summary",
         "scan_id":1289362433,
         "name":"System audit for password-related vulnerabilities",
@@ -134,22 +138,22 @@ The following event is generated:
 
 .. code-block:: json
 
-    {  
+    {
         "type":"check",
         "id":618748202,
         "policy":"CIS benchmark for Debian/Linux",
         "policy_id":"cis_debian",
-        "check":{  
+        "check":{
             "id":5031,
             "title":"Ensure IP forwarding is disabled",
             "description":"The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.",
             "rationale":"Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.",
             "remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0",
-            "compliance":{  
+            "compliance":{
                 "cis_csc":"5.1",
                 "cis":"3.1.1"
             },
-            "rules":[  
+            "rules":[
                 "f:/proc/sys/net/ipv4/ip_forward -> 1;"
             ],
             "file":"/proc/sys/net/ipv4/ip_forward",
@@ -157,14 +161,14 @@ The following event is generated:
         }
     }
 
-The *result* is ``passed`` because the ``rules`` are looking for a ``1`` inside the ``/proc/sys/net/ipv4/ip_forward`` file. 
+The *result* is ``passed`` because the ``rules`` are looking for a ``1`` inside the ``/proc/sys/net/ipv4/ip_forward`` file.
 As it has the value ``0``, the result is marked as ``passed``.
 
 .. note::
   A *check* can be marked as *not applicable* in the case an error happens when performing the check.
   In this case, the field *result* doesn't appear and the check returns two other fields: *status* and *reason*.
 
-  
+
 Enabled policies
 ^^^^^^^^^^^^^^^^
 
@@ -185,7 +189,7 @@ Each agent will send the policies it has enabled, so the manager can compare the
 Integrity mechanism
 -------------------
 
-To maintain the integrity between the agent state for each check and the manager's database for that agent, an integrity mechanism has been included in SCA scans.
+To ensure the integrity between the agent state for each check and the manager's database for that agent, an integrity mechanism has been included in SCA scans.
 
 Integrity of the scan results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

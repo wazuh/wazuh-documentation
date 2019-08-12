@@ -1,5 +1,13 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. Section marks used on this document:
+.. h0 ======================================
+.. h1 --------------------------------------
+.. h2 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. h3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. h4 ######################################
+.. h5 ::::::::::::::::::::::::::::::::::::::
+
 .. _manual_sec_config_assessment:
 
 Security Configuration Assessment
@@ -19,11 +27,14 @@ The Security Configuration Assesment (SCA) module aims to provide the user with 
 - To avoid alert flooding and repeated alerts in each scan. Now, only state changes and new checks are alerted, being those states updated in the manager database.
 - Current policies used by *Rootcheck* have been enriched and updated to a new YAML format. CIS policies are based in the latest CIS benchmarks available.
 
-More information on this module is available in the following sections:
+Further information is available in the following sections:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   security-configuration-assessment
-   how-it-works
-   use-case
+    001_what_is_it
+    002_how_it_works
+    003_how_to_configure
+    004_creating_custom_policies
+    use-case
+..    security-configuration-assessment_all
