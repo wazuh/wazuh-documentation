@@ -1,102 +1,99 @@
-.. Copyright (C) 2019 Wazuh, Inc.
-
-.. _create-custom-wpk-automatically:
-
 Automated custom WPK packages creation
 =======================================
 
 Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency.
 
-To create a WPK package this way only docker and a X509 certificate are needed, in the case of Windows WPK a msi package is needed.
+To create a WPK package your own WPK package follow these steps:
 
-1. Get a X509 certificate and CA
+Get an X509 certificate and CA
 --------------------------------
 
-1. Create root CA
+If you already have your own certificate this step can be skipped.
 
-.. code-block:: console
+Create root CA
 
-    # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
+ .. code-block:: console
 
-2. Create a certificate and key
+ # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
 
-.. code-block:: console
+Create a certificate and key
 
-    # openssl req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
+ .. code-block:: console
 
-3. Set the location as follows:
+ # openssl req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
 
-    - ``/C=US`` is the country.
-    - ``/ST=CA`` is the state.
-    - ``/O=Wazuh`` is the organization's name.
+Set the location as follows:
 
-4. Sign this certificate with the root CA
+ - ``/C=US`` is the country.
+ - ``/ST=CA`` is the state.
+ - ``/O=Wazuh`` is the organization's name.
 
-.. code-block:: console
+Sign this certificate with the root CA
 
-    # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
+ .. code-block:: console
 
-2. Build WPK
--------------
+ # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
+
 
 Requirements
-^^^^^^^^^^^^
 
-    * Docker
+ * Docker
+ * git
 
-Download our wazuh-packages repository from GitHub, there you can find tools for building different kinds of packages, and go to the wpk directory.
+Download our wazuh-packages repository from GitHub and go to the wpk directory.
 
-  .. code-block:: console
+ .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-installers/wpk
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk
 
-Execute the `generate_wpk_package.sh` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
+Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
 
-  .. code-block:: console
+ .. code-block:: console
 
-    $ ./generate_wpk_package.sh -h
+ $ ./generate_wpk_package.sh -h
 
-    Usage: /wazuh-installers/wpk-docker/generate_wpk_package.sh [OPTIONS]
+ Usage: ./generate_wpk_package.sh [OPTIONS]
 
-    -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows]
-    -b,   --branch <branch>                     [Required] Select Git branch or tag e.g.
-    -d,   --destination <path>                  [Required] Set the destination path of package.
-    -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
-    -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
-    -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
-    -pd,  --package-directory <directory>       [Required for windows] Path to the package name to pack on wpk.
-    -o,   --output <name>                       [Required] Name to the output package.
-    -h,   --help                                Show this help.
+ -t, --target-system <target> [Required] Select target wpk to build [linux/windows]
+ -b, --branch <branch> [Required] Select Git branch or tag e.g.
+ -d, --destination <path> [Required] Set the destination path of package.
+ -k, --key-dir <arch> [Required] Set the WPK key path to sign package.
+ -a, --architecture <arch> [Optional] Target architecture of the package [x86_64].
+ -j, --jobs <number> [Optional] Number of parallel jobs when compiling.
+ -pd, --package-directory <directory> [Required for windows] Path to the package name to pack on wpk.
+ -o, --output <name> [Required] Name to the output package.
+ -h, --help Show this help.
 
 To use this tool the certificate and the key must be in the same directory.
 
-2.1. Linux WPK
-^^^^^^^^^^^^^^
+Linux WPK
+----------
 
-An example of how to build a Linux WPK would be:
+Here you can see how to build a WPK package for Linux systems.
 
-  .. code-block:: console
+ .. code-block:: console
 
-    # ./generate_wpk_package.sh -t linux -b branch_tag -d output/path -k path/to/keys -o myagent.wpk
+ # ./generate_wpk_package.sh -t linux -b branch_tag -d output/path -k path/to/keys -o myagent.wpk
 
-2.2. Windows WPK
-^^^^^^^^^^^^^^^^
+Windows WPK
+------------
 
-To build a WPK for Windows you need to first download a msi package of the desired version:
+To build a WPK for Windows you need to first download an MSI package of the desired version:
 
-  .. code-block:: console
+ .. code-block:: console
 
-    # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-3.9.2-1.msi --output wazuh-agent-3.9.2-1.msi
+ # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-3.9.5-1.msi
 
-An example of how to build a Windows WPK package would be:
+Here you can see how to build a WPK package for Windows systems.
 
-  .. code-block:: console
+ .. code-block:: console
 
-    # /generate_wpk_package.sh -t windows -b branch_tag -d output/path -k path/to/keys -o myagent.wpk -pd path/to/wazuhagent.msi
+ # /generate_wpk_package.sh -t windows -b branch_tag -d output/path -k path/to/keys -o myagent.wpk -pd path/to/wazuhagent.msi
 
 Definitions:
-    - **branch_tag** is the branch of the wazuh repository you want to build the sources from.
-    - **output/path** is the path to the directory where you want to store your WPK.
-    - **myagent.wpk** is the name of the WPK.
-    - **path/to/keys** is the path to your SSL certificate and key both of them must be in the same directory.
-    - **path/to/wazuhagent.msi** is the path to the msi package.
+ - ``branch_tag`` is the branch of the wazuh repository you want to build the sources from.
+ - ``output/path`` is the path to the directory where you want to store your WPK.
+ - ``myagent.wpk`` is the name of the WPK.
+ - ``path/to/keys`` is the path to your SSL certificate and key both of them must be in the same directory.
+ - ``path/to/wazuhagent.msi`` is the path to the MSI package.
+
