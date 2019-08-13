@@ -44,14 +44,20 @@ b) For Debian/Ubuntu:
   # apt-get update && apt-get install openjdk-8-jre
   
 c) For Windows:
-
-  1. Create an `Oracle account <https://www.oracle.com/index.html>`_.
   
-  2. Download the `Java JRE 8 <https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html>`_ installer.
+  1. Download the MSI-based installer of `OpenJDK 8 <https://developers.redhat.com/products/openjdk/download>`_ for Windows for your architecture.
   
-  3. Install Java JRE 8:
+  2. Run the installer and follow the on-screen instructions to install OpenJDK 8.
   
-    - Execute the installer with elevated privileges.
+  3. Set Environment Variables:
+  
+    - Go to Control Panel -> System and Security -> System -> Advanced system settings -> Environment Variables.
+    
+    - Under System Variables, create or edit ``JAVA_HOME`` variable and add the installation path of the JDK. Example: ``C:\Program Files\java-1.8.0``.
+    
+    - Apply changes.
+    
+    - Open up the Command Prompt and type ``java -version`` to check the newly installed version.
 
 .. note::
   If the version 8 of the Java Runtime Environment is not available for your operating system, use the version 7 or 6 instead.
