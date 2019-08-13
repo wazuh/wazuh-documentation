@@ -13,7 +13,7 @@ observe the alerts that are generated.
 Preparation
 -----------
 
-To turn on Wazuh agent and syscheck debug logging on windows-agent, start Notepad with the "Run as administrator" option and enter this text
+To turn on Wazuh agent and syscheck debug logging on windows-agent, start Notepad with the "Run as administrator" option and enter this text:
 
     .. code-block:: console
 
@@ -21,7 +21,7 @@ To turn on Wazuh agent and syscheck debug logging on windows-agent, start Notepa
         rootcheck.sleep=0
         syscheck.sleep=0
 
-Save this as a new file called "C:\\Program Files (x86)\\ossec-agent\\local_internal_options.conf", making sure under "Save as type:" to choose "All Files" so that the file does not get a .txt extension appended to it.
+Save this as a new file called ``C:\Program Files (x86)\ossec-agent\local_internal_options.conf``, making sure under "Save as type:" to choose "All Files" so that the file does not get a .txt extension appended to it.
 
 Open the Windows Command Prompt, using the "Run as administrator" option. Then create a couple of lab directories:
 
@@ -35,7 +35,7 @@ Configuring FIM
 ---------------
 
 Run your Wazuh Agent Manager shortcut (win32ui) on the desktop and click on View -> View Config, and replace the large
-default <syscheck> section with this:
+default ``<syscheck>`` section with this:
 
     .. code-block:: console
 
@@ -121,9 +121,9 @@ the FILE INTEGRITY tab, which would look something like this:
 A look under the hood of syscheck
 ---------------------------------
 
-What has actually happened in the background? How does Wazuh track file state between scans so it can know when a file has changed and what about that file changed?
+What has actually happened in the background? How does Wazuh track file state between scans so it can know when a file has changed and what about that file changed? Each time a Wazuh agent runs a periodic syscheck FIM scan, the monitored file checksums and attributes are sent back to the Wazuh Manager who stores them and looks for modifications by comparing the new values to the old values.
 
-On the manager in the /var/ossec/queue/db/ directory we see files like 000.db, 001.db, 002.db, 003.db.  These are SQLite files for the manager and each agent (by ID#), each containing multiple tables related to a system including one related to syscheck.
+On the manager in the ``/var/ossec/queue/db/`` directory we see files like ``000.db``, ``001.db``, ``002.db``, ``003.db``.  These are SQLite files for the manager and each agent (by ID#), each containing multiple tables related to a system including one related to syscheck.
 
 .. code-block:: console
 
@@ -132,7 +132,7 @@ On the manager in the /var/ossec/queue/db/ directory we see files like 000.db, 0
     fim_entry       scan_info       sys_netiface    sys_ports
     metadata        sys_hwinfo      sys_netproto    sys_processes
 
-The following command shows the schema of the fim_entry table where the manager stores syscheck scan results for itself and its agents:
+The following command shows the schema of the ``fim_entry`` table where the manager stores syscheck scan results for itself and its agents:
 
 .. code-block:: console
 
