@@ -5,16 +5,19 @@ $(function(){
       form_control,
       querystr = '',
 			loc = location.hash;
+	/* var mainElement = $('.central-page-area'),
+			tocWrapperElement = $('nav.full-toctree-nav'),
+			gTocElement = $('nav.full-toctree-nav .globaltoc'),
+			footerElement = $('#main-footer'); */
   var mainElement = $('.central-page-area'),
       tocWrapperElement = $('nav.full-toctree-nav'),
-			gTocElement = $('nav.full-toctree-nav .globaltoc'),
-      footerElement = $('#main-footer');
+			gTocElement = $('nav.full-toctree-nav .globaltoc');
   var winScroll = 0,
       gTocScroll = 0,
       pageHeight = $('body').height(),
       windowHeight = $(window).height(),
       mainTop = mainElement.offset().top,
-      mainBottom = footerElement.offset().top
+      /* mainBottom = footerElement.offset().top */
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
   var breakpoint = 992,
@@ -24,9 +27,9 @@ $(function(){
 	// List of empty nodes, containing only a toctree
 	var empty_toc_nodes = [
 		'amazon/configuration/index',
-		'compliance/index',
-		'containers/index',
-		'deployment/index',
+		'compliance',
+		'containers',
+		'deployment',
 		'development/index',
 		'docker-monitor/index',
 		'installation-guide/upgrading/legacy/index',
@@ -42,8 +45,12 @@ $(function(){
 		'user-manual/ruleset/ruleset-xml-syntax/index'
 	];
 
-  changeVerionPosition($(window).outerWidth());
-  changeSearchPosition($(window).outerWidth());
+  /* list of nodes (by title) which will not show their subtree */
+  var hide_subtree_nodes = [
+    'Install Wazuh manager on Linux',
+    'Install Wazuh agent on Linux'
+  ].map(item =>item.toLowerCase());
+
 	mark_toc_nodes_with_class(empty_toc_nodes, 'empty-toc-node');
 	checkScroll();
   if (document.location.hash) {
@@ -66,6 +73,7 @@ $(function(){
 	});
 
 	show_current_subtree();
+	hide_subtree(hide_subtree_nodes);
 
 	// Show the hidden menu
 	setTimeout(function(){ $('#navbar-globaltoc').removeClass('hidden'); }, 500);
@@ -123,43 +131,178 @@ $(function(){
 
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
-   var headerHeight = Math.round($('.header').height());
-   if (scrollTop > headerHeight ) {
+	 var headerHeight = 100;
+	 if ($('body').hasClass('no-latest-docs')) {
+		headerHeight += parseInt($('.no-latest-notice').outerHeight());
+	 }
+   if (scrollTop >= headerHeight ) {
      $('body').addClass('scrolled');
-		 /* Move searchbar to .menu-sub on scroll down if desktop size */
-		 if ( $(window).outerWidth() >= breakpoint ) {
-			 searcbarToHorizontal();
-		 }
    } else {
      $('body').removeClass('scrolled');
-		 /* Move searchbar to #search-lg on scroll up if desktop size */
-		 if ( $(window).outerWidth() >= breakpoint ) {
-			 searcbarToVertical();
-		 }
    }
  }
 
- /* -- Same scroll in navbar ------------------------------------------------------------------------------- */
+	/* -- Menu scroll -------------------------------------------------------------------------------*/
 
- $(window).on('scroll', function(e){
-
-	// Get data of scroll and positions
-	var document_height = $('.central-page-area').height();
-	var footer_height = $('#main-footer').height();
+	var navbar_top = 100;
+	var notice_height = 0;
+	if ($('body').hasClass('no-latest-docs')) {
+		notice_height = parseInt($('.no-latest-notice').outerHeight());
+	}
+	var delay = navbar_top + 200;
+	var window_height = window.innerHeight;
+	var document_height = $(document).outerHeight();
 	var document_scroll = $(window).scrollTop();
-	var nav_height = $('#globaltoc').height() + $('#search-lg').height();
-	var nav_scroll = $('.side-scroll').scrollTop();
+	var container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
+	var nav_height = parseInt($('#globaltoc').outerHeight());
+	var page_focus = 'document';
+	var page_hover = 'document';
+	var page_mouse_wheel = false;
+	var navbar_click = false;
 
-	// Calculate navbar end scroll position
-	//document_scroll -= 110;
-	//document_height += footer_height;
-	var proporcion = document_height/nav_height;
-	var nav_scroll_end = (document_scroll/proporcion).toFixed();
+	heightNavbar();
+	scrollNavbar();
+	headerSticky();
 
-	// Set navbar end scroll position
-	$('.side-scroll').scrollTop(nav_scroll_end);
+	$('#navbar').on('mousemove', function(e){
+		page_hover = 'nav';
+	});
 
- });
+	$('#header, #main-content').on('mousemove', function(e){
+		page_hover = 'document';
+	});
+
+	$(window).bind('mousewheel DOMMouseScroll', function(e){
+		page_mouse_wheel = true;
+	}); 
+
+	$(document).keydown(function(e) {
+		if (e.which == 38 || e.which == 40) {
+			page_mouse_wheel = false;
+		}
+	});
+
+	$('#navbar a').focus(function(){
+		navbar_click = true;
+	});
+
+	$('#header, #main-content').click(function(){
+		navbar_click = false;
+	});
+
+	$(window).on('resize', function(e) {
+
+		window_height = window.innerHeight;
+		document_height = $(document).outerHeight();
+		document_scroll = $(window).scrollTop();
+		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
+		nav_height = parseInt($('#globaltoc').outerHeight());
+		if ($('body').hasClass('no-latest-docs')) {
+			notice_height = parseInt($('.no-latest-notice').outerHeight());
+		}
+
+		if ($(window).width() >= 992) {
+			$('html').css({'overflow-y':'auto'});
+		}
+
+		heightNavbar();
+		scrollNavbar();
+		
+	});
+
+	$('#navbar-globaltoc').on('scroll',function(e) {
+		page_focus = 'nav';
+	});
+
+	$(window).on('scroll',function(e) {
+		
+		page_focus = 'document';
+
+		window_height = window.innerHeight;
+		document_height = $(document).outerHeight();
+		document_scroll = $(window).scrollTop();
+		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
+		nav_height = parseInt($('#globaltoc').outerHeight());
+
+		/* Update height of navbar */
+		heightNavbar();
+		/* If the coursor isn't in the navbar */
+		if (((page_focus == 'document' && page_hover == 'document') || 
+				(page_mouse_wheel && page_focus == 'nav' && page_hover == 'nav') ||
+				(!navbar_click && !page_mouse_wheel && page_focus == 'document' && page_hover == 'nav')
+			) && $(window).width() >= 992) {
+			/* Set the new scroll of navbar */
+			scrollNavbar();
+		}
+		
+		headerSticky();
+
+	});
+
+	$('.navbar-toggler').on('click', function(e) {
+		if ($(this).hasClass('collapsed')) {
+			$('html').css({'overflow-y':'hidden'});
+		} else {
+			$('html').css({'overflow-y':'auto'});
+		}
+	});
+
+	function heightNavbar() {
+
+		if ($(window).width() >= 992) {
+
+			if (document_scroll <= navbar_top) {
+				$('#navbar').css({'padding-top':(notice_height+navbar_top-document_scroll)+'px'});
+				$('#navbar-globaltoc').css({'height':'calc(100vh - 152px - '+ notice_height +'px + '+document_scroll+'px)'});
+			} else {
+				$('#navbar').css({'padding-top':notice_height});
+				$('#navbar-globaltoc').css({'height':'calc(100vh - 152px - '+ notice_height +'px + '+navbar_top+'px)'});
+			}
+			$('#navbar-globaltoc').css({'padding-top':0});
+
+		} else {
+
+			if (document_scroll <= navbar_top) {
+				$('#navbar').css({'padding-top':0});
+				$('#navbar-globaltoc').css({'padding-top':(notice_height+100)+'px'});
+			} else {
+				$('#navbar').css({'padding-top':0});
+				$('#navbar-globaltoc').css({'padding-top':(notice_height+52)+'px'});
+			}
+
+		}
+
+	}
+
+	function scrollNavbar() {
+
+		scroll_real = document_height-window_height-delay;
+		if(scroll_real < 0){
+			scroll_real += delay;
+			delay = 0;
+		}
+		nav_scroll_real = nav_height-container_nav_height;
+		percentage = ((document_scroll-delay)/scroll_real).toFixed(3);
+		nav_scroll_end = (percentage*nav_scroll_real).toFixed();
+		if (percentage == 0) { nav_scroll_end = 0; }
+		if (percentage == 1) { nav_scroll_end += 20; }
+
+		if (nav_scroll_real >= 0) {
+			$('#navbar-globaltoc').scrollTop(nav_scroll_end);
+		}
+			
+	}
+
+	function headerSticky() {
+
+		var document_scroll = $(window).scrollTop();
+		if (document_scroll >= (notice_height+100)) {
+			$('#header-sticky').css({'top':notice_height});
+		} else {
+			$('#header-sticky').css({'top':'-52px'});
+		}
+
+	}
 
 	/* Global toc --------------------------------------------------------------------------------------------------*/
   function currentToc(){
@@ -191,12 +334,18 @@ $(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
-		$('.globaltoc li.initial').removeClass('initial');
 		if( li.hasClass('show')){
 			li.removeClass('show');
 		} else {
+			li.siblings('li').removeClass('show');
 			li.addClass('show');
 		}
+
+		if(!li.parents().hasClass('show')){
+			$('.globaltoc li.show').addClass('show');
+		}
+
+		$('.globaltoc li.initial').removeClass('initial');
 		return false;
    });
 
@@ -238,6 +387,15 @@ $(function(){
 		 });
 	 }
 
+	 function hide_subtree(node_list){
+		 $("#globaltoc a").each(function(){
+			 if ( jQuery.inArray( $(this).text().toLowerCase(), node_list ) !== -1 ) {
+				 $(this).siblings().hide();
+				 $(this).children("button").hide();
+			 }
+		 });
+	 }
+
 	 $('.globaltoc .empty-toc-node').each(function(){
 		 $(this).on('click', function(e){
 			 e.preventDefault();
@@ -258,76 +416,10 @@ $(function(){
 		 var curWidth = $(this).outerWidth();
      $('table').removeClass('table-responsive');
      reponsiveTables();
-     changeVerionPosition(curWidth);
-     changeSearchPosition(curWidth);
 		 currentToc();
 
 		 checkScroll();
 	 });
-
-	function changeVerionPosition (currentWidth) {
-		if (currentWidth >= breakpoint) {
-			versionToDesktop();
-		} else {
-			versionToMobile();
-		}
-	}
-
-  function versionToDesktop (){
-    var vSelector = $('.release-selector-wrapper');
-    if (vSelector.closest('#main-navbar').length > 0 ){
-      // Selector in #main-navbar: change to .version-zone:
-      vSelector.appendTo($('.version-zone'));
-    }
-  }
-
-	function versionToMobile (){
-		var vSelector = $('.release-selector-wrapper');
-		if (vSelector.closest('.version-zone').length > 0 ){
-			// Selector in .version-zone: change to #main-navbar
-			vSelector.appendTo($('#main-navbar'));
-		}
-	}
-
-  function changeSearchPosition (currentWidth){
-    if (currentWidth >= breakpoint) {
-			searcbarToDesktop();
-		} else {
-			searcbarToMobile();
-		}
-  }
-
-  function searcbarToDesktop(){
-    var searchbar = $('.search_main');
-    if (searchbar.closest('.blue-bar').length > 0 ){
-      // Search bar in .blue-bar .container: change to #search-lg
-      searchbar.appendTo($('#search-lg'));
-    }
-  }
-
-  function searcbarToMobile(){
-    var searchbar = $('.search_main');
-    if (searchbar.closest('#search-lg').length > 0 ){
-      // Search bar in #search-lg: change to .blue-bar .container:
-      searchbar.appendTo($('.blue-bar'));
-    }
-  }
-
-	function searcbarToVertical(){
-    var searchbar = $('.search_main');
-    if (searchbar.closest('.blue-bar').length > 0 ){
-      // Search bar in .blue-bar .container: change to #search-lg
-      searchbar.prependTo($('#search-lg'));
-    }
-  }
-
-  function searcbarToHorizontal(){
-    var searchbar = $('.search_main');
-    if (searchbar.closest('#search-lg').length > 0 ){
-      // Search bar in #search-lg: change to .blue-bar .container:
-      searchbar.prependTo($('.blue-bar'));
-    }
-  }
 
 	// Corrects the scrolling movement so the element to which the page is being scrolled appears in the screen, having in mind the fixed top bar.
 	function correctScrollTo(spaceBeforeAnchor){
@@ -493,4 +585,31 @@ $(function(){
     });
 
   }
+
+  /* Lightbox style fix */
+  $('a[data-lightbox]').on('click', function(){
+    var topheight = $('body').hasClass('scrolled') ? 101 : 152;
+    var top_value = $('.side-scroll').offset().top;
+    $('html, body').css('overflow', 'hidden');
+    $('#lightboxOverlay').width('100%');
+    $('.side-scroll').attr('style',$('.side-scroll').attr('style')+'position: relative; top: '+(top_value-topheight)+'px');
+  });
+
+  $('#lightboxOverlay, #lightbox, #lightbox .lb-close').on('click', function(e){
+    $('html, body').css('overflow', '');
+    $('.side-scroll').removeAttr('style');
+    menuHeight();
+  });
+
+  $('#lightbox .lb-details span, #lightbox .lb-dataContainer :not(.lb-close)').on('click', function(e){
+    e.stopPropagation();
+    $('html, body').css('overflow', 'hidden');
+  });
+
+  /* Restore overflow when pressing key 'Esc' */
+  $(document).on('keydown', function(e){
+    if( e.keyCode == 27 ){
+      $('html, body').css('overflow', '');
+    }
+  });
 });
