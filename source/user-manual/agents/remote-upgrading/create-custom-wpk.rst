@@ -77,9 +77,9 @@ Canonical WPK package example
 
     .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
 
-3. Modify the ``wazuh-3.9.3/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+3. Modify the ``wazuh-3.9.5/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
     .. code-block:: console
 
@@ -91,9 +91,9 @@ Canonical WPK package example
 
     .. code-block:: console
 
-        # cd wazuh-3.9.3/src
-        # make deps
-        # make TARGET=agent
+      # cd wazuh-3.9.5/src
+      # make deps
+      # make TARGET=agent
 
 5. Install the root CA if you want to overwrite the root CA with the file you created previously:
 

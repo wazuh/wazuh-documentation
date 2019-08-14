@@ -128,20 +128,20 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-7.2.0
+    # yum install filebeat-7.3.0
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 5. Download the Wazuh module for Filebeat:
@@ -180,7 +180,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-    
+
 Next steps
 ----------
 

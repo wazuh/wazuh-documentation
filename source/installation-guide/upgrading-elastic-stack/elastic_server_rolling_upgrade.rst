@@ -77,13 +77,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-7.2.0
+      # yum install elasticsearch-7.3.0
 
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.2.0
+      # apt-get install elasticsearch=7.3.0
       # systemctl restart elasticsearch
 
 5. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
@@ -135,7 +135,7 @@ Due to this change, previous alerts won't be visible in Wazuh indices, an update
 
 Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
 
-Here is an example of how to run the request using the index *wazuh-alerts-3.x-2019.05.16*. 
+Here is an example of how to run the request using the index *wazuh-alerts-3.x-2019.05.16*.
 
 .. code-block:: bash
 
@@ -167,27 +167,27 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-7.2.0
+      # yum install filebeat-7.3.0
 
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.2.0
+      # apt-get install filebeat=7.3.0
 
 2. Update the configuration file.
 
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 3. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 4. Download the Wazuh module for Filebeat:
@@ -225,19 +225,19 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-7.2.0
+      # yum install kibana-7.3.0
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.2.0
+      # apt-get install kibana=7.3.0
 
 4. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.3_7.2.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
 
 5. Restart Kibana.
 

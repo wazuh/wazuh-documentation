@@ -11,15 +11,15 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
   This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
 
-1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.9.3_7.2.0.ova>`_, contains the following components:
+1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.9.5_7.3.0.ova>`_, contains the following components:
 
-    - CentOS 7
-    - Wazuh 3.9.3
-    - Wazuh API 3.9.3
-    - Elasticsearch 7.2.0
-    - Filebeat 7.2.0
-    - Kibana 7.2.0
-    - Wazuh app 3.9.3-7.2.0
+  - CentOS 7
+  - Wazuh 3.9.5
+  - Wazuh API 3.9.5
+  - Elasticsearch 7.3.0
+  - Filebeat 7.3.0
+  - Kibana 7.3.0
+  - Wazuh app 3.9.5-7.3.0
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
@@ -29,9 +29,9 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
     - :doc:`How to install Wazuh agents<installing-wazuh-agent/index>`
 
-    .. warning::
+  .. warning::
 
-      Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
+    Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
 4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, filebeat, and kibana with the 'systemctl' command. For example:
 

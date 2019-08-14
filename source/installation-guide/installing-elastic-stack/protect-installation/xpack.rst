@@ -7,57 +7,6 @@ X-Pack
 
 Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intentioned users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
-Adding authentication for Elasticsearch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1. Add the next lines to ``/etc/elasticsearch/elasticsearch.yml``.
-
-.. code-block:: yaml
-
-    xpack.security.enabled: true
-    xpack.security.transport.ssl.enabled: true
-
-2. Restart Elasticsearch.
-
-.. code-block:: console
-
-    # systemctl restart elasticsearch
-
-3. Generate credentials for all the Elastic Stack pre-built roles and users.
-
-.. code-block:: console
-
-    # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
-
-4. Note down at least the password for the ``elastic`` user.
-
-5. Setting up credentials for Filebeat. Add the next two lines to ``/etc/filebeat/filebeat.yml``.
-
-.. code-block:: yaml
-
-    output.elasticsearch.username: "elastic"
-    output.elasticsearch.password: "elastic_password"
-
-6. Restart Filebeat.
-
-.. code-block:: console
-
-    # systemctl restart filebeat
-
-7. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
-
-.. code-block:: yaml
-
-    xpack.security.enabled: true
-    elasticsearch.username: "elastic"
-    elasticsearch.password: "elastic_password"
-
-8. Restart Kibana.
-
-.. code-block:: console
-
-    # systemctl restart kibana
-
 Configure Elastic Stack to use encrypted connections 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -78,13 +27,11 @@ This section describes how to secure the communications between the involved com
           ip:
             - "10.0.0.4"
 
-2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. 
+2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool.
 
 .. code-block:: console
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --out certs.zip
-
-3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step.
 
 .. code-block:: console
 
@@ -101,20 +48,32 @@ This section describes how to secure the communications between the involved com
         |-- kibana.crt
         |-- kibana.key
 
+3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
+
+.. code-block:: console
+
+    # unzip /usr/share/elasticsearch/certs.zip -d /usr/share/elasticsearch/
+
 .. note::
 
     The ``ca.crt`` file is shared for all the instances. The ``.crt`` and ``.key`` pairs are unique for each instance.
 
 **Configure the Elasticsearch instance**
 
+
 1. Create the directory ``/etc/elasticsearch/certs``, then copy the certificate authorities, the certificate and the key there.
+
+.. note::
+
+    The following commands are assuming a single-host installation, if the components are distributed each file should be distributed to its components (via scp or other available means).
+
 
 .. code-block:: console
 
     # mkdir /etc/elasticsearch/certs/ca -p
-    # cp certs/ca/ca.crt /etc/elasticsearch/certs/ca
-    # cp certs/elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
-    # cp certs/elasticsearch/elasticsearch.key /etc/elasticsearch/certs
+    # cp ca/ca.crt /etc/elasticsearch/certs/ca
+    # cp elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
+    # cp elasticsearch/elasticsearch.key /etc/elasticsearch/certs
     # chown -R elasticsearch: /etc/elasticsearch/certs
     # chmod -R 770 /etc/elasticsearch/certs
 
@@ -149,9 +108,9 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/filebeat/certs/ca -p
-    # cp certs/ca/ca.crt /etc/filebeat/certs/ca
-    # cp certs/wazuh-manager/wazuh-manager.crt /etc/filebeat/certs
-    # cp certs/wazuh-manager/wazuh-manager.key /etc/filebeat/certs
+    # cp ca/ca.crt /etc/filebeat/certs/ca
+    # cp wazuh-manager/wazuh-manager.crt /etc/filebeat/certs
+    # cp wazuh-manager/wazuh-manager.key /etc/filebeat/certs
     # chmod 770 -R /etc/filebeat/certs
 
 2. Add the proper settings in ``/etc/filebeat/filebeat.yml``.
@@ -181,9 +140,9 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/kibana/certs/ca -p
-    # cp certs/ca/ca.crt /etc/kibana/certs/ca
-    # cp certs/kibana/kibana.crt /etc/kibana/certs
-    # cp certs/kibana/kibana.key /etc/kibana/certs
+    # cp ca/ca.crt /etc/kibana/certs/ca
+    # cp kibana/kibana.crt /etc/kibana/certs
+    # cp kibana/kibana.key /etc/kibana/certs
     # chown -R kibana: /etc/kibana/certs
     # chmod -R 770 /etc/kibana/certs
 
@@ -208,6 +167,58 @@ This section describes how to secure the communications between the involved com
 
     # systemctl restart kibana
 
+
+Adding authentication for Elasticsearch
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Add the next line to ``/etc/elasticsearch/elasticsearch.yml``.
+
+.. code-block:: yaml
+
+    xpack.security.enabled: true
+
+2. Restart Elasticsearch and wait for the service to be ready.
+
+.. code-block:: console
+
+    # systemctl restart elasticsearch
+
+
+3. Generate credentials for all the Elastic Stack pre-built roles and users.
+
+.. code-block:: console
+
+    # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
+
+4. Note down at least the password for the ``elastic`` user.
+5. Setting up credentials for Filebeat. Add the next two lines to ``/etc/filebeat/filebeat.yml``.
+
+.. code-block:: yaml
+
+    output.elasticsearch.username: "elastic"
+    output.elasticsearch.password: "password_generated_for_elastic"
+
+6. Restart Filebeat.
+
+.. code-block:: console
+
+    # systemctl restart filebeat
+
+7. Setting up credentials for Kibana. Add the next lines to ``/etc/kibana/kibana.yml``.
+
+.. code-block:: yaml
+
+    xpack.security.enabled: true
+    elasticsearch.username: "elastic"
+    elasticsearch.password: "password_generated_for_elastic"
+
+8. Restart Kibana.
+
+.. code-block:: console
+
+    # systemctl restart kibana
+
+You may now login to your Kibana web interface and use the elastic user credentials to login:
 .. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
   :align: center
   :width: 100%
