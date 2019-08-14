@@ -7,7 +7,7 @@ App overview
 
 The Wazuh app is available on the left side of the screen, on the Kibana sidebar. It's organized in four main sections on the top navigation bar, an indicator for the currently selected API and index pattern, and a button to open the Settings page. This section is a brief description of each of these sections, its features and what the user can do with them.
 
-.. image:: ../../../images/kibana-app/features/app-overview/app-navigation.png
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/app-navigation.png
   :align: center
   :width: 100%
 
@@ -23,7 +23,7 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
     List all your agents in a single page. Get relevant information about them, such as current version, OS, IP, group, and more. You can refine your search using the bar and the filters above the list, or :ref:`download the list <kibana_download_csv>` using the ``Formatted`` button.
 
-.. image:: ../../../images/kibana-app/features/app-overview/agents-preview.png
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/agents-preview.png
   :align: center
   :width: 100%
 
@@ -31,7 +31,7 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
     When clicking on an agent from the list, you can open a tab similar to *Overview*, but tailored to the agent. In addition to this, you can quickily switch to a different agent using the autocomplete search bar on the top right corner. You can check the agent connection status, its alerts, group configuration, hardware information, etc.
 
-.. image:: ../../../images/kibana-app/features/app-overview/agents.png
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/agents.png
   :align: center
   :width: 100%
 
@@ -39,7 +39,7 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
     You can interactively explore your Wazuh alerts from the *Discover* page. You have access to every alert from your currently selected index pattern. You can submit search queries, filter the search results, and view alerts data. You can also see the number of alerts that match the search query and get field value statistics.
 
-.. image:: ../../../images/kibana-app/features/app-overview/discover.png
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/discover.png
   :align: center
   :width: 100%
 
