@@ -1,9 +1,5 @@
 .. _up_ossec_manager:
 
-.. warning::
-
-    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/migrating-from-ossec/ossec-server.html>`_.
-
 Migrating OSSEC manager installed from packages
 ===================================================
 

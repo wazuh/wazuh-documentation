@@ -1,9 +1,5 @@
 .. _setup_puppet:
 
-.. warning::
-
-    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/deploying-with-puppet/setup-puppet/index.html>`_.
-
 Set up Puppet
 ============================
 

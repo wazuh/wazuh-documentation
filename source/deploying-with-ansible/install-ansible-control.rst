@@ -1,9 +1,5 @@
 .. _setup_ansible_control:
 
-.. warning::
-
-    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/deploying-with-ansible/install-ansible-control.html>`_.
-
 Install Ansible
 ============================
 
