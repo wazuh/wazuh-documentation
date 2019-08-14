@@ -39,7 +39,7 @@ Below you can find a table describing the variables used by Wazuh installers on 
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   AGENT_NAME          |  Designates the agent's name. By default will be the computer name.                                                          |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   GROUP               |  Assigns the specified group to the agent.                                                                                   |
+|   GROUP               |  Assigns the agent to one or more existing groups (separated by commas).                                                     |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   \/l  installer.log  |  Generates a log of the installation process.                                                                                |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
