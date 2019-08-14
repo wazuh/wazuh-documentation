@@ -73,7 +73,7 @@ Request List
 	* PUT /agents/restart  (`Restart all agents`_)
 
 `Cache`_
-	* DELETE /cache  (`Clear group cache`_)
+	* DELETE /cache/:group  (`Clear group cache`_)
 	* DELETE /cache  (`Delete cache index`_)
 	* GET /cache  (`Get cache index`_)
 	* GET /cache/config  (`Return cache configuration`_)
