@@ -31,7 +31,7 @@ The ``agent-auth`` program is the client application used along with :ref:`ossec
 +---------------------+-------------------------------------------------------------------------------+
 | **-g <group>**      | Run as a group.                                                               |
 +---------------------+-------------------------------------------------------------------------------+
-| **-G <group>**      | Set the group for centralized configuration.                                  |
+| **-G <group>**      | Set the group or groups (separated by commas) for centralized configuration.  |
 +---------------------+-------------------------------------------------------------------------------+
 | **-i**              | Let the agent IP address be set by the manager connection.                    |
 +---------------------+-------------------------------------------------------------------------------+
