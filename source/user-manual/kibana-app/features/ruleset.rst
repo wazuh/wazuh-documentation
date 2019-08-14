@@ -11,7 +11,7 @@ The Wazuh app provides a section for the ruleset on the *Management* tab. It's d
 
 A special search syntax can be used on the bar for filtering rules and decoders, similar to the *Lucene* syntax used in Kibana. For example, if you type ``group: syslog``, it will create a filter pill under the search bar. You can remove the filter clicking on the `X` icon.
 
-.. image:: ../../../images/kibana-app/features/ruleset/ruleset-list.png
+.. thumbnail:: ../../../images/kibana-app/features/ruleset/ruleset-list.png
   :align: center
   :width: 100%
 
@@ -19,6 +19,6 @@ When the user clicks on a rule or decoder, it will open a detail view, where you
 
 At the bottom of the page, there's a table of related rules or decoders that are defined on the same file.
 
-.. image:: ../../../images/kibana-app/features/ruleset/ruleset-detail.png
+.. thumbnail:: ../../../images/kibana-app/features/ruleset/ruleset-detail.png
   :align: center
   :width: 100%
