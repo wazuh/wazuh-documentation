@@ -12,43 +12,43 @@ Using Kibana UI with the ``elastic`` user
 
 1. Login into Kibana using the ``elastic`` user:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack01.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack01.png
     :align: center
     :width: 40%
 
 2. Go to *Management > Security > Roles*:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack02.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack02.png
     :align: center
     :width: 100%
 
 3. Create the ``wazuh-admin`` role:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack03.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack03.png
     :align: center
     :width: 100%
 
 4. Create the ``wazuh-basic`` role:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack04.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack04.png
     :align: center
     :width: 100%
 
 5. Create the ``wazuh-api-admin`` role:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack05.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack05.png
     :align: center
     :width: 100%
 
 6. Go to *Management > Security > Users*:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack06.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack06.png
     :align: center
     :width: 100%
 
 7. Create the Wazuh administrator user:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
     :align: center
     :width: 100%
 
@@ -58,7 +58,7 @@ Using Kibana UI with the ``elastic`` user
 
     This user is not able to add/remove/edit a Wazuh API, use the Wazuh administrator user instead (step 7).
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
   :align: center
   :width: 100%
 
@@ -68,7 +68,7 @@ Using Kibana UI with the ``elastic`` user
 
     Ensure the password is strong enough, it will be the superuser for your environment.
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack09.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack09.png
   :align: center
   :width: 100%
 

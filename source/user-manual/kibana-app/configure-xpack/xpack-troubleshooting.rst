@@ -47,6 +47,6 @@ The index pattern list is calculated from the server and it's filtered depending
 
 If the user can't access to any pattern, the app will display the following screen:
 
-.. image:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack14.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack14.png
   :align: center
   :width: 50%
