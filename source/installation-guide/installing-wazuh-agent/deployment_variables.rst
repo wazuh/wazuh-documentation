@@ -37,7 +37,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name. See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                                            |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_GROUP         |  Assigns the installed agent to a previously created group. See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                                                       |
+|   WAZUH_GROUP         |  Assigns the installed agent to a previously created group or groups (separated by commas). See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                       |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Examples:
