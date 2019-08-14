@@ -149,6 +149,7 @@ $(function(){
 	if ($('#page').hasClass('no-latest-docs')) {
 		notice_height = parseInt($('.no-latest-notice').outerHeight());
 	}
+	
 	var delay = navbar_top + 200;
 	var window_height = window.innerHeight;
 	var document_height = $(document).outerHeight();
@@ -163,6 +164,12 @@ $(function(){
 	heightNavbar();
 	scrollNavbar();
 	headerSticky();
+
+	setTimeout(function(){
+		if ($('#page').hasClass('no-latest-docs')) {
+			notice_height = parseInt($('.no-latest-notice').outerHeight());
+		}
+	},500);
 
 	$('#navbar').on('mousemove', function(e){
 		page_hover = 'nav';
@@ -223,6 +230,9 @@ $(function(){
 		document_scroll = $(window).scrollTop();
 		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 		nav_height = parseInt($('#globaltoc').outerHeight());
+		if ($('#page').hasClass('no-latest-docs')) {
+			notice_height = parseInt($('.no-latest-notice').outerHeight());
+		}
 
 		/* Update height of navbar */
 		heightNavbar();
