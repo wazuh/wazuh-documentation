@@ -46,20 +46,20 @@ Installing Wazuh agent
     .. code-block:: console
 
       # apt-get install wazuh-agent
-      
+
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
   b) Deployment:
 
-    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events. 
+    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events.
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent  
+      # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent
 
-    See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.      
+    See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.
 
-4. **(Optional)** Disable the Wazuh updates:
+2. **(Optional)** Disable the Wazuh updates:
 
   We recommend maintaining the Wazuh Manager version greater or equal to that of the Wazuh Agents. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
@@ -79,7 +79,7 @@ To uninstall the agent:
 
       # apt-get remove wazuh-agent
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command:
 
     .. code-block:: console
 

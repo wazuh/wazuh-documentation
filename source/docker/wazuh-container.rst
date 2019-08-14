@@ -28,49 +28,51 @@ Increase max_map_count on your host (Linux)
 
 1. You need to increase ``max_map_count`` on your Docker host:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # sysctl -w vm.max_map_count=262144
+      # sysctl -w vm.max_map_count=262144
 
 2. To set this value permanently, update the vm.max_map_count setting in ``/etc/sysctl.conf``. To verify after rebooting, run "sysctl vm.max_map_count".
 
-.. warning::
+    .. warning::
 
-  If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
+      If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
 
 Increase max_map_count on your host (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. You need to increase ``max_map_count`` on your Docker host:
 
-.. code-block:: console
+    .. code-block:: console
 
-  $ docker-machine ssh default
-  # sysctl -w vm.max_map_count=262144
-  # exit
+      $ docker-machine ssh default
+      # sysctl -w vm.max_map_count=262144
+      # exit
 
 2.1 To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``:
 
-.. code-block:: console
+    .. code-block:: console
 
-  $ docker-machine ssh default
-  # vi /var/lib/boot2docker/bootlocal.sh
+      $ docker-machine ssh default
+      # vi /var/lib/boot2docker/bootlocal.sh
 
-2.2 Add the following line into the profile file::
+2.2 Add the following line into the profile file:
 
-  sysctl -w vm.max_map_count=262144
+    .. code-block:: console
+
+      sysctl -w vm.max_map_count=262144
 
 2.3 Make the script runnable:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # chmod +x /var/lib/boot2docker/bootlocal.sh
+      # chmod +x /var/lib/boot2docker/bootlocal.sh
 
 2.4 To verify after rebooting, run "sysctl vm.max_map_count".
 
-.. warning::
+    .. warning::
 
-  If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
+      If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
 
 SELinux
 ^^^^^^^

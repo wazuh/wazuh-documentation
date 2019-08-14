@@ -222,5 +222,3 @@ Upgrade Kibana
     # systemctl daemon-reload
     # systemctl enable kibana.service
     # systemctl start kibana.service
-
-

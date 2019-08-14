@@ -7,9 +7,9 @@ Install Wazuh Server
 
 Once the Ansible repository has been cloned, we proceed to install the Wazuh server, that is, we will install a Wazuh manager, Wazuh API and Filebeat.
 
-- `1 - Access to wazuh-ansible`_
-- `2 - Preparing the playbook`_
-- `3 - Running the playbook`_
+1. Access to wazuh-ansible
+2. Preparing the playbook
+3. Running the playbook
 
 1 - Access to wazuh-ansible 
 ---------------------------

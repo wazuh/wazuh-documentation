@@ -5,7 +5,7 @@
 Protect your data in the Elastic Stack
 ======================================
 
-Learn how to protect your data in the Elastic Stack in different ways. X-Pack is the official way, it comes with the Elastic Stack. 
+Learn how to protect your data in the Elastic Stack in different ways. X-Pack is the official way, it comes with the Elastic Stack.
 Search Guard is an open-source alternative to X-Pack, they can't be used together. We also show how to add simple authentication and SSL
 for Kibana if you don't want to use X-Pack neither Search Guard.
 
@@ -26,4 +26,3 @@ for Kibana if you don't want to use X-Pack neither Search Guard.
    xpack
    searchguard
    kibana_ssl
-

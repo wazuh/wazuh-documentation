@@ -36,39 +36,39 @@ Each instance can be installed on different hosts following the same steps descr
 
 1. Download Splunk v7.3.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
-  .. note::
-    Splunk is not open source software and it requires a registered user and license in order to work. Users can also use a free trial license.
+    .. note::
+      Splunk is not open source software and it requires a registered user and license in order to work. Users can also use a free trial license.
 
 2. Install the Splunk v7.3.0 package:
 
-  a) For RPM based distributions:
+    a) For RPM based distributions:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # yum install splunk-enterprise-package.rpm
+        # yum install splunk-enterprise-package.rpm
 
-  b) For Debian/Ubuntu distributions:
+    b) For Debian/Ubuntu distributions:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # dpkg --install splunk-enterprise-package.deb
+        # dpkg --install splunk-enterprise-package.deb
 
 3. Ensure Splunk v7.3.0 is installed in ``/opt/splunk`` and start the service:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /opt/splunk/bin/splunk start
+      # /opt/splunk/bin/splunk start
 
-  .. note::
-    You will be prompted for a name and password for the administrator user.
+    .. note::
+      You will be prompted for a name and password for the administrator user.
 
-  After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
+    After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
 4. Optional. Additionally, if the Splunk service is required to start at boot time, execute the following *command*.
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /opt/splunk/bin/splunk enable boot-start
+      # /opt/splunk/bin/splunk enable boot-start
 
 Configuring the Splunk instances
 --------------------------------
@@ -120,9 +120,9 @@ Now, restart the Splunk Service:
 
   Check the state of the cluster executing:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # /opt/splunk/bin/splunk show cluster-bundle-status
+    # /opt/splunk/bin/splunk show cluster-bundle-status
 
 
 Next step is installing the :ref:`Wazuh App <splunk_app>` into the search heads instances to start using the services.

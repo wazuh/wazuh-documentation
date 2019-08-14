@@ -23,7 +23,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
-  Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options. You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
+    Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options. You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
 
 3. The **Wazuh Manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
 
@@ -35,16 +35,16 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, filebeat, and kibana with the 'systemctl' command. For example:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl restart wazuh-manager
-    # systemctl restart wazuh-api
-    # systemctl stop elasticsearch
-    # systemctl start filebeat
-    # systemctl status kibana
+      # systemctl restart wazuh-manager
+      # systemctl restart wazuh-api
+      # systemctl stop elasticsearch
+      # systemctl start filebeat
+      # systemctl status kibana
 
 5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADDRESS (where ``OVA_IP_ADDRESS`` is your system IP).
 
-  .. note::
+    .. note::
 
-    If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
+      If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.

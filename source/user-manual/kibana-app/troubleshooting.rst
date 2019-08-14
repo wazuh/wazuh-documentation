@@ -148,27 +148,27 @@ All the technologies we are using have their own logs files, you can check them 
 
 1. Check the Elastic Stack log files:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # cat /var/log/elasticsearch/elasticsearch.log | grep -i -E "error|warn"
-  # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
+      # cat /var/log/elasticsearch/elasticsearch.log | grep -i -E "error|warn"
+      # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
 
-.. note::
-  The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
+    .. note::
+      The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
 
-.. warning::
-  By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
+    .. warning::
+      By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
 2. Check the Wazuh app log file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
+      # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
 
 3. Check the Wazuh Manager log file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
+      # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
 
 You can also open a new thread in our `Google mailing list <https://groups.google.com/group/wazuh>`_, or a new issue in our `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_.
