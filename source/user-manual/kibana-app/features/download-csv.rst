@@ -14,6 +14,6 @@ This feature is currently available on tables from the following app pages:
 - **Management > Groups**
 - **Management > Logs**
 
-.. image:: ../../../images/kibana-app/features/download-csv/download-csv.png
+.. thumbnail:: ../../../images/kibana-app/features/download-csv/download-csv.png
   :align: center
   :width: 100%

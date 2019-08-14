@@ -122,7 +122,7 @@ When the evaluation is complete you will see the results as OSSEC alerts:
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. image:: ../../../../images/wodles-oscap/pci-oscap.png
+.. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
     :align: center
     :width: 100%
 
@@ -130,7 +130,7 @@ Note that each field is extracted to facilitate searches and analysis.
 
 Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../../../images/wodles-oscap/pci-dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
     :align: center
     :width: 100%
 
@@ -220,11 +220,11 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. image:: ../../../../images/wodles-oscap/oscap_example.png
+.. thumbnail:: ../../../../images/wodles-oscap/oscap_example.png
     :align: center
     :width: 100%
 
-.. image:: ../../../../images/wodles-oscap/overview.png
+.. thumbnail:: ../../../../images/wodles-oscap/overview.png
     :align: center
     :width: 100%
 
@@ -233,7 +233,7 @@ Note that each field is extracted to facilitate searches and analysis.
 
 Finally, you can explore all scan results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../../../images/wodles-oscap/dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/dashboard.png
     :align: center
     :width: 100%
 
