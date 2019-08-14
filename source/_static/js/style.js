@@ -132,7 +132,7 @@ $(function(){
  function checkScroll(){
 	 var scrollTop = $(document).scrollTop();
 	 var headerHeight = 100;
-	 if ($('body').hasClass('no-latest-docs')) {
+	 if ($('#page').hasClass('no-latest-docs')) {
 		headerHeight += parseInt($('.no-latest-notice').outerHeight());
 	 }
    if (scrollTop >= headerHeight ) {
@@ -146,7 +146,7 @@ $(function(){
 
 	var navbar_top = 100;
 	var notice_height = 0;
-	if ($('body').hasClass('no-latest-docs')) {
+	if ($('#page').hasClass('no-latest-docs')) {
 		notice_height = parseInt($('.no-latest-notice').outerHeight());
 	}
 	var delay = navbar_top + 200;
@@ -197,7 +197,7 @@ $(function(){
 		document_scroll = $(window).scrollTop();
 		container_nav_height = parseInt($('#navbar-globaltoc').outerHeight());
 		nav_height = parseInt($('#globaltoc').outerHeight());
-		if ($('body').hasClass('no-latest-docs')) {
+		if ($('#page').hasClass('no-latest-docs')) {
 			notice_height = parseInt($('.no-latest-notice').outerHeight());
 		}
 
