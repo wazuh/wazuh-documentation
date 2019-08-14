@@ -191,7 +191,7 @@ For agents with unrestricted address (address ``any`` or netmask different from 
 
 This is the **encryption flow chart**:
 
-.. image:: ../images/development/encryption_flow.png
+.. thumbnail:: ../images/development/encryption_flow.png
     :align: center
     :width: 50%
 
