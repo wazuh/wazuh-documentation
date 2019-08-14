@@ -58,7 +58,6 @@ Author: Wazuh Inc.
     top: 0;
   }
 }
-}
 
 @-webkit-keyframes showMenuStickyMobile_noLatestDocs {
   0% {
@@ -158,7 +157,7 @@ dt {
   margin-bottom: 1rem;
 }
 
-body.no-latest-docs {
+#page.no-latest-docs {
   padding-top: 80px;
 }
 
@@ -341,7 +340,7 @@ header .menuweb-bar .menu-item a {
           animation: showMenuStickyMobile 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
 }
 
-.no-latest-docs.scrolled #header-sticky {
+.no-latest-docs #header-sticky {
   -webkit-animation: showMenuStickyMobile_noLatestDocs 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
           animation: showMenuStickyMobile_noLatestDocs 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
 }
@@ -785,7 +784,7 @@ li.toctree-l5 > a {
   padding-top: 180px;
 }
 
-.no-latest-docs.scrolled #navbar-globaltoc {
+.no-latest-docs #navbar-globaltoc {
   padding-top: 132px;
 }
 
@@ -2796,7 +2795,7 @@ div.highlight pre {
 
 @media (min-width: 992px){
 
-      body.no-latest-docs {
+      #page.no-latest-docs {
         padding-top: 40px;
       }
 
@@ -2841,7 +2840,7 @@ div.highlight pre {
                 animation: showMenuSticky 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
       }
 
-      .no-latest-docs.scrolled #header-sticky {
+      .no-latest-docs #header-sticky {
         -webkit-animation: showMenuSticky_noLatestDocs 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
                 animation: showMenuSticky_noLatestDocs 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0ms both;
       }
@@ -3439,7 +3438,7 @@ pre .nb { color: #0086b3 } /* Name.Builtin */
 pre .nc { color: #458; font-weight: bold } /* Name.Class */
 pre .no { color: teal } /* Name.Constant */
 pre .nd { color: #555555 } /* Name.Decorator */
-pre .ni { color: #purple } /* Name.Entity */
+pre .ni { color: purple } /* Name.Entity */
 pre .ne { color: #900; font-weight: bold  } /* Name.Exception */
 pre .nf { color: #900; font-weight: bold } /* Name.Function */
 pre .nl { color: #002070 } /* Name.Label */
