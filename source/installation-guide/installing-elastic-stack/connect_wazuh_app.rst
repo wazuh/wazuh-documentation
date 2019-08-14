@@ -7,13 +7,13 @@ In this section, we'll register the Wazuh API (installed on the Wazuh server) in
 
 1. Open a web browser and go to the Elastic Stack server's IP address on port 5601 (default Kibana port). Then, from the left menu, go to the Wazuh App.
 
-  .. image:: ../../images/installation/wazuhapp/kibana_app.png
+  .. thumbnail:: ../../images/installation/wazuhapp/kibana_app.png
     :align: center
     :width: 100%
 
 2. Click on ``Add new API``.
 
-  .. image:: ../../images/installation/wazuhapp/connect_api.png
+  .. thumbnail:: ../../images/installation/wazuhapp/connect_api.png
     :align: center
     :width: 100%
 
@@ -33,7 +33,7 @@ In this section, we'll register the Wazuh API (installed on the Wazuh server) in
 
 4. Fill Username and Password with appropriate credentials you created in previous step.  Enter ``http://MANAGER_IP`` for the URL, where ``MANAGER_IP`` is the real IP address of the Wazuh qserver. Enter "55000" for the Port.
 
-  .. image:: ../../images/installation/wazuhapp/fields_api.png
+  .. thumbnail:: ../../images/installation/wazuhapp/fields_api.png
     :align: center
     :width: 100%
 
@@ -41,7 +41,7 @@ In this section, we'll register the Wazuh API (installed on the Wazuh server) in
 
 6. Click on ``Save``.
 
-  .. image:: ../../images/installation/wazuhapp/app_running.png
+  .. thumbnail:: ../../images/installation/wazuhapp/app_running.png
     :align: center
     :width: 100%
 
