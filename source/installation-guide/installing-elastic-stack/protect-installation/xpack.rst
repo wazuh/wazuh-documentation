@@ -219,6 +219,7 @@ Adding authentication for Elasticsearch
     # systemctl restart kibana
 
 You may now login to your Kibana web interface and use the elastic user credentials to login:
+
 .. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
   :align: center
   :width: 100%
