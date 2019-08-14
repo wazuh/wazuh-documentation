@@ -5,6 +5,8 @@
 fluent-forward
 ==============
 
+.. versionadded:: 3.9.0
+
 .. topic:: XML section name
 
 	.. code-block:: xml
