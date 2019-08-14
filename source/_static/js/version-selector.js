@@ -6,20 +6,20 @@ jQuery(function($){
     */
 
 
-    var current_version = "3.9-new-design";
+    var current_version = "3.9";
 
     var versions = [
         {name: "3.9 (current)", url: "/"+current_version},
-        {name: "3.8", url: "/3.8-new-design"},
-        {name: "3.7", url: "/3.7-new-design"},
-        {name: "3.6", url: "/3.6-new-design"},
-        {name: "3.5", url: "/3.5-new-design"},
-        {name: "3.4", url: "/3.4-new-design"},
-        {name: "3.3", url: "/3.3-new-design"},
-        {name: "3.2", url: "/3.2-new-design"},
-        {name: "3.1", url: "/3.1-new-design"},
-        {name: "3.0", url: "/3.0-new-design"},
-        {name: "2.1", url: "/2.1-new-design"},];
+        {name: "3.8", url: "/3.8"},
+        {name: "3.7", url: "/3.7"},
+        {name: "3.6", url: "/3.6"},
+        {name: "3.5", url: "/3.5"},
+        {name: "3.4", url: "/3.4"},
+        {name: "3.3", url: "/3.3"},
+        {name: "3.2", url: "/3.2"},
+        {name: "3.1", url: "/3.1"},
+        {name: "3.0", url: "/3.0"},
+        {name: "2.1", url: "/2.1"},];
 
     addVersions();
 		checkLatestDocs();
