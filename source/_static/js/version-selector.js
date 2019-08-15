@@ -43,11 +43,11 @@ jQuery(function($){
             return;
         }
 
+        page = document.location.pathname.split('/'+path)[1];
+
         if (path == "current" || path == "3.x" ) {
             path = current_version;
         }
-
-				page = document.location.pathname.split('/'+path)[1]; // Gets the page of the documentation that it's been visited
 
         for (var i = 0; i < versions.length; i++) {
             ele += "<li><a href='" + versions[i].url + page + "'>"+versions[i].name+"</a></li>";
