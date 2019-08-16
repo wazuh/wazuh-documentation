@@ -4,9 +4,79 @@ How to configure SCA
 .. contents:: Table of Contents
    :depth: 10
 
-When a Wazuh agent is installed, the system will only include the policy files supported by that particular Operating System.
-The :ref:`table<available_sca_policies>` lists the policy file set officially supported by Wazuh.
-These policies are included with the Wazuh manager installation so they can be easily enabled.
+Upon installation, agents will include the policies appropriates for their particular Operating System.
+For the full list of **Officially supported policy files**  see table :ref:`available_sca_policies`.
+These policies are included with the Wazuh Manager installation so that they can be easily enabled.
+
+static const char * const XML_ENABLED = "enabled";
+static const char * const XML_SCAN_DAY = "day";
+static const char * const XML_WEEK_DAY = "wday";
+static const char * const XML_TIME = "time";
+static const char * const XML_INTERVAL = "interval";
+static const char * const XML_SCAN_ON_START= "scan_on_start";
+static const char * const XML_POLICIES = "policies";
+static const char * const XML_POLICY = "policy";
+static const char * const XML_SKIP_NFS = "skip_nfs";
+
+Enabling and disabling policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` files) present in their ruleset folder:
+
+- Linux agents: ``<ossec-agent-installation-folder>/ruleset/sca``.
+- Windows agents: ``<ossec-agent-installation-folder>\ruleset\sca``.
+
+.. danger::
+    The contents of the aformentioned **default ruleset folders are neither kept accross installations nor updates**.
+    If you wish to modify or add new policies, place then under an alternative folder.
+
+To enable a policy file that's outside the default folder, add a line like
+
+.. code-block:: xml
+
+    <policy>/var/ossec/etc/shared/policy_file_to_enable.yml</policy>
+
+in the **policies section** of the **SCA** module.
+
+There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
+(or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
+the `ossec.conf` by adding a line such as
+
+.. code-block:: xml
+
+    <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
+
+in the **policies section** of the **SCA** module.
+
+How to share policy files and configuration with agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section,
+the Wazuh manager has the ability to push files and configurations to connected agents.
+
+This feature can be used to push policy files to agents in defined groups. By default, every agent belongs to the
+*default* group, so we can use this group as example.
+
+In order to push a new policy from the manager it should be placed in the directory ``/var/ossec/etc/shared/default``,
+and be owned by user `ossec`.
+
+In addition, to push configuration, the same strategy applies. For instance, in order to add a policy, add a block like the following to the ``/var/ossec/etc/shared/default/agent.conf`` as per the
+:ref:`example<ossec_conf_enable_policy>`.
+
+.. code-block:: xml
+    :name: ossec_conf_enable_policy
+    :caption: Enabling a policy from the ``ossec.conf``
+
+    <agent_config>
+        <!-- Shared agent configuration here -->
+        <sca>
+            <policies>
+                <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
+            </policies>
+        </sca>
+    </agent_config>
+
+This ``<sca>`` block will be merged with the ``<sca>`` block on the agent side and the new configuration will be added.
 
 .. table:: Available SCA policies
     :widths: auto
@@ -69,63 +139,3 @@ These policies are included with the Wazuh manager installation so they can be e
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_mysql5-6_enterprise     |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-
-Enabling and disabling policies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` files) present in their ruleset folder:
-
-- Linux agents: ``<ossec-agent-installation-folder>/ruleset/sca``.
-- Windows agents: ``<ossec-agent-installation-folder>\ruleset\sca``.
-
-.. danger::
-    The contents of the aformentioned **default ruleset folders are neither kept accross installations nor updates**.
-    If you wish to modify or add new policies, place then under an alternative folder.
-
-To enable a policy file that's outside the default folder, add a line like
-
-.. code-block:: xml
-
-    <policy>/var/ossec/etc/shared/policy_file_to_enable.yml</policy>
-
-in the **policies section** of the **SCA** module.
-
-There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
-(or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
-the `ossec.conf` by adding a line like
-
-.. code-block:: xml
-
-    <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
-
-in the **policies section** of the **SCA** module.
-
-How to share policy files and configuration with agents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section,
-the Wazuh manager has the ability to push files and configurations to connected agents.
-
-This feature can be used to push policy files to agents in defined groups. By default, every agent belongs to the
-*default* group, so we can use this group as example.
-
-In order to push a new policy from the manager it should be placed in the directory ``/var/ossec/etc/shared/default``,
-and be owned by user `ossec`.
-
-In addition, to push configuration, the same strategy applies. For instance, in order to add a policy, add a block like the following to the ``/var/ossec/etc/shared/default/agent.conf`` as per the
-:ref:`example<ossec_conf_enable_policy>`.
-
-.. code-block:: xml
-    :name: ossec_conf_enable_policy
-    :caption: Enabling a policy from the ``ossec.conf``
-
-    <agent_config>
-        <!-- Shared agent configuration here -->
-        <sca>
-            <policies>
-                <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
-            </policies>
-        </sca>
-    </agent_config>
-
-This ``<sca>`` block will be merged with the ``<sca>`` block on the agent side and the new configuration will be added.
