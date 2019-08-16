@@ -36,15 +36,13 @@ location
 
 Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
-For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
+For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jul 30th, 2019).
 
-Wildcards may be used on non-Windows systems, but if the log file doesn't exist at the time ``ossec-logcollector`` is started, it will be added after ``logcollector.vcheck_files`` seconds.
+Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
-Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
+The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. 
-
-As an example, these two configurations show a channel filtering for firewall and Sysmon events.
+In the following example we can see two configurations showing a channel filtering for firewall and Sysmon events.
 
 .. code-block:: xml
 
@@ -58,6 +56,26 @@ As an example, these two configurations show a channel filtering for firewall an
       <log_format>eventchannel</log_format>
   </localfile>
 
+
+Below we have some Windows wildcard examples.
+
+.. code-block:: xml
+
+  <localfile>
+      <location>C:\Users\wazuh\myapp\*</location>
+      <log_format>syslog</log_format>
+  </localfile>
+
+  <localfile>
+      <location>C:\xampp\apache\logs\*.log</location>
+      <log_format>syslog</log_format>
+  </localfile>
+
+  <localfile>
+      <location>C:\logs\file-%Y-%m-%d.log</location>
+      <log_format>syslog</log_format>
+  </localfile>
+
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
 +--------------------+--------------------------+
@@ -65,8 +83,10 @@ As an example, these two configurations show a channel filtering for firewall an
 +--------------------+--------------------------+
 
 .. note::
-  On Windows systems, only one wildcard character is supported. For instance ``*match*``, will match all files.
-  The maximum amount of files to monitor is limited to 200.
+  * ``strftime`` format strings and wildcards cannot be used on the same entry.
+
+  * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
+  * The maximum amount of files monitored at same time is limited to 200.
 
 command
 ^^^^^^^
@@ -133,7 +153,7 @@ query
 
 Filter ``eventchannel`` events that Wazuh will process by using an *XPATH* query following the event schema.
 
-Example: 
+Example:
 
 .. code-block:: xml
 

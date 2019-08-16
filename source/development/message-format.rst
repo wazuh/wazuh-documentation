@@ -9,13 +9,16 @@ Standard OSSEC message format
 
 This page aims to describe the format of messages that OSSEC (and Wazuh) accepts and sends between its components:
 
-Input logs
+**Input logs**
+
     Strings ingested by *Logcollector* from log files, Windows events, program outputs, etc.
 
-Standard OSSEC events
+**Standard OSSEC events**
+
     Data sent **locally** between OSSEC components, usually to *Agent daemon* (in agents) or *Analysis daemon* (in manager).
 
-Secure messages
+**Secure messages**
+
     Data delivered **remotely** between *Agent daemon* and *Remote daemon*.
 
 Input logs
@@ -62,21 +65,22 @@ Queue
 
     The most common queue types are:
 
-    1
-        Local file log, including Syslog messages, Windows event logs, outputs from commands, OpenSCAP results and custom logs.
-    2
-        Remote Syslog messages, received by the Syslog server at *Remote daemon*.
-    4
-        Secure messages. They are events from *Remote daemon* to *Analysis daemon*, that contain a standard OSSEC message plus the source agent ID.
-    8
-        Syscheck event. *Analysis daemon* parses it using the Syscheck decoder.
-    9
-        Rootcheck event. *Analysis daemon* parses it using the Rootcheck decoder.
+        **1** Local file log, including Syslog messages, Windows event logs, outputs from commands, OpenSCAP results and custom logs.
+        
+        **2** Remote Syslog messages, received by the Syslog server at *Remote daemon*.
+        
+        **4** Secure messages. They are events from *Remote daemon* to *Analysis daemon*, that contain a standard OSSEC message plus the source agent ID.
+        
+        **8** Syscheck event. *Analysis daemon* parses it using the Syscheck decoder.
+        
+        **9** Rootcheck event. *Analysis daemon* parses it using the Rootcheck decoder.
 
-Location
+**Location**
+
     Log source, typically the path to the file where the log was found.
 
-Message
+**Message**
+
     Content of the log.
 
 Example:
@@ -105,7 +109,8 @@ The *block* is the result of joining a header and the input event::
 
     <Block> = <Random> <Global counter> ":" <Local counter> ":" <Event>
 
-Random
+**Random**
+
     5-byte 0-padded random unsigned integer.
 
     +---------+----------+
@@ -114,7 +119,8 @@ Random
     | Padding | 0-padded |
     +---------+----------+
 
-Global counter
+**Global counter**
+
     Most significant part of the message counter.
 
     +---------+-----------+
@@ -123,7 +129,8 @@ Global counter
     | Padding | 0-padded  |
     +---------+-----------+
 
-Local counter
+**Local counter**
+
     Least significant part of the message counter.
 
     +---------+----------+
@@ -132,7 +139,8 @@ Local counter
     | Padding | 0-padded |
     +---------+----------+
 
-Event
+**Event**
+
     Input message.
 
 Hash
@@ -223,12 +231,14 @@ Network protocol
 
 The procedure to send a payload via network depends on the connection protocol:
 
-UDP protocol
+**UDP protocol**
+
     The datagram is the payload itself::
 
         Send(<Payload>)
 
-TCP protocol
+**TCP protocol**
+
     Messages are not delimited by the network, so the payload size must be prepended to the payload::
 
         Send(<Size> <Payload>)
@@ -248,12 +258,14 @@ Encryption system
 
 The encryption system uses a constant initialization vector and a key:
 
-Initialization vector
+**Initialization vector**
+
     8-byte hexadecimal array::
 
         <IV> = FE DC BA 98 76 54 32 10
 
-Encryption key
+**Encryption key**
+
     They key is built by appending and cutting hexadecimal strings depending on some agent attributes (see :ref:`client-keys`)::
 
         <Key> = MD5(<Pass>) MD5(MD5(<Name>) MD5(<ID>))[0:15]

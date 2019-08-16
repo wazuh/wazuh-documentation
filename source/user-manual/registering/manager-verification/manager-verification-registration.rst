@@ -11,7 +11,7 @@ To verify the manager using SSL, it is needed to create a SSL certificate for th
     :align: center
     :width: 100%
 
-In this example, we are going to create a certificate for a Wazuh Manager, whose IP address is ``192.168.1.2``. 
+In this example, we are going to create a certificate for a Wazuh Manager, whose IP address is ``192.168.1.2``.
 
 Wazuh Manager
 ^^^^^^^^^^^^^
@@ -31,7 +31,7 @@ Follow these stes in the Wazuh Manager:
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
-3. Restart the Wazuh Manager: 
+3. Restart the Wazuh Manager:
 
   a) For Systemd:
 
@@ -52,7 +52,7 @@ Once you have completed the Wazuh Manager section, you need to copy the CA file 
 
 .. toctree::
     :maxdepth: 2
-    
+
     agents/linux-unix-manager-verification
     agents/windows-manager-verification
     agents/macos-manager-verification

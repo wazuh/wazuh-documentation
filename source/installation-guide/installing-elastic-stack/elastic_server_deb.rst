@@ -30,7 +30,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=7.2.0
+    # apt-get install elasticsearch=7.3.0
 
 2. Enable and start the Elasticsearch service:
 
@@ -49,6 +49,11 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # update-rc.d elasticsearch defaults 95 10
     # service elasticsearch start
 
+3. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E setup.template.json.enabled=false
 
 .. _install_kibana_app_deb:
 
@@ -61,13 +66,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=7.2.0
+    # apt-get install kibana=7.3.0
 
 2. Install the Wazuh app plugin for Kibana:
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.3_7.2.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 

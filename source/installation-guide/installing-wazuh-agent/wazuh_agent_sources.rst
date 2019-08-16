@@ -17,30 +17,30 @@ Installing Linux agent
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-  a) For RPM-based distributions:
+    a) For RPM-based distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
       # yum install make gcc policycoreutils-python automake autoconf libtool
 
-  b) For Debian-based distributions:
+    b) For Debian-based distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
       # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool
 
 2. Download and extract the latest version:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.4.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cd wazuh-*
-    # ./install.sh
+      # cd wazuh-*
+      # ./install.sh
 
   If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
@@ -77,11 +77,11 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
 1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
-  .. code-block:: console
+    .. code-block:: console
 
-   # apt-get install gcc-mingw-w64
-   # apt-get install nsis
-   # apt-get install make
+      # apt-get install gcc-mingw-w64
+      # apt-get install nsis
+      # apt-get install make
 
 2. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
@@ -91,36 +91,36 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
 3. Download the Wazuh source code and unzip it:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
-    # cd wazuh-3.9.3/src
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.4.tar.gz | tar zx
+    # cd wazuh-3.9.4/src
 
 4. Compile the agent by running the ``make`` command:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # make deps
-    # make TARGET=winagent
+      # make deps
+      # make TARGET=winagent
 
-The following output will appear at the end of the building process:
+    The following output will appear at the end of the building process:
 
-  .. code-block:: console
+    .. code-block:: console
 
-   Done building winagent
+      Done building winagent
 
 
 5. Moves the entire repository to the Windows machine. It is recommended to compress it to speed up the process.
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.9.3
+    # zip -r wazuh.zip ../../wazuh-3.9.4
 
 6. Decompress the repository the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
-  .. code-block:: console
+    .. code-block:: console
 
-    cd wazuh-3.9.3\src\win32
+    cd wazuh-3.9.4\src\win32
     .\wazuh-installer-build-msi.bat
 
   If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.

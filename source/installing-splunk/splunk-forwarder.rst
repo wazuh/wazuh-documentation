@@ -20,17 +20,17 @@ Installation process
 
 2. Install it with the following commands depending on your operating system:
 
-  a) For **RPM based** distributions:
+    a) For **RPM based** distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # yum install splunkforwarder-package.rpm
+      # yum install splunkforwarder-package.rpm
 
-  b) For **DEB based** distributions:
+    b) For **DEB based** distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # dpkg --install splunkforwarder-package.deb
+      # dpkg --install splunkforwarder-package.deb
 
 3. Ensure Splunk Forwarder v7.3.0 is installed in ``/opt/splunkforwarder``.
 
@@ -50,53 +50,53 @@ Configuring props
 
 1. Download and insert the ``props.conf`` template:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/splunk/props.conf
 
 Configuring inputs
 ++++++++++++++++++
 
 1. Download and insert the ``inputs.conf`` template:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/splunk/inputs.conf
 
 2. Set the Wazuh manager hostname:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunkforwarder/etc/system/local/inputs.conf
+      # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunkforwarder/etc/system/local/inputs.conf
 
 Set up data forwarding
 ^^^^^^^^^^^^^^^^^^^^^^
 
 1. Point Forwarder output to Wazuh's Splunk Indexer with the following command:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
+      # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
 
-  - ``INDEXER_IP`` is the IP address of the Splunk Indexer.
-  - ``INDEXER_PORT`` is the port of the Splunk Indexer. By default it's 9997.
+    - ``INDEXER_IP`` is the IP address of the Splunk Indexer.
+    - ``INDEXER_PORT`` is the port of the Splunk Indexer. By default it's 9997.
 
 2. Restart Splunk Forwarder service:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /opt/splunkforwarder/bin/splunk restart
+      # /opt/splunkforwarder/bin/splunk restart
 
-  .. warning::
-    If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
+    .. warning::
+      If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
 
-After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
+    After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
 
 3. Optional. If you additionally want the Splunk Forwarder service to start at boot time, please execute the following command:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /opt/splunkforwarder/bin/splunk enable boot-start
+      # /opt/splunkforwarder/bin/splunk enable boot-start
 
 Configuring Forwarder in a Splunk cluster
 -----------------------------------------

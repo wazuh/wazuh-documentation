@@ -38,6 +38,8 @@ There are several options to install a Wazuh agent, depending on the operating s
 
 .. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider exploring these options if you are deploying Wazuh in a larger environment.
 
+.. rst-class:: d-none
+
 .. toctree::
     :hidden:
     :maxdepth: 2

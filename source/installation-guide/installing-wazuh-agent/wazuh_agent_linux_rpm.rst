@@ -7,11 +7,11 @@ CentOS/RHEL/Oracle Linux/Amazon Linux
 
 The RPM package is suitable for installation on Red Hat, CentOS and other RPM-based systems. In this page, we will provide the instructions for:
 
-- CentOS/RHEL 6 or greater. 
-- Oracle Linux 6 or greater. 
+- CentOS/RHEL 6 or greater.
+- Oracle Linux 6 or greater.
 - Amazon Linux 1 and 2
 
-For other RPM-based OS (CentOS/RHEL/Oracle Linux 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
+For other RPM-based OS (CentOS/RHEL/Oracle Linux 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -22,7 +22,7 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH 
+    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
@@ -38,20 +38,20 @@ Installing Wazuh agent
   a) Installation:
 
     .. code-block:: console
-   
+
       # yum install wazuh-agent
-         
+
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
   b) Deployment:
 
-    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events. 
+    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events.
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent 
+      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent
 
-    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
+    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.
 
 3. **(Optional)** Disable the Wazuh repository:
 
@@ -70,4 +70,4 @@ To uninstall the agent:
 
       # yum remove wazuh-agent
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``. 
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.

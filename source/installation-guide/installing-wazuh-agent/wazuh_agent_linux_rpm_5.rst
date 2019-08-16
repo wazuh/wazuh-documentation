@@ -5,7 +5,7 @@
 CentOS/RHEL/Oracle Linux 5
 ==========================
 
-The RPM package is suitable for CentOS/RHEL/Oracle Linux 5. For other RPM-based OS (CentOS/RHEL/Oracle Linux 6 or higher , Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
+The RPM package is suitable for CentOS/RHEL/Oracle Linux 5. For other RPM-based OS (CentOS/RHEL/Oracle Linux 6 or higher , Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -16,7 +16,7 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5 
+    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
@@ -32,20 +32,20 @@ Installing Wazuh agent
   a) Installation:
 
     .. code-block:: console
-   
+
       # yum install wazuh-agent
-         
+
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
   b) Deployment:
 
-    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events.  
+    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events.
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent 
+      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent
 
-    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
+    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.
 
 3. **(Optional)** Disable the Wazuh repository:
 

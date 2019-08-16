@@ -61,52 +61,52 @@ Canonical WPK package example
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-  a) For RPM-based distributions:
+    a) For RPM-based distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-  b) For Debian-based distributions:
+    b) For Debian-based distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+        # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
 
 2. Download and extract the latest version:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.3.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
 
-3. Modify the ``wazuh-3.9.3/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+3. Modify the ``wazuh-3.9.5/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      USER_LANGUAGE="en"
-      USER_NO_STOP="y"
-      USER_UPDATE="y"
+        USER_LANGUAGE="en"
+        USER_NO_STOP="y"
+        USER_UPDATE="y"
 
 4. Compile the project from the ``src`` folder:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      # cd wazuh-3.9.3/src
+      # cd wazuh-3.9.5/src
       # make deps
       # make TARGET=agent
 
 5. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      # cd ../
-      # cp path/to/wpk_root.pem etc/wpk_root.pem
+        # cd ../
+        # cp path/to/wpk_root.pem etc/wpk_root.pem
 
 6. Compile the WPK package using your SSL certificate and key:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+        # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
 Definitions:
     - **output/myagent.wpk** is the name of the output WPK package.

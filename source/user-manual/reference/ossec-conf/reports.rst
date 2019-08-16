@@ -147,20 +147,20 @@ Enable or disable the inclusion of logs when creating the report.
 Example of configuration
 ------------------------
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <reports>
-      <title>Auth_Report</title>
-      <group>authentication_failed,</group>
-      <srcip>192.168.1.10</srcip>
-      <email_to>recipient@example.wazuh.com</email_to>
-      <showlogs>yes</showlogs>
-    </reports>
+  <reports>
+    <title>Auth_Report</title>
+    <group>authentication_failed,</group>
+    <srcip>192.168.1.10</srcip>
+    <email_to>recipient@example.wazuh.com</email_to>
+    <showlogs>yes</showlogs>
+  </reports>
 
-    <reports>
-      <title>List of logged users</title>
-      <rule>535</rule>
-      <email_to>recipient@example.wazuh.com</email_to>
-      <srcip>192.168.1.10</srcip>
-      <showlogs>yes</showlogs>
-    </reports>
+  <reports>
+    <title>List of logged users</title>
+    <rule>535</rule>
+    <email_to>recipient@example.wazuh.com</email_to>
+    <srcip>192.168.1.10</srcip>
+    <showlogs>yes</showlogs>
+  </reports>

@@ -27,109 +27,109 @@ NGINX SSL proxy for Splunk (RPM-based distributions)
 
 1. Install NGINX:
 
-  a. For CentOS:
+    a. For CentOS:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # cat > /etc/yum.repos.d/nginx.repo <<\EOF
-      [nginx]
-      name=nginx repo
-      baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-      gpgcheck=0
-      enabled=1
-      EOF
+        # cat > /etc/yum.repos.d/nginx.repo <<\EOF
+        [nginx]
+        name=nginx repo
+        baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+        gpgcheck=0
+        enabled=1
+        EOF
 
-      # yum install nginx
+        # yum install nginx
 
-  b. For RHEL:
+    b. For RHEL:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # cat > /etc/yum.repos.d/nginx.repo <<\EOF
-      [nginx]
-      name=nginx repo
-      baseurl=http://nginx.org/packages/rhel/$releasever/$basearch/
-      gpgcheck=0
-      enabled=1
-      EOF
+        # cat > /etc/yum.repos.d/nginx.repo <<\EOF
+        [nginx]
+        name=nginx repo
+        baseurl=http://nginx.org/packages/rhel/$releasever/$basearch/
+        gpgcheck=0
+        enabled=1
+        EOF
 
-      # yum install nginx
+        # yum install nginx
 
-  .. note:: For more information, see `NGINX: Official Red Hat/CentOS packages <https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-red-hat-centos-packages>`_.
+    .. note:: For more information, see `NGINX: Official Red Hat/CentOS packages <https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-red-hat-centos-packages>`_.
 
 2. Install your SSL certificate and private key:
 
-  a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
+    a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      # cp <ssl_pem> /etc/pki/tls/certs/splunk-access.pem
-      # cp <ssl_key> /etc/pki/tls/private/splunk-access.key
+        # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+        # cp <ssl_pem> /etc/pki/tls/certs/splunk-access.pem
+        # cp <ssl_key> /etc/pki/tls/private/splunk-access.key
 
-  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
+    b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/splunk-access.key -out /etc/pki/tls/certs/splunk-access.pem
-        Generating a 2048 bit RSA private key
-        ...........+++
-        ................+++
-        writing new private key to '/etc/pki/tls/private/splunk-access.key'
-        -----
-        You are about to be asked to enter information that will be incorporated
-        into your certificate request.
-        What you are about to enter is what is called a Distinguished Name or a DN.
-        There are quite a few fields but you can leave some blank
-        For some fields there will be a default value,
-        If you enter '.', the field will be left blank.
-        -----
-        Country Name (2 letter code) [AU]: US
-        State or Province Name (full name) [Some-State]: California
-        Locality Name (eg, city) []: San Jose
-        Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc.
-        Organizational Unit Name (eg, section) []: section
-        Common Name (e.g. server FQDN or YOUR name) []: example.com
-        Email Address []: example@mail.com
+        # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+        # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/splunk-access.key -out /etc/pki/tls/certs/splunk-access.pem
+          Generating a 2048 bit RSA private key
+          ...........+++
+          ................+++
+          writing new private key to '/etc/pki/tls/private/splunk-access.key'
+          -----
+          You are about to be asked to enter information that will be incorporated
+          into your certificate request.
+          What you are about to enter is what is called a Distinguished Name or a DN.
+          There are quite a few fields but you can leave some blank
+          For some fields there will be a default value,
+          If you enter '.', the field will be left blank.
+          -----
+          Country Name (2 letter code) [AU]: US
+          State or Province Name (full name) [Some-State]: California
+          Locality Name (eg, city) []: San Jose
+          Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc.
+          Organizational Unit Name (eg, section) []: section
+          Common Name (e.g. server FQDN or YOUR name) []: example.com
+          Email Address []: example@mail.com
 
 
 3. Configure NGINX as an HTTPS reverse proxy to Splunk:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cat > /etc/nginx/conf.d/default.conf <<\EOF
-    server {
-        listen 80;
-        listen [::]:80;
-        return 301 https://$host$request_uri;
-    }
+      # cat > /etc/nginx/conf.d/default.conf <<\EOF
+      server {
+          listen 80;
+          listen [::]:80;
+          return 301 https://$host$request_uri;
+      }
 
-    server {
-        listen 443 default_server;
-        listen            [::]:443;
-        ssl on;
-        ssl_certificate /etc/pki/tls/certs/splunk-access.pem;
-        ssl_certificate_key /etc/pki/tls/private/splunk-access.key;
-        access_log            /var/log/nginx/nginx.access.log;
-        error_log            /var/log/nginx/nginx.error.log;
-        location / {
-            auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
-            proxy_pass http://splunk-server-ip:8000/;
-        }
-    }
-    EOF
+      server {
+          listen 443 default_server;
+          listen            [::]:443;
+          ssl on;
+          ssl_certificate /etc/pki/tls/certs/splunk-access.pem;
+          ssl_certificate_key /etc/pki/tls/private/splunk-access.key;
+          access_log            /var/log/nginx/nginx.access.log;
+          error_log            /var/log/nginx/nginx.error.log;
+          location / {
+              auth_basic "Restricted";
+              auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
+              proxy_pass http://splunk-server-ip:8000/;
+          }
+      }
+      EOF
 
 4. Allow NGINX to connect to the Splunk port if SELinux is being used:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # semanage port -a -t http_port_t -p tcp 8000
+      # semanage port -a -t http_port_t -p tcp 8000
 
-  .. note::
+    .. note::
 
-    This assumes that you have ``policycoreutils-python`` installed to manage SELinux. Also that the used port is the default one.
+      This assumes that you have ``policycoreutils-python`` installed to manage SELinux. Also that the used port is the default one.
 
 
 Enable authentication by htpasswd
@@ -137,29 +137,29 @@ Enable authentication by htpasswd
 
 1. Install the package ``httpd-tools``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # yum install httpd-tools
+      # yum install httpd-tools
 
 2. Generate the ``.htpasswd`` file. Make sure to replace ``wazuh`` with your chosen username, matching with the `auth_basic_user_file`:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # htpasswd -c /etc/nginx/conf.d/splunk.htpasswd wazuh
+      # htpasswd -c /etc/nginx/conf.d/splunk.htpasswd wazuh
 
 3. Restart NGINX:
 
-  a. For Systemd:
+    a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart nginx
+        # systemctl restart nginx
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service nginx restart
+        # service nginx restart
 
 Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 
@@ -168,87 +168,87 @@ NGINX SSL proxy for Splunk (Debian-based distributions)
 
 1. Install NGINX:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get install nginx
+      # apt-get install nginx
 
 2. Install your SSL certificate and private key:
 
-  a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
+    a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # mkdir -p /etc/ssl/certs /etc/ssl/private
-      # cp <ssl_pem> /etc/ssl/certs/splunk-access.pem
-      # cp <ssl_key> /etc/ssl/private/splunk-access.key
+        # mkdir -p /etc/ssl/certs /etc/ssl/private
+        # cp <ssl_pem> /etc/ssl/certs/splunk-access.pem
+        # cp <ssl_key> /etc/ssl/private/splunk-access.key
 
-  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
+    b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # mkdir -p /etc/ssl/certs /etc/ssl/private
-      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/splunk-access.key -out /etc/ssl/certs/splunk-access.pem
-        Generating a 2048 bit RSA private key
-        .............+++
-        ..+++
-        writing new private key to '/etc/ssl/private/splunk-access.key'
-        -----
+        # mkdir -p /etc/ssl/certs /etc/ssl/private
+        # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/splunk-access.key -out /etc/ssl/certs/splunk-access.pem
+          Generating a 2048 bit RSA private key
+          .............+++
+          ..+++
+          writing new private key to '/etc/ssl/private/splunk-access.key'
+          -----
 
 3. Configure NGINX as an HTTPS reverse proxy to Splunk:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cat > /etc/nginx/sites-available/default <<\EOF
-    server {
-        listen 80;
-        listen [::]:80;
-        return 301 https://$host$request_uri;
-    }
+      # cat > /etc/nginx/sites-available/default <<\EOF
+      server {
+          listen 80;
+          listen [::]:80;
+          return 301 https://$host$request_uri;
+      }
 
-    server {
-        listen 443 default_server;
-        listen            [::]:443;
-        ssl on;
-        ssl_certificate /etc/ssl/certs/splunk-access.pem;
-        ssl_certificate_key /etc/ssl/private/splunk-access.key;
-        access_log            /var/log/nginx/nginx.access.log;
-        error_log            /var/log/nginx/nginx.error.log;
-        location / {
-            auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
-            proxy_pass http://splunk-server-ip:8000/;
-        }
-    }
-    EOF
+      server {
+          listen 443 default_server;
+          listen            [::]:443;
+          ssl on;
+          ssl_certificate /etc/ssl/certs/splunk-access.pem;
+          ssl_certificate_key /etc/ssl/private/splunk-access.key;
+          access_log            /var/log/nginx/nginx.access.log;
+          error_log            /var/log/nginx/nginx.error.log;
+          location / {
+              auth_basic "Restricted";
+              auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
+              proxy_pass http://splunk-server-ip:8000/;
+          }
+      }
+      EOF
 
 Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Install the package ``apache2-utils``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get install apache2-utils
+      # apt-get install apache2-utils
 
 2. Generate the ``.htpasswd`` file replacing ``<user>`` below with your chosen username:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # htpasswd -c /etc/nginx/conf.d/splunk.htpasswd <user>
+      # htpasswd -c /etc/nginx/conf.d/splunk.htpasswd <user>
 
 3. Restart NGINX:
 
-  a. For Systemd:
+    a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart nginx
+        # systemctl restart nginx
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service nginx restart
+        # service nginx restart
 
 Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 

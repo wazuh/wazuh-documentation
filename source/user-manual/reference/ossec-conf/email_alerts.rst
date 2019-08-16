@@ -159,12 +159,12 @@ This selects the alert file to be read from.
 Example of configuration
 ------------------------
 
-	.. code-block:: xml
+.. code-block:: xml
 
-	    <email_alerts>
-	      <email_to>recipient@example.wazuh.com</email_to>
-	      <email_to>recipient2@example.wazuh.com</email_to>
-	      <level>12</level>
-	      <group>sshd,</group>
-	      <do_not_delay/>
-	    </email_alerts>
+	<email_alerts>
+		<email_to>recipient@example.wazuh.com</email_to>
+		<email_to>recipient2@example.wazuh.com</email_to>
+		<level>12</level>
+		<group>sshd,</group>
+		<do_not_delay/>
+	</email_alerts>

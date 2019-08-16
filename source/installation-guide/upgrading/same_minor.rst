@@ -5,7 +5,7 @@
 Upgrade from the same minor version
 ===================================
 
-Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 3.9.0 to 3.9.3.
+Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 3.9.0 to 3.9.5.
 
 Upgrade the Wazuh manager and Wazuh API
 ---------------------------------------
@@ -20,8 +20,14 @@ b) Upgrade on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-manager wazuh-api
+
+c) Upgrade on OpenSUSE:
+
+.. code-block:: console
+
+    # zypper update wazuh-manager wazuh-api
 
 Upgrade the Wazuh agent
 -----------------------
@@ -36,5 +42,11 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-agent
+
+c) Upgrade the Wazuh agent on OpenSUSE:
+
+.. code-block:: console
+
+    # zypper update wazuh-agent
