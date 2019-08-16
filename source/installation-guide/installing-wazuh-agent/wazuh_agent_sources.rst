@@ -88,8 +88,8 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
     .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.4.tar.gz | tar zx
-    # cd wazuh-3.9.4/src
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
+      # cd wazuh-3.9.4/src
 
 4. Compile the agent by running the ``make`` command:
 
