@@ -129,7 +129,7 @@ Variables are set in the **variables** section. Their names are preceded by ``$`
 
 Checks
 ^^^^^^^^^
-Checks are the core of a SCA policy, as they describe the checks to be performed in the system.
+Checks are the core of an SCA policy, as they describe the checks to be performed in the system.
 Each check is comprised by several fields as described in table :ref:`sca_policy_file_checks_section`.
 
 
@@ -272,7 +272,7 @@ The operators for content checking are:
     | greater than                   | ``>``    | ``n:SomeProperty (\d) compare > 42``  |
     +--------------------------------+----------+---------------------------------------+
 
-A whole rule can be negated using the operator ``not``, which is placed at the begining of the rule.
+A whole rule can be negated using the operator ``not``, which is placed at the beginning of the rule.
 
 .. code-block:: yaml
 

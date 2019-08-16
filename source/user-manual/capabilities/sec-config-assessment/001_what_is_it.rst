@@ -9,16 +9,16 @@ known as hardening, and configuration assessment is an effective way to determin
 attack surface reduced.
 
 The SCA module performs scans using policy files in order to discover exposures or misconfigurations in monitored hosts.
-For example it could determine if it is necessary to change password configuration, remove unnecessary software, and disable
+For example, it could determine if it is necessary to change password configuration, remove unnecessary software, and disable
 or remove of unnecessary services among others assessments.
 The target of those policies can be an Operating System such as Debian or Windows, or a particular software such as the SSH server.
 
-Policies for the SCA module are wriPtten in YAML format. Format that was chosen due having human readability in mind, which allows
+Policies for the SCA module are written in YAML format. Format that was chosen due having human readability in mind, which allows
 users to quickly understand and write their own policies or extend the existing ones to fit their needs.
 
 Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well establish standard for host hardening.
 
-Overview of a SCA check
+Overview of an SCA check
 ----------------------------------
 
 Each check comprises some metadata information, a description of the purpose of the check, and its logical description
