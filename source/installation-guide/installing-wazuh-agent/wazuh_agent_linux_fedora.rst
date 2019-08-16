@@ -55,6 +55,8 @@ Installing Wazuh agent
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
+Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
+
 Uninstall
 ---------
 
@@ -64,4 +66,4 @@ To uninstall the agent:
 
       # dnf remove wazuh-agent
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``. 
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.

@@ -111,7 +111,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
       # zip -r wazuh.zip ../../wazuh-3.9.5
 
-6. Decompress the repository the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
+6. Decompress the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
     .. code-block:: console
 
