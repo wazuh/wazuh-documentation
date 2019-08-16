@@ -89,7 +89,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
     .. code-block:: console
 
       # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
-      # cd wazuh-3.9.4/src
+      # cd wazuh-3.9.5/src
 
 4. Compile the agent by running the ``make`` command:
 
@@ -109,14 +109,14 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
     .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.9.4
+      # zip -r wazuh.zip ../../wazuh-3.9.5
 
 6. Decompress the repository the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
     .. code-block:: console
 
-    cd wazuh-3.9.4\src\win32
-    .\wazuh-installer-build-msi.bat
+      cd wazuh-3.9.5\src\win32
+      .\wazuh-installer-build-msi.bat
 
   If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
 
