@@ -61,6 +61,8 @@ Installing Wazuh agent
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
+Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
+
 Uninstall
 ---------
 
