@@ -32,7 +32,7 @@ Installing Wazuh agent
   a) Installation:
 
     .. code-block:: console
-   
+
       # zypper install wazuh-agent
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
@@ -54,6 +54,8 @@ Installing Wazuh agent
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
 
 Uninstall
 ---------
