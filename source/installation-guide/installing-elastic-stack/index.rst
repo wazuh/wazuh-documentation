@@ -23,6 +23,7 @@ After the installation, find below optional steps you may find interesting:
 
 - :ref:`Elasticsearch tuning <elastic_tuning>`
 - :ref:`Transform your data with Logstash <transform_logstash>`
+- :ref:`Insert a Wazuh API entry automatically <automatic_api>`
 
 
 .. note::
@@ -38,3 +39,4 @@ After the installation, find below optional steps you may find interesting:
    protect-installation/index
    transform_logstash
    elastic_tuning
+   automatic_api

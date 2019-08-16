@@ -22,7 +22,6 @@ There are several options for installing the Wazuh server depending on the opera
 There are some related additional configurations that can be applied:
 
 - :ref:`Securing the Wazuh API <securing_api>`
-- :ref:`Insert a Wazuh API entry automatically <automatic_api>`
 
 
 .. note::
@@ -35,4 +34,4 @@ There are some related additional configurations that can be applied:
     wazuh_server_linux
     sources_installation
     securing_api
-    automatic_api
+
