@@ -278,14 +278,14 @@ Wazuh is a free and open source platform for threat detection, security monitori
    getting-started/index
    installation-guide/index
    user-manual/index
-   development/index
-   containers
-   deployment
-   compliance
-   monitoring
-   installing-splunk/index
+   docker/index
+   deploying-with-puppet/index
+   deploying-with-ansible/index
+   pci-dss/index
+   amazon/index
    migrating-from-ossec/index
    release-notes/index
+   development/index
 
 .. raw:: html
 
