@@ -87,7 +87,7 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 
     .. code-block:: none
 
-        INFO: Policy 'cis_debian9_L2' information for agent '002' is outdated. Latest scan results requested.
+        INFO: Policy 'cis_debian9_L2' information for agent '002' is outdated. Requested latest scan results.
 
 #. The manager flushes its stored data for that policy.
 #. The agent sends the scan results for that policy.
