@@ -146,7 +146,7 @@ Deploy
 2. Create domains to access the services
 
     We recommend creating domains and certificates to access the services. Examples:
-    
+
     - wazuh-master.your-domain.com: Wazuh API and authd registration service.
     - wazuh-manager.your-domain.com: Reporting service.
     - wazuh.your-domain.com: Kibana and Wazuh app.
@@ -198,7 +198,7 @@ Deploy
 
             $ kubectl apply -f elastic_stack/logstash/logstash-svc.yaml
             $ kubectl apply -f elastic_stack/logstash/logstash-deploy.yaml
-        
+
 4. Deploy Wazuh
 
     .. code-block:: console
@@ -277,9 +277,9 @@ Verifying the deployment
 
 **Accesing Kibana**
 
-    In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: https://wazuh.your-domain.com.
+    In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: ``https://wazuh.your-domain.com``.
 
-    Also, you can access using the DNS (Eg: https://internal-xxx-yyy.us-east-1.elb.amazonaws.com):
+    Also, you can access using the DNS (Eg: ``https://internal-xxx-yyy.us-east-1.elb.amazonaws.com``):
 
     .. code-block:: console
 

@@ -250,4 +250,4 @@ In a cluster with one node, the number of replicas should be set to zero:
 
 Reference:
 
-  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-concepts.html#getting-started-shards-and-replicas>`_.
+  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/getting-started-concepts.html#getting-started-shards-and-replicas>`_.
