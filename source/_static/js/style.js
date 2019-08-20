@@ -1,5 +1,5 @@
 $(function() {
-  const loc = location.hash;
+  let loc = location.hash;
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
@@ -66,7 +66,8 @@ $(function() {
   });
 
   /**
-   * updateFromHash()
+   * Updates the hash value (from the URL) in order to update the selected leaf from the globl toctree.
+   * That is, when the sections within a document are included in the toctree.
    */
   function updateFromHash() {
     loc = location.hash;
@@ -75,8 +76,8 @@ $(function() {
   }
 
   /**
-   * selectLeaf()
-   * @param {int} hash
+   * When sections of a document are included in the toctree, this updates the selected section in the global toctree.
+   * @param {string} hash String that appearse after the sign # in the URL.
    */
   function selectLeaf(hash) {
     if (hash.length > 0) {
@@ -90,7 +91,7 @@ $(function() {
   reponsiveTables();
 
   /**
-   * reponsiveTables()
+   * Adds the class table-responsive to tables in #main-content wider than their container.
    */
   function reponsiveTables() {
     $('#main-content table').each(function() {
@@ -120,7 +121,7 @@ $(function() {
   });
 
   /**
-   * Check document scroll and add/remove the "scrolled" class
+   * Checks the document scroll and add/remove the "scrolled" class
    */
   function checkScroll() {
     const scrollTop = $(document).scrollTop();
@@ -237,7 +238,7 @@ $(function() {
   });
 
   /**
-   * Change the navbar height
+   * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
     if ($(window).width() >= 992) {
@@ -261,7 +262,7 @@ $(function() {
   }
 
   /**
-   * Set the same scroll on the navbar that on the document
+   * Sets the same scroll on the navbar (globaltoc) that on the document
    */
   function scrollNavbar() {
     scrollReal = documentHeight-windowHeight-delay;
@@ -285,7 +286,7 @@ $(function() {
   }
 
   /**
-   * Change the "top" value of header sticky
+   * Changes the "top" value of sticky header
    */
   function headerSticky() {
     const documentScroll = $(window).scrollTop();
@@ -295,28 +296,6 @@ $(function() {
       $('#header-sticky').css({'top': '-52px'});
     }
   }
-
-  /* Global toc --------------------------------------------------------------------------------------------------*/
-
-  /**
-   * currentToc()
-   */
-  function currentToc() {
-    /* Gets the name of the first level folder */
-    category = document.location.pathname.split('/')[2]; /* [2] The URL contains the version; [1] for URLs without version */
-    category = (category && category.indexOf('.') < 0)?category:'';
-
-    /* Highlight current category from #menu-submenu */
-    $('#menu-submenu').find('li').each(function() {
-      if ($(this).children('a').attr('href').indexOf(category) >= 0 && category.length > 0 ) {
-        $(this).addClass('active');
-      } else {
-        $(this).removeClass('active');
-      }
-    });
-  }
-
-  currentToc();
 
   /* Toggle collapse */
   $('.globaltoc a .toc-toggle-btn').on('click', function(e) {
@@ -345,13 +324,12 @@ $(function() {
   });
 
   /**
-   * showCurrentSubtree()
-   * @return {int}
+   * Shows the selected style for the parent document of pages that don't appear in the globaltoc
+   * @return {boolean} Returns true only if this funcionability in not applicable to the current page.
    */
   function showCurrentSubtree() {
     updateFromHash();
     if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('page-404') ) {
-      /* Shows the selected style for the parent document of pages that don't appear in the globaltoc */
       $('.globaltoc :contains("'+ $('#breadcrumbs li:nth-last-child(2) a').text() +'")').addClass('show').addClass('current');
       return true;
     }
@@ -366,10 +344,11 @@ $(function() {
   }
 
   /**
-   * markTocNodesWithClass()
-   * Note: this might be improved in the future using a new builder or extension
-   * @param {int} nodeList
-   * @param {int} className
+   * Gives the class stored in className to all nodes from nodeList that are present in the toctree.
+   * Function mainly used to mark the empty nodes (documents that contain only a toctree, without real content).
+   * Note: this might be improved in the future using a new builder or extension.
+   * @param {array} nodeList List of nodes in the toctree that needs to be marked with the class.
+   * @param {string} className Class to be applied to the nodes.
    */
   function markTocNodesWithClass(nodeList, className) {
     let regex;
@@ -380,7 +359,7 @@ $(function() {
       $('.globaltoc a').each(function() {
         const href = $(this).prop('href').split('#')[0];
         const isCurrent = (href === curLocation);
-        /* The selected menu link in the globaltoc acts as the toggle button, showing on an off its subtree */
+        /* The selected menu link in the globaltoc acts as the toggle button, showing on and off its subtree */
         if ( regex.test(href) || isCurrent ) {
           $(this).addClass(className);
         }
@@ -392,8 +371,8 @@ $(function() {
   }
 
   /**
-   * hideSubtree()
-   * @param {int} nodeList
+   * Hides from the global toctree the subtree of particular nodes specified in a list.
+   * @param {array} nodeList List of nodes whose subtree should not be shown in the global toctree.
    */
   function hideSubtree(nodeList) {
     $('#globaltoc a').each(function() {
@@ -423,15 +402,13 @@ $(function() {
   $(window).on('resize', function(e) {
     $('table').removeClass('table-responsive');
     reponsiveTables();
-    currentToc();
     checkScroll();
   });
 
   /**
-   * correctScrollTo()
-   * Corrects the scrolling movement so the element to which the page is being scrolled appears in the screen,
-   * having in mind the fixed top bar.
-   * @param {int} spaceBeforeAnchor
+   * Corrects the scrolling movement so the element to which the page is being scrolled appears correctly in the screen,
+   * having in mind the fixed top bar and the no-latest-notice if present.
+   * @param {int} spaceBeforeAnchor Space required between the target element and the top of the window.
    */
   function correctScrollTo(spaceBeforeAnchor) {
     if ( $('#page').hasClass('no-latest-docs') ) {
@@ -467,8 +444,9 @@ $(function() {
 
 
   /**
-   * capabilitiesHome()
-   * @param {int} ele
+   * Only for main index (documentation's home page).
+   * Functionallity of the capabilities section: selects capability, controls the responsive behaviour, etc.
+   * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
    */
   function capabilitiesHome(ele) {
     let eleOther = ele;
