@@ -1977,7 +1977,7 @@ h4, h5, h6 {
   padding-left: 5px;
 }
 
-#search-results .highlighted {
+main .highlighted {
   background-color: #fff200;
 }
 
