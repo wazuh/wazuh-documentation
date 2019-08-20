@@ -59,6 +59,7 @@ We can see the roles we have.
 	    │   └── vars
 	    └── ansible-wazuh-manager
 	        ├── defaults
+			├── files
 	        ├── handlers
 	        ├── meta
 	        ├── tasks
