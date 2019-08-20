@@ -13,7 +13,7 @@ Each agent has its own local database where it stores the current state of each 
 or *invalid*, allowing agents to send only the differences detected between scans. If there has been no
 change, only the scan *summary* event will be sent, thus avoiding unnecessary network traffic while keeping
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
- Kibana App.
+Kibana App.
 
 An overview of the integrity (more on this later) and alerting flow is depicted in the
 :ref:`sequence diagram <sca_sequence_diagram>` below.

@@ -114,3 +114,7 @@ that began with the host being scaned.
     :title: Alert about IP forwarding check
     :align: center
     :width: 100%
+
+
+The insights provided by SCA Alerts will then help system operators to take actions aiming to reduce the attack surface of the
+hosts they manage.
