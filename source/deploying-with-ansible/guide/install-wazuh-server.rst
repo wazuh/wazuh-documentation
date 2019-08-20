@@ -36,18 +36,12 @@ We can see the roles we have.
 	│   │   ├── meta
 	│   │   ├── tasks
 	│   │   └── templates
-	│   ├── ansible-kibana
+	│   └── ansible-kibana
 	│       ├── defaults
 	│       ├── handlers
 	│       ├── meta
 	│       ├── tasks
-	│       └── templates
-	│    
-	│    
-	│    
-	│    
-	│    
-	│    
+	│       └── templates 
 	└── wazuh
 	    ├── ansible-filebeat
 	    │   ├── defaults
