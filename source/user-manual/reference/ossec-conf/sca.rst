@@ -48,8 +48,6 @@ Scheduling options
 | `time`_              | A time of the day *[hh:mm]* |
 +----------------------+-----------------------------+
 
-In the :doc:`SCA documentation<../../capabilities/sec-config-assessment/index>` are shown some cases of using these options.
-
 +-------------------+------------+
 | Interval suffixes | Time scale |
 +===================+============+
@@ -63,6 +61,9 @@ In the :doc:`SCA documentation<../../capabilities/sec-config-assessment/index>` 
 +-------------------+------------+
 | `M`               | months     |
 +-------------------+------------+
+
+Some examples of usage of these options are included in the
+:doc:`SCA documentation<../../capabilities/sec-config-assessment/000_index>`.
 
 Main options
 ------------

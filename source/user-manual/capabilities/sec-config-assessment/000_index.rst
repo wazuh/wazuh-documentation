@@ -19,7 +19,7 @@ There are multiple Wazuh integrations that perform configuration assessment scan
 
 - The OpenSCAP integration is only available on Linux hosts, not Windows agents.
 - The CIS-CAT tool is proprietary software which requires an external license for its use.
-- The *Rootcheck* module depends on the *Syscheck* daemon and  its policies feeds are often outdated.
+- The *Rootcheck* module depends on the *Syscheck* daemon and its policies feeds are often outdated.
 
 The Security Configuration Assessment (SCA) module aims to provide the user with the best possible experience when performing scans about hardening and configuration policies. Some of its key features include:
 

@@ -16,7 +16,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
-- :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
+- :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/000_index>` (**sca**)
 - :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
