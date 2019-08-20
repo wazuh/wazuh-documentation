@@ -75,7 +75,7 @@ changes, as any variation alters the summary information.
     sca.file: cis_debian8_L2.yml
 
 If we focus in check 5031 (whose alert appears above), we can see it verifies that IP forwarding is
-disabled by checking for the content of file */proc/sys/net/ipv4/ip_forward*.
+disabled by checking the contents of file */proc/sys/net/ipv4/ip_forward*.
 
 By enabling IPv4 forwarding,
 
@@ -106,8 +106,9 @@ The next SCA scan for that policy generates the following alert:
     sca.check.result: failed
     sca.check.previous_result: passed
 
-The level 9 alert shows how the check has changed from **passed** to **failed**. This state is updated on
-the manager side and the last result scanned is available from the SCA tab in the Wazuh app.
+The level 9 alert shows how the check has changed from **passed** to **failed**. This state is updated on the
+manager side and the last result scanned is available from the SCA tab in the Wazuh app, which finishes the path
+that began with the host being scaned.
 
 .. thumbnail:: ../../../images/sca/SCA-ip-forward-check.png
     :title: Alert about IP forwarding check

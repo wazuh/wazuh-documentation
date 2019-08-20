@@ -164,7 +164,8 @@ the evaluation of its rules.
 Condition
 ~~~~~~~~~~~~~~~~~~~
 
-The condition field specifies how rule results are aggregated in order to calculate the final value of a check, there are three options:
+The condition field specifies how rule results are aggregated in order to calculate the final value of a check,
+there are three options:
 
 - ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied, and as **failed** as soon as one evaluates to **failed**,
 
@@ -209,12 +210,12 @@ Special mention deserves how rules evaluated as **non-applicable** are treated b
 Rules
 ~~~~~~~~~~~~~~~~~~~
 
-Rules can check for existence of files, directories, registry keys and values, running processes, and recursively test for
-existence of files inside directories. When it comes to content checking, they are able to check for file contents, recursively
-check for the contents of files inside directories, command output and registry value data.
+Rules can check for existence of files, directories, registry keys and values, running processes, and recursively
+test for existence of files inside directories. When it comes to content checking, they are able to check for file
+contents, recursively check for the contents of files inside directories, command output and registry value data.
 
-In an abstract manner, rules start by a location (and a `type` of location), that will be the target of the test, followed by the actual
-the test specification. Such tests fall into two categories: existence and content checks.
+In an abstract manner, rules start by a location (and a `type` of location), that will be the target of the test,
+followed by the actual the test specification. Such tests fall into two categories: existence and content checks.
 
 .. General rule syntax
    ###################
@@ -350,8 +351,9 @@ Examples of content checks:
 Examples
 ###################
 
-The following sections cover each rule type, illustrating them with several examples. It is also recomended to check the actual
-policies and, for minimalistic although complete examples, the `SCA test suite policies <https://github.com/wazuh/wazuh-qa/tree/master/integration_tests/sca/3.10>`_.
+The following sections cover each rule type, illustrating them with several examples. It is also recomended to check
+the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
+<https://github.com/wazuh/wazuh-qa/tree/master/integration_tests/sca/3.10>`_.
 
 Rule syntax for files
 :::::::::::::::::::::::::::::::::::

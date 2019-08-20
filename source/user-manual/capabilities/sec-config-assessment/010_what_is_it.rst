@@ -5,26 +5,27 @@ What is SCA
    :depth: 10
 
 One of the most certain ways to secure hosts is by reducing their vulnerability surface. That process is commonly
-known as hardening, and configuration assessment is an effective way to determine where hosts might have their
-attack surface reduced.
+known as hardening, and configuration assessment is an effective way to determine opportunities where hosts could
+have their attack surface reduced, and here is where SCA comes into play.
 
-The SCA module performs scans using policy files in order to discover exposures or misconfigurations in monitored hosts.
-For example, it could determine if it is necessary to change password configuration, remove unnecessary software, and disable
-or remove of unnecessary services among others assessments.
-The target of those policies can be an Operating System such as Debian or Windows, or a particular software such as the SSH server.
+SCA performs scans in order to discover exposures or misconfigurations in monitored hosts. Those scans assess the
+configuration of the hosts by means of policy files, that contains rules to be tested against the actual
+configuration of host.
+For example, SCA could assess whether it is necessary to change password related configuration, remove unnecessary
+software, disable unnecessary services, or audit the TCP/IP stack configuration.
 
-Policies for the SCA module are written in YAML format. Format that was chosen due having human readability in mind, which allows
-users to quickly understand and write their own policies or extend the existing ones to fit their needs.
-
-Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well establish standard for host hardening.
+Policies for the SCA module are written in YAML format. This that was chosen due having human readability in mind,
+which allows users to quickly understand and write their own policies or extend the existing ones to fit their needs.
+Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well establish
+standard for host hardening.
 
 Overview of an SCA check
 ----------------------------------
 
 Each check comprises some metadata information, a description of the purpose of the check, and its logical description
 (fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
-if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, specially CIS policies, already have their
-CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` below.
+if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, specially CIS policies,
+already have their CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` below.
 
 
 .. code-block:: yaml
@@ -46,8 +47,9 @@ CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` b
 Interpreting SCA scan results
 ----------------------------------
 
-SCA scan results appear as :ref:`alerts<alert_example>` whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events
-necessary to keep the global status of the scan updated, avoiding potential event flooding.
+SCA scan results appear as :ref:`alerts<alert_example>` whenever a particular check changes its status between scans.
+Moreover, Wazuh agents only send those events necessary to keep the global status of the scan updated, avoiding
+potential event flooding.
 
 .. code-block:: none
     :name: alert_example

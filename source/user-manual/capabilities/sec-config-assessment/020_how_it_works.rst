@@ -9,12 +9,14 @@ How SCA works
 States vs alerts
 --------------------
 
-Each agent has its own local database where it stores the current state of each check: *passed*, *failed*, or *invalid*, allowing
-agents to send only the differences detected between scans. If there has been no change, only the scan *summary* event will be sent,
-thus avoiding unnecessary network traffic while keeping the manager up to date. The manager will then use those updates to issue
-alerts that will be shown in the Kibana App.
+Each agent has its own local database where it stores the current state of each check: *passed*, *failed*,
+or *invalid*, allowing agents to send only the differences detected between scans. If there has been no
+change, only the scan *summary* event will be sent, thus avoiding unnecessary network traffic while keeping
+the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
+ Kibana App.
 
-And overview of the integrity (more on this later) and alerting flow is depicted in the :ref:`sequence diagram <sca_sequence_diagram>` below.
+An overview of the integrity (more on this later) and alerting flow is depicted in the
+:ref:`sequence diagram <sca_sequence_diagram>` below.
 
 .. figure:: ../../../images/sca/sca_sequence_diagram.svg
   :alt: SCA integrity and alerting flow
@@ -90,8 +92,9 @@ two integrity mechanisms have been included in SCA, one for policy files and the
 Integrity of policy files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy files is detected,
-SCA will invalidate the results stored in the database for that policy and request a fresh dump of them.
+This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy
+files is detected, SCA will invalidate the results stored in the database for that policy and request a
+fresh dump of them.
 
 In a nutshell, whenever the hash of a policy file changes, the recovery steps performed are:
 
@@ -112,8 +115,8 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 
 Integrity of the scan results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To illustrate how the integrity of scan results is kept, we will use an example in which the agent-side database
-and the manager-side differ. This scenary could happen due to, for instance, a network issue.
+To illustrate how the integrity of scan results is kept, we will use an example in which the agent-side
+database and the manager-side differ. This scenary could happen due to, for instance, a network issue.
 
 .. table:: States stores in the Agent and Manager sides
     :widths: auto
