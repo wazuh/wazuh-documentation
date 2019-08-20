@@ -39,7 +39,21 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     # yum install elasticsearch-7.3.0
 
-2. Enable and start the Elasticsearch service:
+2. **Optional.** Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen on all interfaces by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to:
+
+   .. code-block:: yaml
+
+     network.host: 0.0.0.0
+
+3. If you are installing a **distributed architecture**, you will have to make an additional configuration change by editing the file ``/etc/elasticsearch/elasticsearch.yml``. Add or edit (if commented) the following lines:
+
+   .. code-block:: yaml
+
+     node.name: node-1
+     network.host: 0.0.0.0
+     cluster.initial_master_nodes: ["node-1"]
+
+4. Enable and start the Elasticsearch service:
 
   a) For Systemd:
 
@@ -56,7 +70,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # chkconfig --add elasticsearch
     # service elasticsearch start
 
-3. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
+5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
 
   .. code-block:: console
 
@@ -81,7 +95,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
 
-3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
+3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. Configure Kibana to listen on all interfaces by editing the file ``/etc/kibana/kibana.yml`` and uncommenting the setting ``server.host``. Change the value to:
 
   .. code-block:: yaml
 
