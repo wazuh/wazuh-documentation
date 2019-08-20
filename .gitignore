@@ -1,3 +1,9 @@
 build
+_build
 .vscode
 .DS_Store
+test
+node_modules
+.eslintrc
+package-lock.json
+package.json
