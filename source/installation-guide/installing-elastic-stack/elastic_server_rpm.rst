@@ -49,7 +49,6 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
    .. code-block:: yaml
 
-     node.master: true
      node.name: node-1
      network.host: 0.0.0.0
      cluster.initial_master_nodes: ["node-1"]
