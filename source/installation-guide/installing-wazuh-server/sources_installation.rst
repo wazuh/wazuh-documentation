@@ -89,11 +89,7 @@ Installing Wazuh manager
   During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
 
 .. warning::
-  When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
-
-.. warning::
-  Be extremely careful not to select a critical installation directory.
-
+  Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
 
 5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
 
@@ -156,12 +152,49 @@ Installing Wazuh API
 
       # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.5/install_api.sh && bash ./install_api.sh download
 
+3. Once the process is complete, you can check the service status with:
+
+  * For Systemd:
+
+    .. code-block:: console
+
+      # systemctl status wazuh-api
+
+  * For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-api status
+
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
 Installing Filebeat
 -------------------
 
-While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_), the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball that should work for any Linux distro. See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
+While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_), the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package. Below are the links to install Filebeat using different OS packages.
+
++-------------------------------+----------------------------------------------------------------+
+| Operative system              | Version                                                        |
++===============================+================================================================+
+| Amazon Linux                  | :ref:`1 or greater <wazuh_server_rpm_amazon_filebeat>`         |
++-------------------------------+----------------------------------------------------------------+
+| CentOS                        | :ref:`6 or greater <wazuh_server_rpm_centos_filebeat>`         |
++-------------------------------+----------------------------------------------------------------+
+| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_server_rpm_rhel_filebeat>`           |
++-------------------------------+----------------------------------------------------------------+
+| Oracle Linux                  | :ref:`6 or greater <wazuh_server_rpm_oracle_filebeat>`         |
++-------------------------------+----------------------------------------------------------------+
+| Debian                        | :ref:`7 or greater <wazuh_server_deb_filebeat>`                |
++-------------------------------+----------------------------------------------------------------+
+| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_deb_filebeat>`            |
++-------------------------------+----------------------------------------------------------------+
+| Fedora                        | :ref:`22 or greater <wazuh_server_rpm_fedora_filebeat>`        |
++-------------------------------+----------------------------------------------------------------+
+| OpenSUSE                      | :ref:`42 or greater <wazuh_server_rpm_suse_opensuse_filebeat>` |
++-------------------------------+----------------------------------------------------------------+
+| SUSE                          | :ref:`12 <wazuh_server_rpm_suse_opensuse_filebeat>`            |
++-------------------------------+----------------------------------------------------------------+
+
 
 Next steps
 ----------
