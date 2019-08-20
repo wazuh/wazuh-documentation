@@ -1,2 +1,637 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="777px" height="697px" viewBox="-0.5 -0.5 777 697" content="&lt;mxfile modified=&quot;2019-08-19T14:21:59.187Z&quot; host=&quot;www.draw.io&quot; agent=&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/76.0.3809.100 Chrome/76.0.3809.100 Safari/537.36&quot; etag=&quot;x56Qz-eU67cSQBqKLx07&quot; version=&quot;11.1.4&quot; type=&quot;device&quot;&gt;&lt;diagram name=&quot;Page-1&quot; id=&quot;13e1069c-82ec-6db2-03f1-153e76fe0fe0&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;"><defs/><g><rect x="236" y="0" width="100" height="40" rx="6" ry="6" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 286 40 L 286 696" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><g transform="translate(264.5,7.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="42" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 44px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Wazuh <br />Manager</div></div></foreignObject><text x="21" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Verdana">Wazuh &lt;br&gt;Manager</text></switch></g><path d="M 286 80 L 286 355.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 286 360.88 L 282.5 353.88 L 286 355.63 L 289.5 353.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 291 224 L 320 224 L 320 244 L 308.12 244" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 301.12 244 L 308.12 240.5 L 308.12 247.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(323.5,224.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="51" height="11" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: left;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;background-color:#ffffff;">Issue Alert</div></div></foreignObject><text x="26" y="11" fill="#000000" text-anchor="middle" font-size="11px" font-family="Helvetica">Issue Alert</text></switch></g><rect x="281" y="80" width="10" height="616" fill="#ffffff" stroke="#000000" pointer-events="none"/><rect x="291" y="232" width="10" height="40" fill="#ffffff" stroke="#000000" pointer-events="none"/><rect x="396" y="0" width="100" height="40" rx="6" ry="6" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 446 40 L 446 696" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><g transform="translate(419.5,14.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="52" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 54px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Wazuh DB</div></div></foreignObject><text x="26" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Verdana">Wazuh DB</text></switch></g><rect x="441" y="80" width="10" height="616" fill="#ffffff" stroke="#000000" pointer-events="none"/><rect x="536" y="0" width="100" height="40" rx="6" ry="6" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 586 40 L 586 580" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><g transform="translate(558.5,14.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="54" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 56px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Wazuh API</div></div></foreignObject><text x="27" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Verdana">Wazuh API</text></switch></g><rect x="676" y="0" width="100" height="40" rx="6" ry="6" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 726 40 L 726 692" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><g transform="translate(697.5,14.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="56" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 58px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Wazuh App</div></div></foreignObject><text x="28" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Verdana">Wazuh App</text></switch></g><rect x="721" y="80" width="10" height="608" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 146 339 L 236 339 L 275.63 339" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 280.88 339 L 273.88 342.5 L 275.63 339 L 273.88 335.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><rect x="96" y="0" width="100" height="40" rx="6" ry="6" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 146 40 L 146 696" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><g transform="translate(118.5,14.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="54" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 56px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">SCA Agent</div></div></foreignObject><text x="27" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Verdana">SCA Agent</text></switch></g><rect x="141" y="80" width="10" height="616" fill="#ffffff" stroke="#000000" pointer-events="none"/><rect x="146" y="106" width="10" height="40" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 151 86 L 176 86 L 176 106 L 164.12 106" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 157.12 106 L 164.12 102.5 L 164.12 109.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(179.5,88.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="72" height="11" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: left;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;background-color:#ffffff;">Execute Policy</div></div></foreignObject><text x="36" y="11" fill="#000000" text-anchor="middle" font-size="11px" font-family="Helvetica">Execute Policy</text></switch></g><rect x="581" y="80" width="10" height="612" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 151 188 L 274.63 188" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 279.88 188 L 272.88 191.5 L 274.63 188 L 272.88 184.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(180.5,166.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="80" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 80px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Send Changes</div></div></foreignObject><text x="40" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Send Changes</text></switch></g><path d="M 291 209 L 434.63 209" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 439.88 209 L 432.88 212.5 L 434.63 209 L 432.88 205.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(179.5,314.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="82" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 84px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Send Summary</div></div></foreignObject><text x="41" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Send Summary</text></switch></g><g transform="translate(346.5,192.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="38" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 40px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Update</div></div></foreignObject><text x="19" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Update</text></switch></g><rect x="286" y="366" width="10" height="70" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 296 346 L 294 346 L 321 346 L 321 366 L 304.12 366" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 297.12 366 L 304.12 362.5 L 304.12 369.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(324.5,348.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="73" height="11" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: left;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;background-color:#ffffff;">Check Integrity</div></div></foreignObject><text x="37" y="11" fill="#000000" text-anchor="middle" font-size="11px" font-family="Helvetica">Check Integrity</text></switch></g><path d="M 286 413.5 L 159.37 413.14" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 154.12 413.12 L 161.13 409.64 L 159.37 413.14 L 161.11 416.64 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(177.5,394.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="76" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 76px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Request Scan</div></div></foreignObject><text x="38" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Request Scan</text></switch></g><path d="M 146 479 L 273.63 479" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 278.88 479 L 271.88 482.5 L 273.63 479 L 271.88 475.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 291.23 492.95 L 436.63 492.89" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 441.88 492.89 L 434.88 496.39 L 436.63 492.89 L 434.88 489.39 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(346.5,462.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="38" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 40px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Update</div></div></foreignObject><text x="19" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Update</text></switch></g><g transform="translate(509.5,577.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="32" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 34px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Query</div></div></foreignObject><text x="16" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Query</text></switch></g><path d="M 581 600.76 L 456.37 600.76" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 451.12 600.76 L 458.12 597.26 L 456.37 600.76 L 458.12 604.26 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 721 589 L 636 589 L 597.37 589" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 592.12 589 L 599.12 585.5 L 597.37 589 L 599.12 592.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(639.5,569.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="32" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 34px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Query</div></div></foreignObject><text x="16" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Query</text></switch></g><g transform="translate(174.5,452.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="72" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 72px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">Send Checks</div></div></foreignObject><text x="36" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Send Checks</text></switch></g><path d="M 450 636.18 L 514 636.02 Q 524 636 534 636 L 580.76 636" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><path d="M 572.88 640.5 L 581.88 636 L 572.88 631.5" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(483.5,621.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="65" height="11" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;background-color:#ffffff;">Query results</div></div></foreignObject><text x="33" y="11" fill="#000000" text-anchor="middle" font-size="11px" font-family="Helvetica">Query results</text></switch></g><path d="M 591 653.18 L 655 653.02 Q 665 653 675 653 L 717.76 653" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="none"/><path d="M 709.88 657.5 L 718.88 653 L 709.88 648.5" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(622.5,638.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="65" height="11" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;background-color:#ffffff;">Query results</div></div></foreignObject><text x="33" y="11" fill="#000000" text-anchor="middle" font-size="11px" font-family="Helvetica">Query results</text></switch></g><path d="M 295 519 L 324 519 L 324 538 L 304.12 538" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 297.12 538 L 304.12 534.5 L 304.12 541.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(327.5,522.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="51" height="11" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: left;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;background-color:#ffffff;">Issue Alert</div></div></foreignObject><text x="26" y="11" fill="#000000" text-anchor="middle" font-size="11px" font-family="Helvetica">Issue Alert</text></switch></g><rect x="286" y="522" width="10" height="40" fill="#ffffff" stroke="#000000" pointer-events="none"/><path d="M 0 160 L 72 160 L 72 189 L 62 204 L 0 204 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 72 160 L 476 160 L 476 307 L 0 307 L 0 204" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(1.5,169.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="70" height="26" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 70px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">If there are changes</div></div></foreignObject><text x="35" y="19" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">If there are changes</text></switch></g><path d="M 0 384 L 108 384 L 108 424 L 98 439 L 0 439 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 108 384 L 479 384 L 479 576 L 0 576 L 0 439" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(1.5,392.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="106" height="40" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 106px; white-space: nowrap; overflow-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;white-space:normal;">If stored policy information does not match</div></div></foreignObject><text x="53" y="26" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">If stored policy information does not match</text></switch></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 979 798"
+   version="1.1"
+   id="svg4181"
+   sodipodi:docname="sca_sequence_diagram.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata4185">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>SCA_e</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1850"
+     inkscape:window-height="1136"
+     id="namedview4183"
+     showgrid="false"
+     inkscape:zoom="1.197995"
+     inkscape:cx="340.08368"
+     inkscape:cy="399"
+     inkscape:window-x="1990"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4181" />
+  <defs
+     id="defs3979">
+    <style
+       id="style3977">.a,.b,.c,.f,.n{fill:none;}.a{stroke:#666;stroke-miterlimit:10;}.a,.b,.c,.f,.i,.n{stroke-linecap:round;}.a,.c{stroke-dasharray:4;}.b,.c{stroke:#0094ce;}.b,.c,.f,.i,.n{stroke-linejoin:round;}.d{fill:#00aae7;}.e,.j{font-size:16px;}.e,.i{fill:#fff;}.e,.j,.k{font-family:OpenSans-Regular, Open Sans;}.f,.i,.n{stroke:#00a9e5;}.g,.h{fill:#00a9e5;}.h{opacity:0.5;}.k{font-size:19.43px;fill:#4d4d4d;}.l{fill:#ffb600;}.m{fill:#0094d0;}.n{stroke-dasharray:4 4;}</style>
+  </defs>
+  <title
+     id="title3981">SCA_e</title>
+  <rect
+     class="a"
+     x="336.5"
+     y="19.5"
+     width="294"
+     height="86"
+     rx="8.43"
+     id="rect3983"
+     style="stroke-width:2;stroke-miterlimit:10;stroke-dasharray:8;stroke-dashoffset:0" />
+  <rect
+     class="a"
+     x="28"
+     y="204.5"
+     width="575"
+     height="114"
+     rx="8.43"
+     id="rect3985"
+     style="stroke-width:2;stroke-miterlimit:10;stroke-dasharray:8;stroke-dashoffset:0" />
+  <rect
+     class="a"
+     x="28"
+     y="415.5"
+     width="575"
+     height="178"
+     rx="8.43"
+     id="rect3987"
+     style="stroke-width:2;stroke-miterlimit:20;stroke-dasharray:8;stroke-dashoffset:0.2" />
+  <line
+     class="b"
+     x1="222.5"
+     y1="96.5"
+     x2="222.5"
+     y2="758"
+     id="line3989" />
+  <line
+     class="c"
+     x1="222.5"
+     y1="761.5"
+     x2="222.5"
+     y2="781.5"
+     id="line3991" />
+  <line
+     class="c"
+     x1="396.5"
+     y1="761.5"
+     x2="396.5"
+     y2="781.5"
+     id="line3993" />
+  <line
+     class="c"
+     x1="570.5"
+     y1="761.5"
+     x2="570.5"
+     y2="781.5"
+     id="line3995" />
+  <line
+     class="c"
+     x1="744.5"
+     y1="761.5"
+     x2="744.5"
+     y2="781.5"
+     id="line3997" />
+  <line
+     class="c"
+     x1="918.5"
+     y1="761.5"
+     x2="918.5"
+     y2="781.5"
+     id="line3999" />
+  <line
+     class="b"
+     x1="396.5"
+     y1="96.5"
+     x2="396.5"
+     y2="758"
+     id="line4001" />
+  <rect
+     class="d"
+     x="172.5"
+     y="73.96"
+     width="100"
+     height="21.73"
+     rx="4.46"
+     id="rect4003" />
+  <text
+     class="e"
+     transform="translate(184.25 89.52)"
+     id="text4005">SCA Agent</text>
+  <rect
+     class="d"
+     x="346.5"
+     y="73.83"
+     width="100"
+     height="22"
+     rx="4.46"
+     id="rect4007" />
+  <text
+     class="e"
+     transform="translate(361.46 89.52)"
+     id="text4009">Analysisd</text>
+  <polyline
+     class="f"
+     points="223 144 274.5 144 274.5 179 232.5 179"
+     id="polyline4011" />
+  <path
+     class="g"
+     d="M239.27,174.2a.5.5,0,0,1-.15.69L232.67,179l6.45,4.11a.5.5,0,0,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,239.27,174.2Z"
+     id="path4013" />
+  <rect
+     class="h"
+     x="218"
+     y="131"
+     width="9"
+     height="609"
+     rx="2.37"
+     id="rect4015" />
+  <rect
+     class="h"
+     x="223"
+     y="161"
+     width="9"
+     height="37"
+     rx="2.37"
+     id="rect4017" />
+  <rect
+     class="h"
+     x="397"
+     y="271"
+     width="9"
+     height="37"
+     rx="2.37"
+     id="rect4019" />
+  <rect
+     class="h"
+     x="397"
+     y="383"
+     width="9"
+     height="61"
+     rx="2.37"
+     id="rect4021" />
+  <rect
+     class="h"
+     x="392"
+     y="131"
+     width="9"
+     height="609"
+     rx="2.37"
+     id="rect4023" />
+  <line
+     class="b"
+     x1="570.5"
+     y1="96.5"
+     x2="570.5"
+     y2="758"
+     id="line4025" />
+  <rect
+     class="d"
+     x="521"
+     y="73.83"
+     width="99"
+     height="22"
+     rx="4.46"
+     id="rect4027" />
+  <text
+     class="e"
+     transform="translate(559.48 89.52)"
+     id="text4029">DB</text>
+  <rect
+     class="h"
+     x="566"
+     y="131"
+     width="9"
+     height="609"
+     rx="2.37"
+     id="rect4031" />
+  <line
+     class="b"
+     x1="744.5"
+     y1="96.5"
+     x2="744.5"
+     y2="758"
+     id="line4033" />
+  <rect
+     class="d"
+     x="694.5"
+     y="73.83"
+     width="100"
+     height="22"
+     rx="4.46"
+     id="rect4035" />
+  <text
+     class="e"
+     transform="translate(704.89 89.52)"
+     id="text4037">Wazuh API</text>
+  <rect
+     class="h"
+     x="740"
+     y="131"
+     width="9"
+     height="609"
+     rx="2.37"
+     id="rect4039" />
+  <rect
+     class="d"
+     x="868.5"
+     y="73.83"
+     width="100"
+     height="22"
+     rx="4.46"
+     id="rect4041" />
+  <text
+     class="e"
+     transform="translate(876.14 89.52)"
+     id="text4043">Wazuh App</text>
+  <line
+     class="b"
+     x1="918.5"
+     y1="96.5"
+     x2="918.5"
+     y2="758"
+     id="line4045" />
+  <rect
+     class="h"
+     x="914"
+     y="131"
+     width="9"
+     height="609"
+     rx="2.37"
+     id="rect4047" />
+  <rect
+     class="i"
+     x="244.5"
+     y="151.5"
+     width="117"
+     height="20"
+     rx="2.11"
+     id="rect4049" />
+  <text
+     class="j"
+     transform="translate(33.6 226.52)"
+     id="text4053">There are<tspan
+   x="0"
+   y="22"
+   id="tspan4051">changes</tspan>
+</text>
+  <text
+     class="j"
+     transform="translate(250.23 166.19)"
+     id="text4055">Execute Policy</text>
+  <polyline
+     class="f"
+     points="397 254 448.5 254 448.5 289 406.5 289"
+     id="polyline4057" />
+  <path
+     class="g"
+     d="M413.27,284.2a.5.5,0,0,1-.15.69L406.67,289l6.45,4.11a.5.5,0,0,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,413.27,284.2Z"
+     id="path4059" />
+  <rect
+     class="i"
+     x="427.5"
+     y="261.5"
+     width="87"
+     height="20"
+     rx="2.11"
+     id="rect4061" />
+  <text
+     class="j"
+     transform="translate(432 276.19)"
+     id="text4063">Issue Alert</text>
+  <polyline
+     class="f"
+     points="397 366 448.5 366 448.5 401 406.5 401"
+     id="polyline4065" />
+  <path
+     class="g"
+     d="M413.27,396.2a.5.5,0,0,1-.15.69L406.67,401l6.45,4.11a.5.5,0,0,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,413.27,396.2Z"
+     id="path4067" />
+  <rect
+     class="i"
+     x="420.5"
+     y="373.5"
+     width="119"
+     height="20"
+     rx="2.11"
+     id="rect4069" />
+  <text
+     class="j"
+     transform="translate(424.49 388.19)"
+     id="text4071">Check Integrity</text>
+  <rect
+     class="h"
+     x="397"
+     y="551"
+     width="9"
+     height="36"
+     rx="2.37"
+     id="rect4073" />
+  <polyline
+     class="f"
+     points="397 534 448.5 534 448.5 569 406.5 569"
+     id="polyline4075" />
+  <path
+     class="g"
+     d="M413.27,564.2a.5.5,0,0,1-.15.69L406.67,569l6.45,4.11a.5.5,0,1,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,413.27,564.2Z"
+     id="path4077" />
+  <rect
+     class="i"
+     x="426.5"
+     y="541.5"
+     width="89"
+     height="20"
+     rx="2.11"
+     id="rect4079" />
+  <text
+     class="j"
+     transform="translate(432 556.19)"
+     id="text4081">Issue Alert</text>
+  <line
+     class="f"
+     x1="223"
+     y1="225.5"
+     x2="394"
+     y2="225.5"
+     id="line4083" />
+  <path
+     class="g"
+     d="M387.23,230.3a.5.5,0,0,1,.15-.69l6.45-4.11-6.45-4.11a.5.5,0,1,1,.54-.84l7.11,4.53a.49.49,0,0,1,0,.84l-7.11,4.53a.45.45,0,0,1-.27.08A.49.49,0,0,1,387.23,230.3Z"
+     id="path4085" />
+  <text
+     class="k"
+     transform="translate(427.91 51.19)"
+     id="text4087">Wazuh Manager</text>
+  <path
+     class="l"
+     d="M415.65,34.18H394.38a2.59,2.59,0,0,0-2.6,2.6v1.29a2.59,2.59,0,0,0,2.6,2.6H403a8.41,8.41,0,0,1,13.63-.19,2.6,2.6,0,0,0,1.62-2.41V36.78A2.59,2.59,0,0,0,415.65,34.18Zm-20.56,4.3a1.06,1.06,0,1,1,1.06-1.06A1.05,1.05,0,0,1,395.09,38.48Zm3.18,0a1.06,1.06,0,1,1,1.06-1.06A1.05,1.05,0,0,1,398.27,38.48Z"
+     id="path4089" />
+  <path
+     class="l"
+     d="M416.62,50.51a8.41,8.41,0,0,1-13.6-.17h-8.61a2.6,2.6,0,0,0-2.6,2.59v1.3a2.61,2.61,0,0,0,2.6,2.6h21.27a2.6,2.6,0,0,0,2.6-2.6v-1.3A2.59,2.59,0,0,0,416.62,50.51Zm-21.53,4.13a1.06,1.06,0,1,1,1.06-1.06A1.06,1.06,0,0,1,395.09,54.64Zm3.18,0a1.06,1.06,0,1,1,1.06-1.06A1.06,1.06,0,0,1,398.27,54.64Z"
+     id="path4091" />
+  <path
+     class="l"
+     d="M402.13,42.24h-7.72a2.61,2.61,0,0,0-2.6,2.6v1.29a2.6,2.6,0,0,0,2.6,2.6h7.72a8.43,8.43,0,0,1,0-6.49Zm-7,4.3a1.06,1.06,0,1,1,1.06-1A1,1,0,0,1,395.09,46.54Zm3.18,0a1.06,1.06,0,1,1,1.06-1A1,1,0,0,1,398.27,46.54Z"
+     id="path4093" />
+  <path
+     class="d"
+     d="M407.61,48l1.44-2.62H411L412.26,48l3.25-6.13a6.7,6.7,0,0,0-11.18-.11Z"
+     id="path4095" />
+  <path
+     class="m"
+     d="M413.08,49.79a1,1,0,0,1-.38.4.92.92,0,0,1-.49.13.89.89,0,0,1-.48-.13,1,1,0,0,1-.37-.4L409.89,47l-1.48,2.79a1,1,0,0,1-.37.4.91.91,0,0,1-.48.13.93.93,0,0,1-.87-.53l-3.27-6.06a6.8,6.8,0,0,0-.24,1.76,6.7,6.7,0,1,0,13.4,0,6.79,6.79,0,0,0-.23-1.76Z"
+     id="path4097" />
+  <text
+     class="j"
+     transform="translate(36.2 438.52)"
+     id="text4103">Stored policy<tspan
+   x="0"
+   y="22"
+   id="tspan4099">information does</tspan>
+<tspan
+   x="0"
+   y="44"
+   id="tspan4101">not match</tspan>
+</text>
+  <rect
+     class="d"
+     x="247"
+     y="215.5"
+     width="117"
+     height="20"
+     rx="2.11"
+     id="rect4105" />
+  <text
+     class="e"
+     transform="translate(252.73 230.19)"
+     id="text4107">Send Changes</text>
+  <line
+     class="f"
+     x1="223"
+     y1="351.5"
+     x2="394"
+     y2="351.5"
+     id="line4109" />
+  <path
+     class="g"
+     d="M387.23,356.3a.5.5,0,0,1,.15-.69l6.45-4.11-6.45-4.11a.5.5,0,1,1,.54-.84l7.11,4.53a.49.49,0,0,1,0,.84l-7.11,4.53a.45.45,0,0,1-.27.08A.49.49,0,0,1,387.23,356.3Z"
+     id="path4111" />
+  <rect
+     class="d"
+     x="250"
+     y="341.5"
+     width="111"
+     height="20"
+     rx="2.11"
+     id="rect4113" />
+  <text
+     class="e"
+     transform="translate(254.88 356.19)"
+     id="text4115">Scan Integrity</text>
+  <line
+     class="f"
+     x1="223"
+     y1="484.5"
+     x2="394"
+     y2="484.5"
+     id="line4117" />
+  <path
+     class="g"
+     d="M387.23,489.3a.5.5,0,0,1,.15-.69l6.45-4.11-6.45-4.11a.5.5,0,0,1,.54-.84l7.11,4.53a.49.49,0,0,1,0,.84l-7.11,4.53a.45.45,0,0,1-.27.08A.49.49,0,0,1,387.23,489.3Z"
+     id="path4119" />
+  <rect
+     class="d"
+     x="248"
+     y="474"
+     width="115"
+     height="20"
+     rx="2.11"
+     id="rect4121" />
+  <text
+     class="e"
+     transform="translate(258.46 488.69)"
+     id="text4123">Send Checks</text>
+  <line
+     class="f"
+     x1="397"
+     y1="512.5"
+     x2="568"
+     y2="512.5"
+     id="line4125" />
+  <path
+     class="g"
+     d="M561.23,517.3a.5.5,0,0,1,.15-.69l6.45-4.11-6.45-4.11a.5.5,0,0,1,.54-.84l7.11,4.53a.49.49,0,0,1,0,.84l-7.11,4.53a.45.45,0,0,1-.27.08A.49.49,0,0,1,561.23,517.3Z"
+     id="path4127" />
+  <rect
+     class="d"
+     x="438"
+     y="502.5"
+     width="83"
+     height="20"
+     rx="2.11"
+     id="rect4129" />
+  <text
+     class="e"
+     transform="translate(452.11 517.19)"
+     id="text4131">Update</text>
+  <line
+     class="f"
+     x1="396.5"
+     y1="437.5"
+     x2="225.5"
+     y2="437.5"
+     id="line4133" />
+  <path
+     class="g"
+     d="M232.27,432.7a.5.5,0,0,1-.15.69l-6.45,4.11,6.45,4.11a.5.5,0,1,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,232.27,432.7Z"
+     id="path4135" />
+  <rect
+     class="d"
+     x="248"
+     y="427"
+     width="115"
+     height="20"
+     rx="2.11"
+     id="rect4137" />
+  <text
+     class="e"
+     transform="translate(255.49 441.69)"
+     id="text4139">Request Scan</text>
+  <line
+     class="f"
+     x1="744.5"
+     y1="618"
+     x2="573.5"
+     y2="618"
+     id="line4141" />
+  <path
+     class="g"
+     d="M580.27,613.2a.5.5,0,0,1-.15.69L573.67,618l6.45,4.11a.5.5,0,1,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,580.27,613.2Z"
+     id="path4143" />
+  <rect
+     class="d"
+     x="612"
+     y="608"
+     width="83"
+     height="20"
+     rx="2.11"
+     id="rect4145" />
+  <text
+     class="e"
+     transform="translate(630.57 622.69)"
+     id="text4147">Query</text>
+  <line
+     class="f"
+     x1="918.5"
+     y1="594.5"
+     x2="747.5"
+     y2="594.5"
+     id="line4149" />
+  <path
+     class="g"
+     d="M754.27,589.7a.5.5,0,0,1-.15.69l-6.45,4.11,6.45,4.11a.5.5,0,1,1-.54.84l-7.11-4.53a.49.49,0,0,1,0-.84l7.11-4.53a.45.45,0,0,1,.27-.08A.49.49,0,0,1,754.27,589.7Z"
+     id="path4151" />
+  <rect
+     class="d"
+     x="786"
+     y="584.5"
+     width="83"
+     height="20"
+     rx="2.11"
+     id="rect4153" />
+  <text
+     class="e"
+     transform="translate(804.57 599.19)"
+     id="text4155">Query</text>
+  <line
+     class="n"
+     x1="742.5"
+     y1="661"
+     x2="570.5"
+     y2="661"
+     id="line4157" />
+  <path
+     class="g"
+     d="M735.73,656.2a.5.5,0,0,0,.15.69l6.45,4.11-6.45,4.11a.5.5,0,0,0,.54.84l7.11-4.53a.49.49,0,0,0,0-.84l-7.11-4.53a.45.45,0,0,0-.27-.08A.49.49,0,0,0,735.73,656.2Z"
+     id="path4159" />
+  <rect
+     class="d"
+     x="598"
+     y="651"
+     width="111"
+     height="20"
+     rx="2.11"
+     id="rect4161" />
+  <text
+     class="e"
+     transform="translate(603.35 665.69)"
+     id="text4163">Query results</text>
+  <line
+     class="n"
+     x1="915.5"
+     y1="687.5"
+     x2="744.5"
+     y2="687.5"
+     id="line4165" />
+  <path
+     class="g"
+     d="M908.73,682.7a.5.5,0,0,0,.15.69l6.45,4.11-6.45,4.11a.5.5,0,0,0,.54.84l7.11-4.53a.49.49,0,0,0,0-.84l-7.11-4.53a.45.45,0,0,0-.27-.08A.49.49,0,0,0,908.73,682.7Z"
+     id="path4167" />
+  <rect
+     class="d"
+     x="770"
+     y="677.5"
+     width="115"
+     height="20"
+     rx="2.11"
+     id="rect4169" />
+  <text
+     class="e"
+     transform="translate(777.35 692.19)"
+     id="text4171">Query results</text>
+  <line
+     class="f"
+     x1="396.5"
+     y1="236.5"
+     x2="567.5"
+     y2="236.5"
+     id="line4173" />
+  <path
+     class="g"
+     d="M560.73,241.3a.5.5,0,0,1,.15-.69l6.45-4.11-6.45-4.11a.5.5,0,1,1,.54-.84l7.11,4.53a.49.49,0,0,1,0,.84l-7.11,4.53a.45.45,0,0,1-.27.08A.49.49,0,0,1,560.73,241.3Z"
+     id="path4175" />
+  <rect
+     class="d"
+     x="442"
+     y="226.5"
+     width="83"
+     height="20"
+     rx="2.11"
+     id="rect4177" />
+  <text
+     class="e"
+     transform="translate(456.11 241.19)"
+     id="text4179">Update</text>
+</svg>
