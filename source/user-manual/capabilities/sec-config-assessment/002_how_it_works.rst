@@ -11,14 +11,26 @@ States vs alerts
 
 Each agent has its own local database where it stores the current state of each check: *passed*, *failed*, or *invalid*, allowing
 agents to send only the differences detected between scans. If there has been no change, only the scan *summary* event will be sent,
-thus avoiding unnecessary0 network traffic while keeping the manager up to date. The manager will then use those updates to issue
+thus avoiding unnecessary network traffic while keeping the manager up to date. The manager will then use those updates to issue
 alerts that will be shown in the Kibana App.
 
-Available information of scans
+And overview of the integrity (more on this later) and alerting flow is depicted in the :ref:`sequence diagram <sca_sequence_diagram>` below.
+
+.. figure:: ../../../images/sca/sca_sequence_diagram.svg
+  :alt: SCA integrity and alerting flow
+  :name: sca_sequence_diagram
+  :align: center
+  :width: 85%
+
+  SCA integrity and alerting flow
+
+Scan Results
 ------------------------------
 
-A check event has three possible results (``passed``, ``failed``, and ``not applicable``) that are
-Take the following example from policy  ``cis_debian9_L2.yml``:
+Any given check event has three possible results (``passed``, ``failed``, and ``not applicable``). This result
+is determined by the set of rules and the rule result aggregator of the check.
+
+Take the following check from policy  ``cis_debian9_L2.yml`` as an example:
 
 .. code-block:: yaml
 
@@ -61,12 +73,12 @@ After evaluating the aforementioned check, the following event is generated:
     }
   }
 
-The *result* is ``passed`` because the rule founds "enabled" at the beginning of a line in the output of the
+The *result* is ``passed`` because the rule found "enabled" at the beginning of a line in the output of
 command `systemctl is-enabled auditd`.
 
 .. note::
-  A *check* can be marked as *not applicable* in the case an error occurs while performing the check.
-  In that case, instead of including the field *result*, fields: *status* and *reason* will be included.
+  A *check* will be marked as ``not applicable`` in the case an error occurs while performing the check.
+  In such cases, instead of including the field ``result``, fields: ``status`` and ``reason`` will be included.
 
 
 Integrity mechanisms

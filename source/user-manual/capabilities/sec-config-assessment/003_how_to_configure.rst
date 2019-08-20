@@ -5,18 +5,10 @@ How to configure SCA
    :depth: 10
 
 Upon installation, agents will include the policies appropriates for their particular Operating System.
-For the full list of **Officially supported policy files**  see table :ref:`available_sca_policies`.
+For the full list of **Officially supported policy files** see table :ref:`available_sca_policies`.
 These policies are included with the Wazuh Manager installation so that they can be easily enabled.
 
-static const char * const XML_ENABLED = "enabled";
-static const char * const XML_SCAN_DAY = "day";
-static const char * const XML_WEEK_DAY = "wday";
-static const char * const XML_TIME = "time";
-static const char * const XML_INTERVAL = "interval";
-static const char * const XML_SCAN_ON_START= "scan_on_start";
-static const char * const XML_POLICIES = "policies";
-static const char * const XML_POLICY = "policy";
-static const char * const XML_SKIP_NFS = "skip_nfs";
+For a detailed description of the various configuration parameters of SCA, please check the :ref:`reference_sec_config_assessment`
 
 Enabling and disabling policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

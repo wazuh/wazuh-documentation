@@ -180,7 +180,7 @@ Special mention deserves how rules evaluated as **non-applicable** are treated b
 
 - ``none``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
 
-.. table:: Truth table for condition
+.. table:: Condition truth-table
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
@@ -356,55 +356,55 @@ policies and, for minimalistic although complete examples, the `SCA test suite p
 Rule syntax for files
 :::::::::::::::::::::::::::::::::::
 
-- Checking that a file exists: ``f:/path/to/file``
-- Checking that a file does not exists: ``not f:/path/to/file``
-- Checking file contains (whole line literal match): ``f:/path/to/file -> content``
-- Checking file contents against regex: ``f:/path/to/file -> r:REGEX``
-- Checking a numeric value: ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
+- Check that a file exists: ``f:/path/to/file``
+- Check that a file does not exists: ``not f:/path/to/file``
+- Check file contains (whole line literal match): ``f:/path/to/file -> content``
+- Check file contents against regex: ``f:/path/to/file -> r:REGEX``
+- Check a numeric value: ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
 
 Rule syntax for directories
 :::::::::::::::::::::::::::::::::::
 
-- Checking that a directory exists: ``d:/path/to/directory``
-- Checking that a directory contains a file: ``d:/path/to/directory -> file``
-- Checking that a directory contains files that match a regex: ``d:/path/to/directory -> r:^files``
-- Checking files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
+- Check if a directory exists: ``d:/path/to/directory``
+- Check if a directory contains a file: ``d:/path/to/directory -> file``
+- Check if a directory contains files that match a regex: ``d:/path/to/directory -> r:^files``
+- Check files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
 
 Rule syntax for processes
 :::::::::::::::::::::::::::::::::::
 
-- Checking that a process is running ``p:process_name``
-- Checking that a process is **not** running ``not p:process_name``
+- Check if a process is running ``p:process_name``
+- Check if a process is **not** running ``not p:process_name``
 
 Rule syntax for commands
 :::::::::::::::::::::::::::::::::::
 
-- Checking the output of a command ``c:command -> output``
-- Checking the output of a command using regex ``c:command -> r:REGEX``
-- Checking a numeric value ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare >= number``
+- Check the output of a command ``c:command -> output``
+- Check the output of a command using regex ``c:command -> r:REGEX``
+- Check a numeric value ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare >= number``
 
 Rule syntax for Windows Registry
 :::::::::::::::::::::::::::::::::::
 
-- Checking that a registry exists ``r:path/to/registry``
-- Checking that a registry key exists ``r:path/to/registry -> key``
-- Checking a registry key content ``r:path/to/registry -> key -> content``
+- Check if a registry exists ``r:path/to/registry``
+- Check if a registry key exists ``r:path/to/registry -> key``
+- Check registry key contents ``r:path/to/registry -> key -> content``
 
 Composite rules
 :::::::::::::::::::::::::::::::::::
 
-- Checking that there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+- Check if there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
-- Checking that there is **no** line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+- Check if there is **no** line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
 Other examples
 :::::::::::::::::::::::::::::::::::
 
-- Looking at the value inside a file: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
-- Checking if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
-- Checking if a process is running: ``p:avahi-daemon``
-- Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0``
-- Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$``
-- Checking if a directory exists: ``d:/etc/mysql``
-- Check the running configuration of ssh to check the maximum authentication tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
-- Check if root is the only UID 0 account ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``
+- Check for file contents, whole line match: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
+- Check if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
+- Check if a process is running: ``p:avahi-daemon``
+- Check value of registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0``
+- Check if a directory contains files: ``d:/home/* -> ^.mysql_history$``
+- Check if a directory exists: ``d:/etc/mysql``
+- Check the running configuration of sshd for the maximum authentication tries allowed: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$``
+- Check if root is the only account with UID 0: ``f:/etc/passwd -> !r:^# && !r:^root: && r:^\w+:\w+:0:``
