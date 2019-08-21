@@ -325,7 +325,7 @@ Upgrade Kibana
 
   The .kibana index (which holds Kibana's configuration) has drastically changed. To migrate it, follow the official documentation:
 
-  - `Migrating Kibana .index to 6.0 <https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html>`_
+  - `Migrating Kibana .index to 6.0 <https://www.elastic.co/guide/en/kibana/6.x/migrating-6.0-index.html>`_
 
 
 4. Upgrade the Wazuh Kibana App:
