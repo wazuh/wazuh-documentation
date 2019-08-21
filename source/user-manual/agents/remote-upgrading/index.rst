@@ -14,8 +14,7 @@ Remote upgrading
 
         upgrading-agent
         custom-repository
-        create-custom-wpk-automatically
-        create-custom-wpk-manually
+        create-custom-wpk/create-wpk-key
         install-custom-wpk
         wpk-list
 
