@@ -345,9 +345,9 @@ todo_include_todos = False
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
-    app.add_stylesheet('css/font-awesome.min.css')
-    app.add_stylesheet('css/wazuh-icons.css')
-    app.add_stylesheet('css/style.css')
+    app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat("source/_static/css/font-awesome.min.css").st_mtime)
+    app.add_stylesheet("css/wazuh-icons.css?ver=%s" % os.stat("source/_static/css/wazuh-icons.css").st_mtime)
+    app.add_stylesheet("css/style.css?ver=%s" % os.stat("source/_static/css/style.css").st_mtime)
 
 # -- Additional configuration ------------------------------------------------
 html_context = {
