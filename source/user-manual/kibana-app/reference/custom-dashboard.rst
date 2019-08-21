@@ -5,7 +5,7 @@
 Create a custom dashboard
 =========================
 
-This section describes the process of creating a set of custom visualizations using Kibana and how to add then into a dashboard to create a custom dashboard.
+This section describes the process of creating a set of custom visualizations using Kibana and how to add them into a dashboard to create a custom dashboard.
 
 
 Creating Visualization
@@ -33,7 +33,7 @@ the same for other types of visualization.
    :width: 100%
 
 
-Next step will be selecting the index that will be used as data source.
+Next step will be selecting the index that will be used as a data source.
 We can work with any index that we created previously, but generally, we
 will be working with **wazuh-alerts-3.x-\***.
 
