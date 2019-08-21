@@ -31,25 +31,25 @@ The Wazuh agent for Solaris can be downloaded from our :doc:`packages list<../pa
 
             # pkgadd -d wazuh-agent_v3.10.0-sol10-sparc.pkg
 
-If the Solaris 11 zone where you want to install the package has child zones you will need to create a repository before installing the package:
+If the Solaris 11 zone where you want to install the package has child zones, you will need to create a repository before installing the package:
 
-    a) For Solaris 10 i386:
+    a) For Solaris 11 i386:
 
         .. code-block:: console
 
             # pkg set-publisher -g wazuh-agent_v3.10.0-sol11-i386.p5p wazuh
 
-    b) For Solaris 10 i386:
+    b) For Solaris 11 SPARC:
 
         .. code-block:: console
 
             # pkg set-publisher -g wazuh-agent_v3.10.0-sol11-sparc.p5p wazuh
 
-After creating the repository install the package:
+After creating the repository, install the package:
 
     .. code-block:: console
 
-        # pkg install --accept wazuh-agent
+        # pkg install wazuh-agent
 
 Finally, remove the publisher:
 
