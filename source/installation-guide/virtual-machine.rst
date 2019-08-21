@@ -39,7 +39,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
     # systemctl start logstash
     # systemctl status kibana
 
-5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADDRESS (where ``OVA_IP_ADDRESS`` is your system IP).
+5. In order to connect to the Kibana web user interface, login with ``https://OVA_IP_ADDRESS`` (where ``OVA_IP_ADDRESS`` is your system IP).
 
 
 .. note:: If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
