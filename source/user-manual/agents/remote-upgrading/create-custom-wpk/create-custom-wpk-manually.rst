@@ -5,9 +5,6 @@
 Manual custom WPK packages creation
 ====================================
 
-Compile a package
---------------------
-
 WPK packages will generally contain the complete agent code, however, this is not required.
 
 A WPK package must contain an installation program in binary form or a script in any language supported by the agent (Bash, Python, etc). Linux WPK packages must contain a Bash script named ``upgrade.sh`` for UNIX or ``upgrade.bat`` for Windows. This program must:

@@ -8,8 +8,7 @@ Custom WPK packages creation
 Get an X509 certificate and CA
 -------------------------------
 
-To create a WPK package it is required to have an X509 certificate and CA if you already have it jump to the next :ref:`section <Build the WPK package
->`, if you don't follow these steps:
+To create a WPK package it is required to have an X509 certificate and CA if you already have it jump to the next :ref:`section <build-wpk-package>`, if you don't follow these steps:
 
 Create root CA
 
@@ -35,6 +34,8 @@ Sign this certificate with the root CA
 
             # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
 
+
+.. _build-wpk-package:
 
 Build the WPK package
 ----------------------
