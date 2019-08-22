@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_deb:
+.. _wazuh_manager_deb:
 
 Debian and Ubuntu
 =================
@@ -120,7 +120,7 @@ Installing the Wazuh API
     # echo "wazuh-manager hold" | sudo dpkg --set-selections
     # echo "wazuh-api hold" | sudo dpkg --set-selections
 
-.. _wazuh_server_deb_filebeat:
+.. _wazuh_manager_deb_filebeat:
 
 Installing Filebeat
 -------------------

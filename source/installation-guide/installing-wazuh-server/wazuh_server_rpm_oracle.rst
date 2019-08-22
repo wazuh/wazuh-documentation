@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_oracle:
+.. _wazuh_manager_rpm_oracle:
 
 Oracle Linux
 ============
@@ -99,7 +99,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_oracle_filebeat:
+.. _wazuh_manager_rpm_oracle_filebeat:
 
 Installing Filebeat
 -------------------
