@@ -2,8 +2,8 @@
 
 .. _wazuh_server_linux:
 
-Install Wazuh Manager on Linux
-==============================
+Installation from packages
+==========================
 
 The Wazuh Manager can be installed in the most of Linux Distribution. It's possible to use DEB packages or RPM packages depending on the target Operative System flavor.
 

@@ -2,201 +2,35 @@
 
 .. _sources_installation:
 
-Install Wazuh server from sources
-=================================
-
-This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
-
-Installing Wazuh manager
-------------------------
-
-1. Install the development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
-
-  a) For RPM-based distributions:
-
-    .. code-block:: console
-
-      # yum install make gcc policycoreutils-python automake autoconf libtool
-
-  b) For Debian-based distributions:
-
-    .. code-block:: console
-
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
-
-  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
-
-  To install the build dependencies of CPython, follow these steps:
-
-  * For RPM-based distributions:
-
-    .. code-block:: console
-
-      # yum install epel-release yum-utils -y
-      # yum-builddep python34 -y
-
-
-  * For Ubuntu based system:
-
-    .. code-block:: console
-
-      # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
-      # apt-get update
-      # apt-get build-dep python3.6 -y
-
-  * For Debian based system:
-
-    .. code-block:: console
-
-      # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
-      # apt-get update
-      # apt-get build-dep python3.5 -y
-
-  .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
-
-
-2. Download and extract the latest version:
-
-  .. code-block:: console
-
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
-
-3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
-
-  .. warning::
-    If you want to enable the database output, :ref:`check out <manual_database_output>` this section before running the installation script.
-
-  .. code-block:: console
-
-    # cd wazuh-*
-    # ./install.sh
-
-  If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
-
-  .. code-block:: console
-
-    # cd wazuh-*
-    # make -C src clean
-    # make -C src clean-deps
-
-4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
-
-  .. code-block:: none
-
-    1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
-
-.. note::
-  During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
-
-.. warning::
-  Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
-
-5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl start wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager start
-
-  If you want to confirm that it started:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager status
-
-Installing Wazuh API
---------------------
-
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend you add the official repository as this has more recent versions.
-
-  a) For RPM-based distributions:
-
-    .. code-block:: console
-
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-      # yum -y install nodejs
-      # npm config set user 0
-
-  b) For Debian-based distributions:
-
-    .. code-block:: console
-
-      # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-      # apt-get install -y nodejs
-      # npm config set user 0
-
-  .. note::
-
-    If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
-
-    For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
-
-2. Download and execute the installation script:
-
-  .. code-block:: console
-
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.5/install_api.sh && bash ./install_api.sh download
-
-3. Once the process is complete, you can check the service status with:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api status
-
-.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
-
-Installing Filebeat
--------------------
-
-While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_), the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package. Below are the links to install Filebeat using different OS packages.
-
-+-------------------------------+----------------------------------------------------------------+
-| Operative system              | Version                                                        |
-+===============================+================================================================+
-| Amazon Linux                  | :ref:`1 or greater <wazuh_server_rpm_amazon_filebeat>`         |
-+-------------------------------+----------------------------------------------------------------+
-| CentOS                        | :ref:`6 or greater <wazuh_server_rpm_centos_filebeat>`         |
-+-------------------------------+----------------------------------------------------------------+
-| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_server_rpm_rhel_filebeat>`           |
-+-------------------------------+----------------------------------------------------------------+
-| Oracle Linux                  | :ref:`6 or greater <wazuh_server_rpm_oracle_filebeat>`         |
-+-------------------------------+----------------------------------------------------------------+
-| Debian                        | :ref:`7 or greater <wazuh_server_deb_filebeat>`                |
-+-------------------------------+----------------------------------------------------------------+
-| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_deb_filebeat>`            |
-+-------------------------------+----------------------------------------------------------------+
-| Fedora                        | :ref:`22 or greater <wazuh_server_rpm_fedora_filebeat>`        |
-+-------------------------------+----------------------------------------------------------------+
-| OpenSUSE                      | :ref:`42 or greater <wazuh_server_rpm_suse_opensuse_filebeat>` |
-+-------------------------------+----------------------------------------------------------------+
-| SUSE                          | :ref:`12 <wazuh_server_rpm_suse_opensuse_filebeat>`            |
-+-------------------------------+----------------------------------------------------------------+
-
-
-Next steps
-----------
-
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Installation from sources
+===========================================
+
+The Wazuh Manager can be installed in the most of Linux Distribution.
+
+
++-------------------------------+---------------------------------------------------------------------------+
+| Operative system              | Version                                                                   |
++===============================+===========================================================================+
+| Amazon Linux                  | :doc:`1 or greater <wazuh_server_sources_amazon>`                         |
++-------------------------------+---------------------------------------------------------------------------+
+| CentOS                        | :doc:`6 or greater <wazuh_server_sources_centos>`                         |
++-------------------------------+---------------------------------------------------------------------------+
+| Red Hat Enterprise Linux      | :doc:`6 or greater <wazuh_server_sources_rhel>`                           |
++-------------------------------+---------------------------------------------------------------------------+
+| Oracle Linux                  | :doc:`6 or greater <wazuh_server_sources_oracle>`                         |
++-------------------------------+---------------------------------------------------------------------------+
+| Debian                        | :doc:`7 or greater <wazuh_server_sources_debian>`                         |
++-------------------------------+---------------------------------------------------------------------------+
+| Ubuntu                        | :doc:`12.10 or greater <wazuh_server_sources_debian>`                     |
++-------------------------------+---------------------------------------------------------------------------+
+
+
+.. toctree::
+    :hidden:
+    :maxdepth: 2
+
+    wazuh_server_sources_amazon
+    wazuh_server_sources_centos
+    wazuh_server_sources_debian
+    wazuh_server_sources_rhel
+    wazuh_server_sources_oracle
