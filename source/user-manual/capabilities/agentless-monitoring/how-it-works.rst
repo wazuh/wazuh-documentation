@@ -82,7 +82,7 @@ A set of commands can also be configured to run on a remote device. Wazuh will a
 
 .. note::
 
-  To use ``su`` in a command as an argument, ``use_su`` must be set before the hostname. In the previous example, this would appear as: <host>use_su root@example_address.com</host>
+  To use ``su`` in a command as an argument, ``use_su`` must be set before the hostname. In the previous example, this would appear as: ``<host>use_su root@example_address.com</host>``
 
 
 Pix config

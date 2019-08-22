@@ -228,4 +228,4 @@ Note that we are assuming that your target index pattern is **"wazuh-alerts-*"**
 
 Reference:
 
-  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#getting-started-shards-and-replicas>`_.
+  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/6.2/_basic_concepts.html#getting-started-shards-and-replicas>`_.
