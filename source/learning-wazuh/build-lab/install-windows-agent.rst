@@ -97,10 +97,10 @@ Switch over to your Wazuh Server SSH window and run these commands, looking for 
 
     .. code-block:: console
 
-        [root@wazuh-server ossec]# agent_control -l
+        [root@wazuh-manager ossec]# agent_control -l
 
         Wazuh agent_control. List of available agents:
-        ID: 000, Name: wazuh-server (server), IP: 127.0.0.1, Active/Local
+        ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
         ID: 001, Name: linux-agent, IP: any, Active
         ID: 002, Name: elastic-server, IP: any, Active
         ID: 003, Name: windows-agent, IP: any, Active
@@ -110,7 +110,7 @@ Switch over to your Wazuh Server SSH window and run these commands, looking for 
 
     .. code-block:: console
 
-        [root@wazuh-server ~]# grep "agent connected"  /var/ossec/logs/alerts/alerts.log -B1 -A1
+        [root@wazuh-manager ~]# grep "agent connected"  /var/ossec/logs/alerts/alerts.log -B1 -A1
         2018 Jan 17 01:17:58 (linux-agent) any->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'linux-agent->any'.

@@ -12,6 +12,6 @@ These instructions guide you through the process of upgrading your Wazuh install
     .. toctree::
        :maxdepth: 2
 
-       upgrading-wazuh-server
+       upgrading-wazuh-manager
        upgrading-elastic-stack
        upgrading-wazuh-agent

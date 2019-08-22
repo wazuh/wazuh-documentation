@@ -44,7 +44,7 @@ The diagrams below list the components that are run per host for single-host and
     .. toctree::
         :maxdepth: 3
 
-        installing-wazuh-server/index
+        installing-wazuh-manager/index
         installing-elastic-stack/index
         installing-wazuh-agent/index
         upgrading/index

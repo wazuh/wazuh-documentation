@@ -297,7 +297,7 @@ Wazuh Manager
 
   Set Wazuh Manager fqdn hostname.
 
-  *Default wazuh-server*
+  *Default wazuh-manager*
 
 **wazuh_manager_config:**
 
@@ -347,7 +347,7 @@ Wazuh Manager
       mail_to:
         - 'admin@example.net'
       mail_smtp_server: localhost
-      mail_from: wazuh-server@example.com
+      mail_from: wazuh-manager@example.com
       extra_emails:
         - enable: false
           mail_to: 'admin@example.net'
