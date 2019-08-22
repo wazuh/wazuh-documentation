@@ -702,11 +702,11 @@ storage\\container\\content_type
 Specifies the content of the blobs.
 
 - **text**. Plain text. Each line is a log.
-- **json_file**. The blob contain records of logs in standard json format. **Note:**
+- **json_file**. The blob contain records of logs in standard json format.
 - **json_inline**. Each line is a log in json format.
 
 .. note::
-	As of November 1st 2018, the format of logs stored in Azure accounts became inline JSON.
+	As of November 1st 2018, the format of logs stored in Azure accounts became **inline JSON** instead of **JSON file**.
 	
 .. note::
 
