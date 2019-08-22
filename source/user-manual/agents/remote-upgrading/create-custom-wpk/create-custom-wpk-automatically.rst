@@ -13,7 +13,7 @@ Requirements
 ^^^^^^^^^^^^^
 
  * Docker
- * git
+ * Git
 
 Download our wazuh-packages repository from GitHub and go to the wpk directory.
 
