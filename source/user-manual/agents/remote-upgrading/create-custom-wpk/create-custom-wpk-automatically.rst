@@ -40,7 +40,7 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
             -c,   --checksum <path>                     [Optional] Generate checksum
             -h,   --help                                Show this help.
 
-To use this tool the certificate and the key must be in the same directory.
+To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
 
 Linux WPK
 ^^^^^^^^^^
