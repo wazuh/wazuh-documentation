@@ -45,7 +45,7 @@ There are two different ways of creating a WPK, you can do it manually or you ca
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
         create-custom-wpk-manually
         create-custom-wpk-automatically
