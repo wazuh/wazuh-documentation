@@ -76,6 +76,12 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     # filebeat setup --index-management -E setup.template.json.enabled=false
 
+.. note:: The Elasticsearch service listens on the default port 9200. You can make a simple check by making the following request:
+
+    .. code-block:: console
+
+        # curl http://YOUR_ELASTIC_SERVER_IP:9200
+
 .. _install_kibana_app_rpm:
 
 Kibana
@@ -126,9 +132,30 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
+.. note:: The Kibana service listens on the default port 5601.
+
 Next steps
 ----------
 
 Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
 You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
+
+Uninstall
+---------
+
+To uninstall Elasticsearch:
+
+    .. code-block:: console
+
+      # yum remove elasticsearch
+
+There are files marked as configuration and data files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/lib/elasticsearch`` and ``/etc/elasticsearch``.
+
+To uninstall Kibana:
+
+    .. code-block:: console
+
+      # yum remove kibana
+
+As in the previous case, the complete files removal can be done by removing the folder ``/var/lib/kibana`` and ``/etc/kibana``.
