@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. _upgrading_wazuh_agent:
+
 Upgrading Wazuh agents
 ======================
 

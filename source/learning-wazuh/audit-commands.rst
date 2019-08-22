@@ -170,7 +170,7 @@ a list of commands that Wazuh should give us a special alert about when they are
 
     .. code-block:: console
 
-        [root@wazuh-server lists]# ossec-makelists
+        [root@wazuh-manager lists]# ossec-makelists
         * File etc/lists/audit-keys.cdb does not need to be compiled
         * File etc/lists/suspicious-programs.cdb needs to be updated
         * File etc/lists/amazon/aws-sources.cdb does not need to be compiled

@@ -28,7 +28,7 @@ Setting the variables in a separate YAML file is recommended when configuring th
 
   filebeat_output_logstash_hosts: '10.1.1.11:5000'
 
-  wazuh_manager_fqdn: "wazuh-server"
+  wazuh_manager_fqdn: "wazuh-manager"
 
   wazuh_manager_config:
     json_output: 'yes'

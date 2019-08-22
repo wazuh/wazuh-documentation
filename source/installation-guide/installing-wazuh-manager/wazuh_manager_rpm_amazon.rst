@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_fedora:
+.. _wazuh_manager_rpm_amazon:
 
-Fedora
-======
+Amazon Linux
+============
 
-For Fedora platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Amazon Linux 1 and 2, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -29,10 +29,6 @@ To set up the repository, run this command:
     protect=1
     EOF
 
-.. note::
-
-  From Fedora v22 to v25, it's required to install ``dkms`` package (``dnf install dkms``).
-
 Installing the Wazuh Manager
 ----------------------------
 
@@ -40,7 +36,7 @@ The next step is to install the Wazuh Manager on your system:
 
   .. code-block:: console
 
-    # dnf install wazuh-manager
+    # yum install wazuh-manager
 
 Once the process is complete, you can check the service status with:
 
@@ -59,26 +55,23 @@ Once the process is complete, you can check the service status with:
 Installing the Wazuh API
 ------------------------
 
-.. note::
-
-  If you have Fedora v24 or lower, you need to add the official NodeJS repository previously:
-
-
-    .. code-block:: console
-
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-
-1. Install NodeJS:
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
   .. code-block:: console
 
-    # dnf install nodejs
+    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 
-2. Install the Wazuh API:
+  and then, install NodeJS:
 
   .. code-block:: console
 
-    # dnf install wazuh-api
+    # yum install nodejs
+
+2. Install the Wazuh API. It will update NodeJS if it is required:
+
+  .. code-block:: console
+
+    # yum install wazuh-api
 
 3. Once the process is complete, you can check the service status with:
 
@@ -105,14 +98,14 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_fedora_filebeat:
+.. _wazuh_manager_rpm_amazon_filebeat:
 
 Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
+The RPM package is suitable for installation on Red Hat, CentOS, Amazon Linux and other modern RPM-based systems.
 
 1. Install the Elastic repository and its GPG key:
 
@@ -134,7 +127,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # dnf install filebeat-7.3.0
+    # yum install filebeat-7.3.0
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
@@ -197,14 +190,14 @@ Uninstall
 
 To uninstall the Wazuh Manager and Wazuh API:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # dnf remove wazuh-manager wazuh-api
+      # yum remove wazuh-manager wazuh-api
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 
 To uninstall filebeat:
 
-  .. code-block:: console
+    .. code-block:: console
 
-      # dnf remove filebeat
+      # yum remove filebeat

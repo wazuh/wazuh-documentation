@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_suse_opensuse:
+.. _wazuh_manager_deb:
 
-SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
-===========================================================
+Debian and Ubuntu
+=================
 
-For SUSE 12, OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -14,43 +14,53 @@ Adding the Wazuh repository
 
 The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
-To set up the repository, run this command:
+1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
   .. code-block:: console
 
-    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
-    [wazuh_repo]
-    gpgcheck=1
-    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    enabled=1
-    name=Wazuh repository
-    baseurl=https://packages.wazuh.com/3.x/yum/
-    protect=1
-    EOF
+    # apt-get update
+    # apt-get install curl apt-transport-https lsb-release gnupg2
+
+2. Install the GPG key:
+
+  .. code-block:: console
+
+    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+
+3. Add the repository:
+
+  .. code-block:: console
+
+    # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+
+4. Update the package information:
+
+  .. code-block:: console
+
+    # apt-get update
 
 Installing the Wazuh Manager
 ----------------------------
 
-The next step is to install the Wazuh Manager on your system:
+On your terminal, install the Wazuh manager:
 
   .. code-block:: console
 
-    # zypper install wazuh-manager
+    # apt-get install wazuh-manager
 
-Once the process is complete, you can check the service status with:
+Once the process is completed, you can check the service status with:
 
-    * For Systemd:
+  * For Systemd:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # systemctl status wazuh-manager
+      # systemctl status wazuh-manager
 
-    * For SysV Init:
+  * For SysV Init:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # service wazuh-manager status
+      # service wazuh-manager status
 
 Installing the Wazuh API
 ------------------------
@@ -59,19 +69,23 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+    # curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
+  .. note::
+
+      If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
 
   and then, install NodeJS:
 
   .. code-block:: console
 
-    # zypper install nodejs
+    # apt-get install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
-    # zypper install wazuh-api
+    # apt-get install wazuh-api
 
 3. Once the process is complete, you can check the service status with:
 
@@ -90,58 +104,57 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-4. (Optional) Disable the Wazuh repository:
+4. (Optional) Disable the Wazuh updates:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+    # apt-get update
 
-.. _wazuh_server_rpm_suse_opensuse_filebeat:
+  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+  .. code-block:: console
+
+    # echo "wazuh-manager hold" | sudo dpkg --set-selections
+    # echo "wazuh-api hold" | sudo dpkg --set-selections
+
+.. _wazuh_manager_deb_filebeat:
 
 Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
+The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 1. Install the Elastic repository and its GPG key:
 
   .. code-block:: console
 
-    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-    # cat > /etc/zypp/repos.d/elastic.repo << EOF
-    [elasticsearch-7.x]
-    name=Elasticsearch repository for 7.x packages
-    baseurl=https://artifacts.elastic.co/packages/7.x/yum
-    gpgcheck=1
-    gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    enabled=1
-    autorefresh=1
-    type=rpm-md
-    EOF
+    # apt-get install curl apt-transport-https
+    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+    # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+    # apt-get update
 
 2. Install Filebeat:
 
   .. code-block:: console
 
-    # zypper install filebeat-7.3.0
+    # apt-get install filebeat=7.3.0
 
-3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/7.x/filebeat.yml
-    # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
-    # chmod go+r /etc/filebeat/wazuh-template.json
 
 5. Download the Wazuh module for Filebeat:
 
@@ -169,16 +182,8 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
     .. code-block:: console
 
-      # chkconfig --add filebeat
+      # update-rc.d filebeat defaults 95 10
       # service filebeat start
-
-8. (Optional) Disable the Elastic repository:
-
-  It is recommended that the Elastic repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
-
-  .. code-block:: console
-
-    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
 
 Next steps
 ----------
@@ -192,12 +197,23 @@ To uninstall the Wazuh Manager and Wazuh API:
 
     .. code-block:: console
 
-      # zypper remove wazuh-manager wazuh-api
+      # apt-get remove wazuh-manager wazuh-api
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command:
+
+    .. code-block:: console
+
+      # apt-get remove --purge wazuh-manager wazuh-api
 
 To uninstall filebeat:
 
     .. code-block:: console
 
-      # zypper remove filebeat
+      # apt-get remove filebeat
+
+The Filebeat complete files removal action can be done using the following command:
+
+    .. code-block:: console
+
+      # apt-get remove --purge filebeat
+

@@ -2,7 +2,7 @@
 
 .. _installation_agents:
 
-Installing Wazuh agent
+Installing Wazuh Agent
 ======================
 
 The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
