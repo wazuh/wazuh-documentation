@@ -8,7 +8,7 @@ Custom WPK packages creation
 Get an X509 certificate and CA
 -------------------------------
 
-To create a WPK package it is required to have an X509 certificate and CA if you already have it jump to the next :ref:`section <build-wpk-package>`, if you don't follow these steps:
+To create a WPK package it is required to have an X509 certificate and CA if you already have it jump to the next :ref:`section <build-wpk-package>`, if you don't, follow these steps:
 
 Create root CA
 
