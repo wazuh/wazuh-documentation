@@ -43,7 +43,7 @@ Run ``verify-agent-conf`` to confirm no errors were introduced into agent.conf.
 
 
 Configure ``vulnerability-detector`` and ``syscollector`` on wazuh-manager
--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 
 In ``ossec.conf`` on wazuh-manager, just before the ``open-scap`` wodle configuration section, insert the following so
 that it will inventory its own software plus scan all collected software inventories against published CVEs, alerting where

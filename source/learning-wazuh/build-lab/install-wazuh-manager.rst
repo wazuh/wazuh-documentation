@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _build_lab_install_wazuh_server:
+.. _build_lab_install_wazuh_manager:
 
-Install Wazuh Server Components
-===============================
+Install Wazuh Manager Components
+================================
 
-The Wazuh Server in your lab will be running the Wazuh Manager, Wazuh API, and Filebeat applications.
+The Wazuh Manager in your lab will be running the Wazuh Manager, Wazuh API, and Filebeat applications.
 
 Log in and sudo to root
 -----------------------
@@ -124,7 +124,7 @@ The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with 
 Install Filebeat
 ----------------
 
-Filebeat is the tool on the Wazuh Server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack Server.
+Filebeat is the tool on the Wazuh Manager that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack Server.
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
 
