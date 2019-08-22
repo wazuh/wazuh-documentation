@@ -1392,8 +1392,8 @@ footer a:focus,
   border: none;
 }
 
-main li.toctree-l1 > a {
-  color: #333;
+main li.toctree-l1 a {
+  color: #0094ce;
 }
 
 main li.toctree-l1 > a:hover,
