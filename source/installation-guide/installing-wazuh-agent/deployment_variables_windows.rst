@@ -10,68 +10,68 @@ For an agent to be fully deployed and connected to the Wazuh server it needs to 
 Below you can find a table describing the variables used by Wazuh installers on Windows, and a few examples on how to use them.
 
 
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-| Option                      | Description                                                                                                                  |
-+=============================+==============================================================================================================================+
-|   WAZUH_APPLICATION_FOLDER  |  Sets the installation path. Default C:\\Program Files (x86)\\ossec-agent\\.                                                 |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_MANAGER_IP          |  Specifies the managers IP address or hostname. This option also accepts a list of IPs or hostnames separated by semicolons. |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_MANAGER_PORT        |  Specifies the managers connection port.                                                                                     |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL            |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_AUTHD_SERVER        |  Specifies the Authd IP address.                                                                                             |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_AUTHD_PORT          |  Specifies the Authd connection port.                                                                                        |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PASSWORD            |  Sets the Authd password.                                                                                                    |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_NOTIFY_TIME         |  Sets the time between manager checks.                                                                                       |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_TIME_RECONNECT      |  Sets the time in seconds until a reconnection attempt.                                                                      |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_CERTIFICATE         |  Specifies the certificate of authority path.                                                                                |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PEM                 |  Specifies the certificate path.                                                                                             |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_KEY                 |  Specifies the key path.                                                                                                     |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_AGENT_NAME          |  Designates the agent's name. By default will be the computer name.                                                          |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_GROUP               |  Assigns the specified group to the agent.                                                                                   |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   \/l  installer.log        |  Generates a log of the installation process.                                                                                |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
-| \/l\*v installer.log        |  Generates a log of the installation process, including verbose messages.                                                    |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Option                             | Description                                                                                                                  |
++====================================+==============================================================================================================================+
+|   APPLICATIONFOLDER                |  Sets the installation path. Default C:\\Program Files (x86)\\ossec-agent\\.                                                 |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_MANAGER                    |  Specifies the managers IP address or hostname. This option also accepts a list of IPs or hostnames separated by semicolons. |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_MANAGER_PORT               |  Specifies the managers connection port.                                                                                     |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_PROTOCOL                   |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_REGISTRATION_SERVER        |  Specifies the Authd IP address.                                                                                             |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_REGISTRATION_PORT          |  Specifies the Authd connection port.                                                                                        |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_REGISTRATION_PASSWORD      |  Sets the Authd password.                                                                                                    |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_KEEP_ALIVE_INTERVAL        |  Sets the time between manager checks.                                                                                       |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_TIME_RECONNECT             |  Sets the time in seconds until a reconnection attempt.                                                                      |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_REGISTRATION_CA            |  Specifies the certificate of authority path.                                                                                |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_REGISTRATION_CERTIFICATE   |  Specifies the certificate path.                                                                                             |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_REGISTRATION_KEY           |  Specifies the key path.                                                                                                     |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_AGENT_NAME                 |  Designates the agent's name. By default will be the computer name.                                                          |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   WAZUH_AGENT_GROUP                |  Assigns the agent to one or more existing groups (separated by commas).                                                     |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   \/l  installer.log               |  Generates a log of the installation process.                                                                                |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| \/l\*v installer.log               |  Generates a log of the installation process, including verbose messages.                                                    |
++------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 
 Below there are some examples to install and register a Windows agent.
 
 Registration with password::
 
-    wazuh-agent-3.9.3-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" PASSWORD="TopSecret" AGENT_NAME="W2012"
+    wazuh-agent-3.9.5-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_NAME="W2012"
 
 Registration with password and assigning a group::
 
-    wazuh-agent-3.9.3-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" PASSWORD="TopSecret" GROUP="my-group"
+    wazuh-agent-3.9.5-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_GROUP="my-group"
 
 Registration with relative path to CA. It will be searched at your `APPLICATIONFOLDER` folder::
 
-    wazuh-agent-3.9.3-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" AGENT_NAME="W2019" CERTIFICATE="rootCA.pem"
+    wazuh-agent-3.9.5-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2019" WAZUH_REGISTRATION_CA="rootCA.pem"
 
 Absolute paths to CA, certificate or key that contain spaces can be written as shown below::
 
-    wazuh-agent-3.9.3-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" KEY="C:\Progra~2\sslagent.key" PEM="C:\Progra~2\sslagent.cert"
+    wazuh-agent-3.9.5-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="C:\Progra~2\sslagent.key" WAZUH_REGISTRATION_CERTIFICATE="C:\Progra~2\sslagent.cert"
 
 The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
 
 .. note::
-    To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <host-verification-registration>` section.
+    To verify agents via SSL, it's necessary to use both WAZUH_REGISTRATION_KEY and WAZUH_REGISTRATION_CERTIFICATE options. See the :ref:`verify hosts with SSL <host-verification-registration>` section.
 
 Registration with protocol::
 
-    wazuh-agent-3.9.3-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2" AGENT_NAME="W2016" PROTOCOL="TCP"
+    wazuh-agent-3.9.5-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016" WAZUH_PROTOCOL="TCP"
 
 .. warning::
     In Windows versions older than Windows Server 2008 or Windows 7, it's necessary to run the ``ossec-authd`` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.
