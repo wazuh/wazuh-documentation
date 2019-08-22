@@ -3,7 +3,7 @@
 .. _sources_installation:
 
 Installation from sources
-===========================================
+=========================
 
 The Wazuh Manager can be installed in the most of Linux Distribution.
 
