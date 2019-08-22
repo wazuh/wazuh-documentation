@@ -63,4 +63,4 @@ Here you can find different methods to register the Wazuh Agents:
 
 .. note::
 
-	If you're running Wazuh in cluster mode, refer to the :ref:`Configuring a cluster section <agent-registration-cluster>` to get more details about the registration process in the cluster.
+	If you're running Wazuh in cluster mode, refer to the :ref:`registering agents in the wazuh cluster <deploy_wazuh_agents_cluster>` section to get more details about the registration process in the cluster.
