@@ -36,18 +36,12 @@ We can see the roles we have.
 	│   │   ├── meta
 	│   │   ├── tasks
 	│   │   └── templates
-	│   ├── ansible-kibana
-	│   │   ├── defaults
-	│   │   ├── handlers
-	│   │   ├── meta
-	│   │   ├── tasks
-	│   │   └── templates
-	│   └── ansible-logstash
-	│       ├── defaults
-	│       ├── handlers
-	│       ├── meta
-	│       ├── tasks
-	│       └── templates
+	│   └── ansible-kibana
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates 
 	└── wazuh
 	    ├── ansible-filebeat
 	    │   ├── defaults
@@ -65,6 +59,7 @@ We can see the roles we have.
 	    │   └── vars
 	    └── ansible-wazuh-manager
 	        ├── defaults
+	        ├── files
 	        ├── handlers
 	        ├── meta
 	        ├── tasks
@@ -82,7 +77,6 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-elastic_stack-single.yml
 	├── wazuh-elastic.yml
 	├── wazuh-kibana.yml
-	├── wazuh-logstash.yml
 	└── wazuh-manager.yml
 
 
@@ -100,19 +94,19 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 	- hosts: <your wazuh server host>
 	  roles:
 	    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
-	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_logstash_hosts: 'your logstash IP' }
+	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_elasticsearch_hosts: '<YOUR_ELASTICSEARCH_IP>:9200' }
 
 
 Let's take a closer look at the content. 
 
 The first line ``hosts:`` indicates the machines where the commands below will be executed. 
 
-The ``roles:`` section indicates the roles that will be executed on the hosts mentioned above. Specifically, we are going to install the role of wazuh-manager (Wazuh manager + API) and the role of filebeat to which we indicate to overwrite the field ``filebeat_output_logstash_hosts`` with that IP address.
+The ``roles:`` section indicates the roles that will be executed on the hosts mentioned above. Specifically, we are going to install the role of wazuh-manager (Wazuh manager + API) and the role of filebeat to which we indicate to overwrite the field ``filebeat_output_elasticsearch_hosts`` with that IP address.
 
 2 - Preparing the playbook 
 --------------------------
 
-2.1 - We must create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the IP address of the machine where we are going to install the Wazuh server adding it to the hosts section and we will add the IP address of the machine where we are going to install our Logstash service to the ``filebeat_output_logstash_hosts`` field. 
+2.1 - We must create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the IP address of the machine where we are going to install the Wazuh server adding it to the hosts section and we will add the IP address of the machine where we are going to install our Elasticsearch service to the ``filebeat_output_elasticsearch_hosts`` field. 
 
 Our resulting file is:  
 
@@ -121,7 +115,7 @@ Our resulting file is:
 	- hosts: 192.168.0.180
 	  roles:
 	    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
-	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_logstash_hosts: '192.168.0.108:5000' }
+	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_elasticsearch_hosts: '192.168.0.108:9200' }
 
 .. note::
 
@@ -141,7 +135,7 @@ Our resulting file is:
 
 		- hosts: 192.168.0.180
 		  roles:
-		    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_logstash_hosts: '192.168.0.108:5000' }
+		    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_elasticsearch_hosts: '192.168.0.108:9200' }
 
 
 3 - Running the playbook
@@ -232,6 +226,6 @@ We can check the status of our new services in our Wazuh server.
 
 .. code-block:: console
 
-	● filebeat.service - Filebeat sends log files to Logstash or directly to Elasticsearch.
+	● filebeat.service - Filebeat sends log files to Elasticsearch.
 	   Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago
