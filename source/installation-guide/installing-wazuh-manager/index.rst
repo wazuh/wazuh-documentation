@@ -14,7 +14,7 @@ There are several options for installing the Wazuh Manager depending on the oper
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`Linux packages<wazuh_manager_linux>`                 | Install Wazuh Manager from Linux packages.                            |
+| :ref:`Linux packages<wazuh_manager_linux>`                | Install Wazuh Manager from Linux packages.                            |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Sources <sources_installation>`                     | Install Wazuh Manager from source code.                               |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
