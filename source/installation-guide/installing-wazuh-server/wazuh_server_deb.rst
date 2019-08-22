@@ -142,30 +142,33 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=7.1.1
+    # apt-get install filebeat=7.3.0
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/7.x/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json 
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
 
-5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+5. Download the Wazuh module for Filebeat:
+
+  .. code-block:: console
+
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
+6. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
-    output.elasticsearch:
-      hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-6. Enable and start the Filebeat service:
+7. Enable and start the Filebeat service:
 
   * For Systemd:
 
@@ -196,7 +199,7 @@ To uninstall the Wazuh Manager and Wazuh API:
 
       # apt-get remove wazuh-manager wazuh-api
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command:
 
     .. code-block:: console
 
@@ -208,7 +211,7 @@ To uninstall filebeat:
 
       # apt-get remove filebeat
 
-The Filebeat complete files removal action can be done using the following command: 
+The Filebeat complete files removal action can be done using the following command:
 
     .. code-block:: console
 

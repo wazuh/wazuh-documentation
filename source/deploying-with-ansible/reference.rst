@@ -10,47 +10,56 @@ Variables references
 Elasticsearch
 ===================
 
-elasticsearch_cluster_name
+**elasticsearch_cluster_name**
+
   Name of the Elasticsearch cluster
 
   *Default wazuh*
 
-elasticsearch_node_name
+**elasticsearch_node_name**
+
   Name of the Elasticsearch node
 
   *Default node-1*
 
-elasticsearch_http_port
+**elasticsearch_http_port**
+
   ElasticSearch listening port
 
   *Default 9200*
 
-elasticsearch_network_host
+**elasticsearch_network_host**
+
   ElasticSearch, listening ip address
 
   *Default 127.0.0.1*
 
-elasticsearch_jvm_xms
+**elasticsearch_jvm_xms**
+
   JVM heap size
 
   *Default null*
 
-elastic_stack_version
+**elastic_stack_version**
+
   Version of Elasticsearch to install
 
   *Default 6.2.2*
 
-elasticsearch_shards
+**elasticsearch_shards**
+
   Set number of shards for indices
 
   *Default 5*
 
-elasticsearch_replicas
+**elasticsearch_replicas**
+
   Set number of shards for indices
 
   *Default 1*
 
-elasticsearch_install_java
+**elasticsearch_install_java**
+
   When it's present will install Oracle Java.
 
   *Default yes*
@@ -60,32 +69,38 @@ elasticsearch_install_java
 Kibana
 =========
 
-elasticsearch_http_port
+**elasticsearch_http_port**
+
   Elasticsearch node port.
 
   *Default 9200*
 
-elasticsearch_network_host
+**elasticsearch_network_host**
+
   IP address or hostname of Elasticsearch node.
 
   *Default 127.0.0.1*
 
-kibana_server_host
+**kibana_server_host**
+
   Listening IP address of Kibana.
 
   *Default 0.0.0.0*
 
-kibana_server_port
+**kibana_server_port**
+
   Listening port of Kibana.
 
   *Default 5601*
 
-elastic_stack_version
+**elastic_stack_version**
+
   Version of Kibana to install
 
   *Default 6.2.2*
 
-wazuh_version
+**wazuh_version**
+
   Wazuh APP compatible version to install
 
   *Default 3.2.0*
@@ -95,62 +110,74 @@ wazuh_version
 Logstash
 ===================
 
-logstash_create_config
+**logstash_create_config**
+
   Generate or not Logstash config.
 
   *Defaults true*
 
-logstash_input_beats
+**logstash_input_beats**
+
   When is set to true, it will configure Logstash to use Filebeat input. Otherwise it will use File input.
 
   *Defaults false*
 
-elasticsearch_network_host
+**elasticsearch_network_host**
+
   Ip address or hostname of Elasticsearch node.
 
   *Default 127.0.0.1*
 
-elasticsearch_http_port
+**elasticsearch_http_port**
+
   Port of Elasticsearch node.
 
   *Default 9200*
 
-elasticsearch_shards
+**elasticsearch_shards**
+
   Set number of shards for indices
 
   *Default 5*
 
-elasticsearch_replicas
+**elasticsearch_replicas**
+
   Set number of shards for indices
 
   *Default 1*
 
-elastic_stack_version
+**elastic_stack_version**
+
   Version of Logstash to install
 
   *Default 6.2.2*
 
-logstash_ssl
+**logstash_ssl**
+
   Using ssl between filebeat and logstash
 
   *Default false*
 
-logstash_ssl_dir
+**logstash_ssl_dir**
+
   Folder where the SSL key and cert will be stored.
 
   *Default /etc/pki/logstash*
 
-logstash_ssl_certificate_file
+**logstash_ssl_certificate_file**
+
   SSL certificate file to be copied from Ansible server to logstash server.
 
   *Default null*
 
-logstash_ssl_key_file
+**logstash_ssl_key_file**
+
   SSL key file to be copied from Ansible server to logstash server.
 
   *Default null*
 
-logstash_install_java
+**logstash_install_java**
+
   When it's present will install Oracle Java.
 
   *Default yes*
@@ -160,12 +187,14 @@ logstash_install_java
 Filebeat
 ===================
 
-filebeat_create_config:
+**filebeat_create_config:**
+
   Generate or not Filebeat config.
 
   *Default true*
 
-filebeat_prospectors:
+**filebeat_prospectors:**
+
   Set filebeat prospectors to fetch data.
 
   *Example:* ::
@@ -179,12 +208,14 @@ filebeat_prospectors:
       json.keys_under_root: true
       json.overwrite_keys: true
 
-filebeat_output_elasticsearch_enabled:
+**filebeat_output_elasticsearch_enabled:**
+
   Send output to Elasticsearch node(s).
 
   *Default false*
 
-filebeat_output_elasticsearch_hosts:
+**filebeat_output_elasticsearch_hosts:**
+
   Elasticsearch node(s) to send output.
 
   *Example:* ::
@@ -193,12 +224,14 @@ filebeat_output_elasticsearch_hosts:
     - "localhost:9200"
     - "10.1.1.10:9200"
 
-filebeat_output_logstash_enabled:
+**filebeat_output_logstash_enabled:**
+
   Send output to Logstash node(s).
 
   *Default true*
 
-filebeat_output_logstash_hosts:
+**filebeat_output_logstash_hosts:**
+
   Logstash node(s) to send output.
 
   *Example:* ::
@@ -207,42 +240,50 @@ filebeat_output_logstash_hosts:
     - "10.1.1.10:5000"
     - "10.1.1.11:5000"
 
-filebeat_enable_logging:
+**filebeat_enable_logging:**
+
   Enable/disable logging.
 
   *Default true*
 
-filebeat_log_level:
+**filebeat_log_level:**
+
   Set filebeat log level.
 
   *Default debug*
 
-filebeat_log_dir:
+**filebeat_log_dir:**
+
   Set filebeat log directory.
 
   *Default: /var/log/mybeat*
 
-filebeat_log_filename:
+**filebeat_log_filename:**
+
   Set filebeat log filename.
 
   *Default mybeat.log*
 
-filebeat_ssl_dir:
+**filebeat_ssl_dir:**
+
   Set the folder containing SSL certs.
 
   *Default /etc/pki/logstash*
 
-filebeat_ssl_certificate_file:
+**filebeat_ssl_certificate_file:**
+
   Set certificate filename.
 
   *Default null*
 
-filebeat_ssl_key_file:
+**filebeat_ssl_key_file:**
+
   Set certificate key filename.
 
   *Default null*
 
-filebeat_ssl_insecure:
+**filebeat_ssl_insecure:**
+
   Verify validity of the server certificate hostname.
 
   *Default false*
@@ -252,12 +293,14 @@ filebeat_ssl_insecure:
 Wazuh Manager
 ===================
 
-wazuh_manager_fqdn:
+**wazuh_manager_fqdn:**
+
   Set Wazuh Manager fqdn hostname.
 
   *Default wazuh-server*
 
-wazuh_manager_config:
+**wazuh_manager_config:**
+
   This store the Wazuh Manager configuration.
 
   *Example:*
@@ -436,7 +479,8 @@ wazuh_manager_config:
           port: null
           format: null
 
-wazuh_agent_configs:
+**wazuh_agent_configs:**
+
   This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
 
   *Example:*
@@ -496,7 +540,8 @@ wazuh_agent_configs:
           - format: 'System'
             location: 'eventlog'
 
-cdb_lists:
+**cdb_lists:**
+
   Configure CDB lists used by the Wazuh Manager (located at ``ansible-wazuh-manager/vars/cdb_lists.yml``).
 
   *Example:*
@@ -514,7 +559,8 @@ cdb_lists:
 
 .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
-agentless_creeds:
+**agentless_creeds:**
+
   Credentials and host(s) to be used by agentless feature.
 
   *Example:*
@@ -531,7 +577,8 @@ agentless_creeds:
 
 .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
-wazuh_api_user:
+**wazuh_api_user:**
+
   Wazuh API credentials.
 
   *Example:*
@@ -544,7 +591,8 @@ wazuh_api_user:
 
 .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
-authd_pass:
+**authd_pass:**
+
   Wazuh authd service password.
 
   *Example:*
@@ -558,7 +606,8 @@ authd_pass:
 Wazuh Agent
 ===================
 
-wazuh_managers:
+**wazuh_managers:**
+
   Set Wazuh Manager servers IP address, protocol, and port to be used by the agent.
 
   *Example:*
@@ -572,7 +621,8 @@ wazuh_managers:
         port: 1514
         protocol: tcp
 
-wazuh_profile:
+**wazuh_profile:**
+
   Configure what profiles this agent will have.
 
   *Default null*
@@ -583,7 +633,8 @@ wazuh_profile:
 
       wazuh_profile: "centos7, centos7-web"
 
-wazuh_agent_authd:
+**wazuh_agent_authd:**
+
   Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. Be aware that this Ansible role will use the first Wazuh Manager address defined on `wazuh_managers` as the authd registration server.
 
   .. code-block:: yaml
@@ -596,17 +647,20 @@ wazuh_agent_authd:
       ssl_agent_key: null
       ssl_auto_negotiate: 'no'
 
-wazuh_notify_time
+**wazuh_notify_time**
+
   Set the <notify_time> option in the agent.
 
   *Default null*
 
-wazuh_time_reconnect
+**wazuh_time_reconnect**
+
   Set <time-reconnect> option in the agent.
 
   *Default null*
 
-wazuh_winagent_config
+**wazuh_winagent_config**
+
   Set the Wazuh Agent installation regarding Windows hosts.
 
   .. code-block:: yaml
@@ -617,7 +671,8 @@ wazuh_winagent_config
     repo: https://packages.wazuh.com/windows/
     md5: fd9a3ce30cd6f9f553a1bc71e74a6c9f
 
-wazuh_agent_config:
+**wazuh_agent_config:**
+
   Wazuh Agent related configuration.
 
   *Example:*
@@ -691,11 +746,12 @@ wazuh_agent_config:
 
   .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect authd credentials.
 
-  authd_pass:
-    Wazuh authd credentials for agent registration.
+**authd_pass:**
 
-    *Example:*
+  Wazuh authd credentials for agent registration.
 
-    .. code-block:: yaml
+  *Example:*
 
-      authd_pass: foobar
+  .. code-block:: yaml
+
+    authd_pass: foobar

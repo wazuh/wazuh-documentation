@@ -26,6 +26,12 @@ b) Debian/Ubuntu:
 
     # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
 
+c) OpenSUSE:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+
 Upgrade the Wazuh manager and API
 ----------------------------------
 
@@ -39,8 +45,14 @@ b) Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-manager wazuh-api
+
+c) OpenSUSE:
+
+.. code-block:: console
+
+    # zypper update wazuh-manager wazuh-api
 
 .. note::
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
@@ -58,10 +70,16 @@ b) Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get update 
+    # apt-get update
     # apt-get install wazuh-agent
 
-c) Windows:
+c) OpenSUSE:
+
+  .. code-block:: console
+
+    # zypper update wazuh-agent
+
+d) Windows:
 
   The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
 
@@ -78,7 +96,7 @@ c) Windows:
 
   .. code-block:: console
 
-    # wazuh-agent-3.9.2-1.msi /q
+    # wazuh-agent-3.9.5-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -102,3 +120,9 @@ b) Debian/Ubuntu:
 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
     # apt-get update
+
+c) OpenSUSE:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo

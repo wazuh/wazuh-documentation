@@ -21,9 +21,9 @@ Depending on your operating system you can choose to install Elastic Stack from 
 
 After the installation, find below optional steps you may find interesting:
 
-- :ref:`Enrich events with geolocation information <geo_ip>`
 - :ref:`Elasticsearch tuning <elastic_tuning>`
 - :ref:`Transform your data with Logstash <transform_logstash>`
+- :ref:`Insert a Wazuh API entry automatically <automatic_api>`
 
 
 .. note::
@@ -37,6 +37,6 @@ After the installation, find below optional steps you may find interesting:
    elastic_server_rpm
    elastic_server_deb
    protect-installation/index
-   geoip
    transform_logstash
    elastic_tuning
+   automatic_api

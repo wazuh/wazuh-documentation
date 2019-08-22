@@ -139,7 +139,7 @@ The setup process for the database output is finished. Now the only thing left i
 
   .. code-block:: console
 
-    # systemctl retart wazuh-manager
+    # systemctl restart wazuh-manager
 
   b. For SysV Init:
 

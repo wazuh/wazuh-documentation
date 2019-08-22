@@ -17,7 +17,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 To set up the repository, run this command:
 
   .. code-block:: console
-  
+
     # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
@@ -127,32 +127,35 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-7.1.1
+    # yum install filebeat-7.3.0
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
-5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+5. Download the Wazuh module for Filebeat:
+
+  .. code-block:: console
+
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
+6. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
-    output.elasticsearch:
-      hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-6. Enable and start the Filebeat service:
+7. Enable and start the Filebeat service:
 
   * For Systemd:
 
@@ -169,6 +172,14 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
       # chkconfig --add filebeat
       # service filebeat start
 
+8. (Optional) Disable the Elastic repository:
+
+  It is recommended that the Elastic repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+
 Next steps
 ----------
 
@@ -183,7 +194,7 @@ To uninstall the Wazuh Manager and Wazuh API:
 
       # yum remove wazuh-manager wazuh-api
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``. 
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 
 To uninstall filebeat:
 

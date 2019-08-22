@@ -26,6 +26,7 @@ Options
 - `helo_server`_
 - `email_maxperhour`_
 - `email_idsname`_
+- `email_log_source`_
 - `custom_alert_output`_
 - `stats`_
 - `logall`_
@@ -157,6 +158,18 @@ The name will be added to the email headers with the specified value.
 +--------------------+----------+
 | **Allowed values** | Any name |
 +--------------------+----------+
+
+
+email_log_source
+^^^^^^^^^^^^^^^^
+
+This selects the alert file to be read from.
+
++--------------------+---------------------------+
+| **Default value**  | alerts.json               |
++--------------------+---------------------------+
+| **Allowed values** | alerts.log or alerts.json |
++--------------------+---------------------------+
 
 custom_alert_output
 ^^^^^^^^^^^^^^^^^^^

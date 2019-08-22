@@ -76,27 +76,46 @@ Deploying a Wazuh cluster
 
 1. Set the cluster configuration
 
-  Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
+    Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
 
-  - ``<node_type>``: Set the node type.
-  - ``<key>``: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
+    - ``<node_type>``: Set the node type.
+    - ``<key>``: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
 
-      .. code-block:: console
+        .. code-block:: console
 
-          # openssl rand -hex 16
+            # openssl rand -hex 16
 
-  - ``<disabled>``: Set this field to ``no`` in order to enable the cluster.
-  - ``<nodes>``: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
+    - ``<disabled>``: Set this field to ``no`` in order to enable the cluster.
+    - ``<nodes>``: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
 
-    The following is an example of the configuration of a **worker** node:
+      The following is an example of the configuration of a **worker** node:
 
-    .. code-block:: xml
+      .. code-block:: xml
+
+          <cluster>
+              <name>wazuh</name>
+              <node_name>node02</node_name>
+              <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+              <node_type>worker</node_type>
+              <port>1516</port>
+              <bind_addr>0.0.0.0</bind_addr>
+              <nodes>
+                <node>master</node>
+              </nodes>
+              <hidden>no</hidden>
+              <disabled>no</disabled>
+          </cluster>
+
+
+      And the following is an example of the configuration of a **master** node:
+
+      .. code-block:: xml
 
         <cluster>
             <name>wazuh</name>
-            <node_name>node02</node_name>
+            <node_name>node01</node_name>
             <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-            <node_type>worker</node_type>
+            <node_type>master</node_type>
             <port>1516</port>
             <bind_addr>0.0.0.0</bind_addr>
             <nodes>
@@ -105,25 +124,6 @@ Deploying a Wazuh cluster
             <hidden>no</hidden>
             <disabled>no</disabled>
         </cluster>
-
-
-    And the following is an example of the configuration of a **master** node:
-
-    .. code-block:: xml
-
-      <cluster>
-          <name>wazuh</name>
-          <node_name>node01</node_name>
-          <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-          <node_type>master</node_type>
-          <port>1516</port>
-          <bind_addr>0.0.0.0</bind_addr>
-          <nodes>
-            <node>master</node>
-          </nodes>
-          <hidden>no</hidden>
-          <disabled>no</disabled>
-      </cluster>
 
 2. Restart the node
 
@@ -185,70 +185,70 @@ The correct way to use it is to point every agent to send the events to the *loa
 
 1. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <client>
-      <server>
-        <address>LOAD_BALANCER_IP</address>
-        ...
-      </server>
-    </client>
+      <client>
+        <server>
+          <address>LOAD_BALANCER_IP</address>
+          ...
+        </server>
+      </client>
 
 2. Restart the agents:
 
-  a. For Systemd:
+    a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-agent
+        # systemctl restart wazuh-agent
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-agent restart
+        # service wazuh-agent restart
 
 3. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
 
-  This configuration will depend of the load balancer service choosen.
+    This configuration will depend of the load balancer service choosen.
 
 Here is a short configuration guide of a **load balancer** using Nginx:
 
   1. Install Nginx in the *load balancer instance*:
 
-    - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
-    - Follow the steps related on that guide to install the packages.
+      - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
+      - Follow the steps related on that guide to install the packages.
 
   2. Configure the instance as a *load balancer*:
 
-    - The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
-    - Now, open the configuration file and add the following structure:
+      - The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
+      - Now, open the configuration file and add the following structure:
 
-      .. code-block:: xml
+        .. code-block:: xml
 
-        stream {
-            upstream cluster {
-                hash $remote_addr consistent;
-                server <WAZUH-MASTER-IP>:1514;
-                server <WAZUH-WORKER1-IP>:1514;
-                server <WAZUH-WORKER2-IP>:1514;
-            }
-            upstream master {
-                server <WAZUH-MASTER-IP>:1515;
-            }
-            server {
-                listen 1514;
-                proxy_pass cluster;
-            }
-            server {
-                listen 1515;
-                proxy_pass master;
-            }
-        }
+          stream {
+              upstream cluster {
+                  hash $remote_addr consistent;
+                  server <WAZUH-MASTER-IP>:1514;
+                  server <WAZUH-WORKER1-IP>:1514;
+                  server <WAZUH-WORKER2-IP>:1514;
+              }
+              upstream master {
+                  server <WAZUH-MASTER-IP>:1515;
+              }
+              server {
+                  listen 1514;
+                  proxy_pass cluster;
+              }
+              server {
+                  listen 1515;
+                  proxy_pass master;
+              }
+          }
 
-    - You can find more details in nginx guide for configuring `TCP and UDP load balancer. <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/>`_
+      - You can find more details in nginx guide for configuring `TCP and UDP load balancer. <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/>`_
 
-    3. Restart nginx configuration files:
+  3. Restart nginx configuration files:
 
       .. code-block:: console
 
@@ -333,9 +333,9 @@ For example, the following snippet shows the connected nodes in the cluster:
 
     # /var/ossec/bin/cluster_control -l
     NAME      TYPE    VERSION  ADDRESS
-    worker-1  worker  3.9.2    172.17.0.101
-    worker-2  worker  3.9.2    172.17.0.102
-    master    master  3.9.2    172.17.0.100
+    worker-1  worker  3.9.5    172.17.0.101
+    worker-2  worker  3.9.5    172.17.0.102
+    master    master  3.9.5    172.17.0.100
 
 This information can also be obtained using the Restful API:
 
@@ -349,19 +349,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.9.2",
+                "version": "3.9.5",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.9.2",
+                "version": "3.9.5",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.9.2",
+                "version": "3.9.5",
                 "type": "master",
                 "name": "node01"
              }

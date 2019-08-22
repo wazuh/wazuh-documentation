@@ -42,7 +42,7 @@ In this example, we are going to create a certificate for Wazuh Agents without s
       ...
     </client>
 
-4. Restart the Wazuh Manager: 
+4. Restart the Wazuh Manager:
 
   a) For Systemd:
 
@@ -87,7 +87,7 @@ This is an alternative method to the previous one. In this case, we will bind th
       ...
     </client>
 
-4. Restart the Wazuh Manager: 
+4. Restart the Wazuh Manager:
 
   a) For Systemd:
 
@@ -109,7 +109,7 @@ Once you have completed the Wazuh Manager section, you need to copy the newly cr
 
 .. toctree::
     :maxdepth: 2
-    
+
     agents/linux-unix-agent-verification
     agents/windows-agent-verification
     agents/macos-agent-verification

@@ -4,7 +4,7 @@
 
 Install Wazuh Agent
 ===================
- 
+
 We can install the Wazuh agent using the roles and playbooks available in the Wazuh Ansible repository. The Ansible server must have access to the Agent instance.
 
 - `1 - Access to wazuh-ansible`_
@@ -13,8 +13,8 @@ We can install the Wazuh agent using the roles and playbooks available in the Wa
 
 .. note::
 
-	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is CentOS 7 and we do not need to indicate the path of the Python interpreter. 
-	
+	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is CentOS 7 and we do not need to indicate the path of the Python interpreter.
+
 
 	192.168.0.180 ansible_ssh_user=centos
 
@@ -50,7 +50,7 @@ We can install the Wazuh agent using the roles and playbooks available in the Wa
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
 	CHANGELOG.md  playbooks  README.md  roles  VERSION
 
-We can see the roles we have. 
+We can see the roles we have.
 
 .. code-block:: console
 
@@ -100,7 +100,7 @@ We can see the roles we have.
 	        ├── templates
 	        └── vars
 
-And we can see the preconfigured playbooks we have. 
+And we can see the preconfigured playbooks we have.
 
 .. code-block:: console
 
@@ -114,7 +114,7 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-logstash.yml
 	└── wazuh-manager.yml
 
-In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
+In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref:`Wazuh Agent <ansible-wazuh-agent>` role.
 
@@ -140,22 +140,22 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 	      ssl_auto_negotiate: 'no'
 
 
-Let's take a closer look at the content. 
+Let's take a closer look at the content.
 
-The first line ``hosts:`` indicates the machines where the commands below will be executed. 
+The first line ``hosts:`` indicates the machines where the commands below will be executed.
 
-The ``roles:`` section indicates the roles that will be executed on the hosts mentioned above. Specifically, we are going to install the role of wazuh-agent. 
+The ``roles:`` section indicates the roles that will be executed on the hosts mentioned above. Specifically, we are going to install the role of wazuh-agent.
 
-We can also see a list of variables ``wazuh_managers:`` for the connection with Wazuh manager. This list overwrites the default configuration. 
+We can also see a list of variables ``wazuh_managers:`` for the connection with Wazuh manager. This list overwrites the default configuration.
 
-Finally we see another list of variables ``wazuh_agent_authd`` for the agent registration, which also overwrites the default configuration.  
+Finally we see another list of variables ``wazuh_agent_authd`` for the agent registration, which also overwrites the default configuration.
 
-2 - Preparing the playbook 
+2 - Preparing the playbook
 --------------------------
 
-2.1 - We must create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the IP address of the machine where we are going to install the Wazuh agent adding it to the hosts section and we will add the IP address of the Wazuh server to the ``wazuh_managers:`` section. 
+2.1 - We must create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the IP address of the machine where we are going to install the Wazuh agent adding it to the hosts section and we will add the IP address of the Wazuh server to the ``wazuh_managers:`` section.
 
-Our resulting file is:  
+Our resulting file is:
 
 .. code-block:: yaml
 
@@ -180,18 +180,18 @@ Our resulting file is:
 3 - Running the playbook
 ------------------------
 
-It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, opting to enter the password when Ansible requests it. To contemplate other options we consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one). 
+It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, opting to enter the password when Ansible requests it. To contemplate other options we consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one).
 
 3.1 - Let's launch the playbook run.
 
 - We use the ``-b`` option to indicate that we are going to become a super user.
-- We use the ``-K`` option to indicate Ansible to ask for the password. 
+- We use the ``-K`` option to indicate Ansible to ask for the password.
 
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playboks$ ansible-playbook wazuh-agent.yml -b -K
 
-We will obtain a final result similar to the one shown in the following code block. 
+We will obtain a final result similar to the one shown in the following code block.
 
 .. code-block:: console
 
@@ -240,7 +240,7 @@ We will obtain a final result similar to the one shown in the following code blo
 	ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
-We can check the status of our new services in our Wazuh agent. 
+We can check the status of our new services in our Wazuh agent.
 
 .. code-block:: console
 
@@ -249,7 +249,7 @@ We can check the status of our new services in our Wazuh agent.
 	   Loaded: loaded (/etc/systemd/system/wazuh-agent.service; enabled; vendor preset: disabled)
 	   Active: active (running) since lun 2018-09-17 11:26:16 CEST; 3min 28s ago
 
-We can see the agent connection in Kibana. 
+We can see the agent connection in Kibana.
 
 .. thumbnail:: ../../images/ansible/ansible-agent2.png
     :align: center
@@ -259,7 +259,7 @@ We can see the agent connection in Kibana.
     :align: center
     :width: 100%
 
-We can also view agent information from the Wazuh-server. 
+We can also view agent information from the Wazuh-server.
 
 .. code-block:: console
 

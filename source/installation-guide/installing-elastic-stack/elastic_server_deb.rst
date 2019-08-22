@@ -30,9 +30,23 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=7.1.1
+    # apt-get install elasticsearch=7.3.0
 
-2. Enable and start the Elasticsearch service:
+2. **Optional.** Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen on all interfaces by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to:
+
+   .. code-block:: yaml
+
+     network.host: 0.0.0.0
+
+3. If you are installing a **distributed architecture**, you will have to make an additional configuration change by editing the file ``/etc/elasticsearch/elasticsearch.yml``. Add or edit (if commented) the following lines:
+
+   .. code-block:: yaml
+
+     node.name: node-1
+     network.host: 0.0.0.0
+     cluster.initial_master_nodes: ["node-1"]
+
+4. Enable and start the Elasticsearch service:
 
   a) For Systemd:
 
@@ -49,6 +63,17 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # update-rc.d elasticsearch defaults 95 10
     # service elasticsearch start
 
+5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E setup.template.json.enabled=false
+
+.. note:: The Elasticsearch service listens on the default port 9200. You can make a simple check by making the following request:
+
+    .. code-block:: console
+
+        # curl http://YOUR_ELASTIC_SERVER_IP:9200
 
 .. _install_kibana_app_deb:
 
@@ -61,13 +86,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=7.1.1
+    # apt-get install kibana=7.3.0
 
 2. Install the Wazuh app plugin for Kibana:
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_7.1.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
@@ -108,9 +133,30 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # echo "elasticsearch hold" | sudo dpkg --set-selections
     # echo "kibana hold" | sudo dpkg --set-selections
 
+.. note:: The Kibana service listens on the default port 5601.
+
 Next steps
 ----------
 
 Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
 You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
+
+Uninstall
+---------
+
+To uninstall Elasticsearch:
+
+    .. code-block:: console
+
+      # apt-get remove elasticsearch
+
+There are files marked as configuration and data files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/lib/elasticsearch`` and ``/etc/elasticsearch``.
+
+To uninstall Kibana:
+
+    .. code-block:: console
+
+      # apt-get remove kibana
+
+As in the previous case, the complete files removal can be done by removing the folder ``/var/lib/kibana`` and ``/etc/kibana``.
