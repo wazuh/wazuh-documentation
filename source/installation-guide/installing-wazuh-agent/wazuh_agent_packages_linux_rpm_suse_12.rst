@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_linux_rpm_suse_11:
+.. _wazuh_agent_packages_linux_rpm_suse_12:
 
-SUSE 11
-=======
+SUSE 12, OpenSUSE 42, Leap and Tumbleweed
+=========================================
 
-The RPM package is suitable for Suse 11. For other RPM-based OS (CentOS/RHEL, Fedora, Suse 12, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`.
+The RPM package is suitable for SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed. For other RPM-based OS (CentOS/RHEL/Oracle Linux, Amazon Linux, Fedora, Suse 11), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_packages_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -16,14 +16,14 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
-    gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
     enabled=1
     name=Wazuh repository
-    baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
+    baseurl=https://packages.wazuh.com/3.x/yum/
     protect=1
     EOF
 

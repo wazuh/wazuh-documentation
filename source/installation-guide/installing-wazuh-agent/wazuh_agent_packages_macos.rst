@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_macos:
+.. _wazuh_agent_packages_macos:
 
 Install Wazuh agent on macOS
 ============================
