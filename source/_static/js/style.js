@@ -143,6 +143,7 @@ $(function() {
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
   }
+
   let delay = navbarTop + 200;
   let windowHeight = window.innerHeight;
   let documentHeight = $(document).outerHeight();
@@ -157,6 +158,12 @@ $(function() {
   heightNavbar();
   scrollNavbar();
   headerSticky();
+
+  setTimeout(function() {
+    if ($('#page').hasClass('no-latest-docs')) {
+      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
+    }
+  }, 500);
 
   $('#navbar').on('mousemove', function(e) {
     pageHover = 'nav';
@@ -214,7 +221,9 @@ $(function() {
     documentScroll = $(window).scrollTop();
     containerNavHeight = parseInt($('#navbar-globaltoc').outerHeight());
     navHeight = parseInt($('#globaltoc').outerHeight());
-
+    if ($('#page').hasClass('no-latest-docs')) {
+      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
+    }
     /* Update height of navbar */
     heightNavbar();
     /* If the coursor isn't in the navbar */
