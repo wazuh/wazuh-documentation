@@ -45,7 +45,7 @@ b) For Debian/Ubuntu:
   
 c) For Windows:
   
-  1. Download the MSI-based installer of `OpenJDK 8 <https://developers.redhat.com/products/openjdk/download>`_ for Windows for your architecture.
+  1. Download the MSI-based installer of `OpenJDK 8 <https://developers.redhat.com/products/openjdk/download>`_ for your Windows architecture.
   
   2. Run the installer and follow the on-screen instructions to install OpenJDK 8.
   
