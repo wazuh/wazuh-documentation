@@ -9,7 +9,7 @@ Follow these steps to update your ``Wazuh v1.x`` agents to ``Wazuh v2.x``.
 
 a) On DEB or RPM based **Linux systems**, you can easily rely on the packages manager to upgrade your agents. The process differs very little from installing a new agent. More information is available in our documentation at:
 
-  - :ref:`Install Wazuh agent on Linux <wazuh_agent_linux>`
+  - :ref:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`
 
   You can check your agent version by running the following command:
 
@@ -25,5 +25,5 @@ a) On DEB or RPM based **Linux systems**, you can easily rely on the packages ma
 
 b) On **Windows**, **Mac OS** and other operating systems, we advise you to delete your previous version and install Wazuh v2.x from scratch. More information is available in our documentation at:
 
-  - :ref:`Install Wazuh agent on Windows <wazuh_agent_windows>`
-  - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_macos>`
+  - :ref:`Install Wazuh agent on Windows <wazuh_agent_packages_windows>`
+  - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_packages_macos>`

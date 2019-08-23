@@ -99,7 +99,7 @@ d) Windows:
     # wazuh-agent-3.9.5-1.msi /q
 
 .. note::
-  To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
+  To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_packages_windows>`.
 
 Finishing the Wazuh upgrade
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
