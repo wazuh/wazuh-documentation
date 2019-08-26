@@ -29,7 +29,9 @@ $(function() {
   const hideSubtreeNodes = [
     'Install Wazuh manager on Linux',
     'Install Wazuh agent on Linux',
-  ].map((item) => item.toLowerCase());
+  ].map(function(item) {
+    return item.toLowerCase();
+  });
 
   markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
   checkScroll();
