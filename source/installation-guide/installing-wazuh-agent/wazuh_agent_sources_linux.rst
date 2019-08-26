@@ -5,7 +5,7 @@
 Install Wazuh agent on Linux
 ============================
 
-The Wazuh Manager can be installed in the most of Linux Distribution.
+The Wazuh Agent can be installed in the most of Linux Distribution.
 
 +-------------------------------+---------------------------------------------------------------------------+
 | Operative system              | Version                                                                   |
@@ -18,11 +18,14 @@ The Wazuh Manager can be installed in the most of Linux Distribution.
 +-------------------------------+---------------------------------------------------------------------------+
 | Oracle Linux                  | :doc:`6 or greater <wazuh_agent_sources_linux_rpm>`                       |
 +-------------------------------+---------------------------------------------------------------------------+
-| Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_sources_linux_deb>`                   |
-+-------------------------------+---------------------------------------------------------------------------+
 | Debian                        | :doc:`7 or greater <wazuh_agent_sources_linux_deb>`                       |
 +-------------------------------+---------------------------------------------------------------------------+
-
+| Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_sources_linux_deb>`                   |
++-------------------------------+---------------------------------------------------------------------------+
+| Fedora                        | :doc:`22 or greater <wazuh_agent_sources_linux_fedora>`                   |
++-------------------------------+---------------------------------------------------------------------------+
+| OpenSuse                      | :doc:`42 or greater <wazuh_agent_sources_linux_suse_12>`                  |
++-------------------------------+---------------------------------------------------------------------------+
 
 .. toctree::
     :hidden:
@@ -30,4 +33,6 @@ The Wazuh Manager can be installed in the most of Linux Distribution.
 
     wazuh_agent_sources_linux_rpm
     wazuh_agent_sources_linux_deb
+    wazuh_agent_sources_linux_fedora
+    wazuh_agent_sources_linux_suse_12
 
