@@ -17,25 +17,25 @@ The Wazuh agent can be installed in the most of Linux Distribution. It's possibl
 +                               +---------------------------------------------------------------+
 |                               | :doc:`5 <wazuh_agent_packages_linux_rpm_5>`                   |
 +-------------------------------+---------------------------------------------------------------+
-| Red Hat Enterprise Linux      | :doc:`6 or greater <wazuh_agent_packages_linux_rpm>`          |
-+                               +---------------------------------------------------------------+
-|                               | :doc:`5 <wazuh_agent_packages_linux_rpm_5>`                   |
+| Debian                        | :doc:`7 or greater <wazuh_agent_packages_linux_deb>`          |
++-------------------------------+---------------------------------------------------------------+
+| Fedora                        | :doc:`22 or greater <wazuh_agent_packages_linux_fedora>`      |
 +-------------------------------+---------------------------------------------------------------+
 | Oracle Linux                  | :doc:`6 or greater <wazuh_agent_packages_linux_rpm>`          |
 +                               +---------------------------------------------------------------+
 |                               | :doc:`5 <wazuh_agent_packages_linux_rpm_5>`                   |
 +-------------------------------+---------------------------------------------------------------+
-| Debian                        | :doc:`7 or greater <wazuh_agent_packages_linux_deb>`          |
-+-------------------------------+---------------------------------------------------------------+
-| Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_packages_linux_deb>`      |
-+-------------------------------+---------------------------------------------------------------+
-| Fedora                        | :doc:`22 or greater <wazuh_agent_packages_linux_fedora>`      |
-+-------------------------------+---------------------------------------------------------------+
 | OpenSUSE                      | :doc:`42 or greater <wazuh_agent_packages_linux_rpm_suse_12>` |
++-------------------------------+---------------------------------------------------------------+
+| Red Hat Enterprise Linux      | :doc:`6 or greater <wazuh_agent_packages_linux_rpm>`          |
++                               +---------------------------------------------------------------+
+|                               | :doc:`5 <wazuh_agent_packages_linux_rpm_5>`                   |
 +-------------------------------+---------------------------------------------------------------+
 | SUSE                          | :doc:`12 <wazuh_agent_packages_linux_rpm_suse_12>`            |
 +                               +---------------------------------------------------------------+
 |                               | :doc:`11 <wazuh_agent_packages_linux_rpm_suse_11>`            |
++-------------------------------+---------------------------------------------------------------+
+| Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_packages_linux_deb>`      |
 +-------------------------------+---------------------------------------------------------------+
 
 .. toctree::
