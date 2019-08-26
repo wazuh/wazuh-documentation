@@ -5,7 +5,7 @@
 Installation from sources
 ==========================
 
-The Wazuh agent can be installed via source files on the following operating systems:
+The Wazuh Agent can be installed via source files on the following operating systems:
 
 +--------------------------------------------------------+--------------------------------------------------+
 | Type                                                   | Description                                      |

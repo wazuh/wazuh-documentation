@@ -1,17 +1,13 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_sources_linux_rpm:
+.. _wazuh_agent_sources_linux_rpm_suse_12:
 
-CentOS/RHEL/Oracle Linux/Amazon Linux
-=====================================
+SUSE 12, OpenSUSE 42, Leap and Tumbleweed
+=========================================
 
-This guide describes how to install the Wazuh Agent from source code for the following distributions.
+This guide describes how to install the Wazuh Agent from source code for SUSE12, OpenSUSE 42, Leap and Tumbleweed.
 
-- CentOS/RHEL 6 or greater.
-- Oracle Linux 6 or greater.
-- Amazon Linux 1 and 2.
-
-For other RPM-based OS (CentOS/RHEL/Oracle Linux 5) or other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
+For other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
 
 Installing Wazuh Agent
 ----------------------
@@ -20,17 +16,9 @@ Installing Wazuh Agent
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-    * For RHEL system:
+    .. code-block:: console
 
-        .. code-block:: console
-
-          # yum install make gcc policycoreutils automake autoconf libtool
-
-    * For Amazon,Oracle and CentOS system:
-
-        .. code-block:: console
-
-          # yum install make gcc policycoreutils-python automake autoconf libtool
+      # zypper install make gcc policycoreutils automake autoconf libtool
 
 2. Download and extract the latest version:
 
