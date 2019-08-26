@@ -9,9 +9,9 @@ This guide describes how to install the Wazuh Agent from source code for the fol
 
 - CentOS/RHEL 6 or greater.
 - Oracle Linux 6 or greater.
-- Amazon Linux 1 and 2
+- Amazon Linux 1 and 2.
 
-For other RPM-based OS (CentOS/RHEL/Oracle Linux 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
+For other RPM-based OS (CentOS/RHEL/Oracle Linux 5) or other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
 
 Installing Wazuh Agent
 ----------------------

@@ -7,7 +7,7 @@ SUSE 12, OpenSUSE 42, Leap and Tumbleweed
 
 This guide describes how to install the Wazuh Agent from source code for SUSE12, OpenSUSE 42, Leap and Tumbleweed.
 
-For other RPM-based OS (CentOS/RHEL/Oracle Linux/Amazon Linux), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
+For other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
 
 Installing Wazuh Agent
 ----------------------

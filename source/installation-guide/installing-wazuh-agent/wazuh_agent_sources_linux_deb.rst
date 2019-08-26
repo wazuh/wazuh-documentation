@@ -5,12 +5,14 @@
 Debian/Ubuntu
 =============
 
-This guide describes how to install the Wazuh Agent from source code for Debian, Ubuntu, and other Debian-based systems.
+This guide describes how to install the Wazuh Agent from source code for Debian 7 or greeter, Ubuntu 12.10 or greeter, and other Debian-based systems.
 
-.. note:: All the commands described below need to be executed with root user privileges.
+For other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
 
 Installing Wazuh Agent
 ----------------------
+
+.. note:: All the commands described below need to be executed with root user privileges.
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 

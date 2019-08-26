@@ -5,9 +5,9 @@
 Fedora
 ======
 
-This guide describes how to install the Wazuh Agent from source code for Fedora 22 or higher.
+This guide describes how to install the Wazuh Agent from source code for Fedora 22 or greeter.
 
-For other RPM-based OS (CentOS/RHEL/Oracle Linux 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
+For other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
 
 Installing Wazuh Agent
 ----------------------
