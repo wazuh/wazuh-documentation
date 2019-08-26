@@ -16,6 +16,8 @@ The Wazuh Manager can be installed in the most of Linux Distribution.
 +-------------------------------+---------------------------------------------------------------------------+
 | Red Hat Enterprise Linux      | :doc:`6 or greater <wazuh_agent_sources_linux_rpm>`                       |
 +-------------------------------+---------------------------------------------------------------------------+
+| Oracle Linux                  | :doc:`6 or greater <wazuh_agent_sources_linux_rpm>`                       |
++-------------------------------+---------------------------------------------------------------------------+
 | Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_sources_linux_deb>`                   |
 +-------------------------------+---------------------------------------------------------------------------+
 | Debian                        | :doc:`7 or greater <wazuh_agent_sources_linux_deb>`                       |
@@ -28,3 +30,4 @@ The Wazuh Manager can be installed in the most of Linux Distribution.
 
     wazuh_agent_sources_linux_rpm
     wazuh_agent_sources_linux_deb
+
