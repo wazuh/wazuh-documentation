@@ -23,6 +23,12 @@ The Wazuh Manager can be installed in the most of Linux Distribution.
 +-------------------------------+---------------------------------------------------------------------------+
 | Ubuntu                        | :doc:`12.10 or greater <wazuh_manager_sources_debian>`                    |
 +-------------------------------+---------------------------------------------------------------------------+
+| Fedora                        | :doc:`22 or greater <wazuh_manager_sources_fedora>`                       |
++-------------------------------+---------------------------------------------------------------------------+
+| OpenSUSE                      | :doc:`42 or greater <wazuh_manager_sources_suse_opensuse>`                |
++-------------------------------+---------------------------------------------------------------------------+
+| SUSE                          | :doc:`12 <wazuh_manager_sources_suse_opensuse>`                           |
++-------------------------------+---------------------------------------------------------------------------+
 
 
 .. toctree::
@@ -34,3 +40,5 @@ The Wazuh Manager can be installed in the most of Linux Distribution.
     wazuh_manager_sources_debian
     wazuh_manager_sources_rhel
     wazuh_manager_sources_oracle
+    wazuh_manager_sources_suse_opensuse
+    wazuh_manager_sources_fedora
