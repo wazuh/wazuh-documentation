@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_linux_deb:
+.. _wazuh_agent_packages_linux_deb:
 
 Debian/Ubuntu
 =============

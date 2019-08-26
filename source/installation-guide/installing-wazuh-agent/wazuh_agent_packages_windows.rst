@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_windows:
+.. _wazuh_agent_packages_windows:
 
 Install Wazuh agent on Windows
 ==============================
