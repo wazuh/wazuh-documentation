@@ -13,7 +13,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
 +-----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Option                            | Description                                                                                                                                                                                                      |
 +===================================+==================================================================================================================================================================================================================+
-|   WAZUH_MANAGER                   |  Specifies the manager IP address or hostname. In case you want to specify multiple managers, you can add them separated by commas. See `address <../../user-manual/reference/ossec-conf/client.html#address>`_. |
+|   WAZUH_MANAGER                   |  Specifies the manager IP address or hostname. In case you want to specify multiple managers, you can add them separated by semicolons. See `address <../../user-manual/reference/ossec-conf/client.html#address>`_. |
 +-----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_MANAGER_PORT              |  Specifies the manager’s connection port. See `server-port <../../user-manual/reference/ossec-conf/client.html#server-port>`_.                                                                                   |
 +-----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -70,11 +70,11 @@ Examples:
      # WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_AGENT_NAME="ubuntu18" \
           WAZUH_PROTOCOL="tcp" apt-get install wazuh-agent
 
-* Registration and adding multiple address (using `yum`):
+* Registration and adding multiple addresses (using `yum`):
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="10.0.0.2,10.0.0.3" WAZUH_AUTHD_SERVER="10.0.0.2" \
+     # WAZUH_MANAGER_IP="10.0.0.2;10.0.0.3" WAZUH_AUTHD_SERVER="10.0.0.2" \
           WAZUH_AGENT_NAME="ubuntu18" apt-get install wazuh-agent
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below (in MacOS):
