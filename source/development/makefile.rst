@@ -12,7 +12,7 @@ You can also find here the different settings available for the ``Makefile``. Ea
 Compiling the source code
 -------------------------
 
-When following the official documentation to install the Wazuh manager :ref:`from sources <sources_installation>` (or the :ref:`Wazuh agent <agent-sources>`), the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
+When following the official documentation to install the Wazuh manager :ref:`from sources <sources_installation>` (or the :ref:`Wazuh agent <wazuh_agent_sources>`), the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
 
 To compile the code with ``make``, the working directory must be where the ``MAKEFILE`` resides, in this case, the ``/src`` directory of the installation folder:
 

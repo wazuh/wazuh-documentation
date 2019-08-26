@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_solaris:
+.. _wazuh_agent_packages_solaris:
 
 Install Wazuh agent on Solaris
 ===============================
