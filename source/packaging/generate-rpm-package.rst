@@ -15,7 +15,7 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the wpk directory.
+Download our wazuh-packages repository from GitHub and go to the rpms directory.
 
  .. code-block:: console
 
@@ -41,7 +41,7 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
         -c, --checksum <path>     [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
         -h, --help                Show this help.
 
-Below, you will find some examples of how to build a RPM package.
+Below, you will find some examples of how to build an RPM package.
 
 .. code-block:: console
 
@@ -53,7 +53,7 @@ This will generate a 3.10.0 manager package with revision ``my_rev`` for ``x86_6
 
     ./generate_rpm_package.sh -b v3.10.0 -s /tmp -t api -a i386 -r my_rev
 
-This will generate a 3.10.0 api package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp`` .
+This will generate a 3.10.0 api package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
