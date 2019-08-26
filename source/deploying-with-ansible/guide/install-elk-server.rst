@@ -5,7 +5,7 @@
 Install Elastic Stack Server
 ============================
 
-The deployment of the Elastic Stack server involves the installation of Elasticsearch, Logstash and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Elastic Stack server.
+The deployment of the Elastic Stack server involves the installation of Elasticsearch and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Elastic Stack server.
 
 - `1 - Access to wazuh-ansible`_
 - `2 - Preparing the playbook`_
@@ -58,18 +58,12 @@ We can see the roles we have.
 	│   │   ├── meta
 	│   │   ├── tasks
 	│   │   └── templates
-	│   ├── ansible-kibana
-	│   │   ├── defaults
-	│   │   ├── handlers
-	│   │   ├── meta
-	│   │   ├── tasks
-	│   │   └── templates
-	│   └── ansible-logstash
-	│       ├── defaults
-	│       ├── handlers
-	│       ├── meta
-	│       ├── tasks
-	│       └── templates
+	│   └── ansible-kibana
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
 	└── wazuh
 	    ├── ansible-filebeat
 	    │   ├── defaults
@@ -104,20 +98,17 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-elastic_stack-single.yml
 	├── wazuh-elastic.yml
 	├── wazuh-kibana.yml
-	├── wazuh-logstash.yml
 	└── wazuh-manager.yml
 
-Using **Elasticsearch**, **Logstash** and **Kibana** roles we will install and configure the Elastic Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
+Using **Elasticsearch** and **Kibana** roles we will install and configure the Elastic Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the following files:
 - ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch/defaults/main.yml``
-- ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash/defaults/main.yml``
 - ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana/defaults/main.yml``
 
 We also can create another YAML file only with the content we want to change the configuration for each role. We can find more information here:
 
 - :ref:`Elasticsearch <ansible-wazuh-elasticsearch>` role.
-- :ref:`Logstash <ansible-wazuh-logstash>` role.
 - :ref:`Kibana <ansible-wazuh-kibana>` role.
 
 
@@ -129,13 +120,6 @@ Let's see below, the content of the playbooks ``/etc/ansible/wazuh-elastic.yml``
 	- hosts: <your elasticsearch host>
 	  roles:
 	    - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'your elasticsearch IP' }
-
-.. code-block:: yaml
-
-	- hosts: <your logstash host>
-	  roles:
-	    - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, elasticsearch_network_host: 'your elasticsearch IP' }
-
 
 .. code-block:: yaml
 
@@ -163,10 +147,9 @@ We could configure these three files and execute them, but we are going to creat
 	- hosts: 192.168.0.108
 	  roles:
 	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
-	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, logstash_input_beats: true,  elasticsearch_network_host: 'localhost' }
 	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
-As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry. We have added the three roles to execute, as everything goes on a single server, they will use ``localhost`` to communicate with Elasticsearch. Finally, we prepare Logstash by adding the entry ``logstash_input_beats: true`` to receive Filebeat events.
+As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry.
 
 
 3 - Running the playbook
@@ -226,9 +209,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	RUNNING HANDLER [ansible-role-elasticsearch : restart elasticsearch] **************************************************************************************
 	changed: [192.168.0.108]
 
-	RUNNING HANDLER [ansible-role-logstash : restart logstash] ************************************************************************************************
-	changed: [192.168.0.108]
-
 	RUNNING HANDLER [ansible-role-kibana : restart kibana] ****************************************************************************************************
 	changed: [192.168.0.108]
 
@@ -250,15 +230,6 @@ We can check the status of our new services in our Elastic Stack server.
 	  Drop-In: /etc/systemd/system/elasticsearch.service.d
 	           └─elasticsearch.conf
 	   Active: active (running) since Thu 2018-09-13 16:51:59 CEST; 5min ago
-
-- Logstash.
-
-.. code-block:: console
-
-	root@elk:/home/elk# systemctl status logstash.service
-	● logstash.service - logstash
-	   Loaded: loaded (/etc/systemd/system/logstash.service; enabled; vendor preset: enabled)
-	   Active: active (running) since Thu 2018-09-13 16:53:31 CEST; 4min 8s ago
 
 - Kibana
 
