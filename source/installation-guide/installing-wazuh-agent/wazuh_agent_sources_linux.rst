@@ -2,7 +2,7 @@
 
 .. _wazuh_agent_sources_linux:
 
-Install Wazuh agent on Linux
+Install Wazuh Agent on Linux
 ============================
 
 The Wazuh Agent can be installed in the most of Linux Distribution.

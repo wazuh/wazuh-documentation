@@ -2,14 +2,14 @@
 
 .. _wazuh_agent_sources_windows:
 
-Install Wazuh agent on Windows
+Install Wazuh Agent on Windows
 ==============================
 
-This section describes how to download and build the Wazuh HIDS Windows agent from sources. This process begins with compiling the agent on a Linux system to generate the .msi installer for the Windows installation.
+This section describes how to download and build the Wazuh HIDS Windows Agent from sources. This process begins with compiling the Agent on a Linux system to generate the .msi installer for the Windows installation.
 
 .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
 
-1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
+1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh Agent installer on Ubuntu:
 
     .. code-block:: console
 
@@ -30,7 +30,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
       # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
       # cd wazuh-3.9.5/src
 
-4. Compile the agent by running the ``make`` command:
+4. Compile the Agent by running the ``make`` command:
 
     .. code-block:: console
 
@@ -63,4 +63,4 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
     :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
-.. note:: Once the agent is deployed :doc:`with a normal or unattended installation<./wazuh_agent_packages_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :doc:`the registering section<../../user-manual/registering/index>`.
+.. note:: Once the Agent is deployed :doc:`with a normal or unattended installation<./wazuh_agent_packages_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :doc:`the registering section<../../user-manual/registering/index>`.

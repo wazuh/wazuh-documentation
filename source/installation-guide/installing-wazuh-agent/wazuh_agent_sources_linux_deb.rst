@@ -5,11 +5,11 @@
 Debian/Ubuntu
 =============
 
-This guide describes how to install the Wazuh agent from source code for Debian, Ubuntu, and other Debian-based systems.
+This guide describes how to install the Wazuh Agent from source code for Debian, Ubuntu, and other Debian-based systems.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
-Installing Wazuh agent
+Installing Wazuh Agent
 ----------------------
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
@@ -53,10 +53,10 @@ Installing Wazuh agent
 
    .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
-4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
+4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh Agent:
 
  .. code-block:: none
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+Now that the Agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
