@@ -46,13 +46,14 @@ jQuery(function($) {
     }
 
     page = document.location.pathname.split('/'+path)[1];
+    search = document.location.search;
 
     if (path == 'current' || path == '3.x' ) {
       path = currentVersion;
     }
 
     for (let i = 0; i < versions.length; i++) {
-      ele += '<li><a href="' + versions[i].url + page + '">'+versions[i].name+'</a></li>';
+      ele += '<li><a href="' + versions[i].url + page + search + '">'+versions[i].name+'</a></li>';
       if ( versions[i].url == '/' + path ) {
         selected = i;
       }
