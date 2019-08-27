@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-sol10:
+.. _create-custom-sol:
 
 Creating custom Solaris packages
 =============================
