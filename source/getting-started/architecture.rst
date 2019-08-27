@@ -21,7 +21,7 @@ The below diagram illustrates how components are distributed when the Wazuh serv
     :align: center
     :width: 100%
 
-In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server. 
+In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
@@ -62,7 +62,7 @@ The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000
 Required ports
 --------------
 
-For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them. 
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
 
 Wazuh
 ^^^^^
@@ -137,7 +137,7 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
 
 .. code-block:: bash
 
-  root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
+  root@wazuh-manager:/var/ossec/logs/archives/2017/Jan# ls -l
   total 176
   -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
   -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum

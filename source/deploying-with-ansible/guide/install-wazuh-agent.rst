@@ -65,18 +65,12 @@ We can see the roles we have.
 	│   │   ├── meta
 	│   │   ├── tasks
 	│   │   └── templates
-	│   ├── ansible-kibana
-	│   │   ├── defaults
-	│   │   ├── handlers
-	│   │   ├── meta
-	│   │   ├── tasks
-	│   │   └── templates
-	│   └── ansible-logstash
-	│       ├── defaults
-	│       ├── handlers
-	│       ├── meta
-	│       ├── tasks
-	│       └── templates
+	│   └── ansible-kibana
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
 	└── wazuh
 	    ├── ansible-filebeat
 	    │   ├── defaults
@@ -111,7 +105,6 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-elastic_stack-single.yml
 	├── wazuh-elastic.yml
 	├── wazuh-kibana.yml
-	├── wazuh-logstash.yml
 	└── wazuh-manager.yml
 
 In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.

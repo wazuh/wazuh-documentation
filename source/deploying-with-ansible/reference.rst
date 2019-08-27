@@ -44,7 +44,7 @@ Elasticsearch
 
   Version of Elasticsearch to install
 
-  *Default 6.2.2*
+  *Default 7.3.0*
 
 **elasticsearch_shards**
 
@@ -97,30 +97,13 @@ Kibana
 
   Version of Kibana to install
 
-  *Default 6.2.2*
+  *Default 7.3.0*
 
 **wazuh_version**
 
   Wazuh APP compatible version to install
 
-  *Default 3.2.0*
-
-.. _wazuh_ansible_reference_logstash:
-
-Logstash
-===================
-
-**logstash_create_config**
-
-  Generate or not Logstash config.
-
-  *Defaults true*
-
-**logstash_input_beats**
-
-  When is set to true, it will configure Logstash to use Filebeat input. Otherwise it will use File input.
-
-  *Defaults false*
+  *Default 3.9.5*
 
 **elasticsearch_network_host**
 
@@ -145,42 +128,6 @@ Logstash
   Set number of shards for indices
 
   *Default 1*
-
-**elastic_stack_version**
-
-  Version of Logstash to install
-
-  *Default 6.2.2*
-
-**logstash_ssl**
-
-  Using ssl between filebeat and logstash
-
-  *Default false*
-
-**logstash_ssl_dir**
-
-  Folder where the SSL key and cert will be stored.
-
-  *Default /etc/pki/logstash*
-
-**logstash_ssl_certificate_file**
-
-  SSL certificate file to be copied from Ansible server to logstash server.
-
-  *Default null*
-
-**logstash_ssl_key_file**
-
-  SSL key file to be copied from Ansible server to logstash server.
-
-  *Default null*
-
-**logstash_install_java**
-
-  When it's present will install Oracle Java.
-
-  *Default yes*
 
 .. _wazuh_ansible_reference_filebeat:
 
@@ -224,22 +171,6 @@ Filebeat
     - "localhost:9200"
     - "10.1.1.10:9200"
 
-**filebeat_output_logstash_enabled:**
-
-  Send output to Logstash node(s).
-
-  *Default true*
-
-**filebeat_output_logstash_hosts:**
-
-  Logstash node(s) to send output.
-
-  *Example:* ::
-
-    filebeat_output_logstash_hosts:
-    - "10.1.1.10:5000"
-    - "10.1.1.11:5000"
-
 **filebeat_enable_logging:**
 
   Enable/disable logging.
@@ -268,7 +199,7 @@ Filebeat
 
   Set the folder containing SSL certs.
 
-  *Default /etc/pki/logstash*
+  *Default /etc/pki/root*
 
 **filebeat_ssl_certificate_file:**
 
@@ -297,7 +228,7 @@ Wazuh Manager
 
   Set Wazuh Manager fqdn hostname.
 
-  *Default wazuh-server*
+  *Default wazuh-manager*
 
 **wazuh_manager_config:**
 
@@ -347,7 +278,7 @@ Wazuh Manager
       mail_to:
         - 'admin@example.net'
       mail_smtp_server: localhost
-      mail_from: wazuh-server@example.com
+      mail_from: wazuh-manager@example.com
       extra_emails:
         - enable: false
           mail_to: 'admin@example.net'
