@@ -14,6 +14,7 @@ compat.make_admonition = BaseAdmonition
 
 import sys
 import os
+import re
 import shlex
 import datetime
 
@@ -342,16 +343,66 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+# -- Minify ------------------------------------------------------------------
+
+actual_path = os.path.dirname(os.path.realpath(__file__))
+files = [
+    ['css/style','css'],
+    ['css/wazuh-icons','css'],
+    ['js/style','js'],
+    ['js/version-selector','js'],
+]
+
+for file in files:
+
+    path_end = actual_path+'/_static/'
+
+    with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
+
+        output = f.read()
+
+        # remove comments - this will break a lot of hacks :-P
+        output = re.sub( r'\s*/\*\s*\*/', "$$HACK1$$", output ) # preserve IE<6 comment hack
+        output = re.sub( r'/\*[\s\S]*?\*/', "", output )
+        output = output.replace( "$$HACK1$$", '/**/' ) # preserve IE<6 comment hack
+
+        # url() doesn't need quotes
+        output = re.sub( r'url\((["\'])([^)]*)\1\)', r'url(\2)', output )
+
+        # spaces may be safely collapsed as generated content will collapse them anyway
+        output = re.sub( r'\s+', ' ', output )
+
+        # shorten collapsable colors: #aabbcc to #abc
+        output = re.sub( r'#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(\s|;)', r'#\1\2\3\4', output )
+
+        # fragment values can loose zeros
+        output = re.sub( r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', output )
+
+        with open(os.path.join(path_end, file[0]+'.min.'+file[1]), 'w') as f2:
+            f2.write(output)
+
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
-    actual_path = os.path.dirname(os.path.realpath(__file__))
+    
     app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
-    app.add_stylesheet("css/wazuh-icons.css?ver=%s" % os.stat(
+    app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_stylesheet("css/style.css?ver=%s" % os.stat(
+    app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
+
+    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/style.js")).st_mtime)
+    app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
+
+exclude_patterns = [
+    "css/wazuh-icons.css",
+    "css/style.css",
+    "js/style.js",
+    "js/version-selector.js"
+]
 
 # -- Additional configuration ------------------------------------------------
 html_context = {
