@@ -99,7 +99,7 @@ Deploying a Wazuh cluster
             worker01-node  worker  3.9.5   172.22.0.3
 
 
-    .. attention::
+    .. warning::
 
         **All agents must be registered in the master node, even if the agent is going to report to the worker node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be **deleted** by the master node.
 
@@ -114,17 +114,17 @@ Deploying a Wazuh cluster
     +------------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                                   | Description                                                 |
     +========================================================================+=============================================================+
-    | :ref:`RPM packages <wazuh_server_rpm_centos_filebeat>`                 | Install Filebeat on CentOS.                                 |
+    | :ref:`RPM packages <wazuh_manager_rpm_centos_filebeat>`                | Install Filebeat on CentOS.                                 |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_fedora_filebeat>`                 | Install Filebeat on Fedora.                                 |
+    | :ref:`RPM packages <wazuh_manager_rpm_fedora_filebeat>`                | Install Filebeat on Fedora.                                 |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_oracle_filebeat>`                 | Install Filebeat on Oracle Linux.                           |
+    | :ref:`RPM packages <wazuh_manager_rpm_oracle_filebeat>`                | Install Filebeat on Oracle Linux.                           |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_rhel_filebeat>`                   | Install Filebeat on Red Hat Enterprise Linux.               |
+    | :ref:`RPM packages <wazuh_manager_rpm_rhel_filebeat>`                  | Install Filebeat on Red Hat Enterprise Linux.               |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_suse_opensuse_filebeat>`          | Install Filebeat on CentOS/RHEL/Fedora.                     |
+    | :ref:`RPM packages <wazuh_manager_rpm_suse_opensuse_filebeat>`         | Install Filebeat on CentOS/RHEL/Fedora.                     |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
+    | :ref:`DEB packages <wazuh_manager_deb_filebeat>`                       | Install Filebeat on Debian/Ubuntu.                          |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
     **Installing Splunk forwarder:**
