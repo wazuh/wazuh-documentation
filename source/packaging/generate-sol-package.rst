@@ -50,13 +50,13 @@ Download the sources:
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -d 3.10.0
+    # ./generate_wazuh_packages.sh -d v3.10.0
 
 Build the package
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -b 3.10.0
+    # ./generate_wazuh_packages.sh -b v3.10.0
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
