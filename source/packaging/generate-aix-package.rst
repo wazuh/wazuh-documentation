@@ -5,7 +5,7 @@
 Creating custom AIX packages
 =============================
 
-Wazuh provides an automated way of building AIX packages using docker so there is no need for any other dependency.
+Wazuh provides an automated way of building AIX packages, keep in mind that to build an AIX package you must run this tool in an AIX system.
 
 To create an AIX package follow these steps:
 
