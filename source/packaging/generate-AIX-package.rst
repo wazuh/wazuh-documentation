@@ -1,13 +1,13 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-rpm:
+.. _create-custom-aix:
 
-Creating custom RPM packages
+Creating custom AIX packages
 =============================
 
-Wazuh provides an automated way of building RPM packages using docker so there is no need for any other dependency.
+Wazuh provides an automated way of building AIX packages using docker so there is no need for any other dependency.
 
-To create an RPM package follow these steps:
+To create an AIX package follow these steps:
 
 Requirements
 ^^^^^^^^^^^^^
