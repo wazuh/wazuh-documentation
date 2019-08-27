@@ -7,7 +7,7 @@ Creating custom RPM packages
 
 Wazuh provides an automated way of building RPM packages using docker so there is no need for any other dependency.
 
-To create a WPK package follow these steps:
+To create an RPM package follow these steps:
 
 Requirements
 ^^^^^^^^^^^^^
@@ -21,7 +21,7 @@ Download our wazuh-packages repository from GitHub and go to the rpms directory.
 
         $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms
 
-Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
+Execute the ``generate_rpm_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the RPM and run a container that will build it:
 
 .. code-block:: console
 
