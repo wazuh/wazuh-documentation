@@ -51,7 +51,7 @@ Installing Wazuh manager
     # make -C src clean
     # make -C src clean-deps
 
-4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
+4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh manager:
 
   .. code-block:: none
 

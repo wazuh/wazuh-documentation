@@ -33,7 +33,7 @@ Open a session in your MacOS X agent host as root user. Then, follow these steps
 
       If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
-3. Edit the Wazuh Agent configuration in ``/Library/Ossec/etc/ossec.conf`` to add the Wazuh Manager IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh Manager address:
+3. Edit the Wazuh agent configuration in ``/Library/Ossec/etc/ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
 
   .. code-block:: xml
 

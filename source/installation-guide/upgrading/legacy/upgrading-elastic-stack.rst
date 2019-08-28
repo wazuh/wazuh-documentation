@@ -41,12 +41,12 @@ Configure Logstash
 	    }
     }
 
-3. *If you are using a **single-host architecture** (where Wazuh server is running with Elastic Stack on the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh Manager - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh Manager - JSON file input``:
+3. *If you are using a **single-host architecture** (where Wazuh server is running with Elastic Stack on the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh server - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh server - JSON file input``:
 
   .. code-block:: console
 
     # Wazuh - Logstash configuration file
-    ## Remote Wazuh Manager - Filebeat input
+    ## Remote Wazuh server - Filebeat input
     #input {
     #beats {
     #      port => 5000
@@ -56,7 +56,7 @@ Configure Logstash
     #      ssl_key => "/etc/logstash/logstash.key"
     #  }
     #}
-    # Local Wazuh Manager - JSON file input
+    # Local Wazuh server - JSON file input
     input {
        file {
            type => "wazuh-alerts"

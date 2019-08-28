@@ -34,7 +34,7 @@ Open the Windows Command Prompt, using the "Run as administrator" option. Then c
 Configuring FIM
 ---------------
 
-Run your Wazuh Agent Manager shortcut (win32ui) on the desktop and click on View -> View Config, and replace the large
+Run your Wazuh agent Manager shortcut (win32ui) on the desktop and click on View -> View Config, and replace the large
 default ``<syscheck>`` section with this:
 
     .. code-block:: console
@@ -60,7 +60,7 @@ that was changed, while changes to c:\\orange files will not include details of 
 
 Close and save your modified config file.  Then restart Wazuh on windows-agent (Manage -> Restart).
 
-In Wazuh Agent Manager, click on View -> View Logs. You should see a couple of entries like this, accounting for
+In Wazuh agent Manager, click on View -> View Logs. You should see a couple of entries like this, accounting for
 the new syscheck monitoring of your two test directories:
 
     .. code-block:: console
@@ -121,7 +121,7 @@ the FILE INTEGRITY tab, which would look something like this:
 A look under the hood of syscheck
 ---------------------------------
 
-What has actually happened in the background? How does Wazuh track file state between scans so it can know when a file has changed and what about that file changed? Each time a Wazuh agent runs a periodic syscheck FIM scan, the monitored file checksums and attributes are sent back to the Wazuh Manager who stores them and looks for modifications by comparing the new values to the old values.
+What has actually happened in the background? How does Wazuh track file state between scans so it can know when a file has changed and what about that file changed? Each time a Wazuh agent runs a periodic syscheck FIM scan, the monitored file checksums and attributes are sent back to the Wazuh manager who stores them and looks for modifications by comparing the new values to the old values.
 
 On the manager in the ``/var/ossec/queue/db/`` directory we see files like ``000.db``, ``001.db``, ``002.db``, ``003.db``.  These are SQLite files for the manager and each agent (by ID#), each containing multiple tables related to a system including one related to syscheck.
 
@@ -155,7 +155,7 @@ The following command shows the schema of the ``fim_entry`` table where the mana
 	14|sha256|TEXT|0||0
 	15|attributes|INTEGER|0|0|0
 	16|symbolic_path|TEXT|0||0
-        
+
 This file contains syscheck scan results including file hashes and other metadata, plus a count of how many times a given file has been seen to change.
 
 The following command shows the syscheck-monitored files for the windows-agent (ID #006):

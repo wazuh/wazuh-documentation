@@ -11,7 +11,7 @@ This section shows the most relevant improvements and fixes in version 3.9.5. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.9.5-7.2.0/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.9.5-7.3.0/CHANGELOG.md>`_
 
-Wazuh Manager
+Wazuh manager
 -------------
 
 - Fixed a bug in the Framework that prevented Cluster and API from handling the file *client.keys* if it's mounted as a volume on Docker.

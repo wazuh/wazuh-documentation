@@ -39,7 +39,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
     # apt-get update
 
-Installing the Wazuh Manager
+Installing the Wazuh server
 ----------------------------
 
 On your terminal, install the Wazuh manager:
@@ -193,7 +193,7 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager and Wazuh API:
+To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 

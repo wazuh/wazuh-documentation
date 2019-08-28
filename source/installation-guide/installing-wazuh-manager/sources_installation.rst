@@ -5,7 +5,7 @@
 Installation from sources
 =========================
 
-The Wazuh Manager can be installed in the most of Linux Distribution.
+The Wazuh server can be installed in the most of Linux Distribution.
 
 
 +-------------------------------+---------------------------------------------------------------------------+

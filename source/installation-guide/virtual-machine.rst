@@ -25,7 +25,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
     Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options. You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
 
-3. The **Wazuh Manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
+3. The **Wazuh manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
 
     - :doc:`How to install Wazuh agents<installing-wazuh-agent/index>`
 

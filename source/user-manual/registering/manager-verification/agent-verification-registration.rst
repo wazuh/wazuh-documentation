@@ -5,7 +5,7 @@
 Agent verification using SSL
 ============================
 
-To verify the Wazuh Agents using a SSL, it is needed to create a SSL certificate for the Wazuh Agents and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the Wazuh Manager to verificate the Wazuh Agents while they are been registered.
+To verify the Wazuh agents using a SSL, it is needed to create a SSL certificate for the Wazuh agents and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the Wazuh manager to verificate the Wazuh agents while they are been registered.
 
   .. image:: ../../../images/manual/managing-agents/SSLregister2.png
     :align: center
@@ -16,7 +16,7 @@ To verify the Wazuh Agents using a SSL, it is needed to create a SSL certificate
 Enable Agent verification without host validation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this example, we are going to create a certificate for Wazuh Agents without specifying their hostname. This will allow us to share the certificate among all of our Wazuh Agents and use it. This will verify that the Wazuh Agents have a certificate signed by our CA, no matter where they're connecting from, refusing those agents where the certificate is not present.
+In this example, we are going to create a certificate for Wazuh agents without specifying their hostname. This will allow us to share the certificate among all of our Wazuh agents and use it. This will verify that the Wazuh agents have a certificate signed by our CA, no matter where they're connecting from, refusing those agents where the certificate is not present.
 
 1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
 
@@ -42,7 +42,7 @@ In this example, we are going to create a certificate for Wazuh Agents without s
       ...
     </client>
 
-4. Restart the Wazuh Manager:
+4. Restart the Wazuh manager:
 
   a) For Systemd:
 
@@ -87,7 +87,7 @@ This is an alternative method to the previous one. In this case, we will bind th
       ...
     </client>
 
-4. Restart the Wazuh Manager:
+4. Restart the Wazuh manager:
 
   a) For Systemd:
 
@@ -102,10 +102,10 @@ This is an alternative method to the previous one. In this case, we will bind th
       # service wazuh-manager restart
 
 
-Wazuh Agents
+Wazuh agents
 ^^^^^^^^^^^^
 
-Once you have completed the Wazuh Manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``. After that, follow the steps to connect the Wazuh Agent to the manager:
+Once you have completed the Wazuh manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``. After that, follow the steps to connect the Wazuh agent to the manager:
 
 .. toctree::
     :maxdepth: 2

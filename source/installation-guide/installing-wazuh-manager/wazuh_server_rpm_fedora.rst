@@ -33,10 +33,10 @@ To set up the repository, run this command:
 
   From Fedora v22 to v25, it's required to install ``dkms`` package (``dnf install dkms``).
 
-Installing the Wazuh Manager
+Installing the Wazuh manager
 ----------------------------
 
-The next step is to install the Wazuh Manager on your system:
+The next step is to install the Wazuh manager on your system:
 
   .. code-block:: console
 
@@ -195,7 +195,7 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager and Wazuh API:
+To uninstall the Wazuh manager and Wazuh API:
 
   .. code-block:: console
 

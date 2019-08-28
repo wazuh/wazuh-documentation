@@ -2,7 +2,7 @@
 
 .. _upgrading_wazuh_server:
 
-Upgrading Wazuh Manager
+Upgrading Wazuh server
 =======================
 
 Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
@@ -28,11 +28,11 @@ Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
 
     # yum remove logstash-forwarder
 
-3. Install the Wazuh Manager:
+3. Install the Wazuh server:
 
   You can upgrade your current installation by following the below installation guide for your specific operating system:
 
-  - :ref:`Install Wazuh Manager with RPM packages <wazuh_server_linux>`
+  - :ref:`Install Wazuh server with RPM packages <wazuh_server_linux>`
 
   Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file because your previous version will have been overwritten. The previous version has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended that you  compare the new file with the old one and import old settings where needed.
 

@@ -2,10 +2,10 @@
 
 .. _build_lab_install_wazuh_server:
 
-Install Wazuh Manager Components
+Install Wazuh server Components
 ================================
 
-The Wazuh Manager in your lab will be running the Wazuh Manager, Wazuh API, and Filebeat applications.
+The Wazuh server in your lab will be running the Wazuh manager, Wazuh API, and Filebeat applications.
 
 Log in and sudo to root
 -----------------------
@@ -30,10 +30,10 @@ Add the Wazuh yum repository
          EOF
 
 
-Install and set up Wazuh Manager
+Install and set up Wazuh server
 --------------------------------
 
-Install the Wazuh Manager software and confirm it is running
+Install the Wazuh manager software and confirm it is running
 
   .. code-block:: console
 
@@ -51,7 +51,7 @@ Install the Wazuh Manager software and confirm it is running
 
       # service wazuh-manager status
 
-Configure Wazuh Manager to listen for agent connections on tcp instead of udp
+Configure Wazuh manager to listen for agent connections on tcp instead of udp
 
   .. code-block:: console
 
@@ -60,7 +60,7 @@ Configure Wazuh Manager to listen for agent connections on tcp instead of udp
     # grep "<protocol>tcp" -B3 -A1 /var/ossec/etc/ossec.conf
 
 
-Configure Wazuh Manager to allow self registration of new agents with authentication
+Configure Wazuh manager to allow self registration of new agents with authentication
 
   .. code-block:: console
 
@@ -70,7 +70,7 @@ Configure Wazuh Manager to allow self registration of new agents with authentica
     # echo "please123" > /var/ossec/etc/authd.pass # this is the password agents will use for self-registration
     # ossec-control enable auth
 
-Restart Wazuh Manager and confirm the agent listener and the self-registration listener are in place:
+Restart Wazuh manager and confirm the agent listener and the self-registration listener are in place:
 
   a. For Systemd:
 
@@ -91,7 +91,7 @@ Restart Wazuh Manager and confirm the agent listener and the self-registration l
 Install Wazuh API
 -----------------
 
-The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with and control Wazuh Manager. It is a general purpose RESTful API that can be used from the command line via curl or via custom scripts for interacting with various aspects of Wazuh Manager.
+The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with and control Wazuh manager. It is a general purpose RESTful API that can be used from the command line via curl or via custom scripts for interacting with various aspects of Wazuh manager.
 
 1. Install wazuh-api package and its dependency nodejs.
 
@@ -124,7 +124,7 @@ The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with 
 Install Filebeat
 ----------------
 
-Filebeat is the tool on the Wazuh Manager that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack Server.
+Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack Server.
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
 
