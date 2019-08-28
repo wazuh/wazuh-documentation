@@ -165,7 +165,7 @@ All the technologies we are using have their own logs files, you can check them 
 
       # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
 
-3. Check the Wazuh Manager log file:
+3. Check the Wazuh manager log file:
 
     .. code-block:: console
 

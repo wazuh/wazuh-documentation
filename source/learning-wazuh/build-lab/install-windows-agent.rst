@@ -2,10 +2,10 @@
 
 .. _build_lab_install_windows_agent:
 
-Install the Windows Wazuh Agent
+Install the Windows Wazuh agent
 ===============================
 
-Download the Wazuh Agent package
+Download the Wazuh agent package
 --------------------------------
 
 1. Log into your Windows Agent instance via Remote Desktop as Administrator.
@@ -50,7 +50,7 @@ Run the installer to both install and self-register
 5.  A black window will pop up briefly and disappear.  The Windows agent should now be installed and registered.  Close PowerShell.
 
 
-Create a shortcut to the Wazuh Agent Manager tool on the desktop
+Create a shortcut to the Wazuh agent Manager tool on the desktop
 ----------------------------------------------------------------
 
 (This is only for lab purposes.  In production you will rarely call this tool.)
@@ -73,7 +73,7 @@ Create a shortcut to the Wazuh Agent Manager tool on the desktop
 6. Close File Explorer.
 
 
-Run the Wazuh Agent Manager and confirm it is running and connected to the Wazuh Manager
+Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh manager
 ----------------------------------------------------------------------------------------
 
 1. Double-click on the win32ui-Shortcut icon on your desktop.  It should look like this:
@@ -83,14 +83,14 @@ Run the Wazuh Agent Manager and confirm it is running and connected to the Wazuh
         :width: 40%
 
 
-2. Click View->View Logs.  You should find record of the agent successfully connecting to the Wazuh Manager.
+2. Click View->View Logs.  You should find record of the agent successfully connecting to the Wazuh manager.
 
     .. code-block:: console
 
         2018/01/17 02:27:24 ossec-agent: INFO: (4102): Connected to the server (172.30.0.10:1514).
 
 
-Observe that Wazuh Manager is aware of all the connected agents.
+Observe that Wazuh manager is aware of all the connected agents.
 ----------------------------------------------------------------
 
 Switch over to your Wazuh Server SSH window and run these commands, looking for your self-registered agents.

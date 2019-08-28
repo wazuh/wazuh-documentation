@@ -5,7 +5,7 @@
 SUSE 11
 =======
 
-The RPM package is suitable for Suse 11. For other RPM-based OS (CentOS/RHEL, Fedora, Suse 12, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_packages_linux>`.
+The RPM package is suitable for Suse 11. For other RPM-based OS (CentOS/RHEL, Fedora, Suse 12, OpenSUSE), please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -49,7 +49,7 @@ Installing Wazuh agent
 
 3. **(Optional)** Disable the Wazuh repository:
 
-  We recommend maintaining the Wazuh Manager version greater or equal to that of the Wazuh Agents. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
+  We recommend maintaining the Wazuh manager version greater or equal to that of the Wazuh agents. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 

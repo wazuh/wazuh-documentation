@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_manager_deb:
+.. _wazuh_server_deb:
 
 Debian and Ubuntu
 =================
@@ -39,7 +39,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
     # apt-get update
 
-Installing the Wazuh Manager
+Installing the Wazuh server
 ----------------------------
 
 On your terminal, install the Wazuh manager:
@@ -120,7 +120,7 @@ Installing the Wazuh API
     # echo "wazuh-manager hold" | sudo dpkg --set-selections
     # echo "wazuh-api hold" | sudo dpkg --set-selections
 
-.. _wazuh_manager_deb_filebeat:
+.. _wazuh_server_deb_filebeat:
 
 Installing Filebeat
 -------------------
@@ -193,7 +193,7 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager and Wazuh API:
+To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 
