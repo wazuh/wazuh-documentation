@@ -14,9 +14,9 @@ There are several options for installing the Wazuh server depending on the opera
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`Linux packages<wazuh_server_linux>`                | Install Wazuh server from Linux packages.                             |
+| :ref:`Linux packages<wazuh_server_linux>`                 | Install Wazuh server from Linux packages.                             |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Sources <sources_installation>`                     | Install Wazuh server from source code.                               |
+| :ref:`Sources <sources_installation>`                     | Install Wazuh server from source code.                                |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 
 There are some related additional configurations that can be applied:
