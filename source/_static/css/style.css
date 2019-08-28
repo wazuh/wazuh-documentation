@@ -1392,6 +1392,10 @@ footer a:focus,
   border: none;
 }
 
+#main-content {
+  width: 100%;
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
