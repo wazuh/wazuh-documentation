@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_manager_rpm_suse_opensuse:
+.. _wazuh_server_rpm_suse_opensuse:
 
 SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
 ===========================================================
@@ -98,7 +98,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-.. _wazuh_manager_rpm_suse_opensuse_filebeat:
+.. _wazuh_server_rpm_suse_opensuse_filebeat:
 
 Installing Filebeat
 -------------------

@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_manager_rpm_centos:
+.. _wazuh_server_rpm_centos:
 
 CentOS
 ======
@@ -98,7 +98,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_manager_rpm_centos_filebeat:
+.. _wazuh_server_rpm_centos_filebeat:
 
 Installing Filebeat
 -------------------

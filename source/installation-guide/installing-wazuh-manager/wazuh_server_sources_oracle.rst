@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_manager_sources_oracle:
+.. _wazuh_server_sources_oracle:
 
 Oracle Linux
 ============
@@ -130,7 +130,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_),
-the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_manager_rpm_oracle_filebeat>`.
+the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_oracle_filebeat>`.
 
 Next steps
 ----------

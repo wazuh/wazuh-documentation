@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _build_lab_install_wazuh_manager:
+.. _build_lab_install_wazuh_server:
 
 Install Wazuh Manager Components
 ================================

@@ -14,7 +14,7 @@ There are several options for installing the Wazuh Manager depending on the oper
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`Linux packages<wazuh_manager_linux>`                | Install Wazuh Manager from Linux packages.                            |
+| :ref:`Linux packages<wazuh_server_linux>`                | Install Wazuh Manager from Linux packages.                             |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Sources <sources_installation>`                     | Install Wazuh Manager from source code.                               |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
@@ -31,7 +31,7 @@ There are some related additional configurations that can be applied:
     :hidden:
     :maxdepth: 2
 
-    wazuh_manager_linux
+    wazuh_server_linux
     sources_installation
     securing_api
 
