@@ -2,10 +2,10 @@
 
 .. _wazuh_agent_sources_linux:
 
-Install Wazuh Agent on Linux
+Install Wazuh agent on Linux
 ============================
 
-The Wazuh Agent can be installed in the most of Linux Distribution.
+The Wazuh agent can be installed in the most of Linux Distribution.
 
 +-------------------------------+---------------------------------------------------------------------------+
 | Operative system              | Version                                                                   |
@@ -26,8 +26,6 @@ The Wazuh Agent can be installed in the most of Linux Distribution.
 +-------------------------------+---------------------------------------------------------------------------+
 | Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_sources_linux_deb>`                   |
 +-------------------------------+---------------------------------------------------------------------------+
-
-
 
 .. toctree::
     :hidden:

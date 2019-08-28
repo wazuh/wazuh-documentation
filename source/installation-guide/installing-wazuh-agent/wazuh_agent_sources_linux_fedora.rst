@@ -5,11 +5,11 @@
 Fedora
 ======
 
-This guide describes how to install the Wazuh Agent from source code for Fedora 22 or greeter.
+This guide describes how to install the Wazuh agent from source code for Fedora 22 or greater.
 
-For other Linux distributions, please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_sources_linux>`.
+For other Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_sources_linux>`.
 
-Installing Wazuh Agent
+Installing Wazuh agent
 ----------------------
 
 .. note:: All the commands described below need to be executed with root user privileges.
@@ -46,10 +46,10 @@ Installing Wazuh Agent
 
    .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
-4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh Agent:
+4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
  .. code-block:: none
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-Now that the Agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
