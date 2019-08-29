@@ -27,8 +27,6 @@ The Wazuh agent can be installed in the most of Linux Distribution.
 | Ubuntu                        | :doc:`12.10 or greater <wazuh_agent_sources_linux_deb>`                   |
 +-------------------------------+---------------------------------------------------------------------------+
 
-
-
 .. toctree::
     :hidden:
     :maxdepth: 2

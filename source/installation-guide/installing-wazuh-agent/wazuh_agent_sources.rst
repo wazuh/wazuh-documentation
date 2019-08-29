@@ -14,6 +14,8 @@ The Wazuh agent can be installed via source files on the following operating sys
 +--------------------------------------------------------+--------------------------------------------------+
 | :doc:`Windows sources <wazuh_agent_sources_windows>`   | Install Wazuh agents on Windows.                 |
 +--------------------------------------------------------+--------------------------------------------------+
+| :doc:`Solaris sources <wazuh_agent_sources_solaris>`   | Install Wazuh agents on Solaris.                 |
++--------------------------------------------------------+--------------------------------------------------+
 
 .. toctree::
     :hidden:
@@ -21,3 +23,4 @@ The Wazuh agent can be installed via source files on the following operating sys
 
     wazuh_agent_sources_linux
     wazuh_agent_sources_windows
+    wazuh_agent_sources_solaris
