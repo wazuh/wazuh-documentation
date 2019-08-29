@@ -10,7 +10,7 @@ The following steps show how to upgrade to the latest available version of Wazuh
 Starting the upgrade
 --------------------
 
-If you followed our :ref:`manager <installation>` or :ref:`agents <installation_agents>` installation guides, probably you disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages.
+If you followed our :ref:`manager <wazuh_server_installation>` or :ref:`agents <installation_agents>` installation guides, probably you disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages.
 
 a) CentOS/RHEL/Fedora:
 
