@@ -20,7 +20,7 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 
 Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
-You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
+You can check our `compatibility compatibility_matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
 No template found for the selected index pattern
 ------------------------------------------------
@@ -86,8 +86,6 @@ API version mismatch. Expected vX.Y.Z
 The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
 You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.9.5.
-
-Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 
 Routes. Error. Cannot read property 'manager' of undefined
 ----------------------------------------------------------

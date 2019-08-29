@@ -47,8 +47,6 @@ The diagrams below list the components that are run per host for single-host and
         installing-wazuh-manager/index
         installing-elastic-stack/index
         installing-wazuh-agent/index
-        upgrading/index
-        upgrading-elastic-stack/index
         virtual-machine
         packages-list/index
 
