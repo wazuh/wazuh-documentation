@@ -8,7 +8,7 @@ Install Wazuh agent on Linux
 The Wazuh agent can be installed in the following operating systems:
 
 +-------------------------------+---------------------------------------------------------------------------+
-| Operative system              | Version                                                                   |
+| Operating system              | Version                                                                   |
 +===============================+===========================================================================+
 | Amazon Linux                  | :doc:`1 or greater <wazuh_agent_sources_linux_rpm>`                       |
 +-------------------------------+---------------------------------------------------------------------------+
