@@ -17,20 +17,20 @@ Enabling and disabling policies
 By default, the Wazuh Agent will run scans for every policy (`.yaml` or `.yml` files) present in their
 ruleset folder:
 
-- Linux agents: ``<ossec-agent-installation-folder>/ruleset/sca``.
-- Windows agents: ``<ossec-agent-installation-folder>\ruleset\sca``.
+- Linux agents: ``<agent-installation-folder>/ruleset/sca``.
+- Windows agents: ``<agent-installation-folder>\ruleset\sca``.
 
 .. danger::
-    The contents of the aformentioned **default ruleset folders are neither kept accross installations nor updates**.
+    The contents of the aforementioned **default ruleset folders are neither kept accross installations nor updates**.
     If you wish to modify or add new policies, place then under an alternative folder.
 
 To enable a policy file that's outside the default folder, add a line like
 
 .. code-block:: xml
 
-    <policy>/var/ossec/etc/shared/policy_file_to_enable.yml</policy>
+    <policy>/some/custom/policy/folder/policy_file_to_enable.yml</policy>
 
-in the **policies section** of the **SCA** module.
+to the **policies section** of the **SCA** module.
 
 There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
@@ -40,7 +40,7 @@ the `ossec.conf` by adding a line such as
 
     <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
 
-in the **policies section** of the **SCA** module.
+to the **policies section** of the **SCA** module.
 
 How to share policy files and configuration with agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

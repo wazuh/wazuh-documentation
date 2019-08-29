@@ -6,11 +6,8 @@ How SCA works
 .. contents:: Table of Contents
    :depth: 10
 
-States vs alerts
---------------------
-
 Each agent has its own local database where it stores the current state of each check: *passed*, *failed*,
-or *invalid*, allowing agents to send only the differences detected between scans. If there has been no
+or *not-applicable*, allowing agents to only send the differences detected between scans. If there has been no
 change, only the scan *summary* event will be sent, thus avoiding unnecessary network traffic while keeping
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
 Kibana App.
