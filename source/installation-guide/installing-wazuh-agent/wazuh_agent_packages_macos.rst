@@ -42,7 +42,7 @@ Uninstall
 
 To uninstall the agent in macOS:
 
-1. Stop the Wazuh Agent service
+1. Stop the Wazuh agent service
 
     .. code-block:: console
 

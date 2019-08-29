@@ -1392,6 +1392,10 @@ footer a:focus,
   border: none;
 }
 
+#main-content {
+  width: 100%;
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
@@ -3136,7 +3140,7 @@ div.highlight pre {
 			}
 
 			#main-content {
-        width: calc(100% - 350px);
+        width: calc(100% - 360px);
         min-height: 100vh;
         margin-top: 90px;
         margin-left: 360px;

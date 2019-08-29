@@ -5738,7 +5738,7 @@ Restart
 
 Restart Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Restarts Wazuh Manager.
+Restarts Wazuh manager.
 
 **Request**:
 

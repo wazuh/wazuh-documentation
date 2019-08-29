@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_manager_rpm_oracle:
+.. _wazuh_server_rpm_amazon:
 
-Oracle Linux
+Amazon Linux
 ============
 
-For Oracle Linux 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Amazon Linux 1 and 2, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -29,11 +29,10 @@ To set up the repository, run this command:
     protect=1
     EOF
 
-
-Installing the Wazuh Manager
+Installing the Wazuh server
 ----------------------------
 
-The next step is to install the Wazuh Manager on your system:
+The next step is to install the Wazuh manager on your system:
 
   .. code-block:: console
 
@@ -99,14 +98,14 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_manager_rpm_oracle_filebeat:
+.. _wazuh_server_rpm_amazon_filebeat:
 
 Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
+The RPM package is suitable for installation on Red Hat, CentOS, Amazon Linux and other modern RPM-based systems.
 
 1. Install the Elastic repository and its GPG key:
 
@@ -189,7 +188,7 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager and Wazuh API:
+To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 

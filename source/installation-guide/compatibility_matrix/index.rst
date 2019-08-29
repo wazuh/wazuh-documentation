@@ -16,7 +16,7 @@ Wazuh software can be installed in many operating systems. Moreover, there's als
 Operating system compatibility
 ------------------------------
 
-Wazuh Manager
+Wazuh manager
 ^^^^^^^^^^^^^
 
 Below it shown the compatibility table for the Wazuh manager.
@@ -45,9 +45,9 @@ Below it shown the compatibility table for the Wazuh manager.
 |   Oracle Linux 6 and 7            |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
 
-*(\*) SUSE based host are available as Wazuh Manager since Wazuh v3.2.1 version.*
+*(\*) SUSE based host are available as Wazuh manager since Wazuh v3.2.1 version.*
 
-Wazuh Agent
+Wazuh agent
 ^^^^^^^^^^^
 
 In this table, you can check our supported OS list where the Wazuh agent can be installed.
@@ -97,17 +97,17 @@ When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wa
 Manager and agents
 ^^^^^^^^^^^^^^^^^^
 
-The compatibility between Wazuh Agent and Wazuh Manager is guaranteed when the Wazuh Manager has a **newer or equal** version than the Wazuh Agent.
+The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a **newer or equal** version than the Wazuh agent.
 
 
 .. note::
 
-    The Wazuh Manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
+    The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
 
 Manager and API
 ^^^^^^^^^^^^^^^
 
-The API requires the same ``major.minor`` version than the Wazuh Manager in order to be compatible.
+The API requires the same ``major.minor`` version than the Wazuh manager in order to be compatible.
 
 
 API and Kibana app
