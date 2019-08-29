@@ -13,7 +13,7 @@ Wazuh Cluster
 Introduction
 ------------
 
-Recommended reading: :ref:`wazuh-cluster`.
+Recommended reading: :ref:`Wazuh Cluster <configuring-cluster>`.
 
 Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, in consequence, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large number of agents.
 
@@ -410,9 +410,9 @@ If the log error message isn't clarifying enough, the traceback can be logged se
     # grep -i error /var/ossec/logs/cluster.log -A 10
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
-    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.9.0-py3.7.egg/wazuh/cluster/cluster.py", line 213, in walk_dir
+    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.10.0-py3.7.egg/wazuh/cluster/cluster.py", line 213, in walk_dir
         entry_metadata['md5'] = md5(common.ossec_path + full_path)
-    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.9.0-py3.7.egg/wazuh/utils.py", line 380, in md5
+    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.10.0-py3.7.egg/wazuh/utils.py", line 380, in md5
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 
