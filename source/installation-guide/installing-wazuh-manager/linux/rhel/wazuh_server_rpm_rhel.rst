@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_centos:
+.. _wazuh_server_rpm_rhel:
 
-CentOS
-======
+Install from packages
+=====================
 
-For CentOS 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Red Hat Enterprise Linux 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -98,7 +98,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_centos_filebeat:
+.. _wazuh_server_rpm_rhel_filebeat:
 
 Installing Filebeat
 -------------------

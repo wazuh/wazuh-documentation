@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_sources_suse_opensuse:
+.. _wazuh_server_sources_deb:
 
-SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
-===========================================================
+Install from sources
+====================
 
 This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
@@ -14,18 +14,30 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # zypper install make gcc policycoreutils-python automake autoconf libtool
+      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
     1.1 **Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
       To install the build dependencies of CPython, follow these steps:
 
-      .. code-block:: console
+      * For Ubuntu based system:
 
-          # zypper install epel-release yum-utils -y
-          # zypper-builddep python34 -y
+        .. code-block:: console
+
+          # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+          # apt-get update
+          # apt-get build-dep python3.6 -y
+
+      * For Debian based system:
+
+        .. code-block:: console
+
+          # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+          # apt-get update
+          # apt-get build-dep python3.5 -y
 
       .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
+
 
 2. Download and extract the latest version:
 
@@ -98,17 +110,15 @@ Installing Wazuh API
 
     .. code-block:: console
 
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-      # zypper -y install nodejs
+      # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      # apt-get install -y nodejs
       # npm config set user 0
 
-    .. note:: If you have OpenSUSE NodeJS is available in the main repositories. You can install it using:
+  .. note::
 
-        .. code-block:: console
+    If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
 
-          # zypper install nodejs6
-
-        You can find more information in the `NodeJS documentation <https://nodejs.org/en/download/package-manager/#opensuse-and-sle>`_.
+    For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 
 2. Download and execute the installation script:
 
@@ -138,7 +148,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_),
-the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_suse_opensuse_filebeat>`.
+the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_deb_filebeat>`.
 
 Next steps
 ----------

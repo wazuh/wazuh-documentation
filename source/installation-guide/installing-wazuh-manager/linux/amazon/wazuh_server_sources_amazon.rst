@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_sources_oracle:
+.. _wazuh_server_sources_amazon:
 
-Oracle Linux
-============
+Install from sources
+====================
 
 This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
@@ -22,8 +22,8 @@ Installing Wazuh manager
 
       .. code-block:: console
 
-          # yum install epel-release yum-utils -y
-          # yum-builddep python34 -y
+        # yum install epel-release yum-utils -y
+        # yum-builddep python34 -y
 
       .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
@@ -130,7 +130,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_),
-the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_oracle_filebeat>`.
+the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_amazon_filebeat>`.
 
 Next steps
 ----------
