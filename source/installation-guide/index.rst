@@ -51,4 +51,4 @@ The diagrams below list the components that are run per host for single-host and
         upgrading-elastic-stack/index
         virtual-machine
         packages-list/index
-        compatibility_matrix/index
+
