@@ -11,9 +11,9 @@ For example, the following snippet shows the connected nodes in the cluster:
 
     # /var/ossec/bin/cluster_control -l
     NAME      TYPE    VERSION  ADDRESS
-    worker-1  worker  3.9.5    172.17.0.101
-    worker-2  worker  3.9.5    172.17.0.102
-    master    master  3.9.5    172.17.0.100
+    worker-1  worker  3.10.0    172.17.0.101
+    worker-2  worker  3.10.0    172.17.0.102
+    master    master  3.10.0    172.17.0.100
 
 This information can also be obtained using the Restful API:
 
