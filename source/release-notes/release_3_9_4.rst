@@ -11,7 +11,7 @@ This section shows the most relevant improvements and fixes in version 3.9.4. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.9.4-7.2.0/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.9.4-7.3.0/CHANGELOG.md>`_
 
-Wazuh Agent
+Wazuh agent
 -----------
 
 - Fixed a bug in FIM that made it apply a wrong configuration. This occurred when defining different options for nested directories.
@@ -19,7 +19,7 @@ Wazuh Agent
 - Fixed a bug in the agent that could make it truncate its IP address within the control message.
 - Fixed a bug in the Windows agent that produced a resource leak when monitoring directories in who-data mode.
 
-Wazuh Manager
+Wazuh manager
 -------------
 
 - Fixed a bug in Analysisd that could potentially make it crash while handling JSON objects due to a race condition.

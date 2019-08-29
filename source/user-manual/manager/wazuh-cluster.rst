@@ -153,17 +153,17 @@ The following must be considered when configuring a Wazuh app:
     +------------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                                   | Description                                                 |
     +========================================================================+=============================================================+
-    | :ref:`RPM packages <wazuh_manager_rpm_centos_filebeat>`                | Install Filebeat on CentOS.                                 |
+    | :ref:`RPM packages <wazuh_server_rpm_centos_filebeat>`                 | Install Filebeat on CentOS.                                 |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_manager_rpm_fedora_filebeat>`                | Install Filebeat on Fedora.                                 |
+    | :ref:`RPM packages <wazuh_server_rpm_fedora_filebeat>`                 | Install Filebeat on Fedora.                                 |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_manager_rpm_oracle_filebeat>`                | Install Filebeat on Oracle Linux.                           |
+    | :ref:`RPM packages <wazuh_server_rpm_oracle_filebeat>`                 | Install Filebeat on Oracle Linux.                           |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_manager_rpm_rhel_filebeat>`                  | Install Filebeat on Red Hat Enterprise Linux.               |
+    | :ref:`RPM packages <wazuh_server_rpm_rhel_filebeat>`                   | Install Filebeat on Red Hat Enterprise Linux.               |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_manager_rpm_suse_opensuse_filebeat>`         | Install Filebeat on CentOS/RHEL/Fedora.                     |
+    | :ref:`RPM packages <wazuh_server_rpm_suse_opensuse_filebeat>`          | Install Filebeat on CentOS/RHEL/Fedora.                     |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_manager_deb_filebeat>`                       | Install Filebeat on Debian/Ubuntu.                          |
+    | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
     **Installing Splunk forwarder:**

@@ -5,7 +5,7 @@
 Packages List
 =============
 
-Wazuh Manager, Wazuh Agent and Wazuh API
+Wazuh manager, Wazuh agent and Wazuh API
 ----------------------------------------
 
 AIX

@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_manager_rpm_centos:
+.. _wazuh_server_rpm_centos:
 
 CentOS
 ======
@@ -29,10 +29,10 @@ To set up the repository, run this command:
     protect=1
     EOF
 
-Installing the Wazuh Manager
+Installing the Wazuh manager
 ----------------------------
 
-The next step is to install the Wazuh Manager on your system:
+The next step is to install the Wazuh manager on your system:
 
   .. code-block:: console
 
@@ -98,7 +98,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_manager_rpm_centos_filebeat:
+.. _wazuh_server_rpm_centos_filebeat:
 
 Installing Filebeat
 -------------------
@@ -188,7 +188,7 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager and Wazuh API:
+To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 

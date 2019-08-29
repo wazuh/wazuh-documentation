@@ -9,7 +9,7 @@ To register an agent using the command line, first follow the steps from the **M
 
 Manager
 ^^^^^^^
-1. In the CLI of the Wazuh Manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``windows-server`` and its address or IP is ``any``.
+1. In the CLI of the Wazuh manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``windows-server`` and its address or IP is ``any``.
 
 	.. code-block:: console
 
@@ -35,12 +35,12 @@ Manager
 
 Agent
 ^^^^^
-Once you have added the agent in the Wazuh Manager host, open a session in your Windows agent host and then, start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh Agent in Windows host depends on the architecture of the host.
+Once you have added the agent in the Wazuh manager host, open a session in your Windows agent host and then, start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh agent in Windows host depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
-This guide suppose that the Wazuh Agent is installed in a x86_64 host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``. After that, let's import the key and connect the agent to the manager.
+This guide suppose that the Wazuh agent is installed in a x86_64 host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``. After that, let's import the key and connect the agent to the manager.
 
 1. First, import the key using ``manage_agents``:
 
@@ -57,7 +57,7 @@ This guide suppose that the Wazuh Agent is installed in a x86_64 host, so the in
 	      Added.
 
 
-2. Edit the Wazuh Agent configuration in ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to add the Wazuh Manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh Manager address. The address of the Wazuh Manager can be an IP address or a DNS name:
+2. Edit the Wazuh agent configuration in ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:
 
 	.. code-block:: xml
 

@@ -2,7 +2,7 @@
 
 .. _installation_agents:
 
-Installing Wazuh Agent
+Installing Wazuh agent
 ======================
 
 The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
@@ -21,9 +21,9 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-----------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                            | Description                                                           |
 +=================================================================+=======================================================================+
-| :ref:`Installation from packages <wazuh_agent_packages>`        | Install Wazuh Manager from packages.                                  |
+| :ref:`Installation from packages <wazuh_agent_packages>`        | Install Wazuh agent from packages.                                    |
 +-----------------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Installation from sources <wazuh_agent_sources>`          | Install Wazuh Manager from source code.                               |
+| :ref:`Installation from sources <wazuh_agent_sources>`          | Install Wazuh agent from source code.                                 |
 +-----------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider exploring these options if you are deploying Wazuh in a larger environment.

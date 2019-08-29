@@ -2,14 +2,14 @@
 
 .. _wazuh_agent_sources_windows:
 
-Install Wazuh Agent on Windows
+Install Wazuh agent on Windows
 ==============================
 
 This section describes how to download and build the Wazuh HIDS Windows Agent from sources. This process begins with compiling the Agent on a Linux system to generate the .msi installer for the Windows installation.
 
 .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
 
-1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh Agent installer on Ubuntu:
+1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
     .. code-block:: console
 
