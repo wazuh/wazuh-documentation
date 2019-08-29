@@ -8,83 +8,102 @@ Configure Elasticsearch cluster
 .. note:: All the commands described below need to be executed with root user privileges.
 
 
-With the Elasticsearch's cluster assignment feature we can configure a group of server nodes working together so that in case of any of them fails, the rest of them will recover its information by 
-the replicas and will add it to the index, so no information will be lost and a higher availability service will be reached. 
+Elasticsearch's cluster feature allows configuring a group of server nodes working together to grant a higher availability service and a data loss prevention mechanism. In case any of the nodes fails, the rest will recover its information.
 
 
 Steps
 -----
 
-.. note:: In this example, we are configuring a three-nodes Elasticsearch cluster from scratch, but any dimension can be configured with **at least two nodes running**. However, if a node is down, the entire cluster will be down, so we recommend to have three nodes or more.
+In this example, a cluster of three nodes will be configured, which is the minimum of nodes recommend for a cluster.
 
-.. warning:: Remember to configure first all Elasticsearch nodes as previously done at `Elastic Stack installation guide <https://documentation.wazuh.com/current/installation-guide/installing-elastic-stack/>`_
+Remember to configure first all Elasticsearch nodes as previously done at `Elastic Stack installation guide <https://documentation.wazuh.com/current/installation-guide/installing-elastic-stack/>`_
 
 1. Once all Elasticsearch machines are up and running, it is important to configure the cluster on each of them at ``/etc/elasticsearch/elasticsearch.yml``:
 
    .. code-block:: yaml
 
-         cluster.name: elastic-cluster
-	 node.name: "elastic-node-0x"
-	 path.data: /var/lib/elasticsearch
-	 path.logs: /var/logs/elasticsearch
-	 network.host: <ELASTIC_NODE_x_SERVER_IP>
-	 discovery.seed_hosts:
-	  - <ELASTIC_NODE_1_SERVER_IP>
-	  - <ELASTIC_NODE_2_SERVER_IP>
-	  - <ELASTIC_NODE_3_SERVER_IP>
-	 cluster.initial_master_nodes:
-	  - <1ST_MASTER-ELIGIBLE_NODE.NAME>
-	  - <2ND_MASTER-ELIGIBLE_NODE.NAME>
-	  - <3RD_MASTER-ELIGIBLE_NODE.NAME>
+        cluster.name: elastic-cluster
+	node.name: <node_name>
+	network.host: <elasticsearch_ip>
+	discovery.seed_hosts:
+	 - <elasticsearch_ip_node1>
+	 - <elasticsearch_ip_node2>
+	 - <elasticsearch_ip_node3>
+	cluster.initial_master_nodes:
+	 - <master_node_1>
+	 - <master_node_2>
+ 	 - <master_node_3>
 	 
    
-   .. warning:: It is highly recommended to use at least **two eligible master nodes** at ``cluster.initial_master_nodes`` to avoid the nodes do not know where in shards the searched data is in case the original master in charge of bringing that information is down, what is called split-brain. 
-
-
-  You must then restart Elasticsearch service on all nodes:
+  To apply the changes, restart Elasticsearch:
   
+  a. For systemd:
+	
   .. code-block:: console
   
 	# systemctl restart elasticsearch.service
+	
+  b. For SysV Init:
+  
+  .. code-block:: console
+   
+   	# service elasticsearch.service restart
    
 
-2. After that, we need to modify Filebeat configuration file located at ``/etc/filebeat/filebeat.yml`` in the Wazuh manager machine or machines in case we have a Wazuh manager cluster:
+2. It is necessary to modify the Filebeat configuration file located at ``/etc/filebeat/filebeat.yml`` where Filebeat was installed.
 
   .. code-block:: yaml
   
 	output.elasticsearch:
-		hosts: ['http://<ELASTIC_NODE_1_SERVER_IP>:9200','http://<ELASTIC_NODE_2_SERVER_IP>:9200','http://<ELASTIC_NODE_3_SERVER_IP>:9200']
+		hosts: ['http://<elasticsearch_ip_node1>:9200','http://<elasticsearch_ip_node2>:9200','http://<elasticsearch_ip_node3>:9200']
 		loadbalance: true
   
-  Now, it is time to restart Filebeat service:
+  Restart the Filebeat service:
   
+  a. For systemd:
+	
   .. code-block:: console
   
 	# systemctl restart filebeat.service
 	
+  b. For SysV Init:
+  
+  .. code-block:: console
+   
+   	# service filebeat.service restart
 
-3. Then, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (Wazuh manager server or the entire cluster):
+3. Once the Elasticsearch cluster is working, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed:
 
   .. code-block:: console
 
     # filebeat setup --index-management -E setup.template.json.enabled=false
 
 
-4. Finally, set the list of Elasticsearch nodes in Kibana at ``/etc/kibana/kibana.yml``:
+4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
 
   .. code-block:: yaml
 	
-	elasticsearch.hosts: ["http://<ELASTIC_NODE_1_SERVER_IP>:9200","http://<ELASTIC_NODE_2_SERVER_IP>:9200","http://<ELASTIC_NODE_3_SERVER_IP>:9200"]
-	
-  Then, restart Kibana service as below:
+	elasticsearch.hosts: ["http://<elasticsearch_ip_node1>:9200","http://<elasticsearch_ip_node2>:9200","http://<elasticsearch_ip_node3>:9200"]
+
+  All nodes listed here must be on the same cluster.
   
+  Restart the Kibana service:
+  
+  a. For systemd:
+	
   .. code-block:: console
   
 	# systemctl restart kibana.service
+	
+  b. For SysV Init:
+  
+  .. code-block:: console
+   
+   	# service kibana.service restart
 	
 	
 Next steps
 ----------
 
-Once the Elastic Stack servers are configured for clustering, you can try first shutting Elasticsearch nodes down with at least two of them running and check the changes of the elected master node. You can also use Kibana in order to check all the information can be searched.
+Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
