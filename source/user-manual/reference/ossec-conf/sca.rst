@@ -63,7 +63,7 @@ Scheduling options
 +-------------------+------------+
 
 Some examples of usage of these options are included in the
-:doc:`SCA documentation<../../capabilities/sec-config-assessment/000_index>`.
+:doc:`SCA documentation<../../capabilities/sec-config-assessment/index>`.
 
 Main options
 ------------

@@ -10,7 +10,7 @@
    viewBox="0 0 979 798"
    version="1.1"
    id="svg4181"
-   sodipodi:docname="sca_sequence_diagram.svg"
+   sodipodi:docname="sca_sequence_diagram1.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata4185">
@@ -38,12 +38,20 @@
      id="namedview4183"
      showgrid="false"
      inkscape:zoom="1.197995"
-     inkscape:cx="340.08368"
+     inkscape:cx="190.66736"
      inkscape:cy="399"
      inkscape:window-x="1990"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4181" />
+     inkscape:current-layer="svg4181"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="205.34309,702.00627"
+       orientation="0,1"
+       inkscape:locked="false"
+       id="guide922" />
+  </sodipodi:namedview>
   <defs
      id="defs3979">
     <style
@@ -137,8 +145,10 @@
      id="rect4003" />
   <text
      class="e"
-     transform="translate(184.25 89.52)"
-     id="text4005">SCA Agent</text>
+     id="text4005"
+     style="font-size:16px;font-family:OpenSans-Regular, 'Open Sans';fill:#ffffff"
+     x="203.44875"
+     y="90.354721">SCA</text>
   <rect
      class="d"
      x="346.5"
@@ -290,11 +300,16 @@
      id="rect4049" />
   <text
      class="j"
-     transform="translate(33.6 226.52)"
-     id="text4053">There are<tspan
+     transform="translate(33.6,226.52)"
+     id="text4053"
+     style="font-size:16px;font-family:OpenSans-Regular, 'Open Sans'">If there were<tspan
    x="0"
    y="22"
    id="tspan4051">changes</tspan>
+<tspan
+   x="0"
+   y="22"
+   id="tspan1954" />
 </text>
   <text
      class="j"
@@ -405,16 +420,19 @@
      id="path4097" />
   <text
      class="j"
-     transform="translate(36.2 438.52)"
-     id="text4103">Stored policy<tspan
-   x="0"
-   y="22"
-   id="tspan4099">information does</tspan>
-<tspan
-   x="0"
-   y="44"
-   id="tspan4101">not match</tspan>
-</text>
+     id="text4103"
+     style="font-size:16px;font-family:OpenSans-Regular, 'Open Sans'"
+     x="32.861088"
+     y="415.98233">
+    <tspan
+       x="32.861088"
+       y="437.98233"
+       id="tspan4099">If integrity failed</tspan>
+    <tspan
+       x="32.861088"
+       y="437.98233"
+       id="tspan927" />
+  </text>
   <rect
      class="d"
      x="247"
@@ -634,4 +652,14 @@
      class="e"
      transform="translate(456.11 241.19)"
      id="text4179">Update</text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="95.158997"
+     y="232.0544"
+     id="text1952"><tspan
+       sodipodi:role="line"
+       id="tspan1950"
+       x="95.158997"
+       y="267.44501"></tspan></text>
 </svg>

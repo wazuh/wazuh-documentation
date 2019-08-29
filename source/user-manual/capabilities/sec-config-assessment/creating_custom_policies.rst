@@ -76,19 +76,19 @@ Each section has their own fields as described in the as described in tables
 .. _sca_policy_file_policy_section:
 .. table:: Policy section
 
-    +--------------------+----------------+-------------------+------------------------+
-    | Field              | Mandatory      | Type              | Allowed values         |
-    +====================+================+===================+========================+
-    | id                 | Yes            | String            | Any string             |
-    +--------------------+----------------+-------------------+------------------------+
-    | file               | Yes            | String            | Any string             |
-    +--------------------+----------------+-------------------+------------------------+
-    | name               | Yes            | String            | Any string             |
-    +--------------------+----------------+-------------------+------------------------+
-    | description        | Yes            | String            | Any string             |
-    +--------------------+----------------+-------------------+------------------------+
-    | references         | No             | Array of strings  | Any string             |
-    +--------------------+----------------+-------------------+------------------------+
+    +--------------------+----------------+-------------------+------------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values         | Allowed values         |
+    +====================+================+===================+========================+========================+
+    | id                 | Yes            | String            | Any string             | Policy ID              |
+    +--------------------+----------------+-------------------+------------------------+------------------------+
+    | file               | Yes            | String            | Any string             | Policy filename        |
+    +--------------------+----------------+-------------------+------------------------+------------------------+
+    | name               | Yes            | String            | Any string             | Policy title           |
+    +--------------------+----------------+-------------------+------------------------+------------------------+
+    | description        | Yes            | String            | Any string             | Brief description      |
+    +--------------------+----------------+-------------------+------------------------+------------------------+
+    | references         | No             | Array of strings  | Any string             | Any string             |
+    +--------------------+----------------+-------------------+------------------------+------------------------+
 
 .. _sca_policy_file_requirements_section:
 .. table:: Requirements section
@@ -214,7 +214,7 @@ Rules can check for existence of files, directories, registry keys and values, r
 test for existence of files inside directories. When it comes to content checking, they are able to check for file
 contents, recursively check for the contents of files inside directories, command output and registry value data.
 
-In an abstract manner, rules start by a location (and a `type` of location), that will be the target of the test,
+Abstracly, rules start by a location (and a `type` of location), that will be the target of the test,
 followed by the actual the test specification. Such tests fall into two categories: existence and content checks.
 
 .. General rule syntax

@@ -32,8 +32,8 @@ Further information is available in the following sections:
 .. toctree::
     :maxdepth: 2
 
-    010_what_is_it
-    020_how_it_works
-    030_how_to_configure
-    040_creating_custom_policies
-    050_use-case
+    what_is_it
+    how_it_works
+    how_to_configure
+    creating_custom_policies
+    use-case
