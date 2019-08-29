@@ -32,13 +32,13 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     # apt-get install elasticsearch=7.3.0
 
-2. Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen on all interfaces by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to the IP you want to bind it to:
+2. Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen to a non-loopback address by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to the IP you want to bind it to:
 
    .. code-block:: yaml
 
      network.host: <elasticsearch_ip>
 
-3. Change Elasticsearch's cluster configuration by editing the file ``/etc/elasticsearch/elasticsearch.yml``. Add or edit (if commented) the following lines:
+3. Further configuration will be necessary after changing the ``network.host`` option. Add or edit (if commented) the following lines in the file ``/etc/elasticsearch/elasticsearch.yml``:
 
    .. code-block:: yaml
 
@@ -62,7 +62,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # update-rc.d elasticsearch defaults 95 10
     # service elasticsearch start
 
-5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
+5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed:
 
   .. code-block:: console
 
@@ -104,7 +104,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
-3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access it from the outside make it listen on his network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
+3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml
 
