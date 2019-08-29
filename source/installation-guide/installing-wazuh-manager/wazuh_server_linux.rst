@@ -5,8 +5,7 @@
 Installation from packages
 ==========================
 
-The Wazuh server can be installed in the most of Linux Distribution. It's possible to use DEB packages or RPM packages depending on the target Operative System flavor.
-
+The Wazuh server can be installed in the following operating systems:
 
 +-------------------------------+-------------------------------------------------------+
 | Operative system              | Version                                               |

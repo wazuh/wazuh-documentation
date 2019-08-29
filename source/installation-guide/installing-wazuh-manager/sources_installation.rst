@@ -5,8 +5,7 @@
 Installation from sources
 =========================
 
-The Wazuh server can be installed in the most of Linux Distribution.
-
+The Wazuh server can be installed in the following operating systems:
 
 +-------------------------------+---------------------------------------------------------------------------+
 | Operative system              | Version                                                                   |
