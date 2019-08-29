@@ -13,7 +13,7 @@ Wazuh Cluster
 Introduction
 ------------
 
-Recommended reading: :ref:`wazuh-cluster`.
+Recommended reading: :ref:`Wazuh Cluster <configuring-cluster>`.
 
 Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, in consequence, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large number of agents.
 
