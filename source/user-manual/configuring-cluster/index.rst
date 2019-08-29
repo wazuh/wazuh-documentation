@@ -95,8 +95,8 @@ Deploying a Wazuh cluster
             # /var/ossec/bin/cluster-control -l
 
             NAME           TYPE    VERSION  ADDRESS
-            master-node    master  3.9.5   wazuh-master
-            worker01-node  worker  3.9.5   172.22.0.3
+            master-node    master  3.10.0   wazuh-master
+            worker01-node  worker  3.10.0   172.22.0.3
 
 
     .. warning::
