@@ -16,7 +16,7 @@ Steps
 
 In this example, a cluster of three nodes will be configured, which is the minimum of nodes recommend for a cluster.
 
-Remember to configure first all Elasticsearch nodes as previously done at `Elastic Stack installation guide <https://documentation.wazuh.com/current/installation-guide/installing-elastic-stack/>`_
+Remember to configure first all Elasticsearch nodes as previously done at `Elastic Stack installation guide <https://documentation.wazuh.com/current/installation-guide/installing-elastic-stack/>`_.
 
 1. Once all Elasticsearch machines are up and running, it is important to configure the cluster on each of them at ``/etc/elasticsearch/elasticsearch.yml``:
 
