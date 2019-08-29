@@ -11,7 +11,7 @@ Configure Elasticsearch cluster
 Elasticsearch's cluster feature allows configuring a group of server nodes working together to grant a higher availability service and a data loss prevention mechanism. In case any of the nodes fails, the rest will recover its information.
 
 
-Steps
+Configuration
 -----
 
 In this example, a cluster of three nodes will be configured, which is the minimum of nodes recommend for a cluster.
