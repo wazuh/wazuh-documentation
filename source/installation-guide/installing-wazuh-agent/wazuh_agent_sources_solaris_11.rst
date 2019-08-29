@@ -41,33 +41,13 @@ Installing Wazuh agent
 
         # git clone -b v3.9.5 https://github.com/wazuh/wazuh.git
 
-3. Compile the sources files.
+     .. note:: If you can't download the file due to an Open SSL error, then you should copy the directory with the scp utility.
 
-    * For Solaris 11 i386:
-
-        .. code-block:: console
-
-            # cd wazuh*/src
-            # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
-            # gmake -j 4 TARGET=agent
-
-    * For Solaris 11 SPARC:
-
-        .. code-block:: console
-
-            # mv wazuh*/src/Makefile wazuh*/src/Makefile.tmp
-            # sed -n '/OSSEC_LDFLAGS+=-z relax=secadj/!p' wazuh*/src/Makefile.tmp > wazuh*/src/Makefile
-            # cd wazuh*/src
-            # gmake deps
-            # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes
-            # gmake -j 4 TARGET=agent
-
-4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
      .. code-block:: console
 
-        # cd ../
+        # cd wazuh*
         # ./install.sh
 
     If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
@@ -82,7 +62,7 @@ Installing Wazuh agent
 
    .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
-5. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
+4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
  .. code-block:: none
 

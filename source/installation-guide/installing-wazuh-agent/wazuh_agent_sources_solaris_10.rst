@@ -25,7 +25,7 @@ Installing Wazuh agent
 
          .. code-block:: console
 
-            # pkgutil -y -i git automake gmake autoconf libtool wget curl gcc5core
+            # /opt/csw/bin/pkgutil -y -i git automake gmake autoconf libtool wget curl gcc5core
 
 2. Download the latest version and a necessary file.
 
