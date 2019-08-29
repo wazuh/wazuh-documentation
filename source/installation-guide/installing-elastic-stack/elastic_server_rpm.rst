@@ -80,7 +80,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     .. code-block:: console
 
-        # curl http://YOUR_ELASTIC_SERVER_IP:9200
+        # curl http://<elasticsearch_ip>:9200
 
 .. _install_kibana_app_rpm:
 
