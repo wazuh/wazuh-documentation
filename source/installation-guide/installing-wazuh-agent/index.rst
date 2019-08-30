@@ -26,6 +26,8 @@ There are several options to install a Wazuh agent, depending on the operating s
 | :ref:`Installation from sources <wazuh_agent_sources>`          | Install Wazuh agent from source code.                                 |
 +-----------------------------------------------------------------+-----------------------------------------------------------------------+
 
+.. note:: The compatibility between Wazuh Agent and Wazuh Manager is guaranteed when the Wazuh Manager has a newer or equal version than the Wazuh Agent.
+
 .. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider exploring these options if you are deploying Wazuh in a larger environment.
 
 .. rst-class:: d-none

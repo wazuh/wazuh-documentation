@@ -5,7 +5,7 @@
 Installation from packages
 ==========================
 
-The Wazuh agent can be installed in the most of Linux Distribution.
+The Wazuh agent can be installed in the following operating systems:
 
 +----------------------------------------------------------+-----------------------------------------------------+
 | Type                                                     | Description                                         |
