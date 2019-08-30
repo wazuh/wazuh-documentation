@@ -331,6 +331,7 @@ $(function() {
     }
 
     $('.globaltoc li.initial').removeClass('initial');
+    completelyHideMenuItems();
     return false;
   });
 
@@ -352,6 +353,20 @@ $(function() {
       $(this).addClass('initial').addClass('show');
     });
     $('#navbar-globaltoc').removeClass('hidden');
+    completelyHideMenuItems();
+  }
+
+  /**
+   * Completely hides the visually hidden elements
+   */
+  function completelyHideMenuItems() {
+    $('#navbar-globaltoc li ul').each(function() {
+      if ( $(this).closest('li').hasClass('show') ) {
+        this.hidden = false;
+      } else {
+        this.hidden = true;
+      }
+    });
   }
 
   /**
