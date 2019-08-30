@@ -30,7 +30,7 @@ The macOS agent can be downloaded from :doc:`packages list<../packages-list/inde
 
      Using the GUI you can perform a simple installation, without register and configure the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.
 
-     .. thumbnail:: ../../images/installation/macos.png
+     .. thumbnail:: ../../../images/installation/macos.png
          :align: center
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
