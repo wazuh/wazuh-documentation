@@ -2,10 +2,10 @@
 
 .. _wazuh_agent_packages_amazon:
 
-Amazon Linux 1 and 2
-====================
+Amazon Linux 1 or greater
+=========================
 
-The RPM package is suitable for installation on Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
+The RPM package is suitable for installation on Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <../../index>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -35,7 +35,7 @@ Installing Wazuh agent
 
       # yum install wazuh-agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../../../user-manual/registering/index>`.
 
   b) Deployment:
 
@@ -45,7 +45,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent
 
-    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.
+    See the following document for additional automated deployment options: :ref:`deployment variables <deployment_variables>`.
 
 3. **(Optional)** Disable the Wazuh repository:
 

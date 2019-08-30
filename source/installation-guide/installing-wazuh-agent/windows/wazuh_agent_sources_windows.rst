@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_windows:
 
-Install Wazuh agent on Windows
-==============================
+Installation from sources
+=========================
 
 This section describes how to download and build the Wazuh HIDS Windows Agent from sources. This process begins with compiling the Agent on a Linux system to generate the .msi installer for the Windows installation.
 

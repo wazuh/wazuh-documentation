@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_packages_windows:
 
-Install Wazuh agent on Windows
-==============================
+Installation from packages
+==========================
 
 .. note:: You will need administrator privileges to perform this installation.
 
