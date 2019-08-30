@@ -39,19 +39,19 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     # yum install elasticsearch-7.3.0
 
-2. **Optional.** Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen on all interfaces by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to:
+2. Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen to a non-loopback address by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to the IP you want to bind it to:
 
    .. code-block:: yaml
 
-     network.host: 0.0.0.0
+     network.host: <elasticsearch_ip>
 
-3. If you are installing a **distributed architecture**, you will have to make an additional configuration change by editing the file ``/etc/elasticsearch/elasticsearch.yml``. Add or edit (if commented) the following lines:
+
+3. Further configuration will be necessary after changing the ``network.host`` option. Add or edit (if commented) the following lines in the file ``/etc/elasticsearch/elasticsearch.yml``:
 
    .. code-block:: yaml
 
-     node.name: node-1
-     network.host: 0.0.0.0
-     cluster.initial_master_nodes: ["node-1"]
+     node.name: <node_name>
+     cluster.initial_master_nodes: ["<node_name>"]
 
 4. Enable and start the Elasticsearch service:
 
@@ -70,7 +70,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # chkconfig --add elasticsearch
     # service elasticsearch start
 
-5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed (current host, for single architecture or Wazuh manager host for distributed architecture):
+5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed:
 
   .. code-block:: console
 
@@ -80,7 +80,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     .. code-block:: console
 
-        # curl http://YOUR_ELASTIC_SERVER_IP:9200
+        # curl http://<elasticsearch_ip>:9200
 
 .. _install_kibana_app_rpm:
 
@@ -113,11 +113,11 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
     
-3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. Configure Kibana to listen on all interfaces by editing the file ``/etc/kibana/kibana.yml`` and uncommenting the setting ``server.host``. Change the value to:
+3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml
 
-    server.host: "0.0.0.0"
+    server.host: "<kibana_ip>"
 
 4. Enable and start the Kibana service:
 
