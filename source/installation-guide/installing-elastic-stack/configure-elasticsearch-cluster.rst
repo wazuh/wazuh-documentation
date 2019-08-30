@@ -12,13 +12,13 @@ Elasticsearch's cluster feature allows configuring a group of server nodes worki
 
 
 Configuration
------
+-------------
 
 In this example, a cluster of three nodes will be configured, which is the minimum number of nodes recommended.
 
 First of all, it is necessary to configure all Elasticsearch nodes as previously done at `Elastic Stack installation guide <https://documentation.wazuh.com/current/installation-guide/installing-elastic-stack/>`_.
 
-1. Once all Elasticsearch machines are up and running, the following configuration is required on each of them by editing ``/etc/elasticsearch/elasticsearch.yml` to set up the cluster:
+1. Once all Elasticsearch machines are up and running, the following configuration is required on each of them by editing `/etc/elasticsearch/elasticsearch.yml` to set up the cluster:
 
    .. code-block:: yaml
 
