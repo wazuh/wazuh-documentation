@@ -5,7 +5,7 @@
 Installation from packages
 ==========================
 
-The Wazuh agent for Solaris 10 can be downloaded from our :doc:`packages list <packages>`. The current version has been tested on Solaris 10 version 5.10. Install the agent as follows:
+The Wazuh agent for Solaris 10 can be downloaded from our :ref:`packages list<packages>`. The current version has been tested on Solaris 10 version 5.10. Install the agent as follows:
 
   a) For Solaris 10 i386:
 

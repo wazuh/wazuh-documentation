@@ -10,13 +10,13 @@ The Wazuh agent can be installed in the following Solaris versions.
 +---------------------------------------------------------------------------+
 | Solaris version                                                           |
 +===========================================================================+
-| :doc:`Solaris 10 i386 <wazuh_agent_solaris10>`                            |
+| :ref:`Solaris 10 i386 <wazuh_agent_solaris10>`                            |
 +---------------------------------------------------------------------------+
-| :doc:`Solaris 10 SPARC <wazuh_agent_solaris10>`                           |
+| :ref:`Solaris 10 SPARC <wazuh_agent_solaris10>`                           |
 +---------------------------------------------------------------------------+
-| :doc:`Solaris 11 i386 <wazuh_agent_solaris11>`                            |
+| :ref:`Solaris 11 i386 <wazuh_agent_solaris11>`                            |
 +---------------------------------------------------------------------------+
-| :doc:`Solaris 11 SPARC <wazuh_agent_solaris11>`                           |
+| :ref:`Solaris 11 SPARC <wazuh_agent_solaris11>`                           |
 +---------------------------------------------------------------------------+
 
 .. toctree::

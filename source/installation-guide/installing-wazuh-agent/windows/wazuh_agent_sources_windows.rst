@@ -63,4 +63,4 @@ This section describes how to download and build the Wazuh HIDS Windows Agent fr
 
     :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
-.. note:: Once the Agent is deployed :doc:`with a normal or unattended installation<./wazuh_agent_packages_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :doc:`the registering section<../../user-manual/registering/index>`.
+.. note:: Once the Agent is deployed :doc:`with a normal or unattended installation<./wazuh_agent_packages_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.

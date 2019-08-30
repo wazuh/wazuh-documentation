@@ -45,7 +45,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" dnf install wazuh-agent
 
-    See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.
+    See the following document for additional deployment options: :ref:`deployment variables <deployment_variables>`.
 
 3. **(Optional)** Disable the Wazuh repository:
 

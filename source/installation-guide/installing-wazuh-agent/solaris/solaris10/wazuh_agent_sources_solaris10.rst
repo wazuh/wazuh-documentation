@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_sources_solaris_10:
+.. _wazuh_agent_sources_solaris10:
 
 Installation from sources
 =========================

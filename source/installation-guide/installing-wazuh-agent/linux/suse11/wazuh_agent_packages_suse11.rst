@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_suse_11:
+.. _wazuh_agent_packages_suse11:
 
 SUSE 11
 =======
@@ -45,7 +45,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" zypper install wazuh-agent
 
-    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.
+    See the following document for additional automated deployment options: :ref:`deployment variables <deployment_variables>`.
 
 3. **(Optional)** Disable the Wazuh repository:
 
