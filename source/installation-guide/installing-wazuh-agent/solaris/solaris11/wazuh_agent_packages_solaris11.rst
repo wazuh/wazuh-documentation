@@ -42,7 +42,7 @@ Finally, remove the publisher:
 
         # pkg unset-publisher wazuh
 
-Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
 Uninstall
 ---------

@@ -5,7 +5,7 @@
 Amazon Linux 1 or greater
 =========================
 
-This guide describes how to install the Wazuh agent from source code for Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_sources_linux>`.
+This guide describes how to install the Wazuh agent from source code for Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -52,4 +52,4 @@ Installing Wazuh agent
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<register_agents>`.

@@ -100,4 +100,4 @@ Installing Wazuh agent
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
