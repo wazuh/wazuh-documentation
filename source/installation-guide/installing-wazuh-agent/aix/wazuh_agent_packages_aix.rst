@@ -5,7 +5,7 @@
 Install Wazuh agent on AIX
 ==========================
 
-The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packages-list/index>`. You can choose installation or a deployment:
+The Wazuh agent for AIX can be downloaded from our :doc:`packages list <>`. You can choose installation or a deployment:
 
   a) Installation:
 
