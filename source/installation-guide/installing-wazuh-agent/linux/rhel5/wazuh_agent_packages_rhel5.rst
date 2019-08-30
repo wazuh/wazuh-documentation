@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_linux_rpm_suse_11:
+.. _wazuh_agent_packages_rhel5:
 
-SUSE 11
-=======
+Red Hat Enterprise Linux 5
+==========================
 
-The RPM package is suitable for Suse 11. For other RPM-based OS (CentOS/RHEL, Fedora, Suse 12, OpenSUSE), please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
+The RPM package is suitable for Red Hat Enterprise Linux 5. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -16,8 +16,8 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
-    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
     gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
@@ -33,7 +33,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # zypper install wazuh-agent
+      # yum install wazuh-agent
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
@@ -43,7 +43,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" zypper install wazuh-agent
+      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent
 
     See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.
 
@@ -64,6 +64,6 @@ To uninstall the agent:
 
     .. code-block:: console
 
-      # zypper remove wazuh-agent
+      # yum remove wazuh-agent
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.

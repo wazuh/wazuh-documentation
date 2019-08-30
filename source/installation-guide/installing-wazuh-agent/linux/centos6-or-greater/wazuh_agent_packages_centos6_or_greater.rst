@@ -1,17 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_linux_rpm:
+.. _wazuh_agent_packages_centos6_or_greater:
 
-CentOS/RHEL/Oracle Linux/Amazon Linux
-=====================================
+CentOS 6 or greater
+===================
 
-The RPM package is suitable for installation on Red Hat, CentOS and other RPM-based systems. In this page, we will provide the instructions for:
-
-- CentOS/RHEL 6 or greater.
-- Oracle Linux 6 or greater.
-- Amazon Linux 1 and 2
-
-For other RPM-based OS (CentOS/RHEL/Oracle Linux 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
+The RPM package is suitable for CentOS 6 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 

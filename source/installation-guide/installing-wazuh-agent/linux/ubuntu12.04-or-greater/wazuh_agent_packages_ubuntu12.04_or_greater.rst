@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_linux_deb:
+.. _wazuh_agent_packages_ubuntu12.04_or_greater:
 
-Debian/Ubuntu
-=============
+Ubuntu 12.04 or greater
+=======================
 
-The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems.
+The DEB package is suitable for Ubuntu 12.04 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <wazuh_agent_packages_linux>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 

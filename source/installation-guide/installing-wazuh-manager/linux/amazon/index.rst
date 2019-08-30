@@ -5,7 +5,7 @@
 Amazon
 ======
 
-The Wazuh server is available for Amazon Linux 1 and 2, and can be installed via packages or repositories:
+The Wazuh server is available for Amazon Linux 1 and 2, and can be installed via packages or sources:
 
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
