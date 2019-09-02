@@ -1722,10 +1722,21 @@ select, option {
   transition: .1s all ease;
   color: #00a9e5;
   text-align: left;
- }
+}
 
 #select-version .dropdown-menu li:hover a {
   color: #fff;
+}
+
+#select-version .dropdown-menu li a.disable {
+  cursor: default;
+  color: #999;
+  background-color: #f5f5f5;
+}
+
+#select-version .dropdown-menu li:hover a.disable {
+  color: #fff;
+  background-color: #00a9e5;
 }
 
 .version::after {
@@ -2525,6 +2536,31 @@ div.highlight pre {
 .linenos {
   padding: 0 0.5em 0 1em !important;
   border-right: 1px solid #00a9e5;
+}
+
+.tooltip > .tooltip-inner {
+  max-width: 300px !important;
+  padding: 7px !important;
+  font-size: 11px !important;
+  color: #fff !important;
+  background-color: #888 !important;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before,
+.bs-tooltip-top .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=right] .arrow::before,
+.bs-tooltip-right .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=left] .arrow::before,
+.bs-tooltip-left .arrow::before {
+  display: none;
 }
 
 @media (min-width:576px){

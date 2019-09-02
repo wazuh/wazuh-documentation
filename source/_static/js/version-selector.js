@@ -54,8 +54,30 @@ jQuery(function($) {
       path = currentVersion;
     }
 
+    const actualVersion = $('.no-latest-notice').attr('data-version');
+    url = window.location.href.split(actualVersion)[1];
     for (let i = 0; i < versions.length; i++) {
-      ele += '<li><a href="' + versions[i].url + page + search + '">'+versions[i].name+'</a></li>';
+      let pageExists = false;
+      let tooltip = '';
+      const ver = versions[i].name.split(' (current)')[0];
+      $.ajax({
+        url: '/'+ver+url,
+        success: function() {
+          pageExists = true;
+        },
+        error: function() {
+          pageExists = false;
+        },
+        async: false,
+      });
+
+      if (!pageExists) {
+        tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
+      } else {
+        tooltip = '';
+      }
+
+      ele += '<li><a href="' + versions[i].url + page + search + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
       if ( versions[i].url == '/' + path ) {
         selected = i;
       }
