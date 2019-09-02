@@ -86,8 +86,8 @@ Installing Wazuh agent
 
       .. code-block:: console
 
-        # make -C src clean
-        # make -C src clean-deps
+        # gmake -C src clean
+        # gmake -C src clean-deps
 
    .. note::
      During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
