@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_macos:
+.. _wazuh_agent_package_macos:
 
-Installation from packages
+Installation from package
 ==========================
 
 The macOS agent can be downloaded from :doc:`packages list<../../packages-list/index>`. You can install it by using the command line or following the GUI steps:

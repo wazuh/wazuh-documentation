@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_windows:
+.. _wazuh_agent_package_windows:
 
-Installation from packages
+Installation from package
 ==========================
 
 .. note:: You will need administrator privileges to perform this installation.

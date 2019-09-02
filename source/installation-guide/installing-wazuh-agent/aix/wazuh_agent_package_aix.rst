@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_aix:
+.. _wazuh_agent_package_aix:
 
-Installation from sources
+Installation from package
 =========================
 
 The Wazuh agent for AIX can be downloaded from our :doc:`packages list <../../packages-list/index>`. You can choose installation or a deployment:

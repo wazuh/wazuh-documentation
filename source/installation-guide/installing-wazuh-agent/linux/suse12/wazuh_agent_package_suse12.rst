@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_rhel6_or_greater:
+.. _wazuh_agent_package_suse12:
 
-Red Hat Enterprise Linux 6 or greater
-=====================================
+SUSE 12
+=======
 
-The RPM package is suitable for Red Hat Enterprise Linux 6 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+The RPM package is suitable for installation on SUSE 12. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -16,8 +16,8 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH
-    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
     gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -33,7 +33,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # yum install wazuh-agent
+      # zypper install wazuh-agent
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
@@ -43,7 +43,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent
+      # WAZUH_MANAGER_IP="10.0.0.2" zypper install wazuh-agent
 
     See the following document for additional automated deployment options: :ref:`deployment variables <deployment_variables>`.
 
@@ -64,6 +64,6 @@ To uninstall the agent:
 
     .. code-block:: console
 
-      # yum remove wazuh-agent
+      # zypper remove wazuh-agent
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.

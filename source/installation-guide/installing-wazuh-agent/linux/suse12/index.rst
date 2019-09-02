@@ -5,12 +5,12 @@
 SUSE 12
 =======
 
-The Wazuh agent is available for SUSE 12, and can be installed via packages or sources:
+The Wazuh agent is available for SUSE 12, and can be installed via package or sources:
 
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                                      | Description                                                           |
 +===========================================================================+=======================================================================+
-| :ref:`Packages installation <wazuh_agent_packages_suse12>`                | Install Wazuh agent for SUSE 12 via packages.                         |
+| :ref:`Package installation <wazuh_agent_package_suse12>`                  | Install Wazuh agent for SUSE 12 via package.                          |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Sources installation <wazuh_agent_sources_suse12>`                  | Install Wazuh agent for SUSE 12 via sources.                          |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
@@ -20,5 +20,5 @@ The Wazuh agent is available for SUSE 12, and can be installed via packages or s
     :hidden:
     :maxdepth: 0
 
-    wazuh_agent_packages_suse12
+    wazuh_agent_package_suse12
     wazuh_agent_sources_suse12

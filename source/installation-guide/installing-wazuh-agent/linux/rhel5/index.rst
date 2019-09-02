@@ -5,16 +5,16 @@
 Red Hat Enterprise Linux 5
 ==========================
 
-The Wazuh agent is available for Red Hat Enterprise Linux 5, and can be installed via packages:
+The Wazuh agent is available for Red Hat Enterprise Linux 5, and can be installed via package:
 
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                          | Description                                                           |
 +===============================================================+=======================================================================+
-| :ref:`Packages installation <wazuh_agent_packages_rhel5>`     | Install Wazuh agent for Red Hat Enterprise Linux 5 via packages.      |
+| :ref:`Package installation <wazuh_agent_package_rhel5>`       | Install Wazuh agent for Red Hat Enterprise Linux 5 via package.       |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. toctree::
     :hidden:
     :maxdepth: 0
 
-    wazuh_agent_packages_rhel5
+    wazuh_agent_package_rhel5

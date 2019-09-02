@@ -21,7 +21,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 +----------------------------------------------------------+-----------------------------------------------------+
 | Type                                                     | Description                                         |
 +==========================================================+=====================================================+
-| :ref:`Linux packages <wazuh_agent_linux>`                | Install Wazuh agents on Linux.                      |
+| :ref:`Linux installer <wazuh_agent_linux>`               | Install Wazuh agents on Linux.                      |
 +----------------------------------------------------------+-----------------------------------------------------+
 | :ref:`Windows installer <wazuh_agent_windows>`           | Install Wazuh agents on Windows.                    |
 +----------------------------------------------------------+-----------------------------------------------------+

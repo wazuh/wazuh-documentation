@@ -197,4 +197,4 @@ Parameters for basic auth:
 | **PASS**                           | API password.                                                                                                                                             |
 +------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: To automate deployments in Windows you can use the parameters of its :ref:`installer <wazuh_agent_packages_windows>`.
+.. note:: To automate deployments in Windows you can use the parameters of its :ref:`installer <wazuh_agent_package_windows>`.

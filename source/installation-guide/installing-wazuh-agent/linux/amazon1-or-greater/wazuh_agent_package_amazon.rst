@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_centos6_or_greater:
+.. _wazuh_agent_package_amazon:
 
-CentOS 6 or greater
-===================
+Amazon Linux 1 or greater
+=========================
 
-The RPM package is suitable for CentOS 6 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+The RPM package is suitable for installation on Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <../../index>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -35,7 +35,7 @@ Installing Wazuh agent
 
       # yum install wazuh-agent
 
-    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../../../user-manual/registering/index>`.
 
   b) Deployment:
 

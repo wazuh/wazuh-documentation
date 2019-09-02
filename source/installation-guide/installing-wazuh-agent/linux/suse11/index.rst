@@ -5,16 +5,16 @@
 SUSE 11
 =======
 
-The Wazuh agent is available for SUSE 11, and can be installed via packages:
+The Wazuh agent is available for SUSE 11, and can be installed via package:
 
 +----------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                           | Description                                                           |
 +================================================================+=======================================================================+
-| :ref:`Packages installation <wazuh_agent_packages_suse11>`     | Install Wazuh agent for SUSE 11 via packages.                         |
+| :ref:`Package installation <wazuh_agent_package_suse11>`       | Install Wazuh agent for SUSE 11 via package.                          |
 +----------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. toctree::
     :hidden:
     :maxdepth: 0
 
-    wazuh_agent_packages_suse11
+    wazuh_agent_package_suse11

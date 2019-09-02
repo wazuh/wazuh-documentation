@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_hpux:
+.. _wazuh_agent_package_hpux:
 
-Installation from packages
-==========================
+Installation from package
+=========================
 
 The Wazuh agent for HP-UX can be downloaded from our :doc:`packages list<../../packages-list/index>`. The installation steps are:
 

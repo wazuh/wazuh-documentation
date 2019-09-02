@@ -5,12 +5,12 @@
 Solaris 10
 ==========
 
-The Wazuh agent is available for Solaris 10 i386 and Solaris 10 SPARC. The Wazuh agent can be installed via packages or sources:
+The Wazuh agent is available for Solaris 10 i386 and Solaris 10 SPARC. The Wazuh agent can be installed via package or sources:
 
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                                      | Description                                                           |
 +===========================================================================+=======================================================================+
-| :ref:`Packages installation <wazuh_agent_packages_solaris10>`             | Install Wazuh agent Solaris 10 via packages.                          |
+| :ref:`Package installation <wazuh_agent_package_solaris10>`               | Install Wazuh agent Solaris 10 via package.                           |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Sources installation <wazuh_agent_sources_solaris10>`               | Install Wazuh agent for Solaris 10 via sources.                       |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
@@ -20,5 +20,5 @@ The Wazuh agent is available for Solaris 10 i386 and Solaris 10 SPARC. The Wazuh
     :hidden:
     :maxdepth: 0
 
-    wazuh_agent_packages_solaris10
+    wazuh_agent_package_solaris10
     wazuh_agent_sources_solaris10

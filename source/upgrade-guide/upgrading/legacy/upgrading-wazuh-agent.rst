@@ -25,5 +25,5 @@ a) On DEB or RPM based **Linux systems**, you can easily rely on the packages ma
 
 b) On **Windows**, **Mac OS** and other operating systems, we advise you to delete your previous version and install Wazuh v2.x from scratch. More information is available in our documentation at:
 
-  - :ref:`Install Wazuh agent on Windows <wazuh_agent_packages_windows>`
-  - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_packages_macos>`
+  - :ref:`Install Wazuh agent on Windows <wazuh_agent_package_windows>`
+  - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_package_macos>`

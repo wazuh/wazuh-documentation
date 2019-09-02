@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_packages_oracle5:
+.. _wazuh_agent_package_centos5:
 
-Oracle Linux 5
-==============
+CentOS 5
+========
 
-The RPM package is suitable for Oracle Linux 5. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+The RPM package is suitable for CentOS 5. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 

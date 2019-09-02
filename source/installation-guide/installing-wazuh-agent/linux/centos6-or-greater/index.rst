@@ -5,12 +5,12 @@
 Centos 6 or greater
 ===================
 
-The Wazuh agent is available for CentOS 6 or greater, and can be installed via packages or sources:
+The Wazuh agent is available for CentOS 6 or greater, and can be installed via package or sources:
 
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                                      | Description                                                           |
 +===========================================================================+=======================================================================+
-| :ref:`Packages installation <wazuh_agent_packages_centos6_or_greater>`    | Install Wazuh agent for CentOS 6 or greater via packages.             |
+| :ref:`Package installation <wazuh_agent_package_centos6_or_greater>`      | Install Wazuh agent for CentOS 6 or greater via package.              |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Sources installation <wazuh_agent_sources_centos6_or_greater>`      | Install Wazuh agent for CentOS 6 or greater via sources.              |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------+
@@ -20,5 +20,5 @@ The Wazuh agent is available for CentOS 6 or greater, and can be installed via p
     :hidden:
     :maxdepth: 0
 
-    wazuh_agent_packages_centos6_or_greater
+    wazuh_agent_package_centos6_or_greater
     wazuh_agent_sources_centos6_or_greater
