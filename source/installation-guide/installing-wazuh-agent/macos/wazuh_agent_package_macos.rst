@@ -5,7 +5,7 @@
 Install Wazuh agent on macOS from package
 =========================================
 
-The macOS agent can be downloaded from :doc:`packages list<../../packages-list/index>`. You can install it by using the command line or following the GUI steps:
+The macOS agent can be downloaded from :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
 
   a) Using the command line, you can choose installation or deployment:
 
@@ -35,7 +35,7 @@ The macOS agent can be downloaded from :doc:`packages list<../../packages-list/i
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
 
-Now that the agent is installed, if you didn't use the deployment method, you will now have to register and configure the agent to communicate with the manager. For more information about this process, please visit :doc:`user manual<../../../user-manual/registering/index>`.
+Now that the agent is installed, if you didn't use the deployment method, you will now have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
 Uninstall
 ---------
