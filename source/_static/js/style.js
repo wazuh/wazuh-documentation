@@ -161,12 +161,6 @@ $(function() {
   scrollNavbar();
   headerSticky();
 
-  setTimeout(function() {
-    if ($('#page').hasClass('no-latest-docs')) {
-      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
-    }
-  }, 500);
-
   $('#navbar').on('mousemove', function(e) {
     pageHover = 'nav';
   });
@@ -223,9 +217,6 @@ $(function() {
     documentScroll = $(window).scrollTop();
     containerNavHeight = parseInt($('#navbar-globaltoc').outerHeight());
     navHeight = parseInt($('#globaltoc').outerHeight());
-    if ($('#page').hasClass('no-latest-docs')) {
-      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
-    }
     /* Update height of navbar */
     heightNavbar();
     /* If the coursor isn't in the navbar */
@@ -331,6 +322,7 @@ $(function() {
     }
 
     $('.globaltoc li.initial').removeClass('initial');
+    completelyHideMenuItems();
     return false;
   });
 
@@ -352,6 +344,20 @@ $(function() {
       $(this).addClass('initial').addClass('show');
     });
     $('#navbar-globaltoc').removeClass('hidden');
+    completelyHideMenuItems();
+  }
+
+  /**
+   * Completely hides the visually hidden elements
+   */
+  function completelyHideMenuItems() {
+    $('#navbar-globaltoc li ul').each(function() {
+      if ( $(this).closest('li').hasClass('show') ) {
+        this.hidden = false;
+      } else {
+        this.hidden = true;
+      }
+    });
   }
 
   /**
