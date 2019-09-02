@@ -72,11 +72,6 @@ Installing the Wazuh API
   .. code-block:: console
 
     # yum install wazuh-api
-Install the Wazuh API. It will update NodeJS if it is required:
-
-  .. code-block:: console
-
-    # apt-get install wazuh-api
 
 3. (Optional) By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. It is highly recommended that you secure the Wazuh API by following the steps below:
 
