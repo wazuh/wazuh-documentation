@@ -59,8 +59,9 @@ $(function() {
 
   /* Show the hidden menu */
   setTimeout(function() {
-    $('#navbar-globaltoc').removeClass('hidden');
-  }, 500);
+    $('#navbar').removeClass('hidden');
+    $('.central-page-area:before').css({'content': 'none'});
+  }, 100);
 
   $(window).on('hashchange', function() {
     updateFromHash();
