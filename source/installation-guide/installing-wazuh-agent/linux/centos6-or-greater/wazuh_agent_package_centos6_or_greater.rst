@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_centos6_or_greater:
 
-CentOS 6 or greater
-===================
+Install Wazuh agent on centOS from package
+==========================================
 
 The RPM package is suitable for CentOS 6 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

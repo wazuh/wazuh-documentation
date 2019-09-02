@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_ubuntu12.04_or_greater:
 
-Ubuntu 12.04 or greater
-=======================
+Install Wazuh agent on Ubuntu from sources
+==========================================
 
 This guide describes how to install the Wazuh agent from source code for Ubuntu 12.04 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

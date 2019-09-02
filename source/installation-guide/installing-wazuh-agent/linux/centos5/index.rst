@@ -2,15 +2,15 @@
 
 .. _wazuh_agent_centos5_index:
 
-Centos 5
-========
+Install Wazuh agent on CentOS 5
+===============================
 
 The Wazuh agent is available for CentOS 5, and can be installed via package:
 
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                          | Description                                                           |
 +===============================================================+=======================================================================+
-| :ref:`Package installation <wazuh_agent_package_centos5>`     | Install Wazuh agent for CentOS 5 via package.                         |
+| :ref:`From package <wazuh_agent_package_centos5>`             | Install Wazuh agent for CentOS 5 via package.                         |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. toctree::

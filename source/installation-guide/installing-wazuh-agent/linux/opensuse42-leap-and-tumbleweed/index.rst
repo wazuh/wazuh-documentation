@@ -2,17 +2,18 @@
 
 .. _wazuh_agent_opensuse42_or_greater_index:
 
-OpenSUSE 42, Leap and Tumbleweed
-=================================
+Install Wazuh agent on OpenSUSE 42, Leap and Tumbleweed
+=======================================================
+
 
 The Wazuh agent is available for OpenSUSE 42, Leap and Tumbleweed, and can be installed via package or sources:
 
 +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
 | Type                                                                                 | Description                                                             |
 +======================================================================================+=========================================================================+
-| :ref:`Package installation <wazuh_agent_package_opensuse42_or_greater>`              | Install Wazuh agent for OpenSUSE 42, Leap and Tumbleweed via package.   |
+| :ref:`From package <wazuh_agent_package_opensuse42_or_greater>`                      | Install Wazuh agent for OpenSUSE 42, Leap and Tumbleweed via package.   |
 +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
-| :ref:`Sources installation <wazuh_agent_sources_opensuse42_or_greater>`              | Install Wazuh agent for OpenSUSE 42, Leap and Tumbleweed via sources.   |
+| :ref:`From sources <wazuh_agent_sources_opensuse42_or_greater>`                      | Install Wazuh agent for OpenSUSE 42, Leap and Tumbleweed via sources.   |
 +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
 
 

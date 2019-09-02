@@ -10,7 +10,7 @@ The Wazuh agent is available for macOS, and can be installed via package:
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                          | Description                                                           |
 +===============================================================+=======================================================================+
-| :ref:`Package installation <wazuh_agent_package_macos>`       | Install Wazuh agent for macOS via package.                            |
+| :ref:`From package <wazuh_agent_package_macos>`               | Install Wazuh agent for macOS via package.                            |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. rst-class:: d-none

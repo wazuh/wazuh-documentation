@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_suse12:
 
-SUSE 12
-=======
+Install Wazuh agent on SUSE 12 from package
+===========================================
 
 The RPM package is suitable for installation on SUSE 12. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

@@ -10,9 +10,9 @@ The Wazuh agent is available for Windows, and can be installed via package or so
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                          | Description                                                           |
 +===============================================================+=======================================================================+
-| :ref:`Package installation <wazuh_agent_package_windows>`     | Install Wazuh agent for Windows via package.                          |
+| :ref:`From package <wazuh_agent_package_windows>`             | Install Wazuh agent for Windows via package.                          |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Sources installation <wazuh_agent_package_windows>`     | Install Wazuh agent for Windows via sources.                          |
+| :ref:`From sources <wazuh_agent_package_windows>`             | Install Wazuh agent for Windows via sources.                          |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. rst-class:: d-none

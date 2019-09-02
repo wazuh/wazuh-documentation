@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_solaris11:
 
-Installation from package
-==========================
+Install Wazuh agent on Solaris 11 from package
+==============================================
 
 The Wazuh agent for Solaris can be downloaded from our :ref:`packages list<packages>`. The current version has been tested on Solaris 11 version 5.11. Install the agent as follows:
 

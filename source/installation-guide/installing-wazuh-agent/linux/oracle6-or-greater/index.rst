@@ -2,17 +2,17 @@
 
 .. _wazuh_agent_oracle6_or_greater_index:
 
-Oracle Linux 6 or greater
-=========================
+Install Wazuh agent on Oracle Linux
+===================================
 
 The Wazuh agent is available for Oracle Linux 6 or greater, and can be installed via package or sources:
 
 +---------------------------------------------------------------------------+--------------------------------------------------------------------------------+
 | Type                                                                      | Description                                                                    |
 +===========================================================================+================================================================================+
-| :ref:`Package installation <wazuh_agent_package_oracle6_or_greater>`      | Install Wazuh agent for Oracle Linux 6 or greater via package.                 |
+| :ref:`From package <wazuh_agent_package_oracle6_or_greater>`              | Install Wazuh agent for Oracle Linux 6 or greater via package.                 |
 +---------------------------------------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`Sources installation <wazuh_agent_sources_oracle6_or_greater>`      | Install Wazuh agent for Oracle Linux 6 or greater via sources.                 |
+| :ref:`From sources <wazuh_agent_sources_oracle6_or_greater>`              | Install Wazuh agent for Oracle Linux 6 or greater via sources.                 |
 +---------------------------------------------------------------------------+--------------------------------------------------------------------------------+
 
 

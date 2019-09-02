@@ -10,7 +10,7 @@ The Wazuh agent is available for HP-UX, and can be installed via package:
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                          | Description                                                           |
 +===============================================================+=======================================================================+
-| :ref:`Package installation <wazuh_agent_package_hpux>`        | Install Wazuh agent for HPU-UX via package.                           |
+| :ref:`From package <wazuh_agent_package_hpux>`                | Install Wazuh agent for HPU-UX via package.                           |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. rst-class:: d-none

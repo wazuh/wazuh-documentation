@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_amazon:
 
-Amazon Linux 1 or greater
-=========================
+Install Wazuh agent on Amazon Linux from package
+================================================
 
 The RPM package is suitable for installation on Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :doc:`Install Wazuh agent on Linux <../../index>`.
 

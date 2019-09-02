@@ -10,7 +10,7 @@ The Wazuh agent is available for AIX, and can be installed via package:
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                          | Description                                                           |
 +===============================================================+=======================================================================+
-| :ref:`Package installation <wazuh_agent_package_aix>`         | Install Wazuh agent for AIX via package.                              |
+| :ref:`From package <wazuh_agent_package_aix>`                 | Install Wazuh agent for AIX via package.                              |
 +---------------------------------------------------------------+-----------------------------------------------------------------------+
 
 .. rst-class:: d-none

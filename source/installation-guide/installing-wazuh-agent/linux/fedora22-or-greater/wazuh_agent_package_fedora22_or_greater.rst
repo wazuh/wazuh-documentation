@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_fedora22_or_greater:
 
-Fedora 22 or greater
-====================
+Install Wazuh agent on Fedora from package
+==========================================
 
 The RPM package is suitable for installation on Fedora 22 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

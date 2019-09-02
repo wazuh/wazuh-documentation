@@ -2,10 +2,10 @@
 
 .. _wazuh_agent_package_aix:
 
-Installation from package
-=========================
+Install Wazuh agent on AIX from package
+=======================================
 
-The Wazuh agent for AIX can be downloaded from our :doc:`packages list <../../packages-list/index>`. You can choose installation or a deployment:
+The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages>`. You can choose installation or a deployment:
 
   a) Installation:
 
@@ -13,7 +13,7 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list <../../pa
 
       # rpm -ivh wazuh-agent-3.9.5-1.aix.ppc.rpm
 
-    With this simple installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../../user-manual/registering/index>`.
+    With this simple installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
   b) Deployment:
 

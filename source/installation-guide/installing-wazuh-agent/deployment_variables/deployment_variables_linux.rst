@@ -2,7 +2,6 @@
 
 .. _deployment_variables_linux:
 
-
 Deployment variables for Linux
 ==============================
 
