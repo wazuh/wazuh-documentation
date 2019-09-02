@@ -16,7 +16,6 @@ $(function() {
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
     'monitoring',
-    'release-notes/index',
     'user-manual/index',
     'user-manual/agents/index',
     'user-manual/agents/remove-agents/index',
@@ -73,7 +72,6 @@ $(function() {
    */
   function updateFromHash() {
     loc = location.hash;
-    $('.globaltoc .leaf, .globaltoc a.current').removeClass('current');
     selectLeaf(loc);
   }
 
