@@ -20,5 +20,3 @@ The Wazuh agent is available for AIX, and can be installed via package:
     :maxdepth: 2
 
     wazuh_agent_package_aix
-
-

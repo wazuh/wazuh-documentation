@@ -24,4 +24,3 @@ The Wazuh agent is available for Windows, and can be installed via package or so
     wazuh_agent_package_windows
     wazuh_agent_sources_windows
 
-

@@ -57,7 +57,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent
 
-    See the following document for additional deployment options: :ref:`deployment variables <deployment_variables>`.
+    See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 
 2. **(Optional)** Disable the Wazuh updates:
 

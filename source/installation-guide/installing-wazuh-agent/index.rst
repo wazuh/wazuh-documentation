@@ -51,5 +51,3 @@ There are several options to install a Wazuh agent, depending on the operating s
     hpux/index
     aix/index
     deployment_variables
-    deployment_variables_windows
-

@@ -22,3 +22,4 @@ The Wazuh agent is available for macOS, and can be installed via package:
     wazuh_agent_package_macos
 
 
+
