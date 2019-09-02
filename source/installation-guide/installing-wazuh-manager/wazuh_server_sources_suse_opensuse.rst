@@ -118,35 +118,30 @@ Installing Wazuh API
 
 3. (Optional) By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. It is highly recommended that you secure the Wazuh API by following the steps below:
 
-  In order to enable HTTPS, you can generate your own certificate or generate it automatically by using the script ``/var/ossec/api/scripts/configure_api.sh``.
+  The script ``/var/ossec/api/scripts/configure_api.sh`` is a guided script that will help you on:
 
-  .. note::
-    This script allows you to change the port used by the Wazuh API to handle the incoming HTTP requests. The port 55000 is used by default.
+    a) Enabling HTTPS. You can generate your own certificate or generate it automatically by using the script.
+    b) Changing the the port used by the Wazuh API to handle the incoming HTTP (or HTTPS) requests. The port `55000` is used by default.
+    c) Changing the default credentials. By default, you can access the Wazuh API by typing user "foo" and password "bar". If you did not use the script you can still change it as follows:
 
-    **Change the default credentials:**
+      .. code-block:: console
 
-    The ``configure_api.sh`` script allows you to change the API's user. If you did not use the script you can still change it as follows:
+        # cd /var/ossec/api/configuration/auth
+        # node htpasswd -c user myUserName
 
-    .. code-block:: console
+  The script will ask you for the required information. After that, you will then need to restart the ``wazuh-api`` service for the change to take effect.
 
-      # cd /var/ossec/api/configuration/auth
-      # node htpasswd -c user myUserName
+    * For Systemd:
 
-    By default, you can access the Wazuh API by typing user "foo" and password "bar".
+      .. code-block:: console
 
-  You will then need to restart the ``wazuh-api`` service for the change to take effect.
+        # systemctl restart wazuh-api
 
-  * For Systemd:
+    * For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api restart
+        # service wazuh-api restart
 
   .. note::
     If you do not need to access to the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
