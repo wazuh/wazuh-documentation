@@ -73,20 +73,18 @@ Installing the Wazuh API
 
     # zypper install wazuh-api
 
-3. (Optional) By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. It is highly recommended that you secure the Wazuh API by following the steps below:
+3. (Optional) By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. It is highly recommended that you secure the Wazuh API. The script ``/var/ossec/api/scripts/configure_api.sh`` is a guided script that will help you to:
 
-  The script ``/var/ossec/api/scripts/configure_api.sh`` is a guided script that will help you on:
-
-    a) Enabling HTTPS. You can generate your own certificate or generate it automatically by using the script.
-    b) Changing the the port used by the Wazuh API to handle the incoming HTTP (or HTTPS) requests. The port `55000` is used by default.
-    c) Changing the default credentials. By default, you can access the Wazuh API by typing user "foo" and password "bar". If you did not use the script you can still change it as follows:
+    a) Enable HTTPS. You can generate your own certificate or generate it automatically by using the script.
+    b) Change the port used by the Wazuh API to handle the incoming HTTP (or HTTPS) requests. The port `55000` is used by default.
+    c) Change the default credentials. By default, you can access the Wazuh API by typing user "foo" and password "bar". If you did not use the script you can still change it as follows:
 
       .. code-block:: console
 
         # cd /var/ossec/api/configuration/auth
         # node htpasswd -c user myUserName
 
-  The script will ask you for the required information. After that, you will then need to restart the ``wazuh-api`` service for the change to take effect.
+  The script will ask you for the required information. After that, you will need to restart the wazuh-api service for the change to take effect.
 
     * For Systemd:
 
@@ -101,7 +99,7 @@ Installing the Wazuh API
         # service wazuh-api restart
 
   .. note::
-    If you do not need to access to the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
+    If you do not need to access the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
 
 4. Once the process is complete, you can check the service status with:
 
