@@ -195,7 +195,7 @@ $(function() {
       noticeHeight = parseInt($('.no-latest-notice').outerHeight());
     }
 
-    if ($(window).width() >= 992) {
+    if ($(window).outerWidth() >= 992) {
       $('html').css({'overflow-y': 'auto'});
     }
 
@@ -221,7 +221,7 @@ $(function() {
     if (((pageFocus == 'document' && pageHover == 'document') ||
       (pageMouseWheel && pageFocus == 'nav' && pageHover == 'nav') ||
       (!navbarClick && !pageMouseWheel && pageFocus == 'document' && pageHover == 'nav')
-    ) && $(window).width() >= 992) {
+    ) && $(window).outerWidth() >= 992) {
       /* Set the new scroll of navbar */
       scrollNavbar();
     }
@@ -241,7 +241,7 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
-    if ($(window).width() >= 992) {
+    if ($(window).outerWidth() >= 992) {
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': (noticeHeight+navbarTop-documentScroll)+'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - '+ noticeHeight +'px + '+documentScroll+'px)'});
@@ -436,12 +436,12 @@ $(function() {
 
   /* -- Add funcionability for cloud-info --------------------------------------------------------------------------- */
 
-  if ($(window).width() < 1200) {
+  if ($(window).outerWidth() < 1200) {
     $('#capabilities .left .topic.active p').not('.topic-title').slideDown(300);
   }
 
   $(window).resize(function() {
-    if ($(window).width() >= 1200) {
+    if ($(window).outerWidth() >= 1200) {
       $('#capabilities .left .topic p').not('.topic-title').css({'display': 'none'});
       if ($('#capabilities .left .topic.active').length > 0) {
         capabilitiesHome($('#capabilities .left .topic.active'));
@@ -477,7 +477,7 @@ $(function() {
         eleOther = false;
       }
 
-      if ($(window).width() >= 1200) {
+      if ($(window).outerWidth() >= 1200) {
         let className = '';
         className = $(ele).attr('class');
         className = className.replace(' topic', '');
