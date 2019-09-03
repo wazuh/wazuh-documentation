@@ -39,7 +39,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
     # apt-get update
 
-Installing the Wazuh Manager
+Installing the Wazuh manager
 ----------------------------
 
 On your terminal, install the Wazuh manager:
