@@ -74,7 +74,35 @@ Installing the Wazuh API
 
     # yum install wazuh-api
 
-3. Once the process is complete, you can check the service status with:
+3. (Optional) By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. It is highly recommended that you secure the Wazuh API. The script ``/var/ossec/api/scripts/configure_api.sh`` is a guided script that will help you to:
+
+    a) Enable HTTPS. You can generate your own certificate or generate it automatically by using the script.
+    b) Change the port used by the Wazuh API to handle the incoming HTTP (or HTTPS) requests. The port `55000` is used by default.
+    c) Change the default credentials. By default, you can access the Wazuh API by typing user "foo" and password "bar". If you did not use the script you can still change it as follows:
+
+      .. code-block:: console
+
+        # cd /var/ossec/api/configuration/auth
+        # node htpasswd -c user myUserName
+
+  The script will ask you for the required information. After that, you will need to restart the wazuh-api service for the change to take effect.
+
+    * For Systemd:
+
+      .. code-block:: console
+
+        # systemctl restart wazuh-api
+
+    * For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-api restart
+
+  .. note::
+    If you do not need to access the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
+
+4. Once the process is complete, you can check the service status with:
 
   * For Systemd:
 
@@ -91,7 +119,7 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-4. (Optional) Disable the Wazuh repository:
+5. (Optional) Disable the Wazuh repository:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
