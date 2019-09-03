@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_suse_opensuse:
+.. _wazuh_server_rpm_opensuse:
 
-Install Wazuh server on SUSE/OpenSUSE from packages
-===================================================
+Install Wazuh server on OpenSUSE from packages
+==============================================
 
-For SUSE 12, OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -98,7 +98,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_suse_opensuse_filebeat:
+.. _wazuh_server_rpm_opensuse_filebeat:
 
 Installing Filebeat
 -------------------

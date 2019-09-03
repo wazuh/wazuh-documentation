@@ -5,14 +5,14 @@
 Install Wazuh server on Amazon Linux
 ====================================
 
-The Wazuh server is available for Amazon Linux 1 and 2, and can be installed via packages or sources:
+The Wazuh server is available for Amazon Linux 1 or greater, and can be installed via packages or sources:
 
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`From packages <wazuh_server_rpm_amazon>`            | Install Wazuh server for Amazon Linux via packages.                   |
+| :ref:`From packages <wazuh_server_rpm_amazon>`            | Install Wazuh server for Amazon Linux 1 or greater via packages.      |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`From sources <wazuh_server_sources_amazon>`         | Install Wazuh server for Amazon Linux via sources.                    |
+| :ref:`From sources <wazuh_server_sources_amazon>`         | Install Wazuh server for Amazon Linux 1 or greater via sources.       |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 
 

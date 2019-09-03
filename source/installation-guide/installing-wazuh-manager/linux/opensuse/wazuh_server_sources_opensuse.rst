@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_sources_suse_opensuse:
+.. _wazuh_server_sources_opensuse:
 
-Install Wazuh server on SUSE/OpenSUSE from sources
-==================================================
+Install Wazuh server on OpenSUSE from sources
+=============================================
 
-This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
+This guide describes how to install the manager and API for OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
 Installing Wazuh manager
 ------------------------
@@ -98,17 +98,9 @@ Installing Wazuh API
 
     .. code-block:: console
 
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-      # zypper -y install nodejs
-      # npm config set user 0
-
-    .. note:: If you have OpenSUSE NodeJS is available in the main repositories. You can install it using:
-
-        .. code-block:: console
-
           # zypper install nodejs6
 
-        You can find more information in the `NodeJS documentation <https://nodejs.org/en/download/package-manager/#opensuse-and-sle>`_.
+    You can find more information in the `NodeJS documentation <https://nodejs.org/en/download/package-manager/#opensuse-and-sle>`_.
 
 2. Download and execute the installation script:
 
@@ -138,7 +130,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_),
-the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_suse_opensuse_filebeat>`.
+the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_opensuse_filebeat>`.
 
 Next steps
 ----------

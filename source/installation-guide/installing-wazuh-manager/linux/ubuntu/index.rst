@@ -1,18 +1,18 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_debian:
+.. _wazuh_server_ubuntu:
 
-Install Wazuh server on Debian
-==============================
+Install Wazuh server on Ubuntu
+===============================
 
-The Wazuh server is available for Debian 7 or greater, and can be installed via packages or sources:
+The Wazuh server is available for Ubuntu 12.04 or greater, and can be installed via packages or sources:
 
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`From packages <wazuh_server_deb>`                   | Install Wazuh server for Debian 7 or greater via packages.            |
+| :ref:`From packages <wazuh_server_ubuntu>`                | Install Wazuh server for Ubuntu 12.04 or greater via packages.        |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`From sources <wazuh_server_sources_deb>`            | Install Wazuh server for Debian 7 or greater via sources.             |
+| :ref:`From sources <wazuh_server_sources_ubuntu>`         | Install Wazuh server for Ubuntu 12.04 or greater via sources.         |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 
 
@@ -20,5 +20,5 @@ The Wazuh server is available for Debian 7 or greater, and can be installed via 
     :hidden:
     :maxdepth: 0
 
-    wazuh_server_deb
-    wazuh_server_sources_deb
+    wazuh_server_packages_ubuntu
+    wazuh_server_sources_ubuntu

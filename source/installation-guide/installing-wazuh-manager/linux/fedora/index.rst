@@ -10,9 +10,9 @@ The Wazuh server is available for Fedora  22 or greater, and can be installed vi
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`From packages <wazuh_server_rpm_fedora>`            | Install Wazuh server for Fedora via packages.                         |
+| :ref:`From packages <wazuh_server_rpm_fedora>`            | Install Wazuh server for Fedora 22 or greater via packages.           |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`From sources <wazuh_server_sources_fedora>`         | Install Wazuh server for Fedora via sources.                          |
+| :ref:`From sources <wazuh_server_sources_fedora>`         | Install Wazuh server for Fedora 22 or greater via sources.            |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 
 

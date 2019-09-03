@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_sources_oracle:
+.. _wazuh_server_sources_ubuntu:
 
-Installing Wazuh server on Oracle Linux from sources
-====================================================
+Install Wazuh server on Ubuntu from sources
+===========================================
 
-This guide describes how to install the manager and API for Oracle Linux 6 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
+This guide describes how to install the manager and API for Ubuntu 12.04 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
 Installing Wazuh manager
 ------------------------
@@ -14,18 +14,20 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # yum install make gcc policycoreutils-python automake autoconf libtool
+      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
     1.1 **Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
       To install the build dependencies of CPython, follow these steps:
 
-      .. code-block:: console
+        .. code-block:: console
 
-          # yum install epel-release yum-utils -y
-          # yum-builddep python34 -y
+          # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+          # apt-get update
+          # apt-get build-dep python3.6 -y
 
       .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
+
 
 2. Download and extract the latest version:
 
@@ -98,9 +100,15 @@ Installing Wazuh API
 
     .. code-block:: console
 
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-      # yum -y install nodejs
+      # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      # apt-get install -y nodejs
       # npm config set user 0
+
+  .. note::
+
+    If you are using **Ubuntu 12.04 (Precise)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
+
+    For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 
 2. Download and execute the installation script:
 
@@ -130,7 +138,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_),
-the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_rpm_oracle_filebeat>`.
+the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend :ref:`installing Filebeat via repository package  <wazuh_server_packages_ubuntu_filebeat>`.
 
 Next steps
 ----------

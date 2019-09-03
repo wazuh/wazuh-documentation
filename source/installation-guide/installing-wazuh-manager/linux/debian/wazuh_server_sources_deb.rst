@@ -2,10 +2,10 @@
 
 .. _wazuh_server_sources_deb:
 
-Install Wazuh server on Debian/Ubuntu from sources
-==================================================
+Install Wazuh server on Debian from sources
+===========================================
 
-This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
+This guide describes how to install the manager and API for Debian 7 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
 Installing Wazuh manager
 ------------------------
@@ -19,16 +19,6 @@ Installing Wazuh manager
     1.1 **Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
       To install the build dependencies of CPython, follow these steps:
-
-      * For Ubuntu based system:
-
-        .. code-block:: console
-
-          # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
-          # apt-get update
-          # apt-get build-dep python3.6 -y
-
-      * For Debian based system:
 
         .. code-block:: console
 
@@ -116,7 +106,7 @@ Installing Wazuh API
 
   .. note::
 
-    If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
+    If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
 
     For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 

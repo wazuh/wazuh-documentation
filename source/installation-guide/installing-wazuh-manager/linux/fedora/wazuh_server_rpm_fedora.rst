@@ -5,7 +5,7 @@
 Install Wazuh server on Fedora from packages
 ============================================
 
-For Fedora platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Fedora 22 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 

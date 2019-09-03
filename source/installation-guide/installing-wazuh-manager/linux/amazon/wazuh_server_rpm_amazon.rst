@@ -5,7 +5,7 @@
 Install Wazuh server on Amazon Linux from packages
 ==================================================
 
-For Amazon Linux 1 and 2, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Amazon Linux 1 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 

@@ -2,10 +2,10 @@
 
 .. _wazuh_server_deb:
 
-Install Wazuh server on Debian/Ubuntu from packages
-===================================================
+Install Wazuh server on Debian from packages
+============================================
 
-For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Debian 7 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -73,7 +73,7 @@ Installing the Wazuh API
 
   .. note::
 
-      If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
+      If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
 
   and then, install NodeJS:
 

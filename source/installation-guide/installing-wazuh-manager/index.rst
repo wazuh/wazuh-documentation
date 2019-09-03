@@ -24,13 +24,13 @@ There are several options for installing the Wazuh server depending on the opera
 +-------------------------------+---------------------------------------------------------------+
 | Oracle Linux                  | :ref:`6 or greater <wazuh_server_oracle>`                     |
 +-------------------------------+---------------------------------------------------------------+
-| OpenSUSE                      | :ref:`42 or greater <wazuh_server_suse-opensuse>`             |
+| OpenSUSE                      | :ref:`42 or greater <wazuh_server_opensuse>`                  |
 +-------------------------------+---------------------------------------------------------------+
 | Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_server_rhel>`                       |
 +-------------------------------+---------------------------------------------------------------+
-| SUSE                          | :ref:`12 <wazuh_server_suse-opensuse>`                        |
+| SUSE                          | :ref:`12 <wazuh_server_suse>`                                 |
 +-------------------------------+---------------------------------------------------------------+
-| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_debian>`                 |
+| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_ubuntu>`                 |
 +-------------------------------+---------------------------------------------------------------+
 
 
@@ -50,8 +50,10 @@ There are some related additional configurations that can be applied:
     linux/centos/index
     linux/debian/index
     linux/fedora/index
+    linux/opensuse/index
     linux/oracle/index
     linux/rhel/index
-    linux/suse-opensuse/index
+    linux/suse/index
+    linux/ubuntu/index
     securing_api
 
