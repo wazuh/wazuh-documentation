@@ -10,7 +10,7 @@ The Wazuh server is available for CentOS 6 or greater, and can be installed via 
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`From packages <wazuh_server_rpm_centos>`            | Install Wazuh server for CentOS 6 or greater via packages.            |
+| :ref:`From packages <wazuh_server_packages_centos>`       | Install Wazuh server for CentOS 6 or greater via packages.            |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`From sources <wazuh_server_sources_centos>`         | Install Wazuh server for CentOS 6 or greater via sources.             |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
@@ -20,5 +20,5 @@ The Wazuh server is available for CentOS 6 or greater, and can be installed via 
     :hidden:
     :maxdepth: 0
 
-    wazuh_server_rpm_centos
+    wazuh_server_packages_centos
     wazuh_server_sources_centos

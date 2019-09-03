@@ -10,7 +10,7 @@ The Wazuh server is available for Oracle Linux 6 or greater, and can be installe
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                      | Description                                                           |
 +===========================================================+=======================================================================+
-| :ref:`From packages <wazuh_server_rpm_oracle>`            | Install Wazuh server for Oracle Linux 6 or greater via packages.      |
+| :ref:`From packages <wazuh_server_packages_oracle>`       | Install Wazuh server for Oracle Linux 6 or greater via packages.      |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`From sources <wazuh_server_sources_oracle>`         | Install Wazuh server for Oracle Linux 6 or greater via sources.       |
 +-----------------------------------------------------------+-----------------------------------------------------------------------+
@@ -20,5 +20,5 @@ The Wazuh server is available for Oracle Linux 6 or greater, and can be installe
     :hidden:
     :maxdepth: 0
 
-    wazuh_server_rpm_oracle
+    wazuh_server_packages_oracle
     wazuh_server_sources_oracle

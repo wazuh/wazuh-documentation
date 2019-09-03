@@ -153,23 +153,23 @@ The following must be considered when configuring a Wazuh app:
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
     | Type                                                                   | Description                                                                       |
     +========================================================================+===================================================================================+
-    | :ref:`DEB packages <wazuh_server_rpm_amazon_filebeat>`                 | Install Filebeat on Amazon Linux 1 or greater.                                    |
+    | :ref:`DEB packages <wazuh_server_packages_amazon_filebeat>`            | Install Filebeat on Amazon Linux 1 or greater.                                    |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_centos_filebeat>`                 | Install Filebeat on CentOS 6 or greater.                                          |
+    | :ref:`RPM packages <wazuh_server_packages_centos_filebeat>`            | Install Filebeat on CentOS 6 or greater.                                          |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian 7 or greater.                                          |
+    | :ref:`DEB packages <wazuh_server_packages_deb_filebeat>`               | Install Filebeat on Debian 7 or greater.                                          |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_fedora_filebeat>`                 | Install Filebeat on Fedora 22 or greater.                                         |
+    | :ref:`RPM packages <wazuh_server_packages_fedora_filebeat>`            | Install Filebeat on Fedora 22 or greater.                                         |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_server_rpm_opensuse_filebeat>`               | Install Filebeat on OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed.  |
+    | :ref:`DEB packages <wazuh_server_packages_opensuse_filebeat>`          | Install Filebeat on OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed.  |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_oracle_filebeat>`                 | Install Filebeat on Oracle Linux 6 or greater.                                    |
+    | :ref:`RPM packages <wazuh_server_packages_oracle_filebeat>`            | Install Filebeat on Oracle Linux 6 or greater.                                    |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_rhel_filebeat>`                   | Install Filebeat on Red Hat Enterprise Linux 6 or greater.                        |
+    | :ref:`RPM packages <wazuh_server_packages_rhel_filebeat>`              | Install Filebeat on Red Hat Enterprise Linux 6 or greater.                        |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`RPM packages <wazuh_server_rpm_suse_filebeat>`                   | Install Filebeat on SUSE 12.                                                      |
+    | :ref:`RPM packages <wazuh_server_packages_suse_filebeat>`              | Install Filebeat on SUSE 12.                                                      |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
-    | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Ubuntu 12.04 or greater.                                      |
+    | :ref:`DEB packages <wazuh_server_packages_ubuntu_filebeat>`            | Install Filebeat on Ubuntu 12.04 or greater.                                      |
     +------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
     **Installing Splunk forwarder:**

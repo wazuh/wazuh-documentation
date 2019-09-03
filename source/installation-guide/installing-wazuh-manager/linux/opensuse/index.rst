@@ -10,7 +10,7 @@ The Wazuh server is available OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
 +---------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
 | Type                                                                | Description                                                                                    |
 +=====================================================================+================================================================================================+
-| :ref:`From packages <wazuh_server_rpm_opensuse>`                    | Install Wazuh server for OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed via packages.      |
+| :ref:`From packages <wazuh_server_packages_opensuse>`               | Install Wazuh server for OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed via packages.      |
 +---------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
 | :ref:`From sources <wazuh_server_sources_opensuse>`                 | Install Wazuh server for OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed via sources.       |
 +---------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
@@ -20,5 +20,5 @@ The Wazuh server is available OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
     :hidden:
     :maxdepth: 2
 
-    wazuh_server_rpm_opensuse
+    wazuh_server_packages_opensuse
     wazuh_server_sources_opensuse

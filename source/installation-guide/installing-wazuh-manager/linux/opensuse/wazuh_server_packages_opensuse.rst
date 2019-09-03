@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_oracle:
+.. _wazuh_server_packages_opensuse:
 
-Install Wazuh server on Oracle Linux from packages
-==================================================
+Install Wazuh server on OpenSUSE from packages
+==============================================
 
-For Oracle Linux 6 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -19,7 +19,7 @@ To set up the repository, run this command:
   .. code-block:: console
 
     # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
     gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -29,7 +29,6 @@ To set up the repository, run this command:
     protect=1
     EOF
 
-
 Installing the Wazuh manager
 ----------------------------
 
@@ -37,7 +36,7 @@ The next step is to install the Wazuh manager on your system:
 
   .. code-block:: console
 
-    # yum install wazuh-manager
+    # zypper install wazuh-manager
 
 Once the process is complete, you can check the service status with:
 
@@ -66,13 +65,13 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # yum install nodejs
+    # zypper install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
-    # yum install wazuh-api
+    # zypper install wazuh-api
 
 3. Once the process is complete, you can check the service status with:
 
@@ -97,9 +96,9 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_oracle_filebeat:
+.. _wazuh_server_packages_opensuse_filebeat:
 
 Installing Filebeat
 -------------------
@@ -113,7 +112,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
   .. code-block:: console
 
     # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-    # cat > /etc/yum.repos.d/elastic.repo << EOF
+    # cat > /etc/zypp/repos.d/elastic.repo << EOF
     [elasticsearch-7.x]
     name=Elasticsearch repository for 7.x packages
     baseurl=https://artifacts.elastic.co/packages/7.x/yum
@@ -128,7 +127,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-7.3.0
+    # zypper install filebeat-7.3.0
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
@@ -179,7 +178,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
 
 Next steps
 ----------
@@ -193,7 +192,7 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 
-      # yum remove wazuh-manager wazuh-api
+      # zypper remove wazuh-manager wazuh-api
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 
@@ -201,4 +200,4 @@ To uninstall filebeat:
 
     .. code-block:: console
 
-      # yum remove filebeat
+      # zypper remove filebeat

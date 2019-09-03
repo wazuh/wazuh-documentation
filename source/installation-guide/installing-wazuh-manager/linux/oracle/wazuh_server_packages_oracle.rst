@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_centos:
+.. _wazuh_server_packages_oracle:
 
-Install Wazuh server on CentOS from packages
-============================================
+Install Wazuh server on Oracle Linux from packages
+==================================================
 
-For CentOS 6 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Oracle Linux 6 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -28,6 +28,7 @@ To set up the repository, run this command:
     baseurl=https://packages.wazuh.com/3.x/yum/
     protect=1
     EOF
+
 
 Installing the Wazuh manager
 ----------------------------
@@ -98,7 +99,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_centos_filebeat:
+.. _wazuh_server_packages_oracle_filebeat:
 
 Installing Filebeat
 -------------------
