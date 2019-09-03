@@ -537,7 +537,7 @@ Removes a list of groups.
 
 Delete agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes agents, using a list of them or a criterion based on the status or time of the last connection. The Wazuh API must be restarted after removing an agent.
+Removes agents, using a list of them or a criterion based on the status or time of the last connection.
 
 **Request**:
 
@@ -701,7 +701,7 @@ Adds a list of agents to the specified group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://localhost:55000/agents/group/dmz?pretty" -k
+	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents/group/dmz?pretty" -k
 
 **Example Response:**
 ::
@@ -1408,7 +1408,7 @@ Remove a list of agents of a group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://localhost:55000/agents/group/dmz?ids=001,002&pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/group/dmz?ids=001,002&pretty"
 
 **Example Response:**
 ::
@@ -1483,18 +1483,18 @@ Removes the group. Agents that were assigned to the removed group will automatic
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "msg": "All selected groups were removed",
-	      "ids": [
-	         "dmz"
-	      ],
-	      "affected_agents": [
-		     "001"
-		  ]
-	   }
-	}
+   {
+      "error": 0,
+      "data": {
+         "msg": "All selected groups were removed",
+         "ids": [
+            "dmz"
+         ],
+         "affected_agents": [
+            "001"
+         ]
+      }
+   }
 	
 
 Upload file into a group
@@ -2634,7 +2634,7 @@ Returns ossec.conf in JSON format.
 
 Get the cluster configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the cluster configuration
+Returns the cluster configuration.
 
 **Request**:
 
@@ -2792,7 +2792,7 @@ Returns the content of a local file (rules, decoders and lists).
 
 Update local file at any cluster node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Upload a local file (rules, decoders and lists) in a cluster node
+Upload a local file (rules, decoders and lists) in a cluster node.
 
 **Request**:
 
@@ -3344,7 +3344,7 @@ Nodes
 
 Get local node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the local node info
+Returns the local node info.
 
 **Request**:
 
@@ -3372,7 +3372,7 @@ Returns the local node info
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the node info
+Returns the node info.
 
 **Request**:
 
@@ -3487,7 +3487,7 @@ Restarts a specific node in cluster.
 
 	{
 	    "error": 0,
-	    "data": "Restarting manager"
+	    "data": "Restart request sent"
 	}
 
 Restart all nodes in cluster
@@ -3510,7 +3510,7 @@ Restarts all nodes in cluster.
 
 	{
 	    "error": 0,
-	    "data": "Restarting manager"
+	    "data": "Restart request sent"
 	}
 
 
@@ -5471,10 +5471,10 @@ Confirmation message.
 **Example Response:**
 ::
 
-	{
-	   "error": 1906,
-	   "message": "File does not exist"
-	}
+   {
+      "error": 0,
+      "data": "File was deleted"
+   }
 	
 
 Get local file
@@ -5953,7 +5953,7 @@ Restarts Wazuh Manager.
 
 	{
 	    "error": 0,
-	    "data": "Restarting manager"
+	    "data": "Restart request sent"
 	}
 
 
@@ -7195,13 +7195,316 @@ Returns the sca checks of an agent.
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 0,
-	      "items": []
-	   }
-	}
+   {
+      "error": 0,
+      "data": {
+         "totalItems": 16,
+         "items": [
+            {
+               "title": "Web vulnerability - .htaccess file compromised - auto append",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+               "id": 1015,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^.htaccess$ -> r:php_value auto_append_file;"
+                  }
+               ]
+            },
+            {
+               "title": "Web vulnerability - .htaccess file compromised",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+               "id": 1014,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^.htaccess$ -> r:RewriteCond \\S+HTTP_REFERERS \\S+google;"
+                  }
+               ]
+            },
+            {
+               "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode(POST))",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1013,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> .php$ -> r:eval\\(base64_decode\\(\\S_POST;"
+                  }
+               ]
+            },
+            {
+               "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode)",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1012,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> .php$ -> r:eval\\(base64_decode\\(\\paWYo;"
+                  }
+               ]
+            },
+            {
+               "title": "Web vulnerability - Outdated osCommerce (v2.2) installation",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1011,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^application_top.php$ -> r:'osCommerce 2.2-;"
+                  }
+               ]
+            },
+            {
+               "title": "Web vulnerability - Outdated Joomla installation",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1010,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^version.php$ -> IN r:var \\.RELEASE && r:'3.4.8';"
+                  }
+               ]
+            },
+            {
+               "title": "Web vulnerability - Outdated WordPress installation",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1009,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^version.php$ -> IN r:^\\.wp_version && >:$wp_version = '4.4.2';"
+                  }
+               ]
+            },
+            {
+               "title": "Web exploits: '.shell' is an uncommon file name inside htdocs - Possible compromise",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1008,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^.shell$;"
+                  }
+               ]
+            },
+            {
+               "title": "Web exploits: '...' is an uncommon file name inside htdocs - Possible compromise",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1007,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^...$;"
+                  }
+               ]
+            },
+            {
+               "title": "Web exploits: '.ssh' is an uncommon file name inside htdocs",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1006,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^.ssh$;"
+                  }
+               ]
+            },
+            {
+               "title": "Web exploits: 'id' is an uncommon file name inside htdocs - Possible compromise",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1005,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^id$;"
+                  }
+               ]
+            },
+            {
+               "title": "Web exploits: '.yop' is an uncommon file name inside htdocs - Possible compromise",
+               "status": "Not applicable",
+               "reason": "Directory /var/www not found",
+               "policy_id": "system_audit",
+               "id": 1004,
+               "result": "",
+               "compliance": [
+                  {
+                     "key": "pci_dss",
+                     "value": "6.5, 6.6, 11.4"
+                  }
+               ],
+               "rules": [
+                  {
+                     "type": "directory",
+                     "rule": "d:$web_dirs -> ^.yop$;"
+                  }
+               ]
+            },
+            {
+               "title": "PHP - Displaying of errors is enabled",
+               "status": "Not applicable",
+               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+               "policy_id": "system_audit",
+               "id": 1003,
+               "result": "",
+               "rules": [
+                  {
+                     "type": "file",
+                     "rule": "f:$php.ini -> r:^display_errors = On;"
+                  }
+               ]
+            },
+            {
+               "title": "PHP - Allow URL fopen is enabled",
+               "status": "Not applicable",
+               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+               "policy_id": "system_audit",
+               "id": 1002,
+               "result": "",
+               "rules": [
+                  {
+                     "type": "file",
+                     "rule": "f:$php.ini -> r:^allow_url_fopen = On;"
+                  }
+               ]
+            },
+            {
+               "title": "PHP - Expose PHP is enabled",
+               "status": "Not applicable",
+               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+               "policy_id": "system_audit",
+               "id": 1001,
+               "result": "",
+               "rules": [
+                  {
+                     "type": "file",
+                     "rule": "f:$php.ini -> r:^expose_php = On;"
+                  }
+               ]
+            },
+            {
+               "title": "PHP - Register globals are enabled",
+               "status": "Not applicable",
+               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+               "policy_id": "system_audit",
+               "id": 1000,
+               "result": "",
+               "rules": [
+                  {
+                     "type": "file",
+                     "rule": "f:$php.ini -> r:^register_globals = On;"
+                  }
+               ]
+            }
+         ]
+      }
+   }
 	
 
 Get security configuration assessment (SCA) database
@@ -7246,28 +7549,28 @@ Returns the sca database of an agent.
 **Example Response:**
 ::
 
-	{
-       "error": 0,
-       "data": {
-          "totalItems": 1,
-          "items": [
-             {
-                "hash_file": "bbc8852e2a222ebaa997afc26f258b1e79f38174a8979b11a1a047dc3f75390a",
-                "references": "https://www.cisecurity.org/cis-benchmarks/",
-                "score": 49,
-                "name": "CIS Benchmark for Red Hat Enterprise Linux 7",
-                "invalid": 3,
-                "end_scan": "2019-08-30 09:18:12",
-                "policy_id": "cis_rhel7",
-                "total_checks": 64,
-                "start_scan": "2019-08-30 09:18:12",
-                "pass": 30,
-                "fail": 31,
-                "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Red Hat Enterprise Linux 7 systems running on x86 and x64 platforms. This document was tested against Red Hat Enterprise Linux 7.4."
-             }
-          ]
-       }
-	}
+   {
+      "error": 0,
+      "data": {
+         "totalItems": 1,
+         "items": [
+            {
+               "hash_file": "bbc8852e2a222ebaa997afc26f258b1e79f38174a8979b11a1a047dc3f75390a",
+               "references": "https://www.cisecurity.org/cis-benchmarks/",
+               "score": 49,
+               "name": "CIS Benchmark for Red Hat Enterprise Linux 7",
+               "invalid": 3,
+               "end_scan": "2019-08-30 09:18:12",
+               "policy_id": "cis_rhel7",
+               "total_checks": 64,
+               "start_scan": "2019-08-30 09:18:12",
+               "pass": 30,
+               "fail": 31,
+               "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Red Hat Enterprise Linux 7 systems running on x86 and x64 platforms. This document was tested against Red Hat Enterprise Linux 7.4."
+            }
+         ]
+      }
+   }
 
 
 
