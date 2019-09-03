@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_centos:
 
-Install from sources
-====================
+Install Wazuh server on CentOS from sources
+===========================================
 
 This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 

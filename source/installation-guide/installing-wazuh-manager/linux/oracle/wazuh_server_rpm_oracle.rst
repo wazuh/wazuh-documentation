@@ -2,8 +2,8 @@
 
 .. _wazuh_server_rpm_oracle:
 
-Install from packages
-=====================
+Install Wazuh server on Oracle Linux from packages
+==================================================
 
 For Oracle Linux 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

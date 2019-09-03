@@ -2,17 +2,17 @@
 
 .. _wazuh_server_suse-opensuse:
 
-SUSE and OpenSUSE
-=================
+Install Wazuh server on SUSE and OpenSUSE
+=========================================
 
 The Wazuh server is available for SUSE 12 or OpenSUSE 42 or greater, and can be installed via packages or repositories:
 
 +---------------------------------------------------------------------+-----------------------------------------------------------------------+
 | Type                                                                | Description                                                           |
 +=====================================================================+=======================================================================+
-| :ref:`Packages installation <wazuh_server_rpm_suse_opensuse>`       | Install Wazuh server for SUSE and OpenSUSE via packages.              |
+| :ref:`From packages <wazuh_server_rpm_suse_opensuse>`               | Install Wazuh server for SUSE and OpenSUSE via packages.              |
 +---------------------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Sources installation <wazuh_server_sources_suse_opensuse>`    | Install Wazuh server for  SUSE and OpenSUSE via sources.              |
+| :ref:`From sources <wazuh_server_sources_suse_opensuse>`            | Install Wazuh server for SUSE and OpenSUSE via sources.               |
 +---------------------------------------------------------------------+-----------------------------------------------------------------------+
 
 

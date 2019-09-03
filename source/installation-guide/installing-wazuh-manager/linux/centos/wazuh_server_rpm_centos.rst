@@ -2,8 +2,8 @@
 
 .. _wazuh_server_rpm_centos:
 
-Install from packages
-=====================
+Install Wazuh server on CentOS from packages
+============================================
 
 For CentOS 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

@@ -2,8 +2,8 @@
 
 .. _wazuh_server_rpm_amazon:
 
-Install from packages
-=====================
+Install Wazuh server on Amazon Linux from packages
+==================================================
 
 For Amazon Linux 1 and 2, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

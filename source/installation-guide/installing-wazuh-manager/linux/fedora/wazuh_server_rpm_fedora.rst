@@ -2,8 +2,8 @@
 
 .. _wazuh_server_rpm_fedora:
 
-Install from packages
-=====================
+Install Wazuh server on Fedora from packages
+============================================
 
 For Fedora platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
