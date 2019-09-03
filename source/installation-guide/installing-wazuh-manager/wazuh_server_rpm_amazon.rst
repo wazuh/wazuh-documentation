@@ -29,7 +29,7 @@ To set up the repository, run this command:
     protect=1
     EOF
 
-Installing the Wazuh server
+Installing the Wazuh Manager
 ----------------------------
 
 The next step is to install the Wazuh manager on your system:
