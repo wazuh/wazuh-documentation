@@ -47,8 +47,8 @@ The diagrams below list the components that are run per host for single-host and
         installing-wazuh-manager/index
         installing-elastic-stack/index
         installing-wazuh-agent/index
+        installing-splunk/index
         virtual-machine
         packages-list/index
         compatibility_matrix/index
         securing_api
-
