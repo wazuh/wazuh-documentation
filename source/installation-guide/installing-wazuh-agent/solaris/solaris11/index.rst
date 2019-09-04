@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_solaris11:
 
-Install Wazuh agent on Solaris 11
-=================================
+Solaris 11
+==========
 
 The Wazuh agent is available for Solaris 11 i386 and Solaris 11 SPARC. The Wazuh agent can be installed via package or sources:
 

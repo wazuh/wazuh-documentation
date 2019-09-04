@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_oracle:
 
-Installing Wazuh server on Oracle Linux from sources
-====================================================
+Oracle Linux from sources
+=========================
 
 This guide describes how to install the manager and API for Oracle Linux 6 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 

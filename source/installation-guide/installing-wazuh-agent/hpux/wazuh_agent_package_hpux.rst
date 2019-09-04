@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_hpux:
 
-Install Wazuh agent on HP-UX from package
-=========================================
+HP-UX from package
+==================
 
 The Wazuh agent for HP-UX can be downloaded from our :ref:`packages list<packages>`. The installation steps are:
 

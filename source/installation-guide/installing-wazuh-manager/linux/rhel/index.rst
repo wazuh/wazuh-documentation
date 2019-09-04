@@ -2,8 +2,8 @@
 
 .. _wazuh_server_rhel:
 
-Install Wazuh server on Red Hat Enterprise Linux
-================================================
+Red Hat Enterprise Linux
+========================
 
 The Wazuh server is available for Red Hat Enterprise Linux 6 or greater, and can be installed via packages or repositories:
 

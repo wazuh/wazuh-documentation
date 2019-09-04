@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_fedora22_or_greater_index:
 
-Install Wazuh agent on Fedora
-=============================
+Fedora
+======
 
 The Wazuh agent is available for Fedora 22 or greater, and can be installed via package or sources:
 

@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_rhel6_or_greater:
 
-Install Wazuh agent on Red Hat Enterprise Linux from package
-============================================================
+Red Hat Enterprise Linux 6 or greater from package
+==================================================
 
 The RPM package is suitable for Red Hat Enterprise Linux 6 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

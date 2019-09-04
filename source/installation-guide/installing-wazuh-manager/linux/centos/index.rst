@@ -2,8 +2,8 @@
 
 .. _wazuh_server_centos:
 
-Install Wazuh server on CentOS
-==============================
+CentOS
+======
 
 The Wazuh server is available for CentOS 6 or greater, and can be installed via packages or sources:
 

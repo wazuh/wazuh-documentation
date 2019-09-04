@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_rhel6_or_greater_index:
 
-Install Wazuh agent on Red Hat Enterprise Linux
-===============================================
+Red Hat Enterprise Linux 6 or greater
+=====================================
 
 The Wazuh agent is available for Red Hat Enterprise Linux 6 or greater, and can be installed via package or sources:
 

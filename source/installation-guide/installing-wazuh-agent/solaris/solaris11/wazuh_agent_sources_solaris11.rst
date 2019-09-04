@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_solaris11:
 
-Install Wazuh agent on Solaris 11 from sources
-==============================================
+Solaris 11 from sources
+=======================
 
 This section describes how to download and build the Wazuh HIDS Solaris agent from sources for the following versions:
 

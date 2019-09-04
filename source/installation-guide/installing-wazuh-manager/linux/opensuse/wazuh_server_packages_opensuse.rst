@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_opensuse:
 
-Install Wazuh server on OpenSUSE from packages
-==============================================
+OpenSUSE from packages
+======================
 
 For OpenSUSE OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
