@@ -850,23 +850,6 @@ li.toctree-l5 > a {
 	content: '\f077';
 }
 
-#globaltoc > nav > ul .show > ul > li:not(.show){
-  max-height: 80px;
-	opacity: 1;
-	transition: max-height ease .3s, opacity ease 0.3s;
-}
-
-#globaltoc > nav > ul .show.initial > ul > li:not(.show){
-  transition: none !important;
-}
-
-#globaltoc > nav > ul li:not(.show) > ul > li {
-	max-height: 0;
-	opacity: 0;
-	border-width: 0px;
-	transition: max-height ease .3s, opacity ease 0.3s;
-}
-
 #globaltoc li {
 	overflow: hidden;
 	border-bottom: 1px solid rgba(59, 59, 59, 0.08);
