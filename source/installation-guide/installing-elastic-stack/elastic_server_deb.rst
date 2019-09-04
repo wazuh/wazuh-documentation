@@ -12,7 +12,7 @@ The DEB package is suitable for Debian, Ubuntu and other Debian-based systems.
 Preparation
 -----------
 
-1. Install the Elastic repository and its GPG key:
+1. Add the Elastic repository and its GPG key:
 
   .. code-block:: console
 
@@ -44,7 +44,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
      node.name: <node_name>
      cluster.initial_master_nodes: ["<node_name>"]
-     
+
 4. Enable and start the Elasticsearch service:
 
   a) For Systemd:
@@ -89,9 +89,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 2. Install the Wazuh app plugin for Kibana:
 
-   
+
   * Install from URL:
-    
+
   .. code-block:: console
 
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip

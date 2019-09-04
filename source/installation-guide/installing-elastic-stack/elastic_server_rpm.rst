@@ -12,7 +12,7 @@ The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-
 Preparation
 -----------
 
-1. Install the Elastic repository and its GPG key:
+1. Add the Elastic repository and its GPG key:
 
   .. code-block:: console
 
@@ -97,9 +97,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 2. Install the Wazuh app plugin for Kibana:
 
-   
+
   * Install from URL:
-    
+
   .. code-block:: console
 
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
@@ -112,7 +112,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
-    
+
 3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml

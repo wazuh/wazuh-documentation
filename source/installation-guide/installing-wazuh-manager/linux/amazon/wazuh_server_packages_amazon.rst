@@ -103,9 +103,7 @@ Installing the Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
-
-The RPM package is suitable for installation on Red Hat, CentOS, Amazon Linux and other modern RPM-based systems.
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch. To install it:
 
 1. Install the Elastic repository and its GPG key:
 

@@ -125,11 +125,9 @@ Installing the Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch. To install it:
 
-The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
-
-1. Install the Elastic repository and its GPG key:
+1. Add the Elastic repository and its GPG key:
 
   .. code-block:: console
 
