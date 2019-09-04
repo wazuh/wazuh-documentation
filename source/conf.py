@@ -349,8 +349,8 @@ actual_path = os.path.dirname(os.path.realpath(__file__))
 files = [
     ['css/style','css'],
     ['css/wazuh-icons','css'],
-    ['js/style','js'],
     ['js/version-selector','js'],
+    ['js/style','js'],
 ]
 
 for file in files:
@@ -392,16 +392,16 @@ def setup(app):
     app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
 
-    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/js/style.js")).st_mtime)
     app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
+    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/style.js")).st_mtime)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
-    "js/style.js",
     "js/version-selector.js"
+    "js/style.js",
 ]
 
 # -- Additional configuration ------------------------------------------------
