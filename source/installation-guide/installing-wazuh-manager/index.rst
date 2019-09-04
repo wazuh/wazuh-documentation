@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _installation:
+.. _wazuh_server_installation:
 
 Installing Wazuh server
 ========================
@@ -11,13 +11,28 @@ There are two components that are usually installed on a Wazuh server: the manag
 
 There are several options for installing the Wazuh server depending on the operating system and whether or not you wish to build from sources. Consult the table below and choose how to proceed:
 
-+-----------------------------------------------------------+-----------------------------------------------------------------------+
-| Type                                                      | Description                                                           |
-+===========================================================+=======================================================================+
-| :ref:`Linux packages<wazuh_server_linux>`                 | Install Wazuh server from Linux packages.                             |
-+-----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Sources <sources_installation>`                     | Install Wazuh server from source code.                                |
-+-----------------------------------------------------------+-----------------------------------------------------------------------+
++-------------------------------+---------------------------------------------------------------+
+| Operative system              | Version                                                       |
++===============================+===============================================================+
+| Amazon Linux                  | :ref:`1 or greater <wazuh_server_amazon>`                     |
++-------------------------------+---------------------------------------------------------------+
+| CentOS                        | :ref:`6 or greater <wazuh_server_centos>`                     |
++-------------------------------+---------------------------------------------------------------+
+| Debian                        | :ref:`7 or greater <wazuh_server_debian>`                     |
++-------------------------------+---------------------------------------------------------------+
+| Fedora                        | :ref:`22 or greater <wazuh_server_fedora>`                    |
++-------------------------------+---------------------------------------------------------------+
+| Oracle Linux                  | :ref:`6 or greater <wazuh_server_oracle>`                     |
++-------------------------------+---------------------------------------------------------------+
+| OpenSUSE                      | :ref:`42 or greater <wazuh_server_opensuse>`                  |
++-------------------------------+---------------------------------------------------------------+
+| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_server_rhel>`                       |
++-------------------------------+---------------------------------------------------------------+
+| SUSE                          | :ref:`12 <wazuh_server_suse>`                                 |
++-------------------------------+---------------------------------------------------------------+
+| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_ubuntu>`                 |
++-------------------------------+---------------------------------------------------------------+
+
 
 There are some related additional configurations that can be applied:
 
@@ -31,7 +46,14 @@ There are some related additional configurations that can be applied:
     :hidden:
     :maxdepth: 2
 
-    wazuh_server_linux
-    sources_installation
+    linux/amazon/index
+    linux/centos/index
+    linux/debian/index
+    linux/fedora/index
+    linux/opensuse/index
+    linux/oracle/index
+    linux/rhel/index
+    linux/suse/index
+    linux/ubuntu/index
     securing_api
 
