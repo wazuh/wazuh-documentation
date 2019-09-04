@@ -107,39 +107,39 @@ Services
 
 **Elastic stack**
 
-    +----------------------+-------------------------------------------------------------------------------------+
-    | Name                 | Description                                                                         |
-    +======================+=====================================================================================+
-    | wazuh-elasticsearch  | Communication for Elasticsearch nodes.                                              |
-    +----------------------+-------------------------------------------------------------------------------------+
-    | elasticsearch        | Elasticsearch service. Used by Kibana and Logstash.                                 |
-    +----------------------+-------------------------------------------------------------------------------------+
-    | wazuh-nginx          | Service for HTTPS access to Kibana.                                                 |
-    +----------------------+-------------------------------------------------------------------------------------+
-    | kibana               | Kibana service. The UI for Elasticsearch.                                           |
-    +----------------------+-------------------------------------------------------------------------------------+
-    | logstash             | Logstash service, each Wazuh node has a Filebeat instance pointing to this service. |
-    +----------------------+-------------------------------------------------------------------------------------+
++----------------------+-------------------------------------------------------------------------------------+
+| Name                 | Description                                                                         |
++======================+=====================================================================================+
+| wazuh-elasticsearch  | Communication for Elasticsearch nodes.                                              |
++----------------------+-------------------------------------------------------------------------------------+
+| elasticsearch        | Elasticsearch service. Used by Kibana and Logstash.                                 |
++----------------------+-------------------------------------------------------------------------------------+
+| wazuh-nginx          | Service for HTTPS access to Kibana.                                                 |
++----------------------+-------------------------------------------------------------------------------------+
+| kibana               | Kibana service. The UI for Elasticsearch.                                           |
++----------------------+-------------------------------------------------------------------------------------+
+| logstash             | Logstash service, each Wazuh node has a Filebeat instance pointing to this service. |
++----------------------+-------------------------------------------------------------------------------------+
 
 **Wazuh**
 
-    +----------------------+-------------------------------------------------------------------------+
-    | Name                 | Description                                                             |
-    +======================+=========================================================================+
-    | wazuh                | Wazuh API: wazuh-master.your-domain.com:55000                           |
-    |                      +-------------------------------------------------------------------------+
-    |                      | Agent registration service (authd): wazuh-master.your-domain.com:1515   |
-    +----------------------+-------------------------------------------------------------------------+
-    | wazuh-workers        | Reporting service: wazuh-manager.your-domain.com:1514                   |
-    +----------------------+-------------------------------------------------------------------------+
-    | wazuh-cluster        | Communication for Wazuh manager nodes.                                  |
-    +----------------------+-------------------------------------------------------------------------+
++----------------------+-------------------------------------------------------------------------+
+| Name                 | Description                                                             |
++======================+=========================================================================+
+| wazuh                | Wazuh API: wazuh-master.your-domain.com:55000                           |
+|                      +-------------------------------------------------------------------------+
+|                      | Agent registration service (authd): wazuh-master.your-domain.com:1515   |
++----------------------+-------------------------------------------------------------------------+
+| wazuh-workers        | Reporting service: wazuh-manager.your-domain.com:1514                   |
++----------------------+-------------------------------------------------------------------------+
+| wazuh-cluster        | Communication for Wazuh manager nodes.                                  |
++----------------------+-------------------------------------------------------------------------+
 
 Deploy
 ------
 
 1. Deploy Kubernetes
-    
+
     Follow the `Official guide <https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/>`_ to deploy a Kubernetes Cluster.
     This repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
 
@@ -147,9 +147,9 @@ Deploy
 
     We recommend creating domains and certificates to access the services. Examples:
 
-        - wazuh-master.your-domain.com: Wazuh API and authd registration service.
-        - wazuh-manager.your-domain.com: Reporting service.
-        - wazuh.your-domain.com: Kibana and Wazuh app.
+    - wazuh-master.your-domain.com: Wazuh API and authd registration service.
+    - wazuh-manager.your-domain.com: Reporting service.
+    - wazuh.your-domain.com: Kibana and Wazuh app.
 
     .. note::
         You can skip this step and the services will be accessible using the Load balancer DNS from the VPC.
@@ -159,20 +159,20 @@ Deploy
     Clone this repository to deploy the necessary services and pods.
 
     .. code-block:: console
-            
+
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git
         $ cd wazuh-kubernetes
 
-3.1. Wazuh namespace and StorageClass
+    3.1. Wazuh namespace and StorageClass
 
-    The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our *StatefulSet* applications.
+        The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our *StatefulSet* applications.
 
         .. code-block:: console
 
             $ kubectl apply -f base/wazuh-ns.yaml
             $ kubectl apply -f base/aws-gp2-storage-class.yaml
 
-3.2. Deploy Elasticsearch
+    3.2. Deploy Elasticsearch
 
         .. code-block:: console
 
@@ -180,10 +180,10 @@ Deploy
             $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-api-svc.yaml
             $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
 
-3.3. Deploy Kibana and Nginx
-    
-    In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
-        
+    3.3. Deploy Kibana and Nginx
+
+        In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
+
         .. code-block:: console
 
             $ kubectl apply -f elastic_stack/kibana/kibana-svc.yaml
@@ -192,7 +192,7 @@ Deploy
             $ kubectl apply -f elastic_stack/kibana/kibana-deploy.yaml
             $ kubectl apply -f elastic_stack/kibana/nginx-deploy.yaml
 
-3.4. Deploy Logstash
+    3.4. Deploy Logstash
 
         .. code-block:: console
 
@@ -277,9 +277,9 @@ Verifying the deployment
 
 **Accesing Kibana**
 
-    In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: https://wazuh.your-domain.com.
+    In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: ``https://wazuh.your-domain.com``.
 
-    Also, you can access using the DNS (Eg: https://internal-xxx-yyy.us-east-1.elb.amazonaws.com):
+    Also, you can access using the DNS (Eg: ``https://internal-xxx-yyy.us-east-1.elb.amazonaws.com``):
 
     .. code-block:: console
 
@@ -295,10 +295,10 @@ Agents
 
 Wazuh agents are designed to monitor hosts. To start using them:
 
-1. :doc:`Install the agent <../installation-guide/installing-wazuh-agent/index>`.
+1. :doc:`Install the agent <../../installation-guide/installing-wazuh-agent/index>`.
 
 
-2. Now, register the agent using the :doc:`registration service <../user-manual/registering/index>`.
+2. Now, register the agent using the :doc:`registration service <../../user-manual/registering/index>`.
 
 
 3. Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and changing the ``MANAGER_IP`` for the external IP of the service pointing to port 1514 or for the DNS provided by *AWS Route 53* if you are using it.

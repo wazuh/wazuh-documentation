@@ -4,9 +4,12 @@
 
 .. _not_found:
 
-404 | Page not found
+Page not found
 ====================
 
-This page does not exist or has been removed from the Documentation.
+404
+---
 
-To find what you need, use the search box in the upper left.
+Seems that you got lost...
+
+:ref:`Return home <index>`

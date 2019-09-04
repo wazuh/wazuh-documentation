@@ -19,7 +19,7 @@ Wazuh core
 - Log collector will not report Windows Eventchannel events bookmarked by default.
 - Agent-info that are not generated in utf-8 format will be discarded.
 - Fix memory leak in Modules Daemon when your on-demand configuration was requested.
-- Analysisd and Logtest crashed when trying rules having <different_geoip> and no <not_same_field> stanza.
+- Fixed a bug that crashed Analysisd and Logtest when trying rules having <different_geoip> and no <not_same_field> stanza.
 - Fixed the parser of the Canonical's OVAL feed due to a syntax change.
 - Rules with <list lookup="address_match_key" /> produced a false match if the CDB list file is missing.
 - Remote configuration was missing the <ignore> stanzas for Syscheck and Rootcheck when defined as sregex.
@@ -30,16 +30,15 @@ Wazuh apps
 
 - Added support for Kibana v7.2.0.
 - Added support for Kibana v6.8.1.
-- Fix height for the menu directive with Dynamic height.
-- Fix timepicker in cluster monitoring.
-- Fix time offset for reporting table.
-- Fix API call for fetching GDPR requirements in agents.
-- Fix several minor bugs.
+- Fixed height for the menu directive with Dynamic height.
+- Fixed timepicker in cluster monitoring.
+- Fixed time offset for reporting table.
+- Fixed API call for fetching GDPR requirements in agents.
 - Fixed filters which were not applying when refreshing agents search bar.
 - Fixed wrong fields in never connected agents.
 - Fixed the error message when the App dectects an unexpected Wazuh version.
 - Fixed invalid date message in some web browsers.
-- Fixed missing ignored and ignored_sregex fieldsin the configuration ondemand.
+- Fixed missing ignored and ignored_sregex fields in the configuration ondemand.
 
 
 Wazuh ruleset
@@ -48,4 +47,4 @@ Wazuh ruleset
 - Changed NGINX decoder to make the field "server" optional. (Credits to `@iasdeoupxe <https://github.com/iasdeoupxe>`_).
 - Remove unwanted tailing single quote in Audit decoder. (Credits to `@branchnetconsulting <https://github.com/branchnetconsulting>`_).
 - Avoid conflicts between the "uid" and "auid" fields in the Audit decoder. (Credits to `@tokibi <https://github.com/tokibi>`_).
-- Exclude the full log field from rules for AWS, Suricata, VirusTotal, OwnCloud, Vuls, CIS-CAT, Vulnerability Detector, MySQL, Osquery y Azure.
+- Exclude the full log field from rules for AWS, Suricata, VirusTotal, OwnCloud, Vuls, CIS-CAT, Vulnerability Detector, MySQL, Osquery and Azure.

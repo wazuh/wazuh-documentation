@@ -56,12 +56,12 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.9.3
+            Version: 3.9.5
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.9.3
+            Version: 3.9.5
             Type: worker
             Active agents: 1
             Status:
@@ -79,7 +79,7 @@ Get cluster's healthcheck
                     Permission to synchronize: True.
 
         node03 (192.168.56.105)
-            Version: 3.9.3
+            Version: 3.9.5
             Type: worker
             Active agents: 0
             Status:
@@ -105,12 +105,12 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.9.3
+            Version: 3.9.5
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.9.3
+            Version: 3.9.5
             Type: worker
             Active agents: 1
             Status:
@@ -136,17 +136,17 @@ Get connected nodes
 
         # /var/ossec/bin/cluster_control -l
         NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  3.9.3    172.17.0.101
-        worker-2  worker  3.9.3    172.17.0.102
-        master    master  3.9.3    172.17.0.100
+        worker-1  worker  3.9.5    172.17.0.101
+        worker-2  worker  3.9.5    172.17.0.102
+        master    master  3.9.5    172.17.0.100
 
 * Filter connected nodes by name
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -l -fn master worker-1
         NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  3.9.3    172.17.0.101
-        master    master  3.9.3    172.17.0.100
+        worker-1  worker  3.9.5    172.17.0.101
+        master    master  3.9.5    172.17.0.100
 
 Get agents in cluster
 ^^^^^^^^^^^^^^^^^^^^^
@@ -156,15 +156,15 @@ Get agents in cluster
 
         # /var/ossec/bin/cluster_control -a
         NAME    IP         ID   STATUS  VERSION       NODE NAME
-        master  127.0.0.1  000  Active  Wazuh v3.9.3  master
-        agent1  any        001  Active  Wazuh v3.9.3  worker-2
+        master  127.0.0.1  000  Active  Wazuh v3.9.5  master
+        agent1  any        001  Active  Wazuh v3.9.5  worker-2
 
 * Get all agents reporting to a node
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a -fn worker-2
         NAME    IP         ID   STATUS  VERSION       NODE NAME
-        agent1  any        001  Active  Wazuh v3.9.3  worker-2
+        agent1  any        001  Active  Wazuh v3.9.5  worker-2
 
 * Get all active disconnected reporting to a node
     .. code-block:: shell

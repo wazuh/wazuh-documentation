@@ -15,59 +15,59 @@ Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. W
 Installation
 ------------
 
-1. Download the latest Splunk app for Wazuh:
-
-  .. code-block:: console
-
-    # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.9.3_7.3.0.tar.gz
-
-2. Install the Splunk app for Wazuh:
-
-  a. CLI mode:
+1. Download the latest Wazuh app for Splunk:
 
     .. code-block:: console
 
-      # /opt/splunk/bin/splunk install app SplunkAppForWazuh.tar.gz
+      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.9.5_7.3.0.tar.gz
 
-    .. code-block:: console
+2. Install the Wazuh app for Splunk:
 
-      # /opt/splunk/bin/splunk restart
+    a. CLI mode:
 
-  b. Web GUI:
+      .. code-block:: console
 
-    .. code-block:: none
+        # /opt/splunk/bin/splunk install app SplunkAppForWazuh.tar.gz
 
-      Apps -> Manage apps -> Install app from file
+      .. code-block:: console
 
-  The app includes the ``indexes.conf`` file to create Wazuh indexes and the ``inputs.conf`` file to listen to forwarded data on port 9997.
+        # /opt/splunk/bin/splunk restart
 
-  .. warning::
-    If you installed Splunk using the :ref:`distributed architecture <splunk_distributed>`, these two files are already configured on the **search peer** instances, and must be removed from the Wazuh app installation directory:
+    b. Web GUI:
 
-    .. code-block:: none
+      .. code-block:: none
 
-      # rm -rf /opt/splunk/etc/apps/SplunkAppForWazuh/default/indexes.conf
-      # rm -rf /opt/splunk/etc/apps/SplunkAppForWazuh/default/inputs.conf
-      # /opt/splunk/bin/splunk restart
+        Apps -> Manage apps -> Install app from file
+
+    The app includes the ``indexes.conf`` file to create Wazuh indexes and the ``inputs.conf`` file to listen to forwarded data on port 9997.
+
+    .. warning::
+      If you installed Splunk using the :ref:`distributed architecture <splunk_distributed>`, these two files are already configured on the **search peer** instances, and must be removed from the Wazuh app installation directory:
+
+      .. code-block:: none
+
+        # rm -rf /opt/splunk/etc/apps/SplunkAppForWazuh/default/indexes.conf
+        # rm -rf /opt/splunk/etc/apps/SplunkAppForWazuh/default/inputs.conf
+        # /opt/splunk/bin/splunk restart
 
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
-  .. image:: ../images/splunk-app/app-icon.png
-    :align: center
+    .. image:: ../images/splunk-app/app-icon.png
+      :align: center
 
 4. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
-  By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner if the app can estabilish a connection.
+    By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner if the app can estabilish a connection.
 
-  .. note::
-    You can get more information about how to set up the credentials at :ref:`securing_api`.
+    .. note::
+      You can get more information about how to set up the credentials at :ref:`securing_api`.
 
-  .. thumbnail:: ../images/splunk-app/app-setup.png
-    :title: App initial configuration
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../images/splunk-app/app-setup.png
+      :title: App initial configuration
+      :align: center
+      :width: 100%
 
-Now that you've finished installing Splunk app for Wazuh, you can install and setup Splunk forwarders on the :ref:`Splunk forwarder section <splunk_forwarder>`.
+Now that you've finished installing Wazuh app for Splunk, you can install and setup Splunk forwarders on the :ref:`Splunk forwarder section <splunk_forwarder>`.
 
 Installing the Wazuh App in a Splunk cluster
 --------------------------------------------

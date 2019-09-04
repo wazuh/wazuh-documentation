@@ -5,7 +5,7 @@
 Deployment variables for Linux, macOS and AIX
 =============================================
 
-For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning. 
+For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning.
 
 Below you can find a table describing the variables used by Wazuh installers, and a few examples on how to use them.
 
@@ -37,7 +37,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name. See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                                            |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_GROUP         |  Assigns the installed agent to a previously created group. See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                                                       |
+|   WAZUH_GROUP         |  Assigns the agent to one or more existing groups (separated by commas). See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                                          |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Examples:
@@ -61,7 +61,7 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-          WAZUH_CERTIFICATE="rootCA.pem" rpm -i wazuh-agent-3.9.3-1.aix.ppc.rpm
+          WAZUH_CERTIFICATE="rootCA.pem" rpm -i wazuh-agent-3.9.5-1.aix.ppc.rpm
 
 * Registration with protocol (using `apt-get`):
 
@@ -82,6 +82,6 @@ Examples:
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" WAZUH_AUTHD_SERVER "10.0.0.2" WAZUH_KEY "/var/ossec/etc/sslagent.key" \
-          WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.3-1.pkg -target /
+          WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.5-1.pkg -target /
 
 .. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`agent-verification-with-host-validation` section.

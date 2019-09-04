@@ -16,7 +16,7 @@ Wazuh software can be installed in many operating systems. Moreover, there's als
 Operating system compatibility
 ------------------------------
 
-Wazuh Manager
+Wazuh manager
 ^^^^^^^^^^^^^
 
 Below it shown the compatibility table for the Wazuh manager.
@@ -45,9 +45,9 @@ Below it shown the compatibility table for the Wazuh manager.
 |   Oracle Linux 6 and 7            |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
 
-*(\*) SUSE based host are available as Wazuh Manager since Wazuh v3.2.1 version.*
+*(\*) SUSE based host are available as Wazuh manager since Wazuh v3.2.1 version.*
 
-Wazuh Agent
+Wazuh agent
 ^^^^^^^^^^^
 
 In this table, you can check our supported OS list where the Wazuh agent can be installed.
@@ -69,9 +69,9 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+
 |   Fedora 22 or newer               |   ✓                     |
 +------------------------------------+-------------------------+
-|   Windows XP 2003 or newer         |   ✓                     |
+|   Windows XP or newer              |   ✓                     |
 +------------------------------------+-------------------------+
-|   Windows Server 2008 or newer     |   ✓                     |
+|   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
 |   Mac OS X                         |   ✓                     |
 +------------------------------------+-------------------------+
@@ -97,17 +97,17 @@ When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wa
 Manager and agents
 ^^^^^^^^^^^^^^^^^^
 
-The compatibility between Wazuh Agent and Wazuh Manager is guaranteed when the Wazuh Manager has a **newer or equal** version than the Wazuh Agent.
+The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a **newer or equal** version than the Wazuh agent.
 
 
 .. note::
 
-    The Wazuh Manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
+    The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
 
 Manager and API
 ^^^^^^^^^^^^^^^
 
-The API requires the same ``major.minor`` version than the Wazuh Manager in order to be compatible.
+The API requires the same ``major.minor`` version than the Wazuh manager in order to be compatible.
 
 
 API and Kibana app
@@ -123,25 +123,25 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +    **API and Wazuh App version**  + **Elastic Stack version** +
 |                                   |                           |
 +-----------------------------------+---------------------------+
-|              3.9.x                |      6.7.1 to 7.2.0*      |
+|              3.9.x                |      6.7.1 to 7.3.0       |
 +-----------------------------------+---------------------------+
-|              3.8.x                |      6.5.4 to 6.7.1*      |
+|              3.8.x                |      6.5.4 to 6.7.1       |
 +-----------------------------------+---------------------------+
-|              3.7.x                |      6.4.2 to 6.5.4*      |
+|              3.7.x                |      6.4.2 to 6.5.4       |
 +-----------------------------------+---------------------------+
-|              3.6.x                |      6.3.2 to 6.4.3*      |
+|              3.6.x                |      6.3.2 to 6.4.3       |
 +-----------------------------------+---------------------------+
-|              3.5.x                |      6.3.2 to 6.4.0*      |
+|              3.5.x                |      6.3.2 to 6.4.0       |
 +-----------------------------------+---------------------------+
-|              3.4.x                |      6.3.1 to 6.3.2*      |
+|              3.4.x                |      6.3.1 to 6.3.2       |
 +-----------------------------------+---------------------------+
-|              3.3.x                |      6.2.4 to 6.3.1*      |
+|              3.3.x                |      6.2.4 to 6.3.1       |
 +-----------------------------------+---------------------------+
-|              3.2.x                |      6.1.0 to 6.2.4*      |
+|              3.2.x                |      6.1.0 to 6.2.4       |
 +-----------------------------------+---------------------------+
-|              3.1.x                |      6.1.0 to 6.1.3*      |
+|              3.1.x                |      6.1.0 to 6.1.3       |
 +-----------------------------------+---------------------------+
-|              3.0.x                |      6.0.0 to 6.1.0*      |
+|              3.0.x                |      6.0.0 to 6.1.0       |
 +-----------------------------------+---------------------------+
 |              2.1.1                |           5.6.5           |
 +-----------------------------------+---------------------------+
@@ -161,13 +161,13 @@ The Splunk app for Wazuh requires compatibility between two different products:
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
 +---------------------------------+---------------------------+
-|              3.9.x              |      7.2.5 to 7.3.0*      |
+|              3.9.x              |      7.2.5 to 7.3.0       |
 +---------------------------------+---------------------------+
-|              3.8.x              |      7.2.3 to 7.2.6*      |
+|              3.8.x              |      7.2.3 to 7.2.6       |
 +---------------------------------+---------------------------+
-|              3.7.x              |      7.2.0 to 7.2.1*      |
+|              3.7.x              |      7.2.0 to 7.2.1       |
 +---------------------------------+---------------------------+
-|              3.6.x              |      7.1.2 to 7.1.3*      |
+|              3.6.x              |      7.1.2 to 7.1.3       |
 +---------------------------------+---------------------------+
 |              3.5.x              |      7.1.2                |
 +---------------------------------+---------------------------+
@@ -175,7 +175,7 @@ The Splunk app for Wazuh requires compatibility between two different products:
 +---------------------------------+---------------------------+
 |              3.3.x              |      7.1.1                |
 +---------------------------------+---------------------------+
-|              3.2.x              |      7.0.3 to 7.1.1*      |
+|              3.2.x              |      7.0.3 to 7.1.1       |
 +---------------------------------+---------------------------+
 
 
