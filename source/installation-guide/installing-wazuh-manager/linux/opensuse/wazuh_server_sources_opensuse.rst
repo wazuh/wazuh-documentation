@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_opensuse:
 
-Install Wazuh server on OpenSUSE from sources
-=============================================
+OpenSUSE from sources
+=====================
 
 This guide describes how to install the manager and API for OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 

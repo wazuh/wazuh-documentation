@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_suse12_index:
 
-Install Wazuh agent on SUSE 12
-==============================
+SUSE 12
+=======
 
 The Wazuh agent is available for SUSE 12, and can be installed via package or sources:
 

@@ -2,8 +2,8 @@
 
 .. _wazuh_server_opensuse:
 
-Install Wazuh server on OpenSUSE
-================================
+OpenSUSE
+========
 
 The Wazuh server is available OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed, and can be installed via packages or repositories:
 

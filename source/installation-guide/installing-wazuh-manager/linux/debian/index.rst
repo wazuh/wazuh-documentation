@@ -2,8 +2,8 @@
 
 .. _wazuh_server_debian:
 
-Install Wazuh server on Debian
-==============================
+Debian
+======
 
 The Wazuh server is available for Debian 7 or greater, and can be installed via packages or sources:
 

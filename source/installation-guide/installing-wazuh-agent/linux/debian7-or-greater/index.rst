@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_debian7_or_greater_index:
 
-Install Wazuh agent on Debian
-=============================
+Debian
+======
 
 The Wazuh agent is available for Debian 7 or greater, and can be installed via package or sources:
 

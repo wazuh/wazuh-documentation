@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_macos:
 
-Install Wazuh agent on macOS
-============================
+macOS
+=====
 
 The Wazuh agent is available for macOS, and can be installed via package or sources:
 

@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_macos:
 
-Install Wazuh agent on macOS from sources
-=========================================
+macOS from sources
+==================
 
 This guide describes how to install the Wazuh agent from source code for macOS. For other operating systems, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
