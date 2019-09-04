@@ -2,8 +2,8 @@
 
 .. _wazuh_server_ubuntu:
 
-Install Wazuh server on Ubuntu
-===============================
+Ubuntu
+=======
 
 The Wazuh server is available for Ubuntu 12.04 or greater, and can be installed via packages or sources:
 

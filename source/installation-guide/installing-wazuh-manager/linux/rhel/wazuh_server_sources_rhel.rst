@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_rhel:
 
-Install Wazuh server on Red Hat Enterprise Linux from sources
-=============================================================
+Red Hat Enterprise Linux from sources
+=====================================
 
 This guide describes how to install the manager and API for Red Hat Enterprise Linux or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 

@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_windows:
 
-Install Wazuh agent on Windows
-==============================
+Windows
+=======
 
 The Wazuh agent is available for Windows, and can be installed via package or sources:
 

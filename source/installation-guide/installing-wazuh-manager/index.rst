@@ -55,5 +55,5 @@ There are some related additional configurations that can be applied:
     linux/rhel/index
     linux/suse/index
     linux/ubuntu/index
-    securing_api
+
 

@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_suse:
 
-Install Wazuh server on SUSE from sources
-=========================================
+SUSE from sources
+=================
 
 This guide describes how to install the manager and API for SUSE 12 from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 

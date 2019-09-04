@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_ubuntu12.04_or_greater_index:
 
-Install Wazuh agent on Ubuntu
-=============================
+Ubuntu
+======
 
 The Wazuh agent is available for Ubuntu 12.04 or greater, and can be installed via package or sources:
 

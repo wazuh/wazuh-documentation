@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_rhel:
 
-Install Wazuh server on Red Hat Enterprise Linux from packages
-==============================================================
+Red Hat Enterprise Linux from packages
+======================================
 
 For Red Hat Enterprise Linux 6 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

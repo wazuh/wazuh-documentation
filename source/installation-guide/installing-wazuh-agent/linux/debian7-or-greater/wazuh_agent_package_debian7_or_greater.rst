@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_debian7_or_greater:
 
-Install Wazuh agent on Debian from package
-==========================================
+Debian from package
+===================
 
 The DEB package is suitable for Debian 7 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

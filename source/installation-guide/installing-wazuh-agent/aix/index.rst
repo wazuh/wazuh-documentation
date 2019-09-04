@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_aix:
 
-Install Wazuh agent on AIX
-==========================
+AIX
+===
 
 The Wazuh agent is available for AIX, and can be installed via package:
 

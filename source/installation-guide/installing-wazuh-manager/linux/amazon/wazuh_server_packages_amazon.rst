@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_amazon:
 
-Install Wazuh server on Amazon Linux from packages
-==================================================
+Amazon Linux from packages
+==========================
 
 For Amazon Linux 1 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

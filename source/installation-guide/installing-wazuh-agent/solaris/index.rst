@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_solaris:
 
-Install Wazuh agent on Solaris
-==============================
+Solaris
+=======
 
 The Wazuh agent can be installed in the following Solaris versions.
 

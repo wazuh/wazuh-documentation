@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_oracle6_or_greater:
 
-Install Wazuh agent on Oracle Linux from sources
-================================================
+Oracle Linux 6 or greater from sources
+======================================
 
 This guide describes how to install the Wazuh agent from source code for Oracle Linux 6 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

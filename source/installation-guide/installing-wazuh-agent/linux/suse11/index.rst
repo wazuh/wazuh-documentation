@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_suse11_index:
 
-Install Wazuh agent on SUSE 11
-==============================
+SUSE 11
+=======
 
 The Wazuh agent is available for SUSE 11, and can be installed via package:
 

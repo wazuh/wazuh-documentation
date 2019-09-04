@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_amazon:
 
-Install Wazuh server on Amazon Linux from sources
-=================================================
+Amazon Linux from sources
+=========================
 
 This guide describes how to install the manager and API for Amazon Linux 1 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 

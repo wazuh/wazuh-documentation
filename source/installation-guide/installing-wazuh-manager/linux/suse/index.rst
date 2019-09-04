@@ -2,8 +2,8 @@
 
 .. _wazuh_server_suse:
 
-Install Wazuh server on SUSE
-============================
+SUSE
+====
 
 The Wazuh server is available for SUSE 12, and can be installed via packages or repositories:
 

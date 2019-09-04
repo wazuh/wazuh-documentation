@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_oracle5_index:
 
-Install Wazuh agent on Oracle Linux 5
-=====================================
+Oracle Linux 5
+==============
 
 The Wazuh agent is available for Oracle Linux 5, and can be installed via package:
 

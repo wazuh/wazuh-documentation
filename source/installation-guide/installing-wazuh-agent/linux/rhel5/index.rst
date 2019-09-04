@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_rhel5_index:
 
-Install Wazuh agent on Red Hat Enterprise Linux 5
-=================================================
+Red Hat Enterprise Linux 5
+==========================
 
 The Wazuh agent is available for Red Hat Enterprise Linux 5, and can be installed via package:
 
