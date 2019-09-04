@@ -7147,7 +7147,7 @@ Returns the sca checks of an agent.
 
 ``GET`` ::
 
-	/sca/:agent_id/checks/:id
+	/sca/:agent_id/checks/:policy_id
 
 **Parameters:**
 
@@ -7156,7 +7156,7 @@ Returns the sca checks of an agent.
 +==============================+===============+======================================================================================================================================================================================================================================+
 | ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``policy_id``                | String        | Filters by scan id                                                                                                                                                                                                                   |
+| ``policy_id``                | String        | Filter by policy name                                                                                                                                                                                                                |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``title``                    | String        | Filters by title                                                                                                                                                                                                                     |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -7190,7 +7190,7 @@ Returns the sca checks of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000/checks/system_audit?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000/checks/unix_audit?pretty&limit=2"
 
 **Example Response:**
 ::
@@ -7198,313 +7198,61 @@ Returns the sca checks of an agent.
    {
       "error": 0,
       "data": {
-         "totalItems": 16,
+         "totalItems": 23,
          "items": [
             {
-               "title": "Web vulnerability - .htaccess file compromised - auto append",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
-               "id": 1015,
-               "result": "",
+               "id": 4022,
+               "status": "",
+               "policy_id": "unix_audit",
+               "command": "systemctl is-enabled auditd",
+               "reason": "",
+               "result": "failed",
+               "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+               "title": "Ensure auditd service is enabled",
+               "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+               "description": "Turn on the auditd daemon to record system events.",
                "compliance": [
                   {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
+                     "key": "cis_csc",
+                     "value": "6.2,6.3"
                   }
                ],
                "rules": [
                   {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^.htaccess$ -> r:php_value auto_append_file;"
+                     "type": "command",
+                     "rule": "c:systemctl is-enabled auditd -> r:^enabled"
                   }
                ]
             },
             {
-               "title": "Web vulnerability - .htaccess file compromised",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
-               "id": 1014,
-               "result": "",
+               "id": 4021,
+               "status": "",
+               "policy_id": "unix_audit",
+               "command": "systemctl is-enabled cups",
+               "reason": "",
+               "references": "https://www.cups.org",
+               "result": "passed",
+               "remediation": "Run the following command to disable cups: # systemctl disable cups",
+               "title": "Ensure CUPS is not enabled",
+               "rationale": "If the system does not need to print jobs or accept print jobs from other systems, it is recommended that CUPS be disabled to reduce the potential attack surface.",
+               "description": "The Common Unix Print System (CUPS) provides the ability to print to both local and network printers. A system running CUPS can also accept print jobs from remote systems and print them to local printers. It also provides a web based remote administration capability.",
                "compliance": [
                   {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
+                     "key": "cis_csc",
+                     "value": "9.1,9.2"
                   }
                ],
                "rules": [
                   {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^.htaccess$ -> r:RewriteCond \\S+HTTP_REFERERS \\S+google;"
-                  }
-               ]
-            },
-            {
-               "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode(POST))",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1013,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> .php$ -> r:eval\\(base64_decode\\(\\S_POST;"
-                  }
-               ]
-            },
-            {
-               "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode)",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1012,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> .php$ -> r:eval\\(base64_decode\\(\\paWYo;"
-                  }
-               ]
-            },
-            {
-               "title": "Web vulnerability - Outdated osCommerce (v2.2) installation",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1011,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^application_top.php$ -> r:'osCommerce 2.2-;"
-                  }
-               ]
-            },
-            {
-               "title": "Web vulnerability - Outdated Joomla installation",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1010,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^version.php$ -> IN r:var \\.RELEASE && r:'3.4.8';"
-                  }
-               ]
-            },
-            {
-               "title": "Web vulnerability - Outdated WordPress installation",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1009,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^version.php$ -> IN r:^\\.wp_version && >:$wp_version = '4.4.2';"
-                  }
-               ]
-            },
-            {
-               "title": "Web exploits: '.shell' is an uncommon file name inside htdocs - Possible compromise",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1008,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^.shell$;"
-                  }
-               ]
-            },
-            {
-               "title": "Web exploits: '...' is an uncommon file name inside htdocs - Possible compromise",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1007,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^...$;"
-                  }
-               ]
-            },
-            {
-               "title": "Web exploits: '.ssh' is an uncommon file name inside htdocs",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1006,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^.ssh$;"
-                  }
-               ]
-            },
-            {
-               "title": "Web exploits: 'id' is an uncommon file name inside htdocs - Possible compromise",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1005,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^id$;"
-                  }
-               ]
-            },
-            {
-               "title": "Web exploits: '.yop' is an uncommon file name inside htdocs - Possible compromise",
-               "status": "Not applicable",
-               "reason": "Directory /var/www not found",
-               "policy_id": "system_audit",
-               "id": 1004,
-               "result": "",
-               "compliance": [
-                  {
-                     "key": "pci_dss",
-                     "value": "6.5, 6.6, 11.4"
-                  }
-               ],
-               "rules": [
-                  {
-                     "type": "directory",
-                     "rule": "d:$web_dirs -> ^.yop$;"
-                  }
-               ]
-            },
-            {
-               "title": "PHP - Displaying of errors is enabled",
-               "status": "Not applicable",
-               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
-               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
-               "policy_id": "system_audit",
-               "id": 1003,
-               "result": "",
-               "rules": [
-                  {
-                     "type": "file",
-                     "rule": "f:$php.ini -> r:^display_errors = On;"
-                  }
-               ]
-            },
-            {
-               "title": "PHP - Allow URL fopen is enabled",
-               "status": "Not applicable",
-               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
-               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
-               "policy_id": "system_audit",
-               "id": 1002,
-               "result": "",
-               "rules": [
-                  {
-                     "type": "file",
-                     "rule": "f:$php.ini -> r:^allow_url_fopen = On;"
-                  }
-               ]
-            },
-            {
-               "title": "PHP - Expose PHP is enabled",
-               "status": "Not applicable",
-               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
-               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
-               "policy_id": "system_audit",
-               "id": 1001,
-               "result": "",
-               "rules": [
-                  {
-                     "type": "file",
-                     "rule": "f:$php.ini -> r:^expose_php = On;"
-                  }
-               ]
-            },
-            {
-               "title": "PHP - Register globals are enabled",
-               "status": "Not applicable",
-               "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
-               "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
-               "policy_id": "system_audit",
-               "id": 1000,
-               "result": "",
-               "rules": [
-                  {
-                     "type": "file",
-                     "rule": "f:$php.ini -> r:^register_globals = On;"
+                     "type": "command",
+                     "rule": "c:systemctl is-enabled cups -> r:^enabled"
                   }
                ]
             }
          ]
       }
    }
+
 	
 
 Get security configuration assessment (SCA) database
@@ -7544,7 +7292,7 @@ Returns the sca database of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000?q=pass>;score<150&pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000?q=pass>20;score<150&pretty"
 
 **Example Response:**
 ::
@@ -7555,18 +7303,18 @@ Returns the sca database of an agent.
          "totalItems": 1,
          "items": [
             {
-               "hash_file": "bbc8852e2a222ebaa997afc26f258b1e79f38174a8979b11a1a047dc3f75390a",
                "references": "https://www.cisecurity.org/cis-benchmarks/",
-               "score": 49,
                "name": "CIS Benchmark for Red Hat Enterprise Linux 7",
-               "invalid": 3,
-               "end_scan": "2019-08-30 09:18:12",
-               "policy_id": "cis_rhel7",
                "total_checks": 64,
-               "start_scan": "2019-08-30 09:18:12",
+               "end_scan": "2019-09-04 08:23:27",
                "pass": 30,
+               "start_scan": "2019-09-04 08:23:27",
                "fail": 31,
-               "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Red Hat Enterprise Linux 7 systems running on x86 and x64 platforms. This document was tested against Red Hat Enterprise Linux 7.4."
+               "score": 49,
+               "hash_file": "bbc8852e2a222ebaa997afc26f258b1e79f38174a8979b11a1a047dc3f75390a",
+               "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Red Hat Enterprise Linux 7 systems running on x86 and x64 platforms. This document was tested against Red Hat Enterprise Linux 7.4.",
+               "policy_id": "cis_rhel7",
+               "invalid": 3
             }
          ]
       }
