@@ -25,3 +25,4 @@ Find the answer to commonly asked support questions!
    faq_tuning
    faq_troubleshooting
    faq_cluster
+   faq_capabilities
