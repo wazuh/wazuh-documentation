@@ -122,7 +122,7 @@ Starting with **inputs.conf**, create it and fill it with the next block:
   index = wazuh
   sourcetype = wazuh
 
-  Now, following with the **outputs.conf**:
+Now, following with the **outputs.conf**:
 
 .. code-block:: console
 
