@@ -4,7 +4,6 @@ jQuery(function($) {
   * Copyright (C) 2019 Wazuh, Inc.
   */
 
-
   const currentVersion = '3.9';
   const versions = [
     {name: '3.9 (current)', url: '/'+currentVersion},
@@ -20,46 +19,113 @@ jQuery(function($) {
     {name: '2.1', url: '/2.1'},
   ];
 
-  addVersions();
+  checkCurrentVersion();
   checkLatestDocs();
+
+  let selectVersion = true;
+  $('#select-version button').click(function() {
+    if (selectVersion) {
+      addVersions();
+      selectVersion = false;
+      $('#select-version [data-toggle="tooltip"]').tooltip();
+    }
+  });
+
+  /**
+   * Add the current version to the version selector.
+   */
+  function checkCurrentVersion() {
+    let selected = -1;
+    const path = document.location.pathname.split('/')[1];
+    const selectVersionCurrent = $('#select-version .current');
+    for (let i = 0; i < versions.length; i++) {
+      if ( versions[i].url == '/' + path ) {
+        selected = i;
+      }
+    }
+    selectVersionCurrent.html(versions[selected].name);
+  }
 
   /**
    * Adds the available versions to the version selector.
    */
   function addVersions() {
     let ele = '';
-    let selected = -1;
     const version = $('.version');
     const selectVersion = $('#select-version');
-    const selectVersionCurrent = $('#select-version .current');
     const selectVersionUl = $('#select-version .dropdown-menu');
     let path = document.location.pathname.split('/')[1];
+    let fullUrl = window.location.href;
     let page = '';
+    let redCurrent = '';
+    let urlTrue = '';
+
+    if (fullUrl == null) {/* Firefox fix */
+      fullUrl = document.URL;
+    }
+    page = fullUrl.split('/'+path)[1];
+    page = page.replace('index.html', '');
+
     if (version == null) {
       console.error('No such element of class "version"');
       return;
     }
-
     if (selectVersion == null) {
       console.error('No such element "select-version"');
       return;
     }
 
-    page = document.location.pathname.split('/'+path)[1];
-    search = document.location.search;
-
     if (path == 'current' || path == '3.x' ) {
       path = currentVersion;
     }
 
-    const actualVersion = $('.no-latest-notice').attr('data-version');
-    url = window.location.href.split(actualVersion)[1];
+    /* Check for redirects for this page */
+    for (redItem in redirects) {
+      if ({}.hasOwnProperty.call(redirects, redItem)) {
+        for (verItem in redirects[redItem]) {
+          if ({}.hasOwnProperty.call(redirects[redItem], verItem)) {
+            let red = redirects[redItem][verItem];
+            red = red.replace('index.html', '');
+            if (red.charAt(red.length-1) != '/' && page.charAt(page.length-1) == '/') {
+              red = red+'/';
+            }
+            if (red.charAt(0) != '/') {
+              red = '/'+red;
+            }
+            redirects[redItem][verItem] = red;
+            if (red == page) {
+              redCurrent = redirects[redItem];
+            }
+          }
+        }
+      }
+    }
+
+    /* Creates the links to others versions */
     for (let i = 0; i < versions.length; i++) {
       let pageExists = false;
+      let href = '';
       let tooltip = '';
       const ver = versions[i].name.split(' (current)')[0];
+
+      /* Get the new URL */
+      for (redirect in redCurrent) {
+        if (redirect == ver) {
+          if (redCurrent[redirect] != '') {
+            urlTrue = redCurrent[redirect];
+          }
+        }
+      }
+
+      /* If there isn't redirect */
+      if (urlTrue == '') {
+        urlTrue = page;
+      }
+
+      /* Check if the file exists */
       $.ajax({
-        url: '/'+ver+url,
+        type: 'HEAD',
+        url: '/'+ver+urlTrue,
         success: function() {
           pageExists = true;
         },
@@ -72,16 +138,13 @@ jQuery(function($) {
       if (!pageExists) {
         tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
       } else {
+        href = '/'+ver+urlTrue;
         tooltip = '';
       }
 
-      ele += '<li><a href="' + versions[i].url + page + search + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
-      if ( versions[i].url == '/' + path ) {
-        selected = i;
-      }
+      ele += '<li><a href="' + href + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
     }
-    selectVersionUl.append(ele);
-    selectVersionCurrent.html(versions[selected].name);
+    selectVersionUl.html(ele);
   }
 
   /**
