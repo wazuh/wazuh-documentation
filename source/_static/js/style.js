@@ -601,9 +601,6 @@ $(function() {
     }
   });
 
-  /* Enable all tooltips in the documentation */
-  $('[data-toggle="tooltip"]').tooltip();
-
   /* Enable links that have the '.disable' class */
   $('#select-version .dropdown-menu').on('click keypress', 'li a.disable', function(e) {
     return false;
