@@ -161,7 +161,8 @@ Now we start getting alerts on account of the new audit rules::
 
 Let's see what happens when we execute the following commands:
 
-New File
+**New File**
+
   Command:
 
   .. code-block:: console
@@ -213,7 +214,8 @@ New File
     audit.file.inode: 18369115
     audit.file.mode: 0100644
 
-Write Access
+**Write Access**
+
   Command:
 
   .. code-block:: console
@@ -265,7 +267,8 @@ Write Access
     audit.file.inode: 18369115
     audit.file.mode: 0100644
 
-Change Permissions
+**Change Permissions**
+
   Command:
 
   .. code-block:: console
@@ -313,7 +316,8 @@ Change Permissions
     audit.file.mode: 0100644
 
 
-Read access
+**Read access**
+
   Command:
 
   .. code-block:: console
@@ -360,7 +364,8 @@ Read access
     audit.file.inode: 18369115
     audit.file.mode: 0100744
 
-Delete file
+**Delete file**
+
   Command:
 
   .. code-block:: console

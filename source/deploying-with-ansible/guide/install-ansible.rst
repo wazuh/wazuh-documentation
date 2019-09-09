@@ -74,8 +74,8 @@ For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next st
   .. code-block:: console
 
       # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
-      apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-      apt-get update
+      # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+      # apt-get update
 
 3 - Finally, install ansible:
 

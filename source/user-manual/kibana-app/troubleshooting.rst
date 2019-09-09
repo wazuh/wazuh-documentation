@@ -20,7 +20,7 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 
 Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
-You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
+You can check our `compatibility compatibility_matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
 No template found for the selected index pattern
 ------------------------------------------------
@@ -29,7 +29,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.3/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
   {"acknowledged":true}
 
@@ -85,9 +85,7 @@ API version mismatch. Expected vX.Y.Z
 
 The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
-You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.9.3.
-
-Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
+You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.9.5.
 
 Routes. Error. Cannot read property 'manager' of undefined
 ----------------------------------------------------------
@@ -148,27 +146,27 @@ All the technologies we are using have their own logs files, you can check them 
 
 1. Check the Elastic Stack log files:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # cat /var/log/elasticsearch/elasticsearch.log | grep -i -E "error|warn"
-  # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
+      # cat /var/log/elasticsearch/elasticsearch.log | grep -i -E "error|warn"
+      # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
 
-.. note::
-  The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
+    .. note::
+      The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
 
-.. warning::
-  By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
+    .. warning::
+      By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
 2. Check the Wazuh app log file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
+      # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
 
-3. Check the Wazuh Manager log file:
+3. Check the Wazuh manager log file:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
+      # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
 
 You can also open a new thread in our `Google mailing list <https://groups.google.com/group/wazuh>`_, or a new issue in our `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_.

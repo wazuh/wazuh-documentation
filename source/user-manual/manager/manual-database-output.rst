@@ -49,7 +49,7 @@ Prerequisites
 Installation
 ------------
 
-As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :ref:`sources installation guide <sources_installation>`, users must pre-compile the source code before running the ``install.sh`` script.
+As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :ref:`sources installation guide <wazuh_server_installation>`, users must pre-compile the source code before running the ``install.sh`` script.
 
 Execute the following command before **step 3** from the installation guide:
 
@@ -139,7 +139,7 @@ The setup process for the database output is finished. Now the only thing left i
 
   .. code-block:: console
 
-    # systemctl retart wazuh-manager
+    # systemctl restart wazuh-manager
 
   b. For SysV Init:
 

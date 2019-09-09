@@ -343,8 +343,7 @@ Each section has their own fields that can be mandatory as described below:
 It is recommended that new policy files be placed under the `ruleset/sca` directory.
 
 .. note::
-  - Remember that the **policy** id field must be unique, not existing in other policy files.
-  - Remember that the **checks** id field must be unique within the same policy.
+  - Remember that the value of the **policy** and **check** id fields must be unique, not existing in other policy files.
 
 
 Information about variables

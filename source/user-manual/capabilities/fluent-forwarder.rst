@@ -5,9 +5,9 @@
 Fluentd forwarder
 =================
 
-.. versionadded:: 4.0.0
+.. versionadded:: 3.9.0
 
-This module allows Wazuh to forward messages to a Fluentd server. Fluentd it's an open source data collector logger that comes along 
+This module allows Wazuh to forward messages to a Fluentd server. Fluentd it's an open source data collector logger that comes along
 with great plugins to build your own logging layer. Check it out at https://www.fluentd.org/
 
 - `How it works`_

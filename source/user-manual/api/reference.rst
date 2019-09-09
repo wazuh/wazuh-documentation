@@ -231,8 +231,8 @@ Runs an Active Response command on a specified agent.
 ::
 
 	{
-	    "error": 0,
-	    "data": "Command sent."
+	    "data": "Command sent.",
+	    "error": 0
 	}
 
 
@@ -285,7 +285,7 @@ Add a new agent.
 	      "key": "MDA5IE5ld0hvc3QgMTAuMC4wLjkgYjA1MTVjZTU0MWZhZjA1MjBkN2UwYTg2NDY1OGZjNmE4NjEyNDZlZDY4Njk0ZWI5NTAwYzQ4MTg4MzYyZGRjNA=="
 	   }
 	}
-	
+
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -320,7 +320,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	      "key": "MDEwIG15TmV3QWdlbnQgYW55IDZkODVmZTI1MzhhNTVmNzVhN2ZhMTFmOTZhNGQ0MTlhMTEyZTIzYzFiMGU2Mzk0NzI3N2U2YTc3MTBjNzY1NTc="
 	   }
 	}
-	
+
 
 Insert agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -369,7 +369,7 @@ Insert an agent with an existing id and key.
 	      "key": "MTIzIE5ld0hvc3RfMiAxMC4wLjEwLjEwIDFhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5emFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6YWJjZGVmZ2hpNjQ="
 	   }
 	}
-	
+
 
 
 Config
@@ -486,7 +486,7 @@ Returns the active configuration in JSON format.
 	      ]
 	   }
 	}
-	
+
 
 
 Delete
@@ -533,7 +533,7 @@ Removes a list of groups.
 	      ]
 	   }
 	}
-	
+
 
 Delete agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -595,7 +595,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	      "total_failed_ids": 1
 	   }
 	}
-	
+
 
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -634,7 +634,7 @@ Removes an agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Group
@@ -672,7 +672,7 @@ Returns the sync status in JSON format.
 	      "synced": false
 	   }
 	}
-	
+
 
 
 Groups
@@ -716,7 +716,7 @@ Adds a list of agents to the specified group.
 	      ]
 	   }
 	}
-	
+
 
 Add agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -752,7 +752,7 @@ Adds an agent to the specified group.
 	   "error": 0,
 	   "data": "Group 'dmz' added to agent '004'."
 	}
-	
+
 
 Create a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -784,7 +784,7 @@ Creates a new group.
 	   "error": 0,
 	   "data": "Group 'pciserver' created."
 	}
-	
+
 
 Get a file in group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -970,7 +970,7 @@ Returns the list of agents in a group.
 	      "totalItems": 3
 	   }
 	}
-	
+
 
 Get agents without group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1061,7 +1061,7 @@ Returns a list with the available agents without group.
 	      "totalItems": 5
 	   }
 	}
-	
+
 
 Get group configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1114,7 +1114,7 @@ Returns the group configuration (agent.conf).
 	      ]
 	   }
 	}
-	
+
 
 Get group files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1256,7 +1256,7 @@ Returns the files belonging to the group.
 	      "totalItems": 24
 	   }
 	}
-	
+
 
 Get groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1318,7 +1318,7 @@ Returns the list of existing agent groups.
 	      "totalItems": 3
 	   }
 	}
-	
+
 
 Put configuration file (agent.conf) into a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1383,7 +1383,7 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 	   "error": 0,
 	   "data": "Agent 004 set to group default."
 	}
-	
+
 
 Remove a single group of multiple agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1423,7 +1423,7 @@ Remove a list of agents of a group.
 	      ]
 	   }
 	}
-	
+
 
 Remove all agent groups.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1455,7 +1455,7 @@ Removes the group of the agent. The agent will automatically revert to the 'defa
 	   "error": 0,
 	   "data": "Group unset for agent '004'."
 	}
-	
+
 
 Remove group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1495,7 +1495,7 @@ Removes the group. Agents that were assigned to the removed group will automatic
          ]
       }
    }
-	
+
 
 Upload file into a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1577,7 +1577,7 @@ Returns a summary of the OS.
 	      ]
 	   }
 	}
-	
+
 
 Get agents summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1607,7 +1607,7 @@ Returns a summary of the available agents.
 	      "Pending": 0
 	   }
 	}
-	
+
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1773,7 +1773,7 @@ Returns a list with the available agents.
 	      "totalItems": 10
 	   }
 	}
-	
+
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1827,7 +1827,7 @@ Returns various information from an agent.
 	      "node_name": "master"
 	   }
 	}
-	
+
 
 Get an agent by its name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1869,7 +1869,7 @@ Returns various information from an agent called :agent_name.
 	      "node_name": "unknown"
 	   }
 	}
-	
+
 
 
 Key
@@ -1905,7 +1905,7 @@ Returns the key of an agent.
 	   "error": 0,
 	   "data": "MDA0IHNlcnZlcjAwMSAxMC4wLjAuNjIgY2U3NmM1ZTQxNzJjZDg0ZGIxZmIwYTJlMzdiMTZjNTJjODQ3YjYxNjQ3ZjZjZWNlNmM2OWRlZjFkZjIwNDI0Mg=="
 	}
-	
+
 
 
 Restart
@@ -2066,7 +2066,7 @@ Returns all the different combinations that agents have for the selected fields.
 	      "totalItems": 10
 	   }
 	}
-	
+
 
 
 Upgrade
@@ -2275,7 +2275,7 @@ Clears cache of the specified group.
 	      "groups": {}
 	   }
 	}
-	
+
 
 Delete cache index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2302,7 +2302,7 @@ Clears entire cache.
 	      "groups": {}
 	   }
 	}
-	
+
 
 
 Info
@@ -2333,7 +2333,7 @@ Returns current cache index.
 	      "groups": {}
 	   }
 	}
-	
+
 
 Return cache configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2364,7 +2364,7 @@ Returns cache configuration.
 	      "redisClient": false
 	   }
 	}
-	
+
 
 
 
@@ -2630,7 +2630,7 @@ Returns ossec.conf in JSON format.
 	      ]
 	   }
 	}
-	
+
 
 Get the cluster configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2666,7 +2666,7 @@ Returns the cluster configuration.
 	      "disabled": false
 	   }
 	}
-	
+
 
 
 Files
@@ -2754,7 +2754,7 @@ Confirmation message.
 	   "error": 0,
 	   "data": "File was deleted"
 	}
-	
+
 
 Get local file from any cluster node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2788,7 +2788,7 @@ Returns the content of a local file (rules, decoders and lists).
 	   "error": 0,
 	   "data": "<!-- Local Decoders -->\n\n<!-- Modify it at your will. -->\n<!-- Copyright (C) 2015-2019, Wazuh Inc. -->\n\n<!--\n  - Allowed static fields:\n  - location   - where the log came from (only on FTS)\n  - srcuser    - extracts the source username\n  - dstuser    - extracts the destination (target) username\n  - user       - an alias to dstuser (only one of the two can be used)\n  - srcip      - source ip\n  - dstip      - dst ip\n  - srcport    - source port\n  - dstport    - destination port\n  - protocol   - protocol\n  - id         - event id\n  - url        - url of the event\n  - action     - event action (deny, drop, accept, etc)\n  - status     - event status (success, failure, etc)\n  - extra_data - Any extra data\n-->\n\n<decoder name=\"local_decoder_example\">\n    <program_name>local_decoder_example</program_name>\n</decoder>\n"
 	}
-	
+
 
 Update local file at any cluster node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2854,7 +2854,7 @@ Returns whether the cluster is enabled or disabled.
 	      "running": "yes"
 	   }
 	}
-	
+
 
 Get node node_id's status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2895,7 +2895,7 @@ Returns the status of the manager processes.
 	      "wazuh-db": "running"
 	   }
 	}
-	
+
 
 Get node_id's information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2937,7 +2937,7 @@ Returns basic information about manager.
 	      }
 	   }
 	}
-	
+
 
 Show cluster health
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3056,7 +3056,7 @@ Show cluster health.
 	      }
 	   }
 	}
-	
+
 
 
 Logs
@@ -3143,7 +3143,7 @@ Returns the three last months of ossec.log.
 	      "totalItems": 142
 	   }
 	}
-	
+
 
 Get summary of ossec.log from a specific node in cluster.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3336,7 +3336,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	      }
 	   }
 	}
-	
+
 
 
 Nodes
@@ -3368,7 +3368,7 @@ Returns the local node info.
 	      "type": "master"
 	   }
 	}
-	
+
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3397,7 +3397,7 @@ Returns the node info.
 	      "ip": "wazuh-master"
 	   }
 	}
-	
+
 
 Get nodes info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3461,7 +3461,7 @@ Returns the nodes info.
 	      ]
 	   }
 	}
-	
+
 
 
 Restart
@@ -3868,7 +3868,7 @@ Returns all decoders included in ossec.conf.
 	      "totalItems": 827
 	   }
 	}
-	
+
 
 Get all decoders files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3974,7 +3974,7 @@ Returns all decoders files included in ossec.conf.
 	      "totalItems": 100
 	   }
 	}
-	
+
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4036,7 +4036,7 @@ Returns all parent decoders included in ossec.conf.
 	      "totalItems": 159
 	   }
 	}
-	
+
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4110,7 +4110,7 @@ Returns the decoders with the specified name.
 	      "totalItems": 3
 	   }
 	}
-	
+
 
 
 
@@ -4274,7 +4274,7 @@ Returns the agent's hardware info.
 	      "totalItems": 6
 	   }
 	}
-	
+
 
 
 Netaddr
@@ -4348,7 +4348,7 @@ Returns the agent's network address info.
 	      "totalItems": 6
 	   }
 	}
-	
+
 
 
 Netiface
@@ -4470,7 +4470,7 @@ Returns the agent's network interface info.
 	      "totalItems": 6
 	   }
 	}
-	
+
 
 
 Netproto
@@ -4542,7 +4542,7 @@ Returns the agent's network protocol info.
 	      "totalItems": 6
 	   }
 	}
-	
+
 
 
 OS
@@ -4678,7 +4678,7 @@ Returns the agent's os info.
 	      "totalItems": 6
 	   }
 	}
-	
+
 
 
 Packages
@@ -4770,7 +4770,7 @@ Returns the agent's packages info.
 	      "totalItems": 1140
 	   }
 	}
-	
+
 
 
 Ports
@@ -4874,7 +4874,7 @@ Returns the agent's ports info.
 	      "totalItems": 19
 	   }
 	}
-	
+
 
 
 Processes
@@ -5019,7 +5019,7 @@ Returns the agent's processes info.
 	      "totalItems": 70
 	   }
 	}
-	
+
 
 
 Results
@@ -5187,7 +5187,7 @@ Returns the content of all CDB lists.
 	      ]
 	   }
 	}
-	
+
 
 Get paths from all lists
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5245,7 +5245,7 @@ Returns the path from all lists.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -5362,7 +5362,7 @@ Returns the requested configuration in JSON format.
 	      }
 	   }
 	}
-	
+
 
 Get manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5413,7 +5413,7 @@ Returns ossec.conf in JSON format.
 	      ]
 	   }
 	}
-	
+
 
 
 Files
@@ -5443,7 +5443,7 @@ Returns if Wazuh configuration is OK.
 	      "status": "OK"
 	   }
 	}
-	
+
 
 Delete a local file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5475,7 +5475,7 @@ Confirmation message.
       "error": 0,
       "data": "File was deleted"
    }
-	
+
 
 Get local file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5509,7 +5509,7 @@ Returns the content of a local file (rules, decoders and lists).
 	   "error": 0,
 	   "data": "<!-- Local Decoders -->\n\n<!-- Modify it at your will. -->\n<!-- Copyright (C) 2015-2019, Wazuh Inc. -->\n\n<!--\n  - Allowed static fields:\n  - location   - where the log came from (only on FTS)\n  - srcuser    - extracts the source username\n  - dstuser    - extracts the destination (target) username\n  - user       - an alias to dstuser (only one of the two can be used)\n  - srcip      - source ip\n  - dstip      - dst ip\n  - srcport    - source port\n  - dstport    - destination port\n  - protocol   - protocol\n  - id         - event id\n  - url        - url of the event\n  - action     - event action (deny, drop, accept, etc)\n  - status     - event status (success, failure, etc)\n  - extra_data - Any extra data\n-->\n\n<decoder name=\"local_decoder_example\">\n    <program_name>local_decoder_example</program_name>\n</decoder>\n"
 	}
-	
+
 
 Update local file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5590,7 +5590,7 @@ Returns basic information about manager.
 	      }
 	   }
 	}
-	
+
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5631,7 +5631,7 @@ Returns the status of the manager processes.
 	      "wazuh-db": "running"
 	   }
 	}
-	
+
 
 
 Logs
@@ -5718,7 +5718,7 @@ Returns the three last months of ossec.log.
 	      "totalItems": 189
 	   }
 	}
-	
+
 
 Get summary of ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5927,7 +5927,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	      }
 	   }
 	}
-	
+
 
 
 Restart
@@ -5935,7 +5935,7 @@ Restart
 
 Restart Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Restarts Wazuh Manager.
+Restarts Wazuh manager.
 
 **Request**:
 
@@ -6029,7 +6029,7 @@ Returns a summary of the current analysisd stats.
 	      "archives_queue_size": 16384
 	   }
 	}
-	
+
 
 Get manager stats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6334,7 +6334,7 @@ Returns the timestamp of the last rootcheck scan.
 	      "start": "2019-08-30 09:18:27"
 	   }
 	}
-	
+
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6378,7 +6378,7 @@ Returns the CIS requirements of all rootchecks of the specified agent.
          ]
       }
    }
-	
+
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6478,7 +6478,7 @@ Returns the PCI requirements of all rootchecks of the agent.
          ]
       }
    }
-	
+
 
 
 Run
@@ -6537,7 +6537,7 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
+
 
 
 
@@ -6758,7 +6758,7 @@ Returns the files of all rules.
 	      "totalItems": 125
 	   }
 	}
-	
+
 
 Get rule gdpr requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6804,7 +6804,7 @@ Returns the GDPR requirements of all rules.
 	      "totalItems": 4
 	   }
 	}
-	
+
 
 Get rule gpg13 requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7012,7 +7012,7 @@ Returns the NIST-800-53 requirements of all rules.
 	      "totalItems": 25
 	   }
 	}
-	
+
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7064,7 +7064,7 @@ Returns the PCI requirements of all rules.
 	      "totalItems": 38
 	   }
 	}
-	
+
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7130,7 +7130,7 @@ Returns the rules with the specified id.
 	      "totalItems": 1
 	   }
 	}
-	
+
 
 
 
@@ -7253,7 +7253,7 @@ Returns the sca checks of an agent.
       }
    }
 
-	
+
 
 Get security configuration assessment (SCA) database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7510,7 +7510,7 @@ Return the timestamp of the last syscheck scan.
 	      "end": "2019-08-30 09:18:50"
 	   }
 	}
-	
+
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7614,7 +7614,7 @@ Returns the syscheck files of an agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Run
@@ -7673,7 +7673,7 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
+
 
 
 
@@ -7730,7 +7730,7 @@ Returns the agent's hardware info.
 	      "board_serial": "PM00R017AM000245"
 	   }
 	}
-	
+
 
 
 Netaddr
@@ -7796,7 +7796,7 @@ Returns the agent's network address info.
 	      "totalItems": 1
 	   }
 	}
-	
+
 
 
 Netiface
@@ -7893,7 +7893,7 @@ Returns the agent's network interface info.
 	      "totalItems": 1
 	   }
 	}
-	
+
 
 
 Netproto
@@ -7956,7 +7956,7 @@ Returns the agent's network protocol info.
 	      "totalItems": 1
 	   }
 	}
-	
+
 
 
 OS
@@ -8011,7 +8011,7 @@ Returns the agent's OS info.
 	      "hostname": "1cb46c820ff5"
 	   }
 	}
-	
+
 
 
 Packages
@@ -8101,7 +8101,7 @@ Returns the agent's packages info.
 	      "totalItems": 225
 	   }
 	}
-	
+
 
 
 Ports
@@ -8203,7 +8203,7 @@ Returns the agent's ports info.
 	      "totalItems": 6
 	   }
 	}
-	
+
 
 
 Processes
