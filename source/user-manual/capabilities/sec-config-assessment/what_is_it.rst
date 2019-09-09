@@ -4,7 +4,7 @@ What is SCA
 .. contents:: Table of Contents
    :depth: 10
 
-One of the most certain ways to secure hosts is by reducing their vulnerability surface. That process is commonly
+One of the most certain ways to securize hosts is by reducing their vulnerability surface. That process is commonly
 known as hardening, and configuration assessment is an effective way to determine opportunities where hosts could
 have their attack surface reduced, and here is where SCA comes into play.
 
@@ -24,7 +24,7 @@ Overview of an SCA check
 
 Each check comprises some metadata information, a description of the purpose of the check, and its logical description
 (fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
-if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, specially CIS policies,
+if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, especially CIS policies,
 already have their CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` below.
 
 
