@@ -50,4 +50,3 @@ The diagrams below list the components that are run per host for single-host and
         installing-splunk/index
         packages-list/index
         compatibility_matrix/index
-        securing_api
