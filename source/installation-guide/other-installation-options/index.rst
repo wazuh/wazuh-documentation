@@ -14,4 +14,4 @@ Wazuh may be installed via packages, but alternatively, you can build Wazuh from
         :maxdepth: 1
 
         installing-splunk/index
-
+        wazuh-from-sources/index

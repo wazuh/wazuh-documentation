@@ -14,23 +14,23 @@ There are several options for installing the Wazuh server depending on the opera
 +-------------------------------+---------------------------------------------------------------+
 | Operative system              | Version                                                       |
 +===============================+===============================================================+
-| Amazon Linux                  | :ref:`1 or greater <wazuh_server_amazon>`                     |
+| Amazon Linux                  | :ref:`1 or greater <wazuh_server_packages_amazon>`            |
 +-------------------------------+---------------------------------------------------------------+
-| CentOS                        | :ref:`6 or greater <wazuh_server_centos>`                     |
+| CentOS                        | :ref:`6 or greater <wazuh_server_packages_centos>`            |
 +-------------------------------+---------------------------------------------------------------+
-| Debian                        | :ref:`7 or greater <wazuh_server_debian>`                     |
+| Debian                        | :ref:`7 or greater <wazuh_server_packages_deb>`               |
 +-------------------------------+---------------------------------------------------------------+
-| Fedora                        | :ref:`22 or greater <wazuh_server_fedora>`                    |
+| Fedora                        | :ref:`22 or greater <wazuh_server_packages_fedora>`           |
 +-------------------------------+---------------------------------------------------------------+
-| Oracle Linux                  | :ref:`6 or greater <wazuh_server_oracle>`                     |
+| Oracle Linux                  | :ref:`6 or greater <wazuh_server_packages_oracle>`            |
 +-------------------------------+---------------------------------------------------------------+
-| OpenSUSE                      | :ref:`42 or greater <wazuh_server_opensuse>`                  |
+| OpenSUSE                      | :ref:`42 or greater <wazuh_server_packages_opensuse>`         |
 +-------------------------------+---------------------------------------------------------------+
-| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_server_rhel>`                       |
+| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_server_packages_rhel>`              |
 +-------------------------------+---------------------------------------------------------------+
-| SUSE                          | :ref:`12 <wazuh_server_suse>`                                 |
+| SUSE                          | :ref:`12 <wazuh_server_packages_suse>`                        |
 +-------------------------------+---------------------------------------------------------------+
-| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_ubuntu>`                 |
+| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_packages_ubuntu>`        |
 +-------------------------------+---------------------------------------------------------------+
 
 
@@ -46,14 +46,14 @@ There are some related additional configurations that can be applied:
     :hidden:
     :maxdepth: 2
 
-    linux/amazon/index
-    linux/centos/index
-    linux/debian/index
-    linux/fedora/index
-    linux/opensuse/index
-    linux/oracle/index
-    linux/rhel/index
-    linux/suse/index
-    linux/ubuntu/index
+    linux/amazon/wazuh_server_packages_amazon
+    linux/centos/wazuh_server_packages_centos
+    linux/debian/wazuh_server_packages_deb
+    linux/fedora/wazuh_server_packages_fedora
+    linux/oracle/wazuh_server_packages_oracle
+    linux/opensuse/wazuh_server_packages_opensuse
+    linux/rhel/wazuh_server_packages_rhel
+    linux/suse/wazuh_server_packages_suse
+    linux/ubuntu/wazuh_server_packages_ubuntu
 
 

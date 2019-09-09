@@ -10,47 +10,47 @@ The Wazuh agent can be installed in the following Linux distributions:
 +-------------------------------+-------------------------------------------------------------------------+
 | Operating system              | Version                                                                 |
 +===============================+=========================================================================+
-| Amazon Linux                  | :ref:`1 or greater <wazuh_agent_amazon_index>`                          |
+| Amazon Linux                  | :ref:`1 or greater <wazuh_agent_package_amazon>`                        |
 +-------------------------------+-------------------------------------------------------------------------+
-| CentOS                        | :ref:`6 or greater <wazuh_agent_centos6_or_greater_index>`              |
+| CentOS                        | :ref:`6 or greater <wazuh_agent_package_centos6_or_greater>`            |
 +                               +-------------------------------------------------------------------------+
-|                               | :ref:`5 <wazuh_agent_centos5_index>`                                    |
+|                               | :ref:`5 <wazuh_agent_package_centos5>`                                  |
 +-------------------------------+-------------------------------------------------------------------------+
-| Debian                        | :ref:`7 or greater <wazuh_agent_debian7_or_greater_index>`              |
+| Debian                        | :ref:`7 or greater <wazuh_agent_package_debian7_or_greater>`            |
 +-------------------------------+-------------------------------------------------------------------------+
-| Fedora                        | :ref:`22 or greater <wazuh_agent_fedora22_or_greater_index>`            |
+| Fedora                        | :ref:`22 or greater <wazuh_agent_package_fedora22_or_greater>`          |
 +-------------------------------+-------------------------------------------------------------------------+
-| Oracle Linux                  | :ref:`6 or greater <wazuh_agent_oracle6_or_greater_index>`              |
+| Oracle Linux                  | :ref:`6 or greater <wazuh_agent_package_oracle6_or_greater>`            |
 +                               +-------------------------------------------------------------------------+
-|                               | :ref:`5 <wazuh_agent_oracle5_index>`                                    |
+|                               | :ref:`5 <wazuh_agent_package_oracle5>`                                  |
 +-------------------------------+-------------------------------------------------------------------------+
-| OpenSUSE                      | :ref:`42 or greater <wazuh_agent_opensuse42_or_greater_index>`          |
+| OpenSUSE                      | :ref:`42 or greater <wazuh_agent_package_opensuse42_or_greater>`        |
 +-------------------------------+-------------------------------------------------------------------------+
-| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_agent_rhel6_or_greater_index>`                |
+| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_agent_package_rhel6_or_greater>`              |
 +                               +-------------------------------------------------------------------------+
-|                               | :ref:`5 <wazuh_agent_rhel5_index>`                                      |
+|                               | :ref:`5 <wazuh_agent_package_rhel5>`                                    |
 +-------------------------------+-------------------------------------------------------------------------+
-| SUSE                          | :ref:`12 <wazuh_agent_suse12_index>`                                    |
+| SUSE                          | :ref:`12 <wazuh_agent_package_suse12>`                                  |
 +                               +-------------------------------------------------------------------------+
-|                               | :ref:`11 <wazuh_agent_suse11_index>`                                    |
+|                               | :ref:`11 <wazuh_agent_package_suse11>`                                  |
 +-------------------------------+-------------------------------------------------------------------------+
-| Ubuntu                        | :ref:`12.10 or greater <wazuh_agent_ubuntu12.04_or_greater_index>`      |
+| Ubuntu                        | :ref:`12.10 or greater <wazuh_agent_package_ubuntu12.04_or_greater>`    |
 +-------------------------------+-------------------------------------------------------------------------+
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    amazon1-or-greater/index
-    centos5/index
-    centos6-or-greater/index
-    debian7-or-greater/index
-    fedora22-or-greater/index
-    opensuse42-leap-and-tumbleweed/index
-    oracle5/index
-    oracle6-or-greater/index
-    rhel5/index
-    rhel6-or-greater/index
-    suse11/index
-    suse12/index
-    ubuntu12.04-or-greater/index
+    amazon1-or-greater/wazuh_agent_package_amazon
+    centos5/wazuh_agent_package_centos5
+    centos6-or-greater/wazuh_agent_package_centos6_or_greater
+    debian7-or-greater/wazuh_agent_package_debian7_or_greater
+    fedora22-or-greater/wazuh_agent_package_fedora22_or_greater
+    opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater
+    oracle5/wazuh_agent_package_oracle5
+    oracle6-or-greater/wazuh_agent_package_oracle6_or_greater
+    rhel5/wazuh_agent_package_rhel5
+    rhel6-or-greater/wazuh_agent_package_rhel6_or_greater
+    suse11/wazuh_agent_package_suse11
+    suse12/wazuh_agent_package_suse12
+    ubuntu12.04-or-greater/wazuh_agent_package_ubuntu12.04_or_greater

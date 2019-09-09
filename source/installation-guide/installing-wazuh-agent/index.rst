@@ -21,17 +21,17 @@ There are several options to install a Wazuh agent, depending on the operating s
 +----------------------------------------------------------+-----------------------------------------------------+
 | Type                                                     | Description                                         |
 +==========================================================+=====================================================+
-| :ref:`AIX installer <wazuh_agent_aix>`                   | Install Wazuh agents on AIX.                        |
+| :ref:`AIX installer <wazuh_agent_package_aix>`           | Install Wazuh agents on AIX.                        |
 +----------------------------------------------------------+-----------------------------------------------------+
-| :ref:`HP-UX installer <wazuh_agent_hpux>`                | Install Wazuh agents on HP-UX.                      |
+| :ref:`HP-UX installer <wazuh_agent_package_hpux>`        | Install Wazuh agents on HP-UX.                      |
 +----------------------------------------------------------+-----------------------------------------------------+
 | :ref:`Linux installer <wazuh_agent_linux>`               | Install Wazuh agents on Linux.                      |
 +----------------------------------------------------------+-----------------------------------------------------+
-| :ref:`macOS installer <wazuh_agent_macos>`               | Install Wazuh agents on macOS.                      |
+| :ref:`macOS installer <wazuh_agent_package_macos>`       | Install Wazuh agents on macOS.                      |
 +----------------------------------------------------------+-----------------------------------------------------+
 | :ref:`Solaris installer <wazuh_agent_solaris>`           | Install Wazuh agents on Solaris.                    |
 +----------------------------------------------------------+-----------------------------------------------------+
-| :ref:`Windows installer <wazuh_agent_windows>`           | Install Wazuh agents on Windows.                    |
+| :ref:`Windows installer <wazuh_agent_package_windows>`   | Install Wazuh agents on Windows.                    |
 +----------------------------------------------------------+-----------------------------------------------------+
 
 .. note:: The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
@@ -44,10 +44,10 @@ There are several options to install a Wazuh agent, depending on the operating s
     :hidden:
     :maxdepth: 2
 
-    aix/index
-    hpux/index
+    aix/wazuh_agent_package_aix
+    hpux/wazuh_agent_package_hpux
     linux/index
-    macos/index
+    macos/wazuh_agent_package_macos
     solaris/index
-    windows/index
+    windows/wazuh_agent_package_windows
     deployment_variables
