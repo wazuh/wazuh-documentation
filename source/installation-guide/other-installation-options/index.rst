@@ -11,6 +11,7 @@ Wazuh may be installed via packages, but alternatively, you can build Wazuh from
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 0
+        :maxdepth: 1
 
         installing-splunk/index
+
