@@ -911,7 +911,7 @@ Returns the list of agents in a group.
 	               "version": "7.6"
 	            },
 	            "dateAdd": "1970-01-01 00:00:00",
-	            "version": "Wazuh v3.9.5",
+	            "version": "Wazuh v3.10.0",
 	            "manager": "1cb46c820ff5",
 	            "mergedSum": "6c2a4b148047e590188f8befe47c2bff",
 	            "id": "001",
@@ -938,7 +938,7 @@ Returns the list of agents in a group.
 	               "version": "7.6"
 	            },
 	            "dateAdd": "2019-08-30 09:18:12",
-	            "version": "Wazuh v3.9.5",
+	            "version": "Wazuh v3.10.0",
 	            "manager": "7995615e03c0",
 	            "mergedSum": "6c2a4b148047e590188f8befe47c2bff",
 	            "id": "002",
@@ -1710,7 +1710,7 @@ Returns a list with the available agents.
 	            "node_name": "worker-1",
 	            "ip": "172.22.0.6",
 	            "id": "002",
-	            "version": "Wazuh v3.9.5",
+	            "version": "Wazuh v3.10.0",
 	            "manager": "7995615e03c0"
 	         },
 	         {
@@ -1736,7 +1736,7 @@ Returns a list with the available agents.
 	            "node_name": "master",
 	            "ip": "172.22.0.3",
 	            "id": "001",
-	            "version": "Wazuh v3.9.5",
+	            "version": "Wazuh v3.10.0",
 	            "manager": "1cb46c820ff5"
 	         },
 	         {
@@ -7414,7 +7414,7 @@ Returns a dictionary with a full summary of agents.
 	            },
 	            {
 	               "count": 2,
-	               "version": "Wazuh v3.9.5"
+	               "version": "Wazuh v3.10.0"
 	            },
 	            {
 	               "count": 7
