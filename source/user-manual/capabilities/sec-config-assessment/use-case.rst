@@ -8,7 +8,7 @@ Use case: Getting an alert when a check changes its result value
 
 Let's describe how the SCA scanner detects and reports changes in the check results using a simple use case.
 
-To configure the execution of the *SCA* module with a policy file, it is necessary to set up a block as follows:
+To configure the execution of the **SCA** module with a policy file, it is necessary to set up a block as follows:
 
 .. code-block:: none
 

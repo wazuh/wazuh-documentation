@@ -64,10 +64,10 @@ detailed in the :ref:`sca_policy_file_sections` table.
 
 
 .. note::
-  If the *requirements* aren't satisfied for a specific policy file, the scan for that file won't start.
+  If the **requirements** aren't satisfied for a specific policy file, the scan for that file won't start.
 
 
-Each section has their own fields as described in the as described in tables
+Each section has their own fields as described in tables
 :ref:`sca_policy_file_policy_section`,
 :ref:`sca_policy_file_requirements_section`,
 :ref:`sca_policy_file_variables_section`,
@@ -115,7 +115,7 @@ Each section has their own fields as described in the as described in tables
     +--------------------+----------------+-------------------+------------------------+
 
 .. note::
-  - Fields id from **policy** and **checks** must be unique across policy files.
+  Fields id from **policy** and **checks** must be unique across policy files.
 
 Variables
 ^^^^^^^^^
@@ -345,8 +345,8 @@ This rule reads as `Pass if there's a line whose first character is not "#" and 
 Examples of content checks:
 
     - ``systemctl is-enabled cups -> r:^enabled``` checks that the output of the command contains a line starting by `enabled`.
-    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4'`` checks that value of MaxAuthTries is less or equal to 4.
-    - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of *LimitBlankPasswordUse* is 1.
+    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4'`` checks that `MaxAuthTries` is less or equal to 4.
+    - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of `LimitBlankPasswordUse` is 1.
 
 Examples
 ###################

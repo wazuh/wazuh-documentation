@@ -72,7 +72,7 @@ potential event flooding.
     sca.check.file: ["/proc/sys/kernel/randomize_va_space"]
     sca.check.result: passed
 
-Scan results summaries are then shown on the Wazuh App, within the *SCA* tab.
+Scan results summaries are then shown on the Wazuh App, within the **SCA** tab.
 
 .. thumbnail:: ../../../images/sca/sca-agent.png
     :title: SCA summary

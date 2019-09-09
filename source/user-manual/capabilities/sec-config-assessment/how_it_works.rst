@@ -8,11 +8,11 @@ How SCA works
 
 Each agent has its own local database where it stores the current state of each check: *passed*, *failed*,
 or *not-applicable*, allowing agents to only send the differences detected between scans. If there has been no
-change, only the scan *summary* event will be sent, thus avoiding unnecessary network traffic while keeping
+change, only the scan ``summary`` event will be sent, thus avoiding unnecessary network traffic while keeping
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
 Kibana App.
 
-An overview of the integrity (more on this later) and alerting flow is depicted in the
+An   the integrity (more on this later) and alerting flow is depicted in the
 :ref:`sequence diagram <sca_sequence_diagram>` below.
 
 .. figure:: ../../../images/sca/sca_sequence_diagram.svg
@@ -72,11 +72,11 @@ After evaluating the aforementioned check, the following event is generated:
     }
   }
 
-The *result* is ``passed`` because the rule found "enabled" at the beginning of a line in the output of
+The ``result`` is ``passed`` because the rule found "enabled" at the beginning of a line in the output of
 command `systemctl is-enabled auditd`.
 
 .. note::
-  A *check* will be marked as ``not applicable`` in the case an error occurs while performing the check.
+  A **check** will be marked as ``not applicable`` in case an error occurs while performing the check.
   In such cases, instead of including the field ``result``, fields: ``status`` and ``reason`` will be included.
 
 
@@ -125,7 +125,7 @@ database and the manager-side differ. This scenary could happen due to, for inst
     +----------+------------------+--------------------+
     | 1001     | ``failed``       | ``failed``         |
     +----------+------------------+--------------------+
-    | 1002     | ``failed``       | *missing*          |
+    | 1002     | ``failed``       | ``missing``        |
     +----------+------------------+--------------------+
     | 1003     | ``passed``       | ``passed``         |
     +----------+------------------+--------------------+
