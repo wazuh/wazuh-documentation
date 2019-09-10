@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_centos:
 
-CentOS from packages
-====================
+CentOS
+======
 
 For CentOS 6 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

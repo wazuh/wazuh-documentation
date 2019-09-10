@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_ubuntu:
 
-Ubuntu from packages
-====================
+Ubuntu
+======
 
 For Ubuntu 12.04 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

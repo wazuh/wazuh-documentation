@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_fedora:
 
-Fedora from packages
-====================
+Fedora
+======
 
 For Fedora 22 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

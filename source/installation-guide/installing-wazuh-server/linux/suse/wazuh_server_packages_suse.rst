@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_suse:
 
-SUSE from packages
-==================
+SUSE
+====
 
 For SUSE 12, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

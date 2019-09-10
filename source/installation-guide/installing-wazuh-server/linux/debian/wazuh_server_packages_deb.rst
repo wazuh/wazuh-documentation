@@ -2,8 +2,8 @@
 
 .. _wazuh_server_packages_deb:
 
-Debian from packages
-====================
+Debian
+======
 
 For Debian 7 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
