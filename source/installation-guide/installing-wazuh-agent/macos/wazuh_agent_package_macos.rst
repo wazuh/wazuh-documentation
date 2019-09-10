@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_macos:
 
-macOS from package
-==================
+macOS
+=====
 
 The macOS agent can be downloaded from :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
 
