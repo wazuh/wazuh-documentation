@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_amazon:
 
-Amazon Linux from sources
-=========================
+Amazon Linux
+============
 
 This guide describes how to install the Wazuh agent from source code for Amazon Linux 1 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

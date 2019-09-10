@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_suse12:
 
-SUSE 12 from sources
-====================
+SUSE 12
+=======
 
 This guide describes how to install the Wazuh agent from source code for SUSE 12. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

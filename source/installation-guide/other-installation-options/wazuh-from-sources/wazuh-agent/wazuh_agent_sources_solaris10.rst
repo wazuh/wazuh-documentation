@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_solaris10:
 
-Solaris 10 from sources
-=======================
+Solaris 10
+==========
 
 This section describes how to download and build the Wazuh HIDS Solaris agent from sources for the following versions:
 

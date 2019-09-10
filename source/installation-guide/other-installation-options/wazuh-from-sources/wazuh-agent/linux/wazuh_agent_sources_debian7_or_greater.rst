@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_debian7_or_greater:
 
-Debian from sources
-===================
+Debian
+======
 
 This guide describes how to install the Wazuh agent from source code for Debian 7 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

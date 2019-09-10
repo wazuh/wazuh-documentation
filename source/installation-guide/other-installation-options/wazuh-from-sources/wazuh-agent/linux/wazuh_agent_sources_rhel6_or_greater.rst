@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_rhel6_or_greater:
 
-Red Hat Enterprise Linux 6 or greater from sources
-==================================================
+Red Hat Enterprise Linux 6 or greater
+=====================================
 
 This guide describes how to install the Wazuh agent from source code for CentOS 6 or greeter. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
