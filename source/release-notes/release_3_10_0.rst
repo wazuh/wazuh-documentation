@@ -16,30 +16,30 @@ This section shows the most relevant improvements and fixes in version 3.10.0. M
 Wazuh core
 ----------
 
-**Security Configuration Assessment (SCA)**
+**Security Configuration Assessment**
 
-- Security Configuration Assessment (SCA) module has been refactored: It has a new internal logic motor and the policy syntax has changed. Its existing policies have also been improved and rewritten according to the refactor. 
-- Now supports symbolic links following so a soft link, a hard link and the real file looks like just one for SCA module. Also now includes a numerical comparator for its rules.
-- Its compliances are now shown as groups on alerts to, i.e., filter alerts on APP side.
-- All present policies files are loaded at the default location.
-- Fixed integrity check when switching between manager nodes: the manager will request a scan when the integrity fails or the table of results is empty.
+- The Security Configuration Assessment (SCA) module has been refactored: It has an improved internal logic motor and the policy syntax has changed. Available SCA policies have been also adapted to this refactor.
+- A numerical comparator has been included as part of the rules syntax.
+- Each check compliance are shown as groups on alerts to, i.e., creating new visualizations about compliance in the Wazuh App.
+- All present policies at the default location are now loaded by default in order to avoid configuration issues.
+- It has been fixed a data inconsistency when switching between manager nodes: the manager will request the last assessment results when the DB is empty between scans.
 
 **File integrity monitoring**
 
 - FIM can now identify resembled paths with the same semantics and add them only once.
-- Fixed error in Windows who-data when handling the directories list.
+- It has been fixed an error in Windows who-data when handling the directories list.
 - Who-data alerts based on audit logs containing hex fields are now correctly handled.
 
 **AWS wodle**
 
 - Fixed the exception handling when using an invalid bucket in AWS wodle.
-- Fix error when getting profiles in custom AWS buckets. 
+- Fix error when getting profiles in custom AWS buckets.
 - Fixed error message in empty AWS bucket case.
 
 **IPv6 Compatibility**
 
-- Increased IP internal representation size for IPv6 lenght.
-- IPv6 loopback address added to localhosts list in DB output module.
+- Increased the IP internal representation size to support IPv6.
+- IPv6 loopback address has been added to localhosts list in the DB output module.
 
 **Other fixes and improvements**
 
@@ -55,10 +55,7 @@ Wazuh core
 Wazuh API
 ---------
 
-- New API requests to retrieve ``HIPAA``, ``NIST 800-53`` and ``gpg13`` compliances rules group list.
-- New ``HIPAA``, ``NIST 800-53`` and ``gpg13`` compliances API request filters.
-- Improvements in stored passwords security: encryption changed from MD5 to BCrypt.
-- New API request to get full summary of agents:
+- A new API request has been created to get the full summary of agents:
 
 .. code-block:: js
 
@@ -102,41 +99,28 @@ Wazuh API
         ...
         }
     }
-    
-    
-- Now users can dive into its SCA scan results using the API.
-- Fixed exception handling for DELETE/agents API calls.(OUT)
-- Disabled cache usage in POST/agents API calls. (OUT)
+
+
+- Support for ``HIPAA``, ``NIST 800-53`` and ``gpg13`` compliances: adding new API requests and filters.
+- Improvements in stored passwords security: encryption changed from MD5 to BCrypt.
 - Fixed API installation in Docker CentOS 7 containers.
 
 
 Wazuh Ruleset
 -------------
 
-- SCA policies have been improved and refactored.
-- SCA policies have been mapped with ``HIPAA`` and ``NIST_800_53`` compliances.
-- Add rules for VIPRE antivirus.
-- Add Windows Software Restriction Policy rules.
-- Add Perdition(imap/pop3 proxy) rules.
-- Add support for NAXSI web application firewall.
-- Add rule to alert about system time changes.
-- Add rule to detect sudo actions from users other than root.
-- Add recon group to SSH rule.
-- Add rule to detect untrusted kernel modules being loaded.
-- Add rules for RAID and disk failures.
-- Add rule for ZFS error message.
-- Add rule for systemd status=1/FAILURE.
-- Fix false positives on rootkit trojans detection.
-- Fix rules about shellshock attack adding the proper GDPR mapping.
-- Wazuh ruleset now includes decoders and rules for Panda-PAPS.
-- Wazuh ruleset now supports CheckPoint Smart-1 firewalls with new decoders and rules.
-- Extend event detection for Windows Defender decoders.
-- Improved postfix decoder there are more extracted fields.
-- Our ruleset now supports Cisco-ASA devices with new rules and decoders.
-- Fixed false positives when using Sonicwall decoders.
-- Fix for 0380-windows_decoder.xml Windows decoder. It now supports ISS logs an extracts new useful fields.
+Our rules and SCA policies have been mapped to support ``HIPAA`` and ``NIST_800_53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
 
-Wazuh Kibana APP
+It has been added rules and decoders for other technologies:
+
+- Rules for the VIPRE antivirus.
+- Support for Cisco-ASA devices with new rules and decoders.
+- Added Windows Software Restriction Policy rules.
+- Added Perdition(imap/pop3 proxy) rules.
+- Added support for NAXSI web application firewall.
+
+
+Wazuh Kibana App
 ----------------
 
 - Added an interactive guide for registering agents, things are now easier for the user, guiding it through the steps needed ending in a copy & paste snippet for deploying his agents.
@@ -148,7 +132,7 @@ Wazuh Kibana APP
 - Hide attributes field from non-Windows agents in the FIM table.
 - Fixed broken view in `Management > Configuration > Amazon S3 > Buckets`, some information was missing.
 - Restored Remove column feature in Discover tabs.
-- The app installation date was not being updated properly, now it's fixed .
+- The app installation date was not being updated properly, now it's fixed.
 - APIs passwords are now obfuscated in server responses.
 
 **Other additions and improvements**
@@ -157,12 +141,12 @@ Wazuh Kibana APP
 - Export the configuration of a certain agent as a PDF document. Supports granularity for exporting just certain sections of the configuration.
 
 
-Wazuh Splunk APP
+Wazuh Splunk App
 ----------------
 
 - New design and several UI/UX changes.
-- Wazuh Splunk APP has been adapted for Microsoft Edge Browser
-- Added an interactive guide for registering agents, things are now easier for the user, guiding it through the steps needed ending in a copy & paste snippet for deploying his agent #623
+- Wazuh Splunk app has been adapted for Microsoft Edge Browser.
+- Added an interactive guide for registering agents, things are now easier for the user, guiding it through the steps needed ending in a copy & paste snippet for deploying his agent.
 - Added ``HIPAA`` and ``NIST-800-53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
 - Debug level added for app logs.
 - Improved app performance.
