@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_centos5:
 
-CentOS 5 from package
-=====================
+CentOS 5
+========
 
 The RPM package is suitable for CentOS 5. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
