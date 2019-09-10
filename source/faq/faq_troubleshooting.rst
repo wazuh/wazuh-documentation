@@ -53,3 +53,25 @@ Agent event queue is full. Events may be lost
 ---------------------------------------------
 
 https://documentation.wazuh.com/3.x/user-manual/capabilities/antiflooding.html
+
+
+ossec-agentd: CRITICAL: (1751): File client.keys not found or empty
+-------------------------------------------------------------------
+Did you register the Agent against the Manager? The Agent has to be connected to a Manager in order to work. To register the Agent you may follow the steps that our documentation provide: https://documentation.wazuh.com/current/user-manual/registering/linux-unix-simple-registration.html
+
+
+Agent-auth registration timeout
+-------------------------------
+In this case is worth to check ports, firewall and iptables.
+
+
+
+How can i find out if an agent is in a broken state?
+----------------------------------------------------
+Agent's ossec-agentd.state file will let you see the current state and the latest keepalive and ack signals.
+This file may be found in C:\Program Files(x86)\ossec-agent\ on Windows an /var/ossec/var/run/ on Linux agents
+
+
+
+
+{"error":0,"data":[{"id":"000","name":"nanoPill","ip":"127.0.0.1","status":"Active"},{"id":"003","name":"SERV2016","ip":"192.168.75.131","status":"Disconnected"},{"id":"<na>","name":"(ssh_integrity_check_linux) vagrant@192.168.33.32","ip":"192.168.33.32","status":"agentless"},{"id":"<na>","name":"(ssh_generic_diff) vagrant@192.168.33.32","ip":"192.168.33.32","status":"agentless"}]}
