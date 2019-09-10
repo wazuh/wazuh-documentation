@@ -14,6 +14,8 @@ There are several options for installing the Wazuh server depending on the opera
 +------------------------------------------------+-----------------------------------------------------+
 | Type                                           | Description                                         |
 +================================================+=====================================================+
+| :ref:`AIX <wazuh_agent_sources_aix>`           | Install Wazuh agent from sources on AIX.            |
++------------------------------------------------+-----------------------------------------------------+
 | :ref:`Linux <wazuh_agent_sources_linux>`       | Install Wazuh agent from sources on Linux.          |
 +------------------------------------------------+-----------------------------------------------------+
 | :ref:`macOS <wazuh_agent_sources_macos>`       | Install Wazuh agent from sources on macOS.          |
@@ -38,6 +40,7 @@ There are some related additional configurations that can be applied:
     :maxdepth: 2
 
     linux/index
+    wazuh_agent_sources_aix
     wazuh_agent_sources_macos
     wazuh_agent_sources_solaris10
     wazuh_agent_sources_solaris11
