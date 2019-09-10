@@ -13,7 +13,7 @@ There are several options for installing the Wazuh server depending on the opera
 
 +------------------------------------------------+-----------------------------------------------------+
 | Type                                           | Description                                         |
-+==========================================================+===========================================+
++================================================+=====================================================+
 | :ref:`Linux <wazuh_agent_sources_linux>`       | Install Wazuh agent from sources on Linux.          |
 +------------------------------------------------+-----------------------------------------------------+
 | :ref:`macOS <wazuh_agent_sources_macos>`       | Install Wazuh agent from sources on macOS.          |
