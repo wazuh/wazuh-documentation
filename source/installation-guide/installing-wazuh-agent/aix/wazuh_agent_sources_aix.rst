@@ -49,7 +49,7 @@ Installing Wazuh agent
 
    .. code-block:: console
         
-        # cd wazuh*
+        # cd wazuh-*
         # gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.9 
         # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes DISABLE_SYSC=yes
 
