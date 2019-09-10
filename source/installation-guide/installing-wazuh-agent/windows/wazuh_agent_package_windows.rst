@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_windows:
 
-Windows from package
-====================
+Windows
+=======
 
 .. note:: You will need administrator privileges to perform this installation.
 
