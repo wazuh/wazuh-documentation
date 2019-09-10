@@ -10,7 +10,7 @@ Installing Splunk
 
 To learn more about how Splunk works, here is their documentation: `Splunk <https://docs.splunk.com/Documentation>`_
 
-This guide describes the Splunk Enterprise installation process for two different types of distributed architecture, along with the Splunk forwarder and the Wazuh app for Splunk.
+This guide describes the Splunk Enterprise installation process for two different types of Multitier Server, along with the Splunk forwarder and the Wazuh app for Splunk.
 
 - The **single-instance architecture** is recommended for testing and evaluation purposes, or also for small-medium sized environments.
 - The **Splunk Cluster architecture** is recommended to replicate data along different indexes and make distributed searches.

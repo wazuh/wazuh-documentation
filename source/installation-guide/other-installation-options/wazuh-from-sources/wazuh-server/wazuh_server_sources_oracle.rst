@@ -5,7 +5,7 @@
 Oracle Linux
 ============
 
-This guide describes how to install the manager and API for Oracle Linux 6 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
+This guide describes how to install the manager and API for Oracle Linux 6 or greater from source code. In addition, for multitier server, you will find some guidance on how to install Filebeat.
 
 Installing Wazuh manager
 ------------------------
@@ -135,4 +135,4 @@ the process is more complex than you may like and it is beyond the scope of Wazu
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Once you have installed the manager, API and Filebeat (only needed for multitier server), you are ready to install :ref:`Elastic Stack <installation_elastic>`.

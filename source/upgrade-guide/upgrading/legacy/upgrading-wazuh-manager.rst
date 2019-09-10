@@ -14,7 +14,7 @@ Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
     # /var/ossec/bin/ossec-control stop
     # systemctl stop wazuh-api
 
-2. **If you have a distributed architecture**, remove logstash-forwarder as it has been replaced by Filebeat:
+2. **If you have a multitier server**, remove logstash-forwarder as it has been replaced by Filebeat:
 
   Deb systems:
 

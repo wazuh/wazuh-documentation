@@ -5,7 +5,7 @@
 Installing & Configuring Splunk Cluster
 =======================================
 
-This document will guide the users through the installation process for a multi-instance distributed architecture, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
+This document will guide the users through the installation process for a multitier server, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
 
 .. note::
   Many of the commands described below need to be executed with root user privileges.

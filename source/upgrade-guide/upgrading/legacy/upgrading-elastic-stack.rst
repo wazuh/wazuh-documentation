@@ -125,7 +125,7 @@ Follow these steps to upgrade your Elastic Stack cluster to version 5.X:
    # rm /etc/logstash/conf.d/01-ossec-singlehost.conf
    # rm /etc/logstash/elastic-ossec-template.json
 
-  For **distributed architectures** (Elastic Stack standalone server):
+  For **multitier server** (Elastic Stack standalone server):
 
   .. code-block:: console
 
