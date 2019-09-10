@@ -2,8 +2,8 @@
 
 .. _wazuh_server_sources_ubuntu:
 
-Ubuntu from sources
-===================
+Ubuntu
+======
 
 This guide describes how to install the manager and API for Ubuntu 12.04 or greater from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
