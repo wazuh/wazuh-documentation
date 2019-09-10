@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_suse11:
 
-SUSE 11 from package
-====================
+SUSE 11
+=======
 
 The RPM package is suitable for installation on SUSE 11. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
