@@ -23,10 +23,10 @@ The Wazuh agent can be installed in the following Solaris versions.
     :hidden:
     :maxdepth: 2
 
-    solaris10/wazuh_agent_package_solaris10
-    solaris10/wazuh_agent_package_solaris10
-    solaris11/wazuh_agent_package_solaris11
-    solaris11/wazuh_agent_package_solaris11
+    wazuh_agent_package_solaris10
+    wazuh_agent_package_solaris10
+    wazuh_agent_package_solaris11
+    wazuh_agent_package_solaris11
 
 
 

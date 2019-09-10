@@ -44,10 +44,10 @@ There are several options to install a Wazuh agent, depending on the operating s
     :hidden:
     :maxdepth: 2
 
-    aix/wazuh_agent_package_aix
-    hpux/wazuh_agent_package_hpux
+    wazuh_agent_package_aix
+    wazuh_agent_package_hpux
     linux/index
-    macos/wazuh_agent_package_macos
+    wazuh_agent_package_macos
     solaris/index
-    windows/wazuh_agent_package_windows
+    wazuh_agent_package_windows
     deployment_variables

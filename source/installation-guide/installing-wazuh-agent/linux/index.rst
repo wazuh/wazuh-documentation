@@ -41,16 +41,16 @@ The Wazuh agent can be installed in the following Linux distributions:
     :hidden:
     :maxdepth: 1
 
-    amazon1-or-greater/wazuh_agent_package_amazon
-    centos5/wazuh_agent_package_centos5
-    centos6-or-greater/wazuh_agent_package_centos6_or_greater
-    debian7-or-greater/wazuh_agent_package_debian7_or_greater
-    fedora22-or-greater/wazuh_agent_package_fedora22_or_greater
-    opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater
-    oracle5/wazuh_agent_package_oracle5
-    oracle6-or-greater/wazuh_agent_package_oracle6_or_greater
-    rhel5/wazuh_agent_package_rhel5
-    rhel6-or-greater/wazuh_agent_package_rhel6_or_greater
-    suse11/wazuh_agent_package_suse11
-    suse12/wazuh_agent_package_suse12
-    ubuntu12.04-or-greater/wazuh_agent_package_ubuntu12.04_or_greater
+    wazuh_agent_package_amazon
+    wazuh_agent_package_centos5
+    wazuh_agent_package_centos6_or_greater
+    wazuh_agent_package_debian7_or_greater
+    wazuh_agent_package_fedora22_or_greater
+    wazuh_agent_package_opensuse42_or_greater
+    wazuh_agent_package_oracle5
+    wazuh_agent_package_oracle6_or_greater
+    wazuh_agent_package_rhel5
+    wazuh_agent_package_rhel6_or_greater
+    wazuh_agent_package_suse11
+    wazuh_agent_package_suse12
+    wazuh_agent_package_ubuntu12.04_or_greater
