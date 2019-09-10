@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_opensuse42_or_greater:
 
-OpenSUSE from package
-=====================
+OpenSUSE
+========
 
 The RPM package is suitable for installation on openSUSE 42, Leap and Tumbleweed. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
