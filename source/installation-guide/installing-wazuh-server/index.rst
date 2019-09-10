@@ -46,14 +46,14 @@ There are some related additional configurations that can be applied:
     :hidden:
     :maxdepth: 2
 
-    linux/amazon/wazuh_server_packages_amazon
-    linux/centos/wazuh_server_packages_centos
-    linux/debian/wazuh_server_packages_deb
-    linux/fedora/wazuh_server_packages_fedora
-    linux/oracle/wazuh_server_packages_oracle
-    linux/opensuse/wazuh_server_packages_opensuse
-    linux/rhel/wazuh_server_packages_rhel
-    linux/suse/wazuh_server_packages_suse
-    linux/ubuntu/wazuh_server_packages_ubuntu
+    linux/wazuh_server_packages_amazon
+    linux/wazuh_server_packages_centos
+    linux/wazuh_server_packages_deb
+    linux/wazuh_server_packages_fedora
+    linux/wazuh_server_packages_oracle
+    linux/wazuh_server_packages_opensuse
+    linux/wazuh_server_packages_rhel
+    linux/wazuh_server_packages_suse
+    linux/wazuh_server_packages_ubuntu
 
 
