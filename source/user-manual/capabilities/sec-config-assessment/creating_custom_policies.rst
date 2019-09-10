@@ -344,8 +344,8 @@ This rule reads as `Pass if there's a line whose first character is not "#" and 
 
 Examples of content checks:
 
-    - ``systemctl is-enabled cups -> r:^enabled``` checks that the output of the command contains a line starting by `enabled`.
-    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4'`` checks that `MaxAuthTries` is less or equal to 4.
+    - ``systemctl is-enabled cups -> r:^enabled`` checks that the output of the command contains a line starting by `enabled`.
+    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4`` checks that `MaxAuthTries` is less or equal to 4.
     - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of `LimitBlankPasswordUse` is 1.
 
 Examples

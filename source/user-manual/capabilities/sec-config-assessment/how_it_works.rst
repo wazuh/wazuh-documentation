@@ -19,9 +19,7 @@ An   the integrity (more on this later) and alerting flow is depicted in the
   :alt: SCA integrity and alerting flow
   :name: sca_sequence_diagram
   :align: center
-  :width: 85%
-
-  SCA integrity and alerting flow
+  :figwidth: 75%
 
 Scan Results
 ------------------------------

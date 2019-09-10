@@ -16,7 +16,7 @@ software, disable unnecessary services, or audit the TCP/IP stack configuration.
 
 Policies for the SCA module are written in YAML format. This that was chosen due having human readability in mind,
 which allows users to quickly understand and write their own policies or extend the existing ones to fit their needs.
-Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well establish
+Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well-established
 standard for host hardening.
 
 Overview of an SCA check
@@ -25,7 +25,7 @@ Overview of an SCA check
 Each check comprises some metadata information, a description of the purpose of the check, and its logical description
 (fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
 if the check is relevant to any compliance specifications, and to which. Most of Wazuh policies, especially CIS policies,
-already have their CIS and PCI-DSS controls mapped. See an example :ref:`example<check_overview>` below.
+already have their CIS and PCI-DSS controls mapped. See an :ref:`example<check_overview>` below.
 
 
 .. code-block:: yaml

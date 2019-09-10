@@ -9,7 +9,7 @@ For the full list of **Officially supported policy files** see table :ref:`avail
 These policies are included with the Wazuh Manager installation so that they can be easily enabled.
 
 For a detailed description of the various configuration parameters of SCA, please check the
-:ref:`reference_sec_config_assessment`
+:ref:`reference_sec_config_assessment`.
 
 Enabling and disabling policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
