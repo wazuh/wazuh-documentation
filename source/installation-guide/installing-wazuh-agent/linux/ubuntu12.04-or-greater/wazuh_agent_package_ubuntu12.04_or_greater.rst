@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_ubuntu12.04_or_greater:
 
-Ubuntu from package
-===================
+Ubuntu
+======
 
 The DEB package is suitable for Ubuntu 12.04 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
