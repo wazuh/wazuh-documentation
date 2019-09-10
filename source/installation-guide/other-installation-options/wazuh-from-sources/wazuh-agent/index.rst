@@ -18,9 +18,7 @@ There are several options for installing the Wazuh server depending on the opera
 +------------------------------------------------+-----------------------------------------------------+
 | :ref:`macOS <wazuh_agent_sources_macos>`       | Install Wazuh agent from sources on macOS.          |
 +------------------------------------------------+-----------------------------------------------------+
-| :ref:`Solaris <wazuh_agent_sources_solaris10>` | Install Wazuh agent from sources on Solaris 10.     |
-+------------------------------------------------+-----------------------------------------------------+
-| :ref:`Solaris <wazuh_agent_sources_solaris11>` | Install Wazuh agent from sources on Solaris 11.     |
+| :ref:`Solaris <wazuh_agent_sources_solaris>`   | Install Wazuh agent from sources on Solaris         |
 +------------------------------------------------+-----------------------------------------------------+
 | :ref:`Windows <wazuh_agent_sources_windows>`   | Install Wazuh agent from sources on Windows.        |
 +------------------------------------------------+-----------------------------------------------------+
@@ -39,7 +37,6 @@ There are some related additional configurations that can be applied:
 
     linux/index
     wazuh_agent_sources_macos
-    wazuh_agent_sources_solaris10
-    wazuh_agent_sources_solaris11
+    solaris/index
     wazuh_agent_sources_windows
 
