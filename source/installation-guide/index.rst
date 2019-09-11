@@ -31,7 +31,7 @@ The Wazuh server and Elastic Stack subsystems run on a single host.
 
 + **Multitier server**
 
-The Wazuh and Elastic Stack subsystems run on separate host systems. Wazuh can be configured to work along 2 or more servers (cluster mode) and Elastic Stack as well.
+The Wazuh and Elastic Stack subsystems run on separate host systems. Wazuh can be configured to work along two or more servers (cluster mode) and Elastic Stack as well.
 
 .. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Installing Wazuh manager - Multitier Server
