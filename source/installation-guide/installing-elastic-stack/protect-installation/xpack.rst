@@ -119,8 +119,8 @@ This section describes how to secure the communications between the involved com
 
     output.elasticsearch.hosts: ['10.0.0.3:9200']
     output.elasticsearch.protocol: https
-    output.elasticsearch.ssl.certificate: "/etc/filebeat/certs/wazuh-manager.crt"
-    output.elasticsearch.ssl.key: "/etc/filebeat/certs/wazuh-manager.key"
+    output.elasticsearch.ssl.certificate: "/etc/filebeat/certs/wazuh-manager/wazuh-manager.crt"
+    output.elasticsearch.ssl.key: "/etc/filebeat/certs/wazuh-manager/wazuh-manager.key"
     output.elasticsearch.ssl.certificate_authorities: ["/etc/filebeat/certs/ca/ca.crt"]
 
 .. note::
