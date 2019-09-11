@@ -44,7 +44,7 @@ The Wazuh and Elastic Stack subsystems run on separate host systems. Wazuh can b
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 0
+        :maxdepth: 1
 
         installing-wazuh-server/index
         installing-elastic-stack/index

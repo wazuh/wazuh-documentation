@@ -44,7 +44,7 @@ After the Wazuh server installation, we strongly recommend to secure the Wazuh A
 
 .. toctree::
     :hidden:
-    :maxdepth: 2
+    :maxdepth: 0
 
     linux/wazuh_server_packages_amazon
     linux/wazuh_server_packages_centos
