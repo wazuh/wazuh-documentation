@@ -74,7 +74,7 @@ $ossec_prefilter
   `Default false`
 
 $ossec_service_provider
-  This option associate Operative System Family
+  This option associate Operating System Family
 
 $ossec_config_profiles
   Specify the agent.conf profile(s) to be used by the agent.
