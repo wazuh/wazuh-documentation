@@ -114,7 +114,9 @@
   {% if pagename == 'index' %}
   <div id="page" class="index">
   {% elif pagename == 'not_found' %}
-  <div id="page" class="page-404">
+  <div id="page" class="page-404 not-indexed">
+  {% elif pagename == 'search' or pagename == 'genindex' %}
+  <div id="page" class="not-indexed">
   {% else %}
   <div id="page">
   {% endif %}
@@ -155,7 +157,7 @@
         <div id="main-content" class="order-1">
           <div id="rst-content">
 
-          {% if pagename != 'index' and pagename != 'not_found' %}
+          {% if pagename != 'index' and pagename != 'not_found' and pagename != 'search' and pagename != 'genindex' %}
           <div class="edit-repo-wrapper">
             {% include "editrepo.html" %}
           </div>
@@ -207,8 +209,6 @@
       </script>
       {{- js() }}
     {% endif %}
-    <script type="text/javascript" src="{{ pathto('_static/js/version-selector.js', 1) }}"></script>
-    <script type="text/javascript" src="{{ pathto('_static/js/style.js', 1) }}"></script>
   {% endif %}
   {%- endblock footer_js %}
 
