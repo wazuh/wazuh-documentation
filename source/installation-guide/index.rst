@@ -22,14 +22,14 @@ Setting up Wazuh involves the installation of two central components: the Wazuh 
 
 The diagrams below list the components that are run per host for single-host and multitier server.
 
-**Single-host architecture**:
+**Single-host server**:
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Installing Wazuh manager - single server architecture
     :align: center
     :width: 100%
 
-**Multitier Server**:
+**Multitier server**:
 
 .. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Installing Wazuh manager - Multitier Server
