@@ -18,18 +18,20 @@ Setting up Wazuh involves the installation of two server subsystems - the Wazuh 
 
 - **Wazuh agent**: Runs on the monitored endpoint. Collects endpoint logs, events and configuration data and sends it to the Wazuh server to detect intrusions and anomalies.
 
-**Multitier server** run the Wazuh manager and Elastic Stack cluster (one or more servers) on different hosts. **Single-host architectures** run the Wazuh manager and Elastic Stack on the same system. This guide covers both installation options.
+The Wazuh server can be installed and operated in either of these two configurations:
 
-The diagrams below list the components that are run per host for single-host and multitier server.
+- **Single-host server**
 
-**Single-host server**:
+The Wazuh server and Elastic Stack subsystems run on a single host.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Installing Wazuh manager - single server architecture
     :align: center
     :width: 100%
 
-**Multitier server**:
++ **Multitier server**
+
+The Wazuh and Elastic Stack subsystems run on separate host systems. Wazuh can be configured to work along 2 or more servers (cluster mode) and Elastic Stack as well.
 
 .. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Installing Wazuh manager - Multitier Server
