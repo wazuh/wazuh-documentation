@@ -34,7 +34,8 @@ There are several options for installing the Wazuh server depending on the opera
 +-------------------------------+---------------------------------------------------------+
 
 
-There are some related additional configurations that can be applied:
+
+After the Wazuh server installation, we strongly recommend to secure the Wazuh API:
 
 - :ref:`Securing the Wazuh API <securing_api>`
 
