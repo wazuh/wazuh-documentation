@@ -12,11 +12,11 @@ This document will guide you through the Wazuh installation process. For interac
 
 Setting up Wazuh involves the installation of two server subsystems - the Wazuh server and Elastic Stack - along with the Wazuh agents:
 
-- **Wazuh server:** Collects and analyze data from deployed agents. Consists of: Wazuh manager, WAZUH API and filebeat.
+- **Wazuh server:** collects and analyze data from deployed agents. Consists of: Wazuh manager, WAZUH API and filebeat.
 
-+ **Elastic Stack**: Ingests and indexes data from the Wazuh server. Consists of: Elasticsearch, Kibana and the Wazuh App. Logstash is optional.
++ **Elastic Stack**: ingests and indexes data from the Wazuh server. Consists of: Elasticsearch, Kibana and the Wazuh App. Logstash is optional.
 
-- **Wazuh agent**: Runs on the monitored endpoint. Collects endpoint logs, events and configuration data and sends it to the Wazuh server to detect intrusions and anomalies.
+- **Wazuh agent**: runs on the monitored endpoint. Collects endpoint logs, events and configuration data and sends it to the Wazuh server to detect intrusions and anomalies.
 
 The Wazuh server can be installed and operated in either of these two configurations:
 
