@@ -106,7 +106,7 @@ The level 9 alert shows how the check has changed from **passed** to **failed**.
 manager side and the last result scanned is available from the SCA tab in the Wazuh app, which finishes the path
 that began with the host being scaned.
 
-.. thumbnail:: ../../../images/sca/SCA_alert_ssh_permit_root_login.png
+.. thumbnail:: ../../../images/sca/sca_alert_ssh_permit_root_login.png
     :title: Alert generated due to SSH configuration change.
     :align: center
     :width: 100%

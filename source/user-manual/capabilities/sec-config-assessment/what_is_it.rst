@@ -32,17 +32,19 @@ already have their CIS and PCI-DSS controls mapped. See an :ref:`example<check_o
     :name: check_overview
     :caption: Check example
 
-    - id: 3006
-      title: "Ensure nodev option set on /tmp partition"
-      description: "The nodev mount option specifies that the filesystem cannot contain special devices."
-      rationale: "Since the /tmp filesystem is not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices in /tmp."
-      remediation: "Edit /etc/systemd/system/local-fs.target.wants/tmp.mount to configure the /tmp mount and run the following commands to enable systemd /tmp mounting: systemctl unmask tmp.mount systemctl enable tmp.mount"
+    - id: 3064
+      title: "Ensure IPv6 default deny firewall policy"
+      description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected."
+      rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
+      remediation: "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
       compliance:
-        - cis: ["1.1.3"]
-        - cis_csc: ["5.1"]
+        - cis: ["3.5.2.1"]
+        - cis_csc: ["9.4"]
       condition: all
       rules:
-        - 'c:mount -> r:\s/tmp\s && r:nodev'
+        - 'c:ip6tables -L -> r:^Chain INPUT && r:policy DROP'
+        - 'c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP'
+        - 'c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP'
 
 Interpreting SCA scan results
 ----------------------------------
@@ -55,22 +57,23 @@ potential event flooding.
     :name: alert_example
     :caption: Alert example
 
-    ** Alert 1556643969.400529: - sca,gdpr_IV_35.7.d
-    2019 Apr 30 10:06:09 (centos) 192.168.0.97->sca
-    Rule: 19008 (level 3) -> 'CIS Benchmark for Red Hat Enterprise Linux 7: Ensure address space layout randomization (ASLR) is enabled'
-    {"type":"check","id":645241598,"policy":"CIS Benchmark for Red Hat Enterprise Linux 7","policy_id":"cis_rhel7","check":{"id":6523,"title":"Ensure address space layout randomization (ASLR) is enabled","description":"Address space layout randomization (ASLR) is an exploit mitigation technique which randomly arranges the address space of key data areas of a process.","rationale":"Randomly placing virtual memory regions will make it difficult to write memory page exploits as the memory placement will be consistently shifting.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: kernel.randomize_va_space = 2 and set the active kernel parameter","compliance":{"cis":"1.5.3","cis_csc":"8.4"},"rules":["f:/proc/sys/kernel/randomize_va_space -> !r:^2$;"],"file":"/proc/sys/kernel/randomize_va_space","result":"passed"}}
+    ** Alert 1568287462.156390: mail  - sca,gdpr_IV_35.7.d
+    2019 Sep 12 13:24:22 (debian9-56) 10.0.0.56->sca
+    Rule: 19007 (level 7) -> 'CIS benchmark for Debian/Linux 9 L1: Ensure IPv6 default deny firewall policy'
+    {"type":"check","id":1802673953,"policy":"CIS benchmark for Debian/Linux 9 L1","policy_id":"cis_debian9_L1","check":{"id":3064,"title":"Ensure IPv6 default deny firewall policy","description":"A default deny all policy on connections ensures that any unconfigured network usage will be rejected.","rationale":"With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.","remediation":"Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.","compliance":{"cis":"3.5.2.1","cis_csc":"9.4"},"rules":["c:ip6tables -L -> r:^Chain INPUT && r:policy DROP","c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP","c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"],"command":"ip6tables -L","result":"failed"}}
     sca.type: check
-    sca.scan_id: 645241598
-    sca.policy: CIS Benchmark for Red Hat Enterprise Linux 7
-    sca.check.id: 6523
-    sca.check.title: Ensure address space layout randomization (ASLR) is enabled
-    sca.check.description: Address space layout randomization (ASLR) is an exploit mitigation technique which randomly arranges the address space of key data areas of a process.
-    sca.check.rationale: Randomly placing virtual memory regions will make it difficult to write memory page exploits as the memory placement will be consistently shifting.
-    sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: kernel.randomize_va_space = 2 and set the active kernel parameter
-    sca.check.compliance.cis: 1.5.3
-    sca.check.compliance.cis_csc: 8.4
-    sca.check.file: ["/proc/sys/kernel/randomize_va_space"]
-    sca.check.result: passed
+    sca.scan_id: 1802673953
+    sca.policy: CIS benchmark for Debian/Linux 9 L1
+    sca.check.id: 3064
+    sca.check.title: Ensure IPv6 default deny firewall policy
+    sca.check.description: A default deny all policy on connections ensures that any unconfigured network usage will be rejected.
+    sca.check.rationale: With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.
+    sca.check.remediation: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.
+    sca.check.compliance.cis: 3.5.2.1
+    sca.check.compliance.cis_csc: 9.4
+    sca.check.command: ["ip6tables -L"]
+    sca.check.result: failed
+
 
 Scan results summaries are then shown on the Wazuh App, within the **SCA** tab.
 
@@ -81,7 +84,7 @@ Scan results summaries are then shown on the Wazuh App, within the **SCA** tab.
 
 In addition, each result can be expanded to display additional information.
 
-.. thumbnail:: ../../../images/sca/sca_check_result.png
+.. thumbnail:: ../../../images/sca/sca_agent_check_result.png
     :title: SCA check list
     :align: center
     :width: 100%
