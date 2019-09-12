@@ -74,14 +74,14 @@ potential event flooding.
 
 Scan results summaries are then shown on the Wazuh App, within the **SCA** tab.
 
-.. thumbnail:: ../../../images/sca/sca-agent.png
+.. thumbnail:: ../../../images/sca/sca_agent_overview.png
     :title: SCA summary
     :align: center
     :width: 100%
 
 In addition, each result can be expanded to display additional information.
 
-.. thumbnail:: ../../../images/sca/sca-check.png
+.. thumbnail:: ../../../images/sca/sca_check_result.png
     :title: SCA check list
     :align: center
     :width: 100%

@@ -36,4 +36,4 @@ Further information is available in the following sections:
     how_it_works
     how_to_configure
     creating_custom_policies
-    use-case
+    use_case

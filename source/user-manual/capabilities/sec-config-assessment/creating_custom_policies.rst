@@ -314,7 +314,7 @@ The general form of a rule testing for contents is as follows:
 
     RULE_TYPE:target -> CONTENT_OPERATOR:value
 
-.. attention::
+.. warning::
     - The context of a content check is limited to a **line**.
     - Content checks are case-sensitive.
     - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
@@ -326,7 +326,7 @@ Content check operator results can be negated by adding a ``!`` before then, for
 
     f:/etc/ssh_config -> !r:PermitRootLogin
 
-.. attention::
+.. warning::
     Be careful when negating content operators as that will make then evaluate as  **passed** for **anything** that does not match with the check specified.
     For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
 
@@ -338,7 +338,7 @@ Content check operators can be chained using the operator ``&&`` (AND) as follow
 
 This rule reads as `Pass if there's a line whose first character is not "#" and contains "Protocol" and "2"`.
 
-.. attention::
+.. warning::
     - It is **mandatory** to respect the spaces around the ``&&`` operator.
     - There's no particular order of evaluation between tests chained using the ``&&`` operator.
 
