@@ -13,23 +13,24 @@ This section shows the most relevant improvements and fixes in version 3.10.0. M
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.10.0-6.8.2/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.10.0-7.3.0/CHANGELOG.md>`_
 
+
 Wazuh core
 ----------
 
 **Security Configuration Assessment**
 
-- It has an improved internal logic motor and the policy syntax has changed. Available SCA policies have been also adapted to this refactor.
+- Improved internal logic engine and policy syntax changes. Available SCA policies have been also adapted to this refactor.
 - A numerical comparator has been included as part of the rules syntax.
 - Each check compliance are shown as groups on alerts to, i.e., creating new visualizations about compliance in the Wazuh App.
-- To avoid configuration issues, all present policies at the default location are now loaded by default.
-- It has been fixed a data inconsistency when switching between manager nodes: the manager will request the last assessment results when the DB is empty between scans.
-- :ref:`New documentation <manual_sec_config_assessment>`
+- To avoid configuration issues, all present policies at the default location are now automatically loaded.
+- A data inconsistency when switching between manager nodes has been fixed: the manager will request the last assessment results when the DB is empty between scans.
+For further information, check our `SCA documentation. <manual_sec_config_assessment>`
 
 **File integrity monitoring**
 
-- FIM now identifies resembled paths with the same semantics and add them only once.
+- FIM now identifies equivalent paths adding them only once.
 - It has been fixed an error in Windows who-data when handling the directories list.
-- Who-data alerts based on audit logs with hexadecimal value fields are now correctly handled.
+- Who-data Linux alerts with hexadecimal fields are now correctly handled.
 
 **AWS wodle**
 
@@ -44,12 +45,11 @@ Wazuh core
 
 **Other fixes and improvements**
 
+- The log collection module now extends the duplicate file detection with inode comparison, useful for symbolic and hard links.
 - Agentless queries now accept ``]`` and ``>`` characters as terminal prompt characters.
-- On overwriting rules, list rule field is now correctly copied from the original to the overwriting rule.
+- The mail module now supports alerts with the ``full_log`` field when using ``alerts.json`` as alerts source.
+- On overwriting rules, list field is now correctly copied from the original to the overwriting rule.
 - Fixed an error in the hardware inventory collector for PowerPC architectures.
-- The mail module now properly supports alerts from rules containing the ``no_full_log`` option when using ``alerts.json`` as alerts source.
-- LogCollector module now correctly detects monitored duplicate files.
-- More user-friendly message when some of Wazuh required daemons are down. Now is possible to restart cluster nodes except when ossec-execd is down.
 
 
 Wazuh API
@@ -123,30 +123,23 @@ It has been added rules and decoders for other technologies:
 Wazuh Kibana App
 ----------------
 
-- An interactive and user-friendly guide for registering agents has been added. It guides users through the steps needed, ending in a copy & paste snippet for deploying its agents.
-- Added ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
-- Wazuh app now works under custom Kibana spaces.
-- Wazuh app now works as a native plugin when using Kibana spaces and can be safely hidden/displayed depending on the selected space.
-- Added an alerts summary in ``Overview >`` FIM panel.
+- ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
+- Added support for custom Kibana spaces.
+- Wazuh app now works as a native plugin  and can be safely hidden/displayed depending on the selected space.
+- New alerts summary in ``Overview >`` FIM panel.
 - Alerts search bar fixed for Kibana v7.3.0, now queries are applied as expected.
 - Hide attributes field from non-Windows agents in the FIM table.
 - Fixed broken view in `Management > Configuration > Amazon S3 > Buckets`.
 - Restored Remove column feature in Discover tabs.
-- The app installation date was not being updated properly, now it's fixed.
-
-**Other additions and improvements**
-
-- Export all the information of a Wazuh group and its related agents in a PDF document.
-- Export the configuration of a certain agent as a PDF document. It supports granularity for exporting just some configuration sections.
+- The app installation date is now correctly updated.
 
 
 Wazuh Splunk App
 ----------------
 
+- ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
 - New design and several UI/UX changes.
 - Wazuh Splunk app has been adapted for Microsoft Edge Browser.
-- An interactive and user-friendly guide for registering agents has been added. It guides users through the steps needed, ending in a copy & paste snippet for deploying its agents.
-- New ``HIPAA`` and ``NIST 800 53`` dashboards for the recently added regulatory compliance groups into the Wazuh core.
 - Debug level added for app logs.
 - Improved app performance.
 - Modules are being shown only when supported by the agent OS.
@@ -154,7 +147,8 @@ Wazuh Splunk App
 - Non-active Agent data is now being shown correctly.
 - Devtools content is now successfully loaded.
 
-**Other additions and improvements**
+**Other additions and improvements for both Apps**
 
 - Export all the information of a Wazuh group and its related agents in a PDF document.
-- Export the configuration of a certain agent as a PDF document. It supports granularity for exporting just some configuration sections.
+- Export the configuration of a certain agent as a PDF document.
+- An interactive and user-friendly guide for agents registering: it guides users through the needed steps, ending in a copy & paste snippet for agents deployment.
