@@ -7,7 +7,7 @@ X-Pack
 
 Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intentioned users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
-Configure Elastic Stack to use encrypted connections 
+Configure Elastic Stack to use encrypted connections
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section describes how to secure the communications between the involved components, adding an SSL layer.
@@ -220,6 +220,6 @@ Adding authentication for Elasticsearch
 
 You may now login to your Kibana web interface and use the elastic user credentials to login:
 
-.. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
+.. thumbnail:: ../../images/protect-elastic-stack/xpack-login.png
   :align: center
   :width: 100%
