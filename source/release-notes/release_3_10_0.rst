@@ -24,7 +24,8 @@ Wazuh core
 - Each check compliance are shown as groups on alerts to, i.e., creating new visualizations about compliance in the Wazuh App.
 - To avoid configuration issues, all present policies at the default location are now automatically loaded.
 - A data inconsistency when switching between manager nodes has been fixed: the manager will request the last assessment results when the DB is empty between scans.
-For further information, check our `SCA documentation. <manual_sec_config_assessment>`
+
+For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
 
 **File integrity monitoring**
 
@@ -59,7 +60,7 @@ Wazuh API
 
 .. code-block:: js
 
-        # curl -u foo:bar "http://localhost:55000/summary/agents?pretty"
+    GET /summary/agents
     {
     "error": 0,
     "data": {
@@ -125,8 +126,8 @@ Wazuh Kibana App
 
 - ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
 - Added support for custom Kibana spaces.
-- Wazuh app now works as a native plugin  and can be safely hidden/displayed depending on the selected space.
-- New alerts summary in ``Overview >`` FIM panel.
+- Wazuh app now works as a native plugin and can be safely hidden/displayed depending on the selected space.
+- New alerts summary in `Overview > FIM` panel.
 - Alerts search bar fixed for Kibana v7.3.0, now queries are applied as expected.
 - Hide attributes field from non-Windows agents in the FIM table.
 - Fixed broken view in `Management > Configuration > Amazon S3 > Buckets`.
