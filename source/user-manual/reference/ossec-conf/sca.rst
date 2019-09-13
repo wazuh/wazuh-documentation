@@ -108,6 +108,9 @@ Attributes
 | **enabled**    | Offers the possibility to disable a policy when it has been enabled previously. |
 +----------------+---------------------------------------------------------------------------------+
 
+.. note::
+  Since Wazuh v3.10.0, although this section is missing, the Wazuh Agent will run scans for every policy (.yaml or .yml files) present in their ruleset folder.
+
 Example
 
 .. code-block:: xml

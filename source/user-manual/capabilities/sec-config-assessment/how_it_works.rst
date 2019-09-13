@@ -12,7 +12,7 @@ change, only the scan ``summary`` event will be sent, thus avoiding unnecessary 
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
 Kibana App.
 
-An   the integrity (more on this later) and alerting flow is depicted in the
+An the integrity (more on this later) and alerting flow is depicted in the
 :ref:`sequence diagram <sca_sequence_diagram>` below.
 
 .. figure:: ../../../images/sca/sca_sequence_diagram.svg

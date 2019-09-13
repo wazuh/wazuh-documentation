@@ -129,7 +129,7 @@ will be added.
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | web_vulnerabilites          |  System audit for web-related vulnerabilities              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apache2_4               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |
+    | cis_apache_24               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_mysql5-6_community      |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

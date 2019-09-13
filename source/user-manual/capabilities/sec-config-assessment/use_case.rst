@@ -69,14 +69,14 @@ changes, as any variation alters the summary information.
     sca.score: 36
     sca.file: cis_debian9_L1.yml
 
-If we focus in check 3078 (whose alert appears above), we can see it verifies that IP forwarding is
-disabled by checking the contents of file */proc/sys/net/ipv4/ip_forward*.
+If we focus in check 3078 (whose alert appears above), we can see it verifies that SSH root login is
+disabled by checking the contents of file */etc/ssh/sshd_config*.
 
-By enabling IPv4 forwarding,
+By enabling the `PermitRootLogin` option to force the check to fail,
 
-.. code-block:: bash
+.. code-block:: console
 
-    echo "1" > /proc/sys/net/ipv4/ip_forward
+    # sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config
 
 
 The next SCA scan for that policy generates the following alert:
