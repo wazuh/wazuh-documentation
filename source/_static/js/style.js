@@ -16,7 +16,6 @@ $(function() {
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
     'monitoring',
-    'release-notes/index',
     'user-manual/index',
     'user-manual/agents/index',
     'user-manual/agents/remove-agents/index',
@@ -73,7 +72,6 @@ $(function() {
    */
   function updateFromHash() {
     loc = location.hash;
-    $('.globaltoc .leaf, .globaltoc a.current').removeClass('current');
     selectLeaf(loc);
   }
 
@@ -161,12 +159,6 @@ $(function() {
   scrollNavbar();
   headerSticky();
 
-  setTimeout(function() {
-    if ($('#page').hasClass('no-latest-docs')) {
-      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
-    }
-  }, 500);
-
   $('#navbar').on('mousemove', function(e) {
     pageHover = 'nav';
   });
@@ -203,7 +195,7 @@ $(function() {
       noticeHeight = parseInt($('.no-latest-notice').outerHeight());
     }
 
-    if ($(window).width() >= 992) {
+    if ($(window).outerWidth() >= 992) {
       $('html').css({'overflow-y': 'auto'});
     }
 
@@ -223,16 +215,13 @@ $(function() {
     documentScroll = $(window).scrollTop();
     containerNavHeight = parseInt($('#navbar-globaltoc').outerHeight());
     navHeight = parseInt($('#globaltoc').outerHeight());
-    if ($('#page').hasClass('no-latest-docs')) {
-      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
-    }
     /* Update height of navbar */
     heightNavbar();
     /* If the coursor isn't in the navbar */
     if (((pageFocus == 'document' && pageHover == 'document') ||
       (pageMouseWheel && pageFocus == 'nav' && pageHover == 'nav') ||
       (!navbarClick && !pageMouseWheel && pageFocus == 'document' && pageHover == 'nav')
-    ) && $(window).width() >= 992) {
+    ) && $(window).outerWidth() >= 992) {
       /* Set the new scroll of navbar */
       scrollNavbar();
     }
@@ -252,7 +241,7 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
-    if ($(window).width() >= 992) {
+    if ($(window).outerWidth() >= 992) {
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': (noticeHeight+navbarTop-documentScroll)+'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - '+ noticeHeight +'px + '+documentScroll+'px)'});
@@ -331,6 +320,7 @@ $(function() {
     }
 
     $('.globaltoc li.initial').removeClass('initial');
+    completelyHideMenuItems();
     return false;
   });
 
@@ -352,6 +342,20 @@ $(function() {
       $(this).addClass('initial').addClass('show');
     });
     $('#navbar-globaltoc').removeClass('hidden');
+    completelyHideMenuItems();
+  }
+
+  /**
+   * Completely hides the visually hidden elements
+   */
+  function completelyHideMenuItems() {
+    $('#navbar-globaltoc li ul').each(function() {
+      if ( $(this).closest('li').hasClass('show') ) {
+        this.hidden = false;
+      } else {
+        this.hidden = true;
+      }
+    });
   }
 
   /**
@@ -432,12 +436,12 @@ $(function() {
 
   /* -- Add funcionability for cloud-info --------------------------------------------------------------------------- */
 
-  if ($(window).width() < 1200) {
+  if ($(window).outerWidth() < 1200) {
     $('#capabilities .left .topic.active p').not('.topic-title').slideDown(300);
   }
 
   $(window).resize(function() {
-    if ($(window).width() >= 1200) {
+    if ($(window).outerWidth() >= 1200) {
       $('#capabilities .left .topic p').not('.topic-title').css({'display': 'none'});
       if ($('#capabilities .left .topic.active').length > 0) {
         capabilitiesHome($('#capabilities .left .topic.active'));
@@ -473,7 +477,7 @@ $(function() {
         eleOther = false;
       }
 
-      if ($(window).width() >= 1200) {
+      if ($(window).outerWidth() >= 1200) {
         let className = '';
         className = $(ele).attr('class');
         className = className.replace(' topic', '');
