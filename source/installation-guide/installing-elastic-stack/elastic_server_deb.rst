@@ -110,7 +110,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     server.host: "<kibana_ip>"
 
-4. Enable and start the Kibana service:
+4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
+
+  .. code-block:: yaml
+  
+    elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"]
+
+5. Enable and start the Kibana service:
 
   a) For Systemd:
 
@@ -127,7 +133,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # update-rc.d kibana defaults 95 10
     # service kibana start
 
-5. (Optional) Disable the Elasticsearch updates:
+6. (Optional) Disable the Elasticsearch updates:
 
   It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
 
