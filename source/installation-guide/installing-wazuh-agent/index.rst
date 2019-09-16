@@ -19,7 +19,7 @@ In addition, it communicates with the Wazuh manager, sending data in near real-t
 There are several options to install a Wazuh agent, depending on the operating system and whether or not you wish to build from source. Consult the table below and choose how to proceed for a given agent:
 
 +----------------------------------------------------------+-----------------------------------------------------+
-| Type                                                     | Description                                         |
+| Operating system                                         | Description                                         |
 +==========================================================+=====================================================+
 | :ref:`AIX installer <wazuh_agent_package_aix>`           | Install Wazuh agents on AIX.                        |
 +----------------------------------------------------------+-----------------------------------------------------+
@@ -34,9 +34,11 @@ There are several options to install a Wazuh agent, depending on the operating s
 | :ref:`Windows installer <wazuh_agent_package_windows>`   | Install Wazuh agents on Windows.                    |
 +----------------------------------------------------------+-----------------------------------------------------+
 
-.. note:: The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
+In each OS installer document, it is described how to deploy the agent using the deployment variables, which facilitates the task of deployment, registration, and configuration of the agent in a single command. The complete guide: :ref:`Deployment variables <deployment_variables>`.
 
-.. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider exploring these options if you are deploying Wazuh in a larger environment.
+On the other hand, deploying agents to a large number of servers or endpoints can be easier using automation tools like :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM or :ref:`Ansible <wazuh_ansible_guide>`. Consider exploring these options if you are deploying Wazuh in a larger environment.
+
+.. note:: The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
 
 .. rst-class:: d-none
 
