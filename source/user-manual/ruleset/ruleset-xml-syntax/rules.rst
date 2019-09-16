@@ -18,9 +18,12 @@ Available options
 - `field`_
 - `srcip`_
 - `dstip`_
+- `data`_
 - `extra_data`_
 - `user`_
+- `system_name`_
 - `program_name`_
+- `protocol`_
 - `hostname`_
 - `time`_
 - `weekday`_
@@ -40,6 +43,7 @@ Available options
 - `same_user`_
 - `same_field`_
 - `not_same_field`_
+- `global_frequency`_
 - `different_url`_
 - `different_srcgeoip`_
 - `description`_
@@ -201,6 +205,17 @@ Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" t
 | **Allowed values** | Any dstip |
 +--------------------+-----------+
 
+data
+^^^^^^^^^^
+
+Any string that is decoded into the data field.
+
++--------------------+-------------+
+| **Default Value**  | n/a         |
++--------------------+-------------+
+| **Allowed values** | Any string. |
++--------------------+-------------+
+
 extra_data
 ^^^^^^^^^^
 
@@ -223,10 +238,32 @@ Any username (decoded as the username).
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
+system_name
+^^^^^^^^^^^^
+
+system_name name is decoded from syslog process name.
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
++--------------------+------------------------------------------------------------------+
+
 program_name
 ^^^^^^^^^^^^
 
 Program name is decoded from syslog process name.
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
++--------------------+------------------------------------------------------------------+
+
+protocol
+^^^^^^^^
+
+Any protocol.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -538,6 +575,16 @@ As an example of this option, check this rule:
 .. note::
 
   Rule 100002 will trigger when the last three events do not have the same `netinfo.iface.mac` address.
+
+global_frequency
+^^^^^^^^^^^^^^
+
+Specifies that the decoded id do not have to be the same.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+----------------------+
+| **Example of use** | <global_frequency /> |
++--------------------+----------------------+
 
 different_url
 ^^^^^^^^^^^^^
