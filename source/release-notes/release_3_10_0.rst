@@ -17,20 +17,10 @@ This section shows the most relevant improvements and fixes in version 3.10.0. M
 Wazuh core
 ----------
 
-**Security Configuration Assessment**
-
-- Improved internal logic engine and policy syntax changes. Available SCA policies have been also adapted to this refactor.
-- A numerical comparator has been included as part of the rules syntax.
-- Compliance mapping information is now part of the alert groups.
-- Policies present at the default folder are now automatically loaded.
-- The Manager will request the last assessment results when the DB is empty between scans.
-
-For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
-
 **HIPAA/NIST support**
 
 - ``HIPAA`` and ``NIST 800 53`` groups were added to the compliance groups parser. 
-- New corresponding fields in the Wazuh ELK template. 
+- Elasticsearch template addapted to new compliance fields. 
 
 Thanks to this additions, the app includes new ``HIPAA`` and ``NIST 800 53`` compliance dashboards.
 
@@ -43,6 +33,16 @@ Thanks to this additions, the app includes new ``HIPAA`` and ``NIST 800 53`` com
   :title: Wazuh App NIST Dashboard
   :align: center
   :width: 100%
+  
+**Security Configuration Assessment**
+
+- Improved internal logic engine and policy syntax changes. Available SCA policies have been also adapted to this refactor.
+- A numerical comparator has been included as part of the rules syntax.
+- Compliance mapping information is now part of the alert groups.
+- Policies present at the default folder are now automatically loaded.
+- The Manager will request the last assessment results when the DB is empty between scans.
+
+For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
 
 **File integrity monitoring**
 
