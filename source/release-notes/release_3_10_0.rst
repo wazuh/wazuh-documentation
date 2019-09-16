@@ -27,6 +27,23 @@ Wazuh core
 
 For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
 
+**HIPAA/NIST support**
+
+- ``HIPAA`` and ``NIST 800 53`` groups were added to the compliance groups parser. 
+- New corresponding fields in the Wazuh ELK template. 
+
+Thanks to this additions, the app includes new ``HIPAA`` and ``NIST 800 53`` compliance dashboards.
+
+.. thumbnail:: ../images/release-notes/3.10.0/HIPAA.png
+  :title: Wazuh App HIPAA Dashboard
+  :align: center
+  :width: 100%
+
+.. thumbnail:: ../images/release-notes/3.10.0/NIST.png
+  :title: Wazuh App NIST Dashboard
+  :align: center
+  :width: 100%
+
 **File integrity monitoring**
 
 - FIM now identifies equivalent paths adding them only once.
@@ -110,7 +127,7 @@ Wazuh API
 Wazuh Ruleset
 -------------
 
-Our rules and SCA policies have been mapped to support ``HIPAA`` and ``NIST 800 53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
+860 rules have been mapped to support ``HIPAA`` and ``NIST 800 53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
 
 It has been added rules and decoders for other technologies:
 
