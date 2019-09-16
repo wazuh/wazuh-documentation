@@ -74,48 +74,48 @@ Wazuh API
 
 - A new API request has been created to get the full summary of agents:
 
-.. code-block:: js
+  .. code-block:: js
 
-    GET /summary/agents
-    {
-    "error": 0,
-    "data": {
+      GET /summary/agents
+      {
+      "error": 0,
+      "data": {
 
-        ...
-        "agent_status": {
-            "Total": 6,
-            "Active": 6,
-            "Disconnected": 0,
-            "Never connected": 0,
-            "Pending": 0
-        },
-        "agent_version": {
-            "items": [
-                {
-                "version": "Wazuh v3.10.0",
-                "count": 1
-                },
-                {
-                "version": "Wazuh v3.9.5",
-                "count": 5
-                }
-            ],
-            "totalItems": 6
-        },
-        "last_registered_agent": {
-            "os": {
-                "arch": "x86_64",
-                "codename": "Bionic Beaver",
-                "major": "18",
-                "minor": "04",
-                "name": "Ubuntu",
-                "platform": "ubuntu",
-                "uname": "Linux |ee7d4f51c0ae |4.18.0-16-generic |#17~18.04.1-Ubuntu SMP Tue Feb 12 13:35:51 UTC 2019 |x86_64",
-                "version": "18.04.2 LTS"
-            },
-        ...
-        }
-    }
+          ...
+          "agent_status": {
+              "Total": 6,
+              "Active": 6,
+              "Disconnected": 0,
+              "Never connected": 0,
+              "Pending": 0
+          },
+          "agent_version": {
+              "items": [
+                  {
+                  "version": "Wazuh v3.10.0",
+                  "count": 1
+                  },
+                  {
+                  "version": "Wazuh v3.9.5",
+                  "count": 5
+                  }
+              ],
+              "totalItems": 6
+          },
+          "last_registered_agent": {
+              "os": {
+                  "arch": "x86_64",
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "minor": "04",
+                  "name": "Ubuntu",
+                  "platform": "ubuntu",
+                  "uname": "Linux |ee7d4f51c0ae |4.18.0-16-generic |#17~18.04.1-Ubuntu SMP Tue Feb 12 13:35:51 UTC 2019 |x86_64",
+                  "version": "18.04.2 LTS"
+              },
+          ...
+          }
+      }
 
 
 - Support for ``HIPAA``, ``NIST 800 53`` and ``GPG13`` compliance: adding new API requests and filters.
