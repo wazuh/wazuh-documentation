@@ -16,7 +16,7 @@ Wazuh software can be installed in many operating systems. Moreover, there's als
 Operating system compatibility
 ------------------------------
 
-Wazuh Manager
+Wazuh manager
 ^^^^^^^^^^^^^
 
 Below it shown the compatibility table for the Wazuh manager.
@@ -26,28 +26,31 @@ Below it shown the compatibility table for the Wazuh manager.
 +    **Operating System**           +------------------------+--------+--------+
 |                                   |  From 3.0.x to current |  2.1.1 |  2.1.0 |
 +-----------------------------------+------------------------+--------+--------+
-|   Debian Wheezy/7 or newer        |       ✓                |   ✓    |   ✓    |
-+-----------------------------------+------------------------+--------+--------+
-|   Ubuntu Precise/12.04 - 16.10    |       ✓                |   ✓    |   ✓    |
-+-----------------------------------+------------------------+--------+--------+
-|   Ubuntu Zesty/17.04 or newer     |       ✓                |   ✗    |   ✗    |
+|   Amazon Linux 1 or newer         |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
 |   CentOS 6 and 7                  |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
-|   RHEL 6 and 7                    |       ✓                |   ✓    |   ✓    |
+|   Debian Wheezy/7 or newer        |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
 |   Fedora (>= 22)                  |       ✓                |   ✓    |   ✓    |
-+-----------------------------------+------------------------+--------+--------+
-|   SUSE 12 *                       |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
 |   OpenSUSE 42, 15 and Tumbleweed *|       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
 |   Oracle Linux 6 and 7            |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
+|   RHEL 6 and 7                    |       ✓                |   ✓    |   ✓    |
++-----------------------------------+------------------------+--------+--------+
+|   SUSE 12 *                       |       ✓                |   ✗    |   ✗    |
++-----------------------------------+------------------------+--------+--------+
+|   Ubuntu Precise/12.04 - 16.10    |       ✓                |   ✓    |   ✓    |
++-----------------------------------+------------------------+--------+--------+
+|   Ubuntu Zesty/17.04 or newer     |       ✓                |   ✗    |   ✗    |
++-----------------------------------+------------------------+--------+--------+
 
-*(\*) SUSE based host are available as Wazuh Manager since Wazuh v3.2.1 version.*
 
-Wazuh Agent
+*(\*) SUSE based host are available as Wazuh manager since Wazuh v3.2.1 version.*
+
+Wazuh agent
 ^^^^^^^^^^^
 
 In this table, you can check our supported OS list where the Wazuh agent can be installed.
@@ -57,36 +60,40 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +       **Operating System**         +-------------------------+
 |                                    |  From 3.3.1 to current  |
 +------------------------------------+-------------------------+
-|   Debian Wheezy/7 or newer         |   ✓                     |
+|   AIX 5, 6 and 7                   |   ✓                     |
 +------------------------------------+-------------------------+
-|   Ubuntu Precise/12.04 or newer    |   ✓                     |
+|   Amazon Linux, Amazon Linux 2     |   ✓                     |
 +------------------------------------+-------------------------+
 |   CentOS 5, 6 and 7                |   ✓                     |
 +------------------------------------+-------------------------+
-|   RHEL 5, 6 and 7                  |   ✓                     |
+|   Debian Wheezy/7 or newer         |   ✓                     |
++------------------------------------+-------------------------+
+|   Fedora 22 or newer               |   ✓                     |
++------------------------------------+-------------------------+
+|   HP-UX 11.31                      |   ✓                     |
++------------------------------------+-------------------------+
+|   Mac OS X                         |   ✓                     |
++------------------------------------+-------------------------+
+|   OpenSUSE 42, 15, Tumbleweed      |   ✓                     |
 +------------------------------------+-------------------------+
 |   Oracle Linux 5, 6 and 7          |   ✓                     |
 +------------------------------------+-------------------------+
-|   Fedora 22 or newer               |   ✓                     |
+|   RHEL 5, 6 and 7                  |   ✓                     |
++------------------------------------+-------------------------+
+|   Solaris 10 and 11 - i386 / sparc |   ✓                     |
++------------------------------------+-------------------------+
+|   Suse 11 and 12                   |   ✓                     |
++------------------------------------+-------------------------+
+|   Ubuntu Precise/12.04 or newer    |   ✓                     |
 +------------------------------------+-------------------------+
 |   Windows XP or newer              |   ✓                     |
 +------------------------------------+-------------------------+
 |   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
-|   Mac OS X                         |   ✓                     |
-+------------------------------------+-------------------------+
-|   HP-UX 11.31                      |   ✓                     |
-+------------------------------------+-------------------------+
-|   Solaris 10 and 11 - i386 / sparc |   ✓                     |
-+------------------------------------+-------------------------+
-|   AIX 5, 6 and 7                   |   ✓                     |
-+------------------------------------+-------------------------+
-|   Suse 11 and 12                   |   ✓                     |
-+------------------------------------+-------------------------+
-|   Amazon Linux, Amazon Linux 2     |   ✓                     |
-+------------------------------------+-------------------------+
-|   OpenSUSE 42, 15, Tumbleweed      |   ✓                     |
-+------------------------------------+-------------------------+
+
+
+
+
 
 
 Product compatibility
@@ -97,17 +104,17 @@ When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wa
 Manager and agents
 ^^^^^^^^^^^^^^^^^^
 
-The compatibility between Wazuh Agent and Wazuh Manager is guaranteed when the Wazuh Manager has a **newer or equal** version than the Wazuh Agent.
+The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a **newer or equal** version than the Wazuh agent.
 
 
 .. note::
 
-    The Wazuh Manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
+    The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
 
 Manager and API
 ^^^^^^^^^^^^^^^
 
-The API requires the same ``major.minor`` version than the Wazuh Manager in order to be compatible.
+The API requires the same ``major.minor`` version than the Wazuh manager in order to be compatible.
 
 
 API and Kibana app

@@ -63,50 +63,50 @@ The following is an example of how to deploy the CIS-CAT integration:
 
 1. In the configuration file, ``ossec.conf``, set up a section as follows:
 
-  1.1 If you are using a UNIX environment:
+    1.1 If you are using a UNIX environment:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <wodle name="cis-cat">
+      <wodle name="cis-cat">
 
-      <disabled>no</disabled>
-      <timeout>1800</timeout>
-      <interval>1d</interval>
-      <scan-on-start>yes</scan-on-start>
+        <disabled>no</disabled>
+        <timeout>1800</timeout>
+        <interval>1d</interval>
+        <scan-on-start>yes</scan-on-start>
 
-      <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
-      <ciscat_path>wodles/ciscat</ciscat_path>
+        <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
+        <ciscat_path>wodles/ciscat</ciscat_path>
 
-      <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
-        <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
-      </content>
+        <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+          <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
+        </content>
 
-    </wodle>
+      </wodle>
 
 
-  1.2 If you are using a Windows environment:
+    1.2 If you are using a Windows environment:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <wodle name="cis-cat">
-      <disabled>no</disabled>
-      <timeout>1800</timeout>
-      <interval>1d</interval>
-      <scan-on-start>yes</scan-on-start>
+      <wodle name="cis-cat">
+        <disabled>no</disabled>
+        <timeout>1800</timeout>
+        <interval>1d</interval>
+        <scan-on-start>yes</scan-on-start>
 
-      <java_path>\\server\jre\bin</java_path>
-      <ciscat_path>C:\cis-cat</ciscat_path>
+        <java_path>\\server\jre\bin</java_path>
+        <ciscat_path>C:\cis-cat</ciscat_path>
 
-      <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
-        <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
-      </content>
+        <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
+          <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
+        </content>
 
-    </wodle>
+      </wodle>
 
-  Make sure the paths are correct for the location of your Java and the CIS-CAT tool. For both cases, you could specify the full path, or a relative path to the Wazuh installation folder. Also, consider the following tips when configuring the ``content`` section:
+    Make sure the paths are correct for the location of your Java and the CIS-CAT tool. For both cases, you could specify the full path, or a relative path to the Wazuh installation folder. Also, consider the following tips when configuring the ``content`` section:
 
-  - The location of the selected benchmark file have to be indicated by the full path, or by a relative path to the CIS-CAT installation folder.
-  - If no profile is specified, the first one, which is usually the most permissive, will be selected.
+    - The location of the selected benchmark file have to be indicated by the full path, or by a relative path to the CIS-CAT installation folder.
+    - If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
 2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
 

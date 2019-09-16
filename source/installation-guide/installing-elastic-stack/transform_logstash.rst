@@ -76,7 +76,7 @@ them to Elasticsearch.
 
   .. code-block:: console
 
-    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/logstash/7.x/01-wazuh-remote.conf
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.10.0/extensions/logstash/7.x/01-wazuh-remote.conf
 
 5. Restart Logstash.
 
@@ -84,7 +84,7 @@ them to Elasticsearch.
 
     # systemctl restart logstash
 
-5. Configure the Filebeat instance, change the events destination from Elasticsearch instance to the Logstash instance.
+6. Configure the Filebeat instance, change the events destination from Elasticsearch instance to the Logstash instance.
 
   * Disable the Elasticsearch output in ``/etc/filebeat/filebeat.yml``.
 
@@ -102,13 +102,13 @@ them to Elasticsearch.
 
       output.logstash.hosts: ["YOUR_LOGSTASH_SERVER_IP:5000"]
 
-6. Restart Filebeat.
+7. Restart Filebeat.
 
   .. code-block:: console
 
     # systemctl restart filebeat
 
-7. Check if Logstash is reachable from Filebeat.
+8. Check if Logstash is reachable from Filebeat.
 
   .. code-block:: console
 
@@ -129,4 +129,4 @@ them to Elasticsearch.
 
 Useful information for events transformation:
 
-  - https://www.elastic.co/guide/en/logstash/current/transformation.html
+  - `Transforming Data <https://www.elastic.co/guide/en/logstash/current/transformation.html>`_

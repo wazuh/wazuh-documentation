@@ -27,7 +27,7 @@ This section describes how to secure the communications between the involved com
           ip:
             - "10.0.0.4"
 
-2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. 
+2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool.
 
 .. code-block:: console
 
@@ -219,6 +219,7 @@ Adding authentication for Elasticsearch
     # systemctl restart kibana
 
 You may now login to your Kibana web interface and use the elastic user credentials to login:
+
 .. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
   :align: center
   :width: 100%
