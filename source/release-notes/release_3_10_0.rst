@@ -127,7 +127,7 @@ Wazuh API
 Wazuh Ruleset
 -------------
 
-860 rules have been mapped to support ``HIPAA`` and ``NIST 800 53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
+The ruleset have been mapped to support ``HIPAA`` and ``NIST 800 53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
 
 It has been added rules and decoders for other technologies:
 
