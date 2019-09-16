@@ -43,6 +43,7 @@ Available options
 - `same_user`_
 - `same_field`_
 - `not_same_field`_
+- `global_frequency`_
 - `different_url`_
 - `different_srcgeoip`_
 - `description`_
@@ -574,6 +575,16 @@ As an example of this option, check this rule:
 .. note::
 
   Rule 100002 will trigger when the last three events do not have the same `netinfo.iface.mac` address.
+
+global_frequency
+^^^^^^^^^^^^^^
+
+Specifies that the decoded id do not have to be the same.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+----------------------+
+| **Example of use** | <global_frequency /> |
++--------------------+----------------------+
 
 different_url
 ^^^^^^^^^^^^^
