@@ -44,7 +44,7 @@ Elasticsearch
 
   Version of Elasticsearch to install
 
-  *Default 7.3.2*
+  *Default 7.2.1*
 
 **elasticsearch_shards**
 
@@ -97,7 +97,7 @@ Kibana
 
   Version of Kibana to install
 
-  *Default 7.3.2*
+  *Default 7.2.1*
 
 **wazuh_version**
 
