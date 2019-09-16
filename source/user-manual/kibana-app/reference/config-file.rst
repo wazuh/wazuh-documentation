@@ -152,7 +152,7 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define in seconds the frequency of API requests to get the state of the agents to create a new document in the `wazuh-monitoring' index with this data.
+Define in seconds the frequency of API requests to get the state of the agents to create a new document in the `wazuh-monitoring` index with this data.
 
 +--------------------+-----------------------------+
 | **Default value**  | 900 (seconds)               |
