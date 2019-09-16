@@ -10,17 +10,26 @@ This section shows the most relevant improvements and fixes in version 3.10.0. M
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.10.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.10.0/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.10.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.10.0-6.8.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.10.0-7.3.1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.10.0-7.3.0/CHANGELOG.md>`_
-
 
 Wazuh core
 ----------
 
+**Security Configuration Assessment**
+
+- Improved internal logic engine and policy syntax changes. Available SCA policies have been also adapted to this refactor.
+- A numerical comparator has been included as part of the rules syntax.
+- Compliance mapping information is now part of the alert groups.
+- Policies present at the default folder are now automatically loaded.
+- The Manager will request the last assessment results when the DB is empty between scans.
+
+For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
+
 **HIPAA/NIST support**
 
-- ``HIPAA`` and ``NIST 800 53`` groups were added to the compliance groups parser. 
-- Elasticsearch template addapted to new compliance fields. 
+- ``HIPAA`` and ``NIST 800 53`` groups were added to the compliance groups parser.
+- New corresponding fields in the Wazuh Elastic Stack template.
 
 Thanks to this additions, the app includes new ``HIPAA`` and ``NIST 800 53`` compliance dashboards.
 
@@ -33,16 +42,6 @@ Thanks to this additions, the app includes new ``HIPAA`` and ``NIST 800 53`` com
   :title: Wazuh App NIST Dashboard
   :align: center
   :width: 100%
-  
-**Security Configuration Assessment**
-
-- Improved internal logic engine and policy syntax changes. Available SCA policies have been also adapted to this refactor.
-- A numerical comparator has been included as part of the rules syntax.
-- Compliance mapping information is now part of the alert groups.
-- Policies present at the default folder are now automatically loaded.
-- The Manager will request the last assessment results when the DB is empty between scans.
-
-For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
 
 **File integrity monitoring**
 
@@ -53,8 +52,8 @@ For further information, check our :ref:`SCA documentation <manual_sec_config_as
 **AWS module**
 
 - Fixed the exception handling when using an invalid bucket.
-- Fix error when getting profiles in custom AWS buckets.
-- Fixed error message in empty AWS bucket case.
+- Fixed an error when getting profiles in custom AWS buckets.
+- Fixed the error message when an AWS bucket is empty.
 
 **IPv6 Compatibility**
 
@@ -127,7 +126,7 @@ Wazuh API
 Wazuh Ruleset
 -------------
 
-The ruleset have been mapped to support ``HIPAA`` and ``NIST 800 53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
+981 rules have been mapped to support ``HIPAA`` and ``NIST 800 53`` compliance. In addition, the SCA policies have been fully reviewed, adapted to the module refactor and added support for new platforms.
 
 It has been added rules and decoders for other technologies:
 
@@ -143,7 +142,7 @@ Wazuh Kibana App
 
 - ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance mapping.
 - Added support for custom Kibana spaces.
-- Wazuh app now works as a native plugin and can be safely hidden/displayed depending on the selected space.
+- Wazuh Kibana app now works as a native plugin and can be safely hidden/displayed depending on the selected space.
 - New alerts summary in `Overview > FIM` panel.
 - Alerts search bar fixed for Kibana v7.3.0, now queries are applied as expected.
 - Hide attributes field from non-Windows agents in the FIM table.
