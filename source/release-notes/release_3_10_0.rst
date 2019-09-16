@@ -21,9 +21,9 @@ Wazuh core
 
 - Improved internal logic engine and policy syntax changes. Available SCA policies have been also adapted to this refactor.
 - A numerical comparator has been included as part of the rules syntax.
-- Each check compliance are shown as groups on alerts to, i.e., creating new visualizations about compliance in the Wazuh App.
-- To avoid configuration issues, all present policies at the default location are now automatically loaded.
-- A data inconsistency when switching between manager nodes has been fixed: the manager will request the last assessment results when the DB is empty between scans.
+- Compliance mapping information is now part of the alert groups.
+- Policies present at the default folder are now automatically loaded.
+- The Manager will request the last assessment results when the DB is empty between scans.
 
 For further information, check our :ref:`SCA documentation <manual_sec_config_assessment>`.
 
@@ -33,9 +33,9 @@ For further information, check our :ref:`SCA documentation <manual_sec_config_as
 - It has been fixed an error in Windows who-data when handling the directories list.
 - Who-data Linux alerts with hexadecimal fields are now correctly handled.
 
-**AWS wodle**
+**AWS module**
 
-- Fixed the exception handling when using an invalid bucket in AWS wodle.
+- Fixed the exception handling when using an invalid bucket.
 - Fix error when getting profiles in custom AWS buckets.
 - Fixed error message in empty AWS bucket case.
 
@@ -102,7 +102,7 @@ Wazuh API
     }
 
 
-- Support for ``HIPAA``, ``NIST 800 53`` and ``GPG13`` compliances: adding new API requests and filters.
+- Support for ``HIPAA``, ``NIST 800 53`` and ``GPG13`` compliance: adding new API requests and filters.
 - Improvements in stored passwords security: encryption changed from MD5 to BCrypt.
 - Fixed API installation in Docker CentOS 7 containers.
 
@@ -124,7 +124,7 @@ It has been added rules and decoders for other technologies:
 Wazuh Kibana App
 ----------------
 
-- ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
+- ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance mapping.
 - Added support for custom Kibana spaces.
 - Wazuh app now works as a native plugin and can be safely hidden/displayed depending on the selected space.
 - New alerts summary in `Overview > FIM` panel.
@@ -138,18 +138,16 @@ Wazuh Kibana App
 Wazuh Splunk App
 ----------------
 
-- ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance groups into the Wazuh core.
+- ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance mapping.
 - New design and several UI/UX changes.
 - Wazuh Splunk app has been adapted for Microsoft Edge Browser.
 - Debug level added for app logs.
-- Improved app performance.
 - Modules are being shown only when supported by the agent OS.
 - API sensitive information is now hidden on every transition.
 - Non-active Agent data is now being shown correctly.
-- Devtools content is now successfully loaded.
 
 **Other additions and improvements for both Apps**
 
 - Export all the information of a Wazuh group and its related agents in a PDF document.
 - Export the configuration of a certain agent as a PDF document.
-- An interactive and user-friendly guide for agents registering: it guides users through the needed steps, ending in a copy & paste snippet for agents deployment.
+- Added an interactive and user-friendly guide for agents registering, ending in a copy & paste snippet.
