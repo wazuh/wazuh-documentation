@@ -13,7 +13,6 @@ This section shows the most relevant improvements and fixes in version 3.10.0. M
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.10.0-7.3.1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.10.0-7.3.0/CHANGELOG.md>`_
 
-
 Wazuh core
 ----------
 
@@ -143,7 +142,7 @@ Wazuh Kibana App
 
 - ``HIPAA`` and ``NIST 800 53`` new dashboards for the recently added regulatory compliance mapping.
 - Added support for custom Kibana spaces.
-- Wazuh App now works as a native plugin and can be safely hidden/displayed depending on the selected space.
+- Wazuh Kibana app now works as a native plugin and can be safely hidden/displayed depending on the selected space.
 - New alerts summary in `Overview > FIM` panel.
 - Alerts search bar fixed for Kibana v7.3.0, now queries are applied as expected.
 - Hide attributes field from non-Windows agents in the FIM table.
