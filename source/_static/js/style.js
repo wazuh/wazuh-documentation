@@ -58,8 +58,9 @@ $(function() {
 
   /* Show the hidden menu */
   setTimeout(function() {
-    $('#navbar-globaltoc').removeClass('hidden');
-  }, 500);
+    $('#navbar').removeClass('hidden');
+    $('.central-page-area:before').css({'content': 'none'});
+  }, 100);
 
   $(window).on('hashchange', function() {
     updateFromHash();
@@ -612,5 +613,13 @@ $(function() {
     if ( e.keyCode == 27 ) {
       $('html, body').css('overflow', '');
     }
+  });
+
+  /* Enable all tooltips in the documentation */
+  $('[data-toggle="tooltip"]').tooltip();
+
+  /* Enable links that have the '.disable' class */
+  $('#select-version .dropdown-menu').on('click keypress', 'li a.disable', function(e) {
+    return false;
   });
 });
