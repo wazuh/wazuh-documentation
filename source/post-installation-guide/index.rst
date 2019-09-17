@@ -10,7 +10,6 @@ This guide describes the diferent post-installation configuration availables.
 .. topic:: Contents
 
     .. toctree::
-       :hidden:
        :maxdepth: 2
 
        protect-installation/index
