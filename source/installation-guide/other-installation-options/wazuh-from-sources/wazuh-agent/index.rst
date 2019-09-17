@@ -5,7 +5,7 @@
 Installing Wazuh agent from sources
 ===================================
 
-The Wazuh server can be installed on any Unix-like operating system. It is most commonly installed on Linux. The installation process is easier via the packages if one is available for your distribution, however, building and installing from sources is also pretty straightforward.
+The Wazuh server can be installed on any Unix-like operating system. It is most commonly installed on Linux. The installation process is easier via a package if one is available for your distribution. However, building and installing from sources is also pretty straightforward.
 
 There are two components that are usually installed on a Wazuh server: the manager and the API. In addition, **Filebeat** is needed to forward alerts to Elastic Stack.
 
