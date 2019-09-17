@@ -5,7 +5,7 @@
 Post installation
 =================
 
-This guide describes the different post-installation configurations available. The installation guide contains the basics Wazuh and Elastic stack installation and minimal configurations for start working. If you need to configure more than one Elasticsearch node in a cluster mode, protecting the installation, to see advanced settings, here you will find this information.
+This guide describes the different available post-installation configurations. The installation guide contains instructions for a basic installation of Wazuh and Elastic Stack and simple configurations to get the solution up an running. Here you will find information on how to configure multiple Elasticsearch nodes in cluster mode, how to protect the installations, how to tuning your Elasticsearch installation, etc.
 
 .. topic:: Contents
 
