@@ -2,11 +2,11 @@
 
 .. _upgrading_same_minor_or_major:
 
-Upgrade from the same minor or  major version
-=============================================
+Upgrade from the same minor or major version
+============================================
 
 Use these instructions if you are upgrading your Wazuh installation within same minor version (for example, 3.9.0 to 3.9.5)
-or within the same major version (for example, from 3.8.2 to 3.9.5).
+or within the same major version (for example, from 3.8.2 to 3.10.0).
 
 Upgrade the Wazuh manager and Wazuh API
 ---------------------------------------
