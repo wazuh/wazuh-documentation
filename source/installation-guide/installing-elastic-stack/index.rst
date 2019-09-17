@@ -5,7 +5,7 @@
 Installing Elastic Stack
 ========================
 
-This guide describes the installation of an Elastic Stack server comprised of Filebeat, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
+This guide describes the installation of an Elastic Stack server comprised of Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
 
 In addition to Elastic Stack components, you will also find the instructions to install and configure the Wazuh app (deployed as a Kibana plugin).
 
