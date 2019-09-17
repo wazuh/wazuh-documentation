@@ -52,4 +52,3 @@ After the installation, find below optional steps you may find interesting:
     linux/elastic_stack_packages_rhel
     linux/elastic_stack_packages_suse
     linux/elastic_stack_packages_ubuntu
-    configure-elasticsearch-cluster.rst

@@ -5,14 +5,15 @@
 Post installation
 =================
 
-This guide describes the diferent post-installation configuration availables.
+This guide describes the different post-installation configurations available.
 
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 2
+        :maxdepth: 2
 
-       protect-installation/index
-       transform_logstash
-       elastic_tuning
-       automatic_api
+        configure-elasticsearch-cluster.rst
+        protect-installation/index
+        transform_logstash
+        elastic_tuning
+        automatic_api
