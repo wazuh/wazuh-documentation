@@ -7,6 +7,7 @@ node_modules
 .eslintrc
 package-lock.json
 package.json
+backstop_data/
 source/_static/css/style.min.css
 source/_static/css/wazuh-icons.min.css
 source/_static/js/style.min.js
