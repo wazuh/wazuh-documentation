@@ -63,39 +63,39 @@ rule
 
 ``<rule>`` is the label that starts the block that defines a *rule*. In this section the different options to this label are explained.
 
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                  |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | 0 to 16                                                                                |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **id**        | Definition     | Specifies the ID of the rule.                                                          |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 999999                                                            |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **maxsize**   | Definition     | Specifies the maximum size of the event.                                               |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                              |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **frequency** | Definition     | Number of times the rule must have matched before firing.                              |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 2 to 9999                                                              |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **timeframe** | Definition     | The timeframe in seconds. This option is intended to be used with the frequency option.|
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 99999                                                             |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).           |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 999999                                                            |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                    |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | yes, no                                                                                |
-+---------------+----------------+----------------------------------------------------------------------------------------+
-| **noalert**   | Definition     | Not trigger any alert if the rule matches.                                             |
-+               +----------------+----------------------------------------------------------------------------------------+
-|               | Allowed values | Attribute with no value                                                                |
-+---------------+----------------+----------------------------------------------------------------------------------------+
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                           |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | 0 to 16                                                                                         |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **id**        | Definition     | Specifies the ID of the rule.                                                                   |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 999999                                                                     |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **maxsize**   | Definition     | Specifies the maximum size of the event.                                                        |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 9999                                                                       |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **frequency** | Definition     | Number of times the rule must have matched before firing.                                       |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 2 to 9999                                                                       |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **timeframe** | Definition     | The ``timeframe`` in seconds. This option is intended to be used with the ``frequency`` option. |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 99999                                                                      |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).                    |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 999999                                                                     |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                             |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | yes, no                                                                                         |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
+| **noalert**   | Definition     | Not trigger any alert if the rule matches.                                                      |
++               +----------------+-------------------------------------------------------------------------------------------------+
+|               | Allowed values | Attribute with no value                                                                         |
++---------------+----------------+-------------------------------------------------------------------------------------------------+
 
 Example:
 
@@ -241,7 +241,7 @@ Any username (decoded as the username).
 system_name
 ^^^^^^^^^^^^
 
-system_name name is decoded from syslog process name.
+Any string that is decoded into the system_name field.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -426,7 +426,7 @@ if_matched_sid
 
 Matches if an alert of the defined ID has been triggered in a set number of seconds.
 
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -442,7 +442,7 @@ if_matched_group
 
 Matches if an alert of the defined group has been triggered in a set number of seconds.
 
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -455,7 +455,7 @@ same_id
 ^^^^^^^
 
 Specifies that the decoded id must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_id />        |
@@ -465,7 +465,7 @@ same_source_ip
 ^^^^^^^^^^^^^^
 
 Specifies that the decoded source ip must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_source_ip /> |
@@ -475,7 +475,7 @@ same_src_port
 ^^^^^^^^^^^^^
 
 Specifies that the decoded source port must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_src_port />  |
@@ -485,7 +485,7 @@ same_dst_port
 ^^^^^^^^^^^^^
 
 Specifies that the decoded destination port must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_dst_port />  |
@@ -495,7 +495,7 @@ same_location
 ^^^^^^^^^^^^^
 
 Specifies that the location must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_location />  |
@@ -505,7 +505,7 @@ same_user
 ^^^^^^^^^
 
 Specifies that the decoded user must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_user />      |
@@ -517,7 +517,7 @@ same_field
 .. versionadded:: 3.9.0
 
 Specifies that the decoded field must be the same as the previous one.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_field />     |
@@ -549,7 +549,7 @@ not_same_field
 .. versionadded:: 3.9.0
 
 Specifies that the decoded field must be different than the previous one.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <not_same_field /> |
@@ -577,10 +577,13 @@ As an example of this option, check this rule:
   Rule 100002 will trigger when the last three events do not have the same `netinfo.iface.mac` address.
 
 global_frequency
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
-Specifies that the decoded id do not have to be the same.
-This option is used in conjunction with frequency and timeframe.
+.. versionadded:: 3.11.0
+
+Specifies that the events of all agents will be contemplated when using the
+frequency and ``timeframe`` options. By default, only the events generated by
+the same agent will be taken into account to increase the frequency counter.
 
 +--------------------+----------------------+
 | **Example of use** | <global_frequency /> |
@@ -590,7 +593,7 @@ different_url
 ^^^^^^^^^^^^^
 
 Specifies that the decoded url must be different.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <different_url />  |
@@ -600,7 +603,7 @@ different_srcgeoip
 ^^^^^^^^^^^^^^^^^^
 
 Specifies that the source geoip location must be different.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
 | **Example of use** | <different_srcgeoip /> |
