@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _elastic_server_rpm:
+.. _elastic_stack_packages_rhel:
 
-Install Elastic Stack with RPM packages
-=======================================
+Red Hat Enterprise Linux
+========================
 
-The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-based systems.
+For CentRed Hat Enterprise LinuxOS 6 or greater, installing the Elastic stack components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -82,7 +82,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         # curl http://<elasticsearch_ip>:9200
 
-.. _install_kibana_app_rpm:
+.. _install_kibana_app_rhel:
 
 Kibana
 ------
@@ -122,8 +122,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
 
   .. code-block:: yaml
-  
-    elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"] 
+
+    elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"]
 
 5. Enable and start the Kibana service:
 

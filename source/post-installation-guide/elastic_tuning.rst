@@ -154,7 +154,7 @@ Let's look at some options for how a cluster with three nodes and three shards c
 Setting the number of shards and replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The default installation of Elastic Stack with :ref:`RPM <elastic_server_rpm>` or :ref:`Debian <elastic_server_deb>` packages will configure each index with five primary shards and one replica.
+The default installation of :ref:`Elastic Stack <installation_elastic>` will configure each index with five primary shards and one replica.
 
 If you want to change these settings, you will need to edit the Elasticsearch template. In the following example, the proper values for shards and replicas are configured in a cluster with only one node.
 

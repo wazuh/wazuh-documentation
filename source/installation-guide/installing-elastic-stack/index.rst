@@ -9,15 +9,27 @@ This guide describes the installation of an Elastic Stack server comprised of El
 
 In addition to Elastic Stack components, you will also find the instructions to install and configure the Wazuh app (deployed as a Kibana plugin).
 
-Depending on your operating system you can choose to install Elastic Stack from RPM or DEB packages. Consult the table below and choose how to proceed:
+In the following table you will find the Elastic stack installation guide for the available operating systems:
 
-+--------------------------------------------+-----------------------------------------------+
-| Type                                       | Description                                   |
-+============================================+===============================================+
-| `RPM packages <elastic_server_rpm.html>`_  | Install Elastic Stack on CentOS/RHEL/Fedora.  |
-+--------------------------------------------+-----------------------------------------------+
-| `DEB packages <elastic_server_deb.html>`_  | Install Elastic Stack on Debian/Ubuntu.       |
-+--------------------------------------------+-----------------------------------------------+
++-------------------------------+---------------------------------------------------------------+
+| Operating system              | Version                                                       |
++===============================+===============================================================+
+| Amazon Linux                  | :ref:`1 or greater <elastic_stack_packages_amazon>`           |
++-------------------------------+---------------------------------------------------------------+
+| CentOS                        | :ref:`6 or greater <elastic_stack_packages_centos>`           |
++-------------------------------+---------------------------------------------------------------+
+| Debian                        | :ref:`7 or greater <elastic_stack_packages_deb>`              |
++-------------------------------+---------------------------------------------------------------+
+| Oracle Linux                  | :ref:`6 or greater <elastic_stack_packages_oracle>`           |
++-------------------------------+---------------------------------------------------------------+
+| OpenSUSE                      | :ref:`42 or greater <elastic_stack_packages_opensuse>`        |
++-------------------------------+---------------------------------------------------------------+
+| Red Hat Enterprise Linux      | :ref:`6 or greater <elastic_stack_packages_rhel>`             |
++-------------------------------+---------------------------------------------------------------+
+| SUSE                          | :ref:`12 <elastic_stack_packages_suse>`                       |
++-------------------------------+---------------------------------------------------------------+
+| Ubuntu                        | :ref:`12.10 or greater <elastic_stack_packages_ubuntu>`       |
++-------------------------------+---------------------------------------------------------------+
 
 After the installation, find below optional steps you may find interesting:
 
@@ -29,9 +41,15 @@ After the installation, find below optional steps you may find interesting:
     Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
 
 .. toctree::
-   :hidden:
-   :maxdepth: 2
+    :hidden:
+    :maxdepth: 2
 
-   elastic_server_rpm
-   elastic_server_deb
-   configure-elasticsearch-cluster.rst
+    linux/elastic_stack_packages_amazon
+    linux/elastic_stack_packages_centos
+    linux/elastic_stack_packages_deb
+    linux/elastic_stack_packages_opensuse
+    linux/elastic_stack_packages_oracle
+    linux/elastic_stack_packages_rhel
+    linux/elastic_stack_packages_suse
+    linux/elastic_stack_packages_ubuntu
+    configure-elasticsearch-cluster.rst
