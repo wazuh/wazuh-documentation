@@ -2502,7 +2502,7 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
-  margin-left: 0.7rem;
+  margin-left: 0.3rem;
 }
 
 blockquote ul li > div[class^='highlight'] {
