@@ -16,25 +16,24 @@ facility that allows rules to look up decoded field values in various lists and 
 The Linux auditd system is an extensive auditing tool, which we will only touch on here. Consider searching the Wazuh
 documentation for "Monitoring system calls" to get a broader picture of the ways you can take advantage of it.
 
-In the following examples we are using the ID `1001` which belongs to our "centos" user. You can obtain the ID of your user by running "id" command:
-
-    .. code-block:: console
-
-        # id anonymous
-        uid=1000(anonymous) gid=1000(anonymous) groups=1000(anonymous)
-
-
 Turn on program call auditing on linux-agent
 --------------------------------------------
 
-1. Having already sudo-ed to root on linux-agent, append the following audit rules to /etc/audit/rules.d/audit.rules
+1. Obtain your user ID by running the "id" command
+
+    .. code-block:: console
+
+        # id centos
+        uid=1001(centos) gid=1001(centos) groups=1001(centos)
+
+2. Having already sudo-ed to root on linux-agent, append the following audit rules to /etc/audit/rules.d/audit.rules
 
     .. code-block:: console
 
         -a exit,always -F euid=1001 -F arch=b32 -S execve -k audit-wazuh-c
         -a exit,always -F euid=1001 -F arch=b64 -S execve -k audit-wazuh-c
 
-2. Then reload the rules and confirm they are in place:
+3. Then reload the rules and confirm they are in place:
 
     .. code-block:: console
 
