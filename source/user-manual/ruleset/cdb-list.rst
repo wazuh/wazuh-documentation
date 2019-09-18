@@ -41,7 +41,7 @@ Example of IP address list file::
 We recommend to store the lists on ``/var/ossec/etc/lists``.
 
 .. note::
-  Until version 3.11, ``ossec-makelist`` compiled the CDB list. Now, the CBD list will be compiled at the start of wazuh or running ``ossec-logtest``  
+  Since version 3.11 the CBD list will be compiled at the start of ``ossec-analysisd`` and wazuh. 
 
 Adding the list to ossec.conf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
