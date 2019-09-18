@@ -6,7 +6,7 @@ Install Ansible
 OpenSSH Compatibility
 ------------------------------
 
-Ansible version 1.3 and later uses native OpenSSH for remote communication and, also, uses ControlPersist, a feature available for OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation, which is very useful for Ansible. Otherwise, you will need to consider to setup Accelerated Mode on Ansible.
+Ansible version 1.3 and later uses native OpenSSH for remote communication and, also, uses ControlPersist, a feature available for OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation, which is very useful for Ansible. Otherwise, you will need to consider to setup `Accelerated Mode <https://docs.ansible.com/ansible/2.3/playbooks_acceleration.html>`_ on Ansible.
 
 Windows hosts
 ------------------
