@@ -56,6 +56,15 @@ Specifies the name of the current node of the cluster.
 | **Allowed values** | Any name      |
 +--------------------+---------------+
 
+.. versionadded:: 3.11
+
+The name of the node can be the environment variable ``hostname``.
+
+.. code-block:: xml
+
+  <node_name>$HOSTNAME</node_name>
+
+
 .. _cluster_node_type:
 
 node_type
