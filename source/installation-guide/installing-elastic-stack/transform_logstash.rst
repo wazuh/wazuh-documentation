@@ -92,9 +92,6 @@ them to Elasticsearch.
 
       #output.elasticsearch:
       #    hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      #    pipeline: geoip
-      #    indices:
-      #        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
   * Add the Logstash output in ``/etc/filebeat/filebeat.yml``.
 
