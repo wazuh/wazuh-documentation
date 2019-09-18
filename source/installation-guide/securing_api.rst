@@ -21,7 +21,7 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
     .. code-block:: console
 
       # cd /var/ossec/api/configuration/auth
-      # node htpasswd -c user myUserName
+      # node htpasswd -Bc -C 10 user myUserName
       
     By default, you can access the Wazuh API by typing user "foo" and password "bar".
  

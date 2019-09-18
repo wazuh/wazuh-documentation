@@ -12,7 +12,7 @@ The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-
 Preparation
 -----------
 
-1. Install the Elastic repository and its GPG key:
+1. Add the Elastic repository and its GPG key:
 
   .. code-block:: console
 
@@ -37,7 +37,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # yum install elasticsearch-7.3.0
+    # yum install elasticsearch-7.3.2
 
 2. Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen to a non-loopback address by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to the IP you want to bind it to:
 
@@ -93,33 +93,39 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # yum install kibana-7.3.0
+    # yum install kibana-7.3.2
 
 2. Install the Wazuh app plugin for Kibana:
 
-   
+
   * Install from URL:
-    
+
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
 
   * Install from the package:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.9.5_7.3.0.zip
+     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.3.2.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
-    
+
 3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml
 
     server.host: "<kibana_ip>"
 
-4. Enable and start the Kibana service:
+4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
+
+  .. code-block:: yaml
+  
+    elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"] 
+
+5. Enable and start the Kibana service:
 
   a) For Systemd:
 
@@ -136,7 +142,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # chkconfig --add kibana
     # service kibana start
 
-5. (Optional) Disable the Elasticsearch repository:
+6. (Optional) Disable the Elasticsearch repository:
 
   It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
 

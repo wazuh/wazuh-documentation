@@ -5,7 +5,7 @@
 Install Wazuh app for Splunk
 ============================
 
-.. thumbnail:: ../images/splunk-app/splunk-app.png
+.. thumbnail:: ../../images/splunk-app/splunk-app.png
   :title: Splunk app - Overview > Security events tab
   :align: center
   :width: 90%
@@ -19,7 +19,7 @@ Installation
 
     .. code-block:: console
 
-      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.9.5_7.3.0.tar.gz
+      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.10.0_7.3.0.tar.gz
 
 2. Install the Wazuh app for Splunk:
 
@@ -52,7 +52,7 @@ Installation
 
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
-    .. image:: ../images/splunk-app/app-icon.png
+    .. image:: ../../images/splunk-app/app-icon.png
       :align: center
 
 4. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
@@ -62,7 +62,7 @@ Installation
     .. note::
       You can get more information about how to set up the credentials at :ref:`securing_api`.
 
-    .. thumbnail:: ../images/splunk-app/app-setup.png
+    .. thumbnail:: ../../images/splunk-app/app-setup.png
       :title: App initial configuration
       :align: center
       :width: 100%

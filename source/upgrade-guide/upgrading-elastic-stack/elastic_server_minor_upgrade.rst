@@ -74,13 +74,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-7.3.0
+      # yum install elasticsearch-7.3.2
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.3.0
+      # apt-get install elasticsearch=7.3.2
       # systemctl restart elasticsearch
 
 5. Restart the service.
@@ -125,27 +125,27 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-7.3.0
+      # yum install filebeat-7.3.2
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.3.0
+      # apt-get install filebeat=7.3.2
 
 2. Update the configuration file.
 
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.0/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 3. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.0/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 4. Download the Wazuh module for Filebeat:
@@ -182,19 +182,19 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-7.3.0
+      # yum install kibana-7.3.2
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.3.0
+      # apt-get install kibana=7.3.2
 
 3. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.5_7.3.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
 
 4. Restart Kibana.
 

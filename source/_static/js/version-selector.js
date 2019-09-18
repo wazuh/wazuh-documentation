@@ -5,9 +5,10 @@ jQuery(function($) {
   */
 
 
-  const currentVersion = '3.9';
+  const currentVersion = '3.10';
   const versions = [
-    {name: '3.9 (current)', url: '/'+currentVersion},
+    {name: '3.10 (current)', url: '/'+currentVersion},
+    {name: '3.9', url: '/3.9'},
     {name: '3.8', url: '/3.8'},
     {name: '3.7', url: '/3.7'},
     {name: '3.6', url: '/3.6'},
@@ -76,7 +77,7 @@ jQuery(function($) {
       pageID.classList.add('no-latest-docs');
     }
 
-    // Updates link to the latest version with the correct path (documentation's home)
+    /* Updates link to the latest version with the correct path (documentation's home) */
     page = document.location.pathname.split('/'+thisVersion)[1];
     const link = document.querySelector('.link-latest');
     link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
