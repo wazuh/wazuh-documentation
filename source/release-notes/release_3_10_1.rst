@@ -12,8 +12,8 @@ This section lists the changes in version 3.10.1. More details about these chang
 Wazuh core
 ----------
 
-- Prevent Remoted from crashing due to a locked mutex disposal.
-
+- Fix error in Remoted when reloading agent keys (locked mutex disposal).
+- Fix invalid read error in Remoted counters.
 
 Wazuh API
 ---------
