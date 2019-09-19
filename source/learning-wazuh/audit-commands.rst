@@ -22,8 +22,8 @@ Turn on program call auditing on linux-agent
 
     .. code-block:: console
 
-        -a exit,always -F euid=1001 -F arch=b32 -S execve -k audit-wazuh-c
-        -a exit,always -F euid=1001 -F arch=b64 -S execve -k audit-wazuh-c
+        -a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b32 -S execve -k audit-wazuh-c
+        -a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b64 -S execve -k audit-wazuh-c
 
 2. Then reload the rules and confirm they are in place:
 
@@ -32,8 +32,8 @@ Turn on program call auditing on linux-agent
         # auditctl -R /etc/audit/rules.d/audit.rules
         ...
         # auditctl -l
-        -a always,exit -F arch=b32 -S execve -F euid=1001 -F key=audit-wazuh-c
-        -a always,exit -F arch=b64 -S execve -F euid=1001 -F key=audit-wazuh-c
+        -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
+        -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
 
 
 Trigger a few audit events
