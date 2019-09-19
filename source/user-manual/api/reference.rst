@@ -2618,15 +2618,15 @@ Returns ossec.conf in JSON format.
 	      "logall_json": "no",
 	      "email_notification": "no",
 	      "smtp_server": "smtp.example.wazuh.com",
-	      "email_from": "ossecm@example.wazuh.com",
+	      "email_from": "wazuh@example.wazuh.com",
 	      "email_to": "recipient@example.wazuh.com",
 	      "email_maxperhour": "12",
 	      "email_log_source": "alerts.log",
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "80.58.0.33",
-	         "80.58.32.97"
+	         "10.0.5.124",
+	         "10.5.5.120"
 	      ]
 	   }
 	}
@@ -5402,14 +5402,14 @@ Returns ossec.conf in JSON format.
 	      "email_notification": "yes",
 	      "smtp_server": "localhost",
 	      "email_from": "wazuh@test.com",
-	      "email_to": "hello@wazuh.com",
+	      "email_to": "recipient@example.wazuh.com",
 	      "email_maxperhour": "12",
 	      "email_log_source": "alerts.log",
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "80.58.0.33",
-	         "80.58.32.97"
+	         "10.0.5.124",
+	         "10.5.5.120"
 	      ]
 	   }
 	}
