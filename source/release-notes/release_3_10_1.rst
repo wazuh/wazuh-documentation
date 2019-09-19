@@ -5,7 +5,7 @@
 3.10.1 Release notes
 ====================
 
-This section shows the improvements and fixes in version 3.10.1. More details about these changes are provided in each component changelog:
+This section lists the changes in version 3.10.1. More details about these changes are provided in each component changelog:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.10.1/CHANGELOG.md>`_
 
