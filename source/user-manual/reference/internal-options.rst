@@ -861,22 +861,6 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | Any integer between 1 and 60.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.worker_pool**         | Description   | Number of threads that process the payload reception         |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 3.3.0                                      |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 4                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 16                                 |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.keyupdate_interval**  | Description   | Minimum delay (in seconds) between keys file reloading       |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 3.3.0                                      |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 10                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 3600                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
 |         **remoted.debug**         | Description   | Debug level (manager installation)                           |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 0                                                            |
@@ -893,7 +877,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | Any integer between 1 and 3600                               |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|         **remoted.worker_pool**   | Description   | Number of parallel worker threads                            |
+|    **remoted.worker_pool**        | Description   | Number of threads that process the payload reception         |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 4                                                            |
 +                                   +---------------+--------------------------------------------------------------+
@@ -1052,7 +1036,7 @@ Rootcheck
 Security Configuration Assessment
 ---------------------------------
 
-.. versionadded:: 3.9.0 
+.. versionadded:: 3.9.0
 
 +-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 |    **sca.request_db_interval**    | Description    | In case of integrity fail, this is the maximum interval (minutes) to resend the scan information to the manager. |
