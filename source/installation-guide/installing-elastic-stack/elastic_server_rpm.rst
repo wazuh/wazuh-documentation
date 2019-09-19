@@ -102,13 +102,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.1_7.3.2.zip
 
   * Install from the package:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.3.2.zip
+     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.1_7.3.2.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
@@ -122,8 +122,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
 
   .. code-block:: yaml
-  
-    elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"] 
+
+    elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"]
 
 5. Enable and start the Kibana service:
 
