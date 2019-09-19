@@ -80,4 +80,4 @@ To uninstall the agent in macOS:
   .. code-block:: console
 
     # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-    # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
+
