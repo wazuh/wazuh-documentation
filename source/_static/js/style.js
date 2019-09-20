@@ -613,4 +613,40 @@ $(function() {
       $('html, body').css('overflow', '');
     }
   });
+
+  /* Copy to clipboard ----------------------------------------------------------------------------------*/
+  $('.highlight').each(function() {
+    const blockCode = $(this).parent();
+    blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+  });
+
+  $('.copy-to-clipboard').click(function() {
+    const ele = $(this);
+    let data = $(ele).parent().find('.highlight').html();
+    data = data.replace(/(<([^>]+)>)/ig, '');
+    copyToClipboard(data);
+    $(ele).addClass('copied');
+    $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
+    $(ele).find('span').css({'display': 'block'});
+    setTimeout(function() {
+      $(ele).removeClass('copied');
+    }, 700);
+    setTimeout(function() {
+      $(ele).find('span').css({'display': 'none'});
+      $(ele).find('i').css({'display': 'block'});
+    }, 1000);
+  });
+
+  /**
+   * Copy the data to clipboard
+   * @param {string} data The string to copy
+   */
+  function copyToClipboard(data) {
+    const aux = document.createElement('textarea');
+    aux.value = data;
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand('copy');
+    document.body.removeChild(aux);
+  }
 });
