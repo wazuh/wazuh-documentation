@@ -99,17 +99,7 @@ Usage
 
       $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.9.0_6.7.1 --single-branch
 
-2. Start the Docker service:
-
-  a) For Systemd::
-
-      $ systemctl start docker
-      
-  b) For SysV Init::
-  
-      $ service docker start
-
-3. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
+2. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
   a) Foreground::
 
