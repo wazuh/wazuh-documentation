@@ -624,6 +624,9 @@ $(function() {
     const ele = $(this);
     let data = $(ele).parent().find('.highlight').html();
     data = data.replace(/(<([^>]+)>)/ig, '');
+    data = String(data);
+    data = data.replace(/(?:\$\s)/g, '');
+    data = data.replace(/(?:\#\s)/g, '');
     copyToClipboard(data);
     $(ele).addClass('copied');
     $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
@@ -649,4 +652,21 @@ $(function() {
     document.execCommand('copy');
     document.body.removeChild(aux);
   }
+
+  /* Avoid select $ and # on the code blocks -----------------------------------------------------*/
+  $('.highlight').each(function() {
+    const ele = $(this);
+    const data = ele.html();
+    const find = data.match(/(?:\$\s|\#)/g);
+    if (find != null) {
+      const dataArray = data.split('\n');
+      let content = '';
+      dataArray.forEach((line) => {
+        line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
+        line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
+        content += line;
+      });
+      ele.html(content);
+    }
+  });
 });
