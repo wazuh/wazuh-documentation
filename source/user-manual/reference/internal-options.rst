@@ -820,7 +820,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed Value | Any integer between 1 and 16.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|  **remoted.merge_shared**         | Description   | Merge shared configuration to be broadcast to agents.      |
+|  **remoted.merge_shared**         | Description   | Merge shared configuration to be broadcast to agents.        |
 |                                   |               |                                                              |
 |                                   |               | .. versionadded:: 3.2.3                                      |
 +                                   +---------------+--------------------------------------------------------------+

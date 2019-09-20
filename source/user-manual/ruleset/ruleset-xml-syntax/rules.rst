@@ -753,7 +753,7 @@ Declares the actual status of a rule.
 +--------------------+----------------------------------------------+
 | **Default Value**  | n/a                                          |
 +--------------------+----------------------------------------------+
-| **Allowed values** | started, aborted, succeded, failed, lost... |
+| **Allowed values** | started, aborted, succeded, failed, lost...  |
 +--------------------+----------------------------------------------+
 
 var
