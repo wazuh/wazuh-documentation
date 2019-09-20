@@ -36,7 +36,7 @@ Wazuh apps
 - Fixed API call for fetching GDPR requirements in agents.
 - Fixed filters which were not applying when refreshing agents search bar.
 - Fixed wrong fields in never connected agents.
-- Fixed the error message when the App dectects an unexpected Wazuh version.
+- Fixed the error message when the App detects an unexpected Wazuh version.
 - Fixed invalid date message in some web browsers.
 - Fixed missing ignored and ignored_sregex fields in the configuration ondemand.
 

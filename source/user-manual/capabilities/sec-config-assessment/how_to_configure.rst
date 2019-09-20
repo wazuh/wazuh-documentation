@@ -21,7 +21,7 @@ ruleset folder:
 - Windows agents: ``<agent-installation-folder>\ruleset\sca``.
 
 .. warning::
-    The contents of the aforementioned **default ruleset folders are neither kept accross installations nor updates**.
+    The contents of the aforementioned **default ruleset folders are neither kept across installations nor updates**.
     If you wish to modify or add new policies, place then under an alternative folder.
 
 To enable a policy file that's outside the default folder, add a line like
@@ -127,7 +127,7 @@ will be added.
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | MAC OS X 10.13 (High Sierra)  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | web_vulnerabilites          |  System audit for web-related vulnerabilities              | N/A                           |
+    | web_vulnerabilities          |  System audit for web-related vulnerabilities              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apache_24               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

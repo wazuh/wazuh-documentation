@@ -111,7 +111,7 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 Integrity of the scan results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To illustrate how the integrity of scan results is kept, we will use an example in which the agent-side
-database and the manager-side differ. This scenary could happen due to, for instance, a network issue.
+database and the manager-side differ. This scenario could happen due to, for instance, a network issue.
 
 .. table:: States stores in the Agent and Manager sides
     :widths: auto

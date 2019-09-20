@@ -127,7 +127,7 @@ Scheduling options
 scan_on_start
 ^^^^^^^^^^^^^
 
-The SCA module will perform the scan inmediately when started.
+The SCA module will perform the scan immediately when started.
 
 +--------------------+---------+
 | **Default value**  | yes     |

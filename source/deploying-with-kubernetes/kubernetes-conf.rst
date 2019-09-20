@@ -275,7 +275,7 @@ Verifying the deployment
         wazuh-manager-worker-1-0          1/1       Running   0          11m
         wazuh-nginx-748fb8494f-xwwhw      1/1       Running   0          14m
 
-**Accesing Kibana**
+**Accessing Kibana**
 
     In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: ``https://wazuh.your-domain.com``.
 

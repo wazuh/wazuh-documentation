@@ -163,7 +163,7 @@ IAM Roles can also be used to access the S3 bucket. Follow these steps to create
       :align: center
       :width: 70%
 
-6. Access to role summay and click on its policy name:
+6. Access to role summary and click on its policy name:
 
     .. thumbnail:: ../../images/aws/aws-create-role-7.png
       :align: center
