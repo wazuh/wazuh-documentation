@@ -85,7 +85,7 @@ Now restart Elasticsearch service:
 
 Search Guard must fit the Elasticsearch version like any other component from the Elastic stack. Versioning is a bit different for Search Guard, please check your version at `Search Guard versions <https://docs.search-guard.com/latest/search-guard-versions>`_.
 
-The versioning syntaxis for Search Guard is as follow:
+The versioning syntax for Search Guard is as follow:
 
 .. code-block:: none
 

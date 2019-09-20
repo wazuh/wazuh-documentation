@@ -461,7 +461,7 @@ $(function() {
 
   /**
    * Only for main index (documentation's home page).
-   * Functionallity of the capabilities section: selects capability, controls the responsive behaviour, etc.
+   * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
    */
   function capabilitiesHome(ele) {

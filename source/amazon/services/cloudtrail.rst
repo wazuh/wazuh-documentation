@@ -153,7 +153,7 @@ When an instance in EC2 is stopped, the following alert will be shown on Kibana:
   :align: center
   :width: 70%
 
-If an user tries to stop instances **without relevant permissions**, the following alert wil be show on Kibana:
+If an user tries to stop instances **without relevant permissions**, the following alert willbe show on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-ec2-6.png
   :align: center
