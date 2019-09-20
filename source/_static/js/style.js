@@ -625,6 +625,9 @@ $(function() {
     const ele = $(this);
     let data = $(ele).parent().find('.highlight').html();
     data = data.replace(/(<([^>]+)>)/ig, '');
+    data = String(data);
+    data = data.replace(/(?:\$\s)/g, '');
+    data = data.replace(/(?:\#\s)/g, '');
     copyToClipboard(data);
     $(ele).addClass('copied');
     $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
