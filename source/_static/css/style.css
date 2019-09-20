@@ -760,8 +760,9 @@ li.toctree-l5 > a {
   position: relative;
 }
 
-.central-page-area:before {
+.central-page-area::before {
   content: '';
+  display: none;
   width: 360px;
   height: 100vh;
   margin-left: -15px;
@@ -2896,6 +2897,10 @@ div.highlight pre {
       #navbar {
         visibility: visible;
         width: 360px;
+      }
+
+      .central-page-area::before {
+        display: block;
       }
 
       #navbar-globaltoc {
