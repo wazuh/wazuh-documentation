@@ -2538,6 +2538,13 @@ div.highlight pre {
   padding: 0.5em 1em;
 }
 
+.highlight .no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select:none;
+}
+
 .note pre,
 .warning pre {
   background-color: #f4f4f4 !important;
@@ -3472,6 +3479,7 @@ div[class^='highlight']:hover .copy-to-clipboard {
 
 div[class^='highlight'] .copy-to-clipboard.copied {
   opacity: 1;
+  background-color: #333;
 }
 
 div[class^='highlight'] .copy-to-clipboard:hover {
