@@ -60,7 +60,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # yum install logstash-7.3.0
+      # yum install logstash-7.3.2
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -68,7 +68,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # apt-get install logstash=1:7.3.0-1
+      # apt-get install logstash=1:7.3.2-1
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -76,7 +76,7 @@ them to Elasticsearch.
 
   .. code-block:: console
 
-    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.10.0/extensions/logstash/7.x/01-wazuh-remote.conf
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.10.1/extensions/logstash/7.x/01-wazuh-remote.conf
 
 5. Restart Logstash.
 
@@ -92,9 +92,6 @@ them to Elasticsearch.
 
       #output.elasticsearch:
       #    hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      #    pipeline: geoip
-      #    indices:
-      #        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
   * Add the Logstash output in ``/etc/filebeat/filebeat.yml``.
 

@@ -58,8 +58,9 @@ $(function() {
 
   /* Show the hidden menu */
   setTimeout(function() {
-    $('#navbar-globaltoc').removeClass('hidden');
-  }, 500);
+    $('#navbar').removeClass('hidden');
+    $('.central-page-area:before').css({'content': 'none'});
+  }, 100);
 
   $(window).on('hashchange', function() {
     updateFromHash();
@@ -330,7 +331,7 @@ $(function() {
    */
   function showCurrentSubtree() {
     updateFromHash();
-    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('page-404') ) {
+    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('not-indexed') ) {
       $('.globaltoc :contains("'+ $('#breadcrumbs li:nth-last-child(2) a').text() +'")').addClass('show').addClass('current');
       return true;
     }

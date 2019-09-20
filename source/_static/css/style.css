@@ -760,6 +760,16 @@ li.toctree-l5 > a {
   position: relative;
 }
 
+.central-page-area:before {
+  content: '';
+  width: 360px;
+  height: 100vh;
+  margin-left: -15px;
+  top: 0;
+  position: fixed;
+  background-color: #EAEAEA;
+}
+
 #navbar {
   z-index: 3;
   visibility: hidden;
@@ -768,6 +778,12 @@ li.toctree-l5 > a {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
+  transition: opacity 0.3s ease;
+}
+
+#navbar.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 #navbar-globaltoc {
@@ -787,12 +803,6 @@ li.toctree-l5 > a {
 .no-latest-docs #navbar-globaltoc {
   padding-top: 132px;
 }
-
-#navbar-globaltoc.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
   right: 0;
   left: 0;
@@ -2492,7 +2502,7 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
-  margin-left: 0.7rem;
+  margin-left: 0.3rem;
 }
 
 blockquote ul li > div[class^='highlight'] {
