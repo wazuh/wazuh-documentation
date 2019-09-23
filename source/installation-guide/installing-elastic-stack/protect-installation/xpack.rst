@@ -5,7 +5,7 @@
 X-Pack
 ======
 
-Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intentioned users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
+Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intended users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
 Configure Elastic Stack to use encrypted connections 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

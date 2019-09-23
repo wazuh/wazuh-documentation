@@ -24,7 +24,7 @@ In addition, the capacity of the buffer is configurable in the ``remote`` sectio
 Wazuh modules
 -------------
 
-Vulnerability-detector module has an improvement within the version comparator algorithm to avoid false positive alerts. It also has been fixed the behaviour when the software inventory of an agent is missing.
+Vulnerability-detector module has an improvement within the version comparator algorithm to avoid false positive alerts. It also has been fixed the behavior when the software inventory of an agent is missing.
 
 Wazuh app: Kibana
 -----------------

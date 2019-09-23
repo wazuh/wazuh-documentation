@@ -127,7 +127,7 @@ at which rootcheck commences its first scan for the sake of this lab.
 
         # service wazuh-agent restart
 
-    Now our next rootcheck scan should run shortly.  It should alert about the ryslogd process which we hid with Diamorphine.
+    Now our next rootcheck scan should run shortly.  It should alert about the rsyslogd process which we hid with Diamorphine.
 
 10. Watch ossec.log on linux-agent for rootcheck activity that should commence within 5 minutes of the agent restart.
 

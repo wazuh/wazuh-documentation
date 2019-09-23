@@ -4,7 +4,7 @@ What is SCA
 .. contents:: Table of Contents
    :depth: 10
 
-One of the most certain ways to securize hosts is by reducing their vulnerability surface. That process is commonly
+One of the most certain ways to secure hosts is by reducing their vulnerability surface. That process is commonly
 known as hardening, and configuration assessment is an effective way to determine opportunities where hosts could
 have their attack surface reduced, and here is where SCA comes into play.
 
