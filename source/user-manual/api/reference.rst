@@ -911,7 +911,7 @@ Returns the list of agents in a group.
 	               "version": "7.6"
 	            },
 	            "dateAdd": "1970-01-01 00:00:00",
-	            "version": "Wazuh v3.10.1",
+	            "version": "Wazuh v3.10.2",
 	            "manager": "1cb46c820ff5",
 	            "mergedSum": "6c2a4b148047e590188f8befe47c2bff",
 	            "id": "001",
@@ -938,7 +938,7 @@ Returns the list of agents in a group.
 	               "version": "7.6"
 	            },
 	            "dateAdd": "2019-08-30 09:18:12",
-	            "version": "Wazuh v3.10.1",
+	            "version": "Wazuh v3.10.2",
 	            "manager": "7995615e03c0",
 	            "mergedSum": "6c2a4b148047e590188f8befe47c2bff",
 	            "id": "002",
@@ -1710,7 +1710,7 @@ Returns a list with the available agents.
 	            "node_name": "worker-1",
 	            "ip": "172.22.0.6",
 	            "id": "002",
-	            "version": "Wazuh v3.10.1",
+	            "version": "Wazuh v3.10.2",
 	            "manager": "7995615e03c0"
 	         },
 	         {
@@ -1736,7 +1736,7 @@ Returns a list with the available agents.
 	            "node_name": "master",
 	            "ip": "172.22.0.3",
 	            "id": "001",
-	            "version": "Wazuh v3.10.1",
+	            "version": "Wazuh v3.10.2",
 	            "manager": "1cb46c820ff5"
 	         },
 	         {
@@ -1757,7 +1757,7 @@ Returns a list with the available agents.
 	            "node_name": "master",
 	            "ip": "127.0.0.1",
 	            "id": "000",
-	            "version": "Wazuh v3.10.1",
+	            "version": "Wazuh v3.10.2",
 	            "manager": "1cb46c820ff5"
 	         },
 	         {
@@ -1822,7 +1822,7 @@ Returns various information from an agent.
 	      "name": "1cb46c820ff5",
 	      "ip": "127.0.0.1",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
-	      "version": "Wazuh v3.10.1",
+	      "version": "Wazuh v3.10.2",
 	      "id": "000",
 	      "node_name": "master"
 	   }
@@ -2919,7 +2919,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "version": "v3.10.1",
+	      "version": "v3.10.2",
 	      "compilation_date": "Fri Aug 30 08:02:30 UTC 2019",
 	      "type": "server",
 	      "max_agents": "14000",
@@ -2974,7 +2974,7 @@ Show cluster health.
 	            "info": {
 	               "name": "worker-1",
 	               "type": "worker",
-	               "version": "3.10.1",
+	               "version": "3.10.2",
 	               "ip": "172.22.0.4",
 	               "n_active_agents": 1
 	            },
@@ -3011,7 +3011,7 @@ Show cluster health.
 	            "info": {
 	               "name": "worker-2",
 	               "type": "worker",
-	               "version": "3.10.1",
+	               "version": "3.10.2",
 	               "ip": "172.22.0.5",
 	               "n_active_agents": 0
 	            },
@@ -3048,7 +3048,7 @@ Show cluster health.
 	            "info": {
 	               "name": "master",
 	               "type": "master",
-	               "version": "3.10.1",
+	               "version": "3.10.2",
 	               "ip": "wazuh-master",
 	               "n_active_agents": 2
 	            }
@@ -3393,7 +3393,7 @@ Returns the node info.
 	   "data": {
 	      "name": "master",
 	      "type": "master",
-	      "version": "3.10.1",
+	      "version": "3.10.2",
 	      "ip": "wazuh-master"
 	   }
 	}
@@ -3443,19 +3443,19 @@ Returns the nodes info.
 	         {
 	            "name": "master",
 	            "type": "master",
-	            "version": "3.10.1",
+	            "version": "3.10.2",
 	            "ip": "wazuh-master"
 	         },
 	         {
 	            "name": "worker-1",
 	            "type": "worker",
-	            "version": "3.10.1",
+	            "version": "3.10.2",
 	            "ip": "172.22.0.4"
 	         },
 	         {
 	            "name": "worker-2",
 	            "type": "worker",
-	            "version": "3.10.1",
+	            "version": "3.10.2",
 	            "ip": "172.22.0.5"
 	         }
 	      ]
@@ -5572,7 +5572,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "version": "v3.10.1",
+	      "version": "v3.10.2",
 	      "compilation_date": "Fri Aug 30 08:02:30 UTC 2019",
 	      "type": "server",
 	      "max_agents": "14000",
@@ -7410,11 +7410,11 @@ Returns a dictionary with a full summary of agents.
 	         "items": [
 	            {
 	               "count": 1,
-	               "version": "Wazuh v3.10.1"
+	               "version": "Wazuh v3.10.2"
 	            },
 	            {
 	               "count": 2,
-	               "version": "Wazuh v3.10.1"
+	               "version": "Wazuh v3.10.2"
 	            },
 	            {
 	               "count": 7
