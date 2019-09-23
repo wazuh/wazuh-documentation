@@ -133,7 +133,7 @@ In previous Elastic search versions, the Elastic documents were indexed using th
 
 Due to this change, previous alerts won't be visible in Wazuh indices, an update must be performed to all previous indices in order to complete the upgrade.
 
-Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
+Run below request for each Wazuh index that was created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
 
 Here is an example of how to run the request using the index *wazuh-alerts-3.x-2019.05.16*.
 
@@ -245,3 +245,11 @@ Upgrade Kibana
 
     # systemctl daemon-reload
     # systemctl restart kibana
+
+6. (Optional) Disable the Elasticsearch repository:
+
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
