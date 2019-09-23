@@ -47,7 +47,7 @@ Examples:
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="aix-agent" && installer -pkg wazuh-agent-3.10.1-1.pkg -target /
+          WAZUH_AGENT_NAME="macos-agent" && installer -pkg wazuh-agent-3.10.1-1.pkg -target /
 
 * Registration with password and assigning a group:
 
@@ -60,14 +60,14 @@ Examples:
 
 .. code-block:: console
 
-     # launchctl setenv WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
+     # launchctl setenv WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="macos-agent" \
           WAZUH_REGISTRATION_CA="rootCA.pem" && installer -pkg wazuh-agent-3.10.1-1.pkg -target /
 
 * Registration with protocol:
 
 .. code-block:: console
 
-     # launchctl setenv WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
+     # launchctl setenv WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="macos-agent" \
           WAZUH_PROTOCOL="tcp" && installer -pkg wazuh-agent-3.10.1-1.pkg -target /
 
 * Registration and adding multiple address:
@@ -75,7 +75,7 @@ Examples:
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-          WAZUH_AGENT_NAME="aix-agent" && installer -pkg wazuh-agent-3.10.1-1.pkg -target /
+          WAZUH_AGENT_NAME="macos-agent" && installer -pkg wazuh-agent-3.10.1-1.pkg -target /
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
