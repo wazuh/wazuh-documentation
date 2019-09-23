@@ -12,4 +12,4 @@ This section lists the changes in version 3.10.2. More details about these chang
 Wazuh core
 ----------
 
-- Fixed the unexpected log collection module behaviour when several hard links point to the same file. The duplicate file detection method has changed: Instead of finding duplicate files on startup and removing one of the entries, now the log collection module searches for duplicate files on file checking.
+- Fixed error in log collection module when reloading localfiles with ``strftime`` wildcards.
