@@ -46,13 +46,7 @@ First install the needed dependencies:
 
     # ./generate_wazuh_packages.sh -e
 
-Download the sources:
-
-.. code-block:: console
-
-    # ./generate_wazuh_packages.sh -d v3.10.0
-
-Build the package
+Download and build the sources:
 
 .. code-block:: console
 
