@@ -53,10 +53,10 @@ This will build a 3.10.2 package and store it in ``/tmp``.
 
  # ./generate_wazuh_packages.sh -b v3.10.2 -s /tmp -j 6
 
-This will also build a 3.10.2 package and store it in ``/tmp`` but will use 6 jobs to comile the sources.
+This will also build a 3.10.2 package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
 
 .. code-block:: console
 
  # ./generate_wazuh_packages.sh -b v3.10.2 -s /tmp -j 6 -c
 
-In adition to the previous settings this will generate a ``.sha512`` file containing the checksum of the package.
+In addition to the previous settings this will generate a ``.sha512`` file containing the checksum of the package.
