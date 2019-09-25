@@ -30,6 +30,7 @@ Options
 - `ignore_binaries`_
 - `age`_
 - `exclude`_
+- `reconnect_time`_
 
 location
 ^^^^^^^^
@@ -430,6 +431,37 @@ For example, we may want to read all the files from a directory, but exclude tho
 | **Default value**  | n/a                      |
 +--------------------+--------------------------+
 | **Allowed values** | Any log file or wildcard |
++--------------------+--------------------------+
+
+reconnect_time
+^^^^^^^^^^^^^^
+
+.. versionadded:: 3.11.0
+
+Used to define the time in seconds to try to reconnect with Windows Event Channel when it has fallen.
+
+This feature is only compatible with eventchannel log format.
+
+Here is an example of how to configure this option:
+
+.. code-block:: xml
+
+  <localfile>
+    <location>Application</location>
+    <log_format>eventchannel</log_format>
+    <reconnect_time>40</reconnect_time>
+  </localfile>
+
+  <localfile>
+    <location>System</location>
+    <log_format>eventchannel</log_format>
+    <reconnect_time>20</reconnect_time>
+  </localfile>
+
++--------------------+--------------------------+
+| **Default value**  | 5                        |
++--------------------+--------------------------+
+| **Allowed values** | Any time in seconds      |
 +--------------------+--------------------------+
 
 Configuration examples
