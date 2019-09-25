@@ -13,20 +13,28 @@ Installing Wazuh agent
 .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
 1. Install development tools and compilers.
+   
+   1.1 Download the ``depothelper-2.10-hppa_32-11.31.depot`` file.
 
-   1.1 Install the package manager.
+      .. code-block:: console
+
+        # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hpux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
+
+      .. note:: If you can't download the script this way, then you should copy it through the scp utility.
+
+   1.2 Install the package manager.
 
      .. code-block:: console
 
         # swinstall -s depothelper-2.10-hppa_32-11.31.depot \*
 
-   1.2 Download the ``wget`` tool.
+   1.3 Download the ``wget`` tool (If it is not installed).
 
      .. code-block:: console
 
         # /usr/local/bin/depothelper -f wget
 
-   1.3  Download the following script
+   1.4  Download the following script
 
       .. code-block:: console
 
@@ -34,7 +42,7 @@ Installing Wazuh agent
 
       .. note:: If you can't download the script this way, then you should copy it through the scp utility.
 
-   1.4  Install the necessary dependencies using the script.
+   1.5  Install the necessary dependencies using the script.
 
       .. code-block:: console
 
