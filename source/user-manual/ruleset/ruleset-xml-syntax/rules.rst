@@ -589,12 +589,6 @@ Examples:
 
   .. code-block:: xml
 
-    <rule id="100009" level="1">
-      ...
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
-      <description> Rule to match IPs </description>
-    </rule>
-
     <rule id="100015" level="2">
       ...
       <description> A timeout occurred. </description>
