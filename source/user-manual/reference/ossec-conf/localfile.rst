@@ -440,7 +440,7 @@ reconnect_time
 
 Used to define the time in seconds to try to reconnect with Windows Event Channel when it has fallen.
 
-This feature is only compatible with eventchannel log format.
+This feature is only compatible with eventchannel log format. Time must be greater than 4 seconds.
 
 Here is an example of how to configure this option:
 
@@ -461,7 +461,7 @@ Here is an example of how to configure this option:
 +--------------------+--------------------------+
 | **Default value**  | 5                        |
 +--------------------+--------------------------+
-| **Allowed values** | Any time in seconds      |
+| **Allowed values** | Any time in seconds > 4  |
 +--------------------+--------------------------+
 
 Configuration examples
