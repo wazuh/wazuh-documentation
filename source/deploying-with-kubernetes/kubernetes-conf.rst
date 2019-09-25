@@ -46,61 +46,61 @@ You can check how we build our Wazuh docker containers in our `repository <https
 
 This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) and the API are placed here.
 
-+-------------------------+-------------+
-| Image                   | Controller  |
-+=========================+=============+
++--------------------------+-------------+
+| Image                    | Controller  |
++==========================+=============+
 | wazuh/wazuh:3.10.2_7.3.2 | StatefulSet |
-+-------------------------+-------------+
++--------------------------+-------------+
 
 **Wazuh worker 0 / 1**
 
 These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
 
-+-------------------------+-------------+
-| Image                   | Controller  |
-+=========================+=============+
++--------------------------+-------------+
+| Image                    | Controller  |
++==========================+=============+
 | wazuh/wazuh:3.10.2_7.3.2 | StatefulSet |
-+-------------------------+-------------+
++--------------------------+-------------+
 
 **Elasticsearch**
 
 Elasticsearch pod, it ingests events received from Logstash.
 
-+---------------------------------------+-------------+
-| Image                                 | Controller  |
-+=======================================+=============+
++----------------------------------------+-------------+
+| Image                                  | Controller  |
++========================================+=============+
 | wazuh/wazuh-elasticsearch:3.10.2_7.3.2 | StatefulSet |
-+---------------------------------------+-------------+
++----------------------------------------+-------------+
 
 **Logstash**
 
 Logstash pod, it's listening to events from the Filebeat instances that are installed on every Wazuh manager node, then it sends all the events to Elasticsearch.
 
-+----------------------------------+-------------+
-| Image                            | Controller  |
-+==================================+=============+
++-----------------------------------+-------------+
+| Image                             | Controller  |
++===================================+=============+
 | wazuh/wazuh-logstash:3.10.2_7.3.2 | Deployment  |
-+----------------------------------+-------------+
++-----------------------------------+-------------+
 
 **Kibana**
 
 Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 
-+--------------------------------+-------------+
-| Image                          | Controller  |
-+================================+=============+
++---------------------------------+-------------+
+| Image                           | Controller  |
++=================================+=============+
 | wazuh/wazuh-kibana:3.10.2_7.3.2 | Deployment  |
-+--------------------------------+-------------+
++---------------------------------+-------------+
 
 **Nginx**
 
 Nginx service used as a reverse proxy for Kibana.
 
-+--------------------------------+-------------+
-| Image                          | Controller  |
-+================================+=============+
++---------------------------------+-------------+
+| Image                           | Controller  |
++=================================+=============+
 | wazuh/wazuh-nginx:3.10.2_7.3.2  | Deployment  |
-+--------------------------------+-------------+
++---------------------------------+-------------+
 
 Services
 ^^^^^^^^
