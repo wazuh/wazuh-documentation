@@ -113,3 +113,74 @@ The following pre-configured scripts are for Windows:
 +--------------------------+---------------------------------------------------------------+
 | route-null.cmd           | Adds an IP to null route                                      |
 +--------------------------+---------------------------------------------------------------+
+
+
+Create a custom script
+----------------------
+
+You can create your own scripts for active-responses in any language you consider (e.g. Python), but a bash script must lead the execution acting as a runway. This bash script is the one that will later be executed by the active-response. Also check that the agent is ready to  execute that programming language.
+
+Parameters
+^^^^^^^^^^
+Active-response collects some parameters from the alert that triggered it that will be passed as arguments to the configured script. Those are:
+
+.. code-block:: none
+
+  <SCRIPT-NAME> <ACTION> <USER> <IP> <ALERT-ID> <RULE-ID> <AGENT> <FILENAME>
+
+
+Some considerations:
+
+* ``<SCRIPT_NAME>`` It is the name of the script to be executed.
+
+* ``<ACTION>`` Can be either *add* or *delete*. This can be used to add/remove an IP from a blacklist just using the same script for both actions, disable/enable an account, etc. 
+
+* ``<USER>`` Defines the username (e.g. root). Will be ``-`` if not set. This field can be used for example for denying a specific user to access a resource.
+
+* ``<IP>`` Will be ``-`` if not set. This field can be used for example to deny requests coming from this IP after a possible brute force attack.
+
+* ``<ALERT-ID>`` The ID of the alert that launched the AR.
+
+* ``<RULE-ID>`` The rule ID that triggered the alert.
+
+* ``<AGENT>`` The agent ID or hostname.
+
+* ``<FILENAME>`` It is the source path file of the log that triggered the alert if that is the case.
+
+These arguments give us many possibilities to customize the proper response after a rule is triggered. They are numbered from 0 to 7, so we can reference them in the bash script using ``$[0-7]``.
+
+Configuration
+^^^^^^^^^^^^^
+Remember to compile the main script if it is needed. It also requires the right permissions to be executed.
+	
+	.. code-block:: yaml
+
+      		chown root:ossec /var/ossec/active-response/bin/script_name.sh
+		chmod ug+x /var/ossec/active-response/bin/script_name.sh
+
+Configure ``<command>`` and ``<active-response>`` blocks, both of them at ``/var/ossec/etc/ossec.conf``.
+
+    Example::
+
+     <command>
+       <name>block-IP</name>
+       <executable>blocking_IP.sh</executable>
+       <expect>srcip</expect>
+       <timeout_allowed>yes</timeout_allowed>
+     </command>
+
+This will be used by ``<active-response>`` to gather information about the script that will be ran, and if it will be stateless (non-revertible) or stateful (revertible).
+
+    Example::
+
+     <active-response>
+       <command>block-IP</command>
+       <location>defined-agent</location>
+       <agent_id>008</agent_id>
+       <level>8</level>
+       <timeout>900</timeout>
+     </active-response>
+
+This active response will be launched only in case an alert is triggered with a level equal or higher than 8, so the agent with ID 008 will execute the command, denying access to the IP given. Then, after a period of 900 seconds, the action will be undone, letting that IP access the system again. 
+
+The field ``<timeout>`` will make the system execute the script twice, the first one to perform the action (e.g. write an IP in a blacklist file to block it) when the rule is triggered and the second one to undo it (e.g. deleting the IP from the blacklist). In this way, in case of being interested in having this timeout working, the script must be developed in such a way that its execution depends on the value of ``ACTION`` parameter. For example, an ``if`` condition could be an easy solution for that.
