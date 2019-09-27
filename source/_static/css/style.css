@@ -2234,7 +2234,9 @@ p.first.admonition-title::before,
 }
 
 .note div[class^='highlight'],
-.warning div[class^='highlight'] {
+.warning div[class^='highlight'],
+.note div[class^='last highlight'],
+.warning div[class^='last highlight'] {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -2505,7 +2507,8 @@ blockquote blockquote {
   margin-left: 0.3rem;
 }
 
-blockquote ul li > div[class^='highlight'] {
+blockquote ul li > div[class^='highlight'],
+blockquote ul li > div[class^='last highlight'] {
   margin-bottom: 0.5rem;
 }
 
@@ -3382,20 +3385,26 @@ div.highlight pre {
 pre.literal-block,
 .rst-content .literal-block,
 .rst-content pre.literal-block,
-div[class^='highlight'] {
+div[class^='highlight'],
+div[class^='last highlight'] {
   border: 1px solid #e1e4e5;
   padding: 0px;
   margin: 1px 0 24px 0
 }
 
-div[class^='highlight'] {
+div[class^='highlight'],
+div[class^='last highlight'] {
   position: relative;
 }
 
 .codeblock div[class^='highlight'],
 pre.literal-block div[class^='highlight'],
 .rst-content .literal-block div[class^='highlight'],
-div[class^='highlight'] div[class^='highlight'] {
+div[class^='highlight'] div[class^='highlight'],
+.codeblock div[class^='last highlight'],
+pre.literal-block div[class^='last highlight'],
+.rst-content .literal-block div[class^='last highlight'],
+div[class^='last highlight'] div[class^='last highlight'] {
   border: none;
   background: none;
   margin: 0
@@ -3405,7 +3414,8 @@ div[class^='highlight'] div[class^='highlight'] {
   margin: 0;
 }
 
-div[class^='highlight'] td.code {
+div[class^='highlight'] td.code,
+div[class^='last highlight'] td.code {
   width: 100%
 }
 
@@ -3413,7 +3423,8 @@ div[class^='highlight'] td.code {
   line-height: 1.5;
 }
 
-div[class^='highlight'] pre {
+div[class^='highlight'] pre,
+div[class^='last highlight'] pre {
   white-space: pre;
   margin: 0;
   line-height: 1.5;
@@ -3421,7 +3432,8 @@ div[class^='highlight'] pre {
   overflow: auto;
 }
 
-div[class^='highlight'] .copy-to-clipboard {
+div[class^='highlight'] .copy-to-clipboard,
+div[class^='last highlight'] .copy-to-clipboard {
   z-index: 1;
   cursor: pointer;
   opacity: 0;
@@ -3437,20 +3449,24 @@ div[class^='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class^='highlight']:hover .copy-to-clipboard {
+div[class^='highlight']:hover .copy-to-clipboard,
+div[class^='last highlight']:hover .copy-to-clipboard {
   opacity: 1;
 }
 
-div[class^='highlight'] .copy-to-clipboard.copied {
+div[class^='highlight'] .copy-to-clipboard.copied,
+div[class^='last highlight'] .copy-to-clipboard.copied {
   opacity: 1;
   background-color: #333;
 }
 
-div[class^='highlight'] .copy-to-clipboard:hover {
+div[class^='highlight'] .copy-to-clipboard:hover,
+div[class^='last highlight'] .copy-to-clipboard:hover {
   background-color: #333;
 }
 
-div[class^='highlight'] .copy-to-clipboard span {
+div[class^='highlight'] .copy-to-clipboard span,
+div[class^='last highlight'] .copy-to-clipboard span {
   display: none;
   font-size: 0.9rem;
   font-family: 'Open Sans', sans-serif;
