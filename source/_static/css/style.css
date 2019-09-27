@@ -2156,6 +2156,11 @@ label {
   border-radius: 4px;
 }
 
+.admonition.admonition-output {
+	margin-bottom: 0;
+	border-radius: 4px 4px 0 0;
+}
+
 .admonition p {
   padding: 1rem;
   margin: 0;
@@ -2173,6 +2178,13 @@ label {
 .admonition.admonition-generic-admonition > [class*="highlight-"] {
 	margin: 1rem;
   padding: 0;
+}
+
+.output[class*="highlight-"] .highlight {
+	margin: 0;
+	padding-top: 1.3rem;
+	border: none;
+	background-color: #e8e8e8;
 }
 
 .admonition ul, .admonition ol {
@@ -2239,9 +2251,18 @@ p.first.admonition-title::before,
 	background-color: rgba(221, 108, 70, 0.5);
 }
 
+.output .admonition-title {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #ffffff;
+}
+
 .note p.first.admonition-title::before,
 .admonition-generic-admonition p.first.admonition-title::before {
   content: '\f06a';
+}
+
+.output p.first.admonition-title::before {
+  content: '\f138';
 }
 
 .note > ol,
@@ -2562,7 +2583,6 @@ ul#breadcrumbs a {
   background-color: #f4f4f4;
 }
 
-blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;

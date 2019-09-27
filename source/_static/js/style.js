@@ -617,7 +617,11 @@ $(function() {
   /* Copy to clipboard ----------------------------------------------------------------------------------*/
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
-    blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+    if ( !blockCode.hasClass('output') ) {
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+    } else {
+      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+    }
   });
 
   $('.copy-to-clipboard').click(function() {
