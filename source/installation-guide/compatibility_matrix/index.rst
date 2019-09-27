@@ -114,7 +114,7 @@ The compatibility between Wazuh agent and Wazuh manager is guaranteed when the W
 Manager and API
 ^^^^^^^^^^^^^^^
 
-The API requires the same ``major.minor`` version than the Wazuh manager in order to be compatible.
+The API requires the same ``major.minor`` version as the Wazuh manager in order to be compatible.
 
 
 API and Kibana app
@@ -190,4 +190,4 @@ The Splunk app for Wazuh requires compatibility between two different products:
 +---------------------------------+---------------------------+
 
 
-You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Splunk app for Wazuh and Splunk versions.
+You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.
