@@ -760,8 +760,9 @@ li.toctree-l5 > a {
   position: relative;
 }
 
-.central-page-area:before {
+.central-page-area::before {
   content: '';
+  display: none;
   width: 360px;
   height: 100vh;
   margin-left: -15px;
@@ -2155,15 +2156,35 @@ label {
   border-radius: 4px;
 }
 
+.admonition.admonition-output {
+	margin-bottom: 0;
+	border-radius: 4px 4px 0 0;
+}
+
 .admonition p {
   padding: 1rem;
   margin: 0;
 }
 
 .admonition.note > [class*="highlight-"],
-.admonition.warning > [class*="highlight-"] {
+.admonition.warning > [class*="highlight-"],
+.admonition.attention > [class*="highlight-"],
+.admonition.caution > [class*="highlight-"],
+.admonition.danger > [class*="highlight-"],
+.admonition.error > [class*="highlight-"],
+.admonition.hint > [class*="highlight-"],
+.admonition.important > [class*="highlight-"],
+.admonition.tip > [class*="highlight-"],
+.admonition.admonition-generic-admonition > [class*="highlight-"] {
 	margin: 1rem;
   padding: 0;
+}
+
+.output[class*="highlight-"] .highlight {
+	margin: 0;
+	padding-top: 1.3rem;
+	border: none;
+	background-color: #e8e8e8;
 }
 
 .admonition ul, .admonition ol {
@@ -2173,7 +2194,7 @@ label {
 }
 
 p.admonition-title {
-  color: #ffffff;
+  color: rgba(51,51,51,0.9);
   font-size: 1.2rem;
 	padding: 0.25rem 1rem;
 }
@@ -2186,63 +2207,127 @@ p.first.admonition-title::before,
   margin-right: 0.75em;
 }
 
-.note {
+.note,
+.admonition-generic-admonition {
 	background-color: rgba(0, 169, 229, 0.1);
 }
 
-.warning {
-	background-color: rgba(255, 183, 0, 0.1);
+.warning,
+.caution,
+.attention {
+	background-color: rgba(255, 182, 0, 0.1);
 }
 
-.note .admonition-title {
+.hint,
+.important,
+.tip {
+	background-color: rgba(51, 204, 153, 0.1);
+}
+
+.error,
+.danger {
+	background-color: rgba(221, 108, 70, 0.1);
+}
+
+.note .admonition-title,
+.admonition-generic-admonition .admonition-title {
   background-color: rgba(0, 169, 229, 0.5);
 }
 
-.warning .admonition-title {
-  color: rgba(51,51,51,0.9);
-  background-color: rgba(255, 183, 0, 0.5);
+.warning .admonition-title,
+.caution .admonition-title,
+.attention .admonition-title {
+  background-color: rgba(255, 182, 0, 0.5);
 }
 
-.note p.first.admonition-title::before {
+.hint .admonition-title,
+.important .admonition-title,
+.tip .admonition-title  {
+	background-color: rgba(51, 204, 153, 0.5);
+}
+
+.error .admonition-title,
+.danger .admonition-title  {
+	background-color: rgba(221, 108, 70, 0.5);
+}
+
+.output .admonition-title {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #ffffff;
+}
+
+.note p.first.admonition-title::before,
+.admonition-generic-admonition p.first.admonition-title::before {
   content: '\f06a';
-  color: #ffffff;
+}
+
+.output p.first.admonition-title::before {
+  content: '\f138';
 }
 
 .note > ol,
-.warning > ol {
+.warning > ol,
+.admonition-generic-admonition > ol,
+.caution > ol,
+.attention > ol,
+.hint > ol,
+.important > ol,
+.tip > ol,
+.error > ol,
+.danger > ol {
   padding-left: 3rem;
 }
 
 .note > dl,
 .note > ul,
 .warning > dl,
-.warning > ul {
+.warning > ul,
+.admonition-generic-admonition > dl,
+.admonition-generic-admonition > ul,
+.caution > dl,
+.caution > ul,
+.attention > dl,
+.attention > ul,
+.hint > dl,
+.hint > ul,
+.important > dl,
+.important > ul,
+.tip > dl,
+.tip > ul,
+.error > dl,
+.error > ul,
+.danger > dl,
+.danger > ul {
   padding-left: 2rem !important;
 }
 
-.note .highlight-yaml,
-.warning .highlight-yaml {
+.admonition .highlight-yaml {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
-.note blockquote,
-.warning blockquote {
+.admonition blockquote {
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: transparent;
 }
 
-.note div[class^='highlight'],
-.warning div[class^='highlight'] {
+.admonition div[class^='highlight'],
+.admonition div[class^='last highlight']{
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
+.error p.first.admonition-title::before,
+.danger p.first.admonition-title::before,
+.hint p.first.admonition-title::before,
+.important p.first.admonition-title::before,
+.tip p.first.admonition-title::before,
+.attention p.first.admonition-title::before,
+.caution p.first.admonition-title::before,
 .warning p.first.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
-  color: rgba(51,51,51,0.8);
 }
 
 .admonition .highlight-console {
@@ -2498,14 +2583,14 @@ ul#breadcrumbs a {
   background-color: #f4f4f4;
 }
 
-blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
   margin-left: 0.3rem;
 }
 
-blockquote ul li > div[class^='highlight'] {
+blockquote ul li > div[class^='highlight'],
+blockquote ul li > div[class^='last highlight'] {
   margin-bottom: 0.5rem;
 }
 
@@ -2527,8 +2612,14 @@ div.highlight pre {
   padding: 0.5em 1em;
 }
 
-.note pre,
-.warning pre {
+.highlight .no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select:none;
+}
+
+.admonition pre {
   background-color: #f4f4f4 !important;
 }
 
@@ -2896,6 +2987,10 @@ div.highlight pre {
       #navbar {
         visibility: visible;
         width: 360px;
+      }
+
+      .central-page-area::before {
+        display: block;
       }
 
       #navbar-globaltoc {
@@ -3375,20 +3470,26 @@ div.highlight pre {
 pre.literal-block,
 .rst-content .literal-block,
 .rst-content pre.literal-block,
-div[class^='highlight'] {
+div[class^='highlight'],
+div[class^='last highlight'] {
   border: 1px solid #e1e4e5;
   padding: 0px;
   margin: 1px 0 24px 0
 }
 
-div[class^='highlight'] {
+div[class^='highlight'],
+div[class^='last highlight'] {
   position: relative;
 }
 
 .codeblock div[class^='highlight'],
 pre.literal-block div[class^='highlight'],
 .rst-content .literal-block div[class^='highlight'],
-div[class^='highlight'] div[class^='highlight'] {
+div[class^='highlight'] div[class^='highlight'],
+.codeblock div[class^='last highlight'],
+pre.literal-block div[class^='last highlight'],
+.rst-content .literal-block div[class^='last highlight'],
+div[class^='last highlight'] div[class^='last highlight'] {
   border: none;
   background: none;
   margin: 0
@@ -3398,7 +3499,8 @@ div[class^='highlight'] div[class^='highlight'] {
   margin: 0;
 }
 
-div[class^='highlight'] td.code {
+div[class^='highlight'] td.code,
+div[class^='last highlight'] td.code {
   width: 100%
 }
 
@@ -3406,7 +3508,8 @@ div[class^='highlight'] td.code {
   line-height: 1.5;
 }
 
-div[class^='highlight'] pre {
+div[class^='highlight'] pre,
+div[class^='last highlight'] pre {
   white-space: pre;
   margin: 0;
   line-height: 1.5;
@@ -3414,7 +3517,8 @@ div[class^='highlight'] pre {
   overflow: auto;
 }
 
-div[class^='highlight'] .copy-to-clipboard {
+div[class^='highlight'] .copy-to-clipboard,
+div[class^='last highlight'] .copy-to-clipboard {
   z-index: 1;
   cursor: pointer;
   opacity: 0;
@@ -3430,19 +3534,24 @@ div[class^='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class^='highlight']:hover .copy-to-clipboard {
+div[class^='highlight']:hover .copy-to-clipboard,
+div[class^='last highlight']:hover .copy-to-clipboard {
   opacity: 1;
 }
 
-div[class^='highlight'] .copy-to-clipboard.copied {
+div[class^='highlight'] .copy-to-clipboard.copied,
+div[class^='last highlight'] .copy-to-clipboard.copied {
   opacity: 1;
-}
-
-div[class^='highlight'] .copy-to-clipboard:hover {
   background-color: #333;
 }
 
-div[class^='highlight'] .copy-to-clipboard span {
+div[class^='highlight'] .copy-to-clipboard:hover,
+div[class^='last highlight'] .copy-to-clipboard:hover {
+  background-color: #333;
+}
+
+div[class^='highlight'] .copy-to-clipboard span,
+div[class^='last highlight'] .copy-to-clipboard span {
   display: none;
   font-size: 0.9rem;
   font-family: 'Open Sans', sans-serif;
