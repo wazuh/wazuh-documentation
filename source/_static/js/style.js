@@ -59,7 +59,6 @@ $(function() {
   /* Show the hidden menu */
   setTimeout(function() {
     $('#navbar').removeClass('hidden');
-    $('.central-page-area:before').css({'content': 'none'});
   }, 100);
 
   $(window).on('hashchange', function() {
@@ -461,7 +460,7 @@ $(function() {
 
   /**
    * Only for main index (documentation's home page).
-   * Functionallity of the capabilities section: selects capability, controls the responsive behaviour, etc.
+   * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
    */
   function capabilitiesHome(ele) {
@@ -618,12 +617,16 @@ $(function() {
   /* Copy to clipboard ----------------------------------------------------------------------------------*/
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
-    blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+    if ( !blockCode.hasClass('output') ) {
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+    } else {
+      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+    }
   });
 
   $('.copy-to-clipboard').click(function() {
     const ele = $(this);
-    let data = $(ele).parent().find('.highlight').html();
+    let data = $(ele).parent().find('.highlight').text();
     data = data.replace(/(<([^>]+)>)/ig, '');
     data = String(data);
     data = data.replace(/(?:\$\s)/g, '');
