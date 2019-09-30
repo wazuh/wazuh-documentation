@@ -2238,6 +2238,7 @@ p.first.admonition-title::before,
 .caution .admonition-title,
 .attention .admonition-title {
   background-color: rgba(255, 182, 0, 0.5);
+
 }
 
 .hint .admonition-title,
