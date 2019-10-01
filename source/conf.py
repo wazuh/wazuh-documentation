@@ -356,29 +356,43 @@ files = [
 for file in files:
 
     path_end = actual_path+'/_static/'
+    min_file = os.path.join(path_end, file[0]+'.min.'+file[1])
 
-    with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
+    if os.path.isfile(min_file):
+        with open(min_file, 'r') as f_min:
+            min_file_content = f_min.read()
 
-        output = f.read()
+        with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
 
-        # remove comments - this will break a lot of hacks :-P
-        output = re.sub( r'\s*/\*\s*\*/', "$$HACK1$$", output ) # preserve IE<6 comment hack
-        output = re.sub( r'/\*[\s\S]*?\*/', "", output )
-        output = output.replace( "$$HACK1$$", '/**/' ) # preserve IE<6 comment hack
+            output = f.read()
 
-        # url() doesn't need quotes
-        output = re.sub( r'url\((["\'])([^)]*)\1\)', r'url(\2)', output )
+            # remove comments - this will break a lot of hacks :-P
+            output = re.sub( r'\s*/\*\s*\*/', "$$HACK1$$", output ) # preserve IE<6 comment hack
+            output = re.sub( r'/\*[\s\S]*?\*/', "", output )
+            output = output.replace( "$$HACK1$$", '/**/' ) # preserve IE<6 comment hack
 
-        # spaces may be safely collapsed as generated content will collapse them anyway
-        output = re.sub( r'\s+', ' ', output )
+            # url() doesn't need quotes
+            output = re.sub( r'url\((["\'])([^)]*)\1\)', r'url(\2)', output )
 
-        # shorten collapsable colors: #aabbcc to #abc
-        output = re.sub( r'#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(\s|;)', r'#\1\2\3\4', output )
+            # spaces may be safely collapsed as generated content will collapse them anyway
+            output = re.sub( r'\s+', ' ', output )
 
-        # fragment values can loose zeros
-        output = re.sub( r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', output )
+            # shorten collapsable colors: #aabbcc to #abc
+            output = re.sub( r'#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(\s|;)', r'#\1\2\3\4', output )
 
-        with open(os.path.join(path_end, file[0]+'.min.'+file[1]), 'w') as f2:
+            # fragment values can loose zeros
+            output = re.sub( r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', output )
+
+            if output == min_file_content:
+                minify = False
+            else:
+                minify = True
+    else:
+        minify = True
+
+
+    if minify:
+        with open(min_file, 'w') as f2:
             f2.write(output)
 
 # -- Setup -------------------------------------------------------------------
