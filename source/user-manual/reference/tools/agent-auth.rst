@@ -39,7 +39,7 @@ The ``agent-auth`` program is the client application used along with :ref:`ossec
 +---------------------+-------------------------------------------------------------------------------+
 | **-h**              | Display the help message                                                      |
 +---------------------+-------------------------------------------------------------------------------+
-| **-k <path>**       | Display the full path to the agent key.                                       |
+| **-k <path>**       | Full path to the agent key.                                                   |
 +---------------------+-------------------------------------------------------------------------------+
 | **-m <manager_ip>** | IP address of the manager.                                                    |
 +---------------------+-------------------------------------------------------------------------------+
@@ -57,9 +57,9 @@ The ``agent-auth`` program is the client application used along with :ref:`ossec
 +---------------------+-------------------------------------------------------------------------------+
 | **-V**              | Display version and license information.                                      |
 +---------------------+-------------------------------------------------------------------------------+
-| **-v <path>**       | Display the full path to the CA certificate used to verify the server.        |
+| **-v <path>**       | Full path to the CA certificate used to verify the server.                    |
 +---------------------+-------------------------------------------------------------------------------+
-| **-x <path>**       | Display the full path to the agent certificate.                               |
+| **-x <path>**       | Full path to the agent certificate.                                           |
 +---------------------+-------------------------------------------------------------------------------+
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html
