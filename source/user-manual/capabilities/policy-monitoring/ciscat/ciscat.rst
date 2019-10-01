@@ -214,13 +214,13 @@ Scheduling executions by day of the week
 .. code-block:: xml
 
   <!-- 18:00 every monday -->
-  <wday>monday</monday>
+  <wday>monday</wday>
   <time>18:00</time>
 
 .. code-block:: xml
 
   <!-- 18:00 every monday with three weeks of frequency -->
-  <wday>monday</monday>
+  <wday>monday</wday>
   <time>18:00</time>
   <interval>3w</interval>
 
