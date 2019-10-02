@@ -17,6 +17,7 @@ Preparation
 
   .. code-block:: console
 
+    # apt-get update
     # apt-get install curl apt-transport-https
     # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
     # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
