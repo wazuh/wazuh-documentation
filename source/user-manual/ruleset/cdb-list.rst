@@ -18,7 +18,7 @@ The list file is a plain text file where each line has the following format::
     key1:value1
     key2:value2
 
-Each key must be unique and is terminated with a colon ``:``.
+Each key has to be unique, must be followed by a colon ``:`` and an optional value. The values between lines can be the same as long as the key is unique.
 
 For IP addresses the dot notation is used for subnet matches:
 
@@ -67,6 +67,18 @@ Restart Wazuh to apply the changes:
   .. code-block:: console
 
     # service wazuh-manager restart
+
+Compiling the CDB list
+^^^^^^^^^^^^^^^^^^^^^^
+
+Compile the list by calling the ``ossec-makelists`` binary in ``/var/ossec/bin/``. Upon executing the ``ossec-makelists`` binary we will be prompted with the following message:
+
+.. code-block:: console
+  
+  # /var/ossec/bin/ossec-makelists
+  * File lists/my-list.cdb needs to be updated
+	
+This is the success message indicating that the text file ``/var/ossec/etc/lists/my-list`` was compiled into the CDB file ``/var/ossec/etc/lists/my-list.cdb``. The ``my-list`` file is what you can read, edit, and recompile with ossec-makeslits.  The ``my-list.cdb`` file is the compiled CDB that Wazuh can read and use for high performance lookup during rule analysis.
 
 Using the CDB list in the rules
 -------------------------------
