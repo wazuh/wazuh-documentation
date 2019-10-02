@@ -158,35 +158,15 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
   .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 6. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
-    output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
+    output.elasticsearch.hosts: ['YOUR_ELASTIC_SERVER_IP:9200']
 
-7. Enable and start the Filebeat service:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl daemon-reload
-      # systemctl enable filebeat.service
-      # systemctl start filebeat.service
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # update-rc.d filebeat defaults 95 10
-      # service filebeat start
-
-Next steps
-----------
-
-Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Now, before to start the filebeat service, it's necessary to have the certificate generated in the Elasticsearch master node. This process will be described in :ref:`Elastic Stack <installation_elastic>`.
 
 Uninstall
 ---------
