@@ -66,7 +66,7 @@ Example:
 Assign the decoder which father it belongs:
 
 .. code-block:: xml
-  
+
   <decoder name="decoder_junior">
     <parent>decoder_father</parent>
     ...

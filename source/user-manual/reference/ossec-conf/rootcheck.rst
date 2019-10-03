@@ -44,7 +44,7 @@ Options
 base_directory
 ^^^^^^^^^^^^^^^
 
-The base directory that will be prepended to the following options:
+The base directory that will be prefixed to the following options:
 
 - rootkit_files
 - rootkit_trojans

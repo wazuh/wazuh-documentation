@@ -200,7 +200,7 @@ Observe that elastic-server is no longer blocking the offending linux-agent, wit
 **AR Scenario 2 - Make all Linux lab systems block attacker even if they were not the target of the attack.**
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In the newly-added <active-response> section in ossec.conf on wazuh-server, change the <location> value from **local** to **all** so that
+In the newly-added <active-response> section in ossec.conf on wazuh-manager, change the <location> value from **local** to **all** so that
 all Linux Wazuh agents will block the attacker even when only one of them is targeted.
 
 .. note::

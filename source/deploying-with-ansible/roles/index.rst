@@ -23,5 +23,4 @@ Below we explain briefly how to use these roles, please check out `Ansible Playb
         wazuh-filebeat
         wazuh-elasticsearch
         wazuh-kibana
-        wazuh-logstash
         wazuh-agent
