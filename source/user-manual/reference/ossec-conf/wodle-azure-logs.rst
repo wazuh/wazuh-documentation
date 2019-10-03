@@ -706,6 +706,9 @@ Specifies the content of the blobs.
 - **json_inline**. Each line is a log in json format.
 
 .. note::
+	As of November 1st 2018, the format of logs stored in Azure accounts became **inline JSON** instead of **JSON file**.
+	
+.. note::
 
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
 
@@ -756,7 +759,7 @@ Example of storage configuration
 
             <container name="insights-operational-logs">
                 <blobs>.json</blobs>
-                <content_type>json_file</content_type>
+                <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
             </container>
 
@@ -813,7 +816,7 @@ Example of all integration
 
             <container name="insights-operational-logs">
                 <blobs>.json</blobs>
-                <content_type>json_file</content_type>
+                <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
             </container>
 

@@ -25,7 +25,7 @@ We can use rootcheck to monitor security policies. The first thing to do is to e
 
 .. code-block:: console
 
-	root@agente:/home/agente# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
+	root@agent:/home/agent# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
 	<rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
 	<rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
 	<system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
@@ -180,7 +180,7 @@ Wazuh will generate an alert like this.
 	2018 May 16 16:34:45 (agent01) 192.168.1.50->/var/log/auth.log
 	Rule: 5710 (level 5) -> 'sshd: Attempt to login using a non-existent user'
 	Src IP: 192.168.1.64
-	May 16 16:34:44 agente sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
+	May 16 16:34:44 agent sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
 
 .. thumbnail:: ../images/gdpr/access_1.png
     :title: Alert visualization at Kibana Discover
@@ -313,14 +313,14 @@ Wazuh will generate an alert like this.
 	2018 May 16 16:45:36 (agent01) 192.168.1.50->/var/log/auth.log
 	Rule: 5712 (level 10) -> 'sshd: brute force trying to get access to the system.'
 	Src IP: 192.168.1.64
-	May 16 16:45:35 agente sshd[10549]: Failed password for invalid user Evil_User from 192.168.1.64 port 49894 ssh2
-	May 16 16:45:32 agente sshd[10549]: Invalid user Evil_User from 192.168.1.64 port 49894
-	May 16 16:45:31 agente sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:28 agente sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:27 agente sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:24 agente sshd[10547]: Invalid user Evil_User from 192.168.1.64 port 49892
-	May 16 16:44:58 agente sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
-	May 16 16:44:56 agente sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
+	May 16 16:45:35 agent sshd[10549]: Failed password for invalid user Evil_User from 192.168.1.64 port 49894 ssh2
+	May 16 16:45:32 agent sshd[10549]: Invalid user Evil_User from 192.168.1.64 port 49894
+	May 16 16:45:31 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+	May 16 16:45:28 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+	May 16 16:45:27 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+	May 16 16:45:24 agent sshd[10547]: Invalid user Evil_User from 192.168.1.64 port 49892
+	May 16 16:44:58 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
+	May 16 16:44:56 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
 
 
 .. thumbnail:: ../images/gdpr/brute_1.png

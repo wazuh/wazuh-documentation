@@ -13,21 +13,21 @@ In this section we will see how to create these data containers:
 
 1. Go to Services > Storage > S3:
 
-.. thumbnail:: ../../images/aws/aws-create-firehose-1.png
-  :align: center
-  :width: 70%
+    .. thumbnail:: ../../images/aws/aws-create-firehose-1.png
+      :align: center
+      :width: 70%
 
 2. Click on the *Create bucket*:
 
-.. thumbnail:: ../../images/aws/aws-create-firehose-2.png
-  :align: center
-  :width: 70%
+    .. thumbnail:: ../../images/aws/aws-create-firehose-2.png
+      :align: center
+      :width: 70%
 
 3. Create a new bucket, give it a name, then click on the *Create* button:
 
-.. thumbnail:: ../../images/aws/aws-create-firehose-3.png
-  :align: center
-  :width: 45%
+    .. thumbnail:: ../../images/aws/aws-create-firehose-3.png
+      :align: center
+      :width: 45%
 
-.. warning::
-  Note down the bucket ARN because it might be needed later.
+    .. warning::
+      Note down the bucket ARN because it might be needed later.

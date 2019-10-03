@@ -88,7 +88,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prepended to all description
+# If true, the current module name will be prefixed to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 

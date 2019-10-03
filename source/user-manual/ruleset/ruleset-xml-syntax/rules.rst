@@ -577,8 +577,7 @@ Example:
 description
 ^^^^^^^^^^^
 
-Used to add a description to a rule so it makes more clear and readable its funcionality.
-This option apports more readable information for the users, so is usually added to the rules.
+Specifies a human readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -598,7 +597,7 @@ Examples:
 
     <rule id="100015" level="2">
       ...
-      <description> A timeout occured. </description>
+      <description> A timeout occurred. </description>
     </rule>
 
     <rule id="100035" level="4">
@@ -725,7 +724,7 @@ Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 
-Groups are variables that define a behaviour. When an alert includes that group label, this behaviour will occur.
+Groups are variables that define a behavior. When an alert includes that group label, this behavior will occur.
 
 Example:
 
@@ -754,7 +753,7 @@ Declares the actual status of a rule.
 +--------------------+----------------------------------------------+
 | **Default Value**  | n/a                                          |
 +--------------------+----------------------------------------------+
-| **Allowed values** | started, aborted, succedeed, failed, lost... |
+| **Allowed values** | started, aborted, succeded, failed, lost...  |
 +--------------------+----------------------------------------------+
 
 var

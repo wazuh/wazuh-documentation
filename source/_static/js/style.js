@@ -460,7 +460,7 @@ $(function() {
 
   /**
    * Only for main index (documentation's home page).
-   * Functionallity of the capabilities section: selects capability, controls the responsive behaviour, etc.
+   * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
    */
   function capabilitiesHome(ele) {
@@ -612,13 +612,5 @@ $(function() {
     if ( e.keyCode == 27 ) {
       $('html, body').css('overflow', '');
     }
-  });
-
-  /* Enable all tooltips in the documentation */
-  $('[data-toggle="tooltip"]').tooltip();
-
-  /* Enable links that have the '.disable' class */
-  $('#select-version .dropdown-menu').on('click keypress', 'li a.disable', function(e) {
-    return false;
   });
 });
