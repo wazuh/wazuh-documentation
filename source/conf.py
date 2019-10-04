@@ -47,6 +47,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
+    'sphinx_tabs.tabs',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -384,7 +385,7 @@ for file in files:
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
-    
+
     app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
     app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(

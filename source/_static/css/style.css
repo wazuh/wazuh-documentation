@@ -1396,6 +1396,25 @@ footer a:focus,
   width: 100%;
 }
 
+#main-content .sphinx-tabs .menu .item.docutils.container {
+  border-bottom: none;
+  border-bottom-color: currentcolor;
+
+}
+
+.sphinx-tabs .item.docutils.container, .sphinx-tabs .menu.docutils.container {
+  width: auto;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.sphinx-tabs.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
