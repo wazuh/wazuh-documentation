@@ -49,7 +49,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
         
 3. Configure ``inputs.conf`` and ``indexes.conf``:
 
-    a) Create ``indexes.conf`:
+    a) Create ``indexes.conf``:
 
       .. code-block:: console
 
