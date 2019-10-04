@@ -47,7 +47,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.0/extensions/elasticsearch/7.x/elasticsearch.yml
+          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
 
       2.2. Edit the file ``/etc/elasticsearch/elasticsearch.yml``
 
@@ -214,7 +214,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.0/extensions/elasticsearch/7.x/elasticsearch.yml
+          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
 
       2.2. Edit the file ``/etc/elasticsearch/elasticsearch.yml``
 
@@ -231,7 +231,6 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 	          - <elasticsearch_ip_node1>
 	          - <elasticsearch_ip_node2>
 	          - <elasticsearch_ip_node3>
-
 
       The values to be replaced:
         - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``.
@@ -430,33 +429,28 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
         # chmod 770 -R /etc/kibana/certs
         # chown -R kibana:kibana /etc/kibana/
 
-3. Edit the file ``/etc/kibana/kibana.yml`` appending the following settings:
 
-  .. code-block:: yaml
+3. Once we have Kibana installed we need to configure it by downloading and editing the file ``/etc/kibana/kibana.yml`` as follow:
 
-      server.host: "<kibana_ip>"
+  3.1. Download the Kibana configuration file from the Wazuh repository:
 
-      # Elasticsearch from/to Kibana
-      elasticsearch.hosts: ["https://<elasticsearch_ip>:9200"]
-      elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca/ca.crt"]
-      elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana.crt"
-      elasticsearch.ssl.key: "/etc/kibana/certs/kibana.key"
+        .. code-block:: console
 
-      # Browser from/to Kibana
-      server.ssl.enabled: true
-      server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
-      server.ssl.key: "/etc/kibana/certs/kibana.key"
+          # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/kibana/7.x/kibana.yml
 
-      # Elasticsearch authentication
-      xpack.security.enabled: true
-      elasticsearch.username: "elastic"
-      elasticsearch.password: "<password_generated_for_elastic>"
+  3.2 Edit the file ``/etc/kibana/kibana.yml``:
 
-  The values to be replaced:
+    .. code-block:: yaml
 
-    - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``. You can separate by commas the Elasticsearch nodes if you have more than one Elasticsearch node.
-    - ``<kibana_ip>``: Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by replacing ``<kibana_ip>`` with the Kibana host IP. I.e: ``10.0.0.2``.
-    - ``<password_generated_for_elastic>``: The password generated in step 5. I.e: ``IJB8YtGoTgrpaPdGZbSO``.
+        server.host: "<kibana_ip>"
+        elasticsearch.hosts: ["https://<elasticsearch_ip>:9200"]
+        elasticsearch.password: "<password_generated_for_elastic>"
+
+    The values to be replaced:
+
+      - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``. You can separate by commas the Elasticsearch nodes if you have more than one Elasticsearch node.
+      - ``<kibana_ip>``: Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by replacing ``<kibana_ip>`` with the Kibana host IP. I.e: ``10.0.0.2``.
+      - ``<password_generated_for_elastic>``: The password generated in step 5. I.e: ``IJB8YtGoTgrpaPdGZbSO``.
 
 4. Install the Wazuh app plugin for Kibana:
 
