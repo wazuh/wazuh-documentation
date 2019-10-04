@@ -19,6 +19,7 @@ Find the answer to commonly asked support questions!
    faq_installation
    faq_integrations
    faq_miscellaneous
+   faq_fim
    faq_wazuh
    faq_logs
    faq_rules
