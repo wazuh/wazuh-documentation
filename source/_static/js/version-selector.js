@@ -61,7 +61,6 @@ jQuery(function($) {
     let fullUrl = window.location.href;
     let page = '';
     let redCurrent = '';
-    let urlTrue = '';
 
     if (fullUrl == null) {/* Firefox fix */
       fullUrl = document.URL;
@@ -82,7 +81,7 @@ jQuery(function($) {
       path = currentVersion;
     }
 
-    /* Check for redirects for this page */
+    /* Get the redirects for this page */
     for (redItem in redirects) {
       if ({}.hasOwnProperty.call(redirects, redItem)) {
         for (verItem in redirects[redItem]) {
@@ -103,50 +102,22 @@ jQuery(function($) {
         }
       }
     }
-
-    /* Creates the links to others versions */
+    
+    /* Create the links of all releases for the version selector */
     for (let i = 0; i < versions.length; i++) {
-      let pageExists = false;
       let href = '';
       let tooltip = '';
-      const ver = versions[i].name.split(' (current)')[0];
-
-      /* Get the new URL */
-      for (redirect in redCurrent) {
-        if (redirect == ver) {
-          if (redCurrent[redirect] != '') {
-            urlTrue = redCurrent[redirect];
-          }
-        }
-      }
-
-      /* If there isn't redirect */
-      if (urlTrue == '') {
-        urlTrue = page;
-      }
-
-      /* Check if the file exists */
-      $.ajax({
-        type: 'HEAD',
-        url: '/'+ver+urlTrue,
-        success: function() {
-          pageExists = true;
-        },
-        error: function() {
-          pageExists = false;
-        },
-        async: false,
-      });
-
-      if (!pageExists) {
-        tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
+      let ver = versions[i].name.replace(' (current)', '');
+      if (redCurrent[ver] == '' || redCurrent[ver] == null) {
+        tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + ver +'"';
       } else {
-        href = '/'+ver+urlTrue;
+        href = '/'+ver+redCurrent[ver];
         tooltip = '';
       }
-
-      ele += '<li><a href="' + href + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
+      ele += '<li><a href="' + href + '" '+ tooltip +'>'+ver+'</a></li>';
     }
+
+    /* Include the html with the realeases links */
     selectVersionUl.html(ele);
   }
 
