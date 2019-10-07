@@ -183,7 +183,7 @@ $(function() {
     heightNavbar();
   });
 
-  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'mousewheel';
+  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'wheel';
 
   if (document.getElementById('navbar-globaltoc').addEventListener) {
     document.getElementById('navbar-globaltoc').addEventListener(mousewheelevt, function(e) {
@@ -203,7 +203,7 @@ $(function() {
     }, {passive: false} );
   }
 
-  $('#navbar-globaltoc').on('mousewheel', function(e) {
+  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
     eventScroll = 'mousewheel';
     if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
       scrollDirection = 'up';
@@ -217,7 +217,7 @@ $(function() {
       e.returnValue = false;
       return false;
     }
-  });
+  }); */
 
   $('#navbar-globaltoc').keydown(function(e) {
     eventScroll = 'keys';
