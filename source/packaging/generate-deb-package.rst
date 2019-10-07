@@ -31,7 +31,7 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
 
         -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
         -t, --target <target>     [Required] Target package to build: manager, api or agent.
-        -a, --architecture <arch> [Optional] Target architecture of the package. By default: x86_64
+        -a, --architecture <arch> [Optional] Target architecture of the package amd64 or i386. By default: x86_64
         -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 4.
         -r, --revision <rev>      [Optional] Package revision. By default: 1.
         -s, --store <path>        [Optional] Set the directory where the package will be stored. By default, an output folder will be created.
