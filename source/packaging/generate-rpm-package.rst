@@ -45,19 +45,19 @@ Below, you will find some examples of how to build an RPM package.
 
 .. code-block:: console
 
-    ./generate_rpm_package.sh -b v3.10.0 -s /tmp -t manager -a x86_64 -r my_rev.
+    ./generate_rpm_package.sh -b v3.10.2 -s /tmp -t manager -a x86_64 -r my_rev.
 
-This will generate a 3.10.0 manager package with revision ``my_rev`` for ``x86_64`` systems.
-
-.. code-block:: console
-
-    ./generate_rpm_package.sh -b v3.10.0 -s /tmp -t api -a i386 -r my_rev
-
-This will generate a 3.10.0 api package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+This will generate a 3.10.2 manager package with revision ``my_rev`` for ``x86_64`` systems.
 
 .. code-block:: console
 
-    ./generate_rpm_package.sh -b v3.10.0 -t agent -a x86_64 -p /opt
+    ./generate_rpm_package.sh -b v3.10.2 -s /tmp -t api -a i386 -r my_rev
 
-This will generate a 3.10.0 agent package with ``/opt`` as installation directory for ``x86_64`` systems.
+This will generate a 3.10.2 api package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+
+.. code-block:: console
+
+    ./generate_rpm_package.sh -b v3.10.2 -t agent -a x86_64 -p /opt
+
+This will generate a 3.10.2 agent package with ``/opt`` as installation directory for ``x86_64`` systems.
 
