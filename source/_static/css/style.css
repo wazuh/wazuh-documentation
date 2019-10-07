@@ -1514,6 +1514,27 @@ footer .contact-info .fa-paper-plane-o {
   font-weight: 400;
 }
 
+.sphinx-tabs .sphinx-menu a.item{
+  color: #0094ce !important;
+}
+
+#main-content .sphinx-tabs .menu .item.docutils.container{
+  border-radius: 5px 5px 0 0 !important;
+}
+
+.sphinx-tabs .sphinx-menu a.active.item, .ui.attached.segment{
+  border-color: #0094ce !important;
+}
+
+.sphinx-tabs .sphinx-menu a.item:not(.active){
+  border-color: #f4f4f4 !important;
+}
+
+.sphinx-tabs .sphinx-menu, .ui.tabular.menu{
+  border-bottom: 1px solid #0094ce !important;
+  border-bottom-color: #0094ce !important;
+}
+
 #page.page-404 {
 	background-color: #0094ce;
 }
