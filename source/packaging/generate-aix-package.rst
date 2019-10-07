@@ -28,25 +28,37 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
  # ./generate_wazuh_packages.sh -h
 
- Usage: ./generate_wazuh_packages.sh [OPTIONS]
+ Usage: ../wazuh-packages/aix/generate_wazuh_packages.sh [OPTIONS]
 
- -b, --branch <branch> Select Git branch or tag e.g.
- -e, --environment Install all the packages necessaries to build the RPM package
- -s, --store <rpm_directory> Directory to store the resulting RPM package. By default: /tmp/build
- -p, --install-path <rpm_home> Installation path for the package. By default: /var
- -c, --checksum Compute the SHA512 checksum of the RPM package.
- -h, --help Shows this help
+    -b, --branch <branch>               Select Git branch or tag e.g.
+    -e, --environment                   Install all the packages necessaries to build the RPM package
+    -s, --store  <rpm_directory>        Directory to store the resulting RPM package. By default: /tmp/build
+    -p, --install-path <rpm_home>       Installation path for the package. By default: /var
+    -c, --checksum <path>               Compute the SHA512 checksum of the RPM package.
+    -h, --help                          Shows this help
 
-Below, you will find some examples of how to build AIX packages.
-
-.. code-block:: console
-
- # ./generate_wazuh_packages.sh -e -b v3.10.0 -s /tmp
-
-This will download and install all the necessary dependencies, build a 3.10.0 package and store it in ``/tmp``.
+First, install the needed dependencies:
 
 .. code-block:: console
 
- # ./generate_wazuh_packages.sh -b v3.10.0 -s /tmp -p /opt
+ # ./generate_wazuh_packages.sh -e
 
-This will build a 3.10.0 package with ``/opt`` as installation directory and store it in ``/tmp``.
+Below, you will find some examples of how to build an AIX package.
+
+.. code-block:: console
+
+ # ./generate_wazuh_packages.sh -b v3.10.2
+
+ This will generate a 3.10.2 AIX package.
+
+.. code-block:: console
+
+ # ./generate_wazuh_packages.sh -b v3.10.2 -c
+
+ This will generate a 3.10.2 AIX package with checksum.
+
+ .. code-block:: console
+
+ # ./generate_wazuh_packages.sh -b v3.10.2  -p /opt
+
+ This will generate a 3.10.2 AIX package with ``opt`` as installation directory.
