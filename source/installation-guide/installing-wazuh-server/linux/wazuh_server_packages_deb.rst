@@ -12,7 +12,7 @@ For Debian 7 or greater, installing the Wazuh server components entails the inst
 Adding the Wazuh repository
 ---------------------------
 
-The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server or servers in case that you want to configure a Wazuh cluster. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
@@ -39,31 +39,140 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
     # apt-get update
 
+Remember to repeat the *Adding the Wazuh repository* steps in every server where you want to install the Wazuh manager.
+
 Installing the Wazuh server
 ----------------------------
 
-On your terminal, install the Wazuh manager:
+.. tabs::
 
-  .. code-block:: console
+  .. group-tab:: Single Wazuh
 
-    # apt-get install wazuh-manager
+    On your terminal, install the Wazuh manager:
 
-Once the process is completed, you can check the service status with:
+      .. code-block:: console
 
-  * For Systemd:
+        # apt-get install wazuh-manager
 
-    .. code-block:: console
+    Once the process is completed, you can check the service status with:
 
-      # systemctl status wazuh-manager
+      * For Systemd:
 
-  * For SysV Init:
+        .. code-block:: console
 
-    .. code-block:: console
+          # systemctl status wazuh-manager
 
-      # service wazuh-manager status
+      * For SysV Init:
+
+        .. code-block:: console
+
+          # service wazuh-manager status
+
+  .. group-tab:: Cluster Wazuh
+
+    On your terminal, install the Wazuh manager:
+
+      .. code-block:: console
+
+        # apt-get install wazuh-manager
+
+    The Wazuh manager is installed and configured in a single-mode by default. Now, you need to configure the cluster mode by editing the following settings in ``/var/ossec/etc/ossec.conf`` in the Wazuh manager node that you want to be the *master node*:
+
+      .. code-block:: xml
+
+        <cluster>
+            <name>wazuh</name>
+            <node_name>master-node</node_name>
+            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+            <node_type>master</node_type>
+            <port>1516</port>
+            <bind_addr>0.0.0.0</bind_addr>
+            <nodes>
+                <node>master</node>
+            </nodes>
+            <hidden>no</hidden>
+            <disabled>no</disabled>
+        </cluster>
+
+    The available parameters:
+
+      - :ref:`name <cluster_name>`: Name that we will assign to the cluster
+      - :ref:`node_name <cluster_node_name>`: Name of the current node
+      - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
+
+        .. code-block:: console
+
+          # openssl rand -hex 16
+
+      - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker)
+      - :ref:`port <cluster_port>`: Destination port for cluster communication
+      - :ref:`bind_addr <cluster_bind_addr>`: IP where this node is listening to (0.0.0.0 any IP)
+      - :ref:`nodes <cluster_nodes>`: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
+      - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
+      - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
+
+    Once edited the ``/var/ossec/etc/ossec.conf`` configuration file, the Wazuh manager needs to be restarted:
+
+      * For Systemd:
+
+        .. code-block:: console
+
+          # systemctl restart wazuh-manager
+
+      * For SysV Init:
+
+        .. code-block:: console
+
+          # service wazuh-manager restart
+
+    After configuring the Wazuh manager master node, you need to configure the workers node (one or more). Let's suppose that you have installed the Wazuh manager in the workers node, but by default, those Wazuh managers are configured in a single-mode. In order to configure them in cluster mode as workers you can do it as follow:
+
+      .. code-block:: xml
+
+        <cluster>
+            <name>wazuh</name>
+            <node_name>worker-node</node_name>
+            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+            <node_type>worker</node_type>
+            <port>1516</port>
+            <bind_addr>0.0.0.0</bind_addr>
+            <nodes>
+                <node>master</node>
+            </nodes>
+            <hidden>no</hidden>
+            <disabled>no</disabled>
+        </cluster>
+
+    As you can see in the previous example, you have to set the :ref:`node_type <cluster_node_type>` as ``worker``, give a name in :ref:`node_name <cluster_node_name>` (it has to be different in every node), the previously generated :ref:`key <cluster_key>` (the same for all nodes), the setting of the :ref:`nodes <cluster_nodes>` have to contain the master address (it can be either an IP or a DNS), and :ref:`disabled <cluster_disabled>` to ``no``.
+
+    Once edited the ``/var/ossec/etc/ossec.conf`` configuration file, the Wazuh manager needs to be restarted:
+
+      * For Systemd:
+
+        .. code-block:: console
+
+          # systemctl restart wazuh-manager
+
+      * For SysV Init:
+
+        .. code-block:: console
+
+          # service wazuh-manager restart
+
+    Finnally, you can check if the Wazuh cluster is working and connected with:
+
+      .. code-block:: console
+
+        # /var/ossec/bin/cluster_control -l
+        NAME         TYPE    VERSION  ADDRESS
+        master-node  master  3.10.2   10.0.0.3
+        worker-node1 worker  3.10.2   10.0.0.4
+        worker-node2 worker  3.10.2   10.0.0.5
 
 Installing the Wazuh API
 ------------------------
+
+Before to start, note that if you are setting up a Wazuh cluster, the Wazuh API has to be installed in the Wazuh master node. The Wazuh app must be configured to point to the master’s API.
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
@@ -125,7 +234,7 @@ Installing the Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch. To install it:
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch. It has to be installed in every Wazuh manager server. To install it:
 
 1. Add the Elastic repository and its GPG key:
 
