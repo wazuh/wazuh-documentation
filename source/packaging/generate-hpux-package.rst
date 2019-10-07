@@ -27,20 +27,16 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
 .. code-block:: console
 
- # ./generate_wazuh_packages.sh -h
+    # ./generate_wazuh_packages.sh -h
 
- These scripts build a wazuh package for HPUX.
- USAGE: Command line options available:
- -h, --help Displays this help.
- -d, --download Download Wazuh repository.
- -b, --build Builds HPUX package.
- -u, --utils Download and install utilities and dependencies.
- -c, --clean-all Clean sources and generated files.
+    Usage: ../wazuh-packages/hpux/generate_wazuh_packages.sh [OPTIONS]
 
- USAGE EXAMPLE:
- --------------
- ./generate_wazuh_packages.sh [option] [branch_tag] [revision]
- ./generate_wazuh_packages.sh -d branches/3.3 1
+        -e Install all the packages necessaries to build the TAR package
+        -b <branch> Select Git branch. Example v3.10.2
+        -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
+        -p <tar_home> Installation path for the package. By default: /var
+        -c, --checksum Compute the SHA512 checksum of the TAR package.
+        -h Shows this help
 
 Below, you will find an example of how to build HPUX packages.
 
@@ -48,16 +44,24 @@ First, install the needed dependencies:
 
 .. code-block:: console
 
- # ./generate_wazuh_packages.sh -u
+ # ./generate_wazuh_packages.sh -e
 
-Download the sources:
-
-.. code-block:: console
-
- # ./generate_wazuh_packages.sh -d v3.10.0
-
-Build the package
+Below, you will find some examples of how to build an HPUX package.
 
 .. code-block:: console
 
- # ./generate_wazuh_packages.sh -b v3.10.0
+ # ./generate_wazuh_packages.sh -b v3.10.2
+
+ This will generate a 3.10.2 HPUX package.
+
+.. code-block:: console
+
+ # ./generate_wazuh_packages.sh -b v3.10.2 -c
+
+ This will generate a 3.10.2 HPUX package with checksum.
+
+ .. code-block:: console
+
+ # ./generate_wazuh_packages.sh -b v3.10.2  -p /opt
+
+ This will generate a 3.10.2 HPUX package with ``opt`` as installation directory.
