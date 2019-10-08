@@ -167,11 +167,17 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         Note that, if you changed the node names in the step 3.1, you will have the folder with the name used there, instead ``wazuh-manager``.
 
-      6.4 Setting up credentials for Filebeat. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
+      6.4 Setting up credentials for Filebeat and Elasticsearch output. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
 
       .. code-block:: yaml
 
         output.elasticsearch.password: "password_generated_for_elastic"
+
+      Replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+
+      .. code-block:: yaml
+
+        output.elasticsearch.hosts: ['YOUR_ELASTIC_SERVER_IP:9200']
 
       6.5. Enable and start the Filebeat service:
 
@@ -201,22 +207,21 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
   .. ************************************************* ******************** *************************************************
   .. group-tab:: Cluster
 
-    1. Install the Elasticsearch package:
+    **Steps for all Elasticsearch nodes**
+
+    1. Install the Elasticsearch package in all cluster hosts 2:
 
       .. code-block:: console
 
         # apt-get install elasticsearch=7.3.2
 
+    2. Download the Elasticsearch configuration file from the Wazuh repository:
 
-    2. Once we have Elasticsearch installed we need to configure it by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follow:
+      .. code-block:: console
 
-      2.1. Download the Elasticsearch configuration file from the Wazuh repository:
+        # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
 
-        .. code-block:: console
-
-          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
-
-      2.2. Edit the file ``/etc/elasticsearch/elasticsearch.yml``
+    3. Once we have Elasticsearch installed we need to configure it by editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follow:
 
         .. code-block:: yaml
 
@@ -232,16 +237,21 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 	          - <elasticsearch_ip_node2>
 	          - <elasticsearch_ip_node3>
 
-      The values to be replaced:
-        - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``.
-        - ``<node_name>``: The node name. I.e: ``elastic-master1``.
-        - ``<elastic_cluster>``: The cluster name. I.e: ``elastic-cluster-production``.
-        - ``<elasticsearch_ip_nodeX>``: others Elasticsearch cluster nodes IPs. I.e: ``10.0.0.3``.
-        - ``<master_node_X>``: others elasticsearch master node names. I.e: ``elastic-master2``.
+        The values to be replaced:
 
-    3. Configure Elastic Stack to use encrypted connections:
+          - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``.
+          - ``<node_name>``: The node name. I.e: ``elastic-master1``.
+          - ``<elastic_cluster>``: The cluster name. I.e: ``elastic-cluster-production``.
+          - ``<elasticsearch_ip_nodeX>``: others Elasticsearch cluster nodes IPs. I.e: ``10.0.0.3``.
+          - ``<master_node_X>``: others elasticsearch master node names. I.e: ``elastic-master2``.
 
-      3.1. Certificates creation. The steps 3.1 and 3.2 needs to be executed only in the Elasticsearch master node. We need to create all certificates separated by component. After the creation, you will have to distribute into the host according to the component installed on those host. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
+        Depending of the node type, some parameters may vary between nodes. You should include the parameter ``node.master: false`` in every Elasticsearch node that you don't want to configure as master.
+
+    **Steps for master Elasticsearch node**
+
+    4. Configure Elastic Stack to use encrypted connections:
+
+      4.1. We need to create all certificates separated by component. After the creation, you will have to distribute the certificates into the hosts according to the component installed on those hosts. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
 
         .. code-block:: yaml
 
@@ -264,7 +274,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         Replace the ``10.0.0.x`` IPs by your hosts IPs.
 
-      3.2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool.
+      4.2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool.
 
         .. code-block:: console
 
@@ -295,13 +305,13 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. note:: The ``ca.crt`` file is shared for all the instances. The ``.crt`` and ``.key`` pairs are unique for each instance.
 
-      3.3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
+      4.3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
 
         .. code-block:: console
 
           # unzip /usr/share/elasticsearch/certs.zip -d /usr/share/elasticsearch/
 
-      3.4. Create the directory ``/etc/elasticsearch/certs``, then copy the certificate authorities, the certificate and the key there.
+      4.4. Create the directory ``/etc/elasticsearch/certs``, then copy the certificate authorities, the certificate and the key there.
 
         .. code-block:: console
 
@@ -311,9 +321,27 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           # chown -R elasticsearch: /etc/elasticsearch/certs
           # chmod -R 770 /etc/elasticsearch/certs
 
-        Depending of the Elasticsearch node in where you are deploying the certificates, you need to replace ``elasticsearch-node1`` by the name that you provided to the node in the `instances.yml` file (step 3.1).
+        Depending of the Elasticsearch node in where you are deploying the certificates, you need to replace ``elasticsearch-node1`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
 
-    4. Enable and start the Elasticsearch service:
+      4.5. In the Elasticsearch configuration file ``/etc/elasticsearch/elasticsearch.yml`` you have to review the path according with the previous step:
+
+        .. code-block:: console
+
+          # Transport layer
+          xpack.security.transport.ssl.enabled: true
+          xpack.security.transport.ssl.verification_mode: certificate
+          xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch-node1.key
+          xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch-node1.crt
+          xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
+
+          # HTTP layer
+          xpack.security.http.ssl.enabled: true
+          xpack.security.http.ssl.verification_mode: certificate
+          xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch-node1.key
+          xpack.security.http.ssl.certificate: /etc/elasticsearch/certs/elasticsearch-node1.crt
+          xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
+
+    5. Enable and start the Elasticsearch service:
 
       a) For Systemd:
 
@@ -330,9 +358,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         # update-rc.d elasticsearch defaults 95 10
         # service elasticsearch start
 
-    .. note: The file `cert.zip` has to be copied in *all* nodes with Elasticsearch, filebeat and/or Kibana. For the Elasticsearch nodes, you have to follow the steps 3.3, 3.4 and 4.
-
-    5. Generate credentials for all the Elastic Stack pre-built roles and users.
+    6. Generate credentials for all the Elastic Stack pre-built roles and users.
 
       .. code-block:: console
 
@@ -340,33 +366,59 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
       Note down at least the password for the ``elastic`` user.
 
-    6. Once Elasticsearch is up and running, we need to place the filebeat corresponding CA, certificate and key in the **in the Wazuh server host**, so the following steps needs to be done in the Wazuh server:
+    **Steps for all others Elasticsearch nodes**
 
-      5.1. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/filebeat/``
+    7. The file `cert.zip` created in the step 4.2 has to be copied in *all* nodes with Elasticsearch, filebeat and/or Kibana. For the Elasticsearch nodes, you have to follow the steps **4.3, 4.4, 4.5 and 5**.
 
-      5.2. Extract the certificates file:
+
+    8. Once completed the step 8 in every Elasticsearch node, you should have an Elasticsearch cluster working. The following ``curl`` must to show you all the connected cluster nodes (replacing ``<password_generated_for_elastic>`` by the password generated in step 6 and ``<elasticsearch_ip>`` by the Elasticsearch node that you want to query):
+
+      .. code-block:: console
+
+        curl https://<elasticsearch_ip>:9200/_cat/nodes -u elastic:<password_generated_for_elastic> -k
+
+      .. code-block:: console
+
+        10.0.0.3 19 98 96 1.19 1.40 1.57 dim * elastic1
+        10.0.0.4 19 98 96 1.19 1.40 1.57 dim - elastic2
+        10.0.0.5 29 98 96 1.19 1.40 1.57 dim - elastic3
+
+    **Wazuh server or servers**
+
+    9. Once Elasticsearch is up and running, we need to place the filebeat corresponding CA, certificate and key in the **in the Wazuh server host**, so the following steps needs to be done in the Wazuh server or servers in case of Wazuh cluster:
+
+      9.1. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/filebeat/``
+
+      9.2. Extract the certificates file:
 
         .. code-block:: console
 
           # unzip /usr/share/filebeat/certs.zip -d /usr/share/filebeat/
 
-      5.3. Create the directory ``/etc/filebeat/certs``, then copy the certificate authorities, the certificate and the key there.
+      9.3. Create the directory ``/etc/filebeat/certs``, then copy the certificate authorities, the certificate and the key there.
 
         .. code-block:: console
 
             # cd /usr/share/filebeat/
             # mkdir /etc/filebeat/certs/ca -p
-            # cp -R ca/ filebeat/* /etc/filebeat/certs/
-            # chown -R filebeat: /etc/filebeat/certs
+            # cp -R ca/ wazuh-manager/* /etc/filebeat/certs/
             # chmod -R 770 /etc/filebeat/certs
 
-      5.4 Setting up credentials for Filebeat. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
+        You will need to replace ``wazuh-manager`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
+
+      9.4 Setting up credentials for Filebeat. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
 
         .. code-block:: yaml
 
           output.elasticsearch.password: "password_generated_for_elastic"
 
-      In addition to this, it is necessary to add all elasticsearch nodes to the output configuration:
+      In addition to this, it is necessary to add all elasticsearch nodes to the output configuration. Replace the line:
+
+        .. code-block:: yaml
+
+          output.elasticsearch.hosts: ['YOUR_ELASTIC_SERVER_IP:9200']
+
+      By this configuration:
 
         .. code-block:: yaml
 
@@ -374,7 +426,10 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
             hosts: ['<elasticsearch_ip_node1>:9200','<elasticsearch_ip_node2>:9200','<elasticsearch_ip_node3>:9200']
             loadbalance: true
 
-      5.5. Enable and start the Filebeat service:
+      Also, if you changed the node names in step 4.1, you need to review the certificates paths, the parameters: ``output.elasticsearch.ssl.certificate`` and ``output.elasticsearch.ssl.key``.
+
+
+      9.5. Enable and start the Filebeat service:
 
         * For Systemd:
 
@@ -391,7 +446,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
             # chkconfig --add filebeat
             # service filebeat start
 
-      5.6. Load the Filebeat template:
+      9.6. Load the Filebeat template:
 
         .. code-block:: console
 
@@ -485,6 +540,166 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # service kibana start
 
 6. (Optional) Disable the Elasticsearch updates:
+
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command in all the hosts that you have installed Filebeat, Elasticsearch and/or Kibana:
+
+  .. code-block:: console
+
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+    # apt-get update
+
+  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+  .. code-block:: console
+
+    # echo "elasticsearch hold" | sudo dpkg --set-selections
+    # echo "kibana hold" | sudo dpkg --set-selections
+
+.. note:: The Kibana service listens on the default port 5601.
+
+Next steps
+----------
+
+Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
+
+You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
+
+Uninstall
+---------
+
+To uninstall Elasticsearch:
+
+    .. code-block:: console
+
+      # apt-get remove elasticsearch
+
+There are files marked as configuration and data files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/lib/elasticsearch`` and ``/etc/elasticsearch``.
+
+To uninstall Kibana:
+
+    .. code-block:: console
+
+      # apt-get remove kibana
+
+As in the previous case, the complete files removal can be done by removing the folder ``/var/lib/kibana`` and ``/etc/kibana``.
+
+Elasticsearch
+-------------
+
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. Bellow, you can follow the type of installation depending of desired architecture, if you want to configure only one Elasticsearch node or if you want to configure a Elasticsearch cluster.
+
+.. tabs::
+  .. ************************************************* ************************* *************************************************
+  .. *************************************************  Start of single node tab *************************************************
+  .. ************************************************* ************************* *************************************************
+  .. group-tab:: Single node
+
+    #. Install the Elasticsearch package:
+
+      .. code-block:: console
+
+        # apt-get install elasticsearch=7.3.2
+
+    #. Once we have Elasticsearch installed we need to configure it by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follow:
+
+      2.1. Download the Elasticsearch configuration file from the Wazuh repository:
+
+        .. code-block:: console
+
+          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
+
+  .. ************************************************* ******************** *************************************************
+  .. ************************************************* Start of Cluster tab *************************************************
+  .. ************************************************* ******************** *************************************************
+
+.. _install_kibana_app_deb:
+
+Kibana
+------
+
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
+
+#. Install the Kibana package:
+
+  .. code-block:: console
+
+    # apt-get install kibana=7.3.2
+
+#. Configure certificates. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/kibana/``
+
+  2.1. Extract the certificates file:
+
+    .. code-block:: console
+
+      # unzip /usr/share/kibana/certs.zip -d /usr/share/kibana/
+
+  2.2. Create the directory ``/etc/kibana/certs``, then copy the certificate authorities, the certificate and the key there.
+
+    .. code-block:: console
+
+        # cd /usr/share/kibana/
+        # mkdir /etc/kibana/certs/ca -p
+        # cp -R ca/ kibana/* /etc/kibana/certs/
+        # chmod 770 -R /etc/kibana/certs
+        # chown -R kibana:kibana /etc/kibana/
+
+
+#. Once we have Kibana installed we need to configure it by downloading and editing the file ``/etc/kibana/kibana.yml`` as follow:
+
+  3.1. Download the Kibana configuration file from the Wazuh repository:
+
+        .. code-block:: console
+
+          # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/kibana/7.x/kibana.yml
+
+  3.2 Edit the file ``/etc/kibana/kibana.yml``:
+
+    .. code-block:: yaml
+
+        server.host: "<kibana_ip>"
+        elasticsearch.hosts: ["https://<elasticsearch_ip>:9200"]
+        elasticsearch.password: "<password_generated_for_elastic>"
+
+    The values to be replaced:
+
+      - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``. You can separate by commas the Elasticsearch nodes if you have more than one Elasticsearch node.
+      - ``<kibana_ip>``: Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by replacing ``<kibana_ip>`` with the Kibana host IP. I.e: ``10.0.0.2``.
+      - ``<password_generated_for_elastic>``: The password generated in step 5. I.e: ``IJB8YtGoTgrpaPdGZbSO``.
+
+#. Install the Wazuh app plugin for Kibana:
+
+  * Install from URL:
+
+  .. code-block:: console
+
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
+
+  * Install from the package:
+
+  .. code-block:: console
+
+     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.3.2.zip
+
+  .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
+
+#. Enable and start the Kibana service:
+
+  a) For Systemd:
+
+  .. code-block:: console
+
+    # systemctl daemon-reload
+    # systemctl enable kibana.service
+    # systemctl start kibana.service
+
+  b) For SysV Init:
+
+  .. code-block:: console
+
+    # update-rc.d kibana defaults 95 10
+    # service kibana start
+
+#. (Optional) Disable the Elasticsearch updates:
 
   It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command in all the hosts that you have installed Filebeat, Elasticsearch and/or Kibana:
 
