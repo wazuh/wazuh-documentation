@@ -16,8 +16,7 @@ for Kibana if you don't want to use X-Pack neither Search Guard.
 +----------------------------------------------------+------------------------------------------------------+
 | :ref:`Search Guard <searchguard>`                  | Full security solution as an alternative to X-Pack.  |
 +----------------------------------------------------+------------------------------------------------------+
-| :ref:`NGINX reverse proxy for Kibana <kibana_ssl>` | Add simple authentication and SSL for Kibana.        |
-+----------------------------------------------------+------------------------------------------------------+
+
 
 .. toctree::
    :hidden:
@@ -25,4 +24,4 @@ for Kibana if you don't want to use X-Pack neither Search Guard.
 
    xpack
    searchguard
-   kibana_ssl
+
