@@ -69,6 +69,35 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
 
             # service wazuh-api restart
 
+#. Change the default port:
+
+    You can change the default port by using the script ``/var/ossec/api/scripts/configure_api.sh`` or by editing the file ``/var/ossec/api/configuration/config.js``.
+
+        #. Option a: Change the port automatically by using the script.
+
+          You need to execute the script ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. It will ask you for all the necessary parameters and it will change the port using the data provided in the interactive process. The script will restart the Wazuh API automatically.
+
+        #. Option b: Change the port manually. The file ``/var/ossec/api/configuration/config.js`` contains the parameter:
+
+          .. code-block:: console
+
+            // TCP Port used by the API.
+            config.port = "55000";
+
+          You can change it by a system non-used port. After configure it, the Wazuh API service has to be restarted:
+
+            * For Systemd:
+
+              .. code-block:: console
+
+                # systemctl restart wazuh-api
+
+            * For SysV Init:
+
+              .. code-block:: console
+
+                # service wazuh-api restart
+
 #. (Optional) Bind to localhost:
 
     If you do not need to access to the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
