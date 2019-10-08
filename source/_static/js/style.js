@@ -627,7 +627,6 @@ $(function() {
   $('.copy-to-clipboard').click(function() {
     const ele = $(this);
     let data = $(ele).parent().find('.highlight').text();
-    data = data.replace(/(<([^>]+)>)/ig, '');
     data = String(data);
     data = data.replace(/(?:\$\s)/g, '');
     data = data.replace(/(?:\#\s)/g, '');
