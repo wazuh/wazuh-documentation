@@ -307,9 +307,11 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
           # cd /usr/share/elasticsearch/
           # mkdir /etc/elasticsearch/certs/ca -p
-          # cp -R ca/ elasticsearch/* /etc/elasticsearch/certs/
+          # cp -R ca/ elasticsearch-node1/* /etc/elasticsearch/certs/
           # chown -R elasticsearch: /etc/elasticsearch/certs
           # chmod -R 770 /etc/elasticsearch/certs
+
+        Depending of the Elasticsearch node in where you are deploying the certificates, you need to replace ``elasticsearch-node1`` by the name that you provided to the node in the `instances.yml` file (step 3.1).
 
     4. Enable and start the Elasticsearch service:
 
