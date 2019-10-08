@@ -307,9 +307,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
           # cd /usr/share/elasticsearch/
           # mkdir /etc/elasticsearch/certs/ca -p
-          # cp ca/ca.crt /etc/elasticsearch/certs/ca
-          # cp elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
-          # cp elasticsearch/elasticsearch.key /etc/elasticsearch/certs
+          # cp -R ca/ elasticsearch/* /etc/elasticsearch/certs/
           # chown -R elasticsearch: /etc/elasticsearch/certs
           # chmod -R 770 /etc/elasticsearch/certs
 
@@ -356,10 +354,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
             # cd /usr/share/filebeat/
             # mkdir /etc/filebeat/certs/ca -p
-            # cp ca/ca.crt /etc/filebeat/certs/ca
-            # cp wazuh-manager/wazuh-manager.crt /etc/filebeat/certs
-            # cp wazuh-manager/wazuh-manager.key /etc/filebeat/certs
-            # chmod 770 -R /etc/filebeat/certs
+            # cp -R ca/ filebeat/* /etc/filebeat/certs/
+            # chown -R filebeat: /etc/filebeat/certs
+            # chmod -R 770 /etc/filebeat/certs
 
       5.4 Setting up credentials for Filebeat. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
 
