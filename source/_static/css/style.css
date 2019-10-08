@@ -2182,7 +2182,7 @@ label {
 
 .output[class*="highlight-"] .highlight {
 	margin: 0;
-	padding-top: 1.3rem;
+	padding-top: 0.3rem;
 	border: none;
 	background-color: #e8e8e8;
 }
