@@ -3,7 +3,7 @@
 .. _create-custom-deb:
 
 Creating custom Debian packages
-=============================
+===============================
 
 Wazuh provides an automated way of building DEB packages using docker so there is no need for any other dependency.
 
@@ -17,36 +17,36 @@ Requirements
 
 Download our wazuh-packages repository from GitHub and go to the debs directory.
 
- .. code-block:: console
+.. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/debs
 
-Execute the ``generate_debian_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the RPM and run a container that will build it:
+Execute the ``generate_debian_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the DEB and run a container that will build it:
 
 .. code-block:: console
 
-    # ./generate_debian_package.sh -h
+ # ./generate_debian_package.sh -h
 
-    Usage: ./generate_debian_package.sh [OPTIONS]
+ Usage: ./generate_debian_package.sh [OPTIONS]
 
-        -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
-        -t, --target <target>     [Required] Target package to build: manager, api or agent.
-        -a, --architecture <arch> [Optional] Target architecture of the package amd64 or i386. By default: x86_64
-        -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 4.
-        -r, --revision <rev>      [Optional] Package revision. By default: 1.
-        -s, --store <path>        [Optional] Set the directory where the package will be stored. By default, an output folder will be created.
-        -p, --path <path>         [Optional] Installation path for the package. By default: /var/ossec.
-        -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
-        -c, --checksum <path>     [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
-        -h, --help                Show this help.
+    -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
+    -t, --target <target>     [Required] Target package to build: manager, api or agent.
+    -a, --architecture <arch> [Optional] Target architecture of the package amd64 or i386. By default: amd64
+    -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 4.
+    -r, --revision <rev>      [Optional] Package revision. By default: 1.
+    -s, --store <path>        [Optional] Set the directory where the package will be stored. By default, an output folder will be created.
+    -p, --path <path>         [Optional] Installation path for the package. By default: /var/ossec.
+    -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
+    -c, --checksum <path>     [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
+    -h, --help                Show this help.
 
 Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
-    ./generate_debian_package.sh -b v3.10.0 -s /tmp -t manager -a x86_64 -r my_rev.
+    ./generate_debian_package.sh -b v3.10.0 -s /tmp -t manager -a amd64 -r my_rev.
 
-This will generate a 3.10.0 manager package with revision ``my_rev`` for ``x86_64`` systems.
+This will generate a 3.10.0 manager package with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
@@ -56,6 +56,6 @@ This will generate a 3.10.0 api package with revision ``my_rev`` for ``i386`` sy
 
 .. code-block:: console
 
-    ./generate_debian_package.sh -b v3.10.0 -t agent -a x86_64 -p /opt
+    ./generate_debian_package.sh -b v3.10.0 -t agent -a amd64 -p /opt
 
 This will generate a 3.10.0 agent package with ``/opt`` as installation directory for ``x86_64`` systems.
