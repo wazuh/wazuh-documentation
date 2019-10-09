@@ -104,7 +104,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
 
-  * Install from the package:
+  * Install from the local file:
 
   .. code-block:: console
 
