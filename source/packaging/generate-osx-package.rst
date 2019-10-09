@@ -12,8 +12,8 @@ To create an OSX package follow these steps:
 Requirements
 ^^^^^^^^^^^^^
 
- * `<Packages <http://s.sudre.free.fr/Software/Packages/about.html>`_
- * `<Brew <https://brew.sh/>`_
+ * `Packages <http://s.sudre.free.fr/Software/Packages/about.html>`_
+ * `Brew <https://brew.sh/>`_
  * git: on macOS install with homebrew use brew install git
 
 If ``Packages`` and ``Brew`` are not already installed in your system, they can be installed using the generate_wazuh_packages.sh script
@@ -102,7 +102,8 @@ The result of the notarization will be stored in wazuh-packages/macos/request_re
 Common issues
 ^^^^^^^^^^^^^^
 
-* ``xcrun: error: unable to find utility "altool", not a developer tool or in PATH``: this error appears when ``xcrun`` is unable to find altool. To solve it you will need to run:
+ * ``xcrun: error: unable to find utility "altool", not a developer tool or in PATH``: this error appears when ``xcrun`` is unable to find altool. To solve it you will need to run:
+
 .. code-block:: console
 
  $ sudo xcode-select -r
@@ -112,23 +113,18 @@ If this doesn't solve the issue, you will need to specify the path where Xcode i
 
  $ sudo xcode-select -s /path/to/Xcode.app
 
-* ``errSecInternalComponent when running codesign``: check the status of the login keychain. To solve it, you will need to close all the keychains and then run again the script.
+ * ``errSecInternalComponent when running codesign``: check the status of the login keychain. To solve it, you will need to close all the keychains and then run again the script.
 
-* ``error: The specified item could not be found in the keychain``: this error may appear if ``codesign`` or ``productsign`` can't access to the Certificates, the private key or both. Check in the Keychain of your Mac hosts if they can be read by ``codesign`` and ``productsign``.
+ * ``error: The specified item could not be found in the keychain``: this error may appear if ``codesign`` or ``productsign`` can't access to the Certificates, the private key or both. Check in the Keychain of your Mac hosts if they can be read by ``codesign`` and ``productsign``.
 
 Additional information
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-* `Enable hardened runtime (macOS).<https://help.apple.com/xcode/mac/current/#/devf87a2ac8f>`_
+ * `Enable hardened runtime (macOS) <https://help.apple.com/xcode/mac/current/#/devf87a2ac8f>`_
+ * `About Code Signing <https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/Introduction/Introduction.html>`_
+ * `Code Signing Tasks <https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html#//apple_ref/doc/uid/TP40005929-CH4-SW26>`_
+ * `Customizing the Notarization Workflow <https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow?language=objc>`_
+ * `Entitlements <https://developer.apple.com/documentation/bundleresources/entitlements>`_
+ * `Hardened Runtime Entitlements <https://developer.apple.com/documentation/security/hardened_runtime_entitlements?language=objc>`_
+ * `Resolving Common Notarization Issues <https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues>`_
 
-* `About Code Signing.<https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/Introduction/Introduction.html>`_
-
-* `Code Signing Tasks.<https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html#//apple_ref/doc/uid/TP40005929-CH4-SW26>`_
-
-* `Customizing the Notarization Workflow.<https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow?language=objc>`_
-
-* `Entitlements.<https://developer.apple.com/documentation/bundleresources/entitlements>`_
-
-* `Hardened Runtime Entitlements.<https://developer.apple.com/documentation/security/hardened_runtime_entitlements?language=objc>`_
-
-* `Resolving Common Notarization Issues.<https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues>`_
