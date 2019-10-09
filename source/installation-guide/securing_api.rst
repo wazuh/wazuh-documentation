@@ -15,7 +15,7 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
 
           Run ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. At some point, it will ask you for all the necessary parameters and it will create the certificate using the data you provided during the process. After this, the script will restart the Wazuh API automatically.
 
-        #. Option b: Use your own certificate. The file ``/var/ossec/api/configuration/config.js`` contains the section:
+        #. Option b: Use your own certificate. In the file ``/var/ossec/api/configuration/config.js`` you will find the following section:
 
           .. code-block:: console
 
