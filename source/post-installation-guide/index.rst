@@ -12,7 +12,6 @@ This guide describes the different available post-installation configurations. T
     .. toctree::
         :maxdepth: 1
 
-        configure-elasticsearch-cluster.rst
         protect-installation/index
         transform_logstash
         elastic_tuning
