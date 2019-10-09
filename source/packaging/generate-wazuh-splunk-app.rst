@@ -3,14 +3,14 @@
 .. _create-custom-splunk-app:
 
 Creating custom Splunk App packages
-=============================
+===================================
 
 Wazuh provides an automated way of building our Splunk app packages.
 
 To create a Splunk app package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * Docker
  * Git
@@ -28,8 +28,8 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
 
  Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
 
-    -b, --branch <branch>     [Required] Select Git branch or tag e.g. 3.10.3 or v3.10.2-7.3.0
-    -s, --store <directory>   [Optional] Destination directory by default /path/to/generate_wazuh_app.sh/output
+    -b, --branch <branch>     [Required] Select Git branch or tag e.g. v3.10.2-7.3.0
+    -s, --store <directory>   [Optional] Destination directory by default splunkapp/output
     -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y-rev
     -c, --checksum  <path>    [Optional] Generate checksum
     -h, --help                Show this help.
@@ -40,12 +40,12 @@ Below, you will find some examples of how to build Splunk App packages.
 
  # ./generate_wazuh_app.sh -b v3.10.2-7.3.0 -s /splunk-app -r 1
 
-This will generate a Splunk app package for wazuh 3.10.2 and Splunk 7.3.2 with revision 1 and store it in /splunk-app.
+This will generate a Splunk app package for Wazuh 3.10.2 and Splunk 7.3.0 with revision 1 and store it in /splunk-app.
 
 .. code-block:: console
 
  # ./generate_wazuh_app.sh -b v3.10.2-7.3.0 -s /wazuh-app -r 1 -c
 
-This will generate a Splunk app package for wazuh 3.10.2 and Splunk 7.3.2 with revision 1, the sha512 checksum and store them in /splunk-app.
+This will generate a Splunk app package for Wazuh 3.10.2 and Splunk 7.3.0 with revision 1, the sha512 checksum and store them in /splunk-app.
 
 Remember that the branch or tag for the script has to come from our wazuh-splunk repository.
