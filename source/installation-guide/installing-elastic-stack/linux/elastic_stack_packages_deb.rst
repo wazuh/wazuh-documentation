@@ -370,7 +370,6 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     7. The file `cert.zip` created in the step 4.2 has to be copied in *all* nodes with Elasticsearch, filebeat and/or Kibana. For the Elasticsearch nodes, you have to follow the steps **4.3, 4.4, 4.5 and 5**.
 
-
     8. Once completed the step 8 in every Elasticsearch node, you should have an Elasticsearch cluster working. The following ``curl`` must to show you all the connected cluster nodes (replacing ``<password_generated_for_elastic>`` by the password generated in step 6 and ``<elasticsearch_ip>`` by the Elasticsearch node that you want to query):
 
       .. code-block:: console
@@ -387,7 +386,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     9. Once Elasticsearch is up and running, we need to place the filebeat corresponding CA, certificate and key in the **in the Wazuh server host**, so the following steps needs to be done in the Wazuh server or servers in case of Wazuh cluster:
 
-      9.1. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/filebeat/``
+      9.1. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/filebeat/``.
 
       9.2. Extract the certificates file:
 
@@ -465,7 +464,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # apt-get install kibana=7.3.2
 
-2. Configure certificates. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/kibana/``
+2. Configure certificates. Copy from the Elasticsearch node, the file `/usr/share/elasticsearch/certs.zip` into the Wazuh server. You could use `scp` or others. Let's suppose that the file was copied into ``/usr/share/kibana/``.
 
   2.1. Extract the certificates file:
 

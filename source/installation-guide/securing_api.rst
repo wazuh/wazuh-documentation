@@ -7,7 +7,7 @@
 Securing the Wazuh API
 ======================
 
-By default, the communications between the Wazuh Kibana App and the Wazuh API are not encrypted. Besides, the default user is "foo" and the password is  "bar". It is highly recommended that you secure the Wazuh API and change the default user and password. The following steps will help you to achieving it:
+By default, the communications between the Wazuh Kibana plugin and the Wazuh API are not encrypted. In addition to this, the default user is "foo" and the password is  "bar". For this reason, it is highly recommended that you secure the Wazuh API and change the default user and password. The following steps will help you to achieve it:
 
 #. Enable HTTPS:
 
@@ -26,7 +26,7 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
             //config.https_use_ca = "no"
             //config.https_ca = "configuration/ssl/ca.crt"
 
-          All those lines have to be uncommented.  Then, you can indicate the path of your ``crt``, ``key`` and/or the ``ca`` (setting ``https_use_ca`` to ``yes``). Above those options the option, ``config.https`` has to be set up to ``yes``.
+          All those lines have to be uncommented. Then, you can indicate the path of your ``crt``, ``key`` and/or the ``ca`` (setting ``https_use_ca`` to ``yes``). Above those lines, the option ``config.https`` has to be set up to ``yes``.
 
           After configure them, the Wazuh API service has to be restarted:
 
@@ -84,7 +84,7 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
             // TCP Port used by the API.
             config.port = "55000";
 
-          You can change it by a system non-used port. After configure it, the Wazuh API service has to be restarted:
+          You can change it by a system non-used port. After configuring it, the Wazuh API service has to be restarted:
 
             * For Systemd:
 
