@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-sol:
+.. _create-sol:
 
-Creating custom Solaris packages
+Creating  Solaris packages
 =============================
 
 Wazuh provides an automated way of building a solaris 10 and 11, keep in mind that to build these packages you must use the corresponding system.

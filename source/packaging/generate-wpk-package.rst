@@ -1,11 +1,13 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-wpk-automatically:
+.. _create-wpk:
 
-Automated custom WPK packages creation
-=======================================
+Automated WPK packages generation
+=================================
 
 Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency.
+
+To generate an WPK package a an X509 certificate and CA, :ref:`here <create-wpk-key>` you can see how to generate one.
 
 To create a WPK package follow these steps:
 

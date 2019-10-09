@@ -2,7 +2,7 @@
 
 .. _create-custom-wpk-manually:
 
-Manual custom WPK packages creation
+Manual WPK packages generation
 ====================================
 
 WPK packages will generally contain the complete agent code, however, this is not required.

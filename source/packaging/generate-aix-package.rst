@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-aix:
+.. _create-aix:
 
-Creating custom AIX packages
+Creating  AIX packages
 =============================
 
 Wazuh provides an automated way of building AIX packages, keep in mind that to build an AIX package you must run this tool in an AIX system.
@@ -61,4 +61,4 @@ Below, you will find some examples of how to build an AIX package.
 
  # ./generate_wazuh_packages.sh -b v3.10.2  -p /opt
 
- This will generate a 3.10.2 AIX package with ``opt`` as installation directory.
+ This will generate a 3.10.2 AIX package with ``/opt`` as installation directory.

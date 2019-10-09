@@ -1,9 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-wpk-key:
+.. _custom-wpk-creation:
 
 Custom WPK packages creation
 =============================
+
+.. _create-wpk-key:
 
 Get an X509 certificate and CA
 -------------------------------
@@ -47,5 +49,5 @@ There are two different ways of creating a WPK, you can do it manually or you ca
     .. toctree::
         :maxdepth: 1
 
-        create-custom-wpk-manually
-        create-custom-wpk-automatically
+        ../../../../packaging/generate-wpk-package
+        generate-wpk-package-manually

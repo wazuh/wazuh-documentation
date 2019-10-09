@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-osx:
+.. _create-osx:
 
-Creating custom OSX packages
+Creating  OSX packages
 =============================
 
 Wazuh provides an automated way of building OSX packages, keep in mind that to build an OSX package you must run this tool in an OSX system.

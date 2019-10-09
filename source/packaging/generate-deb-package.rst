@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-deb:
+.. _create-deb:
 
-Creating custom Debian packages
+Creating  Debian packages
 ===============================
 
 Wazuh provides an automated way of building DEB packages using docker so there is no need for any other dependency.
@@ -58,4 +58,4 @@ This will generate a 3.10.0 api package with revision ``my_rev`` for ``i386`` sy
 
     ./generate_debian_package.sh -b v3.10.0 -t agent -a amd64 -p /opt
 
-This will generate a 3.10.0 agent package with ``/opt`` as installation directory for ``x86_64`` systems.
+This will generate a 3.10.0 agent package with ``/opt`` as installation directory for ``amd64`` systems.

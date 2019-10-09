@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-hpux:
+.. _create-hpux:
 
-Creating custom AIX packages
+Creating  AIX packages
 =============================
 
 Wazuh provides an automated way of building HPUX packages, keep in mind that to build an HPUX package you must run this tool in an HPUX system.

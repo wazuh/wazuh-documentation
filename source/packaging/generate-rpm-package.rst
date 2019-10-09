@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-rpm:
+.. _create-rpm:
 
-Creating custom RPM packages
+Creating  RPM packages
 =============================
 
 Wazuh provides an automated way of building RPM packages using docker so there is no need for any other dependency.

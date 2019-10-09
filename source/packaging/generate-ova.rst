@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _create-custom-ova:
+.. _create-ova:
 
-Creating custom Wazuh virtual machine
+Creating  Wazuh virtual machine
 =======================================
 
 Wazuh provides an automated way of generating a Virtual machine in OVA format that is ready to run a Wazuh manager and ELK.
@@ -12,10 +12,10 @@ To create the virtual machine follow these steps:
 Requirements
 ^^^^^^^^^^^^^
 
- * `Virtual Box<https://www.virtualbox.org/manual/UserManual.html#installation>`_
- * `Vagrant<https://www.vagrantup.com/docs/installation/>`_
- * `Git<https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
- * `Python<https://www.python.org/download/releases/2.7/>`_
+ * `Virtual Box <https://www.virtualbox.org/manual/UserManual.html#installation>`_
+ * `Vagrant <https://www.vagrantup.com/docs/installation/>`_
+ * `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
+ * `Python <https://www.python.org/download/releases/2.7/>`_
 
 Download our wazuh-packages repository from GitHub and go to the ova directory.
 
@@ -54,7 +54,7 @@ This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 ins
 
  # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r unstable -c
 
-This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using stable packages and generate the sha512 chacksum
+This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using stable packages and generate the sha512 checksum
 
 
 
