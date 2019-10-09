@@ -5,7 +5,7 @@
 Securing the Wazuh API
 ======================
 
-By default, the communications between the Wazuh Kibana plugin and the Wazuh API are not encrypted. In addition to this, the default user is "foo" and the password is  "bar". For this reason, it is highly recommended that you secure the Wazuh API and change the default user and password. The following steps will help you to achieve it:
+By default, the communication between the Wazuh Kibana plugin and the Wazuh API is not encrypted. In addition to this, the default user is "foo" and the password is  "bar". For this reason, it is highly recommended that you secure the Wazuh API and change the default user and password. The following steps will help you to achieve it:
 
 #. Enable HTTPS:
 
