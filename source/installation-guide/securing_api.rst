@@ -26,7 +26,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
           You will need to uncomment these lines. Then, you can indicate the path of your ``crt``, ``key`` and/or the ``ca`` (setting ``https_use_ca`` to ``yes``). Above those lines, the option ``config.https`` has to be set to ``yes``.
 
-          After configure them, the Wazuh API service has to be restarted:
+          After you have configured these, you will need to restart the Wazuh API service:
 
             * For Systemd:
 
