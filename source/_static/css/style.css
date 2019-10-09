@@ -187,7 +187,7 @@ dt {
 }
 
 #header-sticky {
-  z-index: 20;
+  z-index: 5;
   position: fixed;
   top: -52px;
   width: 100%;
@@ -365,7 +365,6 @@ header .menuweb-bar .menu-item a {
 }
 
 #header-default .version-zone {
-  position: relative;
 	padding: 10px 0;
 }
 
