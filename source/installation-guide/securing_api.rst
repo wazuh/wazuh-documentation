@@ -98,4 +98,4 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
 #. (Optional) Bind to localhost:
 
-    If you do not need to access to the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
+    If you don't need to to access to the API externally, you should bind the API to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.
