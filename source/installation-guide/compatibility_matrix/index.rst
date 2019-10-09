@@ -72,7 +72,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+
 |   HP-UX 11.31                      |   ✓                     |
 +------------------------------------+-------------------------+
-|   Mac OS X                         |   ✓                     |
+|   macOS *                          |   ✓                     |
 +------------------------------------+-------------------------+
 |   OpenSUSE 42, 15, Tumbleweed      |   ✓                     |
 +------------------------------------+-------------------------+
@@ -91,7 +91,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 |   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
 
-
+*(\*) Since Wazuh v3.11.0, the macOS agent installer is only compatible with macOS Mojave or newer. If you need to install the agent in previous versions of macOS, you can use the v3.10.2 agent.*
 
 
 

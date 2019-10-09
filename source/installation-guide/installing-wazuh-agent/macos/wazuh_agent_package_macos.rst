@@ -37,6 +37,9 @@ By default, all agent files can be found at the following location: ``/Library/O
 
 Now that the agent is installed, if you didn't use the deployment method, you will now have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
+.. note::
+  Since v3.11.0, the macOS agent installer is only compatible with macOS Mojave or newer. With the release of macOS Catalina (10.15) it is mandatory to notarize the macOS installer and to achieve this, we had to drop the support for older versions of macOS. If you need to install the agent in older versions, you can install the v3.10.2 macOS agent which is compatible with older macOS versions.
+
 Uninstall
 ---------
 
