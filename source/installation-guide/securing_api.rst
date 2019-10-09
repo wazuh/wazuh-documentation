@@ -53,7 +53,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
         # cd /var/ossec/api/configuration/auth
         # node htpasswd -Bc -C 10 user myUserName
 
-      After configure it, the Wazuh API service has to be restarted:
+      After doing this, you will need to restart the Wazuh API service:
 
         * For Systemd:
 
