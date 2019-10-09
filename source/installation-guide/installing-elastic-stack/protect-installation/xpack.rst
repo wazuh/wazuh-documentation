@@ -27,17 +27,18 @@ This section describes how to secure the communications between the involved com
           ip:
             - "10.0.0.4"
 
-2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool.
+2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. Add the ``--keep-ca-key`` parameter in order to keep the CA's certificate and key for future enlargements, otherwise it will be deleted and new ones should be distributed. In this way, keeping the ``ca.key`` safe is strongly recommended.
 
 .. code-block:: console
 
-    # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --out certs.zip
+    # /usr/share/elasticsearch/bin/elasticsearch-certutil cert --pem --in /usr/share/elasticsearch/instances.yml --out certs.zip --keep-ca-key
 
 .. code-block:: console
 
     certs.zip
     |-- ca
     |   |-- ca.crt
+        |-- ca.key
     |-- wazuh-manager
     |   |-- wazuh-manager.crt
     |   |-- wazuh-manager.key
@@ -166,6 +167,8 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # systemctl restart kibana
+
+In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
 
 
 Adding authentication for Elasticsearch
