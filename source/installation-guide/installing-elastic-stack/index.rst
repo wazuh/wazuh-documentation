@@ -31,11 +31,6 @@ In the following table you will find the Elastic stack installation guide for th
 | Ubuntu                        | :ref:`12.10 or greater <elastic_stack_packages_ubuntu>`       |
 +-------------------------------+---------------------------------------------------------------+
 
-After the installation, find below optional steps you may find interesting:
-
-- :ref:`Configure an Elasticsearch Cluster <configure_elasticsearch_cluster>`
-
-
 .. note::
 
     Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
