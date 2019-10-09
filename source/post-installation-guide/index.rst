@@ -14,5 +14,4 @@ This guide describes the different available post-installation configurations. T
 
         protect-installation/index
         transform_logstash
-        elastic_tuning
         automatic_api
