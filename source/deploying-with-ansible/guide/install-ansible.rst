@@ -328,7 +328,7 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 	ansible@ansible:~$ ansible all -m ping
 
-You will get a output like this:
+You will get an output like this:
 
 .. code-block:: console
 
