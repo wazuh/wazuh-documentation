@@ -112,12 +112,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
-
-3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
+3. Edit the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml
 
     server.host: "<kibana_ip>"
+
+  Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. With this change, we make Kibana listen on its network IP.
 
 4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
 
