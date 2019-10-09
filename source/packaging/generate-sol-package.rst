@@ -117,7 +117,7 @@ This will generate a 3.10.0 package for Solaris 11
 
 This will generate a 3.10.0 package for Solaris 10 and Solaris 11
 
-After the process has ended the package will be stored in the `src` folder.
+After the process has ended the package will be stored in the ``src`` folder.
 
 To finish destroy the machines:
 
