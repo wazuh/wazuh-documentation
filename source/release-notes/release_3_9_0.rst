@@ -180,13 +180,13 @@ Wazuh API
 Wazuh app
 ---------
 
-**Wazuh Manager configuration editor**
+**Wazuh manager configuration editor**
 
 Edit the content of the configuration file for one or more nodes using the interface editor.
 
 
 .. thumbnail:: ../images/release-notes/3.9.0/app-03.png
-  :title: Wazuh Manager configuration editor
+  :title: Wazuh manager configuration editor
   :align: center
   :width: 100%
 
