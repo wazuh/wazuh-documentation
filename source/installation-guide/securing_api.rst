@@ -82,7 +82,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
             // TCP Port used by the API.
             config.port = "55000";
 
-          You can change it by a system non-used port. After configuring it, the Wazuh API service has to be restarted:
+          You can replace it with a port that's not being used by your system. After configuring this, you will need to restart the Wazuh API service.
 
             * For Systemd:
 
