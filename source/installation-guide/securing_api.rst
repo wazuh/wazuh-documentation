@@ -40,7 +40,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
                 # service wazuh-api restart
 
-#. Change the default credentials. You can change them manually or using the script ``/var/ossec/api/scripts/configure_api.sh``.
+#. Change the default credentials. You can do this manually or you can run this script: ``/var/ossec/api/scripts/configure_api.sh``.
 
     #. Option a: Change the default credentials using the script.
 
