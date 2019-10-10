@@ -540,7 +540,10 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 6. (Optional) Disable the Elasticsearch updates:
 
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command in all the hosts that you have installed Filebeat, Elasticsearch and/or Kibana:
+  In the installation guide we described how to install and configure Wazuh and also how to install and configure Elasticsearch, Filebeat, and Kibana with a Wazuh use purpose. We have absolute control of when a new Wazuh version is going to be released, but not when a new Elasticsearch version is going to be released.
+  In this guide, the Wazuh Kibana plugin was tested in Kibana version 7.3.2. If Elasticsearch releases a new version and you upgrade your system, the new Kibana version will be installed in your system and we can’t guarantee the correct behavior of our Wazuh Kibana plugin until we’re able to perform a thorough test. When we’re sure the new version works properly, a new version of the Wazuh Kibana plugin will be released to provide a complete compatibility with the new Kibana version.In case of accidental Elasticsearch, Kibana and/or Filebeat upgrade, it’s possible to experience incompatibilities with the Wazuh Kibana plugin.
+
+  In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
 
   .. code-block:: console
 

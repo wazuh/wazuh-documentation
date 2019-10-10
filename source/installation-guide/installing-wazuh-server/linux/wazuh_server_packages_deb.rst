@@ -273,7 +273,33 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
     # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
+6. (Optional) Disable the Elasticsearch updates:
+
+  In the installation guide we described how to install and configure Wazuh and also how to install and configure Filebeat with a Wazuh use purpose. We have absolute control of when a new Wazuh version is going to be released, but not when a new Elasticsearch version is going to be released.
+
+  Currently, the Wazuh Kibana plugin it was tested in Kibana version 7.3.2. If Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system, forcing the upgrade of Elasticsearch and Kibana. We can't ensure the correct behavior of our Wazuh Kibana plugin until a complete set of testing when a new Elasticsearch version is released. Then a new version of the Wazuh Kibana plugin will be released to ensure the complete compatibility with the new Filebeat/Elasticsearch/Kibana version.
+  In case of accidental Filebeat (thus Kibana and Elasticsearch) upgrade, it's possible to have a non-compatible Wazuh Kibana plugin.
+
+  In order to prevent this situation, it is recommended that the Elasticsearch repository be disabled as follow:
+
+  .. code-block:: console
+
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+    # apt-get update
+
+  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+  .. code-block:: console
+
+    # echo "elasticsearch hold" | sudo dpkg --set-selections
+    # echo "kibana hold" | sudo dpkg --set-selections
+
+.. note:: The Kibana service listens on the default port 5601.
+
+
 Now, before to start the filebeat service, it's necessary to have the certificate generated in the Elasticsearch master node. This process will be described in :ref:`Elastic Stack <installation_elastic>`.
+
+
 
 Uninstall
 ---------
