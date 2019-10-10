@@ -27,19 +27,44 @@ Setting up Wazuh involves the installation of two server subsystems: the Wazuh s
 
 - **Wazuh agent**: runs on the monitored endpoint. Collects endpoint logs, events and configuration data and sends it to the Wazuh server to detect intrusions and anomalies.
 
++ **Wazuh cluster**: a Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. With a Wazuh cluster setup, we have the potential to greatly increase the number of agents as long as we add worker nodes whenever necessary.
+
+- **Elasticsearch cluster**:  an Elasticsearch cluster is a group of hosts with Elasticsearch installed with a specific configuration that allows enhancing the availability, scalability and data redundancy of the Elasticsearch service.
+
 Installation types
 ------------------
 
-The Wazuh server can be installed and operated in either of these two deployments:
+The Wazuh server and Elastic stack can be installed and operated in either of these four deployments:
 
-- **Single-host server**: the Wazuh server and Elastic Stack subsystems run on a single host.
+- **Single-host**: the Wazuh server and Elastic Stack subsystems run on a single host.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Installing Wazuh manager - single server architecture
     :align: center
     :width: 100%
 
-+ **Multitier server**: the Wazuh and Elastic Stack subsystems run on separate host systems. Wazuh can be configured to work in two or more servers (cluster mode) and Elastic Stack as well.
++ **Wazuh host and Elastic Stack host**: the Wazuh and Elastic Stack subsystems run on separate host systems.
+
+.. thumbnail:: ../images/installation/installing_wazuh_distributed.png
+    :title: Installing Wazuh manager - Multitier Server
+    :align: center
+    :width: 100%
+
++ **Wazuh cluster and Elastic Stack host**: Wazuh can be configured to work in two or more servers (cluster mode) and Elastic Stack in a single host.
+
+.. thumbnail:: ../images/installation/installing_wazuh_distributed.png
+    :title: Installing Wazuh manager - Multitier Server
+    :align: center
+    :width: 100%
+
++ **Wazuh host and Elastic Stack cluster**: Wazuh run in a single host and Elastic Stack can be configured in three or more servers (cluster mode).
+
+.. thumbnail:: ../images/installation/installing_wazuh_distributed.png
+    :title: Installing Wazuh manager - Multitier Server
+    :align: center
+    :width: 100%
+
++ **Wazuh cluster and Elastic Stack cluster**: Wazuh can be configured to work in two or more servers (cluster mode) and Elastic Stack as well.
 
 .. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Installing Wazuh manager - Multitier Server
