@@ -760,6 +760,17 @@ li.toctree-l5 > a {
   position: relative;
 }
 
+.central-page-area::before {
+  content: '';
+  display: none;
+  width: 360px;
+  height: 100vh;
+  margin-left: -15px;
+  top: 0;
+  position: fixed;
+  background-color: #EAEAEA;
+}
+
 #navbar {
   z-index: 3;
   visibility: hidden;
@@ -768,6 +779,12 @@ li.toctree-l5 > a {
   width: 100%;
   height: 100vh;
   padding-top: 100px;
+  transition: opacity 0.3s ease;
+}
+
+#navbar.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 #navbar-globaltoc {
@@ -787,12 +804,6 @@ li.toctree-l5 > a {
 .no-latest-docs #navbar-globaltoc {
   padding-top: 132px;
 }
-
-#navbar-globaltoc.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
   right: 0;
   left: 0;
@@ -2162,7 +2173,15 @@ label {
 }
 
 .admonition.note > [class*="highlight-"],
-.admonition.warning > [class*="highlight-"] {
+.admonition.warning > [class*="highlight-"],
+.admonition.attention > [class*="highlight-"],
+.admonition.caution > [class*="highlight-"],
+.admonition.danger > [class*="highlight-"],
+.admonition.error > [class*="highlight-"],
+.admonition.hint > [class*="highlight-"],
+.admonition.important > [class*="highlight-"],
+.admonition.tip > [class*="highlight-"],
+.admonition.admonition-generic-admonition > [class*="highlight-"] {
 	margin: 1rem;
   padding: 0;
 }
@@ -2174,7 +2193,7 @@ label {
 }
 
 p.admonition-title {
-  color: #ffffff;
+  color: rgba(51,51,51,0.9);
   font-size: 1.2rem;
 	padding: 0.25rem 1rem;
 }
@@ -2187,63 +2206,117 @@ p.first.admonition-title::before,
   margin-right: 0.75em;
 }
 
-.note {
+.note,
+.admonition-generic-admonition {
 	background-color: rgba(0, 169, 229, 0.1);
 }
 
-.warning {
-	background-color: rgba(255, 183, 0, 0.1);
+.warning,
+.caution,
+.attention {
+	background-color: rgba(255, 182, 0, 0.1);
 }
 
-.note .admonition-title {
+.hint,
+.important,
+.tip {
+	background-color: rgba(51, 204, 153, 0.1);
+}
+
+.error,
+.danger {
+	background-color: rgba(221, 108, 70, 0.1);
+}
+
+.note .admonition-title,
+.admonition-generic-admonition .admonition-title {
   background-color: rgba(0, 169, 229, 0.5);
 }
 
-.warning .admonition-title {
-  color: rgba(51,51,51,0.9);
-  background-color: rgba(255, 183, 0, 0.5);
+.warning .admonition-title,
+.caution .admonition-title,
+.attention .admonition-title {
+  background-color: rgba(255, 182, 0, 0.5);
 }
 
-.note p.first.admonition-title::before {
+.hint .admonition-title,
+.important .admonition-title,
+.tip .admonition-title  {
+	background-color: rgba(51, 204, 153, 0.5);
+}
+
+.error .admonition-title,
+.danger .admonition-title  {
+	background-color: rgba(221, 108, 70, 0.5);
+}
+
+.note p.first.admonition-title::before,
+.admonition-generic-admonition p.first.admonition-title::before {
   content: '\f06a';
-  color: #ffffff;
 }
 
 .note > ol,
-.warning > ol {
+.warning > ol,
+.admonition-generic-admonition > ol,
+.caution > ol,
+.attention > ol,
+.hint > ol,
+.important > ol,
+.tip > ol,
+.error > ol,
+.danger > ol {
   padding-left: 3rem;
 }
 
 .note > dl,
 .note > ul,
 .warning > dl,
-.warning > ul {
+.warning > ul,
+.admonition-generic-admonition > dl,
+.admonition-generic-admonition > ul,
+.caution > dl,
+.caution > ul,
+.attention > dl,
+.attention > ul,
+.hint > dl,
+.hint > ul,
+.important > dl,
+.important > ul,
+.tip > dl,
+.tip > ul,
+.error > dl,
+.error > ul,
+.danger > dl,
+.danger > ul {
   padding-left: 2rem !important;
 }
 
-.note .highlight-yaml,
-.warning .highlight-yaml {
+.admonition .highlight-yaml {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
-.note blockquote,
-.warning blockquote {
+.admonition blockquote {
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: transparent;
 }
 
-.note div[class^='highlight'],
-.warning div[class^='highlight'] {
+.admonition div[class^='highlight'] {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
+.error p.first.admonition-title::before,
+.danger p.first.admonition-title::before,
+.hint p.first.admonition-title::before,
+.important p.first.admonition-title::before,
+.tip p.first.admonition-title::before,
+.attention p.first.admonition-title::before,
+.caution p.first.admonition-title::before,
 .warning p.first.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
-  color: rgba(51,51,51,0.8);
 }
 
 .admonition .highlight-console {
@@ -2503,7 +2576,7 @@ blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
-  margin-left: 0.7rem;
+  margin-left: 0.3rem;
 }
 
 blockquote ul li > div[class^='highlight'] {
@@ -2528,8 +2601,7 @@ div.highlight pre {
   padding: 0.5em 1em;
 }
 
-.note pre,
-.warning pre {
+.admonition pre {
   background-color: #f4f4f4 !important;
 }
 
@@ -2922,6 +2994,10 @@ div.highlight pre {
       #navbar {
         visibility: visible;
         width: 360px;
+      }
+
+      .central-page-area::before {
+        display: block;
       }
 
       #navbar-globaltoc {

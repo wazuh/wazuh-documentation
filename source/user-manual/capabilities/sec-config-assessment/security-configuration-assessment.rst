@@ -3,7 +3,7 @@
 Security Configuration Assessment
 =================================
 
-This section attempts to introduce how this module can help us to securize our systems.
+This section attempts to introduce how this module can help us to secure our systems.
 
 - `The configuration assessment scope`_
 - `Available policies`_
@@ -20,7 +20,7 @@ The target of those policies can be an Operating System such as Debian or Window
 Security compliance
 ^^^^^^^^^^^^^^^^^^^
 
-Each policy check can contain an optional **compliance** field that is used to specify how the check is relevant to different Compliance Standards specifications. Many of the default policies available with Wazuh, specially CIS policies, already have the CIS and PCI-DSS controls mapped. Here we can see an example:
+Each policy check can contain an optional **compliance** field that is used to specify how the check is relevant to different Compliance Standards specifications. Many of the default policies available with Wazuh, especially CIS policies, already have the CIS and PCI-DSS controls mapped. Here we can see an example:
 
 .. code-block:: yaml
 
@@ -98,10 +98,10 @@ The following screenshot of the *SCA* tab shows an overview of scanned policies 
 Available policies
 ------------------
 
-Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability, 
+Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability,
 which allows the user to quickly understand and write their own policy files or extend the existing ones.
 
-Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check. 
+Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check.
 
 Available policies list
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -179,7 +179,7 @@ How to share policy files with agents
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager has the ability to push files and
 configurations to connected agents.
 
-This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example. 
+This feature can be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example.
 
 In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``
 , ensure the policy owner is `ossec` and then add the following block to the ``/var/ossec/etc/shared/default/agent.conf`` file:
@@ -199,7 +199,7 @@ In order to push a new policy from the manager it should be placed in the direct
 
 The ``<sca>`` block will be merged with the current ``<sca>`` block on the agent side and the new policy file will be added.
 
-Current policy files configured to be run on the agent (either by default or by local configuration) my be disabled via the centralized configuration file ``/var/ossec/etc/shared/default/agent.conf`` as follows:
+Current policy files configured to be run on the agent (either by default or by local configuration) may be disabled via the centralized configuration file ``/var/ossec/etc/shared/default/agent.conf`` as follows:
 
 .. code-block:: xml
 
@@ -381,7 +381,7 @@ There are five main types of rules as described below:
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
 
-In order to better understand the syntax of the rules it is important to note that:
+In order to better understand the syntax of the rules, it is important to note that:
 
 - The *type* of a rule references the location where the rule will look for the content of the check. Every rule has to start with a location.
 
@@ -450,7 +450,7 @@ The following examples illustrate this logic:
 
 When more than one term is necessary, two logical operators can be used to determine the accumulated result of a check (terms are separated by ``&&`` inside a rule).
 
-- IN (included): This operator means that both the terms should be matched. 
+- IN (included): This operator means that both the terms should be matched.
 - NIN (not included): The opposite operator, it means the rule is triggered if both terms are not matched.
 
 **Use cases**

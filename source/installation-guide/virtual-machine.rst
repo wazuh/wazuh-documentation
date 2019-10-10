@@ -27,7 +27,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 3. The **Wazuh manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
 
-    - :doc:`How to install Wazuh agents<installing-wazuh-agent/index>`
+    - :ref:`How to install Wazuh agents<installation_agents>`
 
   .. warning::
 

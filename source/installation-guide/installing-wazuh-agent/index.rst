@@ -18,15 +18,23 @@ In addition, it communicates with the Wazuh manager, sending data in near real-t
 
 There are several options to install a Wazuh agent, depending on the operating system and whether or not you wish to build from source. Consult the table below and choose how to proceed for a given agent:
 
-+-----------------------------------------------------------------+-----------------------------------------------------------------------+
-| Type                                                            | Description                                                           |
-+=================================================================+=======================================================================+
-| :ref:`Installation from packages <wazuh_agent_packages>`        | Install Wazuh agent from packages.                                    |
-+-----------------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Installation from sources <wazuh_agent_sources>`          | Install Wazuh agent from source code.                                 |
-+-----------------------------------------------------------------+-----------------------------------------------------------------------+
++----------------------------------------------------------+-----------------------------------------------------+
+| Type                                                     | Description                                         |
++==========================================================+=====================================================+
+| :ref:`AIX installer <wazuh_agent_aix>`                   | Install Wazuh agents on AIX.                        |
++----------------------------------------------------------+-----------------------------------------------------+
+| :ref:`HP-UX installer <wazuh_agent_hpux>`                | Install Wazuh agents on HP-UX.                      |
++----------------------------------------------------------+-----------------------------------------------------+
+| :ref:`Linux installer <wazuh_agent_linux>`               | Install Wazuh agents on Linux.                      |
++----------------------------------------------------------+-----------------------------------------------------+
+| :ref:`macOS installer <wazuh_agent_macos>`               | Install Wazuh agents on macOS.                      |
++----------------------------------------------------------+-----------------------------------------------------+
+| :ref:`Solaris installer <wazuh_agent_solaris>`           | Install Wazuh agents on Solaris.                    |
++----------------------------------------------------------+-----------------------------------------------------+
+| :ref:`Windows installer <wazuh_agent_windows>`           | Install Wazuh agents on Windows.                    |
++----------------------------------------------------------+-----------------------------------------------------+
 
-.. note:: The compatibility between Wazuh Agent and Wazuh Manager is guaranteed when the Wazuh Manager has a newer or equal version than the Wazuh Agent.
+.. note:: The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
 
 .. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider exploring these options if you are deploying Wazuh in a larger environment.
 
@@ -36,7 +44,10 @@ There are several options to install a Wazuh agent, depending on the operating s
     :hidden:
     :maxdepth: 2
 
-    wazuh_agent_packages
-    wazuh_agent_sources
+    aix/index
+    hpux/index
+    linux/index
+    macos/index
+    solaris/index
+    windows/index
     deployment_variables
-    deployment_variables_windows
