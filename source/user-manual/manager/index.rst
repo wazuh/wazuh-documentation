@@ -16,4 +16,3 @@ Wazuh manager is the system that analyzes the data received from all the agents,
         manual-syslog-output
         automatic-reports
         manual-email-report/index
-        manual-email-report/smtp_authentication
