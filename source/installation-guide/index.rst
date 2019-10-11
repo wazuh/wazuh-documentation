@@ -10,9 +10,9 @@ Installation guide
 
 This document will guide you through the Wazuh installation process. If you have any doubt or need assistance:
 
-- `Join our mailing list <wazuh+subscribe@googlegroups.com>`_. In `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can ask questions and participate in discussions. Share your questions and thoughts with the community.
-- `Ask in GitHub <https://github.com/wazuh>`_. Don’t hesitate to collaborate, make pull-requests, submit issues or send commits, we will review all your questions.
-- `Join us on Slack <https://wazuh.com/community/join-us-on-slack>`_. Yet another way to connect with us. Join our #community channel to ask your questions and we will do our best to resolve them.
+- `Mailing list <wazuh+subscribe@googlegroups.com>`_. In `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can ask questions and participate in discussions. Share your questions and thoughts with the community.
+- `GitHub repositories <https://github.com/wazuh>`_. Don’t hesitate to collaborate, make pull-requests, submit issues or send commits, we will review all your questions.
+- `Slack channel <https://wazuh.com/community/join-us-on-slack>`_. Yet another way to connect with us. Join our #community channel to ask your questions and we will do our best to resolve them.
 
 We also provide `professional support, training and consulting services <https://wazuh.com/professional-services/>`_.
 
