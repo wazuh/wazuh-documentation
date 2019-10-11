@@ -5,7 +5,7 @@
 Installing Puppet master
 ========================
 
-In this section it is explained how to install *puppet-master*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/5.1/install_from_packages.html>`_.
+In this section it is explained how to install *puppet-master*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppetserver/latest/install_from_packages.html>`_.
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
@@ -48,7 +48,7 @@ Get the appropriate Puppet apt repository, and then the "puppetserver" package. 
 Create a symbolic link between the installed binary file and your default binary file:
 
   .. code-block:: bash
-    
+
     # ln -s /opt/puppetlabs/bin/puppet /bin
 
 Memory Allocation
@@ -64,7 +64,7 @@ Replace 2g with the amount of memory you want to allocate to Puppet Server. For 
 Configuration
 -------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet.example.com`` with your own FQDN: 
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet.example.com`` with your own FQDN:
 
   ::
 
