@@ -49,7 +49,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.5/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
 
 3. Open the template file and locate this line:
 
@@ -78,21 +78,22 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     .. note::
       ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
-5. Open the Wazuh configuration file for Filebeat (``/etc/filebeat/filebeat.yml``) and replace the index name:
+5. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
 
-    From this:
+    For example, from 
 
     .. code-block:: none
+    
+        - name: index_prefix
+          default: wazuh-alerts-3.x-vagrant
 
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
     To this:
 
     .. code-block:: none
-
-      indices:
-        - index: 'my-custom-alerts-%{+yyyy.MM.dd}'
+    
+        - name: index_prefix
+          default: my-custom-alerts-3.x-vagrant
 
 7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
