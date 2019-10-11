@@ -16,15 +16,15 @@ to the Wazuh manager where it is stored in an agent-specific database for later 
 ``vulnerability-detector`` maintains a fresh copy of the desired CVE sources of vulnerability data, and periodically compares agent
 packages with the relevant CVE database and generates alerts on matches.
 
-In this lab, we will configure ``syscollector`` to run on wazuh-server and on both of the Linux agents.  We will also configure
-``vulnerability-detector`` on wazuh-server to periodically scan the collected inventory data for known vulnerable packages. We will
+In this lab, we will configure ``syscollector`` to run on wazuh-manager and on both of the Linux agents.  We will also configure
+``vulnerability-detector`` on wazuh-manager to periodically scan the collected inventory data for known vulnerable packages. We will
 observe relevant log messages and vulnerability alerts in Kibana including a dashboard dedicated to this.  We will also interact with
 the Wazuh API to more deeply mine the inventory data, and even take a look at the databases where it is stored.
 
 Configure ``syscollector`` for the Linux agents
 -----------------------------------------------
 
-In ``/var/ossec/etc/shared/linux/agent.conf`` on wazuh-server, just before the ``open-scap`` wodle configuration section, insert the
+In ``/var/ossec/etc/shared/linux/agent.conf`` on wazuh-manager, just before the ``open-scap`` wodle configuration section, insert the
 following so each Linux agent will scan itself.
 
   .. code-block:: xml
@@ -42,10 +42,10 @@ Run ``verify-agent-conf`` to confirm no errors were introduced into agent.conf.
 
 
 
-Configure ``vulnerability-detector`` and ``syscollector`` on wazuh-server
--------------------------------------------------------------------------
+Configure ``vulnerability-detector`` and ``syscollector`` on wazuh-manager
+--------------------------------------------------------------------------
 
-In ``ossec.conf`` on wazuh-server, just before the ``open-scap`` wodle configuration section, insert the following so
+In ``ossec.conf`` on wazuh-manager, just before the ``open-scap`` wodle configuration section, insert the following so
 that it will inventory its own software plus scan all collected software inventories against published CVEs, alerting where
 there are matches:
 
@@ -139,17 +139,17 @@ in agent-specific databases on the Wazuh manager.  To see that, plus other infor
 by ``syscollector``, you can mine the Wazuh API.  Not only are software packages inventoried, but basic hardware and operating
 system data is also tracked.
 
-1. Run ``agent_control -l`` on wazuh-server to list your agents as you will need to query the API by agent id number:
+1. Run ``agent_control -l`` on wazuh-manager to list your agents as you will need to query the API by agent id number:
 
   .. code-block:: console
 
     Wazuh agent_control. List of available agents:
-      ID: 000, Name: wazuh-server (server), IP: localhost, Active/Local
+      ID: 000, Name: wazuh-manager (server), IP: localhost, Active/Local
       ID: 001, Name: linux-agent, IP: any, Active
       ID: 002, Name: elastic-server, IP: any, Active
       ID: 003, Name: windows-agent, IP: any, Active
 
-2. On wazuh-server, query the Wazuh API for scanned hardware data about agent 002.
+2. On wazuh-manager, query the Wazuh API for scanned hardware data about agent 002.
 
   .. code-block:: console
 
@@ -199,7 +199,7 @@ system data is also tracked.
             "id": 1524588903,
             "time": "2018/02/23 01:12:21"
           },
-          "release": "3.10.0-693.17.1.el7.x86_64",
+          "release": "3.10.2-693.17.1.el7.x86_64",
           "hostname": "elastic-server",
           "os": {
             "version": "7 (Core)",
@@ -271,7 +271,7 @@ A quick peek at the actual agent databases
 
 Agent-specific databases on the Wazuh manager store, among other things, the ``syscollector`` scan results for each agent.
 
-1. On wazuh-server, list the tables in linux-agent's SQLite database (agent 001):
+1. On wazuh-manager, list the tables in linux-agent's SQLite database (agent 001):
 
   .. code-block:: console
 
@@ -297,7 +297,7 @@ Agent-specific databases on the Wazuh manager store, among other things, the ``s
 
   .. code-block:: console
 
-    1364535564|2018/02/23 01:11:23|linux-agent|x86_64|CentOS Linux|7 (Core)|||||centos|Linux|3.10.0-693.11.6.el7.x86_64|#1 SMP Thu Jan 4 01:06:37 UTC 2018
+    1364535564|2018/02/23 01:11:23|linux-agent|x86_64|CentOS Linux|7 (Core)|||||centos|Linux|3.10.2-693.11.6.el7.x86_64|#1 SMP Thu Jan 4 01:06:37 UTC 2018
 
 3. Do a quick dump of the software packages.
 

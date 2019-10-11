@@ -37,7 +37,7 @@ In order to use the Docker listener module it is only necessary to enable the ``
 
 
 Then, it is necessary to restart the Wazuh service (where the listener will be running).
-            
+
 
 Use cases
 ^^^^^^^^^

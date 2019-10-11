@@ -135,11 +135,6 @@ $manage_repos
 
   `Default true`
 
-$manage_epel_repo
-  Install epel repo and inotify-tools
-
-  `Default true`
-
 $manage_client_keys
   Manage client keys option.
 
