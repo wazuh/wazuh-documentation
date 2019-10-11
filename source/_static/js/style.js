@@ -460,7 +460,7 @@ $(function() {
 
   /**
    * Only for main index (documentation's home page).
-   * Functionallity of the capabilities section: selects capability, controls the responsive behaviour, etc.
+   * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
    */
   function capabilitiesHome(ele) {
@@ -611,6 +611,65 @@ $(function() {
   $(document).on('keydown', function(e) {
     if ( e.keyCode == 27 ) {
       $('html, body').css('overflow', '');
+    }
+  });
+
+  /* Copy to clipboard ----------------------------------------------------------------------------------*/
+  $('.highlight').each(function() {
+    const blockCode = $(this).parent();
+    if ( !blockCode.hasClass('output') ) {
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+    } else {
+      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+    }
+  });
+
+  $('.copy-to-clipboard').click(function() {
+    const ele = $(this);
+    let data = $(ele).parent().find('.highlight').text();
+    data = String(data);
+    data = data.replace(/(?:\$\s)/g, '');
+    data = data.replace(/(?:\#\s)/g, '');
+    copyToClipboard(data);
+    $(ele).addClass('copied');
+    $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
+    $(ele).find('span').css({'display': 'block'});
+    setTimeout(function() {
+      $(ele).removeClass('copied');
+    }, 700);
+    setTimeout(function() {
+      $(ele).find('span').css({'display': 'none'});
+      $(ele).find('i').css({'display': 'block'});
+    }, 1000);
+  });
+
+  /**
+   * Copy the data to clipboard
+   * @param {string} data The string to copy
+   */
+  function copyToClipboard(data) {
+    const aux = document.createElement('textarea');
+    aux.value = data;
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand('copy');
+    document.body.removeChild(aux);
+  }
+
+  /* Avoid select $ and # on the code blocks -----------------------------------------------------*/
+  $('.highlight').each(function() {
+    const ele = $(this);
+    const data = ele.html();
+    const find = data.match(/(?:\$\s|\#)/g);
+    if (find != null) {
+      const dataArray = data.split('\n');
+      let content = '';
+      dataArray.forEach((line) => {
+        line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
+        line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
+        content += line;
+      });
+      ele.html(content);
     }
   });
 });
