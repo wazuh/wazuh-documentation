@@ -32,7 +32,7 @@ Concepts
 Installation types
 ------------------
 
-The Wazuh server and Elastic stack can be installed and operated in either of these four deployments:
+The Wazuh server and Elastic stack can be installed and operated in either of these five deployments:
 
 - **Single-host**: the Wazuh server and Elastic Stack subsystems run on a single host.
 
