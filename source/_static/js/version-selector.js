@@ -4,7 +4,6 @@ jQuery(function($) {
   * Copyright (C) 2019 Wazuh, Inc.
   */
 
-
   const currentVersion = '3.10';
   const versions = [
     {name: '3.10 (current)', url: '/'+currentVersion},
@@ -33,12 +32,16 @@ jQuery(function($) {
     }
   });
 
+  $(window).on('hashchange', function() {
+    addVersions();
+  });
+
   /**
    * Add the current version to the version selector.
    */
   function checkCurrentVersion() {
     let selected = -1;
-    const path = document.location.pathname.split('/')[1];
+    const path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
     const selectVersionCurrent = $('#select-version .current');
     for (let i = 0; i < versions.length; i++) {
       if ( versions[i].url == '/' + path ) {
@@ -53,70 +56,78 @@ jQuery(function($) {
    */
   function addVersions() {
     let ele = '';
-    const version = $('.version');
-    const selectVersion = $('#select-version');
     const selectVersionUl = $('#select-version .dropdown-menu');
     let path = document.location.pathname.split('/')[1];
     let fullUrl = window.location.href;
     let page = '';
-    let redCurrent = '';
 
     if (fullUrl == null) {/* Firefox fix */
       fullUrl = document.URL;
     }
     page = fullUrl.split('/'+path)[1];
-    page = page.replace('index.html', '');
-
-    if (version == null) {
-      console.error('No such element of class "version"');
-      return;
-    }
-    if (selectVersion == null) {
-      console.error('No such element "select-version"');
-      return;
-    }
+    page = normalizeUrl(page);
 
     if (path == 'current' || path == '3.x' ) {
       path = currentVersion;
     }
 
-    /* Get the redirects for this page */
-    for (redItem in redirects) {
-      if ({}.hasOwnProperty.call(redirects, redItem)) {
-        for (verItem in redirects[redItem]) {
-          if ({}.hasOwnProperty.call(redirects[redItem], verItem)) {
-            let red = redirects[redItem][verItem];
-            red = red.replace('index.html', '');
-            if (red.charAt(red.length-1) != '/' && page.charAt(page.length-1) == '/') {
-              red = red+'/';
-            }
-            if (red.charAt(0) != '/') {
-              red = '/'+red;
-            }
-            redirects[redItem][verItem] = red;
-            if (red == page) {
-              redCurrent = redirects[redItem];
-            }
-          }
+    /* Creates the links to others versions */
+    let href;
+    let tooltip;
+    let ver;
+    const versionsClean = versions.map(function(i) {
+      return (i.name).split(' (current)')[0];
+    });
+
+    /* Normalize URLs in arrays */
+    for (let i = 0; i < versionsClean.length; i++) {
+      if ( newUrls[versionsClean[i]] ) {
+        newUrls[versionsClean[i]] = newUrls[versionsClean[i]].map(function(url) {
+          return normalizeUrl(url);
+        });
+      }
+      if ( removedUrls[versionsClean[i]] ) {
+        removedUrls[versionsClean[i]] = removedUrls[versionsClean[i]].map(function(url) {
+          return normalizeUrl(url);
+        });
+      }
+    }
+
+    for (let i = 0; i < redirections.length; i++) {
+      for ( release in redirections[i] ) {
+        if (Object.prototype.hasOwnProperty.call(redirections[i], release)) {
+          redirections[i][release] = normalizeUrl(redirections[i][release]);
         }
       }
     }
 
-    /* Create the links of all releases for the version selector */
-    for (let i = 0; i < versions.length; i++) {
-      let href = '';
-      let tooltip = '';
-      let ver = versions[i].name.replace(' (current)', '');
-      if (redCurrent[ver] == '' || redCurrent[ver] == null) {
-        tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + ver +'"';
-      } else {
-        href = '/'+ver+redCurrent[ver];
-        tooltip = '';
+    /* Get the redirection history */
+    let redirHistory = getRedirectionHistory(page, newUrls, redirections, removedUrls, versionsClean);
+    let emptyUrls = 0;
+    for ( release in redirHistory ) {
+      if (!Object.prototype.hasOwnProperty.call(redirHistory, release) || redirHistory[release].length == 0 ) {
+        /* Check for empty URLs */
+        emptyUrls++;
       }
-      ele += '<li><a href="' + href + '" '+ tooltip +'>'+ver+'</a></li>';
     }
 
-    /* Include the html with the realeases links */
+    if ( emptyUrls == Object.keys(redirHistory).length ) {
+      redirHistory = getRedirectionHistory(page.split('#')[0], newUrls, redirections, removedUrls, versionsClean);
+    }
+
+    for (let i = 0; i < versions.length; i++) {
+      href = '';
+      tooltip = '';
+      ver = versionsClean[i];
+
+      if ( redirHistory[ver].length ) {
+        href = '/'+ver+redirHistory[ver];
+      } else {
+        tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
+      }
+
+      ele += '<li><a href="' + href + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
+    }
     selectVersionUl.html(ele);
   }
 
@@ -138,5 +149,146 @@ jQuery(function($) {
     page = document.location.pathname.split('/'+thisVersion)[1];
     const link = document.querySelector('.link-latest');
     link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
+  }
+
+  /**
+   * Get all the redirections concerning this page through the different releases
+   * @param {string} page Partial URL of the current page
+   * @param {array} listNewUrls Contains the list of all new pages (partial URLs) in each release
+   * @param {array} listRedirections Contains the list of all redirections
+   * @param {array} listRemovedUrls Contains the list of all pages (partial URLs) removed from each release
+   * @param {array} versions Simple list of release versions order from the oldest to the newest one
+   * @return {array} Returns a list with the correct redirection of the current page for each release
+   */
+  function getRedirectionHistory(page, listNewUrls, listRedirections, listRemovedUrls, versions) {
+    let currentPage = page;
+    let redirection;
+    let firstSeenIn = getRelease(page, listNewUrls);
+    let removedIn;
+    let redirectionsTemp = [];
+    const keyPoints = {};
+    const stackPages = [];
+    const checkedPages = [];
+    let lastPageFilled = '';
+    const redirectionHistory = {};
+
+    stackPages.push(currentPage);
+    keyPoints[firstSeenIn] = page;
+
+    /* Get key changes in history */
+    while ( stackPages.length ) {
+      relpair = [];
+      if (redirectionsTemp.length == 0) {
+        currentPage = stackPages.pop();
+        for ( let i = 0; i< listRedirections.length; i++) {
+          redirectionsTemp.push(listRedirections[i]);
+        }
+        firstSeenIn = getRelease(currentPage, listNewUrls);
+        keyPoints[firstSeenIn] = currentPage;
+      }
+      redirection = findRedirectionByPage(currentPage, redirectionsTemp);
+      for (release in redirection) {
+        if (Object.prototype.hasOwnProperty.call(redirection, release)) {
+          relpair.push(release);
+          if ( !(release in Object.keys(keyPoints)) ) {
+            keyPoints[release] = redirection[release];
+            if ( redirection[release] != currentPage
+              && stackPages.indexOf(redirection[release]) == -1
+              && checkedPages.indexOf(redirection[release]) == -1 ) {
+              stackPages.push(redirection[release]);
+            }
+          }
+        }
+      }
+
+      tempArray = [];
+      if ( relpair.length ) {
+        for ( let i = 0; i< redirectionsTemp.length; i++) {
+          if ( !redirectionsTemp[i].hasOwnProperty(relpair[0]) && !redirectionsTemp[i].hasOwnProperty(relpair[0]) ) {
+            tempArray.push(redirectionsTemp[i]);
+          }
+        }
+      }
+      redirectionsTemp = tempArray;
+      if ( checkedPages.indexOf(currentPage) == -1 ) {
+        checkedPages.push(currentPage);
+      }
+    }
+
+    /* Fill the remaining releases in the order they were released */
+    for ( let i = versions.length-1; i >= 0; i--) {
+      if ( keyPoints[versions[i]] != undefined && keyPoints[versions[i]] != lastPageFilled ) {
+        lastPageFilled = keyPoints[versions[i]];
+        removedIn = getRelease(lastPageFilled, listRemovedUrls);
+      }
+      if ( removedIn == versions[i] ) {
+        lastPageFilled = '';
+      }
+      redirectionHistory[versions[i]] = lastPageFilled;
+    }
+    return redirectionHistory;
+  }
+
+  /** Auxiliary functions for version selector redirection **/
+
+  /**
+   * Gets the release somehow related to a URL (the relation is stablished by the array)
+   * @param {string} url Partial URL of the page whose release is required
+   * @param {array} urlArray Contains the list of pages related to each release
+   *  (new or removed URLs depending on the array)
+   * @return {array} Returns the release related to url depending on urlArray
+   */
+  function getRelease( url, urlArray ) {
+    for ( release in urlArray) {
+      if ( urlArray[release].indexOf(url) > -1 ) {
+        return release;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Gets the first redirection in which a given url paticipates.
+   * @param {string} url Partial URL of the page possibly participating in a redirection
+   * @param {array} redirecttionArray Contains the list of all redirections
+   * @return {array} The first redirection in which a given url paticipates.
+   *  Empty array if no redirecion is found for the given url
+   */
+  function findRedirectionByPage(url, redirecttionArray) {
+    let result = [];
+    /* For every redirection registered in redirecttionArray */
+    for ( let i = 0; i< redirecttionArray.length; i++) {
+      /* Check releases involved in the redirection (2 releases: origin and target) */
+      for ( release in redirecttionArray[i] ) {
+        if ( redirecttionArray[i][release] == url ) {
+          result = redirecttionArray[i];
+          return result;
+        }
+      }
+    }
+    return [];
+  }
+
+  /**
+   * Normalize a given URL so it comply with a standard format
+   * @param {string} originalUrl Partial URL of the page that requires normalization
+   * @return {string} The standard (valid) version of the original URL
+   */
+  function normalizeUrl(originalUrl) {
+    let normalizedURL = originalUrl.replace('index.html', '');
+    normalizedURL = normalizedURL.replace(/\/{2,}/, '/');
+
+    if (normalizedURL.charAt(normalizedURL.length-1) == '#' ) {
+      normalizedURL = normalizedURL.substring(0, normalizedURL.length-1);
+    }
+
+    if (normalizedURL.charAt(normalizedURL.length-1) != '/' && !(/.*(\.html|#.*)$/.test(normalizedURL))) {
+      normalizedURL = normalizedURL+'/';
+    }
+    if (normalizedURL.charAt(0) != '/') {
+      normalizedURL = '/'+normalizedURL;
+    }
+
+    return normalizedURL;
   }
 });
