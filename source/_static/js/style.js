@@ -614,11 +614,6 @@ $(function() {
     }
   });
 
-<<<<<<< HEAD
-  /* Enable links that have the '.disable' class */
-  $('#select-version .dropdown-menu').on('click keypress', 'li a.disable', function(e) {
-    return false;
-=======
   /* Copy to clipboard ----------------------------------------------------------------------------------*/
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
@@ -676,6 +671,5 @@ $(function() {
       });
       ele.html(content);
     }
->>>>>>> origin/3.6
   });
 });
