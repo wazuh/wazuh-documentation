@@ -27,7 +27,7 @@ This section describes how to secure the communications between the involved com
           ip:
             - "10.0.0.4"
 
-2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. The ``--keep-ca-key`` modifier may be used in order to keep the CA's certificate and key files, in the case of future expansions these files may be use to sign certificates for new servers, otherwise they will be deleted in any future. Certificates will require a new CA, in consequence the previous certificates will no longer be valid and will need to be redistributed. It is important that the ``ca.key`` file be properly secured.
+2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. The ``--keep-ca-key`` modifier may be used in order to keep the CA's certificate and key files, in the case of future expansions these files may be used to sign certificates for new servers. If this modifier is not used, these files will be deleted and any future certificates will require a new CA, in consequence the previous certificates will no longer be valid and will need to be redistributed. It is important that the ``ca.key`` file be properly secured.
 
 .. code-block:: console
 
