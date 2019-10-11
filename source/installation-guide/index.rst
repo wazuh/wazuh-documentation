@@ -8,7 +8,7 @@ Installation guide
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
 
-This document will guide you through the Wazuh installation process. Wazuh has one of the fastest growing open source security communities in the world. Here you can learn from other users, participate in discussions, talk to our developers and contribute to the project. If you have any doubt or need assistance:
+This document will guide you through the Wazuh installation process. If you have any doubt or need assistance:
 
 - `Join our mailing list <wazuh+subscribe@googlegroups.com>`_. In `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can ask questions and participate in discussions. Share your questions and thoughts with the community.
 - `Ask in GitHub <https://github.com/wazuh>`_. Don’t hesitate to collaborate, make pull-requests, submit issues or send commits, we will review all your questions.
