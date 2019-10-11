@@ -413,12 +413,15 @@ def setup(app):
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
     app.add_javascript("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
+    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
-    "js/version-selector.js"
+    "js/version-selector.js",
     "js/style.js",
+    "js/redirects.js"
 ]
 
 # -- Additional configuration ------------------------------------------------
