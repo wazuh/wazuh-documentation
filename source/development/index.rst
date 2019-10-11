@@ -18,3 +18,4 @@ This section contains technical documentation for developers.
         client-keys
         message-format
         makefile
+        wazuh-cluster

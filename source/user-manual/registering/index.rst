@@ -6,9 +6,9 @@ Registering agents
 ==================
 
 .. meta::
-  :description: Learn more about the different methods that can be used to register agents against the Wazuh Manager.
+  :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
 
-In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh Manager.
+In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh manager.
 
 Prerequisites
 -------------
@@ -54,7 +54,7 @@ You can use the method that better suits with your need. We recommend: :ref:`sim
 .. toctree::
     :maxdepth: 2
     :hidden:
-    
+
     registration-process
     using-command-line
     simple-registration-method

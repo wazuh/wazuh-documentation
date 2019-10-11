@@ -130,7 +130,7 @@ To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configu
 
 As you can see in this sample configuration, ``system_info``, ``high_load_average`` and ``low_free_memory`` queries will be executed every hour.
 
-Furthermore, this configuration uses some default packs such as ``osquery-monitoring``, ``hardware-monitoring`` or ``ossec-rootkit`` among others. You can define you own packs and use it with this wodle.
+Furthermore, this configuration uses some default packs such as ``osquery-monitoring``, ``hardware-monitoring`` or ``ossec-rootkit`` among others. You can define your own packs and use them with this wodle.
 
 Alert examples
 --------------

@@ -50,7 +50,7 @@ The data stored in Wazuh will persist after container reboots but not after cont
 
 In order to preserve Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration in the ``docker-compose.yml`` to look like this::
 
-   elasticsearch:
+   wazuh:
      image: wazuh/wazuh:latest
      hostname: wazuh-manager
      ports:

@@ -5,7 +5,7 @@
 Remove agents using the CLI
 ---------------------------
 
-The binary ``manage_agents`` can be used also to remove agents using the command line. 
+The binary ``manage_agents`` can be used also to remove agents using the command line.
 
 If the user would like confirmation before removing the agent, use the following:
 
@@ -14,7 +14,7 @@ If the user would like confirmation before removing the agent, use the following
     # /var/ossec/bin/manage_agents
 
     ****************************************
-    * Wazuh v3.9.3 Agent manager.          *
+    * Wazuh v3.10.2 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -39,7 +39,7 @@ If the user would like to remove the agent without confirmation, use the option 
     # /var/ossec/bin/manage_agents -r 001
 
     ****************************************
-    * Wazuh v3.9.3 Agent manager.          *
+    * Wazuh v3.10.2 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
