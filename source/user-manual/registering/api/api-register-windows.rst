@@ -5,12 +5,12 @@
 Windows hosts
 =============
 
-To register the Windows Agent, you need to start a Powershell as **Administrator**. The installation directory of the Wazuh Agent in Windows host depends on the architecture of the host.
+To register the Windows Agent, you need to start a Powershell as **Administrator**. The installation directory of the Wazuh agent in Windows host depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
-This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+This guide suppose that the Wazuh agent is installed in a ``x86_64`` host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
 
 1. Add the agent to the manager.
 
@@ -37,16 +37,16 @@ This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so th
 
       > Ignore-SelfSignedCerts
 
-  Use ``Invoke-WebRequest`` to execute the Wazuh API request to register the Wazuh Agent.
+  Use ``Invoke-WebRequest`` to execute the Wazuh API request to register the Wazuh agent.
 
   .. code-block:: console
-    
+
     # $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f api_username, api_password)))
     # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://192.168.1.2:55000/agents -Body @{name=windows_agent} | ConvertFrom-Json
 
-  This will return the ID of the Wazuh Agent.
+  This will return the ID of the Wazuh agent.
 
-2. Extract the Wazuh Agent key using the Wazuh API. In this case, we will assume that the Wazuh Agent ID is ``001``:
+2. Extract the Wazuh agent key using the Wazuh API. In this case, we will assume that the Wazuh agent ID is ``001``:
 
   .. code-block:: console
 
@@ -76,9 +76,9 @@ This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so th
       Confirm adding it?(y/n): y
       Added.
 
-4. Edit the Wazuh Agent configuration to add the Wazuh Manager IP address.
+4. Edit the Wazuh agent configuration to add the Wazuh server IP address.
 
-  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh Manager address:
+  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
 
   .. code-block:: xml
 

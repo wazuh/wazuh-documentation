@@ -5,7 +5,7 @@
 Remote service
 ==============
 
-The Wazuh Manager can be configured to publish the remote service used by agents as follows:
+The Wazuh manager can be configured to publish the remote service used by agents as follows:
 
 Configuration
 -------------

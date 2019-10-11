@@ -404,7 +404,7 @@ remove_old_diff
 .. versionadded:: 3.4.0
 .. deprecated:: 3.8.0
 
-Specifies if Syscheck should delete the local snapshots that are not currently being monitorized. Since version 3.8.0, Syscheck will always purge those snapshots.
+Specifies if Syscheck should delete the local snapshots that are not currently being monitored. Since version 3.8.0, Syscheck will always purge those snapshots.
 
 +--------------------+---------+
 | **Default value**  | yes     |
