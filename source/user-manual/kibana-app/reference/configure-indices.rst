@@ -85,7 +85,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     .. code-block:: none
     
         - name: index_prefix
-          default: wazuh-alerts-3.x-vagrant
+          default: wazuh-alerts-3.x-
 
 
     To this:
@@ -93,7 +93,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     .. code-block:: none
     
         - name: index_prefix
-          default: my-custom-alerts-3.x-vagrant
+          default: my-custom-alerts-3.x-
 
 7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
