@@ -21,7 +21,7 @@ time window.
 The first alert
 ---------------
 
-Use the file viewer of your choice to look at /var/ossec/logs/alerts/alerts.log on the Wazuh Server.  This file is optionally
+Use the file viewer of your choice to look at ``/var/ossec/logs/alerts/alerts.log`` on the Wazuh Server.  This file is optionally
 written to by Wazuh and is mainly useful for learning and debugging purposes.  Search for the text "blimey" and the first alert
 you find should look like this:
 
@@ -36,8 +36,8 @@ you find should look like this:
 
 
 The really important alert output file written to by Wazuh is /var/ossec/logs/alerts/alerts.json.  It consists of single-line JSON
-records containing much more detail than what the alerts.log file shows.  These JSON records are conveyed by Filebeat to Logstash
-for enrichment and insertion into Elasticsearch.  From there they can then be seen with Kibana.  Here is a beautified example of
+records containing much more detail than what the alerts.log file shows.  These JSON records are conveyed by Filebeat to Elasticsearch
+while enriching them so they may be inserted into the appropriate Elasticsearch index.  From there they can then be seen with Kibana.  Here is a beautified example of
 the JSON record in alerts.json that corresponds to the same alert above in alerts.log.
 
 .. code-block:: json
