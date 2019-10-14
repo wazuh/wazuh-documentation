@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_package_suse12:
+.. _wazuh_agent_package_suse:
 
 SUSE 12
 =======
