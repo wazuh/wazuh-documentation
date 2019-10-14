@@ -26,7 +26,7 @@ Preparation
 Elasticsearch
 -------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. Bellow, you can follow the type of installation depending of desired architecture, if you want to configure only one Elasticsearch node or if you want to configure a Elasticsearch cluster.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. Bellow, you can follow the type of installation depending on desired architecture, if you want to configure only one Elasticsearch node or if you want to configure a Elasticsearch cluster.
 
 .. tabs::
   .. ************************************************* ************************* *************************************************
@@ -246,7 +246,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           - ``<elasticsearch_ip_nodeX>``: others Elasticsearch cluster nodes IPs. I.e: ``10.0.0.3``.
           - ``<master_node_X>``: others elasticsearch master node names. I.e: ``elastic-master2``.
 
-        Depending of the node type, some parameters may vary between nodes. You should include the parameter ``node.master: false`` in every Elasticsearch node that you don't want to configure as master.
+        Depending on the node type, some parameters may vary between nodes. You should include the parameter ``node.master: false`` in every Elasticsearch node that you don't want to configure as master.
 
     **Steps for master Elasticsearch node**
 
@@ -323,7 +323,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           # chown -R elasticsearch: /etc/elasticsearch/certs
           # chmod -R 770 /etc/elasticsearch/certs
 
-        Depending of the Elasticsearch node in where you are deploying the certificates, you need to replace ``elasticsearch-node1`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
+        Depending on the Elasticsearch node in where you are deploying the certificates, you need to replace ``elasticsearch-node1`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
 
       4.5. In the Elasticsearch configuration file ``/etc/elasticsearch/elasticsearch.yml`` you have to review the path according with the previous step:
 
