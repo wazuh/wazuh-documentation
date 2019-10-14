@@ -109,7 +109,7 @@ This will generate a 3.10. package for Solaris 10
 
  # vagrant --branch-tag=v3.10.2 up solaris11
 
-This will generate a 3.10.0 package for Solaris 11
+This will generate a 3.10.2 package for Solaris 11
 
 .. code-block:: console
 
