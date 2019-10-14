@@ -2,8 +2,8 @@
 
 .. _searchguard:
 
-Search Guard
-============
+Installing Search Guard
+=======================
 
 Search Guard can be used to secure your Elasticsearch cluster by working with different industry standard authentication techniques, like Kerberos, LDAP / Active Directory, JSON web tokens, TLS certificates and Proxy authentication / SSO.
 
