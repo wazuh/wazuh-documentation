@@ -7,10 +7,14 @@
 Learning Wazuh
 ==============
 
-The applications and integrations that form the Wazuh solution represent a rich family of tools.
-Getting to know these tools takes practice, so in this area we will provide you with a progressive
-set of hands-on experiences to accelerate your progress towards mastery of Wazuh.  Many of the labs
-will assume that the previous labs have already been completed, so we encourage you to do them in order.
+The Wazuh open source security platform is a versatile software that provides awareness 
+of an environment's security through a rich group of components and integrations.
+
+Given the high adaptability of Wazuh, the possibilities that it provides are plentiful 
+in this area of our documentation you will find a progressive set of hands-on experiences
+to accelerate your progress towards mastery of Wazuh. 
+
+Some of the labs will assume that the previous labs have already been completed, so we encourage you to do them in order.
 
 .. toctree::
     :maxdepth: 1
