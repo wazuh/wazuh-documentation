@@ -94,7 +94,7 @@ Installing the Wazuh server
             <disabled>no</disabled>
         </cluster>
 
-    The available parameters:
+    The parameters:
 
       - :ref:`name <cluster_name>`: Name that we will assign to the cluster
       - :ref:`node_name <cluster_node_name>`: Name of the current node
