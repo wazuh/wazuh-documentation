@@ -17,9 +17,9 @@ Requirements
 
 Download our wazuh-packages repository from GitHub and go to the rpms directory.
 
- .. code-block:: console
+.. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/rpms
 
 Execute the ``generate_rpm_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the RPM and run a container that will build it:
 

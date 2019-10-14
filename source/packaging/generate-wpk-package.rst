@@ -19,13 +19,13 @@ Requirements
 
 Download our wazuh-packages repository from GitHub and go to the wpk directory.
 
- .. code-block:: console
+.. code-block:: console
 
  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wpk
 
 Execute the ``generate_wpk_package.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
 
- .. code-block:: console
+.. code-block:: console
 
  $ ./generate_wpk_package.sh -h
 
@@ -49,7 +49,7 @@ Linux WPK
 
 Below, you will find an example of Linux WPK package building.
 
- .. code-block:: console
+.. code-block:: console
 
  # ./generate_wpk_package.sh -t linux -b v3.10.2 -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk
 
@@ -58,13 +58,13 @@ Windows WPK
 
 To build a WPK for Windows you need to first download an MSI package of the desired version:
 
- .. code-block:: console
+.. code-block:: console
 
  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.2-1.msi
 
 Below, you will find an example of Windows WPK package building.
 
- .. code-block:: console
+.. code-block:: console
 
  # ./generate_wpk_package.sh -t windows -b v3.10.2 -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-3.10.2-1.msi
 
@@ -72,6 +72,6 @@ If the ``-c`` or ``--checksum`` option is used there will be a file containing t
 
 Here you can see an example of how to build a WPK generation with checksum:
 
- .. code-block:: console
+.. code-block:: console
 
  # ./generate_wpk_package.sh -t linux -b v3.10.2 -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk -c /tmp/wpk_checksum

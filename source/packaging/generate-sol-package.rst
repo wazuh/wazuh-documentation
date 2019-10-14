@@ -16,9 +16,9 @@ Requirements
 
 Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory.
 
- .. code-block:: console
+.. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -35,7 +35,7 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
      -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
      -p, --install-path <pkg_home>       Installation path for the package. By default: /var.
      -c, --checksum                      Compute the SHA512 checksum of the pkg package.
-      -h, --help                          Shows this help.
+     -h, --help                          Shows this help.
 
 
 Below, you will find an example of how to build a Solaris package.
@@ -50,7 +50,7 @@ Download and build the sources:
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -b v3.10.0
+    # ./generate_wazuh_packages.sh -b v3.10.2
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
