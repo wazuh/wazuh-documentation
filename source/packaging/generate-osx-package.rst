@@ -60,13 +60,13 @@ Below, you will find some examples of how to build OSX packages.
 
  # ./generate_wazuh_packages.sh -b v3.10.2 -s /tmp
 
-This will build a 3.10.2 package and store it in ``/tmp``.
+This will build a 3.10.2 Wazuh agent OSX  package and store it in ``/tmp``.
 
 .. code-block:: console
 
  # ./generate_wazuh_packages.sh -b v3.10.2 -s /tmp -j 6
 
-This will also build a 3.10.2 package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+This will also build a 3.10.2 Wazuh agent OSX package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
 
 .. code-block:: console
 
@@ -127,4 +127,3 @@ Additional information
  * `Entitlements <https://developer.apple.com/documentation/bundleresources/entitlements>`_
  * `Hardened Runtime Entitlements <https://developer.apple.com/documentation/security/hardened_runtime_entitlements?language=objc>`_
  * `Resolving Common Notarization Issues <https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues>`_
-

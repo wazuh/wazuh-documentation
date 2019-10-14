@@ -53,6 +53,8 @@ Below, you will find an example of Linux WPK package building.
 
  # ./generate_wpk_package.sh -t linux -b v3.10.2 -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk
 
+This will build a 3.10.2 Wazuh Linux WPK package named LinuxAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
+
 Windows WPK
 ^^^^^^^^^^^
 
@@ -67,6 +69,8 @@ Below, you will find an example of Windows WPK package building.
 .. code-block:: console
 
  # ./generate_wpk_package.sh -t windows -b v3.10.2 -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-3.10.2-1.msi
+
+This will build a 3.10.2 Wazuh Windows WPK package named WindowsAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
 
 If the ``-c`` or ``--checksum`` option is used there will be a file containing the SHA512 checksum in the same output path or you can indicate where you want to store it.
 

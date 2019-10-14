@@ -103,19 +103,19 @@ Below, you will find some examples of how to build a Solaris package using this 
 
  # vagrant --branch-tag=v3.10.2 up solaris10
 
-This will generate a 3.10. package for Solaris 10
+This will generate a 3.10.2 Wazuh agent package for Solaris 10
 
 .. code-block:: console
 
  # vagrant --branch-tag=v3.10.2 up solaris11
 
-This will generate a 3.10.2 package for Solaris 11
+This will generate a 3.10.2 Wazuh agent package for Solaris 11
 
 .. code-block:: console
 
  # vagrant --branch-tag=v3.10.2 up solaris10 solaris 11
 
-This will generate a 3.10.2 package for Solaris 10 and Solaris 11
+This will generate a 3.10.2 Wazuh agent package for Solaris 10 and Solaris 11
 
 After the process has ended the package will be stored in the ``src`` folder.
 

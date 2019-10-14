@@ -52,16 +52,16 @@ Below, you will find some examples of how to build an HPUX package.
 
  # ./generate_wazuh_packages.sh -b v3.10.2
 
- This will generate a 3.10.2 HPUX package.
+ This will generate a 3.10.2 Wazuh agent HPUX package.
 
 .. code-block:: console
 
  # ./generate_wazuh_packages.sh -b v3.10.2 -c
 
- This will generate a 3.10.2 HPUX package with checksum.
+ This will generate a 3.10.2 Wazuh agent HPUX package with checksum.
 
  .. code-block:: console
 
  # ./generate_wazuh_packages.sh -b v3.10.2  -p /opt
 
- This will generate a 3.10.2 HPUX package with ``opt`` as installation directory.
+ This will generate a 3.10.2 Wazuh agent HPUX package with ``opt`` as installation directory.
