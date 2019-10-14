@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_package_oracle6_or_greater:
+.. _wazuh_agent_package_oracle:
 
 Oracle Linux 6 or greater
 =========================
 
-The RPM package is suitable for Oracle Linux 6 or greater. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+The RPM package is suitable for Oracle Linux 6 or greater. An Oracle Linux 5 RPM is also available. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -14,18 +14,36 @@ Installing Wazuh agent
 
 1. Adding the Wazuh repository:
 
-  .. code-block:: console
+.. tabs::
+  .. group-tab:: Oracle Linux 5
 
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH
-    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-    [wazuh_repo]
-    gpgcheck=1
-    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    enabled=1
-    name=Wazuh repository
-    baseurl=https://packages.wazuh.com/3.x/yum/
-    protect=1
-    EOF
+    .. code-block:: console
+
+      # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+      # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+      enabled=1
+      name=Wazuh repository
+      baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
+      protect=1
+      EOF
+
+  .. group-tab:: Oracle Linux 6 or greater
+
+    .. code-block:: console
+
+      # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH
+      # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
 
 2. On your terminal, install the Wazuh agent. You can choose an installation or a deployment:
 

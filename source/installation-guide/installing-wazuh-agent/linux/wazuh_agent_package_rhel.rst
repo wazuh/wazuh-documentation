@@ -5,7 +5,7 @@
 Red Hat Enterprise Linux
 ========================
 
-The RPM package is suitable for Red Hat Enterprise Linux 6 or greater. A CentOS 5 RPM is also available. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+The RPM package is suitable for Red Hat Enterprise Linux 6 or greater. A RHEL 5 RPM is also available. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
