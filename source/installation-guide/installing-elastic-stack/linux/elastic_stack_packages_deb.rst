@@ -210,7 +210,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     **Steps for all Elasticsearch nodes**
 
-    1. Install the Elasticsearch package in all cluster hosts 2:
+    1. Install the Elasticsearch package in all cluster hosts:
 
       .. code-block:: console
 
