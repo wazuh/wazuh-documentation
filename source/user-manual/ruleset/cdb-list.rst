@@ -18,7 +18,7 @@ The list file is a plain text file where each line has the following format::
     key1:value1
     key2:value2
 
-Each key has to be unique, must be followed by a colon ``:`` and an optional value. The values between lines can be the same as long as the key is unique.
+Each key has to be unique, must be followed by a colon ``:`` and an optional value. This value can be identical to others as long as the key is unique.
 
 For IP addresses the dot notation is used for subnet matches:
 
@@ -74,11 +74,11 @@ Compiling the CDB list
 Compile the list by calling the ``ossec-makelists`` binary in ``/var/ossec/bin/``. Upon executing the ``ossec-makelists`` binary we will be prompted with the following message:
 
 .. code-block:: console
-  
+
   # /var/ossec/bin/ossec-makelists
   * File lists/my-list.cdb needs to be updated
-	
-This is the success message indicating that the text file ``/var/ossec/etc/lists/my-list`` was compiled into the CDB file ``/var/ossec/etc/lists/my-list.cdb``. The ``my-list`` file is what you can read, edit, and recompile with ossec-makeslits.  The ``my-list.cdb`` file is the compiled CDB that Wazuh can read and use for high performance lookup during rule analysis.
+
+This is the success message indicating that the text file ``/var/ossec/etc/lists/my-list`` was compiled into the CDB file ``/var/ossec/etc/lists/my-list.cdb``. The ``my-list`` file is the one that you can read and edit, remembering to recompile with ``/var/ossec/bin/ossec-makelists`` afterwards.  The ``my-list.cdb`` is the generated CDB file that Wazuh will read and use for high performance lookup during rule analysis.
 
 Using the CDB list in the rules
 -------------------------------
@@ -94,13 +94,13 @@ This example is a search for the key stored in the field attribute and will matc
 
      <list field="user" lookup="match_key">etc/lists/list-user</list>
 
-The ``lookup="match_key"`` is the default and can be left out as in this example:
+The ``lookup="match_key"`` is the default and can be omitted as in this example:
 
 .. code-block:: xml
 
      <list field="user">etc/lists/list-user</list>
 
-In case the field is an IP address, you must to use *address_match_key*:
+In case the field is an IP address, you must use ``address_match_key``:
 
 .. code-block:: xml
 
@@ -115,7 +115,7 @@ This example is a search for the key stored in the field attribute and will matc
 
     <list field="user" lookup="not_match_key">etc/lists/list-user</list>
 
-In case the field is an IP address, you must use *not_address_match_key*:
+In case the field is an IP address, you must use ``not_address_match_key``:
 
 .. code-block:: xml
 
@@ -130,7 +130,7 @@ This example is a search for the key stored in the field attribute, and on a pos
 
      <list field="user" lookup="match_key_value" check_value="^block">etc/lists/list-user</list>
 
-In case the field is an IP address, you must use *not_address_match_key*:
+In case the field is an IP address, you must use ``not_address_match_key``:
 
 .. code-block:: xml
 
@@ -165,4 +165,4 @@ CDB lists examples
     <group>list1,list2,</group>
   </rule>
 
-In this example, the described rules check if an IP is in the *list-one*, in the *list-two*, or in both.
+In this example, the described rules check if an IP is in the *list-one*, the *list-two* or both, respectively.
