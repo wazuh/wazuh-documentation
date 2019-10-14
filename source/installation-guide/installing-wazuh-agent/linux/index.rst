@@ -12,9 +12,7 @@ The Wazuh agent can be installed in the following Linux distributions:
 +===============================+=========================================================================+
 | Amazon Linux                  | :ref:`1 or greater <wazuh_agent_package_amazon>`                        |
 +-------------------------------+-------------------------------------------------------------------------+
-| CentOS                        | :ref:`6 or greater <wazuh_agent_package_centos6_or_greater>`            |
-+                               +-------------------------------------------------------------------------+
-|                               | :ref:`5 <wazuh_agent_package_centos5>`                                  |
+| CentOS                        | :ref:`5 or greater <wazuh_agent_package_centos>`            |
 +-------------------------------+-------------------------------------------------------------------------+
 | Debian                        | :ref:`7 or greater <wazuh_agent_package_debian7_or_greater>`            |
 +-------------------------------+-------------------------------------------------------------------------+
@@ -42,7 +40,6 @@ The Wazuh agent can be installed in the following Linux distributions:
     :maxdepth: 1
 
     wazuh_agent_package_amazon
-    wazuh_agent_package_centos5
     wazuh_agent_package_centos6_or_greater
     wazuh_agent_package_debian7_or_greater
     wazuh_agent_package_fedora22_or_greater
