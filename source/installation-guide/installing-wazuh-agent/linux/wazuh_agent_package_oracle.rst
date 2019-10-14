@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_package_oracle:
 
-Oracle Linux 6 or greater
-=========================
+Oracle Linux
+============
 
 The RPM package is suitable for Oracle Linux 6 or greater. An Oracle Linux 5 RPM is also available. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 

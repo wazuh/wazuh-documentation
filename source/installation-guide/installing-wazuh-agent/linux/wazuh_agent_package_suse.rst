@@ -5,7 +5,7 @@
 SUSE 12
 =======
 
-The RPM package is suitable for installation on SUSE 12. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+The RPM package is suitable for installation on SUSE 12. A SUSE 11 RPM is also available. For other operating systems or Linux distributions, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -14,18 +14,36 @@ Installing Wazuh agent
 
 1. Adding the Wazuh repository:
 
-  .. code-block:: console
+.. tabs::
+  .. group-tab:: SUSE 11
 
-    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
-    [wazuh_repo]
-    gpgcheck=1
-    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    enabled=1
-    name=Wazuh repository
-    baseurl=https://packages.wazuh.com/3.x/yum/
-    protect=1
-    EOF
+    .. code-block:: console
+
+      # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+      # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+      enabled=1
+      name=Wazuh repository
+      baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
+      protect=1
+      EOF
+
+  .. group-tab:: SUSE 12
+
+    .. code-block:: console
+
+      # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
 
 2. On your terminal, install the Wazuh agent. You can choose an installation or a deployment:
 
@@ -45,7 +63,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER="10.0.0.2" zypper install wazuh-agent
 
-    See the following document for additional automated deployment options: :ref:`deployment variables <deployment_variables_yum>`.
+    See the following document for additional automated deployment options: :ref:`deployment variables <deployment_variables_zypper>`.
 
 3. **(Optional)** Disable the Wazuh repository:
 
