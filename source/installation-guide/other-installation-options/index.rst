@@ -16,4 +16,3 @@ Wazuh may be installed via packages, but alternatively, you can build Wazuh from
         wazuh-from-sources/wazuh-server/index
         wazuh-from-sources/wazuh-agent/index
         installing-splunk/index
-        searchguard
