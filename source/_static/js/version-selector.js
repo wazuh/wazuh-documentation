@@ -130,7 +130,6 @@ jQuery(function($) {
 
       if ( redirHistory[ver].length ) {
         href = '/'+ver+redirHistory[ver]+param;
-        console.log(href);
       } else {
         tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
       }
