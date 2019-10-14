@@ -141,26 +141,19 @@ Upgrade Filebeat
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
-3. Download the alerts template for Elasticsearch:
-
-  .. code-block:: console
-
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
-    # chmod go+r /etc/filebeat/wazuh-template.json
-
-4. Download the Wazuh module for Filebeat:
+3. Download the Wazuh module for Filebeat:
 
   .. code-block:: console
 
     # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
-5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
     output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-6. Restart Filebeat.
+5. Restart Filebeat.
 
   .. code-block:: console
 
