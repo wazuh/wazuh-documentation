@@ -26,16 +26,16 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -h
+ # ./generate_wazuh_packages.sh -h
 
-    Usage: ./generate_wazuh_packages.sh [OPTIONS]
+ Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
-        -b, --branch <branch>               Select Git branch or tag e.g. master.
-        -e, --environment                   Install all the packages necessaries to build the pkg package.
-        -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
-        -p, --install-path <pkg_home>       Installation path for the package. By default: /var.
-        -c, --checksum                      Compute the SHA512 checksum of the pkg package.
-        -h, --help                          Shows this help.
+     -b, --branch <branch>               Select Git branch or tag e.g. master.
+     -e, --environment                   Install all the packages necessaries to build the pkg package.
+     -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
+     -p, --install-path <pkg_home>       Installation path for the package. By default: /var.
+     -c, --checksum                      Compute the SHA512 checksum of the pkg package.
+      -h, --help                          Shows this help.
 
 
 Below, you will find an example of how to build a Solaris package.
@@ -66,54 +66,54 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
 
 .. code-block:: console
 
-    # vagrant -h up
+ # vagrant -h up
 
-    -- CUSTOM USE OF VAGRANT FOR THIS MACHINE --
+ -- CUSTOM USE OF VAGRANT FOR THIS MACHINE --
 
-        vagrant [OPTION] ... up X
-        To bring up a Solaris machine, X must be solaris10 or solaris11 or both.
+     vagrant [OPTION] ... up X
+     To bring up a Solaris machine, X must be solaris10 or solaris11 or both.
 
-        vagrant [OPTION] ... ssh/provision/delete
+     vagrant [OPTION] ... ssh/provision/delete
 
-        Example:
-        vagrant --branch-tag=v3.10.2 --ram=1024 --cpus=4 up solaris10 solaris11
+     Example:
+     vagrant --branch-tag=v3.10.2 --ram=1024 --cpus=4 up solaris10 solaris11
 
-        -h, --help:
-        Show help
+     -h, --help:
+     Show help
 
-        --branch-tag x, -b x:
-        Generate package for branch/tag x
+     --branch-tag x, -b x:
+     Generate package for branch/tag x
 
-        --ram x
-        Select the amount of ram asigned to the new machine.
+     --ram x
+     Select the amount of ram asigned to the new machine.
 
-        --cpus x
-        Select the number of CPUs asigned to the new machine.
+     --cpus x
+     Select the number of CPUs asigned to the new machine.
 
-        -- DEFAULT USE OF VAGRANT (FOR ALL MACHINES) --
+     -- DEFAULT USE OF VAGRANT (FOR ALL MACHINES) --
 
-    Usage: vagrant [options] <command> [<args>]
+ Usage: vagrant [options] <command> [<args>]
 
-        -v, --version                    Print the version and exit.
-        -h, --help                       Print this help.
+     -v, --version                    Print the version and exit.
+     -h, --help                       Print this help.
 
 Below, you will find some examples of how to build a Solaris package using this tool.
 
 .. code-block:: console
 
-    # vagrant --branch-tag=v3.10.2 up solaris10
+ # vagrant --branch-tag=v3.10.2 up solaris10
 
 This will generate a 3.10. package for Solaris 10
 
 .. code-block:: console
 
-    # vagrant --branch-tag=v3.10.2 up solaris11
+ # vagrant --branch-tag=v3.10.2 up solaris11
 
 This will generate a 3.10.0 package for Solaris 11
 
 .. code-block:: console
 
-    # vagrant --branch-tag=v3.10.2 up solaris10 solaris 11
+ # vagrant --branch-tag=v3.10.2 up solaris10 solaris 11
 
 This will generate a 3.10.2 package for Solaris 10 and Solaris 11
 
@@ -123,4 +123,4 @@ To finish destroy the machines:
 
 .. code-block:: console
 
-    # vagrant destroy solaris10 solaris 11
+ # vagrant destroy solaris10 solaris 11

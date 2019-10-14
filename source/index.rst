@@ -280,12 +280,12 @@ Wazuh is a free and open source platform for threat detection, security monitori
    upgrade-guide/index
    user-manual/index
    development/index
-   packaging/index
    containers
    deployment
    compliance
    monitoring
    migrating-from-ossec/index
+   packaging/index
    release-notes/index
 
 .. raw:: html

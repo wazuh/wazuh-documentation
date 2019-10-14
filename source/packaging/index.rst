@@ -3,7 +3,8 @@
 .. -package-creation:
 
 Wazuh package generation guide
-========================
+==============================
+
 This section will show you how to generate Wazuh packages for different platforms:
 
 .. topic:: Contents
@@ -21,4 +22,3 @@ This section will show you how to generate Wazuh packages for different platform
         generate-wazuh-splunk-app
         generate-wpk-package
         generate-ova
-

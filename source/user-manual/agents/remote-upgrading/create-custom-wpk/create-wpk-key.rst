@@ -14,15 +14,15 @@ To create a WPK package it is required to have an X509 certificate and CA if you
 
 Create root CA
 
-    .. code-block:: console
+.. code-block:: console
 
-            # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
+ # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
 
 Create a certificate and key
 
-    .. code-block:: console
+.. code-block:: console
 
-            # openssl req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
+  # openssl req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
 
 Set the location as follows:
 
@@ -32,9 +32,9 @@ Set the location as follows:
 
 Sign this certificate with the root CA
 
-    .. code-block:: console
+.. code-block:: console
 
-            # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
+ # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
 
 
 .. _build-wpk-package:

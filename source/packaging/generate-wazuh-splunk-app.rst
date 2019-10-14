@@ -28,11 +28,11 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
 
  Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
 
-    -b, --branch <branch>     [Required] Select Git branch or tag e.g. v3.10.2-7.3.0
-    -s, --store <directory>   [Optional] Destination directory by default splunkapp/output
-    -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y-rev
-    -c, --checksum  <path>    [Optional] Generate checksum
-    -h, --help                Show this help.
+     -b, --branch <branch>     [Required] Select Git branch or tag e.g. v3.10.2-7.3.0
+     -s, --store <directory>   [Optional] Destination directory by default splunkapp/output
+     -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y-rev
+     -c, --checksum  <path>    [Optional] Generate checksum
+     -h, --help                Show this help.
 
 Below, you will find some examples of how to build Splunk App packages.
 

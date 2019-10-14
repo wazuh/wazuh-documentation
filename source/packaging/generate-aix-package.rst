@@ -28,14 +28,14 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
  # ./generate_wazuh_packages.sh -h
 
- Usage: ../wazuh-packages/aix/generate_wazuh_packages.sh [OPTIONS]
+ Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
-    -b, --branch <branch>               Select Git branch or tag e.g.
-    -e, --environment                   Install all the packages necessaries to build the RPM package
-    -s, --store  <rpm_directory>        Directory to store the resulting RPM package. By default: /tmp/build
-    -p, --install-path <rpm_home>       Installation path for the package. By default: /var
-    -c, --checksum <path>               Compute the SHA512 checksum of the RPM package.
-    -h, --help                          Shows this help
+     -b, --branch <branch>               Select Git branch or tag e.g.
+     -e, --environment                   Install all the packages necessaries to build the RPM package
+     -s, --store  <rpm_directory>        Directory to store the resulting RPM package. By default: /tmp/build
+     -p, --install-path <rpm_home>       Installation path for the package. By default: /var
+     -c, --checksum <path>               Compute the SHA512 checksum of the RPM package.
+     -h, --help                          Shows this help
 
 First, install the needed dependencies:
 

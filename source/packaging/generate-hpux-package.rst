@@ -27,16 +27,16 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -h
+ # ./generate_wazuh_packages.sh -h
 
-    Usage: ../wazuh-packages/hpux/generate_wazuh_packages.sh [OPTIONS]
+ Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
-        -e Install all the packages necessaries to build the TAR package
-        -b <branch> Select Git branch. Example v3.10.2
-        -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
-        -p <tar_home> Installation path for the package. By default: /var
-        -c, --checksum Compute the SHA512 checksum of the TAR package.
-        -h Shows this help
+     -e Install all the packages necessaries to build the TAR package
+     -b <branch> Select Git branch. Example v3.10.2
+     -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
+     -p <tar_home> Installation path for the package. By default: /var
+     -c,  --checksum Compute the SHA512 checksum of the TAR package.
+     -h Shows this help
 
 Below, you will find an example of how to build HPUX packages.
 

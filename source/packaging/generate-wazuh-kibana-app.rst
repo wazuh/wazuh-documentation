@@ -18,7 +18,7 @@ Requirements
 Download our wazuh-packages repository from GitHub and go to the wazuhapp directory.
  .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp
+ $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/wazuhapp
 
 Execute the ``generate_wazuh_app.sh`` script, with the different options you desire. This script will build a Docker image with all the necessary tools to create the Kibana App package and run a container that will build it:
 
@@ -28,11 +28,11 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
 
  Usage: ./generate_wazuh_app.sh [OPTIONS]
 
-    -b, --branch <branch>     [Required] Select Git branch or tag e.g.v3.10.2-7.3.2
-    -s, --store <path>        [Optional] Set the destination path of package, by defauly wazuhapp/output/
-    -r, --revision <rev>      [Optional] Package revision that append to version e.g. x.x.x-rev
-    -c, --checksum <path>     [Optional] Generate checksum
-    -h, --help                Show this help.
+     -b, --branch <branch>     [Required] Select Git branch or tag e.g.v3.10.2-7.3.2
+     -s, --store <path>        [Optional] Set the destination path of package, by defauly wazuhapp/output/
+     -r, --revision <rev>      [Optional] Package revision that append to version e.g. x.x.x-rev
+     -c, --checksum <path>     [Optional] Generate checksum
+     -h, --help                Show this help.
 
 Below, you will find some examples of how to build Kibana App packages.
 
