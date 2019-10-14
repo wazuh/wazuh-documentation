@@ -43,8 +43,11 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     let selected = -1;
-    const path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
+    let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
     const selectVersionCurrent = $('#select-version .current');
+    if (path == 'current' || path == '3.x' ) {
+      path = currentVersion;
+    }
     for (let i = 0; i < versions.length; i++) {
       if ( versions[i].url == '/' + path ) {
         selected = i;
@@ -59,15 +62,20 @@ jQuery(function($) {
   function addVersions() {
     let ele = '';
     const selectVersionUl = $('#select-version .dropdown-menu');
-    let path = document.location.pathname.split('/')[1];
+    let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
     let fullUrl = window.location.href;
     let page = '';
+    let paramDivision = [];
+    let param = '';
 
     if (fullUrl == null) {/* Firefox fix */
       fullUrl = document.URL;
     }
     page = fullUrl.split('/'+path)[1];
-    page = normalizeUrl(page);
+
+    paramDivision = page.split('?');
+    page = normalizeUrl(paramDivision[0]);
+    param = paramDivision.length == 2 ? ('?'+paramDivision[1]) : '';
 
     if (path == 'current' || path == '3.x' ) {
       path = currentVersion;
@@ -123,7 +131,8 @@ jQuery(function($) {
       ver = versionsClean[i];
 
       if ( redirHistory[ver].length ) {
-        href = '/'+ver+redirHistory[ver];
+        href = '/'+ver+redirHistory[ver]+param;
+        console.log(href);
       } else {
         tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
       }
