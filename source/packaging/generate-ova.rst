@@ -2,15 +2,15 @@
 
 .. _create-ova:
 
-Creating  Wazuh virtual machine
-=======================================
+Generate Wazuh virtual machine
+==============================
 
 Wazuh provides an automated way of generating a Virtual machine in OVA format that is ready to run a Wazuh manager and ELK.
 
 To create the virtual machine follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * `Virtual Box <https://www.virtualbox.org/manual/UserManual.html#installation>`_
  * `Vagrant <https://www.vagrantup.com/docs/installation/>`_
@@ -40,7 +40,7 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.
 
  * Stable: The OVA uses released packages.
- * Unstable: The OVA uses unstable packages.
+ * Unstable: The OVA uses not released packages.
 
 Below, you will find some examples of how to build a Wazuh virtual machine.
 
@@ -54,7 +54,7 @@ This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 ins
 
  # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r unstable -c
 
-This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using stable packages and generate the sha512 checksum
+This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using unstable packages and generate the sha512 checksum
 
 
 

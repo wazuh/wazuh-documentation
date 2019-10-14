@@ -3,12 +3,12 @@
 .. _custom-wpk-creation:
 
 Custom WPK packages creation
-=============================
+============================
 
 .. _create-wpk-key:
 
 Get an X509 certificate and CA
--------------------------------
+------------------------------
 
 To create a WPK package it is required to have an X509 certificate and CA if you already have it jump to the next :ref:`section <build-wpk-package>`, if you don't, follow these steps:
 
@@ -40,7 +40,7 @@ Sign this certificate with the root CA
 .. _build-wpk-package:
 
 Build the WPK package
-----------------------
+---------------------
 
 There are two different ways of creating a WPK, you can do it manually or you can use our automated method using docker:
 

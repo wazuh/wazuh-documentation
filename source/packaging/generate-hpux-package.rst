@@ -2,15 +2,15 @@
 
 .. _create-hpux:
 
-Creating  AIX packages
-=============================
+Generate Wazuh HPUX packages
+============================
 
 Wazuh provides an automated way of building HPUX packages, keep in mind that to build an HPUX package you must run this tool in an HPUX system.
 
 To create an HPUX package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * GCC: download.
  * depothelper: download.

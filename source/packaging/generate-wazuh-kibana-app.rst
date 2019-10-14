@@ -2,8 +2,8 @@
 
 .. _create-kibana-app:
 
-Creating  Kibana App packages
-===================================
+Generate Wazuh Kibana App packages
+==================================
 
 Wazuh provides an automated way of building our Kibana app packages.
 

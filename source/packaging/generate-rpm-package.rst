@@ -2,15 +2,15 @@
 
 .. _create-rpm:
 
-Creating  RPM packages
-=============================
+Creating Wazuh RPM packages
+===========================
 
 Wazuh provides an automated way of building RPM packages using docker so there is no need for any other dependency.
 
 To create an RPM package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * Docker
  * Git
@@ -47,17 +47,17 @@ Below, you will find some examples of how to build an RPM package.
 
     ./generate_rpm_package.sh -b v3.10.2 -s /tmp -t manager -a x86_64 -r my_rev.
 
-This will generate a 3.10.2 manager package with revision ``my_rev`` for ``x86_64`` systems.
+This will generate a 3.10.2 Wazuh manager package with revision ``my_rev`` for ``x86_64`` systems.
 
 .. code-block:: console
 
     ./generate_rpm_package.sh -b v3.10.2 -s /tmp -t api -a i386 -r my_rev
 
-This will generate a 3.10.2 api package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+This will generate a 3.10.2 Wazuh api package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
     ./generate_rpm_package.sh -b v3.10.2 -t agent -a x86_64 -p /opt
 
-This will generate a 3.10.2 agent package with ``/opt`` as installation directory for ``x86_64`` systems.
+This will generate a 3.10.2 Wazuh agent package with ``/opt`` as installation directory for ``x86_64`` systems.
 

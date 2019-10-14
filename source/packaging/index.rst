@@ -2,10 +2,9 @@
 
 .. -package-creation:
 
-Package creation guide
-==============================
-
-This section will show you how to generate wazuh packages for different platforms:
+Wazuh package generation guide
+========================
+This section will show you how to generate Wazuh packages for different platforms:
 
 .. topic:: Contents
 

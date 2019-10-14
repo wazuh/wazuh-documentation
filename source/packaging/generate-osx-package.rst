@@ -2,15 +2,15 @@
 
 .. _create-osx:
 
-Creating  OSX packages
-=============================
+Generate Wazuh OSX packages
+===========================
 
 Wazuh provides an automated way of building OSX packages, keep in mind that to build an OSX package you must run this tool in an OSX system.
 
 To create an OSX package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * `Packages <http://s.sudre.free.fr/Software/Packages/about.html>`_
  * `Brew <https://brew.sh/>`_

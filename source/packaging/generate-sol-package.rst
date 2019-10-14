@@ -2,15 +2,15 @@
 
 .. _create-sol:
 
-Creating  Solaris packages
-=============================
+Generate Wazuh Solaris packages
+===============================
 
 Wazuh provides an automated way of building a solaris 10 and 11, keep in mind that to build these packages you must use the corresponding system.
 
 To create an Solaris package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * Git
 
@@ -76,7 +76,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
         vagrant [OPTION] ... ssh/provision/delete
 
         Example:
-        vagrant --branch-tag=v3.7.2 --ram=1024 --cpus=4 up solaris10 solaris11
+        vagrant --branch-tag=v3.10.2 --ram=1024 --cpus=4 up solaris10 solaris11
 
         -h, --help:
         Show help
@@ -101,21 +101,21 @@ Below, you will find some examples of how to build a Solaris package using this 
 
 .. code-block:: console
 
-    # vagrant --branch-tag=v3.10.0 up solaris10
+    # vagrant --branch-tag=v3.10.2 up solaris10
 
-This will generate a 3.10.0 package for Solaris 10
+This will generate a 3.10. package for Solaris 10
 
 .. code-block:: console
 
-    # vagrant --branch-tag=v3.10.0 up solaris11
+    # vagrant --branch-tag=v3.10.2 up solaris11
 
 This will generate a 3.10.0 package for Solaris 11
 
 .. code-block:: console
 
-    # vagrant --branch-tag=v3.10.0 up solaris10 solaris 11
+    # vagrant --branch-tag=v3.10.2 up solaris10 solaris 11
 
-This will generate a 3.10.0 package for Solaris 10 and Solaris 11
+This will generate a 3.10.2 package for Solaris 10 and Solaris 11
 
 After the process has ended the package will be stored in the ``src`` folder.
 

@@ -2,15 +2,15 @@
 
 .. _create-aix:
 
-Creating  AIX packages
-=============================
+Generate Wazuh AIX packages
+===========================
 
 Wazuh provides an automated way of building AIX packages, keep in mind that to build an AIX package you must run this tool in an AIX system.
 
 To create an AIX package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * curl
 

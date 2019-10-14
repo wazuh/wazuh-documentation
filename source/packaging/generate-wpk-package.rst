@@ -2,8 +2,8 @@
 
 .. _create-wpk:
 
-Automated WPK packages generation
-=================================
+Generate Wazuh WPK packages automatically
+=========================================
 
 Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency.
 
@@ -12,7 +12,7 @@ To generate an WPK package a an X509 certificate and CA, :ref:`here <create-wpk-
 To create a WPK package follow these steps:
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * Docker
  * Git
@@ -45,7 +45,7 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
 
 Linux WPK
-^^^^^^^^^^
+^^^^^^^^^
 
 Below, you will find an example of Linux WPK package building.
 
@@ -54,7 +54,7 @@ Below, you will find an example of Linux WPK package building.
         # ./generate_wpk_package.sh -t linux -b v3.10.2 -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk
 
 Windows WPK
-^^^^^^^^^^^^
+^^^^^^^^^^^
 
 To build a WPK for Windows you need to first download an MSI package of the desired version:
 

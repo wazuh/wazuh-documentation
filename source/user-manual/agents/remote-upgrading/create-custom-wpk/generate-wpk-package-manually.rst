@@ -2,8 +2,8 @@
 
 .. _create-custom-wpk-manually:
 
-Manual WPK packages generation
-====================================
+Generate WPK packages manually
+==============================
 
 WPK packages will generally contain the complete agent code, however, this is not required.
 
@@ -14,7 +14,7 @@ A WPK package must contain an installation program in binary form or a script in
  * Write a file called upgrade_result containing a status number (0 means OK) before exiting.
 
 Requirements
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
  * Python 2.7 or 3.5+
  * The Python ``cryptography`` package. This may be obtained using the following command:
@@ -24,7 +24,7 @@ Requirements
             pip install cryptography
 
 Linux WPK
-^^^^^^^^^^^
+^^^^^^^^^
 
 Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
@@ -90,7 +90,7 @@ Compile the WPK package using your SSL certificate and key:
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
 Windows WPK
-^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
