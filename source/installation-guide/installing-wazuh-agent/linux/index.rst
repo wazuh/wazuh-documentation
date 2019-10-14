@@ -18,11 +18,11 @@ The Wazuh agent can be installed in the following Linux distributions:
 +-------------------------------+-------------------------------------------------------------------------+
 | Fedora                        | :ref:`22 or greater <wazuh_agent_package_fedora22_or_greater>`          |
 +-------------------------------+-------------------------------------------------------------------------+
-| Oracle Linux                  | :ref:`6 or greater <wazuh_agent_package_oracle>`                        |
+| Oracle Linux                  | :ref:`5 or greater <wazuh_agent_package_oracle>`                        |
 +-------------------------------+-------------------------------------------------------------------------+
 | OpenSUSE                      | :ref:`42 or greater <wazuh_agent_package_opensuse42_or_greater>`        |
 +-------------------------------+-------------------------------------------------------------------------+
-| Red Hat Enterprise Linux      | :ref:`6 or greater <wazuh_agent_package_rhel>`                          |
+| Red Hat Enterprise Linux      | :ref:`5 or greater <wazuh_agent_package_rhel>`                          |
 +-------------------------------+-------------------------------------------------------------------------+
 | SUSE                          | :ref:`12 <wazuh_agent_package_suse>`                                    |
 +-------------------------------+-------------------------------------------------------------------------+
