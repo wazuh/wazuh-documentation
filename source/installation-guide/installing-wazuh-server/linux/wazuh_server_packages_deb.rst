@@ -108,7 +108,7 @@ Installing the Wazuh server
 
       - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker)
       - :ref:`port <cluster_port>`: Destination port for cluster communication
-      - :ref:`bind_addr <cluster_bind_addr>`: IP where this node is listening to (0.0.0.0 any IP)
+      - :ref:`bind_addr <cluster_bind_addr>`: This specifies which network IP the node will be bound in order to listen for incoming requests. (0.0.0.0 any IP).
       - :ref:`nodes <cluster_nodes>`: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
       - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
       - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
