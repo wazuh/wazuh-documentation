@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to install Elastic Stack for using Wazuh in SUSE
+
 .. _elastic_stack_packages_suse:
 
 SUSE
