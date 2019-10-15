@@ -9,6 +9,8 @@ The Wazuh server is most commonly installed on Linux. The installation process i
 
 There are two components that are usually installed on a Wazuh server: the manager and the API. In addition, Filebeat is needed to forward alerts to Elastic Stack.
 
+.. note::  You can run Wazuh and Elastic Stack on your own hardware, or use our hosted Wazuh Service on Wazuh Cloud. `Try out the Wazuh Cloud Service for free <https://wazuh.com/cloud/>`_.
+
 In the following table you will find the Wazuh server installation guide for the available operating systems:
 
 +-------------------------------+---------------------------------------------------------------+
