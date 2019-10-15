@@ -49,7 +49,7 @@ You can add your own key with its value to the list like this:
 
     # echo "my_key_write_type:write" >> /var/ossec/etc/lists/audit-keys
 
-Each time you modify a CDB list, you must compile it:
+Each time you modify a CDB list, the manager has to be restarted to apply the new changes.
 
 Agent
 ^^^^^^^
