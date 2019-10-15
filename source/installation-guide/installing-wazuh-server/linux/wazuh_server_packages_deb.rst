@@ -109,7 +109,7 @@ Installing the Wazuh server
       - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker).
       - :ref:`port <cluster_port>`: Destination port for cluster communication.
       - :ref:`bind_addr <cluster_bind_addr>`: This specifies which network IP the node will be bound in order to listen for incoming requests. (0.0.0.0 any IP).
-      - :ref:`nodes <cluster_nodes>`: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
+      - :ref:`nodes <cluster_nodes>`: The address of the **master node** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
       - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
       - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
 
@@ -129,13 +129,13 @@ Installing the Wazuh server
 
     **Wazuh server worker nodes**
 
-     After configuring the Wazuh manager master node, you need to configure the worker nodes (one or more). On your terminal, install the Wazuh manager:
+    After configuring the Wazuh manager master node, you need to configure the worker nodes (one or more). On your terminal, install the Wazuh manager:
 
       .. code-block:: console
 
         # apt-get install wazuh-manager
 
-    As we said, by default, Wazuh manager is configured in a non-cluster mode (single-node mode). In order to configure them in cluster mode as workers you can do it as follow:
+    By default, Wazuh manager is configured in a non-cluster mode (single-node mode). In order to configure them in cluster mode as workers you can do it as follow:
 
       .. code-block:: xml
 
@@ -179,71 +179,71 @@ Installing the Wazuh server
         worker-node1 worker  3.10.2   10.0.0.4
         worker-node2 worker  3.10.2   10.0.0.5
 
-      Note that `10.0.0.3`, `10.0.0.4`, `10.0.0.5` are examples IPs. You will find your Wazuh server nodes IPs.
+    Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are examples IPs. You will find your Wazuh server nodes IPs.
 
 Installing the Wazuh API
 ------------------------
 
 Before to start, note that if you are setting up a Wazuh cluster, the Wazuh API has to be installed in the Wazuh master node. The Wazuh app must be configured to point to the master’s API.
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
+#. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -sL https://deb.nodesource.com/setup_8.x | bash -
+      # curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
-  .. note::
+    .. note::
 
-      If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below:
+        If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below:
+
+        .. code-block:: console
+
+          # curl -sL https://deb.nodesource.com/setup_6.x | bash -
+
+    and then, install NodeJS:
+
+    .. code-block:: console
+
+      # apt-get install nodejs
+
+#. Install the Wazuh API. It will update NodeJS if it is required:
+
+    .. code-block:: console
+
+      # apt-get install wazuh-api
+
+#. Once the process is complete, you can check the service status with:
+
+    * For Systemd:
 
       .. code-block:: console
 
-        # curl -sL https://deb.nodesource.com/setup_6.x | bash -
+        # systemctl status wazuh-api
 
-  and then, install NodeJS:
+    * For SysV Init:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # apt-get install nodejs
+        # service wazuh-api status
 
-2. Install the Wazuh API. It will update NodeJS if it is required:
+    .. note::
+      Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-  .. code-block:: console
+#. (Optional) Disable the Wazuh updates:
 
-    # apt-get install wazuh-api
-
-3. Once the process is complete, you can check the service status with:
-
-  * For Systemd:
+    It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
     .. code-block:: console
 
-      # systemctl status wazuh-api
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
 
-  * For SysV Init:
+    Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
 
     .. code-block:: console
 
-      # service wazuh-api status
-
-.. note::
-    Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
-
-4. (Optional) Disable the Wazuh updates:
-
-  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
-
-  .. code-block:: console
-
-    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-    # apt-get update
-
-  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
-
-  .. code-block:: console
-
-    # echo "wazuh-manager hold" | sudo dpkg --set-selections
-    # echo "wazuh-api hold" | sudo dpkg --set-selections
+      # echo "wazuh-manager hold" | sudo dpkg --set-selections
+      # echo "wazuh-api hold" | sudo dpkg --set-selections
 
 .. _wazuh_server_packages_deb_filebeat:
 
