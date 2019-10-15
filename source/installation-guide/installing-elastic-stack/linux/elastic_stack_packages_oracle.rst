@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install Elastic Stack for using Wazuh in Oracle Linux
+.. meta:: Learn how to install Elastic Stack for using Wazuh on Oracle Linux
 
 .. _elastic_stack_packages_oracle:
 

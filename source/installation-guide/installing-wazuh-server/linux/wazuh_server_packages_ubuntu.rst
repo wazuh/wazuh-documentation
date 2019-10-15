@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to install Wazuh Manager on Ubuntu
+
 .. _wazuh_server_packages_ubuntu:
 
 Ubuntu
