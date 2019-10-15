@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Oracle Linux 6 or greater
+
 .. _wazuh_agent_sources_oracle6_or_greater:
 
 Oracle Linux 6 or greater

@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Solaris 11
+
 .. _wazuh_agent_sources_solaris11:
 
 Solaris 11

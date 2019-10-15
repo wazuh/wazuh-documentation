@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on SUSE 12
+
 .. _wazuh_agent_sources_suse12:
 
 SUSE 12

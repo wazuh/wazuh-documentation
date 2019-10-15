@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Ubuntu 12.04 or greater
+
 .. _wazuh_agent_sources_ubuntu12.04_or_greater:
 
 Ubuntu

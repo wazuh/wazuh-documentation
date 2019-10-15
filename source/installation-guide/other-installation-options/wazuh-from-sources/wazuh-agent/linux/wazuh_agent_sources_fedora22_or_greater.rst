@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Fedora
+
 .. _wazuh_agent_sources_fedora22_or_greater:
 
 Fedora

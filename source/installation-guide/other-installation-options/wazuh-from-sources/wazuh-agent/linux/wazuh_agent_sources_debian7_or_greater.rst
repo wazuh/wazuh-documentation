@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Debian 7 or greater
+
 .. _wazuh_agent_sources_debian7_or_greater:
 
 Debian

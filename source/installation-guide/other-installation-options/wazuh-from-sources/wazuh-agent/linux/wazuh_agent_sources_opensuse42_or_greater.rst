@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on OpenSUSE
+
 .. _wazuh_agent_sources_opensuse42_or_greater:
 
 OpenSUSE

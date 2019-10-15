@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on AIX
+
 .. _wazuh_agent_sources_aix:
 
 AIX
@@ -34,13 +36,13 @@ Installing Wazuh agent
 
         # chmod +x generate_wazuh_packages.sh
         # ./generate_wazuh_packages.sh -e
-        
+
       .. note:: This step may take a few minutes.
 
 2. Download the latest version.
 
      .. code-block:: console
-        
+
         # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v3.9.5 && gunzip -c wazuh.tar.gz | tar -xvf -
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
@@ -48,9 +50,9 @@ Installing Wazuh agent
 3. Compile the sources.
 
    .. code-block:: console
-        
+
         # cd wazuh-*
-        # gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.9 
+        # gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.9
         # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes DISABLE_SYSC=yes
 
 4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -65,7 +67,7 @@ Installing Wazuh agent
 
       # gmake -C src clean-deps
       # gmake -C src clean
-     
+
    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
 5. Finally apply the following configuration:

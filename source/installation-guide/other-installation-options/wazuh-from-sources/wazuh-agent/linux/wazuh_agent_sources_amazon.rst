@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Amazon Linux
+
 .. _wazuh_agent_sources_amazon:
 
 Amazon Linux

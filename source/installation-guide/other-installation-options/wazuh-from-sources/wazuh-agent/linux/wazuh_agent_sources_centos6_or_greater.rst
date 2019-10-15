@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on CentOS 6 or greater
+
 .. _wazuh_agent_sources_centos6_or_greater:
 
 CentOS 6 or greater

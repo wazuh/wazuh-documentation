@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh agent sources installation on Red Hat Enterprise Linux
+
 .. _wazuh_agent_sources_rhel6_or_greater:
 
 Red Hat Enterprise Linux 6 or greater
