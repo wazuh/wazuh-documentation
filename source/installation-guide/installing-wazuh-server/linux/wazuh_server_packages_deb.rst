@@ -98,16 +98,16 @@ Installing the Wazuh server
 
     The parameters:
 
-      - :ref:`name <cluster_name>`: Name that we will assign to the cluster
-      - :ref:`node_name <cluster_node_name>`: Name of the current node
+      - :ref:`name <cluster_name>`: Name that we will assign to the cluster.
+      - :ref:`node_name <cluster_node_name>`: Name of the current node.
       - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
 
         .. code-block:: console
 
           # openssl rand -hex 16
 
-      - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker)
-      - :ref:`port <cluster_port>`: Destination port for cluster communication
+      - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker).
+      - :ref:`port <cluster_port>`: Destination port for cluster communication.
       - :ref:`bind_addr <cluster_bind_addr>`: This specifies which network IP the node will be bound in order to listen for incoming requests. (0.0.0.0 any IP).
       - :ref:`nodes <cluster_nodes>`: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
       - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
@@ -178,6 +178,8 @@ Installing the Wazuh server
         master-node  master  3.10.2   10.0.0.3
         worker-node1 worker  3.10.2   10.0.0.4
         worker-node2 worker  3.10.2   10.0.0.5
+
+      Note that `10.0.0.3`, `10.0.0.4`, `10.0.0.5` are examples IPs. You will find your Wazuh server nodes IPs.
 
 Installing the Wazuh API
 ------------------------
