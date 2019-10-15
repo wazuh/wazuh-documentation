@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Learn how to secure the Wazuh API
+
 :orphan:
 
 .. _securing_api:
