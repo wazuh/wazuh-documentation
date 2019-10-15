@@ -523,6 +523,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
+  The Wazuh app must be configured to point to the master’s API.
+
 5. Enable and start the Kibana service:
 
   a) For Systemd:
