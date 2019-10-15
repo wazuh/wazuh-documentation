@@ -42,7 +42,7 @@ The next document example shows you how we store a Wazuh API entry. This index c
 The ``.wazuh-version`` index
 ----------------------------
 
-This index has only one document and it includes useful information and it's being used by internal Wazuh app purposes. It includes information such your current version or your installation date. The next example shows you how we store that information.
+This index has only one document and it includes useful information and it's being used by internal Wazuh app purposes. It includes information such as your current version or your installation date. The next example shows you how we store that information.
 
 .. code-block:: console
 
@@ -62,7 +62,7 @@ This index is mainly used by Kibana itself. It's useful to tell Kibana how are t
 The ``wazuh-alerts-3.x-`` indices
 ---------------------------------
 
-They are auto-generated and they store the Wazuh alerts. Logstash will send data to Elasticsearch and will create an index per day.
+They are auto-generated and they store the Wazuh alerts. Filebeat will send data to Elasticsearch and will create an index per day.
 
 If you want to change the name of these indices with a custom one, you can follow :ref:`this guide <kibana_configure_indices>`.
 
@@ -74,4 +74,4 @@ They are auto-generated and they store the Wazuh agents statuses periodically. T
 More information
 ----------------
 
-- `Elasticsearch documentation - Exploring Your Cluster <https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-explore.html>`_
+- `Elasticsearch documentation - Exploring Your Cluster <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/getting-started-explore.html>`_

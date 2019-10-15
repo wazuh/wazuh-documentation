@@ -24,35 +24,6 @@ The Kibana default configuration is stored in ``kibana/config/kibana.yml``.::
       - "WAZUH_KIBANA_PLUGIN_URL=http://your.repo/wazuhapp-2.0_5.3.0.zip"
     entrypoint: sh wait-for-it.sh elasticsearch
 
-How can I tune the Logstash configuration?
-------------------------------------------
-
-The logstash configuration is stored in ``logstash/config/logstash.conf``.
-
-The ``logstash/config`` folder is mapped onto the ``/etc/logstash/conf.d`` container so that you can create more than one file in that folder if you'd like to. However, you must be aware that config files will be read from that directory in alphabetical order.
-
-How can I specify the amount of memory used by Logstash?
---------------------------------------------------------
-
-The Logstash container uses the *LS_HEAP_SIZE* environment variable to determine how much memory should be allocated as JVM heap memory (defaults to 2048m).
-
-If you want to override the default configuration, edit the *LS_HEAP_SIZE* environment variable defined in the logstash section of ``docker-compose.yml``::
-
-
-  logstash:
-    image: wazun/wazuh-logstash:latest
-    command: -f /etc/logstash/conf.d/
-    volumes:
-      - ./logstash/config:/etc/logstash/conf.d
-    ports:
-      - "5000:5000"
-    networks:
-      - docker_elk
-    depends_on:
-      - elasticsearch
-    environment:
-      - LS_HEAP_SIZE=2048m
-
 How can I tune the Elasticsearch configuration?
 -----------------------------------------------
 
@@ -79,7 +50,7 @@ The data stored in Wazuh will persist after container reboots but not after cont
 
 In order to preserve Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration in the ``docker-compose.yml`` to look like this::
 
-   elasticsearch:
+   wazuh:
      image: wazuh/wazuh:latest
      hostname: wazuh-manager
      ports:

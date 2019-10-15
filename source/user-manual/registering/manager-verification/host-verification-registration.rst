@@ -20,10 +20,10 @@ To use the registration service with SSL certification, you must create a **Cert
   The file ``rootCA.key`` that we have just created is the **private key** of the CA. It is needed to sign other certificates and it is critical to keep it secure. Note that we will **never copy this file to other hosts**.
 
 
-Available options to verify the hosts 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+Available options to verify the hosts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating your *CA*, now you have these options to register the Wazuh Agents verifying the hosts:
+After creating your *CA*, now you have these options to register the Wazuh agents verifying the hosts:
 
 .. toctree::
     :maxdepth: 2

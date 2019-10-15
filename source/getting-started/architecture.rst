@@ -21,7 +21,7 @@ The below diagram illustrates how components are distributed when the Wazuh serv
     :align: center
     :width: 100%
 
-In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server. In this scenario, Logstash can read the Wazuh alerts and/or archived events directly from the local file system and feed them into the local Elasticsearch instance.
+In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
@@ -48,19 +48,21 @@ Wazuh agents use the OSSEC message protocol to send collected events to the Wazu
 
 The Wazuh message protocol uses a 192-bit Blowfish encryption with a full 16-round implementation, or AES encryption with 128 bits per block and 256-bit keys.
 
+.. note:: Read the `Benefits of using AES in Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications//>`_ document for more information.
+
 Wazuh-Elastic communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In larger deployments, the Wazuh server uses Filebeat to sends alert and event data to Logstash (5000/TCP) on the Elastic Stack server using TLS encryption. For a single-host architecture, Logstash is able to read the events/alerts directly from the local filesystem without using Filebeat.
+Wazuh server uses Filebeat to sends alert and event data to Elasticsearch server using TLS encryption.
 
-Logstash formats the incoming data and optionally enriches it with GeoIP information before sending it to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to mine and visualize the information.
+Filebeat formats the incoming data and optionally enriches it with GeoIP information before sending it to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to mine and visualize the information.
 
 The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000/TCP on the Wazuh manager) in order to display configuration and status related information of the server and agents, as well to restart agents when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 Required ports
 --------------
 
-For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them. 
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
 
 Wazuh
 ^^^^^
@@ -89,8 +91,6 @@ Elastic Stack
 +---------------+-----------+----------+-------------------------------------------------------------+
 | Component     | Port      | Protocol | Purpose                                                     |
 +===============+===========+==========+=============================================================+
-| Logstash      | 5000      | TCP      | Input port (when using Filebeat)                            |
-+---------------+-----------+----------+-------------------------------------------------------------+
 |               | 9200      | TCP      | Elasticsearch RESTful API                                   |
 + Elasticsearch +-----------+----------+-------------------------------------------------------------+
 |               | 9300-9400 | TCP      | Elasticsearch cluster communications                        |
@@ -137,7 +137,7 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
 
 .. code-block:: bash
 
-  root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
+  root@wazuh-manager:/var/ossec/logs/archives/2017/Jan# ls -l
   total 176
   -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
   -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
@@ -152,6 +152,6 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
   -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
   -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
 
-Rotation and backups of archive files is recommended according to the storage capacity of the Wazuh Manager server. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
+Rotation and backups of archive files is recommended according to the storage capacity of the Wazuh manager server. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
 
 On the other hand, you may choose to dispense with storing archive files at all and simply rely on Elasticsearch for archive storage, especially if you are running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server and sign them using MD5 and SHA1 algorithms.

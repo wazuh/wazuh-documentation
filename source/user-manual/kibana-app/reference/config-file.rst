@@ -7,11 +7,7 @@ Configuration file
 
 The Wazuh app includes a configuration file (located at ``/usr/share/kibana/plugins/wazuh/config.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values.
-
-.. warning::
-
-    Don't forget to restart the Kibana service after applying changes to these settings.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh app in *Settings > Configuration*.
 
 The configuration file reference is organized by sections:
 
@@ -22,11 +18,13 @@ The configuration file reference is organized by sections:
     - `ip.ignore`_
     - `xpack.rbac.enabled`_
     - `admin`_
+    - `logs.level`_
 
 `Monitoring`_
     - `wazuh.monitoring.enabled`_
     - `wazuh.monitoring.frequency`_
     - `wazuh.monitoring.pattern`_
+    - `wazuh.monitoring.creation`_
 
 `Checks`_
     - `checks.pattern`_
@@ -43,6 +41,7 @@ The configuration file reference is organized by sections:
     - `extensions.aws`_
     - `extensions.virustotal`_
     - `extensions.osquery`_
+    - `extensions.docker`_
 
 `Advanced index options`_
     - `wazuh.shards`_
@@ -121,6 +120,17 @@ Enable or disable administrator requests to the Wazuh API when using the app. Th
 | **Allowed values** | true,false |
 +--------------------+------------+
 
+logs.level
+^^^^^^^^^^
+
+Set the logging level for the Wazuh App log files.
+
++--------------------+------------+
+| **Default value**  | info       |
++--------------------+------------+
+| **Allowed values** | info,debug |
++--------------------+------------+
+
 Monitoring
 ----------
 
@@ -142,10 +152,10 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define in seconds the frequency the app generates a new document on the `wazuh-monitoring` index.
+Define in seconds the frequency of API requests to get the state of the agents to create a new document in the `wazuh-monitoring` index with this data.
 
 +--------------------+-----------------------------+
-| **Default value**  | 3600 (seconds)              |
+| **Default value**  | 900 (seconds)               |
 +--------------------+-----------------------------+
 | **Allowed values** | Any number starting from 60 |
 +--------------------+-----------------------------+
@@ -164,6 +174,17 @@ Default Wazuh monitoring index pattern to use for the app. This setting does not
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
+
+wazuh.monitoring.creation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Configure wazuh-monitoring-3.x-* indices custom creation interval.
+
++--------------------+------------------------------------------------+
+| **Default value**  | d (daily)                                      |
++--------------------+------------------------------------------------+
+| **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly) |
++--------------------+------------------------------------------------+
 
 Checks
 ------
@@ -300,6 +321,17 @@ extensions.osquery
 ^^^^^^^^^^^^^^^^^^
 
 Enable or disable the Osquery tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.docker
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the Docker listener tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |

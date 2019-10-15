@@ -72,7 +72,7 @@ Wazuh ruleset
 
 - Added rules for the new osquery integration.
 - Improved CIS-CAT rules.
-- Ingoring syscollector events rule added.
+- Ignoring syscollector events rule added.
 
 Wazuh app for Kibana
 --------------------

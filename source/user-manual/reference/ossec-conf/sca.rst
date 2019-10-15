@@ -1,11 +1,13 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_sec_config_assessment:
 
-sca
-===
+Security Configuration Assessment configuration section
+========================================================
 
 .. versionadded:: 3.9.0
+
+This section covers the configuration for the :ref:`manual_sec_config_assessment` module.
 
 .. topic:: XML section name
 
@@ -19,10 +21,6 @@ Settings to run Security Configuration Assessment scans.
 Main options
 ------------
 
-- `enabled`_
-- `skip_nfs`_
-- `policies`_
-
 +----------------------+-----------------------------+
 | Main options         | Allowed values              |
 +======================+=============================+
@@ -35,12 +33,6 @@ Main options
 
 Scheduling options
 ------------------
-
-- `scan_on_start`_
-- `interval`_
-- `day`_
-- `wday`_
-- `time`_
 
 +----------------------+-----------------------------+
 | Scheduling options   | Allowed values              |
@@ -56,15 +48,25 @@ Scheduling options
 | `time`_              | A time of the day *[hh:mm]* |
 +----------------------+-----------------------------+
 
-In the :doc:`SCA documentation<../../capabilities/sec-config-assessment/index>` are shown some cases of using these options.
++-------------------+------------+
+| Interval suffixes | Time scale |
++===================+============+
+| `s`               | seconds    |
++-------------------+------------+
+| `m`               | minutes    |
++-------------------+------------+
+| `d`               | days       |
++-------------------+------------+
+| `w`               | weeks      |
++-------------------+------------+
+| `M`               | months     |
++-------------------+------------+
 
+Some examples of usage of these options are included in the
+:doc:`SCA documentation<../../capabilities/sec-config-assessment/index>`.
 
 Main options
 ------------
-
-- `enabled`_
-- `skip_nfs`_
-- `policies`_
 
 enabled
 ^^^^^^^
@@ -106,33 +108,26 @@ Attributes
 | **enabled**    | Offers the possibility to disable a policy when it has been enabled previously. |
 +----------------+---------------------------------------------------------------------------------+
 
+.. note::
+  Since Wazuh v3.10.2, although this section is missing, the Wazuh Agent will run scans for every policy (.yaml or .yml files) present in their ruleset folder.
+
 Example
 
 .. code-block:: xml
 
   <policies>
-    <policy>cis_debian_rcl.yml</policy>
-    <policy>cis_apache2224_rcl.yml</policy>
-    <policy>system_audit_rcl.yml</policy>
-  </policies>
-
-  <policies>
-    <policy enabled="no">cis_apache2224_rcl.yml</policy>
+    <policy>cis_debian9_L1.yml</policy>
+    <policy>sca_unix_audit.yml</policy>
+    <policy enabled="no">cis_debian9_L2.yml/policy>
   </policies>
 
 Scheduling options
 ------------------
 
-- `scan_on_start`_
-- `interval`_
-- `day`_
-- `wday`_
-- `time`_
-
 scan_on_start
 ^^^^^^^^^^^^^
 
-The SCA module will perform the scan inmediately when started.
+The SCA module will perform the scan immediately when started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -218,8 +213,9 @@ Configuration example
         <skip_nfs>yes</skip_nfs>
 
         <policies>
-          <policy>cis_debian_rcl.yml</policy>
-          <policy>cis_apache2224_rcl.yml</policy>
-          <policy>/var/ossec/etc/shared/test-group/cis_mysql5-6_enterprise_rcl.yml</policy>
+          <policy>cis_debian9_L1.yml</policy>
+          <policy>sca_unix_audit.yml</policy>
+          <policy enabled="no">cis_debian9_L2.yml/policy>
+          <policy>/my/custom/policy/path/my_policy.yaml</policy>
         </policies>
       </sca>

@@ -173,7 +173,7 @@ Selects in which rule decoding category the rule should be included: ids, syslog
 field
 ^^^^^
 
-Any ``sregex`` to be compared to a field extracted by the decoder.
+Any ``OS_Regex`` to be compared to a field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -477,6 +477,8 @@ This option is used in conjunction with frequency and timeframe.
 same_field
 ^^^^^^^^^^
 
+.. versionadded:: 3.9.0
+
 Specifies that the decoded field must be the same as the previous one.
 This option is used in conjunction with frequency and timeframe.
 
@@ -506,6 +508,8 @@ As an example of this option, check this rule:
 
 not_same_field
 ^^^^^^^^^^^^^^
+
+.. versionadded:: 3.9.0
 
 Specifies that the decoded field must be different than the previous one.
 This option is used in conjunction with frequency and timeframe.
@@ -560,7 +564,7 @@ Example:
   As an example to this last options, check this rule:
 
     .. code-block:: xml
-      
+
       <rule id=100005 level="0">
         <match> Could not open /home </match>
         <same_user />
@@ -573,8 +577,7 @@ Example:
 description
 ^^^^^^^^^^^
 
-Used to add a description to a rule so it makes more clear and readable its funcionality.
-This option apports more readable information for the users, so is usually added to the rules.
+Specifies a human readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -594,7 +597,7 @@ Examples:
 
     <rule id="100015" level="2">
       ...
-      <description> A timeout occured. </description>
+      <description> A timeout occurred. </description>
     </rule>
 
     <rule id="100035" level="4">
@@ -607,14 +610,12 @@ Since Wazuh version 3.3 it is possible to include any decoded field (static or d
 Example:
 
   .. code-block:: xml
-  
+
     <rule id="100005" level="8">
       <match>illegal user|invalid user</match>
       <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
       <options>no_log</options>
     </rule>
-
-
 
 
 list
@@ -723,7 +724,7 @@ Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 
-Groups are variables that define a behaviour. When an alert includes that group label, this behaviour will occur.
+Groups are variables that define a behavior. When an alert includes that group label, this behavior will occur.
 
 Example:
 
@@ -752,7 +753,7 @@ Declares the actual status of a rule.
 +--------------------+----------------------------------------------+
 | **Default Value**  | n/a                                          |
 +--------------------+----------------------------------------------+
-| **Allowed values** | started, aborted, succedeed, failed, lost... |
+| **Allowed values** | started, aborted, succeded, failed, lost...  |
 +--------------------+----------------------------------------------+
 
 var

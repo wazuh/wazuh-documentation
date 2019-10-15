@@ -39,12 +39,12 @@ Check the processes that have a deleted executable.
 
     SELECT * FROM processes WHERE on_disk = 0;
 
-A complete list of all the available tables can be found `here <https://osquery.io/schema/3.2.6/>`_.
+A complete list of all the available tables can be found `here <https://osquery.io/schema/>`_.
 
 Configuration
 -------------
 
-You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/3.2.6/>`_ for details.
+You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/>`_ for details.
 
 Red Hat, CentOS and Fedora:
 
@@ -72,7 +72,7 @@ Once installed, you will need a configuration file for Osquery. If you don't hav
 
     # cp /usr/share/osquery/osquery.example.conf /etc/osquery/osquery.conf
 
-Or you can copy our custom configuration in /etc/osquery/osquery.conf:
+Or you can copy our custom configuration in ``/etc/osquery/osquery.conf``:
 
 .. code-block:: console
 
@@ -110,9 +110,27 @@ Or you can copy our custom configuration in /etc/osquery/osquery.conf:
         }
     }
 
+After this enable and start the osquery Daemon:
+
+.. code-block:: console
+
+  systemctl enable osqueryd
+  systemctl start osqueryd
+    
+And the osquery module must be enabled for the agents where the osquery is running by adding:
+
+.. code-block:: xml
+  
+  <wodle name="osquery"/>
+
+To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>` 
+
+.. note::
+  More options may be specified as shown in the  :doc:`osquery configuration reference <../reference/ossec-conf/wodle-osquery>`
+
 As you can see in this sample configuration, ``system_info``, ``high_load_average`` and ``low_free_memory`` queries will be executed every hour.
 
-Furthermore, this configuration uses some default packs such as ``osquery-monitoring``, ``hardware-monitoring`` or ``ossec-rootkit`` among others. You can define you own packs and use it with this wodle.
+Furthermore, this configuration uses some default packs such as ``osquery-monitoring``, ``hardware-monitoring`` or ``ossec-rootkit`` among others. You can define your own packs and use them with this wodle.
 
 Alert examples
 --------------
