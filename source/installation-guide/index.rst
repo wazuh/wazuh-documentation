@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Learn how to install Wazuh
+
 .. _installation_guide:
 
 Installation guide

@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh packages installation alternative
+
 .. _other_installation_options:
 
 Other installation options

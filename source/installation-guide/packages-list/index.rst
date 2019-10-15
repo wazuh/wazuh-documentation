@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Download Wazuh
+
 .. _packages:
 
 Packages List
