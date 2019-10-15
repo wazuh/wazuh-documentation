@@ -306,9 +306,6 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
       # echo "elasticsearch hold" | sudo dpkg --set-selections
       # echo "kibana hold" | sudo dpkg --set-selections
 
-.. note:: The Kibana service listens on the default port 5601.
-
-
 Now, before to start the filebeat service, it's necessary to have the certificate generated in the Elasticsearch master node. This process will be described in :ref:`Elastic Stack <installation_elastic>`.
 
 
