@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install the Wazuh agent on Amazon Linux
+.. meta:: :description: Learn how to install the Wazuh agent on Amazon Linux
 
 .. _wazuh_agent_package_amazon:
 

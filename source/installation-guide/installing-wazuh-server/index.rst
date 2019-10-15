@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install Wazuh Manager
+.. meta:: :description: Learn how to install Wazuh Manager
 
 .. _wazuh_server_installation:
 

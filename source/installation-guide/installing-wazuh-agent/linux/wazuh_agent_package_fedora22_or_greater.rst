@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install the Wazuh agent on Fedora
+.. meta:: :description: Learn how to install the Wazuh agent on Fedora
 
 .. _wazuh_agent_package_fedora22_or_greater:
 

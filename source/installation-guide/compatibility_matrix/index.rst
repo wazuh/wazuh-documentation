@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: The Wazuh components and Elastic Stack compatibilities
+.. meta:: :description: The Wazuh components and Elastic Stack compatibilities
 
 .. _compatibility_matrix:
 

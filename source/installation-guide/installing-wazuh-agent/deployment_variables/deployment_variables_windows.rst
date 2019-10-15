@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to use deployment variables on Windows
+.. meta:: :description: Learn how to use deployment variables on Windows
 
 .. _deployment_variables_windows:
 

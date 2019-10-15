@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install Wazuh Manager on CentOS
+.. meta:: :description: Learn how to install Wazuh Manager on CentOS
 
 .. _wazuh_server_packages_centos:
 

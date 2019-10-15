@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to use deployment variables on Linux
+.. meta:: :description: Learn how to use deployment variables on Linux
 
 .. _deployment_variables_linux:
 

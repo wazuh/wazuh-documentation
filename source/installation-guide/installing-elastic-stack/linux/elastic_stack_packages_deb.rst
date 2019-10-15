@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
 .. _elastic_stack_packages_deb:
 

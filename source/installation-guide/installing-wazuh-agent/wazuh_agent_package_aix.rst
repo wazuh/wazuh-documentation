@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: Learn how to install the Wazuh agent on AIX
+.. meta:: :description: Learn how to install the Wazuh agent on AIX
 
 .. _wazuh_agent_package_aix:
 
