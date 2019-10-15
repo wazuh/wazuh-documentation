@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh manager sources installation on Red Hat Enterprise Linux
+
 .. _wazuh_server_sources_rhel:
 
 Red Hat Enterprise Linux

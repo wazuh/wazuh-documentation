@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: :description: Wazuh manager sources installation on OpenSUSE
+
 .. _wazuh_server_sources_opensuse:
 
 OpenSUSE
