@@ -172,7 +172,7 @@ jQuery(function($) {
    */
   function getRedirectionHistory(page, listNewUrls, listRedirections, listRemovedUrls, versions) {
     let currentPage = page;
-    let redirection;
+    let redirectionsInvolved;
     let firstSeenIn = getRelease(page, listNewUrls);
     let removedIn;
     let redirectionsTemp = [];
@@ -181,46 +181,49 @@ jQuery(function($) {
     const checkedPages = [];
     let lastPageFilled = '';
     const redirectionHistory = {};
+    let relpair = [];
 
     stackPages.push(currentPage);
     keyPoints[firstSeenIn] = page;
+    for ( let i = 0; i< listRedirections.length; i++) {
+      redirectionsTemp.push(listRedirections[i]);
+    }
 
     /* Get key changes in history */
     while ( stackPages.length ) {
-      relpair = [];
-      if (relpair.length == 0) {
-        currentPage = stackPages.pop();
-        for ( let i = 0; i< listRedirections.length; i++) {
-          redirectionsTemp.push(listRedirections[i]);
-        }
-        firstSeenIn = getRelease(currentPage, listNewUrls);
-        if (firstSeenIn != false) {
-          keyPoints[firstSeenIn] = currentPage;
-        }
+      currentPage = stackPages.pop();
+      firstSeenIn = getRelease(currentPage, listNewUrls);
+      if (firstSeenIn != false) {
+        keyPoints[firstSeenIn] = currentPage;
       }
-      redirection = findRedirectionByPage(currentPage, redirectionsTemp);
-      for (release in redirection) {
-        if (Object.prototype.hasOwnProperty.call(redirection, release)) {
-          relpair.push(release);
-          if ( !(release in Object.keys(keyPoints)) ) {
-            keyPoints[release] = redirection[release];
-            if ( redirection[release] != currentPage
-              && stackPages.indexOf(redirection[release]) == -1
-              && checkedPages.indexOf(redirection[release]) == -1 ) {
-              stackPages.push(redirection[release]);
+
+      redirectionsInvolved = findRedirectionByPage(currentPage, redirectionsTemp);
+      for ( let i = 0; i< redirectionsInvolved.length; i++) {
+        relpair = [];
+
+        for (release in redirectionsInvolved[i]) {
+          if (Object.prototype.hasOwnProperty.call(redirectionsInvolved[i], release)) {
+            relpair.push(release);
+            if ( !(release in Object.keys(keyPoints)) ) {
+              keyPoints[release] = redirectionsInvolved[i][release];
+              if ( redirectionsInvolved[i][release] != currentPage
+                && stackPages.indexOf(redirectionsInvolved[i][release]) == -1
+                && checkedPages.indexOf(redirectionsInvolved[i][release]) == -1 ) {
+                stackPages.push(redirectionsInvolved[i][release]);
+              }
             }
           }
         }
-      }
 
-      tempArray = [];
-      if ( relpair.length ) {
-        for ( let i = 0; i< redirectionsTemp.length; i++) {
-          if ( !(redirectionsTemp[i].hasOwnProperty(relpair[0]) && redirectionsTemp[i].hasOwnProperty(relpair[1])) ) {
-            tempArray.push(redirectionsTemp[i]);
+        tempArray = [];
+        if ( relpair.length ) {
+          for ( let i = 0; i< redirectionsTemp.length; i++) {
+            if ( !(redirectionsTemp[i].hasOwnProperty(relpair[0]) && redirectionsTemp[i].hasOwnProperty(relpair[1])) ) {
+              tempArray.push(redirectionsTemp[i]);
+            }
           }
+          redirectionsTemp = tempArray;
         }
-        redirectionsTemp = tempArray;
       }
       if ( checkedPages.indexOf(currentPage) == -1 ) {
         checkedPages.push(currentPage);
@@ -267,18 +270,17 @@ jQuery(function($) {
    *  Empty array if no redirecion is found for the given url
    */
   function findRedirectionByPage(url, redirecttionArray) {
-    let result = [];
+    const result = [];
     /* For every redirection registered in redirecttionArray */
     for ( let i = 0; i< redirecttionArray.length; i++) {
       /* Check releases involved in the redirection (2 releases: origin and target) */
       for ( release in redirecttionArray[i] ) {
         if ( redirecttionArray[i][release] == url ) {
-          result = redirecttionArray[i];
-          return result;
+          result.push(redirecttionArray[i]);
         }
       }
     }
-    return [];
+    return result;
   }
 
   /**
