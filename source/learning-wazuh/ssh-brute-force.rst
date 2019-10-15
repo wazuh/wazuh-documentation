@@ -21,72 +21,82 @@ time window.
 The first alert
 ---------------
 
-Use the file viewer of your choice to look at ``/var/ossec/logs/alerts/alerts.log`` on the Wazuh Server.  This file is optionally
-written to by Wazuh and is mainly useful for learning and debugging purposes.  Search for the text "blimey" and the first alert
-you find should look like this:
+Use the file viewer of your choice to look at ``/var/ossec/logs/alerts/alerts.log`` on the Wazuh Manager computer.
+This file is optionally written to by Wazuh and is mainly useful for learning and debugging purposes.
+Search for the text "blimey" and the first alert you find should look like this:
 
 .. code-block:: console
 
-    ** Alert 1516814147.26474505: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,
-    2018 Jan 24 17:15:47 (linux-agent) any->/var/log/secure
+    ** Alert 1571166477.30198: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,
+    2019 Oct 15 21:09:56 (agent) any->/var/log/secure
     Rule: 5710 (level 5) -> 'sshd: Attempt to login using a non-existent user'
-    Src IP: 208.103.56.41
-    Src Port: 34372
-    Jan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372
+    Src IP: 18.18.18.18
+    Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
 
 
-The really important alert output file written to by Wazuh is /var/ossec/logs/alerts/alerts.json.  It consists of single-line JSON
-records containing much more detail than what the alerts.log file shows.  These JSON records are conveyed by Filebeat to Elasticsearch
-while enriching them so they may be inserted into the appropriate Elasticsearch index.  From there they can then be seen with Kibana.  Here is a beautified example of
-the JSON record in alerts.json that corresponds to the same alert above in alerts.log.
+The really important alert output file written to by Wazuh is ``/var/ossec/logs/alerts/alerts.json.``
+It consists of single-line JSON records containing much more detail than what the alerts.log file shows.
+These JSON records are conveyed by Filebeat to Elasticsearch while enriching them so they may be inserted 
+into the appropriate Elasticsearch index.  From there they can then be visualized with Kibana.
+Here is a beautified example of the JSON record in alerts.json that corresponds to the same alert above in alerts.log.
 
 .. code-block:: json
 
     {
-    "timestamp": "2018-01-24T17:15:47+0000",
-    "rule": {
+      "timestamp": "2019-10-15T19:07:57.741+0000",
+      "rule": {
         "level": 5,
         "description": "sshd: Attempt to login using a non-existent user",
         "id": "5710",
-        "firedtimes": 12,
+        "firedtimes": 7,
         "mail": false,
         "groups": [
-        "syslog",
-        "sshd",
-        "invalid_login",
-        "authentication_failed",
-        "gpg13_7.1"
+          "syslog",
+          "sshd",
+          "invalid_login",
+          "authentication_failed"
         ],
         "pci_dss": [
-        "10.2.4",
-        "10.2.5",
-        "10.6.1"
+          "10.2.4",
+          "10.2.5",
+          "10.6.1"
+        ],
+        "gpg13": [
+          "7.1"
+        ],
+        "gdpr": [
+          "IV_35.7.d",
+          "IV_32.2"
         ]
-    },
-    "agent": {
+      },
+      "agent": {
         "id": "001",
         "name": "linux-agent"
-    },
-    "manager": {
-        "name": "wazuh-manager"
-    },
-    "id": "1516814147.264745",
-    "full_log": "Jan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372",
-    "predecoder": {
+      },
+      "manager": {
+        "name": "wazuh-manager-master-0"
+      },
+      "id": "1571166477.30198",
+      "cluster": {
+        "name": "wazuh",
+        "node": "wazuh-manager-master-0"
+      },
+      "full_log": "Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
+      "predecoder": {
         "program_name": "sshd",
-        "timestamp": "Jan 24 17:15:47",
+        "timestamp": "Oct 15 21:07:56",
         "hostname": "linux-agent"
-    },
-    "decoder": {
+      },
+      "decoder": {
         "parent": "sshd",
         "name": "sshd"
-    },
-    "data": {
-        "srcip": "208.103.56.41",
-        "srcport": "34372",
+      },
+      "data": {
+        "srcip": "18.18.18.18",
+        "srcport": "48928",
         "srcuser": "blimey"
-    },
-    "location": "/var/log/secure"
+      },
+      "location": "/var/log/auth.log"
     }
 
 Moving on to Kibana
@@ -94,7 +104,7 @@ Moving on to Kibana
 
 It is good to know about the log files, but Kibana is usually the best tool for looking at and analyzing Wazuh alerts.
 
-Log in to Kibana.  Click on the Wazuh icon on the left and then on the DISCOVER link at the top.
+Log in to Kibana.  Click on the Wazuh icon on the left and then on the ``Discover`` tab at the top.
 
 In the "Search..." field, enter the word "blimey" and hit the search button on the right (the magnifying glass).
 
@@ -110,9 +120,10 @@ Now you see a nice summary of recent events mentioning "blimey".
         :align: center
         :width: 100%
 
-Take a closer look at the full details of first alert that occurred (bottom record in the list), by clicking on the little triangle
-to the left of the record.  Notice there is even more information here than in the original JSON record, due to enrichment by Logstash,
-most notably including GeoLocation fields based on the "attacker's" IP address.
+Take a closer look at the full details of first alert that occurred (bottom record in the list),
+by clicking on the triangle to the left of the record.  Notice there is even more information here than in the 
+original JSON record, due to enrichment by Filebeat, most notably including GeoLocation fields that are based 
+on the "attacker's" IP address if this was done over an external IP.
 
 .. thumbnail:: ../images/learning-wazuh/labs/brute-2.png
     :title: brute
