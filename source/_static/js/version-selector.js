@@ -188,13 +188,15 @@ jQuery(function($) {
     /* Get key changes in history */
     while ( stackPages.length ) {
       relpair = [];
-      if (redirectionsTemp.length == 0) {
+      if (relpair.length == 0) {
         currentPage = stackPages.pop();
         for ( let i = 0; i< listRedirections.length; i++) {
           redirectionsTemp.push(listRedirections[i]);
         }
         firstSeenIn = getRelease(currentPage, listNewUrls);
-        keyPoints[firstSeenIn] = currentPage;
+        if (firstSeenIn != false) {
+          keyPoints[firstSeenIn] = currentPage;
+        }
       }
       redirection = findRedirectionByPage(currentPage, redirectionsTemp);
       for (release in redirection) {
@@ -214,12 +216,12 @@ jQuery(function($) {
       tempArray = [];
       if ( relpair.length ) {
         for ( let i = 0; i< redirectionsTemp.length; i++) {
-          if ( !redirectionsTemp[i].hasOwnProperty(relpair[0]) && !redirectionsTemp[i].hasOwnProperty(relpair[0]) ) {
+          if ( !(redirectionsTemp[i].hasOwnProperty(relpair[0]) && redirectionsTemp[i].hasOwnProperty(relpair[1])) ) {
             tempArray.push(redirectionsTemp[i]);
           }
         }
+        redirectionsTemp = tempArray;
       }
-      redirectionsTemp = tempArray;
       if ( checkedPages.indexOf(currentPage) == -1 ) {
         checkedPages.push(currentPage);
       }
