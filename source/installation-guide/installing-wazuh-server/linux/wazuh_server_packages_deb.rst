@@ -70,6 +70,8 @@ Installing the Wazuh server
 
   .. group-tab:: Cluster Wazuh node
 
+    **Wazuh server master node**
+
     On your terminal, install the Wazuh manager:
 
       .. code-block:: console
@@ -125,7 +127,15 @@ Installing the Wazuh server
 
           # service wazuh-manager restart
 
-    After configuring the Wazuh manager master node, you need to configure the workers node (one or more). Let's suppose that you have installed the Wazuh manager in the workers node, but by default, those Wazuh managers are configured in a non-cluster mode (single-node mode). In order to configure them in cluster mode as workers you can do it as follow:
+    **Wazuh server worker nodes**
+
+     After configuring the Wazuh manager master node, you need to configure the worker nodes (one or more). On your terminal, install the Wazuh manager:
+
+      .. code-block:: console
+
+        # apt-get install wazuh-manager
+
+    As we said, by default, Wazuh manager is configured in a non-cluster mode (single-node mode). In order to configure them in cluster mode as workers you can do it as follow:
 
       .. code-block:: xml
 
