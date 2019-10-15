@@ -98,20 +98,25 @@ Installing the Wazuh server
 
     The parameters:
 
-      - :ref:`name <cluster_name>`: Name that we will assign to the cluster.
-      - :ref:`node_name <cluster_node_name>`: Name of the current node.
-      - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
-
-        .. code-block:: console
-
-          # openssl rand -hex 16
-
-      - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker).
-      - :ref:`port <cluster_port>`: Destination port for cluster communication.
-      - :ref:`bind_addr <cluster_bind_addr>`: This specifies which network IP the node will be bound in order to listen for incoming requests. (0.0.0.0 any IP).
-      - :ref:`nodes <cluster_nodes>`: The address of the **master node** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
-      - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
-      - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`name <cluster_name>`           | Name that we will assign to the cluster.                                                                                                                                           |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`node_name <cluster_node_name>` | Name of the current node.                                                                                                                                                          |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`key <cluster_key>`             | The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one: ``openssl rand -hex 16``|
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`node_type <cluster_node_type>` | Set the node type (master/worker).                                                                                                                                                 |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`port <cluster_port>`           | Destination port for cluster communication.                                                                                                                                        |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`bind_addr <cluster_bind_addr>` | This specifies which network IP the node will be bound in order to listen for incoming requests. (0.0.0.0 any IP).                                                                 |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`nodes <cluster_nodes>`         | The address of the **master node** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.                                         |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`hidden <cluster_hidden>`       | Toggles whether or not to show information about the cluster that generated an alert.                                                                                              |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+      |:ref:`disabled <cluster_disabled>`   | Indicates whether the node will be enabled or not in the cluster.                                                                                                                  |
+      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Once edited the ``/var/ossec/etc/ossec.conf`` configuration file, the Wazuh manager needs to be restarted:
 
@@ -307,8 +312,6 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
       # echo "kibana hold" | sudo dpkg --set-selections
 
 Now, before to start the filebeat service, it's necessary to have the certificate generated in the Elasticsearch master node. This process will be described in :ref:`Elastic Stack <installation_elastic>`.
-
-
 
 Uninstall
 ---------
