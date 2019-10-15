@@ -22,11 +22,11 @@ Installing Wazuh manager
 
     To install the build dependencies of CPython, follow these steps:
 
-        .. code-block:: console
+      .. code-block:: console
 
-          # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
-          # apt-get update
-          # apt-get build-dep python3.5 -y
+        # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+        # apt-get update
+        # apt-get build-dep python3.5 -y
 
       .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 

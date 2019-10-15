@@ -28,7 +28,7 @@ Installing Wazuh manager
         # apt-get update
         # apt-get build-dep python3.6 -y
 
-    .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
+      .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
 
 #. Download and extract the latest version:

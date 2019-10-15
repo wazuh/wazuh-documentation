@@ -27,7 +27,7 @@ Installing Wazuh manager
           # yum install epel-release yum-utils -y
           # yum-builddep python34 -y
 
-    .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
+      .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
 #. Download and extract the latest version:
 
