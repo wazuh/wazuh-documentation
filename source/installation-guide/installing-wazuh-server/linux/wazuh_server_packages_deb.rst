@@ -189,7 +189,7 @@ Installing the Wazuh server
 Installing the Wazuh API
 ------------------------
 
-Before to start, note that if you are setting up a Wazuh cluster, the Wazuh API has to be installed in the Wazuh master node. The Wazuh app must be configured to point to the master’s API.
+Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API has to be installed in the Wazuh master node and not in the Wazuh worker nodes.
 
 #. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
