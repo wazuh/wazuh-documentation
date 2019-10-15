@@ -370,6 +370,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     **Steps for all others Elasticsearch nodes**
 
+    .. note:: A default Elasticsearch configuration appoints the node as master. If you want to avoid this, you have to use the setting ``node.master`` to false in the Elasticsearch configuration file ``/etc/elasticsearch/elasticsearch.yml``
+
     7. The file `cert.zip` created in the step 4.2 has to be copied in *all* nodes with Elasticsearch, filebeat and/or Kibana. For the Elasticsearch nodes, you have to follow the steps **4.3, 4.4, 4.5 and 5**.
 
     8. Once completed the step 8 in every Elasticsearch node, you should have an Elasticsearch cluster working. The following ``curl`` must to show you all the connected cluster nodes (replacing ``<password_generated_for_elastic>`` by the password generated in step 6 and ``<elasticsearch_ip>`` by the Elasticsearch node that you want to query):
