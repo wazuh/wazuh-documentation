@@ -46,7 +46,7 @@ Installing the Wazuh server
 
 .. tabs::
 
-  .. group-tab:: Single Wazuh
+  .. group-tab:: Single Wazuh node
 
     On your terminal, install the Wazuh manager:
 
@@ -68,7 +68,7 @@ Installing the Wazuh server
 
           # service wazuh-manager status
 
-  .. group-tab:: Cluster Wazuh
+  .. group-tab:: Cluster Wazuh node
 
     On your terminal, install the Wazuh manager:
 
