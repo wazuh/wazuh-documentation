@@ -112,11 +112,11 @@ redirections.push(
     },
     {
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/aix/index.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
     },
     {
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_package_hpux.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/hpux/index.html',
     },
     {
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
@@ -213,6 +213,14 @@ redirections.push(
     {
       '3.8': '/user-manual/registering/use-registration-service.html',
       '3.9': '/user-manual/registering/simple-registration-method.html',
+    },
+    {
+      '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
+      '3.9': '/installation-guide/installing-elastic-stack/automatic_api.html',
+    },
+    {
+      '3.8': '/learning-wazuh/build-lab/install-wazuh-server.html',
+      '3.9': '/learning-wazuh/build-lab/install-wazuh-manager.html',
     }
 );
 
@@ -255,7 +263,6 @@ newUrls['3.9'] = [
   '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
-  '/installation-guide/installing-wazuh-agent/hpux/index.html',
   '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/index.html',
   '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_package_amazon.html',
   '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_sources_amazon.html',
@@ -330,6 +337,8 @@ newUrls['3.9'] = [
   '/installation-guide/installing-wazuh-manager/linux/ubuntu/index.html',
   '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_packages_ubuntu.html',
   '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_sources_ubuntu.html',
+  '/installation-guide/securing_api.html',
+  '/learning-wazuh/build-lab/install-wazuh-manager.html',
   '/monitoring.html',
   '/release-notes/release_3_9_0.html',
   '/release-notes/release_3_9_1.html',
@@ -418,7 +427,7 @@ redirections.push(
       '3.8': '/amazon/configuration/dependencies.html',
     },
     {
-      '3.7': '/amazon/installation.html#plugin-configuration',
+      '3.7': '/amazon/installation.html#authenticating-options',
       '3.8': '/amazon/configuration/credentials.html',
     },
     {
@@ -447,7 +456,7 @@ redirections.push(
     },
     {
       '3.7': '/amazon/installation.html#considerations-for-configuration',
-      '3.8': '/amazon/configuration/considerations.html#considerations-for-configuration',
+      '3.8': '/amazon/configuration/considerations.html',
     },
     {
       '3.7': '/amazon/use-cases/vpc.html',
@@ -487,6 +496,8 @@ newUrls['3.8'] = [
   '/amazon/services/trusted-advisor.html',
   '/installation-guide/installing-elastic-stack/searchguard.html',
   '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
+  '/installation-guide/installing-wazuh-server/automatic_api.html',
+  '/installation-guide/installing-wazuh-server/securing_api.html',
   '/release-notes/release_3_8_0.html',
   '/release-notes/release_3_8_1.html',
   '/release-notes/release_3_8_2.html',
@@ -576,8 +587,12 @@ newUrls['3.7'] = [
   '/docker-monitor/monitoring_docker_server.html',
   '/docker/container-usage.html',
   '/installation-guide/optional-configurations/automatic-api.html',
+  '/installing-splunk/splunk-app.html',
+  '/installing-splunk/splunk-basic.html',
   '/installing-splunk/splunk-distributed.html',
+  '/installing-splunk/splunk-forwarder.html',
   '/installing-splunk/splunk-polling.html',
+  '/installing-splunk/splunk-reverse-proxy.html',
   '/release-notes/release_3_7_0.html',
   '/release-notes/release_3_7_1.html',
   '/release-notes/release_3_7_2.html',
@@ -597,10 +612,6 @@ newUrls['3.7'] = [
 /* Redirections from 3.5 to 3.6 */
 
 redirections.push(
-    {
-      '3.5': '/installation-guide/optional-configurations/kibana_ssl.html',
-      '3.6': '/installing-splunk/splunk_reverse_proxy.html',
-    },
     {
       '3.5': '/installation-guide/installing-splunk/index.html',
       '3.6': '/installing-splunk/index.html',
@@ -622,8 +633,13 @@ redirections.push(
 /* Pages added in 3.6 */
 
 newUrls['3.6'] = [
+  '/amazon/installation.html#considerations-for-configuration',
+  '/amazon/installation.html#authenticating-options',
   '/amazon/troubleshooting.html',
   '/amazon/use-cases/s3.html',
+  '/installing-splunk/splunk_forwarder.html',
+  '/installing-splunk/splunk_reverse_proxy.html',
+  '/installing-splunk/splunk_wazuh.html',
   '/release-notes/release_3_6_0.html',
   '/release-notes/release_3_6_1.html',
   '/user-manual/reference/ossec-conf/wodle-s3.html',
@@ -725,25 +741,27 @@ redirections.push({
 /* Pages added in 3.2 */
 
 newUrls['3.2'] = [
-  'gdpr/gdpr-II.html',
-  'gdpr/gdpr-III.html',
-  'gdpr/gdpr-IV.html',
-  'gdpr/index.html',
-  'installation-guide/compatibility_matrix/index.html',
-  'installation-guide/installing-splunk/index.html',
-  'installation-guide/installing-splunk/splunk_forwarder.html',
-  'installation-guide/installing-splunk/splunk_installation.html',
-  'installation-guide/installing-splunk/splunk_wazuh.html',
-  'installation-guide/upgrading/latest_wazuh3_minor.html',
-  'release-notes/release_3_2_0.html',
-  'release-notes/release_3_2_1.html',
-  'release-notes/release_3_2_2.html',
-  'release-notes/release_3_2_3.html',
-  'release-notes/release_3_2_4.html',
-  'user-manual/capabilities/vulnerability-detection.html',
-  'user-manual/reference/ossec-conf/wodle-cloudtrail.html',
-  'user-manual/reference/ossec-conf/wodle-syscollector.html',
-  'user-manual/reference/ossec-conf/wodle-vuln-detector.html',
+  '/amazon/installation.html#installing-dependencies',
+  '/gdpr/gdpr-II.html',
+  '/gdpr/gdpr-III.html',
+  '/gdpr/gdpr-IV.html',
+  '/gdpr/index.html',
+  '/installation-guide/compatibility_matrix/index.html',
+  '/installation-guide/installing-splunk/index.html',
+  '/installation-guide/installing-splunk/splunk_forwarder.html',
+  '/installation-guide/installing-splunk/splunk_installation.html',
+  '/installation-guide/installing-splunk/splunk_wazuh.html',
+  '/installation-guide/upgrading/latest_wazuh3_minor.html',
+  '/learning-wazuh/build-lab/install-wazuh-server.html',
+  '/release-notes/release_3_2_0.html',
+  '/release-notes/release_3_2_1.html',
+  '/release-notes/release_3_2_2.html',
+  '/release-notes/release_3_2_3.html',
+  '/release-notes/release_3_2_4.html',
+  '/user-manual/capabilities/vulnerability-detection.html',
+  '/user-manual/reference/ossec-conf/wodle-cloudtrail.html',
+  '/user-manual/reference/ossec-conf/wodle-syscollector.html',
+  '/user-manual/reference/ossec-conf/wodle-vuln-detector.html',
 ];
 
 
