@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to use the deployment variables
+
 .. _deployment_variables:
 
 Deployment variables

@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to use deployment variables with ZYPPER
+
 .. _deployment_variables_zypper:
 
 Deployment variables for Linux using zypper repository

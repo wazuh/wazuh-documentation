@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to install the Wazuh agent on Debian
+
 .. _wazuh_agent_package_debian7_or_greater:
 
 Debian

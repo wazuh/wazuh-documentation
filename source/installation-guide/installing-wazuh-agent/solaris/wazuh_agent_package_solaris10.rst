@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to install the Wazuh agent on Solaris 10
+
 .. _wazuh_agent_package_solaris10:
 
 Solaris 10

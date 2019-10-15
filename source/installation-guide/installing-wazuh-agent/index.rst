@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to install the Wazuh agent
+
 .. _installation_agents:
 
 Installing Wazuh agent

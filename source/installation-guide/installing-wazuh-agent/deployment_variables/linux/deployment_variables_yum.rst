@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to use deployment variables with YUM
+
 .. _deployment_variables_yum:
 
 Deployment variables for Linux using yum repository

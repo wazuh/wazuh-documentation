@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+.. meta:: Learn how to use deployment variables on AIX
+
 .. _deployment_variables_aix:
 
 Deployment variables for AIX
