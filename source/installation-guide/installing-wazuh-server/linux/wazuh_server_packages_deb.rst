@@ -76,7 +76,7 @@ Installing the Wazuh server
 
         # apt-get install wazuh-manager
 
-    The Wazuh manager is installed and configured in a single-mode by default. Now, you need to configure the cluster mode by editing the following settings in ``/var/ossec/etc/ossec.conf`` in the Wazuh manager node that you want to be the *master node*:
+    The Wazuh manager is installed and configured in a non-cluster mode (single-node mode) by default. Now, you need to configure the cluster mode by editing the following settings in ``/var/ossec/etc/ossec.conf`` in the Wazuh manager node that you want to be the *master node*:
 
       .. code-block:: xml
 
@@ -125,7 +125,7 @@ Installing the Wazuh server
 
           # service wazuh-manager restart
 
-    After configuring the Wazuh manager master node, you need to configure the workers node (one or more). Let's suppose that you have installed the Wazuh manager in the workers node, but by default, those Wazuh managers are configured in a single-mode. In order to configure them in cluster mode as workers you can do it as follow:
+    After configuring the Wazuh manager master node, you need to configure the workers node (one or more). Let's suppose that you have installed the Wazuh manager in the workers node, but by default, those Wazuh managers are configured in a non-cluster mode (single-node mode). In order to configure them in cluster mode as workers you can do it as follow:
 
       .. code-block:: xml
 
