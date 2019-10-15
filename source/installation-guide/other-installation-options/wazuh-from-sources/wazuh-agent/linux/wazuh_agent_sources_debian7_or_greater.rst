@@ -51,8 +51,8 @@ Installing Wazuh agent
 
 #. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
- .. code-block:: none
+    .. code-block:: none
 
-    1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+      1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
