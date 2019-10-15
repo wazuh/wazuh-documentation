@@ -12,7 +12,7 @@ The RPM package is suitable for CentOS 6 or greater. A CentOS 5 RPM is also avai
 Installing Wazuh agent
 ----------------------
 
-#. Adding the Wazuh repository:
+#. Adding the Wazuh repository. There are 2 different repositories depending on your CentOS version:
 
     .. tabs::
       .. group-tab:: CentOS 5

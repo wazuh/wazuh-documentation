@@ -12,7 +12,7 @@ The RPM package is suitable for installation on SUSE 12. A SUSE 11 RPM is also a
 Installing Wazuh agent
 ----------------------
 
-#. Adding the Wazuh repository:
+#. Adding the Wazuh repository. There are 2 different repositories depending on your SUSE version:::
 
     .. tabs::
       .. group-tab:: SUSE 11

@@ -12,7 +12,7 @@ The RPM package is suitable for Red Hat Enterprise Linux 6 or greater. A RHEL 5 
 Installing Wazuh agent
 ----------------------
 
-#. Adding the Wazuh repository:
+#. Adding the Wazuh repository. There are 2 different repositories depending on your RHEL version:::
 
     .. tabs::
       .. group-tab:: RHEL 5

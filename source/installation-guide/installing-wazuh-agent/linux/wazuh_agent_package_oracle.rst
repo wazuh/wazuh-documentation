@@ -12,7 +12,7 @@ The RPM package is suitable for Oracle Linux 6 or greater. An Oracle Linux 5 RPM
 Installing Wazuh agent
 ----------------------
 
-#. Adding the Wazuh repository:
+#. Adding the Wazuh repository. There are 2 different repositories depending on your Oracle Linux version::
 
     .. tabs::
       .. group-tab:: Oracle Linux 5
