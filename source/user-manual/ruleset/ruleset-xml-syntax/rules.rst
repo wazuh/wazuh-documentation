@@ -125,7 +125,7 @@ Example:
     <rule id="100001" maxsize="300" level="3">
       <if_sid>100020</if_sid>
       <match>Queue flood!</match>
-      <description> Flooded events queue.</description>
+      <description>Flooded events queue.</description>
     </rule>
 
 If the rule matches the ``id`` 100200 that contains the ``Queue flood!`` phrase in it, rule activates and sends an event.
@@ -157,6 +157,8 @@ Example:
 decoded_as
 ^^^^^^^^^^
 
+Specify the decoder which processed the event.
+
 +--------------------+------------------+
 | **Default Value**  | n/a              |
 +--------------------+------------------+
@@ -166,7 +168,7 @@ decoded_as
 category
 ^^^^^^^^
 
-Selects in which rule decoding category the rule should be included: ids, syslog, firewall, web-log, squid or windows.
+Selects in which rule decoding category the rule should be included: ossec, ids, syslog, firewall, web-log, squid or windows.
 
 +--------------------+--------------+
 | **Default Value**  | n/a          |
@@ -177,7 +179,7 @@ Selects in which rule decoding category the rule should be included: ids, syslog
 field
 ^^^^^
 
-Any ``OS_Regex`` to be compared to a field extracted by the decoder.
+Any ``OS_Regex`` to be compared to a dynamic field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -186,7 +188,7 @@ Any ``OS_Regex`` to be compared to a field extracted by the decoder.
 srcip
 ^^^^^
 
-Any IP address or CIDR block to be compared to an IP decoded as srcip. Use "!" to negate it.
+Any IP address or CIDR block to be compared to an IP decoded as ``srcip``. Use "!" to negate it.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -197,7 +199,7 @@ Any IP address or CIDR block to be compared to an IP decoded as srcip. Use "!" t
 dstip
 ^^^^^
 
-Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" to negate it.
+Any IP address or CIDR block to be compared to an IP decoded as ``dstip``. Use "!" to negate it.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -206,9 +208,9 @@ Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" t
 +--------------------+-----------+
 
 data
-^^^^^^^^^^
+^^^^
 
-Any string that is decoded into the data field.
+Any string that is decoded into the ``data`` field.
 
 +--------------------+-----------------------------------------------------------------+
 | **Default Value**  | n/a                                                             |
@@ -219,7 +221,7 @@ Any string that is decoded into the data field.
 extra_data
 ^^^^^^^^^^
 
-Any string that is decoded into the extra_data field.
+Any string that is decoded into the ``extra_data`` field.
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -241,7 +243,7 @@ Any username (decoded as the username).
 system_name
 ^^^^^^^^^^^^
 
-Any string that is decoded into the system_name field.
+Any string that is decoded into the ``system_name`` field.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -263,7 +265,7 @@ Program name is decoded from syslog process name.
 protocol
 ^^^^^^^^
 
-Any protocol.
+Any string that is decoded into the ``protocol`` field.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -375,6 +377,8 @@ The following components use a static location:
 | OpenSCAP integration | open-scap              |
 +----------------------+------------------------+
 | CIS-CAT integration  | wodle_cis-cat          |
++----------------------+------------------------+
+| SCA module           | sca                    |
 +----------------------+------------------------+
 
 action
