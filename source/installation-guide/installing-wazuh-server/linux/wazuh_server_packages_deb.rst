@@ -14,30 +14,30 @@ Adding the Wazuh repository
 
 The first step to setting up Wazuh is to add the Wazuh repository to your server or servers in case that you want to configure a Wazuh cluster. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
-1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
+#. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get update
-    # apt-get install curl apt-transport-https lsb-release gnupg2
+      # apt-get update
+      # apt-get install curl apt-transport-https lsb-release gnupg2
 
-2. Install the GPG key:
+#. Install the GPG key:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-3. Add the repository:
+#. Add the repository:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-4. Update the package information:
+#. Update the package information:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get update
+      # apt-get update
 
 Remember to repeat the *Adding the Wazuh repository* steps in every server where you want to install the Wazuh manager.
 
@@ -252,59 +252,59 @@ Installing Filebeat
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch. It has to be installed in every Wazuh manager server. To install it:
 
-1. Add the Elastic repository and its GPG key:
+#. Add the Elastic repository and its GPG key:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get install curl apt-transport-https
-    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-    # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
-    # apt-get update
+      # apt-get install curl apt-transport-https
+      # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+      # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+      # apt-get update
 
-2. Install Filebeat:
+#. Install Filebeat:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get install filebeat=7.3.2
+      # apt-get install filebeat=7.3.2
 
-3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+#. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/filebeat/7.x/filebeat.yml
 
-4. Download the alerts template for Elasticsearch:
+#. Download the alerts template for Elasticsearch:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
 
-5. Download the Wazuh module for Filebeat:
+#. Download the Wazuh module for Filebeat:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
-6. (Optional) Disable the Elasticsearch updates:
+#. (Optional) Disable the Elasticsearch updates:
 
-  In the installation guide we described how to install and configure Wazuh and also how to install and configure Filebeat with a Wazuh use purpose. We have absolute control of when a new Wazuh version is going to be released, but not when a new Elasticsearch version is going to be released.
+    In the installation guide we described how to install and configure Wazuh and also how to install and configure Filebeat with a Wazuh use purpose. We have absolute control of when a new Wazuh version is going to be released, but not when a new Elasticsearch version is going to be released.
 
-  Currently, the Wazuh Kibana plugin it was tested in Kibana version 7.3.2. If Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system, forcing the upgrade of Elasticsearch and Kibana. We can't ensure the correct behavior of our Wazuh Kibana plugin until a complete set of testing when a new Elasticsearch version is released. Then a new version of the Wazuh Kibana plugin will be released to ensure the complete compatibility with the new Filebeat/Elasticsearch/Kibana version.
-  In case of accidental Filebeat (thus Kibana and Elasticsearch) upgrade, it's possible to have a non-compatible Wazuh Kibana plugin.
+    Currently, the Wazuh Kibana plugin it was tested in Kibana version 7.3.2. If Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system, forcing the upgrade of Elasticsearch and Kibana. We can't ensure the correct behavior of our Wazuh Kibana plugin until a complete set of testing when a new Elasticsearch version is released. Then a new version of the Wazuh Kibana plugin will be released to ensure the complete compatibility with the new Filebeat/Elasticsearch/Kibana version.
+    In case of accidental Filebeat (thus Kibana and Elasticsearch) upgrade, it's possible to have a non-compatible Wazuh Kibana plugin.
 
-  In order to prevent this situation, it is recommended that the Elasticsearch repository be disabled as follow:
+    In order to prevent this situation, it is recommended that the Elasticsearch repository be disabled as follow:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
-    # apt-get update
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+      # apt-get update
 
-  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+    Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # echo "elasticsearch hold" | sudo dpkg --set-selections
-    # echo "kibana hold" | sudo dpkg --set-selections
+      # echo "elasticsearch hold" | sudo dpkg --set-selections
+      # echo "kibana hold" | sudo dpkg --set-selections
 
 .. note:: The Kibana service listens on the default port 5601.
 
