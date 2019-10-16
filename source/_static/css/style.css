@@ -3108,6 +3108,7 @@ div.highlight pre {
         border: none;
         background: #ffb600;
         color: #ffffff;
+        min-width: 235px;
       }
 
       aside.help .btn-help:hover,
