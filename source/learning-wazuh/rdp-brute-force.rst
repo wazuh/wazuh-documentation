@@ -5,20 +5,24 @@
 Detect an RDP brute force attack
 ================================
 
-Here you will wage a small RDP brute force attack against your Windows Agent instance.  You will see how Wazuh detects and
-alerts on each login failure, and how a higher severity alert is produced when enough login failures are seen.  Lastly you
-will take a closer look at the decoders and rules involved in the detection of your "attack".
+Here you will wage a small RDP brute force attack against your Windows Agent instance.
+
+You will see how **Wazuh** detects and alerts on each login failure, and how a higher severity 
+alert is produced when enough login failures are seen.
+
+Lastly you will take a closer look at the decoders and rules involved in the detection of your "attack".
 
 Perform the attack
 ------------------
 
-Using a Windows Remote Desktop client, attempt to log in as user "george" to the Elastic IP assigned to your Windows Agent instance six times in a fairly small time window.
+Using a Windows Remote Desktop client, attempt to log in as user "*george*" to your Windows Agent instance
+eight times in a fairly small time window.
 
 
 See the resulting alerts in Kibana
 ----------------------------------
 
-1. Search Kibana for "george".
+1. Search Kibana for "*george*".
 
 2. Select the following fields for display:
 
@@ -36,13 +40,16 @@ See the resulting alerts in Kibana
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-4. Notice how first the lower level "Windows: Logon Failure" alert is triggered several times, followed by the higher level "Multiple Windows Logon Failures" alert.  This process may repeat itself depending on the total number of logon failures seen.
+4. Notice how first the lower level "*Windows: Logon Failure*" alert is triggered several times,
+   followed by the higher level "Multiple Windows Logon Failures" alert.
+   This process may repeat itself depending on the total number of logon failures seen.
 
 
 Hold your breath for a deep dive!
 ---------------------------------
 
-Let's take a thorough look at how this log event is being decoded and what leads Wazuh to the final conclusion that brute force activity is occurring.
+Let's take a thorough look at how this log event is being decoded and what leads **Wazuh** to the final
+conclusion that brute force activity is occurring.
 
 1. In Kibana, copy the complete contents of the full_log field for one of the Windows logon failure events.
 
