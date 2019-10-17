@@ -234,7 +234,7 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
         # service wazuh-api status
 
     .. note::
-      Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
+      Now, the Wazuh API is installed. We strongly recommend securing the Wazuh API. In the following document :ref:`securing_api` you will see how to enable the HTTPS comunication, how to change the default user and password and more.
 
 #. (Optional) Disable the Wazuh updates:
 
