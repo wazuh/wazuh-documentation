@@ -7,9 +7,9 @@
 Debian
 ======
 
-For Debian 7 or greater, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+To install the Wazuh server components in Debian 7 or higher versions, you have to install the relevant packages after you've added the repositories.
 
-.. note:: Root user privileges are required to execute all the commands described below. 
+.. note:: Root user privileges are required to execute all the commands described below.
 
 Adding the Wazuh repository
 ---------------------------
@@ -160,7 +160,7 @@ Installing the Wazuh server
             <disabled>no</disabled>
         </cluster>
 
-    As you can see in the previous example, you have to set the :ref:`node_type <cluster_node_type>` as ``worker``, give a name in :ref:`node_name <cluster_node_name>` (it has to be different in every node), the previously generated :ref:`key <cluster_key>` (it has to be the same for all nodes), the setting of the :ref:`nodes <cluster_nodes>` have to contain the master address (it can be either an IP or a DNS), and :ref:`disabled <cluster_disabled>` to ``no``.
+    As you can see in the previous example, you have to set the :ref:`node_type <cluster_node_type>` as ``worker``, give a name in :ref:`node_name <cluster_node_name>` (it has to be different in every node), the previously generated :ref:`key <cluster_key>` (it has to be the same for all nodes), the setting of the :ref:`nodes <cluster_nodes>` has to contain the master address (it can be either an IP or a DNS), and :ref:`disabled <cluster_disabled>` to ``no``.
 
     Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
@@ -234,7 +234,7 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
         # service wazuh-api status
 
     .. note::
-      Now, the Wazuh API is installed. We strongly recommend securing the Wazuh API. In the following document :ref:`securing_api` you will see how to enable the HTTPS comunication, how to change the default user and password and more.
+      Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS comunication, how to change the default user and password and more.
 
 #. (Optional) Disable the Wazuh updates:
 
