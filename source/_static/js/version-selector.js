@@ -110,7 +110,7 @@ jQuery(function($) {
     }
 
     /* Get the redirection history */
-    let redirHistory = getRedirectionHistory(page, newUrls, redirections, removedUrls, versionsClean);
+    let redirHistory = getRedirectionHistory(page, newUrls, redirections, removedUrls, versionsClean, path);
     let emptyUrls = 0;
     for ( release in redirHistory ) {
       if (!Object.prototype.hasOwnProperty.call(redirHistory, release) || redirHistory[release].length == 0 ) {
@@ -120,7 +120,7 @@ jQuery(function($) {
     }
 
     if ( emptyUrls == Object.keys(redirHistory).length ) {
-      redirHistory = getRedirectionHistory(page.split('#')[0], newUrls, redirections, removedUrls, versionsClean);
+      redirHistory = getRedirectionHistory(page.split('#')[0], newUrls, redirections, removedUrls, versionsClean, path);
     }
 
     for (let i = 0; i < versions.length; i++) {
@@ -166,9 +166,10 @@ jQuery(function($) {
    * @param {array} listRedirections Contains the list of all redirections
    * @param {array} listRemovedUrls Contains the list of all pages (partial URLs) removed from each release
    * @param {array} versions Simple list of release versions order from the oldest to the newest one
+   * @param {string} verCurrent Current release number
    * @return {array} Returns a list with the correct redirection of the current page for each release
    */
-  function getRedirectionHistory(page, listNewUrls, listRedirections, listRemovedUrls, versions) {
+  function getRedirectionHistory(page, listNewUrls, listRedirections, listRemovedUrls, versions, verCurrent) {
     let currentPage = page;
     let redirectionsInvolved;
     let firstSeenIn = getRelease(page, listNewUrls);
@@ -184,7 +185,18 @@ jQuery(function($) {
     stackPages.push(currentPage);
     keyPoints[firstSeenIn] = page;
     for ( let i = 0; i< listRedirections.length; i++) {
-      redirectionsTemp.push(listRedirections[i]);
+      let found = false;
+      if (listRedirections[i]['target'] !== undefined) {
+        for (let j=0; j<versions.length-1; j++) {
+          verPrev = (verCurrent < versions[j]) ? versions[j+1] : versions[j-1];
+          if ( listRedirections[i]['target'].includes(verPrev+'=>'+versions[j]) ) {
+            found = true;
+          }
+        }
+      }
+      if (found) {
+        redirectionsTemp.push(listRedirections[i]);
+      }
     }
 
     /* Get key changes in history */
@@ -204,9 +216,9 @@ jQuery(function($) {
             relpair.push(release);
             if ( !(release in Object.keys(keyPoints)) ) {
               keyPoints[release] = redirectionsInvolved[i][release];
-              if ( redirectionsInvolved[i][release] != currentPage
-                && stackPages.indexOf(redirectionsInvolved[i][release]) == -1
-                && checkedPages.indexOf(redirectionsInvolved[i][release]) == -1 ) {
+              if ( redirectionsInvolved[i][release] != currentPage &&
+                stackPages.indexOf(redirectionsInvolved[i][release]) == -1 &&
+                checkedPages.indexOf(redirectionsInvolved[i][release]) == -1 ) {
                 stackPages.push(redirectionsInvolved[i][release]);
               }
             }
@@ -287,20 +299,24 @@ jQuery(function($) {
    * @return {string} The standard (valid) version of the original URL
    */
   function normalizeUrl(originalUrl) {
-    let normalizedURL = originalUrl.replace('index.html', '');
-    normalizedURL = normalizedURL.replace(/\/{2,}/, '/');
+    if (!Array.isArray(originalUrl)) {
+      let normalizedURL = originalUrl.replace('index.html', '');
+      normalizedURL = normalizedURL.replace(/\/{2,}/, '/');
 
-    if (normalizedURL.charAt(normalizedURL.length-1) == '#' ) {
-      normalizedURL = normalizedURL.substring(0, normalizedURL.length-1);
-    }
+      if (normalizedURL.charAt(normalizedURL.length-1) == '#' ) {
+        normalizedURL = normalizedURL.substring(0, normalizedURL.length-1);
+      }
 
-    if (normalizedURL.charAt(normalizedURL.length-1) != '/' && !(/.*(\.html|#.*)$/.test(normalizedURL))) {
-      normalizedURL = normalizedURL+'/';
-    }
-    if (normalizedURL.charAt(0) != '/') {
-      normalizedURL = '/'+normalizedURL;
-    }
+      if (normalizedURL.charAt(normalizedURL.length-1) != '/' && !(/.*(\.html|#.*)$/.test(normalizedURL))) {
+        normalizedURL = normalizedURL+'/';
+      }
+      if (normalizedURL.charAt(0) != '/') {
+        normalizedURL = '/'+normalizedURL;
+      }
 
-    return normalizedURL;
+      return normalizedURL;
+    } else {
+      return originalUrl;
+    }
   }
 });
