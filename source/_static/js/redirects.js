@@ -40,14 +40,17 @@ removedUrls['x.y'] = [
 
 redirections.push(
     {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
       '3.9': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
       '3.10': '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
     },
     {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
       '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
       '3.10': '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
     },
     {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
       '3.9': '/user-manual/capabilities/sec-config-assessment/use-case.html',
       '3.10': '/user-manual/capabilities/sec-config-assessment/use_case.html',
     }
@@ -71,154 +74,322 @@ newUrls['3.10'] = [
 
 redirections.push(
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/deploying-with-ansible/guide/install-wazuh-server.html',
       '3.9': '/deploying-with-ansible/guide/install-wazuh-manager.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-elastic-stack/kibana_ssl.html',
       '3.9': '/installation-guide/installing-elastic-stack/protect-installation/kibana_ssl.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-elastic-stack/searchguard.html',
       '3.9': '/installation-guide/installing-elastic-stack/protect-installation/searchguard.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/index.html',
       '3.9': '/installation-guide/installing-splunk/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/splunk-app.html',
       '3.9': '/installation-guide/installing-splunk/splunk-app.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/splunk-basic.html',
       '3.9': '/installation-guide/installing-splunk/splunk-basic.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/splunk-distributed.html',
       '3.9': '/installation-guide/installing-splunk/splunk-distributed.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/splunk-forwarder.html',
       '3.9': '/installation-guide/installing-splunk/splunk-forwarder.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/splunk-polling.html',
       '3.9': '/installation-guide/installing-splunk/splunk-polling.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installing-splunk/splunk-reverse-proxy.html',
       '3.9': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
       '3.9': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
       '3.9': '/installation-guide/installing-wazuh-agent/hpux/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
       '3.9': '/installation-guide/installing-wazuh-agent/macos/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
       '3.9': '/installation-guide/installing-wazuh-agent/solaris/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
       '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-server/index.html',
       '3.9': '/installation-guide/installing-wazuh-manager/index.html',
     },
     {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/opensuse/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/suse/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/index.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_packages_centos.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_packages_fedora.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_packages_rhel.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_packages_deb.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_packages_ubuntu.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_sources_amazon.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_sources_centos.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_sources_deb.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_sources_fedora.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/opensuse/wazuh_server_sources_opensuse.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_sources_oracle.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_sources_rhel.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/suse/wazuh_server_sources_suse.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+      '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_sources_ubuntu.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
       '3.9': '/installation-guide/securing_api.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/index.html',
       '3.9': '/upgrade-guide/upgrading/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/different_major.html',
       '3.9': '/upgrade-guide/upgrading/different_major.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/latest_wazuh3_minor.html',
       '3.9': '/upgrade-guide/upgrading/latest_wazuh3_minor.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/legacy/index.html',
       '3.9': '/upgrade-guide/upgrading/legacy/index.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/legacy/upgrading-elastic-stack.html',
       '3.9': '/upgrade-guide/upgrading/legacy/upgrading-elastic-stack.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/legacy/upgrading-wazuh-agent.html',
       '3.9': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-agent.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/legacy/upgrading-wazuh-server.html',
       '3.9': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-manager.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/restore_alerts.html',
       '3.9': '/upgrade-guide/upgrading/restore_alerts.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/upgrading/same_minor.html',
       '3.9': '/upgrade-guide/upgrading/same_minor_or_major.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/remote-upgrading/create-custom-wpk.html',
       '3.9': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/command-line/register.html',
       '3.9': '/user-manual/registering/using-command-line.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/command-line/listing.html',
       '3.9': '/user-manual/agents/listing/using-command-line.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/command-line/remove.html',
       '3.9': '/user-manual/agents/remove-agents/remove.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/restful-api/remove.html',
       '3.9': '/user-manual/agents/remove-agents/restful-api-remove.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/restful-api/register.html',
       '3.9': '/user-manual/registering/restful-api-register.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/restful-api/listing.html',
       '3.9': '/user-manual/agents/listing/listing.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/agents/wazuh-app.html',
       '3.9': '/user-manual/agents/listing/wazuh-app.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/user-manual/registering/use-registration-service.html',
       '3.9': '/user-manual/registering/simple-registration-method.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
       '3.9': '/installation-guide/installing-elastic-stack/automatic_api.html',
     },
     {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/learning-wazuh/build-lab/install-wazuh-server.html',
       '3.9': '/learning-wazuh/build-lab/install-wazuh-manager.html',
     }
@@ -419,66 +590,82 @@ removedUrls['3.9'] = [
 
 redirections.push(
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#cloudtrail',
       '3.8': '/amazon/services/cloudtrail.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#installing-dependencies',
       '3.8': '/amazon/configuration/dependencies.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#authenticating-options',
       '3.8': '/amazon/configuration/credentials.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#vpc-flow',
       '3.8': '/amazon/services/vpc.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
       '3.8': '/amazon/services/config.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
       '3.8': '/amazon/services/guardduty.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
       '3.8': '/amazon/services/macie.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#create-an-iam-user',
       '3.8': '/amazon/configuration/credentials.html#create-an-iam-user',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#authenticating-options',
       '3.8': '/amazon/configuration/credentials.html#authenticating-options',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#considerations-for-configuration',
       '3.8': '/amazon/configuration/considerations.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/use-cases/vpc.html',
       '3.8': '/amazon/services/vpc.html#use-cases',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/automatic-api.html',
       '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/elastic-tuning.html',
       '3.8': '/installation-guide/installing-elastic-stack/elastic_tuning.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/elastic_ssl.html',
       '3.8': '/installation-guide/installing-elastic-stack/elastic_ssl.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/kibana_ssl.html',
       '3.8': '/installation-guide/installing-elastic-stack/kibana_ssl.html',
     },
     {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/securing-api.html',
       '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
     }
@@ -525,46 +712,57 @@ removedUrls['3.8'] = [
 
 redirections.push(
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/deploying-with-ansible/consider.html',
       '3.7': '/deploying-with-ansible/installation-guide.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/deploying-with-ansible/install-ansible-control.html',
       '3.7': '/deploying-with-ansible/guide/install-ansible.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/installing-splunk/splunk_reverse_proxy.html',
       '3.7': '/installing-splunk/splunk-reverse-proxy.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/installing-splunk/splunk_forwarder.html',
       '3.7': '/installing-splunk/splunk-forwarder.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/installing-splunk/splunk_wazuh.html',
       '3.7': '/installing-splunk/splunk-app.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/installing-splunk/splunk_installation.html',
       '3.7': '/installing-splunk/splunk-basic.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/user-manual/capabilities/virustotal-scan/what-is-virustotal.html',
       '3.7': '/user-manual/capabilities/virustotal-scan/about.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/user-manual/capabilities/virustotal-scan/terms-of-service.html',
       '3.7': '/user-manual/capabilities/virustotal-scan/about.html#terms-of-service',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/user-manual/reference/statistics-files.html#statistics-files',
       '3.7': '/user-manual/reference/statistics-files/index.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/user-manual/reference/statistics-files.html#ossec-agentd-state-file',
       '3.7': '/user-manual/reference/statistics-files/ossec-agentd-state.html',
     },
     {
+      'target': ['3.6=>3.7', '3.7=>3.6'],
       '3.6': '/user-manual/reference/statistics-files.html#ossec-remoted-state-file',
       '3.7': '/user-manual/reference/statistics-files/ossec-remoted-state.html',
     }
@@ -613,18 +811,22 @@ newUrls['3.7'] = [
 
 redirections.push(
     {
+      'target': ['3.5=>3.6', '3.6=>3.5'],
       '3.5': '/installation-guide/installing-splunk/index.html',
       '3.6': '/installing-splunk/index.html',
     },
     {
+      'target': ['3.5=>3.6', '3.6=>3.5'],
       '3.5': '/installation-guide/installing-splunk/splunk_forwarder.html',
       '3.6': '/installing-splunk/splunk_forwarder.html',
     },
     {
+      'target': ['3.5=>3.6', '3.6=>3.5'],
       '3.5': '/installation-guide/installing-splunk/splunk_installation.html',
       '3.6': '/installing-splunk/splunk_installation.html',
     },
     {
+      'target': ['3.5=>3.6', '3.6=>3.5'],
       '3.5': '/installation-guide/installing-splunk/splunk_wazuh.html',
       '3.6': '/installing-splunk/splunk_wazuh.html',
     }
@@ -660,10 +862,12 @@ removedUrls['3.6'] = [
 
 redirections.push(
     {
+      'target': ['3.4=>3.5', '3.5=>3.4'],
       '3.4': '/migrating-from-ossec/ossec-packages-agent.html',
       '3.5': '/migrating-from-ossec/ossec-agent.html',
     },
     {
+      'target': ['3.4=>3.5', '3.5=>3.4'],
       '3.4': '/migrating-from-ossec/ossec-packages-manager.html',
       '3.5': '/migrating-from-ossec/ossec-server.html',
     }
@@ -734,6 +938,7 @@ newUrls['3.3'] = [
 /* Redirections from 3.1 to 3.2 */
 
 redirections.push({
+  'target': ['3.1=>3.2', '3.2=>3.1'],
   '3.1': '/amazon/integration.html',
   '3.2': '/amazon/installation.html',
 });
@@ -792,6 +997,7 @@ removedUrls['3.1'] = [
 /* Redirections from 2.1 to 3.0 */
 
 redirections.push({
+  'target': ['2.1=>3.0', '3.0=>2.1'],
   '2.1': '/user-manual/reference/tools/update-ruleset.py.html',
   '3.0': '/user-manual/reference/tools/update_ruleset.html/',
 });
