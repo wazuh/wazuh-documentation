@@ -370,4 +370,4 @@ The verbose output of ``ossec-logtest`` is very helpful for understanding the hi
 
 Congratulations on your completion of your first **Learning Wazuh** lab!
 
-Before moving on, you might be interested in taking a more detailed look to the documentation about Wazuh rules `here <https://documentation.wazuh.com/current/user-manual/ruleset/index.html#field>`_.
+Before moving on, you might be interested in taking a more detailed look to the documentation about Wazuh rules :ref:`here <ruleset>`.
