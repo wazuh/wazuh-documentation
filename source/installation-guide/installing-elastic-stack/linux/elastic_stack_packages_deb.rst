@@ -59,7 +59,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           node.name: <node_name>
           cluster.initial_master_nodes: ["<node_name>"]
 
-      Replace ``<elasticsearch_ip>`` and ``<node_name>`` with your desired values (host IP and host name).
+      Replace ``<elasticsearch_ip>`` and ``<node_name>`` with your desired values (host IP and host name). For ``<elasticsearch_ip>`` the value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
 
     3. Configure Elastic Stack to use encrypted connections:
 
@@ -242,7 +242,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         The values to be replaced:
 
-          - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``.
+          - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
           - ``<node_name>``: The node name. I.e: ``elastic-master1``.
           - ``<elastic_cluster>``: The cluster name. I.e: ``elastic-cluster-production``.
           - ``<elasticsearch_ip_nodeX>``: others Elasticsearch cluster nodes IPs. I.e: ``10.0.0.3``.
