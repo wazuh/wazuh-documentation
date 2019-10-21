@@ -345,22 +345,25 @@ todo_include_todos = False
 
 # -- Minify ------------------------------------------------------------------
 
-actual_path = os.path.dirname(os.path.realpath(__file__))
-files = [
-    ['css/style','css'],
-    ['css/wazuh-icons','css'],
-    ['js/version-selector','js'],
-    ['js/style','js'],
-]
+def minification(actual_path):
 
-for file in files:
+    files = [
+        ['css/style','css'],
+        ['css/wazuh-icons','css'],
+        ['js/version-selector','js'],
+        ['js/style','js']
+    ]
 
-    path_end = actual_path+'/_static/'
-    min_file = os.path.join(path_end, file[0]+'.min.'+file[1])
+    for file in files:
 
-    if os.path.isfile(min_file):
-        with open(min_file, 'r') as f_min:
-            min_file_content = f_min.read()
+        path_end = actual_path+'/_static/'
+        min_file = os.path.join(path_end, file[0]+'.min.'+file[1])
+        minify = True
+        min_file_content = ''
+
+        if os.path.isfile(min_file):
+            with open(min_file, 'r') as f_min:
+                min_file_content = f_min.read()
 
         with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
 
@@ -383,21 +386,20 @@ for file in files:
             # fragment values can loose zeros
             output = re.sub( r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', output )
 
-            if output == min_file_content:
-                minify = False
-            else:
-                minify = True
-    else:
-        minify = True
+        if output == min_file_content:
+            minify = False
 
-
-    if minify:
-        with open(min_file, 'w') as f2:
-            f2.write(output)
+        if minify:
+            with open(min_file, 'w') as f2:
+                f2.write(output)
 
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
+
+    actual_path = os.path.dirname(os.path.realpath(__file__))
+
+    minification(actual_path)
 
     app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
@@ -414,8 +416,8 @@ def setup(app):
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
-    "js/version-selector.js"
-    "js/style.js",
+    "js/version-selector.js",
+    "js/style.js"
 ]
 
 # -- Additional configuration ------------------------------------------------
