@@ -43,6 +43,7 @@ There are some related additional configurations that can be applied:
 
     linux/index
     wazuh_agent_sources_aix
+    wazuh_agent_sources_hpux
     wazuh_agent_sources_macos
     solaris/index
     wazuh_agent_sources_windows
