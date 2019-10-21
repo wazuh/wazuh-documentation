@@ -26,7 +26,7 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
 
 .. code-block:: console
 
- # ./generate_wazuh_packages.sh -h
+  # ./generate_wazuh_packages.sh -h
 
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
@@ -44,13 +44,13 @@ First install the needed dependencies:
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -e
+  # ./generate_wazuh_packages.sh -e
 
 Download and build the sources:
 
 .. code-block:: console
 
-    # ./generate_wazuh_packages.sh -b v3.10.2
+  # ./generate_wazuh_packages.sh -b v3.10.2
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
@@ -66,54 +66,54 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
 
 .. code-block:: console
 
- # vagrant -h up
+  # vagrant -h up
 
- -- CUSTOM USE OF VAGRANT FOR THIS MACHINE --
+  -- CUSTOM USE OF VAGRANT FOR THIS MACHINE --
 
-     vagrant [OPTION] ... up X
-     To bring up a Solaris machine, X must be solaris10 or solaris11 or both.
+      vagrant [OPTION] ... up X
+      To bring up a Solaris machine, X must be solaris10 or solaris11 or both.
 
-     vagrant [OPTION] ... ssh/provision/delete
+      vagrant [OPTION] ... ssh/provision/delete
 
-     Example:
-     vagrant --branch-tag=v3.10.2 --ram=1024 --cpus=4 up solaris10 solaris11
+      Example:
+      vagrant --branch-tag=v3.10.2 --ram=1024 --cpus=4 up solaris10 solaris11
 
-     -h, --help:
-     Show help
+      -h, --help:
+      Show help
 
-     --branch-tag x, -b x:
-     Generate package for branch/tag x
+      --branch-tag x, -b x:
+      Generate package for branch/tag x
 
-     --ram x
-     Select the amount of ram asigned to the new machine.
+      --ram x
+      Select the amount of ram asigned to the new machine.
 
-     --cpus x
-     Select the number of CPUs asigned to the new machine.
+      --cpus x
+      Select the number of CPUs asigned to the new machine.
 
-     -- DEFAULT USE OF VAGRANT (FOR ALL MACHINES) --
+      -- DEFAULT USE OF VAGRANT (FOR ALL MACHINES) --
 
- Usage: vagrant [options] <command> [<args>]
+  Usage: vagrant [options] <command> [<args>]
 
-     -v, --version                    Print the version and exit.
-     -h, --help                       Print this help.
+      -v, --version                    Print the version and exit.
+      -h, --help                       Print this help.
 
 Below, you will find some examples of how to build a Solaris package using this tool.
 
 .. code-block:: console
 
- # vagrant --branch-tag=v3.10.2 up solaris10
+  # vagrant --branch-tag=v3.10.2 up solaris10
 
 This will generate a 3.10.2 Wazuh agent package for Solaris 10
 
 .. code-block:: console
 
- # vagrant --branch-tag=v3.10.2 up solaris11
+  # vagrant --branch-tag=v3.10.2 up solaris11
 
 This will generate a 3.10.2 Wazuh agent package for Solaris 11
 
 .. code-block:: console
 
- # vagrant --branch-tag=v3.10.2 up solaris10 solaris 11
+  # vagrant --branch-tag=v3.10.2 up solaris10 solaris 11
 
 This will generate a 3.10.2 Wazuh agent package for Solaris 10 and Solaris 11
 
@@ -123,4 +123,4 @@ To finish destroy the machines:
 
 .. code-block:: console
 
- # vagrant destroy solaris10 solaris 11
+  # vagrant destroy solaris10 solaris 11

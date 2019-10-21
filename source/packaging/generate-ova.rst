@@ -27,15 +27,15 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 
 .. code-block:: console
 
- $ ./generate_wazuh_packages.sh -h
+  $ ./generate_wazuh_packages.sh -h
 
- OPTIONS:
-      -b, --build            [Required] Build the OVA and OVF.
-      -v, --version          [Required] Version of wazuh to install on VM.
-      -e, --elastic-version  [Required] Elastic version to download inside VM.
-      -r, --repository       [Required] Status of the packages [stable/unstable]
-      -c, --clean            [Optional] Clean the local machine.
-      -h, --help             [  Util  ] Show this help.
+  OPTIONS:
+       -b, --build            [Required] Build the OVA and OVF.
+       -v, --version          [Required] Version of wazuh to install on VM.
+       -e, --elastic-version  [Required] Elastic version to download inside VM.
+       -r, --repository       [Required] Status of the packages [stable/unstable]
+       -c, --clean            [Optional] Clean the local machine.
+       -h, --help             [  Util  ] Show this help.
 
 The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.
 
@@ -46,12 +46,12 @@ Below, you will find some examples of how to build a Wazuh virtual machine.
 
 .. code-block:: console
 
- # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r stable
+  # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r stable
 
 This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using stable packages
 
 .. code-block:: console
 
- # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r unstable -c
+  # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r unstable -c
 
 This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using unstable packages and generate the sha512 checksum

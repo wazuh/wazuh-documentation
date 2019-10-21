@@ -16,7 +16,7 @@ Create root CA
 
 .. code-block:: console
 
- # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
+  # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
 
 Create a certificate and key
 
@@ -34,7 +34,7 @@ Sign this certificate with the root CA
 
 .. code-block:: console
 
- # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
+  # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
 
 
 .. _build-wpk-package:

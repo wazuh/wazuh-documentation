@@ -25,37 +25,37 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
 
 .. code-block:: console
 
- # ./generate_debian_package.sh -h
+  # ./generate_debian_package.sh -h
 
- Usage: ./generate_debian_package.sh [OPTIONS]
+  Usage: ./generate_debian_package.sh [OPTIONS]
 
-     -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
-     -t, --target <target>     [Required] Target package to build: manager, api or agent.
-     -a, --architecture <arch> [Optional] Target architecture of the package amd64 or i386. By default: amd64
-     -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 4.
-     -r, --revision <rev>      [Optional] Package revision. By default: 1.
-     -s, --store <path>        [Optional] Set the directory where the package will be stored. By default, an output folder will be created.
-     -p, --path <path>         [Optional] Installation path for the package. By default: /var/ossec.
-     -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
-     -c, --checksum <path>     [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
-     -h, --help                Show this help.
+      -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
+      -t, --target <target>     [Required] Target package to build: manager, api or agent.
+      -a, --architecture <arch> [Optional] Target architecture of the package amd64 or i386. By default: amd64
+      -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 4.
+      -r, --revision <rev>      [Optional] Package revision. By default: 1.
+      -s, --store <path>        [Optional] Set the directory where the package will be stored. By default, an output folder will be created.
+      -p, --path <path>         [Optional] Installation path for the package. By default: /var/ossec.
+      -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
+      -c, --checksum <path>     [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
+      -h, --help                Show this help.
 
 Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
- ./generate_debian_package.sh -b v3.10.2 -s /tmp -t manager -a amd64 -r my_rev.
+  # ./generate_debian_package.sh -b v3.10.2 -s /tmp -t manager -a amd64 -r my_rev.
 
 This will generate a 3.10.2 Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
- ./generate_debian_package.sh -b v3.10.2 -s /tmp -t api -a i386 -r my_rev
+  # ./generate_debian_package.sh -b v3.10.2 -s /tmp -t api -a i386 -r my_rev
 
 This will generate a 3.10.2 Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
 
 .. code-block:: console
 
- ./generate_debian_package.sh -b v3.10.2 -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v3.10.2 -t agent -a amd64 -p /opt
 
 This will generate a 3.10.2 Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.
