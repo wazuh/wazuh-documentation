@@ -20,6 +20,8 @@ There are several options for installing the Wazuh server depending on the opera
 +------------------------------------------------+-----------------------------------------------------+
 | :ref:`Linux <wazuh_agent_sources_linux>`       | Install Wazuh agent from sources on Linux.          |
 +------------------------------------------------+-----------------------------------------------------+
+| :ref:`HP-UX <wazuh_agent_sources_hpux>`        | Install Wazuh agent from sources on HP-UX.          |
++------------------------------------------------+-----------------------------------------------------+
 | :ref:`macOS <wazuh_agent_sources_macos>`       | Install Wazuh agent from sources on macOS.          |
 +------------------------------------------------+-----------------------------------------------------+
 | :ref:`Solaris <wazuh_agent_sources_solaris>`   | Install Wazuh agent from sources on Solaris         |
