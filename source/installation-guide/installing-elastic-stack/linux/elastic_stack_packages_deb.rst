@@ -511,7 +511,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       - ``<kibana_ip>``: Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by replacing ``<kibana_ip>`` with the Kibana host IP. I.e: ``10.0.0.2``.
       - ``<password_generated_for_elastic>``: The password generated in step 5. I.e: ``IJB8YtGoTgrpaPdGZbSO``.
 
-4. Install the Wazuh app plugin for Kibana:
+4. Install the Wazuh Kibana plugin:
 
   * Install from URL:
 
@@ -527,7 +527,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` will acomplish this.
 
-  The Wazuh app must be configured to point to the master’s API.
+  The Wazuh Kibana plugin must be configured to point to the master’s API.
 
 5. Enable and start the Kibana service:
 
@@ -576,7 +576,7 @@ Next steps
 
 Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` for instructions related to your specific environment.
 
-You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
+You can also read the Wazuh Kibana plugin :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
 
 Uninstall
 ---------
