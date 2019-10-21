@@ -15,7 +15,7 @@ The macOS agent can be downloaded from :ref:`packages list<packages>`. You can i
 
       .. code-block:: console
 
-        # installer -pkg wazuh-agent-3.10.0-1.pkg -target /
+        # installer -pkg wazuh-agent-3.10.2-1.pkg -target /
 
     * Deployment:
 
@@ -23,7 +23,7 @@ The macOS agent can be downloaded from :ref:`packages list<packages>`. You can i
 
       .. code-block:: console
 
-        # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-3.10.0-1.pkg -target /
+        # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-3.10.2-1.pkg -target /
 
       See the following document for additional automated deployment options :ref:`deployment variables <deployment_variables_macos>`.
 
@@ -81,5 +81,5 @@ To uninstall the agent in macOS:
 
     .. code-block:: console
 
-      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
+    # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
+

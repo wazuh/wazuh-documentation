@@ -61,7 +61,7 @@ Pointing agents to the cluster with a load balancer
 
     4. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
 
-        - This configuration will depend of the load balancer service choosen.
+        - This configuration will depend of the load balancer service chosen.
 
         - Here is a short configuration guide of a **load balancer** using Nginx:
 

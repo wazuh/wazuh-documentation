@@ -1,7 +1,3 @@
-from docutils.parsers.rst.directives.admonitions import BaseAdmonition
-from sphinx.util import compat
-compat.make_admonition = BaseAdmonition
-
 # -*- coding: utf-8 -*-
 #
 # Configuration file for the Sphinx documentation builder.
@@ -89,7 +85,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prepended to all description
+# If true, the current module name will be prefixed to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 
@@ -179,7 +175,7 @@ html_static_path = ['_static']
 #html_domain_indices = True
 
 # If false, no index is generated.
-#html_use_index = True
+html_use_index = False
 
 # If true, the index is split into individual pages for each letter.
 #html_split_index = False
@@ -346,45 +342,61 @@ todo_include_todos = False
 
 # -- Minify ------------------------------------------------------------------
 
-actual_path = os.path.dirname(os.path.realpath(__file__))
-files = [
-    ['css/style','css'],
-    ['css/wazuh-icons','css'],
-    ['js/version-selector','js'],
-    ['js/style','js'],
-]
+def minification(actual_path):
 
-for file in files:
+    files = [
+        ['css/style','css'],
+        ['css/wazuh-icons','css'],
+        ['js/version-selector','js'],
+        ['js/style','js'],
+    ]
 
-    path_end = actual_path+'/_static/'
+    for file in files:
 
-    with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
+        path_end = actual_path+'/_static/'
+        min_file = os.path.join(path_end, file[0]+'.min.'+file[1])
+        minify = True
+        min_file_content = ''
 
-        output = f.read()
+        if os.path.isfile(min_file):
+            with open(min_file, 'r') as f_min:
+                min_file_content = f_min.read()
 
-        # remove comments - this will break a lot of hacks :-P
-        output = re.sub( r'\s*/\*\s*\*/', "$$HACK1$$", output ) # preserve IE<6 comment hack
-        output = re.sub( r'/\*[\s\S]*?\*/', "", output )
-        output = output.replace( "$$HACK1$$", '/**/' ) # preserve IE<6 comment hack
+        with open(os.path.join(path_end, file[0]+'.'+file[1]), 'r') as f:
 
-        # url() doesn't need quotes
-        output = re.sub( r'url\((["\'])([^)]*)\1\)', r'url(\2)', output )
+            output = f.read()
 
-        # spaces may be safely collapsed as generated content will collapse them anyway
-        output = re.sub( r'\s+', ' ', output )
+            # remove comments - this will break a lot of hacks :-P
+            output = re.sub( r'\s*/\*\s*\*/', "$$HACK1$$", output ) # preserve IE<6 comment hack
+            output = re.sub( r'/\*[\s\S]*?\*/', "", output )
+            output = output.replace( "$$HACK1$$", '/**/' ) # preserve IE<6 comment hack
 
-        # shorten collapsable colors: #aabbcc to #abc
-        output = re.sub( r'#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(\s|;)', r'#\1\2\3\4', output )
+            # url() doesn't need quotes
+            output = re.sub( r'url\((["\'])([^)]*)\1\)', r'url(\2)', output )
 
-        # fragment values can loose zeros
-        output = re.sub( r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', output )
+            # spaces may be safely collapsed as generated content will collapse them anyway
+            output = re.sub( r'\s+', ' ', output )
 
-        with open(os.path.join(path_end, file[0]+'.min.'+file[1]), 'w') as f2:
-            f2.write(output)
+            # shorten collapsable colors: #aabbcc to #abc
+            output = re.sub( r'#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(\s|;)', r'#\1\2\3\4', output )
+
+            # fragment values can loose zeros
+            output = re.sub( r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', output )
+
+        if output == min_file_content:
+            minify = False
+
+        if minify:
+            with open(min_file, 'w') as f2:
+                f2.write(output)
 
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
+
+    actual_path = os.path.dirname(os.path.realpath(__file__))
+
+    minification(actual_path)
 
     app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
@@ -401,7 +413,7 @@ def setup(app):
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
-    "js/version-selector.js"
+    "js/version-selector.js",
     "js/style.js",
 ]
 
