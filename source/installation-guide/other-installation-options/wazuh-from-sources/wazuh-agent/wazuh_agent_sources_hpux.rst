@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_sources_hpux:
 
-HP-UX from sources
-==================
+HP-UX
+=====
 
 This guide describes how to install the Wazuh agent from source code for HP-UX. For other operating systems, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
@@ -13,7 +13,7 @@ Installing Wazuh agent
 .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
 1. Install development tools and compilers.
-   
+
    1.1 Download the ``depothelper-2.10-hppa_32-11.31.depot`` file.
 
       .. code-block:: console
