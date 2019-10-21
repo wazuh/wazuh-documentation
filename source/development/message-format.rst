@@ -239,7 +239,7 @@ The procedure to send a payload via network depends on the connection protocol:
 
 **TCP protocol**
 
-    Messages are not delimited by the network, so the payload size must be prepended to the payload::
+    Messages are not delimited by the network, so the payload size must be prefixed to the payload::
 
         Send(<Size> <Payload>)
 

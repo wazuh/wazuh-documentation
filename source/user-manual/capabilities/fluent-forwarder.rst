@@ -32,7 +32,7 @@ The Fluentd server could be located on the same local machine or a remote machin
 Input
 -----
 
-The ``socket_path`` tag indicates the location of the Unix domain UDP socket to be created by the module. From this socket, the module will read the incomming messages and forward them
+The ``socket_path`` tag indicates the location of the Unix domain UDP socket to be created by the module. From this socket, the module will read the incoming messages and forward them
 to the Fluentd server.
 
 The ``tag`` tag it's added to every message read from the UDP socket. This allows the user to specify the flow to the Fluentd server internal routing.

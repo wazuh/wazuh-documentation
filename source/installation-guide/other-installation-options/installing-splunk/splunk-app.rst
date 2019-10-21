@@ -21,7 +21,7 @@ Installation
 
     .. code-block:: console
 
-      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.10.0_7.3.0.tar.gz
+      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.10.2_7.3.0.tar.gz
 
 2. Install the Wazuh app for Splunk:
 
@@ -59,7 +59,7 @@ Installation
 
 4. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
-    By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner if the app can estabilish a connection.
+    By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner if the app can establish a connection.
 
     .. note::
       You can get more information about how to set up the credentials at :ref:`securing_api`.

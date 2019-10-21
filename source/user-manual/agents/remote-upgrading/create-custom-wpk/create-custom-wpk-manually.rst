@@ -44,9 +44,9 @@ Download and extract the latest version:
 
     .. code-block:: console
 
-            # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.0.tar.gz | tar zx
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.2.tar.gz | tar zx
 
-Modify the ``wazuh-3.10.0/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+Modify the ``wazuh-3.10.2/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
     .. code-block:: console
 
@@ -58,7 +58,7 @@ Compile the project from the ``src`` folder:
 
     .. code-block:: console
 
-            # cd wazuh-3.10.0/src
+            # cd wazuh-3.10.2/src
             # make deps
             # make TARGET=agent
 
@@ -110,13 +110,13 @@ Download and extract the latest version of wazuh sources:
 
     .. code-block:: console
 
-            # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.0.tar.gz | tar zx
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.2.tar.gz | tar zx
 
 Download the latest version of the wazuh MSI package:
 
     .. code-block:: console
 
-            # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.0-1.msi --output wazuh-agent-3.10.0-1.msi
+            # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.2-1.msi --output wazuh-agent-3.10.2-1.msi
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 

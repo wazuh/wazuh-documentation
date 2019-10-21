@@ -54,7 +54,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: SCA module
 
-  The :ref:`SCA module <manual_sec_config_assessment>` allows users to check the system configuration against policy files to determinte vulnerabilities and misconfigurations.
+  The :ref:`SCA module <manual_sec_config_assessment>` allows users to check the system configuration against policy files to determine vulnerabilities and misconfigurations.
 
 wazuh-modulesd options
 ----------------------

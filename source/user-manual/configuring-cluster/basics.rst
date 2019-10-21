@@ -94,7 +94,7 @@ Agent info thread
 Integrity thread
 ~~~~~~~~~~~~~~~~~~
 
-    The *integrity thread* is in charge of synchrozing the files sent by the master node to the workers. Those files are:
+    The *integrity thread* is in charge of synchronizing the files sent by the master node to the workers. Those files are:
 
         - :ref:`agent-keys-registration` file.
         - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.

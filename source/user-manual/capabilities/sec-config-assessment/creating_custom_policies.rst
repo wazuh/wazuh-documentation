@@ -214,7 +214,7 @@ Rules can check for existence of files, directories, registry keys and values, r
 test for existence of files inside directories. When it comes to content checking, they are able to check for file
 contents, recursively check for the contents of files inside directories, command output and registry value data.
 
-Abstracly, rules start by a location (and a `type` of location), that will be the target of the test,
+Abstractly, rules start by a location (and a `type` of location), that will be the target of the test,
 followed by the actual the test specification. Such tests fall into two categories: existence and content checks.
 
 .. General rule syntax
@@ -247,7 +247,7 @@ The operators for content checking are:
     +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
     | Operation                                                                            | Operator        | Example                                                    |
     +======================================================================================+=================+============================================================+
-    | Literal comparison, exact match                                                      | *by omision*    | ``f:/file -> CONTENT``                                     |
+    | Literal comparison, exact match                                                      | *by omission*   | ``f:/file -> CONTENT``                                     |
     +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
     | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``          | ``f:/file -> r:REGEX``                                     |
     +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
@@ -351,7 +351,7 @@ Examples of content checks:
 Examples
 ###################
 
-The following sections cover each rule type, illustrating them with several examples. It is also recomended to check
+The following sections cover each rule type, illustrating them with several examples. It is also recommended to check
 the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
 <https://github.com/wazuh/wazuh-qa/tree/master/integration_tests/sca/3.10>`_.
 

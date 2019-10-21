@@ -58,8 +58,8 @@ $(function() {
 
   /* Show the hidden menu */
   setTimeout(function() {
-    $('#navbar-globaltoc').removeClass('hidden');
-  }, 500);
+    $('#navbar').removeClass('hidden');
+  }, 100);
 
   $(window).on('hashchange', function() {
     updateFromHash();
@@ -143,46 +143,27 @@ $(function() {
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
   }
-
-  let delay = navbarTop + 200;
-  let windowHeight = window.innerHeight;
-  let documentHeight = $(document).outerHeight();
   let documentScroll = $(window).scrollTop();
-  let containerNavHeight = parseInt($('#navbar-globaltoc').outerHeight());
-  let navHeight = parseInt($('#globaltoc').outerHeight());
-  let pageFocus = 'document';
-  let pageHover = 'document';
-  let pageMouseWheel = false;
-  let navbarClick = false;
+  let disableScroll = false;
+  let scrollDirection = 'down';
+  let hoverDocument = 'document';
+  let eventScroll;
 
   heightNavbar();
-  scrollNavbar();
   headerSticky();
 
-  $('#navbar').on('mousemove', function(e) {
-    pageHover = 'nav';
-  });
-
-  $('#header, #main-content').on('mousemove', function(e) {
-    pageHover = 'document';
-  });
-
-  $(window).bind('mousewheel DOMMouseScroll', function(e) {
-    pageMouseWheel = true;
-  });
-
-  $(document).keydown(function(e) {
-    if (e.which == 38 || e.which == 40) {
-      pageMouseWheel = false;
+  setTimeout(function() {
+    if ($('#page').hasClass('no-latest-docs')) {
+      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
     }
+  }, 500);
+
+  $('#header, #main-content').on('mouseenter', function() {
+    hoverDocument = 'document';
   });
 
-  $('#navbar a').focus(function() {
-    navbarClick = true;
-  });
-
-  $('#header, #main-content').click(function() {
-    navbarClick = false;
+  $('#navbar-globaltoc').on('mouseenter', function() {
+    hoverDocument = 'navbar';
   });
 
   $(window).on('resize', function(e) {
@@ -200,16 +181,108 @@ $(function() {
     }
 
     heightNavbar();
-    scrollNavbar();
   });
 
-  $('#navbar-globaltoc').on('scroll', function(e) {
-    pageFocus = 'nav';
+  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'wheel';
+
+  if (document.getElementById('navbar-globaltoc').addEventListener) {
+    document.getElementById('navbar-globaltoc').addEventListener(mousewheelevt, function(e) {
+      eventScroll = 'mousewheel';
+      const delta = ((e.deltaY || -e.wheelDelta || e.detail) >> 10) || 1;
+      if (delta < 0 ) {
+        scrollDirection = 'up';
+      } else if (delta > 0) {
+        scrollDirection = 'down';
+      }
+      enableDisableScroll();
+      if (disableScroll) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, {passive: false} );
+  }
+
+  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
+    eventScroll = 'mousewheel';
+    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+      scrollDirection = 'up';
+    } else {
+      scrollDirection = 'down';
+    }
+    enableDisableScroll();
+    if (disableScroll) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.returnValue = false;
+      return false;
+    }
+  }); */
+
+  $('#navbar-globaltoc').keydown(function(e) {
+    eventScroll = 'keys';
+    let arrowKeys = false;
+    if (e.which == 38) {
+      arrowKeys = true;
+      scrollDirection = 'up';
+    }
+    if (e.which == 40) {
+      arrowKeys = true;
+      scrollDirection = 'down';
+    }
+    enableDisableScroll();
+    if (arrowKeys) {
+      if (disableScroll) {
+        return false;
+      }
+    }
   });
+
+  $(document).keydown(function(e) {
+    if (
+      (e.which == 38 || e.which == 40) &&
+      hoverDocument == 'navbar'
+    ) {
+      eventScroll = 'keys';
+      let arrowKeys = false;
+      if (e.which == 38) {
+        arrowKeys = true;
+        scrollDirection = 'up';
+      }
+      if (e.which == 40) {
+        arrowKeys = true;
+        scrollDirection = 'down';
+      }
+      enableDisableScroll();
+      if (arrowKeys) {
+        if (disableScroll) {
+          return false;
+        }
+      }
+    }
+  });
+
+  /**
+   * Enable or disable the scroll of #navbar-globaltoc
+   */
+  function enableDisableScroll() {
+    const ele = document.getElementById('navbar-globaltoc');
+    navbarHeight = parseInt(ele.scrollHeight) - parseInt($(ele).outerHeight());
+    navbarScroll = $(ele).scrollTop();
+    if (navbarScroll == navbarHeight && scrollDirection == 'down' && eventScroll == 'mousewheel') {
+      disableScroll = true;
+    } else if (navbarScroll == 0 && scrollDirection == 'up' && eventScroll == 'mousewheel') {
+      disableScroll = true;
+    } else if (navbarScroll == navbarHeight && scrollDirection == 'down' && eventScroll == 'keys' && hoverDocument == 'navbar') {
+      disableScroll = true;
+    } else if (navbarScroll == 0 && scrollDirection == 'up' && eventScroll == 'keys' && hoverDocument == 'navbar') {
+      disableScroll = true;
+    } else {
+      disableScroll = false;
+    }
+  }
 
   $(window).on('scroll', function(e) {
-    pageFocus = 'document';
-
     windowHeight = window.innerHeight;
     documentHeight = $(document).outerHeight();
     documentScroll = $(window).scrollTop();
@@ -217,15 +290,6 @@ $(function() {
     navHeight = parseInt($('#globaltoc').outerHeight());
     /* Update height of navbar */
     heightNavbar();
-    /* If the coursor isn't in the navbar */
-    if (((pageFocus == 'document' && pageHover == 'document') ||
-      (pageMouseWheel && pageFocus == 'nav' && pageHover == 'nav') ||
-      (!navbarClick && !pageMouseWheel && pageFocus == 'document' && pageHover == 'nav')
-    ) && $(window).outerWidth() >= 992) {
-      /* Set the new scroll of navbar */
-      scrollNavbar();
-    }
-
     headerSticky();
   });
 
@@ -241,7 +305,7 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
-    if ($(window).outerWidth() >= 992) {
+    if ($(window).width() >= 992) {
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': (noticeHeight+navbarTop-documentScroll)+'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - '+ noticeHeight +'px + '+documentScroll+'px)'});
@@ -258,30 +322,6 @@ $(function() {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight+52)+'px'});
       }
-    }
-  }
-
-  /**
-   * Sets the same scroll on the navbar (globaltoc) that on the document
-   */
-  function scrollNavbar() {
-    scrollReal = documentHeight-windowHeight-delay;
-    if (scrollReal < 0) {
-      scrollReal += delay;
-      delay = 0;
-    }
-    navScrollReal = navHeight-containerNavHeight;
-    percentage = ((documentScroll-delay)/scrollReal).toFixed(3);
-    navScrollEnd = (percentage*navScrollReal).toFixed();
-    if (percentage == 0) {
-      navScrollEnd = 0;
-    }
-    if (percentage == 1) {
-      navScrollEnd += 20;
-    }
-
-    if (navScrollReal >= 0) {
-      $('#navbar-globaltoc').scrollTop(navScrollEnd);
     }
   }
 
@@ -330,7 +370,7 @@ $(function() {
    */
   function showCurrentSubtree() {
     updateFromHash();
-    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('page-404') ) {
+    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('not-indexed') ) {
       $('.globaltoc :contains("'+ $('#breadcrumbs li:nth-last-child(2) a').text() +'")').addClass('show').addClass('current');
       return true;
     }
@@ -341,7 +381,6 @@ $(function() {
     currentLeaf.parents('li').each(function() {
       $(this).addClass('initial').addClass('show');
     });
-    $('#navbar-globaltoc').removeClass('hidden');
     completelyHideMenuItems();
   }
 
@@ -352,8 +391,11 @@ $(function() {
     $('#navbar-globaltoc li ul').each(function() {
       if ( $(this).closest('li').hasClass('show') ) {
         this.hidden = false;
+        $(this).slideDown(300);
       } else {
-        this.hidden = true;
+        $(this).slideUp(300, function() {
+          this.hidden = true;
+        });
       }
     });
   }
@@ -460,7 +502,7 @@ $(function() {
 
   /**
    * Only for main index (documentation's home page).
-   * Functionallity of the capabilities section: selects capability, controls the responsive behaviour, etc.
+   * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
    */
   function capabilitiesHome(ele) {
@@ -611,6 +653,65 @@ $(function() {
   $(document).on('keydown', function(e) {
     if ( e.keyCode == 27 ) {
       $('html, body').css('overflow', '');
+    }
+  });
+
+  /* Copy to clipboard ----------------------------------------------------------------------------------*/
+  $('.highlight').each(function() {
+    const blockCode = $(this).parent();
+    if ( !blockCode.hasClass('output') ) {
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+    } else {
+      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+    }
+  });
+
+  $('.copy-to-clipboard').click(function() {
+    const ele = $(this);
+    let data = $(ele).parent().find('.highlight').text();
+    data = String(data);
+    data = data.replace(/(?:\$\s)/g, '');
+    data = data.replace(/(?:\#\s)/g, '');
+    copyToClipboard(data);
+    $(ele).addClass('copied');
+    $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
+    $(ele).find('span').css({'display': 'block'});
+    setTimeout(function() {
+      $(ele).removeClass('copied');
+    }, 700);
+    setTimeout(function() {
+      $(ele).find('span').css({'display': 'none'});
+      $(ele).find('i').css({'display': 'block'});
+    }, 1000);
+  });
+
+  /**
+   * Copy the data to clipboard
+   * @param {string} data The string to copy
+   */
+  function copyToClipboard(data) {
+    const aux = document.createElement('textarea');
+    aux.value = data;
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand('copy');
+    document.body.removeChild(aux);
+  }
+
+  /* Avoid select $ and # on the code blocks -----------------------------------------------------*/
+  $('.highlight').each(function() {
+    const ele = $(this);
+    const data = ele.html();
+    const find = data.match(/(?:\$\s|\#)/g);
+    if (find != null) {
+      const dataArray = data.split('\n');
+      let content = '';
+      dataArray.forEach((line) => {
+        line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
+        line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
+        content += line;
+      });
+      ele.html(content);
     }
   });
 });

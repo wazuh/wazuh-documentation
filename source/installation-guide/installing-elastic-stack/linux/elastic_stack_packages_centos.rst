@@ -74,6 +74,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed:
 
+  .. note:: As mentioned, this command must be run in the Wazuh server.
+
   .. code-block:: console
 
     # filebeat setup --index-management -E setup.template.json.enabled=false
@@ -104,13 +106,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.3.2.zip
 
   * Install from the local file:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.3.2.zip
+     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.2_7.3.2.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 

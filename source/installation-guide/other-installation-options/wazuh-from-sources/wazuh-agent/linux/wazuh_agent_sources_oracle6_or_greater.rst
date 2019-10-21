@@ -26,7 +26,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.0.tar.gz | tar zx
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.2.tar.gz | tar zx
 
 #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
