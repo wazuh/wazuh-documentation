@@ -45,18 +45,18 @@ Below, you will find some examples of how to build an RPM package.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v3.10.2 -s /tmp -t manager -a x86_64 -r my_rev.
+  # ./generate_rpm_package.sh -b v3.11.0 -s /tmp -t manager -a x86_64 -r my_rev.
 
-This will generate a 3.10.2 Wazuh manager RPM package with revision ``my_rev`` for ``x86_64`` systems.
-
-.. code-block:: console
-
-  # ./generate_rpm_package.sh -b v3.10.2 -s /tmp -t api -a i386 -r my_rev
-
-This will generate a 3.10.2 Wazuh api RPM package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+This will generate a 3.11.0 Wazuh manager RPM package with revision ``my_rev`` for ``x86_64`` systems.
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v3.10.2 -t agent -a x86_64 -p /opt
+  # ./generate_rpm_package.sh -b v3.11.0 -s /tmp -t api -a i386 -r my_rev
 
-This will generate a 3.10.2 Wazuh agent RPM package with ``/opt`` as installation directory for ``x86_64`` systems.
+This will generate a 3.11.0 Wazuh api RPM package with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+
+.. code-block:: console
+
+  # ./generate_rpm_package.sh -b v3.11.0 -t agent -a x86_64 -p /opt
+
+This will generate a 3.11.0 Wazuh agent RPM package with ``/opt`` as installation directory for ``x86_64`` systems.

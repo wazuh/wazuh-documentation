@@ -46,12 +46,12 @@ Below, you will find some examples of how to build a Wazuh virtual machine.
 
 .. code-block:: console
 
-  # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r stable
+  # ./generate_ova.sh -b -v 3.11.0 -e 7.4.0 -r stable
 
-This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using stable packages
+This will generate a Virtual machine with Wazuh manager 3.11.0 and ELK 7.4.0 installed using stable packages
 
 .. code-block:: console
 
-  # ./generate_ova.sh -b -v 3.10.2 -e 7.3.2 -r unstable -c
+  # ./generate_ova.sh -b -v 3.11.0 -e 7.4.0 -r unstable -c
 
-This will generate a Virtual machine with Wazuh manager 3.10.2 and ELK 7.3.2 installed using unstable packages and generate the sha512 checksum
+This will generate a Virtual machine with Wazuh manager 3.11.0 and ELK 7.4.0 installed using unstable packages and generate the sha512 checksum
