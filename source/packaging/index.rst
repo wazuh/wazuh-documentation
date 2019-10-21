@@ -17,8 +17,8 @@ This section will show you how to generate Wazuh packages for different platform
         generate-hpux-package
         generate-wazuh-kibana-app
         generate-osx-package
-        generate-ova
         generate-rpm-package
         generate-sol-package
         generate-wazuh-splunk-app
+        generate-ova
         generate-wpk-package
