@@ -2,8 +2,8 @@
 
 .. _s3_bucket:
 
-AWS S3 Bucket
-=============
+Configuring an S3 Bucket
+========================
 
 Amazon Simple Storage Service (Amazon S3) is an object storage service that delivers industry-leading scalability, data availability, security, and performance.
 

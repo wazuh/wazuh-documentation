@@ -10,17 +10,27 @@ Monitoring AWS services
 
 The Wazuh module for AWS (``aws-s3``) provides capabilities to monitor AWS services. Each of the sections below contain detailed instructions to configure and set up all of the supported services, and also the required Wazuh configuration to collect the logs.
 
-This module requires dependencies in order to work, and also the right credentials in order to access to the services. Take a look at the :ref:`amazon_configuration` section before proceeding.
+This module requires dependencies in order to work, and also the right credentials in order to access to the services. Take a look at the `prerequisites`_ section before proceeding.
 
 .. note::
   Bucket encryption and all types of compression are supported, except ``Snappy``.
 
-.. topic:: Contents
+.. _prerequisites:
+.. topic:: Prerequisites
 
   .. toctree::
     :maxdepth: 1
 
     S3-bucket
+    credentials
+    dependencies
+    considerations
+
+.. topic:: Supported services
+
+  .. toctree::
+    :maxdepth: 1
+
     cloudtrail
     config
     vpc
@@ -29,3 +39,10 @@ This module requires dependencies in order to work, and also the right credentia
     kms
     inspector
     trusted-advisor
+
+.. topic:: Troubleshooting
+
+  .. toctree::
+    :maxdepth: 1
+
+    troubleshooting
