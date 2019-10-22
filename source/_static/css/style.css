@@ -273,7 +273,11 @@ dt {
   text-decoration: none;
 }
 
-a .docs-link {
+#links-to-home a.docs-link {
+  vertical-align: middle;
+}
+
+a.docs-link {
   color: #ffffff;
   vertical-align: text-top;
   display: inline-block;
@@ -281,8 +285,8 @@ a .docs-link {
   font-size: 1.2rem;
 }
 
-a .docs-link:hover,
-a .docs-link:active {
+a.docs-link:hover,
+a.docs-link:active {
   color: #ffffff;
 }
 
@@ -2895,6 +2899,10 @@ div.highlight pre {
 
       #header {
         position: relative;
+      }
+
+      #links-to-home a.docs-link {
+        vertical-align: bottom;
       }
 
       #header-sticky .navbar-open {
