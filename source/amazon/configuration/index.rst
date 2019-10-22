@@ -12,6 +12,7 @@ This section contains instructions to install the required dependencies in order
   .. toctree::
     :maxdepth: 1
 
+    S3-bucket
     dependencies
     credentials
     considerations
