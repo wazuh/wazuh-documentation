@@ -55,7 +55,7 @@ Wazuh configuration
         </bucket>
       </wodle>
 
-    To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which value can be ``cloudtrail`` to monitor CloudTrail logs or ``custom`` to monitor any other type of logs, for example, Firehose ones.
+    To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which depends on the service which is monitored.
 
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
