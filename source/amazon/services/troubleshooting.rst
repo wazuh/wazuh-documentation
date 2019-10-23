@@ -20,68 +20,68 @@ After configuring the module successfully users can expect to see the following 
 
     .. code-block:: console
 
-        2018/01/12 18:47:09 wazuh-modulesd:aws-cloudtrail: INFO: Module AWS-CloudTrail started
+        2019/10/28 13:58:10 wazuh-modulesd:aws-s3[8184] wm_aws.c:48 at wm_aws_main(): INFO: Module AWS started
 
 
 2. Scheduled scan:
 
     .. code-block:: console
 
-        2018/01/12 18:49:10 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs started
-        2018/01/12 18:49:11 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs finished.
+        2019/10/28 13:58:10 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
+        2019/10/28 13:38:11 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
 
 
-Troubleshooting
----------------
+Common errors
+-------------
 
-1. Errors in ossec.log
+1. Errors in ``ossec.log``
 
-    When an error occurs when trying to collect and parse logs for a CloudTrail, the ossec.log will output an error such as below:
+    When an error occurs when trying to collect and parse logs for an AWS service, the ``ossec.log`` will output an error such as below:
 
     The number is the AWS Account ID provided for the CloudTrail, and the name in the parenthesis is the AWS Account Alias (if provided).
 
     .. code-block:: console
 
-        2018/06/28 14:31:09 wazuh-modulesd:aws-cloudtrail: WARNING: CloudTrail: 012345678901(Prod)  -  Returned exit code 3.
-        2018/06/28 14:31:09 wazuh-modulesd:aws-cloudtrail: WARNING: CloudTrail: 012345678901(Prod)  -  Invalid credentials to access S3 Bucket
+        2019/10/28 13:58:11 wazuh-modulesd:aws-s3: WARNING: Bucket: wazuh-cloudtrail  -  Returned exit code 3
+        2019/10/28 13:58:11 wazuh-modulesd:aws-s3: WARNING: Bucket: wazuh-cloudtrail  -  Invalid credentials to access S3 Bucket
 
     The exit codes and their possible remediations are the next:
 
 
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | **Code**  | **Description**                                      | **Possible remediation**                                                                                           |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 1         | Unknown error                                        |                                                                                                                    |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 2         | Error parsing configuration (bucket name, keys, etc) | Check the wodle configuration in ``ossec.conf`` file                                                               |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 3         | Invalid credentials to access S3 bucket              | Ensure that your credentials are OK. :ref:`Credentials <amazon_credentials>` section may be useful                 |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 4         | boto3 module missing                                 | Install ``boto3`` library. Visit :ref:`dependencies <amazon_dependencies>` section for getting more information    |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 5         | Unexpected error accessing SQLite DB                 | Check that no more instances of the wodle are running at the same time                                             |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 6         | Unable to create SQLite DB                           | Ensure that the wodle has the right permissions in its directory                                                   |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 7         | Unexpected error querying/working with objects in S3 | Check that no more instances of the wodle are running at the same time                                             |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 8         | Failed to decompress file                            | Only ``.gz`` and ``.zip`` compression formats are supported                                                        |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 9         | Failed to parse file                                 | Check the type of the bucket                                                                                       |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 10        | Failed to execute DB cleanup                         | Check that no more instances of the wodle are running at the same time                                             |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 11        | Unable to connect to Wazuh                           | Ensure that Wazuh is running                                                                                       |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 12        | SIGINT                                               |                                                                                                                    |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | 13        | Error sending message to Wazuh                       | Ensure that Wazuh is running                                                                                       |
-    +-----------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | **Code**  | **Description**                                      | **Possible remediation**                                                                                                                                      |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 1         | Unknown error                                        | Programming error. Please, open an issue in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/issues/new/choose>`_ with the trace of the error     |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 2         | Error parsing configuration (bucket name, keys, etc) | Check the wodle configuration in ``ossec.conf`` file                                                                                                          |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 3         | Invalid credentials to access S3 bucket              | Ensure that your credentials are OK. :ref:`Credentials <amazon_credentials>` section may be useful                                                            |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 4         | boto3 module missing                                 | Install ``boto3`` library. Visit :ref:`dependencies <amazon_dependencies>` section for getting more information                                               |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 5         | Unexpected error accessing SQLite DB                 | Check that no more instances of the wodle are running at the same time                                                                                        |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 6         | Unable to create SQLite DB                           | Ensure that the wodle has the right permissions in its directory                                                                                              |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 7         | Unexpected error querying/working with objects in S3 | Check that no more instances of the wodle are running at the same time                                                                                        |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 8         | Failed to decompress file                            | Only ``.gz`` and ``.zip`` compression formats are supported                                                                                                   |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 9         | Failed to parse file                                 | Check the type of the bucket                                                                                                                                  |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 10        | Failed to execute DB cleanup                         | Check that no more instances of the wodle are running at the same time                                                                                        |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 11        | Unable to connect to Wazuh                           | Ensure that Wazuh is running                                                                                                                                  |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 12        | SIGINT                                               | The module stopped due to an interrupt signal                                                                                                                 |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 13        | Error sending message to Wazuh                       | Ensure that Wazuh is running                                                                                                                                  |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 2. Debugging configuration:
 
-    If users are unable to determine the issues from the ossec.log, users can run the modules in debug mode.  With Wazuh running, stop the moduled
+    If users are unable to determine the issues from the ``ossec.log``, users can run the modules in debug mode.  With Wazuh running, stop the moduled
 
     .. code-block:: console
 
@@ -103,12 +103,11 @@ Troubleshooting
     | -fddd  | Extremely verbose debug (Warning: generates logs of msgs) |
     +--------+-----------------------------------------------------------+
 
-    This will print debug data to the console and log.  The debug will also output the command that the wodle is using to execute the Python script for each CloudTrail.  If a particular CloudTrail is causing problems, this command can be manually executed, increasing the debug level from 1 (basic) to 3 (extremely verbose)
+    This will print debug data to the console and log.  The debug will also output the command that the wodle is using to execute the Python script for each service.  If a particular service is causing problems, this command can be manually executed, increasing the debug level from 1 (basic) to 3 (extremely verbose)
 
     .. code-block:: console
 
-        # 2018/06/28 18:11:02 wazuh-modulesd:aws-cloudtrail: DEBUG: Launching CloudTrail Command: /var/ossec/wodles/aws/aws.py --bucket s3-prod-bucket --iam_role_arn arn:aws:iam::001122334455:role/ROLE_Log-Parser --aws_account_id 012345678901 --aws_account_alias prod --only_logs_after 2018-JUN-01 --debug 2 --skip_on_error
-
+        # 2019/10/28 14:08:28 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): DEBUG: Launching S3 Command: /var/ossec/wodles/aws/aws-s3 --bucket wazuh-cloudtrail --access_key XXXXXXXX --secret_key XXXXXXXX --type cloudtrail --debug 2 --skip_on_error
 
 3. Time interval is shorter than the time taken to pull log data:
 
@@ -116,7 +115,7 @@ Troubleshooting
 
     .. code-block:: console
 
-        2018/01/12 19:10:37 wazuh-modulesd:aws-cloudtrail: WARNING: Interval overtaken.
+        # 2019/10/28 14:08:31 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): WARNING: Interval overtaken.
 
 4. Wrong AWS service path:
 

@@ -24,7 +24,7 @@ Wazuh will need a user with permissions to pull log data from the S3 bucket. The
 
     Navigate to Services > IAM > Users
 
-    .. thumbnail:: ../../images/aws/aws-user.png
+    .. thumbnail:: ../../../images/aws/aws-user.png
       :align: center
       :width: 70%
 
@@ -34,13 +34,13 @@ Wazuh will need a user with permissions to pull log data from the S3 bucket. The
 
     We will attach this policy later to the user we are creating.
 
-    .. thumbnail:: ../../images/aws/aws-create-policy.png
+    .. thumbnail:: ../../../images/aws/aws-create-policy.png
       :align: center
       :width: 70%
 
     Check that your new policy looks like this:
 
-    .. thumbnail:: ../../images/aws/aws-summary-policy.png
+    .. thumbnail:: ../../../images/aws/aws-summary-policy.png
       :align: center
       :width: 70%
 
@@ -72,13 +72,13 @@ Wazuh will need a user with permissions to pull log data from the S3 bucket. The
 
 3. Attach policy:
 
-    .. thumbnail:: ../../images/aws/aws-attach-policy.png
+    .. thumbnail:: ../../../images/aws/aws-attach-policy.png
       :align: center
       :width: 70%
 
 4. Confirm user creation and get credentials:
 
-    .. thumbnail:: ../../images/aws/aws-summary-user.png
+    .. thumbnail:: ../../../images/aws/aws-summary-user.png
       :align: center
       :width: 70%
 
@@ -135,55 +135,55 @@ IAM Roles can also be used to access the S3 bucket. Follow these steps to create
 
 1. Go to Services > Security, Identity & Compliance > IAM.
 
-    .. thumbnail:: ../../images/aws/aws-create-role-1.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-1.png
       :align: center
       :width: 70%
 
 2. Select Roles in the right menu and click on the *Create role* button:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-2.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-2.png
       :align: center
       :width: 70%
 
 3. Select S3 service and click on *Next: Permissions* button:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-4.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-4.png
       :align: center
       :width: 70%
 
 4. Select the previously created policy:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-5.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-5.png
       :align: center
       :width: 70%
 
 5. Click on *Create role* button:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-6.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-6.png
       :align: center
       :width: 70%
 
 6. Access to role summary and click on its policy name:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-7.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-7.png
       :align: center
       :width: 70%
 
 7. Add permissions so the new role can do *sts:AssumeRole* action:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-8.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-8.png
       :align: center
       :width: 70%
 
 8. Come back to the role's summary, go to *Trust relationships* tab and click on *Edit trust relationship* button:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-9.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-9.png
       :align: center
       :width: 70%
 
 9. Add your user to the *Principal* tag and click on *Update Trust Policy* button:
 
-    .. thumbnail:: ../../images/aws/aws-create-role-10.png
+    .. thumbnail:: ../../../images/aws/aws-create-role-10.png
       :align: center
       :width: 70%
 

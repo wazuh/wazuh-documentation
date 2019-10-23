@@ -20,3 +20,55 @@ Older logs
 ----------
 
 The ``aws-s3`` Wazuh module only looks for new logs based upon the key for last processed log object, which includes the datetime stamp. If older logs are loaded into the S3 bucket or the ``only_logs_after`` option date is set to a datetime earlier than previous executions of the module, the older log files will be ignored and not ingested into Wazuh.
+
+
+Configuring multiple services
+-----------------------------
+
+Below there is an example of different services configuration:
+
+.. code-block:: xml
+
+  <wodle name="aws-s3">
+    <disabled>no</disabled>
+    <interval>10m</interval>
+    <run_on_start>yes</run_on_start>
+    <skip_on_error>yes</skip_on_error>
+
+    <service type="inspector">
+      <aws_profile>default</aws_profile>
+      <regions>us-east-1,us-east-2</regions>
+      <only_logs_after>2018-JAN-01</only_logs_after>
+    </service>
+
+    <bucket type="guardduty">
+      <name>wazuh-aws-wodle</name>
+      <path>guardduty</path>
+      <aws_profile>production</aws_profile>
+    </bucket>
+
+    <bucket type="config">
+      <name>wazuh-aws-wodle</name>
+      <path>config</path>
+      <aws_profile>default</aws_profile>
+    </bucket>
+
+    <bucket type="custom">
+      <name>wazuh-aws-wodle</name>
+      <path>kms_compress_encrypted</path>
+      <aws_profile>dev</aws_profile>
+    </bucket>
+
+    <bucket type="cloudtrail">
+      <name>wazuh-cloudtrail</name>
+      <access_key>XXXXXXXXXX</access_key>
+      <secret_key>XXXXXXXXXX</secret_key>
+    </bucket>
+
+    <bucket type="cloudtrail">
+      <name>wazuh-aws-wodle</name>
+      <path>cloudtrail2</path>
+      <aws_profile>default</aws_profile>
+    </bucket>
+
+  </wodle>
