@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _client-keys:
 
@@ -25,7 +25,8 @@ This file contains one line per each agent entry. In the case of agents, only on
 
     <ID> <Name> <Address> <Password>
 
-ID
+**ID**
+
     Agent identificator number.
 
     +--------------------+---------------+
@@ -40,7 +41,8 @@ ID
     | Reserved values    | ID "000"      |
     +--------------------+---------------+
 
-Name
+**Name**
+
     Name of the agent.
 
     +--------------------+--------------------------------------------------+
@@ -51,7 +53,8 @@ Name
     | Unique value       | Yes                                              |
     +--------------------+--------------------------------------------------+
 
-Address
+**Address**
+
     Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP matches this address.
 
     +--------------------+----------------------------+
@@ -64,7 +67,8 @@ Address
     | Aliases            | ``any`` = ``0.0.0.0/0``    |
     +--------------------+----------------------------+
 
-Password
+**Password**
+
     String that will take part in the external message encryption.
 
     +--------------------+----------------------+

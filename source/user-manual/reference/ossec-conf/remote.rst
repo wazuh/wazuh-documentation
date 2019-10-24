@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_remote:
 
@@ -130,7 +130,7 @@ Sets the capacity of the remote daemon queue in number of agent events.
 +--------------------+----------------------------------+
 
 .. note::
-  The remote queue is only available for agent events, not *syslog* events. This options only works when the **connection** is set to ``secure``.
+  The remote queue is only available for agent events, not *syslog* events. This option only works when the **connection** is set to ``secure``.
 
 Example of configuration
 ------------------------

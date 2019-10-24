@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _manual_integration:
 
@@ -93,5 +93,24 @@ This is an example configuration for the VirusTotal integration:
     <name>virustotal</name>
     <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
     <group>syscheck</group>
+    <alert_format>json</alert_format>
+  </integration>
+
+Custom integration
+------------------
+
+Integrator tool is able to connect wazuh with other external software. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
+
+This is an example configuration for a custom integration:
+
+.. code-block:: xml
+
+  <!--Custom external Integration -->
+  <integration>
+    <name>custom-integration</name>
+    <hook_url>WEBHOOK</hook_url>
+    <level>10</level>
+    <group>multiple_drops|authentication_failures</group>
+    <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>

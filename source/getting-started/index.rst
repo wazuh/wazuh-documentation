@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _getting_started:
 
@@ -10,7 +10,7 @@ Getting started
 
 Wazuh is a security detection, visibility, and compliance open source project. It was born as a fork of OSSEC HIDS, and later was integrated with Elastic Stack and OpenSCAP, evolving into a more comprehensive solution. Below is a brief description of these tools and what they do:
 
-.. image:: ../images/getting_started/wazuh_graphic_poc.png
+.. thumbnail:: ../images/getting_started/wazuh_graphic_poc.png
    :align: center
    :width: 100%
 
@@ -28,7 +28,7 @@ Wazuh is a security detection, visibility, and compliance open source project. I
 
 .. topic:: Elastic Stack
 
- `Elastic Stack <https://www.elastic.co>`_ is a software suite (Filebeat, Logstash, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web front-end that gives a high-level dashboard view of events that allows for advanced analytics and data mining deep into your store of event data.
+ `Elastic Stack <https://www.elastic.co>`_ is a software suite (Filebeat, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web front-end that gives a high-level dashboard view of events that allows for advanced analytics and data mining deep into your store of event data.
 
 .. topic:: Table of Contents
 

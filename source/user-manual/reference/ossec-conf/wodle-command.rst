@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wodle_command:
 
@@ -129,7 +129,7 @@ timeout
 .. versionadded:: 3.2.2
 
 Timeout for each command to wait for the end of the execution. Whether this parameter is set to 0, it will wait indefinitely for the end of the process.
-However, if the timeout is other than 0, the execution will finished if it expires.
+However, if the timeout is other than 0, the execution will finish if it expires.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |

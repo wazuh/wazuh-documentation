@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _virustotal-description:
 
@@ -51,27 +51,27 @@ For this use case, we will show how to monitor the folder ``/media/user/software
 
 1. The following must be added to the ``<syscheck>`` section of the configuration file:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <syscheck>
-    ...
-      <directories check_all="yes" realtime="yes">/media/user/software</directories>
-    ...
-    </syscheck>
+      <syscheck>
+      ...
+        <directories check_all="yes" realtime="yes">/media/user/software</directories>
+      ...
+      </syscheck>
 
 2. After applying the configuration, you must restart the Wazuh manager:
 
-  a. For Systemd:
+    a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
 After restarting, FIM will apply the new configuration and the specified folder will be monitored in real-time. The alert below appears when a file is added to the monitored directory:
 

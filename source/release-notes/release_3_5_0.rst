@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _release_3_5_0:
 
@@ -72,7 +72,7 @@ Wazuh ruleset
 
 - Added rules for the new osquery integration.
 - Improved CIS-CAT rules.
-- Ingoring syscollector events rule added.
+- Ignoring syscollector events rule added.
 
 Wazuh app for Kibana
 --------------------

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _openscap_module:
 
@@ -15,8 +15,8 @@ The **OpenSCAP wodle** is an integration of `OpenSCAP <https://www.open-scap.org
 
 
 .. toctree::
-  :maxdepth: 2
+    :maxdepth: 2
 
-  how-it-works
-  oscap-configuration
-  oscap-faq
+    how-it-works
+    oscap-configuration
+    oscap-faq

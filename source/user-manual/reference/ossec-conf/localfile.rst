@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_localfile:
 
@@ -27,21 +27,22 @@ Options
 - `target`_
 - `log_format`_
 - `out_format`_
+- `ignore_binaries`_
+- `age`_
+- `exclude`_
 
 location
 ^^^^^^^^
 
 Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
-For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
+For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jul 30th, 2019).
 
-Wildcards may be used on non-Windows systems, but if the log file doesn't exist at the time ``ossec-logcollector`` is started, it will be added after ``logcollector.vcheck_files`` seconds.
+Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
-Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
+The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. 
-
-As an example, these two configurations show a channel filtering for firewall and Sysmon events.
+In the following example we can see two configurations showing a channel filtering for firewall and Sysmon events.
 
 .. code-block:: xml
 
@@ -55,11 +56,37 @@ As an example, these two configurations show a channel filtering for firewall an
       <log_format>eventchannel</log_format>
   </localfile>
 
-+--------------------+--------------+
-| **Default value**  | n/a          |
-+--------------------+--------------+
-| **Allowed values** | Any log file |
-+--------------------+--------------+
+
+Below we have some Windows wildcard examples.
+
+.. code-block:: xml
+
+  <localfile>
+      <location>C:\Users\wazuh\myapp\*</location>
+      <log_format>syslog</log_format>
+  </localfile>
+
+  <localfile>
+      <location>C:\xampp\apache\logs\*.log</location>
+      <log_format>syslog</log_format>
+  </localfile>
+
+  <localfile>
+      <location>C:\logs\file-%Y-%m-%d.log</location>
+      <log_format>syslog</log_format>
+  </localfile>
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Any log file or wildcard |
++--------------------+--------------------------+
+
+.. note::
+  * ``strftime`` format strings and wildcards cannot be used on the same entry.
+
+  * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
+  * The maximum amount of files monitored at same time is limited to 200.
 
 command
 ^^^^^^^
@@ -109,14 +136,14 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to *yes* to collect only events generated after the Wazuh starts.
+Set it to *no* to collect events generated since Wazuh agent was stopped.
 
-By default, when Wazuh starts it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+By default, when Wazuh starts it will only read all log content from a given Windows Event Channel since the agent started.
 
-Only compatible with `eventchannel` log format.
+This feature is only compatible with `eventchannel` log format.
 
 +--------------------+-----------+
-| **Default value**  | n/a       |
+| **Default value**  | yes       |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+
@@ -126,7 +153,7 @@ query
 
 Filter ``eventchannel`` events that Wazuh will process by using an *XPATH* query following the event schema.
 
-Example: 
+Example:
 
 .. code-block:: xml
 
@@ -282,7 +309,7 @@ Set the format of the log to be read. **field is required**
 
 .. warning::
 
-    Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context.
+    Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh manager from running arbitrary commands on agents in their root security context.
 
 Sample of Multi-line log message in original log file:
 
@@ -338,6 +365,72 @@ Attributes:
 |            +----------------+------------------------------------------------------------------+
 |            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
 +------------+----------------+------------------------------------------------------------------+
+
+ignore_binaries
+^^^^^^^^^^^^^^^
+
+This specifies to ignore binary files, testing if the file is UTF8 or ASCII.
+
+If this is set to **yes** and the file is, for example, a binary file, it will be discarded.
+
++--------------------+-----------+
+| **Default value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | yes or no |
++--------------------+-----------+
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/*</location>
+      <ignore_binaries>yes</ignore_binaries>
+  </localfile>
+
+.. note::
+  On Windows agents, it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
+
+age
+^^^
+
+This specifies to read-only files that have been modified before the specified age.
+
+For example, if the age is set to 1 day, all files that have not been modified since 1 day will be ignored.
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/*</location>
+      <age>1d</age>
+  </localfile>
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                                      |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+exclude
+^^^^^^^
+
+This indicates the location of a wild-carded group of logs to be excluded.
+
+For example, we may want to read all the files from a directory, but exclude those files whose name starts with an `e`.
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/*</location>
+      <exclude>/var/logs/e*</exclude>
+  </localfile>
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Any log file or wildcard |
++--------------------+--------------------------+
 
 Configuration examples
 ----------------------

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ruleset_cdb-list:
 
@@ -40,6 +40,10 @@ Example of IP address list file::
 
 We recommend to store the lists on ``/var/ossec/etc/lists``.
 
+.. versionadded:: 3.11.0
+
+Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists, it is no longer needed to run ``ossec-makelists``, just restart the manager.
+
 Adding the list to ossec.conf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -67,13 +71,6 @@ Restart Wazuh to apply the changes:
   .. code-block:: console
 
     # service wazuh-manager restart
-
-Making the CDB list
-^^^^^^^^^^^^^^^^^^^
-
-The list files must be compiled before they can be used. The tool ``/var/ossec/bin/ossec-makelists`` will process and compile all the lists if needed.
-
-Remember to compile the lists every time that you update them. It is necessary to restart Wazuh to apply the changes.
 
 Using the CDB list in the rules
 -------------------------------

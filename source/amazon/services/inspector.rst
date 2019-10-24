@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _amazon_inspector:
 
@@ -18,49 +18,49 @@ Wazuh configuration
 
 1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with Inspector:
 
-.. code-block:: xml
+    .. code-block:: xml
 
-  <wodle name="aws-s3">
-    <disabled>no</disabled>
-    <interval>10m</interval>
-    <run_on_start>no</run_on_start>
-    <skip_on_error>no</skip_on_error>
-    <service type="inspector">
-      <aws_profile>default</aws_profile>
-    </service>
-  </wodle>
+      <wodle name="aws-s3">
+        <disabled>no</disabled>
+        <interval>10m</interval>
+        <run_on_start>no</run_on_start>
+        <skip_on_error>no</skip_on_error>
+        <service type="inspector">
+          <aws_profile>default</aws_profile>
+        </service>
+      </wodle>
 
-Users must specify at least a region. Multiple regions can be added separated by commas.
+    Users must specify at least a region. Multiple regions can be added separated by commas.
 
-.. note::
-  Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+    .. note::
+      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
 2. Restart Wazuh in order to apply the changes:
 
-* If you're configuring a Wazuh manager:
+    * If you're configuring a Wazuh manager:
 
-  a. For Systemd:
+      a. For Systemd:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+      b. For SysV Init:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # service wazuh-manager restart
+        # service wazuh-manager restart
 
-* If you're configuring a Wazuh agent:
+    * If you're configuring a Wazuh agent:
 
-  a. For Systemd:
+      a. For Systemd:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # systemctl restart wazuh-agent
+        # systemctl restart wazuh-agent
 
-  b. For SysV Init:
+      b. For SysV Init:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # service wazuh-agent restart
+        # service wazuh-agent restart

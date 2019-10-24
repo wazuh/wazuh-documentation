@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _remote-upgrading:
 
@@ -14,7 +14,7 @@ Remote upgrading
 
         upgrading-agent
         custom-repository
-        create-custom-wpk
+        create-custom-wpk/create-wpk-key
         install-custom-wpk
         wpk-list
 

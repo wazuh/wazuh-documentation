@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _build_lab:
 
@@ -27,7 +27,7 @@ as you focus on one aspect after another of the Wazuh solution.
     build-vpc
     launch-ec2-instances
     access-ec2-instances
-    install-wazuh-server
+    install-wazuh-manager
     install-elastic-stack
     kibana-setup
     install-linux-agents

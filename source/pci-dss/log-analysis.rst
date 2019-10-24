@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _pci_dss_log_analysis:
 
@@ -7,9 +7,9 @@ Log analysis
 
 Here we will use Wazuh log collection and analysis capabilities to meet the following PCI DSS controls:
 
-| **10.2.4**: Invalid logical access attempts.
-| **10.2.5**: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
-|
+  | **10.2.4**: Invalid logical access attempts.
+  | **10.2.5**: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
+  |
 
 These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), privilege escalations, changes to accounts, etc. In order to achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement(s). This makes it easy to analyze and visualize our PCI DSS related alerts.
 
@@ -146,10 +146,5 @@ Kibana displays information in an organized way, allowing filtering by different
 
 .. thumbnail:: ../images/pci/log_analysis_2.png
     :title: Wazuh PCI DSS dashboard for Kibana
-    :align: center
-    :width: 100%
-
-.. thumbnail:: ../images/pci/log-analysis-pci.png
-    :title: Wazuh App PCI section for Kibana
     :align: center
     :width: 100%

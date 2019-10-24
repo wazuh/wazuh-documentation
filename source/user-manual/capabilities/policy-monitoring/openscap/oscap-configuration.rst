@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _oscap-examples:
 
@@ -39,9 +39,9 @@ This section describes how to evaluate the Payment Card Industry Data Security S
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know which policy and profile to execute.
+Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
-Agent ``ossec.conf`` file:
+Modify the ``ossec.conf`` file in the agent side to apply the desired profile:
 
 ::
 
@@ -54,13 +54,21 @@ Agent ``ossec.conf`` file:
     <config-profile>redhat7</config-profile>
   </client>
 
-**Step 2: Configure manager**
+After this, restart the agents to apply the configuration.
 
-We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 servers.
+.. code-block:: console
 
-Manager ``/var/ossec/etc/shared/default/agent.conf`` file (assuming that the agent is on the ``default`` group):
+    # /var/ossec/bin/agent_control -R -a
 
-::
+If you prefer, you can restart a specific agent with option ``-u <id>``.
+
+**Step 2: Configure shared settings**
+
+We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 agents.
+
+To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
+
+.. code-block:: xml
 
   <agent_config profile="redhat7">
 
@@ -72,32 +80,9 @@ Manager ``/var/ossec/etc/shared/default/agent.conf`` file (assuming that the age
 
   </agent_config>
 
-**Step 3: Restart manager and agents**
+When the agents receive this configuration, they will restart to apply the changes and start the evaluation.
 
-To apply the new configuration, restart the manager:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
-
-And now, restart all the agents:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/agent_control -R -a
-
-If you prefer, you can restart a specific agent with the option ``-u <id>`` where **id** is the agent's id number.
-
-
-**Step 4: See alerts**
+**Step 3: See alerts**
 
 When the evaluation is complete you will see the results as OSSEC alerts:
 
@@ -122,15 +107,15 @@ When the evaluation is complete you will see the results as OSSEC alerts:
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. image:: ../../../../images/wodles-oscap/pci-oscap.png
+.. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
     :align: center
     :width: 100%
 
-**Step 5: Dashboards**
+**Step 4: Dashboards**
 
 Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../../../images/wodles-oscap/pci-dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
     :align: center
     :width: 100%
 
@@ -141,22 +126,34 @@ The Red Hat Security Response Team provides OVAL definitions for all vulnerabili
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know which policy and profile to execute.
+Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
-Agent ``ossec.conf``:
+Modify the ``ossec.conf`` file in the agent side to apply the desired profile:
 
-::
+.. code-block:: xml
 
   <client>
-    <server-ip>10.0.1.4</server-ip>
+    <server>
+      <address>10.0.1.4</address>
+      <port>1514</port>
+      <protocol>tcp</protocol>
+    </server>
     <config-profile>redhat7</config-profile>
   </client>
 
+After this, restart the agents to apply the configuration.
+
+.. code-block:: console
+
+  # /var/ossec/bin/agent_control -R -a
+
+If you prefer, you can restart a specific agent with option ``-u <id>``.
+
 **Step 2: Configure manager**
 
-We want to execute the RedHat security policy only on Red Hat 7 servers.
+We want to execute the RedHat security policy only on Red Hat 7 agents.
 
-Manager ``shared/agent.conf``:
+To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
 ::
 
@@ -168,32 +165,9 @@ Manager ``shared/agent.conf``:
 
   </agent_config>
 
-**Step 3: Restart manager and agents**
+When the agents receive this configuration, they will restart to apply the changes and start the auditing.
 
-To apply the new configuration, restart the manager:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
-
-And now, restart all the agents:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/agent_control -R -a
-
-If you prefer, you can restart a specific agent with option ``-u <id>``.
-
-
-**Step 4: See alerts**
+**Step 3: See alerts**
 
 When the evaluation is completed you will see the results as OSSEC alerts:
 
@@ -220,20 +194,20 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. image:: ../../../../images/wodles-oscap/oscap_example.png
+.. thumbnail:: ../../../../images/wodles-oscap/oscap_example.png
     :align: center
     :width: 100%
 
-.. image:: ../../../../images/wodles-oscap/overview.png
+.. thumbnail:: ../../../../images/wodles-oscap/overview.png
     :align: center
     :width: 100%
 
 
-**Step 5: Dashboards**
+**Step 4: Dashboards**
 
 Finally, you can explore all scan results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../../../images/wodles-oscap/dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/dashboard.png
     :align: center
     :width: 100%
 

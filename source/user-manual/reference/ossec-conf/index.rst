@@ -1,11 +1,11 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_conf:
 
 Local configuration (ossec.conf)
 ================================
 
-The ``ossec.conf`` file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. It is located at ``/var/ossec/etc/ossec.conf`` both in the manager and agent. It is recommended that you back up this file before making changes to it, as an error in the configuration can prevent Wazuh services from starting up.
+The ``ossec.conf`` file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. It is located at ``/var/ossec/etc/ossec.conf`` both in the manager and agent on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.  It is recommended that you back up this file before making changes to it, as an error in the configuration can prevent Wazuh services from starting up.
 
 The ``ossec.conf`` file is in XML format and all of its configuration options are nested in their appropriate section of the file.  In this file, the outermost XML tag is ``<ossec_config>``.  Here is an example of the proper location of the *alerts* configuration section:
 
@@ -62,6 +62,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`sca <sca>`                                                    | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`socket <socket>`                                              | manager, agent         |
@@ -76,7 +78,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager                |
+| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
@@ -84,11 +86,13 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="docker-listener" <wodle-docker>`                  | agent                  |
+| :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 
 
@@ -118,10 +122,12 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    remote
    reports
    rootcheck
+   sca
    ruleset
    socket
    syscheck
    syslog-output
+   fluent-forward
    wodle-openscap
    wodle-command
    wodle-ciscat

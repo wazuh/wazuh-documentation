@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_integration:
 
@@ -32,11 +32,14 @@ name
 
 This indicates the service to integrate with.
 
-+--------------------+------------------------------+
-| **Default value**  | n/a                          |
-+--------------------+------------------------------+
-| **Allowed values** | slack, pagerduty, virustotal |
-+--------------------+------------------------------+
++--------------------+---------------------------------------------------------------------+
+| **Default value**  | n/a                                                                 |
++--------------------+---------------------------------------------------------------------+
+| **Allowed values** | slack, pagerduty, virustotal, any string that begins with 'custom-' |
++--------------------+---------------------------------------------------------------------+
+
+.. note::
+  In the case of custom external integration, name must begin with ``custom-`` for example: ``custom-myintegration``. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
 
 hook_url
 ^^^^^^^^
@@ -156,5 +159,15 @@ Configuration example
     <name>virustotal</name>
     <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
     <group>syscheck</group>
+    <alert_format>json</alert_format>
+  </integration>
+
+  <!--Custom external Integration -->
+  <integration>
+    <name>custom-integration</name>
+    <hook_url>WEBHOOK</hook_url>
+    <level>10</level>
+    <group>multiple_drops|authentication_failures</group>
+    <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>

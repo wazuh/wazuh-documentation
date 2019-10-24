@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _gdpr_II:
 
@@ -12,7 +12,7 @@ Chapter II, Article 5 Head 1(f)
 
 **Article 5**  "Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality')."
 
-The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements. 
+The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements.
 
 Wazuh’s File integrity monitoring (FIM) helps on this task by watching specific files and triggering alerts when these are modified. The component responsible for this task is called `Syscheck <https://documentation.wazuh.com/3.x/user-manual/reference/ossec-conf/syscheck.html>`_. It stores the cryptographic checksum and other attributes from file or Windows registry keys and regularly compares it to the file's current checksum.
 
@@ -105,7 +105,3 @@ As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%
-
-
-
-

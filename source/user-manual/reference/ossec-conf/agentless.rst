@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_agentless:
 
@@ -62,7 +62,7 @@ Defines the username and the name of the agentless host.
 +--------------------+--------------------------------------------------------+
 | **Default value**  | n/a                                                    |
 +--------------------+--------------------------------------------------------+
-| **Allowed values** | Any username and host (username@hostname)              |
+| **Allowed values** | Any username and host (``username@hostname``)          |
 +--------------------+--------------------------------------------------------+
 
 state

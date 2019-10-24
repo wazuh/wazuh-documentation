@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _agent-management:
 
@@ -16,7 +16,6 @@ This section describes how to manage the agents using the command line (CLI), th
         :maxdepth: 2
 
         agent-life-cycle
-        registering/index
         listing/index
         remove-agents/index
         agent-connection

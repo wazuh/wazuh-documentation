@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _antiflooding:
 
@@ -19,7 +19,7 @@ Why an anti-flooding mechanism is needed
 
 In the Wazuh architecture, Wazuh agents collect information from log files, command outputs, different kinds of scans, etc. They then send all the collected information to their manager, separated into individual events. Without any congestion control, an agent could potentially send events at a rate as high as the system is physically capable of transmitting, which could be hundreds or thousands of events per second.
 
-Due to this fact, a incorrect configuration in an agent may generate enough events to saturate a network or its manager. Here are some misconfiguration scenarios that could lead to this problem:
+Due to this fact, an incorrect configuration in an agent may generate enough events to saturate a network or its manager. Here are some misconfiguration scenarios that could lead to this problem:
 
 - Realtime FIM (Syscheck) of a directory with files that keep changing:
 
@@ -138,12 +138,12 @@ At this point, two possible things could happen:
 
 1. The use of the buffer decreases to below the ``warning level`` before the timer reaches the ``tolerance time``.  If this occurs, no alert about flooding appears on the manager.
 
-This graphic illustrates this situation.
+    This graphic illustrates this situation.
 
-.. thumbnail:: /images/manual/internal-capabilities/graphic_without_flooding.png
-    :title: buffer usage without flooding
-    :align: center
-    :width: 70%
+    .. thumbnail:: /images/manual/internal-capabilities/graphic_without_flooding.png
+        :title: buffer usage without flooding
+        :align: center
+        :width: 70%
 
 2. The use of the buffer stays above the ``warning level`` until the specified ``tolerance time`` has elapsed.  Now, it appears that the buffer may not come back to a normal status by itself. For that reason, a more severe ``Flooding status`` alert is triggered on the manager.
 

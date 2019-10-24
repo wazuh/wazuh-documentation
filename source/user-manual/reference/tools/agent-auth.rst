@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _agent-auth:
 
@@ -31,7 +31,7 @@ The ``agent-auth`` program is the client application used along with :ref:`ossec
 +---------------------+-------------------------------------------------------------------------------+
 | **-g <group>**      | Run as a group.                                                               |
 +---------------------+-------------------------------------------------------------------------------+
-| **-G <group>**      | Set the group for centralized configuration.                                  |
+| **-G <group>**      | Assigns the agent to one or more existing groups (separated by commas).       |
 +---------------------+-------------------------------------------------------------------------------+
 | **-i**              | Let the agent IP address be set by the manager connection.                    |
 +---------------------+-------------------------------------------------------------------------------+

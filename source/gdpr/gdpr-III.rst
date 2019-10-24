@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _gdpr_III:
 
@@ -31,7 +31,7 @@ We have the ability to control access to data through Syscheck and control that 
 .. thumbnail:: ../images/gdpr/time_no_alert.png
     :title: Filtering alerts by Syscheck no alert
     :align: center
-    :width: 100% 
+    :width: 100%
 
 
 Chapter III, Article 17
@@ -43,13 +43,13 @@ In some scenarios, an individual may request the permanent deletion of their per
 
 `Syscheck <https://documentation.wazuh.com/3.x/user-manual/reference/ossec-conf/syscheck.html>`_  can be used again to meet the GDPR requirement found in chapter III Rights of the data subject, article 17.
 
-Permanent data deletion (Syscheck). Wazuh has the ability to monitor deleted files using Syscheck, ensuring that the individual's personal data has been permanently deleted in response to your request. 
+Permanent data deletion (Syscheck). Wazuh has the ability to monitor deleted files using Syscheck, ensuring that the individual's personal data has been permanently deleted in response to your request.
 
 
 Use cases
 ^^^^^^^^^
 
-Using Syscheck to monitor in real time using ``realtime`` we can see if data has been deleted. 
+Using Syscheck to monitor in real time using ``realtime`` we can see if data has been deleted.
 
 .. code-block:: console
 

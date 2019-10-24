@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _pci_dss_file_integrity_monitoring:
 
@@ -11,8 +11,8 @@ First, the Wazuh agent scans the system at an interval you specify, and it sends
 
 `Syscheck <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/syscheck.html>`_  can be used to meet PCI DSS requirement 11.5:
 
-| **11.5** Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.
-|
+    | **11.5** Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.
+    |
 
 Use cases
 ---------

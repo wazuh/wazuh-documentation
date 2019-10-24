@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _user_manual_manager:
 
@@ -22,5 +22,3 @@ The Wazuh manager is the system that analyzes the data received from all registe
         manual-database-output
         automatic-reports
         manual-email-report/index
-        manual-email-report/smtp_authentication
-        wazuh-cluster

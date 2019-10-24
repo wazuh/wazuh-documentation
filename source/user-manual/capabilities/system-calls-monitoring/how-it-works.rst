@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 How it works
 ============
@@ -23,7 +23,7 @@ Audit rules can be specified interactively with the *auditctl* command-line util
 Control rules
 --------------
 
-Some examples that illustrate how to modify the behaviour of the Audit system:
+Some examples that illustrate how to modify the behavior of the Audit system:
 
 +-----------------+-----------------------------------------------------------------+
 | **auditctl -b** | Set the maximum amount of existing Audit buffers in the kernel. |

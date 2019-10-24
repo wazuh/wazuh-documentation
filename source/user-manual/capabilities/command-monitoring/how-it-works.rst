@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 How it works
 ============
@@ -35,3 +35,5 @@ Process the output
 ------------------
 
 After configuring the system to monitor the command's output as if it were log data, custom rules can be created, like for :ref:`Log analysis <manual_log_analysis>` for instance, in order to process the output and trigger an alert when alert criteria are met.
+
+.. note:: Read the `Scheduling remote commands for Wazuh agents <https://wazuh.com/blog/scheduling-remote-commands-for-wazuh-agents//>`_ document for more information and remote command use cases.

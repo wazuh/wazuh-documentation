@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _fim-examples:
 
@@ -28,7 +28,7 @@ For detailed configuration options, go to :ref:`Syscheck <reference_ossec_sysche
 To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
 
 .. note::
-  The directories pushed from :ref:`centralized configuration <reference_agent_conf>` are overwritten in the ``ossec.conf`` file if the directory path is the same.
+  If a directory is specified both in a :ref:`centralized configuration <reference_agent_conf>` and on the agent's  ``ossec.conf``, the centralized configuration will take precedence and override the local configuration.
 
 ::
 

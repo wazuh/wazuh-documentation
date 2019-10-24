@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wodle_s3:
 
@@ -206,7 +206,7 @@ Specifies type of bucket. Is an attribute of the ``bucket`` tag.
 | **Allowed values** | cloudtrail, guardduty, vpcflow, config, custom |
 +--------------------+------------------------------------------------+
 
-  .. note::
+.. note::
     Different configurations as ``macie`` has ``custom`` type.
 
 bucket\\name

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_rootcheck:
 
@@ -44,7 +44,7 @@ Options
 base_directory
 ^^^^^^^^^^^^^^^
 
-The base directory that will be prepended to the following options:
+The base directory that will be prefixed to the following options:
 
 - rootkit_files
 - rootkit_trojans
@@ -63,11 +63,21 @@ ignore
 
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
 
-+--------------------+-----------------------------+
-| **Allowed values** | Any directory or file name. |
-+--------------------+-----------------------------+
-| **Example**        | /etc                        |
-+--------------------+-----------------------------+
++--------------------+-----------------------------------+
+| **Allowed values** | Any directory or file name.       |
++--------------------+-----------------------------------+
+| **Valid for**      | check_sys, check_dev, check_files |
++--------------------+-----------------------------------+
+| **Example**        | /etc                              |
++--------------------+-----------------------------------+
+
+Attributes:
+
++----------+----------------------------------------------------------+
+| **type** | Simple regex expression to ignore files and directories. |
++          +---------------------+------------------------------------+
+|          | Allowed values      | sregex                             |
++----------+---------------------+------------------------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _manual_log_analysis:
 
@@ -18,5 +18,6 @@ The memory and CPU requirements of the Wazuh agent are insignificant since its p
         :maxdepth: 2
 
         how-it-works
+        how-to-collect-wlogs
         log-data-configuration
         log-data-faq

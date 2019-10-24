@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ansible-wazuh-kibana:
 
@@ -12,7 +12,7 @@ This is similar to the Elasticsearch role and is intended to deploy Kibana with 
 - **kibana_server_host**: defines Kibana listen address (default: ``0.0.0.0``).
 - **elastic_stack_version**: defines Kibana version to be installed.
 
-You can create a YAML file ``wazuh-kibana.yml`` to be used be Ansible playbook:
+You can create a YAML file ``wazuh-kibana.yml`` to be used as an Ansible playbook:
 
 .. code-block:: yaml
 

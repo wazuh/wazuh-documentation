@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_wazuh_agent_class:
 
@@ -98,11 +98,6 @@ $agent_ip_address
 
 $manage_repo
   Install Wazuh through Wazuh repositories.
-
-  `Default true`
-
-$manage_epel_repo
-  Install epel repo and inotify-tools
 
   `Default true`
 

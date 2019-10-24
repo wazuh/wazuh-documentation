@@ -1,11 +1,11 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _build_lab_install_linux_agents:
 
 Install the Linux Wazuh agents
 ==============================
 
-Use the following procedure separately on your Linux Agent and Elastic Server instances to register and connect them to the Wazuh Manager.
+Use the following procedure separately on your Linux Agent and Elastic Server instances to register and connect them to the Wazuh manager.
 
 Log in and sudo to root
 -----------------------
@@ -30,17 +30,17 @@ Add the Wazuh yum repository
          EOF
 
 
-Install and connect Wazuh Agent to Manager
+Install and connect Wazuh agent to Manager
 ------------------------------------------
 
-Install the Wazuh Agent software
+Install the Wazuh agent software
 
   .. code-block:: console
 
     # yum -y install wazuh-agent
 
 
-Configure Wazuh Agent to reach out to the Wazuh Manager's IP via tcp.
+Configure Wazuh agent to reach out to the Wazuh manager's IP via tcp.
 
   .. code-block:: console
 
@@ -50,14 +50,14 @@ Configure Wazuh Agent to reach out to the Wazuh Manager's IP via tcp.
     # egrep "<protocol>tcp|<address>172.30.0.10" -B3 -A1 /var/ossec/etc/ossec.conf
 
 
-Make Wazuh Agent register itself with the Wazuh Manager, presenting the required password.
+Make Wazuh agent register itself with the Wazuh manager, presenting the required password.
 
   .. code-block:: console
 
     # agent-auth -m 172.30.0.10 -P please123
 
 
-Restart Wazuh Agent and confirm it successfully connected with the Manager. Run this on the Wazuh Agent side:
+Restart Wazuh agent and confirm it successfully connected with the Manager. Run this on the Wazuh agent side:
 
   a. For Systemd:
 

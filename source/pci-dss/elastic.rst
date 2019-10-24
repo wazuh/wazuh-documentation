@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _pci_dss_elastic:
 
@@ -9,7 +9,7 @@ Wazuh integration with Elastic Stack comes with out-of-the-box dashboards for PC
 
 The following requirements can be met with a combination of Wazuh + Elastic Stack:
 
-| **10.5**: Secure audit trails so they cannot be altered.
-| **10.6.1**: Review the following at least daily: All security events, Logs of all critical system components, etc.
-| **10.7**: Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis.
-|
+    | **10.5**: Secure audit trails so they cannot be altered.
+    | **10.6.1**: Review the following at least daily: All security events, Logs of all critical system components, etc.
+    | **10.7**: Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis.
+    |

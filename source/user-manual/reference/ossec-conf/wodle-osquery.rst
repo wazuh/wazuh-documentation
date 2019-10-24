@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wodle-osquery:
 
@@ -15,7 +15,7 @@ wodle name="osquery"
 Configuration options of the osquery wodle.
 
 .. warning::
-    Osquery is not installed by default. It is a open source software that you have to obtain for using this module.
+    Osquery is not installed by default. It is an open source software that you have to obtain for using this module.
 
 
 Options

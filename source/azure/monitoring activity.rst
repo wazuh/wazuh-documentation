@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _azure_monitoring_activity:
 
@@ -304,9 +304,9 @@ Select the option to export to a storage account, establish the subscription we 
     :align: center
     :width: 50%
 
-In this case, the integration will be executed with an ``interval`` of one day, the credentials will be taken from a file and we will proceed to search in the container ``insights-operational-logs``, all the blobs that have the extension ``.json`` in the last ``24 hours``. We also indicate the type of content that have the blobs that we are going to recover, in this case ``json_file``:
+In this case, the integration will be executed with an ``interval`` of one day, the credentials will be taken from a file and we will proceed to search in the container ``insights-operational-logs``, all the blobs that have the extension ``.json`` in the last ``24 hours``. We also indicate the type of content that have the blobs that we are going to recover, in this case ``json_inline``:
 
-.. note:: As of November 1st 2018, the format of logs stored in Azure accounts will become inline JSON (``json_inline`` in Wazuh) and the previous format will be obsolete (``json_file`` in Wazuh).
+.. note:: As of November 1st 2018, the format of logs stored in Azure accounts became inline JSON (``json_inline`` in Wazuh) and the previous format became obsolete (``json_file`` in Wazuh).
 
 .. code-block:: xml
 
@@ -323,7 +323,7 @@ In this case, the integration will be executed with an ``interval`` of one day, 
 
                 <container name="insights-operational-logs">
                     <blobs>.json</blobs>
-                    <content_type>json_file</content_type>
+                    <content_type>json_inline</content_type>
                     <time_offset>24h</time_offset>
                 </container>
 

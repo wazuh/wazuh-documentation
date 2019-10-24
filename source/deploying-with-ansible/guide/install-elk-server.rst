@@ -1,11 +1,11 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh_ansible_elk_server:
 
 Install Elastic Stack Server
 ============================
 
-The deployment of the Elastic Stack server involves the installation of Elasticsearch, Logstash and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Elastic Stack server. 
+The deployment of the Elastic Stack server involves the installation of Elasticsearch and Kibana services. In the repository of Ansible that Wazuh has we can find the playbooks and roles necessary to carry out the installation. The Ansible server must have access to the Elastic Stack server.
 
 - `1 - Access to wazuh-ansible`_
 - `2 - Preparing the playbook`_
@@ -13,11 +13,11 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 
 .. note::
 
-	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is Ubuntu 17 and we need to indicate the path of the Python interpreter.   
+	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is Ubuntu 17 and we need to indicate the path of the Python interpreter.
 
 
 	192.168.0.180 ansible_ssh_user=centos
-	
+
 	192.168.0.108 ansible_ssh_user=elk      ansible_python_interpreter=/usr/bin/python3
 
 	.. code-block:: console
@@ -43,7 +43,7 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
 	CHANGELOG.md  playbooks  README.md  roles  VERSION
 
-We can see the roles we have. 
+We can see the roles we have.
 
 .. code-block:: console
 
@@ -58,18 +58,12 @@ We can see the roles we have.
 	│   │   ├── meta
 	│   │   ├── tasks
 	│   │   └── templates
-	│   ├── ansible-kibana
-	│   │   ├── defaults
-	│   │   ├── handlers
-	│   │   ├── meta
-	│   │   ├── tasks
-	│   │   └── templates
-	│   └── ansible-logstash
-	│       ├── defaults
-	│       ├── handlers
-	│       ├── meta
-	│       ├── tasks
-	│       └── templates
+	│   └── ansible-kibana
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
 	└── wazuh
 	    ├── ansible-filebeat
 	    │   ├── defaults
@@ -93,7 +87,7 @@ We can see the roles we have.
 	        ├── templates
 	        └── vars
 
-And we can see the preconfigured playbooks we have. 
+And we can see the preconfigured playbooks we have.
 
 .. code-block:: console
 
@@ -104,24 +98,21 @@ And we can see the preconfigured playbooks we have.
 	├── wazuh-elastic_stack-single.yml
 	├── wazuh-elastic.yml
 	├── wazuh-kibana.yml
-	├── wazuh-logstash.yml
 	└── wazuh-manager.yml
 
-Using **Elasticsearch**, **Logstash** and **Kibana** roles we will install and configure the Elastic Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
+Using **Elasticsearch** and **Kibana** roles we will install and configure the Elastic Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
 If we want to change the default configuration we can change the following files:
-- ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch/defaults/main.yml`` 
-- ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash/defaults/main.yml`` 
-- ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana/defaults/main.yml`` 
+- ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch/defaults/main.yml``
+- ``/etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana/defaults/main.yml``
 
 We also can create another YAML file only with the content we want to change the configuration for each role. We can find more information here:
 
-- :ref:`Elasticsearch <ansible-wazuh-elasticsearch>` role. 
-- :ref:`Logstash <ansible-wazuh-logstash>` role. 
-- :ref:`Kibana <ansible-wazuh-kibana>` role. 
+- :ref:`Elasticsearch <ansible-wazuh-elasticsearch>` role.
+- :ref:`Kibana <ansible-wazuh-kibana>` role.
 
 
-Let's see below, the content of the playbooks ``/etc/ansible/wazuh-elastic.yml``. 
+Let's see below, the content of the playbooks ``/etc/ansible/wazuh-elastic.yml``.
 
 
 .. code-block:: yaml
@@ -132,30 +123,23 @@ Let's see below, the content of the playbooks ``/etc/ansible/wazuh-elastic.yml``
 
 .. code-block:: yaml
 
-	- hosts: <your logstash host>
-	  roles:
-	    - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, elasticsearch_network_host: 'your elasticsearch IP' }
-
-
-.. code-block:: yaml
-
 	- hosts: <your kibana host>
 	  roles:
 	    - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'your elasticsearch IP' }
 
-These files are designed to run the installations of each service individually. 
+These files are designed to run the installations of each service individually.
 
-Let's take a closer look at the content. 
+Let's take a closer look at the content.
 
-The first line ``hosts:`` indicates the machines where the commands below will be executed. 
+The first line ``hosts:`` indicates the machines where the commands below will be executed.
 
 The ``roles:`` section indicates the roles that will be executed on the hosts.
 
 
-2 - Preparing the playbook 
+2 - Preparing the playbook
 --------------------------
 
-We could configure these three files and execute them, but we are going to create a single file that executes the installation of the services in our Elastic Stack Server. 
+We could configure these three files and execute them, but we are going to create a single file that executes the installation of the services in our Elastic Stack Server.
 
 .. code-block:: console
 
@@ -163,21 +147,20 @@ We could configure these three files and execute them, but we are going to creat
 	- hosts: 192.168.0.108
 	  roles:
 	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
-	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, logstash_input_beats: true,  elasticsearch_network_host: 'localhost' }
 	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
-As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry. We have added the three roles to execute, as everything goes on a single server, they will use ``localhost`` to communicate with Elasticsearch. Finally, we prepare Logstash by adding the entry ``logstash_input_beats: true`` to receive Filebeat events. 
+As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry.
 
 
 3 - Running the playbook
 ------------------------
 
-It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, opting to enter the password when Ansible requests it. To contemplate other options we consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one). 
+It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, opting to enter the password when Ansible requests it. To contemplate other options we consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one).
 
 3.1 - Let's launch the playbook run.
 
 - We use the ``-b`` option to indicate that we are going to become a super user.
-- We use the ``-K`` option to indicate Ansible to ask for the password. 
+- We use the ``-K`` option to indicate Ansible to ask for the password.
 
 .. code-block:: console
 
@@ -188,7 +171,7 @@ It seems that we are ready to run the playbook and start the installation, but s
 	The installation of the Wazuh application for Kibana may take some time.
 
 
-We will obtain a final result similar to the one shown in the following code block. 
+We will obtain a final result similar to the one shown in the following code block.
 
 
 .. code-block:: console
@@ -226,9 +209,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	RUNNING HANDLER [ansible-role-elasticsearch : restart elasticsearch] **************************************************************************************
 	changed: [192.168.0.108]
 
-	RUNNING HANDLER [ansible-role-logstash : restart logstash] ************************************************************************************************
-	changed: [192.168.0.108]
-
 	RUNNING HANDLER [ansible-role-kibana : restart kibana] ****************************************************************************************************
 	changed: [192.168.0.108]
 
@@ -238,7 +218,7 @@ We will obtain a final result similar to the one shown in the following code blo
 	ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
-We can check the status of our new services in our Elastic Stack server. 
+We can check the status of our new services in our Elastic Stack server.
 
 - Elasticsearch.
 
@@ -251,15 +231,6 @@ We can check the status of our new services in our Elastic Stack server.
 	           └─elasticsearch.conf
 	   Active: active (running) since Thu 2018-09-13 16:51:59 CEST; 5min ago
 
-- Logstash.
-
-.. code-block:: console
-
-	root@elk:/home/elk# systemctl status logstash.service
-	● logstash.service - logstash
-	   Loaded: loaded (/etc/systemd/system/logstash.service; enabled; vendor preset: enabled)
-	   Active: active (running) since Thu 2018-09-13 16:53:31 CEST; 4min 8s ago
-
 - Kibana
 
 .. code-block:: console
@@ -269,7 +240,7 @@ We can check the status of our new services in our Elastic Stack server.
 	   Loaded: loaded (/etc/systemd/system/kibana.service; enabled; vendor preset: enabled)
 	   Active: active (running) since Thu 2018-09-13 16:53:32 CEST; 4min 58s ago
 
-Once the Wazuh API is registered we can access it through our Kibana portal. 
+Once the Wazuh API is registered we can access it through our Kibana portal.
 
 .. thumbnail:: ../../images/ansible/ansible-elk.png
     :align: center

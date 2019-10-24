@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _build_lab_install_elastic_stack:
 
@@ -105,7 +105,7 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
 Logstash
 --------
 
-Logstash takes the Wazuh alerts and logs written as JSON records by Wazuh Manager, and it parses, enriches and passes them along to Elasticsearch for indexing and storage.
+Logstash takes the Wazuh alerts and logs written as JSON records by Wazuh manager, and it parses, enriches and passes them along to Elasticsearch for indexing and storage.
 
 1. Install the Logstash package:
 

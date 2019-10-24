@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _release_3_8_0:
 
@@ -84,13 +84,12 @@ Wazuh API
 
 **New API calls for group management** 
 
-- Edit group configuration file (agent.conf) uploading XML file with new configuration. This addition brings the user the ability to **manage groups remotely**, from now and onwards it's **no longer needed to SSH** into the manager instance to modify groups or to add/remove agents in groups.
+- Edit group configuration file (agent.conf) uploading XML file with new configuration. This addition brings the user the ability to **manage groups remotely**, from now and onward it's **no longer needed to SSH** into the manager instance to modify groups or to add/remove agents in groups.
 
-.. code-block:: javascript
+.. code-block:: console
 
   curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @/tmp/agent.conf.xml \
       "http://localhost:55000/agents/groups/default/files/agent.conf?pretty"
-
   {
     "error": 0,
     "data": "Agent configuration was updated successfully"

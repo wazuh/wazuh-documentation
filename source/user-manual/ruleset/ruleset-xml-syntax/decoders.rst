@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _decoders_syntax:
 
@@ -25,7 +25,6 @@ There is many options to configure the decoders:
 - `plugin_decoder`_
 - `use_own_name`_
 - `json_null_field`_
-- `location`_
 - `var`_
 
 decoder
@@ -45,11 +44,11 @@ Example:
 
 Set name and type of decoder to *ossec*:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <decoder name="ossec" type ="ossec">
-      ...
-    </decoder>
+  <decoder name="ossec" type ="ossec">
+    ...
+  </decoder>
 
 parent
 ^^^^^^
@@ -66,12 +65,12 @@ Example:
 
 Assign the decoder which father it belongs:
 
-  .. code-block:: xml
-    
-    <decoder name="decoder_junior">
-      <parent>decoder_father</parent>
-      ...
-    </decoder>
+.. code-block:: xml
+
+  <decoder name="decoder_junior">
+    <parent>decoder_father</parent>
+    ...
+  </decoder>
 
 accumulate
 ^^^^^^^^^^^
@@ -101,12 +100,12 @@ Example:
 
 Define that the decoder is related with the ``syslogd`` process:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <decoder name="syslogd_decoder">
-      <program_name>syslogd</program_name>
-      ...
-    </decoder>
+  <decoder name="syslogd_decoder">
+    <program_name>syslogd</program_name>
+    ...
+  </decoder>
 
 prematch
 ^^^^^^^^^
@@ -135,8 +134,9 @@ Decoders use them to find words or other patterns into the rules.
 
 An example is this regex that matches any numeral:
 
-  ..code-block:: xml
-    <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
+.. code-block:: xml
+
+  <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
 
 
 +--------------------+--------------------------------------------------------------------+
@@ -250,12 +250,12 @@ Example:
 
 The following decoder will extract the user who generated the alert and the location from where it comes:
 
-  .. code-block:: xml
-  
-    </decoder>
-      <fts>srcuser, location</fts>
-      ...
-    </decoder>
+.. code-block:: xml
+
+  </decoder>
+    <fts>srcuser, location</fts>
+    ...
+  </decoder>
 
 ftscomment
 ^^^^^^^^^^^
@@ -325,30 +325,6 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 |                    | empty (It shows the NULL field as an empty field)                       |
 +--------------------+-------------------------------------------------------------------------+
 
-location
-^^^^^^^^
-
-Points the source where the event has been readed, like a log file or an agent.
-
-+--------------------+-------------------------------------------------------------------------+
-| **Default Value**  | string                                                                  |
-+--------------------+-------------------------------------------------------------------------+
-| **Allowed values** | File path (`/var/log/syslog`)                                           |
-+                    +-------------------------------------------------------------------------+
-|                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
-+--------------------+-------------------------------------------------------------------------+
-
-Example:
-
-  .. code-block:: xml 
-    
-    <decoder name="home_decoder">
-      <location> /home/user </location>
-      ...
-    </decoder>
-
-Only filters the events related to the path ``/home/user``.
-
 var
 ^^^
 
@@ -364,17 +340,17 @@ Example:
 
 .. code-block:: xml
 
-    <var name="header">myprog</var>
-    <var name="offset">after_parent</var>
-    <var name="type">syscall</var>
+  <var name="header">myprog</var>
+  <var name="offset">after_parent</var>
+  <var name="type">syscall</var>
 
-    <decoder name="syscall">
-      <prematch>^$header</prematch>
-    </decoder>
+  <decoder name="syscall">
+    <prematch>^$header</prematch>
+  </decoder>
 
-    <decoder name="syscall-child">
-      <parent>syscall</parent>
-      <prematch offset="$offset">^: $type </prematch>
-      <regex offset="after_prematch">(\S+)</regex>
-      <order>syscall</order>
-    </decoder>
+  <decoder name="syscall-child">
+    <parent>syscall</parent>
+    <prematch offset="$offset">^: $type </prematch>
+    <regex offset="after_prematch">(\S+)</regex>
+    <order>syscall</order>
+  </decoder>

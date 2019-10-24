@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _learning_wazuh_survive_flood:
 
@@ -57,13 +57,13 @@ Configure the Wazuh agent client buffer on linux-agent
 
     .. note::
         The client buffer is explained in detail in the Wazuh User manual.  Search for "Anti-flooding mechanism".  In brief, it
-        allows a Wazuh agent to limit the rate at which it sends log events to the Wazuh Manager.  If events are produced at
+        allows a Wazuh agent to limit the rate at which it sends log events to the Wazuh manager.  If events are produced at
         a rate in excess of the configured eps limit, then they are stored in a leaky bucket queue until the eps rate slows
-        down enough that the queue contents can be sent along to the Wazuh Manager.  If the queue gets full, then any new
-        events are dropped, i.e the bucket leaks.  Various alerts are sent to the Wazuh Manager about all of this.
+        down enough that the queue contents can be sent along to the Wazuh manager.  If the queue gets full, then any new
+        events are dropped, i.e the bucket leaks.  Various alerts are sent to the Wazuh manager about all of this.
 
     +-----------------------------------------------------------------------------------------------+
-    | **Wazuh Agent Client Buffer**                                                                 |
+    | **Wazuh agent Client Buffer**                                                                 |
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/manual/internal-capabilities/bucket.png                              |
     |     :title: leaky bucket                                                                      |
@@ -89,7 +89,7 @@ Make Wazuh manager record alerts for each flooded event record
 --------------------------------------------------------------
 
 Because we will intentionally include the word "fatal" in the flooding log records we generate, they each will trigger generic
-Wazuh rule 1002 which has a low severity level of 2.  By default, Wazuh Manager does not record alerts on rules of severity
+Wazuh rule 1002 which has a low severity level of 2.  By default, Wazuh manager does not record alerts on rules of severity
 levels less than 3, so for this lab we will lower the threshold.
 
 1. Edit /var/ossec/etc/ossec.conf and change <log_alert_level> from 3 to 1 so that the <alerts> section looks like below.  Now alerts of all severity levels will show up in Kibana.
@@ -101,7 +101,7 @@ levels less than 3, so for this lab we will lower the threshold.
             <email_alert_level>12</email_alert_level>
         </alerts>
 
-2. Restart Wazuh Manager.
+2. Restart Wazuh manager.
 
   a. For Systemd:
 
@@ -161,7 +161,7 @@ See what happened according to Kibana
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-2. Notice that the flooding events only arrived at the Wazuh Manager at a rate of 20 eps, our intended limit.  The client buffer eps limit worked!
+2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 20 eps, our intended limit.  The client buffer eps limit worked!
 
 3. Notice that only 1,269 hits are reported for a flood.  It appears many of the flooded events were lost.
 

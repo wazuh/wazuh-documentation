@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _release_3_2_3:
 
@@ -29,7 +29,7 @@ Now, the client nodes initialize the communication and only the master node is i
 
 The number of daemons has been reduced to one: ``wazuh-clusterd``.
 
-You can check our documentation for Wazuh cluster in the following :ref:`link <wazuh-cluster>`.
+You can check our documentation for Wazuh cluster in the following :ref:`Cluster basics <wazuh-cluster-introduction>`.
 
 Core improvements
 -----------------

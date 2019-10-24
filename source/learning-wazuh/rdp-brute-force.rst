@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _learning_wazuh_rdp_brute_force:
 
@@ -46,7 +46,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
 
 1. In Kibana, copy the complete contents of the full_log field for one of the Windows logon failure events.
 
-2. In an ssh session on wazuh-server, run ossec-logtest with high verbosity to get a maximum picture of how this event is being decoded and analyzed.
+2. In an ssh session on wazuh-manager, run ossec-logtest with high verbosity to get a maximum picture of how this event is being decoded and analyzed.
 
     .. code-block:: console
 
@@ -57,7 +57,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
 4. Scroll back up to phase 1 (the pre-decoding phase).  Notice how the full Windows Event Log entry is broken into four fields like this:
 
     - timestamp: '2018 Feb 03 14:21:24'
-    - hostname: 'wazuh-server'
+    - hostname: 'wazuh-manager'
     - program_name: 'WinEvtLog'
     - log: 'Security: AUDIT_FAILURE(4625): Microsoft-Windows-Security-Auditing: (no user)..................."
 

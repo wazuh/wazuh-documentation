@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_global:
 
@@ -26,6 +26,7 @@ Options
 - `helo_server`_
 - `email_maxperhour`_
 - `email_idsname`_
+- `email_log_source`_
 - `custom_alert_output`_
 - `stats`_
 - `logall`_
@@ -141,11 +142,11 @@ This sets the maximum number of email alerts that can be sent per hour. All emai
 
   At the end of the hour, the queued emails will be sent together in one email whether mail grouping is turned on or not.
 
-+--------------------+---------------------------+
-| **Default value**  | 12                        |
-+--------------------+---------------------------+
-| **Allowed values** | Any number from 1 to 9999 |
-+--------------------+---------------------------+
++--------------------+--------------------------------+
+| **Default value**  | 12                             |
++--------------------+--------------------------------+
+| **Allowed values** | Any number from 1 to 1000000   |
++--------------------+--------------------------------+
 
 email_idsname
 ^^^^^^^^^^^^^
@@ -157,6 +158,18 @@ The name will be added to the email headers with the specified value.
 +--------------------+----------+
 | **Allowed values** | Any name |
 +--------------------+----------+
+
+
+email_log_source
+^^^^^^^^^^^^^^^^
+
+This selects the alert file to be read from.
+
++--------------------+---------------------------+
+| **Default value**  | alerts.json               |
++--------------------+---------------------------+
+| **Allowed values** | alerts.log or alerts.json |
++--------------------+---------------------------+
 
 custom_alert_output
 ^^^^^^^^^^^^^^^^^^^

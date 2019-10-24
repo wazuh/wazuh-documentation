@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ansible_wazuh_roles:
 
@@ -23,5 +23,4 @@ Below we explain briefly how to use these roles, please check out `Ansible Playb
         wazuh-filebeat
         wazuh-elasticsearch
         wazuh-kibana
-        wazuh-logstash
         wazuh-agent

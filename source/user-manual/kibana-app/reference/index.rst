@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _kibana_reference:
 
@@ -15,3 +15,4 @@ This part of the user manual will cover the configuration files used by the Wazu
         config-file
         elasticsearch
         configure-indices
+	custom-dashboard

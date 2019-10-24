@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _development:
 
@@ -18,3 +18,4 @@ This section contains technical documentation for developers.
         client-keys
         message-format
         makefile
+        wazuh-cluster

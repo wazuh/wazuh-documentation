@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _agent-connection:
 
@@ -18,7 +18,7 @@ Before you check the agent's connection with the manager, first ensure the agent
     </client>
   </ossec_config>
 
-This will set 10.0.0.10 as the Wazuh Manager server. Once this is done, you will need restart the Agent:
+This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need restart the Agent:
 
   a. For Systemd:
 

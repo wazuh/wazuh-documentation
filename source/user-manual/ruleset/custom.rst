@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ruleset_custom:
 
@@ -78,25 +78,25 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
 
 2. Find and copy the following code from the rule file:
 
-::
+    ::
 
-  <rule id="5710" level="5">
-    <if_sid>5700</if_sid>
-    <match>illegal user|invalid user</match>
-    <description>sshd: Attempt to login using a non-existent user</description>
-    <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
-  </rule>
+      <rule id="5710" level="5">
+        <if_sid>5700</if_sid>
+        <match>illegal user|invalid user</match>
+        <description>sshd: Attempt to login using a non-existent user</description>
+        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
+      </rule>
 
 3. Paste the code into ``/var/ossec/etc/rules/local_rules.xml``, modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
 
-::
+    ::
 
-  <rule id="5710" level="10" overwrite="yes">
-    <if_sid>5700</if_sid>
-    <match>illegal user|invalid user</match>
-    <description>sshd: Attempt to login using a non-existent user</description>
-    <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
-  </rule>
+      <rule id="5710" level="10" overwrite="yes">
+        <if_sid>5700</if_sid>
+        <match>illegal user|invalid user</match>
+        <description>sshd: Attempt to login using a non-existent user</description>
+        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
+      </rule>
 
 
 Changing an existing decoder
@@ -115,23 +115,23 @@ If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we
 
 2. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the OSSEC loading list. To do this, use the tag ``<decoder_exclude>`` in the ``ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
 
-::
+    ::
 
-  <ruleset>
-    <!-- Default ruleset -->
-    <decoder_dir>ruleset/decoders</decoder_dir>
-    <rule_dir>ruleset/rules</rule_dir>
-    <rule_exclude>0215-policy_rules.xml</rule_exclude>
-    <list>etc/lists/audit-keys</list>
+      <ruleset>
+        <!-- Default ruleset -->
+        <decoder_dir>ruleset/decoders</decoder_dir>
+        <rule_dir>ruleset/rules</rule_dir>
+        <rule_exclude>0215-policy_rules.xml</rule_exclude>
+        <list>etc/lists/audit-keys</list>
 
-    <!-- User-defined ruleset -->
-    <decoder_dir>etc/decoders</decoder_dir>
-    <rule_dir>etc/rules</rule_dir>
-    <decoder_exclude>ruleset/decoders/0310-ssh_decoders.xml</decoder_exclude>
-  </ruleset>
+        <!-- User-defined ruleset -->
+        <decoder_dir>etc/decoders</decoder_dir>
+        <rule_dir>etc/rules</rule_dir>
+        <decoder_exclude>ruleset/decoders/0310-ssh_decoders.xml</decoder_exclude>
+      </ruleset>
 
 
 3. Perform the changes in the file ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
 
-.. warning::
-    Note that at this point, if updates to the public Wazuh Ruleset include changes to 0310-ssh_decoders.xml, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.
+    .. warning::
+        Note that at this point, if updates to the public Wazuh Ruleset include changes to 0310-ssh_decoders.xml, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.

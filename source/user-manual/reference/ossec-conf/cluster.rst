@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_cluster:
 
@@ -27,6 +27,8 @@ Options
 - `hidden`_
 - `disabled`_
 
+.. _cluster_name:
+
 name
 ^^^^
 
@@ -37,6 +39,8 @@ Specifies the name of the cluster this node belongs to.
 +--------------------+---------------+
 | **Allowed values** | Any name      |
 +--------------------+---------------+
+
+.. _cluster_node_name:
 
 node_name
 ^^^^^^^^^^
@@ -51,6 +55,8 @@ Specifies the name of the current node of the cluster.
 +--------------------+---------------+
 | **Allowed values** | Any name      |
 +--------------------+---------------+
+
+.. _cluster_node_type:
 
 node_type
 ^^^^^^^^^
@@ -67,10 +73,12 @@ Specifies the role of the node.
 
 	Using ``client`` as ``node_type`` in configuration is still valid but a warning message will be shown in logs.
 
+.. _cluster_key:
+
 key
 ^^^
 
-Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :ref:`deploy_wazuh_cluster` for information on how to generate a key.
+Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :ref:`configuring-cluster` for information on how to generate a key.
 
 .. note::
 	This key must be the same for all of the nodes of the cluster.
@@ -80,6 +88,8 @@ Defines the key used to encrypt the communication between the nodes. This key mu
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any alphanumeric string of 32 characters.   |
 +--------------------+---------------------------------------------+
+
+.. _cluster_interval:
 
 interval
 ^^^^^^^^
@@ -94,6 +104,7 @@ Sets the interval between cluster synchronizations.
 | **Allowed values** | A positive number ending with a character that indicates a time unit, such as s (seconds) or m (minutes).                                |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. _cluster_port:
 
 port
 ^^^^
@@ -106,6 +117,7 @@ Specifies the port to use for the cluster communications.
 | **Allowed values** | Any port number from 1 to 65535. |
 +--------------------+----------------------------------+
 
+.. _cluster_bind_addr:
 
 bind_addr
 ^^^^^^^^^^
@@ -117,6 +129,8 @@ Specifies which IP address will communicate with the cluster when the node has m
 +--------------------+-----------------------+
 | **Allowed values** | Any valid IP address. |
 +--------------------+-----------------------+
+
+.. _cluster_nodes:
 
 nodes
 ^^^^^
@@ -132,6 +146,8 @@ Lists all master nodes in the cluster using the ``<node>`` tag for each one.
 .. note::
 	The current cluster only allows one master node, therefore this list must have only one element. If more elements are found, **the first one will be used as master** and the rest will be ignored.
 
+.. _cluster_hidden:
+
 hidden
 ^^^^^^
 
@@ -142,6 +158,8 @@ Toggles whether or not to show information about the cluster that generated an a
 +--------------------+-----------------------------------------+
 | **Allowed values** | yes, no                                 |
 +--------------------+-----------------------------------------+
+
+.. _cluster_disabled:
 
 disabled
 ^^^^^^^^
@@ -160,8 +178,8 @@ Sample configuration
 
 .. code-block:: xml
 
-    <cluster>
-      <name>wazuh</name>
+	<cluster>
+	  <name>wazuh</name>
       <node_name>manager_01</node_name>
       <node_type>master</node_type>
       <key>ugdtAnd7Pi9myP7CVts4qZaZQEQcRYZa</key>
