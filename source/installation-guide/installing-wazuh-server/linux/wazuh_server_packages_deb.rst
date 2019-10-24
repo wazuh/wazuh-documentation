@@ -252,6 +252,9 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
       # echo "wazuh-manager hold" | sudo dpkg --set-selections
       # echo "wazuh-api hold" | sudo dpkg --set-selections
 
+.. note::
+    Now that the Wazuh API is installed. We strongly recommend to secure the Wazuh API: :ref:`securing_api`.
+
 .. _wazuh_server_packages_deb_filebeat:
 
 Installing Filebeat
