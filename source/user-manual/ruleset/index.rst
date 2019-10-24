@@ -23,5 +23,6 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
        ruleset-xml-syntax/index.rst
        testing
        cdb-list
+       mitre
        contribute
        rules-classification

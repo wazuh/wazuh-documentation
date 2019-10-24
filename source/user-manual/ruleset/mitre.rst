@@ -2,7 +2,7 @@
 
 .. _mitre:
 
-Mitre
+Enhancing with MITRE
 ============
 
 This feature allows the user to customize the alert information to include specific information related to MITRE ATT&CK techniques. MITRE ATT&CK matrix stores all possible attacks that can be made and what to do to mitigate and detect them. This can be useful when an attack is detected through an alert and an user wants to know more about it.
