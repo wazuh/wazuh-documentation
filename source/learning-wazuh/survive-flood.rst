@@ -5,18 +5,20 @@
 Survive a log flood
 ===================
 
-A centralized logging system needs to be able to process many events per second (eps) from many different log sources at the
-same time, but sometimes things just get completely out of hand.  A variety of problems like infinite loop conditions, poorly
-written software, and misconfigured applications can cause one or a few individual devices to suddenly start producing a huge
-and unstopping stream of log messages rushing at your logging system at a rate of hundreds or even thousands of events per
-second.  When such a device or devices suddenly take up vastly more than their fair share of network and log processing
-resources, it can become widely disruptive.  Log flooding can saturate your network bandwidth and/or overtax your Wazuh and
-Elastic system components while one gigabyte after another of likely the same repeated log messages are being reanalyzed and
+A centralized logging system needs to be able to process many events per second (EPS)
+from many different log sources at the same time, but sometimes things just get completely out of hand. 
+A variety of problems like infinite loop conditions, poorly written software, misconfigured applications 
+or even malicious actors can cause one or a few individual devices to suddenly start producing a huge
+and unstopping stream of log messages rushing at your logging system at a rate of hundreds or even 
+thousands of events per second.  When such a device or devices suddenly take up vastly more than their fair 
+share of network and log processing resources, it can become widely disruptive.  
+Log flooding can saturate your network bandwidth and/or overtax your Wazuh and Elastic system components
+while one gigabyte after another of (often repetitive) log messages are being reanalyzed and
 churned to disk.
 
-Thankfully the Wazuh agent has a flood protection mechanism to prevent out of control log production on one system from
-creating disruptions to your network or to your Wazuh/Elastic services.  In this lab we will create a small log flood and
-observe how it is gracefully contained by the Wazuh agent before it departs the system where the logs are produced.  We
+Thankfully the Wazuh agent has a flood protection mechanism to prevent one system from creating
+disruptions to your network or to your Wazuh/Elastic services.  
+In this lab we will create a small log flood and observe how it is gracefully contained by the Wazuh agent before it departs the system where the logs are produced.  We
 will also take a look at the leaky bucket queue that Wazuh uses to accomplish this.  Lastly we will note the alerts that are
 produced to keep us informed about the onset of, escalation of, and recovery from log flooding events.
 
