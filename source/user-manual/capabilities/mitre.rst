@@ -16,7 +16,7 @@ Configuration example
 
 MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.) although some of them belong to more than one tactic. 
 
-The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with rule 5712, that detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE technique to rule 5712.
+The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with rule 5712, that detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE ATT&CK technique to rule 5712.
 
 Add the following lines to /var/ossec/etc/rules/local_rule.xml:
 
@@ -26,7 +26,7 @@ Add the following lines to /var/ossec/etc/rules/local_rule.xml:
 
     <rule id="100002" level="10">
       <if_sid>5712</if_sid>
-      <description>sshd: MITRE Technique T1110.</description>
+      <description>sshd: brute force attack.</description>
       <mitre>
         <id>T1110</id>
       </mitre>
@@ -67,10 +67,10 @@ You have to see an alert similar to this one:
 .. code-block:: json
 
   {
-    "timestamp": "2019-10-23T12:45:23.255+0200",
+    "timestamp": "2019-10-24T12:16:59.366+0200",
     "rule": {
       "level": 10,
-      "description": "sshd: MITRE Technique T1110.",
+      "description": "sshd: brute force attack.",
       "id": "100002",
       "mitre": {
         "id": [
@@ -132,7 +132,7 @@ You have to see an alert similar to this one:
     "location": "/var/log/auth.log"
   }
 
-MITRE information appears inside rule information, as we are seeing. It is divided into two parts: id and tactics. The former stores all MITRE techniques included in the rule whereas the last stores the tactics associated with these techniques.
+MITRE information appears inside rule information, as we are seeing. It is divided into two parts: id and tactics. The former stores all MITRE ATT&CK techniques included in the rule whereas the last stores the tactics associated with these techniques.
 
 Moving on to Kibana
 -------------------

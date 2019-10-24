@@ -814,13 +814,13 @@ Declares the actual status of a rule.
 mitre
 ^^^^^
 
-Specifies the MITRE technique ID or IDs that fit in well with the rule.
+Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
 
-+----------------+---------------------+
-| Required label | Value               |
-+================+=====================+
-| **id**         | MITRE technique ID. |
-+----------------+---------------------+
++----------------+----------------------------+
+| Required label | Value                      |
++================+============================+
+| **id**         | MITRE ATT&CK technique ID. |
++----------------+----------------------------+
 
 Example:
 
