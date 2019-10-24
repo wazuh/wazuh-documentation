@@ -26,8 +26,8 @@ Using the Kibana Wazuh App
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-2. Select **Manage rules files** and search for **ssh**, then click on the eye icon next to 
-   **0095-sshd_rules.xml** to view the contents of that file.
+2. Select **Manage rules files** and search for **ssh**, then click on the eye icon 
+   next to **0095-sshd_rules.xml** to view the contents of that file.
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/rules-2.png                                      |
     |     :title: Selecting 0095-sshd_rules.xml                                                     |
@@ -47,7 +47,8 @@ Using the Kibana Wazuh App
           <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,</group>
         </rule>
 
-4. Click on **Close**, then toggle **Editable files** and click on the pencil icon next to ``local_rules.xml``
+4. Click on **Close**, then toggle **Editable files** and click 
+   on the pencil icon next to ``local_rules.xml``
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/rules-3.png                                      |
     |     :title: Selecting local_rules.xml                                                         |
@@ -71,7 +72,8 @@ Using the Kibana Wazuh App
 
 Notice how the web interface will automatically display an error if the xml syntax is not completly correct.
 
-6. Press **Save file**, confirm and then click on **Restart now**
+6. Press **Save file**, confirm and 
+   then click on **Restart now**.
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/rules-4.png                                      |
     |     :title: Saving local_rules.xml file                                                       |
