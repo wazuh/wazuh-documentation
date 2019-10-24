@@ -14,7 +14,7 @@ This feature allows the user to customize the alert information to include speci
 Configuration example
 ---------------------
 
-MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.). Some of them can have more than one tactic. 
+MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.) although some of them belong to more than one tactic. 
 
 The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with rule 5712, that detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE technique to rule 5712.
 
@@ -132,7 +132,7 @@ You have to see an alert similar to this one:
     "location": "/var/log/auth.log"
   }
 
-MITRE information appears inside rule information, as we are seeing. It is divided into two parts: id and tactics. The former stores all MITRE techniques included in the rule whereas the last stores the technique's tactics.
+MITRE information appears inside rule information, as we are seeing. It is divided into two parts: id and tactics. The former stores all MITRE techniques included in the rule whereas the last stores the tactics associated with these techniques.
 
 Moving on to Kibana
 -------------------

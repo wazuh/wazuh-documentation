@@ -54,6 +54,7 @@ Available options
 - `group`_
 - `status`_
 - `location`_
+- `mitre`_
 - `var`_
 
   - `BAD_WORDS`_
@@ -809,6 +810,29 @@ Declares the actual status of a rule.
 +--------------------+----------------------------------------------+
 | **Allowed values** | started, aborted, succeded, failed, lost...  |
 +--------------------+----------------------------------------------+
+
+mitre
+^^^^^
+
+Specifies the MITRE technique ID or IDs that fit in well with the rule.
+
++----------------+---------------------+
+| Required label | Value               |
++================+=====================+
+| **id**         | MITRE technique ID. |
++----------------+---------------------+
+
+Example:
+
+  .. code-block:: xml
+
+    <rule id="100002" level="10">
+      <description>Attack technique sample.</description>
+      <mitre>
+        <id>T1110</id>
+        <id>T1037</id>
+      </mitre>
+    </rule>
 
 var
 ^^^
