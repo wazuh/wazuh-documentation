@@ -13,8 +13,7 @@ and unstopping stream of log messages rushing at your logging system at a rate o
 thousands of events per second.  When such a device or devices suddenly take up vastly more than their fair 
 share of network and log processing resources, it can become widely disruptive.  
 Log flooding can saturate your network bandwidth and/or overtax your Wazuh and Elastic system components
-while one gigabyte after another of (often repetitive) log messages are being reanalyzed and
-churned to disk.
+while one gigabyte after another of (often repetitive) log messages are being reanalyzed and churned to disk.
 
 Thankfully the Wazuh agent has a flood protection mechanism to prevent one system from creating
 disruptions to your network or to your Wazuh/Elastic services.  
