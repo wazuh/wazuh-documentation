@@ -10,11 +10,12 @@ Learning Wazuh
 The Wazuh open source security platform is a versatile software that provides awareness 
 of an environment's security through a rich group of components and integrations.
 
-Given the high adaptability of Wazuh, the possibilities that it provides are plentiful 
-in this area of our documentation you will find a progressive set of hands-on experiences
+Given the high adaptability of Wazuh, the possibilities that it provides are plentiful. 
+In this area of our documentation you will find a progressive set of hands-on experiences
 to accelerate your progress towards mastery of Wazuh. 
 
-Some of the labs will assume that the previous labs have already been completed, so we encourage you to do them in order.
+Some of the labs will require skills that can be acquired in the previous labs, so we 
+encourage you to do them in order.
 
 .. toctree::
     :maxdepth: 1
