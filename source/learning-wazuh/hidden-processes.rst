@@ -44,12 +44,14 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
         # systemctl restart wazuh-agent
 
 .. note::
-    The ``/var/ossec/etc/internal_options.conf`` file contains all possible internal options that you can change,
-    along with explanations of them.  While you can edit this file directly, it gets overwritten during
+    The ``/var/ossec/etc/internal_options.conf`` file contains all possible internal options that
+    you can change, along with explanations.  While you can edit this file directly, it gets overwritten during
     Wazuh upgrades, so it is recommended that you copy the sections you want to customize from
     ``/var/ossec/etc/internal_options.conf`` to ``/var/ossec/etc/local_internal_options.conf`` where the changes
-    will not be overwritten.  The settings in local_internal_options.conf always take precedence over the
-    settings in internal_options.conf.
+    will not be overwritten.  
+    The settings in **local_internal_options.conf** always take precedence over the 
+    settings in **internal_options.conf,** so editing the **local_internal_options.conf** file will ensure your
+    changes will not be overriden.
 
 5. Install certain packages required for building the rootkit:
 
