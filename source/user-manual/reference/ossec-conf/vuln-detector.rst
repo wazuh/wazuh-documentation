@@ -38,7 +38,7 @@ Options
 +---------------------------+-----------------------------+
 | `ignore_time`_            | A positive number (seconds) |
 +---------------------------+-----------------------------+
-| `provider`_               | An update configuration     |
+| `provider`_               | A valid vulnerability vendor|
 +---------------------------+-----------------------------+
 
 
@@ -248,24 +248,28 @@ Linux Mint 18.X and Pop OS 18 using the Ubuntu 18 vulnerability database, or Ora
         <enabled>yes</enabled>
         <interval>5m</interval>
         <run_on_start>yes</run_on_start>
+
         <provider name="debian">
             <enabled>yes</enabled>
             <os interval="1d">9</os>
         </provider>
+
         <provider name="redhat">
             <enabled>yes</enabled>
             <update_from_year>2013</update_from_year>
             <update_interval>20h</update_interval>
             <allow replaced_os="Red Hat-6">Oracle Linux-6</allow>
         </provider>
+
         <provider name="canonical">
-            <disabled>no</disabled>
+            <enabled>no</enabled>
             <os path="/local/feeds/oval/bionic_oval.xml" allow="linux mint-18, pop!_os-18">bionic</os>
             <os url="http://my_local_repo/xenial_oval.xml">xenial</os>
             <update_interval>1h</update_interval>
         </provider>
+        
         <provider name="nvd">
-            <disabled>no</disabled>
+            <enabled>no</enabled>
             <path>/local/feeds/nvd/nvdcve-1.0-.*json.gz$</path>
         </provider>
     </vulnerability-detector>
