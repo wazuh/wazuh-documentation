@@ -101,11 +101,6 @@ $manage_repo
 
   `Default true`
 
-$manage_epel_repo
-  Install epel repo and inotify-tools
-
-  `Default true`
-
 $agent_package_name
   Define package name defined in params.pp
 

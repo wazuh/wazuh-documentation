@@ -42,7 +42,7 @@ The next document example shows you how we store a Wazuh API entry. This index c
 The ``.wazuh-version`` index
 ----------------------------
 
-This index has only one document and it includes useful information and it's being used by internal Wazuh app purposes. It includes information such your current version or your installation date. The next example shows you how we store that information.
+This index has only one document and it includes useful information and it's being used by internal Wazuh app purposes. It includes information such as your current version or your installation date. The next example shows you how we store that information.
 
 .. code-block:: console
 
@@ -74,4 +74,4 @@ They are auto-generated and they store the Wazuh agents statuses periodically. T
 More information
 ----------------
 
-- `Elasticsearch documentation - Exploring Your Cluster <https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-explore.html>`_
+- `Elasticsearch documentation - Exploring Your Cluster <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/getting-started-explore.html>`_

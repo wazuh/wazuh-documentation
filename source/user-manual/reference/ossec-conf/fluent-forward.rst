@@ -5,12 +5,14 @@
 fluent-forward
 ==============
 
+.. versionadded:: 3.9.0
+
 .. topic:: XML section name
 
 	.. code-block:: xml
 
-		<fluent_forward>
-		</fluent_forward>
+		<fluent-forward>
+		</fluent-forward>
 
 This configuration section is used to configure the Fluentd forwarder module.
 
@@ -172,15 +174,15 @@ Linux configuration:
 .. code-block:: xml
 
     <!-- Simple usage without using TLS -->
-    <fluent_forward>
+    <fluent-forward>
       <enabled>yes</enabled>
       <socket_path>/var/run/fluent.sock</socket_path>
       <address>localhost</address>
       <port>24224</port>
-    </fluent_forward>
+    </fluent-forward>
 
     <!-- Simple usage using TLS -->
-    <fluent_forward>
+    <fluent-forward>
       <enabled>yes</enabled>
       <socket_path>/var/run/fluent.sock</socket_path>
       <address>localhost</address>
@@ -189,4 +191,4 @@ Linux configuration:
       <ca_file>/root/certs/fluent.crt</ca_file>
       <user>foo</user>
       <password>bar</password>
-    </fluent_forward>
+    </fluent-forward>
