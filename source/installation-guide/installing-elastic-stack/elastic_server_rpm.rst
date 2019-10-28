@@ -72,6 +72,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 5. Once Elasticsearch is up and running, it is recommended to load the Filebeat template. Run the following command where Filebeat was installed:
 
+  .. note:: As mentioned, this command must be run in the Wazuh server.
+
   .. code-block:: console
 
     # filebeat setup --index-management -E setup.template.json.enabled=false
