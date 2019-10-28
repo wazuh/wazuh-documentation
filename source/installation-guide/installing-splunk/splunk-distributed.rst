@@ -19,8 +19,8 @@ This document will guide the users through the installation process for a multi-
 
 This is the structure of a basic Splunk Cluster, that's formed by the next elements:
 
-- The **search head** instances will be in charge of all the searching functionality, and they will look for data on the search peers' indexes. This instances won't have any indexes at all. The **Wazuh App** will be installed in this instances.
-- The **search peer** instances (or indexers) collect all the Wazuh data and stores it in the form of indexes. This instances are connected to the search heads so they can consult the peer's indexes.
+- The **search head** instances will be in charge of all the searching functionality, and they will look for data on the search peers' indexes. These instances won't have any indexes at all. The **Wazuh App** will be installed in these instances.
+- The **search peer** instances (or indexers) collect all the Wazuh data and stores it in the form of indexes. These instances are connected to the search heads so they can consult the peer's indexes.
 - The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
 - The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
 
@@ -94,7 +94,7 @@ Now, to create and configure the *indexes.conf* file, execute the following *com
 
 .. code-block:: console
 
-  # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-indexes.conf
+  # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.10/extensions/splunk/peer-indexes.conf
 
 This is the content of that file:
 
