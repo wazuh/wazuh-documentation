@@ -92,7 +92,7 @@ Deploying a Wazuh cluster
 
         .. code-block:: console
 
-            # /var/ossec/bin/cluster-control -l
+            # /var/ossec/bin/cluster_control -l
 
             NAME           TYPE    VERSION  ADDRESS
             master-node    master  3.10.2   wazuh-master
