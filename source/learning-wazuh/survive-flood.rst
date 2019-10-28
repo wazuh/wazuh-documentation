@@ -27,9 +27,9 @@ produced to keep us informed about the onset of, escalation of, and recovery fro
 Configure the Wazuh agent client buffer on linux-agent
 ------------------------------------------------------
 
-1. In this lab, we will limit agent log production to 50 events per second (EPS).  
- Open ``/var/ossec/etc/ossec.conf`` and find the **<client_buffer>** section, and edit within it the
- ``<events_per_second>`` value:
+1. In this lab, we will limit agent log production to 50 events per second (EPS) in order to easily simulate
+   a flooding event. Open ``/var/ossec/etc/ossec.conf`` and find the **<client_buffer>** section, 
+   and edit within it the  ``<events_per_second>`` value:
 
     .. code-block:: xml
 
@@ -39,7 +39,11 @@ Configure the Wazuh agent client buffer on linux-agent
             <queue_size>5000</queue_size>
             <events_per_second>50</events_per_second>
         </client_buffer>
-   
+ 
+    .. warning::
+        These settings are small for simulation purposes.  You would not want to make them this low in production.
+
+
     .. note::
 
         By default, this limit is prevented from being set to lower than 50, you may override
@@ -48,7 +52,6 @@ Configure the Wazuh agent client buffer on linux-agent
         to overly restrictive EPS limits pushed to it via Wazuh manager centralized configuration.  
         Here we make it possible to enforce an EPS as low as 10.:
         ``# echo "agent.min_eps=10" >> /var/ossec/etc/local_internal_options.conf``
-
 
 
 2. Restart the Wazuh agent so the configuration may take effect:
@@ -66,12 +69,12 @@ Configure the Wazuh agent client buffer on linux-agent
         # service wazuh-agent restart
 
     .. note::
-        The client buffer is explained in detail in the Wazuh User manual.  
-        Search for "Anti-flooding mechanism".  In brief, it
-        allows a Wazuh agent to limit the rate at which it sends log events to the Wazuh manager.  If events are produced at
-        a rate in excess of the configured eps limit, then they are stored in a leaky bucket queue until the eps rate slows
-        down enough that the queue contents can be sent along to the Wazuh manager.  If the queue gets full, then any new
-        events are dropped, i.e the bucket leaks.  Various alerts are sent to the Wazuh manager about all of this.
+        The client buffer is explained in detail in the Wazuh User manual's :ref:`antiflooding` section. 
+        In brief, it allows a Wazuh agent to limit the rate at which it sends log events to the Wazuh manager.
+        If events are produced at a rate in excess of the configured EPS limit, then they are stored in a leaky
+        bucket queue until the EPS rate slows down enough that the queue contents can be sent along to the 
+        Wazuh manager.  If the queue gets full, then any new events are dropped, i.e the bucket leaks.
+        Various alerts are sent to the Wazuh manager about all of this.
 
     +-----------------------------------------------------------------------------------------------+
     | **Wazuh agent Client Buffer**                                                                 |
@@ -82,28 +85,18 @@ Configure the Wazuh agent client buffer on linux-agent
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-3. To ensure our flood simulation causes queueing and ultimately overflows the queue, change **<queue_size>** to 500 and **<events_per_second>** to 20.  Save and close ossec.conf.  The new section should look like this:
 
-    .. code-block:: xml
 
-        <client_buffer>
-            <!-- Agent buffer options -->
-            <disabled>no</disabled>
-            <queue_size>500</queue_size>
-            <events_per_second>20</events_per_second>
-        </client_buffer>
+Decrease minimum log alert level
+--------------------------------
 
-    .. warning::
-        These settings are small for simulation purposes.  You would not want to make them this low in production.
+We will generate a flood of messages with the word "fatal" so they will trigger 
+generic Wazuh rule ``1002`` which has a low severity level (2).  By default,
+Wazuh manager does not record alerts on rules of severity levels less than 3,
+so for this lab we will lower the threshold:
 
-Make Wazuh manager record alerts for each flooded event record
---------------------------------------------------------------
-
-Because we will intentionally include the word "fatal" in the flooding log records we generate, they each will trigger generic
-Wazuh rule 1002 which has a low severity level of 2.  By default, Wazuh manager does not record alerts on rules of severity
-levels less than 3, so for this lab we will lower the threshold.
-
-1. Edit /var/ossec/etc/ossec.conf and change <log_alert_level> from 3 to 1 so that the <alerts> section looks like below.  Now alerts of all severity levels will show up in Kibana.
+1. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
+   section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Kibana.
 
     .. code-block:: xml
 
@@ -129,7 +122,7 @@ levels less than 3, so for this lab we will lower the threshold.
 Generate a log flood on linux-agent
 -----------------------------------
 
-1. Create a script called /usr/local/bin/makeflood, with this content:
+1. Create a script called ``/usr/local/bin/makeflood``, with this content:
 
     .. code-block:: console
 
@@ -141,29 +134,37 @@ Generate a log flood on linux-agent
         done
 
     .. note::
-        While we could write records to a log file monitored by Wazuh agent, this script takes an even faster approach of
-        writing records directly to the Wazuh agent's internal socket where, for example, ossec-logcollector streams new
-        log lines from log files.  The script uses netcat to do this, but any tool that can
-        write datagrams to a Unix socket will do the job.  Sometimes it is desirable to have a script on a Wazuh agent
-        send results directly back to the Wazuh manager while completely bypassing the agent's filesystem.  The quoted log
-        line that is piped to netcat consists of three colon-separated parts.  First, the "1" corresponds to the syslog log
-        type.  The second field causes the location metadata value to be set to "floodtest".  After that is a log line just
-        like you might see in /var/log/messages.
+        While we could write records to a log file monitored by Wazuh agent, 
+        this script takes an even faster approach of writing records directly
+        to the Wazuh agent's internal socket. This is where components like 
+        **ossec-logcollector** streams new log lines from log files.
+      
+        The script uses netcat to do this, but any tool that can write datagrams
+        to a Unix socket will do the job. Sometimes it is desirable to have a script
+        on a Wazuh agent send results directly back to the Wazuh manager while
+        completely bypassing the agent's filesystem.
+      
+        The quoted log line that is piped to netcat consists of three
+        colon-separated parts.  First, the "1" corresponds to the syslog log type.
+        The second field causes the location metadata value to be set to "floodtest".
+        After that is a log line just like you might see in ``/var/log/messages``.
 
-2. Make the script executable and then run it to generate a rapid flood of 10,000 log entries.
+2. Make the script executable and then run it to generate a rapid flood of **10,000** log entries.
 
     .. code-block:: console
 
         # chmod 700 /usr/local/bin/makeflood
         # makeflood
 
-3. Notice that the periods representing log messages are scrolling across the screen at a rate well above our 20 eps limit.
+3. Notice that the periods representing log messages are scrolling across the
+   screen at a rate well above our 50 EPS limit.
 
 
 See what happened according to Kibana
 -------------------------------------
 
-1. Query Kibana for "firehose".  Click **[Add]** next to "full_log" for readability. Change the scale from "Auto" to "Second".
+1. Query Kibana for "firehose".  Click **[Add]** next to "full_log" for readability.
+   Change the scale from "Auto" to "Second".
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png                                      |
@@ -172,7 +173,8 @@ See what happened according to Kibana
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 20 eps, our intended limit.  The client buffer eps limit worked!
+2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
+   our intended limit.  The client buffer EPS limit worked!
 
 3. Notice that only 1,269 hits are reported for a flood.  It appears many of the flooded events were lost.
 
@@ -194,12 +196,14 @@ See what happened according to Kibana
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-6. Observe how Wazuh alerts us at various stages of a flooding event so that we can know when we need to intervene with an over-logging system that is not recovering to a normal state on its own.
+6. Observe how Wazuh alerts us at various stages of a flooding event so that we 
+   can know when we need to intervene with an over-logging system that is not 
+   recovering to a normal state on its own.
 
 Return linux-agent to normal client buffer settings
 ---------------------------------------------------
 
-1. In the <client_buffer> section of /var/ossec/etc/ossec.conf file, change it back to this:
+1. In the ``<client_buffer>`` section of ``/var/ossec/etc/ossec.conf`` file, change it back to this:
 
     .. code-block:: xml
 
