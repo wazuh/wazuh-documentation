@@ -63,31 +63,27 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
 Remote syslog
 ^^^^^^^^^^^^^
 
-On other devices, like firewalls, for instance, the log analysis component can be configured to receive log events through syslog.
+In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that we have two methods available:
 
-- Sample configuration:
+One option is for Wazuh to receive syslog logs by a custom port:
 
   .. code-block:: xml
 
     <ossec_config>
       <remote>
         <connection>syslog</connection>
+        <port>513</port>
+        <protocol>udp</protocol>
         <allowed-ips>192.168.2.0/24</allowed-ips>
       </remote>
     <ossec_config>
 
+- ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
+- ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
+- ``<protocol>udp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
+- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP from which syslog messages will be accepted.
 
-``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
-
-Log example:
-
-::
-
-  2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
-  1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
-  [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
-
-If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
+The other option store the logs in a plaintext file and monitor that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
 
 .. code-block:: xml
 
@@ -96,6 +92,8 @@ If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``oss
     <location>/custom/file/path</location>
   </localfile>
 
+- ``<log_format>syslog</log_format>`` indicates the source log format, in this case, syslog format.
+- ``<location>/custom/file/path</location>`` indicates where we have stored the syslog logs.
 
 Analysis
 --------
@@ -163,7 +161,7 @@ Once a rule is matched, the manager will create an alert as below::
   User: rromero
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
-By default, alerts will be generated on events that are important or of security relevance. To store all events even if they do not match a rule, enable the ``<log_all>`` option.
+By default, alerts will be generated on events that are important or of security relevance. To store all events even if they do not match a rule, enable the ``<logall>`` option.
 
 Alerts will be stored at ``/var/ossec/logs/alerts/alerts.(json|log)`` and events at ``/var/ossec/logs/archives/archives.(json|log)``. Logs are rotated and an individual directory is created for each month and year.
 

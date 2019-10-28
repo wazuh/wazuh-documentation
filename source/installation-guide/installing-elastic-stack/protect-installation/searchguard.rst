@@ -40,14 +40,16 @@ Our default configuration is not using authentication for Filebeat so we need to
 
     # systemctl stop filebeat
 
-2. Look for the output section and add username and password fields:
+2. Look for the output section and add the following :
 
 .. code-block:: yaml
 
     output.elasticsearch:
-        ...
+        hosts: ['YOUR-Elastic-Search-IP:9200`]
         username: admin
         password: admin
+        protocol: https
+        ssl.certificate_authorities: ["/etc/filebeat/root-ca.pem"]
 
 
 .. note::
@@ -83,25 +85,24 @@ Now restart Elasticsearch service:
 
 Search Guard must fit the Elasticsearch version like any other component from the Elastic stack. Versioning is a bit different for Search Guard, please check your version at `Search Guard versions <https://docs.search-guard.com/latest/search-guard-versions>`_.
 
-The versioning syntaxis for Search Guard is as follow:
+The versioning syntax for Search Guard is as follows:
 
 .. code-block:: none
 
     com.floragunn:search-guard-7:<elastic_version>-<searchguard_version>
 
-This documentation is designed for the latest supported version, it's 7.0.1 so our right version is:
+This documentation is designed for the latest supported version, it's 7.1.1 so our right version is:
 
 .. code-block:: none
 
-    com.floragunn:search-guard-7:7.0.1-35.0.0
+    com.floragunn:search-guard-7:7.1.1-35.2.0
 
 Since Search Guard is a plugin, we must install it such other Elasticsearch plugins:
 
 .. code-block:: console
 
-    $ sudo -u elasticsearch \
-    /usr/share/elasticsearch/bin/elasticsearch-plugin install \
-    -b com.floragunn:search-guard-7:7.0.1-35.0.0
+    $ /usr/share/elasticsearch/bin/elasticsearch-plugin install \
+    -b com.floragunn:search-guard-7:7.1.1-35.2.0
 
 Search Guard comes with a demo configuration and it's useful as starting point so let's install the demo configuration:
 
@@ -216,7 +217,7 @@ Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticse
 
 .. code-block:: none
 
-    $ sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/7.0.1-35.0.0/search-guard-kibana-plugin-7.0.1-35.0.0.zip
+    $ sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/7.1.1-35.2.0/search-guard-kibana-plugin-7.1.1-35.2.0.zip
 
 2. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
 

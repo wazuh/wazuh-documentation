@@ -28,7 +28,7 @@ Wazuh core
 - Fixed crash when an active response command was received and the module was disable
 - Fixed crash when collecting large files on Windows.
 - Fixed Wazuh manager automatic restart via API on Docker containers.
-- Fixed corruption error in cluster agent info files synchronisation.
+- Fixed corruption error in cluster agent info files synchronization.
 - Reverted five seconds reading timeout in FIM scans.
 
 
@@ -50,7 +50,7 @@ Wazuh ruleset
 Elastic Stack 7
 ----------------
 
-Wazuh is now compatible with Elastic Stack 7, which includes, between others, new out of the box `Security features <https://www.elastic.co/es/blog/getting-started-with-elasticsearch-security>`_.
+Wazuh is now compatible with Elastic Stack 7, which includes, between others, new out of the box `Security features <https://www.elastic.co/blog/getting-started-with-elasticsearch-security>`_.
 
 Additionally, since this Wazuh release, Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server.
 

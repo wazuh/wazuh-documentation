@@ -16,7 +16,7 @@ The following dependencies are required by the wodle:
 - Linux system.
 - Python 2.7 or newer.
 - `Python Docker library <https://pypi.org/project/docker/>`_: It can be installed with ``pip install docker`` command.
- - Starting with Wazuh v3.9.0 this requirement is met by default by the Wazuh manager and must only be installed in 
+- Starting with Wazuh v3.9.0 this requirement is met by default by the Wazuh manager and must only be installed in previous versions or Wazuh agents.
 
 
 Configuration
@@ -37,7 +37,7 @@ In order to use the Docker listener module it is only necessary to enable the ``
 
 
 Then, it is necessary to restart the Wazuh service (where the listener will be running).
-            
+
 
 Use cases
 ^^^^^^^^^
