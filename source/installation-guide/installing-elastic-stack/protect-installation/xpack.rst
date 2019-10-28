@@ -82,14 +82,12 @@ This section describes how to secure the communications between the involved com
 
 .. code-block:: yaml
 
-    # Transport layer
     xpack.security.transport.ssl.enabled: true
     xpack.security.transport.ssl.verification_mode: certificate
     xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
     xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch.crt
     xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
 
-    # HTTP layer
     xpack.security.http.ssl.enabled: true
     xpack.security.http.ssl.verification_mode: certificate
     xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
@@ -151,13 +149,11 @@ This section describes how to secure the communications between the involved com
 
 .. code-block:: yaml
 
-    # Elasticsearch from/to Kibana
     elasticsearch.hosts: ["https://10.0.0.3:9200"]
     elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca/ca.crt"]
     elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     elasticsearch.ssl.key: "/etc/kibana/certs/kibana.key"
 
-    # Browser from/to Kibana
     server.ssl.enabled: true
     server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     server.ssl.key: "/etc/kibana/certs/kibana.key"
