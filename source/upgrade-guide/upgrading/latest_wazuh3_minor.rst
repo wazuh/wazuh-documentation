@@ -121,17 +121,15 @@ b) Debian/Ubuntu:
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
     # apt-get update
 
-<<<<<<< HEAD:source/installation-guide/upgrading/latest_wazuh3_minor.rst
+c) OpenSUSE:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
 Next steps
 ----------
 
 Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<upgrading-elastic-stack>`.
 
 You might also want to check our :ref:`compatibility matrix <compatibility-matrix>` in order to look at the Elastic stack version you need to use.
-=======
-c) OpenSUSE:
-
-  .. code-block:: console
-
-    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
->>>>>>> b2778f2c7854ee541fb9af65f1047f92d64a5983:source/upgrade-guide/upgrading/latest_wazuh3_minor.rst
