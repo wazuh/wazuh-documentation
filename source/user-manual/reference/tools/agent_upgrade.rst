@@ -10,30 +10,30 @@ agent_upgrade
 The agent_upgrade program allows you to list outdated agents and upgrade them.
 
 +--------------------------------------------+---------------------------------------------------------+
-| **-h, --help**                             | Display the help message.                               |
+| ``-h, --help``                             | Display the help message.                               |
 +--------------------------------------------+---------------------------------------------------------+
-| **-l, --list_outdated**                    | Generates a list with all outdated agents.              |
+| ``-l, --list_outdated``                    | Generates a list with all outdated agents.              |
 +--------------------------------------------+---------------------------------------------------------+
-| **-a AGENT_ID, --agent AGENT_ID**          | Agent ID to upgrade.                                    |
+| ``-a AGENT_ID, --agent AGENT_ID``          | Agent ID to upgrade.                                    |
 +--------------------------------------------+---------------------------------------------------------+
-| **-d, --debug**                            | Debug mode.                                             |
+| ``-d, --debug``                            | Debug mode.                                             |
 +--------------------------------------------+---------------------------------------------------------+
-| **-F, --force**                            | Allows reinstall same version and downgrade version.    |
+| ``-F, --force``                            | Allows reinstall same version and downgrade version.    |
 +--------------------------------------------+---------------------------------------------------------+
-| **-s, --silent**                           | Do not show output.                                     |
+| ``-s, --silent``                           | Do not show output.                                     |
 +--------------------------------------------+---------------------------------------------------------+
-| **-v VERSION, --version VERSION**          | Version to install.                                     |
+| ``-v VERSION, --version VERSION``          | Version to install.                                     |
 +--------------------------------------------+---------------------------------------------------------+
-| **-r REPOSITORY, --repository REPOSITORY** | Specify a repository URL.                               |
+| ``-r REPOSITORY, --repository REPOSITORY`` | Specify a repository URL.                               |
 +--------------------------------------------+---------------------------------------------------------+
-| **-f FILE, --file FILE**                   | Custom WPK filename.                                    |
+| ``-f FILE, --file FILE``                   | Custom WPK filename.                                    |
 +--------------------------------------------+---------------------------------------------------------+
-| **-x EXECUTE, --execute EXECUTE**          | Executable filename in the WPK custom file.             |
+| ``-x EXECUTE, --execute EXECUTE``          | Executable filename in the WPK custom file.             |
 |                                            | By default it will try to launch upgrade.sh.            |
 +--------------------------------------------+---------------------------------------------------------+
-| **-t TIMEOUT, --timeout TIMEOUT**          | Timeout where the agent cannot restart while updating.  |
+| ``-t TIMEOUT, --timeout TIMEOUT``          | Timeout where the agent cannot restart while updating.  |
 +--------------------------------------------+---------------------------------------------------------+
-| **-c CHUNK_SIZE, --chunk_size CHUNK_SIZE** | Chunk size sending WPK file. Allowed values: [1 - 64000]|
+| ``-c CHUNK_SIZE, --chunk_size CHUNK_SIZE`` | Chunk size sending WPK file. Allowed values: [1 - 64000]|
 +--------------------------------------------+---------------------------------------------------------+
 
 .. note:: By default, the timeout will be the maximum allowed by the agent with the ``execd.max_restart_lock`` option in :doc:`internal_options.conf<../internal-options>`.

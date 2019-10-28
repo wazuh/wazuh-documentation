@@ -24,7 +24,7 @@ The Wazuh server is based on a suite of applications where each application or c
 
 Components
 ``````````
-- The **Wazuh Manager** receives and analyzes data from the agents using decoders and rules that have been created to trigger security alerts. The manager is also used to distribute configuration files to the agents, to monitor their status and to send control messages to trigger automatic actions at the agent level.
+- The **Wazuh manager** receives and analyzes data from the agents using decoders and rules that have been created to trigger security alerts. The manager is also used to distribute configuration files to the agents, to monitor their status and to send control messages to trigger automatic actions at the agent level.
 
 + The **Registration Service** uses a secure mechanism to register agents without any intervention from server side.
 
@@ -41,7 +41,7 @@ Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addit
 Components
 ``````````
 
-- The **Wazuh app** is a Kibana plugin designed to display Wazuh related information providing a RESTful API web interface. This interface makes administration of the Wazuh Manager and Wazuh Agents easy and powerful.
+- The **Wazuh app** is a Kibana plugin designed to display Wazuh related information providing a RESTful API web interface. This interface makes administration of the Wazuh manager and Wazuh agents easy and powerful.
 
 
 - **Elasticsearch** is a highly scalable full-text search and analytics engine. It is used to index alerts data and historical agents status information. More information can be found at the `Elasticsearch official documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>`_.

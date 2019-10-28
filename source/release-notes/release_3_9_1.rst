@@ -28,7 +28,7 @@ Wazuh core
 - Fixed crash when an active response command was received and the module was disable
 - Fixed crash when collecting large files on Windows.
 - Fixed Wazuh manager automatic restart via API on Docker containers.
-- Fixed corruption error in cluster agent info files synchronisation.
+- Fixed corruption error in cluster agent info files synchronization.
 - Reverted five seconds reading timeout in FIM scans.
 
 

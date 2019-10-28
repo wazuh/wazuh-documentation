@@ -47,7 +47,7 @@ The rules are classified in multiple levels, from the lowest (0) to the maximum 
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 10    | Multiple user generated errors   | They include multiple bad passwords, multiple failed logins, etc.                                                  |
 |       |                                  |                                                                                                                    |
-|       |                                  | They may indicate an attack or may just be that a user just forgot his credencials.                                |
+|       |                                  | They may indicate an attack or may just be that a user just forgot his credentials.                                |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 11    | Integrity checking warning       | They include messages regarding the modification of binaries or the presence of rootkits (by Rootcheck).           |
 |       |                                  |                                                                                                                    |
@@ -57,7 +57,7 @@ The rules are classified in multiple levels, from the lowest (0) to the maximum 
 |       |                                  |                                                                                                                    |
 |       |                                  | They may indicate an attack against a specific application.                                                        |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| 13    | Unusual error (high importante)  | Most of the times it matches a common attack pattern.                                                              |
+| 13    | Unusual error (high importance)  | Most of the times it matches a common attack pattern.                                                              |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 14    | High importance security event   | Most of the times done with correlation and it indicates an attack.                                                |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
