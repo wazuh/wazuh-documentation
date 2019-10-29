@@ -60,6 +60,12 @@ c) OpenSUSE:
 Upgrade the Wazuh agent
 -----------------------
 
+Since the Wazuh 3.x version it is possible to upgrade the agents from the manager or locally.
+
+Upgrading the agents remotely from the manager is possible thanks to the agent_upgrade tools and the Wazuh API. You may check it in the  :ref:`Upgrading agent<upgrading-agent>` section.
+
+To perform the upgrade locally you have to follow the next steps:
+
 a) CentOS/RHEL/Fedora:
 
   .. code-block:: console
