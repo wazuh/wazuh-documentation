@@ -95,6 +95,14 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
         - name: index_prefix
           default: my-custom-alerts-3.x-
 
+
+Note
+
+Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,` and must not start with `_`, `-` or `+`. Also, all the letters must be lowercase. 
+
+
+
+
 7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
     .. code-block:: yaml
