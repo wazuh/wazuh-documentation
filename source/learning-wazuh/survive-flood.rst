@@ -122,6 +122,12 @@ so for this lab we will lower the threshold:
 Generate a log flood on linux-agent
 -----------------------------------
 
+0. If you do not have it already, install netcat:
+   
+   .. code-block:: console
+
+      yum install nmap-ncat
+
 1. Create a script called ``/usr/local/bin/makeflood``, with this content:
 
     .. code-block:: console
@@ -129,8 +135,8 @@ Generate a log flood on linux-agent
         #!/bin/bash
         for i in {1..10000}
         do
-                echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/ossec/queue
-                echo -n "."
+          echo -n "1:floodtest:Feb  3 03:08:47 linux-agent centos: fatal firehose $i" | ncat -Uu /var/ossec/queue/ossec/queue
+          echo -n "."
         done
 
     .. note::
@@ -176,7 +182,7 @@ See what happened according to Kibana
 2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
    our intended limit.  The client buffer EPS limit worked!
 
-3. Notice that only 1,269 hits are reported for a flood.  It appears many of the flooded events were lost.
+3. Notice that only 8,306 hits are reported for a flood.  It appears some of the flooded events were lost.
 
 4. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
 
