@@ -10,26 +10,26 @@ Installation guide
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
 
-This document will guide you through the Wazuh installation process. If you have any doubt or need assistance:
+This document will guide you through the Wazuh installation process. You also have the following resources available, in case you have questions or need assistance:
 
-- `Mailing list <wazuh+subscribe@googlegroups.com>`_. In `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can ask questions and participate in discussions. Share your questions and thoughts with the community.
-- `GitHub repositories <https://github.com/wazuh>`_. Don’t hesitate to collaborate, make pull-requests, submit issues or send commits, we will review all your questions.
-- `Slack channel <https://wazuh.com/community/join-us-on-slack>`_. Yet another way to connect with us. Join our #community channel to ask your questions and we will do our best to resolve them.
+- `Mailing list <wazuh+subscribe@googlegroups.com>`_: In `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can share your questions and thoughts with our users community.
+- `GitHub repositories <https://github.com/wazuh>`_: Here you can submit issues and contribute to the project development. We happily review and accept pull requests.
+- `Slack channel <https://wazuh.com/community/join-us-on-slack>`_: Join users community channel to chat with our team members and other users.
 
-We also provide `professional support, training and consulting services <https://wazuh.com/professional-services/>`_.
+In addition, we also provide `professional support, training and consulting services <https://wazuh.com/professional-services/>`_.
 
-Concepts
---------
+Basic concepts
+--------------
 
-- **Wazuh server:** collects and analyzes data from deployed agents. Consists of: Wazuh manager, Wazuh API and Filebeat.
+- **Wazuh agent**: runs on the monitored endpoint. Collects log data and security events. It also performs inventory and hardening scans, detects malware and system anomalies, and executes active responses. 
 
-+ **Elastic Stack**: ingests and indexes data from the Wazuh server. It also provides a flexible visualization tool. Users can create bar graphs, line graphs and scatter plots or pie charts and maps to consolidate and display a large volume of Wazuh data. Consists of: Elasticsearch, Kibana and the Wazuh App. Logstash is optional.
++ **Wazuh server**: collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat.
 
-- **Wazuh agent**: runs on the monitored endpoint. Collects endpoint logs, events and configuration data and sends it to the Wazuh server to detect intrusions and anomalies.
+- **Elastic Stack**: ingests and indexes data from the Wazuh server. It provides a search engine and a Wazuh user interface for configuration management and data visualization. It runs Elasticsearch and Kibana with the Wazuh plugin. Logstash is optional.
 
-+ **Wazuh cluster**: a Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. With a Wazuh cluster setup, we have the potential to greatly increase the number of agents as long as we add worker nodes whenever necessary.
++ **Wazuh cluster**: is a group of Wazuh servers, that works together to provide high availability and load balancing. With a cluster configuration, your Wazuh infrastructure can scale as much as you need.
 
-- **Elasticsearch cluster**:  an Elasticsearch cluster is a group of hosts with Elasticsearch installed with a specific configuration that allows enhancing the availability, scalability and data redundancy of the Elasticsearch service.
+- **Elasticsearch cluster**: is a group of Elasticsearch nodes configured to work together. It provides high availability, scalability and load balacing for data indexing and searching.
 
 Installation types
 ------------------
