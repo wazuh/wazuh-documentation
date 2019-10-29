@@ -7,7 +7,7 @@
 Debian
 ======
 
-To install the Wazuh server components in Debian 7 or higher versions, you have to install the relevant packages after you've added the repositories.
+To install the Wazuh server components on Debian 7 or higher versions, you have to install the relevant packages after you've added the repositories.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 

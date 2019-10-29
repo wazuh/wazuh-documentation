@@ -8,7 +8,7 @@
 Debian
 ======
 
-To install the Elastic Stack componetns in Debian 8 or 9, you have to install the relevant packages after you've added the repositories.
+To install the Elastic Stack components on Debian 8 or 9, you have to install the relevant packages after you've added the repositories.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
