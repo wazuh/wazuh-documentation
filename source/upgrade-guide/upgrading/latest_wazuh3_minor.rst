@@ -126,3 +126,10 @@ c) OpenSUSE:
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
+Next steps
+----------
+
+Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<upgrading-elastic-stack>`.
+
+You might also want to check our :ref:`compatibility matrix <compatibility-matrix>` in order to look at the Elastic stack version you need to use.
