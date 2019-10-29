@@ -49,13 +49,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.8.2
+      # yum install elasticsearch-6.8.3
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=6.8.2
+      # apt-get install elasticsearch=6.8.3
       # systemctl restart elasticsearch
 
 5. Restart the service.
@@ -105,13 +105,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.8.2
+    # yum install logstash-6.8.3
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.8.2-1
+    # apt-get install logstash=1:6.8.3-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -146,13 +146,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.8.2
+      # yum install filebeat-6.8.3
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.8.2
+      # apt-get install filebeat=6.8.3
 
 2. Update the configuration file.
 
@@ -181,13 +181,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.8.2
+    # yum install kibana-6.8.3
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.8.2
+    # apt-get install kibana=6.8.3
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -209,7 +209,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_6.8.2.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_6.8.3.zip
 
   .. warning::
 

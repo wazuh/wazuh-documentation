@@ -273,7 +273,11 @@ dt {
   text-decoration: none;
 }
 
-a .docs-link {
+#links-to-home a.docs-link {
+  vertical-align: middle;
+}
+
+a.docs-link {
   color: #ffffff;
   vertical-align: text-top;
   display: inline-block;
@@ -281,8 +285,8 @@ a .docs-link {
   font-size: 1.2rem;
 }
 
-a .docs-link:hover,
-a .docs-link:active {
+a.docs-link:hover,
+a.docs-link:active {
   color: #ffffff;
 }
 
@@ -859,23 +863,6 @@ li.toctree-l5 > a {
 
 #globaltoc .show > a > .toc-toggle-btn .toc-toggle-icon:after {
 	content: '\f077';
-}
-
-#globaltoc > nav > ul .show > ul > li:not(.show){
-  max-height: 80px;
-	opacity: 1;
-	transition: max-height ease .3s, opacity ease 0.3s;
-}
-
-#globaltoc > nav > ul .show.initial > ul > li:not(.show){
-  transition: none !important;
-}
-
-#globaltoc > nav > ul li:not(.show) > ul > li {
-	max-height: 0;
-	opacity: 0;
-	border-width: 0px;
-	transition: max-height ease .3s, opacity ease 0.3s;
 }
 
 #globaltoc li {
@@ -2913,6 +2900,10 @@ div.highlight pre {
         position: relative;
       }
 
+      #links-to-home a.docs-link {
+        vertical-align: bottom;
+      }
+
       #header-sticky .navbar-open {
         display: none;
       }
@@ -3107,6 +3098,7 @@ div.highlight pre {
         border: none;
         background: #ffb600;
         color: #ffffff;
+        min-width: 235px;
       }
 
       aside.help .btn-help:hover,
