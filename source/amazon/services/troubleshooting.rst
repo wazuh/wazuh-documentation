@@ -142,6 +142,10 @@ Common errors
 
         <bucket_name>/<prefix>/AWSLogs/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>
 
+      **Cisco Umbrella**
+
+        <bucket_name>/<prefix>/<year>-<month>-<day>
+
       **Use case**
 
         AmazonS3/config/AWSLogs/1308927/Config/EU-West/2019/01/12/file.log
