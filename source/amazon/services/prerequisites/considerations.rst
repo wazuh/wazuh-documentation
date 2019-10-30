@@ -35,48 +35,55 @@ Below there is an example of different services configuration:
     <run_on_start>yes</run_on_start>
     <skip_on_error>yes</skip_on_error>
 
+    <!-- Inspector, two regions, and logs after January 2018 -->
     <service type="inspector">
       <aws_profile>default</aws_profile>
       <regions>us-east-1,us-east-2</regions>
       <only_logs_after>2018-JAN-01</only_logs_after>
     </service>
 
+    <!-- GuarDuty, 'production' profile -->>
     <bucket type="guardduty">
       <name>wazuh-aws-wodle</name>
       <path>guardduty</path>
       <aws_profile>production</aws_profile>
     </bucket>
 
+    <!-- Config, 'default' profile -->
     <bucket type="config">
       <name>wazuh-aws-wodle</name>
       <path>config</path>
       <aws_profile>default</aws_profile>
     </bucket>
 
+    <!-- KMS, 'dev' profile -->
     <bucket type="custom">
       <name>wazuh-aws-wodle</name>
       <path>kms_compress_encrypted</path>
       <aws_profile>dev</aws_profile>
     </bucket>
 
+    <!-- CloudTrail, authentication with hardcoded keys (not recommended), without 'path' tag -->
     <bucket type="cloudtrail">
       <name>wazuh-cloudtrail</name>
       <access_key>XXXXXXXXXX</access_key>
       <secret_key>XXXXXXXXXX</secret_key>
     </bucket>
 
+    <!-- CloudTrail, 'gov1' profile, and 'us-gov-east-1' GovCloud region -->
     <bucket type="cloudtrail">
       <name>wazuh-aws-wodle</name>
       <path>cloudtrail-govcloud</path>
       <regions>us-gov-east-1</regions>
-      <aws_profile>default</aws_profile>
+      <aws_profile>gov1</aws_profile>
     </bucket>
 
+    <!-- CloudTrail, 'gov2' profile, and 'us-gov-west-1' GovCloud region -->
     <bucket type="cloudtrail">
       <name>wazuh-aws-wodle</name>
       <path>cloudtrail-govcloud</path>
       <regions>us-gov-west-1</regions>
-      <aws_profile>default</aws_profile>
+      <aws_profile>gov2</aws_profile>
     </bucket>
 
   </wodle>
