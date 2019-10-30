@@ -5,45 +5,81 @@
 Detect and react to a Shellshock attack
 =======================================
 
-Shellshock represent a family of vulnerabilities disclosed in late 2014 involving the Linux Bash shell.  They made it
-possible to inject shell commands via maliciously crafted web requests sent to Linux web servers.  The pattern in such
-web requests is quite distinctive, and any instance of your servers being probed with Shellshock requests are fairly
+Shellshock represent a family of vulnerabilities disclosed in late 2014 involving
+the Linux Bash shell.  These vulnerabilities made it possible to inject shell 
+commands via maliciously crafted web requests sent to Linux web servers.  The 
+pattern in such web requests is quite distinctive, and any instance of your 
+servers being probed with Shellshock requests are fairly
 strong indicators of malicious probing worthy of automated countermeasures.
 
-In this lab you will use linux-agent to send a Shellshock probe to elastic-server.  After looking over the alert
-that is produced and the rule that produced it, you will then set up and test several active response scenarios in which
-the attacker (linux-agent) will be automatically firewalled off from the Linux lab systems and null routed by the Windows lab
-system in response to this malicious probe being directed at elastic-server.
+In this lab you will send a Shellshock probe to the ``linux-agent``.  After 
+looking over the alert that is produced and the rule that produced it, you will
+then set up and test several active response scenarios in which the attacker 
+will be automatically firewalled off from the Linux lab systems and null routed
+by the Windows lab system in response this attack.
 
-Confirm Wazuh agent on elastic-server monitors the Nginx logs
--------------------------------------------------------------
-
-The Nginx **access.log** and **error.log** file paths should be monitored by default by the Wazuh agent.
-Confirm that these <localfile> sections are indeed present in /var/ossec/etc/ossec.conf:
-
-    .. code-block:: xml
-
-        <localfile>
-            <log_format>apache</log_format>
-            <location>/var/log/nginx/access.log</location>
-        </localfile>
-
-        <localfile>
-            <log_format>apache</log_format>
-            <location>/var/log/nginx/error.log</location>
-        </localfile>
-
-Make linux-agent send a Shellshock probe to elastic-server and find the resulting alert
----------------------------------------------------------------------------------------
-
-Substitute the Elastic IP assigned to your Elastic Server instance, for **ES_SERVER_EIP**. Notice the maliciously crafted
-User-Agent header to be sent, including injected shell commands.
+Install a web server and monitor its logs
+-----------------------------------------
+If you haven't already, install a web server in your ``linux-agent``, for example nginx:
 
     .. code-block:: console
 
-        # curl --insecure https://ES_SERVER_EIP -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
+        yum install epel-release
+        yum install nginx
+        systemctl start nginx
 
-Search Kibana for **rule.id:30412** (the Shellshock rule).  You should find a record like this:
+Ensure that the nginx access and error logs are collected by Wazuh by having
+these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.conf`` file:
+
+    .. code-block:: xml
+
+        <ossec_config>
+            <localfile>
+                <log_format>apache</log_format>
+                <location>/var/log/nginx/access.log</location>
+            </localfile>
+
+            <localfile>
+                <log_format>apache</log_format>
+                <location>/var/log/nginx/error.log</location>
+            </localfile>
+        </ossec_config>
+
+Restart the agent for this change to take effect:
+
+a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-agent restart
+
+
+
+  .. note::
+
+     If a webserver (like nginx) is already on a system when the Wazuh agent is installed
+     the **access.log** and **error.log** file paths will be monitored by default by the Wazuh agent.
+
+
+Send a Shellshock probe to the web server and see the resulting alert
+---------------------------------------------------------------------
+
+Execute the following request to the web server: 
+
+    .. code-block:: console
+
+        # curl --insecure localhost -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
+
+Notice the maliciously crafted User-Agent header to be sent, including injected shell commands.
+This request may be done to a remote address by changing the ``localhost`` for the address of the server.
+
+Search Kibana for **rule.id:31166** (the Shellshock rule).  You should find a record like this:
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/shellshock.png                                   |
@@ -56,30 +92,32 @@ Look over the rule that detected the probe:
 
     .. code-block:: xml
 
-        <rule id="30412" level="6">
-            <if_sid>31101</if_sid>
-            <regex>"\(\)\s*{\s*:;\s*}\s*;</regex>
-            <description>Apache: Shellshock attack attempt</description>
-            <info type="cve">CVE-2014-6271</info>
-            <info type="link">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271</info>
-            <group>attack,pci_dss_11.4,</group>
-        </rule>
+          <rule id="31166" level="15">
+              <if_sid>31101,31108</if_sid>
+              <regex>"\(\)\s*{\s*:;\s*}\s*;|"\(\)\s*{\s*foo:;\s*}\s*;|"\(\)\s*{\s*ignored;\s*}\s*|"\(\)\s*{\s*gry;\s*}\s*;</regex>
+              <description>Shellshock attack attempt</description>
+              <info type="cve">CVE-2014-6271</info>
+              <info type="link">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271</info>
+              <group>attack,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SI.4,</group>
+            </rule>
 
 .. note::
     One of the benefits of including HIDS detection of web attacks in your security strategy is that
     malicious traffic over https is not hidden from a system like Wazuh because it is watching the web
     server logs rather than the encrypted packets of https transmissions.
 
-Set up active response (AR) countermeasures to Shellshock probes
+Set up Active Response (AR) countermeasures to Shellshock probes
 ----------------------------------------------------------------
 
-The Wazuh active response facility allows scripted actions to be taken in response to specific patterns of
-Wazuh rule matches.  By default, AR is enabled on all agents and all standard AR commands are defined in ossec.conf on the Wazuh
-manager, but no actual criteria for calling the AR commands is included.  No AR commands will actually be
-triggered until further configuration is performed on the Wazuh manager.
+The Wazuh Active Response capability allows scripted actions to be taken in
+response to specific criteria of Wazuh rules being matched.  By default, AR
+is enabled on all agents and all standard AR commands are defined in ossec.conf
+on the Wazuh manager, but no actual criteria for calling the AR commands is
+included.  No AR commands will actually be triggered until further configuration
+is performed on the Wazuh manager.
 
-For the purpose of automated blocking, here is probably the most popular command for Linux blocking (by iptables firewall)
-and Windows blocking (by null routing / blackholing), respectively:
+For the purpose of automated blocking, a very popular command for blocking in 
+Linux is using the iptables firewall, and in Windows the null routing / blackholing, respectively:
 
     .. code-block:: xml
 
@@ -99,12 +137,14 @@ and Windows blocking (by null routing / blackholing), respectively:
             <timeout_allowed>yes</timeout_allowed>
         </command>
 
-Each command has a descriptive <name> that is for referring to in <active-response> sections.  The actual
-script to be called is defined by <executable>.  The <expect> value specifies what log field (if any)
-must be present for the command to actually run (like srcip or username).  Lastly, if <timeout_allowed> is
-set to **yes**, then the command is considered stateful and can be reversed after an amount of time
-specified in a specific <active-response> section (see <timeout>).  For more details about configuring
-active response, see the Wazuh user manual.
+Each command has a descriptive ``<name>`` by which it will be referred to in the
+``<active-response>`` sections.  The actual script to be called is defined by
+``<executable>``.  The ``<expect>`` value specifies what log field (if any)
+will be passed along to the script (like srcip or username).  Lastly, if 
+``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
+and can be reversed after an amount of time specified in a specific ``<active-response>``
+section (see :ref:`timeout <reference_ossec_active_response>`).  For more details 
+about configuring active response, see the Wazuh user manual.
 
 
 **AR Scenario 1 - Make victim block attacker with iptables.**
