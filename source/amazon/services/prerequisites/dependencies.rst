@@ -9,12 +9,12 @@ Installing dependencies
   **The integration** with AWS S3 **can be configured in the Wazuh manager** (which also behaves as an agent) **or directly in a Wazuh agent**. This choice merely depends on how you decide to access your AWS infrastructure in your environment. 
 
 .. warning::
-  The Wazuh manager includes all dependencies installed, **this steps are only necessary** when configuring the integration **in a Wazuh agent**.
+  The Wazuh manager includes all dependencies installed, **these steps are only necessary** when configuring the integration **in a Wazuh agent**.
 
 Pip
 ---
 
-The required modules can be installed with Pip, the Python package manager. The majority of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
+The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
 
 a) For **CentOS/RHEL/Fedora** systems:
 

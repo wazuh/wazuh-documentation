@@ -12,19 +12,19 @@ Amazon configuration
 
 1. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
 
-    .. thumbnail:: ../../images/aws/aws-cloudtrail-1.png
+    .. thumbnail:: ../../../images/aws/aws-cloudtrail-1.png
       :align: center
       :width: 70%
 
 2. Create a new trail:
 
-    .. thumbnail:: ../../images/aws/aws-cloudtrail-2.png
+    .. thumbnail:: ../../../images/aws/aws-cloudtrail-2.png
       :align: center
       :width: 70%
 
 3. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (remember the name you provide here, you’ll need to reference it during plugin setup):
 
-    .. thumbnail:: ../../images/aws/aws-cloudtrail-3.png
+    .. thumbnail:: ../../../images/aws/aws-cloudtrail-3.png
       :align: center
       :width: 70%
 
@@ -55,7 +55,7 @@ Wazuh configuration
         </bucket>
       </wodle>
 
-    To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which value can be ``cloudtrail`` to monitor CloudTrail logs or ``custom`` to monitor any other type of logs, for example, Firehose ones.
+    To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which depends on the service which is monitored.
 
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
@@ -119,13 +119,13 @@ Run a new instance in EC2
 
 When an user runs a new instance in EC2, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in Kibana, it shows data such as instance type, the user who created it or creation date:
 
-.. thumbnail:: ../../images/aws/aws-ec2-1.png
+.. thumbnail:: ../../../images/aws/aws-ec2-1.png
   :align: center
   :width: 70%
 
 When an user tries to run an instance **without relevant permissions**, then the following alert will be shown in Kibana:
 
-.. thumbnail:: ../../images/aws/aws-ec2-2.png
+.. thumbnail:: ../../../images/aws/aws-ec2-2.png
   :align: center
   :width: 70%
 
@@ -134,13 +134,13 @@ Start instances in EC2
 
 When an instance in EC2 is started, the following alert will be shown on Kibana, it shows information such as the instance id and the user who started it:
 
-.. thumbnail:: ../../images/aws/aws-ec2-3.png
+.. thumbnail:: ../../../images/aws/aws-ec2-3.png
   :align: center
   :width: 70%
 
 If an user tries to start instances **without relevant permissions** the following alert will be shown on Kibana:
 
-.. thumbnail:: ../../images/aws/aws-ec2-4.png
+.. thumbnail:: ../../../images/aws/aws-ec2-4.png
   :align: center
   :width: 70%
 
@@ -149,13 +149,13 @@ Stop instances in EC2
 
 When an instance in EC2 is stopped, the following alert will be shown on Kibana:
 
-.. thumbnail:: ../../images/aws/aws-ec2-5.png
+.. thumbnail:: ../../../images/aws/aws-ec2-5.png
   :align: center
   :width: 70%
 
 If an user tries to stop instances **without relevant permissions**, the following alert will be show on Kibana:
 
-.. thumbnail:: ../../images/aws/aws-ec2-6.png
+.. thumbnail:: ../../../images/aws/aws-ec2-6.png
   :align: center
   :width: 70%
 
@@ -164,7 +164,7 @@ Create Security Groups in EC2
 
 When a new security group is created, the following alert is shown on Kibana. It shows information such as the user who created it and information about the security group:
 
-.. thumbnail:: ../../images/aws/aws-ec2-7.png
+.. thumbnail:: ../../../images/aws/aws-ec2-7.png
   :align: center
   :width: 70%
 
@@ -173,7 +173,7 @@ Allocate a new Elastic IP address
 
 If a new Elastic IP is allocated, the following alert will be shown on Kibana:
 
-.. thumbnail:: ../../images/aws/aws-ec2-8.png
+.. thumbnail:: ../../../images/aws/aws-ec2-8.png
   :align: center
   :width: 70%
 
@@ -182,7 +182,7 @@ Associate a new Elastic IP address
 
 If an Elastic IP address is associated, then rule ``80446`` will apply, generating the corresponding alert:
 
-.. thumbnail:: ../../images/aws/aws-ec2-9.png
+.. thumbnail:: ../../../images/aws/aws-ec2-9.png
   :align: center
   :width: 70%
 
@@ -198,7 +198,7 @@ Create user account
 
 When we create a new user account in IAM, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When an user account is created, the following alert will appear on Kibana. You can see the username of the created user and who created it:
 
-.. thumbnail:: ../../images/aws/aws-login-1.png
+.. thumbnail:: ../../../images/aws/aws-login-1.png
   :align: center
   :width: 70%
 
@@ -207,7 +207,7 @@ Create user account without permissions
 
 If an unauthorized user attempts to create new users, the following alert will be shown in kibana. It will show you which user has tried to create an user account and the username it tried to create:
 
-.. thumbnail:: ../../images/aws/aws-login-2.png
+.. thumbnail:: ../../../images/aws/aws-login-2.png
   :align: center
   :width: 70%
 
@@ -216,7 +216,7 @@ User login failed
 
 When an user tries to log in with an invalid password, the following alert will be shown in Kibana. There will be shown data such as the user who tried to login or the browser it was using:
 
-.. thumbnail:: ../../images/aws/aws-login-3.png
+.. thumbnail:: ../../../images/aws/aws-login-3.png
   :align: center
   :width: 70%
 
@@ -225,7 +225,7 @@ Possible break-in attempt
 
 When more than 4 authentication failures occur in a **360** second time window, Wazuh raises this alert:
 
-.. thumbnail:: ../../images/aws/aws-login-4.png
+.. thumbnail:: ../../../images/aws/aws-login-4.png
   :align: center
   :width: 70%
 
@@ -234,7 +234,7 @@ Login success
 
 After a successful login, the following event will be shown in Kibana. It shows the user who logged in, the browser it used and many other useful information:
 
-.. thumbnail:: ../../images/aws/aws-login-5.png
+.. thumbnail:: ../../../images/aws/aws-login-5.png
   :align: center
   :width: 70%
 
@@ -243,7 +243,7 @@ And here are the Kibana dashboards for IAM events:
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |
 +==========================================================+============================================================+
-| .. thumbnail:: ../../images/aws/aws-iam-pannels-1.png    | .. thumbnail:: ../../images/aws/aws-iam-pannels-2.png      |
+| .. thumbnail:: ../../../images/aws/aws-iam-pannels-1.png | .. thumbnail:: ../../../images/aws/aws-iam-pannels-2.png   |
 |    :align: center                                        |    :align: center                                          |
 |    :width: 70%                                           |    :width: 70%                                             |
 +----------------------------------------------------------+------------------------------------------------------------+
