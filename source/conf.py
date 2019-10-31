@@ -88,7 +88,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prefixed to all description
+# If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 
@@ -312,7 +312,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be an ISBN number
+# The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
