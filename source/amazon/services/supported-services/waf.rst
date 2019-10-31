@@ -106,8 +106,8 @@ Wazuh configuration
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="waf">
-          <name>wazuh-aws-wodle</name>
-          <path>waf</path>
+          <name>wazuh-aws-wodle</name>       <!-- PUT HERE THE S3 BUCKET CHOSEN IN STEP 7 -->
+          <path>waf</path>                   <!-- PUT HERE THE PREFIX CHOSEN IN STEP 7 -->
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
