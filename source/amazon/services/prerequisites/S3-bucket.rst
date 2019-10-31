@@ -2,8 +2,11 @@
 
 .. _s3_bucket:
 
-AWS S3 Bucket
-=============
+Configuring an S3 Bucket
+========================
+
+.. note::
+  All the supported services except ``Inspector`` need a bucket for working. It is not necessary to create a bucket for each service.
 
 Amazon Simple Storage Service (Amazon S3) is an object storage service that delivers industry-leading scalability, data availability, security, and performance.
 
@@ -13,19 +16,19 @@ In this section we will see how to create these data containers:
 
 1. Go to Services > Storage > S3:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-1.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-1.png
       :align: center
       :width: 70%
 
 2. Click on the *Create bucket*:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-2.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-2.png
       :align: center
       :width: 70%
 
 3. Create a new bucket, give it a name, then click on the *Create* button:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-3.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-3.png
       :align: center
       :width: 45%
 

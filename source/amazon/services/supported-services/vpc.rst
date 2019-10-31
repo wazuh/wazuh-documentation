@@ -10,23 +10,23 @@ Amazon VPC
 Amazon configuration
 --------------------
 
-1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>` 
+1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
 2. Go to Services > Compute > EC2:
 
-    .. thumbnail:: ../../images/aws/aws-create-vpc-1.png
+    .. thumbnail:: ../../../images/aws/aws-create-vpc-1.png
       :align: center
       :width: 70%
 
 3. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
 
-    .. thumbnail:: ../../images/aws/aws-create-vpc-2.png
+    .. thumbnail:: ../../../images/aws/aws-create-vpc-2.png
       :align: center
       :width: 70%
 
 4. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
 
-    .. thumbnail:: ../../images/aws/aws-create-vpc-3.png
+    .. thumbnail:: ../../../images/aws/aws-create-vpc-3.png
       :align: center
       :width: 70%
 
@@ -96,13 +96,13 @@ Create a VPC
 
 If a VPC is created, the following alert will be shown on Kibana:
 
-.. thumbnail:: ../../images/aws/aws-vpc-1.png
+.. thumbnail:: ../../../images/aws/aws-vpc-1.png
   :align: center
   :width: 70%
 
 If an user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
 
-.. thumbnail:: ../../images/aws/aws-vpc-2.png
+.. thumbnail:: ../../../images/aws/aws-vpc-2.png
   :align: center
   :width: 70%
 
@@ -111,13 +111,13 @@ Working with VPC Data
 
 A VPC alert contains data such as dest and source IP address, dst and source port and how many bytes were sent:
 
-.. thumbnail:: ../../images/aws/aws-vpc-3.png
+.. thumbnail:: ../../../images/aws/aws-vpc-3.png
   :align: center
   :width: 70%
 
 These alerts can be easily analyzed using visualizations like the following one:
 
-.. thumbnail:: ../../images/aws/vpc_flow_dataviz.png
+.. thumbnail:: ../../../images/aws/vpc_flow_dataviz.png
   :align: center
   :width: 70%
 

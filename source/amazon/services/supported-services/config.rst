@@ -27,25 +27,25 @@ Amazon configuration
 
 4. Go to Services > Management Tools > CloudWatch:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-12.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-12.png
       :align: center
       :width: 100%
 
 5. Select Rules on the left menu and click on the *Create* rule button:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-13.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-13.png
       :align: center
       :width: 100%
 
 6. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-14.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
       :align: center
       :width: 100%
 
 7. Give the rule some name and click on the *Create* rule button:
 
-    .. thumbnail:: ../../images/aws/aws-create-firehose-15.png
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-15.png
       :align: center
       :width: 100%
 
