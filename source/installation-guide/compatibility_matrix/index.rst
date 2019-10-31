@@ -72,7 +72,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+
 |   HP-UX 11.31                      |   ✓                     |
 +------------------------------------+-------------------------+
-|   Mac OS X                         |   ✓                     |
+|   Mac OS Sierra or newer *         |   ✓                     |
 +------------------------------------+-------------------------+
 |   OpenSUSE 42, 15, Tumbleweed      |   ✓                     |
 +------------------------------------+-------------------------+
@@ -91,7 +91,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 |   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
 
-
+\* With the release of macOS Catalina the packages are required to go through notarization, this process was not performed for packages older than 3.10.2. This means that versions older than 3.10.2 are not compatible with macOS Catalina.
 
 
 
