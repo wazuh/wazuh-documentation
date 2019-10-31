@@ -593,6 +593,9 @@ the same agent will be taken into account to increase the frequency counter for 
 | **Example of use** | <global_frequency /> |
 +--------------------+----------------------+
 
+.. warning::
+  Although the label contains the word `global`, this option works at manager level, not at cluster level.
+
 different_url
 ^^^^^^^^^^^^^
 
