@@ -140,7 +140,7 @@ Linux is using the iptables firewall, and in Windows the null routing / blackhol
 Each command has a descriptive ``<name>`` by which it will be referred to in the
 ``<active-response>`` sections.  The actual script to be called is defined by
 ``<executable>``.  The ``<expect>`` value specifies what log field (if any)
-will be passed along to the script (like srcip or username).  Lastly, if 
+will be passed along to the script (like **srcip** or **username**).  Lastly, if 
 ``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
 and can be reversed after an amount of time specified in a specific ``<active-response>``
 section (see :ref:`timeout <reference_ossec_active_response>`).  For more details 
@@ -150,13 +150,13 @@ about configuring active response, see the Wazuh user manual.
 **AR Scenario 1 - Make victim block attacker with iptables.**
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In ``/var/ossec/etc/ossec.conf`` on Wazuh manager, replace this:
+In the ``/var/ossec/etc/ossec.conf`` file on the Wazuh manager, replace this section:
 
     .. code-block:: xml
 
         <!--
         <active-response>
-        active-response options here
+              active-response options here
         </active-response>
         -->
 
@@ -168,7 +168,7 @@ with this:
             <disabled>no</disabled>
             <command>firewall-drop</command>
             <location>local</location>
-            <rules_id>30412</rules_id>
+            <rules_id>31166</rules_id>
             <timeout>300</timeout>
         </active-response>
 
@@ -186,15 +186,16 @@ and then restart Wazuh manager:
 
       # service wazuh-manager restart
 
-Run the same curl probe just like last time, remembering to substitute for ES_SERVER_EIP:
+Run the same curl probe just like last time, remembering that you may substitute 
+``localhost`` for an external address:
 
     .. code-block:: console
 
-        # curl --insecure https://ES_SERVER_EIP -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
+        # curl --insecure localhost -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
-You will receive several lines of html in reply.  Now repeat the same curl command.  This time the command seems to hang,
-because elastic-server has added linux-agent to its firewall's drop list.  Confirm this with an iptables
-command on elastic-server.
+You will receive several lines of html in reply.  Now repeat the same curl command.
+This time the command seems to hang, because the agent has added the attacking IP to 
+its firewall's drop list.  Confirm this with an iptables command on the attacked server:
 
     .. code-block:: console
 
