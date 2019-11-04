@@ -29,6 +29,7 @@ Options
 - `scan_on_start`_
 - `windows_registry`_
 - `registry_ignore`_
+- `allow_prefilter_cmd`_
 - `prefilter_cmd`_
 - `skip_nfs`_
 - `remove_old_diff`_
@@ -365,6 +366,28 @@ Attributes:
 |          | Allowed values   |  sregex                                                     |
 +----------+------------------+-------------------------------------------------------------+
 
+allow_prefilter_cmd
+^^^^^^^^^^^^^^^^^^^^
+
+Allows to activate _prefilter_cmd_ option.
+
++--------------------+--------------------------------+
+| **Default value**  | no                             |
++--------------------+--------------------------------+
+| **Allowed values** | yes, no                        |
++--------------------+--------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <allow_prefilter_cmd>yes</allow_prefilter_cmd>
+
+
+.. note::
+
+   This option only can be activate from agent side, in the ossec.conf.
+
 prefilter_cmd
 ^^^^^^^^^^^^^^
 
@@ -386,6 +409,7 @@ Example:
 .. note::
 
    This option may negatively impact performance as the configured command will be run for each file checked.
+   To use it need activate `allow_prefilter_cmd` in _ossec.conf_ before.
 
 skip_nfs
 ^^^^^^^^
