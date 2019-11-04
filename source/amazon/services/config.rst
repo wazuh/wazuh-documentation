@@ -10,7 +10,7 @@ AWS Config
 Amazon configuration
 --------------------
 
-1. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ , go to *Settings*.
+1. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ go to *Settings*.
 
 
 2. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
@@ -23,7 +23,11 @@ Amazon configuration
 
 3. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
-    Now, to configure the rules:
+    .. thumbnail:: ../../images/aws/aws-create-config-1.png
+      :align: center
+      :width: 100%
+
+    After these steps, it is necessary to configure the rules.
 
 4. Go to Services > Management Tools > CloudWatch:
 
