@@ -40,7 +40,7 @@ Options
 log_format
 ^^^^^^^^^^
 
-.. deprecated:: 3.10.0
+.. deprecated:: 3.12.0
 
 Specifies the log format between JSON output (.json) or plain text (.log). It also can be set to output both formats at the same time, when both are formats are entered, separated by a comma.
 
@@ -259,7 +259,9 @@ Options:
 
 .. note:: The `schedule` indicated must be a day divisor (except week days). This means that not every value is accepted. For example, a day can be divided into 30-minutes fractions but it cannot be divided into 7-hour fractions. This is done in order to rotate at fixed hours.
 
-.. warning:: The options `max_size` and `min_size` cannot be combined
+.. warning:: The minimum size that can be specified as `max_size` or `min_size` is `1 MB`.
+
+.. warning:: The options `max_size` and `min_size` cannot be combined.
 
 Default configuration
 ---------------------
