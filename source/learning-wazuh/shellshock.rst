@@ -191,11 +191,12 @@ Run the same curl probe just like last time, remembering that you may substitute
 
     .. code-block:: console
 
-        # curl --insecure localhost -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
+        # curl --insecure localhost -H "User-Agent: () { :; }; /bin/cat /etc/passwd" > /dev/null
 
-You will receive several lines of html in reply.  Now repeat the same curl command.
+The command will quickly download the webpage to ``/dev/null``.  Now repeat the same curl command.
 This time the command seems to hang, because the agent has added the attacking IP to 
-its firewall's drop list.  Confirm this with an iptables command on the attacked server:
+its firewall's drop list.  If you have used the agent's IP instead of localhost
+you may confirm this with an iptables command on the attacked server:
 
     .. code-block:: console
 
@@ -212,17 +213,22 @@ its firewall's drop list.  Confirm this with an iptables command on the attacked
         Chain OUTPUT (policy ACCEPT)
         target     prot opt source               destination
 
-Wait at least 5 minutes, and then on elastic-server, look at the content of its local AR log.  By now the stateful firewall-drop
-command will have timed out and been reversed.  This is why you will see an "add" and a "delete" record for this event 5 minutes apart.
+Wait at least 5 minutes, and then on the attacked server look at the content of
+its local AR log.  By now the stateful firewall-drop command will have timed out
+and been reversed.  This is why you will see an "add" and a "delete" record for 
+this event 5 minutes apart.
 
     .. code-block:: console
 
         # cat /var/ossec/logs/active-responses.log
 
-        Sat Feb  3 21:24:43 UTC 2018 /var/ossec/active-response/bin/firewall-drop.sh add - 54.157.87.167 1517693083.46213349 30412
-        Sat Feb  3 21:29:44 UTC 2018 /var/ossec/active-response/bin/firewall-drop.sh delete - 54.157.87.167 1517693083.46213349 30412
+        Mon Nov  4 19:28:08 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh add - 54.157.87.167 1572895688.94657 31166
+        Mon Nov  4 19:33:09 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh delete - 54.157.87.167 1572895688.94657 31166
 
-Observe that elastic-server is no longer blocking the offending linux-agent, with an iptables command on elastic-server:
+
+Observe that the attacked server is no longer blocking the offending IP by
+requesting the webpage with ``curl localhost``, or if you used the agent's
+IP by using an iptables command on the attacked server:
 
     .. code-block:: console
 
@@ -241,12 +247,14 @@ Observe that elastic-server is no longer blocking the offending linux-agent, wit
 **AR Scenario 2 - Make all Linux lab systems block attacker even if they were not the target of the attack.**
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In the newly-added <active-response> section in ossec.conf on wazuh-manager, change the <location> value from **local** to **all** so that
-all Linux Wazuh agents will block the attacker even when only one of them is targeted.
+In the newly-added ``<active-response>`` section in ``ossec.conf`` on wazuh-manager,
+change the ``<location>`` value from **local** to **all** so that all Linux Wazuh 
+agents will block the attacker even when only one of them is targeted.
 
 .. note::
-    The option **all** sends the active response to all agents. If we want it to also run in the manager,
-    we must duplicate the active-response block indicating **server** in the ``location`` field.
+    The option **all** sends the active response to all **agents**. If we want it 
+    to also run in the manager, we must duplicate the active-response block indicating 
+    **server** in the ``location`` field.
 
 .. code-block:: xml
 
@@ -254,7 +262,7 @@ all Linux Wazuh agents will block the attacker even when only one of them is tar
         <disabled>no</disabled>
         <command>firewall-drop</command>
         <location>all</location>
-        <rules_id>30412</rules_id>
+        <rules_id>31166</rules_id>
         <timeout>300</timeout>
     </active-response>
 
@@ -262,12 +270,12 @@ all Linux Wazuh agents will block the attacker even when only one of them is tar
         <disabled>no</disabled>
         <command>firewall-drop</command>
         <location>server</location>
-        <rules_id>30412</rules_id>
+        <rules_id>31166</rules_id>
         <timeout>300</timeout>
     </active-response>
 
-Run the same malicious curl probe from linux-agent as before, and then using the same iptables command as before, confirm
-on both elastic-server and wazuh-manager that both Linux systems are blocking the linux-agent attacker.
+Run the same malicious ``curl`` probe as before, and then confirm 
+that all Linux systems configured are blocking the attacker's IP.
 
 
 **AR Scenario 3 - Make windows-agent null route linux-agent when linux-agent probes elastic-server.**
