@@ -236,7 +236,11 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
     .. note::
       Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS comunication, how to change the default user and password and more.
 
-#. (Optional) Disable the Wazuh updates:
+.. note::
+    Now that the Wazuh API is installed. We strongly recommend to secure the Wazuh API: :ref:`securing_api`.
+
+Disable the Wazuh updates
+-------------------------
 
     We recommend that you disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
@@ -251,9 +255,6 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
 
       # echo "wazuh-manager hold" | sudo dpkg --set-selections
       # echo "wazuh-api hold" | sudo dpkg --set-selections
-
-.. note::
-    Now that the Wazuh API is installed. We strongly recommend to secure the Wazuh API: :ref:`securing_api`.
 
 .. _wazuh_server_packages_deb_filebeat:
 
