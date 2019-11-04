@@ -12,8 +12,8 @@ To install the Elastic Stack components on Debian 7 or higher versions, you have
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
-Preparation
------------
+Adding the Elastic Stack repository
+-----------------------------------
 
 1. Add the Elastic repository and its GPG key to all the hosts in which you want to install Filebeat, Elasticsearch and/or Kibana:
 
