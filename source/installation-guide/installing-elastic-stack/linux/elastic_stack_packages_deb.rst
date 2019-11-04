@@ -548,28 +548,28 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
 
-6. (Optional) Disable the Elasticsearch updates:
-
-  In the installation guide, we described how to install and configure Wazuh and also how to install and configure Filebeat for use with Wazuh. We have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
-
-    The current Wazuh Kibana plugin was tested in Kibana version 7.3.2. When Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system forcing the upgrade of Elasticsearch and Kibana. We must conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin when a new Elasticsearch version is released. Then we release a new version of the Wazuh Kibana plugin that is compatibile with the new Filebeat/Elasticsearch/Kibana version.
-    If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it's possible that the Wazuh Kibana plugin could becom incompatible.
-
-  In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
-
-  .. code-block:: console
-
-    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
-    # apt-get update
-
-  Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
-
-  .. code-block:: console
-
-    # echo "elasticsearch hold" | sudo dpkg --set-selections
-    # echo "kibana hold" | sudo dpkg --set-selections
-
 .. note:: The Kibana service listens on the default port 5601.
+
+Disabling repositories
+----------------------
+
+In the installation guide, we described how to install and configure Wazuh and also how to install and configure Elastic Stack for use with Wazuh. We have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
+
+The current Wazuh Kibana plugin was tested in Kibana version 7.3.2. When Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system forcing the upgrade of Elasticsearch and Kibana. We must conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin when a new Elasticsearch version is released. Then we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version. If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it's possible that the Wazuh Kibana plugin could become incompatible.
+
+In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
+
+.. code-block:: console
+
+  # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+  # apt-get update
+
+Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+.. code-block:: console
+
+  # echo "elasticsearch hold" | sudo dpkg --set-selections
+  # echo "kibana hold" | sudo dpkg --set-selections
 
 Next steps
 ----------
