@@ -525,7 +525,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.3.2.zip
 
-  .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` will acomplish this.
+  .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` will accomplish this.
 
   The Wazuh Kibana plugin must be configured to point to the master’s API.
 

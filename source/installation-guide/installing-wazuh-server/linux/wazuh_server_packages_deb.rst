@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh Manager on Debian
+.. meta:: :description: Learn how to install Wazuh manager on Debian
 
 .. _wazuh_server_packages_deb:
 
@@ -14,7 +14,7 @@ To install the Wazuh server components on Debian 7 or higher versions, you have 
 Adding the Wazuh repository
 ---------------------------
 
-The first step to set up Wazuh is to add the Wazuh repository to your server or servers in the event you want to configure a Wazuh cluster. Alternatively, if you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The first step to set up Wazuh is to add the Wazuh repository to your server or servers in the event you want to configure a Wazuh cluster. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 #. For this, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
@@ -176,7 +176,7 @@ Installing the Wazuh manager
 
           # service wazuh-manager restart
 
-    Finnally, you can check if the Wazuh cluster is working and connected with:
+    Finally, you can check if the Wazuh cluster is working and connected with:
 
       .. code-block:: console
 
@@ -234,7 +234,7 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
         # service wazuh-api status
 
 .. note::
-  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS comunication, how to change the default user and password and more.
+  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default user and password and more.
 
 .. _wazuh_server_packages_deb_filebeat:
 
@@ -322,7 +322,7 @@ To uninstall Filebeat:
 
       # apt-get remove filebeat
 
-The Filebeat complete file removal can be acomplished withg the following command:
+The Filebeat complete file removal can be accomplished with the following command:
 
     .. code-block:: console
 
