@@ -43,7 +43,7 @@ The first step to set up Wazuh is to add the Wazuh repository to your server or 
 
 Remember to repeat the *Adding the Wazuh repository* steps in every server where you want to install the Wazuh manager.
 
-Installing the Wazuh server
+Installing the Wazuh manager
 ----------------------------
 
 .. tabs::
