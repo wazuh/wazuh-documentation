@@ -16,7 +16,7 @@ Adding the Wazuh repository
 
 The first step to set up Wazuh is to add the Wazuh repository to your server or servers in the event you want to configure a Wazuh cluster. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
-#. For this, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
+#. For this, the ``curl``, ``apt-transport-https``, ``lsb-release`` and ``gnupg2`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
     .. code-block:: console
 

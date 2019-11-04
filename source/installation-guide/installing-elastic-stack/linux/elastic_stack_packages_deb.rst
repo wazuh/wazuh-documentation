@@ -15,15 +15,30 @@ To install the Elastic Stack components on Debian 7 or higher versions, you have
 Adding the Elastic Stack repository
 -----------------------------------
 
-1. Add the Elastic repository and its GPG key to all the hosts in which you want to install Filebeat, Elasticsearch and/or Kibana:
+#. For this, the ``curl`` and ``apt-transport-https`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # apt-get update
-    # apt-get install curl apt-transport-https
-    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-    # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
-    # apt-get update
+      # apt-get update
+      # apt-get install curl apt-transport-https
+
+#. Install the GPG key:
+
+    .. code-block:: console
+
+      # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+
+#. Add the repository:
+
+    .. code-block:: console
+
+      # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+
+#. Update the package information:
+
+    .. code-block:: console
+
+      # apt-get update
 
 Elasticsearch
 -------------
