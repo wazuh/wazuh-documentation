@@ -29,6 +29,8 @@ The next table contains the more relevant information about configuring each ser
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`GuardDuty <amazon_guardduty>`              | bucket                | guardduty      | <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>                                            |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
+| Amazon       | :ref:`WAF <amazon_waf>`                          | bucket                | waf            | <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>                                            |
++--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Inspector <amazon_inspector>`              | service               | inspector      |                                                                                             |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Cisco        | :ref:`Umbrella <cisco_umbrella>`                 | bucket                | cisco_umbrella | <bucket_name>/<prefix>/<year>-<month>-<day>                                                 |
@@ -45,5 +47,6 @@ The next table contains the more relevant information about configuring each ser
     macie
     trusted-advisor
     guardduty
+    waf
     inspector
     cisco-umbrella
