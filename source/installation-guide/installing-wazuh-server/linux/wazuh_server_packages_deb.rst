@@ -14,7 +14,7 @@ To install the Wazuh server components on Debian 7 or higher versions, you have 
 Adding the Wazuh repository
 ---------------------------
 
-The first step to set up Wazuh is to add the Wazuh repository to your server or servers in the event you want to configure a Wazuh cluster. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The first step to set up Wazuh is to add the Wazuh repository to your server or servers in the event you want to configure a Wazuh cluster. Alternatively, if you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 #. For this, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
