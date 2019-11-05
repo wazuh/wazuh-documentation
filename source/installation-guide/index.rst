@@ -12,16 +12,16 @@ Installation guide
 
 This document will guide you through the Wazuh installation process. You also have the following resources available, in case you have questions or need assistance:
 
-- `Mailing list <wazuh+subscribe@googlegroups.com>`_: In `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can share your questions and thoughts with our users community.
-- `GitHub repositories <https://github.com/wazuh>`_: Here you can submit issues and contribute to the project development. We happily review and accept pull requests.
-- `Slack channel <https://wazuh.com/community/join-us-on-slack>`_: Join users community channel to chat with our team members and other users.
+- `Mailing list <wazuh+subscribe@googlegroups.com>`_: in `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can share your questions and thoughts with our users community.
+- `GitHub repositories <https://github.com/wazuh>`_: here you can submit issues and contribute to the project development. We happily review and accept pull requests.
+- `Slack channel <https://wazuh.com/community/join-us-on-slack>`_: join users community channel to chat with our team members and other users.
 
 In addition, we also provide `professional support, training and consulting services <https://wazuh.com/professional-services/>`_.
 
 Basic concepts
 --------------
 
-- **Wazuh agent**: runs on the monitored endpoint. Collects log data and security events. It also performs inventory and hardening scans, detects malware and system anomalies, and executes active responses. 
+- **Wazuh agent**: runs on the monitored endpoint. Collects log data and security events. It also performs inventory and hardening scans, detects malware and system anomalies, and executes active responses.
 
 + **Wazuh server**: collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat.
 
