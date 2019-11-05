@@ -371,7 +371,7 @@ allow_prefilter_cmd
 
 .. versionadded:: 3.11.0
 
-Allows to activate _prefilter_cmd_ option.
+Allows to activate the ``prefilter_cmd`` option.
 
 +--------------------+--------------------------------+
 | **Default value**  | no                             |
@@ -388,7 +388,7 @@ Example:
 
 .. note::
 
-   This option only can be activate from agent side, in the ossec.conf.
+   This option only can be activate from the agent side, in its own ``ossec.conf``.
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
@@ -411,7 +411,10 @@ Example:
 .. note::
 
    This option may negatively impact performance as the configured command will be run for each file checked.
-   To use it need activate `allow_prefilter_cmd` in _ossec.conf_ before.
+
+.. note::
+
+   It is needed to enable the ``allow_prefilter_cmd`` option before use it.
 
 skip_nfs
 ^^^^^^^^
