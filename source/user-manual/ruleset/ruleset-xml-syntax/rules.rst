@@ -813,6 +813,7 @@ Declares the actual status of a rule.
 
 mitre
 ^^^^^
+.. versionadded:: 3.12.0
 
 Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
 
