@@ -369,6 +369,8 @@ Attributes:
 allow_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^
 
+.. versionadded:: 3.11.0
+
 Allows to activate _prefilter_cmd_ option.
 
 +--------------------+--------------------------------+
