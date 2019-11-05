@@ -29,7 +29,7 @@ Options
 - `scan_on_start`_
 - `windows_registry`_
 - `registry_ignore`_
-- `allow_prefilter_cmd`_
+- `allow_remote_prefilter_cmd`_
 - `prefilter_cmd`_
 - `skip_nfs`_
 - `remove_old_diff`_
@@ -366,12 +366,12 @@ Attributes:
 |          | Allowed values   |  sregex                                                     |
 +----------+------------------+-------------------------------------------------------------+
 
-allow_prefilter_cmd
-^^^^^^^^^^^^^^^^^^^^
+allow_remote_prefilter_cmd
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.11.0
 
-Allows to activate the ``prefilter_cmd`` option.
+Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
 
 +--------------------+--------------------------------+
 | **Default value**  | no                             |
@@ -383,7 +383,7 @@ Example:
 
 .. code-block:: xml
 
-  <allow_prefilter_cmd>yes</allow_prefilter_cmd>
+  <allow_remote_prefilter_cmd>yes</allow_remote_prefilter_cmd>
 
 
 .. note::
@@ -414,7 +414,7 @@ Example:
 
 .. note::
 
-   It is needed to enable the ``allow_prefilter_cmd`` option before use it.
+   This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
 
 skip_nfs
 ^^^^^^^^
