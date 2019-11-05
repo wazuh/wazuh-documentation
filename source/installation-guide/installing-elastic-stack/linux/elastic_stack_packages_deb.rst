@@ -78,7 +78,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     3. Configure Elastic Stack to use encrypted connections:
 
-      3.1. Certificates creation. We need to create all certificates separated by component. After you’ve created them, you will have to distribute each certificate to the host on which the corresponding component is installed. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
+      3.1. We need to create all certificates separated by component. After you’ve created them, you will have to distribute each certificate to the host on which the corresponding component is installed. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
 
         .. code-block:: yaml
 
@@ -93,7 +93,11 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
             ip:
               - "10.0.0.4"
 
-        Replace the ``10.0.0.x`` IPs with your hosts' IPs. You can change the names and remove or add instances depending on your needs. In the following steps, we will create a file that contains a folder named after the instance defined here. This folder will contain the certificate and the key necessary to communicate with the Elasticsearch node using SSL.
+        Replace the ``10.0.0.x`` IPs with your hosts' IPs. You can change the names and remove or add instances depending on your needs.
+
+        *Example:* if you have installed the Wazuh server, Elasticsearch and Kibana in the same host, the IPs values must be the same. In case of one Wazuh server host and one Elastic Stack host, the Elasticserch IP and Kibana IP must be the same and the Wazuh manager must to be different.
+
+        In the following steps, we will create a file that contains a folder named after the instance defined here. This folder will contain the certificate and the key necessary to communicate with the Elasticsearch node using SSL.
 
       3.2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. The ``--keep-ca-key`` modifier may be used to keep the CA's certificate and key files. If there are future expansions, these files may be used to sign certificates for new servers. If this modifier is not used, these files will be deleted and any future certificates will require a new CA. As a result, the previous certificates will no longer be valid and will need to be redistributed. It is important to ensure that the ``ca.key`` file is properly secured.
 
