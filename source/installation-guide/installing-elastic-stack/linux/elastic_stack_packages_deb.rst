@@ -40,8 +40,8 @@ Adding the Elastic Stack repository
 
       # apt-get update
 
-Elasticsearch
--------------
+Installing Elasticsearch
+------------------------
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. Below, you can follow the type of installation with regard to the desired architecture and whether you want to configure only one Elasticsearch node or if you want to configure an Elasticsearch cluster.
 
@@ -474,8 +474,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 .. _install_kibana_app_deb:
 
-Kibana
-------
+Installing Kibana
+-----------------
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
 
