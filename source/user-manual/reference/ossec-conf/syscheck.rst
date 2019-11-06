@@ -31,10 +31,16 @@ Options
 - `registry_ignore`_
 - `prefilter_cmd`_
 - `skip_nfs`_
+- `skip_dev`_
+- `skip_sys`_
+- `skip_proc`_
 - `remove_old_diff`_
 - `restart_audit`_
 - `windows_audit_interval`_
 - `whodata`_
+- `process_priority`_
+- `inventory`_
+- `max_eps`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -398,6 +404,45 @@ Specifies if syscheck should scan network mounted filesystems (Works on Linux an
 | **Allowed values** | yes, no  |
 +--------------------+----------+
 
+skip_dev
+^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Specifies if syscheck should scan the `/dev` directory. (Works on Linux and FreeBSD).
+
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+skip_sys
+^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Specifies if syscheck should scan the `/sys` directory. (Works on Linux).
+
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+skip_proc
+^^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Specifies if syscheck should scan the `/proc` directory. (Works on Linux and FreeBSD).
+
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
 remove_old_diff
 ^^^^^^^^^^^^^^^
 
@@ -505,6 +550,107 @@ This option allows to disable the Audit health check during the Whodata engine s
 .. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
 
+process_priority
+^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Set the nice value for Syscheck process.
+
++--------------------+------------------------------------+
+| **Default value**  | 10                                 |
++--------------------+------------------------------------+
+| **Allowed values** | Integer number between -20 and 19. |
++--------------------+------------------------------------+
+
+The "niceness" scale in Linux goes from -20 to 19, whereas -20 is the highest priority and 19 the lowest priority.
+
+For Windows the scale is translated as described in the following table:
+
++------------+------------------------------+
+| -20 to -10 | THREAD_PRIORITY_HIGHEST      |
++------------+------------------------------+
+| -9 to -5   | THREAD_PRIORITY_ABOVE_NORMAL |
++------------+------------------------------+
+| -4 to 0    | THREAD_PRIORITY_NORMAL       |
++------------+------------------------------+
+| 1 to 5     | THREAD_PRIORITY_BELOW_NORMAL |
++------------+------------------------------+
+| 6 to 10    | THREAD_PRIORITY_LOWEST       |
++------------+------------------------------+
+| 11 to 19   | THREAD_PRIORITY_IDLE         |
++------------+------------------------------+
+
+
+max_eps
+^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Set the maximum output throughput.
+
++--------------------+---------------------------------------+
+| **Default value**  | 200                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | Integer number between 1 and 1000000. |
++--------------------+---------------------------------------+
+
+
+inventory
+^^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+The database synchronization settings will be configured inside this tag.
+
+.. code-block:: xml
+
+    <!-- Database synchronization settings -->
+    <inventory>
+      <sync_interval>5m</sync_interval>
+      <response_timeout>30</response_timeout>
+      <sync_queue_size>16384</sync_queue_size>
+    </inventory>
+
+
+**sync_interval**
+
+.. versionadded:: 3.12.0
+
+Specifies the number of seconds between every inventory synchronization.
+
++--------------------+---------------------------------------+
+| **Default value**  | 300                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0.|
++--------------------+---------------------------------------+
+
+**response_timeout**
+
+.. versionadded:: 3.12.0
+
+Specifies the time elapsed in seconds since the agent sends the message to the manager and recives the response.
+If the response is not received in this interval, the synchronization is restarted from the beginning.
+
++--------------------+---------------------------------------+
+| **Default value**  | 30                                    |
++--------------------+---------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0.|
++--------------------+---------------------------------------+
+
+**sync_queue_size**
+
+.. versionadded:: 3.12.0
+
+Specifies the queue size of the manager synchronization responses.
+
++--------------------+---------------------------------------+
+| **Default value**  | 16384                                 |
++--------------------+---------------------------------------+
+| **Allowed values** | Integer number between 2 and 1000000. |
++--------------------+---------------------------------------+
+
+
 Default Unix configuration
 --------------------------
 
@@ -526,8 +672,8 @@ Default Unix configuration
     <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
 
     <!-- Directories to check  (perform all possible verifications) -->
-    <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
-    <directories check_all="yes">/bin,/sbin,/boot</directories>
+    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/bin,/sbin,/boot</directories>
 
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
@@ -542,8 +688,6 @@ Default Unix configuration
     <ignore>/etc/cups/certs</ignore>
     <ignore>/etc/dumpdates</ignore>
     <ignore>/etc/svc/volatile</ignore>
-    <ignore>/sys/kernel/security</ignore>
-    <ignore>/sys/kernel/debug</ignore>
 
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
@@ -552,4 +696,20 @@ Default Unix configuration
     <nodiff>/etc/ssl/private.key</nodiff>
 
     <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
+
+    <!-- Nice value for Syscheck process -->
+    <process_priority>10</process_priority>
+
+    <!-- Maximum output throughput -->
+    <max_eps>200</max_eps>
+
+    <!-- Database synchronization settings -->
+    <inventory>
+      <sync_interval>5m</sync_interval>
+      <response_timeout>30</response_timeout>
+      <sync_queue_size>16384</sync_queue_size>
+    </inventory>
   </syscheck>
