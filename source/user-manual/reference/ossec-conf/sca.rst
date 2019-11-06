@@ -47,6 +47,8 @@ Scheduling options
 +----------------------+-----------------------------+
 | `time`_              | A time of the day *[hh:mm]* |
 +----------------------+-----------------------------+
+| `integrity_interval`_| A positive number + suffix  |
++----------------------+-----------------------------+
 
 +-------------------+------------+
 | Interval suffixes | Time scale |
@@ -199,6 +201,17 @@ Time of the day to run the scan. It has to be represented in the format *hh:mm*.
 .. note::
 
 	When only the ``time`` option is set, the interval value must be a multiple of days. By default, the interval is set to a day.
+
+integrity_interval
+^^^^^^^^^^^^^^^^^^
+Interval between integrity checks.
+
++--------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 5m                                                                                                                            |
++--------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours) |
++--------------------+-------------------------------------------------------------------------------------------------------------------------------+
+
 
 
 Configuration example
