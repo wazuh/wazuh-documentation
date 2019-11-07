@@ -160,7 +160,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         # update-rc.d elasticsearch defaults 95 10
         # service elasticsearch start
 
-    5. Generate credentials for all the Elastic Stack pre-built roles and users.
+    5. Generate credentials for all the Elastic Stack pre-built roles and users:
 
       .. code-block:: console
 
@@ -168,9 +168,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
       Make a note of, at the very least, the password for the ``elastic`` user.
 
-    6. Once Elasticsearch is up and running, we need to place the corresponding Filebeat CA, certificate and key in the **in the Wazuh server host**, so the following steps must be performed in the Wazuh server:
+    6. Once Elasticsearch is up and running, we need to place the corresponding Filebeat CA, certificate and key **in the Wazuh server host**, so the following steps must be performed in the Wazuh server:
 
-      6.1. Copy the file `/usr/share/elasticsearch/certs.zip` from the Elasticsearch node into the Wazuh server. You can use `scp` or others. Now, let's suppose that the file was copied into ``/usr/share/filebeat/``
+      6.1. Copy the file `/usr/share/elasticsearch/certs.zip` from the Elasticsearch node into the Wazuh server. You can use `scp` or others. Now, let's suppose that the file was copied into ``/usr/share/filebeat/``.
 
       6.2. Extract the certificates file:
 
@@ -200,6 +200,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       .. code-block:: yaml
 
         output.elasticsearch.hosts: ['YOUR_ELASTIC_SERVER_IP:9200']
+
+      Review the settings ``output.elasticsearch.ssl.certificate``, ``output.elasticsearch.ssl.key`` and ``output.elasticsearch.ssl.certificate_authorities``. They should have the correct paths to the certificates deployed in step 6.3.
 
       6.5. Enable and start the Filebeat service:
 
@@ -363,6 +365,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch-node1.key
           xpack.security.http.ssl.certificate: /etc/elasticsearch/certs/elasticsearch-node1.crt
           xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
+
+      Review the settings ``xpack.security.transport.ssl.key``, ``xpack.security.transport.ssl.certificate``, ``xpack.security.transport.ssl.certificate_authorities``, ``xpack.security.http.ssl.key``, ``xpack.security.http.ssl.certificate`` and ``xpack.security.http.ssl.certificate_authorities``. They should have the correct paths to the certificates deployed in step 4.4.
+
 
     5. Enable and start the Elasticsearch service:
 
@@ -529,6 +534,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       - ``<elasticsearch_ip>``: the host IP. i.e: ``10.0.0.2``. If you have more than one Elasticsearch node, you can separate the nodes with commas.
       - ``<kibana_ip>``: Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by replacing ``<kibana_ip>`` with the Kibana host IP. I.e: ``10.0.0.2``.
       - ``<password_generated_for_elastic>``: The password generated in step 5. I.e: ``IJB8YtGoTgrpaPdGZbSO``.
+
+    Review the settings ``elasticsearch.ssl.certificateAuthorities``, ``elasticsearch.ssl.certificate``, ``elasticsearch.ssl.key``, ``server.ssl.enabled``, ``server.ssl.certificate`` and ``server.ssl.key``. They should have the correct paths to the certificates deployed in step 2.2 of Installing Kibana.
 
 4. Install the Wazuh Kibana plugin:
 
