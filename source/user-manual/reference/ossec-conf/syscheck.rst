@@ -629,8 +629,9 @@ Specifies the number of seconds between every inventory synchronization.
 
 .. versionadded:: 3.12.0
 
-Specifies the time elapsed in seconds since the agent sends the message to the manager and recives the response.
-If the response is not received in this interval, the synchronization is restarted from the beginning.
+Specifies the time elapsed in seconds since the agent sends the message to the manager and receives the response.
+If the response is not received in this interval, the message is marked as unanswered (timed-out) and the agent
+may start a new synchronization session at the defined interval.
 
 +--------------------+---------------------------------------+
 | **Default value**  | 30                                    |
