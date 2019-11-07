@@ -183,7 +183,7 @@ $(function() {
     heightNavbar();
   });
 
-  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'mousewheel';
+  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'wheel';
 
   if (document.getElementById('navbar-globaltoc').addEventListener) {
     document.getElementById('navbar-globaltoc').addEventListener(mousewheelevt, function(e) {
@@ -203,7 +203,7 @@ $(function() {
     }, {passive: false} );
   }
 
-  $('#navbar-globaltoc').on('mousewheel', function(e) {
+  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
     eventScroll = 'mousewheel';
     if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
       scrollDirection = 'up';
@@ -217,7 +217,7 @@ $(function() {
       e.returnValue = false;
       return false;
     }
-  });
+  }); */
 
   $('#navbar-globaltoc').keydown(function(e) {
     eventScroll = 'keys';
@@ -558,40 +558,74 @@ $(function() {
 
   /* Search results --------------------------------------------------------------------------------------------------*/
 
-  if ( $('#search-results').length > 0 ) {
-    const ulSearch = $('ul.search');
+  const searchResults = $('#search-results');
+
+  if ( searchResults.length > 0 ) {
     let lastResult = null;
-    let splitURL;
+    let splitURL = null;
+    const configAdd = {childList: true};
+    const configAtt = {attributes: true, attributeOldValue: true};
+    let observerResults = null;
+    let observerResultList = null;
+    let observerResultText = null;
 
     /* Detects every result that is added to the list */
-    ulSearch.on('DOMSubtreeModified', function() {
-      lastResult = $('ul.search li:last-child');
-      splitURL = lastResult.children('a').prop('href').split('/');
-
-      /* Checks the URL to mark the results found in excludedSearchFolders */
-      $.each(excludedSearchFolders, function(index, value) {
-        if ( $.inArray(value, splitURL) !== -1 ) {
-          lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
-          lastResult.addClass('hidden-result'); /* Hides the excluded result */
-          return false; /* breaks the $.each loop */
+    const addedResult = function(mutationsList, observer) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          lastResult = $('ul.search li:last-child');
+          splitURL = lastResult.children('a').prop('href').split('/');
+          /* Checks the URL to mark the results found in excludedSearchFolders */
+          $.each(excludedSearchFolders, function(index, value) {
+            if ( $.inArray(value, splitURL) !== -1 ) {
+              lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
+              lastResult.addClass('hidden-result'); /* Hides the excluded result */
+              return false; /* breaks the $.each loop */
+            }
+          });
         }
-      });
-    });
+      }
+    };
+
+    /* Checking that the list of search results exists */
+    const existsResultList = function(mutationsList, observer) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList' && $(mutation.addedNodes[0]).hasClass('search') ) {
+          const ulSearch = $('ul.search');
+
+          observerResults.disconnect();
+
+          observerResultList = new MutationObserver(addedResult);
+          observerResultList.observe(ulSearch[0], configAdd);
+          observerResultText = new MutationObserver(changeResultText);
+          observerResultText.observe($('#search-results > p')[0], configAtt);
+        }
+      }
+    };
 
     /* Replaces the result message */
-    $('#search-results > p:first').one('DOMSubtreeModified', function() {
-      const totalResults = $('ul.search li').length;
-      const excludedResults = $('ul.search li.excluded-search-result').length;
-      let resultText = '';
-      if ( totalResults > 0 ) {
-        if ( excludedResults > 0 ) {
-          resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
-        } else {
-          resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+    const changeResultText = function(mutationsList, observer) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes') {
+          observerResultText.disconnect();
+          const totalResults = $('ul.search li').length;
+          const excludedResults = $('ul.search li.excluded-search-result').length;
+          let resultText = '';
+          if ( totalResults > 0 ) {
+            if ( excludedResults > 0 ) {
+              resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+            } else {
+              resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+            }
+            $('#search-results > p:first').html(resultText);
+          }
         }
-        $(this).html(resultText);
       }
-    });
+    };
+
+    observerResults = new MutationObserver(existsResultList);
+    observerResults.observe(searchResults[0], configAdd);
+
 
     /* Click that allows showing excluded results */
     $(document).delegate('#search-results #toggle-results.include', 'click', function() {
