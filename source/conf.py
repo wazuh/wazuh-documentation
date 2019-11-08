@@ -30,7 +30,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.10'
+version = '3.11'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -44,7 +44,6 @@ release = version
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
 ]
@@ -312,7 +311,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be a ISBN number
+# The unique identifier of the text. This can be an ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -336,7 +335,7 @@ images_config = {
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+# intersphinx_mapping = {'https://docs.python.org/': None}
 
 # -- Options for todo extension ----------------------------------------------
 
