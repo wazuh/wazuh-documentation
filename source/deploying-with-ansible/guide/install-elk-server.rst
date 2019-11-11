@@ -13,24 +13,27 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 
 .. note::
 
-	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is Ubuntu 17 and we need to indicate the path of the Python interpreter.
+  Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is Ubuntu 17 and we need to indicate the path of the Python interpreter.
 
+  192.168.0.180 ansible_ssh_user=centos
 
-	192.168.0.180 ansible_ssh_user=centos
+  192.168.0.108 ansible_ssh_user=elk      ansible_python_interpreter=/usr/bin/python3
 
-	192.168.0.108 ansible_ssh_user=elk      ansible_python_interpreter=/usr/bin/python3
+  .. code-block:: console
 
-	.. code-block:: console
+    ansible@ansible:/etc/ansible/wazuh-ansible$ ansible all -m ping
 
-		ansible@ansible:/etc/ansible/wazuh-ansible$ ansible all -m ping
-		192.168.0.108 | SUCCESS => {
-		    "changed": false,
-		    "ping": "pong"
-		}
-		192.168.0.180 | SUCCESS => {
-		    "changed": false,
-		    "ping": "pong"
-		}
+  .. code-block:: console
+    :class: output
+
+    192.168.0.108 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+    }
+    192.168.0.180 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+    }
 
 
 1 - Access to wazuh-ansible
@@ -41,64 +44,76 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
-	CHANGELOG.md  playbooks  README.md  roles  VERSION
+
+.. code-block:: console
+  :class: output
+
+  CHANGELOG.md  playbooks  README.md  roles  VERSION
 
 We can see the roles we have.
 
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
-	roles
-	├── ansible-galaxy
-	│   └── meta
-	├── elastic-stack
-	│   ├── ansible-elasticsearch
-	│   │   ├── defaults
-	│   │   ├── handlers
-	│   │   ├── meta
-	│   │   ├── tasks
-	│   │   └── templates
-	│   └── ansible-kibana
-	│       ├── defaults
-	│       ├── handlers
-	│       ├── meta
-	│       ├── tasks
-	│       └── templates
-	└── wazuh
-	    ├── ansible-filebeat
-	    │   ├── defaults
-	    │   ├── handlers
-	    │   ├── meta
-	    │   ├── tasks
-	    │   ├── templates
-	    │   └── tests
-	    ├── ansible-wazuh-agent
-	    │   ├── defaults
-	    │   ├── handlers
-	    │   ├── meta
-	    │   ├── tasks
-	    │   ├── templates
-	    │   └── vars
-	    └── ansible-wazuh-manager
-	        ├── defaults
-	        ├── handlers
-	        ├── meta
-	        ├── tasks
-	        ├── templates
-	        └── vars
+
+.. code-block:: console
+  :class: output
+
+  roles
+  ├── ansible-galaxy
+  │   └── meta
+  ├── elastic-stack
+  │   ├── ansible-elasticsearch
+  │   │   ├── defaults
+  │   │   ├── handlers
+  │   │   ├── meta
+  │   │   ├── tasks
+  │   │   └── templates
+  │   └── ansible-kibana
+  │       ├── defaults
+  │       ├── handlers
+  │       ├── meta
+  │       ├── tasks
+  │       └── templates
+  └── wazuh
+      ├── ansible-filebeat
+      │   ├── defaults
+      │   ├── handlers
+      │   ├── meta
+      │   ├── tasks
+      │   ├── templates
+      │   └── tests
+      ├── ansible-wazuh-agent
+      │   ├── defaults
+      │   ├── handlers
+      │   ├── meta
+      │   ├── tasks
+      │   ├── templates
+      │   └── vars
+      └── ansible-wazuh-manager
+          ├── defaults
+          ├── handlers
+          ├── meta
+          ├── tasks
+          ├── templates
+          └── vars
 
 And we can see the preconfigured playbooks we have.
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
-	playbooks/
-	├── wazuh-agent.yml
-	├── wazuh-elastic_stack-distributed.yml
-	├── wazuh-elastic_stack-single.yml
-	├── wazuh-elastic.yml
-	├── wazuh-kibana.yml
-	└── wazuh-manager.yml
+  ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
+
+.. code-block:: console
+  :class: output
+
+  playbooks/
+  ├── wazuh-agent.yml
+  ├── wazuh-elastic_stack-distributed.yml
+  ├── wazuh-elastic_stack-single.yml
+  ├── wazuh-elastic.yml
+  ├── wazuh-kibana.yml
+  └── wazuh-manager.yml
 
 Using **Elasticsearch** and **Kibana** roles we will install and configure the Elastic Stack server components, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
@@ -143,11 +158,15 @@ We could configure these three files and execute them, but we are going to creat
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$ cat wazuh-elk.yml
-	- hosts: 192.168.0.108
-	  roles:
-	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
-	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
+  ansible@ansible:/etc/ansible/wazuh-ansible$ cat wazuh-elk.yml
+
+.. code-block:: console
+  :class: output
+
+  - hosts: 192.168.0.108
+    roles:
+      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
+      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
 As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry.
 
@@ -175,47 +194,48 @@ We will obtain a final result similar to the one shown in the following code blo
 
 
 .. code-block:: console
+  :class: output
 
-	TASK [ansible-role-kibana : Make sure Elasticsearch is running before proceeding.] ************************************************************************
-	ok: [192.168.0.108]
+  TASK [ansible-role-kibana : Make sure Elasticsearch is running before proceeding.] ************************************************************************
+  ok: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Reload systemd] ***************************************************************************************************************
-	ok: [192.168.0.108]
+  TASK [ansible-role-kibana : Reload systemd] ***************************************************************************************************************
+  ok: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Kibana configuration] *********************************************************************************************************
-	changed: [192.168.0.108]
+  TASK [ansible-role-kibana : Kibana configuration] *********************************************************************************************************
+  changed: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Checking Wazuh-APP version] ***************************************************************************************************
-	ok: [192.168.0.108]
+  TASK [ansible-role-kibana : Checking Wazuh-APP version] ***************************************************************************************************
+  ok: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Removing old Wazuh-APP] *******************************************************************************************************
-	skipping: [192.168.0.108]
+  TASK [ansible-role-kibana : Removing old Wazuh-APP] *******************************************************************************************************
+  skipping: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Removing bundles] *************************************************************************************************************
-	skipping: [192.168.0.108]
+  TASK [ansible-role-kibana : Removing bundles] *************************************************************************************************************
+  skipping: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Install Wazuh-APP (can take a while)] *****************************************************************************************
-	changed: [192.168.0.108]
+  TASK [ansible-role-kibana : Install Wazuh-APP (can take a while)] *****************************************************************************************
+  changed: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Ensure Kibana started and enabled] ********************************************************************************************
-	changed: [192.168.0.108]
+  TASK [ansible-role-kibana : Ensure Kibana started and enabled] ********************************************************************************************
+  changed: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Remove Elasticsearch repository (and clean up left-over metadata)] ************************************************************
-	skipping: [192.168.0.108]
+  TASK [ansible-role-kibana : Remove Elasticsearch repository (and clean up left-over metadata)] ************************************************************
+  skipping: [192.168.0.108]
 
-	TASK [ansible-role-kibana : Debian/Ubuntu | Removing Elasticsearch repository] ****************************************************************************
-	ok: [192.168.0.108]
+  TASK [ansible-role-kibana : Debian/Ubuntu | Removing Elasticsearch repository] ****************************************************************************
+  ok: [192.168.0.108]
 
-	RUNNING HANDLER [ansible-role-elasticsearch : restart elasticsearch] **************************************************************************************
-	changed: [192.168.0.108]
+  RUNNING HANDLER [ansible-role-elasticsearch : restart elasticsearch] **************************************************************************************
+  changed: [192.168.0.108]
 
-	RUNNING HANDLER [ansible-role-kibana : restart kibana] ****************************************************************************************************
-	changed: [192.168.0.108]
+  RUNNING HANDLER [ansible-role-kibana : restart kibana] ****************************************************************************************************
+  changed: [192.168.0.108]
 
-	PLAY RECAP ************************************************************************************************************************************************
-	192.168.0.108              : ok=43   changed=23   unreachable=0    failed=0
+  PLAY RECAP ************************************************************************************************************************************************
+  192.168.0.108              : ok=43   changed=23   unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
+  ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
 We can check the status of our new services in our Elastic Stack server.
@@ -225,20 +245,28 @@ We can check the status of our new services in our Elastic Stack server.
 .. code-block:: console
 
 	root@elk:/home/elk# systemctl status elasticsearch.service
-	● elasticsearch.service - Elasticsearch
-	   Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
-	  Drop-In: /etc/systemd/system/elasticsearch.service.d
-	           └─elasticsearch.conf
-	   Active: active (running) since Thu 2018-09-13 16:51:59 CEST; 5min ago
+
+.. code-block:: console
+  :class: output
+
+  ● elasticsearch.service - Elasticsearch
+     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/elasticsearch.service.d
+             └─elasticsearch.conf
+     Active: active (running) since Thu 2018-09-13 16:51:59 CEST; 5min ago
 
 - Kibana
 
 .. code-block:: console
 
 	root@elk:/home/elk# systemctl status kibana.service
-	● kibana.service - Kibana
-	   Loaded: loaded (/etc/systemd/system/kibana.service; enabled; vendor preset: enabled)
-	   Active: active (running) since Thu 2018-09-13 16:53:32 CEST; 4min 58s ago
+
+.. code-block:: console
+  :class: output
+
+  ● kibana.service - Kibana
+     Loaded: loaded (/etc/systemd/system/kibana.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2018-09-13 16:53:32 CEST; 4min 58s ago
 
 Once the Wazuh API is registered we can access it through our Kibana portal.
 

@@ -46,6 +46,7 @@ You can setup a SSH key-pairing to provide a silent auth mechanism, first create
 To improve security on this setup, please ensure you provide a password for this key.
 
 .. code-block:: bash
+  :class: output
 
   Enter passphrase (empty for no passphrase): ************
   Enter same passphrase again: ************
@@ -72,6 +73,9 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
   $ cat /etc/ansible/hosts
 
+.. code-block:: bash
+  :class: output
+
   hosts1.example.net
   hosts2.example.net
 
@@ -80,6 +84,9 @@ Also, you can group hosts. This could be useful to execute tasks and roles to se
 .. code-block:: bash
 
   $ cat /etc/ansible/hosts
+
+.. code-block:: bash
+  :class: output
 
   [wazuh-elasticsearch]
   hosts1.example.net
@@ -99,6 +106,7 @@ This will attempt a connection with the remote hosts using ``ping`` module.
 You will get a output like this.
 
 .. code-block:: bash
+  :class: output
 
   hosts1.example.net | SUCCESS => {
       "changed": false,
