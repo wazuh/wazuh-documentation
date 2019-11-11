@@ -19,6 +19,7 @@ After configuring the module successfully users can expect to see the following 
 1. Module starting:
 
     .. code-block:: console
+      :class: output
 
         2018/01/12 18:47:09 wazuh-modulesd:aws-cloudtrail: INFO: Module AWS-CloudTrail started
 
@@ -26,6 +27,7 @@ After configuring the module successfully users can expect to see the following 
 2. Scheduled scan:
 
     .. code-block:: console
+      :class: output
 
         2018/01/12 18:49:10 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs started
         2018/01/12 18:49:11 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs finished.
@@ -41,6 +43,7 @@ Troubleshooting
     The number is the AWS Account ID provided for the CloudTrail, and the name in the parenthesis is the AWS Account Alias (if provided).
 
     .. code-block:: console
+      :class: output
 
         2018/06/28 14:31:09 wazuh-modulesd:aws-cloudtrail: WARNING: CloudTrail: 012345678901(Prod)  -  Returned exit code 3.
         2018/06/28 14:31:09 wazuh-modulesd:aws-cloudtrail: WARNING: CloudTrail: 012345678901(Prod)  -  Invalid credentials to access S3 Bucket
@@ -107,8 +110,9 @@ Troubleshooting
     This will print debug data to the console and log.  The debug will also output the command that the wodle is using to execute the Python script for each CloudTrail.  If a particular CloudTrail is causing problems, this command can be manually executed, increasing the debug level from 1 (basic) to 3 (extremely verbose)
 
     .. code-block:: console
+      :class: output
 
-        # 2018/06/28 18:11:02 wazuh-modulesd:aws-cloudtrail: DEBUG: Launching CloudTrail Command: /var/ossec/wodles/aws/aws.py --bucket s3-prod-bucket --iam_role_arn arn:aws:iam::001122334455:role/ROLE_Log-Parser --aws_account_id 012345678901 --aws_account_alias prod --only_logs_after 2018-JUN-01 --debug 2 --skip_on_error
+        2018/06/28 18:11:02 wazuh-modulesd:aws-cloudtrail: DEBUG: Launching CloudTrail Command: /var/ossec/wodles/aws/aws.py --bucket s3-prod-bucket --iam_role_arn arn:aws:iam::001122334455:role/ROLE_Log-Parser --aws_account_id 012345678901 --aws_account_alias prod --only_logs_after 2018-JUN-01 --debug 2 --skip_on_error
 
 
 3. Time interval is shorter than the time taken to pull log data:
@@ -116,6 +120,7 @@ Troubleshooting
     In this case a simple warning will be displayed. There is no impact in the event data fetching process and the module will keep running.
 
     .. code-block:: console
+      :class: output
 
         2018/01/12 19:10:37 wazuh-modulesd:aws-cloudtrail: WARNING: Interval overtaken.
 
