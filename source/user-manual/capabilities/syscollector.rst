@@ -15,7 +15,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Packages`_
     - `Ports`_
     - `Processes`_
-    _ `Windows updates`_
+    - `Windows updates`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
     - `New searchable fields for Kibana`_
