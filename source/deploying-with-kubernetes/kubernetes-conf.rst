@@ -222,58 +222,78 @@ Verifying the deployment
 
     .. code-block:: console
 
-        $ kubectl get namespaces | grep wazuh
-        wazuh         Active    12m
+      $ kubectl get namespaces | grep wazuh
+
+    .. code-block:: console
+      :class: output
+
+      wazuh         Active    12m
 
 **Services**
 
     .. code-block:: console
 
-        $ kubectl get services -n wazuh
-        NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
-        elasticsearch         ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
-        kibana                ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
-        logstash              ClusterIP      xxx.yy.zzz.41    <none>             5000/TCP                         10m
-        wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
-        wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
-        wazuh-elasticsearch   ClusterIP      None             <none>             9300/TCP                         12m
-        wazuh-nginx           LoadBalancer   xxx.yy.zzz.223   internal-a3b1...   80:31831/TCP,443:30974/TCP       11m
-        wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
+      $ kubectl get services -n wazuh
+
+    .. code-block:: console
+      :class: output
+
+      NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
+      elasticsearch         ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
+      kibana                ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
+      logstash              ClusterIP      xxx.yy.zzz.41    <none>             5000/TCP                         10m
+      wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
+      wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
+      wazuh-elasticsearch   ClusterIP      None             <none>             9300/TCP                         12m
+      wazuh-nginx           LoadBalancer   xxx.yy.zzz.223   internal-a3b1...   80:31831/TCP,443:30974/TCP       11m
+      wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
 
 **Deployments**
 
     .. code-block:: console
 
-        $ kubectl get deployments -n wazuh
-        NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-        wazuh-kibana     1         1         1            1           11m
-        wazuh-logstash   1         1         1            1           10m
-        wazuh-nginx      1         1         1            1           11m
+      $ kubectl get deployments -n wazuh
+
+    .. code-block:: console
+      :class: output
+
+      NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+      wazuh-kibana     1         1         1            1           11m
+      wazuh-logstash   1         1         1            1           10m
+      wazuh-nginx      1         1         1            1           11m
 
 **Statefulset**
 
     .. code-block:: console
 
-        $ kubectl get statefulsets -n wazuh
-        NAME                     DESIRED   CURRENT   AGE
-        wazuh-elasticsearch      1         1         13m
-        wazuh-manager-master     1         1         9m
-        wazuh-manager-worker-0   1         1         9m
-        wazuh-manager-worker-1   1         1         9m
+      $ kubectl get statefulsets -n wazuh
+
+    .. code-block:: console
+      :class: output
+
+      NAME                     DESIRED   CURRENT   AGE
+      wazuh-elasticsearch      1         1         13m
+      wazuh-manager-master     1         1         9m
+      wazuh-manager-worker-0   1         1         9m
+      wazuh-manager-worker-1   1         1         9m
 
 **Pods**
 
     .. code-block:: console
 
-        $ kubectl get pods -n wazuh
-        NAME                              READY     STATUS    RESTARTS   AGE
-        wazuh-elasticsearch-0             1/1       Running   0          15m
-        wazuh-kibana-f4d9c7944-httsd      1/1       Running   0          14m
-        wazuh-logstash-777b7cd47b-7cxfq   1/1       Running   0          13m
-        wazuh-manager-master-0            1/1       Running   0          12m
-        wazuh-manager-worker-0-0          1/1       Running   0          11m
-        wazuh-manager-worker-1-0          1/1       Running   0          11m
-        wazuh-nginx-748fb8494f-xwwhw      1/1       Running   0          14m
+      $ kubectl get pods -n wazuh
+
+    .. code-block:: console
+      :class: output
+
+      NAME                              READY     STATUS    RESTARTS   AGE
+      wazuh-elasticsearch-0             1/1       Running   0          15m
+      wazuh-kibana-f4d9c7944-httsd      1/1       Running   0          14m
+      wazuh-logstash-777b7cd47b-7cxfq   1/1       Running   0          13m
+      wazuh-manager-master-0            1/1       Running   0          12m
+      wazuh-manager-worker-0-0          1/1       Running   0          11m
+      wazuh-manager-worker-1-0          1/1       Running   0          11m
+      wazuh-nginx-748fb8494f-xwwhw      1/1       Running   0          14m
 
 **Accessing Kibana**
 
@@ -283,9 +303,13 @@ Verifying the deployment
 
     .. code-block:: console
 
-        $ kubectl get services -o wide -n wazuh
-        NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
-        wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
+      $ kubectl get services -o wide -n wazuh
+
+    .. code-block:: console
+      :class: output
+      
+      NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
+      wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
 
 .. note::
     `AWS route 53 <https://aws.amazon.com/route53/?nc1=h_ls>`_ can be used to create a DNS that points to the load balancer and make it accessible through that DNS.
