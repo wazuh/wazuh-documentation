@@ -16,7 +16,7 @@ In this example, we are going to create a certificate for a Wazuh manager, whose
 Wazuh manager
 ^^^^^^^^^^^^^
 
-Follow these stes in the Wazuh server:
+Follow these steps in the Wazuh server:
 
 1. Issue and sign a certificate for the manager. You can enter the hostname or the IP address of the Wazuh server where the agents are going to be registerd. In this case, the Wazuh server IP is ``192.168.1.2``:
 

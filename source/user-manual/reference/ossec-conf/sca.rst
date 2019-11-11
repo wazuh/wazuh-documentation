@@ -2,8 +2,8 @@
 
 .. _reference_sec_config_assessment:
 
-Security Configuration Assessment configuration section
-========================================================
+sca
+===
 
 .. versionadded:: 3.9.0
 
