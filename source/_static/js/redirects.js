@@ -41,6 +41,11 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['3.9=>3.10', '3.10=>3.9'],
+      '3.9': '/user-manual/manager/wazuh-cluster.html',
+      '3.10': '/user-manual/configuring-cluster/index.html',
+    },
+    {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
       '3.9': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
       '3.10': '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
     },
@@ -59,6 +64,12 @@ redirections.push(
 /* Pages added in 3.10 */
 
 newUrls['3.10'] = [
+  '/release-notes/release_3_10.html',
+  '/development/wazuh-cluster.html',
+  '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_sources_hpux.html',
+  '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
+  '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
+  '/user-manual/capabilities/sec-config-assessment/use_case.html',
   '/user-manual/capabilities/sec-config-assessment/how_to_configure.html',
   '/user-manual/capabilities/sec-config-assessment/what_is_it.html',
   '/user-manual/configuring-cluster/advanced-settings.html',
@@ -73,6 +84,96 @@ newUrls['3.10'] = [
 /* Redirections from 3.8 to 3.9 */
 
 redirections.push(
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/azure/installation.html',
+      '3.9': '/azure/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/user-manual/kibana-app/configure-xpack/xpack-troubleshooting.html',
+      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/user-manual/kibana-app/configure-xpack/index.html',
+      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/user-manual/kibana-app/configure-xpack/defining-xpack-users.html',
+      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/user-manual/kibana-app/configure-xpack/configure-xpack-users.html',
+      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/user-manual/agents/remote-upgrading/create-custom-wpk.html#compile-a-package',
+      '3.9': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
+      '3.9': '/user-manual/registering/manager-verification/agent-verification-registration.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
+      '3.9': '/user-manual/registering/manager-verification/manager-verification-registration.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
+      '3.9': '/user-manual/registering/password-authorization-registration-service.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/user-manual/agents/restful-api/index.html',
+      '3.9': '/user-manual/agents/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/user-manual/agents/command-line/index.html',
+      '3.9': '/user-manual/agents/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html#using-the-command-line',
+      '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-windows-agent',
+      '3.9': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_sources_windows.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/index.html',
+    },
+    {
+      'target': ['3.8=>3.9', '3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+    },
+    {
+      'target': ['3.8=>3.9'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+    },
     {
       'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/deploying-with-ansible/guide/install-wazuh-server.html',
@@ -147,11 +248,6 @@ redirections.push(
       'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
       '3.9': '/installation-guide/installing-wazuh-agent/solaris/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
     },
     {
       'target': ['3.8=>3.9', '3.9=>3.8'],
@@ -398,9 +494,11 @@ redirections.push(
 /* Pages added in 3.9 */
 
 newUrls['3.9'] = [
+  '/release-notes/release_3_9.html',
   '/amazon/services/S3-bucket.html',
   '/compliance.html',
   '/containers.html',
+  '/deploying-with-ansible/guide/install-wazuh-manager.html',
   '/deploying-with-kubernetes/index.html',
   '/deploying-with-kubernetes/kubernetes-clean-up.html',
   '/deploying-with-kubernetes/kubernetes-conf.html',
@@ -410,11 +508,18 @@ newUrls['3.9'] = [
   '/installation-guide/installing-elastic-stack/automatic_api.html',
   '/installation-guide/installing-elastic-stack/configure-elasticsearch-cluster.html',
   '/installation-guide/installing-elastic-stack/protect-installation/index.html',
+  '/installation-guide/installing-elastic-stack/protect-installation/kibana_ssl.html',
+  '/installation-guide/installing-elastic-stack/protect-installation/searchguard.html',
   '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
   '/installation-guide/installing-elastic-stack/transform_logstash.html',
+  '/installation-guide/installing-splunk/splunk-app.html',
+  '/installation-guide/installing-splunk/splunk-basic.html',
+  '/installation-guide/installing-splunk/splunk-distributed.html',
+  '/installation-guide/installing-splunk/splunk-forwarder.html',
+  '/installation-guide/installing-splunk/splunk-polling.html',
+  '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
   '/installation-guide/installing-wazuh-agent/aix/index.html',
   '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_aix.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_linux.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_macos.html',
@@ -423,17 +528,9 @@ newUrls['3.9'] = [
   '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
   '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
+  '/installation-guide/installing-wazuh-agent/deployment_variables.html',
   '/installation-guide/installing-wazuh-agent/hpux/index.html',
   '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_package_hpux.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_aix.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_linux.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_macos.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_windows.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
-  '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
   '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/index.html',
   '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_package_amazon.html',
   '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_sources_amazon.html',
@@ -473,14 +570,18 @@ newUrls['3.9'] = [
   '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_sources_ubuntu12.04_or_greater.html',
   '/installation-guide/installing-wazuh-agent/macos/index.html',
   '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_package_macos.html',
+  '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_sources_macos.html',
+  '/installation-guide/installing-wazuh-agent/solaris/index.html',
   '/installation-guide/installing-wazuh-agent/solaris/solaris10/index.html',
   '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_package_solaris10.html',
   '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_sources_solaris10.html',
   '/installation-guide/installing-wazuh-agent/solaris/solaris11/index.html',
   '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_package_solaris11.html',
   '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_sources_solaris11.html',
+  '/installation-guide/installing-wazuh-agent/windows/index.html',
   '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_package_windows.html',
   '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_sources_windows.html',
+  '/installation-guide/installing-wazuh-manager/index.html',
   '/installation-guide/installing-wazuh-manager/linux/amazon/index.html',
   '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_packages_amazon.html',
   '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_sources_amazon.html',
@@ -511,26 +612,33 @@ newUrls['3.9'] = [
   '/installation-guide/securing_api.html',
   '/learning-wazuh/build-lab/install-wazuh-manager.html',
   '/monitoring.html',
-  '/release-notes/release_3_9_0.html',
-  '/release-notes/release_3_9_1.html',
-  '/release-notes/release_3_9_2.html',
-  '/release-notes/release_3_9_3.html',
-  '/release-notes/release_3_9_4.html',
-  '/release-notes/release_3_9_5.html',
   '/upgrade-guide/index.html',
+  '/upgrade-guide/upgrading/different_major.html',
+  '/upgrade-guide/upgrading/index.html',
+  '/upgrade-guide/upgrading/latest_wazuh3_minor.html',
+  '/upgrade-guide/upgrading/legacy/index.html',
+  '/upgrade-guide/upgrading/legacy/upgrading-elastic-stack.html',
+  '/upgrade-guide/upgrading/legacy/upgrading-wazuh-agent.html',
+  '/upgrade-guide/upgrading/legacy/upgrading-wazuh-manager.html',
+  '/upgrade-guide/upgrading/restore_alerts.html',
+  '/upgrade-guide/upgrading/same_minor_or_major.html',
   '/upgrade-guide/upgrading-elastic-stack/elastic_server_hard_upgrade.html',
   '/upgrade-guide/upgrading-elastic-stack/elastic_server_minor_upgrade.html',
   '/upgrade-guide/upgrading-elastic-stack/elastic_server_rolling_upgrade.html',
   '/upgrade-guide/upgrading-elastic-stack/index.html',
-  '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
-  '/user-manual/agents/listing/wazuh-app.html',
   '/user-manual/agents/listing/index.html',
+  '/user-manual/agents/listing/listing.html',
+  '/user-manual/agents/listing/using-command-line.html',
+  '/user-manual/agents/listing/wazuh-app.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  '/user-manual/agents/remove-agents/index.html',
+  '/user-manual/agents/remove-agents/remove.html',
+  '/user-manual/agents/remove-agents/restful-api-remove.html',
   '/user-manual/capabilities/fluent-forwarder.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
-  '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   '/user-manual/capabilities/sec-config-assessment/index.html',
-  '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
-  '/user-manual/capabilities/sec-config-assessment/use-case.html',
   '/user-manual/kibana-app/reference/custom-dashboard.html',
   '/user-manual/reference/ossec-conf/fluent-forward.html',
   '/user-manual/reference/ossec-conf/sca.html',
@@ -552,12 +660,17 @@ newUrls['3.9'] = [
   '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
   '/user-manual/registering/manager-verification/host-verification-registration.html',
   '/user-manual/registering/manager-verification/manager-verification-registration.html',
-  '/user-manual/registering/password-authorization-registration-service.html',
   '/user-manual/registering/password/linux-unix-password-registration.html',
   '/user-manual/registering/password/macos-password-registration.html',
   '/user-manual/registering/password/windows-password-registration.html',
+  '/user-manual/registering/password-authorization-registration-service.html',
+  '/user-manual/registering/restful-api-register.html',
+  '/user-manual/registering/simple-registration-method.html',
   '/user-manual/registering/using-command-line.html',
   '/user-manual/registering/windows-simple-registration.html',
+  '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
+  '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
+  '/user-manual/capabilities/sec-config-assessment/use-case.html  ',
 ];
 
 
@@ -591,6 +704,31 @@ removedUrls['3.9'] = [
 redirections.push(
     {
       'target': ['3.7=>3.8', '3.8=>3.7'],
+      '3.7': '/amazon/use-cases/vpc.html',
+      '3.8': '/amazon/services/vpc.html',
+    },
+    {
+      'target': ['3.7=>3.8'],
+      '3.7': '/amazon/use-cases/index.html',
+      '3.8': '/amazon/services/cloudtrail.html#use-cases',
+    },
+    {
+      'target': ['3.7=>3.8'],
+      '3.7': '/amazon/use-cases/iam.html',
+      '3.8': '/amazon/services/cloudtrail.html#iam',
+    },
+    {
+      'target': ['3.7=>3.8'],
+      '3.7': '/amazon/use-cases/ec2.html',
+      '3.8': '/amazon/services/cloudtrail.html#ec2',
+    },
+    {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
+      '3.7': '/amazon/installation.html',
+      '3.8': '/amazon/index.html',
+    },
+    {
+      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#cloudtrail',
       '3.8': '/amazon/services/cloudtrail.html',
     },
@@ -610,17 +748,17 @@ redirections.push(
       '3.8': '/amazon/services/vpc.html',
     },
     {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
+      'target': ['3.8=>3.7'],
       '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
       '3.8': '/amazon/services/config.html',
     },
     {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
+      'target': ['3.8=>3.7'],
       '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
       '3.8': '/amazon/services/guardduty.html',
     },
     {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
+      'target': ['3.8=>3.7'],
       '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
       '3.8': '/amazon/services/macie.html',
     },
@@ -631,23 +769,18 @@ redirections.push(
     },
     {
       'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#authenticating-options',
-      '3.8': '/amazon/configuration/credentials.html#authenticating-options',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/amazon/installation.html#considerations-for-configuration',
       '3.8': '/amazon/configuration/considerations.html',
     },
     {
       'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/use-cases/vpc.html',
-      '3.8': '/amazon/services/vpc.html#use-cases',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
       '3.7': '/installation-guide/optional-configurations/automatic-api.html',
       '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
+    },
+    {
+      'target': ['3.7=>3.8'],
+      '3.7': '/installation-guide/optional-configurations/index.html',
+      '3.8': '/installation-guide/index.html',
     },
     {
       'target': ['3.7=>3.8', '3.8=>3.7'],
@@ -674,20 +807,28 @@ redirections.push(
 /* Pages added in 3.8 */
 
 newUrls['3.8'] = [
+  '/release-notes/release_3_8.html',
   '/amazon/configuration/index.html',
   '/amazon/instances.html',
+  '/amazon/services/cloudtrail.html',
   '/amazon/services/index.html',
   '/amazon/services/config.html',
+  '/amazon/services/guardduty.html',
   '/amazon/services/inspector.html',
   '/amazon/services/kms.html',
+  '/amazon/services/macie.html',
   '/amazon/services/trusted-advisor.html',
+  '/amazon/services/vpc.html',
+  '/amazon/configuration/considerations.html',
+  '/amazon/configuration/credentials.html',
+  '/amazon/configuration/dependencies.html',
+  '/installation-guide/installing-elastic-stack/elastic_tuning.html',
+  '/installation-guide/installing-elastic-stack/elastic_ssl.html',
+  '/installation-guide/installing-elastic-stack/kibana_ssl.html',
   '/installation-guide/installing-elastic-stack/searchguard.html',
   '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
   '/installation-guide/installing-wazuh-server/automatic_api.html',
   '/installation-guide/installing-wazuh-server/securing_api.html',
-  '/release-notes/release_3_8_0.html',
-  '/release-notes/release_3_8_1.html',
-  '/release-notes/release_3_8_2.html',
   '/user-manual/capabilities/agent-key-polling.html',
   '/user-manual/kibana-app/reference/configure-indices.html',
   '/user-manual/reference/ossec-conf/wodle-agent-key-polling.html',
@@ -701,8 +842,8 @@ removedUrls['3.8'] = [
   '/amazon/use-cases/ec2.html',
   '/amazon/use-cases/iam.html',
   '/amazon/use-cases/s3.html',
-  '/installation-guide/optional-configurations/index.html',
   '/amazon/installation.html',
+  '/installation-guide/optional-configurations/index.html',
 ];
 
 
@@ -753,6 +894,11 @@ redirections.push(
     },
     {
       'target': ['3.6=>3.7', '3.7=>3.6'],
+      '3.6': '/user-manual/reference/statistics-files.html',
+      '3.7': '/user-manual/reference/statistics-files/index.html',
+    },
+    {
+      'target': ['3.6=>3.7'],
       '3.6': '/user-manual/reference/statistics-files.html#statistics-files',
       '3.7': '/user-manual/reference/statistics-files/index.html',
     },
@@ -771,14 +917,17 @@ redirections.push(
 /* Pages added in 3.7 */
 
 newUrls['3.7'] = [
+  '/release-notes/release_3_7.html',
   '/azure/index.html',
   '/azure/installation.html',
   '/azure/monitoring activity.html',
   '/azure/monitoring instances.html',
   '/azure/monitoring services.html',
+  '/deploying-with-ansible/guide/install-ansible.html',
   '/deploying-with-ansible/guide/install-elk-server.html',
   '/deploying-with-ansible/guide/install-wazuh-agent.html',
   '/deploying-with-ansible/guide/install-wazuh-server.html',
+  '/deploying-with-ansible/installation-guide.html',
   '/development/makefile.html',
   '/docker-monitor/index.html',
   '/docker-monitor/monitoring_containers_activity.html',
@@ -791,14 +940,17 @@ newUrls['3.7'] = [
   '/installing-splunk/splunk-forwarder.html',
   '/installing-splunk/splunk-polling.html',
   '/installing-splunk/splunk-reverse-proxy.html',
-  '/release-notes/release_3_7_0.html',
-  '/release-notes/release_3_7_1.html',
-  '/release-notes/release_3_7_2.html',
   '/user-manual/api/queries.html',
+  '/user-manual/capabilities/virustotal-scan/about.html',
   '/user-manual/kibana-app/features/query-configuration.html',
   '/user-manual/manager/manual-database-output.html',
   '/user-manual/reference/daemons/ossec-integratord.html',
   '/user-manual/reference/daemons/wazuh-db.html',
+  '/user-manual/reference/ossec-conf/wodle-azure-logs.html',
+  '/user-manual/reference/ossec-conf/wodle-docker.html',
+  '/user-manual/reference/statistics-files/index.html',
+  '/user-manual/reference/statistics-files/ossec-agentd-state.html',
+  '/user-manual/reference/statistics-files/ossec-remoted-state.html',
   '/user-manual/reference/statistics-files/ossec-analysisd-state.html',
   '/user-manual/reference/tools/fim_migrate.html',
   '/user-manual/ruleset/rules-classification.html',
@@ -829,23 +981,27 @@ redirections.push(
       'target': ['3.5=>3.6', '3.6=>3.5'],
       '3.5': '/installation-guide/installing-splunk/splunk_wazuh.html',
       '3.6': '/installing-splunk/splunk_wazuh.html',
+    },
+    {
+      'target': ['3.5=>3.6', '3.6=>3.5'],
+      '3.5': '/user-manual/reference/ossec-conf/wodle-cloudtrail.html',
+      '3.6': '/user-manual/reference/ossec-conf/wodle-s3.html',
     }
 );
 
 /* Pages added in 3.6 */
 
 newUrls['3.6'] = [
-  '/amazon/installation.html#considerations-for-configuration',
-  '/amazon/installation.html#authenticating-options',
+  '/release-notes/release_3_6.html',
   '/amazon/troubleshooting.html',
   '/amazon/use-cases/s3.html',
   '/installing-splunk/splunk_forwarder.html',
+  '/installing-splunk/splunk_installation.html',
   '/installing-splunk/splunk_reverse_proxy.html',
   '/installing-splunk/splunk_wazuh.html',
-  '/release-notes/release_3_6_0.html',
-  '/release-notes/release_3_6_1.html',
   '/user-manual/reference/ossec-conf/wodle-s3.html',
   '/user-manual/reference/statistics-files.html',
+  '/installing-splunk/index.html',
 ];
 
 
@@ -863,6 +1019,11 @@ removedUrls['3.6'] = [
 redirections.push(
     {
       'target': ['3.4=>3.5', '3.5=>3.4'],
+      '3.4': '/installation-guide/installing-elastic-stack/connect_wazuh_app.html',
+      '3.5': '/user-manual/kibana-app/connect-kibana-app.html',
+    },
+    {
+      'target': ['3.4=>3.5', '3.5=>3.4'],
       '3.4': '/migrating-from-ossec/ossec-packages-agent.html',
       '3.5': '/migrating-from-ossec/ossec-agent.html',
     },
@@ -876,7 +1037,7 @@ redirections.push(
 /* Pages added in 3.5 */
 
 newUrls['3.5'] = [
-  '/release-notes/release_3_5_0.html',
+  '/release-notes/release_3_5.html',
   '/user-manual/capabilities/osquery.html',
   '/user-manual/capabilities/syscollector.html',
   '/user-manual/kibana-app/configure-xpack/configure-xpack-users.html',
@@ -898,6 +1059,8 @@ newUrls['3.5'] = [
   '/user-manual/kibana-app/reference/index.html',
   '/user-manual/kibana-app/troubleshooting.html',
   '/user-manual/reference/ossec-conf/wodle-osquery.html',
+  '/migrating-from-ossec/ossec-agent.html',
+  '/migrating-from-ossec/ossec-server.html',
 ];
 
 /* Pages no longer available in 3.5 */
@@ -914,7 +1077,7 @@ removedUrls['3.5'] = [
 /* Pages added in 3.4 */
 
 newUrls['3.4'] = [
-  '/release-notes/release_3_4_0.html',
+  '/release-notes/release_3_4.html',
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
@@ -927,8 +1090,7 @@ newUrls['3.4'] = [
 /* Pages added in 3.3 */
 
 newUrls['3.3'] = [
-  '/release-notes/release_3_3_0.html',
-  '/release-notes/release_3_3_1.html',
+  '/release-notes/release_3_3.html',
   '/user-manual/reference/ossec-conf/socket.html',
 ];
 
@@ -946,7 +1108,7 @@ redirections.push({
 /* Pages added in 3.2 */
 
 newUrls['3.2'] = [
-  '/amazon/installation.html#installing-dependencies',
+  '/release-notes/release_3_2.html',
   '/gdpr/gdpr-II.html',
   '/gdpr/gdpr-III.html',
   '/gdpr/gdpr-IV.html',
@@ -956,17 +1118,35 @@ newUrls['3.2'] = [
   '/installation-guide/installing-splunk/splunk_forwarder.html',
   '/installation-guide/installing-splunk/splunk_installation.html',
   '/installation-guide/installing-splunk/splunk_wazuh.html',
+  '/learning-wazuh/audit-commands.html',
+  '/learning-wazuh/build-lab/access-ec2-instances.html',
+  '/learning-wazuh/build-lab/build-vpc.html',
+  '/learning-wazuh/build-lab/index.html',
+  '/learning-wazuh/build-lab/install-elastic-stack.html',
+  '/learning-wazuh/build-lab/install-linux-agents.html',
+  '/learning-wazuh/build-lab/install-windows-agent.html',
+  '/learning-wazuh/build-lab/kibana-setup.html',
+  '/learning-wazuh/build-lab/launch-ec2-instances.html',
+  '/learning-wazuh/detect-fs-changes.html',
+  '/learning-wazuh/hidden-processes.html',
+  '/learning-wazuh/index.html',
+  '/learning-wazuh/rdp-brute-force.html',
+  '/learning-wazuh/replace-stock-rule.html',
+  '/learning-wazuh/shellshock.html',
+  '/learning-wazuh/ssh-brute-force.html',
+  '/learning-wazuh/suricata.html',
+  '/learning-wazuh/survive-flood.html',
+  '/learning-wazuh/vuln-detection.html',
   '/installation-guide/upgrading/latest_wazuh3_minor.html',
   '/learning-wazuh/build-lab/install-wazuh-server.html',
-  '/release-notes/release_3_2_0.html',
-  '/release-notes/release_3_2_1.html',
-  '/release-notes/release_3_2_2.html',
-  '/release-notes/release_3_2_3.html',
-  '/release-notes/release_3_2_4.html',
   '/user-manual/capabilities/vulnerability-detection.html',
   '/user-manual/reference/ossec-conf/wodle-cloudtrail.html',
   '/user-manual/reference/ossec-conf/wodle-syscollector.html',
   '/user-manual/reference/ossec-conf/wodle-vuln-detector.html',
+  '/amazon/installation.html',
+  '/amazon/installation.html#considerations-for-configuration',
+  '/amazon/installation.html#installing-dependencies',
+  '/amazon/installation.html#cloudtrail',
 ];
 
 
@@ -975,9 +1155,9 @@ newUrls['3.2'] = [
 /* Pages added in 3.1 */
 
 newUrls['3.1'] = [
+  '/release-notes/release_3_1.html',
   '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
   '/installation-guide/upgrading/restore_alerts.html',
-  '/release-notes/release_3_1_0.html',
   '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
   '/user-manual/capabilities/vuls.html',
   '/user-manual/reference/ossec-conf/wodle-ciscat.html',
@@ -999,21 +1179,22 @@ removedUrls['3.1'] = [
 redirections.push({
   'target': ['2.1=>3.0', '3.0=>2.1'],
   '2.1': '/user-manual/reference/tools/update-ruleset.py.html',
-  '3.0': '/user-manual/reference/tools/update_ruleset.html/',
+  '3.0': '/user-manual/reference/tools/update_ruleset.html',
 });
 
 /* Pages added in 3.0 */
 
 newUrls['3.0'] = [
+  '/release-notes/release_3_0.html',
   '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
   '/installation-guide/upgrading/different_major.html',
-  '/release-notes/release_3_0_0.html',
   '/user-manual/agents/agent-life-cycle.html',
   '/user-manual/agents/grouping-agents.html',
   '/user-manual/agents/remote-upgrading/create-custom-wpk.html',
   '/user-manual/agents/remote-upgrading/custom-repository.html',
   '/user-manual/agents/remote-upgrading/index.html',
   '/user-manual/agents/remote-upgrading/install-custom-wpk.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk.html#compile-a-package',
   '/user-manual/agents/remote-upgrading/upgrading-agent.html',
   '/user-manual/agents/remote-upgrading/wpk-list.html',
   '/user-manual/capabilities/virustotal-scan/index.html',
@@ -1027,6 +1208,7 @@ newUrls['3.0'] = [
   '/user-manual/reference/tools/agent_groups.html',
   '/user-manual/reference/tools/agent_upgrade.html',
   '/user-manual/reference/tools/cluster_control.html',
+  '/user-manual/reference/tools/update_ruleset.html',
   '/user-manual/ruleset/json-decoder.html',
 ];
 
@@ -1037,6 +1219,9 @@ newUrls['3.0'] = [
 
 newUrls['2.1'] = [
   '/',
+  '/index.html',
+  '/search.html',
+  '/release-notes/release_2_1.html',
   '/amazon/',
   '/amazon/integration.html',
   '/amazon/use-cases/ec2.html',
@@ -1119,7 +1304,6 @@ newUrls['2.1'] = [
   '/pci-dss/policy-monitoring.html',
   '/pci-dss/rootkit-detection.html',
   '/release-notes/',
-  '/release-notes/release_2_1.html',
   '/user-manual/agents/agent-connection.html',
   '/user-manual/agents/command-line/',
   '/user-manual/agents/command-line/listing.html',
