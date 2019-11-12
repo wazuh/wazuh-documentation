@@ -24,13 +24,11 @@ jQuery(function($) {
   checkLatestDocs();
 
   let selectVersion = true;
-  $('#select-version button').click(function() {
-    if (selectVersion) {
-      addVersions();
-      selectVersion = false;
-      $('#select-version [data-toggle="tooltip"]').tooltip();
-    }
-  });
+  if (selectVersion) {
+    addVersions();
+    selectVersion = false;
+    $('#select-version [data-toggle="tooltip"]').tooltip();
+  }
 
   $(window).on('hashchange', function() {
     addVersions();
@@ -182,7 +180,6 @@ jQuery(function($) {
     const redirectionHistory = {};
     let relpair = [];
 
-    stackPages.push(currentPage);
     keyPoints[firstSeenIn] = page;
     for ( let i = 0; i< listRedirections.length; i++) {
       let found = false;
@@ -200,6 +197,8 @@ jQuery(function($) {
     }
 
     /* Get key changes in history */
+    stackPages.push(currentPage);
+    stackPages.push(page);
     while ( stackPages.length ) {
       currentPage = stackPages.pop();
       firstSeenIn = getRelease(currentPage, listNewUrls);
@@ -207,6 +206,7 @@ jQuery(function($) {
         keyPoints[firstSeenIn] = currentPage;
       }
 
+      console.log(keyPoints);
       redirectionsInvolved = findRedirectionByPage(currentPage, redirectionsTemp);
       for ( let i = 0; i< redirectionsInvolved.length; i++) {
         relpair = [];
