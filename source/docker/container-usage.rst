@@ -22,6 +22,10 @@ Access to containers and services
     .. code-block:: console
 
       $ docker-compose ps
+
+    .. code-block:: console
+      :class: output
+      
               Name                  Command                        State     Ports
 
       wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
@@ -117,6 +121,10 @@ Here is an example of a ``/wazuh-config-mount`` folder used to mount some common
 .. code-block:: console
 
   root@wazuh-manager:/# tree /wazuh-config-mount/
+
+.. code-block:: console
+  :class: output
+
   /wazuh-config-mount/
   └── etc
       ├── ossec.conf
@@ -200,7 +208,7 @@ Performing container updates differs from performing normal updates. For this we
 
 For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would decomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
 
-.. code-block:: console
+.. code-block:: yaml
 
       volumes:
          - /home/my/custom/path:/var/ossec/data:Z
