@@ -26,26 +26,34 @@ We can use rootcheck to monitor security policies. The first thing to do is to e
 .. code-block:: console
 
 	root@agent:/home/agent# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
-	<rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-	<rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
-	<system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
-	<system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
-	<system_audit>/var/ossec/etc/shared/system_audit_ssh.txt</system_audit>
+
+.. code-block:: console
+  :class: output
+
+  <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
+  <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+  <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
+  <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
+  <system_audit>/var/ossec/etc/shared/system_audit_ssh.txt</system_audit>
 
 If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engine, whether it becomes an alert or not:
 
 .. code-block:: console
 
 	root@manager:/home/manager# tail -f /var/ossec/logs/archives/archives.log
-	2018 May 16 17:14:45 (agent01) 192.168.1.50->rootcheck Ending syscheck scan.
-	2018 May 16 17:14:58 manager->rootcheck Starting rootcheck scan.
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 .
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 4 .
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 5: Password Authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 5 .
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 6: Empty passwords allowed {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 6 .
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 7: Rhost or shost used for authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 7 .
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 8: Wrong Grace Time {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 8 .
-	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
+
+.. code-block:: console
+  :class: output
+
+  2018 May 16 17:14:45 (agent01) 192.168.1.50->rootcheck Ending syscheck scan.
+  2018 May 16 17:14:58 manager->rootcheck Starting rootcheck scan.
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 .
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 4 .
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 5: Password Authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 5 .
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 6: Empty passwords allowed {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 6 .
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 7: Rhost or shost used for authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 7 .
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 8: Wrong Grace Time {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 8 .
+  2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
 
 
 Chapter IV, Article 28, Head 3 (c)
@@ -62,34 +70,35 @@ Use cases
 Wazuh can help to control the security in the processing of data using Syscheck we can see the events that arise, the accesses, who performs them, etc.
 
 .. code-block:: console
+  :class: output
 
-	** Alert 1526486886.138354: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
-	2018 May 16 18:08:06 (agent01) 192.168.1.50->syscheck
-	Rule: 550 (level 7) -> 'Integrity checksum changed.'
-	Integrity checksum changed for: '/root/personal_data/secret_data.txt'
-	Size changed from '0' to '13'
-	Old md5sum was: 'd41d8cd98f00b204e9800998ecf8427e'
-	New md5sum is : '2dc8f4959967624fef8b817e01f0d996'
-	Old sha1sum was: 'da39a3ee5e6b4b0d3255bfef95601890afd80709'
-	New sha1sum is : '0f26c2227a2101cffbfc4643f21f3802b4ff0926'
-	What changed:
-	0a1
-	> Data secret
+  ** Alert 1526486886.138354: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
+  2018 May 16 18:08:06 (agent01) 192.168.1.50->syscheck
+  Rule: 550 (level 7) -> 'Integrity checksum changed.'
+  Integrity checksum changed for: '/root/personal_data/secret_data.txt'
+  Size changed from '0' to '13'
+  Old md5sum was: 'd41d8cd98f00b204e9800998ecf8427e'
+  New md5sum is : '2dc8f4959967624fef8b817e01f0d996'
+  Old sha1sum was: 'da39a3ee5e6b4b0d3255bfef95601890afd80709'
+  New sha1sum is : '0f26c2227a2101cffbfc4643f21f3802b4ff0926'
+  What changed:
+  0a1
+  > Data secret
 
-	File: /root/personal_data/secret_data.txt
-	Old size: 0
-	New size: 13
-	New permissions: 100644
-	New user: root (0)
-	New group: root (0)
-	Old MD5: d41d8cd98f00b204e9800998ecf8427e
-	New MD5: 2dc8f4959967624fef8b817e01f0d996
-	Old SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
-	New SHA1: 0f26c2227a2101cffbfc4643f21f3802b4ff0926
-	Old date: Wed May 16 18:07:43 2018
-	New date: Wed May 16 18:08:02 2018
-	Old inode: 19712
-	New inode: 19715
+  File: /root/personal_data/secret_data.txt
+  Old size: 0
+  New size: 13
+  New permissions: 100644
+  New user: root (0)
+  New group: root (0)
+  Old MD5: d41d8cd98f00b204e9800998ecf8427e
+  New MD5: 2dc8f4959967624fef8b817e01f0d996
+  Old SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  New SHA1: 0f26c2227a2101cffbfc4643f21f3802b4ff0926
+  Old date: Wed May 16 18:07:43 2018
+  New date: Wed May 16 18:08:02 2018
+  Old inode: 19712
+  New inode: 19715
 
 .. thumbnail:: ../images/gdpr/process.png
     :title: Alert visualization at Kibana Discover
@@ -124,19 +133,21 @@ Use cases
 Wazuh will generate an alert like this.
 
 .. code-block:: console
+  :class: output
 
-	** Alert 1526470326.10972: - ossec,rootcheck,gdpr_IV_30.1.g,
-	2018 May 16 13:32:06 (agent01) 192.168.1.50->rootcheck
-	Rule: 516 (level 3) -> 'System Audit event.'
-	System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
-	title: SSH Hardening - 9: Wrong Maximum number of authentication attempts
-	file: /etc/ssh/sshd_config
+  ** Alert 1526470326.10972: - ossec,rootcheck,gdpr_IV_30.1.g,
+  2018 May 16 13:32:06 (agent01) 192.168.1.50->rootcheck
+  Rule: 516 (level 3) -> 'System Audit event.'
+  System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
+  title: SSH Hardening - 9: Wrong Maximum number of authentication attempts
+  file: /etc/ssh/sshd_config
 
 We can also see the event stored in our log file ``archives.log``, as long as the ``logall`` option is activated.
 
 .. code-block:: console
+  :class: output
 
-2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
+  2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
 
 .. thumbnail:: ../images/gdpr/audit_1.png
     :title: Alert visualization at Kibana Discover
@@ -175,12 +186,13 @@ Use cases
 Wazuh will generate an alert like this.
 
 .. code-block:: console
+  :class: output
 
-	** Alert 1526481285.44363: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,
-	2018 May 16 16:34:45 (agent01) 192.168.1.50->/var/log/auth.log
-	Rule: 5710 (level 5) -> 'sshd: Attempt to login using a non-existent user'
-	Src IP: 192.168.1.64
-	May 16 16:34:44 agent sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
+  ** Alert 1526481285.44363: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,
+  2018 May 16 16:34:45 (agent01) 192.168.1.50->/var/log/auth.log
+  Rule: 5710 (level 5) -> 'sshd: Attempt to login using a non-existent user'
+  Src IP: 192.168.1.64
+  May 16 16:34:44 agent sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
 
 .. thumbnail:: ../images/gdpr/access_1.png
     :title: Alert visualization at Kibana Discover
@@ -208,24 +220,25 @@ Use cases
 A sample email could be:
 
 .. code-block:: console
+  :class: output
 
-	From: Wazuh <watcher@example.com>               5:03 PM (2 minutes ago)
-	to: me
-	-----------------------------
-	Wazuh Notification.
-	2017 Mar 08 17:03:05
+  From: Wazuh <watcher@example.com>               5:03 PM (2 minutes ago)
+  to: me
+  -----------------------------
+  Wazuh Notification.
+  2017 Mar 08 17:03:05
 
-	Received From: localhost->/var/log/secure
-	Rule: 5503 fired (level 5) -> "PAM: User login failed."
-	Src IP: 192.168.1.37
-	Portion of the log(s):
+  Received From: localhost->/var/log/secure
+  Rule: 5503 fired (level 5) -> "PAM: User login failed."
+  Src IP: 192.168.1.37
+  Portion of the log(s):
 
-	Mar  8 17:03:04 localhost sshd[67231]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.37
-	uid: 0
-	euid: 0
-	tty: ssh
+  Mar  8 17:03:04 localhost sshd[67231]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.37
+  uid: 0
+  euid: 0
+  tty: ssh
 
-	 --END OF NOTIFICATION
+    --END OF NOTIFICATION
 
 A basic configuration could be:
 
@@ -308,19 +321,20 @@ Use cases
 Wazuh will generate an alert like this.
 
 .. code-block:: console
+  :class: output
 
-	** Alert 1526481936.95480: - syslog,sshd,authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,
-	2018 May 16 16:45:36 (agent01) 192.168.1.50->/var/log/auth.log
-	Rule: 5712 (level 10) -> 'sshd: brute force trying to get access to the system.'
-	Src IP: 192.168.1.64
-	May 16 16:45:35 agent sshd[10549]: Failed password for invalid user Evil_User from 192.168.1.64 port 49894 ssh2
-	May 16 16:45:32 agent sshd[10549]: Invalid user Evil_User from 192.168.1.64 port 49894
-	May 16 16:45:31 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:28 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:27 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:24 agent sshd[10547]: Invalid user Evil_User from 192.168.1.64 port 49892
-	May 16 16:44:58 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
-	May 16 16:44:56 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
+  ** Alert 1526481936.95480: - syslog,sshd,authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,
+  2018 May 16 16:45:36 (agent01) 192.168.1.50->/var/log/auth.log
+  Rule: 5712 (level 10) -> 'sshd: brute force trying to get access to the system.'
+  Src IP: 192.168.1.64
+  May 16 16:45:35 agent sshd[10549]: Failed password for invalid user Evil_User from 192.168.1.64 port 49894 ssh2
+  May 16 16:45:32 agent sshd[10549]: Invalid user Evil_User from 192.168.1.64 port 49894
+  May 16 16:45:31 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+  May 16 16:45:28 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+  May 16 16:45:27 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+  May 16 16:45:24 agent sshd[10547]: Invalid user Evil_User from 192.168.1.64 port 49892
+  May 16 16:44:58 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
+  May 16 16:44:56 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
 
 
 .. thumbnail:: ../images/gdpr/brute_1.png

@@ -60,12 +60,13 @@ Using Syscheck to monitor in real time using ``realtime`` we can see if data has
 Getting the following alert in case of deleting a file in that directory:
 
 .. code-block:: console
+  :class: output
 
-	** Alert 1526485921.128966: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
-	2018 May 16 17:52:01 (agent01) 192.168.1.50->syscheck
-	Rule: 553 (level 7) -> 'File deleted. Unable to retrieve checksum.'
-	File '/root/personal_data/subject_data_secret.txt' was deleted. Unable to retrieve checksum.
-	File: /root/personal_data/subject_data_secret.txt
+  ** Alert 1526485921.128966: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
+  2018 May 16 17:52:01 (agent01) 192.168.1.50->syscheck
+  Rule: 553 (level 7) -> 'File deleted. Unable to retrieve checksum.'
+  File '/root/personal_data/subject_data_secret.txt' was deleted. Unable to retrieve checksum.
+  File: /root/personal_data/subject_data_secret.txt
 
 .. thumbnail:: ../images/gdpr/deleted.png
     :title: Filtering alerts by Syscheck alert
