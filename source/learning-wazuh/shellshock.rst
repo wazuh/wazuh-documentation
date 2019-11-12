@@ -12,15 +12,15 @@ pattern in such web requests is quite distinctive, and any instance of your
 servers being probed with Shellshock requests are fairly
 strong indicators of malicious probing worthy of automated countermeasures.
 
-In this lab you will send a Shellshock probe to the ``linux-agent``.  After 
-looking over the alert that is produced and the rule that produced it, you will
-then set up and test several active response scenarios in which the attacker 
+In this lab you will send a Shellshock probe to a web server monitored by Wazuh.
+After looking over the alert that is produced and the rule that produced it, you 
+will then set up and test several active response scenarios in which the attacker 
 will be automatically firewalled off from the Linux lab systems and null routed
 by the Windows lab system in response this attack.
 
 Install a web server and monitor its logs
 -----------------------------------------
-If you haven't already, install a web server in your ``linux-agent``, for example nginx:
+If you haven't already, install a web server in a linux machine, for example **nginx**:
 
     .. code-block:: console
 
@@ -28,7 +28,7 @@ If you haven't already, install a web server in your ``linux-agent``, for exampl
         yum install nginx
         systemctl start nginx
 
-Ensure that the nginx access and error logs are collected by Wazuh by having
+Ensure that the nginx **access** and **error** logs are collected by Wazuh by having
 these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.conf`` file:
 
     .. code-block:: xml
@@ -45,7 +45,7 @@ these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.con
             </localfile>
         </ossec_config>
 
-Restart the agent for this change to take effect:
+Restart the wazuh agent service for this change to take effect:
 
 a. For Systemd:
 
@@ -70,14 +70,21 @@ b. For SysV Init:
 Send a Shellshock probe to the web server and see the resulting alert
 ---------------------------------------------------------------------
 
+For convenience, set up a system variable in the systems where you will run 
+the attack with the address of the web server (this may be itself):
+
+    .. code-block:: console
+
+        # ShellshockTarget="localhost"
+
+
 Execute the following request to the web server: 
 
     .. code-block:: console
 
-        # curl --insecure localhost -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
+        # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
 Notice the maliciously crafted User-Agent header to be sent, including injected shell commands.
-This request may be done to a remote address by changing the ``localhost`` for the address of the server.
 
 Search Kibana for **rule.id:31166** (the Shellshock rule).  You should find a record like this:
 
@@ -186,16 +193,15 @@ and then restart Wazuh manager:
 
       # service wazuh-manager restart
 
-Run the same curl probe just like last time, remembering that you may substitute 
-``localhost`` for an external address:
+Run the same curl probe just like last time:
 
     .. code-block:: console
 
-        # curl --insecure localhost -H "User-Agent: () { :; }; /bin/cat /etc/passwd" > /dev/null
+        # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd" > /dev/null
 
 The command will quickly download the webpage to ``/dev/null``.  Now repeat the same curl command.
 This time the command seems to hang, because the agent has added the attacking IP to 
-its firewall's drop list.  If you have used the agent's IP instead of localhost
+its firewall's drop list.  If you have used the agent's IP instead of ``localhost``
 you may confirm this with an iptables command on the attacked server:
 
     .. code-block:: console
@@ -227,8 +233,7 @@ this event 5 minutes apart.
 
 
 Observe that the attacked server is no longer blocking the offending IP by
-requesting the webpage with ``curl localhost``, or if you used the agent's
-IP by using an iptables command on the attacked server:
+requesting the webpage again, or by using an iptables command on the attacked server:
 
     .. code-block:: console
 
@@ -278,10 +283,10 @@ Run the same malicious ``curl`` probe as before, and then confirm
 that all Linux systems configured are blocking the attacker's IP.
 
 
-**AR Scenario 3 - Make windows-agent null route linux-agent when linux-agent probes elastic-server.**
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+**AR Scenario 3 - Make windows-agent null route the attacker of the web server.**
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Add an additional AR section to ossec.conf on wazuh-manager:
+Add an additional AR section to ``ossec.conf`` on wazuh-manager:
 
     .. code-block:: xml
 
@@ -293,8 +298,9 @@ Add an additional AR section to ossec.conf on wazuh-manager:
             <timeout>300</timeout>
         </active-response>
 
-The Windows-specific **win_route-null** AR script creates a persistent null route on Windows agent systems, preventing them
-from responding to any packets from the attacker.  Note that packets are still received; only the replies are dropped.
+The Windows-specific **win_route-null** AR script creates a persistent null route on Windows 
+agent systems, preventing them from responding to any packets from the attacker.  Note that 
+packets are still received; only the replies are dropped.
 
 Restart the manager:
 
