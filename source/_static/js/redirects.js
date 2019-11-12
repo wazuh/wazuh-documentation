@@ -723,7 +723,7 @@ redirections.push(
       '3.8': '/amazon/services/cloudtrail.html#ec2',
     },
     {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
+      'target': ['3.7=>3.8'],
       '3.7': '/amazon/installation.html',
       '3.8': '/amazon/index.html',
     },
@@ -1222,7 +1222,7 @@ newUrls['2.1'] = [
   '/index.html',
   '/search.html',
   '/release-notes/release_2_1.html',
-  '/amazon/',
+  '/amazon/index.html',
   '/amazon/integration.html',
   '/amazon/use-cases/ec2.html',
   '/amazon/use-cases/iam.html',
