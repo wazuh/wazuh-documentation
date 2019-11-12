@@ -30,7 +30,7 @@ Configuration
 
 For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/pg_hba.conf`` and modify the METHOD to be ``md5`` in these two lines:
 
-.. code-block:: console
+.. code-block:: pkgconfig
 
   # IPv4 local connections:
   host    all             all             127.0.0.1/32            md5
@@ -67,10 +67,14 @@ Test database access:
 .. code-block:: console
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
-   Password for user puppetdb:
-   psql (9.4.11)
-   Type "help" for help.
-   puppetdb=> \q
+
+.. code-block:: console
+  :class: output
+
+  Password for user puppetdb:
+  psql (9.4.11)
+  Type "help" for help.
+  puppetdb=> \q
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
 

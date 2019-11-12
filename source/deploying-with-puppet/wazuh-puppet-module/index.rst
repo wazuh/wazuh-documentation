@@ -17,7 +17,8 @@ Download and install the Wazuh module from Puppet Forge:
     # puppet module install wazuh-wazuh --version 3.10.2
 
   .. code-block:: bash
-  
+    :class: output
+
     Notice: Preparing to install into /etc/puppet/modules ...
     Notice: Downloading from https://forgeapi.puppetlabs.com ...
     Notice: Installing -- do not interrupt ...
