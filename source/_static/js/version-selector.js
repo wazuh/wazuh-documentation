@@ -133,6 +133,10 @@ jQuery(function($) {
       }
 
       ele += '<li><a href="' + href + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
+
+      if (ver == currentVersion) {
+        $('.no-latest-notice .link-latest').attr('href', href);
+      }
     }
     selectVersionUl.html(ele);
   }
@@ -237,11 +241,29 @@ jQuery(function($) {
       }
     }
 
+    /* Know the the release minor on the array keyPoints */
+    let releaseMinor = versions[0];
+    for (rel in versions) {
+      if (Object.prototype.hasOwnProperty.call(versions, rel)) {
+        for (rel2 in keyPoints) {
+          if (Object.prototype.hasOwnProperty.call(keyPoints, rel2)) {
+            if (versions[rel] == rel2) {
+              releaseMinor = versions[rel];
+            }
+          }
+        }
+      }
+    }
+
     /* Fill the remaining releases in the order they were released */
     for ( let i = versions.length-1; i >= 0; i--) {
       if ( keyPoints[versions[i]] != undefined && keyPoints[versions[i]] != lastPageFilled ) {
         lastPageFilled = keyPoints[versions[i]];
         removedIn = getRelease(lastPageFilled, listRemovedUrls);
+      } else {
+        if (releaseMinor > versions[i] && releaseMinor.length == versions[i].length) {
+          lastPageFilled = keyPoints[releaseMinor];
+        }
       }
       if ( removedIn == versions[i] ) {
         lastPageFilled = '';
