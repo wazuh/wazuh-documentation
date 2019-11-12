@@ -200,15 +200,10 @@ jQuery(function($) {
 
     /* Get key changes in history */
     stackPages.push(currentPage);
-    stackPages.push(page);
     while ( stackPages.length ) {
       currentPage = stackPages.pop();
       firstSeenIn = getRelease(currentPage, listNewUrls);
-      if (firstSeenIn != false) {
-        keyPoints[firstSeenIn] = currentPage;
-      }
 
-      console.log(keyPoints);
       redirectionsInvolved = findRedirectionByPage(currentPage, redirectionsTemp);
       for ( let i = 0; i< redirectionsInvolved.length; i++) {
         relpair = [];
@@ -217,11 +212,13 @@ jQuery(function($) {
           if (Object.prototype.hasOwnProperty.call(redirectionsInvolved[i], release)) {
             relpair.push(release);
             if ( !(release in Object.keys(keyPoints)) ) {
-              keyPoints[release] = redirectionsInvolved[i][release];
-              if ( redirectionsInvolved[i][release] != currentPage &&
-                stackPages.indexOf(redirectionsInvolved[i][release]) == -1 &&
-                checkedPages.indexOf(redirectionsInvolved[i][release]) == -1 ) {
-                stackPages.push(redirectionsInvolved[i][release]);
+              if ( release != 'target' ) {
+                keyPoints[release] = redirectionsInvolved[i][release];
+                if ( redirectionsInvolved[i][release] != currentPage &&
+                  stackPages.indexOf(redirectionsInvolved[i][release]) == -1 &&
+                  checkedPages.indexOf(redirectionsInvolved[i][release]) == -1 ) {
+                  stackPages.push(redirectionsInvolved[i][release]);
+                }
               }
             }
           }
@@ -283,12 +280,18 @@ jQuery(function($) {
    */
   function findRedirectionByPage(url, redirecttionArray) {
     const result = [];
+    let releaseStep = '';
     /* For every redirection registered in redirecttionArray */
     for ( let i = 0; i< redirecttionArray.length; i++) {
       /* Check releases involved in the redirection (2 releases: origin and target) */
       for ( release in redirecttionArray[i] ) {
         if ( redirecttionArray[i][release] == url ) {
-          result.push(redirecttionArray[i]);
+          for ( target in redirecttionArray[i]['target'] ) {
+            if (redirecttionArray[i]['target'][target].includes(release+'=>') && release > releaseStep) {
+              releaseStep = release;
+              result.push(redirecttionArray[i]);
+            }
+          }
         }
       }
     }
