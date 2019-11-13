@@ -91,25 +91,25 @@ In Docker for OSX, there is a default memory limit of 2GB, so in order to run `d
 Usage
 -----
 
-1. Get the ``docker-compose.yml`` file to your system:
+#. Get the ``docker-compose.yml`` file to your system:
 
-  a) Only the file::
+    a) Only the file::
 
-      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.9.5_7.2.1/docker-compose.yml
+       $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.9.5_7.2.1/docker-compose.yml
 
-  b) Get the Wazuh repository::
+    b) Get the Wazuh repository::
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.9.5_7.2.1 --single-branch
+       $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.9.5_7.2.1 --single-branch
 
-2. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
+#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
-  a) Foreground::
+    a) Foreground::
 
-      $ docker-compose up
+       $ docker-compose up
 
-  b) Background::
+    b) Background::
 
-      $ docker-compose up -d
+       $ docker-compose up -d
 
 .. note::
   - Wazuh-kibana container will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticsearch is started. Then the set up process will continue normally.
