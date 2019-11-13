@@ -78,7 +78,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     3. Configure Elastic Stack to use encrypted connections:
 
-      3.1. We need to create all certificates separated by component. After you’ve created them, you will have to distribute each certificate to the host on which the corresponding component is installed. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
+      3.1. We need to create all certificates separated by host. After you’ve created them, you will have to distribute each certificate to the host on which the corresponding component is installed. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
 
         .. code-block:: yaml
 
@@ -275,7 +275,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     4. Configure Elastic Stack to use encrypted connections:
 
-      4.1. We need to create all certificates separated by component. After the creation, you will have to distribute the certificates into the hosts according to the component installed on those hosts. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
+      4.1. We need to create all certificates separated by host. After the creation, you will have to distribute the certificates into the hosts according to the component installed on those hosts. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
 
         .. code-block:: yaml
 
