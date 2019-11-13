@@ -40,7 +40,6 @@ release = version
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
     'sphinx_tabs.tabs',
@@ -333,7 +332,7 @@ images_config = {
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+# intersphinx_mapping = {'https://docs.python.org/': None}
 
 # -- Options for todo extension ----------------------------------------------
 
@@ -348,7 +347,7 @@ def minification(actual_path):
         ['css/style','css'],
         ['css/wazuh-icons','css'],
         ['js/version-selector','js'],
-        ['js/style','js'],
+        ['js/style','js']
     ]
 
     for file in files:
@@ -414,7 +413,7 @@ exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
     "js/version-selector.js",
-    "js/style.js",
+    "js/style.js"
 ]
 
 # -- Additional configuration ------------------------------------------------
