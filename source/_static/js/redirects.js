@@ -64,7 +64,9 @@ redirections.push(
 /* Pages added in 3.10 */
 
 newUrls['3.10'] = [
-  '/release-notes/release_3_10.html',
+  '/release-notes/release_3_10_0.html',
+  '/release-notes/release_3_10_1.html',
+  '/release-notes/release_3_10_2.html',
   '/development/wazuh-cluster.html',
   '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_sources_hpux.html',
   '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
@@ -494,7 +496,12 @@ redirections.push(
 /* Pages added in 3.9 */
 
 newUrls['3.9'] = [
-  '/release-notes/release_3_9.html',
+  '/release-notes/release_3_9_0.html',
+  '/release-notes/release_3_9_1.html',
+  '/release-notes/release_3_9_2.html',
+  '/release-notes/release_3_9_3.html',
+  '/release-notes/release_3_9_4.html',
+  '/release-notes/release_3_9_5.html',
   '/amazon/services/S3-bucket.html',
   '/compliance.html',
   '/containers.html',
@@ -807,7 +814,9 @@ redirections.push(
 /* Pages added in 3.8 */
 
 newUrls['3.8'] = [
-  '/release-notes/release_3_8.html',
+  '/release-notes/release_3_8_0.html',
+  '/release-notes/release_3_8_1.html',
+  '/release-notes/release_3_8_2.html',
   '/amazon/configuration/index.html',
   '/amazon/instances.html',
   '/amazon/services/cloudtrail.html',
@@ -917,7 +926,9 @@ redirections.push(
 /* Pages added in 3.7 */
 
 newUrls['3.7'] = [
-  '/release-notes/release_3_7.html',
+  '/release-notes/release_3_7_0.html',
+  '/release-notes/release_3_7_1.html',
+  '/release-notes/release_3_7_2.html',
   '/azure/index.html',
   '/azure/installation.html',
   '/azure/monitoring activity.html',
@@ -992,7 +1003,8 @@ redirections.push(
 /* Pages added in 3.6 */
 
 newUrls['3.6'] = [
-  '/release-notes/release_3_6.html',
+  '/release-notes/release_3_6_0.html',
+  '/release-notes/release_3_6_1.html',
   '/amazon/troubleshooting.html',
   '/amazon/use-cases/s3.html',
   '/installing-splunk/splunk_forwarder.html',
@@ -1037,7 +1049,7 @@ redirections.push(
 /* Pages added in 3.5 */
 
 newUrls['3.5'] = [
-  '/release-notes/release_3_5.html',
+  '/release-notes/release_3_5_0.html',
   '/user-manual/capabilities/osquery.html',
   '/user-manual/capabilities/syscollector.html',
   '/user-manual/kibana-app/configure-xpack/configure-xpack-users.html',
@@ -1077,7 +1089,7 @@ removedUrls['3.5'] = [
 /* Pages added in 3.4 */
 
 newUrls['3.4'] = [
-  '/release-notes/release_3_4.html',
+  '/release-notes/release_3_4_0.html',
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
@@ -1090,7 +1102,8 @@ newUrls['3.4'] = [
 /* Pages added in 3.3 */
 
 newUrls['3.3'] = [
-  '/release-notes/release_3_3.html',
+  '/release-notes/release_3_3_0.html',
+  '/release-notes/release_3_3_1.html',
   '/user-manual/reference/ossec-conf/socket.html',
 ];
 
@@ -1108,7 +1121,11 @@ redirections.push({
 /* Pages added in 3.2 */
 
 newUrls['3.2'] = [
-  '/release-notes/release_3_2.html',
+  '/release-notes/release_3_2_0.html',
+  '/release-notes/release_3_2_1.html',
+  '/release-notes/release_3_2_2.html',
+  '/release-notes/release_3_2_3.html',
+  '/release-notes/release_3_2_4.html',
   '/gdpr/gdpr-II.html',
   '/gdpr/gdpr-III.html',
   '/gdpr/gdpr-IV.html',
@@ -1155,7 +1172,7 @@ newUrls['3.2'] = [
 /* Pages added in 3.1 */
 
 newUrls['3.1'] = [
-  '/release-notes/release_3_1.html',
+  '/release-notes/release_3_1_0.html',
   '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
   '/installation-guide/upgrading/restore_alerts.html',
   '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
@@ -1185,7 +1202,7 @@ redirections.push({
 /* Pages added in 3.0 */
 
 newUrls['3.0'] = [
-  '/release-notes/release_3_0.html',
+  '/release-notes/release_3_0_0.html',
   '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
   '/installation-guide/upgrading/different_major.html',
   '/user-manual/agents/agent-life-cycle.html',
