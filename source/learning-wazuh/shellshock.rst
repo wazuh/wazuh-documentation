@@ -197,7 +197,7 @@ Run the same curl probe just like last time:
 
     .. code-block:: console
 
-        # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd" > /dev/null
+        # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
 The command will quickly download the webpage to ``/dev/null``.  Now repeat the same curl command.
 This time the command seems to hang, because the agent has added the attacking IP to 
@@ -283,8 +283,28 @@ Run the same malicious ``curl`` probe as before, and then confirm
 that all Linux systems configured are blocking the attacker's IP.
 
 
-**AR Scenario 3 - Make windows-agent null route the attacker of the web server.**
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+**AR Scenario 3 - Make windows null route the attacker.**
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+.. note::
+  
+  `Currently Active Response <https://github.com/wazuh/wazuh/issues/2084>`_ only accepts `srcip`, `user` and `filename` as arguments for its scripts. Starting with Wazuh 3.8 Windows logs are collected by default using the `Windows Event Channel` which will provide information in a json format that uses different fields. So in order run an active response in Windows agents using `srcip` information, the configuration must be changed so events will be collected using EventLog.
+
+Configure Windows to collect `EventLog` messages by using centralized configuration, 
+edit `/var/ossec/etc/shared/default/agent.conf` in the Wazuh manager to add the 
+following:
+    .. code-block:: xml
+
+    <agent_config os="windows">
+      <localfile>
+        <location>Security</location>
+        <log_format>eventlog</log_format>
+      </localfile>
+    </agent_config>
+
+.. note::
+  
+  Alternatively this may be achieved through the Wazuh Kibana App by accesing the "Management" tab, from there the "Groups" dashboard and clicking on the pencil action icon for editing the configuration of the default group.
 
 Add an additional AR section to ``ossec.conf`` on wazuh-manager:
 
@@ -316,7 +336,7 @@ Restart the manager:
 
         # service wazuh-manager restart
 
-Run the same probe again from linux-agent.  Observe that the output of the Windows command line "route print /4" now shows a null route for the Elastic IP of linux-agent.  It will be in the "Persistent Routes:" section of the output.
+Run the same probe again to the web server.  Observe that the output of the Windows command line "route print /4" now shows a null route for the Elastic IP of linux-agent.  It will be in the "Persistent Routes:" section of the output.
 
     .. code-block:: console
 
