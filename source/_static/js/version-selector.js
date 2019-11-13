@@ -189,8 +189,17 @@ jQuery(function($) {
       let found = false;
       if (listRedirections[i]['target'] !== undefined) {
         for (let j=0; j<versions.length-1; j++) {
-          verPrev = (verCurrent < versions[j]) ? versions[j+1] : versions[j-1];
-          if ( listRedirections[i]['target'].includes(verPrev+'=>'+versions[j]) ) {
+          if (verCurrent < versions[j] && verCurrent.length <= versions[j].length){
+            verPrev = versions[j];
+            verNext = verCurrent;
+          } else if (verCurrent > versions[j] || (verCurrent < versions[j] && verCurrent.length >= versions[j].length)) {
+            verPrev = verCurrent;
+            verNext = versions[j];
+          } else if (verCurrent == versions[j] && verCurrent.length == versions[j].length) {
+            verPrev = verCurrent;
+            verNext = versions[j+1];
+          }
+          if ( listRedirections[i]['target'].includes(verPrev+'=>'+verNext) ) {
             found = true;
           }
         }
@@ -212,9 +221,9 @@ jQuery(function($) {
 
         for (release in redirectionsInvolved[i]) {
           if (Object.prototype.hasOwnProperty.call(redirectionsInvolved[i], release)) {
-            relpair.push(release);
-            if ( !(release in Object.keys(keyPoints)) ) {
-              if ( release != 'target' ) {
+            if ( release != 'target' ) {
+              relpair.push(release);
+              if ( !(release in Object.keys(keyPoints)) ) {
                 keyPoints[release] = redirectionsInvolved[i][release];
                 if ( redirectionsInvolved[i][release] != currentPage &&
                   stackPages.indexOf(redirectionsInvolved[i][release]) == -1 &&
@@ -261,7 +270,11 @@ jQuery(function($) {
         lastPageFilled = keyPoints[versions[i]];
         removedIn = getRelease(lastPageFilled, listRemovedUrls);
       } else {
-        if (releaseMinor > versions[i] && releaseMinor.length == versions[i].length) {
+        if (
+          releaseMinor > versions[i] && releaseMinor.length == versions[i].length
+          &&
+          firstSeenIn <= versions[i] && firstSeenIn.length == versions[i].length
+        ) {
           lastPageFilled = keyPoints[releaseMinor];
         }
       }
@@ -305,11 +318,13 @@ jQuery(function($) {
     for ( let i = 0; i< redirecttionArray.length; i++) {
       /* Check releases involved in the redirection (2 releases: origin and target) */
       for ( release in redirecttionArray[i] ) {
-        if ( redirecttionArray[i][release] == url ) {
-          for ( target in redirecttionArray[i]['target'] ) {
-            if (redirecttionArray[i]['target'][target].includes(release+'=>') && release > releaseStep) {
-              releaseStep = release;
-              result.push(redirecttionArray[i]);
+        if ( release != 'target' ) {
+          if ( redirecttionArray[i][release] == url ) {
+            for ( target in redirecttionArray[i]['target'] ) {
+              if (redirecttionArray[i]['target'][target].includes(release+'=>') && release > releaseStep) {
+                releaseStep = release;
+                result.push(redirecttionArray[i]);
+              }
             }
           }
         }
