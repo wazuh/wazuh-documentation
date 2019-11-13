@@ -140,9 +140,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # cd /usr/share/elasticsearch/
           # mkdir /etc/elasticsearch/certs/ca -p
-          # cp -R ca/ elasticsearch/* /etc/elasticsearch/certs/
+          # cp -R /usr/share/elasticsearch/ca/ /usr/share/elasticsearch/elasticsearch/* /etc/elasticsearch/certs/
           # chown -R elasticsearch: /etc/elasticsearch/certs
           # chmod -R 770 /etc/elasticsearch/certs
 
@@ -187,9 +186,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-            # cd /usr/share/filebeat/
             # mkdir /etc/filebeat/certs/ca -p
-            # cp -R ca/ wazuh-manager/* /etc/wazuh-manager/certs/
+            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/wazuh-manager/* /etc/wazuh-manager/certs/
             # chmod 770 -R /etc/filebeat/certs
 
         Note that if you changed the node names in step 3.1, you will have the folder with the name used there instead of ``wazuh-manager``.
@@ -350,9 +348,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # cd /usr/share/elasticsearch/
           # mkdir /etc/elasticsearch/certs/ca -p
-          # cp -R ca/ elasticsearch-node1/* /etc/elasticsearch/certs/
+          # cp -R /usr/share/elasticsearch/ca/ /usr/share/elasticsearch/elasticsearch-node1/* /etc/elasticsearch/certs/
           # chown -R elasticsearch: /etc/elasticsearch/certs
           # chmod -R 770 /etc/elasticsearch/certs
 
@@ -438,9 +435,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-            # cd /usr/share/filebeat/
             # mkdir /etc/filebeat/certs/ca -p
-            # cp -R ca/ wazuh-manager/* /etc/filebeat/certs/
+            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/wazuh-manager/* /etc/filebeat/certs/
             # chmod -R 770 /etc/filebeat/certs
 
         You will need to replace ``wazuh-manager`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
@@ -516,9 +512,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. code-block:: console
 
-        # cd /usr/share/kibana/
         # mkdir /etc/kibana/certs/ca -p
-        # cp -R ca/ kibana/* /etc/kibana/certs/
+        # cp -R /usr/share/kibana/ca/ /usr/share/kibana/kibana/* /etc/kibana/certs/
         # chmod 770 -R /etc/kibana/certs
         # chown -R kibana:kibana /etc/kibana/
 
