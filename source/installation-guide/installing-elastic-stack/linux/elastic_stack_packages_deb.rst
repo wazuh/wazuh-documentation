@@ -105,14 +105,19 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
           # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --out certs.zip  --keep-ca-key
 
+        The file created contains the ``ca.key`` due to the ``--keep-ca-key`` modifier. You have to distribute the zip file but we recommend not distributing it with the ``ca.key``. You can remove it from the zip file as follow:
+
+        .. code-block:: console
+
+          # zip -d certs.zip "ca.key"
+
         This is the ``zip`` content:
 
         .. code-block:: console
 
           certs.zip
           |-- ca
-          |   |-- ca.crt
-              |-- ca.key
+              |-- ca.crt
           |-- wazuh-manager
           |   |-- wazuh-manager.crt
           |   |-- wazuh-manager.key
@@ -304,14 +309,19 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
           # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --out certs.zip --keep-ca-key
 
+        The file created contains the ``ca.key`` due to the ``--keep-ca-key`` modifier. You have to distribute the zip file but we recommend not distributing it with the ``ca.key``. You can remove it from the zip file as follow:
+
+        .. code-block:: console
+
+          # zip -d certs.zip "ca.key"
+
         This is the ``zip`` content:
 
         .. code-block:: console
 
           certs.zip
           |-- ca
-          |   |-- ca.crt
-              |-- ca.key
+              |-- ca.crt
           |-- wazuh-manager
           |   |-- wazuh-manager.crt
           |   |-- wazuh-manager.key
