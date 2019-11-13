@@ -256,7 +256,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.3.2
+      # apt-get install filebeat=7.4.2
 
 #. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
@@ -281,7 +281,7 @@ Disabling repositories
 
 In the installation guide, we described how to install and configure Wazuh and also how to install and configure Filebeat for use with Wazuh. We have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
 
-In the Elastic Stack installation guide, we will show you how to install and configure Elasticsearch, Kibana and the Wazuh Kibana plugin. The current Wazuh Kibana plugin was tested in Kibana version 7.3.2. When Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system forcing the upgrade of Elasticsearch and Kibana. We must conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin when a new Elasticsearch version is released. Then we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version.
+In the Elastic Stack installation guide, we will show you how to install and configure Elasticsearch, Kibana and the Wazuh Kibana plugin. The current Wazuh Kibana plugin was tested in Kibana version 7.4.2. When Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system forcing the upgrade of Elasticsearch and Kibana. We must conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin when a new Elasticsearch version is released. Then we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version.
 
 If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it's possible that the Wazuh Kibana plugin could become incompatible.
 

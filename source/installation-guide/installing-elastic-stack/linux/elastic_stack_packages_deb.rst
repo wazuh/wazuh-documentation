@@ -55,7 +55,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.3.2
+        # apt-get install elasticsearch=7.4.2
 
 
     2. Once Elasticsearch is installed we need to configure it by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -237,7 +237,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.3.2
+        # apt-get install elasticsearch=7.4.2
 
     2. Download the Elasticsearch configuration file from the Wazuh repository:
 
@@ -492,7 +492,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=7.3.2
+    # apt-get install kibana=7.4.2
 
 2. Configure certificates. Copy the file `/usr/share/elasticsearch/certs.zip` from the Elasticsearch node into the Wazuh server. You can use `scp` or others. Now, let's suppose that the file was copied into ``/usr/share/kibana/``.
 
@@ -543,13 +543,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.3.2.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.0_7.4.2.zip
 
   * Install from the local file:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.3.2.zip
+     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.0_7.4.2.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` will accomplish this.
 
@@ -581,7 +581,7 @@ Disabling repositories
 
 In the installation guide, we described how to install and configure Wazuh and also how to install and configure Elastic Stack for use with Wazuh. We have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
 
-The current Wazuh Kibana plugin was tested in Kibana version 7.3.2. When Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system forcing the upgrade of Elasticsearch and Kibana. We must conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin when a new Elasticsearch version is released. Then we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version. If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it's possible that the Wazuh Kibana plugin could become incompatible.
+The current Wazuh Kibana plugin was tested in Kibana version 7.4.2. When Elasticsearch releases a new version and you upgrade your system, the new Filebeat version will be installed in your system forcing the upgrade of Elasticsearch and Kibana. We must conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin when a new Elasticsearch version is released. Then we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version. If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it's possible that the Wazuh Kibana plugin could become incompatible.
 
 In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
 
