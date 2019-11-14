@@ -138,6 +138,10 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
 .. code-block:: bash
 
   root@wazuh-manager:/var/ossec/logs/archives/2017/Jan# ls -l
+
+.. code-block:: bash
+  :class: output
+
   total 176
   -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
   -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
