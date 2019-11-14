@@ -429,7 +429,7 @@ header .menuweb-bar .menu-item a {
   font-size: 1.1rem;
   font-weight: normal !important;
   transition: .2s all ease;
-	position: relative;
+  position: relative;
 }
 
 #capabilities .left .topic .topic-title::before {
@@ -2987,7 +2987,7 @@ div.highlight pre {
         height: calc(100vh - 165px); /* 40px search + 100px buttons + 25px padding = 165px */
         visibility: visible;
         overflow-y: hidden;
-				-ms-overflow-style: -ms-autohiding-scrollbar;
+        -ms-overflow-style: -ms-autohiding-scrollbar; /* Internet Explorer */
       }
 
       .scrolled #navbar-globaltoc {
