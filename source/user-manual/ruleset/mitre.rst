@@ -5,7 +5,7 @@
 Enhancing with MITRE
 ============
 
-This feature allows the user to customize the alert information to include specific information related to MITRE ATT&CK techniques. MITRE ATT&CK matrix stores all possible attacks that can be made and what to do to mitigate and detect them. This can be useful when an attack is detected through an alert and an user wants to know more about it.
+This feature allows the user to customize the alert information to include specific information related to MITRE ATT&CK techniques. MITRE ATT&CK matrix stores all possible attacks that can be made and what to do to mitigate and detect them. This can be useful when an attack is detected through an alert and a user wants to know more about it.
 
 - `Configuration example`_
 - `Alert example`_
@@ -37,7 +37,7 @@ Add the following lines to /var/ossec/etc/rules/local_rule.xml:
 
 Restart Wazuh and you will have finished configuring the rule. 
 
-If you want to configurate a rule using two o more techniques, you can do it as follows:
+If you want to configure a rule using two o more techniques, you can do it as follows:
 
 .. code-block:: xml
 
@@ -153,6 +153,6 @@ Open the alert and it will be displayed:
 
 As we can see, MITRE information appears correctly in the alert.
 
-In addition, it is possible to filter by a specific technique ID or tactic.
+Also, it is possible to filter by a specific technique ID or tactic.
 
 
