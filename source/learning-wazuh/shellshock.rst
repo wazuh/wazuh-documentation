@@ -118,7 +118,7 @@ Set up Active Response (AR) countermeasures to Shellshock probes
 
 The Wazuh Active Response capability allows scripted actions to be taken in
 response to specific criteria of Wazuh rules being matched.  By default, AR
-is enabled on all agents and all standard AR commands are defined in ossec.conf
+is enabled on all agents and all standard AR commands are defined in ``ossec.conf``
 on the Wazuh manager, but no actual criteria for calling the AR commands is
 included.  No AR commands will actually be triggered until further configuration
 is performed on the Wazuh manager.
@@ -286,26 +286,6 @@ that all Linux systems configured are blocking the attacker's IP.
 **AR Scenario 3 - Make windows null route the attacker.**
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-.. note::
-  
-  `Currently Active Response <https://github.com/wazuh/wazuh/issues/2084>`_ only accepts `srcip`, `user` and `filename` as arguments for its scripts. Starting with Wazuh 3.8 Windows logs are collected by default using the `Windows Event Channel` which will provide information in a json format that uses different fields. So in order run an active response in Windows agents using `srcip` information, the configuration must be changed so events will be collected using EventLog.
-
-Configure Windows to collect `EventLog` messages by using centralized configuration, 
-edit `/var/ossec/etc/shared/default/agent.conf` in the Wazuh manager to add the 
-following:
-    .. code-block:: xml
-
-    <agent_config os="windows">
-      <localfile>
-        <location>Security</location>
-        <log_format>eventlog</log_format>
-      </localfile>
-    </agent_config>
-
-.. note::
-  
-  Alternatively this may be achieved through the Wazuh Kibana App by accesing the "Management" tab, from there the "Groups" dashboard and clicking on the pencil action icon for editing the configuration of the default group.
-
 Add an additional AR section to ``ossec.conf`` on wazuh-manager:
 
     .. code-block:: xml
@@ -314,13 +294,13 @@ Add an additional AR section to ``ossec.conf`` on wazuh-manager:
             <disabled>no</disabled>
             <command>win_route-null</command>
             <location>all</location>
-            <rules_id>30412</rules_id>
+            <rules_id>31166</rules_id>
             <timeout>300</timeout>
         </active-response>
 
-The Windows-specific **win_route-null** AR script creates a persistent null route on Windows 
-agent systems, preventing them from responding to any packets from the attacker.  Note that 
-packets are still received; only the replies are dropped.
+The Windows-specific **win_route-null** AR script creates a persistent null
+route on Windows agent systems, preventing them from responding to any packets
+from the attacker.  Note that packets are still received; only the replies are dropped.
 
 Restart the manager:
 
@@ -336,7 +316,9 @@ Restart the manager:
 
         # service wazuh-manager restart
 
-Run the same probe again to the web server.  Observe that the output of the Windows command line "route print /4" now shows a null route for the Elastic IP of linux-agent.  It will be in the "Persistent Routes:" section of the output.
+Run the same probe again to the web server.  Observe that the output of the 
+Windows command line `route print /4` now shows a null route for the IP of the
+attacker.  It will be in the "Persistent Routes:" section of the output.
 
     .. code-block:: console
 
@@ -353,21 +335,33 @@ Run the same probe again to the web server.  Observe that the output of the Wind
 **Use Kibana to review active response actions taken on all agents during this lab.**
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Search Kibana for "active_response" over a large enough time window to encompass this lab.  Observe firewall blocks and null routes
-being repeatedly applied and removed across all agents.
+Search Kibana for "active_response" over a large enough time window to encompass
+this lab.  Observe firewall blocks and null routes being repeatedly applied and
+removed across all agents.
 
-.. error::
-    There is an error specifically related to AR on Windows agents.  The intended behavior when the Wazuh agent is restarted on
-    a given system, is to cancel any stateful active responses that have not yet timed out.  This works on Linux systems but
-    restarting the Wazuh agent on Windows systems while an active response null routing block is in place, has the undesirable
-    effect of making the block permanent such that not even rebooting the Windows system will clear it out.
-    In that case it it necessary to clear the orphaned null route with a "route delete N.N.N.N" command where N.N.N.N is the
-    null routed IP.
+    +---------------------------------------------------------------------------+
+    | .. thumbnail:: ../images/learning-wazuh/labs/shellshock-2.png             |
+    |     :title: AR in action                                                  |
+    |     :align: center                                                        |
+    |     :width: 100%                                                          |
+    +---------------------------------------------------------------------------+
 
-We hope you enjoyed getting a taste of the Wazuh active response facility.  While blocking an attacking IP is probably the most
-popular use made of Wazuh AR, it is actually far more broadly useful than that.  In addition to countermeasures taken against
-attacking IPs or targeted account names, AR can also be used to take any kind of custom action in response to any kind of rule
-firing.
+.. note::
+    When the Wazuh agent is restarted on a given system, the intended behavior
+    to cancel any stateful active responses that have not yet timed out.
+    On Windows systems if the service is restarted externally (i.e. System reboot)
+    while an active response null routing block is in place, has the undesirable
+    effect of making the block permanent such that it will not be cleared 
+    automatically.  In that case it it necessary to clear the orphaned null route
+    with a `route  delete N.N.N.N` command where N.N.N.N is the null routed IP.
 
-- **Custom alerting**: Collect additional context and send a detailed custom email alert about a specific situation.
-- **Recovery actions**: Respond to certain error logs with automated action to fix the problem.
+We hope you enjoyed getting a taste of the Wazuh **Active Response** capability.
+While blocking an attacking IP is probably the most popular use made of Wazuh AR,
+it is far more broadly useful than that.  In addition to countermeasures taken 
+against attacking IPs or targeted account names, AR can also be used to take 
+any kind of custom action in response to any kind of rule firing.
+
+- **Custom alerting**: Collect additional context and send a detailed custom 
+  email alert about a specific situation.
+- **Recovery actions**: Respond to certain error logs with automated action to
+  fix the problem.
