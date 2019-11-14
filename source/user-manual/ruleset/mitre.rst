@@ -3,7 +3,7 @@
 .. _mitre:
 
 Enhancing with MITRE
-============
+====================
 
 This feature allows the user to customize the alert information to include specific information related to MITRE ATT&CK techniques. MITRE ATT&CK matrix stores all possible attacks that can be made and what to do to mitigate and detect them. This can be useful when an attack is detected through an alert and a user wants to know more about it.
 
@@ -16,7 +16,7 @@ Configuration example
 
 MITRE ATT&CK assigns each attack technique an ID, which can be consulted on this `link <https://attack.mitre.org>`_. These techniques are grouped by tactics (Defense Evasion, Privilege Escalation, etc.) although some of them belong to more than one tactic. 
 
-The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with rule 5712, that detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE ATT&CK technique to rule 5712.
+The ID `T1110 <https://attack.mitre.org/techniques/T1110/>`_ is related to the brute force attack. This technique fits in well with rule 5712, which detects a force brute attack and generates an alert. Below is an example of how to extend this MITRE ATT&CK technique to rule 5712.
 
 Add the following lines to /var/ossec/etc/rules/local_rule.xml:
 
@@ -107,10 +107,10 @@ You have to see an alert similar to this one:
     },
     "agent": {
       "id": "000",
-      "name": "agent000-host"
+      "name": "ubuntu"
     },
     "manager": {
-      "name": "manager-host"
+      "name": "ubuntu"
     },
     "id": "1571827523.33858990",
     "previous_output": "Jan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372\nJan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372\nJan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372\nJan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372\nJan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372\nJan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372\nJan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372",
