@@ -4,11 +4,9 @@ jQuery(function($) {
   * Copyright (C) 2019 Wazuh, Inc.
   */
 
-
-  const currentVersion = '3.11';
+  const currentVersion = '3.10';
   const versions = [
-    {name: '3.11 (current)', url: '/'+currentVersion},
-    {name: '3.10', url: '/3.10'},
+    {name: '3.10 (current)', url: '/'+currentVersion},
     {name: '3.9', url: '/3.9'},
     {name: '3.8', url: '/3.8'},
     {name: '3.7', url: '/3.7'},
@@ -191,10 +189,14 @@ jQuery(function($) {
       let found = false;
       if (listRedirections[i]['target'] !== undefined) {
         for (let j=0; j<versions.length-1; j++) {
-          if (verCurrent < versions[j] && verCurrent.length <= versions[j].length){
+          if (verCurrent < versions[j] && verCurrent.length <= versions[j].length) {
             verPrev = versions[j];
             verNext = verCurrent;
-          } else if (verCurrent > versions[j] || (verCurrent < versions[j] && verCurrent.length >= versions[j].length)) {
+          } else if (
+            verCurrent > versions[j]
+            ||
+            ( verCurrent < versions[j] && verCurrent.length >= versions[j].length )
+          ) {
             verPrev = verCurrent;
             verNext = versions[j];
           } else if (verCurrent == versions[j] && verCurrent.length == versions[j].length) {
