@@ -29,6 +29,3 @@ The Wazuh agent can be installed in the following Solaris versions.
     wazuh_agent_package_solaris10_sparc
     wazuh_agent_package_solaris11_intel
     wazuh_agent_package_solaris11_sparc
-
-
-
