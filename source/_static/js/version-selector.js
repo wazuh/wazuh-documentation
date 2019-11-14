@@ -189,10 +189,14 @@ jQuery(function($) {
       let found = false;
       if (listRedirections[i]['target'] !== undefined) {
         for (let j=0; j<versions.length-1; j++) {
-          if (verCurrent < versions[j] && verCurrent.length <= versions[j].length){
+          if (verCurrent < versions[j] && verCurrent.length <= versions[j].length) {
             verPrev = versions[j];
             verNext = verCurrent;
-          } else if (verCurrent > versions[j] || (verCurrent < versions[j] && verCurrent.length >= versions[j].length)) {
+          } else if (
+            verCurrent > versions[j]
+            ||
+            ( verCurrent < versions[j] && verCurrent.length >= versions[j].length )
+          ) {
             verPrev = verCurrent;
             verNext = versions[j];
           } else if (verCurrent == versions[j] && verCurrent.length == versions[j].length) {
