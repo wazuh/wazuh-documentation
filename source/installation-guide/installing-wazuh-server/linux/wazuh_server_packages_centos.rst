@@ -187,7 +187,7 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
 
     .. code-block:: console
 
-      # curl -sL https://deb.nodesource.com/setup_8.x | bash -
+      # curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 
     and then, install NodeJS:
 
