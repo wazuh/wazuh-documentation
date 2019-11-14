@@ -568,12 +568,12 @@ $(function() {
     let observerResults = null;
     let observerResultList = null;
     let observerResultText = null;
-		let i = 0;
+    let i = 0;
 
     /* Detects every result that is added to the list */
     const addedResult = function(mutationsList, observer) {
-			for ( i = 0; i< mutationsList.length-1; i++) {
-			 if (mutationsList[i].type === 'childList') {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'childList') {
           lastResult = $('ul.search li:last-child');
           splitURL = lastResult.children('a').prop('href').split('/');
           /* Checks the URL to mark the results found in excludedSearchFolders */
