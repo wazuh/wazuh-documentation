@@ -568,11 +568,12 @@ $(function() {
     let observerResults = null;
     let observerResultList = null;
     let observerResultText = null;
+		let i = 0;
 
     /* Detects every result that is added to the list */
     const addedResult = function(mutationsList, observer) {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
+			for ( i = 0; i< mutationsList.length-1; i++) {
+			 if (mutationsList[i].type === 'childList') {
           lastResult = $('ul.search li:last-child');
           splitURL = lastResult.children('a').prop('href').split('/');
           /* Checks the URL to mark the results found in excludedSearchFolders */
@@ -589,8 +590,8 @@ $(function() {
 
     /* Checking that the list of search results exists */
     const existsResultList = function(mutationsList, observer) {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList' && $(mutation.addedNodes[0]).hasClass('search') ) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search') ) {
           const ulSearch = $('ul.search');
 
           observerResults.disconnect();
@@ -605,8 +606,8 @@ $(function() {
 
     /* Replaces the result message */
     const changeResultText = function(mutationsList, observer) {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'attributes') {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'attributes') {
           observerResultText.disconnect();
           const totalResults = $('ul.search li').length;
           const excludedResults = $('ul.search li.excluded-search-result').length;
@@ -740,7 +741,7 @@ $(function() {
     if (find != null) {
       const dataArray = data.split('\n');
       let content = '';
-      dataArray.forEach((line) => {
+      dataArray.forEach(function(line) {
         line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
         line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
         content += line;
