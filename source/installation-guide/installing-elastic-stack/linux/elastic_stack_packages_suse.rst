@@ -100,7 +100,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # zip -d certs.zip "ca.key"
+          # zip -d /usr/share/elasticsearch/certs.zip "ca.key"
 
         This is the ``zip`` content:
 
@@ -302,7 +302,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # zip -d certs.zip "ca.key"
+          # zip -d /usr/share/elasticsearch/certs.zip "ca.key"
 
         This is the ``zip`` content:
 
