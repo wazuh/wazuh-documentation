@@ -178,7 +178,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         .. code-block:: console
 
             # mkdir /etc/filebeat/certs/ca -p
-            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/wazuh-manager/* /etc/wazuh-manager/certs/
+            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/wazuh-manager/* /etc/filebeat/certs/
             # chmod 770 -R /etc/filebeat/certs
 
         Note that if you changed the node names in step 3.1, you will have the folder with the name used there instead of ``wazuh-manager``.
