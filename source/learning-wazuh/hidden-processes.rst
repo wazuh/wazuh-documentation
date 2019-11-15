@@ -78,9 +78,20 @@ at which rootcheck commences its first scan for the sake of this lab.
         # lsmod | grep diamorphine
         # kill -63 509
         # lsmod | grep diamorphine
+
+    .. code-block:: none
+        :class: output
+
         diamorphine            13155  0
+
+    .. code-block:: console
+
         # kill -63 509
         # lsmod | grep diamorphine
+
+    .. code-block:: none
+        :class: output
+
         #
 
     In the case of Diamorphine, any attempt to send kill signal -63 to any process whether it exists or not, will toggle whether the Diamorphine kernel module hides itself.
@@ -90,9 +101,20 @@ at which rootcheck commences its first scan for the sake of this lab.
     .. code-block:: console
 
         # ps auxw | grep rsyslog | grep -v grep
+
+    .. code-block:: none
+        :class: output
+
         root       535  0.0  0.3 218744  3736 ?        Ssl  Dec07   0:00 /usr/sbin/rsyslogd -n
+
+    .. code-block:: console
+
         # kill -31 535
         # ps auxw | grep rsyslog | grep -v grep
+
+    .. code-block:: none
+        :class: output
+
         #
 
 9. Next configure linux-agent to run rootcheck scans every 5 minutes by replacing the entire <rootcheck> section in /var/ossec/etc/ossec.conf with the following:
@@ -137,7 +159,8 @@ at which rootcheck commences its first scan for the sake of this lab.
 
     You should see something like this shortly:
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
 
             2018/01/22 03:21:49 rootcheck: INFO: Starting rootcheck scan.
             2018/01/22 03:21:49 rootcheck: INFO: No rootcheck_files file configured.
@@ -160,7 +183,8 @@ at which rootcheck commences its first scan for the sake of this lab.
 
 11. Now switch back to the manager, and try to find alerts in /var/ossec/logs/alerts/alerts.log that looks something like this:
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
 
             ** Alert 1516591319.4517361: - ossec,rootcheck,
             2018 Jan 22 03:21:59 (linux-agent) any->rootcheck

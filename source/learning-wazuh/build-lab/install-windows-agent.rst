@@ -85,7 +85,8 @@ Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh
 
 2. Click View->View Logs.  You should find record of the agent successfully connecting to the Wazuh manager.
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2018/01/17 02:27:24 ossec-agent: INFO: (4102): Connected to the server (172.30.0.10:1514).
 
@@ -99,6 +100,9 @@ Switch over to your Wazuh Server SSH window and run these commands, looking for 
 
         [root@wazuh-manager ossec]# agent_control -l
 
+    .. code-block:: none
+        :class: output
+
         Wazuh agent_control. List of available agents:
         ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
         ID: 001, Name: linux-agent, IP: any, Active
@@ -111,6 +115,10 @@ Switch over to your Wazuh Server SSH window and run these commands, looking for 
     .. code-block:: console
 
         [root@wazuh-manager ~]# grep "agent connected"  /var/ossec/logs/alerts/alerts.log -B1 -A1
+
+    .. code-block:: none
+        :class: output
+
         2018 Jan 17 01:17:58 (linux-agent) any->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'linux-agent->any'.

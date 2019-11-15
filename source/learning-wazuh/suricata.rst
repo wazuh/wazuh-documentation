@@ -63,13 +63,15 @@ Trigger NIDS alerts on both agents and see the output
 
 3. Observe that the standard log is fairly simple with limited information.
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         22:02/09/2018-21:32:13.120749  [**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 82.165.177.154:80 -> 172.30.0.30:45504
 
 4. See how much more data is provided in the JSON output, and how field names are provided.
 
     .. code-block:: json
+        :class: output
 
         {
         "timestamp": "2018-02-09T21:32:13.120749+0000",
@@ -146,12 +148,17 @@ the shared configuration with their local configuration.
         .. code-block:: console
 
             # agent_groups -a -g linux -q
+
+        .. code-block:: none
+            :class: output
+
             Group 'linux' created.
 
 
     - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
 
             Available agents:
             ID: 001, Name: linux-agent, IP: any
@@ -163,8 +170,19 @@ the shared configuration with their local configuration.
         .. code-block:: console
 
             # agent_groups -a -i 001 -g linux -q
+
+        .. code-block:: none
+            :class: output
+
             Group 'linux' set to agent '001'.
+
+        .. code-block:: console
+
             # agent_groups -a -i 002 -g linux -q
+
+        .. code-block:: none
+            :class: output
+
             Group 'linux' set to agent '002'.
 
 2. Put our Suricata-specific Wazuh agent config into the shared agent.conf file belonging to the "linux" agent group.  The file is ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
@@ -183,6 +201,9 @@ the shared configuration with their local configuration.
     .. code-block:: console
 
         # verify-agent-conf
+
+    .. code-block:: none
+        :class: output
 
         verify-agent-conf: Verifying [/var/ossec/etc/shared/default/agent.conf]
         verify-agent-conf: OK
@@ -236,7 +257,8 @@ Observe how Wazuh decodes Suricata events
 
 2. Run ``ossec-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         **Phase 1: Completed pre-decoding.
             full event: '{"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}'

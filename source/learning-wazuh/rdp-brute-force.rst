@@ -76,7 +76,8 @@ Let's take a thorough look at how this log event is being decoded and what leads
 
 5. Look over the phase 2 output:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         **Phase 2: Completed decoding.
             decoder: 'windows'
@@ -168,7 +169,8 @@ Let's take a thorough look at how this log event is being decoded and what leads
 
 8. After the record has been decoded, it's time to start comparing it to the Wazuh rules.  See the "\*\*Rule debugging" section for that process.
 
-    .. code-block:: console
+    .. code-block:: none
+        :output:
 
         Trying rule: 6 - Generic template for all windows rules.
             *Rule 6 matched.
@@ -224,6 +226,9 @@ Let's take a thorough look at how this log event is being decoded and what leads
     .. code-block:: console
 
         # show-wazuh-rule 18100
+
+    .. code-block:: none
+        :class: output
 
         /var/ossec/ruleset/rules/0220-msauth_rules.xml:  <rule id="18100" level="0">
         /var/ossec/ruleset/rules/0220-msauth_rules.xml:    <category>windows</category>

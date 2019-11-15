@@ -44,13 +44,15 @@ In this lab you will raise the severity level of a specific rule in the Wazuh Ru
 
 8. Run ossec-logtest to test your customized rule and paste in this event that should trigger it:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         Jan 25 17:27:36 linux-agent sshd[7642]: Did not receive identification string from 138.68.149.171 port 55640
 
 9. Observe your customized alert level near the end of the output:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         **Phase 3: Completed filtering (rules).
             Rule id: '5706'

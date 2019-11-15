@@ -32,6 +32,10 @@ Turn on program call auditing on linux-agent
         # auditctl -R /etc/audit/rules.d/audit.rules
         ...
         # auditctl -l
+
+    .. code-block:: none
+        :class: output
+
         -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
         -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
 
@@ -44,8 +48,19 @@ Trigger a few audit events
     .. code-block:: console
 
         [root@linux-agent ~]# exit
+
+    .. code-block:: none
+        :class: output
+
         logout
+
+    .. code-block:: console
+
         [centos@linux-agent ~]$ ping -c1 8.8.4.4
+
+    .. code-block:: none
+        :class: output
+
         PING 8.8.4.4 (8.8.4.4) 56(84) bytes of data.
         64 bytes from 8.8.4.4: icmp_seq=1 ttl=51 time=1.09 ms
 
@@ -58,6 +73,10 @@ Trigger a few audit events
     .. code-block:: console
 
         [centos@linux-agent ~]$ sudo cat /etc/shadow
+
+    .. code-block:: none
+        :class: output
+
         root:!!:17497:0:99999:7:::
         bin:*:17110:0:99999:7:::
         ...
@@ -67,8 +86,19 @@ Trigger a few audit events
     .. code-block:: console
 
         [centos@linux-agent ~]$ sudo su -
+
+    .. code-block:: none
+        :class: output
+
         Last login: Fri Feb  9 10:08:57 UTC 2018 on pts/0
+
+    .. code-block:: console
+
         [root@linux-agent ~]# df
+
+    .. code-block:: none
+        :class: output
+
         Filesystem     1K-blocks    Used Available Use% Mounted on
         /dev/xvda1       8377344 1616824   6760520  20% /
         devtmpfs          486604       0    486604   0% /dev
@@ -171,6 +201,10 @@ a list of commands that Wazuh should give us a special alert about when they are
     .. code-block:: console
 
         [root@wazuh-manager lists]# ossec-makelists
+
+    .. code-block:: none
+        :class: output
+
         * File etc/lists/audit-keys.cdb does not need to be compiled
         * File etc/lists/suspicious-programs.cdb needs to be updated
         * File etc/lists/amazon/aws-sources.cdb does not need to be compiled
@@ -346,6 +380,7 @@ Observe the order in which our child rules are evaluated
 4. Carefully note the order in which child rules of "80792 - Audit: Command" were evaluated.
 
     .. code-block:: console
+        :class: output
 
         Trying rule: 80792 - Audit: Command: $(audit.exe)
         *Rule 80792 matched.

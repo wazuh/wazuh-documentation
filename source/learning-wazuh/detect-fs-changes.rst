@@ -63,7 +63,8 @@ Close and save your modified config file.  Then restart Wazuh on windows-agent (
 In Wazuh agent Manager, click on View -> View Logs. You should see a couple of entries like this, accounting for
 the new syscheck monitoring of your two test directories:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2018/01/22 23:35:04 ossec-agent: INFO: Monitoring directory: 'c:/apple', with options perm | size | owner | group | md5sum | sha1sum | realtime | report_changes | mtime | inode.
         2018/01/22 23:35:04 ossec-agent: INFO: Monitoring directory: 'c:/orange', with options perm | size | owner | group | md5sum | sha1sum | mtime | inode.
@@ -128,6 +129,10 @@ On the manager in the ``/var/ossec/queue/db/`` directory we see files like ``000
 .. code-block:: console
 
     # sqlite3 /var/ossec/queue/db/000.db ".tables"
+
+.. code-block:: none
+    :class: output
+
     ciscat_results  pm_event        sys_netaddr     sys_osinfo      sys_programs
     fim_entry       scan_info       sys_netiface    sys_ports
     metadata        sys_hwinfo      sys_netproto    sys_processes
@@ -137,6 +142,10 @@ The following command shows the schema of the ``fim_entry`` table where the mana
 .. code-block:: console
 
     # sqlite3 -header /var/ossec/queue/db/000.db "PRAGMA table_info(fim_entry);"
+
+.. code-block:: none
+  :class: output
+  
 	cid|name|type|notnull|dflt_value|pk
 	0|file|TEXT|0||1
 	1|type|TEXT|1||0
