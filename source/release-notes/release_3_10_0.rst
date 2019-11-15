@@ -74,9 +74,13 @@ Wazuh API
 
 - A new API request has been created to get the full summary of agents:
 
-  .. code-block:: js
+  .. code-block:: none
 
       GET /summary/agents
+
+  .. code-block:: js
+      :class: output
+
       {
       "error": 0,
       "data": {

@@ -27,6 +27,7 @@ This integration is achieved through the use of the new `Command wodle`.  This m
 Below is an example of results where a vulnerability is identified:
 
 .. code-block:: console
+   :class: output
    :emphasize-lines: 3
 
    ** Alert 1513880084.806869: - vuls,
@@ -61,6 +62,7 @@ The new CIS-CAT module was developed for evaluating CIS benchmarks in Wazuh agen
 With the CIS-CAT wodle assessments can be scheduled to run periodically, sending reports to the manager and displaying results for each check.  A report overview is also displayed as in the example below:
 
 .. code-block:: console
+   :class: output
    :emphasize-lines: 3
 
    ** Alert 1513886205.7639319: - ciscat,

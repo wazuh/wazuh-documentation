@@ -35,6 +35,9 @@ For instance: ::
 
     curl -u foo:bar -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "http://localhost:55000/active-response/001?pretty"
 
+.. code-block:: js
+    :class: output
+    
     {
       "error": 0,
       "message": "Command sent."
