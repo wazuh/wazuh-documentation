@@ -170,7 +170,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
 8. After the record has been decoded, it's time to start comparing it to the Wazuh rules.  See the "\*\*Rule debugging" section for that process.
 
     .. code-block:: none
-        :output:
+        :class: output
 
         Trying rule: 6 - Generic template for all windows rules.
             *Rule 6 matched.
