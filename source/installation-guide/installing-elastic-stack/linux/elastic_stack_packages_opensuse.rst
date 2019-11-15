@@ -6,7 +6,7 @@
 
 
 OpenSUSE
-======
+========
 
 To install the Elastic Stack components on OpenSUSE 42 or higher versions, you have to install the relevant packages after you've added the repositories.
 
