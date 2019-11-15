@@ -192,11 +192,15 @@ NGINX SSL proxy for Splunk (Debian-based distributions)
 
         # mkdir -p /etc/ssl/certs /etc/ssl/private
         # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/splunk-access.key -out /etc/ssl/certs/splunk-access.pem
-          Generating a 2048 bit RSA private key
-          .............+++
-          ..+++
-          writing new private key to '/etc/ssl/private/splunk-access.key'
-          -----
+
+      .. code-block:: console
+        :class: output
+
+        Generating a 2048 bit RSA private key
+        .............+++
+        ..+++
+        writing new private key to '/etc/ssl/private/splunk-access.key'
+        -----
 
 3. Configure NGINX as an HTTPS reverse proxy to Splunk:
 
