@@ -8,7 +8,7 @@
 CentOS
 ======
 
-To install the Elastic Stack components on CentOS 7 or higher versions, you have to install the relevant packages after you've added the repositories.
+To install the Elastic Stack components on CentOS 6 or higher versions, you have to install the relevant packages after you've added the repositories.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
