@@ -199,6 +199,14 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
 
       # curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
+    .. note::
+
+        If you are using **Ubuntu 12.04** you must install NodeJS 6 using the command below:
+
+        .. code-block:: console
+
+          # curl -sL https://deb.nodesource.com/setup_6.x | bash -
+
     and then, install NodeJS:
 
     .. code-block:: console
