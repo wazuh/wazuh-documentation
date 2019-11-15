@@ -54,8 +54,8 @@ Installing Wazuh manager
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh manager:
 
   .. code-block:: none
-   :class: output
-  
+    :class: output
+
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
 .. note::
