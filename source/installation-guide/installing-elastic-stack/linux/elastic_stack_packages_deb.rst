@@ -76,6 +76,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
       Replace ``<elasticsearch_ip>`` and ``<node_name>`` with your desired values (host IP and host name). For ``<elasticsearch_ip>`` the value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
 
+    .. note:: If your using Debian 7, you will need to change the ulimit by ``ulimit -u 4096``. In addition to this, the setting ``bootstrap.system_call_filter`` must be added and set to ``false`` in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file.
+
     3. Configure Elastic Stack to use encrypted connections:
 
       3.1. We need to create all certificates separated by host. After you’ve created them, you will have to distribute each certificate to the host on which the corresponding component is installed. First, we will create the specification file ``/usr/share/elasticsearch/instances.yml``:
