@@ -85,7 +85,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         .. code-block:: yaml
 
           instances:
-          - name: "wazuh-manager"
+          - name: "filebeat"
             ip:
               - "10.0.0.2"
           - name: "elasticsearch"
@@ -120,9 +120,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           certs.zip
           |-- ca
               |-- ca.crt
-          |-- wazuh-manager
-          |   |-- wazuh-manager.crt
-          |   |-- wazuh-manager.key
+          |-- filebeat
+          |   |-- filebeat.crt
+          |   |-- filebeat.key
           |-- elasticsearch
           |   |-- elasticsearch.crt
           |   |-- elasticsearch.key
@@ -189,10 +189,10 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         .. code-block:: console
 
             # mkdir /etc/filebeat/certs/ca -p
-            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/wazuh-manager/* /etc/filebeat/certs/
+            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/filebeat/* /etc/filebeat/certs/
             # chmod 770 -R /etc/filebeat/certs
 
-        Note that if you changed the node names in step 3.1, you will have the folder with the name used there instead of ``wazuh-manager``.
+        Note that if you changed the node names in step 3.1, you will have the folder with the name used there instead of ``filebeat``.
 
       6.4 Setting up credentials for Filebeat and Elasticsearch output. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
 
@@ -285,7 +285,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         .. code-block:: yaml
 
           instances:
-          - name: "wazuh-manager"
+          - name: "filebeat"
             ip:
               - "10.0.0.2"
           - name: "elasticsearch-node1"
@@ -322,9 +322,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
           certs.zip
           |-- ca
               |-- ca.crt
-          |-- wazuh-manager
-          |   |-- wazuh-manager.crt
-          |   |-- wazuh-manager.key
+          |-- filebeat
+          |   |-- filebeat.crt
+          |   |-- filebeat.key
           |-- elasticsearch-node1
           |   |-- elasticsearch-node1.crt
           |   |-- elasticsearch-node1.key
@@ -438,10 +438,10 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
         .. code-block:: console
 
             # mkdir /etc/filebeat/certs/ca -p
-            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/wazuh-manager/* /etc/filebeat/certs/
+            # cp -R /usr/share/filebeat/ca/ /usr/share/filebeat/filebeat/* /etc/filebeat/certs/
             # chmod -R 770 /etc/filebeat/certs
 
-        You will need to replace ``wazuh-manager`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
+        You will need to replace ``filebeat`` by the name that you provided to the node in the `instances.yml` file (step 4.1).
 
       9.4 Setting up credentials for Filebeat. Change the following line, with the previously generated Elasticsearch password, in the file ``/etc/filebeat/filebeat.yml``.
 
