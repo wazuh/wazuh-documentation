@@ -81,7 +81,7 @@ jQuery(function($) {
     let href;
     let tooltip;
     let ver;
-    const versionsClean = versions.map(function(i) {
+    let versionsClean = versions.map(function(i) {
       return (i.name).split(' (current)')[0];
     });
 
@@ -108,32 +108,18 @@ jQuery(function($) {
     }
 
     /* Get the redirection history */
-    let redirHistory = getRedirectionHistory(page, newUrls, redirections, removedUrls, versionsClean, path);
-    let emptyUrls = 0;
-    for ( release in redirHistory ) {
-      if (!Object.prototype.hasOwnProperty.call(redirHistory, release) || redirHistory[release].length == 0 ) {
-        /* Check for empty URLs */
-        emptyUrls++;
-      }
-    }
-
-    if ( emptyUrls == Object.keys(redirHistory).length ) {
-      redirHistory = getRedirectionHistory(page.split('#')[0], newUrls, redirections, removedUrls, versionsClean, path);
-    }
-
+    const redirHistory = getRedirectionHistory(versionsClean, path, page, newUrls, redirections, removedUrls);
+    versionsClean = versionsClean.reverse();
     for (let i = 0; i < versions.length; i++) {
       href = '';
       tooltip = '';
       ver = versionsClean[i];
-
-      if ( redirHistory[ver].length ) {
+      if ( redirHistory[ver] != null && redirHistory[ver].length ) {
         href = '/'+ver+redirHistory[ver]+param;
       } else {
         tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
       }
-
       ele += '<li><a href="' + href + '" '+ tooltip +'>'+versions[i].name+'</a></li>';
-
       if (ver == currentVersion) {
         $('.no-latest-notice .link-latest').attr('href', href);
       }
@@ -162,182 +148,6 @@ jQuery(function($) {
   }
 
   /**
-   * Get all the redirections concerning this page through the different releases
-   * @param {string} page Partial URL of the current page
-   * @param {array} listNewUrls Contains the list of all new pages (partial URLs) in each release
-   * @param {array} listRedirections Contains the list of all redirections
-   * @param {array} listRemovedUrls Contains the list of all pages (partial URLs) removed from each release
-   * @param {array} versions Simple list of release versions order from the oldest to the newest one
-   * @param {string} verCurrent Current release number
-   * @return {array} Returns a list with the correct redirection of the current page for each release
-   */
-  function getRedirectionHistory(page, listNewUrls, listRedirections, listRemovedUrls, versions, verCurrent) {
-    let currentPage = page;
-    let redirectionsInvolved;
-    let firstSeenIn = getRelease(page, listNewUrls);
-    let removedIn;
-    let redirectionsTemp = [];
-    const keyPoints = {};
-    const stackPages = [];
-    const checkedPages = [];
-    let lastPageFilled = '';
-    const redirectionHistory = {};
-    let relpair = [];
-
-    keyPoints[firstSeenIn] = page;
-    for ( let i = 0; i< listRedirections.length; i++) {
-      let found = false;
-      if (listRedirections[i]['target'] !== undefined) {
-        for (let j=0; j<versions.length-1; j++) {
-          if (verCurrent < versions[j] && verCurrent.length <= versions[j].length) {
-            verPrev = versions[j];
-            verNext = verCurrent;
-          } else if (
-            verCurrent > versions[j]
-            ||
-            ( verCurrent < versions[j] && verCurrent.length >= versions[j].length )
-          ) {
-            verPrev = verCurrent;
-            verNext = versions[j];
-          } else if (verCurrent == versions[j] && verCurrent.length == versions[j].length) {
-            verPrev = verCurrent;
-            verNext = versions[j+1];
-          }
-          if ( listRedirections[i]['target'].includes(verPrev+'=>'+verNext) ) {
-            found = true;
-          }
-        }
-      }
-      if (found) {
-        redirectionsTemp.push(listRedirections[i]);
-      }
-    }
-
-    /* Get key changes in history */
-    stackPages.push(currentPage);
-    while ( stackPages.length ) {
-      currentPage = stackPages.pop();
-      firstSeenIn = getRelease(currentPage, listNewUrls);
-
-      redirectionsInvolved = findRedirectionByPage(currentPage, redirectionsTemp);
-      for ( let i = 0; i< redirectionsInvolved.length; i++) {
-        relpair = [];
-
-        for (release in redirectionsInvolved[i]) {
-          if (Object.prototype.hasOwnProperty.call(redirectionsInvolved[i], release)) {
-            if ( release != 'target' ) {
-              relpair.push(release);
-              if ( !(release in Object.keys(keyPoints)) ) {
-                keyPoints[release] = redirectionsInvolved[i][release];
-                if ( redirectionsInvolved[i][release] != currentPage &&
-                  stackPages.indexOf(redirectionsInvolved[i][release]) == -1 &&
-                  checkedPages.indexOf(redirectionsInvolved[i][release]) == -1 ) {
-                  stackPages.push(redirectionsInvolved[i][release]);
-                }
-              }
-            }
-          }
-        }
-
-        tempArray = [];
-        if ( relpair.length ) {
-          for ( let i = 0; i< redirectionsTemp.length; i++) {
-            if ( !(redirectionsTemp[i].hasOwnProperty(relpair[0]) && redirectionsTemp[i].hasOwnProperty(relpair[1])) ) {
-              tempArray.push(redirectionsTemp[i]);
-            }
-          }
-          redirectionsTemp = tempArray;
-        }
-      }
-      if ( checkedPages.indexOf(currentPage) == -1 ) {
-        checkedPages.push(currentPage);
-      }
-    }
-
-    /* Know the the release minor on the array keyPoints */
-    let releaseMinor = versions[0];
-    for (rel in versions) {
-      if (Object.prototype.hasOwnProperty.call(versions, rel)) {
-        for (rel2 in keyPoints) {
-          if (Object.prototype.hasOwnProperty.call(keyPoints, rel2)) {
-            if (versions[rel] == rel2) {
-              releaseMinor = versions[rel];
-            }
-          }
-        }
-      }
-    }
-
-    /* Fill the remaining releases in the order they were released */
-    for ( let i = versions.length-1; i >= 0; i--) {
-      if ( keyPoints[versions[i]] != undefined && keyPoints[versions[i]] != lastPageFilled ) {
-        lastPageFilled = keyPoints[versions[i]];
-        removedIn = getRelease(lastPageFilled, listRemovedUrls);
-      } else {
-        if (
-          releaseMinor > versions[i] && releaseMinor.length == versions[i].length
-          &&
-          firstSeenIn <= versions[i] && firstSeenIn.length == versions[i].length
-        ) {
-          lastPageFilled = keyPoints[releaseMinor];
-        }
-      }
-      if ( removedIn == versions[i] ) {
-        lastPageFilled = '';
-      }
-      redirectionHistory[versions[i]] = lastPageFilled;
-    }
-    return redirectionHistory;
-  }
-
-  /** Auxiliary functions for version selector redirection **/
-
-  /**
-   * Gets the release somehow related to a URL (the relation is stablished by the array)
-   * @param {string} url Partial URL of the page whose release is required
-   * @param {array} urlArray Contains the list of pages related to each release
-   *  (new or removed URLs depending on the array)
-   * @return {array} Returns the release related to url depending on urlArray
-   */
-  function getRelease( url, urlArray ) {
-    for ( release in urlArray) {
-      if ( urlArray[release].indexOf(url) > -1 ) {
-        return release;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Gets the first redirection in which a given url paticipates.
-   * @param {string} url Partial URL of the page possibly participating in a redirection
-   * @param {array} redirecttionArray Contains the list of all redirections
-   * @return {array} The first redirection in which a given url paticipates.
-   *  Empty array if no redirecion is found for the given url
-   */
-  function findRedirectionByPage(url, redirecttionArray) {
-    const result = [];
-    let releaseStep = '';
-    /* For every redirection registered in redirecttionArray */
-    for ( let i = 0; i< redirecttionArray.length; i++) {
-      /* Check releases involved in the redirection (2 releases: origin and target) */
-      for ( release in redirecttionArray[i] ) {
-        if ( release != 'target' ) {
-          if ( redirecttionArray[i][release] == url ) {
-            for ( target in redirecttionArray[i]['target'] ) {
-              if (redirecttionArray[i]['target'][target].includes(release+'=>') && release > releaseStep) {
-                releaseStep = release;
-                result.push(redirecttionArray[i]);
-              }
-            }
-          }
-        }
-      }
-    }
-    return result;
-  }
-
-  /**
    * Normalize a given URL so it comply with a standard format
    * @param {string} originalUrl Partial URL of the page that requires normalization
    * @return {string} The standard (valid) version of the original URL
@@ -362,5 +172,333 @@ jQuery(function($) {
     } else {
       return originalUrl;
     }
+  }
+
+  /**
+   * Get the redirections history about a URL
+   * @param {array} versions
+   * @param {string} verCurrent
+   * @param {string} page
+   * @param {array} newUrls
+   * @param {array} redirections
+   * @param {array} removedUrls
+   * @return {array}
+   */
+  function getRedirectionHistory(versions, verCurrent, page, newUrls, redirections, removedUrls) {
+    const rtn = [];
+    const history = [];
+    history[verCurrent] = page;
+    let cellTemp = [];
+    versions = versions.reverse();
+    const verCurrentNum = getReleaseNum(verCurrent, versions);
+    let direction = 'toBoth';
+    if (verCurrentNum == versions.length) {
+      direction = 'toBottom';
+    }
+    if (verCurrentNum == 0) {
+      direction = 'toTop';
+    }
+
+    cellTemp.push({
+      'page': page,
+      'version': verCurrent,
+      'versionNum': verCurrentNum,
+      'direction': direction,
+    });
+
+    let count = 0;
+    while (cellTemp.length) {
+      const analyzeUrl = cellTemp.pop();
+      const infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
+      const logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      while (logic.length) {
+        const forLogic = logic.pop();
+        const p = forLogic['url'];
+        const v = forLogic['release'];
+        const d = forLogic['direction'];
+        const vn = getReleaseNum(forLogic['release'], versions);
+        const urlNew = {
+          'page': p,
+          'version': v,
+          'versionNum': vn,
+          'direction': d,
+        };
+        cellTemp.push(urlNew);
+        history[v] = p;
+      }
+      if (count >= 1000) {
+        cellTemp = [];
+        return false;
+      }
+      count++;
+    }
+
+    history1 = fillUrls('toBottom', history, verCurrentNum, versions);
+    history2 = fillUrls('toTop', history, verCurrentNum, versions);
+
+    for (x in history1) {
+      if ({}.hasOwnProperty.call(history1, x)) {
+        rtn[x] = history1[x];
+      }
+    }
+    for (x in history2) {
+      if ({}.hasOwnProperty.call(history2, x)) {
+        rtn[x] = history2[x];
+      }
+    }
+
+    const pageCreated = getInfoNewsUrl(rtn[versions[0]], newUrls);
+    if (pageCreated !== false) {
+      const pageCreatedNum = getReleaseNum(pageCreated['release'], versions);
+      for (r in rtn) {
+        if ({}.hasOwnProperty.call(rtn, r)) {
+          const rNum = getReleaseNum(r, versions);
+          if (parseInt(rNum) < parseInt(pageCreatedNum)) {
+            delete rtn[r];
+          }
+        }
+      }
+    }
+
+    const pageRemoved = getInfoRemovedUrl(rtn[versions[versions.length-1]], removedUrls);
+    if (pageRemoved !== false) {
+      const pageRemovedNum = getReleaseNum(pageRemoved['release'], versions);
+      for (r in rtn) {
+        if ({}.hasOwnProperty.call(rtn, r)) {
+          const rNum = getReleaseNum(r, versions);
+          if (parseInt(rNum) >= parseInt(pageRemovedNum)) {
+            delete rtn[r];
+          }
+        }
+      }
+    }
+
+    return rtn;
+  }
+
+  /**
+   * Get the release key number
+   * @param {string} key
+   * @param {array} versions
+   * @return {number}
+   */
+  function getReleaseNum(key, versions) {
+    let verKey = -1;
+    for (i in versions) {
+      if (key == versions[i]) {
+        verKey = i;
+      }
+    }
+    return verKey;
+  }
+
+  /**
+   * Return redirections about a URL
+   * @param {string} page
+   * @param {array} redirections
+   * @return {array}
+   */
+  function getInfoRedirectUrl(page, redirections) {
+    const redirectionsTemp = [];
+    for (forId in redirections) {
+      if ({}.hasOwnProperty.call(redirections, forId)) {
+        for (forRelease in redirections[forId]) {
+          if (forRelease != 'target') {
+            if (page == redirections[forId][forRelease]) {
+              redirectionsTemp.push(redirections[forId]);
+            }
+          }
+        }
+      }
+    }
+    return redirectionsTemp;
+  }
+
+  /**
+   * Return the release when a URL is created
+   * @param {string} page
+   * @param {array} newUrls
+   * @return {array|boolean}
+   */
+  function getInfoNewsUrl(page, newUrls) {
+    let newUrlsTemp = false;
+    for (forRelease in newUrls) {
+      if ({}.hasOwnProperty.call(newUrls, forRelease)) {
+        for (forUrl in newUrls[forRelease]) {
+          if (page == newUrls[forRelease][forUrl]) {
+            newUrlsTemp = [];
+            newUrlsTemp['release'] = forRelease;
+            newUrlsTemp['url'] = newUrls[forRelease][forUrl];
+          }
+        }
+      }
+    }
+    return newUrlsTemp;
+  }
+
+  /**
+   * Return the release when a URL is removed
+   * @param {string} page
+   * @param {array} removedUrls
+   * @return {array|boolean}
+   */
+  function getInfoRemovedUrl(page, removedUrls) {
+    let removedUrlsTemp = false;
+    for (forRelease in removedUrls) {
+      if ({}.hasOwnProperty.call(removedUrls, forRelease)) {
+        for (forUrl in removedUrls[forRelease]) {
+          if (page == removedUrls[forRelease][forUrl]) {
+            removedUrlsTemp = [];
+            removedUrlsTemp['release'] = forRelease;
+            removedUrlsTemp['url'] = removedUrls[forRelease][forUrl];
+          }
+        }
+      }
+    }
+    return removedUrlsTemp;
+  }
+
+  /**
+   * Get the logic of the redirects
+   * @param {array} analyzeUrl
+   * @param {array} infoUrl
+   * @param {array} versions
+   * @return {array}
+   */
+  function getLogicRedirects(analyzeUrl, infoUrl, versions) {
+    const relatedUrl = [];
+    const infoUrlRedirects = infoUrl;
+    while (infoUrlRedirects.length) {
+      const redirect = infoUrlRedirects.pop();
+      for (forTarget in redirect['target']) {
+        if ({}.hasOwnProperty.call(redirect['target'], forTarget)) {
+          const target = redirect['target'][forTarget].split('=>');
+          const originNum = parseInt(getReleaseNum(target[0], versions));
+          const targetNum = parseInt(getReleaseNum(target[1], versions));
+          if (analyzeUrl['page'] == redirect[target[0]]) {
+            /* To top */
+            if (
+              analyzeUrl['direction'] != 'toBottom'
+              &&
+              originNum < targetNum
+              &&
+              parseInt(analyzeUrl['versionNum']) <= originNum
+            ) {
+              relatedUrl.push({
+                'release': target[1],
+                'direction': 'toTop',
+                'url': redirect[target[1]],
+              });
+            }
+            /* To bottom */
+            if (
+              analyzeUrl['direction'] != 'toTop'
+              &&
+              originNum > targetNum
+              &&
+              parseInt(analyzeUrl['versionNum']) >= originNum
+            ) {
+              relatedUrl.push({
+                'release': target[1],
+                'direction': 'toBottom',
+                'url': redirect[target[1]],
+              });
+            }
+          }
+        }
+      }
+    }
+    return relatedUrl;
+  }
+
+  /**
+   * Find the all the URLs
+   * @param {string} direction
+   * @param {array} history
+   * @param {number} verCurrentNum
+   * @param {array} versions
+   * @return {array}
+   */
+  function fillUrls(direction, history, verCurrentNum, versions) {
+    const historyTemp = [];
+    for (forVersions in versions) {
+      if ({}.hasOwnProperty.call(versions, forVersions)) {
+        forVersions = parseInt(forVersions);
+
+        if (direction == 'toBottom') {
+          if (forVersions < verCurrentNum) {
+            if (history[versions[forVersions]] == null) {
+              if (forVersions != versions.length-1) {
+                const next = findNextUrl(forVersions, versions, history);
+                if (next != -1) {
+                  historyTemp[versions[forVersions]] = history[versions[next]];
+                }
+              }
+            } else {
+              historyTemp[versions[forVersions]] = history[versions[forVersions]];
+            }
+          }
+        }
+        if (direction == 'toTop') {
+          if (forVersions >= verCurrentNum) {
+            if (history[versions[forVersions]] == null) {
+              if (forVersions != 0) {
+                const prev = findPrevUrl(forVersions, versions, historyTemp);
+                if (prev != -1) {
+                  historyTemp[versions[forVersions]] = historyTemp[versions[prev]];
+                }
+              }
+            } else {
+              historyTemp[versions[forVersions]] = history[versions[forVersions]];
+            }
+          }
+        }
+      }
+    }
+    return historyTemp;
+  }
+
+  /**
+   * Find the following URL
+   * @param {number} num
+   * @param {number} versions
+   * @param {number} history
+   * @return {number}
+   */
+  function findNextUrl(num, versions, history) {
+    let found = -1;
+    for (i in versions) {
+      if ({}.hasOwnProperty.call(versions, i)) {
+        i = parseInt(i);
+        if (i > num) {
+          if (history[versions[i]] != null && found == -1) {
+            found = i;
+          }
+        }
+      }
+    }
+    return found;
+  }
+
+  /**
+   * Find the previous URL
+   * @param {number} num
+   * @param {number} versions
+   * @param {number} historyTemp
+   * @return {number}
+   */
+  function findPrevUrl(num, versions, historyTemp) {
+    let found = -1;
+    for (i in versions) {
+      if ({}.hasOwnProperty.call(versions, i)) {
+        i = parseInt(i);
+        if (i >= num) {
+          if (historyTemp[versions[i-1]] != null && found == -1) {
+            found = i-1;
+          }
+        }
+      }
+    }
+    return found;
   }
 });
