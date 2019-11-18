@@ -17,6 +17,9 @@ a) On DEB or RPM based **Linux systems**, you can easily rely on the packages ma
 
       # /var/ossec/bin/manage_agents -V
 
+  .. code-block:: none
+      :class: output
+      
           Wazuh v2.0 - Wazuh Inc.
 
           This program is free software; you can redistribute it and/or modify
