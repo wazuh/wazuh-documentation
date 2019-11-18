@@ -10,6 +10,10 @@ For example, the following snippet shows the connected nodes in the cluster:
 .. code-block:: console
 
     # /var/ossec/bin/cluster_control -l
+
+.. code-block:: none
+    :class: output
+
     NAME      TYPE    VERSION  ADDRESS
     worker-1  worker  3.10.2    172.17.0.101
     worker-2  worker  3.10.2    172.17.0.102
@@ -20,6 +24,10 @@ This information can also be obtained using the Restful API:
 .. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/cluster/nodes?pretty"
+
+.. code-block:: none
+    :class: output
+
     {
        "error": 0,
        "data": {
