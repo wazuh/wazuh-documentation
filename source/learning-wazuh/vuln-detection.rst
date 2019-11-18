@@ -143,7 +143,7 @@ fields for viewing like below:
 
     +---------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png          |
-    |     :title: flood                                                         |
+    |     :title: Found Vulnerabilities                                         |
     |     :align: center                                                        |
     |     :width: 100%                                                          |
     +---------------------------------------------------------------------------+
@@ -152,7 +152,7 @@ Expand one of the records to see all the information available:
 
     +---------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png               |
-    |     :title: flood                                                         |
+    |     :title: Vulnerability event                                           |
     |     :align: center                                                        |
     |     :width: 100%                                                          |
     +---------------------------------------------------------------------------+
@@ -163,8 +163,9 @@ well as the ability to create visualizations and filtering search results in Kib
 
 .. note::
 
-   The field ``data.vulnerability.state`` indicates that the vulnerability has
-   been fixed in future versions of the software but is still present in the version
+   When the field ``data.vulnerability.state`` has the value "Fixed", this
+   indicates that the vulnerability has been corrected in future versions of
+   the software. However the vulnerability is still present in the version
    installed in your system.
 
 Look deeper with the Wazuh API:
@@ -255,62 +256,84 @@ hardware and operating system data is also tracked.
     }
 
 
-4. You can also query the software inventory data in many ways.  Let's list the
-   versions of wget on all of our Linux systems:
+4. You can also use the experimental capabilities of the API to list information
+   of all agents in the environment. In order to do so it is necessary to enable
+   this capability by editing the API's configuration file:
 
   .. code-block:: console
 
-    # curl -u foo:bar -k -X GET "http://localhost:55000/experimental/syscollector/packages?pretty&search=wget"
+     sed -i 's/config.experimental_features  = false/config.experimental_features  = true/g' /var/ossec/api/configuration/config.js
+
+5. Restart the Wazuh API service:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-api
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-api restart
+
+
+6. Let's list the versions of curl on all of our Linux systems:
+
+  .. code-block:: console
+
+    # curl -u foo:bar -k -X GET "http://localhost:55000/experimental/syscollector/packages?name=curl&pretty"
 
   The results should look like this:
 
   .. code-block:: json
 
-    {
-      "error": 0,
-      "data": {
-          "totalItems": 3,
-          "items": [
-            {
-                "scan_id": 1828761440,
-                "vendor": "CentOS",
-                "description": "A utility for retrieving files using the HTTP or FTP protocols",
-                "format": "rpm",
-                "scan_time": "2018/02/23 00:55:34",
-                "agent_id": "000",
-                "version": "1.14-15.el7_4.1",
-                "architecture": "x86_64",
-                "name": "wget"
-            },
-            {
-                "scan_id": 302583356,
-                "vendor": "CentOS",
-                "description": "A utility for retrieving files using the HTTP or FTP protocols",
-                "format": "rpm",
-                "scan_time": "2018/02/23 01:11:23",
-                "agent_id": "001",
-                "version": "1.14-15.el7_4.1",
-                "architecture": "x86_64",
-                "name": "wget"
-            },
-            {
-                "scan_id": 1797197868,
-                "vendor": "CentOS",
-                "description": "A utility for retrieving files using the HTTP or FTP protocols",
-                "format": "rpm",
-                "scan_time": "2018/02/23 01:12:21",
-                "agent_id": "002",
-                "version": "1.14-15.el7_4.1",
-                "architecture": "x86_64",
-                "name": "wget"
-            }
-          ]
+      {
+         "error": 0,
+         "data": {
+            "items": [
+               {
+                  "scan": {
+                     "id": 1079269475,
+                     "time": "2019/11/18 16:55:30"
+                  },
+                  "size": 527,
+                  "architecture": "x86_64",
+                  "format": "rpm",
+                  "vendor": "CentOS",
+                  "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                  "install_time": "2019/06/01 17:14:25",
+                  "version": "7.29.0-51.el7",
+                  "name": "curl",
+                  "section": "Applications/Internet",
+                  "agent_id": "000"
+               },
+               {
+                  "scan": {
+                     "id": 462044543,
+                     "time": "2019/11/18 16:56:18"
+                  },
+                  "size": 527,
+                  "architecture": "x86_64",
+                  "format": "rpm",
+                  "vendor": "CentOS",
+                  "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                  "install_time": "2019/06/01 17:14:25",
+                  "version": "7.29.0-51.el7",
+                  "name": "curl",
+                  "section": "Applications/Internet",
+                  "agent_id": "001"
+               }
+            ],
+            "totalItems": 2
+         }
       }
-    }
+
 
 .. note::
   Take time to read the online documentation about the Wazuh API.  It is a
-  powerful facility that puts all sorts of data, configuration details, and
+  powerful utility that puts all sorts of data, configuration details, and
   state information at your fingertips once you know how to ask for it.
 
 
@@ -331,9 +354,13 @@ the ``syscollector`` scan results for each agent.
 
   .. code-block:: console
 
-    fim_entry      metadata       sys_netaddr    sys_ports
-    fim_event      pm_event       sys_netiface   sys_processes
-    fim_file       sys_hwinfo     sys_osinfo     sys_programs
+    ciscat_results        sca_policy            sys_netproto
+    fim_entry             sca_scan_info         sys_osinfo
+    metadata              scan_info             sys_ports
+    pm_event              sys_hotfixes          sys_processes
+    sca_check             sys_hwinfo            sys_programs
+    sca_check_compliance  sys_netaddr           vuln_metadata
+    sca_check_rules       sys_netiface
 
   The ``sys_`` table are populated by ``syscollector``.
 
@@ -341,53 +368,53 @@ the ``syscollector`` scan results for each agent.
 
   .. code-block:: console
 
-    # echo "select * from sys_osinfo;" | sqlite3 /var/ossec/queue/db/001.db
+    #  sqlite3 /var/ossec/queue/db/001.db 'select * from sys_osinfo;' -header
 
   You should see:
 
   .. code-block:: console
 
-    1364535564|2018/02/23 01:11:23|linux-agent|x86_64|CentOS Linux|7 (Core)|||||centos|Linux|3.11.3-693.11.6.el7.x86_64|#1 SMP Thu Jan 4 01:06:37 UTC 2018
+    scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_build|os_platform|sysname|release|version|os_release
+    1753634782|2019/11/18 16:56:18|agent|x86_64|CentOS Linux|7.7||7|7||centos|Linux|3.10.0-957.12.2.el7.x86_64|#1 SMP Tue May 14 21:24:32 UTC 2019|
+
 
 3. Do a quick dump of the software packages.
 
   .. code-block:: console
 
-    # echo "select * from sys_programs;" | sqlite3 /var/ossec/queue/db/001.db | cut -d\| -f4,6,8
+    # sqlite3 /var/ossec/queue/db/001.db "select name,version,description from sys_programs;" -header
 
   You should see something like:
 
   .. code-block:: console
 
-    grub2-pc|1:2.02-0.65.el7.centos.2|Bootloader with support for Linux, Multiboot, and more
-    centos-release|7-4.1708.el7.centos|CentOS Linux release file
-    setup|2.8.71-7.el7|A set of system configuration and setup files
-    policycoreutils-python|2.5-17.1.el7|SELinux policy core python utilities
-    basesystem|10.0-7.el7.centos|The skeleton package which defines a simple CentOS Linux system
-    net-tools|2.0-0.22.20131004git.el7|Basic networking tools
-    libdaemon|0.14-7.el7|Library for writing UNIX daemons
-    tzdata|2017c-1.el7|Timezone data
-    nss-softokn-freebl|3.28.3-8.el7_4|Freebl library for the Network Security Services
-    nspr|4.13.1-1.0.el7_3|Netscape Portable Runtime
+    name|version|description
+    quota|1:4.01-17.el7|System administration tools for monitoring users' disk usage
+    grub2-common|1:2.02-0.76.el7.centos.1|grub2 common layout
+    pciutils|3.5.1-3.el7|PCI bus related utilities
+    grub2-pc-modules|1:2.02-0.76.el7.centos.1|Modules used to build custom grub images
+    libdrm|2.4.91-3.el7|Direct Rendering Manager runtime library
+    bind-license|32:9.9.4-73.el7_6|License of the BIND DNS suite
+    NetworkManager|1:1.12.0-10.el7_6|Network connection manager and user applications
+    tzdata|2019a-1.el7|Timezone data
+    gssproxy|0.7.0-21.el7|GSSAPI Proxy
     ...
-
-
 
 Wazuh Kibana App
 ----------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data,
 usually the most beautiful place to see your vulnerability detection results
-are in the Wazuh Kibana App itself.  Both in the OVERVIEW section as well as
-when you have drilled down into a specific agent, you can open the VULNERABILITIES
+is in the Wazuh Kibana App itself.  Both in the **Overview** section as well as
+when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png                                    |
-    |     :title: flood                                                                             |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+    +---------------------------------------------------------------------------+
+    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png                |
+    |     :title: flood                                                         |
+    |     :align: center                                                        |
+    |     :width: 100%                                                          |
+    +---------------------------------------------------------------------------+
 
 
 
