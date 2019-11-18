@@ -62,17 +62,22 @@ Alerts related to policy monitoring:
 
 The policy and compliance monitoring databases are normally maintained on the manager, which distributes them to all the agents.
 
-Example of an existing policy rule::
+Example of an existing policy rule
 
- # PermitRootLogin not allowed
- # PermitRootLogin indicates if the root user can log in via ssh.
- $sshd_file=/etc/ssh/sshd_config;
+.. code-block:: yaml
 
- [SSH Configuration - 1: Root can log in] [any] [1]
- f:$sshd_file -> !r:^# && r:PermitRootLogin\.+yes;
- f:$sshd_file -> r:^#\s*PermitRootLogin;
+  # PermitRootLogin not allowed
+  # PermitRootLogin indicates if the root user can log in via ssh.
+  $sshd_file=/etc/ssh/sshd_config;
 
-Alert example::
+  [SSH Configuration - 1: Root can log in] [any] [1]
+  f:$sshd_file -> !r:^# && r:PermitRootLogin\.+yes;
+  f:$sshd_file -> r:^#\s*PermitRootLogin;
+
+Alert example:
+
+.. code-block:: none
+ :class: output
 
  ** Alert 1487185712.51190: - ossec,rootcheck,
  2017 Feb 15 11:08:32 localhost->rootcheck

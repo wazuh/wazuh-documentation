@@ -88,15 +88,16 @@ When the evaluation is complete you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463752181.32768: - oscap,rule-result,pci_dss_2.2,
   2016 May 20 13:49:41 (RH_Agent) 10.0.1.7->wodle_open-scap
   Rule: 81529 (level 5) -> 'OpenSCAP rule failed (severity low).'
   oscap: msg: "rule-result", id: "47T7_Qd08gm4y8TSoD53", policy: "ssg-rhel7-ds.xml", profile: "xccdf_org.ssgproject.content_profile_pci-dss", rule_id: "xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout", result: "fail", title: "Set SSH Idle Timeout Interval", ident: "CCE-26611-4", severity: "low".
 
-
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463752181.33254: - oscap,report-overview,pci_dss_2.2,
   2016 May 20 13:49:41 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -173,7 +174,8 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463757700.70731: mail  - oscap,rule-result,pci_dss_2.2,
   2016 May 20 15:21:40 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -182,7 +184,8 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 
 
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463757700.71339: - oscap,report-overview,pci_dss_2.2,
   2016 May 20 15:21:40 (RH_Agent) 10.0.1.7->wodle_open-scap

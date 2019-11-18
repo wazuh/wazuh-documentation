@@ -83,8 +83,9 @@ Wodle flow
 The agent will run *openscap-scanner* periodically according to the configuration. Each result of the scan will be sent to the Manager and it will generate an alert if the status of the result is fail. It is possible to tuning the rules to send the pass result too.
 
 .. code-block:: json
+  :class: output
 
-    {
+  {
       "timestamp": "2017-03-20T15:59:43-0700",
       "rule": {
         "level": 7,
@@ -144,6 +145,7 @@ The agent will run *openscap-scanner* periodically according to the configuratio
 When the scan finishes, a report event is sent which generates an alert:
 
 .. code-block:: json
+  :class: output
 
   {
       "timestamp": "2017-03-20T15:59:43-0700",

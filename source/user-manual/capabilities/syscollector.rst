@@ -463,6 +463,10 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # sqlite3 /var/ossec/queue/db/003.db
+
+.. code-block:: none
+  :class: output
+
   SQLite version 3.7.17 2013-05-20 00:56:22
   Enter ".help" for instructions
   Enter SQL statements terminated with a ";"
@@ -474,6 +478,10 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+
+.. code-block:: json
+  :class: output
+
   {
    "error": 0,
    "data": {
