@@ -130,6 +130,6 @@ c) OpenSUSE:
 Next steps
 ----------
 
-Once you have updated the Wazuh manager and API you are ready to :ref:`install the Elastic Stack<_installation_elastic>`.
+Once you have updated the Wazuh manager and API you are ready to :ref:`install the Elastic Stack <installation_elastic>`.
 
-You might also want to check our :ref:`compatibility matrix <_compatibility_matrix>` in order to look at the Elastic stack version you need to use.
+You might also want to check our :ref:`compatibility matrix <compatibility_matrix>` in order to look at the Elastic stack version you need to use.
