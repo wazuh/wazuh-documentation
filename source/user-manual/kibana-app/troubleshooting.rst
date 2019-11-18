@@ -31,6 +31,9 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
   # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
+.. code-block:: none
+  :class: output
+
   {"acknowledged":true}
 
 .. warning::

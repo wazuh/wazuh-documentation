@@ -73,6 +73,9 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
       # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
+    .. code-block:: none
+      :class: output
+
       {"acknowledged":true}
 
     .. note::
