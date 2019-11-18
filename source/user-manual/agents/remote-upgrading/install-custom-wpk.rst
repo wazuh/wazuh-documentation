@@ -44,7 +44,8 @@ Where:
 
 Output example:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     Sending WPK: [=========================] 100%
     Installation started... Please wait.
