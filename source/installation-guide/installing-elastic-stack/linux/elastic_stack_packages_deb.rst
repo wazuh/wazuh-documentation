@@ -25,7 +25,7 @@ If you have any doubt, please check again the :ref:`Installation types guide<ins
 
   .. group-tab:: Single-host
 
-    **Elasticsearch configuration** 
+    **Elasticsearch configuration**
 
     #. Add the Elastic repository and its GPG key
 
@@ -53,7 +53,7 @@ If you have any doubt, please check again the :ref:`Installation types guide<ins
 
         .. include:: ../../../_templates/installation-guide/common/generate_elastic_credentials.rst
 
-    **Filebeat configuration** 
+    **Filebeat configuration**
 
     #. Configure filebeat to use the Elasticsearch certificates and set-up the Elasticsearch credentials:
 
