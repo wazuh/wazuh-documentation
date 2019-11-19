@@ -21,8 +21,11 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
-		Available agents:
-		    ID: 001, Name: windows-server, IP: any
+  .. code-block:: none
+    :class: output
+
+    Available agents:
+      ID: 001, Name: windows-server, IP: any
 
 3. Using the ID from the previous command, extract the new agent’s key using. Copy this key because you will need it for the agent:
 
@@ -30,8 +33,11 @@ Manager
 
 		# /var/ossec/bin/manage_agents -e 001
 
-		Agent key information for '001' is:
-		MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ==
+  .. code-block:: none
+    :class: output
+
+    Agent key information for '001' is:
+    MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ==
 
 Agent
 ^^^^^
@@ -48,13 +54,16 @@ This guide suppose that the Wazuh agent is installed in a x86_64 host, so the in
 
 	      # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
 
-	      Agent information:
-	         ID:001
-	         Name:windows-server
-	         IP Address:any
+      .. code-block:: none
+        :class: output
 
-	      Confirm adding it?(y/n): y
-	      Added.
+        Agent information:
+          ID:001
+          Name:windows-server
+          IP Address:any
+
+        Confirm adding it?(y/n): y
+        Added.
 
 
 2. Edit the Wazuh agent configuration in ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:
