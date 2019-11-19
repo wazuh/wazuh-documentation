@@ -25,52 +25,7 @@ If you have any doubt, please check again the :ref:`Installation types guide<ins
 
   .. group-tab:: Single-host
 
-    **Elasticsearch configuration**
-
-    #. Add the Elastic repository and its GPG key
-
-        .. include:: ../../../_templates/installation-guide/deb/add_elastic_repository.rst
-
-    #. Install the Elasticsearch package>
-
-        .. include:: ../../../_templates/installation-guide/deb/install_elasticsearch.rst
-
-    #. Once Elasticsearch is installed we need to configure it by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
-
-        .. include:: ../../../_templates/installation-guide/common/edit_elastic_yml_single_node.rst
-
-        .. note:: If your using Debian 7, you will need to change the ulimit by ``ulimit -u 4096``. In addition to this, the setting ``bootstrap.system_call_filter`` must be added and set to ``false`` in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file.
-
-    #. Certificates creation:
-
-        .. include:: ../../../_templates/installation-guide/common/certificates_creation_aio.rst
-
-    #. Enable and start the Elasticsearch service:
-
-        .. include:: ../../../_templates/installation-guide/deb/enable_start_elasticsearch.rst
-
-    #. Generate credentials for all the Elastic Stack pre-built roles and users:
-
-        .. include:: ../../../_templates/installation-guide/common/generate_elastic_credentials.rst
-
-    **Filebeat configuration**
-
-    #. Configure filebeat to use the Elasticsearch certificates and set-up the Elasticsearch credentials:
-
-        .. include:: ../../../_templates/installation-guide/common/configure_filebeat.rst
-
-    #. Enable and start the Filebeat service:
-
-        .. include:: ../../../_templates/installation-guide/deb/enable_start_filebeat.rst
-
-    #. Load the Filebeat template:
-
-        .. include:: ../../../_templates/installation-guide/common/load_filebeat_template.rst
-
-        .. note:: You can test Filebeat output using ``filebeat test output``.
-
-
-
+    .. include:: debian/all_in_one_tab.rst
 
 
 
@@ -126,47 +81,21 @@ The following Kibana installation may vary depending on if you will install Kiba
 
   .. group-tab:: Same Elasticsearch host
 
-    #. Install the Kibana package:
+    .. include:: debian/kibana_all_in_one_tab.rst
 
-      .. include:: ../../../_templates/installation-guide/deb/install_kibana.rst
-
-    #. Copy the Elasticsearch certificates into Kibana configuration folder:
-
-      .. include:: ../../../_templates/installation-guide/common/copy_certificates_kibana_aio.rst
-
-    #. Configure Kibana:
-
-      .. include:: ../../../_templates/installation-guide/common/configure_kibana_aio.rst
-
-    #. Install the Wazuh Kibana plugin:
-
-      .. include:: ../../../_templates/installation-guide/common/install_wazuh_kibana_plugin.rst
-
-    #. Enable and start the Kibana service:
-
-      .. include:: ../../../_templates/installation-guide/deb/enable_start_kibana.rst
-
-    In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
-
-    .. note:: The Kibana service listens on the default port 5601.
 
 
   .. group-tab:: Different Elasticsearch host
 
 
-    how to install Wazuh single and Elastic stack single
+    .. include:: debian/kibana_different_host_tab.rst
 
-    .. include:: ../../../_templates/installation-guide/deb/add_elastic_repository.rst
-
-    ending text
 
 
 Disabling repositories
 ----------------------
 
 .. include:: ../../../_templates/installation-guide/deb/disabling_elastic_repository.rst
-
-.. note:: The repositories disabling must be done in all hosts where any Elastic Stack components were installed.
 
 Uninstall
 ---------

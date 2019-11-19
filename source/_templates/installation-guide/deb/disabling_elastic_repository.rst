@@ -18,4 +18,6 @@ Alternatively, you can set the package state to ``hold``, which will stop update
   # echo "elasticsearch hold" | sudo dpkg --set-selections
   # echo "kibana hold" | sudo dpkg --set-selections
 
+.. note:: The repositories disabling must be done in all hosts where any Elastic Stack components were installed.
+
 .. End of disabling_elastic_repository.rst
