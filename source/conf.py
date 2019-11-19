@@ -401,8 +401,8 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
+    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
     app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
     app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
