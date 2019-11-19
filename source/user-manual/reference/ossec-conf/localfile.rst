@@ -206,6 +206,7 @@ This is a sample JSON object from the log file:
 The additional fields configured above would appear in the resulting event as below:
 
 .. code-block:: json
+  :class: output
 
   {
     "event": {
@@ -324,6 +325,7 @@ Sample of Multi-line log message in original log file:
 Sample Log message as analyzed by ossec-analysisd:
 
 .. code-block:: console
+    :class: output
 
     Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
