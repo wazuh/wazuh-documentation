@@ -81,17 +81,35 @@ Name it as below and click **[Create]**.
     :align: center
     :width: 75%
 
-Next click **[Attach to VPC]**, select your "Wazuh Lab" VPC and click **[Yes, Attach]**, at which point your new gateway
+Next click **[Close]** then select the gate way and from the **[Action]** menu select  **[Attach to VPC]**, 
+
+.. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway-2.png
+    :title: Create gateway
+    :align: center
+    :width: 75%
+    
+Select your "Wazuh Lab" VPC and click **[Attach]**, at which point your new gateway
 should appear with a green "attached" state.
+
 
 Route Table
 -----------
 
-The route table for your new VPC must be associated with your subnet and gateway.  Click the `Route Tables
-<https://console.aws.amazon.com/vpc/home#routetables:>`_ link in your `VPC Dashboard
-<https://console.aws.amazon.com/vpc/home?#vpcs:>`_ and select the route table for your "Wazuh Lab" VPC.  Then click the
-**[Routes]** tab and the **[Edit]** button, and then the **[Add another route]** button.  Add a new route with a *Destination*
-of "0.0.0.0/0" and for the *Target*, click on the empty field and pick the Wazuh Lab Gateway from the list.  Click **[Save]**.
+The route table for your new VPC must be associated with your subnet and gateway.
+Click the `Route Tables <https://console.aws.amazon.com/vpc/home#routetables:>`_ 
+link in your `VPC Dashboard <https://console.aws.amazon.com/vpc/home?#vpcs:>`_ 
+and select the route table for your "Wazuh Lab" VPC (you can find it
+by searching for the VPC ID that it has been assigned). Then click the **[Routes]**
+tab and the **[Edit]** button, and then the **[Add route]** button.  
+Add a new route with a *Destination* of "0.0.0.0/0" and for the *Target*, click
+on the empty field, select *Internet Gateway* and pick the Wazuh Lab Gateway 
+from the list.  Click **[Save routes]** and then **[Close]**.
+
+.. thumbnail:: ../../images/learning-wazuh/build-lab/route-table-0.png
+    :title: Route table
+    :align: center
+    :width: 75%
+
 The results should look like this (exact igw- id will be different):
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/route-table.png
@@ -99,35 +117,35 @@ The results should look like this (exact igw- id will be different):
     :align: center
     :width: 75%
 
-Click on the "Subnet Associations" tab below and then on **[Edit]**.
-Checkmark only your Wazuh Lab Subnet and click **[Save]**.  It should look like this:
-
-.. thumbnail:: ../../images/learning-wazuh/build-lab/route-table-2.png
-    :title: Route table 2
-    :align: center
-    :width: 75%
+Click on the "Subnet Associations" tab below and then on **[Edit subnet associations]**.
+Select only your Wazuh Lab Subnet and click **[Save]**. 
 
 Security Groups
 ---------------
 
-We will need a couple of **Security Groups**, one for your Linux instances and one for your Windows instance.
-We will allow inbound SSH/HTTPS traffic to the Linux instances from the Internet and inbound RDP traffic to the Windows instance
-from the Internet, while allowing unrestricted communication within the VPC and unrestricted outbound traffic.
+We will need a couple of **Security Groups**, one for your Linux instances and 
+one for your Windows instance. We will allow inbound SSH/HTTPS traffic to the 
+Linux instances from the Internet and inbound RDP traffic to the Windows 
+instance from the Internet, while allowing unrestricted communication within 
+the VPC and unrestricted outbound traffic.
 
 Windows Security Group
 ::::::::::::::::::::::
 
-Click on the `Security Groups <https://console.aws.amazon.com/vpc/home#securityGroups:>`_ link  in your `VPC Dashboard
-<https://console.aws.amazon.com/vpc/home?#vpcs:>`_ and then click **[Create Security Group]**.  Create a security group like
-below, and then click **[Yes, Create]**.
+Click on the 
+`Security Groups <https://console.aws.amazon.com/vpc/home#securityGroups:>`_ 
+link  in your `VPC Dashboard <https://console.aws.amazon.com/vpc/home?#vpcs:>`_
+and then click **[Create Security Group]**.  Create a security group as shown
+below, and then click **[Create]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-win.png
     :title: Sec Group Win
     :align: center
     :width: 75%
 
-Next select only the "Wazuh Windows" security group, click on the **[Inbound Rules]** tab, and click **[Edit]**.
-Set up two rules like below and click **[Save]**.
+Next select only the "Wazuh Windows" security group, click on the **[Inbound 
+Rules]** tab, and click **[Edit rules]**. 
+Set up two rules as shown below and click **[Save rules]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-win-2.png
     :title: Sec Group Win
@@ -137,15 +155,17 @@ Set up two rules like below and click **[Save]**.
 Linux Security Group
 ::::::::::::::::::::
 
-Click again on **[Create Security Group]**.  Create a security group like below, and then click **[Yes, Create]**.
+Click again on **[Create Security Group]**.  Create a security group like below,
+then click **[Create]** and then **[Close]**
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-lin.png
     :title: Sec Group Lin
     :align: center
     :width: 75%
 
-Next select only the "Wazuh Linux" security group, click on the **[Inbound Rules]** tab, and click **[Edit]**.
-Set up two rules like below and click **[Save]**.
+Next select only the "Wazuh Linux" security group, click on the **[Inbound Rules]**
+tab, and click **[Edit rules]**. Set up two rules like below, click **[Save rules]**
+and the **[Close]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-lin-2.png
     :title: Sec Group Lin
@@ -156,13 +176,18 @@ Set up two rules like below and click **[Save]**.
 SSH key pair
 ------------
 
-You need to set up a **Key Pair** to use in authenticating with the EC2 instances you are about to launch.  Go to your
-`EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_ and click on **[Create Key Pair]**.  Name it "Wazuh Lab"
-and click **[Create]**.  Your web browser should automatically download the key file **WazuhLab.pem** at this point.
+You need to set up a **Key Pair** to use in authenticating with the EC2 instances
+you are about to launch.  Go to the `Key Pairs 
+<https://us-west-1.console.aws.amazon.com/ec2/home?region=us-west-1#KeyPairs:>`
+link in your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_ and
+click on **[Create Key Pair]**. Name it "Wazuh Lab" and click **[Create]**.  
+Your web browser should automatically download the key file **WazuhLab.pem** at
+this point.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/key-pair.png
     :title: Key Pair
     :align: center
     :width: 75%
 
-Hold onto this file.  You will need it to gain access to your EC2 instances once they are launched.
+Hold onto this file.  You will need it to gain access to your EC2 instances once
+they are launched.
