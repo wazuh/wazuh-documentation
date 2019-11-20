@@ -37,10 +37,6 @@ Launch a Wazuh Server instance
     IP=`ip -o -4 addr show dev eth0 | cut -d ' ' -f 7 | cut -f 1 -d '/'`
     if [ "$IP" == "172.30.0.10" ]; then
     	hostnamectl set-hostname --static wazuh-manager
-        # Move the below file to a Wazuh-hosted location, perhaps here:
-        # https://documentation.wazuh.com/current/leaning-wazuh/scripts/show-wazuh-rules
-        curl http://www.branchnetconsulting.com/wazuh/show-wazuh-rule > /usr/local/bin/show-wazuh-rule
-        chmod 755 /usr/local/bin/show-wazuh-rule
     fi
     if [ "$IP" == "172.30.0.20" ]; then
     	hostnamectl set-hostname --static elastic-server
@@ -85,17 +81,6 @@ Launch a Wazuh Server instance
 - Click on **[View Instances]** to confirm your new instance is on its way up.
 
 
-Launch an Elastic Server instance
----------------------------------
-
-Repeat the process for "Launch a Wazuh Server" with the following exceptions:
-
-- Choose a recommended instance type of General Purpose **t2.xlarge**.  As small as a **t2.large** should still work though it will not be as snappy.
-- Set the *Primary IP* to 172.30.0.20.
-- Choose a recommended *Storage Size* is 100GB, though as low as 8GB should generally be adequate if you are careful with disk space management and don't leave the lab running for a long time.
-- Set the *Name* Tag to "Elastic Server".
-
-
 Launch a Linux Agent instance
 -----------------------------
 
@@ -106,6 +91,21 @@ Repeat the process for "Launch a Wazuh Server" with the following exceptions:
 - Set the *Name* Tag to "Linux Agent".
 
 
+Launch an Elastic Server instance
+---------------------------------
+
+Repeat the process for "Launch a Wazuh Server" changing the following:
+
+- Choose a recommended instance type of General Purpose **t2.xlarge**.  An instance
+  as small as a **t2.large** should still work but it will not be as responsive.
+- Set the *Primary IP* to 172.30.0.20.
+- Choose a recommended *Storage Size* of 100GB. As low as 8GB should generally 
+  be adequate if you are careful with disk space management and don't leave the
+  lab running for a long time.
+- Set the *Name* Tag to "Elastic Server".
+
+
+
 Launch a Windows Agent instance
 -------------------------------
 
@@ -114,7 +114,8 @@ Repeat the process for "Launch a Wazuh Server" with the following exceptions:
 - When choosing an image (AMI) click on Quick Start and Select "Microsoft Windows Server 2016 Base"
 - Choose an instance type of General Purpose **t2.small**.
 - Set the *Primary IP* to 172.30.0.40.
+- Do not change the Storage Size to smaller than the default of 30GB.  Larger is
+  fine if you wish.
 - Do not put any launch script into the User data box.
-- Do not change the Storage Size to smaller than the default of 30GB.  Larger if fine if you wish.
 - Set the *Name* Tag to "Windows Agent".
 - Pick the "Wazuh Windows" security group instead of the "Wazuh Linux" one.
