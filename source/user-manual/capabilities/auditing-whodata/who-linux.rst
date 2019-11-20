@@ -44,7 +44,7 @@ We can check if the Audit rule for monitoring the selected folder is applied. To
 
     # auditctl -l | grep wazuh_fim
 
-and check if the rule was added:
+and check in the command output that the rule was added:
 
 .. code-block:: bash
 
@@ -58,19 +58,19 @@ Alert fields
 The following fields are received in FIM alerts when who-data is enabled:
 
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **(Audit) User**             | Contains the user ID and name of the user who started the process that modified the monitored file.                |
+| **(Audit) User**             | Contains the ID and name of the user who started the process that modified the monitored file.                     |
 +------------------------------+                                                                                                                    +
 | **audit.user.id**            |                                                                                                                    |
 |                              |                                                                                                                    |
 | **audit.user.name**          |                                                                                                                    |
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **(Audit) Login user**       | Contains the Audit user ID and name, that are the login uid and login name.                                        |
+| **(Audit) Login user**       | Contains the Audit user ID and name, they correspond respectivey to the login UID and login name.                  |
 +------------------------------+ This ID is assigned to a user upon login and is inherited by every process even when the user's identity changes.  +
 | **audit.login_user.id**      |                                                                                                                    |
 |                              |                                                                                                                    |
 | **audit.login_user.name**    |                                                                                                                    |
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **(Audit) Effective user**   | Contains the effective user ID and name of the user who started the process that modified the monitored file.      |
+| **(Audit) Effective user**   | Contains the effective ID and name of the user who started the process that modified the monitored file.           |
 +------------------------------+                                                                                                                    +
 | **audit.effective_user.id**  |                                                                                                                    |
 |                              |                                                                                                                    |
