@@ -39,6 +39,7 @@ The manager will generate an alert every time an event collected by one of the a
 Here is an example found in ``/var/ossec/logs/alerts/alerts.json``:
 
 .. code-block:: json
+  :class: output
 
   {
     "agent": {
@@ -95,6 +96,7 @@ The File integrity monitoring (FIM) component detects and alerts when operating 
 Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5 and SHA1 checksums, file sizes (before and after the change), file permissions, file owner, content changes and the user who made these changes (who-data).
 
 .. code-block:: json
+    :class: output
 
     {
         "timestamp":"2018-07-10T14:05:28.452-0800",
@@ -230,6 +232,7 @@ Wazuh uses different detection mechanisms to look for system anomalies or well-k
 Below is an example of an alert generated when a hidden process is found. In this case, the affected system is running a Linux kernel-level rootkit (named Diamorphine):
 
 .. code-block:: json
+  :class: output
 
   {
     "agent": {
@@ -291,7 +294,8 @@ The Wazuh agent uses OpenSCAP internally to verify that systems conform to CIS h
 SCAP checks are run periodically (the default is once a day) and results are set to the Wazuh server where they are processed through OpenSCAP decoders and rules. Below is an example of an alert generated when Linux audit policies (auditd) are not configured to monitor user actions:
 
 .. code-block:: json
-
+  :class: output
+  
   {
     "agent": {
         "id": "1040",
