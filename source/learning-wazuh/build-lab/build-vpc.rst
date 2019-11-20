@@ -178,7 +178,7 @@ SSH key pair
 
 You need to set up a **Key Pair** to use in authenticating with the EC2 instances
 you are about to launch.  Go to the `Key Pairs 
-<https://us-west-1.console.aws.amazon.com/ec2/home?region=us-west-1#KeyPairs:>`
+<https://console.aws.amazon.com/ec2/home#KeyPairs:>`
 link in your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_ and
 click on **[Create Key Pair]**. Name it "Wazuh Lab" and click **[Create]**.  
 Your web browser should automatically download the key file **WazuhLab.pem** at
