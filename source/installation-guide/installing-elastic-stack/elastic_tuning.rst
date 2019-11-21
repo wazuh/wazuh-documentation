@@ -61,7 +61,7 @@ In this guide, we will show how to set the *bootstrap.memory_lock* setting to tr
 
   By default, Elasticsearch is configured with a 1 GB heap. You can change the heap size via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
 
-  .. code-block:: bash
+  .. code-block:: yaml
 
     # Xms represents the initial size of total heap space
     # Xmx represents the maximum size of total heap space
@@ -95,6 +95,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
     # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
+    :class: output
 
     {
       "nodes" : {
@@ -175,6 +176,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
     # vi w-elastic-template.json
 
   .. code-block:: json
+    :class: output
 
     {
       "order": 1,
@@ -202,6 +204,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
     # curl -X PUT "http://localhost:9200/_template/wazuh-custom" -H 'Content-Type: application/json' -d @w-elastic-template.json
 
   .. code-block:: json
+    :class: output
 
     { "acknowledged" : true }
 
@@ -212,6 +215,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
     # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
 
   .. code-block:: json
+    :class: output
 
     {
       "wazuh-custom" : {
@@ -242,6 +246,10 @@ In a cluster with one node, the number of replicas should be set to zero:
 .. code-block:: none
 
   # curl -X PUT "http://localhost:9200/wazuh-alerts-\*/_settings?pretty" -H 'Content-Type: application/json' -d'
+
+.. code-block:: json
+  :class: output
+
   {
     "settings" : {
       "number_of_replicas" : 0
