@@ -91,7 +91,7 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
         :align: center
         :width: 50%
 
-     - Under Connection->Data, set the *Auto-login username* to "centos".
+    - Under Connection->Data, set the *Auto-login username* to "centos".
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/putty-2.png
         :title: PuTTY
