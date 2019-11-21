@@ -20,7 +20,7 @@ The list file is a plain text file where each line has the following format::
 
 Each key must be unique, followed by a colon ``:`` and it can have an optional value. The value can be identical to others but the key must remain unique.
 
-With a key we can determine the presence or absence of a field in a given list. By adding a value we can use it as criteria in rules. For example, if we have account names (key) with a department name (value) associated it would be possible to create an alert that triggers when a user not from the finance department logs into the finance server.
+With a key we can determine the presence or absence of a field in a given list. By adding a value we can use it as criteria in rules. For example, if we have account names (key) with a department name (value) associated, it would be possible to create an alert that triggers when a user not from the finance department logs into the finance server.
 
 For IP addresses the dot notation is used for subnet matches:
 
