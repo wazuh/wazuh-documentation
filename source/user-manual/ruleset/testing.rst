@@ -5,12 +5,15 @@
 Testing decoders and rules
 ===============================
 
-The tool *ossec-logtest* allow us to test how an event is decoded and if an alert is generated.
+Each environment needs a specified ruleset. The Sysadmins eventually will need to create their own rules and decoders. 
 
-Run the tool */var/ossec/bin/ossec-logtest* and paste the following log::
+When creating rules and decoders, there is a need to verify that they work. The Logtest tool allows their testing and verification.
+
+To test logs like following run */var/ossec/bin/ossec-logtest* and paste it. ::
 
     Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
 
+Logtest output will be:
 
 .. code-block:: console
 
@@ -35,126 +38,97 @@ Run the tool */var/ossec/bin/ossec-logtest* and paste the following log::
            Description: 'sshd: authentication success.'
     **Alert to be generated.
 
-.. warning::
 
-    The decoder name showed in *Phase 2* will be the name of the parent decoder.
+As shown, log processing has three phases:
+
+  - Phase 1: Pre-decoding tries to divide logs into four fields following the Syslog standard. 
+  - Phase 2: The decoding extracts useful information to share in a possible alert.
+  - Phase 3: Rules matching decides if a log will generate an alert.
 
 
-In addition, you can use the option "-v" to show more information about the rules:
+.. note::
+    - Only the log message extracting in *Phase 1* will be pushed to rules and decoders.
+    - If *Phase 1* doesn't admit log format, full log will be pushed to rules and decoders.
+    - The decoder name showed in *Phase 2* will be the name of the parent decoder.
+
+.. note::
+    Logtest has mutliples options to run. You can see all of these `here <../reference/tools/ossec-logtest.html>`_.
+
+
+Test Event channel events
+-------------------------
+
+Wazuh allows the monitoring of Windows event channels. There are two formats to collect Windows logs: Eventlog and Eventchannel.
+
+To test rules for logs in eventchannel format the option -e can be used.
+
+An example could be the following. Run Logtest and paste this log::
+
+    <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event"><System><Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-a5ba-3e3b0328c30d}" /><EventID>4625</EventID><Version>0</Version><Level>0</Level><Task>12544</Task><Opcode>0</Opcode><Keywords>0x8010000000000000</Keywords><TimeCreated SystemTime="2019-11-21T09:27:22.761037400Z" /><EventRecordID>219488</EventRecordID><Correlation ActivityID="{edb11679-a087-0000-f018-b1ed87a0d501}" /><Execution ProcessID="584" ThreadID="3520" /><Channel>Security</Channel><Computer>WIN-6UJQ4IGFLK2</Computer><Security /></System><EventData><Data Name="SubjectUserSid">S-1-5-18</Data><Data Name="SubjectUserName">WIN-6UJQ4IGFLK2$</Data><Data Name="SubjectDomainName">WORKGROUP</Data><Data Name="SubjectLogonId">0x3e7</Data><Data Name="TargetUserSid">S-1-0-0</Data><Data Name="TargetUserName">Administrator</Data><Data Name="TargetDomainName">WIN-6UJQ4IGFLK2</Data><Data Name="Status">0xc000006d</Data><Data Name="FailureReason">%%2313</Data><Data Name="SubStatus">0xc000006a</Data><Data Name="LogonType">7</Data><Data Name="LogonProcessName">User32</Data><Data Name="AuthenticationPackageName">Negotiate</Data><Data Name="WorkstationName">WIN-6UJQ4IGFLK2</Data><Data Name="TransmittedServices">-</Data><Data Name="LmPackageName">-</Data><Data Name="KeyLength">0</Data><Data Name="ProcessId">0x340</Data><Data Name="ProcessName">C:\Windows\System32\svchost.exe</Data><Data Name="IpAddress">127.0.0.1</Data><Data Name="IpPort">0</Data></EventData></Event>
+
+The output is:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/ossec-logtest -v
+    $ /var/ossec/bin/ossec-logtest -e
+    2019/11/22 09:59:56 ossec-testrule: INFO: Started (pid: 12330).
+    ossec-testrule: Type one log per line.
 
-    Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
+    <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event"><System><Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-a5ba-3e3b0328c30d}" /><EventID>4625</EventID><Version>0</Version><Level>0</Level><Task>12544</Task><Opcode>0</Opcode><Keywords>0x8010000000000000</Keywords><TimeCreated SystemTime="2019-11-21T09:27:22.761037400Z" /><EventRecordID>219488</EventRecordID><Correlation ActivityID="{edb11679-a087-0000-f018-b1ed87a0d501}" /><Execution ProcessID="584" ThreadID="3520" /><Channel>Security</Channel><Computer>WIN-6UJQ4IGFLK2</Computer><Security /></System><EventData><Data Name="SubjectUserSid">S-1-5-18</Data><Data Name="SubjectUserName">WIN-6UJQ4IGFLK2$</Data><Data Name="SubjectDomainName">WORKGROUP</Data><Data Name="SubjectLogonId">0x3e7</Data><Data Name="TargetUserSid">S-1-0-0</Data><Data Name="TargetUserName">Administrator</Data><Data Name="TargetDomainName">WIN-6UJQ4IGFLK2</Data><Data Name="Status">0xc000006d</Data><Data Name="FailureReason">%%2313</Data><Data Name="SubStatus">0xc000006a</Data><Data Name="LogonType">7</Data><Data Name="LogonProcessName">User32</Data><Data Name="AuthenticationPackageName">Negotiate</Data><Data Name="WorkstationName">WIN-6UJQ4IGFLK2</Data><Data Name="TransmittedServices">-</Data><Data Name="LmPackageName">-</Data><Data Name="KeyLength">0</Data><Data Name="ProcessId">0x340</Data><Data Name="ProcessName">C:\Windows\System32\svchost.exe</Data><Data Name="IpAddress">127.0.0.1</Data><Data Name="IpPort">0</Data></EventData></Event>
+
 
 
     **Phase 1: Completed pre-decoding.
-           full event: 'Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516'
-           hostname: 'ip-10-0-0-10'
-           program_name: 'sshd'
-           log: 'Accepted publickey for root from 73.189.131.56 port 57516'
+        full event: '<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event"><System><Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-a5ba-3e3b0328c30d}" /><EventID>4625</EventID><Version>0</Version><Level>0</Level><Task>12544</Task><Opcode>0</Opcode><Keywords>0x8010000000000000</Keywords><TimeCreated SystemTime="2019-11-21T09:27:22.761037400Z" /><EventRecordID>219488</EventRecordID><Correlation ActivityID="{edb11679-a087-0000-f018-b1ed87a0d501}" /><Execution ProcessID="584" ThreadID="3520" /><Channel>Security</Channel><Computer>WIN-6UJQ4IGFLK2</Computer><Security /></System><EventData><Data Name="SubjectUserSid">S-1-5-18</Data><Data Name="SubjectUserName">WIN-6UJQ4IGFLK2$</Data><Data Name="SubjectDomainName">WORKGROUP</Data><Data Name="SubjectLogonId">0x3e7</Data><Data Name="TargetUserSid">S-1-0-0</Data><Data Name="TargetUserName">Administrator</Data><Data Name="TargetDomainName">WIN-6UJQ4IGFLK2</Data><Data Name="Status">0xc000006d</Data><Data Name="FailureReason">%%2313</Data><Data Name="SubStatus">0xc000006a</Data><Data Name="LogonType">7</Data><Data Name="LogonProcessName">User32</Data><Data Name="AuthenticationPackageName">Negotiate</Data><Data Name="WorkstationName">WIN-6UJQ4IGFLK2</Data><Data Name="TransmittedServices">-</Data><Data Name="LmPackageName">-</Data><Data Name="KeyLength">0</Data><Data Name="ProcessId">0x340</Data><Data Name="ProcessName">C:\Windows\System32\svchost.exe</Data><Data Name="IpAddress">127.0.0.1</Data><Data Name="IpPort">0</Data></EventData></Event>'
+        timestamp: '(null)'
+        hostname: 'lopezziur'
+        program_name: '(null)'
+        log: '<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event"><System><Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-a5ba-3e3b0328c30d}" /><EventID>4625</EventID><Version>0</Version><Level>0</Level><Task>12544</Task><Opcode>0</Opcode><Keywords>0x8010000000000000</Keywords><TimeCreated SystemTime="2019-11-21T09:27:22.761037400Z" /><EventRecordID>219488</EventRecordID><Correlation ActivityID="{edb11679-a087-0000-f018-b1ed87a0d501}" /><Execution ProcessID="584" ThreadID="3520" /><Channel>Security</Channel><Computer>WIN-6UJQ4IGFLK2</Computer><Security /></System><EventData><Data Name="SubjectUserSid">S-1-5-18</Data><Data Name="SubjectUserName">WIN-6UJQ4IGFLK2$</Data><Data Name="SubjectDomainName">WORKGROUP</Data><Data Name="SubjectLogonId">0x3e7</Data><Data Name="TargetUserSid">S-1-0-0</Data><Data Name="TargetUserName">Administrator</Data><Data Name="TargetDomainName">WIN-6UJQ4IGFLK2</Data><Data Name="Status">0xc000006d</Data><Data Name="FailureReason">%%2313</Data><Data Name="SubStatus">0xc000006a</Data><Data Name="LogonType">7</Data><Data Name="LogonProcessName">User32</Data><Data Name="AuthenticationPackageName">Negotiate</Data><Data Name="WorkstationName">WIN-6UJQ4IGFLK2</Data><Data Name="TransmittedServices">-</Data><Data Name="LmPackageName">-</Data><Data Name="KeyLength">0</Data><Data Name="ProcessId">0x340</Data><Data Name="ProcessName">C:\Windows\System32\svchost.exe</Data><Data Name="IpAddress">127.0.0.1</Data><Data Name="IpPort">0</Data></EventData></Event>'
 
     **Phase 2: Completed decoding.
-           decoder: 'sshd'
-           dstuser: 'root'
-           srcip: '73.189.131.56'
 
-    **Rule debugging:
-        Trying rule: 1 - Generic template for all syslog rules.
-           *Rule 1 matched.
-           *Trying child rules.
-        Trying rule: 600 - Active Response Messages Grouped
-        Trying rule: 2100 - NFS rules grouped.
-        Trying rule: 2507 - OpenLDAP group.
-        Trying rule: 2550 - rshd messages grouped.
-        Trying rule: 2701 - Ignoring procmail messages.
-        Trying rule: 2800 - Pre-match rule for smartd.
-        Trying rule: 5100 - Pre-match rule for kernel messages
-        Trying rule: 5200 - Ignoring hpiod for producing useless logs.
-        Trying rule: 2830 - Crontab rule group.
-        Trying rule: 5300 - Initial grouping for su messages.
-        Trying rule: 5905 - useradd failed.
-        Trying rule: 5400 - Initial group for sudo messages
-        Trying rule: 9100 - PPTPD messages grouped
-        Trying rule: 9200 - Squid syslog messages grouped
-        Trying rule: 2900 - Dpkg (Debian Package) log.
-        Trying rule: 2930 - Yum logs.
-        Trying rule: 2931 - Yum logs.
-        Trying rule: 2940 - NetworkManager grouping.
-        Trying rule: 2943 - nouveau driver grouping
-        Trying rule: 3100 - Grouping of the sendmail rules.
-        Trying rule: 3190 - Grouping of the smf-sav sendmail milter rules.
-        Trying rule: 3300 - Grouping of the postfix reject rules.
-        Trying rule: 3320 - Grouping of the postfix rules.
-        Trying rule: 3390 - Grouping of the clamsmtpd rules.
-        Trying rule: 3395 - Grouping of the postfix warning rules.
-        Trying rule: 3500 - Grouping for the spamd rules
-        Trying rule: 3600 - Grouping of the imapd rules.
-        Trying rule: 3700 - Grouping of mailscanner rules.
-        Trying rule: 3800 - Grouping of Exchange rules.
-        Trying rule: 3900 - Grouping for the courier rules.
-        Trying rule: 4300 - Grouping of PIX rules
-        Trying rule: 4500 - Grouping for the Netscreen Firewall rules
-        Trying rule: 4700 - Grouping of Cisco IOS rules.
-        Trying rule: 4800 - SonicWall messages grouped.
-        Trying rule: 5500 - Grouping of the pam_unix rules.
-        Trying rule: 5556 - unix_chkpwd grouping.
-        Trying rule: 5600 - Grouping for the telnetd rules
-        Trying rule: 5700 - SSHD messages grouped.
-           *Rule 5700 matched.
-           *Trying child rules.
-        Trying rule: 5709 - sshd: Useless SSHD message without an user/ip and context.
-        Trying rule: 5711 - sshd: Useless/Duplicated SSHD message without a user/ip.
-        Trying rule: 5721 - sshd: System disconnected from sshd.
-        Trying rule: 5722 - sshd: ssh connection closed.
-        Trying rule: 5723 - sshd: key error.
-        Trying rule: 5724 - sshd: key error.
-        Trying rule: 5725 - sshd: Host ungracefully disconnected.
-        Trying rule: 5727 - sshd: Attempt to start sshd when something already bound to the port.
-        Trying rule: 5729 - sshd: Debug message.
-        Trying rule: 5732 - sshd: Possible port forwarding failure.
-        Trying rule: 5733 - sshd: User entered incorrect password.
-        Trying rule: 5734 - sshd: sshd could not load one or more host keys.
-        Trying rule: 5735 - sshd: Failed write due to one host disappearing.
-        Trying rule: 5736 - sshd: Connection reset or aborted.
-        Trying rule: 5750 - sshd: could not negotiate with client.
-        Trying rule: 5756 - sshd: subsystem request failed.
-        Trying rule: 5707 - sshd: OpenSSH challenge-response exploit.
-        Trying rule: 5701 - sshd: Possible attack on the ssh server (or version gathering).
-        Trying rule: 5706 - sshd: insecure connection attempt (scan).
-        Trying rule: 5713 - sshd: Corrupted bytes on SSHD.
-        Trying rule: 5731 - sshd: SSH Scanning.
-        Trying rule: 5747 - sshd: bad client public DH value
-        Trying rule: 5748 - sshd: corrupted MAC on input
-        Trying rule: 5702 - sshd: Reverse lookup error (bad ISP or attack).
-        Trying rule: 5710 - sshd: Attempt to login using a non-existent user
-        Trying rule: 5716 - sshd: authentication failed.
-        Trying rule: 5718 - sshd: Attempt to login using a denied user.
-        Trying rule: 5726 - sshd: Unknown PAM module, PAM misconfiguration.
-        Trying rule: 5737 - sshd: cannot bind to configured address.
-        Trying rule: 5738 - sshd: pam_loginuid could not open loginuid.
-        Trying rule: 5704 - sshd: Timeout while logging in.
-        Trying rule: 5717 - sshd: configuration error (moduli).
-        Trying rule: 5728 - sshd: Authentication services were not able to retrieve user credentials.
-        Trying rule: 5730 - sshd: SSHD is not accepting connections.
-        Trying rule: 5739 - sshd: configuration error (AuthorizedKeysCommand)
-        Trying rule: 5740 - sshd: connection reset by peer
-        Trying rule: 5741 - sshd: connection refused
-        Trying rule: 5742 - sshd: connection timed out
-        Trying rule: 5743 - sshd: no route to host
-        Trying rule: 5744 - sshd: port forwarding issue
-        Trying rule: 5745 - sshd: transport endpoint is not connected
-        Trying rule: 5746 - sshd: get_remote_port failed
-        Trying rule: 5749 - sshd: bad packet length
-        Trying rule: 5715 - sshd: authentication success.
-           *Rule 5715 matched.
-           *Trying child rules.
-        Trying rule: 40101 - System user successfully logged to the system.
-        Trying rule: 40112 - Multiple authentication failures followed by a success.
+        decoder: 'windows_eventchannel'
+        win.system.providerName: 'Microsoft-Windows-Security-Auditing'
+        win.system.providerGuid: '{54849625-5478-4994-a5ba-3e3b0328c30d}'
+        win.system.eventID: '4625'
+        win.system.version: '0'
+        win.system.level: '0'
+        win.system.task: '12544'
+        win.system.opcode: '0'
+        win.system.keywords: '0x8010000000000000'
+        win.system.systemTime: '2019-11-21T09:27:22.761037400Z'
+        win.system.eventRecordID: '219488'
+        win.system.processID: '584'
+        win.system.threadID: '3520'
+        win.system.channel: 'Security'
+        win.system.computer: 'WIN-6UJQ4IGFLK2'
+        win.system.severityValue: 'AUDIT_FAILURE'
+        win.eventdata.subjectUserSid: 'S-1-5-18'
+        win.eventdata.subjectUserName: 'WIN-6UJQ4IGFLK2$'
+        win.eventdata.subjectDomainName: 'WORKGROUP'
+        win.eventdata.subjectLogonId: '0x3e7'
+        win.eventdata.targetUserSid: 'S-1-0-0'
+        win.eventdata.targetUserName: 'Administrator'
+        win.eventdata.targetDomainName: 'WIN-6UJQ4IGFLK2'
+        win.eventdata.status: '0xc000006d'
+        win.eventdata.failureReason: '%%2313'
+        win.eventdata.subStatus: '0xc000006a'
+        win.eventdata.logonType: '7'
+        win.eventdata.logonProcessName: 'User32'
+        win.eventdata.authenticationPackageName: 'Negotiate'
+        win.eventdata.workstationName: 'WIN-6UJQ4IGFLK2'
+        win.eventdata.keyLength: '0'
+        win.eventdata.processId: '0x340'
+        win.eventdata.processName: 'C:\Windows\System32\svchost.exe'
+        win.eventdata.ipAddress: '127.0.0.1'
+        win.eventdata.ipPort: '0'
 
     **Phase 3: Completed filtering (rules).
-           Rule id: '5715'
-           Level: '3'
-           Description: 'sshd: authentication success.'
+        Rule id: '60122'
+        Level: '5'
+        Description: 'Logon Failure - Unknown user or bad password'
     **Alert to be generated.
+
+
+.. warning::
+    Log must be added without line breaks.

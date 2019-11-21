@@ -40,11 +40,13 @@ The ossec-logtest program is a useful tool when working with Wazuh rules.  This 
 +-------------------------------------------+--------------------------------------------------------------------------------+
 | **-v**                                    | Display the verbose results.                                                   |
 +-------------------------------------------+--------------------------------------------------------------------------------+
+| **-e**                                    | Allows test rules for Eventchannel events                                      |
++-------------------------------------------+--------------------------------------------------------------------------------+
 
 .. note::
 
-  - U ossec-logtest code requires access to all ossec configuration files.
+  - -U ossec-logtest code requires access to all ossec configuration files.
 
 .. note::
 
-    -v is the key option to troubleshoot a rule or decoder problem.
+  - -v shows more information about the rules, it is the key option to troubleshoot a rule or decoder problem.
