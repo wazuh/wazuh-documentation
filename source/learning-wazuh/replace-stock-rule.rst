@@ -27,7 +27,7 @@ Using the Kibana Wazuh App
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-2. Select **Manage rules files** and search for **ssh**, then click on the eye icon 
+2. Select **Manage rules files** and search for "ssh", then click on the eye icon 
    next to **0095-sshd_rules.xml** to view the contents of that file.
 
     +-----------------------------------------------------------------------------------------------+
@@ -83,7 +83,7 @@ Notice how the web interface will automatically display an error if the xml synt
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-7. After this is done attempt to log in to the **linux-agent** using ``ssh`` and incorrect credentials.
+7. After this is done attempt to log in to the **linux-agent** using SSH and incorrect credentials.
    Then look for the event on Kibana by searching for **5716** and you will see the the level of the
    alert for the most recent event will be **7**:
 

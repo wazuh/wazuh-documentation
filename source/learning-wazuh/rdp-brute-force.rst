@@ -7,7 +7,7 @@ Detect an RDP brute force attack
 
 Here you will wage a small RDP brute force attack against your Windows Agent instance.
 
-You will see how **Wazuh** detects and alerts on each login failure, and how a higher severity 
+You will see how Wazuh detects and alerts on each login failure, and how a higher severity 
 alert is produced when enough login failures are seen.
 
 Lastly you will take a closer look at the decoders and rules involved in the detection of your "attack".
@@ -48,12 +48,12 @@ See the resulting alerts in Kibana
 Hold your breath for a deep dive!
 ---------------------------------
 
-Let's take a thorough look at how this log event is being decoded and what leads **Wazuh** to the final
+Let's take a thorough look at how this log event is being decoded and what leads Wazuh to the final
 conclusion that brute force activity is occurring.
 
 1. In Kibana, copy the complete contents of the full_log field for one of the Windows logon failure events.
 
-2. In an ssh session on wazuh-manager, run ossec-logtest with high verbosity to get a maximum picture of how this event is being decoded and analyzed.
+2. In an SSH session on wazuh-manager, run ossec-logtest with high verbosity to get a maximum picture of how this event is being decoded and analyzed.
 
     .. code-block:: console
 
