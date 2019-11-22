@@ -246,10 +246,6 @@ In a cluster with one node, the number of replicas should be set to zero:
 .. code-block:: none
 
   # curl -X PUT "http://localhost:9200/wazuh-alerts-\*/_settings?pretty" -H 'Content-Type: application/json' -d'
-
-.. code-block:: json
-  :class: output
-
   {
     "settings" : {
       "number_of_replicas" : 0
