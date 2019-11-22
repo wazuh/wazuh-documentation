@@ -30,12 +30,30 @@ So, when we modify the file, Wazuh generates an alert.
 .. code-block:: console
 
     [root@centos ~]# ls -l credit_cards
+
+.. code-block:: none
+    :class: output
+
     +total 4
     -rw-r--r--. 1 root root 14 Jan 10 19:33 cardholder_data.txt
+
+.. code-block:: console
+
     [root@centos ~]# cat credit_cards/cardholder_data.txt
+
+.. code-block:: none
+    :class: output
+
     User1 = card4
+
+.. code-block:: console
+
     [root@centos ~]# echo "User1 = card5" > credit_cards/cardholder_data.txt
     [root@centos ~]# cat credit_cards/cardholder_data.txt
+
+.. code-block:: none
+    :class: output
+
     User1 = card5
 
 As you can see, syscheck alerts are tagged with the requirement 11.5.
@@ -44,6 +62,9 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
 
     root@ubuntu:~# tail -n28 /var/ossec/logs/alerts/alerts.log
 
+.. code-block:: none
+    :class: output
+    
     ** Alert 1484071804.77110: - ossec,syscheck,pci_dss_11.5,
     2017 Jan 10 19:10:04 (CentOS) 192.168.56.4->syscheck
     Rule: 550 (level 7) -> 'Integrity checksum changed.'
