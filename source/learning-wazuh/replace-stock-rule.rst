@@ -19,7 +19,7 @@ In this lab you will raise the severity level of a specific rule in the Wazuh Ru
 
 2. Copy existing rule 5706 from /var/ossec/ruleset/rules/0095-sshd_rules.xml:
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <rule id="5706" level="6">
             <if_sid>5700</if_sid>
@@ -34,7 +34,7 @@ In this lab you will raise the severity level of a specific rule in the Wazuh Ru
 
 5. Add the tag **overwrite="yes"** to the rule so that Wazuh knows you are replacing an already defined rule.  The first line should now look like this:
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <rule id="5706" level="7" overwrite="yes">
 
@@ -50,7 +50,8 @@ In this lab you will raise the severity level of a specific rule in the Wazuh Ru
 
 9. Observe your customized alert level near the end of the output:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output    
 
         **Phase 3: Completed filtering (rules).
             Rule id: '5706'

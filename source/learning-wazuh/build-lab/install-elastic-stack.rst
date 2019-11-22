@@ -171,7 +171,8 @@ Copy Logstash certificate to where Filebeat can use it
 
 2. Copy the file content in preparation for pasting it into an empty file on the Wazuh Server.  It will look somewhat like this:
 
-	.. code-block:: console
+	.. code-block:: none
+		:class: output
 
 		-----BEGIN CERTIFICATE-----
 		MIIDaDCCAlCgAwIBAgIJAJ9yfo5G55kNMA0GCSqGSIb3DQEBCwUAMEIxCzAJBgNV
