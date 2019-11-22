@@ -8,7 +8,12 @@ Registering agents
 .. meta::
   :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
 
-In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh manager.
+When Wazuh Agent is successfully installed it is time to register it with Wazuh Manager. This process enables an encrypted and authenticated communication channel which allows manager to receive data collected by the agent. Wazuh provides a variety of different agent registration methods. The choice depends on factors like system architecture or user preferences.
+
+Below are listed currently available registration methods containing a brief description to enable you to choose the method that best suits your needs.
+
+Please, note that if agent was deployed using :ref:`Deployment Variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`, agent is already registered with manager.
+
 
 Prerequisites
 -------------
