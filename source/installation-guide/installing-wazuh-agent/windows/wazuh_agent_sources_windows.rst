@@ -39,7 +39,8 @@ This section describes how to download and build the Wazuh HIDS Windows Agent fr
 
     The following output will appear at the end of the building process:
 
-    .. code-block:: console
+    .. code-block:: none
+      :class: output    
 
       Done building winagent
 
