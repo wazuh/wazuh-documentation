@@ -28,6 +28,9 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
 
   # ./generate_wazuh_packages.sh -h
 
+.. code-block:: none
+ :class: output
+
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
      -b, --branch <branch>               Select Git branch or tag e.g. master.
@@ -67,6 +70,9 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
 .. code-block:: console
 
   # vagrant -h up
+
+.. code-block:: none
+  :class: output
 
   -- CUSTOM USE OF VAGRANT FOR THIS MACHINE --
 

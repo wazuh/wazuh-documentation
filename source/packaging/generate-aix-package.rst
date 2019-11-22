@@ -28,6 +28,9 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
   # ./generate_wazuh_packages.sh -h
 
+.. code-block:: none
+  :class: output
+  
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -b, --branch <branch>               Select Git branch or tag e.g.
