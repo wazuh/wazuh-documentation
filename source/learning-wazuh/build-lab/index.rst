@@ -29,6 +29,6 @@ as you focus on one aspect after another of the Wazuh solution.
     access-ec2-instances
     install-wazuh-manager
     install-elastic-stack
-    kibana-setup
+    xpack-security-setup
     install-linux-agents
     install-windows-agent
