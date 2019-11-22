@@ -5,21 +5,21 @@
 Detect an SSH brute-force attack
 ================================
 
-Here you will wage a small ssh brute force attack against your Linux Agent instance.
+Here you will wage a small SSH brute force attack against your Linux Agent instance.
 
-You will see how **Wazuh** detects and alerts on each login failure, and how a higher severity alert 
+You will see how Wazuh detects and alerts on each login failure, and how a higher severity alert 
 is produced when enough login failures from the same source IP are seen in the same time window.  
 
 You will also inspect the actual rules that fire as well as the enriched alert records
-that subsequently can be seen in **Kibana**.
+that subsequently can be seen in Kibana.
 
 Attack
 ------
 
-Using the **ssh** client of your choice, attempt to login as user "*blimey*" to your Linux Agent instance.
+Using the SSH client of your choice, attempt to login as user "*blimey*" to your Linux Agent instance.
 
 The attempts may be rejected before you are even prompted for a password since "*blimey*" is not an authorized
-**ssh** user on that system. 
+SSH user on that system. 
 
 Do this a total of eight times, making sure to get all your attempts made in the same 2-minute time window.
 
@@ -28,7 +28,7 @@ The first alert
 
 Use the file viewer of your choice to look at ``/var/ossec/logs/alerts/alerts.log`` on the Wazuh Manager computer.
 
-This file is optionally written to by **Wazuh** and is mainly useful for learning and debugging purposes.
+This file is optionally written to by Wazuh and is mainly useful for learning and debugging purposes.
 
 Search for the text "*blimey*" and the first alert you find should look like this:
 
@@ -41,12 +41,12 @@ Search for the text "*blimey*" and the first alert you find should look like thi
     Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
 
 
-The really important alert output file **Wazuh** writes to is ``/var/ossec/logs/alerts/alerts.json``.
+The really important alert output file Wazuh writes to is ``/var/ossec/logs/alerts/alerts.json``.
 
 It consists of single-line JSON records containing much more detail than what the ``alerts.log`` file shows.
 
-These JSON records are conveyed by **Filebeat** to **Elasticsearch** while enriching them so they may be inserted 
-into the appropriate **Elasticsearch** index.From there they can then be visualized with **Kibana**.
+These JSON records are conveyed by Filebeat to Elasticsearch while enriching them so they may be inserted 
+into the appropriate Elasticsearch index.From there they can then be visualized with Kibana.
 
 Here is a beautified example of the JSON record in ``alerts.json`` that corresponds to the same alert above in ``alerts.log``.
 
@@ -77,6 +77,14 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
         "gdpr": [
           "IV_35.7.d",
           "IV_32.2"
+            ],
+        "hipaa": [
+          "164.312.b"
+        ],
+        "nist_800_53": [
+          "AU.14",
+          "AC.7",
+          "AU.6"
         ]
       },
       "agent": {
@@ -112,9 +120,9 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
 Moving on to Kibana
 -------------------
 
-It is good to know about the log files, but **Kibana** is usually the best tool for looking at and analyzing **Wazuh** alerts.
+It is good to know about the log files, but Kibana is usually the best tool for looking at and analyzing Wazuh alerts.
 
-Log in to Kibana.  Click on the **Wazuh** icon on the left and then on the ``Discover`` tab at the top.
+Log in to Kibana.  Click on the Wazuh icon on the left and then on the ``Discover`` tab at the top.
 
 In the "*Search..*." field, enter the word "*blimey*" and hit the search button on the right (the magnifying glass).
 
@@ -164,7 +172,7 @@ Parent rule **5700** simply detects all sshd events and has a number of child ru
 
 Because these rules deal with individual events with no correlation across separate events, they are called "atomic" rules.
 
-However, after we repeated our ssh logon failure a number of times, another rule fired.
+However, after we repeated our SSH logon failure a number of times, another rule fired.
 
 Scroll back up in **Kibana** and find the event with a description of "*sshd: brute force trying to
 get access to the system*" which will be the first or nearly the first entry is your **Kibana results**. 
@@ -196,7 +204,7 @@ This rule **5712** is a special kind of child rule to rule **5710**.
 It will only fire if rule **5710** fires on events involving the same source IP at least eight 
 times in a **120** second period.
 
-The severity level of this rule is higher (10) than the previous one (only 5) because a cluster of ssh
+The severity level of this rule is higher (10) than the previous one (only 5) because a cluster of SSH
 login failure attempts from the same source is commonly a sign of a brute force attack.  
 
 This kind of rule is correlating multiple events over time and is thus called a "composite" rule.
