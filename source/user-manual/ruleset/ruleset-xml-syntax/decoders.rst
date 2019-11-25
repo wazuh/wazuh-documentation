@@ -8,31 +8,51 @@ Decoders Syntax
 The decoders extract the information from the received events.
 When an event is received, the decoders separate the information in blocks to prepare them for their subsequent analysis.
 
+Overview
+--------
+
+Lets have a general look into what options can be found in a decoder's syntax:
+
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| Option            | Values                                                        | Description                                                                                      |
++===================+===============================================================+==================================================================================================+
+| `decoder`_        | Name and/or type                                              | Its attributes will be used to define the decoder.                                               |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `parent`_         | Any decoder's name                                            | It will reference a parent decoder and the current will become a child decoder.                  |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `accumulate`_     | None                                                          | It allows to track events over multiple log messages.                                            |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `program_name`_   | Any program name                                              | It defines the name of the program associated with the decoder.                                  |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `prematch`_       | Any String or `RegEx <regex.html#os-regex-or-regex-syntax>`_  | It will look for a match in the log, in case it finds one, the decoder will be used.             |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `regex`_          | Any `RegEx <regex.html#os-regex-or-regex-syntax>`_            | The decoder will use this option to find words or patterns of interest and extract them.         |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `order`_          | Fields to be decoded                                          | The values that `regex`_ will extract, will be stored in these groups.                           |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `fts`_            | Static fields to be decoded                                   | Fist time seen.                                                                                  |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `ftscomment`_     | Any String                                                    | Adds a comment to fts.                                                                           |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `plugin_decoder`_ | See `below <decoders.html#plugin-decoder>`_                   | Specifies a plugin that will do the decoding. Useful when extraction with regex is too complex.  |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `use_own_name`_   | True                                                          | Only for child decoders.                                                                         |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `json_null_field`_| String                                                        | Adds the possibility of choosing how to store a null value from a JSON.                          |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| `var`_            | Name for the variable.                                        | Defines variables that can be reused.                                                            |
++-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+
+
+
 Options
 -------
-
-There is many options to configure the decoders:
-
-- `decoder`_
-- `parent`_
-- `accumulate`_
-- `program_name`_
-- `prematch`_
-- `regex`_
-- `order`_
-- `fts`_
-- `ftscomment`_
-- `plugin_decoder`_
-- `use_own_name`_
-- `json_null_field`_
-- `var`_
 
 decoder
 ^^^^^^^
 
 The attributes listed below define a decoder.
 
-Test
 
 +-----------+---------------------------+
 | Attribute | Description               |
@@ -52,10 +72,20 @@ Set name and type of decoder to *ossec*:
     ...
   </decoder>
 
+*Type* can also be defined later in the decoder:
+
+.. code-block:: xml
+
+  <decoder name="ossec">
+   <type>ossec</type>
+    ...
+  </decoder>
+
 parent
 ^^^^^^
 
-It is used to link a subordinate codeblock to his parent.
+It is used to link a subordinate codeblock to his parent. A parent decoder can have multiple child decoders, but take into account that a child decoder cannot be a parent. It is possible to create what we call `sibling decoders <https://wazuh.com/blog/sibling-decoders-flexible-extraction-of-information/>`_, which are a great aid in extracting an unknown amount of information.
+
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -65,8 +95,7 @@ It is used to link a subordinate codeblock to his parent.
 
 Example:
 
-Assign the decoder which father it belongs:
-
+*Decoder_junior* will enter only if *decoder_parent* has previously matched.
 .. code-block:: xml
 
   <decoder name="decoder_junior">
@@ -77,7 +106,7 @@ Assign the decoder which father it belongs:
 accumulate
 ^^^^^^^^^^^
 
-Allow Wazuh to track events over multiple log messages based on a decoded id.
+Allows Wazuh to track events over multiple log messages based on a decoded id.
 
 .. note::
 
@@ -90,7 +119,7 @@ Allow Wazuh to track events over multiple log messages based on a decoded id.
 program_name
 ^^^^^^^^^^^^^
 
-It defines the name of the program with which the decoder is associated.
+It defines the name of the program which the decoder is associated with. The program name of a log will be obtained, if possible, in the pre-decoding phase.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
