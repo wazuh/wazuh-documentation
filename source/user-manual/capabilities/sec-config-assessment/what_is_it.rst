@@ -56,6 +56,7 @@ potential event flooding.
 .. code-block:: none
     :name: alert_example
     :caption: Alert example
+    :class: output
 
     ** Alert 1568287462.156390: mail  - sca,gdpr_IV_35.7.d
     2019 Sep 12 13:24:22 (debian9-56) 10.0.0.56->sca

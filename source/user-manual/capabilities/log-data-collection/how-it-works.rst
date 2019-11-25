@@ -152,8 +152,11 @@ For the previous example, rule 5715 is matched:
 Alert
 -----
 
-Once a rule is matched, the manager will create an alert as below::
+Once a rule is matched, the manager will create an alert as below:
 
+.. code-block:: none
+  :class: output
+  
   ** Alert 1487103546.21448: - syslog,sshd,authentication_success,pci_dss_10.2.5,
   2017 Feb 14 12:19:06 localhost->/var/log/secure
   Rule: 5715 (level 3) -> 'sshd: authentication success.'
