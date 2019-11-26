@@ -53,13 +53,13 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 3. Open the template file and locate this line:
 
-    .. code-block:: none
+    .. code-block:: javascript
 
       "index_patterns": ["wazuh-alerts-3.x-*"],
 
     Add your custom pattern:
 
-    .. code-block:: none
+    .. code-block:: javascript
 
       "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],
 
@@ -73,6 +73,9 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
       # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
+    .. code-block:: json
+      :class: output
+
       {"acknowledged":true}
 
     .. note::
@@ -80,18 +83,20 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 5. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
 
-    For example, from 
+    For example, from
 
-    .. code-block:: none
-    
+
+    .. code-block:: yaml
+
         - name: index_prefix
           default: wazuh-alerts-3.x-
 
 
     To this:
 
-    .. code-block:: none
-    
+
+    .. code-block:: yaml
+
         - name: index_prefix
           default: my-custom-alerts-3.x-
 
