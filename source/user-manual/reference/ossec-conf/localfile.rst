@@ -436,33 +436,19 @@ For example, we may want to read all the files from a directory, but exclude tho
 reconnect_time
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.0
+.. versionadded:: 3.12.0
 
-Used to define the time in seconds to try to reconnect with Windows Event Channel when it has fallen.
+Defines the interval of reconnection attempts when the Windows Event Channel service is down.
 
-This feature is only compatible with eventchannel log format. Time must be greater than 4 seconds.
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 5s                                                                                                                                                  |
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks)  |
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Here is an example of how to configure this option:
+.. note::
 
-.. code-block:: xml
-
-  <localfile>
-    <location>Application</location>
-    <log_format>eventchannel</log_format>
-    <reconnect_time>40</reconnect_time>
-  </localfile>
-
-  <localfile>
-    <location>System</location>
-    <log_format>eventchannel</log_format>
-    <reconnect_time>20</reconnect_time>
-  </localfile>
-
-+--------------------+--------------------------+
-| **Default value**  | 5                        |
-+--------------------+--------------------------+
-| **Allowed values** | Any time in seconds > 4  |
-+--------------------+--------------------------+
+    This option only applies when the ``log_format`` is ``eventchannel``.
 
 Configuration examples
 ----------------------
@@ -502,4 +488,5 @@ Windows configuration:
       <log_format>eventchannel</log_format>
       <only-future-events>yes</only-future-events>
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
+      <reconnect_time>10s</reconnect_time>
     </localfile>
