@@ -5,9 +5,15 @@
 Linux and UNIX hosts
 ====================
 
-Open a session in your Linux/Unix agent host as root user. Then, follow these steps:
+Open a session in your Linux/Unix agent host as root user and follow these steps:
 
-1. Add the agent to the manager.
+1. Add the agent to the manager using following template:
+
+  .. code-block:: console
+
+    # curl -u <API-USER>:<API-PASSWORD> -k -X POST -d '{"name":"<AGENT-NAME>","ip":"<AGENT_IP>"}' -H 'Content-Type:application/json' "<https/http>://<MANAGER-IP>:55000/agents?pretty"
+
+  An example API request looks as follows:
 
   .. code-block:: console
 
@@ -23,6 +29,8 @@ Open a session in your Linux/Unix agent host as root user. Then, follow these st
       }
     }
 
+  For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+
 2. Import the key to the agent:
 
   .. code-block:: console
@@ -33,7 +41,7 @@ Open a session in your Linux/Unix agent host as root user. Then, follow these st
 
       If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
-3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
+3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address in the ``<client><server>`` section:
 
   .. code-block:: xml
 
@@ -44,7 +52,7 @@ Open a session in your Linux/Unix agent host as root user. Then, follow these st
       </server>
     </client>
 
-4. Start the agent.
+4. Start the agent:
 
   a) For Systemd:
 
@@ -63,3 +71,9 @@ Open a session in your Linux/Unix agent host as root user. Then, follow these st
     .. code-block:: console
 
       # /var/ossec/bin/ossec-control start
+
+5. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
+
+    .. code-block:: console
+
+      # /var/ossec/bin/agent_control -i <AGENT-ID>
