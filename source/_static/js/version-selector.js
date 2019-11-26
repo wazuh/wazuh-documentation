@@ -209,7 +209,9 @@ jQuery(function($) {
     let count = 0;
     while (cellTemp.length) {
       const analyzeUrl = cellTemp.pop();
-      const infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
+      let infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
+      analyzeUrl['page'] = analyzeUrl['page'].split('#')[0];
+      infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
       const logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
       while (logic.length) {
         const forLogic = logic.pop();
