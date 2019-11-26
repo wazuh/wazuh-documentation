@@ -11,38 +11,63 @@ When an event is received, the decoders separate the information in blocks to pr
 Overview
 --------
 
-Lets have a general look into what options can be found in a decoder's syntax:
+There are many options to configure the decoders:
 
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | Option            | Values                                                        | Description                                                                                      |
 +===================+===============================================================+==================================================================================================+
 | `decoder`_        | Name and/or type                                              | Its attributes will be used to define the decoder.                                               |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `parent`_         | Any decoder's name                                            | It will reference a parent decoder and the current will become a child decoder.                  |
+| `parent`_         | Any decoder's name                                            | It will reference a parent decoder and the current one will become a child decoder.              |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `accumulate`_     | None                                                          | It allows to track events over multiple log messages.                                            |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `program_name`_   | Any program name                                              | It defines the name of the program associated with the decoder.                                  |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `prematch`_       | Any String or `RegEx <regex.html#os-regex-or-regex-syntax>`_  | It will look for a match in the log, in case it finds one, the decoder will be used.             |
+| `prematch`_       | Any String or `RegEx <regex.html#os-regex-or-regex-syntax>`_  | It will look for a match in the log, in case it does, the decoder will be used.                  |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `regex`_          | Any `RegEx <regex.html#os-regex-or-regex-syntax>`_            | The decoder will use this option to find words or patterns of interest and extract them.         |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `order`_          | Fields to be decoded                                          | The values that `regex`_ will extract, will be stored in these groups.                           |
+| `order`_          | See `below <decoders.html#order>`_                            | The values that `regex`_ will extract, will be stored in these groups.                           |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `fts`_            | Static fields to be decoded                                   | Fist time seen.                                                                                  |
+| `fts`_            | See `below <decoders.html#fts>`_                              | Fist time seen.                                                                                  |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `ftscomment`_     | Any String                                                    | Adds a comment to fts.                                                                           |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `plugin_decoder`_ | See `below <decoders.html#plugin-decoder>`_                   | Specifies a plugin that will do the decoding. Useful when extraction with regex is too complex.  |
+| `plugin_decoder`_ | See `below <decoders.html#plugin-decoder>`_                   | Specifies a plugin that will do the decoding. Useful when extraction with regex is not feasible. |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `use_own_name`_   | True                                                          | Only for child decoders.                                                                         |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `json_null_field`_| String                                                        | Adds the possibility of choosing how to store a null value from a JSON.                          |
+| `json_null_field`_| String                                                        | Adds the option of deciding how a null value from a JSON will be stored.                         |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `var`_            | Name for the variable.                                        | Defines variables that can be reused.                                                            |
+| `var`_            | Name for the variable.                                        | Defines variables that can be reused inside the same file.                                       |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 
+How it works
+------------
+
+To understand the inner workings of a decoder, it will be easier through examples like the following:
+
+::
+
+  Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
+
+  **Phase 1: Completed pre-decoding.
+         full event: 'Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33'
+         timestamp: 'Apr 14 19:28:21'
+         hostname: 'gorilla'
+         program_name: 'sshd'
+         log: 'Connection closed by 192.168.1.33'
+
+  **Phase 2: Completed decoding.
+         decoder: 'sshd'
+         srcip: '192.168.1.33'
+
+At the beginning of the example is the full log of an event. The log firstly goes through a pre-decoding phase, where general information will be extracted if possible.
+
+Afterwards, the decoder will begin the extraction of information from the log that is left. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+
+Before making a custom decoder, the first step should always be running the event log through :ref:`ossec-logtest <ossec-logtest>` to know where to start.
 
 
 Options
@@ -64,7 +89,7 @@ The attributes listed below define a decoder.
 
 Example:
 
-Set name and type of decoder to *ossec*:
+Sets name and type of decoder to *ossec*:
 
 .. code-block:: xml
 
@@ -84,7 +109,7 @@ Set name and type of decoder to *ossec*:
 parent
 ^^^^^^
 
-It is used to link a subordinate codeblock to his parent. A parent decoder can have multiple child decoders, but take into account that a child decoder cannot be a parent. It is possible to create what we call `sibling decoders <https://wazuh.com/blog/sibling-decoders-flexible-extraction-of-information/>`_, which are a great aid in extracting an unknown amount of information.
+It is used to link a subordinate decoder to its parent. A parent decoder can have multiple child decoders, but take into account that a child decoder cannot be a parent. It is possible to create what we call `sibling decoders <https://wazuh.com/blog/sibling-decoders-flexible-extraction-of-information/>`_, which are a great aid in extracting an unknown amount of information.
 
 
 +--------------------+------------------+
@@ -96,6 +121,7 @@ It is used to link a subordinate codeblock to his parent. A parent decoder can h
 Example:
 
 *Decoder_junior* will enter only if *decoder_parent* has previously matched.
+
 .. code-block:: xml
 
   <decoder name="decoder_junior">
@@ -141,12 +167,12 @@ Define that the decoder is related with the ``syslogd`` process:
 prematch
 ^^^^^^^^^
 
-It attempts to find a match within the log for the string defined.
+It attempts to find a match within the log for the string defined. It is used as a condition to enter the decoder, if it finds a match, the current decoder will be used and the search for a decoder will stop and only its child decoders will be able to match. It is important to be as specific as possible to avoid matching with wrong events.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
+| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_      |
 +--------------------+--------------------------------------------------------------------+
 
 The attribute below is optional, it allows to discard some of the content of the entry.
@@ -155,6 +181,8 @@ The attribute below is optional, it allows to discard some of the content of the
 | Attribute          | Value              |
 +====================+====================+
 | **offset**         | after_regex        |
++                    +                    +
+|                    | after_parent       |
 +--------------------+--------------------+
 
 regex
