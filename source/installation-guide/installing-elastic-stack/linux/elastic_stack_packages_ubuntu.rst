@@ -64,7 +64,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
         .. code-block:: console
 
-          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
+          # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/elasticsearch/7.x/elasticsearch.yml
 
       2.2. Edit the file ``/etc/elasticsearch/elasticsearch.yml``
 
@@ -246,7 +246,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/elasticsearch/7.x/elasticsearch.yml
+        # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/elasticsearch/7.x/elasticsearch.yml
 
     3. Once we have Elasticsearch installed we need to configure it by editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follow:
 
@@ -524,7 +524,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
         .. code-block:: console
 
-          # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elk-secured/extensions/kibana/7.x/kibana.yml
+          # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/kibana/7.x/kibana.yml
 
   3.2 Edit the file ``/etc/kibana/kibana.yml``:
 
