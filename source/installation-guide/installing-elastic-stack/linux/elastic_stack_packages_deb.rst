@@ -8,7 +8,7 @@
 Debian
 ======
 
-To install the Elastic Stack components on Debian 7 or higher versions, you have to install the relevant packages after you've added the repositories.
+This document will guide you to install the Elastic Stack components on Debian 7 or higher versions.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -55,7 +55,7 @@ Configure Filebeat
 
     .. include:: common/load_filebeat_template.rst
 
-.. _install_kibana_app_deb:
+    ending text
 
 Installing Kibana
 -----------------
