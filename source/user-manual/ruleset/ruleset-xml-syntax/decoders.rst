@@ -26,11 +26,11 @@ There are many options to configure the decoders:
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `prematch`_       | Any String or `RegEx <regex.html#os-regex-or-regex-syntax>`_  | It will look for a match in the log, in case it does, the decoder will be used.                  |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `regex`_          | Any `RegEx <regex.html#os-regex-or-regex-syntax>`_            | The decoder will use this option to find words or patterns of interest and extract them.         |
+| `regex`_          | Any `RegEx <regex.html#os-regex-or-regex-syntax>`_            | The decoder will use this option to find fields of interest and extract them.                    |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `order`_          | See `below <decoders.html#order>`_                            | The values that `regex`_ will extract, will be stored in these groups.                           |
+| `order`_          | See `order table <decoders.html#order>`_                      | The values that `regex`_ will extract, will be stored in these groups.                           |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| `fts`_            | See `below <decoders.html#fts>`_                              | Fist time seen.                                                                                  |
+| `fts`_            | See `fts table <decoders.html#fts>`_                          | Fist time seen.                                                                                  |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | `ftscomment`_     | Any String                                                    | Adds a comment to fts.                                                                           |
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
@@ -109,7 +109,8 @@ Sets name and type of decoder to *ossec*:
 parent
 ^^^^^^
 
-It is used to link a subordinate decoder to its parent. A parent decoder can have multiple child decoders, but take into account that a child decoder cannot be a parent. It is possible to create what we call `sibling decoders <https://wazuh.com/blog/sibling-decoders-flexible-extraction-of-information/>`_, which are a great aid in extracting an unknown amount of information.
+It is used to link a subordinate decoder to its parent. A parent decoder can have many child decoders but take into account that a child decoder cannot be a parent.
+It is possible to create what we call `sibling decoders <sibling-decoders.html>`_, which is a handy decoding strategy to handle dynamic logs. 
 
 
 +--------------------+------------------+
@@ -189,7 +190,7 @@ regex
 ^^^^^^^
 
 **Regular expressions** or ``regex`` are sequences of characters that define a pattern.
-Decoders use them to find words or other patterns into the rules.
+Decoders use them to find words or other patterns into the rules. The decoder will only extract those fields that are contained within parentheses.
 
 An example is this regex that matches any numeral:
 
@@ -218,7 +219,7 @@ The attribute below is optional, it allows to discard some of the content of the
 
 Example:
 
-Show when an user executed the sudo command for the first time:
+Show when a user executed the sudo command for the first time:
 
 .. code-block:: xml
 
@@ -230,6 +231,8 @@ Show when an user executed the sudo command for the first time:
     <fts>name,srcuser,location</fts>
     <ftscomment>First time user executed the sudo command</ftscomment>
   </decoder>
+
+
 
 order
 ^^^^^^
