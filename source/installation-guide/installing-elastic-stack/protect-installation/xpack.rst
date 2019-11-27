@@ -33,7 +33,8 @@ This section describes how to secure the communications between the involved com
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert --pem --in instances.yml --out certs.zip --keep-ca-key
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     certs.zip
     |-- ca
