@@ -37,6 +37,9 @@ Specifies a type of incoming connection to accept: secure or syslog.
 | **Allowed values** | secure, syslog |
 +--------------------+----------------+
 
+.. note::
+	Only one secure remote configuration can be specified.
+
 port
 ^^^^^^^^^^^
 
@@ -62,7 +65,7 @@ Specifies the protocol to use. It is available for secure connections and syslog
 +--------------------+----------+
 
 .. note::
-	It is not possible to use both protocols simultaneously.
+	It is not possible to use both protocols simultaneously for secure connections.
 
 allowed-ips
 ^^^^^^^^^^^
