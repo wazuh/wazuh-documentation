@@ -4,8 +4,8 @@
 
 .. _installation_guide:
 
-Installation guide
-==================
+Quick installation guide
+========================
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
@@ -29,7 +29,7 @@ Basic concepts
 
 + **Wazuh cluster**: is a group of Wazuh servers, that works together to provide high availability and load balancing. With a cluster configuration, your Wazuh infrastructure can scale as much as you need.
 
-- **Elasticsearch cluster**: is a group of Elasticsearch nodes configured to work together. It provides high availability, scalability and load balacing for data indexing and searching.
+- **Elasticsearch cluster**: is a group of Elasticsearch nodes configured to work together. It provides high availability, scalability and load balancing for data indexing and searching.
 
 Installation types
 ------------------

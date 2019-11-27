@@ -44,6 +44,7 @@ In the following table you will find the Elastic stack installation guide for th
     linux/elastic_stack_packages_amazon
     linux/elastic_stack_packages_centos
     linux/elastic_stack_packages_deb
+    linux/elastic_stack_packages_fedora
     linux/elastic_stack_packages_opensuse
     linux/elastic_stack_packages_oracle
     linux/elastic_stack_packages_rhel

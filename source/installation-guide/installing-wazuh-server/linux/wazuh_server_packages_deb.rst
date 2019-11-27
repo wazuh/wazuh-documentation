@@ -46,147 +46,25 @@ Remember to repeat the *Adding the Wazuh repository* steps in every system that 
 Installing the Wazuh manager
 ----------------------------
 
-.. tabs::
+Use your terminal to install the Wazuh manager:
 
-  .. group-tab:: Single Wazuh node
+  .. code-block:: console
 
-    Use your terminal to install the Wazuh manager:
+    # apt-get install wazuh-manager
 
-      .. code-block:: console
+Once the process is completed, you can check the service status with:
 
-        # apt-get install wazuh-manager
+  * For Systemd:
 
-    Once the process is completed, you can check the service status with:
+    .. code-block:: console
 
-      * For Systemd:
+      # systemctl status wazuh-manager
 
-        .. code-block:: console
+  * For SysV Init:
 
-          # systemctl status wazuh-manager
+    .. code-block:: console
 
-      * For SysV Init:
-
-        .. code-block:: console
-
-          # service wazuh-manager status
-
-  .. group-tab:: Cluster Wazuh node
-
-    **Wazuh server master node**
-
-    Use your terminal to install the Wazuh manager:
-
-      .. code-block:: console
-
-        # apt-get install wazuh-manager
-
-    The Wazuh manager is installed and configured in a non-cluster mode (single-node mode) by default. Now, you need to configure the cluster mode by editing the following settings in ``/var/ossec/etc/ossec.conf`` in the Wazuh manager node that you want to be the *master node*:
-
-      .. code-block:: xml
-
-        <cluster>
-            <name>wazuh</name>
-            <node_name>master-node</node_name>
-            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-            <node_type>master</node_type>
-            <port>1516</port>
-            <bind_addr>0.0.0.0</bind_addr>
-            <nodes>
-                <node>master</node>
-            </nodes>
-            <hidden>no</hidden>
-            <disabled>no</disabled>
-        </cluster>
-
-    The parameters:
-
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`name <cluster_name>`           | Name that we will assign to the cluster.                                                                                                                                           |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`node_name <cluster_node_name>` | Name of the current node.                                                                                                                                                          |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`key <cluster_key>`             | The key must be 32 characters long and should be the same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``|
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`node_type <cluster_node_type>` | Set the node type (master/worker).                                                                                                                                                 |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`port <cluster_port>`           | Destination port for cluster communication.                                                                                                                                        |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`bind_addr <cluster_bind_addr>` | This specifies which network IP the node will be bound to in order to listen for incoming requests. (0.0.0.0 for any IP).                                                          |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`nodes <cluster_nodes>`         | The address of the **master node** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.                                         |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`hidden <cluster_hidden>`       | Toggles whether or not to show information about the cluster that generated an alert.                                                                                              |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-      |:ref:`disabled <cluster_disabled>`   | Indicates whether the node will be enabled or not in the cluster.                                                                                                                  |
-      +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-    Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
-
-      * For Systemd:
-
-        .. code-block:: console
-
-          # systemctl restart wazuh-manager
-
-      * For SysV Init:
-
-        .. code-block:: console
-
-          # service wazuh-manager restart
-
-    **Wazuh server worker nodes**
-
-    After configuring the Wazuh manager master node, you need to configure the worker nodes (one or more). Using your terminal, install the Wazuh manager:
-
-      .. code-block:: console
-
-        # apt-get install wazuh-manager
-
-    By default, the Wazuh manager is configured in a non-cluster mode (single-node mode). If you want to configure multiple managers in cluster mode as workers, you can do the following:
-
-      .. code-block:: xml
-
-        <cluster>
-            <name>wazuh</name>
-            <node_name>worker-node</node_name>
-            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-            <node_type>worker</node_type>
-            <port>1516</port>
-            <bind_addr>0.0.0.0</bind_addr>
-            <nodes>
-                <node>master</node>
-            </nodes>
-            <hidden>no</hidden>
-            <disabled>no</disabled>
-        </cluster>
-
-    As you can see in the previous example, you have to set the :ref:`node_type <cluster_node_type>` as ``worker``, give a name in :ref:`node_name <cluster_node_name>` (it has to be different in every node), the previously generated :ref:`key <cluster_key>` (it has to be the same for all nodes), the setting of the :ref:`nodes <cluster_nodes>` has to contain the master address (it can be either an IP or a DNS), and :ref:`disabled <cluster_disabled>` to ``no``.
-
-    Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
-
-      * For Systemd:
-
-        .. code-block:: console
-
-          # systemctl restart wazuh-manager
-
-      * For SysV Init:
-
-        .. code-block:: console
-
-          # service wazuh-manager restart
-
-    Finally, you can check if the Wazuh cluster is working and connected with:
-
-      .. code-block:: console
-
-        # /var/ossec/bin/cluster_control -l
-        NAME         TYPE    VERSION  ADDRESS
-        master-node  master  3.10.2   10.0.0.3
-        worker-node1 worker  3.10.2   10.0.0.4
-        worker-node2 worker  3.10.2   10.0.0.5
-
-    Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are examples IPs. You will find your particular Wazuh server node IPs.
+      # service wazuh-manager status
 
 Installing the Wazuh API
 ------------------------
