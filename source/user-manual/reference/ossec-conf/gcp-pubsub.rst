@@ -16,17 +16,27 @@ gcp-pubsub
 
 This configuration section is used to configure the Google Cloud Pub/Sub module.
 
-Options
--------
+Main options
+------------
 
 - `enabled`_
 - `project_id`_
 - `subscription_name`_
 - `credentials_file`_
-- `interval`_
 - `max_messages`_
-- `pull_on_start`_
 - `logging`_
+
+Scheduling options
+------------------
+- `pull_on_start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
+
+
+Main options
+------------
 
 enabled
 ^^^^^^^
@@ -78,17 +88,6 @@ This setting specifies the path to the Google Cloud credentials file in JW Token
 
 For example ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>``.
 
-interval
-^^^^^^^^
-
-Interval between module executions.
-
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1h                                                                                                                                                             |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months) |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
 max_messages
 ^^^^^^^^^^^^
 Number of maximum messages pulled in each iteration.
@@ -98,6 +97,21 @@ Number of maximum messages pulled in each iteration.
 +--------------------+-------------+
 | **Allowed values** | Any integer |
 +--------------------+-------------+
+
+logging
+^^^^^^^^
+
+Toggle between the different logging levels.
+
++--------------------+--------------------------------------------+
+| **Default value**  | info                                       |
++--------------------+--------------------------------------------+
+| **Allowed values** | disabled/info/debug/warning/error/critical |
++--------------------+--------------------------------------------+
+
+
+Scheduling options
+------------------
 
 pull_on_start
 ^^^^^^^^^^^^^
@@ -110,16 +124,70 @@ Trigger the pulling in case of an agent start or restart.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-logging
+interval
 ^^^^^^^^
 
-Toggle between the different logging levels.
+Interval between module executions.
 
-+--------------------+--------------------------------------------+
-| **Default value**  | info                                       |
-+--------------------+--------------------------------------------+
-| **Allowed values** | disabled/info/debug/warning/error/critical |
-+--------------------+--------------------------------------------+
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1h                                                                                                                                                             |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months) |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+day
+^^^
+
+Day of the month to run the fetch logs from GCP.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the month [1..31] |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
+
+wday
+^^^^
+
+Day of the week to run the script to fetch logs. This option is **not compatible** with the ``day`` option.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the week:         |
+|                    |   - sunday/sun           |
+|                    |   - monday/mon           |
+|                    |   - tuesday/tue          |
+|                    |   - wednesday/wed        |
+|                    |   - thursday/thu         |
+|                    |   - friday/fri           |
+|                    |   - saturday/sat         |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
+time
+^^^^
+
+Time of the day to retrieve logs from GCP. It has to be represented in the format *hh:mm*.
+
++--------------------+-----------------------+
+| **Default value**  | n/a                   |
++--------------------+-----------------------+
+| **Allowed values** | Time of day *[hh:mm]* |
++--------------------+-----------------------+
+
+.. note::
+
+	When only the ``time`` option is set, the interval value must be a multiple of days. By default, the interval is set to a day.
+
+
 
 Configuration example
 ---------------------
