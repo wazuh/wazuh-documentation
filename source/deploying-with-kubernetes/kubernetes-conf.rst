@@ -223,6 +223,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get namespaces | grep wazuh
+
+    .. code-block:: none
+        :class: output
+
         wazuh         Active    12m
 
 **Services**
@@ -230,6 +234,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get services -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         elasticsearch         ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
         kibana                ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
@@ -245,6 +253,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get deployments -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           11m
         wazuh-logstash   1         1         1            1           10m
@@ -255,6 +267,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get statefulsets -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                     DESIRED   CURRENT   AGE
         wazuh-elasticsearch      1         1         13m
         wazuh-manager-master     1         1         9m
@@ -266,6 +282,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get pods -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                              READY     STATUS    RESTARTS   AGE
         wazuh-elasticsearch-0             1/1       Running   0          15m
         wazuh-kibana-f4d9c7944-httsd      1/1       Running   0          14m
@@ -284,6 +304,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get services -o wide -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
         wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
 
