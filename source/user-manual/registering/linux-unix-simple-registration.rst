@@ -2,8 +2,8 @@
 
 .. _linux-unix-simple-registration:
 
-Linux and Unix agents
-=====================
+Linux and Unix hosts
+====================
 
 Open a session in your Linux/Unix agent host as root user. After that, you can register the Agent using ``agent-auth`` as follows:
 
@@ -14,9 +14,9 @@ Open a session in your Linux/Unix agent host as root user. After that, you can r
     # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
 
-2. Edit the Wazuh agent configuration to add the Wazuh server IP address.
+2. Edit the agent configuration to add the manager IP address.
 
-  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
+  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server IP address:
 
   .. code-block:: xml
 

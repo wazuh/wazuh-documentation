@@ -2,8 +2,8 @@
 
 .. _windows-simple-registration:
 
-Windows agents
-==============
+Windows hosts
+=============
 
 To register the Windows Agent, you need to start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh agent in Windows host depends on the architecture of the host.
 
