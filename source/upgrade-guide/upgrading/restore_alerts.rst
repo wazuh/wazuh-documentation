@@ -83,7 +83,7 @@ If everything worked well, the output will appear something like this:
 
         # curl "http://localhost:9200/_cat/indices?v"
 
-    .. code-block:: console
+    .. code-block:: none
         :class: output
 
         health status index                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size

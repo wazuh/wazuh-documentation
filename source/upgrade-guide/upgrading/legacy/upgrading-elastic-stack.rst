@@ -66,7 +66,7 @@ Configure Logstash
     }
     ...
 
-   The above configuration will setup Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than receive forwarded data from Filebeat.
+The above configuration will setup Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than receive forwarded data from Filebeat.
 
 Configure Kibana
 ^^^^^^^^^^^^^^^^
