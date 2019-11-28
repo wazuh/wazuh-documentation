@@ -27,6 +27,9 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
 
   # ./generate_debian_package.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_debian_package.sh [OPTIONS]
 
       -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
