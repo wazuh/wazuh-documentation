@@ -115,6 +115,10 @@ Wazuh API
 .. code-block:: js
 
     GET /sca/001
+
+.. code-block:: js
+    :class: output
+
     {
         "error": 0,
         "data": {
@@ -145,6 +149,10 @@ Wazuh API
 .. code-block:: js
 
     GET /sca/001/checks/system_audit_ssh
+
+.. code-block:: js
+    :class: output
+
     {
         "error": 0,
         "data": {
