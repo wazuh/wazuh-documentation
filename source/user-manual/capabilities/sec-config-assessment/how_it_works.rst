@@ -46,6 +46,7 @@ Take the following check from policy  ``cis_debian9_L2.yml`` as an example:
 After evaluating the aforementioned check, the following event is generated:
 
 .. code-block:: json
+  :class: output
 
   {
     "type": "check",
@@ -96,6 +97,7 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 #. A message appears in the manager log file, e.g:
 
     .. code-block:: none
+        :class: output
 
         INFO: Policy 'cis_debian9_L2' information for agent '002' is outdated. Requested latest scan results.
 

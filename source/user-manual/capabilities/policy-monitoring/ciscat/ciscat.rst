@@ -113,7 +113,8 @@ The following is an example of how to deploy the CIS-CAT integration:
 Information about the executed scan and report overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: none
+   :class: output
 
    ** Alert 1518119251.42536: - ciscat,
    2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
@@ -137,7 +138,8 @@ Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpo
 Information about a specific result
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: none
+   :class: output
 
    ** Alert 1518119251.125999: - ciscat,
    2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
