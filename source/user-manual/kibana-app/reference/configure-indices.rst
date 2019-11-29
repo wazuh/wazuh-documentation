@@ -53,13 +53,13 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 3. Open the template file and locate this line:
 
-    .. code-block:: none
+    .. code-block:: javascript
 
       "index_patterns": ["wazuh-alerts-3.x-*"],
 
     Add your custom pattern:
 
-    .. code-block:: none
+    .. code-block:: javascript
 
       "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],
 
@@ -73,6 +73,9 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
       # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
+    .. code-block:: json
+      :class: output
+
       {"acknowledged":true}
 
     .. note::
@@ -82,14 +85,14 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     From this:
 
-    .. code-block:: none
+    .. code-block:: yaml
 
       indices:
         - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
     To this:
 
-    .. code-block:: none
+    .. code-block:: yaml
 
       indices:
         - index: 'my-custom-alerts-%{+yyyy.MM.dd}'
