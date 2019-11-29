@@ -17,6 +17,10 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -33,6 +37,10 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 .. code-block:: console
 
     # curl -u foo:bar -X PUT "http://localhost:55000/agents/new_agent"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -47,6 +55,10 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 .. code-block:: console
 
     # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "http://localhost:55000//agents"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -61,6 +73,10 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 .. code-block:: console
 
     # curl -u foo:bar -X DELETE "http://localhost:55000/rootcheck/001?pretty"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": "Rootcheck database deleted"
@@ -94,9 +110,8 @@ Code:
     print(json.dumps(r.json(), indent=4, sort_keys=True))
     print("Status: {0}".format(r.status_code))
 
-Output:
-
-.. code-block:: javascript
+.. code-block:: json
+    :class: output
 
     {
         "data": {
@@ -121,6 +136,10 @@ Output:
         },
         "error": 0
     }
+
+.. code-block:: json
+    :class: output
+
     Status: 200
 
 
@@ -172,9 +191,10 @@ Code:
 
     Write-Output $r
 
-Output:
 
-::
+.. code-block:: none
+    :class: output
+
 
     error data
     ----- --------
