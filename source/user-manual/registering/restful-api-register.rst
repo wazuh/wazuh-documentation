@@ -2,8 +2,8 @@
 
 .. _restful-api-register:
 
-Using the Wazuh API
-===================
+Using the Wazuh API manually
+============================
 
 Wazuh API allows to register a Wazuh Agent by running a single requests from any host. This request will return a registration **key** for that agent, and then, you **must manually add** this key to the agent using ``manage_agents`` utility.
 
@@ -18,12 +18,3 @@ Registering the Agents
     api/api-register-linux-unix
     api/api-register-windows
     api/api-register-macos
-
-Scripts to register the agents automatically
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-We have prepared a few scripts in different programming languages to help with the task of registering an agent with the API:
-
-    - `Register an agent using a shell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.sh>`_.
-    - `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.py>`_.
-    - `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.ps1>`_.

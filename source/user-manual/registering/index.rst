@@ -54,9 +54,9 @@ Below are listed currently available registration methods containing a brief des
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
 | :ref:`Using Wazuh API manually <restful-api-register>`                                         | Requires Wazuh API user name and password as well as manager's and agent's IP address |
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`Using scripts to register agents with API <restful-api-register>`                        |                                                                                       |
+| :ref:`Using scripts to register agents with API <restful-api-register-script>`                 |                                                                                       |
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`simple-registration-service`                                                             |                                                                                       |
+| :ref:`simple-registration-service`                                                             | Requires Root/Administrator access to an agent. Doesn't require an access to a manager|
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
 | :ref:`password-authorization-registration-service`                                             |                                                                                       |
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
