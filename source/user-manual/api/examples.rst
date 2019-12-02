@@ -137,7 +137,7 @@ Code:
         "error": 0
     }
 
-.. code-block:: json
+.. code-block:: none
     :class: output
 
     Status: 200
