@@ -54,7 +54,7 @@ Below are listed currently available registration methods containing a brief des
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
 | :ref:`Using Wazuh API manually <restful-api-register>`                                         | Requires Wazuh API user name and password as well as manager's and agent's IP address |
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`Using scripts to register agents with API <restful-api-register-script>`                 |                                                                                       |
+| :ref:`Using scripts to register agents with API <restful-api-register-script>`                 | Fast and easy way to register agents for those familiar with using scripts.           |
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
 | :ref:`simple-registration-service`                                                             | Requires Root/Administrator access to an agent. Doesn't require an access to a manager|
 +------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
