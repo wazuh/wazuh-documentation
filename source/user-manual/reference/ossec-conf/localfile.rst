@@ -107,13 +107,14 @@ Change a command name in the log message.
 
 For example ``<alias>usb-check</alias>`` would replace:
 
-.. code-block:: xml
+.. code-block:: none
 
    ossec: output: 'reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR':
 
 with:
 
-.. code-block:: xml
+.. code-block:: none
+   :class: output
 
    ossec: output: 'usb-check':
 
@@ -207,6 +208,7 @@ This is a sample JSON object from the log file:
 The additional fields configured above would appear in the resulting event as below:
 
 .. code-block:: json
+  :class: output
 
   {
     "event": {
@@ -314,7 +316,7 @@ Set the format of the log to be read. **field is required**
 
 Sample of Multi-line log message in original log file:
 
-.. code-block:: console
+.. code-block:: none
 
     Aug 9 14:22:47 hostname log line one
     Aug 9 14:22:47 hostname log line two
@@ -324,7 +326,8 @@ Sample of Multi-line log message in original log file:
 
 Sample Log message as analyzed by ossec-analysisd:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
