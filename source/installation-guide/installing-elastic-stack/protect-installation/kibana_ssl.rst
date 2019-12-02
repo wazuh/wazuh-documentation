@@ -199,7 +199,7 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
 
     .. code-block:: none
         :class: output
-        
+
         Generating a 2048 bit RSA private key
         .............+++
         ..+++

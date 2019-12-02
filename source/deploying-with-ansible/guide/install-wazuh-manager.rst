@@ -173,7 +173,6 @@ We will obtain a final result similar to the one shown in the following code blo
 .. code-block:: none
 	:class: output
 
-
 	TASK [ansible-role-filebeat : Debian/Ubuntu | Add Filebeat repository.] **********************************************************************************
 	skipping: [192.168.0.180]
 

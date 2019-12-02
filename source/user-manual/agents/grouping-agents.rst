@@ -296,7 +296,7 @@ Finally, to check the synchronization status of the group configuration for a si
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {

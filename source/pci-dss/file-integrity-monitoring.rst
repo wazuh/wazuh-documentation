@@ -64,7 +64,7 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
 
 .. code-block:: none
     :class: output
-    
+
     ** Alert 1484071804.77110: - ossec,syscheck,pci_dss_11.5,
     2017 Jan 10 19:10:04 (CentOS) 192.168.56.4->syscheck
     Rule: 550 (level 7) -> 'Integrity checksum changed.'

@@ -118,7 +118,7 @@ Switch over to your Wazuh Server SSH window and run these commands, looking for 
 
     .. code-block:: none
         :class: output
-        
+
         2018 Jan 17 01:17:58 (linux-agent) any->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'linux-agent->any'.

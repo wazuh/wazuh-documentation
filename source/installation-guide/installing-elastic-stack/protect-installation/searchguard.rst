@@ -131,9 +131,9 @@ You can check if it's working as expected using the next request (Search Guard n
 
     $ curl -k -u admin:admin https://<ELASTICSEARCH_HOST>:9200/_searchguard/authinfo?pretty
 
-.. code-block:: none
+.. code-block:: json
     :class: output
-    
+
     {
     "user" : "User [name=admin, roles=[admin], requestedTenant=null]",
     "user_name" : "admin",

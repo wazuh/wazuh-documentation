@@ -21,7 +21,7 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
-  .. code-block:: none
+	.. code-block:: none
 		:class: output
 
 		Available agents:
@@ -54,7 +54,7 @@ This guide suppose that the Wazuh agent is installed in a x86_64 host, so the in
 
 	      # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
 
-    .. code-block:: none
+	  .. code-block:: none
 	      :class: output
 
 	      Agent information:

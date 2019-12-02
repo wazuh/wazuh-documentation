@@ -21,7 +21,7 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
-  .. code-block:: none
+	.. code-block:: none
 		:class: output
 
 		Available agents:
@@ -33,7 +33,7 @@ Manager
 
 		# /var/ossec/bin/manage_agents -e 001
 
-  .. code-block:: none
+	.. code-block:: none
 		:class: output
 
 		Agent key information for '001' is:

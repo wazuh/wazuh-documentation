@@ -295,7 +295,7 @@ SCAP checks are run periodically (the default is once a day) and results are set
 
 .. code-block:: json
   :class: output
-  
+
   {
     "agent": {
         "id": "1040",

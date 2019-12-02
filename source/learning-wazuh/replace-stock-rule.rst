@@ -51,7 +51,7 @@ In this lab you will raise the severity level of a specific rule in the Wazuh Ru
 9. Observe your customized alert level near the end of the output:
 
     .. code-block:: none
-        :class: output    
+        :class: output
 
         **Phase 3: Completed filtering (rules).
             Rule id: '5706'

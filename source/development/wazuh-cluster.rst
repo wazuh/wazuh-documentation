@@ -416,7 +416,7 @@ If the log error message isn't clarifying enough, the traceback can be logged se
 
 .. code-block:: none
     :class: output
-    
+
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
     File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.10.2-py3.7.egg/wazuh/cluster/cluster.py", line 213, in walk_dir

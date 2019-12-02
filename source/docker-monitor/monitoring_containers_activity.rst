@@ -229,7 +229,7 @@ This is the alert for ``docker unpause apache`` command:
 
 .. code-block:: json
     :class: output
-    
+
     {
     "timestamp": "2018-10-05T17:18:35.373+0200",
     "rule": {

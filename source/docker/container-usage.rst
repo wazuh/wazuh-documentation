@@ -25,7 +25,7 @@ Access to containers and services
 
     .. code-block:: none
       :class: output
-      
+
               Name                  Command                        State     Ports
 
       wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp

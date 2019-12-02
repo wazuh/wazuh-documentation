@@ -114,7 +114,7 @@ them to Elasticsearch.
   Example output:
 
   .. code-block:: none
-    :class: output  
+    :class: output
 
     logstash: 172.16.1.2:5000...
     connection...

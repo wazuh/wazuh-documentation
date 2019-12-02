@@ -29,6 +29,7 @@ For instance:
 The structure of the repository should be as shown below:
 
 .. code-block:: none
+    :class: output
 
     /
     └── centos

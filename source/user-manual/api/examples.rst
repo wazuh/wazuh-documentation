@@ -110,7 +110,7 @@ Code:
     print(json.dumps(r.json(), indent=4, sort_keys=True))
     print("Status: {0}".format(r.status_code))
 
-.. code-block:: javascript
+.. code-block:: json
     :class: output
 
     {
@@ -186,6 +186,7 @@ Code:
     }
 
     Write-Output $r
+    
 
 .. code-block:: none
     :class: output

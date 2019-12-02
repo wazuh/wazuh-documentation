@@ -227,7 +227,7 @@ A more precise timeframe can be specified using operators ``>`` and ``<`` togeth
 
 .. code-block:: json
     :class: output
-    
+
     {
         "error": 0,
         "data": {
