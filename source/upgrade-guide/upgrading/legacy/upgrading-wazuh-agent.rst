@@ -18,13 +18,13 @@ a) On DEB or RPM based **Linux systems**, you can easily rely on the packages ma
       # /var/ossec/bin/manage_agents -V
 
   .. code-block:: none
-          :class: output
+      :class: output
 
-          Wazuh v2.0 - Wazuh Inc.
+      Wazuh v2.0 - Wazuh Inc.
 
-          This program is free software; you can redistribute it and/or modify
-          it under the terms of the GNU General Public License (version 2) as
-          published by the Free Software Foundation.
+      This program is free software; you can redistribute it and/or modify
+      it under the terms of the GNU General Public License (version 2) as
+      published by the Free Software Foundation.
 
 b) On **Windows**, **Mac OS** and other operating systems, we advise you to delete your previous version and install Wazuh v2.x from scratch. More information is available in our documentation at:
 

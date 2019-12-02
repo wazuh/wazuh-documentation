@@ -161,7 +161,7 @@ We could configure these three files and execute them, but we are going to creat
 
 	ansible@ansible:/etc/ansible/wazuh-ansible$ cat wazuh-elk.yml
 
-.. code-block:: none
+.. code-block:: yaml
 	:class: output
 
 	- hosts: 192.168.0.108

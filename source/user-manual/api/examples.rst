@@ -195,7 +195,6 @@ Code:
 .. code-block:: none
     :class: output
 
-
     error data
     ----- --------
     0     @{syscheckTime=Wed Feb 24 09:55:04 2016; syscheckEndTime=Wed Feb 24 10:00:42 2016}

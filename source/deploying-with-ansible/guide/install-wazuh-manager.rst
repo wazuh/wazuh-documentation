@@ -104,7 +104,7 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ cat wazuh-manager.yml
 
-.. code-block:: none
+.. code-block:: yaml
 	:class: output
 
 	- hosts: <your wazuh server host>

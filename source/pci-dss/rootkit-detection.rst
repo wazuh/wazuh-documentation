@@ -61,7 +61,7 @@ Wazuh performs several tests to detect rootkits.  One of them is to check for fi
 
 .. code-block:: none
     :class: output
-    
+
     Rule: 502 (level 3) -> 'Ossec server started.'
     ossec: Ossec started.
 

@@ -76,7 +76,7 @@ Debian and Ubuntu based Linux distributions:
 
 Editing ossec.conf
 ~~~~~~~~~~~~~~~~~~
-Wazuh must be aware of the events detected by Audit. So, it is needs to be configured to read the audit log file: :
+Wazuh must be aware of the events detected by Audit. So, it is needs to be configured to read the audit log file:
 
 .. code-block: xml
 

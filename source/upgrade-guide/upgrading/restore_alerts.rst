@@ -79,10 +79,6 @@ Once the reindex of your alerts has finished, you can confirm that it was succes
 
 If everything worked well, the output will appear something like this:
 
-    .. code-block:: console
-
-        # curl "http://localhost:9200/_cat/indices?v"
-
     .. code-block:: none
         :class: output
 

@@ -66,8 +66,8 @@ To set the labels at the manager level, the following configuration would be add
 When an alert is fired for an agent with the above configuration applied from the manager, the defined labels will add information to alerts as shown below:
 
 .. code-block:: none
-   :emphasize-lines: 3,4,5,6
-   :class: output
+    :emphasize-lines: 3,4,5,6
+    :class: output
 
     ** Alert 1488922301.778562: mail  - ossec,syscheck,pci_dss_11.5,
     2017 Jun 07 13:31:43 (92603de31548) 192.168.66.1->syscheck

@@ -80,7 +80,6 @@ Using the RESTful API
     .. code-block:: json
         :class: output
 
-
         {
           "error": 0,
           "data": {
