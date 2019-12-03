@@ -54,7 +54,8 @@ Below shell script allows to register Wazuh agent on a Linux/Unix host using Waz
 Register the agent automatically using a Python script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Below Python script allows to register Wazuh agent on a Linux/Unix host, as well as on a Windows host, using Wazuh Api service. The script requires root/administrator access and shall be run on the agent.
+Below Python script allows us to register Wazuh agent on a Linux/Unix host, as well as on a Windows host, using Wazuh API service. The script requires root/administrator access and shall be run on the agent.
+The script requires Python and pip package-management system to be installed on the agent host machine.
 
 1. Download the script: `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.py>`_.
 
@@ -66,6 +67,43 @@ Below Python script allows to register Wazuh agent on a Linux/Unix host, as well
 
     base_url = 'http://10.0.0.1:55000'
 
+  You might need to amend the following lines according to your configuration:
+
+  .. code-block:: console
+
+    base_url = 'http://10.0.0.1:55000'
+    auth = HTTPBasicAuth('foo', 'bar')
+    agent_name = "auto"
+    verify = False  # Use with self-signed certificates.
+
+  If the ``agent_name`` has a default ``auto`` value, script will use the output of the hostname command as the agent's name.
+
+  For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+
+3. Execute the script.
+
+   On a Linux/Unix host execute the following command:
+
+   .. code-block:: console
+
+     # ./api-register-agent.py
+
+   The registration process requires ``requests`` package to be installed. If the following package is not found the script asks for the package installation:
+
+   .. code-block:: console
+
+     No module 'requests' found. Install: pip install requests
+
+   After the script is successfully executed it returns the agent's name and ID:
+
+   .. code-block:: console
+
+     Adding agent.
+     Agent 'agent-010' with ID '010' added.
+     Importing authentication key.
+     Restarting.
+
+   The script will automatically start the agent.
 |
 Register the agent automatically using a PowerShell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
