@@ -4,8 +4,8 @@
 
 .. _installation_guide:
 
-Quick installation guide
-========================
+Quick start environment guide
+=============================
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
