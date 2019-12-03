@@ -77,7 +77,7 @@ The output of your script must be a JSON object in the standard output.
 
 On success example:
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -162,7 +162,7 @@ On success example:
 
 On error example:
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {

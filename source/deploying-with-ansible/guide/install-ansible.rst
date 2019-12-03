@@ -105,45 +105,45 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 
 .. code-block:: console
 
-	 ansible@ansible:~$ ssh-keygen
+	ansible@ansible:~$ ssh-keygen
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  Generating public/private rsa key pair.
-  Enter file in which to save the key (/home/ansible/.ssh/id_rsa):
-  Enter passphrase (empty for no passphrase):
-  Enter same passphrase again:
-  Your identification has been saved in /home/ansible/.ssh/id_rsa.
-  Your public key has been saved in /home/ansible/.ssh/id_rsa.pub.
-  The key fingerprint is:
-  SHA256:Z2nkI+fOVMa21NxP8YZaKpQWFqbm4cnAKXZezkuG/0g ansible@ansible
-  The key's randomart image is:
-  +---[RSA 2048]----+
-  |          o      |
-  |     . . o .     |
-  |    o = = +    . |
-  |   . + @ * = o oo|
-  |      o S % * = =|
-  |       + @ * = o.|
-  |        E + +   .|
-  |       . * .     |
-  |        . +      |
-  +----[SHA256]-----+
+	Generating public/private rsa key pair.
+	Enter file in which to save the key (/home/ansible/.ssh/id_rsa):
+	Enter passphrase (empty for no passphrase):
+	Enter same passphrase again:
+	Your identification has been saved in /home/ansible/.ssh/id_rsa.
+	Your public key has been saved in /home/ansible/.ssh/id_rsa.pub.
+	The key fingerprint is:
+	SHA256:Z2nkI+fOVMa21NxP8YZaKpQWFqbm4cnAKXZezkuG/0g ansible@ansible
+	The key's randomart image is:
+	+---[RSA 2048]----+
+	|          o      |
+	|     . . o .     |
+	|    o = = +    . |
+	|   . + @ * = o oo|
+	|      o S % * = =|
+	|       + @ * = o.|
+	|        E + +   .|
+	|       . * .     |
+	|        . +      |
+	+----[SHA256]-----+
 
-  If you wish you can include a passphrase.
+If you wish you can include a passphrase.
 
 1.3 - Check the permissions of the generated keys.
 
 - ``id_rsa`` must have restrictive permits (600 or "- r w - - - - - - -").
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  drwx------  2 ansible ansible 4,0K sep 12 13:37 .
-  -rw-------  1 ansible ansible 1,7K sep 12 13:37 id_rsa
-  -rw-r--r--  1 ansible ansible  397 sep 12 13:37 id_rsa.pub
-  drwxr-xr-x 15 ansible ansible 4,0K sep 12 13:32 ..
+	drwx------  2 ansible ansible 4,0K sep 12 13:37 .
+	-rw-------  1 ansible ansible 1,7K sep 12 13:37 id_rsa
+	-rw-r--r--  1 ansible ansible  397 sep 12 13:37 id_rsa.pub
+	drwxr-xr-x 15 ansible ansible 4,0K sep 12 13:32 ..
 
 - In addition, the ``/home/ansible/.ssh/`` directory must have the entry permissions at 700 (d r w x - - - - - -), as we can see.
 
@@ -203,13 +203,13 @@ Check the permissions.
 
 	[centos@localhost ~]$ ls -lath .ssh/
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  total 4,0K
-  drwx------.  2 centos centos   29 sep 12 14:07 .
-  -rw-r--r--.  1 centos centos    0 sep 12 14:07 authorized_keys
-  drwx------. 15 centos centos 4,0K sep 12 14:03 ..
+	total 4,0K
+	drwx------.  2 centos centos   29 sep 12 14:07 .
+	-rw-r--r--.  1 centos centos    0 sep 12 14:07 authorized_keys
+	drwx------. 15 centos centos 4,0K sep 12 14:03 ..
 
 
 3 - Return to the Ansible server and concatenate the public key to the ``~/.ssh/authorized_keys`` file in the $HOME of Wazuh server using SSH
@@ -220,10 +220,10 @@ Check the permissions.
 
 	ansible@ansible:~$ cat .ssh/id_rsa.pub | ssh centos@192.168.0.180 "cat >> .ssh/authorized_keys"
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  centos@192.168.0.180's password:
+	centos@192.168.0.180's password:
 
 We could see the authorized_keys content.
 
@@ -231,10 +231,10 @@ We could see the authorized_keys content.
 
 	[centos@localhost ~]$ cat .ssh/authorized_keys
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  ssh-rsa AAA...60V ansible@ansible
+	ssh-rsa AAA...60V ansible@ansible
 
 4 - Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
 
@@ -274,10 +274,10 @@ We could see the authorized_keys content.
 
 	ansible@ansible:~$ ssh centos@192.168.0.180
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  Last login: Wed Sep 12 13:57:48 2018 from 192.168.0.107
+	Last login: Wed Sep 12 13:57:48 2018 from 192.168.0.107
 
 As we can see, we access without having to enter any password.
 
@@ -351,13 +351,13 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 You will get a output like this:
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  192.168.0.180 | SUCCESS => {
-  "changed": false,
-  "ping": "pong"
-  }
+	192.168.0.180 | SUCCESS => {
+	    "changed": false,
+	    "ping": "pong"
+	}
 
 
 This way we will know that Ansible server reaches the remote system (Wazuh server).
@@ -375,7 +375,7 @@ From Ansible server.
 	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.10.2_7.3.2 https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  wazuh-ansible
+	wazuh-ansible

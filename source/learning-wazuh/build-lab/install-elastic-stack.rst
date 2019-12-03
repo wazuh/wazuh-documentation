@@ -171,17 +171,16 @@ Copy Logstash certificate to where Filebeat can use it
 
 2. Copy the file content in preparation for pasting it into an empty file on the Wazuh Server.  It will look somewhat like this:
 
-  .. code-block:: none
-    :class: output
-    
-    -----BEGIN CERTIFICATE-----
-    MIIDaDCCAlCgAwIBAgIJAJ9yfo5G55kNMA0GCSqGSIb3DQEBCwUAMEIxCzAJBgNV
-    BAYTAlhYMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg
-    ...
-    MoVou4/OaUeQM6JbcVrL2YkLyAfpJpMhB0LtNVeIY0fJlwV1SwXYLlAqGUjPDJvz
-    NvWeiuulue3zaf3r
-    -----END CERTIFICATE-----
+	.. code-block:: none
+		:class: output
 
+		-----BEGIN CERTIFICATE-----
+		MIIDaDCCAlCgAwIBAgIJAJ9yfo5G55kNMA0GCSqGSIb3DQEBCwUAMEIxCzAJBgNV
+		BAYTAlhYMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg
+		...
+		MoVou4/OaUeQM6JbcVrL2YkLyAfpJpMhB0LtNVeIY0fJlwV1SwXYLlAqGUjPDJvz
+		NvWeiuulue3zaf3r
+		-----END CERTIFICATE-----
 
 3. Now switch over to the Wazuh Server use the text editor of your choice to open a new file /etc/filebeat/logstash.crt.  Paste and save the copied certificate text there.  Filebeat will use this certificate to verify the identity of the Logstash server as well as to negotiate an encrypted tunnel for conveying alert records.
 

@@ -144,26 +144,26 @@ The following command shows the schema of the ``fim_entry`` table where the mana
     # sqlite3 -header /var/ossec/queue/db/000.db "PRAGMA table_info(fim_entry);"
 
 .. code-block:: none
-  :class: output
+	:class: output
 
-  cid|name|type|notnull|dflt_value|pk
-  0|file|TEXT|0||1
-  1|type|TEXT|1||0
-  2|date|INTEGER|1|strftime('%s', 'now')|0
-  3|changes|INTEGER|1|1|0
-  4|size|INTEGER|0||0
-  5|perm|TEXT|0||0
-  6|uid|TEXT|0||0
-  7|gid|TEXT|0||0
-  8|md5|TEXT|0||0
-  9|sha1|TEXT|0||0
-  10|uname|TEXT|0||0
-  11|gname|TEXT|0||0
-  12|mtime|INTEGER|0||0
-  13|inode|INTEGER|0||0
-  14|sha256|TEXT|0||0
-  15|attributes|INTEGER|0|0|0
-  16|symbolic_path|TEXT|0||0
+	cid|name|type|notnull|dflt_value|pk
+	0|file|TEXT|0||1
+	1|type|TEXT|1||0
+	2|date|INTEGER|1|strftime('%s', 'now')|0
+	3|changes|INTEGER|1|1|0
+	4|size|INTEGER|0||0
+	5|perm|TEXT|0||0
+	6|uid|TEXT|0||0
+	7|gid|TEXT|0||0
+	8|md5|TEXT|0||0
+	9|sha1|TEXT|0||0
+	10|uname|TEXT|0||0
+	11|gname|TEXT|0||0
+	12|mtime|INTEGER|0||0
+	13|inode|INTEGER|0||0
+	14|sha256|TEXT|0||0
+	15|attributes|INTEGER|0|0|0
+	16|symbolic_path|TEXT|0||0
 
 This file contains syscheck scan results including file hashes and other metadata, plus a count of how many times a given file has been seen to change.
 

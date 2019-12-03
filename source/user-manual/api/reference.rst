@@ -229,7 +229,7 @@ Runs an Active Response command on a specified agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -279,7 +279,7 @@ Add a new agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -316,7 +316,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -367,7 +367,7 @@ Insert an agent with an existing id and key.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -444,7 +444,7 @@ Returns the active configuration in JSON format.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -527,7 +527,7 @@ Removes a list of groups.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -585,7 +585,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -638,7 +638,7 @@ Removes an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -681,7 +681,7 @@ Returns the sync status in JSON format.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -723,7 +723,7 @@ Adds a list of agents to the specified group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -767,7 +767,7 @@ Adds an agent to the specified group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -801,7 +801,7 @@ Creates a new group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -853,7 +853,7 @@ Returns the specified file belonging to the group parsed to JSON.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -921,7 +921,7 @@ Returns the list of agents in a group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1035,7 +1035,7 @@ Returns a list with the available agents without group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1122,7 +1122,7 @@ Returns the group configuration (agent.conf).
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1183,7 +1183,7 @@ Returns the files belonging to the group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1325,7 +1325,7 @@ Returns the list of existing agent groups.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1381,7 +1381,7 @@ Upload the group configuration (agent.conf).
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1416,7 +1416,7 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1452,7 +1452,7 @@ Remove a list of agents of a group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1492,7 +1492,7 @@ Removes the group of the agent. The agent will automatically revert to the 'defa
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1526,7 +1526,7 @@ Removes the group. Agents that were assigned to the removed group will automatic
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
    :class: output
 
    {
@@ -1570,7 +1570,7 @@ Upload a file to a group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1615,7 +1615,7 @@ Returns a summary of the OS.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1646,7 +1646,7 @@ Returns a summary of the available agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1725,7 +1725,7 @@ Returns a list with the available agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1856,7 +1856,7 @@ Returns various information from an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1912,7 +1912,7 @@ Returns various information from an agent called :agent_name.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1958,7 +1958,7 @@ Returns the key of an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -1996,7 +1996,7 @@ Restarts a list of agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2027,7 +2027,7 @@ Restarts all agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2060,7 +2060,7 @@ Restarts the specified agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2114,7 +2114,7 @@ Returns all the different combinations that agents have for the selected fields.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2171,7 +2171,7 @@ Returns the list of outdated agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2220,7 +2220,7 @@ Returns the upgrade result from an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2257,7 +2257,7 @@ Upgrade the agent using a custom file.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2303,7 +2303,7 @@ Upgrade the agent using a WPK file from online repository.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2343,7 +2343,7 @@ Clears cache of the specified group.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2372,7 +2372,7 @@ Clears entire cache.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2405,7 +2405,7 @@ Returns current cache index.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2434,7 +2434,7 @@ Returns cache configuration.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2508,7 +2508,7 @@ Returns the agent's ciscat results info
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2640,7 +2640,7 @@ Returns the requested configuration in JSON format.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2696,7 +2696,7 @@ Returns ossec.conf in JSON format.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2739,7 +2739,7 @@ Returns the cluster configuration.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2781,7 +2781,7 @@ Returns if Wazuh configuration is OK.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2809,7 +2809,7 @@ Returns if Wazuh configuration is OK.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2845,7 +2845,7 @@ Confirmation message.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2881,7 +2881,7 @@ Returns the content of a local file (rules, decoders and lists).
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2919,7 +2919,7 @@ Upload a local file (rules, decoders and lists) in a cluster node.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2948,7 +2948,7 @@ Returns whether the cluster is enabled or disabled.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -2977,7 +2977,7 @@ Returns the status of the manager processes.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3020,7 +3020,7 @@ Returns basic information about manager.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3072,7 +3072,7 @@ Show cluster health.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3214,7 +3214,7 @@ Returns the three last months of ossec.log.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3274,7 +3274,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3473,7 +3473,7 @@ Returns the local node info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3503,7 +3503,7 @@ Returns the node info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3552,7 +3552,7 @@ Returns the nodes info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3604,7 +3604,7 @@ Restarts a specific node in cluster.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3629,7 +3629,7 @@ Restarts all nodes in cluster.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3658,7 +3658,7 @@ Returns a summary of the current analysisd stats on the node.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3709,7 +3709,7 @@ Returns a summary of the current remoted stats on the node.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3768,7 +3768,7 @@ Returns Wazuh statistical information for the current or specified date.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3819,7 +3819,7 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3855,7 +3855,7 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -3970,7 +3970,7 @@ Returns all decoders included in ossec.conf.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4051,7 +4051,7 @@ Returns all decoders files included in ossec.conf.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4145,7 +4145,7 @@ Returns all parent decoders included in ossec.conf.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4211,7 +4211,7 @@ Returns the decoders with the specified name.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4278,7 +4278,7 @@ Clears the syscheck database for all agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4337,7 +4337,7 @@ Returns the agent's hardware info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4467,7 +4467,7 @@ Returns the agent's network address info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4561,7 +4561,7 @@ Returns the agent's network interface info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4667,7 +4667,7 @@ Returns the agent's network protocol info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4745,7 +4745,7 @@ Returns the agent's os info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4883,7 +4883,7 @@ Returns the agent's packages info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -4981,7 +4981,7 @@ Returns the agent's ports info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5099,7 +5099,7 @@ Returns the agent's processes info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5236,7 +5236,7 @@ Returns the agent's ciscat results info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5318,7 +5318,7 @@ Returns the content of all CDB lists.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5384,7 +5384,7 @@ Returns the path from all lists.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5503,7 +5503,7 @@ Returns the requested configuration in JSON format.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5559,7 +5559,7 @@ Returns ossec.conf in JSON format.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5606,7 +5606,7 @@ Returns if Wazuh configuration is OK.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5642,7 +5642,7 @@ Confirmation message.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
    :class: output
 
    {
@@ -5678,7 +5678,7 @@ Returns the content of a local file (rules, decoders and lists).
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5716,7 +5716,7 @@ Upload a local file (rules, decoders and lists).
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5745,7 +5745,7 @@ Returns basic information about manager.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5789,7 +5789,7 @@ Returns the status of the manager processes.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5861,7 +5861,7 @@ Returns the three last months of ossec.log.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -5921,7 +5921,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6136,7 +6136,7 @@ Restarts Wazuh manager.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6165,7 +6165,7 @@ Returns a summary of the current analysisd stats.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6246,7 +6246,7 @@ Returns Wazuh statistical information for the current or specified date.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6297,7 +6297,7 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6333,7 +6333,7 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6415,7 +6415,7 @@ Returns a summary of the current remoted stats.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6458,7 +6458,7 @@ Clears the rootcheck database for all agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6491,7 +6491,7 @@ Clears the rootcheck database for a specific agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6528,7 +6528,7 @@ Returns the timestamp of the last rootcheck scan.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6571,7 +6571,7 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
    :class: output
 
    {
@@ -6625,7 +6625,7 @@ Returns the rootcheck database of an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6675,7 +6675,7 @@ Returns the PCI requirements of all rootchecks of the agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
    :class: output
 
    {
@@ -6711,7 +6711,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6744,7 +6744,7 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6817,7 +6817,7 @@ Returns all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -6915,7 +6915,7 @@ Returns the files of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7009,7 +7009,7 @@ Returns the GDPR requirements of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7057,7 +7057,7 @@ Returns the GPG13 requirements of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7111,7 +7111,7 @@ Returns the groups of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7165,7 +7165,7 @@ Returns the HIPAA requirements of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7219,7 +7219,7 @@ Returns the NIST-800-53 requirements of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7273,7 +7273,7 @@ Returns the PCI requirements of all rules.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7329,7 +7329,7 @@ Returns the rules with the specified id.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7426,7 +7426,7 @@ Returns the sca checks of an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
    :class: output
 
    {
@@ -7530,7 +7530,7 @@ Returns the sca database of an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
    :class: output
 
    {
@@ -7581,7 +7581,7 @@ Returns a dictionary with a full summary of agents.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7705,7 +7705,7 @@ Clears the syscheck database for the specified agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7742,7 +7742,7 @@ Return the timestamp of the last syscheck scan.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7813,7 +7813,7 @@ Returns the syscheck files of an agent.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7881,7 +7881,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7914,7 +7914,7 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -7957,7 +7957,7 @@ Returns the agent's hardware info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8029,7 +8029,7 @@ Returns the agent's network address info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8113,7 +8113,7 @@ Returns the agent's network interface info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8194,7 +8194,7 @@ Returns the agent's network protocol info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8245,7 +8245,7 @@ Returns the agent's OS info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8320,7 +8320,7 @@ Returns the agent's packages info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8416,7 +8416,7 @@ Returns the agent's ports info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{
@@ -8534,7 +8534,7 @@ Returns the agent's processes info.
 
 **Example Response:**
 
-.. code-block:: js
+.. code-block:: json
 	:class: output
 
 	{

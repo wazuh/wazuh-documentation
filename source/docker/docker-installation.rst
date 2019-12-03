@@ -21,7 +21,7 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
       # uname -r
 
-    .. code-block:: console
+    .. code-block:: none
       :class: output
 
       3.10.0-229.el7.x86_64
@@ -37,9 +37,9 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
   a) For Systemd::
 
       $ systemctl start docker
-      
+
   b) For SysV Init::
-  
+
       $ service docker start
 
 .. note::
@@ -81,9 +81,9 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
       $ docker-compose --version
 
-    .. code-block:: console
+    .. code-block:: none
       :class: output
-
+    
       docker-compose version 1.23.1, build b02f1306
 
     .. note::

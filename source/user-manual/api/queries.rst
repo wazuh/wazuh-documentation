@@ -33,7 +33,7 @@ For example, to filter Ubuntu agents with a version higher than 12, the followin
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12&select=id,name,os.name,os.version,os.codename,os.major"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -71,7 +71,7 @@ The same field can be used multiple times to get a more accurate result. For exa
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12;os.version<18&select=id,name,os.name,os.version,os.codename,os.major"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -99,7 +99,7 @@ An example of using the OR operator can be filtering Ubuntu or CentOS agents:
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu,os.name=centos+linux&select=id,name,os.name,os.version,os.codename,os.major"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -147,7 +147,7 @@ Another example using the ``~`` operator is the following:
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name~cent"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -194,7 +194,7 @@ The following example shows how to check rootcheck events generated in a specifi
 
     # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -225,7 +225,7 @@ A more precise timeframe can be specified using operators ``>`` and ``<`` togeth
 
     # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {

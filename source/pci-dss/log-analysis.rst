@@ -110,7 +110,7 @@ Since we have JSON output enabled, we can also see the alert in ``alerts.json``:
 
     root@ubuntu:~# tail -n1 /var/ossec/logs/alerts/alerts.json | jq
 
-.. code-block:: none
+.. code-block:: json
     :class: output
 
     {

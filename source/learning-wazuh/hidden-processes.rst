@@ -92,7 +92,7 @@ at which rootcheck commences its first scan for the sake of this lab.
     .. code-block:: none
         :class: output
 
-        #
+
 
     In the case of Diamorphine, any attempt to send kill signal -63 to any process whether it exists or not, will toggle whether the Diamorphine kernel module hides itself.
 
@@ -115,7 +115,7 @@ at which rootcheck commences its first scan for the sake of this lab.
     .. code-block:: none
         :class: output
 
-        #
+        
 
 9. Next configure linux-agent to run rootcheck scans every 5 minutes by replacing the entire <rootcheck> section in /var/ossec/etc/ossec.conf with the following:
 

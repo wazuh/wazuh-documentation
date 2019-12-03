@@ -148,7 +148,7 @@ The following is an example of how a centralized configuration can be done.
 
     Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # touch /var/ossec/etc/shared/default/agent.conf
         # chown ossec:ossec /var/ossec/etc/shared/default/agent.conf

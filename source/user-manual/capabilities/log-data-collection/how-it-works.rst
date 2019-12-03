@@ -152,7 +152,7 @@ For the previous example, rule 5715 is matched:
 Alert
 -----
 
-Once a rule is matched, the manager will create an alert as below
+Once a rule is matched, the manager will create an alert as below:
 
 .. code-block:: none
   :class: output

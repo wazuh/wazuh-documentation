@@ -139,7 +139,7 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
 
   root@wazuh-manager:/var/ossec/logs/archives/2017/Jan# ls -l
 
-.. code-block:: bash
+.. code-block:: none
   :class: output
 
   total 176

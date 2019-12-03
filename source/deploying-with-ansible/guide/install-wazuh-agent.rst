@@ -13,35 +13,35 @@ We can install the Wazuh agent using the roles and playbooks available in the Wa
 
 .. note::
 
-  Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is CentOS 7 and we do not need to indicate the path of the Python interpreter.
+	Following the example we started in the previous sections, we have added a second host to the ``/etc/ansible/hosts`` file, in this case the operating system is CentOS 7 and we do not need to indicate the path of the Python interpreter.
 
 
-  192.168.0.180 ansible_ssh_user=centos
+	192.168.0.180 ansible_ssh_user=centos
 
-  192.168.0.108 ansible_ssh_user=elk      ansible_python_interpreter=/usr/bin/python3
+	192.168.0.108 ansible_ssh_user=elk      ansible_python_interpreter=/usr/bin/python3
 
-  192.168.0.102 ansible_ssh_user=centos
+	192.168.0.102 ansible_ssh_user=centos
 
 
-  .. code-block:: console
+	.. code-block:: console
 
-    ansible@ansible:~$ ansible all -m ping
+		ansible@ansible:~$ ansible all -m ping
 
-  .. code-block:: console
-    :class: output
+	.. code-block:: none
+		:class: output
 
-    192.168.0.102 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-    }
-    192.168.0.180 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-    }
-    192.168.0.108 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-    }
+		192.168.0.102 | SUCCESS => {
+		    "changed": false,
+		    "ping": "pong"
+		}
+		192.168.0.180 | SUCCESS => {
+		    "changed": false,
+		    "ping": "pong"
+		}
+		192.168.0.108 | SUCCESS => {
+		    "changed": false,
+		    "ping": "pong"
+		}
 
 
 1 - Access to wazuh-ansible
@@ -53,10 +53,10 @@ We can install the Wazuh agent using the roles and playbooks available in the Wa
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  CHANGELOG.md  playbooks  README.md  roles  VERSION
+	CHANGELOG.md  playbooks  README.md  roles  VERSION
 
 We can see the roles we have.
 
@@ -64,47 +64,47 @@ We can see the roles we have.
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  roles
-  ├── ansible-galaxy
-  │   └── meta
-  ├── elastic-stack
-  │   ├── ansible-elasticsearch
-  │   │   ├── defaults
-  │   │   ├── handlers
-  │   │   ├── meta
-  │   │   ├── tasks
-  │   │   └── templates
-  │   └── ansible-kibana
-  │       ├── defaults
-  │       ├── handlers
-  │       ├── meta
-  │       ├── tasks
-  │       └── templates
-  └── wazuh
-      ├── ansible-filebeat
-      │   ├── defaults
-      │   ├── handlers
-      │   ├── meta
-      │   ├── tasks
-      │   ├── templates
-      │   └── tests
-      ├── ansible-wazuh-agent
-      │   ├── defaults
-      │   ├── handlers
-      │   ├── meta
-      │   ├── tasks
-      │   ├── templates
-      │   └── vars
-      └── ansible-wazuh-manager
-          ├── defaults
-          ├── handlers
-          ├── meta
-          ├── tasks
-          ├── templates
-          └── vars
+	roles
+	├── ansible-galaxy
+	│   └── meta
+	├── elastic-stack
+	│   ├── ansible-elasticsearch
+	│   │   ├── defaults
+	│   │   ├── handlers
+	│   │   ├── meta
+	│   │   ├── tasks
+	│   │   └── templates
+	│   └── ansible-kibana
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
+	└── wazuh
+	    ├── ansible-filebeat
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── tests
+	    ├── ansible-wazuh-agent
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── vars
+	    └── ansible-wazuh-manager
+	        ├── defaults
+	        ├── handlers
+	        ├── meta
+	        ├── tasks
+	        ├── templates
+	        └── vars
 
 And we can see the preconfigured playbooks we have.
 
@@ -113,15 +113,15 @@ And we can see the preconfigured playbooks we have.
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
 
 .. code-block:: console
-  :class: output
+	:class: output
 
-  playbooks/
-  ├── wazuh-agent.yml
-  ├── wazuh-elastic_stack-distributed.yml
-  ├── wazuh-elastic_stack-single.yml
-  ├── wazuh-elastic.yml
-  ├── wazuh-kibana.yml
-  └── wazuh-manager.yml
+	playbooks/
+	├── wazuh-agent.yml
+	├── wazuh-elastic_stack-distributed.yml
+	├── wazuh-elastic_stack-single.yml
+	├── wazuh-elastic.yml
+	├── wazuh-kibana.yml
+	└── wazuh-manager.yml
 
 In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
 
@@ -202,52 +202,52 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 We will obtain a final result similar to the one shown in the following code block.
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  TASK [ansible-wazuh-agent : Copy CA, SSL key and cert for authd] ******************************************************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Copy CA, SSL key and cert for authd] ******************************************************************************************
+	skipping: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Register agent (via authd)] *******************************************************************************************
-  changed: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Register agent (via authd)] *******************************************************************************************
+	changed: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Verify agent registration] ********************************************************************************************
-  changed: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Verify agent registration] ********************************************************************************************
+	changed: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Retrieving rest-API Credentials] **********************************************************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Retrieving rest-API Credentials] **********************************************************************************************
+	skipping: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Create the agent key via rest-API] ************************************************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Create the agent key via rest-API] ************************************************************************************
+	skipping: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Retieve new agent data via rest-API] **********************************************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Retieve new agent data via rest-API] **********************************************************************************
+	skipping: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Register agent (via rest-API)] ****************************************************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Register agent (via rest-API)] ****************************************************************************************
+	skipping: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Vuls integration deploy (runs in background, can take a while)] *******************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Vuls integration deploy (runs in background, can take a while)] *******************************************************
+	skipping: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Installing agent configuration (ossec.conf)] **************************************************************************
-  changed: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Installing agent configuration (ossec.conf)] **************************************************************************
+	changed: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Linux | Ensure Wazuh Agent service is started and enabled] ********************************************************************
-  changed: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Linux | Ensure Wazuh Agent service is started and enabled] ********************************************************************
+	changed: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Remove Wazuh repository (and clean up left-over metadata)] ********************************************************************
-  changed: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Remove Wazuh repository (and clean up left-over metadata)] ********************************************************************
+	changed: [192.168.0.102]
 
-  TASK [ansible-wazuh-agent : Remove Wazuh repository (and clean up left-over metadata)] ********************************************************************
-  skipping: [192.168.0.102]
+	TASK [ansible-wazuh-agent : Remove Wazuh repository (and clean up left-over metadata)] ********************************************************************
+	skipping: [192.168.0.102]
 
-  RUNNING HANDLER [ansible-wazuh-agent : restart wazuh-agent] ***********************************************************************************************
-  changed: [192.168.0.102]
+	RUNNING HANDLER [ansible-wazuh-agent : restart wazuh-agent] ***********************************************************************************************
+	changed: [192.168.0.102]
 
-  PLAY RECAP ************************************************************************************************************************************************
-  192.168.0.102              : ok=12   changed=8    unreachable=0    failed=0
+	PLAY RECAP ************************************************************************************************************************************************
+	192.168.0.102              : ok=12   changed=8    unreachable=0    failed=0
 
-  ansible@ansible:/etc/ansible/wazuh-ansible$
+	ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
 We can check the status of our new services in our Wazuh agent.
@@ -256,12 +256,12 @@ We can check the status of our new services in our Wazuh agent.
 
 	[root@wazuh-agent-ansible centos]# systemctl status wazuh-agent
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  ● wazuh-agent.service - Wazuh agent
-    Loaded: loaded (/etc/systemd/system/wazuh-agent.service; enabled; vendor preset: disabled)
-    Active: active (running) since lun 2018-09-17 11:26:16 CEST; 3min 28s ago
+	● wazuh-agent.service - Wazuh agent
+	   Loaded: loaded (/etc/systemd/system/wazuh-agent.service; enabled; vendor preset: disabled)
+	   Active: active (running) since lun 2018-09-17 11:26:16 CEST; 3min 28s ago
 
 We can see the agent connection in Kibana.
 
@@ -279,11 +279,11 @@ We can also view agent information from the Wazuh-server.
 
 	[root@localhost centos]# /var/ossec/bin/agent_control -l
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  Wazuh agent_control. List of available agents:
-    ID: 000, Name: localhost.localdomain (server), IP: 127.0.0.1, Active/Local
-    ID: 001, Name: wazuh-agent-ansible, IP: 192.168.0.102, Active
+	Wazuh agent_control. List of available agents:
+	   ID: 000, Name: localhost.localdomain (server), IP: 127.0.0.1, Active/Local
+	   ID: 001, Name: wazuh-agent-ansible, IP: 192.168.0.102, Active
 
-  List of agentless devices:
+	List of agentless devices:

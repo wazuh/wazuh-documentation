@@ -20,10 +20,10 @@ Once the Ansible repository has been cloned, we proceed to install the Wazuh ser
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  CHANGELOG.md  playbooks  README.md  roles  VERSION
+	CHANGELOG.md  playbooks  README.md  roles  VERSION
 
 We can see the roles we have.
 
@@ -31,48 +31,48 @@ We can see the roles we have.
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  roles
-  ├── ansible-galaxy
-  │   └── meta
-  ├── elastic-stack
-  │   ├── ansible-elasticsearch
-  │   │   ├── defaults
-  │   │   ├── handlers
-  │   │   ├── meta
-  │   │   ├── tasks
-  │   │   └── templates
-  │   └── ansible-kibana
-  │       ├── defaults
-  │       ├── handlers
-  │       ├── meta
-  │       ├── tasks
-  │       └── templates
-  └── wazuh
-      ├── ansible-filebeat
-      │   ├── defaults
-      │   ├── handlers
-      │   ├── meta
-      │   ├── tasks
-      │   ├── templates
-      │   └── tests
-      ├── ansible-wazuh-agent
-      │   ├── defaults
-      │   ├── handlers
-      │   ├── meta
-      │   ├── tasks
-      │   ├── templates
-      │   └── vars
-      └── ansible-wazuh-manager
-          ├── defaults
-          ├── files
-          ├── handlers
-          ├── meta
-          ├── tasks
-          ├── templates
-          └── vars
+	roles
+	├── ansible-galaxy
+	│   └── meta
+	├── elastic-stack
+	│   ├── ansible-elasticsearch
+	│   │   ├── defaults
+	│   │   ├── handlers
+	│   │   ├── meta
+	│   │   ├── tasks
+	│   │   └── templates
+	│   └── ansible-kibana
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
+	└── wazuh
+	    ├── ansible-filebeat
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── tests
+	    ├── ansible-wazuh-agent
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── vars
+	    └── ansible-wazuh-manager
+	        ├── defaults
+	        ├── files
+	        ├── handlers
+	        ├── meta
+	        ├── tasks
+	        ├── templates
+	        └── vars
 
 And we can see the preconfigured playbooks we have.
 
@@ -80,16 +80,16 @@ And we can see the preconfigured playbooks we have.
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  playbooks/
-  ├── wazuh-agent.yml
-  ├── wazuh-elastic_stack-distributed.yml
-  ├── wazuh-elastic_stack-single.yml
-  ├── wazuh-elastic.yml
-  ├── wazuh-kibana.yml
-  └── wazuh-manager.yml
+	playbooks/
+	├── wazuh-agent.yml
+	├── wazuh-elastic_stack-distributed.yml
+	├── wazuh-elastic_stack-single.yml
+	├── wazuh-elastic.yml
+	├── wazuh-kibana.yml
+	└── wazuh-manager.yml
 
 
 Using **Wazuh Manager** role we will install and configure Wazuh Manager and Wazuh API, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`.
@@ -104,13 +104,13 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ cat wazuh-manager.yml
 
-.. code-block:: console
-  :class: output
+.. code-block:: yaml
+	:class: output
 
-  - hosts: <your wazuh server host>
-    roles:
-      - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
-      - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_elasticsearch_hosts: '<YOUR_ELASTICSEARCH_IP>:9200' }
+	- hosts: <your wazuh server host>
+	  roles:
+	    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
+	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_elasticsearch_hosts: '<YOUR_ELASTICSEARCH_IP>:9200' }
 
 
 Let's take a closer look at the content.
@@ -170,53 +170,53 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 We will obtain a final result similar to the one shown in the following code block.
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  TASK [ansible-role-filebeat : Debian/Ubuntu | Add Filebeat repository.] **********************************************************************************
-  skipping: [192.168.0.180]
+	TASK [ansible-role-filebeat : Debian/Ubuntu | Add Filebeat repository.] **********************************************************************************
+	skipping: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : Install Filebeat.] *********************************************************************************************************
-  changed: [192.168.0.180]
+	TASK [ansible-role-filebeat : Install Filebeat.] *********************************************************************************************************
+	changed: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : Copy Filebeat configuration.] **********************************************************************************************
-  changed: [192.168.0.180]
+	TASK [ansible-role-filebeat : Copy Filebeat configuration.] **********************************************************************************************
+	changed: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : Ensure Filebeat SSL key pair directory exists.] ****************************************************************************
-  skipping: [192.168.0.180]
+	TASK [ansible-role-filebeat : Ensure Filebeat SSL key pair directory exists.] ****************************************************************************
+	skipping: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : Copy SSL key and cert for filebeat.] ***************************************************************************************
-  skipping: [192.168.0.180] => (item=)
-  skipping: [192.168.0.180] => (item=)
+	TASK [ansible-role-filebeat : Copy SSL key and cert for filebeat.] ***************************************************************************************
+	skipping: [192.168.0.180] => (item=)
+	skipping: [192.168.0.180] => (item=)
 
-  TASK [ansible-role-filebeat : Reload systemd] ************************************************************************************************************
-  ok: [192.168.0.180]
+	TASK [ansible-role-filebeat : Reload systemd] ************************************************************************************************************
+	ok: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : Ensure Filebeat is started and enabled at boot.] ***************************************************************************
-  changed: [192.168.0.180]
+	TASK [ansible-role-filebeat : Ensure Filebeat is started and enabled at boot.] ***************************************************************************
+	changed: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : RedHat/CentOS/Fedora | Remove Filebeat repository (and clean up left-over metadata)] ***************************************
-  changed: [192.168.0.180]
+	TASK [ansible-role-filebeat : RedHat/CentOS/Fedora | Remove Filebeat repository (and clean up left-over metadata)] ***************************************
+	changed: [192.168.0.180]
 
-  TASK [ansible-role-filebeat : Debian/Ubuntu | Remove Filebeat repository (and clean up left-over metadata)] **********************************************
-  skipping: [192.168.0.180]
+	TASK [ansible-role-filebeat : Debian/Ubuntu | Remove Filebeat repository (and clean up left-over metadata)] **********************************************
+	skipping: [192.168.0.180]
 
-  RUNNING HANDLER [ansible-wazuh-manager : rebuild cdb_lists] **********************************************************************************************
-  changed: [192.168.0.180]
+	RUNNING HANDLER [ansible-wazuh-manager : rebuild cdb_lists] **********************************************************************************************
+	changed: [192.168.0.180]
 
-  RUNNING HANDLER [ansible-wazuh-manager : restart wazuh-manager] ******************************************************************************************
-  changed: [192.168.0.180]
+	RUNNING HANDLER [ansible-wazuh-manager : restart wazuh-manager] ******************************************************************************************
+	changed: [192.168.0.180]
 
-  RUNNING HANDLER [ansible-wazuh-manager : restart wazuh-api] **********************************************************************************************
-  changed: [192.168.0.180]
+	RUNNING HANDLER [ansible-wazuh-manager : restart wazuh-api] **********************************************************************************************
+	changed: [192.168.0.180]
 
-  RUNNING HANDLER [ansible-role-filebeat : restart filebeat] ***********************************************************************************************
-  changed: [192.168.0.180]
+	RUNNING HANDLER [ansible-role-filebeat : restart filebeat] ***********************************************************************************************
+	changed: [192.168.0.180]
 
-  PLAY RECAP ***********************************************************************************************************************************************
-  192.168.0.180              : ok=36   changed=19   unreachable=0    failed=0
+	PLAY RECAP ***********************************************************************************************************************************************
+	192.168.0.180              : ok=36   changed=19   unreachable=0    failed=0
 
-  ansible@ansible:/etc/ansible/wazuh-ansible$
+	ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
 We can check the status of our new services in our Wazuh server.
@@ -227,12 +227,12 @@ We can check the status of our new services in our Wazuh server.
 
 	[root@localhost centos]# systemctl status wazuh-manager
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  ● wazuh-manager.service - Wazuh manager
-     Loaded: loaded (/etc/systemd/system/wazuh-manager.service; enabled; vendor preset: disabled)
-     Active: active (running) since jue 2018-09-13 12:36:52 CEST; 35min ago
+	● wazuh-manager.service - Wazuh manager
+	   Loaded: loaded (/etc/systemd/system/wazuh-manager.service; enabled; vendor preset: disabled)
+	   Active: active (running) since jue 2018-09-13 12:36:52 CEST; 35min ago
 
 - Wazuh API.
 
@@ -240,18 +240,18 @@ We can check the status of our new services in our Wazuh server.
 
 	[root@localhost centos]# systemctl status wazuh-api
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  ● wazuh-api.service - Wazuh API daemon
-     Loaded: loaded (/etc/systemd/system/wazuh-api.service; enabled; vendor preset: disabled)
-     Active: active (running) since jue 2018-09-13 12:36:54 CEST; 36min ago
+	● wazuh-api.service - Wazuh API daemon
+	   Loaded: loaded (/etc/systemd/system/wazuh-api.service; enabled; vendor preset: disabled)
+	   Active: active (running) since jue 2018-09-13 12:36:54 CEST; 36min ago
 
 - Filebeat.
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+	:class: output
 
-  ● filebeat.service - Filebeat sends log files to Elasticsearch.
-     Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
-     Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago
+	● filebeat.service - Filebeat sends log files to Elasticsearch.
+	   Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
+	   Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago

@@ -18,17 +18,17 @@ Malware can replace files, directories and commands on it's host system.  Perfor
 Example:
 
 .. code-block:: none
-  :class: output
+	:class: output
 
-  ** Alert 1460948255.25442: mail  - ossec,syscheck,pci_dss_11.5,
-  2016 Apr 17 19:57:35 (ubuntu) 10.0.0.144->syscheck
-  Rule: 550 (level 7) -> 'Integrity checksum changed.'
-  Integrity checksum changed for: '/test/hello'
-  Size changed from '12' to '17'
-  Old md5sum was: 'e59ff97941044f85df5297e1c302d260'
-  New md5sum is : '7947eba5d9cc58d440fb06912e302949'
-  Old sha1sum was: '648a6a6ffffdaa0badb23b8baf90b6168dd16b3a'
-  New sha1sum is : '379b74ac9b2d2b09ff6ad7fa876c79f914a755e1'
+	** Alert 1460948255.25442: mail  - ossec,syscheck,pci_dss_11.5,
+	2016 Apr 17 19:57:35 (ubuntu) 10.0.0.144->syscheck
+	Rule: 550 (level 7) -> 'Integrity checksum changed.'
+	Integrity checksum changed for: '/test/hello'
+	Size changed from '12' to '17'
+	Old md5sum was: 'e59ff97941044f85df5297e1c302d260'
+	New md5sum is : '7947eba5d9cc58d440fb06912e302949'
+	Old sha1sum was: '648a6a6ffffdaa0badb23b8baf90b6168dd16b3a'
+	New sha1sum is : '379b74ac9b2d2b09ff6ad7fa876c79f914a755e1'
 
 Check running processes
 -----------------------

@@ -52,7 +52,6 @@ In addition, you can use the option "-v" to show more information about the rule
 .. code-block:: none
     :class: output
 
-
     Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
 
 

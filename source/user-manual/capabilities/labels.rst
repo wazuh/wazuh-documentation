@@ -65,7 +65,7 @@ To set the labels at the manager level, the following configuration would be add
 
 When an alert is fired for an agent with the above configuration applied from the manager, the defined labels will add information to alerts as shown below:
 
-.. code-block:: console
+.. code-block:: none
     :emphasize-lines: 3,4,5,6
     :class: output
 
@@ -143,7 +143,7 @@ And the same alert in JSON format shows the advantage of using nested labels:
 
 If email reports have been enabled, the following email notification would then be received:
 
-.. code-block:: console
+.. code-block:: none
   :class: output
 
   Wazuh Notification.

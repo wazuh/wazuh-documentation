@@ -16,7 +16,7 @@ Download and install the Wazuh module from Puppet Forge:
 
     # puppet module install wazuh-wazuh --version 3.10.2
 
-  .. code-block:: bash
+  .. code-block:: none
     :class: output
 
     Notice: Preparing to install into /etc/puppet/modules ...
@@ -34,7 +34,7 @@ Download and install the Wazuh module from Puppet Forge:
       └── stahnma-epel (v1.3.1)
 
 This module installs and configures Wazuh agent and manager.
-  
+
 Install manager via Puppet
 --------------------------
 

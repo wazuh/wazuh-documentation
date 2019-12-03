@@ -25,7 +25,7 @@ This information can also be obtained using the Restful API:
 
     # curl -u foo:bar -X GET "http://localhost:55000/cluster/nodes?pretty"
 
-.. code-block:: none
+.. code-block:: json
     :class: output
 
     {

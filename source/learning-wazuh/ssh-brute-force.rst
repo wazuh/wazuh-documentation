@@ -41,7 +41,7 @@ records containing much more detail than what the alerts.log file shows.  These 
 for enrichment and insertion into Elasticsearch.  From there they can then be seen with Kibana.  Here is a beautified example of
 the JSON record in alerts.json that corresponds to the same alert above in alerts.log.
 
-.. code-block:: none
+.. code-block:: json
     :class: output
 
     {

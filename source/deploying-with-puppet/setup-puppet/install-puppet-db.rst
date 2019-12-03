@@ -68,13 +68,13 @@ Test database access:
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+   :class: output
 
-  Password for user puppetdb:
-  psql (9.4.11)
-  Type "help" for help.
-  puppetdb=> \q
+   Password for user puppetdb:
+   psql (9.4.11)
+   Type "help" for help.
+   puppetdb=> \q
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
 

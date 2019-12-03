@@ -58,16 +58,15 @@ Configure Logstash
     #}
     # Local Wazuh server - JSON file input
     input {
-      file {
-        type => "wazuh-alerts"
-        path => "/var/ossec/logs/alerts/alerts.json"
-        codec => "json"
-      }
+        file {
+            type => "wazuh-alerts"
+            path => "/var/ossec/logs/alerts/alerts.json"
+            codec => "json"
+        }
     }
     ...
 
-
-  The above configuration will setup Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than receive forwarded data from Filebeat.
+The above configuration will setup Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than receive forwarded data from Filebeat.
 
 Configure Kibana
 ^^^^^^^^^^^^^^^^

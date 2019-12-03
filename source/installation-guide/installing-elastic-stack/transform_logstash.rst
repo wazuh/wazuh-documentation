@@ -113,7 +113,7 @@ them to Elasticsearch.
 
   Example output:
 
-  .. code-block:: console
+  .. code-block:: none
     :class: output
 
     logstash: 172.16.1.2:5000...

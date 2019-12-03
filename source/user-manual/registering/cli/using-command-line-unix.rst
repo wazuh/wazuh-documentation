@@ -21,11 +21,11 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
-  .. code-block:: none
-    :class: output
+	.. code-block:: none
+		:class: output
 
-    Available agents:
-      ID: 001, Name: aix-7-agent, IP: any
+		Available agents:
+		    ID: 001, Name: aix-7-agent, IP: any
 
 3. Using the ID from the previous command, extract the new agent’s key using. Copy this key because you will need it for the agent:
 
@@ -33,11 +33,11 @@ Manager
 
 		# /var/ossec/bin/manage_agents -e 001
 
-  .. code-block:: none
-    :class: output
+	.. code-block:: none
+		:class: output
 
-    Agent key information for '001' is:
-    MDAxIGFpeC03LWFnZW50IGFueSAxNDZlMzMwZGI1NTExOGVmYzA5OTllMDhjMmEzOThkZTZiZDgwM2FiYmUxODljNDY3MDczMTE3ODlkNWFlOTY5==
+		Agent key information for '001' is:
+		MDAxIGFpeC03LWFnZW50IGFueSAxNDZlMzMwZGI1NTExOGVmYzA5OTllMDhjMmEzOThkZTZiZDgwM2FiYmUxODljNDY3MDczMTE3ODlkNWFlOTY5==
 
 Agent
 ^^^^^
@@ -49,16 +49,16 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 
 	      # /var/ossec/bin/manage_agents -i MDAxIGFpeC03LWFnZW50IGFueSAxNDZlMzMwZGI1NTExOGVmYzA5OTllMDhjMmEzOThkZTZiZDgwM2FiYmUxODljNDY3MDczMTE3ODlkNWFlOTY5
 
-    .. code-block:: none
-        :class: output
+	  .. code-block:: none
+	      :class: output
 
-        Agent information:
-          ID:001
-          Name:aix-7-agent
-          IP Address:any
+	      Agent information:
+	         ID:001
+	         Name:aix-7-agent
+	         IP Address:any
 
-        Confirm adding it?(y/n): y
-        Added.
+	      Confirm adding it?(y/n): y
+	      Added.
 
 
 2. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:

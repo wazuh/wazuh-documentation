@@ -41,8 +41,8 @@ Also, users can retrieve the connected agents by using the ``manage_agents`` wit
    # /var/ossec/bin/manage_agents -l
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Available agents:
+   Available agents:
       ID: 001, Name: agent-ubuntu2, IP: any
       ID: 002, Name: agent-ubuntu1, IP: any

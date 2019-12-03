@@ -95,7 +95,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
     # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
-  :class: output
+    :class: output
 
     {
       "nodes" : {

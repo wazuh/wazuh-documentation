@@ -33,22 +33,22 @@ This section describes how to secure the communications between the involved com
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert --pem --in instances.yml --out certs.zip --keep-ca-key
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+    :class: output
 
-  certs.zip
-  |-- ca
-  |   |-- ca.crt
-      |-- ca.key
-  |-- wazuh-manager
-  |   |-- wazuh-manager.crt
-  |   |-- wazuh-manager.key
-  |-- elasticsearch
-  |   |-- elasticsearch.crt
-  |   |-- elasticsearch.key
-  |-- kibana
-      |-- kibana.crt
-      |-- kibana.key
+    certs.zip
+    |-- ca
+    |   |-- ca.crt
+        |-- ca.key
+    |-- wazuh-manager
+    |   |-- wazuh-manager.crt
+    |   |-- wazuh-manager.key
+    |-- elasticsearch
+    |   |-- elasticsearch.crt
+    |   |-- elasticsearch.key
+    |-- kibana
+        |-- kibana.crt
+        |-- kibana.key
 
 3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
 

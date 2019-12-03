@@ -100,7 +100,7 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -112,7 +112,7 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -126,9 +126,9 @@ After that, we can ask the **API** about groups which an agent belongs:
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
 
-    .. code-block:: none
-        :class: output
+    .. code-block:: json
         :emphasize-lines: 6,7,8,9,10
+        :class: output
 
         {
             "error": 0,
@@ -296,7 +296,7 @@ Finally, to check the synchronization status of the group configuration for a si
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {

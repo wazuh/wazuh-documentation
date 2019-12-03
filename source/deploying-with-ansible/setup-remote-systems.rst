@@ -14,7 +14,8 @@ Using passwords
 
 Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so, in order to establish a connection with remote hosts, a user/password must be supplied. To follow there is a description of some useful options to use for SSH authentication:
 
-.. code-block:: bash
+.. code-block:: none
+  :class: output
 
   -u <user>   Set the connection user.
   -k          Ask the password of the connection user.
@@ -45,7 +46,7 @@ You can setup a SSH key-pairing to provide a silent auth mechanism, first create
 
 To improve security on this setup, please ensure you provide a password for this key.
 
-.. code-block:: bash
+.. code-block:: none
   :class: output
 
   Enter passphrase (empty for no passphrase): ************
@@ -73,7 +74,7 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
   $ cat /etc/ansible/hosts
 
-.. code-block:: bash
+.. code-block:: none
   :class: output
 
   hosts1.example.net
@@ -85,7 +86,7 @@ Also, you can group hosts. This could be useful to execute tasks and roles to se
 
   $ cat /etc/ansible/hosts
 
-.. code-block:: bash
+.. code-block:: none
   :class: output
 
   [wazuh-elasticsearch]
@@ -105,7 +106,7 @@ This will attempt a connection with the remote hosts using ``ping`` module.
 
 You will get a output like this.
 
-.. code-block:: bash
+.. code-block:: none
   :class: output
 
   hosts1.example.net | SUCCESS => {

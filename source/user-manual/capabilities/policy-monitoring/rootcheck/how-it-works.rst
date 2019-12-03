@@ -64,15 +64,15 @@ The policy and compliance monitoring databases are normally maintained on the ma
 
 Example of an existing policy rule
 
-.. code-block:: yaml
+.. code-block:: pkgconfig
 
-  # PermitRootLogin not allowed
-  # PermitRootLogin indicates if the root user can log in via ssh.
-  $sshd_file=/etc/ssh/sshd_config;
+ # PermitRootLogin not allowed
+ # PermitRootLogin indicates if the root user can log in via ssh.
+ $sshd_file=/etc/ssh/sshd_config;
 
-  [SSH Configuration - 1: Root can log in] [any] [1]
-  f:$sshd_file -> !r:^# && r:PermitRootLogin\.+yes;
-  f:$sshd_file -> r:^#\s*PermitRootLogin;
+ [SSH Configuration - 1: Root can log in] [any] [1]
+ f:$sshd_file -> !r:^# && r:PermitRootLogin\.+yes;
+ f:$sshd_file -> r:^#\s*PermitRootLogin;
 
 Alert example:
 

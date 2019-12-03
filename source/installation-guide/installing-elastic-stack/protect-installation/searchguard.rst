@@ -112,12 +112,12 @@ Search Guard comes with a demo configuration and it's useful as starting point s
     $ chmod a+x install_demo_configuration.sh
     # ./install_demo_configuration.sh
 
-.. code-block:: console
-  :class: output
+.. code-block:: none
+    :class: output
 
-  Install demo certificates? [y/N] y
-  Initialize Search Guard? [y/N] y
-  Enable cluster mode? [y/N] y
+    Install demo certificates? [y/N] y
+    Initialize Search Guard? [y/N] y
+    Enable cluster mode? [y/N] y
 
 Restart Elasticsearch service:
 
@@ -131,34 +131,34 @@ You can check if it's working as expected using the next request (Search Guard n
 
     $ curl -k -u admin:admin https://<ELASTICSEARCH_HOST>:9200/_searchguard/authinfo?pretty
 
-.. code-block:: console
-  :class: output
+.. code-block:: json
+    :class: output
 
-  {
-  "user" : "User [name=admin, roles=[admin], requestedTenant=null]",
-  "user_name" : "admin",
-  "user_requested_tenant" : null,
-  "remote_address" : "10.0.0.4:46378",
-  "backend_roles" : [
-      "admin"
-  ],
-  "custom_attribute_names" : [
-      "attr.internal.attribute1",
-      "attr.internal.attribute2",
-      "attr.internal.attribute3"
-  ],
-  "sg_roles" : [
-      "sg_all_access",
-      "sg_own_index"
-  ],
-  "sg_tenants" : {
-      "admin_tenant" : true,
-      "admin" : true
-  },
-  "principal" : null,
-  "peer_certificates" : "0",
-  "sso_logout_url" : null
-  }
+    {
+    "user" : "User [name=admin, roles=[admin], requestedTenant=null]",
+    "user_name" : "admin",
+    "user_requested_tenant" : null,
+    "remote_address" : "10.0.0.4:46378",
+    "backend_roles" : [
+        "admin"
+    ],
+    "custom_attribute_names" : [
+        "attr.internal.attribute1",
+        "attr.internal.attribute2",
+        "attr.internal.attribute3"
+    ],
+    "sg_roles" : [
+        "sg_all_access",
+        "sg_own_index"
+    ],
+    "sg_tenants" : {
+        "admin_tenant" : true,
+        "admin" : true
+    },
+    "principal" : null,
+    "peer_certificates" : "0",
+    "sso_logout_url" : null
+    }
 
 Setting up Search Guard roles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

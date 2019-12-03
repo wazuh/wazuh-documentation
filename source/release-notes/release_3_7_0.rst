@@ -26,7 +26,7 @@ In this example, an agent is added to two new groups.
 
   # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
 
-.. code-block:: js
+.. code-block:: json
   :class: output
 
   {
@@ -38,7 +38,7 @@ In this example, an agent is added to two new groups.
 
   # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
 
-.. code-block:: js
+.. code-block:: json
   :class: output
 
   {
@@ -52,9 +52,9 @@ And on the API, it's possible to check all the groups the agent is added:
 
   # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
 
-.. code-block:: js
-  :class: output
+.. code-block:: none
   :emphasize-lines: 6,7,8,9,10
+  :class: output
 
   {
     "error": 0,

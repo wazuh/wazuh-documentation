@@ -47,7 +47,7 @@ Examples
 
     # agent_upgrade -l
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     ID    Name                               Version
@@ -64,7 +64,7 @@ Examples
 
     # agent_upgrade -a 002
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Sending WPK: [=========================] 100%
@@ -78,7 +78,7 @@ Examples
 
     # agent_upgrade -a 002 -dF -v v3.0.0 -r http://mycompany.wpkrepo.com/ -t 500
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Manager version: v3.1.0
@@ -111,7 +111,7 @@ Examples
 
     # agent_upgrade -a 002 -d -f /root/upgrade_openscap_debian.wpk -x install.sh
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Custom WPK file: upgrade_openscap_debian.wpk (852 KB)

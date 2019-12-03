@@ -379,7 +379,7 @@ Observe the order in which our child rules are evaluated
 
 4. Carefully note the order in which child rules of "80792 - Audit: Command" were evaluated.
 
-    .. code-block:: console
+    .. code-block:: none
         :class: output
 
         Trying rule: 80792 - Audit: Command: $(audit.exe)

@@ -47,7 +47,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -a -g debian
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Do you want to create the group 'debian'? [y/N]: y
@@ -59,7 +59,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -a -i 002 -g debian
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Do you want to set the group 'debian' to the agent '002'? [y/N]: y
@@ -71,7 +71,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -s -i 002
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     The agent 'agent-deb-002' with ID '002' belongs to groups: default, debian, east-office
@@ -82,7 +82,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -l -g debian
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     3 agent(s) in group 'debian':
@@ -96,7 +96,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -c -g debian
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Files for group 'debian':
@@ -115,7 +115,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -r -i 002
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Do you want to delete all groups of agent '002'? [y/N]: y
@@ -127,7 +127,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -r -i 003 -g group2
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Do you want to delete the group 'group2' of agent '003'? [y/N]: y
@@ -139,7 +139,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -r -g debian
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Do you want to remove the 'debian' group? [y/N]: y
@@ -152,7 +152,7 @@ Examples
 
     $ /var/ossec/bin/agent_groups -a -i 001 -g group1
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     Do you want to add the group 'group1' to the agent '001'? [y/N]: y
@@ -160,9 +160,9 @@ Examples
 
     $ /var/ossec/bin/agent_groups -a -i 001 -g group2
 
-.. code-block:: console
+.. code-block:: none
     :class: output
-    
+
     Do you want to add the group 'group2' to the agent '001'? [y/N]: y
     Group 'group2' added to agent '001'.
 

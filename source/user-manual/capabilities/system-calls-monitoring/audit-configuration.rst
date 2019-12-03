@@ -107,7 +107,7 @@ Monitoring accesses to a directory
 
 In this example, we are going to monitor every kind of access under the */home* directory:
 
-.. code-block:: console
+.. code-block:: none
 
     auditctl -w /home -p w -k audit-wazuh-w
     auditctl -w /home -p a -k audit-wazuh-a
@@ -118,7 +118,6 @@ Now we start getting alerts on account of the new audit rules:
 
 .. code-block:: none
   :class: output
-
 
   ** Alert 1487891035.24299: - audit,audit_configuration,
   2017 Feb 23 15:03:55 localhost->/var/log/audit/audit.log
@@ -537,7 +536,6 @@ After configuring PAM, if we execute the previous command with the user *homer* 
 .. code-block:: console
 
     # homer@springfield:/# sudo ls /var/ossec/etc
-
 
 .. code-block:: none
   :class: output

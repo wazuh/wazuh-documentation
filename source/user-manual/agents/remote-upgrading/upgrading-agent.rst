@@ -77,7 +77,7 @@ Using the RESTful API
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/outdated?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -111,7 +111,7 @@ Using the RESTful API
 
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/upgrade?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -126,7 +126,7 @@ Using the RESTful API
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/002/upgrade_result?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {
@@ -141,7 +141,7 @@ Using the RESTful API
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/002?pretty"
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {

@@ -30,7 +30,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
 
     # curl -u foo:bar "http://localhost:55000?pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -71,7 +71,7 @@ Here are some of the basic concepts related to making API requests and understan
 
  * Example response without errors:
 
-  .. code-block:: js
+  .. code-block:: json
         :class: output
 
         {
@@ -110,7 +110,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
     # curl -u foo:bar "http://localhost:55000/rules/1002?pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -147,7 +147,7 @@ It can also be helpful to know what rules are available that match a specific cr
 
     # curl -u foo:bar "http://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -200,7 +200,7 @@ The API can be used to show information about all monitored files by syscheck. T
 
     # curl -u foo:bar "http://localhost:55000/syscheck/000?event=modified&search=.py&pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -251,7 +251,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
     # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -283,7 +283,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
     # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -321,7 +321,7 @@ Rootcheck requests are very similar to the syscheck requests. In order to get al
 
     # curl -u foo:bar "http://localhost:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -350,7 +350,7 @@ Some information about the manager can be retrieved using the API. Configuration
 
     # curl -u foo:bar "http://localhost:55000/manager/status?pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -376,7 +376,7 @@ You can even dump the manager's current configuration with the request bellow (r
 
     # curl -u foo:bar "http://localhost:55000/manager/configuration?pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -408,7 +408,7 @@ This enumerates **active** agents:
 
     # curl -u foo:bar "http://localhost:55000/agents?offset=1&limit=1&status=active&pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {
@@ -452,7 +452,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
     # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"
 
-.. code-block:: js
+.. code-block:: json
     :class: output
 
     {

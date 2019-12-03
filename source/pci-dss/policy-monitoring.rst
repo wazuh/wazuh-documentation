@@ -85,7 +85,7 @@ In this case, all the logs above are alerts, so we will see an instance of the l
 
     [root@manager ossec]# tail -n 1 logs/alerts/alerts.json | pjson
 
-.. code-block:: none
+.. code-block:: json
     :class: output
 
     {

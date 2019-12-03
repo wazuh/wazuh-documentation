@@ -384,7 +384,7 @@ Troubleshooting
 
 The cluster has lots of different components working together: a network protocol, I/O and some Wazuh specific logic. All these components log their progress in ``logs/cluster.log`` file. To make things easier for the developer, each component includes a log tag to help the developer see which exact component logged the event. The following is an example of how the log file looks:
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     2019/04/10 15:34:28 wazuh-clusterd: INFO: [Worker worker-1] [Agent info] Waiting to receive zip file from worker
@@ -401,7 +401,7 @@ When there is an error in the cluster, it will be logged under the ``ERROR:`` ta
 
     # grep -i error /var/ossec/logs/cluster.log
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     2019/04/10 15:37:58 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
@@ -414,7 +414,7 @@ If the log error message isn't clarifying enough, the traceback can be logged se
     # systemctl restart wazuh-manager
     # grep -i error /var/ossec/logs/cluster.log -A 10
 
-.. code-block:: console
+.. code-block:: none
     :class: output
 
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
