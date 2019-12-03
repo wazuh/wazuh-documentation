@@ -78,7 +78,7 @@ Alert example:
 
 .. code-block:: none
  :class: output
-
+ 
  ** Alert 1487185712.51190: - ossec,rootcheck,
  2017 Feb 15 11:08:32 localhost->rootcheck
  Rule: 516 (level 3) -> 'System Audit event.'
