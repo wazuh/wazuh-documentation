@@ -140,7 +140,7 @@ The agent will run *openscap-scanner* periodically according to the configuratio
         "name": "oscap"
       },
       "location": "wodle_open-scap"
-  }
+    }
 
 When the scan finishes, a report event is sent which generates an alert:
 
