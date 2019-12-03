@@ -132,7 +132,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
     }
 
 
-It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command bellow:
+It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
 
 .. code-block:: console
 
@@ -337,7 +337,7 @@ Some information about the manager can be retrieved using the API. Configuration
     }
 
 
-You can even dump the manager's current configuration with the request bellow (response shortened for brevity):
+You can even dump the manager's current configuration with the request below (response shortened for brevity):
 
 .. code-block:: console
 
