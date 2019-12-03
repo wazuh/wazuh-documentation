@@ -35,7 +35,7 @@ For instance:
 
 .. code-block:: console
 
-    # curl -u foo:bar -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "http://localhost:55000/active-response/001?pretty"
+    curl -u foo:bar -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "http://localhost:55000/active-response/001?pretty"
 
 .. code-block:: json
     :class: output

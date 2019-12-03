@@ -136,6 +136,10 @@ Code:
         },
         "error": 0
     }
+
+.. code-block:: none
+    :class: output
+
     Status: 200
 
 
@@ -186,7 +190,7 @@ Code:
     }
 
     Write-Output $r
-    
+
 
 .. code-block:: none
     :class: output

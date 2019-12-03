@@ -85,15 +85,12 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     For example, from
 
-
     .. code-block:: yaml
 
         - name: index_prefix
           default: wazuh-alerts-3.x-
 
-
     To this:
-
 
     .. code-block:: yaml
 

@@ -151,7 +151,7 @@ Generic Diff sample alert:
 
 .. code-block:: none
 	:class: output
-  
+
 	** Alert 1486811190.88243: - ossec,syscheck,agentless,pci_dss_11.5,pci_dss_10.6.1,
 	2017 Feb 11 03:06:30 ubuntu->(ssh_generic_diff) root@192.168.1.3->agentless
 	Rule: 555 (level 7) -> 'Integrity checksum for agentless device changed.'
