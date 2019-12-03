@@ -231,7 +231,7 @@ Logstash
         $ kubectl get deploy --namespace wazuh
 
     .. code-block:: none
-            :class: output
+        :class: output
 
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           6d

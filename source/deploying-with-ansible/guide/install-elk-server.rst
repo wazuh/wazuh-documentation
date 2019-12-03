@@ -23,7 +23,7 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 
 		ansible@ansible:/etc/ansible/wazuh-ansible$ ansible all -m ping
 
-  .. code-block:: none
+	.. code-block:: none
 		:class: output
 
 		192.168.0.108 | SUCCESS => {
@@ -261,7 +261,7 @@ We can check the status of our new services in our Elastic Stack server.
 
 	root@elk:/home/elk# systemctl status kibana.service
 
-.. code-block:: console
+.. code-block:: none
 	:class: output
 
 	● kibana.service - Kibana

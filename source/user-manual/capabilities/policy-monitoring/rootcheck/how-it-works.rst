@@ -62,7 +62,7 @@ Alerts related to policy monitoring:
 
 The policy and compliance monitoring databases are normally maintained on the manager, which distributes them to all the agents.
 
-Example of an existing policy rule
+Example of an existing policy rule:
 
 .. code-block:: pkgconfig
 
@@ -78,7 +78,7 @@ Alert example:
 
 .. code-block:: none
  :class: output
-
+ 
  ** Alert 1487185712.51190: - ossec,rootcheck,
  2017 Feb 15 11:08:32 localhost->rootcheck
  Rule: 516 (level 3) -> 'System Audit event.'

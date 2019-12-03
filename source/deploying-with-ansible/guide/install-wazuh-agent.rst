@@ -112,7 +112,7 @@ And we can see the preconfigured playbooks we have.
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
 
-.. code-block:: console
+.. code-block:: none
 	:class: output
 
 	playbooks/
