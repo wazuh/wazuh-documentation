@@ -4,8 +4,8 @@
 
 .. _installation_guide_old:
 
-All in one configuration
-========================
+All in one installation guide
+=============================
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.

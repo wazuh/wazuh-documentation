@@ -10,7 +10,7 @@ The following steps show how to upgrade to the latest available version of Wazuh
 Starting the upgrade
 --------------------
 
-If you followed our :ref:`manager <wazuh_server_installation>` or :ref:`agents <installation_agents>` installation guides, probably you disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages.
+If you followed our :ref:`manager <wazuh_server_packages>` or :ref:`agents <installation_agents>` installation guides, probably you disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages.
 
 a) CentOS/RHEL/Fedora:
 
@@ -136,6 +136,6 @@ c) OpenSUSE:
 Next steps
 ----------
 
-Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<installation_elastic_legacy>`.
+Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<elastic_stack_packages_legacy>`.
 
 You might also want to check our :ref:`compatibility matrix <compatibility_matrix>` in order to look at the Elastic stack version you need to use.

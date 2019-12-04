@@ -32,7 +32,7 @@ Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
 
   You can upgrade your current installation by following the below installation guide for your specific operating system:
 
-  - :ref:`Install Wazuh server with RPM packages <wazuh_server_installation>`
+  - :ref:`Install Wazuh server with RPM packages <wazuh_server_packages>`
 
   Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file because your previous version will have been overwritten. The previous version has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended that you  compare the new file with the old one and import old settings where needed.
 

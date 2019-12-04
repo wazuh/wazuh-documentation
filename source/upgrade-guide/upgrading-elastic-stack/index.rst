@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _installation_elastic_legacy:
+.. _elastic_stack_packages_legacy:
 
 Upgrading Elastic Stack
 =======================

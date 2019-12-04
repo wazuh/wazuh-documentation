@@ -2,7 +2,7 @@
 
 .. meta:: :description: Learn how to install Wazuh manager on Debian
 
-.. _wazuh_server_packages_deb:
+.. _wazuh_server_packages:
 
 Wazuh server
 ============
