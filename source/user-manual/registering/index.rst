@@ -16,7 +16,7 @@ Please, note that if agent was deployed using :ref:`Deployment Variables <deploy
 .. _agent-keys-registration:
 
 Agent keys
------------
+----------
 
 The manager uses the file ``/var/ossec/etc/client.keys`` to store the registration record of each agent, which includes ID, name, IP, and key.
 Example::
@@ -75,9 +75,9 @@ Below are listed currently available registration methods containing a brief des
     :maxdepth: 2
     :hidden:
 
-    registration-process
     using-command-line
+    restful-api-register
+    restful-api-register-script
     simple-registration-method
     password-authorization-registration-service
     manager-verification/host-verification-registration
-    restful-api-register

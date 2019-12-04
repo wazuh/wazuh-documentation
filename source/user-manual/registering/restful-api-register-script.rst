@@ -104,7 +104,7 @@ The script requires Python and pip package-management system to be installed on 
      Restarting.
 
    The script will automatically start the agent.
-|
+ 
 Register the agent automatically using a PowerShell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
