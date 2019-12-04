@@ -123,7 +123,7 @@ Look over the relevant Wazuh rule
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-    This CDB list contains keys and values separated colons.  Some lists only contain keys, in which case each key exists
+    This CDB list contains keys and values separated by colons.  Some lists only contain keys, in which case each key exists
     on a line of its own and is directly followed by a colon.
 
 3. Notice that in addition to the text file ``/var/ossec/etc/lists/audit-keys``, there is also a binary ``/var/ossec/etc/lists/audit-keys.cdb`` file that Wazuh uses for actual lookups.
