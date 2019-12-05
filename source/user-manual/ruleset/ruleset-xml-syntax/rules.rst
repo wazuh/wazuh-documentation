@@ -5,31 +5,35 @@
 Rules Syntax
 ============
 
-In this section, **xml labels** used to configure ``rules`` are listed.
+The Wazuh Ruleset combined with any custom rules, is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
+
+Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ with our community.
+
 
 Overview
 --------
 
+The **xml labels** used to configure ``rules`` are listed here.
 
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | Option              | Values                                                        | Description                                                                                          |
 +=====================+===============================================================+======================================================================================================+
-| `rule`_             | See `table <rules.html#rule>`_ below                         | Its starts a new *rule* and its defining options.                                                    |
+| `rule`_             | See `table <rules.html#rule>`_ below.                         | Its starts a new rule and its defining options.                                                      |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `match`_            | Any `sregex <regex.html#os-match-or-sregex-syntax>`_          | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
+| `match`_            | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `regex`_            | Any `RegEx <regex.html#os-regex-or-regex-syntax>`_            | It does the same a ``match`` but in *regex* instead of *sregex*.                                     |
+| `regex`_            | Any `regex <regex.html#os-regex-or-regex-syntax>`_.           | It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `decoded_as`_       | Any *decoder*'s name.                                         | It will match with logs that have been decoded by a specific *decoder*.                              |
+| `decoded_as`_       | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `category`_         | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose *decoder*'s `type <decoders.html#decoder>`_                            |
+| `category`_         | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `field`_            | Name and `sregex <regex.html#os-match-or-sregex-syntax>`_     | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ witha specific    |
+| `field`_            | Name and `sregex <regex.html#os-match-or-sregex-syntax>`_     | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
 |                     |                                                               | value.                                                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `srcip`_            | Any IP address.                                               | It will compare the IP address with an IP decoded as ``srcip``. Use "!" to negate it.                |
+| `srcip`_            | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `dstip`_            | Any IP address.                                               | It will compare the IP address with an IP decoded as ``dstip``. Use "!" to negate it.                |
+| `dstip`_            | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `extra_data`_       | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -39,9 +43,9 @@ Overview
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `hostname`_         | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the hostname obtained in the pre-decoding phase.                                 |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `time`_             | Any time range. Eg.(hh:mm-hh:mm)                              | It checks if the event was generated during that time range.                                         |
+| `time`_             | Any time range. e.g. (hh:mm-hh:mm)                            | It checks if the event was generated during that time range.                                         |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `weekday`_          | monday - sunday, weekdays, weekends                           | It checks whether the event was generated during certaing weekdays.                                  |
+| `weekday`_          | monday - sunday, weekdays, weekends                           | It checks whether the event was generated during certain weekdays.                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `id`_               | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will look for a match with the field decoded as ``ID``                                            |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -51,7 +55,7 @@ Overview
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `action`_           | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `if_sid`_           | A rule ID (Number).                                           | It works similar to parent decoder. It will match if that rule ID has previously matched.            |
+| `if_sid`_           | A rule ID.                                                    | It works similar to parent decoder. It will match if that rule ID has previously matched.            |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_group`_         | Any group name.                                               | It will match if the indicated group has matched before.                                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -81,20 +85,20 @@ Overview
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 |`different_srcgeoip`_| None.                                                         | The decoded ``srcgeoip`` must be different.                                                          |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `description`_      | Any String.                                                   | Provides a human readable description to explain what is the purpose of the rule. Please, use this   |
+| `description`_      | Any String.                                                   | Provides a human-readable description to explain what is the purpose of the rule. Please, use this   |
 |                     |                                                               | field when creating custom rules.                                                                    |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `list`_             | Path to the CDB file.                                         | Perform a CDB lookup using an ossec list.                                                            |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `info`_             | Any String.                                                   | Extra informatin using certain attributes.                                                           |
+| `info`_             | Any String.                                                   | Extra information using certain attributes.                                                          |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `options`_          | See the table `below. <rules.html#options>`_                 | Additional rule options that can be used.                                                            |
+| `options`_          | See the table `below. <rules.html#options>`_                  | Additional rule options that can be used.                                                            |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `check_diff`_       | None.                                                         | Determines when the output of a command changes.                                                     |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `group`_            | Any String.                                                   | Add additional groups to the alert.                                                                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `status`_           | started, aborted, succeded, failed, lost, etc.                | Declares de actual status of a rule.                                                                 |
+| `status`_           | started, aborted, succeded, failed, lost, etc.                | Declares the current status of a rule.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `var`_              | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
