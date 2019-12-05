@@ -11,7 +11,7 @@ When an event is received, the decoders separate the information in blocks to pr
 Overview
 --------
 
-There are many options to configure the decoders:
+There are many options to configure in decoders:
 
 +-------------------+---------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | Option            | Values                                                        | Description                                                                                      |
@@ -110,7 +110,7 @@ parent
 ^^^^^^
 
 It is used to link a subordinate decoder to its parent. A parent decoder can have many child decoders but take into account that a child decoder cannot be a parent.
-It is possible to create what we call `sibling decoders <sibling-decoders.html>`_, which is a handy decoding strategy to handle dynamic logs. 
+It is possible to create what we call `sibling decoders <sibling-decoders.html>`_, which is a handy decoding strategy to handle dynamic logs.
 
 
 +--------------------+------------------+
