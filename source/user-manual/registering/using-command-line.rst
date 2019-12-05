@@ -9,6 +9,9 @@ This method consists of registering the agents manually in the Wazuh manager usi
 
 This method is completely manual and requires root access (or Administrator access in Windows) to the Wazuh managers and Wazuh agents.
 
+Registering the Agents
+^^^^^^^^^^^^^^^^^^^^^^
+
 .. toctree::
     :maxdepth: 1
 

@@ -2,8 +2,8 @@
 
 .. _simple-registration-service:
 
-Using the simple registration service
-=====================================
+Registering agents using the simple registration service
+========================================================
 
 This is the easiest method to register agents. It doesn’t require any kind of authorization or host verification. If the ``OpenSSL`` package is installed before installing the manager, the package will create the certificate and key needed to run the authentication process called ``ossec-authd``. This certificate and key can be found on the manager in ``/var/ossec/etc/sslmanager.cert`` and
 ``/var/ossec/etc/sslmanager.key``.
