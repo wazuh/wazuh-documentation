@@ -752,6 +752,7 @@ $(function() {
     setTimeout(function() {
       $(ele).find('span').css({'display': 'none'});
       $(ele).find('i').css({'display': 'block'});
+      $(ele).focus();
     }, 1000);
   });
 
