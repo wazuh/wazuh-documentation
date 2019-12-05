@@ -5,12 +5,14 @@
 Registering agents with password authorization
 ==============================================
 
-You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password. To register an agent using the registration service and a password, first follow the steps from the ``Manager`` section and then, follow the steps from the correspondig OS.
+This registration method is similar to ``Simple registration service`` except that it allows additional protection of the manager from unauthorized registrations by using a password.
+
+To register the agent, first, follow the instructions in the ``Manager`` section and then select the corresponding section for the agent's operating system.
 
 Manager
 ^^^^^^^
 
-To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.conf`` file:
+To enable password authorization, in ``/var/ossec/etc/ossec.conf`` file, in ``<auth><use_password>`` section, set the value to yes.
 
     .. code-block:: xml
 
@@ -20,9 +22,9 @@ To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.co
         ...
       </auth>
 
-After changing the ``ossec.conf`` file, you can use a custom password or let the registration process to generate a random password:
+You can choose your password or let the registration service generate one for you:
 
-  a) **Using a custom password**: create this file ``/var/ossec/etc/authd.pass`` and write in it your custom password. For example, if we want to use *TopSecret* as a password:
+  a) **Using a custom password**: create ``/var/ossec/etc/authd.pass`` file and save your custom password in it. In the below example, we will use password ``TopSecret``:
 
     .. code-block:: console
 
