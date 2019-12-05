@@ -22,6 +22,7 @@ Options
 - `enabled`_
 - `socket_path`_
 - `tag`_
+- `object_key`_
 - `address`_
 - `port`_
 - `shared_key`_
@@ -68,6 +69,21 @@ This indicates the tag to be added to the messages forwarded to the Fluentd serv
 +--------------------+------------+
 
 For example ``<tag>debug.test</tag>``.
+
+object_key
+^^^^^^^^^^
+
+.. versionadded:: 3.11.0
+
+Fluent Forward packs every log into an object. This option defines the key of that object, whose value is the log itself.
+
++--------------------+----------------------+
+| **Default value**  | message              |
++--------------------+----------------------+
+| **Allowed values** | Any non-empty string |
++--------------------+----------------------+
+
+For example ``<object_key>message</object_key>``.
 
 address
 ^^^^^^^
