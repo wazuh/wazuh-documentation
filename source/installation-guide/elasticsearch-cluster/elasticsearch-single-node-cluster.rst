@@ -128,13 +128,8 @@ Next steps
 
 The next step consists of select the Wazuh server installation type that you want.
 
-+---------------------+-------------------------------------------------------------+
-| Wazuh cluster type  | Guide                                                       |
-+=====================+=============================================================+
-| Single-node cluster | :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>` |
-+---------------------+-------------------------------------------------------------+
-| Multi-node cluster  | :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`   |
-+---------------------+-------------------------------------------------------------+
+- :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
+- :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`
 
 
 Uninstall
