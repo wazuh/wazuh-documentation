@@ -47,25 +47,21 @@ Available registration methods
 
 Below are listed currently available registration methods containing a brief description to enable you to choose the method that best suits your needs.
 
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| Registration method                                                                            | Description                                                                           |
-+================================================================================================+=======================================================================================+
-| :ref:`Using command line (CLI) <using-command-line>`                                           | Simple and fully manual. Requires root access for both manager and agent host.        |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`Using Wazuh API manually <restful-api-register>`                                         | Requires Wazuh API user name and password as well as manager's and agent's IP address |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`Using scripts to register agents with API <restful-api-register-script>`                 | Fast and easy way to register agents for those familiar with using scripts.           |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`Using simple registration service <simple-registration-service>`                         | Requires Root/Administrator access to an agent. Doesn't require an access to a manager|
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`Using password authorization <password-authorization-registration-service>`              |                                                                                       |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`manager-verification-registration`                                                       |                                                                                       |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`agent-verification-with-host-validation`                                                 |                                                                                       |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
-| :ref:`agent-verification-without-host-validation`                                              |                                                                                       |
-+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Registration method                                                                            | Description                                                                                                        |
++================================================================================================+====================================================================================================================+
+| :ref:`Using command line (CLI) <using-command-line>`                                           | Simple and fully manual. Requires root access for both manager and agent host.                                     |
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using Wazuh API manually <restful-api-register>`                                         | Requires Wazuh API user name and password. Doesn't require root access to the manager                              |
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using scripts to register agents with API <restful-api-register-script>`                 | Fast and easy way to register agents for those familiar with using scripts.                                        |
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using simple registration service <simple-registration-service>`                         | Requires Root/Administrator access to an agent. Doesn't require an access to a manager                             |
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using password authorization <password-authorization-registration-service>`              | Provides password protection of the manager from unauthorized registrations                                        |
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using registration service with host verification <host-verification-registration>`      | Uses Certificate of Authority (CA) to ensure that the connection is established between a right agent and a manager|                                                                                   
++------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 .. note::
 

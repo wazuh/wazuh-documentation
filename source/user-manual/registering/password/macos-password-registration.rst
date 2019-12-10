@@ -2,8 +2,8 @@
 
 .. _macos-password-registration:
 
-MacOS X agents
-==============
+MacOS X hosts
+=============
 
 Open a session in your MacOS X agent host as root user. After that, you can register the Agent using ``agent-auth`` and a password as follows:
 

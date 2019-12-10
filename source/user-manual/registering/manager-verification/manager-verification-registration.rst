@@ -5,7 +5,7 @@
 Manager verification using SSL
 ==============================
 
-To verify the manager using SSL, it is needed to create a SSL certificate for the Wazuh manager and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the agents to verificate the Wazuh manager while they are been registered.
+To verify the manager using SSL, we will create an SSL certificate and sign it using the :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the agents to ensure that they are connected to the correct manager during the registration service.
 
   .. image:: ../../../images/manual/managing-agents/SSLregister1.png
     :align: center
@@ -13,12 +13,12 @@ To verify the manager using SSL, it is needed to create a SSL certificate for th
 
 In this example, we are going to create a certificate for a Wazuh manager, whose IP address is ``192.168.1.2``.
 
-Wazuh manager
-^^^^^^^^^^^^^
+Manager
+^^^^^^^
 
-Follow these steps in the Wazuh server:
+Follow these steps in the Wazuh manager host:
 
-1. Create a configuration file and name it ``req.conf``. You can enter the hostname or the IP address of the Wazuh server where the agents are going to be registered. In this case, the Wazuh server IP is ``192.168.1.2``. The content of the configuration file could be as follows:
+1. Create a configuration file ``req.conf`` and enter the hostname or the IP address of the Wazuh server where the agents are going to be registered. The configuration file could be as follows:
 
   .. code-block:: console
 
@@ -44,7 +44,7 @@ Follow these steps in the Wazuh server:
     # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
     # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
 
-  .. note:: The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This will allow the registration of Wazuh agents with a SAN certificate.
+  .. note:: The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This allows the registration of the agents with a SAN certificate.
 
 3. Copy the newly created certificate and its key to the ``/var/ossec/etc`` folder:
 
@@ -66,10 +66,10 @@ Follow these steps in the Wazuh server:
 
       # service wazuh-manager restart
 
-Wazuh agents
-^^^^^^^^^^^^
+Agents
+^^^^^^
 
-Once you have completed the Wazuh manager section, you need to copy the CA file (``.pem``) to the agent. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the Wazuh agent to the manager:
+Once you have completed the manager section, you need to copy the CA file (``.pem``) to the agent. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the agent to the manager:
 
 .. toctree::
     :maxdepth: 2

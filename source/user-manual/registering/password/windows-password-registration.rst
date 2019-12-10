@@ -2,36 +2,37 @@
 
 .. _windows-password-registration:
 
-Windows agents
-==============
+Windows hosts
+=============
 
-To register the Windows Agent, you need to start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh agent in Windows host depends on the architecture of the host.
+To register the Windows Agent, you need to start a CMD or a Powershell as **Administrator**. The agent's installation directory depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
-This guide suppose that the Wazuh agent is installed in a ``x86_64`` host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+.. note::
+	  In this example we will register the agent installed on a ``x86_64`` host.
+|
 
-After that, you can register the agent using ``agent-auth.exe`` and your password:
+1. Register the agent using the password. It can be stored in a file or provided as a command-line argument:
 
-1. Register the agent using the password. The agents can use the password by storing it on a file or as a command line argument, so you can use any of these two options:
-
-    a) Write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` and run the ``agent-auth`` program:
+    a) **Using a stored password**: write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` file and run the ``agent-auth`` program. It allows agent registration by simply providing the manager’s IP address. If the agent's name is omitted the registration service will use the hostname as the agent's name:
 
     .. code-block:: console
 
-      # echo TopSecret > C:\Program Files (x86)\ossec-agent\authd.pass
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+      PS echo TopSecret > "C:\Program Files (x86)\ossec-agent\authd.pass"
+      PS C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -A <AGENT_NAME>
 
-    b) Run the program with the ``-P`` flag, and insert the password:
+    b)  **Using a password as a command-line argument**: run the ``agent-auth`` program, provide the manager’s IP address together with the password following the ``-P`` flag. If the agent's name is omitted the registration service will use the hostname as the agent's name:
 
     .. code-block:: none
 
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -P "TopSecret"
+      PS C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -A <AGENT_NAME> -P "TopSecret"
 
-2. Edit the Wazuh agent configuration to add the Wazuh server IP address.
+    |
+		You can adjust the agent registration according to your requirements choosing from available agent-auth options.
 
-  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
+2. Edit the Wazuh agent configuration file. In ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 
   .. code-block:: xml
 
@@ -56,4 +57,3 @@ After that, you can register the agent using ``agent-auth.exe`` and your passwor
 
 			# net stop wazuh
 			# net start wazuh
-

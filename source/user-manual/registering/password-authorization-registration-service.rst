@@ -5,14 +5,14 @@
 Registering agents with password authorization
 ==============================================
 
-This registration method is similar to ``Simple registration service`` except that it allows additional protection of the manager from unauthorized registrations by using a password.
+This registration method is similar to :ref:`Simple registration service <simple-registration-service>` except that it allows additional protection of the manager from unauthorized registrations by using a password.
 
-To register the agent, first, follow the instructions in the ``Manager`` section and then select the corresponding section for the agent's operating system.
+To register the agent follow the instructions in the ``Manager`` section and then select the corresponding section for the agent's operating system.
 
 Manager
 ^^^^^^^
 
-To enable password authorization, in ``/var/ossec/etc/ossec.conf`` file, in ``<auth><use_password>`` section, set the value to yes.
+To enable password authorization, in ``/var/ossec/etc/ossec.conf`` file, in ``<auth><use_password>`` section, set the value to ``yes``.
 
     .. code-block:: xml
 
@@ -24,13 +24,17 @@ To enable password authorization, in ``/var/ossec/etc/ossec.conf`` file, in ``<a
 
 You can choose your password or let the registration service generate one for you:
 
-  a) **Using a custom password**: create ``/var/ossec/etc/authd.pass`` file and save your custom password in it. In the below example, we will use password ``TopSecret``:
+.. note::
+    In this example, the custom password to register the Wazuh agent is ``TopSecret``.
+|
+
+  a) **Using a custom password**: create ``/var/ossec/etc/authd.pass`` file and save your custom password in it:
 
     .. code-block:: console
 
       # echo "TopSecret" > /var/ossec/etc/authd.pass
 
-  b) **Using a random password**: If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a random password. You can find the password in ``/var/ossec/logs/ossec.log``.
+  b) **Using a random password**: if no password is specified in ``/var/ossec/etc/authd.pass``, the registration service will create a random password. You can find the password in ``/var/ossec/logs/ossec.log`` by exectuting the following command:
 
     .. code-block:: console
 
@@ -38,7 +42,7 @@ You can choose your password or let the registration service generate one for yo
         2019/04/25 15:09:50 ossec-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
 
 
-To enable these changes, you need to **restart** the Wazuh manager:
+Restart the Wazuh manager for the changes to take effect:
 
   a) For Systemd:
 
@@ -52,8 +56,7 @@ To enable these changes, you need to **restart** the Wazuh manager:
 
       # service wazuh-manager start
 
-.. note::
-    In this example, the password to registering the Wazuh agent is *TopSecret*.
+|
 
 Agents
 ^^^^^^

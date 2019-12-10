@@ -2,15 +2,16 @@
 
 .. _host-verification-registration:
 
-Registration service with host verification
-===========================================
+Registering agents with host verification
+=========================================
 
-Using verification with an SSL key certificate is really useful to check if connections between agents and managers are correct. This way, the user avoids the mistake of connecting to a different manager or agent.
+Using verification with an SSL key certificate provides confidence that the connection between the right agent and the right manager is established.
 
 Creating a Certificate of Authority (CA)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To use the registration service with SSL certification, you must create a **Certificate of Authority** that will be used to sign certificates for the manager and the agents. The hosts will receive a copy of this CA in order to verify the remote certificate:
+To use the registration service with SSL certification, you must create a **Certificate of Authority** that will be used to sign certificates for the manager and the agents. The hosts will receive a copy of this CA in order to verify the remote certificate.
+To generate the certificate execute the following command:
 
 .. code-block:: console
 
@@ -23,7 +24,7 @@ To use the registration service with SSL certification, you must create a **Cert
 Available options to verify the hosts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating your *CA*, now you have these options to register the Wazuh agents verifying the hosts:
+After creating your `CA`, now you have these options to register the Wazuh agents verifying the hosts:
 
 .. toctree::
     :maxdepth: 2

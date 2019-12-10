@@ -2,10 +2,10 @@
 
 .. _linux-unix-agent-verification:
 
-Linux and Unix agents
-=====================
+Linux and Unix agent hosts
+==========================
 
-Open a session in your Linux/Unix agent host as root user. After that, you can register the Agent using ``agent-auth``:
+Open a session in your Linux/Unix agent host as a root user. After that, you can register the agent with the manager using ``agent-auth`` program:
 
 1. Copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the ``/var/ossec/etc`` folder and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
