@@ -44,14 +44,10 @@ The following image resume the architecture possibilities referring to single-no
 Start deploying Wazuh server and Elastic Stack
 ----------------------------------------------
 
-The guide starts with the Elasticsearch section. Once Elasticsearch is configured, the guide will drive you into the Wazuh cluster installation document. The following table shows the two Elasticsearch options depending on your needs:
+The guide starts with the Elasticsearch section. Once Elasticsearch is configured, the guide will drive you into the Wazuh cluster installation document.
+There are two Elasticsearch configuration type: single node cluster or multi-node cluster. Follow one option depending of your needs:
 
-+----------------------------+-----------------------------------------------------------------------------+
-| Elasticsearch cluster type | Guide                                                                       |
-+============================+=============================================================================+
-| Single-node cluster        | :ref:`Elasticsearch single-node cluster<elasticsearch_single_node_cluster>` |
-+----------------------------+-----------------------------------------------------------------------------+
-| Multi-node cluster         | :ref:`Elasticsearch multi-node cluster<elasticsearch_multi_node_cluster>`   |
-+----------------------------+-----------------------------------------------------------------------------+
+- :ref:`Elasticsearch single-node cluster<elasticsearch_single_node_cluster>`
+- :ref:`Elasticsearch multi-node cluster<elasticsearch_multi_node_cluster>`
 
 After configured the Wazuh server - Elastic Stack environment, the Wazuh agent must be installed in every endpoint to be monitored. Follow the guide :ref:`Wazuh agent installation guide<installation_agents>` for start deploying the Wazuh agents.
