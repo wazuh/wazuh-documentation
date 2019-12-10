@@ -41,10 +41,10 @@ The following image resume the architecture possibilities referring to single-no
     :align: center
     :width: 100%
 
-Start deploying Wazuh and Elastic Stack
----------------------------------------
+Start deploying Wazuh server and Elastic Stack
+----------------------------------------------
 
-Start deploying the Elasticsearch cluster by choosing one of the following guide depending of your needs:
+The guide starts the Wazuh server - Elastic Stack installation guide with the Elasticsearch section. The following table shows the two options depending on your needs:
 
 +----------------------------+-----------------------------------------------------------------------------+
 | Elasticsearch cluster type | Guide                                                                       |
