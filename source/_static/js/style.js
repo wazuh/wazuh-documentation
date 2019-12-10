@@ -12,7 +12,6 @@ $(function() {
     'deployment',
     'development/index',
     'docker-monitor/index',
-    'installation-guide/index',
     'installation-guide/elasticsearch-cluster/index',
     'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',

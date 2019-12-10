@@ -8,7 +8,9 @@ Installation guide
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section contains technical documentation for Install Wazuh.
+A Quickstart installation guide is included in Getting started, which can be found :ref:`here<installation_guide>`. The mentioned guide aims to introduce Wazuh by installing along with  Elastic Stack on a single system (host). It can be used for learning proposes or small production environments, taking into account the non-high availability inconvenience.
+
+Unlike the Quickstart installation guide, here you will find how to build a production environment with data and services high availability, scalability, etc. The introduction document will drive you through the basic concepts and architecture of a Wazuh production environment.
 
 .. topic:: Contents
 
