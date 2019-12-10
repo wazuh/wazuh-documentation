@@ -36,7 +36,7 @@ Architecture
 
 The following image resume the architecture possibilities referring to single-node or multi-node cluster in Wazuh and Elasticsearch.
 
-.. thumbnail:: ../../images/getting_started/architecture_ports_elastic.png
+.. thumbnail:: ../../images/installation/installing_wazuh_basic_production.png
     :title: Elastic ports diagram
     :align: center
     :width: 100%
