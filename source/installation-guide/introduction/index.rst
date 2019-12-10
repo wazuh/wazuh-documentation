@@ -54,6 +54,3 @@ The guide starts the Wazuh server - Elastic Stack installation guide with the El
 | Multi-node cluster         | :ref:`Elasticsearch multi-node cluster<elasticsearch_multi_node_cluster>`   |
 +----------------------------+-----------------------------------------------------------------------------+
 
-.. note::
-  Before installing the components, please confirm that the time synchronization service is configured and working on your servers. This is most commonly done with **NTP**.  For more information, go to `Debian/Ubuntu <https://help.ubuntu.com/lts/serverguide/NTP.html>`_ or `CentOS/RHEL/Fedora/Amazon Linux/Oracle Linux/OpenSUSE/SUSE <http://www.tecmint.com/install-ntp-server-in-centos/>`_.
-
