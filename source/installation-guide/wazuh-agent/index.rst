@@ -54,4 +54,3 @@ On the other hand, deploying agents to a large number of servers or endpoints ca
     wazuh_agent_package_macos
     solaris/index
     wazuh_agent_package_windows
-    deployment_variables

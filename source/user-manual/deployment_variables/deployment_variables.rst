@@ -30,8 +30,8 @@ Below you can find a table showing the different operating systems with which yo
     :hidden:
     :maxdepth: 2
 
-    deployment_variables/deployment_variables_aix
-    deployment_variables/deployment_variables_linux
-    deployment_variables/deployment_variables_macos
-    deployment_variables/deployment_variables_windows
+    deployment_variables_aix
+    deployment_variables_linux
+    deployment_variables_macos
+    deployment_variables_windows
 
