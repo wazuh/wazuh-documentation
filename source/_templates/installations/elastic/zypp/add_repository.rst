@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # zypper install zip unzip
+      # zypper install zip unzip tar
 
 #. Import the GPG key:
 
