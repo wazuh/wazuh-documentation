@@ -1047,7 +1047,7 @@ a.headerlink:before {
   color: #ffb600;
   content: '\f0c1';
   display: inline-block;
-  font: normal bold normal 0.8rem/.5 FontAwesome;
+  font: normal bold normal 0.95rem/.5 FontAwesome;
   text-align: right;
   padding-left: 10px;
   padding-bottom: 4px;
