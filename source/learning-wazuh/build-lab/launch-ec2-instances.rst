@@ -10,18 +10,18 @@ Here we will launch the Wazuh Server, the Elastic Server, and the Linux Agent as
 Launch a Wazuh Server instance
 ------------------------------
 
-- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click **[Launch Instance]**.
-- On the left click on "AWS Marketplace".
+- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click on **[Launch Instance]**.
+- On the left, click on "AWS Marketplace".
 - Type "centos 7" into the search field and hit <Enter>.
-- Find the image below and click **[Select]** next to it.
+- Find the image below and click on **[Select]** next to it.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/centos-ami.png
     :title: CentOS 7 AMI
     :align: center
     :width: 75%
 
-- Click **[Continue]**.
-- Select the General purpose t2.micro image and click **[Next: Configure Instance Details]**
+- Click on **[Continue]**.
+- Select the General purpose t2.micro image and click on **[Next: Configure Instance Details]**
 - For *Network*, choose your VPC, and for the *Primary IP* of eth0, put in "172.30.0.10".
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/config-inst-details.png
@@ -51,7 +51,7 @@ Launch a Wazuh Server instance
     echo "172.30.0.40 windows-agent" >> /etc/hosts
     echo "PATH=$PATH:$HOME/bin:/var/ossec/bin" >> /root/.bashrc
 
-- Click **[Next: Add Storage]**
+- Click on **[Next: Add Storage]**
 - Choose a recommended *Size* of 20GB.  As low as 8GB should work on this instance if you are careful.
 - Choose a *Volume Type* of "General Purpose SSD"
 - Checkmark *Delete on Termination*.
@@ -61,7 +61,7 @@ Launch a Wazuh Server instance
     :align: center
     :width: 75%
 
-- Click **[Next: Add Tags]** and then **[Add Tag]**.
+- Click on **[Next: Add Tags]** and then on **[Add Tag]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/add-tag-waz-svr.png
     :title: Add tag
@@ -99,7 +99,7 @@ Repeat the process for "Launch a Wazuh Server" changing the following:
 - Choose a recommended instance type of General Purpose **t2.xlarge**.  An instance
   as small as a **t2.large** should still work but it will not be as responsive.
 - Set the *Primary IP* to 172.30.0.20.
-- Choose a recommended *Storage Size* of 100GB. As low as 8GB should generally 
+- Choose a recommended *Storage Size* of 100GB. As low as 8GB should generally
   be adequate if you are careful with disk space management and don't leave the
   lab running for a long time.
 - Set the *Name* Tag to "Elastic Server".
