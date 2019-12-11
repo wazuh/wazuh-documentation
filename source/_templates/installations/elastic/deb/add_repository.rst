@@ -5,7 +5,7 @@
     .. code-block:: console
 
       # apt-get update
-      # apt-get install curl apt-transport-https zip
+      # apt-get install curl apt-transport-https zip unzip
 
 #. Install the GPG key:
 

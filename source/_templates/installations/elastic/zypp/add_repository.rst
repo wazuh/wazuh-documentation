@@ -1,5 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+#. Install the certificates deployment dependencies:
+
+    .. code-block:: console
+
+      # zypper install zip unzip
+
 #. Import the GPG key:
 
     .. code-block:: console
