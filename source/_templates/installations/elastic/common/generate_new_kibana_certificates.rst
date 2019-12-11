@@ -21,22 +21,12 @@ Create the certificates using the `elasticsearch-certutil <https://www.elastic.c
 
   # /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca /usr/share/elasticsearch/ca/ca.key  --ca-cert /usr/share/elasticsearch/ca/ca.crt --in instances.yml --keep-ca-key --out certs.zip
 
-The file created contains the ``ca.key`` due to the ``--keep-ca-key`` modifier. You have to distribute the zip file but we recommend not distributing it with the ``ca.key``. You can remove it from the zip file as follow:
+The file created contains the ``ca.key`` due to the ``--keep-ca-key`` modifier. You have to copy the zip file into another server but we recommend not distributing it with the ``ca.key``. You can remove it from the zip file as follow:
 
 .. code-block:: console
 
   # zip -d /usr/share/elasticsearch/certs.zip "ca/ca.key"
 
-This is the ``zip`` content:
-
-.. code-block:: console
-
-  certs.zip
-  |-- ca
-      |-- ca.crt
-  |-- kibana
-      |-- kibana.crt
-      |-- kibana.key
 
 Copy the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step into the Kibana server. This example will suppose that it will be placed at home folder ``~/``.
 

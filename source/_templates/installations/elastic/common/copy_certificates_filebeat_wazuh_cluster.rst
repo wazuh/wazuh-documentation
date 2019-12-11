@@ -6,8 +6,9 @@ In section **Installing Elasticsearch**, we created a .zip that contains the fil
 
   # mkdir /etc/filebeat/certs/ca -p
   # unzip ~/certs.zip -d ~/
-  # cp -R /usr/share/filebeat-X/ca/ ~/filebeat-X/* /etc/filebeat/certs/
+  # cp -R ~/filebeat-X/ca/ ~/filebeat-X/* /etc/filebeat/certs/
   # chmod -R 500 /etc/filebeat/certs
   # chmod 400 /etc/filebeat/certs/ca/ca.* /etc/filebeat/certs/filebeat-X.*
+  # rm -rf ~/filebeat-X/ ~/certs.zip
 
 .. End of copy_certificates_filebeat_wazuh_cluster.rst
