@@ -10,92 +10,102 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
 
-The following Kibana installation may vary depending on if you will install Kibana in the same host that Elasticsearch or not. Please, select the correct option from the tabs below:
+Elastic recommends to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on if you will install Kibana in the same server that Elasticsearch or not.
+
+
+Adding the Elastic Stack repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
 
+  .. group-tab:: APT
 
-  .. tab:: Same Elasticsearch host
 
-    #. Install the Kibana package:
+    .. include:: ../../_templates/installations/elastic/deb/add_repository.rst
 
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../_templates/installations/elastic/yum/add_repository.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../_templates/installations/elastic/zypp/add_repository.rst
+
+
+
+Kibana installation and configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Install the Kibana package:
 
     .. tabs::
 
         .. group-tab:: APT
 
 
-            .. include:: ../../_templates/installations/elastic/deb/add_repository.rst
+            .. include:: ../../_templates/installations/elastic/deb/install_kibana.rst
 
 
 
         .. group-tab:: Yum
 
 
-            .. include:: ../../_templates/installations/elastic/yum/add_repository.rst
+            .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: ZYpp
 
 
-            .. include:: ../../_templates/installations/elastic/zypp/add_repository.rst
+            .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
+
+
+#. The next step may vary depending on if you want to install Kibana in the same Elasticsearch server or in a different one. It consists of certificate placement:
+
+
+    .. tabs::
 
 
 
-    .. include:: ../../_templates/deb/install_kibana.rst
+        .. tab:: Same Elasticsearch server
 
-    #. Copy the Elasticsearch certificates into Kibana configuration folder:
 
-        .. include:: ../../_templates/common/copy_certificates_kibana_aio.rst
+            Copy the Elasticsearch certificates:
 
-    #. Configure Kibana:
-
-        .. include:: ../../_templates/common/configure_kibana_aio.rst
-
-    #. Install the Wazuh Kibana plugin:
-
-        .. include:: ../../_templates/common/install_wazuh_kibana_plugin.rst
-
-    #. Enable and start the Kibana service:
-
-        .. include:: ../../_templates/deb/enable_start_kibana.rst
-
-    In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
-
-    .. note:: The Kibana service listens on the default port 5601.
+            .. include:: ../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 
 
+        .. tab:: Different Elasticsearch server
 
-  .. tab:: Different Elasticsearch host
+
+            .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
-    #. Install the Kibana package:
 
-    .. include:: ../../_templates/deb/install_kibana.rst
+#. Download the Kibana configuration file:
 
-    #. Copy the Elasticsearch certificates into Kibana configuration folder:
+    .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
 
-        .. include:: ../../_templates/common/copy_certificates_kibana.rst
 
-    #. Configure Kibana:
+#. Install the Wazuh Kibana plugin:
 
-        .. include:: ../../_templates/common/configure_kibana_aio.rst
+    .. include:: ../../_templates/installations/elastic/common/install_wazuh_kibana_plugin.rst
 
-    #. Install the Wazuh Kibana plugin:
+#. Enable and start the Kibana service:
 
-        .. include:: ../../_templates/common/install_wazuh_kibana_plugin.rst
-
-    #. Enable and start the Kibana service:
-
-        .. include:: ../../_templates/deb/enable_start_kibana.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
     In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
 
     .. note:: The Kibana service listens on the default port 5601.
-
 
 
 
