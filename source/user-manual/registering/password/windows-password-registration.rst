@@ -5,7 +5,7 @@
 Windows hosts
 =============
 
-To register the Windows Agent, you need to start a CMD or a Powershell as **Administrator**. The agent's installation directory depends on the architecture of the host.
+To register the Windows agent, you need to start a CMD or a Powershell as **Administrator**. The agent's installation directory depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
@@ -30,7 +30,7 @@ To register the Windows Agent, you need to start a CMD or a Powershell as **Admi
       PS C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -A <AGENT_NAME> -P "TopSecret"
 
     |
-		You can adjust the agent registration according to your requirements choosing from available agent-auth options.
+		You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
 
 2. Edit the Wazuh agent configuration file. In ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 

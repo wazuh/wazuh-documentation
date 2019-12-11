@@ -7,7 +7,7 @@ Linux and UNIX hosts
 
 Open a session in your Linux/Unix agent host as root user and follow these steps:
 
-1. Add the agent to the manager using following template:
+1. Add the Wazuh agent to the Wazuh manager using following template:
 
   .. code-block:: console
 
@@ -77,3 +77,5 @@ Open a session in your Linux/Unix agent host as root user and follow these steps
     .. code-block:: console
 
       # /var/ossec/bin/agent_control -i <AGENT-ID>
+
+    The output of the program will display information about the newly registered agent.  

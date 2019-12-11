@@ -5,9 +5,7 @@
 Registering agents using the Wazuh API manually
 ===============================================
 
-Wazuh API allows to register a Wazuh Agent by running a single requests from any host. This request will return a registration **key** for that agent, and then, you **must manually add** this key to the agent using ``manage_agents`` utility.
-
-In this example, we will register an agent in a manager whose IP is ``192.168.1.2``.
+Wazuh API allows registering the Wazuh agent by running a single request from any host. This request returns agent's registration key, which must be manually added to the agent using ``manage_agents`` program. 
 
 Registering the Agents
 ^^^^^^^^^^^^^^^^^^^^^^

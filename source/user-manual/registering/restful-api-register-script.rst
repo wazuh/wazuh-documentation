@@ -5,12 +5,12 @@
 Registering agents using sripts
 ===============================
 
-We have prepared a few different scripts to allow automatically register an agent using the Wazuh API.
+We have prepared a few different scripts to allow automatically register the Wazuh agent using the Wazuh API.
 
 
 Register the agent automatically using a shell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Below shell script allows to register Wazuh agent on a Linux/Unix host using Wazuh Api service. The script requires root access and shall be run on the agent.
+Below shell script allows to register the agent on a Linux/Unix host using Wazuh Api service. The script requires root access and shall be run on the agent.
 
 1. Download the script:  `Register an agent using a shell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.sh>`_.
 
@@ -75,8 +75,8 @@ Below shell script allows to register Wazuh agent on a Linux/Unix host using Waz
 Register the agent automatically using a Python script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Below Python script allows us to register Wazuh agent on a Linux/Unix host, as well as on a Windows host, using Wazuh API service. The script requires root/administrator access and shall be run on the agent host.
-The script requires ``Python`` and ``pip package-management system`` to be installed on the agent host machine.
+Below Python script allows us to register the Wazuh agent on a Linux/Unix host, as well as on a Windows host, using Wazuh API service. The script requires root/administrator access and shall be run on the agent host.
+The script requires an installation of ``Python`` and ``pip package-management system``.
 
 1. Download the script: `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.py>`_.
 
@@ -97,7 +97,7 @@ The script requires ``Python`` and ``pip package-management system`` to be insta
     agent_name = "auto"
     verify = False  # Use with self-signed certificates.
 
-  By default, the registration service will use the hostname as the agent name. You can change this by replacing:
+  By default, the registration service will use the hostname as the agent's name. You can change this by replacing:
 
   .. code-block:: console
 
@@ -158,7 +158,7 @@ The script requires ``Python`` and ``pip package-management system`` to be insta
 
 Register the agent automatically using a PowerShell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Below PowerShell script allows us to register Wazuh agent on a Windows host using Wazuh API service. The script requires administrator access and shall be run on the agent host.
+Below PowerShell script allows us to register the Wazuh agent on a Windows host using Wazuh API service. The script requires administrator access and shall be run on the agent's host.
 
 1. Download the script: `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.ps1>`_.
 
@@ -177,7 +177,7 @@ Below PowerShell script allows us to register Wazuh agent on a Windows host usin
      $wazuh_manager = "<Wazuh-Manager-IP>"
      Ignore-SelfSignedCerts
 
-   By default, the registration service will use the hostname as the agent name. You can change this by replacing:
+   By default, the registration service will use the hostname as the agent's name. You can change this by replacing:
 
    .. code-block:: console
 

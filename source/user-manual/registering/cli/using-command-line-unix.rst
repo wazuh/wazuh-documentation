@@ -2,8 +2,8 @@
 
 .. _command-line-register-unix:
 
-Using the CLI in Unix hosts
-============================
+Unix hosts
+==========
 
 To register an agent using the command line, first follow the steps from the **Manager** section and then, from the **Agent** section. This guide covers the registration process for Solaris, AIX, HP-UX, etc.
 

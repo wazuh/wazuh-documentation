@@ -5,9 +5,9 @@
 Registering agents using the command line (CLI)
 ===============================================
 
-This method consists of registering the agents manually in the Wazuh manager using ``manage_agents`` binary, extracting the key and inserting it in the Wazuh agents using ``manage_agents`` too.
+This method consists of registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` program, extracting the key and inserting it in the agent.
 
-This method is completely manual and requires root access (or Administrator access in Windows) to the Wazuh managers and Wazuh agents.
+It requires root/administrator access both to the manager and the agent.
 
 Registering the Agents
 ^^^^^^^^^^^^^^^^^^^^^^

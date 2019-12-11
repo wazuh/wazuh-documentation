@@ -5,13 +5,14 @@
 Manager verification using SSL
 ==============================
 
-To verify the manager using SSL, we will create an SSL certificate and sign it using the :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the agents to ensure that they are connected to the correct manager during the registration service.
+To verify the Wazuh manager using SSL, we will create an SSL certificate and sign it using the :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the agents to ensure that they are connected to the correct manager during the registration service.
 
   .. image:: ../../../images/manual/managing-agents/SSLregister1.png
     :align: center
     :width: 100%
 
-In this example, we are going to create a certificate for a Wazuh manager, whose IP address is ``192.168.1.2``.
+.. note::
+	In this example, we will create a certificate for the manager, whose IP address is ``192.168.1.2``.
 
 Manager
 ^^^^^^^

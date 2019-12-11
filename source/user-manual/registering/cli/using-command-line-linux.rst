@@ -2,20 +2,26 @@
 
 .. _command-line-register-linux:
 
-Using the CLI in Linux hosts
-============================
+Linux hosts
+===========
 
-To register an agent using the command line, first follow the steps from the **Manager** section and then, from the **Agent** section.
+To register the Wazuh agent using the command line, first, follow the steps from the **Manager** section and then, from the **Agent** section.
 
 Manager
 ^^^^^^^
-1. In the CLI of the Wazuh manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``ubuntu-ag`` and its address or IP is ``any``.
+1. On the CLI of the Wazuh manager host add a new agent by running ``manage_agents`` program and providing agent's name and IP address:
+
+	.. code-block:: console
+
+	  # /var/ossec/bin/manage_agents -a <AGENT_IP> -n <AGENT_NAME>
+
+	In this example, we will add an agent under the name ``ubuntu-ag`` and with the IP address ``any``.
 
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -a any -n ubuntu-ag
 
-2. Now, list the agents to get the ID of the ``ubuntu-ag`` agent:
+2. List the agents to obtain the ID of the ``ubuntu-ag`` agent:
 
 	.. code-block:: console
 
@@ -24,7 +30,7 @@ Manager
 		Available agents:
 		    ID: 001, Name: ubuntu-ag, IP: any
 
-3. Using the ID from the previous command, extract the new agent’s key using. Copy this key because you will need it for the agent:
+3. Extract the agent's key using the ID found in the output of the previous command:
 
 	.. code-block:: console
 
@@ -33,11 +39,14 @@ Manager
 		Agent key information for '001' is:
 		MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
+  Copy the key, you will import it to the agent to enable the communication to the manager.
+
+
 Agent
 ^^^^^
-Once you have added the agent in the Wazuh manager host, open a session in your Linux agent host as root user. After that, let's import the key and connect the agent to the manager.
+Once you have added the agent in the manager, open a session in your Linux agent host as a root user.
 
-1. First, import the key using ``manage_agents``:
+1. Import the key using ``manage_agents`` program:
 
 	  .. code-block:: console
 
@@ -52,7 +61,7 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 	      Added.
 
 
-2. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:
+2.  Edit the agent configuration file. In ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the manager IP address or a DNS name:
 
 	.. code-block:: xml
 
@@ -63,7 +72,7 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 		  </server>
 		</client>
 
-3. Once you have complete the step 1 and 2, start the agent:
+3. Start the agent:
 
 	* For Systemd:
 
@@ -76,3 +85,11 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 	  .. code-block:: console
 
 		  # service wazuh-agent restart
+
+4. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
+
+		.. code-block:: console
+
+			# /var/ossec/bin/agent_control -i <AGENT-ID>
+
+		The output of the program will display information about the newly registered agent.	

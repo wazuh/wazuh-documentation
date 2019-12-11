@@ -2,8 +2,8 @@
 
 .. _command-line-register-macos:
 
-Using the CLI in MacOS X hosts
-==============================
+MacOS X hosts
+=============
 
 To register an agent using the command line, first follow the steps from the **Manager** section and then, from the **Agent** section.
 

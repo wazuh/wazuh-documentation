@@ -2,20 +2,26 @@
 
 .. _command-line-register-windows:
 
-Using the CLI in Windows hosts
-==============================
+Windows hosts
+=============
 
 To register an agent using the command line, first follow the steps from the **Manager** section and then, from the **Agent** section.
 
 Manager
 ^^^^^^^
-1. In the CLI of the Wazuh manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``windows-server`` and its address or IP is ``any``.
+1. On the CLI of the Wazuh manager host add a new agent by running ``manage_agents`` program and providing agent's name and IP address:
+
+	.. code-block:: console
+
+		# /var/ossec/bin/manage_agents -a <AGENT_IP> -n <AGENT_NAME>
+
+	In this example, we will add an agent under the name ``windows-server`` and with the IP address ``any``.
 
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -a any -n windows-server
 
-2. Now, list the agents to get the ID of the ``windows-server`` agent:
+2. List the agents to obtain the ID of the ``windows-server`` agent:
 
 	.. code-block:: console
 
@@ -24,7 +30,7 @@ Manager
 		Available agents:
 		    ID: 001, Name: windows-server, IP: any
 
-3. Using the ID from the previous command, extract the new agent’s key using. Copy this key because you will need it for the agent:
+3. Extract the agent's key using the ID found in the output of the previous command:
 
 	.. code-block:: console
 
@@ -33,16 +39,20 @@ Manager
 		Agent key information for '001' is:
 		MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ==
 
+  Copy the key, you will import it to the agent to enable the communication to the manager.
+
 Agent
 ^^^^^
-Once you have added the agent in the Wazuh manager host, open a session in your Windows agent host and then, start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh agent in Windows host depends on the architecture of the host.
+Once you have added the agent in the manager, open a session in your Windows agent host and start a CMD or a Powershell as **Administrator**. The agent’s installation directory depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
-This guide suppose that the Wazuh agent is installed in a x86_64 host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``. After that, let's import the key and connect the agent to the manager.
+.. note::
+		In this example we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+|
 
-1. First, import the key using ``manage_agents``:
+1. Import the key using ``manage_agents`` program:
 
 	  .. code-block:: console
 
@@ -57,7 +67,7 @@ This guide suppose that the Wazuh agent is installed in a x86_64 host, so the in
 	      Added.
 
 
-2. Edit the Wazuh agent configuration in ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:
+2. Edit the agent configuration file. In ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the manager IP address or a DNS name:
 
 	.. code-block:: xml
 
@@ -68,7 +78,7 @@ This guide suppose that the Wazuh agent is installed in a x86_64 host, so the in
 		  </server>
 		</client>
 
-3. Once you have complete the step 1 and 2, start the agent:
+3. Start the agent:
 
 	* Using Powershell with administrator access:
 
@@ -82,3 +92,11 @@ This guide suppose that the Wazuh agent is installed in a x86_64 host, so the in
 
 			# net stop wazuh
 			# net start wazuh
+
+4. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
+
+		.. code-block:: console
+
+			# /var/ossec/bin/agent_control -i <AGENT-ID>
+
+    The output of the program will display information about the newly registered agent.
