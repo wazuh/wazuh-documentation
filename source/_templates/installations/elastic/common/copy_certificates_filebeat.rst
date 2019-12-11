@@ -10,5 +10,5 @@ In section **Installing Elasticsearch**, we created a .zip that contains the fil
   # chmod -R 500 /etc/filebeat/certs
   # chmod 400 /etc/filebeat/certs/ca/ca.* /etc/filebeat/certs/filebeat.*
   # rm -rf ~/filebeat-X/ ~/certs.zip
-  
+
 .. End of copy_certificates_filebeat.rst

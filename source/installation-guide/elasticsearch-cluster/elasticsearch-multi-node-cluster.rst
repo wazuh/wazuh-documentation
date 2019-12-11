@@ -75,6 +75,7 @@ Elasticsearch installation and configuration
         .. include:: ../../_templates/installations/elastic/zypp/install_elasticsearch.rst
 
 
+
 #. [*All*] .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
 
 .. note:: If your using Debian 7, you will need to change the ulimit by ``ulimit -u 4096``. In addition to this, the setting ``bootstrap.system_call_filter`` must be added and set to ``false`` in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file.
@@ -83,7 +84,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*Master*] Certificates creation:
+#. [*Master*] This step implies to select the Wazuh cluster installation type. Select the tab ``Wazuh single-node cluster`` if you will configure a Wazuh single node cluster. If your Wazuh cluster will have two or more nodes, select ``Wazuh multi-node cluster`` tab.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
