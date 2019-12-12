@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/kibana/7.x/kibana_cluster.yml
+  # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/kibana/7.x/kibana.yml
 
 Edit the file ``/etc/kibana/kibana.yml``:
 
