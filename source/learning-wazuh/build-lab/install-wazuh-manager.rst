@@ -10,9 +10,14 @@ The Wazuh server in your lab will be running the Wazuh manager, Wazuh API, and F
 Log in and sudo to root
 -----------------------
 
+This is how it should look like, after loging in and gaining sudo privileges with ``sudo su``:
+
     .. code-block:: console
 
-        # sudo su -
+      [centos@wazuh-manager ~]$ sudo su -
+      Last login: Thu Dec 12 19:21:56 UTC 2019 on pts/0
+      [root@wazuh-manager ~]#
+
 
 Add the Wazuh yum repository
 ----------------------------
@@ -58,18 +63,21 @@ Configure Wazuh manager to allow self registration of new agents with authentica
     # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
     # echo "please123" > /var/ossec/etc/authd.pass # this is the password agents will use for self-registration
 
-Restart Wazuh manager and confirm the agent listener and the self-registration 
+Restart Wazuh manager and confirm the agent listener and the self-registration
 listener are in place:
 
     .. code-block:: console
 
-      # systemctl restart wazuh-manager
-      # netstat -natp | egrep "(:1514|:1515)"
+      [root@wazuh-manager ~]# systemctl restart wazuh-manager
+      [root@wazuh-manager ~]# netstat -natp | egrep "(:1514|:1515)"
+      tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/ossec-remoted
+      tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/ossec-authd
+
 
 Install Wazuh API
 -----------------
 
-The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with 
+The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with
 and control Wazuh manager. It is a general purpose RESTful API that can be used
 from the command line via curl or via custom scripts for interacting with various
 aspects of Wazuh manager.
@@ -99,7 +107,7 @@ aspects of Wazuh manager.
 Install Filebeat
 ----------------
 
-Filebeat is the tool on the Wazuh server that will securely forward the alerts 
+Filebeat is the tool on the Wazuh server that will securely forward the alerts
 and archived events to the Elasticsearch service.
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
@@ -116,13 +124,13 @@ and archived events to the Elasticsearch service.
     enabled=1
     autorefresh=1
     type=rpm-md
-    EOF 
+    EOF
 
 2. Install Filebeat:
 
   .. code-block:: console
 
-    # yum install filebeat-7.3.2
+    # yum install filebeat-7.4.2
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
@@ -158,7 +166,7 @@ and archived events to the Elasticsearch service.
     # systemctl enable filebeat.service
     # systemctl start filebeat.service
 
-8. Now disable the Wazuh and Elastic repositories in order to prevent a future
+8. Now disable the Wazuh and Elastic repositories in order to prevent
    unintended upgrades that may cause a version conflict with the current installation.
 
   .. code-block:: console
