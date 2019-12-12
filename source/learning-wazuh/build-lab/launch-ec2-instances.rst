@@ -68,10 +68,10 @@ Launch a Wazuh Server instance
     :align: center
     :width: 75%
 
-- Click **[Next: Configure Security Group]**
+- Click on **[Next: Configure Security Group]**
 - Choose *Select an existing security group* and then select only the *Wazuh Linux* security group.
-- Click **[Review and Launch]** and then **[Launch]**.
-- Select the "Wazuh Lab" key pair, check the acknowledgment box and click **[Launch Instances]**
+- Click on **[Review and Launch]** and on **[Launch]**.
+- Select the "Wazuh_Lab" key pair, check the acknowledgment box and click on **[Launch Instances]**
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/select-key-pair.png
     :title: Key pair
@@ -84,7 +84,7 @@ Launch a Wazuh Server instance
 Launch a Linux Agent instance
 -----------------------------
 
-Repeat the process for "Launch a Wazuh Server" with the following exceptions:
+Repeat the process for "Launch a Wazuh Server instance" with the following exceptions:
 
 - Set the *Primary IP* to 172.30.0.30.
 - Leave the *Storage Size* at the default 8GB unless you plan to make extra disk space demands on this instance.
@@ -94,7 +94,7 @@ Repeat the process for "Launch a Wazuh Server" with the following exceptions:
 Launch an Elastic Server instance
 ---------------------------------
 
-Repeat the process for "Launch a Wazuh Server" changing the following:
+Repeat the process for "Launch a Wazuh Server instance" changing the following:
 
 - Choose a recommended instance type of General Purpose **t2.xlarge**.  An instance
   as small as a **t2.large** should still work but it will not be as responsive.
@@ -109,13 +109,13 @@ Repeat the process for "Launch a Wazuh Server" changing the following:
 Launch a Windows Agent instance
 -------------------------------
 
-Repeat the process for "Launch a Wazuh Server" with the following exceptions:
+Repeat the process for "Launch a Wazuh Server instance" with the following exceptions:
 
 - When choosing an image (AMI) click on Quick Start and Select "Microsoft Windows Server 2016 Base"
 - Choose an instance type of General Purpose **t2.small**.
 - Set the *Primary IP* to 172.30.0.40.
+- Do not put any launch script into the User data box.
 - Do not change the Storage Size to smaller than the default of 30GB.  Larger is
   fine if you wish.
-- Do not put any launch script into the User data box.
 - Set the *Name* Tag to "Windows Agent".
 - Pick the "Wazuh Windows" security group instead of the "Wazuh Linux" one.
