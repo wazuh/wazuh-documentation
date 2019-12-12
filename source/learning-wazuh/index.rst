@@ -17,23 +17,25 @@ to accelerate your progress towards mastery of Wazuh.
 Some of the labs will require skills that can be acquired in the previous labs, so we
 encourage you to do them in order.
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Getting Started
+.. topic:: Getting Started
 
-    build-lab/index
+  .. toctree::
+      :maxdepth: 1
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Labs
+      build-lab/index
 
-    ssh-brute-force
-    rdp-brute-force
-    hidden-processes
-    detect-fs-changes
-    replace-stock-rule
-    survive-flood
-    shellshock
-    audit-commands
-    suricata
-    vuln-detection
+.. topic:: Labs
+
+  .. toctree::
+      :maxdepth: 1
+
+      ssh-brute-force
+      rdp-brute-force
+      hidden-processes
+      detect-fs-changes
+      replace-stock-rule
+      survive-flood
+      shellshock
+      audit-commands
+      suricata
+      vuln-detection
