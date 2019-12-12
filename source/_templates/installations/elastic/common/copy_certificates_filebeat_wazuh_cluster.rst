@@ -5,6 +5,7 @@ Before to use the following command, you need to remember the number that you de
 .. code-block:: console
 
   # mkdir /etc/filebeat/certs/ca -p
+  # zip -d ~/certs.zip "ca/ca.key"
   # unzip ~/certs.zip -d ~/certs
   # cp -R ~/certs/ca/ ~/certs/filebeat-X/* /etc/filebeat/certs/
   # mv /etc/filebeat/certs/filebeat-X.crt /etc/filebeat/certs/filebeat.crt
