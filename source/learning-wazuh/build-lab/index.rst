@@ -20,15 +20,16 @@ as you focus on one aspect after another of the Wazuh solution.
     :align: center
     :width: 75%
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Steps
+.. topic:: Steps
 
-    build-vpc
-    launch-ec2-instances
-    access-ec2-instances
-    install-wazuh-manager
-    install-elastic-stack
-    xpack-security-setup
-    install-linux-agents
-    install-windows-agent
+  .. toctree::
+      :maxdepth: 1
+
+      build-vpc
+      launch-ec2-instances
+      access-ec2-instances
+      install-wazuh-manager
+      install-elastic-stack
+      xpack-security-setup
+      install-linux-agents
+      install-windows-agent
