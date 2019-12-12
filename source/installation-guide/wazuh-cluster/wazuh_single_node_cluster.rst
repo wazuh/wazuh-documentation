@@ -217,6 +217,10 @@ The next step consists of install Kibana. You can continue the guide  :ref:`here
 Checking services and certificates
 ----------------------------------
 
+Check the Filebeat certificates:
+
+    .. include:: ../../_templates/installations/check_certificates.rst
+
 Check the Wazuh manager service:
 
     .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager_service.rst
@@ -224,10 +228,6 @@ Check the Wazuh manager service:
 Check the Wazuh API service:
 
     .. include:: ../../_templates/installations/wazuh/common/check_wazuh_api_service.rst
-
-Check the Filebeat certificates:
-
-    .. include:: ../../_templates/installations/check_certificates.rst
 
 Check the Filebeat service:
 
