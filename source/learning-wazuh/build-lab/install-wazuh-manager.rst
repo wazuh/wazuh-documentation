@@ -15,7 +15,6 @@ This is how it should look like, after loging in and gaining sudo privileges wit
     .. code-block:: console
 
       [centos@wazuh-manager ~]$ sudo su -
-      Last login: Thu Dec 12 19:21:56 UTC 2019 on pts/0
       [root@wazuh-manager ~]#
 
 
