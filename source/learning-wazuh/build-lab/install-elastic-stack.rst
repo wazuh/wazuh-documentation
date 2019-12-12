@@ -15,7 +15,9 @@ machine via SSH.
 
     .. code-block:: console
 
-        # sudo su -
+      [centos@elastic-server ~]$ sudo su -
+      [root@elastic-server ~]#
+
 
 
 Preparation
@@ -48,14 +50,14 @@ Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine that will
 store alerts and log records sent by Wazuh via Filebeat and make them available
-to Kibana. For more information, please see `Elasticsearch 
+to Kibana. For more information, please see `Elasticsearch
 <https://www.elastic.co/products/elasticsearch>`_.
 
 1. Install the Elasticsearch package:
 
   .. code-block:: console
 
-	 # yum -y install elasticsearch-7.3.2
+	 # yum -y install elasticsearch-7.4.2
 
 2. Enable and start the Elasticsearch service:
 
@@ -80,14 +82,14 @@ to Kibana. For more information, please see `Elasticsearch
 
   .. note::
     The two references to "5g" in the above steps will only work if the Elastic
-    Server was launched with the recommended instance size t2.xlarge.  If you 
+    Server was launched with the recommended instance size t2.xlarge.  If you
     chose to use t2.large instead, change the "5g" references to "3g".
 
 Kibana
 ------
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the 
-events and archives stored in Elasticsearch. More info at `Kibana 
+Kibana is a flexible and intuitive web interface for mining and visualizing the
+events and archives stored in Elasticsearch. More info at `Kibana
 <https://www.elastic.co/products/kibana>`_.
 
 1. Install the Kibana package:
@@ -105,7 +107,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.3.2.zip
 
-3. Kibana will only listen on the loopback interface (localhost) by default, 
+3. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
    Kibana from the any IP set the ``server.host: "0.0.0.0"`` variable, and
    set the port to be the standard port for HTTPS: ``server.port: 443``
@@ -122,7 +124,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 4.  Allow Kibana (which is run as a non-root process) to bind to port 443:
 
   .. code-block:: console
-    
+
     setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
 
 5. Enable and start the Kibana service:
@@ -136,11 +138,10 @@ events and archives stored in Elasticsearch. More info at `Kibana
 Disable the Elastic repository
 ------------------------------
 
-Now disable the Elastic repository in order to prevent a future unintended 
+Now disable the Elastic repository in order to prevent a future unintended
 Elastic Stack upgrade to a version that may be in conflict with the latest
 stable Wazuh packages.
 
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-
