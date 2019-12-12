@@ -43,7 +43,7 @@ The following image resume the architecture possibilities referring to single-no
 
 On the left side, the set of wazuh agents is represented. The Wazuh agents can communicate with the Wazuh cluster through a load balancer but it is not required, the load balancer can be removed.
 
-On the center, it is represented the Wazuh cluster, which can be one a single-node Wazuh cluster (only one server with Wazuh server installed) or it can be two or more Wazuh managers distributed in two or more servers. Only the master Wazuh cluster node will have the Wazuh API. And all the servers will have Filebeat installed.
+On the center, it is represented the Wazuh cluster, which can be one a single-node Wazuh cluster (only one server with Wazuh server installed) or it can be two or more Wazuh managers distributed in two or more servers. Only the master Wazuh cluster node will have the Wazuh API. All the servers will have Filebeat installed.
 
 On the right side, it is represented the Elasticsearch cluster. An Elasticsearch cluster may consist of one or more nodes.
 
