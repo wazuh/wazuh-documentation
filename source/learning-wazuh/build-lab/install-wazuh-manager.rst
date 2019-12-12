@@ -21,6 +21,8 @@ This is how it should look like, after loging in and gaining sudo privileges wit
 Add the Wazuh yum repository
 ----------------------------
 
+The first step to setting up the manager is to add the Wazuh repository:
+
      .. code-block:: console
 
          # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
@@ -37,14 +39,14 @@ Add the Wazuh yum repository
 Install and set up Wazuh server
 --------------------------------
 
-Install the Wazuh manager software and confirm it is running
+Install the Wazuh manager software and confirm it is running:
 
   .. code-block:: console
 
     # yum -y install wazuh-manager
     # systemctl status wazuh-manager
 
-Configure Wazuh manager to listen for agent connections on tcp instead of udp
+Configure Wazuh manager to listen for agent connections on tcp instead of udp:
 
   .. code-block:: console
 
@@ -53,7 +55,7 @@ Configure Wazuh manager to listen for agent connections on tcp instead of udp
     # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
 
 
-Configure Wazuh manager to allow self registration of new agents with authentication
+Configure Wazuh manager to allow self registration of new agents with authentication:
 
   .. code-block:: console
 
@@ -76,8 +78,8 @@ listener are in place:
 Install Wazuh API
 -----------------
 
-The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with
-and control Wazuh manager. It is a general purpose RESTful API that can be used
+The Wazuh API provides an interface to manage and monitor the configuration and deployment status of agents.
+It is mostly used by the Wazuh Kibana plugin, but it is a general-purpose RESTful API that can be used
 from the command line via curl or via custom scripts for interacting with various
 aspects of Wazuh manager.
 
@@ -96,7 +98,7 @@ aspects of Wazuh manager.
 
 	 # /var/ossec/api/scripts/configure_api.sh
 
-  Hit <Enter> during configuration to take defaults, except for these cases:
+  Press <Enter> during configuration to take defaults, except for these cases:
 
   - For the three "Enter pass phrase for..." prompts:  specify "keypass" each time.
   - For "API user", enter "wazuhapiuser".
