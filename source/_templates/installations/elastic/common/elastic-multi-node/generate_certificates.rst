@@ -86,7 +86,7 @@
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out certs.zip
+      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
     The file created contains the ``ca.key`` due to the ``--keep-ca-key`` modifier. The ``certs.zip`` file must be distributed along all the involved servers defined in the file ``instances.yml``. We recommend not distributing it with the ``ca.key``. You can remove it from the zip file as follow:
 

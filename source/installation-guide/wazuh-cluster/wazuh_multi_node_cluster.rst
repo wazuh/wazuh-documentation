@@ -225,7 +225,7 @@ Filebeat installation and configuration
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
-    .. include:: ../../_templates/installations/elastic/common/configure_filebeat_cluster.rst
+    .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
 #. Enable and start the Filebeat service:
 
