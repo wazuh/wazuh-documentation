@@ -27,23 +27,24 @@
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out certs.zip
+      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
     Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
 
     .. code-block:: console
 
-      # unzip /usr/share/elasticsearch/certs.zip -d ~/
+      # unzip ~/certs.zip -d ~/certs
 
     The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
 
     .. code-block:: console
 
       # mkdir /etc/elasticsearch/certs/ca -p
-      # cp -R ~/ca/ ~/elasticsearch/* /etc/elasticsearch/certs/
+      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
       # chown -R elasticsearch: /etc/elasticsearch/certs
       # chmod -R 500 /etc/elasticsearch/certs
       # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
+      # rm -rf ~/certs/ ~/certs.zip
 
 
 
