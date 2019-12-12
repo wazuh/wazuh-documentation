@@ -30,9 +30,11 @@ The next step is to create the directory ``/etc/elasticsearch/certs``, and then 
 .. code-block:: console
 
   # mkdir /etc/kibana/certs/ca -p
-  # cp -R ~/certs/ca/ ~/kibana/* /etc/kibana/certs/
+  # cp ~/certs/ca.crt /etc/kibana/certs/ca
+  # cp ~/certs/kibana/* /etc/kibana/certs/
   # chown -R kibana: /etc/kibana/certs
   # chmod -R 500 /etc/kibana/certs
   # chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
+  # rm -rf ~/certs ~/kibana.zip
 
 .. End of include file

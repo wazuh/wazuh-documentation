@@ -2,13 +2,13 @@
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
-.. _kibana_cluster:
+.. _kibana:
 
 
 Kibana
 ======
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Elastic Kibana site <https://www.elastic.co/products/kibana>`_.
 
 Elastic recommends to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on if you will install Kibana in the same server that Elasticsearch or not.
 
@@ -108,4 +108,7 @@ Kibana installation and configuration
     .. note:: The Kibana service listens on the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
 
+Next steps
+----------
 
+Once the Wazuh - Elastic Stack environment is ready, it's necessary to install a Wazuh agent in every server, endpoint, etc. to be monitored. The Wazuh installation guide is available in most operating systems and it can be found :ref:`here<installation_agents>`.

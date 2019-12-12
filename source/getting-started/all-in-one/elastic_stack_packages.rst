@@ -92,6 +92,52 @@ Certificates creation and deployment
 
     .. include:: ../../_templates/installations/elastic/common/generate_elastic_credentials.rst
 
+Kibana installation and configuration
+-------------------------------------
+
+#. Install the Kibana package:
+
+    .. tabs::
+
+        .. group-tab:: APT
+
+
+            .. include:: ../../_templates/installations/elastic/deb/install_kibana.rst
+
+
+
+        .. group-tab:: Yum
+
+
+            .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
+
+
+
+        .. group-tab:: ZYpp
+
+
+            .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
+
+
+#. .. include:: ../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
+
+#. Download the Kibana configuration file:
+
+    .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
+
+#. Install the Wazuh Kibana plugin:
+
+    .. include:: ../../_templates/installations/elastic/common/install_wazuh_kibana_plugin.rst
+
+#. Enable and start the Kibana service:
+
+    .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
+
+    The first Kibana start may take a few minutes. In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
+
+    .. note:: The Kibana service listens on the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+
+
 Disabling repositories
 ----------------------
 
@@ -120,6 +166,7 @@ In order to anticipate and avoid this situation, we recommend disabling the Elas
 
 
     .. include:: ../../_templates/installations/elastic/zypp/disabling_repositories.rst
+
 
 
 Uninstall

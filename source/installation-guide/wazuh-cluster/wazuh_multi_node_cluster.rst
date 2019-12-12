@@ -235,7 +235,10 @@ Filebeat installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
+Next steps
+----------
 
+The next step consists of install Kibana. You can continue the guide  :ref:`here<kibana>`.
 
 Checking services and certificates
 ----------------------------------
