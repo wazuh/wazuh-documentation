@@ -76,7 +76,9 @@ Elasticsearch installation and configuration
 
 
 
-#. [*All*] .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
+#. [*All*] Once Elasticsearch is installed we need to configure it by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+
+    .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
 
 .. note:: If your using Debian 7, you will need to change the ulimit by ``ulimit -u 4096``. In addition to this, the setting ``bootstrap.system_call_filter`` must be added and set to ``false`` in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file.
 
@@ -88,7 +90,7 @@ Certificates creation and deployment
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. [*All*] Certificates deployment:
+#. [*All*] The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. Remember to replace the ``X`` according to the defined ``instances.yml`` file:
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
