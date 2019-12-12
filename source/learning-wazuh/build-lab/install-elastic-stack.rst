@@ -96,7 +96,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    # yum install -y kibana-7.3.2
+    # yum install -y kibana-7.4.2
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -105,7 +105,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.3.2.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.4.2.zip
 
 3. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
@@ -125,7 +125,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
+    # setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
 
 5. Enable and start the Kibana service:
 
