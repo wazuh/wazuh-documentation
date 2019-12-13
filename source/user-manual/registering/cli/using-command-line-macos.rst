@@ -5,17 +5,25 @@
 MacOS X hosts
 =============
 
-To register an agent using the command line, first follow the steps from the **Manager** section and then, from the **Agent** section.
+To register an agent using the command line, first, follow the steps from the **Manager** section and then, from the **Agent** section.
 
 Manager
 ^^^^^^^
-1. In the CLI of the Wazuh manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``macos-mojave`` and its address or IP is ``any``.
+
+1. On the CLI of the Wazuh manager host add a new agent by running ``manage_agents`` program and providing the agent's name and IP address:
+
+	.. code-block:: console
+
+		# /var/ossec/bin/manage_agents -a <AGENT_IP> -n <AGENT_NAME>
+
+	In this example, we will add an agent under the name ``macos-mojave`` and with the IP address ``any``.
 
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -a any -n macos-mojave
 
-2. Now, list the agents to get the ID of the ``macos-mojave`` agent:
+
+2. List the agents to obtain the ID of the ``macos-mojave`` agent:
 
 	.. code-block:: console
 
@@ -24,7 +32,7 @@ Manager
 		Available agents:
 		    ID: 001, Name: macos-mojave, IP: any
 
-3. Using the ID from the previous command, extract the new agent’s key using. Copy this key because you will need it for the agent:
+3. Extract the agent's key using the ID found in the output of the previous command:
 
 	.. code-block:: console
 
@@ -33,11 +41,13 @@ Manager
 		Agent key information for '001' is:
 		MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ==
 
+  Copy the key, you will import it to the agent to enable the communication to the manager.
+
 Agent
 ^^^^^
-Once you have added the agent in the Wazuh manager host, open a session in your MacOS X agent host as root user. After that, let's import the key and connect the agent to the manager.
+Once you have added the agent in the manager, open a session in your MacOS X agent host as a root user.
 
-1. First, import the key using ``manage_agents``:
+1. Import the key using ``manage_agents`` program:
 
 	  .. code-block:: console
 
@@ -52,7 +62,7 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 	      Added.
 
 
-2. Edit the Wazuh agent configuration in ``/Library/Ossec/etc/ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:
+2. Edit the agent configuration file. In ``/Library/Ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the manager IP address or a DNS name:
 
 	.. code-block:: xml
 
@@ -63,7 +73,7 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 		  </server>
 		</client>
 
-3. Once you have complete the step 1 and 2, start the agent:
+3. Start the agent:
 
 	.. code-block:: console
 
