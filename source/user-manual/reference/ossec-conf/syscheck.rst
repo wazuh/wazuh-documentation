@@ -608,6 +608,7 @@ The database synchronization settings will be configured inside this tag.
     <!-- Database synchronization settings -->
     <inventory>
       <sync_interval>5m</sync_interval>
+      <max_sync_interval>1h</max_sync_interval>
       <response_timeout>30</response_timeout>
       <sync_queue_size>16384</sync_queue_size>
     </inventory>
@@ -617,13 +618,24 @@ The database synchronization settings will be configured inside this tag.
 
 .. versionadded:: 3.12.0
 
-Specifies the number of seconds between every inventory synchronization.
+Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
 
 +--------------------+---------------------------------------+
 | **Default value**  | 300                                   |
 +--------------------+---------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0.|
 +--------------------+---------------------------------------+
+
+**max_sync_interval**
+
+.. versionadded:: 3.12.0
+
+Specifies the maximum number of seconds between every inventory synchronization.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | 3600                                                      |
++--------------------+-----------------------------------------------------------+
++--------------------+-----------------------------------------------------------+
 
 **response_timeout**
 
