@@ -70,10 +70,6 @@ Installing the Wazuh manager
 
     .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
-Check the Wazuh manager service:
-
-    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager_service.rst
-
 
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,26 +202,6 @@ Filebeat installation and configuration
 #. Load the Filebeat template:
 
     .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
-
-
-Checking services and certificates
-----------------------------------
-
-Check the Wazuh manager service:
-
-    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager_service.rst
-
-Check the Wazuh API service:
-
-    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_api_service.rst
-
-Check the Filebeat certificates:
-
-    .. include:: ../../_templates/installations/check_certificates.rst
-
-Check the Filebeat service:
-
-    .. include:: ../../_templates/installations/wazuh/common/check_filebeat_service.rst
 
 
 Disabling repositories

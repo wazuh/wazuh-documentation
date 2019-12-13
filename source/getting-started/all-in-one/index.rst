@@ -2,7 +2,7 @@
 
 .. meta:: :description: Learn how to install Wazuh
 
-.. _installation_guide_old:
+.. _installation_guide_aio:
 
 All in one installation guide
 =============================
