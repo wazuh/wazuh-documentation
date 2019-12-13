@@ -24,10 +24,10 @@ To generate the certificate execute the following command:
 Available options to verify the hosts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After creating your `CA`, now you have these options to register the Wazuh agents verifying the hosts:
+After creating your ``CA``, you have these options to register the agents verifying the hosts:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     manager-verification-registration
     agent-verification-registration

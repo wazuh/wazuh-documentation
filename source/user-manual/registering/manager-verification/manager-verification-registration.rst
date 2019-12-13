@@ -70,7 +70,7 @@ Follow these steps in the Wazuh manager host:
 Agents
 ^^^^^^
 
-Once you have completed the manager section, you need to copy the CA file (``.pem``) to the agent. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the agent to the manager:
+Once you have completed the manager section, you need to copy the CA file (``.pem``) to the agent host. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the agent to the manager:
 
 .. toctree::
     :maxdepth: 2

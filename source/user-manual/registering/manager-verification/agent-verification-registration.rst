@@ -5,11 +5,13 @@
 Agent verification using SSL
 ============================
 
-To verify the Wazuh agents using a SSL, it is needed to create a SSL certificate for the Wazuh agents and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the Wazuh manager to verify the Wazuh agents while they are been registered.
+To verify the Wazuh agent using an SSL, we will create an SSL certificate for the agent and sign it using :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the manager to ensure that the correct agent is beeing connected during the registration service.
 
   .. image:: ../../../images/manual/managing-agents/SSLregister2.png
     :align: center
     :width: 100%
+
+To register verified by SSL agent first complete the steps for the choosen verification method in a Manager section and then, follow the steps for the correspondig agent host OS. 
 
 .. _agent-verification-without-host-validation:
 
