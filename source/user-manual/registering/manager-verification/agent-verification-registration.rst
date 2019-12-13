@@ -11,16 +11,19 @@ To verify the Wazuh agent using an SSL, we will create an SSL certificate for th
     :align: center
     :width: 100%
 
-To register verified by SSL agent first complete the steps for the choosen verification method in a Manager section and then, follow the steps for the correspondig agent host OS. 
+To register verified by SSL agent first complete the steps for the chosen verification method in a **Manager** section and then, follow the steps for the corresponding **Agent** host OS.
+
+Manager
+^^^^^^^
 
 .. _agent-verification-without-host-validation:
 
 Enable Agent verification without host validation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------
 
-In this example, we are going to create a certificate for Wazuh agents without specifying their hostname. This will allow us to share the certificate among all of our Wazuh agents and use it. This will verify that the Wazuh agents have a certificate signed by our CA, no matter where they're connecting from, refusing those agents where the certificate is not present.
+In this example, we will create a certificate for agents without specifying their hostname or IP address. This will allow us to share the same certificate among all selected agents. The signed certificate will verify the agent. Registration service for agents where the certificate is not present will be refused.
 
-1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
+1. Issue and sign a certificate for the agent by executing the following commands in the location of CA files. Remember that we will not enter the ``common name`` field:
 
   .. code-block:: console
 
@@ -28,13 +31,13 @@ In this example, we are going to create a certificate for Wazuh agents without s
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
 
-2. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder:
+2. Copy the CA (``.pem`` file) to the ``/var/ossec/etc`` folder:
 
   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
 
-3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. You will need to modify the ``<auth><ssl_agent_ca>`` section by uncommenting it (remove the ``<!-`` and ``-->``) and by adding the path to the CA file.
+3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file.
 
   .. code-block:: xml
 
@@ -44,7 +47,7 @@ In this example, we are going to create a certificate for Wazuh agents without s
       ...
     </client>
 
-4. Restart the Wazuh manager:
+4. Restart the manager:
 
   a) For Systemd:
 
@@ -61,15 +64,15 @@ In this example, we are going to create a certificate for Wazuh agents without s
 .. _agent-verification-with-host-validation:
 
 Enable Agent verification with host validation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------
 
 This is an alternative method to the previous one. In this case, we will bind the agent's certificate to its IP address as seen by the manager.
 
-1. Issue and sign a certificate for the agent, entering its hostname or IP address into the *common name* field. For example, if the agent's IP is ``192.168.1.3``:
+1. Issue and sign a certificate for the agent by executing the following commands in the location of ``CA`` files. In the ``common name`` field replace ``<AGENT_IP>`` with the agent's hostname or IP address.
 
   .. code-block:: console
 
-    # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
+    # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<AGENT_IP>'
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
 2. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder:
@@ -78,7 +81,7 @@ This is an alternative method to the previous one. In this case, we will bind th
 
     # cp rootCA.pem /var/ossec/etc
 
-3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. You will need to modify the ``<auth><ssl_agent_ca>`` section by uncommenting it (remove the ``<!-`` and ``-->``) and by adding the path to the CA file. You also need to set the field ``<ssl_verify_host>`` to ``yes``:
+3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file. Set the field ``<ssl_verify_host>`` to ``yes``:
 
   .. code-block:: xml
 
@@ -89,7 +92,7 @@ This is an alternative method to the previous one. In this case, we will bind th
       ...
     </client>
 
-4. Restart the Wazuh manager:
+4. Restart the manager:
 
   a) For Systemd:
 
@@ -104,10 +107,10 @@ This is an alternative method to the previous one. In this case, we will bind th
       # service wazuh-manager restart
 
 
-Wazuh agents
-^^^^^^^^^^^^
+Agent
+^^^^^
 
-Once you have completed the Wazuh manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``. After that, follow the steps to connect the Wazuh agent to the manager:
+Once you have completed the manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``. After that, follow the steps to connect the agent to the manager:
 
 .. toctree::
     :maxdepth: 2

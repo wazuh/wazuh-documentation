@@ -2,22 +2,26 @@
 
 .. _linux-unix-agent-verification:
 
-Linux and Unix agent hosts
+Linux and Unix hosts
 ==========================
 
-Open a session in your Linux/Unix agent host as a root user. After that, you can register the agent with the manager using ``agent-auth`` program:
+Open a session in your Linux/Unix agent host as a root user, you will use the certificate (``.cert`` file) and its key (``.key`` file) previously created on the manager:
 
-1. Copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the ``/var/ossec/etc`` folder and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
+1. Copy the certificate (``.cert`` file) and its key (``.key`` file) to the ``/var/ossec/etc`` folder:
 
     .. code-block:: console
 
       # cp sslagent.cert sslagent.key /var/ossec/etc
-      # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
+    Run the ``agent-auth`` program which automatically add the agent to the manager. If the agent’s name is omitted the registration service will use the hostname as the agent’s name. In the below command repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 
-2. Edit the Wazuh agent configuration to add the Wazuh server IP address.
+    .. code-block:: console
 
-  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
+      # /var/ossec/bin/agent-auth -m <MANAGER_IP> -A <AGENT_NAME> -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+
+    You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
+
+2. Edit the Wazuh agent configuration file. In ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 
   .. code-block:: xml
 
