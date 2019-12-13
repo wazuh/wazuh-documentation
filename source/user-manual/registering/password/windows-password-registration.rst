@@ -23,6 +23,8 @@ To register the Windows agent, you need to start a CMD or a Powershell as **Admi
       PS echo TopSecret > "C:\Program Files (x86)\ossec-agent\authd.pass"
       PS C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -A <AGENT_NAME>
 
+   The agent assumes the input file is in ``UTF-8 encoding``, without ``byte-order mark (BOM)``. If your file is created in an incorrect encoding you can change it by opening the ``authd.pass`` file in a Notepad and Save As ``ANSI`` encoding.
+
     b)  **Using a password as a command-line argument**: run the ``agent-auth`` program, provide the manager’s IP address together with the password following the ``-P`` flag. If the agent's name is omitted the registration service will use the hostname as the agent's name:
 
     .. code-block:: none
