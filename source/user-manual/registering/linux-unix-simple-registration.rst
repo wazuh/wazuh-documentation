@@ -46,9 +46,3 @@ Open a session in your Linux/Unix agent host as a root user. After that, you can
     .. code-block:: console
 
       # service wazuh-agent start
-
-  c) Other cases:
-
-    .. code-block:: console
-
-      # /var/ossec/bin/ossec-control start

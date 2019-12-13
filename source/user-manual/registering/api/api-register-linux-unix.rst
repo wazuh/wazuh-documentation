@@ -65,17 +65,3 @@ Open a session in your Linux/Unix agent host as root user and follow these steps
     .. code-block:: console
 
       # service wazuh-agent start
-
-  c) Other cases:
-
-    .. code-block:: console
-
-      # /var/ossec/bin/ossec-control start
-
-5. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
-
-    .. code-block:: console
-
-      # /var/ossec/bin/agent_control -i <AGENT-ID>
-
-    The output of the program will display information about the newly registered agent.  

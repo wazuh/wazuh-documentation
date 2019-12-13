@@ -92,11 +92,3 @@ Once you have added the agent in the manager, open a session in your Windows age
 
 			# net stop wazuh
 			# net start wazuh
-
-4. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
-
-		.. code-block:: console
-
-			# /var/ossec/bin/agent_control -i <AGENT-ID>
-
-    The output of the program will display information about the newly registered agent.

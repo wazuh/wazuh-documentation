@@ -2,11 +2,10 @@
 
 .. _restful-api-register-script:
 
-Registering agents using sripts
-===============================
+Registering agents using scripts
+================================
 
 We have prepared a few different scripts to allow automatically register the Wazuh agent using the Wazuh API.
-
 
 Register the agent automatically using a shell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -158,6 +157,7 @@ The script requires an installation of ``Python`` and ``pip package-management s
 
 Register the agent automatically using a PowerShell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Below PowerShell script allows us to register the Wazuh agent on a Windows host using Wazuh API service. The script requires administrator access and shall be run on the agent's host.
 
 1. Download the script: `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.ps1>`_.
@@ -210,15 +210,3 @@ Below PowerShell script allows us to register the Wazuh agent on a Windows host 
         IP Address:10.0.0.8
 
    The script will automatically start the agent.
-
-   |
-
-4. To verify that the agent is successfully registered with the manager you can use ``agent_control`` program.
-
-   Execute the following command on the manager:
-
-   .. code-block:: console
-
-     # /var/ossec/bin/agent_control -i <AGENT-ID>
-
-   The output of the program will display information about the newly registered agent.
