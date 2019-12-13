@@ -5,9 +5,9 @@
 Linux and Unix hosts
 ====================
 
-Open a session in your Linux/Unix agent host as a root user, you will use the CA (**.pem file**) previously created on the manager.
+Open a session in your Linux/Unix agent host as a root user, you will use the CA (``.pem`` file) previously created on the manager.
 
-1. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder:
+1. Copy the CA (``.pem`` file) to the ``/var/ossec/etc`` folder:
 
   .. code-block:: console
 

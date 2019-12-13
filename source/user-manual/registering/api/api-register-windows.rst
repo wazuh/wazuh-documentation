@@ -5,13 +5,13 @@
 Windows hosts
 =============
 
-To register the Windows agent, you need to start a Powershell as **Administrator**. The agent's installation directory depends on the architecture of the host.
+To register the Windows agent, you need to start a Powershell as Administrator. The agent's installation directory depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
 .. note::
-		In this example we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+		In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
 |
 1. Add the agent to the manager.
 
@@ -90,23 +90,15 @@ To register the Windows agent, you need to start a Powershell as **Administrator
 
 5. Start the agent.
 
-	a) Using Powershell with administrator access:
+	a) Using Powershell with Administrator access:
 
 		.. code-block:: console
 
 			# Restart-Service -Name wazuh
 
-	b) Using cmd with administrator access:
+	b) Using cmd with Administrator access:
 
 		.. code-block:: console
 
 			# net stop wazuh
 			# net start wazuh
-
-6. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
-
-	.. code-block:: console
-
-		# /var/ossec/bin/agent_control -i <AGENT-ID>
-
-	The output of the program will display information about the newly registered agent.	
