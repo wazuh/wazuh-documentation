@@ -58,7 +58,7 @@ Below are listed currently available registration methods containing a brief des
 +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using simple registration service <simple-registration-service>`                         | Requires Root/Administrator access to an agent. Doesn't require an access to a manager. Allows to add an agent to a group during registration.                             |
 +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`Using password authorization <password-authorization-registration-service>`              | Provides password protection of a manager from unauthorized registrations. Allows to add an agent to a group during registration.                                          |                                                                                                             
+| :ref:`Using password authorization <password-authorization-registration-service>`              | Provides password protection of a manager from unauthorized registrations. Allows to add an agent to a group during registration.                                          |
 +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using registration service with host verification <host-verification-registration>`      | Uses Certificate of Authority (CA) to ensure that the connection is established between a right agent and a manager. Allows to add an agent to a group during registration.|
 +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -77,3 +77,4 @@ Below are listed currently available registration methods containing a brief des
     simple-registration-method
     password-authorization-registration-service
     manager-verification/host-verification-registration
+    registering-agent-troubleshooting
