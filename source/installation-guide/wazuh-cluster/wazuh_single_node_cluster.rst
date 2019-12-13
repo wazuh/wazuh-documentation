@@ -71,10 +71,6 @@ Installing the Wazuh manager
 
     .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
-Check the Wazuh manager service:
-
-    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager_service.rst
-
 
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
