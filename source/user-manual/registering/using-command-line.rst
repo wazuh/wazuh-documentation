@@ -18,4 +18,3 @@ Registering the Agents
     cli/using-command-line-linux
     cli/using-command-line-windows
     cli/using-command-line-macos
-    cli/using-command-line-unix

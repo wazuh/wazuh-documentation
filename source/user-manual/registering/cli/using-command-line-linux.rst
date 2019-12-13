@@ -2,8 +2,8 @@
 
 .. _command-line-register-linux:
 
-Linux hosts
-===========
+Linux and Unix hosts
+====================
 
 To register the Wazuh agent using the command line, first, follow the steps from the **Manager** section and then, from the **Agent** section.
 
@@ -15,20 +15,20 @@ Manager
 
 	  # /var/ossec/bin/manage_agents -a <AGENT_IP> -n <AGENT_NAME>
 
-	In this example, we will add an agent under the name ``ubuntu-ag`` and with the IP address ``any``.
+	In this example, we will add an agent under the name ``agent_1`` and with the IP address ``any``.
 
 	.. code-block:: console
 
-		# /var/ossec/bin/manage_agents -a any -n ubuntu-ag
+		# /var/ossec/bin/manage_agents -a any -n agent_1
 
-2. List the agents to obtain the ID of the ``ubuntu-ag`` agent:
+2. List the agents to obtain the ID of the ``agent_1`` agent:
 
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -l
 
 		Available agents:
-		    ID: 001, Name: ubuntu-ag, IP: any
+		    ID: 001, Name: agent_1, IP: any
 
 3. Extract the agent's key using the ID found in the output of the previous command:
 
@@ -54,7 +54,7 @@ Once you have added the agent in the manager, open a session in your Linux agent
 
 	      Agent information:
 	         ID:001
-	         Name:ubuntu-ag
+	         Name:agent_1
 	         IP Address:any
 
 	      Confirm adding it?(y/n): y
@@ -85,11 +85,3 @@ Once you have added the agent in the manager, open a session in your Linux agent
 	  .. code-block:: console
 
 		  # service wazuh-agent restart
-
-4. Additionally, you can check if the agent is successfully registered and connected to the manager by executing following command on the manager:
-
-		.. code-block:: console
-
-			# /var/ossec/bin/agent_control -i <AGENT-ID>
-
-		The output of the program will display information about the newly registered agent.	
