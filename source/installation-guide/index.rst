@@ -21,4 +21,4 @@ Unlike the Quickstart installation guide, here you will find how to build a prod
         elasticsearch-cluster/index
         wazuh-cluster/index
         kibana/index
-        wazuh-agent/index
+
