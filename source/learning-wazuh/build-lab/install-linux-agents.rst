@@ -5,15 +5,21 @@
 Install the Linux Wazuh agents
 ==============================
 
-Use the following procedure separately on your Linux Agent and Elastic Server 
+Use the following procedure separately on your **Linux Agent** and **Elastic Server**
 instances to install, register and configure them to connect to the Wazuh manager.
 
 Log in and sudo to root
 -----------------------
 
+Remember to do this on both your Linux Agent and on your Elastic Server:
+
     .. code-block:: console
 
-        # sudo su -
+        [user@user_machine]$ ssh -i Wazuh_Lab.pem centos@ELASTIC_SERVER_IP
+        [root@elastic-server ~]$ sudo su -
+
+        [user@user_machine]$ ssh -i Wazuh_Lab.pem centos@LINUX_AGENT_IP
+        [centos@linux-agent ~]$ sudo su -
 
 Add the Wazuh yum repository
 ----------------------------
@@ -54,8 +60,8 @@ You should see output like this:
     status='connected'
 
 .. note::
-  The **/var/ossec/var/run/ossec-agentd.state** file on \*NIX platforms and the
-  **C:\\Program Files (x86)\\ossec-agent\\ossec-agent.state** file on Windows 
+  The **/var/ossec/var/run/ossec-agentd.state** file on Unix-like platforms and the
+  **C:\\Program Files (x86)\\ossec-agent\\ossec-agent.state** file on Windows
   platforms contain several useful pieces of information about the state of the
   Wazuh agent's connection with the Wazuh manager.  See the file content itself
   for more information.
