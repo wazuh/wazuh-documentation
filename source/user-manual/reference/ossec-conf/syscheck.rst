@@ -636,7 +636,7 @@ Specifies the maximum number of seconds between every inventory synchronization.
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | 3600                                                      |
 +--------------------+-----------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to sync_interval.    |
+| **Allowed values** | Any number greater than or equal to sync_interval.        |
 +--------------------+-----------------------------------------------------------+
 
 **response_timeout**
