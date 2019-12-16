@@ -16,10 +16,10 @@ Download the Wazuh agent package
 
     https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.2-1.msi
 
-3. Hit <Enter>. In the Warning dialog, click **[Add]** and then **[Add]** again,
-   and then **[Close]**.
+3. Press <Enter>. In the Warning dialog, click on **[Add]**, on **[Add]** again
+   and then on **[Close]**.
 
-4. Re-paste the above link into the address bar and hit <Enter> again.  Click
+4. Re-paste the above link into the address bar and hit <Enter> again.  Click on
    **[Save]**.  The MSI installer is now in your Downloads folder.
 
 
@@ -49,7 +49,7 @@ Run the installer to both install and self-register
         :align: center
         :width: 100%
 
-5.  A black window will pop up briefly and disappear.  The Windows agent should 
+5.  A black window will pop up briefly and disappear.  The Windows agent should
     now be installed and registered.  Close PowerShell.
 
 
@@ -91,19 +91,19 @@ Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh
 Observe that Wazuh manager is aware of all the connected agents.
 ----------------------------------------------------------------
 
-Switch over to your Wazuh Server SSH window and run these commands, looking for 
+Switch over to your Wazuh Server SSH window and run these commands, looking for
 your self-registered agents.
 
     .. code-block:: console
 
         [root@wazuh-manager centos]# /var/ossec/bin/agent_control -l
-        
+
         Wazuh agent_control. List of available agents:
            ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
            ID: 001, Name: linux-agent, IP: 172.30.0.30, Active
            ID: 002, Name: elastic-server, IP: 172.30.0.20, Active
            ID: 003, Name: windows-agent, IP: 172.30.0.40, Active
-        
+
         List of agentless devices:
 
     .. code-block:: console
@@ -120,4 +120,3 @@ your self-registered agents.
         2019 Nov 22 12:05:23 (windows-agent) 172.30.0.40->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'windows-agent->172.30.0.40'.
-
