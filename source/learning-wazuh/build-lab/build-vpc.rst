@@ -28,8 +28,8 @@ Create VPC
 
 Even if you already have one or more VPCs, you will be creating a new one.
 Go to your `AWS VPC Dashboard <https://console.aws.amazon.com/vpc/home?#vpcs:>`_
-and click **[Create VPC]**. Specify the *Name* and *IPv4 CIDR block* below, and
-then click **[Create]**.
+and click on **[Create VPC]**. Specify the *Name* and *IPv4 CIDR block* below, and
+then click on **[Create]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/new-vpc.png
     :title: New VPC
