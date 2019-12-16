@@ -157,7 +157,7 @@ and archived events to the Elasticsearch service.
 
   .. code-block:: console
 
-  	sed -i 's/YOUR_ELASTIC_SERVER_IP/172.30.0.20/' /etc/filebeat/filebeat.yml
+  	# sed -i 's/YOUR_ELASTIC_SERVER_IP/172.30.0.20/' /etc/filebeat/filebeat.yml
 
 7. Enable and start the Filebeat service:
 
