@@ -5,7 +5,7 @@
 Install Elastic Stack
 =====================
 
-Your Elastic Server will be running Elasticsearch, Kibana and the Wazuh Kibana App.
+Your Elastic Server will be running Elasticsearch, Kibana and the Wazuh Kibana plugin.
 
 Log in and sudo to root
 -----------------------
@@ -43,7 +43,7 @@ Preparation
 
    .. code-block:: console
 
-     yum install -y unzip
+     # yum install -y unzip
 
 Elasticsearch
 -------------
@@ -98,7 +98,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # yum install -y kibana-7.4.2
 
-2. Install the Wazuh app plugin for Kibana:
+2. Install the Wazuh plugin for Kibana:
 
 
   * Install from URL:
