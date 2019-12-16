@@ -597,7 +597,7 @@ Set the maximum output throughput.
 
 
 synchronization
-^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.12.0
 
@@ -634,11 +634,11 @@ Specifies whether there will be periodic inventory synchronizations or not.
 Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
 the value will be duplicated until it reaches the value of ``max_interval``.
 
-+--------------------+---------------------------------------+
-| **Default value**  | 300                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0.|
-+--------------------+---------------------------------------+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 300 s                                                                |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
++--------------------+----------------------------------------------------------------------+
 
 **max_interval**
 
@@ -646,11 +646,11 @@ the value will be duplicated until it reaches the value of ``max_interval``.
 
 Specifies the maximum number of seconds between every inventory synchronization.
 
-+--------------------+-----------------------------------------------------------+
-| **Default value**  | 3600                                                      |
-+--------------------+-----------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval.             |
-+--------------------+-----------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                         |
++--------------------+-----------------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------------+
 
 **response_timeout**
 
