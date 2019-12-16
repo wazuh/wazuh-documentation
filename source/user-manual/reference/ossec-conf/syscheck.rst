@@ -619,6 +619,7 @@ The database synchronization settings will be configured inside this tag.
 .. versionadded:: 3.12.0
 
 Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
+the value will be duplicated until it reaches the value of ``max_sync_interval``.
 
 +--------------------+---------------------------------------+
 | **Default value**  | 300                                   |
@@ -635,6 +636,7 @@ Specifies the maximum number of seconds between every inventory synchronization.
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | 3600                                                      |
 +--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to max_sync_interval.    |
 +--------------------+-----------------------------------------------------------+
 
 **response_timeout**
