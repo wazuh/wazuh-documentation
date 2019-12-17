@@ -155,7 +155,7 @@ Example:
       <group>multiple_spam,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SI.4,</group>
     </rule>
 
-The rule is created with ID: 3151. It will trigger a level 10 alert if the rule ``3102`` has been matched 8 times in the last 120 seconds.
+The rule is created with ID: ``3151`` and it will trigger a level 10 alert if the rule ``3102`` has matched 8 times in the last 120 seconds.
 
 match
 ^^^^^
