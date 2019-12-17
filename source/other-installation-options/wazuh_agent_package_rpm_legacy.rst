@@ -87,13 +87,13 @@ Installing Wazuh agent
       .. group-tab:: Yum
 
 
-        .. include:: ../_templates/installations/wazuh/yum/disabling_repositories.rst
+        .. include:: ../_templates/installations/wazuh/yum/disabling_repository.rst
 
 
 
       .. group-tab:: ZYpp
 
-        .. include:: ../_templates/installations/wazuh/zypp/disabling_repositories.rst
+        .. include:: ../_templates/installations/wazuh/zypp/disabling_repository.rst
 
 
 
