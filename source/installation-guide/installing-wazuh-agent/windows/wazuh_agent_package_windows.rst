@@ -38,8 +38,8 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
         See the following document for additional automated deployment options: :ref:`deployment variables for Windows <deployment_variables_windows>`.
 
-        .. warning::
-    		It is not possible to launch the installer again after the agent is installed to change the variables. The variables may be changed manually or by uninstalling and installing the agent again by using the new variables.
+        .. note::
+		It is not possible to use the installer to change the variables. Once the agent is installed you may change the variables mannually or uninstall the agent to install it again by using different variables.
 
   b) Using the GUI:
 
