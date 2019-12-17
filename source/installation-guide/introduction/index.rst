@@ -45,7 +45,7 @@ This architecture diagram represents a production Wazuh - Elastic stack environm
 
 The Wazuh cluster (center) can be configured as a single-node cluster (only one server with Wazuh server installed) or a multi-node cluster (two or more Wazuh managers distributed in two or more servers). Only the master Wazuh cluster node will have the Wazuh API installed. All the Wazuh cluster servers will have Filebeat installed.
 
- An Elasticsearch cluster (right side) may consist of one or more nodes.
+An Elasticsearch cluster (right side) may consist of one or more nodes.
 
 Kibana (above Elasticsearch cluster) will retrieve data from both clusters, Wazuh and Elasticsearch. It will show data in a comprehensive way.
 
