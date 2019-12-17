@@ -21,7 +21,7 @@ Supported platforms
 
 .. include:: ../../_templates/installations/introduction/supported_platforms.rst
 
-Wazuh cloud (SAAS)
+Wazuh cloud (SaaS)
 ------------------
 
 .. include:: ../../_templates/installations/introduction/wazuh_saas.rst

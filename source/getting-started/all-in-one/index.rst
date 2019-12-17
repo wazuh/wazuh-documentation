@@ -4,8 +4,8 @@
 
 .. _installation_guide_aio:
 
-All in one installation guide
-=============================
+Basic installation case
+=======================
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
