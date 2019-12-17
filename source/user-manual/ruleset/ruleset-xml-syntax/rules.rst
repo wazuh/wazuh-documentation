@@ -273,7 +273,7 @@ Example:
           <options>no_full_log</options>
       </rule>
 
-This rule groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
+This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
 
 srcip
 ^^^^^
@@ -576,7 +576,7 @@ Example:
         <description>osquery message</description>
       </rule>
 
-This rule groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
+This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
 
 action
 ^^^^^^
