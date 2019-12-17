@@ -287,6 +287,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
    compliance
    migrating-from-ossec/index
    release-notes/index
+   other-installation-options/index
 
 .. raw:: html
 

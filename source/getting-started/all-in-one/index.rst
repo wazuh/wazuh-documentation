@@ -77,5 +77,3 @@ The Wazuh server and Elastic stack can be installed and operated in either of th
 
         elastic_stack_packages
         wazuh_server_packages
-        other-installation-options/index
-

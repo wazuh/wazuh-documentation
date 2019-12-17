@@ -29,8 +29,6 @@ There are several options to install a Wazuh agent, depending on the operating s
 +----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Linux installer <wazuh_agent_package_linux>`       | Install Wazuh agents on Linux.                                        |
 +----------------------------------------------------------+-----------------------------------------------------------------------+
-| :ref:`Linux legacy RPM <wazuh_agent_package_rpm_legacy>` | Install Wazuh agents on  CentOS 5, RHEL 5, Oracle Linux 5 or SUSE 11. |
-+----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`macOS installer <wazuh_agent_package_macos>`       | Install Wazuh agents on macOS.                                        |
 +----------------------------------------------------------+-----------------------------------------------------------------------+
 | :ref:`Solaris installer <wazuh_agent_solaris>`           | Install Wazuh agents on Solaris.                                      |
@@ -53,7 +51,6 @@ On the other hand, deploying agents to a large number of servers or endpoints ca
     wazuh_agent_package_aix
     wazuh_agent_package_hpux
     wazuh_agent_package_linux
-    wazuh_agent_package_rpm_legacy
     wazuh_agent_package_macos
     solaris/index
     wazuh_agent_package_windows
