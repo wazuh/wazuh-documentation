@@ -7,7 +7,7 @@ Detect an RDP brute force attack
 
 Here you will wage a small RDP brute force attack against your Windows Agent instance.
 
-You will see how Wazuh detects and alerts on each login failure, and how a higher severity 
+You will see how Wazuh detects and alerts on each login failure, and how a higher severity
 alert is produced when enough login failures are seen.
 
 Lastly you will take a closer look at the decoders and rules involved in the detection of your "attack".
@@ -22,25 +22,33 @@ eight times in a fairly small time window.
 See the resulting alerts in Kibana
 ----------------------------------
 
-1. Search Kibana for "*george*".
 
-2. Select the following fields for display:
+1. On Kibana, go to **[Security events]**, search for "*george*" and then click on **[Discover]** on the top right corner.
 
-    - rule.description
-    - rule.id
-    - data.account_name
-    - data.srcip
+2. On ``Discover``, you can personalize how to visualize the alerts. Using the image below as reference, click on the button next to ``Available fields``, introduce the field you are looking for in ``Field name`` and click on **[add]**. We will be using the 4 fields stated below.
 
-3. Inspect the events which will look something like this:
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/win-brute.png                                    |
-    |     :title: flood                                                                             |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------+---------------------------------------------------------------+
+|        .. image:: ../images/learning-wazuh/labs/select-field.png   |    - rule.description                                         |
+|             :align: center                                         |    - rule.id                                                  |
+|             :width: 500px                                          |    - data.win.eventdata.targetUserName                        |
+|             :height: 500px                                         |    - data.win.eventdata.ipAddress                             |
++--------------------------------------------------------------------+---------------------------------------------------------------+
 
-4. Notice how first the lower level "*Windows: Logon Failure*" alert is triggered several times,
+
+
+
+3. Inspect the events which will look similar to this:
+
+
+  .. image:: ../images/learning-wazuh/labs/win-brute.png
+    :align: left
+    :width: 800px
+    :height: 600px
+
+
+
+4. Notice how the lower level "*Windows: Logon Failure*" alert is triggered several times,
    followed by the higher level "Multiple Windows Logon Failures" alert.
    This process may repeat itself depending on the total number of logon failures seen.
 
