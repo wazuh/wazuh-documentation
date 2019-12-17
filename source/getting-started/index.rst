@@ -40,6 +40,7 @@ Wazuh is a security detection, visibility, and compliance open source project. I
    components
    architecture
    use-cases
+   all-in-one/index
    compatibility_matrix/index
    packages-list/index
-   all-in-one/index
+
