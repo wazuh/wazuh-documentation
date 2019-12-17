@@ -8,7 +8,7 @@ Install the Windows Wazuh agent
 Download the Wazuh agent package
 --------------------------------
 
-1. Log into your Windows Agent instance via Remote Desktop as Administrator.
+1. Log into your Windows Agent instance via Remote Desktop as Administrator. Remember to use the password you obtained `previously <access-ec2-instances.html#rdp-access-to-windows-instance>`_.
 
 2. Open Internet Explorer and paste the following into the address bar:
 
@@ -19,7 +19,7 @@ Download the Wazuh agent package
 3. Press <Enter>. In the Warning dialog, click on **[Add]**, on **[Add]** again
    and then on **[Close]**.
 
-4. Re-paste the above link into the address bar and hit <Enter> again.  Click on
+4. Re-paste the above link into the address bar and press <Enter> again.  Click on
    **[Save]**.  The MSI installer is now in your Downloads folder.
 
 
