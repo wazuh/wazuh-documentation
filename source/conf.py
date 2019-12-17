@@ -351,8 +351,8 @@ def minification(actual_path):
         ['css/style','css'],
         ['css/wazuh-icons','css'],
         ['js/version-selector','js'],
-        ['js/style','js'],
-        ['js/redirects','js']
+        ['js/redirects','js'],
+        ['js/style','js']
     ]
 
     for file in files:
@@ -402,8 +402,8 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
+    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
     app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
     app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
@@ -420,8 +420,8 @@ exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
     "js/version-selector.js",
-    "js/style.js",
-    "js/redirects.js"
+    "js/redirects.js",
+    "js/style.js"
 ]
 
 # -- Additional configuration ------------------------------------------------
