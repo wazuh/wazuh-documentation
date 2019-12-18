@@ -8,7 +8,7 @@ Expose hiding processes
 In this exercise you will safely implement a kernel-mode rootkit on your lab machine as a proof-of-concept for Wazuh rootkit detection.
 
 This rootkit is able to hide itself from the kernel module list as well as hide selected processes from being visible
-to ``ps``.  
+to ``ps``.
 
 However, Wazuh will sill detect it using the system calls ``setsid()``, ``getpid()``, and ``kill()``. This makes
 Wazuh a very effective Linux rootkit detection application by looking for general low-level hiding behavior.
@@ -17,20 +17,20 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
     .. code-block:: console
 
-        # sudo su -
+        [root@linux-agent centos]$ sudo su -
 
 2. Update your kernel and reboot.  This is necessary for the rootkit build process.
 
     .. code-block:: console
 
-        # yum -y update
-        # shutdown -r now
+        [root@linux-agent centos]# yum -y update
+        [root@linux-agent centos]# shutdown -r now
 
 3. Log back into linux-agent and become root again.
 
     .. code-block:: console
 
-        # sudo su -
+        [root@linux-agent centos]$ sudo su -
 
 4. In your linux-agent's ``/var/ossec/etc/local_internal_options.conf`` file, enable debug logging
    and speed up the rate at which rootcheck commences its first scan for the sake of this lab.
@@ -48,8 +48,8 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
     you can change, along with explanations.  While you can edit this file directly, it gets overwritten during
     Wazuh upgrades, so it is recommended that you copy the sections you want to customize from
     ``/var/ossec/etc/internal_options.conf`` to ``/var/ossec/etc/local_internal_options.conf`` where the changes
-    will not be overwritten.  
-    The settings in **local_internal_options.conf** always take precedence over the 
+    will not be overwritten.
+    The settings in **local_internal_options.conf** always take precedence over the
     settings in **internal_options.conf,** so editing the **local_internal_options.conf** file will ensure your
     changes will not be overriden.
 
@@ -79,12 +79,12 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
         # insmod diamorphine.ko
 
     .. note::
-        Depending on the environment the module will sometimes fail to load or function properly. 
-        If you receive the errors ``insmod: ERROR: could not insert module diamorphine.ko: Invalid parameters`` 
-        or ``bash: kill: (509) - No such process`` in the next step, you can restart the linux-agent machine 
-        and try again. Sometimes it will take several tries to work.    
+        Depending on the environment the module will sometimes fail to load or function properly.
+        If you receive the errors ``insmod: ERROR: could not insert module diamorphine.ko: Invalid parameters``
+        or ``bash: kill: (509) - No such process`` in the next step, you can restart the linux-agent machine
+        and try again. Sometimes it will take several tries to work.
 
-The kernel-level rootkit “Diamorphine” is now installed on this system! By default it is hidden so we 
+The kernel-level rootkit “Diamorphine” is now installed on this system! By default it is hidden so we
 are not able to detect it by running “lsmod”.  Only with a special "kill" signal can we make Diamorphine
 unhide itself:  Try it out:
 
@@ -99,9 +99,9 @@ unhide itself:  Try it out:
         #
 
 
-    In the case of Diamorphine, any attempt to send kill signal ``-63`` to any process whether it exists or not, 
+    In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not,
     will toggle whether the Diamorphine kernel module hides itself.
-    
+
     This rootkit also allows you to hide a selected processes from being seen by the "ps" command for example.
     Run the following commands to see how the rsyslog process is first visible, then send the ``-31`` signal to
     its pid and observe how the process is no longer visible
@@ -117,7 +117,7 @@ unhide itself:  Try it out:
 9. Next configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/ossec.conf`` file to **300** with the following:
 
     .. code-block:: xml
-            
+
             <rootcheck>
               <disabled>no</disabled>
               <check_files>yes</check_files>
@@ -127,16 +127,16 @@ unhide itself:  Try it out:
               <check_pids>yes</check_pids>
               <check_ports>yes</check_ports>
               <check_if>yes</check_if>
-            
+
               <!-- Frequency that rootcheck is executed - every 12 hours by default-->
-             
+
               <frequency>300</frequency>
-             
+
               <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
               <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
               <skip_nfs>yes</skip_nfs>
             </rootcheck>
-    
+
     Restart the agent.
 
     a. For Systemd:
@@ -151,7 +151,7 @@ unhide itself:  Try it out:
 
         # service wazuh-agent restart
 
-    The next rootcheck scan should run shortly and it will alert about the rsyslogd process 
+    The next rootcheck scan should run shortly and it will alert about the rsyslogd process
     which we hid with Diamorphine.
 
 10. Watch ``ossec.log`` on linux-agent for rootcheck activity that should start within 5 minutes of the agent restart.
@@ -182,14 +182,14 @@ unhide itself:  Try it out:
             2019/10/18 14:47:34 rootcheck[464] run_rk_check.c:293 at run_rk_check(): INFO: Ending rootcheck scan.
             2019/10/18 14:47:34 rootcheck[464] run_rk_check.c:296 at run_rk_check(): DEBUG: Leaving run_rk_check
 
-    We see various rootkit scanning measures taking place that correspond to the various 
-    ``<check_...>`` options specified in the ``<rootkit>`` section of ``ossec.conf``.  
+    We see various rootkit scanning measures taking place that correspond to the various
+    ``<check_...>`` options specified in the ``<rootkit>`` section of ``ossec.conf``.
     The **check_rc_pids** scan is the one that will catch Diamorphine.
 
 |
 
 11. Now switch back to the manager, and look for alerts in ``/var/ossec/logs/alerts/alerts.log``
-    that looks something like this:
+    similar to these ones:
 
  .. code-block:: console
 
@@ -198,20 +198,20 @@ unhide itself:  Try it out:
             Rule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'
             Process '732' hidden from /proc. Possible kernel level rootkit.
             title: Process '732' hidden from /proc.
-            
+
             ** Alert 1571420732.2395334: - ossec,rootcheck,gdpr_IV_35.7.d,
             2019 Oct 18 17:45:32 (agent) any->rootcheck
             Rule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'
             Process '740' hidden from /proc. Possible kernel level rootkit.
             title: Process '740' hidden from /proc.
-            
+
             ** Alert 1571420732.2395619: - ossec,rootcheck,gdpr_IV_35.7.d,
             2019 Oct 18 17:45:32 (agent) any->rootcheck
             Rule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'
             Process '741' hidden from /proc. Possible kernel level rootkit.
             title: Process '741' hidden from /proc.
 
-12. Also try to find the same event in Kibana by searching for "rootkit".
+12. It is also possible to find the same event in Kibana by searching for "rootkit".
 
     .. thumbnail:: ../images/learning-wazuh/labs/kibana-rootkit.png
         :title: brute
@@ -254,4 +254,4 @@ unhide itself:  Try it out:
 
       # service wazuh-agent restart
 
-Now that you have finished this lab exercise you may be interested in reading the :ref:`Anomaly and Malware detection <manual_anomaly_detection>` section of our documentation in more detail.
+Now that you have finished this lab exercise you may be interested in reading the :ref:`Anomaly and Malware detection <manual_anomaly_detection>` section of our documentation for more details.
