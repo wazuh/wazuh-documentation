@@ -6,7 +6,7 @@ Change the rules
 ================
 
 The `Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_ is maintained by Wazuh, Inc.
-and is contributed to by the Wazuh community.  These stock rules are located in various files 
+and is contributed to by the Wazuh community.  These stock rules are located in various files
 in ``/var/ossec/ruleset/rules/`` on the Wazuh manager and should not be edited in that location
 because they are overwritten when you upgrade Wazuh manager or perform a Wazuh Ruleset update.
 
@@ -16,9 +16,10 @@ In order to change a default rule, then the ``overwrite="yes"`` option must be u
 In this lab you will raise the severity level of a specific rule in the Wazuh Ruleset.
 This can be achieved using the Web Interface or directly editing the files on the Wazuh Manager.
 
-Using the Kibana Wazuh App
---------------------------
-1. Open the Wazuh app in Kibana, go into the Management Tab and select the Ruleset
+Using the Kibana Wazuh plugin
+-----------------------------
+
+1. Open the Wazuh User Interface in Kibana, go into the Management Tab and select the Ruleset
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/rules-1.png                                      |
@@ -27,7 +28,7 @@ Using the Kibana Wazuh App
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-2. Select **Manage rules files** and search for "ssh", then click on the eye icon 
+2. Select **Manage rules files** and search for "ssh", then click on the eye icon
    next to **0095-sshd_rules.xml** to view the contents of that file.
 
     +-----------------------------------------------------------------------------------------------+
@@ -37,7 +38,7 @@ Using the Kibana Wazuh App
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-3. Scroll down to rule ``5716`` and copy the text starting from where the ``<rule`` tag is opened until 
+3. Scroll down to rule ``5716`` and copy the text starting from where the ``<rule`` tag is opened until
    it is closed ``</rule>``:
 
     .. code-block:: xml
@@ -109,7 +110,7 @@ Using the Command Line Interface
           <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,</group>
         </rule>
 
-3. Paste it into ``/var/ossec/etc/rules/local_rules.xml``.  Make sure to insert it before a the closing 
+3. Paste it into ``/var/ossec/etc/rules/local_rules.xml``.  Make sure to insert it before a the closing
    ``</group>`` tag, as all rules must be located inside of a ``<group>`` section.
 
 4. Change the level from "5" to "7" in your revised version of the rule.
@@ -121,10 +122,10 @@ Using the Command Line Interface
 
         <rule id="5716" level="7" overwrite="yes">
 
-6. You could customize anything about the rule as long as you keep the rule id the same and include 
-   the *overwrite* tag.  If you change the rule id then the original rule will not be overwritten and 
-   it may interfere with your customized version.  If you leave the rule id the same but forget to add 
-   the overwrite tag, then Wazuh manager will fail the next time it is restarted and throw an error about 
+6. You could customize anything about the rule as long as you keep the rule id the same and include
+   the *overwrite* tag.  If you change the rule id then the original rule will not be overwritten and
+   it may interfere with your customized version.  If you leave the rule id the same but forget to add
+   the overwrite tag, then Wazuh manager will fail the next time it is restarted and throw an error about
    a duplicate rule id.
 
 7. Save your changes to ``local_rules.xml``.
@@ -146,7 +147,7 @@ Using the Command Line Interface
         **Alert to be generated.
 
 .. note::
-    The Wazuh manager only reads in the rules when started or restarted, so any real events like above 
-    would not be affected by your customized rule until you restart Wazuh manager.  The ``ossec-logtest`` 
-    tool does not require Wazuh manager to be restarted to notice your latest rule changes, which provides 
+    The Wazuh manager only reads in the rules when started or restarted, so any real events like above
+    would not be affected by your customized rule until you restart Wazuh manager.  The ``ossec-logtest``
+    tool does not require Wazuh manager to be restarted to notice your latest rule changes, which provides
     you with a convenient way to test your rule changes before making them take effect on real events.
