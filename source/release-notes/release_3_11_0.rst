@@ -15,13 +15,36 @@ This section shows the most relevant improvements and fixes in version 3.11.0. M
 
 Wazuh core
 ----------
-- Vulnerability detector module now supports Windows Agents. 
-- The Wazuh agent modules now waits until the network service is ready.
-- The ossec-makelist binary is now deprecated and the Analysisd module compiles the CDB lists on each restart. 
-- Wazuh agent now checks if the ``MANAGER_IP`` is a valid IP or hostname. This prevents the agents to keep trying to connect to an invalid address indefinitely.
-- Under certain conditions Authd was overwriting an agent with the same IP, now it outputs a duplicated IP error. 
+
+**Vulnerability detector**
+
+- Added support for Windows agents. It looks for vulnerabilities related to installed software, as well as those of the OS itself.
+- Added support for Debian 10 and RHEL8.
+- Vulnerability detector alerts include PCI-DSS mapping.
+
+**Inventory**
+
+- Added inventory of Windows Security Updates.
 - Processes and ports inventory are now supported in macOS X agents.
-- Bug fixed while entering a wildcard path in localfile and creating folders inside that path.
+
+**Log collection**
+
+- Allowed JSON escaping for logs on Logcollector's output format.
+- Added the host's primary IP to Logcollector's output format.
+- Fixed Logcollector wildcards to not detect directories as log files.
+
+**Analysis engine**
+
+- Frequency rules now depend on the event source (agents) by default. This behavior can be switched by the option ``global_frequency``.
+- Fixed the use of fields ``protocol``, ``system_name``, ``data`` and ``extra_data`` as rule fields in the analysis stage.
+- The ``ossec-makelist`` binary is deprecated since the ``Analysisd`` module compiles the CDB lists on startup.
+
+**Other fixes and improvements**
+
+- The Wazuh agent modules now waits until the network service is ready.
+- The authentication service now displays a warning message when registering to an unverified manager.
+- Added a validation for avoiding agents to keep trying to connect to an invalid address indefinitely.
+- Windows EventChannel alerts now include the full message with the translation of coded fields.
 
 Wazuh API
 ---------
@@ -35,8 +58,8 @@ Wazuh Ruleset
 -------------
 
 - New decoders and rules to integrate McAfee ePolicy Orchestrator in our ruleset.
-- The frequency rules are now source dependant(increased for the same agent by default). The new ``global_frequency`` rules option allows making frequency rules not source dependant.
-- Ruleset ``protocol``, ``system_name``, ``data`` and ``extra_data`` fields are now correctly recognized in the events parsing and rule checking.
+- Added rules to collect events related to the Windows firewall.
+- Now OSQuery logs related to internal messages appear in alerts.
 
 Wazuh Kibana App
 ----------------
