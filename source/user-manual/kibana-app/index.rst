@@ -12,7 +12,7 @@ The Wazuh Kibana plugin lets you visualize and analyze Wazuh alerts stored in El
 
 .. note:: Read our `Searching for alerts using the Wazuh Kibana plugin <https://wazuh.com/blog/searching-for-alerts-using-the-wazuh-app-for-kibana//>`_ document for more information.
 
-To install the plugin, you can follow our :ref:`Elastic Stack installation guides <elastic_stack_packages>`.
+To install the plugin, you can follow our :ref:`Elastic Stack installation guides <kibana>`.
 
 This manual describes the configuration process to get it started and the different plugin features that you can use. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
 

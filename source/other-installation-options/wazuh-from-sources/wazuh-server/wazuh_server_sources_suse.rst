@@ -137,4 +137,4 @@ the process is more complex than you may like and it is beyond the scope of Wazu
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for multitier server), you are ready to install :ref:`Elastic Stack <elastic_stack_packages>`.
+Once you have installed the manager, API and Filebeat (only needed for multitier server), you are ready to install :ref:`Elastic Stack <elasticsearch_cluster>`.
