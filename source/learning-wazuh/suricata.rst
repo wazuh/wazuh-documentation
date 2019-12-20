@@ -13,11 +13,11 @@ This is where a NIDS (Network Intrusion Detection System) can provide additional
 a way that is highly complimentary to the HIDS functionality in Wazuh.
 
 Suricata is one such NIDS solution, which is open source and can be quickly deployed either on dedicated hardware for
-monitoring one or more transit points on your network, or directly on existing \*nix hosts to monitor just their own network
+monitoring one or more transit points on your network, or directly on existing Unix-like hosts to monitor just their own network
 traffic.  Because Suricata is capable of generating JSON logs of NIDS events, it integrates beautifully with Wazuh.
 
 In this lab we will deploy Suricata on linux-agent and elastic-server such that Wazuh picks up the Suricata NIDS events
-and they can be seen with Kibana.  Instead of making the same Wazuh config changes to both Linux agents, we
+so can be seen in Kibana.  Instead of making the same Wazuh config changes to both Linux agents, we
 will make use of Wazuh's centralized configuration feature to push out the extra Suricata-related Wazuh configuration
 to the appropriate agents. Lastly, we will do a little GeoIP enrichment of the Suricata NIDS events with Logstash, showing
 how easily we can augment existing log records with additional context information to make them more valuable.
@@ -123,7 +123,7 @@ Trigger NIDS alerts on both agents and see the output
 Get the Suricata JSON data to Wazuh
 -----------------------------------
 
-Suricata is configured to write alerts to /var/log/suricata/eve.json which Wazuh does not monitor by default.  Both of our
+Suricata is configured to write alerts to ``/var/log/suricata/eve.json`` which Wazuh does not monitor by default.  Both of our
 Linux agents need an additional ``<localfile>`` config section like this:
 
     .. code-block:: xml
@@ -139,19 +139,21 @@ Wazuh agent.  Search the online documentation for "Centralized Configuration" fo
 configuration content served up to them by Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
 the shared configuration with their local configuration.
 
-1. Add elastic-server and linux-agent to a new agent group called "linux".
+1. Add elastic-server and linux-agent to a new agent group called "linux". Go to wazuh-manager and:
 
     - Create an agent group called "linux" which will cover all shared Linux agent configuration elements.
 
         .. code-block:: console
 
-            # agent_groups -a -g linux -q
+            [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -g linux -q
             Group 'linux' created.
 
 
     - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
 
         .. code-block:: console
+
+            [root@wazuh-manager centos]# /var/ossec/bin/manage_agents -l
 
             Available agents:
             ID: 001, Name: linux-agent, IP: any
@@ -162,12 +164,12 @@ the shared configuration with their local configuration.
 
         .. code-block:: console
 
-            # agent_groups -a -i 001 -g linux -q
+            [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -i 001 -g linux -q
             Group 'linux' set to agent '001'.
-            # agent_groups -a -i 002 -g linux -q
+            [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -i 002 -g linux -q
             Group 'linux' set to agent '002'.
 
-2. Put our Suricata-specific Wazuh agent config into the shared agent.conf file belonging to the "linux" agent group.  The file is ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
+2. Put our Suricata-specific Wazuh agent config into the shared agent.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
 
     .. code-block:: xml
 
@@ -182,7 +184,7 @@ the shared configuration with their local configuration.
 
     .. code-block:: console
 
-        # verify-agent-conf
+        [root@wazuh-manager centos]# /var/ossec/bin/verify-agent-conf
 
         verify-agent-conf: Verifying [/var/ossec/etc/shared/default/agent.conf]
         verify-agent-conf: OK
