@@ -322,7 +322,7 @@ Windows command line `route print /4` now shows a null route for the IP of the
 attacker.  It will be in the "Persistent Routes:" section of the output.
 
     .. code-block:: console
-    
+
       PS C:\Users\Administrator> route print /4
 
             (...)
