@@ -6,27 +6,28 @@ Detect and react to a Shellshock attack
 =======================================
 
 Shellshock represent a family of vulnerabilities disclosed in late 2014 involving
-the Linux Bash shell.  These vulnerabilities made it possible to inject shell 
-commands via maliciously crafted web requests sent to Linux web servers.  The 
-pattern in such web requests is quite distinctive, and any instance of your 
+the Linux Bash shell.  These vulnerabilities made it possible to inject shell
+commands via maliciously crafted web requests sent to Linux web servers.  The
+pattern in such web requests is quite distinctive, and any instance of your
 servers being probed with Shellshock requests are fairly
 strong indicators of malicious probing worthy of automated countermeasures.
 
 In this lab you will send a Shellshock probe to a web server monitored by Wazuh.
-After looking over the alert that is produced and the rule that produced it, you 
-will then set up and test several active response scenarios in which the attacker 
+After looking over the alert that is produced and the rule that produced it, you
+will then set up and test several active response scenarios in which the attacker
 will be automatically firewalled off from the Linux lab systems and null routed
-by the Windows lab system in response this attack.
+by the Windows lab system in response to this attack.
 
 Install a web server and monitor its logs
 -----------------------------------------
-If you haven't already, install a web server in a linux machine, for example **nginx**:
+
+If you haven't already, install a web server in your linux-agent, for example **nginx**:
 
     .. code-block:: console
 
-        yum install epel-release
-        yum install nginx
-        systemctl start nginx
+        [root@linux-agent centos]# yum install epel-release
+        [root@linux-agent centos]# yum install nginx
+        [root@linux-agent centos]# systemctl start nginx
 
 Ensure that the nginx **access** and **error** logs are collected by Wazuh by having
 these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.conf`` file:
@@ -70,19 +71,19 @@ b. For SysV Init:
 Send a Shellshock probe to the web server and see the resulting alert
 ---------------------------------------------------------------------
 
-For convenience, set up a system variable in the systems where you will run 
+For convenience, set up a system variable in the systems where you will run
 the attack with the address of the web server (this may be itself):
 
     .. code-block:: console
 
-        # ShellshockTarget="localhost"
+      [root@linux-agent centos]# ShellshockTarget="localhost"
 
 
-Execute the following request to the web server: 
+Execute the following request to the web server:
 
     .. code-block:: console
 
-        # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
+        [root@linux-agent centos]# curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
 Notice the maliciously crafted User-Agent header to be sent, including injected shell commands.
 
@@ -123,7 +124,7 @@ on the Wazuh manager, but no actual criteria for calling the AR commands is
 included.  No AR commands will actually be triggered until further configuration
 is performed on the Wazuh manager.
 
-For the purpose of automated blocking, a very popular command for blocking in 
+For the purpose of automated blocking, a very popular command for blocking in
 Linux is using the iptables firewall, and in Windows the null routing / blackholing, respectively:
 
     .. code-block:: xml
@@ -147,10 +148,10 @@ Linux is using the iptables firewall, and in Windows the null routing / blackhol
 Each command has a descriptive ``<name>`` by which it will be referred to in the
 ``<active-response>`` sections.  The actual script to be called is defined by
 ``<executable>``.  The ``<expect>`` value specifies what log field (if any)
-will be passed along to the script (like **srcip** or **username**).  Lastly, if 
+will be passed along to the script (like **srcip** or **username**).  Lastly, if
 ``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
 and can be reversed after an amount of time specified in a specific ``<active-response>``
-section (see :ref:`timeout <reference_ossec_active_response>`).  For more details 
+section (see :ref:`timeout <reference_ossec_active_response>`).  For more details
 about configuring active response, see the Wazuh user manual.
 
 
@@ -200,7 +201,7 @@ Run the same curl probe just like last time:
         # curl --insecure $ShellshockTarget -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 
 The command will quickly download the webpage to ``/dev/null``.  Now repeat the same curl command.
-This time the command seems to hang, because the agent has added the attacking IP to 
+This time the command seems to hang, because the agent has added the attacking IP to
 its firewall's drop list.  If you have used the agent's IP instead of ``localhost``
 you may confirm this with an iptables command on the attacked server:
 
@@ -221,7 +222,7 @@ you may confirm this with an iptables command on the attacked server:
 
 Wait at least 5 minutes, and then on the attacked server look at the content of
 its local AR log.  By now the stateful firewall-drop command will have timed out
-and been reversed.  This is why you will see an "add" and a "delete" record for 
+and been reversed.  This is why you will see an "add" and a "delete" record for
 this event 5 minutes apart.
 
     .. code-block:: console
@@ -253,12 +254,12 @@ requesting the webpage again, or by using an iptables command on the attacked se
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 In the newly-added ``<active-response>`` section in ``ossec.conf`` on wazuh-manager,
-change the ``<location>`` value from **local** to **all** so that all Linux Wazuh 
+change the ``<location>`` value from **local** to **all** so that all Linux Wazuh
 agents will block the attacker even when only one of them is targeted.
 
 .. note::
-    The option **all** sends the active response to all **agents**. If we want it 
-    to also run in the manager, we must duplicate the active-response block indicating 
+    The option **all** sends the active response to all **agents**. If we want it
+    to also run in the manager, we must duplicate the active-response block indicating
     **server** in the ``location`` field.
 
 .. code-block:: xml
@@ -279,7 +280,7 @@ agents will block the attacker even when only one of them is targeted.
         <timeout>300</timeout>
     </active-response>
 
-Run the same malicious ``curl`` probe as before, and then confirm 
+Run the same malicious ``curl`` probe as before, and then confirm
 that all Linux systems configured are blocking the attacker's IP.
 
 
@@ -316,11 +317,15 @@ Restart the manager:
 
         # service wazuh-manager restart
 
-Run the same probe again to the web server.  Observe that the output of the 
+Run the same probe again to the web server.  Observe that the output of the
 Windows command line `route print /4` now shows a null route for the IP of the
 attacker.  It will be in the "Persistent Routes:" section of the output.
 
     .. code-block:: console
+    
+      PS C:\Users\Administrator> route print /4
+
+            (...)
 
             ===========================================================================
             Persistent Routes:
@@ -351,17 +356,17 @@ removed across all agents.
     to cancel any stateful active responses that have not yet timed out.
     On Windows systems if the service is restarted externally (i.e. System reboot)
     while an active response null routing block is in place, has the undesirable
-    effect of making the block permanent such that it will not be cleared 
+    effect of making the block permanent such that it will not be cleared
     automatically.  In that case it it necessary to clear the orphaned null route
     with a `route  delete N.N.N.N` command where N.N.N.N is the null routed IP.
 
 We hope you enjoyed getting a taste of the Wazuh **Active Response** capability.
 While blocking an attacking IP is probably the most popular use made of Wazuh AR,
-it is far more broadly useful than that.  In addition to countermeasures taken 
-against attacking IPs or targeted account names, AR can also be used to take 
+it is far more broadly useful than that.  In addition to countermeasures taken
+against attacking IPs or targeted account names, AR can also be used to take
 any kind of custom action in response to any kind of rule firing.
 
-- **Custom alerting**: Collect additional context and send a detailed custom 
+- **Custom alerting**: Collect additional context and send a detailed custom
   email alert about a specific situation.
 - **Recovery actions**: Respond to certain error logs with automated action to
   fix the problem.
