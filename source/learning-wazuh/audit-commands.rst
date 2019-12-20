@@ -5,44 +5,45 @@
 Keep watch for malicious command execution
 ==========================================
 
-Linux systems have a powerful auditing facility called **auditd** which can give 
-a very detailed accounting of actions on and changes to a system, but by default 
+Linux systems have a powerful auditing facility called **auditd** which can give
+a very detailed accounting of actions and changes in a system, but by default,
 no auditd rules are active so we tend to miss out on this detailed history.
-In this lab we will configure auditd on a linux machine to account for all commands 
-executed by a given user (for example "wazuser"), including commands run by this user
-in a sudo command or after sudo-ing to root.  After causing some audit events 
+In this lab, we will configure auditd on a Linux machine to account for all commands
+executed by a given user (it should be "centos" if you built the lab following this guide), including commands run by this user
+in a sudo command or after sudo-ing to root.  After causing some audit events
 to be generated, we will look them over in Kibana.
 Then we will set up several custom Wazuh rules to alert on especially suspicious
 command calls, making use of the CDB list lookup capability that allows rules to
-look up decoded field values in various lists and to use the results as part of 
+look up decoded field values in various lists and to use the results as part of
 the alert criteria.
 
-The Linux auditd system is an extensive auditing tool, which we will only touch 
-on here. Consider reading the :ref:`system_call_monitoring` section to get a 
+The Linux auditd system is an extensive auditing tool, which we will only touch
+on here. Consider reading the :ref:`system_call_monitoring` section to get a
 broader picture of the ways you can take advantage of it.
 
 Turn on program call auditing on linux-agent
 --------------------------------------------
 
-1. Having already sudo-ed to root on a linux agent machine, append the following 
-   audit rules to /etc/audit/rules.d/audit.rules
+1. Having already sudo-ed to root on our linux-agent machine, append the following
+   audit rules to ``/etc/audit/rules.d/audit.rules``
 
     .. code-block:: console
 
-        -a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b32 -S execve -k audit-wazuh-c
-        -a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b64 -S execve -k audit-wazuh-c
+        [root@linux-agent centos]# echo "-a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b32 -S execve -k audit-wazuh-c" >> /etc/audit/rules.d/audit.rules
+        [root@linux-agent centos]# echo "-a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b64 -S execve -k audit-wazuh-c" >> /etc/audit/rules.d/audit.rules
+
 
    Where ``auid=1000`` represents the user ID. If unsure, you may verify this value
-   by running: ``grep wazuser /etc/passwd`` (replacing ``wazuser`` if you have a 
+   by running: ``grep centos /etc/passwd`` (replacing ``centos`` if you have a
    different user name).
 
 2. Then reload the rules and confirm they are in place:
 
     .. code-block:: console
 
-        # auditctl -R /etc/audit/rules.d/audit.rules
+        [root@linux-agent centos]# auditctl -R /etc/audit/rules.d/audit.rules
         ...
-        # auditctl -l
+        [root@linux-agent centos]# auditctl -l
         -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
         -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
 
@@ -54,9 +55,9 @@ Trigger a few audit events
 
     .. code-block:: console
 
-        [root@linux-agent ~]# exit
+        [root@linux-agent centos]# exit
         logout
-        [wazuser@linux-agent ~]$ ping -c1 8.8.4.4
+        [centos@linux-agent ~]$ ping -c1 8.8.4.4
         PING 8.8.4.4 (8.8.4.4) 56(84) bytes of data.
         64 bytes from 8.8.4.4: icmp_seq=1 ttl=51 time=1.09 ms
 
@@ -64,11 +65,11 @@ Trigger a few audit events
         1 packets transmitted, 1 received, 0% packet loss, time 0ms
         rtt min/avg/max/mdev = 1.093/1.093/1.093/0.000 ms
 
-2. While still **wazuser**, use sudo to run a privileged commands
+2. While still **centos**, use sudo to run a privileged commands
 
     .. code-block:: console
 
-        [wazuser@linux-agent ~]$ sudo cat /etc/shadow
+        [centos@linux-agent ~]$ sudo cat /etc/shadow
         root:!!:17497:0:99999:7:::
         bin:*:17110:0:99999:7:::
         ...
@@ -77,7 +78,7 @@ Trigger a few audit events
 
     .. code-block:: console
 
-        [wazuser@linux-agent ~]$ sudo su -
+        [centos@linux-agent ~]$ sudo su -
         Last login: Thu Nov 14 12:27:12 UTC 2019 on pts/0
         [root@linux-agent ~]# df
         Filesystem     1K-blocks    Used Available Use% Mounted on
@@ -96,7 +97,7 @@ Look over the audit events
    Auditd writes events here, but it is not very readable.  Thankfully the Linux Wazuh
    agents already monitors this file by default.
 
-2. Search Kibana for ``rule.id:80792`` in the Kibana Discover area.  That will 
+2. Search Kibana for ``rule.id:80792`` in the Kibana Discover area.  That will
    catch all auditd command audit events.
 
 3. Pick the following Kibana fields for columnar display:
@@ -106,11 +107,11 @@ Look over the audit events
     - data.audit.euid
     - full_log
 
-4. Explore the audit records, finding and examining your unprivileged ping, and 
+4. Explore the audit records, finding and examining your unprivileged ping, and
    your privileged cat and df calls.  They will be mingled with other commands.
 
-5. The **wazuser** user has uid 1000.  User **root** has uid 0.  Notice the 
-   ``auid`` (audited user identity) always traces back to the **wazuser** user, 
+5. The **centos** user has uid 1000.  User **root** has uid 0.  Notice the
+   ``auid`` (audited user identity) always traces back to the **centos** user,
    even though the ``euid`` effective user identity is sometimes 0 and sometimes
    1000 depending on whether privileges were escalated.  This allows you to see
    who actually ran the command with sudo or while sudo-ed to **root**.
@@ -131,7 +132,7 @@ Look over the relevant Wazuh rule
         </rule>
 
     Parent rule 80700 catches all auditd events, while this rule focuses on auditd
-    command events.  Notice how the ``<list>`` line in this rule takes the decoded 
+    command events.  Notice how the ``<list>`` line in this rule takes the decoded
     ``audit.key`` value which all our auditd rules set to "audit-wazuh-c" presently,
     and looks this up in a CDB list called ``audit-keys`` to see if the ``audit.key``
     value is listed with a value of "command".
@@ -146,8 +147,8 @@ Look over the relevant Wazuh rule
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-    This CDB list contains keys and values separated colons.  Some lists only 
-    contain keys, in which case each key exists on a line of its own and is 
+    This CDB list contains keys and values separated colons.  Some lists only
+    contain keys, in which case each key exists on a line of its own and is
     directly followed by a colon.
 
 3. Notice that in addition to the text file ``/var/ossec/etc/lists/audit-keys``,
@@ -158,15 +159,15 @@ Look over the relevant Wazuh rule
 Create a list of commands that Wazuh will watch for
 ---------------------------------------------------
 
-Wazuh allows you to maintain flat file CDB lists (key only or key:value) which 
-are compiled into a special binary format to facilitate high-performance lookups 
-in Wazuh rules.  Such lists must be created as files, added to the Wazuh 
+Wazuh allows you to maintain flat file CDB lists (key only or key:value) which
+are compiled into a special binary format to facilitate high-performance lookups
+in Wazuh rules.  Such lists must be created as files, added to the Wazuh
 configuration, and then compiled.
-After that, rules can be built that look up decoded fields in those CDB lists as
-part of their match criteria.  Right now we want a list of commands that Wazuh 
-should give us a special alert about when they are executed.
+After that, rules can be built to look up decoded fields in those CDB lists as
+part of their match criteria.  Right now, we want to create a list of commands that Wazuh
+will use to give us special alerts when executed.
 
-1. On wazuh-manager, create ``/var/ossec/etc/lists/suspicious-programs`` with 
+1. On wazuh-manager, create ``/var/ossec/etc/lists/suspicious-programs`` with
    this content:
 
     .. code-block:: console
@@ -176,11 +177,14 @@ should give us a special alert about when they are executed.
         tcpdump:
         ping:
 
-2. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration:
+2. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration in ``/var/ossec/etc/ossec.conf``:
 
-    .. code-block:: console
+    .. code-block:: xml
 
-        <list>etc/lists/suspicious-programs</list>
+        <ruleset>
+          <list>etc/lists/suspicious-programs</list>
+          ....
+
 
     .. note::
 
@@ -205,7 +209,15 @@ should give us a special alert about when they are executed.
     In this case we are simply checking to see if the decoded ``audit.command``
     value appears in our new CDB lists at all, without checking its value.
 
-4. Restart the Wazuh manager:
+
+
+4. Compile the CDB list (if your version is inferior to v3.11.0):
+
+    .. code-block:: console
+
+      [root@wazuh-manager centos]# /var/ossec/bin/ossec-makelists
+
+5. Restart the Wazuh manager:
 
   a. For Systemd:
 
@@ -219,13 +231,16 @@ should give us a special alert about when they are executed.
 
       # service wazuh-manager restart
 
-5. On the linux computer monitored agent, install and run ``tcpdump`` to trip 
+
+
+
+6. On the linux computer monitored agent, install and run ``tcpdump`` to trip
    our new rule:
 
     .. code-block:: console
 
-        # yum -y install tcpdump
-        # tcpdump --version
+        [root@linux-agent ~]# yum -y install tcpdump
+        [root@linux-agent ~]# tcpdump --version
 
 6. Search Kibana for ``data.audit.command:tcpdump`` and expand the record,
    where you should see a ``rule.id`` of 100200.
@@ -234,10 +249,10 @@ should give us a special alert about when they are executed.
 Make a smarter list and rule
 ----------------------------
 
-Let's make this list a little smarter by including values that indicate how 
+Let's make this list a little smarter by including values that indicate how
 alarmed we should be about a given program being run.
 
-1. On The manager, replace the content of ``/var/ossec/etc/lists/suspicious-programs`` 
+1. On The manager, replace the content of ``/var/ossec/etc/lists/suspicious-programs``
    with the following:
 
     .. code-block:: console
@@ -248,7 +263,7 @@ alarmed we should be about a given program being run.
         ping:yellow
 
 
-2. Now that our ``suspicious-programs`` list is more granular, let's create a 
+2. Now that our ``suspicious-programs`` list is more granular, let's create a
    higher severity rule to fire specifically on instances when a "red" program
    is executed.
 
@@ -264,7 +279,16 @@ alarmed we should be about a given program being run.
             <group>audit_command,</group>
         </rule>
 
-3. Restart the Wazuh manager:
+
+3. Compile the CDB list (if your version is inferior to v3.11.0):
+
+    .. code-block:: console
+
+      [root@wazuh-manager centos]# /var/ossec/bin/ossec-makelists
+
+
+
+4. Restart the Wazuh manager:
 
   a. For Systemd:
 
@@ -278,23 +302,23 @@ alarmed we should be about a given program being run.
 
       # service wazuh-manager restart
 
-4. On the monitored linux agent install and run a "red" program (netcat):
+45 On the monitored linux agent install and run a "red" program (netcat):
 
     .. code-block:: console
 
-        # yum -y install nmap-ncat
-        # nc -v
+        [root@linux-agent ~]# yum -y install nmap-ncat
+        [root@linux-agent ~]# nc -v
 
-5. Search Kibana for ``data.audit.command:nc`` and expand the record, noting 
+6. Search Kibana for ``data.audit.command:nc`` and expand the record, noting
    especially the rule.description of "Audit: Highly Suspicious Command executed: /usr/bin/ncat"
 
 
 Make an exception
 -----------------
 
-You have ``ping`` in your CDB list, but perhaps you have several systems that 
-routinely ping 8.8.8.8 as a connectivity check and you don't want these events 
-to be logged.  Another child rule of ``80297``, with a level of "0" can provide 
+You have ``ping`` in your CDB list, but perhaps you have several systems that
+routinely ping 8.8.8.8 as a connectivity check and you don't want these events
+to be logged.  Another child rule of ``80297``, with a level of "0" can provide
 such an exception.
 
 1. Add this new rule to ``/var/ossec/etc/rules/local_rules.xml`` on wazuh-manager, directly after rule 100210 and before the closing ``</group>`` tag.:
@@ -327,32 +351,32 @@ such an exception.
 
       # service wazuh-manager restart
 
-3. Test the rule by pinging both 8.8.8.8 and 8.8.4.4.
+3. In you linux-agent, test the rule by pinging both 8.8.8.8 and 8.8.4.4.
 
     .. code-block:: console
 
-        # yum -y install tcpdump
-        # ping -c1 8.8.8.8
-        # ping -c1 8.8.4.4
+        [root@linux-agent ~]# yum -y install tcpdump
+        [root@linux-agent ~]# ping -c1 8.8.8.8
+        [root@linux-agent ~]# ping -c1 8.8.4.4
 
-4. Search Kibana for ``data.audit.command:ping``.  Notice that only the ping 
-   event involving 8.8.4.4 shows up, because the other one was ignored by this 
+4. Search Kibana for ``data.audit.command:ping``.  Notice that only the ping
+   event involving 8.8.4.4 shows up, because the other one was ignored by this
    exception rule.
 
 
 Observe the order in which our child rules are evaluated
 --------------------------------------------------------
 
-1. On the monitored computer, run a mundane command not listed in our CDB.
+1. On your linux-agent, run a mundane command not listed in our CDB.
 
     .. code-block:: console
 
-            # sleep 1
+            [root@linux-agent ~]# sleep 1
 
-2. Search Kibana for ``data.audit.command:sleep`` to find the resulting event. 
+2. Search Kibana for ``data.audit.command:sleep`` to find the resulting event.
    Copy the ``full_log`` value.
 
-3. Run ``/var/ossec/bin/ossec-logtest -v`` on the Wazuh Manager and paste in 
+3. Run ``/var/ossec/bin/ossec-logtest -v`` on the Wazuh Manager and paste in
    the ``full_log`` value from above.
 
 4. Carefully note the order in which child rules of "80792 - Audit: Command"
@@ -377,7 +401,40 @@ Observe the order in which our child rules are evaluated
 
 .. warning:: **Why does my new rule never fire?**
 
-    Sometimes a new rule never matches anything because of a flaw in its criteria. 
-    Other times it never matches because it is never even evaluated.  Remember, 
-    ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being 
+    Sometimes a new rule never matches anything because of a flaw in its criteria.
+    Other times it never matches because it is never even evaluated.  Remember,
+    ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being
     evaluated at all, and if not, what rule might be overshadowing it.
+
+
+Remember to set your settings back to normal
+--------------------------------------------
+
+
+When testing different things, it is recommendable that you reverse the changes to keep your testing Lab clean. So new tests don't interfere with previous ones.
+
+You would need to delete the line we wrote in the ``<ruleset>`` section of Wazuh manager's configuration, ``ossec.conf``:
+
+  .. code-block:: xml
+
+      <list>etc/lists/suspicious-programs</list>
+
+In the linux-agent, delete the two lines we added to ``/etc/audit/rules.d/audit.rules``:
+
+  .. code-block:: console
+
+    -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
+    -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
+
+
+Now you would need to reload the auditd rules and restart the manager for changes to take effect:
+
+
+  .. code-block:: console
+
+     [root@linux-agent centos]# auditctl -R /etc/audit/rules.d/audit.rules
+
+
+  .. code-block:: console
+
+    [root@wazuh-manager centos]# systemctl restart wazuh-manager
