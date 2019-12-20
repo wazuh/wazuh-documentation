@@ -39,7 +39,7 @@ Options
 - `windows_audit_interval`_
 - `whodata`_
 - `process_priority`_
-- `inventory`_
+- `synchronization`_
 - `max_eps`_
 
 .. _reference_ossec_syscheck_directories:
@@ -596,8 +596,8 @@ Set the maximum output throughput.
 +--------------------+---------------------------------------+
 
 
-inventory
-^^^^^^^^^
+synchronization
+^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.12.0
 
@@ -606,24 +606,51 @@ The database synchronization settings will be configured inside this tag.
 .. code-block:: xml
 
     <!-- Database synchronization settings -->
-    <inventory>
-      <sync_interval>5m</sync_interval>
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
       <sync_queue_size>16384</sync_queue_size>
-    </inventory>
+    </synchronization>
 
 
-**sync_interval**
+**enabled**
 
 .. versionadded:: 3.12.0
 
-Specifies the number of seconds between every inventory synchronization.
+Specifies whether there will be periodic inventory synchronizations or not.
 
 +--------------------+---------------------------------------+
-| **Default value**  | 300                                   |
+| **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0.|
+| **Allowed values** | yes/no                                |
 +--------------------+---------------------------------------+
+
+**interval**
+
+.. versionadded:: 3.12.0
+
+Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
+the value will be duplicated until it reaches the value of ``max_interval``.
+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 300 s                                                                |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
++--------------------+----------------------------------------------------------------------+
+
+**max_interval**
+
+.. versionadded:: 3.12.0
+
+Specifies the maximum number of seconds between every inventory synchronization.
+
++--------------------+-----------------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                         |
++--------------------+-----------------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------------+
 
 **response_timeout**
 
@@ -639,7 +666,7 @@ may start a new synchronization session at the defined interval.
 | **Allowed values** | Any number greater than or equal to 0.|
 +--------------------+---------------------------------------+
 
-**sync_queue_size**
+**queue_size**
 
 .. versionadded:: 3.12.0
 
@@ -708,9 +735,8 @@ Default Unix configuration
     <max_eps>200</max_eps>
 
     <!-- Database synchronization settings -->
-    <inventory>
-      <sync_interval>5m</sync_interval>
-      <response_timeout>30</response_timeout>
-      <sync_queue_size>16384</sync_queue_size>
-    </inventory>
+    <synchronization>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+    </synchronization>
   </syscheck>
