@@ -132,7 +132,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
   .. code-block:: console
 
-    # dnf install filebeat-7.5.0
+    # dnf install filebeat-7.5.1
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
