@@ -18,63 +18,64 @@ Wazuh core
 
 **Vulnerability detector**
 
-- Added support for Windows agents. It looks for vulnerabilities related to installed software, as well as those of the OS itself.
-- Added support for Debian 10 and RHEL8.
+- Windows support. Thanks to a combination of NVD feed and the Microsoft Security guide, the module is able to detect system vulnerabilities and software vulnerabilities.
+- Added support for Debian 10 and RHEL 8.
 - Vulnerability detector alerts include PCI-DSS mapping.
 
 **Inventory**
 
-- Added inventory of Windows Security Updates.
-- Processes and ports inventory are now supported in macOS X agents.
+- Added extraction for Windows Security Updates (hotfixes).
+- Processes and ports are now supported in macOS.
 
 **Log collection**
 
-- Allowed JSON escaping for logs on Logcollector's output format.
-- Added the host's primary IP to Logcollector's output format.
-- Fixed Logcollector wildcards to not detect directories as log files.
+- Allowed JSON escaping for logs in the output format.
+- Added the host's primary IP in the output format.
+- Wildcards don't detect directories as log files any more.
 
 **Analysis engine**
 
-- Frequency rules now depend on the event source (agents) by default. This behavior can be switched by the option ``global_frequency``.
-- Fixed the use of fields ``protocol``, ``system_name``, ``data`` and ``extra_data`` as rule fields in the analysis stage.
-- The ``ossec-makelist`` binary is deprecated since the ``Analysisd`` module compiles the CDB lists on startup.
+- Frequency based rules aggregate the counter for the same event source by default. Introduced a new setting to toggle this behaviour: ``global_frequency``.
+- Fields ``protocol``, ``system_name``, ``data`` and ``extra_data`` can now be used for event matching in rules creation.
+- The ``ossec-makelist`` binary has been deprecated. The ``Analysisd`` daemon will compile the CDB lists on the startup.
 
 **Other fixes and improvements**
 
-- The Wazuh agent modules now waits until the network service is ready.
-- The authentication service now displays a warning message when registering to an unverified manager.
-- Added a validation for avoiding agents to keep trying to connect to an invalid address indefinitely.
-- Windows EventChannel alerts now include the full message with the translation of coded fields.
+- The Wazuh agent now waits until the network service is ready before start.
+- The agent key request service now displays a warning message when registering to an unverified manager.
+- Improved ``<address>`` field validation at agent start up.
+- Windows EventChannel alerts now include the full message with the coded field translation.
 
 Wazuh API
 ---------
 
-- The query parameter (``q``) now can be used to filter rules, decoders or logs.
-- New endpoint I: ``PUT /agents/group/{group_id}/restart`` to restart all agents in a group.
-- New endpoint II: ``GET /syscollector/:agent_id/hotfixes`` to get hotfixes info.
+- The query parameter (``q``) now can be used for filtering rules, decoders and logs.
+- New endpoint I: ``PUT /agents/group/{group_id}/restart`` for restarting all agents assigned to a group.
+- New endpoint II: ``GET /syscollector/:agent_id/hotfixes`` for listing the system hotfixes (Windows).
 - Improved error descriptions for the ``PUT /agents/:agent_id/upgrade_custom API`` call.
 
 Wazuh Ruleset
 -------------
 
-- New decoders and rules to integrate McAfee ePolicy Orchestrator in our ruleset.
+- New decoders and rules for McAfee ePolicy Orchestrator.
 - Added rules to collect events related to the Windows firewall.
-- Now OSQuery logs related to internal messages appear in alerts.
+- OSQuery logs related to internal messages appear in alerts.
 
-Wazuh Kibana App
-----------------
-- Support for Kibana v7.4.0
-- The API credentials configuration has been moved from the .wazuh index to the wazuh.yml configuration file. Now the hosts API configuration is done from this file and not from the application.
-- Reporting module events are now logged in the Wazuh App logs.
+Wazuh WUI for Kibana
+---------------------
+- Support for Kibana: v6.8.6, v7.5.1.
+- Support for OpenDistro: v1.3.0.
+- The API credentials configuration has been migrated from the ``.wazuh`` index to the ``wazuh.yml`` configuration file. Now the hosts API configuration is managed from this configuration file instead from the WUI.
+- Reporting module events are now logged in the Wazuh WUI logs.
 - The index pattern selector is now hidden in case that only one index exists.
-- Fixed error exporting as CSV the files into a group.
+- Fixed CSV export for files in a agents group.
 
-Wazuh Splunk App
-----------------
+Wazuh WUI for Splunk
+---------------------
 - CDB lists names are now correctly displayed.
-- Fixed a bug in Syscheck section when generating a PDF configuration summary.
+- Fixed a bug in Syscheck section when generating the PDF configuration summary.
 
-**Other additions and improvements for both Apps**
+**Other additions and improvements**
 
 - The new log collection option ``<reconnect_time>`` is included in the Log collection configuration section.
 - Rules/Decoders/CDB-lists files can be uploaded using a Drag & Drop feature.
