@@ -99,8 +99,8 @@ Deploying a Wazuh cluster
         .. code-block:: console
         
             NAME           TYPE    VERSION  ADDRESS
-            master-node    master  3.10.2   wazuh-master
-            worker01-node  worker  3.10.2   172.22.0.3
+            master-node    master  3.11.0   wazuh-master
+            worker01-node  worker  3.11.0   172.22.0.3
 
 
     .. warning::
