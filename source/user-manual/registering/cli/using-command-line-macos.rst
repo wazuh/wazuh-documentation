@@ -5,7 +5,7 @@
 MacOS X hosts
 =============
 
-To register an agent using the command line, first, follow the steps from the **Manager** section and then, from the **Agent** section.
+To register the Wazuh agent using the command line, first, follow the steps from the **Manager** section and then, from the **Agent** section. 
 
 Manager
 ^^^^^^^
