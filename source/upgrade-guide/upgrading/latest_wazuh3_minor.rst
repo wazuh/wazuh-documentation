@@ -136,6 +136,6 @@ c) OpenSUSE:
 Next steps
 ----------
 
-Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<upgrading-elastic-stack>`.
+Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack <upgrading_elastic_stack>`.
 
-You might also want to check our :ref:`compatibility matrix <compatibility-matrix>` in order to look at the Elastic stack version you need to use.
+You might also want to check our :ref:`compatibility matrix <vu_compatibility_matrix>` in order to look at the Elastic stack version you need to use.
