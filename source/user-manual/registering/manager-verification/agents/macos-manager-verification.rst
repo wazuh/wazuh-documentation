@@ -5,20 +5,25 @@
 MacOS X hosts
 ==============
 
-Open a session in your MacOS X agent host as root user. After that, you can register the Agent using ``agent-auth``:
+Open a session in your MacOS X agent host as a root user, you will use the CA (``.pem`` file) previously created on the manager.
 
-1. Copy the CA (**.pem file**) to the ``/Library/Ossec/etc`` folder and run the ``agent-auth`` program:
+1. Copy the CA (``.pem`` file) to the ``/Library/Ossec/etc`` folder:
 
   .. code-block:: console
 
     # cp rootCA.pem /Library/Ossec/etc
-    # /Library/Ossec/bin/agent-auth -m 192.168.1.2 -v /Library/Ossec/etc/rootCA.pem
+
+  Run the ``agent-auth`` program which automatically add the agent to the manager. If the agent's name is omitted the registration service will use the hostname as the agent's name. In the below command repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
+
+  .. code-block:: console
+
+    # /Library/Ossec/bin/agent-auth -m <MANAGER_IP> -A <AGENT_NAME> -v /Library/Ossec/etc/rootCA.pem
 
   .. note:: Note that this method must include the -v option that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the manager.
 
-2. Edit the Wazuh agent configuration to add the Wazuh server IP address.
+  You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
 
-  In the file ``/Library/Ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh server address:
+2. Edit the Wazuh agent configuration file. In ``/Library/Ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address: Edit the Wazuh agent configuration to add the Wazuh server IP address.
 
   .. code-block:: xml
 
