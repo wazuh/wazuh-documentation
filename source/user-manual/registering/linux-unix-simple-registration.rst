@@ -5,10 +5,10 @@
 Linux and Unix hosts
 ====================
 
-Open a session in your Linux/Unix agent host as a root user. After that, you can register the agent using ``agent-auth`` program as follows:
+Open a session in your Linux/Unix agent host as a root user. After that, you can register the Wazuh agent using ``agent-auth`` program as follows:
 
 1. On the agent, run the ``agent-auth`` program.
-   It allows agent registration by simply providing the manager's IP address. In this case, as we do not specify the agent's name, the name will be set automatically using hostname:
+   It allows agent registration by simply providing the manager's IP address. In this case, as the agent’s name is not provided, the name is set automatically using hostname:
 
   .. code-block:: console
 

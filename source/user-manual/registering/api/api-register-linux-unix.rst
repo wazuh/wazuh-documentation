@@ -11,7 +11,7 @@ Open a session in your Linux/Unix agent host as root user and follow these steps
 
   .. code-block:: console
 
-    # curl -u <API-USER>:<API-PASSWORD> -k -X POST -d '{"name":"<AGENT-NAME>","ip":"<AGENT_IP>"}' -H 'Content-Type:application/json' "<https/http>://<MANAGER-IP>:55000/agents?pretty"
+    # curl -u <API-USER>:<API-PASSWORD> -k -X POST -d '{"name":"<AGENT-NAME>","ip":"<AGENT_IP>"}' -H 'Content-Type:application/json' "<https/http>://<MANAGER_IP>:55000/agents?pretty"
 
   An example API request looks as follows:
 
@@ -41,7 +41,7 @@ Open a session in your Linux/Unix agent host as root user and follow these steps
 
       If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
-3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address in the ``<client><server>`` section:
+3. Edit the agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address in the ``<client><server>`` section:
 
   .. code-block:: xml
 
