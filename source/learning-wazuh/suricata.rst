@@ -299,37 +299,45 @@ Observe how Wazuh decodes Suricata events
 Spice things up with a little GeoIP
 -----------------------------------
 
-You may have noticed that there were no Geolocation fields in the Kibana records for Suricata events.  In Wazuh's default configuration for
-Logstash, Geolocation is only performed on fields ``@src_ip`` and ``data.srcip``, while with Suricata events we would need to act on fields
-``data.src_ip`` and ``data.dest_ip``.  To keep from overcrowding our Suricata Kibana records, let's just fetch the name and abbreviation of
-the country for each source and destination IP address.
+You may have noticed that there were no Geolocation fields in the Kibana records for Suricata events.  In Wazuh's default configuration, Geolocation is only performed on fields ``data.srcip``, ``data.win.eventdata.ipAddress`` and ``data.aws.sourceIPAddress`` , while with Suricata events we would need to act on fields
+``data.src_ip`` and ``data.dest_ip``.  We are going to change our configuration to show more information from ``data.src_ip``:
 
-1. On elastic-server, insert this additional filter section to /etc/logstash/conf.d/01-wazuh.conf just above the output section:
+1. On wazuh-manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP field inside ``processors``, along the other Geolocation fields:
 
     .. code-block:: console
 
-        filter {
-            if "suricata" in [rule][groups] {
-                geoip {
-                    source => "[data][src_ip]"
-                    target => "geoip_src"
-                    fields => ["country_code2", "country_name"]
-                    tag_on_failure => []
-                }
-                geoip {
-                    source => "[data][dest_ip]"
-                    target => "geoip_dest"
-                    fields => ["country_code2", "country_name"]
-                    tag_on_failure => []
-                }
-            }
-        }
+        {
+           "geoip": {
+             "field": "data.src_ip",
+             "target_field": "GeoLocation",
+             "properties": ["city_name", "country_name", "region_name", "location"],
+             "ignore_missing": true,
+             "ignore_failure": true
+           }
+         },
 
-2. Restart logstash on elastic-server with ``systemctl restart logstash``.
 
-3. Trigger some more NIDS events on one of more of your Linux agents with curl ``http://testmyids.com``.
+2. We now need to delete the current pipeline. In Kibana, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
 
-4. Look through the new Suricata events in Kibana, observing they now have either source or destination geoip fields populated.  Private IPs of course cannot be geolocated.
+    .. code-block:: console
+
+        DELETE _ingest/pipeline/filebeat-7.4.2-wazuh-alerts-pipeline
+
+
+3. We restart Filebeat in wazuh-manager:
+
+    .. code-block:: console
+
+        [root@wazuh-manager centos]# systemctl restart filebeat
+
+
+4. Trigger some more NIDS events on one of more of your Linux agents with:
+
+    .. code-block:: console
+
+        curl ``http://testmyids.com``.
+
+5. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IPs of course cannot be geolocated.
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png                               |
