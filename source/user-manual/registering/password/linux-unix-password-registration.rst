@@ -5,12 +5,11 @@
 Linux and Unix hosts
 ====================
 
-
-Open a session in your Linux/Unix agent host as a root user. After that, you can register the Agent using ``agent-auth`` and a password as follows:
+Open a session in your Linux/Unix agent host as a root user. After that, you can register the Wazuh agent using ``agent-auth`` program and a password as follows:
 
 1. Register the agent using the password. It can be stored in a file or provided as a command-line argument:
 
-  a) **Using a stored password**: write the password on ``/Library/Ossec/etc/authd.pass`` file and run the ``agent-auth`` program. It allows agent registration by simply providing the manager’s IP address. If the agent's name is omitted the registration service will use the hostname as the agent's name:
+  a) **Using a stored password**: write the password on ``/var/ossec/etc/authd.pass`` file and run the ``agent-auth`` program. It allows agent registration by simply providing the manager’s IP address. If the agent's name is omitted the registration service will use the hostname as the agent's name:
 
     .. code-block:: console
 
@@ -26,7 +25,7 @@ Open a session in your Linux/Unix agent host as a root user. After that, you can
 
    You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
 
-2. Edit the Wazuh agent configuration file. In ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
+2. Edit the agent configuration file. In ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 
   .. code-block:: xml
 
