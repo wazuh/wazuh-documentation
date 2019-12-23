@@ -28,19 +28,19 @@ Below it shown the compatibility table for the Wazuh manager.
 +-----------------------------------+------------------------+--------+--------+
 |   Amazon Linux 1 or newer         |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
-|   CentOS 6 and 7                  |       ✓                |   ✓    |   ✓    |
+|   CentOS 6 or newer               |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
 |   Debian Wheezy/7 or newer        |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
 |   Fedora (>= 22)                  |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
-|   OpenSUSE 42, 15 and Tumbleweed *|       ✓                |   ✗    |   ✗    |
+|   OpenSUSE 42 or newer            |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
-|   Oracle Linux 6 and 7            |       ✓                |   ✗    |   ✗    |
+|   Oracle Linux 6 or newer         |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
-|   RHEL 6 and 7                    |       ✓                |   ✓    |   ✓    |
+|   RHEL 6 or newer                 |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
-|   SUSE 12 *                       |       ✓                |   ✗    |   ✗    |
+|   SUSE 12* or newer               |       ✓                |   ✗    |   ✗    |
 +-----------------------------------+------------------------+--------+--------+
 |   Ubuntu Precise/12.04 - 16.10    |       ✓                |   ✓    |   ✓    |
 +-----------------------------------+------------------------+--------+--------+
@@ -64,7 +64,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+
 |   Amazon Linux, Amazon Linux 2     |   ✓                     |
 +------------------------------------+-------------------------+
-|   CentOS 5, 6 and 7                |   ✓                     |
+|   CentOS 5 or newer                |   ✓                     |
 +------------------------------------+-------------------------+
 |   Debian Wheezy/7 or newer         |   ✓                     |
 +------------------------------------+-------------------------+
@@ -72,17 +72,17 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+
 |   HP-UX 11.31                      |   ✓                     |
 +------------------------------------+-------------------------+
-|   Mac OS X                         |   ✓                     |
+|   macOS Sierra or newer *          |   ✓                     |
 +------------------------------------+-------------------------+
-|   OpenSUSE 42, 15, Tumbleweed      |   ✓                     |
+|   OpenSUSE 42 or newer             |   ✓                     |
 +------------------------------------+-------------------------+
-|   Oracle Linux 5, 6 and 7          |   ✓                     |
+|   Oracle Linux 5 or newer          |   ✓                     |
 +------------------------------------+-------------------------+
-|   RHEL 5, 6 and 7                  |   ✓                     |
+|   RHEL 5 or newer                  |   ✓                     |
 +------------------------------------+-------------------------+
 |   Solaris 10 and 11 - i386 / sparc |   ✓                     |
 +------------------------------------+-------------------------+
-|   Suse 11 and 12                   |   ✓                     |
+|   Suse 11 or newer                 |   ✓                     |
 +------------------------------------+-------------------------+
 |   Ubuntu Precise/12.04 or newer    |   ✓                     |
 +------------------------------------+-------------------------+
@@ -91,7 +91,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 |   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
 
-
+\* With the release of macOS Catalina the packages are required to go through notarization. Version 3.10.2 was the first version to be notarized, this means that packages for versions older than 3.10.2 are not compatible with macOs Catalina.
 
 
 
@@ -114,7 +114,7 @@ The compatibility between Wazuh agent and Wazuh manager is guaranteed when the W
 Manager and API
 ^^^^^^^^^^^^^^^
 
-The API requires the same ``major.minor`` version than the Wazuh manager in order to be compatible.
+The API requires the same ``major.minor`` version as the Wazuh manager in order to be compatible.
 
 
 API and Kibana app
@@ -130,7 +130,7 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +    **API and Wazuh App version**  + **Elastic Stack version** +
 |                                   |                           |
 +-----------------------------------+---------------------------+
-|              3.10.x               |      6.8.2 to 7.3.2       |
+|              3.10.x               |      6.8.2 to 7.5.1       |
 +-----------------------------------+---------------------------+
 |              3.9.x                |      6.7.1 to 7.3.0       |
 +-----------------------------------+---------------------------+
@@ -170,7 +170,7 @@ The Splunk app for Wazuh requires compatibility between two different products:
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
 +---------------------------------+---------------------------+
-|              3.10.x             |      7.3.0                |
+|              3.10.x             |      7.3.0 to 8.0.0       |
 +---------------------------------+---------------------------+
 |              3.9.x              |      7.2.5 to 7.3.0       |
 +---------------------------------+---------------------------+
@@ -190,4 +190,4 @@ The Splunk app for Wazuh requires compatibility between two different products:
 +---------------------------------+---------------------------+
 
 
-You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Splunk app for Wazuh and Splunk versions.
+You can find more information on the `Wazuh app repository <https://github.com/wazuh/wazuh-splunk#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app for Splunk and Splunk versions.

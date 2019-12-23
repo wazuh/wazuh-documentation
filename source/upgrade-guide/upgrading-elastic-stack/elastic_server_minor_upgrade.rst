@@ -8,197 +8,190 @@ Upgrading Elastic Stack from 7.x to 7.y
 Prepare the Elastic Stack
 -------------------------
 
-1. Stop the services:
-
-  .. code-block:: console
-
-    # systemctl stop filebeat
-    # systemctl stop kibana
-
-2. Add the new repository for Elastic Stack 7.x:
-
-  * For CentOS/RHEL/Fedora:
+#. Stop the services:
 
     .. code-block:: console
 
-      # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-      # cat > /etc/yum.repos.d/elastic.repo << EOF
-      [elasticsearch-7.x]
-      name=Elasticsearch repository for 7.x packages
-      baseurl=https://artifacts.elastic.co/packages/7.x/yum
-      gpgcheck=1
-      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-      enabled=1
-      autorefresh=1
-      type=rpm-md
-      EOF
+      # systemctl stop filebeat
+      # systemctl stop kibana
 
-  * For Debian/Ubuntu:
+#. Add the new repository for Elastic Stack 7.x:
 
-    .. code-block:: console
+    * For CentOS/RHEL/Fedora:
 
-      # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-      # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+      .. code-block:: console
+
+        # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+        # cat > /etc/yum.repos.d/elastic.repo << EOF
+        [elasticsearch-7.x]
+        name=Elasticsearch repository for 7.x packages
+        baseurl=https://artifacts.elastic.co/packages/7.x/yum
+        gpgcheck=1
+        gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        enabled=1
+        autorefresh=1
+        type=rpm-md
+        EOF
+
+    * For Debian/Ubuntu:
+
+      .. code-block:: console
+
+        # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+        # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
 
 
 Upgrade Elasticsearch
 ---------------------
 
-1. Disable shard allocation
+#. Disable shard allocation
 
-  .. code-block:: bash
+    .. code-block:: bash
 
-    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-    {
-      "persistent": {
-        "cluster.routing.allocation.enable": "primaries"
+      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": "primaries"
+        }
       }
-    }
-    '
+      '
 
-2. Stop non-essential indexing and perform a synced flush. (Optional)
+#. Stop non-essential indexing and perform a synced flush. (Optional)
 
-  .. code-block:: bash
+    .. code-block:: bash
 
-    curl -X POST "localhost:9200/_flush/synced"
+      curl -X POST "localhost:9200/_flush/synced"
 
-3. Shut down a single node.
-
-  .. code-block:: console
-
-    # systemctl stop elasticsearch
-
-4. Upgrade the node you shut down.
-
-  * For CentOS/RHEL/Fedora:
+#. Shut down a single node.
 
     .. code-block:: console
 
-      # yum install elasticsearch-7.3.2
+      # systemctl stop elasticsearch
 
-  * For Debian/Ubuntu:
+#. Upgrade the node you shut down.
+
+    * For CentOS/RHEL/Fedora:
+
+      .. code-block:: console
+
+        # yum install elasticsearch-7.5.1
+
+    * For Debian/Ubuntu:
+
+      .. code-block:: console
+
+        # apt-get install elasticsearch=7.5.1
+        # systemctl restart elasticsearch
+
+#. Restart the service.
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=7.3.2
+      # systemctl daemon-reload
       # systemctl restart elasticsearch
 
-5. Restart the service.
+#. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a *_cat/nodes* request:
 
-  .. code-block:: console
+    .. code-block:: bash
 
-    # systemctl daemon-reload
-    # systemctl restart elasticsearch
+      curl -X GET "localhost:9200/_cat/nodes"
 
-6. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a *_cat/nodes* request:
+#. Reenable shard allocation.
 
-  .. code-block:: bash
+    .. code-block:: bash
 
-    curl -X GET "localhost:9200/_cat/nodes"
-
-7. Reenable shard allocation.
-
-  .. code-block:: bash
-
-    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-    {
-      "persistent": {
-        "cluster.routing.allocation.enable": null
+      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      {
+        "persistent": {
+          "cluster.routing.allocation.enable": null
+        }
       }
-    }
-    '
+      '
 
-8. Before upgrading the next node, wait for the cluster to finish shard allocation.
+#. Before upgrading the next node, wait for the cluster to finish shard allocation.
 
-  .. code-block:: bash
+    .. code-block:: bash
 
-    curl -X GET "localhost:9200/_cat/health?v"
+      curl -X GET "localhost:9200/_cat/health?v"
 
-9. Repeat it for every Elasticsearch node.
+#. Repeat it for every Elasticsearch node.
 
 Upgrade Filebeat
 ----------------
 
-1. Upgrade Filebeat.
+#. Upgrade Filebeat.
 
-  * For CentOS/RHEL/Fedora:
+    * For CentOS/RHEL/Fedora:
+
+      .. code-block:: console
+
+        # yum install filebeat-7.5.1
+
+    * For Debian/Ubuntu:
+
+      .. code-block:: console
+
+        # apt-get install filebeat=7.5.1
+
+#. Update the configuration file.
 
     .. code-block:: console
 
-      # yum install filebeat-7.3.2
+      # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.11.0/extensions/filebeat/7.x/filebeat.yml
+      # chmod go+r /etc/filebeat/filebeat.yml
 
-  * For Debian/Ubuntu:
+#. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.3.2
+      # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
-2. Update the configuration file.
+#. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
-  .. code-block:: console
+    .. code-block:: yaml
 
-    # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/filebeat/7.x/filebeat.yml
-    # chmod go+r /etc/filebeat/filebeat.yml
+      output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-3. Download the alerts template for Elasticsearch:
+#. Restart Filebeat.
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
-    # chmod go+r /etc/filebeat/wazuh-template.json
-
-4. Download the Wazuh module for Filebeat:
-
-  .. code-block:: console
-
-    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
-
-5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
-
-  .. code-block:: yaml
-
-    output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-
-6. Restart Filebeat.
-
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl restart filebeat
+      # systemctl daemon-reload
+      # systemctl restart filebeat
 
 Upgrade Kibana
 --------------
 
-1. Remove the Wazuh app.
-
-  .. code-block:: console
-
-    # /usr/share/kibana/bin/kibana-plugin remove wazuh
-
-2. Upgrade Kibana.
-
-  * For CentOS/RHEL/Fedora:
+#. Remove the Wazuh app.
 
     .. code-block:: console
 
-      # yum install kibana-7.3.2
+      # /usr/share/kibana/bin/kibana-plugin remove wazuh
 
-  * For Debian/Ubuntu:
+#. Upgrade Kibana.
+
+    * For CentOS/RHEL/Fedora:
+
+      .. code-block:: console
+
+        # yum install kibana-7.5.1
+
+    * For Debian/Ubuntu:
+
+      .. code-block:: console
+
+        # apt-get install kibana=7.5.1
+
+#. Install the Wazuh app.
 
     .. code-block:: console
 
-      # apt-get install kibana=7.3.2
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.0_7.5.1.zip
 
-3. Install the Wazuh app.
+#. Restart Kibana.
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.3.2.zip
-
-4. Restart Kibana.
-
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl restart kibana
+      # systemctl daemon-reload
+      # systemctl restart kibana

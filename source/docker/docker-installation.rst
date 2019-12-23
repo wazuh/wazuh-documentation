@@ -28,6 +28,16 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
       # curl -sSL https://get.docker.com/ | sh
 
+3. Start the Docker service:
+
+  a) For Systemd::
+
+      $ systemctl start docker
+      
+  b) For SysV Init::
+  
+      $ service docker start
+
 .. note::
   If you would like to use Docker as a non-root user, you should now consider adding your user to the ``docker`` group with something like the following command (remember that you'll have to log out and log back in for this to take effect):
 
