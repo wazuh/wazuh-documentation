@@ -19,7 +19,7 @@ Installation
 
     .. code-block:: console
 
-      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/wazuhapp-splunk-3.10.2_8.0.0.tar.gz
+      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/wazuhapp-splunk-3.11.0_8.0.0.tar.gz
 
 2. Install the Wazuh app for Splunk:
 
