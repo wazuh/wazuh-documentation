@@ -13,17 +13,15 @@ Below shell script allows registering the agent on a Linux/Unix host using Wazuh
 
 1. Download the script:  `Register an agent using a shell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.sh>`_.
 
-|
-
 2. In the script replace ``API_IP`` value to your Wazuh API host IP address:
 
-  .. code-block:: console
+  .. code-block:: bash
 
     API_IP="10.0.0.1"
 
   You might need to amend the following lines according to your configuration:
 
-  .. code-block:: console
+  .. code-block:: bash
 
     API_PORT="55000"
     PROTOCOL="http"
@@ -31,8 +29,6 @@ Below shell script allows registering the agent on a Linux/Unix host using Wazuh
     PASSWORD="bar"
 
   For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
-
-|
 
 3. Execute the script. If the agent's name is omitted the registration service will use the hostname as the agent's name.
 
@@ -57,8 +53,6 @@ Below shell script allows registering the agent on a Linux/Unix host using Wazuh
 
    The script will automatically start the agent.
 
-   |
-
 Register the agent automatically using a Python script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -67,17 +61,15 @@ The script requires an installation of ``Python`` and ``pip package-management s
 
 1. Download the script: `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.py>`_.
 
-   |
-
 2. In the script under the ``Configuration`` section replace the ``base_url`` IP address with your Wazuh API host IP address:
 
-  .. code-block:: console
+  .. code-block:: python
 
     base_url = 'http://10.0.0.1:55000'
 
   You might also need to amend the following lines according to your configuration:
 
-  .. code-block:: console
+  .. code-block:: python
 
     base_url = 'http://10.0.0.1:55000'
     auth = HTTPBasicAuth('foo', 'bar')
@@ -86,13 +78,13 @@ The script requires an installation of ``Python`` and ``pip package-management s
 
   By default, the registration service will use the hostname as the agent's name. You can change this by replacing:
 
-  .. code-block:: console
+  .. code-block:: python
 
     agent_name = "auto"
 
   with:
 
-  .. code-block:: console
+  .. code-block:: python
 
     agent_name = "YOUR-AGENT-NAME"
 
@@ -121,8 +113,6 @@ The script requires an installation of ``Python`` and ``pip package-management s
 
    The script will automatically start the agent.
 
-   |
-
 Register the agent automatically using a PowerShell script:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -130,11 +120,9 @@ Below PowerShell script allows registering the Wazuh agent on a Windows host usi
 
 1. Download the script: `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.9/examples/api-register-agent.ps1>`_.
 
-|
-
 2. In the script under the ``Configuration`` section replace ``<Wazuh-Manager-IP>`` with your Wazuh manager IP address. You might also need to amend other lines according to your configuration:
 
-   .. code-block:: console
+   .. code-block:: PowerShell
 
      $base_url = "http://<Wazuh-Manager-IP>:55000"
      $username = "foo"
@@ -147,20 +135,18 @@ Below PowerShell script allows registering the Wazuh agent on a Windows host usi
 
    By default, the registration service will use the hostname as the agent's name. You can change this by replacing:
 
-   .. code-block:: console
+   .. code-block:: PowerShell
 
      $agent_name = $env:computername
 
    with:
 
-   .. code-block:: console
+   .. code-block:: PowerShell
 
      $agent_name = "YOUR-AGENT-NAME"
 
 
    For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
-
-   |
 
 3. Execute the script as an Administrator with the following command:
 
@@ -178,3 +164,4 @@ Below PowerShell script allows registering the Wazuh agent on a Windows host usi
         IP Address:10.0.0.8
 
    The script will automatically start the agent.
+   
