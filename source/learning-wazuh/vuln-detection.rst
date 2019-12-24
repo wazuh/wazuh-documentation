@@ -436,7 +436,7 @@ The ``sys_`` table are populated by ``syscollector``.
         ...
 
 Wazuh Kibana Plugin
-----------------
+-------------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data,
 usually the most beautiful place to see your vulnerability detection results
