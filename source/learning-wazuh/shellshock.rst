@@ -76,7 +76,7 @@ the attack with the address of the web server (this may be itself):
 
     .. code-block:: console
 
-      [root@linux-agent centos]# ShellshockTarget="localhost"
+      [root@linux-agent centos]# ShellshockTarget="172.30.0.30"
 
 
 Execute the following request to the web server:
@@ -211,11 +211,11 @@ you may confirm this with an iptables command on the attacked server:
 
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
-        DROP       all  --  54.157.87.167        0.0.0.0/0
+        DROP       all  --  172.30.0.30          0.0.0.0/0
 
         Chain FORWARD (policy ACCEPT)
         target     prot opt source               destination
-        DROP       all  --  54.157.87.167        0.0.0.0/0
+        DROP       all  --  172.30.0.30          0.0.0.0/0
 
         Chain OUTPUT (policy ACCEPT)
         target     prot opt source               destination
@@ -229,8 +229,8 @@ this event 5 minutes apart.
 
         # cat /var/ossec/logs/active-responses.log
 
-        Mon Nov  4 19:28:08 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh add - 54.157.87.167 1572895688.94657 31166
-        Mon Nov  4 19:33:09 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh delete - 54.157.87.167 1572895688.94657 31166
+        Mon Nov  4 19:28:08 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh add - 172.30.0.30 1572895688.94657 31166
+        Mon Nov  4 19:33:09 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh delete - 172.30.0.30 1572895688.94657 31166
 
 
 Observe that the attacked server is no longer blocking the offending IP by
@@ -333,7 +333,7 @@ attacker.  It will be in the "Persistent Routes:" section of the output.
             169.254.169.254  255.255.255.255       172.30.0.1      25
             169.254.169.250  255.255.255.255       172.30.0.1      25
             169.254.169.251  255.255.255.255       172.30.0.1      25
-              54.157.87.167  255.255.255.255      172.30.0.40       1
+                172.30.0.30  255.255.255.255      172.30.0.40       1
             ===========================================================================
 
 
