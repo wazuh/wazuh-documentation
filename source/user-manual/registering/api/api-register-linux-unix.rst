@@ -5,7 +5,7 @@
 Linux and UNIX hosts
 ====================
 
-Open a session in your Linux/Unix agent host as root user and follow these steps:
+Open a session in your Linux/Unix agent host as a root user and follow these steps:
 
 1. Add the Wazuh agent to the Wazuh manager using following template:
 
@@ -41,7 +41,7 @@ Open a session in your Linux/Unix agent host as root user and follow these steps
 
       If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
-3. Edit the agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address in the ``<client><server>`` section:
+3. Edit the agent configuration file. In ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 
   .. code-block:: xml
 

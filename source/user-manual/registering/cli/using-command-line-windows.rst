@@ -50,7 +50,6 @@ Once you have added the agent in the manager, open a session in your Windows age
 
 .. note::
 		In this example we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
-|
 
 1. Import the key using ``manage_agents`` program:
 
@@ -66,29 +65,28 @@ Once you have added the agent in the manager, open a session in your Windows age
 	      Confirm adding it?(y/n): y
 	      Added.
 
-
 2. Edit the agent configuration file. In ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the manager IP address or a DNS name:
 
-	.. code-block:: xml
+   .. code-block:: xml
 
-		<client>
-		  <server>
-		    <address>MANAGER_IP</address>
-		    ...
-		  </server>
-		</client>
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        ...
+      </server>
+    </client>
 
 3. Start the agent:
 
-	* Using Powershell with administrator access:
+   a) Using Powershell with administrator access:
 
-		.. code-block:: console
+   .. code-block:: console
 
-			# Restart-Service -Name wazuh
+      # Restart-Service -Name wazuh
 
-	* Using Windows cmd with administrator access:
+   b) Using Windows cmd with administrator access:
 
-		.. code-block:: console
+   .. code-block:: console
 
-			# net stop wazuh
-			# net start wazuh
+      # net stop wazuh
+      # net start wazuh

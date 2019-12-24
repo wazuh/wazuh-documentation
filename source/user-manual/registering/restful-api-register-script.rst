@@ -15,20 +15,20 @@ Below shell script allows registering the agent on a Linux/Unix host using Wazuh
 
 2. In the script replace ``API_IP`` value to your Wazuh API host IP address:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
-    API_IP="10.0.0.1"
+     API_IP="10.0.0.1"
 
-  You might need to amend the following lines according to your configuration:
+   You might need to amend the following lines according to your configuration:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
-    API_PORT="55000"
-    PROTOCOL="http"
-    USER="foo"
-    PASSWORD="bar"
+     API_PORT="55000"
+     PROTOCOL="http"
+     USER="foo"
+     PASSWORD="bar"
 
-  For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+   For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
 
 3. Execute the script. If the agent's name is omitted the registration service will use the hostname as the agent's name.
 
@@ -63,32 +63,32 @@ The script requires an installation of ``Python`` and ``pip package-management s
 
 2. In the script under the ``Configuration`` section replace the ``base_url`` IP address with your Wazuh API host IP address:
 
-  .. code-block:: python
+   .. code-block:: python
 
-    base_url = 'http://10.0.0.1:55000'
+     base_url = 'http://10.0.0.1:55000'
 
-  You might also need to amend the following lines according to your configuration:
+   You might also need to amend the following lines according to your configuration:
 
-  .. code-block:: python
+   .. code-block:: python
 
-    base_url = 'http://10.0.0.1:55000'
-    auth = HTTPBasicAuth('foo', 'bar')
-    agent_name = "auto"
-    verify = False  # Use with self-signed certificates.
+     base_url = 'http://10.0.0.1:55000'
+     auth = HTTPBasicAuth('foo', 'bar')
+     agent_name = "auto"
+     verify = False  # Use with self-signed certificates.
 
-  By default, the registration service will use the hostname as the agent's name. You can change this by replacing:
+   By default, the registration service will use the hostname as the agent's name. You can change this by replacing:
 
-  .. code-block:: python
+   .. code-block:: python
 
-    agent_name = "auto"
+     agent_name = "auto"
 
-  with:
+   with:
 
-  .. code-block:: python
+   .. code-block:: python
 
-    agent_name = "YOUR-AGENT-NAME"
+     agent_name = "YOUR-AGENT-NAME"
 
-  For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+   For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
 
 3. Execute the script by running the following command:
 
@@ -164,4 +164,3 @@ Below PowerShell script allows registering the Wazuh agent on a Windows host usi
         IP Address:10.0.0.8
 
    The script will automatically start the agent.
-   

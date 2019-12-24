@@ -11,20 +11,19 @@ To register the Windows agent, open a session in your Windows agent host and sta
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
 .. note::
-	In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
-|
+  In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
 
 1. On the agent, run the ``agent-auth.exe`` program, using the manager's IP address. If the agent's name is omitted the registration service will use the hostname as the agent's name:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP> -A <AGENT_NAME>
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP> -A <AGENT_NAME>
 
-  You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
+   You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
 
 2. Edit the agent configuration file. In ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the manager IP address:
 
-  .. code-block:: xml
+   .. code-block:: xml
 
     <client>
       <server>
@@ -35,15 +34,15 @@ To register the Windows agent, open a session in your Windows agent host and sta
 
 3. Start the agent.
 
-	a) Using Powershell with administrator access:
+	  a) Using Powershell with administrator access:
 
-		.. code-block:: console
+    .. code-block:: console
 
-			# Start-Service -Name wazuh
+      # Start-Service -Name wazuh
 
-	b) Using Windows cmd with administrator access:
+    b) Using Windows cmd with administrator access:
 
-		.. code-block:: console
+    .. code-block:: console
 
-			# net stop wazuh
-			# net start wazuh
+      # net stop wazuh
+      # net start wazuh

@@ -21,7 +21,7 @@ Follow these steps in the Wazuh manager host:
 
 1. Create a configuration file ``req.conf`` and enter the hostname or the IP address of the Wazuh server where the agents are going to be registered. The configuration file could be as follows:
 
-  .. code-block:: console
+   .. code-block:: console
 
     [req]
     distinguished_name = req_distinguished_name
@@ -36,34 +36,34 @@ Follow these steps in the Wazuh manager host:
     DNS.1 = wazuh
     DNS.2 = wazuh.com
 
-  .. note:: The ``subjectAltName`` extension is optional but necessary to allow the registration of Wazuh agents with a SAN certificate. In this case, the Wazuh server DNS are ``wazuh`` and ``wazuh.com``.
+   .. note:: The ``subjectAltName`` extension is optional but necessary to allow the registration of Wazuh agents with a SAN certificate. In this case, the Wazuh server DNS are ``wazuh`` and ``wazuh.com``.
 
 2. Issue and sign a certificate for the manager:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
     # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
 
-  .. note:: The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This allows the registration of the agents with a SAN certificate.
+   .. note:: The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This allows the registration of the agents with a SAN certificate.
 
 3. Copy the newly created certificate and its key to the ``/var/ossec/etc`` folder:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
 4. Restart the Wazuh manager:
 
-  a) For Systemd:
+   a) For Systemd:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # systemctl restart wazuh-manager
 
-  b) For SysV Init:
+   b) For SysV Init:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # service wazuh-manager restart
 

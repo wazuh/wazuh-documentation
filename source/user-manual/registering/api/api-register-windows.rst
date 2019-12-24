@@ -11,13 +11,13 @@ To register the Windows agent, you need to start a Powershell as Administrator. 
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
 .. note::
-		In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
-|
+		In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``
+
 1. Add the agent to the manager.
 
   1.1 If your Wazuh API is running over HTTPS and it is using a self-signed certificate, you need to execute this function in your Powershell:
 
-    .. code-block:: powershell
+   .. code-block:: powershell
 
       > function Ignore-SelfSignedCerts {
           add-type @"
@@ -38,22 +38,22 @@ To register the Windows agent, you need to start a Powershell as Administrator. 
 
       > Ignore-SelfSignedCerts
 
-  Use ``Invoke-WebRequest`` command to execute the Wazuh API request to register the agent.
+   Use ``Invoke-WebRequest`` command to execute the Wazuh API request to register the agent.
 
-  .. code-block:: console
+   .. code-block:: console
 
     # $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f api_username, api_password)))
     # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://192.168.1.2:55000/agents -Body @{name=windows_agent} | ConvertFrom-Json
 
-  Copy the agent's ID returned by the above command.
+   Copy the agent's ID returned by the above command.
 
 2. Extract the agent's key using the ID found in the output of the previous command. In this example request, we use agent's ID ``001``:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://192.168.1.2:55000/agents/001/key | ConvertFrom-Json
 
-  .. code-block:: json
+   .. code-block:: json
 
     {
       "error": 0,
@@ -65,7 +65,7 @@ To register the Windows agent, you need to start a Powershell as Administrator. 
 
 3. Import the key using ``manage_agents`` program:
 
-  .. code-block:: console
+   .. code-block:: console
 
       # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
 
@@ -79,7 +79,7 @@ To register the Windows agent, you need to start a Powershell as Administrator. 
 
 4. Edit the agent configuration file. In ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the manager IP address:
 
-  .. code-block:: xml
+   .. code-block:: xml
 
     <client>
       <server>
@@ -90,15 +90,15 @@ To register the Windows agent, you need to start a Powershell as Administrator. 
 
 5. Start the agent.
 
-	a) Using Powershell with Administrator access:
+   a) Using Powershell with Administrator access:
 
-		.. code-block:: console
+   .. code-block:: console
 
-			# Restart-Service -Name wazuh
+      # Restart-Service -Name wazuh
 
-	b) Using cmd with Administrator access:
+   b) Using cmd with Administrator access:
 
-		.. code-block:: console
+   .. code-block:: console
 
-			# net stop wazuh
-			# net start wazuh
+      # net stop wazuh
+      # net start wazuh

@@ -25,21 +25,20 @@ In this example, we will create a certificate for agents without specifying thei
 
 1. Issue and sign a certificate for the agent by executing the following commands in the location of CA files. Remember that we will not enter the ``common name`` field:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -batch
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-
 2. Copy the CA (``.pem`` file) to the ``/var/ossec/etc`` folder:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
 
 3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file.
 
-  .. code-block:: xml
+   .. code-block:: xml
 
     <auth>
       ...
@@ -49,17 +48,17 @@ In this example, we will create a certificate for agents without specifying thei
 
 4. Restart the manager:
 
-  a) For Systemd:
+   a) For Systemd:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      # systemctl restart wazuh-manager
+    # systemctl restart wazuh-manager
 
-  b) For SysV Init:
+   b) For SysV Init:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      # service wazuh-manager restart
+    # service wazuh-manager restart
 
 .. _agent-verification-with-host-validation:
 
@@ -70,20 +69,20 @@ This is an alternative method to the previous one. In this case, we will bind th
 
 1. Issue and sign a certificate for the agent by executing the following commands in the location of ``CA`` files. In the ``common name`` field replace ``<AGENT_IP>`` with the agent's hostname or IP address.
 
-  .. code-block:: console
+   .. code-block:: console
 
     # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<AGENT_IP>'
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
 2. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
 
 3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file. Set the field ``<ssl_verify_host>`` to ``yes``:
 
-  .. code-block:: xml
+   .. code-block:: xml
 
     <auth>
       ...
@@ -94,18 +93,17 @@ This is an alternative method to the previous one. In this case, we will bind th
 
 4. Restart the manager:
 
-  a) For Systemd:
+   a) For Systemd:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # systemctl restart wazuh-manager
 
-  b) For SysV Init:
+   b) For SysV Init:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # service wazuh-manager restart
-
 
 Agent
 ^^^^^
