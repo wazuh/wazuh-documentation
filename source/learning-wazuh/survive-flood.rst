@@ -249,13 +249,13 @@ a. For Systemd:
 
   .. code-block:: console
 
-    # systemctl restart wazuh-agent
+    # systemctl restart wazuh-manager
 
 b. For SysV Init:
 
   .. code-block:: console
 
-    # service wazuh-agent restart
+    # service wazuh-manager restart
 
 
 Congratulations on completing this lab. You survived the log flood!
