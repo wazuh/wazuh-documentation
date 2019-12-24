@@ -25,15 +25,14 @@ See the resulting alerts in Kibana
 
 1. On Kibana, go to **[Security events]**, search for "*george*" and then click on **[Discover]** on the top right corner.
 
-2. On ``Discover``, you can personalize how to visualize the alerts. Using the image below as reference, click on the button next to ``Available fields``, introduce the field you are looking for in ``Field name`` and click on **[add]**. We will be using the 4 fields stated below.
+2. On ``Discover``, you can personalize how to visualize the alerts. If you look at the menu on the left, click on the button next to ``Available fields``, introduce the field you are looking for in ``Field name`` and click on **[add]**. We will be using the 4 fields stated below.
 
 
-+--------------------------------------------------------------------+---------------------------------------------------------------+
-|        .. image:: ../images/learning-wazuh/labs/select-field.png   |    - rule.description                                         |
-|             :align: center                                         |    - rule.id                                                  |
-|             :width: 500px                                          |    - data.win.eventdata.targetUserName                        |
-|             :height: 500px                                         |    - data.win.eventdata.ipAddress                             |
-+--------------------------------------------------------------------+---------------------------------------------------------------+
+  - rule.description
+  - rule.id
+  - data.win.eventdata.targetUserName
+  - data.win.eventdata.ipAddress
+
 
 
 
