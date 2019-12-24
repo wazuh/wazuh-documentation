@@ -9,17 +9,17 @@ Open a session in your Linux/Unix agent host as a root user and follow these ste
 
 1. Add the Wazuh agent to the Wazuh manager using following template:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # curl -u <API-USER>:<API-PASSWORD> -k -X POST -d '{"name":"<AGENT-NAME>","ip":"<AGENT_IP>"}' -H 'Content-Type:application/json' "<https/http>://<MANAGER_IP>:55000/agents?pretty"
 
-  An example API request looks as follows:
+   An example API request looks as follows:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # curl -u foo:bar -k -X POST -d '{"name":"ubuntu-ag","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://192.168.1.2:55000/agents?pretty"
 
-  .. code-block:: json
+   .. code-block:: json
 
     {
       "error": 0,
@@ -29,21 +29,21 @@ Open a session in your Linux/Unix agent host as a root user and follow these ste
       }
     }
 
-  For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+   For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
 
 2. Import the key to the agent:
 
-  .. code-block:: console
+   .. code-block:: console
 
       # /var/ossec/bin/manage_agents -i MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=
 
-  .. warning::
+   .. warning::
 
       If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
 3. Edit the agent configuration file. In ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, repalce the ``MANAGER_IP`` with the Wazuh manager IP address:
 
-  .. code-block:: xml
+   .. code-block:: xml
 
     <client>
       <server>
@@ -54,14 +54,14 @@ Open a session in your Linux/Unix agent host as a root user and follow these ste
 
 4. Start the agent:
 
-  a) For Systemd:
+   a) For Systemd:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # systemctl start wazuh-agent
 
-  b) For SysV Init:
+   b) For SysV Init:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # service wazuh-agent start

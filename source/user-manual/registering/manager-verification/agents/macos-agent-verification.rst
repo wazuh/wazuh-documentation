@@ -34,4 +34,4 @@ Open a session in your MacOS X agent host as a root user, you will use the certi
 
    .. code-block:: console
 
-   # /Library/Ossec/bin/ossec-control start
+      # /Library/Ossec/bin/ossec-control start
