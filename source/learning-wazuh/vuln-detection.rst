@@ -7,22 +7,22 @@ Track down vulnerable applications
 
 Of the many software packages installed on your environment's computers,
 which ones have known vulnerabilities that might impact your security posture?
-Wazuh helps you answer this question with the ``syscollector`` and 
+Wazuh helps you answer this question with the ``syscollector`` and
 ``vulnerability-detector`` modules.
 
-On each agent, ``syscollector`` can scan the system for the presence and 
-version of all software packages.  This information is submitted to the Wazuh 
+On each agent, ``syscollector`` can scan the system for the presence and
+version of all software packages.  This information is submitted to the Wazuh
 manager where it is stored in an agent-specific database for later assessment.
-On the Wazuh manager, ``vulnerability-detector`` maintains a fresh copy of the 
+On the Wazuh manager, ``vulnerability-detector`` maintains a fresh copy of the
 desired CVE sources of vulnerability data, and periodically compares agent
 packages with the relevant CVE database and generates alerts on matches.
 
-In this lab, we will see how ``syscollector`` is configured by default to run on 
+In this lab, we will see how ``syscollector`` is configured by default to run on
 the Wazuh Manager and on the agents. We will also configure ``vulnerability-detector``
 on the Wazuh Manager to periodically scan the collected inventory data for known
-vulnerable packages. 
-We will observe relevant log messages and vulnerability alerts in Kibana including 
-a dashboard dedicated to this.  We will also interact with the Wazuh API to more 
+vulnerable packages.
+We will observe relevant log messages and vulnerability alerts in Kibana including
+a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
 
@@ -52,6 +52,11 @@ network interfaces, installed packages, open ports and running processes every h
 
 Configure ``vulnerability-detector`` on  the Wazuh Manager
 ----------------------------------------------------------
+
+    .. note::
+
+      This configuration will only work for Wazuh v3.11 or above.
+
 
 In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to the **vulnerability-detector** wodle (Wazuh module) and enable both the service and feeds you may want to use.
 
@@ -89,10 +94,10 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
       </provider>
     </vulnerability-detector>
 
-In the example above we have enabled the feeds for RedHat, which will allow us 
-to monitor CentOS systems, and NVD, the National Vulnerability Database, which 
-will allow us to monitor Windows systems. More information on this module and 
-how to configure it can be found in the 
+In the example above we have enabled the feeds for RedHat, which will allow us
+to monitor CentOS systems, and NVD, the National Vulnerability Database, which
+will allow us to monitor Windows systems. More information on this module and
+how to configure it can be found in the
 :ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
 
 Restart the Wazuh manager.
@@ -158,26 +163,26 @@ Expand one of the records to see all the information available:
     +---------------------------------------------------------------------------+
 
 Note all the available fields and remember that the different components of Wazuh
-may be configured to act differently depending on the fields of each alert, as 
+may be configured to act differently depending on the fields of each alert, as
 well as the ability to create visualizations and filtering search results in Kibana.
 
 .. note::
 
-   When the field ``data.vulnerability.state`` has the value "Fixed", this 
-   indicates that the vulnerability has been corrected in future versions of 
+   When the field ``data.vulnerability.state`` has the value "Fixed", this
+   indicates that the vulnerability has been corrected in future versions of
    the software. However the vulnerability is still present in the version
    installed in your system.
 
 Look deeper with the Wazuh API:
 -------------------------------
 
-Up to now we have only seen the Wazuh API enable the Wazuh Kibana App to 
-interface directly with the Wazuh manager.  However, you can also access the 
+Up to now we have only seen the Wazuh API enable the Wazuh Kibana plugin to
+interface directly with the Wazuh manager.  However, you can also access the
 API directly from your own scripts or from the command line with curl.  This is
-especially helpful here to obtain environment-wide package information. 
+especially helpful here to obtain environment-wide package information.
 The actual inventory data is kept in agent-specific databases on the Wazuh manager.
 To see that, as well as other information collected by ``syscollector``, you can
-query the Wazuh API.  Not only are software packages inventoried, but basic 
+query the Wazuh API.  Not only are software packages inventoried, but basic
 hardware and operating system data is also tracked.
 
 1. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
@@ -185,75 +190,87 @@ hardware and operating system data is also tracked.
 
   .. code-block:: console
 
-    Wazuh agent_control. List of available agents:
-      ID: 000, Name: wazuh-manager (server), IP: localhost, Active/Local
-      ID: 001, Name: RHEL7, IP: any, Active
-      ID: 002, Name: Windows2012, IP: any, Active
-      ID: 003, Name: Debian, IP: any, Active
+      [root@wazuh-manager centos]# agent_control -l
+
+      Wazuh agent_control. List of available agents:
+       ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
+       ID: 001, Name: elastic-server, IP: 172.30.0.20, Active
+       ID: 002, Name: linux-agent, IP: 172.30.0.30, Active
+       ID: 003, Name: windows-agent, IP: 172.30.0.40, Active
+
+
 
 2. From the Wazuh Manager, query the Wazuh API for scanned hardware data about
-   agent 002.
+   agent 003.
 
   .. code-block:: console
 
-    # curl -u foo:bar -k -X GET "http://localhost:55000/syscollector/002/hardware?pretty"
-
-  Where ``foo:bar`` are the default credentials for the API.
-  The results should look like this:
-
-  .. code-block:: json
-
-    {
-       "error": 0,
-       "data": {
-          "cpu": {
-             "cores": 1,
-             "mhz": 2208,
-             "name": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz"
-          },
-          "ram": {
-             "free": 1280472,
-             "total": 2096692,
-             "usage": 38
-          },
-          "scan": {
-             "id": 1678215913,
-             "time": "2019/11/15 14:04:48"
-          },
-          "board_serial": "0"
-       }
-    }
+    # curl -u wazuhapiuser:wazuhlab -k -X GET "http://localhost:55000/syscollector/003/hardware?pretty"
 
 
-3. Next, query the Wazuh API for scanned OS data about agent 002.
+
+Where ``wazuhapiuser:wazuhlab`` are the credentials for the API.
+The results should look like this:
 
   .. code-block:: console
 
-    # curl -u foo:bar -k -X GET "http://localhost:55000/syscollector/002/os?pretty"
+    [root@linux-agent centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://172.30.0.10:55000/syscollector/003/hardware?pretty"
+      {
+         "error": 0,
+         "data": {
+            "cpu": {
+               "cores": 1,
+               "mhz": 2400,
+               "name": "Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz"
+            },
+            "ram": {
+               "free": 1121708,
+               "total": 2096752,
+               "usage": 46
+            },
+            "scan": {
+               "id": 1265621549,
+               "time": "2019/12/24 13:43:33"
+            },
+            "board_serial": "unknown"
+         }
+      }
 
-  The results should look like this:
 
-  .. code-block:: json
 
-    {
-       "error": 0,
-       "data": {
-          "os": {
-             "build": "9600",
-             "major": "6",
-             "minor": "3",
-             "name": "Microsoft Windows Server 2012 R2 Standard",
-             "version": "6.3.9600"
-          },
-          "scan": {
-             "id": 1997683397,
-             "time": "2019/11/15 14:04:48"
-          },
-          "version": "6.2",
-          "hostname": "WINDOWS",
-          "architecture": "x86_64"
-       }
-    }
+3. Next, query the Wazuh API for scanned OS data about agent 003. You can also use localhost instead of the IP if you do it in wazuh-manager
+
+  .. code-block:: console
+
+    curl -u wazuhapiuser:wazuhlab -k -XGET "https://localhost:55000/syscollector/003/os?pretty"
+
+
+The results should look like this:
+
+
+  .. code-block:: console
+
+      [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://localhost:55000/syscollector/003/os?pretty"
+      {
+         "error": 0,
+         "data": {
+            "os": {
+               "build": "14393",
+               "major": "10",
+               "minor": "0",
+               "name": "Microsoft Windows Server 2016 Datacenter",
+               "version": "10.0.14393"
+            },
+            "scan": {
+               "id": 1230696232,
+               "time": "2019/12/24 14:43:33"
+            },
+            "architecture": "x86_64",
+            "version": "6.2",
+            "hostname": "EC2AMAZ-KMLTB1V"
+         }
+      }
+
 
 
 4. You can also use the experimental capabilities of the API to list information
@@ -262,78 +279,98 @@ hardware and operating system data is also tracked.
 
   .. code-block:: console
 
-     sed -i 's/config.experimental_features  = false/config.experimental_features  = true/g' /var/ossec/api/configuration/config.js
+      [root@wazuh-manager centos]# sed -i 's/config.experimental_features  = false/config.experimental_features  = true/g' /var/ossec/api/configuration/config.js
+
 
 5. Restart the Wazuh API service:
 
   a. For Systemd:
-  
+
     .. code-block:: console
-  
+
       # systemctl restart wazuh-api
-  
+
   b. For SysV Init:
-  
+
     .. code-block:: console
-  
+
       # service wazuh-api restart
 
-  
+
 6. Let's list the versions of curl on all of our Linux systems:
 
   .. code-block:: console
 
-    # curl -u foo:bar -k -X GET "http://localhost:55000/experimental/syscollector/packages?name=curl&pretty"
+    # curl -u wazuhapiuser:wazuhlab -k -X GET  "http://localhost:55000/experimental/syscollector/packages?name=curl&pretty"
 
-  The results should look like this: 
 
-  .. code-block:: json
+The results should look like this:
 
-      {
-         "error": 0,
-         "data": {
-            "items": [
-               {
-                  "scan": {
-                     "id": 1079269475,
-                     "time": "2019/11/18 16:55:30"
-                  },
-                  "size": 527,
-                  "architecture": "x86_64",
-                  "format": "rpm",
-                  "vendor": "CentOS",
-                  "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                  "install_time": "2019/06/01 17:14:25",
-                  "version": "7.29.0-51.el7",
-                  "name": "curl",
-                  "section": "Applications/Internet",
-                  "agent_id": "000"
-               },
-               {
-                  "scan": {
-                     "id": 462044543,
-                     "time": "2019/11/18 16:56:18"
-                  },
-                  "size": 527,
-                  "architecture": "x86_64",
-                  "format": "rpm",
-                  "vendor": "CentOS",
-                  "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
-                  "install_time": "2019/06/01 17:14:25",
-                  "version": "7.29.0-51.el7",
-                  "name": "curl",
-                  "section": "Applications/Internet",
-                  "agent_id": "001"
-               }
-            ],
-            "totalItems": 2
-         }
-      }
+  .. code-block:: console
+
+        [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -X GET "https://172.30.0.10:55000/experimental/syscollector/packages?name=curl&pretty"
+        {
+           "error": 0,
+           "data": {
+              "items": [
+                 {
+                    "scan": {
+                       "id": 4551322,
+                       "time": "2019/12/24 14:37:55"
+                    },
+                    "vendor": "CentOS",
+                    "size": 527,
+                    "section": "Applications/Internet",
+                    "install_time": "2019/01/28 20:53:16",
+                    "format": "rpm",
+                    "version": "7.29.0-51.el7",
+                    "name": "curl",
+                    "architecture": "x86_64",
+                    "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                    "agent_id": "000"
+                 },
+                 {
+                    "scan": {
+                       "id": 833988275,
+                       "time": "2019/12/24 14:43:40"
+                    },
+                    "vendor": "CentOS",
+                    "size": 527,
+                    "section": "Applications/Internet",
+                    "install_time": "2019/01/28 20:53:16",
+                    "format": "rpm",
+                    "version": "7.29.0-51.el7",
+                    "name": "curl",
+                    "architecture": "x86_64",
+                    "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                    "agent_id": "001"
+                 },
+                 {
+                    "scan": {
+                       "id": 1281439567,
+                       "time": "2019/12/24 14:43:41"
+                    },
+                    "vendor": "CentOS",
+                    "size": 527,
+                    "section": "Applications/Internet",
+                    "install_time": "2019/12/18 16:08:20",
+                    "format": "rpm",
+                    "version": "7.29.0-54.el7_7.1",
+                    "name": "curl",
+                    "architecture": "x86_64",
+                    "description": "A utility for getting files from remote servers (FTP, HTTP, and others)",
+                    "agent_id": "002"
+                 }
+              ],
+              "totalItems": 3
+           }
+        }
+
 
 
 .. note::
-  Take time to read the online documentation about the Wazuh API.  It is a 
-  powerful utility that puts all sorts of data, configuration details, and 
+  Take time to read the online documentation about the `Wazuh API <../user-manual/api/index.html>`_. It is a
+  powerful utility that puts all sorts of data, configuration details, and
   state information at your fingertips once you know how to ask for it.
 
 
@@ -341,71 +378,69 @@ hardware and operating system data is also tracked.
 A quick peek at the actual agent databases
 ------------------------------------------
 
-Agent-specific databases on the Wazuh manager store, among other things, 
+Agent-specific databases on the Wazuh manager store, among other things,
 the ``syscollector`` scan results for each agent.
 
 1. On the Wazuh Manager, list the tables in an agent's SQLite database:
 
   .. code-block:: console
 
-    # sqlite3 /var/ossec/queue/db/001.db .tables
+      [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db .tables
 
-  You should see:
+      ciscat_results        sca_policy            sys_netproto
+      fim_entry             sca_scan_info         sys_osinfo
+      metadata              scan_info             sys_ports
+      pm_event              sys_hotfixes          sys_processes
+      sca_check             sys_hwinfo            sys_programs
+      sca_check_compliance  sys_netaddr           vuln_metadata
+      sca_check_rules       sys_netiface
 
-  .. code-block:: console
 
-    ciscat_results        sca_policy            sys_netproto        
-    fim_entry             sca_scan_info         sys_osinfo          
-    metadata              scan_info             sys_ports           
-    pm_event              sys_hotfixes          sys_processes       
-    sca_check             sys_hwinfo            sys_programs        
-    sca_check_compliance  sys_netaddr           vuln_metadata       
-    sca_check_rules       sys_netiface  
 
-  The ``sys_`` table are populated by ``syscollector``.
+The ``sys_`` table are populated by ``syscollector``.
 
 2. Query the OS information table
 
   .. code-block:: console
 
-    #  sqlite3 /var/ossec/queue/db/001.db 'select * from sys_osinfo;' -header
+      [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db 'select * from sys_osinfo;' -header
 
-  You should see:
+      scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_build|os_platform|sysname|release|version|os_release
+      1059274052|2019/12/24 14:43:41|linux-agent|x86_64|CentOS Linux|7.7||7|7||centos|Linux|3.10.0-1062.9.1.el7.x86_64|#1 SMP Fri Dec 6 15:49:49 UTC 2019|
 
-  .. code-block:: console
 
-    scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_build|os_platform|sysname|release|version|os_release
-    1753634782|2019/11/18 16:56:18|agent|x86_64|CentOS Linux|7.7||7|7||centos|Linux|3.10.0-957.12.2.el7.x86_64|#1 SMP Tue May 14 21:24:32 UTC 2019|
 
- 
 3. Do a quick dump of the software packages.
 
   .. code-block:: console
 
-    # sqlite3 /var/ossec/queue/db/001.db "select name,version,description from sys_programs;" -header
+      [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db "select name,version,description from sys_programs;" -header
 
-  You should see something like:
+      name|version|description
+      kbd-legacy|1.15.5-15.el7|Legacy data for kbd package
+      fontconfig|2.13.0-4.3.el7|Font configuration and customization library
+      centos-indexhtml|7-9.el7.centos|Browser default start page for CentOS
+      pth|2.0.7-23.el7|The GNU Portable Threads library
+      ncurses|5.9-14.20130511.el7_4|Ncurses support utilities
+      libX11|1.6.7-2.el7|Core X11 protocol client library
+      gpgme|1.3.2-5.el7|GnuPG Made Easy - high level crypto API
+      filesystem|3.2-25.el7|The basic directory layout for a Linux system
+      nginx-filesystem|1:1.16.1-1.el7|The basic directory layout for the Nginx server
+      libestr|0.1.9-2.el7|String handling essentials library
+      nginx-mod-http-xslt-filter|1:1.16.1-1.el7|Nginx XSLT module
+      kbd-misc|1.15.5-15.el7|Data for kbd package
+      tcpdump|14:4.9.2-4.el7_7.1|A network traffic monitoring tool
+      libsepol|2.5-10.el7|SELinux binary policy manipulation library
+      epel-release|7-12|Extra Packages for Enterprise Linux repository configuration
 
-  .. code-block:: console
+        ...
 
-    name|version|description
-    quota|1:4.01-17.el7|System administration tools for monitoring users' disk usage
-    grub2-common|1:2.02-0.76.el7.centos.1|grub2 common layout
-    pciutils|3.5.1-3.el7|PCI bus related utilities
-    grub2-pc-modules|1:2.02-0.76.el7.centos.1|Modules used to build custom grub images
-    libdrm|2.4.91-3.el7|Direct Rendering Manager runtime library
-    bind-license|32:9.9.4-73.el7_6|License of the BIND DNS suite
-    NetworkManager|1:1.12.0-10.el7_6|Network connection manager and user applications
-    tzdata|2019a-1.el7|Timezone data
-    gssproxy|0.7.0-21.el7|GSSAPI Proxy
-    ...
-
-Wazuh Kibana App
+Wazuh Kibana Plugin
 ----------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data,
-usually the most beautiful place to see your vulnerability detection results 
-is in the Wazuh Kibana App itself.  Both in the **Overview** section as well as 
+usually the most beautiful place to see your vulnerability detection results
+is in the Wazuh Kibana plugin itself.  Both in the **Overview** section as well as
 when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 
