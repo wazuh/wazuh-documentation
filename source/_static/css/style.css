@@ -3,6 +3,36 @@ The main theme stylesheet.
 Author: Wazuh Inc.
 -------------------------------------------------------------- */
 
+@media print {
+  header#header {
+    display: none;
+  }
+  
+  #navbar {
+    display: none;
+  }
+  
+  .edit-repo-wrapper {
+    display: none;
+  }
+  
+  .navigation-buttons {
+    display: none;
+  }
+  
+  footer {
+    display: none;
+  }
+  
+  .highlight pre {
+    border: 0;
+  }
+  
+  a {
+    text-decoration: none !important;
+  }
+}
+
 * {
   -webkit-font-smoothing: antialiased; /* Correct font weight error in light fonts produced in some browsers */
   word-wrap: break-word;
