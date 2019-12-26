@@ -2,10 +2,10 @@
 
 .. _restful-api-register:
 
-Registering agents using the Wazuh API manually
-===============================================
+Registering agents using the Wazuh API
+======================================
 
-Wazuh API allows registering the Wazuh agent by running a single request from any host. This request returns agent's registration key, which must be manually added to the agent using ``manage_agents`` program. 
+Wazuh API allows registering the Wazuh agent by running a single request from any host. This request returns agent's registration key, which must be manually added to the agent using ``manage_agents`` program.
 
 Registering the Agents
 ^^^^^^^^^^^^^^^^^^^^^^

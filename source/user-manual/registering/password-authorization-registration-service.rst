@@ -2,8 +2,8 @@
 
 .. _password-authorization-registration-service:
 
-Registering agents with password authorization
-==============================================
+Registering agents using registration service with password authorization
+=========================================================================
 
 This registration method is similar to :ref:`Simple registration service <simple-registration-service>` except that it allows additional protection of the manager from unauthorized registrations by using a password.
 

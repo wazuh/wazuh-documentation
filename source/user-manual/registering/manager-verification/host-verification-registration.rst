@@ -2,8 +2,8 @@
 
 .. _host-verification-registration:
 
-Registering agents with host verification
-=========================================
+Registering agents using registration service with host verification
+====================================================================
 
 Using verification with an SSL key certificate provides confidence that the connection between the right agent and the right manager is established.
 

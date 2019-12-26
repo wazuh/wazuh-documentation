@@ -2,8 +2,8 @@
 
 .. _restful-api-register-script:
 
-Registering agents using scripts
-================================
+Registering agents using the Wazuh API with scripts
+===================================================
 
 We have prepared a few different scripts to allow automatically register the Wazuh agent using the Wazuh API.
 
