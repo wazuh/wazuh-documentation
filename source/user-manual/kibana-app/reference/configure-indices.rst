@@ -18,7 +18,7 @@ Considerations
 Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh app. We always recommend updating the installation to the latest version in order get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh>`.
 
 .. note::
-  This tutorial **won`t work** on Wazuh 2.x and Elastic Stack 5.x.
+  This tutorial **won't work** on Wazuh 2.x and Elastic Stack 5.x.
 
 Also, keep in mind that this process **will be restored** after upgrading the Wazuh app, or any of the Elastic Stack components involved during the process. The reason for this depends on each component:
 
