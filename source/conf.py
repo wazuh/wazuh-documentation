@@ -1,5 +1,6 @@
 from docutils.parsers.rst.directives.admonitions import BaseAdmonition
 from sphinx.util import compat
+from PyPDF2 import PdfFileMerger
 compat.make_admonition = BaseAdmonition
 
 # -*- coding: utf-8 -*-
@@ -17,6 +18,9 @@ import os
 import re
 import shlex
 import datetime
+
+from os import listdir
+from os.path import isfile, isdir, join
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -420,6 +424,7 @@ exclude_patterns = [
 ]
 
 # -- Additional configuration ------------------------------------------------
+
 html_context = {
     "display_github": True,
     "github_user": "wazuh",
@@ -427,3 +432,83 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version
 }
+
+# -- Merge all the PDF files --------------------------------------------------
+
+def listdir_recurd(files_list, root, folder, checked_folders):
+
+    if (folder != root):
+        checked_folders.append(folder)
+    for f in listdir(folder):
+        d = join(folder, f)
+        if isdir(d) and d not in checked_folders:
+            listdir_recurd(files_list, root, d, checked_folders)
+        else:
+            if isfile(d):  # si no hago esto, inserta en la lista el nombre de las carpetas ignoradas
+                file_name = join(folder, f)
+                if ".pdf" in file_name:
+                    files_list.append(file_name)
+    return files_list
+
+def file_get_contents(urls, path, filename):
+    pdf = filename+'.pdf'
+    pdf_path = join(actual_path, pdf)
+    if os.path.exists(pdf_path):
+        if pdf not in pdfs:
+            pdfs.append(pdf)
+    filename_rst = filename
+    if '.rst' not in filename:
+        filename_rst += '.rst'
+    if os.path.exists(filename_rst):
+        fp = open(filename_rst, "r", encoding="utf8")
+        content = fp.read()
+        fp.close()
+        rst = content.split('.. toctree::')
+        if len(rst) > 1:
+            rst = rst[1].replace(' ', '')
+            rst = rst.split('\n')
+            for string in rst:
+                if string != '' and string[0] != ':' and string[0] != '.' and string[0] != '<':
+                    if path == '':
+                        url = string
+                    else:
+                        url = path+'/'+string
+                    if url not in urls:
+                        urls.append(url)
+                        toctree.append(url)
+                        pdf = join(actual_path, url+'.pdf')
+                        if os.path.exists(pdf):
+                            pdfs.append(pdf)
+    return urls
+
+actual_path = os.path.dirname(os.path.realpath(__file__))
+urls = ['index']
+news_url = []
+toctree = urls[:]
+pdfs = ['cover.pdf']
+
+while len(toctree) > 0:
+    for tocbranch in toctree:
+        if type(tocbranch) is not list:
+            path = tocbranch.rpartition('/')[0]
+            news_url = file_get_contents(urls, path, os.path.join(actual_path, tocbranch))
+            if news_url is not None:
+                urls = news_url
+                news_url = []
+        toctree.remove(tocbranch)
+merger = PdfFileMerger()
+for pdf in pdfs:
+    merger.append(pdf)
+
+merger.write('_static/pdf/wazuh-documentation-temp.pdf')
+pdf_temp_size = os.path.getsize(join(actual_path, '_static/pdf/wazuh-documentation-temp.pdf'))
+if os.path.isfile(join(actual_path, '_static/pdf/wazuh-documentation.pdf')):
+    pdf_size = os.path.getsize(join(actual_path, '_static/pdf/wazuh-documentation.pdf'))
+else:
+    pdf_size = 0
+if pdf_temp_size != pdf_size:
+    os.remove(join(actual_path, '_static/pdf/wazuh-documentation.pdf'))
+    os.rename(r'_static/pdf/wazuh-documentation-temp.pdf', r'_static/pdf/wazuh-documentation.pdf')
+else:
+    os.remove(join(actual_path, '_static/pdf/wazuh-documentation-temp.pdf'))
+merger.close()
