@@ -82,7 +82,7 @@ Internet Gateway
 Your VPC needs an Internet Gateway so it can communicate with the Internet.
 Click on the `Internet Gateways
 <https://console.aws.amazon.com/vpc/home#igws:>`_ in your `VPC Dashboard
-<https://console.aws.amazon.com/vpc/home?#vpcs:>`_ and click
+<https://console.aws.amazon.com/vpc/home?#vpcs:>`_ and click on
 **[Create Internet Gateway]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway-0.png
@@ -92,21 +92,21 @@ Click on the `Internet Gateways
 
 
 
-Name it as below and click **[Create]**.
+Name it as below and click on **[Create]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway.png
     :title: Create gateway
     :align: center
     :width: 75%
 
-Next click **[Close]** then select the gate way and from the **[Action]** menu select  **[Attach to VPC]**,
+Next, click on **[Close]** then select the gate way and from the **[Action]** menu, select  **[Attach to VPC]**,
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/create-gateway-2.png
     :title: Create gateway
     :align: center
     :width: 75%
 
-Select your "Wazuh Lab" VPC and click **[Attach]**, at which point your new gateway
+Select your "Wazuh Lab" VPC and click on **[Attach]**, at which point your new gateway
 should appear with a green "attached" state.
 
 
@@ -163,7 +163,7 @@ below and click on **[Create]**.
 
 Next select only the "Wazuh Windows" security group, click on the **[Inbound
 Rules]** tab and on **[Edit rules]**.
-Set up two rules as shown below and click **[Save rules]**.
+Set up two rules as shown below and click on **[Save rules]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-win-2.png
     :title: Sec Group Win
@@ -174,7 +174,7 @@ Linux Security Group
 ::::::::::::::::::::
 
 Click again on **[Create Security Group]**.  Create a security group like below,
-then click **[Create]** and then **[Close]**
+then click on **[Create]** and on **[Close]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-lin.png
     :title: Sec Group Lin
@@ -182,8 +182,8 @@ then click **[Create]** and then **[Close]**
     :width: 75%
 
 Next select only the "Wazuh Linux" security group, click on the **[Inbound Rules]**
-tab, and click **[Edit rules]**. Set up two rules like below, click **[Save rules]**
-and the **[Close]**.
+tab, and click on **[Edit rules]**. Set up two rules like below, click on **[Save rules]**
+and on **[Close]**.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/sec-group-lin-2.png
     :title: Sec Group Lin
