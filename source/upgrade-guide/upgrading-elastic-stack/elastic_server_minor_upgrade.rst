@@ -183,6 +183,19 @@ Upgrade Kibana
 
         # apt-get install kibana=7.5.1
 
+#. Remove generated bundles.
+
+    .. code-block:: console
+
+      # rm -rf /usr/share/kibana/optimize/bundles
+
+#. Update file permissions. This will avoid several errors prior to updating the app.
+
+    .. code-block:: console
+
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins
+
 #. Install the Wazuh app.
 
     .. code-block:: console
