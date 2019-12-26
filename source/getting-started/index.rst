@@ -8,7 +8,7 @@ Getting started
 .. meta::
   :description: Get started with the Wazuh components and learn how each one is involved.
 
-Wazuh is a threat detection, integrity monitoing, incident response and regulatory compliance platform. It is capable of protecting workloads across on-premise, virtualized, containerized and cloud-based environments. Wazuh project is completely free open source, and currently used by thousands of organizations around the world, from large enterprises to small businesses.
+Wazuh is a threat detection, integrity monitoring, incident response and regulatory compliance platform. It is capable of protecting workloads across on-premise, virtualized, containerized and cloud-based environments. Wazuh project is completely free open source, and currently used by thousands of organizations around the world, from large enterprises to small businesses.
 
 Wazuh platform is composed of two tightly integrated technologies: our easily deployed lightweight agent, and our centralized and intelligent analysis engine, also known as the Wazuh server. Besides, Wazuh has been fully integrated with the Elastic Stack, providing a search engine and data visualization tool that allows users to navigate through their security alerts.
 
