@@ -2,8 +2,8 @@
 
 .. _create-ova:
 
-Generate Wazuh virtual machine
-==============================
+Virtual machine
+===============
 
 Wazuh provides an automated way of generating a Virtual machine in OVA format that is ready to run a Wazuh manager and ELK.
 

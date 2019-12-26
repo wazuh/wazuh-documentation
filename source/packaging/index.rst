@@ -5,7 +5,7 @@
 Wazuh packages generation guide
 ===============================
 
-This section will show you how to generate Wazuh packages for different platforms:
+This section will show you how to generate your own Wazuh packages for different platforms:
 
 .. topic:: Contents
 

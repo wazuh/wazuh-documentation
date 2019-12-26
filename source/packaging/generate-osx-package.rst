@@ -2,12 +2,12 @@
 
 .. _create-osx:
 
-Generate Wazuh OSX packages
-===========================
+macOS package
+=============
 
-Wazuh provides an automated way of building OSX packages, keep in mind that to build an OSX package you must run this tool in an OSX system.
+Wazuh provides an automated way of building macOS packages, keep in mind that to build an macOS package you must run this tool in an macOS system.
 
-To create an OSX package follow these steps:
+To create an macOS package follow these steps:
 
 Requirements
 ^^^^^^^^^^^^
@@ -52,19 +52,19 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       --altool-password             [Optional] Temporary password to use altool from Xcode.
 
 
-Below, you will find some examples of how to build OSX packages.
+Below, you will find some examples of how to build macOS packages.
 
 .. code-block:: console
 
   # ./generate_wazuh_packages.sh -b v3.11.0 -s /tmp
 
-This will build a 3.11.0 Wazuh agent OSX  package and store it in ``/tmp``.
+This will build a 3.11.0 Wazuh agent macOS  package and store it in ``/tmp``.
 
 .. code-block:: console
 
   # ./generate_wazuh_packages.sh -b v3.11.0 -s /tmp -j 6
 
-This will also build a 3.11.0 Wazuh agent OSX package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+This will also build a 3.11.0 Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
 
 .. code-block:: console
 

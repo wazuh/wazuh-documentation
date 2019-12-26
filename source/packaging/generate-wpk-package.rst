@@ -2,8 +2,8 @@
 
 .. _create-wpk:
 
-Generate Wazuh WPK packages automatically
-=========================================
+WPK packages
+============
 
 Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency.
 
