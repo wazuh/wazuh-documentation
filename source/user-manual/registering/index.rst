@@ -8,7 +8,7 @@ Registering agents
 .. meta::
   :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
 
-The Wazuh agent registration process enables Agent-Manager communication, which requires a pre-shared key to be available on both sides. This key is used to establish an encrypted and authenticated communication channel by using ``AES algorithm``, allowing the manager to receive data collected by the agent.
+The Wazuh agent registration process enables Agent-Manager communication, which requires a pre-shared key to be available on both sides. This key is used to establish an encrypted and authenticated communication channel by using `AES algorithm <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications/>`_, allowing the manager to receive data collected by the agent.
 
 .. note::
 
