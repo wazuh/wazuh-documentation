@@ -7,7 +7,7 @@
 
 Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server and ``elasticsearch_password`` with the previously generated password.
 
- * Alternative Method
+*Alternative Method
 
 .. code-block:: console
 
