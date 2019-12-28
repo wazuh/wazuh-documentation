@@ -26,7 +26,7 @@ Replace ``<elasticsearch_ip>`` and ``<node_name>`` with your desired values (hos
   # sed -i 's/^#node\.name: node\-1/node\.name: node\-1/'i /etc/elasticsearch/elasticsearch.yml
   # sed -i 's/^#cluster\.initial_master_nodes: \["node-1", "node-2"]/cluster.initial_master_nodes: ["node-1"]'/i /etc/elasticsearch/elasticsearch.yml
 
-
+Perform each command line by line.
 
 
 .. End of include file
