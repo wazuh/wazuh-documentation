@@ -7,4 +7,13 @@
 
 Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server and ``elasticsearch_password`` with the previously generated password.
 
+ * Alternative Method
+
+.. code-block:: console
+
+  # sudo ip="$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}'):9200"
+  # sudo sed -i "s/YOUR_ELASTIC_SERVER_IP:9200/$ip/" /etc/filebeat/filebeat.yml
+  
+
+
 .. End of include file
