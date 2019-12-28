@@ -27,7 +27,7 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 - [sphinx-rtd-theme](https://pypi.org/project/sphinx_rtd_theme/) 0.2.4
 - [sphinxcontrib-images](https://pypi.org/project/sphinxcontrib-images/) 0.7.0
 - [sphinxprettysearchresults](https://pypi.org/project/sphinxprettysearchresults/) 0.3.5
-- [sphinx-tabs 1.1.13](https://pypi.org/project/sphinx-tabs/) 1.1.13
+- [sphinx-tabs](https://pypi.org/project/sphinx-tabs/) 1.1.13
 
 ## Copyright & License
 
