@@ -8,13 +8,13 @@ Getting started
 .. meta::
   :description: Get started with the Wazuh components and learn how each one is involved.
 
-Wazuh is a threat detection, integrity monitoing, incident response and regulatory compliance platform. It is capable of protecting workloads across on-premise, virtualized, containerized and cloud-based environments. Wazuh project is completely free open source, and currently used by thousands of organizations around the world, from large enterprises to small businesses.
+Wazuh is a threat detection, integrity monitoring, incident response and regulatory compliance platform. It is capable of protecting workloads across on-premise, virtualized, containerized and cloud-based environments. Wazuh project is completely free open source, and currently used by thousands of organizations around the world, from small businesses to large enterprises.
 
 Wazuh platform is composed of two tightly integrated technologies: our easily deployed lightweight agent, and our centralized and intelligent analysis engine, also known as the Wazuh server. Besides, Wazuh has been fully integrated with the Elastic Stack, providing a search engine and data visualization tool that allows users to navigate through their security alerts.
 
-Wazuh agent runs on most operating systems, including Linux, Windows, MacOS, Solaris, AIX and others. It is installed on the endpoint, such as laptops, desktops, servers, cloud instances or virtual machines, and provides detection and prevention capabilities, while also collecting and streaming data to the Wazuh server, where security analysis takes place.
+Wazuh agent runs on most operating systems, including Linux, Windows, macOS, Solaris, AIX and others. It is installed on the endpoint, such as laptops, desktops, servers, cloud instances or virtual machines, and provides detection and prevention capabilities, while also collects and streams data to the Wazuh server, where security analysis takes place.
 
-Our centralized components, the Wazuh server and Elastic Stack, can be deployed at scale, supporting cluster configurations and providing high-availability and load balancing. These two technologies continually collect, process, analyze, correlate and normalize data received from the agents or from integrations with external sources such as network devices, cloud applications or external APIs.
+Our centralized components, the Wazuh server and Elastic Stack, have been designed to scale, supporting cluster configurations and providing high-availability and load balancing. These two technologies continually collect, process, analyze, correlate and normalize data received from the agents or from integrations with external sources such as network devices, cloud applications or external APIs.
 
 .. topic:: Table of Contents
 
