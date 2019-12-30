@@ -21,7 +21,7 @@ Launch a Wazuh Server instance
     :width: 75%
 
 - Click on **[Continue]**.
-- Select the General purpose t2.micro image and click on **[Next: Configure Instance Details]**
+- Select the General purpose **t2.small** image and click on **[Next: Configure Instance Details]**
 - For *Network*, choose your VPC, and for the *Primary IP* of eth0, put in "172.30.0.10".
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/config-inst-details.png
@@ -86,6 +86,7 @@ Launch a Linux Agent instance
 
 Repeat the process for "Launch a Wazuh Server instance" with the following exceptions:
 
+- Select the General purpose **t2.micro** image
 - Set the *Primary IP* to 172.30.0.30.
 - Leave the *Storage Size* at the default 8GB unless you plan to make extra disk space demands on this instance.
 - Set the *Name* Tag to "Linux Agent".
