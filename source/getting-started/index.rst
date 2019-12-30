@@ -18,11 +18,12 @@ Our centralized components, the Wazuh server and Elastic Stack, have been design
 
 .. topic:: Table of Contents
 
- This document provides an overview of the Wazuh platform components and architecture, and a brief description of some of the most common use cases of the solution. 
+ This document provides an overview of the Wazuh platform components and architecture, and a brief description of some of the most common use cases of the solution.
 
 .. toctree::
    :maxdepth: 1
 
+   basics
    components
    architecture
    use-cases
@@ -30,4 +31,3 @@ Our centralized components, the Wazuh server and Elastic Stack, have been design
    all_in_one
    compatibility_matrix/index
    packages-list
-
