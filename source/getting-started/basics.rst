@@ -2,7 +2,7 @@
 
 .. meta:: :description: Learn how to install Wazuh
 
-.. _installation_guide_aio:
+.. _basics:
 
 Introduction to basic case
 ==========================

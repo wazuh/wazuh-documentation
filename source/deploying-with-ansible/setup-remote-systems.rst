@@ -37,7 +37,7 @@ Windows hosts use a different mechanism to perform authentication. Please refer 
 Using SSH key-pairing
 ----------------------
 
-You can setup a SSH key-pairing to provide a silent auth mechanism, first create a OpenSSH key-pair:
+You can setup an SSH key-pairing to provide a silent auth mechanism, first create an OpenSSH key-pair:
 
 .. code-block:: bash
 
@@ -96,7 +96,7 @@ This will attempt a connection with the remote hosts using ``ping`` module.
 
   $ ansible all -m ping
 
-You will get a output like this.
+You will get an output like this.
 
 .. code-block:: bash
 

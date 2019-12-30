@@ -328,7 +328,7 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 	ansible@ansible:~$ ansible all -m ping
 
-You will get a output like this:
+You will get an output like this:
 
 .. code-block:: console
 
@@ -350,6 +350,6 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.10.2_7.3.2 https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v3.11.0_7.5.1 https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
 	wazuh-ansible

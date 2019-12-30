@@ -55,7 +55,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v3.10.2.zip && /usr/local/bin/unzip v3.10.2
+        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v3.11.0.zip && /usr/local/bin/unzip v3.11.0
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 
