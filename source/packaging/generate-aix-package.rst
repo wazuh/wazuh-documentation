@@ -47,18 +47,18 @@ Below, you will find some examples of how to build an AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.0
+  # ./generate_wazuh_packages.sh -b v3.11.1
 
-This will generate a 3.11.0 Wazuh agent AIX package.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v3.11.0 -c
-
-This will generate a 3.11.0 Wazuh agent AIX package with checksum.
+This will generate a 3.11.1 Wazuh agent AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.0  -p /opt
+  # ./generate_wazuh_packages.sh -b v3.11.1 -c
 
-This will generate a 3.11.0 Wazuh agent AIX package with ``/opt`` as installation directory.
+This will generate a 3.11.1 Wazuh agent AIX package with checksum.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v3.11.1  -p /opt
+
+This will generate a 3.11.1 Wazuh agent AIX package with ``/opt`` as installation directory.

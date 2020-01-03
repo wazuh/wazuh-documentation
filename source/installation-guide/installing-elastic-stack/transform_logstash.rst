@@ -76,7 +76,7 @@ them to Elasticsearch.
 
   .. code-block:: console
 
-    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.0/extensions/logstash/7.x/01-wazuh-remote.conf
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.1/extensions/logstash/7.x/01-wazuh-remote.conf
 
 5. Restart Logstash.
 

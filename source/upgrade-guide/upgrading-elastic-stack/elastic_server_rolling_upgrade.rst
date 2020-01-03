@@ -180,7 +180,7 @@ Upgrade Filebeat
     .. code-block:: console
 
       # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.11.0/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.11.1/extensions/filebeat/7.x/filebeat.yml
       # chmod go+r /etc/filebeat/filebeat.yml
 
 #. Download the Wazuh module for Filebeat:
@@ -231,7 +231,7 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.0_7.5.1.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.1_7.5.1.zip
 
 #. Restart Kibana.
 
