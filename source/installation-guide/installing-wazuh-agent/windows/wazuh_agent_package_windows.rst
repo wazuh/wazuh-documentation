@@ -30,11 +30,11 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
 	* Using CMD: ::
 
-            wazuh-agent-3.11.1-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2"
+            wazuh-agent-3.11.1-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
 	* Using PowerShell: ::
 
-	    .\wazuh-agent-3.11.1-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2"
+	    .\wazuh-agent-3.11.1-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
         See the following document for additional automated deployment options: :ref:`deployment variables for Windows <deployment_variables_windows>`.
 
