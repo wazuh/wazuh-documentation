@@ -166,6 +166,7 @@ Tells rootcheck to scan the entire system.  This option may lead to some false p
 readall
 ^^^^^^^^^^^^^^^
 
+.. versionadded:: 3.11.0
 
 Tells rootcheck to scan recursively in each of the selected system directories
 
