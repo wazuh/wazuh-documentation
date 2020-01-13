@@ -95,7 +95,7 @@ Usage
 
   a) Only the file::
 
-      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.11.1_7.5.1/docker-compose.yml
+      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/v3.11.1_7.5.1/docker-compose.yml
 
   b) Get the Wazuh repository::
 
