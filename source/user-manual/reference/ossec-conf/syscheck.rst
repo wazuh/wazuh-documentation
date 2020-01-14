@@ -29,6 +29,7 @@ Options
 - `scan_on_start`_
 - `windows_registry`_
 - `registry_ignore`_
+- `allow_remote_prefilter_cmd`_
 - `prefilter_cmd`_
 - `skip_nfs`_
 - `remove_old_diff`_
@@ -365,6 +366,30 @@ Attributes:
 |          | Allowed values   |  sregex                                                     |
 +----------+------------------+-------------------------------------------------------------+
 
+allow_remote_prefilter_cmd
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.11.1
+
+Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
+
++--------------------+--------------------------------+
+| **Default value**  | no                             |
++--------------------+--------------------------------+
+| **Allowed values** | yes, no                        |
++--------------------+--------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <allow_remote_prefilter_cmd>yes</allow_remote_prefilter_cmd>
+
+
+.. note::
+
+   This option only can be activate from the agent side, in its own ``ossec.conf``.
+
 prefilter_cmd
 ^^^^^^^^^^^^^^
 
@@ -386,6 +411,10 @@ Example:
 .. note::
 
    This option may negatively impact performance as the configured command will be run for each file checked.
+
+.. note::
+
+   This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
 
 skip_nfs
 ^^^^^^^^

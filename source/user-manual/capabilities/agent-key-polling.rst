@@ -208,7 +208,7 @@ Suppose you have a table named ``agent`` in your database with the following str
 .. note::
   If your executable is a script that does not include shebang, you must include its interpreter in the `sexec_path` parameter of the configuration.
 
-The python script bellow shows an example of an agent key retrieval from the database (MySQL).
+The python script below shows an example of an agent key retrieval from the database (MySQL).
 
 .. code-block:: python
 
@@ -254,7 +254,7 @@ The python script bellow shows an example of an agent key retrieval from the dat
   if __name__ == '__main__':
       main()
 
-The php script bellow shows an example of an agent key retrieval from the database (MySQL).
+The php script below shows an example of an agent key retrieval from the database (MySQL).
 
 .. code-block:: php
 

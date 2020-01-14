@@ -17,11 +17,11 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
       * Using CMD: ::
 
-	  wazuh-agent-3.10.2-1.msi /q
+	  wazuh-agent-3.11.1-1.msi /q
 
       * Using PowerShell: ::
 
-	  .\wazuh-agent-3.10.2-1.msi /q
+	  .\wazuh-agent-3.11.1-1.msi /q
 
 
     * Deployment:
@@ -30,11 +30,11 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
 	* Using CMD: ::
 
-            wazuh-agent-3.10.2-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2"
+            wazuh-agent-3.11.1-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2"
 
 	* Using PowerShell: ::
 
-	    .\wazuh-agent-3.10.2-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2"
+	    .\wazuh-agent-3.11.1-1.msi /q ADDRESS="10.0.0.2" AUTHD_SERVER="10.0.0.2"
 
         See the following document for additional automated deployment options: :ref:`deployment variables for Windows <deployment_variables_windows>`.
 
@@ -59,4 +59,4 @@ Uninstall
 
 To uninstall the agent, the original MSI file will be needed to perform the unattended process::
 
-    msiexec.exe /x wazuh-agent-3.10.2-1.msi /qn
+    msiexec.exe /x wazuh-agent-3.11.1-1.msi /qn

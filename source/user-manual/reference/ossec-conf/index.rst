@@ -46,6 +46,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`email_alerts <email_alerts>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 | :doc:`global  <global>`                                             | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`integration  <integration>`                                   | manager                |
@@ -62,9 +64,9 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`sca <sca>`                                                    | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`sca <sca>`                                                    | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`socket <socket>`                                              | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
@@ -72,29 +74,26 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`syslog_output <syslog-output>`                                | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="open-scap" <wodle-openscap>`                      | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="command" <wodle-command>`                         | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="vulnerability-detector" <wodle-vuln-detector>`    | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
+| :doc:`vulnerability-detector <vuln-detector>`                       | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
+| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-
+| :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="command" <wodle-command>`                         | manager, agent         |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="open-scap" <wodle-openscap>`                      | manager, agent         |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
 
@@ -133,7 +132,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-ciscat
    wodle-s3
    wodle-syscollector
-   wodle-vuln-detector
+   vuln-detector
    wodle-osquery
    wodle-docker
    wodle-azure-logs

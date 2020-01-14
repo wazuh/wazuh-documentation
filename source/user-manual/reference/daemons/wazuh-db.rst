@@ -160,6 +160,8 @@ Syscollector tables
 +-----------------------------------------------+--------------------------------------------------------------------------------+
 | :ref:`sys_programs <syscollector_packages>`   | Stores information about the packages installed in the system                  |
 +-----------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_hotfixes <syscollector_hotfixes>`   | Stores information about the Windows updates installed on the agent            |
++-----------------------------------------------+--------------------------------------------------------------------------------+
 
 
 

@@ -263,7 +263,6 @@ dt {
 }
 
 #links-to-home .wazuh-logo-link {
-  vertical-align: text-bottom;
   display: inline-block;
   margin-right: 5px;
 }
@@ -273,7 +272,7 @@ dt {
   text-decoration: none;
 }
 
-a .docs-link {
+a.docs-link {
   color: #ffffff;
   vertical-align: text-top;
   display: inline-block;
@@ -281,8 +280,8 @@ a .docs-link {
   font-size: 1.2rem;
 }
 
-a .docs-link:hover,
-a .docs-link:active {
+a.docs-link:hover,
+a.docs-link:active {
   color: #ffffff;
 }
 
@@ -295,7 +294,7 @@ a .docs-link:active {
   position: fixed;
   bottom: 0;
   right: 15px;
-  height: 44px;
+  height: 42px;
   padding: 10px;
   z-index: 100;
   border-radius: 25px 25px 0 0;
@@ -312,7 +311,7 @@ a .docs-link:active {
 
 #btn-scroll .fa {
   color: rgba(255, 255, 255, 0.75);
-  font-size: 25px;
+  font-size: 1.4rem;
   transition: color .7s;
 }
 
@@ -431,7 +430,7 @@ header .menuweb-bar .menu-item a {
   position: absolute;
     width: auto !important;
     top: 13px;
-    left: 8px;
+    left: 14px;
     color: #00a9e5;
     font: normal normal normal 39px/1 'wazuh-icons';
     vertical-align: middle;
@@ -609,6 +608,10 @@ header .menuweb-bar .menu-item a {
   -ms-box-shadow: none;
   -o-box-shadow: none;
   box-shadow: none;
+}
+
+.navigation-buttons .btn .fa {
+  font-size: 0.75rem;
 }
 
 footer {
@@ -849,7 +852,7 @@ li.toctree-l5 > a {
   width: 11px;
   height: 11px;
   padding: 1px;
-  font: normal normal normal 9px/1 FontAwesome;
+  font: normal bold normal 0.65rem/1 FontAwesome;
   text-rendering: auto;
 }
 
@@ -1044,7 +1047,7 @@ a.headerlink:before {
   color: #ffb600;
   content: '\f0c1';
   display: inline-block;
-  font: normal normal normal 15px/.5 FontAwesome;
+  font: normal bold normal 0.95rem/.5 FontAwesome;
   text-align: right;
   padding-left: 10px;
   padding-bottom: 4px;
@@ -1198,13 +1201,14 @@ footer a:focus,
 
 .search_main .searchform > .btn-search,
 .navbar-toggler.btn-close {
-  height: 25px;
-  width: 25px;
+  height: 28px;
+  width: 28px;
   border: none;
   position: absolute;
-  top: 3px;
+  padding: 3px;
+  top: 2px;
   right: 3px;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .search_main .btn-search:focus {
@@ -1378,7 +1382,7 @@ footer a:focus,
 }
 
 .search_main .btn-search .fa {
-  font-size: 20px;
+  font-size: 15px;
   line-height: .2;
 }
 
@@ -1756,7 +1760,7 @@ select, option {
   right: 10px;
   width: 0.5rem;
   height: 0.5rem;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1em/.5 FontAwesome;
   content: '\f0d7';
   color: #ffffff;
   pointer-events: none;
@@ -2213,7 +2217,7 @@ p.admonition-title {
 p.first.admonition-title::before,
 .no-latest-notice span::before {
   display: inline-block;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1.1rem/.5 FontAwesome;
   width: 12px;
   margin-right: 0.75em;
 }
@@ -2354,7 +2358,7 @@ p.first.admonition-title::before,
 .versionadded > p > span::before, .deprecated span.versionmodified::before {
   content: '\f06a';
   display: inline-block;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1em/.5 FontAwesome;
   width: 12px;
   margin-right: 0.75em;
 }
@@ -2565,7 +2569,8 @@ ul#breadcrumbs {
 
 ul#breadcrumbs .fa {
   color: #0094d0;
-  padding: 0 4px;
+  padding: 0 4px 0 2px;
+  font-size: 0.75rem;
 }
 
 ul#breadcrumbs li:before {
@@ -2586,6 +2591,10 @@ ul#breadcrumbs a {
 
 .edit-repo a {
   color: #0094d0;
+}
+
+.edit-repo a i {
+  margin-right: 5px;
 }
 
 [class*="highlight-"] {
@@ -3167,7 +3176,7 @@ div.highlight pre {
 
       #links-to-home .docs-link {
         margin-left: 15px;
-        line-height: 2em;
+        line-height: 1em;
       }
 
 			#links-to-home .wazuh-logo-link img {
