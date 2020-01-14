@@ -30,7 +30,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.11'
+version = '3.12'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -88,7 +88,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prefixed to all description
+# If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 
@@ -312,7 +312,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be an ISBN number
+# The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''

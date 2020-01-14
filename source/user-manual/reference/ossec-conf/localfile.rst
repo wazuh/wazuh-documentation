@@ -30,6 +30,7 @@ Options
 - `ignore_binaries`_
 - `age`_
 - `exclude`_
+- `reconnect_time`_
 
 location
 ^^^^^^^^
@@ -432,6 +433,23 @@ For example, we may want to read all the files from a directory, but exclude tho
 | **Allowed values** | Any log file or wildcard |
 +--------------------+--------------------------+
 
+reconnect_time
+^^^^^^^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Defines the interval of reconnection attempts when the Windows Event Channel service is down.
+
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 5s                                                                                                                                                  |
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks)  |
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. note::
+
+    This option only applies when the ``log_format`` is ``eventchannel``.
+
 Configuration examples
 ----------------------
 
@@ -470,4 +488,5 @@ Windows configuration:
       <log_format>eventchannel</log_format>
       <only-future-events>yes</only-future-events>
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
+      <reconnect_time>10s</reconnect_time>
     </localfile>
