@@ -7,7 +7,7 @@ In section **Installing Elasticsearch**, we created a .zip that contains the fil
   # mkdir /etc/filebeat/certs/ca -p
   # zip -d ~/certs.zip "ca/ca.key"
   # unzip ~/certs.zip -d ~/certs
-  # cp -R ~/ca/ ~/filebeat/* /etc/filebeat/certs/
+  # cp -R ~/certs/ca/ ~/certs/filebeat/* /etc/filebeat/certs/
   # chmod -R 500 /etc/filebeat/certs
   # chmod 400 /etc/filebeat/certs/ca/ca.* /etc/filebeat/certs/filebeat.*
   # rm -rf ~/certs/ ~/certs.zip
