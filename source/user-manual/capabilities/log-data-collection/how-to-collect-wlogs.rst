@@ -68,7 +68,7 @@ Windows event channels can be monitored by placing their name at the location fi
 
 .. note::
 
-    Eventchannel is supported on Windows prior or equal to Vista.
+    Eventchannel is supported on Windows versions equal or more recent than Vista.
 
 Available channels and providers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

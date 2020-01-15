@@ -89,7 +89,9 @@ Upgrade Elasticsearch
 5. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
 
   .. code-block:: yaml
-
+  
+    discovery.seed_hosts:
+      - master_node_name_or_ip_address
     cluster.initial_master_nodes:
       - master_node_name_or_ip_address
 
