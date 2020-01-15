@@ -73,7 +73,11 @@ Installing the Wazuh API
 
   .. note::
 
-      If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
+      If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below:
+
+      .. code-block:: console
+
+        # curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
   and then, install NodeJS:
 
@@ -140,7 +144,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
   .. code-block:: console
 
-    # apt-get install filebeat=7.3.2
+    # apt-get install filebeat=7.5.1
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
