@@ -29,6 +29,8 @@
 
       # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
+    The generated file ``~/certs.zip`` must be copied into the Wazuh server before to continue the steps below.
+
     Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
 
     .. code-block:: console
