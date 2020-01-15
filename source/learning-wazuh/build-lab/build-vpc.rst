@@ -31,19 +31,6 @@ already have an AWS account, sign up for one
 Create VPC
 ----------
 
-
-
-
-
-
-+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
-|                                                                                |                                                                                            |
-|  .. note::                                                                     |       .. thumbnail:: ../../images/learning-wazuh/build-lab/new-ec2-disabled.png            |
-|    This guide has been developed with the ``New EC2 Experience`` disabled.     |              :title: New VPC                                                               |
-|    The new experience is very similar, but if you prefer to have your screen   |              :align: center                                                                |
-|    exactly as the screenshots, you can easily disable it too.                  |              :width: 75%                                                                   |
-+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+
-
 Even if you already have one or more VPCs, you will be creating a new one.
 Go to your `AWS VPC Dashboard <https://console.aws.amazon.com/vpc/home?#vpcs:>`_
 and click on **[Create VPC]**. Specify the *Name* and *IPv4 CIDR block* below, and
