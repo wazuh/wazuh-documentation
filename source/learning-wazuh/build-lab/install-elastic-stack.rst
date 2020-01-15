@@ -2,10 +2,10 @@
 
 .. _build_lab_install_elastic_stack:
 
-Install Elastic Stack
-=====================
+Install the Elastic Stack
+=========================
 
-Your Elastic Server will be running Elasticsearch, Kibana and the Wazuh Kibana plugin.
+Your Elastic Stack will be running Elasticsearch, Kibana and the Wazuh plugin for Kibana.
 
 Log in and sudo to root
 -----------------------
@@ -105,7 +105,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.0_7.5.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.1_7.5.1.zip
 
 3. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
