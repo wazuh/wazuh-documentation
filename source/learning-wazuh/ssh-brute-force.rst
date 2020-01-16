@@ -30,14 +30,12 @@ Do this a total of eight times, making sure to get all your attempts made in the
 The first alert
 ---------------
 
-Use the file viewer of your choice to look at ``/var/ossec/logs/alerts/alerts.log`` on the Wazuh Manager computer. For example:
+Use the file viewer of your choice to look at ``/var/ossec/logs/alerts/alerts.log`` on the Wazuh Manager instance. For example:
 
   .. code-block:: console
 
     less /var/ossec/logs/alerts/alerts.log
 
-
-This file is optionally written to by Wazuh and is mainly useful for learning and debugging purposes.
 
 Search for the text "*blimey*" and the first alert you find should look like this:
 
@@ -131,7 +129,7 @@ Moving on to Kibana
 
 It is good to know about the log files, but Kibana is usually the best tool for looking at and analyzing Wazuh alerts.
 
-Log in to Kibana.  Click on the Wazuh icon on the left and then on the ``Discover`` tab at the top.
+Log in to Kibana and click on the ``Discover`` icon on the left vertical menu.
 
 In the "*Search..*." field, enter the word "*blimey*" and hit the search button on the right (the magnifying glass).
 
