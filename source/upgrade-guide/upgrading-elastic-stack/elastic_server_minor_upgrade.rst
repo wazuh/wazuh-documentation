@@ -143,10 +143,10 @@ Upgrade Filebeat
 
 #. Download the alerts template for Elasticsearch:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.1/extensions/elasticsearch/7.x/wazuh-template.json
-    # chmod go+r /etc/filebeat/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.1/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
