@@ -52,6 +52,19 @@ Available options
 - `same_field`_
 - `not_same_field`_
 - `global_frequency`_
+- `different_id`_
+- `different_source_ip`_
+- `different_destination_ip`_
+- `different_src_port`_
+- `different_dst_port`_
+- `different_location`_
+- `different_user`_
+- `different_protocol`_
+- `different_action`_
+- `different_data`_
+- `different_extra_data`_
+- `different_status`_
+- `different_system_name`_
 - `different_url`_
 - `different_srcgeoip`_
 - `description`_
@@ -576,7 +589,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 same_extra_data
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded extra_data must be the same.
+Specifies that the decoded extra data must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------------+
@@ -683,6 +696,126 @@ the same agent will be taken into account to increase the frequency counter for 
 
 .. warning::
   Although the label contains the word `global`, this option works at manager level, not at cluster level.
+
+different_id
+^^^^^^^^^^^^
+
+Specifies that the decoded id must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------+
+| **Example of use** | <different_id />  |
++--------------------+-------------------+
+
+different_source_ip
+^^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded source ip must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------------+
+| **Example of use** | <different_source_ip />  |
++--------------------+--------------------------+
+
+different_destination_ip
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded destination ip must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------------------+
+| **Example of use** | <different_destination_ip />  |
++--------------------+-------------------------------+
+
+different_src_port
+^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded source port must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------------+
+| **Example of use** | <different_src_port />  |
++--------------------+-------------------------+
+
+different_dst_port
+^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded destination port must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------------+
+| **Example of use** | <different_dst_port />  |
++--------------------+-------------------------+
+
+different_user
+^^^^^^^^^^^^^^
+
+Specifies that the decoded user must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+---------------------+
+| **Example of use** | <different_user />  |
++--------------------+---------------------+
+
+different_protocol
+^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded protocol must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------------+
+| **Example of use** | <different_protocol />  |
++--------------------+-------------------------+
+
+different_action
+^^^^^^^^^^^^^^^^
+
+Specifies that the decoded action must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-----------------------+
+| **Example of use** | <different_action />  |
++--------------------+-----------------------+
+
+different_data
+^^^^^^^^^^^^^^
+
+Specifies that the decoded data must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+---------------------+
+| **Example of use** | <different_data />  |
++--------------------+---------------------+
+
+different_extra_data
+^^^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded extra data must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+---------------------------+
+| **Example of use** | <different_extra_data />  |
++--------------------+---------------------------+
+
+different_status
+^^^^^^^^^^^^^^^^
+
+Specifies that the decoded status must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-----------------------+
+| **Example of use** | <different_status />  |
++--------------------+-----------------------+
+
+different_system_name
+^^^^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded system name must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+----------------------------+
+| **Example of use** | <different_system_name />  |
++--------------------+----------------------------+
 
 different_url
 ^^^^^^^^^^^^^
