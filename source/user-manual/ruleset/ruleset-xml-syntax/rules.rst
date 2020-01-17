@@ -37,10 +37,18 @@ Available options
 - `if_matched_group`_
 - `same_id`_
 - `same_source_ip`_
+- `same_destination_ip`_
 - `same_src_port`_
 - `same_dst_port`_
 - `same_location`_
 - `same_user`_
+- `same_protocol`_
+- `same_action`_
+- `same_url`_
+- `same_data`_
+- `same_extra_data`_
+- `same_status`_
+- `same_system_name`_
 - `same_field`_
 - `not_same_field`_
 - `global_frequency`_
@@ -475,6 +483,16 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_source_ip /> |
 +--------------------+--------------------+
 
+same_destination_ip
+^^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded destination ip must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------------+
+| **Example of use** | <same_destination_ip /> |
++--------------------+-------------------------+
+
 same_src_port
 ^^^^^^^^^^^^^
 
@@ -514,6 +532,76 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 +--------------------+--------------------+
 | **Example of use** | <same_user />      |
 +--------------------+--------------------+
+
+same_protocol
+^^^^^^^^^^^^^
+
+Specifies that the decoded protocol must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+------------------------+
+| **Example of use** | <same_protocol />      |
++--------------------+------------------------+
+
+same_action
+^^^^^^^^^^^
+
+Specifies that the decoded action must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+----------------------+
+| **Example of use** | <same_action />      |
++--------------------+----------------------+
+
+same_url
+^^^^^^^^
+
+Specifies that the decoded url must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+-------------------+
+| **Example of use** | <same_url />      |
++--------------------+-------------------+
+
+same_data
+^^^^^^^^^
+
+Specifies that the decoded data must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------+
+| **Example of use** | <same_data />      |
++--------------------+--------------------+
+
+same_extra_data
+^^^^^^^^^^^^^^^
+
+Specifies that the decoded extra_data must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------------+
+| **Example of use** | <same_extra_data />      |
++--------------------+--------------------------+
+
+same_status
+^^^^^^^^^^^
+
+Specifies that the decoded status must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+----------------------+
+| **Example of use** | <same_status />      |
++--------------------+----------------------+
+
+same_system_name
+^^^^^^^^^^^^^^^^
+
+Specifies that the decoded system name must be the same.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+---------------------------+
+| **Example of use** | <same_system_name />      |
++--------------------+---------------------------+
 
 same_field
 ^^^^^^^^^^
