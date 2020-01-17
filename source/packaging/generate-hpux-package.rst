@@ -21,7 +21,7 @@ Download our wazuh-packages repository from GitHub and go to the ``hpux`` direct
 
  $ curl -L https://github.com/wazuh/wazuh-packages/tarball/master | tar zx
  $ cd wazuh-wazuh-packages-*
- $ cd hpux
+ $ cd hp-ux
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 
@@ -36,6 +36,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
       -p <tar_home> Installation path for the package. By default: /var
       -c,  --checksum Compute the SHA512 checksum of the TAR package.
+      -d <path_to_depot>, --depot Change the path to depothelper package (by default current path).
       -h Shows this help
 
 Below, you will find an example of how to build HPUX packages.
