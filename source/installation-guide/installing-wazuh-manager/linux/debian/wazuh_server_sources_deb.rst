@@ -33,7 +33,7 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.11.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.11.2.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -114,7 +114,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.11.1/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.11.2/install_api.sh && bash ./install_api.sh download
 
 3. Once the process is complete, you can check the service status with:
 
