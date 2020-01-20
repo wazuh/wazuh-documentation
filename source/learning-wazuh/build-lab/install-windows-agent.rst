@@ -26,21 +26,21 @@ Download the Wazuh agent package
 Run the installer to both install and self-register
 ---------------------------------------------------
 
-1. Click the "Search Windows" icon (magnifying glass in bottom left of screen).  Type: "powershell" and right click on Windows PowerShell
+1. Click the **"Search Windows"** icon (magnifying glass in bottom left of screen).  Type: **"powershell"** and right click on Windows PowerShell
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/pshell-1.png
         :title: powershell
         :width: 40%
 
-2. Click "Run as administrator"
+2. Click **"Run as administrator"**
 
-3. In PowerShell, change to the Downloads directory with "cd Downloads"
+3. In PowerShell, change to the Downloads directory with **"cd Downloads"**
 
 4. Then run the installer with this command line:
 
     .. code-block:: console
 
-        .\\wazuh-agent-3.11.0-1.msi /q WAZUH_MANAGER="172.30.0.10" WAZUH_PROTOCOL="tcp" WAZUH_REGISTRATION_SERVER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
+        .\\wazuh-agent-3.11.2-1.msi /q WAZUH_MANAGER="172.30.0.10" WAZUH_PROTOCOL="tcp" WAZUH_REGISTRATION_SERVER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
 
     It should look like this
 
