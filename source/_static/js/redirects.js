@@ -51,13 +51,38 @@ redirections.push(
     },
     {
       'target': ['3.9=>3.10', '3.10=>3.9'],
+      '3.9': '/user-manual/capabilities/sec-config-assessment/use-case.html',
+      '3.10': '/user-manual/capabilities/sec-config-assessment/use_case.html',
+    },
+    {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
       '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
+      '3.10': '/user-manual/capabilities/sec-config-assessment/what_is_it.html',
+    },
+    {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
+      '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html#creating-custom-sca-policies',
       '3.10': '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
     },
     {
       'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/capabilities/sec-config-assessment/use-case.html',
-      '3.10': '/user-manual/capabilities/sec-config-assessment/use_case.html',
+      '3.9': '/user-manual/manager/wazuh-cluster.html',
+      '3.10': '/user-manual/configuring-cluster/basics.html',
+    },
+    {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
+      '3.9': '/user-manual/manager/wazuh-cluster.html#getting-started',
+      '3.10': '/user-manual/configuring-cluster/index.html',
+    },
+    {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
+      '3.9': '/user-manual/manager/wazuh-cluster.html#pointing-agents-to-the-cluster-with-a-load-balancer',
+      '3.10': '/user-manual/configuring-cluster/advanced-settings.html',
+    },
+    {
+      'target': ['3.9=>3.10', '3.10=>3.9'],
+      '3.9': '/user-manual/manager/wazuh-cluster.html#cluster-management',
+      '3.10': '/user-manual/configuring-cluster/cluster_management.html',
     }
 );
 
@@ -677,7 +702,7 @@ newUrls['3.9'] = [
   '/user-manual/registering/windows-simple-registration.html',
   '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
-  '/user-manual/capabilities/sec-config-assessment/use-case.html  ',
+  '/user-manual/capabilities/sec-config-assessment/use-case.html',
 ];
 
 
