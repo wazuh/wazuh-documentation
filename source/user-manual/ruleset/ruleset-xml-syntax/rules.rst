@@ -480,6 +480,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Allowed values** | Any Group |
 +--------------------+-----------+
 
+.. note::
+  The dynamic filters same_field or not_same_field will not work with the static fields (user, srcip, dstip, etc.) and the specific ones have to be used instead. 
 
 same_id
 ^^^^^^^
