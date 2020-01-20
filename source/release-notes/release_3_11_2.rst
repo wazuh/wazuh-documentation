@@ -17,21 +17,20 @@ Wazuh core
 
 - Fixed handler leaks on SCA module for Windows agents.
 
-**Vulnerability detector**
+**Vulnerability Detector**
 
-- Optimized memory usage during the NVD feed fetch.
-
+- The module needed around 1 GB memory during the NVD feed fetch. The memory usage now remains on few hundred MBs.
 
 **Rootcheck**
 
-- Fixed bug on Rootcheck scan that led to 100% CPU usage spikes. The ``<readall>`` option was applied even when disabled.
+- Fixed bug on Rootcheck scan that led to 100% CPU usage spikes. The ``<readall>`` option was wrongly applied, even when disabled.
 - Fixed handler leaks on Rootcheck module for Windows agents.
 
 **Other fixes and improvements**
 
-- Fixed a memory leak in Clusterd.
-- Fixed ``VERSION`` file permissions.
-- The Slack integration can now handle alerts with no description.
+- Fixed a memory leak in Clusterd: the RAM usage was steadily climbing through the days until the memory was exhausted.
+- Ruleset update lead to incorrect ``VERSION`` file permissions.
+- The Slack integration now correctly handles alerts with no description.
 
 Wazuh UI for Kibana
 -------------------
