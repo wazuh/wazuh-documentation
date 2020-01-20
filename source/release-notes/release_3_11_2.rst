@@ -19,7 +19,7 @@ Wazuh core
 
 **Vulnerability Detector**
 
-- The module needed around 1 GB memory during the NVD feed fetch. The memory usage now remains on few hundred MBs.
+- The module needed around 1 GB memory during the NVD feed fetch. The memory usage now remains on a few hundred MBs.
 
 **Rootcheck**
 
@@ -36,4 +36,4 @@ Wazuh UI for Kibana
 -------------------
 
 - Increased list filesize limit for the CDB-list.
-- The xml validator now correctly handles the ``--`` string within comments.
+- The XML validator now correctly handles the ``--`` string within comments.
