@@ -5,13 +5,13 @@
 Configure X-Pack Security
 =========================
 
-Since your Wazuh Server and Elastic Server instances are on separate servers, it
-is important to configure SSL encryption and verification between Filebeat and
-Elasticsearch. And since your Kibana is exposed to the World Wide Web it is
-important to add authentication to access it.
+Since your Wazuh Server and Elastic Server instances are located on separate instances, it's
+actually important to set up SSL encryption along with the verification between Filebeat and
+Elasticsearch. Also, since your Kibana is publicly exposed to internet, it's
+important to add authentication to access it as well.
 
 
-Setting up SSL for Elastic Stack
+Setting up SSL for Elasticsearch
 --------------------------------
 
 
@@ -33,7 +33,7 @@ Setting up SSL for Elastic Stack
             - "172.30.0.20"
     EOF
 
-2. Create the certificates using the `elasticsearch-certutil
+2. Create the required certificates, private keys and the certificate authority (CA) structure using the native `elasticsearch-certutil
    <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool.
 
 .. code-block:: console
@@ -142,20 +142,20 @@ Configure SSL in Kibana
 Configure SSL for Filebeat
 ::::::::::::::::::::::::::
 
-1. We must now copy the certificate files from the Elastic server to the Wazuh
-   Manager. In order to do so you may place the ``Wazuh_Lab.pem`` file in your
+1. We must now copy the generated certificate, private key and CA from the Elastic server to the Wazuh
+   Manager. In order to do so, you may place the ``Wazuh_Lab.pem`` file in your
    Elastic Server:
 
   a. Using scp from Linux:
 
    .. code-block:: console
 
-      # scp -i Wazuh_Lab.pem Wazuh_Lab.pem centos@N.N.N.N:
+      # scp -i Wazuh_Lab.pem centos@N.N.N.N:
 
    Where N.N.N.N must be replaced with the Elastic IP of your Elastic Server.
 
-  b. Alternatively you may copy and paste the contents of this file onto this file
-     on the Elastic server.
+  b. Alternatively you may copy and paste the content of this file onto this file
+     on the Elasticsearch instance.
 
 2. Now copy the SSL files from the Elastic Server onto the Wazuh Manager
 
