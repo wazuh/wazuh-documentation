@@ -15,7 +15,7 @@ The ``ca.crt`` will be needed. It can be added as follow:
 
 .. code-block:: console
 
-  # zip -j ~/kibana4.zip /etc/elasticsearch/certs/ca/ca.crt
+  # zip -j ~/kibana.zip /etc/elasticsearch/certs/ca/ca.crt
 
 Copy the generated ``~/kibana.zip`` file from the previous step into the Kibana server. This example will suppose that it will be placed at home folder ``~/``.
 
