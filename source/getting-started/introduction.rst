@@ -127,9 +127,9 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 
 + **RESTful API:** This provides an interface to manage and monitor the configuration and deployment status of agents. It is also used by the Wazuh web interface, which is a Kibana app.
 
-Basic installation case
------------------------
+Jumpstart to Wazuh
+------------------
 
-The Basic installation case guide will focus in the first installation type: all the components in the same host. Follow `this document <all_in_one>`_ to start configuring the Basic installation case for non-production or small environments.
+The Jumpstart to Wazuh guide will focus in the first installation type: all the components in the same host. Follow `this document <all_in_one>`_ to start configuring the Jumpstart to Wazuh for non-production or small environments.
 
 

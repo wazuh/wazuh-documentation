@@ -4,8 +4,8 @@
 
 .. _all_in_one:
 
-Basic installation case
-=======================
+Jumpstart to Wazuh
+==================
 
 This document will guide you to install the Wazuh server and Elastic stack components in a all in one configuration. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
 
