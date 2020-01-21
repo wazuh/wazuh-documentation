@@ -23,11 +23,10 @@ Our centralized components, the Wazuh server and Elastic Stack, have been design
 .. toctree::
    :maxdepth: 1
 
-   basics
+   introduction
    components
    architecture
    use-cases
-   introduction
    all_in_one
    compatibility_matrix/index
    packages-list
