@@ -23,7 +23,7 @@ Once logged again into the Kibana server, extract the generated ``~/kibana.zip``
 
 .. code-block:: console
 
-  # unzip ~/certs.zip -d ~/certs
+  # unzip ~/kibana.zip -d ~/certs
 
 The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
 
