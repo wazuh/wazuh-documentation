@@ -22,7 +22,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `match`_            | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `regex`_            | Any `regex <regex.html#os-regex-or-regex-syntax>`_.           | It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
+| `regex`_            | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_.| It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `decoded_as`_       | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
