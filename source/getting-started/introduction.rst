@@ -4,8 +4,8 @@
 
 .. _introduction:
 
-Introduction to basic case
-==========================
+Introduction
+============
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
