@@ -20,7 +20,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.11.1.tar.gz | tar zx
+      $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.11.2.tar.gz | tar zx
 
     .. note:: All the commands described below need to be executed with root user privileges.
 
