@@ -19,6 +19,8 @@ Options
 
 - `connection`_
 - `port`_
+- `key_polling`_
+- `mode`_
 - `protocol`_
 - `allowed-ips`_
 - `denied-ips`_
@@ -49,6 +51,34 @@ Specifies the port to use to listen for events.
 +--------------------+---------------------------------+
 
 .. _manager_protocol:
+
+key_polling
+^^^^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Attributes:
+
++--------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **enabled**              | Specifies if agent key polling is enabled or not                                                                    |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+
+mode
+^^^^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Specifies the mode of the agent key polling:
+Local: execute the script of the server where the agent is connected
+Master: execute the script of the cluster's master server.
+
++--------------------+---------------------------------+
+| **Default value**  | local                           |
++--------------------+---------------------------------+
+| **Allowed values** | local, master                   |
++--------------------+---------------------------------+
 
 protocol
 ^^^^^^^^^^^
@@ -140,6 +170,8 @@ Example of configuration
     <remote>
       <connection>syslog</connection>
       <port>514</port>
+      <key_polling enabled="yes">
+        <mode>local</mode>
       <protocol>udp</protocol>
       <allowed-ips>192.168.1.0/24</allowed-ips>
       <local_ip>192.168.1.5</local_ip>
