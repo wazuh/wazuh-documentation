@@ -69,7 +69,7 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # curl -sL https://deb.nodesource.com/setup_8.x | bash -
+    # curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
   .. note::
 
