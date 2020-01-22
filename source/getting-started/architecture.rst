@@ -21,7 +21,7 @@ The below diagram illustrates how components are distributed when the Wazuh serv
     :align: center
     :width: 100%
 
-In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server.
+In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can be all deployed on a single server.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
@@ -39,7 +39,7 @@ Communications and data flow
 Agent-server communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). The Wazuh server then decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
+Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). Then the Wazuh server decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
 
 - The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
 - The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule.
@@ -53,7 +53,7 @@ The Wazuh message protocol uses a 192-bit Blowfish encryption with a full 16-rou
 Wazuh-Elastic communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh server uses Filebeat to sends alert and event data to Elasticsearch server using TLS encryption.
+Wazuh server uses Filebeat to send alerts and events data to Elasticsearch server using TLS encryption.
 
 Filebeat formats the incoming data and optionally enriches it with GeoIP information before sending it to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to mine and visualize the information.
 
