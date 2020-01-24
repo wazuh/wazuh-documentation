@@ -78,7 +78,7 @@ Full path to the folder that contains the `osqueryd` executable.
 +-------------------------------+------------------------------------------------------+
 | **Default value on Linux**    | Empty                                                |
 +-------------------------------+------------------------------------------------------+
-| **Default value on Windows**  | C:\\ProgramData\\osquery\\osqueryd                   |
+| **Default value on Windows**  | C:\\Program Files\\osquery\\osqueryd                 |
 +-------------------------------+------------------------------------------------------+
 | **Allowed values**            | Any valid path                                       |
 +-------------------------------+------------------------------------------------------+
@@ -88,13 +88,13 @@ log_path
 
 Full path to the results log written by Osquery.
 
-+-------------------------------+------------------------------------------------------+
-| **Default value on Linux**    | /var/log/osquery/osqueryd.results.log                |
-+-------------------------------+------------------------------------------------------+
-| **Default value on Windows**  | C:\\ProgramData\\osquery\\log\\osqueryd.results.log  |
-+-------------------------------+------------------------------------------------------+
-| **Allowed values**            | Any valid path                                       |
-+-------------------------------+------------------------------------------------------+
++-------------------------------+-------------------------------------------------------+
+| **Default value on Linux**    | /var/log/osquery/osqueryd.results.log                 |
++-------------------------------+-------------------------------------------------------+
+| **Default value on Windows**  | C:\\Program Files\\osquery\\log\\osqueryd.results.log |
++-------------------------------+-------------------------------------------------------+
+| **Allowed values**            | Any valid path                                        |
++-------------------------------+-------------------------------------------------------+
 
 config_path
 ^^^^^^^^^^^
@@ -104,7 +104,7 @@ Path to the Osquery configuration file. This path can be relative to the folder 
 +-------------------------------+------------------------------------------------------+
 | **Default value on Linux**    | /etc/osquery/osquery.conf                            |
 +-------------------------------+------------------------------------------------------+
-| **Default value on Windows**  | C:\\ProgramData\\osquery\\osquery.conf               |
+| **Default value on Windows**  | C:\\Program Files\\osquery\\osquery.conf             |
 +-------------------------------+------------------------------------------------------+
 | **Allowed values**            | Any valid path                                       |
 +-------------------------------+------------------------------------------------------+

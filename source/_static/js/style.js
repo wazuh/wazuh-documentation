@@ -183,7 +183,7 @@ $(function() {
     heightNavbar();
   });
 
-  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'mousewheel';
+  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'wheel';
 
   if (document.getElementById('navbar-globaltoc').addEventListener) {
     document.getElementById('navbar-globaltoc').addEventListener(mousewheelevt, function(e) {
@@ -203,7 +203,7 @@ $(function() {
     }, {passive: false} );
   }
 
-  $('#navbar-globaltoc').on('mousewheel', function(e) {
+  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
     eventScroll = 'mousewheel';
     if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
       scrollDirection = 'up';
@@ -217,7 +217,7 @@ $(function() {
       e.returnValue = false;
       return false;
     }
-  });
+  }); */
 
   $('#navbar-globaltoc').keydown(function(e) {
     eventScroll = 'keys';
@@ -558,40 +558,75 @@ $(function() {
 
   /* Search results --------------------------------------------------------------------------------------------------*/
 
-  if ( $('#search-results').length > 0 ) {
-    const ulSearch = $('ul.search');
+  const searchResults = $('#search-results');
+
+  if ( searchResults.length > 0 ) {
     let lastResult = null;
-    let splitURL;
+    let splitURL = null;
+    const configAdd = {childList: true};
+    const configAtt = {attributes: true, attributeOldValue: true};
+    let observerResults = null;
+    let observerResultList = null;
+    let observerResultText = null;
+    let i = 0;
 
     /* Detects every result that is added to the list */
-    ulSearch.on('DOMSubtreeModified', function() {
-      lastResult = $('ul.search li:last-child');
-      splitURL = lastResult.children('a').prop('href').split('/');
-
-      /* Checks the URL to mark the results found in excludedSearchFolders */
-      $.each(excludedSearchFolders, function(index, value) {
-        if ( $.inArray(value, splitURL) !== -1 ) {
-          lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
-          lastResult.addClass('hidden-result'); /* Hides the excluded result */
-          return false; /* breaks the $.each loop */
+    const addedResult = function(mutationsList, observer) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'childList') {
+          lastResult = $('ul.search li:last-child');
+          splitURL = lastResult.children('a').prop('href').split('/');
+          /* Checks the URL to mark the results found in excludedSearchFolders */
+          $.each(excludedSearchFolders, function(index, value) {
+            if ( $.inArray(value, splitURL) !== -1 ) {
+              lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
+              lastResult.addClass('hidden-result'); /* Hides the excluded result */
+              return false; /* breaks the $.each loop */
+            }
+          });
         }
-      });
-    });
+      }
+    };
+
+    /* Checking that the list of search results exists */
+    const existsResultList = function(mutationsList, observer) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search') ) {
+          const ulSearch = $('ul.search');
+
+          observerResults.disconnect();
+
+          observerResultList = new MutationObserver(addedResult);
+          observerResultList.observe(ulSearch[0], configAdd);
+          observerResultText = new MutationObserver(changeResultText);
+          observerResultText.observe($('#search-results > p')[0], configAtt);
+        }
+      }
+    };
 
     /* Replaces the result message */
-    $('#search-results > p:first').one('DOMSubtreeModified', function() {
-      const totalResults = $('ul.search li').length;
-      const excludedResults = $('ul.search li.excluded-search-result').length;
-      let resultText = '';
-      if ( totalResults > 0 ) {
-        if ( excludedResults > 0 ) {
-          resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
-        } else {
-          resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+    const changeResultText = function(mutationsList, observer) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'attributes') {
+          observerResultText.disconnect();
+          const totalResults = $('ul.search li').length;
+          const excludedResults = $('ul.search li.excluded-search-result').length;
+          let resultText = '';
+          if ( totalResults > 0 ) {
+            if ( excludedResults > 0 ) {
+              resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+            } else {
+              resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+            }
+            $('#search-results > p:first').html(resultText);
+          }
         }
-        $(this).html(resultText);
       }
-    });
+    };
+
+    observerResults = new MutationObserver(existsResultList);
+    observerResults.observe(searchResults[0], configAdd);
+
 
     /* Click that allows showing excluded results */
     $(document).delegate('#search-results #toggle-results.include', 'click', function() {
@@ -660,7 +695,7 @@ $(function() {
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
     if ( !blockCode.hasClass('output') ) {
-      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
     } else {
       blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
     }
@@ -670,8 +705,7 @@ $(function() {
     const ele = $(this);
     let data = $(ele).parent().find('.highlight').text();
     data = String(data);
-    data = data.replace(/(?:\$\s)/g, '');
-    data = data.replace(/(?:\#\s)/g, '');
+    data = filterCodeBlock(data, $(ele).parent());
     copyToClipboard(data);
     $(ele).addClass('copied');
     $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
@@ -684,6 +718,50 @@ $(function() {
       $(ele).find('i').css({'display': 'block'});
     }, 1000);
   });
+
+  /**
+   * Filter the code block text that will be copied to the clipboard
+   * @param {string} data The string from the code block
+   * @param {Obj} parent jQuery object containing the parent element, which has the appropriate lexer class
+   * @return {string} filter code block text
+   */
+  function filterCodeBlock(data, parent) {
+    /* Remove elipsis */
+    data = data.replace(/(^|\n)\s*(\.\s{0,1}){3}\s*($|\n)/g, '\n');
+    /* Remove prompts with square brakets */
+    data = data.replace(/(.+]\$\s)/g, '');
+    data = data.replace(/(.+]\#\s)/g, '');
+    /* Remove especific prompts */
+    data = data.replace(/ansible@ansible:.+\$\s/g, '');
+    data = data.replace(/mysql>\s/g, '');
+    data = data.replace(/sqlite>\s/g, '');
+    data = data.replace(/Query\s.+\)\n/g, '');
+    /* Remove prompts with format user@domain in general */
+    data = data.replace(/.+@.+:.+(\#|\$)\s/g, '');
+    /* Remove prompts with the symbol > */
+    data = data.replace(/^>\s/g, '');
+    data = data.replace(/\n>\s/g, '\n');
+    /* Remove prompts with the symbol $ */
+    data = data.replace(/(?:\$\s)/g, '');
+    /* Remove additional line breaks */
+    data = data.replace(/\n{2,}$/g, '\n');
+    /* Remove prompts with the symbol # only when they cannot be considered comments */
+    if ( !parent.hasClass('highlight-yaml')
+      && !parent.hasClass('highlight-python')
+      && !parent.hasClass('highlight-powershell')
+      && !parent.is($('[class*="conf"]')) ) {
+      data = data.replace(/(?:\#\s)/g, '');
+    }
+    /* Filter only for commands (console or bash lexers) */
+    if ( parent.hasClass('highlight-console') || parent.hasClass('highlight-bash') ) {
+      /* Remove comment lines (starging with //) */
+      data = data.replace(/(^|\n)\/\/.+/g, '');
+      /* Remove additional line breaks in command lines to avoid accidental enter inputs */
+      data = data.replace(/\n{2,}/g, '\n');
+    }
+    data = data.trim();
+    return data;
+  }
 
   /**
    * Copy the data to clipboard
@@ -706,7 +784,7 @@ $(function() {
     if (find != null) {
       const dataArray = data.split('\n');
       let content = '';
-      dataArray.forEach((line) => {
+      dataArray.forEach(function(line) {
         line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
         line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
         content += line;

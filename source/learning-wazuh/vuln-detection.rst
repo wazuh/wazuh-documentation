@@ -199,7 +199,7 @@ system data is also tracked.
             "id": 1524588903,
             "time": "2018/02/23 01:12:21"
           },
-          "release": "3.10.2-693.17.1.el7.x86_64",
+          "release": "3.11.2-693.17.1.el7.x86_64",
           "hostname": "elastic-server",
           "os": {
             "version": "7 (Core)",
@@ -297,7 +297,7 @@ Agent-specific databases on the Wazuh manager store, among other things, the ``s
 
   .. code-block:: console
 
-    1364535564|2018/02/23 01:11:23|linux-agent|x86_64|CentOS Linux|7 (Core)|||||centos|Linux|3.10.2-693.11.6.el7.x86_64|#1 SMP Thu Jan 4 01:06:37 UTC 2018
+    1364535564|2018/02/23 01:11:23|linux-agent|x86_64|CentOS Linux|7 (Core)|||||centos|Linux|3.11.2-693.11.6.el7.x86_64|#1 SMP Thu Jan 4 01:06:37 UTC 2018
 
 3. Do a quick dump of the software packages.
 

@@ -9,10 +9,12 @@ Open a session in your Linux/Unix agent host as root user. After that, you can r
 
 1. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder and run the ``agent-auth`` program:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # cp rootCA.pem /var/ossec/etc
-      # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
+    # cp rootCA.pem /var/ossec/etc
+    # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
+
+  .. note:: Note that this method must include the -v option that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the manager.
 
 
 2. Edit the Wazuh agent configuration to add the Wazuh server IP address.
