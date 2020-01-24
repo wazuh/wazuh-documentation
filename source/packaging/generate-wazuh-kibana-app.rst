@@ -2,8 +2,8 @@
 
 .. _create-kibana-app:
 
-Wazuh Kibana plugin package
-===========================
+Wazuh Kibana plugin
+===================
 
 Wazuh provides an automated way of building our Wazuh Kibana plugin packages.
 

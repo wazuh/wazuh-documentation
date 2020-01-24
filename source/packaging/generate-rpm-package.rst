@@ -2,8 +2,8 @@
 
 .. _create-rpm:
 
-RPM packages
-============
+RPM
+===
 
 Wazuh provides an automated way of building RPM packages using docker so there is no need for any other dependency.
 

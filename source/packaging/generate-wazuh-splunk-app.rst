@@ -2,8 +2,8 @@
 
 .. _create-splunk-app:
 
-Splunk App package
-==================
+Splunk App
+==========
 
 Wazuh provides an automated way of building our Wazuh Splunk app packages.
 

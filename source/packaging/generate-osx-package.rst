@@ -2,8 +2,8 @@
 
 .. _create-osx:
 
-macOS package
-=============
+macOS
+=====
 
 Wazuh provides an automated way of building macOS packages, keep in mind that to build an macOS package you must run this tool in an macOS system.
 

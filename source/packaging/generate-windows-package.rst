@@ -2,8 +2,8 @@
 
 .. _create-windows:
 
-Generate Wazuh Windows packages
-===============================
+Windows
+=======
 
 Wazuh provides an automated way of building Windows packages.
 

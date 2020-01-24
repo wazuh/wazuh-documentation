@@ -2,8 +2,8 @@
 
 .. _create-deb:
 
-Debian packages
-===============
+Debian
+======
 
 Wazuh provides an automated way of building DEB packages using docker so there is no need for any other dependency.
 
