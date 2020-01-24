@@ -2,8 +2,8 @@
 
 .. _create-aix:
 
-Generate Wazuh AIX packages
-===========================
+AIX package
+===========
 
 Wazuh provides an automated way of building AIX packages, keep in mind that to build an AIX package you must run this tool in an AIX system.
 
@@ -47,18 +47,18 @@ Below, you will find some examples of how to build an AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.0
+  # ./generate_wazuh_packages.sh -b v3.11.2
 
-This will generate a 3.11.0 Wazuh agent AIX package.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v3.11.0 -c
-
-This will generate a 3.11.0 Wazuh agent AIX package with checksum.
+This will generate a 3.11.2 Wazuh agent AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.0  -p /opt
+  # ./generate_wazuh_packages.sh -b v3.11.2 -c
 
-This will generate a 3.11.0 Wazuh agent AIX package with ``/opt`` as installation directory.
+This will generate a 3.11.2 Wazuh agent AIX package with checksum.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v3.11.2  -p /opt
+
+This will generate a 3.11.2 Wazuh agent AIX package with ``/opt`` as installation directory.

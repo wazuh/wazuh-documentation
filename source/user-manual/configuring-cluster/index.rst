@@ -92,11 +92,15 @@ Deploying a Wazuh cluster
 
         .. code-block:: console
 
-            # /var/ossec/bin/cluster-control -l
+            # /var/ossec/bin/cluster_control -l
 
+    The output should be similar to:
+
+        .. code-block:: console
+        
             NAME           TYPE    VERSION  ADDRESS
-            master-node    master  3.10.2   wazuh-master
-            worker01-node  worker  3.10.2   172.22.0.3
+            master-node    master  3.11.2   wazuh-master
+            worker01-node  worker  3.11.2   172.22.0.3
 
 
     .. warning::
