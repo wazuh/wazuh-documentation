@@ -5,7 +5,7 @@
   .. group-tab:: Wazuh single-node cluster
 
 
-    We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follow:
+    Create the specification file ``/usr/share/elasticsearch/instances.yml`` as follows:
 
     .. code-block:: yaml
 
@@ -21,7 +21,7 @@
 
     Replace the ``10.0.0.2`` and ``10.0.0.3`` IPs with your host IPs.
 
-    In the following steps, we will create a file that contains a folder named after the instance defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    We will now create a compressed zip file that contains a folder named after each of the instances defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
@@ -29,7 +29,7 @@
 
       # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
-    The generated file ``~/certs.zip`` must be copied into the Wazuh server before to continue the steps below.
+    The generated file ``~/certs.zip`` must be copied into the Wazuh server before continuing with the steps below.
 
     Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
 

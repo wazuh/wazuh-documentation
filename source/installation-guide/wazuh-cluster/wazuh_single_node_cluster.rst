@@ -8,7 +8,7 @@
 Wazuh single-node cluster
 =========================
 
-This document will guide you to install the Wazuh server components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document will guide you in installing the Wazuh server components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubts about your OS compatibility.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -108,7 +108,7 @@ Installing the Wazuh API
 
 
 .. note::
-  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default user and password and more.
+  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default credentials and more.
 
 .. _wazuh_server_single_node_filebeat:
 
