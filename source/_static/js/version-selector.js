@@ -263,8 +263,17 @@ jQuery(function($) {
     while (cellTemp.length) {
       const analyzeUrl = cellTemp.pop();
       let infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
-      infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
-      const logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      let logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      if (logic.length == 0) {
+        const pageHashArray = analyzeUrl['page'].split('#');
+        if ( pageHashArray.length > 1 ) {
+          infoUrl = getInfoRedirectUrl(pageHashArray[0], redirections);
+          if (infoUrl.length != 0) {
+            analyzeUrl['page'] = pageHashArray[0];
+          }
+        }
+        logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      }
       while (logic.length) {
         const forLogic = logic.pop();
         const p = forLogic['url'];
