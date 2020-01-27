@@ -279,7 +279,7 @@ Verifying the deployment
 
     In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: ``https://wazuh.your-domain.com``.
 
-    Also, you can access using the DNS (Eg: ``https://internal-xxx-yyy.us-east-1.elb.amazonaws.com``):
+    Also, you can access using the DNS (e.g.: ``https://internal-xxx-yyy.us-east-1.elb.amazonaws.com``):
 
     .. code-block:: console
 
