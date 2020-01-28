@@ -41,7 +41,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # git clone -b v3.11.2 https://github.com/wazuh/wazuh.git
+        # git clone -b v3.11.3 https://github.com/wazuh/wazuh.git
 
      .. note:: If you can't download the file due to an Open SSL error, then you should copy the directory with the scp utility.
 
