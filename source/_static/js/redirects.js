@@ -42,6 +42,11 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/S3-bucket.html',
+      '3.11': '/amazon/services/prerequisites/S3-bucket.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
       '3.11': '/packaging/generate-wpk-package.html',
     },
@@ -55,6 +60,7 @@ redirections.push(
 /* Pages added in 3.11 */
 
 newUrls['3.11'] = [
+  '/amazon/services/prerequisites/S3-bucket.html',
   '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
 ];
 
@@ -207,12 +213,12 @@ redirections.push(
       '3.9': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
     },
     {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
       '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
     },
     {
-      'target': ['3.9=>3.8'],
+      'target': ['3.8=>3.9', '3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
       '3.9': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_package_windows.html',
     },
@@ -248,8 +254,38 @@ redirections.push(
     },
     {
       'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle5/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_sources_oracle6_or_greater.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_package_oracle6_or_greater.html',
     },
     {
       'target': ['3.9=>3.8'],
@@ -293,7 +329,7 @@ redirections.push(
     },
     {
       'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/index.html',
     },
     {
@@ -303,7 +339,7 @@ redirections.push(
     },
     {
       'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/index.html',
     },
     {
@@ -383,7 +419,7 @@ redirections.push(
     },
     {
       'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/index.html',
     },
     {
@@ -393,7 +429,7 @@ redirections.push(
     },
     {
       'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/index.html',
     },
     {
@@ -447,8 +483,13 @@ redirections.push(
       '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_package_suse11.html',
     },
     {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
+      'target': ['3.8=>3.9'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
+      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
+    },
+    {
+      'target': ['3.9=>3.8'],
+      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
       '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
     },
     {
@@ -457,7 +498,7 @@ redirections.push(
       '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_package_suse12.html',
     },
     {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
+      'target': ['3.8=>3.9'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
       '3.9': '/installation-guide/installing-wazuh-agent/macos/index.html',
     },
@@ -465,11 +506,6 @@ redirections.push(
       'target': ['3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
       '3.9': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_package_macos.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
-      '3.9': '//installation-guide/installing-wazuh-agent/macos/wazuh_agent_sources_macos.html',
     },
     {
       'target': ['3.8=>3.9', '3.9=>3.8'],
@@ -500,11 +536,6 @@ redirections.push(
       'target': ['3.9=>3.8'],
       '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
       '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_package_solaris11.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_sources_solaris11.html',
     },
     {
       'target': ['3.8=>3.9', '3.9=>3.8'],
