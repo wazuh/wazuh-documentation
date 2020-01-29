@@ -42,6 +42,11 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/index.html',
+      '3.11': '/amazon/services/supported-services/index.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/amazon/configuration/considerations.html',
       '3.11': '/amazon/services/prerequisites/considerations.html',
     },
@@ -107,6 +112,11 @@ redirections.push(
     },
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/troubleshooting.html',
+      '3.11': '/amazon/services/troubleshooting.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
       '3.11': '/packaging/generate-wpk-package.html',
     },
@@ -114,12 +124,38 @@ redirections.push(
       'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
       '3.11': '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/user-manual/capabilities/vulnerability-detection.html#compatibility-matrix',
+      '3.11': '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/user-manual/capabilities/vulnerability-detection.html#how-it-works',
+      '3.11': '/user-manual/capabilities/vulnerability-detection/how_it_works.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/user-manual/capabilities/vulnerability-detection.html',
+      '3.11': '/user-manual/capabilities/vulnerability-detection/index.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/user-manual/capabilities/vulnerability-detection.html#use-case-running-a-vulnerability-scan',
+      '3.11': '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/user-manual/reference/ossec-conf/wodle-vuln-detector.html',
+      '3.11': '/user-manual/reference/ossec-conf/vuln-detector.html',
     }
 );
 
 /* Pages added in 3.11 */
 
 newUrls['3.11'] = [
+  '/amazon/services/supported-services/index.html',
   '/amazon/services/prerequisites/considerations.html',
   '/amazon/services/prerequisites/credentials.html',
   '/amazon/services/prerequisites/dependencies.html',
@@ -133,7 +169,27 @@ newUrls['3.11'] = [
   '/amazon/services/supported-services/macie.html',
   '/amazon/services/supported-services/trusted-advisor.html',
   '/amazon/services/supported-services/vpc.html',
-  '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  '/amazon/services/troubleshooting.html',
+  '/packaging/generate-aix-package.html',
+  '/packaging/generate-deb-package.html',
+  '/packaging/generate-hpux-package.html',
+  '/packaging/generate-osx-package.html',
+  '/packaging/generate-ova.html',
+  '/packaging/generate-rpm-package.html',
+  '/packaging/generate-sol-package.html',
+  '/packaging/generate-wazuh-kibana-app.html',
+  '/packaging/generate-wazuh-splunk-app.html',
+  '/packaging/generate-wpk-package.html',
+  '/packaging/index.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  '/user-manual/capabilities/vulnerability-detection/allow_os.html',
+  '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
+  '/user-manual/capabilities/vulnerability-detection/cpe_helper.html',
+  '/user-manual/capabilities/vulnerability-detection/how_it_works.html',
+  '/user-manual/capabilities/vulnerability-detection/index.html',
+  '/user-manual/capabilities/vulnerability-detection/offline_update.html',
+  '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
+  '/user-manual/reference/ossec-conf/vuln-detector.html',
 ];
 
 
