@@ -221,6 +221,9 @@ jQuery(function($) {
         normalizedURL = '/'+normalizedURL;
       }
 
+      if (!checkEncodeURI(normalizedURL)) {
+        normalizedURL = encodeURI(normalizedURL);
+      }
       return normalizedURL;
     } else {
       return originalUrl;
@@ -573,3 +576,12 @@ jQuery(function($) {
     return found;
   }
 });
+
+/**
+ * Checks if a URI is encoded
+ * @param {string} str string containing the URI to be checked
+ * @return {boolean} True if the URL seems to be encoded
+ */
+function checkEncodeURI(str) {
+  return /\%/i.test(str);
+}
