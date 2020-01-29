@@ -42,8 +42,68 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/configuration/considerations.html',
+      '3.11': '/amazon/services/prerequisites/considerations.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/configuration/credentials.html',
+      '3.11': '/amazon/services/prerequisites/credentials.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/configuration/dependencies.html',
+      '3.11': '/amazon/services/prerequisites/dependencies.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/amazon/services/S3-bucket.html',
       '3.11': '/amazon/services/prerequisites/S3-bucket.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/configuration/index.html',
+      '3.11': '/amazon/services/prerequisites/index.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/cloudtrail.html',
+      '3.11': '/amazon/services/supported-services/cloudtrail.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/config.html',
+      '3.11': '/amazon/services/supported-services/config.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/guardduty.html',
+      '3.11': '/amazon/services/supported-services/guardduty.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/inspector.html',
+      '3.11': '/amazon/services/supported-services/inspector.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/kms.html',
+      '3.11': '/amazon/services/supported-services/kms.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/macie.html',
+      '3.11': '/amazon/services/supported-services/macie.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/trusted-advisor.html',
+      '3.11': '/amazon/services/supported-services/trusted-advisor.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/amazon/services/vpc.html',
+      '3.11': '/amazon/services/supported-services/vpc.html',
     },
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
@@ -60,7 +120,19 @@ redirections.push(
 /* Pages added in 3.11 */
 
 newUrls['3.11'] = [
+  '/amazon/services/prerequisites/considerations.html',
+  '/amazon/services/prerequisites/credentials.html',
+  '/amazon/services/prerequisites/dependencies.html',
   '/amazon/services/prerequisites/S3-bucket.html',
+  '/amazon/services/prerequisites/index.html',
+  '/amazon/services/supported-services/cloudtrail.html',
+  '/amazon/services/supported-services/config.html',
+  '/amazon/services/supported-services/guardduty.html',
+  '/amazon/services/supported-services/inspector.html',
+  '/amazon/services/supported-services/kms.html',
+  '/amazon/services/supported-services/macie.html',
+  '/amazon/services/supported-services/trusted-advisor.html',
+  '/amazon/services/supported-services/vpc.html',
   '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
 ];
 
