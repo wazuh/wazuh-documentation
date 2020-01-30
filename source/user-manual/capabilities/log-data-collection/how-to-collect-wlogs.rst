@@ -266,7 +266,7 @@ Some events from different channels are shown below with the associated provider
 Filtering events from Windows Event Channel with queries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Events from the Windows Event channel can be filtered as below.
+Events from the Windows Event channel can be filtered as below. In this example, only events which levels are less or equal to "3" are checked.
 
 .. code-block:: xml
 
@@ -284,12 +284,13 @@ Users can filter events with different severity levels.
         <location>System</location>
         <log_format>eventchannel</log_format>
         <query>
-            <QueryList>
-                <Query Id="0" Path="System">
-                    <Select Path="System">*[System[(Level&lt;=3)]]</Select>
-                </Query>
-            </QueryList>
+            \<QueryList\>
+                \<Query Id="0" Path="System"\>
+                    \<Select Path="System"\>*[System[(Level&lt;=3)]]\</Select\>
+                \</Query\>
+            \</QueryList\>
         </query>
     </localfile>
 
-In this example, only events which levels are less or equal to "3" are checked.
+.. note::
+  The ``<QueryList>`` syntax requires escaping the XML labels inside the query as above. 
