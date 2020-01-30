@@ -56,7 +56,7 @@ Available options
 - `not_same_field`_
 - `global_frequency`_
 - `different_id`_
-- `different_source_ip`_
+- `different_src_ip`_
 - `different_destination_ip`_
 - `different_src_port`_
 - `different_dst_port`_
@@ -768,17 +768,17 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <different_id />  |
 +--------------------+-------------------+
 
-different_source_ip
-^^^^^^^^^^^^^^^^^^^
+different_src_ip
+^^^^^^^^^^^^^^^^
 
 Specifies that the decoded source ip must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 .. versionadded:: 3.12.0
 
-+--------------------+--------------------------+
-| **Example of use** | <different_source_ip />  |
-+--------------------+--------------------------+
++--------------------+-----------------------+
+| **Example of use** | <different_src_ip />  |
++--------------------+-----------------------+
 
 different_destination_ip
 ^^^^^^^^^^^^^^^^^^^^^^^^
