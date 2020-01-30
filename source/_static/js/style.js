@@ -792,4 +792,11 @@ $(function() {
       ele.html(content);
     }
   });
+
+  /* Disable "not found" links in the version selector -------------------------------------------*/
+  $('#select-version a.disable').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  });
 });
