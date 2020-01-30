@@ -179,6 +179,7 @@ newUrls['3.11'] = [
   '/packaging/generate-sol-package.html',
   '/packaging/generate-wazuh-kibana-app.html',
   '/packaging/generate-wazuh-splunk-app.html',
+  '/packaging/generate-windows-package.html',
   '/packaging/generate-wpk-package.html',
   '/packaging/index.html',
   '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
@@ -192,6 +193,8 @@ newUrls['3.11'] = [
   '/user-manual/reference/ossec-conf/vuln-detector.html',
   '/release-notes/release_3_11_0.html',
   '/release-notes/release_3_11_1.html',
+  '/release-notes/release_3_11_2.html',
+  '/release-notes/release_3_11_3.html',
 ];
 
 
