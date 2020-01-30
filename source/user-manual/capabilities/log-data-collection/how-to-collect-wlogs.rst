@@ -284,11 +284,11 @@ Users can filter events with different severity levels.
         <location>System</location>
         <log_format>eventchannel</log_format>
         <query>
-            \<QueryList\>
-                \<Query Id="0" Path="System"\>
-                    \<Select Path="System"\>*[System[(Level&lt;=3)]]\</Select\>
-                \</Query\>
-            \</QueryList\>
+            \<QueryList>
+                \<Query Id="0" Path="System">
+                    \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                \</Query>
+            \</QueryList>
         </query>
     </localfile>
 
