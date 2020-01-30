@@ -221,6 +221,9 @@ jQuery(function($) {
         normalizedURL = '/'+normalizedURL;
       }
 
+      if (!checkEncodeURI(normalizedURL)) {
+        normalizedURL = encodeURI(normalizedURL);
+      }
       return normalizedURL;
     } else {
       return originalUrl;
@@ -263,8 +266,17 @@ jQuery(function($) {
     while (cellTemp.length) {
       const analyzeUrl = cellTemp.pop();
       let infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
-      infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
-      const logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      let logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      if (logic.length == 0) {
+        const pageHashArray = analyzeUrl['page'].split('#');
+        if ( pageHashArray.length > 1 ) {
+          infoUrl = getInfoRedirectUrl(pageHashArray[0], redirections);
+          if (infoUrl.length != 0) {
+            analyzeUrl['page'] = pageHashArray[0];
+          }
+        }
+        logic = getLogicRedirects(analyzeUrl, infoUrl, versions);
+      }
       while (logic.length) {
         const forLogic = logic.pop();
         const p = forLogic['url'];
@@ -564,3 +576,12 @@ jQuery(function($) {
     return found;
   }
 });
+
+/**
+ * Checks if a URI is encoded
+ * @param {string} str string containing the URI to be checked
+ * @return {boolean} True if the URL seems to be encoded
+ */
+function checkEncodeURI(str) {
+  return /\%/i.test(str);
+}
