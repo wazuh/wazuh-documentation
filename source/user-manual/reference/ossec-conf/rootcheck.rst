@@ -26,6 +26,7 @@ Options
 - `windows_apps`_
 - `windows_malware`_
 - `scanall`_
+- `readall`_
 - `frequency`_
 - `disabled`_
 - `check_dev`_
@@ -155,6 +156,17 @@ scanall
 ^^^^^^^^^^^^^^^
 
 Tells rootcheck to scan the entire system.  This option may lead to some false positives.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+readall
+^^^^^^^^^^^^^^^
+
+Tells rootcheck to scan recursively in each of the selected system directories
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -325,7 +337,7 @@ Default Unix configuration
 .. code-block:: xml
 
     <!-- Policy monitoring -->
-      <rootcheck>
+    <rootcheck>
       <disabled>no</disabled>
       <check_unixaudit>yes</check_unixaudit>
       <check_files>yes</check_files>

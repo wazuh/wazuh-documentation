@@ -145,7 +145,7 @@ Another example using the ``~`` operator is the following:
                     "major": "7",
                     "name": "CentOS Linux",
                     "platform": "centos",
-                    "uname": "Linux |localhost.localdomain |3.11.1-862.11.6.el7.x86_64 |#1 SMP Tue Aug 14 21:49:04 UTC 2018 |x86_64",
+                    "uname": "Linux |localhost.localdomain |3.11.3-862.11.6.el7.x86_64 |#1 SMP Tue Aug 14 21:49:04 UTC 2018 |x86_64",
                     "version": "7"
                     },
                     "name": "agent002",

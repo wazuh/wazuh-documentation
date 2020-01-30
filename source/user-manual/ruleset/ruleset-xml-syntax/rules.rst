@@ -659,7 +659,7 @@ Examples:
 
     <rule id="100035" level="4">
       ...
-      <description> File missing. Root acces unrestricted. </description>
+      <description> File missing. Root access unrestricted. </description>
     </rule>
 
 Since Wazuh version 3.3 it is possible to include any decoded field (static or dynamic) to the description message. You can use the following syntax: ``$(field_name)`` to add a field to the description.

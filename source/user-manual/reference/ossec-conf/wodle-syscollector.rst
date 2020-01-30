@@ -162,7 +162,7 @@ Enables the processes scan.
 hotfixes
 ^^^^^^^^
 
-.. versionadded:: 3.11.1
+.. versionadded:: 3.11.3
 
 Enables the hotfixes scan. It reports the Windows updates installed.
 

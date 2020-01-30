@@ -47,7 +47,7 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="aix-agent" yum install wazuh-agent
+          WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent
 
 * Registration with password and assigning a group:
 
@@ -60,14 +60,14 @@ Examples:
 
 .. code-block:: console
 
-     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
+     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
           WAZUH_REGISTRATION_CA="rootCA.pem" yum install wazuh-agent
 
 * Registration with protocol:
 
 .. code-block:: console
 
-     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
+     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
           WAZUH_PROTOCOL="tcp" yum install wazuh-agent
 
 * Registration and adding multiple address:
@@ -75,7 +75,7 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-          WAZUH_AGENT_NAME="aix-agent" yum install wazuh-agent
+          WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
