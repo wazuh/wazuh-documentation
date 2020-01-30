@@ -190,6 +190,8 @@ newUrls['3.11'] = [
   '/user-manual/capabilities/vulnerability-detection/offline_update.html',
   '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
   '/user-manual/reference/ossec-conf/vuln-detector.html',
+  '/release-notes/release_3_11_0.html',
+  '/release-notes/release_3_11_1.html',
 ];
 
 
@@ -1732,6 +1734,14 @@ newUrls['3.2'] = [
 
 
 /* *** RELEASE 3.1 *** */
+
+/* Redirections from 3.0 to 3.1 */
+
+redirections.push({
+  'target': ['3.0=>3.1', '3.1=>3.0'],
+  '3.0': '/installation-guide/unattended-installation.html',
+  '3.1': '/user-manual/reference/unattended-installation.html',
+});
 
 /* Pages added in 3.1 */
 
