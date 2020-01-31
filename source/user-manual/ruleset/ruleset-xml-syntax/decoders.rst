@@ -367,7 +367,7 @@ An example of its use is described at the :doc:`JSON decoder <../json-decoder>` 
 use_own_name
 ^^^^^^^^^^^^^
 
-Allows to set the name of the child decoder from the name attribute instead of using the name of the parent decoder.
+Allows setting the name of the child decoder from the name attribute instead of using the name of the parent decoder.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
