@@ -7,7 +7,7 @@ Rules Syntax
 
 The Wazuh Ruleset combined with any customs rules is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
 
-Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ with our community.
+Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ to our community.
 
 
 Overview
@@ -37,7 +37,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `extra_data`_       | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `user`_             | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will compare a sregex representing a username with a string decoded as ``user``.                 |
+| `user`_             | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will compare a sregex representing a username with a string decoded as ``user``.                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `program_name`_     | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the program_name obtained in the pre-decoding phase.                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -79,7 +79,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous one.                                          |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous one.                                   |
+| `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous one.                                       |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_url`_    | None.                                                         | The decoded ``url`` must be different.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -138,7 +138,7 @@ rule
 +               +----------------+----------------------------------------------------------------------------------------+
 |               | Allowed values | yes, no                                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
-| **noalert**   | Definition     | Not trigger an alert if the rule matches.                                             |
+| **noalert**   | Definition     | Not trigger an alert if the rule matches.                                              |
 +               +----------------+----------------------------------------------------------------------------------------+
 |               | Allowed values | Attribute with no value                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
