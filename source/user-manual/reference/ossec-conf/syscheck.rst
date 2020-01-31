@@ -41,6 +41,7 @@ Options
 - `process_priority`_
 - `synchronization`_
 - `max_eps`_
+- `database`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -593,6 +594,20 @@ Set the maximum output throughput.
 | **Default value**  | 200                                   |
 +--------------------+---------------------------------------+
 | **Allowed values** | Integer number between 1 and 1000000. |
++--------------------+---------------------------------------+
+
+
+database
+^^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Specify where is the database going to be stored.
+
++--------------------+---------------------------------------+
+| **Default value**  | disk                                  |
++--------------------+---------------------------------------+
+| **Allowed values** | disk, memory                          |
 +--------------------+---------------------------------------+
 
 
