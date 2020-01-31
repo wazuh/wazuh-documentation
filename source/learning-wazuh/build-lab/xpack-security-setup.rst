@@ -150,7 +150,7 @@ Configure SSL for Filebeat
 
    .. code-block:: console
 
-      # scp -i Wazuh_Lab.pem centos@N.N.N.N:
+      # scp -i Wazuh_Lab.pem Wazuh_Lab.pem centos@N.N.N.N:
 
    Where N.N.N.N must be replaced with the Elastic IP of your Elastic Server.
 
