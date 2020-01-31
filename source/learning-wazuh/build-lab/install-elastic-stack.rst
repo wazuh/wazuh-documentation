@@ -57,7 +57,7 @@ to Kibana. For more information, please see `Elasticsearch
 
   .. code-block:: console
 
-	 # yum -y install elasticsearch-7.5.1
+	 # yum -y install elasticsearch-7.5.2
 
 2. Enable and start the Elasticsearch service:
 
@@ -96,7 +96,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    # yum install -y kibana-7.5.1
+    # yum install -y kibana-7.5.2
 
 2. Install the Wazuh plugin for Kibana:
 
@@ -105,7 +105,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.1_7.5.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.5.2.zip
 
 3. Kibana will only listen on the loopback interface (localhost) by default,
    which means that it can be only accessed from the same machine. To access
