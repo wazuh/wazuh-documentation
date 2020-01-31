@@ -21,7 +21,7 @@ Launch a Wazuh Server instance
     :width: 75%
 
 - Click on **[Continue]**.
-- Select the General purpose **t2.small** image and click on **[Next: Configure Instance Details]**
+- Select the General purpose **t2.micro** image and click on **[Next: Configure Instance Details]**
 - For *Network*, choose your VPC, and for the *Primary IP* of eth0, put in "172.30.0.10".
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/config-inst-details.png
