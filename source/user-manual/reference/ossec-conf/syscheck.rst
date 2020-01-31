@@ -164,9 +164,14 @@ Attributes:
 |                          | If set, ``realtime`` works as usual (with symbolic links to directories, not files).                                |
 +                          +                                                                                                                     +
 |                          | .. versionadded:: 3.8.0                                                                                             |
+|                          | .. deprecated:: 3.12.0                                                                                              |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+
+.. note::
+
+   Since version 3.12, the <follow_symbolic_link> feature is run by default when monitoring a link.
 
 .. _reference_ossec_syscheck_ignore:
 
