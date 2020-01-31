@@ -114,6 +114,12 @@ b. For SysV Init:
 
     # service wazuh-manager restart
 
+
+.. note::
+
+  The first time the Vulnerability database is updated can take longer to finish.
+
+
 Look at the logs
 ----------------
 
@@ -131,12 +137,15 @@ and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manage
 
   .. code-block:: console
 
-    2019/11/14 19:23:38 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting Red Hat Enterprise Linux database update.
-    2019/11/14 19:24:14 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the Red Hat Enterprise Linux feed finished successfully.
-    2019/11/14 19:24:15 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting National Vulnerability Database database update.
-    2019/11/14 19:24:25 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the National Vulnerability Database feed finished successfully.
-    2019/11/14 19:24:25 wazuh-modulesd:vulnerability-detector: INFO: (5452): Starting vulnerability scanning.
-    2019/11/14 19:24:25 wazuh-modulesd:vulnerability-detector: INFO: (5453): Vulnerability scanning finished.
+      [root@wazuh-manager ~]# grep vulnerability-detector: /var/ossec/logs/ossec.log
+      2020/01/31 17:26:27 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting Red Hat Enterprise Linux database update.
+      2020/01/31 17:26:46 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the Red Hat Enterprise Linux feed finished successfully.
+      2020/01/31 17:26:48 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting National Vulnerability Database database update.
+      2020/01/31 17:46:06 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the National Vulnerability Database feed finished successfully.
+      2020/01/31 17:46:06 wazuh-modulesd:vulnerability-detector: INFO: (5452): Starting vulnerability scanning.
+      2020/01/31 17:46:19 wazuh-modulesd:vulnerability-detector: INFO: (5453): Vulnerability scanning finished.
+
+
 
 
 
