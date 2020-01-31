@@ -5,7 +5,7 @@
 Rules Syntax
 ============
 
-The Wazuh Ruleset combined with any custom rules, is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
+The Wazuh Ruleset combined with any customs rules is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
 
 Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ with our community.
 
@@ -37,7 +37,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `extra_data`_       | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `user`_             | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will compare an sregex representing a username with a string decoded as ``user``.                 |
+| `user`_             | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will compare a sregex representing a username with a string decoded as ``user``.                 |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `program_name`_     | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the program_name obtained in the pre-decoding phase.                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -79,7 +79,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous one.                                          |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_field`_   | None.                                                         | The decoded ``field`` must be the different than the previous one.                                   |
+| `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous one.                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_url`_    | None.                                                         | The decoded ``url`` must be different.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -107,7 +107,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 rule
 ^^^^
 
-``<rule>`` is the label that starts the block that defines a *rule*. In this section the different options to this label are explained.
+``<rule>`` is the label that starts the block that defines a *rule*. In this section, different options for this label are explained.
 
 +---------------+----------------+----------------------------------------------------------------------------------------+
 | **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                  |
@@ -138,7 +138,7 @@ rule
 +               +----------------+----------------------------------------------------------------------------------------+
 |               | Allowed values | yes, no                                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
-| **noalert**   | Definition     | Not trigger any alert if the rule matches.                                             |
+| **noalert**   | Definition     | Not trigger an alert if the rule matches.                                             |
 +               +----------------+----------------------------------------------------------------------------------------+
 |               | Allowed values | Attribute with no value                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
@@ -249,7 +249,7 @@ Example:
         <description>Generic template for all syslog rules.</description>
       </rule>
 
-The rule will be triggered if the event has previously been cataloged ``syslog`` by the decoder, but it will not trigger an alert. Instead it will be matched by other rules that might trigger alerts if needed.
+The rule will be triggered if the event has previously been cataloged ``syslog`` by the decoder, but it will not trigger an alert. Instead, it will be matched by other rules that might trigger alerts if needed.
 
 field
 ^^^^^
@@ -374,7 +374,7 @@ This rule will trigger when the user ``mysql`` successfully logs into the system
 program_name
 ^^^^^^^^^^^^
 
-Used as a requisite to trigger the rule. Program name is decoded from syslog process name.
+Used as a requisite to trigger the rule. The program's name is decoded from syslog process name.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -416,7 +416,7 @@ Example:
           <description>Yum logs.</description>
         </rule>
 
-This rule will group rules for ``Yum logs`` when something is either being installed, updated or erase.
+This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
 
 time
 ^^^^
@@ -445,7 +445,7 @@ This rule will trigger when there is a successful login between 6 pm and 8 am.
 weekday
 ^^^^^^^
 
-Used as a requisite to trigger the rule. Checks the week day that the event was generated.
+Used as a requisite to trigger the rule. Checks the weekday that the event was generated.
 
 +--------------------+-------------------------------------+
 | **Default Value**  | n/a                                 |
@@ -604,7 +604,7 @@ This rule will trigger a level 4 alert when the decoded action from Netscreen is
 if_sid
 ^^^^^^
 
-Used as a requisite to trigger the rule. Matches if the ID has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendant as necessary, whereas decoder cannot have "grandchildren".
+Used as a requisite to trigger the rule. Matches if the ID has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -864,7 +864,7 @@ This option is used in conjunction with frequency and timeframe.
 
 Example:
 
-  As an example to this last options, check this rule:
+  As an example of these last options, check this rule:
 
     .. code-block:: xml
 
@@ -875,12 +875,12 @@ Example:
         <same_dst_port />
       </rule>
 
-  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using same ``port``.
+  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
 
 description
 ^^^^^^^^^^^
 
-Specifies a human readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
+Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -919,13 +919,13 @@ Example:
 list
 ^^^^
 
-Perform a CDB lookup using an ossec list.  This is a fast on disk database which will always find keys within two seeks of the file.
+Perform a CDB lookup using an ossec list.  This is a fast on-disk database which will always find keys within two seeks of the file.
 
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                                               |
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory.Must also be included in the ossec.conf file. |
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                                                                |
++--------------------+--------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory. Must also be included in the ossec.conf file. |
++--------------------+--------------------------------------------------------------------------------------------------------------------+
 
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 | Attribute       | Description                                                                                                                       |
@@ -975,7 +975,7 @@ Extra information may be added through the following attributes:
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
 | Attribute | Allowed values | Description                                                                                               |
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
-| type      | **text**       | This is the default when no type is selected. Additional,information about the alert/event.               |
+| type      | **text**       | This is the default when no type is selected. Additional information about the alert/event.               |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
 |           | **link**       | Link to more information about the alert/event.                                                           |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
@@ -1061,7 +1061,7 @@ Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 
-Groups are variables that define a behavior. When an alert includes that group label, this behavior will occur.
+Groups are variables that define behavior. When an alert includes that group label, this behavior will occur.
 
 Example:
 
@@ -1140,7 +1140,7 @@ BAD_WORDS
 
 ``BAD_WORDS`` is a very used use case of ``<var>`` option.
 
-Is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
+It is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
 
 Example:
 
