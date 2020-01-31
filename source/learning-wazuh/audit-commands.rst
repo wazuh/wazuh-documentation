@@ -188,7 +188,7 @@ will use to give us special alerts when executed.
 
     .. note::
 
-       Before Wazuh v3.11.0 it was necessary to run `/var/ossec/bin/ossec-makelists` after changing CDB lists. After v3.11.0 the lists are complied when the manager is started.
+       Before Wazuh v3.11.0 it was necessary to run `/var/ossec/bin/ossec-makelists` after changing CDB lists. After v3.11.0 the lists are already compiled when the manager is started.
 
 
 3. Now let's add a new rule that uses this list as part of its criteria
