@@ -214,7 +214,7 @@ hardware and operating system data is also tracked.
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET "http://localhost:55000/syscollector/003/hardware?pretty"
+    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://localhost:55000/syscollector/003/hardware?pretty"
 
 
 
@@ -310,7 +310,7 @@ The results should look like this:
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET  "http://localhost:55000/experimental/syscollector/packages?name=curl&pretty"
+    # curl -u wazuhapiuser:wazuhlab -k -X GET  "https://localhost:55000/experimental/syscollector/packages?name=curl&pretty"
 
 
 The results should look like this:
