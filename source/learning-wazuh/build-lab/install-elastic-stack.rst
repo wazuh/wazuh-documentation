@@ -127,7 +127,20 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
 
-5. Enable and start the Kibana service:
+5. Configure the credentials to access the Wazuh API:
+
+  .. code-block:: console
+
+    # cat >> /usr/share/kibana/plugins/wazuh/wazuh.yml << EOF
+
+        - wazuhapi:
+           url: https://172.30.0.10
+           port: 55000
+           user: wazuhapiuser
+           password: wazuhlab
+      EOF
+
+6. Enable and start the Kibana service:
 
   .. code-block:: console
 
