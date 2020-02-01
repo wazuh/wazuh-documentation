@@ -166,7 +166,8 @@ Tells rootcheck to scan the entire system.  This option may lead to some false p
 readall
 ^^^^^^^^^^^^^^^
 
-Tells rootcheck to scan recursively in each of the selected system directories
+Allow Rootcheck read all system files and compare the bytes read with files size.
+With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/etc``, ``/boot``
 
 +--------------------+---------+
 | **Default value**  | no      |
