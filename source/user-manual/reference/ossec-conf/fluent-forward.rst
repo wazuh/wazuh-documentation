@@ -22,6 +22,7 @@ Options
 - `enabled`_
 - `socket_path`_
 - `tag`_
+- `object_key`_
 - `address`_
 - `port`_
 - `shared_key`_
@@ -68,6 +69,21 @@ This indicates the tag to be added to the messages forwarded to the Fluentd serv
 +--------------------+------------+
 
 For example ``<tag>debug.test</tag>``.
+
+object_key
+^^^^^^^^^^
+
+.. versionadded:: 3.11.3
+
+Fluent Forward packs every log into an object. This option defines the key of that object, whose value is the log itself.
+
++--------------------+----------------------+
+| **Default value**  | message              |
++--------------------+----------------------+
+| **Allowed values** | Any non-empty string |
++--------------------+----------------------+
+
+For example ``<object_key>message</object_key>``.
 
 address
 ^^^^^^^
@@ -170,7 +186,7 @@ For example ``<timeout>10</timeout>``.
 
 poll_interval
 ^^^^^^^^^^^^^
-.. versionadded:: 3.11.0
+.. versionadded:: 3.11.3
 
 Defines the connection health check interval (in seconds). If the module keeps idle during the defined time, it will poll the connection. If the connection is broken, the module will reconnect to the Fluent server.
 
@@ -185,7 +201,7 @@ For instance: ``<poll_interval>60</poll_interval>``
 
 keepalive
 ^^^^^^^^^
-.. versionadded:: 3.11.0
+.. versionadded:: 3.11.3
 
 Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait undefinitely for the server to confirm a delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
 
