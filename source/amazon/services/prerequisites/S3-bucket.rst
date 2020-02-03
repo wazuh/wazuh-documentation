@@ -20,7 +20,7 @@ In this section we will see how to create these data containers:
       :align: center
       :width: 70%
 
-2. Click on the *Create bucket*:
+2. Click on *Create bucket*:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-2.png
       :align: center
