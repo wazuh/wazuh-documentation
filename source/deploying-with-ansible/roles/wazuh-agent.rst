@@ -10,7 +10,7 @@ This role is designed to install and configure Wazuh Agent on different hosts, t
 - **wazuh_manager_ip:** set Wazuh server to connect.
 - **wazuh_agent_authd:** array with a set of options to register the Wazuh agent on the Wazuh server, will require the ``ossec-authd`` service started on the Wazuh server.
 
-By example, create a YAML file ``wazuh-agent.yml`` to be used be Ansible playbook:
+By example, create a YAML file ``wazuh-agent.yml`` to be used as an Ansible playbook:
 
 .. code-block:: yaml
 
@@ -54,6 +54,6 @@ Next, run the ansible playbook:
 
   $ ansible-playbook wazuh-agent.yml -e@vars-production.yml
 
-The example above for production environment will install Wazuh agent in all host except ``wazuh-manager``. then it will register against ``wazuh-manager`` with ip ``10.1.1.12``.
+The example above for a production environment will install a Wazuh agent in all hosts except ``wazuh-manager``, then it will register against them ``wazuh-manager`` with ip ``10.1.1.12``.
 
 Please review the :ref:`references <wazuh_ansible_reference_agent>` section to see all variables available for this role.

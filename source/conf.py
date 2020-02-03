@@ -30,7 +30,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.10'
+version = '3.11'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -311,7 +311,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be a ISBN number
+# The unique identifier of the text. This can be an ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -350,6 +350,7 @@ def minification(actual_path):
         ['css/style','css'],
         ['css/wazuh-icons','css'],
         ['js/version-selector','js'],
+        ['js/redirects','js'],
         ['js/style','js']
     ]
 
@@ -400,8 +401,8 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
+    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
     app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
     app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
@@ -411,11 +412,14 @@ def setup(app):
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
     app.add_javascript("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
+    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
     "js/version-selector.js",
+    "js/redirects.js",
     "js/style.js"
 ]
 

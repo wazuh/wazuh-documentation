@@ -174,7 +174,7 @@ Example:
     <rule id="100001" maxsize="300" level="3">
       <if_sid>100200</if_sid>
       <match>Queue flood!</match>
-      <description> Flooded events queue.</description>
+      <description>Flooded events queue.</description>
     </rule>
 
 If the rule matches the ``id`` 100200 and the log contains the ``Queue flood!`` phrase in it, rule activates and triggers a level 3 alert.
@@ -322,6 +322,16 @@ Example:
 This rule will trigger when an ``dstip`` different from ``198.168.41.30`` is detected.
 
 
+data
+^^^^
+
+Any string that is decoded into the ``data`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
++--------------------+-----------------------------------------------------------------+
 
 extra_data
 ^^^^^^^^^^
@@ -370,6 +380,16 @@ Example:
 
 This rule will trigger when the user ``mysql`` successfully logs into the system. Being a System user it should never log in to the system.
 
+system_name
+^^^^^^^^^^^^
+
+Any string that is decoded into the ``system_name`` field.
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
++--------------------+------------------------------------------------------------------+
 
 program_name
 ^^^^^^^^^^^^
@@ -394,6 +414,18 @@ Example:
       </rule>
 
 The rule will trigger when the program Syslogd restarted.
+
+protocol
+^^^^^^^^
+
+Any string that is decoded into the ``protocol`` field.
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
++--------------------+------------------------------------------------------------------+
+
 
 hostname
 ^^^^^^^^
@@ -565,6 +597,8 @@ The following components use a static location:
 +----------------------+------------------------+
 | CIS-CAT integration  | wodle_cis-cat          |
 +----------------------+------------------------+
+| SCA module           | sca                    |
++----------------------+------------------------+
 
 
 Example:
@@ -667,7 +701,7 @@ if_matched_sid
 
 Matches if an alert of the defined ID has been triggered in a set number of seconds.
 
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -697,7 +731,7 @@ if_matched_group
 
 Matches if an alert of the defined group has been triggered in a set number of seconds.
 
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -721,7 +755,7 @@ same_id
 ^^^^^^^
 
 Specifies that the decoded id must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_id />        |
@@ -731,7 +765,7 @@ same_source_ip
 ^^^^^^^^^^^^^^
 
 Specifies that the decoded source ip must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_source_ip /> |
@@ -741,7 +775,7 @@ same_src_port
 ^^^^^^^^^^^^^
 
 Specifies that the decoded source port must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_src_port />  |
@@ -751,7 +785,7 @@ same_dst_port
 ^^^^^^^^^^^^^
 
 Specifies that the decoded destination port must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_dst_port />  |
@@ -761,7 +795,7 @@ same_location
 ^^^^^^^^^^^^^
 
 Specifies that the location must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_location />  |
@@ -771,7 +805,7 @@ same_user
 ^^^^^^^^^
 
 Specifies that the decoded user must be the same.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_user />      |
@@ -783,7 +817,7 @@ same_field
 .. versionadded:: 3.9.0
 
 Specifies that the decoded field must be the same as the previous one.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_field />     |
@@ -815,7 +849,7 @@ not_same_field
 .. versionadded:: 3.9.0
 
 Specifies that the decoded field must be different than the previous one.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <not_same_field /> |
@@ -842,11 +876,27 @@ As an example of this option, check this rule:
 
   Rule 100002 will trigger when the last three events do not have the same `netinfo.iface.mac` address.
 
+global_frequency
+^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.11.1
+
+Specifies that the events of all agents will be contemplated when using the
+frequency and ``timeframe`` options. By default, only the events generated by
+the same agent will be taken into account to increase the frequency counter for a rule.
+
++--------------------+----------------------+
+| **Example of use** | <global_frequency /> |
++--------------------+----------------------+
+
+.. warning::
+  Although the label contains the word `global`, this option works at manager level, not at cluster level.
+
 different_url
 ^^^^^^^^^^^^^
 
 Specifies that the decoded url must be different.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <different_url />  |
@@ -856,7 +906,7 @@ different_srcgeoip
 ^^^^^^^^^^^^^^^^^^
 
 Specifies that the source geoip location must be different.
-This option is used in conjunction with frequency and timeframe.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
 | **Example of use** | <different_srcgeoip /> |
@@ -900,7 +950,7 @@ Examples:
 
     <rule id="100035" level="4">
       ...
-      <description> File missing. Root acces unrestricted. </description>
+      <description> File missing. Root access unrestricted. </description>
     </rule>
 
 Since Wazuh version 3.3 it is possible to include any decoded field (static or dynamic) to the description message. You can use the following syntax: ``$(field_name)`` to add a field to the description.
