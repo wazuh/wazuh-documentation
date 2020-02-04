@@ -279,6 +279,7 @@ Events from the Windows Event channel can be filtered as below. In this example,
 Users can filter events with different severity levels.
 
 .. code-block:: xml
+    :class: escaped-tag-signs
 
     <localfile>
         <location>System</location>
