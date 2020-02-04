@@ -55,7 +55,7 @@ Each list must be defined in the ``ossec.conf`` file using the following syntax:
   The ``<list>`` setting uses a relative path to the Wazuh installation folder (``/var/ossec/``) so make sure to indicate the directory accordingly.
   
 .. warning::
-  It is necessary to compile the lists every time they are modified. You may compile them manually by using the ``/var/ossec/bin/ossec-makelists`` tool. Any change to a list won't take effect until the Wazuh manager is restarted.
+  It is necessary to compile the lists every time they are modified. You may compile them manually by using the ``/var/ossec/bin/ossec-makelists`` tool. 
   
 
 Restart Wazuh to apply the changes:
