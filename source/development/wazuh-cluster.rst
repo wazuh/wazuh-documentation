@@ -117,7 +117,7 @@ Agent info
 
 This thread is in charge of synchronizing the agent's last keepalives and OS information with the master. The communication here is also started by the worker and it has the following stages:
 
-1. The worker sends the master a file containing all agent-info files merged in a single one. Only files whose modification date is less than half an hour will be sent.
+1. The worker sends the master a file containing all agent-info files merged in a single one. Only files whose modification date is less than 30 minutes will be sent.
 2. The master decompresses the merged file and updates agent statuses. During the update process, the master compares the modification dates of its local file and the remote file. In case the master has a more recent file, the remote one is discarded.
 
 If there is an error during this process the worker is NOT notified about it.
