@@ -115,13 +115,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
 
-3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
+3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can only be accessed from the same machine. To access Kibana from the outside, make it listen on its network interface IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml
 
     server.host: "<kibana_ip>"
 
-4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
+4. Set the URL or the IP of the Elasticsearch node by editing the file ``/etc/kibana/kibana.yml``:
 
   .. code-block:: yaml
 
@@ -146,7 +146,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 6. (Optional) Disable the Elasticsearch repository:
 
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
+  It is recommended that the Elasticsearch repository to be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh plugin for Kibana. To do this, use the following command:
 
   .. code-block:: console
 
@@ -157,7 +157,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Next steps
 ----------
 
-Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
+Once the Wazuh Manager and the Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
 You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
 
