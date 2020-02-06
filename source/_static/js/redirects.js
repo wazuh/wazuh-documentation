@@ -211,7 +211,7 @@ newUrls['3.11'] = [
   '/user-manual/capabilities/vulnerability-detection/offline_update.html',
   '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
   '/user-manual/reference/ossec-conf/vuln-detector.html',
-  '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html'
+  '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
   '/release-notes/release_3_11_0.html',
   '/release-notes/release_3_11_1.html',
   '/release-notes/release_3_11_2.html',
