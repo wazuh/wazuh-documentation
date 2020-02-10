@@ -2,8 +2,8 @@
 
 .. _windows-simple-registration:
 
-Windows hosts
-=============
+Simple registration service for Windows hosts
+=============================================
 
 To register the Windows agent, open a session in your Windows agent host and start a CMD or a Powershell as Administrator. The agent’s installation directory depends on the architecture of the host.
 

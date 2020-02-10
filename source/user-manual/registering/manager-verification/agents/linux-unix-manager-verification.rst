@@ -2,8 +2,8 @@
 
 .. _linux-unix-manager-verification:
 
-Linux and Unix hosts
-====================
+Registration with Manager varification for Linux and Unix hosts
+===============================================================
 
 Open a session in your Linux/Unix agent host as a root user, you will use the CA (``.pem`` file) previously created on the manager.
 

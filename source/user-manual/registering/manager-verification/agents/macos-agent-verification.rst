@@ -2,8 +2,8 @@
 
 .. _macos-agent-verification:
 
-MacOS X hosts
-==============
+Registration with Agent varification for MacOS X hosts
+======================================================
 
 Open a session in your MacOS X agent host as a root user, you will use the certificate (``.cert`` file) and its key (``.key`` file) previously created on the manager:
 

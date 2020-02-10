@@ -2,8 +2,8 @@
 
 .. _api-register-linux-unix:
 
-Linux and UNIX hosts
-====================
+API registration for Linux and UNIX hosts
+=========================================
 
 Open a session in your Linux/Unix agent host as a root user and follow these steps:
 
@@ -29,7 +29,7 @@ Open a session in your Linux/Unix agent host as a root user and follow these ste
       }
     }
 
-   For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+   For more information about API credentials and HTTPS support follow the :ref:`Wazuh API configuration<api_configuration>`.
 
 2. Import the key to the agent:
 
@@ -65,3 +65,4 @@ Open a session in your Linux/Unix agent host as a root user and follow these ste
    .. code-block:: console
 
       # service wazuh-agent start
+      

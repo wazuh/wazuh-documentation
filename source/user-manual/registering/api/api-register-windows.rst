@@ -2,8 +2,8 @@
 
 .. _api-register-windows:
 
-Windows hosts
-=============
+API registration for Windows hosts
+==================================
 
 To register the Windows agent, you need to start a Powershell as Administrator. The agent's installation directory depends on the architecture of the host.
 

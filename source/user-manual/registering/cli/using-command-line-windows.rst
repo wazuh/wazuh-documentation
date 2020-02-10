@@ -2,8 +2,8 @@
 
 .. _command-line-register-windows:
 
-Windows hosts
-=============
+CLI registration for Windows hosts
+==================================
 
 To register an agent using the command line, first follow the steps from the **Manager** section and then, from the **Agent** section.
 

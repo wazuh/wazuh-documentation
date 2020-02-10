@@ -2,8 +2,8 @@
 
 .. _windows-manager-verification:
 
-Windows hosts
-==============
+Registration with Manager varification for Windows hosts
+========================================================
 
 Open a session in your Windows agent host and start a CMD or a Powershell as Administrator. To register the agent, you will use the CA (.pem file) previously created on the manager.
 

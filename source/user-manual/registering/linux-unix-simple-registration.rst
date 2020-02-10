@@ -2,8 +2,8 @@
 
 .. _linux-unix-simple-registration:
 
-Linux and Unix hosts
-====================
+Simple registration service for Linux and Unix hosts
+====================================================
 
 Open a session in your Linux/Unix agent host as a root user. After that, you can register the Wazuh agent using ``agent-auth`` program as follows:
 

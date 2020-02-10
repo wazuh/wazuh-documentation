@@ -2,8 +2,8 @@
 
 .. _macos-password-registration:
 
-MacOS X hosts
-=============
+Registration with password authorization for MacOS X hosts
+==========================================================
 
 Open a session in your MacOS X agent host as a root user. After that, you can register the Wazuh agent using ``agent-auth`` program and a password as follows:
 

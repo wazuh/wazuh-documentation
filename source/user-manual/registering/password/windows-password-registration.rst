@@ -2,8 +2,8 @@
 
 .. _windows-password-registration:
 
-Windows hosts
-=============
+Registration with password authorization for Windows hosts
+==========================================================
 
 To register the Windows agent, you need to start a CMD or a Powershell as Administrator The agent's installation directory depends on the architecture of the host.
 
@@ -19,8 +19,8 @@ To register the Windows agent, you need to start a CMD or a Powershell as Admini
 
    .. code-block:: none
 
-      PS echo TopSecret > "C:\Program Files (x86)\ossec-agent\authd.pass"
-      PS C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP> -A <AGENT_NAME>
+      # echo TopSecret > "C:\Program Files (x86)\ossec-agent\authd.pass"
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP> -A <AGENT_NAME>
 
    The agent assumes the input file is in ``UTF-8 encoding``, without ``byte-order mark (BOM)``. If your file is created in an incorrect encoding you can change it by opening the ``authd.pass`` file in a Notepad and Save As ``ANSI`` encoding.
 
@@ -28,7 +28,7 @@ To register the Windows agent, you need to start a CMD or a Powershell as Admini
 
    .. code-block:: none
 
-      PS C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP> -A <AGENT_NAME> -P "TopSecret"
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP> -A <AGENT_NAME> -P "TopSecret"
 
    You can adjust the agent registration according to your requirements choosing from available :ref:`agent-auth` options.
 

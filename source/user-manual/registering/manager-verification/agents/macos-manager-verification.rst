@@ -2,8 +2,8 @@
 
 .. _macos-manager-verification:
 
-MacOS X hosts
-==============
+Registration with Manager varification for MacOS X hosts
+======================================================
 
 Open a session in your MacOS X agent host as a root user, you will use the CA (``.pem`` file) previously created on the manager.
 

@@ -2,8 +2,8 @@
 
 .. _macos-simple-registration:
 
-MacOS X hosts
-=============
+Simple registration service for MacOS X hosts
+=============================================
 
 Open a session in your MacOS X agent host as a root user. After that, you can register the Wazuh agent using ``agent-auth`` as follows:
 

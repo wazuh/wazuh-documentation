@@ -2,10 +2,10 @@
 
 .. _api-register-macos:
 
-MacOS X hosts
-=============
+API registration for MacOS X hosts
+==================================
 
-Open a session in your MacOS X agent host as root user. Then, follow these steps: 
+Open a session in your MacOS X agent host as root user. Then, follow these steps:
 
 1. Add the Wazuh agent to the Wazuh manager using following template:
 
@@ -29,7 +29,7 @@ Open a session in your MacOS X agent host as root user. Then, follow these steps
       }
     }
 
-  For more information about API credentials and HTTPS support please follow the :ref:`Wazuh API configuration<api_configuration>`.
+  For more information about API credentials and HTTPS support follow the :ref:`Wazuh API configuration<api_configuration>`.
 
 2. Import the key to the agent:
 

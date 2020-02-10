@@ -9,9 +9,49 @@ Registering agents troubleshooting
   :description: Registering Wazuh agents - Troubleshooting
 
 
-Problem scenario title
-----------------------
+Agent registers successfully but disappears after another agent is being registered.
+------------------------------------------------------------------------------------
 
-.. note::
+By default, the manager attaches an agent to the visible IP of the agent. If the manager or the agents are, for example, behind a NAT, the agent should be registered with IP Address ``any``. That way ``any`` works as ``0.0.0.0/0``.
 
-  Notes come here.
+1. To set up this behavior for a single registration:
+
+   Add the agent's IP Address as ``any`` to the registration command.
+
+   An example :ref:`Simple Registration Service <simple-registration-service>` command template could look like this:
+
+   .. code-block:: console
+
+    # /var/ossec/bin/agent-auth -m <MANAGER_IP> -I any
+
+
+2. To set up this behavior for all subsequent registrations:
+
+   In the manager's configuration ``/var/ossec/etc/ossec.conf`` file set the ``<use_source_ip>`` to ``no``:
+
+   .. code-block:: xml
+
+    <ossec_config>
+      ...
+      <auth>
+        ...
+        <use_source_ip>no</use_source_ip>
+        ...
+      </auth>
+      ...
+    </ossec_config>
+
+   Restart the manager for the changes to take effect.
+
+   .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+   .. note::
+    Specifying the agent's IP Address in the registration command manually overwrites that setting.
+
+ If the registered machines have the same hostname, the agent name has to be specified manually.
+ In that case, an example :ref:`Simple Registration Service <simple-registration-service>` command template could look like this:
+  .. code-block:: console
+
+    # /var/ossec/bin/agent-auth -m <MANAGER_IP> -I any -A <AGENT_NAME>

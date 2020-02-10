@@ -2,8 +2,8 @@
 
 .. _agent-verification-registration:
 
-Agent verification using SSL
-============================
+Registration with Agent verification
+====================================
 
 To verify the Wazuh agent using an SSL, we will create an SSL certificate for the agent and sign it using :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the manager to ensure that the correct agent is beeing connected during the registration service.
 
@@ -111,7 +111,7 @@ Agent
 Once you have completed the manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``. After that, follow the steps to connect the agent to the manager:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 5
 
     agents/linux-unix-agent-verification
     agents/windows-agent-verification

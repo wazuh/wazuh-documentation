@@ -3,7 +3,7 @@
 .. _host-verification-registration:
 
 Registering agents using registration service with host verification
-====================================================================
+--------------------------------------------------------------------
 
 Using verification with an SSL key certificate provides confidence that the connection between the right agent and the right manager is established.
 
@@ -29,5 +29,5 @@ After creating your ``CA``, you have these options to register the agents verify
 .. toctree::
     :maxdepth: 1
 
-    manager-verification-registration
-    agent-verification-registration
+    manager-verification/manager-verification-registration
+    manager-verification/agent-verification-registration

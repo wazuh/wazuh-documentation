@@ -3,9 +3,9 @@
 .. _password-authorization-registration-service:
 
 Registering agents using registration service with password authorization
-=========================================================================
+-------------------------------------------------------------------------
 
-This registration method is similar to :ref:`Simple registration service <simple-registration-service>` except that it allows additional protection of the manager from unauthorized registrations by using a password.
+This registration method is similar to ``Simple registration service`` except that it allows additional protection of the manager from unauthorized registrations by using a password.
 
 To register the agent follow the instructions in the **Manager** section and then select the corresponding section for the agent's operating system.
 

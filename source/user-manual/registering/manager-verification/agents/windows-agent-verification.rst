@@ -2,8 +2,8 @@
 
 .. _windows-agent-verification:
 
-Windows hosts
-==============
+Registration with Agent varification for Windows hosts
+======================================================
 
 Open a session in your Windows agent host and start a CMD or a Powershell as Administrator, you will use the certificate (``.cert`` file) and its key (``.key`` file) previously created on the manager.
 
@@ -13,7 +13,7 @@ The agent’s installation directory depends on the architecture of the host.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
 .. note::
-	 In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+	 In this example, we will register the agent installed on a ``x86_64`` host. The installation path will be: ``C:\Program Files (x86)\ossec-agent``
 
 1. Copy the certificate (``.cert`` file) and its key (``.key`` file) to the ``C:\Program Files (x86)\ossec-agent`` folder:
 

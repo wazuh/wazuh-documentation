@@ -2,8 +2,8 @@
 
 .. _command-line-register-linux:
 
-Linux and Unix hosts
-====================
+CLI registration for Linux and Unix hosts
+=========================================
 
 To register the Wazuh agent using the command line, first, follow the steps from the **Manager** section and then, from the **Agent** section.
 

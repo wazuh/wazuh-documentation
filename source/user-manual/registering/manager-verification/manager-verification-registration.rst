@@ -2,17 +2,19 @@
 
 .. _manager-verification-registration:
 
-Manager verification using SSL
-==============================
+Registration with Manager verification
+--------------------------------------
 
 To verify the Wazuh manager using SSL, we will create an SSL certificate and sign it using the :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the agents to ensure that they are connected to the correct manager during the registration service.
 
-  .. image:: ../../../images/manual/managing-agents/SSLregister1.png
-    :align: center
-    :width: 100%
+
+.. image:: ../../../images/manual/managing-agents/SSLregister1.png
+  :align: center
+  :width: 100%
+
 
 .. note::
-	In this example, we will create a certificate for the manager, whose IP address is ``192.168.1.2``.
+	In this example, we will create a certificate for the manager, whose IP address is ``192.168.1.2``
 
 Manager
 ^^^^^^^
@@ -73,8 +75,9 @@ Agents
 Once you have completed the manager section, you need to copy the CA file (``.pem``) to the agent host. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the agent to the manager:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 4
 
     agents/linux-unix-manager-verification
     agents/windows-manager-verification
     agents/macos-manager-verification
+ 

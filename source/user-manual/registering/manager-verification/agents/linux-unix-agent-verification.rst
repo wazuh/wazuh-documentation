@@ -2,8 +2,8 @@
 
 .. _linux-unix-agent-verification:
 
-Linux and Unix hosts
-====================
+Registration with Agent varification for Linux and Unix hosts
+=============================================================
 
 Open a session in your Linux/Unix agent host as a root user, you will use the certificate (``.cert`` file) and its key (``.key`` file) previously created on the manager:
 
