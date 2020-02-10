@@ -89,7 +89,7 @@ Usage
 
         $ docker-compose up -d
 
-    Then access the Kibana UI by hitting `http://localhost:5601 <http://localhost:5601>`_ with a web browser.
+    Then access the Kibana UI by hitting ``http://localhost:5601`` with a web browser.
 
 
 By default, the stack exposes the following ports:
