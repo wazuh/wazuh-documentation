@@ -21,6 +21,9 @@ $(function() {
     'user-manual/agents/remove-agents/index',
     'user-manual/agents/listing/index',
     'user-manual/kibana-app/reference/index',
+    'user-manual/registering/simple-registration-method',
+    'user-manual/registering/password-authorization-registration-service',
+    'user-manual/registering/manager-verification/host-verification-registration',
     'user-manual/ruleset/ruleset-xml-syntax/index',
   ];
 
