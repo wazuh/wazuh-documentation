@@ -13,6 +13,6 @@ Registering the Agents
 .. toctree::
     :maxdepth: 2
 
-    api/api-register-linux-unix
-    api/api-register-windows
-    api/api-register-macos
+    Linux and Unix hosts<api/api-register-linux-unix>
+    Windows hosts<api/api-register-windows>
+    MacOS X hosts<api/api-register-macos>
