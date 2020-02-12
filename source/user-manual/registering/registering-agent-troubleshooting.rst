@@ -52,6 +52,7 @@ By default, the manager attaches an agent to the visible IP of the agent. If the
 
  If the registered machines have the same hostname, the agent name has to be specified manually.
  In that case, an example :ref:`Simple Registration Service <simple-registration-service>` command template could look like this:
-  .. code-block:: console
+
+   .. code-block:: console
 
     # /var/ossec/bin/agent-auth -m <MANAGER_IP> -I any -A <AGENT_NAME>
