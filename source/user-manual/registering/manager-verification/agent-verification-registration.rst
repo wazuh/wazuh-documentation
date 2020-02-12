@@ -116,3 +116,4 @@ Once you have completed the manager section, you need to copy the newly created 
     agents/linux-unix-agent-verification
     agents/windows-agent-verification
     agents/macos-agent-verification
+    
