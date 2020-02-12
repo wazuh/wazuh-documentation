@@ -15,6 +15,6 @@ Registering the Agents
 .. toctree::
     :maxdepth: 1
 
-    cli/using-command-line-linux
-    cli/using-command-line-windows
-    cli/using-command-line-macos
+    Linux and Unix host<cli/using-command-line-linux>
+    Windows hosts<cli/using-command-line-windows>
+    MacOS X hosts<cli/using-command-line-macos>
