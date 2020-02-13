@@ -241,13 +241,13 @@ The following configuration will update the vulnerability database for Ubuntu, D
 .. code-block:: xml
 
     <vulnerability-detector>
-        <enabled>no</enabled>
+        <enabled>yes</enabled>
         <interval>5m</interval>
         <ignore_time>6h</ignore_time>
         <run_on_start>yes</run_on_start>
 
         <provider name="canonical">
-            <enabled>no</enabled>
+            <enabled>yes</enabled>
             <os>precise</os>
             <os>trusty</os>
             <os>xenial</os>
@@ -256,7 +256,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
         </provider>
 
         <provider name="debian">
-            <enabled>no</enabled>
+            <enabled>yes</enabled>
             <os>wheezy</os>
             <os>stretch</os>
             <os>jessie</os>
@@ -265,13 +265,13 @@ The following configuration will update the vulnerability database for Ubuntu, D
         </provider>
 
         <provider name="redhat">
-            <enabled>no</enabled>
+            <enabled>yes</enabled>
             <update_from_year>2010</update_from_year>
             <update_interval>1h</update_interval>
         </provider>
 
         <provider name="nvd">
-            <enabled>no</enabled>
+            <enabled>yes</enabled>
             <update_from_year>2010</update_from_year>
             <update_interval>1h</update_interval>
         </provider>
