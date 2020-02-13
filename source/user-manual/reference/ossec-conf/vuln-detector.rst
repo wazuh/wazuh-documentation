@@ -236,42 +236,47 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-The following configuration will update the vulnerability database for Debian 9 with a day of interval,
-Red Hat from 2013, Ubuntu Bionic from a local file, Ubuntu Xenial from a local repository, and the
-National Vulnerability Database from local files. It also allows you to extract vulnerabilities from agents with
-Linux Mint 18.X and Pop OS 18 using the Ubuntu 18 vulnerability database, or Oracle Linux 6 agents using the Red Hat feed.
-
+The following configuration will update the vulnerability database for Ubuntu, Debian, Redhat and Microsoft Windows.
 
 .. code-block:: xml
 
     <vulnerability-detector>
         <enabled>yes</enabled>
         <interval>5m</interval>
+        <ignore_time>6h</ignore_time>
         <run_on_start>yes</run_on_start>
+
+        <provider name="canonical">
+            <enabled>yes</enabled>
+            <os>precise</os>
+            <os>trusty</os>
+            <os>xenial</os>
+            <os>bionic</os>
+            <update_interval>1h</update_interval>
+        </provider>
 
         <provider name="debian">
             <enabled>yes</enabled>
-            <os interval="1d">9</os>
+            <os>wheezy</os>
+            <os>stretch</os>
+            <os>jessie</os>
+            <os>buster</os>
+            <update_interval>1h</update_interval>
         </provider>
 
         <provider name="redhat">
             <enabled>yes</enabled>
-            <update_from_year>2013</update_from_year>
-            <update_interval>20h</update_interval>
-            <allow replaced_os="Red Hat-6">Oracle Linux-6</allow>
-        </provider>
-
-        <provider name="canonical">
-            <enabled>no</enabled>
-            <os path="/local/feeds/oval/bionic_oval.xml" allow="linux mint-18, pop!_os-18">bionic</os>
-            <os url="http://my_local_repo/xenial_oval.xml">xenial</os>
+            <update_from_year>2010</update_from_year>
             <update_interval>1h</update_interval>
         </provider>
-        
+
         <provider name="nvd">
-            <enabled>no</enabled>
-            <path>/local/feeds/nvd/nvdcve-1.0-.*json.gz$</path>
+            <enabled>yes</enabled>
+            <update_from_year>2010</update_from_year>
+            <update_interval>1h</update_interval>
         </provider>
+
     </vulnerability-detector>
+
 
 .. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detection/index>` to obtain more information about this module.
