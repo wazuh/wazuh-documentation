@@ -72,12 +72,13 @@ Follow these steps in the Wazuh manager host:
 Agents
 ^^^^^^
 
-Once you have completed the manager section, you need to copy the CA file (``.pem``) to the agent host. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the agent to the manager:
+Once you have completed the manager section, you need to copy the CA file (``.pem``) to the agent host. In this example, the CA file is ``rootCA.pem``.
+
+Now, follow the instructions to register the agent depending on the OS of the host:
 
 .. toctree::
     :maxdepth: 4
 
-    agents/linux-unix-manager-verification
-    agents/windows-manager-verification
-    agents/macos-manager-verification
- 
+    Linux and Unix host<agents/linux-unix-manager-verification>
+    Windows host<agents/windows-manager-verification>
+    MacOS X host<agents/macos-manager-verification>
