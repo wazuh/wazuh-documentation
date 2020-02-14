@@ -9,5 +9,5 @@ Registering agents using simple registration service
     :maxdepth: 3
 
     Linux and Unix host<linux-unix-simple-registration>
-    Windows hosts<windows-simple-registration>
-    MacOS X hosts<macos-simple-registration>
+    Windows host<windows-simple-registration>
+    MacOS X host<macos-simple-registration>
