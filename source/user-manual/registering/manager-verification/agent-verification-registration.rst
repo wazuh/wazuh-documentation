@@ -108,12 +108,13 @@ This is an alternative method to the previous one. In this case, we will bind th
 Agent
 ^^^^^
 
-Once you have completed the manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``. After that, follow the steps to connect the agent to the manager:
+Once you have completed the manager section, you need to copy the newly created certificate (``.cert`` file) and its key (``.key`` file) to the agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``.
+
+Now, follow the instructions to register the agent depending on the OS of the host:
 
 .. toctree::
     :maxdepth: 5
 
-    agents/linux-unix-agent-verification
-    agents/windows-agent-verification
-    agents/macos-agent-verification
-    
+    Linux and Unix host<agents/linux-unix-agent-verification>
+    Windows host<agents/windows-agent-verification>
+    MacOS X host<agents/macos-agent-verification>
