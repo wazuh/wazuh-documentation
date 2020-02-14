@@ -16,5 +16,5 @@ Registering the Agents
     :maxdepth: 1
 
     Linux and Unix host<cli/using-command-line-linux>
-    Windows hosts<cli/using-command-line-windows>
-    MacOS X hosts<cli/using-command-line-macos>
+    Windows host<cli/using-command-line-windows>
+    MacOS X host<cli/using-command-line-macos>
