@@ -28,9 +28,9 @@ Agents
 ^^^^^^
 Now, follow the instructions to register the agent depending on the OS of the host:
 
-* :doc:`Linux and Unix hosts<linux-unix-simple-registration>`
-* :doc:`Windows hosts<windows-simple-registration>`
-* :doc:`MacOS X hosts<macos-simple-registration>`
+* :doc:`Linux and Unix host<linux-unix-simple-registration>`
+* :doc:`Windows host<windows-simple-registration>`
+* :doc:`MacOS X host<macos-simple-registration>`
 
 Registering agents using registration service with password authorization
 -------------------------------------------------------------------------
@@ -90,9 +90,9 @@ Agents
 
 Now, follow the instructions to register the agent depending on the OS of the host:
 
-* :doc:`Linux and Unix hosts<password/linux-unix-password-registration>`
-* :doc:`Windows hosts<password/windows-password-registration>`
-* :doc:`MacOS X hosts<password/macos-password-registration>`
+* :doc:`Linux and Unix host<password/linux-unix-password-registration>`
+* :doc:`Windows host<password/windows-password-registration>`
+* :doc:`MacOS X host<password/macos-password-registration>`
 
 Registering agents using registration service with host verification
 --------------------------------------------------------------------
