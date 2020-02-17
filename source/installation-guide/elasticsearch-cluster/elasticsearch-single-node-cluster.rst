@@ -126,7 +126,7 @@ In order to anticipate and avoid this situation, we recommend disabling the Elas
 Next steps
 ----------
 
-The next step consists of select the Wazuh server installation type that you want.
+The next step consists on the selection of the Wazuh server installation type desired.
 
 - :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`

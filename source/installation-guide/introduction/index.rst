@@ -8,7 +8,7 @@ Introduction
 ============
 
 
-This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`Jumpstart to Wazuh<all_in_one>` guide could be used in small production environments, it not designed for high available, scalable, environments. This section will help you to configure an environment with different levels of distribution and, in consequence, scalable environments with high availability.
+This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`Jumpstart to Wazuh<all_in_one>` guide could be used in small production environments, it not designed for high availability, scalable, environments. This section will help you to configure an environment with different levels of distribution and, in consequence, scalable environments with high availability.
 
 
 Community
@@ -41,7 +41,7 @@ The following image summarizes the architecture possibilities with regards to si
     :align: center
     :width: 100%
 
-This architecture diagram represents a Wazuh - Elastic Stack production environment. The set of Wazuh agents (on the left) may communicate with the Wazuh cluster through a load balancer, but this is not required and may omitted.
+This architecture diagram represents a Wazuh - Elastic Stack production environment. The set of Wazuh agents (on the left) may communicate with the Wazuh cluster through a load balancer, but this is not required and may be omitted.
 
 The Wazuh cluster (center) can be configured as a single-node cluster (only one server with a Wazuh manager installed) or a multi-node cluster (two or more Wazuh managers distributed over two or more servers). Only the master Wazuh cluster node will have the Wazuh API installed. All the Wazuh cluster servers will have Filebeat installed.
 
