@@ -86,7 +86,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*Master*] This step implies to select the Wazuh cluster installation type. Select the tab ``Wazuh single-node cluster`` if you will configure a Wazuh single node cluster. If your Wazuh cluster will have two or more nodes, select ``Wazuh multi-node cluster`` tab.
+#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Select the tab ``Wazuh single-node cluster`` if you will configure a Wazuh single node cluster. If your Wazuh cluster will have two or more nodes, select ``Wazuh multi-node cluster`` tab.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
