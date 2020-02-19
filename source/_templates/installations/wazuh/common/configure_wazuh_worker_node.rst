@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 Configure the cluster mode by editing the following settings in ``/var/ossec/etc/ossec.conf``:
 

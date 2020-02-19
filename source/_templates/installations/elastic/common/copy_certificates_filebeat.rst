@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 In section **Installing Elasticsearch**, we created a .zip that contains the files necessaries. You must copy the zip file from the host where was created to the Wazuh server host. You could use ``scp`` for example. Now, let's suppose that the file was copied into home folder.
 

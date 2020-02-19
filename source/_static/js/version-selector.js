@@ -1,7 +1,7 @@
 jQuery(function($) {
   /*
   * Wazuh documentation - Version selector script
-  * Copyright (C) 2019 Wazuh, Inc.
+  * Copyright (C) 2020 Wazuh, Inc.
   *
   * EXECUTION FLOW
   * ==============

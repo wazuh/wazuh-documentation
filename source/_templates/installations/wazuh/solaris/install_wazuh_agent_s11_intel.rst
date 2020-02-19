@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 The Wazuh agent for Solaris 11 i386 can be downloaded from our :ref:`packages list<packages>` or directly from here: `Solaris 11 i386 <https://packages.wazuh.com/3.x/solaris/i386/11/wazuh-agent_v3.10.2-sol11-i386.pkg>`_. The current version has been tested on Solaris 11 i386 version 5.10. Install the agent as follows:
 
