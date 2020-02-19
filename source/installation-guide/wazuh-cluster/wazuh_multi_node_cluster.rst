@@ -20,7 +20,7 @@ The Wazuh server collects and analyzes data from deployed agents. It runs the Wa
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section described how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. You must to follow this section in all the servers that you want to configure as Wazuh multi-node cluster.
+This section describes how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. You must to follow this section in all the servers that you want to configure as Wazuh multi-node cluster.
 
 .. tabs::
 
@@ -49,7 +49,7 @@ This section described how to add the Wazuh repository. It will be used for Wazu
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package. This section must be applied in all servers that will acts as a Wazuh cluster node:
+#. Install the Wazuh manager package. This section must be applied in all servers that will act as a Wazuh cluster nodes:
 
 .. tabs::
 
@@ -74,7 +74,7 @@ Installing the Wazuh manager
     .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
-Now, all the Wazuh cluster nodes have installed the Wazuh manager. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
+Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
 
 One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
 
@@ -238,7 +238,7 @@ Filebeat installation and configuration
 Next steps
 ----------
 
-The next step consists of install Kibana. You can continue the guide  :ref:`here<kibana>`.
+The next step consists on installing Kibana. You can continue the guide  :ref:`here<kibana>`.
 
 
 Disabling repositories
