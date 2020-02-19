@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _client-keys:
 
@@ -27,7 +27,7 @@ This file contains one line per each agent entry. In the case of agents, only on
 
 **ID**
 
-    Agent identificator number.
+    Agent identification number.
 
     +--------------------+---------------+
     | Allowed characters | Digits only   |

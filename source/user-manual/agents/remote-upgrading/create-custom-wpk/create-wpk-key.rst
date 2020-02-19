@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _custom-wpk-creation:
 
@@ -49,5 +49,5 @@ There are two different ways of creating a WPK, you can do it manually or you ca
     .. toctree::
         :maxdepth: 1
 
-        ../../../../packaging/generate-wpk-package
+        ../../../../development/packaging/generate-wpk-package
         generate-wpk-package-manually

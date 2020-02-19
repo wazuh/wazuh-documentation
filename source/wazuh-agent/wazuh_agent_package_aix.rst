@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh agent on AIX
 
@@ -13,7 +13,7 @@ The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages
 
     .. code-block:: console
 
-      # rpm -ivh wazuh-agent-3.11.0-1.aix.ppc.rpm
+      # rpm -ivh wazuh-agent-3.11.3-1.aix.ppc.rpm
 
     With this simple installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
@@ -23,7 +23,7 @@ The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages
 
     .. code-block:: console
 
-      # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-3.11.0-1.aix.ppc.rpm
+      # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-3.11.3-1.aix.ppc.rpm
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_aix>`.
 

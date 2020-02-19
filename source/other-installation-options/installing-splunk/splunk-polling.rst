@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Splunk for Wazuh installation guide
 
@@ -43,4 +43,4 @@ Save the file when you're done editing it, and restart Splunk:
   # /opt/splunk/bin/splunk restart
 
 .. note::
-  You can find useful information about the ``inputs.conf`` file in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.0/Admin/Inputsconf>`_.
+  You can find useful information about the ``inputs.conf`` file in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.1/Admin/Inputsconf>`_.

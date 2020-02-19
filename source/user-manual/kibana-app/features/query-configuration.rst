@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _kibana_query_configuration:
 
@@ -11,7 +11,7 @@ The actual configuration of an agent, or the manager can be queried on demand by
   :align: center
   :width: 100%
 
-The image bellow shows that the agent configuration is synchronized:
+The image below shows that the agent configuration is synchronized:
 
 .. thumbnail:: ../../../images/kibana-app/features/query-configuration/is-sync.png
   :align: center

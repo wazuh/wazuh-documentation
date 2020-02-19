@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: The Wazuh components and Elastic Stack compatibilities
 
@@ -132,7 +132,9 @@ The Wazuh Kibana plugin requires compatibility between two different products:
 +    **API and Wazuh App version**  + **Elastic Stack version** +
 |                                   |                           |
 +-----------------------------------+---------------------------+
-|              3.10.x               |      6.8.2 to 7.5.1       |
+|              3.11.x               |      6.8.6 to 7.5.2       |
++-----------------------------------+---------------------------+
+|              3.10.x               |      6.8.6 to 7.5.1       |
 +-----------------------------------+---------------------------+
 |              3.9.x                |      6.7.1 to 7.3.0       |
 +-----------------------------------+---------------------------+
@@ -171,6 +173,8 @@ The Splunk app for Wazuh requires compatibility between two different products:
 |                                 |                           |
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
++---------------------------------+---------------------------+
+|              3.11.x             |      7.3.2 to 8.0.1       |
 +---------------------------------+---------------------------+
 |              3.10.x             |      7.3.0 to 8.0.0       |
 +---------------------------------+---------------------------+

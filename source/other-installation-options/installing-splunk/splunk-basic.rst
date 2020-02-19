@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Splunk for Wazuh installation guide
 
@@ -30,12 +30,12 @@ Install Splunk Indexer
 
 This component works receiving the data flow streamed by a forwarder and stores it in a Splunk index.
 
-1. Download Splunk v8.0.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+1. Download Splunk v8.0.1 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
     .. note::
       Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
 
-2. Install the Splunk v8.0.0 package:
+2. Install the Splunk v8.0.1 package:
 
     a) For RPM based distributions:
 
@@ -53,15 +53,15 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
       .. code-block:: console
 
-        # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.0/extensions/splunk/peer-indexes.conf
+        # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/splunk/peer-indexes.conf
 
     b) Create ``ìnputs.conf``:
 
       .. code-block:: console
 
-        # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.0/extensions/splunk/peer-inputs.conf
+        # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/splunk/peer-inputs.conf
 
-4. Ensure Splunk v8.0.0 is installed in ``/opt/splunk`` and start the service:
+4. Ensure Splunk v8.0.1 is installed in ``/opt/splunk`` and start the service:
 
 5. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
 
@@ -74,4 +74,4 @@ Now that you've finished installing Splunk on a single-instance mode, you can pr
 Additional links
 ----------------
 
-- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.0/Admin/CLIadmincommands>`_ .
+- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.1/Admin/CLIadmincommands>`_ .

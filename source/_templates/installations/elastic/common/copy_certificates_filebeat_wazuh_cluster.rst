@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 Before to use the following command, you need to remember the number that you defined this Wazuh server in the ``instances.yml`` file. Replace the ``X`` with the defined number:
 

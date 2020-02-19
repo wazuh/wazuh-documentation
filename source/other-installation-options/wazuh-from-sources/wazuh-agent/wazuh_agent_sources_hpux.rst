@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wazuh_agent_sources_hpux:
 
@@ -55,7 +55,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v3.11.0.zip && /usr/local/bin/unzip v3.11.0
+        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v3.11.3.zip && /usr/local/bin/unzip v3.11.3
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 

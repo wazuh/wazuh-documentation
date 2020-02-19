@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_ossec_rootcheck:
 
@@ -26,6 +26,7 @@ Options
 - `windows_apps`_
 - `windows_malware`_
 - `scanall`_
+- `readall`_
 - `frequency`_
 - `disabled`_
 - `check_dev`_
@@ -155,6 +156,18 @@ scanall
 ^^^^^^^^^^^^^^^
 
 Tells rootcheck to scan the entire system.  This option may lead to some false positives.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+readall
+^^^^^^^^^^^^^^^
+
+Allow Rootcheck read all system files and compare the bytes read with files size.
+With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/etc``, ``/boot``
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -325,7 +338,7 @@ Default Unix configuration
 .. code-block:: xml
 
     <!-- Policy monitoring -->
-      <rootcheck>
+    <rootcheck>
       <disabled>no</disabled>
       <check_unixaudit>yes</check_unixaudit>
       <check_files>yes</check_files>

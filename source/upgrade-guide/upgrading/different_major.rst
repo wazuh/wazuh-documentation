@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _upgrading_different_major:
 
@@ -131,7 +131,7 @@ Upgrade Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.11.0-1.msi /q
+    # wazuh-agent-3.11.3-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.

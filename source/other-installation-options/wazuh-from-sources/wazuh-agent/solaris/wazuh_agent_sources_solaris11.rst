@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Wazuh agent sources installation on Solaris 11
 
@@ -43,7 +43,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # git clone -b v3.11.0 https://github.com/wazuh/wazuh.git
+        # git clone -b v3.11.3 https://github.com/wazuh/wazuh.git
 
      .. note:: If you can't download the file due to an Open SSL error, then you should copy the directory with the scp utility.
 

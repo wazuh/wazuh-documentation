@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Learn how to use deployment variables with DNF
 
@@ -49,7 +49,7 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="aix-agent" dnf install wazuh-agent
+          WAZUH_AGENT_NAME="fedora-agent" dnf install wazuh-agent
 
 * Registration with password and assigning a group:
 
@@ -62,14 +62,14 @@ Examples:
 
 .. code-block:: console
 
-     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
+     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="fedora-agent" \
           WAZUH_REGISTRATION_CA="rootCA.pem" dnf install wazuh-agent
 
 * Registration with protocol:
 
 .. code-block:: console
 
-     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
+     # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="fedora-agent" \
           WAZUH_PROTOCOL="tcp" dnf install wazuh-agent
 
 * Registration and adding multiple address:
@@ -77,7 +77,7 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-          WAZUH_AGENT_NAME="aix-agent" dnf install wazuh-agent
+          WAZUH_AGENT_NAME="fedora-agent" dnf install wazuh-agent
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 

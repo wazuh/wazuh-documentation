@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _release_3_0_0:
 
@@ -63,7 +63,7 @@ The Wazuh manager now includes a native decoder for the JSON format which can re
 
 See the :doc:`JSON decoder <../user-manual/ruleset/json-decoder>` section for further information.
 
-Along with this, we included a new a log source type in Logcollector to monitor JSON log files. Custom labels can be included from the endpoint which will add valuable metadata to the monitored JSON logs.
+Along with this, we introduced a new log format in Logcollector to be able to monitor JSON log files. Custom labels can be included from the endpoint which will add valuable metadata to the monitored JSON logs.
 
 See below for sample configuration:
 

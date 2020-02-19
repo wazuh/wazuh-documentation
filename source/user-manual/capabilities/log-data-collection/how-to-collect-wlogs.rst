@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 How to collect Windows logs
 ===========================
@@ -68,7 +68,7 @@ Windows event channels can be monitored by placing their name at the location fi
 
 .. note::
 
-    Eventchannel is supported on Windows prior or equal to Vista.
+    Eventchannel is supported on Windows versions equal or more recent than Vista.
 
 Available channels and providers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -266,7 +266,7 @@ Some events from different channels are shown below with the associated provider
 Filtering events from Windows Event Channel with queries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Events from the Windows Event channel can be filtered as below.
+Events from the Windows Event channel can be filtered as below. In this example, only events which levels are less or equal to "3" are checked.
 
 .. code-block:: xml
 
@@ -279,17 +279,19 @@ Events from the Windows Event channel can be filtered as below.
 Users can filter events with different severity levels.
 
 .. code-block:: xml
+    :class: escaped-tag-signs
 
     <localfile>
         <location>System</location>
         <log_format>eventchannel</log_format>
         <query>
-            <QueryList>
-                <Query Id="0" Path="System">
-                    <Select Path="System">*[System[(Level&lt;=3)]]</Select>
-                </Query>
-            </QueryList>
+            \<QueryList>
+                \<Query Id="0" Path="System">
+                    \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                \</Query>
+            \</QueryList>
         </query>
     </localfile>
 
-In this example, only events which levels are less or equal to "3" are checked.
+.. note::
+  The ``<QueryList>`` syntax requires escaping the XML labels inside the query as above. 

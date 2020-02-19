@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Splunk for Wazuh installation guide
 .. _installation_splunk:
@@ -24,7 +24,7 @@ This guide describes the Splunk Enterprise installation process for two differen
 | :ref:`Splunk Cluster installation <splunk_distributed>`                | Install a Cluster with Splunk multi-instance architecture.  |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-Find more information about how to scale your environments using Splunk Enterprise on the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.0/Deploy/Distributedoverview>`_.
+Find more information about how to scale your environments using Splunk Enterprise on the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.1/Deploy/Distributedoverview>`_.
 
 .. warning::
   The Wazuh app for Splunk requires the installation of a **Wazuh manager** and **Wazuh API** in order to work properly. Check out the :ref:`installation guide <installation_guide>` before proceeding with Splunk.

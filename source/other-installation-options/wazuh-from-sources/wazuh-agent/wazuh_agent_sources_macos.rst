@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Wazuh agent sources installation on macOS
 
@@ -22,7 +22,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.11.0.tar.gz | tar zx
+      $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.11.3.tar.gz | tar zx
 
     .. note:: All the commands described below need to be executed with root user privileges.
 

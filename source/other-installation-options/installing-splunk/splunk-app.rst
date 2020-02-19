@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. meta:: :description: Splunk for Wazuh installation guide
 
@@ -21,7 +21,7 @@ Installation
 
     .. code-block:: console
 
-      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/wazuhapp-splunk-3.11.0_8.0.0.tar.gz
+      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/wazuhapp-splunk-3.11.3_8.0.1.tar.gz
 
 2. Install the Wazuh app for Splunk:
 

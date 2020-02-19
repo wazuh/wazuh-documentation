@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wodle_s3:
 
@@ -55,7 +55,7 @@ Options
 disabled
 ^^^^^^^^
 
-Disables the CloudTrail wodle.
+Disables the AWS-S3 wodle.
 
 +--------------------+-----------------------------+
 | **Default value**  | no                          |

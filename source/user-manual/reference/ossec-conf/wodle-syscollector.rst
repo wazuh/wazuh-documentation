@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wodle-syscollector:
 
@@ -162,7 +162,7 @@ Enables the processes scan.
 hotfixes
 ^^^^^^^^
 
-.. versionadded:: 3.11.0
+.. versionadded:: 3.11.3
 
 Enables the hotfixes scan. It reports the Windows updates installed.
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _syscollector:
 
@@ -368,7 +368,7 @@ List the current processes running in a system host.
 Windows updates
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.0
+.. versionadded:: 3.11.3
 
 List the Windows updates installed on Windows agents, also known as hotfixes. They are used as feed for the Vulnerability detector to find out Windows vulnerabilities.
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _deployment:
 
@@ -10,3 +10,4 @@ Deployment
 
    deploying-with-puppet/index
    deploying-with-ansible/index
+   virtual-machine/virtual-machine
