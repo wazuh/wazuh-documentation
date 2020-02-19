@@ -74,13 +74,13 @@ Upgrade Elasticsearch
 
       .. code-block:: console
 
-        # yum install elasticsearch-7.5.2
+        # yum install elasticsearch-7.6.0
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.5.2
+        # apt-get install elasticsearch=7.6.0
         # systemctl restart elasticsearch
 
 #. Restart the service.
@@ -125,13 +125,13 @@ Upgrade Filebeat
 
       .. code-block:: console
 
-        # yum install filebeat-7.5.2
+        # yum install filebeat-7.6.0
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install filebeat=7.5.2
+        # apt-get install filebeat=7.6.0
 
 #. Update the configuration file.
 
@@ -182,13 +182,13 @@ Upgrade Kibana
 
       .. code-block:: console
 
-        # yum install kibana-7.5.2
+        # yum install kibana-7.6.0
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install kibana=7.5.2
+        # apt-get install kibana=7.6.0
 
 #. Remove generated bundles.
 
@@ -207,7 +207,7 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.5.2.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
 
 #. Restart Kibana.
 
