@@ -23,7 +23,7 @@ The Elasticsearch configuration section has steps that must be done in all the h
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*All*] The adding Elastic Stack repository must be done in all Elasticsearch cluster node. 
+[*All*] The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes. 
 
 .. tabs::
 

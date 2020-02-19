@@ -26,10 +26,10 @@
       EOF
 
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
-    - An ``filebeat`` instance with IP ``10.0.0.5``. It is an Wazuh single-node cluster.
-    - Three ``elasticsearch`` instances, the #1, #2 and #3 with their respectives IPs ``10.0.0.2``,``10.0.0.3`` and ``10.0.0.4``. Both belong to a three Elasticsearch cluster nodes. If you want to configure an Elasticsearch multi-node cluster with four or more nodes, you must define more ``name`` sections with their respectives names and IPs.
+    - A ``filebeat`` instance with IP ``10.0.0.5``. It is a Wazuh single-node cluster.
+    - Three ``elasticsearch`` instances, #1, #2 and #3 with their respectives IPs ``10.0.0.2``,``10.0.0.3`` and ``10.0.0.4``. Both belong to a three Elasticsearch cluster nodes. If you want to configure an Elasticsearch multi-node cluster with four or more nodes, you must define more ``name`` sections with their respectives names and IPs.
 
-    Replace the IPs with your host IPs.
+    Replace the IPs with your hosts IPs.
 
     In the following steps, we will create a file that contains a folder named after the instance defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
@@ -68,10 +68,10 @@
       EOF
 
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
-    - Two ``filebeat`` instances, the #1 and #2 with their respectives IPs ``10.0.0.5`` and ``10.0.0.6``. Both belong to a two Wazuh cluster nodes. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respectives names and IPs.
-    - Three instances ``elasticsearch``, the #1, #2 and #3 with their respectives IPs ``10.0.0.2``,``10.0.0.3`` and ``10.0.0.4``. Both belongs to a three Elasticsearch cluster nodes. If you want to configure a Elasticsearch multi-node cluster with four or more nodes, you must define more ``name`` sections with their respectives names and IPs.
+    - Two ``filebeat`` instances, #1 and #2 with their respectives IPs ``10.0.0.5`` and ``10.0.0.6``. Both belong to a two Wazuh cluster nodes. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respectives names and IPs.
+    - Three instances ``elasticsearch``, #1, #2 and #3 with their respectives IPs ``10.0.0.2``,``10.0.0.3`` and ``10.0.0.4``. Both belongs to a three Elasticsearch cluster nodes. If you want to configure a Elasticsearch multi-node cluster with four or more nodes, you must define more ``name`` sections with their respectives names and IPs.
 
-    Replace the IPs with your host IPs.
+    Replace the IPs with your hosts IPs.
 
     In the following steps, we will create a file that contains the folders named after the instances defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 

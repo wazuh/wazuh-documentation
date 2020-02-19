@@ -20,7 +20,7 @@ Edit the file ``/etc/elasticsearch/elasticsearch.yml``
           - <elasticsearch_ip_node2>
           - <elasticsearch_ip_node3>
 
-The values to be replaced:
+Values to be replaced:
 
 - ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
 - ``<node_name>``: The node name. I.e: ``elastic-master1``.
