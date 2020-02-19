@@ -21,4 +21,5 @@ This section will show you how to generate your own Wazuh packages for different
         generate-sol-package
         generate-wazuh-splunk-app
         generate-ova
+        generate-windows-package
         generate-wpk-package

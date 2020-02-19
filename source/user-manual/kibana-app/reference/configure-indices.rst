@@ -18,7 +18,7 @@ Considerations
 Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh Kibana plugin. We always recommend updating the installation to the latest version in order get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh>`.
 
 .. note::
-  This tutorial **won`t work** on Wazuh 2.x and Elastic Stack 5.x.
+  This tutorial **won't work** on Wazuh 2.x and Elastic Stack 5.x.
 
 Also, keep in mind that this process **will be restored** after upgrading the Wazuh Kibana plugin, or any of the Elastic Stack components involved during the process. The reason for this depends on each component:
 
@@ -49,7 +49,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.0/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/elasticsearch/7.x/wazuh-template.json
 
 3. Open the template file and locate this line:
 
@@ -94,6 +94,12 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     
         - name: index_prefix
           default: my-custom-alerts-3.x-
+
+
+Note
+
+Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,` and must not start with `_`, `-` or `+`. Also, all the letters must be lowercase. 
+
 
 7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana plugin configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 

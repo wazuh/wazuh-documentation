@@ -693,16 +693,42 @@ $(function() {
     }
   });
 
-  /* Copy to clipboard ----------------------------------------------------------------------------------*/
+  /* Special code blocks --------------------------------------------------------------------------------*/
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
+
+    /* Output */
     if ( !blockCode.hasClass('output') ) {
       blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
     } else {
       blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
     }
+
+    /* Escaped tag signs */
+    if ( blockCode.hasClass('escaped-tag-signs') ) {
+      let data = $(this).html();
+      const datafragments = data.split(/\\</);
+      data = '';
+      datafragments.forEach(function( ltFragment, i) {
+        /* The first fragment occurs just before the opening tag, so it doesn't need to be processed */
+        if ( i != 0 ) {
+          gtFragments = ltFragment.split(/&gt;/);
+          ltFragment = gtFragments.shift();
+          if ( gtFragments.length ) {
+            ltFragment += '\\>' + gtFragments.join('>');
+          }
+        }
+        if ( i != datafragments.length-1 ) {
+          data += ltFragment+'\\<';
+        } else {
+          data += ltFragment;
+        }
+      });
+      $(this).html(data);
+    }
   });
 
+  /* Copy to clipboard ----------------------------------------------------------------------------------*/
   $('.copy-to-clipboard').click(function() {
     const ele = $(this);
     let data = $(ele).parent().find('.highlight').text();
@@ -793,5 +819,12 @@ $(function() {
       });
       ele.html(content);
     }
+  });
+
+  /* Disable "not found" links in the version selector -------------------------------------------*/
+  $('#select-version a.disable').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
   });
 });
