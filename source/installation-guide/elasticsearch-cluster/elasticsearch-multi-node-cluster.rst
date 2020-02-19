@@ -18,7 +18,7 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. You will know if you must to follow the step in all nodes or only in master by the [All] or [Master] label at the beginning of the step.
+The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. You will know if you must to follow the step in all nodes or only in master by the [All] or [Master] label at the beginning of the step. In case there are two or more [Master] nodes, the steps must be done in just one of them.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
