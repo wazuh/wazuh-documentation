@@ -10,3 +10,4 @@ Deployment
 
    deploying-with-puppet/index
    deploying-with-ansible/index
+   virtual-machine/virtual-machine
