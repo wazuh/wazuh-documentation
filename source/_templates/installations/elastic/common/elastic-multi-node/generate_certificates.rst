@@ -5,7 +5,7 @@
   .. group-tab:: Wazuh single-node cluster
 
 
-    We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follow:
+    We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follows:
 
     .. code-block:: yaml
 
