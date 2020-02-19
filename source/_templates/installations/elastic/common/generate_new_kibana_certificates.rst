@@ -8,7 +8,7 @@ It is necessary to create new certificates for the new server where Kibana will 
     --ca-key /etc/elasticsearch/certs/ca/ca.key \
     --ca-cert /etc/elasticsearch/certs/ca/ca.crt \
     --name kibana \
-    --ip 10.0.0.7 \
+    --ip <kibana's_ip> \
     --out ~/kibana.zip 
 
 The ``ca.crt`` will be needed. It can be added as follow:
