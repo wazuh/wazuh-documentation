@@ -9,9 +9,9 @@ Windows
 
 .. note:: You will need administrator privileges to perform this installation.
 
-The first step to installing the Wazuh agent on a Windows machine is to download the Windows installer from the :ref:`packages list<packages>` or directly from `here <https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.2-1.msi>`_. Once this is downloaded, you can install it by using the command line or following the GUI steps:
+The first step to intall the Wazuh agent on a Windows machine is to download the Windows installer from the :ref:`packages list<packages>` or directly from `here <https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.2-1.msi>`_. Once it is downloaded, you can install it using the command line or following the GUI steps:
 
-  a) Using the command line, you can choose installation or deployment:
+  a) Using the command line, you can choose between installation or deployment:
 
     * Installation:
 
@@ -28,7 +28,7 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
     * Deployment:
 
-        You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``ADDRESS`` and ``AUTHD_SERVER``. The agent will use those values to register and assign a Wazuh manager for forwarding events
+        You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``ADDRESS`` and ``AUTHD_SERVER``. The agent will use those values to register and assign a Wazuh manager for forwarding events.
 
 	* Using CMD: ::
 

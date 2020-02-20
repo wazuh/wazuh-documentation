@@ -42,7 +42,7 @@ Adding the Wazuh repository
 Installing Wazuh agent
 ----------------------
 
-#. On your terminal, install the Wazuh agent. You can choose installation or deployment:
+#. On your terminal, install the Wazuh agent. You can choose between installation or deployment:
 
     a) Installation:
 
@@ -73,7 +73,7 @@ Installing Wazuh agent
 
     b) Deployment:
 
-      You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and it will be the assigned manager for forwarding events.
+      You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events.
 
       .. tabs::
 
@@ -101,7 +101,7 @@ Installing Wazuh agent
 
 #. **(Optional)** Disable the Wazuh updates:
 
-    We recommend maintaining the Wazuh manager version greater or equal to that of the Wazuh agents. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
+    We recommend maintaining the Wazuh manager version greater or equal to the Wazuh agents'. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
     .. tabs::
 

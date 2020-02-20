@@ -7,7 +7,7 @@
 AIX
 ===
 
-The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages>` or directly from `here <https://packages.wazuh.com/3.x/aix/wazuh-agent-3.10.2-1.aix.ppc.rpm>`_. You can choose installation or a deployment:
+The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages>` or directly from `here <https://packages.wazuh.com/3.x/aix/wazuh-agent-3.10.2-1.aix.ppc.rpm>`_. You can choose between installation or deployment:
 
   a) Installation:
 
@@ -19,7 +19,7 @@ The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages
 
   b) Deployment:
 
-    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and it will be the assigned manager for forwarding events.
+    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events.
 
     .. code-block:: console
 
@@ -36,4 +36,4 @@ To uninstall the agent:
 
       # rpm -e wazuh-agent
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
+There are files marked as configuration files. Due to this designation, the package manager does not remove those files from the filesystem. The complete file removal action is on user's responsibility. It can be done removing the folder ``/var/ossec``.

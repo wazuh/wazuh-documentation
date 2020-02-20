@@ -7,9 +7,9 @@
 macOS
 =====
 
-The package for macOS is suitable for macOS Sierra or greater. The macOS agent can be downloaded from :ref:`packages list<packages>` or directly from `here <https://packages.wazuh.com/3.x/osx/wazuh-agent-3.10.2-1.pkg>`_. You can install it by using the command line or following the GUI steps:
+The package for macOS is suitable for macOS Sierra or greater. The macOS agent can be downloaded from :ref:`packages list<packages>` or directly from `here <https://packages.wazuh.com/3.x/osx/wazuh-agent-3.10.2-1.pkg>`_. You can install it using the command line or following the GUI steps:
 
-  a) Using the command line, you can choose installation or deployment:
+  a) Using the command line, you can choose between installation or deployment:
 
     * Installation:
 
@@ -19,7 +19,7 @@ The package for macOS is suitable for macOS Sierra or greater. The macOS agent c
 
     * Deployment:
 
-      You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and it will be the assigned manager for forwarding events.
+      You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER``. The agent will use this value to register and this will be the assigned manager for forwarding events.
 
       .. code-block:: console
 
@@ -30,14 +30,14 @@ The package for macOS is suitable for macOS Sierra or greater. The macOS agent c
   b) Using the GUI:
 
 
-     Using the GUI you can perform a simple installation, without register and configure the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.
+     Using the GUI you can perform a simple installation without registering and configuring the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers.
 
      .. thumbnail:: ../images/installation/macos.png
          :align: center
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
 
-Now that the agent is installed, if you didn't use the deployment method, you will now have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
+Now that the agent is installed, if you did not use the deployment method, you will have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
 Uninstall
 ---------
