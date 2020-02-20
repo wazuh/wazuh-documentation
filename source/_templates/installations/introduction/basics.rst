@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In this section we will group the definitions depending of the granularity of the component, starting from the unique components and finishing in clusters.
+In this section we will group the definitions depending on the granularity of the component, starting from the unique components and finishing in clusters.
 
 Individual components
 ^^^^^^^^^^^^^^^^^^^^^
@@ -29,8 +29,8 @@ Grouped components
 Clustered components
 ^^^^^^^^^^^^^^^^^^^^
 
-* Single-node cluster: we use this term referring to those components that act within only one server without communication to other servers with the same components. A Wazuh single-node cluster is a Wazuh server installed in a server acting alone. The same can be applied to Elasticsearch.
+* Single-node cluster: we use this term referring to those components that act within only one server without communication with other servers with the same components. A Wazuh single-node cluster is a Wazuh server installed in a server acting alone. The same can be applied to Elasticsearch.
 
-* Multi-node cluster: we use this term referring to those components that are installed in two or more different servers and they are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster is a Wazuh server installed in two or more servers syncing and sharing data. The same can be applied to Elasticsearch. It provides high availability, scalability and load balancing for data indexing and searching. With the multi-node clusters your Wazuh infrastructure can scale as much as you need.
+* Multi-node cluster: we use this term referring to those components that are installed in two or more different servers and they are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists on two or more servers syncing and sharing data with Wazuh server installed on them. The same can be applied to Elasticsearch. It provides high availability, scalability and load balancing for data indexing and searching. With the multi-node clusters your Wazuh infrastructure can scale as much as you need.
 
 .. End of file
