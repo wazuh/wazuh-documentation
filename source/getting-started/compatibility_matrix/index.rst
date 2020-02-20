@@ -93,7 +93,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 |   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
 
-\* With the release of macOS Catalina the packages are required to go through notarization. Version 3.10.2 was the first version to be notarized, this means that packages for versions older than 3.10.2 are not compatible with macOs Catalina.
+\* With the release of macOS Catalina the packages are required to go through notarization. Version 3.10.2 was the first version to be notarized, this means that packages for older versions than 3.10.2 are not compatible with macOs Catalina.
 
 
 
