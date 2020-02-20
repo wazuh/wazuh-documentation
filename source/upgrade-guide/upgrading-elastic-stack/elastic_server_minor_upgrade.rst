@@ -170,6 +170,15 @@ Upgrade Filebeat
 Upgrade Kibana
 --------------
 
+.. warning::
+  For updates from Wazuh 3.11.x to 3.11.y (regardless of the version of the Elastic Stack) it is recommended to make a backup of the Wazuh app configuration file in order not to lose the modified parameters or the configured APIs.
+
+#. Make a backup of the configuration file.
+
+    .. code-block:: console
+
+      # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /tmp/wazuh-backup.yml
+
 #. Remove the Wazuh app.
 
     .. code-block:: console
@@ -208,6 +217,19 @@ Upgrade Kibana
     .. code-block:: console
 
       # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
+
+#. Restore the configuration file backup.
+
+    .. code-block:: console
+
+      # sudo cp /tmp/wazuh-backup.yml /usr/share/kibana/plugins/wazuh/wazuh.yml
+
+#. Update configuration file permissions.
+
+    .. code-block:: console
+
+      # sudo chown kibana:kibana /usr/share/kibana/plugins/wazuh/wazuh.yml
+      # sudo chmod 500 /usr/share/kibana/plugins/wazuh/wazuh.yml
 
 #. Restart Kibana.
 
