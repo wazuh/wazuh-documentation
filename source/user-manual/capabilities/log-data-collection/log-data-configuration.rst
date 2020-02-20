@@ -6,7 +6,7 @@ Configuration
 ==========================
 
 #. `Basic usage`_
-#. `Monitoring logs using regular expressions for file names`_
+#. `Monitoring logs using wildcard patterns for file names`_
 #. `Monitoring date-based logs`_
 #. `Using environment variables`_
 #. `Using multiple outputs`_
@@ -26,10 +26,10 @@ As in this basic usage example, provide the name of the file to be monitored and
       <log_format>syslog</log_format>
     </localfile>
 
-Monitoring logs using regular expressions for file names
+Monitoring logs using wildcard patterns for file names
 --------------------------------------------------------
 
-Wazuh supports posix regular expressions. For example, to analyze every file that ends with a .log inside the ``/var/log`` directory, use the following configuration:
+Wazuh supports posix wildcard patterns, just like listing files in a terminal. For example, to analyze every file that ends with a .log inside the ``/var/log`` directory, use the following configuration:
 
 .. code-block:: xml
 

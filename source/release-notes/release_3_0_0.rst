@@ -29,7 +29,7 @@ Support for the grouping of agents has now been included at the Wazuh manager le
 
 Version 3.0.0 allows agents to be assigned to a specific group which may have different agent configuration, rootcheck policies and hardening checks than other groups. The manager will then send only the necessary files to each agent based on this assignment. Once the new configuration is received, the agent will restart itself to apply the changes.
 
-This groups management feature is available via terminal using a CLI included in the Wazuh Manager, as well using Wazuh API requests.
+This groups management feature is available via terminal using a CLI included in the Wazuh manager, as well using Wazuh API requests.
 
 More information about this feature is found at :doc:`Grouping agents <../user-manual/agents/grouping-agents>`.
 
@@ -150,7 +150,7 @@ A new digitally signed MSI Windows installer has been developed in order to impr
 
 This installer can be launched in unattended mode from the command line and combines the agent installation, configuration, registration and connection into a single step.
 
-The procedure for using the MSI installer can be found at: :doc:`Install Wazuh agent on Windows <../../installation-guide/installing-wazuh-agent/wazuh_agent_windows>`
+The procedure for using the MSI installer can be found at: :ref:`Install Wazuh agent on Windows <wazuh_agent_package_windows>`
 
 
 Wazuh API

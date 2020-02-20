@@ -56,7 +56,7 @@ expect
 
 Specifies the lists of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not extracted in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all.
 
-A good example is the firewall-block command which expects the ``srcip`` field in order to knows which IP address to block.  Multiple expected field names are comma separated.
+A good example is the firewall-block command which expects the ``srcip`` field in order to know which IP address to block.  Multiple expected field names are comma separated.
 
 +--------------------+------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                  |

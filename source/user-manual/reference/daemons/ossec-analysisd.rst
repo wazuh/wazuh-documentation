@@ -69,7 +69,7 @@ Daemon multithreaded internal structure
     a. Takes the event from the queue.
     b. Stores the element in memory to be written on it's own log file.
 
-4. Logging:
+5. Logging:
     a. Every 1 second, all the log files are writted to the HDD.
     b. Every 5 seconds (by default, if not overrided), the status file for Analysisd is generated.
 

@@ -6,7 +6,7 @@ How to collect Windows logs
 Windows events can be gathered and forwarded to the manager, where they are processed and alerted if they match any rule. There are two formats to collect Windows logs:
 
 - Eventlog (supported by every Windows version)
-- Eventchannel (for Windows prior or equal to Vista)
+- Eventchannel (for Windows Vista and later versions)
 
 Windows logs are descriptive messages which come with relevant information about events that occur in the system. They are collected and shown at the Event Viewer, where they are classified by the source that generated them.
 
@@ -26,7 +26,7 @@ Eventlog uses as well the Windows API to obtain events from Windows logs and ret
 Windows Eventlog vs Windows Eventchannel
 ----------------------------------------
 
-Eventlog is supported on every Windows versions and can monitor any logs except for particular Applications and Services Logs, this means that the information that can be retrieved is reduced to System, Application and Security channels.
+Eventlog is supported on every Windows version and can monitor any logs except for particular Applications and Services Logs, this means that the information that can be retrieved is reduced to System, Application and Security channels.
 
 On the other hand, Eventchannel is maintained since Windows Vista and can monitor the Application and Services logs along with the basic Windows logs. In addition, the use of queries to filter by any field is supported for this log format.
 
@@ -68,7 +68,7 @@ Windows event channels can be monitored by placing their name at the location fi
 
 .. note::
 
-    Eventchannel is supported on Windows prior or equal to Vista.
+    Eventchannel is supported on Windows versions equal or more recent than Vista.
 
 Available channels and providers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -285,8 +285,8 @@ Users can filter events with different severity levels.
         <log_format>eventchannel</log_format>
         <query>
             <QueryList>
-                <Query Id="0"\ Path="System">
-                    \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                <Query Id="0" Path="System">
+                    <Select Path="System">*[System[(Level&lt;=3)]]</Select>
                 </Query>
             </QueryList>
         </query>

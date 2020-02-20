@@ -11,7 +11,7 @@ When an event is received, the decoders separate the information in blocks to pr
 Options
 -------
 
-There is many options to configure the decoders:
+There are many options to configure the decoders:
 
 - `decoder`_
 - `parent`_
@@ -66,7 +66,7 @@ Example:
 Assign the decoder which father it belongs:
 
 .. code-block:: xml
-  
+
   <decoder name="decoder_junior">
     <parent>decoder_father</parent>
     ...
