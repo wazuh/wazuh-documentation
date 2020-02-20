@@ -3,6 +3,8 @@ Regular Expression Syntax
 
 There are two types of regular expressions: regex (*OS_Regex*) and sregex (*OS_Match*).
 
+.. _os_regex_syntax:
+
 Regex (OS_Regex) syntax
 --------------------------------
 
