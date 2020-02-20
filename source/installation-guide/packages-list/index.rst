@@ -5,8 +5,16 @@
 Packages List
 =============
 
+
 Wazuh manager, Wazuh agent and Wazuh API
 ----------------------------------------
+
+- `AIX`_
+- `Linux`_
+- `HP-UX`_
+- `macOS`_
+- `Solaris`_
+- `Windows`_
 
 AIX
 ^^^
