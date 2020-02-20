@@ -72,7 +72,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+
 |   HP-UX 11.31                      |   ✓                     |
 +------------------------------------+-------------------------+
-|   Mac OS X                         |   ✓                     |
+|   macOS Sierra or newer *          |   ✓                     |
 +------------------------------------+-------------------------+
 |   OpenSUSE 42, 15, Tumbleweed      |   ✓                     |
 +------------------------------------+-------------------------+
@@ -91,7 +91,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 |   Windows Server 2003 or newer     |   ✓                     |
 +------------------------------------+-------------------------+
 
-
+\* With the release of macOS Catalina the packages are required to go through notarization. Version 3.10.2 was the first version to be notarized, this means that packages for versions older than 3.10.2 are not compatible with macOs Catalina.
 
 
 
@@ -130,7 +130,7 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +    **API and Wazuh App version**  + **Elastic Stack version** +
 |                                   |                           |
 +-----------------------------------+---------------------------+
-|              3.10.x               |      6.8.2 to 7.4.2       |
+|              3.10.x               |      6.8.2 to 7.5.1       |
 +-----------------------------------+---------------------------+
 |              3.9.x                |      6.7.1 to 7.3.0       |
 +-----------------------------------+---------------------------+

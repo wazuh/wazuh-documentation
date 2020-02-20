@@ -119,7 +119,7 @@ Example:
   .. code-block:: xml
 
     <rule id="100001" maxsize="300" level="3">
-      <if_sid>100020</if_sid>
+      <if_sid>100200</if_sid>
       <match>Queue flood!</match>
       <description> Flooded events queue.</description>
     </rule>

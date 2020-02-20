@@ -92,7 +92,7 @@ Deploying a Wazuh cluster
 
         .. code-block:: console
 
-            # /var/ossec/bin/cluster-control -l
+            # /var/ossec/bin/cluster_control -l
 
         .. code-block:: none
             :class: output

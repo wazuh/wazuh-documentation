@@ -5,7 +5,7 @@
 macOS from package
 ==================
 
-The macOS agent can be downloaded from :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
+The package for macOS is suitable for macOS Sierra or greater. The macOS agent can be downloaded from :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
 
   a) Using the command line, you can choose installation or deployment:
 
@@ -80,4 +80,6 @@ To uninstall the agent in macOS:
   .. code-block:: console
 
     # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
+
+
 
