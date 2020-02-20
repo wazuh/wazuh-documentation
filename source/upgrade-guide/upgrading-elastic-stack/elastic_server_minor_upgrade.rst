@@ -229,7 +229,7 @@ Upgrade Kibana
     .. code-block:: console
 
       # sudo chown kibana:kibana /usr/share/kibana/plugins/wazuh/wazuh.yml
-      # sudo chmod 500 /usr/share/kibana/plugins/wazuh/wazuh.yml
+      # sudo chmod 600 /usr/share/kibana/plugins/wazuh/wazuh.yml
 
 #. Restart Kibana.
 
