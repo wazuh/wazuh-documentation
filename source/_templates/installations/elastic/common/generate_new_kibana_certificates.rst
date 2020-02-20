@@ -11,7 +11,7 @@ It is necessary to create new certificates for the new server where Kibana will 
     --ip <kibana's_ip> \
     --out ~/kibana.zip 
 
-The ``ca.crt`` will be needed. It can be added as follow:
+The ``ca.crt`` will be needed. It can be added as follows:
 
 .. code-block:: console
 
@@ -19,7 +19,7 @@ The ``ca.crt`` will be needed. It can be added as follow:
 
 Copy the generated ``~/kibana.zip`` file from the previous step into the Kibana server. This example will suppose that it will be placed at home folder ``~/``.
 
-Once logged again into the Kibana server, extract the generated ``~/kibana.zip`` file. You can use ``unzip``:
+Once logged in again on the Kibana server, extract the generated ``~/kibana.zip`` file. You can use ``unzip``:
 
 .. code-block:: console
 

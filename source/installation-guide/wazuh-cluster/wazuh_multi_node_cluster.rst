@@ -15,7 +15,7 @@ This document will guide you to install the Wazuh server components in a single-
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to your servers. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to your servers. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -49,7 +49,7 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package. This section must be applied in all servers that will act as a Wazuh cluster nodes:
+#. Install the Wazuh manager package. This step must be applied in all servers that will act as a Wazuh cluster nodes:
 
 .. tabs::
 
@@ -110,7 +110,7 @@ Installing the Wazuh API
 Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API has to be installed in the Wazuh master node and not in the Wazuh worker nodes.
 
 .. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available for your Operating system. In this guide, we used the 8.x version but feel free to install a more recent one.
+  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available version for your Operating system. In this guide, we used the 8.x version but feel free to install a more recent one.
 
 
 .. tabs::

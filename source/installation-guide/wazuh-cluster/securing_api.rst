@@ -13,9 +13,9 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
 #. Enable HTTPS:
 
-    In order to enable HTTPS, you can generate your own certificate or generate it automatically by using the script ``/var/ossec/api/scripts/configure_api.sh``.
+    In order to enable HTTPS, you can generate your own certificate or generate it automatically using the script ``/var/ossec/api/scripts/configure_api.sh``.
 
-        #. Option a: Generate the certificate automatically by using the script.
+        #. Option a: Generate the certificate automatically using the script.
 
           You need to execute the script ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. It will ask you for all the necessary parameters and it will create the certificate using the data provided in the interactive process. The script will restart the Wazuh API automatically.
 
@@ -30,7 +30,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
           All those lines have to be uncommented. Then, you can indicate the path of your ``crt``, ``key`` and/or the ``ca`` (setting ``https_use_ca`` to ``yes``). Above those lines, the option ``config.https`` has to be set up to ``yes``.
 
-          After configure them, the Wazuh API service has to be restarted:
+          After configuring them, the Wazuh API service has to be restarted:
 
             * For Systemd:
 
@@ -57,7 +57,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
         # cd /var/ossec/api/configuration/auth
         # node htpasswd -Bc -C 10 user myUserName
 
-      After configure it, the Wazuh API service has to be restarted:
+      After configuring it, the Wazuh API service has to be restarted:
 
         * For Systemd:
 
@@ -73,9 +73,9 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
 #. Change the default port:
 
-    You can change the default port by using the script ``/var/ossec/api/scripts/configure_api.sh`` or by editing the file ``/var/ossec/api/configuration/config.js``.
+    You can change the default port using the script ``/var/ossec/api/scripts/configure_api.sh`` or by editing the file ``/var/ossec/api/configuration/config.js``.
 
-        #. Option a: Change the port automatically by using the script.
+        #. Option a: Change the port automatically using the script.
 
           You need to execute the script ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. It will ask you for all the necessary parameters and it will change the port using the data provided in the interactive process. The script will restart the Wazuh API automatically.
 
@@ -86,7 +86,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
             // TCP Port used by the API.
             config.port = "55000";
 
-          You can change it by a system non-used port. After configuring it, the Wazuh API service has to be restarted:
+          You can change it for a non-used system's port. After configuring it, the Wazuh API service has to be restarted:
 
             * For Systemd:
 

@@ -14,6 +14,6 @@ The following settings must be changed:
   output.elasticsearch.ssl.certificate: /etc/filebeat/certs/filebeat-X.crt
   output.elasticsearch.ssl.key: /etc/filebeat/certs/filebeat-X.key
 
-Replace the ``X`` by the number defined in the ``instances.yml`` definition step when installing Elasticsearch.
+Replace the ``X`` with the number defined in the ``instances.yml`` definition step when installing Elasticsearch.
 
 .. End of include file

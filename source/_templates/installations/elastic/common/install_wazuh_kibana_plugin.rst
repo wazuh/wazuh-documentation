@@ -21,6 +21,6 @@
 
 
 
-.. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` will accomplish this.
+.. note:: The `path` must have *read* permissions for *others*. E.g: The directory `/tmp/` will accomplish this.
 
 .. End of install_wazuh_kibana_plugin.rst

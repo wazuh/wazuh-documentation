@@ -8,14 +8,14 @@
 Wazuh single-node cluster
 =========================
 
-This document will guide you in installing the Wazuh server components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubts about your OS compatibility.
+This document will guide you to install the Wazuh server components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubts about your OS compatibility.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to your server. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to your server. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,7 +76,7 @@ Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available for your Operating system. In this guide, we used the 8.x version but feel free to install a more recent one.
+  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available version for your Operating System. In this guide, we used the 8.x version but feel free to install a more recent one.
 
 
 .. tabs::
@@ -108,7 +108,7 @@ Installing the Wazuh API
 
 
 .. note::
-  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default credentials and more.
+  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable HTTPS communication, how to change default credentials and more.
 
 .. _wazuh_server_single_node_filebeat:
 
@@ -208,7 +208,7 @@ Filebeat installation and configuration
 Next steps
 ----------
 
-The next step consists of install Kibana. You can continue the guide  :ref:`here<kibana>`.
+The next step consists on installing Kibana. You can continue the guide  :ref:`here<kibana>`.
 
 
 Disabling repositories
