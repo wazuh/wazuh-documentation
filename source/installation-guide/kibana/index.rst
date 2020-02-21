@@ -10,7 +10,7 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Elastic Kibana site <https://www.elastic.co/products/kibana>`_.
 
-Elastic recommends to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on if you will install Kibana in the same server that Elasticsearch or not.
+Elastic recommends to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on if you will install Kibana in the same Elasticsearch server or not.
 
 
 Adding the Elastic Stack repository
@@ -67,7 +67,7 @@ Kibana installation and configuration
             .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
-#. The next step may vary depending on if you want to install Kibana in the same Elasticsearch server or in a different one. It consists of certificate placement:
+#. The next step may vary depending on if you want to install Kibana in the same Elasticsearch server or in a different one. It consists on certificate placement:
 
 
     .. tabs::
