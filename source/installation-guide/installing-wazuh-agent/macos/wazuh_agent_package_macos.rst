@@ -5,7 +5,7 @@
 macOS from package
 ==================
 
-The package for macOS is suitable for macOS Sierra or greater. You can download the  `macOS installer <https://packages.wazuh.com/3.x/osx/wazuh-agent-3.11.3-1.pkg>`_ from our :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
+The package for macOS is suitable for macOS Sierra or greater. You can download the `macOS installer <https://packages.wazuh.com/3.x/osx/wazuh-agent-3.11.3-1.pkg>`_ from our :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
 
   a) Using the command line, you can choose installation or deployment:
 
