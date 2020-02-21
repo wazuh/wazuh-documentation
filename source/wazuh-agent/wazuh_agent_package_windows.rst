@@ -44,7 +44,7 @@ The first step to intall the Wazuh agent on a Windows machine is to download the
   b) Using the GUI:
 
 
-    To install the Windows agent from the GUI, run the downloaded file and follow the steps in the installation wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.
+    To install the Windows agent from the GUI, run the downloaded file and follow the steps in the installation wizard. If you are not sure how to answer to some of the prompts, simply use the default answers.
 
     Once installed, the agent uses a graphical user interface for configuration, opening the log file or starting and stopping the service.
 
