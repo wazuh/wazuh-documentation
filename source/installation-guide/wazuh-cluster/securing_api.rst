@@ -73,7 +73,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
 #. Change the default port:
 
-    You can change the default port using the script ``/var/ossec/api/scripts/configure_api.sh`` or by editing the file ``/var/ossec/api/configuration/config.js``.
+    You can change the default port using the script ``/var/ossec/api/scripts/configure_api.sh`` or editing the file ``/var/ossec/api/configuration/config.js``.
 
         #. Option a: Change the port automatically using the script.
 
