@@ -47,7 +47,7 @@ The Wazuh cluster (center) can be configured as a single-node cluster (only one 
 
 An Elasticsearch cluster (right side) may consists on one or more nodes.
 
-Kibana (above Elasticsearch cluster) will retrieve data from both clusters, Wazuh and Elasticsearch. It will show data in a comprehensive way.
+Kibana (above Elasticsearch cluster) will retrieve data from both clusters, Wazuh and Elasticsearch in a comprehensive way.
 
 
 Start deploying Wazuh server and Elastic Stack
