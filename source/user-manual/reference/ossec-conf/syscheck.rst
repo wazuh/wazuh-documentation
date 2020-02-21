@@ -640,13 +640,13 @@ max_eps
 
 .. versionadded:: 3.12.0
 
-Set the maximum output throughput.
+Set the maximum event reporting throughput. Events are messages that will produce an alert.
 
-+--------------------+---------------------------------------+
-| **Default value**  | 200                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | Integer number between 1 and 1000000. |
-+--------------------+---------------------------------------+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 100                                                     |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
++--------------------+---------------------------------------------------------+
 
 
 database
@@ -679,6 +679,7 @@ The database synchronization settings will be configured inside this tag.
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
       <sync_queue_size>16384</sync_queue_size>
+      <max_eps>10</max_eps>
     </synchronization>
 
 
@@ -745,6 +746,20 @@ Specifies the queue size of the manager synchronization responses.
 | **Allowed values** | Integer number between 2 and 1000000. |
 +--------------------+---------------------------------------+
 
+max_eps
+^^^^^^^
+
+.. versionadded:: 3.12.0
+
+Set the maximum synchronization message throughput.
+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 10                                                      |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
++--------------------+---------------------------------------------------------+
+
+
 
 Default Unix configuration
 --------------------------
@@ -799,11 +814,12 @@ Default Unix configuration
     <process_priority>10</process_priority>
 
     <!-- Maximum output throughput -->
-    <max_eps>200</max_eps>
+    <max_eps>100</max_eps>
 
     <!-- Database synchronization settings -->
     <synchronization>
       <interval>5m</interval>
       <max_interval>1h</max_interval>
+      <max_eps>10</max_eps>
     </synchronization>
   </syscheck>
