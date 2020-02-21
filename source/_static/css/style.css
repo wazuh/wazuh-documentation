@@ -3467,6 +3467,15 @@ div[class*='highlight'] {
   margin: 1px 0 24px 0
 }
 
+div[class*='highlight'].output {
+	border: none;
+	background-color: transparent;
+}
+
+div[class*='highlight'].output .highlight {
+	border: 1px solid #e1e4e5;
+}
+
 div[class*='highlight'] {
   position: relative;
 }
