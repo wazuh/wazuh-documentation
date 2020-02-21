@@ -73,7 +73,7 @@
 
     Every ``name`` section represent one host involved in the Wazuh - Elastic Stack environment. In this example, the file describe:
     - An instance ``elasticsearch`` with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
-    - Two instances ``filebeat``, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. Both belongs to a two nodes Wazuh cluster. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respective names and IPs.
+    - Two instances ``filebeat``, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. Both belong to a two nodes Wazuh cluster. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respective names and IPs.
 
     Replace the IPs with your host IPs.
 
@@ -85,7 +85,7 @@
 
       # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
-    The generated file ``~/certs.zip`` must be copied into the Wazuh servers before to continue the steps below.
+    The generated file ``~/certs.zip`` must be copied into the Wazuh servers before continuing with the steps below.
 
     Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
 

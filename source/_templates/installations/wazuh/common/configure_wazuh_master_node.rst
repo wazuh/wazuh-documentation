@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Configure the cluster mode by editing the following settings in ``/var/ossec/etc/ossec.conf``:
+Configure the cluster mode editing the following settings in ``/var/ossec/etc/ossec.conf``:
 
 .. code-block:: xml
 
