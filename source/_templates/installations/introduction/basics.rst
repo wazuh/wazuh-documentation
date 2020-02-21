@@ -9,7 +9,7 @@ Individual components
 
 * Wazuh manager: this component is in charge of analyzing the data received from the agents and triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, configuration not compliant with policy, possible rootkit, etc…).
 
-* Wazuh API: this component provides an interface to manage and monitor the configuration and deployment status of agents and managers. It is also used by the Wazuh web interface, which is a Kibana app.
+* Wazuh API: this component provides an interface to manage and monitor the configuration and deployment status of agents and managers. It is also used by the Wazuh web interface, which is a Kibana plugin.
 
 * Filebeat: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch.
 
@@ -24,13 +24,13 @@ Grouped components
 
 * Wazuh server: collects and analyzes data from deployed agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API and Filebeat.
 
-* Elastic Stack: the Elasticsearch and Kibana components can be installed on the same server. Both components installed together are called Elastic Stack. It runs Kibana with the Wazuh plugin. Logstash is optional.
+* Elastic Stack: the Elasticsearch and Kibana components can be installed on the same server. Both components installed together are called Elastic Stack. It runs Kibana with the Wazuh plugin. Logstash may be optionally installed.
 
 Clustered components
 ^^^^^^^^^^^^^^^^^^^^
 
-* Single-node cluster: we use this term referring to those components that act within only one server without communication with other servers with the same components. A Wazuh single-node cluster is a Wazuh server installed in a server acting alone. The same can be applied to Elasticsearch.
+* Single-node cluster: we use this term for referring to those components that act within only one server; without communication with other servers running the same components. A Wazuh single-node cluster is a Wazuh manager server that is not connected to other manager nodes. A similar criteria can be applied to Elasticsearch nodes.
 
-* Multi-node cluster: we use this term referring to those components that are installed in two or more different servers and they are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists on two or more servers syncing and sharing data with Wazuh server installed on them. The same can be applied to Elasticsearch. It provides high availability, scalability and load balancing for data indexing and searching. With the multi-node clusters your Wazuh infrastructure can scale as much as you need.
+* Multi-node cluster: we use this term for referring to those components that are installed in two or more separate servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh managers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability and load balancing for data indexing and searching. With the multi-node clusters your Wazuh infrastructure can scale as much as you need.
 
 .. End of file
