@@ -8,7 +8,7 @@
 Elasticsearch single-node cluster
 =================================
 
-This document will guide you to install the Elastic Stack components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document will guide you to install the Elastic Stack components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt regarding the compatibility of your Operating System.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -16,7 +16,7 @@ This document will guide you to install the Elastic Stack components in a single
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
