@@ -74,13 +74,13 @@ Upgrade Elasticsearch
 
       .. code-block:: console
 
-        # yum install elasticsearch-7.4.0
+        # yum install elasticsearch-7.6.0
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.4.0
+        # apt-get install elasticsearch=7.6.0
         # systemctl restart elasticsearch
 
 #. Restart the service.
@@ -125,21 +125,28 @@ Upgrade Filebeat
 
       .. code-block:: console
 
-        # yum install filebeat-7.4.0
+        # yum install filebeat-7.6.0
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install filebeat=7.4.0
+        # apt-get install filebeat=7.6.0
 
 #. Update the configuration file.
 
     .. code-block:: console
 
       # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/filebeat/7.x/filebeat.yml
       # chmod go+r /etc/filebeat/filebeat.yml
+
+#. Download the alerts template for Elasticsearch:
+
+    .. code-block:: console
+
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -163,6 +170,15 @@ Upgrade Filebeat
 Upgrade Kibana
 --------------
 
+.. warning::
+  For updates from Wazuh 3.11.x to 3.11.y (regardless of the version of the Elastic Stack) it is recommended to make a backup of the Wazuh app configuration file in order not to lose the modified parameters or the configured APIs.
+
+#. Make a backup of the configuration file.
+
+    .. code-block:: console
+
+      # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /tmp/wazuh-backup.yml
+
 #. Remove the Wazuh app.
 
     .. code-block:: console
@@ -175,19 +191,45 @@ Upgrade Kibana
 
       .. code-block:: console
 
-        # yum install kibana-7.4.0
+        # yum install kibana-7.6.0
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install kibana=7.4.0
+        # apt-get install kibana=7.6.0
+
+#. Remove generated bundles.
+
+    .. code-block:: console
+
+      # rm -rf /usr/share/kibana/optimize/bundles
+
+#. Update file permissions. This will avoid several errors prior to updating the app.
+
+    .. code-block:: console
+
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Wazuh app.
 
     .. code-block:: console
 
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.4.0.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
+
+#. Restore the configuration file backup.
+
+    .. code-block:: console
+
+      # sudo cp /tmp/wazuh-backup.yml /usr/share/kibana/plugins/wazuh/wazuh.yml
+
+#. Update configuration file permissions.
+
+    .. code-block:: console
+
+      # sudo chown kibana:kibana /usr/share/kibana/plugins/wazuh/wazuh.yml
+      # sudo chmod 600 /usr/share/kibana/plugins/wazuh/wazuh.yml
 
 #. Restart Kibana.
 

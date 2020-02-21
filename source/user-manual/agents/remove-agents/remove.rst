@@ -17,7 +17,7 @@ If the user would like confirmation before removing the agent, use the following
     :class: output
 
     ****************************************
-    * Wazuh v3.10.2 Agent manager.          *
+    * Wazuh v3.11.3 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -45,7 +45,7 @@ If the user would like to remove the agent without confirmation, use the option 
     :class: output
 
     ****************************************
-    * Wazuh v3.10.2 Agent manager.          *
+    * Wazuh v3.11.3 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).

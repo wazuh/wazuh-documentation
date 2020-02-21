@@ -5,7 +5,7 @@
 Defining an alert level threshold
 ==================================
 
-Each event on the Wazuh agent is set to a certain severity level with 1 as the default. All events from this level up will trigger an alert in the Wazuh manager.
+Each event collected by the Wazuh agent is transmitted to the Wazuh Manager. The Manager will assign the event a severity level depending of which rules it matches from the ruleset. By default it will only log alerts with a severity level of 3 or higher.  
 
 Configuration
 -------------

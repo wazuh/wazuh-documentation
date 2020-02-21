@@ -37,7 +37,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
         "error": 0,
         "data": {
             "msg": "Welcome to Wazuh HIDS API",
-            "api_version": "v3.10.2",
+            "api_version": "v3.11.3",
             "hostname": "wazuh",
             "timestamp": "Mon Dec 03 2018 00:36:13 GMT+0000 (UTC)"
         }
@@ -78,7 +78,7 @@ Here are some of the basic concepts related to making API requests and understan
             "error":0,
             "data":{
                 "msg":"Welcome to Wazuh HIDS API",
-                "api_version":"v3.10.2",
+                "api_version":"v3.11.3",
                 "hostname":"wazuh",
                 "timestamp":"Mon Dec 03 2018 00:37:50 GMT+0000 (UTC)"
             }
@@ -144,7 +144,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
     }
 
 
-It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command bellow:
+It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
 
 .. code-block:: console
 
@@ -373,7 +373,7 @@ Some information about the manager can be retrieved using the API. Configuration
     }
 
 
-You can even dump the manager's current configuration with the request bellow (response shortened for brevity):
+You can even dump the manager's current configuration with the request below (response shortened for brevity):
 
 .. code-block:: console
 
@@ -428,7 +428,7 @@ This enumerates **active** agents:
                 "ip": "192.168.185.7",
                 "node_name": "node01",
                 "dateAdd": "2018-08-02 16:52:04",
-                "version": "Wazuh v3.10.2",
+                "version": "Wazuh v3.11.3",
                 "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
                 "manager_host": "wazuh",
                 "lastKeepAlive": "2018-08-03 01:27:33",

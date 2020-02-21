@@ -16,16 +16,46 @@ We will set up an Elastic IP for each new EC2 instance.  You will use these IPs 
 of the VPC, like for SSH, RDP, or HTTPS.  The instances will communicate with each other exclusively via their
 VPC private IPs.
 
-Separately for each new EC2 instance, do the following
+For each of the new EC2 instances (Wazuh Server, Linux Agent, Elastic Server,
+Windows Agent), do the following:
 
-- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click **[Elastic IPs]**.
-- Click **[Allocate new address]**, choose "VPC" and click **[Allocate]** and then **[Close]**.
-- Select only the unassociated EIP (has no Instance yet).
-- Click **[Actions]** and choose "Associate address".
-- Click on the empty *Instance* field select your EC2 instance to assign this EIP to it.
-- Click on the empty *Private IP* field and pick the IP that pops up.  There will only be one.
-- Click **[Associate]**.
+- Access `Elastic IPs <https://console.aws.amazon.com/ec2/home#Addresses>`_ from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
+- Click on **[Allocate new address]**, choose "VPC", "Amazon pool", click on **[Allocate]** and on **[Close]**.
 
+.. thumbnail:: ../../images/learning-wazuh/build-lab/alloc_address.png
+        :title: Address allocation
+        :align: center
+        :width: 75%
+
+- Select the newly created Elastic IP (which has no Instance yet).
+- Click on **[Actions]** and choose "Associate address".
+- Click on the empty *Instance* field select your EC2 instance (Wazuh Server, Linux Agent, Elastic Server, Windows Agent) to assign this
+  Elastic IP to it.
+- Click on the empty *Private IP* field and pick the IP that pops up.  There
+  will only be one.
+- Click on **[Associate]**.
+
+SSH access to Linux instances via command-line SSH client
+---------------------------------------------------------
+
+Ensure the ``Wazuh_Lab.pem`` file has the correct permissions.
+The SSH client will not use it if it is readable by all.
+
+.. code-block:: console
+
+    chmod 400 Wazuh_Lab.pem
+
+Then log in to the linux EC2 instances:
+
+.. code-block:: console
+
+    ssh -i Wazuh_Lab.pem centos@N.N.N.N
+
+Replace ``N.N.N.N`` with the Elastic IP of your Linux instance (Wazuh Server, Linux Agent or Elastic Server).
+
+The exact syntax of this command may vary depending on your operating system and
+specific SSH client.  Consult your system's and/or SSH client's documentation
+if the above does not work for you.
 
 SSH access to Linux instances via Windows Putty client
 ------------------------------------------------------
@@ -35,22 +65,32 @@ Putty is a popular Windows SSH client.  Download and run the MSI installer for P
 Use PuTTYgen to convert your key file into a form Putty can authenticate with
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-    - Run PuTTYgen (**c:\\Program Files (x86)\\PuTTY\\puttygen.exe**)
+    - Run PuTTYgen (**C:\\Program Files (x86)\\PuTTY\\puttygen.exe**)
     - File -> Load private key
     - Change file type selector to "All Files"
-    - Browse to and Open your WazuhLab.pem file.  It will be imported and look like this:
+    - Browse to and Open your ``Wazuh_Lab.pem`` file.  It will be imported and look
+      like this:
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/puttygen.png
         :title: PuTTYgen
         :align: center
         :width: 50%
 
-    - Click **[Save private key]**, confirm that you don't want to use a password and click **[Yes]**.
-    - Store the key in a location convenient to you.  For the following example, we will assume you put it in **c:\\ssh\\** under the name "WazuhLab" with .ppk file type.
+    - Click on **[Save private key]**, confirm that you don't want to use a password
+      and click **[Yes]**.
+    - Store the key in a location convenient to you.  For the following example,
+      we will assume you put it in **C:\\ssh\\** under the name "WazuhLab" with
+      .ppk file extension.
     - Close PuTTYgen.
-    - Run PuTTY (**c:\\Program Files (x86)\\PuTTY\\putty.exe**)
+    - Run PuTTY (**C:\\Program Files (x86)\\PuTTY\\putty.exe**)
     - Under *Host Name* put the Elastic IP associated with the Linux EC2 instance.
     - Under *Saved Session* put the instance name (i.e. Wazuh Server)
+
+    .. thumbnail:: ../../images/learning-wazuh/build-lab/putty.png
+        :title: PuTTY
+        :align: center
+        :width: 50%
+
     - Under Connection->Data, set the *Auto-login username* to "centos".
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/putty-2.png
@@ -58,39 +98,42 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
         :align: center
         :width: 50%
 
-    - Under Connection->SSH->Auth, click **[Browse]** and choose the WazuhLab.ppk file you just saved from PuTTYgen.
-    - Scroll back up and click on "Session" and then on **[Save]** to save all of this for future use.
-    - Click **[Open]** and **[Yes]** for the security alert.
+    - Under Connection->SSH->Auth, click on **[Browse]** and choose the WazuhLab.ppk
+      file you just saved from PuTTYgen.
+
+    .. thumbnail:: ../../images/learning-wazuh/build-lab/putty-3.png
+        :title: PuTTY
+        :align: center
+        :width: 50%
+
+    - Scroll back up on the left bar and click on "Session" and then on
+      **[Save]** to save this configuration for future use.
+    - Click on **[Open]** and on **[Yes]** for the security alert.
     - You should be in now:
 
-.. thumbnail:: ../../images/learning-wazuh/build-lab/putty-3.png
+.. thumbnail:: ../../images/learning-wazuh/build-lab/putty-4.png
     :title: PuTTY
     :align: center
     :width: 75%
 
 
-SSH access to Linux instances via command-line SSH client
----------------------------------------------------------
-
-First of all, make sure your WazuhLab.pem file is only readable by you.  The SSH client will not use it if it is world readable.
-Then log in something like this, substituting the EIP of your Linux instance for the 1.2.3.4 below:
-
-.. code-block:: console
-
-    ssh -i WazuhLab.pem centos@1.2.3.4
-
-The exact syntax of this command may vary depending on your operating system and specific ssh client.  Consult your system's
-and/or ssh client's documentation if the above does not work for you.
-
-
 RDP access to Windows instance
 ------------------------------
 
-- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click "Instances".
+- Access the `Instances <https://console.aws.amazon.com/ec2/home#Instances:>`_
+  section from your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_.
 - Select only the "Windows Agent" instance.
-- Click **[Actions]** and then **[Get Windows Password]**.
-- Click **[Choose File]** and select the WazuhLab.pem that was downloaded when you created the key pair.
-- Click **[Decrypt Password]**.
+- Click on **[Actions]** and on **[Get Windows Password]**.
+- Click on **[Browse]** and select the Wazuh_Lab.pem that was downloaded when you
+  created the key pair.
+
+.. thumbnail:: ../../images/learning-wazuh/build-lab/win-key.png
+    :title: Windows Password
+    :align: center
+    :width: 75%
+
+- Click on **[Decrypt Password]**.
 - Save the Administrator password somewhere so you don't lose it.
-- Open and RDP session with the Elastic IP you associated with your Windows instance, using the Administrator account and the password you just acquired.
+- Open an RDP session with the Elastic IP you associated with your Windows
+  instance, using the Administrator account and the password you just acquired.
 - When prompted in Windows about making your PC be discoverable, choose "No".

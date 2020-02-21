@@ -39,12 +39,12 @@ Check the processes that have a deleted executable.
 
     SELECT * FROM processes WHERE on_disk = 0;
 
-A complete list of all the available tables can be found `here <https://osquery.io/schema/>`_.
+A complete list of all the available tables can be found `here <https://osquery.io/schema/current/>`_.
 
 Configuration
 -------------
 
-You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/>`_ for details.
+You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/4.1.2>`_ for details.
 
 Red Hat, CentOS and Fedora:
 
@@ -116,14 +116,14 @@ After this enable and start the osquery Daemon:
 
   systemctl enable osqueryd
   systemctl start osqueryd
-    
+
 And the osquery module must be enabled for the agents where the osquery is running by adding:
 
 .. code-block:: xml
-  
+
   <wodle name="osquery"/>
 
-To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>` 
+To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>`
 
 .. note::
   More options may be specified as shown in the  :doc:`osquery configuration reference <../reference/ossec-conf/wodle-osquery>`

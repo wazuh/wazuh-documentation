@@ -54,6 +54,6 @@ Next, run the ansible playbook:
 
   $ ansible-playbook wazuh-agent.yml -e@vars-production.yml
 
-The example above for production environment will install Wazuh agent in all host except ``wazuh-manager``. then it will register against ``wazuh-manager`` with ip ``10.1.1.12``.
+The example above for a production environment will install a Wazuh agent in all hosts except ``wazuh-manager``, then it will register against them ``wazuh-manager`` with ip ``10.1.1.12``.
 
 Please review the :ref:`references <wazuh_ansible_reference_agent>` section to see all variables available for this role.

@@ -102,7 +102,7 @@ d) Windows:
 
   .. code-block:: console
 
-    # wazuh-agent-3.10.2-1.msi /q
+    # wazuh-agent-3.11.3-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
@@ -136,6 +136,6 @@ c) OpenSUSE:
 Next steps
 ----------
 
-Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<upgrading-elastic-stack>`.
+Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<installation_elastic_legacy>`.
 
-You might also want to check our :ref:`compatibility matrix <compatibility-matrix>` in order to look at the Elastic stack version you need to use.
+You might also want to check our :ref:`compatibility matrix <compatibility_matrix>` in order to look at the Elastic stack version you need to use.

@@ -84,7 +84,7 @@ Keep alive
 
 The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
 
-This feature is very useful to drop nodes that are facing a networking issue or aren't available at the moment.  It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
+This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.  It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
 
 
 Integrity Thread
@@ -117,7 +117,7 @@ Agent info
 
 This thread is in charge of synchronizing the agent's last keepalives and OS information with the master. The communication here is also started by the worker and it has the following stages:
 
-1. The worker sends the master a file containing all agent-info files merged in a single one. Only files whose modification date is less than half an hour will be sent.
+1. The worker sends the master a file containing all agent-info files merged in a single one. Only files whose modification date is less than 30 minutes will be sent.
 2. The master decompresses the merged file and updates agent statuses. During the update process, the master compares the modification dates of its local file and the remote file. In case the master has a more recent file, the remote one is discarded.
 
 If there is an error during this process the worker is NOT notified about it.
@@ -419,9 +419,9 @@ If the log error message isn't clarifying enough, the traceback can be logged se
 
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
-    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.10.2-py3.7.egg/wazuh/cluster/cluster.py", line 213, in walk_dir
+    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.11.3-py3.7.egg/wazuh/cluster/cluster.py", line 213, in walk_dir
         entry_metadata['md5'] = md5(common.ossec_path + full_path)
-    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.10.2-py3.7.egg/wazuh/utils.py", line 380, in md5
+    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.11.3-py3.7.egg/wazuh/utils.py", line 380, in md5
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 
