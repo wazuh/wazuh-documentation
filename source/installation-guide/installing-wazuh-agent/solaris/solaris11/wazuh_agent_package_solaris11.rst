@@ -5,7 +5,7 @@
 Solaris 11 from package
 =======================
 
-The Wazuh agent for Solaris can be downloaded from our :ref:`packages list<packages>`. The current version has been tested on Solaris 11 version 5.11. Install the agent as follows:
+You can download the `Solaris11 installer (Intel architecture) <https://packages.wazuh.com/3.x/solaris/i386/11/wazuh-agent_v3.11.3-sol11-i386.p5p>`_ or `Solaris11 installer (SPARC architecture) <https://packages.wazuh.com/3.x/solaris/sparc/11/wazuh-agent_v3.11.3-sol11-sparc.p5p>`_ from our :ref:`packages list<packages>`. The current version has been tested on Solaris 11 version 5.11. Install the agent as follows:
 
   a) For Solaris 11 i386:
 
