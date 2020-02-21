@@ -5,7 +5,7 @@
 AIX from package
 ================
 
-The Wazuh agent for AIX can be downloaded from our :ref:`packages list <packages>`. You can choose installation or a deployment:
+You can download the  `AIX installer <https://packages.wazuh.com/3.x/aix/wazuh-agent-3.11.3-1.aix.ppc.rpm>`_ from our :ref:`packages list <packages>`. You can choose installation or a deployment:
 
   a) Installation:
 
