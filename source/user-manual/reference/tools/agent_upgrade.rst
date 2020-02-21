@@ -9,7 +9,7 @@ agent_upgrade
 
 The agent_upgrade program allows you to list outdated agents and upgrade them.
 
-.. note:: In case of having a multi-node Wazuh cluster agent_upgrade must be executed on the node where the agent is connected.
+.. note:: In case of having a multi-node Wazuh cluster, agent_upgrade must be executed on the node where the agent is connected.
 
 +--------------------------------------------+---------------------------------------------------------+
 | ``-h, --help``                             | Display the help message.                               |
