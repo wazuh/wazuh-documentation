@@ -94,13 +94,15 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
 
   * Install from the package:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.11.3_7.6.0.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-3.11.3_7.6.0.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 

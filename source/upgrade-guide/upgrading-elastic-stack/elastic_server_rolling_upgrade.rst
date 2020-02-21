@@ -218,7 +218,8 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # /usr/share/kibana/bin/kibana-plugin remove wazuh
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin remove wazuh
 
 #. Upgrade Kibana.
 
@@ -238,7 +239,8 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_7.6.0.zip
 
 #. Restart Kibana.
 

@@ -202,14 +202,16 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin remove wazuh
 
 3. Upgrade the Wazuh app:
 
   .. code-block:: console
 
-    # rm -rf /usr/share/kibana/optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_6.8.6.zip
+    # cd /usr/share/kibana/
+    # rm -rf optimize/bundles
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.3_6.8.6.zip
 
   .. warning::
 
