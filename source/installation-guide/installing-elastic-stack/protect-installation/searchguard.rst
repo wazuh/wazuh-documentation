@@ -217,7 +217,8 @@ Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticse
 
 .. code-block:: none
 
-    $ sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/7.1.1-35.2.0/search-guard-kibana-plugin-7.1.1-35.2.0.zip
+    $ cd /usr/share/kibana/
+    $ sudo -u kibana bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/7.1.1-35.2.0/search-guard-kibana-plugin-7.1.1-35.2.0.zip
 
 2. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
 
