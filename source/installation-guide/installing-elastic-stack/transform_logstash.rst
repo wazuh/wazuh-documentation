@@ -90,8 +90,8 @@ them to Elasticsearch.
 
     .. code-block:: yaml
 
-      #output.elasticsearch:
-      #    hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
+      # output.elasticsearch:
+      # hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
   * Add the Logstash output in ``/etc/filebeat/filebeat.yml``.
 
@@ -113,7 +113,8 @@ them to Elasticsearch.
 
   Example output:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     logstash: 172.16.1.2:5000...
     connection...

@@ -41,6 +41,10 @@ Get cluster's healthcheck
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -i
+
+    .. code-block:: none
+        :class: output
+
         Cluster name: wazuh
 
         Last completed synchronization for connected nodes (3):
@@ -51,6 +55,10 @@ Get cluster's healthcheck
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -i more
+
+    .. code-block:: none
+        :class: output
+
         Cluster name: wazuh
 
         Connected nodes (3):
@@ -100,6 +108,10 @@ Get cluster's healthcheck
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -i more -fn node02 node01
+
+    .. code-block:: none
+        :class: output
+
         Cluster name: wazuh
 
         Connected nodes (3):
@@ -135,6 +147,10 @@ Get connected nodes
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -l
+
+    .. code-block:: none
+        :class: output
+
         NAME      TYPE    VERSION  ADDRESS
         worker-1  worker  3.10.2    172.17.0.101
         worker-2  worker  3.10.2    172.17.0.102
@@ -144,6 +160,10 @@ Get connected nodes
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -l -fn master worker-1
+
+    .. code-block:: none
+        :class: output
+
         NAME      TYPE    VERSION  ADDRESS
         worker-1  worker  3.10.2    172.17.0.101
         master    master  3.10.2    172.17.0.100
@@ -155,6 +175,10 @@ Get agents in cluster
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a
+
+    .. code-block:: none
+        :class: output
+
         NAME    IP         ID   STATUS  VERSION       NODE NAME
         master  127.0.0.1  000  Active  Wazuh v3.10.2  master
         agent1  any        001  Active  Wazuh v3.10.2  worker-2
@@ -163,6 +187,10 @@ Get agents in cluster
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a -fn worker-2
+
+    .. code-block:: none
+        :class: output
+
         NAME    IP         ID   STATUS  VERSION       NODE NAME
         agent1  any        001  Active  Wazuh v3.10.2  worker-2
 
@@ -170,4 +198,8 @@ Get agents in cluster
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a -fn node02 -fs Disconnected
+
+    .. code-block:: none
+        :class: output
+
         NAME    IP         ID   STATUS  VERSION       NODE NAME

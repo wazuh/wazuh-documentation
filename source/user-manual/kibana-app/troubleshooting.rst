@@ -12,7 +12,7 @@ This section collects common installation or usage problems on the Wazuh app, an
 
 The Wazuh app has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
 
-.. code-block:: console
+.. code-block:: javascript
 
   "kibana": {
     "version": "6.7.2"
@@ -30,6 +30,9 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 .. code-block:: console
 
   # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+
+.. code-block:: json
+  :class: output
 
   {"acknowledged":true}
 

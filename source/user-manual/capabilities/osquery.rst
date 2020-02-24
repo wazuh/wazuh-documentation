@@ -136,7 +136,8 @@ Alert examples
 --------------
 Sample alert in log format:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     ** Alert 1532958886.437707: - osquery,
         2018 Jul 30 13:54:46 manager->osquery
@@ -185,6 +186,7 @@ Sample alert in log format:
 And the same alert in ``JSON`` format:
 
 .. code-block:: json
+    :class: output
 
     {
     "timestamp": "2018-07-30T13:54:46.476+0000",

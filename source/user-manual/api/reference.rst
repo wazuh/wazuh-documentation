@@ -228,7 +228,9 @@ Runs an Active Response command on a specified agent.
 	curl -u foo:bar -k -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/active-response/001?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "data": "Command sent.",
@@ -276,7 +278,9 @@ Add a new agent.
 	curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -311,7 +315,9 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/myNewAgent?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -360,7 +366,9 @@ Insert an agent with an existing id and key.
 	curl -u foo:bar -k -X POST -d '{"name":"NewHost_2","ip":"10.0.10.10","id":"123","key":"1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents/insert?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -435,7 +443,9 @@ Returns the active configuration in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/config/logcollector/localfile?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -516,7 +526,9 @@ Removes a list of groups.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups?ids=webserver,database&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -572,7 +584,9 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents?older_than=10s&purge&ids=003,005&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -623,7 +637,9 @@ Removes an agent.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/008?pretty&purge"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -664,7 +680,9 @@ Returns the sync status in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/group/is_sync?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -704,7 +722,9 @@ Adds a list of agents to the specified group.
 	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents/group/dmz?pretty" -k
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -746,7 +766,9 @@ Adds an agent to the specified group.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -778,7 +800,9 @@ Creates a new group.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/groups/pciserver?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -828,7 +852,9 @@ Returns the specified file belonging to the group parsed to JSON.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/webserver/files/cis_debian_linux_rcl.txt?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -894,7 +920,9 @@ Returns the list of agents in a group.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1006,7 +1034,9 @@ Returns a list with the available agents without group.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/no_group?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1091,7 +1121,9 @@ Returns the group configuration (agent.conf).
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1150,7 +1182,9 @@ Returns the files belonging to the group.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/default/files?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1290,7 +1324,9 @@ Returns the list of existing agent groups.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1344,7 +1380,9 @@ Upload the group configuration (agent.conf).
 	curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @agent.conf.xml "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty" -k
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -1377,7 +1415,9 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1411,7 +1451,9 @@ Remove a list of agents of a group.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/group/dmz?ids=001,002&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1449,7 +1491,9 @@ Removes the group of the agent. The agent will automatically revert to the 'defa
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1481,7 +1525,9 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+   :class: output
 
    {
       "error": 0,
@@ -1523,7 +1569,9 @@ Upload a file to a group.
 	curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @agent.conf.xml "https://127.0.0.1:55000/agents/groups/dmz/files/agent.conf?pretty" -k
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -1566,7 +1614,9 @@ Returns a summary of the OS.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary/os?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1595,7 +1645,9 @@ Returns a summary of the available agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1672,7 +1724,9 @@ Returns a list with the available agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&limit=5&sort=-ip,name"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1801,7 +1855,9 @@ Returns various information from an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1855,7 +1911,9 @@ Returns various information from an agent called :agent_name.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/NewHost?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1899,7 +1957,9 @@ Returns the key of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/004/key?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1935,7 +1995,9 @@ Restarts a list of agents.
 	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"ids":["002","004"]}' "https://127.0.0.1:55000/agents/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -1964,7 +2026,9 @@ Restarts all agents.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -1995,7 +2059,9 @@ Restarts the specified agent.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/007/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2047,7 +2113,9 @@ Returns all the different combinations that agents have for the selected fields.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/stats/distinct?pretty&fields=os.platform"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2102,7 +2170,9 @@ Returns the list of outdated agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/outdated?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2149,7 +2219,9 @@ Returns the upgrade result from an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/003/upgrade_result?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2184,7 +2256,9 @@ Upgrade the agent using a custom file.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade_custom?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2228,7 +2302,9 @@ Upgrade the agent using a WPK file from online repository.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2266,7 +2342,9 @@ Clears cache of the specified group.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache/mygroup?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2293,7 +2371,9 @@ Clears entire cache.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2324,7 +2404,9 @@ Returns current cache index.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2351,7 +2433,9 @@ Returns cache configuration.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache/config?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2423,7 +2507,9 @@ Returns the agent's ciscat results info
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/ciscat/000/results?pretty&sort=-score"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2553,7 +2639,9 @@ Returns the requested configuration in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/master/config/logcollector/internal?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2607,7 +2695,9 @@ Returns ossec.conf in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/configuration?section=global&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2648,7 +2738,9 @@ Returns the cluster configuration.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2688,7 +2780,9 @@ Returns if Wazuh configuration is OK.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/master/configuration/validation?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2714,7 +2808,9 @@ Returns if Wazuh configuration is OK.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/configuration/validation?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2748,7 +2844,9 @@ Confirmation message.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cluster/master/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2782,7 +2880,9 @@ Returns the content of a local file (rules, decoders and lists).
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/master/files?path=etc/decoders/local_decoder.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2818,7 +2918,9 @@ Upload a local file (rules, decoders and lists) in a cluster node.
 	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/cluster/master/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2845,7 +2947,9 @@ Returns whether the cluster is enabled or disabled.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2872,7 +2976,9 @@ Returns the status of the manager processes.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/status?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2913,7 +3019,9 @@ Returns basic information about manager.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/info?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2963,7 +3071,9 @@ Show cluster health.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/healthcheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3103,7 +3213,9 @@ Returns the three last months of ossec.log.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/logs?offset=0&limit=5&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3161,7 +3273,9 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/logs/summary?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3358,7 +3472,9 @@ Returns the local node info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3386,7 +3502,9 @@ Returns the node info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes/master?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3433,7 +3551,9 @@ Returns the nodes info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3483,7 +3603,9 @@ Restarts a specific node in cluster.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/cluster/worker-1/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3506,7 +3628,9 @@ Restarts all nodes in cluster.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/cluster/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3533,7 +3657,9 @@ Returns a summary of the current analysisd stats on the node.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/analysisd?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3582,7 +3708,9 @@ Returns a summary of the current remoted stats on the node.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/remoted?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3639,7 +3767,9 @@ Returns Wazuh statistical information for the current or specified date.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3688,7 +3818,9 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/hourly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3722,7 +3854,9 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/weekly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3835,7 +3969,9 @@ Returns all decoders included in ossec.conf.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders?pretty&offset=0&limit=2&sort=+file,position"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3914,7 +4050,9 @@ Returns all decoders files included in ossec.conf.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/files?pretty&offset=0&limit=10&sort=-path"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4006,7 +4144,9 @@ Returns all parent decoders included in ossec.conf.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/parents?pretty&offset=0&limit=2&sort=-file"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4070,7 +4210,9 @@ Returns the decoders with the specified name.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/apache-errorlog?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4135,7 +4277,9 @@ Clears the syscheck database for all agents.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/experimental/syscheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -4192,7 +4336,9 @@ Returns the agent's hardware info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/hardware?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4320,7 +4466,9 @@ Returns the agent's network address info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4412,7 +4560,9 @@ Returns the agent's network interface info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netiface?pretty&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4516,7 +4666,9 @@ Returns the agent's network protocol info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4592,7 +4744,9 @@ Returns the agent's os info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/os?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4728,7 +4882,9 @@ Returns the agent's packages info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/packages?pretty&sort=-name&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4824,7 +4980,9 @@ Returns the agent's ports info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/ports?pretty&limit=2&sort=protocol"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4940,7 +5098,9 @@ Returns the agent's processes info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/processes?pretty&limit=2&sort=priority"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5075,7 +5235,9 @@ Returns the agent's ciscat results info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/ciscat/results?pretty&sort=-score"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -5155,7 +5317,9 @@ Returns the content of all CDB lists.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/lists?pretty&path=etc/lists/audit-keys"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5219,7 +5383,9 @@ Returns the path from all lists.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/lists/files?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5336,7 +5502,9 @@ Returns the requested configuration in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/config/logcollector/internal?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5390,7 +5558,9 @@ Returns ossec.conf in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration?section=global&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5435,7 +5605,9 @@ Returns if Wazuh configuration is OK.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration/validation?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5469,7 +5641,9 @@ Confirmation message.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/manager/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+   :class: output
 
    {
       "error": 0,
@@ -5503,7 +5677,9 @@ Returns the content of a local file (rules, decoders and lists).
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/files?path=etc/decoders/local_decoder.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5539,7 +5715,9 @@ Upload a local file (rules, decoders and lists).
 	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/manager/files?path=etc/rules/new_rule.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -5566,7 +5744,9 @@ Returns basic information about manager.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/info?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5608,7 +5788,9 @@ Returns the status of the manager processes.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/status?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5678,7 +5860,9 @@ Returns the three last months of ossec.log.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs?offset=0&limit=5&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5736,7 +5920,9 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs/summary?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5949,7 +6135,9 @@ Restarts Wazuh manager.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -5976,7 +6164,9 @@ Returns a summary of the current analysisd stats.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/analysisd?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6055,7 +6245,9 @@ Returns Wazuh statistical information for the current or specified date.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6104,7 +6296,9 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/hourly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6138,7 +6332,9 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/weekly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6218,7 +6414,9 @@ Returns a summary of the current remoted stats.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/remoted?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6259,7 +6457,9 @@ Clears the rootcheck database for all agents.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6290,7 +6490,9 @@ Clears the rootcheck database for a specific agent.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6325,7 +6527,9 @@ Returns the timestamp of the last rootcheck scan.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/last_scan?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6366,7 +6570,9 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/cis?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+   :class: output
 
    {
       "error": 0,
@@ -6418,7 +6624,9 @@ Returns the rootcheck database of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000?offset=0&limit=2&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6466,7 +6674,9 @@ Returns the PCI requirements of all rootchecks of the agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/pci?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+   :class: output
 
    {
       "error": 0,
@@ -6500,7 +6710,9 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6531,7 +6743,9 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6602,7 +6816,9 @@ Returns all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules?offset=0&limit=2&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6698,7 +6914,9 @@ Returns the files of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/files?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6790,7 +7008,9 @@ Returns the GDPR requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/gdpr?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6836,7 +7056,9 @@ Returns the GPG13 requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/gpg13?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6888,7 +7110,9 @@ Returns the groups of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/groups?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6940,7 +7164,9 @@ Returns the HIPAA requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/hipaa?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6992,7 +7218,9 @@ Returns the NIST-800-53 requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/nist-800-53?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7044,7 +7272,9 @@ Returns the PCI requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/pci?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7098,7 +7328,9 @@ Returns the rules with the specified id.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/1002?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7193,7 +7425,9 @@ Returns the sca checks of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000/checks/unix_audit?pretty&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+   :class: output
 
    {
       "error": 0,
@@ -7295,7 +7529,9 @@ Returns the sca database of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000?q=pass>20;score<150&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+   :class: output
 
    {
       "error": 0,
@@ -7344,7 +7580,9 @@ Returns a dictionary with a full summary of agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/summary/agents?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7466,7 +7704,9 @@ Clears the syscheck database for the specified agent.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/syscheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -7501,7 +7741,9 @@ Return the timestamp of the last syscheck scan.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000/last_scan?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7570,7 +7812,9 @@ Returns the syscheck files of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000?offset=0&limit=2&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7636,7 +7880,9 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -7667,7 +7913,9 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7708,7 +7956,9 @@ Returns the agent's hardware info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/hardware?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7778,7 +8028,9 @@ Returns the agent's network address info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7860,7 +8112,9 @@ Returns the agent's network interface info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netiface?pretty&limit=2&sort=state"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7939,7 +8193,9 @@ Returns the agent's network protocol info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7988,7 +8244,9 @@ Returns the agent's OS info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/os?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8061,7 +8319,9 @@ Returns the agent's packages info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/packages?pretty&limit=2&offset=10&sort=-name"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8155,7 +8415,9 @@ Returns the agent's ports info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/ports?pretty&sort=-protocol&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8271,7 +8533,9 @@ Returns the agent's processes info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/processes?pretty&limit=2&offset=10&sort=-name"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8347,7 +8611,3 @@ Returns the agent's processes info.
 	      "totalItems": 18
 	   }
 	}
-
-
-
-

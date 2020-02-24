@@ -192,6 +192,10 @@ NGINX SSL proxy for Splunk (Debian-based distributions)
 
         # mkdir -p /etc/ssl/certs /etc/ssl/private
         # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/splunk-access.key -out /etc/ssl/certs/splunk-access.pem
+
+      .. code-block:: none
+          :class: output
+
           Generating a 2048 bit RSA private key
           .............+++
           ..+++

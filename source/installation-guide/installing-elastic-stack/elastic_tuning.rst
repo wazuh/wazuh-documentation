@@ -95,6 +95,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
     # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
+    :class: output
 
     {
       "nodes" : {
@@ -212,6 +213,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
     # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
 
   .. code-block:: json
+    :class: output
 
     {
       "wazuh-custom" : {

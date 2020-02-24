@@ -99,13 +99,15 @@ Finally, the ``expect`` package must be present on the manager for this feature 
 
 When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/ossec.log`` file:
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   ossec-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
 
 When Wazuh has connected to the remote device, the following will be shown in the same log file:
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   ossec-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Starting.
   ossec-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Finished.
@@ -116,7 +118,10 @@ Once configured as above, Wazuh alerts will be triggered when changes occur with
 
 Sample alerts are as follows:
 
-Integrity check BSD/Linux sample alert::
+Integrity check BSD/Linux sample alert:
+
+.. code-block:: none
+	:class: output
 
 	** Alert 1486811998.93230: - ossec,syscheck,pci_dss_11.5,
 	2017 Feb 11 03:19:58 ubuntu->(ssh_integrity_check_linux) root@192.168.1.3->syscheck
@@ -141,7 +146,10 @@ Integrity check BSD/Linux sample alert::
 
 
 
-Generic Diff sample alert::
+Generic Diff sample alert:
+
+.. code-block:: none
+	:class: output
 
 	** Alert 1486811190.88243: - ossec,syscheck,agentless,pci_dss_11.5,pci_dss_10.6.1,
 	2017 Feb 11 03:06:30 ubuntu->(ssh_generic_diff) root@192.168.1.3->agentless

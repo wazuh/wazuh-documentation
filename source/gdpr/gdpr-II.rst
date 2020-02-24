@@ -51,17 +51,36 @@ When we modify the file Wazuh generates an alert.
 .. code-block:: console
 
 	root@agent:~# ls -l personal_data
+
+.. code-block:: none
+	:class: output
+
 	total 4
 	-rw-r--r-- 1 root root 18 may 16 11:39 subject_data.txt
+
+.. code-block:: console
+
 	root@agent:~# cat personal_data/subject_data.txt
+
+.. code-block:: none
+	:class: output
+
 	User01= user03_ID
+
+.. code-block:: console
+
 	root@agent:~# echo "User01= user02_ID" > personal_data/subject_data.txt
 	root@agent:~# cat personal_data/subject_data.txt
+
+.. code-block:: none
+	:class: output
+
 	User01= user02_ID
 
 As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526470666.11377: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
 	2018 May 16 13:37:46 (agent01) 192.168.1.50->syscheck

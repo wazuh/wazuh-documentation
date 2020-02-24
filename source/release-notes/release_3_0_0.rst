@@ -78,7 +78,7 @@ See below for sample configuration:
 
 Below is a sample JSON log from the monitored file.
 
-.. code-block:: json
+.. code-block:: js
 
   {
     "event": {
@@ -93,6 +93,7 @@ Below is a sample JSON log from the monitored file.
 The following will be the result when the above configuration is applied to the JSON log:
 
 .. code-block:: json
+  :class: output
 
   {
     "event": {
@@ -119,8 +120,9 @@ The integration with VirusTotal as a threat intelligence source, along with the 
 
 Below is an example of an alert triggered from a positive result:
 
-.. code-block:: console
+.. code-block:: none
    :emphasize-lines: 3
+   :class: output
 
    ** Alert 1510684984.55826: mail  - virustotal,
    2017 Nov 14 18:43:04 PC->virustotal
