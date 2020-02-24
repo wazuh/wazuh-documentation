@@ -3,7 +3,7 @@
 Remote Hosts
 ============================
 
-Ansible was born with the idea to be an agentless automation platform. Ansible relies on SSH the connection to remote hosts, meaning that, you can connect to remote hosts as SSH does. We briefly explain two (2) of this methods below.
+Ansible was born with the idea to be an agentless automation platform. Ansible relies on SSH the connection to remote hosts, meaning that, you can connect to remote hosts as SSH does. We briefly explain two (2) of these methods below.
 
 .. note:: We recommend the use of `Using passwords`_ method, this avoid you share your public SSH Key among several hosts.
 
