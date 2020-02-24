@@ -37,6 +37,9 @@ image with all the necessary tools to compile and obtain the Windows agent compi
 
   #  ./generate_compiled_windows_agent.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_compiled_windows_agent.sh [OPTIONS]
 
       -b, --branch <branch>     [Required] Select Git branch [${BRANCH}]. By default: master."
@@ -78,6 +81,9 @@ Execute the ``generate_wazuh_msi.ps1`` script, with the different options you de
 
   # cd .\[AGENT_UNCOMPRESSED_FOLDER]\src\win32
   # .\generate_wazuh_msi.ps1
+
+.. code-block:: none
+  :class: output
 
   This tool can be used to generate the Windows Wazuh agent msi package.
       PARAMETERS TO BUILD WAZUH-AGENT MSI:

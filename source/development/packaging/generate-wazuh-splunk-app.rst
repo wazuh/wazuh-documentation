@@ -27,6 +27,9 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
 
   $ ./generate_wazuh_splunk_app.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
 
       -b, --branch <branch>     [Required] Select Git branch or tag e.g. v3.11.3-7.3.0

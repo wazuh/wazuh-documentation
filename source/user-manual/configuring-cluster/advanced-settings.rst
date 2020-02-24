@@ -75,7 +75,7 @@ Pointing agents to the cluster with a load balancer
             - The way nginx and its modules work are determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
             - Now, open the configuration file and add the following structure:
 
-            .. code-block:: xml
+            .. code-block:: nginx
 
                 stream {
                     upstream cluster {

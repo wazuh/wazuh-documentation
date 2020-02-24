@@ -29,6 +29,9 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
 
   $ ./generate_wpk_package.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_wpk_package.sh [OPTIONS]
 
       -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows]

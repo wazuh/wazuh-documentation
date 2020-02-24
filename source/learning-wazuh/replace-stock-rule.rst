@@ -138,7 +138,8 @@ Using the Command Line Interface
 
 9. Observe your customized alert level near the end of the output:
 
-    .. code-block:: xml
+    .. code-block:: none
+        :class: output
 
         **Phase 3: Completed filtering (rules).
                Rule id: '5716'

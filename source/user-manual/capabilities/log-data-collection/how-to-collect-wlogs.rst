@@ -205,6 +205,7 @@ The installation log will be collected at the Application channel. To monitor lo
 The next step is to install a new application. Once it is installed, the Wazuh manager will build the next JSON event related with the installation process:
 
 .. code-block:: json
+    :class: output
 
     {
         "win": {

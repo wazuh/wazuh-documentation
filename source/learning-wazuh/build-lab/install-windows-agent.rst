@@ -12,7 +12,7 @@ Download the Wazuh agent package
 
 2. Open Internet Explorer and paste the following into the address bar:
 
-  .. code-block:: console
+  .. code-block:: none
 
     https://packages.wazuh.com/3.x/windows/wazuh-agent-3.11.3-1.msi
 
@@ -83,7 +83,8 @@ Run the Wazuh agent Manager and confirm it is running and connected to the Wazuh
 
 2. Click on View->View Logs.  You should find record of the agent successfully connecting to the Wazuh manager.
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2019/11/22 12:05:23 ossec-agent: INFO: (4102): Connected to the server (172.30.0.10:1514/tcp).
 
@@ -98,6 +99,9 @@ your self-registered agents.
 
         [root@wazuh-manager centos]# /var/ossec/bin/agent_control -l
 
+    .. code-block:: none
+        :class: output
+
         Wazuh agent_control. List of available agents:
            ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
            ID: 001, Name: linux-agent, IP: 172.30.0.30, Active
@@ -109,6 +113,10 @@ your self-registered agents.
     .. code-block:: console
 
         [root@wazuh-manager centos]# grep "agent connected"  /var/ossec/logs/alerts/alerts.log -B1 -A1
+
+    .. code-block:: none
+        :class: output
+
         2019 Nov 22 11:41:35 (linux-agent) 172.30.0.30->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'linux-agent->172.30.0.30'.

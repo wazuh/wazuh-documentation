@@ -29,6 +29,9 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 
   $ ./generate_wazuh_packages.sh -h
 
+.. code-block:: none
+  :class: output
+
   OPTIONS:
        -b, --build            [Required] Build the OVA and OVF.
        -v, --version          [Required] Version of wazuh to install on VM.

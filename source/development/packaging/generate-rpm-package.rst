@@ -27,6 +27,9 @@ Execute the ``generate_rpm_package.sh`` script, with the different options you d
 
   #  ./generate_rpm_package.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_rpm_package.sh [OPTIONS]
 
       -b, --branch <branch>     [Required] Select Git branch or tag e.g. master

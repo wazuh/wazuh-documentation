@@ -127,7 +127,8 @@ The ``vulnerability-detector`` module generates logs on the manager, and ``sysco
 
 Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an agent:
 
-  .. code-block:: xml
+  .. code-block:: none
+      :class: output
 
       2019/11/14 19:21:21 wazuh-modulesd:syscollector: INFO: Module started.
       2019/11/14 19:21:22 wazuh-modulesd:syscollector: INFO: Starting evaluation.
@@ -135,9 +136,13 @@ Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an ag
 
 and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager
 
-  .. code-block:: console
+  .. code-block:: none
 
       [root@wazuh-manager ~]# grep vulnerability-detector: /var/ossec/logs/ossec.log
+
+  .. code-block:: none
+      :class: output
+
       2020/01/31 17:26:27 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting Red Hat Enterprise Linux database update.
       2020/01/31 17:26:46 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the Red Hat Enterprise Linux feed finished successfully.
       2020/01/31 17:26:48 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting National Vulnerability Database database update.
@@ -201,6 +206,9 @@ hardware and operating system data is also tracked.
 
       [root@wazuh-manager centos]# agent_control -l
 
+  .. code-block:: none
+      :class: output
+
       Wazuh agent_control. List of available agents:
        ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
        ID: 001, Name: elastic-server, IP: 172.30.0.20, Active
@@ -221,9 +229,13 @@ hardware and operating system data is also tracked.
 Where ``wazuhapiuser:wazuhlab`` are the credentials for the API.
 The results should look like this:
 
-  .. code-block:: console
+  .. code-block:: none
 
     [root@linux-agent centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://172.30.0.10:55000/syscollector/003/hardware?pretty"
+
+  .. code-block:: json
+      :class: output
+
       {
          "error": 0,
          "data": {
@@ -260,6 +272,10 @@ The results should look like this:
   .. code-block:: console
 
       [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://localhost:55000/syscollector/003/os?pretty"
+
+  .. code-block:: json
+      :class: output
+
       {
          "error": 0,
          "data": {
@@ -318,6 +334,10 @@ The results should look like this:
   .. code-block:: console
 
         [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -X GET "https://172.30.0.10:55000/experimental/syscollector/packages?name=curl&pretty"
+
+  .. code-block:: json
+        :class: output
+
         {
            "error": 0,
            "data": {
@@ -396,6 +416,9 @@ the ``syscollector`` scan results for each agent.
 
       [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db .tables
 
+  .. code-block:: none
+      :class: output
+
       ciscat_results        sca_policy            sys_netproto
       fim_entry             sca_scan_info         sys_osinfo
       metadata              scan_info             sys_ports
@@ -414,6 +437,10 @@ The ``sys_`` table are populated by ``syscollector``.
 
       [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db 'select * from sys_osinfo;' -header
 
+
+  .. code-block:: none
+      :class: output
+
       scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_build|os_platform|sysname|release|version|os_release
       1059274052|2019/12/24 14:43:41|linux-agent|x86_64|CentOS Linux|7.7||7|7||centos|Linux|3.10.0-1062.9.1.el7.x86_64|#1 SMP Fri Dec 6 15:49:49 UTC 2019|
 
@@ -424,6 +451,10 @@ The ``sys_`` table are populated by ``syscollector``.
   .. code-block:: console
 
       [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db "select name,version,description from sys_programs;" -header
+
+
+  .. code-block:: none
+      :class: output
 
       name|version|description
       kbd-legacy|1.15.5-15.el7|Legacy data for kbd package

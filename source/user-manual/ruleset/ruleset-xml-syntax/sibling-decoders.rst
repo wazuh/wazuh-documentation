@@ -65,7 +65,8 @@ A simple decoder may be:
 
 Using `/var/ossec/bin/ossec-logtest` we get:
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   **Phase 1: Completed pre-decoding.
   full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
@@ -121,7 +122,8 @@ But using modular logic with sibling decoders:
 
 Both messages are now correctly decoded.
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   ossec-testrule: Type one log per line.
 

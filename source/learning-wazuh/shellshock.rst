@@ -209,6 +209,9 @@ you may confirm this with an iptables command on the attacked server:
 
         # iptables --list -n
 
+    .. code-block:: none
+        :class: output
+
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
         DROP       all  --  172.30.0.30          0.0.0.0/0
@@ -229,6 +232,9 @@ this event 5 minutes apart.
 
         # cat /var/ossec/logs/active-responses.log
 
+    .. code-block:: none
+        :class: output
+
         Mon Nov  4 19:28:08 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh add - 172.30.0.30 1572895688.94657 31166
         Mon Nov  4 19:33:09 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh delete - 172.30.0.30 1572895688.94657 31166
 
@@ -239,6 +245,9 @@ requesting the webpage again, or by using an iptables command on the attacked se
     .. code-block:: console
 
         # iptables --list -n
+
+    .. code-block:: none
+        :class: output
 
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
@@ -321,9 +330,10 @@ Run the same probe again to the web server.  Observe that the output of the
 Windows command line `route print /4` now shows a null route for the IP of the
 attacker.  It will be in the "Persistent Routes:" section of the output.
 
-    .. code-block:: console
+    .. code-block:: none
+            :class: output
 
-      PS C:\Users\Administrator> route print /4
+            PS C:\Users\Administrator> route print /4
 
             (...)
 

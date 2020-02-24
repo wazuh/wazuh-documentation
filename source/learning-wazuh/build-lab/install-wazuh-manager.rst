@@ -71,6 +71,10 @@ listener are in place:
 
       [root@wazuh-manager ~]# systemctl restart wazuh-manager
       [root@wazuh-manager ~]# netstat -natp | egrep "(:1514|:1515)"
+
+    .. code-block:: none
+      :class: output
+
       tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/ossec-remoted
       tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/ossec-authd
 

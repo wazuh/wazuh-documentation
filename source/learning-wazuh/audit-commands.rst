@@ -44,6 +44,10 @@ Turn on program call auditing on linux-agent
         [root@linux-agent centos]# auditctl -R /etc/audit/rules.d/audit.rules
         ...
         [root@linux-agent centos]# auditctl -l
+
+    .. code-block:: none
+        :class: output
+
         -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
         -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
 
@@ -56,8 +60,19 @@ Trigger a few audit events
     .. code-block:: console
 
         [root@linux-agent centos]# exit
+
+    .. code-block:: none
+        :class: output
+
         logout
+
+    .. code-block:: console
+
         [centos@linux-agent ~]$ ping -c1 8.8.4.4
+
+    .. code-block:: none
+        :class: output
+
         PING 8.8.4.4 (8.8.4.4) 56(84) bytes of data.
         64 bytes from 8.8.4.4: icmp_seq=1 ttl=51 time=1.09 ms
 
@@ -70,6 +85,10 @@ Trigger a few audit events
     .. code-block:: console
 
         [centos@linux-agent ~]$ sudo cat /etc/shadow
+
+    .. code-block:: none
+        :class: output
+
         root:!!:17497:0:99999:7:::
         bin:*:17110:0:99999:7:::
         ...
@@ -79,8 +98,19 @@ Trigger a few audit events
     .. code-block:: console
 
         [centos@linux-agent ~]$ sudo su -
+
+    .. code-block:: none
+        :class: output
+
         Last login: Thu Nov 14 12:27:12 UTC 2019 on pts/0
+
+    .. code-block:: console
+
         [root@linux-agent ~]# df
+
+    .. code-block:: none
+        :class: output
+
         Filesystem     1K-blocks    Used Available Use% Mounted on
         /dev/xvda1       8377344 1616824   6760520  20% /
         devtmpfs          486604       0    486604   0% /dev
@@ -122,7 +152,7 @@ Look over the relevant Wazuh rule
 
 1. Here is Wazuh rule 80792:
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <rule id="80792" level="3">
             <if_sid>80700</if_sid>
@@ -139,7 +169,7 @@ Look over the relevant Wazuh rule
 
 2. Look over the key-value pairs in the lookup file.  The file is ``/var/ossec/etc/lists/audit-keys``.
 
-    .. code-block:: console
+    .. code-block:: none
 
         audit-wazuh-w:write
         audit-wazuh-r:read
@@ -170,7 +200,7 @@ will use to give us special alerts when executed.
 1. On wazuh-manager, create ``/var/ossec/etc/lists/suspicious-programs`` with
    this content:
 
-    .. code-block:: console
+    .. code-block:: none
 
         ncat:
         nc:
@@ -195,7 +225,7 @@ will use to give us special alerts when executed.
    to do so add the following to ``/var/ossec/etc/rules/local_rules.xml``
    on the Wazuh Manager.
 
-    .. code-block:: console
+    .. code-block:: xml
 
       <group name="audit">
         <rule id="100200" level="8">
@@ -255,7 +285,7 @@ alarmed we should be about a given program being run.
 1. On The manager, replace the content of ``/var/ossec/etc/lists/suspicious-programs``
    with the following:
 
-    .. code-block:: console
+    .. code-block:: none
 
         ncat:red
         nc:red
@@ -270,7 +300,7 @@ alarmed we should be about a given program being run.
    Add this new rule to ``/var/ossec/etc/rules/local_rules.xml`` on wazuh-manager,
    directly after rule 100200 and before the closing ``</group>`` tag:
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <rule id="100210" level="12">
             <if_sid>80792</if_sid>
@@ -323,7 +353,7 @@ such an exception.
 
 1. Add this new rule to ``/var/ossec/etc/rules/local_rules.xml`` on wazuh-manager, directly after rule 100210 and before the closing ``</group>`` tag.:
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <rule id="100220" level="0">
             <if_sid>80792</if_sid>
@@ -382,7 +412,8 @@ Observe the order in which our child rules are evaluated
 4. Carefully note the order in which child rules of "80792 - Audit: Command"
    were evaluated:
 
-    .. code-block:: console
+    .. code-block:: none
+       :class: output
 
        ...
        Trying rule: 80789 - Audit: Watch - Execute access: $(audit.file.name)

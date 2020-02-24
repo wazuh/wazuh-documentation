@@ -93,10 +93,21 @@ unhide itself:  Try it out:
         # lsmod | grep diamorphine
         # kill -63 509
         # lsmod | grep diamorphine
+
+    .. code-block:: none
+        :class: output
+
         diamorphine            13155  0
+
+    .. code-block:: console
+
         # kill -63 509
         # lsmod | grep diamorphine
-        #
+
+    .. code-block:: none
+        :class: output
+
+
 
 
     In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not,
@@ -109,10 +120,20 @@ unhide itself:  Try it out:
     .. code-block:: console
 
         # ps auxw | grep rsyslogd | grep -v grep
+
+    .. code-block:: none
+        :class: output
+
         root       732  0.0  0.7 214452  3572 ?        Ssl  14:53   0:00 /usr/sbin/rsyslogd -n
+
+    .. code-block:: console
+
         # kill -31 $(pidof rsyslogd)
         # ps auxw | grep rsyslog | grep -v grep
-        #
+
+    .. code-block:: none
+        :class: output
+
 
 9. Next configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/ossec.conf`` file to **300** with the following:
 
@@ -162,7 +183,8 @@ unhide itself:  Try it out:
 
     You should see something like this shortly:
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
 
             2019/10/18 14:47:05 rootcheck[464] rootcheck.c:197 at rootcheck_init(): DEBUG: Starting ...
             2019/10/18 14:47:05 rootcheck[464] rootcheck.c:246 at rootcheck_connect(): DEBUG: Starting queue ...
@@ -191,7 +213,8 @@ unhide itself:  Try it out:
 11. Now switch back to the manager, and look for alerts in ``/var/ossec/logs/alerts/alerts.log``
     similar to these ones:
 
- .. code-block:: console
+ .. code-block::  none
+     :class: output
 
      ** Alert 1571420732.2395049: - ossec,rootcheck,gdpr_IV_35.7.d,
             2019 Oct 18 17:45:32 (agent) any->rootcheck
@@ -236,7 +259,7 @@ unhide itself:  Try it out:
 
 16. In the ``<rootcheck>`` section of linux-agent's ``/var/ossec/etc/ossec.conf`` file, disable rootcheck for now.
 
-        .. code-block:: console
+        .. code-block:: xml
 
             <disabled>yes</disabled>
 
