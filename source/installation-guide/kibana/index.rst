@@ -97,7 +97,9 @@ Kibana installation and configuration
 
 #. Install the Wazuh Kibana plugin:
 
-    .. include:: ../../_templates/installations/elastic/common/install_wazuh_kibana_plugin.rst
+    .. code-block:: console
+
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.5.2.zip
 
 #. Enable and start the Kibana service:
 
