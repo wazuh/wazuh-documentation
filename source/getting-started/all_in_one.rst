@@ -74,7 +74,7 @@ Elasticsearch installation and configuration
         .. include:: ../_templates/installations/elastic/zypp/install_elasticsearch.rst
 
 
-#. .. include:: ./../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+#. .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
 .. note:: If your using Debian 7, you will need to change the ulimit by ``ulimit -u 4096``. In addition to this, the setting ``bootstrap.system_call_filter`` must be added and set to ``false`` in the ``/etc/elasticsearch/elasticsearch.yml`` configuration file.
 
