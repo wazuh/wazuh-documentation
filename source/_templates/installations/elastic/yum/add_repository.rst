@@ -10,7 +10,7 @@
 
     .. code-block:: console
 
-      # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+      # rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 #. Add the repository:
 
