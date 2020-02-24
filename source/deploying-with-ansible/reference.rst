@@ -19,7 +19,7 @@ elasticsearch_node_name
   *Default node-1*
 
 elasticsearch_http_port
-  ElasticSearch listening port 
+  ElasticSearch listening port
 
   *Default 9200*
 
@@ -524,7 +524,7 @@ wazuh_profile:
 
   *Default null*
 
-  Multiple profiles can be included, separated by a comma and a space, by example:
+  Multiple profiles can be included, separated by a comma and a space, for example:
 
   .. code-block:: yaml
 
