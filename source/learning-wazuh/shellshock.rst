@@ -160,6 +160,9 @@ command on elastic-server.
 
         # iptables --list -n
 
+    .. code-block:: none
+        :class: output
+
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
         DROP       all  --  54.157.87.167        0.0.0.0/0
@@ -178,6 +181,9 @@ command will have timed out and been reversed.  This is why you will see an "add
 
         # cat /var/ossec/logs/active-responses.log
 
+    .. code-block:: none
+        :class: output
+
         Sat Feb  3 21:24:43 UTC 2018 /var/ossec/active-response/bin/firewall-drop.sh add - 54.157.87.167 1517693083.46213349 30412
         Sat Feb  3 21:29:44 UTC 2018 /var/ossec/active-response/bin/firewall-drop.sh delete - 54.157.87.167 1517693083.46213349 30412
 
@@ -186,6 +192,9 @@ Observe that elastic-server is no longer blocking the offending linux-agent, wit
     .. code-block:: console
 
         # iptables --list -n
+
+    .. code-block:: none
+        :class: output
 
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
@@ -263,7 +272,8 @@ Restart the manager:
 
 Run the same probe again from linux-agent.  Observe that the output of the Windows command line "route print /4" now shows a null route for the Elastic IP of linux-agent.  It will be in the "Persistent Routes:" section of the output.
 
-    .. code-block:: console
+    .. code-block:: none
+            :class: output
 
             ===========================================================================
             Persistent Routes:

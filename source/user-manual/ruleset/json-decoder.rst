@@ -86,7 +86,8 @@ The following example shows how the rules contained in the file ``0470-suricata_
 
 The output of *ossec-logtest* from the above JSON record is as follows:
 
-::
+.. code-block:: none
+    :class: output
 
     **Phase 1: Completed pre-decoding.
        full event: '{"timestamp":"2016-05-02T17:46:48.515262+0000","flow_id":1234,"in_iface":"eth0","event_type":"alert","src_ip":"16.10.10.10","src_port":5555,"dest_ip":"16.10.10.11","dest_port":80,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2019236,"rev":3,"signature":"ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number","category":"Attempted Administrator Privilege Gain","severity":1},"payload":"21YW5kXBtgdW5zIGRlcHJY2F0QgYWI","payload_printable":"this_is_an_example","stream":0,"host":"suricata.com"}'
@@ -148,7 +149,8 @@ The decoder declaration using that new feature would be the following:
 
 The JSON decoder will extract the fields contained in the JSON event as dynamic fields, taking into account from the end of the prematch text. The output of the *ossec-logtest* is the following:
 
-::
+.. code-block:: none
+    :class: output
 
     **Phase 1: Completed pre-decoding.
         full event: '2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}'
@@ -178,7 +180,8 @@ In addition, we could define a rule for these raw events decoded:
 
 Finally, the result retrieved by *ossec-logtest* would be:
 
-::
+.. code-block:: none
+    :class: output
 
     **Phase 3: Completed filtering (rules).
         Rule id: '100001'
@@ -188,7 +191,8 @@ Finally, the result retrieved by *ossec-logtest* would be:
 
 Another new feature is the ability of mixing plugin decoders with regex expressions, take a look in the following incoming log:
 
-::
+.. code-block:: none
+    :class: output
 
     2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
 
@@ -214,7 +218,8 @@ We can set several children decoders from a parent specifying a plugin decoder a
 
 The output of the *ossec-logtest* tool shows the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
 
-::
+.. code-block:: none
+    :class: output
 
     **Phase 1: Completed pre-decoding.
         full event: '2018 Apr 04 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
@@ -223,7 +228,7 @@ The output of the *ossec-logtest* tool shows the decoded fields by the JSON deco
         program_name: 'nba_email_db'
         log: 'json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
 
-   **Phase 2: Completed decoding.
+    **Phase 2: Completed decoding.
         decoder: 'json_parent'
         name: 'Stephen'
         surname: 'Curry'

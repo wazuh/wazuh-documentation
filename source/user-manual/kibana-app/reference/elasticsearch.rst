@@ -14,7 +14,7 @@ The ``.wazuh`` index
 This index is used by the Wazuh app to store Wazuh API credentials and useful information about the Wazuh manager currently being used.
 The next document example shows you how we store a Wazuh API entry. This index could grow up if you add more Wazuh API entries.
 
-.. code-block:: console
+.. code-block:: json
 
     {
         "api_user" : "foo",
@@ -44,7 +44,7 @@ The ``.wazuh-version`` index
 
 This index has only one document and it includes useful information and it's being used by internal Wazuh app purposes. It includes information such as your current version or your installation date. The next example shows you how we store that information.
 
-.. code-block:: console
+.. code-block:: json
 
     {
         "name" : "Wazuh app",

@@ -16,8 +16,9 @@ Download and install the Wazuh module from Puppet Forge:
 
     # puppet module install wazuh-wazuh --version 3.10.2
 
-  .. code-block:: bash
-  
+  .. code-block:: none
+    :class: output
+
     Notice: Preparing to install into /etc/puppet/modules ...
     Notice: Downloading from https://forgeapi.puppetlabs.com ...
     Notice: Installing -- do not interrupt ...
@@ -33,7 +34,7 @@ Download and install the Wazuh module from Puppet Forge:
       └── stahnma-epel (v1.3.1)
 
 This module installs and configures Wazuh agent and manager.
-  
+
 Install manager via Puppet
 --------------------------
 
@@ -49,7 +50,7 @@ The manager is configured by installing the ``wazuh::server`` class, and optiona
 
   ``server => 'pgp.mit.edu'``. Line 9 to 12, do not forget the ``,`` after source entry.
 
-  .. code-block:: console
+  .. code-block:: puppet
 
     apt::key { 'wazuh':
         id     => '0DCFCA5547B19D2A6099506096B3EE5F29111145',
@@ -59,7 +60,7 @@ The manager is configured by installing the ``wazuh::server`` class, and optiona
 
 Here is an example of a manifest ``wazuh-manager.pp``
 
-  .. code-block:: bash
+  .. code-block:: puppet
 
     node "server.yourhost.com" {
       class { 'wazuh::server':
@@ -100,7 +101,7 @@ The agent is configured by installing the ``wazuh::agent`` class.
 
 Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP address)
 
-  .. code-block:: bash
+  .. code-block:: puppet
 
     node "client.yourhost.com" {
 

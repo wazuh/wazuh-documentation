@@ -25,7 +25,7 @@ Example with notepad.exe as the important process to monitor:
 
 1. Configure the agent in the agent's **local_internal_options.conf** file to accept remote commands from the manager.
 
-    .. code-block:: console
+    .. code-block:: pkgconfig
 
       # Logcollector - Whether or not to accept remote commands from the manager
       logcollector.remote_commands=1

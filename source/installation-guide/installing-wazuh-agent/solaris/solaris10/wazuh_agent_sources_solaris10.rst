@@ -95,6 +95,7 @@ Installing Wazuh agent
 8. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
  .. code-block:: none
+    :class: output
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 

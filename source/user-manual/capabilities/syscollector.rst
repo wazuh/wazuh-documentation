@@ -463,10 +463,22 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # sqlite3 /var/ossec/queue/db/003.db
+
+.. code-block:: none
+  :class: output
+
   SQLite version 3.7.17 2013-05-20 00:56:22
   Enter ".help" for instructions
   Enter SQL statements terminated with a ";"
+  sqlite>
+
+.. code-block:: console
+
   sqlite> select * from sys_programs where name="wazuh-agent";
+
+.. code-block:: none
+  :class: output
+
   696614220|2018/08/06 02:07:30|deb|wazuh-agent|extra|admin|105546|Wazuh, Inc <support@wazuh.com>||3.5.0-1|amd64|||Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring||0
 
 - By querying the API, which retrieves nested data in JSON format.
@@ -474,6 +486,10 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+
+.. code-block:: json
+  :class: output
+
   {
    "error": 0,
    "data": {

@@ -48,7 +48,7 @@ Download and extract the latest version:
 
 Modify the ``wazuh-3.11.0/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
-.. code-block:: console
+.. code-block:: pkgconfig
 
   USER_LANGUAGE="en"
   USER_NO_STOP="y"

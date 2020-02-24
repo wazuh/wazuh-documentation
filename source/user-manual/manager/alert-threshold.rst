@@ -12,7 +12,7 @@ Configuration
 
 The alert level threshold is configured in the ``ossec.conf`` file using the ``<alerts>`` XML tag. The available options for this are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
 
-::
+.. code-block:: xml
 
   <ossec_config>
     <alerts>

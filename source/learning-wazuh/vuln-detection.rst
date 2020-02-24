@@ -90,7 +90,8 @@ The ``vulnerability-detector`` module generates logs on the manager, and ``sysco
 
 Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an agent:
 
-  .. code-block:: xml
+  .. code-block:: none
+      :class: output
 
       2018/02/23 00:55:33 wazuh-modulesd:syscollector: INFO: Module started.
       2018/02/23 00:55:34 wazuh-modulesd:syscollector: INFO: Starting evaluation.
@@ -98,7 +99,8 @@ Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an ag
 
 and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     2018/02/23 00:55:33 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting Red Hat Enterprise Linux 7 DB update...
     2018/02/23 00:55:33 wazuh-modulesd:vulnerability-detector: INFO: (5452): Starting vulnerability scanning.
@@ -141,7 +143,8 @@ system data is also tracked.
 
 1. Run ``agent_control -l`` on wazuh-manager to list your agents as you will need to query the API by agent id number:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     Wazuh agent_control. List of available agents:
       ID: 000, Name: wazuh-manager (server), IP: localhost, Active/Local
@@ -158,6 +161,7 @@ system data is also tracked.
   The results should look like this:
 
   .. code-block:: json
+    :class: output
 
     {
       "error": 0,
@@ -188,6 +192,7 @@ system data is also tracked.
   The results should look like this:
 
   .. code-block:: json
+    :class: output
 
     {
       "error": 0,
@@ -217,6 +222,7 @@ system data is also tracked.
   The results should look like this:
 
   .. code-block:: json
+    :class: output
 
     {
       "error": 0,
@@ -279,7 +285,8 @@ Agent-specific databases on the Wazuh manager store, among other things, the ``s
 
   You should see:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     fim_entry      metadata       sys_netaddr    sys_ports
     fim_event      pm_event       sys_netiface   sys_processes
@@ -295,7 +302,8 @@ Agent-specific databases on the Wazuh manager store, among other things, the ``s
 
   You should see:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     1364535564|2018/02/23 01:11:23|linux-agent|x86_64|CentOS Linux|7 (Core)|||||centos|Linux|3.10.2-693.11.6.el7.x86_64|#1 SMP Thu Jan 4 01:06:37 UTC 2018
 
@@ -307,7 +315,8 @@ Agent-specific databases on the Wazuh manager store, among other things, the ``s
 
   You should see something like:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     grub2-pc|1:2.02-0.65.el7.centos.2|Bootloader with support for Linux, Multiboot, and more
     centos-release|7-4.1708.el7.centos|CentOS Linux release file

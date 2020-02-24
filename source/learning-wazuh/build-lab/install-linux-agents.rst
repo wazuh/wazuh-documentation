@@ -77,7 +77,8 @@ Restart Wazuh agent and confirm it successfully connected with the Manager. Run 
 
 You should see output like this:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     status='connected'
 

@@ -111,6 +111,10 @@ Search Guard comes with a demo configuration and it's useful as starting point s
     $ cd /usr/share/elasticsearch/plugins/search-guard-7/tools/
     $ chmod a+x install_demo_configuration.sh
     # ./install_demo_configuration.sh
+
+.. code-block:: none
+    :class: output
+
     Install demo certificates? [y/N] y
     Initialize Search Guard? [y/N] y
     Enable cluster mode? [y/N] y
@@ -126,6 +130,10 @@ You can check if it's working as expected using the next request (Search Guard n
 .. code-block:: console
 
     $ curl -k -u admin:admin https://<ELASTICSEARCH_HOST>:9200/_searchguard/authinfo?pretty
+
+.. code-block:: json
+    :class: output
+
     {
     "user" : "User [name=admin, roles=[admin], requestedTenant=null]",
     "user_name" : "admin",

@@ -90,6 +90,10 @@ Wazuh API
 
   curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @/tmp/agent.conf.xml \
       "http://localhost:55000/agents/groups/default/files/agent.conf?pretty"
+
+.. code-block:: js
+  :class: output
+
   {
     "error": 0,
     "data": "Agent configuration was updated successfully"
@@ -150,7 +154,7 @@ Manage your groups from the app, this feature includes:
 
 This was added before for Wazuh alerts indices, now you can do the same for monitoring indices editing the app configuration file (config.yml).
 
-.. code-block:: console
+.. code-block:: yaml
 
   # Default index pattern to use for Wazuh monitoring
   wazuh.monitoring.pattern: wazuh-monitoring-3.x-*

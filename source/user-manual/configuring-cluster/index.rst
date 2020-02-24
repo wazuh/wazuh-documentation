@@ -94,6 +94,9 @@ Deploying a Wazuh cluster
 
             # /var/ossec/bin/cluster-control -l
 
+        .. code-block:: none
+            :class: output
+
             NAME           TYPE    VERSION  ADDRESS
             master-node    master  3.10.2   wazuh-master
             worker01-node  worker  3.10.2   172.22.0.3
@@ -188,6 +191,9 @@ Deploying a Wazuh cluster
         .. code-block:: console
 
             # /var/ossec/bin/agent_control -l
+
+        .. code-block:: none
+            :class: output
 
             Wazuh agent_control. List of available agents:
                 ID: 000, Name: agent000 (server), IP: 127.0.0.1, Active/Local
