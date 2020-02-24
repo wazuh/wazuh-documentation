@@ -16,7 +16,7 @@ Preparation
 
   .. code-block:: console
 
-    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
     # cat > /etc/yum.repos.d/elastic.repo << EOF
     [elasticsearch-7.x]
     name=Elasticsearch repository for 7.x packages
