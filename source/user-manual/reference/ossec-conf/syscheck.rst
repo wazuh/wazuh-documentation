@@ -369,7 +369,7 @@ Attributes:
 allow_remote_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.3
+.. versionadded:: 3.11.4
 
 Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
 
