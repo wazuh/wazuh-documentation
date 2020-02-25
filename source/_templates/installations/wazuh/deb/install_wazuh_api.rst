@@ -6,14 +6,6 @@
 
       # curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
-    .. note::
-
-        If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below:
-
-        .. code-block:: console
-
-          # curl -sL https://deb.nodesource.com/setup_6.x | bash -
-
 #. Install NodeJS:
 
     .. code-block:: console
