@@ -44,7 +44,9 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
 
 
 We can check if it works by using ``/var/ossec/bin/ossec-logtest``:
-::
+
+.. code-block:: none
+  :class: output
 
   **Phase 1: Completed pre-decoding.
        full event: 'Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100''

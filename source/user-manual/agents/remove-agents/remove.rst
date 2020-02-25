@@ -13,8 +13,11 @@ If the user would like confirmation before removing the agent, use the following
 
     # /var/ossec/bin/manage_agents
 
+.. code-block:: none
+    :class: output
+
     ****************************************
-    * Wazuh v3.11.0 Agent manager.          *
+    * Wazuh v3.11.4 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -38,8 +41,11 @@ If the user would like to remove the agent without confirmation, use the option 
 
     # /var/ossec/bin/manage_agents -r 001
 
+.. code-block:: none
+    :class: output
+
     ****************************************
-    * Wazuh v3.11.0 Agent manager.          *
+    * Wazuh v3.11.4 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).

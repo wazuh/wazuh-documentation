@@ -5,112 +5,161 @@
 Rules Syntax
 ============
 
-In this section, **xml labels** used to configure ``rules`` are listed.
+The Wazuh Ruleset combined with any customs rules is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
 
-Available options
------------------
+Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ to our community.
 
-- `rule`_
-- `match`_
-- `regex`_
-- `decoded_as`_
-- `category`_
-- `field`_
-- `srcip`_
-- `dstip`_
-- `data`_
-- `extra_data`_
-- `user`_
-- `system_name`_
-- `program_name`_
-- `protocol`_
-- `hostname`_
-- `time`_
-- `weekday`_
-- `id`_
-- `url`_
-- `action`_
-- `if_sid`_
-- `if_group`_
-- `if_level`_
-- `if_matched_sid`_
-- `if_matched_group`_
-- `same_id`_
-- `same_source_ip`_
-- `same_src_port`_
-- `same_dst_port`_
-- `same_location`_
-- `same_user`_
-- `same_field`_
-- `not_same_field`_
-- `global_frequency`_
-- `different_url`_
-- `different_srcgeoip`_
-- `description`_
-- `list`_
-- `info`_
-- `options`_
-- `check_diff`_
-- `group`_
-- `status`_
-- `location`_
-- `var`_
 
-  - `BAD_WORDS`_
+Overview
+--------
+
+The **xml labels** used to configure ``rules`` are listed here.
+
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| Option              | Values                                                        | Description                                                                                          |
++=====================+===============================================================+======================================================================================================+
+| `rule`_             | See `table <rules.html#rule>`_ below.                         | Its starts a new rule and its defining options.                                                      |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `match`_            | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `regex`_            | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_.| It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `decoded_as`_       | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `category`_         | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `field`_            | Name and `sregex <regex.html#os-match-or-sregex-syntax>`_     | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
+|                     |                                                               | value.                                                                                               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `srcip`_            | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `dstip`_            | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `extra_data`_       | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `user`_             | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will compare a sregex representing a username with a string decoded as ``user``.                  |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `program_name`_     | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the program_name obtained in the pre-decoding phase.                             |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `hostname`_         | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the hostname obtained in the pre-decoding phase.                                 |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `time`_             | Any time range. e.g. (hh:mm-hh:mm)                            | It checks if the event was generated during that time range.                                         |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `weekday`_          | monday - sunday, weekdays, weekends                           | It checks whether the event was generated during certain weekdays.                                   |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `id`_               | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will look for a match with the field decoded as ``ID``                                            |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `url`_              | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will look for a match with the field decoded as ``url``                                           |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `location`_         | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | Location identifies the origin of the input.                                                         |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `action`_           | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `if_sid`_           | A rule ID.                                                    | It works similar to parent decoder. It will match if that rule ID has previously matched.            |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `if_group`_         | Any group name.                                               | It will match if the indicated group has matched before.                                             |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `if_level`_         | Any level from 1 to 16.                                       | It will match if that level has already been triggered by another rule.                              |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `if_matched_sid`_   | Any rule ID (Number).                                         | Similar to ``if_sid`` but it will only match if the ID has been triggered in a period of time.       |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `if_matched_group`_ | Any group name.                                               | Similar to ``if_group`` but it will only match if the group has been triggered in a period of time.  |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_id`_          | None.                                                         | The decoded ``id`` must be the same.                                                                 |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_source_ip`_   | None.                                                         | The decoded ``scrip`` must be the same.                                                              |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_src_port`_    | None.                                                         | The decoded ``scr_port`` must be the same.                                                           |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_dst_port`_    | None.                                                         | The decoded ``dst_port`` must be the same.                                                           |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_location`_    | None.                                                         | The ``location`` must be the same.                                                                   |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_user`_        | None.                                                         | The decoded ``user`` must be the same.                                                               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous one.                                          |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous one.                                       |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `different_url`_    | None.                                                         | The decoded ``url`` must be different.                                                               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+|`different_srcgeoip`_| None.                                                         | The decoded ``srcgeoip`` must be different.                                                          |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `description`_      | Any String.                                                   | Provides a human-readable description to explain what is the purpose of the rule. Please, use this   |
+|                     |                                                               | field when creating custom rules.                                                                    |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `list`_             | Path to the CDB file.                                         | Perform a CDB lookup using an ossec list.                                                            |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `info`_             | Any String.                                                   | Extra information using certain attributes.                                                          |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `options`_          | See the table `below. <rules.html#options>`_                  | Additional rule options that can be used.                                                            |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `check_diff`_       | None.                                                         | Determines when the output of a command changes.                                                     |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `group`_            | Any String.                                                   | Add additional groups to the alert.                                                                  |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `status`_           | started, aborted, succeded, failed, lost, etc.                | Declares the current status of a rule.                                                               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `var`_              | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+
 
 rule
 ^^^^
 
-``<rule>`` is the label that starts the block that defines a *rule*. In this section the different options to this label are explained.
+``<rule>`` is the label that starts the block that defines a *rule*. In this section, different options for this label are explained.
 
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                           |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | 0 to 16                                                                                         |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **id**        | Definition     | Specifies the ID of the rule.                                                                   |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 999999                                                                     |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **maxsize**   | Definition     | Specifies the maximum size of the event.                                                        |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                       |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **frequency** | Definition     | Number of times the rule must have matched before firing.                                       |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 2 to 9999                                                                       |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **timeframe** | Definition     | The ``timeframe`` in seconds. This option is intended to be used with the ``frequency`` option. |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 99999                                                                      |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).                    |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 999999                                                                     |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                             |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | yes, no                                                                                         |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
-| **noalert**   | Definition     | Not trigger any alert if the rule matches.                                                      |
-+               +----------------+-------------------------------------------------------------------------------------------------+
-|               | Allowed values | Attribute with no value                                                                         |
-+---------------+----------------+-------------------------------------------------------------------------------------------------+
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                  |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | 0 to 16                                                                                |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **id**        | Definition     | Specifies the ID of the rule.                                                          |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 999999                                                            |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **maxsize**   | Definition     | Specifies the maximum size of the event.                                               |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 9999                                                              |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **frequency** | Definition     | Number of times the rule must have matched before firing.                              |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 2 to 9999                                                              |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **timeframe** | Definition     | The timeframe in seconds. This option is intended to be used with the frequency option.|
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 99999                                                             |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).           |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | Any number from 1 to 999999                                                            |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                    |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | yes, no                                                                                |
++---------------+----------------+----------------------------------------------------------------------------------------+
+| **noalert**   | Definition     | Not trigger an alert if the rule matches.                                              |
++               +----------------+----------------------------------------------------------------------------------------+
+|               | Allowed values | Attribute with no value                                                                |
++---------------+----------------+----------------------------------------------------------------------------------------+
 
 Example:
 
   .. code-block:: xml
 
-    <!--- Rule definition -->
-    <rule id="100001" maxsize="300" level="3">
-      ...
+    <rule id="3151" level="10" frequency="8" timeframe="120">
+      <if_matched_sid>3102</if_matched_sid>
+      <same_source_ip />
+      <description>sendmail: Sender domain has bogus MX record. </description>
+      <description>It should not be sending e-mail.</description>
+      <group>multiple_spam,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SI.4,</group>
     </rule>
 
-In this example, the rule is assigned with the ID 100001, a maximum size of each event of 300 characters and the rule level in 3.
+The rule is created with ID: ``3151`` and it will trigger a level 10 alert if the rule ``3102`` has matched 8 times in the last 120 seconds.
 
 match
 ^^^^^
-Any string to match against the log event.
+Used as a requisite to trigger the rule, will search for a match in the log event.
 
 +--------------------+-----------------------------------------------------------------+
 | **Default Value**  | n/a                                                             |
@@ -123,17 +172,17 @@ Example:
   .. code-block:: xml
 
     <rule id="100001" maxsize="300" level="3">
-      <if_sid>100020</if_sid>
+      <if_sid>100200</if_sid>
       <match>Queue flood!</match>
       <description>Flooded events queue.</description>
     </rule>
 
-If the rule matches the ``id`` 100200 that contains the ``Queue flood!`` phrase in it, rule activates and sends an event.
+If the rule matches the ``id`` 100200 and the log contains the ``Queue flood!`` phrase in it, rule activates and triggers a level 3 alert.
 
 regex
 ^^^^^
 
-Any regex to match against the log event.
+Used as a requisite to trigger the rule, will search for a match in the log event.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
@@ -143,21 +192,21 @@ Any regex to match against the log event.
 
 Example:
 
-  ``regex`` is used to find a variety of strings in a rule. For example, if we want to match any valid IP:
 
   .. code-block:: xml
 
     <rule id="100001" level="3">
-      <if_sid>10050</if_sid>
-      <regex>^(\d+.\d+.\d+.\d+)$</regex>
+      <if_sid>100500</if_sid>
+      <regex>\d+.\d+.\d+.\d+</regex>
       <description>Matches any valid IP</description>
     </rule>
 
+If the rule matches the ``ìd`` 100500 and the event contains any valid IP, the rule is triggered and generates a level 3 alert.
 
 decoded_as
 ^^^^^^^^^^
 
-Specify the decoder which processed the event.
+Used as a requisite to trigger the rule. It will be triggered if the event has been decoded by a certain ``decoder``. Useful to group rules and have child rules inheriting from it.
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -165,10 +214,23 @@ Specify the decoder which processed the event.
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
 
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="53500" level="0">
+        <decoded_as>smtpd</decoded_as>
+        <description>OpenSMTPd grouping.</description>
+      </rule>
+
+The rule will be triggered if the event was decoded by the ``smtpd`` decoder. Now is possible to make more rules that will inherit from this one, specifically made for OpenSMTPd events.
+
 category
 ^^^^^^^^
 
-Selects in which rule decoding category the rule should be included: ossec, ids, syslog, firewall, web-log, squid or windows.
+
+Used as a requisite to trigger the rule. It will be triggered if the ``decoder`` included that log in said category. The main categories are: ids, syslog, firewall, web-log, squid or windows.
 
 +--------------------+--------------+
 | **Default Value**  | n/a          |
@@ -176,19 +238,47 @@ Selects in which rule decoding category the rule should be included: ossec, ids,
 | **Allowed values** | Any category |
 +--------------------+--------------+
 
+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="01" level="0" noalert="1">
+        <category>syslog</category>
+        <description>Generic template for all syslog rules.</description>
+      </rule>
+
+The rule will be triggered if the event has previously been cataloged ``syslog`` by the decoder, but it will not trigger an alert. Instead, it will be matched by other rules that might trigger alerts if needed.
+
 field
 ^^^^^
 
-Any ``OS_Regex`` to be compared to a dynamic field extracted by the decoder.
+Used as a requisite to trigger the rule. It will check for a match in the content of a field extracted by the decoder.
 
-+----------+-----------------------------------------------------------+
-| **name** | Specifies the name of the field extracted by the decoder. |
-+----------+-----------------------------------------------------------+
++--------------------+-----------------------------------------------------------------+
+| **name**           | Specifies the name of the field extracted by the decoder.       |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
++--------------------+-----------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="87100" level="0">
+          <decoded_as>json</decoded_as>
+          <field name="integration">virustotal</field>
+          <description>VirusTotal integration messages.</description>
+          <options>no_full_log</options>
+      </rule>
+
+This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
 
 srcip
 ^^^^^
 
-Any IP address or CIDR block to be compared to an IP decoded as ``srcip``. Use "!" to negate it.
+Used as a requisite to trigger the rule. It will compare any IP address or CIDR block to an IP decoded as srcip. Use "!" to negate it.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -196,16 +286,41 @@ Any IP address or CIDR block to be compared to an IP decoded as ``srcip``. Use "
 | **Allowed values** | Any srcip |
 +--------------------+-----------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="100105" level="8">
+          <if_sid>100100<if_sid>
+          <srcip>10.25.23.12</srcip>
+          <description>Forbidden srcip has been detected.</description>
+      </rule>
+
+This rule will trigger when that exact ``scrip`` has been decoded.
+
 dstip
 ^^^^^
 
-Any IP address or CIDR block to be compared to an IP decoded as ``dstip``. Use "!" to negate it.
+Used as a requisite to trigger the rule. It will compare any IP address or CIDR block to an IP decoded as dstip. Use "!" to negate it.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
 +--------------------+-----------+
 | **Allowed values** | Any dstip |
 +--------------------+-----------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="100110" level="5">
+          <if_sid>100100<if_sid>
+          <dstip>!198.168.41.30</dstip>
+          <description>A different dstip has been detected.</description>
+      </rule>
+
+This rule will trigger when an ``dstip`` different from ``198.168.41.30`` is detected.
+
 
 data
 ^^^^
@@ -221,7 +336,7 @@ Any string that is decoded into the ``data`` field.
 extra_data
 ^^^^^^^^^^
 
-Any string that is decoded into the ``extra_data`` field.
+Used as a requisite to trigger the rule. It will compare any string with the one decoded into the extra_data field.
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -229,16 +344,41 @@ Any string that is decoded into the ``extra_data`` field.
 | **Allowed values** | Any string. |
 +--------------------+-------------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="7301" level="0">
+        <category>windows</category>
+        <extra_data>^Symantec AntiVirus</extra_data>
+        <description>Grouping of Symantec AV rules from eventlog.</description>
+      </rule>
+
+This rule will trigger when the log belongs to ``windows`` category and the decoded field ``extra_data`` is: ``Symantec AntiVirus``
+
 user
 ^^^^
 
-Any username (decoded as the username).
+Used as a requisite to trigger the rule. It will check the username (decoded as ``user``).
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="140101" level="12">
+        <if_group>authentication_success</if_group>
+        <user>mysql</user>
+        <description>System user successfully logged to the system.</description>
+      </rule>
+
+This rule will trigger when the user ``mysql`` successfully logs into the system. Being a System user it should never log in to the system.
 
 system_name
 ^^^^^^^^^^^^
@@ -254,13 +394,26 @@ Any string that is decoded into the ``system_name`` field.
 program_name
 ^^^^^^^^^^^^
 
-Program name is decoded from syslog process name.
+Used as a requisite to trigger the rule. The program's name is decoded from syslog process name.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="1005" level="5">
+        <program_name>syslogd</program_name>
+        <match>^restart</match>
+        <description>Syslogd restarted.</description>
+        <group>pci_dss_10.6.1,gpg13_10.1,gpg13_4.14,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,</group>
+      </rule>
+
+The rule will trigger when the program Syslogd restarted.
 
 protocol
 ^^^^^^^^
@@ -273,10 +426,11 @@ Any string that is decoded into the ``protocol`` field.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
+
 hostname
 ^^^^^^^^
 
-Any hostname (decoded as the syslog hostname) or log file.
+Used as a requisite to trigger the rule. Any hostname (decoded as the syslog hostname) or log file.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -284,10 +438,22 @@ Any hostname (decoded as the syslog hostname) or log file.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
+Example:
+
+  .. code-block:: xml
+
+        <rule id="2931" level="0">
+          <hostname>yum.log$</hostname>
+          <match>^Installed|^Updated|^Erased</match>
+          <description>Yum logs.</description>
+        </rule>
+
+This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
+
 time
 ^^^^
 
-Time that the event was generated.
+Used as a requisite to trigger the rule. Used for checking the time that the event was generated.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                  |
@@ -295,10 +461,23 @@ Time that the event was generated.
 | **Allowed values** | Any time range (hh:mm-hh:mm, hh:mm am-hh:mm pm, hh-hh, hh am-hh pm)  |
 +--------------------+----------------------------------------------------------------------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="17101" level="9">
+        <if_group>authentication_success</if_group>
+        <time>6 pm - 8:30 am</time>
+        <description>Successful login during non-business hours.</description>
+        <group>login_time,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
+      </rule>
+
+This rule will trigger when there is a successful login between 6 pm and 8 am.
+
 weekday
 ^^^^^^^
 
-Week day that the event was generated.
+Used as a requisite to trigger the rule. Checks the weekday that the event was generated.
 
 +--------------------+-------------------------------------+
 | **Default Value**  | n/a                                 |
@@ -306,34 +485,74 @@ Week day that the event was generated.
 | **Allowed values** | monday - sunday, weekdays, weekends |
 +--------------------+-------------------------------------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="17102" level="9">
+        <if_group>authentication_success</if_group>
+        <weekday>weekends</weekday>
+        <description>Successful login during weekend.</description>
+        <group>login_day,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
+      </rule>
+
+This rule will trigger when there is a successful login during the weekend.
+
 id
 ^^
 
-Any ID (decoded as the ID).
+Used as a requisite to trigger the rule. It will check any ID (decoded as the ID).
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
+
+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="81100" level="0">
+          <decoded_as>kernel</decoded_as>
+          <id>usb</id>
+          <description>USB messages grouped.</description>
+      </rule>
+
+This rule will group the logs whose decoded ID is usb.
 
 url
 ^^^
 
-Any URL (decoded as the URL).
+Used as a requisite to trigger the rule. It will check any URL (decoded as the URL).
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="31102" level="0">
+        <if_sid>31101</if_sid>
+        <url>.jpg$|.gif$|favicon.ico$|.png$|robots.txt$|.css$|.js$|.jpeg$</url>
+        <compiled_rule>is_simple_http_request</compiled_rule>
+        <description>Ignored extensions on 400 error codes.</description>
+      </rule>
+
+This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are nothing to worry about.
 
 location
 ^^^^^^^^
 
 .. versionadded:: 3.5.0
 
-The event extended location of the incoming event.
+Used as a requisite to trigger the rule. It will check the content of the field location and trying to find a match.
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -381,10 +600,22 @@ The following components use a static location:
 | SCA module           | sca                    |
 +----------------------+------------------------+
 
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="24000" level="3">
+        <location>osquery$</location>
+        <description>osquery message</description>
+      </rule>
+
+This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
+
 action
 ^^^^^^
 
-Any action (decoded as the ACTION).
+Used as a requisite to trigger the rule. It will check any action (decoded as the ACTION).
 
 +--------------------+----------------------+
 | **Default Value**  | n/a                  |
@@ -392,10 +623,22 @@ Any action (decoded as the ACTION).
 | **Allowed values** | Any String.          |
 +--------------------+----------------------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="4502" level="4">
+        <if_sid>4500</if_sid>
+        <action>warning</action>
+        <description>Netscreen warning message.</description>
+      </rule>
+
+This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning``.
+
 if_sid
 ^^^^^^
 
-Matches if the ID has matched.
+Used as a requisite to trigger the rule. Matches if the ID has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -403,16 +646,44 @@ Matches if the ID has matched.
 | **Allowed values** | Any rule id |
 +--------------------+-------------+
 
+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="100110" level="5">
+        <if_sid>100100</if_sid>
+        <match>Error</match>
+        <description>There is an error in the log.</description>
+      </rule>
+
+The rule will be triggered if the rule with id: ``100100`` has previously been triggered and the log contains the word "Error".
+
 if_group
 ^^^^^^^^
 
-Matches if the group has matched before.
+Used as a requisite to trigger the rule. Matches if the group has matched before.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
 +--------------------+-----------+
 | **Allowed values** | Any Group |
 +--------------------+-----------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="184676" level="12">
+          <if_group>sysmon_event1</if_group>
+          <field name="sysmon.image">lsm.exe</field>
+          <description>Sysmon - Suspicious Process - lsm.exe</description>
+          <group>pci_dss_10.6.1,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,nist_800_53_SI.4,</group>
+      </rule>
+
+The rule matches if the group ``sysmon_event1`` has previously matched before and if the field decoded as ``sysmon.image`` is "lsm.exe".
+
 
 if_level
 ^^^^^^^^
@@ -441,6 +712,20 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 .. note::
   Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
 
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="30316" level="10" frequency="10" timeframe="120">
+        <if_matched_sid>30315</if_matched_sid>
+        <same_source_ip />
+        <description>Apache: Multiple Invalid URI requests from same source.</description>
+        <group>invalid_request,pci_dss_10.2.4,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,</group>
+      </rule>
+
+The rule is triggered when rule 30315 has been triggered 10 times in 120 seconds and if the requests were made by the same ``srcip``.
+
 if_matched_group
 ^^^^^^^^^^^^^^^^
 
@@ -454,6 +739,17 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Allowed values** | Any Group |
 +--------------------+-----------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="40113" level="12" frequency="8" timeframe="360">
+        <if_matched_group>virus</if_matched_group>
+        <description>Multiple viruses detected - Possible outbreak.</description>
+        <group>virus,pci_dss_5.1,pci_dss_5.2,pci_dss_11.4,gpg13_4.2,gdpr_IV_35.7.d,nist_800_53_SI.3,nist_800_53_SI.4,</group>
+      </rule>
+
+The rule will trigger when the group ``virus`` has been matched 8 times in the last 360 seconds.
 
 same_id
 ^^^^^^^
@@ -583,7 +879,7 @@ As an example of this option, check this rule:
 global_frequency
 ^^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.0
+.. versionadded:: 3.11.1
 
 Specifies that the events of all agents will be contemplated when using the
 frequency and ``timeframe`` options. By default, only the events generated by
@@ -618,7 +914,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 Example:
 
-  As an example to this last options, check this rule:
+  As an example of these last options, check this rule:
 
     .. code-block:: xml
 
@@ -629,12 +925,12 @@ Example:
         <same_dst_port />
       </rule>
 
-  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using same ``port``.
+  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
 
 description
 ^^^^^^^^^^^
 
-Specifies a human readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
+Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -646,11 +942,6 @@ Examples:
 
   .. code-block:: xml
 
-    <rule id="100009" level="1">
-      ...
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
-      <description> Rule to match IPs </description>
-    </rule>
 
     <rule id="100015" level="2">
       ...
@@ -659,7 +950,7 @@ Examples:
 
     <rule id="100035" level="4">
       ...
-      <description> File missing. Root acces unrestricted. </description>
+      <description> File missing. Root access unrestricted. </description>
     </rule>
 
 Since Wazuh version 3.3 it is possible to include any decoded field (static or dynamic) to the description message. You can use the following syntax: ``$(field_name)`` to add a field to the description.
@@ -678,13 +969,13 @@ Example:
 list
 ^^^^
 
-Perform a CDB lookup using an ossec list.  This is a fast on disk database which will always find keys within two seeks of the file.
+Perform a CDB lookup using an ossec list.  This is a fast on-disk database which will always find keys within two seeks of the file.
 
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                                               |
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory.Must also be included in the ossec.conf file. |
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                                                                |
++--------------------+--------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory. Must also be included in the ossec.conf file. |
++--------------------+--------------------------------------------------------------------------------------------------------------------+
 
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 | Attribute       | Description                                                                                                                       |
@@ -706,6 +997,20 @@ Perform a CDB lookup using an ossec list.  This is a fast on disk database which
 | **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value                  |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="80780" level="3">
+          <if_sid>80700</if_sid>
+          <list field="audit.key" lookup="match_key_value" check_value="write">etc/lists/audit-keys</list>
+          <description>Audit: Watch - Write access</description>
+          <group>audit_watch_write,gdpr_IV_30.1.g,</group>
+      </rule>
+
+The rule will look for "audit.key" in the CDB list. Where it will check if its equal to "write", in which case it will match and trigger a level 3 alert.
+
 info
 ^^^^
 
@@ -720,7 +1025,7 @@ Extra information may be added through the following attributes:
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
 | Attribute | Allowed values | Description                                                                                               |
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
-| type      | **text**       | This is the default when no type is selected. Additional,information about the alert/event.               |
+| type      | **text**       | This is the default when no type is selected. Additional information about the alert/event.               |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
 |           | **link**       | Link to more information about the alert/event.                                                           |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
@@ -728,6 +1033,23 @@ Extra information may be added through the following attributes:
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
 |           | **ovsdb**      | The osvdb id related to this alert/event.                                                                 |
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
+
+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="5714" level="14" timeframe="120" frequency="3">
+        <if_matched_sid>5713</if_matched_sid>
+        <match>Local: crc32 compensation attack</match>
+        <description>sshd: SSH CRC-32 Compensation attack</description>
+        <info type="cve">2001-0144</info>
+        <info type="link">http://www.securityfocus.com/bid/2347/info/</info>
+        <group>exploit_attempt,pci_dss_11.4,pci_dss_6.2,gpg13_4.12,gdpr_IV_35.7.d,nist_800_53_SI.4,nist_800_53_SI.2,</group>
+      </rule>
+
+The rule provides additional information about the threat it detects.
 
 .. _rules_options:
 
@@ -770,9 +1092,17 @@ check_diff
 
 Used to determine when the output of a command changes.
 
-+--------------------+--------------------+
-| **Example of use** | <check_diff />     |
-+--------------------+--------------------+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="534" level="1">
+        <if_sid>530</if_sid>
+        <match>ossec: output: 'w'</match>
+        <check_diff />
+        <options>no_log</options>
+        <description>List of logged in users. It will not be alerted by default.</description>
+      </rule>
 
 group
 ^^^^^
@@ -781,7 +1111,7 @@ Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 
-Groups are variables that define a behavior. When an alert includes that group label, this behavior will occur.
+Groups are variables that define behavior. When an alert includes that group label, this behavior will occur.
 
 Example:
 
@@ -805,13 +1135,25 @@ It's a very useful label to keep the rules ordered.
 status
 ^^^^^^
 
-Declares the actual status of a rule.
+Checks the actual status of an event.
 
 +--------------------+----------------------------------------------+
 | **Default Value**  | n/a                                          |
 +--------------------+----------------------------------------------+
 | **Allowed values** | started, aborted, succeded, failed, lost...  |
 +--------------------+----------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="213" level="7">
+        <if_sid>210</if_sid>
+        <status>aborted</status>
+        <description>Remote upgrade could not be launched. Error: $(error).</description>
+        <group>upgrade,upgrade_failure,</group>
+      </rule>
+
 
 var
 ^^^
@@ -848,7 +1190,7 @@ BAD_WORDS
 
 ``BAD_WORDS`` is a very used use case of ``<var>`` option.
 
-Is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
+It is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
 
 Example:
 
