@@ -15,9 +15,9 @@ For example, the following snippet shows the connected nodes in the cluster:
     :class: output
 
     NAME      TYPE    VERSION  ADDRESS
-    worker-1  worker  3.11.3    172.17.0.101
-    worker-2  worker  3.11.3    172.17.0.102
-    master    master  3.11.3    172.17.0.100
+    worker-1  worker  3.11.4    172.17.0.101
+    worker-2  worker  3.11.4    172.17.0.102
+    master    master  3.11.4    172.17.0.100
 
 This information can also be obtained using the Restful API:
 
@@ -35,19 +35,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.11.3",
+                "version": "3.11.4",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.11.3",
+                "version": "3.11.4",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.11.3",
+                "version": "3.11.4",
                 "type": "master",
                 "name": "node01"
              }
