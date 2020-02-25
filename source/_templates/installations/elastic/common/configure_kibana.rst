@@ -16,6 +16,6 @@ Values to be replaced:
 
 - ``<kibana_ip>``: Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by replacing ``kibana_ip`` with the Kibana's host IP.
 - ``<elasticsearch_ip>``: the host IP. If you have more than one Elasticsearch node, you can separate the nodes with commas.
-- ``<elasticsearch_password>``: The password generated in Elasticsearch installation and configuration.
+- ``<elasticsearch_password>``: The password generated in Elasticsearch installation and configuration for ``elastic`` user.
 
 .. End of configure_kibana.rst
