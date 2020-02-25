@@ -106,10 +106,6 @@ Installing Wazuh API
       # apt-get install -y nodejs
       # npm config set user 0
 
-    .. note::
-
-      If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
-
       For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 
 #. Download and execute the installation script:
