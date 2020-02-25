@@ -65,8 +65,9 @@ To set the labels at the manager level, the following configuration would be add
 
 When an alert is fired for an agent with the above configuration applied from the manager, the defined labels will add information to alerts as shown below:
 
-.. code-block:: console
-   :emphasize-lines: 3,4,5,6
+.. code-block:: none
+    :emphasize-lines: 3,4,5,6
+    :class: output
 
     ** Alert 1488922301.778562: mail  - ossec,syscheck,pci_dss_11.5,
     2017 Jun 07 13:31:43 (92603de31548) 192.168.66.1->syscheck
@@ -85,6 +86,7 @@ When an alert is fired for an agent with the above configuration applied from th
 And the same alert in JSON format shows the advantage of using nested labels:
 
 .. code-block:: javascript
+  :class: output
 
   {
     "timestamp": "2017-03-07T13:31:41-0800",
@@ -141,7 +143,8 @@ And the same alert in JSON format shows the advantage of using nested labels:
 
 If email reports have been enabled, the following email notification would then be received:
 
-.. code-block:: console
+.. code-block:: none
+  :class: output
 
   Wazuh Notification.
   2017 Mar 07 13:31:41

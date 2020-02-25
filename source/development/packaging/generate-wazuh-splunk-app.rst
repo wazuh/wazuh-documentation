@@ -27,9 +27,12 @@ Execute the ``generate_wazuh_app.sh`` script, with the different options you des
 
   $ ./generate_wazuh_splunk_app.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_wazuh_splunk_app.sh [OPTIONS]
 
-      -b, --branch <branch>     [Required] Select Git branch or tag e.g. v3.11.3-7.3.0
+      -b, --branch <branch>     [Required] Select Git branch or tag e.g. v3.11.4-7.3.0
       -s, --store <directory>   [Optional] Destination directory by default splunkapp/output
       -r, --revision            [Optional] Package revision that append to version e.g. x.x.x-y.y.y-rev
       -c, --checksum  <path>    [Optional] Generate checksum
@@ -39,14 +42,14 @@ Below, you will find some examples of how to build Wazuh Splunk App packages.
 
 .. code-block:: console
 
-  # ./generate_wazuh_app.sh -b v3.11.3-7.3.0 -s /splunk-app -r 1
+  # ./generate_wazuh_app.sh -b v3.11.4-7.3.0 -s /splunk-app -r 1
 
-This will generate a Wazuh Splunk app package for Wazuh 3.11.3 and Splunk 7.3.0 with revision 1 and store it in /splunk-app.
+This will generate a Wazuh Splunk app package for Wazuh 3.11.4 and Splunk 7.3.0 with revision 1 and store it in /splunk-app.
 
 .. code-block:: console
 
-  # ./generate_wazuh_app.sh -b v3.11.3-7.3.0 -s /wazuh-app -r 1 -c
+  # ./generate_wazuh_app.sh -b v3.11.4-7.3.0 -s /wazuh-app -r 1 -c
 
-This will generate a Wazuh Splunk app package for Wazuh 3.11.3 and Splunk 7.3.0 with revision 1, the sha512 checksum and store them in /splunk-app.
+This will generate a Wazuh Splunk app package for Wazuh 3.11.4 and Splunk 7.3.0 with revision 1, the sha512 checksum and store them in /splunk-app.
 
 Remember that the branch or tag for the script has to come from our wazuh-splunk repository.

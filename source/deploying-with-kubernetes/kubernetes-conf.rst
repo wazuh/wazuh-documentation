@@ -49,7 +49,7 @@ This pod contains the master node of the Wazuh cluster. The master node centrali
 +--------------------------+-------------+
 | Image                    | Controller  |
 +==========================+=============+
-| wazuh/wazuh:3.11.2_7.5.1 | StatefulSet |
+| wazuh/wazuh:3.11.3_7.5.2 | StatefulSet |
 +--------------------------+-------------+
 
 **Wazuh worker 0 / 1**
@@ -59,7 +59,7 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 +--------------------------+-------------+
 | Image                    | Controller  |
 +==========================+=============+
-| wazuh/wazuh:3.11.2_7.5.1 | StatefulSet |
+| wazuh/wazuh:3.11.3_7.5.2 | StatefulSet |
 +--------------------------+-------------+
 
 **Elasticsearch**
@@ -69,7 +69,7 @@ Elasticsearch pod, it ingests events received from Logstash.
 +----------------------------------------+-------------+
 | Image                                  | Controller  |
 +========================================+=============+
-| wazuh/wazuh-elasticsearch:3.11.2_7.5.1 | StatefulSet |
+| wazuh/wazuh-elasticsearch:3.11.3_7.5.2 | StatefulSet |
 +----------------------------------------+-------------+
 
 **Logstash**
@@ -79,7 +79,7 @@ Logstash pod, it's listening to events from the Filebeat instances that are inst
 +-----------------------------------+-------------+
 | Image                             | Controller  |
 +===================================+=============+
-| wazuh/wazuh-logstash:3.11.2_7.5.1 | Deployment  |
+| wazuh/wazuh-logstash:3.11.3_7.5.2 | Deployment  |
 +-----------------------------------+-------------+
 
 **Kibana**
@@ -89,7 +89,7 @@ Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 +---------------------------------+-------------+
 | Image                           | Controller  |
 +=================================+=============+
-| wazuh/wazuh-kibana:3.11.2_7.5.1 | Deployment  |
+| wazuh/wazuh-kibana:3.11.3_7.5.2 | Deployment  |
 +---------------------------------+-------------+
 
 **Nginx**
@@ -99,7 +99,7 @@ Nginx service used as a reverse proxy for Kibana.
 +---------------------------------+-------------+
 | Image                           | Controller  |
 +=================================+=============+
-| wazuh/wazuh-nginx:3.11.2_7.5.1  | Deployment  |
+| wazuh/wazuh-nginx:3.11.3_7.5.2  | Deployment  |
 +---------------------------------+-------------+
 
 Services
@@ -223,6 +223,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get namespaces | grep wazuh
+
+    .. code-block:: none
+        :class: output
+
         wazuh         Active    12m
 
 **Services**
@@ -230,6 +234,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get services -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         elasticsearch         ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
         kibana                ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
@@ -245,6 +253,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get deployments -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           11m
         wazuh-logstash   1         1         1            1           10m
@@ -255,6 +267,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get statefulsets -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                     DESIRED   CURRENT   AGE
         wazuh-elasticsearch      1         1         13m
         wazuh-manager-master     1         1         9m
@@ -266,6 +282,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get pods -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                              READY     STATUS    RESTARTS   AGE
         wazuh-elasticsearch-0             1/1       Running   0          15m
         wazuh-kibana-f4d9c7944-httsd      1/1       Running   0          14m
@@ -284,6 +304,10 @@ Verifying the deployment
     .. code-block:: console
 
         $ kubectl get services -o wide -n wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
         wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
 

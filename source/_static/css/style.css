@@ -123,6 +123,11 @@ dt {
   padding-bottom: 10px;
 }
 
+.docutils.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -677,6 +682,14 @@ footer .logo a:focus {
 
 ul, ol {
 	padding-left: 1.7rem;
+}
+
+ul.simple li dl {
+  margin-bottom: 0;
+}
+
+ul.simple dl dt {
+  font-weight: normal;
 }
 
 ul.simple dl dd {
@@ -3519,6 +3532,15 @@ div[class*='highlight'] {
   margin: 1px 0 24px 0
 }
 
+div[class*='highlight'].output {
+	border: none;
+	background-color: transparent;
+}
+
+div[class*='highlight'].output .highlight {
+	border: 1px solid #e1e4e5;
+}
+
 div[class*='highlight'] {
   position: relative;
 }
@@ -3568,7 +3590,8 @@ div[class*='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class*='highlight']:hover .copy-to-clipboard {
+div[class*='highlight']:hover .copy-to-clipboard,
+div[class*='highlight'] .copy-to-clipboard:focus {
   opacity: 1;
 }
 
