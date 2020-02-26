@@ -80,7 +80,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follow:
+#. We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follows:
 
     .. code-block:: yaml
 
@@ -93,7 +93,7 @@ Certificates creation and deployment
 
     Replace the ``10.0.0.2`` with your host IP.
 
-    In the following steps, we will create a file that contains a folder named after the instance defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    In the following steps, we will create a file that contains a folder named after the instance defined here. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
@@ -163,13 +163,15 @@ Kibana installation and configuration
 
 #. Install the Wazuh Kibana plugin:
 
-    .. include:: ../_templates/installations/elastic/common/install_wazuh_kibana_plugin.rst
+    .. code-block:: console
+
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.5.2.zip
 
 #. Enable and start the Kibana service:
 
     .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
 
-The first Kibana start may take a few minutes. In order to establish HTTPS communication between the browser and Kibana, go to the browser's settings and import the ``ca.crt`` extracted from the .zip file.
+  On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding to your browser the ``ca.crt`` previously created on browser's settings.
 
 .. note:: The Kibana service listens on the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
@@ -267,7 +269,7 @@ Installing the Wazuh API
 
 
 .. note::
-  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default user and password and more.
+  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default user and password and more.
 
 .. _wazuh_server_packages_filebeat:
 
@@ -331,7 +333,7 @@ Filebeat installation and configuration
         .. include:: ../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
-#. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+#. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
@@ -341,7 +343,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.4/extensions/elasticsearch/7.x/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
