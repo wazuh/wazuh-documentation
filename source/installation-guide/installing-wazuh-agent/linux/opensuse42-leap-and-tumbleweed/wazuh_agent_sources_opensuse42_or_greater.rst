@@ -54,3 +54,53 @@ Installing Wazuh agent
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+
+Uninstall
+---------
+
+To uninstall Wazuh agent:
+
+    .. code-block:: console
+
+      # OSSEC_INIT="/etc/ossec-init.conf"
+      # . $OSSEC_INIT 2> /dev/null
+
+  Stop the service:
+
+    .. code-block:: console
+
+      # service wazuh-agent stop 2> /dev/null
+
+  Stop daemons:
+
+    .. code-block:: console
+
+      # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+
+  Remove files and service artifacts:
+
+    .. code-block:: console
+
+      # rm -rf $DIRECTORY $OSSEC_INIT
+
+  Delete the service:
+
+    .. code-block:: console
+
+      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
+      # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+      # if pidof systemd > /dev/null
+      # then
+            # find /etc/systemd/system -name "wazuh*" | xargs rm -f
+            # systemctl daemon-reload
+      # fi
+      # systemctl daemon-reload
+
+  Remove users:
+
+    .. code-block:: console
+
+      # userdel ossec 2> /dev/null
+      # userdel ossecm 2> /dev/null
+      # userdel ossecr 2> /dev/null
+      # groupdel ossec 2> /dev/null
