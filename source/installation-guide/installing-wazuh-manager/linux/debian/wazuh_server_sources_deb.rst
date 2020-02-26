@@ -145,3 +145,54 @@ Next steps
 ----------
 
 Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+
+Uninstall
+---------
+
+To uninstall Wazuh manager and Wazuh API:
+
+    .. code-block:: console
+
+      # OSSEC_INIT="/etc/ossec-init.conf"
+      # . $OSSEC_INIT 2> /dev/null
+
+  Stop the service:
+
+    .. code-block:: console
+
+      # service wazuh-manager stop 2> /dev/null
+      # service wazuh-api stop 2> /dev/null
+
+  Stop daemons:
+
+    .. code-block:: console
+
+      # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+
+  Remove files and service artifacts:
+
+    .. code-block:: console
+
+      # rm -rf $DIRECTORY $OSSEC_INIT
+
+  Delete the service:
+
+    .. code-block:: console
+
+      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
+      # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+      # if pidof systemd > /dev/null
+      # then
+            # find /etc/systemd/system -name "wazuh*" | xargs rm -f
+            # systemctl daemon-reload
+      # fi
+      # systemctl daemon-reload
+
+  Remove users:
+
+    .. code-block:: console
+
+      # userdel ossec 2> /dev/null
+      # userdel ossecm 2> /dev/null
+      # userdel ossecr 2> /dev/null
+      # groupdel ossec 2> /dev/null
