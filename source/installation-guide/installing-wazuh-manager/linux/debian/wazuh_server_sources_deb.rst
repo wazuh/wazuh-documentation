@@ -163,7 +163,7 @@ To uninstall Wazuh manager and Wazuh API:
       # service wazuh-manager stop 2> /dev/null
       # service wazuh-api stop 2> /dev/null
 
-  Stop daemons:
+  Stop the daemon:
 
     .. code-block:: console
 

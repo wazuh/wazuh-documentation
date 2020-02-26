@@ -69,7 +69,7 @@ To uninstall Wazuh agent:
 
       # service wazuh-agent stop 2> /dev/null
 
-  Stop daemons:
+  Stop the daemon:
 
     .. code-block:: console
 
