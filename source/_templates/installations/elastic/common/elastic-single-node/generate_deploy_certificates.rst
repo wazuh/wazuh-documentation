@@ -20,8 +20,9 @@
       EOF
 
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
-    - An instance elasticsearch with IP 10.0.0.2.
-    - An instance filebeat with IP 10.0.0.3 belonging to a one node Wazuh cluster.
+
+    - An instance ``elasticsearch`` with IP ``10.0.0.2``.
+    - An instance ``filebeat`` with IP ``10.0.0.3`` belonging to a one node Wazuh cluster.
 
     Replace the IPs with your host's IPs.
 
@@ -75,11 +76,12 @@
         - "10.0.0.4"
       EOF
 
-    Every ``name`` section represent one host involved in the Wazuh - Elastic Stack environment. In this example, the file describe:
+    Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
+
     - An instance ``elasticsearch`` with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
     - Two instances ``filebeat``, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. Both belong to a two nodes Wazuh cluster. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respective names and IPs.
 
-    Replace the IPs with your host IPs.
+    Replace the IPs with your host's IPs.
 
     In the following steps, we will create a file that contains the folders named after the instances defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
