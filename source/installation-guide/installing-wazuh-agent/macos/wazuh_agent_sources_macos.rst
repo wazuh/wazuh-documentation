@@ -65,35 +65,35 @@ To uninstall Wazuh agent:
       # OSSEC_INIT="/etc/ossec-init.conf"
       # . $OSSEC_INIT 2> /dev/null
 
-  Stop the service:
+Stop the service:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # service wazuh-agent stop 2> /dev/null
+    # service wazuh-agent stop 2> /dev/null
 
-  Stop the daemon:
+Stop the daemon:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+    # $DIRECTORY/bin/ossec-control stop 2> /dev/null
 
-  Remove files and service artifacts:
+Remove files and service artifacts:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # rm -rf $DIRECTORY $OSSEC_INIT
+    # rm -rf $DIRECTORY $OSSEC_INIT
 
-  Delete the service:
+Delete the service:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # rm -rf /Library/StartupItems/OSSEC
+    # rm -rf /Library/StartupItems/OSSEC
 
-  Remove users:
+Remove users:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # dscl . -delete "/Users/ossec" > /dev/null 2>&1
-      # dscl . -delete "/Users/ossecm" > /dev/null 2>&1
-      # dscl . -delete "/Users/ossecr" > /dev/null 2>&1
-      # dscl . -delete "/Groups/ossec" > /dev/null 2>&1
+    # dscl . -delete "/Users/ossec" > /dev/null 2>&1
+    # dscl . -delete "/Users/ossecm" > /dev/null 2>&1
+    # dscl . -delete "/Users/ossecr" > /dev/null 2>&1
+    # dscl . -delete "/Groups/ossec" > /dev/null 2>&1
