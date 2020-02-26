@@ -252,11 +252,6 @@ Installing the Wazuh API
     .. include:: ../_templates/installations/wazuh/deb/install_wazuh_api.rst
 
 
-    In Debian 7 the Wazuh API service does not start automatically. It must be started as follow:
-
-    .. include:: ../_templates/installations/wazuh/common/start_wazuh_api.rst
-
-
 
   .. group-tab:: Yum
 
