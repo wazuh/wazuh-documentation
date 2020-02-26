@@ -2,8 +2,8 @@
 
 .. _create-sol:
 
-Solaris package
-===============
+Solaris
+=======
 
 Wazuh provides an automated way of building a solaris 10 and 11, keep in mind that to build these packages you must use the corresponding system.
 
@@ -28,6 +28,9 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
 
   # ./generate_wazuh_packages.sh -h
 
+.. code-block:: none
+ :class: output
+
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
      -b, --branch <branch>               Select Git branch or tag e.g. master.
@@ -50,7 +53,7 @@ Download and build the sources:
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.1
+  # ./generate_wazuh_packages.sh -b v3.11.4
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
@@ -68,6 +71,9 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
 
   # vagrant -h up
 
+.. code-block:: none
+  :class: output
+
   -- CUSTOM USE OF VAGRANT FOR THIS MACHINE --
 
       vagrant [OPTION] ... up X
@@ -76,7 +82,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       vagrant [OPTION] ... ssh/provision/delete
 
       Example:
-      vagrant --branch-tag=v3.11.1 --ram=1024 --cpus=4 up solaris10 solaris11
+      vagrant --branch-tag=v3.11.4 --ram=1024 --cpus=4 up solaris10 solaris11
 
       -h, --help:
       Show help
@@ -101,21 +107,21 @@ Below, you will find some examples of how to build a Solaris package using this 
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v3.11.1 up solaris10
+  # vagrant --branch-tag=v3.11.4 up solaris10
 
-This will generate a 3.11.1 Wazuh agent package for Solaris 10
-
-.. code-block:: console
-
-  # vagrant --branch-tag=v3.11.1 up solaris11
-
-This will generate a 3.11.1 Wazuh agent package for Solaris 11
+This will generate a 3.11.4 Wazuh agent package for Solaris 10
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v3.11.1 up solaris10 solaris 11
+  # vagrant --branch-tag=v3.11.4 up solaris11
 
-This will generate a 3.11.1 Wazuh agent package for Solaris 10 and Solaris 11
+This will generate a 3.11.4 Wazuh agent package for Solaris 11
+
+.. code-block:: console
+
+  # vagrant --branch-tag=v3.11.4 up solaris10 solaris 11
+
+This will generate a 3.11.4 Wazuh agent package for Solaris 10 and Solaris 11
 
 After the process has ended the package will be stored in the ``src`` folder.
 

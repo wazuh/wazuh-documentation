@@ -10,6 +10,10 @@ The binary ``agent_control``, used with ``-l`` option, allows for the retrieval 
 .. code-block:: console
 
     # /var/ossec/bin/agent_control -l
+
+.. code-block:: none
+    :class: output
+
     Wazuh agent_control. List of available agents:
        ID: 000, Name: vpc-ossec-manager (server), IP: 127.0.0.1, Active/Local
        ID: 1040, Name: ip-10-0-0-76, IP: 10.0.0.76, Active
@@ -36,6 +40,9 @@ Also, users can retrieve the connected agents by using the ``manage_agents`` wit
 
    # /var/ossec/bin/manage_agents -l
 
-   Available agents: 
+.. code-block:: none
+   :class: output
+
+   Available agents:
       ID: 001, Name: agent-ubuntu2, IP: any
       ID: 002, Name: agent-ubuntu1, IP: any

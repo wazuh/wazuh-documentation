@@ -2,8 +2,8 @@
 
 .. _create-deb:
 
-Debian packages
-===============
+Debian
+======
 
 Wazuh provides an automated way of building DEB packages using docker so there is no need for any other dependency.
 
@@ -27,6 +27,9 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
 
   # ./generate_debian_package.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_debian_package.sh [OPTIONS]
 
       -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
@@ -44,18 +47,18 @@ Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v3.11.1 -s /tmp -t manager -a amd64 -r my_rev.
+  # ./generate_debian_package.sh -b v3.11.4 -s /tmp -t manager -a amd64 -r my_rev.
 
-This will generate a 3.11.1 Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
-
-.. code-block:: console
-
-  # ./generate_debian_package.sh -b v3.11.1 -s /tmp -t api -a i386 -r my_rev
-
-This will generate a 3.11.1 Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+This will generate a 3.11.4 Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v3.11.1 -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v3.11.4 -s /tmp -t api -a i386 -r my_rev
 
-This will generate a 3.11.1 Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.
+This will generate a 3.11.4 Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+
+.. code-block:: console
+
+  # ./generate_debian_package.sh -b v3.11.4 -t agent -a amd64 -p /opt
+
+This will generate a 3.11.4 Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.

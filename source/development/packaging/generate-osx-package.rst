@@ -2,8 +2,8 @@
 
 .. _create-osx:
 
-macOS package
-=============
+macOS
+=====
 
 Wazuh provides an automated way of building macOS packages, keep in mind that to build an macOS package you must run this tool in an macOS system.
 
@@ -29,6 +29,9 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 .. code-block:: console
 
   $ ./generate_wazuh_packages.sh -h
+
+.. code-block:: none
+  :class: output
 
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
@@ -56,19 +59,19 @@ Below, you will find some examples of how to build macOS packages.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.1 -s /tmp
+  # ./generate_wazuh_packages.sh -b v3.11.4 -s /tmp
 
-This will build a 3.11.1 Wazuh agent macOS  package and store it in ``/tmp``.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v3.11.1 -s /tmp -j 6
-
-This will also build a 3.11.1 Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+This will build a 3.11.4 Wazuh agent macOS  package and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.1 -s /tmp -j 6 -c
+  # ./generate_wazuh_packages.sh -b v3.11.4 -s /tmp -j 6
+
+This will also build a 3.11.4 Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v3.11.4 -s /tmp -j 6 -c
 
 In addition to the previous settings this will generate a ``.sha512`` file containing the checksum of the package.
 
@@ -86,7 +89,7 @@ Once you have set up the environment, you can build and notarize the package as 
 
 .. code-block:: console
 
-  $ sudo ./generate_wazuh_packages.sh -b v3.11.1 -j 4 -r 1 --notarize \
+  $ sudo ./generate_wazuh_packages.sh -b v3.11.4 -j 4 -r 1 --notarize \
       --keychain "/Users/your-user/Library/Keychains/login.keychain-db" \
       --application-certificate "Your Developer ID Application" \
       --installer-certificate "Your Developer ID Installer" \
