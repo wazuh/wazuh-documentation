@@ -85,54 +85,30 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
         and try again. Sometimes it will take several tries to work.
 
 The kernel-level rootkit “Diamorphine” is now installed on this system! By default it is hidden so we
-are not able to detect it by running “lsmod”.  Only with a special "kill" signal can we make Diamorphine
-unhide itself:  Try it out:
+are not able to detect it by running “lsmod”.  Only with a special "kill" signal can we make Diamorphine unhide itself. Try it out:
 
     .. code-block:: console
 
         # lsmod | grep diamorphine
         # kill -63 509
         # lsmod | grep diamorphine
-
-    .. code-block:: none
-        :class: output
-
         diamorphine            13155  0
-
-    .. code-block:: console
-
         # kill -63 509
         # lsmod | grep diamorphine
 
-    .. code-block:: none
-        :class: output
 
-
-
-
-    In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not,
-    will toggle whether the Diamorphine kernel module hides itself.
+    In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not, will toggle whether the Diamorphine kernel module hides itself.
 
     This rootkit also allows you to hide a selected processes from being seen by the "ps" command for example.
-    Run the following commands to see how the rsyslog process is first visible, then send the ``-31`` signal to
-    its pid and observe how the process is no longer visible
+    Run the following commands to see how the rsyslog process is first visible, then send the ``-31`` signal to its pid and observe how the process is no longer visible.
 
     .. code-block:: console
 
         # ps auxw | grep rsyslogd | grep -v grep
-
-    .. code-block:: none
-        :class: output
-
         root       732  0.0  0.7 214452  3572 ?        Ssl  14:53   0:00 /usr/sbin/rsyslogd -n
-
-    .. code-block:: console
-
         # kill -31 $(pidof rsyslogd)
         # ps auxw | grep rsyslog | grep -v grep
 
-    .. code-block:: none
-        :class: output
 
 
 9. Next configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/ossec.conf`` file to **300** with the following:
