@@ -91,7 +91,7 @@ Certificates creation and deployment
         - "10.0.0.2"
       EOF
 
-    Replace the ``10.0.0.2`` with your host IP.
+    Replace the ``10.0.0.2`` with your host's IP.
 
     In the following steps, we will create a file that contains a folder named after the instance defined here. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
@@ -355,7 +355,7 @@ Filebeat installation and configuration
 
     .. include:: ../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. .. include:./../_templates/installations/elastic/common/copy_certificates_filebeat_aio.rst
+#. .. include:: ./../_templates/installations/elastic/common/copy_certificates_filebeat_aio.rst
 
 #. Enable and start the Filebeat service:
 
