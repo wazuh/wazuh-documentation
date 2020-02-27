@@ -12,7 +12,7 @@ Here is a list of common use cases:
 #. `Signature-based log analysis`_
 #. `File integrity monitoring`_
 #. `Rootkits detection`_
-#. `Security policy monitoring`_
+#. `Active response`_
 
 Signature-based log analysis
 ----------------------------
@@ -261,3 +261,42 @@ Below is an example of an alert generated when a hidden process is found. In thi
     "timestamp": "2017-03-05T15:13:04-0800",
     "title": "Process '562' hidden from /proc."
   }
+
+Active Response
+---------------
+The Wazuh Active Response capability allows scripted actions to be taken in
+response to specific criteria of Wazuh rules being matched.  By default, AR
+is enabled on all agents and all standard AR commands are defined in ``ossec.conf``
+on the Wazuh manager, but no actual criteria for calling the AR commands is
+included.  No AR commands will actually be triggered until further configuration
+is performed on the Wazuh manager.
+
+For the purpose of automated blocking, a very popular command for blocking in
+Linux is using the iptables firewall, and in Windows the null routing / blackholing, respectively:
+
+    .. code-block:: xml
+
+        <command>
+            <name>firewall-drop</name>
+            <executable>firewall-drop.sh</executable>
+            <expect>srcip</expect>
+            <timeout_allowed>yes</timeout_allowed>
+        </command>
+
+    .. code-block:: xml
+
+        <command>
+            <name>win_route-null</name>
+            <executable>route-null.cmd</executable>
+            <expect>srcip</expect>
+            <timeout_allowed>yes</timeout_allowed>
+        </command>
+
+Each command has a descriptive ``<name>`` by which it will be referred to in the
+``<active-response>`` sections.  The actual script to be called is defined by
+``<executable>``.  The ``<expect>`` value specifies what log field (if any)
+will be passed along to the script (like **srcip** or **username**).  Lastly, if
+``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
+and can be reversed after an amount of time specified in a specific ``<active-response>``
+section (see :ref:`timeout <reference_ossec_active_response>`).  For more details
+about configuring active response, see the Wazuh user manual.
