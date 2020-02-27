@@ -6,8 +6,7 @@
 
 Jumpstart to Wazuh
 ==================
-
-This document will guide you to install the Wazuh server and Elastic stack components in a all in one configuration. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. The :ref:`compatibility matrix<compatibility_matrix>` is available in case of having any doubts about OS compatibility.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -80,7 +79,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follows:
+#. The specification file ``/usr/share/elasticsearch/instances.yml`` must be created as follows:
 
     .. code-block:: yaml
 
@@ -91,9 +90,9 @@ Certificates creation and deployment
         - "10.0.0.2"
       EOF
 
-    Replace the ``10.0.0.2`` with your host's IP.
+    Replace the ``10.0.0.2`` with the host's IP.
 
-    In the following steps, we will create a file that contains a folder named after the instance defined here. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
@@ -101,7 +100,7 @@ Certificates creation and deployment
 
       # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
+    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used:
 
     .. code-block:: console
 
@@ -181,7 +180,7 @@ Kibana installation and configuration
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to your server. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -242,7 +241,7 @@ Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available for your Operating system. In this guide, we used the 8.x version but feel free to install a more recent one.
+  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating system. In this guide, it has been used the 8.x version but a more recent one can be installed.
 
 
 .. tabs::
@@ -269,7 +268,7 @@ Installing the Wazuh API
 
 
 .. note::
-  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default user and password and more.
+  Now, that the Wazuh API is installed, it is strongly recommended to secure the API. In the document :ref:`securing_api` it is explained how to enable the HTTPS communication, how to change the default user and password and more.
 
 .. _wazuh_server_packages_filebeat:
 
@@ -371,7 +370,7 @@ Disabling repositories
 
 .. include:: ../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
+In order to anticipate and avoid this situation, it is recommended to disable the Elasticsearch repository in the following way:
 
 .. tabs::
 
