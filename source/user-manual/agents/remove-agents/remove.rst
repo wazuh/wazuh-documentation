@@ -29,7 +29,7 @@ If the user would like confirmation before removing the agent, use the following
 
     Available agents:
        ID: 001, Name: DB_Agent, IP: any
-    Provide the ID of the agent to be removed (or '\q' to quit): 003
+    Provide the ID of the agent to be removed (or '\q' to quit): 001
     Confirm deleting it?(y/n): y
     Agent '001' removed.
 
