@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-#. The ``curl`` and ``apt-transport-https`` packages must be installed on your system. The ``zip`` package will be necessary for the certificates management. If they are not already present, install them using the commands below:
+#. The ``curl`` and ``apt-transport-https`` packages must be installed on the system. The ``zip`` package will be necessary for the certificates management. If they are not already present, they must be installed using the commands below:
 
     .. code-block:: console
 

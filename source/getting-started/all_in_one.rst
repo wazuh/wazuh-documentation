@@ -170,7 +170,7 @@ Kibana installation and configuration
 
     .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
 
-  On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding to your browser the ``ca.crt`` previously created on browser's settings.
+  On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding to the browser the ``ca.crt`` previously created on browser's settings.
 
 .. note:: The Kibana service listens on the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 

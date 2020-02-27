@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-You also have the following resources available, in case you have questions or need assistance:
+In case of having questions or needing assistance, the following resources are available: 
 
 - `Mailing list <wazuh+subscribe@googlegroups.com>`_: in `our Google group <https://groups.google.com/forum/#!forum/wazuh>`_ you can share your questions and thoughts with our community of users.
 - `GitHub repositories <https://github.com/wazuh>`_: here you can submit issues and contribute to the project development. We happily welcome, review and accept pull requests.

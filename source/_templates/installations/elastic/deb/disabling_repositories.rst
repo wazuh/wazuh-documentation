@@ -5,7 +5,7 @@
   # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
   # apt-get update
 
-Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+Alternatively, the package state can be set to ``hold``, which will stop updates (although it can still be upgraded manually using ``apt-get install``).
 
 .. code-block:: console
 
