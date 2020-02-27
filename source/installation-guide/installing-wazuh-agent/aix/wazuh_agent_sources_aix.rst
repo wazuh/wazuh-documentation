@@ -43,7 +43,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v3.9.5 && gunzip -c wazuh.tar.gz | tar -xvf -
+        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v3.11.4 && gunzip -c wazuh.tar.gz | tar -xvf -
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 
@@ -52,7 +52,7 @@ Installing Wazuh agent
    .. code-block:: console
 
         # cd wazuh-*
-        # gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.9
+        # gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.11
         # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes DISABLE_SYSC=yes
 
 4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
