@@ -8,7 +8,7 @@
 Elasticsearch multi-node cluster
 =================================
 
-This document will guide you to install the Elastic Stack components in a multi-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document will explain how to install the Elastic Stack components in a multi-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` in case of having any doubt about OS compatibility.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -18,7 +18,7 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. You will know if you must to follow the step in all nodes or only in master by the [All] or [Master] label at the beginning of the step. In case there are two or more [Master] nodes, the steps must be done in just one of them.
+The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. The labels [All] or [Master]  at the beginning of the step will indicate whether the steps must be done in all nodes or in a master node. In case of having two or more [Master] nodes, the steps must be done in just one of them.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,18 +76,18 @@ Elasticsearch installation and configuration
 
 
 
-#. [*All*] Once Elasticsearch is installed we need to configure it by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+#. [*All*] Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Select the tab ``Wazuh single-node cluster`` if you will configure a Wazuh single node cluster. If your Wazuh cluster will have two or more nodes, select ``Wazuh multi-node cluster`` tab.
+#. [*Master*] This step implies the selection of the Wazuh cluster installation type. In case of configuring a Wazuh single node cluster, the ``Wazuh single-node cluster`` tab must be selected. In case of having two or more nodes, the ``Wazuh multi-node cluster`` tab must be choosen.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. [*All*] The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. Remember to replace the ``X`` according to the defined ``instances.yml`` file:
+#. [*All*] The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
@@ -104,7 +104,7 @@ Disabling repositories
 
 .. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
+In order to anticipate and avoid this situation, it is recommended to disable Elasticsearch repository in the following way:
 
 .. tabs::
 
