@@ -10,7 +10,7 @@ Installation guide
 
 A Jumpstart to Wazuh guide is included in the :ref:`Getting started section<all_in_one>`, which aims to introduce Wazuh by installing it along with Elastic Stack on a single system (server). The jumpstart guide can be used for learning purposes or small production environments but it will not benefit from the high availability of a distributed environment.
 
-In this section however, you will find how to build a production environment with data and services high availability, scalability, etc. The introduction document will drive you through the basic concepts and architecture of a Wazuh production environment.
+This section however, will explain how to build a production environment with data and services high availability, scalability, etc. The introduction document will go through the basic concepts and architecture of a Wazuh production environment.
 
 .. topic:: Contents
 

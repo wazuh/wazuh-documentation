@@ -8,7 +8,7 @@ Introduction
 ============
 
 
-This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`Jumpstart to Wazuh<all_in_one>` guide could be used in small production environments, it is not designed for high availability and scalable environments. This section will help you to configure an environment with different levels of distribution and, in consequence, scalable environments with high availability.
+This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`Jumpstart to Wazuh<all_in_one>` guide could be used in small production environments, it is not designed for high availability and scalable environments. This section is aimed to configure an environment with different levels of distribution and, in consequence, scalable environments with high availability.
 
 
 Community
@@ -45,7 +45,7 @@ This architecture diagram represents a Wazuh - Elastic Stack production environm
 
 The Wazuh cluster (center) can be configured as a single-node cluster (only one server with a Wazuh manager installed) or a multi-node cluster (two or more Wazuh managers distributed over two or more servers). Only the Wazuh master node will have the Wazuh API installed. All the Wazuh cluster servers will have Filebeat installed.
 
-An Elasticsearch cluster (right side) may consist of one or more nodes.
+An Elasticsearch cluster (right side) may consist on one or more nodes.
 
 Kibana (above the Elasticsearch cluster) will retrieve data from both clusters, Wazuh and Elasticsearch in a comprehensive way.
 
@@ -53,8 +53,8 @@ Kibana (above the Elasticsearch cluster) will retrieve data from both clusters, 
 Start deploying Wazuh server and Elastic Stack
 ----------------------------------------------
 
-The installation guide starts with the Elasticsearch section. After Elasticsearch is configured, the guide will drive you into the Wazuh cluster installation document.
-There are two Elasticsearch configuration types: single node cluster or multi-node cluster. Follow the option that meets your needs:
+The installation guide starts with the Elasticsearch section. After Elasticsearch is configured, the guide will go through the Wazuh cluster installation document.
+There are two Elasticsearch configuration types: single node cluster or multi-node cluster, depending on environment's requirements:
 
 - :ref:`Elasticsearch single-node cluster<elasticsearch_single_node_cluster>`
 - :ref:`Elasticsearch multi-node cluster<elasticsearch_multi_node_cluster>`

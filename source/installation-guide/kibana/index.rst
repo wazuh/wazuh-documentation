@@ -10,8 +10,7 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Elastic Kibana site <https://www.elastic.co/products/kibana>`_.
 
-Elastic recommends to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on if you will install Kibana in the same Elasticsearch server or not.
-
+Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same Elasticsearch server or not.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,7 +66,7 @@ Kibana installation and configuration
             .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
-#. The next step may vary depending on if you want to install Kibana in the same Elasticsearch server or in a different one. It consists on certificate placement:
+#. The next step may vary depending on whether Kibana will be installed in the same Elasticsearch server or in a different one. It consists on certificate placement:
 
 
     .. tabs::
@@ -105,9 +104,9 @@ Kibana installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
-    On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding to your browser the ``ca.crt`` previously created on browser's settings.
+    On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding in browser's settings the ``ca.crt`` previously created.
 
-    .. note:: The Kibana service listens on the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
 
 Next steps
