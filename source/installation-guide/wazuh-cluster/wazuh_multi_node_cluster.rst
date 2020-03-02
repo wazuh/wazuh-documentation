@@ -8,19 +8,19 @@
 Wazuh multi-node cluster
 =========================
 
-This document will guide you to install the Wazuh server components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document will go through the installation of the Wazuh server components in a multi-node cluster.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to your servers. Alternatively, if you want to download the Wazuh manager package directly, or check the compatible versions, click :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. You must to follow this section in all the servers that you want to configure as Wazuh multi-node cluster.
+This section describes how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
 
 .. tabs::
 
@@ -107,10 +107,10 @@ Wazuh server worker nodes
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API has to be installed in the Wazuh master node and not in the Wazuh worker nodes.
+Before starting, note that the Wazuh API has to be installed in the Wazuh master node and not in the Wazuh worker nodes.
 
 .. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available version for your Operating system. In this guide, we used the 8.x version but feel free to install a more recent one.
+  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always recommended to install the most recent available version for each Operating System. In this guide, the 8.x version was used but a most recent one can be installed.
 
 
 .. tabs::
@@ -137,7 +137,7 @@ Before starting, note that if you are setting up a Wazuh cluster, the Wazuh API 
 
 
 .. note::
-  Now, that the Wazuh API is installed, we strongly recommend securing the API. In the following document :ref:`securing_api` you will learn how to enable the HTTPS communication, how to change the default user and password and more.
+  Now, that the Wazuh API is installed, it is strongly recommended to secure the API. In the following document :ref:`securing_api` it is explained how to enable the HTTPS communication, how to change the default user and password and more.
 
 .. _wazuh_server_multi_node_filebeat:
 
@@ -238,7 +238,7 @@ Filebeat installation and configuration
 Next steps
 ----------
 
-The next step consists on installing Kibana. You can continue the guide  :ref:`here<kibana>`.
+The next step consists on installing Kibana. The guide continues  :ref:`here<kibana>`.
 
 
 Disabling repositories
