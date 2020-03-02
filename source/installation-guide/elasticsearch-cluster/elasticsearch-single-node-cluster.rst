@@ -8,7 +8,7 @@
 Elasticsearch single-node cluster
 =================================
 
-This document will guide you to install the Elastic Stack components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt regarding the compatibility of your Operating System.
+This document will guide you to install the Elastic Stack components in a single-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 

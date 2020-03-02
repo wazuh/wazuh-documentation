@@ -7,7 +7,7 @@
 Install Wazuh agent on Linux RPM legacy
 =======================================
 
-This document will guide you to install or deploy the Wazuh agent in a Linux legacy OS like CentOS 5, Red Hat Enterprise Linux 5, Oracle Linux 5 or SUSE 11. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document will guide you to install or deploy the Wazuh agent in a Linux legacy OS like CentOS 5, Red Hat Enterprise Linux 5, Oracle Linux 5 or SUSE 11.
 
 If you are using a most recent Linux OS, you must follow the guide :ref:`Wazuh Agent for Linux<wazuh_agent_package_linux>`
 

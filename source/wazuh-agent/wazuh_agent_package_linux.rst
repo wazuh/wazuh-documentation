@@ -7,7 +7,7 @@
 Linux
 =====
 
-This document will guide you to install or deploy the Wazuh agent. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt about your OS compatibility.
+This document will guide you to install or deploy the Wazuh agent.
 
 If you are using CentOS 5, Red Hat Enterprise Linux 5, Oracle Linux 5 or SUSE 11, you must follow the guide :ref:`Wazuh Agent for Linux legacy<wazuh_agent_package_rpm_legacy>`
 

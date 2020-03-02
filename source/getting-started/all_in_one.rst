@@ -6,7 +6,7 @@
 
 Jumpstart to Wazuh
 ==================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. The :ref:`compatibility matrix<compatibility_matrix>` is available in case of having any doubts about OS compatibility.
+This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 

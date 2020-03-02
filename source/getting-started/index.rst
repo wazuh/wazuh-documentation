@@ -28,5 +28,4 @@ Our centralized components, the Wazuh server and Elastic Stack, have been design
    architecture
    use-cases
    all_in_one
-   compatibility_matrix/index
    packages-list
