@@ -50,6 +50,7 @@ In order to check SSH security settings and help meet requirement 2.2.4, we have
     [root@manager ossec]# cat etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
 
 .. code-block:: xml
+    :class: output
 
     <rootcheck>
         <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
@@ -63,6 +64,10 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
 .. code-block:: console
 
     [root@manager ossec]# tail -f logs/archives/archives.log
+
+.. code-block:: none
+    :class: output
+
     2016 Jan 29 12:58:02 manager->rootcheck Ending rootcheck scan.
     2016 Jan 29 13:07:18 manager->ossec-monitord ossec: Ossec started.
     2016 Jan 29 13:08:34 manager->rootcheck Starting rootcheck scan.
@@ -81,6 +86,7 @@ In this case, all the logs above are alerts, so we will see an instance of the l
     [root@manager ossec]# tail -n 1 logs/alerts/alerts.json | pjson
 
 .. code-block:: json
+    :class: output
 
     {
       "rule": {

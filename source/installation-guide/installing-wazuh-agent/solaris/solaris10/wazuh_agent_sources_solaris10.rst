@@ -31,7 +31,7 @@ Installing Wazuh agent
 
    .. code-block:: console
 
-      # git clone -b v3.11.3 https://github.com/wazuh/wazuh.git
+      # git clone -b v3.11.4 https://github.com/wazuh/wazuh.git
       # wget -P wazuh https://raw.githubusercontent.com/wazuh/wazuh-packages/master/solaris/solaris10/solaris10_patch.sh
 
 3. Create an user and group called `ossec` needed for installation.
@@ -95,6 +95,7 @@ Installing Wazuh agent
 8. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
  .. code-block:: none
+    :class: output
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 

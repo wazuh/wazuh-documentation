@@ -5,16 +5,17 @@
 Remote Hosts Connection
 ============================
 
-Ansible was born with the idea to be an agentless automation platform. Ansible relies on SSH the connection to remote hosts, meaning that, you can connect to remote hosts as SSH does. To follow, we briefly explain two (2) of this methods.
+Ansible was born with the idea to be an agentless automation platform. Ansible relies on SSH the connection to remote hosts, meaning that, you can connect to remote hosts as SSH does. We briefly explain two (2) of these methods below.
 
 .. note:: We recommend the use of `Using passwords`_ method, this avoid you share your public SSH Key among several hosts.
 
 Using passwords
 -------------------
 
-Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so, in order to establish a connection with remote hosts, a user/password must be supplied. To follow there is a description of some useful options to use for SSH authentication:
+Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so, in order to establish a connection with remote hosts, a user/password must be supplied. The following is a description of some useful options to use for SSH authentication:
 
-.. code-block:: bash
+.. code-block:: none
+  :class: output
 
   -u <user>   Set the connection user.
   -k          Ask the password of the connection user.
@@ -45,7 +46,8 @@ You can setup an SSH key-pairing to provide a silent auth mechanism, first creat
 
 To improve security on this setup, please ensure you provide a password for this key.
 
-.. code-block:: bash
+.. code-block:: none
+  :class: output
 
   Enter passphrase (empty for no passphrase): ************
   Enter same passphrase again: ************
@@ -72,6 +74,9 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
   $ cat /etc/ansible/hosts
 
+.. code-block:: none
+  :class: output
+
   hosts1.example.net
   hosts2.example.net
 
@@ -80,6 +85,9 @@ Also, you can group hosts. This could be useful to execute tasks and roles to se
 .. code-block:: bash
 
   $ cat /etc/ansible/hosts
+
+.. code-block:: none
+  :class: output
 
   [wazuh-elasticsearch]
   hosts1.example.net
@@ -98,7 +106,8 @@ This will attempt a connection with the remote hosts using ``ping`` module.
 
 You will get an output like this.
 
-.. code-block:: bash
+.. code-block:: none
+  :class: output
 
   hosts1.example.net | SUCCESS => {
       "changed": false,

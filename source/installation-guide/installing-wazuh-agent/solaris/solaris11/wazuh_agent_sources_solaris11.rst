@@ -41,7 +41,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # git clone -b v3.11.3 https://github.com/wazuh/wazuh.git
+        # git clone -b v3.11.4 https://github.com/wazuh/wazuh.git
 
      .. note:: If you can't download the file due to an Open SSL error, then you should copy the directory with the scp utility.
 
@@ -67,6 +67,7 @@ Installing Wazuh agent
 4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
  .. code-block:: none
+    :class: output
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 

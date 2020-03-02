@@ -13,3 +13,4 @@ Ruleset XML syntax
        decoders
        rules
        regex
+       sibling-decoders
