@@ -5,7 +5,7 @@
   .. group-tab:: Wazuh single-node cluster
 
 
-    Create the specification file ``/usr/share/elasticsearch/instances.yml`` as follows:
+    The specification file can be created  ``/usr/share/elasticsearch/instances.yml`` as follows:
 
     .. code-block:: yaml
 
@@ -21,14 +21,14 @@
 
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
-    - An instance ``elasticsearch`` with IP ``10.0.0.2``.
-    - An instance ``filebeat`` with IP ``10.0.0.3`` belonging to a one node Wazuh cluster.
+    - An ``elasticsearch`` instance with IP ``10.0.0.2``.
+    - An ``filebeat`` instance with IP ``10.0.0.3`` belonging to a one node Wazuh cluster.
 
-    Replace the IPs with your host's IPs.
+    The IPs must be replaced with the host's IPs.
 
-    We will now create a compressed zip file that contains a folder named after each of the instances defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+   Now a compressed zip file that contains a folder named after each of the instances defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-    Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
     .. code-block:: console
 
@@ -36,7 +36,7 @@
 
     The generated file ``~/certs.zip`` must be copied into the Wazuh server before continuing with the steps below.
 
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
+    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used to extract the file:
 
     .. code-block:: console
 
@@ -59,7 +59,7 @@
 
 
 
-    We need to create the specification file ``/usr/share/elasticsearch/instances.yml`` as follow:
+    The specification file ``/usr/share/elasticsearch/instances.yml`` must be created as follows:
 
     .. code-block:: yaml
 
@@ -78,12 +78,12 @@
 
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
-    - An instance ``elasticsearch`` with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
-    - Two instances ``filebeat``, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. Both belong to a two nodes Wazuh cluster. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respective names and IPs.
+    - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
+    - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. Both belong to a two nodes Wazuh cluster. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
 
-    Replace the IPs with your host's IPs.
+    The IPs must be replaced with the host's IPs.
 
-    In the following steps, we will create a file that contains the folders named after the instances defined here. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    In the following steps, a file that contains the folders named after the instances defined here will be created. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
@@ -93,7 +93,7 @@
 
     The generated file ``~/certs.zip`` must be copied into the Wazuh servers before continuing with the steps below.
 
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. You can use ``unzip``:
+    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used``unzip``:
 
     .. code-block:: console
 
