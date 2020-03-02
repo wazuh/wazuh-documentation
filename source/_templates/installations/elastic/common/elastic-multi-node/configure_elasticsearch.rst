@@ -22,11 +22,11 @@ The file ``/etc/elasticsearch/elasticsearch.yml`` has to be edited:
 
 Values to be replaced:
 
-- ``<elasticsearch_ip>``: the host IP. I.e: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
-- ``<node_name>``: The node name. I.e: ``elastic-master1``.
-- ``<elastic_cluster>``: The cluster name. I.e: ``elastic-cluster-production``.
-- ``<elasticsearch_ip_nodeX>``: other Elasticsearch cluster nodes IPs. I.e: ``10.0.0.3``.
-- ``<master_node_X>``: other elasticsearch master node names. I.e: ``elastic-master2``.
+- ``<elasticsearch_ip>``: the host IP. e.g.: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
+- ``<node_name>``: The node name. e.g.: ``elastic-master1``.
+- ``<elastic_cluster>``: The cluster name. e.g.: ``elastic-cluster-production``.
+- ``<elasticsearch_ip_nodeX>``: other Elasticsearch cluster nodes IPs. e.g.: ``10.0.0.3``.
+- ``<master_node_X>``: other elasticsearch master node names. e.g.: ``elastic-master2``.
 
 Depending on the node type, some parameters may vary between nodes. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master.
 
