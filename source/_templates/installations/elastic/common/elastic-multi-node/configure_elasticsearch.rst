@@ -4,7 +4,7 @@
 
   # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/elasticsearch/7.x/elasticsearch_cluster.yml
 
-Edit the file ``/etc/elasticsearch/elasticsearch.yml``
+The file ``/etc/elasticsearch/elasticsearch.yml`` has to be edited:
 
 .. code-block:: yaml
 
@@ -28,6 +28,6 @@ Values to be replaced:
 - ``<elasticsearch_ip_nodeX>``: other Elasticsearch cluster nodes IPs. I.e: ``10.0.0.3``.
 - ``<master_node_X>``: other elasticsearch master node names. I.e: ``elastic-master2``.
 
-Depending on the node type, some parameters may vary between nodes. You should include the parameter ``node.master: false`` in every Elasticsearch node that you don't want to configure as master.
+Depending on the node type, some parameters may vary between nodes. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master.
 
 .. End of include file
