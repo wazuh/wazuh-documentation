@@ -16,7 +16,7 @@
 
   .. tab:: SysV Init
 
-    Choose one option according your OS:
+    Choose one option according to the OS used:
 
     a) Debian based OS
 
