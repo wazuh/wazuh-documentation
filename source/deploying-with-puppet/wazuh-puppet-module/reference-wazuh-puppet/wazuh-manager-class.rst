@@ -1,14 +1,14 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _reference_wazuh_server_class:
+.. _reference_wazuh_manager_class:
 
-Wazuh server class
+Wazuh manager class
 ===================
 
-``class wazuh::server``
+``class wazuh::manager``
 -----------------------
 
-$smtp_server
+$ossec_smtp_server
   SMTP mail server.
 
 $ossec_emailto
@@ -75,7 +75,7 @@ $ossec_white_list
 
 $ossec_extra_rules_config
   Using it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
-  You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the wazuh::server class.
+  You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the wazuh::manager class.
 
   `Default []`
 
