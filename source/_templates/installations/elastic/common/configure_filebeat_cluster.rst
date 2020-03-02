@@ -5,7 +5,7 @@
   output.elasticsearch.hosts: <elasticsearch_ip>:9200
   output.elasticsearch.password: <elasticsearch_password>
 
-Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server and ``elasticsearch_password`` with the previously generated password for ``elastic`` user.
+``elasticsearch_ip`` must be replaced with the IP address or the hostname of the Elasticsearch server and ``elasticsearch_password`` with the previously generated password for ``elastic`` user.
 
 The following settings must be changed:
 
@@ -14,6 +14,6 @@ The following settings must be changed:
   output.elasticsearch.ssl.certificate: /etc/filebeat/certs/filebeat-X.crt
   output.elasticsearch.ssl.key: /etc/filebeat/certs/filebeat-X.key
 
-Replace the ``X`` with the number defined in the ``instances.yml`` definition step when installing Elasticsearch.
+The ``X`` must be replaced with the number defined in the ``instances.yml`` definition step when installing Elasticsearch.
 
 .. End of include file
