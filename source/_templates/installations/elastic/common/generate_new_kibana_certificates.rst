@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-It is necessary to create new certificates for the new server where Kibana will be installed. This process has to be done in the Elasticsearch master node where we created the other certificates. Once logged in there, use the following command: 
+It is necessary to create new certificates for the new server where Kibana will be installed. This process has to be done in the Elasticsearch master node where the other certificates were created. Once logged in there, the following command has to be used: 
 
 .. code-block:: console
 
@@ -17,9 +17,9 @@ The ``ca.crt`` will be needed. It can be added as follows:
 
   # zip -j ~/kibana.zip /etc/elasticsearch/certs/ca/ca.crt
 
-Copy the generated ``~/kibana.zip`` file from the previous step into the Kibana server. This example will suppose that it will be placed at home folder ``~/``.
+The generated ``~/kibana.zip`` file from the previous step must be copied into the Kibana server. This example will suppose that it will be placed at home folder ``~/``.
 
-Once logged in again on the Kibana server, extract the generated ``~/kibana.zip`` file. You can use ``unzip``:
+Once logged in again on the Kibana server, the generated ``~/kibana.zip`` file. ``unzip`` can be used to extract the file:
 
 .. code-block:: console
 
