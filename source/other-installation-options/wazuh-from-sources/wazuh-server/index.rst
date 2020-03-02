@@ -157,7 +157,7 @@ Installing Wazuh API
 --------------------
 
 .. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available version for your Operating System. In this guide, we used the 8.x version but feel free to install a more recent one.
+  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available version for your Operating System. In this guide, we used the 8.x version but a most recent one can be installed.
 
 .. tabs::
 
