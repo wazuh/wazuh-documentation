@@ -18,7 +18,7 @@ FAQ
 #. `How FIM manages historical records in his database?`_
 #. `How can I migrate my old DB information into a new SQLite database?`_
 #. `Can I hot-swap monitored directories?`_
-#. `I lose whodata events when audit sends huge amount of them at the same time, what to do?`_
+#. `How to edit audit configuration to deal with huge amount of whodata events at the same time.`_
 
 How often does syscheck run?
 --------------------------------
@@ -96,14 +96,14 @@ Can I hot-swap monitored directories?
 
 Yes, this can be done for Linux in both agents and manager by setting the monitoring of symbolic links to directories. To set the refresh interval, use option :doc:`syscheck.symlink_scan_interval <../../reference/internal-options>`.
 
-I lose whodata events when audit sends huge amount of them at the same time, what to do?
+How to edit audit configuration to deal with huge amount of whodata events at the same time.
 ----------------------------------------------------------------------------------------
 
-This is a problem with audit socket and dispatcher. You need to configure audit, there are two values involved:
+It is possible to lose events when a lot of them are generated in a moment, there is a problem with audit socket and dispatcher that can be fixed by editing two values involved:
 ::
 
-  /etc/audisp/audisp.conf  -> disp_qos
-  /etc/audit/audit.conf    -> q_dephs
+  /etc/audisp/audisp.conf  -> disp_qos = ["lossy", "lossless"]
+  /etc/audit/audit.conf    -> q_dephs = [<Numerical value>]
 
 The first one (disp_qos) controls whether you want blocking/lossless or non-blocking/lossy communication between the audit daemon and the dispatcher. There is a 128k buffer between the audit daemon and dispatcher. This is good enogh for most uses. If lossy is chosen, incoming events going to the dispatcher are discarded when this queue is full. (Events are still written to disk if log_format is not nolog.) Otherwise the auditd daemon will wait for the queue to have an empty spot before logging to disk. The risk is that while the daemon is waiting for network IO, an event is not being recorded to disk.
 Valid values are: lossy and lossless.
@@ -112,3 +112,10 @@ Recommended value is lossless.
 
 The other one (q_dephs) is a numeric value that tells how big to make the internal queue of the audit event dispatcher. A bigger queue lets it handle a flood of events better, but could hold events that are not processed when the daemon is terminated. If you get messages in syslog about events getting dropped, increase this value.
 The default value is 80.
+
+There is another variable that can prevent loss of events, within the syscheck configuration:
+::
+
+  /var/ossec/etc/internal_options.conf  -> rt_delay = [<Numerical value>]
+
+Time in milliseconds for delay between alerts in real-time. Low values are better to fix this problem.
