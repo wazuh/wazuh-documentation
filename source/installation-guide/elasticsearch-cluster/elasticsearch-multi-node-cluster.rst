@@ -104,7 +104,6 @@ Disabling repositories
 
 .. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, it is recommended to disable Elasticsearch repository in the following way:
 
 .. tabs::
 
