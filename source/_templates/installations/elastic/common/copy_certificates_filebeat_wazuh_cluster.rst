@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Before using the following command, you need to remember the number that you defined for this Wazuh server in the ``instances.yml`` file. Replace the ``X`` with the defined number:
+For using the following command, the ``X`` must be replaced with the number defined for this Wazuh server in the ``instances.yml`` file:
 
 .. code-block:: console
 
