@@ -5,7 +5,7 @@
 Upgrade guide
 =============
 
-The following links will describe how to upgrade Wazuh or Elastic Stack.
+The following links will describe how to upgrade Wazuh or Elastic Stack. In case of having any doubt about operating system compatibility, please check the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app#older-packages>`_.
 
 
 
