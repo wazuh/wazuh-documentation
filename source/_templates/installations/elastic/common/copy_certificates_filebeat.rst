@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In section **Installing Elasticsearch**, we created a .zip that contains the necessary files. You must copy the zip file from the host where was created into the Wazuh server host. You could use ``scp`` for example. Now, let's suppose that the file was copied into home folder.
+In section **Installing Elasticsearch**, a .zip that contains the necessary files was created. The zip file must be copied from the host where was created into the Wazuh server host. ``scp`` can be used for example. This example supposes that the file has been copied into the home folder.
 
 .. code-block:: console
 
