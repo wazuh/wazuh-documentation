@@ -8,7 +8,7 @@
 Elasticsearch multi-node cluster
 =================================
 
-This document will explain how to install the Elastic Stack components in a multi-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` in case of having any doubt about OS compatibility.
+This document will explain how to install the Elastic Stack components in a multi-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
