@@ -18,12 +18,12 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. The labels [All] or [Master]  at the beginning of the step will indicate whether the steps must be done in all nodes or in a master node. In case of having two or more [Master] nodes, the steps must be done in just one of them.
+The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. The labels [*All*] or [*Master*]  at the beginning of the step will indicate whether the steps must be done in all nodes or in a master node. In case of having two or more [*Master*] nodes, the steps must be done in just one of them.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*All*] The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes. 
+[*All*] The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
 
 .. tabs::
 
@@ -83,7 +83,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*Master*] This step implies the selection of the Wazuh cluster installation type. In case of configuring a Wazuh single node cluster, the ``Wazuh single-node cluster`` tab must be selected. In case of having two or more nodes, the ``Wazuh multi-node cluster`` tab must be choosen.
+#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster`` and ``Wazuh multi-node cluster`` tab depending on your intallation.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
@@ -163,8 +163,3 @@ To uninstall Elasticsearch:
 
 
     .. include:: ../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
-
-
-
-
-

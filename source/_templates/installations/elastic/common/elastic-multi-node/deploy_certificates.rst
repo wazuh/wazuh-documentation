@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. note:: If the elasticsearch node is not the master node where the certificates were created, it necessary to remove the ``ca.key`` file: ``zip -d ~/certs.zip "ca/ca.key"``.
+.. note:: If the Elasticsearch node is not the master node where the certificates were created, it necessary to remove the ``ca.key`` file: ``zip -d ~/certs.zip "ca/ca.key"``.
 
 .. code-block:: console
 
