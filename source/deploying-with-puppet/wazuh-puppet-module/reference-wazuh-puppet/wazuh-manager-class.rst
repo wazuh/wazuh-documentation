@@ -6,7 +6,7 @@ Wazuh manager class
 ===================
 
 ``class wazuh::manager``
------------------------
+------------------------
 
 $ossec_smtp_server
   SMTP mail server.
