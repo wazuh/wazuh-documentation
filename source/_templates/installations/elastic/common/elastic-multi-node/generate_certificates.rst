@@ -70,12 +70,12 @@
 
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
-    - Two ``filebeat`` instances, #1 and #2 with their respectives IPs ``10.0.0.5`` and ``10.0.0.6``. Both belong to a two Wazuh cluster nodes. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respectives names and IPs.
-    - Three instances ``elasticsearch``, #1, #2 and #3 with their respectives IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. Both belong to a three Elasticsearch cluster nodes. In case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respectives names and IPs.
+    - Two ``filebeat`` instances, #1 and #2 with their respectives IPs ``10.0.0.5`` and ``10.0.0.6``. Both belong to individual Wazuh cluster nodes. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respectives names and IPs.
+    - Three instances ``elasticsearch``, #1, #2 and #3 with their respectives IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. They belong to three Elasticsearch cluster nodes. In the case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respectives names and IPs.
 
-    Replace the IPs with the hosts' IPs.
+    Replace the IPs of this example with the addresses of the hosts in your enviornment.
 
-    In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    In the following steps, a zip file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
