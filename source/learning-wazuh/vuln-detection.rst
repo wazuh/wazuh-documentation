@@ -160,21 +160,19 @@ See the alerts in Kibana
 Search Kibana for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png          |
-    |     :title: Found Vulnerabilities                                         |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
+    :title: Found Vulnerabilities
+    :align: center
+    :width: 100%
+
 
 Expand one of the records to see all the information available:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png               |
-    |     :title: Vulnerability event                                           |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png
+    :title: Vulnerability event
+    :align: center
+    :width: 100%
+
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
@@ -484,13 +482,11 @@ is in the Wazuh Kibana plugin itself.  Both in the **Overview** section as well 
 when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png                |
-    |     :title: flood                                                         |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
 
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png
+    :title: Flood
+    :align: left
+    :width: 100%
 
 
 Optional exercise
