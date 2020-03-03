@@ -266,9 +266,9 @@ Active Response
 ---------------
 The Wazuh Active Response capability allows scripted actions to be taken in
 response to specific criteria of Wazuh rules being matched.  By default, AR
-is enabled on all agents and all standard AR commands are defined in ``ossec.conf``
+is enabled in all agents and all standard AR commands are defined in ``ossec.conf``
 on the Wazuh manager, but no actual criteria for calling the AR commands is
-included.  No AR commands will actually be triggered until further configuration
+included. No AR commands will actually be triggered until further configuration
 is performed on the Wazuh manager.
 
 For the purpose of automated blocking, a very popular command for blocking in
@@ -300,3 +300,5 @@ will be passed along to the script (like **srcip** or **username**).  Lastly, if
 and can be reversed after an amount of time specified in a specific ``<active-response>``
 section (see :ref:`timeout <reference_ossec_active_response>`).  For more details
 about configuring active response, see the Wazuh user manual.
+
+Preconfigured active response scripts can be found :ref:`here <active_response_scripts>`.
