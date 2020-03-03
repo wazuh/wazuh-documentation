@@ -5,22 +5,22 @@
 Recommended practices
 ---------------------
 
-When managing an environment, it is vital to make sure it is healthy, safe and human error proved. On this guide, we will lay some of the best practices we should follow to have our Wazuh environment on its peak performance.
+When managing an environment,  it is vital to ensure it is maintained healthy, safe and to place safeguards against human error. On this guide, you will find some of the best practices you can follow to keep your Wazuh environment on its peak performance.
 
 
 Disk space
 ----------
 
-One common issue is running out of disk space. When maintaining an environment we should do regular check-ups on the available disk space. A very quick way of doing so is executing the following:
+One common issue is running out of disk space. When maintaining an environment you should do regular check-ups on the available disk space. A very quick way of doing so is executing the following:
 
 .. code-block:: console
 
   # df -h
 
-A common cause of high disk space is leaving the ``<logall>`` option enabled. This option will store all the collected logs, even those that did not trigger a Wazuh alert, in ``/var/ossec/logs/archives``.
+A common cause of high disk space is having the ``<logall>`` option enabled. This option will store all the collected logs, even those that did not trigger a Wazuh alert, in ``/var/ossec/logs/archives``.
 This option is mainly used for testing purposes, leaving it enabled can cause unnecessary disk consumption. To disable it, go to:
 
-.. code-block:: console
+.. code-block:: none
 
   /var/ossec/etc/ossec.conf
 
@@ -51,22 +51,22 @@ b) For SysV Init:
     # service wazuh-manager restart
 
 
-If we have more than 80% of the disk space used, we should urgently fix the situation. Otherwise, there is risk of data loss.
+If you have more than 80% of the available disk space in use, you should urgently fix the situation. Otherwise, there is risk of data loss.
 To do so, there are only two available options, either to free space or to increase disk space.
 
-If adding disk space is an option that we would rather avoid, we can try and free some space from Wazuh's logs. For these steps is important to be thorough and careful, to avoid deleting anything we do not wish to delete.
+If adding disk space is an option that you would rather avoid, you can free some space from Wazuh's logs. For the following steps, it is important to be thorough and careful, to avoid deleting anything you do not wish to delete.
 
-First, execute this command to check how much space do we have occupied:
+First, execute this command to check how much space are Wazuh logs and alerts occupying:
 
 .. code-block:: console
 
   # du -h -d1 /var/ossec/logs/
 
-This command will tell us how much disk space each subfolder takes. From these results, we are only interested in ``/var/ossec/logs/alerts`` and ``/var/ossec/logs/archives``. Especially this second one. If ``archives`` is occupying a lot of space,
-that means that we have ``logall`` enabled, it will be recommendable to disable it if you have not done it already. This folder will be the first one we can use to free space. It follows the following structure:
+This command will tell you how much disk space each subfolder takes. From these results, you only need to look at ``/var/ossec/logs/alerts`` and ``/var/ossec/logs/archives``. Especially this second one. If ``archives`` is occupying a lot of space,
+it means that you have ``logall`` enabled, it will be recommendable to disable it if you have not done it already. ``archives`` will be the first wazuh component you need to clean to free space. It follows the following structure:
 
 
-.. code-block:: console
+.. code-block:: none
 
     ├── archives
     │   ├── 2019
@@ -80,13 +80,13 @@ that means that we have ``logall`` enabled, it will be recommendable to disable 
     │   ├── archives.json
     │   └── archives.log
 
-There is a subfolder for each year, one for each month and inside there will be files for each day. Given that this is archives, it will be possible to delete the entire month if we do not wish to keep any of the data. Do not delete the anual folder nor the ``archives.json`` or the ``archives.log``, in case we decide to use them in te future for testing.
+There is a subfolder for each year, one for each month and inside there will be files for each day. Given that this is archives, it will be possible to delete the entire month if we do not wish to keep any of the data. Do not delete the anual folder nor the ``archives.json`` or the ``archives.log``, in case you decide to use them in the future for testing.
 
-If these steps did not free enough disk space, we could have to take a look at the ``alerts`` folder. Here we must be extremely careful. The first step would be to decide our retention policy, depending on it we can decide which files to delete. It is not the same to have a one year retention policy than to have a 90 days retention policy.
+If these steps did not free enough disk space, you can clean the ``alerts`` folder. Here you must be extremely careful. The first step would be to decide your retention policy, depending on it you can decide which files to delete. It is not the same to have a one year retention policy than to have a 90 days retention policy.
 
 ``Alerts`` follows the same structure as ``Archives``:
 
-.. code-block:: console
+.. code-block:: none
 
     ├── alerts
     │   ├── 2019
@@ -100,14 +100,14 @@ If these steps did not free enough disk space, we could have to take a look at t
     │   ├── alerts.json
     │   └── alerts.log
 
-Once the retention policy has been established, we can proceed to delete the chosen files. Remember to do so carefully, preferably one by one, to avoid deleting something accidentally. In each folder, each compressed file will have the alerts of each day, you may have up to 4 files for each day, corresponding to the compressed logs ``.json.gz`` and ``.log.gz`` plus the checksum file for each of them, which ensures their integrity. Do not delete the ``alerts.json`` or the ``alerts.log`` file. Delete the files you no longer need at your own risk.
+Once the retention policy has been established, you can proceed to delete the chosen files. Remember to do so carefully, preferably one by one, to avoid deleting a file accidentally. In each folder, each compressed file will have the alerts of each day, you may have up to 4 files for each day, corresponding to the compressed logs ``.json.gz`` and ``.log.gz`` plus the checksum file for each of them, which ensures their integrity. Do not delete the ``alerts.json`` or the ``alerts.log`` file. Delete the files you no longer need at your own risk.
 
 Back-ups
 --------
 
 Taking care of a sensible system is not an easy task and you should always be ready for the worst. Therefore, it is a highly recommendable practice to have backups of important files and folders, especially before making changes or upgrading.
 
-Before making any important changes or upgrading, always make a backup of these files::
+Before making any important changes or upgrading, always make a backup of the folowing files::
 
   /var/ossec/api/configuration
   /var/ossec/etc
@@ -124,7 +124,7 @@ Before making any important changes or upgrading, always make a backup of these 
 
 These two folders must be copied with the manager service stopped:
 
-.. code-block:: console
+.. code-block:: none
 
   /var/ossec/var/db/global.db
   /var/ossec/queue/db
@@ -135,18 +135,18 @@ From this paths, the more critical are::
   /var/ossec/etc
   /var/ossec/logs
 
-In ``/var/ossec/etc`` we can find our client.keys, customized configurations, customized rules and configurations of our agent groups.
+In ``/var/ossec/etc`` you can find your client.keys, customized configurations, customized rules and configurations of your agent groups.
 
-In ``/var/ossec/logs`` we will find all our alerts, archives and logs from different Wazuh components. This will be the heaviest folder in Wazuh, as it will contain all the alerts the Manager has detected.
+In ``/var/ossec/logs`` you will find all your alerts, archives and logs from different Wazuh components. This will be the heaviest folder in Wazuh, as it will contain all the alerts the Manager has detected.
 
-The file ``/var/ossec/etc/client.keys`` has the registration information of all our agents. Without it, the agents would not be able to connect to the Manager. For this reason and given that it is a very small file, it is good practice to make regular backups of it.
+The file ``/var/ossec/etc/client.keys`` has the registration information of all your agents. Without it, the agents would not be able to connect to the Manager. For this reason and given that it is a very small file, it is a good practice to make regular backups of it.
 Therefore if it is accidentally deleted or edited, it will be possible to restore a recent back-up and avoid having to re-register all the agents given the case.
 
 
 Processes
 ---------
 
-When checking on our Wazuh environment, we should always start by looking at the service status with:
+When checking on your Wazuh environment, you should always start by checking the service status:
 
 * For Systemd:
 
@@ -161,7 +161,7 @@ When checking on our Wazuh environment, we should always start by looking at the
     # service wazuh-manager status
 
 
-If the service is running but we suspect there might be some issue, it is recommendable to make sure all the Wazuh daemons are running:
+If the service is running but you suspect there might be some issue, it is recommendable to make sure all the Wazuh daemons are running:
 
   .. code-block:: console
 
