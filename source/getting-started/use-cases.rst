@@ -337,7 +337,7 @@ Once the agent starts, `Syscollector` runs periodically scans of defined targets
 The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
 with this feature the API can be directly queried about the different scans being able to filter by any desired field.
 
-In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
+In addition, the packages and hotfixes inventory is used as feed for the :ref:`Vulnerability detection <vulnerability-detection>`.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
