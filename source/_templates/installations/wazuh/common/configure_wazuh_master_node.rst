@@ -12,7 +12,7 @@ Configure the cluster mode editing the following settings in ``/var/ossec/etc/os
     <port>1516</port>
     <bind_addr>0.0.0.0</bind_addr>
     <nodes>
-      <node>master</node>
+      <node>wazuh-master-address</node>
     </nodes>
     <hidden>no</hidden>
     <disabled>no</disabled>
@@ -25,7 +25,7 @@ The parameters:
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`node_name <cluster_node_name>` | Name of the current node.                                                                                                                                                          |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`key <cluster_key>`             | The key must be 32 characters long and should be the same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``|
+|:ref:`key <cluster_key>`             | Key that will be used to encrypt communication between cluster nodes. It must be 32 characters long and should be the same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``|
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`node_type <cluster_node_type>` | Set the node type (master/worker).                                                                                                                                                 |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
