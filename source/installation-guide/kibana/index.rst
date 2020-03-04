@@ -104,7 +104,7 @@ Kibana installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
-    On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding in browser's settings the ``ca.crt`` previously created.
+    The first time you use a browser to access Kibana, the browser will show a warning message stating that the certificate was not issued by a trusted authority. This can be accepted either by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
