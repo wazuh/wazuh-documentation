@@ -13,6 +13,8 @@ Here is a list of common use cases:
 #. `File integrity monitoring`_
 #. `Rootkits detection`_
 #. `Active response`_
+#. `Security Configuration Assessment`_
+#. `System inventory`_
 
 Signature-based log analysis
 ----------------------------
@@ -299,6 +301,56 @@ will be passed along to the script (like **srcip** or **username**).  Lastly, if
 ``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
 and can be reversed after an amount of time specified in a specific ``<active-response>``
 section (see :ref:`timeout <reference_ossec_active_response>`).  For more details
-about configuring active response, see the Wazuh user manual.
+about configuring active response, see the Wazuh user manual. Preconfigured active response scripts can be found :ref:`here <active_response_scripts>`.
 
-Preconfigured active response scripts can be found :ref:`here <active_response_scripts>`.
+Security Configuration Assessment
+---------------------------------
+
+SCA performs scans in order to discover exposures or misconfigurations in monitored hosts. Those scans assess the configuration of the hosts by means of policy files, that contains rules to be tested against the actual configuration of host. For example, SCA could assess whether it is necessary to change password related configuration, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration.
+
+Policies for the SCA module are written in YAML format. This that was chosen due having human readability in mind, which allows users to quickly understand and write their own policies or extend the existing ones to fit their needs. Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well-established standard for host hardening.
+
+.. code-block:: yaml
+    :caption: Check example
+
+    - id: 3064
+      title: "Ensure IPv6 default deny firewall policy"
+      description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected."
+      rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
+      remediation: "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
+      compliance:
+        - cis: ["3.5.2.1"]
+        - cis_csc: ["9.4"]
+      condition: all
+      rules:
+        - 'c:ip6tables -L -> r:^Chain INPUT && r:policy DROP'
+        - 'c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP'
+        - 'c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP'
+
+System inventory
+----------------
+
+The main purpose of this module is to gather the most relevant information from the monitored system.
+
+Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
+
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
+with this feature the API can be directly queried about the different scans being able to filter by any desired field.
+
+In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
+
+Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+
+To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+
+  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+
+  .. code-block:: xml
+
+    <rule id="100001" level="5">
+      <if_sid>221</if_sid>
+      <decoded_as>syscollector</decoded_as>
+      <field name="netinfo.iface.name">eth0</field>
+      <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
+    </rule>
+
