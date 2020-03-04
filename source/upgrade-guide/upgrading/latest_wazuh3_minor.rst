@@ -137,5 +137,3 @@ Next steps
 ----------
 
 Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<elastic_stack_packages_legacy>`.
-
-You might also want to check our :ref:`compatibility matrix <compatibility_matrix>` in order to look at the Elastic stack version you need to use.

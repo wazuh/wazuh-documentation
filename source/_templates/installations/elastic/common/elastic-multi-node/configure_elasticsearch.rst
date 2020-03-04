@@ -24,11 +24,11 @@ Depending on the node type, some parameters may vary between nodes. ``cluster.in
 
 Values to be replaced:
 
-- ``<elasticsearch_ip>``: the host's IP. I.e: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
-- ``<node_name>``: The node name. I.e: ``elastic-master1``.
-- ``<elastic_cluster>``: Elasticsearch cluster name. I.e: ``elastic-cluster-production``.
-- ``<master_node_X>``: Elasticsearch cluster master-eligible node names. I.e: ``elastic-master2``.
-- ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. I.e: ``10.0.0.3``.
+- ``<elasticsearch_ip>``: the host's IP. E.g.: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
+- ``<node_name>``: The node name. E.g.: ``elastic-master1``.
+- ``<elastic_cluster>``: Elasticsearch cluster name. E.g.: ``elastic-cluster-production``.
+- ``<master_node_X>``: Elasticsearch cluster master-eligible node names. E.g.: ``elastic-master2``.
+- ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. E.g.: ``10.0.0.3``.
 
 For more information, please see `important discovery and cluster formation settings <https://www.elastic.co/guide/en/elasticsearch/reference/7.6/discovery-settings.html#discovery-settings>`_.
 

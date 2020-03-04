@@ -6,7 +6,7 @@
 
 Jumpstart to Wazuh
 ==================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. The :ref:`compatibility matrix<compatibility_matrix>` is available in case of having any doubts about OS compatibility.
+This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -94,7 +94,7 @@ Certificates creation and deployment
 
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-    Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
     .. code-block:: console
 
@@ -240,8 +240,7 @@ Installing the Wazuh manager
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating system. In this guide, it has been used the 8.x version but a more recent one can be installed.
+Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating system. In this guide, it has been used the 10.x version but a more recent one can be installed.
 
 
 .. tabs::
@@ -370,7 +369,6 @@ Disabling repositories
 
 .. include:: ../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, it is recommended to disable the Elasticsearch repository in the following way:
 
 .. tabs::
 

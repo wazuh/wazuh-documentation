@@ -9,97 +9,109 @@
 Securing the Wazuh API
 ======================
 
-By default, the communications between the Wazuh Kibana plugin and the Wazuh API are not encrypted. In addition to this, the default user is "foo" and the password is  "bar". For this reason, it is highly recommended to secure the Wazuh API and change the default user and password. The following steps will explain how achieve it:
+By default, the communications between the Wazuh Kibana plugin and the Wazuh API are not encrypted. In addition to this, the default user is "foo" and the password is  "bar". For this reason, it is highly recommended to secure the Wazuh API and change the default user and password. Each step can be done using either the automated process or the manual process.
 
-#. Enable HTTPS:
+The automated process consists on running the script ``/var/ossec/api/scripts/configure_api.sh`` and following its steps. It will ask for all the necessary parameters during the interactive process. Binding the network is not contemplated in this script. The next configuration must be done manually: :ref:`binding port<binding port>`.
 
-    In order to enable HTTPS, certificates can be generated either manually or automatically using the script ``/var/ossec/api/scripts/configure_api.sh``.
+The following sections will explain how to generate certificates, change credentials and default port manually. In case of having run the previously mentioned script, these section do not have to be executed. 
 
-        #. Option a: Generate the certificate automatically using the script.
+Enable HTTPS
+~~~~~~~~~~~~~
 
-          The fisrt step is to execute the script ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. It will ask for all the necessary parameters and it will create the certificate using the data provided in the interactive process. The script will restart the Wazuh API automatically.
+    In order to enable HTTPS, certificates must be generated:
 
-        #. Option b: Use own certificate. The file ``/var/ossec/api/configuration/config.js`` contains the section:
 
-          .. code-block:: console
+    The file ``/var/ossec/api/configuration/config.js`` contains the section:
 
-            //config.https_key = "configuration/ssl/server.key"
-            //config.https_cert = "configuration/ssl/server.crt"
-            //config.https_use_ca = "no"
-            //config.https_ca = "configuration/ssl/ca.crt"
+    .. code-block:: console
 
-          All those lines have to be uncommented. Then, the path of  ``crt``, ``key`` and/or the ``ca`` (setting ``https_use_ca`` to ``yes``) can be indicated. Above those lines, the option ``config.https`` has to be set up to ``yes``.
+      //config.https_key = "configuration/ssl/server.key"
+      //config.https_cert = "configuration/ssl/server.crt"
+      //config.https_use_ca = "no"
+      //config.https_ca = "configuration/ssl/ca.crt"
 
-          After configuring them, the Wazuh API service has to be restarted:
+    All those lines have to be uncommented. Then, the path of  ``crt``, ``key`` and/or the ``ca`` (setting ``https_use_ca`` to ``yes``) can be indicated. Above those lines, the option ``config.https`` has to be set up to ``yes``.
 
-            * For Systemd:
+    After configuring them, the Wazuh API service has to be restarted:
 
-              .. code-block:: console
+        .. tabs::
 
-                # systemctl restart wazuh-api
 
-            * For SysV Init:
+          .. group-tab:: Systemd
 
-              .. code-block:: console
+            .. code-block:: console
 
-                # service wazuh-api restart
+              # systemctl restart wazuh-api
 
-#. Change the default credentials. They can be changed manually or using the script ``/var/ossec/api/scripts/configure_api.sh``.
+          .. group-tab:: SysV Init
 
-    #. Option a: Change the default credentials using the script.
+            .. code-block:: console
 
-      Execute ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. It will ask for all the necessary parameters and it will create the user with the required password. The script will restart the Wazuh API automatically.
+              # service wazuh-api restart
 
-    #. Option b: Change the default credentials manually using the following commands:
 
-      .. code-block:: console
 
-        # cd /var/ossec/api/configuration/auth
-        # node htpasswd -Bc -C 10 user myUserName
+Change the default credentials
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      After configuring it, the Wazuh API service has to be restarted:
+    The default credentials can be changed manually using the following commands:
 
-        * For Systemd:
+    .. code-block:: console
 
-          .. code-block:: console
+      # cd /var/ossec/api/configuration/auth
+      # node htpasswd -Bc -C 10 user myUserName
 
-            # systemctl restart wazuh-api
+    After changing them, the Wazuh API service has to be restarted:
 
-        * For SysV Init:
+        .. tabs::
 
-          .. code-block:: console
 
-            # service wazuh-api restart
+          .. group-tab:: Systemd
 
-#. Change the default port:
+            .. code-block:: console
 
-    The default port can be changed using the script ``/var/ossec/api/scripts/configure_api.sh`` or editing the file ``/var/ossec/api/configuration/config.js``.
+              # systemctl restart wazuh-api
 
-        #. Option a: Change the port automatically using the script.
+          .. group-tab:: SysV Init
 
-          Execute the script ``/var/ossec/api/scripts/configure_api.sh`` and follow the script steps. It will ask for all the necessary parameters and it will change the port using the data provided in the interactive process. The script will restart the Wazuh API automatically.
+            .. code-block:: console
 
-        #. Option b: Change the port manually. The file ``/var/ossec/api/configuration/config.js`` contains the parameter:
+              # service wazuh-api restart
 
-          .. code-block:: console
 
-            // TCP Port used by the API.
-            config.port = "55000";
 
-          It can be changed by a non-used system's port. After configuring it, the Wazuh API service has to be restarted:
+Change the default port
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-            * For Systemd:
+    The file ``/var/ossec/api/configuration/config.js`` contains the parameter:
+    
+    .. code-block:: console
 
-              .. code-block:: console
+      // TCP Port used by the API.
+      config.port = "55000";
 
-                # systemctl restart wazuh-api
+    It can be changed by a non-used system's port. After configuring it, the Wazuh API service has to be restarted:
 
-            * For SysV Init:
+        .. tabs::
 
-              .. code-block:: console
 
-                # service wazuh-api restart
+          .. group-tab:: Systemd
 
-#. (Optional) Bind to localhost:
+            .. code-block:: console
+
+              # systemctl restart wazuh-api
+
+          .. group-tab:: SysV Init
+
+            .. code-block:: console
+
+              # service wazuh-api restart
+
+
+
+.. _binding port:
+
+Bind to localhost (optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     If the API will not be accessed externally, the API should be bond to ``localhost`` using the option ``config.host`` in the configuration file ``/var/ossec/api/configuration/config.js``.

@@ -4,7 +4,7 @@
 
   # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
 
-The ``elastic's`` password must be saved.
+Take note of the password for the ``elastic`` user since it will be used later on.
 
 
 .. End of include file

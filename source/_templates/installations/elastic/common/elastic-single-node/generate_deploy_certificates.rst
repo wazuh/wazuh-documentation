@@ -79,11 +79,11 @@
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
     - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
-    - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. Both belong to a two nodes Wazuh cluster. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
+    - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. These correspond to two Wazuh cluster nodes. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
 
-    The IPs must be replaced with the host's IPs.
+    Replace the IPs of this example with the addresses of the hosts in your enviornment.
 
-    In the following steps, a file that contains the folders named after the instances defined here will be created. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    In the following steps, a zip file that contains folders named after the instances defined here will be created. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
@@ -93,7 +93,7 @@
 
     The generated file ``~/certs.zip`` must be copied into the Wazuh servers before continuing with the steps below.
 
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used``unzip``:
+    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used:
 
     .. code-block:: console
 

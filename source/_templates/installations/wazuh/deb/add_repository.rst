@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-#. For this, the ``curl``, ``apt-transport-https``, ``lsb-release`` and ``gnupg2`` packages must be installed on the system. The package ``zip`` will be necessary for the certificates management. If they are not already present, they must be installed using the commands below:
+#. For this, the ``curl``, ``apt-transport-https``, ``lsb-release`` and ``gnupg2`` packages must be installed on the system. The ``zip`` package will be necessary for the certificates management. If they are not already present, they must be installed using the commands below:
 
     .. code-block:: console
 

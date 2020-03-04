@@ -83,7 +83,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster`` and ``Wazuh multi-node cluster`` tab depending on your intallation.
+#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster`` tab, for the Wazuh single node cluster, and ``Wazuh multi-node cluster`` tab in case of having two or more nodes.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
@@ -104,7 +104,6 @@ Disabling repositories
 
 .. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, it is recommended to disable Elasticsearch repository in the following way:
 
 .. tabs::
 

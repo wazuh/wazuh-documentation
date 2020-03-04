@@ -156,8 +156,7 @@ To install the build dependencies of CPython, follow these steps:
 Installing Wazuh API
 --------------------
 
-.. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, we always recommend installing the most recent available version for your Operating System. In this guide, we used the 8.x version but a most recent one can be installed.
+Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always recommended to install the most recent available version for each Operating System. In this guide, the 10.x version was used but a most recent one can be installed.
 
 .. tabs::
 
@@ -167,7 +166,7 @@ Installing Wazuh API
 
     .. code-block:: console
 
-      # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      # curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
       # apt-get install -y nodejs
       # npm config set user 0
 
@@ -177,7 +176,7 @@ Installing Wazuh API
 
     .. code-block:: console
 
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+      # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
       # yum -y install nodejs
       # npm config set user 0
 

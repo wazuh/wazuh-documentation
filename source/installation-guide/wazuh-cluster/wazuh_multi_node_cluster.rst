@@ -109,8 +109,7 @@ Installing the Wazuh API
 
 Before starting, note that the Wazuh API has to be installed in the Wazuh master node and not in the Wazuh worker nodes.
 
-.. note::
-  Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always recommended to install the most recent available version for each Operating System. In this guide, the 8.x version was used but a most recent one can be installed.
+Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always recommended to install the most recent available version for each Operating System. In this guide, the 10.x version was used but a most recent one can be installed.
 
 
 .. tabs::
@@ -211,7 +210,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.4/extensions/elasticsearch/7.x/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -246,7 +245,6 @@ Disabling repositories
 
 .. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
 
 .. tabs::
 

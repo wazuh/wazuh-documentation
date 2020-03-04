@@ -8,7 +8,7 @@
 Elasticsearch single-node cluster
 =================================
 
-This document will guide you to install the Elastic Stack components in a single-node cluster. Please, check the :ref:`compatibility matrix<compatibility_matrix>` if you have any doubt regarding the compatibility of your Operating System.
+This document will explain how to install the Elastic Stack components in a single-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -79,7 +79,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. In this step you must select the type of Wazuh cluster installation that you will set in your environment. Select the ``Wazuh single-node cluster`` tab if you want to configure a single Wazuh node cluster. If your Wazuh cluster will have two or more nodes, select the ``Wazuh multi-node cluster`` tab.
+#. This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster`` tab, for the Wazuh single node cluster, and ``Wazuh multi-node cluster`` tab in case of having two or more nodes.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
@@ -96,7 +96,6 @@ Disabling repositories
 
 .. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
 
-In order to anticipate and avoid this situation, we recommend disabling the Elasticsearch repository in the following way:
 
 .. tabs::
 

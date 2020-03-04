@@ -19,7 +19,7 @@ The ``ca.crt`` will be needed. It can be added as follows:
 
 The generated ``~/kibana.zip`` file from the previous step must be copied into the Kibana server. This example will suppose that it will be placed at home folder ``~/``.
 
-Once logged in again on the Kibana server, the generated ``~/kibana.zip`` file. ``unzip`` can be used to extract the file:
+Once logged in again on the Kibana server, the generated ``~/kibana.zip`` file can be extracted. ``unzip`` can be used to extract the file:
 
 .. code-block:: console
 
