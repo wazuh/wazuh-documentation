@@ -16,6 +16,7 @@ Here is a list of common use cases:
 #. `Security Configuration Assessment`_
 #. `System inventory`_
 #. `Cloud security monitoring`_
+#. `Containers security monitoring`_
 
 Signature-based log analysis
 ----------------------------
@@ -312,7 +313,7 @@ SCA performs scans in order to discover exposures or misconfigurations in monito
 Policies for the SCA module are written in YAML format. This that was chosen due having human readability in mind, which allows users to quickly understand and write their own policies or extend the existing ones to fit their needs. Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well-established standard for host hardening.
 
 .. code-block:: yaml
-    :caption: Check example
+    :caption: Check the example
 
     - id: 3064
       title: "Ensure IPv6 default deny firewall policy"
@@ -344,16 +345,23 @@ Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trig
 
 To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
 
-  .. code-block:: xml
+.. code-block:: xml
 
     <rule id="100001" level="5">
-      <if_sid>221</if_sid>
-      <decoded_as>syscollector</decoded_as>
-      <field name="netinfo.iface.name">eth0</field>
-      <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
+        <if_sid>221</if_sid>
+        <decoded_as>syscollector</decoded_as>
+        <field name="netinfo.iface.name">eth0</field>
+        <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
     </rule>
+
+When the alerts are triggered they will be displayed in Kibana this way:
+
+.. thumbnail:: ../images/manual/internal-capabilities/syscollector_alerts.png
+    :title: Information from syscollector for "port" value.
+    :align: center
+    :width: 80%
 
 Cloud security monitoring
 -------------------------
@@ -393,3 +401,11 @@ The next table contains the most relevant information about configuring each ser
 Microsoft Azure
 ~~~~~~~~~~~~~~~
 
+Containers security monitoring
+------------------------------
+
+Docker
+~~~~~~
+
+Kubernetes
+~~~~~~~~~~
