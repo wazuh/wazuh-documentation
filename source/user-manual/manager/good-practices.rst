@@ -51,7 +51,7 @@ b) For SysV Init:
     # service wazuh-manager restart
 
 
-If you have more than 80% of the available disk space in use, you should urgently fix the situation. Otherwise, there is risk of data loss.
+If you have more than 80% of the available disk space in use, you should urgently fix the situation. Otherwise, there is risk of data loss. Wazuh will start sending alerts when disk space reaches 90% usage.
 To do so, there are only two available options, either to free space or to increase disk space.
 
 If adding disk space is an option that you would rather avoid, you can free some space from Wazuh's logs. For the following steps, it is important to be thorough and careful, to avoid deleting anything you do not wish to delete.
