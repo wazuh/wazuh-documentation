@@ -186,7 +186,7 @@ Because these rules deal with individual events with no correlation across separ
 However, after we repeated our SSH logon failure a number of times, another rule fired.
 
 If you scroll back up in **Kibana** and look for an event with the following description: "*sshd: brute force trying to
-get access to the system*" wich should be the first or nearly the first entry in your **Kibana results**. If not, you will need to repeat the `attack <ssh-brute-force.html#attack>`_
+get access to the system*" which should be the first or nearly the first entry in your **Kibana results**. If not, you will need to repeat the `attack <ssh-brute-force.html#attack>`_
 making sure you do it 8 times in less than 2 minutes.
 
 Expand that record to take a closer look.

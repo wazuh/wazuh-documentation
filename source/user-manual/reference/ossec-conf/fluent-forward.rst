@@ -203,7 +203,7 @@ keepalive
 ^^^^^^^^^
 .. versionadded:: 3.11.4
 
-Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait undefinitely for the server to confirm a delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
+Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait indefinitely for the server to confirm a delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
 
 This option allows enabling TCP keepalive and tune its options. When the connection becomes idle during ``<idle>`` seconds, the agent will start delivering one keepalive probe every ``<interval>`` seconds. If no response is received after ``<count>`` attempts, the agent will reset the connection.
 

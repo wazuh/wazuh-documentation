@@ -91,10 +91,10 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       Generate package for branch/tag x
 
       --ram x
-      Select the amount of ram asigned to the new machine.
+      Select the amount of ram assigned to the new machine.
 
       --cpus x
-      Select the number of CPUs asigned to the new machine.
+      Select the number of CPUs assigned to the new machine.
 
       -- DEFAULT USE OF VAGRANT (FOR ALL MACHINES) --
 
