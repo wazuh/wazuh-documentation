@@ -15,6 +15,7 @@ Here is a list of common use cases:
 #. `Active response`_
 #. `Security Configuration Assessment`_
 #. `System inventory`_
+#. `Cloud security monitoring`_
 
 Signature-based log analysis
 ----------------------------
@@ -353,4 +354,42 @@ To allow this configuration, in a rule declaration set the ``<decoded_as>`` fiel
       <field name="netinfo.iface.name">eth0</field>
       <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
     </rule>
+
+Cloud security monitoring
+-------------------------
+
+Wazuh helps monitoring Amazon Web Srvices and Microsoft Azure infrastructures.
+
+Amazon Web Services
+~~~~~~~~~~~~~~~~~~~
+
+Wazuh helps to increase the security of an AWS infrastructure in two different, complementary ways:
+
+- **Installing the Wazuh agent on the instances** to monitor the activity inside them. It collects different types of system and application data and forwards it to the Wazuh manager. Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages and scanning system configurations).
+- **Monitoring AWS services** to collect and analyze log data about the infrastructure. Thanks to the module for AWS, Wazuh can trigger alerts based on the events obtained from these services, which provide rich and complete information about the infrastructure, such as the instances configuration, unauthorized behavior, data stored on S3, and more.
+
+The next table contains the most relevant information about configuring each service in ``ossec.conf``:
+
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| **Service**                                      | **Configuration tag** | **Type**      | **Path to logs**                                                                            |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`CloudTrail <amazon_cloudtrail>`            | bucket                | cloudtrail    | <bucket_name>/<prefix>/AWSLogs/<account_id>/CloudTrail/<region>/<year>/<month>/<day>        |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`VPC <amazon_vpc>`                          | bucket                | vpcflow       | <bucket_name>/<prefix>/AWSLogs/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>       |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`Config <amazon_config>`                    | bucket                | config        | <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>            |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`KMS <amazon_kms>`                          | bucket                | custom        | <bucket_name>/<prefix>/<year>/<month>/<day>                                                 |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`Macie <amazon_macie>`                      | bucket                | custom        | <bucket_name>/<prefix>/<year>/<month>/<day>                                                 |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`Trusted Advisor <amazon_trusted_advisor>`  | bucket                | custom        | <bucket_name>/<prefix>/<year>/<month>/<day>                                                 |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`GuardDuty <amazon_guardduty>`              | bucket                | guardduty     | <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>                                            |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+| :ref:`Inspector <amazon_inspector>`              | service               | inspector     |                                                                                             |
++--------------------------------------------------+-----------------------+---------------+---------------------------------------------------------------------------------------------+
+
+Microsoft Azure
+~~~~~~~~~~~~~~~
 
