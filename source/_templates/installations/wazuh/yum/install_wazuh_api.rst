@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+      # curl -sL https://rpm.nodesource.com/setup_10.x | bash -
 
 #. Install NodeJS:
 
