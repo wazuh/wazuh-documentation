@@ -93,13 +93,13 @@ Upgrade Elasticsearch
 
       .. code-block:: console
 
-        # yum install elasticsearch-7.6.0
+        # yum install elasticsearch-7.6.1
 
     * Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.6.0
+        # apt-get install elasticsearch=7.6.1
         # systemctl restart elasticsearch
 
 #. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
@@ -183,13 +183,13 @@ Upgrade Filebeat
 
       .. code-block:: console
 
-        # yum install filebeat-7.6.0
+        # yum install filebeat-7.6.1
 
     * Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install filebeat=7.6.0
+        # apt-get install filebeat=7.6.1
 
 #. Update the configuration file.
 
@@ -243,13 +243,13 @@ Upgrade Kibana
 
       .. code-block:: console
 
-        # yum install kibana-7.6.0
+        # yum install kibana-7.6.1
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install kibana=7.6.0
+        # apt-get install kibana=7.6.1
 
 #. Install the Wazuh app.
 
@@ -258,14 +258,14 @@ Upgrade Kibana
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
+      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.1.zip
 
     * From the package:
 
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-3.11.4_7.6.0.zip
+      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-3.11.4_7.6.1.zip
 
 #. Restart Kibana.
 

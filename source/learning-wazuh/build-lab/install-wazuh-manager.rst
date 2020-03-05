@@ -135,7 +135,7 @@ and archived events to the Elasticsearch service.
 
   .. code-block:: console
 
-    # yum install filebeat-7.6.0
+    # yum install filebeat-7.6.1
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
