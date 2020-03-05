@@ -253,10 +253,19 @@ Upgrade Kibana
 
 #. Install the Wazuh app.
 
+    * From URL:
+
     .. code-block:: console
 
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
+
+    * From the package:
+
+    .. code-block:: console
+
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-3.11.4_7.6.0.zip
 
 #. Restart Kibana.
 
