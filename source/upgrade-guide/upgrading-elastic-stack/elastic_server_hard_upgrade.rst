@@ -248,11 +248,21 @@ Upgrade Kibana
 
 3. Upgrade the Wazuh app:
 
+  * Install from URL:
+
   .. code-block:: console
 
     # cd /usr/share/kibana/
     # rm -rf optimize/bundles
     # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_6.8.6.zip
+
+  * Install from the package:
+
+  .. code-block:: console
+
+    # cd /usr/share/kibana/
+    # rm -rf optimize/bundles
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install file:///path/wazuhapp-3.11.4_7.6.0.zip
 
   .. warning::
 
