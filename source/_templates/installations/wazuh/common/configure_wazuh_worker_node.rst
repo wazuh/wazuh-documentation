@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Configure the cluster mode editing the following settings in ``/var/ossec/etc/ossec.conf``:
+Configure the cluster node by editing the following settings in ``/var/ossec/etc/ossec.conf``:
 
 .. code-block:: xml
 
@@ -18,7 +18,16 @@ Configure the cluster mode editing the following settings in ``/var/ossec/etc/os
       <disabled>no</disabled>
   </cluster>
 
-As you can see in the previous example, you have to set the :ref:`node_type <cluster_node_type>` as ``worker``, give a name in :ref:`node_name <cluster_node_name>` (it has to be different in every node), the previously generated :ref:`key <cluster_key>` (it has to be the same for all nodes), the setting of the :ref:`nodes <cluster_nodes>` has to contain the master address (it can be either an IP or a DNS), and :ref:`disabled <cluster_disabled>` to ``no``.
+As shown in the above example example, the following parameters have to be amended:
 
+- :ref:`node_type <cluster_node_type>` has to be set as ``worker``,
+
+- :ref:`node_name <cluster_node_name>` has to be given (different in every node),
+
+- the previously generated :ref:`key <cluster_key>` has to be add (same for all nodes),
+
+- :ref:`nodes <cluster_nodes>` has to contain the address of the master (it can be either an IP or a DNS),
+
+- :ref:`disabled <cluster_disabled>` has to be set to ``no``.
 
 .. End of include file

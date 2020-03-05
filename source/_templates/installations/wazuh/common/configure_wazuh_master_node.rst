@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Configure the cluster mode editing the following settings in ``/var/ossec/etc/ossec.conf``:
+Configure the cluster node by editing the following settings in ``/var/ossec/etc/ossec.conf``:
 
 .. code-block:: xml
 
@@ -21,23 +21,23 @@ Configure the cluster mode editing the following settings in ``/var/ossec/etc/os
 The parameters:
 
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`name <cluster_name>`           | Name that we will assign to the cluster.                                                                                                                                           |
+|:ref:`name <cluster_name>`           | Name of the cluster.                                                                                                                                                               |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`node_name <cluster_node_name>` | Name of the current node.                                                                                                                                                          |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`key <cluster_key>`             | The key must be 32 characters long and should be the same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``|
+|:ref:`key <cluster_key>`             | The key must be 32 characters long and same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``              |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`node_type <cluster_node_type>` | Set the node type (master/worker).                                                                                                                                                 |
+|:ref:`node_type <cluster_node_type>` | Type of the node (master/worker).                                                                                                                                                  |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`port <cluster_port>`           | Destination port for cluster communication.                                                                                                                                        |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`bind_addr <cluster_bind_addr>` | This specifies which network IP the node will be bound to in order to listen for incoming requests. (0.0.0.0 for any IP).                                                          |
+|:ref:`bind_addr <cluster_bind_addr>` | Network IP to which the node will be bound to listen for incoming requests (0.0.0.0 for any IP).                                                                                   |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`nodes <cluster_nodes>`         | The address of the **master node** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.                                         |
+|:ref:`nodes <cluster_nodes>`         | The address of the **master node**. It must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.                                     |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`hidden <cluster_hidden>`       | Toggles whether showing or not information about the cluster that generated an alert.                                                                                              |
+|:ref:`hidden <cluster_hidden>`       | Shows or hides the cluster information in the generated alerts.                                                                                                                    |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`disabled <cluster_disabled>`   | Indicates whether the node will be enabled or not in the cluster.                                                                                                                  |
+|:ref:`disabled <cluster_disabled>`   | Indicates whether the node will be enabled or disabled in the cluster. This option must be enabled on the master node, otherwise, the workers cannot join the cluster.             |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. End of include file
