@@ -190,6 +190,8 @@ A good summary of file changes can be found in the FIM dashboard which provides 
    :align: center
    :width: 100%
 
+More information about how does Wazuh monitor file integrity can be found :ref:`here<manual_file_integrity>`.
+
 Rootkits detection
 ------------------
 
@@ -266,6 +268,8 @@ Below is an example of an alert generated when a hidden process is found. In thi
     "title": "Process '562' hidden from /proc."
   }
 
+More information about how does Wazuh detect rootkits can be found :ref:`here<learning_wazuh_hidden_processes>`.
+
 Active Response
 ---------------
 The Wazuh Active Response capability allows scripted actions to be taken in
@@ -312,22 +316,52 @@ SCA performs scans in order to discover exposures or misconfigurations in monito
 
 Policies for the SCA module are written in YAML format. This that was chosen due having human readability in mind, which allows users to quickly understand and write their own policies or extend the existing ones to fit their needs. Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well-established standard for host hardening.
 
-.. code-block:: yaml
-    :caption: Check the example
+Here is an example from policy ``cis_debian9_L2.yml``:
 
-    - id: 3064
-      title: "Ensure IPv6 default deny firewall policy"
-      description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected."
-      rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
-      remediation: "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
-      compliance:
-        - cis: ["3.5.2.1"]
-        - cis_csc: ["9.4"]
-      condition: all
-      rules:
-        - 'c:ip6tables -L -> r:^Chain INPUT && r:policy DROP'
-        - 'c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP'
-        - 'c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP'
+.. code-block:: yaml
+
+  - id: 3511
+    title: "Ensure auditd service is enabled"
+    description: "Turn on the auditd daemon to record system events."
+    rationale: "The capturing of system events provides system administrators [...]"
+    remediation: "Run the following command to enable auditd: # systemctl enable auditd"
+    compliance:
+      - cis: ["4.1.2"]
+      - cis_csc: ["6.2", "6.3"]
+    condition: all
+    rules:
+      - 'c:systemctl is-enabled auditd -> r:^enabled'
+
+After evaluating the aforementioned check, the following event is generated:
+
+.. code-block:: json
+  :class: output
+
+  {
+    "type": "check",
+    "id": 355612303,
+    "policy": "CIS benchmark for Debian/Linux 9 L2",
+    "policy_id": "cis_debian9_L2",
+    "check": {
+      "id": 3511,
+      "title": "Ensure auditd service is enabled",
+      "description": "Turn on the auditd daemon to record system events.",
+      "rationale": "The capturing of system events provides system administrators [...]",
+      "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+      "compliance": {
+        "cis": "4.1.2",
+        "cis_csc": "6.2,6.3"
+      },
+      "rules": [
+        "c:systemctl is-enabled auditd -> r:^enabled"
+      ],
+      "command": "systemctl is-enabled auditd",
+      "result": "passed"
+    }
+  }
+
+The ``result`` is ``passed`` because the rule found "enabled" at the beginning of a line in the output of
+command `systemctl is-enabled auditd`. More information about security configuration assessment can be found :ref:`here<manual_sec_config_assessment>`.  
 
 System inventory
 ----------------
@@ -366,7 +400,7 @@ When the alerts are triggered they will be displayed in Kibana this way:
 Cloud security monitoring
 -------------------------
 
-Wazuh helps monitoring Amazon Web Srvices and Microsoft Azure infrastructures.
+Wazuh helps monitoring Amazon Web Services and Microsoft Azure infrastructures.
 
 Amazon Web Services
 ~~~~~~~~~~~~~~~~~~~
@@ -401,11 +435,113 @@ The next table contains the most relevant information about configuring each ser
 Microsoft Azure
 ~~~~~~~~~~~~~~~
 
+The `Activity Log <https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-overview-activity-logs>`_ provides information on subscription level events that have occurred in Azure, with the following relevant information:
+
+- **Administrative Data:** Covers the logging of all creation, update, deletion and action operations performed through the Resource Manager. All actions performed by an user or application using the Resource Manager are interpreted as an operation on a specific resource type. Operations such as write, delete, or action involve logging both the start and the success or failure of that operation in the Administrative category. The Administrative category also includes any changes to the role-based access control of a subscription.
+
+- **Alert Data:** Contains the log of all activations of Azure alerts. For example we will be able to obtain an alert when the percentage of CPU usage of one of the virtual machines of the infrastructure exceeds a certain threshold. Azure provides the option to elaborate customized rules to receive notifications when an event coincides with the rule. When an alert is activated it is logged in the Activity Log.
+
+- **Security Data:** Here we contemplate the log of alerts generated by the Azure Security Center. For example, a log could be related to the execution of suspicious files.
+
+- **Service HealthData:** Covers the log of any service health incident that has occurred in Azure. There are five different types of health events: Action Required, Assisted Recovery, Incident, Maintenance, Information or Security, logged when a subscription resource is affected by the event.
+
+- **Autoscale Data:** Contains the logging of any event related to the autoscale engine based on the autoscale settings in your subscription. Autoscale start events and successful or failed events are logged in this category.
+
+- **Recomendation Data:** Includes Azure Advisor recommendation events.
+
+To monitor the activities of our infrastructure we can use the **Azure Log Analytics REST API** or we can directly access the content of **Azure Storage** accounts. This section explains the two ways to proceed, looking at the steps to follow in the Microsoft Azure portal and using the `azure-logs` module on the Wazuh manager.
+
+Here is an example of rules for alerts generation:
+
+.. code-block:: xml
+
+    <rule id="87801" level="5">
+        <decoded_as>json</decoded_as>
+        <field name="azure_tag">azure-log-analytics</field>
+        <description>Azure: Log analytics</description>
+    </rule>
+
+    <rule id="87810" level="3">
+        <if_sid>87801</if_sid>
+        <field name="Type">AzureActivity</field>
+        <description>Azure: Log analytics activity</description>
+    </rule>
+
+    <rule id="87811" level="3">
+        <if_sid>87810</if_sid>
+        <field name="OperationName">\.+</field>
+        <description>Azure: Log analytics: $(OperationName)</description>
+    </rule>
+
+More information about how to use Wazuh to monitor Microsoft Azure can be found :ref:`here<azure>`.
+
 Containers security monitoring
 ------------------------------
 
 Docker
 ~~~~~~
 
-Kubernetes
-~~~~~~~~~~
+All the features available in an agent can be useful to monitor Docker server. The :ref:`Docker wodle <wodle_docker>` collects events on Docker containers such as starting, stopping or pausing.
+
+In order to use the Docker listener module it is only necessary to enable the ``wodle`` in the ``/var/ossec/etc/ossec.conf`` file of the server running docker, or this can also be done through :ref:`here<reference_agent_conf>`. It will start a new thread to listen to Docker events.  
+
+.. code-block:: xml
+
+    <wodle name="docker-listener">
+        <disabled>no</disabled>
+    </wodle>
+
+For example, the command ``docker start apache``, which start a container called `apache`, generates the following alert:
+
+.. code-block:: json
+    :class: output
+
+    {
+    "timestamp": "2018-10-05T17:15:33.892+0200",
+    "rule": {
+        "level": 3,
+        "description": "Container apache started",
+        "id": "87903",
+        "mail": false,
+        "groups": [
+        "docker"
+        ]
+    },
+    "agent": {
+        "id": "002",
+        "name": "agent001",
+        "ip": "192.168.122.19"
+    },
+    "manager": {
+        "name": "localhost.localdomain"
+    },
+    "id": "1538752533.76076",
+    "cluster": {
+        "name": "wazuh",
+        "node": "master"
+    },
+    "full_log": "{\"integration\": \"docker\", \"docker\": {\"status\": \"start\", \"id\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"from\": \"httpd\", \"Type\": \"container\", \"Action\": \"start\", \"Actor\": {\"ID\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"Attributes\": {\"image\": \"httpd\", \"name\": \"apache\"}}, \"time\": 1538752533, \"timeNano\": 1538752533877226210}}",
+    "decoder": {
+        "name": "json"
+    },
+    "data": {
+        "integration": "docker",
+        "docker": {
+        "status": "start",
+        "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+        "from": "httpd",
+        "Type": "container",
+        "Action": "start",
+        "Actor": {
+            "ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+            "Attributes": {
+            "image": "httpd",
+            "name": "apache"
+            }
+        },
+        "time": "1538752533",
+        "timeNano": "1538752533877226240.000000"
+        }
+    },
+    "location": "Wazuh-Docker"
+    }
