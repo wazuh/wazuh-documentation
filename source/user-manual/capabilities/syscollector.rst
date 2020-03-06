@@ -368,7 +368,7 @@ List the current processes running in a system host.
 Windows updates
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.4
+.. versionadded:: 3.11.0
 
 List the Windows updates installed on Windows agents, also known as hotfixes. They are used as feed for the Vulnerability detector to find out Windows vulnerabilities.
 
