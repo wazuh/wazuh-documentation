@@ -477,6 +477,66 @@ Here is an example of rules for alerts generation:
         <description>Azure: Log analytics: $(OperationName)</description>
     </rule>
 
+And here is the output: 
+
+.. code-block:: json
+  :class: output
+
+    {
+        "timestamp": "2020-03-06T09:06:51.432+0000",
+        "rule": {
+        "level": 3,
+        "description": "Azure: Log analytics: Microsoft.Compute/virtualMachines/start/action",
+        "id": "62723",
+        "firedtimes": 1,
+        "mail": false,
+        "groups": [
+            "azure"
+        ]
+        },
+        "agent": {
+        "id": "000",
+        "name": "wazuh-manager-master-0"
+        },
+        "manager": {
+        "name": "wazuh-manager-master-0"
+        },
+        "id": "1582685611.529",
+        "cluster": {
+        "name": "wazuh",
+        "node": "wazuh-manager-master-0"
+        },
+        "decoder": {
+        "name": "json"
+        },
+        "data": {
+        "Category": "Administrative",
+        "ResourceProvider": "Microsoft.Compute",
+        "TenantId": "d4cd75e6-7i2e-554d-b604-3811e9914fea",
+        "ActivityStatus": "Started",
+        "Type": "AzureActivity",
+        "Authorization": "{\r\n  \"action\": \"Microsoft.Compute/virtualMachines/start/action\",\r\n  \"scope\": \"/subscriptions/v1153d2d-ugl4-4221-bc88-40365el115gg/resourceGroups/WazuhGroup/providers/Microsoft.Compute/virtualMachines/Logstash\"\r\n}",
+        "OperationId": "d4elf2e7-65d8-2824-gf44-37742d81c00f",
+        "azure_tag": "azure-log-analytics",
+        "ResourceId": "/subscriptions/v1153d2d-ugl4-4221-bc88-40365el115gg/resourceGroups/WazuhGroup/providers/Microsoft.Compute/virtualMachines/Logstash",
+        "OperationName": "Microsoft.Compute/virtualMachines/start/action",
+        "CorrelationId": "d4elf2e7-65d8-2824-gf44-37742d81c00f",
+        "HTTPRequest": "{\r\n  \"clientRequestId\": \"dc562c26-c1r2-5fac-94c2-824h208n2024\",\r\n  \"clientIpAddress\": \"83.49.98.225\",\r\n  \"method\": \"POST\"\r\n}",
+        "log_analytics_tag": "azure-activity",
+        "Resource": "Logstash",
+        "Level": "Informational",
+        "Caller": "user.email@email.com",
+        "TimeGenerated": "2018-05-25T15:43:16.52Z",
+        "ResourceGroup": "WazuhGroup",
+        "SubscriptionId": "v1153d2d-ugl4-4221-bc88-40365el115gg",
+        "EventSubmissionTimestamp": "2018-05-25T15:43:36.109Z",
+        "CallerIpAddress": "83.49.98.225",
+        "EventDataId": "69db115c-45ds-664b-4275-a684a72b8df2",
+        "SourceSystem": "Azure"
+        },
+        "location": "/azure.json"
+    }
+
 More information about how to use Wazuh to monitor Microsoft Azure can be found :ref:`here<azure>`.
 
 Containers security monitoring
