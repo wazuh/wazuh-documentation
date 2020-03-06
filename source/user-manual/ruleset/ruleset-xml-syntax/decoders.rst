@@ -25,10 +25,10 @@ There are many options to configure in decoders:
 | `program_name`_   | Any program name                                              | It defines the name of the program associated with the decoder.                                 |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `prematch`_       | Any String or `Regular Expression                             | It will look for a match in the log, in case it does, the decoder will be used.                 |
-|                   | <regex.html#os-regex-or-regex-syntax>`_                       |                                                                                                 |
+|                   | <regex.html#regex-os-regex-syntax>`_                          |                                                                                                 |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `regex`_          | Any `Regular Expression                                       | The decoder will use this option to find fields of interest and extract them.                   |
-|                   | <regex.html#os-regex-or-regex-syntax>`_                       |                                                                                                 |
+|                   | <regex.html#regex-os-regex-syntax>`_                          |                                                                                                 |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `order`_          | See `order table <decoders.html#order>`_                      | The values that `regex`_ will extract, will be stored in these groups.                          |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
@@ -154,7 +154,7 @@ It defines the name of the program which the decoder is associated with. The pro
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_       |
 +--------------------+--------------------------------------------------------------------+
 
 Example:
@@ -176,7 +176,7 @@ It attempts to find a match within the log for the string defined. It is used as
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_      |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
 +--------------------+--------------------------------------------------------------------+
 
 The attribute below is optional, it allows to discard some of the content of the entry.
@@ -205,7 +205,7 @@ An example is this regex that matches any numeral:
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_      |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
 +--------------------+--------------------------------------------------------------------+
 
 The attribute below is optional, it allows to discard some of the content of the entry.
