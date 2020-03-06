@@ -70,7 +70,7 @@ Using the Kibana Wazuh plugin
           </rule>
         </group>
 
-Notice how the web interface will automatically display an error if the xml syntax is not completly correct.
+Notice how the web interface will automatically display an error if the xml syntax is not completely correct.
 
 6. Press **Save file**, confirm and then click on **Restart now**.
 

@@ -53,7 +53,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
         # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.11.4/extensions/splunk/peer-indexes.conf
 
-    b) Create ``ìnputs.conf``:
+    b) Create ``inputs.conf``:
 
       .. code-block:: console
 

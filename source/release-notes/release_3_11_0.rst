@@ -35,7 +35,7 @@ Wazuh core
 
 **Analysis engine**
 
-- Frequency based rules aggregate the counter for the same event source by default. Introduced a new setting to toggle this behaviour: ``global_frequency``.
+- Frequency based rules aggregate the counter for the same event source by default. Introduced a new setting to toggle this behavior: ``global_frequency``.
 - Fields ``protocol``, ``system_name``, ``data`` and ``extra_data`` can now be used for event matching in rules creation.
 - The ``ossec-makelist`` binary has been deprecated. The ``Analysisd`` daemon will compile the CDB lists on the startup.
 

@@ -51,7 +51,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
     will not be overwritten.
     The settings in **local_internal_options.conf** always take precedence over the
     settings in **internal_options.conf,** so editing the **local_internal_options.conf** file will ensure your
-    changes will not be overriden.
+    changes will not be overridden.
 
 5. Install certain packages required for building the rootkit:
 
