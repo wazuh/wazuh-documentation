@@ -2,7 +2,7 @@
 
 .. _elastic_server_hard_upgrade:
 
-Upgrading Elastic Stack from 6.x to 6.8
+Upgrading Elastic Stack from 6.x to 6.x
 =======================================
 
 Prepare the Elastic Stack
@@ -15,6 +15,27 @@ Prepare the Elastic Stack
     # systemctl stop logstash
     # systemctl stop filebeat
     # systemctl stop kibana
+
+2. In case of having disabled the repository for Elastic Stack 6.x it can be enabled using:
+
+  * For CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
+
+  * For Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-6.x.list
+      # apt-get update
+
+  * For openSUSE:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
 
 Upgrade Elasticsearch
 ---------------------
@@ -49,13 +70,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.8.6
+      # yum install elasticsearch-6.x.6
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch=6.8.6
+      # apt-get install elasticsearch=6.x.6
       # systemctl restart elasticsearch
 
 5. Restart the service.
@@ -105,13 +126,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.8.6
+    # yum install logstash-6.x.6
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.8.6-1
+    # apt-get install logstash=1:6.x.6-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -146,13 +167,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.8.6
+      # yum install filebeat-6.x.6
 
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.8.6
+      # apt-get install filebeat=6.x.6
 
 2. Update the configuration file.
 
@@ -181,13 +202,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.8.6
+    # yum install kibana-6.x.6
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.8.6
+    # apt-get install kibana=6.x.6
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -213,7 +234,7 @@ Upgrade Kibana
 
     # cd /usr/share/kibana/
     # rm -rf optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_6.8.6.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_6.x.6.zip
 
   * Install from the package:
 
@@ -248,7 +269,7 @@ Disabling repositories
 
       .. code-block:: console
 
-        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
         # apt-get update
 
       Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
