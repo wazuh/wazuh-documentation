@@ -15,47 +15,26 @@ Prepare the Elastic Stack
       # systemctl stop filebeat
       # systemctl stop kibana
 
-#. Add the new repository for Elastic Stack 7.x:
+#. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
-    * For CentOS/RHEL/Fedora:
+  * For CentOS/RHEL/Fedora:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-        # cat > /etc/yum.repos.d/elastic.repo << EOF
-        [elasticsearch-7.x]
-        name=Elasticsearch repository for 7.x packages
-        baseurl=https://artifacts.elastic.co/packages/7.x/yum
-        gpgcheck=1
-        gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-        enabled=1
-        autorefresh=1
-        type=rpm-md
-        EOF
+      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-    * For Debian/Ubuntu:
+  * For Debian/Ubuntu:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-        # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+      # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
+      # apt-get update
 
-    * openSUSE:
+  * For openSUSE:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-        # cat > /etc/zypp/repos.d/elastic.repo << EOF
-        [elasticsearch-7.x]
-        name=Elasticsearch repository for 7.x packages
-        baseurl=https://artifacts.elastic.co/packages/7.x/yum
-        gpgcheck=1
-        gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-        enabled=1
-        autorefresh=1
-        type=rpm-md
-        EOF        
-
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo      
 
 Upgrade Elasticsearch
 ---------------------
