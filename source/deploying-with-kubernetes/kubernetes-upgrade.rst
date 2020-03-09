@@ -45,7 +45,7 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.11.3_7.5.2'
+      image: 'wazuh/wazuh:3.11.4_7.6.1'
 
 
 Apply the new configuration

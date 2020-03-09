@@ -49,7 +49,7 @@ This pod contains the master node of the Wazuh cluster. The master node centrali
 +--------------------------+-------------+
 | Image                    | Controller  |
 +==========================+=============+
-| wazuh/wazuh:3.11.3_7.5.2 | StatefulSet |
+| wazuh/wazuh:3.11.4_7.6.1 | StatefulSet |
 +--------------------------+-------------+
 
 **Wazuh worker 0 / 1**
@@ -59,7 +59,7 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 +--------------------------+-------------+
 | Image                    | Controller  |
 +==========================+=============+
-| wazuh/wazuh:3.11.3_7.5.2 | StatefulSet |
+| wazuh/wazuh:3.11.4_7.6.1 | StatefulSet |
 +--------------------------+-------------+
 
 **Elasticsearch**
@@ -69,7 +69,7 @@ Elasticsearch pod, it ingests events received from Logstash.
 +----------------------------------------+-------------+
 | Image                                  | Controller  |
 +========================================+=============+
-| wazuh/wazuh-elasticsearch:3.11.3_7.5.2 | StatefulSet |
+| wazuh/wazuh-elasticsearch:3.11.4_7.6.1 | StatefulSet |
 +----------------------------------------+-------------+
 
 **Logstash**
@@ -79,7 +79,7 @@ Logstash pod, it's listening to events from the Filebeat instances that are inst
 +-----------------------------------+-------------+
 | Image                             | Controller  |
 +===================================+=============+
-| wazuh/wazuh-logstash:3.11.3_7.5.2 | Deployment  |
+| wazuh/wazuh-logstash:3.11.4_7.6.1 | Deployment  |
 +-----------------------------------+-------------+
 
 **Kibana**
@@ -89,7 +89,7 @@ Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 +---------------------------------+-------------+
 | Image                           | Controller  |
 +=================================+=============+
-| wazuh/wazuh-kibana:3.11.3_7.5.2 | Deployment  |
+| wazuh/wazuh-kibana:3.11.4_7.6.1 | Deployment  |
 +---------------------------------+-------------+
 
 **Nginx**
@@ -99,7 +99,7 @@ Nginx service used as a reverse proxy for Kibana.
 +---------------------------------+-------------+
 | Image                           | Controller  |
 +=================================+=============+
-| wazuh/wazuh-nginx:3.11.3_7.5.2  | Deployment  |
+| wazuh/wazuh-nginx:3.11.4_7.6.1  | Deployment  |
 +---------------------------------+-------------+
 
 Services
