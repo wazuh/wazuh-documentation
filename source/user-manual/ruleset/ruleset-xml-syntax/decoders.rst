@@ -208,7 +208,9 @@ An example is this regex that matches any numeral:
 | **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
 +--------------------+--------------------------------------------------------------------+
 
-The attribute below is optional, it allows to discard some of the content of the entry.
+When using the ``regex`` label it is mandatory to define an ``order`` label as well. Besides, ``regex`` label requires a ``prematch`` or a ``program_name`` label defined on the same decoder or a ``parent`` with a ``prematch`` or a ``program_name defined`` label defined on it.
+
+The attribute below is optional. It allows to discard some of the content of the entry.
 
 +--------------------+--------------------+
 | Attribute          | Value              |
@@ -240,7 +242,7 @@ Show when a user executed the sudo command for the first time:
 order
 ^^^^^^
 
-It defines what the parenthesis groups contain and the order in which they were received.
+It defines what the parenthesis groups contain and the order in which they were received. It requires a ``regex`` label defined on the same decoder.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
