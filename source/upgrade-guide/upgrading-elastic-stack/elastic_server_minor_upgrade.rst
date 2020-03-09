@@ -27,7 +27,7 @@ Prepare the Elastic Stack
 
     .. code-block:: console
 
-      # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-6.x.list
+      # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
       # apt-get update
 
   * For openSUSE:
