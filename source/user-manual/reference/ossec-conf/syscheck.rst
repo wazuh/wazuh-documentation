@@ -50,6 +50,8 @@ Drive letters without directories are not valid. At a minimum the '.' should be 
 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
+Note: The length of a directory must be less than 64.
+
 +--------------------+------------------------------------+
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
