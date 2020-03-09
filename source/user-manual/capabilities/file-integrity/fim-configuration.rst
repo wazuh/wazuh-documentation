@@ -74,6 +74,10 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
     <directories check_all="yes" whodata="yes">/etc</directories>
   </syscheck>
 
+
+.. warning:: There is a known bug that affects to some versions of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the source directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
+
+
 .. _how_to_fim_report_changes:
 
 Configure to report changes
