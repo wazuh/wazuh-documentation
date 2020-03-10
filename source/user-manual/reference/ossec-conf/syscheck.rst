@@ -50,7 +50,7 @@ Drive letters without directories are not valid. At a minimum the '.' should be 
 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
-The length of a directory must be less than 64.
+There exists a limit in the number of directories that can be written in one line separated by commas, this is limited to 64 directories.
 
 +--------------------+------------------------------------+
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
