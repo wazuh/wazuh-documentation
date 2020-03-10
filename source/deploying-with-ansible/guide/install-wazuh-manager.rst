@@ -216,8 +216,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	PLAY RECAP ***********************************************************************************************************************************************
 	192.168.0.180              : ok=36   changed=19   unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
-
 
 We can check the status of our new services in our Wazuh server.
 
@@ -249,7 +247,8 @@ We can check the status of our new services in our Wazuh server.
 
 - Filebeat.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	[root@localhost centos]# systemctl status filebeat
 

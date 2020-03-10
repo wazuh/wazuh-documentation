@@ -97,6 +97,9 @@ Deploying a Wazuh cluster
         .. code-block:: none
             :class: output
 
+        .. code-block:: none
+            :class: output
+
             NAME           TYPE    VERSION  ADDRESS
             master-node    master  3.12.0   wazuh-master
             worker01-node  worker  3.12.0   172.22.0.3

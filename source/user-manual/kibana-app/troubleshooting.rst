@@ -34,6 +34,9 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 .. code-block:: json
   :class: output
 
+.. code-block:: json
+  :class: output
+
   {"acknowledged":true}
 
 .. warning::

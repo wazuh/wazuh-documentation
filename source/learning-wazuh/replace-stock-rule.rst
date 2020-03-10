@@ -127,7 +127,8 @@ Using the Command Line Interface
 
 8. Run ``ossec-logtest`` to test your customized rule and paste in this event that should trigger it:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         Oct 23 17:27:17 agent sshd[8221]: Failed password for root from ::1 port 60164 ssh2
 

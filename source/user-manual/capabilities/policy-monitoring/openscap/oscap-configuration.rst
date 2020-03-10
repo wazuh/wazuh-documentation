@@ -254,7 +254,9 @@ We can limit the evaluation to only specific profiles of a policy:
 Using CPE dictionary
 ------------------------------------------------------------------
 
-You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms. ::
+You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms.
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 
