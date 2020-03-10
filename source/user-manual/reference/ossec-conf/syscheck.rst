@@ -746,8 +746,7 @@ Specifies the queue size of the manager synchronization responses.
 | **Allowed values** | Integer number between 2 and 1000000. |
 +--------------------+---------------------------------------+
 
-max_eps
-^^^^^^^
+**max_eps**
 
 .. versionadded:: 3.12.0
 
