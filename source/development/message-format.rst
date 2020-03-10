@@ -29,7 +29,8 @@ Input logs are messages ingested by Logcollector. They can be in Syslog format o
 Syslog message
 ~~~~~~~~~~~~~~
 
-::
+.. code-block:: none
+    :class: output
 
     Nov  9 16:06:26 localhost salute: Hello world.
 
@@ -85,7 +86,8 @@ Queue
 
 Example:
 
-::
+.. code-block:: none
+    :class: output
 
     1:/var/log/syslog:Nov  9 16:06:26 localhost salute: Hello world.
 

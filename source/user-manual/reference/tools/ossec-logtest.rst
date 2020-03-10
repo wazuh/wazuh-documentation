@@ -43,7 +43,7 @@ The ossec-logtest program is a useful tool when working with Wazuh rules.  This 
 
 .. note::
 
-  - U ossec-logtest code requires access to all ossec configuration files.
+    -U ossec-logtest code requires access to all ossec configuration files.
 
 .. note::
 

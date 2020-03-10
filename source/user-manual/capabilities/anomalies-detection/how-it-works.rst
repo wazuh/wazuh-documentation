@@ -15,7 +15,10 @@ File integrity monitoring
 ----------------------------
 Malware can replace files, directories and commands on it's host system.  Performing file integrity checks on the main directories of a system allows for the detection of these actions. More information :ref:`File Integrity Monitoring Section <manual_file_integrity>`
 
-Example::
+Example:
+
+.. code-block:: none
+	:class: output
 
 	** Alert 1460948255.25442: mail  - ossec,syscheck,pci_dss_11.5,
 	2016 Apr 17 19:57:35 (ubuntu) 10.0.0.144->syscheck
@@ -33,7 +36,10 @@ A malicious process can prevent itself from being seen in a system's list of pro
 
 Example:
 
-Diamorphine is a kernel-mode rootkit that is able to hide itself and other processes from `ps`. If we install this package and hide a process, we will get an alert like this::
+Diamorphine is a kernel-mode rootkit that is able to hide itself and other processes from `ps`. If we install this package and hide a process, we will get an alert like this:
+
+.. code-block:: none
+  :class: output
 
   ** Alert 1460225922.841535: mail  - ossec,rootcheck
   2017 Feb 15 10:00:42 (localhost) 192.168.1.240->rootcheck
@@ -54,12 +60,25 @@ Check hidden files using system calls
 
 Wazuh scans the entire system comparing the differences between the *stat size* and the file size when using the *fopen* + *read* calls. The number of nodes in each directory is also compared with the output of *opendir* + *readdir*. If any results do not match, malware may be present.
 
-Alert Example::
+Alert Example:
+
+.. code-block:: none
+  :class: output
 
   ** Alert 1460225922.51190: mail  - ossec,rootcheck
   2017 Feb 15 10:30:42 (localhost) 192.168.1.240->rootcheck
   Rule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'
   Files hidden inside directory '/etc'. Link count does not match number of files (128,129)
+
+
+The directories monitored are:
+
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Unix**    | ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/lib``, ``/etc``, ``/root``, ``/var/log``, ``/var/mail``, ``/var/lib``, ``/var/www``, ``/usr/lib``, ``/usr/include``, ``/tmp``, ``/boot``, ``/usr/local``, ``/var/tmp`` and ``/sys`` |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Windows** | ``C:\WINDOWS`` and ``C:\Program Files``                                                                                                                                                                                                            |
++-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 Scan the */dev* directory
 -------------------------
@@ -67,7 +86,10 @@ The */dev* directory should only contain device-specific files. Any additional f
 
 Example:
 
-  If you create a hidden file on ``/dev``, Wazuh should alert because there is a hidden file in a directory that should only contain device-specific files. The following is the alert generated in that case::
+  If you create a hidden file on ``/dev``, Wazuh should alert because there is a hidden file in a directory that should only contain device-specific files. The following is the alert generated in that case:
+
+  .. code-block:: none
+    :class: output
 
     ** Alert 1487182293.37491: - ossec,rootcheck,
     2017 Feb 15 10:11:33 localhost->rootcheck

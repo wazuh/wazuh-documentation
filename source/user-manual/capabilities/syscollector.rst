@@ -15,6 +15,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Packages`_
     - `Ports`_
     - `Processes`_
+    - `Windows updates`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
     - `New searchable fields for Kibana`_
@@ -30,12 +31,12 @@ Once the agent starts, `Syscollector` runs periodically scans of defined targets
 The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
 with this feature the API can be directly queried about the different scans being able to filter by any desired field.
 
-In addition, the packages inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection>`.
+In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
 Available scans
 ---------------
 
-The collected information from Wazuh agents is stored in different SQLite tables. Here the content of each available table is described .
+The collected information from Wazuh agents is stored in different SQLite tables. Here the content of each available table is described.
 
 At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD. See the `compatibility matrix`_ for more information.
 
@@ -101,6 +102,8 @@ Retrieve basic information about the operating system.
 | **os_minor**     | Minor release version   | 04                                                  | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | **os_build**     | Optional build-specific | 14393                                               | Windows           |
++------------------+-------------------------+-----------------------------------------------------+-------------------+
+| **os_release**   | Windows Release ID      | SP2                                                 | Windows           |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | **os_platform**  | OS platform             | ubuntu                                              | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
@@ -360,26 +363,45 @@ List the current processes running in a system host.
 | **processor**   | Number of the processor                | 0                                                 | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 
+.. _syscollector_hotfixes:
+
+Windows updates
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.11.0
+
+List the Windows updates installed on Windows agents, also known as hotfixes. They are used as feed for the Vulnerability detector to find out Windows vulnerabilities.
+
++------------------+----------------------------------------+--------------------------------+-------------------+
+| Field            | Description                            | Example                        | Available         |
++==================+========================================+================================+===================+
+| **scan_id**      | Scan identifier                        | 1618114744                     | Windows           |
++------------------+----------------------------------------+--------------------------------+-------------------+
+| **scan_time**    | Scan date                              | 2019/08/22 07:27:15            | Windows           |
++------------------+----------------------------------------+--------------------------------+-------------------+
+| **hotfix**       | Windows update ID                      | KB4489899                      | Windows           |
++------------------+----------------------------------------+--------------------------------+-------------------+
+
 Compatibility matrix
 --------------------
 
 The following table shows the operating systems that this module currently supports.
 
-+------------------------+----------------------------------------------------------------------+
-|                        |                      **Syscollector scan**                           |
-+  **Operating System**  +-----------+-----------+-----------+----------+-----------+-----------+
-|                        |  Hardware |    OS     |  Packages |  Network |   Ports   | Processes |
-+------------------------+-----------+-----------+-----------+----------+-----------+-----------+
-|    Windows             |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |
-+------------------------+-----------+-----------+-----------+----------+-----------+-----------+
-|    Linux               |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |
-+------------------------+-----------+-----------+-----------+----------+-----------+-----------+
-|    macOS               |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |
-+------------------------+-----------+-----------+-----------+----------+-----------+-----------+
-|    FreeBSD             |     ✓     |     ✓     |     ✓     |     ✓    |     ✗     |     ✗     |
-+------------------------+-----------+-----------+-----------+----------+-----------+-----------+
-|    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |
-+------------------------+-----------+-----------+-----------+----------+-----------+-----------+
++------------------------+----------------------------------------------------------------------------------+
+|                        |                      **Syscollector scan**                                       |
++  **Operating System**  +-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|                        |  Hardware |    OS     |  Packages |  Network |   Ports   | Processes |  Hotfixes |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    Windows             |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |     ✓     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    Linux               |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |     ✗     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    macOS               |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |     ✗     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    FreeBSD             |     ✓     |     ✓     |     ✓     |     ✓    |     ✗     |     ✗     |     ✗     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |     ✗     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
 
 Using Syscollector information to trigger alerts
 ------------------------------------------------
@@ -422,7 +444,7 @@ In Elasticsearch the fields will be saved as ``data.type.value``. For example, f
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version              | data.os.codename                 |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  | 
+| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location | data.program.name                |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
@@ -431,6 +453,8 @@ In Elasticsearch the fields will be saved as ``data.type.value``. For example, f
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Network**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
 |                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac           |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Hotfix**           | hotfix                                                                                                               | data.hotfix                      |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
 Use case: Visualize system inventory in the Wazuh app
@@ -463,10 +487,22 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # sqlite3 /var/ossec/queue/db/003.db
+
+.. code-block:: none
+  :class: output
+
   SQLite version 3.7.17 2013-05-20 00:56:22
   Enter ".help" for instructions
   Enter SQL statements terminated with a ";"
+  sqlite>
+
+.. code-block:: console
+
   sqlite> select * from sys_programs where name="wazuh-agent";
+
+.. code-block:: none
+  :class: output
+
   696614220|2018/08/06 02:07:30|deb|wazuh-agent|extra|admin|105546|Wazuh, Inc <support@wazuh.com>||3.5.0-1|amd64|||Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring||0
 
 - By querying the API, which retrieves nested data in JSON format.
@@ -474,6 +510,10 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+
+.. code-block:: json
+  :class: output
+
   {
    "error": 0,
    "data": {
