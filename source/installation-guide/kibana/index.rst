@@ -8,9 +8,9 @@
 Kibana
 ======
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Elastic Kibana site <https://www.elastic.co/products/kibana>`_.
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More information can be found at `Elastic Kibana site <https://www.elastic.co/products/kibana>`_.
 
-Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same Elasticsearch server or not.
+Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,7 +66,7 @@ Kibana installation and configuration
             .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
-#. The next step may vary depending on whether Kibana will be installed in the same Elasticsearch server or in a different one. It consists on certificate placement:
+#. The next step may vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one. It consists on certificate placement:
 
 
     .. tabs::
@@ -104,7 +104,7 @@ Kibana installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
-    On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding in browser's settings the ``ca.crt`` previously created.
+    The first time you use a browser to access Kibana, the browser will show a warning message stating that the certificate was not issued by a trusted authority. This can be accepted either by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
@@ -112,4 +112,4 @@ Kibana installation and configuration
 Next steps
 ----------
 
-Once the Wazuh - Elastic Stack environment is ready, it's necessary to install a Wazuh agent in every server, endpoint, etc. to be monitored. The Wazuh installation guide is available in most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, you may install a Wazuh agent in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.

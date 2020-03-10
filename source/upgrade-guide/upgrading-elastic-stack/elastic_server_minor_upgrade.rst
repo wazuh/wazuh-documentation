@@ -15,7 +15,7 @@ Prepare the Elastic Stack
       # systemctl stop filebeat
       # systemctl stop kibana
 
-#. Add the new repository for Elastic Stack 7.x:
+#. In case of having disabled the repository for Elastic Stack it must be added again:
 
     * For CentOS/RHEL/Fedora:
 
