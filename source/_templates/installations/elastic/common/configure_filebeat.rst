@@ -18,11 +18,9 @@
 
     .. code-block:: yaml
 
-      output.elasticsearch.hosts: ["<elasticsearch_ip_node_1>:9200", "<elasticsearch_ip_node_2>:9200", "<elasticsearch_ip_node_3>:9200"]
+      output.elasticsearch.hosts: <elasticsearch_ip_node_1>:9200,<elasticsearch_ip_node_2>:9200,<elasticsearch_ip_node_3>:9200
       output.elasticsearch.password: <elasticsearch_password>
 
     Replace ``elasticsearch_ip_node_x`` with the IP address or the hostname of the Elasticsearch server to connect to and ``elasticsearch_password`` with the previously generated password for ``elastic`` user.
-
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 .. End of include file
