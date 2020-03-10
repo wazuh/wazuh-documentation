@@ -166,7 +166,7 @@ Upgrade Kibana
 --------------
 
 .. warning::
-  For updates from Wazuh 3.11.x to 3.11.y (regardless of the version of the Elastic Stack) it is recommended to make a backup of the Wazuh app configuration file in order not to lose the modified parameters or the configured APIs.
+  For updates from Wazuh 3.12.x to 3.12.y (regardless of the version of the Elastic Stack) it is recommended to make a backup of the Wazuh app configuration file in order not to lose the modified parameters or the configured APIs.
 
 #. Make a backup of the configuration file.
 
