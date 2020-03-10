@@ -51,7 +51,8 @@ How it works
 
 To understand the inner workings of a decoder, it will be easier through examples like the following:
 
-::
+.. code-block:: none
+  :class: output
 
   Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
 
