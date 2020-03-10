@@ -230,16 +230,16 @@ Wazuh ruleset
 
 - Added new options ``<same_field>`` and ``<not_same_field>`` to correlate dynamic fields in rules.
 
-.. code-block:: xml
+    .. code-block:: xml
 
-    <rule id="100002" level="7" frequency="3" timeframe="300">
-        <if_matched_sid>100001</if_matched_sid>
-        <same_field>netinfo.iface.name</same_field>
-        <same_field>netinfo.iface.mac</same_field>
-        <not_same_field>netinfo.iface.rx_bytes</not_same_field>
-        <options>no_full_log</options>
-        <description>Testing options for correlating repeated fields</description>
-    </rule>
+        <rule id="100002" level="7" frequency="3" timeframe="300">
+            <if_matched_sid>100001</if_matched_sid>
+            <same_field>netinfo.iface.name</same_field>
+            <same_field>netinfo.iface.mac</same_field>
+            <not_same_field>netinfo.iface.rx_bytes</not_same_field>
+            <options>no_full_log</options>
+            <description>Testing options for correlating repeated fields</description>
+        </rule>
 
 - Improved rules for Docker to prevent the activation of certain rules that should not be activated.
 - Modified the structure and the names for Windows EventChannel fields in all the related rules.

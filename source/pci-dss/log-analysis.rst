@@ -75,7 +75,14 @@ In this scenario, we try to open the file ``cardholder_data.txt``. Since our cur
     drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 centos
     drwxr-x---  2 root  root  33 Jan  5 18:32 credit_cards
     drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 user_data
+
+.. code-block:: console
+
     [agent@centos ~]# cat credit_cards/cardholder_data.txt
+
+.. code-block:: none
+    :class: output
+
     Number: 0000-0000-0000-0000
     Holder: Mr. John Smith
 

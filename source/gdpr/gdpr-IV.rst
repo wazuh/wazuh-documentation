@@ -262,7 +262,7 @@ Chapter IV, Article 35, Head 1
 
 Implement appropriate technical measures to safeguard the rights and freedoms of data subjects, informed by an assessment of the risks to these rights and freedoms.
 
-Wazuh has security measures in place to safeguard personal data, as well as the ability to support risk assessment by categorizing Syschek alerts for certain files. For example, you can add the alert level of an event to support a risk assessment.
+Wazuh has security measures in place to safeguard personal data, as well as the ability to support risk assessment by categorizing Syscheck alerts for certain files. For example, you can add the alert level of an event to support a risk assessment.
 
 Use cases
 ^^^^^^^^^

@@ -39,12 +39,12 @@ Check the processes that have a deleted executable.
 
     SELECT * FROM processes WHERE on_disk = 0;
 
-A complete list of all the available tables can be found `here <https://osquery.io/schema/>`_.
+A complete list of all the available tables can be found `here <https://osquery.io/schema/current/>`_.
 
 Configuration
 -------------
 
-You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/>`_ for details.
+You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/4.1.2>`_ for details.
 
 Red Hat, CentOS and Fedora:
 
