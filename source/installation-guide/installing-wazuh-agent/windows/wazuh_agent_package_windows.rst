@@ -7,7 +7,7 @@ Windows from package
 
 .. note:: You will need administrator privileges to perform this installation.
 
-The first step to install the Wazuh agent on a Windows machine is to download the `Windows installer <https://packages.wazuh.com/3.x/windows/wazuh-agent-3.11.4-1.msi>`_ from the :ref:`packages list<packages>`. Once this is downloaded, you can install it using the command line or following the GUI steps:
+The first step to install the Wazuh agent on a Windows machine is to download the `Windows installer <https://packages.wazuh.com/3.x/windows/wazuh-agent-3.12.0-1.msi>`_ from the :ref:`packages list<packages>`. Once this is downloaded, you can install it using the command line or following the GUI steps:
 
   a) Using the command line, you can choose installation or deployment:
 
@@ -17,11 +17,11 @@ The first step to install the Wazuh agent on a Windows machine is to download th
 
       * Using CMD: ::
 
-	  wazuh-agent-3.11.4-1.msi /q
+	  wazuh-agent-3.12.0-1.msi /q
 
       * Using PowerShell: ::
 
-	  .\wazuh-agent-3.11.4-1.msi /q
+	  .\wazuh-agent-3.12.0-1.msi /q
 
 
     * Deployment:
@@ -30,11 +30,11 @@ The first step to install the Wazuh agent on a Windows machine is to download th
 
 	* Using CMD: ::
 
-            wazuh-agent-3.11.4-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
+            wazuh-agent-3.12.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
 	* Using PowerShell: ::
 
-	    .\wazuh-agent-3.11.4-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
+	    .\wazuh-agent-3.12.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
     See the following document for additional automated deployment options: :ref:`deployment variables for Windows <deployment_variables_windows>`.
 
@@ -59,4 +59,4 @@ Uninstall
 
 To uninstall the agent, the original MSI file will be needed to perform the unattended process::
 
-    msiexec.exe /x wazuh-agent-3.11.4-1.msi /qn
+    msiexec.exe /x wazuh-agent-3.12.0-1.msi /qn
