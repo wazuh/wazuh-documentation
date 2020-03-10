@@ -46,9 +46,9 @@ We can check if the Audit rule for monitoring the selected folder is applied. To
 
 and check if the rule was added:
 
-.. code-block:: bash
+.. code-block:: console
 
-    -w /etc -p wa -k wazuh_fim
+    # auditctl -w /etc -p wa -k wazuh_fim
 
 When the agent is stopped, we can use the same command to check that the added rule was successfully removed.
 
