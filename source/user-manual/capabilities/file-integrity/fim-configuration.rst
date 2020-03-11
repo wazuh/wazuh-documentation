@@ -75,7 +75,7 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
   </syscheck>
 
 
-.. warning:: There is a known bug that affects to some versions of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
+.. warning:: There is a known bug that affects to the versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
 
 
 .. _how_to_fim_report_changes:
