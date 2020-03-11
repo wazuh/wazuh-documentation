@@ -166,7 +166,7 @@ We could configure these three files and execute them, but we are going to creat
 
 	- hosts: 192.168.0.108
 	  roles:
-	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
+	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
 	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
 As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry.

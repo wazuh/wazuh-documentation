@@ -741,8 +741,7 @@ $(function() {
     const ele = $(this);
     let data = $(ele).parent().find('.highlight').text();
     data = String(data);
-    data = data.replace(/(?:\$\s)/g, '');
-    data = data.replace(/(?:\#\s)/g, '');
+    data = filterCodeBlock(data, $(ele).parent());
     copyToClipboard(data);
     $(ele).addClass('copied');
     $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
@@ -756,6 +755,50 @@ $(function() {
       $(ele).focus();
     }, 1000);
   });
+
+  /**
+   * Filter the code block text that will be copied to the clipboard
+   * @param {string} data The string from the code block
+   * @param {Obj} parent jQuery object containing the parent element, which has the appropriate lexer class
+   * @return {string} filter code block text
+   */
+  function filterCodeBlock(data, parent) {
+    /* Remove elipsis */
+    data = data.replace(/(^|\n)\s*(\.\s{0,1}){3}\s*($|\n)/g, '\n');
+    /* Remove prompts with square brakets */
+    data = data.replace(/(.+]\$\s)/g, '');
+    data = data.replace(/(.+]\#\s)/g, '');
+    /* Remove especific prompts */
+    data = data.replace(/ansible@ansible:.+\$\s/g, '');
+    data = data.replace(/mysql>\s/g, '');
+    data = data.replace(/sqlite>\s/g, '');
+    data = data.replace(/Query\s.+\)\n/g, '');
+    /* Remove prompts with format user@domain in general */
+    data = data.replace(/.+@.+:.+(\#|\$)\s/g, '');
+    /* Remove prompts with the symbol > */
+    data = data.replace(/^>\s/g, '');
+    data = data.replace(/\n>\s/g, '\n');
+    /* Remove prompts with the symbol $ */
+    data = data.replace(/(?:\$\s)/g, '');
+    /* Remove additional line breaks */
+    data = data.replace(/\n{2,}$/g, '\n');
+    /* Remove prompts with the symbol # only when they cannot be considered comments */
+    if ( !parent.hasClass('highlight-yaml')
+      && !parent.hasClass('highlight-python')
+      && !parent.hasClass('highlight-powershell')
+      && !parent.is($('[class*="conf"]')) ) {
+      data = data.replace(/(?:\#\s)/g, '');
+    }
+    /* Filter only for commands (console or bash lexers) */
+    if ( parent.hasClass('highlight-console') || parent.hasClass('highlight-bash') ) {
+      /* Remove comment lines (starging with //) */
+      data = data.replace(/(^|\n)\/\/.+/g, '');
+      /* Remove additional line breaks in command lines to avoid accidental enter inputs */
+      data = data.replace(/\n{2,}/g, '\n');
+    }
+    data = data.trim();
+    return data;
+  }
 
   /**
    * Copy the data to clipboard

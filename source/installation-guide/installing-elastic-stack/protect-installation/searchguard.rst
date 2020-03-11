@@ -74,8 +74,8 @@ Currently, it's not supported to use X-Pack security at the same time. If your e
 For Elasticsearch you need to edit the file */etc/elasticsearch/elasticsearch.yml* in all your nodes and add the next line:
 
 .. code-block:: yaml
-    
-    xpack.security.enabled: false 
+
+    xpack.security.enabled: false
 
 Now restart Elasticsearch service:
 
@@ -163,17 +163,17 @@ You can check if it's working as expected using the next request (Search Guard n
 Setting up Search Guard roles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Search Guard works using core roles. Core roles are used by Search Guard user roles. Finally, user roles are used by Search Guard users. 
+Search Guard works using core roles. Core roles are used by Search Guard user roles. Finally, user roles are used by Search Guard users.
 
 - Roles file
     - */usr/share/elasticsearch/plugins/search-guard-7/sgconfig/sg_roles.yml*
     - Core roles used under the hood by Search Guard.
-- Role mapping 
+- Role mapping
     - */usr/share/elasticsearch/plugins/search-guard-7/sgconfig/sg_roles_mapping.yml*
     - Roles used by the Search Guard users. These roles can group multiple core roles.
 - Internal users
     - */usr/share/elasticsearch/plugins/search-guard-7/sgconfig/sg_internal_users.yml*
-    - These are the users that all the components will use. Each component uses a different user with its own roles. 
+    - These are the users that all the components will use. Each component uses a different user with its own roles.
 
 Creating new roles
 ^^^^^^^^^^^^^^^^^^
@@ -188,7 +188,7 @@ Creating new roles
 
 .. code-block:: none
 
-    # /usr/share/elasticsearch/plugins/search-guard-7/tools/sgadmin.sh \ 
+    # /usr/share/elasticsearch/plugins/search-guard-7/tools/sgadmin.sh \
     -cd /usr/share/elasticsearch/plugins/search-guard-7/sgconfig -cn <ELASTICSEARCH_CLUSTER_NAME> -key \
     /etc/elasticsearch/kirk-key.pem -cert /etc/elasticsearch/kirk.pem -cacert \
     /etc/elasticsearch/root-ca.pem -h <ELASTICSEARCH_HOST> -nhnv
@@ -211,7 +211,7 @@ For Kibana you need to edit the file */etc/kibana/kibana.yml* and add the next l
 
 .. code-block:: yaml
 
-    xpack.security.enabled: false 
+    xpack.security.enabled: false
 
 Now restart Kibana service:
 
@@ -219,13 +219,14 @@ Now restart Kibana service:
 
     # systemctl restart kibana
 
-Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticsearch plugins versioning, this means you must fit exactly your Kibana version. 
+Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticsearch plugins versioning, this means you must fit exactly your Kibana version.
 
 1. Install the plugin as usual:
 
 .. code-block:: none
 
-    $ sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/7.1.1-35.2.0/search-guard-kibana-plugin-7.1.1-35.2.0.zip
+    $ cd /usr/share/kibana/
+    $ sudo -u kibana bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/7.1.1-35.2.0/search-guard-kibana-plugin-7.1.1-35.2.0.zip
 
 2. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
 
@@ -235,16 +236,16 @@ Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticse
     elasticsearch.hosts: ["https://<ELASTICSEARCH_HOST>:9200"]
 
     # Credentials
-    elasticsearch.username: "admin" 
+    elasticsearch.username: "admin"
     elasticsearch.password: "admin"
 
     # Disable SSL verification because we use self-signed demo certificates
-    elasticsearch.ssl.verificationMode: none 
+    elasticsearch.ssl.verificationMode: none
 
     # Whitelist the Search Guard Multi Tenancy Header
     elasticsearch.requestHeadersWhitelist: [ "Authorization" , "sgtenant" ]
 
-Now you can access your Kibana UI as usual and it will prompt for a login. You can access it using the already existing one user named `admin`. 
+Now you can access your Kibana UI as usual and it will prompt for a login. You can access it using the already existing one user named `admin`.
 
 
 See `Kibana Search Guard plugin <https://search.maven.org/search?q=g:com.floragunn%20AND%20a:search-guard-kibana-plugin>`_ for details.

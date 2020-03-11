@@ -4,20 +4,19 @@
 
 Solaris 10 from package
 =======================
-
-The Wazuh agent for Solaris 10 can be downloaded from our :ref:`packages list<packages>`. The current version has been tested on Solaris 10 version 5.10. Install the agent as follows:
+You can download the `Solaris10 installer (Intel architecture) <https://packages.wazuh.com/3.x/solaris/i386/10/wazuh-agent_v3.12.0-sol10-i386.pkg>`_ or `Solaris10 installer (SPARC architecture) <https://packages.wazuh.com/3.x/solaris/sparc/10/wazuh-agent_v3.12.0-sol10-sparc.pkg>`_ from our from our :ref:`packages list<packages>`. The current version has been tested on Solaris 10 version 5.10. Install the agent as follows:
 
   a) For Solaris 10 i386:
 
     .. code-block:: console
 
-      # pkgadd -d wazuh-agent_v3.10.2-sol10-i386.pkg
+      # pkgadd -d wazuh-agent_v3.12.0-sol10-i386.pkg
 
   b) For Solaris 10 SPARC:
 
     .. code-block:: console
 
-      # pkgadd -d wazuh-agent_v3.10.2-sol10-sparc.pkg
+      # pkgadd -d wazuh-agent_v3.12.0-sol10-sparc.pkg
 
 After creating the repository install the package:
 

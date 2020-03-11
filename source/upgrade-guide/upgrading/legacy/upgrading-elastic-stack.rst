@@ -58,11 +58,11 @@ Configure Logstash
     #}
     # Local Wazuh server - JSON file input
     input {
-       file {
-           type => "wazuh-alerts"
-           path => "/var/ossec/logs/alerts/alerts.json"
-           codec => "json"
-       }
+        file {
+            type => "wazuh-alerts"
+            path => "/var/ossec/logs/alerts/alerts.json"
+            codec => "json"
+        }
     }
     ...
 
