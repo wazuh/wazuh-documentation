@@ -51,8 +51,8 @@ b) For SysV Init:
     # service wazuh-manager restart
 
 
-If you have more than 80% of the available disk space in use, you should urgently fix the situation. Otherwise, there is risk of data loss. Wazuh will start sending alerts when disk space reaches 90% usage.
-To do so, there are only two available options, either to free space or to increase disk space.
+If you have more than 80% of the available disk space in use, you should urgently fix the situation. Wazuh will start sending alerts when disk space reaches 90% usage.
+To avoid the risk of data loss, there are only two available options, either to free space or to increase disk space.
 
 If adding disk space is an option that you would rather avoid, you can free some space from Wazuh's logs. For the following steps, it is important to be thorough and careful, to avoid deleting anything you do not wish to delete.
 
@@ -63,7 +63,7 @@ First, execute this command to check how much space are Wazuh logs and alerts oc
   # du -h -d1 /var/ossec/logs/
 
 This command will tell you how much disk space each subfolder takes. From these results, you only need to look at ``/var/ossec/logs/alerts`` and ``/var/ossec/logs/archives``. Especially this second one. If ``archives`` is occupying a lot of space,
-it means that you have ``logall`` enabled, it will be recommendable to disable it if you have not done it already. ``archives`` will be the first wazuh component you need to clean to free space. It follows the following structure:
+it means that you have ``logall`` enabled, it will be recommendable to disable it if you have not done it already. ``archives`` will be the first wazuh component you need to clean to free space, as all the security relevant information will be stored in ``alerts``. It follows the following structure:
 
 
 .. code-block:: none
@@ -203,3 +203,29 @@ b) For SysV Init:
     # service wazuh-manager restart
 
 For further help troubleshooting do not hesitate to visit our community channels where our team will be happy to help you. You can find us in `Slack <https://wazuh.com/community/join-us-on-slack/>`_ and in our `Google mailing list <https://groups.google.com/group/wazuh>`_.
+
+
+Configuration
+-------------
+
+When changing the default configuration, there are many things an experienced user would take into account.
+
+Centralized configuration
+#########################
+
+When changing the configuration, it is important to always follow a consistent method. Otherwise it will be difficult to keep track of all changes.
+
+  - Avoid changing an agent's configuration in its ``ossec.conf``. Unless it is related to the agent registration or removing default values, whenever you change an agent's configuration always make use of agent's groups. An agent can be in multiple groups at the same time, having all of its configurations. Each group has its own configuration file, ``agent.conf`` which will be merged into a unique ``agent.conf`` file in each agent. Following these instructions, all custom configurations of an agent will be found in its ``agent.conf``. For more info on agents groups: `Grouping agents <../agents/grouping-agents.html>`_
+
+
+Syscheck
+########
+
+File Integrity Monitoring is a very powerful and attractive capability of Wazuh. But it can be very high resource consuming if not used correctly.
+
+When configuring which files to monitor, you should avoid:
+
+  - Constantly changing files, like logs or temporary files.
+  - Folder with too many files. It is not possible to monitor everything. You should decide which file are considered critical and focus your resources there. Attempting to monitor millions of files will be very high resource consuming.
+
+The best practice would be to decide which files, folders and subfolderts are considered critical in each system and monitor them. 
