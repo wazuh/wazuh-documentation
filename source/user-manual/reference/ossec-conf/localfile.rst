@@ -36,7 +36,7 @@ location
 
 Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
-For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jul 30th, 2019).
+For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
 
 Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
@@ -106,13 +106,14 @@ Change a command name in the log message.
 
 For example ``<alias>usb-check</alias>`` would replace:
 
-.. code-block:: xml
+.. code-block:: none
 
    ossec: output: 'reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR':
 
 with:
 
-.. code-block:: xml
+.. code-block:: none
+   :class: output
 
    ossec: output: 'usb-check':
 
@@ -206,6 +207,7 @@ This is a sample JSON object from the log file:
 The additional fields configured above would appear in the resulting event as below:
 
 .. code-block:: json
+  :class: output
 
   {
     "event": {
@@ -313,7 +315,7 @@ Set the format of the log to be read. **field is required**
 
 Sample of Multi-line log message in original log file:
 
-.. code-block:: console
+.. code-block:: none
 
     Aug 9 14:22:47 hostname log line one
     Aug 9 14:22:47 hostname log line two
@@ -323,7 +325,8 @@ Sample of Multi-line log message in original log file:
 
 Sample Log message as analyzed by ossec-analysisd:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
@@ -343,6 +346,8 @@ The list of available parameters is:
 +========================+=======================================================================+
 | ``log``                | Message from the log.                                                 |
 +------------------------+-----------------------------------------------------------------------+
+| ``json_escaped_log``   | Message from the log, escaping JSON reserver characters.              |
++------------------------+-----------------------------------------------------------------------+
 | ``output``             | Output from a command. Alias of ``log``.                              |
 +------------------------+-----------------------------------------------------------------------+
 | ``location``           | Path to the source log file.                                          |
@@ -354,6 +359,8 @@ The list of available parameters is:
 | ``timestamp <format>`` | Custom timestamp, in ``strftime`` string format.                      |
 +------------------------+-----------------------------------------------------------------------+
 | ``hostname``           | System's host name.                                                   |
++------------------------+-----------------------------------------------------------------------+
+| ``host_ip``            | Host's primary IP address.                                            |
 +------------------------+-----------------------------------------------------------------------+
 
 Attributes:

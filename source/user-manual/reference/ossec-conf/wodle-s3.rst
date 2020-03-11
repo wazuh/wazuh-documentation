@@ -55,7 +55,7 @@ Options
 disabled
 ^^^^^^^^
 
-Disables the CloudTrail wodle.
+Disables the AWS-S3 wodle.
 
 +--------------------+-----------------------------+
 | **Default value**  | no                          |

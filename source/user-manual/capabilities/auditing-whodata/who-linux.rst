@@ -46,9 +46,9 @@ We can check if the Audit rule for monitoring the selected folder is applied. To
 
 and check if the rule was added:
 
-.. code-block:: bash
+.. code-block:: console
 
-    -w /etc -p wa -k wazuh_fim
+    # auditctl -w /etc -p wa -k wazuh_fim
 
 When the agent is stopped, we can use the same command to check that the added rule was successfully removed.
 
@@ -101,7 +101,8 @@ In the following example we can see how the user *Smith* added a new IP to the f
 
 Alert in log format:
 
-.. code-block:: bash
+.. code-block:: none
+    :class: output
 
     ** Alert 1531224328.2834462: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
     2018 Jul 10 14:05:28 (vpc-agent-debian) any->syscheck
@@ -138,6 +139,7 @@ Alert in log format:
 Alert in JSON format:
 
 .. code-block:: json
+  :class: output
 
   {
     "timestamp":"2018-07-10T14:05:28.452-0800",

@@ -109,7 +109,7 @@ Attributes
 +----------------+---------------------------------------------------------------------------------+
 
 .. note::
-  Since Wazuh v3.10.2, although this section is missing, the Wazuh Agent will run scans for every policy (.yaml or .yml files) present in their ruleset folder.
+  Since Wazuh v3.10.0, although this section is missing, the Wazuh Agent will run scans for every policy (.yaml or .yml files) present in their ruleset folder.
 
 Example
 

@@ -36,7 +36,8 @@ After devices have been added to the list, the manager must be configured to mon
 BSD Integrity Check
 ^^^^^^^^^^^^^^^^^^^
 For BSD systems, set the ``type`` as ``ssh_integrity_check_bsd`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the ``<arguments>`` tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
-::
+
+.. code-block:: xml
 
   <agentless>
     <type>ssh_integrity_check_bsd</type>
@@ -50,7 +51,7 @@ Linux Integrity Check
 ^^^^^^^^^^^^^^^^^^^^^
 For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the ``<arguments>`` tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
 
-::
+.. code-block:: xml
 
   <agentless>
     <type>ssh_integrity_check_linux</type>
@@ -64,7 +65,7 @@ Generic Diff
 ^^^^^^^^^^^^
 A set of commands can also be configured to run on a remote device. Wazuh will alert you if the output of those commands changes. In order to use this option, set the ``type`` as ``ssh_generic_diff``, as shown below.
 
-::
+.. code-block:: xml
 
   <agentless>
     <type>ssh_generic_diff</type>
@@ -83,7 +84,7 @@ Pix config
 ^^^^^^^^^^
 This option will alert if a Cisco PIX/router configuration changes. Set the ``type`` to ``ssh_pixconfig_diff``, as shown below.
 
-::
+.. code-block:: xml
 
   <agentless>
     <type>ssh_pixconfig_diff</type>
@@ -99,13 +100,15 @@ Finally, the ``expect`` package must be present on the manager for this feature 
 
 When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/ossec.log`` file:
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   ossec-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
 
 When Wazuh has connected to the remote device, the following will be shown in the same log file:
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   ossec-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Starting.
   ossec-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Finished.
@@ -116,7 +119,10 @@ Once configured as above, Wazuh alerts will be triggered when changes occur with
 
 Sample alerts are as follows:
 
-Integrity check BSD/Linux sample alert::
+Integrity check BSD/Linux sample alert:
+
+.. code-block:: none
+	:class: output
 
 	** Alert 1486811998.93230: - ossec,syscheck,pci_dss_11.5,
 	2017 Feb 11 03:19:58 ubuntu->(ssh_integrity_check_linux) root@192.168.1.3->syscheck
@@ -141,7 +147,10 @@ Integrity check BSD/Linux sample alert::
 
 
 
-Generic Diff sample alert::
+Generic Diff sample alert:
+
+.. code-block:: none
+	:class: output
 
 	** Alert 1486811190.88243: - ossec,syscheck,agentless,pci_dss_11.5,pci_dss_10.6.1,
 	2017 Feb 11 03:06:30 ubuntu->(ssh_generic_diff) root@192.168.1.3->agentless

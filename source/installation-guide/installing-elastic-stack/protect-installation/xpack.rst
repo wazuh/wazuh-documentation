@@ -7,7 +7,7 @@ X-Pack
 
 Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intended users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
-Configure Elastic Stack to use encrypted connections 
+Configure Elastic Stack to use encrypted connections
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section describes how to secure the communications between the involved components, adding an SSL layer.
@@ -33,7 +33,8 @@ This section describes how to secure the communications between the involved com
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert --pem --in instances.yml --out certs.zip --keep-ca-key
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     certs.zip
     |-- ca
