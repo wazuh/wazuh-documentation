@@ -230,7 +230,9 @@ Runs an Active Response command on a specified agent.
 	curl -u foo:bar -k -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/active-response/001?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -278,13 +280,15 @@ Add a new agent.
 	curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "id": "009",
-	      "key": "MDA5IE5ld0hvc3QgMTAuMC4wLjkgY2M1MTM2MDk0NGFhZDQ2ZTEzYTM3N2I2NjZhMTcxMTI2M2FlM2UxYzFhOGUwMmY1NDk0OWM5MzczMGZkODU5NQ=="
+	      "key": "MDA5IE5ld0hvc3QgMTAuMC4wLjkgZDk1NGI0ODZmYWEyNDVlMjdhOTVmM2ZmNDU3OWYxMmM5MjZjY2QwY2QxZmY1YzE5OGZiYmExYTI4ZTg1MzVlNA=="
 	   }
 	}
 	
@@ -313,13 +317,15 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/myNewAgent?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "id": "010",
-	      "key": "MDEwIG15TmV3QWdlbnQgYW55IDc4YjYzMTE0ZDgzYTA0NDZiNzZjN2RlYTQ4NzhkZWY3OGZjNGZiOTNmMjYzNzhmOGZlMGVjMDk4YTU2NzJkMzM="
+	      "key": "MDEwIG15TmV3QWdlbnQgYW55IDZkZTc5ZmQwMmIwZWNkNjVjNzU1ZDBhNDkzM2ZlMTdmZWQ5MDQ0OTMyZTRmYmIzMmJkZmZmYWYzOTVkZWIyYjQ="
 	   }
 	}
 	
@@ -362,7 +368,9 @@ Insert an agent with an existing id and key.
 	curl -u foo:bar -k -X POST -d '{"name":"NewHost_2","ip":"10.0.10.10","id":"123","key":"1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents/insert?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -448,7 +456,9 @@ Returns the active configuration in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/config/logcollector/localfile?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -529,7 +539,9 @@ Removes a list of groups.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups?ids=webserver,database&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -585,7 +597,9 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents?older_than=10s&purge&ids=003,005&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -641,7 +655,9 @@ Removes an agent.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/008?pretty&purge"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -682,7 +698,9 @@ Returns the sync status in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/group/is_sync?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -722,7 +740,9 @@ Adds a list of agents to the specified group.
 	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents/group/dmz?pretty" -k
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -764,7 +784,9 @@ Adds an agent to the specified group.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -796,7 +818,9 @@ Creates a new group.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/groups/pciserver?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -846,7 +870,9 @@ Returns the specified file belonging to the group parsed to JSON.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/webserver/files/cis_debian_linux_rcl.txt?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -912,7 +938,9 @@ Returns the list of agents in a group.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -925,25 +953,25 @@ Returns the list of agents in a group.
 	               "minor": "1",
 	               "name": "CentOS Linux",
 	               "platform": "centos",
-	               "uname": "Linux |58d5dd1e4205 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	               "uname": "Linux |6df2b547e612 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
 	               "version": "8.1"
 	            },
 	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "id": "001",
-	            "status": "Active",
-	            "version": "Wazuh v3.12",
-	            "dateAdd": "2020-03-10 10:48:15",
-	            "registerIP": "172.23.0.5",
-	            "ip": "172.23.0.5",
-	            "node_name": "master",
 	            "mergedSum": "438c69bbca3caceabac91d821004c6ab",
-	            "lastKeepAlive": "2020-03-10 10:49:06",
-	            "manager": "d0b97894011c",
-	            "name": "58d5dd1e4205",
+	            "manager": "f2fe0a2b2d94",
+	            "version": "Wazuh v3.11.4",
+	            "id": "001",
+	            "ip": "172.23.0.5",
+	            "registerIP": "172.23.0.5",
+	            "status": "Active",
+	            "dateAdd": "2020-03-11 14:40:08",
 	            "group": [
 	               "default",
 	               "dmz"
-	            ]
+	            ],
+	            "node_name": "master",
+	            "name": "6df2b547e612",
+	            "lastKeepAlive": "2020-03-11 14:41:59"
 	         },
 	         {
 	            "os": {
@@ -952,36 +980,37 @@ Returns the list of agents in a group.
 	               "minor": "1",
 	               "name": "CentOS Linux",
 	               "platform": "centos",
-	               "uname": "Linux |6647413945af |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	               "uname": "Linux |3e42938763b6 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
 	               "version": "8.1"
 	            },
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "mergedSum": "438c69bbca3caceabac91d821004c6ab",
+	            "manager": "9010b2027421",
+	            "version": "Wazuh v3.11.4",
 	            "id": "002",
-	            "status": "Active",
-	            "version": "Wazuh v3.12",
-	            "dateAdd": "2020-03-10 10:48:16",
-	            "registerIP": "172.23.0.6",
 	            "ip": "172.23.0.6",
-	            "node_name": "worker-1",
-	            "mergedSum": "c1940a9db1a5f9d9876b0268e2a042f7",
-	            "lastKeepAlive": "2020-03-10 10:49:00",
-	            "manager": "22d176fc16f5",
-	            "name": "6647413945af",
+	            "registerIP": "172.23.0.6",
+	            "status": "Active",
+	            "dateAdd": "2020-03-11 14:40:08",
 	            "group": [
 	               "default",
 	               "dmz"
-	            ]
+	            ],
+	            "node_name": "worker-1",
+	            "name": "3e42938763b6",
+	            "lastKeepAlive": "2020-03-11 14:41:49"
 	         },
 	         {
 	            "id": "004",
-	            "status": "Never connected",
-	            "dateAdd": "2020-03-10 10:49:04",
-	            "registerIP": "10.0.0.62",
 	            "ip": "10.0.0.62",
-	            "node_name": "unknown",
-	            "name": "server001",
+	            "registerIP": "10.0.0.62",
+	            "status": "Never connected",
+	            "dateAdd": "2020-03-11 14:41:53",
 	            "group": [
 	               "dmz"
-	            ]
+	            ],
+	            "node_name": "unknown",
+	            "name": "server001"
 	         }
 	      ],
 	      "totalItems": 3
@@ -1023,56 +1052,58 @@ Returns a list with the available agents without group.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/no_group?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "items": [
 	         {
-	            "dateAdd": "2020-03-10 10:49:04",
+	            "ip": "10.0.0.15",
 	            "status": "Never connected",
 	            "node_name": "unknown",
-	            "ip": "10.0.0.15",
+	            "registerIP": "10.0.0.15",
 	            "name": "main_database",
 	            "id": "006",
-	            "registerIP": "10.0.0.15"
+	            "dateAdd": "2020-03-11 14:41:54"
 	         },
 	         {
-	            "dateAdd": "2020-03-10 10:49:05",
+	            "ip": "10.0.0.14",
 	            "status": "Never connected",
 	            "node_name": "unknown",
-	            "ip": "10.0.0.14",
+	            "registerIP": "10.0.0.14",
 	            "name": "dmz002",
 	            "id": "007",
-	            "registerIP": "10.0.0.14"
+	            "dateAdd": "2020-03-11 14:41:54"
 	         },
 	         {
-	            "dateAdd": "2020-03-10 10:49:09",
+	            "ip": "10.0.0.9",
 	            "status": "Never connected",
 	            "node_name": "unknown",
-	            "ip": "10.0.0.9",
+	            "registerIP": "10.0.0.9",
 	            "name": "NewHost",
 	            "id": "009",
-	            "registerIP": "10.0.0.9"
+	            "dateAdd": "2020-03-11 14:41:58"
 	         },
 	         {
-	            "dateAdd": "2020-03-10 10:49:09",
+	            "ip": "any",
 	            "status": "Never connected",
 	            "node_name": "unknown",
-	            "ip": "any",
+	            "registerIP": "any",
 	            "name": "myNewAgent",
 	            "id": "010",
-	            "registerIP": "any"
+	            "dateAdd": "2020-03-11 14:41:58"
 	         },
 	         {
-	            "dateAdd": "2020-03-10 10:49:09",
+	            "ip": "10.0.10.10",
 	            "status": "Never connected",
 	            "node_name": "unknown",
-	            "ip": "10.0.10.10",
+	            "registerIP": "10.0.10.10",
 	            "name": "NewHost_2",
 	            "id": "123",
-	            "registerIP": "10.0.10.10"
+	            "dateAdd": "2020-03-11 14:41:58"
 	         }
 	      ],
 	      "totalItems": 5
@@ -1108,7 +1139,9 @@ Returns the group configuration (agent.conf).
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1167,7 +1200,9 @@ Returns the files belonging to the group.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/default/files?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1309,7 +1344,9 @@ Returns the list of existing agent groups.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1324,13 +1361,12 @@ Returns the list of existing agent groups.
 	         {
 	            "count": 3,
 	            "name": "dmz",
-	            "mergedSum": "c5371de04611abfea22cd19a4af6b6b3",
+	            "mergedSum": "c2401dcf5127bdaa9db8fbd93fee6ff5",
 	            "configSum": "cfbae9ecc10eb15f1b4fc736de6758cc"
 	         },
 	         {
 	            "count": 0,
 	            "name": "pciserver",
-	            "mergedSum": "bea4f89b64fd7928060d027725e580c6",
 	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
 	         }
 	      ],
@@ -1363,7 +1399,9 @@ Upload the group configuration (agent.conf).
 	curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @agent.conf.xml "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty" -k
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -1396,7 +1434,9 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1430,7 +1470,9 @@ Remove a list of agents of a group.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/group/dmz?ids=001,002&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1468,7 +1510,9 @@ Removes the group of the agent. The agent will automatically revert to the 'defa
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1500,7 +1544,9 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1540,7 +1586,9 @@ Upload a file to a group.
 	curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @agent.conf.xml "https://127.0.0.1:55000/agents/groups/dmz/files/agent.conf?pretty" -k
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -1583,7 +1631,9 @@ Returns a summary of the OS.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary/os?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1616,7 +1666,9 @@ Returns a summary of the available agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1693,20 +1745,22 @@ Returns a list with the available agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&limit=5&sort=-ip,name"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "items": [
 	         {
-	            "registerIP": "any",
-	            "name": "myNewAgent",
-	            "id": "010",
 	            "status": "Never connected",
 	            "ip": "any",
 	            "node_name": "unknown",
-	            "dateAdd": "2020-03-10 10:49:09"
+	            "name": "myNewAgent",
+	            "id": "010",
+	            "dateAdd": "2020-03-11 14:41:58",
+	            "registerIP": "any"
 	         },
 	         {
 	            "os": {
@@ -1715,74 +1769,24 @@ Returns a list with the available agents.
 	               "major": "8",
 	               "name": "CentOS Linux",
 	               "platform": "centos",
-	               "uname": "Linux |367091e739bf |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	               "uname": "Linux |51ae6aeff9b0 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
 	               "version": "8"
 	            },
-	            "registerIP": "172.23.0.7",
-	            "name": "367091e739bf",
-	            "id": "003",
-	            "lastKeepAlive": "2020-03-10 10:49:03",
-	            "version": "Wazuh v3.5.0",
-	            "mergedSum": "d176520efcde0ea7cc469680313d8e2f",
+	            "status": "Active",
 	            "group": [
 	               "default"
 	            ],
-	            "manager": "f7a844596918",
-	            "status": "Active",
 	            "ip": "172.23.0.7",
+	            "manager": "7ce87f29a3ad",
+	            "version": "Wazuh v3.5.0",
 	            "node_name": "worker-2",
-	            "dateAdd": "2020-03-10 10:48:16"
-	         },
-	         {
-	            "os": {
-	               "arch": "x86_64",
-	               "major": "8",
-	               "minor": "1",
-	               "name": "CentOS Linux",
-	               "platform": "centos",
-	               "uname": "Linux |6647413945af |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
-	               "version": "8.1"
-	            },
-	            "registerIP": "172.23.0.6",
-	            "name": "6647413945af",
-	            "id": "002",
-	            "lastKeepAlive": "2020-03-10 10:49:00",
-	            "version": "Wazuh v3.11.4",
-	            "mergedSum": "c1940a9db1a5f9d9876b0268e2a042f7",
-	            "group": [
-	               "default"
-	            ],
-	            "manager": "22d176fc16f5",
-	            "status": "Active",
-	            "ip": "172.23.0.6",
-	            "node_name": "worker-1",
-	            "dateAdd": "2020-03-10 10:48:16"
-	         },
-	         {
-	            "os": {
-	               "arch": "x86_64",
-	               "major": "8",
-	               "minor": "1",
-	               "name": "CentOS Linux",
-	               "platform": "centos",
-	               "uname": "Linux |58d5dd1e4205 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
-	               "version": "8.1"
-	            },
-	            "registerIP": "172.23.0.5",
-	            "name": "58d5dd1e4205",
-	            "id": "001",
-	            "lastKeepAlive": "2020-03-10 10:49:06",
-	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "version": "Wazuh v3.11.4",
+	            "name": "51ae6aeff9b0",
+	            "id": "003",
 	            "mergedSum": "438c69bbca3caceabac91d821004c6ab",
-	            "group": [
-	               "default"
-	            ],
-	            "manager": "d0b97894011c",
-	            "status": "Active",
-	            "ip": "172.23.0.5",
-	            "node_name": "master",
-	            "dateAdd": "2020-03-10 10:48:15"
+	            "lastKeepAlive": "2020-03-11 14:41:55",
+	            "dateAdd": "2020-03-11 14:40:09",
+	            "registerIP": "172.23.0.7",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
 	         },
 	         {
 	            "os": {
@@ -1791,19 +1795,71 @@ Returns a list with the available agents.
 	               "minor": "1",
 	               "name": "CentOS Linux",
 	               "platform": "centos",
-	               "uname": "Linux |d0b97894011c |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	               "uname": "Linux |3e42938763b6 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
 	               "version": "8.1"
 	            },
-	            "registerIP": "127.0.0.1",
-	            "name": "d0b97894011c",
-	            "id": "000",
-	            "lastKeepAlive": "9999-12-31 23:59:59",
-	            "version": "Wazuh v3.12.0",
-	            "manager": "d0b97894011c",
+	            "status": "Active",
+	            "group": [
+	               "default"
+	            ],
+	            "ip": "172.23.0.6",
+	            "manager": "9010b2027421",
+	            "version": "Wazuh v3.11.4",
+	            "node_name": "worker-1",
+	            "name": "3e42938763b6",
+	            "id": "002",
+	            "mergedSum": "438c69bbca3caceabac91d821004c6ab",
+	            "lastKeepAlive": "2020-03-11 14:41:49",
+	            "dateAdd": "2020-03-11 14:40:08",
+	            "registerIP": "172.23.0.6",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
+	         },
+	         {
+	            "os": {
+	               "arch": "x86_64",
+	               "major": "8",
+	               "minor": "1",
+	               "name": "CentOS Linux",
+	               "platform": "centos",
+	               "uname": "Linux |6df2b547e612 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	               "version": "8.1"
+	            },
+	            "status": "Active",
+	            "group": [
+	               "default"
+	            ],
+	            "ip": "172.23.0.5",
+	            "manager": "f2fe0a2b2d94",
+	            "version": "Wazuh v3.11.4",
+	            "node_name": "master",
+	            "name": "6df2b547e612",
+	            "id": "001",
+	            "mergedSum": "438c69bbca3caceabac91d821004c6ab",
+	            "lastKeepAlive": "2020-03-11 14:41:59",
+	            "dateAdd": "2020-03-11 14:40:08",
+	            "registerIP": "172.23.0.5",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
+	         },
+	         {
+	            "os": {
+	               "arch": "x86_64",
+	               "major": "8",
+	               "minor": "1",
+	               "name": "CentOS Linux",
+	               "platform": "centos",
+	               "uname": "Linux |f2fe0a2b2d94 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	               "version": "8.1"
+	            },
 	            "status": "Active",
 	            "ip": "127.0.0.1",
+	            "manager": "f2fe0a2b2d94",
+	            "version": "Wazuh v3.12.0",
 	            "node_name": "master",
-	            "dateAdd": "2020-03-10 10:45:48"
+	            "name": "f2fe0a2b2d94",
+	            "id": "000",
+	            "lastKeepAlive": "9999-12-31 23:59:59",
+	            "dateAdd": "2020-03-11 14:38:19",
+	            "registerIP": "127.0.0.1"
 	         }
 	      ],
 	      "totalItems": 11
@@ -1837,7 +1893,9 @@ Returns various information from an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -1848,19 +1906,19 @@ Returns various information from an agent.
 	         "minor": "1",
 	         "name": "CentOS Linux",
 	         "platform": "centos",
-	         "uname": "Linux |d0b97894011c |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
+	         "uname": "Linux |f2fe0a2b2d94 |5.3.0-40-generic |#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020 |x86_64",
 	         "version": "8.1"
 	      },
-	      "id": "000",
 	      "status": "Active",
-	      "node_name": "master",
+	      "dateAdd": "2020-03-11 14:38:19",
 	      "registerIP": "127.0.0.1",
-	      "name": "d0b97894011c",
+	      "id": "000",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
-	      "ip": "127.0.0.1",
 	      "version": "Wazuh v3.12.0",
-	      "dateAdd": "2020-03-10 10:45:48",
-	      "manager": "d0b97894011c"
+	      "name": "f2fe0a2b2d94",
+	      "node_name": "master",
+	      "ip": "127.0.0.1",
+	      "manager": "f2fe0a2b2d94"
 	   }
 	}
 	
@@ -1891,18 +1949,20 @@ Returns various information from an agent called :agent_name.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/NewHost?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "id": "009",
-	      "node_name": "unknown",
-	      "dateAdd": "2020-03-10 10:49:09",
-	      "registerIP": "10.0.0.9",
 	      "status": "Never connected",
-	      "ip": "10.0.0.9",
-	      "name": "NewHost"
+	      "node_name": "unknown",
+	      "name": "NewHost",
+	      "dateAdd": "2020-03-11 14:41:58",
+	      "registerIP": "10.0.0.9",
+	      "ip": "10.0.0.9"
 	   }
 	}
 	
@@ -1935,11 +1995,13 @@ Returns the key of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/004/key?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
-	   "data": "MDA0IHNlcnZlcjAwMSAxMC4wLjAuNjIgMGNjNmM0ZTI3NmY0NzhmZTcwZDg1NzMzNGNjNzQ5ZTU5MTQyZjMzZmU2YWNkYTE0OWNhNGFmYzNhZjE5YTdlMw=="
+	   "data": "MDA0IHNlcnZlcjAwMSAxMC4wLjAuNjIgMzE2NmIxOGE3NDBmYTc4MmJhNDdhNDI0NzU2NjZkYWFlMGJmM2IzYzYwNTJmMjJlMmNmMDg2YzRjODI2MWRhYw=="
 	}
 	
 
@@ -1971,7 +2033,9 @@ Restarts a list of agents.
 	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"ids":["002","004"]}' "https://127.0.0.1:55000/agents/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2008,7 +2072,9 @@ Restarts agents which belong to a group
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/groups/dmz/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	ToDo - Hardcoded output
 	
@@ -2029,7 +2095,9 @@ Restarts all agents.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2060,7 +2128,9 @@ Restarts the specified agent.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/007/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2112,7 +2182,9 @@ Returns all the different combinations that agents have for the selected fields.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/stats/distinct?pretty&fields=os.platform"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2167,7 +2239,9 @@ Returns the list of outdated agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/outdated?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2214,7 +2288,9 @@ Returns the upgrade result from an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/003/upgrade_result?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2249,7 +2325,9 @@ Upgrade the agent using a custom file.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade_custom?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2293,7 +2371,9 @@ Upgrade the agent using a WPK file from online repository.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2331,7 +2411,9 @@ Clears cache of the specified group.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache/mygroup?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2358,7 +2440,9 @@ Clears entire cache.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2389,7 +2473,9 @@ Returns current cache index.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2416,7 +2502,9 @@ Returns cache configuration.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache/config?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2490,7 +2578,9 @@ Returns the agent's ciscat results info
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/ciscat/000/results?pretty&sort=-score"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2605,7 +2695,9 @@ Returns the requested configuration in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/master/config/logcollector/internal?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2659,7 +2751,9 @@ Returns ossec.conf in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/configuration?section=global&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2700,7 +2794,9 @@ Returns the cluster configuration
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2740,7 +2836,9 @@ Returns if Wazuh configuration is OK.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/master/configuration/validation?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2766,7 +2864,9 @@ Returns if Wazuh configuration is OK.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/configuration/validation?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2800,7 +2900,9 @@ Confirmation message.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cluster/master/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2834,7 +2936,9 @@ Returns the content of a local file (rules, decoders and lists).
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/master/files?path=etc/decoders/local_decoder.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2870,7 +2974,9 @@ Upload a local file (rules, decoders and lists) in a cluster node.
 	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/cluster/master/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -2897,7 +3003,9 @@ Returns whether the cluster is enabled or disabled.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2924,7 +3032,9 @@ Returns the status of the manager processes.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/status?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -2965,21 +3075,23 @@ Returns basic information about manager.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/info?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
 	      "version": "v3.12.0",
-	      "compilation_date": "Tue Mar 10 10:45:44 UTC 2020",
+	      "compilation_date": "Wed Mar 11 14:38:15 UTC 2020",
 	      "type": "server",
 	      "max_agents": "N/A",
 	      "openssl_support": "N/A",
 	      "ruleset_version": "31200",
 	      "tz_offset": "+0000",
 	      "tz_name": "UTC",
-	      "name": "22d176fc16f5",
+	      "name": "9010b2027421",
 	      "cluster": {
 	         "enabled": "yes",
 	         "running": "yes",
@@ -3015,16 +3127,18 @@ Show cluster health.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/healthcheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "n_connected_nodes": 2,
 	      "nodes": {
-	         "worker-2": {
+	         "worker-1": {
 	            "info": {
-	               "name": "worker-2",
+	               "name": "worker-1",
 	               "type": "worker",
 	               "version": "3.12.0",
 	               "ip": "172.23.0.3",
@@ -3033,10 +3147,10 @@ Show cluster health.
 	            "status": {
 	               "sync_integrity_free": true,
 	               "last_sync_integrity": {
-	                  "date_start_master": "2020-03-10 10:49:17.505958",
-	                  "date_end_master": "2020-03-10 10:49:17.517275",
+	                  "date_start_master": "2020-03-11 14:42:05.177044",
+	                  "date_end_master": "2020-03-11 14:42:05.277634",
 	                  "total_files": {
-	                     "missing": 2,
+	                     "missing": 6,
 	                     "extra": 0,
 	                     "extra_valid": 0,
 	                     "shared": 4
@@ -3044,24 +3158,24 @@ Show cluster health.
 	               },
 	               "sync_agentinfo_free": true,
 	               "last_sync_agentinfo": {
-	                  "date_start_master": "2020-03-10 10:49:14.448559",
-	                  "date_end_master": "2020-03-10 10:49:14.457137",
+	                  "date_start_master": "2020-03-11 14:42:08.062940",
+	                  "date_end_master": "2020-03-11 14:42:08.072203",
 	                  "total_agentinfo": 0,
 	                  "total_agent_info": 11
 	               },
 	               "sync_extravalid_free": true,
 	               "last_sync_agentgroups": {
-	                  "date_start_master": "2020-03-10 10:48:41.460338",
-	                  "date_end_master": "2020-03-10 10:48:41.467895",
+	                  "date_start_master": "2020-03-11 14:40:34.907258",
+	                  "date_end_master": "2020-03-11 14:40:34.919856",
 	                  "total_agentgroups": 0,
 	                  "total_extra_valid": 4
 	               },
-	               "last_keep_alive": "2020-03-10 10:49:14.395323"
+	               "last_keep_alive": "2020-03-11 14:42:07.821814"
 	            }
 	         },
-	         "worker-1": {
+	         "worker-2": {
 	            "info": {
-	               "name": "worker-1",
+	               "name": "worker-2",
 	               "type": "worker",
 	               "version": "3.12.0",
 	               "ip": "172.23.0.4",
@@ -3070,10 +3184,10 @@ Show cluster health.
 	            "status": {
 	               "sync_integrity_free": true,
 	               "last_sync_integrity": {
-	                  "date_start_master": "2020-03-10 10:49:19.028298",
-	                  "date_end_master": "2020-03-10 10:49:19.070440",
+	                  "date_start_master": "2020-03-11 14:42:05.436777",
+	                  "date_end_master": "2020-03-11 14:42:05.542503",
 	                  "total_files": {
-	                     "missing": 4,
+	                     "missing": 6,
 	                     "extra": 0,
 	                     "extra_valid": 0,
 	                     "shared": 4
@@ -3081,19 +3195,19 @@ Show cluster health.
 	               },
 	               "sync_agentinfo_free": true,
 	               "last_sync_agentinfo": {
-	                  "date_start_master": "2020-03-10 10:49:15.977057",
-	                  "date_end_master": "2020-03-10 10:49:15.986101",
+	                  "date_start_master": "2020-03-11 14:42:08.293115",
+	                  "date_end_master": "2020-03-11 14:42:08.305542",
 	                  "total_agentinfo": 0,
 	                  "total_agent_info": 11
 	               },
 	               "sync_extravalid_free": true,
 	               "last_sync_agentgroups": {
-	                  "date_start_master": "2020-03-10 10:48:42.991426",
-	                  "date_end_master": "2020-03-10 10:48:42.999883",
+	                  "date_start_master": "2020-03-11 14:40:35.131238",
+	                  "date_end_master": "2020-03-11 14:40:35.139096",
 	                  "total_agentgroups": 0,
 	                  "total_extra_valid": 4
 	               },
-	               "last_keep_alive": "2020-03-10 10:49:15.918086"
+	               "last_keep_alive": "2020-03-11 14:42:08.017944"
 	            }
 	         },
 	         "master": {
@@ -3157,44 +3271,46 @@ Returns the three last months of ossec.log.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/logs?offset=0&limit=5&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "items": [
 	         {
-	            "timestamp": "2020-03-10 10:49:19",
+	            "timestamp": "2020-03-11 14:42:08",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " This vulnerability-detector declaration is deprecated. Use <vulnerability-detector> instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:19",
+	            "timestamp": "2020-03-11 14:42:08",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'disabled' option at module 'vulnerability-detector' is deprecated. Use 'enabled' instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:19",
+	            "timestamp": "2020-03-11 14:42:08",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'feed' option at module 'vulnerability-detector' is deprecated. Use 'provider' instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:19",
+	            "timestamp": "2020-03-11 14:42:08",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'feed' option at module 'vulnerability-detector' is deprecated. Use 'provider' instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:19",
+	            "timestamp": "2020-03-11 14:42:08",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'feed' option at module 'vulnerability-detector' is deprecated. Use 'provider' instead."
 	         }
 	      ],
-	      "totalItems": 159
+	      "totalItems": 185
 	   }
 	}
 	
@@ -3215,7 +3331,9 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/logs/summary?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3381,16 +3499,16 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "debug": 0
 	      },
 	      "ossec-syscheckd": {
-	         "all": 28,
-	         "info": 28,
+	         "all": 53,
+	         "info": 53,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
 	         "debug": 0
 	      },
 	      "ossec-rootcheck": {
-	         "all": 3,
-	         "info": 3,
+	         "all": 4,
+	         "info": 4,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
@@ -3420,7 +3538,9 @@ Returns the local node info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3448,7 +3568,9 @@ Returns the node info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes/master?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3497,7 +3619,9 @@ Returns the nodes info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3511,13 +3635,13 @@ Returns the nodes info.
 	            "ip": "wazuh-master"
 	         },
 	         {
-	            "name": "worker-2",
+	            "name": "worker-1",
 	            "type": "worker",
 	            "version": "3.12.0",
 	            "ip": "172.23.0.3"
 	         },
 	         {
-	            "name": "worker-1",
+	            "name": "worker-2",
 	            "type": "worker",
 	            "version": "3.12.0",
 	            "ip": "172.23.0.4"
@@ -3547,7 +3671,9 @@ Restarts a specific node in cluster.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/cluster/worker-1/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3570,7 +3696,9 @@ Restarts all nodes in cluster.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/cluster/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3597,7 +3725,9 @@ Returns a summary of the current analysisd stats on the node.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/analysisd?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3667,7 +3797,9 @@ Returns a summary of the current remoted stats on the node.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/remoted?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3708,7 +3840,9 @@ Returns Wazuh statistical information for the current or specified date.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3757,7 +3891,9 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/hourly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3791,7 +3927,9 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/worker-1/stats/weekly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -3906,7 +4044,9 @@ Returns all decoders included in ossec.conf.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders?pretty&offset=0&limit=2&sort=+file,position"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -3985,7 +4125,9 @@ Returns all decoders files included in ossec.conf.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/files?pretty&offset=0&limit=10&sort=-path"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4077,7 +4219,9 @@ Returns all parent decoders included in ossec.conf.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/parents?pretty&offset=0&limit=2&sort=-file"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4141,7 +4285,9 @@ Returns the decoders with the specified name.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/apache-errorlog?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4206,7 +4352,9 @@ Clears the syscheck database for all agents.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/experimental/syscheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -4261,7 +4409,9 @@ Returns the agent's hardware info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/hardware?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4270,17 +4420,17 @@ Returns the agent's hardware info.
 	         {
 	            "cpu": {
 	               "cores": 8,
-	               "mhz": 3992.278,
+	               "mhz": 2308.682,
 	               "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	            },
 	            "ram": {
-	               "free": 561624,
+	               "free": 585788,
 	               "total": 16024656,
 	               "usage": 97
 	            },
 	            "scan": {
-	               "id": 1942850080,
-	               "time": "2020/03/10 10:48:15"
+	               "id": 900301359,
+	               "time": "2020/03/11 14:40:08"
 	            },
 	            "board_serial": "/72NL9Y2/CNCMK009B30174/",
 	            "agent_id": "000"
@@ -4288,17 +4438,17 @@ Returns the agent's hardware info.
 	         {
 	            "cpu": {
 	               "cores": 4,
-	               "mhz": 3926.411,
+	               "mhz": 3534.378,
 	               "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	            },
 	            "ram": {
-	               "free": 655908,
+	               "free": 561428,
 	               "total": 16024656,
-	               "usage": 96
+	               "usage": 97
 	            },
 	            "scan": {
-	               "id": 2029323263,
-	               "time": "2020/03/10 10:49:24"
+	               "id": 7297918,
+	               "time": "2020/03/11 14:41:26"
 	            },
 	            "board_serial": "/72NL9Y2/CNCMK009B30174/",
 	            "agent_id": "003"
@@ -4306,17 +4456,17 @@ Returns the agent's hardware info.
 	         {
 	            "cpu": {
 	               "cores": 8,
-	               "mhz": 3825.322,
+	               "mhz": 1135.028,
 	               "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	            },
 	            "ram": {
-	               "free": 672492,
+	               "free": 577132,
 	               "total": 16024656,
-	               "usage": 96
+	               "usage": 97
 	            },
 	            "scan": {
-	               "id": 1492306159,
-	               "time": "2020/03/10 10:48:16"
+	               "id": 727206569,
+	               "time": "2020/03/11 14:40:08"
 	            },
 	            "board_serial": "/72NL9Y2/CNCMK009B30174/",
 	            "agent_id": "000"
@@ -4324,17 +4474,17 @@ Returns the agent's hardware info.
 	         {
 	            "cpu": {
 	               "cores": 8,
-	               "mhz": 3999.999,
+	               "mhz": 1416.754,
 	               "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	            },
 	            "ram": {
-	               "free": 710364,
+	               "free": 559936,
 	               "total": 16024656,
-	               "usage": 96
+	               "usage": 97
 	            },
 	            "scan": {
-	               "id": 2077498068,
-	               "time": "2020/03/10 10:49:16"
+	               "id": 728438524,
+	               "time": "2020/03/11 14:41:09"
 	            },
 	            "board_serial": "/72NL9Y2/CNCMK009B30174/",
 	            "agent_id": "002"
@@ -4342,17 +4492,17 @@ Returns the agent's hardware info.
 	         {
 	            "cpu": {
 	               "cores": 8,
-	               "mhz": 4000.002,
+	               "mhz": 3460.966,
 	               "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	            },
 	            "ram": {
-	               "free": 516884,
+	               "free": 598588,
 	               "total": 16024656,
 	               "usage": 97
 	            },
 	            "scan": {
-	               "id": 1282042316,
-	               "time": "2020/03/10 10:48:14"
+	               "id": 1787159141,
+	               "time": "2020/03/11 14:40:08"
 	            },
 	            "board_serial": "/72NL9Y2/CNCMK009B30174/",
 	            "agent_id": "000"
@@ -4360,17 +4510,17 @@ Returns the agent's hardware info.
 	         {
 	            "cpu": {
 	               "cores": 8,
-	               "mhz": 4000.058,
+	               "mhz": 900.009,
 	               "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	            },
 	            "ram": {
-	               "free": 743456,
+	               "free": 551276,
 	               "total": 16024656,
-	               "usage": 96
+	               "usage": 97
 	            },
 	            "scan": {
-	               "id": 740576543,
-	               "time": "2020/03/10 10:49:06"
+	               "id": 1318139746,
+	               "time": "2020/03/11 14:40:59"
 	            },
 	            "board_serial": "/72NL9Y2/CNCMK009B30174/",
 	            "agent_id": "001"
@@ -4425,7 +4575,9 @@ Returns the agent's network address info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4433,23 +4585,23 @@ Returns the agent's network address info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 1849094842
+	               "id": 322964060
 	            },
-	            "iface": "eth0",
-	            "proto": "ipv4",
-	            "address": "172.23.0.3",
 	            "broadcast": "172.23.255.255",
+	            "iface": "eth0",
+	            "address": "172.23.0.4",
+	            "proto": "ipv4",
 	            "netmask": "255.255.0.0",
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 1818070534
+	               "id": 1643886297
 	            },
-	            "iface": "eth0",
-	            "proto": "ipv4",
-	            "address": "172.23.0.7",
 	            "broadcast": "172.23.255.255",
+	            "iface": "eth0",
+	            "address": "172.23.0.7",
+	            "proto": "ipv4",
 	            "netmask": "255.255.0.0",
 	            "agent_id": "003"
 	         }
@@ -4521,7 +4673,9 @@ Returns the agent's network interface info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netiface?pretty&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4529,14 +4683,14 @@ Returns the agent's network interface info.
 	      "items": [
 	         {
 	            "rx": {
-	               "bytes": 7664,
+	               "bytes": 7414,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 51
+	               "packets": 52
 	            },
 	            "scan": {
-	               "id": 1849094842,
-	               "time": "2020/03/10 10:48:15"
+	               "id": 322964060,
+	               "time": "2020/03/11 14:40:08"
 	            },
 	            "tx": {
 	               "bytes": 454,
@@ -4544,34 +4698,34 @@ Returns the agent's network interface info.
 	               "errors": 0,
 	               "packets": 5
 	            },
-	            "state": "up",
-	            "mac": "02:42:ac:17:00:03",
-	            "type": "ethernet",
 	            "mtu": 1500,
+	            "type": "ethernet",
+	            "state": "up",
+	            "mac": "02:42:ac:17:00:04",
 	            "name": "eth0",
 	            "agent_id": "000"
 	         },
 	         {
 	            "rx": {
-	               "bytes": 447112,
+	               "bytes": 448082,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 1076
+	               "packets": 1085
 	            },
 	            "scan": {
-	               "id": 1818070534,
-	               "time": "2020/03/10 10:49:09"
+	               "id": 1643886297,
+	               "time": "2020/03/11 14:41:11"
 	            },
 	            "tx": {
-	               "bytes": 421541,
+	               "bytes": 421937,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 1626
+	               "packets": 1630
 	            },
+	            "mtu": 1500,
+	            "type": "ethernet",
 	            "state": "up",
 	            "mac": "02:42:AC:17:00:07",
-	            "type": "ethernet",
-	            "mtu": 1500,
 	            "name": "eth0",
 	            "agent_id": "003"
 	         }
@@ -4625,7 +4779,9 @@ Returns the agent's network protocol info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4633,22 +4789,22 @@ Returns the agent's network protocol info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 1849094842
+	               "id": 322964060
 	            },
-	            "type": "ipv4",
-	            "iface": "eth0",
 	            "gateway": "172.23.0.1",
+	            "iface": "eth0",
 	            "dhcp": "enabled",
+	            "type": "ipv4",
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 1818070534
+	               "id": 1643886297
 	            },
-	            "type": "ipv4",
-	            "iface": "eth0",
 	            "gateway": "172.23.0.1",
+	            "iface": "eth0",
 	            "dhcp": "enabled",
+	            "type": "ipv4",
 	            "agent_id": "003"
 	         }
 	      ],
@@ -4703,7 +4859,9 @@ Returns the agent's os info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/os?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4718,14 +4876,14 @@ Returns the agent's os info.
 	               "version": "8.1"
 	            },
 	            "scan": {
-	               "id": 1920185465,
-	               "time": "2020/03/10 10:48:15"
+	               "id": 556912922,
+	               "time": "2020/03/11 14:40:08"
 	            },
-	            "hostname": "f7a844596918",
-	            "architecture": "x86_64",
 	            "release": "5.3.0-40-generic",
-	            "sysname": "Linux",
+	            "hostname": "7ce87f29a3ad",
 	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
+	            "architecture": "x86_64",
+	            "sysname": "Linux",
 	            "agent_id": "000"
 	         },
 	         {
@@ -4737,14 +4895,14 @@ Returns the agent's os info.
 	               "version": "8 (Core)"
 	            },
 	            "scan": {
-	               "id": 867513241,
-	               "time": "2020/03/10 10:49:24"
+	               "id": 850046217,
+	               "time": "2020/03/11 14:41:26"
 	            },
-	            "hostname": "367091e739bf",
-	            "architecture": "x86_64",
 	            "release": "5.3.0-40-generic",
-	            "sysname": "Linux",
+	            "hostname": "51ae6aeff9b0",
 	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
+	            "architecture": "x86_64",
+	            "sysname": "Linux",
 	            "agent_id": "003"
 	         },
 	         {
@@ -4756,14 +4914,14 @@ Returns the agent's os info.
 	               "version": "8.1"
 	            },
 	            "scan": {
-	               "id": 290866200,
-	               "time": "2020/03/10 10:48:16"
+	               "id": 323895753,
+	               "time": "2020/03/11 14:40:08"
 	            },
+	            "sysname": "Linux",
+	            "release": "5.3.0-40-generic",
 	            "architecture": "x86_64",
 	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
-	            "release": "5.3.0-40-generic",
-	            "hostname": "22d176fc16f5",
-	            "sysname": "Linux",
+	            "hostname": "9010b2027421",
 	            "agent_id": "000"
 	         },
 	         {
@@ -4775,14 +4933,14 @@ Returns the agent's os info.
 	               "version": "8.1"
 	            },
 	            "scan": {
-	               "id": 480574840,
-	               "time": "2020/03/10 10:49:16"
+	               "id": 1270222934,
+	               "time": "2020/03/11 14:41:09"
 	            },
+	            "sysname": "Linux",
+	            "release": "5.3.0-40-generic",
 	            "architecture": "x86_64",
 	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
-	            "release": "5.3.0-40-generic",
-	            "hostname": "6647413945af",
-	            "sysname": "Linux",
+	            "hostname": "3e42938763b6",
 	            "agent_id": "002"
 	         },
 	         {
@@ -4794,14 +4952,14 @@ Returns the agent's os info.
 	               "version": "8.1"
 	            },
 	            "scan": {
-	               "id": 1944262753,
-	               "time": "2020/03/10 10:48:14"
+	               "id": 1128899975,
+	               "time": "2020/03/11 14:40:08"
 	            },
-	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
 	            "sysname": "Linux",
-	            "architecture": "x86_64",
+	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
 	            "release": "5.3.0-40-generic",
-	            "hostname": "d0b97894011c",
+	            "hostname": "f2fe0a2b2d94",
+	            "architecture": "x86_64",
 	            "agent_id": "000"
 	         },
 	         {
@@ -4813,14 +4971,14 @@ Returns the agent's os info.
 	               "version": "8.1"
 	            },
 	            "scan": {
-	               "id": 658897529,
-	               "time": "2020/03/10 10:49:06"
+	               "id": 1198650764,
+	               "time": "2020/03/11 14:40:59"
 	            },
-	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
 	            "sysname": "Linux",
-	            "architecture": "x86_64",
+	            "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
 	            "release": "5.3.0-40-generic",
-	            "hostname": "58d5dd1e4205",
+	            "hostname": "6df2b547e612",
+	            "architecture": "x86_64",
 	            "agent_id": "001"
 	         }
 	      ],
@@ -4875,7 +5033,9 @@ Returns the agent's packages info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/packages?pretty&sort=-name&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4883,34 +5043,34 @@ Returns the agent's packages info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 1904027220,
-	               "time": "2020/03/10 10:48:15"
+	               "id": 1892036290,
+	               "time": "2020/03/11 14:40:08"
 	            },
-	            "section": "Unspecified",
-	            "size": 7099,
-	            "architecture": "x86_64",
-	            "vendor": "CentOS",
-	            "description": "Powerful interactive shell",
-	            "name": "zsh",
-	            "install_time": "2020/03/10 10:47:33",
+	            "install_time": "2020/03/11 14:39:53",
 	            "version": "5.5.1-6.el8",
+	            "name": "zsh",
 	            "format": "rpm",
+	            "description": "Powerful interactive shell",
+	            "size": 7099,
+	            "vendor": "CentOS",
+	            "section": "Unspecified",
+	            "architecture": "x86_64",
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 343972160,
-	               "time": "2020/03/10 10:48:16"
+	               "id": 1570416077,
+	               "time": "2020/03/11 14:40:08"
 	            },
-	            "name": "zsh",
-	            "description": "Powerful interactive shell",
-	            "architecture": "x86_64",
-	            "install_time": "2020/03/10 10:47:33",
-	            "version": "5.5.1-6.el8",
-	            "section": "Unspecified",
-	            "vendor": "CentOS",
 	            "format": "rpm",
+	            "name": "zsh",
+	            "section": "Unspecified",
 	            "size": 7099,
+	            "install_time": "2020/03/11 14:39:53",
+	            "architecture": "x86_64",
+	            "description": "Powerful interactive shell",
+	            "version": "5.5.1-6.el8",
+	            "vendor": "CentOS",
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4971,7 +5131,9 @@ Returns the agent's ports info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/ports?pretty&limit=2&sort=protocol"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -4980,20 +5142,20 @@ Returns the agent's ports info.
 	         {
 	            "local": {
 	               "ip": "127.0.0.11",
-	               "port": 40289
+	               "port": 45491
 	            },
 	            "remote": {
 	               "ip": "0.0.0.0",
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 723741091,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 99092781,
+	               "time": "2020/03/11 14:40:11"
 	            },
-	            "state": "listening",
-	            "rx_queue": 0,
-	            "inode": 7228847,
 	            "protocol": "tcp",
+	            "inode": 13036496,
+	            "rx_queue": 0,
+	            "state": "listening",
 	            "tx_queue": 0,
 	            "agent_id": "000"
 	         },
@@ -5007,13 +5169,13 @@ Returns the agent's ports info.
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 723741091,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 99092781,
+	               "time": "2020/03/11 14:40:11"
 	            },
-	            "state": "listening",
-	            "rx_queue": 0,
-	            "inode": 7401117,
 	            "protocol": "tcp",
+	            "inode": 13040604,
+	            "rx_queue": 0,
+	            "state": "listening",
 	            "tx_queue": 0,
 	            "agent_id": "000"
 	         }
@@ -5087,7 +5249,9 @@ Returns the agent's processes info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/processes?pretty&limit=2&sort=priority"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5095,71 +5259,71 @@ Returns the agent's processes info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 703839022,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 818705997,
+	               "time": "2020/03/11 14:40:11"
 	            },
-	            "priority": 20,
-	            "state": "S",
-	            "size": 2972,
-	            "ruser": "root",
-	            "suser": "root",
-	            "pgrp": 1,
 	            "euser": "root",
-	            "utime": 27,
-	            "nice": 0,
-	            "argvs": "/scripts/entrypoint.sh,wazuh-master,worker-2,worker",
-	            "egroup": "root",
-	            "share": 658,
-	            "stime": 2,
-	            "ppid": 0,
-	            "nlwp": 1,
 	            "pid": "1",
+	            "stime": 2,
 	            "sgroup": "root",
-	            "fgroup": "root",
-	            "tgid": 1,
+	            "size": 2972,
+	            "suser": "root",
+	            "share": 631,
 	            "session": 1,
-	            "tty": 0,
-	            "vm_size": 11888,
-	            "name": "bash",
-	            "processor": 7,
-	            "resident": 723,
-	            "start_time": 1374509,
+	            "state": "S",
+	            "priority": 20,
+	            "processor": 4,
+	            "ruser": "root",
 	            "cmd": "bash",
+	            "utime": 21,
+	            "ppid": 0,
 	            "rgroup": "root",
+	            "nlwp": 1,
+	            "name": "bash",
+	            "fgroup": "root",
+	            "pgrp": 1,
+	            "start_time": 2748050,
+	            "argvs": "/scripts/entrypoint.sh,wazuh-master,worker-2,worker",
+	            "resident": 695,
+	            "vm_size": 11888,
+	            "egroup": "root",
+	            "tgid": 1,
+	            "nice": 0,
+	            "tty": 0,
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 703839022,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 818705997,
+	               "time": "2020/03/11 14:40:11"
 	            },
-	            "priority": 20,
-	            "state": "S",
-	            "size": 159246,
-	            "ruser": "ossec",
-	            "suser": "ossec",
-	            "pgrp": 136,
 	            "euser": "ossec",
-	            "utime": 2,
-	            "nice": 0,
-	            "egroup": "ossec",
-	            "share": 1013,
-	            "stime": 3,
-	            "ppid": 1,
-	            "nlwp": 11,
-	            "pid": "137",
+	            "pid": "136",
+	            "stime": 5,
 	            "sgroup": "ossec",
-	            "fgroup": "ossec",
-	            "tgid": 137,
-	            "session": 136,
-	            "tty": 0,
-	            "vm_size": 636984,
-	            "name": "wazuh-db",
-	            "processor": 1,
-	            "resident": 1406,
-	            "start_time": 1374751,
+	            "size": 159245,
+	            "suser": "ossec",
+	            "share": 1008,
+	            "session": 135,
+	            "state": "S",
+	            "priority": 20,
+	            "processor": 3,
+	            "ruser": "ossec",
 	            "cmd": "/var/ossec/bin/wazuh-db",
+	            "utime": 4,
+	            "ppid": 1,
 	            "rgroup": "ossec",
+	            "nlwp": 11,
+	            "name": "wazuh-db",
+	            "fgroup": "ossec",
+	            "pgrp": 135,
+	            "start_time": 2748314,
+	            "resident": 1335,
+	            "vm_size": 636980,
+	            "egroup": "ossec",
+	            "tgid": 136,
+	            "nice": 0,
+	            "tty": 0,
 	            "agent_id": "000"
 	         }
 	      ],
@@ -5222,7 +5386,9 @@ Returns the agent's ciscat results info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/ciscat/results?pretty&sort=-score"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -5302,7 +5468,9 @@ Returns the content of all CDB lists.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/lists?pretty&path=etc/lists/audit-keys"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5366,7 +5534,9 @@ Returns the path from all lists.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/lists/files?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5470,7 +5640,9 @@ Returns the requested configuration in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/config/logcollector/internal?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5524,7 +5696,9 @@ Returns ossec.conf in JSON format.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration?section=global&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5569,7 +5743,9 @@ Returns if Wazuh configuration is OK.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration/validation?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5603,7 +5779,9 @@ Confirmation message.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/manager/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 1906,
@@ -5637,7 +5815,9 @@ Returns the content of a local file (rules, decoders and lists).
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/files?path=etc/decoders/local_decoder.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5673,7 +5853,9 @@ Upload a local file (rules, decoders and lists).
 	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/manager/files?path=etc/rules/new_rule.xml&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -5700,21 +5882,23 @@ Returns basic information about manager.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/info?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
 	      "version": "v3.12.0",
-	      "compilation_date": "Tue Mar 10 10:45:44 UTC 2020",
+	      "compilation_date": "Wed Mar 11 14:38:15 UTC 2020",
 	      "type": "server",
 	      "max_agents": "N/A",
 	      "openssl_support": "N/A",
 	      "ruleset_version": "31200",
 	      "tz_offset": "+0000",
 	      "tz_name": "UTC",
-	      "name": "d0b97894011c",
+	      "name": "f2fe0a2b2d94",
 	      "cluster": {
 	         "enabled": "yes",
 	         "running": "yes",
@@ -5742,7 +5926,9 @@ Returns the status of the manager processes.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/status?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5814,44 +6000,46 @@ Returns the three last months of ossec.log.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs?offset=0&limit=5&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "items": [
 	         {
-	            "timestamp": "2020-03-10 10:49:29",
+	            "timestamp": "2020-03-11 14:42:18",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " This vulnerability-detector declaration is deprecated. Use <vulnerability-detector> instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:29",
+	            "timestamp": "2020-03-11 14:42:18",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'disabled' option at module 'vulnerability-detector' is deprecated. Use 'enabled' instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:29",
+	            "timestamp": "2020-03-11 14:42:18",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'feed' option at module 'vulnerability-detector' is deprecated. Use 'provider' instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:29",
+	            "timestamp": "2020-03-11 14:42:18",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'feed' option at module 'vulnerability-detector' is deprecated. Use 'provider' instead."
 	         },
 	         {
-	            "timestamp": "2020-03-10 10:49:29",
+	            "timestamp": "2020-03-11 14:42:18",
 	            "tag": "wazuh-modulesd",
 	            "level": "warning",
 	            "description": " 'feed' option at module 'vulnerability-detector' is deprecated. Use 'provider' instead."
 	         }
 	      ],
-	      "totalItems": 202
+	      "totalItems": 230
 	   }
 	}
 	
@@ -5872,7 +6060,9 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs/summary?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -5942,8 +6132,8 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "debug": 0
 	      },
 	      "ossec-remoted": {
-	         "all": 13,
-	         "info": 10,
+	         "all": 15,
+	         "info": 12,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 3,
@@ -6037,25 +6227,17 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "ossec-analysisd": {
-	         "all": 45,
-	         "info": 45,
+	      "ossec-syscheckd": {
+	         "all": 53,
+	         "info": 53,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "ossec-logcollector": {
-	         "all": 12,
-	         "info": 12,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:syscollector": {
-	         "all": 5,
-	         "info": 5,
+	      "ossec-rootcheck": {
+	         "all": 4,
+	         "info": 4,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
@@ -6064,22 +6246,6 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	      "ossec-maild": {
 	         "all": 2,
 	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-syscheckd": {
-	         "all": 28,
-	         "info": 28,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-rootcheck": {
-	         "all": 3,
-	         "info": 3,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
@@ -6109,7 +6275,9 @@ Restarts Wazuh Manager.
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6136,14 +6304,16 @@ Returns a summary of the current analysisd stats.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/analysisd?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
-	      "total_events_decoded": 206,
-	      "syscheck_events_decoded": 201,
-	      "syscheck_edps": 40,
+	      "total_events_decoded": 5,
+	      "syscheck_events_decoded": 0,
+	      "syscheck_edps": 0,
 	      "syscollector_events_decoded": 0,
 	      "syscollector_edps": 0,
 	      "rootcheck_events_decoded": 0,
@@ -6158,7 +6328,7 @@ Returns a summary of the current analysisd stats.
 	      "other_events_edps": 1,
 	      "events_processed": 5,
 	      "events_edps": 1,
-	      "events_received": 206,
+	      "events_received": 5,
 	      "events_dropped": 0,
 	      "alerts_written": 0,
 	      "firewall_written": 0,
@@ -6215,7 +6385,9 @@ Returns Wazuh statistical information for the current or specified date.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6264,7 +6436,9 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/hourly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6298,7 +6472,9 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/weekly?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6378,7 +6554,9 @@ Returns a summary of the current remoted stats.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/remoted?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6386,11 +6564,11 @@ Returns a summary of the current remoted stats.
 	      "queue_size": 0,
 	      "total_queue_size": 131072,
 	      "tcp_sessions": 0,
-	      "evt_count": 1282,
-	      "ctrl_msg_count": 12,
+	      "evt_count": 2149,
+	      "ctrl_msg_count": 17,
 	      "discarded_count": 0,
-	      "msg_sent": 1014,
-	      "recv_bytes": 309120,
+	      "msg_sent": 1579,
+	      "recv_bytes": 498136,
 	      "dequeued_after_close": 0
 	   }
 	}
@@ -6419,7 +6597,9 @@ Clears the rootcheck database for all agents.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6450,7 +6630,9 @@ Clears the rootcheck database for a specific agent.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6485,13 +6667,15 @@ Returns the timestamp of the last rootcheck scan.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/last_scan?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
-	      "end": "2020-03-10 10:48:48",
-	      "start": "2020-03-10 10:48:30"
+	      "end": "2020-03-11 14:40:41",
+	      "start": "2020-03-11 14:40:23"
 	   }
 	}
 	
@@ -6526,7 +6710,9 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/cis?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 2003,
@@ -6572,13 +6758,22 @@ Returns the rootcheck database of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000?offset=0&limit=2&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
-	      "items": [],
-	      "totalItems": 0
+	      "items": [
+	         {
+	            "readDay": "2020-03-11 14:40:25",
+	            "status": "outstanding",
+	            "oldDay": "2020-03-11 14:40:25",
+	            "event": "File '/root/.npm/_cacache/index-v5/f6/fe/9c43f3b048ef1201673bfea640b64c9d4b5264f75c3fa308f333a57f6e47' is owned by root and has written permissions to anyone."
+	         }
+	      ],
+	      "totalItems": 1
 	   }
 	}
 	
@@ -6613,7 +6808,9 @@ Returns the PCI requirements of all rootchecks of the agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/pci?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 2003,
@@ -6641,7 +6838,9 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -6672,7 +6871,9 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6745,7 +6946,9 @@ Returns all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules?offset=0&limit=2&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6841,7 +7044,9 @@ Returns the files of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/files?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6933,7 +7138,9 @@ Returns the GDPR requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/gdpr?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -6979,7 +7186,9 @@ Returns the GPG13 requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/gpg13?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7031,7 +7240,9 @@ Returns the groups of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/groups?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7083,7 +7294,9 @@ Returns the HIPAA requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/hipaa?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7135,7 +7348,9 @@ Returns the NIST-800-53 requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/nist-800-53?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7187,7 +7402,9 @@ Returns the PCI requirements of all rules.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/pci?offset=0&limit=10&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7241,7 +7458,9 @@ Returns the rules with the specified id.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/1002?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7338,7 +7557,9 @@ Returns the sca checks of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000/checks/unix_audit?limit=1&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7346,17 +7567,17 @@ Returns the sca checks of an agent.
 	      "totalItems": 23,
 	      "items": [
 	         {
-	            "description": "Turn on the auditd daemon to record system events.",
-	            "reason": "",
-	            "status": "",
-	            "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
-	            "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
-	            "result": "failed",
-	            "command": "systemctl is-enabled auditd",
-	            "title": "Ensure auditd service is enabled",
-	            "policy_id": "unix_audit",
-	            "condition": "all",
 	            "id": 4022,
+	            "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+	            "title": "Ensure auditd service is enabled",
+	            "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+	            "result": "failed",
+	            "policy_id": "unix_audit",
+	            "reason": "",
+	            "description": "Turn on the auditd daemon to record system events.",
+	            "condition": "all",
+	            "status": "",
+	            "command": "systemctl is-enabled auditd",
 	            "compliance": [
 	               {
 	                  "key": "cis_csc",
@@ -7415,25 +7636,27 @@ Returns the sca database of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000?q=pass>2;score<150&pretty&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "items": [
 	         {
-	            "total_checks": 23,
-	            "policy_id": "unix_audit",
-	            "end_scan": "2020-03-10 10:48:13",
 	            "score": 25,
-	            "fail": 12,
-	            "description": "Guidance for establishing a secure configuration for Unix based systems.",
-	            "references": "https://www.ssh.com/ssh/",
+	            "policy_id": "unix_audit",
+	            "pass": 4,
 	            "invalid": 7,
+	            "references": "https://www.ssh.com/ssh/",
 	            "hash_file": "c07d31fa918a0e2b430abaaae0b9fc3b5abd469fd057e2c0a205a4ece4b9c41f",
-	            "start_scan": "2020-03-10 10:48:13",
+	            "total_checks": 23,
+	            "end_scan": "2020-03-11 14:40:07",
+	            "start_scan": "2020-03-11 14:40:07",
 	            "name": "System audit for Unix based systems",
-	            "pass": 4
+	            "fail": 12,
+	            "description": "Guidance for establishing a secure configuration for Unix based systems."
 	         }
 	      ],
 	      "totalItems": 1
@@ -7464,7 +7687,9 @@ Returns a dictionary with a full summary of agents.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/summary/agents?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7541,16 +7766,16 @@ Returns a dictionary with a full summary of agents.
 	      "agent_version": {
 	         "items": [
 	            {
-	               "version": "Wazuh v3.12.0",
-	               "count": 1
+	               "count": 1,
+	               "version": "Wazuh v3.12.0"
 	            },
 	            {
-	               "version": "Wazuh v3.11.4",
-	               "count": 2
+	               "count": 2,
+	               "version": "Wazuh v3.11.4"
 	            },
 	            {
-	               "version": "Wazuh v3.5.0",
-	               "count": 1
+	               "count": 1,
+	               "version": "Wazuh v3.5.0"
 	            },
 	            {
 	               "count": 7
@@ -7559,13 +7784,13 @@ Returns a dictionary with a full summary of agents.
 	         "totalItems": 11
 	      },
 	      "last_registered_agent": {
-	         "node_name": "unknown",
+	         "status": "Never connected",
+	         "dateAdd": "2020-03-11 14:41:58",
+	         "ip": "10.0.0.9",
 	         "registerIP": "10.0.0.9",
 	         "name": "NewHost",
-	         "status": "Never connected",
-	         "dateAdd": "2020-03-10 10:49:09",
 	         "id": "009",
-	         "ip": "10.0.0.9"
+	         "node_name": "unknown"
 	      }
 	   }
 	}
@@ -7602,7 +7827,9 @@ Clears the syscheck database for the specified agent.
 	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/syscheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -7637,13 +7864,15 @@ Return the timestamp of the last syscheck scan.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000/last_scan?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
-	      "end": "2020-03-10 10:48:50",
-	      "start": "2020-03-10 10:48:30"
+	      "start": "2020-03-11 14:42:22",
+	      "end": "2020-03-11 14:40:43"
 	   }
 	}
 	
@@ -7710,43 +7939,45 @@ Returns the syscheck files of an agent.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000?offset=0&limit=2&pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "items": [
 	         {
-	            "size": 642,
-	            "gid": "0",
-	            "file": "/etc/xattr.conf",
-	            "mtime": "2016-12-09 19:11:13",
-	            "uid": "0",
-	            "md5": "d1e7e7add29e247fdcf2a098fe5b37a0",
-	            "sha1": "54113a3771fd7b2b8bb63ccf0a899ac9af88f685",
 	            "inode": 16921835,
-	            "gname": "root",
-	            "type": "file",
-	            "perm": "100644",
-	            "uname": "root",
 	            "sha256": "c1259ead36165a9477c9e1948500fb1ae58f33140d2c8b9fdf09ae54425d62b6",
-	            "date": "2020-03-10 10:48:35"
+	            "uid": "0",
+	            "size": 642,
+	            "date": "2020-03-11 14:40:28",
+	            "mtime": "2016-12-09 19:11:13",
+	            "md5": "d1e7e7add29e247fdcf2a098fe5b37a0",
+	            "gname": "root",
+	            "perm": "100644",
+	            "sha1": "54113a3771fd7b2b8bb63ccf0a899ac9af88f685",
+	            "uname": "root",
+	            "file": "/etc/xattr.conf",
+	            "type": "file",
+	            "gid": "0"
 	         },
 	         {
-	            "size": 2151,
-	            "gid": "0",
-	            "file": "/etc/security/pwquality.conf",
-	            "mtime": "2017-02-10 13:50:08",
-	            "uid": "0",
-	            "md5": "1f814b47cc24ab813961e2939d1db23c",
-	            "sha1": "8e1dde40834f87a44cd6cbe209c3bbcc45ab9ac0",
 	            "inode": 17060873,
-	            "gname": "root",
-	            "type": "file",
-	            "perm": "100644",
-	            "uname": "root",
 	            "sha256": "77976ab8c2b73c5951600cb43526076c28a650677988df1c9a8e981ea9d65c9f",
-	            "date": "2020-03-10 10:48:35"
+	            "uid": "0",
+	            "size": 2151,
+	            "date": "2020-03-11 14:40:28",
+	            "mtime": "2017-02-10 13:50:08",
+	            "md5": "1f814b47cc24ab813961e2939d1db23c",
+	            "gname": "root",
+	            "perm": "100644",
+	            "sha1": "8e1dde40834f87a44cd6cbe209c3bbcc45ab9ac0",
+	            "uname": "root",
+	            "file": "/etc/security/pwquality.conf",
+	            "type": "file",
+	            "gid": "0"
 	         }
 	      ],
 	      "totalItems": 957
@@ -7774,7 +8005,9 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	    "error": 0,
@@ -7805,7 +8038,9 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck/000?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7846,24 +8081,26 @@ Returns the agent's hardware info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/hardware?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
 	   "data": {
 	      "cpu": {
 	         "cores": 8,
-	         "mhz": 4000.002,
+	         "mhz": 3460.966,
 	         "name": "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
 	      },
 	      "ram": {
-	         "free": 516884,
+	         "free": 598588,
 	         "total": 16024656,
 	         "usage": 97
 	      },
 	      "scan": {
-	         "id": 1282042316,
-	         "time": "2020/03/10 10:48:14"
+	         "id": 1787159141,
+	         "time": "2020/03/11 14:40:08"
 	      },
 	      "board_serial": "/72NL9Y2/CNCMK009B30174/"
 	   }
@@ -7912,7 +8149,9 @@ Returns all hotfixes installed by Microsoft(R) in Windows(R) systems (KB... fixe
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/001/hotfixes?pretty&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7971,7 +8210,9 @@ Returns the agent's network address info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -7979,13 +8220,13 @@ Returns the agent's network address info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 372027227
+	               "id": 370984796
 	            },
-	            "proto": "ipv4",
 	            "address": "172.23.0.2",
-	            "broadcast": "172.23.255.255",
+	            "netmask": "255.255.0.0",
 	            "iface": "eth0",
-	            "netmask": "255.255.0.0"
+	            "proto": "ipv4",
+	            "broadcast": "172.23.255.255"
 	         }
 	      ],
 	      "totalItems": 1
@@ -8057,7 +8298,9 @@ Returns the agent's network interface info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netiface?pretty&limit=2&sort=state"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8065,26 +8308,26 @@ Returns the agent's network interface info.
 	      "items": [
 	         {
 	            "rx": {
-	               "bytes": 8250,
+	               "bytes": 8164,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 56
+	               "packets": 59
 	            },
 	            "scan": {
-	               "id": 372027227,
-	               "time": "2020/03/10 10:48:14"
+	               "id": 370984796,
+	               "time": "2020/03/11 14:40:07"
 	            },
 	            "tx": {
-	               "bytes": 388,
+	               "bytes": 504,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 4
+	               "packets": 6
 	            },
 	            "type": "ethernet",
-	            "mtu": 1500,
 	            "name": "eth0",
-	            "mac": "02:42:ac:17:00:02",
-	            "state": "up"
+	            "state": "up",
+	            "mtu": 1500,
+	            "mac": "02:42:ac:17:00:02"
 	         }
 	      ],
 	      "totalItems": 1
@@ -8138,7 +8381,9 @@ Returns the agent's network protocol info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8146,12 +8391,12 @@ Returns the agent's network protocol info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 372027227
+	               "id": 370984796
 	            },
-	            "gateway": "172.23.0.1",
+	            "type": "ipv4",
 	            "iface": "eth0",
 	            "dhcp": "enabled",
-	            "type": "ipv4"
+	            "gateway": "172.23.0.1"
 	         }
 	      ],
 	      "totalItems": 1
@@ -8189,7 +8434,9 @@ Returns the agent's OS info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/os?pretty"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8202,14 +8449,14 @@ Returns the agent's OS info.
 	         "version": "8.1"
 	      },
 	      "scan": {
-	         "id": 1944262753,
-	         "time": "2020/03/10 10:48:14"
+	         "id": 1128899975,
+	         "time": "2020/03/11 14:40:08"
 	      },
-	      "hostname": "d0b97894011c",
-	      "architecture": "x86_64",
-	      "sysname": "Linux",
 	      "version": "#32-Ubuntu SMP Fri Jan 31 20:24:34 UTC 2020",
-	      "release": "5.3.0-40-generic"
+	      "architecture": "x86_64",
+	      "release": "5.3.0-40-generic",
+	      "hostname": "f2fe0a2b2d94",
+	      "sysname": "Linux"
 	   }
 	}
 	
@@ -8264,7 +8511,9 @@ Returns the agent's packages info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/packages?pretty&limit=2&offset=10&sort=-name"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8272,33 +8521,33 @@ Returns the agent's packages info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 688535136,
-	               "time": "2020/03/10 10:48:14"
+	               "id": 1446174342,
+	               "time": "2020/03/11 14:40:08"
 	            },
 	            "name": "tar",
-	            "format": "rpm",
-	            "section": "Applications/Archiving",
-	            "architecture": "x86_64",
+	            "size": 2846,
 	            "vendor": "CentOS",
 	            "install_time": "2020/01/13 21:49:20",
-	            "description": "A GNU file archiving program",
 	            "version": "2:1.30-4.el8",
-	            "size": 2846
+	            "section": "Applications/Archiving",
+	            "description": "A GNU file archiving program",
+	            "format": "rpm",
+	            "architecture": "x86_64"
 	         },
 	         {
 	            "scan": {
-	               "id": 688535136,
-	               "time": "2020/03/10 10:48:14"
+	               "id": 1446174342,
+	               "time": "2020/03/11 14:40:08"
 	            },
 	            "name": "systemd-udev",
-	            "format": "rpm",
-	            "section": "Unspecified",
-	            "architecture": "x86_64",
+	            "size": 8116,
 	            "vendor": "CentOS",
 	            "install_time": "2020/01/13 21:49:18",
-	            "description": "Rule-based device node and kernel event manager",
 	            "version": "239-18.el8_1.1",
-	            "size": 8116
+	            "section": "Unspecified",
+	            "description": "Rule-based device node and kernel event manager",
+	            "format": "rpm",
+	            "architecture": "x86_64"
 	         }
 	      ],
 	      "totalItems": 261
@@ -8360,7 +8609,9 @@ Returns the agent's ports info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/ports?pretty&sort=-protocol&limit=2"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8376,14 +8627,14 @@ Returns the agent's ports info.
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 986046699,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 10385605,
+	               "time": "2020/03/11 14:40:11"
 	            },
 	            "state": "listening",
 	            "protocol": "tcp6",
-	            "rx_queue": 0,
 	            "tx_queue": 0,
-	            "inode": 7411651
+	            "rx_queue": 0,
+	            "inode": 13042011
 	         },
 	         {
 	            "local": {
@@ -8395,14 +8646,14 @@ Returns the agent's ports info.
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 986046699,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 10385605,
+	               "time": "2020/03/11 14:40:11"
 	            },
 	            "state": "listening",
 	            "protocol": "tcp6",
-	            "rx_queue": 0,
 	            "tx_queue": 0,
-	            "inode": 7401643
+	            "rx_queue": 0,
+	            "inode": 13045023
 	         }
 	      ],
 	      "totalItems": 6
@@ -8478,7 +8729,9 @@ Returns the agent's processes info.
 	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/processes?pretty&limit=2&offset=10&sort=-name"
 
 **Example Response:**
-::
+
+.. code-block:: json
+	:class: output
 
 	{
 	   "error": 0,
@@ -8486,69 +8739,69 @@ Returns the agent's processes info.
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 22521756,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 1430619430,
+	               "time": "2020/03/11 14:40:11"
 	            },
-	            "start_time": 1374657,
-	            "rgroup": "ossec",
-	            "ppid": 1,
-	            "pid": "105",
-	            "name": "ossec-integrato",
-	            "egroup": "ossec",
-	            "vm_size": 30772,
-	            "euser": "ossecm",
-	            "nlwp": 2,
-	            "resident": 762,
-	            "sgroup": "ossec",
-	            "pgrp": 104,
 	            "nice": 0,
-	            "tgid": 105,
-	            "priority": 20,
-	            "size": 7693,
-	            "state": "S",
-	            "processor": 6,
-	            "utime": 0,
-	            "ruser": "ossecm",
-	            "cmd": "/var/ossec/bin/ossec-integratord",
-	            "share": 522,
-	            "stime": 0,
-	            "suser": "ossecm",
-	            "tty": 0,
+	            "nlwp": 2,
+	            "vm_size": 30772,
+	            "session": 103,
+	            "sgroup": "ossec",
 	            "fgroup": "ossec",
-	            "session": 104
+	            "start_time": 2748219,
+	            "priority": 20,
+	            "state": "S",
+	            "size": 7693,
+	            "ppid": 1,
+	            "cmd": "/var/ossec/bin/ossec-integratord",
+	            "resident": 757,
+	            "ruser": "ossecm",
+	            "suser": "ossecm",
+	            "pid": "104",
+	            "egroup": "ossec",
+	            "pgrp": 103,
+	            "tty": 0,
+	            "euser": "ossecm",
+	            "utime": 0,
+	            "name": "ossec-integrato",
+	            "rgroup": "ossec",
+	            "tgid": 104,
+	            "share": 517,
+	            "stime": 0,
+	            "processor": 2
 	         },
 	         {
 	            "scan": {
-	               "id": 22521756,
-	               "time": "2020/03/10 10:48:17"
+	               "id": 1430619430,
+	               "time": "2020/03/11 14:40:11"
 	            },
-	            "start_time": 1374769,
-	            "rgroup": "ossec",
-	            "ppid": 1,
-	            "pid": "188",
-	            "name": "ossec-execd",
-	            "egroup": "ossec",
-	            "vm_size": 30832,
-	            "euser": "root",
-	            "nlwp": 2,
-	            "resident": 761,
-	            "sgroup": "ossec",
-	            "pgrp": 187,
 	            "nice": 0,
-	            "tgid": 188,
-	            "priority": 20,
-	            "size": 7708,
-	            "state": "S",
-	            "processor": 2,
-	            "utime": 0,
-	            "ruser": "root",
-	            "cmd": "/var/ossec/bin/ossec-execd",
-	            "share": 495,
-	            "stime": 0,
-	            "suser": "root",
-	            "tty": 0,
+	            "nlwp": 2,
+	            "vm_size": 30828,
+	            "session": 186,
+	            "sgroup": "ossec",
 	            "fgroup": "ossec",
-	            "session": 187
+	            "start_time": 2748335,
+	            "priority": 20,
+	            "state": "S",
+	            "size": 7707,
+	            "ppid": 1,
+	            "cmd": "/var/ossec/bin/ossec-execd",
+	            "resident": 757,
+	            "ruser": "root",
+	            "suser": "root",
+	            "pid": "187",
+	            "egroup": "ossec",
+	            "pgrp": 186,
+	            "tty": 0,
+	            "euser": "root",
+	            "utime": 0,
+	            "name": "ossec-execd",
+	            "rgroup": "ossec",
+	            "tgid": 187,
+	            "share": 492,
+	            "stime": 0,
+	            "processor": 6
 	         }
 	      ],
 	      "totalItems": 18
