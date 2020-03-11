@@ -33,6 +33,8 @@ Server subsection options
 - :ref:`port <server_port>`
 - :ref:`protocol <server_protocol>`
 
+.. _server_address:
+
 address
 ^^^^^^^^
 
@@ -162,6 +164,7 @@ Specifies the ``agent.conf`` profile(s) to be used by the agent.
 | **Allowed values** | Multiple profiles can be included, separated by a comma and a space. |
 +--------------------+----------------------------------------------------------------------+
 
+.. _notify_time:
 
 notify_time
 ^^^^^^^^^^^
@@ -174,6 +177,7 @@ Specifies the time in seconds between agent checkins to the manager.  More frequ
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
+.. _time_reconnect:
 
 time-reconnect
 ^^^^^^^^^^^^^^

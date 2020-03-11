@@ -91,6 +91,8 @@ Now that we have Wazuh installed with database support, we need to set up the da
   
 .. code-block:: console
 
+.. code-block:: console
+
   # mysql -u root -p Alerts_DB < src/os_dbd/mysql.schema
 
 **For PostgreSQL:**

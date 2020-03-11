@@ -14,7 +14,7 @@ Download and install the Wazuh module from Puppet Forge:
 
   .. code-block:: console
 
-    # puppet module install wazuh-wazuh --version 3.10.2
+    # puppet module install wazuh-wazuh --version 3.11.4
 
   .. code-block:: none
     :class: output
@@ -23,7 +23,7 @@ Download and install the Wazuh module from Puppet Forge:
     Notice: Downloading from https://forgeapi.puppetlabs.com ...
     Notice: Installing -- do not interrupt ...
     /etc/puppet/modules
-    └─┬ wazuh-wazuh (v3.10.2)
+    └─┬ wazuh-wazuh (v3.11.4)
       ├── puppet-nodejs (v7.0.0)
       ├── puppet-selinux (v1.6.1)
       ├── puppetlabs-apt (v6.3.0)
@@ -38,7 +38,7 @@ This module installs and configures Wazuh agent and manager.
 Install manager via Puppet
 --------------------------
 
-The manager is configured by installing the ``wazuh::server`` class, and optionally using:
+The manager is configured by installing the ``wazuh::manager`` class, and optionally using:
 
  - ``wazuh::command``: to define active response command (like ``firewall-drop.sh``).
  - ``wazuh::activeresponse``: to link rules to active response commands.
@@ -63,8 +63,8 @@ Here is an example of a manifest ``wazuh-manager.pp``
   .. code-block:: puppet
 
     node "server.yourhost.com" {
-      class { 'wazuh::server':
-        smtp_server => 'localhost',
+      class { 'wazuh::manager':
+        ossec_smtp_server => 'localhost',
         ossec_emailto => ['user@mycompany.com'],
       }
 
@@ -124,7 +124,7 @@ Reference Wazuh puppet
 +-----------------------------------------------------------------+---------------------------------------------+
 | Sections                                                        | Functions                                   |
 +=================================================================+=============================================+
-| :ref:`Wazuh server class <reference_wazuh_server_class>`        | :ref:`email_alert <ref_server_email_alert>` |
+| :ref:`Wazuh manager class <reference_wazuh_manager_class>`      | :ref:`email_alert <ref_server_email_alert>` |
 |                                                                 |                                             |
 |                                                                 | :ref:`command <ref_server_command>`         |
 |                                                                 |                                             |
@@ -146,4 +146,4 @@ Reference Wazuh puppet
 
     reference-wazuh-puppet/ossec-scanpaths
     reference-wazuh-puppet/wazuh-agent-class
-    reference-wazuh-puppet/wazuh-server-class
+    reference-wazuh-puppet/wazuh-manager-class

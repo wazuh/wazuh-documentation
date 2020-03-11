@@ -7,14 +7,14 @@ Rootkit detection
 
 Rootkit and trojan detection is performed using two files: ``rootkit_files.txt`` and ``rootkit_trojans.txt``. In addition, other low-level tests are performed to detect kernel-level rootkits. You can use these capabilities by adding references to these files in ``ossec.conf``:
 
-::
+.. code-block:: xml
 
     <rootcheck>
         <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
 
-These are the options available for the `rootcheck component <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/rootcheck.html>`_:
+These are the options available for the :ref:`rootcheck component<reference_ossec_rootcheck>`:
 
 + **rootkit_files**: Contains the Unix-based application level rootkit signatures.
 

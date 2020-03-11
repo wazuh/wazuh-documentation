@@ -25,7 +25,7 @@ Options
 - `network`_
 - `packages`_
 - `ports`_
-- `processes`_
+- `hotfixes`_
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -47,6 +47,8 @@ Options
 | `ports`_             | yes, no                     |
 +----------------------+-----------------------------+
 | `processes`_         | yes, no                     |
++----------------------+-----------------------------+
+| `hotfixes`_          | yes, no                     |
 +----------------------+-----------------------------+
 
 
@@ -156,6 +158,22 @@ Enables the processes scan.
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+hotfixes
+^^^^^^^^
+
+.. versionadded:: 3.11.0
+
+Enables the hotfixes scan. It reports the Windows updates installed.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+.. note::
+  This option is enabled by default but no included in the initial configuration.
 
 
 Example of configuration

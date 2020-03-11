@@ -28,12 +28,12 @@ Install Splunk Indexer
 
 This component works receiving the data flow streamed by a forwarder and stores it in a Splunk index.
 
-1. Download Splunk v7.3.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+1. Download Splunk v8.0.1 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
     .. note::
       Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
 
-2. Install the Splunk v7.3.0 package:
+2. Install the Splunk v8.0.1 package:
 
     a) For RPM based distributions:
 
@@ -47,18 +47,21 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
         # dpkg --install splunk-enterprise-package.deb
 
-3. Ensure Splunk v7.3.0 is installed in ``/opt/splunk`` and start the service:
+3. Configure ``inputs.conf`` and ``indexes.conf``:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # /opt/splunk/bin/splunk start
+        # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.12.0/extensions/splunk/peer-indexes.conf
 
-    .. note::
-      You will be prompted for a name and password for the administrator user.
+    b) Create ``inputs.conf``:
 
-    After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
+      .. code-block:: console
 
-4. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+        # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.12.0/extensions/splunk/peer-inputs.conf
+
+4. Ensure Splunk v8.0.1 is installed in ``/opt/splunk`` and start the service:
+
+5. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
 
     .. code-block:: console
 
@@ -69,4 +72,4 @@ Now that you've finished installing Splunk on a single-instance mode, you can pr
 Additional links
 ----------------
 
-- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.3.0/Admin/CLIadmincommands>`_ .
+- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.0.1/Admin/CLIadmincommands>`_ .

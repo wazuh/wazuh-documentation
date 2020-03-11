@@ -37,7 +37,7 @@ location
 
 Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
-For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jul 30th, 2019).
+For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
 
 Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
@@ -347,6 +347,8 @@ The list of available parameters is:
 +========================+=======================================================================+
 | ``log``                | Message from the log.                                                 |
 +------------------------+-----------------------------------------------------------------------+
+| ``json_escaped_log``   | Message from the log, escaping JSON reserver characters.              |
++------------------------+-----------------------------------------------------------------------+
 | ``output``             | Output from a command. Alias of ``log``.                              |
 +------------------------+-----------------------------------------------------------------------+
 | ``location``           | Path to the source log file.                                          |
@@ -358,6 +360,8 @@ The list of available parameters is:
 | ``timestamp <format>`` | Custom timestamp, in ``strftime`` string format.                      |
 +------------------------+-----------------------------------------------------------------------+
 | ``hostname``           | System's host name.                                                   |
++------------------------+-----------------------------------------------------------------------+
+| ``host_ip``            | Host's primary IP address.                                            |
 +------------------------+-----------------------------------------------------------------------+
 
 Attributes:
