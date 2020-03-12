@@ -103,7 +103,7 @@ Kibana
 
   Wazuh APP compatible version to install
 
-  *Default |WAZUH_LATEST|*
+  *Default |WAZUH_LATEST_ANSIBLE|*
 
 **elasticsearch_network_host**
 

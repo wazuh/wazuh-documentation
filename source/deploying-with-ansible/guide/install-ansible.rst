@@ -372,7 +372,7 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v|WAZUH_LATEST|_7.6.1 https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v|WAZUH_LATEST_ANSIBLE|_7.6.1 https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
 
 .. code-block:: none
