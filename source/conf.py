@@ -414,6 +414,7 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.0",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
+    "|SPLUNK_LATEST|" : "8.0.1",
 }   
 
 # -- Setup -------------------------------------------------------------------
