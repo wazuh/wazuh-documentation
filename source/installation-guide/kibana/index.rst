@@ -114,8 +114,47 @@ Kibana installation and configuration
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
+Disabling repositories
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
+
+
+.. tabs::
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/elastic/deb/disabling_repositories.rst
+
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../_templates/installations/elastic/yum/disabling_repositories.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../_templates/installations/elastic/zypp/disabling_repositories.rst
+
 
 Next steps
-----------
+~~~~~~~~~~
 
 Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+
+Uninstall Kibana
+~~~~~~~~~~~~~~~~
+
+To uninstall Kibana:
+
+    .. code-block:: console
+
+      # apt-get remove kibana
+
+There are files marked as configuration and data files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/lib/kibana`` and ``/etc/kibana``.
