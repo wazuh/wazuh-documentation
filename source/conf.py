@@ -393,6 +393,30 @@ def minification(actual_path):
             with open(min_file, 'w') as f2:
                 f2.write(output)
 
+# -- Versions -------------------------------------------------------------------
+
+def customReplacements(app, docname, source):
+    result = source[0]
+    for key in app.config.custom_replacements:
+        result = result.replace(key, app.config.custom_replacements[key])
+    source[0] = result
+
+custom_replacements = {
+    "|WAZUH_LATEST|" : "3.11.4",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.11.4",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.11.4",
+    "|WAZUH_LATEST_PUPPET|" : "3.11.4",
+    "|WAZUH_LATEST_OVA|" : "3.11.4",
+    "|WAZUH_LATEST_DOCKER|" : "3.11.4",
+    "|ELASTICSEARCH_LATEST|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
+    "|SPLUNK_LATEST|" : "8.0.1",
+}   
+
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
@@ -414,6 +438,8 @@ def setup(app):
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
     app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_config_value('custom_replacements', {}, True)
+    app.connect('source-read', customReplacements)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
