@@ -49,12 +49,12 @@ Below, you will find some examples of how to build a Wazuh virtual machine.
 
 .. code-block:: console
 
-  # ./generate_ova.sh -b -v |WAZUH_LATEST_OVA| -e |ELASTICSEARCH_LATEST_OVA| -r stable
+  # ./generate_ova.sh -b -v |WAZUH_LATEST| -e |ELASTICSEARCH_LATEST| -r stable
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST_OVA| and ELK |ELASTICSEARCH_LATEST_OVA| installed using stable packages
+This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using stable packages
 
 .. code-block:: console
 
-  # ./generate_ova.sh -b -v |WAZUH_LATEST_OVA| -e |ELASTICSEARCH_LATEST_OVA| -r unstable -c
+  # ./generate_ova.sh -b -v |WAZUH_LATEST| -e |ELASTICSEARCH_LATEST| -r unstable -c
 
-This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST_OVA| and ELK |ELASTICSEARCH_LATEST_OVA| installed using unstable packages and generate the sha512 checksum
+This will generate a Virtual machine with Wazuh manager |WAZUH_LATEST| and ELK |ELASTICSEARCH_LATEST| installed using unstable packages and generate the sha512 checksum
