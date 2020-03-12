@@ -32,7 +32,7 @@ Alert fields
 The following fields are received in alerts when who-data is enabled:
 
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **(Audit) User**             | Contains the ID and name of the user who started the process that modified the monitored file.                |
+| **(Audit) User**             | Contains the ID and name of the user who started the process that modified the monitored file.                     |
 +------------------------------+                                                                                                                    +
 | **audit.user.id**            |                                                                                                                    |
 |                              |                                                                                                                    |
