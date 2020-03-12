@@ -53,7 +53,8 @@ Alert examples
 
 Alert in log format:
 
-::
+.. code-block:: none
+    :class: output
 
     ** Alert 1531323832.10357533: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
     2018 Jul 11 17:43:52 (vpc-agent-win) any->syscheck
@@ -90,6 +91,7 @@ Alert in log format:
 Alert in JSON format:
 
 .. code-block:: json
+    :class: output
 
     {
         "timestamp":"2018-07-11T17:43:52.914+0200",

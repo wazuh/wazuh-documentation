@@ -9,8 +9,8 @@ Wazuh can be configured to send email alerts to one or more email addresses when
 
 Sample email:
 
-::
-
+.. code-block:: none
+    :class: output
 
     From: Wazuh <you@example.com>               5:03 PM (2 minutes ago)
     to: me
