@@ -603,15 +603,10 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	   "error": 0,
 	   "data": {
 	      "msg": "Some agents were not removed",
-	      "affected_agents": [],
+	      "affected_agents": [
+	            "003"
+	      ],
 	      "failed_ids": [
-	         {
-	            "id": "003",
-	            "error": {
-	               "message": "Agent is not eligible for removal: The agent has a status different to 'all' or the specified time frame 'older_than 10s' does not apply.",
-	               "code": 1731
-	            }
-	         },
 	         {
 	            "id": "005",
 	            "error": {
@@ -621,8 +616,8 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	         }
 	      ],
 	      "older_than": "10s",
-	      "total_affected_agents": 0,
-	      "total_failed_ids": 2
+	      "total_affected_agents": 1,
+	      "total_failed_ids": 1
 	   }
 	}
 	
@@ -773,7 +768,7 @@ Adds an agent to the specified group.
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force_single_group``       | Boolean       | Wheter to append new group to current agent's group or replace it.                                                                                                                                                                   |
+| ``force_single_group``       | Boolean       | Whether to append new group to current agent's group or replace it.                                                                                                                                                                  |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -788,7 +783,7 @@ Adds an agent to the specified group.
 
 	{
 	   "error": 0,
-	   "data": "Agent '004' already belongs to group 'dmz'."
+	   "data": "Group 'dmz' added to agent '004'."
 	}
 	
 
@@ -2773,7 +2768,7 @@ Returns ossec.conf in JSON format.
 	      "logall_json": "no",
 	      "email_notification": "no",
 	      "smtp_server": "smtp.example.wazuh.com",
-	      "email_from": "ossecm@example.wazuh.com",
+	      "email_from": "wazuh@example.wazuh.com",
 	      "email_to": "recipient@example.wazuh.com",
 	      "email_maxperhour": "12",
 	      "email_log_source": "alerts.log",
@@ -3095,9 +3090,9 @@ Returns basic information about manager.
 	      "version": "v3.12.0",
 	      "compilation_date": "Fri Aug 30 08:02:30 UTC 2019",
 	      "type": "server",
-	      "max_agents": "N/A",
-	      "openssl_support": "N/A",
-	      "ruleset_version": "31200",
+	      "max_agents": "14000",
+	      "openssl_support": "yes",
+	      "ruleset_version": "31005",
 	      "tz_offset": "+0000",
 	      "tz_name": "UTC",
 	      "name": "9010b2027421",
@@ -6724,10 +6719,16 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	:class: output
 
 	{
-	   "error": 2003,
-	   "message": "Error in wazuhdb request"
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         "2.3 RHEL7",
+	         "1.4 RHEL74"
+	      ]
+	   }
 	}
-	
+
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6822,8 +6823,14 @@ Returns the PCI requirements of all rootchecks of the agent.
 	:class: output
 
 	{
-	   "error": 2003,
-	   "message": "Error in wazuhdb request"
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         "4.1",
+	         "2.2.4"
+	      ]
+	   }
 	}
 	
 
