@@ -67,7 +67,7 @@ For Windows, you should enable the ``hotfixes`` option, to report the Windows up
         <hotfixes>yes</hotfixes>
       </wodle>
 
-By default it will collect inventory information for hardware, operating system,
+By default, it will collect inventory information for hardware, operating system,
 network interfaces, installed packages, open ports and running processes every hour.
 
 Configure ``vulnerability-detector`` on  the Wazuh Manager
