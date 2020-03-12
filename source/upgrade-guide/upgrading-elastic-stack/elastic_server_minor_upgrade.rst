@@ -69,13 +69,13 @@ Upgrade Elasticsearch
 
       .. code-block:: console
 
-        # yum install elasticsearch-7.6.1
+        # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.6.1
+        # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
         # systemctl restart elasticsearch
 
 #. Restart the service.
@@ -120,13 +120,13 @@ Upgrade Filebeat
 
       .. code-block:: console
 
-        # yum install filebeat-7.6.1
+        # yum install filebeat-|ELASTICSEARCH_LATEST|
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install filebeat=7.6.1
+        # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 #. Update the configuration file.
 
@@ -187,13 +187,13 @@ Upgrade Kibana
 
       .. code-block:: console
 
-        # yum install kibana-7.6.1
+        # yum install kibana-|ELASTICSEARCH_LATEST|
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install kibana=7.6.1
+        # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
 #. Remove generated bundles.
 
@@ -215,14 +215,14 @@ Upgrade Kibana
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_7.6.1.zip
+      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
     * From the package:
 
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_7.6.1.zip
+      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 #. Restore the configuration file backup.
 

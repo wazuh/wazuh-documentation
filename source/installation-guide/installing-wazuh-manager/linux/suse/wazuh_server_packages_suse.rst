@@ -125,7 +125,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
   .. code-block:: console
 
-    # zypper install filebeat-7.6.1
+    # zypper install filebeat-|ELASTICSEARCH_LATEST|
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
