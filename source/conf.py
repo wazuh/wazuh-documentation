@@ -402,14 +402,8 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_MANAGER|" : "3.11.4",
-    "|WAZUH_AGENT|" : "3.11.4",
-    "|WAZUH_API|" : "3.11.4",
-    "|WAZUH_KIBANA_APP|" : "3.11.4-7.6.0",
-    "|FILEBEAT|" : "7.6.1",
+    "|WAZUH_LATEST|" : "3.11.4",
     "|ELASTICSEARCH|" : "7.6.1",
-    "|KIBANA|" : "7.6.1"
-
 }   
 
 # -- Setup -------------------------------------------------------------------
