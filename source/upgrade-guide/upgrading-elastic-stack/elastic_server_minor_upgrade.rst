@@ -166,13 +166,20 @@ Upgrade Kibana
 --------------
 
 .. warning::
-  For updates from Wazuh 3.12.x to 3.12.y (regardless of the version of the Elastic Stack) it is recommended to make a backup of the Wazuh app configuration file in order not to lose the modified parameters or the configured APIs.
+  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
 
-#. Make a backup of the configuration file.
+#. Stop Kibana.
 
     .. code-block:: console
 
-      # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /tmp/wazuh-backup.yml
+      # systemctl stop kibana
+
+#. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
+
+    .. code-block:: console
+
+      # mkdir -p /usr/share/kibana/optimize/wazuh/config
+      # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
 #. Remove the Wazuh app.
 
@@ -206,7 +213,7 @@ Upgrade Kibana
     .. code-block:: console
 
       # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
+      # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Wazuh app.
 
@@ -224,18 +231,12 @@ Upgrade Kibana
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-3.12.0_7.6.1.zip
 
-#. Restore the configuration file backup.
-
-    .. code-block:: console
-
-      # sudo cp /tmp/wazuh-backup.yml /usr/share/kibana/plugins/wazuh/wazuh.yml
-
 #. Update configuration file permissions.
 
     .. code-block:: console
 
-      # sudo chown kibana:kibana /usr/share/kibana/plugins/wazuh/wazuh.yml
-      # sudo chmod 600 /usr/share/kibana/plugins/wazuh/wazuh.yml
+      # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+      # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
 #. Restart Kibana.
 
