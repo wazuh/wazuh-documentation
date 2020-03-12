@@ -410,10 +410,10 @@ custom_replacements = {
     "|WAZUH_LATEST_DOCKER|" : "3.11.4",
     "|ELASTICSEARCH_LATEST|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.6.0",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.0",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.0",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.0",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.0",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
 }   
 
 # -- Setup -------------------------------------------------------------------
