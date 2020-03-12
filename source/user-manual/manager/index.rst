@@ -22,3 +22,4 @@ The Wazuh manager is the system that analyzes the data received from all registe
         manual-database-output
         automatic-reports
         manual-email-report/index
+        filebeat_customization
