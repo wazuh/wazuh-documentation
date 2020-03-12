@@ -404,6 +404,11 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     "|WAZUH_LATEST|" : "3.11.4",
     "|ELASTICSEARCH|" : "7.6.1",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.11.4",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.11.4",
+    "|WAZUH_LATEST_PUPPET|" : "3.11.4",
+    "|WAZUH_LATEST_OVA|" : "3.11.4",
+    "|WAZUH_LATEST_DOCKER|" : "3.11.4",
 }   
 
 # -- Setup -------------------------------------------------------------------
