@@ -26,11 +26,13 @@ a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
 
-Configure ``syscollector`` for the all  agents
-----------------------------------------------
+Configure ``syscollector`` for all the agents
+---------------------------------------------
 
 In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents
-see the default configuration and find the syscollector section:
+see the default configuration and find the syscollector section.
+
+For Linux systems:
 
   .. code-block:: xml
 
@@ -45,6 +47,24 @@ see the default configuration and find the syscollector section:
         <packages>yes</packages>
         <ports all="no">yes</ports>
         <processes>yes</processes>
+      </wodle>
+
+For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
+
+  .. code-block:: xml
+
+      <!-- System inventory -->
+      <wodle name="syscollector">
+        <disabled>no</disabled>
+        <interval>1h</interval>
+        <scan_on_start>yes</scan_on_start>
+        <hardware>yes</hardware>
+        <os>yes</os>
+        <network>yes</network>
+        <packages>yes</packages>
+        <ports all="no">yes</ports>
+        <processes>yes</processes>
+        <hotfixes>yes</hotfixes>
       </wodle>
 
 By default it will collect inventory information for hardware, operating system,
