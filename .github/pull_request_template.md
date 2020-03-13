@@ -25,3 +25,5 @@ If your PR closes an issue, please use the "closes" keyword indicating the issue
 ## Checks
 - [ ] It compiles without warnings.
 - [ ] Spelling and grammar. 
+- [ ] Used impersonal speech. 
+- [ ] Used uppercase only on nouns. 
