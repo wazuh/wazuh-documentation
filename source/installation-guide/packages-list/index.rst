@@ -2,7 +2,7 @@
 
 .. _packages:
 
-Packages List
+Packages list
 =============
 
 Wazuh manager, Wazuh agent and Wazuh API
