@@ -2,7 +2,7 @@
 
 .. _virtual_machine:
 
-Virtual Machine
+Virtual machine
 ===============
 
 Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox (where installed) and other OVA compatible virtualization systems.
