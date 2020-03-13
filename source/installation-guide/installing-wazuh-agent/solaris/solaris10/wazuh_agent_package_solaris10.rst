@@ -18,18 +18,6 @@ You can download the `Solaris10 installer (Intel architecture) <https://packages
 
       # pkgadd -d wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg
 
-After creating the repository install the package:
-
-    .. code-block:: console
-
-        # pkg install --accept wazuh-agent
-
-Finally, remove the publisher:
-
-    .. code-block:: console
-
-        # pkg unset-publisher wazuh
-
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
 Uninstall
