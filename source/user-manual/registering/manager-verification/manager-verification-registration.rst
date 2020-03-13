@@ -5,20 +5,20 @@
 Manager verification using SSL
 ==============================
 
-To verify the manager using SSL, it is needed to create a SSL certificate for the Wazuh Manager and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the agents to verificate the Wazuh Manager while they are been registered.
+To verify the manager using SSL, it is needed to create a SSL certificate for the Wazuh manager and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the agents to verificate the Wazuh manager while they are been registered.
 
   .. image:: ../../../images/manual/managing-agents/SSLregister1.png
     :align: center
     :width: 100%
 
-In this example, we are going to create a certificate for a Wazuh Manager, whose IP address is ``192.168.1.2``. 
+In this example, we are going to create a certificate for a Wazuh manager, whose IP address is ``192.168.1.2``.
 
-Wazuh Manager
+Wazuh manager
 ^^^^^^^^^^^^^
 
-Follow these stes in the Wazuh Manager:
+Follow these steps in the Wazuh server:
 
-1. Issue and sign a certificate for the manager. You can enter the hostname or the IP address of the Wazuh Manager where the agents are going to be registerd. In this case, the Wazuh Manager IP is ``192.168.1.2``:
+1. Issue and sign a certificate for the manager. You can enter the hostname or the IP address of the Wazuh server where the agents are going to be registerd. In this case, the Wazuh server IP is ``192.168.1.2``:
 
   .. code-block:: console
 
@@ -31,7 +31,7 @@ Follow these stes in the Wazuh Manager:
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
-3. Restart the Wazuh Manager: 
+3. Restart the Wazuh manager:
 
   a) For Systemd:
 
@@ -45,14 +45,14 @@ Follow these stes in the Wazuh Manager:
 
       # service wazuh-manager restart
 
-Wazuh Agents
+Wazuh agents
 ^^^^^^^^^^^^
 
-Once you have completed the Wazuh Manager section, you need to copy the CA file (``.pem``) to the agent. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the Wazuh Agent to the manager:
+Once you have completed the Wazuh manager section, you need to copy the CA file (``.pem``) to the agent. In this example, the CA file is ``rootCA.pem``. After that, follow the steps to connect the Wazuh agent to the manager:
 
 .. toctree::
     :maxdepth: 2
-    
+
     agents/linux-unix-manager-verification
     agents/windows-manager-verification
     agents/macos-manager-verification

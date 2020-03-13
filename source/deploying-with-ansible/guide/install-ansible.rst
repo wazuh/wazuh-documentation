@@ -74,8 +74,8 @@ For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next st
   .. code-block:: console
 
       # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
-      apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-      apt-get update
+      # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+      # apt-get update
 
 3 - Finally, install ansible:
 
@@ -106,6 +106,10 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 .. code-block:: console
 
 	ansible@ansible:~$ ssh-keygen
+
+.. code-block:: none
+	:class: output
+
 	Generating public/private rsa key pair.
 	Enter file in which to save the key (/home/ansible/.ssh/id_rsa):
 	Enter passphrase (empty for no passphrase):
@@ -127,13 +131,14 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 	|        . +      |
 	+----[SHA256]-----+
 
-	If you wish you can include a passphrase.
+If you wish you can include a passphrase.
 
 1.3 - Check the permissions of the generated keys.
 
 - ``id_rsa`` must have restrictive permits (600 or "- r w - - - - - - -").
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	drwx------  2 ansible ansible 4,0K sep 12 13:37 .
 	-rw-------  1 ansible ansible 1,7K sep 12 13:37 id_rsa
@@ -197,6 +202,10 @@ Check the permissions.
 .. code-block:: console
 
 	[centos@localhost ~]$ ls -lath .ssh/
+
+.. code-block:: none
+	:class: output
+
 	total 4,0K
 	drwx------.  2 centos centos   29 sep 12 14:07 .
 	-rw-r--r--.  1 centos centos    0 sep 12 14:07 authorized_keys
@@ -210,6 +219,10 @@ Check the permissions.
 .. code-block:: console
 
 	ansible@ansible:~$ cat .ssh/id_rsa.pub | ssh centos@192.168.0.180 "cat >> .ssh/authorized_keys"
+
+.. code-block:: none
+	:class: output
+
 	centos@192.168.0.180's password:
 
 We could see the authorized_keys content.
@@ -217,6 +230,10 @@ We could see the authorized_keys content.
 .. code-block:: console
 
 	[centos@localhost ~]$ cat .ssh/authorized_keys
+
+.. code-block:: none
+	:class: output
+
 	ssh-rsa AAA...60V ansible@ansible
 
 4 - Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
@@ -256,6 +273,10 @@ We could see the authorized_keys content.
 .. code-block:: console
 
 	ansible@ansible:~$ ssh centos@192.168.0.180
+
+.. code-block:: none
+	:class: output
+
 	Last login: Wed Sep 12 13:57:48 2018 from 192.168.0.107
 
 As we can see, we access without having to enter any password.
@@ -319,7 +340,7 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 	In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the path that Ansible has to follow for its use. If this happens, we must add to the host side the following line:
 
-	 - 192.168.0.181  ansible_ssh_user=ubuntu   **ansible_python_interpreter=/usr/bin/python3**
+	- 192.168.0.181  ansible_ssh_user=ubuntu   **ansible_python_interpreter=/usr/bin/python3**
 
 
 2 - This will attempt a connection with the remote hosts using ping module.
@@ -330,7 +351,8 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 You will get a output like this:
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	192.168.0.180 | SUCCESS => {
 	    "changed": false,
@@ -350,6 +372,10 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.9 https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.10.2_7.3.2 https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
+
+.. code-block:: none
+	:class: output
+
 	wazuh-ansible

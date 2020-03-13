@@ -39,9 +39,9 @@ This section describes how to evaluate the Payment Card Industry Data Security S
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know which policy and profile to execute.
+Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
-Agent ``ossec.conf`` file:
+Modify the ``ossec.conf`` file in the agent side to apply the desired profile:
 
 ::
 
@@ -54,13 +54,21 @@ Agent ``ossec.conf`` file:
     <config-profile>redhat7</config-profile>
   </client>
 
-**Step 2: Configure manager**
+After this, restart the agents to apply the configuration.
 
-We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 servers.
+.. code-block:: console
 
-Manager ``/var/ossec/etc/shared/default/agent.conf`` file (assuming that the agent is on the ``default`` group):
+    # /var/ossec/bin/agent_control -R -a
 
-::
+If you prefer, you can restart a specific agent with option ``-u <id>``.
+
+**Step 2: Configure shared settings**
+
+We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 agents.
+
+To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
+
+.. code-block:: xml
 
   <agent_config profile="redhat7">
 
@@ -72,46 +80,24 @@ Manager ``/var/ossec/etc/shared/default/agent.conf`` file (assuming that the age
 
   </agent_config>
 
-**Step 3: Restart manager and agents**
+When the agents receive this configuration, they will restart to apply the changes and start the evaluation.
 
-To apply the new configuration, restart the manager:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
-
-And now, restart all the agents:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/agent_control -R -a
-
-If you prefer, you can restart a specific agent with the option ``-u <id>`` where **id** is the agent's id number.
-
-
-**Step 4: See alerts**
+**Step 3: See alerts**
 
 When the evaluation is complete you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463752181.32768: - oscap,rule-result,pci_dss_2.2,
   2016 May 20 13:49:41 (RH_Agent) 10.0.1.7->wodle_open-scap
   Rule: 81529 (level 5) -> 'OpenSCAP rule failed (severity low).'
   oscap: msg: "rule-result", id: "47T7_Qd08gm4y8TSoD53", policy: "ssg-rhel7-ds.xml", profile: "xccdf_org.ssgproject.content_profile_pci-dss", rule_id: "xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout", result: "fail", title: "Set SSH Idle Timeout Interval", ident: "CCE-26611-4", severity: "low".
 
-
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463752181.33254: - oscap,report-overview,pci_dss_2.2,
   2016 May 20 13:49:41 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -122,15 +108,15 @@ When the evaluation is complete you will see the results as OSSEC alerts:
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. image:: ../../../../images/wodles-oscap/pci-oscap.png
+.. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
     :align: center
     :width: 100%
 
-**Step 5: Dashboards**
+**Step 4: Dashboards**
 
 Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../../../images/wodles-oscap/pci-dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
     :align: center
     :width: 100%
 
@@ -141,24 +127,36 @@ The Red Hat Security Response Team provides OVAL definitions for all vulnerabili
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know which policy and profile to execute.
+Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
-Agent ``ossec.conf``:
+Modify the ``ossec.conf`` file in the agent side to apply the desired profile:
 
-::
+.. code-block:: xml
 
   <client>
-    <server-ip>10.0.1.4</server-ip>
+    <server>
+      <address>10.0.1.4</address>
+      <port>1514</port>
+      <protocol>tcp</protocol>
+    </server>
     <config-profile>redhat7</config-profile>
   </client>
 
+After this, restart the agents to apply the configuration.
+
+.. code-block:: console
+
+  # /var/ossec/bin/agent_control -R -a
+
+If you prefer, you can restart a specific agent with option ``-u <id>``.
+
 **Step 2: Configure manager**
 
-We want to execute the RedHat security policy only on Red Hat 7 servers.
+We want to execute the RedHat security policy only on Red Hat 7 agents.
 
-Manager ``shared/agent.conf``:
+To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
-::
+.. code-block:: xml
 
   <agent_config profile="redhat7">
 
@@ -168,38 +166,17 @@ Manager ``shared/agent.conf``:
 
   </agent_config>
 
-**Step 3: Restart manager and agents**
+When the agents receive this configuration, they will restart to apply the changes and start the auditing.
 
-To apply the new configuration, restart the manager:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
-
-And now, restart all the agents:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/agent_control -R -a
-
-If you prefer, you can restart a specific agent with option ``-u <id>``.
-
-
-**Step 4: See alerts**
+**Step 3: See alerts**
 
 When the evaluation is completed you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-::
+.. code-block:: none
+  :class: output
+
 
   ** Alert 1463757700.70731: mail  - oscap,rule-result,pci_dss_2.2,
   2016 May 20 15:21:40 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -207,8 +184,9 @@ When the evaluation is completed you will see the results as OSSEC alerts:
   oscap: msg: "rule-result", id: "I0iLEGFi4iTkxjnL9LWQ", policy: "com.redhat.rhsa-RHEL7.ds.xml", profile: "no-profiles", rule_id: "xccdf_com.redhat.rhsa_rule_oval-com.redhat.rhsa-def-20160722", result: "fail", title: "RHSA-2016:0722: openssl security update (Important)", ident: "RHSA-2016-0722, CVE-2016-0799, CVE-2016-2105, CVE-2016-2106, CVE-2016-2107, CVE-2016-2108, CVE-2016-2109, CVE-2016-2842", severity: "high".
 
 
+.. code-block:: none
+  :class: output
 
-::
 
   ** Alert 1463757700.71339: - oscap,report-overview,pci_dss_2.2,
   2016 May 20 15:21:40 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -220,27 +198,29 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 Note that each field is extracted to facilitate searches and analysis.
 
-.. image:: ../../../../images/wodles-oscap/oscap_example.png
+.. thumbnail:: ../../../../images/wodles-oscap/oscap_example.png
     :align: center
     :width: 100%
 
-.. image:: ../../../../images/wodles-oscap/overview.png
+.. thumbnail:: ../../../../images/wodles-oscap/overview.png
     :align: center
     :width: 100%
 
 
-**Step 5: Dashboards**
+**Step 4: Dashboards**
 
 Finally, you can explore all scan results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../../../images/wodles-oscap/dashboard.png
+.. thumbnail:: ../../../../images/wodles-oscap/dashboard.png
     :align: center
     :width: 100%
 
 Overwriting the timeout
 ------------------------------------------------------------------
 
-It is possible to overwrite the timeout for a specific evaluation: ::
+It is possible to overwrite the timeout for a specific evaluation:
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 
@@ -256,7 +236,9 @@ It is possible to overwrite the timeout for a specific evaluation: ::
 
 Using profiles
 ------------------------------------------------------------------
-We can limit the evaluation to only specific profiles of a policy: ::
+We can limit the evaluation to only specific profiles of a policy:
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 
@@ -286,7 +268,9 @@ You can also optionally specify the CPE dictionary file, which is used to determ
 
 Using IDs
 ------------------------------------------------------------------
-You can select a specific ID of the datastream file:  ::
+You can select a specific ID of the datastream file:
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 

@@ -10,6 +10,8 @@ Grouping agents
 There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
 the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process.
 
+.. note:: Read the `Agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration//>`_ document for more information.
+
 Unless otherwise assigned, all new agents automatically belong to the **'default'** group. This group is created during the installation process with the configuration files placed in the ``/var/ossec/etc/shared/default/`` folder. These files will be pushed from the manager to all agents belonging to this group.
 
 Below are the steps to assign agents to a group with a specific configuration:
@@ -21,7 +23,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. note:: The group must be created and configured before assigning agents.
 
-   .. note:: This behaviour corresponds to ``v3.7.0`` and later.
+   .. note:: This behavior corresponds to ``v3.7.0`` and later.
 
 
    .. code-block:: console
@@ -42,6 +44,9 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # /var/ossec/bin/agent_groups -l -g dbms
 
+   .. code-block:: none
+        :class: output
+
         5 agent(s) in group 'dbms':
           ID: 002  Name: agent-dbms-e1.
           ID: 003  Name: agent-dbms-e2.
@@ -60,7 +65,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 3. Within 20 minutes of connecting to the manager, each agent assigned to a group will receive the files contained in the *'dbms'* folder from the manager, including the ``agent.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP, however if TCP is used, this may move along much faster.
 
-4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behaviour, and, if needed, it must be explicitely activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options <../reference/internal-options>`).
+4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behavior, and, if needed, it must be explicitly activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options <../reference/internal-options>`).
 
 .. _multigroups:
 
@@ -94,11 +99,22 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
     .. code-block:: console
 
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": "Group 'webserver' added to agent '001'."
         }
+
+    .. code-block:: console
+
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": "Group 'apache' added to agent '001'."
@@ -107,9 +123,13 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 After that, we can ask the **API** about groups which an agent belongs:
 
     .. code-block:: console
-        :emphasize-lines: 7,8,9,10,11
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
+
+    .. code-block:: json
+        :emphasize-lines: 6,7,8,9,10
+        :class: output
+
         {
             "error": 0,
             "data": {
@@ -149,10 +169,20 @@ With the **agent_groups** CLI, agents can be registered to groups on the same wa
     .. code-block:: console
 
         $ /var/ossec/bin/agent_groups -a -i 001 -g webserver
+
+    .. code-block:: none
+        :class: output
+
         Do you want to add the group 'webserver' to the agent '001'? [y/N]: y
         Group 'webserver' added to agent '001'.
 
+    .. code-block:: console
+
         $ /var/ossec/bin/agent_groups -a -i 001 -g apache
+
+    .. code-block:: none
+        :class: output
+
         Do you want to add the group 'apache' to the agent '001'? [y/N]: y
         Group 'apache' added to agent '001'.
 
@@ -173,6 +203,10 @@ For example, to list the groups available for now, we could run the following qu
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -l -g webserver
+
+    .. code-block:: none
+        :class: output
+
         3 agent(s) in group 'webserver':
           ID: 001 Name: ag-windows-12.
           ID: 003 Name: ag-windows-east.
@@ -183,6 +217,10 @@ Same easy to query which groups are assigned to the agent 001:
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver', u'apache']'.
 
 The priority of the groups increases from the left to the right, being the last one the highest priority one.
@@ -197,9 +235,19 @@ group `apache` for the agent 001:
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -r -i 001 -g apache -q
+
+    .. code-block:: none
+        :class: output
+
         Group 'apache' unset for agent '001'.
 
+    .. code-block:: console
+
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver']'.
 
 It is also possible to switch between groups overwriting the existing assignment:
@@ -207,10 +255,28 @@ It is also possible to switch between groups overwriting the existing assignment
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'default', u'webserver']'.
+
+    .. code-block:: console
+
         # /var/ossec/bin/agent_groups -a -f -i 001 -g apache
+
+    .. code-block:: none
+        :class: output
+
         Group 'apache' set to agent '001'.
+
+    .. code-block:: console
+
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'apache']'.
 
 The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
@@ -220,9 +286,19 @@ Finally, to check the synchronization status of the group configuration for a si
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -S -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent '008' sync status is: Agent configuration is synced.
 
+    .. code-block:: console
+
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": {

@@ -37,6 +37,9 @@ By default, OSSEC includes a CDB list with the following keys:
 
     # cat /var/ossec/etc/lists/audit-keys
 
+.. code-block:: none
+    :class: output
+
     audit-wazuh-w:write
     audit-wazuh-r:read
     audit-wazuh-a:attribute
@@ -50,11 +53,6 @@ You can add your own key with its value to the list like this:
     # echo "my_key_write_type:write" >> /var/ossec/etc/lists/audit-keys
 
 Each time you modify a CDB list, you must compile it:
-
-.. code-block:: console
-
-    # /var/ossec/bin/ossec-makelists
-
 
 Agent
 ^^^^^^^
@@ -107,14 +105,19 @@ Now everything is ready to process audit events. You only need to create the pro
 Monitoring accesses to a directory
 ----------------------------------
 
-In this example, we are going to monitor every kind of access under the */home* directory: ::
+In this example, we are going to monitor every kind of access under the */home* directory:
+
+.. code-block:: none
 
     auditctl -w /home -p w -k audit-wazuh-w
     auditctl -w /home -p a -k audit-wazuh-a
     auditctl -w /home -p r -k audit-wazuh-r
     auditctl -w /home -p x -k audit-wazuh-x
 
-Now we start getting alerts on account of the new audit rules::
+Now we start getting alerts on account of the new audit rules:
+
+.. code-block:: none
+  :class: output
 
   ** Alert 1487891035.24299: - audit,audit_configuration,
   2017 Feb 23 15:03:55 localhost->/var/log/audit/audit.log
@@ -161,14 +164,18 @@ Now we start getting alerts on account of the new audit rules::
 
 Let's see what happens when we execute the following commands:
 
-New File
+**New File**
+
   Command:
 
- .. code-block:: console
+  .. code-block:: console
 
-      # touch /home/malware.py
+    # touch /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: none
+    :class: output
 
     ** Alert 1487891161.28457: - audit,audit_watch_write,audit_watch_create,
     2017 Feb 23 15:06:01 localhost->/var/log/audit/audit.log
@@ -211,14 +218,18 @@ New File
     audit.file.inode: 18369115
     audit.file.mode: 0100644
 
-Write Access
+**Write Access**
+
   Command:
 
   .. code-block:: console
 
-      # nano /home/malware.py
+    # nano /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: none
+    :class: output
 
     ** Alert 1487891353.48010: - audit,audit_watch_write,
     2017 Feb 23 15:09:13 localhost->/var/log/audit/audit.log
@@ -261,14 +272,18 @@ Write Access
     audit.file.inode: 18369115
     audit.file.mode: 0100644
 
-Change Permissions
+**Change Permissions**
+
   Command:
 
- .. code-block:: console
+  .. code-block:: console
 
-      # chmod u+x /home/malware.py
+    # chmod u+x /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: none
+    :class: output
 
     ** Alert 1487891409.49498: - audit,audit_watch_attribute,
     2017 Feb 23 15:10:09 localhost->/var/log/audit/audit.log
@@ -307,14 +322,18 @@ Change Permissions
     audit.file.mode: 0100644
 
 
-Read access
+**Read access**
+
   Command:
 
   .. code-block:: console
 
-      # /home/malware.py
+    # /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: none
+    :class: output
 
     ** Alert 1487891459.53222: - audit,audit_watch_read,
     2017 Feb 23 15:10:59 localhost->/var/log/audit/audit.log
@@ -335,7 +354,7 @@ Read access
     audit.pid: 60821
     audit.auid: 1000
     audit.uid: 0
-    audit.gid: 0
+    audit.gid: 0q
     audit.euid: 0
     audit.suid: 0
     audit.fsuid: 0
@@ -352,14 +371,18 @@ Read access
     audit.file.inode: 18369115
     audit.file.mode: 0100744
 
-Delete file
+**Delete file**
+
   Command:
 
   .. code-block:: console
 
-      # rm /home/malware.py
+    # rm /home/malware.py
 
-  Alert::
+  Alert:
+
+  .. code-block:: none
+    :class: output
 
     ** Alert 1487891497.54463: - audit,audit_watch_write,audit_watch_delete,
     2017 Feb 23 15:11:37 localhost->/var/log/audit/audit.log
@@ -414,7 +437,10 @@ Here we choose to audit all commands run by a user who has admin privileges. The
     # auditctl -a exit,always -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c
     # auditctl -a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c
 
-If the root user executes nano, the alert will look like this::
+If the root user executes nano, the alert will look like this:
+
+.. code-block:: none
+  :class: output
 
   ** Alert 1487892032.56406: - audit,audit_command,
   2017 Feb 23 15:20:32 localhost->/var/log/audit/audit.log
@@ -463,7 +489,10 @@ By default, Wazuh is able to detect privilege escalation by analyzing the corres
 
     # homer@springfield:/# sudo ls /var/ossec/etc
 
-Wazuh detects the action, extracting the *srcuser*, *dstuser* and *command* among other fields: ::
+Wazuh detects the action, extracting the *srcuser*, *dstuser* and *command* among other fields:
+
+.. code-block:: none
+  :class: output
 
   ** Alert 1487892460.79075: - syslog,sudo,pci_dss_10.2.5,pci_dss_10.2.2,
   2017 Feb 23 15:27:40 localhost->/var/log/secure
@@ -493,6 +522,9 @@ A common configuration should include: *login*, *common-session*, *cron* and *ss
 
     # grep -R "pam_loginuid.so" /etc/pam.d/
 
+.. code-block:: none
+    :class: output
+
     /etc/pam.d/login:session    required     pam_loginuid.so
     /etc/pam.d/common-session:session required        pam_loginuid.so
     /etc/pam.d/cron:session    required     pam_loginuid.so
@@ -505,7 +537,8 @@ After configuring PAM, if we execute the previous command with the user *homer* 
 
     # homer@springfield:/# sudo ls /var/ossec/etc
 
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1487892803.121460: - audit,audit_command,
   2017 Feb 23 15:33:23 localhost->/var/log/audit/audit.log

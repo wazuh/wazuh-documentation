@@ -51,32 +51,33 @@ For this use case, we will show how to monitor the folder ``/media/user/software
 
 1. The following must be added to the ``<syscheck>`` section of the configuration file:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <syscheck>
-    ...
-      <directories check_all="yes" realtime="yes">/media/user/software</directories>
-    ...
-    </syscheck>
+      <syscheck>
+      ...
+        <directories check_all="yes" realtime="yes">/media/user/software</directories>
+      ...
+      </syscheck>
 
 2. After applying the configuration, you must restart the Wazuh manager:
 
-  a. For Systemd:
+    a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
 After restarting, FIM will apply the new configuration and the specified folder will be monitored in real-time. The alert below appears when a file is added to the monitored directory:
 
 .. code-block:: console
   :emphasize-lines: 4,10,11
+  :class: output
 
   ** Alert 1510684983.55139: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,
   2017 Nov 14 18:43:03 PC->syscheck
@@ -106,6 +107,7 @@ When a request to VirusTotal is sent by the integrator module, as noted above, d
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510676062.9653: - virustotal,
   2017 Nov 14 16:14:22 PC->virustotal
@@ -121,6 +123,7 @@ This error means that the API key set in the configuration is invalid.
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510684990.60518: - virustotal,
   2017 Nov 14 18:43:10 PC->virustotal
@@ -138,6 +141,7 @@ While the two previous alerts represent errors that may occur, the following are
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510684376.32386: - virustotal,
   2017 Nov 14 18:32:56 PC->virustotal
@@ -157,6 +161,7 @@ While the two previous alerts represent errors that may occur, the following are
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510684984.55826: mail  - virustotal,
   2017 Nov 14 18:43:04 PC->virustotal

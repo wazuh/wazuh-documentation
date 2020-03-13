@@ -9,7 +9,7 @@ To register an agent using the command line, first follow the steps from the **M
 
 Manager
 ^^^^^^^
-1. In the CLI of the Wazuh Manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``ubuntu-ag`` and its address or IP is ``any``.
+1. In the CLI of the Wazuh manager host, we will run ``manage_agents`` to add the agent. In this example, we are going to add a new agent. Its name will be ``ubuntu-ag`` and its address or IP is ``any``.
 
 	.. code-block:: console
 
@@ -21,6 +21,9 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
+	.. code-block:: none
+		:class: output
+
 		Available agents:
 		    ID: 001, Name: ubuntu-ag, IP: any
 
@@ -30,18 +33,24 @@ Manager
 
 		# /var/ossec/bin/manage_agents -e 001
 
+	.. code-block:: none
+		:class: output
+
 		Agent key information for '001' is:
 		MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
 Agent
 ^^^^^
-Once you have added the agent in the Wazuh Manager host, open a session in your Linux agent host as root user. After that, let's import the key and connect the agent to the manager.
+Once you have added the agent in the Wazuh manager host, open a session in your Linux agent host as root user. After that, let's import the key and connect the agent to the manager.
 
 1. First, import the key using ``manage_agents``:
 
 	  .. code-block:: console
 
 	      # /var/ossec/bin/manage_agents -i MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw
+
+	  .. code-block:: none
+	      :class: output
 
 	      Agent information:
 	         ID:001
@@ -52,7 +61,7 @@ Once you have added the agent in the Wazuh Manager host, open a session in your 
 	      Added.
 
 
-2. Edit the Wazuh Agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh Manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh Manager address. The address of the Wazuh Manager can be an IP address or a DNS name:
+2. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh server IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh server address. The address of the Wazuh server can be an IP address or a DNS name:
 
 	.. code-block:: xml
 

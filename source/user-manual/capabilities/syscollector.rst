@@ -88,7 +88,7 @@ Retrieve basic information about the operating system.
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | **hostname**     | Hostname of the machine | ag-ubuntu-16                                        | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
-| **architecture** | OS arquitecture         | x86_64                                              | All               |
+| **architecture** | OS architecture         | x86_64                                              | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | **os_name**      | OS name                 | Ubuntu                                              | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
@@ -321,13 +321,13 @@ List the current processes running in a system host.
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **euser**       | Effective user                         | root                                              | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **ruser**       | Real user                              | root                                              | Linux             |
+| **ruser**       | Real user                              | root                                              | Linux/macOS       |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **suser**       | Saved-set user                         | root                                              | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **egroup**      | Effective group                        | root                                              | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **rgroup**      | Real group                             | root                                              | Linux             |
+| **rgroup**      | Real group                             | root                                              | Linux/macOS       |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **sgroup**      | Saved-set group                        | root                                              | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
@@ -335,7 +335,7 @@ List the current processes running in a system host.
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **priority**    | Kernel scheduling priority             | 20                                                | All               |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **nice**        | Nice value of the process              | 0                                                 | Linux             |
+| **nice**        | Nice value of the process              | 0                                                 | Linux/macOS       |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **size**        | Size of the process                    | 53030                                             | All               |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
@@ -429,7 +429,7 @@ In Elasticsearch the fields will be saved as ``data.type.value``. For example, f
 | **Process**          | name, state, ppid, utime, stime, cmd, args, euser, ruser, suser, egroup, sgroup, fgroup, rgroup, priority, nice,     | data.process.state               |
 |                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                |                                  |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **netinfo**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
+| **Network**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
 |                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac           |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
@@ -463,6 +463,10 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # sqlite3 /var/ossec/queue/db/003.db
+
+.. code-block:: none
+  :class: output
+
   SQLite version 3.7.17 2013-05-20 00:56:22
   Enter ".help" for instructions
   Enter SQL statements terminated with a ";"
@@ -474,6 +478,10 @@ The current inventory can be consulted in different ways. Let's see an example q
 .. code-block:: console
 
   # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+
+.. code-block:: json
+  :class: output
+
   {
    "error": 0,
    "data": {

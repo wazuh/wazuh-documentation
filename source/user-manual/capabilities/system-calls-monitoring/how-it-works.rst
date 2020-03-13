@@ -23,7 +23,7 @@ Audit rules can be specified interactively with the *auditctl* command-line util
 Control rules
 --------------
 
-Some examples that illustrate how to modify the behaviour of the Audit system:
+Some examples that illustrate how to modify the behavior of the Audit system:
 
 +-----------------+-----------------------------------------------------------------+
 | **auditctl -b** | Set the maximum amount of existing Audit buffers in the kernel. |
@@ -72,7 +72,7 @@ For example, to define a rule that logs all write access to, and every attribute
 
 System Call Rules
 -----------------
-To define a system call rule, use the following syntax:::
+To define a system call rule, use the following syntax: ::
 
    -a action,filter -S system_call -F field=value -k key_name
 

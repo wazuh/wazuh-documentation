@@ -33,102 +33,106 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 1. First of all, stop the Filebeat service:
 
-  a. For Systemd:
+    a. For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl stop filebeat
+      # systemctl stop filebeat
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service filebeat stop
+      # service filebeat stop
 
 2. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
 
 3. Open the template file and locate this line:
 
-  .. code-block:: none
+    .. code-block:: none
 
-    "index_patterns": ["wazuh-alerts-3.x-*"],
+      "index_patterns": ["wazuh-alerts-3.x-*"],
 
-  Add your custom pattern:
+    Add your custom pattern:
 
-  .. code-block:: none
+    .. code-block:: none
 
-    "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],
+      "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],
 
-  If your template is a custom template and it's still using the ``"template": "wazuh-alerts-3.x-*",`` setting, remove that line, just use ``"index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],``.
+    If your template is a custom template and it's still using the ``"template": "wazuh-alerts-3.x-*",`` setting, remove that line, just use ``"index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],``.
 
-  The asterisk character (``*``) on the index patterns is important because Filebeat will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh app.
+    The asterisk character (``*``) on the index patterns is important because Filebeat will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh app.
 
 4. Save the modifications and insert the new template into Elasticsearch. This will replace the current template:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
+      # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
-    {"acknowledged":true}
+    .. code-block:: json
+      :class: output
 
-  .. note::
-    ``{"acknowledged":true}`` indicates that the template was inserted correctly.
+      {"acknowledged":true}
 
-5. Open the Wazuh configuration file for Filebeat (``/etc/filebeat/filebeat.yml``) and replace the index name:
+    .. note::
+      ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
-  From this:
+5. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
 
-  .. code-block:: none
+    For example, from
 
-    indices:
-      - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+    .. code-block:: yaml
 
-  To this:
+        - name: index_prefix
+          default: wazuh-alerts-3.x-
 
-  .. code-block:: none
 
-    indices:
-      - index: 'my-custom-alerts-%{+yyyy.MM.dd}'
+    To this:
+
+    .. code-block:: yaml
+
+        - name: index_prefix
+          default: my-custom-alerts-3.x-
 
 7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
-  .. code-block:: yaml
+    .. code-block:: yaml
 
-    pattern: my-custom-alerts-*
+      pattern: my-custom-alerts-*
 
-  This will make the app to automatically create and/or select the new index pattern.
+    This will make the app to automatically create and/or select the new index pattern.
 
-  Restart the Kibana service:
+    Restart the Kibana service:
 
-  a. For Systemd:
+    a. For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl restart kibana
+      # systemctl restart kibana
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service kibana restart
+      # service kibana restart
 
 8. Restart the Filebeat service:
 
-  a. For Systemd:
+    a. For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl restart filebeat
+      # systemctl restart filebeat
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service filebeat restart
+      # service filebeat restart
 
 If the pattern is not present in Kibana UI, just create a new one using the same name used on the Elasticsearch template, and make sure to use ``@timestamp`` as the Time Filter field name.
 

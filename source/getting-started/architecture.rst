@@ -21,7 +21,7 @@ The below diagram illustrates how components are distributed when the Wazuh serv
     :align: center
     :width: 100%
 
-In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server. 
+In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch instance can all be deployed on a single server.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
@@ -48,6 +48,8 @@ Wazuh agents use the OSSEC message protocol to send collected events to the Wazu
 
 The Wazuh message protocol uses a 192-bit Blowfish encryption with a full 16-round implementation, or AES encryption with 128 bits per block and 256-bit keys.
 
+.. note:: Read the `Benefits of using AES in Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications//>`_ document for more information.
+
 Wazuh-Elastic communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -60,7 +62,7 @@ The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000
 Required ports
 --------------
 
-For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them. 
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
 
 Wazuh
 ^^^^^
@@ -135,7 +137,11 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
 
 .. code-block:: bash
 
-  root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
+  root@wazuh-manager:/var/ossec/logs/archives/2017/Jan# ls -l
+
+.. code-block:: none
+  :class: output
+
   total 176
   -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
   -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
@@ -150,6 +156,6 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
   -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
   -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
 
-Rotation and backups of archive files is recommended according to the storage capacity of the Wazuh Manager server. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
+Rotation and backups of archive files is recommended according to the storage capacity of the Wazuh manager server. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
 
 On the other hand, you may choose to dispense with storing archive files at all and simply rely on Elasticsearch for archive storage, especially if you are running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability. You could even use a *cron* job to move snapshotted indexes to a final data storage server and sign them using MD5 and SHA1 algorithms.

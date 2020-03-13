@@ -29,11 +29,15 @@ Use the cURL command to send a *request* to confirm that everything is working a
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000?pretty"
+
+.. code-block:: json
+    :class: output
+
     {
         "error": 0,
         "data": {
             "msg": "Welcome to Wazuh HIDS API",
-            "api_version": "v3.9.1",
+            "api_version": "v3.10.2",
             "hostname": "wazuh",
             "timestamp": "Mon Dec 03 2018 00:36:13 GMT+0000 (UTC)"
         }
@@ -67,13 +71,14 @@ Here are some of the basic concepts related to making API requests and understan
 
  * Example response without errors:
 
-  .. code-block:: console
+  .. code-block:: json
+        :class: output
 
         {
             "error":0,
             "data":{
                 "msg":"Welcome to Wazuh HIDS API",
-                "api_version":"v3.9.1",
+                "api_version":"v3.10.2",
                 "hostname":"wazuh",
                 "timestamp":"Mon Dec 03 2018 00:37:50 GMT+0000 (UTC)"
             }
@@ -104,6 +109,10 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/rules/1002?pretty"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -137,6 +146,10 @@ It can also be helpful to know what rules are available that match a specific cr
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -186,6 +199,10 @@ The API can be used to show information about all monitored files by syscheck. T
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/syscheck/000?event=modified&search=.py&pretty"
+
+.. code-block:: json
+    :class: output
+
     {
         "error": 0,
         "data": {
@@ -233,6 +250,10 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -261,6 +282,10 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -295,6 +320,10 @@ Rootcheck requests are very similar to the syscheck requests. In order to get al
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -320,6 +349,10 @@ Some information about the manager can be retrieved using the API. Configuration
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/manager/status?pretty"
+
+.. code-block:: json
+    :class: output
+
     {
         "error": 0,
         "data": {
@@ -342,6 +375,10 @@ You can even dump the manager's current configuration with the request bellow (r
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/manager/configuration?pretty"
+
+.. code-block:: json
+    :class: output
+
     {
       "error": 0,
       "data": {
@@ -370,6 +407,10 @@ This enumerates **active** agents:
 .. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000/agents?offset=1&limit=1&status=active&pretty"
+
+.. code-block:: json
+    :class: output
+
     {
        "error": 0,
        "data": {
@@ -384,7 +425,7 @@ This enumerates **active** agents:
                 "ip": "192.168.185.7",
                 "node_name": "node01",
                 "dateAdd": "2018-08-02 16:52:04",
-                "version": "Wazuh v3.9.1",
+                "version": "Wazuh v3.10.2",
                 "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
                 "manager_host": "wazuh",
                 "lastKeepAlive": "2018-08-03 01:27:33",
@@ -410,6 +451,10 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 .. code-block:: console
 
     # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"
+
+.. code-block:: json
+    :class: output
+
     {
         "error": 0,
         "data": {

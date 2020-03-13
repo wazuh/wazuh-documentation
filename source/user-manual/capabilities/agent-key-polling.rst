@@ -77,7 +77,8 @@ The output of your script must be a JSON object in the standard output.
 
 On success example:
 
-.. code-block:: console
+.. code-block:: json
+    :class: output
 
     {
         "error": 0,
@@ -89,7 +90,8 @@ On success example:
         }
     }
 
-error
+**error**
+
     Error identificator number.
 
     +--------------------+----------------+
@@ -100,14 +102,16 @@ error
     | Unique value       | Yes, must be 0 |
     +--------------------+----------------+
 
-data
+**data**
+
     Data in json format with the following fields.
 
     +--------------------+-------------------+
     | Allowed fields     | id, name, ip, key |
     +--------------------+-------------------+
 
-id
+**id**
+
     Agent identificator number.
 
     +--------------------+---------------+
@@ -118,7 +122,8 @@ id
     | Unique value       | Yes           |
     +--------------------+---------------+
 
-name
+**name**
+
     Agent name.
 
     +--------------------+--------------------------------------------------+
@@ -129,7 +134,8 @@ name
     | Unique value       | Yes                                              |
     +--------------------+--------------------------------------------------+
 
-address
+**address**
+
     Allowed source address range in CIDR format. If specified, the manager will only accept the agent if its source IP matches this address.
 
     +--------------------+----------------------------+
@@ -142,7 +148,8 @@ address
     | Aliases            | ``any`` = ``0.0.0.0/0``    |
     +--------------------+----------------------------+
 
-key
+**key**
+
     String that will take part in the external message encryption.
 
     +--------------------+----------------------+
@@ -155,14 +162,16 @@ key
 
 On error example:
 
-.. code-block:: console
+.. code-block:: json
+    :class: output
 
     {
         "error": 1,
         "message": "Your error message"
     }
 
-error
+**error**
+
     Error identificator number.
 
     +--------------------+---------------+
@@ -171,7 +180,8 @@ error
     | Unique value       | Yes           |
     +--------------------+---------------+
 
-message
+**message**
+
     String that will show the message error.
 
     +--------------------+----------------------+

@@ -25,7 +25,11 @@ We can use rootcheck to monitor security policies. The first thing to do is to e
 
 .. code-block:: console
 
-	root@agente:/home/agente# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
+	root@agent:/home/agent# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
+
+.. code-block:: xml
+	:class: output
+
 	<rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
 	<rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
 	<system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
@@ -37,6 +41,10 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
 .. code-block:: console
 
 	root@manager:/home/manager# tail -f /var/ossec/logs/archives/archives.log
+
+.. code-block:: none
+	:class: output
+
 	2018 May 16 17:14:45 (agent01) 192.168.1.50->rootcheck Ending syscheck scan.
 	2018 May 16 17:14:58 manager->rootcheck Starting rootcheck scan.
 	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 .
@@ -61,7 +69,8 @@ Use cases
 
 Wazuh can help to control the security in the processing of data using Syscheck we can see the events that arise, the accesses, who performs them, etc.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526486886.138354: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
 	2018 May 16 18:08:06 (agent01) 192.168.1.50->syscheck
@@ -123,7 +132,8 @@ Use cases
 
 Wazuh will generate an alert like this.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526470326.10972: - ossec,rootcheck,gdpr_IV_30.1.g,
 	2018 May 16 13:32:06 (agent01) 192.168.1.50->rootcheck
@@ -132,11 +142,12 @@ Wazuh will generate an alert like this.
 	title: SSH Hardening - 9: Wrong Maximum number of authentication attempts
 	file: /etc/ssh/sshd_config
 
-We can also see the event stored in our log file ``archives.log``, as long as the ``log_all`` option is activated.
+We can also see the event stored in our log file ``archives.log``, as long as the ``logall`` option is activated.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
-2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
+	2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
 
 .. thumbnail:: ../images/gdpr/audit_1.png
     :title: Alert visualization at Kibana Discover
@@ -174,13 +185,14 @@ Use cases
 
 Wazuh will generate an alert like this.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526481285.44363: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,
 	2018 May 16 16:34:45 (agent01) 192.168.1.50->/var/log/auth.log
 	Rule: 5710 (level 5) -> 'sshd: Attempt to login using a non-existent user'
 	Src IP: 192.168.1.64
-	May 16 16:34:44 agente sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
+	May 16 16:34:44 agent sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
 
 .. thumbnail:: ../images/gdpr/access_1.png
     :title: Alert visualization at Kibana Discover
@@ -207,7 +219,8 @@ Use cases
 
 A sample email could be:
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	From: Wazuh <watcher@example.com>               5:03 PM (2 minutes ago)
 	to: me
@@ -307,20 +320,21 @@ Use cases
 
 Wazuh will generate an alert like this.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526481936.95480: - syslog,sshd,authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,
 	2018 May 16 16:45:36 (agent01) 192.168.1.50->/var/log/auth.log
 	Rule: 5712 (level 10) -> 'sshd: brute force trying to get access to the system.'
 	Src IP: 192.168.1.64
-	May 16 16:45:35 agente sshd[10549]: Failed password for invalid user Evil_User from 192.168.1.64 port 49894 ssh2
-	May 16 16:45:32 agente sshd[10549]: Invalid user Evil_User from 192.168.1.64 port 49894
-	May 16 16:45:31 agente sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:28 agente sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:27 agente sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
-	May 16 16:45:24 agente sshd[10547]: Invalid user Evil_User from 192.168.1.64 port 49892
-	May 16 16:44:58 agente sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
-	May 16 16:44:56 agente sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
+	May 16 16:45:35 agent sshd[10549]: Failed password for invalid user Evil_User from 192.168.1.64 port 49894 ssh2
+	May 16 16:45:32 agent sshd[10549]: Invalid user Evil_User from 192.168.1.64 port 49894
+	May 16 16:45:31 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+	May 16 16:45:28 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+	May 16 16:45:27 agent sshd[10547]: Failed password for invalid user Evil_User from 192.168.1.64 port 49892 ssh2
+	May 16 16:45:24 agent sshd[10547]: Invalid user Evil_User from 192.168.1.64 port 49892
+	May 16 16:44:58 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
+	May 16 16:44:56 agent sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
 
 
 .. thumbnail:: ../images/gdpr/brute_1.png

@@ -12,7 +12,7 @@ Chapter II, Article 5 Head 1(f)
 
 **Article 5**  "Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality')."
 
-The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements. 
+The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements.
 
 Wazuh’s File integrity monitoring (FIM) helps on this task by watching specific files and triggering alerts when these are modified. The component responsible for this task is called `Syscheck <https://documentation.wazuh.com/3.x/user-manual/reference/ossec-conf/syscheck.html>`_. It stores the cryptographic checksum and other attributes from file or Windows registry keys and regularly compares it to the file's current checksum.
 
@@ -51,17 +51,36 @@ When we modify the file Wazuh generates an alert.
 .. code-block:: console
 
 	root@agent:~# ls -l personal_data
+
+.. code-block:: none
+	:class: output
+
 	total 4
 	-rw-r--r-- 1 root root 18 may 16 11:39 subject_data.txt
+
+.. code-block:: console
+
 	root@agent:~# cat personal_data/subject_data.txt
+
+.. code-block:: none
+	:class: output
+
 	User01= user03_ID
+
+.. code-block:: console
+
 	root@agent:~# echo "User01= user02_ID" > personal_data/subject_data.txt
 	root@agent:~# cat personal_data/subject_data.txt
+
+.. code-block:: none
+	:class: output
+
 	User01= user02_ID
 
 As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526470666.11377: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
 	2018 May 16 13:37:46 (agent01) 192.168.1.50->syscheck
@@ -105,7 +124,3 @@ As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%
-
-
-
-

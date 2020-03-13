@@ -9,7 +9,7 @@ Logstash is an open source data collection engine with real-time pipelining capa
 from disparate sources and normalize the data into destinations of your choice. Cleanse and democratize all your data for diverse
 advanced downstream analytics and visualization use cases.
 
-This guide describes how to configure Logstash for receiving events from one or more Filebeat instances, parse the events, and then send 
+This guide describes how to configure Logstash for receiving events from one or more Filebeat instances, parse the events, and then send
 them to Elasticsearch.
 
 1. Install Java 8.
@@ -60,7 +60,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # yum install logstash-7.1.0
+      # yum install logstash-7.5.1
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -68,7 +68,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # apt-get install logstash=1:7.1.0-1
+      # apt-get install logstash=1:7.5.1-1
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -76,7 +76,7 @@ them to Elasticsearch.
 
   .. code-block:: console
 
-    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/logstash/7.x/01-wazuh-remote.conf
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/logstash/7.x/01-wazuh-remote.conf
 
 5. Restart Logstash.
 
@@ -84,17 +84,14 @@ them to Elasticsearch.
 
     # systemctl restart logstash
 
-5. Configure the Filebeat instance, change the events destination from Elasticsearch instance to the Logstash instance.
+6. Configure the Filebeat instance, change the events destination from Elasticsearch instance to the Logstash instance.
 
   * Disable the Elasticsearch output in ``/etc/filebeat/filebeat.yml``.
 
     .. code-block:: yaml
 
-      #output.elasticsearch:
-      #    hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-      #    pipeline: geoip
-      #    indices:
-      #        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+      # output.elasticsearch:
+      # hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
   * Add the Logstash output in ``/etc/filebeat/filebeat.yml``.
 
@@ -102,21 +99,22 @@ them to Elasticsearch.
 
       output.logstash.hosts: ["YOUR_LOGSTASH_SERVER_IP:5000"]
 
-6. Restart Filebeat.
+7. Restart Filebeat.
 
   .. code-block:: console
 
     # systemctl restart filebeat
 
-7. Check if Logstash is reachable from Filebeat.
+8. Check if Logstash is reachable from Filebeat.
 
   .. code-block:: console
 
     # filebeat test output
-  
+
   Example output:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     logstash: 172.16.1.2:5000...
     connection...
@@ -129,4 +127,4 @@ them to Elasticsearch.
 
 Useful information for events transformation:
 
-  - https://www.elastic.co/guide/en/logstash/current/transformation.html
+  - `Transforming Data <https://www.elastic.co/guide/en/logstash/current/transformation.html>`_

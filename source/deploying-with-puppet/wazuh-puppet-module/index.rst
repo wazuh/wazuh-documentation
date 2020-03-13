@@ -14,15 +14,16 @@ Download and install the Wazuh module from Puppet Forge:
 
   .. code-block:: console
 
-    # puppet module install wazuh-wazuh --version 3.9.0
+    # puppet module install wazuh-wazuh --version 3.10.2
 
-  .. code-block:: bash
-  
+  .. code-block:: none
+    :class: output
+
     Notice: Preparing to install into /etc/puppet/modules ...
     Notice: Downloading from https://forgeapi.puppetlabs.com ...
     Notice: Installing -- do not interrupt ...
     /etc/puppet/modules
-    └─┬ wazuh-wazuh (v3.9.0)
+    └─┬ wazuh-wazuh (v3.10.2)
       ├── puppet-nodejs (v7.0.0)
       ├── puppet-selinux (v1.6.1)
       ├── puppetlabs-apt (v6.3.0)
@@ -33,7 +34,7 @@ Download and install the Wazuh module from Puppet Forge:
       └── stahnma-epel (v1.3.1)
 
 This module installs and configures Wazuh agent and manager.
-  
+
 Install manager via Puppet
 --------------------------
 
@@ -96,7 +97,7 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 Install agent via Puppet
 ------------------------
 
-The agent is configured by installing the ``wazuh::client`` class.
+The agent is configured by installing the ``wazuh::agent`` class.
 
 Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP address)
 
@@ -104,9 +105,10 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP
 
     node "client.yourhost.com" {
 
-    class { "wazuh::client":
-      ossec_server_ip => "192.168.209.166"
-    }
+      class { "wazuh::agent":
+        wazuh_register_endpoint => "192.168.209.166",
+        wazuh_reporting_endpoint => "192.168.209.167"
+      }
 
     }
 

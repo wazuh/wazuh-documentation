@@ -112,9 +112,13 @@ Wazuh API
 - Multiple nodes restart.
 - SCA endpoints for policies, scan and checks.
 
-.. code-block:: js
+.. code-block:: none
 
     GET /sca/001
+
+.. code-block:: js
+    :class: output
+
     {
         "error": 0,
         "data": {
@@ -142,9 +146,13 @@ Wazuh API
 
 - Dive into your SCA scan results using the API.
 
-.. code-block:: js
+.. code-block:: none
 
     GET /sca/001/checks/system_audit_ssh
+
+.. code-block:: js
+    :class: output
+
     {
         "error": 0,
         "data": {
@@ -180,13 +188,13 @@ Wazuh API
 Wazuh app
 ---------
 
-**Wazuh Manager configuration editor**
+**Wazuh manager configuration editor**
 
 Edit the content of the configuration file for one or more nodes using the interface editor.
 
 
 .. thumbnail:: ../images/release-notes/3.9.0/app-03.png
-  :title: Wazuh Manager configuration editor
+  :title: Wazuh manager configuration editor
   :align: center
   :width: 100%
 

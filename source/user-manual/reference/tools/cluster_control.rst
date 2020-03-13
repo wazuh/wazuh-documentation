@@ -41,6 +41,10 @@ Get cluster's healthcheck
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -i
+
+    .. code-block:: none
+        :class: output
+
         Cluster name: wazuh
 
         Last completed synchronization for connected nodes (3):
@@ -51,17 +55,21 @@ Get cluster's healthcheck
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -i more
+
+    .. code-block:: none
+        :class: output
+
         Cluster name: wazuh
 
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.9.1
+            Version: 3.10.2
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.9.1
+            Version: 3.10.2
             Type: worker
             Active agents: 1
             Status:
@@ -79,7 +87,7 @@ Get cluster's healthcheck
                     Permission to synchronize: True.
 
         node03 (192.168.56.105)
-            Version: 3.9.1
+            Version: 3.10.2
             Type: worker
             Active agents: 0
             Status:
@@ -100,17 +108,21 @@ Get cluster's healthcheck
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -i more -fn node02 node01
+
+    .. code-block:: none
+        :class: output
+
         Cluster name: wazuh
 
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.9.1
+            Version: 3.10.2
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.9.1
+            Version: 3.10.2
             Type: worker
             Active agents: 1
             Status:
@@ -135,18 +147,26 @@ Get connected nodes
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -l
+
+    .. code-block:: none
+        :class: output
+
         NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  3.9.1    172.17.0.101
-        worker-2  worker  3.9.1    172.17.0.102
-        master    master  3.9.1    172.17.0.100
+        worker-1  worker  3.10.2    172.17.0.101
+        worker-2  worker  3.10.2    172.17.0.102
+        master    master  3.10.2    172.17.0.100
 
 * Filter connected nodes by name
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -l -fn master worker-1
+
+    .. code-block:: none
+        :class: output
+
         NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  3.9.1    172.17.0.101
-        master    master  3.9.1    172.17.0.100
+        worker-1  worker  3.10.2    172.17.0.101
+        master    master  3.10.2    172.17.0.100
 
 Get agents in cluster
 ^^^^^^^^^^^^^^^^^^^^^
@@ -155,19 +175,31 @@ Get agents in cluster
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a
+
+    .. code-block:: none
+        :class: output
+
         NAME    IP         ID   STATUS  VERSION       NODE NAME
-        master  127.0.0.1  000  Active  Wazuh v3.9.1  master
-        agent1  any        001  Active  Wazuh v3.9.1  worker-2
+        master  127.0.0.1  000  Active  Wazuh v3.10.2  master
+        agent1  any        001  Active  Wazuh v3.10.2  worker-2
 
 * Get all agents reporting to a node
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a -fn worker-2
+
+    .. code-block:: none
+        :class: output
+
         NAME    IP         ID   STATUS  VERSION       NODE NAME
-        agent1  any        001  Active  Wazuh v3.9.1  worker-2
+        agent1  any        001  Active  Wazuh v3.10.2  worker-2
 
 * Get all active disconnected reporting to a node
     .. code-block:: shell
 
         # /var/ossec/bin/cluster_control -a -fn node02 -fs Disconnected
+
+    .. code-block:: none
+        :class: output
+
         NAME    IP         ID   STATUS  VERSION       NODE NAME

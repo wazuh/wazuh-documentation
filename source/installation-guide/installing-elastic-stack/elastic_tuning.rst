@@ -95,6 +95,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
     # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
+    :class: output
 
     {
       "nodes" : {
@@ -166,7 +167,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 
@@ -190,7 +191,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
       "...": "..."
       }
     }
-  
+
   .. note::
 
     We set "order" to "1", otherwise Filebeat will overwrite your template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
@@ -212,6 +213,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
     # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
 
   .. code-block:: json
+    :class: output
 
     {
       "wazuh-custom" : {
@@ -239,16 +241,15 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with one node, the number of replicas should be set to zero:
 
-.. code-block:: console
+.. code-block:: none
 
-  # curl -X PUT "http://localhost:9200/wazuh-alerts-*/_settings?pretty" -H 'Content-Type: application/json' -d'
+  # curl -X PUT "http://localhost:9200/wazuh-alerts-\*/_settings?pretty" -H 'Content-Type: application/json' -d'
   {
     "settings" : {
       "number_of_replicas" : 0
     }
-  }
-  '
+  }'
 
 Reference:
 
-  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-concepts.html#getting-started-shards-and-replicas>`_.
+  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/getting-started-concepts.html#getting-started-shards-and-replicas>`_.

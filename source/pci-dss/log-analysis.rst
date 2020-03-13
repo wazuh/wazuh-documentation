@@ -7,9 +7,9 @@ Log analysis
 
 Here we will use Wazuh log collection and analysis capabilities to meet the following PCI DSS controls:
 
-| **10.2.4**: Invalid logical access attempts.
-| **10.2.5**: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
-|
+  | **10.2.4**: Invalid logical access attempts.
+  | **10.2.5**: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
+  |
 
 These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), privilege escalations, changes to accounts, etc. In order to achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement(s). This makes it easy to analyze and visualize our PCI DSS related alerts.
 
@@ -67,11 +67,22 @@ In this scenario, we try to open the file ``cardholder_data.txt``. Since our cur
 .. code-block:: console
 
     [agent@centos ~]# ls -l
+
+.. code-block:: none
+    :class: output
+
     total 0
     drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 centos
     drwxr-x---  2 root  root  33 Jan  5 18:32 credit_cards
     drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 user_data
+
+.. code-block:: console
+
     [agent@centos ~]# cat credit_cards/cardholder_data.txt
+
+.. code-block:: none
+    :class: output
+
     Number: 0000-0000-0000-0000
     Holder: Mr. John Smith
 
@@ -80,6 +91,9 @@ Using the ``sudo`` log analysis decoder and rules, Wazuh will generate an alert 
 .. code-block:: console
 
     root@ubuntu:~# tail -n10 /var/ossec/logs/alerts/alerts.log
+
+.. code-block:: none
+    :class: output
 
     ** Alert 1483621881.263207: - syslog,sudo,pci_dss_10.2.5,pci_dss_10.2.2,
     2017 Jan 05 14:11:21 (CentOS) 192.168.56.4->/var/log/secure
@@ -97,6 +111,7 @@ Since we have JSON output enabled, we can also see the alert in ``alerts.json``:
     root@ubuntu:~# tail -n1 /var/ossec/logs/alerts/alerts.json | jq
 
 .. code-block:: json
+    :class: output
 
     {
       "rule": {
@@ -148,4 +163,3 @@ Kibana displays information in an organized way, allowing filtering by different
     :title: Wazuh PCI DSS dashboard for Kibana
     :align: center
     :width: 100%
-
