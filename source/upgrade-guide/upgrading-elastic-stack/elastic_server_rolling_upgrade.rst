@@ -86,10 +86,12 @@ Upgrade Elasticsearch
         # apt-get install elasticsearch=7.5.1
         # systemctl restart elasticsearch
 
-#. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
+#. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``).
 
     .. code-block:: yaml
 
+      discovery.seed_hosts:
+        - master_node_name_or_ip_address
       cluster.initial_master_nodes:
         - master_node_name_or_ip_address
 
