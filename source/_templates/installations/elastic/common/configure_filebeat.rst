@@ -3,6 +3,7 @@
 .. tabs::
 
 
+
   .. group-tab:: Elasticsearch single-node cluster
 
 
@@ -22,5 +23,6 @@
       output.elasticsearch.password: <elasticsearch_password>
 
     Replace ``elasticsearch_ip_node_x`` with the IP address or the hostname of the Elasticsearch server to connect to and ``elasticsearch_password`` with the previously generated password for ``elastic`` user.
+
 
 .. End of include file
