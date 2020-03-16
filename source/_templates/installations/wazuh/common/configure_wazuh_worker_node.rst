@@ -18,7 +18,7 @@ Configure the cluster node by editing the following settings in ``/var/ossec/etc
       <disabled>no</disabled>
   </cluster>
 
-As shown in the above example example, the following parameters have to be amended:
+As shown in the example above, the following parameters have to be amended:
 
 - :ref:`node_type <cluster_node_type>` has to be set as ``worker``,
 
