@@ -11,15 +11,15 @@ It is necessary to create new certificates for the server where Kibana will be i
     --ip <kibana_ip> \
     --out ~/kibana.zip
 
-Add ``ca.crt`` to the created ``kibana.zip`` file as follows:
+Add the ``ca.crt`` to the created ``kibana.zip`` file as follows:
 
 .. code-block:: console
 
   # zip -j ~/kibana.zip /etc/elasticsearch/certs/ca/ca.crt
 
-Copy ``kibana.zip`` file to the Kibana server. This example assumes that the file is placed at home folder ``~/``.
+Copy the ``kibana.zip`` file to the Kibana server. This example assumes that the file is placed at home folder ``~/``.
 
-Extract ``kibana.zip`` file. If ``unzip`` is used, the command looks as follows:
+Extract the ``kibana.zip`` file. If ``unzip`` is used, the command looks as follows:
 
 .. code-block:: console
 
