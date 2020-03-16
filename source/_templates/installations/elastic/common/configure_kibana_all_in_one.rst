@@ -4,7 +4,7 @@
 
   # curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/kibana/7.x/kibana.yml
 
-Edit ``/etc/kibana/kibana.yml`` file:
+Edit the ``/etc/kibana/kibana.yml`` file:
 
 .. code-block:: yaml
 
