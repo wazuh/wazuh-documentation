@@ -107,9 +107,9 @@ Wazuh server worker nodes
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before starting, note that the Wazuh API has to be installed in the Wazuh master node and not in the Wazuh worker nodes.
+Before starting, note that the Wazuh API has to be installed only in the Wazuh master node and not in the Wazuh worker nodes.
 
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always recommended to install the most recent available version for each Operating System. In this guide, the 10.x version was used but a most recent one can be installed.
+Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
 
 
 .. tabs::
@@ -136,7 +136,7 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always 
 
 
 .. note::
-  Now, that the Wazuh API is installed, it is strongly recommended to secure the API. In the following document :ref:`securing_api` it is explained how to enable the HTTPS communication, how to change the default user and password and more.
+  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
 
 .. _wazuh_server_multi_node_filebeat:
 
@@ -200,7 +200,7 @@ Filebeat installation and configuration
         .. include:: ../../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
-#. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
@@ -222,9 +222,11 @@ Filebeat installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
-#. Edit the file ``/etc/filebeat/filebeat.yml``:
+#. Edit ``/etc/filebeat/filebeat.yml`` file:
 
     .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
+
+    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Enable and start the Filebeat service:
 
@@ -237,7 +239,7 @@ Filebeat installation and configuration
 Next steps
 ----------
 
-The next step consists on installing Kibana. The guide continues  :ref:`here<kibana>`.
+The next step consists of installing Kibana. The guide continues  :ref:`here<kibana>`.
 
 
 Disabling repositories
@@ -322,6 +324,3 @@ To uninstall Filebeat:
 
 
     .. include:: ../../_templates/installations/elastic/zypp/uninstall_filebeat.rst
-
-
-
