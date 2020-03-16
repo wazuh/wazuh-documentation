@@ -107,7 +107,7 @@ Wazuh server worker nodes
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Wazuh API has to be installed only in the Wazuh master node.
+Before starting, note that the Wazuh API has to be installed only in the Wazuh master node and not in the Wazuh worker nodes.
 
 Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
 
