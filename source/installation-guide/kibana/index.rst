@@ -110,7 +110,7 @@ Kibana installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
-    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted either by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
@@ -153,8 +153,24 @@ Uninstall Kibana
 
 To uninstall Kibana:
 
-    .. code-block:: console
+.. tabs::
 
-      # apt-get remove kibana
 
-There are files marked as configuration and data files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/lib/kibana`` and ``/etc/kibana``.
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_kibana.rst
