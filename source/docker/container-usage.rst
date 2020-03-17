@@ -106,7 +106,7 @@ Registering agents in a Wazuh manager deployed through Docker works just like in
 Loading custom Wazuh configuration files
 ----------------------------------------
 
-The Wazuh docker image contains a script (**entrypoint.sh**) that automatically loads custom configuration files into the Wazuh manager container. To do this, you first need to create the ``./wazuh-config-mount`` folder in the same directory as your ``docker-compose.yml`` file. Upon booting the container, **entrypoint.sh** will copy the file to the right place while respecting the destination file permissions.
+The Wazuh Docker image contains a script (**entrypoint.sh**) that automatically loads custom configuration files into the Wazuh manager container. To do so, you first need to create the ``./wazuh-config-mount`` folder in the same directory as your ``docker-compose.yml`` file. Upon booting the container, the **entrypoint.sh** script will copy the file to the right place while respecting the destination file permissions.
 
 For example, to load a custom ``ossec.conf``, you would place it in ``./wazuh-config-mount/etc/ossec.conf``, which would then load it in ``/var/ossec/data/etc/ossec.conf`` on the manager. The same applies for other files, here is an example of a ``/wazuh-config-mount`` folder:
 
@@ -129,9 +129,9 @@ For example, to load a custom ``ossec.conf``, you would place it in ``./wazuh-co
 Mounting persistent storage
 ---------------------------
 
-By default, Docker's storage is not persistent. Upon removing a container, its files are removed with it. To solve this, Docker offers persistent storage in the form of **volumes** or **bind mounts**. Volumes are the recommended way to store information and are stored in an area of the filesystem managed by Docker, whereas bind mounts are stored wherever the user specifies. Volumes are also much more portable than bind mounts, as they do not depend on the host's filesystem to read or write files.
+By default, storage in Docker is not persistent. Upon removing a container, its files are removed with it. To solve this, Docker provides persistent storage in the form of **volumes** or **bind mounts**. Volumes are the recommended way to store information and they are stored in a specific filesystem area managed by Docker, whereas bind mounts are stored wherever the user specifies. Volumes are also much more portable than bind mounts, as they do not depend on the host's filesystem to read or write files.
 
-.. note:: For more information on Docker's storage options, see the `Docker documentation <https://docs.docker.com/storage/>`_.
+.. note:: For more information about Docker's storage options, see the `Docker documentation <https://docs.docker.com/storage/>`_.
 
 .. warning::
 
@@ -166,7 +166,7 @@ Volume:
 Upgrades
 --------
 
-Upgrades on containers are done differently to traditional upgrades, due to the entire philosophy behind containers being prepackaged software isolated from the host system. To upgrade a container, simply change the version number of each service to the desired version in the ``docker-compose.yml`` file. Then, pull down the service and bring it up again.
+Upgrades on containers are done differently from traditional upgrades, due to the entire philosophy behind containers being prepackaged software isolated from the host system. To upgrade a container, simply change the version number of each service to the desired version in the ``docker-compose.yml`` file. Then, pull down the service and bring it up again.
 
 .. note:: As mentioned before, Docker's storage is not persistent. Consider mounting a volume to the container to preserve configuration files before you upgrade.
 

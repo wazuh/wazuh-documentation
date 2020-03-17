@@ -117,7 +117,7 @@ Usage
 
 The compose file (``docker-compose.yml``) contains everything needed to deploy Wazuh, which includes the necessary configuration for each service. As mentioned, ``docker-compose up`` builds and runs each service defined in the compose file.
 
-Besides ``up``, docker-compose has the following commands of note:
+Besides ``up``, docker-compose has the following commands:
 
 - ``down`` stops and removes a container created by ``up``.
 - ``start``, ``stop`` and ``restart`` start, stop and restart existing containers. They do not create or destroy containers like ``up`` and ``down``.
