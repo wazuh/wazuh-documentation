@@ -57,7 +57,7 @@ Other things that could additionally or alternatively take place might be:
 
 1. An email, Slack, or PagerDuty message could be generated about this alert.
 
-2. A high severity local rule of your own making, child of rule 18152, could fire if the attacked account name specifically matches your secret Windows admin account name.
+2. A high severity local rule of your own making, child of rule 60204, could fire if the attacked account name specifically matches your secret Windows admin account name.
 
 3. An active response could be triggered causing windows-agent to null-route the attacking IP address.
 
