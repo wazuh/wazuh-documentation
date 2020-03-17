@@ -106,7 +106,7 @@ Registering agents in a Wazuh manager deployed through Docker works just like in
 Loading custom Wazuh configuration files
 ----------------------------------------
 
-The Wazuh Docker image contains a script (**entrypoint.sh**) that automatically loads custom configuration files into the Wazuh manager container. To do so, you first need to create the ``./wazuh-config-mount`` folder in the same directory as your ``docker-compose.yml`` file. Upon booting the container, the **entrypoint.sh** script will copy the file to the right place while respecting the destination file permissions.
+The Wazuh Docker image contains a script (**entrypoint.sh**) that automatically loads custom configuration files into the Wazuh manager container. To do so, first you need to create the ``./wazuh-config-mount`` folder in the same directory as your ``docker-compose.yml`` file. Upon booting the container, the **entrypoint.sh** script will copy the file to the right place while respecting the destination file permissions.
 
 For example, to load a custom ``ossec.conf``, you would place it in ``./wazuh-config-mount/etc/ossec.conf``, which would then load it in ``/var/ossec/data/etc/ossec.conf`` on the manager. The same applies for other files, here is an example of a ``/wazuh-config-mount`` folder:
 
