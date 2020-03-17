@@ -61,7 +61,7 @@ Registering agents in a Wazuh manager deployed through Docker works just like in
         </client>
         . . .
 
-    If for example we had launched the command ``docker-compose up`` on host with IP address **192.168.50.75**, we would have the following configuration:
+    If, for example, we executed the command ``docker-compose up`` on the host with IP address **192.168.50.75**, we would have the following configuration:
 
     .. code-block:: xml
 
