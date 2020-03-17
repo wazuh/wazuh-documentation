@@ -14,7 +14,7 @@ configuration of host.
 For example, SCA could assess whether it is necessary to change password related configuration, remove unnecessary
 software, disable unnecessary services, or audit the TCP/IP stack configuration.
 
-Policies for the SCA module are written in YAML format. This that was chosen due having human readability in mind,
+Policies for the SCA module are written in YAML. This format was chosen having in mind human readability,
 which allows users to quickly understand and write their own policies or extend the existing ones to fit their needs.
 Furthermore, Wazuh is distributed with a set of policies, most of them based on the CIS benchmarks, a well-established
 standard for host hardening.
@@ -56,6 +56,7 @@ potential event flooding.
 .. code-block:: none
     :name: alert_example
     :caption: Alert example
+    :class: output
 
     ** Alert 1568287462.156390: mail  - sca,gdpr_IV_35.7.d
     2019 Sep 12 13:24:22 (debian9-56) 10.0.0.56->sca

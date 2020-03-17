@@ -57,6 +57,9 @@ Example of use
 
     # ./fim_migrate
 
+.. code-block:: none
+    :class: output
+
     2018-10-25 15:18:20 [INFO] Upgrading FIM database for manager...
     2018-10-25 15:18:20 [INFO] Added 4734 file entries in manager database.
     2018-10-25 15:18:20 [INFO] [1/3] Upgrading FIM database for agent '001'...

@@ -20,15 +20,15 @@ The **xml labels** used to configure ``rules`` are listed here.
 +=====================+===============================================================+======================================================================================================+
 | `rule`_             | See `table <rules.html#rule>`_ below.                         | Its starts a new rule and its defining options.                                                      |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `match`_            | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
+| `match`_            | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `regex`_            | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_.| It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
+| `regex`_            | Any `regex expression <regex.html#regex-os-regex-syntax>`_.   | It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `decoded_as`_       | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `category`_         | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `field`_            | Name and `sregex <regex.html#os-match-or-sregex-syntax>`_     | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
+| `field`_            | Name and `sregex <regex.html#sregex-os-match-syntax>`_        | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
 |                     |                                                               | value.                                                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `srcip`_            | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
@@ -37,21 +37,21 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `extra_data`_       | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `user`_             | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will compare a sregex representing a username with a string decoded as ``user``.                  |
+| `user`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a username with a string decoded as ``user``.                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `program_name`_     | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the program_name obtained in the pre-decoding phase.                             |
+| `program_name`_     | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the program_name obtained in the pre-decoding phase.                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `hostname`_         | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It compares it with the hostname obtained in the pre-decoding phase.                                 |
+| `hostname`_         | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the hostname obtained in the pre-decoding phase.                                 |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `time`_             | Any time range. e.g. (hh:mm-hh:mm)                            | It checks if the event was generated during that time range.                                         |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `weekday`_          | monday - sunday, weekdays, weekends                           | It checks whether the event was generated during certain weekdays.                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `id`_               | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will look for a match with the field decoded as ``ID``                                            |
+| `id`_               | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will look for a match with the field decoded as ``ID``                                            |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `url`_              | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | It will look for a match with the field decoded as ``url``                                           |
+| `url`_              | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will look for a match with the field decoded as ``url``                                           |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `location`_         | Any `sregex <regex.html#os-match-or-sregex-syntax>`_.         | Location identifies the origin of the input.                                                         |
+| `location`_         | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Location identifies the origin of the input.                                                         |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `action`_           | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -67,9 +67,9 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_id`_          | None.                                                         | The decoded ``id`` must be the same.                                                                 |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `same_source_ip`_   | None.                                                         | The decoded ``scrip`` must be the same.                                                              |
+| `same_source_ip`_   | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `same_src_port`_    | None.                                                         | The decoded ``scr_port`` must be the same.                                                           |
+| `same_src_port`_    | None.                                                         | The decoded ``src_port`` must be the same.                                                           |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_dst_port`_    | None.                                                         | The decoded ``dst_port`` must be the same.                                                           |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -98,7 +98,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `group`_            | Any String.                                                   | Add additional groups to the alert.                                                                  |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `status`_           | started, aborted, succeded, failed, lost, etc.                | Declares the current status of a rule.                                                               |
+| `status`_           | started, aborted, succeeded, failed, lost, etc.               | Declares the current status of a rule.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `var`_              | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -164,7 +164,7 @@ Used as a requisite to trigger the rule, will search for a match in the log even
 +--------------------+-----------------------------------------------------------------+
 | **Default Value**  | n/a                                                             |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
 +--------------------+-----------------------------------------------------------------+
 
 Example:
@@ -187,7 +187,7 @@ Used as a requisite to trigger the rule, will search for a match in the log even
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_ |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_    |
 +--------------------+---------------------------------------------------------------+
 
 Example:
@@ -259,7 +259,7 @@ Used as a requisite to trigger the rule. It will check for a match in the conten
 +--------------------+-----------------------------------------------------------------+
 | **name**           | Specifies the name of the field extracted by the decoder.       |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
 +--------------------+-----------------------------------------------------------------+
 
 Example:
@@ -330,7 +330,7 @@ Any string that is decoded into the ``data`` field.
 +--------------------+-----------------------------------------------------------------+
 | **Default Value**  | n/a                                                             |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
 +--------------------+-----------------------------------------------------------------+
 
 extra_data
@@ -364,7 +364,7 @@ Used as a requisite to trigger the rule. It will check the username (decoded as 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 
@@ -388,7 +388,7 @@ Any string that is decoded into the ``system_name`` field.
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 program_name
@@ -399,7 +399,7 @@ Used as a requisite to trigger the rule. The program's name is decoded from sysl
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 Example:
@@ -423,7 +423,7 @@ Any string that is decoded into the ``protocol`` field.
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 
@@ -435,7 +435,7 @@ Used as a requisite to trigger the rule. Any hostname (decoded as the syslog hos
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 Example:
@@ -506,7 +506,7 @@ Used as a requisite to trigger the rule. It will check any ID (decoded as the ID
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 
@@ -531,7 +531,7 @@ Used as a requisite to trigger the rule. It will check any URL (decoded as the U
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 Example:
@@ -557,7 +557,7 @@ Used as a requisite to trigger the rule. It will check the content of the field 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
 +--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
 The location identifies the origin of the input. If the event comes from an agent, its name and registered IP (as it was added) is appended to the location.
@@ -879,7 +879,7 @@ As an example of this option, check this rule:
 global_frequency
 ^^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.1
+.. versionadded:: 3.11.0
 
 Specifies that the events of all agents will be contemplated when using the
 frequency and ``timeframe`` options. By default, only the events generated by

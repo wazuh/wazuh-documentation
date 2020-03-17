@@ -30,7 +30,7 @@ Remember that unlike rules, decoders cannot have "grandchildren". A child decode
 Dealing with dynamically structured logs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The process of matching at decoder level uses `regular expressions <regex.html#os-regex-or-regex-syntax>`_, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
+The process of matching at decoder level uses `regular expressions <regex.html#regex-os-regex-syntax>`_, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
 
 This is where sibling decoders come in. Taking advantage of the simple parent-children matching logic, one can create a set of decoders that are together "parent" of themselves. As a result, when one of these decoders is matched it will also check the "sibling" decoders whilst extracting one piece of information at a time.
 
@@ -65,7 +65,8 @@ A simple decoder may be:
 
 Using `/var/ossec/bin/ossec-logtest` we get:
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   **Phase 1: Completed pre-decoding.
   full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
@@ -121,7 +122,8 @@ But using modular logic with sibling decoders:
 
 Both messages are now correctly decoded.
 
-.. code-block:: xml
+.. code-block:: none
+  :class: output
 
   ossec-testrule: Type one log per line.
 

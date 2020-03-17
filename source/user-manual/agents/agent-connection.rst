@@ -7,7 +7,7 @@ Checking connection with Manager
 
 Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager's IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
 
-::
+.. code-block:: xml
 
   <ossec_config>
     <client>

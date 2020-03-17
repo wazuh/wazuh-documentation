@@ -20,7 +20,7 @@ Follow these steps in the Wazuh server:
 
 1. Create a configuration file and name it ``req.conf``. You can enter the hostname or the IP address of the Wazuh server where the agents are going to be registered. In this case, the Wazuh server IP is ``192.168.1.2``. The content of the configuration file could be as follows:
 
-  .. code-block:: console
+  .. code-block:: pkgconfig
 
     [req]
     distinguished_name = req_distinguished_name

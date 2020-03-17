@@ -29,7 +29,8 @@ Input logs are messages ingested by Logcollector. They can be in Syslog format o
 Syslog message
 ~~~~~~~~~~~~~~
 
-::
+.. code-block:: none
+    :class: output
 
     Nov  9 16:06:26 localhost salute: Hello world.
 
@@ -85,7 +86,8 @@ Queue
 
 Example:
 
-::
+.. code-block:: none
+    :class: output
 
     1:/var/log/syslog:Nov  9 16:06:26 localhost salute: Hello world.
 
@@ -173,11 +175,15 @@ So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the arr
 Encrypted data
 ++++++++++++++
 
-The padded data is encrypted using Blowfish::
+The padded data is encrypted using AES::
 
-    <Encrypted> = Blowfish(<Padding> <Block>)
+    <Encrypted> = AES(<Padding> <Block>)
 
 The initialization vector and the encryption key are described in `Encryption system`_.
+
+.. note::
+
+    The default encryption method is AES, although Blowfish is available as an alternative encryption method.
 
 Payload
 +++++++

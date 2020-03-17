@@ -47,6 +47,7 @@ Wazuh will need a user with permissions to pull log data from the S3 bucket. The
     Raw output for the example policy:
 
     .. code-block:: json
+      :class: output
 
       {
         "Version": "2012-10-17",

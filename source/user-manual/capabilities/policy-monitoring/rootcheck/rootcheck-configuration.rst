@@ -44,7 +44,8 @@ Root access to SSH
 ------------------
 
 1. First you need to create your custom audit file (audit_test.txt):
-::
+
+.. code-block:: pkgconfig
 
   # PermitRootLogin not allowed
   # PermitRootLogin indicates if the root user can log in by ssh.

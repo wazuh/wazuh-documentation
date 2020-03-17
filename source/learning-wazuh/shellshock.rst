@@ -89,12 +89,11 @@ Notice the maliciously crafted User-Agent header to be sent, including injected 
 
 Search Kibana for **rule.id:31166** (the Shellshock rule).  You should find a record like this:
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/shellshock.png                                   |
-    |     :title: flood                                                                             |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/shellshock.png
+    :title: Flood
+    :align: center
+    :width: 100%
+
 
 Look over the rule that detected the probe:
 
@@ -155,8 +154,8 @@ section (see :ref:`timeout <reference_ossec_active_response>`).  For more detail
 about configuring active response, see the Wazuh user manual.
 
 
-**AR Scenario 1 - Make victim block attacker with iptables.**
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+AR Scenario 1 - Make victim block attacker with iptables
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 In the ``/var/ossec/etc/ossec.conf`` file on the Wazuh manager, replace this section:
 
@@ -209,6 +208,9 @@ you may confirm this with an iptables command on the attacked server:
 
         # iptables --list -n
 
+    .. code-block:: none
+        :class: output
+
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
         DROP       all  --  172.30.0.30          0.0.0.0/0
@@ -229,6 +231,9 @@ this event 5 minutes apart.
 
         # cat /var/ossec/logs/active-responses.log
 
+    .. code-block:: none
+        :class: output
+
         Mon Nov  4 19:28:08 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh add - 172.30.0.30 1572895688.94657 31166
         Mon Nov  4 19:33:09 UTC 2019 /var/ossec/active-response/bin/firewall-drop.sh delete - 172.30.0.30 1572895688.94657 31166
 
@@ -240,6 +245,9 @@ requesting the webpage again, or by using an iptables command on the attacked se
 
         # iptables --list -n
 
+    .. code-block:: none
+        :class: output
+
         Chain INPUT (policy ACCEPT)
         target     prot opt source               destination
 
@@ -250,8 +258,8 @@ requesting the webpage again, or by using an iptables command on the attacked se
         target     prot opt source               destination
 
 
-**AR Scenario 2 - Make all Linux lab systems block attacker even if they were not the target of the attack.**
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+AR Scenario 2 - Make all Linux lab systems block attacker even if they were not the target of the attack
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 In the newly-added ``<active-response>`` section in ``ossec.conf`` on wazuh-manager,
 change the ``<location>`` value from **local** to **all** so that all Linux Wazuh
@@ -284,8 +292,8 @@ Run the same malicious ``curl`` probe as before, and then confirm
 that all Linux systems configured are blocking the attacker's IP.
 
 
-**AR Scenario 3 - Make windows null route the attacker.**
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+AR Scenario 3 - Make windows null route the attacker
+::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Add an additional AR section to ``ossec.conf`` on wazuh-manager:
 
@@ -321,9 +329,10 @@ Run the same probe again to the web server.  Observe that the output of the
 Windows command line `route print /4` now shows a null route for the IP of the
 attacker.  It will be in the "Persistent Routes:" section of the output.
 
-    .. code-block:: console
+    .. code-block:: none
+            :class: output
 
-      PS C:\Users\Administrator> route print /4
+            PS C:\Users\Administrator> route print /4
 
             (...)
 
@@ -337,19 +346,18 @@ attacker.  It will be in the "Persistent Routes:" section of the output.
             ===========================================================================
 
 
-**Use Kibana to review active response actions taken on all agents during this lab.**
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Use Kibana to review active response actions taken on all agents during this lab
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Search Kibana for "active_response" over a large enough time window to encompass
 this lab.  Observe firewall blocks and null routes being repeatedly applied and
 removed across all agents.
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/shellshock-2.png             |
-    |     :title: AR in action                                                  |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/shellshock-2.png
+    :title: AR in action
+    :align: center
+    :width: 100%
+
 
 .. note::
     When the Wazuh agent is restarted on a given system, the intended behavior

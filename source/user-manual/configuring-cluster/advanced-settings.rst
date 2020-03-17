@@ -44,22 +44,8 @@ Pointing agents to the cluster with a load balancer
 
           # service wazuh-agent restart
 
-    3. Disable the option :ref:`use_source_ip <auth_use_source_ip>`:
 
-        - When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster. To change this, we need to change ``use_source_ip`` in the master's ``ossec.conf`` to no, this way agents can register with any IP.
-
-
-        .. code-block:: xml
-
-            <auth>
-                <disabled>no</disabled>
-                <port>1515</port>
-                <use_source_ip>no</use_source_ip>
-                ...
-            </auth>
-
-
-    4. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
+    3. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
 
         - This configuration will depend of the load balancer service chosen.
 
@@ -75,7 +61,7 @@ Pointing agents to the cluster with a load balancer
             - The way nginx and its modules work are determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
             - Now, open the configuration file and add the following structure:
 
-            .. code-block:: xml
+            .. code-block:: nginx
 
                 stream {
                     upstream cluster {
@@ -115,7 +101,7 @@ Pointing agents to the cluster (Failover mode)
 
     Suppose we have the following IPs:
 
-        .. code-block:: console
+        .. code-block:: none
 
             worker01: 172.0.0.4
             worker02: 172.0.0.5
