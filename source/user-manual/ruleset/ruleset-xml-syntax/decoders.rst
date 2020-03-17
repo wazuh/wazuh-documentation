@@ -25,10 +25,10 @@ There are many options to configure in decoders:
 | `program_name`_   | Any program name                                              | It defines the name of the program associated with the decoder.                                 |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `prematch`_       | Any String or `Regular Expression                             | It will look for a match in the log, in case it does, the decoder will be used.                 |
-|                   | <regex.html#os-regex-or-regex-syntax>`_                       |                                                                                                 |
+|                   | <regex.html#regex-os-regex-syntax>`_                          |                                                                                                 |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `regex`_          | Any `Regular Expression                                       | The decoder will use this option to find fields of interest and extract them.                   |
-|                   | <regex.html#os-regex-or-regex-syntax>`_                       |                                                                                                 |
+|                   | <regex.html#regex-os-regex-syntax>`_                          |                                                                                                 |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `order`_          | See `order table <decoders.html#order>`_                      | The values that `regex`_ will extract, will be stored in these groups.                          |
 +-------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
@@ -51,9 +51,12 @@ How it works
 
 To understand the inner workings of a decoder, it will be easier through examples like the following:
 
-::
+.. code-block:: console
 
   Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
+
+.. code-block:: none
+  :class: output
 
   **Phase 1: Completed pre-decoding.
          full event: 'Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33'
@@ -76,6 +79,23 @@ Before making a custom decoder, the first step should always be running the even
 Options
 -------
 
+There is many options to configure the decoders:
+
+- `decoder`_
+- `parent`_
+- `accumulate`_
+- `program_name`_
+- `prematch`_
+- `regex`_
+- `order`_
+- `fts`_
+- `ftscomment`_
+- `plugin_decoder`_
+- `use_own_name`_
+- `json_null_field`_
+- `var`_
+- `type`_
+
 decoder
 ^^^^^^^
 
@@ -87,27 +107,16 @@ The attributes listed below define a decoder.
 +===========+===========================+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
-| type      | The type of the decoder   |
-+-----------+---------------------------+
 
 Example:
 
-Sets name and type of decoder to *ossec*:
+Set name of decoder to *ossec*:
 
 .. code-block:: xml
 
-  <decoder name="ossec" type ="ossec">
-    ...
-  </decoder>
-
-*Type* can also be defined later in the decoder:
-
-.. code-block:: xml
-
-  <decoder name="ossec">
-   <type>ossec</type>
-    ...
-  </decoder>
+    <decoder name="ossec">
+      ...
+    </decoder>
 
 parent
 ^^^^^^
@@ -154,7 +163,7 @@ It defines the name of the program which the decoder is associated with. The pro
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_       |
 +--------------------+--------------------------------------------------------------------+
 
 Example:
@@ -176,7 +185,7 @@ It attempts to find a match within the log for the string defined. It is used as
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_      |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
 +--------------------+--------------------------------------------------------------------+
 
 The attribute below is optional, it allows to discard some of the content of the entry.
@@ -205,10 +214,12 @@ An example is this regex that matches any numeral:
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_      |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
 +--------------------+--------------------------------------------------------------------+
 
-The attribute below is optional, it allows to discard some of the content of the entry.
+When using the ``regex`` label it is mandatory to define an ``order`` label as well. Besides, ``regex`` label requires a ``prematch`` or a ``program_name`` label defined on the same decoder or a ``parent`` with a ``prematch`` or a ``program_name defined`` label defined on it.
+
+The attribute below is optional. It allows to discard some of the content of the entry.
 
 +--------------------+--------------------+
 | Attribute          | Value              |
@@ -240,7 +251,7 @@ Show when a user executed the sudo command for the first time:
 order
 ^^^^^^
 
-It defines what the parenthesis groups contain and the order in which they were received.
+It defines what the parenthesis groups contain and the order in which they were received. It requires a ``regex`` label defined on the same decoder.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -413,9 +424,25 @@ Example:
     <prematch>^$header</prematch>
   </decoder>
 
-  <decoder name="syscall-child">
-    <parent>syscall</parent>
-    <prematch offset="$offset">^: $type </prematch>
-    <regex offset="after_prematch">(\S+)</regex>
-    <order>syscall</order>
-  </decoder>
+    <decoder name="syscall-child">
+      <parent>syscall</parent>
+      <prematch offset="$offset">^: $type </prematch>
+      <regex offset="after_prematch">(\S+)</regex>
+      <order>syscall</order>
+    </decoder>
+
+type
+^^^^
+
+It sets the type of log that the decoder is going to match.
+
+Example:
+
+Set type of decoder to *syslog*:
+
+.. code-block:: xml
+
+    <decoder>
+      <type>syslog</type>
+      ...
+    </decoder>

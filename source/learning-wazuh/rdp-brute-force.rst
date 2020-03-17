@@ -36,21 +36,16 @@ See the resulting alerts in Kibana
 
 
 
-
 3. Inspect the events which will look similar to this:
 
-
-  .. image:: ../images/learning-wazuh/labs/win-brute.png
+  .. thumbnail:: ../images/learning-wazuh/labs/win-brute.png
     :align: left
-    :width: 800px
-    :height: 600px
-
+    :width: 100%
 
 
 4. Notice how the lower level "*Windows: Logon Failure*" alert is triggered several times,
    followed by the higher level "Multiple Windows Logon Failures" alert.
    This process may repeat itself depending on the total number of logon failures seen.
-
 
 
 

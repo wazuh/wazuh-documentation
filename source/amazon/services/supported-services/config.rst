@@ -12,7 +12,6 @@ Amazon configuration
 
 1. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ go to *Settings*.
 
-
 2. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
 
     - All resources

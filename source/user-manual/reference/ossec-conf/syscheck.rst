@@ -50,6 +50,8 @@ Drive letters without directories are not valid. At a minimum the '.' should be 
 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
+There exists a limit in the number of directories that can be written in one line separated by commas, this is limited to 64 directories.
+
 +--------------------+------------------------------------+
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
@@ -369,7 +371,7 @@ Attributes:
 allow_remote_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.11.3
+.. versionadded:: 3.11.0
 
 Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
 

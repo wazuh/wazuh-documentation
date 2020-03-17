@@ -5,14 +5,14 @@
 ossec-agentd
 ============
 
-The ossec-agentd program is the client-side daemon that communicates with the server. It runs as ``ossec`` and is chrooted to ``/var/ossec``.
+The ossec-agentd program is the client-side daemon that communicates with the server. It runs as user ``ossec``.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
-| **-D <dir>**    | Chroot to <dir>                                                                                 |
+| **-D <dir>**    | Chroot to <dir>. **Deprecated since v3.12.0.**                                                  |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec                                          |
 +-----------------+-------------------------------------------+-----------------------------------------------------+

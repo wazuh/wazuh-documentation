@@ -42,9 +42,9 @@ Example of IP address list file::
 
 We recommend to store the lists on ``/var/ossec/etc/lists``.
 
-.. versionadded:: 3.11.3
+.. versionadded:: 3.11.0
 
-Since Wazuh v3.11.3, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists, it is no longer needed to run ``ossec-makelists``, just restart the manager.
+Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists, it is no longer needed to run ``ossec-makelists``, just restart the manager.
 
 Adding the list to ossec.conf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

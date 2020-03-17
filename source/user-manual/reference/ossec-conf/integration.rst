@@ -102,9 +102,7 @@ This filters alerts by rule group. For the VirusTotal integration, only rules fr
 event_location
 ^^^^^^^^^^^^^^
 
-This filters alerts by where the event originated. Follows the `OS_Regex Syntax`_.
-
-.. _`OS_Regex Syntax`: https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/regex.html
+This filters alerts by where the event originated. Follows the :ref:`OS_Regex Syntax<os_regex_syntax>`.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |

@@ -26,7 +26,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.11'
+version = '3.12'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -84,7 +84,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prefixed to all description
+# If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 
@@ -308,7 +308,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be an ISBN number
+# The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -390,6 +390,31 @@ def minification(actual_path):
             with open(min_file, 'w') as f2:
                 f2.write(output)
 
+# -- Versions -------------------------------------------------------------------
+
+def customReplacements(app, docname, source):
+    result = source[0]
+    for key in app.config.custom_replacements:
+        result = result.replace(key, app.config.custom_replacements[key])
+    source[0] = result
+
+custom_replacements = {
+    "|WAZUH_LATEST|" : "3.11.4",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.11.4",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.11.4",
+    "|WAZUH_LATEST_PUPPET|" : "3.11.4",
+    "|WAZUH_LATEST_OVA|" : "3.11.4",
+    "|WAZUH_LATEST_DOCKER|" : "3.11.4",
+    "|ELASTICSEARCH_LATEST|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.0",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
+    "|SPLUNK_LATEST|" : "8.0.1",
+    "|ELASTIC_6_LATEST|" : "6.8.7",
+}   
+
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
@@ -411,6 +436,8 @@ def setup(app):
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
     app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_config_value('custom_replacements', {}, True)
+    app.connect('source-read', customReplacements)
 
 exclude_patterns = [
     "css/wazuh-icons.css",

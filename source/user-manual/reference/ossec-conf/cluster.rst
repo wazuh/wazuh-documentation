@@ -178,8 +178,8 @@ Sample configuration
 
 .. code-block:: xml
 
-	<cluster>
-	  <name>wazuh</name>
+    <cluster>
+      <name>wazuh</name>
       <node_name>manager_01</node_name>
       <node_type>master</node_type>
       <key>ugdtAnd7Pi9myP7CVts4qZaZQEQcRYZa</key>
