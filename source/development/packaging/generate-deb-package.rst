@@ -47,18 +47,18 @@ Below, you will find some examples of how to build a DEB package.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v3.12.0 -s /tmp -t manager -a amd64 -r my_rev.
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| -s /tmp -t manager -a amd64 -r my_rev.
 
-This will generate a 3.12.0 Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
-
-.. code-block:: console
-
-  # ./generate_debian_package.sh -b v3.12.0 -s /tmp -t api -a i386 -r my_rev
-
-This will generate a 3.12.0 Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+This will generate a |WAZUH_LATEST| Wazuh manager package DEB with revision ``my_rev`` for ``amd64`` systems.
 
 .. code-block:: console
 
-  # ./generate_debian_package.sh -b v3.12.0 -t agent -a amd64 -p /opt
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| -s /tmp -t api -a i386 -r my_rev
 
-This will generate a 3.12.0 Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.
+This will generate a |WAZUH_LATEST| Wazuh api package DEB with revision ``my_rev`` for ``i386`` systems and store it in ``/tmp``.
+
+.. code-block:: console
+
+  # ./generate_debian_package.sh -b v|WAZUH_LATEST| -t agent -a amd64 -p /opt
+
+This will generate a |WAZUH_LATEST| Wazuh agent DEB package with ``/opt`` as installation directory for ``amd64`` systems.

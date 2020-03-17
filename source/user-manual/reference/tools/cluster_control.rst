@@ -64,12 +64,12 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.12.0
+            Version: |WAZUH_LATEST|
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.12.0
+            Version: |WAZUH_LATEST|
             Type: worker
             Active agents: 1
             Status:
@@ -87,7 +87,7 @@ Get cluster's healthcheck
                     Permission to synchronize: True.
 
         node03 (192.168.56.105)
-            Version: 3.12.0
+            Version: |WAZUH_LATEST|
             Type: worker
             Active agents: 0
             Status:
@@ -117,12 +117,12 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.12.0
+            Version: |WAZUH_LATEST|
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.12.0
+            Version: |WAZUH_LATEST|
             Type: worker
             Active agents: 1
             Status:
@@ -152,9 +152,9 @@ Get connected nodes
         :class: output
 
         NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  3.12.0    172.17.0.101
-        worker-2  worker  3.12.0    172.17.0.102
-        master    master  3.12.0    172.17.0.100
+        worker-1  worker  |WAZUH_LATEST|    172.17.0.101
+        worker-2  worker  |WAZUH_LATEST|    172.17.0.102
+        master    master  |WAZUH_LATEST|    172.17.0.100
 
 * Filter connected nodes by name
     .. code-block:: console
@@ -165,8 +165,8 @@ Get connected nodes
         :class: output
 
         NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  3.12.0    172.17.0.101
-        master    master  3.12.0    172.17.0.100
+        worker-1  worker  |WAZUH_LATEST|    172.17.0.101
+        master    master  |WAZUH_LATEST|    172.17.0.100
 
 Get agents in cluster
 ^^^^^^^^^^^^^^^^^^^^^
@@ -180,8 +180,8 @@ Get agents in cluster
         :class: output
 
         NAME    IP         ID   STATUS  VERSION       NODE NAME
-        master  127.0.0.1  000  Active  Wazuh v3.12.0  master
-        agent1  any        001  Active  Wazuh v3.12.0  worker-2
+        master  127.0.0.1  000  Active  Wazuh v|WAZUH_LATEST|  master
+        agent1  any        001  Active  Wazuh v|WAZUH_LATEST|  worker-2
 
 * Get all agents reporting to a node
     .. code-block:: console
@@ -192,7 +192,7 @@ Get agents in cluster
         :class: output
 
         NAME    IP         ID   STATUS  VERSION       NODE NAME
-        agent1  any        001  Active  Wazuh v3.12.0  worker-2
+        agent1  any        001  Active  Wazuh v|WAZUH_LATEST|  worker-2
 
 * Get all active disconnected reporting to a node
     .. code-block:: console

@@ -84,11 +84,13 @@ command
 
 Path and arguments of the command to be executed.
 
-+--------------------+-----------------------------+
-| **Default value**  | N/A                         |
-+--------------------+-----------------------------+
-| **Allowed values** | An existing command         |
-+--------------------+-----------------------------+
++--------------------+-----------------------+
+| **Default value**  | N/A                   |
++--------------------+-----------------------+
+| **Allowed values** | - An existing command |
+|                    | - Path to a binary    |
+|                    | - Path to a script    |
++--------------------+-----------------------+
 
 interval
 ^^^^^^^^
@@ -143,7 +145,7 @@ verify_md5
 
 .. versionadded:: 3.6.0
 
-Verify the binary MD5 sum.
+Verify the MD5 sum of the binary or the script specified on the command option.
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -157,7 +159,7 @@ verify_sha1
 
 .. versionadded:: 3.6.0
 
-Verify the binary SHA1 sum.
+Verify the SHA1 sum of the binary or the script specified on the command option.
 
 +--------------------+---------------+
 | **Default value**  | n/a           |
@@ -171,7 +173,7 @@ verify_sha256
 
 .. versionadded:: 3.6.0
 
-Verify the binary SHA256 sum.
+Verify the SHA256 sum of the binary or the script specified on the command option.
 
 +--------------------+-----------------+
 | **Default value**  | n/a             |

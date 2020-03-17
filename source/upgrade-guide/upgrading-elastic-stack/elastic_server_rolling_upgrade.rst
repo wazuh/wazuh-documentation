@@ -93,13 +93,13 @@ Upgrade Elasticsearch
 
       .. code-block:: console
 
-        # yum install elasticsearch-7.6.1
+        # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
     * Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.6.1
+        # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
         # systemctl restart elasticsearch
 
 #. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
@@ -183,27 +183,27 @@ Upgrade Filebeat
 
       .. code-block:: console
 
-        # yum install filebeat-7.6.1
+        # yum install filebeat-|ELASTICSEARCH_LATEST|
 
     * Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install filebeat=7.6.1
+        # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 #. Update the configuration file.
 
     .. code-block:: console
 
       # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.12.0/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
       # chmod go+r /etc/filebeat/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.12.0/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
@@ -243,13 +243,13 @@ Upgrade Kibana
 
       .. code-block:: console
 
-        # yum install kibana-7.6.1
+        # yum install kibana-|ELASTICSEARCH_LATEST|
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install kibana=7.6.1
+        # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
 #. Install the Wazuh app.
 
@@ -258,14 +258,14 @@ Upgrade Kibana
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.12.0_7.6.1.zip
+      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
     * From the package:
 
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-3.12.0_7.6.1.zip
+      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 #. Restart Kibana.
 
