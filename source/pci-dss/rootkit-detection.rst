@@ -14,7 +14,7 @@ Rootkit and trojan detection is performed using two files: ``rootkit_files.txt``
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
 
-These are the options available for the :doc:`rootcheck component<../user-manual/reference/ossec-conf/rootcheck>`:
+These are the options available for the :ref:`rootcheck component<reference_ossec_rootcheck>`:
 
 + **rootkit_files**: Contains the Unix-based application level rootkit signatures.
 

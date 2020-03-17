@@ -30,7 +30,7 @@ To configure syscheck, a list of files and directories must be identified. The `
 .. note::
   If a directory is specified both in a :ref:`centralized configuration <reference_agent_conf>` and on the agent's  ``ossec.conf``, the centralized configuration will take precedence and override the local configuration.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
@@ -42,7 +42,7 @@ Configuring scheduled scans
 
 **Syscheck** has an option to configure the ``frequency`` of the system scans. In this example, **syscheck** is configured to run every 10 hours.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <frequency>36000</frequency>
@@ -54,7 +54,7 @@ Configuring real-time monitoring
 --------------------------------
 Real-time monitoring is configured with the ``realtime`` option. This option only works with directories rather than with individual files. Real-time change detection is paused during periodic **syscheck** scans and reactivates as soon as these scans are complete.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" realtime="yes">c:/tmp</directories>
@@ -68,7 +68,7 @@ Configuring who-data monitoring
 Who-data monitoring is configured with the ``whodata`` option. This option replaces the ``realtime`` option, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
 This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`Auditing who-data <auditing-whodata>` entry to get further information.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" whodata="yes">/etc</directories>
@@ -85,7 +85,7 @@ Configure to report changes
 
 Using the ``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes`` to, because in order to do this, Wazuh copies every single file you want to monitor to a private location.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
@@ -98,7 +98,7 @@ Configure to ignore files
 
 Files and directories can be omitted using the ignore option (or registry_ignore for Windows registry entries). In order to avoid false positives, **syscheck** can be configured to ignore certain files that don't need to be monitored.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <ignore>/etc/random-seed</ignore>
@@ -113,7 +113,7 @@ Configure maximum recursion level allowed
 
 It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an integer between **0 and 320**. An example of use:
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
@@ -148,7 +148,9 @@ If we don't want any recursion (just get alerts from the files in the monitored 
 Ignoring files via rules
 ------------------------
 
-It is also possible to ignore files using rules, as in this example::
+It is also possible to ignore files using rules, as in this example:
+
+.. code-block:: xml
 
   <rule id="100345" level="0">
     <if_group>syscheck</if_group>
@@ -161,7 +163,7 @@ Changing severity
 
 With a custom rule, the level of a **syscheck** alert can be altered when changes to a specific file or file pattern are detected.
 
-::
+.. code-block:: xml
 
   <rule id="100345" level="12">
     <if_group>syscheck</if_group>

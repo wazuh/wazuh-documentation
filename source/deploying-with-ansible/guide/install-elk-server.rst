@@ -236,8 +236,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	PLAY RECAP ************************************************************************************************************************************************
 	192.168.0.108              : ok=43   changed=23   unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
-
 
 We can check the status of our new services in our Elastic Stack server.
 
