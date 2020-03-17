@@ -79,7 +79,7 @@ Wazuh’s main components are the agent that runs on each monitored host and the
 Wazuh agent
 ^^^^^^^^^^^
 
-The Wazuh agent runs on Windows, Linux, Solaris, BSD, and Mac operating systems. It is used to collect different types of system and application data that it forwards to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
+The Wazuh agent runs on Windows, Linux, Solaris, BSD, and Mac operating systems. It is used to collect different types of system and application data that is forwarded to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
 
 The agents can be used to monitor physical servers, virtual machines and cloud instances (e.g. Amazon AWS, Azure or Google Cloud). Pre-compiled agent installation packages are available for Linux, HP-UX, AIX, Solaris, Windows, and Darwin (Mac OS X).
 
@@ -123,7 +123,7 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 
 + **Remote daemon service:** This is the service that receives data from the agents. It makes use of the pre-shared keys to validate each agent's identity and to encrypt the communications between the agent and the manager.
 
-- **Analysis daemon:** This is the process that performs data analysis. It utilizes decoders to identify the type of information being processed (e.g. Windows events, SSHD logs, web server logs, etc.) and then extract relevant data elements from the log messages (e.g. source ip, event id, user, etc.). Next, by using rules, it can identify specific patterns in the decoded log records which could trigger alerts and possibly even call for automated countermeasures (active responses) like an IP ban on the firewall.
+- **Analysis daemon:** This is the process that performs data analysis. It utilizes decoders to identify the type of information being processed (e.g. Windows events, SSHD logs, web server logs, etc.) and then extract relevant data elements from the log messages (e.g. source ip, event id, user, etc.). Next, using rules, it can identify specific patterns in the decoded log records which could trigger alerts and possibly even call for automated countermeasures (active responses) like an IP ban on the firewall.
 
 + **RESTful API:** This provides an interface to manage and monitor the configuration and deployment status of agents. It is also used by the Wazuh web interface, which is a Kibana app.
 
