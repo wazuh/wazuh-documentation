@@ -428,3 +428,5 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version
 }
+
+sphinx_tabs_nowarn = True
