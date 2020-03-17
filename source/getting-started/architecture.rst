@@ -39,7 +39,7 @@ Communications and data flow
 Agent-server communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). Then the Wazuh server decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
+Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). Then the Wazuh server decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether a rule is tripped or not:
 
 - The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
 - The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule.
