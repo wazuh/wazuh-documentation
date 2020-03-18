@@ -73,4 +73,4 @@ Uninstall
 
 To uninstall the agent, the original MSI file will be needed to perform the unattended process::
 
-    msiexec.exe /x wazuh-agent-|WAZUH_LATEST_REV|.msi /qn
+    msiexec.exe /x wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION|.msi /qn
