@@ -413,6 +413,7 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
     "|SPLUNK_LATEST|" : "8.0.1",
     "|ELASTIC_6_LATEST|" : "6.8.7",
+    "|WAZUH_LATEST_REV|" : "3.11.4-1",
 }   
 
 # -- Setup -------------------------------------------------------------------
