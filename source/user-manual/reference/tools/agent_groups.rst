@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _agent_groups:
 
@@ -131,6 +131,10 @@ Examples
     :class: output
 
     Do you want to delete the group 'group2' of agent '003'? [y/N]: y
+
+.. code-block:: none
+    :class: output
+
     Group 'group2' unset for agent '003'.
 
 * Remove the group *'debian'* from every agent:

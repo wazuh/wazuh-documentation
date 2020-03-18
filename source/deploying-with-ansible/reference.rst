@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wazuh_ansible_reference:
 
@@ -264,7 +264,7 @@ Wazuh Manager
       authd:
         enable: true
         port: 1515
-        use_source_ip: 'yes'
+        use_source_ip: 'no'
         force_insert: 'yes'
         force_time: 0
         purge: 'no'

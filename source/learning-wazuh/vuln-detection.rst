@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _learning_wazuh_vuln_detection:
 
@@ -220,7 +220,8 @@ hardware and operating system data is also tracked.
 1. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
    need to query the API by agent id number:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
       [root@wazuh-manager centos]# agent_control -l
 

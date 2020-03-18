@@ -1,16 +1,16 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _kibana_troubleshooting:
 
 Troubleshooting
 ===============
 
-This section collects common installation or usage problems on the Wazuh app, and some basic steps to solve them.
+This section collects common installation or usage problems on the Wazuh Kibana plugin, and some basic steps to solve them.
 
-"Incorrect Kibana version in plugin [wazuh]" when installing the app
---------------------------------------------------------------------
+"Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
+------------------------------------------------------------------------------------
 
-The Wazuh app has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
+The Wazuh Kibana plugin has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
 
 .. code-block:: javascript
 
@@ -18,7 +18,7 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
     "version": "6.7.2"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
+Your Wazuh Kibana plugin must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
 You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -42,7 +42,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 Wazuh API seems to be down
 --------------------------
 
-It means your Wazuh API could be unavailable. Since the Wazuh app needs data from the Wazuh API, it must be available for the Wazuh app.
+It means your Wazuh API could be unavailable. Since the Wazuh Kibana plugin needs data from the Wazuh API, it must be available for the Wazuh Kibana plugin.
 
 If you are using ``systemd``, please check the status as follow:
 
@@ -64,8 +64,8 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 If the *curl* command fails but the Wazuh API is running properly, it means you have a connectivity problem between servers.
 
-I don't see alerts in the Wazuh app
------------------------------------
+I don't see alerts in the Wazuh Kibana plugin
+---------------------------------------------
 
 The first step is to check if there are alerts in Elasticsearch.
 
@@ -86,7 +86,7 @@ There should be two processes reading the ``alerts.json`` file: ``ossec-analysis
 API version mismatch. Expected vX.Y.Z
 -------------------------------------
 
-The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
+The Wazuh Kibana plugin uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an Wazuh Kibana plugin designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
 You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh |WAZUH_LATEST|.
 
@@ -160,7 +160,7 @@ All the technologies we are using have their own logs files, you can check them 
     .. warning::
       By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
-2. Check the Wazuh app log file:
+2. Check the Wazuh Kibana plugin log file:
 
     .. code-block:: console
 

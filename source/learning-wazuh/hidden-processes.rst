@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _learning_wazuh_hidden_processes:
 
@@ -118,7 +118,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
         root       732  0.0  0.7 214452  3572 ?        Ssl  14:53   0:00 /usr/sbin/rsyslogd -n
 
-    .. code-block:: console
+    .. code-block:: xml
 
         # kill -31 $(pidof rsyslogd)
         # ps auxw | grep rsyslog | grep -v grep

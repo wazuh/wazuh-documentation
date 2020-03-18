@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _ruleset_json-decoder:
 
@@ -191,7 +191,8 @@ Finally, the result retrieved by *ossec-logtest* would be:
 
 Another new feature is the ability of mixing plugin decoders with regex expressions, take a look in the following incoming log:
 
-::
+.. code-block:: none
+    :class: output
 
     2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
 

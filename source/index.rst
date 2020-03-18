@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _index:
 
@@ -277,6 +277,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    getting-started/index
    installation-guide/index
+   wazuh-agent/index
    upgrade-guide/index
    user-manual/index
    development/index
@@ -287,7 +288,10 @@ Wazuh is a free and open source platform for threat detection, security monitori
    migrating-from-ossec/index
    learning-wazuh/index
    release-notes/index
+   other-installation-options/index
 
 .. raw:: html
 
    </div>
+
+

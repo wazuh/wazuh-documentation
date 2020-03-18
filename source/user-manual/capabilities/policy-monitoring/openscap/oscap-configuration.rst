@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _oscap-examples:
 
@@ -88,7 +88,7 @@ When the evaluation is complete you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-..  code-block:: none
+.. code-block:: none
   :class: output
 
   ** Alert 1463752181.32768: - oscap,rule-result,pci_dss_2.2,
@@ -96,7 +96,7 @@ When the evaluation is complete you will see the results as OSSEC alerts:
   Rule: 81529 (level 5) -> 'OpenSCAP rule failed (severity low).'
   oscap: msg: "rule-result", id: "47T7_Qd08gm4y8TSoD53", policy: "ssg-rhel7-ds.xml", profile: "xccdf_org.ssgproject.content_profile_pci-dss", rule_id: "xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout", result: "fail", title: "Set SSH Idle Timeout Interval", ident: "CCE-26611-4", severity: "low".
 
-..  code-block:: none
+.. code-block:: none
   :class: output
 
   ** Alert 1463752181.33254: - oscap,report-overview,pci_dss_2.2,
@@ -254,7 +254,9 @@ We can limit the evaluation to only specific profiles of a policy:
 Using CPE dictionary
 ------------------------------------------------------------------
 
-You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms. ::
+You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms.
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 

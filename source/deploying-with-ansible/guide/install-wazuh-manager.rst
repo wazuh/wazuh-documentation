@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wazuh_ansible_wazuh_manager:
 
@@ -216,8 +216,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	PLAY RECAP ***********************************************************************************************************************************************
 	192.168.0.180              : ok=36   changed=19   unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
-
 
 We can check the status of our new services in our Wazuh server.
 
@@ -253,6 +251,10 @@ We can check the status of our new services in our Wazuh server.
 	:class: output
 
 	[root@localhost centos]# systemctl status filebeat
+
+.. code-block:: none
+	:class: output
+
 	● filebeat.service - Filebeat sends log files to Elasticsearch.
 	   Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago

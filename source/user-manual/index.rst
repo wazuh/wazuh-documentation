@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _user_manual:
 
@@ -18,6 +18,7 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         overview
         manager/index
         registering/index
+        deployment_variables/deployment_variables
         agents/index
         configuring-cluster/index
         capabilities/index
@@ -25,3 +26,4 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         api/index
         kibana-app/index
         reference/index
+        elasticsearch/elastic_tuning

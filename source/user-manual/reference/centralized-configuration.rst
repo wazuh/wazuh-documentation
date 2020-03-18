@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_agent_conf:
 
@@ -328,30 +328,35 @@ Here we can distinct the two main blocks: ``groups`` and ``agents``.
 
     - Parsing is successful:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         INFO: Successfully parsed of yaml file: /etc/shared/files.yml
 
     - File has been changed:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         INFO: File '/etc/shared/files.yml' changed. Reloading data
 
     - Parsing failed due to bad token:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
     - Download of file failed:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         ERROR: Failed to download file from url: https://example.com/merged.mg
 
     - Downloaded ``merged.mg`` file is corrupted or not valid:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         ERROR: The downloaded file '/var/download/merged.mg' is corrupted.

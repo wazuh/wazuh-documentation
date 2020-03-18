@@ -1,41 +1,47 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _components:
 
 Components
 ==========
 
-Wazuh’s main components are the agent that runs on each monitored host and the server that analyzes data received from the agents and agentless sources like syslog. In addition, the server forwards event data to an Elasticsearch cluster where information is indexed and stored.
+Wazuh’s main components are the agent, that runs on each monitored endpoint, and the server that analyzes data received from the agents and also from agentless sources like syslog or external APIs. In addition, the server forwards event data to an Elasticsearch cluster where information is indexed and stored.
 
 Wazuh agent
 -----------
 
-The Wazuh agent runs on Windows, Linux, Solaris, BSD, and Mac operating systems. It is used to collect different types of system and application data that it forwards to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
+The Wazuh agent runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It can be deployed on laptops, desktops, servers, cloud instances or virtual machines. It provides threats detection and prevention capabilities, and it is used to collect different types of system and application data that is forwarded to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
 
-The agents can be used to monitor physical servers, virtual machines and cloud instances (e.g. Amazon AWS, Azure or Google Cloud). Pre-compiled agent installation packages are available for Linux, HP-UX, AIX, Solaris, Windows, and Darwin (Mac OS X).
+The Wazuh agent has a modular architecture, where different components take care of different tasks (e.g. monitoring the file system, reading log messages, collecting inventory data or scanning system configurations). Users can enable or disable agent modules via configuration settings, adapting the solution to their particular use cases.
 
-On Unix-based operating systems, the agent runs multiple processes which communicate with each other through a local Unix domain socket. One of those processes is in charge of the communication and data sending to the Wazuh server. On Windows systems, there is only one agent process running multiple tasks using mutexes.
+The diagram below represents the agent architecture and components:
 
-Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages and scanning system configurations).
-
-The diagram below represents the internal tasks and processes that take place at the agent level:
-
-.. thumbnail:: ../images/getting_started/wazuh_agent_processes.png
+.. thumbnail:: ../images/getting_started/wazuh_agent_architecture.png
    :title: Wazuh agent components
    :align: center
-   :width: 80%
+   :width: 100%
 
-All agent processes have different purposes and settings. Here is a brief description of what is done by each of them:
+All agent modules have different purposes and settings. Here is a brief description of what is done by each of them:
 
-- **Rootcheck:** This process performs multiple tasks related to the detection of rootkits, malware and system anomalies. It also runs certain basic security checks against system configuration files.
+- **Log collector:** This agent component is capable of reading flat log files and Windows event logs, collecting operating system and application log messages. It does support XPath filters for Windows events, and recognizes multi-line formats (e.g. Linux Audit logs). It can also enrich JSON events with additional metadata.
 
-+ **Log Collector:** This agent component is used to read operating system and application log messages, including flat log files, standard Windows event logs and even Windows Event Channels. It can also be configured to periodically run and capture the output of specific commands.
++ **Commmand execution:** Agents have the ability to run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. This module can be used to meet different use cases (e.g. monitor hard disk's space left). 
 
-- **Syscheck:** This process performs file integrity monitoring (FIM) and can also monitor registry keys on Windows systems. It is capable of detecting changes in a file's content, ownership and other attributes, as well as noting the creation and deletion of files. While it performs periodic FIM scans by default, it can also be configured to communicate with the operating system kernel to do real-time detection of file changes and to produce a detailed change report (diffs) of text files.
+- **File integrity monitoring (FIM):** This module monitors the file system, reporting when files are created, deleted or modified. It keeps track of file attributes, permissions, ownership and content. When an event occurs, it captures who, what and when details in real time. Additionally, this module builds and maintains a database with the state of the monitored files, allowing queries to be run remotely.
 
-+ **OpenSCAP:** This module uses published `OVAL <https://oval.mitre.org/>`_ (Open Vulnerability Assessment Language) and `XCCDF <https://scap.nist.gov/specifications/xccdf/>`_ (Extensible Configuration Checklist Description Format) baseline security profiles. By periodically scanning a system, it can find vulnerable applications or configurations that do not follow well-known standards, such as those defined in `CIS <https://benchmarks.cisecurity.org/downloads/benchmarks/>`_ (Center for Internet Security) benchmarks.
++ **Security configuration assessment (SCA):** This component provides continuous configuration assessment, utilizing out-of-the-box checks based on the Center of Internet Security (CIS) benchmarks. Users can also create their own SCA checks to monitor and enforce their security policies.
 
-- **Agent Daemon:** This is the process that receives the data generated or collected by all other agent components. It compresses, encrypts and delivers the data to the server through an authenticated channel. This process runs in an isolated “chroot” (change root) environment, meaning that it has limited access to the monitored system. This improves the overall security of the agent because it is the only process that connects to the network.
+- **System inventory:** This agent module periodically runs scans, collecting inventory data such as operating system version, network interfaces, running processes, installed applications and a list of open ports. Scan results are stored into SQL databases that can be queried remotely.
+
++ **Malware detection:** Using a non-signature based approach, this component is capable of detecting anomalies and possible presence of rootkits. Monitoring system calls, it looks for hidden processes, hidden files or hidden ports. 
+
+- **Active response:** This module runs automatic actions when threats are detected. Among its capabilities, it can block a network connection, stop a running process or delete a malicious file. Custom responses can also be created by users when necessary (e.g. run a binary in a sandbox, capture a network connection traffic, scan a file with an antivirus, etc.).
+
++ **Containers security monitoring:** This agent module is integrated with the Docker Engine API in order to monitor changes in a containarized environment. For example, it detects changes on container images, network configuration or data volumes. Besides, it alerts on containers running in privileged mode and on users executing commands in a running container.
+
+- **Cloud security monitoring:** This component monitors cloud providers such as Amazon AWS or Microsoft Azure, communicating natively with their APIs. It is capable of detecting changes on the cloud infrastructure (e.g. a new user is created, a security group is modified, a cloud instance is stopped, etc.), and collecting cloud services log data (e.g. AWS Cloudtrail, AWS Macie, AWS GuardDuty, Azure Active Directory, etc.).
+
+The Wazuh agent itself delivers the data, generated or collected by all of the different agent modules, to the Wazuh server. It does so through a secure channel, providing data encryption and compression in real time. Additionally, it does implement flow control mechanisms to avoid flooding, queueing events when necessary and protecting the network bandwidth. 
 
 Wazuh server
 ------------
@@ -53,7 +59,7 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 
 + **Remote daemon service:** This is the service that receives data from the agents. It makes use of the pre-shared keys to validate each agent's identity and to encrypt the communications between the agent and the manager.
 
-- **Analysis daemon:** This is the process that performs data analysis. It utilizes decoders to identify the type of information being processed (e.g. Windows events, SSHD logs, web server logs, etc.) and then extract relevant data elements from the log messages (e.g. source ip, event id, user, etc.). Next, by using rules, it can identify specific patterns in the decoded log records which could trigger alerts and possibly even call for automated countermeasures (active responses) like an IP ban on the firewall.
+- **Analysis daemon:** This is the process that performs data analysis. It utilizes decoders to identify the type of information being processed (e.g. Windows events, SSHD logs, web server logs, etc.) and then extract relevant data elements from the log messages (e.g. source ip, event id, user, etc.). Next, using rules, it can identify specific patterns in the decoded log records which could trigger alerts and possibly even call for automated countermeasures (active responses) like an IP ban on the firewall.
 
 + **RESTful API:** This provides an interface to manage and monitor the configuration and deployment status of agents. It is also used by the Wazuh web interface, which is a Kibana app.
 
@@ -61,13 +67,13 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 Elastic Stack
 -------------
 
-Elastic Stack is a unified suite of popular open source projects for log management, including Elasticsearch, Kibana, Filebeat, and others. The projects that are especially relevant to the Wazuh solution are:
+Elastic Stack is a unified suite of popular open source projects for log management, that includes Elasticsearch, Kibana, Filebeat, among others. The projects that are especially relevant to the Wazuh solution are:
 
 - **Elasticsearch:** A highly scalable, full-text search and analytics engine. Elasticsearch is distributed, meaning the data (indices) are divided into shards and each shard can have zero or more replicas.
 - **Kibana:** A flexible and intuitive web interface for mining, analyzing, and visualizing data. It runs on top of the content indexed on an Elasticsearch cluster.
 - **Filebeat:** A lightweight forwarder used to convey logs across a network, usually to Elasticsearch.
 
-Wazuh integrates with Elastic Stack to provide a feed of already decoded log messages to be indexed by Elasticsearch, as well as a real-time web console for alert and log data analysis. In addition, the Wazuh user interface (running on top of Kibana) can be used for management and monitoring of your Wazuh infrastructure.
+Wazuh integrates with Elastic Stack to provide a feed of already decoded log messages to be indexed by Elasticsearch, as well as a real-time web console for alert and log data analysis. In addition, the Wazuh user interface (running on top of Kibana) can be used for managing and monitoring your Wazuh infrastructure.
 
 An Elasticsearch *index* is a collection of documents that have somewhat similar characteristics (like certain common fields and shared data retention requirements). Wazuh utilizes as many as three different indices, created daily, to store different event types:
 

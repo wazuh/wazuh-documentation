@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_wazuh_agent_class:
 
@@ -74,7 +74,7 @@ $ossec_prefilter
   `Default false`
 
 $ossec_service_provider
-  This option associate Operative System Family
+  This option associate Operating System Family
 
 $ossec_config_profiles
   Specify the agent.conf profile(s) to be used by the agent.

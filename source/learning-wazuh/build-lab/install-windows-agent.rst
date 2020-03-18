@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _build_lab_install_windows_agent:
 
@@ -98,6 +98,9 @@ your self-registered agents.
     .. code-block:: console
 
         [root@wazuh-manager centos]# /var/ossec/bin/agent_control -l
+
+    .. code-block:: none
+        :class: output
 
     .. code-block:: none
         :class: output

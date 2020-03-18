@@ -12,6 +12,8 @@ $(function() {
     'deployment',
     'development/index',
     'docker-monitor/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
