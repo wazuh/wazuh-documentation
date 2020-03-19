@@ -31,16 +31,15 @@ Wazuh core
 - Make Logcollector continuously attempt to reconnect with the agent daemon.
 
 **AWS**
+
 - Add support for monitoring Cisco Umbrella S3 buckets.
 - Add support for monitoring AWS S3 buckets in GovCloud regions. 
 
-
-Add multi-target support for unit testing
-Add a status validation when starting Wazuh.
-Add automatic reconnection with the Eventchannel service when it is restarted.
-
 **Other fixes and improvements**
 
+- Add multi-target support for unit testing
+- Add a status validation when starting Wazuh.
+- Add automatic reconnection with the Eventchannel service when it is restarted.
 - Make Windows agents send the keep-alive independently.
 - Do not enforce source IP checking by default in the registration process.
 - Fix a small memory leak in clusterd.
