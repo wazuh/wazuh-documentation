@@ -168,6 +168,8 @@ With a custom rule, the level of a **syscheck** alert can be altered when change
     <description>Changes to /var/www/htdocs - Critical file!</description>
   </rule>
 
+.. _how_to_fim_synchronization:
+
 Configuring synchronization
 ---------------------------
 
