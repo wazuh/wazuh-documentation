@@ -238,6 +238,14 @@ Upgrade Kibana
       # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
       # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
+#. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+
+    .. code-block:: console
+
+      # cat >> /etc/default/kibana << EOF
+      NODE_OPTIONS="--max_old_space_size=2048"
+      EOF
+
 #. Restart Kibana.
 
     .. code-block:: console
