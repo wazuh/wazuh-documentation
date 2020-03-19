@@ -231,12 +231,6 @@ Upgrade Kibana
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
-#. Restore the configuration file backup.
-
-    .. code-block:: console
-
-      # sudo cp /tmp/wazuh-backup.yml /usr/share/kibana/plugins/wazuh/wazuh.yml
-
 #. Update configuration file permissions.
 
     .. code-block:: console
