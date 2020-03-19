@@ -108,7 +108,7 @@ It is possible to lose who-data events when a flood of events appears. The follo
 The first one (disp_qos) controls whether you want blocking/lossless or non-blocking/lossy communication between the audit daemon and the dispatcher. There is a 128k buffer between the audit daemon and dispatcher. This is good enough for most uses. If lossy is chosen, incoming events going to the dispatcher are discarded when this queue is full. (Events are still written to disk if log_format is not nolog.) Otherwise the auditd daemon will wait for the queue to have an empty spot before logging to disk. The risk is that while the daemon is waiting for network IO, an event is not being recorded to disk.
 Recommended value is lossless.
 
-The other one (q_dephs) is a numeric value that tells how big to make the internal queue of the audit event dispatcher. A bigger queue lets it handle a flood of events better, but could hold events that are not processed when the daemon is terminated. If you get messages in syslog about events getting dropped, increase this value.
+The other one (q_dephs) is a numeric value that tells how big will the internal queue of the audit event dispatcher be. A bigger queue handles flood of events better, but could hold events that are not processed when the daemon is terminated. If you get messages in syslog about events getting dropped, increase this value.
 The default value is 80.
 
 On the Wazuh side, the rt_delay variable from the internal FIM configuration can help to prevent the loss of events:
