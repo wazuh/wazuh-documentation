@@ -44,7 +44,7 @@ Elasticsearch
 
   Version of Elasticsearch to install
 
-  *Default 7.6.1*
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
 
 **elasticsearch_shards**
 
@@ -97,13 +97,13 @@ Kibana
 
   Version of Kibana to install
 
-  *Default 7.6.1*
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
 
 **wazuh_version**
 
   Wazuh APP compatible version to install
 
-  *Default 3.11.4*
+  *Default |WAZUH_LATEST_ANSIBLE|*
 
 **elasticsearch_network_host**
 

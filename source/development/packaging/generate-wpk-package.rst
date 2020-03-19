@@ -54,9 +54,9 @@ Below, you will find an example of Linux WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t linux -b v3.12.0 -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk
+  # ./generate_wpk_package.sh -t linux -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk
 
-This will build a 3.12.0 Wazuh Linux WPK package named LinuxAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
+This will build a |WAZUH_LATEST| Wazuh Linux WPK package named LinuxAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
 
 Windows WPK
 ^^^^^^^^^^^
@@ -65,15 +65,15 @@ To build a WPK for Windows you need to first download an MSI package of the desi
 
 .. code-block:: console
 
-  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-3.12.0-1.msi
+  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-1.msi
 
 Below, you will find an example of Windows WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t windows -b v3.12.0 -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-3.12.0-1.msi
+  # ./generate_wpk_package.sh -t windows -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-|WAZUH_LATEST|-1.msi
 
-This will build a 3.12.0 Wazuh Windows WPK package named WindowsAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
+This will build a |WAZUH_LATEST| Wazuh Windows WPK package named WindowsAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
 
 If the ``-c`` or ``--checksum`` option is used there will be a file containing the SHA512 checksum in the same output path or you can indicate where you want to store it.
 
@@ -81,4 +81,4 @@ Here you can see an example of how to build a WPK generation with checksum:
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t linux -b v3.12.0 -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk -c /tmp/wpk_checksum
+  # ./generate_wpk_package.sh -t linux -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o LinuxAgent.wpk -c /tmp/wpk_checksum

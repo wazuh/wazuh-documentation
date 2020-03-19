@@ -35,7 +35,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -e Install all the packages necessaries to build the TAR package
-      -b <branch> Select Git branch. Example v3.12.0
+      -b <branch> Select Git branch. Example v|WAZUH_LATEST|
       -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
       -p <tar_home> Installation path for the package. By default: /var
       -c,  --checksum Compute the SHA512 checksum of the TAR package.
@@ -54,18 +54,18 @@ Below, you will find some examples of how to build an HPUX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.12.0
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|
 
-This will generate a 3.12.0 Wazuh agent HPUX package.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v3.12.0 -c
-
-This will generate a 3.12.0 Wazuh agent HPUX package with checksum.
+This will generate a |WAZUH_LATEST| Wazuh agent HPUX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.12.0  -p /opt
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -c
 
-This will generate a 3.12.0 Wazuh agent HPUX package with ``opt`` as installation directory.
+This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with checksum.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|  -p /opt
+
+This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with ``opt`` as installation directory.

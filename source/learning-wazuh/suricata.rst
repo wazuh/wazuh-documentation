@@ -352,7 +352,7 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
     .. code-block:: none
 
-        DELETE _ingest/pipeline/filebeat-7.6.1-wazuh-alerts-pipeline
+        DELETE _ingest/pipeline/filebeat-|ELASTICSEARCH_LATEST|-wazuh-alerts-pipeline
 
 
 3. We restart Filebeat in wazuh-manager:
