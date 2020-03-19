@@ -257,6 +257,8 @@ The following decoder will extract the user who generated the alert and the loca
     ...
   </decoder>
 
+The decoder will consider this option if the decoded event triggers a rule that uses `if_fts <rules.html#if-fts>`_.
+
 ftscomment
 ^^^^^^^^^^^
 
