@@ -365,7 +365,7 @@ wazuh.replicas
 Define the number of replicas to use for the ``wazuh`` index.
 
 +--------------------+----------------------------+
-| **Default value**  | 1                          |
+| **Default value**  | 0                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
@@ -398,7 +398,7 @@ wazuh.monitoring.shards
 Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
-| **Default value**  | 5                          |
+| **Default value**  | 2                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 1 |
 +--------------------+----------------------------+
@@ -409,7 +409,7 @@ wazuh.monitoring.replicas
 Define the number of replicas to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
-| **Default value**  | 1                          |
+| **Default value**  | 0                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
