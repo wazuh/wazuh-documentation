@@ -816,7 +816,7 @@ same_field
 
 .. versionadded:: 3.9.0
 
-The value of the dynamic field specified at this option, must appear in previous events a ``frequency`` number of times within the required time frame.
+The value of the dynamic field specified in this option must appear in previous events a ``frequency`` number of times within the required ``timeframe``.
 
 +--------------------+-------------------------------+
 | **Example of use** | <same_field>key</same_field>  |
@@ -839,7 +839,7 @@ As an example of this option, check these rules:
     <description>Testing same_field option</description>
   </rule>
 
-Rule 100002 will fire when ``key2`` is the same in four events that matched rule 100001 before. Therefore, for the following events sequence:
+Rule 100002 will fire when ``key2`` in the currently considered event is the same in four events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
 
 .. code-block:: json
 
@@ -849,9 +849,9 @@ Rule 100002 will fire when ``key2`` is the same in four events that matched rule
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"CCCC"}
   {"key":"value", "key2":"CCCC"}
-  {"key":"value", "key2":"AAAA"}
+  {"key":"value", "key2":"AAAA"} <- Event being considered
 
-The last event will fire rule 100002 instead of 100001 by finding the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
+The last event will fire rule 100002 instead of 100001 becasue it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
 
 .. code-block:: json
   :emphasize-lines: 5
@@ -895,7 +895,7 @@ not_same_field
 
 .. versionadded:: 3.9.0
 
-It is the opposite setting to ``same_field``. The value of the dynamic field specified at this option, must be different to the ones found in previous events a ``frequency`` number of times within the required time frame.
+It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
 
 +--------------------+----------------------------------------+
 | **Example of use** | <not_same_field>key2</not_same_field>  |
@@ -918,16 +918,16 @@ As an example of this option, check these rules:
     <description>Testing not_same_field option</description>
   </rule>
 
-Rule 100002 will fire when ``key2`` of the current event has a different value that the same field in four events that matched rule 100001 before. Therefore, for the following events sequence:
+Rule 100002 will fire when ``key2`` in the currently considered event has a different value that the same field in four previous events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
 
 .. code-block:: json
 
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"BBBB"}
-  {"key":"value", "key2":"CCCC"}
+  {"key":"value", "key2":"CCCC"} <- Event being considered
 
-The last event will fire rule 100002 instead of 100001 due to the value ``CCCC`` does not appear in three of the previous events. The corresponding alert looks like this one:
+The last event will fire rule 100002 instead of 100001 due to the value ``CCCC`` does not appear in three previous events. The corresponding alert looks like this one:
 
 .. code-block:: json
   :emphasize-lines: 5
