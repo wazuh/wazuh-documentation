@@ -662,6 +662,7 @@ Specify where is the database going to be stored.
 | **Allowed values** | disk, memory                          |
 +--------------------+---------------------------------------+
 
+.. _reference_ossec_syscheck_synchronization:
 
 synchronization
 ^^^^^^^^^^^^^^^
