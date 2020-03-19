@@ -842,6 +842,7 @@ As an example of this option, check these rules:
 Rule 100002 will fire when ``key2`` in the currently considered event is the same in four events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
 
 .. code-block:: json
+  :emphasize-lines: 7
 
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"AAAA"}
@@ -849,7 +850,7 @@ Rule 100002 will fire when ``key2`` in the currently considered event is the sam
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"CCCC"}
   {"key":"value", "key2":"CCCC"}
-  {"key":"value", "key2":"AAAA"} <- Event being considered
+  {"key":"value", "key2":"AAAA"}
 
 The last event will fire rule 100002 instead of 100001 becasue it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
 
@@ -921,11 +922,12 @@ As an example of this option, check these rules:
 Rule 100002 will fire when ``key2`` in the currently considered event has a different value that the same field in four previous events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
 
 .. code-block:: json
+  :emphasize-lines: 4
 
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"AAAA"}
   {"key":"value", "key2":"BBBB"}
-  {"key":"value", "key2":"CCCC"} <- Event being considered
+  {"key":"value", "key2":"CCCC"}
 
 The last event will fire rule 100002 instead of 100001 due to the value ``CCCC`` does not appear in three previous events. The corresponding alert looks like this one:
 
