@@ -414,6 +414,21 @@ custom_replacements = {
     "|SPLUNK_LATEST|" : "8.0.1",
     "|ELASTIC_6_LATEST|" : "6.8.7",
     "|WAZUH_REVISION_AIX|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_X86|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_DEB_API_X86|" : "1",
+    "|WAZUH_REVISION_HDPUX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_WINDOWS|" : "1",
 }   
 
 # -- Setup -------------------------------------------------------------------
