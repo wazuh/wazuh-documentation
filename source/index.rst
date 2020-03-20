@@ -291,3 +291,13 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. raw:: html
 
    </div>
+
+  <script>
+  // Delete old cached redirects from /current
+  fetch('https://documentation-dev.wazuh.com/current', {cache: "no-cache"})
+  .then(response => {
+    if(response.url != 'https://documentation-dev.wazuh.com/3.11/') {
+      console.log("Cached redirections deleted");
+    }
+  });
+  </script>
