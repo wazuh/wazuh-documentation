@@ -26,7 +26,7 @@ Wazuh core
 
 **Logcollector**
 
-- Avoid reopening the current socket when Logcollector fails to send a event.
+- Avoid reopening the current socket when Logcollector fails to send an event.
 - Prevent Logcollector from starving when has to reload files.
 - Make Logcollector continuously attempt to reconnect with the agent daemon.
 
