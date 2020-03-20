@@ -18,17 +18,13 @@ Manager
 
     # /var/ossec/bin/manage_agents -a <agent_IP> -n <agent_name>
 
-   In this example, we will add the agent under the name ``agent_1`` and with the IP address ``any``.
-
-  .. code-block:: console
-
-    # /var/ossec/bin/manage_agents -a any -n agent_1
-
-2. Find the ``ID`` of the ``agent_1``:
+2. Find the ``ID`` of the agent:
 
    .. code-block:: console
 
-    # /var/ossec/bin/manage_agents -l | grep agent_1
+    # /var/ossec/bin/manage_agents -l | grep <agent_name>
+
+   An example output of the command looks as follows:
 
    .. code-block:: none
            :class: output
@@ -39,7 +35,9 @@ Manager
 
    .. code-block:: console
 
-    # /var/ossec/bin/manage_agents -e 001
+    # /var/ossec/bin/manage_agents -e <agent_id>
+
+   An example output of the command looks as follows:
 
    .. code-block:: none
            :class: output
@@ -47,7 +45,7 @@ Manager
            Agent key information for '001' is:
            MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
-   The key has to be imported to the agent to enable communication to the manager.
+   The ``key`` has to be imported to the agent to enable communication to the manager.
 
 Agent
 ^^^^^
@@ -64,7 +62,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-     # /var/ossec/bin/manage_agents -i MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw
+     # /var/ossec/bin/manage_agents -i <key>
 
     An example output of the command should looks as follows:
 
@@ -99,7 +97,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-       # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw
+       # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
 
     The example output of the command should looks as follows:
 
@@ -132,7 +130,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-     # /Library/Ossec/bin/manage_agents -i MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw
+     # /Library/Ossec/bin/manage_agents -i <key>
 
     An example output of the command should looks as follows:
 

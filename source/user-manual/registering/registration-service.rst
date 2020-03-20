@@ -60,7 +60,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
+     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
 
    2. Edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
@@ -116,19 +116,17 @@ Manager
 
 2. Choose custom password or let the registration service generate one.
 
-  .. note::
-
-   In this example, the custom password to register the Wazuh agent is ``TopSecret``.
-
   .. tabs::
 
    .. group-tab:: Using a custom password
 
-    Create ``/var/ossec/etc/authd.pass`` file and save custom password in it:
+    Create ``/var/ossec/etc/authd.pass`` file and save custom password in it.
+
+    In the command below, replace ``<custom_pasword>`` with your chosen password:
 
     .. code-block:: console
 
-      # echo "TopSecret" > /var/ossec/etc/authd.pass
+      # echo "<custom_password>" > /var/ossec/etc/authd.pass
 
    .. group-tab:: Using a random password
 
@@ -171,7 +169,7 @@ Choose the tab corresponding to the agent host operating system:
 
        .. code-block:: console
 
-        # echo "TopSecret" > /var/ossec/etc/authd.pass
+        # echo "<custom_password>" > /var/ossec/etc/authd.pass
         # /var/ossec/bin/agent-auth -m <manager_IP>
 
       .. group-tab:: Using a password as a command-line argument
@@ -182,7 +180,7 @@ Choose the tab corresponding to the agent host operating system:
 
        .. code-block:: console
 
-        # /var/ossec/bin/agent-auth -m <manager_IP> -P "TopSecret"
+        # /var/ossec/bin/agent-auth -m <manager_IP> -P "<custom_password>"
 
    2. Edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
 
@@ -212,7 +210,7 @@ Choose the tab corresponding to the agent host operating system:
 
        .. code-block:: none
 
-        # echo TopSecret > "C:\Program Files (x86)\ossec-agent\authd.pass"
+        # echo <custom_password> > "C:\Program Files (x86)\ossec-agent\authd.pass"
         # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
 
        The agent assumes the input file is in ``UTF-8 encoding``, without ``byte-order mark (BOM)``. If the file is created in an incorrect encoding it can be changed by opening the ``authd.pass`` file in a Notepad and Save As ``ANSI`` encoding.
@@ -225,7 +223,7 @@ Choose the tab corresponding to the agent host operating system:
 
        .. code-block:: none
 
-         # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -P "TopSecret"
+         # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -P "<custom_password>"
 
    2. Edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
@@ -253,7 +251,7 @@ Choose the tab corresponding to the agent host operating system:
 
       .. code-block:: console
 
-         # echo "TopSecret" > /Library/Ossec/etc/authd.pass
+         # echo "<custom_password>" > /Library/Ossec/etc/authd.pass
          # /Library/Ossec/bin/agent-auth -m <manager_IP>
 
      .. group-tab:: Using a password as a command-line argument
@@ -264,7 +262,7 @@ Choose the tab corresponding to the agent host operating system:
 
       .. code-block:: console
 
-        # /Library/Ossec/bin/agent-auth -m <manager_IP> -P "TopSecret"
+        # /Library/Ossec/bin/agent-auth -m <manager_IP> -P "<custom_password>"
 
   2. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
@@ -307,11 +305,6 @@ There are two options to register the agent using host verification:
 
  .. group-tab:: Registration with Manager verification
 
-   .. _agent-verification-with-host-validation:
-
-   Enable Agent verification without host validation
-   -------------------------------------------------
-
    To verify the Wazuh manager using SSL, create an SSL certificate and sign it using the :ref:`Certificate of Authority (CA) <host-verification-registration>` created in the previous section. This will allow the agents to ensure that they are connected to the correct manager during the registration service.
 
    .. image:: ../../images/manual/managing-agents/SSLregister1.png
@@ -324,9 +317,10 @@ There are two options to register the agent using host verification:
 
    **Manager**
 
+
    Follow these steps in the Wazuh manager host:
 
-   1. Create the configuration file ``req.conf`` with the hostname or the IP address of the Wazuh server where the agents are going to be registered. The configuration file could be as follows:
+   1. Create the configuration file ``req.conf``, replacing ``<manager_IP>`` with the hostname or the IP address of the Wazuh server where the agents are going to be registered. The configuration file could be as follows:
 
        .. code-block:: console
 
@@ -336,7 +330,7 @@ There are two options to register the agent using host verification:
         prompt = no
         [req_distinguished_name]
         C = US
-        CN = 192.168.1.2
+        CN = <manager_IP>
         [req_ext]
         subjectAltName = @alt_names
         [alt_names]
@@ -492,9 +486,6 @@ There are two options to register the agent using host verification:
 
      .. _agent-verification-without-host-validation:
 
-     Enable Agent verification without host validation
-     -------------------------------------------------
-
      This example shows the creation of a certificate for the agents without specifying their hostname or IP address. This will allow to share the same certificate among all selected agents. The signed certificate will verify the agent. Registration service for agents where the certificate is not present will be refused.
 
      1. Issue and sign a certificate for the agent by executing the following commands in the location of CA files. Remember to not enter the ``common name`` field:
@@ -523,6 +514,8 @@ There are two options to register the agent using host verification:
      4. Restart the manager:
 
        .. include:: ../../_templates/registrations/common/restart_manager.rst
+
+
 
     .. group-tab:: Enable Agent verification with host validation
 
@@ -557,6 +550,8 @@ There are two options to register the agent using host verification:
      4. Restart the manager:
 
        .. include:: ../../_templates/registrations/common/restart_manager.rst
+
+
 
    **Agent**
 
@@ -642,10 +637,10 @@ There are two options to register the agent using host verification:
 
              # /Library/Ossec/bin/agent-auth -m <manager_IP> -x /Library/Ossec/etc/sslagent.cert -k /Library/Ossec/etc/sslagent.key
 
-       2. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+       3. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
         .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-       3. Start the agent.
+       4. Start the agent.
 
         .. include:: ../../_templates/registrations/macosx/start_agent.rst

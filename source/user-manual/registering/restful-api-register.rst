@@ -40,7 +40,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-     # /var/ossec/bin/manage_agents -i MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=
+     # /var/ossec/bin/manage_agents -i <key>
 
     An example output of the command looks as follows:
 
@@ -126,7 +126,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-     # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=
+     # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
 
     An example output of the command looks as follows:
 
@@ -178,7 +178,7 @@ Choose the tab corresponding to the agent host operating system:
 
     .. code-block:: console
 
-     # /Library/Ossec/bin/manage_agents -i MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=
+     # /Library/Ossec/bin/manage_agents -i <key>
 
     An example output of the command looks as follows:
 
