@@ -8,20 +8,23 @@ Configuration
 #. `Basic usage`_
 #. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
+#. `Configuring who-data monitoring`_
 #. `Configure to report changes`_
 #. `Configure to ignore files`_
 #. `Configure maximum recursion level allowed`_
 #. `Ignoring files via rules`_
 #. `Changing severity`_
+#. `Configuring synchronization`_
 
 Basic usage
 -----------
 **Syscheck** is configured in the :ref:`ossec.conf <reference_ossec_conf>` file.  Generally this configuration is set using the following sections:
 
-- :ref:`frequency <reference_ossec_syscheck_frequency>`,
-- :ref:`directories <reference_ossec_syscheck_directories>`,
-- :ref:`ignore <reference_ossec_syscheck_ignore>`, and
-- :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`.
+- :ref:`frequency <reference_ossec_syscheck_frequency>`
+- :ref:`directories <reference_ossec_syscheck_directories>`
+- :ref:`ignore <reference_ossec_syscheck_ignore>`
+- :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
+- :ref:`synchronization <reference_ossec_syscheck_synchronization>`
 
 For detailed configuration options, go to :ref:`Syscheck <reference_ossec_syscheck>`.
 
@@ -61,7 +64,7 @@ Real-time monitoring is configured with the ``realtime`` option. This option onl
   </syscheck>
 
 Configuring who-data monitoring
---------------------------------
+-------------------------------
 
 .. versionadded:: 3.4.0
 
@@ -164,3 +167,25 @@ With a custom rule, the level of a **syscheck** alert can be altered when change
     <match>/var/www/htdocs</match>
     <description>Changes to /var/www/htdocs - Critical file!</description>
   </rule>
+
+.. _how_to_fim_synchronization:
+
+Configuring synchronization
+---------------------------
+
+.. versionadded:: 3.12.0
+
+Synchronization can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout.
+
+::
+
+  <syscheck>
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <response_timeout>30</response_timeout>
+      <sync_queue_size>16384</sync_queue_size>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </syscheck>
