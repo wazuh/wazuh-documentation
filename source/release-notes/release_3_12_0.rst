@@ -42,7 +42,7 @@ Wazuh core
 - Add automatic reconnection with the Eventchannel service when it is restarted.
 - Make Windows agents send the keep-alive independently.
 - Do not enforce source IP checking by default in the registration process.
-- Fix a small memory leak in clusterd.
+- Fix a small memory leak in clustered.
 - Fix a crash in the fluent forwarder when SSL is not enabled.
 - Replace non-reentrant functions to avoid race condition hazards.
 - Fix the registration of more than one agent as any when forcing to use the source IP.
