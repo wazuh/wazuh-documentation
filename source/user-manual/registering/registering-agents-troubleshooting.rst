@@ -18,11 +18,11 @@ By default, the manager attaches an agent to the visible IP of the agent. If the
 
    Add the agent's IP Address as ``any`` to the registration command.
 
-   An example :ref:`Simple Registration Service <simple-registration-service>` command template could look like this:
+   An example :ref:`Simple Registration Service <simple-registration-service>` command template could look as follows:
 
    .. code-block:: console
 
-    # /var/ossec/bin/agent-auth -m <MANAGER_IP> -I any
+    # /var/ossec/bin/agent-auth -m <manager_IP> -I any
 
 
 2. To set up this behavior for all subsequent registrations:
@@ -41,18 +41,18 @@ By default, the manager attaches an agent to the visible IP of the agent. If the
       ...
     </ossec_config>
 
-   Restart the manager for the changes to take effect.
+   Restart the manager for the changes to take effect:
 
    .. code-block:: console
 
     # systemctl restart wazuh-manager
 
    .. note::
-    Specifying the agent's IP Address in the registration command manually overwrites that setting.
+    Specifying the agent's IP address in the registration command manually overwrites this setting.
 
  If the registered machines have the same hostname, the agent name has to be specified manually.
- In that case, an example :ref:`Simple Registration Service <simple-registration-service>` command template could look like this:
+ In that case, an example :ref:`Simple Registration Service <simple-registration-service>` command template could look as follows:
 
    .. code-block:: console
 
-    # /var/ossec/bin/agent-auth -m <MANAGER_IP> -I any -A <AGENT_NAME>
+    # /var/ossec/bin/agent-auth -m <manager_IP> -I any -A <agent_name>
