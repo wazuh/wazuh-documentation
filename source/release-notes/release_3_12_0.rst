@@ -44,7 +44,7 @@ Wazuh core
 - Source IP checking by default in the registration process in no longer enforced.
 - Fixed a small memory leak in clustered.
 - Fixed a crash in the fluent forwarder when SSL is not enabled.
-- Replace non-reentrant functions to avoid race condition hazards.
+- Replaced non-reentrant functions to avoid race condition hazards.
 - Fixed the registration of more than one agent as any when forcing to use the source IP.
 - Fixed Windows upgrades in custom directories.
 - Fixed the format of the alert payload passed to the Slack integration.
