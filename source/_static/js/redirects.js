@@ -126,6 +126,11 @@ redirections.push(
     },
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
+      '3.10': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-server-class.html',
+      '3.11': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
+    },
+    {
+      'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
       '3.11': '/development/packaging/generate-wpk-package.html',
     },
@@ -179,6 +184,8 @@ newUrls['3.11'] = [
   '/amazon/services/supported-services/trusted-advisor.html',
   '/amazon/services/supported-services/vpc.html',
   '/amazon/services/troubleshooting.html',
+  '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
+  '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_sources_aix.html',
   '/learning-wazuh/index.html',
   '/learning-wazuh/build-lab/index.html',
   '/learning-wazuh/build-lab/build-vpc.html',
@@ -225,6 +232,7 @@ newUrls['3.11'] = [
   '/release-notes/release_3_11_1.html',
   '/release-notes/release_3_11_2.html',
   '/release-notes/release_3_11_3.html',
+  '/release-notes/release_3_11_4.html',
 ];
 
 
