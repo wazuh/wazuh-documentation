@@ -42,11 +42,6 @@ newUrls['3.12'] = [
   '/amazon/services/supported-services/cisco-umbrella.html',
   '/amazon/services/supported-services/waf.html',
   '/user-manual/capabilities/file-integrity/fim-synchronization.html',
-];
-
-/* Pages added in 3.12 */
-
-newUrls['3.12'] = [
   '/release-notes/release_3_12_0.html',
 ];
 
