@@ -136,7 +136,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
   .. code-block:: console
 
-    # cat >> /usr/share/kibana/plugins/wazuh/wazuh.yml << EOF
+    # cat >> /usr/share/kibana/optimize/wazuh/config/wazuh.yml << EOF
 
         - wazuhapi:
            url: https://172.30.0.10
