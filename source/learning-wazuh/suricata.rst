@@ -157,7 +157,8 @@ the shared configuration with their local configuration.
 
     - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
 
             [root@wazuh-manager centos]# /var/ossec/bin/manage_agents -l
 
@@ -205,6 +206,9 @@ the shared configuration with their local configuration.
     .. code-block:: console
 
         [root@wazuh-manager centos]# /var/ossec/bin/verify-agent-conf
+
+    .. code-block:: none
+        :class: output
 
     .. code-block:: none
         :class: output
@@ -346,9 +350,9 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
 2. We now need to delete the current pipeline. In Kibana, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
 
-    .. code-block:: console
+    .. code-block:: none
 
-        DELETE _ingest/pipeline/filebeat-7.6.0-wazuh-alerts-pipeline
+        DELETE _ingest/pipeline/filebeat-|ELASTICSEARCH_LATEST|-wazuh-alerts-pipeline
 
 
 3. We restart Filebeat in wazuh-manager:
@@ -366,12 +370,10 @@ You may have noticed that there were no Geolocation fields in the Kibana records
 
 5. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IPs of course cannot be geolocated.
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png                               |
-    |     :title: flood                                                                             |
-    |     :align: center                                                                            |
-    |     :width: 75%                                                                               |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png
+    :title: Flood
+    :align: center
+    :width: 100%
 
 
 If you have time, you could also...

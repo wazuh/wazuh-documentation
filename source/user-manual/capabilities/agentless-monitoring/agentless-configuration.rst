@@ -16,7 +16,7 @@ Integrity check BSD
 -------------------
 This sample configuration will monitor the ``/bin`` and ``/var`` directories:
 
-::
+.. code-block:: xml
 
   <agentless>
     <type>ssh_integrity_check_bsd</type>
@@ -35,7 +35,7 @@ For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenc
 
 The sample configuration will monitor the ``/bin``, ``/etc`` and ``/sbin`` directories
 
-::
+.. code-block:: xml
 
   <agentless>
     <type>ssh_integrity_check_linux</type>

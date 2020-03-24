@@ -45,7 +45,7 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.11.3_7.5.2'
+      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|'
 
 
 Apply the new configuration

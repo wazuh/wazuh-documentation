@@ -1,11 +1,13 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
-.. _wazuh_agent_sources_hpux:
+.. meta:: :description: Wazuh agent sources installation on AIX
 
-HP-UX from sources
-==================
+.. _wazuh_agent_sources_aix:
 
-This guide describes how to install the Wazuh agent from source code for HP-UX. For other operating systems, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
+AIX from sources
+================
+
+This guide describes how to install the Wazuh agent from source code for AIX. For other operating systems, please check the list: :ref:`Install Wazuh agent <installation_agents>`.
 
 Installing Wazuh agent
 ----------------------
@@ -13,49 +15,35 @@ Installing Wazuh agent
 .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
 1. Install development tools and compilers.
-   
-   1.1 Download the ``depothelper-2.10-hppa_32-11.31.depot`` file.
 
-      .. code-block:: console
-
-        # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hpux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
-
-      .. note:: If you can't download the script this way, then you should copy it through the scp utility.
-
-   1.2 Install the package manager.
+   1.1 Download the ``wget`` tool.
 
      .. code-block:: console
 
-        # swinstall -s depothelper-2.10-hppa_32-11.31.depot \*
+        # rpm -Uvh --nodeps http://www.oss4aix.org/download/RPMS/wget/wget-1.19.2-1.aix5.1.ppc.rpm
 
-   1.3 Download the ``wget`` tool (If it is not installed).
-
-     .. code-block:: console
-
-        # /usr/local/bin/depothelper -f wget
-
-   1.4  Download the following script
+   1.2  Download the following script
 
       .. code-block:: console
 
-        # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh-packages/master/hpux/generate_wazuh_packages.sh --no-check-certificate
+        # wget https://raw.githubusercontent.com/wazuh/wazuh-packages/master/aix/generate_wazuh_packages.sh --no-check-certificate
 
       .. note:: If you can't download the script this way, then you should copy it through the scp utility.
 
-   1.5  Install the necessary dependencies using the script.
+  1.3  Install the necessary dependencies using the script.
 
       .. code-block:: console
 
         # chmod +x generate_wazuh_packages.sh
         # ./generate_wazuh_packages.sh -e
 
-      .. note:: This step may take a long time.
+      .. note:: This step may take a few minutes.
 
 2. Download the latest version.
 
      .. code-block:: console
 
-        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.zip && /usr/local/bin/unzip v|WAZUH_LATEST|
+        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_LATEST| && gunzip -c wazuh.tar.gz | tar -xvf -
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 
@@ -64,23 +52,32 @@ Installing Wazuh agent
    .. code-block:: console
 
         # cd wazuh-*
-        # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.10
-        # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
+        # gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.11
+        # gmake -C src TARGET=agent USE_SELINUX=no PREFIX=/var/ossec DISABLE_SHARED=yes DISABLE_SYSC=yes
 
 4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
    .. code-block:: console
 
-      # DISABLE_SHARED=yes ./install.sh
+      # DISABLE_SHARED="yes" DISABLE_SYSC="yes" ./install.sh
 
    If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
    .. code-block:: console
 
-      # /usr/local/bin/gmake -C src clean-deps
-      # /usr/local/bin/gmake -C src clean
+      # gmake -C src clean-deps
+      # gmake -C src clean
 
    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
+
+5. Finally apply the following configuration:
+
+   .. code-block:: console
+
+      # sed '/System inventory/,/^$/{/^$/!d;}' /var/ossec/etc/ossec.conf > /var/ossec/etc/ossec.conf.tmp
+      # mv /var/ossec/etc/ossec.conf.tmp /var/ossec/etc/ossec.conf
+
+   .. note:: Note that the above commands have been executed for the default installation path /var/ossec. If you have installed the agent in another path, you will have to modify the path of those commands.
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
@@ -116,7 +113,7 @@ Delete the service:
 
   .. code-block:: console
 
-    # find /sbin/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+    # find /etc/rc.d -name "*wazuh" | xargs rm -f
 
 Remove users:
 

@@ -16,7 +16,7 @@ More information in about syscheck configuration in the :ref:`File integrity mon
 To tell Wazuh to enable real time monitoring of the default paths:
 
 wazuh::manager::ossec_scanpaths:
--------------------------------
+--------------------------------
 
   path: /etc report_changes: 'no' realtime: 'no'
 
@@ -29,7 +29,7 @@ wazuh::manager::ossec_scanpaths:
   path: /sbin report_changes: 'yes' realtime: 'yes'
 
 wazuh::manager::ossec_ignorepaths:
----------------------------------
+----------------------------------
 
 By default, it will be empty.
 

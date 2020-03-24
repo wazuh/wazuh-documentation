@@ -175,11 +175,15 @@ So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the arr
 Encrypted data
 ++++++++++++++
 
-The padded data is encrypted using Blowfish::
+The padded data is encrypted using AES::
 
-    <Encrypted> = Blowfish(<Padding> <Block>)
+    <Encrypted> = AES(<Padding> <Block>)
 
 The initialization vector and the encryption key are described in `Encryption system`_.
+
+.. note::
+
+    The default encryption method is AES, although Blowfish is available as an alternative encryption method.
 
 Payload
 +++++++

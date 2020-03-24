@@ -166,7 +166,7 @@ We could configure these three files and execute them, but we are going to creat
 
 	- hosts: 192.168.0.108
 	  roles:
-	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
+	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
 	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
 As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry.
@@ -235,8 +235,6 @@ We will obtain a final result similar to the one shown in the following code blo
 
 	PLAY RECAP ************************************************************************************************************************************************
 	192.168.0.108              : ok=43   changed=23   unreachable=0    failed=0
-
-	ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
 We can check the status of our new services in our Elastic Stack server.

@@ -53,7 +53,7 @@ Download and build the sources:
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.4
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
@@ -82,7 +82,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       vagrant [OPTION] ... ssh/provision/delete
 
       Example:
-      vagrant --branch-tag=v3.11.4 --ram=1024 --cpus=4 up solaris10 solaris11
+      vagrant --branch-tag=v|WAZUH_LATEST| --ram=1024 --cpus=4 up solaris10 solaris11
 
       -h, --help:
       Show help
@@ -91,10 +91,10 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       Generate package for branch/tag x
 
       --ram x
-      Select the amount of ram asigned to the new machine.
+      Select the amount of ram assigned to the new machine.
 
       --cpus x
-      Select the number of CPUs asigned to the new machine.
+      Select the number of CPUs assigned to the new machine.
 
       -- DEFAULT USE OF VAGRANT (FOR ALL MACHINES) --
 
@@ -107,21 +107,21 @@ Below, you will find some examples of how to build a Solaris package using this 
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v3.11.4 up solaris10
+  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10
 
-This will generate a 3.11.4 Wazuh agent package for Solaris 10
-
-.. code-block:: console
-
-  # vagrant --branch-tag=v3.11.4 up solaris11
-
-This will generate a 3.11.4 Wazuh agent package for Solaris 11
+This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 10
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v3.11.4 up solaris10 solaris 11
+  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris11
 
-This will generate a 3.11.4 Wazuh agent package for Solaris 10 and Solaris 11
+This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 11
+
+.. code-block:: console
+
+  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10 solaris 11
+
+This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 10 and Solaris 11
 
 After the process has ended the package will be stored in the ``src`` folder.
 

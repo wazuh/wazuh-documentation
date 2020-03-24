@@ -41,3 +41,6 @@ Below there is an example of the content of the file:
 
     # Total number of bytes received
     recv_bytes='435879'
+
+    # Messages dequeued after the agent closes the connection
+    dequeued_after_close='487'

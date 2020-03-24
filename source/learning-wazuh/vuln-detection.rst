@@ -26,11 +26,13 @@ a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
 
-Configure ``syscollector`` for the all  agents
-----------------------------------------------
+Configure ``syscollector`` for all the agents
+---------------------------------------------
 
 In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents
-see the default configuration and find the syscollector section:
+see the default configuration and find the syscollector section.
+
+For Linux systems:
 
   .. code-block:: xml
 
@@ -47,7 +49,25 @@ see the default configuration and find the syscollector section:
         <processes>yes</processes>
       </wodle>
 
-By default it will collect inventory information for hardware, operating system,
+For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
+
+  .. code-block:: xml
+
+      <!-- System inventory -->
+      <wodle name="syscollector">
+        <disabled>no</disabled>
+        <interval>1h</interval>
+        <scan_on_start>yes</scan_on_start>
+        <hardware>yes</hardware>
+        <os>yes</os>
+        <network>yes</network>
+        <packages>yes</packages>
+        <ports all="no">yes</ports>
+        <processes>yes</processes>
+        <hotfixes>yes</hotfixes>
+      </wodle>
+
+By default, it will collect inventory information for hardware, operating system,
 network interfaces, installed packages, open ports and running processes every hour.
 
 Configure ``vulnerability-detector`` on  the Wazuh Manager
@@ -160,21 +180,19 @@ See the alerts in Kibana
 Search Kibana for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png          |
-    |     :title: Found Vulnerabilities                                         |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
+    :title: Found Vulnerabilities
+    :align: center
+    :width: 100%
+
 
 Expand one of the records to see all the information available:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png               |
-    |     :title: Vulnerability event                                           |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png
+    :title: Vulnerability event
+    :align: center
+    :width: 100%
+
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
@@ -202,7 +220,8 @@ hardware and operating system data is also tracked.
 1. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
    need to query the API by agent id number:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
       [root@wazuh-manager centos]# agent_control -l
 
@@ -484,13 +503,11 @@ is in the Wazuh Kibana plugin itself.  Both in the **Overview** section as well 
 when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png                |
-    |     :title: flood                                                         |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
 
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png
+    :title: Flood
+    :align: left
+    :width: 100%
 
 
 Optional exercise

@@ -172,12 +172,11 @@ See what happened according to Kibana
 1. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
    Change the scale from "Auto" to "Second".
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png                                      |
-    |     :title: flood                                                                             |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
+    :title: Flood
+    :align: center
+    :width: 100%
+
 
 2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
    our intended limit.  The client buffer EPS limit worked!
@@ -186,21 +185,19 @@ See what happened according to Kibana
 
 4. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png                                     |
-    |     :title: flood2                                                                            |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png
+    :title: Flood
+    :align: center
+    :width: 100%
+
 
 5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png                                      |
-    |     :title: flood3                                                                            |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
+    :title: Flood
+    :align: center
+    :width: 100%
+
 
 6. Observe how Wazuh alerts us at various stages of a flooding event so that we
    can know when we need to intervene with an over-logging system that is not

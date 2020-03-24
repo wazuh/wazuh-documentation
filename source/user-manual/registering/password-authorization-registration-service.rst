@@ -5,7 +5,7 @@
 Using the registration service with password authorization
 ==========================================================
 
-You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password. To register an agent using the registration service and a password, first follow the steps from the **Manager** section and then, follow the steps from the correspondig OS.
+You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password. To register an agent using the registration service and a password, first follow the steps from the **Manager** section and then, follow the steps from the corresponding OS.
 
 Manager
 ^^^^^^^
