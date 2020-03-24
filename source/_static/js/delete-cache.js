@@ -4,6 +4,5 @@
   const fetch_url = parts[0] + '//' + parts[2] + '/current/' + parts.slice(4).join('/');
   fetch(fetch_url, {cache: "no-cache"})
     .then(response => {
-      console.log("Fixed redirect for " + fetch_url);
-      console.log("It now redirects to " +  response.url);
+      /* Fixed redirects, do nothing */
     });
