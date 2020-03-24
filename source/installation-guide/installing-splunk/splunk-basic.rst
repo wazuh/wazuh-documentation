@@ -65,13 +65,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
       .. code-block:: console
 
-        # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/splunk/peer-indexes.conf
-
-    b) Create ``inputs.conf``:
-
-      .. code-block:: console
-
-        # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/splunk/peer-inputs.conf
+        # /opt/splunk/bin/splunk start
         
 
 5. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
