@@ -32,6 +32,7 @@ Available options
 - `if_level`_
 - `if_matched_sid`_
 - `if_matched_group`_
+- `if_fts`_
 - `same_id`_
 - `same_source_ip`_
 - `same_src_port`_
@@ -119,7 +120,7 @@ Example:
   .. code-block:: xml
 
     <rule id="100001" maxsize="300" level="3">
-      <if_sid>100020</if_sid>
+      <if_sid>100200</if_sid>
       <match>Queue flood!</match>
       <description> Flooded events queue.</description>
     </rule>
@@ -413,6 +414,14 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | Any Group |
 +--------------------+-----------+
 
+if_fts
+^^^^^^
+
+Makes the decoder that processed the event to take the `fts <decoders.html#fts>`_ line into consideration.
+
++--------------------+--------------------+
+| **Example of use** | <if_fts />         |
++--------------------+--------------------+
 
 same_id
 ^^^^^^^
@@ -588,12 +597,6 @@ Specifies a human readable description to the rule in order to provide context t
 Examples:
 
   .. code-block:: xml
-
-    <rule id="100009" level="1">
-      ...
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
-      <description> Rule to match IPs </description>
-    </rule>
 
     <rule id="100015" level="2">
       ...

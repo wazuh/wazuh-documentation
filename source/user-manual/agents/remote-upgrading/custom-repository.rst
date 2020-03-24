@@ -44,6 +44,9 @@ Every folder must contain a file named ``versions`` that lists each version repr
 
     # cat our_wpk_repo/centos/7/x86_64/versions
 
+.. code-block:: none
+    :class: output
+
     v3.1.0 f835015c6bbf87356a62bdfd513c7f1ffc16e0af
     v3.0.0 df5397c8c4a1b29c42726dfa821330fa1bac7058
 

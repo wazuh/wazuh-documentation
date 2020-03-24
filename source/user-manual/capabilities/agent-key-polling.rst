@@ -77,7 +77,8 @@ The output of your script must be a JSON object in the standard output.
 
 On success example:
 
-.. code-block:: console
+.. code-block:: json
+    :class: output
 
     {
         "error": 0,
@@ -161,7 +162,8 @@ On success example:
 
 On error example:
 
-.. code-block:: console
+.. code-block:: json
+    :class: output
 
     {
         "error": 1,

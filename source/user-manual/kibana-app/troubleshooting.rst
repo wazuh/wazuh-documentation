@@ -12,7 +12,7 @@ This section collects common installation or usage problems on the Wazuh app, an
 
 The Wazuh app has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
 
-.. code-block:: console
+.. code-block:: javascript
 
   "kibana": {
     "version": "6.7.2"
@@ -20,7 +20,7 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 
 Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
-You can check our `compatibility compatibility_matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>` to learn more about product compatibility between Wazuh and the Elastic Stack.
+You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
 
 No template found for the selected index pattern
 ------------------------------------------------
@@ -30,6 +30,9 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 .. code-block:: console
 
   # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+
+.. code-block:: json
+  :class: output
 
   {"acknowledged":true}
 

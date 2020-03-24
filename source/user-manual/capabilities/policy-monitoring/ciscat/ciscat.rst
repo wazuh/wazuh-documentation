@@ -42,6 +42,22 @@ b) For Debian/Ubuntu:
 .. code-block:: console
 
   # apt-get update && apt-get install openjdk-8-jre
+  
+c) For Windows:
+  
+  1. Download the MSI-based installer of `OpenJDK 8 <https://developers.redhat.com/products/openjdk/download>`_ for your Windows architecture.
+  
+  2. Run the installer and follow the on-screen instructions to install OpenJDK 8.
+  
+  3. Set Environment Variables:
+  
+    - Go to Control Panel -> System and Security -> System -> Advanced system settings -> Environment Variables.
+    
+    - Under System Variables, create or edit ``JAVA_HOME`` variable and add the installation path of the JDK. Example: ``C:\Program Files\java-1.8.0``.
+    
+    - Apply changes.
+    
+    - Open up the Command Prompt and type ``java -version`` to check the newly installed version.
 
 .. note::
   If the version 8 of the Java Runtime Environment is not available for your operating system, use the version 7 or 6 instead.
@@ -113,7 +129,8 @@ The following is an example of how to deploy the CIS-CAT integration:
 Information about the executed scan and report overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: none
+   :class: output
 
    ** Alert 1518119251.42536: - ciscat,
    2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
@@ -137,7 +154,8 @@ Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpo
 Information about a specific result
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: none
+   :class: output
 
    ** Alert 1518119251.125999: - ciscat,
    2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
@@ -198,13 +216,13 @@ Scheduling executions by day of the week
 .. code-block:: xml
 
   <!-- 18:00 every monday -->
-  <wday>monday</monday>
+  <wday>monday</wday>
   <time>18:00</time>
 
 .. code-block:: xml
 
   <!-- 18:00 every monday with three weeks of frequency -->
-  <wday>monday</monday>
+  <wday>monday</wday>
   <time>18:00</time>
   <interval>3w</interval>
 

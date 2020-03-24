@@ -12,7 +12,7 @@ change, only the scan ``summary`` event will be sent, thus avoiding unnecessary 
 the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
 Kibana App.
 
-An the integrity (more on this later) and alerting flow is depicted in the
+Integrity and alerting flow is depicted in the
 :ref:`sequence diagram <sca_sequence_diagram>` below.
 
 .. figure:: ../../../images/sca/sca_sequence_diagram.svg
@@ -46,6 +46,7 @@ Take the following check from policy  ``cis_debian9_L2.yml`` as an example:
 After evaluating the aforementioned check, the following event is generated:
 
 .. code-block:: json
+  :class: output
 
   {
     "type": "check",
@@ -96,6 +97,7 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 #. A message appears in the manager log file, e.g:
 
     .. code-block:: none
+        :class: output
 
         INFO: Policy 'cis_debian9_L2' information for agent '002' is outdated. Requested latest scan results.
 

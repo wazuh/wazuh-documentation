@@ -58,7 +58,9 @@ The next example shows how the auditd decoder extracts the information from an a
 
 
 JSON Output:
-::
+
+.. code-block:: json
+  :class: output
 
   {
     "rule": {

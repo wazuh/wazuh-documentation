@@ -20,6 +20,10 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
     .. code-block:: console
 
       # uname -r
+
+    .. code-block:: none
+      :class: output
+
       3.10.0-229.el7.x86_64
 
 2. Run the Docker installation script.
@@ -27,6 +31,16 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
     .. code-block:: console
 
       # curl -sSL https://get.docker.com/ | sh
+
+3. Start the Docker service:
+
+  a) For Systemd::
+
+      $ systemctl start docker
+
+  b) For SysV Init::
+
+      $ service docker start
 
 .. note::
   If you would like to use Docker as a non-root user, you should now consider adding your user to the ``docker`` group with something like the following command (remember that you'll have to log out and log back in for this to take effect):
@@ -66,6 +80,10 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
     .. code-block:: console
 
       $ docker-compose --version
+
+    .. code-block:: none
+      :class: output
+    
       docker-compose version 1.23.1, build b02f1306
 
     .. note::

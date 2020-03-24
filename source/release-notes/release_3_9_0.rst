@@ -112,9 +112,13 @@ Wazuh API
 - Multiple nodes restart.
 - SCA endpoints for policies, scan and checks.
 
-.. code-block:: js
+.. code-block:: none
 
     GET /sca/001
+
+.. code-block:: js
+    :class: output
+
     {
         "error": 0,
         "data": {
@@ -142,9 +146,13 @@ Wazuh API
 
 - Dive into your SCA scan results using the API.
 
-.. code-block:: js
+.. code-block:: none
 
     GET /sca/001/checks/system_audit_ssh
+
+.. code-block:: js
+    :class: output
+
     {
         "error": 0,
         "data": {

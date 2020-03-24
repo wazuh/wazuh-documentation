@@ -77,6 +77,7 @@ After restarting, FIM will apply the new configuration and the specified folder 
 
 .. code-block:: console
   :emphasize-lines: 4,10,11
+  :class: output
 
   ** Alert 1510684983.55139: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,
   2017 Nov 14 18:43:03 PC->syscheck
@@ -106,6 +107,7 @@ When a request to VirusTotal is sent by the integrator module, as noted above, d
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510676062.9653: - virustotal,
   2017 Nov 14 16:14:22 PC->virustotal
@@ -121,6 +123,7 @@ This error means that the API key set in the configuration is invalid.
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510684990.60518: - virustotal,
   2017 Nov 14 18:43:10 PC->virustotal
@@ -138,6 +141,7 @@ While the two previous alerts represent errors that may occur, the following are
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510684376.32386: - virustotal,
   2017 Nov 14 18:32:56 PC->virustotal
@@ -157,6 +161,7 @@ While the two previous alerts represent errors that may occur, the following are
 
 .. code-block:: console
   :emphasize-lines: 3
+  :class: output
 
   ** Alert 1510684984.55826: mail  - virustotal,
   2017 Nov 14 18:43:04 PC->virustotal

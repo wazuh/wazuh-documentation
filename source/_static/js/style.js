@@ -143,46 +143,27 @@ $(function() {
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
   }
-
-  let delay = navbarTop + 200;
-  let windowHeight = window.innerHeight;
-  let documentHeight = $(document).outerHeight();
   let documentScroll = $(window).scrollTop();
-  let containerNavHeight = parseInt($('#navbar-globaltoc').outerHeight());
-  let navHeight = parseInt($('#globaltoc').outerHeight());
-  let pageFocus = 'document';
-  let pageHover = 'document';
-  let pageMouseWheel = false;
-  let navbarClick = false;
+  let disableScroll = false;
+  let scrollDirection = 'down';
+  let hoverDocument = 'document';
+  let eventScroll;
 
   heightNavbar();
-  scrollNavbar();
   headerSticky();
 
-  $('#navbar').on('mousemove', function(e) {
-    pageHover = 'nav';
-  });
-
-  $('#header, #main-content').on('mousemove', function(e) {
-    pageHover = 'document';
-  });
-
-  $(window).bind('mousewheel DOMMouseScroll', function(e) {
-    pageMouseWheel = true;
-  });
-
-  $(document).keydown(function(e) {
-    if (e.which == 38 || e.which == 40) {
-      pageMouseWheel = false;
+  setTimeout(function() {
+    if ($('#page').hasClass('no-latest-docs')) {
+      noticeHeight = parseInt($('.no-latest-notice').outerHeight());
     }
+  }, 500);
+
+  $('#header, #main-content').on('mouseenter', function() {
+    hoverDocument = 'document';
   });
 
-  $('#navbar a').focus(function() {
-    navbarClick = true;
-  });
-
-  $('#header, #main-content').click(function() {
-    navbarClick = false;
+  $('#navbar-globaltoc').on('mouseenter', function() {
+    hoverDocument = 'navbar';
   });
 
   $(window).on('resize', function(e) {
@@ -200,16 +181,109 @@ $(function() {
     }
 
     heightNavbar();
-    scrollNavbar();
+    adjustLightboxHeight();
   });
 
-  $('#navbar-globaltoc').on('scroll', function(e) {
-    pageFocus = 'nav';
+  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'wheel';
+
+  if (document.getElementById('navbar-globaltoc').addEventListener) {
+    document.getElementById('navbar-globaltoc').addEventListener(mousewheelevt, function(e) {
+      eventScroll = 'mousewheel';
+      const delta = ((e.deltaY || -e.wheelDelta || e.detail) >> 10) || 1;
+      if (delta < 0 ) {
+        scrollDirection = 'up';
+      } else if (delta > 0) {
+        scrollDirection = 'down';
+      }
+      enableDisableScroll();
+      if (disableScroll) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, {passive: false} );
+  }
+
+  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
+    eventScroll = 'mousewheel';
+    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+      scrollDirection = 'up';
+    } else {
+      scrollDirection = 'down';
+    }
+    enableDisableScroll();
+    if (disableScroll) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.returnValue = false;
+      return false;
+    }
+  }); */
+
+  $('#navbar-globaltoc').keydown(function(e) {
+    eventScroll = 'keys';
+    let arrowKeys = false;
+    if (e.which == 38) {
+      arrowKeys = true;
+      scrollDirection = 'up';
+    }
+    if (e.which == 40) {
+      arrowKeys = true;
+      scrollDirection = 'down';
+    }
+    enableDisableScroll();
+    if (arrowKeys) {
+      if (disableScroll) {
+        return false;
+      }
+    }
   });
+
+  $(document).keydown(function(e) {
+    if (
+      (e.which == 38 || e.which == 40) &&
+      hoverDocument == 'navbar'
+    ) {
+      eventScroll = 'keys';
+      let arrowKeys = false;
+      if (e.which == 38) {
+        arrowKeys = true;
+        scrollDirection = 'up';
+      }
+      if (e.which == 40) {
+        arrowKeys = true;
+        scrollDirection = 'down';
+      }
+      enableDisableScroll();
+      if (arrowKeys) {
+        if (disableScroll) {
+          return false;
+        }
+      }
+    }
+  });
+
+  /**
+   * Enable or disable the scroll of #navbar-globaltoc
+   */
+  function enableDisableScroll() {
+    const ele = document.getElementById('navbar-globaltoc');
+    navbarHeight = parseInt(ele.scrollHeight) - parseInt($(ele).outerHeight());
+    navbarScroll = $(ele).scrollTop();
+    if (navbarScroll == navbarHeight && scrollDirection == 'down' && eventScroll == 'mousewheel') {
+      disableScroll = true;
+    } else if (navbarScroll == 0 && scrollDirection == 'up' && eventScroll == 'mousewheel') {
+      disableScroll = true;
+    } else if (navbarScroll == navbarHeight && scrollDirection == 'down' && eventScroll == 'keys' && hoverDocument == 'navbar') {
+      disableScroll = true;
+    } else if (navbarScroll == 0 && scrollDirection == 'up' && eventScroll == 'keys' && hoverDocument == 'navbar') {
+      disableScroll = true;
+    } else {
+      disableScroll = false;
+    }
+  }
 
   $(window).on('scroll', function(e) {
-    pageFocus = 'document';
-
     windowHeight = window.innerHeight;
     documentHeight = $(document).outerHeight();
     documentScroll = $(window).scrollTop();
@@ -217,15 +291,6 @@ $(function() {
     navHeight = parseInt($('#globaltoc').outerHeight());
     /* Update height of navbar */
     heightNavbar();
-    /* If the coursor isn't in the navbar */
-    if (((pageFocus == 'document' && pageHover == 'document') ||
-      (pageMouseWheel && pageFocus == 'nav' && pageHover == 'nav') ||
-      (!navbarClick && !pageMouseWheel && pageFocus == 'document' && pageHover == 'nav')
-    ) && $(window).outerWidth() >= 992) {
-      /* Set the new scroll of navbar */
-      scrollNavbar();
-    }
-
     headerSticky();
   });
 
@@ -241,7 +306,7 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
-    if ($(window).outerWidth() >= 992) {
+    if ($(window).width() >= 992) {
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': (noticeHeight+navbarTop-documentScroll)+'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - '+ noticeHeight +'px + '+documentScroll+'px)'});
@@ -258,30 +323,6 @@ $(function() {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight+52)+'px'});
       }
-    }
-  }
-
-  /**
-   * Sets the same scroll on the navbar (globaltoc) that on the document
-   */
-  function scrollNavbar() {
-    scrollReal = documentHeight-windowHeight-delay;
-    if (scrollReal < 0) {
-      scrollReal += delay;
-      delay = 0;
-    }
-    navScrollReal = navHeight-containerNavHeight;
-    percentage = ((documentScroll-delay)/scrollReal).toFixed(3);
-    navScrollEnd = (percentage*navScrollReal).toFixed();
-    if (percentage == 0) {
-      navScrollEnd = 0;
-    }
-    if (percentage == 1) {
-      navScrollEnd += 20;
-    }
-
-    if (navScrollReal >= 0) {
-      $('#navbar-globaltoc').scrollTop(navScrollEnd);
     }
   }
 
@@ -341,7 +382,6 @@ $(function() {
     currentLeaf.parents('li').each(function() {
       $(this).addClass('initial').addClass('show');
     });
-    $('#navbar-globaltoc').removeClass('hidden');
     completelyHideMenuItems();
   }
 
@@ -352,8 +392,11 @@ $(function() {
     $('#navbar-globaltoc li ul').each(function() {
       if ( $(this).closest('li').hasClass('show') ) {
         this.hidden = false;
+        $(this).slideDown(300);
       } else {
-        this.hidden = true;
+        $(this).slideUp(300, function() {
+          this.hidden = true;
+        });
       }
     });
   }
@@ -516,40 +559,75 @@ $(function() {
 
   /* Search results --------------------------------------------------------------------------------------------------*/
 
-  if ( $('#search-results').length > 0 ) {
-    const ulSearch = $('ul.search');
+  const searchResults = $('#search-results');
+
+  if ( searchResults.length > 0 ) {
     let lastResult = null;
-    let splitURL;
+    let splitURL = null;
+    const configAdd = {childList: true};
+    const configAtt = {attributes: true, attributeOldValue: true};
+    let observerResults = null;
+    let observerResultList = null;
+    let observerResultText = null;
+    let i = 0;
 
     /* Detects every result that is added to the list */
-    ulSearch.on('DOMSubtreeModified', function() {
-      lastResult = $('ul.search li:last-child');
-      splitURL = lastResult.children('a').prop('href').split('/');
-
-      /* Checks the URL to mark the results found in excludedSearchFolders */
-      $.each(excludedSearchFolders, function(index, value) {
-        if ( $.inArray(value, splitURL) !== -1 ) {
-          lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
-          lastResult.addClass('hidden-result'); /* Hides the excluded result */
-          return false; /* breaks the $.each loop */
+    const addedResult = function(mutationsList, observer) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'childList') {
+          lastResult = $('ul.search li:last-child');
+          splitURL = lastResult.children('a').prop('href').split('/');
+          /* Checks the URL to mark the results found in excludedSearchFolders */
+          $.each(excludedSearchFolders, function(index, value) {
+            if ( $.inArray(value, splitURL) !== -1 ) {
+              lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
+              lastResult.addClass('hidden-result'); /* Hides the excluded result */
+              return false; /* breaks the $.each loop */
+            }
+          });
         }
-      });
-    });
+      }
+    };
+
+    /* Checking that the list of search results exists */
+    const existsResultList = function(mutationsList, observer) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search') ) {
+          const ulSearch = $('ul.search');
+
+          observerResults.disconnect();
+
+          observerResultList = new MutationObserver(addedResult);
+          observerResultList.observe(ulSearch[0], configAdd);
+          observerResultText = new MutationObserver(changeResultText);
+          observerResultText.observe($('#search-results > p')[0], configAtt);
+        }
+      }
+    };
 
     /* Replaces the result message */
-    $('#search-results > p:first').one('DOMSubtreeModified', function() {
-      const totalResults = $('ul.search li').length;
-      const excludedResults = $('ul.search li.excluded-search-result').length;
-      let resultText = '';
-      if ( totalResults > 0 ) {
-        if ( excludedResults > 0 ) {
-          resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
-        } else {
-          resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+    const changeResultText = function(mutationsList, observer) {
+      for ( i = 0; i< mutationsList.length-1; i++) {
+        if (mutationsList[i].type === 'attributes') {
+          observerResultText.disconnect();
+          const totalResults = $('ul.search li').length;
+          const excludedResults = $('ul.search li.excluded-search-result').length;
+          let resultText = '';
+          if ( totalResults > 0 ) {
+            if ( excludedResults > 0 ) {
+              resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+            } else {
+              resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+            }
+            $('#search-results > p:first').html(resultText);
+          }
         }
-        $(this).html(resultText);
       }
-    });
+    };
+
+    observerResults = new MutationObserver(existsResultList);
+    observerResults.observe(searchResults[0], configAdd);
+
 
     /* Click that allows showing excluded results */
     $(document).delegate('#search-results #toggle-results.include', 'click', function() {
@@ -599,18 +677,163 @@ $(function() {
   $('#lightboxOverlay, #lightbox, #lightbox .lb-close').on('click', function(e) {
     $('html, body').css('overflow', '');
     $('.side-scroll').removeAttr('style');
-    menuHeight();
   });
 
   $('#lightbox .lb-details span, #lightbox .lb-dataContainer :not(.lb-close)').on('click', function(e) {
     e.stopPropagation();
     $('html, body').css('overflow', 'hidden');
   });
+  adjustLightboxHeight();
+
+  /**
+   * Checks the real height of .no-latest-notice in order to add the appropriate top margin to the lightbox element.
+   * If .no-latest-notice is not visible, the margin is zero
+   */
+  function adjustLightboxHeight() {
+    noLatestHeight = document.querySelector('.no-latest-notice').offsetHeight;
+    $('#lightbox').css('margin-top', noLatestHeight );
+  }
 
   /* Restore overflow when pressing key 'Esc' */
   $(document).on('keydown', function(e) {
     if ( e.keyCode == 27 ) {
       $('html, body').css('overflow', '');
     }
+  });
+
+  /* Special code blocks --------------------------------------------------------------------------------*/
+  $('.highlight').each(function() {
+    const blockCode = $(this).parent();
+
+    /* Output */
+    if ( !blockCode.hasClass('output') ) {
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
+    } else {
+      blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
+    }
+
+    /* Escaped tag signs */
+    if ( blockCode.hasClass('escaped-tag-signs') ) {
+      let data = $(this).html();
+      const datafragments = data.split(/\\</);
+      data = '';
+      datafragments.forEach(function( ltFragment, i) {
+        /* The first fragment occurs just before the opening tag, so it doesn't need to be processed */
+        if ( i != 0 ) {
+          gtFragments = ltFragment.split(/&gt;/);
+          ltFragment = gtFragments.shift();
+          if ( gtFragments.length ) {
+            ltFragment += '\\>' + gtFragments.join('>');
+          }
+        }
+        if ( i != datafragments.length-1 ) {
+          data += ltFragment+'\\<';
+        } else {
+          data += ltFragment;
+        }
+      });
+      $(this).html(data);
+    }
+  });
+
+  /* Copy to clipboard ----------------------------------------------------------------------------------*/
+  $('.copy-to-clipboard').click(function() {
+    const ele = $(this);
+    let data = $(ele).parent().find('.highlight').text();
+    data = String(data);
+    data = filterCodeBlock(data, $(ele).parent());
+    copyToClipboard(data);
+    $(ele).addClass('copied');
+    $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
+    $(ele).find('span').css({'display': 'block'});
+    setTimeout(function() {
+      $(ele).removeClass('copied');
+    }, 700);
+    setTimeout(function() {
+      $(ele).find('span').css({'display': 'none'});
+      $(ele).find('i').css({'display': 'block'});
+      $(ele).focus();
+    }, 1000);
+  });
+
+  /**
+   * Filter the code block text that will be copied to the clipboard
+   * @param {string} data The string from the code block
+   * @param {Obj} parent jQuery object containing the parent element, which has the appropriate lexer class
+   * @return {string} filter code block text
+   */
+  function filterCodeBlock(data, parent) {
+    /* Remove elipsis */
+    data = data.replace(/(^|\n)\s*(\.\s{0,1}){3}\s*($|\n)/g, '\n');
+    /* Remove prompts with square brakets */
+    data = data.replace(/(.+]\$\s)/g, '');
+    data = data.replace(/(.+]\#\s)/g, '');
+    /* Remove especific prompts */
+    data = data.replace(/ansible@ansible:.+\$\s/g, '');
+    data = data.replace(/mysql>\s/g, '');
+    data = data.replace(/sqlite>\s/g, '');
+    data = data.replace(/Query\s.+\)\n/g, '');
+    /* Remove prompts with format user@domain in general */
+    data = data.replace(/.+@.+:.+(\#|\$)\s/g, '');
+    /* Remove prompts with the symbol > */
+    data = data.replace(/^>\s/g, '');
+    data = data.replace(/\n>\s/g, '\n');
+    /* Remove prompts with the symbol $ */
+    data = data.replace(/(?:\$\s)/g, '');
+    /* Remove additional line breaks */
+    data = data.replace(/\n{2,}$/g, '\n');
+    /* Remove prompts with the symbol # only when they cannot be considered comments */
+    if ( !parent.hasClass('highlight-yaml')
+      && !parent.hasClass('highlight-python')
+      && !parent.hasClass('highlight-powershell')
+      && !parent.is($('[class*="conf"]')) ) {
+      data = data.replace(/(?:\#\s)/g, '');
+    }
+    /* Filter only for commands (console or bash lexers) */
+    if ( parent.hasClass('highlight-console') || parent.hasClass('highlight-bash') ) {
+      /* Remove comment lines (starging with //) */
+      data = data.replace(/(^|\n)\/\/.+/g, '');
+      /* Remove additional line breaks in command lines to avoid accidental enter inputs */
+      data = data.replace(/\n{2,}/g, '\n');
+    }
+    data = data.trim();
+    return data;
+  }
+
+  /**
+   * Copy the data to clipboard
+   * @param {string} data The string to copy
+   */
+  function copyToClipboard(data) {
+    const aux = document.createElement('textarea');
+    aux.value = data;
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand('copy');
+    document.body.removeChild(aux);
+  }
+
+  /* Avoid select $ and # on the code blocks -----------------------------------------------------*/
+  $('.highlight').each(function() {
+    const ele = $(this);
+    const data = ele.html();
+    const find = data.match(/(?:\$\s|\#)/g);
+    if (find != null) {
+      const dataArray = data.split('\n');
+      let content = '';
+      dataArray.forEach(function(line) {
+        line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
+        line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
+        content += line;
+      });
+      ele.html(content);
+    }
+  });
+
+  /* Disable "not found" links in the version selector -------------------------------------------*/
+  $('#select-version a.disable').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
   });
 });

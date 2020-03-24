@@ -123,6 +123,11 @@ dt {
   padding-bottom: 10px;
 }
 
+.docutils.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -263,7 +268,6 @@ dt {
 }
 
 #links-to-home .wazuh-logo-link {
-  vertical-align: text-bottom;
   display: inline-block;
   margin-right: 5px;
 }
@@ -273,7 +277,7 @@ dt {
   text-decoration: none;
 }
 
-a .docs-link {
+a.docs-link {
   color: #ffffff;
   vertical-align: text-top;
   display: inline-block;
@@ -281,8 +285,8 @@ a .docs-link {
   font-size: 1.2rem;
 }
 
-a .docs-link:hover,
-a .docs-link:active {
+a.docs-link:hover,
+a.docs-link:active {
   color: #ffffff;
 }
 
@@ -295,7 +299,7 @@ a .docs-link:active {
   position: fixed;
   bottom: 0;
   right: 15px;
-  height: 44px;
+  height: 42px;
   padding: 10px;
   z-index: 100;
   border-radius: 25px 25px 0 0;
@@ -312,7 +316,7 @@ a .docs-link:active {
 
 #btn-scroll .fa {
   color: rgba(255, 255, 255, 0.75);
-  font-size: 25px;
+  font-size: 1.4rem;
   transition: color .7s;
 }
 
@@ -431,7 +435,7 @@ header .menuweb-bar .menu-item a {
   position: absolute;
     width: auto !important;
     top: 13px;
-    left: 8px;
+    left: 14px;
     color: #00a9e5;
     font: normal normal normal 39px/1 'wazuh-icons';
     vertical-align: middle;
@@ -611,6 +615,10 @@ header .menuweb-bar .menu-item a {
   box-shadow: none;
 }
 
+.navigation-buttons .btn .fa {
+  font-size: 0.75rem;
+}
+
 footer {
   font-size: 0.88rem;
   background-color: #0094ce;
@@ -674,6 +682,14 @@ footer .logo a:focus {
 
 ul, ol {
 	padding-left: 1.7rem;
+}
+
+ul.simple li dl {
+  margin-bottom: 0;
+}
+
+ul.simple dl dt {
+  font-weight: normal;
 }
 
 ul.simple dl dd {
@@ -849,7 +865,7 @@ li.toctree-l5 > a {
   width: 11px;
   height: 11px;
   padding: 1px;
-  font: normal normal normal 9px/1 FontAwesome;
+  font: normal bold normal 0.65rem/1 FontAwesome;
   text-rendering: auto;
 }
 
@@ -1044,7 +1060,7 @@ a.headerlink:before {
   color: #ffb600;
   content: '\f0c1';
   display: inline-block;
-  font: normal normal normal 15px/.5 FontAwesome;
+  font: normal bold normal 0.95rem/.5 FontAwesome;
   text-align: right;
   padding-left: 10px;
   padding-bottom: 4px;
@@ -1198,13 +1214,14 @@ footer a:focus,
 
 .search_main .searchform > .btn-search,
 .navbar-toggler.btn-close {
-  height: 25px;
-  width: 25px;
+  height: 28px;
+  width: 28px;
   border: none;
   position: absolute;
-  top: 3px;
+  padding: 3px;
+  top: 2px;
   right: 3px;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .search_main .btn-search:focus {
@@ -1378,7 +1395,7 @@ footer a:focus,
 }
 
 .search_main .btn-search .fa {
-  font-size: 20px;
+  font-size: 15px;
   line-height: .2;
 }
 
@@ -1733,10 +1750,21 @@ select, option {
   transition: .1s all ease;
   color: #00a9e5;
   text-align: left;
- }
+}
 
 #select-version .dropdown-menu li:hover a {
   color: #fff;
+}
+
+#select-version .dropdown-menu li a.disable {
+  cursor: default;
+  color: #999;
+  background-color: #f5f5f5;
+}
+
+#select-version .dropdown-menu li:hover a.disable {
+  color: #fff;
+  background-color: #00a9e5;
 }
 
 .version::after {
@@ -1745,7 +1773,7 @@ select, option {
   right: 10px;
   width: 0.5rem;
   height: 0.5rem;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1em/.5 FontAwesome;
   content: '\f0d7';
   color: #ffffff;
   pointer-events: none;
@@ -2156,6 +2184,11 @@ label {
   border-radius: 4px;
 }
 
+.admonition.admonition-output {
+	margin-bottom: 0;
+	border-radius: 4px 4px 0 0;
+}
+
 .admonition p {
   padding: 1rem;
   margin: 0;
@@ -2175,6 +2208,13 @@ label {
   padding: 0;
 }
 
+.output[class*="highlight-"] .highlight {
+	margin: 0;
+	padding-top: 0.3rem;
+	border: none;
+	background-color: #e8e8e8;
+}
+
 .admonition ul, .admonition ol {
   padding-top: 1rem;
   padding-right: 1rem;
@@ -2190,7 +2230,7 @@ p.admonition-title {
 p.first.admonition-title::before,
 .no-latest-notice span::before {
   display: inline-block;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1.1rem/.5 FontAwesome;
   width: 12px;
   margin-right: 0.75em;
 }
@@ -2239,9 +2279,18 @@ p.first.admonition-title::before,
 	background-color: rgba(221, 108, 70, 0.5);
 }
 
+.output .admonition-title {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #ffffff;
+}
+
 .note p.first.admonition-title::before,
 .admonition-generic-admonition p.first.admonition-title::before {
   content: '\f06a';
+}
+
+.output p.first.admonition-title::before {
+  content: '\f138';
 }
 
 .note > ol,
@@ -2291,7 +2340,7 @@ p.first.admonition-title::before,
   background-color: transparent;
 }
 
-.admonition div[class^='highlight'] {
+.admonition div[class*='highlight'] {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -2321,7 +2370,7 @@ p.first.admonition-title::before,
 .versionadded > p > span::before, .deprecated span.versionmodified::before {
   content: '\f06a';
   display: inline-block;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1em/.5 FontAwesome;
   width: 12px;
   margin-right: 0.75em;
 }
@@ -2532,7 +2581,8 @@ ul#breadcrumbs {
 
 ul#breadcrumbs .fa {
   color: #0094d0;
-  padding: 0 4px;
+  padding: 0 4px 0 2px;
+  font-size: 0.75rem;
 }
 
 ul#breadcrumbs li:before {
@@ -2555,20 +2605,23 @@ ul#breadcrumbs a {
   color: #0094d0;
 }
 
+.edit-repo a i {
+  margin-right: 5px;
+}
+
 [class*="highlight-"] {
   overflow: auto;
   margin-bottom: 1.5rem;
   background-color: #f4f4f4;
 }
 
-blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
   margin-bottom: 1em;
   margin-left: 0.3rem;
 }
 
-blockquote ul li > div[class^='highlight'] {
+blockquote ul li > div[class*='highlight'] {
   margin-bottom: 0.5rem;
 }
 
@@ -2590,6 +2643,13 @@ div.highlight pre {
   padding: 0.5em 1em;
 }
 
+.highlight .no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select:none;
+}
+
 .admonition pre {
   background-color: #f4f4f4 !important;
 }
@@ -2597,6 +2657,31 @@ div.highlight pre {
 .linenos {
   padding: 0 0.5em 0 1em !important;
   border-right: 1px solid #00a9e5;
+}
+
+.tooltip > .tooltip-inner {
+  max-width: 300px !important;
+  padding: 7px !important;
+  font-size: 11px !important;
+  color: #fff !important;
+  background-color: #888 !important;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before,
+.bs-tooltip-top .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=right] .arrow::before,
+.bs-tooltip-right .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=left] .arrow::before,
+.bs-tooltip-left .arrow::before {
+  display: none;
 }
 
 @media (min-width:576px){
@@ -3102,7 +3187,7 @@ div.highlight pre {
 
       #links-to-home .docs-link {
         margin-left: 15px;
-        line-height: 2em;
+        line-height: 1em;
       }
 
 			#links-to-home .wazuh-logo-link img {
@@ -3441,26 +3526,39 @@ div.highlight pre {
 pre.literal-block,
 .rst-content .literal-block,
 .rst-content pre.literal-block,
-div[class^='highlight'] {
+div[class*='highlight'] {
   border: 1px solid #e1e4e5;
   padding: 0px;
   margin: 1px 0 24px 0
 }
 
-.codeblock div[class^='highlight'],
-pre.literal-block div[class^='highlight'],
-.rst-content .literal-block div[class^='highlight'],
-div[class^='highlight'] div[class^='highlight'] {
+div[class*='highlight'].output {
+	border: none;
+	background-color: transparent;
+}
+
+div[class*='highlight'].output .highlight {
+	border: 1px solid #e1e4e5;
+}
+
+div[class*='highlight'] {
+  position: relative;
+}
+
+.codeblock div[class*='highlight'],
+pre.literal-block div[class*='highlight'],
+.rst-content .literal-block div[class*='highlight'],
+div[class*='highlight'] div[class*='highlight'] {
   border: none;
   background: none;
   margin: 0
 }
 
-.last div[class^='highlight'] {
+.last div[class*='highlight'] {
   margin: 0;
 }
 
-div[class^='highlight'] td.code {
+div[class*='highlight'] td.code {
   width: 100%
 }
 
@@ -3468,12 +3566,48 @@ div[class^='highlight'] td.code {
   line-height: 1.5;
 }
 
-div[class^='highlight'] pre {
+div[class*='highlight'] pre {
   white-space: pre;
   margin: 0;
   line-height: 1.5;
   display: block;
   overflow: auto;
+}
+
+div[class*='highlight'] .copy-to-clipboard {
+  z-index: 1;
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  padding: 5px;
+  color: #fff;
+  font: normal normal normal 14px/1 FontAwesome;
+  background-color: #00a9e5;
+  border: 0;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+div[class*='highlight']:hover .copy-to-clipboard,
+div[class*='highlight'] .copy-to-clipboard:focus {
+  opacity: 1;
+}
+
+div[class*='highlight'] .copy-to-clipboard.copied {
+  opacity: 1;
+  background-color: #333;
+}
+
+div[class*='highlight'] .copy-to-clipboard:hover {
+  background-color: #333;
+}
+
+div[class*='highlight'] .copy-to-clipboard span {
+  display: none;
+  font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
 }
 
 @media print {

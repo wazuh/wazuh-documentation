@@ -44,7 +44,7 @@ Elasticsearch
 
   Version of Elasticsearch to install
 
-  *Default 7.3.2*
+  *Default 7.4.0*
 
 **elasticsearch_shards**
 
@@ -97,7 +97,7 @@ Kibana
 
   Version of Kibana to install
 
-  *Default 7.3.2*
+  *Default 7.4.0*
 
 **wazuh_version**
 
@@ -558,7 +558,7 @@ Wazuh Agent
 
   *Default null*
 
-  Multiple profiles can be included, separated by a comma and a space, by example:
+  Multiple profiles can be included, separated by a comma and a space, for example:
 
   .. code-block:: yaml
 

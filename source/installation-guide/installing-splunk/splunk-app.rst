@@ -19,7 +19,7 @@ Installation
 
     .. code-block:: console
 
-      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.10.2_7.3.0.tar.gz
+      # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/wazuhapp-splunk-3.10.2_8.0.0.tar.gz
 
 2. Install the Wazuh app for Splunk:
 
@@ -75,7 +75,7 @@ After installing the App following the **Official installation guide** in our **
   // Create the file that listens the outputs from the Wazuh API:
   # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
 
-Then, fill the outputs.conf file wit the next lines:
+Then, fill the outputs.conf file with the next lines:
 
 .. code-block:: xml
 
