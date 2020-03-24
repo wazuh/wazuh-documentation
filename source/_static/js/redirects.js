@@ -44,6 +44,12 @@ newUrls['3.12'] = [
   '/user-manual/capabilities/file-integrity/fim-synchronization.html',
 ];
 
+/* Pages added in 3.12 */
+
+newUrls['3.12'] = [
+  '/release-notes/release_3_12_0.html',
+];
+
 /* *** RELEASE 3.11 ****/
 
 /* Redirections from 3.10 to 3.11  */
