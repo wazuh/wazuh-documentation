@@ -41,7 +41,7 @@ Wazuh core
 - Added a status validation when starting Wazuh.
 - Added automatic reconnection with the Eventchannel service when it is restarted.
 - Made Windows agents send the keep-alive independently.
-- Source IP checking by default in the registration process in no longer enforced.
+- Source IP checking by default in the registration process is no longer enforced.
 - Fixed a small memory leak in clustered.
 - Fixed a crash in the fluent forwarder when SSL is not enabled.
 - Replaced non-reentrant functions to avoid race condition hazards.
