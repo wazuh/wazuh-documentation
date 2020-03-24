@@ -74,8 +74,8 @@ Wazuh API
 Wazuh ruleset
 -------------
 
-- Extended the rules to detect shellshock attacks (by @iasdeoupxe).
-- Updated Roundcube decoder to support versions greater than 1.4 (by @iasdeoupxe).
+- Extended the rules to detect shellshock attacks.
+- Updated Roundcube decoder to support versions greater than 1.4.
 - Added rules and decoders for Junos.
 - Fixed GPG requirement in Windows rules.
 - Improved Cisco decoders and fixed Owlh rule's IDs conflict.
