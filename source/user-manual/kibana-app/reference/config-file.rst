@@ -44,8 +44,6 @@ The configuration file reference is organized by sections:
     - `extensions.docker`_
 
 `Advanced index options`_
-    - `wazuh.shards`_
-    - `wazuh.replicas`_
     - `wazuh-version.shards`_
     - `wazuh-version.replicas`_
     - `wazuh.monitoring.shards`_
@@ -348,27 +346,6 @@ Advanced index options
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
-wazuh.shards
-^^^^^^^^^^^^
-
-Define the number of shards to use for the ``wazuh`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
-+--------------------+----------------------------+
-
-wazuh.replicas
-^^^^^^^^^^^^^^
-
-Define the number of replicas to use for the ``wazuh`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 0                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 0 |
-+--------------------+----------------------------+
 
 wazuh-version.shards
 ^^^^^^^^^^^^^^^^^^^^
