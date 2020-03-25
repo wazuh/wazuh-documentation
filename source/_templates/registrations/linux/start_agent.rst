@@ -1,15 +1,17 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-* For Systemd:
+.. tabs::
 
-.. code-block:: console
+ .. group-tab:: Using Systemd
 
- # systemctl restart wazuh-agent
+  .. code-block:: console
 
-* For SysV Init:
+   # systemctl restart wazuh-agent
 
-.. code-block:: console
+ .. group-tab:: SysV Init
 
- # service wazuh-agent restart
+  .. code-block:: console
+
+   # service wazuh-agent restart
 
 .. End of include file

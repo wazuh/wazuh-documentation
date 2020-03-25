@@ -1,16 +1,18 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-* Using Powershell:
+.. tabs::
 
-.. code-block:: console
+ .. group-tab:: Using Powershell
 
- # Restart-Service -Name wazuh
+  .. code-block:: console
 
-* Using Windows cmd:
+   # Restart-Service -Name wazuh
 
-.. code-block:: console
+ .. group-tab:: Using Windows cmd
 
- # net stop wazuh
- # net start wazuh
+  .. code-block:: console
+
+   # net stop wazuh
+   # net start wazuh
 
 .. End of include file

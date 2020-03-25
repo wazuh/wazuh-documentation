@@ -1,15 +1,17 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-* Using Systemd:
+.. tabs::
 
- .. code-block:: console
+ .. group-tab:: Using Systemd
 
-  # systemctl start wazuh-manager
+  .. code-block:: console
 
-* Using SysV Init:
+   # systemctl start wazuh-manager
 
- .. code-block:: console
+ .. group-tab:: Using SysV Init
 
-  # service wazuh-manager start
+  .. code-block:: console
+
+   # service wazuh-manager start
 
 .. End of include file

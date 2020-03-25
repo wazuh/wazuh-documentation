@@ -1,44 +1,90 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _registration-service:
+.. _other_registration_methods:
 
-Registering agents using Registration Service
-=============================================
+Other registration methods
+==========================
 
-If the ``OpenSSL`` package is installed before installing the manager, the package will create the certificate and key needed to run the authentication process called ``ossec-authd``. This certificate and key can be found on the manager in ``/var/ossec/etc/sslmanager.cert`` and
-``/var/ossec/etc/sslmanager.key``.
+Below are presented other agent registration methods:
 
-The ``ossec-authd`` service is used to obtain a unique key, one per each agent, which allows to authenticate with the Wazuh communication service and to encrypt traffic. The communication is done over TLS protocol.
-The ``agent-auth`` program is the client application used along with ``ossec-authd`` to automatically add the agent to the manager.
+.. _using_command_line:
 
-Below are presented three different scenarios of registering the agent using ``agent-auth`` program.
+Registering agents using the Command Line (CLI)
+-----------------------------------------------
 
-The agent registration can be adjusted by using different :ref:`agent-auth` options.
+This method consists on registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` program, extracting the registration key and inserting it in the agent.
 
-.. _simple-registration-service:
+.. note:: Root/Administrator user privileges are necessary to execute all the commands described below.
 
-Simple Registration Service
----------------------------
+Manager
+^^^^^^^
 
-This is the easiest method to register the agent. It doesn’t require any kind of authorization or host verification.
+1. On the CLI of the Wazuh manager host add the agent with ``manage_agents`` program providing new agent's name and IP address:
+
+   .. code-block:: console
+
+    # /var/ossec/bin/manage_agents -a <agent_IP> -n <agent_name>
+
+2. Find the ``ID`` of the agent:
+
+   .. code-block:: console
+
+    # /var/ossec/bin/manage_agents -l | grep <agent_name>
+
+   An example output of the command looks as follows:
+
+   .. code-block:: none
+           :class: output
+
+           ID: 001, Name: agent_1, IP: any
+
+3. Extract the agent's registration key using the agent's ID:
+
+   .. code-block:: console
+
+    # /var/ossec/bin/manage_agents -e <agent_id>
+
+   An example output of the command looks as follows:
+
+   .. code-block:: none
+           :class: output
+
+           Agent key information for '001' is:
+           MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
+
+   The ``key`` has to be imported to the agent to enable communication to the manager.
+
+Agent
+^^^^^
 
 Choose the tab corresponding to the agent host operating system:
 
 .. tabs::
 
- .. group-tab:: Linux/Unix host
+  .. group-tab:: Linux/Unix host
 
-   Open a session in the Linux/Unix agent host as a ``root`` user.
+   Open a session in your agent host as a ``root`` user.
 
-   1. Run the ``agent-auth`` program, using the manager’s IP address:
-
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
+   1. Import the registration key to the agent using ``manage_agents`` program:
 
     .. code-block:: console
 
-     # /var/ossec/bin/agent-auth -m <manager_IP>
+     # /var/ossec/bin/manage_agents -i <key>
 
-   2. Edit the agent's  ``/var/ossec/etc/ossec.conf`` configuration file:
+    An example output of the command should looks as follows:
+
+    .. code-block:: none
+            :class: output
+
+            Agent information:
+                ID:001
+                Name:agent_1
+                IP Address:any
+
+            Confirm adding it?(y/n): y
+            Added.
+
+   2. Edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -48,50 +94,273 @@ Choose the tab corresponding to the agent host operating system:
 
 
 
- .. group-tab:: Windows host
+  .. group-tab:: Windows host
 
-   Open a Powershell or CMD session in the agent host as an ``Administrator``.
+   Open a session in your agent host as an ``Administrator``.
 
     .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
-   1. Run the ``agent-auth.exe`` program, using the manager's IP address:
-
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
+   1. Import the registration key to the agent using ``manage_agents`` program:
 
     .. code-block:: console
 
-     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
+       # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
+
+    The example output of the command should looks as follows:
+
+    .. code-block:: none
+            :class: output
+
+            Agent information:
+                ID:001
+                Name:agent_1
+                IP Address:any
+
+            Confirm adding it?(y/n): y
+            Added.
 
    2. Edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   3. Start the agent.
+   3. Start the agent:
 
     .. include:: ../../_templates/registrations/windows/start_agent.rst
 
 
 
- .. group-tab:: MacOS X host
+  .. group-tab:: MacOS X host
 
-  Open a session in the MacOS X agent host as a ``root`` user.
+   Open a session in your agent host as a ``root`` user.
 
-  1. Run the ``agent-auth`` program, using the manager’s IP address:
+   1. Import the registration key to the agent using ``manage_agents`` program:
 
-   .. include:: ../../_templates/registrations/common/set_agent_name.rst
+    .. code-block:: console
 
-   .. code-block:: console
+     # /Library/Ossec/bin/manage_agents -i <key>
 
-    # /Library/Ossec/bin/agent-auth -m <manager_IP>
+    An example output of the command should looks as follows:
 
-  2. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+    .. code-block:: none
+            :class: output
 
-   .. include:: ../../_templates/registrations/common/client_server_section.rst
+            Agent information:
+    	         ID:001
+    	         Name:agent_1
+    	         IP Address:any
 
-  3. Start the agent:
+            Confirm adding it?(y/n): y
+            Added.
 
-   .. include:: ../../_templates/registrations/macosx/start_agent.rst
+   2. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
+    .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+   3. Start the agent:
+
+    .. include:: ../../_templates/registrations/macosx/start_agent.rst
+
+
+.. _restful_api_register:
+
+Registering agents using the Wazuh API
+--------------------------------------
+
+Wazuh API allows agent registration by running a single request from any host. This request returns agent's registration key, which must be manually added to the agent using ``manage_agents`` program.
+
+.. note:: Root user privileges are necessary to execute all the commands described below.
+
+Choose the tab corresponding to the agent host operating system:
+
+.. tabs::
+
+  .. group-tab:: Linux/Unix host
+
+   1. Open a session in the agent host as a root user. To add the agent to the manager and extract the registration key execute the API request replacing the values in the brackets:
+
+    .. code-block:: console
+
+     # curl -u <API_username>:<API_password> -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' -H 'Content-Type:application/json' "https://<manager_IP>:55000/agents?pretty"
+
+    The output of the API request returns the registration key:
+
+    .. code-block:: none
+            :class: output
+
+            {
+             "error": 0,
+             "data": {
+                 "id": "001",
+                 "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
+             }
+            }
+
+    More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
+
+   2. Import the registration key to the agent using ``manage_agents`` program. Replace the agent's registration key:
+
+    .. code-block:: console
+
+     # /var/ossec/bin/manage_agents -i <key>
+
+    An example output of the command looks as follows:
+
+    .. code-block:: none
+            :class: output
+
+            Agent information:
+               ID:001
+               Name:agent_1
+               IP Address:any
+
+            Confirm adding it?(y/n): y
+            Added.
+
+   3. Edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
+
+    .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+   4. Start the agent:
+
+    .. include:: ../../_templates/registrations/linux/start_agent.rst
+
+
+
+  .. group-tab:: Windows host
+
+   1. Open a Powershell session in the agent host as an Administrator and add the agent to the manager.
+
+    .. include:: ../../_templates/registrations/windows/installation_directory.rst
+
+    If the Wazuh API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in Powershell:
+
+    .. code-block:: powershell
+
+      > function Ignore-SelfSignedCerts {
+          add-type @"
+              using System.Net;
+              using System.Security.Cryptography.X509Certificates;
+              public class PolicyCert : ICertificatePolicy {
+                  public PolicyCert() {}
+                  public bool CheckValidationResult(
+                      ServicePoint sPoint, X509Certificate cert,
+                      WebRequest wRequest, int certProb) {
+                      return true;
+                  }
+              }
+      "@
+          [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+      }
+
+      > Ignore-SelfSignedCerts
+
+    Use ``Invoke-WebRequest`` to execute the Wazuh API request to register the Wazuh agent. Values in the angle brackets have to be replaced:
+
+    .. code-block:: console
+
+      # $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f <API_username>, <API_password>)))
+      # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<manager_IP>:55000/agents -Body @{name=<agent_name>} | ConvertFrom-Json
+
+    The command above returns the agent's ``ID``.
+
+   2. Extract the agent's key using the agent's ID. Values in the angle brackets have to be replaced:
+
+    .. code-block:: console
+
+     # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://<manager_IP>:55000/agents/<agent_ID>/key | ConvertFrom-Json
+
+    The output of the request returns the registration key:
+
+    .. code-block:: none
+            :class: output
+
+            {
+              "error": 0,
+              "data": {
+                  "id": "001",
+                  "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
+             }
+            }
+
+   3. Import the registration key to the agent using ``manage_agents`` program:
+
+    .. code-block:: console
+
+     # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i <key>
+
+    An example output of the command looks as follows:
+
+    .. code-block:: none
+            :class: output
+
+            Agent information:
+               ID:001
+               Name:agent_1
+               IP Address:any
+
+            Confirm adding it?(y/n): y
+            Added.
+
+   4. Edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+
+    .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+   5. Start the agent:
+
+    .. include:: ../../_templates/registrations/windows/start_agent.rst
+
+
+
+  .. group-tab:: MacOS X host
+
+   1. Open a session in the agent host as a root user. To add the agent to the manager and extract the registration key execute the API request replacing the values in the brackets:
+
+    .. code-block:: console
+
+     # curl -u <API_username>:<API_password> -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' -H 'Content-Type:application/json' "https://<manager_IP>:55000/agents?pretty"
+
+    The output of the API request returns the registration key:
+
+    .. code-block:: none
+            :class: output
+
+            {
+             "error": 0,
+             "data": {
+               "id": "001",
+               "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
+             }
+            }
+
+    More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
+
+   2. Import the registration key to the agent using ``manage_agents`` program. Replace the agent's registration key:
+
+    .. code-block:: console
+
+     # /Library/Ossec/bin/manage_agents -i <key>
+
+    An example output of the command looks as follows:
+
+    .. code-block:: none
+            :class: output
+
+            Agent information:
+                ID:001
+                Name:agent_1
+                IP Address:any
+
+            Confirm adding it?(y/n): y
+            Added.
+
+   3. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+
+    .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+   4. Start the agent:
+
+    .. include:: ../../_templates/registrations/macosx/start_agent.rst
 
 
 .. _password-authorization-registration-service:
@@ -99,7 +368,7 @@ Choose the tab corresponding to the agent host operating system:
 Registration Service with Password Authorization
 ------------------------------------------------
 
-This registration method is similar to ``Simple registration service`` except that it allows additional protection of the manager from unauthorized registrations by using a password.
+This registration method is similar to :ref:`Simple Registration Service <simple-registration-service>` except that it allows additional protection of the manager from unauthorized registrations by using a password.
 
 Manager
 ^^^^^^^
@@ -190,6 +459,8 @@ Choose the tab corresponding to the agent host operating system:
 
     .. include:: ../../_templates/registrations/linux/start_agent.rst
 
+   The agent registration can be adjusted by using different :ref:`agent-auth` options.
+
 
 
  .. group-tab:: Windows host
@@ -272,12 +543,14 @@ Choose the tab corresponding to the agent host operating system:
 
    .. include:: ../../_templates/registrations/macosx/start_agent.rst
 
+  The agent registration can be adjusted by using different :ref:`agent-auth` options.
+
 
 
 .. _host-verification-registration:
 
-Registering agents using Registration Service with Host Verification
---------------------------------------------------------------------
+Registration Service with Host Verification
+-------------------------------------------
 
 Using verification with an SSL key certificate provides confidence that the connection between the right agent and the right manager is established.
 
@@ -398,6 +671,8 @@ There are two options to register the agent using host verification:
 
       .. include:: ../../_templates/registrations/linux/start_agent.rst
 
+     The agent registration can be adjusted by using different :ref:`agent-auth` options.  
+
 
 
     .. group-tab:: Windows host
@@ -432,6 +707,8 @@ There are two options to register the agent using host verification:
 
       .. include:: ../../_templates/registrations/windows/start_agent.rst
 
+     The agent registration can be adjusted by using different :ref:`agent-auth` options.
+
 
 
     .. group-tab:: MacOS X host
@@ -465,6 +742,8 @@ There are two options to register the agent using host verification:
       .. code-block:: console
 
        # /Library/Ossec/bin/ossec-control start
+
+     The agent registration can be adjusted by using different :ref:`agent-auth` options.
 
 
 
@@ -581,11 +860,13 @@ There are two options to register the agent using host verification:
 
      3. Edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
 
-      .. include:: ../../_templates/registrations/common/client_server_section.rst
+       .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-     3. Start the agent.
+     4. Start the agent.
 
-      .. include:: ../../_templates/registrations/linux/start_agent.rst
+       .. include:: ../../_templates/registrations/linux/start_agent.rst
+
+     The agent registration can be adjusted by using different :ref:`agent-auth` options.
 
 
 
@@ -639,8 +920,10 @@ There are two options to register the agent using host verification:
 
        3. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
-        .. include:: ../../_templates/registrations/common/client_server_section.rst
+          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
        4. Start the agent.
 
-        .. include:: ../../_templates/registrations/macosx/start_agent.rst
+          .. include:: ../../_templates/registrations/macosx/start_agent.rst
+
+       The agent registration can be adjusted by using different :ref:`agent-auth` options.

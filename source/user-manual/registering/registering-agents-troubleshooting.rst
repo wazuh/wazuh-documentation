@@ -12,7 +12,7 @@ Registering agents - Troubleshooting
 Agent registers successfully but disappears after another agent is being registered.
 ------------------------------------------------------------------------------------
 
-By default, the manager attaches an agent to the visible IP of the agent. If the manager or the agents are, for example, behind a NAT, the agent should be registered with IP Address ``any``. That way ``any`` works as ``0.0.0.0/0``.
+By default, the manager attaches an agent to the visible IP of the agent. If the manager or the agents are, for example, behind a NAT, the agent should be registered with IP Address ``any``, which works as ``0.0.0.0/0``.
 
 1. To set up this behavior for a single registration:
 
