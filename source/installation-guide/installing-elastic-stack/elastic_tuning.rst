@@ -253,7 +253,7 @@ In a cluster with one node, the number of replicas should be set to zero:
   }'
 
 
-More information about configuring and shards and replicas can be found in the `Kibana configuration section <kibana_config_file>`_.
+More information about configuring and shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
 
 Reference:
 
