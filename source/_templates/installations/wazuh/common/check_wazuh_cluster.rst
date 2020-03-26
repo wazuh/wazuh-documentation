@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Finally, you can check if the Wazuh cluster is working and connected with:
+To verify that the Wazuh cluster is enabled and all the nodes are connected, execute:
 
   .. code-block:: console
 
@@ -10,6 +10,6 @@ Finally, you can check if the Wazuh cluster is working and connected with:
     worker-node1 worker  3.11.4   10.0.0.4
     worker-node2 worker  3.11.4   10.0.0.5
 
-Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are examples IPs. You will find your particular Wazuh server node IPs.
+Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 
 .. End of include file

@@ -10,8 +10,8 @@ This section shows the most relevant improvements and fixes in version 3.11.0. M
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.11.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.11.0/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.11.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.11.0-7.4.0/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.11.0-7.3.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.11.0-7.5.1/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/tree/v3.11.0-8.0.0/CHANGELOG.md>`_
 
 Wazuh core
 ----------
@@ -35,7 +35,7 @@ Wazuh core
 
 **Analysis engine**
 
-- Frequency based rules aggregate the counter for the same event source by default. Introduced a new setting to toggle this behaviour: ``global_frequency``.
+- Frequency based rules aggregate the counter for the same event source by default. Introduced a new setting to toggle this behavior: ``global_frequency``.
 - Fields ``protocol``, ``system_name``, ``data`` and ``extra_data`` can now be used for event matching in rules creation.
 - The ``ossec-makelist`` binary has been deprecated. The ``Analysisd`` daemon will compile the CDB lists on the startup.
 

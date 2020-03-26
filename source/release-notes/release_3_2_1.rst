@@ -40,7 +40,7 @@ Agents management
 
 Related to the agents management, the Operating System name detection in macOS and old Linux distributions has been fixed, retrieving the needed information correctly.
 
-In addition, agent labels are also inserted in JSON archives even when the event doesn`t match any rule.
+In addition, agent labels are also inserted in JSON archives even when the event does not match any rule.
 
 The API call ``GET/agents/purgeable/: timeframe`` has been restructured to add a new field called ``totalItems``. This field contains the number of agents that can be removed.
 

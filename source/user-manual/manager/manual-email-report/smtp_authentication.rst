@@ -25,7 +25,8 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 #. Configure Postfix in the ``/etc/postfix/main.cf`` file adding these lines to the end of the file:
 
     Ubuntu
-    ::
+
+    .. code-block:: cfg
 
       relayhost = [smtp.gmail.com]:587
       smtp_sasl_auth_enable = yes
@@ -35,7 +36,8 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
       smtp_use_tls = yes
 
     CentOS
-    ::
+
+    .. code-block:: cfg
 
       relayhost = [smtp.gmail.com]:587
       smtp_sasl_auth_enable = yes

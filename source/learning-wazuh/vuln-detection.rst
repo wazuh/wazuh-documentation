@@ -26,11 +26,13 @@ a dashboard dedicated to this.  We will also interact with the Wazuh API to more
 deeply mine the inventory data, and even take a look at the databases where it is
 stored.
 
-Configure ``syscollector`` for the all  agents
-----------------------------------------------
+Configure ``syscollector`` for all the agents
+---------------------------------------------
 
 In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents
-see the default configuration and find the syscollector section:
+see the default configuration and find the syscollector section.
+
+For Linux systems:
 
   .. code-block:: xml
 
@@ -47,7 +49,25 @@ see the default configuration and find the syscollector section:
         <processes>yes</processes>
       </wodle>
 
-By default it will collect inventory information for hardware, operating system,
+For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
+
+  .. code-block:: xml
+
+      <!-- System inventory -->
+      <wodle name="syscollector">
+        <disabled>no</disabled>
+        <interval>1h</interval>
+        <scan_on_start>yes</scan_on_start>
+        <hardware>yes</hardware>
+        <os>yes</os>
+        <network>yes</network>
+        <packages>yes</packages>
+        <ports all="no">yes</ports>
+        <processes>yes</processes>
+        <hotfixes>yes</hotfixes>
+      </wodle>
+
+By default, it will collect inventory information for hardware, operating system,
 network interfaces, installed packages, open ports and running processes every hour.
 
 Configure ``vulnerability-detector`` on  the Wazuh Manager
@@ -127,7 +147,8 @@ The ``vulnerability-detector`` module generates logs on the manager, and ``sysco
 
 Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an agent:
 
-  .. code-block:: xml
+  .. code-block:: none
+      :class: output
 
       2019/11/14 19:21:21 wazuh-modulesd:syscollector: INFO: Module started.
       2019/11/14 19:21:22 wazuh-modulesd:syscollector: INFO: Starting evaluation.
@@ -135,9 +156,13 @@ Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an ag
 
 and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager
 
-  .. code-block:: console
+  .. code-block:: none
 
       [root@wazuh-manager ~]# grep vulnerability-detector: /var/ossec/logs/ossec.log
+
+  .. code-block:: none
+      :class: output
+
       2020/01/31 17:26:27 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting Red Hat Enterprise Linux database update.
       2020/01/31 17:26:46 wazuh-modulesd:vulnerability-detector: INFO: (5494): The update of the Red Hat Enterprise Linux feed finished successfully.
       2020/01/31 17:26:48 wazuh-modulesd:vulnerability-detector: INFO: (5461): Starting National Vulnerability Database database update.
@@ -155,21 +180,19 @@ See the alerts in Kibana
 Search Kibana for ``vulnerability-detector``, selecting some of the more helpful
 fields for viewing like below:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png          |
-    |     :title: Found Vulnerabilities                                         |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-found-list.png
+    :title: Found Vulnerabilities
+    :align: center
+    :width: 100%
+
 
 Expand one of the records to see all the information available:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png               |
-    |     :title: Vulnerability event                                           |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-found.png
+    :title: Vulnerability event
+    :align: center
+    :width: 100%
+
 
 Note all the available fields and remember that the different components of Wazuh
 may be configured to act differently depending on the fields of each alert, as
@@ -197,9 +220,13 @@ hardware and operating system data is also tracked.
 1. Run ``agent_control -l`` on the Wazuh Manager to list your agents as you will
    need to query the API by agent id number:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
       [root@wazuh-manager centos]# agent_control -l
+
+  .. code-block:: none
+      :class: output
 
       Wazuh agent_control. List of available agents:
        ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
@@ -221,9 +248,13 @@ hardware and operating system data is also tracked.
 Where ``wazuhapiuser:wazuhlab`` are the credentials for the API.
 The results should look like this:
 
-  .. code-block:: console
+  .. code-block:: none
 
     [root@linux-agent centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://172.30.0.10:55000/syscollector/003/hardware?pretty"
+
+  .. code-block:: json
+      :class: output
+
       {
          "error": 0,
          "data": {
@@ -260,6 +291,10 @@ The results should look like this:
   .. code-block:: console
 
       [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -XGET "https://localhost:55000/syscollector/003/os?pretty"
+
+  .. code-block:: json
+      :class: output
+
       {
          "error": 0,
          "data": {
@@ -318,6 +353,10 @@ The results should look like this:
   .. code-block:: console
 
         [root@wazuh-manager centos]# curl -u wazuhapiuser:wazuhlab -k -X GET "https://172.30.0.10:55000/experimental/syscollector/packages?name=curl&pretty"
+
+  .. code-block:: json
+        :class: output
+
         {
            "error": 0,
            "data": {
@@ -396,6 +435,9 @@ the ``syscollector`` scan results for each agent.
 
       [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db .tables
 
+  .. code-block:: none
+      :class: output
+
       ciscat_results        sca_policy            sys_netproto
       fim_entry             sca_scan_info         sys_osinfo
       metadata              scan_info             sys_ports
@@ -414,6 +456,10 @@ The ``sys_`` table are populated by ``syscollector``.
 
       [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db 'select * from sys_osinfo;' -header
 
+
+  .. code-block:: none
+      :class: output
+
       scan_id|scan_time|hostname|architecture|os_name|os_version|os_codename|os_major|os_minor|os_build|os_platform|sysname|release|version|os_release
       1059274052|2019/12/24 14:43:41|linux-agent|x86_64|CentOS Linux|7.7||7|7||centos|Linux|3.10.0-1062.9.1.el7.x86_64|#1 SMP Fri Dec 6 15:49:49 UTC 2019|
 
@@ -424,6 +470,10 @@ The ``sys_`` table are populated by ``syscollector``.
   .. code-block:: console
 
       [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/002.db "select name,version,description from sys_programs;" -header
+
+
+  .. code-block:: none
+      :class: output
 
       name|version|description
       kbd-legacy|1.15.5-15.el7|Legacy data for kbd package
@@ -453,13 +503,11 @@ is in the Wazuh Kibana plugin itself.  Both in the **Overview** section as well 
 when you have drilled down into a specific agent, you can open the **Vulnerabilities**
 tab to see a nice dashboard of this information:
 
-    +---------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png                |
-    |     :title: flood                                                         |
-    |     :align: center                                                        |
-    |     :width: 100%                                                          |
-    +---------------------------------------------------------------------------+
 
+.. thumbnail:: ../images/learning-wazuh/labs/vuln-dash.png
+    :title: Flood
+    :align: left
+    :width: 100%
 
 
 Optional exercise

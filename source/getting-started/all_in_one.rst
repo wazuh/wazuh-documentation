@@ -79,7 +79,7 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The specification file ``/usr/share/elasticsearch/instances.yml`` must be created as follows:
+#. The specification file ``/usr/share/elasticsearch/instances.yml`` can be created as follows:
 
     .. code-block:: yaml
 
@@ -152,27 +152,33 @@ Kibana installation and configuration
             .. include:: ../_templates/installations/elastic/zypp/install_kibana.rst
 
 
-#. Copy the Elasticsearch certificates into Kibana configuration folder:
+#. Copy the Elasticsearch certificates into the Kibana configuration folder:
 
     .. include:: ../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../_templates/installations/elastic/common/configure_kibana.rst
+    .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
 #. Install the Wazuh Kibana plugin:
 
+    The installation of the plugin must be done from the Kibana home directory.
+
     .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.5.2.zip
+        # cd /usr/share/kibana
+
+    .. code-block:: console
+
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
 
 #. Enable and start the Kibana service:
 
     .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
 
-  On the first Kibana access, the browser will prompt a warning message. This can be accepted either by clicking on ``Advanced options`` or by adding in browser's settings the ``ca.crt`` previously created.
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
-.. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
 
 .. _all_in_one_wazuh:
@@ -240,7 +246,7 @@ Installing the Wazuh manager
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating system. In this guide, it has been used the 10.x version but a more recent one can be installed.
+Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
 
 
 .. tabs::
@@ -267,7 +273,7 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 .. note::
-  Now, that the Wazuh API is installed, it is strongly recommended to secure the API. In the document :ref:`securing_api` it is explained how to enable the HTTPS communication, how to change the default user and password and more.
+  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
 
 .. _wazuh_server_packages_filebeat:
 
@@ -331,11 +337,11 @@ Filebeat installation and configuration
         .. include:: ../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
-#. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/elastic-secured-3.10/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/filebeat/7.x/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -353,7 +359,7 @@ Filebeat installation and configuration
 
     .. include:: ../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. .. include:: ./../_templates/installations/elastic/common/copy_certificates_filebeat_aio.rst
+    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Enable and start the Filebeat service:
 
@@ -472,3 +478,27 @@ To uninstall Elasticsearch:
 
     .. include:: ../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
 
+
+To uninstall Kibana:
+
+.. tabs::
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../_templates/installations/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../_templates/installations/elastic/zypp/uninstall_kibana.rst

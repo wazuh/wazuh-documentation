@@ -66,7 +66,7 @@ Kibana installation and configuration
             .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
-#. The next step may vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one. It consists on certificate placement:
+#. The next step, involving the certificate placement, may vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
 
     .. tabs::
@@ -96,6 +96,12 @@ Kibana installation and configuration
 
 #. Install the Wazuh Kibana plugin:
 
+    The installation of the plugin must be done from the Kibana home directory.
+
+    .. code-block:: console
+
+        # cd /usr/share/kibana
+
     .. code-block:: console
 
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
@@ -104,12 +110,67 @@ Kibana installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
-    The first time you use a browser to access Kibana, the browser will show a warning message stating that the certificate was not issued by a trusted authority. This can be accepted either by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
+Disabling repositories
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
+
+
+.. tabs::
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/elastic/deb/disabling_repositories.rst
+
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../_templates/installations/elastic/yum/disabling_repositories.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../_templates/installations/elastic/zypp/disabling_repositories.rst
+
 
 Next steps
-----------
+~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, you may install a Wazuh agent in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+
+Uninstall Kibana
+~~~~~~~~~~~~~~~~
+
+To uninstall Kibana:
+
+.. tabs::
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_kibana.rst

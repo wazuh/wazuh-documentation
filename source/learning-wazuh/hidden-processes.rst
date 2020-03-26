@@ -51,7 +51,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
     will not be overwritten.
     The settings in **local_internal_options.conf** always take precedence over the
     settings in **internal_options.conf,** so editing the **local_internal_options.conf** file will ensure your
-    changes will not be overriden.
+    changes will not be overridden.
 
 5. Install certain packages required for building the rootkit:
 
@@ -84,35 +84,47 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
         or ``bash: kill: (509) - No such process`` in the next step, you can restart the linux-agent machine
         and try again. Sometimes it will take several tries to work.
 
-The kernel-level rootkit “Diamorphine” is now installed on this system! By default it is hidden so we
-are not able to detect it by running “lsmod”.  Only with a special "kill" signal can we make Diamorphine
-unhide itself:  Try it out:
+        The kernel-level rootkit “Diamorphine” is now installed on this system! By default it is hidden so we are not able to detect it by running “lsmod”.  Only with a special "kill" signal can we make Diamorphine unhide itself. Try it out:
 
     .. code-block:: console
 
         # lsmod | grep diamorphine
         # kill -63 509
         # lsmod | grep diamorphine
+
+    .. code-block:: console
+        :class: output
+
         diamorphine            13155  0
+
+    .. code-block:: console
+
         # kill -63 509
         # lsmod | grep diamorphine
-        #
 
+    When using these last commands, an empty output is expected.
 
-    In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not,
-    will toggle whether the Diamorphine kernel module hides itself.
+    In the case of Diamorphine, any attempt to send a kill signal ``-63`` to any process whether it exists or not, will toggle whether the Diamorphine kernel module hides itself.
 
     This rootkit also allows you to hide a selected processes from being seen by the "ps" command for example.
-    Run the following commands to see how the rsyslog process is first visible, then send the ``-31`` signal to
-    its pid and observe how the process is no longer visible
+    Run the following commands to see how the rsyslog process is first visible, then send the ``-31`` signal to its pid and observe how the process is no longer visible.
 
     .. code-block:: console
 
         # ps auxw | grep rsyslogd | grep -v grep
+
+    .. code-block:: console
+        :class: output
+
         root       732  0.0  0.7 214452  3572 ?        Ssl  14:53   0:00 /usr/sbin/rsyslogd -n
+
+    .. code-block:: xml
+
         # kill -31 $(pidof rsyslogd)
         # ps auxw | grep rsyslog | grep -v grep
-        #
+
+
+    When using these last commands, an empty output is expected.
 
 9. Next configure linux-agent to run rootcheck scans every 5 minutes setting the ``frequency`` option the ``<rootcheck>`` section of your agent's ``/var/ossec/etc/ossec.conf`` file to **300** with the following:
 
@@ -162,7 +174,8 @@ unhide itself:  Try it out:
 
     You should see something like this shortly:
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
 
             2019/10/18 14:47:05 rootcheck[464] rootcheck.c:197 at rootcheck_init(): DEBUG: Starting ...
             2019/10/18 14:47:05 rootcheck[464] rootcheck.c:246 at rootcheck_connect(): DEBUG: Starting queue ...
@@ -191,7 +204,8 @@ unhide itself:  Try it out:
 11. Now switch back to the manager, and look for alerts in ``/var/ossec/logs/alerts/alerts.log``
     similar to these ones:
 
- .. code-block:: console
+ .. code-block::  none
+     :class: output
 
      ** Alert 1571420732.2395049: - ossec,rootcheck,gdpr_IV_35.7.d,
             2019 Oct 18 17:45:32 (agent) any->rootcheck
@@ -236,7 +250,7 @@ unhide itself:  Try it out:
 
 16. In the ``<rootcheck>`` section of linux-agent's ``/var/ossec/etc/ossec.conf`` file, disable rootcheck for now.
 
-        .. code-block:: console
+        .. code-block:: xml
 
             <disabled>yes</disabled>
 

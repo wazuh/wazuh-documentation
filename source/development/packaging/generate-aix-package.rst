@@ -28,6 +28,9 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
   # ./generate_wazuh_packages.sh -h
 
+.. code-block:: none
+  :class: output
+
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -b, --branch <branch>               Select Git branch or tag e.g.
@@ -47,18 +50,18 @@ Below, you will find some examples of how to build an AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.3
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|
 
-This will generate a 3.11.3 Wazuh agent AIX package.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v3.11.3 -c
-
-This will generate a 3.11.3 Wazuh agent AIX package with checksum.
+This will generate a |WAZUH_LATEST| Wazuh agent AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v3.11.3  -p /opt
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -c
 
-This will generate a 3.11.3 Wazuh agent AIX package with ``/opt`` as installation directory.
+This will generate a |WAZUH_LATEST| Wazuh agent AIX package with checksum.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|  -p /opt
+
+This will generate a |WAZUH_LATEST| Wazuh agent AIX package with ``/opt`` as installation directory.

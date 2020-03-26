@@ -23,6 +23,10 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 	.. code-block:: console
 
 		ansible@ansible:/etc/ansible/wazuh-ansible$ ansible all -m ping
+
+	.. code-block:: none
+		:class: output
+
 		192.168.0.108 | SUCCESS => {
 		    "changed": false,
 		    "ping": "pong"
@@ -41,6 +45,10 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
+
+.. code-block:: none
+	:class: output
+
 	CHANGELOG.md  playbooks  README.md  roles  VERSION
 
 We can see the roles we have.
@@ -48,6 +56,10 @@ We can see the roles we have.
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
+
+.. code-block:: none
+	:class: output
+
 	roles
 	├── ansible-galaxy
 	│   └── meta
@@ -92,6 +104,10 @@ And we can see the preconfigured playbooks we have.
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
+
+.. code-block:: none
+	:class: output
+
 	playbooks/
 	├── wazuh-agent.yml
 	├── wazuh-elastic_stack-distributed.yml
@@ -144,9 +160,13 @@ We could configure these three files and execute them, but we are going to creat
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/wazuh-ansible$ cat wazuh-elk.yml
+
+.. code-block:: yaml
+	:class: output
+
 	- hosts: 192.168.0.108
 	  roles:
-	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
+	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
 	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
 As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry.
@@ -174,7 +194,8 @@ It seems that we are ready to run the playbook and start the installation, but s
 We will obtain a final result similar to the one shown in the following code block.
 
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	TASK [ansible-role-kibana : Make sure Elasticsearch is running before proceeding.] ************************************************************************
 	ok: [192.168.0.108]
@@ -215,8 +236,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	PLAY RECAP ************************************************************************************************************************************************
 	192.168.0.108              : ok=43   changed=23   unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
-
 
 We can check the status of our new services in our Elastic Stack server.
 
@@ -225,6 +244,10 @@ We can check the status of our new services in our Elastic Stack server.
 .. code-block:: console
 
 	root@elk:/home/elk# systemctl status elasticsearch.service
+
+.. code-block:: none
+	:class: output
+
 	● elasticsearch.service - Elasticsearch
 	   Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
 	  Drop-In: /etc/systemd/system/elasticsearch.service.d
@@ -236,6 +259,10 @@ We can check the status of our new services in our Elastic Stack server.
 .. code-block:: console
 
 	root@elk:/home/elk# systemctl status kibana.service
+
+.. code-block:: none
+	:class: output
+
 	● kibana.service - Kibana
 	   Loaded: loaded (/etc/systemd/system/kibana.service; enabled; vendor preset: enabled)
 	   Active: active (running) since Thu 2018-09-13 16:53:32 CEST; 4min 58s ago

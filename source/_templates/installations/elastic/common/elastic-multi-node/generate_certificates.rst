@@ -28,7 +28,8 @@
     Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
     - A ``filebeat`` instance with IP ``10.0.0.5``. It is a Wazuh single-node cluster.
-    - Three ``elasticsearch`` instances, #1, #2 and #3 with their respective IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. Both belong to a three Elasticsearch cluster nodes. In case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respective names and IPs.
+
+    - Three ``elasticsearch`` instances, #1, #2 and #3 with their respective IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. All belong to three Elasticsearch cluster nodes. In case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respective names and IPs.
 
     Replace the IPs with the hosts' IPs.
 

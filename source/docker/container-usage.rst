@@ -22,6 +22,10 @@ Access to containers and services
     .. code-block:: console
 
       $ docker-compose ps
+
+    .. code-block:: none
+      :class: output
+
               Name                  Command                        State     Ports
 
       wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
@@ -141,7 +145,7 @@ Both volumes and bind mounts can be specified in the ``docker-compose.yml``. For
 
 Bind mount:
 
-.. code-block:: console
+.. code-block:: yaml
 
 	 elasticsearch:
 	    . . .
@@ -151,7 +155,7 @@ Bind mount:
 
 Volume:
 
-.. code-block:: console
+.. code-block:: yaml
 
     elasticsearch:
       . . .
@@ -166,9 +170,17 @@ Volume:
 Upgrades
 --------
 
-Upgrades on containers are done differently from traditional upgrades, due to the entire philosophy behind containers being prepackaged software isolated from the host system. To upgrade a container, simply change the version number of each service to the desired version in the ``docker-compose.yml`` file. Then, pull down the service and bring it up again.
+Performing container updates differs from performing normal updates. For this we recommend the use of volumes.
 
-.. note:: As mentioned before, Docker's storage is not persistent. Consider mounting a volume to the container to preserve configuration files before you upgrade.
+For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would uncomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
+
+.. code-block:: yaml
+
+      volumes:
+         - /home/my/custom/path:/var/ossec/data:Z
+  #      - my-path:/etc/postfix:Z
+  #      - my-path:/etc/filebeat
+  #      - my-custom-config-path/ossec.conf:/wazuh-config-mount/etc/ossec.conf
 
 Custom commands and scripts
 ---------------------------

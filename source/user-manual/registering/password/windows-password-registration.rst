@@ -25,7 +25,7 @@ After that, you can register the agent using ``agent-auth.exe`` and your passwor
 
     b) Run the program with the ``-P`` flag, and insert the password:
 
-    .. code-block:: none
+    .. code-block:: console
 
       # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -P "TopSecret"
 
@@ -56,4 +56,3 @@ After that, you can register the agent using ``agent-auth.exe`` and your passwor
 
 			# net stop wazuh
 			# net start wazuh
-
