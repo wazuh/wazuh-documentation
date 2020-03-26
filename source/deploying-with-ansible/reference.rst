@@ -571,7 +571,7 @@ Wazuh Agent
   .. code-block:: yaml
 
     wazuh_agent_authd:
-      registration_address:127.0.0.1
+      registration_address: 10.1.1.12
       enable: false
       port: 1515
       ssl_agent_ca: null
