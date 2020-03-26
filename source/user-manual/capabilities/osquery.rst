@@ -74,7 +74,7 @@ Once installed, you will need a configuration file for Osquery. If you don't hav
 
 Or you can copy our custom configuration in ``/etc/osquery/osquery.conf``:
 
-.. code-block:: console
+.. code-block:: json
 
     {
         "options": {

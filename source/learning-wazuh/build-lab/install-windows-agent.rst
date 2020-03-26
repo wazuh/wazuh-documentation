@@ -102,6 +102,9 @@ your self-registered agents.
     .. code-block:: none
         :class: output
 
+    .. code-block:: none
+        :class: output
+
         Wazuh agent_control. List of available agents:
            ID: 000, Name: wazuh-manager (server), IP: 127.0.0.1, Active/Local
            ID: 001, Name: linux-agent, IP: 172.30.0.30, Active

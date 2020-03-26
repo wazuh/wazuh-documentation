@@ -270,7 +270,7 @@ If you are hosting Splunk web behind a proxy that does not place it at the proxy
 
 For example, if your proxy hosts Splunk web at ``yourhost.com:8000/splunk``, you have to set up the ``root_endpoint`` option like this:
 
-    .. code-block:: console
+    .. code-block:: none
 
       [settings]
       root_endpoint=/splunk

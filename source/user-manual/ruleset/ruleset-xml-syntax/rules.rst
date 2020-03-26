@@ -1043,7 +1043,6 @@ Examples:
 
   .. code-block:: xml
 
-
     <rule id="100015" level="2">
       ...
       <description> A timeout occurred. </description>

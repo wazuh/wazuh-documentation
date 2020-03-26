@@ -30,7 +30,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.11'
+version = '3.12'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -87,7 +87,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prefixed to all description
+# If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 
@@ -311,7 +311,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be an ISBN number
+# The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -402,19 +402,19 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.11.4",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.11.4",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.11.4",
-    "|WAZUH_LATEST_PUPPET|" : "3.11.4",
-    "|WAZUH_LATEST_OVA|" : "3.11.4",
-    "|WAZUH_LATEST_DOCKER|" : "3.11.4",
+    "|WAZUH_LATEST|" : "3.12.0",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
+    "|WAZUH_LATEST_PUPPET|" : "3.12.0",
+    "|WAZUH_LATEST_OVA|" : "3.12.0",
+    "|WAZUH_LATEST_DOCKER|" : "3.12.0",
     "|ELASTICSEARCH_LATEST|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.0",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
-    "|SPLUNK_LATEST|" : "8.0.1",
+    "|SPLUNK_LATEST|" : "8.0.2",
     "|ELASTIC_6_LATEST|" : "6.8.7",
 }   
 

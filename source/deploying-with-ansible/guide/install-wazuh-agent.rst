@@ -249,8 +249,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	PLAY RECAP ************************************************************************************************************************************************
 	192.168.0.102              : ok=12   changed=8    unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
-
 
 We can check the status of our new services in our Wazuh agent.
 
