@@ -12,6 +12,7 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
    # curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&sort=-ip,name"
 
 .. code-block:: json
+   :class: output
 
    {
       "error": 0,

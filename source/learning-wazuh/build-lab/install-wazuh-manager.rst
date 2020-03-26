@@ -71,6 +71,10 @@ listener are in place:
 
       [root@wazuh-manager ~]# systemctl restart wazuh-manager
       [root@wazuh-manager ~]# netstat -natp | egrep "(:1514|:1515)"
+
+    .. code-block:: none
+      :class: output
+
       tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/ossec-remoted
       tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/ossec-authd
 
@@ -131,20 +135,20 @@ and archived events to the Elasticsearch service.
 
   .. code-block:: console
 
-    # yum install filebeat-7.5.2
+    # yum install filebeat-|ELASTICSEARCH_LATEST|
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.3/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 5. Download the Wazuh module for Filebeat:

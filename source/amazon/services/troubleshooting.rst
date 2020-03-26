@@ -18,14 +18,16 @@ After configuring the module successfully users can expect to see the following 
 
 1. Module starting:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2019/10/28 13:58:10 wazuh-modulesd:aws-s3[8184] wm_aws.c:48 at wm_aws_main(): INFO: Module AWS started
 
 
 2. Scheduled scan:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2019/10/28 13:58:10 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
         2019/10/28 13:38:11 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
@@ -40,7 +42,8 @@ Common errors
 
     The number is the AWS Account ID provided for the CloudTrail, and the name in the parenthesis is the AWS Account Alias (if provided).
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2019/10/28 13:58:11 wazuh-modulesd:aws-s3: WARNING: Bucket: wazuh-cloudtrail  -  Returned exit code 3
         2019/10/28 13:58:11 wazuh-modulesd:aws-s3: WARNING: Bucket: wazuh-cloudtrail  -  Invalid credentials to access S3 Bucket
@@ -77,6 +80,8 @@ Common errors
     +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 13        | Error sending message to Wazuh                       | Ensure that Wazuh is running                                                                                                                                  |
     +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 14        | Empty bucket                                         | Ensure that the path to the log files is right                                                                                                                |
+    +-----------+------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 2. Debugging configuration:
@@ -105,7 +110,8 @@ Common errors
 
     This will print debug data to the console and log.  The debug will also output the command that the wodle is using to execute the Python script for each service.  If a particular service is causing problems, this command can be manually executed, increasing the debug level from 1 (basic) to 3 (extremely verbose)
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         # 2019/10/28 14:08:28 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): DEBUG: Launching S3 Command: /var/ossec/wodles/aws/aws-s3 --bucket wazuh-cloudtrail --access_key XXXXXXXX --secret_key XXXXXXXX --type cloudtrail --debug 2 --skip_on_error
 
@@ -113,7 +119,8 @@ Common errors
 
     In this case a simple warning will be displayed. There is no impact in the event data fetching process and the module will keep running.
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         # 2019/10/28 14:08:31 wazuh-modulesd:aws-s3[2557] wm_aws.c:409 at wm_aws_run_s3(): WARNING: Interval overtaken.
 
@@ -141,6 +148,10 @@ Common errors
       **AWS VPC**
 
         <bucket_name>/<prefix>/AWSLogs/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>
+
+      **Cisco Umbrella**
+
+        <bucket_name>/<prefix>/<year>-<month>-<day>
 
       **Use case**
 

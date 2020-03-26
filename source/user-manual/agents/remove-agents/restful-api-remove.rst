@@ -12,6 +12,7 @@ The request `DELETE /agents <https://documentation.wazuh.com/current/user-manual
     # curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents?older_than=10s&ids=005,006,007&pretty"
 
 .. code-block:: json
+    :class: output
 
     {
         "error": 0,

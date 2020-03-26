@@ -72,7 +72,7 @@ For example, to define a rule that logs all write access to, and every attribute
 
 System Call Rules
 -----------------
-To define a system call rule, use the following syntax:::
+To define a system call rule, use the following syntax: ::
 
    -a action,filter -S system_call -F field=value -k key_name
 

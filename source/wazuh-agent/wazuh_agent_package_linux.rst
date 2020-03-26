@@ -97,7 +97,7 @@ Installing Wazuh agent
 
           .. include:: ../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
 
-      See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
+    See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 
 #. **(Optional)** Disable the Wazuh updates:
 
