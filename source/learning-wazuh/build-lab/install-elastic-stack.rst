@@ -117,10 +117,6 @@ events and archives stored in Elasticsearch. More info at `Kibana
   .. code-block:: console
 
     # cat >> /etc/kibana/kibana.yml << EOF
-
-  .. code-block:: none
-    :class: output
-
     server.host: "0.0.0.0"
     server.port: 443
     EOF
