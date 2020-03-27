@@ -14,4 +14,11 @@
 
    # service wazuh-agent restart
 
+ .. group-tab:: For Unix host
+
+  .. code-block:: console
+
+   # /var/ossec/bin/ossec-control start
+   
+
 .. End of include file

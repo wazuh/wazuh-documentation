@@ -8,7 +8,10 @@ Registering agents
 .. meta::
   :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
 
-The Wazuh agent registration process enables agent-manager communication, which requires a pre-shared key available on both sides. This key is used to establish an encrypted and authenticated communication channel by using `AES algorithm <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications/>`_, allowing the manager to receive data collected by the agent.
+Wazuh agents communicate with the Wazuh server using outbound TCP/UDP connections to two different services:
+
+ - 1515/TCP: Service used for agents registration, to obtain a unique key. The communication is done over TLS. The obtained unique key (one per agent) is used later to authenticate with the Wazuh service (1514/TCP-UDP) and to encrypt traffic.
+ - 1514/TCP-UDP: Service used to send collected data and control messages.
 
 .. note::
 
@@ -17,7 +20,7 @@ The Wazuh agent registration process enables agent-manager communication, which 
 
 .. _simple-registration-service:
 
-Registering agent using Simple Registration Service
+Registering agent using simple registration service
 ---------------------------------------------------
 
 To register the agent, choose the tab corresponding to the agent host operating system:
@@ -28,15 +31,15 @@ To register the agent, choose the tab corresponding to the agent host operating 
 
    Open a session in the Linux/Unix agent host as a ``root`` user.
 
-   1. Run the ``agent-auth`` program, using the manager’s IP address:
-
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
+   1. To register the agent, run the ``agent-auth`` program, using the manager’s IP address:
 
     .. code-block:: console
 
      # /var/ossec/bin/agent-auth -m <manager_IP>
 
-   2. Edit the agent's  ``/var/ossec/etc/ossec.conf`` configuration file:
+    If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+
+   2. To enable the communication with the manager, edit the agent's  ``/var/ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -55,15 +58,15 @@ To register the agent, choose the tab corresponding to the agent host operating 
 
     .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
-   1. Run the ``agent-auth.exe`` program, using the manager's IP address:
-
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
+   1. To register the agent, run the ``agent-auth.exe`` program, using the manager's IP address:
 
     .. code-block:: console
 
      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
 
-   2. Edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+    If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+
+   2. To enable the communication with the manager, edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -77,15 +80,15 @@ To register the agent, choose the tab corresponding to the agent host operating 
 
   Open a session in the MacOS X agent host as a ``root`` user.
 
-  1. Run the ``agent-auth`` program, using the manager’s IP address:
-
-   .. include:: ../../_templates/registrations/common/set_agent_name.rst
+  1. To register the agent, run the ``agent-auth`` program, using the manager’s IP address:
 
    .. code-block:: console
 
     # /Library/Ossec/bin/agent-auth -m <manager_IP>
 
-  2. Edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+   If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+
+  2. To enable the communication with the manager, edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
    .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -95,17 +98,28 @@ To register the agent, choose the tab corresponding to the agent host operating 
 
   The agent registration can be adjusted by using different :ref:`agent-auth` options.
 
+The above method is the simplest way of registering agents. There are also available other registration methods:
 
-The above method is the simplest way of registering the agent. There are also available :ref:`other registration methods <other_registration_methods>`.
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| Registration method                                                                                 | Description                                                                                                                                      |
++=====================================================================================================+==================================================================================================================================================+
+| :ref:`Using command line (CLI) <command-line-registration>`                                         | Manual registeration using ``manage_agents`` program. Requires extracting the registration key from the manager and inserting it in the agent.   |
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using Wazuh API <restful-api-registration>`                                                   | Uses a simple Wazuh API request from any host. Requires adding returned registration key to the agent using ``manage_agents`` program.           |
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using registration service with password authorization <password-authorization-registration>` | Registration using ``agent-auth`` program. Allows additional protection of the manager from unauthorized registrations by using a password.      |
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Using registration service with host verification <host-verification-registration>`           | Registration using ``agent-auth`` program. Provides confidence that the connection between the right agent and the right manager is established. |
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
 To learn more about the agent registration process, please read the :ref:`registering agents - additional information <registering_agent_theory>`.
-
-In case of problems during the registration, several solutions can be found on :ref:`registering agents' troubleshooting <registering-agents-troubleshooting>`.
 
 .. toctree::
     :maxdepth: 2
     :hidden:
 
-    other-registration-methods
+    command-line-registration
+    restful-api-registration
+    password-authorization-registration
+    host-verification-registration
     registering-agents-theory
-    registering-agents-troubleshooting
