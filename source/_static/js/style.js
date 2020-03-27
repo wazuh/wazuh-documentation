@@ -183,6 +183,7 @@ $(function() {
     }
 
     heightNavbar();
+    adjustLightboxHeight();
   });
 
   const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'wheel';
@@ -678,13 +679,22 @@ $(function() {
   $('#lightboxOverlay, #lightbox, #lightbox .lb-close').on('click', function(e) {
     $('html, body').css('overflow', '');
     $('.side-scroll').removeAttr('style');
-    menuHeight();
   });
 
   $('#lightbox .lb-details span, #lightbox .lb-dataContainer :not(.lb-close)').on('click', function(e) {
     e.stopPropagation();
     $('html, body').css('overflow', 'hidden');
   });
+  adjustLightboxHeight();
+
+  /**
+   * Checks the real height of .no-latest-notice in order to add the appropriate top margin to the lightbox element.
+   * If .no-latest-notice is not visible, the margin is zero
+   */
+  function adjustLightboxHeight() {
+    noLatestHeight = document.querySelector('.no-latest-notice').offsetHeight;
+    $('#lightbox').css('margin-top', noLatestHeight );
+  }
 
   /* Restore overflow when pressing key 'Esc' */
   $(document).on('keydown', function(e) {
@@ -744,6 +754,7 @@ $(function() {
     setTimeout(function() {
       $(ele).find('span').css({'display': 'none'});
       $(ele).find('i').css({'display': 'block'});
+      $(ele).focus();
     }, 1000);
   });
 

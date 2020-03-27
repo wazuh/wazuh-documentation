@@ -9,7 +9,7 @@ File integrity monitoring (Syscheck) is performed by comparing the cryptographic
 
 First, the Wazuh agent scans the system at an interval you specify, and it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. Then, the server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is sent if the checksum (or another file attribute) changes.  Wazuh also supports near real-time file integrity checking where this is desired.
 
-`Syscheck <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/syscheck.html>`_  can be used to meet PCI DSS requirement 11.5:
+:ref:`Syscheck <reference_ossec_syscheck>`  can be used to meet PCI DSS requirement 11.5:
 
     | **11.5** Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.
     |
@@ -30,12 +30,30 @@ So, when we modify the file, Wazuh generates an alert.
 .. code-block:: console
 
     [root@centos ~]# ls -l credit_cards
+
+.. code-block:: none
+    :class: output
+
     +total 4
     -rw-r--r--. 1 root root 14 Jan 10 19:33 cardholder_data.txt
+
+.. code-block:: console
+
     [root@centos ~]# cat credit_cards/cardholder_data.txt
+
+.. code-block:: none
+    :class: output
+
     User1 = card4
+
+.. code-block:: console
+
     [root@centos ~]# echo "User1 = card5" > credit_cards/cardholder_data.txt
     [root@centos ~]# cat credit_cards/cardholder_data.txt
+
+.. code-block:: none
+    :class: output
+
     User1 = card5
 
 As you can see, syscheck alerts are tagged with the requirement 11.5.
@@ -43,6 +61,9 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
 .. code-block:: console
 
     root@ubuntu:~# tail -n28 /var/ossec/logs/alerts/alerts.log
+
+.. code-block:: none
+    :class: output
 
     ** Alert 1484071804.77110: - ossec,syscheck,pci_dss_11.5,
     2017 Jan 10 19:10:04 (CentOS) 192.168.56.4->syscheck

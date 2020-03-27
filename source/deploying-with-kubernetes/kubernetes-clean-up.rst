@@ -20,6 +20,10 @@ The deployment of the Wazuh cluster of managers involves the use of different `S
     .. code-block:: console
 
         $ kubectl get services --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         elasticsearch         ClusterIP      172.20.247.17    <none>             9200/TCP                         6d
         kibana                ClusterIP      172.20.121.19    <none>             5601/TCP                         6d
@@ -43,6 +47,10 @@ The deployment of the Wazuh cluster of managers involves the use of different `S
     .. code-block:: console
 
         $ kubectl get StatefulSet --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                     DESIRED   CURRENT   AGE
         wazuh-elasticsearch      1         1         6d
         wazuh-manager-master     1         1         6d
@@ -62,11 +70,16 @@ The deployment of the Wazuh cluster of managers involves the use of different `S
     .. code-block:: console
 
         $ kubectl get ConfigMap --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                          DATA      AGE
         wazuh-manager-master-conf     1         6d
         wazuh-manager-worker-0-conf   1         6d
         wazuh-manager-worker-1-conf   1         6d
 
+    .. code-block:: console
 
         $ kubectl delete ConfigMap wazuh-manager-master-conf --namespace wazuh
         $ kubectl delete ConfigMap wazuh-manager-worker-0-conf --namespace wazuh
@@ -78,12 +91,17 @@ The deployment of the Wazuh cluster of managers involves the use of different `S
     .. code-block:: console
 
         $ kubectl get persistentvolumeclaim --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                                            STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS             AGE
         wazuh-elasticsearch-wazuh-elasticsearch-0       Bound     pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   30Gi       RWO            gp2-encrypted-retained   6d
         wazuh-manager-master-wazuh-manager-master-0     Bound     pvc-fb821971-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            gp2-encrypted-retained   6d
         wazuh-manager-worker-wazuh-manager-worker-0-0   Bound     pvc-ffe7bf66-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            gp2-encrypted-retained   6d
         wazuh-manager-worker-wazuh-manager-worker-1-0   Bound     pvc-024466da-f7c5-11e8-b9b8-022ada63b4ac   10Gi       RWO            gp2-encrypted-retained   6d
 
+    .. code-block:: console
 
         $ kubectl delete persistentvolumeclaim wazuh-manager-master-wazuh-manager-master-0 --namespace wazuh
         $ kubectl delete persistentvolumeclaim wazuh-manager-master-wazuh-manager-worker-0-0 --namespace wazuh
@@ -94,12 +112,17 @@ The deployment of the Wazuh cluster of managers involves the use of different `S
     .. code-block:: console
 
         $ kubectl get persistentvolume
+
+    .. code-block:: none
+        :class: output
+
         NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS        CLAIM                                                         STORAGECLASS             REASON    AGE
         pvc-024466da-f7c5-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Bound         wazuh/wazuh-manager-worker-wazuh-manager-worker-1-0           gp2-encrypted-retained             6d
         pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   30Gi       RWO            Retain           Bound         wazuh/wazuh-elasticsearch-wazuh-elasticsearch-0               gp2-encrypted-retained             6d
         pvc-fb821971-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Bound         wazuh/wazuh-manager-master-wazuh-manager-master-0             gp2-encrypted-retained             6d
         pvc-ffe7bf66-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Bound         wazuh/wazuh-manager-worker-wazuh-manager-worker-0-0           gp2-encrypted-retained             6d
 
+    .. code-block:: console
 
         $ kubectl delete persistentvolume pvc-fb821971-f7c4-11e8-b9b8-022ada63b4ac
         $ kubectl delete persistentvolume pvc-ffe7bf66-f7c4-11e8-b9b8-022ada63b4ac
@@ -113,6 +136,10 @@ Elasticsearch
     .. code-block:: console
 
         $ kubectl get services --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         elasticsearch         ClusterIP      172.20.247.17    <none>             9200/TCP                         6d
         kibana                ClusterIP      172.20.121.19    <none>             5601/TCP                         6d
@@ -120,16 +147,24 @@ Elasticsearch
         wazuh-elasticsearch   ClusterIP      None             <none>             9300/TCP                         6d
         wazuh-nginx           LoadBalancer   172.20.166.239   internal-ac0c...   80:30409/TCP,443:32575/TCP       6d
 
+    .. code-block:: console
+
         $ kubectl delete service elasticsearch --namespace wazuh
         $ kubectl delete service wazuh-elasticsearch --namespace wazuh
 
 2. Remove the *StatefulSet* elements.
 
     .. code-block:: console
-            
+
         $ kubectl get StatefulSet --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                     DESIRED   CURRENT   AGE
         wazuh-elasticsearch      1         1         6d
+
+    .. code-block:: console
 
         $ kubectl delete StatefulSet wazuh-elasticsearch --namespace wazuh
 
@@ -138,8 +173,14 @@ Elasticsearch
     .. code-block:: console
 
         $ kubectl get persistentvolumeclaim --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                                            STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS             AGE
         wazuh-elasticsearch-wazuh-elasticsearch-0       Bound     pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   30Gi       RWO            gp2-encrypted-retained   6d
+
+    .. code-block:: console
 
         $ kubectl delete persistentvolumeclaim wazuh-elasticsearch-wazuh-elasticsearch-0 --namespace wazuh
 
@@ -148,11 +189,17 @@ Elasticsearch
     .. code-block:: console
 
         $ kubectl get persistentvolume
+
+    .. code-block:: none
+        :class: output
+
         NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS        CLAIM                                                         STORAGECLASS             REASON    AGE
         pvc-024466da-f7c5-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released      wazuh/wazuh-manager-worker-wazuh-manager-worker-1-0           gp2-encrypted-retained             6d
         pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac   30Gi       RWO            Retain           Bound         wazuh/wazuh-elasticsearch-wazuh-elasticsearch-0               gp2-encrypted-retained             6d
         pvc-fb821971-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released      wazuh/wazuh-manager-master-wazuh-manager-master-0             gp2-encrypted-retained             6d
         pvc-ffe7bf66-f7c4-11e8-b9b8-022ada63b4ac   10Gi       RWO            Retain           Released      wazuh/wazuh-manager-worker-wazuh-manager-worker-0-0           gp2-encrypted-retained             6d
+
+    .. code-block:: console
 
         $ kubectl delete persistentvolume pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac
 
@@ -162,12 +209,18 @@ Logstash
 1. The first step is to remove the services related to Logstash.
 
     .. code-block:: console
-            
+
         $ kubectl get services --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         kibana                ClusterIP      172.20.121.19    <none>             5601/TCP                         6d
         logstash              ClusterIP      172.20.160.68    <none>             5000/TCP                         6d
         wazuh-nginx           LoadBalancer   172.20.166.239   internal-ac0c...   80:30409/TCP,443:32575/TCP       6d
+
+    .. code-block:: console
 
         $ kubectl delete service logstash --namespace wazuh
 
@@ -176,10 +229,16 @@ Logstash
     .. code-block:: console
 
         $ kubectl get deploy --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           6d
         wazuh-logstash   1         1         1            1           6d
         wazuh-nginx      1         1         1            1           6d
+
+    .. code-block:: console
 
         $ kubectl delete deploy wazuh-logstash --namespace wazuh
 
@@ -191,9 +250,15 @@ Kibana and Nginx
     .. code-block:: console
 
         $ kubectl get services --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         kibana                ClusterIP      172.20.121.19    <none>             5601/TCP                         6d
         wazuh-nginx           LoadBalancer   172.20.166.239   internal-ac0c...   80:30409/TCP,443:32575/TCP       6d
+
+    .. code-block:: console
 
         $ kubectl delete service kibana --namespace wazuh
         $ kubectl delete service wazuh-nginx --namespace wazuh
@@ -203,9 +268,15 @@ Kibana and Nginx
     .. code-block:: console
 
         $ kubectl get deploy --namespace wazuh
+
+    .. code-block:: none
+        :class: output
+
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           6d
         wazuh-nginx      1         1         1            1           6d
+
+    .. code-block:: console
 
         $ kubectl delete deploy wazuh-kibana --namespace wazuh
         $ kubectl delete deploy wazuh-nginx --namespace wazuh

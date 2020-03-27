@@ -44,6 +44,9 @@ Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
 
     # /var/ossec/bin/manage_agents -V
 
+.. code-block:: none
+  	:class: output
+
   	Wazuh v2.0 - Wazuh Inc.
 
   	This program is free software; you can redistribute it and/or modify

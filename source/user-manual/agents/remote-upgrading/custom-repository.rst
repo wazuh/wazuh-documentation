@@ -9,7 +9,7 @@ Custom agent upgrade packages may be created by generating a repository to host 
 
 WPK files must be named using the following pattern:
 
-.. code-block:: console
+.. code-block:: none
 
     wazuh_agent_W_X_Y_Z.wpk
 
@@ -21,14 +21,15 @@ Where:
 
 For instance:
 
-.. code-block:: console
+.. code-block:: none
 
     wazuh_agent_v3.0.0_centos_7_x86_64.wpk
 
 
 The structure of the repository should be as shown below:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     /
     └── centos
@@ -43,6 +44,9 @@ Every folder must contain a file named ``versions`` that lists each version repr
 .. code-block:: console
 
     # cat our_wpk_repo/centos/7/x86_64/versions
+
+.. code-block:: none
+    :class: output
 
     v3.1.0 f835015c6bbf87356a62bdfd513c7f1ffc16e0af
     v3.0.0 df5397c8c4a1b29c42726dfa821330fa1bac7058

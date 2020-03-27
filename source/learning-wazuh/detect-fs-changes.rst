@@ -16,7 +16,7 @@ Preparation
 To turn on Wazuh agent and syscheck debug logging on *windows-agent*, start Notepad with the
 "Run as administrator" option and enter this text:
 
-    .. code-block:: console
+    .. code-block:: none
 
         windows.debug=2
         rootcheck.sleep=0
@@ -27,7 +27,7 @@ Save this as a new file called ``C:\Program Files (x86)\ossec-agent\local_intern
 Open the **Windows Command Prompt** or a **PowerShell**, using the "Run as administrator" option.
 Then create a couple of lab directories:
 
-    .. code-block:: console
+    .. code-block:: none
 
         mkdir C:\apple
         mkdir C:\orange
@@ -39,7 +39,7 @@ Configuring FIM
 Run the **Wazuh Agent Manager** (``C:\Program Files (x86)\ossec-agent\win32ui.exe``) and click on
 View -> View Config, and replace the large default ``<syscheck>`` section with this:
 
-    .. code-block:: console
+    .. code-block:: xml
 
         <syscheck>
             <disabled>no</disabled>
@@ -66,7 +66,8 @@ Close and save your modified config file.  Then restart Wazuh on *windows-agent*
 In the **Wazuh Agent Manager**, click on View -> View Logs. You should see a couple of entries like this,
 accounting for the new syscheck monitoring of your two test directories:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         2019/10/20 08:21:53 ossec-agent: INFO: Monitoring directory: 'c:/apple', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | realtime | report_changes | mtime | inode | attributes'.
         2019/10/20 08:21:53 ossec-agent: INFO: Monitoring directory: 'c:/orange', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | mtime | inode | attributes'.
@@ -140,6 +141,10 @@ multiple tables including one related to syscheck.
 .. code-block:: console
 
     [root@wazuh-manager centos]# sqlite3 /var/ossec/queue/db/000.db ".tables"
+
+.. code-block:: none
+    :class: output
+
     ciscat_results        sca_check_rules       sys_netiface
     fim_entry             sca_policy            sys_netproto
     metadata              sca_scan_info         sys_osinfo
@@ -153,6 +158,10 @@ scan results for itself and its agents:
 .. code-block:: console
 
     [root@wazuh-manager centos]# sqlite3 -header /var/ossec/queue/db/000.db "PRAGMA table_info(fim_entry);"
+
+.. code-block:: none
+    :class: output
+
        cid|name|type|notnull|dflt_value|pk
        0|file|TEXT|0||1
        1|type|TEXT|1||0
@@ -184,8 +193,8 @@ The following command shows the syscheck-monitored files for the windows-agent (
 
 
 
-Change your configuration back default
---------------------------------------
+Change your configuration back to default
+-----------------------------------------
 
 
 Before moving on to the next Lab, we need to change ``<syscheck>`` configuration back to the way it was.

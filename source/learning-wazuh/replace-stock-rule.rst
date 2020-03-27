@@ -21,22 +21,20 @@ Using the Kibana Wazuh plugin
 
 1. Open the Wazuh User Interface in Kibana, go into the Management Tab and select the Ruleset
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/rules-1.png                                      |
-    |     :title: Management                                                                        |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/rules-1.png
+    :title: Management
+    :align: center
+    :width: 100%
+
 
 2. Select **Manage rules files** and search for "ssh", then click on the eye icon
    next to **0095-sshd_rules.xml** to view the contents of that file.
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/rules-2.png                                      |
-    |     :title: Selecting 0095-sshd_rules.xml                                                     |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/rules-2.png
+    :title: Selecting 0095-sshd_rules.xml
+    :align: center
+    :width: 100%
+
 
 3. Scroll down to rule ``5716`` and copy the text starting from where the ``<rule`` tag is opened until
    it is closed ``</rule>``:
@@ -52,12 +50,11 @@ Using the Kibana Wazuh plugin
 
 4. Click on **Close**, then toggle **Editable files** and click on the pencil icon next to ``local_rules.xml``
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/rules-3.png                                      |
-    |     :title: Selecting local_rules.xml                                                         |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/rules-3.png
+    :title: Selecting local_rules.xml
+    :align: center
+    :width: 100%
+
 
 5. Paste the original rule within an existing set of ``<group>`` tags or create your own. Then change the
    alert's level and specify that it overwrites the original rule:
@@ -73,27 +70,25 @@ Using the Kibana Wazuh plugin
           </rule>
         </group>
 
-Notice how the web interface will automatically display an error if the xml syntax is not completly correct.
+Notice how the web interface will automatically display an error if the xml syntax is not completely correct.
 
 6. Press **Save file**, confirm and then click on **Restart now**.
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/rules-4.png                                      |
-    |     :title: Saving local_rules.xml file                                                       |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/rules-4.png
+    :title: Saving local_rules.xml file
+    :align: center
+    :width: 100%
+
 
 7. After this is done attempt to log in to the **linux-agent** using SSH and incorrect credentials.
    Then look for the event on Kibana by searching for **5716** and you will see the the level of the
    alert for the most recent event will be **7**:
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/rules-5.png                                      |
-    |     :title: Rule level has been changed                                                       |
-    |     :align: center                                                                            |
-    |     :width: 100%                                                                              |
-    +-----------------------------------------------------------------------------------------------+
+.. thumbnail:: ../images/learning-wazuh/labs/rules-5.png
+    :title: Rule level has been changed
+    :align: center
+    :width: 100%
+
 
 Using the Command Line Interface
 --------------------------------
@@ -132,13 +127,15 @@ Using the Command Line Interface
 
 8. Run ``ossec-logtest`` to test your customized rule and paste in this event that should trigger it:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         Oct 23 17:27:17 agent sshd[8221]: Failed password for root from ::1 port 60164 ssh2
 
 9. Observe your customized alert level near the end of the output:
 
-    .. code-block:: xml
+    .. code-block:: none
+        :class: output
 
         **Phase 3: Completed filtering (rules).
                Rule id: '5716'
