@@ -76,7 +76,6 @@ Upgrade Elasticsearch
       .. code-block:: console
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-        # systemctl restart elasticsearch
 
 #. Restart the service.
 
@@ -168,11 +167,6 @@ Upgrade Kibana
 .. warning::
   Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
 
-#. Stop Kibana.
-
-    .. code-block:: console
-
-      # systemctl stop kibana
 
 #. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
 
@@ -231,18 +225,20 @@ Upgrade Kibana
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
-#. Restore the configuration file backup.
-
-    .. code-block:: console
-
-      # sudo cp /tmp/wazuh-backup.yml /usr/share/kibana/plugins/wazuh/wazuh.yml
-
 #. Update configuration file permissions.
 
     .. code-block:: console
 
       # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
       # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+
+#. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+
+    .. code-block:: console
+
+      # cat >> /etc/default/kibana << EOF
+      NODE_OPTIONS="--max_old_space_size=2048"
+      EOF
 
 #. Restart Kibana.
 

@@ -100,7 +100,6 @@ Upgrade Elasticsearch
       .. code-block:: console
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-        # systemctl restart elasticsearch
 
 #. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``).
 
@@ -268,6 +267,14 @@ Upgrade Kibana
 
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+
+#. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+
+    .. code-block:: console
+
+      # cat >> /etc/default/kibana << EOF
+      NODE_OPTIONS="--max_old_space_size=2048"
+      EOF
 
 #. Restart Kibana.
 

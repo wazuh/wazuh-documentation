@@ -255,6 +255,7 @@ We can check the status of our new services in our Wazuh server.
 .. code-block:: none
 	:class: output
 
+	[root@localhost centos]# systemctl status filebeat
 	● filebeat.service - Filebeat sends log files to Elasticsearch.
 	   Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago

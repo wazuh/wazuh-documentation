@@ -77,9 +77,9 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_user`_        | None.                                                         | The decoded ``user`` must be the same.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous one.                                          |
+| `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous ones.                                         |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous one.                                       |
+| `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_url`_    | None.                                                         | The decoded ``url`` must be different.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -751,6 +751,15 @@ Example:
 
 The rule will trigger when the group ``virus`` has been matched 8 times in the last 360 seconds.
 
+if_fts
+^^^^^^
+
+Makes the decoder that processed the event to take the `fts <decoders.html#fts>`_ line into consideration.
+
++--------------------+--------------------+
+| **Example of use** | <if_fts />         |
++--------------------+--------------------+
+
 same_id
 ^^^^^^^
 
@@ -816,65 +825,157 @@ same_field
 
 .. versionadded:: 3.9.0
 
-Specifies that the decoded field must be the same as the previous one.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+The value of the dynamic field specified in this option must appear in previous events a ``frequency`` number of times within the required ``timeframe``.
 
-+--------------------+--------------------+
-| **Example of use** | <same_field />     |
-+--------------------+--------------------+
++--------------------+-------------------------------+
+| **Example of use** | <same_field>key</same_field>  |
++--------------------+-------------------------------+
 
-As an example of this option, check this rule:
+As an example of this option, check these rules:
 
 .. code-block:: xml
 
+  <!-- {"key":"value", "key2":"AAAA"} -->
   <rule id="100001" level="3">
-    <if_sid>221</if_sid>
-    <field name="netinfo.iface.name">ens33</field>
-    <description>Testing interface alert</description>
+    <decoded_as>json</decoded_as>
+    <field name="key">value</field>
+    <description>Testing JSON alert</description>
   </rule>
 
-  <rule id="100002" level="7" frequency="3" timeframe="300">
+  <rule id="100002" level="10" frequency="4" timeframe="300">
     <if_matched_sid>100001</if_matched_sid>
-    <same_field>netinfo.iface.mac</same_field>
-    <description>Testing options for correlating repeated fields</description>
+    <same_field>key2</same_field>
+    <description>Testing same_field option</description>
   </rule>
 
-.. note::
+Rule 100002 will fire when ``key2`` in the currently considered event is the same in four events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
 
-  Rule 100002 will trigger when the last three events had the same `netinfo.iface.mac` address.
+.. code-block:: json
+  :emphasize-lines: 7
+
+  {"key":"value", "key2":"AAAA"}
+  {"key":"value", "key2":"AAAA"}
+  {"key":"value", "key2":"BBBB"}
+  {"key":"value", "key2":"AAAA"}
+  {"key":"value", "key2":"CCCC"}
+  {"key":"value", "key2":"CCCC"}
+  {"key":"value", "key2":"AAAA"}
+
+The last event will fire rule 100002 instead of 100001 becasue it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
+
+.. code-block:: json
+  :emphasize-lines: 5
+  :class: output
+
+  {
+    "timestamp": "2020-03-04T03:00:28.973-0800",
+    "rule": {
+      "level": 10,
+      "description": "Testing same_field option",
+      "id": "100002",
+      "frequency": 4,
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "local"
+      ]
+    },
+    "agent": {
+      "id": "000",
+      "name": "ubuntu"
+    },
+    "manager": {
+      "name": "ubuntu"
+    },
+    "id": "1583319628.14426",
+    "previous_output": "{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}",
+    "full_log": "{\"key\":\"value\",\"key2\":\"AAAA\"}",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "key": "value",
+      "key2": "AAAA"
+    },
+    "location": "/root/test.log"
+  }
 
 not_same_field
 ^^^^^^^^^^^^^^
 
 .. versionadded:: 3.9.0
 
-Specifies that the decoded field must be different than the previous one.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
 
-+--------------------+--------------------+
-| **Example of use** | <not_same_field /> |
-+--------------------+--------------------+
++--------------------+----------------------------------------+
+| **Example of use** | <not_same_field>key2</not_same_field>  |
++--------------------+----------------------------------------+
 
-
-As an example of this option, check this rule:
+As an example of this option, check these rules:
 
 .. code-block:: xml
 
+  <!-- {"key":"value", "key2":"AAAA"} -->
   <rule id="100001" level="3">
-    <if_sid>221</if_sid>
-    <field name="netinfo.iface.name">ens33</field>
-    <description>Testing interface alert</description>
+    <decoded_as>json</decoded_as>
+    <field name="key">value</field>
+    <description>Testing JSON alert</description>
   </rule>
 
-  <rule id="100002" level="7" frequency="3" timeframe="300">
+  <rule id="100002" level="10" frequency="4" timeframe="300">
     <if_matched_sid>100001</if_matched_sid>
-    <not_same_field>netinfo.iface.mac</not_same_field>
-    <description>Testing options for correlating repeated fields</description>
+    <not_same_field>key2</not_same_field>
+    <description>Testing not_same_field option</description>
   </rule>
 
-.. note::
+Rule 100002 will fire when ``key2`` in the currently considered event has a different value that the same field in four previous events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
 
-  Rule 100002 will trigger when the last three events do not have the same `netinfo.iface.mac` address.
+.. code-block:: json
+  :emphasize-lines: 4
+
+  {"key":"value", "key2":"AAAA"}
+  {"key":"value", "key2":"AAAA"}
+  {"key":"value", "key2":"BBBB"}
+  {"key":"value", "key2":"CCCC"}
+
+The last event will fire rule 100002 instead of 100001 due to the value ``CCCC`` does not appear in three previous events. The corresponding alert looks like this one:
+
+.. code-block:: json
+  :emphasize-lines: 5
+  :class: output
+
+  {
+    "timestamp": "2020-03-04T03:02:21.973-0800",
+    "rule": {
+      "level": 10,
+      "description": "Testing not_same_field option",
+      "id": "100002",
+      "frequency": 4,
+      "firedtimes": 1,
+      "mail": false,
+      "groups": [
+        "local"
+      ]
+    },
+    "agent": {
+      "id": "000",
+      "name": "ubuntu"
+    },
+    "manager": {
+      "name": "ubuntu"
+    },
+    "id": "1583319633.14426",
+    "previous_output": "{\"key\":\"value\",\"key2\":\"BBBB\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}",
+    "full_log": "{\"key\":\"value\",\"key2\":\"CCCC\"}",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "key": "value",
+      "key2": "CCCC"
+    },
+    "location": "/root/test.log"
+  }
 
 global_frequency
 ^^^^^^^^^^^^^^^^
@@ -941,7 +1042,6 @@ Specifies a human-readable description to the rule in order to provide context t
 Examples:
 
   .. code-block:: xml
-
 
     <rule id="100015" level="2">
       ...
