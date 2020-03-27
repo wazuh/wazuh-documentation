@@ -76,7 +76,6 @@ Upgrade Elasticsearch
       .. code-block:: console
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-        # systemctl restart elasticsearch
 
 #. Restart the service.
 
