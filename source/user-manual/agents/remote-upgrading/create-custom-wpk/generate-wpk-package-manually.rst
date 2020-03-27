@@ -116,7 +116,7 @@ Download the latest version of the wazuh MSI package:
 
 .. code-block:: console
 
-  # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-1.msi --output wazuh-agent-|WAZUH_LATEST|-1.msi
+  # curl -Ls https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 
