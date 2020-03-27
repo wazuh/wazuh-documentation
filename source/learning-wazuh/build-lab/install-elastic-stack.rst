@@ -134,12 +134,12 @@ events and archives stored in Elasticsearch. More info at `Kibana
 
     # cat >> /usr/share/kibana/optimize/wazuh/config/wazuh.yml << EOF
 
-        - wazuhapi:
-           url: https://172.30.0.10
-           port: 55000
-           user: wazuhapiuser
-           password: wazuhlab
-      EOF
+      - wazuhapi:
+         url: https://172.30.0.10
+         port: 55000
+         user: wazuhapiuser
+         password: wazuhlab
+    EOF
 
 6. Enable and start the Kibana service:
 
