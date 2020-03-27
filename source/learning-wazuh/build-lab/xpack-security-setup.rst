@@ -255,7 +255,7 @@ Note that you may use the "elastic" user and the password you configured for it 
       [root@wazuh-manager ~]# cat >> /etc/filebeat/filebeat.yml << EOF
 
       output.elasticsearch.username: "elastic"
-      output.elasticsearch.password: "password_generated_for_elastic"
+      output.elasticsearch.password: "password_provided_for_elastic"
       EOF
 
 8. Restart Filebeat
