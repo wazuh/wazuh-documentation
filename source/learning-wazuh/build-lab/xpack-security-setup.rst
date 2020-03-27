@@ -269,7 +269,7 @@ Note that you may use the "elastic" user and the password you configured for it 
 
       [root@wazuh-manager ~]# systemctl restart filebeat
 
-Log in to Kibana and connect it to the Wazuh API
+Log in to Kibana to verify it is working
 ------------------------------------------------
 
 1. Now use your local web browser to surf to https://SERVER_IP where SERVER_IP
@@ -281,15 +281,3 @@ Log in to Kibana and connect it to the Wazuh API
 .. thumbnail:: ../../images/learning-wazuh/build-lab/xpack-login.png
   :align: center
   :width: 100%
-
-2. Click on the Wazuh icon on the left.  Fill out the form for connecting to the
-   API like below, where the user is "wazuhapiuser", the API password is "wazuhlab"
-   the host is "https://172.30.0.10" and the port is "55000":
-
-  .. thumbnail:: ../../images/learning-wazuh/build-lab/kibana-to-api.png
-      :title: API Connect
-      :align: center
-      :width: 75%
-
-4. Click on **[Save]** and then click on the Wazuh icon again to bring up the Wazuh
-   Kibana App.  It should now be ready to use.
