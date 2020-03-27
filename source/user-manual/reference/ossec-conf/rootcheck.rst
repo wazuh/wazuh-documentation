@@ -165,7 +165,7 @@ readall
 ^^^^^^^^^^^^^^^
 
 Allow Rootcheck read all system files and compare the bytes read with files size.
-With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/etc``, ``/boot``
+With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/lib``, ``/etc``, ``/root``, ``/var/log``, ``/var/mail``, ``/var/lib``, ``/var/www``, ``/usr/lib``, ``/usr/include``, ``/tmp``, ``/boot``, ``/usr/local``, ``/var/tmp`` and ``/sys``.
 
 +--------------------+---------+
 | **Default value**  | no      |
