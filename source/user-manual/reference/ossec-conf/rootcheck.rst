@@ -65,11 +65,9 @@ ignore
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
 
 +--------------------+-----------------------------------+
-| **Allowed values** | Any directory or file name.       |
+| **Allowed values** | sregex                            |
 +--------------------+-----------------------------------+
 | **Valid for**      | check_sys, check_dev, check_files |
-+--------------------+-----------------------------------+
-| **Example**        | /etc                              |
 +--------------------+-----------------------------------+
 
 Attributes:
@@ -348,6 +346,7 @@ Default Unix configuration
       <check_pids>yes</check_pids>
       <check_ports>yes</check_ports>
       <check_if>yes</check_if>
+      <ignore type="sregex">^/etc/</ignore>
 
       <!-- Frequency that rootcheck is executed - every 12 hours -->
       <frequency>43200</frequency>
