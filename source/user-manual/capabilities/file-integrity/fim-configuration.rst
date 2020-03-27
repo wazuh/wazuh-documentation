@@ -183,7 +183,7 @@ Configuring synchronization
 
 Synchronization can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <synchronization>
