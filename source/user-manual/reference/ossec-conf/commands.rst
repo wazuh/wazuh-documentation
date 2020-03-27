@@ -71,15 +71,15 @@ extra_args
 
 .. versionadded:: 3.5.0
 
-Allows the user to customize the parameters sent to the active response script living on the agent side.
+Allows the user to customize the parameters sent to the active response script living on the agent side. There can be only one ``extra_args`` field with just one argument on it.
 
-+--------------------+----------------------------------------------------------------+
-| **Default value**  | n/a                                                            |
-+--------------------+----------------------------------------------------------------+
-| **Allowed values** | Any extra argument to be read by the active-response scripts.  |
-+--------------------+----------------------------------------------------------------+
-| **use**            | Not required                                                   |
-+--------------------+----------------------------------------------------------------+
++--------------------+-------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                       |
++--------------------+-------------------------------------------------------------------------------------------+
+| **Allowed values** | Any extra argument to be read by the active-response scripts. It must no contain spaces.  |
++--------------------+-------------------------------------------------------------------------------------------+
+| **use**            | Not required                                                                              |
++--------------------+-------------------------------------------------------------------------------------------+
 
 .. note::
 	The content of this setting will be appended to the existent parameters being sent to the agent.
@@ -105,7 +105,7 @@ Sample configuration
     <command>
       <name>custom_command</name>
       <executable>custom_script.sh</executable>
-      <extra_args>-arg1 --arg2 arg3 ; cat /etc/passwd</extra_args>
+      <extra_args>custom_argument</extra_args>
       <timeout_allowed>yes</timeout_allowed>
     </command>
 
