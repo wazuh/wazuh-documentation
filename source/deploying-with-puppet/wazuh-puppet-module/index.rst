@@ -62,8 +62,8 @@ Here is an example of a manifest ``wazuh-manager.pp``
   .. code-block:: bash
 
     node "server.yourhost.com" {
-      class { 'wazuh::server':
-        smtp_server => 'localhost',
+      class { 'wazuh::manager':
+        ossec_smtp_server => 'localhost',
         ossec_emailto => ['user@mycompany.com'],
       }
 
