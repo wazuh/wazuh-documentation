@@ -225,8 +225,13 @@ are configured in the Elastic Server using Elasticsearch directly.
 4. When prompted confirm you wish to continue and provide a password. Then
    provide a password for each one of the components as prompted.
 
+5. Restart Elasticsearch and wait for the service to be ready.
 
-5. Set up credentials for Kibana by adding the following lines to
+  .. code-block:: console
+
+      [root@elastic-server ~]# systemctl restart elasticsearch
+
+6. Set up credentials for Kibana by adding the following lines to
    ``/etc/kibana/kibana.yml``:
 
   .. code-block:: console
@@ -241,13 +246,13 @@ are configured in the Elastic Server using Elasticsearch directly.
 
 Note that you may use the "elastic" user and the password you configured for it in the previous step.
 
-6. Restart Kibana.
+7. Restart Kibana.
 
   .. code-block:: console
 
       [root@elastic-server ~]# systemctl restart kibana
 
-7. Set up credentials for Filebeat on the Wazuh server by adding the following
+8. Set up credentials for Filebeat on the Wazuh server by adding the following
    lines to ``/etc/filebeat/filebeat.yml``.
 
   .. code-block:: console
@@ -258,7 +263,7 @@ Note that you may use the "elastic" user and the password you configured for it 
       output.elasticsearch.password: "password_provided_for_elastic"
       EOF
 
-8. Restart Filebeat
+9. Restart Filebeat
 
   .. code-block:: console
 
