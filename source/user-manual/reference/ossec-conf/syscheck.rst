@@ -18,6 +18,7 @@ Configuration options for file integrity monitoring.
 Options
 -------
 
+- `disabled`_
 - `directories`_
 - `ignore`_
 - `nodiff`_
@@ -44,12 +45,31 @@ Options
 - `max_eps`_
 - `database`_
 
+.. _reference_ossec_syscheck_disabled:
+
+disabled
+^^^^^^^^
+
+Indicates if the syscheck scan is disabled or not.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+Example:
+
+.. code-block:: xml
+
+ <disabled>no</disabled>
+
 .. _reference_ossec_syscheck_directories:
 
 directories
 ^^^^^^^^^^^
 
-Use this option to add or remove directories to be monitored. The directories must be comma separated.
+List of directories to be monitored. The directories can be comma-separated or multiple lines may be entered to include multiple directories.
 
 All files and subdirectories within the noted directories will also be monitored.
 
@@ -57,13 +77,13 @@ Drive letters without directories are not valid. At a minimum the '.' should be 
 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
-There exists a limit in the number of directories that can be written in one line separated by commas, this is limited to 64 directories.
+There is a limit of 64 directories, comma-separated, that can be written in one line .
 
-+--------------------+------------------------------------+
-| **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
-+--------------------+------------------------------------+
-| **Allowed values** | Any directory                      |
-+--------------------+------------------------------------+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | The default configuration may vary depending on the operating system. |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any directory                                                         |
++--------------------+-----------------------------------------------------------------------+
 
 Attributes:
 
@@ -182,7 +202,7 @@ Attributes:
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **restrict**             | Limit checks to files containing the entered string in the file name.                                                 |
 +                          +                                                                                                                       +
-|                          | Any directory or file name (but not a path) is allowed                                                                |
+|                          | Any directory or file name (but not a path) is allowed.                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -234,13 +254,13 @@ Nevertheless, the second one disables the SHA-256 hash check.
 ignore
 ^^^^^^
 
-List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories.  These files and directories are still checked, but the results are ignored.
+List of files or directories to be ignored. Introduced as one entry per line. Multiple lines may be entered to include multiple files or directories. Ignored files and directories are still scaned, but the results are not being reported.
 
-+--------------------+-----------------------------+
-| **Allowed values** | Any directory or file name. |
-+--------------------+-----------------------------+
-| **Example**        | /etc/mtab                   |
-+--------------------+-----------------------------+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | The default configuration may vary depending on the operating system. |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any directory or file name.                                           |
++--------------------+-----------------------------------------------------------------------+
 
 Attributes:
 
@@ -249,38 +269,58 @@ Attributes:
 +          +--------------------------------------------+------------------------------------+
 |          | Allowed values                             | sregex                             |
 +----------+--------------------------------------------+------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <ignore>/etc/mtab</ignore>
+ <ignore type="sregex">.log$|.swp$</ignore>
 
 nodiff
 ^^^^^^
 
-List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
+List of files to not compute the diff. Introduced as one entry per line. It could be used for sensitive files like a private key, credentials stored in a file or database configuration to avoid data leaking by sending the file content changes through alerts.
 
-+--------------------+----------------------+
-| **Allowed values** | Any file name.       |
-+--------------------+----------------------+
-| **Example**        | /etc/ssl/private.key |
-+--------------------+----------------------+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | The default configuration may vary depending on the operating system.|
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any file name.                                                       |
++--------------------+----------------------------------------------------------------------+
 
 Attributes:
 
 +----------+---------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
+| **type** | This is a simple regex pattern to filter out files to not compute the diff.     |
 +          +--------------------------------------------+------------------------------------+
 |          | Allowed values                             | sregex                             |
 +----------+--------------------------------------------+------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <nodiff>/etc/ssl/private.key</nodiff>
+ <nodiff type="sregex">/tmp/test/file$</nodiff>
 
 .. _reference_ossec_syscheck_frequency:
 
 frequency
 ^^^^^^^^^^^
 
-Frequency that the syscheck will be run (in seconds).
+Frequency that the syscheck will be run. Given in seconds.
 
 +--------------------+-------------------------------------+
 | **Default value**  | 43200                               |
 +--------------------+-------------------------------------+
 | **Allowed values** | A positive number, time in seconds. |
 +--------------------+-------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <frequency>43200</frequency>
 
 scan_time
 ^^^^^^^^^^^
@@ -293,6 +333,12 @@ Time to run the scans. Times may be represented as 9pm or 8:30.
 | **Allowed values** | Time of day.  |
 +--------------------+---------------+
 
+Example:
+
+.. code-block:: xml
+
+ <scan_time>8:30</scan_time>
+
 .. note::
 
    This may delay the initialization of real-time scans.
@@ -300,13 +346,19 @@ Time to run the scans. Times may be represented as 9pm or 8:30.
 scan_day
 ^^^^^^^^^
 
-Day of the week to run the scans(one entry per line). Multiple lines may be entered to include multiple registry entries.
+Day of the week to run the scans, one entry per line.
 
 +--------------------+-------------------+
 | **Default value**  | n/a               |
 +--------------------+-------------------+
 | **Allowed values** | Day of the week.  |
 +--------------------+-------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <scan_day>thursday</scan_day>
 
 auto_ignore
 ^^^^^^^^^^^
@@ -322,7 +374,7 @@ Specifies whether or not syscheck will ignore files that change too many times (
 Attributes:
 
 +---------------+------------------------------------------------------------------------------+
-| **frequency** | Number of times the alert can be repeated in the'timeframe' time interval.   |
+| **frequency** | Number of times the alert can be repeated in the 'timeframe' time interval.  |
 |               +------------------+-----------------------------------------------------------+
 |               | Default value    | 10                                                        |
 |               +------------------+-----------------------------------------------------------+
@@ -334,6 +386,12 @@ Attributes:
 |               +------------------+-----------------------------------------------------------+
 |               | Allowed values   | Any number between 1 and 43200.                           |
 +---------------+------------------+-----------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
 
 .. note::
 
@@ -352,9 +410,16 @@ Specifies if syscheck should alert when new files are created.
 | **Allowed values** | yes, no  |
 +--------------------+----------+
 
+Example:
+
+.. code-block:: xml
+
+ <alert_new_files>yes</alert_new_files>
+
 .. note::
 
-   It is valid on: server and local.
+	It is valid on: server and local.
+
 
 .. _reference_ossec_syscheck_scan_start:
 
@@ -369,17 +434,22 @@ Specifies if syscheck scans immediately when started.
 | **Allowed values** | yes, no  |
 +--------------------+----------+
 
+Example:
+
+.. code-block:: xml
+
+ <scan_on_start>yes</scan_on_start>
 
 windows_registry
 ^^^^^^^^^^^^^^^^
 
-Use this option to monitor specified Windows registry entries (one entry per line). Multiple lines may be entered to include multiple registry entries.
+List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
-+--------------------+------------------------------+
-| **Default value**  | HKEY_LOCAL_MACHINE\\Software |
-+--------------------+------------------------------+
-| **Allowed values** | Any registry entry.          |
-+--------------------+------------------------------+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | The default configuration may vary depending on the operating system.|
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any registry entry.                                                  |
++--------------------+----------------------------------------------------------------------+
 
 Attributes:
 
@@ -397,6 +467,13 @@ Attributes:
 |          | Allowed values   | Tags list separated by commas        |
 +----------+------------------+--------------------------------------+
 
+Example:
+
+.. code-block:: xml
+
+ <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Classes\Protocols</windows_registry>
+ <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Policies</windows_registry>
+ <windows_registry tags="services-registry">HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services</windows_registry>
 
 .. note::
 
@@ -405,13 +482,13 @@ Attributes:
 registry_ignore
 ^^^^^^^^^^^^^^^
 
-List of registry entries to be ignored. (one entry per line). Multiple lines may be entered to include multiple registry entries.
+List of registry entries to be ignored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
-+--------------------+---------------------+
-| **Default value**  | n/a                 |
-+--------------------+---------------------+
-| **Allowed values** | Any registry entry. |
-+--------------------+---------------------+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | The default configuration may vary depending on the operating system. |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any registry entry.                                                   |
++--------------------+-----------------------------------------------------------------------+
 
 Attributes:
 
@@ -426,6 +503,13 @@ Attributes:
 +          +------------------+-------------------------------------------------------------+
 |          | Allowed values   |  sregex                                                     |
 +----------+------------------+-------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
+ <registry_ignore type="sregex">\Enum$</registry_ignore>
 
 allow_remote_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -480,52 +564,76 @@ Example:
 skip_nfs
 ^^^^^^^^
 
-Specifies if syscheck should scan network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, ``skip_nfs`` will exclude checking files on CIFS or NFS mounts.
 
 +--------------------+----------+
 | **Default value**  | yes      |
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+ <skip_nfs>yes</skip_nfs>
 
 skip_dev
 ^^^^^^^^
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the `/dev` directory. (Works on Linux and FreeBSD).
+Specifies if syscheck should scan the ```/dev`` directory. This option works on Linux and FreeBSD systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+ <skip_dev>yes</skip_dev>
 
 skip_sys
 ^^^^^^^^
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the `/sys` directory. (Works on Linux).
+Specifies if syscheck should scan the ``/sys`` directory. This option works on Linux system.
 
 +--------------------+----------+
 | **Default value**  | yes      |
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+ <skip_sys>yes</skip_sys>
 
 skip_proc
 ^^^^^^^^^
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the `/proc` directory. (Works on Linux and FreeBSD).
+Specifies if syscheck should scan the ```/proc`` directory. This option works on Linux and FreeBSD systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+ <skip_proc>yes</skip_proc>
 
 remove_old_diff
 ^^^^^^^^^^^^^^^
@@ -541,6 +649,12 @@ Specifies if Syscheck should delete the local snapshots that are not currently b
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+Example:
+
+.. code-block:: xml
+
+ <remove_old_diff>yes</remove_old_diff>
+
 restart_audit
 ^^^^^^^^^^^^^
 
@@ -549,7 +663,7 @@ restart_audit
 
 .. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
 
-Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ```Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -558,12 +672,20 @@ whodata rules won't be applied automatically.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+Example for ``restart_audit`` since v3.9.0:
+
+.. code-block:: xml
+
+ <whodata>
+  <restart_audit>yes</restart_audit>
+ </whodata>
+
 windows_audit_interval
 ^^^^^^^^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.5.0
 
-This option sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+Sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
 | **Default value**  | 300 seconds                        |
@@ -571,6 +693,11 @@ This option sets the frequency in seconds with which the Windows agent will chec
 | **Allowed values** | Any number from 1 to 9999          |
 +--------------------+------------------------------------+
 
+Example:
+
+.. code-block:: xml
+
+ <windows_audit_interval>300</windows_audit_interval>
 
 whodata
 ^^^^^^^
@@ -593,7 +720,7 @@ The Whodata options will be configured inside this tag.
 
 .. versionadded:: 3.9.0
 
-Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ```Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -607,7 +734,7 @@ whodata rules won't be applied automatically.
 
 .. versionadded:: 3.7.1
 
-Set up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
+Sets up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
 
 +--------------------+------------------------------------+
 | **Default value**  | Empty                              |
@@ -623,7 +750,7 @@ Set up the FIM engine to collect the Audit events using keys with ``audit_key``.
 
 .. versionadded:: 3.9.0
 
-This option allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
+Allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
 
 +--------------------+------------+
 | **Default value**  | yes        |
@@ -633,13 +760,14 @@ This option allows to disable the Audit health check during the Whodata engine s
 
 .. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
+For more information, please read :ref:`auditing who-data <auditing-whodata>`
 
 process_priority
 ^^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.12.0
 
-Set the nice value for Syscheck process.
+Sets the nice value for Syscheck process.
 
 +--------------------+------------------------------------+
 | **Default value**  | 10                                 |
@@ -665,13 +793,19 @@ For Windows the scale is translated as described in the following table:
 | 11 to 19   | THREAD_PRIORITY_IDLE         |
 +------------+------------------------------+
 
+Example:
+
+.. code-block:: xml
+
+ <process_priority>10</process_priority>
+
 
 max_eps
 ^^^^^^^
 
 .. versionadded:: 3.12.0
 
-Set the maximum event reporting throughput. Events are messages that will produce an alert.
+Sets the maximum event reporting throughput. Events are messages that will produce an alert.
 
 +--------------------+---------------------------------------------------------+
 | **Default value**  | 100                                                     |
@@ -679,13 +813,19 @@ Set the maximum event reporting throughput. Events are messages that will produc
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
 
+Example:
+
+.. code-block:: xml
+
+ <max_eps>100</max_eps>
+
 
 database
 ^^^^^^^^
 
 .. versionadded:: 3.12.0
 
-Specify where is the database going to be stored.
+Specifies where the database is going to be stored.
 
 +--------------------+---------------------------------------+
 | **Default value**  | disk                                  |
@@ -700,7 +840,7 @@ synchronization
 
 .. versionadded:: 3.12.0
 
-The database synchronization settings will be configured inside this tag.
+The database synchronization settings are configured inside this tag.
 
 .. code-block:: xml
 
@@ -782,7 +922,7 @@ Specifies the queue size of the manager synchronization responses.
 
 .. versionadded:: 3.12.0
 
-Set the maximum synchronization message throughput.
+Sets the maximum synchronization message throughput.
 
 +--------------------+---------------------------------------------------------+
 | **Default value**  | 10                                                      |
@@ -792,13 +932,171 @@ Set the maximum synchronization message throughput.
 
 
 
-Default Unix configuration
---------------------------
+.. tabs::
 
-.. code-block:: xml
+ .. group-tab:: Default Unix configuration
 
-  <!-- File integrity monitoring -->
-  <syscheck>
+  .. code-block:: xml
+
+    <!-- File integrity monitoring -->
+	  <syscheck>
+		
+	    <disabled>no</disabled>
+
+	    <!-- Frequency that syscheck is executed default every 12 hours -->
+	    <frequency>43200</frequency>
+
+	    <scan_on_start>yes</scan_on_start>
+
+	    <!-- Generate alert when new file detected -->
+	    <alert_new_files>yes</alert_new_files>
+
+	    <!-- Don't ignore files that change more than 'frequency' times -->
+	    <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
+
+	    <!-- Directories to check  (perform all possible verifications) -->
+	    <directories>/etc,/usr/bin,/usr/sbin</directories>
+	    <directories>/bin,/sbin,/boot</directories>
+
+	    <!-- Files/directories to ignore -->
+	    <ignore>/etc/mtab</ignore>
+	    <ignore>/etc/hosts.deny</ignore>
+	    <ignore>/etc/mail/statistics</ignore>
+	    <ignore>/etc/random-seed</ignore>
+	    <ignore>/etc/random.seed</ignore>
+	    <ignore>/etc/adjtime</ignore>
+	    <ignore>/etc/httpd/logs</ignore>
+	    <ignore>/etc/utmpx</ignore>
+	    <ignore>/etc/wtmpx</ignore>
+	    <ignore>/etc/cups/certs</ignore>
+	    <ignore>/etc/dumpdates</ignore>
+	    <ignore>/etc/svc/volatile</ignore>
+
+	    <!-- File types to ignore -->
+	    <ignore type="sregex">.log$|.swp$</ignore>
+
+	    <!-- Check the file, but never compute the diff -->
+	    <nodiff>/etc/ssl/private.key</nodiff>
+
+	    <skip_nfs>yes</skip_nfs>
+	    <skip_dev>yes</skip_dev>
+	    <skip_proc>yes</skip_proc>
+	    <skip_sys>yes</skip_sys>
+
+	    <!-- Nice value for Syscheck process -->
+	    <process_priority>10</process_priority>
+
+	    <!-- Maximum output throughput -->
+	    <max_eps>100</max_eps>
+
+	    <!-- Database synchronization settings -->
+	    <synchronization>
+	      <interval>5m</interval>
+	      <max_interval>1h</max_interval>
+	      <max_eps>10</max_eps>
+	    </synchronization>
+
+	  </syscheck>
+
+
+
+ .. group-tab:: Default Windows configuration
+
+  .. code-block:: xml
+
+   <!-- File integrity monitoring -->
+   <syscheck>
+
+    <disabled>no</disabled>
+
+    <!-- Frequency that syscheck is executed default every 12 hours -->
+    <frequency>43200</frequency>
+
+    <!-- Default files to be monitored. -->
+    <directories recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$">%WINDIR%</directories>
+    <directories recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$">%WINDIR%\SysNative</directories>
+    <directories recursion_level="0">%WINDIR%\SysNative\drivers\etc</directories>
+    <directories recursion_level="0" restrict="WMIC.exe$">%WINDIR%\SysNative\wbem</directories>
+    <directories recursion_level="0" restrict="powershell.exe$">%WINDIR%\SysNative\WindowsPowerShell\v1.0</directories>
+    <directories recursion_level="0" restrict="winrm.vbs$">%WINDIR%\SysNative</directories>
+
+    <!-- 32-bit programs. -->
+    <directories recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedit.exe$|regedt32.exe$|regsvr32.exe$|runas.exe$|sc.exe$|schtasks.exe$|sethc.exe$|subst.exe$">%WINDIR%\System32</directories>
+    <directories recursion_level="0">%WINDIR%\System32\drivers\etc</directories>
+    <directories recursion_level="0" restrict="WMIC.exe$">%WINDIR%\System32\wbem</directories>
+    <directories recursion_level="0" restrict="powershell.exe$">%WINDIR%\System32\WindowsPowerShell\v1.0</directories>
+    <directories recursion_level="0" restrict="winrm.vbs$">%WINDIR%\System32</directories>
+    <directories realtime="yes">%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup</directories>
+    <ignore>%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup\desktop.ini</ignore>
+    <ignore type="sregex">.log$|.htm$|.jpg$|.png$|.chm$|.pnf$|.evtx$</ignore>
+
+    <!-- Windows registry entries to monitor. -->
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\batfile</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\cmdfile</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\comfile</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\exefile</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\piffile</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\AllFilesystemObjects</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\Directory</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\Folder</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Classes\Protocols</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Policies</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Security</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\KnownDLLs</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\SecurePipeServers\winreg</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce</windows_registry>
+    <windows_registry>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\URL</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Active Setup\Installed Components</windows_registry>
+
+    <!-- Windows registry entries to ignore. -->
+    <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\Security\SAM\Domains\Account\Users</registry_ignore>
+    <registry_ignore type="sregex">\Enum$</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\MpsSvc\Parameters\AppCs</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\MpsSvc\Parameters\PortKeywords\DHCP</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\MpsSvc\Parameters\PortKeywords\IPTLSIn</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\MpsSvc\Parameters\PortKeywords\IPTLSOut</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\MpsSvc\Parameters\PortKeywords\RPC-EPMap</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\MpsSvc\Parameters\PortKeywords\Teredo</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\PolicyAgent\Parameters\Cache</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx</registry_ignore>
+    <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\ADOVMPPackage\Final</registry_ignore>
+
+    <!-- Frequency for ACL checking (seconds) -->
+    <windows_audit_interval>60</windows_audit_interval>
+
+    <!-- Nice value for Syscheck module -->
+    <process_priority>10</process_priority>
+
+    <!-- Maximum output throughput -->
+    <max_eps>100</max_eps>
+
+    <!-- Database synchronization settings -->
+    <synchronization>
+     <enabled>yes</enabled>
+     <interval>5m</interval>
+     <max_interval>1h</max_interval>
+     <max_eps>10</max_eps>
+    </synchronization>
+
+   </syscheck>
+
+
+
+ .. group-tab:: Default MacOS X configuration
+
+  .. code-block:: xml
+
+   <!-- File integrity monitoring -->
+   <syscheck>
+
     <disabled>no</disabled>
 
     <!-- Frequency that syscheck is executed default every 12 hours -->
@@ -806,15 +1104,9 @@ Default Unix configuration
 
     <scan_on_start>yes</scan_on_start>
 
-    <!-- Generate alert when new file detected -->
-    <alert_new_files>yes</alert_new_files>
-
-    <!-- Don't ignore files that change more than 'frequency' times -->
-    <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
-
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
-    <directories>/bin,/sbin,/boot</directories>
+    <directories>/bin,/sbin</directories>
 
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
@@ -849,8 +1141,10 @@ Default Unix configuration
 
     <!-- Database synchronization settings -->
     <synchronization>
-      <interval>5m</interval>
-      <max_interval>1h</max_interval>
-      <max_eps>10</max_eps>
+     <enabled>yes</enabled>
+     <interval>5m</interval>
+     <max_interval>1h</max_interval>
+     <max_eps>10</max_eps>
     </synchronization>
-  </syscheck>
+
+   </syscheck>
