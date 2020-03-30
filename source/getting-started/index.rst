@@ -27,5 +27,4 @@ Our centralized components, the Wazuh server and Elastic Stack, have been design
    components
    architecture
    use-cases
-   all_in_one
    packages-list

@@ -8,7 +8,7 @@ Introduction
 ============
 
 
-This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`Jumpstart to Wazuh<all_in_one>` guide could be used in small production environments, it is not designed for high availability and scalable environments. This section is aimed to configure an environment with different levels of distribution and, in consequence, scalable environments with high availability.
+This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`All-in-One installation<all_in_one>` guide could be used in small production environments, it is not designed for high availability and scalable environments. This section is aimed to configure an environment with different levels of distribution and, in consequence, scalable environments with high availability.
 
 
 Community
