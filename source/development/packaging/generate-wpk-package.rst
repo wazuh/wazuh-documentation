@@ -65,13 +65,13 @@ To build a WPK for Windows you need to first download an MSI package of the desi
 
 .. code-block:: console
 
-  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-1.msi
+  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 Below, you will find an example of Windows WPK package building.
 
 .. code-block:: console
 
-  # ./generate_wpk_package.sh -t windows -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-|WAZUH_LATEST|-1.msi
+  # ./generate_wpk_package.sh -t windows -b v|WAZUH_LATEST| -d /tmp/wpk -k /tmp/keys -o WindowsAgent.wpk -pd /tmp/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 This will build a |WAZUH_LATEST| Wazuh Windows WPK package named WindowsAgent.wpk, using the  with the previously generated keys that are saved in ``/tmp/keys`` and store it in ``/tmp/wpk``.
 
