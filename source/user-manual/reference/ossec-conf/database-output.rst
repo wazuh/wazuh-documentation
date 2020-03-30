@@ -25,6 +25,8 @@ Available options
 - `password`_
 - `database`_
 - `type`_
+- `port`_
+- `socket`_
 
 hostname
 ^^^^^^^^
@@ -81,6 +83,28 @@ Type of database (Mysql or PostgreSQL).
 | **Allowed values** | mysql/postgresql |
 +--------------------+------------------+
 
+port
+^^^^
+
+Specify the port used.
+
++--------------------+--------------------+
+| **Default value**  | 3306               |
++--------------------+--------------------+
+| **Allowed values** | Any available port |
++--------------------+--------------------+
+
+socket
+^^^^^^
+
+Specify the socket used
+
++--------------------+----------------------+
+| **Default value**  | /queue/db/wdb        |
++--------------------+----------------------+
+| **Allowed values** | Any available socket |
++--------------------+----------------------+
+
 Sample configuration
 --------------------
 
@@ -92,4 +116,6 @@ Sample configuration
     <password>secret1234</password>
     <database>Alerts_DB</database>
     <type>mysql</type>
+    <port>3306</port>
+    <socket>/queue/db/wdb</socket>
   </database_output>
