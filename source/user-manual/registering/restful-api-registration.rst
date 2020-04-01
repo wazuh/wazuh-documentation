@@ -2,20 +2,20 @@
 
 .. _restful-api-registration:
 
-Registering agents using the Wazuh API
-======================================
+Registering the Wazuh agents using the Wazuh API
+================================================
 
-Wazuh API allows agent registration by running a single request from any host. This request returns agent's registration key, which must be manually added to the agent using ``manage_agents`` program.
+The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` program.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
-Choose the tab corresponding to the agent host operating system:
+Choose the tab corresponding to the Wazuh agent host operating system:
 
 .. tabs::
 
   .. group-tab:: Linux/Unix host
 
-   1. Open a session in the agent host as a root user. To add the agent to the manager and extract the registration key execute the API request replacing the values in the brackets:
+   1. Open a session in the Wazuh agent's host as a root user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
 
     .. code-block:: console
 
@@ -36,7 +36,7 @@ Choose the tab corresponding to the agent host operating system:
 
     More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
 
-   2. Import the registration key to the agent using ``manage_agents`` program. Replace the agent's registration key:
+   2. Import the registration key to the Wazuh agent using ``manage_agents`` program. Replace the Wazuh agent's registration key:
 
     .. code-block:: console
 
@@ -55,21 +55,23 @@ Choose the tab corresponding to the agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   3. To enable the communication with the manager, edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
+   3. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/var/ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   4. Start the agent:
+   4. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/start_agent.rst
+    .. include:: ../../_templates/registrations/linux/restart_agent.rst
 
 
 
   .. group-tab:: Windows host
 
-   1. Open a Powershell session in the agent host as an Administrator and add the agent to the manager.
+   Open a Powershell session in the Wazuh agent's host as an Administrator.
 
-    .. include:: ../../_templates/registrations/windows/installation_directory.rst
+   .. include:: ../../_templates/registrations/windows/installation_directory.rst
+
+   1. Add the Wazuh agent to the Wazuh manager.
 
     If the Wazuh API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in Powershell:
 
@@ -101,9 +103,9 @@ Choose the tab corresponding to the agent host operating system:
       # $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f <API_username>, <API_password>)))
       # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<manager_IP>:55000/agents -Body @{name=<agent_name>} | ConvertFrom-Json
 
-    The command above returns the agent's ``ID``.
+    The command above returns the Wazuh agent's ``ID``.
 
-   2. Extract the agent's key using the agent's ID. Values in the angle brackets have to be replaced:
+   2. Extract the Wazuh agent's key using the Wazuh agent's ID. Values in the angle brackets have to be replaced:
 
     .. code-block:: console
 
@@ -122,7 +124,7 @@ Choose the tab corresponding to the agent host operating system:
              }
             }
 
-   3. Import the registration key to the agent using ``manage_agents`` program:
+   3. Import the registration key to the Wazuh agent using ``manage_agents`` program:
 
     .. code-block:: console
 
@@ -141,19 +143,19 @@ Choose the tab corresponding to the agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   4. To enable the communication with the manager, edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+   4. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   5. Start the agent:
+   5. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/start_agent.rst
+    .. include:: ../../_templates/registrations/windows/restart_agent.rst
 
 
 
   .. group-tab:: MacOS X host
 
-   1. Open a session in the agent host as a root user. To add the agent to the manager and extract the registration key execute the API request replacing the values in the brackets:
+   1. Open a session in the Wazuh agent host as a root user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
 
     .. code-block:: console
 
@@ -174,7 +176,7 @@ Choose the tab corresponding to the agent host operating system:
 
     More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
 
-   2. Import the registration key to the agent using ``manage_agents`` program. Replace the agent's registration key:
+   2. Import the registration key to the Wazuh agent using ``manage_agents`` program. Replace the Wazuh agent's registration key:
 
     .. code-block:: console
 
@@ -193,10 +195,10 @@ Choose the tab corresponding to the agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   3. To enable the communication with the manager, edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+   3. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   4. Start the agent:
+   4. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/macosx/start_agent.rst
+    .. include:: ../../_templates/registrations/macosx/restart_agent.rst

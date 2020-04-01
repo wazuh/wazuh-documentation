@@ -2,15 +2,15 @@
 
 .. _password-authorization-registration:
 
-Registration Service with Password Authorization
+Registration service with password authorization
 ================================================
 
-This registration method is similar to :ref:`simple registration service <simple-registration-service>` except that it allows additional protection of the manager from unauthorized registrations by using a password.
+This registration method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it allows additional protection of the Wazuh manager from unauthorized registrations by using a password.
 
-Manager
-^^^^^^^
+Wazuh manager
+^^^^^^^^^^^^^
 
-1. To enable password authorization amend the manager's ``/var/ossec/etc/ossec.conf`` configuration file as shown below:
+1. To enable password authorization amend the Wazuh manager's ``/var/ossec/etc/ossec.conf`` configuration file as shown below:
 
   .. code-block:: xml
 
@@ -26,7 +26,7 @@ Manager
 
    .. group-tab:: Using a custom password
 
-    Create ``/var/ossec/etc/authd.pass`` file and save custom password in it.
+    Create the ``/var/ossec/etc/authd.pass`` file and save the custom password in it.
 
     In the command below, replace ``<custom_pasword>`` with your chosen password:
 
@@ -36,7 +36,7 @@ Manager
 
    .. group-tab:: Using a random password
 
-    If no password is specified in ``/var/ossec/etc/authd.pass``, the registration service will create a random password. The password can be found in ``/var/ossec/logs/ossec.log`` by executing the following command:
+    If no password is specified in the ``/var/ossec/etc/authd.pass`` file, the registration service will create a random password. The password can be found in ``/var/ossec/logs/ossec.log`` by executing the following command:
 
     .. code-block:: console
 
@@ -48,136 +48,149 @@ Manager
              2019/04/25 15:09:50 ossec-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
 
 
-3. Restart the manager for the changes to take effect:
+3. Restart the Wazuh manager for the changes to take effect:
 
  .. include:: ../../_templates/registrations/common/restart_manager.rst
 
-Agents
-^^^^^^
+Wazuh agents
+^^^^^^^^^^^^
 
-Choose the tab corresponding to the agent host operating system:
+Choose the tab corresponding to the Wazuh agent host operating system:
 
 .. tabs::
 
  .. group-tab:: Linux/Unix host
 
-   Open a session in the Linux/Unix agent host as a ``root`` user.
+   Open a session in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
-   1. Register the agent using the password. It can be stored in a file or provided as a command-line argument:
+   1. Register the Wazuh agent using the password. It can be stored in a file or provided as a command-line argument:
 
      .. tabs::
 
       .. group-tab:: Using a stored password
 
-       Write the password on ``/var/ossec/etc/authd.pass`` file and run the ``agent-auth`` program using the manager’s IP address:
+       Write the password on ``/var/ossec/etc/authd.pass`` file and run the ``agent-auth`` program using the Wazuh manager’s IP address:
 
        .. code-block:: console
 
         # echo "<custom_password>" > /var/ossec/etc/authd.pass
         # /var/ossec/bin/agent-auth -m <manager_IP>
 
-       If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+       .. include:: ../../_templates/registrations/common/set_agent_name.rst
+
+
 
       .. group-tab:: Using a password as a command-line argument
 
-       Run the ``agent-auth`` program providing the manager’s IP address together with the password followed by the ``-P`` flag:
+       Run the ``agent-auth`` program providing the Wazuh manager’s IP address together with the password followed by the ``-P`` flag:
 
        .. code-block:: console
 
         # /var/ossec/bin/agent-auth -m <manager_IP> -P "<custom_password>"
 
-       If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+       .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-   2. To enable the communication with the manager, edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
+
+
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/var/ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   3. Start the agent:
+   3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/start_agent.rst
+    .. include:: ../../_templates/registrations/linux/restart_agent.rst
 
-   The agent registration can be adjusted by using different :ref:`agent-auth` options.
+   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
 
 
  .. group-tab:: Windows host
 
-   Open a Powershell or CMD session in the agent host as an ``Administrator``.
+   Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
    .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
-   1. Register the agent using the password. It can be stored in a file or provided as a command-line argument:
+   1. Register the Wazuh agent using the password. It can be stored in a file or provided as a command-line argument:
 
      .. tabs::
 
       .. group-tab:: Using a stored password
 
-       Write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` file and run the ``agent-auth`` program using the manager’s IP address:
+       Write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` file and run the ``agent-auth`` program using the Wazuh manager’s IP address:
 
        .. code-block:: none
 
         # echo <custom_password> > "C:\Program Files (x86)\ossec-agent\authd.pass"
         # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
 
-       If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+       .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-       The agent assumes the input file is in ``UTF-8 encoding``, without ``byte-order mark (BOM)``. If the file is created in an incorrect encoding it can be changed by opening the ``authd.pass`` file in a Notepad and Save As ``ANSI`` encoding.
+       The Wazuh agent assumes that the input file is in ``UTF-8`` encoding, without ``byte-order mark (BOM)``. If the file is created in an incorrect encoding it can be changed by opening the ``authd.pass`` file in a Notepad and Save As ``ANSI`` encoding.
+
+
 
       .. group-tab:: Using a password as a command-line argument
 
-       Run the ``agent-auth`` program, provide the manager’s IP address together with the password following the ``-P`` flag:
+       Run the ``agent-auth`` program, provide the Wazuh manager’s IP address together with the password following the ``-P`` flag:
 
        .. code-block:: none
 
          # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -P "<custom_password>"
 
-       If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+       .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-   2. To enable the communication with the manager, edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+
+
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   3. Start the agent:
+   3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/start_agent.rst
+    .. include:: ../../_templates/registrations/windows/restart_agent.rst
+
+   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
 
 
  .. group-tab:: MacOS X host
 
-  Open a session in the Linux/Unix agent host as a ``root`` user.
+  Open a session in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
-  1. Register the agent using the password. It can be stored in a file or provided as a command-line argument:
+  1. Register the Wazuh agent using the password. It can be stored in a file or provided as a command-line argument:
 
     .. tabs::
 
      .. group-tab:: Using a stored password
 
-      Write the password on ``/Library/Ossec/etc/authd.pass`` file and run the ``agent-auth`` program using the manager’s IP address:
+      Write the password on ``/Library/Ossec/etc/authd.pass`` file and run the ``agent-auth`` program using the Wazuh manager’s IP address:
 
       .. code-block:: console
 
          # echo "<custom_password>" > /Library/Ossec/etc/authd.pass
          # /Library/Ossec/bin/agent-auth -m <manager_IP>
 
-      If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+      .. include:: ../../_templates/registrations/common/set_agent_name.rst
+
+
 
      .. group-tab:: Using a password as a command-line argument
 
-      Run the ``agent-auth`` program, provide the manager’s IP address together with the password following the ``-P`` flag:
+      Run the ``agent-auth`` program, provide the Wazuh manager’s IP address together with the password following the ``-P`` flag:
 
       .. code-block:: console
 
         # /Library/Ossec/bin/agent-auth -m <manager_IP> -P "<custom_password>"
 
-      If the new agent’s name is not provided, it is set automatically using hostname. To specify the agent's name add ``-A <agent_name>`` to the command above.
+      .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-  2. To enable the communication with the manager, edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+
+  2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
    .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-  3. Start the agent.
+  3. Restart the Wazuh agent:
 
-   .. include:: ../../_templates/registrations/macosx/start_agent.rst
+   .. include:: ../../_templates/registrations/macosx/restart_agent.rst
 
-  The agent registration can be adjusted by using different :ref:`agent-auth` options.
+  The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.

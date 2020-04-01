@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
- # /Library/Ossec/bin/ossec-control start
+ # /Library/Ossec/bin/ossec-control restart
 
 .. End of include file

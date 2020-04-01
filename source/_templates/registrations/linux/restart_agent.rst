@@ -2,23 +2,23 @@
 
 .. tabs::
 
- .. group-tab:: Using Systemd
+ .. group-tab:: Systemd
 
   .. code-block:: console
 
    # systemctl restart wazuh-agent
 
- .. group-tab:: SysV Init
+ .. group-tab:: SysV init
 
   .. code-block:: console
 
    # service wazuh-agent restart
 
- .. group-tab:: For Unix host
+ .. group-tab:: Other Unix based OS
 
   .. code-block:: console
 
-   # /var/ossec/bin/ossec-control start
-   
+   # /var/ossec/bin/ossec-control restart
+
 
 .. End of include file

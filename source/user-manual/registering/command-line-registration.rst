@@ -2,23 +2,23 @@
 
 .. _command-line-registration:
 
-Registering agents using the command line (CLI)
-===============================================
+Registering the Wazuh agents using the command line (CLI)
+=========================================================
 
-This method consists on registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` program, extracting the registration key and inserting it in the agent.
+This method consists on registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` program, extracting the registration key and inserting it in the Wazuh agent.
 
 .. note:: Root/Administrator user privileges are necessary to execute all the commands described below.
 
-Manager
-^^^^^^^
+Wazuh manager
+^^^^^^^^^^^^^
 
-1. On the CLI of the Wazuh manager host add the agent with ``manage_agents`` program providing new agent's name and IP address:
+1. On the CLI of the Wazuh manager's host add the Wazuh agent with ``manage_agents`` program providing new Wazuh agent's name and IP address:
 
    .. code-block:: console
 
     # /var/ossec/bin/manage_agents -a <agent_IP> -n <agent_name>
 
-2. Find the ``ID`` of the agent:
+2. Find the ``ID`` of the Wazuh agent:
 
    .. code-block:: console
 
@@ -31,7 +31,7 @@ Manager
 
            ID: 001, Name: agent_1, IP: any
 
-3. Extract the agent's registration key using the agent's ID:
+3. Extract the Wazuh agent's registration key using the Wazuh agent's ID:
 
    .. code-block:: console
 
@@ -45,20 +45,20 @@ Manager
            Agent key information for '001' is:
            MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
-   The ``key`` has to be imported to the agent to enable communication to the manager.
+   The ``key`` has to be imported to the Wazuh agent to enable communication to the Wazuh manager.
 
-Agent
-^^^^^
+Wazuh agent
+^^^^^^^^^^^
 
-Choose the tab corresponding to the agent host operating system:
+Choose the tab corresponding to the Wazuh agent's host operating system:
 
 .. tabs::
 
   .. group-tab:: Linux/Unix host
 
-   Open a session in your agent host as a ``root`` user.
+   Open a session in your Wazuh agent's host as a ``root`` user.
 
-   1. Import the registration key to the agent using ``manage_agents`` program:
+   1. Import the registration key to the Wazuh agent using ``manage_agents`` program:
 
     .. code-block:: console
 
@@ -77,23 +77,23 @@ Choose the tab corresponding to the agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   2. To enable the communication with the manager, edit the agent's ``/var/ossec/etc/ossec.conf`` configuration file:
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/var/ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   3. Start the agent:
+   3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/start_agent.rst
+    .. include:: ../../_templates/registrations/linux/restart_agent.rst
 
 
 
   .. group-tab:: Windows host
 
-   Open a session in your agent host as an ``Administrator``.
+   Open a session in your Wazuh agent's host as an ``Administrator``.
 
     .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
-   1. Import the registration key to the agent using ``manage_agents`` program:
+   1. Import the registration key to the Wazuh agent using ``manage_agents`` program:
 
     .. code-block:: console
 
@@ -112,21 +112,21 @@ Choose the tab corresponding to the agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   2. To enable the communication with the manager, edit the agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   3. Start the agent:
+   3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/start_agent.rst
+    .. include:: ../../_templates/registrations/windows/restart_agent.rst
 
 
 
   .. group-tab:: MacOS X host
 
-   Open a session in your agent host as a ``root`` user.
+   Open a session in your Wazuh agent's host as a ``root`` user.
 
-   1. Import the registration key to the agent using ``manage_agents`` program:
+   1. Import the registration key to the Wazuh agent using ``manage_agents`` program:
 
     .. code-block:: console
 
@@ -145,10 +145,10 @@ Choose the tab corresponding to the agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   2. To enable the communication with the manager, edit the agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-   3. Start the agent:
+   3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/macosx/start_agent.rst
+    .. include:: ../../_templates/registrations/macosx/restart_agent.rst

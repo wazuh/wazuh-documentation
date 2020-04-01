@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-The agent's installation directory depends on the architecture of the host:
+The Wazuh agent's installation directory depends on the architecture of the host:
 
  - ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
  - ``C:\Program Files\ossec-agent`` for ``x64`` hosts.

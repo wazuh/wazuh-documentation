@@ -2,13 +2,13 @@
 
 .. tabs::
 
- .. group-tab:: Using Powershell
+ .. group-tab:: Powershell
 
   .. code-block:: console
 
    # Restart-Service -Name wazuh
 
- .. group-tab:: Using Windows cmd
+ .. group-tab:: Windows cmd
 
   .. code-block:: console
 
