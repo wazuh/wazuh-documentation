@@ -5,7 +5,7 @@
 Upgrading Elastic Stack from 7.x to 7.y
 =======================================
 
-The process of upgrading Elastic Stack must be done in each node of the cluster, one at a time, otherwise, the cluster may become corrupt.
+In case of having more than one Elasticsearch nodes, the process of upgrading Elastic Stack must be done in each node of the cluster, one at a time, otherwise, the cluster may become corrupt.
 
 Prepare the Elastic Stack
 -------------------------
@@ -76,7 +76,7 @@ Upgrade Elasticsearch
 
     .. include:: ../../_templates/upgrading/common/check_shard_allocation.rst
 
-Once the shard allocation is finished, the next node in the cluster can be upgraded.    
+Once the shard allocation is finished, the next node in the cluster, if any, can be upgraded.    
 
 Upgrade Filebeat
 ----------------
@@ -109,11 +109,18 @@ Upgrade Filebeat
 
 #. Update the configuration file.
 
-    .. include:: ../../_templates/upgrading/common/update_filebeat_conf.rst
+    .. code-block:: console
+
+      # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
+      # chmod go+r /etc/filebeat/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
-    .. include:: ../../_templates/upgrading/common/alerts_template.rst
+    .. code-block:: console
+
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -194,9 +201,10 @@ Upgrade Kibana
         # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 
+     
+        
 
-
-#. Update configuration file permissions.
+#. Update the configuration file permissions.
 
     .. include:: ../../_templates/upgrading/common/update_kibana_conf_permissions.rst
 
@@ -206,10 +214,7 @@ Upgrade Kibana
 
 #. Restart Kibana.
 
-    .. code-block:: console
-
-      # systemctl daemon-reload
-      # systemctl restart kibana
+    .. include:: ../../_templates/upgrading/common/enable_kibana.rst
 
 Disabling repositories
 ^^^^^^^^^^^^^^^^^^^^^^
