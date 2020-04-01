@@ -94,12 +94,16 @@ Usage
 #. Get the ``docker-compose.yml`` file to your system:
 
     a) Only the file:
-
-      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER|/docker-compose.yml
+      
+      .. code-block:: console
+       
+        $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER|/docker-compose.yml
 
     b) Get the Wazuh repository:
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER| --single-branch
+      .. code-block:: console
+
+        $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER| --single-branch
 
 #. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
@@ -110,6 +114,26 @@ Usage
     b) Background::
 
         $ docker-compose up -d
+
+The compose file (``docker-compose.yml``) contains everything needed to deploy Wazuh, which includes the necessary configuration for each service. As mentioned, ``docker-compose up`` builds and runs each service defined in the compose file.
+
+Besides ``up``, docker-compose has the following commands:
+
+- ``down`` stops and removes a container created by ``up``.
+- ``start``, ``stop`` and ``restart`` start, stop and restart existing containers. They do not create or destroy containers like ``up`` and ``down``.
+
+Additionally, docker-compose commands can be run on a single service. This is done by specifying the service's name after the command::
+
+      $ docker-compose <command> <service name>
+
+
+Where ``service name`` is the name of each service in the ``docker-compose.yml`` file. By default:
+
+- wazuh
+- elasticsearch
+- kibana
+- nginx
+
 
 .. note::
   - Wazuh-kibana container will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticsearch is started. Then the set up process will continue normally.
