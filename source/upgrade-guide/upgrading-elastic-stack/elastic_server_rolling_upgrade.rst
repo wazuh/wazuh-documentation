@@ -19,7 +19,7 @@ Prepare the Elastic Stack
 
 #. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
-    .. include:: ../../_templates/upgrading/minor/add_repository.rst
+    .. include:: ../../_templates/upgrading/common/add_repository.rst
 
 Upgrade Elasticsearch
 ---------------------

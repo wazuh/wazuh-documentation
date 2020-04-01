@@ -8,174 +8,224 @@ Upgrading Elastic Stack from 6.x to 6.8
 Prepare the Elastic Stack
 -------------------------
 
-1. Stop the services:
+#. Stop the services:
 
-  .. code-block:: console
+  .. tabs::
 
-    # systemctl stop logstash
-    # systemctl stop filebeat
-    # systemctl stop kibana
 
-2. In case of having disabled the repository for Elastic Stack 6.x it can be enabled using:
+    .. group-tab:: Systemd
 
-  * For CentOS/RHEL/Fedora:
+      .. code-block:: console
 
-    .. code-block:: console
+        # systemctl stop logstash.service
+        # systemctl stop filebeat.service
+        # systemctl stop kibana.service
 
-      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-  * For Debian/Ubuntu:
 
-    .. code-block:: console
+    .. group-tab:: SysV Init
 
-      # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-6.x.list
-      # apt-get update
+      .. code-block:: console
 
-  * For openSUSE:
+          # service logstash stop
+          # service filebeat stop
+          # service kibana stop
 
-    .. code-block:: console
+#. In case of having disabled the repository for Elastic Stack 6.x it can be enabled using:
 
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
+  .. tabs::
+
+
+    .. group-tab:: Yum
+
+      .. code-block:: console
+
+        # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
+
+
+
+    .. group-tab:: APT
+
+      .. code-block:: console
+
+          # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-6.x.list
+          # apt-get update
+
+    .. group-tab:: ZYpp
+
+      .. code-block:: console
+
+          # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo   
 
 Upgrade Elasticsearch
 ---------------------
 
-1. Disable shard allocation
+At Wazuh we have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
 
-  .. code-block:: bash
+The current Wazuh Kibana plugin has been tested in Kibana version |ELASTIC_6_LATEST|. Each time a new version of the Elastic Stack is released we conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin. After testing is done and any necessary adjustments have been performed we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version.
 
-    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-    {
-      "persistent": {
-        "cluster.routing.allocation.enable": "primaries"
-      }
-    }
-    '
+If the repository is still enabled when Elastic releases a new version, the new Filebeat version would be installed on your system forcing the upgrade of Elasticsearch and Kibana.  If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it's possible that the Wazuh Kibana plugin could become incompatible.
 
-2. Stop non-essential indexing and perform a synced flush. (Optional)
+In order to anticipate and avoid this situation, it is recommended to disable the Elasticsearch repository in the following way:
 
-  .. code-block:: bash
+#. Disable shard allocation:
 
-    curl -X POST "localhost:9200/_flush/synced"
+    .. include:: ../../_templates/upgrading/common/disable_shard_allocation.rst
 
-3. Shut down a single node.
+#. (Optional) Stop non-essential indexing and perform a synced flush:
 
-  .. code-block:: console
+    .. include:: ../../_templates/upgrading/common/stop_indexing.rst
 
-    # systemctl stop elasticsearch
+#. Shut down the node:
+
+    .. include:: ../../_templates/upgrading/common/stop_elastic.rst
 
 4. Upgrade the node you shut down.
 
-  * For CentOS/RHEL/Fedora:
+    .. tabs::
 
-    .. code-block:: console
 
-      # yum install elasticsearch-|ELASTIC_6_LATEST|
+      .. group-tab:: Yum
 
-  * For Debian/Ubuntu:
+        .. code-block:: console
 
-    .. code-block:: console
+          # yum install elasticsearch-|ELASTIC_6_LATEST|
 
-      # apt-get install elasticsearch=|ELASTIC_6_LATEST|
-      # systemctl restart elasticsearch
 
-5. Restart the service.
 
-  .. code-block:: console
+      .. group-tab:: APT
 
-    # systemctl daemon-reload
-    # systemctl restart elasticsearch
+        .. code-block:: console
 
-6. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a *_cat/nodes* request:
+            # apt-get install elasticsearch=|ELASTIC_6_LATEST|
 
-  .. code-block:: bash
+  
+      .. group-tab:: ZYpp
 
-    curl -X GET "localhost:9200/_cat/nodes"
+        .. code-block:: console
 
-7. Reenable shard allocation.
+            # zypper install elasticsearch-|ELASTIC_6_LATEST|        
 
-  .. code-block:: bash
+#. Restart the service.
 
-    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-    {
-      "persistent": {
-        "cluster.routing.allocation.enable": null
-      }
-    }
-    '
+    .. include:: ../../_templates/upgrading/common/enable_elastic.rst
 
-8. Before upgrading the next node, wait for the cluster to finish shard allocation.
+#. Once the node is enabled, check that the node works properly:
 
-  .. code-block:: bash
+    .. include:: ../../_templates/upgrading/common/check_upgrade.rst
 
-    curl -X GET "localhost:9200/_cat/health?v"
+#. Reenable shard allocation.
 
-9. Repeat it for every Elasticsearch node.
-10. Load the Wazuh template for Elasticsearch:
+    .. include:: ../../_templates/upgrading/common/enable_shard_allocation.rst
+
+#. Check if the shard allocation is finished:
+
+    .. include:: ../../_templates/upgrading/common/check_shard_allocation.rst
+
+    Once the shard allocation is finished, the next node in the cluster, if any, can be upgraded.   
+
+#. Load the Wazuh template for Elasticsearch:
 
   .. code-block:: console
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/6.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
-^^^^^^^^^^^^^^^^
+----------------
 
-1. Upgrade the ``logstash`` package:
+#. Upgrade logstash.
 
-  a) For CentOS/RHEL/Fedora:
+    .. tabs::
 
-  .. code-block:: console
 
-    # yum install logstash-|ELASTIC_6_LATEST|
+      .. group-tab:: Yum
 
-  b) For Debian/Ubuntu:
+        .. code-block:: console
 
-  .. code-block:: console
+          # yum install logstash-|ELASTIC_6_LATEST|
 
-    # apt-get install logstash=1:|ELASTIC_6_LATEST|-1
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+
+            # apt-get install logstash=|ELASTIC_6_LATEST|
+
+  
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+            # zypper install logstash-|ELASTIC_6_LATEST|
 
 2. Download and set the Wazuh configuration for Logstash:
 
-  a) Local configuration:
+    .. tabs::
 
-    .. code-block:: console
 
-      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/logstash/6.x/01-wazuh-local.conf
-      # usermod -a -G ossec logstash
+      .. group-tab:: Local configuration
 
-  b) Remote configuration:
+        .. code-block:: console
 
-    .. code-block:: console
+          # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
+          # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/logstash/6.x/01-wazuh-local.conf
+          # usermod -a -G ossec logstash
 
-      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/logstash/6.x/01-wazuh-remote.conf
+      .. group-tab:: Remote configuration
 
-3. Start the Logstash service:
+        .. code-block:: console
 
-  .. code-block:: console
+          # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
+          # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/logstash/6.x/01-wazuh-remote.conf
 
-    # systemctl daemon-reload
-    # systemctl start logstash.service
+#. Start the Logstash service:
+
+  .. tabs::
+
+
+    .. group-tab:: Systemd
+
+
+      .. code-block:: console
+
+        # systemctl daemon-reload
+        # systemctl start logstash.service
+
+    .. group-tab:: SysV Init
+
+      .. code-block:: console
+      
+        # service logstash start
 
 Upgrade Filebeat
 ----------------
 
-1. Upgrade Filebeat.
+#. Upgrade Filebeat.
 
-  * For CentOS/RHEL/Fedora:
+    .. tabs::
 
-    .. code-block:: console
 
-      # yum install filebeat-|ELASTIC_6_LATEST|
+      .. group-tab:: Yum
 
-  * For Debian/Ubuntu:
+        .. code-block:: console
 
-    .. code-block:: console
+          # yum install filebeat-|ELASTIC_6_LATEST|
 
-      # apt-get install filebeat=|ELASTIC_6_LATEST|
 
-2. Update the configuration file.
+      .. group-tab:: APT
+
+        .. code-block:: console
+
+            # apt-get install filebeat=|ELASTIC_6_LATEST|
+
+  
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+            # zypper install filebeat-|ELASTIC_6_LATEST|
+
+#. Update the configuration file.
 
   .. code-block:: console
 
@@ -183,104 +233,117 @@ Upgrade Filebeat
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/6.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
-3. Restart Filebeat.
+#. Restart Filebeat.
 
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl restart filebeat
+    .. include:: ../../_templates/upgrading/common/enable_filebeat.rst
 
 Upgrade Kibana
 --------------
 
-Upgrade Kibana
-^^^^^^^^^^^^^^
+.. warning::
+  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
 
-1. Upgrade the ``kibana`` package:
+#. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
 
-  a) For CentOS/RHEL/Fedora:
+    .. include:: ../../_templates/upgrading/common/copy_wazuh_yml.rst
 
-  .. code-block:: console
+#. Remove the Wazuh app.
 
-    # yum install kibana-|ELASTIC_6_LATEST|
+    .. include:: ../../_templates/upgrading/common/remove_wazuh_app.rst
 
-  b) For Debian/Ubuntu:
+#. Upgrade Kibana.
 
-  .. code-block:: console
+    .. tabs::
 
-    # apt-get install kibana=|ELASTIC_6_LATEST|
 
-2. Uninstall the Wazuh app from Kibana:
+      .. group-tab:: Yum
 
-  a) Update file permissions. This will avoid several errors prior to updating the app:
+        .. code-block:: console
 
-  .. code-block:: console
+          # yum install kibana-|ELASTIC_6_LATEST|
 
-    # chown -R kibana:kibana /usr/share/kibana/optimize
-    # chown -R kibana:kibana /usr/share/kibana/plugins
 
-  b) Remove the Wazuh app:
 
-  .. code-block:: console
+      .. group-tab:: APT
 
-    # cd /usr/share/kibana/
-    # sudo -u kibana bin/kibana-plugin remove wazuh
+        .. code-block:: console
 
-3. Upgrade the Wazuh app:
+            # apt-get install kibana=|ELASTIC_6_LATEST|
 
-  * Install from URL:
+  
+      .. group-tab:: ZYpp
 
-  .. code-block:: console
+        .. code-block:: console
 
-    # cd /usr/share/kibana/
-    # rm -rf optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTIC_6_LATEST|.zip
+            # zypper install kibana-|ELASTIC_6_LATEST|
 
-  * Install from the package:
+#. Remove generated bundles.
 
-  .. code-block:: console
+    .. include:: ../../_templates/upgrading/common/remove_generated_bundles.rst
 
-    # cd /usr/share/kibana/
-    # rm -rf optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_7.6.0.zip
+#. Update file permissions. This will avoid several errors prior to updating the app.
 
-  .. warning::
+    .. include:: ../../_templates/upgrading/common/update_kibana_file_permissions.rst
 
-    The Wazuh app installation process may take several minutes. Please wait patiently.
+#. Upgrade the Wazuh app:
 
-4. Start the Kibana service:
+    .. tabs::
 
-  .. code-block:: console
 
-    # systemctl daemon-reload
-    # systemctl enable kibana.service
-    # systemctl start kibana.service
+      .. group-tab:: Install from URL
+
+        .. code-block:: console
+
+          # cd /usr/share/kibana/
+          # rm -rf optimize/bundles
+          # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTIC_6_LATEST|.zip
+
+      .. group-tab:: Install from the package
+
+        .. code-block:: console
+
+          # cd /usr/share/kibana/
+          # rm -rf optimize/bundles
+          # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTIC_6_LATEST|.zip
+
+      .. warning::
+
+        The Wazuh app installation process may take several minutes. Please wait patiently.
+
+#. Restart Kibana.
+
+    .. include:: ../../_templates/upgrading/common/enable_kibana.rst
 
 Disabling repositories
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
-    * For CentOS/RHEL/Fedora:
+  .. tabs::
+
+
+    .. group-tab:: Yum
 
       .. code-block:: console
 
         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
-    * For Debian/Ubuntu:
+
+
+    .. group-tab:: APT
 
       .. code-block:: console
 
-        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
-        # apt-get update
+          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
+          # apt-get update
 
-      Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+        Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+        .. code-block:: console
+
+          # echo "elasticsearch hold" | sudo dpkg --set-selections
+          # echo "kibana hold" | sudo dpkg --set-selections
+
+    .. group-tab:: ZYpp
 
       .. code-block:: console
 
-        # echo "elasticsearch hold" | sudo dpkg --set-selections
-        # echo "kibana hold" | sudo dpkg --set-selections
-
-    * For openSUSE:
-
-      .. code-block:: console
-
-        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+          # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
