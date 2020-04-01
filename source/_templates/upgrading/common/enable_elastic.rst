@@ -17,18 +17,20 @@
 
     Choose one option according to the OS used:
 
-    a) Debian based OS
+      .. tabs::
 
-      .. code-block:: console
+        .. group-tab:: Debian based OS
 
-        # update-rc.d elasticsearch defaults 95 10
-        # service elasticsearch start
+          .. code-block:: console
 
-    b) RPM based OS
+            # update-rc.d elasticsearch defaults 95 10
+            # service elasticsearch start
 
-      .. code-block:: console
+        .. group-tab:: RPM based OS
 
-        # chkconfig --add elasticsearch
-        # service elasticsearch start
+          .. code-block:: console
+
+            # chkconfig --add elasticsearch
+            # service elasticsearch start
 
 .. End of include file
