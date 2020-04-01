@@ -113,7 +113,7 @@ Upgrade Elasticsearch
 
     .. include:: ../../_templates/upgrading/common/check_shard_allocation.rst
 
-Once the shard allocation is finished, the next node in the cluster, if any, can be upgraded.  
+    Once the shard allocation is finished, the next node in the cluster, if any, can be upgraded.  
 
 
 Field migration: From @timestamp to timestamp
