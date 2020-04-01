@@ -277,6 +277,8 @@ Example:
  <ignore>/etc/mtab</ignore>
  <ignore type="sregex">.log$|.swp$</ignore>
 
+.. _reference_ossec_syscheck_nodiff:
+
 nodiff
 ^^^^^^
 
@@ -322,6 +324,8 @@ Example:
 
  <frequency>43200</frequency>
 
+.. _reference_ossec_syscheck_scan_time:
+
 scan_time
 ^^^^^^^^^^^
 
@@ -342,6 +346,8 @@ Example:
 .. note::
 
    This may delay the initialization of real-time scans.
+
+.. _reference_ossec_syscheck_scan_day:
 
 scan_day
 ^^^^^^^^^
@@ -478,6 +484,8 @@ Example:
 .. note::
 
    New entries will not trigger alerts, only changes to existing entries.
+
+.. _reference_ossec_syscheck_registry_ignore:
 
 registry_ignore
 ^^^^^^^^^^^^^^^
@@ -938,65 +946,65 @@ Sets the maximum synchronization message throughput.
 
   .. code-block:: xml
 
-    <!-- File integrity monitoring -->
-	  <syscheck>
-		
-	    <disabled>no</disabled>
+   <!-- File integrity monitoring -->
+   <syscheck>
 
-	    <!-- Frequency that syscheck is executed default every 12 hours -->
-	    <frequency>43200</frequency>
+    <disabled>no</disabled>
 
-	    <scan_on_start>yes</scan_on_start>
+    <!-- Frequency that syscheck is executed default every 12 hours -->
+    <frequency>43200</frequency>
 
-	    <!-- Generate alert when new file detected -->
-	    <alert_new_files>yes</alert_new_files>
+    <scan_on_start>yes</scan_on_start>
 
-	    <!-- Don't ignore files that change more than 'frequency' times -->
-	    <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
+    <!-- Generate alert when new file detected -->
+    <alert_new_files>yes</alert_new_files>
 
-	    <!-- Directories to check  (perform all possible verifications) -->
-	    <directories>/etc,/usr/bin,/usr/sbin</directories>
-	    <directories>/bin,/sbin,/boot</directories>
+    <!-- Don't ignore files that change more than 'frequency' times -->
+    <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
 
-	    <!-- Files/directories to ignore -->
-	    <ignore>/etc/mtab</ignore>
-	    <ignore>/etc/hosts.deny</ignore>
-	    <ignore>/etc/mail/statistics</ignore>
-	    <ignore>/etc/random-seed</ignore>
-	    <ignore>/etc/random.seed</ignore>
-	    <ignore>/etc/adjtime</ignore>
-	    <ignore>/etc/httpd/logs</ignore>
-	    <ignore>/etc/utmpx</ignore>
-	    <ignore>/etc/wtmpx</ignore>
-	    <ignore>/etc/cups/certs</ignore>
-	    <ignore>/etc/dumpdates</ignore>
-	    <ignore>/etc/svc/volatile</ignore>
+    <!-- Directories to check  (perform all possible verifications) -->
+    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/bin,/sbin,/boot</directories>
 
-	    <!-- File types to ignore -->
-	    <ignore type="sregex">.log$|.swp$</ignore>
+    <!-- Files/directories to ignore -->
+    <ignore>/etc/mtab</ignore>
+    <ignore>/etc/hosts.deny</ignore>
+    <ignore>/etc/mail/statistics</ignore>
+    <ignore>/etc/random-seed</ignore>
+    <ignore>/etc/random.seed</ignore>
+    <ignore>/etc/adjtime</ignore>
+    <ignore>/etc/httpd/logs</ignore>
+    <ignore>/etc/utmpx</ignore>
+    <ignore>/etc/wtmpx</ignore>
+    <ignore>/etc/cups/certs</ignore>
+    <ignore>/etc/dumpdates</ignore>
+    <ignore>/etc/svc/volatile</ignore>
 
-	    <!-- Check the file, but never compute the diff -->
-	    <nodiff>/etc/ssl/private.key</nodiff>
+    <!-- File types to ignore -->
+    <ignore type="sregex">.log$|.swp$</ignore>
 
-	    <skip_nfs>yes</skip_nfs>
-	    <skip_dev>yes</skip_dev>
-	    <skip_proc>yes</skip_proc>
-	    <skip_sys>yes</skip_sys>
+    <!-- Check the file, but never compute the diff -->
+    <nodiff>/etc/ssl/private.key</nodiff>
 
-	    <!-- Nice value for Syscheck process -->
-	    <process_priority>10</process_priority>
+    <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
 
-	    <!-- Maximum output throughput -->
-	    <max_eps>100</max_eps>
+    <!-- Nice value for Syscheck process -->
+    <process_priority>10</process_priority>
 
-	    <!-- Database synchronization settings -->
-	    <synchronization>
-	      <interval>5m</interval>
-	      <max_interval>1h</max_interval>
-	      <max_eps>10</max_eps>
-	    </synchronization>
+    <!-- Maximum output throughput -->
+    <max_eps>100</max_eps>
 
-	  </syscheck>
+    <!-- Database synchronization settings -->
+    <synchronization>
+     <interval>5m</interval>
+     <max_interval>1h</max_interval>
+     <max_eps>10</max_eps>
+    </synchronization>
+
+   </syscheck>
 
 
 
