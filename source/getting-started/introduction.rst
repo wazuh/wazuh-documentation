@@ -35,7 +35,7 @@ Installation types
 
 The Wazuh server and Elastic stack can be installed and operated in one of these five deployments:
 
-- All in one: the Wazuh server and Elastic Stack subsystems run on a single host.
+- All-in-one: the Wazuh server and Elastic Stack subsystems run on a single host.
 
 .. thumbnail:: ../images/installation/installing_wazuh_architecture_onehost.png
     :title: Installing Wazuh manager - single server architecture
@@ -127,9 +127,9 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 
 + **RESTful API:** This provides an interface to manage and monitor the configuration and deployment status of agents. It is also used by the Wazuh web interface, which is a Kibana app.
 
-Jumpstart to Wazuh
-------------------
+All-in-One installation
+-----------------------
 
-The Jumpstart to Wazuh guide will focus in the first installation type: all the components in the same host. Follow `this document <all_in_one>`_ to start configuring the Jumpstart to Wazuh for non-production or small environments.
+The All-in-One installation guide will focus on the first installation type: all the components in the same host. Follow `this document <all_in_one>`_ to start configuring the All-in-One installation for non-production or small environments.
 
 
