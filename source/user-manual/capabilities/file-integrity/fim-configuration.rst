@@ -55,7 +55,7 @@ Syscheck has an option to configure the :ref:`frequency <reference_ossec_syschec
     <directories>/bin,/sbin</directories>
   </syscheck>
 
-There is an alternative way to schedule the scans using the :ref:`scan_time <reference_ossec_syscheck_scan_time>` and the :ref:`scan_day <reference_ossec_syscheck_scan_day>` options. In this example, the scan will run every Saturday at the 10pm. Configuring **syscheck** that way might help, for example, to set up the scans outside the environment production hours.
+There is an alternative way to schedule the scans using the :ref:`scan_time <reference_ossec_syscheck_scan_time>` and the :ref:`scan_day <reference_ossec_syscheck_scan_day>` options. In this example, the scan will run every Saturday at the 10pm. Configuring syscheck that way might help, for example, to set up the scans outside the environment production hours.
 
 .. code-block:: xml
 
@@ -69,6 +69,7 @@ There is an alternative way to schedule the scans using the :ref:`scan_time <ref
 
 Configuring real-time monitoring
 --------------------------------
+
 Real-time monitoring is configured with the ``realtime`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute only works with the directories rather than with the individual files. Real-time change detection is paused during periodic syscheck scans and reactivates as soon as these scans are complete.
 
 .. code-block:: xml
@@ -100,7 +101,7 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
 Configuring reporting file changes
 ----------------------------------
 
-To report the exact content that has been changed in a text file, syscheck can be configured with the ``report_changes``attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
+To report the exact content that has been changed in a text file, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
 
 In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories:
 
