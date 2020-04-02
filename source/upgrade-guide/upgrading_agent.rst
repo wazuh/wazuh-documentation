@@ -7,47 +7,51 @@ Upgrade the Wazuh agent
 
 Since the Wazuh 3.x version it is possible to upgrade the agents from the manager or locally.
 
-Upgrading the agents remotely from the manager is possible thanks to the agent_upgrade tools and the Wazuh API. You may check it in the  :ref:`Upgrading agent<upgrading-agent>` section.
+Upgrading the agents remotely from the manager is possible thanks to the agent_upgrade tool and the Wazuh API. Further information can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
 
-To perform the upgrade locally you have to follow the next steps:
+Choose a tab depending on the OS where the agent is installed: 
 
-a) CentOS/RHEL/Fedora:
+.. tabs::
 
-  .. code-block:: console
+  .. group-tab:: Yum
 
-    # yum upgrade wazuh-agent
+    .. code-block:: console
 
-b) Debian/Ubuntu:
+      # yum upgrade wazuh-agent
 
-  .. code-block:: console
+  .. group-tab:: APT
 
-    # apt-get update
-    # apt-get install wazuh-agent
+    .. code-block:: console
 
-c) OpenSUSE:
+      # apt-get update
+      # apt-get install wazuh-agent
 
-  .. code-block:: console
+  .. group-tab:: ZYpp
 
-    # zypper update wazuh-agent
+    .. code-block:: console
 
-d) Windows:
+      # zypper update wazuh-agent
 
-  The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
+  .. group-tab:: Windows
 
-  * Using the GUI installer:
+    The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
 
-  Open the installer and follow the instructions to upgrade the agent.
+    .. tabs::
+  
+      .. group-tab:: Using the GUI installer
 
-    .. image:: ../images/installation/windows.png
-      :align: center
+        Open the installer and follow the instructions to upgrade the agent.
 
-  * Using the command line:
+          .. image:: ../images/installation/windows.png
+            :align: center
 
-  To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
+      .. group-tab:: Using the command line
 
-  .. code-block:: console
+        To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
 
-    # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+        .. code-block:: console
 
-.. note::
-  To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+          # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+
+    .. note::
+      To learn more about the unattended installation process, please check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
