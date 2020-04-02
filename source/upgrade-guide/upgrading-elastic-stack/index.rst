@@ -5,14 +5,11 @@
 Upgrading Elastic Stack
 =======================
 
-
-This guide describes the upgrading of an Elastic Stack including Filebeat, Logstash, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
-
-In addition to Elastic Stack components, you will also find the instructions to install and configure the Wazuh app (deployed as a Kibana plugin).
+In this guide it is described how to upgrade Elastic Stack including Filebeat, Logstash, Elasticsearch, and Kibana. Besides, it is also described how  to install and configure the Wazuh Kibana plugin. It has been used the package-based upgrade but it can be also installed from binary tarballs.
 
 .. note::
 
-    Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_
+    Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_. Alternatively, Elastic Stack can be upgraded from 6.x to 6.8 and after that, upgraded it to |ELASTICSEARCH_LATEST|.
 
 +----------------------------------------------------------+----------------------------------------------------+
 | Type                                                     | Description                                        |
