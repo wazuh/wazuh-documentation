@@ -5,7 +5,7 @@
 Registering the Wazuh agents using the Wazuh API
 ================================================
 
-The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` program.
+The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` utility.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -15,7 +15,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
   .. group-tab:: Linux/Unix host
 
-   1. Open a session in the Wazuh agent's host as a root user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
+   1. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
 
     .. code-block:: console
 
@@ -36,7 +36,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
     More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
 
-   2. Import the registration key to the Wazuh agent using ``manage_agents`` program. Replace the Wazuh agent's registration key:
+   2. Import the registration key to the Wazuh agent using ``manage_agents`` utility. Replace the Wazuh agent's registration key:
 
     .. code-block:: console
 
@@ -67,7 +67,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
   .. group-tab:: Windows host
 
-   Open a Powershell session in the Wazuh agent's host as an Administrator.
+   Open a Powershell session in the Wazuh agent's host as an ``Administrator``.
 
    .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
@@ -124,7 +124,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
              }
             }
 
-   3. Import the registration key to the Wazuh agent using ``manage_agents`` program:
+   3. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
 
     .. code-block:: console
 
@@ -155,7 +155,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
   .. group-tab:: MacOS X host
 
-   1. Open a session in the Wazuh agent host as a root user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
+   1. Open a terminal in the Wazuh agent host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
 
     .. code-block:: console
 
@@ -176,7 +176,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
     More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
 
-   2. Import the registration key to the Wazuh agent using ``manage_agents`` program. Replace the Wazuh agent's registration key:
+   2. Import the registration key to the Wazuh agent using ``manage_agents`` utility. Replace the Wazuh agent's registration key:
 
     .. code-block:: console
 

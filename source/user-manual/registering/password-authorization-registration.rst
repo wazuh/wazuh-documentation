@@ -61,7 +61,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
  .. group-tab:: Linux/Unix host
 
-   Open a session in the Linux/Unix Wazuh agent's host as a ``root`` user.
+   Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
    1. Register the Wazuh agent using the password. It can be stored in a file or provided as a command-line argument:
 
@@ -69,7 +69,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
       .. group-tab:: Using a stored password
 
-       Write the password on ``/var/ossec/etc/authd.pass`` file and run the ``agent-auth`` program using the Wazuh manager’s IP address:
+       Write the password on ``/var/ossec/etc/authd.pass`` file and run the ``agent-auth`` utility using the Wazuh manager’s IP address:
 
        .. code-block:: console
 
@@ -82,7 +82,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
       .. group-tab:: Using a password as a command-line argument
 
-       Run the ``agent-auth`` program providing the Wazuh manager’s IP address together with the password followed by the ``-P`` flag:
+       Run the ``agent-auth`` utility providing the Wazuh manager’s IP address together with the password followed by the ``-P`` flag:
 
        .. code-block:: console
 
@@ -116,7 +116,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
       .. group-tab:: Using a stored password
 
-       Write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` file and run the ``agent-auth`` program using the Wazuh manager’s IP address:
+       Write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` file and run the ``agent-auth`` utility using the Wazuh manager’s IP address:
 
        .. code-block:: none
 
@@ -131,7 +131,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
       .. group-tab:: Using a password as a command-line argument
 
-       Run the ``agent-auth`` program, provide the Wazuh manager’s IP address together with the password following the ``-P`` flag:
+       Run the ``agent-auth`` utility, provide the Wazuh manager’s IP address together with the password following the ``-P`` flag:
 
        .. code-block:: none
 
@@ -155,7 +155,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
  .. group-tab:: MacOS X host
 
-  Open a session in the Linux/Unix Wazuh agent's host as a ``root`` user.
+  Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
   1. Register the Wazuh agent using the password. It can be stored in a file or provided as a command-line argument:
 
@@ -163,7 +163,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
      .. group-tab:: Using a stored password
 
-      Write the password on ``/Library/Ossec/etc/authd.pass`` file and run the ``agent-auth`` program using the Wazuh manager’s IP address:
+      Write the password on ``/Library/Ossec/etc/authd.pass`` file and run the ``agent-auth`` utility using the Wazuh manager’s IP address:
 
       .. code-block:: console
 
@@ -176,7 +176,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
      .. group-tab:: Using a password as a command-line argument
 
-      Run the ``agent-auth`` program, provide the Wazuh manager’s IP address together with the password following the ``-P`` flag:
+      Run the ``agent-auth`` utility, provide the Wazuh manager’s IP address together with the password following the ``-P`` flag:
 
       .. code-block:: console
 

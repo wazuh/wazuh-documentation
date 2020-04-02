@@ -5,14 +5,14 @@
 Registering the Wazuh agents using the command line (CLI)
 =========================================================
 
-This method consists on registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` program, extracting the registration key and inserting it in the Wazuh agent.
+This method consists on registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` utility, extracting the registration key and inserting it in the Wazuh agent.
 
 .. note:: Root/Administrator user privileges are necessary to execute all the commands described below.
 
 Wazuh manager
 ^^^^^^^^^^^^^
 
-1. On the CLI of the Wazuh manager's host add the Wazuh agent with ``manage_agents`` program providing new Wazuh agent's name and IP address:
+1. On the CLI of the Wazuh manager's host add the Wazuh agent with ``manage_agents`` utility providing new Wazuh agent's name and IP address:
 
    .. code-block:: console
 
@@ -56,9 +56,9 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
   .. group-tab:: Linux/Unix host
 
-   Open a session in your Wazuh agent's host as a ``root`` user.
+   Open a terminal in your Wazuh agent's host as a ``root`` user.
 
-   1. Import the registration key to the Wazuh agent using ``manage_agents`` program:
+   1. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
 
     .. code-block:: console
 
@@ -89,11 +89,11 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
   .. group-tab:: Windows host
 
-   Open a session in your Wazuh agent's host as an ``Administrator``.
+   Open a a Powershell or CMD session in your Wazuh agent's host as an ``Administrator``.
 
     .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
-   1. Import the registration key to the Wazuh agent using ``manage_agents`` program:
+   1. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
 
     .. code-block:: console
 
@@ -124,9 +124,9 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
   .. group-tab:: MacOS X host
 
-   Open a session in your Wazuh agent's host as a ``root`` user.
+   Open a terminal in your Wazuh agent's host as a ``root`` user.
 
-   1. Import the registration key to the Wazuh agent using ``manage_agents`` program:
+   1. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
 
     .. code-block:: console
 

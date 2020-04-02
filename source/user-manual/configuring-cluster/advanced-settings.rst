@@ -1,7 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
+.. _cluster_agents_connections:
+
 Agents connections
-======================
+==================
 
     In this section we are going to explore other ways to configure our cluster. We'll see that besides the basic way described in our :ref:`Getting started <gt-cluster>`, we have the options to use a load balancer or a failover mode.
 

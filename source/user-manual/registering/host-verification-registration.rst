@@ -92,7 +92,7 @@ There are two options to register the Wazuh agent using host verification:
 
     .. group-tab:: Linux/Unix host
 
-     Open a session in the Linux/Unix Wazuh agent's host as a ``root`` user.
+     Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
      1. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``/var/ossec/etc`` folder:
 
@@ -100,7 +100,7 @@ There are two options to register the Wazuh agent using host verification:
 
         # cp rootCA.pem /var/ossec/etc
 
-     2. To register the Wazuh agent, run the ``agent-auth`` program providing the Wazuh manager’s IP address and location of the CA:
+     2. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
 
       .. code-block:: console
 
@@ -126,7 +126,7 @@ There are two options to register the Wazuh agent using host verification:
 
     .. group-tab:: Windows host
 
-     Open a session in the Windows Wazuh agent's host and start a CMD or a Powershell as an ``Administrator``.
+     Open a Powershell or CMD session in the Windows Wazuh agent's host and start a CMD or a Powershell as an ``Administrator``.
 
      .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
@@ -136,7 +136,7 @@ There are two options to register the Wazuh agent using host verification:
 
          # cp rootCA.pem C:\Program Files (x86)\ossec-agent
 
-     2. To register the Wazuh agent, run the ``agent-auth`` program providing the Wazuh manager’s IP address and location of the CA:
+     2. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
 
         .. code-block:: console
 
@@ -162,7 +162,7 @@ There are two options to register the Wazuh agent using host verification:
 
     .. group-tab:: MacOS X host
 
-     Open a session in the MacOS X Wazuh agent's host as a ``root`` user.
+     Open a terminal in the MacOS X Wazuh agent's host as a ``root`` user.
 
      1. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``/Library/Ossec/etc`` folder:
 
@@ -170,7 +170,7 @@ There are two options to register the Wazuh agent using host verification:
 
          # cp rootCA.pem /Library/Ossec/etc
 
-     2. To register the Wazuh agent, run the ``agent-auth`` program providing the Wazuh manager’s IP address and location of the CA:
+     2. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
 
         .. code-block:: console
 
@@ -291,7 +291,7 @@ There are two options to register the Wazuh agent using host verification:
 
     .. group-tab:: Linux/Unix host
 
-     Open a session in the Linux/Unix Wazuh agent's host as a ``root`` user.
+     Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
      1. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``/var/ossec/etc`` folder:
 
@@ -299,7 +299,7 @@ There are two options to register the Wazuh agent using host verification:
 
           # cp sslagent.cert sslagent.key /var/ossec/etc
 
-     2. To register the Wazuh agent, run the ``agent-auth`` program which automatically adds the Wazuh agent to the Wazuh manager:
+     2. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
 
        .. code-block:: console
 
@@ -321,7 +321,7 @@ There are two options to register the Wazuh agent using host verification:
 
     .. group-tab:: Windows host
 
-      Open a session in the Windows Wazuh agent's host and start a CMD or a Powershell as an ``Administrator``.
+      Open a Powershell or CMD session in the Windows Wazuh agent's host and start a CMD or a Powershell as an ``Administrator``.
 
       .. include:: ../../_templates/registrations/windows/installation_directory.rst
 
@@ -331,7 +331,7 @@ There are two options to register the Wazuh agent using host verification:
 
         # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
 
-      2. To register the Wazuh agent, run the ``agent-auth`` program which automatically adds the Wazuh agent to the Wazuh manager:
+      2. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
 
        .. code-block:: console
 
@@ -351,7 +351,7 @@ There are two options to register the Wazuh agent using host verification:
 
     .. group-tab:: MacOS X host
 
-       Open a session in the MacOS X Wazuh agent's host as a ``root`` user.
+       Open a terminal in the MacOS X Wazuh agent's host as a ``root`` user.
 
        1. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``/Library/Ossec/etc`` folder:
 
@@ -359,7 +359,7 @@ There are two options to register the Wazuh agent using host verification:
 
              # cp sslagent.cert sslagent.key /Library/Ossec/etc
 
-       2. To register the Wazuh agent, run the ``agent-auth`` program which automatically adds the Wazuh agent to the Wazuh manager:
+       2. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
 
           .. code-block:: console
 
