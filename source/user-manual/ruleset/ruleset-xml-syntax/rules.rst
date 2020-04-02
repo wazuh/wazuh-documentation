@@ -83,6 +83,8 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `not_same_user`_    | None.                                                         | The decoded ``user`` must be different.                                                              |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_agent`_   | None.                                                         | The decoded ``agent`` must be different.                                                             |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous ones.                                         |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `not_same_field`_   | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
@@ -854,6 +856,16 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <not_same_user />  |
++--------------------+--------------------+
+
+not_same_agent
+^^^^^^^^^^^^^^
+
+Specifies that the decoded agent must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------+
+| **Example of use** | <not_same_agent /> |
 +--------------------+--------------------+
 
 same_field
