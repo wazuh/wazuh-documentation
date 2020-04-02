@@ -5,50 +5,20 @@
 Upgrade from the same minor or major version
 ============================================
 
-Use these instructions if you are upgrading your Wazuh installation within same minor version (for example, 3.9.0 to 3.9.5)
+This section explains how to upgrade a Wazuh installation within same minor version (for example, 3.9.0 to 3.9.5)
 or within the same major version (for example, from 3.8.2 to |WAZUH_LATEST|).
 
 Upgrade the Wazuh manager and Wazuh API
 ---------------------------------------
 
-a) Upgrade on CentOS/RHEL/Fedora:
+    .. include:: ../../_templates/upgrading/wazuh/update_manager_api.rst
 
-.. code-block:: console
-
-    # yum upgrade wazuh-manager wazuh-api
-
-b) Upgrade on Debian/Ubuntu:
-
-.. code-block:: console
-
-    # apt-get update
-    # apt-get install wazuh-manager wazuh-api
-
-c) Upgrade on OpenSUSE:
-
-.. code-block:: console
-
-    # zypper update wazuh-manager wazuh-api
+.. note::
+  The installation of the updated packages **will automatically restart the services** for the Wazuh manager and API. The Wazuh config file will keep **unmodified**, so the settings for the new capabilities will have to be added manually. Check the :ref:`User Manual <user_manual>` for more information.
 
 
-Upgrade the Wazuh agent
------------------------
+Disabling repositories
+----------------------
 
-a) Upgrade the Wazuh agent on CentOS/RHEL/Fedora:
-
-.. code-block:: console
-
-    # yum upgrade wazuh-agent
-
-b) Upgrade the Wazuh agent on Debian/Ubuntu:
-
-.. code-block:: console
-
-    # apt-get update
-    # apt-get install wazuh-agent
-
-c) Upgrade the Wazuh agent on OpenSUSE:
-
-.. code-block:: console
-
-    # zypper update wazuh-agent
+    .. include:: ../../_templates/upgrading/wazuh/disable_repository.rst
+    
