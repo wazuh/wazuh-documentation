@@ -3,10 +3,12 @@
 .. _elastic_server_hard_upgrade:
 
 Upgrading Elastic Stack from 6.x to 6.8
----------------------------------------
+=======================================
+
+In case of having installed a version under Elastic Stack 6.8 and willing to upgrade it to |ELASTICSEARCH_LATEST|, it is recommended to first upgrade it to 6.8 version. If the cluster is formed by two or more Elasticsearch nodes, the process should be done one at a time, otherwise, the cluster may become corrupt.
 
 Prepare the Elastic Stack
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 #. Stop the services:
 
@@ -313,6 +315,11 @@ Upgrade Kibana
 #. Restart Kibana.
 
     .. include:: ../../_templates/upgrading/common/enable_kibana.rst
+
+Upgrading to |ELASTICSEARCH_LATEST|
+-----------------------------------
+
+  Now that Elastic Stack is running in version 6.8, it can be upgraded to |ELASTICSEARCH_LATEST| version. Further instructions can be found :ref:`here <elastic_server_rolling_upgrade>`.
 
 Disabling repositories
 ----------------------
