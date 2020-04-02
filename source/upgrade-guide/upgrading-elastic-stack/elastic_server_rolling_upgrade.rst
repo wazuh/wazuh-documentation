@@ -15,26 +15,26 @@ Prepare the Elastic Stack
 
 #. Stop the services:
 
-    .. include:: ../../_templates/upgrading/common/stop_services.rst
+    .. include:: ../../_templates/upgrading/elastic/common/stop_services.rst
 
 #. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
-    .. include:: ../../_templates/upgrading/common/add_repository.rst
+    .. include:: ../../_templates/upgrading/elastic/common/add_repository.rst
 
 Upgrade Elasticsearch
 ---------------------
 
 #. Disable shard allocation:
 
-    .. include:: ../../_templates/upgrading/common/disable_shard_allocation.rst
+    .. include:: ../../_templates/upgrading/elastic/common/disable_shard_allocation.rst
 
 #. (Optional) Stop non-essential indexing and perform a synced flush:
 
-    .. include:: ../../_templates/upgrading/common/stop_indexing.rst
+    .. include:: ../../_templates/upgrading/elastic/common/stop_indexing.rst
 
 #. Shut down the node:
 
-    .. include:: ../../_templates/upgrading/common/stop_elastic.rst
+    .. include:: ../../_templates/upgrading/elastic/common/stop_elastic.rst
 
 #. Upgrade the node:
 
@@ -99,19 +99,19 @@ Upgrade Elasticsearch
 
 #. Restart the service.
 
-    .. include:: ../../_templates/upgrading/common/enable_elastic.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_elastic.rst
 
 #. Once the node is enabled, check that the node works properly:
 
-    .. include:: ../../_templates/upgrading/common/check_upgrade.rst
+    .. include:: ../../_templates/upgrading/elastic/common/check_upgrade.rst
 
 #. Reenable shard allocation:
 
-    .. include:: ../../_templates/upgrading/common/enable_shard_allocation.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_shard_allocation.rst
 
 #. Check if the shard allocation is finished:
 
-    .. include:: ../../_templates/upgrading/common/check_shard_allocation.rst
+    .. include:: ../../_templates/upgrading/elastic/common/check_shard_allocation.rst
 
     Once the shard allocation is finished, the next node in the cluster, if any, can be upgraded.  
 
@@ -194,15 +194,15 @@ Upgrade Filebeat
 
 #. Download the Wazuh module for Filebeat:
 
-    .. include:: ../../_templates/upgrading/common/download_wazuh_module.rst
+    .. include:: ../../_templates/upgrading/elastic/common/download_wazuh_module.rst
 
 #. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
-    .. include:: ../../_templates/upgrading/common/edit_filebeat_file.rst
+    .. include:: ../../_templates/upgrading/elastic/common/edit_filebeat_file.rst
 
 #. Restart Filebeat.
 
-    .. include:: ../../_templates/upgrading/common/enable_filebeat.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_filebeat.rst
 
 Upgrade Kibana
 --------------
@@ -212,11 +212,11 @@ Upgrade Kibana
 
 #. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
 
-    .. include:: ../../_templates/upgrading/common/copy_wazuh_yml.rst
+    .. include:: ../../_templates/upgrading/elastic/common/copy_wazuh_yml.rst
 
 #. Remove the Wazuh app.
 
-    .. include:: ../../_templates/upgrading/common/remove_wazuh_app.rst
+    .. include:: ../../_templates/upgrading/elastic/common/remove_wazuh_app.rst
 
 #. Upgrade Kibana.
 
@@ -264,20 +264,20 @@ Upgrade Kibana
 
 #. Update the configuration file permissions.
 
-    .. include:: ../../_templates/upgrading/common/update_kibana_conf_permissions.rst
+    .. include:: ../../_templates/upgrading/elastic/common/update_kibana_conf_permissions.rst
 
 #. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
-    .. include:: ../../_templates/upgrading/common/increase_heap_size.rst
+    .. include:: ../../_templates/upgrading/elastic/common/increase_heap_size.rst
 
 #. Restart Kibana.
 
-    .. include:: ../../_templates/upgrading/common/enable_kibana.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_kibana.rst
       
 Disabling repositories
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. include:: ../../_templates/upgrading/common/disabling_repository_message.rst
+.. include:: ../../_templates/upgrading/elastic/common/disabling_repository_message.rst
 
 
 .. tabs::

@@ -72,15 +72,15 @@ In order to anticipate and avoid this situation, it is recommended to disable th
 
 #. Disable shard allocation:
 
-    .. include:: ../../_templates/upgrading/common/disable_shard_allocation.rst
+    .. include:: ../../_templates/upgrading/elastic/common/disable_shard_allocation.rst
 
 #. (Optional) Stop non-essential indexing and perform a synced flush:
 
-    .. include:: ../../_templates/upgrading/common/stop_indexing.rst
+    .. include:: ../../_templates/upgrading/elastic/common/stop_indexing.rst
 
 #. Shut down the node:
 
-    .. include:: ../../_templates/upgrading/common/stop_elastic.rst
+    .. include:: ../../_templates/upgrading/elastic/common/stop_elastic.rst
 
 4. Upgrade the node you shut down.
 
@@ -110,19 +110,19 @@ In order to anticipate and avoid this situation, it is recommended to disable th
 
 #. Restart the service.
 
-    .. include:: ../../_templates/upgrading/common/enable_elastic.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_elastic.rst
 
 #. Once the node is enabled, check that the node works properly:
 
-    .. include:: ../../_templates/upgrading/common/check_upgrade.rst
+    .. include:: ../../_templates/upgrading/elastic/common/check_upgrade.rst
 
 #. Reenable shard allocation.
 
-    .. include:: ../../_templates/upgrading/common/enable_shard_allocation.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_shard_allocation.rst
 
 #. Check if the shard allocation is finished:
 
-    .. include:: ../../_templates/upgrading/common/check_shard_allocation.rst
+    .. include:: ../../_templates/upgrading/elastic/common/check_shard_allocation.rst
 
     Once the shard allocation is finished, the next node in the cluster, if any, can be upgraded.   
 
@@ -237,7 +237,7 @@ Upgrade Filebeat
 
 #. Restart Filebeat.
 
-    .. include:: ../../_templates/upgrading/common/enable_filebeat.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_filebeat.rst
 
 Upgrade Kibana
 --------------
@@ -247,11 +247,11 @@ Upgrade Kibana
 
 #. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
 
-    .. include:: ../../_templates/upgrading/common/copy_wazuh_yml.rst
+    .. include:: ../../_templates/upgrading/elastic/common/copy_wazuh_yml.rst
 
 #. Remove the Wazuh app.
 
-    .. include:: ../../_templates/upgrading/common/remove_wazuh_app.rst
+    .. include:: ../../_templates/upgrading/elastic/common/remove_wazuh_app.rst
 
 #. Upgrade Kibana.
 
@@ -281,11 +281,11 @@ Upgrade Kibana
 
 #. Remove generated bundles.
 
-    .. include:: ../../_templates/upgrading/common/remove_generated_bundles.rst
+    .. include:: ../../_templates/upgrading/elastic/common/remove_generated_bundles.rst
 
 #. Update file permissions. This will avoid several errors prior to updating the app.
 
-    .. include:: ../../_templates/upgrading/common/update_kibana_file_permissions.rst
+    .. include:: ../../_templates/upgrading/elastic/common/update_kibana_file_permissions.rst
 
 #. Upgrade the Wazuh app:
 
@@ -314,7 +314,7 @@ Upgrade Kibana
 
 #. Restart Kibana.
 
-    .. include:: ../../_templates/upgrading/common/enable_kibana.rst
+    .. include:: ../../_templates/upgrading/elastic/common/enable_kibana.rst
 
 Upgrading to |ELASTICSEARCH_LATEST|
 -----------------------------------
