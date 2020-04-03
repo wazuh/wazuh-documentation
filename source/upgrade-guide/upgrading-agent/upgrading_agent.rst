@@ -11,75 +11,75 @@ Upgrading the agents remotely from the manager is possible thanks to the agent_u
 
 Choose a tab depending on the OS where the agent is installed: 
 
-.. tabs::
+  .. tabs::
 
-  .. group-tab:: Yum
+    .. group-tab:: Yum
 
-    #. In case of having disabled the repository, it is necessary to add it again:
+      #. In case of having disabled the repository, it is necessary to add it again:
 
-        .. code-block:: console
+          .. code-block:: console
 
-            # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+              # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
 
-    #. Upgrade the agent: 
+      #. Upgrade the agent: 
 
-        .. code-block:: console
+          .. code-block:: console
 
-          # yum upgrade wazuh-agent
+            # yum upgrade wazuh-agent
 
 
-  .. group-tab:: APT
+    .. group-tab:: APT
 
-    #. In case of having disabled the repository, it is necessary to add it again:
+      #. In case of having disabled the repository, it is necessary to add it again:
 
-        .. code-block:: console
+          .. code-block:: console
 
-          # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo    
+            # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo    
+      
+      #. Upgrade the agent:
+      
+          .. code-block:: console
+
+            # apt-get update
+            # apt-get install wazuh-agent
+
+    .. group-tab:: ZYpp
+
+      #. In case of having disabled the repository, it is necessary to add it again:
+
+          .. code-block:: console
+
+            # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo    
+      
+      #. Upgrade the agent: 
+      
+          .. code-block:: console
+
+            # zypper update wazuh-agent
+
+    .. group-tab:: Windows
+
+      The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
+
+      .. tabs::
     
-    #. Upgrade the agent:
-    
-        .. code-block:: console
+        .. group-tab:: Using the GUI installer
 
-          # apt-get update
-          # apt-get install wazuh-agent
+          Open the installer and follow the instructions to upgrade the agent.
 
-  .. group-tab:: ZYpp
+            .. image:: ../../images/installation/windows.png
+              :align: center
 
-    #. In case of having disabled the repository, it is necessary to add it again:
+        .. group-tab:: Using the command line
 
-        .. code-block:: console
+          To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
 
-          # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo    
-    
-    #. Upgrade the agent: 
-    
-        .. code-block:: console
+          .. code-block:: console
 
-          # zypper update wazuh-agent
+            # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
-  .. group-tab:: Windows
-
-    The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
-
-    .. tabs::
-  
-      .. group-tab:: Using the GUI installer
-
-        Open the installer and follow the instructions to upgrade the agent.
-
-          .. image:: ../../images/installation/windows.png
-            :align: center
-
-      .. group-tab:: Using the command line
-
-        To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
-
-        .. code-block:: console
-
-          # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
-
-    .. note::
-      To learn more about the unattended installation process, please check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+      .. note::
+        To learn more about the unattended installation process, please check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
 
 Disabling repositories
 ----------------------
