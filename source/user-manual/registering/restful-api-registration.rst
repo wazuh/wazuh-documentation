@@ -55,7 +55,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   3. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/var/ossec/etc/ossec.conf`` configuration file:
+   3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -143,7 +143,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   4. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+   4. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -195,7 +195,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   3. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+   3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 

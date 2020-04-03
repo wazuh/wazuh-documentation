@@ -5,7 +5,7 @@
 Registering the Wazuh agents using the command line (CLI)
 =========================================================
 
-This method consists on registering the Wazuh agent manually with the Wazuh manager using ``manage_agents`` utility, extracting the registration key and inserting it in the Wazuh agent.
+This method consists on registering the Wazuh agent with the Wazuh manager using ``manage_agents`` utility by extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent.
 
 .. note:: Root/Administrator user privileges are necessary to execute all the commands described below.
 
@@ -77,7 +77,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/var/ossec/etc/ossec.conf`` configuration file:
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -112,7 +112,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -145,7 +145,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
             Confirm adding it?(y/n): y
             Added.
 
-   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's ``/Library/Ossec/etc/ossec.conf`` configuration file:
+   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
 
