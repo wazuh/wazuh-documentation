@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrade_guide:
+.. _upgrade_agent:
 
-Upgrade guide
-=============
+Upgrade the Wazuh agent
+=======================
 
 In this section it is descibed how to upgrade both Wazuh and Elastic Stack. In case of having any doubt about the operating system compatibility, please check the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app#older-packages>`_. 
 
@@ -12,10 +12,5 @@ Wazuh agents can be upgraded using the ``agent_upgrade`` tool from the Wazuh ser
     .. toctree::
         :maxdepth: 1
 
-        upgrading/index
-        upgrading-elastic-stack/index
-        upgrading-agent/index
-
-.. note::
-    If you run into an issue during the upgrade process, feel free to ask for help in our `mailing list <https://groups.google.com/d/forum/wazuh>`_. The Wazuh team and other users of the Open Source community may be able to assist you.
-
+        upgrading_agent
+        upgrading_agent_different_major

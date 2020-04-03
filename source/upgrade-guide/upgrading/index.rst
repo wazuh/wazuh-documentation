@@ -2,8 +2,8 @@
 
 .. _upgrading_wazuh:
 
-Upgrading Wazuh
-===============
+Upgrading Wazuh Manager
+=======================
 
 This section describes how to upgrade an existing Wazuh installation. The upgrade process depends on the version that is currently installed and the version that you want to upgrade to:
 

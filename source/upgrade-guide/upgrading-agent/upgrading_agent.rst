@@ -3,7 +3,7 @@
 .. _upgrading_agent:
 
 Upgrade the Wazuh agent
------------------------
+=======================
 
 Since the Wazuh 3.x version it is possible to upgrade the agents from the manager or locally.
 
@@ -42,7 +42,7 @@ Choose a tab depending on the OS where the agent is installed:
 
         Open the installer and follow the instructions to upgrade the agent.
 
-          .. image:: ../images/installation/windows.png
+          .. image:: ../../images/installation/windows.png
             :align: center
 
       .. group-tab:: Using the command line
@@ -55,3 +55,9 @@ Choose a tab depending on the OS where the agent is installed:
 
     .. note::
       To learn more about the unattended installation process, please check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+
+Disabling repositories
+----------------------
+
+    .. include:: ../../_templates/upgrading/wazuh/disable_repository.rst
+          
