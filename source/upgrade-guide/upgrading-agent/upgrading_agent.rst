@@ -15,22 +15,47 @@ Choose a tab depending on the OS where the agent is installed:
 
   .. group-tab:: Yum
 
-    .. code-block:: console
+    #. In case of having disabled the repository, it is necessary to add it again:
 
-      # yum upgrade wazuh-agent
+        .. code-block:: console
+
+            # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+
+    #. Upgrade the agent: 
+
+        .. code-block:: console
+
+          # yum upgrade wazuh-agent
+
 
   .. group-tab:: APT
 
-    .. code-block:: console
+    #. In case of having disabled the repository, it is necessary to add it again:
 
-      # apt-get update
-      # apt-get install wazuh-agent
+        .. code-block:: console
+
+          # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo    
+    
+    #. Upgrade the agent:
+    
+        .. code-block:: console
+
+          # apt-get update
+          # apt-get install wazuh-agent
 
   .. group-tab:: ZYpp
 
-    .. code-block:: console
+    #. In case of having disabled the repository, it is necessary to add it again:
 
-      # zypper update wazuh-agent
+        .. code-block:: console
+
+          # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo    
+    
+    #. Upgrade the agent: 
+    
+        .. code-block:: console
+
+          # zypper update wazuh-agent
 
   .. group-tab:: Windows
 
@@ -60,4 +85,3 @@ Disabling repositories
 ----------------------
 
     .. include:: ../../_templates/upgrading/wazuh/disable_repository.rst
-          

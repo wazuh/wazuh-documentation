@@ -5,7 +5,7 @@
 Upgrade the Wazuh agent from 2x to latest
 =========================================
 
-In order to the Wazuh agent from 2.x version to |WAZUH_LATEST| it is necessary to add the new repository for Wazuh 3.x. Choose a tab depending on the OS where the agent is installed: 
+In order to the Wazuh agent from 2.x version to |WAZUH_LATEST| it is necessary to add the new repository for Wazuh 3.x before upgrading. Choose a tab depending on the OS where the agent is installed: 
 
 .. tabs::
 
@@ -114,4 +114,3 @@ Disabling repositories
 ----------------------
 
     .. include:: ../../_templates/upgrading/wazuh/disable_repository.rst
-    
