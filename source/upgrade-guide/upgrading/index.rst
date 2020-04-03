@@ -23,7 +23,6 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
     :maxdepth: 2
 
     legacy/index
-    same_minor_or_major
     different_major
     latest_wazuh3_minor
     restore_alerts

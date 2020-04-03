@@ -2,10 +2,10 @@
 
 .. _upgrading_latest_minor:
 
-Upgrade from the same major version (3.x)
-=========================================
+Upgrade Manager from the same major version (3.x)
+=================================================
 
-In this section it is described how to upgrade to the latest Wazuh version. This implies upgrading Elastic Stack to the latest version. Further instructions can be found :ref:`here <elastic_stack_packages_legacy>`.
+In this section it is described how to upgrade Wazuh from 3.x to the latest version. This implies upgrading Elastic Stack to the latest version. Further instructions can be found :ref:`here <elastic_stack_packages_legacy>`.
 
 Starting the upgrade
 --------------------
