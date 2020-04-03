@@ -770,6 +770,8 @@ Allows to disable the Audit health check during the Whodata engine starting. Thi
 
 For more information, please read :ref:`auditing who-data <auditing-whodata>`
 
+.. _reference_ossec_syscheck_process_priority:
+
 process_priority
 ^^^^^^^^^^^^^^^^
 
@@ -938,11 +940,16 @@ Sets the maximum synchronization message throughput.
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
 
+.. _reference_ossec_syscheck_default_configuration:
+
+Defaut syscheck configuration:
+------------------------------
+
 
 
 .. tabs::
 
- .. group-tab:: Default Unix configuration
+ .. group-tab:: Unix
 
   .. code-block:: xml
 
@@ -1008,7 +1015,7 @@ Sets the maximum synchronization message throughput.
 
 
 
- .. group-tab:: Default Windows configuration
+ .. group-tab:: Windows
 
   .. code-block:: xml
 
@@ -1098,7 +1105,7 @@ Sets the maximum synchronization message throughput.
 
 
 
- .. group-tab:: Default MacOS X configuration
+ .. group-tab:: MacOS X
 
   .. code-block:: xml
 

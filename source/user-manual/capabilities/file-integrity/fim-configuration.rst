@@ -14,6 +14,7 @@ Configuration
 #. `Configuring ignoring files via rules`_
 #. `Configuring the alert severity for the monitored files`_
 #. `Configuring maximum recursion level allowed`_
+#. `Configuring syscheck process priority`_
 #. `Configuring synchronization`_
 
 Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.   The most important in the syscheck configuration are the following sections:
@@ -30,6 +31,7 @@ Configuring syscheck - basic usage
 ----------------------------------
 
 To configure syscheck, a list of files and directories must be identified. The ``check_all`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option allows checks of the file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
+By default, syscheck scans selected directories, whose list depends on the :ref:`default configuration <reference_ossec_syscheck_default_configuration>` for the host operating system.
 
 .. note::
 
@@ -94,6 +96,38 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
 
 
 .. warning:: There is a known bug that affects to the versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
+
+.. _how_to_fim_alert_new_files:
+
+Configuring reporting new files
+-------------------------------
+
+To report new files added to the system, syscheck can be configured with the :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration.
+
+.. code-block:: xml
+
+  <syscheck>
+    <alert_new_files>yes</alert_new_files>
+  </syscheck>
+
+An example alert on a new file creation looks as follows:
+
+.. code-block:: console
+
+  ** Alert 1585943821.46978: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,hipaa_164.312.c.2,nist_800_53_SI.7,
+  2020 Apr 03 19:57:01 (agent) any->syscheck
+  Rule: 554 (level 5) -> 'File added to the system.'
+  File '/etc/new_file' added
+  Mode: scheduledAttributes:
+  - Size: 2
+  - Permissions: rw-r--r--
+  - Date: Fri Apr 3 19:56:50 2020
+  - Inode: 23194
+  - User: root (0)
+  - Group: root (0)
+  - MD5: 9a8ad92c50cae39aa2c5604fd0ab6d8c
+  - SHA1: a9fcd54b25e7e863d72cd47c08af46e61b74b561
+  - SHA256: 092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6
 
 
 .. _how_to_fim_report_changes:
@@ -272,6 +306,31 @@ To disable the recursion and generate the alerts only for the files in the monit
 .. warning::
 
   If ``recursion_level`` is not specified, it is set to the default value defined by ``syscheck.default_max_depth`` in the :ref:`internal options <reference_internal_options>` configuration file.
+
+.. _how_to_fim_synchronization:
+
+Configuring syscheck process priority
+-------------------------------------
+
+.. versionadded:: 3.12.0
+
+To adjust syscheck CPU usage on the monitored system the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option can be used. It sets the nice value for syscheck process. The default ``process_priority`` is set to 10.
+
+Setting ``process_priority`` value higher than the default, will give syscheck lower priority, less CPU resources and make it run slower. In the example below the nice value for syscheck process is set to maximum:
+
+.. code-block:: xml
+
+  <syscheck>
+    <process_priority>19</process_priority>
+  </syscheck>
+
+Setting ``process_priority`` value lower than the default, will give syscheck higher priority, more CPU resources and make it run faster. In the example below the nice value for syscheck process is set to minimum:
+
+.. code-block:: xml
+
+  <syscheck>
+    <process_priority>-20</process_priority>
+  </syscheck>
 
 .. _how_to_fim_synchronization:
 
