@@ -8,10 +8,8 @@ Registering Wazuh agents
 .. meta::
   :description: Learn more about the different methods that can be used to register Wazuh agents against the Wazuh manager.
 
-By default, Wazuh agents communicate with the Wazuh manager using outbound TCP/UDP connections to two different services:
-
- - 1515/TCP: service used for Wazuh agents registration to obtain a unique key. The communication is done over TLS. The obtained unique key (one per Wazuh agent) is used later to authenticate with the Wazuh service (1514/TCP-UDP) and to encrypt traffic. This connection is only required during the registration process.
- - 1514/TCP-UDP: service used to send collected data and control messages.
+The security event data collection from the Wazuh agent requires to enable the communication with the Wazuh manager. The Wazuh manager must know which Wazuh agent is sending the security events and if it is authorized. This step is called as Wazuh agent registration and it can be done by using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain a unique
+key, used to encrypt the traffic between them. Once the registration is done, this communication will no longer be used, unless the Wazuh agent needs to be registered into a new Wazuh manager. After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent. By default, the Wazuh manager will use a communication channel over the port 1514 using UDP protocol, through which The Wazuh Agent will send the collected data.
 
 .. note::
 
