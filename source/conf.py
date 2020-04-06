@@ -415,6 +415,7 @@ def setup(app):
     app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
 
+
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
@@ -424,10 +425,17 @@ exclude_patterns = [
 ]
 
 # -- Additional configuration ------------------------------------------------
+
+if (tags.has("production")):
+    production = True
+else:
+    production = False
+
 html_context = {
     "display_github": True,
     "github_user": "wazuh",
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
-    "github_version": version
+    "github_version": version,
+    "production": production
 }
