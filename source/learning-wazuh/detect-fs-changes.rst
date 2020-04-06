@@ -193,8 +193,8 @@ The following command shows the syscheck-monitored files for the windows-agent (
 
 
 
-Change your configuration back default
---------------------------------------
+Change your configuration back to default
+-----------------------------------------
 
 
 Before moving on to the next Lab, we need to change ``<syscheck>`` configuration back to the way it was.

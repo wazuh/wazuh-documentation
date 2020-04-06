@@ -206,7 +206,7 @@ Upgrades
 
 Performing container updates differs from performing normal updates. For this we recommend the use of volumes.
 
-For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would decomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
+For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would uncomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
 
 .. code-block:: yaml
 

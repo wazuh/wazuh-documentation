@@ -14,7 +14,7 @@ Adding new decoders and rules
 
 .. note::
   The ``<id>`` of custom rules will be in the range from 100000 to 120000.
- 
+
 We are going to describe these procedures using an easy example. Here is a log from a program called ``example``:
 ::
 

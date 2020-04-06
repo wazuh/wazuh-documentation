@@ -143,6 +143,7 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 	        api_proto: 'http'
 	        api_user: ansible
 	    wazuh_agent_authd:
+	      registration_address: <registration IP>
 	      enable: true
 	      port: 1515
 	      ssl_agent_ca: null
@@ -180,6 +181,7 @@ Our resulting file is:
 	        api_proto: 'http'
 	        api_user: ansible
 	    wazuh_agent_authd:
+		  registration_address: 192.168.0.180
 	      enable: true
 	      port: 1515
 	      ssl_agent_ca: null
@@ -246,8 +248,6 @@ We will obtain a final result similar to the one shown in the following code blo
 
 	PLAY RECAP ************************************************************************************************************************************************
 	192.168.0.102              : ok=12   changed=8    unreachable=0    failed=0
-
-	ansible@ansible:/etc/ansible/wazuh-ansible$
 
 
 We can check the status of our new services in our Wazuh agent.

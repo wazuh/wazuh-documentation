@@ -5,7 +5,7 @@
 Configuration file
 ==================
 
-The Wazuh app includes a configuration file (located at ``/usr/share/kibana/plugins/wazuh/config.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh app includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh app in *Settings > Configuration*.
 
@@ -19,6 +19,7 @@ The configuration file reference is organized by sections:
     - `xpack.rbac.enabled`_
     - `admin`_
     - `logs.level`_
+    - `hideManagerAlerts`_
 
 `Monitoring`_
     - `wazuh.monitoring.enabled`_
@@ -31,6 +32,7 @@ The configuration file reference is organized by sections:
     - `checks.template`_
     - `checks.api`_
     - `checks.setup`_
+    - `checks.fields`_
 
 `Extensions`_
     - `extensions.pci`_
@@ -44,8 +46,6 @@ The configuration file reference is organized by sections:
     - `extensions.docker`_
 
 `Advanced index options`_
-    - `wazuh.shards`_
-    - `wazuh.replicas`_
     - `wazuh-version.shards`_
     - `wazuh-version.replicas`_
     - `wazuh.monitoring.shards`_
@@ -74,6 +74,17 @@ Defines the maximum time the app will wait for an API response when making reque
 | **Default value**  | 8000 (milliseconds)           |
 +--------------------+-------------------------------+
 | **Allowed values** | Any number starting from 1500 |
++--------------------+-------------------------------+
+
+api.selector
+^^^^^^^^^^^^
+
+Defines if the user is allowed to change the selected API directly from the Wazuh app top menu.
+
++--------------------+-------------------------------+
+| **Default value**  | false                         |
++--------------------+-------------------------------+
+| **Allowed values** | true,false                    |
 +--------------------+-------------------------------+
 
 ip.selector
@@ -129,6 +140,17 @@ Set the logging level for the Wazuh App log files.
 | **Default value**  | info       |
 +--------------------+------------+
 | **Allowed values** | info,debug |
++--------------------+------------+
+
+hideManagerAlerts
+^^^^^^^^^^^^^^^^^
+
+Hide the manager's alerts in the dashboard visualizations.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
 +--------------------+------------+
 
 Monitoring
@@ -226,6 +248,17 @@ checks.setup
 ^^^^^^^^^^^^
 
 Enable or disable the setup health check when opening the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+checks.fields
+^^^^^^^^^^^^^
+
+Enable or disable the known fields health check when opening the app.
 
 +--------------------+------------+
 | **Default value**  | true       |
@@ -348,28 +381,6 @@ Advanced index options
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
-wazuh.shards
-^^^^^^^^^^^^
-
-Define the number of shards to use for the ``wazuh`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
-+--------------------+----------------------------+
-
-wazuh.replicas
-^^^^^^^^^^^^^^
-
-Define the number of replicas to use for the ``wazuh`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 0 |
-+--------------------+----------------------------+
-
 wazuh-version.shards
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -392,13 +403,14 @@ Define the number of replicas to use for the ``wazuh-version`` index.
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
+
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
-| **Default value**  | 5                          |
+| **Default value**  | 2                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 1 |
 +--------------------+----------------------------+
@@ -409,7 +421,7 @@ wazuh.monitoring.replicas
 Define the number of replicas to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
-| **Default value**  | 1                          |
+| **Default value**  | 0                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+

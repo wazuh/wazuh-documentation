@@ -8,20 +8,23 @@ Configuration
 #. `Basic usage`_
 #. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
+#. `Configuring who-data monitoring`_
 #. `Configure to report changes`_
 #. `Configure to ignore files`_
 #. `Configure maximum recursion level allowed`_
 #. `Ignoring files via rules`_
 #. `Changing severity`_
+#. `Configuring synchronization`_
 
 Basic usage
 -----------
 **Syscheck** is configured in the :ref:`ossec.conf <reference_ossec_conf>` file.  Generally this configuration is set using the following sections:
 
-- :ref:`frequency <reference_ossec_syscheck_frequency>`,
-- :ref:`directories <reference_ossec_syscheck_directories>`,
-- :ref:`ignore <reference_ossec_syscheck_ignore>`, and
-- :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`.
+- :ref:`frequency <reference_ossec_syscheck_frequency>`
+- :ref:`directories <reference_ossec_syscheck_directories>`
+- :ref:`ignore <reference_ossec_syscheck_ignore>`
+- :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
+- :ref:`synchronization <reference_ossec_syscheck_synchronization>`
 
 For detailed configuration options, go to :ref:`Syscheck <reference_ossec_syscheck>`.
 
@@ -30,7 +33,7 @@ To configure syscheck, a list of files and directories must be identified. The `
 .. note::
   If a directory is specified both in a :ref:`centralized configuration <reference_agent_conf>` and on the agent's  ``ossec.conf``, the centralized configuration will take precedence and override the local configuration.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
@@ -42,7 +45,7 @@ Configuring scheduled scans
 
 **Syscheck** has an option to configure the ``frequency`` of the system scans. In this example, **syscheck** is configured to run every 10 hours.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <frequency>36000</frequency>
@@ -54,25 +57,29 @@ Configuring real-time monitoring
 --------------------------------
 Real-time monitoring is configured with the ``realtime`` option. This option only works with directories rather than with individual files. Real-time change detection is paused during periodic **syscheck** scans and reactivates as soon as these scans are complete.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" realtime="yes">c:/tmp</directories>
   </syscheck>
 
 Configuring who-data monitoring
---------------------------------
+-------------------------------
 
 .. versionadded:: 3.4.0
 
 Who-data monitoring is configured with the ``whodata`` option. This option replaces the ``realtime`` option, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
 This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`Auditing who-data <auditing-whodata>` entry to get further information.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" whodata="yes">/etc</directories>
   </syscheck>
+
+
+.. warning:: There is a known bug that affects to the versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
+
 
 .. _how_to_fim_report_changes:
 
@@ -81,7 +88,7 @@ Configure to report changes
 
 Using the ``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes`` to, because in order to do this, Wazuh copies every single file you want to monitor to a private location.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
@@ -94,7 +101,7 @@ Configure to ignore files
 
 Files and directories can be omitted using the ignore option (or registry_ignore for Windows registry entries). In order to avoid false positives, **syscheck** can be configured to ignore certain files that don't need to be monitored.
 
-::
+.. code-block:: xml
 
   <syscheck>
     <ignore>/etc/random-seed</ignore>
@@ -109,7 +116,7 @@ Configure maximum recursion level allowed
 
 It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an integer between **0 and 320**. An example of use:
 
-::
+.. code-block:: xml
 
   <syscheck>
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
@@ -144,7 +151,9 @@ If we don't want any recursion (just get alerts from the files in the monitored 
 Ignoring files via rules
 ------------------------
 
-It is also possible to ignore files using rules, as in this example::
+It is also possible to ignore files using rules, as in this example:
+
+.. code-block:: xml
 
   <rule id="100345" level="0">
     <if_group>syscheck</if_group>
@@ -157,10 +166,32 @@ Changing severity
 
 With a custom rule, the level of a **syscheck** alert can be altered when changes to a specific file or file pattern are detected.
 
-::
+.. code-block:: xml
 
   <rule id="100345" level="12">
     <if_group>syscheck</if_group>
     <match>/var/www/htdocs</match>
     <description>Changes to /var/www/htdocs - Critical file!</description>
   </rule>
+
+.. _how_to_fim_synchronization:
+
+Configuring synchronization
+---------------------------
+
+.. versionadded:: 3.12.0
+
+Synchronization can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout.
+
+.. code-block:: xml
+
+  <syscheck>
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <response_timeout>30</response_timeout>
+      <sync_queue_size>16384</sync_queue_size>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </syscheck>

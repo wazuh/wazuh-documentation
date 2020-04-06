@@ -167,7 +167,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.11.4/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 
@@ -251,6 +251,9 @@ In a cluster with one node, the number of replicas should be set to zero:
       "number_of_replicas" : 0
     }
   }'
+
+
+More information about configuring and shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
 
 Reference:
 
