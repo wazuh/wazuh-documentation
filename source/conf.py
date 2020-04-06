@@ -467,10 +467,17 @@ exclude_patterns = [
 ]
 
 # -- Additional configuration ------------------------------------------------
+
+if (tags.has("production")):
+    production = True
+else:
+    production = False
+
 html_context = {
     "display_github": True,
     "github_user": "wazuh",
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
-    "github_version": version
+    "github_version": version,
+    "production": production
 }
