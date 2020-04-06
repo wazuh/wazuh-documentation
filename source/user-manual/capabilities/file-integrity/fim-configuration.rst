@@ -6,7 +6,7 @@ Configuration
 =============
 
 #. `Configuring syscheck - basic usage`_
-#. `Configuring scheduled scans`_
+#. `Configuring scan time`_
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
 #. `Configuring reporting file changes`_
@@ -17,15 +17,8 @@ Configuration
 #. `Configuring syscheck process priority`_
 #. `Configuring synchronization`_
 
-Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.   The most important in the syscheck configuration are the following sections:
-
-- :ref:`frequency <reference_ossec_syscheck_frequency>`
-- :ref:`directories <reference_ossec_syscheck_directories>`
-- :ref:`ignore <reference_ossec_syscheck_ignore>`
-- :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
-- :ref:`synchronization <reference_ossec_syscheck_synchronization>`
-
-The list of all configuration options is available in the :ref:`syscheck <reference_ossec_syscheck>` section.
+Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.
+The list of all syscheck configuration options is available in the :ref:`syscheck <reference_ossec_syscheck>` section.
 
 Configuring syscheck - basic usage
 ----------------------------------
@@ -44,10 +37,16 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
     <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
   </syscheck>
 
-Configuring scheduled scans
----------------------------
+It is possible to hot-swap the monitored directories. This can be done for Linux, in both the Wazuh agent and the Wazuh manager, by setting the monitoring of symbolic links to directories. To set the refresh interval, use :ref:`syscheck.symlink_scan_interval <ossec_internal_syscheck>` option found in the :ref:`internal configuration <reference_internal_options>`  of the monitored Wazuh agent.
 
-Syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours.
+Once, the directory path is removed from the syscheck configuration and the Wazuh agent is being restarted, the data from the previously monitored path is no longer stored in the FIM database.
+
+Configuring scan time
+---------------------
+
+By default, syscheck scans when the Wazuh starts, however, this behavior can be changed with the :ref:`scan_on_start <reference_ossec_syscheck_scan_start>` option.
+
+For the schedluled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
 
 .. code-block:: xml
 
@@ -57,7 +56,7 @@ Syscheck has an option to configure the :ref:`frequency <reference_ossec_syschec
     <directories>/bin,/sbin</directories>
   </syscheck>
 
-There is an alternative way to schedule the scans using the :ref:`scan_time <reference_ossec_syscheck_scan_time>` and the :ref:`scan_day <reference_ossec_syscheck_scan_day>` options. In this example, the scan will run every Saturday at the 10pm. Configuring syscheck that way might help, for example, to set up the scans outside the environment production hours.
+There is an alternative way to schedule the scans using the :ref:`scan_time <reference_ossec_syscheck_scan_time>` and the :ref:`scan_day <reference_ossec_syscheck_scan_day>` options. In this example, the scan will run every Saturday at the 10pm. Configuring syscheck that way might help, for example, to set up the scans outside the environment production hours:
 
 .. code-block:: xml
 
@@ -72,7 +71,7 @@ There is an alternative way to schedule the scans using the :ref:`scan_time <ref
 Configuring real-time monitoring
 --------------------------------
 
-Real-time monitoring is configured with the ``realtime`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute only works with the directories rather than with the individual files. Real-time change detection is paused during periodic syscheck scans and reactivates as soon as these scans are complete.
+Real-time monitoring is configured with the ``realtime`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute only works with the directories rather than with the individual files. Real-time change detection is paused during periodic syscheck scans and reactivates as soon as these scans are complete:
 
 .. code-block:: xml
 
@@ -86,7 +85,7 @@ Configuring who-data monitoring
 .. versionadded:: 3.4.0
 
 Who-data monitoring is configured with the ``whodata`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute replaces the ``realtime`` attribute, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
-This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`Auditing who-data <auditing-whodata>` entry to get further information.
+This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`auditing who-data <auditing-whodata>` entry to get further information:
 
 .. code-block:: xml
 
@@ -97,12 +96,34 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
 
 .. warning:: There is a known bug that affects to the versions 2.8.5 and 2.8.4 of ``audit`` that shows a directory as ``null`` when it has been moved adding a ``/`` at the end of the directory. This bug will cause that no alerts related with this directory will be shown until a new event related to this directory is triggered when ``whodata`` is enabled.
 
+How to tune audit to deal with a huge amount of who-data events at the same time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is possible to lose ``who-data`` events when a flood of events appears. The following options help the audit socket and dispatcher to deal with big amounts of events:
+
+.. code-block:: xml
+
+ /etc/audit/auditd.conf  -> disp_qos = ["lossy", "lossless"]
+ /etc/audisp/audisp.conf -> q_dephs  = [<Numerical value>]
+
+The ``disp_qos`` sets blocking/lossless or non-blocking/lossy communication between the audit daemon and the dispatcher. There is a 128k buffer between the audit daemon and dispatcher. This is sufficient for most uses. If lossy is chosen, incoming events going to the dispatcher are discarded when the queue is full. In this case, events are still written to disk if ``log_format`` is not ``nolog``. Otherwise, the auditd daemon will wait for the queue to have an empty spot before logging to disk. The risk is that while the daemon is waiting for network IO, an event is not being recorded to disk. The recommended value is lossless.
+
+The ``q_dephs`` is a numeric value, by default set to 80, that tells how big is the internal queue of the audit event dispatcher. A bigger queue handles flood of events better but could hold events that are not processed when the daemon is terminated. This value has to be increased if there are messages in the syslog indicating that the events are being dropped.
+
+On the Wazuh side, the ``rt_delay`` variable from the :ref:`internal FIM configuration <ossec_internal_syscheck>` can help to prevent the loss of events:
+
+.. code-block:: xml
+
+ /var/ossec/etc/internal_options.conf -> syscheck.rt_delay = [Numerical value]
+
+It sets a delay between real-time alerts in milliseconds. The value has to be decreased to process who-data events faster.
+
 .. _how_to_fim_alert_new_files:
 
 Configuring reporting new files
 -------------------------------
 
-To report new files added to the system, syscheck can be configured with the :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration.
+To report new files added to the system, syscheck can be configured with the :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>` option. By default, this feature is enabled on the monitored Wazuh agent, but the option is not present in the syscheck section of the configuration:
 
 .. code-block:: xml
 
@@ -176,7 +197,7 @@ In this example, by enabling the ``report_changes``, the alerts will show the ch
   ---
   > Altered text
 
-If some sentive files exist in the monitored with ``report_changes`` path, :ref:`nodiff <reference_ossec_syscheck_nodiff>` option can be used. This option disables computing the diff for the listed files, avoiding data leaking by sending the files content changes through alerts.
+If some sentive files exist in the monitored with ``report_changes`` path, :ref:`nodiff <reference_ossec_syscheck_nodiff>` option can be used. This option disables computing the diff for the listed files, avoiding data leaking by sending the files content changes through alerts:
 
 .. code-block:: xml
 
@@ -242,7 +263,7 @@ Similar functionality, but for the Windows registries can be achieved by using t
 Configuring ignoring files via rules
 ------------------------------------
 
-An alternative method to ignore a specific files scanned by syscheck is by using rules and setting the rule level to 0. By doing this the alert will be silenced.
+An alternative method to ignore a specific files scanned by syscheck is by using rules and setting the rule level to 0. By doing that the alert will be silenced:
 
 .. code-block:: xml
 
@@ -255,7 +276,7 @@ An alternative method to ignore a specific files scanned by syscheck is by using
 Configuring the alert severity for the monitored files
 ------------------------------------------------------
 
-With a custom rule, the level of a syscheck alert can be altered when changes to a specific file or file pattern are detected.
+With a custom rule, the level of a syscheck alert can be altered when changes to a specific file or file pattern are detected:
 
 .. code-block:: xml
 
@@ -339,7 +360,7 @@ Configuring synchronization
 
 .. versionadded:: 3.12.0
 
-:ref:`Synchronization <reference_ossec_syscheck_synchronization>` can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout.
+:ref:`Synchronization <reference_ossec_syscheck_synchronization>` can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout:
 
 ::
 
