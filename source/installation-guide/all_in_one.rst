@@ -21,11 +21,11 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create the repository file:
+  Create the repository file:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
+      # sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
 
 Install Java Develpment Kit (JDK)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,36 +34,17 @@ Install Java Develpment Kit (JDK)
 
     .. include:: ../_templates/installations/elastic/common/install_jdk.rst      
      
+Install wget and unzip
+~~~~~~~~~~~~~~~~~~~~~~
 
+    .. include:: ../_templates/installations/elastic/common/install_wget_unzip.rst    
 
-Elasticsearch installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Elasticsearch installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Elasticsearch package:
+  Install the Elasticsearch package:
 
-    .. tabs::
-
-      .. group-tab:: APT
-
-
-        .. include:: ../_templates/installations/elastic/deb/install_elasticsearch.rst
-
-
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../_templates/installations/elastic/yum/install_elasticsearch.rst
-
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../_templates/installations/elastic/zypp/install_elasticsearch.rst
-
-
-#. .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+    .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
 
 
 Certificates creation and deployment
