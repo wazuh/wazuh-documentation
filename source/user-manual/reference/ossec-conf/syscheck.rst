@@ -949,30 +949,23 @@ Defaut syscheck configuration:
 
 .. tabs::
 
- .. group-tab:: Unix
+ .. group-tab:: Wazuh manager
 
   .. code-block:: xml
 
    <!-- File integrity monitoring -->
    <syscheck>
-
     <disabled>no</disabled>
-
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-
     <scan_on_start>yes</scan_on_start>
-
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
-
     <!-- Don't ignore files that change more than 'frequency' times -->
     <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
-
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin,/boot</directories>
-
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
     <ignore>/etc/hosts.deny</ignore>
@@ -986,47 +979,84 @@ Defaut syscheck configuration:
     <ignore>/etc/cups/certs</ignore>
     <ignore>/etc/dumpdates</ignore>
     <ignore>/etc/svc/volatile</ignore>
-
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
-
     <!-- Check the file, but never compute the diff -->
     <nodiff>/etc/ssl/private.key</nodiff>
-
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>
     <skip_sys>yes</skip_sys>
-
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
-
     <!-- Maximum output throughput -->
     <max_eps>100</max_eps>
-
     <!-- Database synchronization settings -->
     <synchronization>
-     <interval>5m</interval>
-     <max_interval>1h</max_interval>
-     <max_eps>10</max_eps>
+		  <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <max_eps>10</max_eps>
     </synchronization>
-
    </syscheck>
 
-
-
- .. group-tab:: Windows
+ .. group-tab:: Wazuh agent - Linux/Unix
 
   .. code-block:: xml
 
    <!-- File integrity monitoring -->
    <syscheck>
-
     <disabled>no</disabled>
-
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
+    <scan_on_start>yes</scan_on_start>
+    <!-- Directories to check  (perform all possible verifications) -->
+    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/bin,/sbin,/boot</directories>
+    <!-- Files/directories to ignore -->
+    <ignore>/etc/mtab</ignore>
+    <ignore>/etc/hosts.deny</ignore>
+    <ignore>/etc/mail/statistics</ignore>
+    <ignore>/etc/random-seed</ignore>
+    <ignore>/etc/random.seed</ignore>
+    <ignore>/etc/adjtime</ignore>
+    <ignore>/etc/httpd/logs</ignore>
+    <ignore>/etc/utmpx</ignore>
+    <ignore>/etc/wtmpx</ignore>
+    <ignore>/etc/cups/certs</ignore>
+    <ignore>/etc/dumpdates</ignore>
+    <ignore>/etc/svc/volatile</ignore>
+    <!-- File types to ignore -->
+    <ignore type="sregex">.log$|.swp$</ignore>
+    <!-- Check the file, but never compute the diff -->
+    <nodiff>/etc/ssl/private.key</nodiff>
+    <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
+    <!-- Nice value for Syscheck process -->
+    <process_priority>10</process_priority>
+    <!-- Maximum output throughput -->
+    <max_eps>100</max_eps>
+    <!-- Database synchronization settings -->
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <max_eps>10</max_eps>
+    </synchronization>
+   </syscheck>
 
+
+ .. group-tab:: Wazuh agent - Windows
+
+  .. code-block:: xml
+
+   <!-- File integrity monitoring -->
+   <syscheck>
+    <disabled>no</disabled>
+    <!-- Frequency that syscheck is executed default every 12 hours -->
+    <frequency>43200</frequency>
     <!-- Default files to be monitored. -->
     <directories recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$">%WINDIR%</directories>
     <directories recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$">%WINDIR%\SysNative</directories>
@@ -1034,7 +1064,6 @@ Defaut syscheck configuration:
     <directories recursion_level="0" restrict="WMIC.exe$">%WINDIR%\SysNative\wbem</directories>
     <directories recursion_level="0" restrict="powershell.exe$">%WINDIR%\SysNative\WindowsPowerShell\v1.0</directories>
     <directories recursion_level="0" restrict="winrm.vbs$">%WINDIR%\SysNative</directories>
-
     <!-- 32-bit programs. -->
     <directories recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedit.exe$|regedt32.exe$|regsvr32.exe$|runas.exe$|sc.exe$|schtasks.exe$|sethc.exe$|subst.exe$">%WINDIR%\System32</directories>
     <directories recursion_level="0">%WINDIR%\System32\drivers\etc</directories>
@@ -1044,7 +1073,6 @@ Defaut syscheck configuration:
     <directories realtime="yes">%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup</directories>
     <ignore>%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup\desktop.ini</ignore>
     <ignore type="sregex">.log$|.htm$|.jpg$|.png$|.chm$|.pnf$|.evtx$</ignore>
-
     <!-- Windows registry entries to monitor. -->
     <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\batfile</windows_registry>
     <windows_registry>HKEY_LOCAL_MACHINE\Software\Classes\cmdfile</windows_registry>
@@ -1069,7 +1097,6 @@ Defaut syscheck configuration:
     <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows</windows_registry>
     <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon</windows_registry>
     <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Active Setup\Installed Components</windows_registry>
-
     <!-- Windows registry entries to ignore. -->
     <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
     <registry_ignore>HKEY_LOCAL_MACHINE\Security\SAM\Domains\Account\Users</registry_ignore>
@@ -1083,46 +1110,36 @@ Defaut syscheck configuration:
     <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\PolicyAgent\Parameters\Cache</registry_ignore>
     <registry_ignore>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx</registry_ignore>
     <registry_ignore>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\ADOVMPPackage\Final</registry_ignore>
-
     <!-- Frequency for ACL checking (seconds) -->
     <windows_audit_interval>60</windows_audit_interval>
-
     <!-- Nice value for Syscheck module -->
     <process_priority>10</process_priority>
-
     <!-- Maximum output throughput -->
     <max_eps>100</max_eps>
-
     <!-- Database synchronization settings -->
     <synchronization>
-     <enabled>yes</enabled>
-     <interval>5m</interval>
-     <max_interval>1h</max_interval>
-     <max_eps>10</max_eps>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <max_eps>10</max_eps>
     </synchronization>
-
    </syscheck>
 
 
 
- .. group-tab:: MacOS X
+ .. group-tab:: Wazuh agent - MacOS X
 
   .. code-block:: xml
 
    <!-- File integrity monitoring -->
    <syscheck>
-
     <disabled>no</disabled>
-
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-
     <scan_on_start>yes</scan_on_start>
-
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin</directories>
-
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
     <ignore>/etc/hosts.deny</ignore>
@@ -1136,30 +1153,23 @@ Defaut syscheck configuration:
     <ignore>/etc/cups/certs</ignore>
     <ignore>/etc/dumpdates</ignore>
     <ignore>/etc/svc/volatile</ignore>
-
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
-
     <!-- Check the file, but never compute the diff -->
     <nodiff>/etc/ssl/private.key</nodiff>
-
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>
     <skip_sys>yes</skip_sys>
-
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
-
     <!-- Maximum output throughput -->
     <max_eps>100</max_eps>
-
     <!-- Database synchronization settings -->
     <synchronization>
-     <enabled>yes</enabled>
-     <interval>5m</interval>
-     <max_interval>1h</max_interval>
-     <max_eps>10</max_eps>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <max_eps>10</max_eps>
     </synchronization>
-
    </syscheck>

@@ -328,7 +328,7 @@ To disable the recursion and generate the alerts only for the files in the monit
 
   If ``recursion_level`` is not specified, it is set to the default value defined by ``syscheck.default_max_depth`` in the :ref:`internal options <reference_internal_options>` configuration file.
 
-.. _how_to_fim_synchronization:
+.. _how_to_fim_process_priority:
 
 Configuring syscheck process priority
 -------------------------------------
