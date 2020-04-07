@@ -17,33 +17,23 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
+
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+Create the repository file:
 
+  .. code-block:: console
 
-  .. group-tab:: APT
+    # sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
 
+Install Java Develpment Kit (JDK)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    .. include:: ../_templates/installations/elastic/deb/add_repository.rst
+  Open Distro for Elasticsearch requires the installation of Java Develpment Kit. In can be installled either version 8 or 11 version: 
 
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../_templates/installations/elastic/yum/add_repository.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/elastic/zypp/add_repository.rst
-
-
-
+    .. include:: ../_templates/installations/elastic/common/install_jdk.rst      
+     
 
 
 Elasticsearch installation and configuration

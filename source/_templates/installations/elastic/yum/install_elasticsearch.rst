@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install elasticsearch-7.6.0
+  # yum install opendistroforelasticsearch-1.6.0
 
 .. End of include file
