@@ -402,7 +402,7 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.12.0",
+    "|WAZUH_LATEST|" : "3.12.1",
     "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
     "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
     "|WAZUH_LATEST_PUPPET|" : "3.12.0",
@@ -415,7 +415,7 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
     "|SPLUNK_LATEST|" : "8.0.2",
-    "|ELASTIC_6_LATEST|" : "6.8.7",
+    "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "2",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "2",
