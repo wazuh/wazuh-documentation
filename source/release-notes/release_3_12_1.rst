@@ -7,10 +7,10 @@
 
 This section lists the changes in version 3.12.1. More details about these changes are provided in each component changelog:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/3.12/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/3.12-7.6/CHANGELOG.md>`_
-- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/3.12/CHANGELOG.md>`_
-- `wazuh/splunk <https://github.com/wazuh/wazuh-splunk/blob/3.12.1-8.0/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.12.1/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.12.1-7.6.2/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.12.1/CHANGELOG.md>`_
+- `wazuh/splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.12.1-8.0.2/CHANGELOG.md>`_
 
 Wazuh core
 ----------
@@ -22,6 +22,7 @@ Wazuh core
 - Fixed a bug in Logcollector that made it forward a log to an external socket infinite times.
 - Fixed a buffer overflow when receiving large messages from Syslog over TCP connections.
 - Fixed a malfunction in the Integrator module when analyzing events without a certain field.
+- Removed support for Ubuntu 12.04 (Precise) in Vulneratiliby Detector as its feed is no longer available.
 
 Wazuh Kibana App
 ----------------
