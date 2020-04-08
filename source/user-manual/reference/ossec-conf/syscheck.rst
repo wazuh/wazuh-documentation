@@ -809,6 +809,7 @@ Example:
 
  <process_priority>10</process_priority>
 
+.. _reference_ossec_syscheck_max_eps:
 
 max_eps
 ^^^^^^^
@@ -829,6 +830,7 @@ Example:
 
  <max_eps>100</max_eps>
 
+.. _reference_ossec_syscheck_database:
 
 database
 ^^^^^^^^

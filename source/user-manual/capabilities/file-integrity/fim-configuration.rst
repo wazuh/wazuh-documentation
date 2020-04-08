@@ -15,6 +15,7 @@ Configuration
 #. `Configuring the alert severity for the monitored files`_
 #. `Configuring maximum recursion level allowed`_
 #. `Configuring syscheck process priority`_
+#. `Configuring where the database is to be stored`_
 #. `Configuring synchronization`_
 
 Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`ossec.conf <reference_ossec_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`agent.conf <reference_agent_conf>` file.
@@ -352,6 +353,31 @@ Setting ``process_priority`` value lower than the default, will give syscheck hi
   <syscheck>
     <process_priority>-20</process_priority>
   </syscheck>
+
+.. _how_to_fim_database:
+
+Configuring where the database is to be stored
+----------------------------------------------
+
+.. versionadded:: 3.12.0
+
+When the Wazuh agent starts it performs a first scan and generates its database. By default, the database is created in disk:
+
+.. code-block:: xml
+
+  <syscheck>
+    <database>disk</database>
+  </syscheck>
+
+Syscheck can be configured to store the database in memory instead by changing value of the :ref:`database <reference_ossec_syscheck_database>` option:
+
+.. code-block:: xml
+
+  <syscheck>
+    <database>memory</database>
+  </syscheck>
+
+The main advantage of using in memory database is the performance as reading and writing data is faster than data stored on disk. The corresponding disadvantage is that the memory must be sufficient to store the data.
 
 .. _how_to_fim_synchronization:
 
