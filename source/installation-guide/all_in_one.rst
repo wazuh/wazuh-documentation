@@ -264,13 +264,6 @@ Filebeat installation and configuration
         .. include:: ../_templates/installations/elastic/yum/install_filebeat.rst
 
 
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../_templates/installations/elastic/zypp/install_filebeat.rst
-
-
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
