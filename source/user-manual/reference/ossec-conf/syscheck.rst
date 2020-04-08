@@ -43,6 +43,7 @@ Options
 - `synchronization`_
 - `max_eps`_
 - `database`_
+- `file_limit`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -693,6 +694,21 @@ Specify where is the database going to be stored.
 | **Allowed values** | disk, memory                          |
 +--------------------+---------------------------------------+
 
+
+file_limit
+^^^^^^^^^^
+
+.. versionadded:: 3.12.2
+
+Specifies a limit on the number of files that will be monitored by syscheck. Setting ``file_limit`` to 0 will disable the limit, monitoring as many files as there are in the configured directories.
+
++--------------------+---------------------------------------+
+| **Default value**  | 100000                                |
++--------------------+---------------------------------------+
+| **Allowed values** | Integer number greater or equal to 0. |
++--------------------+---------------------------------------+
+
+
 .. _reference_ossec_syscheck_synchronization:
 
 synchronization
@@ -816,6 +832,9 @@ Default Unix configuration
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin,/boot</directories>
 
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>100000</file_limit>
+
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
     <ignore>/etc/hosts.deny</ignore>
@@ -846,6 +865,9 @@ Default Unix configuration
 
     <!-- Maximum output throughput -->
     <max_eps>100</max_eps>
+
+    <!-- Store the database in disk or in memory -->
+    <database>disk</database>
 
     <!-- Database synchronization settings -->
     <synchronization>
