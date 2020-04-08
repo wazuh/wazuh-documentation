@@ -25,7 +25,7 @@ To generate the certificate execute the following command:
 Available options to verify the hosts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-There are two options to register the Wazuh agent using host verification:
+There are two options to register the Wazuh agent using host verification. Please note, that both, the Wazuh agent verification as well as the Wazuh manager verification can be used in the registration process:
 
 .. tabs::
 
