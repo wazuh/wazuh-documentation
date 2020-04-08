@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install kibana=7.6.0
+  # apt-get install opendistroforelasticsearch-kibana
 
 .. End of include file

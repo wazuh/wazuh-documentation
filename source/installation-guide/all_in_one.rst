@@ -116,13 +116,6 @@ Kibana installation and configuration
             .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
 
 
-
-        .. group-tab:: ZYpp
-
-
-            .. include:: ../_templates/installations/elastic/zypp/install_kibana.rst
-
-
 #. Copy the Elasticsearch certificates into the Kibana configuration folder:
 
     .. include:: ../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
