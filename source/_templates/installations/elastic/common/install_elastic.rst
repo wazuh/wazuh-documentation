@@ -23,7 +23,7 @@
                 # wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.6.1-amd64.deb
                 # dpkg -i elasticsearch-oss-7.6.1-amd64.deb
 
-        #. Install the latest version of Open Distrp for Elasticsearch:
+        #. Install the latest version of Open Distro for Elasticsearch:
 
             .. code-block:: console
 
@@ -33,6 +33,14 @@
 
 
     .. group-tab:: Yum
+
+        #. Create the repository file:
+
+            .. code-block:: console
+
+            # curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo  
+
+        #. Install the latest version of Open Distro for Elasticsearch: 
 
         .. code-block:: console
 

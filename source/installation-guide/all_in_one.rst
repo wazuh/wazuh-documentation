@@ -18,15 +18,6 @@ Installing Elasticsearch
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
 
-Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  Create the repository file:
-
-    .. code-block:: console
-
-      # sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
-
 Install Java Develpment Kit (JDK)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -134,7 +125,7 @@ Kibana installation and configuration
 
     .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
+        # -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
 
 #. Enable and start the Kibana service:
 
@@ -246,31 +237,10 @@ Installing Filebeat
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adding the repository
+~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/elastic/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../_templates/installations/elastic/yum/add_repository.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/elastic/zypp/add_repository.rst
-
+    .. include:: ../_templates/installations/elastic/common/signing_key_filebeat.rst
 
 Filebeat installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

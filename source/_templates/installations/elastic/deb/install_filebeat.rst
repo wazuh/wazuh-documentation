@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install filebeat=7.6.0
+    # apt-get install filebeat
 
 .. End of include file
