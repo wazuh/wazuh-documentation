@@ -8,6 +8,8 @@
 This section lists the changes in version 3.12.2. More details about these changes are provided in each component changelog:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.12.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.12.2-7.6.2/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/3.12-8.0/CHANGELOG.md>`_
 
 Wazuh core
 ----------
@@ -17,9 +19,9 @@ Wazuh core
 Wazuh Kibana App
 ----------------
 
-- Support Wazuh 3.12.1
+- Support Wazuh 3.12.2.
 
 Wazuh Splunk
 ------------
 
-- Support for Wazuh v3.12.1.
+- Support for Wazuh v3.12.2
