@@ -22,6 +22,7 @@ Installing Wazuh agent
     gpgcheck=1
     gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
     enabled=1
+    autorefresh=1
     name=Wazuh repository
     baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
     protect=1
