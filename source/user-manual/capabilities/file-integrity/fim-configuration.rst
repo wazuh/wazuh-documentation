@@ -400,3 +400,5 @@ Configuring synchronization
       <max_eps>10</max_eps>
     </synchronization>
   </syscheck>
+
+If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, the synchronization section will not be present in the ``ossec.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.  
