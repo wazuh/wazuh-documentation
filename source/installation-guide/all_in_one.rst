@@ -41,47 +41,44 @@ Elasticsearch installation
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The specification file ``/usr/share/elasticsearch/instances.yml`` can be created as follows:
+#. In order to secure the installation, the certificates can be created as follows:
 
-    .. code-block:: yaml
+  .. code-block:: console
 
-      cat > /usr/share/elasticsearch/instances.yml <<\EOF
-      instances:
-      - name: "elasticsearch"
-        ip:
-        - "10.0.0.2"
-      EOF
+    # mkdir /etc/elasticsearch/certs/
+    # cd /etc/elasticsearch/certs/
 
-    Replace the ``10.0.0.2`` with the host's IP.
 
-    In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+#. Create the ``root`` certificate:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
+    # openssl genrsa -out root-ca-key.pem 2048 && openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
 
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used to extract the file:
 
-    .. code-block:: console
+#. Create the ``admin`` certificates:
 
-      # unzip ~/certs.zip -d ~/certs
+  .. code-block:: console
 
-    The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
+    # openssl genrsa -out admin-key-temp.pem 2048 && openssl pkcs8 -inform PEM -outform PEM -in admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out admin-key.pem
 
-    .. code-block:: console
+    # openssl req -new -key admin-key.pem -out admin.csr && openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
 
-      # mkdir /etc/elasticsearch/certs/ca -p
-      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
-      # chown -R elasticsearch: /etc/elasticsearch/certs
-      # chmod -R 500 /etc/elasticsearch/certs
-      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-      # rm -rf ~/certs/ ~/certs.zip
+
+#. Create the ``node`` certificates:
+
+  .. code-block:: console
+
+    # openssl genrsa -out node-key-temp.pem 2048 && openssl pkcs8 -inform PEM -outform PEM -in node-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out node-key.pem
+
+    # openssl req -new -key node-key.pem -out node.csr && openssl x509 -req -in node.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out node.pem
+
 
 #. Enable and start the Elasticsearch service:
 
     .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
+
 
 #. Generate credentials for all the Elastic Stack pre-built roles and users:
 
