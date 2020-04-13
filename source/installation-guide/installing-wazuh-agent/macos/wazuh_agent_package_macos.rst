@@ -5,7 +5,7 @@
 macOS from package
 ==================
 
-The package for macOS is suitable for macOS Sierra or greater. You can download the `macOS installer <https://packages.wazuh.com/3.x/osx/wazuh-agent-|WAZUH_LATEST|-1.pkg>`_ from our :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
+The package for macOS is suitable for macOS Sierra or greater. You can download the `macOS installer <https://packages.wazuh.com/3.x/osx/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg>`_ from our :ref:`packages list<packages>`. You can install it by using the command line or following the GUI steps:
 
   a) Using the command line, you can choose installation or deployment:
 
@@ -13,7 +13,7 @@ The package for macOS is suitable for macOS Sierra or greater. You can download 
 
       .. code-block:: console
 
-        # installer -pkg wazuh-agent-|WAZUH_LATEST|-1.pkg -target /
+        # installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
     * Deployment:
 
@@ -21,7 +21,7 @@ The package for macOS is suitable for macOS Sierra or greater. You can download 
 
       .. code-block:: console
 
-        # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_LATEST|-1.pkg -target /
+        # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
       See the following document for additional automated deployment options :ref:`deployment variables <deployment_variables_macos>`.
 

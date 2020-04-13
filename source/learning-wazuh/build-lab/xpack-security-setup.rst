@@ -75,18 +75,18 @@ Configure SSL in Elasticsearch
 
     [root@elastic-server ~]# cat >> /etc/elasticsearch/elasticsearch.yml << EOF
 
-    # Unbind to a specific IP:
+    ## Unbind to a specific IP:
     network.host: 0.0.0.0
     discovery.seed_hosts: ["172.30.0.20"]
 
-    # Transport layer
+    ## Transport layer
     xpack.security.transport.ssl.enabled: true
     xpack.security.transport.ssl.verification_mode: certificate
     xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
     xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch.crt
     xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
 
-    # HTTP layer
+    ## HTTP layer
     xpack.security.http.ssl.enabled: true
     xpack.security.http.ssl.verification_mode: certificate
     xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
@@ -121,13 +121,13 @@ Configure SSL in Kibana
 
     [root@elastic-server ~]# cat >> /etc/kibana/kibana.yml << EOF
 
-    # Elasticsearch from/to Kibana
+    ## Elasticsearch from/to Kibana
     elasticsearch.hosts: ["https://172.30.0.20:9200"]
     elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca/ca.crt"]
     elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     elasticsearch.ssl.key: "/etc/kibana/certs/kibana.key"
 
-    # Browser from/to Kibana
+    ## Browser from/to Kibana
     server.ssl.enabled: true
     server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     server.ssl.key: "/etc/kibana/certs/kibana.key"
@@ -225,8 +225,13 @@ are configured in the Elastic Server using Elasticsearch directly.
 4. When prompted confirm you wish to continue and provide a password. Then
    provide a password for each one of the components as prompted.
 
+5. Restart Elasticsearch and wait for the service to be ready.
 
-5. Set up credentials for Kibana by adding the following lines to
+  .. code-block:: console
+
+      [root@elastic-server ~]# systemctl restart elasticsearch
+
+6. Set up credentials for Kibana by adding the following lines to
    ``/etc/kibana/kibana.yml``:
 
   .. code-block:: console
@@ -241,13 +246,13 @@ are configured in the Elastic Server using Elasticsearch directly.
 
 Note that you may use the "elastic" user and the password you configured for it in the previous step.
 
-6. Restart Kibana.
+7. Restart Kibana.
 
   .. code-block:: console
 
       [root@elastic-server ~]# systemctl restart kibana
 
-7. Set up credentials for Filebeat on the Wazuh server by adding the following
+8. Set up credentials for Filebeat on the Wazuh server by adding the following
    lines to ``/etc/filebeat/filebeat.yml``.
 
   .. code-block:: console
@@ -255,16 +260,16 @@ Note that you may use the "elastic" user and the password you configured for it 
       [root@wazuh-manager ~]# cat >> /etc/filebeat/filebeat.yml << EOF
 
       output.elasticsearch.username: "elastic"
-      output.elasticsearch.password: "password_generated_for_elastic"
+      output.elasticsearch.password: "password_provided_for_elastic"
       EOF
 
-8. Restart Filebeat
+9. Restart Filebeat
 
   .. code-block:: console
 
       [root@wazuh-manager ~]# systemctl restart filebeat
 
-Log in to Kibana and connect it to the Wazuh API
+Log in to Kibana to verify it is working
 ------------------------------------------------
 
 1. Now use your local web browser to surf to https://SERVER_IP where SERVER_IP
@@ -276,15 +281,3 @@ Log in to Kibana and connect it to the Wazuh API
 .. thumbnail:: ../../images/learning-wazuh/build-lab/xpack-login.png
   :align: center
   :width: 100%
-
-2. Click on the Wazuh icon on the left.  Fill out the form for connecting to the
-   API like below, where the user is "wazuhapiuser", the API password is "wazuhlab"
-   the host is "https://172.30.0.10" and the port is "55000":
-
-  .. thumbnail:: ../../images/learning-wazuh/build-lab/kibana-to-api.png
-      :title: API Connect
-      :align: center
-      :width: 75%
-
-4. Click on **[Save]** and then click on the Wazuh icon again to bring up the Wazuh
-   Kibana App.  It should now be ready to use.

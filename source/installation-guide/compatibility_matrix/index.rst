@@ -130,7 +130,9 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +    **API and Wazuh App version**  + **Elastic Stack version** +
 |                                   |                           |
 +-----------------------------------+---------------------------+
-|              3.11.x               |      6.8.6 to |ELASTICSEARCH_LATEST|       |
+|              3.12.x               |      6.8.7 to |ELASTICSEARCH_LATEST|       |
++-----------------------------------+---------------------------+
+|              3.11.x               |      6.8.6 to 7.6.1       |
 +-----------------------------------+---------------------------+
 |              3.10.x               |      6.8.6 to 7.5.1       |
 +-----------------------------------+---------------------------+
@@ -171,6 +173,8 @@ The Splunk app for Wazuh requires compatibility between two different products:
 |                                 |                           |
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
++---------------------------------+---------------------------+
+|              3.12.x             |      7.3.4 to |SPLUNK_LATEST|       |
 +---------------------------------+---------------------------+
 |              3.11.x             |      7.3.2 to 8.0.1       |
 +---------------------------------+---------------------------+

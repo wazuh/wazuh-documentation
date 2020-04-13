@@ -76,7 +76,6 @@ Upgrade Elasticsearch
       .. code-block:: console
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-        # systemctl restart elasticsearch
 
 #. Restart the service.
 
@@ -168,11 +167,6 @@ Upgrade Kibana
 .. warning::
   Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
 
-#. Stop Kibana.
-
-    .. code-block:: console
-
-      # systemctl stop kibana
 
 #. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
 

@@ -67,6 +67,8 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 
 The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.
 
+.. _active_response_scripts:
+
 Default Active response scripts
 -------------------------------
 
