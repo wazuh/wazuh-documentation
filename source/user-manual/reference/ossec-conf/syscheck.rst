@@ -698,15 +698,43 @@ Specify where is the database going to be stored.
 file_limit
 ^^^^^^^^^^
 
-.. versionadded:: 3.12.2
+.. versionadded:: 3.13
 
-Specifies a limit on the number of files that will be monitored by syscheck. Setting ``file_limit`` to 0 will disable the limit, monitoring as many files as there are in the configured directories.
+Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+
+.. code-block:: xml
+
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>
+      <enabled>yes</enabled>
+      <entries>100000</entries>
+    </file_limit>
+
+
+**enabled**
+
+.. versionadded:: 3.13
+
+Specifies wether there will be a limit on the number of monitored files or not.
 
 +--------------------+---------------------------------------+
-| **Default value**  | 100000                                |
+| **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | Integer number greater or equal to 0. |
+| **Allowed values** | yes/no                                |
 +--------------------+---------------------------------------+
+
+
+**entries**
+
+.. versionadded:: 3.13
+
+Specifies the number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
 
 
 .. _reference_ossec_syscheck_synchronization:
@@ -831,9 +859,6 @@ Default Unix configuration
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin,/boot</directories>
-
-    <!-- Maximum number of files to be monitored -->
-    <file_limit>100000</file_limit>
 
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
