@@ -2,26 +2,33 @@
 
 .. _kibana_app:
 
-Kibana app
-==========
+Wazuh Kibana plugin
+===================
 
 .. meta::
   :description: Find information about the Wazuh Kibana app, its different features, configuration reference and how to troubleshoot some of the most common problems.
 
-The Wazuh app for Kibana lets you visualize and analyze Wazuh alerts stored in Elasticsearch. You can obtain statistics per agent, search alerts and filter using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
+The Wazuh Kibana plugin lets the user visualize and analyze Wazuh alerts stored in Elasticsearch and provides control over the Wazuh environment in a convenient way. It integrates with the Wazuh API to retrieve information about the Wazuh manager and the Wazuh agents configuration, logs, ruleset, groups and more. The plugin allows also to present collected data in the form of the PDF reports.
 
-.. note:: Read our `Searching for alerts using the Wazuh app for Kibana <https://wazuh.com/blog/searching-for-alerts-using-the-wazuh-app-for-kibana//>`_ document for more information.
+The installation process of the Wazuh Kibana plugin is described in the Elastic Stack installation section for :ref:`RPM <install_kibana_app_rpm>` and :ref:`Debian <install_kibana_app_deb>` systems.
+It will be available in Kibana under the Wazuh logo icon situated on the left side menu:
 
-To install the app, you can follow our Elastic Stack installation guides (for :ref:`RPM <install_kibana_app_rpm>` or :ref:`Debian <install_kibana_app_deb>` systems).
+.. thumbnail:: ../../images/kibana-app/kibana-plugin-main/wazuh-kibana-plugin-menu.png
+  :align: left
+  :width: 100%
 
-This manual describes the configuration process to get it started and the different app features that you can use. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
+This option will take the user to the main Wazuh Kibana plugin section called Overview:
+
+.. thumbnail:: ../../images/kibana-app/kibana-plugin-main/wazuh-kibana-plugin-main.png
+  :align: center
+  :width: 100%
+
 
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 1
+        :maxdepth: 2
 
-        connect-kibana-app
         features/index
         troubleshooting
         reference/index
