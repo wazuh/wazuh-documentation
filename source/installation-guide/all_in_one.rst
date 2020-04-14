@@ -21,7 +21,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 Install Java Develpment Kit (JDK)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Open Distro for Elasticsearch requires the installation of Java Develpment Kit. In can be installled either version 8 or 11 version: 
+  Open Distro for Elasticsearch requires the installation of Java Develpment Kit. 
 
     .. include:: ../_templates/installations/elastic/common/install_jdk.rst      
      
