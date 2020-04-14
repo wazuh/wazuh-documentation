@@ -15,14 +15,14 @@ After installing the Wazuh-Docker containers, there are several tasks that you c
 Access to services and containers
 ---------------------------------
 
-1. You may access the Kibana UI at the Docker host's IP address, for example: `https://localhost <http://localhost>`_ if you are in the Docker host. By default, the username "foo" and the password "bar" are used.
+#. You may access the Kibana UI at the Docker host's IP address, for example: `https://localhost <http://localhost>`_ if you are in the Docker host. By default, the username "foo" and the password "bar" are used.
 
 .. note::
    The certificate generated for kibana by default is a self-signed certificate, because of this your browser will warn that it cannot verify its authenticity.
 
-2. Agents may be registered by following the standard registration process and using the Docker host's address as the manager's address. For more information see: :ref:`Registering agents<register_agents>`
+#. Agents may be registered by following the standard registration process and using the Docker host's address as the manager's address. For more information see: :ref:`Registering agents<register_agents>`
 
-3. We can list the containers we have created by executing `docker-compose ps` in the directory that contains the ``docker-compose.yml`` file:
+#. We can list the containers we have created by executing `docker-compose ps` in the directory that contains the ``docker-compose.yml`` file:
 
     .. code-block:: console
 
@@ -117,4 +117,3 @@ To execute commands in the Wazuh manager container after configuration is placed
 .. code-block:: console
 
   # docker run -it --rm wazuh/wazuh:latest "/var/ossec/bin/ossec-control enable debug"
-
