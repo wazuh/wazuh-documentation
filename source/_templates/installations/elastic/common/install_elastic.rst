@@ -38,18 +38,12 @@
 
             .. code-block:: console
 
-            # curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo  
+                # curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo  
 
         #. Install the latest version of Open Distro for Elasticsearch: 
 
-        .. code-block:: console
-
-            # yum install opendistroforelasticsearch-1.6.0
-
-        In case of having installed Java 8, the following command must be executed:
-
             .. code-block:: console
 
-                # ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
+                # yum install opendistroforelasticsearch-1.6.0
 
 .. End of include file
