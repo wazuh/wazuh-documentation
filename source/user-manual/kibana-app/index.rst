@@ -13,8 +13,8 @@ The Wazuh Kibana plugin lets the user visualize and analyze Wazuh alerts stored 
 The installation process of the Wazuh Kibana plugin is described in the Elastic Stack installation section for :ref:`RPM <install_kibana_app_rpm>` and :ref:`Debian <install_kibana_app_deb>` systems.
 It will be available in Kibana under the Wazuh logo icon situated on the left side menu:
 
-.. thumbnail:: ../../images/kibana-app/kibana-plugin-main/wazuh-kibana-plugin-menu.png
-  :align: left
+.. thumbnail:: ../../images/kibana-app/kibana-plugin-main/wazuh-kibana-plugin-icon.png
+  :align: center
   :width: 100%
 
 This option will take the user to the main Wazuh Kibana plugin section called Overview:

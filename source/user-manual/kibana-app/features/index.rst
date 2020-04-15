@@ -204,17 +204,17 @@ This section provides information about your currently installed Wazuh app packa
 Dev tools
 ---------
 
-The *Dev tools* tab provides an user interface to interact with the Wazuh API. You can use it to send requests and get a response. This tab uses your currently selected API from :ref:`kibana_settings`. The interface is split into two panes: *editor pane* and *response pane*.
+The *Dev tools* tab provides an user interface to interact with the Wazuh API. This tab uses currently selected API from :ref:`Wazuh API configuration <kibana_settings>`. The interface is split into an editor pane and a response pane:
 
-.. thumbnail:: ../../../images/kibana-app/features/dev-tools/dev-tools.png
+.. thumbnail:: ../../../images/kibana-app/features/dev-tools/wazuh-kibana-dev-tools.png
   :align: center
   :width: 100%
 
-On the editor pane, you can type API requests in several ways:
+On the editor pane, the API requests can be typed in several ways:
 
-- Using *in-line parameters*, just like in a browser.
-- Using *JSON-formatted parameters*.
-- Combining both in-line and JSON-formatted parameters (the in-line parameter has precedence over the JSON-formatted one).
+- Using ``in-line parameters``, just like in a browser.
+- Using ```JSON-formatted parameters``.
+- Combining both in-line and JSON-formatted parameters, where the in-line parameter has precedence over the JSON-formatted one.
 
 .. _kibana_reporting:
 
