@@ -6,7 +6,7 @@
 
 All-in-One installation
 =======================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration.
+This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. This installation guide is meant for small production enviroments. This installation will use the default security settings, which uses generic certificates that are the same for all installations. It is highly recommended to :ref:`securize the installation <securize_opendistro>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -43,42 +43,8 @@ Configure Elasticsearch
 
   .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
-Certificates creation and deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. To secure the installation, the certificates can be created as follows:
-
-    .. code-block:: console
-
-        # mkdir /etc/elasticsearch/certs/
-        # cd /etc/elasticsearch/certs/
-
-#. Create the ``root`` certificate:
-
-    .. code-block:: console
-
-        # openssl genrsa -out root-ca-key.pem 2048 && openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
-
-
-#. Create the ``admin`` certificate:
-
-    .. code-block:: console
-
-        # openssl genrsa -out admin-key-temp.pem 2048 && openssl pkcs8 -inform PEM -outform PEM -in admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out admin-key.pem
-
-        # openssl req -new -key admin-key.pem -out admin.csr && openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
-
-
-#. Create the ``node`` certificate:
-
-    .. code-block:: console
-
-      # openssl genrsa -out node-key-temp.pem 2048 && openssl pkcs8 -inform PEM -outform PEM -in node-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out node-key.pem
-
-      # openssl req -new -key node-key.pem -out node.csr && openssl x509 -req -in node.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out node.pem
-
-
-#. Enable and start the Elasticsearch service:
+Enable and start the Elasticsearch service:
 
     .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
 
@@ -101,10 +67,6 @@ Kibana installation and configuration
 
             .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
 
-
-#. Copy the Elasticsearch certificates into the Kibana configuration folder:
-
-    .. include:: ../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 #. Download the Kibana configuration file:
 
@@ -290,6 +252,16 @@ Filebeat installation and configuration
 #. Load the Filebeat template:
 
     .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
+
+
+.. _securize_opendistro:
+
+Securizing the installation 
+---------------------------
+
+The default installation of Elasticsearch uses generic certificates which are the same in every installation. That is why it is highly recommended to replace and securize the installation. 
+
+.. include:: ../_templates/installations/elastic/common/elasticsearch_certificates.rst
 
 
 Disabling repositories
