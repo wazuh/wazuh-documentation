@@ -38,10 +38,15 @@ Elasticsearch installation
     .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
 
 
+Configure Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. In order to secure the installation, the certificates can be created as follows:
+#. To secure the installation, the certificates can be created as follows:
 
     .. code-block:: console
 
@@ -55,7 +60,7 @@ Certificates creation and deployment
         # openssl genrsa -out root-ca-key.pem 2048 && openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
 
 
-#. Create the ``admin`` certificates:
+#. Create the ``admin`` certificate:
 
     .. code-block:: console
 
@@ -64,7 +69,7 @@ Certificates creation and deployment
         # openssl req -new -key admin-key.pem -out admin.csr && openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
 
 
-#. Create the ``node`` certificates:
+#. Create the ``node`` certificate:
 
     .. code-block:: console
 
@@ -76,11 +81,6 @@ Certificates creation and deployment
 #. Enable and start the Elasticsearch service:
 
     .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
-
-
-#. Generate credentials for all the Elastic Stack pre-built roles and users:
-
-    .. include:: ../_templates/installations/elastic/common/generate_elastic_credentials.rst
 
 Kibana installation and configuration
 -------------------------------------
