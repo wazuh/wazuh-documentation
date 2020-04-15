@@ -241,7 +241,7 @@ Filebeat installation and configuration
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
-    .. include:: ../_templates/installations/elastic/common/configure_filebeat.rst
+    .. include:: ../_templates/installations/elastic/common/configure_filebeat_all_in_one.rst
 
     To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
