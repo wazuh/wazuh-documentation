@@ -75,21 +75,68 @@ Ruleset
 
 The :ref:`ruleset <ruleset>` is a key part of Wazuh. It's used by the Wazuh manager to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies or security policy violations.
 
-Ruleset section in the Wazuh Kibana plugin is available under *Management > Ruleset* option. The section is divided into three parts: ``Rules``, ``Decoders``, and ``Lists``. The table allows you to navigate through the rules or decoders, and you can use the search bar to filter.
+Ruleset section in the Wazuh Kibana plugin is available under *Management > Ruleset* option. The section is divided into three parts: :ref:`Rules <rules_syntax>`, :ref:`Decoders <decoders_syntax>`, and :ref:`Lists <ruleset_cdb-list>`:
 
-A special search syntax can be used on the bar for filtering rules and decoders, similar to the *Lucene* syntax used in Kibana. For example, if you type ``group: audit``, it will create a filter pill under the search bar. You can remove the filter clicking on the `X` icon.
+.. tabs::
 
-.. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-ruleset.png
+ .. group-tab:: Rules
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-rules.png
+    :align: center
+    :width: 100%
+
+ .. group-tab:: Decoders
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-decoders.png
+    :align: center
+    :width: 100%
+
+ .. group-tab:: Lists
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-lists.png
+    :align: center
+    :width: 100%
+
+A special search syntax can be used on the bar for filtering rules and decoders, similar to the ``Lucene`` syntax used in Kibana. For example, typing ``group: audit``, creates a filter pill under the search bar. The ``X`` icon removes the filter:
+
+.. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-ruleset-filter.png
   :align: center
   :width: 100%
 
-When the user clicks on a rule or decoder, it will open a detail view, where you can find the complete information. In the different sections you can find :ref:`PCI DSS <pci_dss>` or :ref:`GDPR <gdpr>` requirements, :ref:`groups <reference_agent_conf>`, regular expressions, and other details. The user can click on some elements to activate a filter on the previous list.
+Clicking on a specific rule or a decoder opens a detail view with the complete information and the table listing related rules or decoders that are defined on the same file:
 
-At the bottom of the page, there's a table of related rules or decoders that are defined on the same file.
+.. tabs::
 
-.. thumbnail:: ../../../images/kibana-app/features/ruleset/ruleset-detail.png
-  :align: center
-  :width: 100%
+ .. group-tab:: Rules
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-rule-details.png
+    :align: center
+    :width: 100%
+
+ .. group-tab:: Decoders
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-decoder-details.png
+    :align: center
+    :width: 100%
+
+
+``Custom rules`` and ``custom decoders`` slide buttons open a sections where the :ref:`custom ruleset <ruleset_custom>` is managed. All the changes to the saved custom ruleset require activating them on the Wazuh manager by clicking ``Restart now`` button:
+
+.. tabs::
+
+ .. group-tab:: Rules
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-custom-rules.png
+    :align: center
+    :width: 100%
+
+ .. group-tab:: Decoders
+
+  .. thumbnail:: ../../../images/kibana-app/features/ruleset/wazuh-kibana-custom-decoders.png
+    :align: center
+    :width: 100%
+
+
 
 .. _kibana_settings:
 
