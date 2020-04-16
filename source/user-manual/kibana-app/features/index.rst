@@ -148,9 +148,9 @@ The *Settings* page allows you to configure and customize your Wazuh app experie
 API
 ^^^
 
-In this section, you can list all your inserted API credentials. The star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed in order to add or edit an entry. Check your API connection status prior to adding them to the app.
+This section lists all inserted Wazuh API entries. The star icon indicates the currently used Wazuh API to show information in the Wazuh Kibana plugin. A working API is needed to add or edit an entry. The connection status of each entry can be checked by clicking the ``Check connection`` button found in the ``Action`` column:
 
-.. thumbnail:: ../../../images/kibana-app/features/settings/api.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/wazuh-kibana-settings-api.png
   :align: center
   :width: 100%
 
@@ -238,20 +238,18 @@ The list of the generated reports is available on *Management > Reporting*, from
 Index pattern selector
 ----------------------
 
-The Kibana app lets you select a custom index pattern for the *Overview*, *Agents* and *Discover* tabs, used to run search and analytics against. You can create custom index patterns on Kibana, and select them on the app if they're compatible.
+The Wazuh Kibana plugin allows creating custom index patterns on Kibana and, if they are compatible, selecting them in the plugin to run search and analytics against.
 
-You can select a different index pattern in two ways:
+Managing an existing index patterns as well as creating a custom index patterns can be done on the *Management > Index Patterns* page on the Kibana interface.
+For a new index patterns, to properly order the alerts by creation date, the ``Time Filter field name`` has to be set to ``timestamp``:
 
-- On the **Settings > Pattern** page.
-- On the **top menu bar**. This selector is only enabled if you have more than one compatible index pattern.
-
-.. thumbnail:: ../../../images/kibana-app/features/index-pattern/index-pattern-description.png
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/wazuh-kibana-index-patterns.png
   :align: center
   :width: 100%
 
-You can open the *Management > Index Patterns* page on the Kibana interface to manage them, and create even more. Make sure to use ``timestamp`` as the *Time Filter field name* to properly order the alerts by creation date.
+The index pattern selector is available on the top menu bar and is enabled only if there are more than one compatible index patterns:
 
-.. thumbnail:: ../../../images/kibana-app/features/index-pattern/management-patterns.png
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/wazuh-kibana-index-pattern-selector.png
   :align: center
   :width: 100%
 
@@ -260,7 +258,7 @@ You can open the *Management > Index Patterns* page on the Kibana interface to m
 Download as CSV
 ---------------
 
-You can download the content of Wazuh tables in CSV format. To do this, locate the ``Formatted`` button on the bottom right corner of each table. Once you click on it, the file will be downloaded to your computer.
+The content of Wazuh tables can be downloaded in CSV format by clicking the Formatted button on the bottom right corner of each table. The file will be downloaded to the user's computer:
 
 .. thumbnail:: ../../../images/kibana-app/features/download-csv/download-csv.png
   :align: center
@@ -271,31 +269,31 @@ You can download the content of Wazuh tables in CSV format. To do this, locate t
 Query configuration
 -------------------
 
-The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the active configuration in real time.
+Wazuh Kibana plugin provides information about the Wazuh managers' and the Wazuh agents' active configuration in real-time. The Wazuh manager's configuration is shown on the *Management > Configuration* page:
 
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/configuration-section.png
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-manager-conf.png
   :align: center
   :width: 100%
 
-The image below shows that the agent configuration is synchronized:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/is-sync.png
-  :align: center
-
-By clicking on the *Log collection* configuration, the active configuration is shown:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/logcollector-query.png
-  :align: center
-  :width: 100%
-
-It also has the capability to show the configuration in JSON or XML formats for better readability:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/logcollector-json.png
-  :align: center
-  :width: 100%
-
-Now for example, if you want to know the current cluster configuration from one of your *Wazuh managers*, click on the *Management > Configuration* tab, select the desired node and then click on the *Cluster* section:
+Most of the elements in the table are clickable, allowing a user to explore each section of the configuration in detail. For example, the current Wazuh manager's cluster configuration can be displayed by selecting the desired node and then clicking on the ``Cluster`` section:
 
 .. thumbnail:: ../../../images/kibana-app/features/query-configuration/cluster.png
+  :align: center
+  :width: 100%
+
+Similarly, each Wazuh agent's configuration can be monitored on *Agents > select the Wazuh agent > Configuration* page. The image below shows that the agent configuration is synchronized:
+
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-agent-sync.png
+  :align: center
+
+For example, by clicking on the Wazuh agent's ``Log collection`` section, the detailed active configuration is shown:
+
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-agent-conf-logcollector.png
+  :align: center
+  :width: 100%
+
+For better readability, the configuration can also be displayed in JSON or XML format :
+
+.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-conf-json.png
   :align: center
   :width: 100%
