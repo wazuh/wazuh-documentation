@@ -12,85 +12,12 @@ This document guides through an installation of the Wazuh server and Elastic sta
 
 .. _all_in_one_elastic:
 
-Installing Elasticsearch
-------------------------
+Preapring the installation
+--------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
 
-
-Install Java Develpment Kit (JDK)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  Open Distro for Elasticsearch requires the installation of Java Develpment Kit. 
-
-    .. include:: ../_templates/installations/elastic/common/install_jdk.rst      
-     
-Install wget and unzip
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. include:: ../_templates/installations/elastic/common/install_wget_unzip.rst    
-
-Elasticsearch installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  Install the Elasticsearch package:
-
-    .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
-
-
-Configure Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~
-
-  .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
-
-
-Enable and start the Elasticsearch service:
-
-    .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
-
-Kibana installation and configuration
--------------------------------------
-
-#. Install the Kibana package:
-
-    .. tabs::
-
-        .. group-tab:: APT
-
-
-            .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
-
-
-
-        .. group-tab:: Yum
-
-
-            .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
-
-
-#. Download the Kibana configuration file:
-
-    .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
-
-#. Install the Wazuh Kibana plugin:
-
-    The installation of the plugin must be done from the Kibana home directory.
-
-    .. code-block:: console
-
-        # cd /usr/share/kibana
-
-    .. code-block:: console
-
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
-
-#. Enable and start the Kibana service:
-
-    .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
-
-    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
-
-    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+  .. include:: ../_templates/installations/elastic/common/before_installation.rst
 
 
 .. _all_in_one_wazuh:
@@ -185,7 +112,72 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 .. note::
-  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
+  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.      
+
+Elasticsearch installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+
+  Install the Elasticsearch package:
+
+    .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
+
+
+Configure Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+
+
+Enable and start the Elasticsearch service:
+
+    .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
+
+Kibana installation and configuration
+-------------------------------------
+
+#. Install the Kibana package:
+
+    .. tabs::
+
+        .. group-tab:: APT
+
+
+            .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
+
+
+
+        .. group-tab:: Yum
+
+
+            .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
+
+
+#. Download the Kibana configuration file:
+
+    .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
+
+#. Install the Wazuh Kibana plugin:
+
+    The installation of the plugin must be done from the Kibana home directory.
+
+    .. code-block:: console
+
+        # cd /usr/share/kibana
+
+    .. code-block:: console
+
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
+
+#. Enable and start the Kibana service:
+
+    .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
+
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
+
+    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+
 
 .. _wazuh_server_packages_filebeat:
 
