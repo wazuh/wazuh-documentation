@@ -108,6 +108,8 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `status`_           | started, aborted, succeeded, failed, lost, etc.               | Declares the current status of a rule.                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `mitre`_            | See `Mitre table <rules.html#mitre>`_ below.                  | Contains Mitre Technique IDs that fit the rule                                                       |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `var`_              | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
@@ -1305,7 +1307,7 @@ Example:
 
 mitre
 ^^^^^
-.. versionadded:: 3.12.0
+.. versionadded:: 3.13.0
 
 Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
 
