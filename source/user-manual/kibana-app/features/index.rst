@@ -143,7 +143,7 @@ Clicking on a specific rule or a decoder opens a detail view with the complete i
 Settings
 --------
 
-The *Settings* page allows you to configure and customize your Wazuh app experience. This section is automatically opened the first time you open the app in order to configure your first Wazuh API credentials, so the app can work properly.
+The *Settings* section allows to configure and receive the information about the Wazuh Kibana plugin:
 
 API
 ^^^
@@ -154,48 +154,30 @@ This section lists all inserted Wazuh API entries. The star icon indicates the c
   :align: center
   :width: 100%
 
-Extensions
-^^^^^^^^^^
-
-Wazuh provides multiple integrations and capabilities to monitor and analyze your hosts. If you're using some of them, you can enable multiple extensions on the app to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
-
-.. thumbnail:: ../../../images/kibana-app/features/settings/extensions.png
-  :align: center
-  :width: 100%
-
-Index pattern
-^^^^^^^^^^^^^
-
-The index pattern functionality is completely described at the :ref:`kibana_index_pattern` section.
-
-.. thumbnail:: ../../../images/kibana-app/features/settings/pattern.png
-  :align: center
-  :width: 100%
-
 Configuration
 ^^^^^^^^^^^^^
 
-You can take a quick look to the full Wazuh app configuration file here. The documentation for the ``wazuh.yml`` file can be found on the :ref:`kibana_config_file` section.
+This section presents and allows to edit Wazuh Kibana plugin :ref:`configuration file <kibana_config_file>` located at ``/usr/share/kibana/optimizewazuh/config/wazuh.yml``:
 
-.. thumbnail:: ../../../images/kibana-app/features/settings/configuration.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/wazuh-kibana-settings-config.png
   :align: center
   :width: 100%
 
 Logs
 ^^^^
 
-The Wazuh app stores log information on the ``/usr/share/kibana/optimize/wazuh-logs/wazuhapp-plain.log`` file. These logs can be helpful for troubleshooting purposes. The *Logs* section allows you to check the last 20 log messages along with its date and severity level.
+This section lists the Wazuh Kibana plugin log messages stored on the ``/usr/share/kibana/optimize/wazuh/logs/wazuhapp.log`` file:
 
-.. thumbnail:: ../../../images/kibana-app/features/settings/logs.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/wazuh-kibana-settings-logs.png
   :align: center
   :width: 100%
 
 About
 ^^^^^
 
-This section provides information about your currently installed Wazuh app package, such as version, revision, and installation date. If you want to discover what's new on each app release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
+This section provides information about currently installed Wazuh Kibana plugin package, such as version, revision, and installation date. The changes to each Wazuh Kibana plugin release can be found in the `changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_:
 
-.. thumbnail:: ../../../images/kibana-app/features/settings/about.png
+.. thumbnail:: ../../../images/kibana-app/features/settings/wazuh-kibana-settings-about.png
   :align: center
   :width: 100%
 
@@ -213,7 +195,7 @@ The *Dev tools* tab provides an user interface to interact with the Wazuh API. T
 On the editor pane, the API requests can be typed in several ways:
 
 - Using ``in-line parameters``, just like in a browser.
-- Using ```JSON-formatted parameters``.
+- Using ``JSON-formatted parameters``.
 - Combining both in-line and JSON-formatted parameters, where the in-line parameter has precedence over the JSON-formatted one.
 
 .. _kibana_reporting:
