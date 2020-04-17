@@ -6,7 +6,7 @@
 
 All-in-One installation
 =======================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. This installation guide is meant for small production enviroments. This installation will use the default security settings, which uses generic certificates that are the same for all installations. It is highly recommended to :ref:`securize the installation <securize_opendistro>`.
+This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. This installation guide is meant for small production enviroments. This installation will use the default security settings, which uses generic certificates that are the same for all installations.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -165,9 +165,6 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-
-    .. code-block:: console
-
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
 
 #. Enable and start the Kibana service:
@@ -231,6 +228,15 @@ Filebeat installation and configuration
 
       # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
+#. Copy the demo Elasticsearch certificates into ``/etc/filebeat/certs``:
+
+    .. code-block:: console
+
+      # mkdir /etc/filebeat/certs
+      # cp /etc/elasticsearch/root-ca.pem /etc/filebeat/certs/
+      # cp /etc/elasticsearch/esnode* /etc/filebeat/certs/
+
+
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
     .. include:: ../_templates/installations/elastic/common/configure_filebeat_all_in_one.rst
@@ -244,16 +250,6 @@ Filebeat installation and configuration
 #. Load the Filebeat template:
 
     .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
-
-
-.. _securize_opendistro:
-
-Securizing the installation 
----------------------------
-
-The default installation of Elasticsearch uses generic certificates which are the same in every installation. That is why it is highly recommended to replace and securize the installation. 
-
-.. include:: ../_templates/installations/elastic/common/elasticsearch_certificates.rst
 
 
 Disabling repositories
