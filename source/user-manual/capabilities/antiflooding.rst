@@ -107,7 +107,8 @@ Warning status (orange area)
 
 Once it has reached the ``warning level``, an alert like the one below is triggered on the manager side:
 
-.. code-block:: console
+.. code-block:: none
+  :class: output
 
   ** Alert 1501604235.59814: - wazuh,agent_flooding,
   2017 Aug 01 18:17:15 (fedora) any->ossec-agent
@@ -122,7 +123,8 @@ Reached 100% (light red area)
 
 When the buffer continues receiving events faster than they are removed, it will eventually reach 100% of its capacity, triggering another alert on the manager:
 
-.. code-block:: console
+.. code-block:: none
+  :class: output
 
   ** Alert 1501604236.60027: - wazuh,agent_flooding,
   2017 Aug 01 18:17:16 (fedora) any->ossec-agent
@@ -154,7 +156,8 @@ If the conditions in number 2 above are met, where the buffer stays above the ``
 
 This alert has the following appearance:
 
-.. code-block:: console
+.. code-block:: none
+  :class: output
 
   ** Alert 1501604250.60248: mail  - wazuh,agent_flooding,
   2017 Aug 01 18:17:30 (fedora) any->ossec-agent
@@ -173,7 +176,8 @@ The right area of the graphic shows how the buffer returns to a normal status af
 
 In order to let the manager know when an agent is working properly again, another alert is triggered when the use of a maxed-out buffer's decreases to less than the ``normal level`` (70% by default). The alert looks like this:
 
-.. code-block:: console
+.. code-block:: none
+  :class: output
 
   ** Alert 1501604257.60486: - wazuh,agent_flooding,
   2017 Aug 01 18:17:37 (fedora) any->ossec-agent

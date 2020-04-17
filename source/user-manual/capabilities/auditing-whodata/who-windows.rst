@@ -8,14 +8,14 @@ Auditing who-data in Windows
 How it works
 ^^^^^^^^^^^^
 
-The who-data monitoring functionality uses the Microsoft Windows audit system to get the information about who made the changes in a monitored directory.
-These changes produce audit events that are processed by *syscheck* and reported to the manager. Compatible with systems greater than Windows Vista.
+The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to get the related information about who made modifications in a monitored directory.
+These changes produce audit events that are processed by *syscheck* and reported to the manager. This feature is only compatible with systems greater than Windows Vista.
 
 Configuration
 ^^^^^^^^^^^^^
 
-To start monitoring in whodata mode, the SACL of the directory to be monitored must be properly configured. Wazuh performs this task automatically when
-starting on directories declared with the tag ``whodata="yes"`` in the file ``ossec.conf``:
+To enable the Whodata feature, the SACL of the directory to be monitored must be properly configured. Wazuh automatically performs this task when 
+the tag ``whodata="yes"`` is declared within the ``directories`` statement in the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -23,7 +23,7 @@ starting on directories declared with the tag ``whodata="yes"`` in the file ``os
       <directories check_all="yes" whodata="yes">C:\Windows\System32\drivers\etc</directories>
     </syscheck>
 
-System audit policies also need to be properly configured. This part is also done automatically for most supported Windows systems. If your system is
+System audit policies also need to be properly configured. This part is also automatically done for most supported Windows systems. If your system is
 superior to Windows Vista but the audit policies cannot be self-configured, see :ref:`the guide to configure Local Audit Policies<who-windows-policies>`.
 
 Alert fields
@@ -32,7 +32,7 @@ Alert fields
 The following fields are received in alerts when who-data is enabled:
 
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **(Audit) User**             | Contains the user ID and name of the user who started the process that modified the monitored file.                |
+| **(Audit) User**             | Contains the ID and name of the user who started the process that modified the monitored file.                     |
 +------------------------------+                                                                                                                    +
 | **audit.user.id**            |                                                                                                                    |
 |                              |                                                                                                                    |
@@ -53,7 +53,8 @@ Alert examples
 
 Alert in log format:
 
-::
+.. code-block:: none
+    :class: output
 
     ** Alert 1531323832.10357533: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
     2018 Jul 11 17:43:52 (vpc-agent-win) any->syscheck
@@ -90,6 +91,7 @@ Alert in log format:
 Alert in JSON format:
 
 .. code-block:: json
+    :class: output
 
     {
         "timestamp":"2018-07-11T17:43:52.914+0200",

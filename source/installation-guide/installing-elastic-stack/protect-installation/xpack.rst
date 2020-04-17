@@ -7,7 +7,7 @@ X-Pack
 
 Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intended users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
-Configure Elastic Stack to use encrypted connections 
+Configure Elastic Stack to use encrypted connections
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section describes how to secure the communications between the involved components, adding an SSL layer.
@@ -33,7 +33,8 @@ This section describes how to secure the communications between the involved com
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert --pem --in instances.yml --out certs.zip --keep-ca-key
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     certs.zip
     |-- ca
@@ -82,14 +83,12 @@ This section describes how to secure the communications between the involved com
 
 .. code-block:: yaml
 
-    # Transport layer
     xpack.security.transport.ssl.enabled: true
     xpack.security.transport.ssl.verification_mode: certificate
     xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
     xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch.crt
     xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
 
-    # HTTP layer
     xpack.security.http.ssl.enabled: true
     xpack.security.http.ssl.verification_mode: certificate
     xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
@@ -151,13 +150,11 @@ This section describes how to secure the communications between the involved com
 
 .. code-block:: yaml
 
-    # Elasticsearch from/to Kibana
     elasticsearch.hosts: ["https://10.0.0.3:9200"]
     elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca/ca.crt"]
     elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     elasticsearch.ssl.key: "/etc/kibana/certs/kibana.key"
 
-    # Browser from/to Kibana
     server.ssl.enabled: true
     server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     server.ssl.key: "/etc/kibana/certs/kibana.key"

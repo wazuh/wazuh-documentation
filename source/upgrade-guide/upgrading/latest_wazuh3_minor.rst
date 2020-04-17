@@ -60,6 +60,12 @@ c) OpenSUSE:
 Upgrade the Wazuh agent
 -----------------------
 
+Since the Wazuh 3.x version it is possible to upgrade the agents from the manager or locally.
+
+Upgrading the agents remotely from the manager is possible thanks to the agent_upgrade tools and the Wazuh API. You may check it in the  :ref:`Upgrading agent<upgrading-agent>` section.
+
+To perform the upgrade locally you have to follow the next steps:
+
 a) CentOS/RHEL/Fedora:
 
   .. code-block:: console
@@ -96,7 +102,7 @@ d) Windows:
 
   .. code-block:: console
 
-    # wazuh-agent-3.10.2-1.msi /q
+    # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
@@ -126,3 +132,10 @@ c) OpenSUSE:
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
+Next steps
+----------
+
+Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<installation_elastic_legacy>`.
+
+You might also want to check our :ref:`compatibility matrix <compatibility_matrix>` in order to look at the Elastic stack version you need to use.

@@ -7,14 +7,14 @@ Rootkit detection
 
 Rootkit and trojan detection is performed using two files: ``rootkit_files.txt`` and ``rootkit_trojans.txt``. In addition, other low-level tests are performed to detect kernel-level rootkits. You can use these capabilities by adding references to these files in ``ossec.conf``:
 
-::
+.. code-block:: xml
 
     <rootcheck>
         <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
 
-These are the options available for the `rootcheck component <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/rootcheck.html>`_:
+These are the options available for the :ref:`rootcheck component<reference_ossec_rootcheck>`:
 
 + **rootkit_files**: Contains the Unix-based application level rootkit signatures.
 
@@ -44,13 +44,24 @@ Use cases
 
 Wazuh performs several tests to detect rootkits.  One of them is to check for files hidden in /dev. The ``/dev`` directory should only contain device-specific files such as the primary IDE hard disk (``/dev/hda``), the kernel random number generators (``/dev/random`` and ``/dev/urandom``), etc. Any additional files, outside of the expected device-specific files, should be inspected because many rootkits use ``/dev`` as a storage partition to hide files. In the following example we have created the file ``.hid`` which is detected by OSSEC and generates the corresponding alert.
 
-::
+.. code-block:: console
 
     [root@manager /]# ls -a /dev | grep '^\.'
+
+.. code-block:: none
+    :class: output
+
     .
     ..
     .hid
+
+.. code-block:: console
+
     [root@manager /]# tail -n 25 /var/ossec/logs/alerts/alerts.log
+
+.. code-block:: none
+    :class: output
+
     Rule: 502 (level 3) -> 'Ossec server started.'
     ossec: Ossec started.
 

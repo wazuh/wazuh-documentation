@@ -5,7 +5,7 @@
 Wazuh Manager
 --------------
 
-This role will install and configure Wazuh Manager and Wazuh API, there are several variables you can use to customize the installation or configuration, by example:
+This role will install and configure Wazuh Manager and Wazuh API, there are several variables you can use to customize the installation or configuration, for example:
 
 - **json_output:** enabling or not JSON output (default: ``yes``)
 - **email_notification:** enabling email notifications (default: ``no``)

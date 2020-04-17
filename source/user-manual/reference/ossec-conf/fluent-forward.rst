@@ -22,6 +22,7 @@ Options
 - `enabled`_
 - `socket_path`_
 - `tag`_
+- `object_key`_
 - `address`_
 - `port`_
 - `shared_key`_
@@ -29,6 +30,8 @@ Options
 - `user`_
 - `password`_
 - `timeout`_
+- `poll_interval`_
+- `keepalive`_
 
 enabled
 ^^^^^^^
@@ -66,6 +69,21 @@ This indicates the tag to be added to the messages forwarded to the Fluentd serv
 +--------------------+------------+
 
 For example ``<tag>debug.test</tag>``.
+
+object_key
+^^^^^^^^^^
+
+.. versionadded:: 3.11.0
+
+Fluent Forward packs every log into an object. This option defines the key of that object, whose value is the log itself.
+
++--------------------+----------------------+
+| **Default value**  | message              |
++--------------------+----------------------+
+| **Allowed values** | Any non-empty string |
++--------------------+----------------------+
+
+For example ``<object_key>message</object_key>``.
 
 address
 ^^^^^^^
@@ -164,6 +182,52 @@ For example ``<timeout>10</timeout>``.
 
 .. note::
   The default value 0 means no timeout.
+
+
+poll_interval
+^^^^^^^^^^^^^
+.. versionadded:: 3.11.0
+
+Defines the connection health check interval (in seconds). If the module keeps idle during the defined time, it will poll the connection. If the connection is broken, the module will reconnect to the Fluent server.
+
++--------------------+--------------------------------+
+| **Default value**  | 60                             |
++--------------------+--------------------------------+
+| **Allowed values** | 1 to 7200                      |
++--------------------+--------------------------------+
+
+For instance: ``<poll_interval>60</poll_interval>``
+
+
+keepalive
+^^^^^^^^^
+.. versionadded:: 3.11.0
+
+Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait indefinitely for the server to confirm a delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
+
+This option allows enabling TCP keepalive and tune its options. When the connection becomes idle during ``<idle>`` seconds, the agent will start delivering one keepalive probe every ``<interval>`` seconds. If no response is received after ``<count>`` attempts, the agent will reset the connection.
+
+Attributes
+~~~~~~~~~~
+
++-------------+-------------------+--------------------+-----------------------+
+| **Option**  | **Default value** | **Allowed values** | **Description**       |
++-------------+-------------------+--------------------+-----------------------+
+| **enabled** | yes               | ``yes`` or ``no``  | Enable TCP keepalive. |
++-------------+-------------------+--------------------+-----------------------+
+
+Keepalive options
+~~~~~~~~~~~~~~~~~
+
++--------------+-------------------+--------------------+--------------------------------------------------------------+
+| **Option**   | **Default value** | **Allowed values** | **Description**                                              |
++--------------+-------------------+--------------------+--------------------------------------------------------------+
+| **count**    | Defined by the OS | 1 to 32767         | Maximum number of probes before closing the connection.      |
++--------------+-------------------+--------------------+--------------------------------------------------------------+
+| **idle**     | Defined by the OS | 1 to 32767         | Idle time: number of seconds before starting to send probes. |
++--------------+-------------------+--------------------+--------------------------------------------------------------+
+| **interval** | Defined by the OS | 1 to 32767         | Interval (in seconds) between probes.                        |
++--------------+-------------------+--------------------+--------------------------------------------------------------+
 
 
 Configuration examples

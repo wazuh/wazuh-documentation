@@ -16,6 +16,9 @@ Run the tool */var/ossec/bin/ossec-logtest* and paste the following log::
 
     $ /var/ossec/bin/ossec-logtest
 
+.. code-block:: none
+    :class: output
+
     Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
 
     **Phase 1: Completed pre-decoding.
@@ -45,6 +48,9 @@ In addition, you can use the option "-v" to show more information about the rule
 .. code-block:: console
 
     $ /var/ossec/bin/ossec-logtest -v
+
+.. code-block:: none
+    :class: output
 
     Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
 

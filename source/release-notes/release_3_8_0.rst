@@ -54,13 +54,13 @@ When Remoted reads an invalid key, now it can retrieve it from an external datab
 
 Details:
 
-- Integrated agent key request to external data sources. 
+- Integrated agent key request to external data sources.
 - Look for missing or old agent keys when Remoted detects an authorization failure.
 - Request agent keys by calling a defined executable or connecting to a local socket.
 
 **FIM who-data changes**
 
-- Added a health check for who-data monitoring features. It checks if the Audit events socket is working before starting the who-data engine in order to avoid start listening to it when it's blocked or disabled. 
+- Added a health check for who-data monitoring features. It checks if the Audit events socket is working before starting the who-data engine in order to avoid start listening to it when it's blocked or disabled.
 - Checks if a rule already exists before trying to insert it to avoid flooding in the `audit.log` file.
 - Who-data module is now able to re-connect to an Audit socket even if the instance is using enforcing with SELinux. Before this enhancement, Wazuh could not re-connect the socket after restart Wazuh if enforcing was being used along Audit.
 
@@ -72,30 +72,34 @@ Now the CDB lists are built at installation time, so there is no need to execute
 
 - When upgrading, databases used for FIM purposes are now auto-upgraded by Wazuh (no need for scripts).
 - Vulnerability detector has been improved for RedHat systems.
-- This version also fixes some known issues when using Wazuh on ARM, HP-UX or AIX systems. 
+- This version also fixes some known issues when using Wazuh on ARM, HP-UX or AIX systems.
 - Logcollector component has been refactored, multiple known issues have been fixed, its performance has been also improved.
 - Improved IP address validation in the option ``<white_list>`` (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_).
-- Improved rule option ``<info>`` validation (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_). 
-- Fixed error description in the osquery configuration parser (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_). 
-- The FTS comment option ``<ftscomment>`` was not being read (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_). 
+- Improved rule option ``<info>`` validation (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_).
+- Fixed error description in the osquery configuration parser (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_).
+- The FTS comment option ``<ftscomment>`` was not being read (Credits to `@pillarsdotnet <https://github.com/pillarsdotnet>`_).
 
 Wazuh API
 ---------
 
-**New API calls for group management** 
+**New API calls for group management**
 
 - Edit group configuration file (agent.conf) uploading XML file with new configuration. This addition brings the user the ability to **manage groups remotely**, from now and onward it's **no longer needed to SSH** into the manager instance to modify groups or to add/remove agents in groups.
 
 .. code-block:: console
 
-  curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @/tmp/agent.conf.xml \
+  # curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @/tmp/agent.conf.xml \
       "http://localhost:55000/agents/groups/default/files/agent.conf?pretty"
+
+.. code-block:: js
+  :class: output
+
   {
     "error": 0,
     "data": "Agent configuration was updated successfully"
   }
 
-- Add or remove agents of a group in bulk. 
+- Add or remove agents of a group in bulk.
 - Added a new parameter named format for fetching the agent.conf content in JSON/XML format depending on the parameter value.
 
 **Wazuh API also has these fixes for this version**
@@ -107,7 +111,7 @@ Wazuh API
 Wazuh app
 ---------
 
-**Group management from the app is now available** 
+**Group management from the app is now available**
 
 Manage your groups from the app, this feature includes:
 
@@ -127,7 +131,7 @@ Manage your groups from the app, this feature includes:
 
 **New search bar for the agents' list**
 
-- The search bar has been modified to provide an better user experience. 
+- The search bar has been modified to provide an better user experience.
 - It suggests filters, allows multiple filters at the same time, combines string searches with filters, same as before but now in one place.
 
 .. thumbnail:: ../images/release-notes/3.8.0/search-bar.png
@@ -146,11 +150,11 @@ Manage your groups from the app, this feature includes:
 
 - As most of the app tables, these tables include a search bar and sortable columns.
 
-**Modify the Wazuh monitoring index pattern name** 
+**Modify the Wazuh monitoring index pattern name**
 
 This was added before for Wazuh alerts indices, now you can do the same for monitoring indices editing the app configuration file (config.yml).
 
-.. code-block:: console
+.. code-block:: yaml
 
   # Default index pattern to use for Wazuh monitoring
   wazuh.monitoring.pattern: wazuh-monitoring-3.x-*
@@ -175,7 +179,7 @@ Wazuh ruleset
 
 Our ruleset this time comes with some new rules/decoders for Windows:
 
-- Added new rules to support the new Windows eventchannel decoder. 
-- Extend Auditd decoder to support more fields. 
+- Added new rules to support the new Windows eventchannel decoder.
+- Extend Auditd decoder to support more fields.
 
-And we've added a new rule to alert when an agent is removed. 
+And we've added a new rule to alert when an agent is removed.

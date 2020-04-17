@@ -27,8 +27,8 @@ This section describes how to download and build the Wazuh HIDS Windows Agent fr
 
     .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.2.tar.gz | tar zx
-      # cd wazuh-3.10.2/src
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_LATEST|/src
 
 4. Compile the Agent by running the ``make`` command:
 
@@ -39,7 +39,8 @@ This section describes how to download and build the Wazuh HIDS Windows Agent fr
 
     The following output will appear at the end of the building process:
 
-    .. code-block:: console
+    .. code-block:: none
+      :class: output
 
       Done building winagent
 
@@ -48,13 +49,13 @@ This section describes how to download and build the Wazuh HIDS Windows Agent fr
 
     .. code-block:: console
 
-      # zip -r wazuh.zip ../../wazuh-3.10.2
+      # zip -r wazuh.zip ../../wazuh-|WAZUH_LATEST|
 
 6. Decompress the repository on the Windows machine, run the `wazuh-installer-build-msi.bat` script from the `win32` folder.
 
     .. code-block:: console
 
-      cd wazuh-3.10.2\src\win32
+      cd wazuh-|WAZUH_LATEST|\src\win32
       .\wazuh-installer-build-msi.bat
 
   If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
@@ -64,3 +65,10 @@ This section describes how to download and build the Wazuh HIDS Windows Agent fr
     :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
 
 .. note:: Once the Agent is deployed :ref:`with a normal or unattended installation <wazuh_agent_package_windows>`, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
+
+Uninstall
+---------
+
+To uninstall the agent, the original MSI file will be needed to perform the unattended process::
+
+    msiexec.exe /x wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /qn

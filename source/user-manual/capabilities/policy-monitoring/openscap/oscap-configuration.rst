@@ -43,7 +43,7 @@ Each agent must be properly identified in order to know which policy and profile
 
 Modify the ``ossec.conf`` file in the agent side to apply the desired profile:
 
-::
+.. code-block:: xml
 
   <client>
     <server>
@@ -88,15 +88,16 @@ When the evaluation is complete you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463752181.32768: - oscap,rule-result,pci_dss_2.2,
   2016 May 20 13:49:41 (RH_Agent) 10.0.1.7->wodle_open-scap
   Rule: 81529 (level 5) -> 'OpenSCAP rule failed (severity low).'
   oscap: msg: "rule-result", id: "47T7_Qd08gm4y8TSoD53", policy: "ssg-rhel7-ds.xml", profile: "xccdf_org.ssgproject.content_profile_pci-dss", rule_id: "xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout", result: "fail", title: "Set SSH Idle Timeout Interval", ident: "CCE-26611-4", severity: "low".
 
-
-::
+.. code-block:: none
+  :class: output
 
   ** Alert 1463752181.33254: - oscap,report-overview,pci_dss_2.2,
   2016 May 20 13:49:41 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -155,7 +156,7 @@ We want to execute the RedHat security policy only on Red Hat 7 agents.
 
 To do this, modify the ``/var/ossec/etc/shared/default/agent.conf`` file in the manager (assuming that the agent is on the ``default`` group):
 
-::
+.. code-block:: xml
 
   <agent_config profile="redhat7">
 
@@ -173,7 +174,9 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
-::
+..  code-block:: none
+  :class: output
+
 
   ** Alert 1463757700.70731: mail  - oscap,rule-result,pci_dss_2.2,
   2016 May 20 15:21:40 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -181,8 +184,9 @@ When the evaluation is completed you will see the results as OSSEC alerts:
   oscap: msg: "rule-result", id: "I0iLEGFi4iTkxjnL9LWQ", policy: "com.redhat.rhsa-RHEL7.ds.xml", profile: "no-profiles", rule_id: "xccdf_com.redhat.rhsa_rule_oval-com.redhat.rhsa-def-20160722", result: "fail", title: "RHSA-2016:0722: openssl security update (Important)", ident: "RHSA-2016-0722, CVE-2016-0799, CVE-2016-2105, CVE-2016-2106, CVE-2016-2107, CVE-2016-2108, CVE-2016-2109, CVE-2016-2842", severity: "high".
 
 
+..  code-block:: none
+  :class: output
 
-::
 
   ** Alert 1463757700.71339: - oscap,report-overview,pci_dss_2.2,
   2016 May 20 15:21:40 (RH_Agent) 10.0.1.7->wodle_open-scap
@@ -214,7 +218,9 @@ Finally, you can explore all scan results using the OpenSCAP dashboards for Kiba
 Overwriting the timeout
 ------------------------------------------------------------------
 
-It is possible to overwrite the timeout for a specific evaluation: ::
+It is possible to overwrite the timeout for a specific evaluation:
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 
@@ -230,7 +236,9 @@ It is possible to overwrite the timeout for a specific evaluation: ::
 
 Using profiles
 ------------------------------------------------------------------
-We can limit the evaluation to only specific profiles of a policy: ::
+We can limit the evaluation to only specific profiles of a policy:
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 
@@ -246,7 +254,9 @@ We can limit the evaluation to only specific profiles of a policy: ::
 Using CPE dictionary
 ------------------------------------------------------------------
 
-You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms. ::
+You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms.
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 
@@ -260,7 +270,9 @@ You can also optionally specify the CPE dictionary file, which is used to determ
 
 Using IDs
 ------------------------------------------------------------------
-You can select a specific ID of the datastream file:  ::
+You can select a specific ID of the datastream file:
+
+..  code-block:: xml
 
     <wodle name="open-scap">
 

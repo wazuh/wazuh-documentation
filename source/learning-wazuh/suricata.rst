@@ -13,11 +13,11 @@ This is where a NIDS (Network Intrusion Detection System) can provide additional
 a way that is highly complimentary to the HIDS functionality in Wazuh.
 
 Suricata is one such NIDS solution, which is open source and can be quickly deployed either on dedicated hardware for
-monitoring one or more transit points on your network, or directly on existing \*nix hosts to monitor just their own network
+monitoring one or more transit points on your network, or directly on existing Unix-like hosts to monitor just their own network
 traffic.  Because Suricata is capable of generating JSON logs of NIDS events, it integrates beautifully with Wazuh.
 
 In this lab we will deploy Suricata on linux-agent and elastic-server such that Wazuh picks up the Suricata NIDS events
-and they can be seen with Kibana.  Instead of making the same Wazuh config changes to both Linux agents, we
+so can be seen in Kibana.  Instead of making the same Wazuh config changes to both Linux agents, we
 will make use of Wazuh's centralized configuration feature to push out the extra Suricata-related Wazuh configuration
 to the appropriate agents. Lastly, we will do a little GeoIP enrichment of the Suricata NIDS events with Logstash, showing
 how easily we can augment existing log records with additional context information to make them more valuable.
@@ -63,13 +63,15 @@ Trigger NIDS alerts on both agents and see the output
 
 3. Observe that the standard log is fairly simple with limited information.
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         22:02/09/2018-21:32:13.120749  [**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 82.165.177.154:80 -> 172.30.0.30:45504
 
 4. See how much more data is provided in the JSON output, and how field names are provided.
 
     .. code-block:: json
+        :class: output
 
         {
         "timestamp": "2018-02-09T21:32:13.120749+0000",
@@ -123,7 +125,7 @@ Trigger NIDS alerts on both agents and see the output
 Get the Suricata JSON data to Wazuh
 -----------------------------------
 
-Suricata is configured to write alerts to /var/log/suricata/eve.json which Wazuh does not monitor by default.  Both of our
+Suricata is configured to write alerts to ``/var/log/suricata/eve.json`` which Wazuh does not monitor by default.  Both of our
 Linux agents need an additional ``<localfile>`` config section like this:
 
     .. code-block:: xml
@@ -139,19 +141,29 @@ Wazuh agent.  Search the online documentation for "Centralized Configuration" fo
 configuration content served up to them by Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
 the shared configuration with their local configuration.
 
-1. Add elastic-server and linux-agent to a new agent group called "linux".
+1. Add elastic-server and linux-agent to a new agent group called "linux". Go to wazuh-manager and:
 
     - Create an agent group called "linux" which will cover all shared Linux agent configuration elements.
 
         .. code-block:: console
 
-            # agent_groups -a -g linux -q
+            [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -g linux -q
+
+        .. code-block:: none
+            :class: output
+
             Group 'linux' created.
 
 
     - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
 
-        .. code-block:: console
+        .. code-block:: none
+            :class: output
+
+            [root@wazuh-manager centos]# /var/ossec/bin/manage_agents -l
+
+        .. code-block:: none
+            :class: output
 
             Available agents:
             ID: 001, Name: linux-agent, IP: any
@@ -162,12 +174,23 @@ the shared configuration with their local configuration.
 
         .. code-block:: console
 
-            # agent_groups -a -i 001 -g linux -q
+            [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -i 001 -g linux -q
+
+        .. code-block:: none
+            :class: output
+
             Group 'linux' set to agent '001'.
-            # agent_groups -a -i 002 -g linux -q
+
+        .. code-block:: console
+
+            [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -i 002 -g linux -q
+
+        .. code-block:: none
+            :class: output
+
             Group 'linux' set to agent '002'.
 
-2. Put our Suricata-specific Wazuh agent config into the shared agent.conf file belonging to the "linux" agent group.  The file is ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
+2. Put our Suricata-specific Wazuh agent config into the shared agent.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
 
     .. code-block:: xml
 
@@ -182,7 +205,13 @@ the shared configuration with their local configuration.
 
     .. code-block:: console
 
-        # verify-agent-conf
+        [root@wazuh-manager centos]# /var/ossec/bin/verify-agent-conf
+
+    .. code-block:: none
+        :class: output
+
+    .. code-block:: none
+        :class: output
 
         verify-agent-conf: Verifying [/var/ossec/etc/shared/default/agent.conf]
         verify-agent-conf: OK
@@ -232,11 +261,22 @@ See Suricata NIDS events in Kibana
 Observe how Wazuh decodes Suricata events
 -----------------------------------------
 
-1. In Kibana, copy the entire full_log value for a Suricata alert.
+1. Find the full log of the event you just triggered. You can do so like this:
+
+    .. code-block:: console
+
+        [root@linux-agent centos]# tail -n1 /var/log/suricata/eve.json
+
+    .. code-block:: json
+        :class: output
+
+        {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
+
 
 2. Run ``ossec-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
 
-    .. code-block:: console
+    .. code-block:: none
+        :class: output
 
         **Phase 1: Completed pre-decoding.
             full event: '{"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}'
@@ -290,44 +330,50 @@ Observe how Wazuh decodes Suricata events
 Spice things up with a little GeoIP
 -----------------------------------
 
-You may have noticed that there were no Geolocation fields in the Kibana records for Suricata events.  In Wazuh's default configuration for
-Logstash, Geolocation is only performed on fields ``@src_ip`` and ``data.srcip``, while with Suricata events we would need to act on fields
-``data.src_ip`` and ``data.dest_ip``.  To keep from overcrowding our Suricata Kibana records, let's just fetch the name and abbreviation of
-the country for each source and destination IP address.
+You may have noticed that there were no Geolocation fields in the Kibana records for Suricata events.  In Wazuh's default configuration, Geolocation is only performed on fields ``data.srcip``, ``data.win.eventdata.ipAddress`` and ``data.aws.sourceIPAddress`` , while with Suricata events we would need to act on fields
+``data.src_ip`` and ``data.dest_ip``.  We are going to change our configuration to show more information from ``data.src_ip``:
 
-1. On elastic-server, insert this additional filter section to /etc/logstash/conf.d/01-wazuh.conf just above the output section:
+1. On wazuh-manager, edit ``/usr/share/filebeat/module/wazuh/alerts/ingest/pipeline.json`` adding the new IP field inside ``processors``, along the other Geolocation fields:
+
+    .. code-block:: none
+
+        {
+           "geoip": {
+             "field": "data.src_ip",
+             "target_field": "GeoLocation",
+             "properties": ["city_name", "country_name", "region_name", "location"],
+             "ignore_missing": true,
+             "ignore_failure": true
+           }
+         },
+
+
+2. We now need to delete the current pipeline. In Kibana, go to ``Dev Tools`` clicking on the Wrench icon. Then execute the following:
+
+    .. code-block:: none
+
+        DELETE _ingest/pipeline/filebeat-|ELASTICSEARCH_LATEST|-wazuh-alerts-pipeline
+
+
+3. We restart Filebeat in wazuh-manager:
 
     .. code-block:: console
 
-        filter {
-            if "suricata" in [rule][groups] {
-                geoip {
-                    source => "[data][src_ip]"
-                    target => "geoip_src"
-                    fields => ["country_code2", "country_name"]
-                    tag_on_failure => []
-                }
-                geoip {
-                    source => "[data][dest_ip]"
-                    target => "geoip_dest"
-                    fields => ["country_code2", "country_name"]
-                    tag_on_failure => []
-                }
-            }
-        }
+        [root@wazuh-manager centos]# systemctl restart filebeat
 
-2. Restart logstash on elastic-server with ``systemctl restart logstash``.
 
-3. Trigger some more NIDS events on one of more of your Linux agents with curl ``http://testmyids.com``.
+4. Trigger some more NIDS events on one of more of your Linux agents with:
 
-4. Look through the new Suricata events in Kibana, observing they now have either source or destination geoip fields populated.  Private IPs of course cannot be geolocated.
+    .. code-block:: console
 
-    +-----------------------------------------------------------------------------------------------+
-    | .. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png                               |
-    |     :title: flood                                                                             |
-    |     :align: center                                                                            |
-    |     :width: 75%                                                                               |
-    +-----------------------------------------------------------------------------------------------+
+        curl ``http://testmyids.com``.
+
+5. Look through the new Suricata events in Kibana, observing they now have source geoip fields populated.  Private IPs of course cannot be geolocated.
+
+.. thumbnail:: ../images/learning-wazuh/labs/suricata-geoip.png
+    :title: Flood
+    :align: center
+    :width: 100%
 
 
 If you have time, you could also...

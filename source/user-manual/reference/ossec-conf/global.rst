@@ -254,7 +254,7 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This designates IP addresses that should never be blocked with an active response and, though only one IP address can be included in this section, you may repeat this as many times as needed to include additional IP addresses.
+This specifies an IP for which Active Responses will not be triggered. Only one IP may be specified for each ``<while_list>`` tag, but several IPs may be used by including multiple ``<white_list>`` tags.
 
 +--------------------+----------------------------+
 | **Default value**  | n/a                        |
@@ -385,7 +385,7 @@ rotate_interval
 
 .. versionadded:: 3.1.0
 
-This option sets the interval between file rotation. The range of possible values is from ``10s`` (10 seconds) to ``1d`` (1 day).
+This option sets the interval between file rotation. The range of possible values is from ``10m`` (10 minutes) to ``1d`` (1 day).
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                      |

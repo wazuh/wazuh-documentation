@@ -20,7 +20,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.10.2.tar.gz | tar zx
+      $ curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
 
     .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -49,7 +49,51 @@ Installing Wazuh agent
 4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
  .. code-block:: none
+    :class: output
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+
+Uninstall
+---------
+
+To uninstall Wazuh agent:
+
+    .. code-block:: console
+
+      # OSSEC_INIT="/etc/ossec-init.conf"
+      # . $OSSEC_INIT 2> /dev/null
+
+Stop the service:
+
+  .. code-block:: console
+
+    # service wazuh-agent stop 2> /dev/null
+
+Stop the daemon:
+
+  .. code-block:: console
+
+    # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+
+Remove files and service artifacts:
+
+  .. code-block:: console
+
+    # rm -rf $DIRECTORY $OSSEC_INIT
+
+Delete the service:
+
+  .. code-block:: console
+
+    # rm -rf /Library/StartupItems/OSSEC
+
+Remove users:
+
+  .. code-block:: console
+
+    # dscl . -delete "/Users/ossec" > /dev/null 2>&1
+    # dscl . -delete "/Users/ossecm" > /dev/null 2>&1
+    # dscl . -delete "/Users/ossecr" > /dev/null 2>&1
+    # dscl . -delete "/Groups/ossec" > /dev/null 2>&1

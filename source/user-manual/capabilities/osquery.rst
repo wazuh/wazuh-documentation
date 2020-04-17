@@ -39,12 +39,12 @@ Check the processes that have a deleted executable.
 
     SELECT * FROM processes WHERE on_disk = 0;
 
-A complete list of all the available tables can be found `here <https://osquery.io/schema/>`_.
+A complete list of all the available tables can be found `here <https://osquery.io/schema/current/>`_.
 
 Configuration
 -------------
 
-You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/>`_ for details.
+You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/4.1.2>`_ for details.
 
 Red Hat, CentOS and Fedora:
 
@@ -74,7 +74,7 @@ Once installed, you will need a configuration file for Osquery. If you don't hav
 
 Or you can copy our custom configuration in ``/etc/osquery/osquery.conf``:
 
-.. code-block:: console
+.. code-block:: json
 
     {
         "options": {
@@ -116,14 +116,14 @@ After this enable and start the osquery Daemon:
 
   systemctl enable osqueryd
   systemctl start osqueryd
-    
+
 And the osquery module must be enabled for the agents where the osquery is running by adding:
 
 .. code-block:: xml
-  
+
   <wodle name="osquery"/>
 
-To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>` 
+To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>`
 
 .. note::
   More options may be specified as shown in the  :doc:`osquery configuration reference <../reference/ossec-conf/wodle-osquery>`
@@ -136,7 +136,8 @@ Alert examples
 --------------
 Sample alert in log format:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     ** Alert 1532958886.437707: - osquery,
         2018 Jul 30 13:54:46 manager->osquery
@@ -185,6 +186,7 @@ Sample alert in log format:
 And the same alert in ``JSON`` format:
 
 .. code-block:: json
+    :class: output
 
     {
     "timestamp": "2018-07-30T13:54:46.476+0000",

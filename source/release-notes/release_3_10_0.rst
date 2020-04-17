@@ -77,6 +77,10 @@ Wazuh API
   .. code-block:: js
 
       GET /summary/agents
+
+  .. code-block:: js
+      :class: output
+
       {
       "error": 0,
       "data": {

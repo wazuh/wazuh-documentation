@@ -81,7 +81,7 @@ $(function() {
    */
   function selectLeaf(hash) {
     if (hash.length > 0) {
-      $('.globaltoc [href="'+hash+'"]').addClass('current');
+      $('.globaltoc [href="' + hash + '"]').addClass('current');
     } else {
       $('.globaltoc [href="#"]').addClass('current');
     }
@@ -95,7 +95,7 @@ $(function() {
    */
   function reponsiveTables() {
     $('#main-content table').each(function() {
-      if ( $(this).width() > $('main').width()) {
+      if ($(this).width() > $('main').width()) {
         $(this).addClass('table-responsive');
       }
     });
@@ -111,7 +111,7 @@ $(function() {
     const scrollYTopPosition = e.currentTarget.pageYOffset;
 
     /* Back to top button */
-    if ( scrollYTopPosition >= $(window).height()*.50 ) {
+    if (scrollYTopPosition >= $(window).height() * .50) {
       $('#btn-scroll').fadeIn('slow');
     } else {
       $('#btn-scroll').fadeOut('slow');
@@ -129,7 +129,7 @@ $(function() {
     if ($('#page').hasClass('no-latest-docs')) {
       headerHeight += parseInt($('.no-latest-notice').outerHeight());
     }
-    if (scrollTop >= headerHeight ) {
+    if (scrollTop >= headerHeight) {
       $('body').addClass('scrolled');
     } else {
       $('body').removeClass('scrolled');
@@ -181,15 +181,16 @@ $(function() {
     }
 
     heightNavbar();
+    adjustLightboxHeight();
   });
 
-  const mousewheelevt = (/Firefox/i.test(navigator.userAgent))? 'DOMMouseScroll' : 'mousewheel';
+  const mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? 'DOMMouseScroll' : 'wheel';
 
   if (document.getElementById('navbar-globaltoc').addEventListener) {
     document.getElementById('navbar-globaltoc').addEventListener(mousewheelevt, function(e) {
       eventScroll = 'mousewheel';
       const delta = ((e.deltaY || -e.wheelDelta || e.detail) >> 10) || 1;
-      if (delta < 0 ) {
+      if (delta < 0) {
         scrollDirection = 'up';
       } else if (delta > 0) {
         scrollDirection = 'down';
@@ -200,10 +201,10 @@ $(function() {
         e.stopPropagation();
         return false;
       }
-    }, {passive: false} );
+    }, {passive: false});
   }
 
-  $('#navbar-globaltoc').on('mousewheel', function(e) {
+  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
     eventScroll = 'mousewheel';
     if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
       scrollDirection = 'up';
@@ -217,7 +218,7 @@ $(function() {
       e.returnValue = false;
       return false;
     }
-  });
+  }); */
 
   $('#navbar-globaltoc').keydown(function(e) {
     eventScroll = 'keys';
@@ -307,20 +308,20 @@ $(function() {
   function heightNavbar() {
     if ($(window).width() >= 992) {
       if (documentScroll <= navbarTop) {
-        $('#navbar').css({'padding-top': (noticeHeight+navbarTop-documentScroll)+'px'});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - '+ noticeHeight +'px + '+documentScroll+'px)'});
+        $('#navbar').css({'padding-top': (noticeHeight + navbarTop - documentScroll) + 'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + documentScroll + 'px)'});
       } else {
         $('#navbar').css({'padding-top': noticeHeight});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - '+ noticeHeight +'px + '+navbarTop+'px)'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + navbarTop + 'px)'});
       }
       $('#navbar-globaltoc').css({'padding-top': 0});
     } else {
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': 0});
-        $('#navbar-globaltoc').css({'padding-top': (noticeHeight+100)+'px'});
+        $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 100) + 'px'});
       } else {
         $('#navbar').css({'padding-top': 0});
-        $('#navbar-globaltoc').css({'padding-top': (noticeHeight+52)+'px'});
+        $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 52) + 'px'});
       }
     }
   }
@@ -330,7 +331,7 @@ $(function() {
    */
   function headerSticky() {
     const documentScroll = $(window).scrollTop();
-    if (documentScroll >= (noticeHeight+100)) {
+    if (documentScroll >= (noticeHeight + 100)) {
       $('#header-sticky').css({'top': noticeHeight});
     } else {
       $('#header-sticky').css({'top': '-52px'});
@@ -341,14 +342,14 @@ $(function() {
   $('.globaltoc a .toc-toggle-btn').on('click', function(e) {
     /* Normal link: avoid toggle if current menu item doesn't have submenu */
     li = $(e.target).closest('li');
-    if (!li || li.children('ul').length == 0 ) {
+    if (!li || li.children('ul').length == 0) {
       return true;
     }
 
     e.stopPropagation();
     e.preventDefault();
 
-    if ( li.hasClass('show')) {
+    if (li.hasClass('show')) {
       li.removeClass('show');
     } else {
       li.siblings('li').removeClass('show');
@@ -370,8 +371,8 @@ $(function() {
    */
   function showCurrentSubtree() {
     updateFromHash();
-    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('not-indexed') ) {
-      $('.globaltoc :contains("'+ $('#breadcrumbs li:nth-last-child(2) a').text() +'")').addClass('show').addClass('current');
+    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('not-indexed')) {
+      $('.globaltoc :contains("' + $('#breadcrumbs li:nth-last-child(2) a').text() + '")').addClass('show').addClass('current');
       return true;
     }
     let currentLeaf = $('.globaltoc a.current.leaf');
@@ -389,7 +390,7 @@ $(function() {
    */
   function completelyHideMenuItems() {
     $('#navbar-globaltoc li ul').each(function() {
-      if ( $(this).closest('li').hasClass('show') ) {
+      if ($(this).closest('li').hasClass('show')) {
         this.hidden = false;
         $(this).slideDown(300);
       } else {
@@ -412,15 +413,15 @@ $(function() {
     const curLocation = location.href.split('#')[0];
     nodeList.forEach(function(tocNode) {
       emptyNode = '.+\/' + tocNode + '.html';
-      regex = new RegExp( emptyNode, 'g');
+      regex = new RegExp(emptyNode, 'g');
       $('.globaltoc a').each(function() {
         const href = $(this).prop('href').split('#')[0];
         const isCurrent = (href === curLocation);
         /* The selected menu link in the globaltoc acts as the toggle button, showing on and off its subtree */
-        if ( regex.test(href) || isCurrent ) {
+        if (regex.test(href) || isCurrent) {
           $(this).addClass(className);
         }
-        if ( isCurrent ) {
+        if (isCurrent) {
           $(this).addClass('current-toc-node');
         }
       });
@@ -433,7 +434,7 @@ $(function() {
    */
   function hideSubtree(nodeList) {
     $('#globaltoc a').each(function() {
-      if ( jQuery.inArray( $(this).text().toLowerCase(), nodeList ) !== -1 ) {
+      if (jQuery.inArray($(this).text().toLowerCase(), nodeList) !== -1) {
         $(this).siblings().hide();
         $(this).children('button').hide();
       }
@@ -468,7 +469,7 @@ $(function() {
    * @param {int} spaceBeforeAnchor Space required between the target element and the top of the window.
    */
   function correctScrollTo(spaceBeforeAnchor) {
-    if ( $('#page').hasClass('no-latest-docs') ) {
+    if ($('#page').hasClass('no-latest-docs')) {
       spaceBeforeAnchor = spaceBeforeAnchor + 40;
     }
     setTimeout(function() {
@@ -509,7 +510,7 @@ $(function() {
     let eleOther = ele;
     let active = false;
 
-    if ( $('#page.index').length > 0 ) {
+    if ($('#page.index').length > 0) {
       if ($(ele).hasClass('active')) {
         active = true;
       } else {
@@ -527,12 +528,12 @@ $(function() {
         const posBox = $('#capabilities .left').offset();
         const posTopic = $(ele).offset();
         $('#capabilities .topic').removeClass('active');
-        $('#capabilities .right .topic.'+className).addClass('active');
+        $('#capabilities .right .topic.' + className).addClass('active');
         let pos = posTopic.top - posBox.top - 4;
         if (pos <= 0) {
           pos = 0;
         }
-        $('#capabilities .line').css({'height': pos+'px'});
+        $('#capabilities .line').css({'height': pos + 'px'});
         $(ele).addClass('active');
       } else {
         if (eleOther != false) {
@@ -558,40 +559,75 @@ $(function() {
 
   /* Search results --------------------------------------------------------------------------------------------------*/
 
-  if ( $('#search-results').length > 0 ) {
-    const ulSearch = $('ul.search');
+  const searchResults = $('#search-results');
+
+  if (searchResults.length > 0) {
     let lastResult = null;
-    let splitURL;
+    let splitURL = null;
+    const configAdd = {childList: true};
+    const configAtt = {attributes: true, attributeOldValue: true};
+    let observerResults = null;
+    let observerResultList = null;
+    let observerResultText = null;
+    let i = 0;
 
     /* Detects every result that is added to the list */
-    ulSearch.on('DOMSubtreeModified', function() {
-      lastResult = $('ul.search li:last-child');
-      splitURL = lastResult.children('a').prop('href').split('/');
-
-      /* Checks the URL to mark the results found in excludedSearchFolders */
-      $.each(excludedSearchFolders, function(index, value) {
-        if ( $.inArray(value, splitURL) !== -1 ) {
-          lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
-          lastResult.addClass('hidden-result'); /* Hides the excluded result */
-          return false; /* breaks the $.each loop */
+    const addedResult = function(mutationsList, observer) {
+      for (i = 0; i < mutationsList.length - 1; i++) {
+        if (mutationsList[i].type === 'childList') {
+          lastResult = $('ul.search li:last-child');
+          splitURL = lastResult.children('a').prop('href').split('/');
+          /* Checks the URL to mark the results found in excludedSearchFolders */
+          $.each(excludedSearchFolders, function(index, value) {
+            if ($.inArray(value, splitURL) !== -1) {
+              lastResult.addClass('excluded-search-result'); /* Marks initially excluded result */
+              lastResult.addClass('hidden-result'); /* Hides the excluded result */
+              return false; /* breaks the $.each loop */
+            }
+          });
         }
-      });
-    });
+      }
+    };
+
+    /* Checking that the list of search results exists */
+    const existsResultList = function(mutationsList, observer) {
+      for (i = 0; i < mutationsList.length - 1; i++) {
+        if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search')) {
+          const ulSearch = $('ul.search');
+
+          observerResults.disconnect();
+
+          observerResultList = new MutationObserver(addedResult);
+          observerResultList.observe(ulSearch[0], configAdd);
+          observerResultText = new MutationObserver(changeResultText);
+          observerResultText.observe($('#search-results > p')[0], configAtt);
+        }
+      }
+    };
 
     /* Replaces the result message */
-    $('#search-results > p:first').one('DOMSubtreeModified', function() {
-      const totalResults = $('ul.search li').length;
-      const excludedResults = $('ul.search li.excluded-search-result').length;
-      let resultText = '';
-      if ( totalResults > 0 ) {
-        if ( excludedResults > 0 ) {
-          resultText = 'Search finished. Found <span id="n-results">' + (totalResults-excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
-        } else {
-          resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+    const changeResultText = function(mutationsList, observer) {
+      for (i = 0; i < mutationsList.length - 1; i++) {
+        if (mutationsList[i].type === 'attributes') {
+          observerResultText.disconnect();
+          const totalResults = $('ul.search li').length;
+          const excludedResults = $('ul.search li.excluded-search-result').length;
+          let resultText = '';
+          if (totalResults > 0) {
+            if (excludedResults > 0) {
+              resultText = 'Search finished. Found <span id="n-results">' + (totalResults - excludedResults) + '</span> page(s) matching the search query. <a id="toggle-results" class="include" href="#">Include Release Notes results</a>';
+            } else {
+              resultText = 'Search finished. Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
+            }
+            $('#search-results > p:first').html(resultText);
+          }
         }
-        $(this).html(resultText);
       }
-    });
+    };
+
+    observerResults = new MutationObserver(existsResultList);
+    observerResults.observe(searchResults[0], configAdd);
+
 
     /* Click that allows showing excluded results */
     $(document).delegate('#search-results #toggle-results.include', 'click', function() {
@@ -635,43 +671,76 @@ $(function() {
     const topValue = $('.side-scroll').offset().top;
     $('html, body').css('overflow', 'hidden');
     $('#lightboxOverlay').width('100%');
-    $('.side-scroll').attr('style', $('.side-scroll').attr('style')+'position: relative; top: '+(topValue-topheight)+'px');
+    $('.side-scroll').attr('style', $('.side-scroll').attr('style') + 'position: relative; top: ' + (topValue - topheight) + 'px');
   });
 
   $('#lightboxOverlay, #lightbox, #lightbox .lb-close').on('click', function(e) {
     $('html, body').css('overflow', '');
     $('.side-scroll').removeAttr('style');
-    menuHeight();
   });
 
   $('#lightbox .lb-details span, #lightbox .lb-dataContainer :not(.lb-close)').on('click', function(e) {
     e.stopPropagation();
     $('html, body').css('overflow', 'hidden');
   });
+  adjustLightboxHeight();
+
+  /**
+   * Checks the real height of .no-latest-notice in order to add the appropriate top margin to the lightbox element.
+   * If .no-latest-notice is not visible, the margin is zero
+   */
+  function adjustLightboxHeight() {
+    noLatestHeight = document.querySelector('.no-latest-notice').offsetHeight;
+    $('#lightbox').css('margin-top', noLatestHeight);
+  }
 
   /* Restore overflow when pressing key 'Esc' */
   $(document).on('keydown', function(e) {
-    if ( e.keyCode == 27 ) {
+    if (e.keyCode == 27) {
       $('html, body').css('overflow', '');
     }
   });
 
-  /* Copy to clipboard ----------------------------------------------------------------------------------*/
+  /* Special code blocks --------------------------------------------------------------------------------*/
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
-    if ( !blockCode.hasClass('output') ) {
-      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="fa fa-files-o" aria-hidden="true"></i></button>');
+
+    /* Output */
+    if (!blockCode.hasClass('output')) {
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
     } else {
       blockCode.prepend('<div class="admonition admonition-output"><p class="first admonition-title">Output</p></div>');
     }
+
+    /* Escaped tag signs */
+    if (blockCode.hasClass('escaped-tag-signs')) {
+      let data = $(this).html();
+      const datafragments = data.split(/\\</);
+      data = '';
+      datafragments.forEach(function(ltFragment, i) {
+        /* The first fragment occurs just before the opening tag, so it doesn't need to be processed */
+        if (i != 0) {
+          gtFragments = ltFragment.split(/&gt;/);
+          ltFragment = gtFragments.shift();
+          if (gtFragments.length) {
+            ltFragment += '\\>' + gtFragments.join('>');
+          }
+        }
+        if (i != datafragments.length - 1) {
+          data += ltFragment + '\\<';
+        } else {
+          data += ltFragment;
+        }
+      });
+      $(this).html(data);
+    }
   });
 
+  /* Copy to clipboard ----------------------------------------------------------------------------------*/
   $('.copy-to-clipboard').click(function() {
     const ele = $(this);
-    let data = $(ele).parent().find('.highlight').text();
-    data = String(data);
-    data = data.replace(/(?:\$\s)/g, '');
-    data = data.replace(/(?:\#\s)/g, '');
+    let data = $(ele).parent().find('.highlight');
+    data = filterCodeBlock(data, $(ele).parent());
     copyToClipboard(data);
     $(ele).addClass('copied');
     $(ele).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
@@ -682,8 +751,58 @@ $(function() {
     setTimeout(function() {
       $(ele).find('span').css({'display': 'none'});
       $(ele).find('i').css({'display': 'block'});
+      $(ele).focus();
     }, 1000);
   });
+
+  /**
+   * Filter the code block text that will be copied to the clipboard
+   * @param {string} code The string from the code block
+   * @param {Obj} parent jQuery object containing the parent element, which has the appropriate lexer class
+   * @return {string} filter code block text
+   */
+  function filterCodeBlock(code, parent) {
+    let data = code.text();
+    const heredocs = findHeredocs(code);
+    data = String(data);
+    if ( !parent.hasClass('highlight-none') ) {
+      /* Remove elipsis */
+      data = data.replace(/(^|\n)\s*(\.\s{0,1}){3}\s*($|\n)/g, '\n');
+      /* Remove prompts with square brakets */
+      data = data.replace(/(.+]\$\s)/g, '');
+      data = data.replace(/(.+]\#\s)/g, '');
+      /* Remove especific prompts */
+      data = data.replace(/ansible@ansible:.+\$\s/g, '');
+      data = data.replace(/mysql>\s/g, '');
+      data = data.replace(/sqlite>\s/g, '');
+      data = data.replace(/Query\s.+\)\n/g, '');
+      /* Remove prompts with format user@domain in general */
+      data = data.replace(/.+@.+:.+(\#|\$)\s/g, '');
+      /* Remove prompts with the symbol > */
+      data = data.replace(/^>\s/g, '');
+      data = data.replace(/\n>\s/g, '\n');
+      /* Remove prompts with the symbol $ */
+      data = data.replace(/(?:\$\s)/g, '');
+      /* Remove additional line breaks */
+      data = data.replace(/\n{2,}$/g, '\n');
+      /* Remove prompts with the symbol # only when they cannot be considered comments */
+      if (!parent.hasClass('highlight-yaml')
+        && !parent.hasClass('highlight-python')
+        && !parent.hasClass('highlight-perl')
+        && !parent.hasClass('highlight-powershell')
+        && !parent.is($('[class*="conf"]'))) {
+        const isBash = parent.hasClass('highlight-bash');
+        const isConsole = parent.hasClass('highlight-console');
+        if (/<<[^<]/.test(data)) {
+          data = replacePromptOnHeredoc(data, heredocs, isConsole, isBash);
+        } else {
+          data = filterPrompt(data, isConsole, isBash);
+        }
+      }
+    }
+    data = data.trim();
+    return data;
+  }
 
   /**
    * Copy the data to clipboard
@@ -702,16 +821,124 @@ $(function() {
   $('.highlight').each(function() {
     const ele = $(this);
     const data = ele.html();
-    const find = data.match(/(?:\$\s|\#)/g);
-    if (find != null) {
-      const dataArray = data.split('\n');
-      let content = '';
-      dataArray.forEach((line) => {
-        line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
-        line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>') + '\n';
-        content += line;
-      });
-      ele.html(content);
+    if (!ele.parent().hasClass('highlight-none')) {
+      const heredocs = findHeredocs(data);
+      const find = data.match(/(?:\$\s|\#)/g);
+      if (find != null) {
+        const dataArray = data.split('\n');
+        const content = [];
+        dataArray.forEach(function(line, i) {
+          const heredocstart = heredocs.find( ({start}) => start === i );
+          const heredocfinish = heredocs.find( ({finish}) => finish === i );
+          const heredoc = heredocs.find( ({start, finish}) => start < i && finish > i );
+          if ( heredocstart ) {
+            line = '<span class="heredoc">'+line;
+          } else if (heredocfinish) {
+            line = line+'</span>';
+          } else if (!heredoc) {
+            line = line.replace('<span class="gp">#</span> ', '<span class="gp no-select"># </span>');
+            line = line.replace('<span class="gp">$</span> ', '<span class="gp no-select">$ </span>');
+            line = line.replace(/(?:\$\s)/g, '<span class="no-select">$ </span>');
+          }
+          content.push(line);
+        });
+        ele.html(content.join('\n'));
+      }
     }
   });
+
+  /* Disable "not found" links in the version selector -------------------------------------------*/
+  $('#select-version a.disable').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  });
 });
+
+/**
+ * Given a word (open) and a delimiter (close), this functions checks if they match
+ * @param {string} open The term used as word after de operator `<<`
+ * @param {string} close the term used as delimiter
+ * @return {boolean} true if they match, false if they don't
+ */
+function closes(open, close) {
+  return close.replace(/[-\\'"]/g, '') == open.replace(/[-\\'"]/g, '');
+}
+
+/**
+ * Looks for heredocs within a code-block
+ * @param {string} code The HTML code that must be checked
+ * @return {array} list o all the heredocs found in the code-block, described by their start and finish lines
+ */
+function findHeredocs(code) {
+  const lines = $(code).text().split('\n');
+  const heredocs = [];
+  let inHereDoc = false;
+  let limitString;
+  let start;
+  let finish;
+
+  lines.forEach((line, i) => {
+    /* If we're inside a heredoc, look for the closing limit string */
+    if (inHereDoc) {
+      if (closes(limitString, line.trim())) {
+        inHereDoc = false;
+        finish = i-1;
+        /* If the heredoc is empty, we don't add it to the list */
+        if (finish > start) {
+          heredocs.push({start: start, finish: finish});
+        }
+      }
+    } else if (/<<[^<]/.test(line)) {
+      /* Check if the current command starts a heredoc */
+      inHereDoc = true;
+      start = i+1;
+      limitString = line.split('<<')[1].trim();
+    }
+  });
+
+  return heredocs;
+}
+
+/**
+ * Filters some of the prompt lines within a code-block depending on the type
+ * @param {string} data The text of the code-block that must be filtered
+ * @param {boolean} isConsole True if the type of the code-block is 'console'
+ * @param {boolean} isBash True if the type of the code-block is 'bash'
+ * @return {string} The text of the code-block already filtered
+ */
+function filterPrompt(data, isConsole = false, isBash = false) {
+  if (!isBash) {
+    /* Remove prompts with the symbol # only when they cannot be considered comments */
+    data = data.replace(/(?:\#\s)/g, '');
+  }
+  if (isConsole || isBash) {
+    /* Remove comment lines (starging with //) */
+    data = data.replace(/(^|\n)\/\/.+/g, '');
+    /* Remove additional line breaks in command lines to avoid accidental enter inputs */
+    data = data.replace(/\n{2,}/g, '\n');
+  }
+  return data;
+}
+
+/**
+ * Uses the information on heredocs in order to avoid parsing heredoc content
+ * @param {string} code The text of the code-block that must be filtered
+ * @param {array} heredocs Information on the heredocs found in this particular code-block
+ * @param {boolean} isConsole True if the type of the code-block is 'console'
+ * @param {boolean} isBash True if the type of the code-block is 'bash'
+ * @return {string} The text of the code-block already filtered buet with the heredocs still intact
+ */
+function replacePromptOnHeredoc(code, heredocs, isConsole = false, isBash = false) {
+  const parsed = [];
+  const lines = code.split('\n');
+  lines.forEach(function(line, i) {
+    const heredoc = heredocs.find( ({start, finish}) => start <= i && finish >= i );
+    if ( !heredoc ) {
+      line = filterPrompt(line, isConsole, isBash);
+    }
+    parsed.push(line);
+  });
+
+  return parsed.join('\n');
+}

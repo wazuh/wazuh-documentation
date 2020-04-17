@@ -21,6 +21,9 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
+	.. code-block:: none
+		:class: output
+
 		Available agents:
 		    ID: 001, Name: aix-7-agent, IP: any
 
@@ -29,6 +32,9 @@ Manager
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -e 001
+
+	.. code-block:: none
+		:class: output
 
 		Agent key information for '001' is:
 		MDAxIGFpeC03LWFnZW50IGFueSAxNDZlMzMwZGI1NTExOGVmYzA5OTllMDhjMmEzOThkZTZiZDgwM2FiYmUxODljNDY3MDczMTE3ODlkNWFlOTY5==
@@ -42,6 +48,9 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 	  .. code-block:: console
 
 	      # /var/ossec/bin/manage_agents -i MDAxIGFpeC03LWFnZW50IGFueSAxNDZlMzMwZGI1NTExOGVmYzA5OTllMDhjMmEzOThkZTZiZDgwM2FiYmUxODljNDY3MDczMTE3ODlkNWFlOTY5
+
+	  .. code-block:: none
+	      :class: output
 
 	      Agent information:
 	         ID:001

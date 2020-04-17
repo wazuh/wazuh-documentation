@@ -12,7 +12,7 @@ This section collects common installation or usage problems on the Wazuh app, an
 
 The Wazuh app has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
 
-.. code-block:: console
+.. code-block:: javascript
 
   "kibana": {
     "version": "6.7.2"
@@ -20,7 +20,7 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 
 Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
-You can check our `compatibility compatibility_matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>` to learn more about product compatibility between Wazuh and the Elastic Stack.
+You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
 
 No template found for the selected index pattern
 ------------------------------------------------
@@ -29,7 +29,10 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+
+.. code-block:: json
+  :class: output
 
   {"acknowledged":true}
 
@@ -85,7 +88,7 @@ API version mismatch. Expected vX.Y.Z
 
 The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
-You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.10.2.
+You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh |WAZUH_LATEST|.
 
 Routes. Error. Cannot read property 'manager' of undefined
 ----------------------------------------------------------
@@ -103,7 +106,7 @@ This error message appears when clicking on the **View surrounding documents** o
 
 In previous versions of Wazuh, the Elasticsearch template had these properties for the ``@timestamp`` field:
 
-.. code-block:: none
+.. code-block:: javascript
 
   "@timestamp": {
     "type": "date",
@@ -112,7 +115,7 @@ In previous versions of Wazuh, the Elasticsearch template had these properties f
 
 As of Elastic Stack 6.4.x, the **date format** causes an error when viewing the surrounding documents, and to fix this, the Elasticsearch templated was updated:
 
-.. code-block:: none
+.. code-block:: javascript
 
   "@timestamp": {
     "type": "date"

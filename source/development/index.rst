@@ -19,3 +19,4 @@ This section contains technical documentation for developers.
         message-format
         makefile
         wazuh-cluster
+        packaging/index

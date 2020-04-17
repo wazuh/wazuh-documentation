@@ -26,6 +26,10 @@ We can use rootcheck to monitor security policies. The first thing to do is to e
 .. code-block:: console
 
 	root@agent:/home/agent# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
+
+.. code-block:: xml
+	:class: output
+
 	<rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
 	<rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
 	<system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
@@ -37,6 +41,10 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
 .. code-block:: console
 
 	root@manager:/home/manager# tail -f /var/ossec/logs/archives/archives.log
+
+.. code-block:: none
+	:class: output
+
 	2018 May 16 17:14:45 (agent01) 192.168.1.50->rootcheck Ending syscheck scan.
 	2018 May 16 17:14:58 manager->rootcheck Starting rootcheck scan.
 	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 .
@@ -61,7 +69,8 @@ Use cases
 
 Wazuh can help to control the security in the processing of data using Syscheck we can see the events that arise, the accesses, who performs them, etc.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526486886.138354: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
 	2018 May 16 18:08:06 (agent01) 192.168.1.50->syscheck
@@ -123,7 +132,8 @@ Use cases
 
 Wazuh will generate an alert like this.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526470326.10972: - ossec,rootcheck,gdpr_IV_30.1.g,
 	2018 May 16 13:32:06 (agent01) 192.168.1.50->rootcheck
@@ -134,9 +144,10 @@ Wazuh will generate an alert like this.
 
 We can also see the event stored in our log file ``archives.log``, as long as the ``logall`` option is activated.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
-2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
+	2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
 
 .. thumbnail:: ../images/gdpr/audit_1.png
     :title: Alert visualization at Kibana Discover
@@ -174,7 +185,8 @@ Use cases
 
 Wazuh will generate an alert like this.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526481285.44363: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,
 	2018 May 16 16:34:45 (agent01) 192.168.1.50->/var/log/auth.log
@@ -207,7 +219,8 @@ Use cases
 
 A sample email could be:
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	From: Wazuh <watcher@example.com>               5:03 PM (2 minutes ago)
 	to: me
@@ -249,7 +262,7 @@ Chapter IV, Article 35, Head 1
 
 Implement appropriate technical measures to safeguard the rights and freedoms of data subjects, informed by an assessment of the risks to these rights and freedoms.
 
-Wazuh has security measures in place to safeguard personal data, as well as the ability to support risk assessment by categorizing Syschek alerts for certain files. For example, you can add the alert level of an event to support a risk assessment.
+Wazuh has security measures in place to safeguard personal data, as well as the ability to support risk assessment by categorizing Syscheck alerts for certain files. For example, you can add the alert level of an event to support a risk assessment.
 
 Use cases
 ^^^^^^^^^
@@ -307,7 +320,8 @@ Use cases
 
 Wazuh will generate an alert like this.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	** Alert 1526481936.95480: - syslog,sshd,authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,
 	2018 May 16 16:45:36 (agent01) 192.168.1.50->/var/log/auth.log

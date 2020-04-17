@@ -30,7 +30,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.11'
+version = '3.12'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -44,7 +44,6 @@ release = version
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
 ]
@@ -88,7 +87,7 @@ exclude_patterns = []
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
 
-# If true, the current module name will be prefixed to all description
+# If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 #add_module_names = True
 
@@ -312,7 +311,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be an ISBN number
+# The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -336,7 +335,7 @@ images_config = {
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+# intersphinx_mapping = {'https://docs.python.org/': None}
 
 # -- Options for todo extension ----------------------------------------------
 
@@ -351,6 +350,7 @@ def minification(actual_path):
         ['css/style','css'],
         ['css/wazuh-icons','css'],
         ['js/version-selector','js'],
+        ['js/redirects','js'],
         ['js/style','js']
     ]
 
@@ -393,6 +393,47 @@ def minification(actual_path):
             with open(min_file, 'w') as f2:
                 f2.write(output)
 
+# -- Versions -------------------------------------------------------------------
+
+def customReplacements(app, docname, source):
+    result = source[0]
+    for key in app.config.custom_replacements:
+        result = result.replace(key, app.config.custom_replacements[key])
+    source[0] = result
+
+custom_replacements = {
+    "|WAZUH_LATEST|" : "3.12.2",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
+    "|WAZUH_LATEST_PUPPET|" : "3.12.0",
+    "|WAZUH_LATEST_OVA|" : "3.12.2",
+    "|WAZUH_LATEST_DOCKER|" : "3.12.0",
+    "|ELASTICSEARCH_LATEST|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
+    "|SPLUNK_LATEST|" : "8.0.2",
+    "|ELASTIC_6_LATEST|" : "6.8.8",
+    "|WAZUH_REVISION_AIX|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_DEB_API_X86|" : "1",
+    "|WAZUH_REVISION_HPUX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_WINDOWS|" : "1",
+}   
+
 # -- Setup -------------------------------------------------------------------
 
 def setup(app):
@@ -401,8 +442,8 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/font-awesome.min.css?ver=%s" % os.stat(
-        os.path.join(actual_path, "_static/css/font-awesome.min.css")).st_mtime)
+    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
     app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
     app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
@@ -412,19 +453,31 @@ def setup(app):
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
     app.add_javascript("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
+    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_config_value('custom_replacements', {}, True)
+    app.connect('source-read', customReplacements)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
     "js/version-selector.js",
+    "js/redirects.js",
     "js/style.js"
 ]
 
 # -- Additional configuration ------------------------------------------------
+
+if (tags.has("production")):
+    production = True
+else:
+    production = False
+
 html_context = {
     "display_github": True,
     "github_user": "wazuh",
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
-    "github_version": version
+    "github_version": version,
+    "production": production
 }

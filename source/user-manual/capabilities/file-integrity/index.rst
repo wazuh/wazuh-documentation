@@ -14,4 +14,5 @@ Wazuh's File integrity monitoring (FIM) system watches selected files, triggerin
 
         how-it-works
         fim-configuration
+        fim-synchronization
         fim-faq

@@ -21,6 +21,9 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
+  .. code-block:: none
+		:class: output
+
 		Available agents:
 		    ID: 001, Name: macos-mojave, IP: any
 
@@ -29,6 +32,9 @@ Manager
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -e 001
+
+  .. code-block:: none
+		:class: output
 
 		Agent key information for '001' is:
 		MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ==
@@ -42,6 +48,9 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 	  .. code-block:: console
 
 	      # /Library/Ossec/bin/manage_agents -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
+
+	  .. code-block:: none
+	      :class: output
 
 	      Agent information:
 	         ID:001

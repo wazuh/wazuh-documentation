@@ -25,6 +25,7 @@ on Unix environments and *C:\\Program files (x86)\\ossec-agent\\ruleset\\sca* on
 Results of the first scan are reported and alerts such as the following one are fired for every check:
 
 .. code-block:: none
+    :class: output
 
     ** Alert 1568287463.187123: mail  - sca,gdpr_IV_35.7.d
     2019 Sep 12 13:24:23 (debian9-56) 10.0.0.56->sca
@@ -52,6 +53,7 @@ In the same way, summary alerts are triggered only upon the first scan, and when
 changes, as any variation alters the summary information.
 
 .. code-block:: none
+    :class: output
 
     ** Alert 1568287673.333022: mail  - sca,gdpr_IV_35.7.d
     2019 Sep 12 13:27:53 (debian9-56) 10.0.0.56->sca
@@ -82,6 +84,7 @@ By enabling the `PermitRootLogin` option to force the check to fail,
 The next SCA scan for that policy generates the following alert:
 
 .. code-block:: none
+    :class: output
 
     ** Alert 1568287670.331089: mail  - sca,gdpr_IV_35.7.d
     2019 Sep 12 13:27:50 (debian9-56) 10.0.0.56->sca

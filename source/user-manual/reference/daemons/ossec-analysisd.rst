@@ -71,7 +71,7 @@ Daemon multithreaded internal structure
 
 5. Logging:
     a. Every 1 second, all the log files are written to the HDD.
-    b. Every 5 seconds (by default, if not overrided), the status file for Analysisd is generated.
+    b. Every 5 seconds (by default, if not overridden), the status file for Analysisd is generated.
 
 Flow example of an event
 ------------------------

@@ -63,7 +63,7 @@ The Wazuh manager now includes a native decoder for the JSON format which can re
 
 See the :doc:`JSON decoder <../user-manual/ruleset/json-decoder>` section for further information.
 
-Along with this, we included a new a log source type in Logcollector to monitor JSON log files. Custom labels can be included from the endpoint which will add valuable metadata to the monitored JSON logs.
+Along with this, we introduced a new log format in Logcollector to be able to monitor JSON log files. Custom labels can be included from the endpoint which will add valuable metadata to the monitored JSON logs.
 
 See below for sample configuration:
 
@@ -93,6 +93,7 @@ Below is a sample JSON log from the monitored file.
 The following will be the result when the above configuration is applied to the JSON log:
 
 .. code-block:: json
+  :class: output
 
   {
     "event": {
@@ -119,8 +120,9 @@ The integration with VirusTotal as a threat intelligence source, along with the 
 
 Below is an example of an alert triggered from a positive result:
 
-.. code-block:: console
+.. code-block:: none
    :emphasize-lines: 3
+   :class: output
 
    ** Alert 1510684984.55826: mail  - virustotal,
    2017 Nov 14 18:43:04 PC->virustotal

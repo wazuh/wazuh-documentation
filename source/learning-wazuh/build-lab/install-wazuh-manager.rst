@@ -10,12 +10,18 @@ The Wazuh server in your lab will be running the Wazuh manager, Wazuh API, and F
 Log in and sudo to root
 -----------------------
 
+This is how it should look like, after loging in and gaining sudo privileges with ``sudo su``:
+
     .. code-block:: console
 
-        # sudo su -
+      [centos@wazuh-manager ~]$ sudo su -
+      [root@wazuh-manager ~]#
+
 
 Add the Wazuh yum repository
 ----------------------------
+
+The first step to setting up the manager is to add the Wazuh repository:
 
      .. code-block:: console
 
@@ -33,71 +39,59 @@ Add the Wazuh yum repository
 Install and set up Wazuh server
 --------------------------------
 
-Install the Wazuh manager software and confirm it is running
+Install the Wazuh manager software and confirm it is running:
 
   .. code-block:: console
 
     # yum -y install wazuh-manager
+    # systemctl status wazuh-manager
 
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-manager
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-manager status
-
-Configure Wazuh manager to listen for agent connections on tcp instead of udp
+Configure Wazuh manager to listen for agent connections on tcp instead of udp:
 
   .. code-block:: console
 
-    # grep "<protocol>udp" -B3 -A1 /var/ossec/etc/ossec.conf
+    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
     # sed -i 's/<protocol>udp/<protocol>tcp/' /var/ossec/etc/ossec.conf
-    # grep "<protocol>tcp" -B3 -A1 /var/ossec/etc/ossec.conf
+    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
 
 
-Configure Wazuh manager to allow self registration of new agents with authentication
+Configure Wazuh manager to allow self registration of new agents with authentication:
 
   .. code-block:: console
 
-    # grep "<use_password>no" -B7 -A8 /var/ossec/etc/ossec.conf
+    # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
     # sed -i 's/<use_password>no/<use_password>yes/' /var/ossec/etc/ossec.conf
-    # grep "<use_password>yes" -B7 -A8 /var/ossec/etc/ossec.conf
+    # grep "<use_password>" -B7 -A8 /var/ossec/etc/ossec.conf
     # echo "please123" > /var/ossec/etc/authd.pass # this is the password agents will use for self-registration
-    # ossec-control enable auth
 
-Restart Wazuh manager and confirm the agent listener and the self-registration listener are in place:
-
-  a. For Systemd:
+Restart Wazuh manager and confirm the agent listener and the self-registration
+listener are in place:
 
     .. code-block:: console
 
-      # systemctl restart wazuh-manager
+      [root@wazuh-manager ~]# systemctl restart wazuh-manager
+      [root@wazuh-manager ~]# netstat -natp | egrep "(:1514|:1515)"
 
-  b. For SysV Init:
+    .. code-block:: none
+      :class: output
 
-    .. code-block:: console
+      tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/ossec-remoted
+      tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/ossec-authd
 
-      # service wazuh-manager restart
-
-  .. code-block:: console
-
-    # netstat -natp | egrep "(:1514|:1515)"
 
 Install Wazuh API
 -----------------
 
-The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with and control Wazuh manager. It is a general purpose RESTful API that can be used from the command line via curl or via custom scripts for interacting with various aspects of Wazuh manager.
+The Wazuh API provides an interface to manage and monitor the configuration and deployment status of agents.
+It is mostly used by the Wazuh Kibana plugin, but it is a general-purpose RESTful API that can be used
+from the command line via curl or via custom scripts for interacting with various
+aspects of Wazuh manager.
 
 1. Install wazuh-api package and its dependency nodejs.
 
   .. code-block:: console
 
-	 # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+	 # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 	 # yum -y install nodejs
 	 # yum -y install wazuh-api
 	 # systemctl status wazuh-api
@@ -108,34 +102,28 @@ The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with 
 
 	 # /var/ossec/api/scripts/configure_api.sh
 
-  Hit <Enter> during configuration to take defaults, except for these cases:
+  Press <Enter> during configuration to take defaults, except for these cases:
 
   - For the three "Enter pass phrase for..." prompts:  specify "keypass" each time.
   - For "API user", enter "wazuhapiuser".
   - For "New password", enter "wazuhlab" and then enter it again.
 
-3. Restart Wazuh API
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-api
-
 
 Install Filebeat
 ----------------
 
-Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack Server.
+Filebeat is the tool on the Wazuh server that will securely forward the alerts
+and archived events to the Elasticsearch service.
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
 
   .. code-block:: console
 
     # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
     # cat > /etc/yum.repos.d/elastic.repo << EOF
-    [elasticsearch-6.x]
-    name=Elasticsearch repository for 6.x packages
-    baseurl=https://artifacts.elastic.co/packages/6.x/yum
+    [elasticsearch-7.x]
+    name=Elasticsearch repository for 7.x packages
+    baseurl=https://artifacts.elastic.co/packages/7.x/yum
     gpgcheck=1
     gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
     enabled=1
@@ -147,21 +135,35 @@ Filebeat is the tool on the Wazuh server that will securely forward the alerts a
 
   .. code-block:: console
 
-	 # yum -y install filebeat-6.1.1
+    # yum install filebeat-|ELASTICSEARCH_LATEST|
 
-3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
-
-  .. code-block:: console
-
-	 # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/filebeat/filebeat.yml
-
-4. Put the specific IP number of your Elastic Server instance into the Filebeat config:
+3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-  	sed -i 's/YOUR_ELASTIC_SERVER_IP/172.30.0.20/' /etc/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
+    # chmod go+r /etc/filebeat/filebeat.yml
 
-5. Enable and start the Filebeat service:
+4. Download the alerts template for Elasticsearch:
+
+  .. code-block:: console
+
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+    # chmod go+r /etc/filebeat/wazuh-template.json
+
+5. Download the Wazuh module for Filebeat:
+
+  .. code-block:: console
+
+    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
+6. Edit and set the specific IP address of your Elasticsearch instance into the Filebeat config:
+
+  .. code-block:: console
+
+  	# sed -i 's/YOUR_ELASTIC_SERVER_IP/172.30.0.20/' /etc/filebeat/filebeat.yml
+
+7. Enable and start the Filebeat service:
 
   .. code-block:: console
 
@@ -169,8 +171,10 @@ Filebeat is the tool on the Wazuh server that will securely forward the alerts a
     # systemctl enable filebeat.service
     # systemctl start filebeat.service
 
-6. Now disable the Elastic repository in order to prevent a future unintended Elastic Stack upgrade to a version that may be in conflict with the latest stable Wazuh packages.
+8. Now disable the Wazuh and Elastic repositories in order to prevent
+   unintended upgrades that may cause a version conflict with the current installation.
 
   .. code-block:: console
 
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo

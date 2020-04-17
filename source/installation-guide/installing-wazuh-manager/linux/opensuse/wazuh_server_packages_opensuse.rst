@@ -59,7 +59,7 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+    # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
   and then, install NodeJS:
 
@@ -125,20 +125,20 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
   .. code-block:: console
 
-    # zypper install filebeat-7.4.0
+    # zypper install filebeat-|ELASTICSEARCH_LATEST|
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 5. Download the Wazuh module for Filebeat:
