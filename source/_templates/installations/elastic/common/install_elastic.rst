@@ -8,7 +8,6 @@
 
             .. code-block:: console
 
-                # apt install apt-transport-https
                 # wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | apt-key add -
 
         #. Add the repositories:
