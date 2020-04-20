@@ -37,7 +37,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
       :align: center
       :width: 100%
 
-   **Wazuh manager**
+   **Creating and signing a certificate on the Wazuh manager**
 
 
    Follow these steps in the Wazuh manager's host:
@@ -80,9 +80,9 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
    4. Restart the Wazuh manager:
 
-       .. include:: ../../_templates/registrations/common/restart_manager.rst
+       .. include:: ../../_templates/common/restart_manager.rst
 
-   **Wazuh agents**
+   **The Wazuh agent registration using CA and enabling the communication with the Wazuh manager**
 
    Copy the CA file (``.pem``) to the Wazuh agent's host. In this example, the CA file is ``rootCA.pem``.
 
@@ -118,7 +118,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      4. Restart the Wazuh agent:
 
-      .. include:: ../../_templates/registrations/linux/restart_agent.rst
+      .. include:: ../../_templates/common/linux/restart_agent.rst
 
      The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -128,7 +128,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      Open a Powershell or CMD session in the Windows Wazuh agent's host and start a CMD or a Powershell as an ``Administrator``.
 
-     .. include:: ../../_templates/registrations/windows/installation_directory.rst
+     .. include:: ../../_templates/windows/installation_directory.rst
 
      1. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``C:\Program Files (x86)\ossec-agent`` folder:
 
@@ -154,7 +154,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      4. Restart the Wazuh agent:
 
-      .. include:: ../../_templates/registrations/windows/restart_agent.rst
+      .. include:: ../../_templates/common/windows/restart_agent.rst
 
      The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -204,9 +204,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
     :align: center
     :width: 100%
 
-   To register verified by SSL Wazuh agent, first, complete the steps for the chosen verification method in a **Wazuh manager** section and then, follow the steps for the corresponding **Wazuh agent** host OS.
-
-   **Wazuh manager**
+   **Creating and signing the Wazuh agent's certificate and enabling the host verification option on the Wazuh manager**
 
    .. tabs::
 
@@ -241,7 +239,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      4. Restart the Wazuh manager:
 
-       .. include:: ../../_templates/registrations/common/restart_manager.rst
+       .. include:: ../../_templates/common/restart_manager.rst
 
 
 
@@ -277,11 +275,11 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      4. Restart the Wazuh manager:
 
-       .. include:: ../../_templates/registrations/common/restart_manager.rst
+       .. include:: ../../_templates/common/restart_manager.rst
 
 
 
-   **Wazuh agent**
+   **The Wazuh agent registration using the certificate and the key and enabling the communication with the Wazuh manager**
 
    Copy the newly created certificate (``.cert`` file) and key (``.key`` file) to the Wazuh agent. In this example, the certificate file is ``sslagent.cert`` and the key is ``sslagent.key``.
 
@@ -313,7 +311,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      4. Restart the Wazuh agent:
 
-       .. include:: ../../_templates/registrations/linux/restart_agent.rst
+       .. include:: ../../_templates/common/linux/restart_agent.rst
 
      The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -323,7 +321,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
       Open a Powershell or CMD session in the Windows Wazuh agent's host and start a CMD or a Powershell as an ``Administrator``.
 
-      .. include:: ../../_templates/registrations/windows/installation_directory.rst
+      .. include:: ../../_templates/windows/installation_directory.rst
 
       1. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``C:\Program Files (x86)\ossec-agent`` folder:
 
@@ -345,7 +343,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
       4. Restart the Wazuh agent:
 
-        .. include:: ../../_templates/registrations/windows/restart_agent.rst
+        .. include:: ../../_templates/common/windows/restart_agent.rst
 
 
 
@@ -373,6 +371,6 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
        4. Restart the Wazuh agent:
 
-          .. include:: ../../_templates/registrations/macosx/restart_agent.rst
+          .. include:: ../../_templates/common/macosx/restart_agent.rst
 
        The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.

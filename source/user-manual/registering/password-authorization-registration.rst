@@ -5,10 +5,14 @@
 Registration service with password authorization
 ================================================
 
-This registration method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it allows additional protection of the Wazuh manager from unauthorized registrations by using a password.
+This method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it allows additional protection of the Wazuh manager from unauthorized registrations by using a password.
 
-Wazuh manager
-^^^^^^^^^^^^^
+Before the registration process, enabling the password authorization option and crating the registration password has to be done on the Wazuh manager. This password can be used for the subsequent agent registrations with the same Wazuh manager.
+
+When those steps are completed, the Wazuh agent can be registered using the ``agent-auth`` utility and providing the password. After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent.
+
+Enabling the password authorization option and creating a registration password on the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. To enable password authorization amend the Wazuh manager's ``/var/ossec/etc/ossec.conf`` configuration file as shown below:
 
@@ -48,12 +52,12 @@ Wazuh manager
              2019/04/25 15:09:50 ossec-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
 
 
-3. Restart the Wazuh manager for the changes to take effect:
+3. Restart the Wazuh manager:
 
- .. include:: ../../_templates/registrations/common/restart_manager.rst
+ .. include:: ../../_templates/common/restart_manager.rst
 
-Wazuh agents
-^^^^^^^^^^^^
+Registering the Wazuh agent and enabling the communication with the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Choose the tab corresponding to the Wazuh agent host operating system:
 
@@ -98,7 +102,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/restart_agent.rst
+    .. include:: ../../_templates/common/linux/restart_agent.rst
 
    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -108,7 +112,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
-   .. include:: ../../_templates/registrations/windows/installation_directory.rst
+   .. include:: ../../_templates/windows/installation_directory.rst
 
    1. Register the Wazuh agent using the password. It can be stored in a file or provided as a command-line argument:
 
@@ -147,7 +151,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/restart_agent.rst
+    .. include:: ../../_templates/common/windows/restart_agent.rst
 
    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -191,6 +195,6 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
   3. Restart the Wazuh agent:
 
-   .. include:: ../../_templates/registrations/macosx/restart_agent.rst
+   .. include:: ../../_templates/common/macosx/restart_agent.rst
 
   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.

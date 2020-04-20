@@ -9,8 +9,8 @@ This method consists on registering the Wazuh agent with the Wazuh manager using
 
 .. note:: Root/Administrator user privileges are necessary to execute all the commands described below.
 
-Wazuh manager
-^^^^^^^^^^^^^
+The Wazuh agent's key extraction from the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. On the CLI of the Wazuh manager's host add the Wazuh agent with ``manage_agents`` utility providing new Wazuh agent's name and IP address:
 
@@ -47,8 +47,8 @@ Wazuh manager
 
    The ``key`` has to be imported to the Wazuh agent to enable communication to the Wazuh manager.
 
-Wazuh agent
-^^^^^^^^^^^
+Key insertion to the Wazuh agent and enabling the communication with the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Choose the tab corresponding to the Wazuh agent's host operating system:
 
@@ -83,7 +83,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/restart_agent.rst
+    .. include:: ../../_templates/common/linux/restart_agent.rst
 
 
 
@@ -91,7 +91,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
    Open a a Powershell or CMD session in your Wazuh agent's host as an ``Administrator``.
 
-    .. include:: ../../_templates/registrations/windows/installation_directory.rst
+    .. include:: ../../_templates/windows/installation_directory.rst
 
    1. Import the registration key to the Wazuh agent using ``manage_agents`` utility:
 
@@ -118,7 +118,7 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/restart_agent.rst
+    .. include:: ../../_templates/common/windows/restart_agent.rst
 
 
 
@@ -151,4 +151,4 @@ Choose the tab corresponding to the Wazuh agent's host operating system:
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/macosx/restart_agent.rst
+    .. include:: ../../_templates/common/macosx/restart_agent.rst

@@ -7,7 +7,7 @@ Registering the Wazuh agents using the Wazuh API
 
 The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` utility.
 
-.. note:: Root user privileges are necessary to execute all the commands described below.
+.. note:: Root user privileges are necessary to execute all the commands described below, and the Wazuh API must be accessible from the host on which the API request is executed.
 
 Choose the tab corresponding to the Wazuh agent host operating system:
 
@@ -61,7 +61,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    4. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/restart_agent.rst
+    .. include:: ../../_templates/common/linux/restart_agent.rst
 
 
 
@@ -69,7 +69,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    Open a Powershell session in the Wazuh agent's host as an ``Administrator``.
 
-   .. include:: ../../_templates/registrations/windows/installation_directory.rst
+   .. include:: ../../_templates/windows/installation_directory.rst
 
    1. Add the Wazuh agent to the Wazuh manager.
 
@@ -149,7 +149,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    5. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/restart_agent.rst
+    .. include:: ../../_templates/common/windows/restart_agent.rst
 
 
 
@@ -201,4 +201,4 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
    4. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/macosx/restart_agent.rst
+    .. include:: ../../_templates/common/macosx/restart_agent.rst

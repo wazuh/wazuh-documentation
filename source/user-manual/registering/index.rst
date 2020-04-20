@@ -47,7 +47,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/linux/restart_agent.rst
+    .. include:: ../../_templates/common/linux/restart_agent.rst
 
 
    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
@@ -58,7 +58,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
    Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
-    .. include:: ../../_templates/registrations/windows/installation_directory.rst
+    .. include:: ../../_templates/windows/installation_directory.rst
 
    1. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
 
@@ -74,7 +74,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
    3. Restart the Wazuh agent:
 
-    .. include:: ../../_templates/registrations/windows/restart_agent.rst
+    .. include:: ../../_templates/common/windows/restart_agent.rst
 
    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -98,7 +98,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
   3. Restart the Wazuh agent:
 
-   .. include:: ../../_templates/registrations/macosx/restart_agent.rst
+   .. include:: ../../_templates/common/macosx/restart_agent.rst
 
   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -118,6 +118,8 @@ There are also other easy registration methods. The choice depends on the partic
 
 To learn more about the Wazuh agent registration process, please read the :ref:`registering Wazuh agents - additional information <registering_agent_theory>`.
 
+In case of problems during the registration, several solutions can be found on :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>`.
+
 .. toctree::
     :maxdepth: 2
     :hidden:
@@ -127,3 +129,4 @@ To learn more about the Wazuh agent registration process, please read the :ref:`
     password-authorization-registration
     host-verification-registration
     registering-agents-theory
+    registering-agents-troubleshooting
