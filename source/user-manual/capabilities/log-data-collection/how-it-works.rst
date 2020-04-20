@@ -76,7 +76,7 @@ One option is for Wazuh to receive syslog logs by a custom port:
         <protocol>udp</protocol>
         <allowed-ips>192.168.2.0/24</allowed-ips>
       </remote>
-    <ossec_config>
+    </ossec_config>
 
 - ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
 - ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
