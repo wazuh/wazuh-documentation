@@ -127,7 +127,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 Configure Elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+  .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
 
 Enable and start the Elasticsearch service:
