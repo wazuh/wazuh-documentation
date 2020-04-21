@@ -85,12 +85,6 @@ In the previous example, we can see that in version **3.6** the page has the URL
 
 It’s worth nothing to remind that, while most redirections are bidirectional, not all of them need to be. Sometimes many new pages are redirected to the same old page (or the other way around), so redirections need to be specified individually.
 
-## Propagate changes to all production branches
-
-After every change to the redirections structure, we need to update all production branches from the repository, so all of them have the new set of values on `redirects.js`.
-
-To do this, we just need to cherry-pick the commit or commits that update the `redirects.js` script to every production branch. We need to do it this way because every branch has its own `redirects.js` file, and all of them need to be updated.
-
 We’re currently working on simplifying and improving this workflow, so it can become easier over time.
 
 ## Examples
@@ -128,15 +122,9 @@ redirections.push(
 );
 ```
 
-#### Step 3
-
-Cherry-pick the commit that changes the `redirects.js` file to the rest of the production branches.
-
 ### Deleting a docu page in a new version
 
 In this example, we have a page called `page-deprecated` up to version **3.7**, but in **3.8** it doesn't exist anymore.
-
-#### Step 1
 
 Add the `page-deprecated.html` URL to the **3.8** `removedUrls` array:
 
@@ -151,15 +139,9 @@ removedUrls['3.8'] = [
 
 This way, in the version selector, all versions from **3.8** will be disabled when visiting `page-deprecated.html`, preventing 404 errors and bad user experience.
 
-#### Step 2
-
-Cherry-pick the commit that changes the `redirects.js` file to the rest of the production branches.
-
 ### Adding a docu page in a new version
 
 In this example, we add a new section (called `page-new.html`) to the documentation starting on version **3.10**. 
-
-#### Step 1
 
 Add the new page URL to the `newUrls['3.10']` array.
 
@@ -176,10 +158,6 @@ newUrls['3.10'] = [
 ```
 
 This way, when visiting `page-new.html`, all the previous versions will be disabled in the version selector, preventing 404 errors.
-
-#### Step 2
-
-Cherry-pick the commit that changes the `redirects.js` file to the rest of the production branches.
 
 ### Dividing a documentation page into multiple pages
 
@@ -238,7 +216,3 @@ redirections.push(
     }
 );
 ```
-
-#### Step 4
-
-Cherry-pick the commit that changes the `redirects.js` file to the rest of the production branches.
