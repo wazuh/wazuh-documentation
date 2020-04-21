@@ -27,3 +27,4 @@ If your PR closes an issue, please use the "closes" keyword indicating the issue
 - [ ] Spelling and grammar. 
 - [ ] Used impersonal speech. 
 - [ ] Used uppercase only on nouns. 
+- [ ] Updated the `redirect.js` script if necessary (check [this guide](../NEW_RELEASE.md)).
