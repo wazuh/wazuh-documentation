@@ -183,6 +183,8 @@ Kibana installation and configuration
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
+    The default user and password to access Kibana is ``admin``.
+
 
 .. _wazuh_server_packages_filebeat:
 
