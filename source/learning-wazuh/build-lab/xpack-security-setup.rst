@@ -75,18 +75,18 @@ Configure SSL in Elasticsearch
 
     [root@elastic-server ~]# cat >> /etc/elasticsearch/elasticsearch.yml << EOF
 
-    ## Unbind to a specific IP:
+    # Unbind to a specific IP:
     network.host: 0.0.0.0
     discovery.seed_hosts: ["172.30.0.20"]
 
-    ## Transport layer
+    # Transport layer
     xpack.security.transport.ssl.enabled: true
     xpack.security.transport.ssl.verification_mode: certificate
     xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
     xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch.crt
     xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
 
-    ## HTTP layer
+    # HTTP layer
     xpack.security.http.ssl.enabled: true
     xpack.security.http.ssl.verification_mode: certificate
     xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
@@ -121,13 +121,13 @@ Configure SSL in Kibana
 
     [root@elastic-server ~]# cat >> /etc/kibana/kibana.yml << EOF
 
-    ## Elasticsearch from/to Kibana
+    # Elasticsearch from/to Kibana
     elasticsearch.hosts: ["https://172.30.0.20:9200"]
     elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca/ca.crt"]
     elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     elasticsearch.ssl.key: "/etc/kibana/certs/kibana.key"
 
-    ## Browser from/to Kibana
+    # Browser from/to Kibana
     server.ssl.enabled: true
     server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
     server.ssl.key: "/etc/kibana/certs/kibana.key"
