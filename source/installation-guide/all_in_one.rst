@@ -167,6 +167,14 @@ Kibana installation and configuration
         # cd /usr/share/kibana
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
 
+#. Copy the demo Elasticsearch certificates into ``/etc/kibana/certs``:
+
+    .. code-block:: console
+
+      # mkdir /etc/kibana/certs
+      # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
+      # cp /etc/elasticsearch/esnode* /etc/kibana/certs/        
+
 #. Enable and start the Kibana service:
 
     .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
@@ -185,6 +193,10 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 Filebeat installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Add the repository:
+
+    .. include:: ../_templates/installations/elastic/common/signing_key_filebeat.rst
 
 
 #. Install the Filebeat package:
@@ -230,13 +242,6 @@ Filebeat installation and configuration
       # mkdir /etc/filebeat/certs
       # cp /etc/elasticsearch/root-ca.pem /etc/filebeat/certs/
       # cp /etc/elasticsearch/esnode* /etc/filebeat/certs/
-
-
-#. Edit the file ``/etc/filebeat/filebeat.yml``:
-
-    .. include:: ../_templates/installations/elastic/common/configure_filebeat_all_in_one.rst
-
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Enable and start the Filebeat service:
 
