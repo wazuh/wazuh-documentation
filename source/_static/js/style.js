@@ -573,7 +573,7 @@ $(function() {
 
     /* Detects every result that is added to the list */
     const addedResult = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'childList') {
           lastResult = $('ul.search li:last-child');
           splitURL = lastResult.children('a').prop('href').split('/');
@@ -591,7 +591,7 @@ $(function() {
 
     /* Checking that the list of search results exists */
     const existsResultList = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search')) {
           const ulSearch = $('ul.search');
 
@@ -607,7 +607,7 @@ $(function() {
 
     /* Replaces the result message */
     const changeResultText = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'attributes') {
           observerResultText.disconnect();
           const totalResults = $('ul.search li').length;
