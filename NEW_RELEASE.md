@@ -238,3 +238,7 @@ redirections.push(
     }
 );
 ```
+
+#### Step 4
+
+Cherry-pick the commit that changes the `redirects.js` file to the rest of the production branches.
