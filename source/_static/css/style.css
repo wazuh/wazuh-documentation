@@ -123,11 +123,6 @@ dt {
   padding-bottom: 10px;
 }
 
-.docutils.container {
-  max-width: 100%;
-  padding: 0;
-}
-
 .no-bullets li::before {
   content: none !important;
 }
@@ -682,14 +677,6 @@ footer .logo a:focus {
 
 ul, ol {
 	padding-left: 1.7rem;
-}
-
-ul.simple li dl {
-  margin-bottom: 0;
-}
-
-ul.simple dl dt {
-  font-weight: normal;
 }
 
 ul.simple dl dd {
@@ -1424,6 +1411,25 @@ footer a:focus,
   width: 100%;
 }
 
+#main-content .sphinx-tabs .menu .item.docutils.container {
+  border-bottom: none;
+  border-bottom-color: currentcolor;
+
+}
+
+.sphinx-tabs .item.docutils.container, .sphinx-tabs .menu.docutils.container {
+  width: auto;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.sphinx-tabs.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
@@ -1521,6 +1527,27 @@ footer .contact-info .fa-paper-plane-o {
 
 .widget_text .textwidget {
   font-weight: 400;
+}
+
+.sphinx-tabs .sphinx-menu a.item{
+  color: #0094ce !important;
+}
+
+#main-content .sphinx-tabs .menu .item.docutils.container{
+  border-radius: 5px 5px 0 0 !important;
+}
+
+.sphinx-tabs .sphinx-menu a.active.item, .ui.attached.segment{
+  border-color: #0094ce !important;
+}
+
+.sphinx-tabs .sphinx-menu a.item:not(.active){
+  border-color: #f4f4f4 !important;
+}
+
+.sphinx-tabs .sphinx-menu, .ui.tabular.menu{
+  border-bottom: 1px solid #0094ce !important;
+  border-bottom-color: #0094ce !important;
 }
 
 #page.page-404 {
@@ -3532,15 +3559,6 @@ div[class*='highlight'] {
   margin: 1px 0 24px 0
 }
 
-div[class*='highlight'].output {
-	border: none;
-	background-color: transparent;
-}
-
-div[class*='highlight'].output .highlight {
-	border: 1px solid #e1e4e5;
-}
-
 div[class*='highlight'] {
   position: relative;
 }
@@ -3590,8 +3608,7 @@ div[class*='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class*='highlight']:hover .copy-to-clipboard,
-div[class*='highlight'] .copy-to-clipboard:focus {
+div[class*='highlight']:hover .copy-to-clipboard {
   opacity: 1;
 }
 
@@ -3634,7 +3651,7 @@ pre .gr { color: #a00 } /* Generic.Error */
 pre .gh { color: #999 } /* Generic.Heading */
 pre .gi { color: #000; background-color: #dfd } /* Generic.Inserted */
 pre .gi .x { color: #000; background-color: #afa }
-pre .go, pre .heredoc, pre .heredoc .gp { color: #888 } /* Generic.Output */
+pre .go { color: #888 } /* Generic.Output */
 pre .gp { color: #555 } /* Generic.Prompt */
 pre .gs { font-weight: bold }
 pre .gu { color: purple; font-weight: bold } /* Generic.Subheading */

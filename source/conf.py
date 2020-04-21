@@ -46,6 +46,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
+    'sphinx_tabs.tabs',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -432,7 +433,7 @@ custom_replacements = {
     "|WAZUH_REVISION_HPUX|" : "1",
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_REVISION_WINDOWS|" : "1",
-}   
+}
 
 # -- Setup -------------------------------------------------------------------
 
@@ -481,3 +482,4 @@ html_context = {
     "github_version": version,
     "production": production
 }
+sphinx_tabs_nowarn = True
