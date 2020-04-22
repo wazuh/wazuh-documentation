@@ -134,56 +134,11 @@ Enable and start the Elasticsearch service:
 
     .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-Kibana installation and configuration
--------------------------------------
+Execute the following command to ensure that the installation was made properly: 
 
-#. Install the Kibana package:
+  .. code-block:: console
 
-    .. tabs::
-
-        .. group-tab:: APT
-
-
-            .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
-
-
-
-        .. group-tab:: Yum
-
-
-            .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
-
-
-#. Download the Kibana configuration file:
-
-    .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
-
-#. Install the Wazuh Kibana plugin:
-
-    The installation of the plugin must be done from the Kibana home directory.
-
-    .. code-block:: console
-
-        # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.12.2_7.6.1.zip
-
-#. Copy the demo Elasticsearch certificates into ``/etc/kibana/certs``:
-
-    .. code-block:: console
-
-      # mkdir /etc/kibana/certs
-      # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
-      # cp /etc/elasticsearch/esnode* /etc/kibana/certs/        
-
-#. Enable and start the Kibana service:
-
-    .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
-
-    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``esnode.pem`` certificate previously created to the Certificate Manager of each browser that will access the Kibana interface.
-
-    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
-
-    The default user and password to access Kibana is ``admin``.
+    # curl -XGET https://localhost:9200 -u admin:admin -k
 
 
 .. _wazuh_server_packages_filebeat:
@@ -252,6 +207,61 @@ Filebeat installation and configuration
 #. Load the Filebeat template:
 
     .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
+
+To ensure that Filebeat has been successfully installed, execute the following command: 
+
+  # filebeat test output
+
+Kibana installation and configuration
+-------------------------------------
+
+#. Install the Kibana package:
+
+    .. tabs::
+
+        .. group-tab:: APT
+
+
+            .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
+
+
+
+        .. group-tab:: Yum
+
+
+            .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
+
+
+#. Download the Kibana configuration file:
+
+    .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
+
+#. Install the Wazuh Kibana plugin:
+
+    The installation of the plugin must be done from the Kibana home directory.
+
+    .. code-block:: console
+
+        # cd /usr/share/kibana
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.12.2_7.6.1.zip
+
+#. Copy the demo Elasticsearch certificates into ``/etc/kibana/certs``:
+
+    .. code-block:: console
+
+      # mkdir /etc/kibana/certs
+      # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
+      # cp /etc/elasticsearch/esnode* /etc/kibana/certs/        
+
+#. Enable and start the Kibana service:
+
+    .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
+
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``esnode.pem`` certificate previously created to the Certificate Manager of each browser that will access the Kibana interface.
+
+    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+
+    The default user and password to access Kibana is ``admin``.
 
 
 Disabling repositories
