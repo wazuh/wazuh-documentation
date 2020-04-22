@@ -105,6 +105,8 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `not_same_field`_       | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `different_field`_      | None.                                                         | The decoded ``field`` must be different than the previous ones.                                      |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_protocol`_        | None.                                                         | The decoded ``protocol`` must be the same.                                                           |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_protocol`_   | None.                                                         | The decoded ``protocol`` must be different.                                                          |
@@ -1198,6 +1200,17 @@ The last event will fire rule 100002 instead of 100001 due to the value ``CCCC``
     },
     "location": "/root/test.log"
   }
+
+different_field
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.13.0
+
+It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
+
++--------------------+------------------------------------------+
+| **Example of use** | <different_field>key2</different_field>  |
++--------------------+------------------------------------------+
 
 global_frequency
 ^^^^^^^^^^^^^^^^
