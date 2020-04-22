@@ -151,11 +151,6 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 Filebeat installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Add the repository:
-
-    .. include:: ../_templates/installations/elastic/common/signing_key_filebeat.rst
-
-
 #. Install the Filebeat package:
 
     .. tabs::
