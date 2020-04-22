@@ -89,7 +89,6 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
       <run_on_start>yes</run_on_start>
       <provider name="canonical">
         <enabled>no</enabled>
-        <os>precise</os>
         <os>trusty</os>
         <os>xenial</os>
         <os>bionic</os>
