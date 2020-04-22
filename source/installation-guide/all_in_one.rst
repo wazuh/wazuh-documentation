@@ -205,7 +205,9 @@ Filebeat installation and configuration
 
 To ensure that Filebeat has been successfully installed, execute the following command: 
 
-  # filebeat test output
+    .. code-block:: console
+      
+      # filebeat test output
 
 Kibana installation and configuration
 -------------------------------------
