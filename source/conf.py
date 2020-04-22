@@ -46,6 +46,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
+    'sphinx_tabs.tabs',
+
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -416,7 +418,7 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
     "|SPLUNK_LATEST|" : "8.0.2",
     "|ELASTIC_6_LATEST|" : "6.8.7",
-}   
+}
 
 # -- Setup -------------------------------------------------------------------
 
@@ -458,3 +460,4 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version
 }
+sphinx_tabs_nowarn = True
