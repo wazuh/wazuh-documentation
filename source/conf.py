@@ -482,3 +482,4 @@ html_context = {
     "github_version": version,
     "production": production
 }
+sphinx_tabs_nowarn = True
