@@ -47,12 +47,6 @@ Adding the Wazuh repository
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/wazuh/zypp/add_repository.rst
-
-
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -74,12 +68,6 @@ Installing the Wazuh manager
 
     .. include:: ../_templates/installations/wazuh/yum/install_wazuh_manager.rst
 
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 Installing the Wazuh API
