@@ -165,9 +165,7 @@ Filebeat installation and configuration
 
 #. Download the alerts template for Elasticsearch:
 
-    .. code-block:: console
-
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.12.2/extensions/elasticsearch/7.x/wazuh-template.json
+  .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
 
 #. Download the Wazuh module for Filebeat:
 
@@ -186,10 +184,7 @@ Filebeat installation and configuration
 #. Enable and start the Filebeat service:
 
     .. include:: ../_templates/installations/elastic/common/enable_filebeat.rst
-
-#. Load the Filebeat template:
-
-    .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
+    
 
 To ensure that Filebeat has been successfully installed, execute the following command: 
 
