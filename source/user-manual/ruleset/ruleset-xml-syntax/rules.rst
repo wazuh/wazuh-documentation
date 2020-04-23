@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _rules_syntax:
 
@@ -67,9 +67,13 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_id`_              | None.                                                         | The decoded ``id`` must be the same.                                                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_id`_          | None.                                                         | The decoded ``id`` must be different.                                                                |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_id`_         | None.                                                         | The decoded ``id`` must be different.                                                                |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_source_ip`_       | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_source_ip`_   | None.                                                         | The decoded ``srcip`` must be different.                                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_srcip`_           | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -96,6 +100,8 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `different_srcuser`_    | None.                                                         | The decoded ``srcuser`` must be different.                                                           |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_user`_            | None.                                                         | The decoded ``user`` must be the same.                                                               |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_user`_        | None.                                                         | The decoded ``user`` must be different.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_user`_       | None.                                                         | The decoded ``user`` must be different.                                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -834,6 +840,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 not_same_id
 ^^^^^^^^^^^
 
+.. deprecated:: 3.13.0 Use `different_id`_ instead.
+
 Specifies that the decoded id must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
@@ -856,6 +864,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 same_source_ip
 ^^^^^^^^^^^^^^
 
+.. deprecated:: 3.13.0 Use `same_srcip`_ instead.
+
 Specifies that the decoded source ip must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
@@ -863,6 +873,17 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_source_ip /> |
 +--------------------+--------------------+
 
+not_same_source_ip
+^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded source ip must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
+.. deprecated:: 3.13.0 Use `different_srcip`_ instead.
+
++--------------------+------------------------+
+| **Example of use** | <not_same_source_ip /> |
++--------------------+------------------------+
 
 same_srcip
 ^^^^^^^^^^
@@ -1015,6 +1036,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 not_same_user
 ^^^^^^^^^^^^^
 
+.. deprecated:: 3.13.0 Use `different_user`_ instead.
+
 Specifies that the decoded user must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
@@ -1128,6 +1151,7 @@ not_same_field
 ^^^^^^^^^^^^^^
 
 .. versionadded:: 3.9.0
+.. deprecated:: 3.13.0 Use `different_field`_ instead.
 
 It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
 
