@@ -267,12 +267,6 @@ Disabling repositories
 
 
 
-  .. group-tab:: ZYpp
-
-    .. include:: ../_templates/installations/wazuh/zypp/disabling_repositories.rst
-
-
-
 Uninstall
 ---------
 
@@ -293,12 +287,6 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. include:: ../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
 
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
 To uninstall Filebeat:
