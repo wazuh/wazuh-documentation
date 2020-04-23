@@ -6,50 +6,35 @@
 
                 #. Add the repository for Java Development Kit (JDK): 
                 
-                    .. tabs::
+                    #. For Debian: 
 
-                        .. group-tab:: Debian
+                        .. code-block:: console
 
-                            .. code-block:: console
-
-                                # echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
-                                # apt update
+                            # echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
 
                         
-                        .. group-tab:: Other Debian based OS
+                    #. Other Debian based OS:
 
                             .. code-block:: console
 
                                 # add-apt-repository ppa:openjdk-r/ppa
-                                # apt update
-
-
-                #. Install Java 11:
 
                     .. code-block:: console
 
-                        # apt install openjdk-11-jdk
-
-            
-                #. Once Java is installed, add ``wget`` and ``unzip`` utilities:
+                        # apt update
+                        
+                #. Install all the required utilities:
 
                     .. code-block:: console
 
-                        # apt install wget unzip                        
+                        # apt install openjdk-11-jdk curl apt-transport-https lsb-release gnupg2 unzip wget                        
 
         .. group-tab:: Yum
 
-            #. Install the Java Development Kit (JDK):
+            Install all the required utilities:
 
                 .. code-block:: console
 
-                    # yum install java-11-openjdk-devel
-
-
-            #. Once Java is installed, add ``wget`` and ``unzip`` utilities:
-
-                .. code-block:: console
-
-                    # yum install wget unzip
+                    # yum install openjdk-11-jdk curl apt-transport-https lsb-release gnupg2 unzip wget
 
 .. End of include file
