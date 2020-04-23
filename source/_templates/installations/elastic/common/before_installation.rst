@@ -13,7 +13,7 @@
                             # echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
 
                         
-                    #. Other Debian based OS:
+                    #. Ubuntu and other Debian based OS:
 
                             .. code-block:: console
 
