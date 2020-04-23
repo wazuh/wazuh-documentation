@@ -162,46 +162,7 @@ Breaking changes
 
 Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** in existing installations, although new installations **won't be affected** by this error.
 
-When clicking on the **View surrounding documents** or **View single document** buttons from an alert on the **Discover** tab the error message "Failed to parse date field with format ``dateOptionalTime``" is displayed.
-
-In previous versions of Wazuh, the Elasticsearch template had these properties for the ``@timestamp`` field:
-
-.. code-block:: javascript
-
-  "@timestamp": {
-    "type": "date",
-    "format": "dateOptionalTime"
-  },
-
-As of Elastic Stack 6.4.x, the **date format** causes an error when viewing the surrounding documents, and to fix this, the Elasticsearch templated was updated:
-
-.. code-block:: javascript
-
-  "@timestamp": {
-    "type": "date"
-  },
-
-This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_latest_minor>`, the new template will be in use, and the next daily indices will be created using the new date format.
-
-However, if you want to fix this problem for the affected indices, there are different options that you can try in order to correct them:
-
-.. warning::
-  The following methods require stopping the Filebeat service before proceeding. After finishing, you can restart it again.
-
-- **Reindex indices:** The most basic form of reindexation consists of copying the documents from one index to another. In this case, we use this procedure to create a new index using the updated template, so we can then remove the old one, and finally, reindex the new index into the previous one.
-
-  On the Elasticsearch documentation you can find more info about the `Reindex API <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_.
-
-+ **Close indices:** Closing an index will be blocked for read/write operations, so it won't be used when visualizing alerts on Kibana, although the data will be still available for archiving purposes.
-
-  On the Elasticsearch documentation you can find more info about the `Open/Close index API <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html>`_.
-
-- **Delete indices:** This method is not suitable for production environments where all the data must be stored or archived. It's more convenient for testing environments, since it's the fastest method to fix the issue.
-
-  On the Elasticsearch documentation you can find more info about the `Delete index API <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html>`_.
-
-This breaking change could lead into a *X of Y shards failed* message because of the presence of old and new Elasticsearch indices using different templates, but it's not critical or harmful.
-
+To learn more about how to fix this, check out the Kibana app’s `toubleshooting guide <https://documentation.wazuh.com/3.7/user-manual/kibana-app/troubleshooting.html#failed-to-parse-date-field-with-format-dateoptionaltime>`_.
 
 New features for Splunk plugin
 ------------------------------

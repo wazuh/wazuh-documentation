@@ -34,7 +34,7 @@ This section provides access to the administration of the :ref:`ruleset <kibana_
 Agents
 ------
 
-This section shows the overall status of the Wazuh agents and lists them allowing access to the detailed information regarding each Wazuh agent.
+This :ref:`section <kibana_agents>` shows the overall status of the Wazuh agents and lists them allowing access to the detailed information regarding each Wazuh agent.
 
 Dev tools
 ---------
@@ -50,7 +50,6 @@ The :ref:`settings <kibana_settings>` section is accessible through the gear ico
     :hidden:
     :maxdepth: 1
 
-    connect-kibana-app
     features/index
     troubleshooting
     reference/index

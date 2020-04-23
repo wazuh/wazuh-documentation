@@ -7,6 +7,8 @@ Features
 
 The Wazuh Kibana plugin supplies the view of the Wazuh cluster, Wazuh agents and generated alerts. It provides an elegant, easy-to-use UI to interact with the Wazuh manager through the Wazuh API, showing the relevant information in a convenient way. This section shows how to use the plugin through its different features.
 
+#. `Discover`_
+#. `Monitoring the Wazuh agent`_
 #. `Ruleset`_
 #. `Settings`_
 #. `Dev tools`_
@@ -14,6 +16,34 @@ The Wazuh Kibana plugin supplies the view of the Wazuh cluster, Wazuh agents and
 #. `Index pattern selector`_
 #. `Download as CSV`_
 #. `Query configuration`_
+
+.. _kibana_discovery:
+
+Discover
+--------
+
+This section is available under the ``Discover`` button and allows interactively explore Wazuh alerts from the currently selected index pattern. It is possible to submit search queries, filter the search results, view alerts data, and also, by clicking on the fields on the left side of the window, add columns for a quick value comparison between alerts. The user can see the number of alerts that match the search query and get field value statistics:
+
+.. thumbnail:: ../../../images/kibana-app/features/discover/wazuh-kibana-discover.png
+  :align: center
+  :width: 100%
+
+.. _kibana_agents:
+
+Monitoring the Wazuh agent
+--------------------------
+
+The overall status of all the Wazuh agents belonging to the Wazuh cluster is shown in the section  *Agents*, found through the top menu. The section shows also an interactive table, listing the Wazuh agents and some of their details. The table allows the user to perform operations such as adding a new Wazuh agent, viewing the configuration of an existing Wazuh agent and more:
+
+.. thumbnail:: ../../../images/kibana-app/features/agents/wazuh-kibana-agents.png
+  :align: center
+  :width: 100%
+
+After selecting a specific Wazuh agent from the list, the user can monitor its security events:
+
+.. thumbnail:: ../../../images/kibana-app/features/agents/wazuh-kibana-agent.png
+  :align: center
+  :width: 100%
 
 .. _kibana_ruleset:
 
@@ -101,10 +131,12 @@ This section lists all inserted Wazuh API entries. The star icon indicates the c
   :align: center
   :width: 100%
 
+.. _kibana_settings_configuration:
+
 Configuration
 ^^^^^^^^^^^^^
 
-This section presents and allows to edit Wazuh Kibana plugin :ref:`configuration file <kibana_config_file>` located at ``/usr/share/kibana/optimizewazuh/config/wazuh.yml``:
+This section presents and allows to edit Wazuh Kibana plugin :ref:`configuration file <kibana_config_file>` located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``:
 
 .. thumbnail:: ../../../images/kibana-app/features/settings/wazuh-kibana-settings-config.png
   :align: center
