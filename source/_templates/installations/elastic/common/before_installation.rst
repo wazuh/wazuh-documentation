@@ -27,7 +27,7 @@
 
                     .. code-block:: console
 
-                        # apt install openjdk-11-jdk curl apt-transport-https lsb-release gnupg2 unzip wget                        
+                        # apt install openjdk-11-jdk curl apt-transport-https gnupg2 unzip wget                        
 
         .. group-tab:: Yum
 
@@ -35,6 +35,6 @@
 
                 .. code-block:: console
 
-                    # yum install openjdk-11-jdk curl apt-transport-https lsb-release gnupg2 unzip wget
+                    # yum install java-11-openjdk-devel curl gnupg2 unzip wget
 
 .. End of include file
