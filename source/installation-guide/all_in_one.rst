@@ -165,7 +165,8 @@ Filebeat installation and configuration
 
 #. Download the alerts template for Elasticsearch:
 
-  .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
+    .. include:: ../_templates/installations/elastic/common/load_filebeat_template.rst
+
 
 #. Download the Wazuh module for Filebeat:
 
