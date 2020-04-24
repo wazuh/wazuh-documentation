@@ -2,6 +2,7 @@
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v3.12.2/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -k -uadmin:admin -H 'Content-Type: application/json' -d @-
+  # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.12.0/extensions/elasticsearch/7.x/wazuh-template.json
+  # chmod go+r /etc/filebeat/wazuh-template.json
 
 .. End of include file
