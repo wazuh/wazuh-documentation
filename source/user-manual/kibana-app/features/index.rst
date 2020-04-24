@@ -122,6 +122,8 @@ Settings
 
 The *Settings* section allows to configure and receive the information about the Wazuh Kibana plugin:
 
+.. _kibana_settings_api:
+
 API
 ^^^
 
