@@ -15,7 +15,8 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
   .. group-tab:: Linux/Unix host
 
-   1. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
+
+   1. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the angle brackets:
 
     .. code-block:: console
 
@@ -36,6 +37,7 @@ Choose the tab corresponding to the Wazuh agent host operating system:
 
     More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
 
+
    2. Import the registration key to the Wazuh agent using ``manage_agents`` utility. Replace the Wazuh agent's registration key:
 
     .. code-block:: console
@@ -55,9 +57,11 @@ Choose the tab corresponding to the Wazuh agent host operating system:
             Confirm adding it?(y/n): y
             Added.
 
+
    3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
 
     .. include:: ../../_templates/registrations/common/client_server_section.rst
+
 
    4. Restart the Wazuh agent:
 

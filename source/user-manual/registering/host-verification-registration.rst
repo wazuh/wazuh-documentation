@@ -5,7 +5,7 @@
 Registration service with host verification
 ===========================================
 
-Using verification with an SSL key certificate provides confidence that the connection between the right Wazuh agent and the right Wazuh manager is established.
+Using verification with an SSL key certificate ensures that the connection between the right Wazuh agent and the right Wazuh manager is established.
 
 Creating a Certificate of Authority (CA)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -214,7 +214,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      This example shows the creation of the certificate for the Wazuh agents without specifying their hostname or IP address. This will allow to share the same certificate among all selected Wazuh agents. The signed certificate will verify the Wazuh agent. Registration service for Wazuh agents where the certificate is not present will be refused.
 
-     1. Issue and sign the certificate for the Wazuh agent by executing the following commands in the location of CA files. Remember to not enter the ``common name`` field:
+     1. Issue and sign the certificate for the Wazuh agent by executing the following commands in the location of CA files. Remember not to enter the ``common name`` field:
 
        .. code-block:: console
 

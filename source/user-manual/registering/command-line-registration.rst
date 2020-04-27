@@ -5,20 +5,20 @@
 Registering the Wazuh agents using the command line (CLI)
 =========================================================
 
-This method consists on registering the Wazuh agent with the Wazuh manager using ``manage_agents`` utility by extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent.
+This method consists on registering the Wazuh agent on the Wazuh manager using ``manage_agents`` utility by extracting the registration key from the Wazuh manager and inserting it manually in the Wazuh agent.
 
 .. note:: Root/Administrator user privileges are necessary to execute all the commands described below.
 
 The Wazuh agent's key extraction from the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. On the CLI of the Wazuh manager's host add the Wazuh agent with ``manage_agents`` utility providing new Wazuh agent's name and IP address:
+#. On the CLI of the Wazuh manager's host add the Wazuh agent with ``manage_agents`` utility providing new Wazuh agent's name and IP address:
 
    .. code-block:: console
 
     # /var/ossec/bin/manage_agents -a <agent_IP> -n <agent_name>
 
-2. Find the ``ID`` of the Wazuh agent:
+#. Find the ``ID`` of the Wazuh agent:
 
    .. code-block:: console
 
@@ -31,7 +31,7 @@ The Wazuh agent's key extraction from the Wazuh manager
 
            ID: 001, Name: agent_1, IP: any
 
-3. Extract the Wazuh agent's registration key using the Wazuh agent's ID:
+#. Extract the Wazuh agent's registration key using the Wazuh agent's ID:
 
    .. code-block:: console
 

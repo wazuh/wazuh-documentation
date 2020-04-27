@@ -8,9 +8,9 @@ Registering Wazuh agents
 .. meta::
   :description: Learn more about the different methods that can be used to register Wazuh agents against the Wazuh manager.
 
-The security event data collection from the Wazuh agent requires to enable the communication with the Wazuh manager.
+The security event data collection from the Wazuh agent requires enabling the communication with the Wazuh manager.
 
-The Wazuh manager must know which Wazuh agent is sending the security events and if it is authorized. This step is called as Wazuh agent registration and it can be done by using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain a unique
+The Wazuh manager must know which Wazuh agent is sending the security events and if it is authorized. This step is called Wazuh agent registration and it can be done by using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain an unique
 key, used to encrypt the traffic between them. Once the registration is done, this communication will no longer be used, unless the Wazuh agent needs to be registered into a new Wazuh manager.
 
 After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent. By default, the Wazuh manager will use a communication channel over the port 1514 using UDP protocol, through which The Wazuh Agent will send the collected data.
@@ -86,19 +86,19 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
   1. To register the Wazuh agent, run the ``agent-auth`` utility, using the Wazuh manager’s IP address:
 
-   .. code-block:: console
+    .. code-block:: console
 
-    # /Library/Ossec/bin/agent-auth -m <manager_IP>
+     # /Library/Ossec/bin/agent-auth -m <manager_IP>
 
-   .. include:: ../../_templates/registrations/common/set_agent_name.rst
+    .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
 
-   .. include:: ../../_templates/registrations/common/client_server_section.rst
+    .. include:: ../../_templates/registrations/common/client_server_section.rst
 
   3. Restart the Wazuh agent:
 
-   .. include:: ../../_templates/common/macosx/restart_agent.rst
+    .. include:: ../../_templates/common/macosx/restart_agent.rst
 
   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
@@ -113,12 +113,12 @@ There are also other easy registration methods. The choice depends on the partic
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Using registration service with password authorization <password-authorization-registration>` | Registration using ``agent-auth`` utility. Allows additional protection of the Wazuh manager from unauthorized registrations by using a password.                   |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`Using registration service with host verification <host-verification-registration>`           | Registration using ``agent-auth`` utility. Provides confidence that the connection between the right Wazuh agent and the right Wazuh manager is established.        |
+| :ref:`Using registration service with host verification <host-verification-registration>`           | Registration using ``agent-auth`` utility. Ensures that the connection between the right Wazuh agent and the right Wazuh manager is established.                    |
 +-----------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 To learn more about the Wazuh agent registration process, please read the :ref:`registering Wazuh agents - additional information <registering_agent_theory>`.
 
-In case of problems during the registration, several solutions can be found on :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>`.
+In case of having problems during the registration, several solutions can be found on :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>`.
 
 .. toctree::
     :maxdepth: 2

@@ -5,14 +5,15 @@
 Registration service with password authorization
 ================================================
 
-This method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it allows additional protection of the Wazuh manager from unauthorized registrations by using a password.
+This method is similar to the :ref:`simple registration service <simple-registration-service>`, except that it provides additional protection of the Wazuh manager from unauthorized registrations by using a password.
 
-Before the registration process, enabling the password authorization option and crating the registration password has to be done on the Wazuh manager. This password can be used for the subsequent agent registrations with the same Wazuh manager.
+Before the registration process, enabling the password authorization option and creating the registration password has to be done on the Wazuh manager. This password can be used for the subsequent agent registrations with the same Wazuh manager.
 
 When those steps are completed, the Wazuh agent can be registered using the ``agent-auth`` utility and providing the password. After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent.
 
 Enabling the password authorization option and creating a registration password on the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 1. To enable password authorization amend the Wazuh manager's ``/var/ossec/etc/ossec.conf`` configuration file as shown below:
 
@@ -24,6 +25,7 @@ Enabling the password authorization option and creating a registration password 
       ...
     </auth>
 
+
 2. Choose custom password or let the registration service generate one.
 
   .. tabs::
@@ -32,7 +34,7 @@ Enabling the password authorization option and creating a registration password 
 
     Create the ``/var/ossec/etc/authd.pass`` file and save the custom password in it.
 
-    In the command below, replace ``<custom_pasword>`` with your chosen password:
+    In the command below, replace ``<custom_pasword>`` with the chosen password:
 
     .. code-block:: console
 

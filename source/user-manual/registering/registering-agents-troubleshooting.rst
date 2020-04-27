@@ -9,12 +9,13 @@ Registering Wazuh agents - Troubleshooting
   :description: Registering Wazuh agents - Troubleshooting
 
 
-The Wzuh agent registers successfully but disappears after another Wazuh agent is being registered.
+The Wazuh agent registers successfully but disappears after another Wazuh agent is being registered
 ---------------------------------------------------------------------------------------------------
 
 By default, the Wazuh manager attaches the Wazuh agent to the visible IP of the Wazuh agent. If the Wazuh manager or the Wazuh agents are, for example, behind a NAT, the Wazuh agent should be registered with IP address ``any``, which works as ``0.0.0.0/0``.
 
-1. To set up this behavior for a single registration:
+
+#. To set up this behavior for a single registration:
 
    Add the Wazuh agent's IP address as ``any`` to the registration command.
 
@@ -33,7 +34,7 @@ By default, the Wazuh manager attaches the Wazuh agent to the visible IP of the 
     # /var/ossec/bin/agent-auth -m <manager_IP> -I any -A <agent_name>
 
 
-2. To set up this behavior for all subsequent registrations:
+#. To set up this behavior for all subsequent registrations:
 
    In the Wazuh manager's configuration ``/var/ossec/etc/ossec.conf`` file, set the :ref:`use_source_ip <auth_use_source_ip>` to ``no``:
 
