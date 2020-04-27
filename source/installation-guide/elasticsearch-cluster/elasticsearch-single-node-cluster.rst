@@ -12,67 +12,28 @@ This document will explain how to install the Elastic Stack components in a sing
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
+Preapring the installation
+--------------------------
+
+Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
+
+  .. include:: ../../_templates/installations/elastic/common/before_installation.rst
+
 
 Installing Elasticsearch
 ------------------------
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Elasticsearch installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+  Install the Elasticsearch package:
 
+    .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/elastic/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/elastic/yum/add_repository.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/add_repository.rst
-
-
-
-
-
-Elasticsearch installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Install the Elasticsearch package:
-
-    .. tabs::
-
-      .. group-tab:: APT
-
-
-        .. include:: ../../_templates/installations/elastic/deb/install_elasticsearch.rst
-
-
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../../_templates/installations/elastic/yum/install_elasticsearch.rst
-
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../_templates/installations/elastic/zypp/install_elasticsearch.rst
-
+Elasticsearch configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
