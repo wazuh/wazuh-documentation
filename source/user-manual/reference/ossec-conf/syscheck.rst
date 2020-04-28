@@ -254,7 +254,7 @@ Nevertheless, the second one disables the SHA-256 hash check.
 ignore
 ^^^^^^
 
-List of files or directories to be ignored. Introduced as one entry per line. Multiple lines may be entered to include multiple files or directories. Ignored files and directories are still scaned, but the results are not being reported.
+List of files or directories to be ignored. Introduced as one entry per line. Multiple lines may be entered to include multiple files or directories. Ignored files and directories are still scaned, but the results are not reported.
 
 +--------------------+-----------------------------------------------------------------------+
 | **Default value**  | The default configuration may vary depending on the operating system. |

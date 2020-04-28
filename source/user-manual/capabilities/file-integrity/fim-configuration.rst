@@ -29,7 +29,7 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
 
 .. note::
 
-  If a directory is specified both in a :ref:`centralized configuration <reference_agent_conf>` and on the Wazuh agent's  ``ossec.conf``, the centralized configuration will take precedence and override the local configuration.
+  If a directory is specified both in a :ref:`centralized configuration <reference_agent_conf>` and on the Wazuh agent's  ``ossec.conf``, the centralized configuration will take preference and override the local configuration.
 
 .. code-block:: xml
 
@@ -102,7 +102,7 @@ How to tune audit to deal with a huge amount of who-data events at the same time
 
 It is possible to lose ``who-data`` events when a flood of events appears. The following options help the audit socket and dispatcher to deal with big amounts of events:
 
-.. code-block:: xml
+.. code-block:: none
 
  /etc/audit/auditd.conf  -> disp_qos = ["lossy", "lossless"]
  /etc/audisp/audisp.conf -> q_dephs  = [<Numerical value>]
@@ -113,7 +113,7 @@ The ``q_dephs`` is a numeric value, by default set to 80, that tells how big is 
 
 On the Wazuh side, the ``rt_delay`` variable from the :ref:`internal FIM configuration <ossec_internal_syscheck>` can help to prevent the loss of events:
 
-.. code-block:: xml
+.. code-block:: none
 
  /var/ossec/etc/internal_options.conf -> syscheck.rt_delay = [Numerical value]
 
@@ -242,7 +242,7 @@ In this example, by adding :ref:`nodiff <reference_ossec_syscheck_nodiff>` optio
 Configuring ignoring files and Windows registry entries
 -------------------------------------------------------
 
-In order to avoid false positives, syscheck can be configured to ignore certain files and directories that don’t need to be monitored by using the :ref:`ignore <reference_ossec_syscheck_ignore>` option:
+In order to avoid false positives, syscheck can be configured to ignore certain files and directories that do not need to be monitored by using the :ref:`ignore <reference_ossec_syscheck_ignore>` option:
 
 .. code-block:: xml
 
@@ -264,7 +264,7 @@ Similar functionality, but for the Windows registries can be achieved by using t
 Configuring ignoring files via rules
 ------------------------------------
 
-An alternative method to ignore a specific files scanned by syscheck is by using rules and setting the rule level to 0. By doing that the alert will be silenced:
+An alternative method to ignore specific files scanned by syscheck is by using rules and setting the rule level to 0. By doing that the alert will be silenced:
 
 .. code-block:: xml
 
@@ -377,7 +377,7 @@ Syscheck can be configured to store the database in memory instead by changing v
     <database>memory</database>
   </syscheck>
 
-The main advantage of using in memory database is the performance as reading and writing data is faster than data stored on disk. The corresponding disadvantage is that the memory must be sufficient to store the data.
+The main advantage of using in memory database is the performance as reading and writing operations are faster than performing them on disk. The corresponding disadvantage is that the memory must be sufficient to store the data.
 
 .. _how_to_fim_synchronization:
 
@@ -401,4 +401,4 @@ Configuring synchronization
     </synchronization>
   </syscheck>
 
-If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, the synchronization section will not be present in the ``ossec.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.  
+If the Wazuh agent is upgraded to the v3.12 and keeps its old configuration, the synchronization section will not be present in the ``ossec.conf`` file but the Wazuh agent will still use the default synchronization settings as shown above.
