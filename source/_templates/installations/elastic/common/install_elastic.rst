@@ -34,13 +34,7 @@
 
     .. group-tab:: Yum
 
-        #. Create the repository file:
-
-            .. code-block:: console
-
-                # curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo  
-
-        #. Install the latest version of Open Distro for Elasticsearch: 
+        #. Install Elasticsearch: 
 
             .. code-block:: console
 

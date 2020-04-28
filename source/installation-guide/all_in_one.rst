@@ -245,28 +245,6 @@ Kibana installation and configuration
     The default user and password to access Kibana is ``admin``.
 
 
-Disabling repositories
-----------------------
-
-.. include:: ../_templates/installations/elastic/common/disabling_repositories_explanation.rst
-
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/wazuh/deb/disabling_repositories.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../_templates/installations/wazuh/yum/disabling_repositories.rst
-
-
 
 Uninstall
 ---------
