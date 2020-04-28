@@ -19,6 +19,7 @@ FAQ
 #. `How can I migrate my old DB information into a new SQLite database?`_
 #. `Can I hot-swap monitored directories?`_
 #. `How to tune audit to deal with a huge amount of who-data events at the same time.`_
+#. `How to create rules for FIM dynamic fields.`_
 
 How often does syscheck run?
 --------------------------------
@@ -117,3 +118,18 @@ On the Wazuh side, the rt_delay variable from the internal FIM configuration can
   /var/ossec/etc/internal_options.conf -> rt_delay = [Numerical value]
 
 It sets a delay between real-time alerts in milliseconds. Decrease its value to process who-data events faster.
+
+How to create rules for FIM dynamic fields.
+-------------------------------------------
+
+To create rules with the FIM dynamic fields, something like this example needs to be added to the ``/var/ossec/etc/rules/local_rules.xml`` file in the Wazuh manager:
+
+.. code-block:: xml
+  <rule id="100002" level="5">
+    <if_sid>550, 553, 554</if_sid>
+    <field name="mode">whodata</field>
+    <description>Alert description</description>
+  </rule>
+
+After adding this to the local rules, restart Wazuh and alerts will start to appear following the new rules.
+
