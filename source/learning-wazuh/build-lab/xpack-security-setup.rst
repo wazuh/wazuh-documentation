@@ -272,7 +272,7 @@ Note that you may use the "elastic" user and the password you configured for it 
 Log in to Kibana to verify it is working
 ------------------------------------------------
 
-1. Now use your local web browser to surf to https://SERVER_IP where SERVER_IP
+1. Now use your local web browser to surf to ``https://SERVER_IP`` where SERVER_IP
    is the Elastic IP assigned to your Elastic Server instance.  Bypass the
    security warnings caused by the fact that we are using a self-signed
    certificate.  You should then be prompted to authenticate with the
