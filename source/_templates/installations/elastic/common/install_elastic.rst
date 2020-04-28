@@ -4,37 +4,23 @@
 
     .. group-tab:: APT
 
-        #. Download and add the signing keys for the repositories:
-
-            .. code-block:: console
-
-                # wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | apt-key add -
-
-        #. Add the repositories:
-
-            .. code-block:: console
-
-                # echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | tee -a   /etc/apt/sources.list.d/opendistroforelasticsearch.list
-
         #. Install Elasticsearch OSS:
 
             .. code-block:: console
 
-                # wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.6.1-amd64.deb
-                # dpkg -i elasticsearch-oss-7.6.1-amd64.deb
+                # apt-get install elasticsearch-oss
 
         #. Install the latest version of Open Distro for Elasticsearch:
 
             .. code-block:: console
 
-                # apt-get update
                 # apt install opendistroforelasticsearch
 
 
 
     .. group-tab:: Yum
 
-        #. Install Elasticsearch: 
+        Install Elasticsearch: 
 
             .. code-block:: console
 

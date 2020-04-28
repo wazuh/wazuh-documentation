@@ -4,13 +4,13 @@
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+      # curl -s https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 #. Add the repository:
 
     .. code-block:: console
 
-      # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # echo "deb https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh_trash.list
 
 #. Update the package information:
 

@@ -2,7 +2,6 @@
 
 .. code-block:: console
 
-    # wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-oss-7.6.1-amd64.deb
-    # dpkg -i filebeat-oss-7.6.1-amd64.deb 
+    # apt-get install filebeat
 
 .. End of include file
