@@ -17,7 +17,7 @@ Preapring the installation
 
 Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
 
-  .. include:: ../_templates/installations/elastic/common/before_installation.rst
+.. include:: ../_templates/installations/elastic/common/before_installation.rst
 
 
 .. _all_in_one_wazuh:
@@ -50,8 +50,6 @@ Adding the Wazuh repository
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Install the Wazuh manager package:
 
 .. tabs::
 
@@ -93,11 +91,6 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/wazuh/zypp/install_wazuh_api.rst
-
 
 .. note::
   It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password amongst other useful API security information.        
@@ -107,26 +100,24 @@ Elasticsearch installation
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-  Install the Elasticsearch package:
-
-    .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
+.. include:: ../_templates/installations/elastic/common/install_elastic.rst    
 
 
 Configure Elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
+.. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
 
 Enable and start the Elasticsearch service:
 
-    .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
+.. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 Execute the following command to ensure that the installation was made properly: 
 
-  .. code-block:: console
+.. code-block:: console
 
-    # curl -XGET https://localhost:9200 -u admin:admin -k
+  # curl -XGET https://localhost:9200 -u admin:admin -k
 
 
 .. _wazuh_server_packages_filebeat:
@@ -135,9 +126,6 @@ Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
-
-Filebeat installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Install the Filebeat package:
 
@@ -198,20 +186,19 @@ Kibana installation and configuration
 
 #. Install the Kibana package:
 
-    .. tabs::
+  .. tabs::
 
-        .. group-tab:: APT
-
-
-            .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
+      .. group-tab:: APT
 
 
+          .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
 
-        .. group-tab:: Yum
 
 
-            .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
+      .. group-tab:: Yum
 
+
+          .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
 
 #. Download the Kibana configuration file:
 
