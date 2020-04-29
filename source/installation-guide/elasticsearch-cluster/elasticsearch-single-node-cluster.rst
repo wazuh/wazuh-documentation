@@ -25,12 +25,35 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
+
+Adding the Wazuh repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .. tabs::
+
+
+    .. group-tab:: APT
+
+
+      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
+
+
+
+    .. group-tab:: Yum
+
+
+      .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+
+
+
+
+
 Elasticsearch installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Install the Elasticsearch package:
 
-    .. include:: ../_templates/installations/elastic/common/install_elastic.rst    
+    .. include:: ../../_templates/installations/elastic/common/install_elastic.rst  
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,34 +74,6 @@ Certificates creation and deployment
 #. Generate credentials for all the Elastic Stack pre-built roles and users:
 
     .. include:: ../../_templates/installations/elastic/common/generate_elastic_credentials.rst
-
-Disabling repositories
-----------------------
-
-.. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
-
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/elastic/deb/disabling_repositories.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/elastic/yum/disabling_repositories.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/disabling_repositories.rst
 
 
 Next steps

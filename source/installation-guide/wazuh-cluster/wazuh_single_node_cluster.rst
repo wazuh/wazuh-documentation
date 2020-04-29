@@ -20,34 +20,29 @@ The Wazuh server collects and analyzes data from deployed agents. It runs the Wa
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+  .. tabs::
 
 
-  .. group-tab:: APT
+    .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
-  .. group-tab:: ZYpp
+    .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
+      .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+
+
 
 
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package:
+Install the Wazuh manager package:
 
 .. tabs::
 
@@ -66,10 +61,6 @@ Installing the Wazuh manager
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 Installing the Wazuh API
@@ -95,11 +86,6 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_api.rst
-
 
 .. note::
   It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
@@ -110,31 +96,6 @@ Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
-
-Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/elastic/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/elastic/yum/add_repository.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/add_repository.rst
 
 
 Filebeat installation and configuration
@@ -160,10 +121,6 @@ Filebeat installation and configuration
 
 
 
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
@@ -174,9 +131,8 @@ Filebeat installation and configuration
 
 #. Download the alerts template for Elasticsearch:
 
-    .. code-block:: console
+    .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.11.4/extensions/elasticsearch/7.x/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -198,44 +154,11 @@ Filebeat installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
 
-#. Load the Filebeat template:
-
-    .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
-
 
 Next steps
 ----------
 
 The next step consists of installing Kibana. The guide continues  :ref:`here<kibana>`.
-
-
-Disabling repositories
-----------------------
-
-.. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
-
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/disabling_repositories.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/wazuh/yum/disabling_repositories.rst
-
-
-
-  .. group-tab:: ZYpp
-
-    .. include:: ../../_templates/installations/wazuh/zypp/disabling_repositories.rst
-
 
 
 Uninstall

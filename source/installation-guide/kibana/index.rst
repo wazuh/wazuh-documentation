@@ -12,30 +12,25 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
-Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adding the Wazuh repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
-
-
-  .. group-tab:: APT
+  .. tabs::
 
 
-    .. include:: ../../_templates/installations/elastic/deb/add_repository.rst
+    .. group-tab:: APT
 
 
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/elastic/yum/add_repository.rst
+      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
-  .. group-tab:: ZYpp
+    .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/elastic/zypp/add_repository.rst
+      .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+
+
 
 
 
@@ -57,13 +52,6 @@ Kibana installation and configuration
 
 
             .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
-
-
-
-        .. group-tab:: ZYpp
-
-
-            .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
 #. The next step, involving the certificate placement, may vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
