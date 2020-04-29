@@ -5,7 +5,7 @@
 Configuration file
 ==================
 
-The Wazuh Kibana plugin configuration file is located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``. Most of the options described below can also be changed through the Wazuh Kibana plugin :ref:`configuration <kibana_settings_configuration>` section.
+The Wazuh Kibana plugin configuration file is located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``. Most of the options described below can be also changed through the Wazuh Kibana plugin :ref:`configuration <kibana_settings_configuration>` section.
 
 The configuration file reference is organized by sections:
 
@@ -431,7 +431,7 @@ Defining the Wazuh API entries
 
 The following configuration is the default structure to define an Wazuh API entry:
 
-.. code-block:: plain
+.. code-block:: yaml
 
   hosts:
     - <id>:

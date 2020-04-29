@@ -238,7 +238,7 @@ Wazuh Kibana plugin provides information about the Wazuh managers' and the Wazuh
   :align: center
   :width: 100%
 
-Most of the elements in the table are clickable, allowing a user to explore each section of the configuration in detail. For example, the current Wazuh manager's cluster configuration can be displayed by selecting the desired node and then clicking on the ``Cluster`` section:
+Most of the elements in the table are clickable, allowing the user to explore each section of the configuration in detail. For example, the current Wazuh manager's cluster configuration can be displayed by selecting the desired node and then clicking on the ``Cluster`` section:
 
 .. thumbnail:: ../../../images/kibana-app/features/query-configuration/cluster.png
   :align: center

@@ -10,7 +10,7 @@ After the installation of the Wazuh Kibana plugin, some new indices will be gene
 The ``.kibana`` index
 ---------------------
 
-This index is mainly used by Kibana to store saved searches, visualizations, and dashboards. Kibana creates a new index if the index doesn't already exist.
+This index is mainly used by Kibana to store saved searches, visualizations, and dashboards. Kibana creates a new index if the index does not already exist.
 
 The ``wazuh-alerts-3.x-`` indices
 ---------------------------------

@@ -5,7 +5,7 @@
 Troubleshooting
 ===============
 
-This section guides how to solve the most common problems with the Wazuh Kibana plugin and, in case of not finding the solution here, how to reach us providing information regarding the issue, allowing us to assist further.
+This section guides about how to solve the most common problems with the Wazuh Kibana plugin and, in case of not finding the solution here, how to reach us providing information regarding the issue, allowing us to assist further.
 
 "Plugin installation was unsuccessful due to error 'Plugin wazuh [<version>] is incompatible with Kibana [<version>]'" when installing the plugin
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,4 +138,4 @@ All the technologies used by Wazuh have their own logs files, which can provide 
 
       # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
 
-You can also open a new thread in Wazuh `Google mailing list <https://groups.google.com/group/wazuh>`_, Wazuh `Slack channel <//https://wazuh.com/community/join-us-on-slack/>`_, or a new issue in Wazuh `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_, providing as much as possible information about the issue. We are always there to help.
+Our community channels are always available to open a new thread in Wazuh `Google mailing list <https://groups.google.com/group/wazuh>`_, Wazuh `Slack channel <//https://wazuh.com/community/join-us-on-slack/>`_, or a new issue in Wazuh `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_, providing as much information as possible about the issue. We are always there to help.

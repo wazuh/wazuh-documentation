@@ -162,7 +162,7 @@ Breaking changes
 
 Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** in existing installations, although new installations **won't be affected** by this error.
 
-To learn more about how to fix this, check out the Kibana app’s `toubleshooting guide <https://documentation.wazuh.com/3.7/user-manual/kibana-app/troubleshooting.html#failed-to-parse-date-field-with-format-dateoptionaltime>`_.
+To learn more about how to fix this, check out the Kibana app’s `troubleshooting guide <https://documentation.wazuh.com/3.7/user-manual/kibana-app/troubleshooting.html#failed-to-parse-date-field-with-format-dateoptionaltime>`_.
 
 New features for Splunk plugin
 ------------------------------

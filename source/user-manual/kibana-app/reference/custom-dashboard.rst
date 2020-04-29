@@ -49,7 +49,7 @@ The chart can be configured by organizing the data using ``Metrics`` and ``Bucke
 
 ``Buckets`` are aggregations of data that are sorted according to the search criteria.
 
-More information can be found on the `Aggregations <https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html>`_ section of the Elasticsearch documentation. 
+More information can be found on the `Aggregations <https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html>`_ section of the Elasticsearch documentation.
 
 In this example, ``Metrics`` (Y-Axis) will remain as default ``Count`` aggregation, and ``Buckets`` (X-Axis) will be modified to sort the data according to the level of the rules that have been triggered.
 
@@ -73,7 +73,7 @@ Click on the ``Apply changes`` button to generate the visualization:
 .. image:: ../../../images/kibana-app/custom-dashboard/bucket-apply-changes.png
    :align: center
 
-The example custom visualization looks as follows:
+The custom visualization example looks as follows:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/horizontal-example-chart.png
    :align: center
