@@ -115,7 +115,7 @@ None of the above solutions are fixing the problem
 
 All the technologies used by Wazuh have their own logs files, which can provide error and warning messages.
 
-1. Elastic Stack log files:
+#. Elastic Stack log files:
 
     .. code-block:: console
 
@@ -126,13 +126,13 @@ All the technologies used by Wazuh have their own logs files, which can provide 
       By default, Elastic Stack uses the ``/var/log`` folder to store logs. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
       Kibana, by default, does not store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
-2. The Wazuh Kibana plugin log file:
+#. The Wazuh Kibana plugin log file:
 
     .. code-block:: console
 
       # cat /usr/share/kibana/optimize/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
 
-3. The Wazuh manager log file:
+#. The Wazuh manager log file:
 
     .. code-block:: console
 
