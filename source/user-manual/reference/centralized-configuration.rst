@@ -240,7 +240,7 @@ Precedence
 It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used.
 When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
-For example:
+In the example below, the final configuration will enable the ``Security Configuration Assessment`` module. In addition, it will add the ``cis_debian_linux_rcl.yml`` to the list of scanned policies as a new entry.
 
 The configuration in the ``ossec.conf`` file:
 
@@ -286,9 +286,7 @@ The result after merging:
     </policies>
   </sca>
 
-The final configuration will enable the Security Configuration Assessment module. In addition, it will add the ``cis_debian_linux_rcl.yml`` to the list of scanned policies as a new entry.
-
-In the example below, the value of the ``<query>`` tag cannot be merged, so its value is directly ``overridden``:
+In the example below, the value of the ``<query>`` tag cannot be merged, so its value is directly ``overridden``.
 
 The configuration in the ``ossec.conf`` file:
 
