@@ -186,19 +186,20 @@ Kibana installation and configuration
 
 #. Install the Kibana package:
 
-  .. tabs::
+    .. tabs::
 
       .. group-tab:: APT
 
 
-          .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
+        .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
 
 
 
       .. group-tab:: Yum
 
 
-          .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
+        .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
+
 
 #. Download the Kibana configuration file:
 
