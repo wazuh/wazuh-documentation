@@ -5,7 +5,7 @@
 3.12.3 Release notes
 ====================
 
-This section lists the changes in version 3.12.2. More details about these changes are provided in each component changelog:
+This section lists the changes in version 3.12.3. More details about these changes are provided in each component changelog:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.12.3/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.12.3-7.6.2/CHANGELOG.md>`_
