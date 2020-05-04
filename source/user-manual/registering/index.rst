@@ -29,78 +29,95 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
 .. tabs::
 
- .. group-tab:: Linux/Unix host
 
-   Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
-
-   1. To register the Wazuh agent, run the ``agent-auth`` utility, using the Wazuh manager’s IP address:
-
-    .. code-block:: console
-
-     # /var/ossec/bin/agent-auth -m <manager_IP>
-
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
-
-   2. To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
-
-    .. include:: ../../_templates/registrations/common/client_server_section.rst
-
-   3. Restart the Wazuh agent:
-
-    .. include:: ../../_templates/common/linux/restart_agent.rst
+  .. group-tab:: Linux/Unix host
 
 
-   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
+    Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
+
+
+    #. To register the Wazuh agent, run the ``agent-auth`` utility, using the Wazuh manager’s IP address:
+
+         .. code-block:: console
+
+           # /var/ossec/bin/agent-auth -m <manager_IP>
+
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
+
+
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
+
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+    #. Restart the Wazuh agent:
+
+      .. include:: ../../_templates/common/linux/restart_agent.rst
+
+
+    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
 
 
- .. group-tab:: Windows host
+  .. group-tab:: Windows host
 
-   Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
+
+    Open a Powershell or CMD session in the Wazuh agent's host as an ``Administrator``.
 
     .. include:: ../../_templates/windows/installation_directory.rst
 
-   1. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
 
-    .. code-block:: console
+    #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
 
-     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
+         .. code-block:: console
 
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
+           # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
 
-   2. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
-
-    .. include:: ../../_templates/registrations/common/client_server_section.rst
-
-   3. Restart the Wazuh agent:
-
-    .. include:: ../../_templates/common/windows/restart_agent.rst
-
-   The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
 
- .. group-tab:: MacOS X host
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-  Open a terminal in the MacOS X Wazuh agent's host as a ``root`` user.
 
-  1. To register the Wazuh agent, run the ``agent-auth`` utility, using the Wazuh manager’s IP address:
+    #. Restart the Wazuh agent:
 
-    .. code-block:: console
+      .. include:: ../../_templates/common/windows/restart_agent.rst
 
-     # /Library/Ossec/bin/agent-auth -m <manager_IP>
 
-    .. include:: ../../_templates/registrations/common/set_agent_name.rst
+    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 
-  2. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
 
-    .. include:: ../../_templates/registrations/common/client_server_section.rst
 
-  3. Restart the Wazuh agent:
+  .. group-tab:: MacOS X host
 
-    .. include:: ../../_templates/common/macosx/restart_agent.rst
 
-  The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
+    Open a terminal in the MacOS X Wazuh agent's host as a ``root`` user.
+
+
+    #. To register the Wazuh agent, run the ``agent-auth`` utility, using the Wazuh manager’s IP address:
+
+
+         .. code-block:: console
+
+           # /Library/Ossec/bin/agent-auth -m <manager_IP>
+
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
+
+
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+    #. Restart the Wazuh agent:
+
+         .. include:: ../../_templates/common/macosx/restart_agent.rst
+
+
+    The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
+
 
 There are also other easy registration methods. The choice depends on the particular use case and the user's preferences:
 

@@ -42,45 +42,49 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
    Follow these steps in the Wazuh manager's host:
 
-   1. Create the configuration file ``req.conf``, replacing ``<manager_IP>`` with the hostname or the IP address of the Wazuh server where the Wazuh agents are going to be registered. The configuration file could be as follows:
 
-       .. code-block:: console
+   #. Create the configuration file ``req.conf``, replacing ``<manager_IP>`` with the hostname or the IP address of the Wazuh server where the Wazuh agents are going to be registered. The configuration file could be as follows:
 
-        [req]
-        distinguished_name = req_distinguished_name
-        req_extensions = req_ext
-        prompt = no
-        [req_distinguished_name]
-        C = US
-        CN = <manager_IP>
-        [req_ext]
-        subjectAltName = @alt_names
-        [alt_names]
-        DNS.1 = wazuh
-        DNS.2 = wazuh.com
+         .. code-block:: console
 
-       .. note:: The ``subjectAltName`` extension is optional but necessary to allow the registration of Wazuh agents with a SAN certificate. In this case, the Wazuh server DNS are ``wazuh`` and ``wazuh.com``.
+          [req]
+          distinguished_name = req_distinguished_name
+          req_extensions = req_ext
+          prompt = no
+          [req_distinguished_name]
+          C = US
+          CN = <manager_IP>
+          [req_ext]
+          subjectAltName = @alt_names
+          [alt_names]
+          DNS.1 = wazuh
+          DNS.2 = wazuh.com
 
-   2. Issue and sign the certificate for the Wazuh manager:
+         .. note:: The ``subjectAltName`` extension is optional but necessary to allow the registration of Wazuh agents with a SAN certificate. In this case, the Wazuh server DNS are ``wazuh`` and ``wazuh.com``.
 
-       .. code-block:: console
 
-        # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
-        # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
+   #. Issue and sign the certificate for the Wazuh manager:
 
-       .. note::
+         .. code-block:: console
 
-         The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This allows the registration of the Wazuh agents with a SAN certificate.
+          # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
+          # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
 
-   3. Copy the certificate and the key to the ``/var/ossec/etc`` folder:
+         .. note::
 
-       .. code-block:: console
+           The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This allows the registration of the Wazuh agents with a SAN certificate.
 
-        # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
-   4. Restart the Wazuh manager:
+   #. Copy the certificate and the key to the ``/var/ossec/etc`` folder:
 
-       .. include:: ../../_templates/common/restart_manager.rst
+         .. code-block:: console
+
+          # cp sslmanager.cert sslmanager.key /var/ossec/etc
+
+
+   #. Restart the Wazuh manager:
+
+     .. include:: ../../_templates/common/restart_manager.rst
 
    **The Wazuh agent registration using CA and enabling the communication with the Wazuh manager**
 
@@ -94,29 +98,33 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
-     1. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``/var/ossec/etc`` folder:
 
-       .. code-block:: console
+     #. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``/var/ossec/etc`` folder:
 
-        # cp rootCA.pem /var/ossec/etc
+         .. code-block:: console
 
-     2. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
+           # cp rootCA.pem /var/ossec/etc
 
-      .. code-block:: console
 
-        # /var/ossec/bin/agent-auth -m <manager_IP> -v /var/ossec/etc/rootCA.pem
+     #. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
 
-      .. include:: ../../_templates/registrations/common/set_agent_name.rst
+         .. code-block:: console
 
-      .. note::
+           # /var/ossec/bin/agent-auth -m <manager_IP> -v /var/ossec/etc/rootCA.pem
 
-        Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-     3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+         .. note::
 
-      .. include:: ../../_templates/registrations/common/client_server_section.rst
+           Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
 
-     4. Restart the Wazuh agent:
+
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+     #. Restart the Wazuh agent:
 
       .. include:: ../../_templates/common/linux/restart_agent.rst
 
@@ -130,29 +138,33 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      .. include:: ../../_templates/windows/installation_directory.rst
 
-     1. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``C:\Program Files (x86)\ossec-agent`` folder:
 
-       .. code-block:: console
+     #. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``C:\Program Files (x86)\ossec-agent`` folder:
 
-         # cp rootCA.pem C:\Program Files (x86)\ossec-agent
+         .. code-block:: console
 
-     2. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
+           # cp rootCA.pem C:\Program Files (x86)\ossec-agent
 
-        .. code-block:: console
 
-         # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -v C:\Program Files (x86)\ossec-agent\rootCA.pem
+     #. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
 
-        .. include:: ../../_templates/registrations/common/set_agent_name.rst
+         .. code-block:: console
 
-        .. note::
+           # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
-         Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-     3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+         .. note::
 
-      .. include:: ../../_templates/registrations/common/client_server_section.rst
+           Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
 
-     4. Restart the Wazuh agent:
+
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+     #. Restart the Wazuh agent:
 
       .. include:: ../../_templates/common/windows/restart_agent.rst
 
@@ -164,29 +176,33 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      Open a terminal in the MacOS X Wazuh agent's host as a ``root`` user.
 
-     1. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``/Library/Ossec/etc`` folder:
 
-       .. code-block:: console
+     #. Copy the CA (``.pem`` file) previously created on the Wazuh manager to the ``/Library/Ossec/etc`` folder:
 
-         # cp rootCA.pem /Library/Ossec/etc
+         .. code-block:: console
 
-     2. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
+           # cp rootCA.pem /Library/Ossec/etc
 
-        .. code-block:: console
 
-         # /Library/Ossec/bin/agent-auth -m <manager_IP> -v /Library/Ossec/etc/rootCA.pem
+     #. To register the Wazuh agent, run the ``agent-auth`` utility providing the Wazuh manager’s IP address and location of the CA:
 
-        .. include:: ../../_templates/registrations/common/set_agent_name.rst
+         .. code-block:: console
 
-        .. note::
+           # /Library/Ossec/bin/agent-auth -m <manager_IP> -v /Library/Ossec/etc/rootCA.pem
 
-         Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-     3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+         .. note::
 
-      .. include:: ../../_templates/registrations/common/client_server_section.rst
+           Note that this method must include the ``-v option`` that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the Wazuh manager.
 
-     4. Restart the Wazuh agent:
+
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+     #. Restart the Wazuh agent:
 
       .. code-block:: console
 
@@ -214,30 +230,34 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      This example shows the creation of the certificate for the Wazuh agents without specifying their hostname or IP address. This will allow to share the same certificate among all selected Wazuh agents. The signed certificate will verify the Wazuh agent. Registration service for Wazuh agents where the certificate is not present will be refused.
 
-     1. Issue and sign the certificate for the Wazuh agent by executing the following commands in the location of CA files. Remember not to enter the ``common name`` field:
 
-       .. code-block:: console
+     #. Issue and sign the certificate for the Wazuh agent by executing the following commands in the location of CA files. Remember not to enter the ``common name`` field:
 
-        # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -batch
-        # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+         .. code-block:: console
 
-     2. Copy the CA (``.pem`` file) to the ``/var/ossec/etc`` folder:
+          # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -batch
+          # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-       .. code-block:: console
 
-        # cp rootCA.pem /var/ossec/etc
+     #. Copy the CA (``.pem`` file) to the ``/var/ossec/etc`` folder:
 
-     3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file.
+         .. code-block:: console
 
-       .. code-block:: xml
+          # cp rootCA.pem /var/ossec/etc
 
-        <auth>
-          ...
-          <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
-          ...
-        </client>
 
-     4. Restart the Wazuh manager:
+     #. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file.
+
+         .. code-block:: xml
+
+          <auth>
+            ...
+            <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+            ...
+          </client>
+
+
+     #. Restart the Wazuh manager:
 
        .. include:: ../../_templates/common/restart_manager.rst
 
@@ -249,31 +269,34 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      This example shows the creation of the certificate for the Wazuh agent binding its IP address as seen by the Wazuh manager.
 
-     1. Issue and sign the certificate for the Wazuh agent by executing the following commands in the location of ``CA`` files. In the ``common name`` field replace ``<agent_IP>`` with the Wazuh agent's hostname or IP address.
 
-       .. code-block:: console
+     #. Issue and sign the certificate for the Wazuh agent by executing the following commands in the location of ``CA`` files. In the ``common name`` field replace ``<agent_IP>`` with the Wazuh agent's hostname or IP address.
 
-        # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
-        # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+         .. code-block:: console
 
-     2. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder:
+          # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
+          # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-       .. code-block:: console
 
-        # cp rootCA.pem /var/ossec/etc
+     #. Copy the CA (**.pem file**) to the ``/var/ossec/etc`` folder:
 
-     3. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file. Set the field ``<ssl_verify_host>`` to ``yes``:
+         .. code-block:: console
 
-       .. code-block:: xml
+          # cp rootCA.pem /var/ossec/etc
 
-        <auth>
-          ...
-          <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
-          <ssl_verify_host>yes</ssl_verify_host>
-          ...
-        </client>
 
-     4. Restart the Wazuh manager:
+     #. Modify the ``/var/ossec/etc/ossec.conf`` file to enable the host verification. Uncomment the ``<auth><ssl_agent_ca>`` section and add the path to the ``CA`` file. Set the field ``<ssl_verify_host>`` to ``yes``:
+
+         .. code-block:: xml
+
+          <auth>
+            ...
+            <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+            <ssl_verify_host>yes</ssl_verify_host>
+            ...
+          </client>
+
+     #. Restart the Wazuh manager:
 
        .. include:: ../../_templates/common/restart_manager.rst
 
@@ -291,25 +314,29 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
      Open a terminal in the Linux/Unix Wazuh agent's host as a ``root`` user.
 
-     1. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``/var/ossec/etc`` folder:
 
-       .. code-block:: console
+     #. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``/var/ossec/etc`` folder:
 
-          # cp sslagent.cert sslagent.key /var/ossec/etc
+         .. code-block:: console
 
-     2. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
+            # cp sslagent.cert sslagent.key /var/ossec/etc
 
-       .. code-block:: console
 
-          # /var/ossec/bin/agent-auth -m <manager_IP> -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+     #. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
 
-       .. include:: ../../_templates/registrations/common/set_agent_name.rst
+         .. code-block:: console
 
-     3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+            # /var/ossec/bin/agent-auth -m <manager_IP> -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
-       .. include:: ../../_templates/registrations/common/client_server_section.rst
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-     4. Restart the Wazuh agent:
+
+     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/var/ossec/etc/ossec.conf``.
+
+         .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+     #. Restart the Wazuh agent:
 
        .. include:: ../../_templates/common/linux/restart_agent.rst
 
@@ -323,25 +350,29 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
       .. include:: ../../_templates/windows/installation_directory.rst
 
-      1. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``C:\Program Files (x86)\ossec-agent`` folder:
 
-       .. code-block:: console
+      #. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``C:\Program Files (x86)\ossec-agent`` folder:
 
-        # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+         .. code-block:: console
 
-      2. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
+           # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
 
-       .. code-block:: console
 
-       	# C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+      #. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
 
-       .. include:: ../../_templates/registrations/common/set_agent_name.rst
+         .. code-block:: console
 
-      3. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+         	 # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP> -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
-        .. include:: ../../_templates/registrations/common/client_server_section.rst
+         .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-      4. Restart the Wazuh agent:
+
+      #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+
+           .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+      #. Restart the Wazuh agent:
 
         .. include:: ../../_templates/common/windows/restart_agent.rst
 
@@ -351,25 +382,29 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
        Open a terminal in the MacOS X Wazuh agent's host as a ``root`` user.
 
-       1. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``/Library/Ossec/etc`` folder:
 
-          .. code-block:: console
+       #. Copy the certificate (``.cert`` file) and its key (``.key`` file), previously created on the Wazuh manager, to the ``/Library/Ossec/etc`` folder:
 
-             # cp sslagent.cert sslagent.key /Library/Ossec/etc
+            .. code-block:: console
 
-       2. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
+               # cp sslagent.cert sslagent.key /Library/Ossec/etc
 
-          .. code-block:: console
 
-             # /Library/Ossec/bin/agent-auth -m <manager_IP> -x /Library/Ossec/etc/sslagent.cert -k /Library/Ossec/etc/sslagent.key
+       #. To register the Wazuh agent, run the ``agent-auth`` utility which automatically adds the Wazuh agent to the Wazuh manager:
 
-          .. include:: ../../_templates/registrations/common/set_agent_name.rst
+            .. code-block:: console
 
-       3. To enable the communication with the Wauh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+               # /Library/Ossec/bin/agent-auth -m <manager_IP> -x /Library/Ossec/etc/sslagent.cert -k /Library/Ossec/etc/sslagent.key
 
-          .. include:: ../../_templates/registrations/common/client_server_section.rst
+            .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
-       4. Restart the Wazuh agent:
+
+       #. To enable the communication with the Wauh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+
+            .. include:: ../../_templates/registrations/common/client_server_section.rst
+
+
+       #. Restart the Wazuh agent:
 
           .. include:: ../../_templates/common/macosx/restart_agent.rst
 
