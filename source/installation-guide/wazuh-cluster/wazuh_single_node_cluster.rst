@@ -146,7 +146,7 @@ Filebeat installation and configuration
 
     To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
-#. Configure Filebeat certificate:
+#. Configure Filebeat certificates:
 
     .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
 
