@@ -1060,6 +1060,8 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 not_same_agent
 ^^^^^^^^^^^^^^
 
+.. deprecated:: 3.13.0
+
 Specifies that the decoded agent must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
