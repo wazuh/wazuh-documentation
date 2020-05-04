@@ -60,6 +60,8 @@ Elasticsearch configuration
 
 #. .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
+.. _certs_creation:
+
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -70,10 +72,6 @@ Certificates creation and deployment
 #. Enable and start the Elasticsearch service:
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
-
-#. Generate credentials for all the Elastic Stack pre-built roles and users:
-
-    .. include:: ../../_templates/installations/elastic/common/generate_elastic_credentials.rst
 
 
 Next steps
