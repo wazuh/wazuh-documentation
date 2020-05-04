@@ -5,6 +5,8 @@
 Configuration
 =============
 
+After the installation, the Wazuh manager and the Wazuh agent come with the :ref:`default syscheck configuration <reference_ossec_syscheck_default_configuration>`, which should be reviewed and adjusted to the particular environment. This section presents different configuration examples, helping to learn how to use syscheck in different use cases:
+
 #. `Configuring syscheck - basic usage`_
 #. `Configuring scan time`_
 #. `Configuring real-time monitoring`_
@@ -45,7 +47,7 @@ Once, the directory path is removed from the syscheck configuration and the Wazu
 Configuring scan time
 ---------------------
 
-By default, syscheck scans when the Wazuh starts, however, this behavior can be changed with the :ref:`scan_on_start <reference_ossec_syscheck_scan_start>` option.
+By default, syscheck scans when the Wazuh starts, however, this behavior can be changed with the :ref:`scan_on_start <reference_ossec_syscheck_scan_on_start>` option.
 
 For the schedluled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
 

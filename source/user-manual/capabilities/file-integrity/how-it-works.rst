@@ -3,7 +3,7 @@
 How it works
 ============
 
-.. versionadded:: 3.12.0
+Since v3.12, Wazuh uses the new FIM module. To learn about the functionality of the FIM used in the previous Wazuh releases, please refer to the corresponding version of the documentation. 
 
 .. thumbnail:: ../../../images/manual/fim/fim-flow.png
   :title: File integrity monitoring
