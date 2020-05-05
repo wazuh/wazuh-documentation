@@ -12,6 +12,10 @@ This document will go through the installation of the Wazuh server components in
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
+Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
+
+  .. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
+
 Installing Wazuh server
 -----------------------
 
