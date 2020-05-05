@@ -6,9 +6,9 @@ In section **Installing Elasticsearch**, the ``certs.zip`` file was created. The
 
     # mkdir /etc/filebeat/certs
     # mv ~/certs.zip /etc/filebeat/certs/
-    # cd /etc/kibana/certs/
+    # cd /etc/filebeat/certs/
     # unzip certs.zip
-    # mv /etc/elasticsearch/elasticsearch.pem /etc/elasticsearch/filebeat.pem
-    # mv /etc/elasticsearch/elasticsearch-key.pem /etc/elasticsearch/filebeat-key.pem 
+    # mv /etc/filebeat/certs/elasticsearch.pem /etc/filebeat/certs/filebeat.pem
+    # mv /etc/filebeat/certs/elasticsearch-key.pem /etc/filebeat/certs/filebeat-key.pem 
 
 .. End of copy_certificates_filebeat.rst

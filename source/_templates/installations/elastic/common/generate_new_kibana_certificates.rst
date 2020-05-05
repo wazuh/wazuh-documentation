@@ -8,7 +8,7 @@ In section **Installing Elasticsearch**, the ``certs.zip`` file was created. The
     # mv ~/certs.zip /etc/kibana/certs/
     # cd /etc/kibana/certs/
     # unzip certs.zip
-    # mv /etc/elasticsearch/elasticsearch.pem /etc/elasticsearch/kibana.pem
-    # mv /etc/elasticsearch/elasticsearch-key.pem /etc/elasticsearch/kibana-key.pem 
+    # mv /etc/kibana/certs/elasticsearch.pem /etc/kibana/certs/kibana.pem
+    # mv /etc/kibana/certs/elasticsearch-key.pem /etc/kibana/certs/kibana-key.pem 
 
 .. End of include file
