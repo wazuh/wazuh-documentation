@@ -5,7 +5,7 @@
 Configuration
 =============
 
-After the installation, the Wazuh manager and the Wazuh agent come with the :ref:`default syscheck configuration <reference_ossec_syscheck_default_configuration>`, which should be reviewed and adjusted to the particular environment. This section presents different configuration examples, helping to learn how to use syscheck in different use cases:
+After the installation, the Wazuh manager and the Wazuh agent have defined a :ref:`default syscheck configuration <reference_ossec_syscheck_default_configuration>`, which should be reviewed and adjusted to the particular environment. This section presents configuration examples, helping to learn how to use it in different use cases:
 
 #. `Configuring syscheck - basic usage`_
 #. `Configuring scan time`_
@@ -27,7 +27,7 @@ Configuring syscheck - basic usage
 ----------------------------------
 
 To configure syscheck, a list of files and directories must be identified. The ``check_all`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option allows checks of the file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
-By default, syscheck scans selected directories, whose list depends on the :ref:`default configuration <reference_ossec_syscheck_default_configuration>` for the host operating system.
+By default, syscheck scans selected directories, whose list depends on the :ref:`default configuration <reference_ossec_syscheck_default_configuration>` for the host's operating system.
 
 .. note::
 

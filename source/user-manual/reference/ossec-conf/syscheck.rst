@@ -91,7 +91,7 @@ Example:
 
 .. note::
 
-   This option only can be activate from the agent side, in its own ``ossec.conf``.
+   This option only can be activated from the agent side, on its own ``ossec.conf``.
 
 
 .. _reference_ossec_syscheck_auto_ignore:
