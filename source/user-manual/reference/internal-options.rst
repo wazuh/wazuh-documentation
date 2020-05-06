@@ -962,6 +962,8 @@ Remoted
 |                                   | Allowed value | Any integer between 1 and 50.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 
+.. _ossec_internal_syscheck:
+
 Syscheck
 --------
 

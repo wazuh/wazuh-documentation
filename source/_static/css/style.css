@@ -123,6 +123,11 @@ dt {
   padding-bottom: 10px;
 }
 
+.literal-block-wrapper.docutils.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -679,13 +684,25 @@ ul, ol {
 	padding-left: 1.7rem;
 }
 
-ul.simple dl dd {
+
+ul.simple li dl,
+ol.simple li dl {
+  margin-bottom: 0;
+}
+
+ul.simple dl dt,
+ol.simple dl dt {
+  font-weight: normal;
+}
+
+ul.simple dl dd,
+ol.simple dl dd {
+
   margin-bottom: 0;
 }
 
 ul.simple dl ul {
   list-style-type: circle;
-  margin-bottom: 0;
 }
 
 blockquote {
@@ -3556,7 +3573,7 @@ pre.literal-block,
 div[class*='highlight'] {
   border: 1px solid #e1e4e5;
   padding: 0px;
-  margin: 1px 0 24px 0
+  margin: 1px 0 24px 0;
 }
 
 div[class*='highlight'] {
@@ -3569,7 +3586,7 @@ pre.literal-block div[class*='highlight'],
 div[class*='highlight'] div[class*='highlight'] {
   border: none;
   background: none;
-  margin: 0
+  margin: 0;
 }
 
 .last div[class*='highlight'] {

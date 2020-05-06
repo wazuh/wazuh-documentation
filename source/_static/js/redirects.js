@@ -45,6 +45,7 @@ newUrls['3.12'] = [
   '/release-notes/release_3_12_0.html',
   '/release-notes/release_3_12_1.html',
   '/release-notes/release_3_12_2.html',
+  '/release-notes/release_3_12_3.html',
 ];
 
 /* *** RELEASE 3.11 ****/
