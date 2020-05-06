@@ -48,6 +48,13 @@ newUrls['3.12'] = [
   '/release-notes/release_3_12_3.html',
 ];
 
+/* Pages no longer available in 3.12 */
+
+removedUrls['3.12'] = [
+  '/user-manual/capabilities/file-integrity/fim-synchronization.html',
+  '/user-manual/capabilities/file-integrity/fim-faq.html',
+];
+
 /* *** RELEASE 3.11 ****/
 
 /* Redirections from 3.10 to 3.11  */
