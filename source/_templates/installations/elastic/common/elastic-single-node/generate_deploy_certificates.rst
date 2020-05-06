@@ -27,12 +27,12 @@
         x509_extensions = v3_req
         
         [req_distinguished_name]
-        C = ES
-        ST = GR
-        L = Granada
-        O = Wazuh
-        OU = Ops
-        CN = DNS_Name
+        C = <country_name>
+        ST = <state>
+        L = <location>
+        O = <organization>
+        OU = <organizational_unit>
+        CN = <common_name>
         
         [ v3_req ]
         authorityKeyIdentifier=keyid,issuer
@@ -41,10 +41,19 @@
         subjectAltName = @alt_names
         
         [alt_names]
-        IP.1 = LOCAL_IP
-        DNS.1 = LOCAL_DNS
+        IP.1 = <node_ip>
 
         EOF
+
+      The following values should be replaced by the desired ones:
+
+        #. ``<country_name>``: Country name (2 letter code).
+        #. ``state``: State or province name.
+        #. ``location``: Locality.
+        #. ``<organization>`` : Organization name.
+        #. ``<organizational_unit>``: Organizational unit name.        
+        #. ``<common_name>``: Common name
+        #. ``<node_ip>``: The IP of the elasticsearch node
 
     Generate the ``root-ca`` public and private keys:
 
@@ -54,11 +63,11 @@
 
       The following values should be replaced by the desired ones:
 
-        #. ``C``: Country name (2 letter code).
-        #. ``ST``: State or province name.
-        #. ``L``: Locality.
-        #. ``OU``: Organizational unit name.
-        #. ``O`` : Organization name.
+        #. ``<country_name>``: Country name (2 letter code).
+        #. ``state``: State or province name.
+        #. ``location``: Locality.
+        #. ``<organizational_unit>``: Organizational unit name.
+        #. ``<organization>`` : Organization name.
 
     Generate the ``csr`` and the server's node private key:
 
