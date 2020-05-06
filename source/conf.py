@@ -46,6 +46,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
+    'sphinx_tabs.tabs',
+
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -481,3 +483,4 @@ html_context = {
     "github_version": version,
     "production": production
 }
+sphinx_tabs_nowarn = True
