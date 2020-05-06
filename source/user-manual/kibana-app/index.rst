@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _kibana_app:
 
@@ -19,37 +19,25 @@ It is available in Kibana under the Wazuh logo icon situated on the left side me
 
 The Wazuh Kibana plugin top menu offers access to the following sections:
 
-.. _kibana_app_overview:
+#. :ref:`Overview <kibana_overwiew>`: provides access to the Wazuh security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance. The triggered alerts are organized in dashboards containing easy to analyze charts and tables.
 
-Overview
---------
+#. :ref:`Management <kibana_management>`: provides access to the administration of the :ref:`ruleset <kibana_ruleset>`, Wazuh cluster configuration and the Wazuh agents' groups. It also shows the Wazuh cluster's overview and status information, Wazuh managers' logs, and lists the user-generated reports.
 
-This section provides access to the Wazuh security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance. The triggered alerts are organized in dashboards containing easy to analyze charts and tables.
+#. :ref:`Agents <kibana_agents>`: shows the overall status of the Wazuh agents and lists them allowing access to the detailed information regarding each Wazuh agent.
 
-Management
-----------
+#. :ref:`Dev tools <kibana_dev_tools>`: provides access to the Wazuh console, an user interface to interact with the Wazuh API.
 
-This section provides access to the administration of the :ref:`ruleset <kibana_ruleset>`, Wazuh cluster configuration and the Wazuh agents' groups. It also shows the Wazuh cluster's overview and status information, Wazuh managers' logs, and lists the user-generated reports.
-
-Agents
-------
-
-This :ref:`section <kibana_agents>` shows the overall status of the Wazuh agents and lists them allowing access to the detailed information regarding each Wazuh agent.
-
-Dev tools
----------
-
-This section provides access to the :ref:`Wazuh console <kibana_dev_tools>`, an user interface to interact with the Wazuh API.
-
-Settings
---------
-
-The :ref:`settings <kibana_settings>` section is accessible through the gear icon, located on the right side of the top menu, and allows to configure and obtain the information about the Wazuh Kibana plugin.
+#. :ref:`Settings <kibana_settings>`: section is accessible through the gear icon, located on the right side of the top menu, and allows to configure and obtain the information about the Wazuh Kibana plugin.
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    features/index
+    overview
+    management
+    agents
+    dev_tools
+    settings
     troubleshooting
     reference/index
+    features/index
