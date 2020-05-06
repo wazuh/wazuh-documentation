@@ -88,8 +88,6 @@ Now that we have Wazuh installed with database support, we need to set up the da
   Query OK, 0 rows affected (0.00 sec)
 
   mysql> quit;
-  
-.. code-block:: console
 
 .. code-block:: console
 

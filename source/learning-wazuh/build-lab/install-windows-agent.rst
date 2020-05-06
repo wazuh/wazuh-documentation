@@ -14,7 +14,7 @@ Download the Wazuh agent package
 
   .. code-block:: none
 
-    https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-1.msi
+    https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 3. Press <Enter>. In the Warning dialog, click on **[Add]**, on **[Add]** again
    and then on **[Close]**.
@@ -40,7 +40,7 @@ Run the installer to both install and self-register
 
     .. code-block:: console
 
-        .\\wazuh-agent-|WAZUH_LATEST|-1.msi /q WAZUH_MANAGER="172.30.0.10" WAZUH_PROTOCOL="tcp" WAZUH_REGISTRATION_SERVER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
+        .\\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="172.30.0.10" WAZUH_PROTOCOL="tcp" WAZUH_REGISTRATION_SERVER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" WAZUH_AGENT_NAME="windows-agent"
 
     It should look like this
 

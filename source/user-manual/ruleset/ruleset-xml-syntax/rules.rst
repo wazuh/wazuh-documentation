@@ -67,7 +67,11 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_id`_          | None.                                                         | The decoded ``id`` must be the same.                                                                 |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_id`_      | None.                                                         | The decoded ``id`` must be different.                                                                |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_source_ip`_   | None.                                                         | The decoded ``srcip`` must be the same.                                                              |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+|`not_same_source_ip`_| None.                                                         | The decoded ``srcip`` must be different.                                                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_src_port`_    | None.                                                         | The decoded ``src_port`` must be the same.                                                           |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -76,6 +80,10 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `same_location`_    | None.                                                         | The ``location`` must be the same.                                                                   |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_user`_        | None.                                                         | The decoded ``user`` must be the same.                                                               |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_user`_    | None.                                                         | The decoded ``user`` must be different.                                                              |
++---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `not_same_agent`_   | None.                                                         | The decoded ``agent`` must be different.                                                             |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_       | None.                                                         | The decoded ``field`` must be the same as the previous ones.                                         |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -770,6 +778,16 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <same_id />        |
 +--------------------+--------------------+
 
+not_same_id
+^^^^^^^^^^^
+
+Specifies that the decoded id must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------+
+| **Example of use** | <not_same_id />    |
++--------------------+--------------------+
+
 same_source_ip
 ^^^^^^^^^^^^^^
 
@@ -779,6 +797,16 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 +--------------------+--------------------+
 | **Example of use** | <same_source_ip /> |
 +--------------------+--------------------+
+
+not_same_source_ip
+^^^^^^^^^^^^^^^^^^
+
+Specifies that the decoded source ip must be different
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+------------------------+
+| **Example of use** | <not_same_source_ip /> |
++--------------------+------------------------+
 
 same_src_port
 ^^^^^^^^^^^^^
@@ -818,6 +846,26 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
 | **Example of use** | <same_user />      |
++--------------------+--------------------+
+
+not_same_user
+^^^^^^^^^^^^^
+
+Specifies that the decoded user must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------+
+| **Example of use** | <not_same_user />  |
++--------------------+--------------------+
+
+not_same_agent
+^^^^^^^^^^^^^^
+
+Specifies that the decoded agent must be different.
+This option is used in conjunction with ``frequency`` and ``timeframe``.
+
++--------------------+--------------------+
+| **Example of use** | <not_same_agent /> |
 +--------------------+--------------------+
 
 same_field
@@ -1042,7 +1090,6 @@ Specifies a human-readable description to the rule in order to provide context t
 Examples:
 
   .. code-block:: xml
-
 
     <rule id="100015" level="2">
       ...

@@ -91,7 +91,7 @@ aspects of Wazuh manager.
 
   .. code-block:: console
 
-	 # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+	 # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 	 # yum -y install nodejs
 	 # yum -y install wazuh-api
 	 # systemctl status wazuh-api

@@ -143,6 +143,7 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 	        api_proto: 'http'
 	        api_user: ansible
 	    wazuh_agent_authd:
+	      registration_address: <registration IP>
 	      enable: true
 	      port: 1515
 	      ssl_agent_ca: null
@@ -180,6 +181,7 @@ Our resulting file is:
 	        api_proto: 'http'
 	        api_user: ansible
 	    wazuh_agent_authd:
+		  registration_address: 192.168.0.180
 	      enable: true
 	      port: 1515
 	      ssl_agent_ca: null

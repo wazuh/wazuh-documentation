@@ -25,13 +25,14 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
     Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options. You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
 
+    In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To prevent this situation it is recommended to enable the ``Hardware Clock in UTC Time`` option on the ``System`` tab of the virtual machine's settings.
+
 3. The **Wazuh manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
 
     - :ref:`How to install Wazuh agents<installation_agents>`
 
   .. warning::
-
-    Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
+    By default the network interface type is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
 4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, filebeat, and kibana with the 'systemctl' command. For example:
 

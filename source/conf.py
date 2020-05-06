@@ -404,21 +404,37 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.12.0",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
-    "|WAZUH_LATEST_PUPPET|" : "3.12.0",
-    "|WAZUH_LATEST_OVA|" : "3.12.0",
-    "|WAZUH_LATEST_DOCKER|" : "3.12.0",
-    "|ELASTICSEARCH_LATEST|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
+    "|WAZUH_LATEST|" : "3.12.3",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
+    "|WAZUH_LATEST_PUPPET|" : "3.12.2",
+    "|WAZUH_LATEST_OVA|" : "3.12.3",
+    "|WAZUH_LATEST_DOCKER|" : "3.12.2",
+    "|ELASTICSEARCH_LATEST|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.2",
     "|SPLUNK_LATEST|" : "8.0.2",
-    "|ELASTIC_6_LATEST|" : "6.8.7",
-}
+    "|ELASTIC_6_LATEST|" : "6.8.8",
+    "|WAZUH_REVISION_AIX|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_DEB_API_X86|" : "1",
+    "|WAZUH_REVISION_HPUX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_WINDOWS|" : "1",
+}   
 
 # -- Setup -------------------------------------------------------------------
 
@@ -453,11 +469,18 @@ exclude_patterns = [
 ]
 
 # -- Additional configuration ------------------------------------------------
+
+if (tags.has("production")):
+    production = True
+else:
+    production = False
+
 html_context = {
     "display_github": True,
     "github_user": "wazuh",
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
-    "github_version": version
+    "github_version": version,
+    "production": production
 }
 sphinx_tabs_nowarn = True

@@ -566,11 +566,12 @@ Wazuh Agent
 
 **wazuh_agent_authd:**
 
-  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. Be aware that this Ansible role will use the first Wazuh Manager address defined on `wazuh_managers` as the authd registration server.
+  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 
   .. code-block:: yaml
 
     wazuh_agent_authd:
+      registration_address: 10.1.1.12
       enable: false
       port: 1515
       ssl_agent_ca: null
