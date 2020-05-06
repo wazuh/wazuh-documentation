@@ -15,6 +15,7 @@ Here is a list of common use cases:
 #. `Active response`_
 #. `Security Configuration Assessment`_
 #. `System inventory`_
+#. `Vulnerability detection`_
 #. `Cloud security monitoring`_
 #. `Containers security monitoring`_
 
@@ -373,7 +374,7 @@ Once the agent starts, `Syscollector` runs periodically scans of defined targets
 The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
 with this feature the API can be directly queried about the different scans being able to filter by any desired field.
 
-In addition, the packages and hotfixes inventory is used as feed for the :ref:`Vulnerability detection <vulnerability-detection>`.
+In addition, the packages and hotfixes inventory is used as feed for the :ref:`Vulnerability detection <vulnerability-detection_use_case>`.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
@@ -398,6 +399,70 @@ When the alerts are triggered they will be displayed in Kibana this way:
     :width: 80%
 
 More information about how does system inventory works and its capabilities can be found :ref:`here<syscollector>`.
+
+.. _vulnerability-detection_use_case:
+
+Vulnerability detection
+-----------------------
+
+Wazuh is able to detect vulnerabilities in the applications installed on the agent's host system. The agents send preriodically a list of the installed applications to the manager, where it is stored in a local sqlite database (one per agent). Besides, the manager builds a global vulnerabilities database using public CVE repositories which is used to cross-correlate this information in the agent's application inventory data. 
+
+The global vulnerabilities database is created automatically, currently pulling data from the following repositories:
+
+- `<https://canonical.com>`_: Used to pull CVEs for Ubuntu Linux distributions.
+- `<https://access.redhat.com>`_: Used to pull CVEs for Red Hat and CentOS Linux distributions.
+- `<https://www.debian.org>`_: Used to pull CVEs for Debian Linux distributions.
+- `<https://nvd.nist.gov/>`_: Used to pull CVEs from the National Vulnerability Database. Currently is only used to report Windows agents.
+
+The following example shows how to configure the necessary components to run the vulnerability detection process.
+
+#. To enable the agent module used to collect installed packages on the monitored system has to be added the following block of settings to the agent's configuration file:
+
+    .. code-block:: xml
+
+        <wodle name="syscollector">
+            <disabled>no</disabled>
+            <interval>1h</interval>
+            <packages>yes</packages>
+        </wodle>
+
+#. Enable the manager module used to detect vulnerabilities adding a block like like the following:
+
+    .. code-block:: xml
+
+        <vulnerability-detector>
+            <enabled>yes</enabled>
+            <interval>5m</interval>
+            <run_on_start>yes</run_on_start>
+            <provider name="canonical">
+            <enabled>yes</enabled>
+            <os>bionic</os>
+            <update_interval>1h</update_interval>
+            </provider>
+        </vulnerability-detector>    
+
+After restarting the Wazuh manager process, the output should look like this:
+
+.. code-block:: none
+    :emphasize-lines: 5,10
+    :class: output
+
+    ** Alert 1571137967.2083: - vulnerability-detector,gdpr_IV_35.7.d,
+    2019 Oct 15 11:12:47 c31dd66f7e82->vulnerability-detector
+    Rule: 23503 (level 5) -> 'CVE-2018-5710 on Ubuntu 18.04 LTS (bionic) - low.'
+    {"vulnerability":{"cve":"CVE-2018-5710","title":"CVE-2018-5710 on Ubuntu 18.04 LTS (bionic) - low.","severity":"Low","published":"2018-01-16T09:29:00Z","state":"Fixed","package":{"name":"libgssapi-krb5-2","version":"1.16-2ubuntu0.1","architecture":"amd64"},"condition":"Package less than 1.16.1-1","reference":"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5710"}}
+    vulnerability.cve: CVE-2018-5710
+    vulnerability.title: CVE-2018-5710 on Ubuntu 18.04 LTS (bionic) - low.
+    vulnerability.severity: Low
+    vulnerability.published: 2018-01-16T09:29:00Z
+    vulnerability.state: Fixed
+    vulnerability.package.name: libgssapi-krb5-2
+    vulnerability.package.version: 1.16-2ubuntu0.1
+    vulnerability.package.architecture: amd64
+    vulnerability.package.condition: Package less than 1.16.1-1
+    vulnerability.reference: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5710
+
+To learn more about how does the vulnerability detection works, visit the :ref:`Vulnerability detection section <vulnerability-detection>`.
 
 Cloud security monitoring
 -------------------------
