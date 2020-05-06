@@ -84,4 +84,4 @@ Examples:
      # WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
           WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
 
-.. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`agent-verification-with-host-validation` section.
+.. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`Registration Service with host verification - Agent verification with host validation <host-verification-registration>` section.
