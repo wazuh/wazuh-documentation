@@ -5,9 +5,7 @@
 Configuration file
 ==================
 
-The Wazuh app includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
-
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh app in *Settings > Configuration*.
+The Wazuh Kibana plugin configuration file is located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``. Most of the options described below can be also changed through the Wazuh Kibana plugin :ref:`configuration <kibana_settings_configuration>` section.
 
 The configuration file reference is organized by sections:
 
@@ -46,10 +44,11 @@ The configuration file reference is organized by sections:
     - `extensions.docker`_
 
 `Advanced index options`_
-    - `wazuh-version.shards`_
-    - `wazuh-version.replicas`_
     - `wazuh.monitoring.shards`_
     - `wazuh.monitoring.replicas`_
+
+`Wazuh API entries`_
+    - `Defining the Wazuh API entries`_
 
 Basic options
 -------------
@@ -57,7 +56,7 @@ Basic options
 pattern
 ^^^^^^^
 
-Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
+Default index pattern to use on the Wazuh Kibana plugin. If there is no valid index patterns on Elasticsearch, the Wazuh Kibana plugin will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-alerts-3.x-*      |
@@ -68,10 +67,10 @@ Default index pattern to use on the app. If there's no valid index patterns on E
 timeout
 ^^^^^^^
 
-Defines the maximum time the app will wait for an API response when making requests to it. It will be ignored if the value is set under 1500 milliseconds.
+Defines the maximum timeout the Wazuh Kibana plugin use when making requests. It will be ignored if the value is set under 1500 milliseconds.
 
 +--------------------+-------------------------------+
-| **Default value**  | 8000 (milliseconds)           |
+| **Default value**  | 20000 (milliseconds)          |
 +--------------------+-------------------------------+
 | **Allowed values** | Any number starting from 1500 |
 +--------------------+-------------------------------+
@@ -79,29 +78,29 @@ Defines the maximum time the app will wait for an API response when making reque
 api.selector
 ^^^^^^^^^^^^
 
-Defines if the user is allowed to change the selected API directly from the Wazuh app top menu.
+Defines if the user is allowed to change the selected Wazuh API directly from the Wazuh Kibana plugin top menu.
 
 +--------------------+-------------------------------+
 | **Default value**  | false                         |
 +--------------------+-------------------------------+
-| **Allowed values** | true,false                    |
+| **Allowed values** | true, false                   |
 +--------------------+-------------------------------+
 
 ip.selector
 ^^^^^^^^^^^
 
-Defines if the user is allowed to change the selected index pattern directly from the top menu bar.
+Defines if the user is allowed to change the selected index pattern directly from the Wazuh Kibana plugin top menu.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh app. An empty list (the default value) won't ignore any valid index pattern.
+Disables certain index pattern names from being available in the index pattern selector in the Wazuh Kibana plugin. The default empty list will not ignore any valid index pattern.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | []                                          |
@@ -112,46 +111,46 @@ Disable certain index pattern names from being available in index pattern select
 xpack.rbac.enabled
 ^^^^^^^^^^^^^^^^^^
 
-Enable or disable X-Pack RBAC security capabilities when using the app.
+Enables or disables ``X-Pack RBAC`` security capabilities.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 admin
 ^^^^^
 
-Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the :ref:`Dev tools <kibana_dev_tools>` tab.
+Enables or disables administrator's ``PUT``, ``POST`` and ``DELETE`` requests to the Wazuh API made in the :ref:`Dev tools <kibana_dev_tools>` console. This option can be changed only in the ``wazuh.yml`` configuration file.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 logs.level
 ^^^^^^^^^^
 
-Set the logging level for the Wazuh App log files.
+Sets the logging level for the Wazuh Kibana plugin log files.
 
-+--------------------+------------+
-| **Default value**  | info       |
-+--------------------+------------+
-| **Allowed values** | info,debug |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | info        |
++--------------------+-------------+
+| **Allowed values** | info, debug |
++--------------------+-------------+
 
 hideManagerAlerts
 ^^^^^^^^^^^^^^^^^
 
-Hide the manager's alerts in the dashboard visualizations.
+Hides the Wazuh manager's alerts in the dashboard visualizations.
 
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 Monitoring
 ----------
@@ -159,22 +158,22 @@ Monitoring
 wazuh.monitoring.enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
+Enables or disables the ``wazuh-monitoring`` index creation and/or visualization:
 
-- When the value is set to ``true``, the app will show the *Agents status* visualization and will insert monitoring-related data.
-- When the value is set to ``false``, the app won't show the visualization and won't insert monitoring-related data.
-- When the value is set to ``worker``, the app will show the visualization, but won't insert monitoring-related data.
+- When the value is set to ``true``, the Wazuh Kibana plugin will show the Wazuh agents ``Status`` visualization and will insert monitoring-related data.
+- When the value is set to ``false``, the Wazuh Kibana plugin will not show the visualization and will not insert monitoring-related data.
+- When the value is set to ``worker``, the Wazuh Kibana plugin will show the visualization, but will not insert monitoring-related data.
 
-+--------------------+-------------------+
-| **Default value**  | true              |
-+--------------------+-------------------+
-| **Allowed values** | true,false,worker |
-+--------------------+-------------------+
++--------------------+---------------------+
+| **Default value**  | true                |
++--------------------+---------------------+
+| **Allowed values** | true, false, worker |
++--------------------+---------------------+
 
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define in seconds the frequency of API requests to get the state of the agents to create a new document in the `wazuh-monitoring` index with this data.
+The frequency, defined in seconds, of the Wazuh API requests to get the state of the Wazuh agents to create a new document in the ``wazuh-monitoring`` index.
 
 +--------------------+-----------------------------+
 | **Default value**  | 900 (seconds)               |
@@ -184,12 +183,12 @@ Define in seconds the frequency of API requests to get the state of the agents t
 
 .. warning::
 
-    Although the minimum value can be ``60``, we recommend adjusting it to at least ``300`` seconds to avoid overloading issues due to the excessive creation of documents into the index.
+    Although the minimum value is ``60``, it is recommended to set it at least to ``300`` seconds to avoid overloading issues due to the excessive creation of documents into the index.
 
 wazuh.monitoring.pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
+Sets the default Wazuh monitoring index pattern to use with the Wazuh Kibana plugin. This setting does not remove any existing patterns or templates, only adds the new one.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-monitoring-3.x-*  |
@@ -200,7 +199,7 @@ Default Wazuh monitoring index pattern to use for the app. This setting does not
 wazuh.monitoring.creation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Configure wazuh-monitoring-3.x-* indices custom creation interval.
+Sets ``wazuh-monitoring-3.x-*`` indices custom creation interval.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | d (daily)                                      |
@@ -214,57 +213,57 @@ Checks
 checks.pattern
 ^^^^^^^^^^^^^^
 
-Enable or disable the index pattern health check when opening the app.
+Enables or disables the index pattern health check when opening the wazuh Kibana plugin.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 checks.template
 ^^^^^^^^^^^^^^^
 
-Enable or disable the template health check when opening the app.
+Enables or disables the template health check when opening the Wazuh Kibana plugin.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 checks.api
 ^^^^^^^^^^
 
-Enable or disable the API health check when opening the app.
+Enables or disables the wazuh API health check when opening the Wazuh Kibana plugin.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 checks.setup
 ^^^^^^^^^^^^
 
-Enable or disable the setup health check when opening the app.
+Enable or disable the setup health check when opening the Wazuh Kibana plugin.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 checks.fields
 ^^^^^^^^^^^^^
 
-Enable or disable the known fields health check when opening the app.
+Enables or disables the known fields health check when opening the Wazuh Kibana plugin.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 Extensions
 ----------
@@ -276,138 +275,136 @@ Extensions
 extensions.pci
 ^^^^^^^^^^^^^^
 
-Enable or disable the PCI DSS tab on *Overview* and *Agents*.
+Enables or disables the ``PCI DSS`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.gdpr
 ^^^^^^^^^^^^^^^
 
-Enable or disable the GDPR tab on *Overview* and *Agents*.
+Enables or disables the ``GDPR`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.audit
 ^^^^^^^^^^^^^^^^
 
-Enable or disable the Audit tab on *Overview* and *Agents*.
+Enables or disables the ``Audit`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.oscap
 ^^^^^^^^^^^^^^^^
 
-Enable or disable the Open SCAP tab on *Overview* and *Agents*.
+Enables or disables the ``Open SCAP`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.ciscat
 ^^^^^^^^^^^^^^^^^
 
-Enable or disable the CIS-CAT tab on *Overview* and *Agents*.
+Enables or disables the ``CIS-CAT`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.aws
 ^^^^^^^^^^^^^^
 
-Enable or disable the Amazon (AWS) tab on *Overview* and *Agents*.
+Enables or disables the ``Amazon (AWS)`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.virustotal
 ^^^^^^^^^^^^^^^^^^^^^
 
-Enable or disable the VirusTotal tab on *Overview* and *Agents*.
+Enables or disables the ``VirusTotal`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.osquery
 ^^^^^^^^^^^^^^^^^^
 
-Enable or disable the Osquery tab on *Overview* and *Agents*.
+Enables or disables the ``Osquery`` tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 extensions.docker
 ^^^^^^^^^^^^^^^^^
 
-Enable or disable the Docker listener tab on *Overview* and *Agents*.
+Enables or disables the ``Docker`` listener tab on *Overview* and *Agents*.
 
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
++--------------------+-------------+
+| **Default value**  | false       |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
+
+extensions.nist
+^^^^^^^^^^^^^^^
+
+Enables or disables the ``NIST`` tab on *Overview* and *Agents*.
+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
+
+extensions.hipaa
+^^^^^^^^^^^^^^^^
+
+Enables or disables the ``HIPAA`` tab on *Overview* and *Agents*.
+
++--------------------+-------------+
+| **Default value**  | true        |
++--------------------+-------------+
+| **Allowed values** | true, false |
++--------------------+-------------+
 
 Advanced index options
 ----------------------
 
 .. warning::
 
-    These options are only valid if they're modified before starting the Kibana service for the very first time.
-
-    You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
-
-wazuh-version.shards
-^^^^^^^^^^^^^^^^^^^^
-
-Define the number of shards to use for the ``wazuh-version`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
-+--------------------+----------------------------+
-
-wazuh-version.replicas
-^^^^^^^^^^^^^^^^^^^^^^
-
-Define the number of replicas to use for the ``wazuh-version`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 0 |
-+--------------------+----------------------------+
-
+    These options are only valid if they are modified before starting the Kibana service for the very first time.
+    How to configure the shards and replicas is explained in the :ref:`elastic_tuning` section.
 
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
+Defines the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 2                          |
@@ -418,10 +415,41 @@ Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
 wazuh.monitoring.replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the number of replicas to use for the ``wazuh-monitoring-3.x-*`` indices.
+Defines the number of replicas to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 0                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
+
+Wazuh API entries
+-----------------
+
+Defining the Wazuh API entries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following configuration is the default structure to define an Wazuh API entry:
+
+.. code-block:: yaml
+
+  hosts:
+    - <id>:
+       url: http(s)://<url>
+       port: <port>
+       user: <user>
+       password: <password>
+
+The following values need to be replaced:
+
+``<id>``: an arbitrary ID.
+
+``<url>``: url of the Wazuh API.
+
+``<port>``: port.
+
+``<user>``: credentials to authenticate.
+
+``<password>``: credentials to authenticate.
+
+The configured Wazuh API entries are available in the Wazuh Kibana plugin under the :ref:`kibana_settings_api` section.

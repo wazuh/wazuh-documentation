@@ -3586,7 +3586,7 @@ pre.literal-block div[class*='highlight'],
 div[class*='highlight'] div[class*='highlight'] {
   border: none;
   background: none;
-  margin: 0
+  margin: 0;
 }
 
 .last div[class*='highlight'] {

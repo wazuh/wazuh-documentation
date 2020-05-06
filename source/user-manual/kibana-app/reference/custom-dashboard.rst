@@ -5,106 +5,90 @@
 Create a custom dashboard
 =========================
 
-This section describes the process of creating a set of custom visualizations using Kibana and how to add them into a dashboard to create a custom dashboard.
+Visualizations are created by the series of aggregations to extract and process the data from indices stored in Elasticsearch. Those visualizations can be added to dashboards for further analysis.
 
+Creating a custtom visualization
+--------------------------------
 
-Creating Visualization
-----------------------
-
-Go to the **Visualize** tab.
+Go to the *Visualize* tab:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/visualize-tab.png
    :align: center
    :width: 100%
 
-Click on **Create new visualization**.
+Click on *Create new visualization*:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/create-new-visualization.png
    :align: center
    :width: 100%
 
-
-And select a visualization type among the ones available. As an example,
-we will be taking the **Horizontal Bar** chart, but it is essentially
-the same for other types of visualization.
+Select a visualization type. This example uses ``Horizontal Bar`` chart:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/select-visualization-type.png
    :align: center
    :width: 100%
 
-
-Next step will be selecting the index that will be used as a data source.
-We can work with any index that we created previously, but generally, we
-will be working with **wazuh-alerts-3.x-\***.
+Select the index to be used as a data source. It can be any index previously created. This example uses the ``wazuh-alerts-3.x-*`` index:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/choose-a-source.png
    :align: center
 
-At this point, a graph will be generated. You can select a lapse of time
-to display the information related to that period. Click on the
-following dropdown menu, define it and then update your
-changes.
+At this point, a graph will be generated. Select a lapse of time to display the information related to that period:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/select-lapse-time.png
    :align: center
    :width: 100%
 
-This chart can be configured to match your preferences. You can organize
-your data using **Metrics** and **Buckets**.
+The chart can be configured by organizing the data using ``Metrics`` and ``Buckets``:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/metrics-and-buckets.png
    :align: center
    :width: 100%
 
-**Metrics** section has options in order to quantify the data: Count,
-average, sum, max/min, etc.
+``Metrics`` section has options in order to quantify the data: Count, Average, Sum, Max, Min, etc.
 
-**Buckets** are aggregations of data that are sorted according to your
-search criteria.
+``Buckets`` are aggregations of data that are sorted according to the search criteria.
 
-For this example, we will leave the Y-Axis as default (*count*) and we
-will modify the Buckets (*X-Axis*) to sort them according to the level
-of the rules that have been triggered.
+More information can be found on the `Aggregations <https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html>`_ section of the Elasticsearch documentation.
 
-To do so we will have to click on **X-Axis**:
+In this example, ``Metrics`` (Y-Axis) will remain as default ``Count`` aggregation, and ``Buckets`` (X-Axis) will be modified to sort the data according to the level of the rules that have been triggered.
+
+Select `Buckets > Add > X-axis`:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/bucket-x-axis.png
    :align: center
 
-Select the **Terms** option in the **Select an aggregation** menu:
+Select `Aggregation > Terms`:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/bucket-select-an-aggregation-terms.png
    :align: center
 
-Now you will be able to select a **Field** to sort by (*e.g.
-rule.level*):
+Select a value for ``Field`` to sort by, this example uses ``rule.level``:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/bucket-term-field.png
    :align: center
 
-And, eventually, you will need to apply the changes to visualize
-them:
+Click on the ``Apply changes`` button to generate the visualization:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/bucket-apply-changes.png
    :align: center
 
-Now you will be able to see a chart like this:
+The custom visualization example looks as follows:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/horizontal-example-chart.png
    :align: center
    :width: 100%
 
-Saving a Visualization
-----------------------
+Saving the visualization
+------------------------
 
-Once we have created a customized visualization, as we did in the
-previous section, we can save it by clicking on **Save**.
+Once the custom visualization is ready, it has to be saved, to be able to use it later in a custom dashboard:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/save-visualization.png
    :align: center
    :width: 100%
 
-After that, set a name for it and confirm.
+Set the visualization name and confirm:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/confirm-save-visualization.png
    :align: center
@@ -112,53 +96,41 @@ After that, set a name for it and confirm.
 Creating a Custom Dashboard
 ---------------------------
 
-In order to create a customized dashboard we can reuse a saved
-visualization in the **Dashboard** section:
+Select the `Dashboard` section:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/dashboard-tab.png
    :align: center
    :width: 100%
 
-Just have to click on **Create a new dashboard**:
+Click on `Create a new dashboard`:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/create-new-dashboard.png
    :align: center
 
-And then click on **Add**.\
+Click on `Add` tab located in the top menu:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/add-visualization-to-dashboard.png
    :align: center
    :width: 100%
 
-Now you can select a visualization to add among the ones you have saved.
-We will choose the bar chart that we created previously and then click
-on **Create new visualization**:
+Select previously created visualization. It will be automatically added to the dashbord:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/select-panels-to-add.png
    :align: center
 
-You will be able to see the visualization added to the
-dashboard:
+The custom visualization is now added to the dashboard. At this point, the user can modify a lapse of time to display the information in the visualization and add more custom visualizations to the dashbord:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/panel-was-properly-added.png
    :align: center
    :width: 100%
 
-You can keep adding visualizations to the dashboard following the same
-process so that it fits your preferences.
-
-.. thumbnail:: ../../../images/kibana-app/custom-dashboard/complex-dashboard.png
-   :align: center
-   :width: 100%
-
-Once you have finished editing your dashboard you will need to save it
-by clicking **Save.**
+Click on `Save` tab located in the top menu:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/save-dashboard.png
    :align: center
    :width: 100%
 
-Set its name, description and save it:
+Set the dashboard name, add the description and save it:
 
 .. image:: ../../../images/kibana-app/custom-dashboard/confirm-save-dashboard.png
    :align: center
