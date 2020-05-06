@@ -39,7 +39,7 @@ Access to services and containers
        root_wazuh_1_9790ada55716           /entrypoint.sh                 Up      0.0.0.0:1514->1514/udp, 0.0.0.0:1515->1515/tcp, 1516/tcp, 0.0.0.0:514->514/udp,
                                                                                   0.0.0.0:55000->55000/tcp
 
-4. We can access the command line of each container by executing `docker-compose exec <service name> /bin/bash` from the directory where the ``docker-compose.yml`` file is located:
+#. We can access the command line of each container by executing `docker-compose exec <service name> /bin/bash` from the directory where the ``docker-compose.yml`` file is located:
 
     .. code-block:: console
 
