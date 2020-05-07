@@ -205,9 +205,7 @@ Kibana installation and configuration
 
     .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
-#. Install the Wazuh Kibana plugin:
-
-    The installation of the plugin must be done from the Kibana home directory.
+#. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follow:
 
     .. code-block:: console
 
