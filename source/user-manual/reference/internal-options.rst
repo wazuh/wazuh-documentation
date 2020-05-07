@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_internal_options:
 
@@ -961,6 +961,8 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | Any integer between 1 and 50.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+
+.. _ossec_internal_syscheck:
 
 Syscheck
 --------

@@ -42,37 +42,38 @@ the `ossec.conf` by adding a line such as
 
 to the **policies section** of the **SCA** module.
 
-How to share policy files and configuration with agents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How to share policy files and configuration with the Wazuh agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section,
-the Wazuh manager has the ability to push files and configurations to connected agents.
+the Wazuh manager has the ability to push files and configurations to connected Wazuh agents.
 
-This feature can be used to push policy files to agents in defined groups. By default, every agent belongs
-to the *default* group, so we can use this group as example.
+This feature can be used to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs
+to the ``default`` group, which is used here as an example:
 
-In order to push a new policy from the manager it should be placed in the directory ``/var/ossec/etc/shared/default``,
-and be owned by user `ossec`.
+#. Edit the Wazuh agent's ``local_internal_options.conf`` file to allow remote SCA policies sent from the Wazuh manager:
 
-In addition, to push configuration, the same strategy applies. For instance, in order to add a policy, add
-a block like the following to the ``/var/ossec/etc/shared/default/agent.conf`` as per the
-:ref:`example<ossec_conf_enable_policy>`.
+     .. code-block:: console
 
-.. code-block:: xml
-    :name: ossec_conf_enable_policy
-    :caption: Enabling a policy from the ``ossec.conf``
+        # echo "sca.remote_commands=1" >> /var/ossec/etc/local_internal_options.conf
 
-    <agent_config>
-        <!-- Shared agent configuration here -->
-        <sca>
-            <policies>
-                <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
-            </policies>
-        </sca>
-    </agent_config>
+#. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder.
 
-This ``<sca>`` block will be merged with the ``<sca>`` block on the agent side and the new configuration
-will be added.
+
+#. Add the configuration block to the Wazuh manager's ``/var/ossec/etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
+
+     .. code-block:: xml
+
+        <agent_config>
+            <!-- Shared agent configuration here -->
+            <sca>
+                <policies>
+                    <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
+                </policies>
+            </sca>
+        </agent_config>
+
+The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent side and the new configuration will be added.
 
 .. table:: Available SCA policies
     :widths: auto
