@@ -1,11 +1,11 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _gcp-pubsub:
 
 gcp-pubsub
-==============
+==========
 
-.. versionadded:: 3.12.0
+.. versionadded:: 3.13.0
 
 .. topic:: XML section name
 
@@ -175,7 +175,7 @@ Day of the week to run the script to fetch logs. This option is **not compatible
 time
 ^^^^
 
-Time of the day to retrieve logs from GCP. It has to be represented in the format *hh:mm*.
+Time of the day to retrieve logs from GCP. It has to be represented in the format *hh:mm*. This option is compatible with ``day`` or ``wday`` options.
 
 +--------------------+-----------------------+
 | **Default value**  | n/a                   |
