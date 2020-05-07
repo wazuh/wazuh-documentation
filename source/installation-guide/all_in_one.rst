@@ -15,7 +15,7 @@ This document guides through an installation of the Wazuh server and Opendistro 
 Preparing the installation
 --------------------------
 
-Before installing Wazuh server and Opendistro, some extra packages must be installed. Opendistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
+Before installing the Wazuh server and Opendistro, some extra packages must be installed. Opendistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
 
 .. include:: ../_templates/installations/elastic/common/before_installation.rst
 
