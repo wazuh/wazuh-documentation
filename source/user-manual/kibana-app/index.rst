@@ -19,7 +19,7 @@ It is available in Kibana under the Wazuh logo icon situated on the left side me
 
 The Wazuh Kibana plugin top menu offers access to the following sections:
 
-#. :ref:`Overview <kibana_overwiew>`: provides access to the Wazuh security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance. The triggered alerts are organized in dashboards containing easy to analyze charts and tables.
+#. :ref:`Overview <kibana_overview>`: provides access to the Wazuh security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance. The triggered alerts are organized in dashboards containing easy to analyze charts and tables.
 
 #. :ref:`Management <kibana_management>`: provides access to the administration of the :ref:`ruleset <kibana_ruleset>`, Wazuh cluster configuration and the Wazuh agents' groups. It also shows the Wazuh cluster's overview and status information, Wazuh managers' logs, and lists the user-generated reports.
 
