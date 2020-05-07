@@ -6,7 +6,7 @@
 
 All-in-One installation
 =======================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. This installation guide is meant for small production enviroments. This installation will use the default security settings, which uses generic certificates that are the same for all installations.
+This document guides through an installation of the Wazuh server and Opendistro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -15,7 +15,7 @@ This document guides through an installation of the Wazuh server and Elastic sta
 Preparing the installation
 --------------------------
 
-Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in further steps.
+Before installing Wazuh server and Opendistro, some extra packages must be installed. Opendistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
 
 .. include:: ../_templates/installations/elastic/common/before_installation.rst
 
@@ -96,7 +96,7 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
   It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password amongst other useful API security information.        
 
 Elasticsearch installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
@@ -181,8 +181,8 @@ To ensure that Filebeat has been successfully installed, execute the following c
       
       # filebeat test output
 
-Kibana installation and configuration
--------------------------------------
+Kibana installation
+-------------------
 
 #. Install the Kibana package:
 

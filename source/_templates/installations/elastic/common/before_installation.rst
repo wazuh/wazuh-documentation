@@ -19,9 +19,11 @@
 
                                 # add-apt-repository ppa:openjdk-r/ppa
 
-                    .. code-block:: console
+                #. Update repository data:
 
-                        # apt update
+                        .. code-block:: console
+
+                            # apt update
                         
                 #. Install all the required utilities:
 
