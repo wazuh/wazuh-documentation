@@ -2,12 +2,9 @@
 
 .. code-block:: console
 
-  # apt-get remove elasticsearch
+  # apt-get remove opendistroforelasticsearch
+  # apt-get remove elasticsearch-oss
 
-There are files marked as configuration and data files. Due to this designation, the package manager does not remove those files from the filesystem. A complete file removal can be done using the following command:
-
-.. code-block:: console
-
-  # apt-get remove --purge elasticsearch
+There are files marked as configuration and data files. Due to this designation, the package manager does not remove those files from the filesystem. The complete file removal action is on user’s responsibility. It can be done by removing the folder ``/var/lib/elasticsearch`` and ``/etc/elasticsearch``.
 
 .. End of include file

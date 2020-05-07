@@ -6,6 +6,7 @@
 
 All-in-One installation
 =======================
+
 This document guides through an installation of the Wazuh server and Opendistro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used.
 
 .. note:: Root user privileges are required to execute all the commands described below.
@@ -25,7 +26,7 @@ Before installing the Wazuh server and Opendistro, some extra packages must be i
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,7 +72,7 @@ Installing the Wazuh manager
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
+Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
 
 
 .. tabs::
@@ -93,14 +94,14 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 .. note::
-  It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password amongst other useful API security information.        
+  It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password amongst other useful API security information.
 
 Installing Elasticsearch
 ------------------------
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-.. include:: ../_templates/installations/elastic/common/install_elastic.rst    
+.. include:: ../_templates/installations/elastic/common/install_elastic.rst
 
 
 Configure Elasticsearch
@@ -113,7 +114,7 @@ Enable and start the Elasticsearch service:
 
 .. include:: ../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-Execute the following command to ensure that the installation was made properly: 
+Execute the following command to ensure that the installation was made properly:
 
 .. code-block:: console
 
@@ -145,7 +146,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
         .. include:: ../_templates/installations/elastic/yum/install_filebeat.rst
 
 
-#. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat config file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
@@ -173,12 +174,12 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 #. Enable and start the Filebeat service:
 
     .. include:: ../_templates/installations/elastic/common/enable_filebeat.rst
-    
 
-To ensure that Filebeat has been successfully installed, execute the following command: 
+
+To ensure that Filebeat has been successfully installed, execute the following command:
 
     .. code-block:: console
-      
+
       # filebeat test output
 
 Installing Kibana
@@ -218,7 +219,7 @@ Installing Kibana
 
       # mkdir /etc/kibana/certs
       # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
-      # cp /etc/elasticsearch/esnode* /etc/kibana/certs/        
+      # cp /etc/elasticsearch/esnode* /etc/kibana/certs/
 
 #. Enable and start the Kibana service:
 
@@ -235,7 +236,7 @@ Installing Kibana
 Uninstall
 ---------
 
-To uninstall the Wazuh manager and Wazuh API:
+To uninstall the Wazuh manager and the Wazuh API:
 
 .. tabs::
 
@@ -274,13 +275,6 @@ To uninstall Filebeat:
     .. include:: ../_templates/installations/elastic/yum/uninstall_filebeat.rst
 
 
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/elastic/zypp/uninstall_filebeat.rst
-
-
 To uninstall Elasticsearch:
 
 .. tabs::
@@ -299,13 +293,6 @@ To uninstall Elasticsearch:
     .. include:: ../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
 
 
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
-
-
 To uninstall Kibana:
 
 .. tabs::
@@ -322,10 +309,3 @@ To uninstall Kibana:
 
 
     .. include:: ../_templates/installations/elastic/yum/uninstall_kibana.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../_templates/installations/elastic/zypp/uninstall_kibana.rst
