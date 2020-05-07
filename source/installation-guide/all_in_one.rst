@@ -22,8 +22,8 @@ Before installing the Wazuh server and Opendistro, some extra packages must be i
 
 .. _all_in_one_wazuh:
 
-Installing Wazuh server
------------------------
+Installing the Wazuh server
+---------------------------
 
 The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
