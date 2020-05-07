@@ -45,6 +45,20 @@ newUrls['3.12'] = [
   '/release-notes/release_3_12_0.html',
   '/release-notes/release_3_12_1.html',
   '/release-notes/release_3_12_2.html',
+  '/release-notes/release_3_12_3.html',
+  '/azure/monitoring-activity.html',
+  '/azure/monitoring-instances.html',
+  '/azure/monitoring-services.html',
+];
+
+/* Pages no longer available in 3.12 */
+
+removedUrls['3.12'] = [
+  '/user-manual/capabilities/file-integrity/fim-synchronization.html',
+  '/user-manual/capabilities/file-integrity/fim-faq.html',
+  '/azure/monitoring activity.html',
+  '/azure/monitoring instances.html',
+  '/azure/monitoring services.html',  
 ];
 
 /* *** RELEASE 3.11 ****/
