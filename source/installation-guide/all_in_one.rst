@@ -95,8 +95,8 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 .. note::
   It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password amongst other useful API security information.        
 
-Elasticsearch installation
---------------------------
+Installing Elasticsearch
+------------------------
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
@@ -181,8 +181,8 @@ To ensure that Filebeat has been successfully installed, execute the following c
       
       # filebeat test output
 
-Kibana installation
--------------------
+Installing Kibana
+-----------------
 
 #. Install the Kibana package:
 
