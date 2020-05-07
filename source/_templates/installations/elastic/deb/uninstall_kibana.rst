@@ -2,8 +2,12 @@
 
 .. code-block:: console
 
-  # apt-get remove kibana opendistroforelasticsearch-kibana
+  # apt-get remove opendistroforelasticsearch-kibana
 
-There are files marked as configuration and data files. Due to this designation, the package manager doesn’t remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/lib/kibana`` and ``/etc/kibana``.
+There are files marked as configuration and data files. Due to this designation, the package manager does not remove those files from the filesystem. A complete file removal can be done using the following command:
+
+.. code-block:: console
+
+  # apt-get remove --purge opendistroforelasticsearch-kibana
 
 .. End of include file
