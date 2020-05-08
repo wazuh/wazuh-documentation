@@ -36,6 +36,26 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 3.12 ****/
 
+/* Redirections from 3.11 to 3.12  */
+
+redirections.push(
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring activity.html',
+      '3.12': '/azure/monitoring-activity.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring instances.html',
+      '3.12': '/azure/monitoring-instances.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring services.html',
+      '3.12': '/azure/monitoring-services.html',
+    }
+);
+
 /* Pages added in 3.12 */
 
 newUrls['3.12'] = [
@@ -58,7 +78,7 @@ removedUrls['3.12'] = [
   '/user-manual/capabilities/file-integrity/fim-faq.html',
   '/azure/monitoring activity.html',
   '/azure/monitoring instances.html',
-  '/azure/monitoring services.html',  
+  '/azure/monitoring services.html',
 ];
 
 /* *** RELEASE 3.11 ****/
