@@ -18,14 +18,14 @@
 
     Choose one option according to the OS used:
 
-    a) Debian based OS
+    a) Debian based OS:
 
       .. code-block:: console
 
         # update-rc.d kibana defaults 95 10
         # service kibana start
 
-    b) RPM based OS
+    b) RPM based OS:
 
       .. code-block:: console
 
