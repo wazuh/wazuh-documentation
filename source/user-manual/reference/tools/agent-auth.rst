@@ -2,6 +2,11 @@
 
 .. _agent-auth:
 
+.. note::
+
+	Since Wazuh 4.0, by default, the agent registers automatically with the manager through auto-enrollment. Configuration details can be found on :ref:`Auto-enrollment section <reference_ossec_client>`.
+
+
 agent-auth
 ==========
 
