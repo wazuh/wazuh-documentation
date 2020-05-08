@@ -2,12 +2,12 @@
 
 In order to allow communication between the different components of the installation, self-signed certificates will be necessary. The following values will be asked during the interactive process:
 
-  #. ``<country_name>``: Country name (2 letter code).
-  #. ``state``: State or province name.
-  #. ``location``: Locality.
-  #. ``<organization>`` : Organization name.
-  #. ``<organizational_unit>``: Organizational unit name.        
-  #. ``<common_name>``: The IP of the node.
+  #. ``C``: Country name (2 letter code).
+  #. ``ST``: State or province name.
+  #. ``L``: Locality.
+  #. ``O`` : Organization name.
+  #. ``OU``: Organizational unit name.        
+  #. ``CN``: The IP of the node.
 
 The certificates can be generated as follows:
 
