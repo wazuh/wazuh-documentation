@@ -1,145 +1,79 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. tabs::
+In order to allow communication between the different components of the installation, self-signed certificates will be necessary. The following values will be asked during the interactive process:
 
-  .. group-tab:: Wazuh single-node cluster
+  #. ``<country_name>``: Country name (2 letter code).
+  #. ``state``: State or province name.
+  #. ``location``: Locality.
+  #. ``<organization>`` : Organization name.
+  #. ``<organizational_unit>``: Organizational unit name.        
+  #. ``<common_name>``: The IP of the node.
 
+The certificates can be generated as follows:
 
-    In order to allow communication between the different components of the installation, self-signed certificates will be necessary. They can be created as follows:
-
-    Move to the installation location and create the certificates directory:
-
-      .. code-block:: console
-
-        # mkdir /etc/elasticsearch/certs
-        # cd /etc/elasticsearch/certs
-    
-    Create a configuration file: 
-
-      .. code-block:: console
-
-        # cat  > csr.conf  <<\EOF
-        [ req ]
-        prompt = no
-        default_bits = 2048
-        default_md = sha256
-        distinguished_name = req_distinguished_name
-        x509_extensions = v3_req
-        
-        [req_distinguished_name]
-        C = <country_name>
-        ST = <state>
-        L = <location>
-        O = <organization>
-        OU = <organizational_unit>
-        CN = <common_name>
-        
-        [ v3_req ]
-        authorityKeyIdentifier=keyid,issuer
-        basicConstraints = CA:FALSE
-        keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-        subjectAltName = @alt_names
-        
-        [alt_names]
-        IP.1 = <node_ip>
-
-        EOF
-
-      The following values should be replaced by the desired ones:
-
-        #. ``<country_name>``: Country name (2 letter code).
-        #. ``state``: State or province name.
-        #. ``location``: Locality.
-        #. ``<organization>`` : Organization name.
-        #. ``<organizational_unit>``: Organizational unit name.        
-        #. ``<common_name>``: Common name
-        #. ``<node_ip>``: The IP of the elasticsearch node
-
-    Generate the ``root-ca`` public and private keys:
-
-      .. code-block:: console
-
-        # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj "/C=<country>/ST=<state>/L=<location>/OU=<organizational_unit>/O=<organization>" -days 3650
-
-      The following values should be replaced by the desired ones:
-
-        #. ``<country_name>``: Country name (2 letter code).
-        #. ``state``: State or province name.
-        #. ``location``: Locality.
-        #. ``<organizational_unit>``: Organizational unit name.
-        #. ``<organization>`` : Organization name.
-
-    Generate the ``csr`` and the server's node private key:
-
-      .. code-block:: console
-
-        # openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config csr.conf -days 3650
-
-    Generate the server's certificate:
-
-      .. code-block:: console
-
-        # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile csr.conf -extensions v3_req -days 3650
-
-    Compress the certificate directory: 
-
-      .. code-block:: console
-
-        # cd /etc/elasticsearch/certs && zip certs *
-
-  .. group-tab:: Wazuh multi-node cluster
-
-
-
-    In order to allow communication between the different components of the installation, self-signed certificates will be necessary. They can be created as follows:
-
-    .. code-block:: yaml
-
-      cat > /usr/share/elasticsearch/instances.yml <<\EOF
-      instances:
-      - name: "elasticsearch"
-        ip:
-        - "10.0.0.2"
-      - name: "filebeat-1"
-        ip:
-        - "10.0.0.3"
-      - name: "filebeat-2"
-        ip:
-        - "10.0.0.4"
-      EOF
-
-    Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
-
-    - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
-    - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. These correspond to two Wazuh cluster nodes. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
-
-    Replace the IPs of this example with the addresses of the hosts in your enviornment.
-
-    In the following steps, a zip file that contains folders named after the instances defined here will be created. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
-
-    Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+  Move to the installation location and create the certificates directory:
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
+      # mkdir /etc/elasticsearch/certs
+      # cd /etc/elasticsearch/certs
 
-    The generated file ``~/certs.zip`` must be copied into the Wazuh servers before continuing with the steps below.
-
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used:
-
-    .. code-block:: console
-
-      # unzip ~/certs.zip -d ~/certs
-
-    The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
+  #. Generate the Root CA certificates:
 
     .. code-block:: console
 
-      # mkdir /etc/elasticsearch/certs/ca -p
-      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
-      # chown -R elasticsearch: /etc/elasticsearch/certs
-      # chmod -R 500 /etc/elasticsearch/certs
-      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-      # rm -rf ~/certs/ ~/certs.zip
+      # openssl genrsa -out root-ca-key.pem 2048
+      # openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
+
+  #. Generate the admin certificate:
+
+    .. code-block:: console
+
+      # openssl genrsa -out admin-key-temp.pem 2048
+      # openssl pkcs8 -inform PEM -outform PEM -in admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out admin-key.pem
+      # openssl req -new -key admin-key.pem -out admin.csr
+      # openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
+
+  #. Generate the Elasticsearch node certificate: 
+
+    .. code-block:: console
+
+      # openssl genrsa -out elasticsearch-key-temp.pem 2048
+      # openssl pkcs8 -inform PEM -outform PEM -in elasticsearch-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out elasticsearch-key.pem
+      # openssl req -new -key elasticsearch-key.pem -out elasticsearch.csr
+      # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out elasticsearch.pem
+
+  #. Generate the Filebeat node certificate: 
+
+    .. code-block:: console
+
+      # openssl genrsa -out filebeat-key-temp.pem 2048
+      # openssl pkcs8 -inform PEM -outform PEM -in filebeat-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out filebeat-key.pem
+      # openssl req -new -key filebeat-key.pem -out filebeat.csr
+      # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out filebeat.pem
+
+  #. Generate the Filebeat node certificate: 
+
+    .. code-block:: console
+
+      # openssl genrsa -out kibana-key-temp.pem 2048
+      # openssl pkcs8 -inform PEM -outform PEM -in kibana-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out kibana-key.pem
+      # openssl req -new -key kibana-key.pem -out kibana.csr
+      # openssl x509 -req -in kibana.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out kibana.pem
+
+  #. Remove the unnecessary files:
+
+    .. code-block:: console
+
+      # rm admin-key-temp.pem
+      # rm admin.csr
+      # rm node-key-temp.pem
+      # rm node.csr
+
+  #. Compress all the necessary files to be sended to the rest of the involved parts:
+
+    .. code-block:: console
+
+      # zip certs *      
 
 .. End of include file
