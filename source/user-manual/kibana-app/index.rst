@@ -19,15 +19,15 @@ It is available in Kibana under the Wazuh logo icon situated on the left side me
 
 The Wazuh Kibana plugin top menu offers access to the following sections:
 
-#. :ref:`Overview <kibana_overview>`: provides access to the Wazuh security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance. The triggered alerts are organized in dashboards containing easy to analyze charts and tables.
+#. :ref:`Overview <kibana_overview>`: monitor the Wazuh alerts presented in security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance subsectons. 
 
-#. :ref:`Management <kibana_management>`: provides access to the administration of the :ref:`ruleset <kibana_ruleset>`, Wazuh cluster configuration and the Wazuh agents' groups. It also shows the Wazuh cluster's overview and status information, Wazuh managers' logs, and lists the user-generated reports.
+#. :ref:`Management <kibana_management>`: access the Wazuh administration tools, status information and reports.
 
-#. :ref:`Agents <kibana_agents>`: shows the overall status of the Wazuh agents and lists them allowing access to the detailed information regarding each Wazuh agent.
+#. :ref:`Agents <kibana_agents>`: monitor the overall status of the Wazuh agents and access the detailed information regarding each Wazuh agent.
 
-#. :ref:`Dev tools <kibana_dev_tools>`: provides access to the Wazuh console, an user interface to interact with the Wazuh API.
+#. :ref:`Dev tools <kibana_dev_tools>`: access the Wazuh console, an user interface to interact with the Wazuh API.
 
-#. :ref:`Settings <kibana_settings>`: section is accessible through the gear icon, located on the right side of the top menu, and allows to configure and obtain the information about the Wazuh Kibana plugin.
+#. :ref:`Settings <kibana_settings>`: configure and obtain the information about the Wazuh Kibana plugin. This section is accessible through the gear icon, located on the right side of the top menu.
 
 .. toctree::
     :hidden:

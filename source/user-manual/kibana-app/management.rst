@@ -50,11 +50,14 @@ It also gives access to detailed information about each Wazuh node:
 Groups
 ------
 
-This section  
+This section provides access to the Wazuh :ref:`agent groups <grouping-agents>` overview and :ref:`configuration <reference_agent_conf>`. The user can browse, add or delete groups and
+also edit the centaralized configuration file ``agent.conf`` for each group available under the *Actions* column:
 
 .. thumbnail:: ../../images/kibana-app/sections/management/wazuh-kibana-groups.png
   :align: center
   :width: 100%
+
+After editing and saving the ``agent.conf`` file, each Wazuh agent belonging to the group will receive and merge the new configration:  
 
 .. thumbnail:: ../../images/kibana-app/sections/management/wazuh-kibana-group-conf.png
   :align: center

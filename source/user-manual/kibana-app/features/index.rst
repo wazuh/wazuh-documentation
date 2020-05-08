@@ -7,22 +7,9 @@ Features
 
 The Wazuh Kibana plugin supplies the view of the Wazuh cluster, Wazuh agents and generated alerts. It provides an elegant, easy-to-use UI to interact with the Wazuh manager through the Wazuh API, showing the relevant information in a convenient way. This section shows how to use the plugin through its different features.
 
-#. `Discover`_
 #. `Reporting`_
 #. `Index pattern selector`_
 #. `Download as CSV`_
-#. `Query configuration`_
-
-.. _kibana_discovery:
-
-Discover
---------
-
-This section is available under the ``Discover`` button and allows interactively explore Wazuh alerts from the currently selected index pattern. It is possible to submit search queries, filter the search results, view alerts data, and also, by clicking on the fields on the left side of the window, add columns for a quick value comparison between alerts. The user can see the number of alerts that match the search query and get field value statistics:
-
-.. thumbnail:: ../../../images/kibana-app/features/discover/wazuh-kibana-discover.png
-  :align: center
-  :width: 100%
 
 Reporting
 ---------
@@ -67,39 +54,5 @@ Download as CSV
 The content of Wazuh tables can be downloaded in CSV format by clicking the Formatted button on the bottom right corner of each table. The file will be downloaded to the user's computer:
 
 .. thumbnail:: ../../../images/kibana-app/features/download-csv/download-csv.png
-  :align: center
-  :width: 100%
-
-.. _kibana_query_configuration:
-
-Query configuration
--------------------
-
-Wazuh Kibana plugin provides information about the Wazuh managers' and the Wazuh agents' active configuration in real-time. The Wazuh manager's configuration is shown on the *Management > Configuration* page:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-manager-conf.png
-  :align: center
-  :width: 100%
-
-Most of the elements in the table are clickable, allowing the user to explore each section of the configuration in detail. For example, the current Wazuh manager's cluster configuration can be displayed by selecting the desired node and then clicking on the ``Cluster`` section:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/cluster.png
-  :align: center
-  :width: 100%
-
-Similarly, each Wazuh agent's configuration can be monitored on *Agents > select the Wazuh agent > Configuration* page. The image below shows that the agent configuration is synchronized:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-agent-sync.png
-  :align: center
-
-For example, by clicking on the Wazuh agent's ``Log collection`` section, the detailed active configuration is shown:
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-agent-conf-logcollector.png
-  :align: center
-  :width: 100%
-
-For better readability, the configuration can also be displayed in JSON or XML format :
-
-.. thumbnail:: ../../../images/kibana-app/features/query-configuration/wazuh-kibana-conf-json.png
   :align: center
   :width: 100%
