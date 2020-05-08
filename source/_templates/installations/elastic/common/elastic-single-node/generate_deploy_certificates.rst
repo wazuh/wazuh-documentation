@@ -52,7 +52,7 @@ The certificates can be generated as follows:
       # openssl req -new -key filebeat-key.pem -out filebeat.csr
       # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out filebeat.pem
 
-  #. Generate the Filebeat node certificate: 
+  #. Generate the Kibana node certificate: 
 
     .. code-block:: console
 
