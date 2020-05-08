@@ -18,7 +18,7 @@ The file ``/etc/elasticsearch/elasticsearch.yml`` has to be edited:
   discovery.seed_hosts:
           - <elasticsearch_ip_node1>
           - <elasticsearch_ip_node2>
-          - <elasticsearch_ip_node3>
+          - <elasticsearch_ip_node3>      
 
 Depending on the node type, some parameters may vary between nodes. ``cluster.initial_master_nodes`` and ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master.
 

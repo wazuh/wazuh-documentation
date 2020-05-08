@@ -1,89 +1,187 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. tabs::
+This step must be done only on the master node. The certificates can be generated as follows:
 
-  .. group-tab:: Wazuh single-node cluster
-
-
-    The specification file ``/usr/share/elasticsearch/instances.yml`` must be created as follows:
-
-    .. code-block:: yaml
-
-      cat > /usr/share/elasticsearch/instances.yml <<\EOF
-      instances:
-      - name: "elasticsearch-1"
-        ip:
-        - "10.0.0.2"
-      - name: "elasticsearch-2"
-        ip:
-        - "10.0.0.3"
-      - name: "elasticsearch-3"
-        ip:
-        - "10.0.0.4"
-      - name: "filebeat"
-        ip:
-        - "10.0.0.5"
-      EOF
-
-    Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
-
-    - A ``filebeat`` instance with IP ``10.0.0.5``. It is a Wazuh single-node cluster.
-
-    - Three ``elasticsearch`` instances, #1, #2 and #3 with their respective IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. All belong to three Elasticsearch cluster nodes. In case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respective names and IPs.
-
-    Replace the IPs with the hosts' IPs.
-
-    In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
-
-    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+  #. Move to the installation location and create the certificates directory:
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
+      # mkdir /etc/elasticsearch/certs
+      # cd /etc/elasticsearch/certs
 
-
-  .. group-tab:: Wazuh multi-node cluster
-
-
-
-    The specification file ``/usr/share/elasticsearch/instances.yml`` can be created as follows:
-
-    .. code-block:: yaml
-
-      cat > /usr/share/elasticsearch/instances.yml <<\EOF
-      instances:
-      - name: "elasticsearch-1"
-        ip:
-        - "10.0.0.2"
-      - name: "elasticsearch-2"
-        ip:
-        - "10.0.0.3"
-      - name: "elasticsearch-3"
-        ip:
-        - "10.0.0.4"
-      - name: "filebeat-1"
-        ip:
-        - "10.0.0.5"
-      - name: "filebeat-2"
-        ip:
-        - "10.0.0.6"
-      EOF
-
-    Every ``name`` section represents one host involved in the Wazuh - Elastic Stack environment. In this example, the file describes:
-
-    - Two ``filebeat`` instances, #1 and #2 with their respective IPs ``10.0.0.5`` and ``10.0.0.6``. Both belong to individual Wazuh cluster nodes. If you want to configure a Wazuh multi-node cluster with three or more nodes, you must define more ``name`` sections with their respective names and IPs.
-    - Three instances ``elasticsearch``, #1, #2 and #3 with their respective IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. They belong to three Elasticsearch cluster nodes. In the case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respective names and IPs.
-
-    Replace the IPs of this example with the addresses of the hosts in your enviornment.
-
-    In the following steps, a zip file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
-
-    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+  #. Generate the Root CA certificates:
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
+      # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj "/C=US/ST=California/L=California/OU=Docu/O=Wazuh" -days 3650
 
-The ``cert.zip`` must be distributed across all ``instances.yml`` defined servers. This guide will assume that the file will be placed in ~/ (home user folder).
+  #. Create the ``admin.conf`` file for the admin certificate: 
+
+    .. code-block:: console
+
+      # cat  > admin.conf  <<\EOF
+      [ req ]
+      prompt = no
+      default_bits = 2048
+      default_md = sha256
+      distinguished_name = req_distinguished_name
+      x509_extensions = v3_req
+      
+      [req_distinguished_name]
+      C = US
+      ST = California
+      L = California
+      O = Wazuh
+      OU = Docu
+      CN = admin
+      
+      [ v3_req ]
+      authorityKeyIdentifier=keyid,issuer
+      basicConstraints = CA:FALSE
+      keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+      subjectAltName = @alt_names
+      
+      [alt_names]
+      IP.1 = <elasticsearch_node_IP>
+
+      EOF 
+
+    Replace the ``elasticsearch_node_IP`` with the Elasticsearch's host IP.     
+
+  #. Generate the admin certificate:
+
+    .. code-block:: console
+
+      # openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config admin.conf -days 3650
+      # openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile admin.conf -extensions v3_req -days 3650
+
+  #. Create the ``elasticsearch.conf`` file for the elasticsearch node certificate: 
+
+    .. code-block:: console
+
+      # cat  > elasticsearch.conf  <<\EOF
+      [ req ]
+      prompt = no
+      default_bits = 2048
+      default_md = sha256
+      distinguished_name = req_distinguished_name
+      x509_extensions = v3_req
+      
+      [req_distinguished_name]
+      C = US
+      ST = California
+      L = California
+      O = Wazuh
+      OU = Docu
+      CN = node-1
+      
+      [ v3_req ]
+      authorityKeyIdentifier=keyid,issuer
+      basicConstraints = CA:FALSE
+      keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+      subjectAltName = @alt_names
+      
+      [alt_names]
+      IP.1 = <elasticsearch_node_IP>
+
+      EOF 
+
+    Replace the ``elasticsearch_node_IP`` with the Elasticsearch's host IP.        
+  
+  #. Generate the Elasticsearch node certificate: 
+
+    .. code-block:: console
+
+      # openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config elasticsearch.conf -days 3650
+      # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile elasticsearch.conf -extensions v3_req -days 3650
+      # chmod 444 /etc/elasticsearch/certs/elasticsearch-key.pem
+
+  #. Create the ``elasticsearch-2.conf`` file for the elasticsearch-2 node certificate: 
+
+    .. code-block:: console
+
+      # cat  > elasticsearch-2.conf  <<\EOF
+      [ req ]
+      prompt = no
+      default_bits = 2048
+      default_md = sha256
+      distinguished_name = req_distinguished_name
+      x509_extensions = v3_req
+      
+      [req_distinguished_name]
+      C = US
+      ST = California
+      L = California
+      O = Wazuh
+      OU = Docu
+      CN = node-2
+      
+      [ v3_req ]
+      authorityKeyIdentifier=keyid,issuer
+      basicConstraints = CA:FALSE
+      keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+      subjectAltName = @alt_names
+      
+      [alt_names]
+      IP.1 = <elasticsearch_node_2_IP>
+
+      EOF 
+
+    Replace the ``elasticsearch_node_2_IP`` with the Elasticsearch's host IP.        
+  
+  #. Generate the Elasticsearch node certificate: 
+
+    .. code-block:: console
+
+      # openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-2-key.pem -out elasticsearch-2.csr -config elasticsearch-2.conf -days 3650
+      # openssl x509 -req -in elasticsearch-2.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch-2.pem -extfile elasticsearch-2.conf -extensions v3_req -days 3650   
+
+    This steps must be repeated for every Elasticsearch node in the installation changing the ``CN`` and ``IP.1`` values in the ``elasticsearch.conf`` file.
+
+  #. Create the ``filebeat.conf`` file for the Filebeat certificate: 
+
+    .. code-block:: console
+
+      # cat  > filebeat.conf  <<\EOF
+      [ req ]
+      prompt = no
+      default_bits = 2048
+      default_md = sha256
+      distinguished_name = req_distinguished_name
+      x509_extensions = v3_req
+      
+      [req_distinguished_name]
+      C = US
+      ST = California
+      L = California
+      O = Wazuh
+      OU = Docu
+      CN = filebeat
+      
+      [ v3_req ]
+      authorityKeyIdentifier=keyid,issuer
+      basicConstraints = CA:FALSE
+      keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+      subjectAltName = @alt_names
+      
+      [alt_names]
+      IP.1 = <Wazuh_server_IP>
+
+      EOF 
+
+    Replace the ``Wazuh_server_IP`` with the Wazuh server's host IP.      
+
+  #. Generate the Filebeat node certificate: 
+
+    .. code-block:: console
+
+      # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config filebeat.conf -days 3650
+      # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile filebeat.conf -extensions v3_req -days 3650
+
+  #. Compress all the necessary files to be sended to the rest of the involved parts:
+
+    .. code-block:: console
+
+      # zip certs *   
 
 .. End of include file
