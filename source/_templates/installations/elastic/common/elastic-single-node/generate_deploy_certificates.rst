@@ -13,7 +13,7 @@ The certificates can be generated as follows:
 
     .. code-block:: console
 
-      # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj "/C=ES/ST=GR/L=Granada/OU=Ops/O=Wazuh" -days 3650
+      # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj "/C=US/ST=California/L=California/OU=Docu/O=Wazuh" -days 3650
 
   #. Create the ``admin.conf`` file for the admin certificate: 
 
@@ -55,11 +55,11 @@ The certificates can be generated as follows:
       # openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config admin.conf -days 3650
       # openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile admin.conf -extensions v3_req -days 3650
 
-  #. Create the ``filebeat.conf`` file for the elasticsearch node certificate: 
+  #. Create the ``elasticsearch.conf`` file for the elasticsearch node certificate: 
 
     .. code-block:: console
 
-      # cat  > filebeat.conf  <<\EOF
+      # cat  > elasticsearch.conf  <<\EOF
       [ req ]
       prompt = no
       default_bits = 2048
@@ -92,8 +92,8 @@ The certificates can be generated as follows:
 
     .. code-block:: console
 
-      # openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config filebeat.conf -days 3650
-      # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile filebeat.conf -extensions v3_req -days 3650
+      # openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config elasticsearch.conf -days 3650
+      # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile elasticsearch.conf -extensions v3_req -days 3650
       # chmod 444 /etc/elasticsearch/certs/elasticsearch-key.pem
 
   #. Create the ``filebeat.conf`` file for the Filebeat certificate: 
