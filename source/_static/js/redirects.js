@@ -173,6 +173,21 @@ redirections.push(
       'target': ['3.11=>3.12'],
       '3.11': '/user-manual/registering/macos-simple-registration.html',
       '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring activity.html',
+      '3.12': '/azure/monitoring-activity.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring instances.html',
+      '3.12': '/azure/monitoring-instances.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring services.html',
+      '3.12': '/azure/monitoring-services.html',
     }
 );
 
@@ -191,6 +206,9 @@ newUrls['3.12'] = [
   '/release-notes/release_3_12_1.html',
   '/release-notes/release_3_12_2.html',
   '/release-notes/release_3_12_3.html',
+  '/azure/monitoring-activity.html',
+  '/azure/monitoring-instances.html',
+  '/azure/monitoring-services.html',
 ];
 
 /* Pages no longer available in 3.12 */
@@ -224,6 +242,9 @@ removedUrls['3.12'] = [
   '/user-manual/registering/linux-unix-simple-registration.html',
   '/user-manual/registering/windows-simple-registration.html',
   '/user-manual/registering/macos-simple-registration.html',
+  '/azure/monitoring activity.html',
+  '/azure/monitoring instances.html',
+  '/azure/monitoring services.html',
 ];
 
 /* *** RELEASE 3.11 ****/
