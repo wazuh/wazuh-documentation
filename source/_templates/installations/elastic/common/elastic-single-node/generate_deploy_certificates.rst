@@ -18,39 +18,63 @@ The certificates can be generated as follows:
       # mkdir /etc/elasticsearch/certs
       # cd /etc/elasticsearch/certs
 
+  #. Create the ``csr.conf`` file: 
+
+    .. code-block:: console
+
+      # cat  > csr.conf  <<\EOF
+      [ req ]
+      prompt = no
+      default_bits = 2048
+      default_md = sha256
+      distinguished_name = req_distinguished_name
+      x509_extensions = v3_req
+      
+      [req_distinguished_name]
+      C = ES
+      ST = GR
+      L = Granada
+      O = Wazuh
+      OU = Ops
+      CN = DNS_Name
+      
+      [ v3_req ]
+      authorityKeyIdentifier=keyid,issuer
+      basicConstraints = CA:FALSE
+      keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+      subjectAltName = @alt_names
+      
+      [alt_names]
+      IP.1 = LOCAL_IP
+
+      EOF
+
   #. Generate the Root CA certificates:
 
     .. code-block:: console
 
-      # openssl genrsa -out root-ca-key.pem 2048
-      # openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
+      # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj "/C=ES/ST=GR/L=Granada/OU=Ops/O=Wazuh" -days 3650
 
   #. Generate the admin certificate:
 
     .. code-block:: console
 
-      # openssl genrsa -out admin-key-temp.pem 2048
-      # openssl pkcs8 -inform PEM -outform PEM -in admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out admin-key.pem
-      # openssl req -new -key admin-key.pem -out admin.csr
-      # openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
+      # openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config csr.conf -days 3650
+      # openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile csr.conf -extensions v3_req -days 3650
 
   #. Generate the Elasticsearch node certificate: 
 
     .. code-block:: console
 
-      # openssl genrsa -out elasticsearch-key-temp.pem 2048
-      # openssl pkcs8 -inform PEM -outform PEM -in elasticsearch-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out elasticsearch-key.pem
-      # openssl req -new -key elasticsearch-key.pem -out elasticsearch.csr
-      # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out elasticsearch.pem
+      # openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config csr.conf -days 3650
+      # openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile csr.conf -extensions v3_req -days 3650
 
   #. Generate the Filebeat node certificate: 
 
     .. code-block:: console
 
-      # openssl genrsa -out filebeat-key-temp.pem 2048
-      # openssl pkcs8 -inform PEM -outform PEM -in filebeat-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out filebeat-key.pem
-      # openssl req -new -key filebeat-key.pem -out filebeat.csr
-      # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out filebeat.pem
+      # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config csr.conf -days 3650
+      # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile csr.conf -extensions v3_req -days 3650
 
   #. Generate the Kibana node certificate: 
 
