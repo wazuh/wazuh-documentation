@@ -36,6 +36,11 @@ There are several ways to set the agent IP:
  - **Fixed IP**: Allow the agent to connect only from the specified IP. Example: ``ServerProd`` has the IP ``192.246.247.247``.
  - **Range IP**: Allow the agent to connect from the specified range of IPs. Example: ``DBServer`` has the IP range ``192.168.0.1/24``.
 
+.. note::
+
+	Since Wazuh 4.0, by default, the agent registers automatically with the manager through auto-enrollment. Configuration details can be found on :ref:`Auto-enrollment section <reference_ossec_client>`.
+
+
 Some registration methods automatically detect the IP of the agent during the registration process.
 
 Registration methods

@@ -5,6 +5,10 @@
 Registering agents
 ==================
 
+.. note::
+
+	Since Wazuh 4.0, by default, the agent registers automatically with the manager through auto-enrollment. Configuration details can be found on :ref:`Auto-enrollment section <reference_ossec_client>`.
+
 .. meta::
   :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
 
@@ -31,7 +35,7 @@ Otherwise, you can create a self-signed certificate using the following command:
 Available registration methods
 ------------------------------
 
-You can use the method that better suits with your need. We recommend: :ref:`simple-registration-service`.
+You can use the method that better suits with your need. We recommend: :ref:`Auto-enrollment, see more in <reference_ossec_client>`.
 
 +----------------+---------------------------------------------------------------+
 | Type           | Method                                                        |
