@@ -96,7 +96,7 @@ Kibana installation and configuration
 
     .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
 #. Enable and start the Kibana service:
 
@@ -106,33 +106,16 @@ Kibana installation and configuration
 
     .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
 
-Disabling repositories
-~~~~~~~~~~~~~~~~~~~~~~
+After the first attempt to access the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP used in the installation.
 
-.. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
+  .. code-block:: yaml
 
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/elastic/deb/disabling_repositories.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/elastic/yum/disabling_repositories.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/disabling_repositories.rst
+    hosts:
+      - default:
+        url: <Wazuh_server_IP>
+        port: 55000
+        user: foo
+        password: bar
 
 
 Next steps
@@ -159,10 +142,3 @@ To uninstall Kibana:
 
 
     .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/uninstall_kibana.rst
