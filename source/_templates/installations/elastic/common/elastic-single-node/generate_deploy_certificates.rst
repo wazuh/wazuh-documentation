@@ -76,15 +76,6 @@ The certificates can be generated as follows:
       # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config csr.conf -days 3650
       # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile csr.conf -extensions v3_req -days 3650
 
-  #. Generate the Kibana node certificate: 
-
-    .. code-block:: console
-
-      # openssl genrsa -out kibana-key-temp.pem 2048
-      # openssl pkcs8 -inform PEM -outform PEM -in kibana-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out kibana-key.pem
-      # openssl req -new -key kibana-key.pem -out kibana.csr
-      # openssl x509 -req -in kibana.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out kibana.pem
-
   #. Remove the unnecessary files:
 
     .. code-block:: console
