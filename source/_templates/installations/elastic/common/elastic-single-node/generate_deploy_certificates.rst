@@ -11,7 +11,7 @@ In order to allow communication between the different components of the installa
 
 The certificates can be generated as follows:
 
-  Move to the installation location and create the certificates directory:
+  #. Move to the installation location and create the certificates directory:
 
     .. code-block:: console
 
