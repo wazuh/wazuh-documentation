@@ -224,10 +224,16 @@ The certificates can be generated as follows:
 
       This step has to be repeated for every Wazuh server node in the installation replacing the certificate name (``filebeat-X``) and ``Wazuh_server_X_IP`` by the corresponding one.         
 
+  #. Remove all the unnecessary files:
+
+    .. code-block:: console
+
+      # rm /etc/elasticsearch/certs/*.conf /etc/elasticsearch/certs/*.csr 
+  
   #. Compress all the necessary files to be sended to the rest of the involved parts:
 
     .. code-block:: console
 
-      # zip certs *      
+      # tar -cf certs.tar *
 
 .. End of include file
