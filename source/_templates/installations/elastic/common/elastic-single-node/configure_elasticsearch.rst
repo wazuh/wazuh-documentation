@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Once Elasticsearch is installed download the preconfigured configuration file: 
+Once Elasticsearch is installed, download the preconfigured configuration file: 
 
 .. code-block:: console
 
