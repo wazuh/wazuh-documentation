@@ -182,6 +182,6 @@ This step must be done only on the master node. The certificates can be generate
 
     .. code-block:: console
 
-      # zip certs *   
+      # tar -cf certs.tar *  
 
 .. End of include file
