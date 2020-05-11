@@ -1,19 +1,15 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In section **Installing Elasticsearch**, the ``cert.zip`` file was created. The file must be copied into the Wazuh server host, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+In section *Installing Elasticsearch*, the ``cert.tar`` file was created. The file must be copied into the Wazuh server host, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
 
-The ``X`` must be replaced with the number defined for this Wazuh server in the ``instances.yml`` file:
+The ``X`` must be replaced with the number used in the certificate name defined for this Wazuh server:
 
 .. code-block:: console
 
-  # mkdir /etc/filebeat/certs/ca -p
-  # zip -d ~/certs.zip "ca/ca.key"
-  # unzip ~/certs.zip -d ~/certs
-  # cp -R ~/certs/ca/ ~/certs/filebeat-X/* /etc/filebeat/certs/
-  # mv /etc/filebeat/certs/filebeat-X.crt /etc/filebeat/certs/filebeat.crt
-  # mv /etc/filebeat/certs/filebeat-X.key /etc/filebeat/certs/filebeat.key
-  # chmod -R 500 /etc/filebeat/certs
-  # chmod 400 /etc/filebeat/certs/ca/ca.* /etc/filebeat/certs/filebeat.*
-  # rm -rf ~/certs/ ~/certs.zip
+  # mkdir /etc/filebeat/certs
+  # mv ~/certs.tar /etc/filebeat/certs/
+  # cd /etc/filebeat/certs/
+  # tar -xf certs.tar
+  # chmod 444 /etc/filebeat/certs/filebeat-X-key.pem
 
 .. End of copy_certificates_filebeat_wazuh_cluster.rst

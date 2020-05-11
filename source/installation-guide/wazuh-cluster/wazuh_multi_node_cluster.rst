@@ -12,15 +12,15 @@ This document will go through the installation of the Wazuh server components in
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-Installing Wazuh server
------------------------
+Installing the Wazuh server
+---------------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
+This section describes how to add the Wazuh repository. It will be used for the Wazuh manager and the Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
 
 .. tabs::
 
@@ -42,7 +42,7 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install the Wazuh manager package. This step must be applied in all servers that will act as a Wazuh cluster nodes:
+Install the Wazuh manager package. This step must be applied in all servers that will act as Wazuh cluster nodes:
 
 .. tabs::
 
@@ -95,7 +95,7 @@ Installing the Wazuh API
 
 Before starting, note that the Wazuh API has to be installed only in the Wazuh master node and not in the Wazuh worker nodes.
 
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
+Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
 
 
 .. tabs::
@@ -115,14 +115,14 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 .. note::
-  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
+  It is strongly recommended to secure the Wazuh API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password, and more.
 
 .. _wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.  It has to be installed in every Wazuh manager server.
 
 
 Filebeat installation and configuration
@@ -211,16 +211,10 @@ Disabling repositories
 
 
 
-  .. group-tab:: ZYpp
-
-    .. include:: ../../_templates/installations/wazuh/zypp/disabling_repositories.rst
-
-
-
 Uninstall
 ---------
 
-To uninstall the Wazuh manager and Wazuh API:
+To uninstall the Wazuh manager and the Wazuh API:
 
 .. tabs::
 
@@ -237,12 +231,6 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
 
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
 To uninstall Filebeat:
@@ -263,10 +251,3 @@ To uninstall Filebeat:
 
 
     .. include:: ../../_templates/installations/elastic/yum/uninstall_filebeat.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/uninstall_filebeat.rst

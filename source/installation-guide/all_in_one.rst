@@ -7,7 +7,7 @@
 All-in-One installation
 =======================
 
-This document guides through an installation of the Wazuh server and Opendistro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used.
+This document guides through an installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -16,7 +16,7 @@ This document guides through an installation of the Wazuh server and Opendistro 
 Preparing the installation
 --------------------------
 
-Before installing the Wazuh server and Opendistro, some extra packages must be installed. Opendistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
+Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
 
 .. include:: ../_templates/installations/elastic/common/before_installation.rst
 
@@ -99,7 +99,7 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
 
 .. include:: ../_templates/installations/elastic/common/install_elastic.rst
 

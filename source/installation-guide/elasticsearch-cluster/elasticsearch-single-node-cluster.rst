@@ -8,14 +8,14 @@
 Elasticsearch single-node cluster
 =================================
 
-This document will explain how to install the Opendistro components in a single-node cluster.
+This document will explain how to install the Open Distro components in a single-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
 Preparing the installation
 --------------------------
 
-Before installing the Wazuh server and Opendistro, some extra packages must be installed. OpenDistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
+Before installing the Wazuh server and Open Distro, some extra packages must be installed. OpenDistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
 
   .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 

@@ -196,7 +196,7 @@ The certificates can be generated as follows:
           L = California
           O = Wazuh
           OU = Docu
-          CN = filebeat
+          CN = filebeat-2
 
           [ v3_req ]
           authorityKeyIdentifier=keyid,issuer
@@ -217,7 +217,7 @@ The certificates can be generated as follows:
           # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-2-key.pem -out filebeat-2.csr -config filebeat-2.conf -days 3650
           # openssl x509 -req -in filebeat-2.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat-2.pem -extfile filebeat-2.conf -extensions v3_req -days 3650
 
-      This step has to be repeated for every Wazuh server node in the installation replacing the certificate name (``filebeat-X``) and ``Wazuh_server_X_IP`` by the corresponding one.
+      This step has to be repeated for every Wazuh server node in the installation replacing the certificate name (``filebeat-X``), ``CN``, and ``Wazuh_server_X_IP`` by the corresponding one.
 
   #. Remove all the unnecessary files:
 
