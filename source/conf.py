@@ -459,6 +459,29 @@ def setup(app):
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
+	# List of compiled documents
+    app.connect('html-page-context', collect_compiled_pagename)
+    app.connect('build-finished', creating_file_list)
+
+exclude_doc = ["not_found"]
+list_compiled_html = []
+
+def collect_compiled_pagename(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    if templatename == "page.html" and pagename not in exclude_doc:
+        list_compiled_html.append(context['pagename']+'.html')
+    else:
+        pass
+
+def creating_file_list(app, exception):
+		''' Creates a document `.doclist` containing the path to every html file that was compiled '''
+		if app.builder.name == 'html':
+				build_path = app.outdir
+				separator = '\n'
+				with open(build_path+'/.doclist', 'w') as doclist_file:
+						list_text = separator.join(list_compiled_html)
+						doclist_file.write(list_text)
+
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
