@@ -15,7 +15,7 @@ This document will explain how to install the Opendistro components in a single-
 Preparing the installation
 --------------------------
 
-Before installing Wazuh server and Opendistro, some extra packages must be installed. OpenDistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will in further steps.
+Before installing the Wazuh server and Opendistro, some extra packages must be installed. OpenDistro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
 
   .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
@@ -23,7 +23,7 @@ Before installing Wazuh server and Opendistro, some extra packages must be insta
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
 
 
 Adding the Wazuh repository
@@ -53,7 +53,7 @@ Elasticsearch installation
 
   Install the Elasticsearch package:
 
-    .. include:: ../../_templates/installations/elastic/common/install_elastic.rst  
+    .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,10 +107,3 @@ To uninstall Elasticsearch:
 
 
     .. include:: ../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst

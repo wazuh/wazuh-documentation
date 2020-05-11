@@ -15,7 +15,7 @@ The certificates can be generated as follows:
 
       # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj "/C=US/ST=California/L=California/OU=Docu/O=Wazuh" -days 3650
 
-  #. Create the ``admin.conf`` file for the admin certificate: 
+  #. Create the ``admin.conf`` file for the admin certificate, replacing the ``elasticsearch_node_IP`` with the Elasticsearch's host IP:
 
     .. code-block:: console
 
@@ -26,7 +26,7 @@ The certificates can be generated as follows:
       default_md = sha256
       distinguished_name = req_distinguished_name
       x509_extensions = v3_req
-      
+
       [req_distinguished_name]
       C = US
       ST = California
@@ -34,19 +34,18 @@ The certificates can be generated as follows:
       O = Wazuh
       OU = Docu
       CN = admin
-      
+
       [ v3_req ]
       authorityKeyIdentifier=keyid,issuer
       basicConstraints = CA:FALSE
       keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
       subjectAltName = @alt_names
-      
+
       [alt_names]
       IP.1 = <elasticsearch_node_IP>
 
-      EOF 
+      EOF
 
-    Replace the ``elasticsearch_node_IP`` with the Elasticsearch's host IP.     
 
   #. Generate the admin certificate:
 
@@ -55,7 +54,7 @@ The certificates can be generated as follows:
       # openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config admin.conf -days 3650
       # openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile admin.conf -extensions v3_req -days 3650
 
-  #. Create the ``elasticsearch.conf`` file for the elasticsearch node certificate: 
+  #. Create the ``elasticsearch.conf`` file for the elasticsearch node certificate, replacing the ``elasticsearch_node_IP`` with the Elasticsearch's host IP:
 
     .. code-block:: console
 
@@ -66,7 +65,7 @@ The certificates can be generated as follows:
       default_md = sha256
       distinguished_name = req_distinguished_name
       x509_extensions = v3_req
-      
+
       [req_distinguished_name]
       C = US
       ST = California
@@ -74,21 +73,20 @@ The certificates can be generated as follows:
       O = Wazuh
       OU = Docu
       CN = node-1
-      
+
       [ v3_req ]
       authorityKeyIdentifier=keyid,issuer
       basicConstraints = CA:FALSE
       keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
       subjectAltName = @alt_names
-      
+
       [alt_names]
       IP.1 = <elasticsearch_node_IP>
 
-      EOF 
+      EOF
 
-    Replace the ``elasticsearch_node_IP`` with the Elasticsearch's host IP.        
-  
-  #. Generate the Elasticsearch node certificate: 
+
+  #. Generate the Elasticsearch node certificate:
 
     .. code-block:: console
 
@@ -100,7 +98,7 @@ The certificates can be generated as follows:
 
     .. group-tab:: Wazuh single-node cluster
 
-      #. Create the ``filebeat.conf`` file for the Filebeat certificate: 
+      #. Create the ``filebeat.conf`` file for the Filebeat certificate, replacing the ``Wazuh_server_IP`` with the Wazuh server's host IP:
 
         .. code-block:: console
 
@@ -111,7 +109,7 @@ The certificates can be generated as follows:
           default_md = sha256
           distinguished_name = req_distinguished_name
           x509_extensions = v3_req
-          
+
           [req_distinguished_name]
           C = US
           ST = California
@@ -119,30 +117,29 @@ The certificates can be generated as follows:
           O = Wazuh
           OU = Docu
           CN = filebeat
-          
+
           [ v3_req ]
           authorityKeyIdentifier=keyid,issuer
           basicConstraints = CA:FALSE
           keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
           subjectAltName = @alt_names
-          
+
           [alt_names]
           IP.1 = <Wazuh_server_IP>
 
-          EOF 
+          EOF
 
-        Replace the ``Wazuh_server_IP`` with the Wazuh server's host IP.      
 
-      #. Generate the Filebeat node certificate: 
+      #. Generate the Filebeat node certificate:
 
         .. code-block:: console
 
           # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config filebeat.conf -days 3650
-          # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile filebeat.conf -extensions v3_req -days 3650    
+          # openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile filebeat.conf -extensions v3_req -days 3650
 
     .. group-tab:: Wazuh multi-node cluster
 
-      #. Create the ``filebeat-1.conf`` file for the Filebeat certificate: 
+      #. Create the ``filebeat-1.conf`` file for the Filebeat certificate, replacing the ``Wazuh_server_1_IP`` with the Wazuh server's host IP:
 
         .. code-block:: console
 
@@ -153,7 +150,7 @@ The certificates can be generated as follows:
           default_md = sha256
           distinguished_name = req_distinguished_name
           x509_extensions = v3_req
-          
+
           [req_distinguished_name]
           C = US
           ST = California
@@ -161,39 +158,38 @@ The certificates can be generated as follows:
           O = Wazuh
           OU = Docu
           CN = filebeat-1
-          
+
           [ v3_req ]
           authorityKeyIdentifier=keyid,issuer
           basicConstraints = CA:FALSE
           keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
           subjectAltName = @alt_names
-          
+
           [alt_names]
           IP.1 = <Wazuh_server_1_IP>
 
-          EOF 
+          EOF
 
-        Replace the ``Wazuh_server_1_IP`` with the Wazuh server's host IP.      
 
-      #. Generate the Filebeat node 1 certificate: 
+      #. Generate the Filebeat node 1 certificate:
 
         .. code-block:: console
 
           # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-1-key.pem -out filebeat-1.csr -config filebeat-1.conf -days 3650
-          # openssl x509 -req -in filebeat-1.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat-1.pem -extfile filebeat-1.conf -extensions v3_req -days 3650  
+          # openssl x509 -req -in filebeat-1.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat-1.pem -extfile filebeat-1.conf -extensions v3_req -days 3650
 
-      #. Create the ``filebeat-2.conf`` file for the Filebeat certificate: 
+      #. Create the ``filebeat-2.conf`` file for the Filebeat certificate, replacing the ``Wazuh_server_2_IP`` with the Wazuh server's host IP:
 
         .. code-block:: console
 
-          # cat  > filebeat.conf  <<\EOF
+          # cat  > filebeat-2.conf  <<\EOF
           [ req ]
           prompt = no
           default_bits = 2048
           default_md = sha256
           distinguished_name = req_distinguished_name
           x509_extensions = v3_req
-          
+
           [req_distinguished_name]
           C = US
           ST = California
@@ -201,35 +197,34 @@ The certificates can be generated as follows:
           O = Wazuh
           OU = Docu
           CN = filebeat
-          
+
           [ v3_req ]
           authorityKeyIdentifier=keyid,issuer
           basicConstraints = CA:FALSE
           keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
           subjectAltName = @alt_names
-          
+
           [alt_names]
           IP.1 = <Wazuh_server_2_IP>
 
-          EOF 
+          EOF
 
-        Replace the ``Wazuh_server_IP`` with the Wazuh server's host IP.      
 
-      #. Generate the Filebeat node 2 certificate: 
+      #. Generate the Filebeat node 2 certificate:
 
         .. code-block:: console
 
           # openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-2-key.pem -out filebeat-2.csr -config filebeat-2.conf -days 3650
-          # openssl x509 -req -in filebeat-2.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat-2.pem -extfile filebeat-2.conf -extensions v3_req -days 3650       
+          # openssl x509 -req -in filebeat-2.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat-2.pem -extfile filebeat-2.conf -extensions v3_req -days 3650
 
-      This step has to be repeated for every Wazuh server node in the installation replacing the certificate name (``filebeat-X``) and ``Wazuh_server_X_IP`` by the corresponding one.         
+      This step has to be repeated for every Wazuh server node in the installation replacing the certificate name (``filebeat-X``) and ``Wazuh_server_X_IP`` by the corresponding one.
 
   #. Remove all the unnecessary files:
 
     .. code-block:: console
 
-      # rm /etc/elasticsearch/certs/*.conf /etc/elasticsearch/certs/*.csr 
-  
+      # rm /etc/elasticsearch/certs/*.conf /etc/elasticsearch/certs/*.csr
+
   #. Compress all the necessary files to be sended to the rest of the involved parts:
 
     .. code-block:: console
