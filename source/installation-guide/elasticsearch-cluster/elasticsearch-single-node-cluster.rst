@@ -67,7 +67,8 @@ Certificates creation and deployment
 
 #. Remove the demo certificates:
 
-  .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
+
 
 #. This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
