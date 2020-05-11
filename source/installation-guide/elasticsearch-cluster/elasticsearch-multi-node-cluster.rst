@@ -66,6 +66,10 @@ Elasticsearch configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#. [*All*]Remove the demo certificates:
+
+  .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
+
 #. [*Master*] This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
