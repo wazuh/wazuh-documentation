@@ -289,7 +289,7 @@ Options
 - `agent_key_path`_
 - `authorization_pass`_
 - `auto_method`_
-- `wait_time`_
+- `delay_after_enrollment`_
 
 enabled
 ^^^^^^^
@@ -425,10 +425,10 @@ Auto negotiate the most secure common SSL/TLS method with the manager, use "yes"
 | **Allowed values** | yes or no                                   |
 +--------------------+---------------------------------------------+
 
-wait_time
-^^^^^^^^^
+delay_after_enrollment
+^^^^^^^^^^^^^^^^^^^^^^
 
-Wait time agentd should wait after a successfull registration.
+Time agentd should wait after a successfull registration.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 20                                          |
