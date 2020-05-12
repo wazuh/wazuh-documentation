@@ -171,44 +171,25 @@ Filebeat installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
-
 #. Configure Filebeat certificates:
 
-    .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
 #. Enable and start the Filebeat service:
 
     .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
 
+To ensure that Filebeat has been successfully installed, execute the following command:
+
+    .. code-block:: console
+
+      # filebeat test output
+
 
 Next steps
 ----------
 
-The next step consists of installing Kibana. The guide continues  :ref:`here<kibana>`.
-
-
-Disabling repositories
-----------------------
-
-.. include:: ../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
-
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/disabling_repositories.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../_templates/installations/wazuh/yum/disabling_repositories.rst
-
+The next step consists of :ref:`installing Kibana <kibana>`.
 
 
 Uninstall

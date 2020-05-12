@@ -185,6 +185,8 @@ To ensure that Filebeat has been successfully installed, execute the following c
 Installing Kibana
 -----------------
 
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch.
+
 #. Install the Kibana package:
 
     .. tabs::

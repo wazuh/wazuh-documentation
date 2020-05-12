@@ -46,9 +46,9 @@ Once the certificate has been created, it must be copied in the Kibana host, for
   .. code-block:: console
 
     # mkdir /etc/kibana/certs
-    # mv ~/certs.zip /etc/kibana/certs/
+    # mv ~/certs.tar /etc/kibana/certs/
     # cd /etc/kibana/certs/
-    # unzip certs.zip
+    # tar -xf certs.tar
     # chmod 444 /etc/kibana/certs/kibana-key.pem
 
 .. End of include file
