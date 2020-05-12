@@ -715,7 +715,7 @@ Specifies a limit on the number of files that will be monitored by syscheck. Fil
 
 .. versionadded:: 3.13
 
-Specifies wether there will be a limit on the number of monitored files or not.
+Specifies whether there will be a limit on the number of monitored files or not.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
