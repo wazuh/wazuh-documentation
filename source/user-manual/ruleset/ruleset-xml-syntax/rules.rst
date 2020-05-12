@@ -28,7 +28,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `category`_         | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `field`_            | Name and `sregex <regex.html#sregex-os-match-syntax>`_        | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
+| `field`_            | Any `regex expression <regex.html#regex-os-regex-syntax>`_    | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
 |                     |                                                               | value.                                                                                               |
 +---------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `srcip`_            | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
@@ -267,7 +267,7 @@ Used as a requisite to trigger the rule. It will check for a match in the conten
 +--------------------+-----------------------------------------------------------------+
 | **name**           | Specifies the name of the field extracted by the decoder.       |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_      |
 +--------------------+-----------------------------------------------------------------+
 
 Example:
