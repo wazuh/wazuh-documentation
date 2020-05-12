@@ -1,18 +1,17 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. note:: If the Elasticsearch node is not the master node where the certificates were created, it necessary to remove the ``ca.key`` file: ``zip -d ~/certs.zip "ca/ca.key"``.
+Copy the  ``certs.tar`` file into each Elasticsearch node, except the master node, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+
+The ``X`` must be replaced with the number used in the certificate name defined for the corresponding Elasticsearch server:
 
 .. code-block:: console
 
-  # unzip ~/certs.zip -d ~/certs
-  # mkdir /etc/elasticsearch/certs/ca -p
-  # cp -R ~/certs/ca/ ~/certs/elasticsearch-X/* /etc/elasticsearch/certs/
-  # mv /etc/elasticsearch/certs/elasticsearch-X.crt /etc/elasticsearch/certs/elasticsearch.crt
-  # mv /etc/elasticsearch/certs/elasticsearch-X.key /etc/elasticsearch/certs/elasticsearch.key
-  # chown -R elasticsearch: /etc/elasticsearch/certs
-  # chmod -R 500 /etc/elasticsearch/certs
-  # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-  # rm -rf ~/certs/ ~/certs.zip
-
+  # mkdir /etc/elasticsearch/certs
+  # mv ~/certs.tar /etc/elasticsearch/certs/
+  # cd /etc/elasticsearch/certs/
+  # tar -xf certs.tar
+  # mv /etc/elasticsearch/certs/elasticsearch-X.pem /etc/elasticsearch/certs/elasticsearch.pem
+  # mv /etc/elasticsearch/certs/elasticsearch-X-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
+  # chmod 444 /etc/elasticsearch/certs/elasticsearch-key.pem
 
 .. End of include file
