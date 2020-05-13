@@ -18,7 +18,7 @@ Considerations
 Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh app. We always recommend updating the installation to the latest version in order get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh>`.
 
 .. note::
-  This tutorial **won`t work** on Wazuh 2.x and Elastic Stack 5.x.
+  This tutorial **won't work** on Wazuh 2.x and Elastic Stack 5.x.
 
 Also, keep in mind that this process **will be restored** after upgrading the Wazuh app, or any of the Elastic Stack components involved during the process. The reason for this depends on each component:
 
@@ -49,17 +49,17 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
 
 3. Open the template file and locate this line:
 
-    .. code-block:: none
+    .. code-block:: javascript
 
       "index_patterns": ["wazuh-alerts-3.x-*"],
 
     Add your custom pattern:
 
-    .. code-block:: none
+    .. code-block:: javascript
 
       "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],
 
@@ -73,28 +73,39 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
       # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
+    .. code-block:: json
+      :class: output
+
       {"acknowledged":true}
 
     .. note::
       ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
-5. Open the Wazuh configuration file for Filebeat (``/etc/filebeat/filebeat.yml``) and replace the index name:
+5. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
 
-    From this:
+    For example, from
 
-    .. code-block:: none
+    .. code-block:: yaml
 
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+        - name: index_prefix
+          default: wazuh-alerts-3.x-
 
     To this:
 
-    .. code-block:: none
+    .. code-block:: yaml
 
-      indices:
-        - index: 'my-custom-alerts-%{+yyyy.MM.dd}'
+        - name: index_prefix
+          default: my-custom-alerts-3.x-
 
-7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
+
+Note
+
+Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,` and must not start with `_`, `-` or `+`. Also, all the letters must be lowercase. 
+
+
+
+
+7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
     .. code-block:: yaml
 

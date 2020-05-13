@@ -123,6 +123,11 @@ dt {
   padding-bottom: 10px;
 }
 
+.docutils.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -263,7 +268,6 @@ dt {
 }
 
 #links-to-home .wazuh-logo-link {
-  vertical-align: text-bottom;
   display: inline-block;
   margin-right: 5px;
 }
@@ -271,10 +275,6 @@ dt {
 #links-to-home .wazuh-logo-link:hover,
 #links-to-home .wazuh-logo-link:focus {
   text-decoration: none;
-}
-
-#links-to-home a.docs-link {
-  vertical-align: middle;
 }
 
 a.docs-link {
@@ -299,7 +299,7 @@ a.docs-link:active {
   position: fixed;
   bottom: 0;
   right: 15px;
-  height: 44px;
+  height: 42px;
   padding: 10px;
   z-index: 100;
   border-radius: 25px 25px 0 0;
@@ -316,7 +316,7 @@ a.docs-link:active {
 
 #btn-scroll .fa {
   color: rgba(255, 255, 255, 0.75);
-  font-size: 25px;
+  font-size: 1.4rem;
   transition: color .7s;
 }
 
@@ -435,7 +435,7 @@ header .menuweb-bar .menu-item a {
   position: absolute;
     width: auto !important;
     top: 13px;
-    left: 8px;
+    left: 14px;
     color: #00a9e5;
     font: normal normal normal 39px/1 'wazuh-icons';
     vertical-align: middle;
@@ -615,6 +615,10 @@ header .menuweb-bar .menu-item a {
   box-shadow: none;
 }
 
+.navigation-buttons .btn .fa {
+  font-size: 0.75rem;
+}
+
 footer {
   font-size: 0.88rem;
   background-color: #0094ce;
@@ -678,6 +682,14 @@ footer .logo a:focus {
 
 ul, ol {
 	padding-left: 1.7rem;
+}
+
+ul.simple li dl {
+  margin-bottom: 0;
+}
+
+ul.simple dl dt {
+  font-weight: normal;
 }
 
 ul.simple dl dd {
@@ -853,7 +865,7 @@ li.toctree-l5 > a {
   width: 11px;
   height: 11px;
   padding: 1px;
-  font: normal normal normal 9px/1 FontAwesome;
+  font: normal bold normal 0.65rem/1 FontAwesome;
   text-rendering: auto;
 }
 
@@ -863,6 +875,23 @@ li.toctree-l5 > a {
 
 #globaltoc .show > a > .toc-toggle-btn .toc-toggle-icon:after {
 	content: '\f077';
+}
+
+#globaltoc > nav > ul .show > ul > li:not(.show){
+  max-height: 80px;
+	opacity: 1;
+	transition: max-height ease .3s, opacity ease 0.3s;
+}
+
+#globaltoc > nav > ul .show.initial > ul > li:not(.show){
+  transition: none !important;
+}
+
+#globaltoc > nav > ul li:not(.show) > ul > li {
+	max-height: 0;
+	opacity: 0;
+	border-width: 0px;
+	transition: max-height ease .3s, opacity ease 0.3s;
 }
 
 #globaltoc li {
@@ -1031,7 +1060,7 @@ a.headerlink:before {
   color: #ffb600;
   content: '\f0c1';
   display: inline-block;
-  font: normal normal normal 15px/.5 FontAwesome;
+  font: normal bold normal 0.95rem/.5 FontAwesome;
   text-align: right;
   padding-left: 10px;
   padding-bottom: 4px;
@@ -1185,13 +1214,14 @@ footer a:focus,
 
 .search_main .searchform > .btn-search,
 .navbar-toggler.btn-close {
-  height: 25px;
-  width: 25px;
+  height: 28px;
+  width: 28px;
   border: none;
   position: absolute;
-  top: 3px;
+  padding: 3px;
+  top: 2px;
   right: 3px;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .search_main .btn-search:focus {
@@ -1365,7 +1395,7 @@ footer a:focus,
 }
 
 .search_main .btn-search .fa {
-  font-size: 20px;
+  font-size: 15px;
   line-height: .2;
 }
 
@@ -1720,10 +1750,21 @@ select, option {
   transition: .1s all ease;
   color: #00a9e5;
   text-align: left;
- }
+}
 
 #select-version .dropdown-menu li:hover a {
   color: #fff;
+}
+
+#select-version .dropdown-menu li a.disable {
+  cursor: default;
+  color: #999;
+  background-color: #f5f5f5;
+}
+
+#select-version .dropdown-menu li:hover a.disable {
+  color: #fff;
+  background-color: #00a9e5;
 }
 
 .version::after {
@@ -1732,7 +1773,7 @@ select, option {
   right: 10px;
   width: 0.5rem;
   height: 0.5rem;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1em/.5 FontAwesome;
   content: '\f0d7';
   color: #ffffff;
   pointer-events: none;
@@ -2189,7 +2230,7 @@ p.admonition-title {
 p.first.admonition-title::before,
 .no-latest-notice span::before {
   display: inline-block;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1.1rem/.5 FontAwesome;
   width: 12px;
   margin-right: 0.75em;
 }
@@ -2329,7 +2370,7 @@ p.first.admonition-title::before,
 .versionadded > p > span::before, .deprecated span.versionmodified::before {
   content: '\f06a';
   display: inline-block;
-  font: normal normal normal 1em/.5 FontAwesome;
+  font: normal bold normal 1em/.5 FontAwesome;
   width: 12px;
   margin-right: 0.75em;
 }
@@ -2540,7 +2581,8 @@ ul#breadcrumbs {
 
 ul#breadcrumbs .fa {
   color: #0094d0;
-  padding: 0 4px;
+  padding: 0 4px 0 2px;
+  font-size: 0.75rem;
 }
 
 ul#breadcrumbs li:before {
@@ -2561,6 +2603,10 @@ ul#breadcrumbs a {
 
 .edit-repo a {
   color: #0094d0;
+}
+
+.edit-repo a i {
+  margin-right: 5px;
 }
 
 [class*="highlight-"] {
@@ -2611,6 +2657,31 @@ div.highlight pre {
 .linenos {
   padding: 0 0.5em 0 1em !important;
   border-right: 1px solid #00a9e5;
+}
+
+.tooltip > .tooltip-inner {
+  max-width: 300px !important;
+  padding: 7px !important;
+  font-size: 11px !important;
+  color: #fff !important;
+  background-color: #888 !important;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before,
+.bs-tooltip-top .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=right] .arrow::before,
+.bs-tooltip-right .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  display: none;
+}
+.bs-tooltip-auto[x-placement^=left] .arrow::before,
+.bs-tooltip-left .arrow::before {
+  display: none;
 }
 
 @media (min-width:576px){
@@ -2898,10 +2969,6 @@ div.highlight pre {
         position: relative;
       }
 
-      #links-to-home a.docs-link {
-        vertical-align: bottom;
-      }
-
       #header-sticky .navbar-open {
         display: none;
       }
@@ -3096,7 +3163,6 @@ div.highlight pre {
         border: none;
         background: #ffb600;
         color: #ffffff;
-        min-width: 235px;
       }
 
       aside.help .btn-help:hover,
@@ -3121,7 +3187,7 @@ div.highlight pre {
 
       #links-to-home .docs-link {
         margin-left: 15px;
-        line-height: 2em;
+        line-height: 1em;
       }
 
 			#links-to-home .wazuh-logo-link img {
@@ -3466,6 +3532,15 @@ div[class*='highlight'] {
   margin: 1px 0 24px 0
 }
 
+div[class*='highlight'].output {
+	border: none;
+	background-color: transparent;
+}
+
+div[class*='highlight'].output .highlight {
+	border: 1px solid #e1e4e5;
+}
+
 div[class*='highlight'] {
   position: relative;
 }
@@ -3515,7 +3590,8 @@ div[class*='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class*='highlight']:hover .copy-to-clipboard {
+div[class*='highlight']:hover .copy-to-clipboard,
+div[class*='highlight'] .copy-to-clipboard:focus {
   opacity: 1;
 }
 
@@ -3535,7 +3611,7 @@ div[class*='highlight'] .copy-to-clipboard span {
 }
 
 @media print {
-  .codeblock,pre.literal-block,.rst-content .literal-block,.rst-content pre.literal-block,div[class*='highlight'],div[class*='highlight'] pre {
+  .codeblock,pre.literal-block,.rst-content .literal-block,.rst-content pre.literal-block,div[class^='highlight'],div[class^='highlight'] pre {
     white-space: pre-wrap
   }
 }
@@ -3558,7 +3634,7 @@ pre .gr { color: #a00 } /* Generic.Error */
 pre .gh { color: #999 } /* Generic.Heading */
 pre .gi { color: #000; background-color: #dfd } /* Generic.Inserted */
 pre .gi .x { color: #000; background-color: #afa }
-pre .go { color: #888 } /* Generic.Output */
+pre .go, pre .heredoc, pre .heredoc .gp { color: #888 } /* Generic.Output */
 pre .gp { color: #555 } /* Generic.Prompt */
 pre .gs { font-weight: bold }
 pre .gu { color: purple; font-weight: bold } /* Generic.Subheading */

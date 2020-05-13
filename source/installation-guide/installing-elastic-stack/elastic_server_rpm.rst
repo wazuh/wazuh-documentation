@@ -16,7 +16,7 @@ Preparation
 
   .. code-block:: console
 
-    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
     # cat > /etc/yum.repos.d/elastic.repo << EOF
     [elasticsearch-7.x]
     name=Elasticsearch repository for 7.x packages
@@ -37,7 +37,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # yum install elasticsearch-7.4.0
+    # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
 2. Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen to a non-loopback address by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to the IP you want to bind it to:
 
@@ -95,7 +95,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # yum install kibana-7.4.0
+    # yum install kibana-|ELASTICSEARCH_LATEST|
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -104,30 +104,40 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.4.0.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
   * Install from the package:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.2_7.4.0.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
 
-3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can be only accessed from the same machine. To access Kibana from the outside make it listen on its network IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
+3. Kibana will only listen on the loopback interface (localhost) by default, which means that it can only be accessed from the same machine. To access Kibana from the outside, make it listen on its network interface IP by editing the file ``/etc/kibana/kibana.yml``, uncomment the setting ``server.host``, and change the value to:
 
   .. code-block:: yaml
 
     server.host: "<kibana_ip>"
 
-4. Configure the URLs of the Elasticsearch instances to use for all your queries. By editing the file ``/etc/kibana/kibana.yml``:
+4. Set the URL or the IP of the Elasticsearch node by editing the file ``/etc/kibana/kibana.yml``:
 
   .. code-block:: yaml
 
     elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"]
+    
+5. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
-5. Enable and start the Kibana service:
+  .. code-block:: console
+
+    # cat >> /etc/default/kibana << EOF
+    NODE_OPTIONS="--max_old_space_size=2048"
+    EOF
+
+6. Enable and start the Kibana service:
 
   a) For Systemd:
 
@@ -144,9 +154,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # chkconfig --add kibana
     # service kibana start
 
-6. (Optional) Disable the Elasticsearch repository:
+7. (Optional) Disable the Elasticsearch repository:
 
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
+  It is recommended that the Elasticsearch repository to be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh plugin for Kibana. To do this, use the following command:
 
   .. code-block:: console
 
@@ -157,7 +167,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Next steps
 ----------
 
-Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
+Once the Wazuh Manager and the Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
 You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.
 

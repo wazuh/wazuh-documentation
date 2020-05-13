@@ -16,22 +16,43 @@ In this example, we are going to create a certificate for a Wazuh manager, whose
 Wazuh manager
 ^^^^^^^^^^^^^
 
-Follow these stes in the Wazuh server:
+Follow these steps in the Wazuh server:
 
-1. Issue and sign a certificate for the manager. You can enter the hostname or the IP address of the Wazuh server where the agents are going to be registerd. In this case, the Wazuh server IP is ``192.168.1.2``:
+1. Create a configuration file and name it ``req.conf``. You can enter the hostname or the IP address of the Wazuh server where the agents are going to be registered. In this case, the Wazuh server IP is ``192.168.1.2``. The content of the configuration file could be as follows:
+
+  .. code-block:: pkgconfig
+
+    [req]
+    distinguished_name = req_distinguished_name
+    req_extensions = req_ext
+    prompt = no
+    [req_distinguished_name]
+    C = US
+    CN = 192.168.1.2
+    [req_ext]
+    subjectAltName = @alt_names
+    [alt_names]
+    DNS.1 = wazuh
+    DNS.2 = wazuh.com
+
+  .. note:: The ``subjectAltName`` extension is optional but necessary to allow the registration of Wazuh agents with a SAN certificate. In this case, the Wazuh server DNS are ``wazuh`` and ``wazuh.com``.
+
+2. Issue and sign a certificate for the manager:
 
   .. code-block:: console
 
-    # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -subj '/C=US/CN=192.168.1.2'
-    # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial
+    # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
+    # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
 
-2. Copy the newly created certificate and its key to the ``/var/ossec/etc`` folder:
+  .. note:: The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``. This will allow the registration of Wazuh agents with a SAN certificate.
+
+3. Copy the newly created certificate and its key to the ``/var/ossec/etc`` folder:
 
   .. code-block:: console
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
-3. Restart the Wazuh manager:
+4. Restart the Wazuh manager:
 
   a) For Systemd:
 

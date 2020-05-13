@@ -9,8 +9,8 @@ Wazuh can be configured to send email alerts to one or more email addresses when
 
 Sample email:
 
-::
-
+.. code-block:: none
+    :class: output
 
     From: Wazuh <you@example.com>               5:03 PM (2 minutes ago)
     to: me
@@ -35,7 +35,7 @@ Generic email options
 
 In order to configure Wazuh to send email alerts, the email settings must be configured in the ``<global>`` section of the ``ossec.conf`` file:
 
-::
+.. code-block:: xml
 
   <ossec_config>
       <global>
@@ -51,7 +51,7 @@ To see all of the available email configuration options, go to the :ref:`global 
 
 Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 12.
 
-::
+.. code-block:: xml
 
   <ossec_config>
     <alerts>
@@ -94,7 +94,7 @@ Email alert based on level
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 This is configured as follows:
 
-::
+.. code-block:: xml
 
  <email_alerts>
    <email_to>you@example.com</email_to>
@@ -110,7 +110,7 @@ Email alert based on level and agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This is configured as follows:
 
-::
+.. code-block:: xml
 
  <email_alerts>
    <email_to>you@example.com</email_to>
@@ -124,7 +124,8 @@ The ``event_location`` field can be configured to monitor a specific log, hostna
 
 Email based on rules ID
 ^^^^^^^^^^^^^^^^^^^^^^^
-::
+
+.. code-block:: xml
 
  <email_alerts>
    <email_to>you@example.com</email_to>
@@ -138,7 +139,8 @@ Email based on the group
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Email alerts can be configured to send an email based on one or more rule groups:
-::
+
+.. code-block:: xml
 
  <email_alerts>
    <email_to>you@example.com</email_to>
@@ -152,7 +154,7 @@ Multiple options and multiple emails
 
 This example shows the email alerts capabilities. Email alerts can be sent to multiple email addresses, each one with unique criteria:
 
-::
+.. code-block:: xml
 
  <ossec_config>
    <email_alerts>
@@ -193,7 +195,7 @@ The possible values for this option are:
 
 For example:
 
-::
+.. code-block:: xml
 
    <rule id="502" level="3">
      <if_sid>500</if_sid>

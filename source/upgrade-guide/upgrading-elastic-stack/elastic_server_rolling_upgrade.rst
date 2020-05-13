@@ -43,6 +43,22 @@ Prepare the Elastic Stack
         # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
         # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
 
+    * openSUSE:
+
+      .. code-block:: console
+
+        # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+        # cat > /etc/zypp/repos.d/elastic.repo << EOF
+        [elasticsearch-7.x]
+        name=Elasticsearch repository for 7.x packages
+        baseurl=https://artifacts.elastic.co/packages/7.x/yum
+        gpgcheck=1
+        gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        enabled=1
+        autorefresh=1
+        type=rpm-md
+        EOF
+
 
 Upgrade Elasticsearch
 ---------------------
@@ -77,19 +93,20 @@ Upgrade Elasticsearch
 
       .. code-block:: console
 
-        # yum install elasticsearch-7.4.0
+        # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
     * Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install elasticsearch=7.4.0
-        # systemctl restart elasticsearch
+        # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
 
-#. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
+#. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``).
 
     .. code-block:: yaml
 
+      discovery.seed_hosts:
+        - master_node_name_or_ip_address
       cluster.initial_master_nodes:
         - master_node_name_or_ip_address
 
@@ -167,21 +184,28 @@ Upgrade Filebeat
 
       .. code-block:: console
 
-        # yum install filebeat-7.4.0
+        # yum install filebeat-|ELASTICSEARCH_LATEST|
 
     * Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install filebeat=7.4.0
+        # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 #. Update the configuration file.
 
     .. code-block:: console
 
       # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.10.2/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
       # chmod go+r /etc/filebeat/filebeat.yml
+
+#. Download the alerts template for Elasticsearch:
+
+    .. code-block:: console
+
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -211,7 +235,8 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # /usr/share/kibana/bin/kibana-plugin remove wazuh
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin remove wazuh
 
 #. Upgrade Kibana.
 
@@ -219,19 +244,37 @@ Upgrade Kibana
 
       .. code-block:: console
 
-        # yum install kibana-7.4.0
+        # yum install kibana-|ELASTICSEARCH_LATEST|
 
     * For Debian/Ubuntu:
 
       .. code-block:: console
 
-        # apt-get install kibana=7.4.0
+        # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
 #. Install the Wazuh app.
 
+    * From URL:
+
     .. code-block:: console
 
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.4.0.zip
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+
+    * From the package:
+
+    .. code-block:: console
+
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+
+#. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+
+    .. code-block:: console
+
+      # cat >> /etc/default/kibana << EOF
+      NODE_OPTIONS="--max_old_space_size=2048"
+      EOF
 
 #. Restart Kibana.
 
@@ -239,3 +282,32 @@ Upgrade Kibana
 
       # systemctl daemon-reload
       # systemctl restart kibana
+      
+Disabling repositories
+^^^^^^^^^^^^^^^^^^^^^^
+
+    * For CentOS/RHEL/Fedora:
+
+      .. code-block:: console
+
+        # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+
+    * For Debian/Ubuntu:
+
+      .. code-block:: console
+
+        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+        # apt-get update
+
+      Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+      .. code-block:: console
+
+        # echo "elasticsearch hold" | sudo dpkg --set-selections
+        # echo "kibana hold" | sudo dpkg --set-selections
+
+    * For openSUSE:
+
+      .. code-block:: console
+
+        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo

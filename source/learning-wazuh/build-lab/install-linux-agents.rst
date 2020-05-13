@@ -5,14 +5,21 @@
 Install the Linux Wazuh agents
 ==============================
 
-Use the following procedure separately on your Linux Agent and Elastic Server instances to register and connect them to the Wazuh manager.
+Use the following procedure separately on your **Linux Agent** and **Elastic Server**
+instances to install, register and configure them to connect to the Wazuh manager.
 
 Log in and sudo to root
 -----------------------
 
+Remember to do this on both your Linux Agent and on your Elastic Server:
+
     .. code-block:: console
 
-        # sudo su -
+        [user@user_machine]$ ssh -i Wazuh_Lab.pem centos@ELASTIC_SERVER_IP
+        [root@elastic-server ~]$ sudo su -
+
+        [user@user_machine]$ ssh -i Wazuh_Lab.pem centos@LINUX_AGENT_IP
+        [centos@linux-agent ~]$ sudo su -
 
 Add the Wazuh yum repository
 ----------------------------
@@ -37,39 +44,10 @@ Install the Wazuh agent software
 
   .. code-block:: console
 
-    # yum -y install wazuh-agent
+    # WAZUH_MANAGER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" \
+    WAZUH_PROTOCOL="tcp" yum -y install wazuh-agent
 
-
-Configure Wazuh agent to reach out to the Wazuh manager's IP via tcp.
-
-  .. code-block:: console
-
-    # egrep "<protocol>udp|<address>MANAGER_IP" -B3 -A1 /var/ossec/etc/ossec.conf
-    # sed -i 's/MANAGER_IP/172.30.0.10/' /var/ossec/etc/ossec.conf
-    # sed -i 's/<protocol>udp/<protocol>tcp/' /var/ossec/etc/ossec.conf
-    # egrep "<protocol>tcp|<address>172.30.0.10" -B3 -A1 /var/ossec/etc/ossec.conf
-
-
-Make Wazuh agent register itself with the Wazuh manager, presenting the required password.
-
-  .. code-block:: console
-
-    # agent-auth -m 172.30.0.10 -P please123
-
-
-Restart Wazuh agent and confirm it successfully connected with the Manager. Run this on the Wazuh agent side:
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-agent
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-agent restart
+Verify the agent has properly connected:
 
   .. code-block:: console
 
@@ -77,11 +55,21 @@ Restart Wazuh agent and confirm it successfully connected with the Manager. Run 
 
 You should see output like this:
 
-  .. code-block:: console
+  .. code-block:: none
+    :class: output
 
     status='connected'
 
 .. note::
-  The **/var/ossec/var/run/ossec-agentd.state** file on \*NIX platforms and the **C:\\Program Files (x86)\\ossec-agent\\ossec-agent.state**
-  file on Windows platforms contain several useful pieces of information about the state of the Wazuh agent's connection with the Wazuh
-  manager.  See the file content itself for more information.
+  The **/var/ossec/var/run/ossec-agentd.state** file on Unix-like platforms and the
+  **C:\\Program Files (x86)\\ossec-agent\\ossec-agent.state** file on Windows
+  platforms contain several useful pieces of information about the state of the
+  Wazuh agent's connection with the Wazuh manager.  See the file content itself
+  for more information.
+
+Now disable the Wazuh repository in order to prevent a future unintended upgrade
+that may cause a version conflict with the current installation.
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo

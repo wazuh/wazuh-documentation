@@ -19,6 +19,10 @@ Once the Ansible repository has been cloned, we proceed to install the Wazuh ser
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
+
+.. code-block:: none
+	:class: output
+
 	CHANGELOG.md  playbooks  README.md  roles  VERSION
 
 We can see the roles we have.
@@ -26,6 +30,10 @@ We can see the roles we have.
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
+
+.. code-block:: none
+	:class: output
+
 	roles
 	├── ansible-galaxy
 	│   └── meta
@@ -71,6 +79,10 @@ And we can see the preconfigured playbooks we have.
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
+
+.. code-block:: none
+	:class: output
+
 	playbooks/
 	├── wazuh-agent.yml
 	├── wazuh-elastic_stack-distributed.yml
@@ -91,6 +103,10 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 .. code-block:: console
 
 	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ cat wazuh-manager.yml
+
+.. code-block:: yaml
+	:class: output
+
 	- hosts: <your wazuh server host>
 	  roles:
 	    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
@@ -154,7 +170,8 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 We will obtain a final result similar to the one shown in the following code block.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	TASK [ansible-role-filebeat : Debian/Ubuntu | Add Filebeat repository.] **********************************************************************************
 	skipping: [192.168.0.180]
@@ -199,8 +216,6 @@ We will obtain a final result similar to the one shown in the following code blo
 	PLAY RECAP ***********************************************************************************************************************************************
 	192.168.0.180              : ok=36   changed=19   unreachable=0    failed=0
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$
-
 
 We can check the status of our new services in our Wazuh server.
 
@@ -209,6 +224,10 @@ We can check the status of our new services in our Wazuh server.
 .. code-block:: console
 
 	[root@localhost centos]# systemctl status wazuh-manager
+
+.. code-block:: none
+	:class: output
+
 	● wazuh-manager.service - Wazuh manager
 	   Loaded: loaded (/etc/systemd/system/wazuh-manager.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:52 CEST; 35min ago
@@ -218,14 +237,25 @@ We can check the status of our new services in our Wazuh server.
 .. code-block:: console
 
 	[root@localhost centos]# systemctl status wazuh-api
+
+.. code-block:: none
+	:class: output
+
 	● wazuh-api.service - Wazuh API daemon
 	   Loaded: loaded (/etc/systemd/system/wazuh-api.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:54 CEST; 36min ago
 
 - Filebeat.
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
+	[root@localhost centos]# systemctl status filebeat
+
+.. code-block:: none
+	:class: output
+
+	[root@localhost centos]# systemctl status filebeat
 	● filebeat.service - Filebeat sends log files to Elasticsearch.
 	   Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago

@@ -65,7 +65,7 @@ use_source_ip
 Toggles the use of the client's source IP address or the use of "any" to add an agent.
 
 +--------------------+---------------------+
-| **Default value**  | yes                 |
+| **Default value**  | no                  |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
@@ -216,7 +216,7 @@ Default configuration
   <auth>
     <disabled>no</disabled>
     <port>1515</port>
-    <use_source_ip>yes</use_source_ip>
+    <use_source_ip>no</use_source_ip>
     <force_insert>yes</force_insert>
     <force_time>0</force_time>
     <purge>yes</purge>

@@ -13,7 +13,9 @@ The following is required to set up the monitoring of a specific command's outpu
 Configure Wazuh agents to accept remote commands from the manager
 -----------------------------------------------------------------
 
-Agents have the ability to run commands pushed from the manager (via the files in the ``shared`` directory). Before this feature can be used, however, the agents must be explicitly configured to accept remote commands. This can be done by setting the :ref:`logcollector.remote_commands <ossec_internal_logcollector>` in the ``local_internal_options.conf`` file on each agent as shown below::
+Agents have the ability to run commands pushed from the manager (via the files in the ``shared`` directory). Before this feature can be used, however, the agents must be explicitly configured to accept remote commands. This can be done by setting the :ref:`logcollector.remote_commands <ossec_internal_logcollector>` in the ``local_internal_options.conf`` file on each agent as shown below:
+
+.. code-block:: yaml
 
   # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1

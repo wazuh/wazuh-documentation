@@ -69,9 +69,11 @@ Now that we have Wazuh installed with database support, we need to set up the da
 
 **For MySQL:**
 
-.. code-block:: sql
+.. code-block:: console
 
   # mysql -u root -p
+
+.. code-block:: sql
 
   mysql> CREATE DATABASE Alerts_DB;
   Query OK, 0 rows affected (0.00 sec)
@@ -86,6 +88,8 @@ Now that we have Wazuh installed with database support, we need to set up the da
   Query OK, 0 rows affected (0.00 sec)
 
   mysql> quit;
+
+.. code-block:: console
 
   # mysql -u root -p Alerts_DB < src/os_dbd/mysql.schema
 

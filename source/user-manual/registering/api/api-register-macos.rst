@@ -14,6 +14,7 @@ Open a session in your MacOS X agent host as root user. Then, follow these steps
     # curl -u foo:bar -k -X POST -d '{"name":"macos-agent","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://192.168.1.2:55000/agents?pretty"
 
   .. code-block:: json
+    :class: output
 
     {
       "error": 0,

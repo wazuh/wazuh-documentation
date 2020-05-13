@@ -1,4 +1,3 @@
-Sphinx==1.6.5
-sphinx-rtd-theme==0.2.4
-sphinxcontrib-images==0.7.0
+Sphinx==1.8.5
+sphinxcontrib-images==0.8.0
 sphinxprettysearchresults==0.3.5

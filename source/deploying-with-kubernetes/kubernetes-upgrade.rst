@@ -45,7 +45,7 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.9.0_6.7.1'
+      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|'
 
 
 Apply the new configuration
@@ -56,6 +56,10 @@ The last step is to apply the new configuration of each pod. For example for the
 .. code-block:: console
 
     $ kubectl apply -f wazuh-manager-master-sts.yaml
+
+.. code-block:: none
+    :class: output
+
     statefulset.apps "wazuh-manager-master" configured
 
 This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, the update will be ready and we can check the new version of Wazuh installed, the cluster and the changes that have been maintained through the use of the volumes.

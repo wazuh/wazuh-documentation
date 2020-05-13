@@ -55,7 +55,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v3.10.2.zip && /usr/local/bin/unzip v3.10.2
+        # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.zip && /usr/local/bin/unzip v|WAZUH_LATEST|
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 
@@ -83,3 +83,46 @@ Installing Wazuh agent
    .. note:: During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside. You can also run an :ref:`unattended installation <unattended-installation>`.
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
+
+Uninstall
+---------
+
+To uninstall Wazuh agent:
+
+    .. code-block:: console
+
+      # OSSEC_INIT="/etc/ossec-init.conf"
+      # . $OSSEC_INIT 2> /dev/null
+
+Stop the service:
+
+  .. code-block:: console
+
+    # service wazuh-agent stop 2> /dev/null
+
+Stop the daemon:
+
+  .. code-block:: console
+
+    # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+
+Remove files and service artifacts:
+
+  .. code-block:: console
+
+    # rm -rf $DIRECTORY $OSSEC_INIT
+
+Delete the service:
+
+  .. code-block:: console
+
+    # find /sbin/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+
+Remove users:
+
+  .. code-block:: console
+
+    # userdel ossec 2> /dev/null
+    # userdel ossecm 2> /dev/null
+    # userdel ossecr 2> /dev/null
+    # groupdel ossec 2> /dev/null

@@ -27,7 +27,7 @@ Configure Logstash
 
 2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:
 
-  .. code-block:: console
+  .. code-block:: pkgconfig
 
     output {
       elasticsearch {
@@ -43,7 +43,7 @@ Configure Logstash
 
 3. *If you are using a **single-host architecture** (where Wazuh server is running with Elastic Stack on the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh server - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh server - JSON file input``:
 
-  .. code-block:: console
+  .. code-block:: pkgconfig
 
     # Wazuh - Logstash configuration file
     ## Remote Wazuh server - Filebeat input
@@ -58,15 +58,15 @@ Configure Logstash
     #}
     # Local Wazuh server - JSON file input
     input {
-       file {
-           type => "wazuh-alerts"
-           path => "/var/ossec/logs/alerts/alerts.json"
-           codec => "json"
-       }
+        file {
+            type => "wazuh-alerts"
+            path => "/var/ossec/logs/alerts/alerts.json"
+            codec => "json"
+        }
     }
     ...
 
-   The above configuration will setup Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than receive forwarded data from Filebeat.
+The above configuration will setup Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than receive forwarded data from Filebeat.
 
 Configure Kibana
 ^^^^^^^^^^^^^^^^
@@ -143,7 +143,7 @@ Follow these steps to upgrade your Elastic Stack cluster to version 5.X:
 
   ``ES_HEAP_SIZE`` option is now deprecated. You should remove or comment out this option in your  ``/etc/sysconfig/elasticsearch`` file:
 
-  .. code-block:: console
+  .. code-block:: yaml
 
     # ES_HEAP_SIZE - Set it to half your system RAM memory
     ES_HEAP_SIZE=8g
@@ -162,6 +162,10 @@ Follow these steps to upgrade your Elastic Stack cluster to version 5.X:
     .. code-block:: console
 
       # /usr/share/logstash/bin/logstash -V
+
+    .. code-block:: none
+      :class: output
+
       logstash 5.2.2
 
   b) For Elasticsearch:
@@ -169,6 +173,10 @@ Follow these steps to upgrade your Elastic Stack cluster to version 5.X:
     .. code-block:: console
 
       # /usr/share/elasticsearch/bin/elasticsearch -V
+
+    .. code-block:: none
+      :class: output
+
       Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
   c) For Kibana:
@@ -176,6 +184,10 @@ Follow these steps to upgrade your Elastic Stack cluster to version 5.X:
     .. code-block:: console
 
       # /usr/share/kibana/bin/kibana -V
+
+    .. code-block:: none
+      :class: output
+
       5.2.
 
 .. note:: Wazuh v2.x uses different indices and templates than Wazuh v1.x, so you will not be able to see the previous alerts using Kibana. In order to access these alerts, you will have to reindex the previous indices.

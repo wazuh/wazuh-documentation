@@ -30,7 +30,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=7.4.0
+    # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
 
 2. Elasticsearch will only listen on the loopback interface (localhost) by default. Configure Elasticsearch to listen to a non-loopback address by editing the file ``/etc/elasticsearch/elasticsearch.yml`` and uncommenting the setting ``network.host``. Change the value to the IP you want to bind it to:
 
@@ -85,7 +85,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=7.4.0
+    # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -94,13 +94,15 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.10.2_7.4.0.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
   * Install from the package:
 
   .. code-block:: console
 
-     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuhapp-3.10.2_7.4.0.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
@@ -116,7 +118,15 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"]
 
-5. Enable and start the Kibana service:
+5. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+
+  .. code-block:: console
+
+    # cat >> /etc/default/kibana << EOF
+    NODE_OPTIONS="--max_old_space_size=2048"
+    EOF
+
+6. Enable and start the Kibana service:
 
   a) For Systemd:
 
@@ -133,7 +143,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # update-rc.d kibana defaults 95 10
     # service kibana start
 
-6. (Optional) Disable the Elasticsearch updates:
+7. (Optional) Disable the Elasticsearch updates:
 
   It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
 

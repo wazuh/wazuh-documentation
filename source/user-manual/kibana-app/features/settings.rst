@@ -37,7 +37,7 @@ The index pattern functionality is completely described at the :ref:`kibana_inde
 Configuration
 -------------
 
-You can take a quick look to the full Wazuh app configuration file here. The documentation for the ``config.yml`` file can be found on the :ref:`kibana_config_file` section.
+You can take a quick look to the full Wazuh app configuration file here. The documentation for the ``wazuh.yml`` file can be found on the :ref:`kibana_config_file` section.
 
 .. thumbnail:: ../../../images/kibana-app/features/settings/configuration.png
   :align: center

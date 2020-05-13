@@ -47,7 +47,7 @@ Get the appropriate Puppet apt repository, and then the "puppetserver" package. 
 
 Create a symbolic link between the installed binary file and your default binary file:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # ln -s /opt/puppetlabs/bin/puppet /bin
 

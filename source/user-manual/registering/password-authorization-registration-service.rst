@@ -5,7 +5,7 @@
 Using the registration service with password authorization
 ==========================================================
 
-You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password. To register an agent using the registration service and a password, first follow the steps from the **Manager** section and then, follow the steps from the correspondig OS.
+You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password. To register an agent using the registration service and a password, first follow the steps from the **Manager** section and then, follow the steps from the corresponding OS.
 
 Manager
 ^^^^^^^
@@ -33,6 +33,10 @@ After changing the ``ossec.conf`` file, you can use a custom password or let the
     .. code-block:: console
 
       # grep "Random password" /var/ossec/logs/ossec.log
+
+    .. code-block:: none
+        :class: output
+
         2019/04/25 15:09:50 ossec-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
 
 

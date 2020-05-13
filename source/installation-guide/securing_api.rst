@@ -17,7 +17,7 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
 
         #. Option b: Use your own certificate. In the file ``/var/ossec/api/configuration/config.js`` you will find the following section:
 
-          .. code-block:: console
+          .. code-block:: javascript
 
             //config.https_key = "configuration/ssl/server.key"
             //config.https_cert = "configuration/ssl/server.crt"
@@ -77,7 +77,7 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
 
         #. Option b: Change the port manually. The file ``/var/ossec/api/configuration/config.js`` contains the parameter:
 
-          .. code-block:: console
+          .. code-block:: javascript
 
             // TCP Port used by the API.
             config.port = "55000";

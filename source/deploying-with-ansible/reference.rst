@@ -44,7 +44,7 @@ Elasticsearch
 
   Version of Elasticsearch to install
 
-  *Default 7.3.2*
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
 
 **elasticsearch_shards**
 
@@ -97,13 +97,13 @@ Kibana
 
   Version of Kibana to install
 
-  *Default 7.3.2*
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
 
 **wazuh_version**
 
   Wazuh APP compatible version to install
 
-  *Default 3.10.2*
+  *Default |WAZUH_LATEST_ANSIBLE|*
 
 **elasticsearch_network_host**
 
@@ -264,7 +264,7 @@ Wazuh Manager
       authd:
         enable: true
         port: 1515
-        use_source_ip: 'yes'
+        use_source_ip: 'no'
         force_insert: 'yes'
         force_time: 0
         purge: 'no'
@@ -558,7 +558,7 @@ Wazuh Agent
 
   *Default null*
 
-  Multiple profiles can be included, separated by a comma and a space, by example:
+  Multiple profiles can be included, separated by a comma and a space, for example:
 
   .. code-block:: yaml
 
@@ -566,11 +566,12 @@ Wazuh Agent
 
 **wazuh_agent_authd:**
 
-  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. Be aware that this Ansible role will use the first Wazuh Manager address defined on `wazuh_managers` as the authd registration server.
+  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 
   .. code-block:: yaml
 
     wazuh_agent_authd:
+      registration_address: 10.1.1.12
       enable: false
       port: 1515
       ssl_agent_ca: null

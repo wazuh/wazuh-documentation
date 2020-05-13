@@ -106,6 +106,10 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 .. code-block:: console
 
 	ansible@ansible:~$ ssh-keygen
+
+.. code-block:: none
+	:class: output
+
 	Generating public/private rsa key pair.
 	Enter file in which to save the key (/home/ansible/.ssh/id_rsa):
 	Enter passphrase (empty for no passphrase):
@@ -127,13 +131,14 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 	|        . +      |
 	+----[SHA256]-----+
 
-	If you wish you can include a passphrase.
+If you wish you can include a passphrase.
 
 1.3 - Check the permissions of the generated keys.
 
 - ``id_rsa`` must have restrictive permits (600 or "- r w - - - - - - -").
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	drwx------  2 ansible ansible 4,0K sep 12 13:37 .
 	-rw-------  1 ansible ansible 1,7K sep 12 13:37 id_rsa
@@ -197,6 +202,10 @@ Check the permissions.
 .. code-block:: console
 
 	[centos@localhost ~]$ ls -lath .ssh/
+
+.. code-block:: none
+	:class: output
+
 	total 4,0K
 	drwx------.  2 centos centos   29 sep 12 14:07 .
 	-rw-r--r--.  1 centos centos    0 sep 12 14:07 authorized_keys
@@ -210,6 +219,10 @@ Check the permissions.
 .. code-block:: console
 
 	ansible@ansible:~$ cat .ssh/id_rsa.pub | ssh centos@192.168.0.180 "cat >> .ssh/authorized_keys"
+
+.. code-block:: none
+	:class: output
+
 	centos@192.168.0.180's password:
 
 We could see the authorized_keys content.
@@ -217,6 +230,10 @@ We could see the authorized_keys content.
 .. code-block:: console
 
 	[centos@localhost ~]$ cat .ssh/authorized_keys
+
+.. code-block:: none
+	:class: output
+
 	ssh-rsa AAA...60V ansible@ansible
 
 4 - Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
@@ -256,6 +273,10 @@ We could see the authorized_keys content.
 .. code-block:: console
 
 	ansible@ansible:~$ ssh centos@192.168.0.180
+
+.. code-block:: none
+	:class: output
+
 	Last login: Wed Sep 12 13:57:48 2018 from 192.168.0.107
 
 As we can see, we access without having to enter any password.
@@ -265,7 +286,7 @@ Test Connection
 
 1 - Add hosts to control
 
-Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server Ip is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
+Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server IP is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
 
 .. code-block:: yaml
 
@@ -330,7 +351,8 @@ Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/host
 
 You will get an output like this:
 
-.. code-block:: console
+.. code-block:: none
+	:class: output
 
 	192.168.0.180 | SUCCESS => {
 	    "changed": false,
@@ -350,6 +372,10 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.10.2_7.3.2 https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v|WAZUH_LATEST_ANSIBLE|_|ELASTICSEARCH_LATEST_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
+
+.. code-block:: none
+	:class: output
+
 	wazuh-ansible

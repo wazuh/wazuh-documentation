@@ -14,7 +14,7 @@ Adding new decoders and rules
 
 .. note::
   The ``<id>`` of custom rules will be in the range from 100000 to 120000.
- 
+
 We are going to describe these procedures using an easy example. Here is a log from a program called ``example``:
 ::
 
@@ -44,7 +44,9 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
 
 
 We can check if it works by using ``/var/ossec/bin/ossec-logtest``:
-::
+
+.. code-block:: none
+  :class: output
 
   **Phase 1: Completed pre-decoding.
        full event: 'Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100''

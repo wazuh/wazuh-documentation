@@ -44,6 +44,9 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # /var/ossec/bin/agent_groups -l -g dbms
 
+   .. code-block:: none
+        :class: output
+
         5 agent(s) in group 'dbms':
           ID: 002  Name: agent-dbms-e1.
           ID: 003  Name: agent-dbms-e2.
@@ -96,11 +99,22 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
     .. code-block:: console
 
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": "Group 'webserver' added to agent '001'."
         }
+
+    .. code-block:: console
+
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": "Group 'apache' added to agent '001'."
@@ -109,9 +123,13 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 After that, we can ask the **API** about groups which an agent belongs:
 
     .. code-block:: console
-        :emphasize-lines: 7,8,9,10,11
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
+
+    .. code-block:: json
+        :emphasize-lines: 6,7,8,9,10
+        :class: output
+
         {
             "error": 0,
             "data": {
@@ -151,10 +169,20 @@ With the **agent_groups** CLI, agents can be registered to groups on the same wa
     .. code-block:: console
 
         $ /var/ossec/bin/agent_groups -a -i 001 -g webserver
+
+    .. code-block:: none
+        :class: output
+
         Do you want to add the group 'webserver' to the agent '001'? [y/N]: y
         Group 'webserver' added to agent '001'.
 
+    .. code-block:: console
+
         $ /var/ossec/bin/agent_groups -a -i 001 -g apache
+
+    .. code-block:: none
+        :class: output
+
         Do you want to add the group 'apache' to the agent '001'? [y/N]: y
         Group 'apache' added to agent '001'.
 
@@ -175,6 +203,10 @@ For example, to list the groups available for now, we could run the following qu
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -l -g webserver
+
+    .. code-block:: none
+        :class: output
+
         3 agent(s) in group 'webserver':
           ID: 001 Name: ag-windows-12.
           ID: 003 Name: ag-windows-east.
@@ -185,6 +217,10 @@ Same easy to query which groups are assigned to the agent 001:
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver', u'apache']'.
 
 The priority of the groups increases from the left to the right, being the last one the highest priority one.
@@ -199,9 +235,19 @@ group `apache` for the agent 001:
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -r -i 001 -g apache -q
+
+    .. code-block:: none
+        :class: output
+
         Group 'apache' unset for agent '001'.
 
+    .. code-block:: console
+
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver']'.
 
 It is also possible to switch between groups overwriting the existing assignment:
@@ -209,10 +255,28 @@ It is also possible to switch between groups overwriting the existing assignment
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'default', u'webserver']'.
+
+    .. code-block:: console
+
         # /var/ossec/bin/agent_groups -a -f -i 001 -g apache
+
+    .. code-block:: none
+        :class: output
+
         Group 'apache' set to agent '001'.
+
+    .. code-block:: console
+
         # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent 'ag-windows-12' with ID '001' has the group: '[u'apache']'.
 
 The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
@@ -222,9 +286,19 @@ Finally, to check the synchronization status of the group configuration for a si
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -S -i 001
+
+    .. code-block:: none
+        :class: output
+
         The agent '008' sync status is: Agent configuration is synced.
 
+    .. code-block:: console
+
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": {

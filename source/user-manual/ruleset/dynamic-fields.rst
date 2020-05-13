@@ -41,7 +41,9 @@ Dynamic fields:
 Wazuh transforms any field name included in the ``<order>`` tag into a JSON field.
 
 The next example shows how the auditd decoder extracts the information from an alert:
-::
+
+.. code-block:: none
+  :class: output
 
   ** Alert 1486483073.60589: - audit,audit_configuration,
   2017 Feb 07 15:57:53 wazuh-example->/var/log/audit/audit.log
@@ -58,7 +60,9 @@ The next example shows how the auditd decoder extracts the information from an a
 
 
 JSON Output:
-::
+
+.. code-block:: json
+  :class: output
 
   {
     "rule": {

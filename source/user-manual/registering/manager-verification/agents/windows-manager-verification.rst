@@ -21,6 +21,7 @@ After that, you can register the agent using ``agent-auth.exe``:
     # cp rootCA.pem C:\Program Files (x86)\ossec-agent
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
+  .. note:: Note that this method must include the -v option that indicates the location of the CA. If this option is not included, a warning message will be displayed and the connection will be established without verifying the manager.
 
 2. Edit the Wazuh agent configuration to add the Wazuh server IP address.
 

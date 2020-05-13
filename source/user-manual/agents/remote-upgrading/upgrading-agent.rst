@@ -20,6 +20,9 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 
         # agent_upgrade -l
 
+    .. code-block:: none
+        :class: output
+
         ID    Name                               Version
         002   VM_Debian9                         Wazuh v3.0.0
         003   VM_Debian8                         Wazuh v3.0.0
@@ -33,6 +36,9 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 
         # agent_upgrade -a 002
 
+    .. code-block:: none
+        :class: output
+
         Sending WPK: [=========================] 100%
         Upgrade procedure started... Please wait.
         Agent upgraded: Wazuh v3.0.0 -> Wazuh v3.1.0
@@ -43,6 +49,9 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
     .. code-block:: console
 
         # /var/ossec/bin/agent_control -i 002
+
+    .. code-block:: none
+        :class: output
 
         Wazuh agent_control. Agent information:
            Agent ID:   002
@@ -67,6 +76,9 @@ Using the RESTful API
     .. code-block:: console
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/outdated?pretty"
+
+    .. code-block:: json
+        :class: output
 
         {
           "error": 0,
@@ -99,6 +111,9 @@ Using the RESTful API
 
         # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/upgrade?pretty"
 
+    .. code-block:: json
+        :class: output
+
         {
            "error": 0,
            "data": "Upgrade procedure started"
@@ -111,6 +126,9 @@ Using the RESTful API
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/002/upgrade_result?pretty"
 
+    .. code-block:: json
+        :class: output
+
         {
            "error": 0,
            "data": "Agent upgraded successfully"
@@ -122,6 +140,9 @@ Using the RESTful API
     .. code-block:: console
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/002?pretty"
+
+    .. code-block:: json
+        :class: output
 
         {
            "error": 0,

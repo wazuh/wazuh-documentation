@@ -21,6 +21,9 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
+	.. code-block:: none
+		:class: output
+
 		Available agents:
 		    ID: 001, Name: ubuntu-ag, IP: any
 
@@ -29,6 +32,9 @@ Manager
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -e 001
+
+	.. code-block:: none
+		:class: output
 
 		Agent key information for '001' is:
 		MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
@@ -42,6 +48,9 @@ Once you have added the agent in the Wazuh manager host, open a session in your 
 	  .. code-block:: console
 
 	      # /var/ossec/bin/manage_agents -i MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw
+
+	  .. code-block:: none
+	      :class: output
 
 	      Agent information:
 	         ID:001

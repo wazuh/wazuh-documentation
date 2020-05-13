@@ -22,6 +22,10 @@ Access to containers and services
     .. code-block:: console
 
       $ docker-compose ps
+
+    .. code-block:: none
+      :class: output
+
               Name                  Command                        State     Ports
 
       wazuhdocker_elasticsearch_1   /usr/local/bin/docker-entr ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
@@ -36,7 +40,7 @@ Access to containers and services
       docker-compose exec <service name> /bin/bash
 
 
-Where ``service name `` is the name of each service in the ``docker-compose.yml`` file. By default:
+Where ``service name`` is the name of each service in the ``docker-compose.yml`` file. By default:
 
 - wazuh
 - elasticsearch
@@ -57,7 +61,7 @@ Registering agents in a Wazuh manager deployed through Docker is quite simple, w
 
 1. Adapt the agent configuration file:
 
-    .. code-block:: console
+    .. code-block:: xml
 
       <ossec_config>
         <client>
@@ -76,7 +80,7 @@ Registering agents in a Wazuh manager deployed through Docker is quite simple, w
 
     If for example we had launched the command ``docker-compose up`` on host with IP address **192.168.50.75**, we would have the following configuration:
 
-    .. code-block:: console
+    .. code-block:: xml
 
       <ossec_config>
         <client>
@@ -117,6 +121,10 @@ Here is an example of a ``/wazuh-config-mount`` folder used to mount some common
 .. code-block:: console
 
   root@wazuh-manager:/# tree /wazuh-config-mount/
+
+.. code-block:: none
+  :class: output
+
   /wazuh-config-mount/
   └── etc
       ├── ossec.conf
@@ -154,7 +162,7 @@ Assembling volumes for the storage of Elastic Stack components is also feasible 
 
 If we wanted to mount the volume for Elasticsearch, we would change the volume entry in our ``docker-compose.yml``:
 
-.. code-block:: console
+.. code-block:: yaml
 
 	 elasticsearch:
 	    . . .
@@ -164,7 +172,7 @@ If we wanted to mount the volume for Elasticsearch, we would change the volume e
 
 Establishing the routes that we want:
 
-.. code-block:: console
+.. code-block:: yaml
 
 	 elasticsearch:
 	    . . .
@@ -172,7 +180,7 @@ Establishing the routes that we want:
 	       - /home/my/local/volume:/usr/share/elasticsearch/data:Z
 	    . . .
 
-.. code-block:: console
+.. code-block:: yaml
 
 	 elasticsearch:
 	    . . .
@@ -198,9 +206,9 @@ Upgrades
 
 Performing container updates differs from performing normal updates. For this we recommend the use of volumes.
 
-For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would decomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
+For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would uncomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
 
-.. code-block:: console
+.. code-block:: yaml
 
       volumes:
          - /home/my/custom/path:/var/ossec/data:Z

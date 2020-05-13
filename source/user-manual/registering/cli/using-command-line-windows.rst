@@ -21,6 +21,9 @@ Manager
 
 		# /var/ossec/bin/manage_agents -l
 
+	.. code-block:: none
+		:class: output
+
 		Available agents:
 		    ID: 001, Name: windows-server, IP: any
 
@@ -29,6 +32,9 @@ Manager
 	.. code-block:: console
 
 		# /var/ossec/bin/manage_agents -e 001
+
+	.. code-block:: none
+		:class: output
 
 		Agent key information for '001' is:
 		MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ==
@@ -47,6 +53,9 @@ This guide suppose that the Wazuh agent is installed in a x86_64 host, so the in
 	  .. code-block:: console
 
 	      # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
+
+	  .. code-block:: none
+	      :class: output
 
 	      Agent information:
 	         ID:001

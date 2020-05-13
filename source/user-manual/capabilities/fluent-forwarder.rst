@@ -108,7 +108,8 @@ Write a string to your log file:
 
 You should see the message on the Fluentd server:
 
-.. code-block:: console
+.. code-block:: none
+    :class: output
 
     2019-03-28 14:47:40.000000000 +0200 debug.test: "message"
 

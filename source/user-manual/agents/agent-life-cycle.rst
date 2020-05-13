@@ -25,7 +25,7 @@ Agent status
 - **Never connected:** The agent has been registered but has not yet connected to the manager.
 - **Pending.** The authentication process is pending: The manager has received a request for connection from the agent but has not received anything else. This may indicate a firewall issue. The agent will be in this state one time in its life cycle.
 - **Active:** The agent has successfully connected and can now communicate with the manager.
-- **Disconnected:** The manager will consider the agent disconnected if it does not receive any ``keep alive`` messages from the agent within a half an hour.
+- **Disconnected:** The manager will consider the agent disconnected if it does not receive any ``keep alive`` messages from the agent within 30 minutes.
 
 Removed agent
 -------------

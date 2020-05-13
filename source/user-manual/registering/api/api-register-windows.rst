@@ -53,6 +53,7 @@ This guide suppose that the Wazuh agent is installed in a ``x86_64`` host, so th
     # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://192.168.1.2:55000/agents/001/key | ConvertFrom-Json
 
   .. code-block:: json
+    :class: output
 
     {
       "error": 0,
@@ -67,6 +68,9 @@ This guide suppose that the Wazuh agent is installed in a ``x86_64`` host, so th
   .. code-block:: console
 
       # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
+
+  .. code-block:: none
+      :class: output
 
       Agent information:
          ID:001

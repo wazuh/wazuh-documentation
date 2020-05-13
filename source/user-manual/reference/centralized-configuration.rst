@@ -51,7 +51,7 @@ Below are the files that would be found in this folder on an agent assigned to t
 +-----------------------------------------------------+-----------------------------------------------------+
 | **Manager**                                         | **Agent (Group: 'debian')**                         |
 +-----------------------------------------------------+-----------------------------------------------------+
-|.. code-block:: console                              |.. code-block:: console                              |
+|.. code-block:: none                                 |.. code-block:: none                                 |
 |                                                     |                                                     |
 |    /var/ossec/etc/shared/                           |    /var/ossec/etc/shared/                           |
 |    ├── ar.conf                                      |    ├── ar.conf                                      |
@@ -146,7 +146,9 @@ The following is an example of how a centralized configuration can be done.
 
 1. Configure the ``agent.conf`` file:
 
-    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it::
+    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it:
+
+    .. code-block:: console
 
         # touch /var/ossec/etc/shared/default/agent.conf
         # chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
@@ -186,7 +188,7 @@ The following is an example of how a centralized configuration can be done.
 
 3. Push the configuration to the agents:
 
-    Each time an agent checks-in with the manager (10 minute default), it looks to see if a new version of ``agent.conf`` is available from the manager.  When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5.
+    With every agent keepalive (10 seconds default), the manager looks to see if a new version of ``agent.conf`` is available. When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5.
 
     .. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
 
@@ -197,6 +199,10 @@ The following is an example of how a centralized configuration can be done.
     .. code-block:: console
 
         # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
+
+    .. code-block:: json
+        :class: output
+
         {
             "error": 0,
             "data": {
@@ -207,6 +213,10 @@ The following is an example of how a centralized configuration can be done.
     .. code-block:: console
 
         # /var/ossec/bin/agent_groups -S -i 001
+
+    .. code-block:: none
+        :class: output
+
         Agent '001' is synchronized.
 
 5. Restart the agent:
@@ -218,6 +228,9 @@ The following is an example of how a centralized configuration can be done.
     .. code-block:: console
 
         # /var/ossec/bin/agent_control -R -u 1032
+
+    .. code-block:: none
+        :class: output
 
         Wazuh agent_control: Restarting agent: 1032
 
@@ -315,30 +328,35 @@ Here we can distinct the two main blocks: ``groups`` and ``agents``.
 
     - Parsing is successful:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         INFO: Successfully parsed of yaml file: /etc/shared/files.yml
 
     - File has been changed:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         INFO: File '/etc/shared/files.yml' changed. Reloading data
 
     - Parsing failed due to bad token:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
     - Download of file failed:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         ERROR: Failed to download file from url: https://example.com/merged.mg
 
     - Downloaded ``merged.mg`` file is corrupted or not valid:
 
-    .. code-block:: shell
+    .. code-block:: none
+        :class: output
 
         ERROR: The downloaded file '/var/download/merged.mg' is corrupted.

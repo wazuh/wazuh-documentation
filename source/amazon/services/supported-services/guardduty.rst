@@ -106,7 +106,7 @@ Wazuh configuration
         <skip_on_error>yes</skip_on_error>
         <bucket type="guardduty">
           <name>wazuh-aws-wodle</name>
-          <path>guardduty</path>
+          <path>firehose/</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>

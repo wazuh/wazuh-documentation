@@ -2,58 +2,62 @@
 
 .. _build_lab_install_elastic_stack:
 
-Install Elastic Stack
-=====================
+Install the Elastic Stack
+=========================
 
-Your Elastic Server will be running Logstash, Elasticsearch, Kibana, and the Wazuh Kibana App.
+Your Elastic Stack will be running Elasticsearch, Kibana and the Wazuh plugin for Kibana.
 
 Log in and sudo to root
 -----------------------
 
-For the purposes of these labs, always become root when logging into a lab machine via ssh.
+For the purposes of these labs, always become root when logging into a lab
+machine via SSH.
 
     .. code-block:: console
 
-        # sudo su -
+      [centos@elastic-server ~]$ sudo su -
+      [root@elastic-server ~]#
+
 
 
 Preparation
 -----------
 
-1. Install the Java 8 OpenJDK package using yum.
+1. Add the Elastic repository and its GPG key:
 
   .. code-block:: console
 
-    # yum install java-1.8.0-openjdk
+    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # cat > /etc/yum.repos.d/elastic.repo << EOF
+    [elasticsearch-7.x]
+    name=Elasticsearch repository for 7.x packages
+    baseurl=https://artifacts.elastic.co/packages/7.x/yum
+    gpgcheck=1
+    gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled=1
+    autorefresh=1
+    type=rpm-md
+    EOF
 
-2. Install the Elastic repository and its GPG key:
+2. Install unzip:
 
-  .. code-block:: console
+   .. code-block:: console
 
-	# rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
-	# cat > /etc/yum.repos.d/elastic.repo << EOF
-	[elasticsearch-6.x]
-	name=Elasticsearch repository for 6.x packages
-	baseurl=https://artifacts.elastic.co/packages/6.x/yum
-	gpgcheck=1
-	gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-	enabled=1
-	autorefresh=1
-	type=rpm-md
-	EOF
-
+     # yum install -y unzip
 
 Elasticsearch
 -------------
 
-Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logstash, and makes them available to Kibana.
+Elasticsearch is a highly scalable full-text search and analytics engine that will
+store alerts and log records sent by Wazuh via Filebeat and make them available
+to Kibana. For more information, please see `Elasticsearch
+<https://www.elastic.co/products/elasticsearch>`_.
 
 1. Install the Elasticsearch package:
 
   .. code-block:: console
 
-	 # yum -y install elasticsearch-6.1.2
+	 # yum -y install elasticsearch-|ELASTICSEARCH_LATEST|
 
 2. Enable and start the Elasticsearch service:
 
@@ -63,163 +67,88 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
   	# systemctl enable elasticsearch.service
   	# systemctl start elasticsearch.service
 
-3. Load Wazuh Elasticsearch templates:
-
-  .. code-block:: console
-
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -X PUT "http://localhost:9200/_template/wazuh-agent" -H 'Content-Type: application/json' -d @-
-
-4. Insert sample alert.  Do not skip this essential step:
-
-  .. code-block:: console
-
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/alert_sample.json | curl -X PUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
-
-5. Optimize Elasticsearch for lab use according to `this <https://documentation.wazuh.com/current/installation-guide/optional-configurations/elastic-tuning.html#elastic-tuning>`_ guide.
+3. Optimize Elasticsearch for lab use according to :ref:`this guide <elastic_tuning>`.
 
   This process will set optimal index sharding, replication, and memory usage values for Elasticsearch.
 
   .. code-block:: none
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
-    # sed -i 's/"index.refresh_interval": "5s"/"index.refresh_interval": "5s",\n    "number_of_shards" :   1,\n    "number_of_replicas" : 0/' w-elastic-template.json
-    # curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @w-elastic-template.json
-    # curl -X PUT "http://localhost:9200/*/_settings?pretty" -H 'Content-Type: application/json' -d'
-    {
-          "settings": {
-          "number_of_replicas" : 0
-          }
-    }
-    '
     # sed -i 's/#bootstrap.memory_lock: true/bootstrap.memory_lock: true/' /etc/elasticsearch/elasticsearch.yml
     # mkdir -p /etc/systemd/system/elasticsearch.service.d/
     # echo -e "[Service]\nLimitMEMLOCK=infinity" > /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
-    # sed -i 's/^-Xms.*/-Xms12g/;s/^-Xmx.*/-Xmx12g/' /etc/elasticsearch/jvm.options
+    # sed -i 's/^-Xms.*/-Xms5g/;s/^-Xmx.*/-Xmx5g/' /etc/elasticsearch/jvm.options
     # systemctl daemon-reload
     # systemctl restart elasticsearch
 
   .. note::
-    The two references to "12g" in the above steps will only work if the Elastic Server was launched with the recommended instance size t2.xlarge.  If you chose to use t2.large instead, change the "12g" references to "5g".
-
-Logstash
---------
-
-Logstash takes the Wazuh alerts and logs written as JSON records by Wazuh manager, and it parses, enriches and passes them along to Elasticsearch for indexing and storage.
-
-1. Install the Logstash package:
-
-  .. code-block:: console
-
-    # yum -y install logstash-6.1.2
-
-2. Download the Wazuh config for Logstash:
-
-  .. code-block:: console
-
-    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/logstash/01-wazuh-remote.conf
-
-3. Enable and start the Logstash service:
-
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl enable logstash.service
-    # systemctl start logstash.service
-
-
-Setting up SSL for Filebeat and Logstash
-----------------------------------------
-
-Since your Wazuh Server and Elastic Server instances are on separate servers, it is important to configure SSL encryption and
-verification between Filebeat and Logstash.
-
-
-Generate and sign an SSL certificate and key for Logstash (on Elastic Server)
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-    .. code-block:: console
-
-        # cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
-        # LINE=$((`grep -nF "[ v3_ca ]" custom_openssl.cnf | cut -d: -f1`+1))
-        # sed -i "$LINE"'isubjectAltName = IP: 172.30.0.20' custom_openssl.cnf
-        # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
-        # ls -alh /etc/logstash/logstash.key /etc/logstash/logstash.crt
-        # rm -f custom_openssl.cnf
-
-
-Configure Logstash to use SSL (on Elastic Server)
-:::::::::::::::::::::::::::::::::::::::::::::::::
-
-    Uncomment the default SSL-related lines in the Logstash config to use the new key and cert, and then restart Logstash.
-
-    .. code-block:: console
-
-        # sed -i "s/#       ssl/        ssl/g" /etc/logstash/conf.d/01-wazuh.conf
-        # grep "  ssl" /etc/logstash/conf.d/01-wazuh.conf -B4 -A2
-        # systemctl restart logstash.service
-
-
-Copy Logstash certificate to where Filebeat can use it
-::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-1. On the Elastic Server, display the Logstash public certificate
-
-	.. code-block:: console
-
-		# cat /etc/logstash/logstash.crt
-
-2. Copy the file content in preparation for pasting it into an empty file on the Wazuh Server.  It will look somewhat like this:
-
-	.. code-block:: console
-
-		-----BEGIN CERTIFICATE-----
-		MIIDaDCCAlCgAwIBAgIJAJ9yfo5G55kNMA0GCSqGSIb3DQEBCwUAMEIxCzAJBgNV
-		BAYTAlhYMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg
-		...
-		MoVou4/OaUeQM6JbcVrL2YkLyAfpJpMhB0LtNVeIY0fJlwV1SwXYLlAqGUjPDJvz
-		NvWeiuulue3zaf3r
-		-----END CERTIFICATE-----
-
-3. Now switch over to the Wazuh Server use the text editor of your choice to open a new file /etc/filebeat/logstash.crt.  Paste and save the copied certificate text there.  Filebeat will use this certificate to verify the identity of the Logstash server as well as to negotiate an encrypted tunnel for conveying alert records.
-
-
-Configure Filebeat to use SSL
-:::::::::::::::::::::::::::::
-
-  Edit the file ``/etc/filebeat/filebeat.yml``, uncomment the lines related to SSL, and restart Filebeat:
-
-      .. code-block:: yaml
-
-          # cat /etc/filebeat/filebeat.yml
-          # sed -i 's/#   ssl/   ssl/;s/#     certificate/      certificate/' /etc/filebeat/filebeat.yml
-          # cat /etc/filebeat/filebeat.yml
-          # systemctl restart filebeat.service
-
+    The two references to "5g" in the above steps will only work if the Elastic
+    Server was launched with the recommended instance size t2.xlarge.  If you
+    chose to use t2.large instead, change the "5g" references to "3g".
 
 Kibana
 ------
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More info at `Kibana <https://www.elastic.co/products/kibana>`_.
+Kibana is a flexible and intuitive web interface for mining and visualizing the
+events and archives stored in Elasticsearch. More info at `Kibana
+<https://www.elastic.co/products/kibana>`_.
 
 1. Install the Kibana package:
 
   .. code-block:: console
 
-	 # yum -y install kibana-6.1.2
+    # yum install -y kibana-|ELASTICSEARCH_LATEST|
 
-2. Install the Wazuh App plugin for Kibana:
+2. Install the Wazuh plugin for Kibana:
+
+
+  * Install from URL:
 
   .. code-block:: console
 
-      # export NODE_OPTIONS="--max-old-space-size=3072"
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    # cd /usr/share/kibana/
+    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
-  .. warning::
+3. Kibana will only listen on the loopback interface (localhost) by default,
+   which means that it can be only accessed from the same machine. To access
+   Kibana from the any IP set the ``server.host: "0.0.0.0"`` variable, and
+   set the port to be the standard port for HTTPS: ``server.port: 443``
 
-    Expect to wait several minutes for the the Kibana plugin installation to complete.  Optimizing and caching browser bundles takes a long time...
 
-4. Enable and start the Kibana service:
+  .. code-block:: console
+
+    # cat >> /etc/kibana/kibana.yml << EOF
+    server.host: "0.0.0.0"
+    server.port: 443
+    EOF
+
+
+4.  Allow Kibana (which is run as a non-root process) to bind to port 443:
+
+  .. code-block:: console
+
+    # setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/share/kibana/node/bin/node
+
+5. Optimize Kibana packages:
+
+  .. code-block:: console
+
+    # cd /usr/share/kibana/
+    NODE_OPTIONS="--max-old-space-size=4096" /usr/share/kibana/bin/kibana --optimize --allow-root
+
+6. Configure the credentials to access the Wazuh API:
+
+  .. code-block:: console
+
+    # cat >> /usr/share/kibana/optimize/wazuh/config/wazuh.yml << EOF
+
+      - wazuhapi:
+         url: https://172.30.0.10
+         port: 55000
+         user: wazuhapiuser
+         password: wazuhlab
+    EOF
+
+7. Enable and start the Kibana service:
 
   .. code-block:: console
 
@@ -227,12 +156,12 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
   	# systemctl enable kibana.service
   	# systemctl start kibana.service
 
-
 Disable the Elastic repository
 ------------------------------
 
-Now disable the Elastic repository in order to prevent a future unintended Elastic Stack upgrade to a version
-that may be in conflict with the latest stable Wazuh packages.
+Now disable the Elastic repository in order to prevent a future unintended
+Elastic Stack upgrade to a version that may be in conflict with the latest
+stable Wazuh packages.
 
   .. code-block:: console
 
