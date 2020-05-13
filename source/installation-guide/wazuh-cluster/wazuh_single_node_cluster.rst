@@ -12,14 +12,14 @@ This document will go through the installation of the Wazuh server components in
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
+Before installing the Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
 
   .. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
-Installing Wazuh server
------------------------
+Installing the Wazuh server
+---------------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,7 +70,7 @@ Install the Wazuh manager package:
 Installing the Wazuh API
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
+Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
 
 
 .. tabs::
@@ -92,7 +92,7 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 
 
 .. note::
-  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
+  It is strongly recommended to secure the Wazuh API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password, and more.
 
 .. _wazuh_server_single_node_filebeat:
 
@@ -127,7 +127,7 @@ Filebeat installation and configuration
 
 
 
-#. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat config file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
@@ -148,8 +148,6 @@ Filebeat installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
-
 #. Configure Filebeat certificates:
 
     .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
@@ -158,11 +156,17 @@ Filebeat installation and configuration
 
     .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
 
+To ensure that Filebeat has been successfully installed, execute the following command:
+
+    .. code-block:: console
+
+      # filebeat test output
+
 
 Next steps
 ----------
 
-The next step consists of installing Kibana. The guide continues  :ref:`here<kibana>`.
+The next step consists of :ref:`installing Kibana <kibana>`.
 
 
 Uninstall
@@ -187,12 +191,6 @@ To uninstall the Wazuh manager and Wazuh API:
 
 
 
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
-
-
 To uninstall Filebeat:
 
 
@@ -211,10 +209,3 @@ To uninstall Filebeat:
 
 
     .. include:: ../../_templates/installations/elastic/yum/uninstall_filebeat.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/elastic/zypp/uninstall_filebeat.rst

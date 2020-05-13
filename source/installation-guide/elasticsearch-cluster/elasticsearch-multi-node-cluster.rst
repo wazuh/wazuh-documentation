@@ -82,15 +82,11 @@ Certificates creation and deployment
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. [*Master*] Generate credentials for all the Elastic Stack pre-built roles and users:
-
-    .. include:: ../../_templates/installations/elastic/common/generate_elastic_credentials.rst
-
 
 Next steps
 ----------
 
-The next step consists on the selection of the Wazuh server installation desired.
+The next step consists on the selection of the Wazuh server installation desired:
 
 - :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`

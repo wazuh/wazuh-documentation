@@ -15,7 +15,7 @@ This document will go through the installation of the Wazuh server components in
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -150,7 +150,7 @@ Filebeat installation and configuration
 
 
 
-#. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat config file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 

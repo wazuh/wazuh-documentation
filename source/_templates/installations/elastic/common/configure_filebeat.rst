@@ -9,7 +9,8 @@
 
     .. code-block:: yaml
 
-      output.elasticsearch.hosts: ["<elasticsearch_ip>:9200"]
+      output.elasticsearch:
+        hosts: ["<elasticsearch_ip>:9200"]
 
     Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server.
 
@@ -18,7 +19,8 @@
 
     .. code-block:: yaml
 
-      output.elasticsearch.hosts: ["<elasticsearch_ip_node_1>:9200", "<elasticsearch_ip_node_2>:9200", "<elasticsearch_ip_node_3>:9200"]
+      output.elasticsearch:
+        hosts: ["<elasticsearch_ip_node_1>:9200", "<elasticsearch_ip_node_2>:9200", "<elasticsearch_ip_node_3>:9200"]
 
     Replace ``elasticsearch_ip_node_x`` with the IP address or the hostname of the Elasticsearch server to connect to.
 
