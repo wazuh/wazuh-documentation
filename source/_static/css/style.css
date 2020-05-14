@@ -3576,6 +3576,15 @@ div[class*='highlight'] {
   margin: 1px 0 24px 0;
 }
 
+div[class*='highlight'].output {
+	border: none;
+	background-color: transparent;
+}
+
+div[class*='highlight'].output .highlight {
+	border: 1px solid #e1e4e5;
+}
+
 div[class*='highlight'] {
   position: relative;
 }
@@ -3625,7 +3634,8 @@ div[class*='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class*='highlight']:hover .copy-to-clipboard {
+div[class*='highlight']:hover .copy-to-clipboard ,
+div[class*='highlight'] .copy-to-clipboard:focus {
   opacity: 1;
 }
 
@@ -3668,7 +3678,7 @@ pre .gr { color: #a00 } /* Generic.Error */
 pre .gh { color: #999 } /* Generic.Heading */
 pre .gi { color: #000; background-color: #dfd } /* Generic.Inserted */
 pre .gi .x { color: #000; background-color: #afa }
-pre .go { color: #888 } /* Generic.Output */
+pre .go, pre .heredoc, pre .heredoc .gp { color: #888 } /* Generic.Output */
 pre .gp { color: #555 } /* Generic.Prompt */
 pre .gs { font-weight: bold }
 pre .gu { color: purple; font-weight: bold } /* Generic.Subheading */
