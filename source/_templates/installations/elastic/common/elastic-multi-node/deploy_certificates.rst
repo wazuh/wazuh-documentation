@@ -9,10 +9,10 @@ The ``X`` must be replaced with the number used in the certificate name defined 
   # mkdir /etc/elasticsearch/certs
   # mv ~/certs.tar /etc/elasticsearch/certs/
   # cd /etc/elasticsearch/certs/
-  # tar -xf certs.tar /etc/elasticsearch/certs/nodeX* /etc/elasticsearch/certs/root-ca.pem
-  # mv /etc/elasticsearch/certs/elasticsearch-X.pem /etc/elasticsearch/certs/elasticsearch.pem
-  # mv /etc/elasticsearch/certs/elasticsearch-X.key /etc/elasticsearch/certs/elasticsearch.key
-  # mv /etc/elasticsearch/certs/elasticsearch-X_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
-  # mv /etc/elasticsearch/certs/elasticsearch-X_http.key /etc/elasticsearch/certs/elasticsearch_http.key
+  # tar -xf certs.tar /etc/elasticsearch/certs/node-X* /etc/elasticsearch/certs/root-ca.pem
+  # mv /etc/elasticsearch/certs/elasticsearchX.pem /etc/elasticsearch/certs/elasticsearch.pem
+  # mv /etc/elasticsearch/certs/elasticsearchX.key /etc/elasticsearch/certs/elasticsearch.key
+  # mv /etc/elasticsearch/certs/elasticsearchX_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
+  # mv /etc/elasticsearch/certs/elasticsearchX_http.key /etc/elasticsearch/certs/elasticsearch_http.key
 
 .. End of include file
