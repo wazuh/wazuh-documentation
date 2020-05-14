@@ -8,7 +8,7 @@ Using Wazuh to monitor GCP services
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Google Cloud Platform (GCP) infrastructure.
 
-.. versionadded:: 3.12.0
+.. versionadded:: 3.13.0
 
 Wazuh helps to increase the security of a GCP infrastructure by collecting and analyzing log data. Thanks to the module for GCP, Wazuh can trigger alerts based on the events obtained from these services via Cloud Pub/Sub.
 
@@ -23,5 +23,5 @@ This module requires dependencies in order to work, and also the right credentia
     :maxdepth: 1
 
     prerequisites/index
+    configuration
     supported-services/index
-    troubleshooting
