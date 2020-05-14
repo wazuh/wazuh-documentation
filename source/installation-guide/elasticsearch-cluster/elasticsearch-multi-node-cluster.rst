@@ -82,6 +82,13 @@ Certificates creation and deployment
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
+#. [*Master*] Execute the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
+
+  .. code-block:: console
+  
+    # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+    # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h ``<elasticsearch_IP>``      
+
 
 Next steps
 ----------

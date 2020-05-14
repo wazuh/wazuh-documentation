@@ -11,7 +11,6 @@ The ``X`` must be replaced with the number used in the certificate name defined 
   # cd /etc/elasticsearch/certs/
   # tar -xf certs.tar
   # mv /etc/elasticsearch/certs/elasticsearch-X.pem /etc/elasticsearch/certs/elasticsearch.pem
-  # mv /etc/elasticsearch/certs/elasticsearch-X-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem
-  # chmod 444 /etc/elasticsearch/certs/elasticsearch-key.pem
+  # mv /etc/elasticsearch/certs/elasticsearch-X.key /etc/elasticsearch/certs/elasticsearch.key
 
 .. End of include file
