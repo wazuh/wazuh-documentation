@@ -14,7 +14,6 @@ The certificates can be generated as follows:
     .. code-block:: console
 
       # wget https://releases.floragunn.com/search-guard-tlstool/1.7/search-guard-tlstool-1.7.zip
-      # unzip search-guard-tlstool-1.7.zip -d searchguard
 
   #. Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``: 
 
@@ -74,6 +73,12 @@ The certificates can be generated as follows:
     .. code-block:: console
 
       # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -ca -crt  
+
+    After the execution, a new directory will be created on the current one called ``out``. Inside will be all the needed certificates. Move them into the Elasticsearch's certificates directory:
+
+      .. code-block:: console
+
+        # mv ./out/* /etc/elasticsearch/certs/      
 
   #. Remove all the unnecessary files:
 
