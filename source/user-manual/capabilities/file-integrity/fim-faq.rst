@@ -133,3 +133,46 @@ To create rules with the FIM dynamic fields, something like this example needs t
 
 After adding this to the local rules, restart Wazuh and alerts will start to appear following the new rules.
 
+Here is a list of the available dynamic fields:
+
+- ``path``
+- ``hard_links``
+- ``mode``
+- ``symbolic_path``
+- ``size_before``
+- ``size_after``
+- ``perm_before``
+- ``perm_after``
+- ``uid_before``
+- ``uid_after``
+- ``gid_before``
+- ``gid_after``
+- ``md5_before``
+- ``md5_after``
+- ``sha1_before``
+- ``sha1_after``
+- ``sha256_before``
+- ``sha256_after``
+- ``uname_before``
+- ``uname_after``
+- ``gname_before``
+- ``gname_after``
+- ``mtime_before``
+- ``mtime_after``
+- ``inode_before``
+- ``inode_after``
+- ``diff``
+- ``tags``
+- ``changed_attributes``
+- ``event``
+- ``audit.user.id``
+- ``audit.user.name``
+- ``audit.group.id``
+- ``audit.group.name``
+- ``audit.process.id``
+- ``audit.process.name``
+- ``audit.process.ppid``
+- ``audit.login_user.id``
+- ``audit.login_user.name``
+- ``audit.effective_user.id``
+- ``audit.effective_user.name``
