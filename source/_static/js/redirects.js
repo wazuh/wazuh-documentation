@@ -40,18 +40,18 @@ removedUrls['x.y'] = [
 
 redirections.push(
     {
-      'target': ['3.10=>3.12', '3.12=>3.10'],
-      '3.10': '/azure/monitoring activity.html',
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring activity.html',
       '3.12': '/azure/monitoring-activity.html',
     },
     {
-      'target': ['3.10=>3.12', '3.12=>3.10'],
-      '3.10': '/azure/monitoring instances.html',
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring instances.html',
       '3.12': '/azure/monitoring-instances.html',
     },
     {
-      'target': ['3.10=>3.12', '3.12=>3.10'],
-      '3.10': '/azure/monitoring services.html',
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring services.html',
       '3.12': '/azure/monitoring-services.html',
     }
 );
