@@ -30,14 +30,44 @@ The certificates can be generated as follows:
 
       .. code-block:: console
 
-        # wget https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/search-guard.yml      
+        # curl -so /etc/elasticsearch/certs/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard.yml
+
+      
+      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line:
+
+        .. code-block:: yaml
+
+          nodes:
+            - name: elasticsearch
+            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            ip: 
+              - <elasticsearch_IP>
 
     .. group-tab:: Wazuh multi-node cluster
 
-     #. tab2
+      .. code-block:: console
 
+        # curl -so /etc/elasticsearch/certs/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard-multi-node.yml     
 
-  After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP.
+      
+      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line.
+
+        .. code-block:: yaml
+
+          nodes:
+            - name: elasticsearch
+            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            ip: 
+              - <elasticsearch_IP>
+
+      There should be added as many ``filebeat-X`` sections as Wazuh servers will be involved in the installation:
+
+        .. code-block:: yaml
+
+          - name: filebeat-1
+            dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=ES
+          - name: filebeat-2
+            dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=ES  
 
   #. Execute the Search Guard's script to create the certificates:
 
