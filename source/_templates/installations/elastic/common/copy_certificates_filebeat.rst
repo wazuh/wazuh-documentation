@@ -4,11 +4,10 @@ In section *Installation guide > Elasticsearch cluster*, the ``certs.tar`` file 
 
 .. code-block:: console
 
-    # mkdir /etc/filebeat/certs
-    # mv ~/certs.tar /etc/filebeat/certs/
-    # cd /etc/filebeat/certs/
-    # tar -xf certs.tar
-    # chmod 444 /etc/filebeat/certs/filebeat-key.pem
+  # mkdir /etc/filebeat/certs
+  # mv ~/certs.tar /etc/filebeat/certs/
+  # cd /etc/filebeat/certs/
+  # tar -xf certs.tar /etc/filebeat/certs/filebeat* /etc/filebeat/certs/root-ca.pem
 
 
 .. End of copy_certificates_filebeat.rst
