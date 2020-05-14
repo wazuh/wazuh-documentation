@@ -185,7 +185,7 @@ Time of the day to retrieve logs from GCP. It has to be represented in the forma
 
 .. note::
 
-	When only the ``time`` option is set, the interval value must be a multiple of days. By default, the interval is set to a day.
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 
 
