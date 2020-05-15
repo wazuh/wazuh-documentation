@@ -125,6 +125,7 @@ How to create rules for FIM dynamic fields.
 To create rules with the FIM dynamic fields, something like this example needs to be added to the ``/var/ossec/etc/rules/local_rules.xml`` file in the Wazuh manager:
 
 .. code-block:: xml
+
   <rule id="100002" level="5">
     <if_sid>550, 553, 554</if_sid>
     <field name="mode">whodata</field>
