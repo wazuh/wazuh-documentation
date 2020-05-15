@@ -16,8 +16,11 @@ gcp-pubsub
 
 This configuration section is used to configure the Google Cloud Pub/Sub module.
 
+Options
+-------
+
 Main options
-------------
+^^^^^^^^^^^^
 
 - `enabled`_
 - `project_id`_
@@ -27,16 +30,12 @@ Main options
 - `logging`_
 
 Scheduling options
-------------------
+^^^^^^^^^^^^^^^^^^
 - `pull_on_start`_
 - `interval`_
 - `day`_
 - `wday`_
 - `time`_
-
-
-Main options
-------------
 
 enabled
 ^^^^^^^
@@ -109,9 +108,6 @@ Toggle between the different logging levels.
 | **Allowed values** | disabled/info/debug/warning/error/critical |
 +--------------------+--------------------------------------------+
 
-
-Scheduling options
-------------------
 
 pull_on_start
 ^^^^^^^^^^^^^
@@ -186,7 +182,6 @@ Time of the day to retrieve logs from GCP. It has to be represented in the forma
 .. note::
 
 	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
-
 
 
 Configuration example
