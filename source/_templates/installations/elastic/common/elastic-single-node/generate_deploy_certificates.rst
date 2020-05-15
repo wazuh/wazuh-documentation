@@ -74,12 +74,6 @@ The certificates can be generated as follows:
 
       # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -ca -crt -t /etc/elasticsearch/certs/  
 
-    After the execution, a new directory will be created on the current one called ``out``. Inside will be all the needed certificates. Move them into the Elasticsearch's certificates directory:
-
-      .. code-block:: console
-
-        # mv ./out/* /etc/elasticsearch/certs/      
-
   #. Remove all the unnecessary files:
 
     .. code-block:: console
