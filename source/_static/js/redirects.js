@@ -36,15 +36,215 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 3.12 ****/
 
+/* Redirections from 3.11 to 3.12  */
+
+redirections.push(
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/user-manual/registering/using-command-line.html',
+      '3.12': '/user-manual/registering/command-line-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/cli/using-command-line-linux.html',
+      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/cli/using-command-line-macos.html',
+      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/cli/using-command-line-unix.html',
+      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/cli/using-command-line-windows.html',
+      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/user-manual/registering/manager-verification/host-verification-registration.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/manager-verification-registration.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agents/linux-unix-manager-verification.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agents/macos-manager-verification.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agent-verification-registration.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agents/linux-unix-agent-verification.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agents/windows-agent-verification.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/manager-verification/agents/macos-agent-verification.html',
+      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/user-manual/registering/password-authorization-registration-service.html',
+      '3.12': '/user-manual/registering/password-authorization-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/password/linux-unix-password-registration.html',
+      '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/password/windows-password-registration.html',
+      '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/password/macos-password-registration.html',
+      '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/user-manual/registering/registration-process.html',
+      '3.12': '/user-manual/registering/registering-agents-theory.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/user-manual/registering/restful-api-register.html',
+      '3.12': '/user-manual/registering/restful-api-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/api/api-register-linux-unix.html',
+      '3.12': '/user-manual/registering/restful-api-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/api/api-register-windows.html',
+      '3.12': '/user-manual/registering/restful-api-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/api/api-register-macos.html',
+      '3.12': '/user-manual/registering/restful-api-registration.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/user-manual/registering/simple-registration-method.html',
+      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/linux-unix-simple-registration.html',
+      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/windows-simple-registration.html',
+      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+    },
+    {
+      'target': ['3.11=>3.12'],
+      '3.11': '/user-manual/registering/macos-simple-registration.html',
+      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring activity.html',
+      '3.12': '/azure/monitoring-activity.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring instances.html',
+      '3.12': '/azure/monitoring-instances.html',
+    },
+    {
+      'target': ['3.11=>3.12', '3.12=>3.11'],
+      '3.11': '/azure/monitoring services.html',
+      '3.12': '/azure/monitoring-services.html',
+    }
+);
+
 /* Pages added in 3.12 */
 
 newUrls['3.12'] = [
   '/amazon/services/supported-services/cisco-umbrella.html',
   '/amazon/services/supported-services/waf.html',
-  '/user-manual/capabilities/file-integrity/fim-synchronization.html',
+  '/user-manual/registering/command-line-registration.html',
+  '/user-manual/registering/host-verification-registration.html',
+  '/user-manual/registering/password-authorization-registration.html',
+  '/user-manual/registering/registering-agents-theory.html',
+  '/user-manual/registering/registering-agents-troubleshooting.html',
+  '/user-manual/registering/restful-api-registration.html',
   '/release-notes/release_3_12_0.html',
   '/release-notes/release_3_12_1.html',
   '/release-notes/release_3_12_2.html',
+  '/release-notes/release_3_12_3.html',
+  '/azure/monitoring-activity.html',
+  '/azure/monitoring-instances.html',
+  '/azure/monitoring-services.html',
+];
+
+/* Pages no longer available in 3.12 */
+
+removedUrls['3.12'] = [
+  '/user-manual/capabilities/file-integrity/fim-faq.html',
+  '/user-manual/registering/using-command-line.html',
+  '/user-manual/registering/cli/using-command-line-linux.html',
+  '/user-manual/registering/cli/using-command-line-macos.html',
+  '/user-manual/registering/cli/using-command-line-unix.html',
+  '/user-manual/registering/cli/using-command-line-windows.html',
+  '/user-manual/registering/manager-verification/host-verification-registration.html',
+  '/user-manual/registering/manager-verification/manager-verification-registration.html',
+  '/user-manual/registering/manager-verification/agent-verification-registration.html',
+  '/user-manual/registering/manager-verification/agents/linux-unix-manager-verification.html',
+  '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
+  '/user-manual/registering/manager-verification/agents/macos-manager-verification.html',
+  '/user-manual/registering/manager-verification/agents/linux-unix-agent-verification.html',
+  '/user-manual/registering/manager-verification/agents/windows-agent-verification.html',
+  '/user-manual/registering/manager-verification/agents/macos-agent-verification.html',
+  '/user-manual/registering/password-authorization-registration-service.html',
+  '/user-manual/registering/password/linux-unix-password-registration.html',
+  '/user-manual/registering/password/windows-password-registration.html',
+  '/user-manual/registering/password/macos-password-registration.html',
+  '/user-manual/registering/registration-process.html',
+  '/user-manual/registering/restful-api-register.html',
+  '/user-manual/registering/api/api-register-linux-unix.html',
+  '/user-manual/registering/api/api-register-windows.html',
+  '/user-manual/registering/api/api-register-macos.html',
+  '/user-manual/registering/simple-registration-method.html',
+  '/user-manual/registering/linux-unix-simple-registration.html',
+  '/user-manual/registering/windows-simple-registration.html',
+  '/user-manual/registering/macos-simple-registration.html',
+  '/azure/monitoring activity.html',
+  '/azure/monitoring instances.html',
+  '/azure/monitoring services.html',
 ];
 
 /* *** RELEASE 3.11 ****/
@@ -135,7 +335,7 @@ redirections.push(
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
       '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
-      '3.11': '/packaging/generate-wpk-package.html',
+      '3.11': '/development/packaging/generate-wpk-package.html',
     },
     {
       'target': ['3.10=>3.11', '3.11=>3.10'],
@@ -209,18 +409,18 @@ newUrls['3.11'] = [
   '/learning-wazuh/audit-commands.html',
   '/learning-wazuh/suricata.html',
   '/learning-wazuh/vuln-detection.html',
-  '/packaging/generate-aix-package.html',
-  '/packaging/generate-deb-package.html',
-  '/packaging/generate-hpux-package.html',
-  '/packaging/generate-osx-package.html',
-  '/packaging/generate-ova.html',
-  '/packaging/generate-rpm-package.html',
-  '/packaging/generate-sol-package.html',
-  '/packaging/generate-wazuh-kibana-app.html',
-  '/packaging/generate-wazuh-splunk-app.html',
-  '/packaging/generate-windows-package.html',
-  '/packaging/generate-wpk-package.html',
-  '/packaging/index.html',
+  '/development/packaging/generate-aix-package.html',
+  '/development/packaging/generate-deb-package.html',
+  '/development/packaging/generate-hpux-package.html',
+  '/development/packaging/generate-osx-package.html',
+  '/development/packaging/generate-ova.html',
+  '/development/packaging/generate-rpm-package.html',
+  '/development/packaging/generate-sol-package.html',
+  '/development/packaging/generate-wazuh-kibana-app.html',
+  '/development/packaging/generate-wazuh-splunk-app.html',
+  '/development/packaging/generate-windows-package.html',
+  '/development/packaging/generate-wpk-package.html',
+  '/development/packaging/index.html',
   '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
   '/user-manual/capabilities/vulnerability-detection/allow_os.html',
   '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
