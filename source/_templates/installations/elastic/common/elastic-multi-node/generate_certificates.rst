@@ -29,7 +29,7 @@ The certificates can be generated as follows:
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard.yml
+        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard.yml
 
       
       After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. There can be indicated more than one IP, setting one per line:
@@ -54,7 +54,7 @@ The certificates can be generated as follows:
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard-multi-node.yml     
+        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard-multi-node.yml     
 
       
       After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. There can be indicated more than one IP, setting one per line:
@@ -88,7 +88,7 @@ The certificates can be generated as follows:
 
     .. code-block:: console
 
-      # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
+      # ./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
       # mv /etc/elasticsearch/certs/node-1.pem /etc/elasticsearch/certs/elasticsearch.pem
       # mv /etc/elasticsearch/certs/node-1.key /etc/elasticsearch/certs/elasticsearch.key
       # mv /etc/elasticsearch/certs/node-1_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
@@ -99,6 +99,8 @@ The certificates can be generated as follows:
     .. code-block:: console
 
       # rm /etc/elasticsearch/certs/client-certificates.readme *_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip
+
+    In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.      
 
   #. Compress all the necessary files to be sended to the rest of the involved parts:
 

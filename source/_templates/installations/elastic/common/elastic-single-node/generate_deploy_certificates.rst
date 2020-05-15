@@ -29,7 +29,7 @@ The certificates can be generated as follows:
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard.yml
+        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard.yml
 
       
       After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line:
@@ -46,7 +46,7 @@ The certificates can be generated as follows:
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard-multi-node.yml     
+        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard-multi-node.yml     
 
       
       After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line.
@@ -72,7 +72,10 @@ The certificates can be generated as follows:
 
     .. code-block:: console
 
-      # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -ca -crt -t /etc/elasticsearch/certs/  
+      # ./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ 
+
+    
+    In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
   #. Remove all the unnecessary files:
 
