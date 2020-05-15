@@ -18,8 +18,16 @@ This section covers the configuration for the :ref:`manual_sec_config_assessment
 
 Settings to run Security Configuration Assessment scans.
 
+Options
+-------
+
 Main options
-------------
+^^^^^^^^^^^^
+
+- `enabled`_
+- `skip_nfs`_
+- `policies`_
+
 
 +----------------------+-----------------------------+
 | Main options         | Allowed values              |
@@ -32,7 +40,14 @@ Main options
 +----------------------+-----------------------------+
 
 Scheduling options
-------------------
+^^^^^^^^^^^^^^^^^^
+
+- `scan_on_start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
+
 
 +----------------------+-----------------------------+
 | Scheduling options   | Allowed values              |
@@ -64,9 +79,6 @@ Scheduling options
 
 Some examples of usage of these options are included in the
 :doc:`SCA documentation<../../capabilities/sec-config-assessment/index>`.
-
-Main options
-------------
 
 enabled
 ^^^^^^^
@@ -121,8 +133,6 @@ Example
     <policy enabled="no">cis_debian9_L2.yml/policy>
   </policies>
 
-Scheduling options
-------------------
 
 scan_on_start
 ^^^^^^^^^^^^^
