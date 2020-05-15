@@ -19,11 +19,12 @@ Configuration options of the Command wodle.
 Options
 -------
 
+Main options
+^^^^^^^^^^^^
+
 - `disabled`_
 - `tag`_
 - `command`_
-- `interval`_
-- `run_on_start`_
 - `ignore_output`_
 - `timeout`_
 - `verify_md5`_
@@ -32,17 +33,13 @@ Options
 - `skip_verification`_
 
 +----------------------+-----------------------------+
-| Options              | Allowed values              |
+| Main options         | Allowed values              |
 +======================+=============================+
 | `disabled`_          | yes, no                     |
 +----------------------+-----------------------------+
 | `tag`_               | A descriptive name          |
 +----------------------+-----------------------------+
 | `command`_           | Command to be executed      |
-+----------------------+-----------------------------+
-| `interval`_          | A positive number (seconds) |
-+----------------------+-----------------------------+
-| `run_on_start`_      | yes, no                     |
 +----------------------+-----------------------------+
 | `ignore_output`_     | yes, no                     |
 +----------------------+-----------------------------+
@@ -56,6 +53,15 @@ Options
 +----------------------+-----------------------------+
 | `skip_verification`_ | yes, no                     |
 +----------------------+-----------------------------+
+
+Scheduling options
+^^^^^^^^^^^^^^^^^^
+
+- `run_on_start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
 
 disabled
 ^^^^^^^^
@@ -89,28 +95,6 @@ Path and arguments of the command to be executed.
 +--------------------+-----------------------------+
 | **Allowed values** | An existing command         |
 +--------------------+-----------------------------+
-
-interval
-^^^^^^^^
-
-Time between commands executions.
-
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 2s                                                                                                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-
-run_on_start
-^^^^^^^^^^^^^
-
-Run command immediately when service is started.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
 
 ignore_output
 ^^^^^^^^^^^^^
@@ -193,6 +177,80 @@ In this case, the agent will log that the checksum verification failed but will 
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+run_on_start
+^^^^^^^^^^^^
+
+Run command immediately when service is started.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+interval
+^^^^^^^^
+
+Time between commands executions.
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 2s                                                                                                                                                   |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), M (months). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+day
+^^^
+
+Day of the month to run the scan.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the month [1..31] |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
+
+wday
+^^^^
+
+Day of the week to run the scan. This option is **not compatible** with the ``day`` option.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the week:         |
+|                    |   - sunday/sun           |
+|                    |   - monday/mon           |
+|                    |   - tuesday/tue          |
+|                    |   - wednesday/wed        |
+|                    |   - thursday/thu         |
+|                    |   - friday/fri           |
+|                    |   - saturday/sat         |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
+time
+^^^^
+
+Time of the day to run the scan. It has to be represented in the format *hh:mm*.
+
++--------------------+-----------------------+
+| **Default value**  | n/a                   |
++--------------------+-----------------------+
+| **Allowed values** | Time of day *[hh:mm]* |
++--------------------+-----------------------+
+
+.. note::
+
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 
 Centralized configuration
