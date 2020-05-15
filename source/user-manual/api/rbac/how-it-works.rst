@@ -7,14 +7,14 @@ How it works
 
 The operation of RBAC is based on the relationship between three components: **users**, **roles** and **policies** or permissions. Policies are associated with roles, and each user can belong to one or more roles.
 
-Since the policies are not directly related to users, it is not necessary to assign them to each person. Simply we assign the user to the appropriate role. The process of updating the permissions of an entire group of users is also made easier thanks to this structure.
+Since the policies are not directly related to users, it is not necessary to assign them to each person. Simply assign the user to the appropriate role. The process of updating the permissions of an entire group of users is also made easier thanks to this structure.
 
-After configuring RBAC, we will have groups that can only see and do certain actions on specified resources that we have previously established. We could, for example, ensure that members of a Security-team have read access to all agents, while the Sales-team has read and modify permissions only to agents in their department (but not delete permissions).
+After configuring RBAC, there will be groups that can only see and do certain actions on specified resources that have previously been established. It would be ensured that members of a Security-team have 'read' access to all agents, while the Sales-team has 'read' and 'modify' permissions only to agents in their department (but not delete permissions).
 
 RBAC modes
 ----------
 
-RBAC in Wazuh can be configured in two different and opposite ways: **black** and **white**. The choice of one mode or another determines what will be the behavior of the created policies.
+RBAC in Wazuh can be configured in two different and opposite ways: **black** and **white**. The choice of one mode or another determines what will be the behaviour of the created policies.
 
 - **White list mode:** everything is forbidden. The administrator configure roles to give permissions.
 - **Black list mode:** everything is allowed. The administrator configure roles to restrict permissions.
@@ -24,7 +24,7 @@ Actions, resources and effect
 -----------------------------
 Policies control API permissions using three elements: actions, resources, and effect.
 
-**Actions** represents a hierarchy of actions that an user may perform. They indicate both the element to which the action belongs and the action itself. The structure they follow looks like the example below, where restarting agent is specified.
+**Actions** represents a hierarchy of actions that a user may perform. They indicate both the element to which the action belongs and the action itself. The structure they follow looks like the example below, where restarting agent is specified.
 
 .. code-block:: console
 

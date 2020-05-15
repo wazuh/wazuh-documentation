@@ -4,15 +4,13 @@
 
 Configuration
 =============
-
-In order to manage RBAC from the API itself, we need to access its new interface. By default, you can find it at https://localhost:55000/ui.
+In order to manage RBAC from the API itself, we need to access its new interface. By default, it can be found at https://localhost:55000/ui.
 
 There, among a complete list of all self-explaining API endpoints, there is a section called *Security* with all the necessary tools for managing users, roles, permissions and the relationship between those elements.
 
 Log in
 ------
-
-Before carry out any action, it is necessary to log in with a user created by default. This user is assigned a role called *administrator*. There are other default roles that you can find in the :ref:`RBAC reference <api_rbac_reference>`.
+Before carrying out any action, it is necessary to log in with a user created by default. This user is assigned a role called *administrator*. There are other default roles that you can find in the: ref: `RBAC reference api_rbac_reference>`.
 
 1. Click on the green Authorize button.
 
@@ -73,7 +71,7 @@ Let's assume a use case where we want to grant the Sales-team access to the agen
       }
     }
 
-With this policy we have established that it is allowed to read agents 001, 002, 003 and 004. We can create more policies to our liking as long as they are not repeated. We may also change this policy at any time to, for example, add new agents.
+With this policy, we have established that it is allowed to read agents 001, 002, 003 and 004. We can create more policies to our liking as long as they are not repeated. We may also change this policy at any time to, for example, add new agents.
 
 The return response after adding the new policy should be similar to the one below. The highlighted ID should be used later to assign the policy to the role.
 
