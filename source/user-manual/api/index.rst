@@ -30,5 +30,6 @@ Wazuh API capabilities:
        getting-started
        queries
        configuration
+       rbac/index
        reference
        examples
