@@ -89,16 +89,16 @@ The certificates can be generated as follows:
     .. code-block:: console
 
       # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
-      # mv /etc/elasticsearch/certs/nodeX.pem /etc/elasticsearch/certs/elasticsearch.pem
-      # mv /etc/elasticsearch/certs/nodeX.key /etc/elasticsearch/certs/elasticsearch.key
-      # mv /etc/elasticsearch/certs/nodeX_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
-      # mv /etc/elasticsearch/certs/nodeX_http.key /etc/elasticsearch/certs/elasticsearch_http.key
+      # mv /etc/elasticsearch/certs/node-X.pem /etc/elasticsearch/certs/elasticsearch.pem
+      # mv /etc/elasticsearch/certs/node-X.key /etc/elasticsearch/certs/elasticsearch.key
+      # mv /etc/elasticsearch/certs/node-X_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
+      # mv /etc/elasticsearch/certs/node-X_http.key /etc/elasticsearch/certs/elasticsearch_http.key
 
   #. Remove all the unnecessary files:
 
     .. code-block:: console
 
-      # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip
+      # rm /etc/elasticsearch/certs/client-certificates.readme *_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip
 
   #. Compress all the necessary files to be sended to the rest of the involved parts:
 
