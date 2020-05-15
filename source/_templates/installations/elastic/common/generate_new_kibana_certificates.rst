@@ -1,54 +1,34 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In case of installing Kibana in a different server from the Elasticsearch's one, new certificates for Kibana should be created. This step must be done on the Elasticsearch node where the rest of the certificates were created:
-
-#. Create the ``kibana.conf`` file for the Kibana certificate, replacing the ``kibana_IP`` with the Kibana's host IP:
-
-  .. code-block:: console
-
-    # cat  > kibana.conf  <<\EOF
-    [ req ]
-    prompt = no
-    default_bits = 2048
-    default_md = sha256
-    distinguished_name = req_distinguished_name
-    x509_extensions = v3_req
-
-    [req_distinguished_name]
-    C = US
-    ST = California
-    L = California
-    O = Wazuh
-    OU = Docu
-    CN = kibana
-
-    [ v3_req ]
-    authorityKeyIdentifier=keyid,issuer
-    basicConstraints = CA:FALSE
-    keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-    subjectAltName = @alt_names
-
-    [alt_names]
-    IP.1 = <kibana_IP>
-
-    EOF
+In case of installing Kibana in a different server from the Elasticsearch's one, new certificates for Kibana should be created. This step must be done on the Elasticsearch master-node where the rest of the certificates were created:
 
 
-#. Generate the kibana certificate:
+#. Modify the ``search-guard.yml`` file placed at ``/etc/elasticsearch/certs/`` and add the following information at the end of the ``clients`` section:
+
+  .. code-block:: yaml
+
+    - name: kibana
+      dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=ES
+
+#. Execute the Search Guard’s script to create the certificates: 
 
   .. code-block:: console
 
-    # openssl req -new -nodes -newkey rsa:2048 -keyout kibana-key.pem -out kibana.csr -config kibana.conf -days 3650
-    # openssl x509 -req -in kibana.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out kibana.pem -extfile kibana.conf -extensions v3_req -days 3650
+    # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -crt -t /etc/elasticsearch/certs/
 
-Once the certificate has been created, it must be copied in the Kibana host, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+#. Add the new certificates to the ``certs.tar`` compressed file: 
 
   .. code-block:: console
 
-    # mkdir /etc/kibana/certs
-    # mv ~/certs.tar /etc/kibana/certs/
-    # cd /etc/kibana/certs/
-    # tar -xf certs.tar
-    # chmod 444 /etc/kibana/certs/kibana-key.pem
+    # tar -rvf certs.tar kibana.pem kibana.key
+
+Once the certificates have been created and added to the ``certs.tar`` file, it must be copied into the Kibana server, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+
+.. code-block:: console
+
+  # mkdir /etc/kibana/certs
+  # mv ~/certs.tar /etc/kibana/certs/
+  # cd /etc/kibana/certs/
+  # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
 
 .. End of include file
