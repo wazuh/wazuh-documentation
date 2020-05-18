@@ -102,13 +102,13 @@ Kibana installation and configuration
 
   .. code-block:: console
 
-    # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node 
+    # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
 #. Enable and start the Kibana service:
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
-    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
     .. note:: The Kibana service listens to the port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP.
 
