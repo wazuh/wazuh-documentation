@@ -14,7 +14,7 @@ Elastic recommends installing Kibana on the same server as Elasticsearch, but it
 
 Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
 
-  .. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
+  .. include:: ../../_templates/installations/elastic/common/before_installation_kibana.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,13 +98,19 @@ Kibana installation and configuration
 
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
+#. Load the Kibana's port configuration
+
+  .. code-block:: console
+
+    # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node 
+
 #. Enable and start the Kibana service:
 
     .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
     With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
-    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
+    .. note:: The Kibana service listens to the port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP.
 
 After the first attempt to access the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
 

@@ -29,7 +29,7 @@
 
                     .. code-block:: console
 
-                        # apt install openjdk-11-jdk curl apt-transport-https gnupg2 unzip wget                        
+                        # apt install openjdk-11-jdk curl apt-transport-https gnupg2 unzip wget libcap2-bin                    
 
         .. group-tab:: Yum
 
@@ -37,6 +37,6 @@
 
                 .. code-block:: console
 
-                    # yum install java-11-openjdk-devel curl gnupg2 unzip wget
+                    # yum install java-11-openjdk-devel curl gnupg2 unzip wget libcap2-bin
 
 .. End of include file
