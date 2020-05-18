@@ -58,7 +58,7 @@ Kibana installation and configuration
             .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
 
 
-#. The next step, involving the certificates placement. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
+#. The next step, involves the certificates placement. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
 
     .. tabs::
