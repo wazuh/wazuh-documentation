@@ -107,5 +107,6 @@ The certificates can be generated as follows:
     .. code-block:: console
 
       # tar -cf certs.tar *
+      # tar --delete -f certs.tar 'searchguard'
 
 .. End of include file
