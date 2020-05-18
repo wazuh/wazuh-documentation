@@ -3,7 +3,7 @@
 In case of installing Kibana in a different server from the Elasticsearch's one, new certificates for Kibana should be created. This step must be done on the Elasticsearch master-node where the rest of the certificates were created:
 
 
-#. Modify the ``search-guard.yml`` file placed at ``/etc/elasticsearch/certs/`` and add the following information at the end of the ``clients`` section:
+#. Modify the ``search-guard.yml`` file placed at ``/etc/elasticsearch/certs/searchguard`` and add the following information at the end of the ``clients`` section:
 
   .. code-block:: yaml
 
@@ -14,7 +14,7 @@ In case of installing Kibana in a different server from the Elasticsearch's one,
 
   .. code-block:: console
 
-    # ./searchguard/tools/sgtlstool.sh -c ./search-guard.yml -crt -t /etc/elasticsearch/certs/
+    # ./searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -crt -t /etc/elasticsearch/certs/
 
 #. Add the new certificates to the ``certs.tar`` compressed file: 
 
