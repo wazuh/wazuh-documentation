@@ -233,11 +233,11 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../_templates/installations/elastic/common/enable_kibana.rst
 
-    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``esnode.pem`` certificate previously created to the Certificate Manager of each browser that will access the Kibana interface.
+    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` certificate previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
     .. note:: The Kibana service listens to the default port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP.
 
-    The default user and password to access Kibana is ``admin``.
+    The default user and password to access Kibana is ``kibanaserver``.
 
 
 
