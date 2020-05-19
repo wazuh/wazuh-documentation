@@ -8,6 +8,8 @@
 Elasticsearch multi-node cluster
 =================================
 
+Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
+
 This document will explain how to install the Open Distro components in a multi-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
@@ -15,8 +17,6 @@ This document will explain how to install the Open Distro components in a multi-
 
 Installing Elasticsearch
 ------------------------
-
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
 
 The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. The labels [*All*] or [*Master*]  at the beginning of the step will indicate whether the steps must be done in all nodes or in a master node only. In case of having two or more [*Master*] nodes, the steps must be done in just one of them.
 
@@ -85,9 +85,9 @@ Certificates creation and deployment
 #. [*Master*] Execute the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
 
   .. code-block:: console
-  
+
     # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-    # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>      
+    # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>
 
 
 Next steps

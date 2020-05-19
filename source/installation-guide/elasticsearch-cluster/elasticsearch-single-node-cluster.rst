@@ -8,6 +8,8 @@
 Elasticsearch single-node cluster
 =================================
 
+Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
+
 This document will explain how to install the Open Distro components in a single-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
@@ -22,9 +24,6 @@ Before installing the Wazuh server and Open Distro, some extra packages must be 
 
 Installing Elasticsearch
 ------------------------
-
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
-
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,9 +80,9 @@ Certificates creation and deployment
 #. Execute the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
 
   .. code-block:: console
-  
+
     # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-    # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>    
+    # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>
 
 
 Next steps
