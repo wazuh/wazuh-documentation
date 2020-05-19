@@ -30,4 +30,11 @@ Values to be replaced:
 - ``<master_node_X>``: Elasticsearch cluster master-eligible node names. E.g.: ``node-2``.
 - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. E.g.: ``10.0.0.3``.
 
+In order to use Wazuh Kibana plugin properly, it is neccesary to add the role ``wazuh-ui``. It can be added by downloading the following files:
+
+.. code-block:: console
+
+  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/elasticsearch/roles/roles.yml
+  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/elasticsearch/roles/roles_mapping.yml  
+  
 .. End of include file
