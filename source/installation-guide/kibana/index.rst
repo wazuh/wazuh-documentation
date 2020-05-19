@@ -113,6 +113,8 @@ Kibana installation and configuration
 
     .. note:: The Kibana service listens to the port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP.
 
+    The default user and password to access Kibana is ``kibanaserver``.    
+
 After the first attempt to access the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
 
   .. code-block:: yaml
