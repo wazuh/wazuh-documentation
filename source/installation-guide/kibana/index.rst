@@ -12,12 +12,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
-Before installing Wazuh server and Elastic stack, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Develpment Kit. Besides, ``wget`` and ``unzip`` utilities will in futher steps.
+If Kibana will be installed on the different server as Elasticsearch, some extra packages must be installed:
 
   .. include:: ../../_templates/installations/elastic/common/before_installation_kibana.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This step is required only if Kibana will be installed on a different server as the other previously installed components:
 
   .. tabs::
 
@@ -103,7 +105,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
-    
+
 
 #. Enable and start the Kibana service:
 
@@ -111,7 +113,7 @@ Kibana installation and configuration
 
     With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
-    .. note:: The Kibana service listens to the port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP. The default user and password to access Kibana is ``kibanaserver``.    
+    .. note:: The Kibana service listens to the port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP. The default user and password to access Kibana is ``kibanaserver``.
 
 After the first attempt to access the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
 
