@@ -100,9 +100,10 @@ Kibana installation and configuration
 
 #. Load the Kibana's port configuration
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+        # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+    
 
 #. Enable and start the Kibana service:
 
