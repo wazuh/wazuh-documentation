@@ -12,7 +12,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
-If Kibana will be installed on the different server as Elasticsearch, some extra packages must be installed:
+Before installing Kibana, some extra packages must be installed:
 
   .. include:: ../../_templates/installations/elastic/common/before_installation_kibana.rst
 
