@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh manager on Debian
+.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single machine
 
 .. _all_in_one:
 
