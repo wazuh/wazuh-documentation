@@ -92,30 +92,11 @@ Installing Wazuh manager
 
       # service wazuh-manager status
 
-Installing Wazuh API
---------------------
+.. versionadded:: 4.0.0
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend you add the official repository as this has more recent versions.
+The Wazuh API will be installed along the Wazuh manager. You do not need any extra requirement for this.
 
-    .. code-block:: console
-
-      # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
-      # dnf -y install nodejs
-      # npm config set user 0
-
-    .. note:: If you have Fedora v24 or lower, you need to add the official NodeJS repository previously:
-
-        .. code-block:: console
-
-          # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-
-2. Download and execute the installation script:
-
-  .. code-block:: console
-
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v|WAZUH_LATEST|/install_api.sh && bash ./install_api.sh download
-
-3. Once the process is complete, you can check the service status with:
+You can check the API service status with:
 
   * For Systemd:
 
