@@ -74,9 +74,9 @@ You can check the API service status with:
 .. note::
     Check out the section :ref:`securing_api` to set up some additional settings.
 
-**Optional:** Disable the Wazuh updates:
+**Optional:** Disable the Wazuh repository.
 
-  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+  It is recommended to disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
