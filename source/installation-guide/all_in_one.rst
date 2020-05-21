@@ -7,7 +7,7 @@
 All-in-One installation
 =======================
 
-This document guides through an installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used.
+This document guides through an installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used. This guide will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -26,7 +26,7 @@ Before installing the Wazuh server and Open Distro, some extra packages must be 
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
