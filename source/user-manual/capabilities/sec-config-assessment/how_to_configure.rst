@@ -51,7 +51,7 @@ the Wazuh manager has the ability to push files and configurations to connected 
 This feature can be used to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs
 to the ``default`` group, which is used here as an example:
 
-#. Edit the Wazuh agent's ``local_internal_options.conf`` file to allow remote SCA policies sent from the Wazuh manager:
+#. Edit the Wazuh agent’s ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh manager:
 
      .. code-block:: console
 
