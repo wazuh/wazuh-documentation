@@ -16,9 +16,9 @@ This document guides through an installation of the Wazuh server and Open Distro
 Preparing the installation
 --------------------------
 
-Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget`` and ``unzip`` utilities will be used in further steps.
+Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl``, and ``unzip`` utilities will be used in further steps:
 
-.. include:: ../_templates/installations/elastic/common/before_installation.rst
+.. include:: ../_templates/installations/before_installation_all_in_one.rst
 
 
 .. _all_in_one_wazuh:
@@ -99,7 +99,7 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_:
 
 .. include:: ../_templates/installations/elastic/common/install_elastic.rst
 
@@ -223,7 +223,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
       # cp /etc/elasticsearch/esnode* /etc/kibana/certs/
 
-#. Load the Kibana's port configuration
+#. Load the Kibana's port configuration:
 
     .. code-block:: console
 

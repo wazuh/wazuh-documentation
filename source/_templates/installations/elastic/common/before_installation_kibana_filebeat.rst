@@ -8,7 +8,7 @@
 
                 .. code-block:: console
 
-                    # apt install curl apt-transport-https gnupg2 unzip wget                        
+                    # apt install curl apt-transport-https
 
         .. group-tab:: Yum
 
@@ -16,6 +16,6 @@
 
                 .. code-block:: console
 
-                    # yum install curl gnupg2 unzip wget
+                    # yum install curl
 
 .. End of include file
