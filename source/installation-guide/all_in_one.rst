@@ -99,7 +99,7 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_:
+Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
 
 .. include:: ../_templates/installations/elastic/common/install_elastic.rst
 
