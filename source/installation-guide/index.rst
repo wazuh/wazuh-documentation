@@ -22,4 +22,5 @@ This section however, will explain how to build a production environment with da
         elasticsearch-cluster/index
         wazuh-cluster/index
         kibana/index
+        further-configuration
 
