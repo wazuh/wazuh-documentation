@@ -5,15 +5,38 @@
 Overview
 ^^^^^^^^
 
-This section provides access to the Wazuh environment security events monitoring. Each subsection presents the triggered Wazuh alerts grouped by a security events type and organized in dashboards containing easy to analyze charts and tables.
+This section provides access to the Wazuh environment security events monitoring.
+Each subsection shows generated Wazuh alerts grouped by a security events type and organized in dashboards containing easy to analyze charts and tables.
+They can be interactively explored on the :ref:`Discover <kibana_overview_discover>` page and presented in a PDF format :ref:`reports <kibana_overview_discover>`.
 
-By default, Wazuh Kiba plugin offers the following subections:
+By default, the *Overview* section presents the subsections organized in the following groups:
+
+#. `Security information management`_
+#. `Threat detection and response`_
+#. `Auditing and Policy monitoring`_
+#. `Regulatory compliance`_
+
+.. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-overview.png
+  :align: center
+  :width: 100%
+
+The *Overview* page can be customized by adding or removing the extensions. It can be done by clicking on the eye icon located in the right top corner of each group, and then enabling or disabling
+available extensions:
+
+.. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-extensions.png
+  :align: center
+  :width: 100%
 
 Security information management
 -------------------------------
 
-This subsection contains ``Security events`` and :ref:`Integrity monitoring <manual_file_integrity>` dashboards. The first allows browsing through the Wazuh security alerts, identifying issues and threats in the monitored by Wazuh environment.
-The second presents the Wazuh alerts related to the file changes, including permissions, content, ownership, and attributes:
+This group contains the following subsections:
+
+- ``Security events`` dashbord allows browsing through the Wazuh security alerts, identifying issues and threats in the monitored by Wazuh environment.
+
+- :ref:`Integrity monitoring <manual_file_integrity>` dashboard presents the Wazuh alerts related to the file changes, including permissions, content, ownership, and attributes.
+
+- :ref:`Amazon AWS <amazon_services>` dashboard shows security events related to the Amazon AWS services, collected directly via AWS API. By default, this dashbord is disabled.
 
 .. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-security-events.png
   :align: center
@@ -22,13 +45,22 @@ The second presents the Wazuh alerts related to the file changes, including perm
 Threat detection and response
 -----------------------------
 
-This section presents :ref:`Vulnerabilities <vulnerability-detection>` dashboard, which helps to discover which applications in the monitored environment are affected by well-knows vulnerabilities.
+This group contains the following subsections:
+
+- :ref:`Vulnerabilities <vulnerability-detection>` dashboard  helps to discover which applications in the monitored environment are affected by well-knows vulnerabilities.
+- VirusTotal
+- Osquery
+- Docker listener
 
 Auditing and Policy monitoring
 ------------------------------
 
-This subsection contains :ref:`Policy monitoring <manual_policy_monitoring>` and :ref:`System auditing <auditing-whodata>` dashboards. The first helps to verify that the scanned systems are configured according to the user's security policies baseline.
-The second provides the information from an audit of users' behavior, monitoring commands execution, and alerting on access to critical files.
+This group contains the following subsections:
+
+- :ref:`Policy monitoring <manual_policy_monitoring>` helps to verify that the scanned systems are configured according to the user's security policies baseline.
+- :ref:`System auditing <auditing-whodata>` dashboard provides the information from an audit of users' behavior, monitoring commands execution, and alerting on access to critical files.
+- OpenSCAP
+- CIS-CAT
 
 .. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-policy-monitoring.png
   :align: center
@@ -63,13 +95,31 @@ This subsection presents dashboards containing information about the following c
   :align: center
   :width: 100%
 
+.. _kibana_overview_discover:
 
 Discover
 --------
 
-Each dashboard in the Overview section has the *Discover* button, which gives access to the section allowing interactively explore the Wazuh alerts from the currently selected index pattern. It is possible to submit search queries, filter the search results, view alerts data, and also, by clicking on the fields on the left side of the window, add columns for a quick value comparison between alerts.
+Each subsection in the *Overview* section has the ``Discover`` button located in the right top corner of the screen. It opens a page where the user can interactively explore the Wazuh alerts from the currently selected index pattern. It is possible to submit search queries, filter the search results, view alerts data, and also, by clicking on the fields on the left side of the window, add columns for a quick value comparison between alerts.
 The user can see the number of alerts that match the search query and get field value statistics:
 
 .. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-discover.png
+  :align: center
+  :width: 100%
+
+.. _kibana_overview_reports:
+
+PDF report generation
+---------------------
+
+Each *Overview* subsection has an option for generating a report by clicking on the printer icon button located on the top right corner of the page. The reports are stored on the same machine where Kibana is installed, in the ``/usr/share/kibana/optimize/wazuh/downloads/reports`` folder. A status message will indicate if the report was generated successfully, or if the process was aborted:
+
+.. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-reports-generation.png
+  :align: center
+  :width: 100%
+
+The list of the reports is available on *Management > Reporting*, from where they can be downloaded or deleted. The reports are generated in PDF format and downloaded to a user's computer:
+
+.. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-reports.png
   :align: center
   :width: 100%

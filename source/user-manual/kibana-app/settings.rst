@@ -36,7 +36,7 @@ This section lists the Wazuh Kibana plugin log messages stored on the ``/usr/sha
 
 .. thumbnail:: ../../images/kibana-app/sections/settings/wazuh-kibana-settings-logs.png
   :align: center
-  :width: 100%
+  :width: 100%  
 
 About
 -----

@@ -5,15 +5,25 @@
 Agents
 ^^^^^^
 
-This section shows the overall status of all the Wazuh agents belonging to the Wazuh cluster. The section shows also an interactive table, listing the Wazuh agents and some of their details. The table allows the user to perform operations such as adding a new Wazuh agent, viewing the configuration of an existing Wazuh agent and more:
+This section shows the overall status of all the Wazuh agents belonging to the Wazuh cluster and an interactive table, listing the Wazuh agents with their details.
+The options in the table allow the user to perform operations such as adding a new Wazuh agent, viewing the configuration of an existing Wazuh agent, or opening the :ref:`Discover <kibana_agents_discover>` section.
+The table contant can be downloaded in CSV format by clicking the ``Formatted`` button located on the bottom right corner of the table. The file will be downloaded to the user's computer:
 
 .. thumbnail:: ../../images/kibana-app/sections/agents/wazuh-kibana-agents.png
   :align: center
   :width: 100%
 
-After selecting a specific Wazuh agent from the list, the user can monitor its security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance:
+After selecting a specific Wazuh agent from the list, the user can monitor its security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance.
+By default, the page displays the following extensions:
 
 .. thumbnail:: ../../images/kibana-app/sections/agents/wazuh-kibana-agent.png
+  :align: center
+  :width: 100%
+
+The Wazuh agent's information page can be customized by adding or removing the extensions. It can be done by clicking on the eye icon located in the right top corner of a subsection, and enabling or disabling
+available extensions:
+
+.. thumbnail:: ../../images/kibana-app/sections/agents/wazuh-kibana-extensions.png
   :align: center
   :width: 100%
 
@@ -26,8 +36,7 @@ Each capability section provides information about related triggered alerts, org
   :align: center
   :width: 100%
 
-By clicking on the printer icon button located on the top right corner in the interface, the user can generate a report for the data presented in the current section.
-The reports are stored on the same machine where Kibana is installed, in the ``/usr/share/kibana/optimize/wazuh/downloads/reports`` folder. A status message will indicate if the report was generated successfully, or if the process was aborted:
+Each capability subsection has an option for generating a PDF report by clicking on the printer icon button located on the top right corner of the page. The reports are stored on the same machine where Kibana is installed, in the ``/usr/share/kibana/optimize/wazuh/downloads/reports`` folder. A status message will indicate if the report was generated successfully, or if the process was aborted:
 
 .. thumbnail:: ../../images/kibana-app/sections/agents/wazuh-kibana-agent-report.png
   :align: center
@@ -54,6 +63,8 @@ For better readability, the configuration can also be displayed in JSON or XML f
 .. thumbnail:: ../../images/kibana-app/sections/agents/wazuh-kibana-conf-json.png
   :align: center
   :width: 100%
+
+.. _kibana_agents_discover:
 
 Discover the Wazuh agent's alerts
 ---------------------------------

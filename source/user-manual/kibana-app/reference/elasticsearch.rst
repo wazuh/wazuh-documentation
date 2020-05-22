@@ -22,7 +22,7 @@ It is possible to change the name of these indices to a custom one. The process 
 The ``wazuh-monitoring-3.x-`` indices
 -------------------------------------
 
-These auto-generated indices store the Wazuh agents' status. The information is updated periodically. The Wazuh Kibana plugin sends data to Elasticsearch and, by default, creates one index per day. These indices are used, for example, by the Wazuh agents' ``Status`` visualization.
+These auto-generated indices store the Wazuh agents' status. The information is updated periodically and, by default, one index per day is created. These indices are used, for example, by the Wazuh agents' ``Status`` visualization.
 
 More information
 ----------------

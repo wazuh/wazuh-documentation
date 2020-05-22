@@ -5,6 +5,21 @@
 Management
 ^^^^^^^^^^
 
+This section provides access to the Wazuh administration tools, status information and reports. The following subsections are available:
+
+#. `Configuration`_
+#. `Cluster`_
+#. `Groups`_
+#. `Logs`_
+#. `Reporting`_
+#. `Ruleset`_
+#. `Status`_
+
+
+.. thumbnail:: ../../images/kibana-app/sections/management/wazuh-kibana-management.png
+  :align: center
+  :width: 100%
+
 .. _kibana_manager_configuration:
 
 Configuration
@@ -57,7 +72,7 @@ also edit the centaralized configuration file ``agent.conf`` for each group avai
   :align: center
   :width: 100%
 
-After editing and saving the ``agent.conf`` file, each Wazuh agent belonging to the group will receive and merge the new configration:  
+After editing and saving the ``agent.conf`` file, each Wazuh agent belonging to the group will receive and merge the new configration:
 
 .. thumbnail:: ../../images/kibana-app/sections/management/wazuh-kibana-group-conf.png
   :align: center
@@ -68,11 +83,13 @@ After editing and saving the ``agent.conf`` file, each Wazuh agent belonging to 
 Logs
 ----
 
-This section provides the Wazuh cluster nodes' logs, which can be filtered and tailed using the ``Play realtime`` button:
+This section provides the Wazuh cluster nodes' logs, which can be filtered using the available filters, and tailed using the ``Play realtime`` button:
 
 .. thumbnail:: ../../images/kibana-app/sections/management/wazuh-kibana-logs.png
   :align: center
   :width: 100%
+
+The logs can be downloaded in CSV format by clicking the ``Formatted`` button located on the bottom right corner of the page. The file will be downloaded to the user's computer.
 
 .. _kibana_reporting:
 
