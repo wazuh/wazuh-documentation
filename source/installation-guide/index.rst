@@ -8,9 +8,12 @@ Installation guide
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-An All-in-One installation guide is included in the :ref:`Installation guide section<all_in_one>`, which aims to introduce Wazuh by installing it along with Elastic Stack on a single system (server). The all-in-one installation lacks of the high availability and scalability capabilities of a distributed environment.
+The Installation guide section includes the :ref:`All-in-One installation <all_in_one>`, which aims to introduce Wazuh by installing it along with Elastic Stack on a single server. The All-in-One installation lacks the high availability and scalability capabilities of a distributed environment.
 
-This section however, will explain how to build a production environment with data and services high availability, scalability, etc. The introduction document will go through the basic concepts and architecture of a Wazuh production environment.
+This section, however, will explain how to build a production environment that provides high availability and scalability of the services.
+
+The Introduction document will go through the basic concepts and architecture of the Wazuh production environment and the Further configuration section will provide the
+additional information about tuning the Wazuh environment.
 
 .. topic:: Contents
 
@@ -23,4 +26,3 @@ This section however, will explain how to build a production environment with da
         wazuh-cluster/index
         kibana/index
         further-configuration
-
