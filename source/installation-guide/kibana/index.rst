@@ -95,9 +95,6 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-
-    .. code-block:: console
-
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
 #. Load the Kibana's port configuration
