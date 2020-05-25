@@ -37,6 +37,6 @@
 
                 .. code-block:: console
 
-                    # yum install java-11-openjdk-devel curl unzip wget libcap2-bin
+                    # yum install java-11-openjdk-devel curl unzip wget libcap
 
 .. End of include file

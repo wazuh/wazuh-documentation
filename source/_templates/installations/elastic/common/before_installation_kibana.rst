@@ -16,6 +16,6 @@
 
                 .. code-block:: console
 
-                    # yum install curl libcap2-bin
+                    # yum install curl libcap
 
 .. End of include file
