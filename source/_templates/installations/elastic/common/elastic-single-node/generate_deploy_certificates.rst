@@ -90,4 +90,10 @@ The certificates can be generated as follows:
       # tar -cf certs.tar *
       # tar --delete -f certs.tar 'searchguard'
 
+  #. Once the certificates have been deployed into their corresponding destination, they can be removed from the Elasticsearch's server:
+
+    .. code-block:: console
+
+      # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat*   
+
 .. End of include file

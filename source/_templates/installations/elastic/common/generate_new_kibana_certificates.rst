@@ -22,6 +22,8 @@ In case of installing Kibana in a different server from the Elasticsearch's one,
 
     # tar -rvf certs.tar kibana.pem kibana.key
 
+  Once the certificates have been coppied into the Kibana's server, they can be removed from the Elasticsearch master node.
+
 Once the certificates have been created and added to the ``certs.tar`` file, it must be copied into the Kibana server, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
 
 .. code-block:: console

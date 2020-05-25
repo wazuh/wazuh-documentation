@@ -94,12 +94,6 @@ The certificates can be generated as follows:
       # mv /etc/elasticsearch/certs/node-1_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
       # mv /etc/elasticsearch/certs/node-1_http.key /etc/elasticsearch/certs/elasticsearch_http.key
 
-  #. Remove all the unnecessary files:
-
-    .. code-block:: console
-
-      # rm /etc/elasticsearch/certs/client-certificates.readme *_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip
-
     In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.      
 
   #. Compress all the necessary files to be sended to the rest of the involved parts:
@@ -108,5 +102,11 @@ The certificates can be generated as follows:
 
       # tar -cf certs.tar *
       # tar --delete -f certs.tar 'searchguard'
+
+  #. Once the certificates have been deployed into their corresponding destination, they can be removed from the Elasticsearch's server:
+
+    .. code-block:: console
+
+      # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat* node-*
 
 .. End of include file
