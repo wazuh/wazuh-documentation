@@ -3,7 +3,7 @@
 Dev tools
 ^^^^^^^^^
 
-This section provides an user interface to interact with the currently selected Wazuh API set in the :ref:`Wazuh API configuration <kibana_settings>`. The interface is split into an editor pane and a response pane:
+This section provides a user interface to interact with the currently selected Wazuh API set in the :ref:`Wazuh API configuration <kibana_settings>`. The interface is split into an editor pane and a response pane:
 
 .. thumbnail:: ../../images/kibana-app/sections/dev-tools/wazuh-kibana-dev-tools.png
   :align: center

@@ -7,7 +7,7 @@ Agents
 
 This section shows the overall status of all the Wazuh agents belonging to the Wazuh cluster and an interactive table, listing the Wazuh agents with their details.
 The options in the table allow the user to perform operations such as adding a new Wazuh agent, viewing the configuration of an existing Wazuh agent, or opening the :ref:`Discover <kibana_agents_discover>` section.
-The table contant can be downloaded in CSV format by clicking the ``Formatted`` button located on the bottom right corner of the table. The file will be downloaded to the user's computer:
+The table content can be downloaded in CSV format by clicking the ``Formatted`` button located on the bottom right corner of the table. The file will be downloaded to the user's computer:
 
 .. thumbnail:: ../../images/kibana-app/sections/agents/wazuh-kibana-agents.png
   :align: center

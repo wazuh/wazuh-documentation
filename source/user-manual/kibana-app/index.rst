@@ -19,13 +19,13 @@ It is available in Kibana under the Wazuh logo icon situated on the left side me
 
 The Wazuh Kibana plugin top menu offers access to the following sections:
 
-#. :ref:`Overview <kibana_overview>`: monitor the Wazuh alerts presented in security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance subsectons.
+#. :ref:`Overview <kibana_overview>`: monitor the Wazuh alerts presented in security information management, threat detection and response, auditing and policy monitoring, and regulatory compliance subsections.
 
-#. :ref:`Management <kibana_management>`: access the Wazuh administration tools, status information and reports.
+#. :ref:`Management <kibana_management>`: access the Wazuh administration tools, status information, and reports.
 
 #. :ref:`Agents <kibana_agents>`: monitor the overall status of the Wazuh agents and access the detailed information regarding each Wazuh agent.
 
-#. :ref:`Dev tools <kibana_dev_tools>`: access the Wazuh console, an user interface to interact with the Wazuh API.
+#. :ref:`Dev tools <kibana_dev_tools>`: access the Wazuh console, a user interface to interact with the Wazuh API.
 
 #. :ref:`Index pattern selector <kibana_index_pattern>`: choose the index pattern to run search and analytics against.
 
@@ -43,4 +43,3 @@ The Wazuh Kibana plugin top menu offers access to the following sections:
     settings
     troubleshooting
     reference/index
-  

@@ -5,7 +5,7 @@ Index pattern selector
 
 The Wazuh Kibana plugin allows creating custom index patterns on Kibana and, if they are compatible, selecting them in the plugin to run search and analytics against.
 
-Managing an existing index patterns as well as creating a custom index patterns can be done on the *Management > Index Patterns* page on the Kibana interface.
+Managing existing index patterns as well as creating a custom index patterns can be done on the *Management > Index Patterns* page on the Kibana interface.
 For the new index patterns, to properly order the alerts by creation date, the ``Time Filter field name`` has to be set to ``timestamp``:
 
 .. thumbnail:: ../../images/kibana-app/sections/index-pattern-selector/wazuh-kibana-index-patterns.png

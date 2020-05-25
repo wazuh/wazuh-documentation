@@ -7,7 +7,7 @@ Overview
 
 This section provides access to the Wazuh environment security events monitoring.
 Each subsection shows generated Wazuh alerts grouped by a security events type and organized in dashboards containing easy to analyze charts and tables.
-They can be interactively explored on the :ref:`Discover <kibana_overview_discover>` page and presented in a PDF format :ref:`reports <kibana_overview_discover>`.
+The Wazuh alerts can be interactively explored on their corresponding :ref:`Discover <kibana_overview_discover>` pages and presented in PDF format :ref:`reports <kibana_overview_discover>`.
 
 By default, the *Overview* section presents the subsections organized in the following groups:
 
@@ -32,7 +32,7 @@ Security information management
 
 This group contains the following subsections:
 
-- ``Security events`` dashbord allows browsing through the Wazuh security alerts, identifying issues and threats in the monitored by Wazuh environment.
+- ``Security events`` dashboard allows browsing through the Wazuh security alerts, identifying issues and threats in the monitored by Wazuh environment.
 
 - :ref:`Integrity monitoring <manual_file_integrity>` dashboard presents the Wazuh alerts related to the file changes, including permissions, content, ownership, and attributes.
 
@@ -48,9 +48,9 @@ Threat detection and response
 This group contains the following subsections:
 
 - :ref:`Vulnerabilities <vulnerability-detection>` dashboard  helps to discover which applications in the monitored environment are affected by well-knows vulnerabilities.
-- VirusTotal
-- Osquery
-- Docker listener
+- :ref:`VirusTotal <virustotal-scan>` dashboard shows alerts resulting from VirusTotal analysis of suspicious files via integration with their API.
+- :ref:`Osquery <osquery>` dashboard allows to exploring an operating system as a high-performance relational database.
+- :ref:`Docker listener <docker-monitor-index>` dashboard gives access to monitoring and view the collected activities from Docker containers such as creation, running, starting, stopping, or pausing events.
 
 Auditing and Policy monitoring
 ------------------------------
@@ -59,8 +59,8 @@ This group contains the following subsections:
 
 - :ref:`Policy monitoring <manual_policy_monitoring>` helps to verify that the scanned systems are configured according to the user's security policies baseline.
 - :ref:`System auditing <auditing-whodata>` dashboard provides the information from an audit of users' behavior, monitoring commands execution, and alerting on access to critical files.
-- OpenSCAP
-- CIS-CAT
+- :ref:`OpenSCAP <openscap_module>` dashboard allows configuration assessment and automation of compliance monitoring using SCAP checks.
+- :ref:`CIS-CAT <ciscat_module>` dashboard presents configuration assessment using Center of Internet Security scanner and SCAP checks.
 
 .. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-policy-monitoring.png
   :align: center
@@ -71,7 +71,7 @@ Regulatory compliance
 
 This subsection presents dashboards containing information about the following compliances:
 
-- :ref:`PCI DSS <pci_dss>`: global security stanard for entities that process, store or transmit payment cardholder data:
+- :ref:`PCI DSS <pci_dss>`: global security standard for entities that process, store or transmit payment cardholder data:
 
 .. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-pci-dss.png
   :align: center

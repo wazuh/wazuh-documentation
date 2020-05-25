@@ -43,7 +43,7 @@ Using the Kibana version and the Wazuh version, the correct plugin can be found 
 No template found for the selected index pattern
 ------------------------------------------------
 
-Elasticsearch needs a specific template to store Wazuh alerts, otherwise visualizations won't load properly. The correct template can be inserted using the following command:
+Elasticsearch needs a specific template to store Wazuh alerts, otherwise, visualizations won't load properly. The correct template can be inserted using the following command:
 
 .. code-block:: console
 
@@ -60,7 +60,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 "Wazuh API seems to be down" information displayed while launching the Wazuh Kibana plugin
 ------------------------------------------------------------------------------------------
 
-The Wazuh Kibana plugin needs data provided by the Wazuh API. To accomplish that, the Wazuh API service has to be active, and there must be a connectivity between the Wazuh server and the Kibana server. The other reason for this information to appear can be that there is the Wazuh API version mismatch.
+The Wazuh Kibana plugin needs data provided by the Wazuh API. To accomplish that, the Wazuh API service has to be active, and there must be connectivity between the Wazuh server and the Kibana server. The other reason for this information to appear can be that there is the Wazuh API version mismatch.
 
 The status of the Wazuh API service can be checked with the following command:
 

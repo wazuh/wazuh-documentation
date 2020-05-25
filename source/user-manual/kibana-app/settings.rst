@@ -36,12 +36,12 @@ This section lists the Wazuh Kibana plugin log messages stored on the ``/usr/sha
 
 .. thumbnail:: ../../images/kibana-app/sections/settings/wazuh-kibana-settings-logs.png
   :align: center
-  :width: 100%  
+  :width: 100%
 
 About
 -----
 
-This section provides information about currently installed Wazuh Kibana plugin package, such as version, revision, and installation date. The changes to each Wazuh Kibana plugin release can be found in the `changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_:
+This section provides information about the currently installed Wazuh Kibana plugin package, such as version, revision, and installation date. The changes to each Wazuh Kibana plugin release can be found in the `changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_:
 
 .. thumbnail:: ../../images/kibana-app/sections/settings/wazuh-kibana-settings-about.png
   :align: center
