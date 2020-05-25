@@ -77,12 +77,6 @@ The certificates can be generated as follows:
     
     In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
-  #. Remove all the unnecessary files:
-
-    .. code-block:: console
-
-      # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip
-
   #. Compress all the necessary files to be sended to the rest of the involved parts:
 
     .. code-block:: console
