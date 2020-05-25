@@ -89,6 +89,8 @@ Time during which vulnerabilities that have already been alerted will be ignored
 provider
 ^^^^^^^^
 
+.. note:: For Linux agents the NVD must be always active. Otherwise, the scanner won't work properly.
+
 Configuration block to specify vulnerability updates.
 
 +--------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
