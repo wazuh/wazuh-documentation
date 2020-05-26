@@ -236,7 +236,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. As the All-in-One installation guide uses demo certificates, this can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by creating own certificates and importing the ``root-ca.pem`` file to the Certificate Manager of each browser that will access the Kibana interface.
 
-  .. note:: The Kibana service listens to the default port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP. The default user and password to access Kibana is ``kibanaserver``.
+  .. note:: The Kibana service listens to the default port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing <kibana_ip> by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
 
 
