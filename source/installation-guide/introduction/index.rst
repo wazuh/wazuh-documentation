@@ -8,7 +8,7 @@ Introduction
 ============
 
 
-This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`All-in-one installation <all_in_one>` can be used in a production environment, depending on the needs of the deployment, a distributed environment may be more suitable as it will provide high availability and scalability features.
+This section covers different options to set up Wazuh with Elastic Stack in a production environment. Although the :ref:`All-in-one installation <all_in_one>` can be used in a production environment, a distributed environment is recommended as it will provide high availability and scalability features.
 
 
 Community
@@ -54,7 +54,7 @@ Start deploying Wazuh server and Elastic Stack
 ----------------------------------------------
 
 The installation guide starts with the Elasticsearch section. After Elasticsearch is configured, the guide will go through the Wazuh cluster installation document.
-There are two Elasticsearch configuration types: single node cluster or multi-node cluster, depending on environment's requirements:
+There are two Elasticsearch configuration types: single node cluster or multi-node cluster, depending on the environment's requirements:
 
 - :ref:`Elasticsearch single-node cluster<elasticsearch_single_node_cluster>`
 - :ref:`Elasticsearch multi-node cluster<elasticsearch_multi_node_cluster>`
