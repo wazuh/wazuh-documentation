@@ -8,7 +8,7 @@
 
                 .. code-block:: console
 
-                    # apt install curl libcap2-bin
+                    # apt install curl apt-transport-https libcap2-bin 
 
         .. group-tab:: Yum
 
