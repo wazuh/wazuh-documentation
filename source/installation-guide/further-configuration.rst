@@ -7,19 +7,19 @@
 Further configuration
 =====================
 
-This seccion will provide extra information abouut the default installation configuration and how to customize it.
+This section provides additional information to the default installation configuration and how to customize it.
 
 Elasticsearch configuration
 ---------------------------
 
-In both the All-in-One installation and Single-node installation guide the IP ``0.0.0.0`` is used as ``network.host``. This is an acceptable value that binds all the available IPs on the machine. This configuration may not be suitable for all enviroments, since the Elasticsearch installation will be accesible from all the machine's IPs, that is why it is recommended to modify this value and bind the ``network.host`` to the desired IP.
+In both the All-in-One installation guide and Elasticsearch single-node cluster installation guide the IP ``0.0.0.0`` is used as ``network.host``. This is an acceptable value that binds all the available IPs on the machine. This configuration may not be suitable for all environments since the Elasticsearch installation will be accessible from all the machine's IPs, that is why it is recommended to modify this value and bind the ``network.host`` to the desired IP.
 
 Certificates Deployment
 -----------------------
 
 In the installation guide, the `Search Guard's offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool/>`_ has been used, but any other certificates creation method can be used.
 
-Open Distro for Elasticsearch requires three kinds of certificates: 
+Open Distro for Elasticsearch requires three kinds of certificates:
 
 - ``root-ca``: This certificate is the one incharged of signing the rest of the certificates.
 
@@ -29,7 +29,7 @@ Open Distro for Elasticsearch requires three kinds of certificates:
 
 - ``admin``: The admin certificate is a client certificate with special privileges needed for management and security related tasks.
 
-To create the certificates, the template located in ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` was used. This template is preconfigured with default values, which are recommended to change for security reasons. Those values are: 
+To create the certificates, the template located in ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` was used. This template is preconfigured with default values, which are recommended to change for security reasons. Those values are:
 
 - ``CN``: Stands for Common Name. This is an arbirtary name which represents the server name protected by the SSL certificate. The certificate is only valid if the request hostname matches the certificate common name.
 
@@ -41,7 +41,7 @@ To create the certificates, the template located in ``/etc/elasticsearch/certs/s
 
 - ``C``: Country name. This value should be introduced using the two letter code, e.g.: ``US``.
 
-These are the default values that are preconfigured in the template downloaded, nevertheless, there are some more values that can be added to the certificates: 
+These are the default values that are preconfigured in the template downloaded, nevertheless, there are some more values that can be added to the certificates:
 
 - ``S``: State or province. It should be spelled out in full, not using abbreviations.
 
@@ -49,7 +49,7 @@ These are the default values that are preconfigured in the template downloaded, 
 
 There can be added even more security improvements, such us the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool/>`_.
 
-The node certificates need the server's IP to be specified, and there can be added as many IPs as neccessary. 
+The node certificates need the server's IP to be specified, and there can be added as many IPs as neccessary.
 To create a node certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` in the ``nodes:`` section modifying the required fields on the Elasticsearch's master node:
 
     .. code-block:: yaml
@@ -68,22 +68,22 @@ As mention before, client and admin certificates are very similar, although the 
         :emphasize-lines: 3
 
         - name: <certificate_name>
-        dn: CN=<common-name>,OU=<operational-unit>,O=<organization>,L=<locality>,C=<country-code>    
+        dn: CN=<common-name>,OU=<operational-unit>,O=<organization>,L=<locality>,C=<country-code>
         admin: true
 
 
-What differs a client certificate from an admin certificate is the ``admin`` tag. If it is set to ``true`` this certificate will be granted with extra permissions. Here is an example for creating a client certificate: 
+What differs a client certificate from an admin certificate is the ``admin`` tag. If it is set to ``true`` this certificate will be granted with extra permissions. Here is an example for creating a client certificate:
 
     .. code-block:: yaml
 
         - name: <certificate_name>
-        dn: CN=<common-name>,OU=<operational-unit>,O=<organization>,L=<locality>,C=<country-code>    
-            
+        dn: CN=<common-name>,OU=<operational-unit>,O=<organization>,L=<locality>,C=<country-code>
+
 
 Wazuh Kibana's users
 --------------------
 
-During the installation process, two new users where added: 
+During the installation process, two new users where added:
 
 - ``wazuh_user`` is created for thos users that only need read access to the Wazuh Kibana plugin.
 
