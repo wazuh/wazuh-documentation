@@ -67,7 +67,7 @@ Kibana installation and configuration
 
 
 
-        .. tab:: Same Elasticsearch server
+        .. group-tab:: Same Elasticsearch server
 
 
             Copy the Elasticsearch certificates:
@@ -76,7 +76,7 @@ Kibana installation and configuration
 
 
 
-        .. tab:: Different Elasticsearch server
+        .. group-tab:: Different Elasticsearch server
 
 
             .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst

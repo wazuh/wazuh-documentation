@@ -3,7 +3,7 @@
 .. tabs::
 
 
-  .. tab:: Systemd
+  .. group-tab:: Systemd
 
 
     .. code-block:: console
@@ -14,7 +14,7 @@
 
 
 
-  .. tab:: SysV Init
+  .. group-tab:: SysV Init
 
     Choose one option according to the OS used:
 

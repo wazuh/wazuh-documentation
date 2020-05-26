@@ -3,7 +3,7 @@
 .. tabs::
 
 
-  .. tab:: Systemd
+  .. group-tab:: Systemd
 
 
     .. code-block:: console
@@ -11,7 +11,7 @@
       # systemctl restart wazuh-manager
 
 
-  .. tab:: SysV Init
+  .. group-tab:: SysV Init
 
     .. code-block:: console
 

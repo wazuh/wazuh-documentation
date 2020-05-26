@@ -138,7 +138,7 @@ To install the build dependencies of CPython, follow these steps:
 .. tabs::
 
 
-  .. tab:: Systemd
+  .. group-tab:: Systemd
 
 
     .. code-block:: console
@@ -146,7 +146,7 @@ To install the build dependencies of CPython, follow these steps:
       # systemctl start wazuh-manager
 
 
-  .. tab:: SysV Init
+  .. group-tab:: SysV Init
 
     .. code-block:: console
 
@@ -203,7 +203,7 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always 
 .. tabs::
 
 
-  .. tab:: Systemd
+  .. group-tab:: Systemd
 
 
     .. code-block:: console
@@ -211,7 +211,7 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is always 
       # systemctl status wazuh-api
 
 
-  .. tab:: SysV Init
+  .. group-tab:: SysV Init
 
     .. code-block:: console
 

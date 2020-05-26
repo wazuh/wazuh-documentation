@@ -3,7 +3,7 @@
 .. tabs::
 
 
-  .. tab:: Systemd
+  .. group-tab:: Systemd
 
 
     .. code-block:: console
@@ -11,7 +11,7 @@
       # systemctl start wazuh-api
 
 
-  .. tab:: SysV Init
+  .. group-tab:: SysV Init
 
     .. code-block:: console
 

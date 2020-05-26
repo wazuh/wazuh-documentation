@@ -3,7 +3,7 @@
 .. tabs::
 
 
-    .. tab:: Install from URL
+    .. group-tab:: Install from URL
 
 
       .. code-block:: console
@@ -12,7 +12,7 @@
 
 
 
-    .. tab:: Install from the local file
+    .. group-tab:: Install from the local file
 
 
       .. code-block:: console
