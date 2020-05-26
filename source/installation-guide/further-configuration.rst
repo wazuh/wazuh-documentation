@@ -83,20 +83,10 @@ What differs a client certificate from an admin certificate is the ``admin`` tag
 Wazuh Kibana's users
 --------------------
 
-During the installation process, three roles and two users were added. 
+During the installation process, two new users where added: 
 
-Users
-^^^^^
+- ``wazuh_user`` is created for thos users that only need read access to the Wazuh Kibana plugin.
 
-- ``wazuhuser`` is created for thos users that only need read access to the Wazuh Kibana plugin.
+- ``wazuh_admin`` is the user recommended for those users that need administration privileges.
 
-- ``wazuhadmin`` is the user recommended for those users that need administration privileges. 
-
-Roles
-^^^^^
-
-- ``wazuh_ui``
-
-- ``wazuh_ui_user``
-
-- ``wazuh_ui_admin``
+These users are designed to be used along the Wazuh Kibana plugin and they are protected so they canot be modified from the Kibana's interface. To modify them or add new users, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
