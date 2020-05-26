@@ -79,6 +79,9 @@ You can also find a set of default roles and policies, which you can use instead
         - `manager:update_api_config`_
         - `manager:upload_file`_
 
+    - `MITRE`_
+        - `mitre:read`_
+
     - `Rules`_
         - `rules:read`_
 
@@ -440,6 +443,12 @@ manager:upload_file
 - PUT /manager/files (`*:*`_)
 
 
+MITRE
+^^^^^^^^^^^^^^^
+mitre:read
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- GET /mitre (`*:*`_)
+
 Rules
 ^^^^^^^^^^^^^^^
 rules:read
@@ -669,6 +678,19 @@ Resources
 Effect
     - allow
 
+mitre_read
+^^^^^^^^^^^^^^^
+Allow read MITRE database information.
+
+Actions
+    - `mitre:read`_
+
+Resources
+    - ``*:*:*``
+
+Effect
+    - allow
+
 rules_read
 ^^^^^^^^^^^^^^^
 Allow read all rule files in the system.
@@ -732,6 +754,7 @@ Policies
     - `cluster_all`_
     - `ciscat_read`_
     - `decoders_read`_
+    - `mitre_read`_
     - `rules_read`_
 
 agents_admin
@@ -770,6 +793,7 @@ Policies
     - `agents_read`_
     - `ciscat_read`_
     - `decoders_read`_
+    - `mitre_read`_
     - `rules_read`_
 
 users_admin

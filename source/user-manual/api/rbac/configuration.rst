@@ -4,34 +4,9 @@
 
 Configuration
 =============
-In order to manage RBAC from the API itself, we need to access its new interface. By default, it can be found at https://localhost:55000/ui.
+Before modifying RBAC policies, roles and more, it is necessary to log into the API. You can find a detailed guide on how to do it within the :ref:`Getting started <api_getting_started>` section of the API.
 
-There, among a complete list of all self-explaining API endpoints, there is a section called *Security* with all the necessary tools for managing users, roles, permissions and the relationship between those elements.
-
-Log in
-------
-Before carrying out any action, it is necessary to log in with a user created by default. This user is assigned a role called *administrator*. There are other default roles that you can find in the: ref: `RBAC reference api_rbac_reference>`.
-
-1. Click on the green Authorize button.
-
-2. Enter the administrator username and password inside the section *basicAuth  (http, Basic)*. The default is "wazuh" and "wazuh".
-
-3. Expand the endpoint ``GET /security/user/authenticate`` and click on the *Try it out* button.
-
-4. Click on the *Execute* button. A result like the following will appear:
-
-    .. code-block:: json
-        :class: output
-
-        {
-          "token": "<JWT_TOKEN>"
-        }
-
-    Copy the value that appeared in ``<JWT_TOKEN>``, without the quotes.
-
-5. Reopen the Authorize button, paste the value of the copied token into the *jwt  (http, Bearer)* field and click the Authorize button inside.
-
-After this, you can use any API endpoint allowed for the role to which the user belongs. In this case, since we have logged in with the administrator user, we can use all of the endpoints.
+The endpoints required to manage RBAC belong to the *Security* group. To run them, this configuration guide uses the API interface. However, the command-line ``cURL`` can be used instead as explained in :ref:`Getting started <api_getting_started>`.
 
 Set RBAC mode
 -------------
