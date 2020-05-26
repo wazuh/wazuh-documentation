@@ -351,6 +351,7 @@ def minification(actual_path):
         ['css/wazuh-icons','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
+        ['js/redoc','js'],
         ['js/style','js']
     ]
 
@@ -455,6 +456,8 @@ def setup(app):
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
     app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_javascript("js/redoc.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/redoc.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
@@ -463,6 +466,7 @@ exclude_patterns = [
     "css/style.css",
     "js/version-selector.js",
     "js/redirects.js",
+    "js/redoc.js",
     "js/style.js"
 ]
 

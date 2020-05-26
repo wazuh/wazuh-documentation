@@ -776,17 +776,6 @@ li.toctree-l5 > a {
   position: relative;
 }
 
-.central-page-area::before {
-  content: '';
-  display: none;
-  width: 360px;
-  height: 100vh;
-  margin-left: -15px;
-  top: 0;
-  position: fixed;
-  background-color: #EAEAEA;
-}
-
 #navbar {
   z-index: 3;
   visibility: hidden;
@@ -2684,6 +2673,13 @@ div.highlight pre {
   display: none;
 }
 
+iframe.redoc-container {
+  width: 100vw;
+  min-height: calc(100vh - 73px);
+  border: 0;
+  margin-left: -45px;
+}
+
 @media (min-width:576px){
 
   #capabilities .right .topic p:not(.topic-title) {
@@ -3047,6 +3043,18 @@ div.highlight pre {
 
       .central-page-area::before {
         display: block;
+        content: '';
+        width: 360px;
+        height: 100vh;
+        margin-left: -15px;
+        top: 0;
+        position: fixed;
+        background-color: #EAEAEA;
+      }
+
+      .no-menu .central-page-area::before {
+        display: none;
+        content: none;
       }
 
       #navbar-globaltoc {
@@ -3298,7 +3306,12 @@ div.highlight pre {
 				flex-wrap: nowrap;
 				position: relative;
 				z-index: 1;
-			}
+      }
+      
+      .no-menu #main-content {
+        width: 100%;
+        margin-left: 0;
+      }
 
 			#main-content {
         width: calc(100% - 360px);

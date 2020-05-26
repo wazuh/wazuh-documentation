@@ -120,6 +120,8 @@
   <div id="page" class="page-404 not-indexed">
   {% elif pagename == 'search' or pagename == 'genindex' %}
   <div id="page" class="not-indexed">
+  {% elif pagename == 'user-manual/api/reference' %}
+  <div id="page" class="no-menu">
   {% else %}
   <div id="page">
   {% endif %}
@@ -129,11 +131,13 @@
     <section  class="container-fluid central-page-area">
       <div class="row">
 
+
+        {% if pagename != 'user-manual/api/reference' %}
         <div id="navbar" class="full-toctree-nav navbar-expand-lg navbar-light order-0 hidden">
 
           <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
             {% include "searchbar.html" %}
-          </div> <!-- // #search-lg -->
+          </div> 
 
           <div id="navbar-globaltoc" class="side-scroll collapse navbar-collapse">
             <div id="globaltoc" class="globaltoc" role="navigation" aria-label="main navigation">
@@ -156,7 +160,8 @@
           </div>
 
         </div>
-
+        {% endif %}
+        
         <div id="main-content" class="order-1">
           <div id="rst-content">
 
