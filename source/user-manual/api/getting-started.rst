@@ -29,18 +29,20 @@ User interface
 
 .. versionadded:: 4.0.0
 
-The Wazuh API interface is based on a free software project known as Swagger UI, which is very useful for listing and describing all available endpoints. It also allows you to interact with each of them, view example outputs and query all available parameters. By default, it can be found at https://localhost:55000/ui.
+The Wazuh API interface is based on a free software project known as Swagger UI, which is very useful for listing and describing all available endpoints. It also allows you to interact with each of them, view example outputs and query all available parameters. By default, it can be found at ``https://localhost:55000/ui``.
 
 .. note::
-    If you don't provide your own, Wazuh API will create self-signed certificates. As a consequence, a security warning will appear in the browser. It is necessary to accept the risk in order to access the UI. For more information, please visit Securing API section.
+    If you don't provide your own, Wazuh API will create self-signed certificates. As a consequence, a security warning will appear in the browser. It is necessary to accept the risk in order to access the UI. For more information, please visit the :doc:`Securing the Wazuh API <../../installation-guide/securing_api>` section.
 
-The interface has a list of all available endpoints separated into groups (active-response, agents, ciscat, cluster, etc.). Each endpoint can have multiple methods (GET, POST, PUT, DELETE). To differentiate them, a specific color is used for each method, along with a label on the left. To run any endpoint, just click on it, press the *Try it out* button, fill in the necessary parameters and click on the *Execute* button.
+The interface has a list of all available endpoints separated into groups (active-response, agents, ciscat, cluster, etc.). Each endpoint can have multiple methods (GET, POST, PUT, DELETE). To differentiate them, a specific color is used for each method, along with a label on the left. To run any endpoint, just click on it, press the *Try it out* button, fill in the necessary parameters and click on the *Execute* button. Please note that **login is required** to run endpoints. You can see how to do it in the next section, :ref:`Logging into the API <api_log_in>`.
 
 .. thumbnail:: ../../images/api/api-ui-overview.png
     :align: center
     :width: 100%
 
 The endpoints can be used both in this interface and with the command-line tool *curl*, so in some examples we will use the two options.
+
+.. _api_log_in:
 
 Logging into the API
 --------------------
@@ -50,20 +52,23 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 Logging into the UI
 ^^^^^^^^^^^^^^^^^^^^^^
 
-1. Access the API interface at <protocol>://<host>:<port>/ui. The default path is https://localhost:55000/ui.
+1. Access the API interface at <protocol>://<host>:<port>/ui. The default path is ``https://localhost:55000/ui``.
 2. Click on the green *Authorize* button.
-3. Enter the username and password inside the section *basicAuth  (http, Basic)* and click *Authorize*. By default, the user is ``wazuh`` and the password is ``wazuh``. Then close this window.
-4. Expand the endpoint ``GET /security/user/authenticate`` and click on the *Try it out* button.
-5. Click on the *Execute* button. A result like the following will appear. Copy the value that appeared in ``<generated_token>``, without the quotes.
+3. Enter the username and password inside the section *basicAuth  (http, Basic)*. By default, the user is ``wazuh`` and the password is ``wazuh``.
+4. Click on the green *Authorize* button under the password field and close this window.
+5. Expand the endpoint ``GET /security/user/authenticate`` and click on the *Try it out* button.
+6. Click on the *Execute* button. A result like the following will appear. Copy the value that appeared in ``<YOUR_JWT_TOKEN>``, without the quotes.
 
     .. code-block:: json
         :class: output
 
         {
-          "token": "<generated_token>"
+          "token": "<YOUR_JWT_TOKEN>"
         }
 
-6. Reopen the Authorize button, paste the value of the copied token into the *jwt  (http, Bearer)* field and click the Authorize button inside. After this, you can use any API endpoint allowed for the role to which the user belongs.
+7. Click again on the Authorize button.
+8. Paste the value of the copied token into the *jwt  (http, Bearer)* field.
+9. Click the Authorize button inside. After this, you can use any API endpoint allowed for the role to which the user belongs.
 
 Logging in with cURL
 ^^^^^^^^^^^^^^^^^^^^
