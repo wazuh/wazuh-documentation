@@ -17,7 +17,7 @@ In both the All-in-One installation guide and Elasticsearch single-node cluster 
 Certificates Deployment
 -----------------------
 
-In the installation guide, the `Search Guard's offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool/>`_ has been used, but any other certificates creation method can be used.
+In the installation guide, the `Search Guard's offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ has been used, but any other certificates creation method can be used.
 
 Open Distro for Elasticsearch requires three kinds of certificates:
 
@@ -47,7 +47,7 @@ These are the default values that are preconfigured in the template downloaded, 
 
 - ``E``: Email adress
 
-There can be added even more security improvements, such us the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool/>`_.
+There can be added even more security improvements, such us the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
 
 The node certificates need the server's IP to be specified, and there can be added as many IPs as neccessary.
 To create a node certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` in the ``nodes:`` section modifying the required fields on the Elasticsearch's master node:
@@ -88,7 +88,7 @@ Once the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` has been
 
         # ./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt
 
-This command will generate both, the ``root.ca`` certificate and all the nodes and clients certificates. In case the ``root-ca`` certificate were previously created, the ``-ca`` tag can be omited. By default, when the script is re-executed, the already present certificates will not be overwritten. Additionally, the tag ``-t`` can be added to specify the output destination. If not modified, the generated certificates will be placed at ``./out``. These and other configuration options can be found in the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool/>`_. 
+This command will generate both, the ``root.ca`` certificate and all the nodes and clients certificates. In case the ``root-ca`` certificate were previously created, the ``-ca`` tag can be omited. By default, when the script is re-executed, the already present certificates will not be overwritten. Additionally, the tag ``-t`` can be added to specify the output destination. If not modified, the generated certificates will be placed at ``./out``. These and other configuration options can be found in the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_. 
 
 
 Wazuh Kibana's users
