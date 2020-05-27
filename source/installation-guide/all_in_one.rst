@@ -16,7 +16,7 @@ This document guides through an installation of the Wazuh server and Open Distro
 Preparing the installation
 --------------------------
 
-Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl``, and ``unzip`` utilities will be used in further steps:
+Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl`` and ``unzip`` utilities will be used in further steps:
 
 .. include:: ../_templates/installations/before_installation_all_in_one.rst
 
@@ -26,7 +26,7 @@ Before installing the Wazuh server and Open Distro, some extra packages must be 
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server.
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

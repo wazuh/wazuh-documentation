@@ -8,7 +8,7 @@
 Elasticsearch single-node cluster
 =================================
 
-Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
+Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
 
 This document will explain how to install the Open Distro components in a single-node cluster.
 
@@ -17,7 +17,7 @@ This document will explain how to install the Open Distro components in a single
 Preparing the installation
 --------------------------
 
-Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl``, and ``unzip`` utilities will be used in further steps:
+Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl`` and ``unzip`` utilities will be used in further steps:
 
   .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 

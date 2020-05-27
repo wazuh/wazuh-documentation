@@ -8,7 +8,7 @@
 Elasticsearch multi-node cluster
 =================================
 
-Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
+Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
 
 This document will explain how to install the Open Distro components in a multi-node cluster.
 
@@ -18,12 +18,12 @@ This document will explain how to install the Open Distro components in a multi-
 Installing Elasticsearch
 ------------------------
 
-The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. The labels [*All*] or [*Master*]  at the beginning of the step will indicate whether the steps must be done in all nodes or in a master node only. In case of having two or more [*Master*] nodes, the steps must be done in just one of them.
+The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node or in all the Elasticsearch nodes except the master node. The labels [*All*], [*Master*] or [*All except Master*] at the beginning of the step will indicate where the steps must be done. In case of having two or more [*Master*] nodes, the steps must be done in just one of them.
 
 Preparing the installation
 --------------------------
 
-[*All*] Before installing Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl``, and ``unzip`` utilities will be used in further steps:
+[*All*] Before installing Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl`` and ``unzip`` utilities will be used in further steps:
 
   .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
