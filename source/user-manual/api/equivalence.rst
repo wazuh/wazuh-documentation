@@ -241,6 +241,8 @@ Decoders
 +=========================+==================================+=====================================+=============================================================================================+
 |                         |                                  |                                     | Added ``decoder_name`` parameter in query used to specify a list of decoder's names to get. |
 |                         |                                  |                                     |                                                                                             |
+|                         |                                  |                                     | Added ``select`` parameter in query.                                                        |
+|                         |                                  |                                     |                                                                                             |
 | Get all decoders        | ``GET /decoders``                | ``GET /decoders``                   | Renamed ``file`` parameter in query to ``filename``.                                        |
 |                         |                                  |                                     |                                                                                             |
 |                         |                                  |                                     | Renamed ``path`` parameter in query to ``relative_dirname``.                                |
@@ -253,7 +255,7 @@ Decoders
 |                         |                                  |                                     |                                                                                             |
 |                         |                                  |                                     | Renamed ``path`` parameter in query to ``relative_dirname``.                                |
 +-------------------------+----------------------------------+-------------------------------------+---------------------------------------------------------------------------------------------+
-| Get all parent decoders | ``GET /decoders/parents``        | ``GET /decoders/parents``           | No major changes.                                                                           |
+| Get all parent decoders | ``GET /decoders/parents``        | ``GET /decoders/parents``           | Added ``select`` parameter in query.                                                        |
 +-------------------------+----------------------------------+-------------------------------------+---------------------------------------------------------------------------------------------+
 
 Experimental
@@ -331,6 +333,8 @@ Lists
 | Action                   | API 3.x usage        | API 4.0 usage        | Changes                                                                                  |
 +==========================+======================+======================+==========================================================================================+
 |                          |                      |                      | Added ``filename`` parameter in query used to filter by filename.                        |
+|                          |                      |                      |                                                                                          |
+|                          |                      |                      | Added ``select`` parameter in query.                                                     |
 | Get all lists            | ``GET /lists``       | ``GET /lists``       |                                                                                          |
 |                          |                      |                      | Renamed ``path`` parameter in query to ``relative_dirname``.                             |
 +--------------------------+----------------------+----------------------+------------------------------------------------------------------------------------------+
@@ -423,6 +427,8 @@ Rules
 | Action                            | API 3.x usage              | API 4.0 usage                          | Changes                                                                                     |
 +===================================+============================+========================================+=============================================================================================+
 |                                   |                            |                                        | Added ``rule_ids`` parameter in query.                                                      |
+|                                   |                            |                                        |                                                                                             |
+|                                   |                            |                                        | Added ``select`` parameter in query.                                                        |
 |                                   |                            |                                        |                                                                                             |
 | Get all rules                     | ``GET /rules``             | ``GET /rules``                         | Renamed ``file`` parameter to ``filename``.                                                 |
 |                                   |                            |                                        |                                                                                             |
