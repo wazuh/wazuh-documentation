@@ -105,7 +105,10 @@
     ga('send', 'pageview');
   </script>
   {% endif %}
-  
+
+  {% if pagename == 'user-manual/reference' %}
+    <link rel="stylesheet" type="text/css" href="{{ pathto('_static/css/customredoc.css', 1) }}">
+  {% endif %}
 </head>
 {%- endblock head %}
 <body>
@@ -116,6 +119,8 @@
 
   {% if pagename == 'index' %}
   <div id="page" class="index">
+  {% elif pagename == 'user-manual/reference' %}
+  <div id="page" class="customredoc">
   {% elif pagename == 'not_found' %}
   <div id="page" class="page-404 not-indexed">
   {% elif pagename == 'search' or pagename == 'genindex' %}
@@ -125,6 +130,8 @@
   {% endif %}
 
     {% include "header.html" %} {%- block header %}{% endblock header %}
+
+    {% if pagename != 'user-manual/reference' %}
 
     <section  class="container-fluid central-page-area">
       <div class="row">
@@ -156,14 +163,17 @@
           </div>
 
         </div>
+        {% endif %}
 
         <div id="main-content" class="order-1">
           <div id="rst-content">
 
-          {% if pagename != 'index' and pagename != 'not_found' and pagename != 'search' and pagename != 'genindex' %}
+          {% if pagename != 'index' and pagename != 'user-manual/reference' and pagename != 'not_found' and pagename != 'search' and pagename != 'genindex' %}
           <div class="edit-repo-wrapper">
             {% include "editrepo.html" %}
           </div>
+          {% endif %}
+          {% if pagename != 'index' and pagename != 'not_found' and pagename != 'search' and pagename != 'genindex' %}
           <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
           </div>
@@ -182,12 +192,16 @@
           <footer>
             {{copyright}}
           </footer>
+          {% if pagename == 'user-manual/reference' %}
+            <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+          {% endif %}
 
         </div>
-
+        {% if pagename != 'user-manual/reference' %}
       </div>
 
     </section>
+    {% endif %}
 
   </div> <!-- // #page -->
   {# Footer's scripts #}

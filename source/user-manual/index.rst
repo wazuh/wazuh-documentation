@@ -24,4 +24,4 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         ruleset/index
         api/index
         kibana-app/index
-        reference/index
+        reference

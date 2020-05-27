@@ -1,0 +1,80 @@
+.customredoc #main-content {
+  margin-top: 0;
+}
+
+.customredoc #reference > h1 {
+  margin: 2em 0 0 40px;
+  position: absolute;
+}
+
+.customredoc .api-info {
+  margin-top: 7em;
+}
+
+.customredoc .cTutD.menu-content {
+  position: fixed;
+  width: 360px;
+  top: 100px!important;
+  height: calc(100vh - 100px)!important;
+  left: 0;
+  transition: all ease;
+}
+
+.scrolled .customredoc .cTutD.menu-content {
+  top: 54px!important;
+  height: calc(100vh - 54px)!important;
+  transition: all ease;
+}
+
+.customredoc h1,
+.customredoc h2,
+.customredoc h3,
+.customredoc h4,
+.customredoc h5,
+.customredoc h6  {
+  color: #404040!important;
+}
+
+.customredoc #main-content a,
+.customredoc #main-content a:visited {
+  color: #0094ce!important;
+}
+
+.customredoc .sc-bAeIUo.jHaAsr.api-content {
+  width: 100%!important;
+}
+
+.customredoc .sc-bxivhb.TPAYK {
+  width: 67%!important;
+}
+
+.customredoc .sc-bxivhb.TPAYK {
+  width: 67%!important;
+}
+
+.customredoc .sc-bZQynM.celZWI {
+  width: 33%;
+}
+
+.customredoc .breadcrumbs-wrapper {
+  position: absolute;
+  margin-left: 40px;
+}
+
+.customredoc .jIdpVJ {
+  border: 1px solid #0094ce!important;
+}
+
+.customredoc #main-content footer {
+  background-color: #f4f4f4;
+  padding: 15px;
+  color: #333;
+}
+
+.customredoc #main-content footer {
+  padding: 30px 45px;
+}
+
+.customredoc #main-content.order-1 #rst-content {
+  padding: 0;
+}
