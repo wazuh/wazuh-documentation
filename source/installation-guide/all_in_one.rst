@@ -7,7 +7,7 @@
 All-in-One installation
 =======================
 
-This document guides through an installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used. This guide will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+This document guides through an installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used. This guide will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
