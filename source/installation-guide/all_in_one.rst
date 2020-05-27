@@ -104,8 +104,8 @@ Open Distro is an open source distribution of Elasticsearch, a highly scalable f
 .. include:: ../_templates/installations/elastic/common/install_elastic.rst
 
 
-Configure Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~
+Configuring Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
