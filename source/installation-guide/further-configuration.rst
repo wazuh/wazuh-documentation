@@ -79,6 +79,17 @@ What differs a client certificate from an admin certificate is the ``admin`` tag
         - name: <certificate_name>
         dn: CN=<common-name>,OU=<operational-unit>,O=<organization>,L=<locality>,C=<country-code>
 
+Generate new certificates
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` has been modified, the certificates can be created using the following command:
+
+    .. code-block:: console
+
+        # ./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt
+
+This command will generate both, the ``root.ca`` certificate and all the nodes and clients certificates. In case the ``root-ca`` certificate were previously created, the ``-ca`` tag can be omited. By default, when the script is re-executed, the already present certificates will not be overwritten. Additionally, the tag ``-t`` can be added to specify the output destination. If not modified, the generated certificates will be placed at ``./out``. These and other configuration options can be found in the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool/>`_. 
+
 
 Wazuh Kibana's users
 --------------------
@@ -89,4 +100,4 @@ During the installation process, two new users where added:
 
 - ``wazuh_admin`` is the user recommended for those users that need administration privileges.
 
-These users are designed to be used along the Wazuh Kibana plugin and they are protected so they canot be modified from the Kibana's interface. To modify them or add new users, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
+These users are designed to be used along the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana's interface. To modify them or add new users, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
