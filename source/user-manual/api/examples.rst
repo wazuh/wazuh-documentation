@@ -136,8 +136,8 @@ Code:
     endpoint = '/agents?select=lastKeepAlive&select=id&status=disconnected'
 
     protocol = 'https'
-    host = 'localhost'
-    port = '55000'
+    host = 'API_IP'
+    port = 'API_PORT'
     version = 'v4'
     user = 'wazuh'
     password = 'wazuh'
@@ -228,8 +228,8 @@ Code:
     $method = "get"
 
     $protocol = "https"
-    $host_name = "192.168.32.2"
-    $port = "55000"
+    $host_name = "API_IP"
+    $port = "API_PORT"
     $version = "v4"
     $username = "wazuh"
     $password = "wazuh"
