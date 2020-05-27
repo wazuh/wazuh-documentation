@@ -34,7 +34,7 @@ The Wazuh API interface is based on a free software project known as Swagger UI,
 .. note::
     If you don't provide your own, Wazuh API will create self-signed certificates. As a consequence, a security warning will appear in the browser. It is necessary to accept the risk in order to access the UI. For more information, please visit the :doc:`Securing the Wazuh API <../../installation-guide/securing_api>` section.
 
-The interface has a list of all available endpoints separated into groups (active-response, agents, ciscat, cluster, etc.). Each endpoint can have multiple methods (GET, POST, PUT, DELETE). To differentiate them, a specific color is used for each method, along with a label on the left. To run any endpoint, just click on it, press the *Try it out* button, fill in the necessary parameters and click on the *Execute* button. Please note that **login is required** to run endpoints. You can see how to do it in the next section, :ref:`Logging into the API <api_log_in>`.
+The interface has a list of all available endpoints separated into groups (active-response, agents, ciscat, cluster, etc.). Each endpoint can have multiple request methods (GET, POST, PUT, DELETE). To differentiate them, a specific color is used for each one, along with a label on the left. To run any endpoint, just click on it, press the *Try it out* button, fill in the necessary parameters and click on the *Execute* button. Please note that **login is required** to run endpoints. You can see how to do it in the next section, :ref:`Logging into the API <api_log_in>`.
 
 .. thumbnail:: ../../images/api/api-ui-overview.png
     :align: center
@@ -49,8 +49,8 @@ Logging into the API
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.
 
-Logging into the UI
-^^^^^^^^^^^^^^^^^^^^^^
+Logging into the API UI
+^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Access the API interface at <protocol>://<host>:<port>/ui. The default path is ``https://localhost:55000/ui``.
 2. Click on the green *Authorize* button.
@@ -68,12 +68,12 @@ Logging into the UI
 
 7. Click again on the Authorize button.
 8. Paste the value of the copied token into the *jwt  (http, Bearer)* field.
-9. Click the Authorize button inside. After this, you can use any API endpoint allowed for the role to which the user belongs.
+9. Click on the Authorize button inside. After that, you can use any API endpoint allowed for the role the user belongs to.
 
 Logging in with cURL
 ^^^^^^^^^^^^^^^^^^^^
 
-1. Use the cURL command to get the JWT token. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default self-signed certificates, it will be necessary to add the parameter ``-k`` as in the example above. Otherwise, it is not necessary to include ``-k``.
+1. Use the cURL command to get the JWT token. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``.
 
     .. code-block:: console
 
@@ -86,30 +86,33 @@ Logging in with cURL
 
         {"token": "<YOUR_JWT_TOKEN>"}
 
-2. Run any endpoint following this structure. Replace <endpoint> and <YOUR_JWT_TOKEN> with your values.
+2. Send a *request* to confirm that everything is working as expected:
 
     .. code-block:: console
 
-        # curl -X <METHOD> "https://localhost:55000/v4/<ENDPOINT>" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+        curl -X GET "https://localhost:55000/v4/" -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
-Send a *request* to confirm that everything is working as expected:
+    .. code-block:: json
+        :class: output
+
+        {
+            "title": "Wazuh API",
+            "api_version": "4.0.0",
+            "revision": 4000,
+            "license_name": "GPL 2.0",
+            "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+            "hostname": "wazuh-master",
+            "timestamp": "2020-05-25T07:05:00+0000"
+        }
+
+Run any endpoint following the structure below. Replace <endpoint> and <YOUR_JWT_TOKEN> with your values.
 
 .. code-block:: console
 
-    curl -X GET "https://localhost:55000/v4/" -H  "accept: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X <METHOD> "https://localhost:55000/v4/<ENDPOINT>" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
-.. code-block:: json
-    :class: output
 
-    {
-        "title": "Wazuh API",
-        "api_version": "4.0.0",
-        "revision": 4000,
-        "license_name": "GPL 2.0",
-        "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-        "hostname": "wazuh-master",
-        "timestamp": "2020-05-25T07:05:00+0000"
-    }
+
 
 
 Basic concepts
@@ -119,19 +122,20 @@ Here are some of the basic concepts related to making API requests and understan
 
 -  The *cURL command* for each request contains:
 
-    +-------------------------------------------------+----------------------------------------------------------------------------------------+
-    | Field                                           | Description                                                                            |
-    +=================================================+========================================================================================+
-    | ``-X GET/POST/PUT/DELETE``                      | Specifies a custom request method to use when communicating with the HTTP server.      |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------+
-    | ``https://localhost:55000/v4/<ENDPOINT>``       | The API URL to use if you are running the command on the manager itself.               |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------+
-    | ``-H  "accept: application/json"``              | Include extra header in the request to set output type to JSON.                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------+
-    | ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include extra header in the request to specify JWT token.                              |
-    +-------------------------------------------------+----------------------------------------------------------------------------------------+
-    | ``-k``                                          | Suppress SSL certificate errors (only if you use the default self-signed certificates).|
-    +-------------------------------------------------+----------------------------------------------------------------------------------------+
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Field                                           | Description                                                                                                                                                        |
+    +=================================================+====================================================================================================================================================================+
+    | ``-X GET/POST/PUT/DELETE``                      | Specifies a custom request method to use when communicating with the HTTP server.                                                                                  |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``http://localhost:55000/v4/<ENDPOINT>``        | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
+    | ``https://localhost:55000/v4/<ENDPOINT>``       |                                                                                                                                                                    |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``-H  "accept: application/json"``              | Include extra header in the request to set output type to JSON (optional).                                                                                         |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include extra header in the request to specify JWT token.                                                                                                          |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``-k``                                          | Suppress SSL certificate errors (only if you use the default self-signed certificates).                                                                            |
+    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 - All responses are in *JSON format* and most of them follow this structure:
 
@@ -144,7 +148,7 @@ Here are some of the basic concepts related to making API requests and understan
     |         +----------------------+-----------------------------------------------------------------------+
     |         | total_failed_items   | Total number of failed items.                                         |
     |         +----------------------+-----------------------------------------------------------------------+
-    |         | failed_items         | List with each one of the failed items in the request.                |
+    |         | failed_items         | List containing each of the failed items in the request.              |
     +---------+----------------------+-----------------------------------------------------------------------+
     | message |                      | Result description.                                                   |
     +---------+----------------------+-----------------------------------------------------------------------+
@@ -261,7 +265,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/rules?rule_ids=1002&pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -304,7 +308,7 @@ It can also be helpful to know what rules are available that match a specific cr
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -375,7 +379,7 @@ The API can be used to show information about all monitored files by syscheck. T
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&search=.py" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -430,7 +434,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -465,7 +469,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -505,7 +509,7 @@ Some information about the manager can be retrieved using the API. Configuration
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/manager/status?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/manager/status?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -545,7 +549,7 @@ You can even dump the manager's current configuration with the request below (re
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/manager/configuration?pretty=true&section=global" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -591,7 +595,7 @@ This enumerates **active** agents:
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&offset=1&limit=1&status=never_connected" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&offset=1&limit=1&status=never_connected" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -625,7 +629,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/v4/agents?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
+    # curl -X POST "https://localhost:55000/v4/agents?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
 
 .. code-block:: json
     :class: output
