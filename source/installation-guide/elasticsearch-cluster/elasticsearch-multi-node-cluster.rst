@@ -49,8 +49,8 @@ Adding the Wazuh repository
 
 
 
-Elasticsearch installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Elasticsearch installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [*All*] Install the Open Distro for Elasticsearch package:
 
@@ -62,6 +62,13 @@ Elasticsearch configuration
 [*All*] Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
+
+Elasticsearch roles
+~~~~~~~~~~~~~~~~~~~
+
+[*Master*] In order to use Wazuh Kibana plugin properly, it is neccesary to add the role ``wazuh-ui``. It can be added by downloading the following files:
+
+    .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
