@@ -100,8 +100,8 @@ When new node certificates are created, they must be added in the Elasticsearch'
             - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
 
 
-Wazuh Kibana's users
---------------------
+Wazuh Kibana's users and roles
+------------------------------
 
 During the installation process, two new users where added:
 
@@ -109,4 +109,12 @@ During the installation process, two new users where added:
 
 - ``wazuh_admin`` is the user recommended for those users that need administration privileges.
 
-These users are designed to be used along the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana's interface. To modify them or add new users, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
+Apart from the previously mentioned users, during the installation process, there are three extra roles added. there roles are incharged of giving the right permissions to the users:
+
+- ``wazuh_ui``: This role gives enough privileges to ``kibanaserver`` user to operate with Wazuh's indexes.
+
+- ``wazuh_ui_user``: This roles provides ``wazuh_ui_user`` hability to read Wazuh's indexes.
+
+- ``wazuh_ui_admin``: This roles allow ``wazuh_admin`` to perform, reading, writing, management and indexing task on the Wazuh indexes.
+
+These users and roles are designed to be used along the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana's interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
