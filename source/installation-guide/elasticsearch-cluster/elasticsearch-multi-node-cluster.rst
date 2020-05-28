@@ -77,7 +77,7 @@ Certificates creation and deployment
 
     .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
 
-#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
+#. [*Master*] Generate and deploy the certificates:
 
     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
