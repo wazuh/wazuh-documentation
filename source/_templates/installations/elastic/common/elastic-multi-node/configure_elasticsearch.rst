@@ -30,4 +30,14 @@ Values to be replaced:
 - ``<master_node_X>``: Elasticsearch cluster master-eligible node names. E.g.: ``node-2``.
 - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. E.g.: ``10.0.0.3``.
 
+Besides, the node certificates for each node must be specified under the ``opendistro_security.nodes_dn`` section. By default, the pre-configured template includes 3 certificates, in case of having only 2 nodes, one of these lines must be removed.
+
+    .. code-block:: yaml
+        :emphasize-lines: 4
+        
+        opendistro_security.nodes_dn:
+            - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            - CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
+            - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
+
 .. End of include file
