@@ -166,7 +166,7 @@ To ensure that Filebeat has been successfully installed, execute the following c
 Next steps
 ----------
 
-The next step consists of :ref:`installing Kibana <kibana>`.
+The next step consists on :ref:`installing Kibana <kibana>`.
 
 
 Uninstall
