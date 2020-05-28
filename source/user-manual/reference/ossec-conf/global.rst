@@ -385,13 +385,17 @@ rotate_interval
 
 .. versionadded:: 3.1.0
 
-This option sets the interval between file rotation. The range of possible values is from ``10s`` (10 seconds) to ``1d`` (1 day).
+This option sets the interval between file rotation. The range of possible values is from ``10m`` (10 minutes) to ``1d`` (1 day).
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                      |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+.. note::
+
+  The default minimum value ``10m`` is set in the :ref:`analysisd.min_rotate_interval <ossec_internal_analysisd>` option found in the internal configuration file ``/var/ossec/etc/internal_options.conf``.
 
 Example:
 
