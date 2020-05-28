@@ -17,6 +17,7 @@ import os
 import re
 import shlex
 import datetime
+from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -115,6 +116,7 @@ html_theme = 'wazuh_doc_theme'
 # documentation.
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
+    'wazuh_doc_url': 'https://documentation.wazuh.com',
     'globaltoc_depth': 5,
     'includehidden': True,
     'collapse_navigation': False,
@@ -430,13 +432,20 @@ def collect_compiled_pagename(app, pagename, templatename, context, doctree):
         pass
 
 def creating_file_list(app, exception):
-		''' Creates a document `.doclist` containing the path to every html file that was compiled '''
-		if app.builder.name == 'html':
-				build_path = app.outdir
-				separator = '\n'
-				with open(build_path+'/.doclist', 'w') as doclist_file:
-						list_text = separator.join(list_compiled_html)
-						doclist_file.write(list_text)
+	''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
+	if app.builder.name == 'html':
+		build_path = app.outdir
+		separator = '\n'
+		with open(build_path+'/.doclist', 'w') as doclist_file:
+			list_text = separator.join(list_compiled_html)
+			doclist_file.write(list_text)
+		sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+		sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+		for compiled_html in list_compiled_html:
+			sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
+		sitemap += '</urlset>'
+		with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
+			sitemap_file.write(sitemap)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
