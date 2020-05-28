@@ -8,7 +8,7 @@ Once Elasticsearch is installed, download the preconfigured configuration file:
 
 This file is configured to use ``0.0.0.0`` as default IP, which binds all the available IPs on the machine. The value ``network.host`` can be changed by any available IP on the file ``/etc/elasticsearch/elasticsearch.yml``.
 
-In order to use Wazuh Kibana plugin properly, it is neccesary to add the roles ``wazuh-ui``, ``wazuh-ui-user`` and ``wazuh-ui-admin``. Besides, two users are added to the default users, ``wazuhuser`` and ``wazuhadmin``
+In order to use Wazuh Kibana plugin properly, it is neccesary to add the roles ``wazuh-ui``, ``wazuh-ui-user`` and ``wazuh-ui-admin``. Besides, two users are added to the default users, ``wazuh_user`` and ``wazuh_admin``:
 
 .. code-block:: console
 

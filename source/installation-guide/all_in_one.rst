@@ -109,7 +109,7 @@ Configuring Elasticsearch
 
 .. include:: ../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
-To lear more about Elasticsearch and its configuration visit the :ref:`further configuration section <further_configuration>`.
+To learn more about Elasticsearch, its configuration and the added roles and users visit the :ref:`further configuration section <further_configuration>`.
 
 Enable and start the Elasticsearch service:
 
