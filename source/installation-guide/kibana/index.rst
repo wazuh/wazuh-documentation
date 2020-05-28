@@ -60,6 +60,20 @@ Kibana installation and configuration
             .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
 
 
+#. Download the Kibana configuration file:
+
+    .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
+
+
+#. Install the Wazuh Kibana plugin:
+
+    The installation of the plugin must be done from the Kibana home directory.
+
+    .. code-block:: console
+
+        # cd /usr/share/kibana
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
+
 #. The next step, involves the certificates placement. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
 
@@ -79,23 +93,9 @@ Kibana installation and configuration
         .. group-tab:: Different Elasticsearch server
 
 
-            .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
-
-
-
-#. Download the Kibana configuration file:
-
-    .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
-
-
-#. Install the Wazuh Kibana plugin:
-
-    The installation of the plugin must be done from the Kibana home directory.
-
-    .. code-block:: console
-
-        # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
+            .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst      
+            
+              
 
 #. Load the Kibana's port configuration
 
