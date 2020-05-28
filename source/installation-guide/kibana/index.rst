@@ -93,11 +93,11 @@ Kibana installation and configuration
         .. group-tab:: Different Elasticsearch server
 
 
-            .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst      
-            
-              
+            .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
-#. Load the Kibana's port configuration
+
+
+#. Load the Kibana's port configuration:
 
     .. code-block:: console
 

@@ -30,7 +30,7 @@ Preparing the installation
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*All*] The addition of the Wazuh repository must be done in all Elasticsearch cluster nodes.
+[*All*] The addition of the Wazuh repository must be done in all Elasticsearch cluster nodes:
 
   .. tabs::
 

@@ -24,7 +24,7 @@ The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for the Wazuh manager and the Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
+This section describes how to add the Wazuh repository. It will be used for the Wazuh manager and the Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster:
 
 .. tabs::
 
@@ -99,7 +99,7 @@ Installing the Wazuh API
 
 Before starting, note that the Wazuh API has to be installed only in the Wazuh master node and not in the Wazuh worker nodes.
 
-Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
+Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed:
 
 
 .. tabs::
