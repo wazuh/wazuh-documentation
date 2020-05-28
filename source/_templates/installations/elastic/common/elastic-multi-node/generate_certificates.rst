@@ -9,13 +9,13 @@ The certificates can be generated as follows:
       # mkdir /etc/elasticsearch/certs
       # cd /etc/elasticsearch/certs
 
-  #. Download the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificates
-    
+  #. Download the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificates:
+
     .. code-block:: console
 
       # wget https://releases.floragunn.com/search-guard-tlstool/1.7/search-guard-tlstool-1.7.zip
 
-  #. Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``: 
+  #. Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``:
 
     .. code-block:: console
 
@@ -31,7 +31,7 @@ The certificates can be generated as follows:
 
         # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard.yml
 
-      
+
       After downloading the configuration file in ``/etc/elasticsearch/certs/searchguard/search-guard.yml``, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. There can be indicated more than one IP, setting one per line:
 
         .. code-block:: yaml
@@ -39,24 +39,24 @@ The certificates can be generated as follows:
           nodes:
             - name: node-1
             dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
-            ip: 
+            ip:
               - <elasticsearch_X_IP>
             - name: node-2
             dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
-            ip: 
+            ip:
               - <elasticsearch_X_IP>
             - name: node-3
             dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=ES
-            ip: 
-              - <elasticsearch_X_IP> 
+            ip:
+              - <elasticsearch_X_IP>
 
     .. group-tab:: Wazuh multi-node cluster
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard-multi-node.yml     
+        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard-multi-node.yml
 
-      
+
       After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. There can be indicated more than one IP, setting one per line:
 
         .. code-block:: yaml
@@ -64,16 +64,16 @@ The certificates can be generated as follows:
           nodes:
             - name: node-1
             dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
-            ip: 
+            ip:
               - <elasticsearch_X_IP>
             - name: node-2
             dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
-            ip: 
+            ip:
               - <elasticsearch_X_IP>
             - name: node-3
             dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=ES
-            ip: 
-              - <elasticsearch_X_IP>                            
+            ip:
+              - <elasticsearch_X_IP>
 
       There should be added as many ``filebeat-X`` sections as Wazuh servers will be involved in the installation:
 
@@ -82,10 +82,10 @@ The certificates can be generated as follows:
           - name: filebeat-1
             dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=ES
           - name: filebeat-2
-            dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=ES  
+            dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=ES
 
     To learn more about how to create and configure the certificates visit the :ref:`further configuration section <further_configuration>`.
-  
+
   #. Execute the Search Guard's script to create the certificates:
 
     .. code-block:: console
@@ -96,7 +96,7 @@ The certificates can be generated as follows:
       # mv /etc/elasticsearch/certs/node-1_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
       # mv /etc/elasticsearch/certs/node-1_http.key /etc/elasticsearch/certs/elasticsearch_http.key
 
-    In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.      
+    In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
   #. Compress all the necessary files to be sended to the rest of the involved parts:
 
