@@ -62,7 +62,7 @@ To create a node certificate, the following lines should be added to the ``/etc/
                 - <node_IP_3>
 
 
-As mention before, client and admin certificates are very similar, although the admin ones have more privileges. An admin certificate must be in at least one of the Elasticsearch nodes, which will be able to perform administratio and security tasks. To create an admin certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``clients:`` section modifying the required fields on the Elasticsearch's master node:
+As mentioned before, client and admin certificates are very similar, although the admin ones have more privileges. An admin certificate must be in at least one of the Elasticsearch nodes, which will be able to perform administratio and security tasks. To create an admin certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``clients:`` section modifying the required fields on the Elasticsearch's master node:
 
     .. code-block:: yaml
         :emphasize-lines: 3
