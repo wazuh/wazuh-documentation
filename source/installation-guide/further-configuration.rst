@@ -25,7 +25,7 @@ Open Distro for Elasticsearch requires three kinds of certificates:
 
 - ``node``: The node certificates are the ones needed for every Elasticsearch node. They must include the node IP.
 
-- ``client``: Those certificates are the ones incharged of the communication between the different parst of the installation e.g. Filebeat and Kibana.
+- ``client``: Those certificates are the ones incharged of the communication between the different parts of the installation e.g. Filebeat and Kibana.
 
 - ``admin``: The admin certificate is a client certificate with special privileges needed for management and security related tasks.
 
