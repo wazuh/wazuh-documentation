@@ -90,6 +90,15 @@ Once the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` has been
 
 This command will generate both, the ``root.ca`` certificate and all the nodes and clients certificates. In case the ``root-ca`` certificate was previously created, the ``-ca`` tag can be omited. By default, when the script is re-executed, the already present certificates will not be overwritten. Additionally, the tag ``-t`` can be added to specify the output destination. If not modified, the generated certificates will be placed at ``./out``. These and other configuration options can be found in the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
 
+When new node certificates are created, they must be added in the Elasticsearch's configuration file placed at ``/etc/elasticsearch/elasticsearch.yml`` under the ``opendistro_security.nodes_dn`` section:
+
+    .. code-block:: yaml
+        :emphasize-lines: 3
+        
+        opendistro_security.nodes_dn:
+            - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
+
 
 Wazuh Kibana's users
 --------------------
