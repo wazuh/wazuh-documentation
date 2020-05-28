@@ -52,6 +52,10 @@ This group contains the following subsections:
 - :ref:`Osquery <osquery>` dashboard allows to exploring an operating system as a high-performance relational database.
 - :ref:`Docker listener <docker-monitor-index>` dashboard gives access to monitoring and view the collected activities from Docker containers such as creation, running, starting, stopping, or pausing events.
 
+.. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-vulnerabilities.png
+  :align: center
+  :width: 100%
+
 Auditing and Policy monitoring
 ------------------------------
 
