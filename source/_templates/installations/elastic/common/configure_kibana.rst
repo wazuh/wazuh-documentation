@@ -14,7 +14,7 @@ Edit the ``/etc/kibana/kibana.yml`` file:
 
 Values to be replaced:
 
-- ``<kibana_ip>``: by default, Kibana only listens on the loopback interface (localhost), which means that it can be only accessed from the same machine. To access Kibana from the outside it may be configured to listen on its network IP by replacing ``kibana_ip`` with Kibana's host IP.
+- ``<kibana_ip>``: by default, Kibana only listens on the loopback interface (localhost), which means that it can be only accessed from the same machine. To access Kibana from the outside it may be configured to listen on its network IP by replacing ``kibana_ip`` with Kibana's host IP. The value ``0.0.0.0`` will accept all the availables IPs of the machine.
 - ``<elasticsearch_ip>``: the host's IP. In case of having more than one Elasticsearch node, Kibana can be configured to connect to multiple Elasticsearch nodes in the same cluster. The nodes' IPs can be separated with commas.
 
 .. End of configure_kibana.rst
