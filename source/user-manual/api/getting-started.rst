@@ -105,14 +105,11 @@ Logging in with cURL
             "timestamp": "2020-05-25T07:05:00+0000"
         }
 
-Run any endpoint following the structure below. Replace <endpoint> and <YOUR_JWT_TOKEN> with your values.
+Once we are logged in we can run any endpoint following the structure below. Please, do not forget to replace <endpoint> and <YOUR_JWT_TOKEN> with your own values.
 
 .. code-block:: console
 
     # curl -X <METHOD> "https://localhost:55000/v4/<ENDPOINT>" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
-
-
-
 
 
 Basic concepts
@@ -142,7 +139,7 @@ Here are some of the basic concepts related to making API requests and understan
     +---------+----------------------+-----------------------------------------------------------------------+
     | Field   | Sub-field            | Description                                                           |
     +=========+======================+=======================================================================+
-    | data    | affecte_items        | List with each one of the successfully affected items in the request. |
+    | data    | affected_items       | List with each one of the successfully affected items in the request. |
     |         +----------------------+-----------------------------------------------------------------------+
     |         | total_affected_items | Total number of successfully affected items.                          |
     |         +----------------------+-----------------------------------------------------------------------+
