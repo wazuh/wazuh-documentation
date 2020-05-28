@@ -23,7 +23,7 @@ The Elasticsearch configuration section has steps that must be done in all the h
 Preparing the installation
 --------------------------
 
-[*All*] Before installing Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, ``wget``, ``curl`` and ``unzip`` utilities will be used in further steps:
+[*All*] Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, some packages like ``wget``, ``curl`` will be used in further steps:
 
   .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
