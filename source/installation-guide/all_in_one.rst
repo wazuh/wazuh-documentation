@@ -209,7 +209,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
-#. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follow:
+#. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
     .. code-block:: console
 

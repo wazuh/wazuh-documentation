@@ -21,11 +21,11 @@ In the distributed installation guide, the `Search Guard's offline TLS tool <htt
 
 Open Distro for Elasticsearch requires three kinds of certificates:
 
-- ``root-ca``: This certificate is the one incharged of signing the rest of the certificates.
+- ``root-ca``: This certificate is the one in charge of signing the rest of the certificates.
 
 - ``node``: The node certificates are the ones needed for every Elasticsearch node. They must include the node IP.
 
-- ``client``: Those certificates are the ones incharged of the communication between the different parts of the installation e.g. Filebeat and Kibana.
+- ``client``: Those certificates are the ones in charge of the communication between the different parts of the installation e.g. Filebeat and Kibana.
 
 - ``admin``: The admin certificate is a client certificate with special privileges needed for management and security related tasks.
 
@@ -49,7 +49,7 @@ These are the default values that are preconfigured in the template downloaded, 
 
 There can be added even more security improvements, such us the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
 
-The node certificates need the server's IP to be specified, and there can be added as many IPs as neccessary.
+The node certificates need the server's IP to be specified, and there can be added as many IPs as necessary.
 To create a node certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``nodes:`` section modifying the required fields on the Elasticsearch's master node:
 
     .. code-block:: yaml
@@ -62,7 +62,7 @@ To create a node certificate, the following lines should be added to the ``/etc/
                 - <node_IP_3>
 
 
-As mentioned before, client and admin certificates are very similar, although the admin ones have more privileges. An admin certificate must be in at least one of the Elasticsearch nodes, which will be able to perform administratio and security tasks. To create an admin certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``clients:`` section modifying the required fields on the Elasticsearch's master node:
+As mentioned before, client and admin certificates are very similar, although the admin ones have more privileges. An admin certificate must be in at least one of the Elasticsearch nodes, which will be able to perform administration and security tasks. To create an admin certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``clients:`` section modifying the required fields on the Elasticsearch's master node:
 
     .. code-block:: yaml
         :emphasize-lines: 3
@@ -88,7 +88,7 @@ Once the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` has been
 
         # ./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt
 
-This command will generate both, the ``root.ca`` certificate and all the nodes and clients certificates. In case the ``root-ca`` certificate was previously created, the ``-ca`` tag can be omited. By default, when the script is re-executed, the already present certificates will not be overwritten. Additionally, the tag ``-t`` can be added to specify the output destination. If not modified, the generated certificates will be placed at ``./out``. These and other configuration options can be found in the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
+This command will generate both, the ``root.ca`` certificate and all the nodes and clients certificates. In case the ``root-ca`` certificate was previously created, the ``-ca`` tag can be omitted. By default, when the script is re-executed, the already present certificates will not be overwritten. Additionally, the tag ``-t`` can be added to specify the output destination. If not modified, the generated certificates will be placed at ``./out``. These and other configuration options can be found in the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
 
 When new node certificates are created, they must be added in the Elasticsearch's configuration file placed at ``/etc/elasticsearch/elasticsearch.yml`` under the ``opendistro_security.nodes_dn`` section:
 
@@ -103,13 +103,13 @@ When new node certificates are created, they must be added in the Elasticsearch'
 Wazuh Kibana's users and roles
 ------------------------------
 
-During the installation process, two new users where added:
+During the installation process, two new users were added:
 
 - ``wazuh_user`` is created for those users that only need read access to the Wazuh Kibana plugin.
 
 - ``wazuh_admin`` is the user recommended for those users that need administration privileges.
 
-Apart from the previously mentioned users, during the installation process, there are three extra roles added. there roles are incharged of giving the right permissions to the users:
+Apart from the previously mentioned users, during the installation process, there were three extra roles added. These roles are in charge of giving the right permissions to the users:
 
 - ``wazuh_ui``: This role gives enough privileges to ``kibanaserver`` user to operate with Wazuh's indexes.
 

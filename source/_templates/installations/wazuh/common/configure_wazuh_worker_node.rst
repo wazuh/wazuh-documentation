@@ -25,7 +25,7 @@ As shown in the example above, the following parameters have to be amended:
 +-------------------------------------+--------------------------------------------------------------------------------------------+
 | :ref:`node_name <cluster_node_name>`| Each node of the cluster must have a unique name                                           |
 +-------------------------------------+--------------------------------------------------------------------------------------------+
-| :ref:`key <cluster_key>`            | The key created previously on for the ``master`` node. It has to be the same for all nodes |
+| :ref:`key <cluster_key>`            | The key created previously for the ``master`` node. It has to be the same for all nodes    |
 +-------------------------------------+--------------------------------------------------------------------------------------------+
 | :ref:`nodes <cluster_nodes>`        | Has to contain the address of the master (it can be either an IP or a DNS)                 |
 +-------------------------------------+--------------------------------------------------------------------------------------------+
