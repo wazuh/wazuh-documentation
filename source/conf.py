@@ -428,18 +428,18 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
-    app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
 
-    app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
-    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_javascript("js/delete-cache.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/delete-cache.js")).st_mtime)
