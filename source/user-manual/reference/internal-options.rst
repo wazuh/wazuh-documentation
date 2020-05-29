@@ -101,6 +101,8 @@ Agent
 |                           |                | 1: Remote configuration is enable.                                               |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 
+.. _ossec_internal_analysisd:
+
 Analysisd
 ---------
 
@@ -1052,7 +1054,7 @@ Rootcheck
 Security Configuration Assessment
 ---------------------------------
 
-.. versionadded:: 3.9.0 
+.. versionadded:: 3.9.0
 
 +-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 |    **sca.request_db_interval**    | Description    | In case of integrity fail, this is the maximum interval (minutes) to resend the scan information to the manager. |
