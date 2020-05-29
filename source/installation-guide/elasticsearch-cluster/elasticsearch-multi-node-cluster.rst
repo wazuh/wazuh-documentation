@@ -52,7 +52,7 @@ Adding the Wazuh repository
 Elasticsearch installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*All*] Install the Open Distro for Elasticsearch package:
+[*All*] Install Open Distro for Elasticsearch:
 
     .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 

@@ -4,23 +4,17 @@
 
     .. group-tab:: APT
 
-        #. Install Elasticsearch OSS:
+        Install Elasticsearch OSS and the latest version of Open Distro for Elasticsearch:
 
             .. code-block:: console
 
-                # apt-get install elasticsearch-oss
-
-        #. Install the latest version of Open Distro for Elasticsearch:
-
-            .. code-block:: console
-
-                # apt install opendistroforelasticsearch
+                # apt install elasticsearch-oss opendistroforelasticsearch
 
 
 
     .. group-tab:: Yum
 
-        Install Elasticsearch: 
+        Install the latest version of Open Distro for Elasticsearch:
 
             .. code-block:: console
 
