@@ -92,6 +92,8 @@ Installing Wazuh manager
 
       # service wazuh-manager status
 
+.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
+
 .. versionadded:: 4.0.0
 
 The Wazuh API will be installed along the Wazuh manager. You do not need any extra requirement for this.
@@ -110,7 +112,7 @@ You can check the API service status with:
 
       # service wazuh-api status
 
-.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
+.. note:: Check out the section :ref:`securing_api` to set up some additional settings.
 
 Installing Filebeat
 -------------------
