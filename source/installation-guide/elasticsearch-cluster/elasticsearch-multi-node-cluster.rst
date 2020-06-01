@@ -35,17 +35,17 @@ Adding the Wazuh repository
   .. tabs::
 
 
-    .. group-tab:: APT
-
-
-      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
-
-
-
     .. group-tab:: Yum
 
 
       .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+
+
+
+    .. group-tab:: APT
+
+
+      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -113,14 +113,14 @@ To uninstall Elasticsearch:
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst

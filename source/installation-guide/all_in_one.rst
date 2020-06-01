@@ -34,18 +34,17 @@ Adding the Wazuh repository
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/wazuh/deb/add_repository.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../_templates/installations/wazuh/yum/add_repository.rst
 
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -55,17 +54,17 @@ Installing the Wazuh manager
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/wazuh/deb/install_wazuh_manager.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../_templates/installations/wazuh/yum/install_wazuh_manager.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../_templates/installations/wazuh/deb/install_wazuh_manager.rst
 
 
 
@@ -78,18 +77,17 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/wazuh/deb/install_wazuh_api.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../_templates/installations/wazuh/yum/install_wazuh_api.rst
 
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../_templates/installations/wazuh/deb/install_wazuh_api.rst
 
 
 
@@ -134,17 +132,18 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. tabs::
 
 
+      .. group-tab:: Yum
+
+
+        .. include:: ../_templates/installations/elastic/yum/install_filebeat.rst
+
+
+
       .. group-tab:: APT
 
 
         .. include:: ../_templates/installations/elastic/deb/install_filebeat.rst
 
-
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../_templates/installations/elastic/yum/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward the Wazuh alerts to Elasticsearch:
@@ -192,17 +191,19 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. tabs::
 
-      .. group-tab:: APT
-
-
-        .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
-
-
 
       .. group-tab:: Yum
 
 
         .. include:: ../_templates/installations/elastic/yum/install_kibana.rst
+
+
+
+      .. group-tab:: APT
+
+
+        .. include:: ../_templates/installations/elastic/deb/install_kibana.rst
+
 
 
 #. Download the Kibana configuration file:
@@ -248,17 +249,17 @@ To uninstall the Wazuh manager and the Wazuh API:
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
 
 
 
@@ -269,6 +270,13 @@ To uninstall Filebeat:
 .. tabs::
 
 
+  .. group-tab:: Yum
+
+
+    .. include:: ../_templates/installations/elastic/yum/uninstall_filebeat.rst
+
+
+
   .. group-tab:: APT
 
 
@@ -276,15 +284,16 @@ To uninstall Filebeat:
 
 
 
-  .. group-tab:: Yum
-
-
-    .. include:: ../_templates/installations/elastic/yum/uninstall_filebeat.rst
-
-
 To uninstall Elasticsearch:
 
 .. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+
 
 
   .. group-tab:: APT
@@ -294,25 +303,19 @@ To uninstall Elasticsearch:
 
 
 
-  .. group-tab:: Yum
-
-
-    .. include:: ../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
-
-
 To uninstall Kibana:
 
 .. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../_templates/installations/elastic/deb/uninstall_kibana.rst
-
 
 
   .. group-tab:: Yum
 
 
     .. include:: ../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../_templates/installations/elastic/deb/uninstall_kibana.rst

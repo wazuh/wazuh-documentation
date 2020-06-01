@@ -26,20 +26,17 @@ This step is required only if Kibana will be installed on a different server as 
 
   .. tabs::
 
-
-    .. group-tab:: APT
-
-
-      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
-
-
-
     .. group-tab:: Yum
 
 
       .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
 
 
+
+    .. group-tab:: APT
+
+
+      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -50,17 +47,18 @@ Kibana installation and configuration
 
     .. tabs::
 
+        .. group-tab:: Yum
+
+
+            .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
+
+
+
         .. group-tab:: APT
 
 
             .. include:: ../../_templates/installations/elastic/deb/install_kibana.rst
 
-
-
-        .. group-tab:: Yum
-
-
-            .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
 
 
 #. Download the Kibana configuration file:
@@ -140,14 +138,14 @@ To uninstall Kibana:
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst

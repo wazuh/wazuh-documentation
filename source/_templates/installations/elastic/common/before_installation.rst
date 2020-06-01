@@ -2,6 +2,14 @@
 
 .. tabs::
 
+        .. group-tab:: Yum
+
+            Install all the required utilities:
+
+                .. code-block:: console
+
+                    # yum install java-11-openjdk-devel curl unzip wget
+
         .. group-tab:: APT
 
                 #. Add the repository for Java Development Kit (JDK):
@@ -29,14 +37,6 @@
 
                     .. code-block:: console
 
-                        # apt install openjdk-11-jdk curl apt-transport-https unzip wget                    
-
-        .. group-tab:: Yum
-
-            Install all the required utilities:
-
-                .. code-block:: console
-
-                    # yum install java-11-openjdk-devel curl unzip wget
+                        # apt install openjdk-11-jdk curl apt-transport-https unzip wget
 
 .. End of include file

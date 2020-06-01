@@ -2,14 +2,6 @@
 
 .. tabs::
 
-        .. group-tab:: APT
-
-            Install all the required utilities:
-
-                .. code-block:: console
-
-                    # apt install curl apt-transport-https
-
         .. group-tab:: Yum
 
             Install all the required utilities:
@@ -17,5 +9,15 @@
                 .. code-block:: console
 
                     # yum install curl
+
+
+                    
+        .. group-tab:: APT
+
+            Install all the required utilities:
+
+                .. code-block:: console
+
+                    # apt install curl apt-transport-https
 
 .. End of include file
