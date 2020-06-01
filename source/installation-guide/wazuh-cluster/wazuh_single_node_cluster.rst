@@ -12,6 +12,9 @@ This document will go through the installation of the Wazuh server components in
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
+Prerequisites
+-------------
+
 Before installing the Wazuh server and Filebeat, some extra packages must be installed:
 
   .. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst

@@ -13,8 +13,8 @@ This document guides through an installation of the Wazuh server and Open Distro
 
 .. _all_in_one_elastic:
 
-Preparing the installation
---------------------------
+Prerequisites for installing Wazuh-Elastic Stack
+------------------------------------------------
 
 Before installing the Wazuh server and Open Distro, some extra packages must be installed. Open Distro for Elasticsearch requires the installation of Java Development Kit. Besides, some packages like ``wget``, ``curl`` will be used in further steps:
 
