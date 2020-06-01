@@ -49,8 +49,8 @@ This group contains the following subsections:
 
 - :ref:`Vulnerabilities <vulnerability-detection>` dashboard  helps to discover which applications in the monitored environment are affected by well-knows vulnerabilities.
 - :ref:`VirusTotal <virustotal-scan>` dashboard shows alerts resulting from VirusTotal analysis of suspicious files via integration with their API.
-- :ref:`Osquery <osquery>` dashboard allows to exploring an operating system as a high-performance relational database.
-- :ref:`Docker listener <docker-monitor-index>` dashboard gives access to monitoring and view the collected activities from Docker containers such as creation, running, starting, stopping, or pausing events.
+- :ref:`Osquery <osquery>` dashboard allows to explore an operating system as a high-performance relational database.
+- :ref:`Docker listener <docker-monitor-index>` dashboard gives access to monitor and view the collected activities from Docker containers such as creation, running, starting, stopping or pausing events.
 
 .. thumbnail:: ../../images/kibana-app/sections/overview/wazuh-kibana-vulnerabilities.png
   :align: center

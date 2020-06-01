@@ -12,13 +12,13 @@ The process involves the modification of the Wazuh template for Elasticsearch, t
 
 .. warning::
 
-  This process could lead into a broken installation of the Elastic Stack if it's not followed step by step. Please proceed carefully.
+  This process could lead into a broken installation of the Elastic Stack if it is not followed step by step. Please proceed carefully.
 
 This process will be restored after upgrading the Wazuh Kibana plugin, or any of the Elastic Stack components involved during the process. The reason for this depends on each component:
 
 - On Elasticsearch, every new upgrade requires to update the Wazuh template, so the default index pattern will be restored.
 - On Filebeat, every new upgrade requires to update the configuration file for the Wazuh filebeat module, so the default name will be used to create indices.
-- On Kibana and the Wazuh Kibana plugin, the configuration file is removed when installing a new version, so it's necessary to apply again the custom settings.
+- On Kibana and the Wazuh Kibana plugin, the configuration file is removed when installing a new version, so it is necessary to apply again the custom settings.
 
 Procedure
 ---------
@@ -74,7 +74,7 @@ This example shows how to add a new index pattern ``my-custom-alerts-*``, along 
         - name: index_prefix
           default: my-custom-alerts-3.x-
 
-    Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,`, and must not start with `_`, `-` or `+`. All the letters must be lowercase.
+    Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,`, and must not start with `_`, `-` or `+`. Besides all the letters must be lowercase.
 
 #. Optional, to use the new index pattern by default,  modify the ``pattern`` setting in the Wazuh Kibana plugin configuration file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``:
 
@@ -94,4 +94,4 @@ This example shows how to add a new index pattern ``my-custom-alerts-*``, along 
 
     .. include:: ../../../_templates/common/restart_filebeat.rst
 
-The Wazuh alerts belonging to the previous index will not be included in the new index, but they can still be queried after selecting their index pattern in the Wazuh Kibana plugin. They can also be `reindexed <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ to the new index.
+The Wazuh alerts that belong to the previous index will not be included in the new index, but they can still be queried after selecting their index pattern in the Wazuh Kibana plugin. They can also be `reindexed <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ to the new index.

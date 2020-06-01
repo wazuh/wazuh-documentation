@@ -67,7 +67,7 @@ Default index pattern to use on the Wazuh Kibana plugin. If there is no valid in
 timeout
 ^^^^^^^
 
-Defines the maximum timeout the Wazuh Kibana plugin use when making requests. It will be ignored if the value is set under 1500 milliseconds.
+Defines the maximum timeout the Wazuh Kibana plugin uses when making requests. It will be ignored if the value is set under 1500 milliseconds.
 
 +--------------------+-------------------------------+
 | **Default value**  | 20000 (milliseconds)          |
