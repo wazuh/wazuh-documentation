@@ -7,17 +7,23 @@
 Packages list
 =============
 
-- `AIX`_
-- `Linux`_
-- `HP-UX`_
-- `macOS`_
-- `Solaris`_
-- `Windows`_
+This download page contains packages required for the Wazuh-Elastic Stack installation with the Wazuh version |WAZUH_LATEST|:
+
+- `Wazuh manager, Wazuh agent and Wazuh API`_
+
+   - `AIX`_
+   - `Linux`_
+   - `HP-UX`_
+   - `macOS`_
+   - `Solaris`_
+   - `Windows`_
 - `Wazuh Kibana plugin and Wazuh Splunk plugin`_
 - `Virtual machine`_
-- `Elasticsearch`_
-- `Kibana`_
-- `Filebeat`_
+- `Elastic Stack`_
+
+   - `Elasticsearch`_
+   - `Kibana`_
+   - `Filebeat`_
 
 Wazuh manager, Wazuh agent and Wazuh API
 ----------------------------------------
