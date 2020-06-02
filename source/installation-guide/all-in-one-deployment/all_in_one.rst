@@ -107,11 +107,28 @@ Configuring Elasticsearch
 
 .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
-To learn more about Elasticsearch, its configuration and the added roles and users visit the :ref:`further configuration section <further_configuration>`.
+Certificates creation
+~~~~~~~~~~~~~~~~~~~~~
 
-Enable and start the Elasticsearch service:
+#. Remove the demo certificates:
 
-.. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
+
+
+#. Generate and deploy the certificates:
+
+    .. include:: ../../_templates/installations/elastic/common/certificates-aio.rst
+
+#. Enable and start the Elasticsearch service:
+
+    .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
+
+#. Execute the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster:
+
+  .. code-block:: console
+
+    # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+    # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key
 
 Execute the following command to ensure that the installation was made properly:
 
@@ -168,8 +185,8 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. code-block:: console
 
       # mkdir /etc/filebeat/certs
-      # cp /etc/elasticsearch/root-ca.pem /etc/filebeat/certs/
-      # cp /etc/elasticsearch/esnode* /etc/filebeat/certs/
+      # cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/
+      # mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/
 
 #. Enable and start the Filebeat service:
 
@@ -222,8 +239,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
       # mkdir /etc/kibana/certs
-      # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
-      # cp /etc/elasticsearch/esnode* /etc/kibana/certs/
+      # mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/
 
 #. Link Kibana's socket to priviledged port 443
 

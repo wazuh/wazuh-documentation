@@ -65,7 +65,6 @@ Certificates creation and deployment
 
     .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
-
 #. Generate and deploy the certificates:
 
     .. include:: ../../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
