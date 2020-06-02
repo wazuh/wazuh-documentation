@@ -1,25 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Learn how to tune the Wazuh and Elasticsearch installation
+.. _user_manual_certificates:
 
-.. _further_configuration:
+Certificates deployment
+=======================
 
-Further configuration
-=====================
+In the :ref:`installation guide <installation_guide>`, the `Search Guard's offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used.
 
-This section provides additional information to the default installation configuration and how to customize it.
-
-Elastic Stack configuration
----------------------------
-
-In both the All-in-One installation guide and Elasticsearch single-node cluster installation guide the IP ``0.0.0.0`` is used as ``network.host``. This is an acceptable value that binds all the available IPs on the machine. This configuration may not be suitable for all environments since the Elasticsearch installation will be accessible from all the machine's IPs, that is why it is recommended to modify this value and bind the ``network.host`` to the desired IP address.
-
-Certificates Deployment
------------------------
-
-In the distributed installation guide, the `Search Guard's offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ has been used to create certificates, but any other certificates creation method, for example using `OpenSSL <https://www.openssl.org/>`_, can be used.
-
-Open Distro for Elasticsearch requires three kinds of certificates:
+Open Distro for Elasticsearch uses four kinds of certificates:
 
 - ``root-ca``: This certificate is the one in charge of signing the rest of the certificates.
 
@@ -47,7 +35,7 @@ These are the default values that are preconfigured in the template downloaded, 
 
 - ``E``: Email adress.
 
-There can be added even more security improvements, such us the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
+There can be added even more security improvements, such as the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
 
 The node certificates need the server's IP to be specified, and there can be added as many IPs as necessary.
 To create a node certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``nodes:`` section modifying the required fields on the Elasticsearch's master node:
@@ -80,7 +68,7 @@ What differs a client certificate from an admin certificate is the ``admin`` tag
         dn: CN=<common-name>,OU=<operational-unit>,O=<organization>,L=<locality>,C=<country-code>
 
 Generate new certificates
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 Once the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` has been modified, the certificates can be created using the following command:
 
@@ -98,23 +86,3 @@ When new node certificates are created, they must be added in the Elasticsearch'
         opendistro_security.nodes_dn:
             - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
             - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
-
-
-Wazuh Kibana's users and roles
-------------------------------
-
-During the installation process, two new users were added:
-
-- ``wazuh_user`` is created for those users that only need read access to the Wazuh Kibana plugin.
-
-- ``wazuh_admin`` is the user recommended for those users that need administration privileges.
-
-Apart from the previously mentioned users, during the installation process, there were three extra roles added. These roles are in charge of giving the right permissions to the users:
-
-- ``wazuh_ui``: This role gives enough privileges to ``kibanaserver`` user to operate with Wazuh's indexes.
-
-- ``wazuh_ui_user``: This roles provides ``wazuh_ui_user`` hability to read Wazuh's indexes.
-
-- ``wazuh_ui_admin``: This roles allow ``wazuh_admin`` to perform, reading, writing, management and indexing task on the Wazuh indexes.
-
-These users and roles are designed to be used along the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana's interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.

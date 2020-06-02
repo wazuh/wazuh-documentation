@@ -12,8 +12,7 @@ The Installation guide section includes the :ref:`All-in-One installation <all_i
 
 This section, however, will explain how to build a production environment that provides high availability and scalability of the services.
 
-The Introduction document will go through the basic concepts and architecture of the Wazuh production environment and the Further configuration section will provide the
-additional information about tuning the Wazuh-Elastic Stack environment.
+The Introduction document will go through the basic concepts and architecture of the Wazuh production environment.
 
 .. topic:: Contents
 
@@ -23,4 +22,4 @@ additional information about tuning the Wazuh-Elastic Stack environment.
         introduction/index
         all-in-one-deployment/index
         distributed-deployment/index
-        further-configuration
+        

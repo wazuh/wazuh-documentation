@@ -17,6 +17,7 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
 
         overview
         manager/index
+        certificates
         registering/index
         deployment_variables/deployment_variables
         agents/index
