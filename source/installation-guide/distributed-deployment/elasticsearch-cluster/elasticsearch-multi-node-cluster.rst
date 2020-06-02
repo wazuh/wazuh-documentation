@@ -25,27 +25,27 @@ Prerequisites
 
 [*All*] Open Distro for Elasticsearch requires the installation of Java Development Kit and other packages including ``wget``, ``curl`` and ``unzip`` that will be used in further steps:
 
-  .. include:: ../../../_templates/installations/elastic/common/before_installation.rst
+.. include:: ../../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [*All*] The addition of the Wazuh repository must be done in all Elasticsearch cluster nodes:
 
-  .. tabs::
+.. tabs::
 
 
-    .. group-tab:: Yum
+  .. group-tab:: Yum
 
 
-      .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
-    .. group-tab:: APT
+  .. group-tab:: APT
 
 
-      .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -54,14 +54,14 @@ Elasticsearch installation
 
 [*All*] Install Open Distro for Elasticsearch:
 
-    .. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [*All*] Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-    .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
+.. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
 
 Elasticsearch roles
 ~~~~~~~~~~~~~~~~~~~

@@ -17,7 +17,7 @@ Prerequisites
 
 Before installing the Wazuh servers and Filebeat, some extra packages must be installed:
 
-  .. include:: ../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
+.. include:: ../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
 Installing the Wazuh server
 ---------------------------

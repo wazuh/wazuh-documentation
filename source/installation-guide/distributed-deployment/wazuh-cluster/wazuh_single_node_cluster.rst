@@ -17,7 +17,7 @@ Prerequisites
 
 Before installing the Wazuh server and Filebeat, some extra packages must be installed:
 
-  .. include:: ../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
+.. include:: ../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
 Installing the Wazuh server
 ---------------------------
@@ -27,20 +27,20 @@ The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. tabs::
+.. tabs::
 
 
-    .. group-tab:: Yum
+  .. group-tab:: Yum
 
 
-      .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
-    .. group-tab:: APT
+  .. group-tab:: APT
 
 
-      .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 

@@ -17,26 +17,26 @@ Prerequisites
 
 Before installing Kibana, some extra packages must be installed:
 
-  .. include:: ../../../_templates/installations/elastic/common/before_installation_kibana.rst
+.. include:: ../../../_templates/installations/elastic/common/before_installation_kibana.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This step is required only if Kibana will be installed on a different server as these components were previously installed while installing Elasticsearch:
 
-  .. tabs::
+.. tabs::
 
-    .. group-tab:: Yum
-
-
-      .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+  .. group-tab:: Yum
 
 
+    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
 
-    .. group-tab:: APT
 
 
-      .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+  .. group-tab:: APT
+
+
+    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -128,7 +128,7 @@ Kibana installation and configuration
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
 
 Uninstall Kibana
 ~~~~~~~~~~~~~~~~
