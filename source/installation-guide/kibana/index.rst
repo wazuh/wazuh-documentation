@@ -98,7 +98,7 @@ Kibana installation and configuration
 
 
 
-#. Load the Kibana's port configuration:
+#. Link Kibana's socket to priviledged port 443
 
     .. code-block:: console
 

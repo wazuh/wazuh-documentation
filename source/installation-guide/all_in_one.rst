@@ -225,7 +225,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       # cp /etc/elasticsearch/root-ca.pem /etc/kibana/certs/
       # cp /etc/elasticsearch/esnode* /etc/kibana/certs/
 
-#. Load the Kibana's port configuration:
+#. Link Kibana's socket to priviledged port 443
 
     .. code-block:: console
 
