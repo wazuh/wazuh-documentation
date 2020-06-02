@@ -12,7 +12,7 @@ This section provides additional information to the default installation configu
 Elastic Stack configuration
 ---------------------------
 
-In both the All-in-One installation guide and Elasticsearch single-node cluster installation guide the IP ``0.0.0.0`` is used as ``network.host``. This is an acceptable value that binds all the available IPs on the machine. This configuration may not be suitable for all environments since the Elasticsearch installation will be accessible from all the machine's IPs, that is why it is recommended to modify this value and bind the ``network.host`` to the desired IP address. More information about this attribute can be found on `Open Distro for Elasticsearch page <https://opendistro.github.io/for-elasticsearch-docs/docs/elasticsearch/cluster/#step-3-bind-a-cluster-to-specific-ip-addresses>`_.
+In both the All-in-One installation guide and Elasticsearch single-node cluster installation guide the IP ``0.0.0.0`` is used as ``network.host``. This is an acceptable value that binds all the available IPs on the machine. This configuration may not be suitable for all environments since the Elasticsearch installation will be accessible from all the machine's IPs, that is why it is recommended to modify this value and bind the ``network.host`` to the desired IP address.
 
 Certificates Deployment
 -----------------------
@@ -94,7 +94,7 @@ When new node certificates are created, they must be added in the Elasticsearch'
 
     .. code-block:: yaml
         :emphasize-lines: 3
-        
+
         opendistro_security.nodes_dn:
             - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
             - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
