@@ -22,7 +22,7 @@ Prerequisites
 
 Before installing Open Distro for Elasticsearch, some extra packages must be installed. Open Distro requires the installation of Java Development Kit. Besides, some packages like ``wget``, ``curl`` will be used in further steps:
 
-  .. include:: ../../_templates/installations/elastic/common/before_installation.rst
+  .. include:: ../../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,14 +33,14 @@ Adding the Wazuh repository
     .. group-tab:: Yum
 
 
-      .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
+      .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -49,12 +49,12 @@ Elasticsearch installation
 
 Install Open Distro for Elasticsearch:
 
-    .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
+    .. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+#. .. include:: ../../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
 .. _certs_creation:
 
@@ -63,16 +63,16 @@ Certificates creation and deployment
 
 #. Remove the demo certificates:
 
-    .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
 
 #. Generate and deploy the certificates:
 
-    .. include:: ../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
+    .. include:: ../../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 #. Execute the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
 
@@ -102,11 +102,11 @@ To uninstall Elasticsearch:
   .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst

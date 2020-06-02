@@ -17,7 +17,7 @@ Prerequisites
 
 Before installing the Wazuh server and Filebeat, some extra packages must be installed:
 
-  .. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
+  .. include:: ../../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
 Installing the Wazuh server
 ---------------------------
@@ -33,14 +33,14 @@ Adding the Wazuh repository
     .. group-tab:: Yum
 
 
-      .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
+      .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -55,14 +55,14 @@ Install the Wazuh manager package:
   .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
 
 
 
@@ -78,14 +78,14 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
   .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_api.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_api.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_api.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_api.rst
 
 
 
@@ -112,14 +112,14 @@ Filebeat installation and configuration
       .. group-tab:: Yum
 
 
-        .. include:: ../../_templates/installations/elastic/yum/install_filebeat.rst
+        .. include:: ../../../_templates/installations/elastic/yum/install_filebeat.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../_templates/installations/elastic/deb/install_filebeat.rst
+        .. include:: ../../../_templates/installations/elastic/deb/install_filebeat.rst
 
 
 
@@ -131,7 +131,7 @@ Filebeat installation and configuration
 
 #. Download the alerts template for Elasticsearch:
 
-    .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
+    .. include:: ../../../_templates/installations/elastic/common/load_filebeat_template.rst
 
 
 #. Download the Wazuh module for Filebeat:
@@ -142,15 +142,15 @@ Filebeat installation and configuration
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
-    .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
+    .. include:: ../../../_templates/installations/elastic/common/configure_filebeat.rst
 
 #. Configure Filebeat certificates:
 
-    .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
+    .. include:: ../../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
 
 #. Enable and start the Filebeat service:
 
-    .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
+    .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
 
 To ensure that Filebeat has been successfully installed, execute the following command:
 
@@ -176,14 +176,14 @@ To uninstall the Wazuh manager and Wazuh API:
   .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
+    .. include:: ../../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
+    .. include:: ../../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
 
 
 
@@ -197,11 +197,11 @@ To uninstall Filebeat:
   .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/elastic/yum/uninstall_filebeat.rst
+    .. include:: ../../../_templates/installations/elastic/yum/uninstall_filebeat.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/elastic/deb/uninstall_filebeat.rst
+    .. include:: ../../../_templates/installations/elastic/deb/uninstall_filebeat.rst

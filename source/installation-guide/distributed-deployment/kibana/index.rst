@@ -17,7 +17,7 @@ Prerequisites
 
 Before installing Kibana, some extra packages must be installed:
 
-  .. include:: ../../_templates/installations/elastic/common/before_installation_kibana.rst
+  .. include:: ../../../_templates/installations/elastic/common/before_installation_kibana.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,14 +29,14 @@ This step is required only if Kibana will be installed on a different server as 
     .. group-tab:: Yum
 
 
-      .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
     .. group-tab:: APT
 
 
-      .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
+      .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -50,20 +50,20 @@ Kibana installation and configuration
         .. group-tab:: Yum
 
 
-            .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
+            .. include:: ../../../_templates/installations/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: APT
 
 
-            .. include:: ../../_templates/installations/elastic/deb/install_kibana.rst
+            .. include:: ../../../_templates/installations/elastic/deb/install_kibana.rst
 
 
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../_templates/installations/elastic/common/configure_kibana.rst
+    .. include:: ../../../_templates/installations/elastic/common/configure_kibana.rst
 
 
 #. Install the Wazuh Kibana plugin:
@@ -87,14 +87,14 @@ Kibana installation and configuration
 
             Copy the Elasticsearch certificates:
 
-            .. include:: ../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
+            .. include:: ../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 
 
         .. group-tab:: Different Elasticsearch server
 
 
-            .. include:: ../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+            .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
 
@@ -107,7 +107,7 @@ Kibana installation and configuration
 
 #. Enable and start the Kibana service:
 
-    .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
+    .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
 
     With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
@@ -141,11 +141,11 @@ To uninstall Kibana:
   .. group-tab:: Yum
 
 
-    .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/elastic/yum/uninstall_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/elastic/deb/uninstall_kibana.rst

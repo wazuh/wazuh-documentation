@@ -21,8 +21,6 @@ additional information about tuning the Wazuh-Elastic Stack environment.
         :maxdepth: 2
 
         introduction/index
-        all_in_one
-        elasticsearch-cluster/index
-        wazuh-cluster/index
-        kibana/index
+        all-in-one-deployment/index
+        distributed-deployment/index
         further-configuration
