@@ -128,7 +128,7 @@ Kibana installation and configuration
 Next steps
 ~~~~~~~~~~
 
-Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
 
 Uninstall Kibana
 ~~~~~~~~~~~~~~~~

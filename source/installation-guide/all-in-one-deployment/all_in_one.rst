@@ -255,7 +255,10 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note:: The Kibana service listens to the default port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
+Next steps
+----------
 
+Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
 
 Uninstall
 ---------
