@@ -119,10 +119,10 @@ After the first attempt to access the Wazuh Kibana plugin may prompt a message t
 
   hosts:
     - default:
-      url: <Wazuh_server_IP>
-      port: 55000
-      user: foo
-      password: bar
+       url: <Wazuh_server_IP>
+       port: 55000
+       user: foo
+       password: bar
 
 
 Next steps
