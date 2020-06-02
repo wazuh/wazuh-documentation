@@ -63,12 +63,12 @@ Elasticsearch configuration
 
 .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
 
-Elasticsearch roles
-~~~~~~~~~~~~~~~~~~~
+Elasticsearch roles and users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*Master*] In order to use Wazuh Kibana plugin properly, it is neccesary to add the roles ``wazuh-ui``, ``wazuh-ui-user`` and ``wazuh-ui-admin``. Besides, two users are added to the default users, ``wazuh_user`` and ``wazuh_admin``:
+[*Master*] In order to use Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
 
-    .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/add_roles_and_users.rst
+.. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
