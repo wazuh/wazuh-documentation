@@ -10,7 +10,7 @@ By default, the API will bind to port 55000/tcp and use self-signed certificates
 Configuration file
 ------------------
 
-The API configuration can be found inside ``/var/ossec/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it.
+The API configuration can be found inside ``/var/ossec/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>`.
 
 .. code-block:: yaml
 
@@ -69,13 +69,17 @@ You can view and edit the API configuration both through the ``api.yaml`` file a
 Manually enable https support
 -----------------------------
 
-Generate the key and certificate request (the Openssl package is required). Please note that this is already done by default when you run the API for the first time:
+Generate the key and certificate request (the Openssl package is required).
 
 .. code-block:: console
 
  # cd /var/ossec/api/configuration/ssl
  # openssl genrsa -des3 -out server.key 1024
  # openssl req -new -key server.key -out server.csr
+
+.. note::
+
+    Please note that this whole process is already done automatically when the API is run for the first time.
 
 By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands:
 
@@ -97,72 +101,74 @@ And remove temporary files:
  # rm server.csr
  # rm server.key.org
 
+.. _api_configuration_options:
+
 Configuration options
 ---------------------
 
 host
 ^^^^^^^^^^^^^^^^^^^^^^
-+-----------+--------------------------+---------------+-----------------------------------------------------------------+
-| Sub-field | Allowed values           | Default value | Description                                                     |
-+===========+==========================+===============+=================================================================+
-|           | Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the API is installed. |
-+-----------+--------------------------+---------------+-----------------------------------------------------------------+
++--------------------------+---------------+-----------------------------------------------------------------+
+| Allowed values           | Default value | Description                                                     |
++==========================+===============+=================================================================+
+| Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the API is installed. |
++--------------------------+---------------+-----------------------------------------------------------------+
 
 port
 ^^^^^^^^^^^^^^^^^^^^^^
-+-----------+-------------------------------+---------------+---------------------------------+
-| Sub-field | Allowed values                | Default value | Description                     |
-+===========+===============================+===============+=================================+
-|           | Any value between 1 and 65535 | 55000         | Port where the API will listen. |
-+-----------+-------------------------------+---------------+---------------------------------+
++-------------------------------+---------------+---------------------------------+
+| Allowed values                | Default value | Description                     |
++===============================+===============+=================================+
+| Any value between 1 and 65535 | 55000         | Port where the API will listen. |
++-------------------------------+---------------+---------------------------------+
 
 behind_proxy_server
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------------+---------------+----------------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                                |
-+============+======================+===============+============================================================================+
-|            | yes, true, no, false | true          | Set this option to "yes" in case the API is running behind a proxy server. |
-+------------+----------------------+---------------+----------------------------------------------------------------------------+
++----------------------+---------------+----------------------------------------------------------------------------+
+| Allowed values       | Default value | Description                                                                |
++======================+===============+============================================================================+
+| yes, true, no, false | true          | Set this option to "yes" in case the API is running behind a proxy server. |
++----------------------+---------------+----------------------------------------------------------------------------+
 
 auth_token_exp_timeout
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+-----------------------+---------------+---------------------------------------------------------+
-| Sub-fields | Allowed values        | Default value | Description                                             |
-+============+=======================+===============+=========================================================+
-|            | Any positive integer. | 36000         | Set how many seconds it takes for JWT tokens to expire. |
-+------------+-----------------------+---------------+---------------------------------------------------------+
++-----------------------+---------------+---------------------------------------------------------+
+| Allowed values        | Default value | Description                                             |
++=======================+===============+=========================================================+
+| Any positive integer. | 36000         | Set how many seconds it takes for JWT tokens to expire. |
++-----------------------+---------------+---------------------------------------------------------+
 
 use_only_authd
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------------+---------------+---------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                         |
-+============+======================+===============+=====================================================================+
-|            | yes, true, no, false | false         | Forces the use of ossec-authd when registering and removing agents. |
-+------------+----------------------+---------------+---------------------------------------------------------------------+
++----------------------+---------------+---------------------------------------------------------------------+
+| Allowed values       | Default value | Description                                                         |
++======================+===============+=====================================================================+
+| yes, true, no, false | false         | Forces the use of ossec-authd when registering and removing agents. |
++----------------------+---------------+---------------------------------------------------------------------+
 
 drop_privileges
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------------+---------------+-------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                         |
-+============+======================+===============+=====================================+
-|            | yes, true, no, false | true          | Run wazuh-api process as ossec user |
-+------------+----------------------+---------------+-------------------------------------+
++----------------------+---------------+-------------------------------------+
+| Allowed values       | Default value | Description                         |
++======================+===============+=====================================+
+| yes, true, no, false | true          | Run wazuh-api process as ossec user |
++----------------------+---------------+-------------------------------------+
 
 experimental_features
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------------+---------------+-----------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                       |
-+============+======================+===============+===================================+
-|            | yes, true, no, false | false         | Enable features under development |
-+------------+----------------------+---------------+-----------------------------------+
++----------------------+---------------+-----------------------------------+
+| Allowed values       | Default value | Description                       |
++======================+===============+===================================+
+| yes, true, no, false | false         | Enable features under development |
++----------------------+---------------+-----------------------------------+
 
 rbac
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values | Default value | Description                                                                                                                                                    |
-+============+================+===============+================================================================================================================================================================+
-| mode       | black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
-+------------+----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values | Default value | Description                                                                                                                                                    |
++================+===============+================================================================================================================================================================+
+| black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
++----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 https
 ^^^^^^^^^^^^^^^^^^^^^^
