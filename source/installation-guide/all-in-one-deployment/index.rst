@@ -4,6 +4,6 @@ All-in-One Deployment
 =====================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     all_in_one
