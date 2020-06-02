@@ -129,23 +129,3 @@ Next steps
 ~~~~~~~~~~
 
 Once the Wazuh-Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
-
-Uninstall Kibana
-~~~~~~~~~~~~~~~~
-
-To uninstall Kibana:
-
-.. tabs::
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/elastic/yum/uninstall_kibana.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/elastic/deb/uninstall_kibana.rst
