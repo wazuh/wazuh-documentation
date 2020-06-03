@@ -92,7 +92,7 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 
 
 .. note::
-  It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password amongst other useful API security information.
+  It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password among other useful API security information.
 
 Installing Elasticsearch
 ------------------------
