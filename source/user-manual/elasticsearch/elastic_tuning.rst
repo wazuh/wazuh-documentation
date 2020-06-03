@@ -7,8 +7,48 @@ Elasticsearch tuning
 
 This guide summarizes the relevant configurations that allow for the optimization of Elasticsearch.
 
+#. `Change users' password`_
 #. `Memory locking`_
 #. `Shards and replicas`_
+
+.. _change_elastic_pass:
+
+Change users' password
+----------------------
+
+In order to improve security, it is highly recommended to change Elasticsearch's default password. All the initial users for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``.
+
+To generate a new password, Opendistro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. The utility may need to be given execution permissions:
+
+  .. code-block:: console
+
+    # cd /usr/share/elasticsearch/plugins/opendistro_security/tools
+    # chmod +x hash.sh
+
+The following example shows how to generate a new hash:
+
+  .. code-block:: console
+
+    # ./hash.sh -p <new-password>
+
+  The value ``<new-password>`` must be replaced by the desired password. 
+
+The execution of the previous command will retrieve a hash code that must be placed on the hash section for the desired user in  ``internal_users.yml``: 
+
+  .. code-block:: yaml
+    :emphasize-lines: 2
+
+    user:
+      hash: <new_generated_hash>
+
+In order to load the changes made, it is necessary to execute the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``: 
+
+  .. code-block:: console
+
+    # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+    # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
+
+The value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch's IP. 
 
 Memory locking
 --------------
