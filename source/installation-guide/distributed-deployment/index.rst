@@ -6,6 +6,4 @@ Distributed Deployment
 .. toctree::
     :maxdepth: 2
 
-    elasticsearch-cluster/index
-    wazuh-cluster/index
-    kibana/index
+    step-by-step-installation/index
