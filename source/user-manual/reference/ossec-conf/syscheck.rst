@@ -43,6 +43,7 @@ Options
 - `synchronization`_
 - `max_eps`_
 - `database`_
+- `file_limit`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -693,6 +694,49 @@ Specify where is the database going to be stored.
 | **Allowed values** | disk, memory                          |
 +--------------------+---------------------------------------+
 
+
+file_limit
+^^^^^^^^^^
+
+.. versionadded:: 3.13
+
+Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+
+.. code-block:: xml
+
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>
+      <enabled>yes</enabled>
+      <entries>100000</entries>
+    </file_limit>
+
+
+**enabled**
+
+.. versionadded:: 3.13
+
+Specifies whether there will be a limit on the number of monitored files or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+
+**entries**
+
+.. versionadded:: 3.13
+
+Specifies the number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
+
+
 .. _reference_ossec_syscheck_synchronization:
 
 synchronization
@@ -846,6 +890,9 @@ Default Unix configuration
 
     <!-- Maximum output throughput -->
     <max_eps>100</max_eps>
+
+    <!-- Store the database in disk or in memory -->
+    <database>disk</database>
 
     <!-- Database synchronization settings -->
     <synchronization>
