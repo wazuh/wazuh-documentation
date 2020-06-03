@@ -5,6 +5,7 @@
 Uninstalling the Wazuh-Elastic Stack components
 ===============================================
 
+This document will give instructions to uninstall each Wazuh-Elastic Stack component. 
 
 Uninstall the Wazuh manager and the Wazuh API
 ---------------------------------------------
