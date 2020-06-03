@@ -5,7 +5,7 @@
 Securing the Wazuh API
 ======================
 
-By default, the communication between the Wazuh Kibana plugin and the Wazuh API is  encrypted with HTTPS. This means that if you do not provide your own private key and certificate, the Wazuh API will generate its own. In addition to this, both default user and password is ``wazuh``. For this reason, it is highly recommended that you change the default password at least and use your own certificate since the one created by the Wazuh API is self signed. These are the **recommended mininum changes** that you should do:
+By default, the communication between the Wazuh Kibana plugin and the Wazuh API is encrypted with HTTPS. This means that if you do not provide your own private key and certificate, the Wazuh API will generate its own in the first run. In addition, the default user is ``wazuh`` and the default password is also ``wazuh``. For this reason, it is highly recommended to at least change the default password and to use your own certificate since the one created by the Wazuh API is self signed. These are the **recommended changes** to apply:
 
 #. Modify HTTPS parameters:
 
@@ -17,7 +17,7 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
       INFO: Generated private key file in WAZUH_PATH/api/configuration/ssl/server.key.
       INFO: Generated certificate file in WAZUH_PATH/api/configuration/ssl/server.crt.
 
-    You can modify the HTTPS options, including its status or the path to the certificate, by modifying the API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
+    These HTTPS options can be changed, including its status or the path to the certificate, by modifying the API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
 
     .. code-block:: yaml
 
@@ -28,7 +28,7 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
 
-    After you have configured these, you will need to restart the Wazuh API service:
+    After you have configured these parameters, it will be necessary to restart the Wazuh API service:
 
       * For Systemd:
 
@@ -42,36 +42,30 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
 
           # service wazuh-api restart
 
-#. Change the default password: 
+#. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
 
-    You can change the default password using the Wazuh API. To do this, you need to do a request to the following endpoint: ``PUT ​/security​/users​/{username}``
+    You can change the default password using the Wazuh API. To do this, you need to do a request to the following Wazuh API endpoint: ``PUT ​/security​/users​/{username}``
 
     .. note::
-      The password for users must have a minimum length of 8 characters and must have at least one uppercase and lowercase letter, a number and a symbol.
+      The password for users must have a minimum length of 8 characters and also use at least one uppercase and lowercase letter, a number and a symbol.
 
-    After configuring this, you will need to restart the Wazuh API service.
+    After changing the password, there is no need to restart the Wazuh API service but a new authentication will be required for the affected users.
 
-      * For Systemd:
+#. Change the default host and port:
 
-        .. code-block:: console
+    The default host is ``0.0.0.0``, which means that the Wazuh API will accept any incoming connection. You can restrict this modifying the API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
 
-          # systemctl restart wazuh-api
+    .. code-block:: console
 
-      * For SysV Init:
+      host: 0.0.0.0
 
-        .. code-block:: console
-
-          # service wazuh-api restart
-
-#. Change the default port:
-
-    You can change the default port modifying the API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
+    The default port can be changed as well in the same configuration file:
 
     .. code-block:: console
 
       port: 55000
 
-    After configuring this, you will need to restart the Wazuh API service.
+    After configuring these parameters, it will be necessary to restart the Wazuh API service.
 
       * For Systemd:
 
@@ -84,3 +78,5 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
         .. code-block:: console
 
           # service wazuh-api restart
+
+You can check a complete API configuration guide :doc:`here <../user-manual/api/configuration>`.
