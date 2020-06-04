@@ -20,8 +20,13 @@ To allow the installation process and guarantee the expected performance of the 
 The user can choose between Step by step installation, a manual way of carrying out the process, or Unattended installation, an automated way using scripts:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
+    :hidden:
 
     requirements
+
+.. toctree::
+    :maxdepth: 2
+
     unattended-installation
     step-by-step-installation/index

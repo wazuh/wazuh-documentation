@@ -30,6 +30,5 @@ The user can choose between Step by step installation, a manual way of carrying 
     :maxdepth: 1
     :glob:
 
-    requirements
     unattended-installation
     all_in_one
