@@ -107,6 +107,14 @@ Configuring Elasticsearch
 
 .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
+Elasticsearch roles and users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to use Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
+
+.. include:: ../../_templates/installations/elastic/common/elastic-single-node/add_roles_and_users.rst
+
+
 Certificates creation
 ~~~~~~~~~~~~~~~~~~~~~
 
