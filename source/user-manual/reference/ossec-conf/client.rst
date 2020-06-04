@@ -290,6 +290,7 @@ Options
 - `authorization_pass`_
 - `auto_method`_
 - `delay_after_enrollment`_
+- `use_source_ip`_
 
 enabled
 ^^^^^^^
@@ -436,6 +437,17 @@ Time agentd should wait after a successfull registration.
 | **Allowed values** | number of seconds                           |
 +--------------------+---------------------------------------------+
 
+use_source_ip
+^^^^^^^^^^^^^
+
+Force manager to compute IP from agent message.
+
++--------------------+-------------------------------------+
+| **Default value**  | no                                  |
++--------------------+-------------------------------------+
+| **Allowed values** | yes or no                           |
++--------------------+-------------------------------------+
+
 Sample configuration
 --------------------
 
@@ -455,6 +467,7 @@ Sample configuration
         <agent_key_path>/path/to/agent.key</agent_key_path>
         <authorization_pass>TopSecret</authorization_pass>
         <auto_method>no</auto_method>
-        <wait_time>20</wait_time>
+        <delay_after_enrollment>20</delay_after_enrollment>
+        <use_source_ip>no</use_source_ip>
       </auto_enrollment>
     </client>
