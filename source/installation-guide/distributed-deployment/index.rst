@@ -1,8 +1,8 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _step_by_step_index:
+.. _distributed_index:
 
-Distributed Deployment
+Distributed deployment
 ======================
 
 This section guides through the distributed installation and configuration of the Wazuh server and Elastic Stack. The components will be installaed on separate hosts. Kibana can be installed on the same server as the Elasticsearch node, or on the separate one. This type of deployment is appropriate for big production environments as it provides the high availability and scalability of the services.
