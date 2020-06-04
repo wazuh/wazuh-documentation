@@ -60,7 +60,7 @@ The Installation guide is divided into two independent sections, ``All-in-One de
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | High availability and scalability of the services | Lacks of the high availability and scalability of the services as all the components are installed on the same server                                    | Provides the high availability and scalability of the services as all the components are installed on the different servers. Kibana can be installed on the same server as the Elasticsearch node, or on the separate one. |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Hardware requirements                             | Lower costs as requires only one server. The detailed hardware requirements for All-in-One deployment can be found :ref:`here <all_in_one_requirements>` | Higher costs as requires a separate server for each component installed. The detailed hardware requirements for All-in-One deployment can be found :ref:`here <step_by_step_requirements>`                                 |
+| Hardware requirements                             | Lower costs as requires only one server. The detailed hardware requirements for All-in-One deployment can be found :ref:`here <all_in_one_requirements>` | Higher costs as requires a separate server for each component installed. The detailed hardware requirements for All-in-One deployment can be found :ref:`here <distributed_requirements>`                                  |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Security of data transfer                         | Ensures the security of data transfer by providing the user generated certificates                                                                       | Ensures the security of data transfer by providing the user generated certificates                                                                                                                                         |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -87,15 +87,8 @@ The Wazuh server and Elastic Stack components can be installed in the following 
 Start deploying Wazuh server and Elastic Stack
 ----------------------------------------------
 
-Choose the deployment types:
+.. toctree::
+    :maxdepth: 2
 
-- :ref:`All-in-One deployment <all_in_one_index>`
-- :ref:`Distributed deployment <step_by_step_index>`
-
-.. topic:: Contents
-
-  .. toctree::
-      :maxdepth: 2
-
-      all-in-one-deployment/index
-      distributed-deployment/index
+    all-in-one-deployment/index
+    distributed-deployment/index
