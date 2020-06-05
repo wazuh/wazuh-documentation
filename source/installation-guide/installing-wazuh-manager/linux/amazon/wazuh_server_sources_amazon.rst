@@ -112,7 +112,7 @@ You can check the API service status with:
 
       # service wazuh-api status
 
-.. note:: Check out the section :ref:`securing_api` to set up some additional settings.
+.. note:: Check out the section :doc:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
 
 Installing Filebeat
 -------------------
