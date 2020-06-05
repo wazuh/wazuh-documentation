@@ -129,7 +129,15 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     elasticsearch.hosts: ["http://<elasticsearch_ip>:9200"]
 
-5. Enable and start the Kibana service:
+5. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+
+  .. code-block:: console
+
+    # cat >> /etc/default/kibana << EOF
+    NODE_OPTIONS="--max_old_space_size=2048"
+    EOF
+
+6. Enable and start the Kibana service:
 
   a) For Systemd:
 
@@ -146,7 +154,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # chkconfig --add kibana
     # service kibana start
 
-6. (Optional) Disable the Elasticsearch repository:
+7. (Optional) Disable the Elasticsearch repository:
 
   It is recommended that the Elasticsearch repository to be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh plugin for Kibana. To do this, use the following command:
 
