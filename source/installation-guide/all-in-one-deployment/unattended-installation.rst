@@ -7,8 +7,25 @@ This section will explain how to install a full Wazuh-Elastic enviroment on a si
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-Download the script and run it: 
+In order to download the script, ``curl`` package must be installed on the system: 
+
+.. tabs::
+
+  .. group-tab:: Yum
 
     .. code-block:: console
 
-        # wget https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash all-in-one-installation.sh
+        # yum install curl
+
+
+  .. group-tab:: APT
+
+    .. code-block:: console
+
+        # apt install curl
+
+Download the script and run it: 
+
+.. code-block:: console
+
+    # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
