@@ -249,7 +249,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       # mkdir /etc/kibana/certs
       # mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/
 
-#. Link Kibana's socket to priviledged port 443
+#. Link Kibana's socket to priviledged port 443:
 
     .. code-block:: console
 
