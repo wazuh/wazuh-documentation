@@ -18,18 +18,18 @@
 
     Choose one option according to the OS used:
 
-    a) Debian based OS:
-
-      .. code-block:: console
-
-        # update-rc.d kibana defaults 95 10
-        # service kibana start
-
-    b) RPM based OS:
+    a) RPM based OS:
 
       .. code-block:: console
 
         # chkconfig --add kibana
+        # service kibana start
+    
+    b) Debian based OS:
+
+      .. code-block:: console
+
+        # update-rc.d kibana defaults 95 10
         # service kibana start
 
 .. End of include file
