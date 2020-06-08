@@ -68,7 +68,7 @@ Elasticsearch roles and users
 
 [*Master*] In order to use Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
 
-.. include:: ../../../../_templates/installations/elastic/common/elastic-multi-node/add_roles_and_users.rst
+.. include:: ../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
