@@ -102,8 +102,8 @@ Apart from the extra users, there are three extra roles added. These roles are i
 
 These users and roles are designed to be used along the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
 
-Further configuration
----------------------
+Customizing the installation
+----------------------------
 
 After the installation, the Wazuh API will use the default credentials but it is highly recommended to change them. The following document :ref:`securing_api` explains how to change the default user and password among other useful API security information.
 
