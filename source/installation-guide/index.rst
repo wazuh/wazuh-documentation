@@ -55,7 +55,7 @@ The Wazuh server and Elastic Stack components can be installed in the following 
 
 - Debian 7 or greater.
 
-- Fedor 22 or greater.
+- Fedora 22 or greater.
 
 - Oracle Linux 5 or greater.
 
