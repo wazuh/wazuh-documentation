@@ -10,14 +10,15 @@ The endpoints required to manage RBAC belong to the *Security* group. To run the
 
 Set RBAC mode
 -------------
-You can modify the RBAC mode (which we mentioned in the :ref:`How it works <api_rbac_how_it_works>` section). To do this, you need to edit the API configuration file found in ``/var/ossec/api/configuration/api.yaml``.
+You can modify the RBAC mode (which we mentioned in the :ref:`How it works <api_rbac_how_it_works>` section). This is a security configuration, so it is necessary to use the security endpoint ``/security/config``, specifically the ``PUT`` method. Just write the following setting inside the request body of the endpoint, setting the desired mode (white/black).
 
-.. code-block:: yaml
+.. code-block:: json
 
-    rbac:
-        mode: white
+    {
+      "mode": "white"
+    }
 
-You can also use the endpoint ``PUT /manager/api/config`` (or PUT ``/cluster/api/config`` if you have a Wazuh cluster deployed) to perform the same action.
+You can also change other settings (not related to RBAC) such as the duration of the JWT tokens, as well as check the current configuration with the ``GET`` method or restore the default one with the ``DELETE`` method.
 
 .. note::
     Wazuh API needs to be restarted for the changes to take effect.

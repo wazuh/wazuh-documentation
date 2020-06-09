@@ -11,15 +11,6 @@ Since the policies are not directly related to users, it is not necessary to ass
 
 After configuring RBAC, there will be groups that can only see and do certain actions on specified resources that have previously been established. It would be ensured that members of a Security-team have 'read' access to all agents, while the Sales-team has 'read' and 'modify' permissions only to agents in their department (but not delete permissions).
 
-RBAC modes
-----------
-
-RBAC in Wazuh can be configured in two different and opposite ways: **black** and **white**. The choice of one mode or another determines what will be the behaviour of the created policies.
-
-- **White list mode:** everything is forbidden. The administrator configure roles to give permissions.
-- **Black list mode:** everything is allowed. The administrator configure roles to restrict permissions.
-
-
 Actions, resources and effect
 -----------------------------
 Policies control API permissions using three elements: actions, resources, and effect.
@@ -41,3 +32,11 @@ Policies control API permissions using three elements: actions, resources, and e
 
 .. note::
     For a complete list of resources and actions, please visit :ref:`RBAC reference <api_rbac_reference>`.
+
+RBAC modes
+----------
+
+RBAC in Wazuh can be configured in two different and opposite ways: **black** and **white**. The choice of one mode or another determines what will be the behaviour of the created policies. If the parameter ``effect`` of a policy is set to ``allow``, that policy will be allowed in both black and white mode. If the effect is ``deny``, it will be denied in both black and white. Therefore, the RBAC mode only affects those actions that are not specified within each policy.
+
+- **White list mode:** everything is forbidden. The administrator configure roles to give permissions.
+- **Black list mode:** everything is allowed. The administrator configure roles to restrict permissions.

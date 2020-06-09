@@ -79,7 +79,7 @@ You can also find a set of default roles and policies, which you can use instead
         - `manager:update_api_config`_
         - `manager:upload_file`_
 
-    - `MITRE`_
+    - `Mitre`_
         - `mitre:read`_
 
     - `Rules`_
@@ -93,7 +93,9 @@ You can also find a set of default roles and policies, which you can use instead
         - `security:create`_
         - `security:delete`_
         - `security:read`_
+        - `security:read_config`_
         - `security:update`_
+        - `security:update_config`_
 
     - `Syscheck`_
         - `syscheck:clear`_
@@ -304,7 +306,7 @@ cluster:delete_file
 
 cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /cluster/api/config (`*:*`_)
+- GET /cluster/api/config (`node:id`_)
 
 cluster:read_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -340,8 +342,8 @@ cluster:status
 
 cluster:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /cluster/api/config (`*:*`_)
-- DELETE /cluster/api/config (`*:*`_)
+- PUT /cluster/api/config (`node:id`_)
+- DELETE /cluster/api/config (`node:id`_)
 
 cluster:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -443,7 +445,7 @@ manager:upload_file
 - PUT /manager/files (`*:*`_)
 
 
-MITRE
+Mitre
 ^^^^^^^^^^^^^^^
 mitre:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -493,6 +495,10 @@ security:read
 - GET /security/roles (`role:id`_)
 - GET /security/users (`user:id`_)
 
+security:read_config
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- GET /security/config (`*:*`_)
+
 security:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - POST /security/roles/{role_id}/policies (`role:id`_, `policy:id`_)
@@ -500,6 +506,12 @@ security:update
 - PUT /security/policies/{policy_id} (`policy:id`_)
 - PUT /security/roles/{role_id} (`role:id`_)
 - PUT /security/users/{username} (`user:id`_)
+
+security:update_config
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- PUT /security/config (`*:*`_)
+- DELETE /security/config (`*:*`_)
+
 
 
 Syscheck
@@ -710,9 +722,11 @@ Provide full access to all security related functionalities.
 
 Actions
     - `security:read`_
+    - `security:read_config`_
     - `security:create`_
     - `security:create_user`_
     - `security:update`_
+    - `security:update_config`_
     - `security:delete`_
 
 Resources
