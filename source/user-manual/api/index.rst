@@ -32,4 +32,5 @@ Wazuh API capabilities:
        configuration
        rbac/index
        reference
+       equivalence
        examples
