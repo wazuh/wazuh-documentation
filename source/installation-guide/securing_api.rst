@@ -5,7 +5,7 @@
 Securing the Wazuh API
 ======================
 
-By default, the communication between the Wazuh Kibana plugin and the Wazuh API is encrypted with HTTPS. This means that if you do not provide your own private key and certificate, the Wazuh API will generate its own in the first run. In addition, the default user is ``wazuh`` and the default password is also ``wazuh``. For this reason, it is highly recommended to at least change the default password and to use your own certificate since the one created by the Wazuh API is self signed. These are the **recommended changes** to apply:
+By default, the communication between the Wazuh Kibana plugin and the Wazuh API is encrypted with HTTPS. This means that if you do not provide your own private key and certificate, the Wazuh API will generate its own in the first run. In addition, the default users are ``wazuh`` and ``wazuh-wui``, and the default password is ``wazuh`` for both of them. For this reason, it is highly recommended to at least change the default passwords and to use your own certificate since the one created by the Wazuh API is self signed. These are the **recommended changes** to apply:
 
 #. Modify HTTPS parameters:
 
