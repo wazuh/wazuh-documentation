@@ -34,12 +34,12 @@ Prepare the Elastic Stack
 
     .. code-block:: console
 
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo      
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
 
 Upgrade Elasticsearch
 ---------------------
 
-#. Disable shard allocation
+#. Disable shard allocation:
 
     .. code-block:: bash
 
@@ -51,19 +51,19 @@ Upgrade Elasticsearch
       }
       '
 
-#. Stop non-essential indexing and perform a synced flush. (Optional)
+#. Stop non-essential indexing and perform a synced flush (optional):
 
     .. code-block:: bash
 
       curl -X POST "localhost:9200/_flush/synced"
 
-#. Shut down a single node.
+#. Shut down a single node:
 
     .. code-block:: console
 
       # systemctl stop elasticsearch
 
-#. Upgrade the node you shut down.
+#. Upgrade the node you shut down:
 
     * For CentOS/RHEL/Fedora:
 
@@ -77,7 +77,7 @@ Upgrade Elasticsearch
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
 
-#. Restart the service.
+#. Restart the service:
 
     .. code-block:: console
 
@@ -90,7 +90,7 @@ Upgrade Elasticsearch
 
       curl -X GET "localhost:9200/_cat/nodes"
 
-#. Reenable shard allocation.
+#. Reenable shard allocation:
 
     .. code-block:: bash
 
@@ -102,7 +102,7 @@ Upgrade Elasticsearch
       }
       '
 
-#. Before upgrading the next node, wait for the cluster to finish shard allocation.
+#. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
     .. code-block:: bash
 
@@ -113,7 +113,7 @@ Upgrade Elasticsearch
 Upgrade Filebeat
 ----------------
 
-#. Upgrade Filebeat.
+#. Upgrade Filebeat:
 
     * For CentOS/RHEL/Fedora:
 
@@ -127,7 +127,7 @@ Upgrade Filebeat
 
         # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
-#. Update the configuration file.
+#. Update the configuration file:
 
     .. code-block:: console
 
@@ -154,7 +154,7 @@ Upgrade Filebeat
 
       output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
 
-#. Restart Filebeat.
+#. Restart Filebeat:
 
     .. code-block:: console
 
@@ -168,21 +168,59 @@ Upgrade Kibana
   Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
 
 
-#. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
+#. Copy the Wazuh Kibana plugin configuration file to its new location:
 
-    .. code-block:: console
+    .. tabs::
 
-      # mkdir -p /usr/share/kibana/optimize/wazuh/config
-      # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-#. Remove the Wazuh app.
+        .. group-tab:: For upgrades from 3.11.x to 3.12.x
+
+          .. code-block:: console
+
+            # mkdir -p /usr/share/kibana/optimize/wazuh/config
+            # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+
+
+        .. group-tab:: For upgrades from 3.10.x or older to 3.12.x
+
+          .. code-block:: console
+
+            # mkdir -p /usr/share/kibana/optimize/wazuh/config
+            # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+
+          Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
+
+          .. code-block:: yaml
+
+            hosts:
+              - <id>:
+                 url: http(s)://<api_url>
+                 port: <api_port>
+                 user: <api_user>
+                 password: <api_password>
+
+          The following values need to be replaced:
+
+            -  ``<id>``: an arbitrary ID.
+
+            -  ``<api_url>``: url of the Wazuh API.
+
+            -  ``<api_port>``: port.
+
+            -  ``<api_user>``: credentials to authenticate.
+
+            -  ``<api_password>``: credentials to authenticate.
+
+
+
+#. Remove the Wazuh app:
 
     .. code-block:: console
 
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin remove wazuh
 
-#. Upgrade Kibana.
+#. Upgrade Kibana:
 
     * For CentOS/RHEL/Fedora:
 
@@ -196,20 +234,20 @@ Upgrade Kibana
 
         # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
-#. Remove generated bundles.
+#. Remove generated bundles:
 
     .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
 
-#. Update file permissions. This will avoid several errors prior to updating the app.
+#. Update file permissions. This will avoid several errors prior to updating the app:
 
     .. code-block:: console
 
       # chown -R kibana:kibana /usr/share/kibana/optimize
       # chown -R kibana:kibana /usr/share/kibana/plugins
 
-#. Install the Wazuh app.
+#. Install the Wazuh app:
 
     * From URL:
 
@@ -225,7 +263,7 @@ Upgrade Kibana
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
-#. Update configuration file permissions.
+#. Update configuration file permissions:
 
     .. code-block:: console
 
@@ -240,7 +278,7 @@ Upgrade Kibana
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
 
-#. Restart Kibana.
+#. Restart Kibana:
 
     .. code-block:: console
 
@@ -263,7 +301,7 @@ Disabling repositories
         # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
         # apt-get update
 
-      Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+      Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``):
 
       .. code-block:: console
 
