@@ -34,6 +34,17 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.0 ****/
+
+/* Pages added in 4.0 */
+
+newUrls['4.0'] = [
+  '/user-manual/api/rbac/index.html',
+  '/user-manual/api/rbac/how-it-works.html',
+  '/user-manual/api/rbac/configuration.html',
+  '/user-manual/api/rbac/reference.html',
+];
+
 /* *** RELEASE 3.12 ****/
 
 /* Pages added in 3.12 */
