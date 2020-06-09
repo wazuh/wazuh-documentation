@@ -17,6 +17,7 @@ This API reference is organized by resources:
 * `Experimental`_
 * `Lists`_
 * `Manager`_
+* `Mitre`_
 * `Rootcheck`_
 * `Rules`_
 * `Security Configuration Assessment`_
@@ -149,6 +150,9 @@ Request List
 	* POST /manager/files  (`Update local file`_)
 	* PUT /manager/restart  (`Restart Wazuh manager`_)
 
+`Mitre`_
+    * GET /mitre  (`Get information from Mitre database`_)
+
 `Rootcheck`_
 	* DELETE /rootcheck  (`Clear rootcheck database`_)
 	* DELETE /rootcheck/:agent_id  (`Clear rootcheck database of an agent`_)
@@ -169,6 +173,9 @@ Request List
 	* GET /rules/hipaa  (`Get rule hipaa requirements`_)
 	* GET /rules/nist-800-53  (`Get rule nist-800-53 requirements`_)
 	* GET /rules/pci  (`Get rule pci requirements`_)
+	* GET /rules/tsc  (`Get rule tsc requirements`_)
+	* GET /rules/mitre  (`Get rule mitre requirements`_)
+
 
 `Security Configuration Assessment`_
 	* GET /sca/:agent_id  (`Get security configuration assessment (SCA) database`_)
@@ -6576,7 +6583,187 @@ Returns a summary of the current remoted stats.
 	      "dequeued_after_close": 0
 	   }
 	}
-	
+
+
+
+
+Mitre
+----------------------------------------
+Info
+++++++++++++++++++++++++++++++++++++++++
+
+Get information from Mitre database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns information from Mitre database
+
+**Request**:
+
+``GET`` ::
+
+	/mitre
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields separated by commas.                                                                                                                                                                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Advanced query filtering.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``id``                       | String        | Filter by attack ID.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``phase_name``               | String        | Filter by phase name.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``platform_name``            | String        | Filter by platform name.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/mitre?limit=2&offset=4&pretty"
+
+**Example Response:**
+
+.. code-block:: json
+	:class: output
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "json": {
+	               "x_mitre_data_sources": [
+	                  "File monitoring",
+	                  "Process monitoring",
+	                  "Process command-line parameters"
+	               ],
+	               "type": "attack-pattern",
+	               "name": "Data from Local System",
+	               "description": "Sensitive data can be collected from local system sources, such as the file system or databases of information residing on the system prior to Exfiltration.\n\nAdversaries will often search the file system on computers they have compromised to find files of interest. They may do this using a [Command-Line Interface](https://attack.mitre.org/techniques/T1059), such as [cmd](https://attack.mitre.org/software/S0106), which has functionality to interact with the file system to gather information. Some adversaries may also use [Automated Collection](https://attack.mitre.org/techniques/T1119) on the local system.\n",
+	               "id": "attack-pattern--3c4a2599-71ee-4405-ba1e-0e28414b4bc5",
+	               "x_mitre_platforms": [
+	                  "Linux",
+	                  "macOS",
+	                  "Windows",
+	                  "GCP",
+	                  "AWS",
+	                  "Azure"
+	               ],
+	               "object_marking_refs": [
+	                  "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+	               ],
+	               "x_mitre_version": "1.1",
+	               "x_mitre_system_requirements": [
+	                  "Privileges to access certain files and directories"
+	               ],
+	               "x_mitre_detection": "Monitor processes and command-line arguments for actions that could be taken to collect files from a system. Remote access tools with built-in features may interact directly with the Windows API to gather data. Data may also be acquired through Windows system management tools such as [Windows Management Instrumentation](https://attack.mitre.org/techniques/T1047) and [PowerShell](https://attack.mitre.org/techniques/T1086).",
+	               "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+	               "x_mitre_contributors": [
+	                  "Praetorian"
+	               ],
+	               "created": "2017-05-31T21:30:20.537Z",
+	               "kill_chain_phases": [
+	                  {
+	                     "kill_chain_name": "mitre-attack",
+	                     "phase_name": "Collection"
+	                  }
+	               ],
+	               "external_references": [
+	                  {
+	                     "external_id": "T1005",
+	                     "source_name": "mitre-attack",
+	                     "url": "https://attack.mitre.org/techniques/T1005"
+	                  }
+	               ],
+	               "modified": "2019-10-04T22:05:50.580Z"
+	            },
+	            "platform_name": [
+	               "AWS",
+	               "Azure",
+	               "GCP",
+	               "Linux",
+	               "Windows",
+	               "macOS"
+	            ],
+	            "phase_name": [
+	               "Collection"
+	            ],
+	            "id": "T1005"
+	         },
+	         {
+	            "json": {
+	               "x_mitre_data_sources": [
+	                  "API monitoring"
+	               ],
+	               "x_mitre_permissions_required": [
+	                  "Administrator"
+	                ],
+	               "name": "File System Logical Offsets",
+	               "description": "Windows allows programs to have direct access to logical volumes. Programs with direct access may read and write files directly from the drive by analyzing file system data structures. This technique bypasses Windows file access controls as well as file system monitoring tools. (Citation: Hakobyan 2009)\n\nUtilities, such as NinjaCopy, exist to perform these actions in PowerShell. (Citation: Github PowerSploit Ninjacopy)",
+	               "id": "attack-pattern--0c8ab3eb-df48-4b9c-ace7-beacaac81cc5",
+	               "x_mitre_platforms": [
+	                  "Windows"
+	               ],
+	               "object_marking_refs": [
+	                  "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"
+	               ],
+	               "x_mitre_version": "1.0",
+	               "type": "attack-pattern",
+	               "kill_chain_phases": [
+	                  {
+	                     "kill_chain_name": "mitre-attack",
+	                     "phase_name": "Defense Evasion"
+	                  }
+	               ],
+	               "x_mitre_detection": "Monitor handle opens on drive volumes that are made by processes to determine when they may directly access logical drives. (Citation: Github PowerSploit Ninjacopy)\n\nMonitor processes and command-line arguments for actions that could be taken to copy files from the logical drive and evade common file system protections. Since this technique may also be used through [PowerShell](https://attack.mitre.org/techniques/T1086), additional logging of PowerShell scripts is recommended.",
+	               "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",
+	               "created": "2017-05-31T21:30:20.934Z",
+	               "modified": "2018-10-17T00:14:20.652Z",
+	               "external_references": [
+	                  {
+	                     "external_id": "T1006",
+	                     "source_name": "mitre-attack",
+	                     "url": "https://attack.mitre.org/techniques/T1006"
+	                  },
+	                  {
+	                     "description": "Hakobyan, A. (2009, January 8). FDump - Dumping File Sectors Directly from Disk using Logical Offsets. Retrieved November 12, 2014.",
+	                     "source_name": "Hakobyan 2009",
+	                     "url": "http://www.codeproject.com/Articles/32169/FDump-Dumping-File-Sectors-Directly-from-Disk-usin"
+	                  },
+	                  {
+	                     "description": "Bialek, J. (2015, December 16). Invoke-NinjaCopy.ps1. Retrieved June 2, 2016.",
+	                     "source_name": "Github PowerSploit Ninjacopy",
+	                     "url": "https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-NinjaCopy.ps1"
+	                  }
+	               ],
+	               "x_mitre_defense_bypassed": [
+	                  "File monitoring",
+	                  "File system access controls"
+	               ]
+	            },
+	            "platform_name": [
+	               "Windows"
+	            ],
+	            "phase_name": [
+	               "Defense Evasion"
+	            ],
+	            "id": "T1006"
+	         }
+	      ],
+	      "totalItems": 266
+	   }
+	}
+
 
 
 
@@ -6952,6 +7139,10 @@ Returns all rules.
 | ``nist-800-53``              | String        | Filters the rules by nist-800-53 requirement.                                                                                                                                                                                        |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``gpg13``                    | String        | Filters the rules by gpg13 requirement.                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``mitre``                    | String        | Filters the rules by mitre requirement.                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tsc``                      | String        | Filters the rules by tsc requirement.                                                                                                                                                                                                |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``q``                        | String        | Query to filter results by. For example q=id=89055                                                                                                                                                                                   |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -7441,6 +7632,114 @@ Returns the PCI requirements of all rules.
 	   }
 	}
 	
+
+Get rule tsc requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the TSC requirements of all rules.
+
+**Request**:
+
+``GET`` ::
+
+	/rules/tsc
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/tsc?offset=0&limit=10&pretty"
+
+**Example Response:**
+
+.. code-block:: json
+	:class: output
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         "A1.2",
+	         "CC6.1",
+	         "CC6.2",
+	         "CC6.3",
+	         "CC6.4",
+	         "CC6.6",
+	         "CC6.7",
+	         "CC6.8",
+	         "CC7.1",
+	         "CC7.2"
+	      ],
+	      "totalItems": 15
+	   }
+	}
+
+
+Get rule mitre requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the MITRE requirements of all rules.
+
+**Request**:
+
+``GET`` ::
+
+	/rules/mitre
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/mitre?offset=0&limit=10&pretty"
+
+**Example Response:**
+
+.. code-block:: json
+	:class: output
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         "T1001",
+	         "T1017",
+	         "T1021",
+	         "T1031",
+	         "T1035",
+	         "T1036",
+	         "T1040",
+	         "T1043",
+	         "T1046",
+	         "T1047"
+	      ],
+	      "totalItems": 53
+	   }
+	}
+
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
