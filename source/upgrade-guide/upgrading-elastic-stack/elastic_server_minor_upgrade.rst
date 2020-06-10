@@ -5,6 +5,10 @@
 Upgrading Elastic Stack from 7.x to 7.y
 =======================================
 
+.. warning::
+  Until the Wazuh version ``3.10.x``, the Wazuh API entries were stored on the Elasticsearch's ``.wazuh`` index. In the later versions, these entries are stored in the Wazuh Kibana plugin configuration file.
+  For the upgrades from version 3.10.x or older, these data should be previously saved and manually added into the Wazuh Kibana plugin configuration file as described in the Upgrade Kibana subsection.
+
 Prepare the Elastic Stack
 -------------------------
 
@@ -165,51 +169,57 @@ Upgrade Kibana
 --------------
 
 .. warning::
-  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
-
+  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
 #. Copy the Wazuh Kibana plugin configuration file to its new location:
 
     .. tabs::
 
-
         .. group-tab:: For upgrades from 3.11.x to 3.12.x
 
-          .. code-block:: console
+            Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
-            # mkdir -p /usr/share/kibana/optimize/wazuh/config
-            # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+              .. code-block:: console
+
+                # mkdir -p /usr/share/kibana/optimize/wazuh/config
+                # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
 
         .. group-tab:: For upgrades from 3.10.x or older to 3.12.x
 
-          .. code-block:: console
 
-            # mkdir -p /usr/share/kibana/optimize/wazuh/config
-            # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+            Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
-          Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
+                  .. code-block:: console
 
-          .. code-block:: yaml
+                    # mkdir -p /usr/share/kibana/optimize/wazuh/config
+                    # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-            hosts:
-              - <id>:
-                 url: http(s)://<api_url>
-                 port: <api_port>
-                 user: <api_user>
-                 password: <api_password>
 
-          The following values need to be replaced:
+            Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
 
-            -  ``<id>``: an arbitrary ID.
+                  .. code-block:: yaml
 
-            -  ``<api_url>``: url of the Wazuh API.
+                    hosts:
+                      - <id>:
+                         url: http(s)://<api_url>
+                         port: <api_port>
+                         user: <api_user>
+                         password: <api_password>
 
-            -  ``<api_port>``: port.
+                  The following values need to be replaced:
 
-            -  ``<api_user>``: credentials to authenticate.
+                    -  ``<id>``: an arbitrary ID.
 
-            -  ``<api_password>``: credentials to authenticate.
+                    -  ``<api_url>``: url of the Wazuh API.
+
+                    -  ``<api_port>``: port.
+
+                    -  ``<api_user>``: credentials to authenticate.
+
+                    -  ``<api_password>``: credentials to authenticate.
+
+                  In case of having more Wazuh API entries, each of them must be added manually.
 
 
 
