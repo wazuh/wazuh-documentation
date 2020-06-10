@@ -8,7 +8,7 @@ Installation guide
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-The Installation guide section aims to guide the user through the process of the Wazuh-Elastic Stack installation and to explain the difference between two available kinds of deployment, the All-in-one and the Distributed.
+The Installation guide section aims to guide the user through the process of the Wazuh-Elastic Stack installation and to explain the difference between two available kinds of deployment, the All-in-one and the Distributed. In this guide, Open Distro for Elasticsearch and Kibana will be used. Open Distro is a fully open source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
 
 Wazuh-Elastic Stack components
 ------------------------------
@@ -22,7 +22,7 @@ Individual components
 
 - ``Wazuh API``: this component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web interface, which is a Kibana plugin.
 
-- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch.
+- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch. This guide will install ``Filebeat-oss``, which is fully open source and `Apache 2.0-licensed`.
 
 - ``Elasticsearch``: is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager.
 
