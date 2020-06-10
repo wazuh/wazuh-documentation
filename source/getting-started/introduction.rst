@@ -127,9 +127,9 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 
 + **RESTful API:** This provides an interface to manage and monitor the configuration and deployment status of agents. It is also used by the Wazuh web interface, which is a Kibana app.
 
-All-in-One installation
+All-in-one installation
 -----------------------
 
-The All-in-One installation guide will focus on the first installation type: all the components in the same host. Follow `this document <all_in_one>`_ to start configuring the All-in-One installation for non-production or small environments.
+The All-in-one installation guide will focus on the first installation type: all the components in the same host. Follow `this document <all_in_one>`_ to start configuring the All-in-one installation for non-production or small environments.
 
 
