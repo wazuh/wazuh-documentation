@@ -76,7 +76,7 @@ Installing the Wazuh app for Splunk in a Splunk cluster
 -------------------------------------------------------
 
 .. note::
-  We can install the Wazuh app for Splunk in each search-head by hand, but in case of having hundreds or even thousands of search-heads, it is more convenient to install it automatically.
+  We can install the Wazuh app for Splunk in each search-head manually, but in case of having hundreds or even thousands of search-heads, it is more convenient to install it automatically.
   For this purpose, the ``deployer`` will be used, a machine that installs the Wazuh app for Splunk in every search-head at the same time and automatically.
 
 Install the Wazuh app for Splunk on the ``deployer`` machine and follow the steps:
