@@ -7,6 +7,8 @@ Configuration
 
 By default, the API will bind to port 55000/tcp and use self-signed certificates. Please review the :ref:`Securing API <securing_api>` section for more information on how to protect it.
 
+.. _api_configuration_file:
+
 Configuration file
 ------------------
 
@@ -18,13 +20,9 @@ The API configuration can be found inside ``/var/ossec/api/configuration/api.yam
      port: 55000
      behind_proxy_server: no
 
-     auth_token_exp_timeout: 36000
      use_only_authd: no
      drop_privileges: yes
      experimental_features: no
-
-     rbac:
-        mode: white
 
      https:
         enabled: yes
@@ -50,9 +48,55 @@ The API configuration can be found inside ``/var/ossec/api/configuration/api.yam
 
 .. warning::
 
-    The master doesn’t send its local API configuration file to the workers. If the configuration is changed in the master node, it should be changed manually in the workers. Take care of not overwriting the IP and port in the local configuration of each worker.
+    The master doesn’t send its local API configuration file to the workers. If the configuration file is changed in the master node, it should be updated manually in the workers. Take care of not overwriting the IP and port in the local configuration of each worker.
 
-You can view and edit the API configuration both through the ``api.yaml`` file and through the endpoint ``/manager/api/config`` (or ``/cluster/api/config`` in case of using Wazuh cluster). Some of the settings are hot applied without the need to restart the API (only through previous endpoints). In case of editing the ``api.yaml`` file, make sure to restart wazuh-api service:
+Make sure to restart wazuh-api service after editing the configuration file:
+
+  a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-api
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-api restart
+
+Configuration endpoints
+-----------------------
+
+The API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`Configuration file <api_configuration_file>`.
+
+The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the ``/security/config`` endpoint.
+
+Get configuration
+^^^^^^^^^^^^^^^^^
+- ``GET /manager/api/config``: Get the complete configuration of the node on which it is run.
+- ``GET /cluster/api/config``: Get the complete configuration of all (or a list) of the cluster nodes.
+- ``GET /security/config``: Get the current security configuration.
+
+Modify configuration
+^^^^^^^^^^^^^^^^^^^^
+- ``PUT /manager/api/config``: Change part of the configuration of the node on which it is run.
+- ``PUT /cluster/api/config``: Change part of the configuration of all (or a list) of the cluster nodes.
+- ``PUT /security/config``: Change the security configuration.
+
+Restore configuration
+^^^^^^^^^^^^^^^^^^^^^
+- ``DELETE /manager/api/config``: Restore the default configuration of the node on which it is run.
+- ``DELETE /cluster/api/config``: Restore the default configuration of all (or a list) of the cluster nodes.
+- ``DELETE /security/config``: Restore the default security configuration.
+
+The following settings are hot applied when using the configuration endpoints:
+
+- behind_proxy_server
+- use_only_authd
+- experimental_features
+- cache (``enabled`` and ``time``)
+
+To apply changes to different settings, it is necessary to restart each API whose configuration have changed:
 
   a. For Systemd:
 
@@ -103,8 +147,8 @@ And remove temporary files:
 
 .. _api_configuration_options:
 
-Configuration options
----------------------
+API configuration options
+-------------------------
 
 host
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -130,14 +174,6 @@ behind_proxy_server
 | yes, true, no, false | true          | Set this option to "yes" in case the API is running behind a proxy server. |
 +----------------------+---------------+----------------------------------------------------------------------------+
 
-auth_token_exp_timeout
-^^^^^^^^^^^^^^^^^^^^^^
-+-----------------------+---------------+---------------------------------------------------------+
-| Allowed values        | Default value | Description                                             |
-+=======================+===============+=========================================================+
-| Any positive integer. | 36000         | Set how many seconds it takes for JWT tokens to expire. |
-+-----------------------+---------------+---------------------------------------------------------+
-
 use_only_authd
 ^^^^^^^^^^^^^^^^^^^^^^
 +----------------------+---------------+---------------------------------------------------------------------+
@@ -161,14 +197,6 @@ experimental_features
 +======================+===============+===================================+
 | yes, true, no, false | false         | Enable features under development |
 +----------------------+---------------+-----------------------------------+
-
-rbac
-^^^^^^^^^^^^^^^^^^^^^^
-+----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values | Default value | Description                                                                                                                                                    |
-+================+===============+================================================================================================================================================================+
-| black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
-+----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 https
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -221,3 +249,22 @@ cache
 +------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------+
 | time       | Any positive integer or real number. | 0.75          | Time in seconds that the cache lasts before expiring.                                       |
 +------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------+
+
+Security configuration options
+------------------------------
+
+auth_token_exp_timeout
+^^^^^^^^^^^^^^^^^^^^^^
++-----------------------+---------------+---------------------------------------------------------+
+| Allowed values        | Default value | Description                                             |
++=======================+===============+=========================================================+
+| Any positive integer. | 36000         | Set how many seconds it takes for JWT tokens to expire. |
++-----------------------+---------------+---------------------------------------------------------+
+
+rbac_mode
+^^^^^^^^^^^^^^^^^^^^^^
++----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values | Default value | Description                                                                                                                                                    |
++================+===============+================================================================================================================================================================+
+| black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
++----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
