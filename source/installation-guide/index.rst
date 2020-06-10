@@ -68,9 +68,9 @@ Types of deployment
 
 The Installation guide is divided into two independent sections, :ref:`All-in-One deployment <all_in_one_index>` and  :ref:`Distributed deployment <distributed_index>`. Each contains the Introduction, which presents the architecture of the deployed environment and explains what steps will be done apart from the components installation. It also provides minimal hardware requirements. The user will choose between two types of installation guides:
 
-- ``Step by step`` manual installation guide: each step has a description which helps to understand the process.
+- ``Unattended``: automated installation guide. Requires the initial input of the information needed to accomplish the process using a script.
 
-- ``Unattended`` automated installation guide: requires the initial input of the information needed to accomplish the process using a script.
+- ``Step by step``: manual installation guide. Each step has a description which helps to understand the process.
 
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                   | All-in-One deployment                                                                                                                                    | Distributed deployment                                                                                                                                                                                                     |
