@@ -20,7 +20,6 @@ Options
 
 - `directories`_
 - `ignore`_
-- `nodiff`_
 - `frequency`_
 - `scan_time`_
 - `scan_day`_
@@ -44,6 +43,7 @@ Options
 - `max_eps`_
 - `database`_
 - `file_limit`_
+- `diff`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -242,25 +242,6 @@ List of files or directories to be ignored (one entry per line). Multiple lines 
 +--------------------+-----------------------------+
 | **Example**        | /etc/mtab                   |
 +--------------------+-----------------------------+
-
-Attributes:
-
-+----------+---------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
-+          +--------------------------------------------+------------------------------------+
-|          | Allowed values                             | sregex                             |
-+----------+--------------------------------------------+------------------------------------+
-
-nodiff
-^^^^^^
-
-List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
-
-+--------------------+----------------------+
-| **Allowed values** | Any file name.       |
-+--------------------+----------------------+
-| **Example**        | /etc/ssl/private.key |
-+--------------------+----------------------+
 
 Attributes:
 
@@ -835,6 +816,111 @@ Set the maximum synchronization message throughput.
 +--------------------+---------------------------------------------------------+
 
 
+.. _reference_ossec_syscheck_diff:
+
+diff
+^^^^
+
+.. versionadded:: 3.14
+
+The diff settings will be configured inside this tag.
+
+.. code-block:: xml
+
+    <diff>
+      <disk_quota>
+        <enabled>yes</enabled>
+        <limit>1GB</limit>
+      </disk_quota>
+      <file_size>
+        <enabled>yes</enabled>
+        <limit>50MB</limit>
+      </file_size>
+
+      <nodiff>/etc/ssl/private.key</nodiff>
+    </diff>
+
+disk_quota
+""""""""""
+
+.. versionadded:: 3.14
+
+This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit again.
+
+**enabled**
+
+.. versionadded:: 3.14
+
+Specifies whether there will be a disk quota limit or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**limit**
+
+.. versionadded:: 3.14
+
+Specifices the limit for the size of the ``queue/diff/local`` folder.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 1GB                                         |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any positive number followed by KB/MB/GB    |
++--------------------------+---------------------------------------+
+
+file_size
+"""""""""
+
+.. versionadded:: 3.14
+
+This option can be used to limit the size of the file which will report diff information with ``report_changes`` enabled. Files bigger than this limit will not report diff information until the size is smaller than the configured limit again.
+
+**enabled**
+
+.. versionadded:: 3.14
+
+Specifies whether there will be a file size limit or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**limit**
+
+.. versionadded:: 3.14
+
+Specifices the limit for the size of files monitored with ``report_changes``.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 50MB                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any positive number followed by KB/MB/GB    |
++--------------------------+---------------------------------------+
+
+nodiff
+""""""
+
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
+
++--------------------+----------------------+
+| **Allowed values** | Any file name.       |
++--------------------+----------------------+
+| **Example**        | /etc/ssl/private.key |
++--------------------+----------------------+
+
+Attributes:
+
++----------+---------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
++          +--------------------------------------------+------------------------------------+
+|          | Allowed values                             | sregex                             |
++----------+--------------------------------------------+------------------------------------+
+
 
 Default Unix configuration
 --------------------------
@@ -877,9 +963,6 @@ Default Unix configuration
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
 
-    <!-- Check the file, but never compute the diff -->
-    <nodiff>/etc/ssl/private.key</nodiff>
-
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>
@@ -893,6 +976,19 @@ Default Unix configuration
 
     <!-- Store the database in disk or in memory -->
     <database>disk</database>
+
+    <diff>
+      <disk_quota>
+        <enabled>yes</enabled>
+        <limit>1GB</limit>
+      </disk_quota>
+      <file_size>
+        <enabled>yes</enabled>
+        <limit>50MB</limit>
+      </file_size>
+
+      <nodiff>/etc/ssl/private.key</nodiff>
+    </diff>
 
     <!-- Database synchronization settings -->
     <synchronization>
