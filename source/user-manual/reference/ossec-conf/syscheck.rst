@@ -1042,7 +1042,7 @@ Defaut syscheck configuration:
     <max_eps>100</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
-		  <enabled>yes</enabled>
+      <enabled>yes</enabled>
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
