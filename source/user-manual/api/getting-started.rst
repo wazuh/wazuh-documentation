@@ -40,7 +40,7 @@ The interface has a list of all available endpoints separated into groups (activ
     :align: center
     :width: 100%
 
-The endpoints can be used both in this interface and with the command-line tool *curl*, so in some examples we will use the two options.
+The Wazuh API endpoints can be reached via the swagger interface or using the command-line tool *curl*. In some of the examples below we will use both options.
 
 .. _api_log_in:
 
@@ -68,7 +68,7 @@ Logging into the API UI
 
 7. Click again on the Authorize button.
 8. Paste the value of the copied token into the *jwt  (http, Bearer)* field.
-9. Click on the Authorize button inside. After that, you can use any API endpoint allowed for the role the user belongs to.
+9. Click on the Authorize button inside. After that, you can use any API endpoint allowed for the roles the user belongs to.
 
 Logging in with cURL
 ^^^^^^^^^^^^^^^^^^^^
@@ -217,7 +217,7 @@ Here are some of the basic concepts related to making API requests and understan
           "title": "Wazuh Error",
           "detail": "Permission denied: Resource type: *:*",
           "status": 400,
-          "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit XXXX",
+          "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
           "code": 4000,
           "dapi_errors": {
             "master-node": {
@@ -241,7 +241,7 @@ Here are some of the basic concepts related to making API requests and understan
 - Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /`` and ``GET /security/user/authenticate``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
-- The API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the API configuration file). The API logs are rotated daily. The rotations are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
+- The API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the API configuration file). The API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
 .. _wazuh_api_use_cases:
