@@ -5,10 +5,18 @@
 Upgrading Elastic Stack from 7.x to 7.y
 =======================================
 
+This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for both Elastic and Open Distro for Elasticsearch distributions. As some of the steps may differ depending on the distribution, the following tags will be used:
+
+- [*Both*] - indicates that the step should be done for both Elastic and Open Distro components.
+
+- [*OD*] - indicates that the step should be done only for Open Distro for Elasticsearch component.
+
+- [*Elastic*] - indicates that the step should be done only for Elastic component.
+
 Prepare the Elastic Stack
 -------------------------
 
-#. Stop the services:
+#. [*Both*] Stop the services:
 
     .. code-block:: console
 
@@ -34,7 +42,7 @@ Prepare the Elastic Stack
 
     .. code-block:: console
 
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo      
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
 
 Upgrade Elasticsearch
 ---------------------
@@ -114,21 +122,42 @@ Upgrade Elasticsearch
 Upgrade Filebeat
 ----------------
 
-#. Upgrade Filebeat.
+#. Upgrade Filebeat:
 
-    * For CentOS/RHEL/Fedora:
+    * Open Distro for Elasticsearch:
 
-      .. code-block:: console
+      .. tabs::
 
-        # yum install filebeat-|ELASTICSEARCH_LATEST|
+        .. group-tab:: YUM
 
-    * For Debian/Ubuntu:
+          .. code-block:: console
 
-      .. code-block:: console
+            # yum install filebeat
 
-        # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+        .. group-tab:: APT
 
-#. Update the configuration file.
+          .. code-block:: console
+
+            # apt-get install filebeat
+
+    * Elastic:
+
+      .. tabs::
+
+        .. group-tab:: YUM
+
+          .. code-block:: console
+
+            # yum install filebeat-|ELASTICSEARCH_LATEST|
+
+        .. group-tab:: APT
+
+          .. code-block:: console
+
+            # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+
+
+#. Update the configuration file:
 
     .. code-block:: console
 
@@ -166,58 +195,118 @@ Upgrade Kibana
 --------------
 
 .. warning::
-  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the wazuh.yml has been moved from /usr/share/kibana/plugins/wazuh/wazuh.yml to /usr/share/kibana/optimize/wazuh/config/wazuh.yml.
+  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
-#. Stop Kibana.
+#. Copy the Wazuh Kibana plugin configuration file to its new location (not needed for upgrades from 3.12.x to 3.13.x):
 
-    .. code-block:: console
+      .. tabs::
 
-      # systemctl stop kibana
+          .. group-tab:: For upgrades from 3.11.x to 3.13.x
 
-#. Copy the wazuh.yml to its new location. (Only needed for upgrades from 3.11.x to 3.12.y).
+              Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
-    .. code-block:: console
+                .. code-block:: console
 
-      # mkdir -p /usr/share/kibana/optimize/wazuh/config
-      # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+                  # mkdir -p /usr/share/kibana/optimize/wazuh/config
+                  # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-#. Remove the Wazuh app.
+
+          .. group-tab:: For upgrades from 3.10.x or older to 3.13.x
+
+
+              Create the new directory and copy the Wazuh Kibana plugin configuration file:
+
+                    .. code-block:: console
+
+                      # mkdir -p /usr/share/kibana/optimize/wazuh/config
+                      # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+
+
+              Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
+
+                    .. code-block:: yaml
+
+                      hosts:
+                        - <id>:
+                           url: http(s)://<api_url>
+                           port: <api_port>
+                           user: <api_user>
+                           password: <api_password>
+
+                    The following values need to be replaced:
+
+                      -  ``<id>``: an arbitrary ID.
+
+                      -  ``<api_url>``: url of the Wazuh API.
+
+                      -  ``<api_port>``: port.
+
+                      -  ``<api_user>``: credentials to authenticate.
+
+                      -  ``<api_password>``: credentials to authenticate.
+
+                    In case of having more Wazuh API entries, each of them must be added manually.
+
+
+
+#. Remove the Wazuh Kibana plugin:
 
     .. code-block:: console
 
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin remove wazuh
 
-#. Upgrade Kibana.
+#. Upgrade Kibana:
 
-    * For CentOS/RHEL/Fedora:
+    * Open Distro for Elasticsearch:
 
-      .. code-block:: console
+      .. tabs::
 
-        # yum install kibana-|ELASTICSEARCH_LATEST|
+        .. group-tab:: YUM
 
-    * For Debian/Ubuntu:
+            .. code-block:: console
 
-      .. code-block:: console
+              # yum install opendistroforelasticsearch-kibana
 
-        # apt-get install kibana=|ELASTICSEARCH_LATEST|
+        .. group-tab:: APT
 
-#. Remove generated bundles.
+            .. code-block:: console
+
+              # apt-get install opendistroforelasticsearch-kibana
+
+
+    * Elastic:
+
+      .. tabs::
+
+        .. group-tab:: YUM
+
+            .. code-block:: console
+
+              # yum install kibana-|ELASTICSEARCH_LATEST|
+
+        .. group-tab:: APT
+
+            .. code-block:: console
+
+              # apt-get install kibana=|ELASTICSEARCH_LATEST|
+
+#. Remove generated bundles:
 
     .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
 
-#. Update file permissions. This will avoid several errors prior to updating the app.
+#. Update file permissions. This will avoid several errors prior to updating the app:
 
     .. code-block:: console
 
       # chown -R kibana:kibana /usr/share/kibana/optimize
       # chown -R kibana:kibana /usr/share/kibana/plugins
 
-#. Install the Wazuh app.
+#. Install the Wazuh Kibana plugin:
 
-    * From URL:
+    * From the URL:
 
     .. code-block:: console
 
@@ -231,20 +320,26 @@ Upgrade Kibana
       # cd /usr/share/kibana/
       # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
-#. Update configuration file permissions.
+#. Update configuration file permissions:
 
     .. code-block:: console
 
       # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
       # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-#. For installations on Kibana 7.6.X versions it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+#. It is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
     .. code-block:: console
 
       # cat >> /etc/default/kibana << EOF
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
+
+#. [*OD*] Link Kibana’s socket to priviledged port 443:
+
+    .. code-block:: console
+
+      # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
 #. Restart Kibana.
 
@@ -253,16 +348,20 @@ Upgrade Kibana
       # systemctl daemon-reload
       # systemctl restart kibana
 
-Disabling repositories
-^^^^^^^^^^^^^^^^^^^^^^
+Disabling the Elastic repositories
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    * For CentOS/RHEL/Fedora:
+It is recommended to disable the Elastic repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+
+.. tabs::
+
+  .. group-tab:: YUM
 
       .. code-block:: console
 
         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
-    * For Debian/Ubuntu:
+  .. group-tab:: APT
 
       .. code-block:: console
 
@@ -275,9 +374,3 @@ Disabling repositories
 
         # echo "elasticsearch hold" | sudo dpkg --set-selections
         # echo "kibana hold" | sudo dpkg --set-selections
-
-    * For openSUSE:
-
-      .. code-block:: console
-
-        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo

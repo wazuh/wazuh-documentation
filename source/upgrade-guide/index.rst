@@ -5,8 +5,11 @@
 Upgrade guide
 =============
 
-The following links will describe how to upgrade Wazuh or Elastic Stack. In case of having any doubt about operating system compatibility, please check the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app#older-packages>`_.
+This document aims to describe the upgrade process of the Wazuh and Elastic Stack.
 
+The Wazuh section explains how to upgrade the Wazuh manager, the Wazuh API and the Wazuh agent. The Elastic Stack section walks the user through the upgrade process of Elasticsearch, Filebeat and Kibana for both Elastic and Open Distro for Elasticsearch distributions.
+
+In case of having any doubt about operating system compatibility, please check the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app#older-packages>`_.
 
 
     .. toctree::
@@ -14,7 +17,3 @@ The following links will describe how to upgrade Wazuh or Elastic Stack. In case
 
         upgrading/index
         upgrading-elastic-stack/index
-
-.. note::
-    If you run into an issue during the upgrade process, feel free to ask for help in our `mailing list <https://groups.google.com/d/forum/wazuh>`_. The Wazuh team and other users of the Open Source community may be able to assist you.
-
