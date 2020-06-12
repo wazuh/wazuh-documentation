@@ -6,21 +6,21 @@ Installing dependencies
 =======================
 
 .. note::
-  **The integration** with GCP **can be configured in the Wazuh manager** (which also behaves as an agent) **or directly in a Wazuh agent**. This choice merely depends on how you decide to access your GCP infrastructure in your environment.
+  The GCP module can be configured in both Wazuh manager and agent. The choice merely depends on where do you want to reach the GCP services from.
 
 .. warning::
-  The Wazuh manager includes all dependencies installed, **these steps are only necessary** when configuring the integration **in a Wazuh agent**.
+  The Wazuh manager includes all dependencies installed, the following steps are only necessary when configuring the integration in a Wazuh agent.
 
 
 Python
 ------
 
-The Wazuh module for GCP (``gcp-pubsub``) requires python 3.6 compatibility.
+The module requires python 3.6 or superior compatibility.
 
 Pip
 ---
 
-The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
+The required Python modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
 
 a) For **CentOS/RHEL/Fedora** systems:
 
