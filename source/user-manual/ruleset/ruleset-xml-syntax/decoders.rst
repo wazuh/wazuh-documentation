@@ -394,7 +394,7 @@ Allows setting the name of the child decoder from the name attribute instead of 
 json_null_field
 ^^^^^^^^^^^^^^^
 
-Specify how to treat the `NULL` fields coming from the JSON events. Only for the JSON decoder.
+Specifies how to treat the `NULL` fields coming from the JSON events. Only for the JSON decoder.
 
 +--------------------+-------------------------------------------------------------------------+
 | **Default Value**  | string                                                                  |
@@ -409,7 +409,7 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 json_array_structure
 ^^^^^^^^^^^^^^^^^^^^
 
-Specify how to treat the array structures coming from the JSON events. Only for the JSON decoder.
+Specifies how to treat the array structures coming from the JSON events. Only for the JSON decoder.
 
 +--------------------+-------------------------------------------------------------------------+
 | **Default Value**  | array                                                                   |
