@@ -24,6 +24,13 @@ $(function() {
     'user-manual/ruleset/ruleset-xml-syntax/index',
   ];
 
+  /* List of nodes in the toctree that should be open in a new tab */
+  const newTabNodes = [
+    'user-manual/api/reference',
+  ];
+  markTocNodesWithClass(newTabNodes, 'js-new-tab');
+  $('.js-new-tab').attr('target', '_blank');
+
   /* list of nodes (by title) which will not show their subtree */
   const hideSubtreeNodes = [
     'Install Wazuh manager on Linux',
