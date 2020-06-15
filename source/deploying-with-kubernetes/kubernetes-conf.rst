@@ -29,7 +29,7 @@ Like a *Deployment*, a *StatefulSet* manages Pods that are based on an identical
 
 It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager, as well as Elasticsearch, are desirable to maintain, so we declare them using *StatefulSet* to ensure that they maintain their states in every startup.
 
-Deployments are intended for stateless use and are quite lightweight and seem to be appropriate for Logstash, Kibana and Nginx, where it is not necessary to maintain the states.
+Deployments are intended for stateless use and are quite lightweight and seem to be appropriate for Kibana and Nginx, where it is not necessary to maintain the states.
 
 Persistent volumes are pieces of storage in the provisioned cluster. It is a resource in the cluster just like a node is a cluster resource. Persistent volumes are volume plugins like Volumes but have a lifecycle independent of any individual pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
 
@@ -64,23 +64,13 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 
 **Elasticsearch**
 
-Elasticsearch pod, it ingests events received from Logstash.
+Elasticsearch pod, it ingests events received from Filebeat.
 
 +----------------------------------------+-------------+
 | Image                                  | Controller  |
 +========================================+=============+
 | wazuh/wazuh-elasticsearch:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES| | StatefulSet |
 +----------------------------------------+-------------+
-
-**Logstash**
-
-Logstash pod, it's listening to events from the Filebeat instances that are installed on every Wazuh manager node, then it sends all the events to Elasticsearch.
-
-+-----------------------------------+-------------+
-| Image                             | Controller  |
-+===================================+=============+
-| wazuh/wazuh-logstash:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES| | Deployment  |
-+-----------------------------------+-------------+
 
 **Kibana**
 
@@ -112,13 +102,11 @@ Services
 +======================+=====================================================================================+
 | wazuh-elasticsearch  | Communication for Elasticsearch nodes.                                              |
 +----------------------+-------------------------------------------------------------------------------------+
-| elasticsearch        | Elasticsearch service. Used by Kibana and Logstash.                                 |
+| elasticsearch        | Elasticsearch service. Used by Kibana and Filebeat.                                 |
 +----------------------+-------------------------------------------------------------------------------------+
 | wazuh-nginx          | Service for HTTPS access to Kibana.                                                 |
 +----------------------+-------------------------------------------------------------------------------------+
 | kibana               | Kibana service. The UI for Elasticsearch.                                           |
-+----------------------+-------------------------------------------------------------------------------------+
-| logstash             | Logstash service, each Wazuh node has a Filebeat instance pointing to this service. |
 +----------------------+-------------------------------------------------------------------------------------+
 
 **Wazuh**
@@ -192,13 +180,6 @@ Deploy
             $ kubectl apply -f elastic_stack/kibana/kibana-deploy.yaml
             $ kubectl apply -f elastic_stack/kibana/nginx-deploy.yaml
 
-    3.4. Deploy Logstash
-
-        .. code-block:: console
-
-            $ kubectl apply -f elastic_stack/logstash/logstash-svc.yaml
-            $ kubectl apply -f elastic_stack/logstash/logstash-deploy.yaml
-
 4. Deploy Wazuh
 
     .. code-block:: console
@@ -241,7 +222,6 @@ Verifying the deployment
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
         elasticsearch         ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
         kibana                ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
-        logstash              ClusterIP      xxx.yy.zzz.41    <none>             5000/TCP                         10m
         wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
         wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
         wazuh-elasticsearch   ClusterIP      None             <none>             9300/TCP                         12m
@@ -259,7 +239,6 @@ Verifying the deployment
 
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           11m
-        wazuh-logstash   1         1         1            1           10m
         wazuh-nginx      1         1         1            1           11m
 
 **Statefulset**
@@ -289,7 +268,6 @@ Verifying the deployment
         NAME                              READY     STATUS    RESTARTS   AGE
         wazuh-elasticsearch-0             1/1       Running   0          15m
         wazuh-kibana-f4d9c7944-httsd      1/1       Running   0          14m
-        wazuh-logstash-777b7cd47b-7cxfq   1/1       Running   0          13m
         wazuh-manager-master-0            1/1       Running   0          12m
         wazuh-manager-worker-0-0          1/1       Running   0          11m
         wazuh-manager-worker-1-0          1/1       Running   0          11m
