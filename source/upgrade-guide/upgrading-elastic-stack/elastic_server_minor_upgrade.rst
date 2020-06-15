@@ -5,53 +5,50 @@
 Upgrading Elastic Stack from 7.x to 7.y
 =======================================
 
-This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for both Elastic and Open Distro for Elasticsearch distributions. As some of the steps may differ depending on the distribution, the following tags will be used:
+This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for both Open Distro for Elasticsearch and Elastic distributions. As some of the steps may differ depending on the distribution, the following tags will be used:
 
-- [*Both*] - indicates that the step should be done for both Elastic and Open Distro components.
+- [*OD*] - indicates that the step should be done only for Open Distro for Elasticsearch upgrade.
 
-- [*OD*] - indicates that the step should be done only for Open Distro for Elasticsearch component.
-
-- [*Elastic*] - indicates that the step should be done only for Elastic component.
+- [*Elastic*] - indicates that the step should be done only for Elastic upgrade.
 
 Prepare the Elastic Stack
 -------------------------
 
-#. [*Both*] Stop the services:
+#. Stop the services:
 
     .. code-block:: console
 
       # systemctl stop filebeat
       # systemctl stop kibana
 
-#. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
+#. [*Elastic*] In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
-  * For CentOS/RHEL/Fedora:
+  .. tabs::
 
-    .. code-block:: console
+    .. group-tab:: YUM
 
-      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
+      .. code-block:: console
 
-  * For Debian/Ubuntu:
+        # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-    .. code-block:: console
+    .. group-tab:: APT
 
-      # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
-      # apt-get update
+      .. code-block:: console
 
-  * For openSUSE:
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
+        # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
+        # apt-get update
 
 Upgrade Elasticsearch
 ---------------------
 
-#. Disable shard allocation
+This guide explains how to perform a rolling upgrade, which lets to shut down one node at a time for minimal disruption of service.
+The cluster remains available throughout the process.
+
+#. Disable shard allocation:
 
     .. code-block:: bash
 
-      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://127.0.0.1:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"
@@ -59,111 +56,162 @@ Upgrade Elasticsearch
       }
       '
 
-#. Stop non-essential indexing and perform a synced flush. (Optional)
+#. Stop non-essential indexing and perform a synced flush (optional):
 
     .. code-block:: bash
 
-      curl -X POST "localhost:9200/_flush/synced"
+      curl -X POST "https://127.0.0.1:9200/_flush/synced" -u <username>:<password> -k
 
-#. Shut down a single node.
+#. Shut down a single node:
 
     .. code-block:: console
 
       # systemctl stop elasticsearch
 
-#. Upgrade the node you shut down.
+#. Upgrade the node you shut down:
 
-    * For CentOS/RHEL/Fedora:
+      .. tabs::
 
-      .. code-block:: console
+        .. group-tab:: Open Distro for Elasticsearch
 
-        # yum install elasticsearch-|ELASTICSEARCH_LATEST|
+          * YUM:
 
-    * For Debian/Ubuntu:
+            .. code-block:: console
 
-      .. code-block:: console
+              # yum install opendistroforelasticsearch-1.6.0
 
-        # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-        # systemctl restart elasticsearch
+          *  APT
 
-#. Restart the service.
+              Upgrade to the underlying Elasticsearch version of the new Open Distro for Elasticsearch release:
+
+                .. code-block:: console
+
+                  # apt install elasticsearch-oss
+
+              Upgrade the packages on the node:
+
+                .. code-block:: console
+
+                  # opendistroforelasticsearch
+
+        .. group-tab:: Elastic
+
+          * YUM
+
+            .. code-block:: console
+
+              # yum install elasticsearch-|ELASTICSEARCH_LATEST|
+
+          * APT
+
+            .. code-block:: console
+
+              # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
+              # systemctl restart elasticsearch
+
+#. [OD] Upgrade any additional plugins that you installaed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins (optional).
+
+
+#. Restart the service:
 
     .. code-block:: console
 
       # systemctl daemon-reload
       # systemctl restart elasticsearch
 
-#. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a *_cat/nodes* request:
+#. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a ``_cat/nodes`` request:
 
     .. code-block:: bash
 
-      curl -X GET "localhost:9200/_cat/nodes"
+      curl -X GET "https://127.0.0.1:9200/_cat/nodes" -u <username>:<password> -k
 
-#. Reenable shard allocation.
+#. Reenable shard allocation:
 
     .. code-block:: bash
 
-      curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://127.0.0.1:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
-          "cluster.routing.allocation.enable": null
+          "cluster.routing.allocation.enable": all
         }
       }
       '
 
-#. Before upgrading the next node, wait for the cluster to finish shard allocation.
+#. Before upgrading the next node, wait for the cluster to finish shard allocation:
 
     .. code-block:: bash
 
-      curl -X GET "localhost:9200/_cat/health?v"
+      curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
 
 #. Repeat it for every Elasticsearch node.
+
 
 Upgrade Filebeat
 ----------------
 
 #. Upgrade Filebeat:
 
-    * Open Distro for Elasticsearch:
-
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Open Distro for Elasticsearch
 
-          .. code-block:: console
+          * YUM:
 
-            # yum install filebeat
+            .. code-block:: console
 
-        .. group-tab:: APT
+              # yum install filebeat
 
-          .. code-block:: console
+          * APT:
 
-            # apt-get install filebeat
+            .. code-block:: console
 
-    * Elastic:
+              # apt-get install filebeat
 
-      .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Elastic
 
-          .. code-block:: console
+          * YUM:
 
-            # yum install filebeat-|ELASTICSEARCH_LATEST|
+            .. code-block:: console
 
-        .. group-tab:: APT
+              # yum install filebeat-|ELASTICSEARCH_LATEST|
 
-          .. code-block:: console
+          * APT:
 
-            # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+            .. code-block:: console
+
+              # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 
 #. Update the configuration file:
 
-    .. code-block:: console
+      .. tabs::
 
-      # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
-      # chmod go+r /etc/filebeat/filebeat.yml
+        .. group-tab:: Open Distro for Elasticsearch
+
+          * All-in-One installation:
+
+            .. code-block:: console
+
+              # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+              # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/filebeat/7.x/filebeat_all_in_one.yml
+              # chmod go+r /etc/filebeat/filebeat.yml
+
+          * Distributed installation:
+
+            .. code-block:: console
+
+              # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+              # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/filebeat/7.x/filebeat.yml
+              # chmod go+r /etc/filebeat/filebeat.yml
+
+        .. group-tab:: Elastic
+
+          .. code-block:: console
+
+            # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+            # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
+            # chmod go+r /etc/filebeat/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -178,13 +226,41 @@ Upgrade Filebeat
 
       # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
-#. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file:
 
-    .. code-block:: yaml
+      .. tabs::
 
-      output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
+        .. group-tab:: Open Distro for Elasticsearch
 
-#. Restart Filebeat.
+          * Elasticsearch single-node:
+
+            .. code-block:: yaml
+
+              output.elasticsearch:
+                hosts: ["<elasticsearch_ip>:9200"]
+
+            Replace ``elasticsearch_ip`` with the IP address or the hostname of the Elasticsearch server.
+
+          * Elasticsearch multi-node:
+
+            .. code-block:: yaml
+
+              output.elasticsearch:
+                hosts: ["<elasticsearch_ip_node_1>:9200", "<elasticsearch_ip_node_2>:9200", "<elasticsearch_ip_node_3>:9200"]
+
+            Replace ``elasticsearch_ip_node_x`` with the IP address or the hostname of the Elasticsearch server to connect to.
+
+          During the installation the default username and password were used. If those credentials were changed, replace those values in the ``filebeat.yml`` configuration file.
+
+        .. group-tab::  Elastic
+
+          Replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+
+          .. code-block:: yaml
+
+            output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
+
+#. Restart Filebeat:
 
     .. code-block:: console
 
@@ -258,38 +334,35 @@ Upgrade Kibana
 
 #. Upgrade Kibana:
 
-    * Open Distro for Elasticsearch:
-
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Open Distro for Elasticsearch
 
-            .. code-block:: console
+          * YUM:
 
-              # yum install opendistroforelasticsearch-kibana
+              .. code-block:: console
 
-        .. group-tab:: APT
+                # yum install opendistroforelasticsearch-kibana
 
-            .. code-block:: console
+          * APT:
 
-              # apt-get install opendistroforelasticsearch-kibana
+              .. code-block:: console
 
+                # apt-get install opendistroforelasticsearch-kibana
 
-    * Elastic:
+        .. group-tab::  Elastic
 
-      .. tabs::
+            * YUM
 
-        .. group-tab:: YUM
+                .. code-block:: console
 
-            .. code-block:: console
+                  # yum install kibana-|ELASTICSEARCH_LATEST|
 
-              # yum install kibana-|ELASTICSEARCH_LATEST|
+            * APT
 
-        .. group-tab:: APT
+                .. code-block:: console
 
-            .. code-block:: console
-
-              # apt-get install kibana=|ELASTICSEARCH_LATEST|
+                  # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
 #. Remove generated bundles:
 
@@ -297,7 +370,7 @@ Upgrade Kibana
 
       # rm -rf /usr/share/kibana/optimize/bundles
 
-#. Update file permissions. This will avoid several errors prior to updating the app:
+#. Update file permissions. This will avoid several errors prior to updating the Wazuh Kibana plugin:
 
     .. code-block:: console
 
@@ -306,19 +379,23 @@ Upgrade Kibana
 
 #. Install the Wazuh Kibana plugin:
 
-    * From the URL:
+  .. tabs::
 
-    .. code-block:: console
+    .. group-tab:: From the URL
 
-      # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+      .. code-block:: console
 
-    * From the package:
+        # cd /usr/share/kibana/
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
-    .. code-block:: console
+    .. group-tab:: From the package
 
-      # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+      .. code-block:: console
+
+        # cd /usr/share/kibana/
+        # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+
+
 
 #. Update configuration file permissions:
 
@@ -351,7 +428,7 @@ Upgrade Kibana
 Disabling the Elastic repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is recommended to disable the Elastic repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+[*Elastic*] It is recommended to disable the repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
 .. tabs::
 
