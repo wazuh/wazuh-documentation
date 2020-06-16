@@ -44,6 +44,8 @@ Upgrade Elasticsearch
 This guide explains how to perform a rolling upgrade, which lets to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
 
+In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is binded to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP. If using ``http`` instead of ``https`` the options ``-u`` and ``-k`` must be ommited.
+
 #. Disable shard allocation:
 
     .. code-block:: bash
@@ -80,7 +82,7 @@ The cluster remains available throughout the process.
 
               # yum install opendistroforelasticsearch-1.6.0
 
-          *  APT
+          *  APT:
 
               Upgrade to the underlying Elasticsearch version of the new Open Distro for Elasticsearch release:
 
@@ -96,13 +98,13 @@ The cluster remains available throughout the process.
 
         .. group-tab:: Elastic
 
-          * YUM
+          * YUM:
 
             .. code-block:: console
 
               # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
-          * APT
+          * APT:
 
             .. code-block:: console
 
@@ -352,13 +354,13 @@ Upgrade Kibana
 
         .. group-tab::  Elastic
 
-            * YUM
+            * YUM:
 
                 .. code-block:: console
 
                   # yum install kibana-|ELASTICSEARCH_LATEST|
 
-            * APT
+            * APT:
 
                 .. code-block:: console
 
@@ -418,7 +420,7 @@ Upgrade Kibana
 
       # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
-#. Restart Kibana.
+#. Restart Kibana:
 
     .. code-block:: console
 
@@ -445,7 +447,7 @@ Disabling the Elastic repositories
         # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
         # apt-get update
 
-      Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+      Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``):
 
       .. code-block:: console
 
