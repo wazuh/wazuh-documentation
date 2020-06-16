@@ -593,7 +593,7 @@ restart_audit
 
 .. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
 
-Allows the system to restart ```Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -682,7 +682,7 @@ skip_dev
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the ```/dev`` directory. This option works on Linux and FreeBSD systems.
+Specifies if syscheck should scan the ``/dev`` directory. This option works on Linux and FreeBSD systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -724,7 +724,7 @@ skip_proc
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the ```/proc`` directory. This option works on Linux and FreeBSD systems.
+Specifies if syscheck should scan the ``/proc`` directory. This option works on Linux and FreeBSD systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -882,7 +882,7 @@ The Whodata options will be configured inside this tag.
 
 .. versionadded:: 3.9.0
 
-Allows the system to restart ```Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
