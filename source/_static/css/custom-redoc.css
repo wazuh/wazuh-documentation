@@ -8,6 +8,122 @@ body {
   line-height: 1.4;
 }
 
+redoc[spec-url] {
+	/* display:none; */
+}
+
+redoc[spec-url] .sc-hORach.iXutXb {
+	width: 40px;
+  top: 6px;
+  height: 40px;
+  padding: 10px;
+  box-shadow: none;
+  border-radius: 4px;
+	background-color: #ffffff;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb .sc-cLQEGU.bPGAgL {
+	color: #00a9e5;
+}
+
+redoc[spec-url] a {
+	color: #0094ce;
+	border-bottom: 1px solid transparent;
+  transition: .2s all ease;
+	font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+redoc[spec-url] p,
+redoc[spec-url] .sc-iRbamj {
+	font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #333333;
+  line-height: 1.4;
+}
+
+redoc[spec-url] code,
+redoc[spec-url] .sc-chPdSV,
+redoc[spec-url] .bMfIUD,
+redoc[spec-url] .dpRRAO,
+redoc[spec-url] .beUper {
+	font-family: 'Fira Mono', monospace;
+}
+
+redoc[spec-url] .sc-chPdSV {
+	font-size: 0.9rem;
+}
+
+redoc[spec-url] a:hover,
+redoc[spec-url] a:focus {
+	color: #0094ce;
+	border-color: #0094cecc;
+}
+
+redoc[spec-url] a:visited {
+	color: #00a9e5;
+}
+
+redoc[spec-url] a.jIdpVJ {
+	border-color: #0094cecc;
+	user-select: none;
+}
+
+redoc[spec-url] .bJNzQd  {
+	border-color: #bfbfbf;
+}
+
+redoc[spec-url] .scrollbar-container [role="menuitem"] {
+  font-family: 'Open Sans', sans-serif;
+}
+
+redoc[spec-url] .scrollbar-container [role="menuitem"].active {
+	color: #0094ce;
+}
+
+redoc[spec-url] .scrollbar-container [role="menuitem"].active,
+redoc[spec-url] .scrollbar-container [role="menuitem"]:hover,
+redoc[spec-url] .scrollbar-container [role="menuitem"]:focus {
+	background-color: #f4f4f4;
+}
+
+redoc[spec-url] .scrollbar-container > ul > li > [role="menuitem"] {
+  font-size: 1rem;
+}
+
+redoc[spec-url] .scrollbar-container li > ul > li > [role="menuitem"] {
+  font-size: 0.88rem;
+}
+
+redoc[spec-url] h1,
+redoc[spec-url] h2,
+redoc[spec-url] h3,
+redoc[spec-url] h4 {
+	color: #333333;
+}
+
+redoc[spec-url] h3,
+redoc[spec-url] h4,
+redoc[spec-url] h5 {
+	font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+redoc[spec-url] .sc-bZQynM.celZWI,
+redoc[spec-url] .kjSShW {
+	background-color: #004057;
+}
+
+redoc[spec-url] .sc-bZQynM.celZWI h3 {
+	color: #ffffff;
+}
+
+redoc[spec-url] .bIbMYr {
+	font-family: 'Montserrat', sans-serif;
+}
+
 .redoc-wrap {
 	margin-top: 50px;
 }
@@ -15,6 +131,7 @@ body {
 .redoc-wrap .menu-content {
   top: 52px!important;
   height: calc(100vh - 52px)!important;
+	background-color: #eaeaea;
 }
 
 #header-redoc {
