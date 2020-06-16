@@ -134,7 +134,7 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
       curl -X PUT "https://127.0.0.1:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
-          "cluster.routing.allocation.enable": all
+          "cluster.routing.allocation.enable": "all"
         }
       }
       '
