@@ -1,24 +1,41 @@
+{%- set titlesuffix = " &middot; "|safe + docstitle|e %}
+
 <!DOCTYPE html>
-<html>
+<html lang="{{ language }}">
   <head>
-    <title>ReDoc</title>
+    <title>API reference{{ titlesuffix }}</title>
+    <link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
+    <link rel="stylesheet" href="{{ pathto('_static/css/custom-redoc.css', 1) }}" type="text/css" />
+
+    {# FAVICON  and canonical #}
+    {%- if favicon %}
+      <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+    {%- endif %}
+
     <!-- needed for adaptive design -->
     <meta charset="utf-8"/>
+    <meta name="author" content="Wazuh" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
-
     <!--
     ReDoc doesn't change outer page styles
     -->
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
+
+    {# Google Analytics #}
+
     </style>
   </head>
   <body>
+    <header id="header-redoc">
+      <div class="navbar-brand" id="logo-title">
+        <div id="links-to-home">
+          <a class="wazuh-logo-link" href="{{ theme_wazuh_web_url }}" title="Wazuh">
+            <img src={{ pathto('_static/img/wazuh_logo_w.png', 1) }} alt="Wazuh" />
+          </a>
+          <a class="docs-link"  href="{{ pathto(master_doc) }}">Docs</a>
+        </div>
+      </div> <!-- // #logo-title -->
+    </header>
     <redoc spec-url='{{ apiURL }}'></redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
   </body>
 </html>

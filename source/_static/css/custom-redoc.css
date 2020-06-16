@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #333333;
+  line-height: 1.4;
+}
+
+.redoc-wrap {
+	margin-top: 50px;
+}
+
+.redoc-wrap .menu-content {
+  top: 52px!important;
+  height: calc(100vh - 52px)!important;
+}
+
+#header-redoc {
+  z-index: 5;
+  position: fixed;
+	top: 0;
+  width: 100%;
+	height:52px;
+  color: #fff;
+	background-color: #00a9e5;
+  background: url(../img/wazuh_bg_head.png), no-repeat center center #00a9e5;
+  background-size: cover;
+}
+
+#header-redoc .navbar-brand {
+	display: flex;
+	height: 100%;
+	justify-content: space-between;
+}
+
+#header-redoc #links-to-home {
+	display: flex;
+	flex-direction: row;
+}
+
+#header-redoc #links-to-home a {
+	align-self: center;
+}
+
+#header-redoc #logo-title {
+  padding: 0 15px;
+}
+
+#header-redoc .wazuh-logo-link img {
+  max-width: 110px;
+}
+
+#header-redoc a {
+  color: #fff;
+	text-decoration: none;
+}
+
+#header-redoc #links-to-home .wazuh-logo-link {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+#header-redoc #links-to-home .wazuh-logo-link:hover,
+#header-redoc #links-to-home .wazuh-logo-link:focus {
+  text-decoration: none;
+}
+
+#header-redoc #links-to-home a.docs-link {
+  color: #ffffff;
+  vertical-align: text-top;
+  display: inline-block;
+  line-height: 1.4em;
+  font-size: 1.2rem;
+}
+
+#header-redoc #links-to-home a.docs-link:hover,
+#header-redoc #links-to-home a.docs-link:active {
+  color: #ffffff;
+}
+
+@media (min-width: 801px){
+}
+
+@media (min-width: 1201px){
+	.redoc-wrap {
+		margin-top: 0;
+	}
+
+	.redoc-wrap .menu-content {
+		top: 100px!important;
+		height: calc(100vh - 100px)!important;
+	}
+
+	#header-redoc {
+		width: 260px;
+		height:100px;
+	}
+
+	#header-redoc .wazuh-logo-link img {
+		max-width: 110px;
+	}
+
+	#header-redoc #links-to-home {
+		width: 100%;
+    justify-content: space-between;
+	}
+
+	#header-redoc #links-to-home .wazuh-logo-link {
+		margin-right: 10px;
+	}
+
+	#header-redoc #links-to-home a.docs-link {
+		padding-top: 6px;
+	}
+
+	#header-redoc .wazuh-logo-link img {
+		max-width: 172px;
+  }
+}
