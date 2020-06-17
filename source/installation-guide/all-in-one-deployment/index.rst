@@ -18,7 +18,7 @@ In addition, in order to use the Wazuh Kibana plugin properly, the extra Elastic
 
 To allow the installation process and guarantee the expected performance of the Wazuh-Elastic Stack components the host must meet the hardware requirements described in the :ref:`Requirements <all_in_one_requirements>` section.
 
-The user can choose between Step by step installation, a manual way of carrying out the process, or Unattended installation, an automated way using a script:
+The user can choose between Step-by-step installation, a manual way of carrying out the process, and Unattended installation, an automated way using a script:
 
 .. toctree::
     :maxdepth: 1
