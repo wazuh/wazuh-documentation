@@ -14,9 +14,9 @@ The commands above add the following Wazuh Kibana's users:
 
 Apart from the extra users, there are three extra roles added. These roles are in charge of giving the right permissions to the users:
 
-- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with Wazuh’s indexes.
+- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indexes.
 
-- ``wazuh_ui_user`` provides ``wazuh_user`` ability to read Wazuh’s indexes.
+- ``wazuh_ui_user`` provides ``wazuh_user`` ability to read the Wazuh’s indexes.
 
 - ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform, reading, writing, management and indexing task on the Wazuh indexes.
 

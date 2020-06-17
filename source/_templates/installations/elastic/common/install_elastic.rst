@@ -4,7 +4,7 @@
 
     .. group-tab:: Yum
 
-        Install the latest version of Open Distro for Elasticsearch:
+        Install Open Distro for Elasticsearch:
 
             .. code-block:: console
 
@@ -14,7 +14,7 @@
 
     .. group-tab:: APT
 
-        Install Elasticsearch OSS and the latest version of Open Distro for Elasticsearch:
+        Install Elasticsearch OSS and Open Distro for Elasticsearch:
 
             .. code-block:: console
 

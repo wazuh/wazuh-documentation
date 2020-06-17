@@ -7,7 +7,7 @@
 Step-by-step installation
 =========================
 
-This document guides through an installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments. The default security settings will be used. This guide will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
+This document guides through the installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -26,7 +26,7 @@ Open Distro for Elasticsearch requires the installation of Java Development Kit 
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server.
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,7 +110,7 @@ Configuring Elasticsearch
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to use Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
+In order to use the Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
 
 .. include:: ../../_templates/installations/elastic/common/add_roles_and_users.rst
 
@@ -188,7 +188,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
       # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
-#. Copy the demo Elasticsearch certificates into ``/etc/filebeat/certs``:
+#. Copy the Elasticsearch certificates into ``/etc/filebeat/certs``:
 
     .. code-block:: console
 
@@ -242,7 +242,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
         # cd /usr/share/kibana
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
-#. Copy the demo Elasticsearch certificates into ``/etc/kibana/certs``:
+#. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
 
     .. code-block:: console
 
