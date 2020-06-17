@@ -33,7 +33,7 @@ Individual components
 Grouped components
 ^^^^^^^^^^^^^^^^^^
 
-- ``Wazuh server``: collects and analyzes data from deployed Wazuh agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API and Filebeat OSS.
+- ``Wazuh server``: collects and analyzes data from deployed Wazuh agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API and Filebeat.
 
 - ``Elastic Stack``: the Open Distro for Elasticsearch and Kibana components can be installed on the same server. Both components installed together are called Elastic Stack. It runs Kibana with the Wazuh Kibana plugin.
 
