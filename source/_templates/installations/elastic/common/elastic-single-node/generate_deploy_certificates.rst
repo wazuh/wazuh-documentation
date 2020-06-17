@@ -7,7 +7,7 @@
     # mkdir /etc/elasticsearch/certs
     # cd /etc/elasticsearch/certs
 
-#. Download the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificates
+#. Download the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificates:
 
   .. code-block:: console
 
@@ -47,7 +47,7 @@
         # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard-multi-node.yml
 
 
-      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line.
+      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line:
 
         .. code-block:: yaml
 
