@@ -102,6 +102,8 @@ Execute the following command to ensure that the installation was made properly:
 
   # curl -XGET https://localhost:9200 -u admin:admin -k
 
+It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml file``. More information about this process can be found :ref:`here <change_elastic_pass>`.
+
 Next steps
 ----------
 
