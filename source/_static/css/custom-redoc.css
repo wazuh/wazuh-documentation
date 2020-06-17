@@ -8,18 +8,105 @@ body {
   line-height: 1.4;
 }
 
-redoc[spec-url] {
+redoc[spec-url] .sc-hORach.iXutXb.btn-close {
+  background-color: transparent;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  outline: 0;
+	height: 40px;
+  width: 40px;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close:focus {
+	border-color: rgba(255, 255, 255, 0.7);
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close .x {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::before,
+redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::after,
+redoc[spec-url] .sc-hORach.iXutXb.btn-close::before {
+  content: '';
+  display: block;
+  background-color: #ffffff;
+  width: 17px;
+  height: 3px;
+  border-radius: 20px;
+  position: absolute;
+  border-bottom: 0;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::before {
+  top: 5px;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::after {
+  top: 19px;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed .x::before {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  width: 17px;
+  transition: all ease .4s;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed) .x::before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  width: 21px;
+  left: 2px;
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  transition: all ease .4s;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed .x::after {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  width: 17px;
+  transition: all ease .4s;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed) .x::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  width: 21px;
+  left: 2px;
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  transition: all ease .4s;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed)::before {
+  opacity: 0;
+	top: 17px;
+  transition: all ease .4s;
+}
+
+redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed::before {
+  opacity: 1;
+  top: 17px;
+  transition: all ease .4s;
+}
+
+
+.loading redoc[spec-url] {
 	/* display:none; */
 }
 
 redoc[spec-url] .sc-hORach.iXutXb {
-	width: 40px;
   top: 6px;
-  height: 40px;
   padding: 10px;
   box-shadow: none;
   border-radius: 4px;
 	background-color: #ffffff;
+	right: 15px;
 }
 
 redoc[spec-url] .sc-hORach.iXutXb .sc-cLQEGU.bPGAgL {
