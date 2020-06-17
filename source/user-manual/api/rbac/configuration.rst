@@ -6,22 +6,25 @@ Configuration
 =============
 Before modifying RBAC policies, roles and more, it is necessary to log into the API. You can find a detailed guide on how to do it within the :ref:`Getting started <api_getting_started>` section of the API.
 
-The endpoints required to manage RBAC belong to the *Security* group. To run them, this configuration guide uses the API interface. However, the command-line ``cURL`` can be used instead as explained in :ref:`Getting started <api_getting_started>`.
-
 Set RBAC mode
 -------------
-You can modify the RBAC mode (which we mentioned in the :ref:`How it works <api_rbac_how_it_works>` section). This is a security configuration so it is necessary to use the security endpoint ``/security/config``, specifically the ``PUT`` method. Just write the following setting inside the request body of the endpoint, setting the desired mode (white/black).
+You can modify the RBAC mode (which we mentioned in the :ref:`How it works <api_rbac_how_it_works>` section). This is a security configuration so it is necessary to use the security endpoint ``/security/config``, specifically the ``PUT`` method. To do so, you can run the following cURL command, replacing your token and the desired mode (white/black).
+
+.. code-block:: console
+
+    # curl -X PUT "https://localhost:55000/v4/security/config?pretty=true" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
 
 .. code-block:: json
+    :class: output
 
     {
-      "mode": "white"
+       "message": "Configuration successfully updated"
     }
 
 You can also change other settings (not related to RBAC) such as the duration of the JWT tokens, as well as check the current configuration with the ``GET`` method or restore the default one with the ``DELETE`` method.
 
 .. note::
-    Wazuh API needs to be restarted for the changes to take effect.
+    All tokens are revoked for security reasons when changing RBAC mode. It will be necessary to obtain a new token after the change.
 
 Create a new policy
 -------------------
@@ -46,6 +49,12 @@ Let's assume a use case where we want to grant the Sales-team access to the agen
         "effect": "allow"
       }
     }
+
+The request would be as follows:
+
+.. code-block:: console
+
+    # curl -X POST "https://localhost:55000/v4/security/policies?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
 
 With this policy, we have established that it is allowed to read agents 001, 002, 003 and 004. We can create more policies to our liking as long as they are not repeated. We may also change this policy at any time to, for example, add new agents.
 
@@ -106,6 +115,12 @@ The link between users and policies is **roles**. Therefore, for the previous ex
 .. note::
     The highlighted lines are designed for a future feature, still in development. It does not affect the functionality.
 
+The request with the information showed above would look like this:
+
+.. code-block:: console
+
+    # curl -X POST "https://localhost:55000/v4/security/roles?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"sales-team\",\"rule\":{\"MATCH\":{\"definition\":\"sales-team\"}}}"
+
 The response body would be this. Remember that the ID is needed to link policies to this role.
 
 .. code-block:: json
@@ -138,9 +153,13 @@ Assign policies to roles
 ------------------------
 To assign policies to a certain role, use the endpoint ``POST /security/roles/{role_id}/policies``
 
-To do it, simply indicate the ID of the role inside *role_id* field and the ID of each policy inside *policy_ids* field. There is another parameter called *position*. It is used to determine which policy is applied when there are two or more conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
+To do it, simply indicate the ID of the role and the ID of each policy. There is another parameter called *position*. It is used to determine which policy is applied when there are two or more conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
 
-In our example the *role_id* would be ``8`` (the ID of "sales-team" role) and the *policy_id* would be ``12`` (the ID of "customer_x_agents" policy). We would get a similar response body:
+In our example the *role_id* would be ``8`` (the ID of "sales-team" role) and the *policy_id* would be ``12`` (the ID of "customer_x_agents" policy). This would be the request:
+
+.. code-block:: console
+
+    # curl -X POST "https://localhost:55000/v4/security/roles/8/policies?policy_ids=12&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -177,9 +196,11 @@ To assign roles to a user, use the endpoint ``POST /security/users/{username}/ro
 
 To add an already created user to an existing role, it is only necessary to specify the user name and the ID of the role. There is another parameter called *position*. It is used to determine which role is applied when there are two or more conflicting roles. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
 
-Following the previous examples, we are going to link the user "sales-member-1" with the role "sales-team" whose ID is 8.
+Following the previous examples, we are going to link the user "sales-member-1" with the role "sales-team" whose ID is 8. This would be the request:
 
-This would be the response body after the assignment:
+.. code-block:: console
+
+    # curl -X POST "https://localhost:55000/v4/security/users/sales-member-1/roles?role_ids=8&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
