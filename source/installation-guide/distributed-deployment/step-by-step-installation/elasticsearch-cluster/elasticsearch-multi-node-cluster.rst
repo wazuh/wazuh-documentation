@@ -10,7 +10,7 @@ Elasticsearch multi-node cluster
 
 Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
 
-This document will explain how to install the Open Distro components in a multi-node cluster.
+This document will explain how to install Elasticsearch in a multi-node cluster.
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
@@ -66,7 +66,7 @@ Elasticsearch configuration
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*Master*] In order to use Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
+[*Master*] In order to use the Wazuh Kibana plugin properly, it is neccesary to add the extra roles and users:
 
 .. include:: ../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
@@ -100,7 +100,7 @@ Execute the following command to ensure that the installation was made properly:
 
 .. code-block:: console
 
-  # curl -XGET https://localhost:9200 -u admin:admin -k
+  # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml file``. More information about this process can be found :ref:`here <change_elastic_pass>`.
 

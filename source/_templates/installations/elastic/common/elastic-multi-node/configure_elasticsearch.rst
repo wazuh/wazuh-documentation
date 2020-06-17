@@ -20,7 +20,7 @@ The file ``/etc/elasticsearch/elasticsearch.yml`` has to be edited:
           - <elasticsearch_ip_node2>
           - <elasticsearch_ip_node3>
 
-Depending on the node type, some parameters may vary between nodes. ``cluster.initial_master_nodes`` and ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master.
+Depending on the node type, some parameters may vary between nodes. The ``cluster.initial_master_nodes`` and the ``discovery.seed_hosts`` are lists of all the master-eligible nodes in the cluster. The parameter ``node.master: false`` must be included in every Elasticsearch node that will not be configured as master.
 
 Values to be replaced:
 
@@ -34,7 +34,7 @@ Besides, the node certificates for each node must be specified under the ``opend
 
     .. code-block:: yaml
         :emphasize-lines: 4
-        
+
         opendistro_security.nodes_dn:
             - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
             - CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
