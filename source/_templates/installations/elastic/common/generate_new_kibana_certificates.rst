@@ -10,19 +10,19 @@ In case of installing Kibana in a different server from the Elasticsearch's one,
     - name: kibana
       dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=ES
 
-#. Execute the Search Guard’s script to create the certificates: 
+#. Execute the Search Guard’s script to create the certificates:
 
   .. code-block:: console
 
     # ./searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -crt -t /etc/elasticsearch/certs/
 
-#. Add the new certificates to the ``certs.tar`` compressed file: 
+#. Add the new certificates to the ``certs.tar`` compressed file:
 
   .. code-block:: console
 
     # tar -rvf certs.tar kibana.pem kibana.key
 
-Once the certificates have been created, they can be removed from the Elasticsearch master node and added to the ``certs.tar`` file, then it must be copied into the Kibana server, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+Once the certificates have been created, they can be removed from the Elasticsearch master node and added to the ``certs.tar`` file, then it must be copied into the Kibana server, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
 .. code-block:: console
 

@@ -10,7 +10,7 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More information can be found at `Kibana site <https://opendistro.github.io/for-elasticsearch-docs/docs/kibana/>`_.
 
-Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
+It is recommended to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -22,7 +22,7 @@ Before installing Kibana, some extra packages must be installed:
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This step is required only if Kibana will be installed on a different server as these components were previously installed while installing Elasticsearch:
+This step is required only if Kibana will be installed on a different server where the Wazuh repository is not present:
 
 .. tabs::
 
@@ -68,14 +68,14 @@ Kibana installation and configuration
 
 #. Install the Wazuh Kibana plugin:
 
-    The installation of the plugin must be done from the Kibana home directory.
+    The installation of the plugin must be done from the Kibana home directory:
 
     .. code-block:: console
 
         # cd /usr/share/kibana
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
-#. The next step, involves the certificates placement. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
+#. The next step involves the certificates placement. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
 
     .. tabs::
@@ -115,7 +115,7 @@ With the first access to Kibana, the browser shows a warning message stating tha
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml file``. More information about this process can be found :ref:`here <change_elastic_pass>`.
 
-After the first attempt to access the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
+With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
 
 .. code-block:: yaml
 
