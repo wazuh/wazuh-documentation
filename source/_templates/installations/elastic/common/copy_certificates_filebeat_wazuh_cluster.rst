@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In section *Installation guide > filebeat cluster*, the ``cert.tar`` file was created. The file must be copied into the Wazuh server host, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+In the section *Installation guide > filebeat cluster*, the ``cert.tar`` file was created. The file must be copied into the Wazuh server host, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
 
 The ``X`` must be replaced with the number used in the certificate name defined for this Wazuh server:
 

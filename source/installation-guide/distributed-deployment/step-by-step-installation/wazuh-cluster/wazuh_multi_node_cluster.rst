@@ -8,7 +8,7 @@
 Wazuh multi-node cluster
 =========================
 
-This document will go through the installation of the Wazuh server components in a multi-node cluster.
+This document will go through the installation of the Wazuh server components and Filebeat in a Wazuh multi-node cluster.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -22,12 +22,12 @@ Before installing the Wazuh servers and Filebeat, some extra packages must be in
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the servers. Alternatively, the packages can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for the Wazuh manager and the Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster:
+This section describes how to add the Wazuh repository. It will be used for the Wazuh manager, the Wazuh API and Filebeat installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster:
 
 .. tabs::
 
@@ -69,7 +69,7 @@ Install the Wazuh manager package. This step must be applied in all servers that
 
 
 
-Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
+Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or a Wazuh worker node.
 
 One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
 
