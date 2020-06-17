@@ -24,7 +24,7 @@
 
     </style>
   </head>
-  <body>
+  <body class="loading">
     <header id="header-redoc">
       <div class="navbar-brand" id="logo-title">
         <div id="links-to-home">
@@ -37,5 +37,6 @@
     </header>
     <redoc spec-url='{{ apiURL }}'></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+    <script src="{{ pathto('_static/js/custom-redoc.js', 1) }}"></script>
   </body>
 </html>

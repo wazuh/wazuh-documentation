@@ -154,7 +154,12 @@ redoc[spec-url] .collapser::after {
 	background-color: #eaeaea;
 }
 
+.loading #header-redoc {
+	display: none;
+}
+
 #header-redoc {
+	display: block;
   z-index: 5;
   position: fixed;
 	top: 0;
