@@ -40,9 +40,12 @@ redoc[spec-url] p,
 redoc[spec-url] .sc-iRbamj {
 	font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 1rem;
   color: #333333;
   line-height: 1.4;
+}
+
+redoc[spec-url] .sc-epnACN.iYKvkC {
+	padding-left: 10px;
 }
 
 redoc[spec-url] code,
@@ -51,10 +54,6 @@ redoc[spec-url] .bMfIUD,
 redoc[spec-url] .dpRRAO,
 redoc[spec-url] .beUper {
 	font-family: 'Fira Mono', monospace;
-}
-
-redoc[spec-url] .sc-chPdSV {
-	font-size: 0.9rem;
 }
 
 redoc[spec-url] a:hover,
@@ -122,6 +121,27 @@ redoc[spec-url] .sc-bZQynM.celZWI h3 {
 
 redoc[spec-url] .bIbMYr {
 	font-family: 'Montserrat', sans-serif;
+}
+
+redoc[spec-url] table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+	padding-bottom: 15px;
+}
+
+redoc[spec-url] .collapser {
+	background-color: #757A7D;
+	height: 1.15em;
+	width: 1.15em;
+	display: inline-flex;
+	border-radius: 3px;
+	justify-content: center;
+	cursor: pointer
+}
+
+redoc[spec-url] .collapser::after {
+	align-self: center;
 }
 
 .redoc-wrap {
@@ -195,6 +215,29 @@ redoc[spec-url] .bIbMYr {
 #header-redoc #links-to-home a.docs-link:hover,
 #header-redoc #links-to-home a.docs-link:active {
   color: #ffffff;
+}
+
+@media (max-width: 499px){
+	redoc[spec-url] td.sc-kgoBCf.kGwPhO {
+    max-width: 290px;
+	}
+}
+@media (max-width: 767px){
+	redoc[spec-url] .TPAYK,
+	redoc[spec-url] .celZWI {
+    padding: 15px;
+	}
+}
+
+@media (min-width: 768px){
+	redoc[spec-url] p,
+	redoc[spec-url] .sc-iRbamj {
+		font-size: 1rem;
+	}
+
+	redoc[spec-url] .sc-chPdSV {
+		font-size: 0.9rem;
+	}
 }
 
 @media (min-width: 801px){
