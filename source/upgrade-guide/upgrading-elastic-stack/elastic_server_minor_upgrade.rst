@@ -84,17 +84,17 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
 
           *  APT:
 
-              Upgrade to the underlying Elasticsearch version of the new Open Distro for Elasticsearch release:
+             Upgrade Elasticsearch OSS:
 
-                .. code-block:: console
+               .. code-block:: console
 
-                  # apt install elasticsearch-oss
+                 # apt install elasticsearch-oss
 
-              Upgrade the packages on the node:
+             Upgrade Open Distro for Elasticsearch:
 
-                .. code-block:: console
+               .. code-block:: console
 
-                  # opendistroforelasticsearch
+                 # apt install opendistroforelasticsearch
 
         .. group-tab:: Elastic
 
@@ -145,7 +145,7 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
 
       curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
 
-#. Repeat it for every Elasticsearch node.
+#. Repeat the steps for every Elasticsearch node.
 
 
 Upgrade Filebeat
@@ -233,6 +233,8 @@ Upgrade Filebeat
       .. tabs::
 
         .. group-tab:: Open Distro for Elasticsearch
+
+          This step is needed only for the upgrade of the ``Distributed installation``. In case of having ``All-in-one`` installation, the file is already configured.
 
           * Elasticsearch single-node:
 
@@ -381,21 +383,21 @@ Upgrade Kibana
 
 #. Install the Wazuh Kibana plugin:
 
-  .. tabs::
+    .. tabs::
 
-    .. group-tab:: From the URL
+      .. group-tab:: From the URL
 
-      .. code-block:: console
+        .. code-block:: console
 
-        # cd /usr/share/kibana/
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
+          # cd /usr/share/kibana/
+          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-3.13.0-tsc-opendistro.zip
 
-    .. group-tab:: From the package
+      .. group-tab:: From the package
 
-      .. code-block:: console
+        .. code-block:: console
 
-        # cd /usr/share/kibana/
-        # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+          # cd /usr/share/kibana/
+          # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 
 
