@@ -28,6 +28,7 @@ Wazuh core
 - Added support for MITRE ATT&CK knowledge base.
 - Added new configuration block for Windows Defender EventChannel.
 - Added as a dependency Microsoft's Software Update Catalog used by Vulnerability Detector.
+- Added support for ``aarch64`` and ``armhf`` architectures.
 
 **Changed**
 
@@ -39,7 +40,8 @@ Wazuh core
 - The NVD is now the primary feed for the vulnerability detector in Linux.
 - Removed OpenSCAP policies installation and configuration block.
 - Changed the internal configuration of Analysisd to be able to register by default a number of agents higher than ``65536``.
-- Change ``same/different_systemname`` for ``same/different_system_name`` in Analysisd static filters.
+- Changed ``same/different_systemname`` for ``same/different_system_name`` in Analysisd static filters.
+- Updated the internal Python interpreter from v3.7.2 to v3.8.2.
 
 **Other fixes and improvements**
 
