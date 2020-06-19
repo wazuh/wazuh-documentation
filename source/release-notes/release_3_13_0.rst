@@ -17,17 +17,17 @@ Wazuh core
 
 **Added**
 
-- Included the NVD as feed for Linux agents in Vulnerability Detector.
-- Improved the Vulnerability Detector engine to correlate alerts between different feeds.
-- Added Vulnerability Detector module unit testing for Unix source code.
-- Added a timeout to the updates of the Vulnerability Detector's feeds to prevent hangings.
-- Added option for the JSON decoder to choose the treatment of Array structures.
+- Included the NVD as a feed for Linux agents in vulnerability detector.
+- Improved the vulnerability detector engine to correlate alerts between different feeds.
+- Added vulnerability detector module unit testing for Unix source code.
+- Added a timeout to the updates of the vulnerability detector's feeds to prevent hangings.
+- Added option for the JSON decoder to choose the treatment of array structures.
 - Added ``mode`` value (real-time, Who-data, or scheduled) as a dynamic field in FIM alerts. 
 - Added a configurable maximum limit of files to be monitored by FIM.
 - New integration for pull logs from Google Cloud Pub/Sub.
 - Added support for MITRE ATT&CK knowledge base.
 - Added new configuration block for Windows Defender EventChannel.
-- Added as a dependency Microsoft's Software Update Catalog used by Vulnerability Detector.
+- Added as a dependency Microsoft's Software Update Catalog used by vulnerability detector.
 - Added support for ``aarch64`` and ``armhf`` architectures.
 
 **Changed**
@@ -58,7 +58,7 @@ Wazuh core
 - Avoided to count links when generating alerts for ignored directories in Rootcheck.
 - Fixed typo in the path used for logging when disabling an account.
 - Fixed an error when receiving different Syslog events in the same TCP packet.
-- Fixed a bug in Vulnerability Detector on Modulesd when comparing Windows software versions.
+- Fixed a bug in vulnerability detector on Modulesd when comparing Windows software versions.
 - Fixed a bug that caused an agent's disconnection time not to be displayed correctly.
 - Optimized the function to obtain the default gateway.
 - Fixed host verification when signing a certificate for the manager.
@@ -84,8 +84,8 @@ Wazuh API
     - ``GET/rules/tsc``
 
 - Added new filters in request ``GET/rules``:
-    - ``mitre``: Filters the rules by mitre requirement
-    - ``tsc``: Filters the rules by tsc requirement
+    - ``mitre``: Filters the rules by mitre requirement.
+    - ``tsc``: Filters the rules by tsc requirement.
 
 **Changed**
 
@@ -111,7 +111,7 @@ Wazuh ruleset
 
 **Changed**
 
-- Changed description of Vulnerability Detector rules.
+- Changed description of vulnerability detector rules.
 - Changed squid decoders.
 
 
