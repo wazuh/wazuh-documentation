@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 Use case: Getting an alert when a check changes its result value
 ================================================================
@@ -13,7 +13,7 @@ To configure the execution of the **SCA** module with a policy file, it is neces
 .. code-block:: none
 
     <sca>
-      <enabled>no</enabled>
+      <enabled>yes</enabled>
       <scan_on_start>yes</scan_on_start>
       <interval>12h</interval>
       <skip_nfs>yes</skip_nfs>

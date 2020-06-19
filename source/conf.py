@@ -46,6 +46,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
     'sphinxprettysearchresults',
+    'sphinx_tabs.tabs',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -402,18 +403,19 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.12.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
-    "|WAZUH_LATEST_PUPPET|" : "3.12.0",
-    "|WAZUH_LATEST_OVA|" : "3.12.2",
-    "|WAZUH_LATEST_DOCKER|" : "3.12.0",
-    "|ELASTICSEARCH_LATEST|" : "7.6.2",
+    "|WAZUH_LATEST|" : "3.12.3",
+    "|WAZUH_LATEST_MINOR|" : "3.12",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
+    "|WAZUH_LATEST_PUPPET|" : "3.12.2",
+    "|WAZUH_LATEST_OVA|" : "3.12.3",
+    "|WAZUH_LATEST_DOCKER|" : "3.12.2",
+    "|ELASTICSEARCH_LATEST|" : "7.7.1",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.2",
     "|SPLUNK_LATEST|" : "8.0.2",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_AIX|" : "1",
@@ -432,7 +434,7 @@ custom_replacements = {
     "|WAZUH_REVISION_HPUX|" : "1",
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_REVISION_WINDOWS|" : "1",
-}   
+}
 
 # -- Setup -------------------------------------------------------------------
 
@@ -442,21 +444,44 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
-    app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
 
-    app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
-    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
+
+	# List of compiled documents
+    app.connect('html-page-context', collect_compiled_pagename)
+    app.connect('build-finished', creating_file_list)
+
+exclude_doc = ["not_found"]
+list_compiled_html = []
+
+def collect_compiled_pagename(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    if templatename == "page.html" and pagename not in exclude_doc:
+        list_compiled_html.append(context['pagename']+'.html')
+    else:
+        pass
+
+def creating_file_list(app, exception):
+		''' Creates a document `.doclist` containing the path to every html file that was compiled '''
+		if app.builder.name == 'html':
+				build_path = app.outdir
+				separator = '\n'
+				with open(build_path+'/.doclist', 'w') as doclist_file:
+						list_text = separator.join(list_compiled_html)
+						doclist_file.write(list_text)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
@@ -481,3 +506,4 @@ html_context = {
     "github_version": version,
     "production": production
 }
+sphinx_tabs_nowarn = True

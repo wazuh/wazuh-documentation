@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wazuh_ansible_elk_server:
 
@@ -128,7 +128,7 @@ We also can create another YAML file only with the content we want to change the
 - :ref:`Kibana <ansible-wazuh-kibana>` role.
 
 
-Let's see below, the content of the playbooks ``/etc/ansible/wazuh-elastic.yml``.
+Let's see below, the content of the playbooks ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-elastic.yml``.
 
 
 .. code-block:: yaml

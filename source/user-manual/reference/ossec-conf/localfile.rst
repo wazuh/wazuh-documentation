@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_ossec_localfile:
 
@@ -276,6 +276,8 @@ Set the format of the log to be read. **field is required**
 |                    | postgresql_log     | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | nmapg              | Used for monitoring files conforming to the grep-able output from ``nmap``.                      |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | iis                | Used for ``iis`` (Windows Web Server) logs.                                                      |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | command            | Used to read the output from the command (as run by root) specified by the command tag.          |
 |                    |                    |                                                                                                  |

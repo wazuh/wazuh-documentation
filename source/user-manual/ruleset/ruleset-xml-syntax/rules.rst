@@ -325,7 +325,7 @@ Used as a requisite to trigger the rule. It will check for a match in the conten
 +--------------------+-----------------------------------------------------------------+
 | **name**           | Specifies the name of the field extracted by the decoder.       |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_      |
 +--------------------+-----------------------------------------------------------------+
 
 Example:
