@@ -66,6 +66,9 @@ A good example is the firewall-block command which expects the ``srcip`` field i
 | **use**            | Not required                                                                                         |
 +--------------------+------------------------------------------------------------------------------------------------------+
 
+.. note::
+	The command will **not** be executed if **srcip** is expected but not found in the alert.
+
 extra_args
 ^^^^^^^^^^
 
