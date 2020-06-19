@@ -1,5 +1,6 @@
 $(function() {
   let loc = location.hash;
+  const version = $('[data-version]').data('version');
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
@@ -28,8 +29,21 @@ $(function() {
   const newTabNodes = [
     'user-manual/api/reference',
   ];
-  markTocNodesWithClass(newTabNodes, 'js-new-tab');
-  $('.js-new-tab').attr('target', '_blank');
+  if ( version >= '4.0') {
+    markTocNodesWithClass(newTabNodes, 'js-new-tab');
+    $('.js-new-tab').attr('target', '_blank');
+
+    /* Links to new tab found within the main content */
+    $('#main-content .reference.internal').each(function() {
+      const linkRef = this;
+      newTabNodes.forEach(function(item) {
+        if (linkRef.href.indexOf(item) !== -1) {
+          $(linkRef).attr('target', '_blank');
+          return;
+        }
+      });
+    });
+  }
 
   /* list of nodes (by title) which will not show their subtree */
   const hideSubtreeNodes = [
