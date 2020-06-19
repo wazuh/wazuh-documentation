@@ -146,7 +146,7 @@ redoc[spec-url] .beUper {
 redoc[spec-url] a:hover,
 redoc[spec-url] a:focus {
 	color: #0094ce;
-	border-color: #0094cecc;
+	border-color: #0094ce;
 }
 
 redoc[spec-url] a:visited {
@@ -154,7 +154,7 @@ redoc[spec-url] a:visited {
 }
 
 redoc[spec-url] a.jIdpVJ {
-	border-color: #0094cecc;
+	border-color: #0094ce;
 	user-select: none;
 }
 
@@ -231,6 +231,10 @@ redoc[spec-url] .collapser::after {
 	align-self: center;
 }
 
+redoc[spec-url] .sc-elJkPf.cxRqCB a {
+  font-size: 0.8rem;
+}
+
 .redoc-wrap {
 	margin-top: 50px;
 }
@@ -241,7 +245,8 @@ redoc[spec-url] .collapser::after {
 	background-color: #eaeaea;
 }
 
-.loading #header-redoc {
+.loading #header-redoc,
+.loading footer {
 	display: none;
 }
 
@@ -309,6 +314,18 @@ redoc[spec-url] .collapser::after {
   color: #ffffff;
 }
 
+#footer-redoc {
+	background-color: #eaeaea;
+}
+
+#footer-redoc #footer-content {
+	background-color: #f4f4f4;
+  padding: 15px;
+  color: #333;
+	font-size: 0.88rem;
+  box-sizing: border-box;
+}
+
 @media (max-width: 499px){
 	redoc[spec-url] td.sc-kgoBCf.kGwPhO {
     max-width: 290px;
@@ -333,6 +350,11 @@ redoc[spec-url] .collapser::after {
 }
 
 @media (min-width: 801px){
+	#footer-redoc #footer-content {
+    width: calc(100% - 260px);
+    margin-left: auto;
+		padding: 30px 45px;
+	}
 }
 
 @media (min-width: 1201px){
