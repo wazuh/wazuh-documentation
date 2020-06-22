@@ -11,6 +11,7 @@ This section lists the changes in version 3.13.0. More details about these chang
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/3.13-7.7/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/3.13/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/3.13/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/3.13-8.0/CHANGELOG.md>`_
 
 Wazuh core
 ----------
@@ -70,8 +71,35 @@ Wazuh core
 Wazuh Kibana App
 ----------------
 
+**Added**
+
 - Support for Wazuh v3.13.0.
-- Fixed an error that allowed having more than one instance of ``babel-polyfill``.
+- Support for Kibana v7.7.1
+- Support for Open Distro 1.8
+- Added new navigation experience with a global menu.
+- Added a breadcrumb in Kibana top nav.
+- Added a new Agents Summary Screen.
+- Added a new feature to add sample data to dashboards.
+- Added MITRE integration.
+- Added Google Cloud Platform integration.
+- Added TSC integration.
+- Added a new integrity monitoring state view for agent.
+- Added a new integrity monitoring files detail view.
+- Added a new component to explore compliance requirements.
+
+**Changed**
+
+- Code migration to React.js.
+- Global review of styles.
+- Unified Overview and Agent dashboards into new Modules.
+- Changed vulnerabilities' dashboard visualizations.
+
+**Fixed**
+
+- Fixed Open Distro tenants to be functional.
+- Improved navigation performance.
+- Avoid creating the ``wazuh-monitoring`` index pattern if it is disabled.
+- SCA checks without compliance field could not be expanded.
 
 Wazuh API
 ---------
@@ -114,5 +142,15 @@ Wazuh ruleset
 - Changed description of vulnerability detector rules.
 - Changed squid decoders.
 
+**Fixed**
 
+- Fixed the provider name so that Windows Eventlog's logs match with the Wazuh rules.
+- Fixed static filters related to the ``system_name`` field.
+- Removed trailing whitespaces in the group name section of the ruleset.
+- Removed invalid zeroes from rules id.
+
+Wazuh Splunk
+------------
+
+- Support for Wazuh v3.13.0
 
