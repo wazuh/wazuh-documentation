@@ -5,135 +5,148 @@
 Upgrade from the same major version (3.x)
 =========================================
 
-The following steps show how to upgrade to the latest available version of Wazuh 3.x (which implies upgrading to the latest version of Elastic Stack 6.x).
+The following steps show how to upgrade to the latest available version of Wazuh 3.x, which implies upgrading to the latest compatible version of Elastic Stack.
 
 Starting the upgrade
 --------------------
 
-If you followed our :ref:`manager <installation_guide>` or :ref:`agents <installation_agents>` installation guides, probably you disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages.
+Following the Wazuh :ref:`manager <installation_guide>` or the Wazuh :ref:`agents <installation_agents>` installation guides, the user probably disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages:
 
-a) CentOS/RHEL/Fedora:
+.. tabs::
 
-  .. code-block:: console
+  .. group-tab:: YUM
 
-    # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+    .. code-block:: console
 
-b) Debian/Ubuntu:
+      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
 
-  This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
+  .. group-tab:: APT
 
-  .. code-block:: console
+    This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
 
-    # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+    .. code-block:: console
 
-c) OpenSUSE:
+      # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
 
-  .. code-block:: console
+  .. group-tab:: ZYpp
 
-    # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+    .. code-block:: console
 
-Upgrade the Wazuh manager and API
-----------------------------------
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-a) CentOS/RHEL/Fedora:
 
-.. code-block:: console
+Upgrade the Wazuh manager and the Wazuh API
+-------------------------------------------
 
-    # yum upgrade wazuh-manager wazuh-api
+.. tabs::
 
-b) Debian/Ubuntu:
+  .. group-tab:: YUM
 
-.. code-block:: console
+    .. code-block:: console
 
-    # apt-get update
-    # apt-get install wazuh-manager wazuh-api
+        # yum upgrade wazuh-manager wazuh-api
 
-c) OpenSUSE:
+  .. group-tab:: APT
 
-.. code-block:: console
+    .. code-block:: console
 
-    # zypper update wazuh-manager wazuh-api
+        # apt-get update
+        # apt-get install wazuh-manager wazuh-api
+
+  .. group-tab:: ZYpp
+
+    .. code-block:: console
+
+        # zypper update wazuh-manager wazuh-api
+
 
 .. note::
-  The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
+  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager, the Wazuh API and the Wazuh agents. The Wazuh configuration file will keep ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in :ref:`User Manual <user_manual>`.
 
 Upgrade the Wazuh agent
 -----------------------
 
-Since the Wazuh 3.x version it is possible to upgrade the agents from the manager or locally.
+Since the Wazuh 3.x version it is possible to upgrade the Wazuh agents from the Wazuh manager or locally.
 
-Upgrading the agents remotely from the manager is possible thanks to the agent_upgrade tools and the Wazuh API. You may check it in the  :ref:`Upgrading agent<upgrading-agent>` section.
+Upgrading the Wazuh agents remotely from the Wazuh manager is possible thanks to the ``agent_upgrade`` tools and the Wazuh API. More information can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
 
-To perform the upgrade locally you have to follow the next steps:
+To perform the upgrade locally follow the instructions depending on the Wazuh agent's operating system:
 
-a) CentOS/RHEL/Fedora:
+-  CentOS/RHEL/Fedora:
 
   .. code-block:: console
 
     # yum upgrade wazuh-agent
 
-b) Debian/Ubuntu:
+-  Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update
     # apt-get install wazuh-agent
 
-c) OpenSUSE:
+-  OpenSUSE:
 
   .. code-block:: console
 
     # zypper update wazuh-agent
 
-d) Windows:
+-  Windows:
 
-  The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
+  The Wazuh agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using the installer, both of them require ``administrator rights``:
 
-  * Using the GUI installer:
+  .. tabs::
 
-  Open the installer and follow the instructions to upgrade the agent.
+    .. group-tab:: Using the GUI installer
 
-    .. image:: ../../images/installation/windows.png
-      :align: center
+      Open the installer and follow the instructions to upgrade the Wazuh agent:
 
-  * Using the command line:
+        .. image:: ../../images/installation/windows.png
+          :align: center
 
-  To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
 
-  .. code-block:: console
+    .. group-tab:: Using the command line
 
-    # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+      To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
 
-.. note::
-  To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+      .. code-block:: console
 
-Finishing the Wazuh upgrade
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
-You've finished upgrading your Wazuh installation to the latest version. Now you can disable again the Wazuh repositories in order to avoid undesired upgrades and compatibility issues.
+  .. note::
 
-a) CentOS/RHEL/Fedora:
+    To learn more about the unattended installation process, please read :ref:`Windows installation guide <wazuh_agent_package_windows>`.
 
-  .. code-block:: console
+Disabling the Wazuh repositories
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+It is recommended to disable the Wazuh repositories in order to avoid undesired upgrades and compatibility issues:
 
-b) Debian/Ubuntu:
+.. tabs::
 
-  This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
+  .. group-tab:: YUM
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-    # apt-get update
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-c) OpenSUSE:
+  .. group-tab:: APT
 
-  .. code-block:: console
+    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repositories.
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+    .. code-block:: console
+
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
+
+  .. group-tab:: ZYpp
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
 
 Next steps
 ----------
 
-Once you have updated the Wazuh manager and API you are ready to :ref:`upgrade the Elastic Stack<elastic_stack_packages_legacy>`.
+The next step consists on :ref:`upgrading the Elastic Stack <elastic_stack_packages_legacy>`.
