@@ -353,7 +353,8 @@ def minification(actual_path):
         ['css/wazuh-icons','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
-        ['js/style','js']
+        ['js/style','js'],
+        ['js/delete-cache', 'js']
     ]
 
     for file in files:
@@ -416,6 +417,8 @@ def setup(app):
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
     app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_js_file("js/delete-cache.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/delete-cache.js")).st_mtime)
 
 	# List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
@@ -452,6 +455,7 @@ exclude_patterns = [
     "css/style.css",
     "js/version-selector.js",
     "js/redirects.js",
+    "js/delete-cache.js",
     "js/style.js"
 ]
 
