@@ -24,10 +24,9 @@ Wazuh core
 - Added a timeout to the updates of the vulnerability detector's feeds to prevent hangings.
 - Added option for the JSON decoder to choose the treatment of array structures.
 - Added ``mode`` value (real-time, Who-data, or scheduled) as a dynamic field in FIM alerts. 
-- Added a field to configure the maximum files to be monitored by the FIM.
+- Added a field to configure the maximum files to be monitored by the FIM module.
 - Added a module to integrate Google Cloud Pub/Sub.
 - Added support for mapping Wazuh rules with MITRE ATT&CK knowledge base.
-- Added new configuration block for Windows Defender EventChannel.
 - Added as a dependency Microsoft's Software Update Catalog used by vulnerability detector.
 - Added support for ``aarch64`` and ``armhf`` architectures.
 
@@ -49,7 +48,7 @@ Wazuh core
 - Fixed a bug that occasionally, kept the memory reserved when deleting monitored directories in FIM.
 - Fixed an issue that prevented Inotify to be liberated when modifying directories in real-time mode of FIM.
 - Fixed an error that caused the alerts deletion with a wrong path in Who-data mode.
-- Fixed and issue that did not generate alerts in Who-data mode when a subdirectory was added to the monitored directory in Windows.
+- Fixed an issue that did not generate alerts in Who-data mode when a subdirectory was added to the monitored directory in Windows.
 - Avoided the truncation of the full log field of the alert when the path is too long.
 - When there is a failure setting policies in Windows, FIM will automatically change from Who-data to real-time mode.
 - Fixed an error that prevented from restarting Windows agents from the manager.
