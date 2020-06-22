@@ -25,8 +25,8 @@ Wazuh core
 - Added option for the JSON decoder to choose the treatment of array structures.
 - Added ``mode`` value (real-time, Who-data, or scheduled) as a dynamic field in FIM alerts. 
 - Added a field to configure the maximum files to be monitored by the FIM module.
-- Added a module to integrate Google Cloud Pub/Sub.
-- Added support for mapping Wazuh rules with MITRE ATT&CK knowledge base.
+- New module to pull and process logs from Google Cloud Pub/Sub service.
+- Added support for mapping rules with MITRE ATT&CK framework.
 - Added as a dependency Microsoft's Software Update Catalog used by vulnerability detector.
 - Added support for ``aarch64`` and ``armhf`` architectures.
 
