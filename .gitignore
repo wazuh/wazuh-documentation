@@ -7,5 +7,3 @@ node_modules
 .eslintrc
 package-lock.json
 package.json
-source/_static/css/*.min.css
-source/_static/js/*.min.js
