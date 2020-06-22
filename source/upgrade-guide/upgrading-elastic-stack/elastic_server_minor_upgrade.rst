@@ -23,20 +23,40 @@ Prepare the Elastic Stack
 
 #. [*Elastic*] In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
-  .. tabs::
+      .. tabs::
 
-    .. group-tab:: YUM
+        .. group-tab:: YUM
 
-      .. code-block:: console
+          .. code-block:: console
 
-        # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
+            # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-    .. group-tab:: APT
+        .. group-tab:: APT
 
-      .. code-block:: console
+          .. code-block:: console
 
-        # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
-        # apt-get update
+            # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
+            # apt-get update
+
+#. [*Elastic*] Before the process of upgrading Filebeat it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro distribution, which might be accidentally installed instead of Elastic package.
+
+   In case of having enabled the Wazuh repository it can be disabled using:
+
+       .. tabs::
+
+         .. group-tab:: YUM
+
+           .. code-block:: console
+
+             # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh_pre.repo
+
+         .. group-tab:: APT
+
+           .. code-block:: console
+
+             # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh_trash.list
+             # apt-get update
+
 
 Upgrade Elasticsearch
 ---------------------
@@ -408,7 +428,7 @@ Upgrade Kibana
       # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
       # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-#. It is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+#. For installations on Kibana 7.6.X versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
     .. code-block:: console
 
@@ -432,7 +452,7 @@ Upgrade Kibana
 Disabling the Elastic repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-[*Elastic*] It is recommended to disable the repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+[*Elastic*] It is recommended to disable the Elastic repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
 .. tabs::
 
