@@ -45,7 +45,7 @@ Wazuh core
 **Other fixes and improvements**
 
 - Fixed a bug that occasionally, kept the memory reserved when deleting monitored directories in FIM.
-- Fixed an issue that prevented Inotify to be liberated when modifying directories in real-time mode of FIM.
+- Fixed and issue regarding inotify watchers allocation when modifying directories in FIM real-time.
 - Fixed an error that caused the alerts deletion with a wrong path in Who-data mode.
 - Fixed an issue that did not generate alerts in Who-data mode when a subdirectory was added to the monitored directory in Windows.
 - Avoided the truncation of the full log field of the alert when the path is too long.
