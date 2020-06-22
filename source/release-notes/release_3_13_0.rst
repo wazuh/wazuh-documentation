@@ -39,7 +39,6 @@ Wazuh core
 - The state field has been removed from vulnerability alerts.
 - The NVD is now the primary feed for the vulnerability detector in Linux.
 - Removed OpenSCAP policies installation and configuration block.
-- Changed the internal configuration of the rule engine to be able to register by default a number of agents higher than ``65536``.
 - Changed ``same/different_systemname`` for ``same/different_system_name`` in Analysisd static filters.
 - Updated the internal Python interpreter from v3.7.2 to v3.8.2.
 
