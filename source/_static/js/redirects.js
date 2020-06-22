@@ -38,6 +38,14 @@ removedUrls['x.y'] = [
 
 newUrls['3.13'] = [
   '/release-notes/release_3_13_0.html',
+  '/gcp/index.html',
+  '/gcp/prerequisites/considerations.html',
+  '/gcp/prerequisites/credentials.html',
+  '/gcp/prerequisites/dependencies.html',
+  '/gcp/prerequisites/index.html',
+  '/gcp/prerequisites/pubsub.html',
+  '/user-manual/reference/ossec-conf/gcp-pubsub.html',
+  '/user-manual/ruleset/mitre.html',
 ];
 
 /* *** RELEASE 3.12 ****/
