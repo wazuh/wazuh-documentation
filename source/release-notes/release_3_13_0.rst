@@ -24,34 +24,34 @@ Wazuh core
 - Added a timeout to the updates of the vulnerability detector's feeds to prevent hangings.
 - Added option for the JSON decoder to choose the treatment of array structures.
 - Added ``mode`` value (real-time, Who-data, or scheduled) as a dynamic field in FIM alerts. 
-- Added a configurable maximum limit of files to be monitored by FIM.
-- New integration for pull logs from Google Cloud Pub/Sub.
-- Added support for MITRE ATT&CK knowledge base.
+- Added a field to configure the maximum files to be monitored by the FIM.
+- Added a module to integrate Google Cloud Pub/Sub.
+- Added support for mapping Wazuh rules with MITRE ATT&CK knowledge base.
 - Added new configuration block for Windows Defender EventChannel.
 - Added as a dependency Microsoft's Software Update Catalog used by vulnerability detector.
 - Added support for ``aarch64`` and ``armhf`` architectures.
 
 **Changed**
 
-- Changed the internal variable ``rt_delay`` configuration to 5 miliseconds.
-- Who-data includes new fields: process CWD, parent process id, and CWD of paren process.
-- FIM opens files with shared deletion permission.
+- Changed the internal variable ``rt_delay`` configuration to 5 miliseconds. This variable provides a delay when processing an event in realtime or whodata.
+- Who-data includes new fields: process CWD, parent process id, and CWD of parent process.
+- FIM now allows to rename/delete files while calculating their hash.
 - Extended the statics fields comparison in the ruleset options.
 - The state field has been removed from vulnerability alerts.
 - The NVD is now the primary feed for the vulnerability detector in Linux.
 - Removed OpenSCAP policies installation and configuration block.
-- Changed the internal configuration of Analysisd to be able to register by default a number of agents higher than ``65536``.
+- Changed the internal configuration of the rule engine to be able to register by default a number of agents higher than ``65536``.
 - Changed ``same/different_systemname`` for ``same/different_system_name`` in Analysisd static filters.
 - Updated the internal Python interpreter from v3.7.2 to v3.8.2.
 
 **Other fixes and improvements**
 
 - Fixed a bug that occasionally, kept the memory reserved when deleting monitored directories in FIM.
-- Freed Inotify watches moving directories in the real-time mode of FIM.
-- Fixed an error that caused the alerts' deletion with a wrong path in Who-data mode.
-- Fixed generating alerts in Who-data mode when moving directories to the folder being monitored in Windows.
+- Fixed an issue that prevented Inotify to be liberated when modifying directories in real-time mode of FIM.
+- Fixed an error that caused the alerts deletion with a wrong path in Who-data mode.
+- Fixed and issue that did not generate alerts in Who-data mode when a subdirectory was added to the monitored directory in Windows.
 - Avoided the truncation of the full log field of the alert when the path is too long.
-- Fixed the changing of monitoring from Who-data to real-time when there is a failure to set policies in Windows.
+- When there is a failure setting policies in Windows, FIM will automatically change from Who-data to real-time mode.
 - Fixed an error that prevented from restarting Windows agents from the manager.
 - Fixed an error that did not allow the usage of the tag ``URL`` by configuring the NVD in a vulnerability detector module.
 - Fixed TOCTOU condition in Clusterd when merging agent-info files.
