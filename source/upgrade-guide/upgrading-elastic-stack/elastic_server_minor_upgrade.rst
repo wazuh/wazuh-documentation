@@ -201,7 +201,7 @@ Upgrade Kibana
 
       # rm -rf /usr/share/kibana/optimize/bundles
 
-#. Update file permissions. This will avoid several errors prior to updating the app.
+#. Update file permissions. This will prevent errors when generating new bundles or updating the app.
 
     .. code-block:: console
 
