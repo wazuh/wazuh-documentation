@@ -32,7 +32,7 @@ Wazuh core
 
 **Changed**
 
-- Increased event fetching delay from 10 miliseconds to 5 miliseconds in FIM modes real-time and whodata (``rt_delay``).
+- Decreased event fetching delay from 10 miliseconds to 5 miliseconds in FIM modes real-time and whodata (``rt_delay``).
 - Who-data includes new fields: process CWD, parent process id, and CWD of parent process.
 - FIM now allows to rename/delete files while calculating their hash.
 - Extended the statics fields comparison in the ruleset options.
