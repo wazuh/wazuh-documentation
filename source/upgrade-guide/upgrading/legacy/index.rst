@@ -5,7 +5,7 @@
 Upgrading from a legacy version
 ===============================
 
-These instructions guide you through the process of upgrading your Wazuh installation from a version prior to 2.0.
+These instructions guide through the process of upgrading the Wazuh installation from a version prior to 2.0.
 
 .. topic:: Contents
 
