@@ -29,9 +29,9 @@ The API starts at boot time. To control or check the **wazuh-api** service, use 
 Logging into the API
 --------------------
 
-Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to get a token in order to run any endpoint:
+Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
 
-1. Use the cURL command to get the JWT token. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``.
+1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``.
 
     .. code-block:: console
 
@@ -594,4 +594,4 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 Conclusion
 ^^^^^^^^^^
-We hope those examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
+We hope the provided examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
