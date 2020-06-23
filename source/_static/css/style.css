@@ -696,7 +696,8 @@ ol.simple dl dt {
 }
 
 ul.simple dl dd,
-ol.simple dl dd {
+ol.simple dl dd,
+.simple li > p {
 
   margin-bottom: 0;
 }
@@ -1546,8 +1547,19 @@ footer .contact-info .fa-paper-plane-o {
   font-weight: 400;
 }
 
-.sphinx-tabs .sphinx-menu a.item{
+.sphinx-tabs .sphinx-menu a.item {
   color: #0094ce !important;
+}
+
+.sphinx-tabs .sphinx-menu a.item p,
+table tr p {
+	color: inherit;
+	font-weight: inherit;
+	margin: inherit;
+}
+
+table tr p {
+  margin: 0.3rem 0px 0.3rem 0;
 }
 
 #main-content .sphinx-tabs .menu .item.docutils.container{
@@ -2233,9 +2245,13 @@ label {
 	border-radius: 4px 4px 0 0;
 }
 
-.admonition p {
+.admonition > p {
   padding: 1rem;
   margin: 0;
+}
+
+.admonition li p {
+	margin: 0;
 }
 
 .admonition.note > [class*="highlight-"],
@@ -2271,7 +2287,7 @@ p.admonition-title {
 	padding: 0.25rem 1rem;
 }
 
-p.first.admonition-title::before,
+p.admonition-title::before,
 .no-latest-notice span::before {
   display: inline-block;
   font: normal bold normal 1.1rem/.5 FontAwesome;
@@ -2328,12 +2344,12 @@ p.first.admonition-title::before,
 	color: #ffffff;
 }
 
-.note p.first.admonition-title::before,
-.admonition-generic-admonition p.first.admonition-title::before {
+.note p.admonition-title::before,
+.admonition-generic-admonition p.admonition-title::before {
   content: '\f06a';
 }
 
-.output p.first.admonition-title::before {
+.output p.admonition-title::before {
   content: '\f138';
 }
 
@@ -2389,14 +2405,14 @@ p.first.admonition-title::before,
   margin-right: 1rem;
 }
 
-.error p.first.admonition-title::before,
-.danger p.first.admonition-title::before,
-.hint p.first.admonition-title::before,
-.important p.first.admonition-title::before,
-.tip p.first.admonition-title::before,
-.attention p.first.admonition-title::before,
-.caution p.first.admonition-title::before,
-.warning p.first.admonition-title::before,
+.error p.admonition-title::before,
+.danger p.admonition-title::before,
+.hint p.admonition-title::before,
+.important p.admonition-title::before,
+.tip p.admonition-title::before,
+.attention p.admonition-title::before,
+.caution p.admonition-title::before,
+.warning p.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
 }
@@ -3576,6 +3592,15 @@ div[class*='highlight'] {
   margin: 1px 0 24px 0;
 }
 
+div[class*='highlight'].output {
+	border: none;
+	background-color: transparent;
+}
+
+div[class*='highlight'].output .highlight {
+	border: 1px solid #e1e4e5;
+}
+
 div[class*='highlight'] {
   position: relative;
 }
@@ -3625,7 +3650,8 @@ div[class*='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class*='highlight']:hover .copy-to-clipboard {
+div[class*='highlight']:hover .copy-to-clipboard ,
+div[class*='highlight'] .copy-to-clipboard:focus {
   opacity: 1;
 }
 
@@ -3668,7 +3694,7 @@ pre .gr { color: #a00 } /* Generic.Error */
 pre .gh { color: #999 } /* Generic.Heading */
 pre .gi { color: #000; background-color: #dfd } /* Generic.Inserted */
 pre .gi .x { color: #000; background-color: #afa }
-pre .go { color: #888 } /* Generic.Output */
+pre .go, pre .heredoc, pre .heredoc .gp { color: #888 } /* Generic.Output */
 pre .gp { color: #555 } /* Generic.Prompt */
 pre .gs { font-weight: bold }
 pre .gu { color: purple; font-weight: bold } /* Generic.Subheading */

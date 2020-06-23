@@ -92,6 +92,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
         <os>trusty</os>
         <os>xenial</os>
         <os>bionic</os>
+        <os>focal</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="debian">

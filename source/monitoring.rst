@@ -11,3 +11,4 @@ Monitoring with Wazuh
    amazon/index
    azure/index
    docker-monitor/index
+   gcp/index

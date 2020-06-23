@@ -593,7 +593,7 @@ restart_audit
 
 .. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
 
-Allows the system to restart ```Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -682,7 +682,7 @@ skip_dev
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the ```/dev`` directory. This option works on Linux and FreeBSD systems.
+Specifies if syscheck should scan the ``/dev`` directory. This option works on Linux and FreeBSD systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -724,7 +724,7 @@ skip_proc
 
 .. versionadded:: 3.12.0
 
-Specifies if syscheck should scan the ```/proc`` directory. This option works on Linux and FreeBSD systems.
+Specifies if syscheck should scan the ``/proc`` directory. This option works on Linux and FreeBSD systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -759,6 +759,49 @@ Example:
 .. code-block:: xml
 
  <skip_sys>yes</skip_sys>
+
+
+
+file_limit
+^^^^^^^^^^
+
+.. versionadded:: 3.13
+
+Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+
+.. code-block:: xml
+
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>
+      <enabled>yes</enabled>
+      <entries>100000</entries>
+    </file_limit>
+
+
+**enabled**
+
+.. versionadded:: 3.13
+
+Specifies whether there will be a limit on the number of monitored files or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+
+**entries**
+
+.. versionadded:: 3.13
+
+Specifies the number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
 
 
 .. _reference_ossec_syscheck_synchronization:
@@ -882,7 +925,7 @@ The Whodata options will be configured inside this tag.
 
 .. versionadded:: 3.9.0
 
-Allows the system to restart ```Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -1042,7 +1085,7 @@ Defaut syscheck configuration:
     <max_eps>100</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
-		  <enabled>yes</enabled>
+      <enabled>yes</enabled>
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <max_eps>10</max_eps>

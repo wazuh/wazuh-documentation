@@ -17,6 +17,7 @@ import os
 import re
 import shlex
 import datetime
+from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -30,7 +31,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.12'
+version = '3.13'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -116,6 +117,7 @@ html_theme = 'wazuh_doc_theme'
 # documentation.
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
+    'wazuh_doc_url': 'https://documentation.wazuh.com',
     'globaltoc_depth': 5,
     'includehidden': True,
     'collapse_navigation': False,
@@ -403,14 +405,15 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.12.3",
+    "|WAZUH_LATEST|" : "3.13.0",
+    "|WAZUH_LATEST_MINOR|" : "3.13",
     "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
     "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
     "|WAZUH_LATEST_PUPPET|" : "3.12.2",
-    "|WAZUH_LATEST_OVA|" : "3.12.3",
+    "|WAZUH_LATEST_OVA|" : "3.13.0",
     "|WAZUH_LATEST_DOCKER|" : "3.12.2",
-    "|ELASTICSEARCH_LATEST|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST|" : "7.7.1",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.7.1",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.2",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.2",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.2",
@@ -443,21 +446,51 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
-    app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
 
-    app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
-    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
+
+	# List of compiled documents
+    app.connect('html-page-context', collect_compiled_pagename)
+    app.connect('build-finished', creating_file_list)
+
+exclude_doc = ["not_found"]
+list_compiled_html = []
+
+def collect_compiled_pagename(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    if templatename == "page.html" and pagename not in exclude_doc:
+        list_compiled_html.append(context['pagename']+'.html')
+    else:
+        pass
+
+def creating_file_list(app, exception):
+	''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
+	if app.builder.name == 'html':
+		build_path = app.outdir
+		separator = '\n'
+		with open(build_path+'/.doclist', 'w') as doclist_file:
+			list_text = separator.join(list_compiled_html)
+			doclist_file.write(list_text)
+		sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+		sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+		for compiled_html in list_compiled_html:
+			sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
+		sitemap += '</urlset>'
+		with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
+			sitemap_file.write(sitemap)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
