@@ -2,53 +2,53 @@
 
 .. _upgrading_wazuh_server:
 
-Upgrading Wazuh server
-=======================
+Upgrading the Wazuh server
+==========================
 
-Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
+Follow these steps to update the Wazuh v1.x server to the Wazuh v2.x.
 
-1. First, stop the processes:
+#. Stop the processes:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /var/ossec/bin/ossec-control stop
-    # systemctl stop wazuh-api
+      # /var/ossec/bin/ossec-control stop
+      # systemctl stop wazuh-api
 
-2. **If you have a multitier server**, remove logstash-forwarder as it has been replaced by Filebeat:
+#. In case of having a multitier server, remove logstash-forwarder as it has been replaced by Filebeat:
 
-  Deb systems:
+    .. tabs::
 
-  .. code-block:: console
+      .. group-tab:: YUM
 
-    # apt-get remove logstash-forwarder
+        .. code-block:: console
 
-  RPM systems:
+          # yum remove logstash-forwarder
 
-  .. code-block:: console
+      .. group-tab:: APT
 
-    # yum remove logstash-forwarder
+        .. code-block:: console
 
-3. Install the Wazuh server:
+          # apt-get remove logstash-forwarder
 
-  You can upgrade your current installation by following the below installation guide for your specific operating system:
+#. Install the Wazuh server:
 
-  - :ref:`Install Wazuh server with RPM packages <installation_guide>`
+    The current installation can be upgraded by following the :ref:`installation guide <installation_guide>` for your specific operating system.
 
-  Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file because your previous version will have been overwritten. The previous version has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended that you  compare the new file with the old one and import old settings where needed.
+    Once the package is installed, review the ``/var/ossec/etc/ossec.conf`` configuration file since it will be overwritten. The previous version can be found at ``ossec.conf.rpmorig`` file or ``ossec.conf.deborig`` file. It is recommended to compare the new file with its old version and import previous settings where needed.
 
-  A backup of your custom rules and decoders will also be saved at ``/var/ossec/etc/backup_ruleset``. You will need to reapply them. We recommend that you use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders going forward as these directories will not be overwritten by future upgrades.
+    A backup of the custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. They have to be reapplied. It is recommended to use ``/var/ossec/etc/decoders`` folder and ``/var/ossec/etc/rules`` folder for custom rules and decoders as these directories will not be overwritten by future upgrades.
 
-4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that you are now running ``Wazuh v2.x``:
+#. To confirm that the Wazuh server is in v2.x use the ``manage_agents`` utility:
 
-.. code-block:: console
+    .. code-block:: console
 
-    # /var/ossec/bin/manage_agents -V
+        # /var/ossec/bin/manage_agents -V
 
-.. code-block:: none
-  	:class: output
+    .. code-block:: none
+      	:class: output
 
-  	Wazuh v2.0 - Wazuh Inc.
+      	Wazuh v2.0 - Wazuh Inc.
 
-  	This program is free software; you can redistribute it and/or modify
-  	it under the terms of the GNU General Public License (version 2) as
-  	published by the Free Software Foundation.
+      	This program is free software; you can redistribute it and/or modify
+      	it under the terms of the GNU General Public License (version 2) as
+      	published by the Free Software Foundation.
