@@ -2,8 +2,8 @@
 
 .. _upgrading_wazuh_agent:
 
-Upgrading Wazuh agents
-======================
+Upgrading the Wazuh agents
+==========================
 
 Follow these steps to update your ``Wazuh v1.x`` agents to ``Wazuh v2.x``.
 
