@@ -394,7 +394,7 @@ Upgrade Kibana
 
       # rm -rf /usr/share/kibana/optimize/bundles
 
-#. Update file permissions. This will avoid several errors prior to updating the Wazuh Kibana plugin:
+#. Update file permissions. This will prevent errors when generating new bundles or updating the Wazuh Kibana plugin:
 
     .. code-block:: console
 
