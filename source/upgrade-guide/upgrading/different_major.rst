@@ -2,162 +2,174 @@
 
 .. _upgrading_different_major:
 
-Upgrade from different major version
-====================================
+Upgrade from a different major version
+======================================
 
-The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x (which implies upgrading from Elastic Stack 5.x to 6.x).
+The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x, which implies upgrading from Elastic Stack 5.x to 6.x.
 
-Upgrade Wazuh manager
----------------------
+Upgrade the Wazuh manager
+-------------------------
 
-1. Stop the services:
-
-  .. code-block:: console
-
-    # systemctl stop wazuh-api
-    # systemctl stop wazuh-manager
-
-2. Add the new repository for Wazuh 3.x.
-
-  a) For CentOS/RHEL/Fedora:
+#. Stop the services:
 
     .. code-block:: console
 
-      # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      enabled=1
-      name=Wazuh repository
-      baseurl=https://packages.wazuh.com/3.x/yum/
-      protect=1
-      EOF
+      # systemctl stop wazuh-api
+      # systemctl stop wazuh-manager
 
-  b) For Debian/Ubuntu:
+#. Add the new repository for Wazuh 3.x.:
 
-    .. code-block:: console
+    .. tabs::
 
-      # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      .. group-tab:: YUM
 
-3. Upgrade the manager.
+        .. code-block:: console
 
-  a) Upgrade the Wazuh manager on CentOS/RHEL/Fedora:
+          # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+          [wazuh_repo]
+          gpgcheck=1
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=1
+          name=Wazuh repository
+          baseurl=https://packages.wazuh.com/3.x/yum/
+          protect=1
+          EOF
 
-    .. code-block:: console
+      .. group-tab:: APT
 
-      # yum install wazuh-manager
+        .. code-block:: console
 
-  b) Upgrade the Wazuh manager on Debian/Ubuntu:
+          # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-    .. code-block:: console
+#. Upgrade the Wazuh manager:
 
-      # apt-get update
-      # apt-get install wazuh-manager
+    .. tabs::
 
-4. Upgrade the API.
+      .. group-tab:: YUM
 
-  a) Upgrade the Wazuh API on CentOS/RHEL/Fedora:
+        .. code-block:: console
 
-    .. code-block:: console
+          # yum install wazuh-manager
 
-      # yum install wazuh-api
+      .. group-tab:: APT
 
-  b) Upgrade the Wazuh API on Debian/Ubuntu:
+        .. code-block:: console
 
-    .. code-block:: console
+          # apt-get update
+          # apt-get install wazuh-manager
 
-      # apt-get install wazuh-api
+#. Upgrade the Wazu API:
 
-Upgrade Wazuh agent
--------------------
+    .. tabs::
 
-1. Stop the service:
+      .. group-tab:: YUM
 
-  .. code-block:: console
+        .. code-block:: console
 
-    # systemctl stop wazuh-agent
+          # yum install wazuh-api
 
-2. Add the new repository for Wazuh 3.x.
+      .. group-tab:: APT
 
-  a) For CentOS/RHEL/Fedora:
+        .. code-block:: console
 
-    .. code-block:: console
+          # apt-get install wazuh-api
 
-      # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      enabled=1
-      name=Wazuh repository
-      baseurl=https://packages.wazuh.com/3.x/yum/
-      protect=1
-      EOF
+Upgrade the Wazuh agent
+-----------------------
 
-  b) For Debian/Ubuntu:
+#. Stop the service:
 
     .. code-block:: console
 
-      # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # systemctl stop wazuh-agent
 
-3. Upgrade the agent.
+#. Add the new repository for Wazuh 3.x.:
 
-  a) Upgrade the Wazuh agent on CentOS/RHEL/Fedora:
+    .. tabs::
 
-    .. code-block:: console
+      .. group-tab:: YUM
 
-      # yum install wazuh-agent
+        .. code-block:: console
 
-  b) Upgrade the Wazuh agent on Debian/Ubuntu:
+          # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+          [wazuh_repo]
+          gpgcheck=1
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=1
+          name=Wazuh repository
+          baseurl=https://packages.wazuh.com/3.x/yum/
+          protect=1
+          EOF
 
-    .. code-block:: console
+      .. group-tab:: APT
 
-      # apt-get update
-      # apt-get install wazuh-agent
+        .. code-block:: console
 
-  c) For Windows:
+          # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-  The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
+#. Upgrade the Wazuh agent:
 
-  * Using the GUI installer:
+    .. tabs::
 
-  Open the installer and follow the instructions to upgrade the agent.
+      .. group-tab:: YUM
 
-    .. image:: ../../images/installation/windows.png
-      :align: center
+        .. code-block:: console
 
-  * Using the command line:
+          # yum install wazuh-agent
 
-  To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
+      .. group-tab:: APT
 
-  .. code-block:: console
+        .. code-block:: console
 
-    # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+          # apt-get update
+          # apt-get install wazuh-agent
 
-.. note::
-  To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+      .. group-tab:: Windows
+
+        The Wazuh agent upgrade process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it, both require ``administrator rights``:
+
+        * Using the GUI installer:
+
+        Open the installer and follow the instructions to upgrade the Wazuh agent:
+
+          .. image:: ../../images/installation/windows.png
+            :align: center
+
+        * Using the command line:
+
+        To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
+
+          .. code-block:: console
+
+            # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+
+        .. note::
+          To learn more about the unattended installation process, please read the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
 
 Disable the Wazuh repository
 ----------------------------
 
-We recommend that the Wazuh repository be disabled in order to prevent accidental upgrades. To disable the repository, follow these steps:
+It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues:
 
-  a) For CentOS/RHEL/Fedora:
+  .. tabs::
 
-    .. code-block:: console
+    .. group-tab:: YUM
 
-      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+      .. code-block:: console
 
-  b) For Debian/Ubuntu:
+        # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-    .. code-block:: console
+    .. group-tab:: APT
 
-      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-      # apt-get update
+      .. code-block:: console
 
-    Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+        # apt-get update
 
-    .. code-block:: console
+      Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command.
 
-      # echo "wazuh-manager hold" | sudo dpkg --set-selections
-      # echo "wazuh-api hold" | sudo dpkg --set-selections
-      # echo "wazuh-agent hold" | sudo dpkg --set-selections
+      .. code-block:: console
+
+        # echo "wazuh-manager hold" | sudo dpkg --set-selections
+        # echo "wazuh-api hold" | sudo dpkg --set-selections
+        # echo "wazuh-agent hold" | sudo dpkg --set-selections
