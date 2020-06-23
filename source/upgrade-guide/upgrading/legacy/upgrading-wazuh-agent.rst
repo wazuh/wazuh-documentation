@@ -5,28 +5,32 @@
 Upgrading the Wazuh agents
 ==========================
 
-Follow these steps to update your ``Wazuh v1.x`` agents to ``Wazuh v2.x``.
+Follow these steps to update the Wazuh v1.x agents to Wazuh v2.x:
 
-a) On DEB or RPM based Linux systems, you can easily rely on the packages manager to upgrade your agents. The process differs very little from installing a new agent. More information is available in our documentation at:
+.. tabs::
 
-  - :ref:`Install Wazuh agent on Linux <wazuh_agent_package_linux>`
+  .. group-tab:: DEB or RPM based Linux systems
 
-  You can check your agent version by running the following command:
+    On DEB or RPM based Linux systems, the Wazuh agents can be upgraded using the packages manager. The process is similar to :ref:`installing the Wazuh agent on Linux <wazuh_agent_package_linux>`.
 
-  .. code-block:: console
+    The Wazuh agent's version can be verified by running the following command:
 
-      # /var/ossec/bin/manage_agents -V
+    .. code-block:: console
 
-  .. code-block:: none
-      :class: output
+        # /var/ossec/bin/manage_agents -V
 
-      Wazuh v2.0 - Wazuh Inc.
+    .. code-block:: none
+        :class: output
 
-      This program is free software; you can redistribute it and/or modify
-      it under the terms of the GNU General Public License (version 2) as
-      published by the Free Software Foundation.
+        Wazuh v2.0 - Wazuh Inc.
 
-b) On Windows, Mac OS and other operating systems, we advise you to delete your previous version and install Wazuh v2.x from scratch. More information is available in our documentation at:
+        This program is free software; you can redistribute it and/or modify
+        it under the terms of the GNU General Public License (version 2) as
+        published by the Free Software Foundation.
 
-  - :ref:`Install Wazuh agent on Windows <wazuh_agent_package_windows>`
-  - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_package_macos>`
+  .. group-tab:: Windows, Mac OS and other operating systems
+
+    On Windows, Mac OS and other operating systems, it can be done by deleting the previous version and installing Wazuh v2.x from scratch. More information about the process can be found on:
+
+    - :ref:`Install Wazuh agent on Windows <wazuh_agent_package_windows>`
+    - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_package_macos>`
