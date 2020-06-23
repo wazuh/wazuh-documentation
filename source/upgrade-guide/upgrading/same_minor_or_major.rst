@@ -8,47 +8,51 @@ Upgrade from the same minor or major version
 The instructions below are for upgrading the Wazuh installation within the same minor version (for example, 3.9.0 to 3.9.5)
 or within the same major version (for example, from 3.8.2 to |WAZUH_LATEST|).
 
-Upgrade the Wazuh manager and Wazuh API
----------------------------------------
+Upgrade the Wazuh manager and the Wazuh API
+-------------------------------------------
 
-a) Upgrade on CentOS/RHEL/Fedora:
+  .. tabs::
 
-.. code-block:: console
+    .. group-tab:: YUM
 
-    # yum upgrade wazuh-manager wazuh-api
+      .. code-block:: console
 
-b) Upgrade on Debian/Ubuntu:
+          # yum upgrade wazuh-manager wazuh-api
 
-.. code-block:: console
+    .. group-tab:: APT
 
-    # apt-get update
-    # apt-get install wazuh-manager wazuh-api
+      .. code-block:: console
 
-c) Upgrade on OpenSUSE:
+          # apt-get update
+          # apt-get install wazuh-manager wazuh-api
 
-.. code-block:: console
+    .. group-tab:: ZYpp
 
-    # zypper update wazuh-manager wazuh-api
+      .. code-block:: console
+
+          # zypper update wazuh-manager wazuh-api
 
 
 Upgrade the Wazuh agent
 -----------------------
 
-a) Upgrade the Wazuh agent on CentOS/RHEL/Fedora:
+  .. tabs::
 
-.. code-block:: console
+    .. group-tab:: YUM
 
-    # yum upgrade wazuh-agent
+      .. code-block:: console
 
-b) Upgrade the Wazuh agent on Debian/Ubuntu:
+          # yum upgrade wazuh-agent
 
-.. code-block:: console
+    .. group-tab:: APT
 
-    # apt-get update
-    # apt-get install wazuh-agent
+      .. code-block:: console
 
-c) Upgrade the Wazuh agent on OpenSUSE:
+          # apt-get update
+          # apt-get install wazuh-agent
 
-.. code-block:: console
+    .. group-tab:: ZYpp
 
-    # zypper update wazuh-agent
+      .. code-block:: console
+
+          # zypper update wazuh-agent
