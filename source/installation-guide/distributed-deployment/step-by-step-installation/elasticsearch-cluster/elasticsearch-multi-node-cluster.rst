@@ -8,7 +8,7 @@
 Elasticsearch multi-node cluster
 =================================
 
-Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
+Open Distro for Elasticsearch is an open-source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_.
 
 This document will explain how to install Elasticsearch in a multi-node cluster.
 
@@ -23,7 +23,7 @@ The Elasticsearch configuration section has steps that must be done in all the h
 Prerequisites
 ~~~~~~~~~~~~~
 
-[*All*] Open Distro for Elasticsearch requires the installation of Java Development Kit and other packages including ``wget``, ``curl`` and ``unzip`` that will be used in further steps:
+[*All*] Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl`` and ``unzip`` that will be used in further steps:
 
 .. include:: ../../../../_templates/installations/elastic/common/before_installation.rst
 
