@@ -7,7 +7,7 @@ This section will explain how to install the Wazuh-Elastic Stack components on s
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ will be used to deploy the certificates for protecting data in the Elastic Stack.
 
-Although the script allows to install both an Elasticsearch cluster node and a Wazuh cluster node in a same machine, this is not recommended. Kibana, on the other hand, should be installed on the same machine as an Elasticsearch cluster master node or on a separate host.
+Although the script allows to install both an Elasticsearch cluster node and a Wazuh cluster node in the same machine, this is not recommended. Kibana, on the other hand, should be installed on the same machine as an Elasticsearch cluster master node or on a separate host.
 
 Prerequisites
 -------------
