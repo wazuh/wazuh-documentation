@@ -5,7 +5,7 @@
 Upgrading Wazuh
 ===============
 
-This section describes how to upgrade an existing Wazuh installation. The upgrade process depends on the version that is currently installed and the version that you want to upgrade to:
+This section describes how to upgrade an existing Wazuh installation. The upgrade process depends on the version that is currently installed and the version that is going to be upgraded to:
 
 +--------------+------------+------------------------------------------------------------------------------------------+
 | Upgrade from | Upgrade to | Supported Upgrade Type                                                                   |
@@ -14,9 +14,6 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
 +--------------+------------+------------------------------------------------------------------------------------------+
 | 3.x          | 3.y        | :ref:`Upgrade from the same major version (3.x) <upgrading_latest_minor>`                |
 +--------------+------------+------------------------------------------------------------------------------------------+
-
-.. note::
-    If you run into an issue during the upgrade process, feel free to ask for help in our `mailing list <https://groups.google.com/d/forum/wazuh>`_. The Wazuh team and other users of the Open Source community may be able to assist you.
 
 .. toctree::
     :hidden:
