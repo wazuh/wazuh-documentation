@@ -8,7 +8,7 @@ Installation guide
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-The Installation guide section aims to guide the user through the process of the Wazuh-Elastic Stack installation and to explain the difference between two available kinds of deployment, the All-in-one and the Distributed. In this guide, `Open Distro for Elasticsearch <https://opendistro.github.io/>`_ and Kibana will be used. Open Distro for Elasticsearch is a fully open source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
+The Installation guide section aims to guide the user through the process of the Wazuh-Elastic Stack installation and to explain the difference between two available kinds of deployment, the All-in-one and the Distributed. In this guide, `Open Distro for Elasticsearch <https://opendistro.github.io/>`_ and Kibana will be used. Open Distro for Elasticsearch is a fully open-source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
 
 Wazuh-Elastic Stack components
 ------------------------------
@@ -22,18 +22,18 @@ Individual components
 
 - ``Wazuh API``: this component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web interface, which is the Wazuh Kibana plugin.
 
-- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch. This guide will install ``Filebeat-oss``, which is fully open source and `Apache 2.0-licensed`.
+- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch. This guide will install ``Filebeat-oss``, which is fully open-source and `Apache 2.0-licensed`.
 
-- ``Elasticsearch``: is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager.
+- ``Elasticsearch``: is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager. This guide will install ``Elasticsearch-oss``, which is fully open-source and `Apache 2.0-licensed`.
 
-- ``Kibana``: is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data.
+- ``Kibana``: is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data. This guide will install ``Open Distro for Kibana``, which is fully open-source and `Apache 2.0-licensed`.
 
-- ``Wazuh Kibana plugin``: lets users visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts and filter using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers' and the Wazuh agents' configuration, logs, ruleset, groups and much more.
+- ``Wazuh Kibana plugin``: lets users visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts and, filter using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers and the Wazuh agents configuration, logs, ruleset, groups, and much more.
 
 Grouped components
 ^^^^^^^^^^^^^^^^^^
 
-- ``Wazuh server``: collects and analyzes data from deployed Wazuh agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API and Filebeat.
+- ``Wazuh server``: collects and analyzes data from deployed Wazuh agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API, and Filebeat.
 
 - ``Elastic Stack``: the Open Distro for Elasticsearch and Kibana components can be installed on the same server. Both components installed together are called Elastic Stack. It runs Kibana with the Wazuh Kibana plugin.
 
@@ -42,7 +42,7 @@ Clustered components
 
 - ``Single-node cluster``: this term is used for referring to those components that act within only one server; without communication with other servers running the same components. A Wazuh single-node cluster is a Wazuh manager server that is not connected to other Wazuh manager nodes. Similar criteria can be applied to Elasticsearch nodes.
 
-- ``Multi-node cluster``: this term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists on two or more servers with Wazuh managers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability and load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
+- ``Multi-node cluster``: this term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists on two or more servers with Wazuh managers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability and, load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
 
 Supported operating systems
 ---------------------------
@@ -51,15 +51,15 @@ The Wazuh server and Elastic Stack components can be installed in the following 
 
 - Amazon Linux 1 and 2.
 
-- CentOS 5 or greater.
+- CentOS 6 or greater.
 
 - Debian 7 or greater.
 
 - Fedora 22 or greater.
 
-- Oracle Linux 5 or greater.
+- Oracle Linux 6 or greater.
 
-- Red Hat Enterprise Linux 5 or greater.
+- Red Hat Enterprise Linux 6 or greater.
 
 - Ubuntu 12 or greater.
 
