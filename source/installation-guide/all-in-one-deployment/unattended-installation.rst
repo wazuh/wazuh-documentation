@@ -91,7 +91,7 @@ In order to use Wazuh Kibana plugin properly, the script adds the following extr
 
 - ``wazuh_user`` is created for those users that only need read access to the Wazuh Kibana plugin.
 
-- ``wazuh_admin`` is the user recommended for those users that need administration privileges.
+- ``wazuh_admin`` is the user recommended for those users that need administrative privileges.
 
 Apart from the extra users, there are three extra roles added. These roles are in charge of giving the right permissions to the users:
 
@@ -99,7 +99,7 @@ Apart from the extra users, there are three extra roles added. These roles are i
 
 - ``wazuh_ui_user`` provides ``wazuh_user`` ability to read Wazuh’s indexes.
 
-- ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform, reading, writing, management and indexing task on the Wazuh indexes.
+- ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform, reading, writing, management, and indexing task on the Wazuh indexes.
 
 These users and roles are designed to be used along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be executed. To learn more about this process, visit the `Open Distro for Elasticsearch documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
 

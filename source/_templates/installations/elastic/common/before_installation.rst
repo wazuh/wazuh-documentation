@@ -18,7 +18,7 @@
 
                         # yum install java-1.8.0-openjdk-devel
 
-            #. Install the rest of the necessay packages:
+            #. Install the rest of the necessary packages:
 
                 .. code-block:: console
 
