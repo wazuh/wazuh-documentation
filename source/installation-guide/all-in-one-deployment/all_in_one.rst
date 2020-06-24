@@ -16,7 +16,7 @@ This document guides through the installation of the Wazuh server and Open Distr
 Prerequisites for installing Wazuh-Elastic Stack
 ------------------------------------------------
 
-Open Distro for Elasticsearch requires the installation of Java Development Kit and other packages including ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
+Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
 
 .. include:: ../../_templates/installations/before_installation_all_in_one.rst
 
@@ -97,7 +97,7 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 Installing Elasticsearch
 ------------------------
 
-Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
+Open Distro for Elasticsearch is an open-source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
 
 .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
