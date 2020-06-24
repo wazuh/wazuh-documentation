@@ -10,7 +10,7 @@ Wazuh single-node cluster
 
 This document will go through the installation of the Wazuh server components and Filebeat in a Wazuh single-node cluster.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: Root user privileges are required to run all the commands described below.
 
 Prerequisites
 -------------
@@ -152,7 +152,7 @@ Filebeat installation and configuration
 
     .. include:: ../../../../_templates/installations/elastic/common/enable_filebeat.rst
 
-To ensure that Filebeat has been successfully installed, execute the following command:
+To ensure that Filebeat has been successfully installed, run the following command:
 
     .. code-block:: console
 

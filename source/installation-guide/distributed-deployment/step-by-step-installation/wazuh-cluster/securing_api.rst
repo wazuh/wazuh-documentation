@@ -13,7 +13,7 @@ By default, the communications between the Wazuh Kibana plugin and the Wazuh API
 
 The automated process consists on running the script ``/var/ossec/api/scripts/configure_api.sh`` and following its steps. It will ask for all the necessary parameters during the interactive process. Binding the network is not contemplated in this script. The next configuration must be done manually: :ref:`binding port<binding port>`.
 
-The following sections will explain how to generate certificates, change credentials and default port manually. In case of having run the previously mentioned script, these section do not have to be executed. 
+The following sections will explain how to generate certificates, change credentials and default port manually. In case of having run the previously mentioned script, these section do not have to be run. 
 
 Enable HTTPS
 ~~~~~~~~~~~~~

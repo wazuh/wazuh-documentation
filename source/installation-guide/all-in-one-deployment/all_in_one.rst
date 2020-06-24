@@ -9,7 +9,7 @@ Step-by-step installation
 
 This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: Root user privileges are required to run all the commands described below.
 
 .. _all_in_one_elastic:
 
@@ -131,14 +131,14 @@ Certificates creation
 
     .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. Execute the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster:
+#. Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster:
 
   .. code-block:: console
 
     # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
     # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key
 
-Execute the following command to ensure that the installation was made properly:
+Run the following command to ensure that the installation was made properly:
 
 .. code-block:: console
 
@@ -201,7 +201,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
 
 
-To ensure that Filebeat has been successfully installed, execute the following command:
+To ensure that Filebeat has been successfully installed, run the following command:
 
     .. code-block:: console
 
