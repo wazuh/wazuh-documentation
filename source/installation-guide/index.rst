@@ -8,7 +8,7 @@ Installation guide
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-The Installation guide section aims to guide the user through the process of the Wazuh-Elastic Stack installation and to explain the difference between two available kinds of deployment, the All-in-one and the Distributed. In this guide, `Open Distro for Elasticsearch <https://opendistro.github.io/>`_ and Kibana will be used. Open Distro is a fully open source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
+The Installation guide section aims to guide the user through the process of the Wazuh-Elastic Stack installation and to explain the difference between two available kinds of deployment, the All-in-one and the Distributed. In this guide, `Open Distro for Elasticsearch <https://opendistro.github.io/>`_ and Kibana will be used. Open Distro for Elasticsearch is a fully open source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
 
 Wazuh-Elastic Stack components
 ------------------------------

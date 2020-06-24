@@ -7,7 +7,7 @@
 Step-by-step installation
 =========================
 
-This document guides through the installation of the Wazuh server and Open Distro components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
+This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -97,7 +97,7 @@ Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is rec
 Installing Elasticsearch
 ------------------------
 
-Open Distro is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
+Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and a number of other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
 
 .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
