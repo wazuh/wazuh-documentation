@@ -130,7 +130,7 @@ In order to use Wazuh Kibana plugin properly, the script adds the following extr
 
 - ``wazuh_user`` is created for those users that only need read access to the Wazuh Kibana plugin.
 
-- ``wazuh_admin`` is the user recommended for those users that need administration privileges.
+- ``wazuh_admin`` is the user recommended for those users that need administrative privileges.
 
 Apart from the extra users, there are three extra roles added. These roles are in charge of giving the right permissions to the users:
 
