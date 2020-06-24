@@ -8,7 +8,7 @@
                 
                 .. code-block:: console
 
-                    # yum install java-11-openjdk-devel install curl unzip wget libcap
+                    # yum install java-11-openjdk-devel curl unzip wget libcap
 
             If the OS used does not support JDK 11, alternatively JDK 8 can be installed.
 
