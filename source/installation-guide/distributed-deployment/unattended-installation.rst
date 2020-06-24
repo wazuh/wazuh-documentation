@@ -3,7 +3,7 @@
 Unattended installation
 =======================
 
-This section will explain how to install the Wazuh-Elastic Stack components on separate hosts by using a single script which has to be run on each of the involved in the installation machines, and will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages. It will also perform a health check verifying that the available system resources of each host meet the minimal requirements. For more information, please visit the :ref:`Requirements <distributed_requirements>` section.
+This section will explain how to install the Wazuh-Elastic Stack components on separate hosts by using a single script that has to be run on each of the involved in the installation machines and will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages. It will also perform a health check verifying that the available system resources of each host meet the minimal requirements. For more information, please visit the :ref:`Requirements <distributed_requirements>` section.
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ will be used to deploy the certificates for protecting data in the Elastic Stack.
 
