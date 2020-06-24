@@ -4,11 +4,25 @@
 
         .. group-tab:: Yum
 
-            Install all the required utilities:
+            #. Install either JDK 11 or JDK 8: 
+                
+                #. Install JDK 11:
+
+                    .. code-block:: console
+
+                        # yum install java-11-openjdk-devel 
+
+                #. Install JDK 8:
+
+                    .. code-block:: console
+
+                        # yum install java-1.8.0-openjdk-devel
+
+            #. Install the rest of the necessay packages:
 
                 .. code-block:: console
 
-                    # yum install java-11-openjdk-devel curl unzip wget libcap
+                    # yum install curl unzip wget libcap
 
         .. group-tab:: APT
 
