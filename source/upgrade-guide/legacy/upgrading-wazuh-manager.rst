@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_wazuh_server:
+.. _upgrading_wazuh_server_legacy:
 
 Upgrading the Wazuh server
 ==========================

@@ -1,11 +1,11 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_latest_minor:
+.. _upgrading_latest_minor_agent:
 
 Upgrade from the same major version (3.x)
 =========================================
 
-The following steps show how to upgrade to the latest available version of Wazuh 3.x, which implies upgrading to the latest compatible version of Elastic Stack.
+The following steps show how to upgrade to the latest available version of the Wazuh agent 3.x.
 
 Starting the upgrade
 --------------------
@@ -34,34 +34,6 @@ Following the Wazuh :ref:`manager <installation_guide>` or the Wazuh :ref:`agent
 
       # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-
-Upgrade the Wazuh manager and the Wazuh API
--------------------------------------------
-
-.. tabs::
-
-  .. group-tab:: YUM
-
-    .. code-block:: console
-
-        # yum upgrade wazuh-manager wazuh-api
-
-  .. group-tab:: APT
-
-    .. code-block:: console
-
-        # apt-get update
-        # apt-get install wazuh-manager wazuh-api
-
-  .. group-tab:: ZYpp
-
-    .. code-block:: console
-
-        # zypper update wazuh-manager wazuh-api
-
-
-.. note::
-  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager, the Wazuh API and the Wazuh agents. The Wazuh configuration file will keep ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in :ref:`User Manual <user_manual>`.
 
 Upgrade the Wazuh agent
 -----------------------
@@ -144,9 +116,3 @@ It is recommended to disable the Wazuh repositories in order to avoid undesired 
     .. code-block:: console
 
       # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
-
-
-Next steps
-----------
-
-The next step consists on :ref:`upgrading the Elastic Stack <elastic_stack_packages_legacy>`.
