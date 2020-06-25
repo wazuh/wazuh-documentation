@@ -118,7 +118,7 @@ jQuery(function($) {
     let page = '';
     if ( thisVersion !== latestVersion ) {
       const pageID = document.querySelector('#page');
-      pageID.classList.add('no-latest-docs');
+      pageID.classList.add('no-latest-docs'); /* TODO:  Fix CLS */
     }
 
     /* Updates link to the latest version with the correct path (documentation's home) */
