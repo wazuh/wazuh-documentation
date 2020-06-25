@@ -93,6 +93,29 @@ Run the following command to ensure that the installation was made properly:
 
   # curl -XGET https://localhost:9200 -u admin:admin -k
 
+The response should look as follows:
+
+.. code-block:: none
+             :class: output
+
+              {
+                "name" : "node-1",
+                "cluster_name" : "elasticsearch",
+                "cluster_uuid" : "O82AgJJTTF2pTOXKPnwQsA",
+                "version" : {
+                  "number" : "7.6.1",
+                  "build_flavor" : "oss",
+                  "build_type" : "rpm",
+                  "build_hash" : "aa751e09be0a5072e8570670309b1f12348f023b",
+                  "build_date" : "2020-02-29T00:15:25.529771Z",
+                  "build_snapshot" : false,
+                  "lucene_version" : "8.4.0",
+                  "minimum_wire_compatibility_version" : "6.8.0",
+                  "minimum_index_compatibility_version" : "6.0.0-beta1"
+                },
+                "tagline" : "You Know, for Search"
+              }  
+
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
 Next steps
