@@ -399,12 +399,12 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.12.0",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
-    "|WAZUH_LATEST_PUPPET|" : "3.12.0",
-    "|WAZUH_LATEST_OVA|" : "3.12.0",
-    "|WAZUH_LATEST_DOCKER|" : "3.12.0",
+    "|WAZUH_LATEST|" : "3.13.0",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.13.0",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.13.0",
+    "|WAZUH_LATEST_PUPPET|" : "3.13.0",
+    "|WAZUH_LATEST_OVA|" : "3.13.0",
+    "|WAZUH_LATEST_DOCKER|" : "3.13.0",
     "|ELASTICSEARCH_LATEST|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.6.1",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
