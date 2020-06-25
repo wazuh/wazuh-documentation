@@ -44,6 +44,7 @@ newUrls['3.13'] = [
   '/gcp/prerequisites/dependencies.html',
   '/gcp/prerequisites/index.html',
   '/gcp/prerequisites/pubsub.html',
+  '/gcp/supported-services/index.html',
   '/user-manual/reference/ossec-conf/gcp-pubsub.html',
   '/user-manual/ruleset/mitre.html',
 ];
