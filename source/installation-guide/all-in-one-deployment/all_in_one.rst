@@ -7,7 +7,7 @@
 Step-by-step installation
 =========================
 
-This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources, alternatively, all the packages can be downloaded directly :ref:`here <packages>`.
+This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources. All the packages available packages can be checked :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to run all the commands described below.
 
