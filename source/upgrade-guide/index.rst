@@ -15,5 +15,7 @@ In case of having any doubt about operating system compatibility, please check t
     .. toctree::
         :maxdepth: 1
 
-        upgrading/index
+        upgrading-wazuh/index
         upgrading-elastic-stack/index
+        upgrading-agent/index
+        legacy/index

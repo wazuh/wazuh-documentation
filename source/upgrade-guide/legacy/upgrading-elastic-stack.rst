@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_elastic_stack:
+.. _upgrading_elastic_stack_legacy:
 
-Upgrading Elastic Stack server
-==============================
+Upgrading Elastic Stack
+=======================
 
 Although Wazuh v2.x is compatible with both Elastic Stack 2.x and 5.x, it is recommended that version 5.x will be installed since the Wazuh Kibana plugin is not compatible with Elastic Stack 2.X. This guide describes the upgrade process, no matter which version of the cluster is going to be used:
 
@@ -75,19 +75,19 @@ In order to display Wazuh alerts data, configure the Kibana index pattern.
 
 #. Go to *Settings* and configure a new wildcard:
 
-    .. thumbnail:: ../../../images/installation/kibana-elk2-set.png
+    .. thumbnail:: ../../images/installation/kibana-elk2-set.png
       :align: center
       :width: 100%
 
 #. Set the ``wazuh-*`` as an index pattern and choose the ``timestamp`` as a time field. Then, click on create:
 
-    .. thumbnail:: ../../../images/installation/kibana-elk2.png
+    .. thumbnail:: ../../images/installation/kibana-elk2.png
       :align: center
       :width: 100%
 
 #. Set this as the default wildcard by clicking on the ``star icon``:
 
-    .. thumbnail:: ../../../images/installation/kibana-elk.png
+    .. thumbnail:: ../../images/installation/kibana-elk.png
       :align: center
       :width: 100%
 
