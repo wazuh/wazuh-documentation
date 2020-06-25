@@ -798,11 +798,6 @@ li.toctree-l5 > a {
   transition: opacity 0.3s ease;
 }
 
-#navbar.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-
 #navbar-globaltoc {
   height: calc(100vh - 165px); /* 40px search + 100px buttons + 25px padding = 165px */
   visibility: visible;
