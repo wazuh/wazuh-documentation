@@ -38,13 +38,6 @@ $(function() {
     correctScrollTo(spaceBeforeAnchor);
   }
 
-  /* Finds current page section in globaltoc */
-  $('.globaltoc .toctree-l2.current a').each(function(e) {
-    if (!$(this).siblings('ul').length) {
-      $(this).addClass('leaf');
-    }
-  });
-
   /* Finds all nodes that contains subtrees within the globaltoc and appends a toggle button to them */
   $('.globaltoc .toctree-l1 a').each(function(e) {
     if ($(this).siblings('ul').length) {
@@ -53,39 +46,11 @@ $(function() {
     }
   });
 
-  showCurrentSubtree();
   hideSubtree(hideSubtreeNodes);
 
-  /* Show the hidden menu */
-  setTimeout(function() {
-    $('#navbar').removeClass('hidden');
-  }, 100);
-
   $(window).on('hashchange', function() {
-    updateFromHash();
     correctScrollTo(spaceBeforeAnchor);
   });
-
-  /**
-   * Updates the hash value (from the URL) in order to update the selected leaf from the globl toctree.
-   * That is, when the sections within a document are included in the toctree.
-   */
-  function updateFromHash() {
-    loc = location.hash;
-    selectLeaf(loc);
-  }
-
-  /**
-   * When sections of a document are included in the toctree, this updates the selected section in the global toctree.
-   * @param {string} hash String that appearse after the sign # in the URL.
-   */
-  function selectLeaf(hash) {
-    if (hash.length > 0) {
-      $('.globaltoc [href="' + hash + '"]').addClass('current');
-    } else {
-      $('.globaltoc [href="#"]').addClass('current');
-    }
-  }
 
   /* Turn all tables in responsive table */
   reponsiveTables();
@@ -203,22 +168,6 @@ $(function() {
       }
     }, {passive: false});
   }
-
-  /* $('#navbar-globaltoc').on('mousewheel', function(e) {
-    eventScroll = 'mousewheel';
-    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
-      scrollDirection = 'up';
-    } else {
-      scrollDirection = 'down';
-    }
-    enableDisableScroll();
-    if (disableScroll) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.returnValue = false;
-      return false;
-    }
-  }); */
 
   $('#navbar-globaltoc').keydown(function(e) {
     eventScroll = 'keys';
@@ -366,26 +315,6 @@ $(function() {
   });
 
   /**
-   * Shows the selected style for the parent document of pages that don't appear in the globaltoc
-   * @return {boolean} Returns true only if this funcionability in not applicable to the current page.
-   */
-  function showCurrentSubtree() {
-    updateFromHash();
-    if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0 && !$('#page').hasClass('index') && !$('#page').hasClass('not-indexed')) {
-      $('.globaltoc :contains("' + $('#breadcrumbs li:nth-last-child(2) a').text() + '")').addClass('show').addClass('current');
-      return true;
-    }
-    let currentLeaf = $('.globaltoc a.current.leaf');
-    if (currentLeaf.length == 0) {
-      currentLeaf = $('.globaltoc [href="#"].current');
-    }
-    currentLeaf.parents('li').each(function() {
-      $(this).addClass('initial').addClass('show');
-    });
-    completelyHideMenuItems();
-  }
-
-  /**
    * Completely hides the visually hidden elements
    */
   function completelyHideMenuItems() {
@@ -420,9 +349,6 @@ $(function() {
         /* The selected menu link in the globaltoc acts as the toggle button, showing on and off its subtree */
         if (regex.test(href) || isCurrent) {
           $(this).addClass(className);
-        }
-        if (isCurrent) {
-          $(this).addClass('current-toc-node');
         }
       });
     });
