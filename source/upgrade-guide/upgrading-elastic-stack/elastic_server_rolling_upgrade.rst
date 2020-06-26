@@ -6,7 +6,8 @@ Upgrading Elastic Stack from 6.8 to 7.x
 =======================================
 
 This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for the Elastic distribution.
-Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7 has Java embedded, so unless you decide to use Logstash, Java is not longer required.
+
+Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required and Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is not longer required.
 
 
 Prepare the Elastic Stack
@@ -153,13 +154,13 @@ Upgrade Elasticsearch
 Field migration: From @timestamp to timestamp
 ----------------------------------------------
 
-In previous Elasticsearch versions, the Elastic documents were indexed using the field ``@timestamp`` as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. Wazuh time-based indices now make use of field ``timestamp`` instead.
+In previous Elasticsearch versions, the Elastic documents were indexed using the ``@timestamp`` field as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. Wazuh time-based indices use ``timestamp`` field instead.
 
-Due to this change, previous alerts won't be visible in Wazuh indices, an update must be performed to all previous indices in order to complete the upgrade.
+Due to this change, previous alerts will not be visible in Wazuh indices and an update must be performed to all previous indices in order to complete the upgrade.
 
 Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
 
-Here is an example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.16``.
+An example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.16`` looks as follows:
 
 .. code-block:: bash
 
@@ -178,9 +179,9 @@ Here is an example of how to run the request using the index ``wazuh-alerts-3.x-
   }
   '
 
-The request must be run for all previous indices you want to migrate, modify the date parameter according to your index name.
+The request must be run for all previous indices which need to be migrated. Modify the date parameter according to the index name.
 
-More information about the request can be found in `Update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ section of the Elasticsearch documentation.
+More information about the request can be found in the `Update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ section of the Elasticsearch documentation.
 
 Upgrade Filebeat
 ----------------
@@ -202,7 +203,7 @@ Upgrade Filebeat
 
           # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
-#. Update the configuration file:
+#. Update the Filebeat configuration file:
 
     .. code-block:: console
 
@@ -223,7 +224,7 @@ Upgrade Filebeat
 
       # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
-#. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
+#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server:
 
     .. code-block:: yaml
 
@@ -239,7 +240,7 @@ Upgrade Filebeat
 Upgrade Kibana
 --------------
 
-#. Modify the Kibana configuration file ``/etc/kibana/kibana.yml`` and replace ``elasticsearch.url: "address:9200"`` by ``elasticsearch.hosts: ["address:9200"]``.
+#. Modify the ``/etc/kibana/kibana.yml`` configuration file and replace ``elasticsearch.url: "address:9200"`` by ``elasticsearch.hosts: ["address:9200"]``.
 
 #. Remove the Wazuh Kibana plugin:
 
@@ -285,7 +286,7 @@ Upgrade Kibana
           # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 
-#. For installations on Kibana 7.6.X versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+#. For installations on Kibana 7.6.x versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
     .. code-block:: console
 
