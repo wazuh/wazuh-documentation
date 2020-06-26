@@ -161,6 +161,10 @@ All files and subdirectories within the noted directories will also be monitored
 
 Drive letters without directories are not valid. At a minimum the '.' should be included (``D:\.``).
 
+Using drive letters without the backslash (``D:``) windows will replace it by the current working directory, monitoring the wazuh installation folder.
+
+Relative paths from the wazuh installation path can be used.
+
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
