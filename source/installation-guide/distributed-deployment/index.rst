@@ -26,7 +26,7 @@ The user can choose between Step by step installation, a manual way of carrying 
     requirements
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     unattended-installation
     step-by-step-installation/index
