@@ -11,7 +11,7 @@ The generic structure of a block in ReStructured text has in its first line the 
   content
 ```
 
-> Make sure to leave a blank space between the block name and the arguments list. This won't work: `.. <name>::<arguments>`
+:warning: Make sure to leave a blank space between the block name and the arguments list. This won't work: `.. <name>::<arguments>`
 
 Here's an example:
 
