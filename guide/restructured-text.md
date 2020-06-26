@@ -49,7 +49,7 @@ Since all indentation is significant, the level of indentation must be consisten
 
 Block content unindented will be interpreted as a separate paragraph. The output will be:
 
-TODO - IMAGEN BLOQUE CODIGO MAL
+![photo6030809081100481230](https://user-images.githubusercontent.com/11634351/85839308-0df20480-b79b-11ea-9f93-38ca49eaccfa.jpg)
 
 ## Markup
 
