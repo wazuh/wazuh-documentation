@@ -6,7 +6,7 @@ Upgrading Elastic Stack
 =======================
 
 
-This guide describes the upgrade process of Elastic Stack including Elasticsearch, Filebeat and Kibana, and, for the Elastic versions older than 7.x., Logstash.
+This guide describes the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana, and, for the Elastic versions older than 7.x., Logstash.
 
 Besides, the upgrade guide from 7.x to 7.y will also walk the user through the process of upgrading the Open Distro for Elasticsearch components.
 
@@ -19,11 +19,11 @@ The Wazuh Kibana plugin will be installed and configured along with Kibana.
 +---------------+------------+--------------------------------------------------------------------------------------------+
 | Upgrade from  | Upgrade to | Description                                                                                |
 +===============+============+============================================================================================+
-| 7.x           | 7.y        | :ref:`How to perform an upgrade from 7.x to 7.y. <elastic_server_minor_upgrade>`           |
+| 7.x           | 7.y        | :ref:`Upgrade from 7.x to 7.y. <elastic_server_minor_upgrade>`                             |
 +---------------+------------+-----------------------------+--------------------------------------------------------------+
-| 6.8           | 7.x        | :ref:`How to perform a rolling upgrade from 6.8 to 7.x. <elastic_server_rolling_upgrade>`  |
+| 6.8           | 7.x        | :ref:`Perform a rolling upgrade from 6.8 to 7.x. <elastic_server_rolling_upgrade>`         |
 +---------------+------------+-----------------------------+--------------------------------------------------------------+
-| 6.x           | 6.8        | :ref:`How to perform an upgrade from 6.x to 6.8. <elastic_server_hard_upgrade>`            |
+| 6.x           | 6.8        | :ref:`Upgrade from 6.x to 6.8. <elastic_server_hard_upgrade>`                              |
 +---------------+------------+-----------------------------+--------------------------------------------------------------+
 
 .. toctree::
