@@ -55,7 +55,7 @@
         # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/multi-node/search-guard-multi-node.yml
 
 
-      After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. There can be indicated more than one IP, setting one per line:
+      After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs in the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml``. There can be indicated more than one IP, setting one per line:
 
         .. code-block:: yaml
 
