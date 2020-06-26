@@ -10,7 +10,7 @@
 
                     # yum install java-11-openjdk-devel curl unzip wget libcap
 
-            If the OS used does not support JDK 11, alternatively JDK 8 can be installed.
+            If the OS used does not support JDK 11, alternatively, JDK 8 can be installed.
 
         .. group-tab:: APT
 
