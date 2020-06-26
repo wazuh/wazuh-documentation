@@ -7,34 +7,6 @@ Upgrade from the same major version (3.x)
 
 The following steps show how to upgrade to the latest available version of the Wazuh agent 3.x.
 
-Add the Wazuh repository
-------------------------
-
-Following the Wazuh :ref:`manager <installation_guide>` or the Wazuh :ref:`agents <installation_agents>` installation guides, the user probably disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages:
-
-.. tabs::
-
-  .. group-tab:: YUM
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
-
-  .. group-tab:: APT
-
-    This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
-
-    .. code-block:: console
-
-      # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
-
-  .. group-tab:: ZYpp
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
-
-
 Upgrade the Wazuh agent
 -----------------------
 
@@ -48,11 +20,27 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
   .. group-tab:: YUM
 
+    If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+
+    Upgrade the Wazuh agent to the latest version:
+
     .. code-block:: console
 
       # yum upgrade wazuh-agent
 
   .. group-tab:: APT
+
+    If the Wazuh repository is disabled it is necessary to enable it to get the latest package. This step is not necessary if the package is set to the ``hold`` state instead of disabling the repository:
+
+    .. code-block:: console
+
+      # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+
+    Upgrade the Wazuh agent to the latest version:
 
     .. code-block:: console
 
@@ -60,6 +48,14 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
       # apt-get install wazuh-agent
 
   .. group-tab:: ZYpp
+
+    If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+
+    Upgrade the Wazuh agent to the latest version:
 
     .. code-block:: console
 

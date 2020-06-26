@@ -5,7 +5,7 @@
 Upgrade from the same major version (3.x)
 =========================================
 
-The following steps show how to upgrade to the latest available version of Wazuh 3.x, which implies upgrading to the latest compatible version of Elastic Stack.
+The following steps show how to upgrade to the latest available version of the Wazuh server 3.x, which implies upgrading to the latest compatible version of Elastic Stack.
 
 Starting the upgrade
 --------------------
