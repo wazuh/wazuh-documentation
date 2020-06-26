@@ -41,7 +41,7 @@ Upgrade the Wazuh manager
 
           # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-#. Upgrade the Wazuh manager:
+#. Upgrade the Wazuh manager and the Wazuh API:
 
     .. tabs::
 
@@ -49,30 +49,14 @@ Upgrade the Wazuh manager
 
         .. code-block:: console
 
-          # yum install wazuh-manager
+          # yum install wazuh-manager wazuh-api
 
       .. group-tab:: APT
 
         .. code-block:: console
 
           # apt-get update
-          # apt-get install wazuh-manager
-
-#. Upgrade the Wazu API:
-
-    .. tabs::
-
-      .. group-tab:: YUM
-
-        .. code-block:: console
-
-          # yum install wazuh-api
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-
-          # apt-get install wazuh-api
+          # apt-get install wazuh-manager wazuh-api
 
 Disable the Wazuh repository
 ----------------------------
