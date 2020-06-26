@@ -7,8 +7,8 @@ Upgrade from the same major version (3.x)
 
 The following steps show how to upgrade to the latest available version of the Wazuh agent 3.x.
 
-Starting the upgrade
---------------------
+Add the Wazuh repository
+------------------------
 
 Following the Wazuh :ref:`manager <installation_guide>` or the Wazuh :ref:`agents <installation_agents>` installation guides, the user probably disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages:
 
@@ -38,38 +38,38 @@ Following the Wazuh :ref:`manager <installation_guide>` or the Wazuh :ref:`agent
 Upgrade the Wazuh agent
 -----------------------
 
-Since the Wazuh 3.x version it is possible to upgrade the Wazuh agents from the Wazuh manager or locally.
+Since the Wazuh 3.x it is possible to upgrade the Wazuh agents from the Wazuh manager or locally.
 
-Upgrading the Wazuh agents remotely from the Wazuh manager is possible thanks to the ``agent_upgrade`` tools and the Wazuh API. More information can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
+Upgrading the Wazuh agents remotely from the Wazuh manager is possible thanks to the ``agent_upgrade`` tools and the Wazuh API. More information about the process can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
 
 To perform the upgrade locally follow the instructions depending on the Wazuh agent's operating system:
 
--  CentOS/RHEL/Fedora:
+.. tabs::
 
-  .. code-block:: console
+  .. group-tab:: YUM
 
-    # yum upgrade wazuh-agent
+    .. code-block:: console
 
--  Debian/Ubuntu:
+      # yum upgrade wazuh-agent
 
-  .. code-block:: console
+  .. group-tab:: APT
 
-    # apt-get update
-    # apt-get install wazuh-agent
+    .. code-block:: console
 
--  OpenSUSE:
+      # apt-get update
+      # apt-get install wazuh-agent
 
-  .. code-block:: console
+  .. group-tab:: ZYpp
 
-    # zypper update wazuh-agent
+    .. code-block:: console
 
--  Windows:
+      # zypper update wazuh-agent
 
-  The Wazuh agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using the installer, both of them require ``administrator rights``:
+  .. group-tab:: Windows
 
-  .. tabs::
+    The Wazuh agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using the installer, both of them require ``administrator rights``:
 
-    .. group-tab:: Using the GUI installer
+    - Using the GUI installer
 
       Open the installer and follow the instructions to upgrade the Wazuh agent:
 
@@ -77,22 +77,22 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
           :align: center
 
 
-    .. group-tab:: Using the command line
+    - Using the command line
 
-      To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
+      To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
 
       .. code-block:: console
 
         # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
-  .. note::
+    .. note::
 
-    To learn more about the unattended installation process, please read :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+      To learn more about the unattended installation process, please read :ref:`Windows installation guide <wazuh_agent_package_windows>`.
 
-Disabling the Wazuh repositories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Disable the Wazuh repository
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is recommended to disable the Wazuh repositories in order to avoid undesired upgrades and compatibility issues:
+It is recommended to disable the Wazuh repositor in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
 .. tabs::
 
