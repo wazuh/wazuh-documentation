@@ -130,7 +130,7 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +   **API and Wazuh App version**   +     **Elastic Stack version**      +
 |                                   |                                    |
 +-----------------------------------+------------------------------------+
-|              3.13.x               |   7.7.0 to |ELASTICSEARCH_LATEST|  |
+|              3.13.x               |   7.7.0 to |ELASTICSEARCH_LATEST|                   |
 +-----------------------------------+------------------------------------+
 |              3.12.x               | 6.8.7 to 6.8.10 and 7.6.1 to 7.7.1 |
 +-----------------------------------+------------------------------------+
