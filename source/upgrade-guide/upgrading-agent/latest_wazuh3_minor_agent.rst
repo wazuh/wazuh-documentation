@@ -85,14 +85,14 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
         # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
-    .. note::
+      .. note::
 
-      To learn more about the unattended installation process, please read :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+        To learn more about the unattended installation process, please read :ref:`Windows installation guide <wazuh_agent_package_windows>`.
 
 Disable the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is recommended to disable the Wazuh repositor in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
 .. tabs::
 
