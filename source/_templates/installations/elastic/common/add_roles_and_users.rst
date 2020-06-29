@@ -14,7 +14,7 @@ The commands above add the following Wazuh Kibana's users:
 
 Apart from the extra users, there are three extra roles added. These roles are in charge of giving the right permissions to the users:
 
-- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indexes. This user is one of the Open Distro for Elasticsearch `default users <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_ and its purpose is to perform tasks such as making cluster-wide searches, indexing monitoring or writing in indices.
+- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indexes. This user is one of the Open Distro for Elasticsearch `default users <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_ and its purpose is to perform tasks such as making cluster-wide searches, indexing monitoring, or writing in indices.
 
 - ``wazuh_ui_user`` provides ``wazuh_user`` ability to read the Wazuh’s indexes.
 
