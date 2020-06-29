@@ -5,10 +5,10 @@
 Upgrading Elastic Stack from 6.x to 6.8
 =======================================
 
-This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Logstash, Filebeat and Kibana for the Elastic distribution.
+This section guides through the upgrade process of the Elastic Stack components including Elasticsearch, Logstash, Filebeat and Kibana for the Elastic distribution.
 
-Prepare the Elastic Stack
--------------------------
+Preparing the Elastic Stack
+---------------------------
 
 #. Stop the services:
 
@@ -42,8 +42,8 @@ Prepare the Elastic Stack
           # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
 
 
-Upgrade Elasticsearch
----------------------
+Upgrading Elasticsearch
+-----------------------
 
 #. Disable shard allocation:
 
@@ -127,10 +127,10 @@ Upgrade Elasticsearch
       # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/6.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 
-Upgrade Logstash
-----------------
+Upgrading Logstash
+------------------
 
-#. Upgrade the ``logstash`` package:
+#. Upgrade the Logstash package:
 
     .. tabs::
 
@@ -174,8 +174,8 @@ Upgrade Logstash
       # systemctl start logstash.service
 
 
-Upgrade Filebeat
-----------------
+Upgrading Filebeat
+------------------
 
 #. Upgrade Filebeat:
 
@@ -209,8 +209,8 @@ Upgrade Filebeat
       # systemctl restart filebeat
 
 
-Upgrade Kibana
---------------
+Upgrading Kibana
+----------------
 
 #. Upgrade the Kibana package:
 
@@ -276,8 +276,10 @@ Upgrade Kibana
       # systemctl enable kibana.service
       # systemctl start kibana.service
 
-Disabling repositories
-----------------------
+Disabling the repositories
+--------------------------
+
+It is recommended to disable the Elastic repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
     .. tabs::
 

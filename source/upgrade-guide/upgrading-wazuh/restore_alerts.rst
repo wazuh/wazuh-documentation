@@ -2,8 +2,8 @@
 
 .. _restore_alerts:
 
-Restore Wazuh alerts from Wazuh 2.x
-===================================
+Restore the Wazuh alerts from Wazuh 2.x
+=======================================
 
 .. versionadded:: 3.1.0
 
@@ -43,7 +43,7 @@ Restoring the alerts
 
 #. Insert the requested parameters into the prompts from the  script as defined below :
 
-    - ``reindex_type``: Indicates the reindexing type. ``ELS2ELS``: From Elasticsearch to Elasticsearch, ``WM2ELS``: From the Wazuh manager to Elasticsearch.
+    - ``reindex_type``: Indicates the reindexing type. It can be either set to the ``ELS2ELS``, for reindexing from Elasticsearch to Elasticsearch, or the ``WM2ELS``, for reindexing from the Wazuh manager to Elasticsearch.
     - ``elastic_ip``: Is the Elasticsearch IP address. By default, set to ``localhost``.
     - ``dateFrom``: Start date as YYYY-MM-DD (2017-12-01).
     - ``dateTo``: End date as YYYY-MM-DD (2017-12-11).
@@ -63,10 +63,10 @@ Restoring the alerts
 
         # systemctl start logstash
 
-Veryfying the reindexing process
+Verifying the reindexing process
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the reindexing of the alerts is completed, the user can confirm that the process was successful by querying Elasticsearch indices:
+Once the reindexing of the alerts is completed, the user can confirm that the process was successful by querying the Elasticsearch indices:
 
     .. code-block:: console
 

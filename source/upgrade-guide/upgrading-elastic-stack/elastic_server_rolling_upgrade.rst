@@ -7,11 +7,11 @@ Upgrading Elastic Stack from 6.8 to 7.x
 
 This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for the Elastic distribution.
 
-Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required and Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is not longer required.
+Coming new in version Elastic 7.x, there is an architecture change introduced in the Wazuh Stack. Logstash is no longer required and Filebeat will send the events directly to the Elasticsearch server. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
 
 
-Prepare the Elastic Stack
--------------------------
+Preparing the Elastic Stack
+---------------------------
 
 #. Stop the services:
 
@@ -64,8 +64,8 @@ Prepare the Elastic Stack
           EOF
 
 
-Upgrade Elasticsearch
----------------------
+Upgrading Elasticsearch
+-----------------------
 
 #. Disable shard allocation:
 
@@ -154,11 +154,11 @@ Upgrade Elasticsearch
 Field migration: From @timestamp to timestamp
 ----------------------------------------------
 
-In previous Elasticsearch versions, the Elastic documents were indexed using the ``@timestamp`` field as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. Wazuh time-based indices use ``timestamp`` field instead.
+In the previous Elasticsearch versions, the Elastic documents were indexed using the ``@timestamp`` field as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. The Wazuh time-based indices use the ``timestamp`` field instead.
 
-Due to this change, previous alerts will not be visible in Wazuh indices and an update must be performed to all previous indices in order to complete the upgrade.
+Due to this change, the previous alerts will not be visible in the Wazuh indices and update must be performed to all previous indices in order to complete the upgrade.
 
-Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
+Run below request for each Wazuh index created before the Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
 
 An example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.16`` looks as follows:
 
@@ -183,8 +183,8 @@ The request must be run for all previous indices which need to be migrated. Modi
 
 More information about the request can be found in the `Update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ section of the Elasticsearch documentation.
 
-Upgrade Filebeat
-----------------
+Upgrading Filebeat
+------------------
 
 #. Upgrade Filebeat:
 
@@ -237,8 +237,8 @@ Upgrade Filebeat
       # systemctl daemon-reload
       # systemctl restart filebeat
 
-Upgrade Kibana
---------------
+Upgrading Kibana
+----------------
 
 #. Modify the ``/etc/kibana/kibana.yml`` configuration file and replace ``elasticsearch.url: "address:9200"`` by ``elasticsearch.hosts: ["address:9200"]``.
 
@@ -301,8 +301,10 @@ Upgrade Kibana
       # systemctl daemon-reload
       # systemctl restart kibana
 
-Disabling repositories
-^^^^^^^^^^^^^^^^^^^^^^
+Disabling the repositories
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is recommended to disable the Elastic repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
     .. tabs::
 

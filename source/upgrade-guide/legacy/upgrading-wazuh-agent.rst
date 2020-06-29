@@ -5,7 +5,7 @@
 Upgrading the Wazuh agent
 =========================
 
-Follow these steps to update the Wazuh v1.x agent to the Wazuh v2.x agent:
+Follow these steps to update the Wazuh  agent v1.x to the Wazuh agent v2.x:
 
 .. tabs::
 
@@ -30,7 +30,7 @@ Follow these steps to update the Wazuh v1.x agent to the Wazuh v2.x agent:
 
   .. group-tab:: Windows and MacOS X
 
-    On Windows and MacOS X, the Wazuh agent upgrade can be done by deleting the previous version and installing Wazuh v2.x agent from scratch. More information about the process can be found on:
+    On Windows and MacOS X, the Wazuh agent upgrade can be done by deleting the previous version and installing Wazuh  agent v2.x from scratch. More information about the process can be found on:
 
     - :ref:`Install the Wazuh agent on Windows <wazuh_agent_package_windows>`
     - :ref:`Install the Wazuh agent on MacOS X <wazuh_agent_package_macos>`

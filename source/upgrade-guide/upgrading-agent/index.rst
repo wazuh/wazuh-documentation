@@ -2,8 +2,8 @@
 
 .. _upgrading_wazuh_agent:
 
-Upgrading Wazuh agent
-=====================
+Upgrading the Wazuh agent
+=========================
 
 This section describes how to upgrade the Wazuh agent. The upgrade process depends on the version that is currently installed:
 

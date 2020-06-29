@@ -7,8 +7,8 @@ Upgrade from a different major version
 
 The following steps show how to upgrade the Wazuh agent from 2.x to 3.x.
 
-Upgrade the Wazuh agent
------------------------
+Upgrading the Wazuh agent
+-------------------------
 
 #. Stop the service:
 
@@ -79,8 +79,8 @@ Upgrade the Wazuh agent
           .. note::
             To learn more about the unattended installation process, please read the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
 
-Disable the Wazuh repository
-----------------------------
+Disabling the Wazuh repository
+------------------------------
 
 It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
@@ -99,7 +99,7 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
         # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
         # apt-get update
 
-      Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command.
+      Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command:
 
       .. code-block:: console
 
