@@ -2,8 +2,8 @@
 
 .. _upgrading_wazuh:
 
-Upgrading Wazuh server
-======================
+Upgrading the Wazuh server
+==========================
 
 This section describes how to upgrade the Wazuh server, including the Wazuh manager and the Wazuh API. The process depends on the version that is currently installed:
 
@@ -19,6 +19,5 @@ This section describes how to upgrade the Wazuh server, including the Wazuh mana
     :hidden:
     :maxdepth: 2
 
-
-    different_major
     latest_wazuh3_minor
+    different_major

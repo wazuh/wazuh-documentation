@@ -5,12 +5,12 @@
 Upgrade from the same major version (3.x)
 =========================================
 
-The following steps show how to upgrade to the latest available version of the Wazuh agent 3.x.
+The following steps show how to upgrade to the latest version of the Wazuh agent 3.x.
 
-Upgrade the Wazuh agent
------------------------
+Upgrading the Wazuh agent
+-------------------------
 
-Since the Wazuh 3.x it is possible to upgrade the Wazuh agents from the Wazuh manager or locally.
+Since the Wazuh 3.x, it is possible to upgrade the Wazuh agents from the Wazuh manager or locally.
 
 Upgrading the Wazuh agents remotely from the Wazuh manager is possible thanks to the ``agent_upgrade`` tools and the Wazuh API. More information about the process can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
 
@@ -90,8 +90,8 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
       On MacOS X the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. More information about the process can be found in the :ref:`Wazuh agent installation and deployment on MacOS X <wazuh_agent_package_macos>` section.
 
 
-Disable the Wazuh repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Disabling the Wazuh repository
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
@@ -105,7 +105,7 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 
   .. group-tab:: APT
 
-    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repositories.
+    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repository.
 
     .. code-block:: console
 

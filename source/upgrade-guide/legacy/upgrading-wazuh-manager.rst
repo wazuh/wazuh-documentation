@@ -5,7 +5,7 @@
 Upgrading the Wazuh server
 ==========================
 
-Follow these steps to update the Wazuh v1.x server to the Wazuh v2.x.
+Follow these steps to update the Wazuh server v1.x  to the Wazuh server v2.x.
 
 #. Stop the processes:
 

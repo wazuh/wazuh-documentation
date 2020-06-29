@@ -7,12 +7,12 @@ Upgrading Elastic Stack from 7.x to 7.y
 
 This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for both Open Distro for Elasticsearch and Elastic distributions. As some of the steps may differ depending on the distribution, the following tags will be used:
 
-- [*OD*] - indicates that the step should be done only for Open Distro for Elasticsearch upgrade.
+- [*OD*] - indicates that the step should be done only during the Open Distro for Elasticsearch upgrade.
 
-- [*Elastic*] - indicates that the step should be done only for Elastic upgrade.
+- [*Elastic*] - indicates that the step should be done only during the Elastic upgrade.
 
-Prepare the Elastic Stack
--------------------------
+Preparing Elastic Stack
+-----------------------
 
 #. Stop the services:
 
@@ -38,7 +38,7 @@ Prepare the Elastic Stack
             # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
             # apt-get update
 
-#. [*Elastic*] Before the process of upgrading Filebeat it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro distribution, which might be accidentally installed instead of Elastic package.
+#. [*Elastic*] Before the process of upgrading Filebeat it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package.
 
    In case of having enabled the Wazuh repository it can be disabled using:
 
@@ -58,13 +58,13 @@ Prepare the Elastic Stack
              # apt-get update
 
 
-Upgrade Elasticsearch
----------------------
+Upgrading Elasticsearch
+-----------------------
 
 This guide explains how to perform a rolling upgrade, which lets to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
 
-In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is binded to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP. If using ``http`` instead of ``https`` the options ``-u`` and ``-k`` must be ommited.
+In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace the ``127.0.0.1`` with your Elasticsearch IP. If using a ``http`` instead of a ``https`` the options ``-u`` and ``-k`` must be omitted.
 
 #. Disable shard allocation:
 
@@ -131,7 +131,7 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
               # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
               # systemctl restart elasticsearch
 
-#. [OD] Upgrade any additional plugins that you installaed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins (optional).
+#. [OD] Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins (optional).
 
 
 #. Restart the service:
@@ -168,8 +168,8 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
 #. Repeat the steps for every Elasticsearch node.
 
 
-Upgrade Filebeat
-----------------
+Upgrading Filebeat
+------------------
 
 #. Upgrade Filebeat:
 
@@ -274,7 +274,7 @@ Upgrade Filebeat
 
             Replace ``elasticsearch_ip_node_x`` with the IP address or the hostname of the Elasticsearch server to connect to.
 
-          During the installation the default username and password were used. If those credentials were changed, replace those values in the ``filebeat.yml`` configuration file.
+          During the installation, the default username and password were used. If those credentials were changed, replace those values in the ``filebeat.yml`` configuration file.
 
         .. group-tab::  Elastic
 
@@ -291,11 +291,11 @@ Upgrade Filebeat
       # systemctl daemon-reload
       # systemctl restart filebeat
 
-Upgrade Kibana
---------------
+Upgrading Kibana
+----------------
 
 .. warning::
-  Since Wazuh 3.12.0 release (regardless of the Elastic Stack version) the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
+  Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from the ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from the ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
 #. Copy the Wazuh Kibana plugin configuration file to its new location (not needed for upgrades from 3.12.x to 3.13.x):
 
@@ -428,7 +428,7 @@ Upgrade Kibana
       # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
       # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-#. For installations on Kibana 7.6.X versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+#. For installations on Kibana 7.6.x versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
     .. code-block:: console
 

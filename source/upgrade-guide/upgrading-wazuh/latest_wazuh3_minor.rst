@@ -7,8 +7,8 @@ Upgrade from the same major version (3.x)
 
 The following steps show how to upgrade to the latest available version of the Wazuh server 3.x, which implies upgrading to the latest compatible version of Elastic Stack.
 
-Upgrade the Wazuh manager and the Wazuh API
--------------------------------------------
+Upgrading the Wazuh manager and the Wazuh API
+---------------------------------------------
 
 .. tabs::
 
@@ -28,7 +28,7 @@ Upgrade the Wazuh manager and the Wazuh API
 
   .. group-tab:: APT
 
-    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to the ``hold`` state instead of disabling the repository:
+    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to the ``hold`` state and the repository is enabled:
 
     .. code-block:: console
 
@@ -57,9 +57,9 @@ Upgrade the Wazuh manager and the Wazuh API
 
 
 .. note::
-  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in :ref:`User manual <user_manual>`.
+  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
 
-Next steps
-----------
+Next step
+---------
 
 The next step consists on :ref:`upgrading the Elastic Stack <elastic_stack_packages_legacy>`.
