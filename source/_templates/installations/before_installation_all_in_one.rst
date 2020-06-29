@@ -39,7 +39,7 @@
 
                     .. code-block:: console
 
-                        # apt install openjdk-11-jdk && export JAVA_HOME="/usr/" && apt-install curl apt-transport-https unzip wget libcap2-bin
+                        # apt install openjdk-11-jdk && export JAVA_HOME="/usr/" && apt-get install curl apt-transport-https unzip wget libcap2-bin
    
 
 .. End of include file
