@@ -28,9 +28,15 @@ Follow these steps to update the Wazuh  agent v1.x to the Wazuh agent v2.x:
         it under the terms of the GNU General Public License (version 2) as
         published by the Free Software Foundation.
 
-  .. group-tab:: Windows and MacOS X
+  .. group-tab:: Windows
 
-    On Windows and MacOS X, the Wazuh agent upgrade can be done by deleting the previous version and installing Wazuh  agent v2.x from scratch. More information about the process can be found on:
+    On Windows systems the Wazuh agent upgrade can be done by deleting the previous version and installing the Wazuh agent v2.x from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
 
-    - :ref:`Install the Wazuh agent on Windows <wazuh_agent_package_windows>`
-    - :ref:`Install the Wazuh agent on MacOS X <wazuh_agent_package_macos>`
+    More information about the process can be found in the :ref:`Wazuh agent installation on Windows <wazuh_agent_package_windows>` section.
+
+
+  .. group-tab:: MacOS X
+
+    On MacOS X system the Wazuh agent upgrade can be done by deleting the previous version and installing the Wazuh agent v2.x from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
+
+    More information about the process can be found in the :ref:`Wazuh agent installation on MacOS X <wazuh_agent_package_macos>` section.

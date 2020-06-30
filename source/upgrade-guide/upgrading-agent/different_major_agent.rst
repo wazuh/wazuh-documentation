@@ -44,11 +44,13 @@ Upgrading the Wazuh agent
 
     .. tabs::
 
+
       .. group-tab:: YUM
 
         .. code-block:: console
 
           # yum install wazuh-agent
+
 
       .. group-tab:: APT
 
@@ -56,6 +58,7 @@ Upgrading the Wazuh agent
 
           # apt-get update
           # apt-get install wazuh-agent
+
 
       .. group-tab:: Windows
 
@@ -78,6 +81,28 @@ Upgrading the Wazuh agent
 
           .. note::
             To learn more about the unattended installation process, please read the :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+
+
+      .. group-tab:: MacOS X
+
+          On MacOS X system the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
+
+          More information about the process can be found in the :ref:`Wazuh agent installation and deployment on MacOS X <wazuh_agent_package_macos>` section.
+
+
+      .. group-tab:: Unix based systems
+
+          On the Unix based systems the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
+
+          More information about the process can be found following the appropriate link for the desired operating system:
+
+          - :ref:`Wazuh agent installation and deployment on AIX <wazuh_agent_package_aix>`.
+
+          - :ref:`Wazuh agent installation on HP-UX <wazuh_agent_package_hpux>`.
+
+          - :ref:`Wazuh agent installation on Solaris <wazuh_agent_solaris>`.
+
+
 
 Disabling the Wazuh repository
 ------------------------------
