@@ -16,14 +16,14 @@
 
                 #. Add the repository for Java Development Kit (JDK):
 
-                    #. For Debian:
+                    * For Debian:
 
                         .. code-block:: console
 
                             # echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
 
 
-                    #. Ubuntu and other Debian based OS:
+                    * Ubuntu and other Debian based OS:
 
                             .. code-block:: console
 
