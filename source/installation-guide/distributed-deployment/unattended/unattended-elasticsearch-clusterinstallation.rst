@@ -2,5 +2,5 @@
 
 .. _unattended_distributed_elasticsearch:
 
-Unattended Elsaticsearch cluster installation
-=============================================
+Elasticsearch & Kibana installation
+===================================
