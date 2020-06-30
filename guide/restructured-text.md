@@ -51,6 +51,8 @@ Block content unindented will be interpreted as a separate paragraph. The output
 
 ![photo6030809081100481230](https://user-images.githubusercontent.com/11634351/85839308-0df20480-b79b-11ea-9f93-38ca49eaccfa.jpg)
 
+Note: put special attention to indentation when [inserting code-blocks inside lists](https://github.com/wazuh/wazuh-documentation/blob/master/guide/good-practices.md#code-blocks-inside-lists).
+
 ## Markup
 
 Text markup has the following rules:
@@ -67,7 +69,7 @@ Text markup has the following rules:
 
 ```
 * Leading spaces will break the code*
-*This is better* 
+*This is better*
 ```
 
 - Marked elements must be separated using a space or a new line.
@@ -81,4 +83,3 @@ Text markup has the following rules:
 **works**
 `too`
 ```
-

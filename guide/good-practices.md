@@ -1,8 +1,8 @@
 # Good practices and common errors
 
-## Auto-enumerated lists
+## Auto-numbered lists
 
-The auto-enumerated  Sphinx option creates self-numbered list items. While hardcoding item numbers is technically correct, these lists will be harder to maintain since indexes must be updated every time the list changes.
+The auto-numbered  Sphinx option creates self-numbered list items. While hardcoding item numbers is technically correct, these lists will be harder to maintain since indexes must be updated every time the list changes.
 
 Example of hardcoded list numbers:
 
@@ -12,12 +12,80 @@ Example of hardcoded list numbers:
 3. Third item
 ```
 
-Example of auto-enumerated list:
+Example of auto-numbered list:
 
 ```
 #. First item
 #. Second item
 #. Third item
+```
+
+## Code-blocks inside lists
+
+To include code-blocs inside a list, position the code-block directive flush with the text in the list. That is, indent three spaces for ordered lists and two spaces for unordered lists. Otherwise, the code-block will break the list into several individual lists, which is semantically incorrect and particularly noticeable in auto-numbered lists.
+
+Example of incorrect auto-numbered lists containing a code block:
+
+```
+#. First item has a code-block
+
+  .. code-block:: console
+
+    # yum install elasticsearch-7.8.0
+
+#. Second item has a code-block
+
+  .. code-block:: yaml
+
+    # network.host: <elasticsearch_ip>
+
+#. Third item
+```
+
+The result will look like this:
+
+```
+1. First item has a code-block
+
+ # yum install elasticsearch-7.8.0
+
+1. Second item has a code-block
+
+ # network.host: <elasticsearch_ip>
+
+1. Third item
+```
+
+Example of correct auto-numbered lists containing a code block:
+
+```
+#. First item has a code-block
+
+   .. code-block:: console
+
+     # yum install elasticsearch-7.8.0
+
+#. Second item has a code-block
+
+   .. code-block:: yaml
+
+     # network.host: <elasticsearch_ip>
+
+#. Third item
+```
+
+The result will look like this:
+
+```
+1. First item has a code-block
+
+   # yum install elasticsearch-7.8.0
+
+2. Second item has a code-block
+
+   # network.host: <elasticsearch_ip>
+
+3. Third item
 ```
 
 ## Always specify code-blocks language

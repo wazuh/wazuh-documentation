@@ -26,7 +26,7 @@ Title 1 Title 2 Title 3 Title 4 Title 5 Title 6
 ```
 
 - Remove any trailing or leading spaces between the backticks.
-- There must be a space separating text and link. 
+- There must be a space separating text and link.
 - Separate links from the rest of the content using spaces or new lines.
 
 ## Code blocks
@@ -41,6 +41,7 @@ Title 1 Title 2 Title 3 Title 4 Title 5 Title 6
 - There must be a space separating the `code-block::` directive and the name of the programming language.
 - Use 'default' as a programming language to prevent code from being pigmented.
 - There must be a blank line (two carriage returns) separating the header and the content.
+- If [the code-block is inside a list](https://github.com/wazuh/wazuh-documentation/blob/master/guide/good-practices.md#code-blocks-inside-lists), pay attention to its indentation.
 
 ## Notes and warnings
 
