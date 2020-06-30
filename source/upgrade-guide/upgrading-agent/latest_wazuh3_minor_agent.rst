@@ -87,7 +87,7 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
   .. group-tab:: MacOS X
 
-      On MacOS X the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
+      On MacOS X system the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
 
       More information about the process can be found in the :ref:`Wazuh agent installation and deployment on MacOS X <wazuh_agent_package_macos>` section.
 
