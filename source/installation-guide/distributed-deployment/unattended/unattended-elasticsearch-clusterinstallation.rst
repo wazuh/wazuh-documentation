@@ -35,7 +35,7 @@ Download the script:
 
     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/elastic-stack-installation.sh 
 
-The script allows to install both Elasticsearch and Kibana. They can be installed either toghether or in separated machines. These are the available options to run the script:
+The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separated machines. These are the available options to run the script:
 
 +-------------------------------+----------------------------------------------------------+
 | Options                       | Purpose                                                  |
@@ -62,7 +62,7 @@ Here is an example of how to run the script to install Open Distro for Elasticse
 Elasticsearch configuration
 ---------------------------
 
-After the installation of Elasticsearch some steps must be done manually in order to finish the configuation. Choose either single-node or multi-node tab depending on the kind of installation used: 
+After the installation of Elasticsearch, some steps must be done manually in order to finish the configuration. Choose either single-node or multi-node tab depending on the kind of installation used: 
 
 .. tabs::
 
@@ -131,7 +131,7 @@ After generating and deploying the certificates, the Elasticsearch service can b
 .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 
-Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
+Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
 .. code-block:: console
 
