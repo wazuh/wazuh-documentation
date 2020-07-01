@@ -89,7 +89,7 @@ Certificates creation and deployment
 
     .. include:: ../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
-#. [*Master*] Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
+#. [*Master*] Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
   .. code-block:: console
 
