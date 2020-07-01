@@ -37,19 +37,21 @@ Download the script:
 
 The script allows to install both Elasticsearch and Kibana. They can be installed either toghether or in separated machines. These are the available options to run the script:
 
-+-------------------------------+-----------------------------------------------------+
-| Options                       | Purpose                                             |
-+===============================+=====================================================+
-| -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch              |
-+-------------------------------+-----------------------------------------------------+
-| -k / --install-kibana         | Installs Open Distro for Kibana                     |
-+-------------------------------+-----------------------------------------------------+
-| -ip / --elasticsearch-ip      | Elasticsearch IP. Usage: ``-ip <elasticsearch_ip>`` |
-+-------------------------------+-----------------------------------------------------+
-| -kip / --kibana-ip            | Kibana IP. Usage: ``-kip <kibana_ip>``              |
-+-------------------------------+-----------------------------------------------------+
-| -m / --multi-node             | Shows help                                          |
-+-------------------------------+-----------------------------------------------------+
++-------------------------------+----------------------------------------------------------+
+| Options                       | Purpose                                                  |
++===============================+==========================================================+
+| -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch                   |
++-------------------------------+----------------------------------------------------------+
+| -k / --install-kibana         | Installs Open Distro for Kibana                          |
++-------------------------------+----------------------------------------------------------+
+| -ip / --elasticsearch-ip      | Elasticsearch IP. Usage: ``-ip <elasticsearch_ip>``      |
++-------------------------------+----------------------------------------------------------+
+| -kip / --kibana-ip            | Kibana IP. Usage: ``-kip <kibana_ip>``                   |
++-------------------------------+----------------------------------------------------------+
+| -m / --multi-node             | Indicates whether it is a multi-node installation or not |
++-------------------------------+----------------------------------------------------------+
+| -h / --help                   | Shows help                                               |
++-------------------------------+----------------------------------------------------------+
 
 Here is an example of how to run the script to install Open Distro for Elasticsearch in multi-node mode and Open Distro for Kibana: 
 
@@ -173,25 +175,25 @@ Kibana configuration
 After installing Kibana, the certificates generated during the Elasticsearch installation must be deployed. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
 
-    .. tabs::
+.. tabs::
 
 
 
-        .. group-tab:: Same Elasticsearch server
+    .. group-tab:: Same Elasticsearch server
 
 
-            Copy the Elasticsearch certificates:
+        Copy the Elasticsearch certificates:
 
-            .. include:: ../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
-
-
-
-        .. group-tab:: Different Elasticsearch server
+        .. include:: ../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 
-            .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+
+    .. group-tab:: Different Elasticsearch server
+
+
+        .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
 Enable and start the Kibana service:
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+.. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
