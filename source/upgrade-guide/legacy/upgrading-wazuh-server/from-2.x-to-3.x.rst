@@ -58,6 +58,9 @@ Upgrade the Wazuh manager
           # apt-get update
           # apt-get install wazuh-manager wazuh-api
 
+.. note::
+  After the upgrade, the old alerts will not be visualized in Kibana due to a change in the Wazuh alerts’ template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping. The process is described in the :ref:`Restore the Wazuh alerts from Wazuh 2.x <restore_alerts_2.x_3.x>` section.
+
 Disable the Wazuh repository
 ----------------------------
 
