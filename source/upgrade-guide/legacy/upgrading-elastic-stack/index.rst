@@ -7,6 +7,10 @@ Upgrading Elastic Stack
 
 This section guides through the process of upgrading the Elastic Stack components from version prior to 7.0.
 
+.. note::
+
+    Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_
+
 .. topic:: Contents
 
     .. toctree::

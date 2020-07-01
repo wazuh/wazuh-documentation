@@ -69,7 +69,7 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
       Open the installer and follow the instructions to upgrade the Wazuh agent:
 
-        .. image:: ../../images/installation/windows.png
+        .. image:: ../images/installation/windows.png
           :align: center
 
 
