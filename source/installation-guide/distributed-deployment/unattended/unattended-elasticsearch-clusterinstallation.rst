@@ -131,16 +131,16 @@ After generating and deploying the certificates, the Elasticsearch service can b
 
 Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must to be replaced by the Elasticsearch installation IP:
 
-  .. code-block:: console
+.. code-block:: console
 
-    # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-    # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>
+  # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+  # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>
 
-Run the following command to ensure that the installation was made properly:
+Run the following command replacing the value <elasticsearch_ip> by the Elasticsearch IP to ensure that the installation was made properly:
 
 .. code-block:: console
 
-  # curl -XGET https://localhost:9200 -u admin:admin -k
+  # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
 
 The response should look as follows:
 
@@ -170,4 +170,28 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 Kibana configuration
 --------------------
 
+After installing Kibana, the certificates generated during the Elasticsearch installation must be deployed. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
+
+    .. tabs::
+
+
+
+        .. group-tab:: Same Elasticsearch server
+
+
+            Copy the Elasticsearch certificates:
+
+            .. include:: ../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
+
+
+
+        .. group-tab:: Different Elasticsearch server
+
+
+            .. include:: ../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+
+
+Enable and start the Kibana service:
+
+    .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
