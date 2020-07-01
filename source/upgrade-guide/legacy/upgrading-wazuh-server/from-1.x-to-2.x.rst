@@ -1,11 +1,11 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_wazuh_server_legacy:
+.. _upgrading_wazuh_server_1.x_2.x:
 
-Upgrading the Wazuh server
-==========================
+Upgrading the Wazuh server from 1.x to 2.x
+============================================
 
-Follow these steps to update the Wazuh server v1.x  to the Wazuh server v2.x.
+Follow these steps to update the Wazuh server 1.x  to the Wazuh server 2.x.
 
 #. Stop the processes:
 

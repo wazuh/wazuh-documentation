@@ -5,15 +5,15 @@
 Upgrading from a legacy version
 ===============================
 
-These instructions guide through the process of upgrading the Wazuh server, including the Wazuh manager and the Wazuh API, and the Wazuh agent installations from a version prior to 2.0.
+This section guides through the process of upgrading the Wazuh server and the Wazuh agent installations from a version prior to 3.0.
 
-Besides, the Upgrading Elastic Stack section will explain how to upgrade the components to the Elastic Stack 5.x or how to configure Logstash and Kibana in v2.x to continue using it along with the Wazuh server 2.0.
+It also explains how to upgrade the Elastic Stack components from version previous to 7.0.
 
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 2
+       :maxdepth: 1
 
-       upgrading-wazuh-manager
-       upgrading-elastic-stack
-       upgrading-wazuh-agent
+       upgrading-wazuh-server/index
+       upgrading-elastic-stack/index
+       upgrading-agent/index

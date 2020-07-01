@@ -1,11 +1,11 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_wazuh_agent_legacy:
+.. _upgrading_agent_1.x_2.x:
 
-Upgrading the Wazuh agent
-=========================
+Upgrading the Wazuh agent from 1.x to 2.x
+=========================================
 
-Follow these steps to update the Wazuh  agent v1.x to the Wazuh agent v2.x:
+Follow these steps to update the Wazuh agent 1.x to the Wazuh agent 2.x:
 
 .. tabs::
 

@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_different_major_agent:
+.. _upgrading_agent_2.x_3.x:
 
-Upgrade from a different major version
-======================================
+Upgrading the Wazuh agent from 2.x to 3.x
+=========================================
 
 The following steps show how to upgrade the Wazuh agent from 2.x to 3.x.
 
@@ -68,7 +68,7 @@ Upgrading the Wazuh agent
 
           Open the installer and follow the instructions to upgrade the Wazuh agent:
 
-            .. image:: ../../images/installation/windows.png
+            .. image:: ../../../images/installation/windows.png
               :align: center
 
         - Using the command line:
