@@ -59,6 +59,34 @@ Upgrading the Wazuh manager and the Wazuh API
 .. note::
   The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
 
+Disabling the Wazuh repository
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues:
+
+.. tabs::
+
+  .. group-tab:: YUM
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+  .. group-tab:: APT
+
+    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repository.
+
+    .. code-block:: console
+
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
+
+  .. group-tab:: ZYpp
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
 Next step
 ---------
 
