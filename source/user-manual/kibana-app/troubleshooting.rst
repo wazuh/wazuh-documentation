@@ -37,7 +37,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
   {"acknowledged":true}
 
 .. warning::
-  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts>`.
+  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
 
 Wazuh API seems to be down
 --------------------------
@@ -95,7 +95,7 @@ Routes. Error. Cannot read property 'manager' of undefined
 
 This error usually means that you're using Wazuh v2.x with Elastic Stack v6.x, or Wazuh v3.x with Elastic Stack v5.x.
 
-You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_different_major>`.
+You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_wazuh_server_2.x_3.x>`.
 
 .. _kibana_troubleshooting_3_7_0:
 
@@ -121,7 +121,7 @@ As of Elastic Stack 6.4.x, the **date format** causes an error when viewing the 
     "type": "date"
   },
 
-This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_latest_minor>`, the new template will be in use, and the next daily indices will be created using the new date format.
+This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_wazuh_server>`, the new template will be in use, and the next daily indices will be created using the new date format.
 
 However, if you want to fix this problem for the affected indices, there are different options that you can try in order to correct them:
 

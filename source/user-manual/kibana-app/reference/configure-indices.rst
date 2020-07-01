@@ -15,7 +15,7 @@ The process involves the modification of the Elasticsearch template used to give
 Considerations
 --------------
 
-Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh Kibana plugin. We always recommend updating the installation to the latest version in order get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh>`.
+Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh Kibana plugin. We always recommend updating the installation to the latest version in order get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh_server>`.
 
 .. note::
   This tutorial **won't work** on Wazuh 2.x and Elastic Stack 5.x.
@@ -100,7 +100,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 Note
 
-Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,` and must not start with `_`, `-` or `+`. Also, all the letters must be lowercase. 
+Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,` and must not start with `_`, `-` or `+`. Also, all the letters must be lowercase.
 
 
 

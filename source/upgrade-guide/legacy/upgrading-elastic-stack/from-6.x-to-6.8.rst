@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _elastic_server_hard_upgrade:
+.. _upgrading_elastic_stack_6.x_6.8:
 
 Upgrading Elastic Stack from 6.x to 6.8
 =======================================

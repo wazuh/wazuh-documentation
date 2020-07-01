@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _upgrading_different_major:
+.. _upgrading_wazuh_server_2.x_3.x:
 
-Upgrade from a different major version
-======================================
+Upgrading the Wazuh server from 2.x to 3.x
+==========================================
 
 The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x, which implies upgrading from Elastic Stack 5.x to 7.x.
 
@@ -90,4 +90,4 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
     :hidden:
     :maxdepth: 2
 
-    restore_alerts
+    restore_alerts-from-2.x-to-3.x
