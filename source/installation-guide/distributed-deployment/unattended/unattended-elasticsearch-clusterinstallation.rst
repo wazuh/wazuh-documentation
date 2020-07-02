@@ -35,7 +35,7 @@ Download the script:
 
     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/elastic-stack-installation.sh 
 
-The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separated machines. These are the available options to run the script:
+The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separate machines. These are the available options to run the script:
 
 +-------------------------------+----------------------------------------------------------+
 | Options                       | Purpose                                                  |
