@@ -53,7 +53,7 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 | -h / --help                   | Shows help                                               |
 +-------------------------------+----------------------------------------------------------+
 
-Elasticsearch can be installed either as a single-node or multi-node cluster. Choose its corresponding tab depending on the kind of installation:
+Elasticsearch can be installed either as a single-node or a multi-node cluster. Choose its corresponding tab depending on the type of installation:
 
 To install Elasticsearch, the script should be executted with the following arguments:
 
@@ -76,7 +76,7 @@ The following example shows how to run the script to install Open Distro for Ela
 Elasticsearch configuration
 ---------------------------
 
-After the installation of Elasticsearch, some steps must be done manually in order to finish the configuration. Choose either single-node or multi-node tab depending on the kind of installation used: 
+After the installation of Elasticsearch, some steps must be done manually in order to finish the configuration. Choose either single-node or multi-node tab depending on the type of installation used: 
 
 .. tabs::
 
