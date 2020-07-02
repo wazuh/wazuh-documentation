@@ -197,3 +197,26 @@ After installing Kibana, the certificates generated during the Elasticsearch ins
 Enable and start the Kibana service:
 
 .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+
+With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
+
+.. note:: The Kibana service listens to the port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
+
+It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
+
+With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
+
+.. code-block:: yaml
+
+  hosts:
+    - default:
+       url: <Wazuh_server_IP>
+       port: 55000
+       user: foo
+       password: bar
+
+
+Next steps
+~~~~~~~~~~
+
+Once the Wazuh-Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
