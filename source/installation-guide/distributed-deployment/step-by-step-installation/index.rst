@@ -7,8 +7,24 @@ The following sections provide information about how to install each involved co
 
 Every component described below can be installed in different machines, except Open Distro for Kibana, that can be installed either in a separate machine or along with Open Distro for Elasticsearch.
 
+- **Elasticsearch cluster**
+    
+    - :ref:`Elasticsearch single-node cluster <elasticsearch_single_node_cluster>`
+    - :ref:`Elasticsearch multi-node cluster <elasticsearch_multi_node_cluster>`
+
+- **Wazuh cluster**
+
+    - :ref:`Wazuh single-node cluster <wazuh_single_node_cluster>`
+    - :ref:`Wazuh multi-node cluster <wazuh_multi_node_cluster>`
+
+- **Kibana**
+
+    - :ref:`Kibana installation <kibana>`
+
+
 .. toctree::
     :maxdepth: 2
+    :hidden:
 
     elasticsearch-cluster/index
     wazuh-cluster/index
