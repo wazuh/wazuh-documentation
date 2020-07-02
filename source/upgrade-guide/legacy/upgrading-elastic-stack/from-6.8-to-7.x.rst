@@ -109,6 +109,12 @@ Upgrading Elasticsearch
           # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
           # systemctl restart elasticsearch
 
+      .. group-tab:: zypper
+
+        .. code-block:: console
+
+          # zypper update elasticsearch-|ELASTICSEARCH_LATEST|
+
 #. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``):
 
     .. code-block:: yaml
@@ -203,6 +209,12 @@ Upgrading Filebeat
 
           # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update filebeat-|ELASTICSEARCH_LATEST|
+
 #. Update the Filebeat configuration file:
 
     .. code-block:: console
@@ -265,6 +277,12 @@ Upgrading Kibana
         .. code-block:: console
 
           # apt-get install kibana=|ELASTICSEARCH_LATEST|
+
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update kibana-|ELASTICSEARCH_LATEST|
 
 #. Install the Wazuh Kibana plugin:
 
