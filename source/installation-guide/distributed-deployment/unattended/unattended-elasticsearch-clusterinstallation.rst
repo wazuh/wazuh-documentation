@@ -57,7 +57,7 @@ Here is an example of how to run the script to install Open Distro for Elasticse
 
 .. code-block:: console
 
-  # bash elastic-stack-installation.sh -e -ip <elasticsearch_ip> -m -k -kip <kibana_ip>
+  # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip> -m -k -kip <kibana_ip>
 
 Elasticsearch configuration
 ---------------------------
