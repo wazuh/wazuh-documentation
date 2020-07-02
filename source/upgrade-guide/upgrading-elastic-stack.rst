@@ -41,6 +41,12 @@ Preparing Elastic Stack
             # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
             # apt-get update
 
+        .. group-tab:: ZYpp
+
+          .. code-block:: console
+
+            # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
+
 #. [*Elastic*] Before the process of upgrading Filebeat it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package.
 
    In case of having enabled the Wazuh repository it can be disabled using:
@@ -59,6 +65,12 @@ Preparing Elastic Stack
 
              # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh_trash.list
              # apt-get update
+
+         .. group-tab:: ZYpp
+
+           .. code-block:: console
+
+             # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
 
 Upgrading Elasticsearch
@@ -119,6 +131,12 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
 
                  # apt install opendistroforelasticsearch
 
+           * ZYpp:
+
+             .. code-block:: console
+
+               # zypper update opendistroforelasticsearch-1.6.0
+
         .. group-tab:: Elastic
 
           * YUM:
@@ -132,7 +150,12 @@ In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is 
             .. code-block:: console
 
               # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-              # systemctl restart elasticsearch
+
+          * ZYpp:
+
+            .. code-block:: console
+
+              # zypper update elasticsearch-|ELASTICSEARCH_LATEST|
 
 #. [OD] Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins (optional).
 
@@ -192,6 +215,12 @@ Upgrading Filebeat
 
               # apt-get install filebeat
 
+          * ZYpp:
+
+            .. code-block:: console
+
+              # zypper update filebeat
+
 
         .. group-tab:: Elastic
 
@@ -207,6 +236,11 @@ Upgrading Filebeat
 
               # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
+          * ZYpp:
+
+            .. code-block:: console
+
+              # zypper update filebeat-|ELASTICSEARCH_LATEST|
 
 #. Update the configuration file:
 
@@ -377,6 +411,12 @@ Upgrading Kibana
 
                 # apt-get install opendistroforelasticsearch-kibana
 
+          * ZYpp:
+
+              .. code-block:: console
+
+                # zypper update opendistroforelasticsearch-kibana
+
         .. group-tab::  Elastic
 
             * YUM:
@@ -390,6 +430,12 @@ Upgrading Kibana
                 .. code-block:: console
 
                   # apt-get install kibana=|ELASTICSEARCH_LATEST|
+
+            * ZYpp:
+
+                .. code-block:: console
+
+                  # zypper update kibana=|ELASTICSEARCH_LATEST|
 
 #. Remove generated bundles:
 
@@ -455,7 +501,7 @@ Upgrading Kibana
 Disabling the Elastic repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-[*Elastic*] It is recommended to disable the Elastic repository to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+[*Elastic*] It is recommended to disable the Elastic repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
 .. tabs::
 
@@ -478,3 +524,9 @@ Disabling the Elastic repositories
 
         # echo "elasticsearch hold" | sudo dpkg --set-selections
         # echo "kibana hold" | sudo dpkg --set-selections
+
+  .. group-tab:: ZYpp
+
+      .. code-block:: console
+
+        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
