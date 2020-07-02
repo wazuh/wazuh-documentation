@@ -97,7 +97,7 @@
 
   In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
-* Compress all the necessary files to be sended to the rest of the involved parts:
+* Compress all the necessary files to be sent to the rest of the involved parts:
 
   .. code-block:: console
 
