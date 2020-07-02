@@ -8,9 +8,10 @@
 Elasticsearch cluster
 =====================
 
+The Elastic Stack can be installed as a single-node cluster or as a multi-node cluster. The single-node installation will be performed in only one machine where Open Distro for Elasticsearch will be installed. The multi-node installation consists on the installation of several Elastic Stack nodes in different machines that will communicate between them. This kind of installation provides high availability and load balancing.
+
 .. toctree::
     :maxdepth: 1
-    :caption: Contents
 
     elasticsearch-single-node-cluster
     elasticsearch-multi-node-cluster
