@@ -86,6 +86,11 @@ Upgrading Elasticsearch
           # apt-get install elasticsearch=|ELASTIC_6_LATEST|
           # systemctl restart elasticsearch
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update elasticsearch-|ELASTIC_6_LATEST|
 
 #. Restart the service:
 
@@ -146,6 +151,13 @@ Upgrading Logstash
 
           # apt-get install logstash=1:|ELASTIC_6_LATEST|-1
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update logstash-|ELASTIC_6_LATEST|
+
+
 #. Download and set the Wazuh configuration for Logstash:
 
     .. tabs::
@@ -193,6 +205,12 @@ Upgrading Filebeat
 
           # apt-get install filebeat=|ELASTIC_6_LATEST|
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update filebeat-|ELASTIC_6_LATEST|
+
 #. Update the configuration file:
 
     .. code-block:: console
@@ -227,6 +245,12 @@ Upgrading Kibana
         .. code-block:: console
 
           # apt-get install kibana=|ELASTIC_6_LATEST|
+
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update kibana-|ELASTIC_6_LATEST|
 
 #. Uninstall the Wazuh Kibana plugin:
 
