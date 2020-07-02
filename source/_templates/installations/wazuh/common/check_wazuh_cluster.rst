@@ -6,7 +6,7 @@ To verify that the Wazuh cluster is enabled and all the nodes are connected, exe
 
     # /var/ossec/bin/cluster_control -l
 
-The execution of this command will have an output like this:
+An example output of the command looks as follows:
 
   .. code-block:: none
     :class: output
