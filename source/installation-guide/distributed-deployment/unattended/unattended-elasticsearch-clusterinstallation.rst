@@ -73,8 +73,8 @@ The example below shows how to run the script to install Open Distro for Elastic
 
   # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip> -m -k -kip <kibana_ip>  
 
-Elasticsearch configuration
----------------------------
+Configure Elasticsearch
+-----------------------
 
 After the installation of Elasticsearch, some steps must be done manually in order to finish the configuration. Choose either single-node or multi-node tab depending on the type of installation used: 
 
@@ -183,8 +183,8 @@ The response should look as follows:
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-Kibana configuration
---------------------
+Configure Kibana
+----------------
 
 After installing Kibana, the certificates generated during the Elasticsearch installation must be deployed. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
