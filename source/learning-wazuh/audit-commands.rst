@@ -55,7 +55,7 @@ Turn on program call auditing on linux-agent
 Trigger a few audit events
 --------------------------
 
-1. Dropping from **root** back to the unpriviledged user, run a ping.
+1. Dropping from **root** back to the unprivileged user, run a ping.
 
     .. code-block:: console
 

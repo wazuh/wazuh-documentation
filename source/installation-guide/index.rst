@@ -28,7 +28,7 @@ Individual components
 
 - ``Kibana``: is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data. This guide will install ``Open Distro for Kibana``, which is fully open-source and `Apache 2.0-licensed`.
 
-- ``Wazuh Kibana plugin``: lets users visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts and, filter using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers and the Wazuh agents configuration, logs, ruleset, groups, and much more.
+- ``Wazuh Kibana plugin``: lets users visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts, andfilter using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers and the Wazuh agents configuration, logs, ruleset, groups, and much more.
 
 Grouped components
 ^^^^^^^^^^^^^^^^^^
