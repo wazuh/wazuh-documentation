@@ -8,7 +8,7 @@
                 
                 .. code-block:: console
 
-                    # yum install java-11-openjdk-devel && export JAVA_HOME="/usr/" && yum install curl unzip wget libcap
+                    # yum install java-11-openjdk-devel && export JAVA_HOME=/usr/ && yum install curl unzip wget libcap
 
             If the OS used does not support JDK 11, alternatively, JDK 8 can be installed, installing the package ``java-1.8.0-openjdk.x86_64``
 
@@ -39,7 +39,7 @@
 
                     .. code-block:: console
 
-                        # apt install openjdk-11-jdk && export JAVA_HOME="/usr/" && apt-get install curl apt-transport-https unzip wget libcap2-bin
+                        # apt install openjdk-11-jdk && export JAVA_HOME=/usr/ && apt-get install curl apt-transport-https unzip wget libcap2-bin
    
 
 .. End of include file
