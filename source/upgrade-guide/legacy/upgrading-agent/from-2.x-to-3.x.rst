@@ -40,6 +40,22 @@ Upgrading the Wazuh agent
 
           # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+          [wazuh_repo]
+          gpgcheck=1
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=1
+          autorefresh=1
+          name=Wazuh repository
+          baseurl=https://packages.wazuh.com/3.x/yum/
+          protect=1
+          EOF
+
 #. Upgrade the Wazuh agent:
 
     .. tabs::
@@ -59,6 +75,11 @@ Upgrading the Wazuh agent
           # apt-get update
           # apt-get install wazuh-agent
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update wazuh-agent
 
       .. group-tab:: Windows
 
@@ -131,3 +152,9 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
         # echo "wazuh-manager hold" | sudo dpkg --set-selections
         # echo "wazuh-api hold" | sudo dpkg --set-selections
         # echo "wazuh-agent hold" | sudo dpkg --set-selections
+
+    .. group-tab:: ZYpp
+
+      .. code-block:: console
+
+        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
