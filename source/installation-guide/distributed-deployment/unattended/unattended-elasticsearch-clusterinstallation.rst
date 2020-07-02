@@ -61,13 +61,13 @@ To install Elasticsearch, the script should be executted with the following argu
 
   # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip>
 
-As mentioned before, Kibana can be installed on a separated machine. In that case, the script arguments should look as follows:
+As mentioned before, Kibana can be installed on a separate machine. In that case, the script arguments should look as follows:
 
 .. code-block:: console
 
   # bash ~/elastic-stack-installation.sh -k -ip <elasticsearch_ip> -kip <kibana_ip>
 
-The following example shows how to run the script to install Open Distro for Elasticsearch in multi-node mode and Open Distro for Kibana: 
+The example below shows how to run the script to install Open Distro for Elasticsearch in multi-node mode and Open Distro for Kibana: 
 
 .. code-block:: console
 
