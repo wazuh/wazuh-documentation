@@ -5,7 +5,7 @@
 Elasticsearch & Kibana installation
 ===================================
 
-This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure a good performance of the installation. For more information, please visit the :ref:`Requirements <distributed_requirements>` section.
+This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure a good performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section.
 
 Run the script
 --------------
@@ -53,11 +53,25 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 | -h / --help                   | Shows help                                               |
 +-------------------------------+----------------------------------------------------------+
 
-Here is an example of how to run the script to install Open Distro for Elasticsearch in multi-node mode and Open Distro for Kibana: 
+Elasticsearch can be installed either as a single-node or multi-node cluster. Choose its corresponding tab depending on the kind of installation:
+
+To install Elasticsearch, the script should be executted with the following arguments:
 
 .. code-block:: console
 
-  # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip> -m -k -kip <kibana_ip>
+  # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip>
+
+As mentioned before, Kibana can be installed on a separated machine. In that case, the script arguments should look as follows:
+
+.. code-block:: console
+
+  # bash ~/elastic-stack-installation.sh -k -ip <elasticsearch_ip> -kip <kibana_ip>
+
+The following example shows how to run the script to install Open Distro for Elasticsearch in multi-node mode and Open Distro for Kibana: 
+
+.. code-block:: console
+
+  # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip> -m -k -kip <kibana_ip>  
 
 Elasticsearch configuration
 ---------------------------
