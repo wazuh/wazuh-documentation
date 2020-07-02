@@ -120,12 +120,12 @@ The response should look as follows:
 .. code-block:: none
             :class: output
 
-            elasticsearch: https://127.0.0.1:9200...
+            elasticsearch: https://<elasticsearch_IP>:9200...
                 parse url... OK
                 connection...
                 parse host... OK
                 dns lookup... OK
-                addresses: 127.0.0.1
+                addresses: <elasticsearch_IP>
                 dial up... OK
                 TLS...
                 security: server's certificate chain verification is enabled
