@@ -12,7 +12,7 @@ By default, the API will bind to port 55000/tcp and use self-signed certificates
 Configuration file
 ------------------
 
-The API configuration can be found inside ``/var/ossec/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>`.
+The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>`.
 
 .. code-block:: yaml
 
@@ -150,11 +150,11 @@ And remove temporary files:
 API configuration options
 -------------------------
 
-This section contains all the options available for the ``/var/ossec/api/configuration/api.yaml`` configuration file.
+This section contains all the options available for the ``{WAZUH_PATH}/api/configuration/api.yaml`` configuration file.
 
 host
 ^^^^^^^^^^^^^^^^^^^^^^
-+--------------------------+---------------+-----------------------------------------------------------------+
++--------------------------+---------------+----------------------------------------------------------------+
 | Allowed values           | Default value | Description                                                     |
 +==========================+===============+=================================================================+
 | Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the API is installed. |
@@ -255,7 +255,7 @@ cache
 Security configuration options
 ------------------------------
 
-This section contains all the options available for the ``/var/ossec/api/security/security.yaml`` configuration file.
+This section contains all the options available for the ``{WAZUH_PATH}/api/configuration/security/security.yaml`` configuration file.
 
 auth_token_exp_timeout
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -273,18 +273,18 @@ rbac_mode
 | black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-max_n_attemps
+max_n_attempts
 ^^^^^^^^^^^^^
-+-----------------------+---------------+------------------------------------------------------------------------------------------------------------------------+
-| Allowed values        | Default value | Description                                                                                                            |
-+=======================+===============+========================================================================================================================+
-| Any positive integer. | 5             | Set how many failed access attempts are allowed during the time specified with ``block_time`` before blocking that IP. |
-+-----------------------+---------------+------------------------------------------------------------------------------------------------------------------------+
++----------------------------+---------------+------------------------------------------------------------------------------------------------------------------------+
+| Allowed values             | Default value | Description                                                                                                            |
++============================+===============+========================================================================================================================+
+| Any positive integer (>0). | 5             | Set how many failed access attempts are allowed during the time specified with ``block_time`` before blocking that IP. |
++----------------------------+---------------+------------------------------------------------------------------------------------------------------------------------+
 
 block_time
 ^^^^^^^^^^
-+-----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values        | Default value | Description                                                                                                                       |
-+=======================+===============+===================================================================================================================================+
-| Any positive integer. | 300           | Set how many seconds it takes for the ``max_n_attemps`` to expire and start counting again the number of access attemps received. |
-+-----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------+
++-----------------------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values        | Default value | Description                                                                                                                                                                  |
++=======================+===============+==============================================================================================================================================================================+
+| Any positive integer. | 300           | Set how many seconds it takes for the ``max_n_attemps`` to expire and start counting again the number of access attemps received. Set to "0" to disable the blocking system. |
++-----------------------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
