@@ -36,53 +36,16 @@ Download and run the script:
 
     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-Verifying the installation
---------------------------
-
-The output of the script will indicate if Elasticsearch and Filebeat were succesfully installed:
-
-An example Elasticsearch response looks as follows:
+After the execution of the script, it will show the following messages to confirm that the install was made successfully:
 
 .. code-block:: none
-             :class: output
+  :class: output
 
-              {
-                "name" : "node-1",
-                "cluster_name" : "elasticsearch",
-                "cluster_uuid" : "O82AgJJTTF2pTOXKPnwQsA",
-                "version" : {
-                  "number" : "7.6.1",
-                  "build_flavor" : "oss",
-                  "build_type" : "rpm",
-                  "build_hash" : "aa751e09be0a5072e8570670309b1f12348f023b",
-                  "build_date" : "2020-02-29T00:15:25.529771Z",
-                  "build_snapshot" : false,
-                  "lucene_version" : "8.4.0",
-                  "minimum_wire_compatibility_version" : "6.8.0",
-                  "minimum_index_compatibility_version" : "6.0.0-beta1"
-                },
-                "tagline" : "You Know, for Search"
-              }
+  # Elasticsearch installation succeeded.
+  # Filebeat installation succeeded.
+  # Waiting for Kibana...
 
-An example Filebeat response looks as follows:
-
-.. code-block:: none
-             :class: output
-
-              elasticsearch: https://127.0.0.1:9200...
-                parse url... OK
-                connection...
-                  parse host... OK
-                  dns lookup... OK
-                  addresses: 127.0.0.1
-                  dial up... OK
-                TLS...
-                  security: server's certificate chain verification is enabled
-                  handshake... OK
-                  TLS version: TLSv1.3
-                  dial up... OK
-                talk to server... OK
-                version: 7.6.1
+Once Kibana is accessible, the script will quit.
 
 Elasticsearch users and roles
 -----------------------------
@@ -99,7 +62,7 @@ Apart from the extra users, there are three extra roles added. These roles are i
 
 - ``wazuh_ui_user`` provides ``wazuh_user`` ability to read Wazuh’s indexes.
 
-- ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform, reading, writing, management, and indexing task on the Wazuh indexes.
+- ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform reading, writing, management, and indexing task on the Wazuh indexes.
 
 These users and roles are designed to be used along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be run. To learn more about this process, visit the `Open Distro for Elasticsearch documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
 
