@@ -41,6 +41,22 @@ Upgrade the Wazuh manager
 
           # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+          [wazuh_repo]
+          gpgcheck=1
+          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+          enabled=1
+          autorefresh=1
+          name=Wazuh repository
+          baseurl=https://packages.wazuh.com/3.x/yum/
+          protect=1
+          EOF
+
 #. Upgrade the Wazuh manager and the Wazuh API:
 
     .. tabs::
@@ -57,6 +73,12 @@ Upgrade the Wazuh manager
 
           # apt-get update
           # apt-get install wazuh-manager wazuh-api
+
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+          # zypper update wazuh-manager wazuh-api
 
 .. note::
   After the upgrade, the old alerts will not be visualized in Kibana due to a change in the Wazuh alerts’ template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping. The process is described in the :ref:`Restore the Wazuh alerts from Wazuh 2.x <restore_alerts_2.x_3.x>` section.
@@ -88,6 +110,12 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
         # echo "wazuh-manager hold" | sudo dpkg --set-selections
         # echo "wazuh-api hold" | sudo dpkg --set-selections
         # echo "wazuh-agent hold" | sudo dpkg --set-selections
+
+    .. group-tab:: ZYpp
+
+      .. code-block:: console
+
+        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
 .. toctree::
     :hidden:
