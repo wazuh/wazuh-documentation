@@ -129,7 +129,7 @@ After the installation of Elasticsearch, some steps must be done manually in ord
 
     **Generating certificates**
 
-    The following steps must be done onñy in the master node:
+    The following steps must be done only in the master node:
 
     .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
