@@ -8,12 +8,12 @@ The script will perform a healtcheck verifying that the available system resourc
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ will be used to generate the certificates for protecting data in the Elastic Stack.
 
-The Wazuh-Elastic Stack installation
-------------------------------------
+Installing the Wazuh-Elastic Stack
+----------------------------------
 
 .. note:: Root user privileges are required to run all the commands described below.
 
-In order to download the script, ``curl`` package must be installed on the system:
+#. In order to download the script, ``curl`` package must be installed on the system:
 
 .. tabs::
 
@@ -30,7 +30,7 @@ In order to download the script, ``curl`` package must be installed on the syste
 
         # apt install curl
 
-Download and run the script:
+#. Download and run the script:
 
 .. code-block:: console
 
@@ -58,22 +58,22 @@ In order to use Wazuh Kibana plugin properly, the script adds the following extr
 
 Apart from the extra users, there are three extra roles added. These roles are in charge of giving the right permissions to the users:
 
-- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indexes. This user is one of the Open Distro for Elasticsearch `default users <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_ and its purpose is to perform tasks such as making cluster-wide searches, indexing monitoring, or writing in indices.
+- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indices. This user is one of the Open Distro for Elasticsearch `default users <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_ and its purpose is to perform tasks such as making cluster-wide searches, indexing monitoring, or writing in indices.
 
-- ``wazuh_ui_user`` provides ``wazuh_user`` ability to read Wazuh’s indexes.
+- ``wazuh_ui_user`` provides ``wazuh_user`` ability to read Wazuh’s indices.
 
-- ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform reading, writing, management, and indexing tasks on the Wazuh indexes.
+- ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform reading, writing, management, and indexing tasks on the Wazuh indices.
 
-These users and roles are designed to be used along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be run. To learn more about this process, visit the `Open Distro for Elasticsearch documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
+These users and roles are designed to operate along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be run. To learn more about this process, visit the `Open Distro for Elasticsearch documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
 
 Customizing the installation
 ----------------------------
 
 After the installation, the Wazuh API will use the default credentials but it is highly recommended to change them. The following document :ref:`securing_api` explains how to change the default user and password among other useful API security information.
 
-The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. It means that Kibana can be accessed from the outside and will accept all the available IPs of the machine.  This value can be changed for a specific IP if needed.
+The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. It means that Kibana can be accessed from the outside and will accept all the available IPs of the host.  This value can be changed for a specific IP if needed.
 
-.. note:: The Kibana service listens to the default port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
 

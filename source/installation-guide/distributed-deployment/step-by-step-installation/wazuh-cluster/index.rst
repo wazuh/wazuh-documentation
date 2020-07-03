@@ -8,7 +8,7 @@
 Wazuh cluster
 =============
 
-The Wazuh server can be installed as a single-node cluster or as a multi-node cluster. The single-node installation will be performed in only one machine where the Wazuh manager, the Wazuh API, and Filebeat will be installed. The multi-node installation consists on the installation of several Wazuh server nodes in different machines that will communicate between them. This kind of installation provides high availability and load balancing.
+The Wazuh server can be installed as a single-node cluster or as a multi-node cluster. The single-node installation will be performed in only one host where the Wazuh manager, the Wazuh API, and Filebeat will be installed. The multi-node installation consists on the installation of several Wazuh server nodes in different hosts that will communicate between them. This kind of installation provides high availability and load balancing.
 
 
  .. toctree::

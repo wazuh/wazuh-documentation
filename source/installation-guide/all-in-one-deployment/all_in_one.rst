@@ -1,13 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single machine
+.. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
 
 .. _all_in_one:
 
 Step-by-step installation
 =========================
 
-This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one configuration. This installation guide is meant for small production environments and will install all the necessary packages through sources. All the packages available packages can be checked :ref:`here <packages>`.
+This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one configuration. This installation guide is meant for small production environments and testing purposes. All the available packages can be checked :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to run all the commands described below.
 
@@ -26,7 +26,7 @@ Open Distro for Elasticsearch requires the Java Development Kit and other packag
 Installing the Wazuh server
 ---------------------------
 
-The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server.
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, and the Wazuh API. The first step to set up Wazuh is to add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -305,7 +305,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
 
 
-.. note:: The Kibana service listens to the default port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 

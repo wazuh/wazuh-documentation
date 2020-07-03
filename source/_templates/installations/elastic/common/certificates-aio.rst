@@ -19,13 +19,13 @@
 
     # unzip search-guard-tlstool-1.7.zip -d searchguard
 
-* Download the ``search-guard.yml`` configuration file. This file is preconfigured to generate all the necessary certificates:
+* Download the ``search-guard.yml`` configuration file. This file is pre-configured to generate all the necessary certificates:
 
   .. code-block:: console
 
       # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/search-guard-aio.yml
 
-* Execute the Search Guard's script to create the certificates:
+* Run the Search Guard's script to create the certificates:
 
   .. code-block:: console
 

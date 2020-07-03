@@ -10,7 +10,7 @@ In case of installing Kibana in a different server from the Elasticsearch's one,
     - name: kibana
       dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=ES
 
-* Execute the Search Guard’s script to create the certificates:
+* Run the Search Guard’s script to create the certificates:
 
   .. code-block:: console
 
