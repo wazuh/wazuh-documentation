@@ -144,7 +144,7 @@ Run the following command to ensure that the installation was made properly:
 
   # curl -XGET https://localhost:9200 -u admin:admin -k
 
-The response should look as follows:
+An example response should look as follows:
 
 .. code-block:: none
              :class: output
@@ -230,7 +230,7 @@ To ensure that Filebeat has been successfully installed, run the following comma
 
       # filebeat test output
 
-The response should look as follows:
+An example response should look as follows:
 
 .. code-block:: none
              :class: output

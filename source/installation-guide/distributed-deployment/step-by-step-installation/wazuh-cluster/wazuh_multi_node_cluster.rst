@@ -194,7 +194,7 @@ To ensure that Filebeat has been successfully installed, run the following comma
 
       # filebeat test output
 
-The response should look as follows:
+An example response should look as follows:
 
 .. code-block:: none
              :class: output

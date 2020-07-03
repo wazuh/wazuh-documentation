@@ -158,7 +158,7 @@ Run the following command replacing the value <elasticsearch_ip> by the Elastics
 
   # curl -XGET https://<elasticsearch_ip>:9200 -u admin:admin -k
 
-The response should look as follows:
+An example response should look as follows:
 
 .. code-block:: none
              :class: output
