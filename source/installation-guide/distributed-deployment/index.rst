@@ -18,7 +18,7 @@ The communication will be encrypted using SSL certificates. Those certificates w
 
 To allow the installation process and guarantee the expected performance of the Wazuh-Elastic Stack components all hosts must meet the hardware requirements described in the :ref:`requirements <distributed_requirements>` section.
 
-The user can choose between step by step installation, a manual way of carrying out the process, or Unattended installation, an automated way using scripts:
+The user can choose between Step-by-step installation, a manual way of carrying out the process, or Unattended installation, an automated way using scripts:
 
 .. toctree::
     :maxdepth: 1
