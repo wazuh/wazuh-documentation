@@ -152,7 +152,7 @@ Run the Elasticsearch's ``securityadmin`` script to load the new certificates in
   # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
   # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key  -h <elasticsearch_IP>
 
-Run the following command replacing the value <elasticsearch_ip> by the Elasticsearch IP to ensure that the installation was made properly:
+Run the following command replacing the value ``<elasticsearch_ip>`` by the Elasticsearch IP to ensure that the installation was made properly:
 
 .. code-block:: console
 
@@ -186,7 +186,7 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 Configure Kibana
 ----------------
 
-After installing Kibana, the user must deploy the certificates generated during the Elasticsearch installation.. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
+After installing Kibana, the user must deploy the certificates generated during the Elasticsearch installation. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
 
 
 .. tabs::
