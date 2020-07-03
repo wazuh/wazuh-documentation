@@ -7,7 +7,7 @@ Upgrading Elastic Stack from 6.8 to 7.x
 
 This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for the Elastic distribution.
 
-Coming new in version Elastic 7.x, there is an architecture change introduced in the Wazuh Stack. Logstash is no longer required and Filebeat will send the events directly to the Elasticsearch server. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
+Coming new in Elastic 7.x, there is an architecture change introduced in the Wazuh Stack. Logstash is no longer required and Filebeat will send the events directly to the Elasticsearch. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
 
 
 Preparing the Elastic Stack
@@ -91,7 +91,7 @@ Upgrading Elasticsearch
 
       # systemctl stop elasticsearch
 
-#. Upgrade the node you shut down:
+#. Upgrade the shut down node:
 
     .. tabs::
 
@@ -164,7 +164,7 @@ In the previous Elasticsearch versions, the Elastic documents were indexed using
 
 Due to this change, the previous alerts will not be visible in the Wazuh indices and update must be performed to all previous indices in order to complete the upgrade.
 
-Run below request for each Wazuh index created before the Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
+Run the request below for each Wazuh index created before the Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
 
 An example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.16`` looks as follows:
 
@@ -185,7 +185,7 @@ An example of how to run the request using the index ``wazuh-alerts-3.x-2019.05.
   }
   '
 
-The request must be run for all previous indices which need to be migrated. Modify the date parameter according to the index name.
+The request must be executed for all previous indices which need to be migrated. Modify the date parameter according to the index name.
 
 More information about the request can be found in the `Update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ section of the Elasticsearch documentation.
 
@@ -304,7 +304,7 @@ Upgrading Kibana
           # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 
-#. For installations on Kibana 7.6.x versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+#. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
     .. code-block:: console
 
