@@ -71,7 +71,7 @@ Upgrading the Wazuh agent
           # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
           # apt-get update
 
-        Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command:
+        Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
 
         .. code-block:: console
 
