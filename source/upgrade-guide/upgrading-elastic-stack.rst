@@ -47,7 +47,7 @@ Preparing Elastic Stack
 
             # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
 
-#. [*Elastic*] Before the process of upgrading Filebeat it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package.
+#. [Elastic] Before the upgrade process it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package.
 
    In case of having enabled the Wazuh repository it can be disabled using:
 
@@ -79,7 +79,7 @@ Upgrading Elasticsearch
 This guide explains how to perform a rolling upgrade, which lets to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
 
-In the commands below the ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace the ``127.0.0.1`` with your Elasticsearch IP. If using a ``http`` instead of a ``https`` the options ``-u`` and ``-k`` must be omitted.
+In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP. If using ``http`` instead of ``https`` the options ``-u`` and ``-k`` must be omitted.
 
 #. Disable shard allocation:
 
@@ -334,7 +334,7 @@ Upgrading Kibana
 .. warning::
   Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from the ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from the ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
-#. Copy the Wazuh Kibana plugin configuration file to its new location (not needed for upgrades from 3.12.x to 3.13.x):
+#. Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to 3.13.x:
 
       .. tabs::
 
@@ -477,7 +477,7 @@ Upgrading Kibana
       # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
       # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
-#. For installations on Kibana 7.6.x versions and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
+#. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
     .. code-block:: console
 
@@ -498,8 +498,8 @@ Upgrading Kibana
       # systemctl daemon-reload
       # systemctl restart kibana
 
-Disabling the Elastic repositories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Disabling the Elastic repository
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [*Elastic*] It is recommended to disable the Elastic repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
