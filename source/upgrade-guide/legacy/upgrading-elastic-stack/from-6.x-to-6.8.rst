@@ -320,11 +320,12 @@ It is recommended to disable the Elastic repository to prevent an upgrade to a n
           # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
           # apt-get update
 
-        Alternatively, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``):
+        Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
 
         .. code-block:: console
 
           # echo "elasticsearch hold" | sudo dpkg --set-selections
+          # echo "filebeat hold" | sudo dpkg --set-selections
           # echo "kibana hold" | sudo dpkg --set-selections
 
       .. group-tab:: ZYpp

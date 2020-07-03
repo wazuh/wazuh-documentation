@@ -40,7 +40,7 @@ To perform the upgrade locally, follow the instructions for the Wazuh agent's op
 
   .. group-tab:: APT
 
-    If the Wazuh repository is disabled it is necessary to enable it to get the latest package. This step is not necessary if the package is set to the ``hold`` state instead of disabling the repository:
+    If the Wazuh repository is disabled it is necessary to enable it to get the latest package. This step is not necessary if the package is set to a ``hold`` state and the repository is enabled:
 
     .. code-block:: console
 
@@ -55,7 +55,7 @@ To perform the upgrade locally, follow the instructions for the Wazuh agent's op
 
     It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
 
-    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repository.
+    This step is not necessary if the user set the packages to a ``hold`` state instead of disabling the repository.
 
     .. code-block:: console
 

@@ -103,13 +103,12 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
         # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
         # apt-get update
 
-      Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command.
+      Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
 
       .. code-block:: console
 
         # echo "wazuh-manager hold" | sudo dpkg --set-selections
         # echo "wazuh-api hold" | sudo dpkg --set-selections
-        # echo "wazuh-agent hold" | sudo dpkg --set-selections
 
     .. group-tab:: ZYpp
 

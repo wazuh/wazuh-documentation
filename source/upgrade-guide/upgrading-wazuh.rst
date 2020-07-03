@@ -28,7 +28,7 @@ Upgrading the Wazuh server
 
   .. group-tab:: APT
 
-    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to the ``hold`` state and the repository is enabled:
+    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to a ``hold`` state and the repository is enabled:
 
     .. code-block:: console
 
@@ -76,7 +76,7 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 
   .. group-tab:: APT
 
-    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repository.
+    This step is not necessary if the user set the packages to a ``hold`` state instead of disabling the repository.
 
     .. code-block:: console
 
