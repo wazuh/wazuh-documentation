@@ -2,8 +2,8 @@
 
 .. _unattended_distributed_elasticsearch:
 
-Elasticsearch & Kibana installation
-===================================
+Elasticsearch & Kibana unattended installation
+==============================================
 
 This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure a proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section.
 
@@ -29,13 +29,15 @@ In order to download the script, ``curl`` package must be installed on the syste
 
         # apt install curl
 
+
+
 Download the script:
 
 .. code-block:: console
 
     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/elastic-stack-installation.sh 
 
-The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separate machines. The available options to run the script are:
+The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separate hosts. The available options to run the script are:
 
 +-------------------------------+----------------------------------------------------------+
 | Options                       | Purpose                                                  |
@@ -53,15 +55,15 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 | -h / --help                   | Shows help                                               |
 +-------------------------------+----------------------------------------------------------+
 
-Elasticsearch can be installed either as a single-node or a multi-node cluster. Choose its corresponding tab depending on the type of installation:
+Elasticsearch can be installed either as a single-node or a multi-node cluster.
 
-To install Elasticsearch, the script should be executted with the following arguments:
+To install Elasticsearch, the script should be run with the following arguments:
 
 .. code-block:: console
 
   # bash ~/elastic-stack-installation.sh -e -ip <elasticsearch_ip>
 
-As mentioned before, Kibana can be installed on a separate machine. In that case, the script arguments should look as follows:
+As mentioned before, Kibana can be installed on a separate host. In that case, the script arguments should look as follows:
 
 .. code-block:: console
 
@@ -214,7 +216,7 @@ Enable and start the Kibana service:
 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
 
-.. note:: The Kibana service listens to port ``443``. The browser address will be: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
+.. note:: The Kibana service listens to port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
 
