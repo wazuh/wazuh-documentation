@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In case of installing Kibana in a different server from the Elasticsearch's one, new certificates for Kibana should be created. This step must be done on the Elasticsearch master-node where the rest of the certificates were created:
+In case of installing Kibana on a separate host where Elasticsearch was installed, new certificates for Kibana should be created. This step must be done on the Elasticsearch master-node where the rest of the certificates were created:
 
 
 * Modify the ``search-guard.yml`` file placed at ``/etc/elasticsearch/certs/searchguard`` and add the following information at the end of the ``clients`` section:
