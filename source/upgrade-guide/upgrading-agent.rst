@@ -10,11 +10,11 @@ The following steps show how to upgrade the Wazuh agent from 3.x to 3.y.
 Upgrading the Wazuh agent
 -------------------------
 
-Since the Wazuh 3.x, it is possible to upgrade the Wazuh agents from the Wazuh manager or locally.
+Since Wazuh 3.x, it is possible to upgrade the Wazuh agents remotely from the Wazuh manager or locally.
 
-Upgrading the Wazuh agents remotely from the Wazuh manager is possible thanks to the ``agent_upgrade`` tools and the Wazuh API. More information about the process can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
+Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tools or the Wazuh API. More information about the process can be found in the :ref:`Upgrading agent<upgrading-agent>` section.
 
-To perform the upgrade locally follow the instructions depending on the Wazuh agent's operating system:
+To perform the upgrade locally, follow the instructions for the Wazuh agent's operating system:
 
 .. tabs::
 
@@ -32,6 +32,12 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
       # yum upgrade wazuh-agent
 
+    It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
   .. group-tab:: APT
 
     If the Wazuh repository is disabled it is necessary to enable it to get the latest package. This step is not necessary if the package is set to the ``hold`` state instead of disabling the repository:
@@ -47,6 +53,15 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
       # apt-get update
       # apt-get install wazuh-agent
 
+    It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+
+    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repository.
+
+    .. code-block:: console
+
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
+
   .. group-tab:: ZYpp
 
     If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
@@ -61,11 +76,17 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
       # zypper update wazuh-agent
 
+    It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
   .. group-tab:: Windows
 
-    The Wazuh agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using the installer, both of them require ``administrator rights``:
+    The Wazuh agent upgrading process for Windows systems requires to download the latest installer from the :ref:`packages list <packages>`. There are two ways of using the installer, both of them require ``administrator rights``:
 
-    - Using the GUI installer
+    - Using the GUI installer:
 
       Open the installer and follow the instructions to upgrade the Wazuh agent:
 
@@ -73,7 +94,7 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
           :align: center
 
 
-    - Using the command line
+    - Using the command line:
 
       To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
 
@@ -83,17 +104,17 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
 
       .. note::
 
-        To learn more about the unattended installation process, please read :ref:`Windows installation guide <wazuh_agent_package_windows>`.
+        To learn more about the unattended installation process, please read :ref:`Windows installation <wazuh_agent_package_windows>` guide.
 
   .. group-tab:: MacOS X
 
-      On MacOS X system the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
+      On MacOS X system the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten, it is recommended to backup the old configuration file and import previous settings where needed.
 
       More information about the process can be found in the :ref:`Wazuh agent installation and deployment on MacOS X <wazuh_agent_package_macos>` section.
 
   .. group-tab:: Unix based systems
 
-      On the Unix based systems the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten it is recommended to backup the old configuration file and import previous settings where needed.
+      On the Unix based systems the Wazuh agent upgrade can be done by deleting the previous version and installing the newest version of the Wazuh agent from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten, it is recommended to backup the old configuration file and import previous settings where needed.
 
       More information about the process can be found following the appropriate link for the desired operating system:
 
@@ -102,32 +123,3 @@ To perform the upgrade locally follow the instructions depending on the Wazuh ag
       - :ref:`Wazuh agent installation on HP-UX <wazuh_agent_package_hpux>`.
 
       - :ref:`Wazuh agent installation on Solaris <wazuh_agent_solaris>`.
-
-
-Disabling the Wazuh repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
-
-.. tabs::
-
-  .. group-tab:: YUM
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
-  .. group-tab:: APT
-
-    This step is not necessary if the user set the packages to the ``hold`` state instead of disabling the repository.
-
-    .. code-block:: console
-
-      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-      # apt-get update
-
-  .. group-tab:: ZYpp
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
