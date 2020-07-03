@@ -10,7 +10,7 @@
 
                     # yum install java-11-openjdk-devel && export JAVA_HOME=/usr/ && yum install curl unzip wget libcap
 
-            If the OS used does not support JDK 11, alternatively, JDK 8 can be installed, installing the package ``java-1.8.0-openjdk.x86_64``
+            If the OS used does not support JDK 11, alternatively, JDK 8 can be installed, using the package ``java-1.8.0-openjdk.x86_64``
 
         .. group-tab:: APT
 
