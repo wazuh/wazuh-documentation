@@ -38,7 +38,7 @@ Follow these steps to update the Wazuh server 1.x  to the Wazuh server 2.x.
 
     A backup of the custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. The custom ruleset has to be reapplied. It is recommended to use the ``/var/ossec/etc/decoders`` folder and the ``/var/ossec/etc/rules`` folder for custom rules and decoders as these directories will not be overwritten by future upgrades.
 
-#. To confirm that the Wazuh server is in v2.x use the ``manage_agents`` utility:
+#. Execute the following command to verify the Wazuh server's version:
 
     .. code-block:: console
 
