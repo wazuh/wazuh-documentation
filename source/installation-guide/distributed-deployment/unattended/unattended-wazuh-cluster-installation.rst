@@ -2,8 +2,8 @@
 
 .. _unattended_distributed_wazuh:
 
-Wazuh server installation
-=========================
+Wazuh server unattended installation
+====================================
 
 This section will explain how to install the Wazuh manager, the Wazuh API, and Filebeat-OSS using an automated script. This script will perform a health check to verify that the system has enough resources to ensure a proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section.
 
