@@ -15,7 +15,7 @@ The following components will be installed:
 
 To protect the data in the Elastic Stack the certificates will be generated using the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_. The guide will also refer to the section explaining how to secure communication between the Wazuh API and the Wazuh Kibana plugin. Besides, in order to use the Wazuh Kibana plugin properly, the extra Elasticsearch roles and users will be added.
 
-To allow the installation process and guarantee the expected performance of the Wazuh-Elastic Stack components all hosts must meet the hardware requirements described in the :ref:`Requirements <distributed_requirements>` section.
+To allow the installation process and guarantee the expected performance of the Wazuh-Elastic Stack components all hosts must meet the hardware requirements described in the :ref:`requirements <distributed_requirements>` section.
 
 The user can choose between step by step installation, a manual way of carrying out the process, or Unattended installation, an automated way using scripts:
 
