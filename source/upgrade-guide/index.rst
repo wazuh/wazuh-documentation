@@ -5,7 +5,7 @@
 Upgrade guide
 =============
 
-This document aims to describe the upgrade process of the Wazuh server, Elastic Stack, for both Elastic and Open Distro for Elasticsearch distributions, and the Wazuh agent.
+This guide describes the upgrade process of the Wazuh manager and the Wazuh API, Elastic Stack, for both Elastic and Open Distro for Elasticsearch distributions, and the Wazuh agent.
 
 The :ref:`Upgrading from a legacy version <upgrading_wazuh_legacy>` section is for those users who need to upgrade the Wazuh installation from a version prior to 3.0.
 

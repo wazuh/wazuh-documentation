@@ -2,10 +2,10 @@
 
 .. _upgrading_wazuh_server:
 
-Upgrading the Wazuh server
-==========================
+Upgrading the Wazuh manager and the Wazuh API
+=============================================
 
-This section describes how to upgrade the Wazuh server, including the Wazuh manager and the Wazuh API, from the Wazuh 3.x to the Wazuh 3.y., which implies upgrading to the latest compatible version of Elastic Stack.
+This section describes how to upgrade the Wazuh manager and the Wazuh API from Wazuh 3.x to Wazuh 3.y, which implies upgrading to the latest compatible version of Elastic Stack.
 
 Upgrading the Wazuh manager and the Wazuh API
 ---------------------------------------------
@@ -59,6 +59,8 @@ Upgrading the Wazuh manager and the Wazuh API
 .. note::
   The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
 
+  If Wazuh is run in a multi-node cluster, it is necessary to upgrade all the Wazuh managers to the same version. Otherwise, the Wazuh nodes will not join the cluster.
+
 Disabling the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -90,4 +92,4 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 Next step
 ---------
 
-The next step consists on :ref:`upgrading the Elastic Stack <upgrading_elastic_stack>`.
+The next step consists on :ref:`upgrading Elastic Stack <upgrading_elastic_stack>`.
