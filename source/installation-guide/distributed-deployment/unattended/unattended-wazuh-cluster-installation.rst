@@ -55,7 +55,7 @@ Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order t
 
         # bash ~/wazuh-server-installation.sh -ip <elasticsearch_IP_1> -ip <elasticsearch_IP_2>
 
-    Replace the ``<elasticsearch_IP_X>`` values by the corresponding Elasticsearch IPs. There can be added as many ``-ip`` tags as nodes needed.
+    Replace the ``<elasticsearch_IP_X>`` values by the corresponding Elasticsearch IPs. There must be added as many ``-ip`` tags as nodes needed.
 
 Configure the installation
 --------------------------
