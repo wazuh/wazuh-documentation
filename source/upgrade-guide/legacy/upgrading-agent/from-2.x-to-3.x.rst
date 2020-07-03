@@ -16,11 +16,14 @@ Upgrading the Wazuh agent
 
       # systemctl stop wazuh-agent
 
-#. Add the new repository for Wazuh 3.x.:
+#. Upgrade the Wazuh agent:
 
     .. tabs::
 
+
       .. group-tab:: YUM
+
+        Add the new repository for Wazuh 3.x:
 
         .. code-block:: console
 
@@ -34,13 +37,49 @@ Upgrading the Wazuh agent
           protect=1
           EOF
 
+        Upgrade the Wazuh agent:
+
+        .. code-block:: console
+
+          # yum install wazuh-agent
+
+        It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+
+        .. code-block:: console
+
+          # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
       .. group-tab:: APT
+
+        Add the new repository for Wazuh 3.x:
 
         .. code-block:: console
 
           # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
+        Upgrade the Wazuh agent:
+
+        .. code-block:: console
+
+          # apt-get update
+          # apt-get install wazuh-agent
+
+        It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+
+        .. code-block:: console
+
+          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+          # apt-get update
+
+        Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command:
+
+        .. code-block:: console
+
+          # echo "wazuh-agent hold" | sudo dpkg --set-selections
+
       .. group-tab:: ZYpp
+
+        Add the new repository for Wazuh 3.x:
 
         .. code-block:: console
 
@@ -56,30 +95,17 @@ Upgrading the Wazuh agent
           protect=1
           EOF
 
-#. Upgrade the Wazuh agent:
-
-    .. tabs::
-
-
-      .. group-tab:: YUM
-
-        .. code-block:: console
-
-          # yum install wazuh-agent
-
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-
-          # apt-get update
-          # apt-get install wazuh-agent
-
-      .. group-tab:: ZYpp
+        Upgrade the Wazuh agent:
 
         .. code-block:: console
 
           # zypper update wazuh-agent
+
+        It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+
+        .. code-block:: console
+
+          # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
       .. group-tab:: Windows
 
@@ -122,39 +148,3 @@ Upgrading the Wazuh agent
           - :ref:`Wazuh agent installation on HP-UX <wazuh_agent_package_hpux>`.
 
           - :ref:`Wazuh agent installation on Solaris <wazuh_agent_solaris>`.
-
-
-
-Disabling the Wazuh repository
-------------------------------
-
-It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
-
-  .. tabs::
-
-    .. group-tab:: YUM
-
-      .. code-block:: console
-
-        # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
-    .. group-tab:: APT
-
-      .. code-block:: console
-
-        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-        # apt-get update
-
-      Alternately, the user can set the package state to ``hold``, which will stop updates. The user can still upgrade it manually using ``apt-get install`` command:
-
-      .. code-block:: console
-
-        # echo "wazuh-manager hold" | sudo dpkg --set-selections
-        # echo "wazuh-api hold" | sudo dpkg --set-selections
-        # echo "wazuh-agent hold" | sudo dpkg --set-selections
-
-    .. group-tab:: ZYpp
-
-      .. code-block:: console
-
-        # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
