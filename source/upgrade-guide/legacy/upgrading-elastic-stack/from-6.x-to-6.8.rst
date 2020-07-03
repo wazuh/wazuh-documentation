@@ -69,7 +69,7 @@ Upgrading Elasticsearch
 
       # systemctl stop elasticsearch
 
-#. Upgrade the node you shut down:
+#. Upgrade the shut down node:
 
     .. tabs::
 
@@ -135,7 +135,7 @@ Upgrading Elasticsearch
 Upgrading Logstash
 ------------------
 
-#. Upgrade the Logstash package:
+#. Upgrade Logstash:
 
     .. tabs::
 
@@ -230,7 +230,7 @@ Upgrading Filebeat
 Upgrading Kibana
 ----------------
 
-#. Upgrade the Kibana package:
+#. Upgrade Kibana:
 
     .. tabs::
 
