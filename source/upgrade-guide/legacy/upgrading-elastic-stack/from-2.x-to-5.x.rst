@@ -5,7 +5,9 @@
 Upgrading Elastic Stack from 2.x to 5.x
 =======================================
 
-Although Wazuh v2.x is compatible with both Elastic Stack 2.x and 5.x, it is recommended that version 5.x will be installed since the Wazuh Kibana plugin is not compatible with Elastic Stack 2.x. This guide shows the steps needed to be done depending on the version of the Elastic Stack which is going to be used:
+Although Wazuh 2.x is compatible with both Elastic Stack 2.x and 5.x, it is recommended that version 5.x will be installed since the Wazuh Kibana plugin is not compatible with Elastic Stack 2.x.
+
+Choose one from the following scenarios:
 
 - `Continue using Elastic Stack 2.x`_
 
@@ -26,7 +28,7 @@ Configuring Logstash
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
       # curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic2-template.json
 
-#. In the output section of the ``/etc/logstash/conf.d/01-wazuh.conf`` file, comment the line for the ``elastic5-template`` and uncomment the line for the ``elastic2-template``:
+#. In the output section of the ``/etc/logstash/conf.d/01-wazuh.conf`` file, comment the line containing ``elastic5-template`` and uncomment the line containing ``elastic2-template``:
 
     .. code-block:: pkgconfig
 
@@ -42,7 +44,7 @@ Configuring Logstash
   	    }
       }
 
-#. If a ``single-host architecture`` is used, where the Wazuh server is installed along with Elastic Stack on the same host, edit the ``/etc/logstash/conf.d/01-wazuh.conf`` file commenting out the entire input section titled ``Remote Wazuh server - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh server - JSON file input``:
+#. If a ``single-host architecture`` is used, where the Wazuh server is installed along with Elastic Stack on the same host, edit the ``/etc/logstash/conf.d/01-wazuh.conf`` file commenting the entire input section titled ``Remote Wazuh server - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh server - JSON file input``:
 
     .. code-block:: pkgconfig
 
@@ -80,13 +82,13 @@ In order to display the Wazuh alerts data, configure the Kibana index pattern:
       :align: center
       :width: 100%
 
-#. Set the ``wazuh-*`` as an index pattern and choose the ``timestamp`` as a time field. Then, click on ``create`` button:
+#. Set the ``wazuh-*`` as an index pattern and choose the ``timestamp`` as a time field. Then, click on the ``create`` button:
 
     .. thumbnail:: ../../../images/installation/kibana-elk2.png
       :align: center
       :width: 100%
 
-#. Set this wildcard as a default by clicking on the ``star icon``:
+#. Set this wildcard as default by clicking on the ``star icon``:
 
     .. thumbnail:: ../../../images/installation/kibana-elk.png
       :align: center
@@ -150,14 +152,14 @@ Follow these steps to upgrade Elastic Stack to version 5.x:
         index.number_of_shards: 1
         index.number_of_replicas: 0
 
-      The ``ES_HEAP_SIZE`` option is now deprecated and should be removed or commented out in the ``/etc/sysconfig/elasticsearch`` file:
+      The ``ES_HEAP_SIZE`` option is now deprecated and should be removed or commented in the ``/etc/sysconfig/elasticsearch`` file:
 
       .. code-block:: yaml
 
         # ES_HEAP_SIZE - Set it to half your system RAM memory
         ES_HEAP_SIZE=8g
 
-    The next step is to configure Elasticsearch following the Elastic `jvm.options guide <https://www.elastic.co/guide/en/elasticsearch/reference/master/heap-size.html>`_.
+    The next step consists on configuring Elasticsearch following the Elastic `jvm.options <https://www.elastic.co/guide/en/elasticsearch/reference/master/heap-size.html>`_ guide.
 
 #. Install the newest version of Elastic Stack 5.x. Follow the appropriate link below for installation instructions for the desired operating system:
 
@@ -199,4 +201,4 @@ Follow these steps to upgrade Elastic Stack to version 5.x:
 
       5.2.
 
-.. note:: Wazuh v2.x uses different indices and templates than Wazuh v1.x. After the upgrade, the previous alerts will not be seen in Kibana. In order to access these alerts, the previous indices have to be reindexed.
+.. note:: Wazuh 2.x uses different indices and templates than Wazuh 1.x. After the upgrade, the previous alerts will not be seen in Kibana. In order to access these alerts, the previous indices have to be reindexed.
