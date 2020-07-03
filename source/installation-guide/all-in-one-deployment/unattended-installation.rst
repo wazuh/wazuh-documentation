@@ -15,26 +15,28 @@ Installing the Wazuh-Elastic Stack
 
 #. In order to download the script, ``curl`` package must be installed on the system:
 
-.. tabs::
+    .. tabs::
 
-  .. group-tab:: Yum
+      .. group-tab:: Yum
 
-    .. code-block:: console
+        .. code-block:: console
 
-        # yum install curl
+          # yum install curl
 
 
-  .. group-tab:: APT
+        .. group-tab:: APT
 
-    .. code-block:: console
+          .. code-block:: console
 
-        # apt install curl
+            # apt install curl
+
+
 
 #. Download and run the script:
 
-.. code-block:: console
+  .. code-block:: console
 
-    # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+      # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
 After the execution of the script, it will show the following messages to confirm that the install was made successfully:
 
