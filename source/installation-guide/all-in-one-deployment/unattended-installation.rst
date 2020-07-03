@@ -23,14 +23,13 @@ Installing the Wazuh-Elastic Stack
 
           # yum install curl
 
+      .. group-tab:: APT
 
-        .. group-tab:: APT
+        .. code-block:: console
 
-          .. code-block:: console
+          # apt install curl
 
-            # apt install curl
-
-
+ 
 
 #. Download and run the script:
 
