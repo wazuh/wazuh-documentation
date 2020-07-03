@@ -20,7 +20,7 @@ Installing Elasticsearch
 Prerequisites
 ~~~~~~~~~~~~~
 
-Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl`` and ``unzip`` that will be used in further steps:
+Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
 
 .. include:: ../../../../_templates/installations/elastic/common/before_installation.rst
 
