@@ -16,13 +16,13 @@ To do so, download the ``restore_alerts.sh`` script `(the script is available he
         # curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.sh
         # curl -so restore_alerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.conf
 
-Once the script and the configuration file are downloaded, the user can restore the Wazuh alerts in two different ways:
+The Wazuh alerts can be restored in two different ways:
 
 - By ``restoring them from Elasticsearch`` to index them in Elasticsearch.
 - By ``restoring them from the Wazuh manager`` to index them in Elasticsearch.
 
-Restoring the alerts
-^^^^^^^^^^^^^^^^^^^^
+Restoring the Wazuh alerts
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Stop Logstash:
 
@@ -43,21 +43,22 @@ Restoring the alerts
 
 #. Insert the requested parameters into the prompts from the  script as defined below :
 
-    - ``reindex_type``: Indicates the reindexing type. It can be either set to the ``ELS2ELS``, for reindexing from Elasticsearch to Elasticsearch, or the ``WM2ELS``, for reindexing from the Wazuh manager to Elasticsearch.
-    - ``elastic_ip``: Is the Elasticsearch IP address. By default, set to ``localhost``.
-    - ``dateFrom``: Start date as YYYY-MM-DD (2017-12-01).
-    - ``dateTo``: End date as YYYY-MM-DD (2017-12-11).
+      - ``reindex_type``: Indicates the reindexing type. It can be either set to ``ELS2ELS``, for reindexing from Elasticsearch to Elasticsearch, or ``WM2ELS``, for reindexing from the Wazuh manager to Elasticsearch.
+      - ``elastic_ip``: Is the Elasticsearch IP address. By default, set to ``localhost``.
+      - ``dateFrom``: Start date as YYYY-MM-DD.
+      - ``dateTo``: End date as YYYY-MM-DD.
 
-  .. note::
-      If the user wants to reindex only a single day, the ``dateFrom`` and the ``dateTo`` should be set to the same date.
+    .. note::
+        If the user wants to reindex only a single day, the ``dateFrom`` and the ``dateTo`` should be set to the same date.
 
- The user can also execute the script and add the values for the parameters as arguments:
+    The user can also execute the script and add the values for the parameters as arguments:
 
-    .. code-block:: console
+      .. code-block:: console
 
-        # ./restore_alerts.sh date_from(yyyy-mm-dd) date_to(yyyy-mm-dd) elasticsearch_ip ELS2ELS|WM2ELS
+          # ./restore_alerts.sh date_from(yyyy-mm-dd) date_to(yyyy-mm-dd) elasticsearch_ip ELS2ELS|WM2ELS
 
- Once the script has finished, Logstash can be started again:
+
+#. Once the script has finished, Logstash can be started again:
 
     .. code-block:: console
 
