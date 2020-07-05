@@ -57,6 +57,14 @@ Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order t
 
     Replace the ``<elasticsearch_IP_X>`` values by the corresponding Elasticsearch IPs. There must be added as many ``-ip`` tags as nodes needed.
 
+
+The script will perform an health-check to ensure that the host has enough resources to garantee a proper performance. This can be omitted adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+
+.. code-block:: console
+
+
+  # bash all-in-one-installation.sh -i
+
 Configure the installation
 --------------------------
 
