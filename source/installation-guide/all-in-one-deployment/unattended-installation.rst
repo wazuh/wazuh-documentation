@@ -48,7 +48,7 @@ After the execution of the script, it will show the following messages to confir
 
 Once Kibana is accessible, the script will quit.
 
-The script will perform an health-check to ensure that the host has enough resources to garantee a proper performance. This can be omitted adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+The script will perform an health-check to ensure that the host has enough resources to garantee a proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
 
 .. code-block:: console
 
