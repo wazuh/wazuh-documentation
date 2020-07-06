@@ -17,7 +17,7 @@ Upgrade the Wazuh manager
       # systemctl stop wazuh-api
       # systemctl stop wazuh-manager
 
-#. Add the new repository for Wazuh 3.x.:
+#. Add the new repository for Wazuh 3.x:
 
     .. tabs::
 
