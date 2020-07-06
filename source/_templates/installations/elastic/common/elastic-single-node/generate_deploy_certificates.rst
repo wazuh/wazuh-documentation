@@ -11,7 +11,7 @@
 
   .. code-block:: console
 
-    # wget https://releases.floragunn.com/search-guard-tlstool/1.7/search-guard-tlstool-1.7.zip
+    # curl -so /etc/elasticsearch/certs/search-guard-tlstool-1.7.zip https://releases.floragunn.com/search-guard-tlstool/1.7/search-guard-tlstool-1.7.zip
 
 * Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``:
 
