@@ -54,7 +54,7 @@ To perform the upgrade locally, follow the instructions for the Wazuh agent's op
       # apt-get install wazuh-agent
 
     It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager.
-    This step is not necessary if the packages are set to a ``hold`` state:
+    This step is not necessary if the package is set to a ``hold`` state:
 
     .. code-block:: console
 
