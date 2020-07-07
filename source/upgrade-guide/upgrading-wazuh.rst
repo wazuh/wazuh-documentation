@@ -20,11 +20,21 @@ Upgrading the Wazuh server
 
         # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
 
-    Upgrade the Wazuh manager and the Wazuh API to the latest version:
+    * All-in-one deployment and Distributed deployment - Wazuh master node:
 
-    .. code-block:: console
+      Upgrade the Wazuh manager and the Wazuh API to the latest version:
 
-        # yum upgrade wazuh-manager wazuh-api
+      .. code-block:: console
+
+          # yum upgrade wazuh-manager wazuh-api
+
+    * Distributed deployment - Wazuh worker node:
+
+      Upgrade the Wazuh manager to the latest version:
+
+      .. code-block:: console
+
+          # yum upgrade wazuh-manager
 
   .. group-tab:: APT
 
@@ -34,12 +44,23 @@ Upgrading the Wazuh server
 
       # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
 
-    Upgrade the Wazuh manager and the Wazuh API to the latest version:
+    * All-in-one deployment and Distributed deployment - Wazuh master node:
 
-    .. code-block:: console
+      Upgrade the Wazuh manager and the Wazuh API to the latest version:
 
-        # apt-get update
-        # apt-get install wazuh-manager wazuh-api
+      .. code-block:: console
+
+          # apt-get update
+          # apt-get install wazuh-manager wazuh-api
+
+    * Distributed deployment - Wazuh worker node:
+
+      Upgrade the Wazuh manager to the latest version:
+
+      .. code-block:: console
+
+          # apt-get update
+          # apt-get install wazuh-manager
 
   .. group-tab:: ZYpp
 
@@ -49,12 +70,21 @@ Upgrading the Wazuh server
 
       # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-    Upgrade the Wazuh manager and the Wazuh API to the latest version:
+    * All-in-one deployment and Distributed deployment - Wazuh master node:
 
-    .. code-block:: console
+      Upgrade the Wazuh manager and the Wazuh API to the latest version:
 
-        # zypper update wazuh-manager wazuh-api
+      .. code-block:: console
 
+          # zypper update wazuh-manager wazuh-api
+
+    * Distributed deployment - Wazuh worker node:
+
+      Upgrade the Wazuh manager to the latest version:
+
+      .. code-block:: console
+
+          # zypper update wazuh-manager   
 
 .. note::
   The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
