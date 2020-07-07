@@ -79,7 +79,7 @@ Specifies the protocol to use when connecting to the manager.
 max_retries
 ^^^^^^^^^^^
 
-.. versionadded:: 4.0
+.. versionadded:: 3.13.1
 
 Number of connection retries.
 
@@ -94,7 +94,7 @@ Number of connection retries.
 retry_interval
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 4.0
+.. versionadded:: 3.13.1
 
 Time interval between connection attempts (seconds).
 
