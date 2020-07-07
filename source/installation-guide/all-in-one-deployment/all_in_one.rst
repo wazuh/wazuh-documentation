@@ -13,8 +13,8 @@ This document guides through the installation of the Wazuh server and Open Distr
 
 .. _all_in_one_elastic:
 
-Prerequisites for installing Wazuh-Elastic Stack
-------------------------------------------------
+Prerequisites for installing Wazuh
+----------------------------------
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
 
@@ -312,4 +312,4 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 Next steps
 ----------
 
-Once the Wazuh-Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.

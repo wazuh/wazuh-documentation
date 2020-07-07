@@ -3,13 +3,13 @@
 Unattended installation
 =======================
 
-This section will explain how to install the Wazuh-Elastic Stack on a single host by using a script that will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages.
+This section will explain how to install Wazuh on a single host by using a script that will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages.
 The script will perform a health-check verifying that the available system resources meet the minimal requirements. For more information, please visit the :ref:`requirements <all_in_one_requirements>` section.
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ will be used to generate the certificates for protecting data in the Elastic Stack.
 
-Installing the Wazuh-Elastic Stack
-----------------------------------
+Installing the Wazuh
+--------------------
 
 .. note:: Root user privileges are required to run all the commands described below.
 
@@ -90,4 +90,4 @@ With the first access to Kibana, the browser shows a warning message stating tha
 Next steps
 ----------
 
-Once the Wazuh-Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.

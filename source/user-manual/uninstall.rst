@@ -2,10 +2,10 @@
 
 .. _user_manual_uninstall:
 
-Uninstalling the Wazuh-Elastic Stack components
-===============================================
+Uninstalling the Wazuh components
+=================================
 
-This document will give instructions to uninstall each Wazuh-Elastic Stack component. 
+This document will give instructions to uninstall each Wazuh component. 
 
 Uninstall the Wazuh manager and the Wazuh API
 ---------------------------------------------
