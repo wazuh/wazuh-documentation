@@ -21,6 +21,7 @@ You can also find a set of default roles and policies, which you can use instead
 
 `Resources`_
     - `*:*`_
+    - `agent:group`_
     - `agent:id`_
     - `group:id`_
     - `node:id`_
@@ -92,10 +93,11 @@ You can also find a set of default roles and policies, which you can use instead
         - `security:create_user`_
         - `security:create`_
         - `security:delete`_
-        - `security:read`_
         - `security:read_config`_
-        - `security:update`_
+        - `security:read`_
+        - `security:revoke`_
         - `security:update_config`_
+        - `security:update`_
 
     - `Syscheck`_
         - `syscheck:clear`_
@@ -137,6 +139,14 @@ Resources
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Example**     | agent:create                                                                                                                            |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+agent:group
+^^^^^^^^^^^
++-----------------+---------------------------------+
+| **Description** | Reference agents via group name |
++-----------------+---------------------------------+
+| **Example**     | agent:group:web                 |
++-----------------+---------------------------------+
 
 agent:id
 ^^^^^^^^^
@@ -222,11 +232,11 @@ role:id
 user:id
 ^^^^^^^
 
-+-----------------+------------------------------------------+
-| **Description** | Reference security user via its username |
-+-----------------+------------------------------------------+
-| **Example**     | user:id:wazuh                            |
-+-----------------+------------------------------------------+
++-----------------+------------------------------------+
+| **Description** | Reference security user via its id |
++-----------------+------------------------------------+
+| **Example**     | user:id:1                          |
++-----------------+------------------------------------+
 
 
 Actions
@@ -489,15 +499,24 @@ security:delete
 - DELETE /security/users (`user:id`_)
 - DELETE /security/users/{username}/roles (`user:id`_, `role:id`_)
 
+security:read_config
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- GET /security/config (`*:*`_)
+
 security:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /security/policies (`policy:id`_)
 - GET /security/roles (`role:id`_)
 - GET /security/users (`user:id`_)
 
-security:read_config
+security:revoke
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /security/config (`*:*`_)
+- GET /security/user/authenticate (`*:*`_)
+
+security:update_config
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- PUT /security/config (`*:*`_)
+- DELETE /security/config (`*:*`_)
 
 security:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -506,12 +525,6 @@ security:update
 - PUT /security/policies/{policy_id} (`policy:id`_)
 - PUT /security/roles/{role_id} (`role:id`_)
 - PUT /security/users/{username} (`user:id`_)
-
-security:update_config
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /security/config (`*:*`_)
-- DELETE /security/config (`*:*`_)
-
 
 
 Syscheck
@@ -721,13 +734,14 @@ security_all
 Provide full access to all security related functionalities.
 
 Actions
-    - `security:read`_
-    - `security:read_config`_
     - `security:create`_
     - `security:create_user`_
+    - `security:delete`_
+    - `security:read`_
+    - `security:read_config`_
+    - `security:revoke`_
     - `security:update`_
     - `security:update_config`_
-    - `security:delete`_
 
 Resources
     - ``role:id:*``
@@ -746,6 +760,7 @@ Actions
     - `security:read`_
     - `security:create_user`_
     - `security:update`_
+    - `security:revoke`_
     - `security:delete`_
 
 Resources

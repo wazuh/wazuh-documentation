@@ -24,56 +24,14 @@ The API starts at boot time. To control or check the **wazuh-api** service, use 
 
     # service wazuh-api start/status/stop/restart
 
-User interface
---------------
-
-.. versionadded:: 4.0.0
-
-The Wazuh API interface is based on a free software project known as Swagger UI, which is very useful for listing and describing all available endpoints. It also allows you to interact with each of them, view example outputs and query all available parameters. By default, it can be found at ``https://localhost:55000/ui``.
-
-.. note::
-    If you don't provide your own, Wazuh API will create self-signed certificates. As a consequence, a security warning will appear in the browser. It is necessary to accept the risk in order to access the UI. For more information, please visit the :doc:`Securing the Wazuh API <../../installation-guide/securing_api>` section.
-
-The interface has a list of all available endpoints separated into groups (active-response, agents, ciscat, cluster, etc.). Each endpoint can have multiple request methods (GET, POST, PUT, DELETE). To differentiate them, a specific color is used for each one, along with a label on the left. To run any endpoint, just click on it, press the *Try it out* button, fill in the necessary parameters and click on the *Execute* button. Please note that **login is required** to run endpoints. You can see how to do it in the next section, :ref:`Logging into the API <api_log_in>`.
-
-.. thumbnail:: ../../images/api/api-ui-overview.png
-    :align: center
-    :width: 100%
-
-The Wazuh API endpoints can be reached via the swagger interface or using the command-line tool *curl*. In some of the examples below we will use both options.
-
 .. _api_log_in:
 
 Logging into the API
 --------------------
 
-Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.
+Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
 
-Logging into the API UI
-^^^^^^^^^^^^^^^^^^^^^^^
-
-1. Access the API interface at <protocol>://<host>:<port>/ui. The default path is ``https://localhost:55000/ui``.
-2. Click on the green *Authorize* button.
-3. Enter the username and password inside the section *basicAuth  (http, Basic)*. By default, the user is ``wazuh`` and the password is ``wazuh``.
-4. Click on the green *Authorize* button under the password field and close this window.
-5. Expand the endpoint ``GET /security/user/authenticate`` and click on the *Try it out* button.
-6. Click on the *Execute* button. A result like the following will appear. Copy the value that appeared in ``<YOUR_JWT_TOKEN>``, without the quotes.
-
-    .. code-block:: json
-        :class: output
-
-        {
-          "token": "<YOUR_JWT_TOKEN>"
-        }
-
-7. Click again on the Authorize button.
-8. Paste the value of the copied token into the *jwt  (http, Bearer)* field.
-9. Click on the Authorize button inside. After that, you can use any API endpoint allowed for the roles the user belongs to.
-
-Logging in with cURL
-^^^^^^^^^^^^^^^^^^^^
-
-1. Use the cURL command to get the JWT token. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``.
+1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``.
 
     .. code-block:: console
 
@@ -251,10 +209,6 @@ Use cases
 
 This section will present several use cases to give you a taste for the API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
 
-.. note::
-
-    Please note that although we will use cURL here, all endpoints can be run in the API UI.
-
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -425,7 +379,6 @@ The API can be used to show information about all monitored files by syscheck. T
       },
       "message": "FIM findings of the agent"
     }
-
 
 You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
 
@@ -641,4 +594,4 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 Conclusion
 ^^^^^^^^^^
-We hope those examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.
+We hope the provided examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
