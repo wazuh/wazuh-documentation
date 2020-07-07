@@ -289,6 +289,7 @@ agent:read
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - PUT /agents/restart (`agent:id`_)
+- PUT /agents/node/{node_id}/restart (`agent:id`_)
 - PUT /agents/{agent_id}/restart (`agent:id`_)
 - PUT /groups/{group_id}/restart (`agent:id`_)
 
@@ -341,6 +342,7 @@ cluster:read_config
 cluster:read_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /cluster/{node_id}/files (`node:id:<node>&file:path:<file_path>`)
+- PUT /agents/node/{node_id}/restart (`node:id`_)
 
 cluster:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
