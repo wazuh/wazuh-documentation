@@ -16,57 +16,23 @@ Advance filtering is possible using the Wazuh API's queries. Queries are specifi
     * ``<``: smaller.
     * ``>``: bigger.
     * ``~``: like as.
+    * ``()``: grouping operators
 * **Value**: Value to filter filter by.
 * **Separator**: Operator to join multiple "queries":
     * ``,``: represents an ``OR``.
     * ``;``: represents an ``AND``.
 
+.. note::
+    Reserved characters need to be percent-encoded, especially semicolons (``;`` → ``%3B``). You can use ``--data-urlencode`` inside cURL to make the process easier.
+
 Examples
 --------
 
-For example, to filter Ubuntu agents with an id higher than 9, the following query would be used:
+For example, to filter Ubuntu agents with a version higher than 18, the following query would be used. Remember that the value of the parameter q is being encoded with ``--data-urlencode``:
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&limit=500&q=os.name=ubuntu;id>9&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
-
-.. code-block:: json
-    :class: output
-
-    {
-       "data": {
-          "affected_items": [
-             {
-                "os": {
-                   "codename": "Bionic Beaver",
-                   "major": "18",
-                   "name": "Ubuntu",
-                   "version": "18.04.2 LTS"
-                },
-                "id": "010",
-                "name": "wazuh-agent10"
-             },
-             {
-                "id": "011",
-                "name": "wazuh-agent11"
-             },
-             {
-                "id": "012",
-                "name": "wazuh-agent12"
-             }
-          ],
-          "total_affected_items": 3,
-          "total_failed_items": 0,
-          "failed_items": []
-       },
-       "message": "All selected agents information is shown"
-    }
-
-An example of using the OR operator can be filtering active or disconnected agents:
-
-.. code-block:: console
-
-    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&q=status=active,status=disconnected&select=id,name,os.name,os.version,os.codename,os.major,status" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -X GET "https://localhost:55000/v4/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -81,9 +47,58 @@ An example of using the OR operator can be filtering active or disconnected agen
                    "name": "Ubuntu",
                    "version": "18.04.4 LTS"
                 },
-                "status": "active",
-                "id": "000",
-                "name": "wazuh-master"
+                "name": "wazuh-master",
+                "id": "000"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent4",
+                "id": "004"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent5",
+                "id": "005"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent6",
+                "id": "006"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent7",
+                "id": "007"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent8",
+                "id": "008"
              },
              {
                 "os": {
@@ -92,9 +107,8 @@ An example of using the OR operator can be filtering active or disconnected agen
                    "name": "Ubuntu",
                    "version": "18.04.2 LTS"
                 },
-                "status": "disconnected",
-                "id": "009",
-                "name": "wazuh-agent9"
+                "name": "wazuh-agent9",
+                "id": "009"
              },
              {
                 "os": {
@@ -103,23 +117,22 @@ An example of using the OR operator can be filtering active or disconnected agen
                    "name": "Ubuntu",
                    "version": "18.04.2 LTS"
                 },
-                "status": "disconnected",
-                "id": "010",
-                "name": "wazuh-agent10"
+                "name": "wazuh-agent10",
+                "id": "010"
              }
           ],
-          "total_affected_items": 3,
+          "total_affected_items": 8,
           "total_failed_items": 0,
           "failed_items": []
        },
        "message": "All selected agents information is shown"
     }
 
-Another example using the ``~`` operator is the following:
+The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 18 but lower than Ubuntu 18.04.4:
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&q=os.platform~win" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -X GET "https://localhost:55000/v4/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -129,32 +142,105 @@ Another example using the ``~`` operator is the following:
           "affected_items": [
              {
                 "os": {
-                   "build": "7601",
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent9",
+                "id": "009"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent10",
+                "id": "010"
+             }
+          ],
+          "total_affected_items": 2,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information is shown"
+    }
+
+An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains *windows* or *centos*.
+
+.. code-block:: console
+
+    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -X GET "https://localhost:55000/v4/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+
+.. code-block:: json
+    :class: output
+
+    {
+       "data": {
+          "affected_items": [
+             {
+                "os": {
                    "major": "6",
-                   "minor": "1",
                    "name": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1",
-                   "platform": "windows",
-                   "uname": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1",
                    "version": "6.1.7601"
                 },
-                "dateAdd": "2020-06-12T08:14:31Z",
-                "registerIP": "any",
-                "status": "active",
-                "mergedSum": "279579633ee2431d12f5a093a3010ed2",
-                "node_name": "master-node",
-                "lastKeepAlive": "2020-06-12T08:16:27Z",
-                "id": "014",
                 "name": "jmv74211-PC",
-                "ip": "10.0.2.15",
-                "version": "Wazuh v3.12.3",
-                "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-                "manager": "wazuh-master",
-                "group": [
-                   "default"
-                ]
+                "id": "013"
              }
           ],
           "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information is shown"
+    }
+
+Getting the ubuntu agents with id other than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18, is an example that involves multiple operators at the same time:
+
+.. code-block:: console
+
+    # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -X GET "https://localhost:55000/v4/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+
+.. code-block:: json
+    :class: output
+
+    {
+       "data": {
+          "affected_items": [
+             {
+                "os": {
+                   "codename": "Xenial Xerus",
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "version": "16.04.6 LTS"
+                },
+                "name": "wazuh-agent1",
+                "id": "001"
+             },
+             {
+                "os": {
+                   "codename": "Xenial Xerus",
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "version": "16.04.6 LTS"
+                },
+                "name": "wazuh-agent2",
+                "id": "002"
+             },
+             {
+                "os": {
+                   "codename": "Xenial Xerus",
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "version": "16.04.6 LTS"
+                },
+                "name": "wazuh-agent3",
+                "id": "003"
+             }
+          ],
+          "total_affected_items": 3,
           "total_failed_items": 0,
           "failed_items": []
        },
