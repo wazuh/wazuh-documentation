@@ -10,13 +10,7 @@ The following steps show how to upgrade the Wazuh agent from 2.x to 3.x.
 Upgrading the Wazuh agent
 -------------------------
 
-#. Stop the service:
-
-    .. code-block:: console
-
-      # systemctl stop wazuh-agent
-
-#. Upgrade the Wazuh agent:
+To upgrade the Wazuh agent choose the appropriate tab for the desired operating system:
 
     .. tabs::
 
