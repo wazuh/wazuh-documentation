@@ -28,54 +28,61 @@ Preparing Elastic Stack
 
     .. tabs::
 
-      .. group-tab:: Open Distro for Elasticsearch
+      .. group-tab:: YUM
 
-         If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
+          * Open Distro for Elasticsearch:
 
-          * YUM:
+            If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
 
             .. code-block:: console
 
               # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
 
-          * APT:
+          * Elastic:
 
-            This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository.
-
-            .. code-block:: console
-
-              # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
-
-          * ZYpp:
-
-            .. code-block:: console
-
-              # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
-
-      .. group-tab:: Elastic
-
-          In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
-
-          * YUM:
+            In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
             .. code-block:: console
 
               # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-          * APT:
+      .. group-tab:: APT
 
-            This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository.
+          * Open Distro for Elasticsearch:
+
+            If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository:
+
+            .. code-block:: console
+
+              # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+
+          * Elastic:
+
+            In case of having disabled the repository for Elastic Stack 7.x it can be enabled using the command below. This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository.
 
             .. code-block:: console
 
               # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
               # apt-get update
 
-          * ZYpp:
+      .. group-tab:: ZYpp
+
+          * Open Distro for Elasticsearch:
+
+            If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
+
+            .. code-block:: console
+
+              # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+
+          * Elastic:
+
+            In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
             .. code-block:: console
 
               # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
+
 
 #. [*Elastic*] Before the upgrade process it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package.
 
@@ -139,53 +146,56 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
       .. tabs::
 
-        .. group-tab:: Open Distro for Elasticsearch
+        .. group-tab:: YUM
 
-          * YUM:
+          * Open Distro for Elasticsearch:
 
             .. code-block:: console
 
               # yum install opendistroforelasticsearch-1.6.0
 
-          * APT:
-
-            Upgrade Elasticsearch OSS:
-
-              .. code-block:: console
-
-                # apt install elasticsearch-oss
-
-            Upgrade Open Distro for Elasticsearch:
-
-              .. code-block:: console
-
-                # apt install opendistroforelasticsearch
-
-          * ZYpp:
-
-            .. code-block:: console
-
-              # zypper update opendistroforelasticsearch-1.6.0
-
-        .. group-tab:: Elastic
-
-          * YUM:
+          * Elastic:
 
             .. code-block:: console
 
               # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
-          * APT:
+        .. group-tab:: APT
+
+          * Open Distro for Elasticsearch:
+
+            Upgrade Elasticsearch OSS:
+
+            .. code-block:: console
+
+              # apt install elasticsearch-oss
+
+            Upgrade Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+              # apt install opendistroforelasticsearch
+
+          * Elastic:
 
             .. code-block:: console
 
               # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
 
-          * ZYpp:
+        .. group-tab:: ZYpp
+
+          * Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+              # zypper update opendistroforelasticsearch-1.6.0
+
+          * Elastic:
 
             .. code-block:: console
 
               # zypper update elasticsearch-|ELASTICSEARCH_LATEST|
+
 
 #. [OD] Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins (optional).
 
@@ -231,46 +241,48 @@ Upgrading Filebeat
 
       .. tabs::
 
-        .. group-tab:: Open Distro for Elasticsearch
+        .. group-tab:: YUM
 
-          * YUM:
+          * Open Distro for Elasticsearch:
 
             .. code-block:: console
 
               # yum install filebeat
 
-          * APT:
-
-            .. code-block:: console
-
-              # apt-get install filebeat
-
-          * ZYpp:
-
-            .. code-block:: console
-
-              # zypper update filebeat
-
-
-        .. group-tab:: Elastic
-
-          * YUM:
+          * Elastic:
 
             .. code-block:: console
 
               # yum install filebeat-|ELASTICSEARCH_LATEST|
 
-          * APT:
+        .. group-tab:: APT
+
+          * Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+              # apt-get install filebeat
+
+          * Elastic:
 
             .. code-block:: console
 
               # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
-          * ZYpp:
+        .. group-tab:: ZYpp
+
+          * Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+              # zypper update filebeat
+
+          * Elastic:
 
             .. code-block:: console
 
               # zypper update filebeat-|ELASTICSEARCH_LATEST|
+
 
 #. Update the configuration file:
 
@@ -427,41 +439,43 @@ Upgrading Kibana
 
       .. tabs::
 
-        .. group-tab:: Open Distro for Elasticsearch
+        .. group-tab:: YUM
 
-          * YUM:
+          * Open Distro for Elasticsearch:
 
             .. code-block:: console
 
               # yum install opendistroforelasticsearch-kibana
 
-          * APT:
-
-            .. code-block:: console
-
-              # apt-get install opendistroforelasticsearch-kibana
-
-          * ZYpp:
-
-            .. code-block:: console
-
-              # zypper update opendistroforelasticsearch-kibana
-
-        .. group-tab::  Elastic
-
-          * YUM:
+          * Elastic:
 
             .. code-block:: console
 
               # yum install kibana-|ELASTICSEARCH_LATEST|
 
-          * APT:
+        .. group-tab:: APT
+
+          * Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+              # apt-get install opendistroforelasticsearch-kibana
+
+          * Elastic:
 
             .. code-block:: console
 
               # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
-          * ZYpp:
+        .. group-tab:: ZYpp
+
+          * Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+              # zypper update opendistroforelasticsearch-kibana
+
+          * Elastic:
 
             .. code-block:: console
 
@@ -533,56 +547,66 @@ Disabling the repository
 
       .. tabs::
 
-        .. group-tab:: Open Distro for Elasticsearch
+        .. group-tab:: YUM
 
-           It is recommended to disable the Wazuh repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+          * Open Distro for Elasticsearch:
 
-            * YUM:
+            It is recommended to disable the Wazuh repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
-              .. code-block:: console
+            .. code-block:: console
 
-                # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh_pre.repo
+              # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh_pre.repo
 
-            * APT:
+          * Elastic:
 
-              .. code-block:: console
+            It is recommended to disable the Elastic repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
-                # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh_trash.list
-                # apt-get update
+            .. code-block:: console
 
-            * ZYpp:
+              # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
-              .. code-block:: console
+        .. group-tab:: APT
 
-                # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+          * Open Distro for Elasticsearch:
 
-        .. group-tab:: Elastic
+            It is recommended to disable the Wazuh repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
-           It is recommended to disable the Elastic repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+            .. code-block:: console
 
-            * YUM:
+              # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh_trash.list
+              # apt-get update
 
-              .. code-block:: console
+          * Elastic:
 
-                # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+            It is recommended to disable the Elastic repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
-            * APT:
+            .. code-block:: console
 
-              .. code-block:: console
+              # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+              # apt-get update
 
-                # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
-                # apt-get update
+            Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
 
-              Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
+            .. code-block:: console
 
-              .. code-block:: console
+              # echo "elasticsearch hold" | sudo dpkg --set-selections
+              # echo "filebeat hold" | sudo dpkg --set-selections
+              # echo "kibana hold" | sudo dpkg --set-selections
 
-                # echo "elasticsearch hold" | sudo dpkg --set-selections
-                # echo "filebeat hold" | sudo dpkg --set-selections
-                # echo "kibana hold" | sudo dpkg --set-selections
+        .. group-tab:: ZYpp
 
-            * ZYpp:
+          * Open Distro for Elasticsearch:
 
-              .. code-block:: console
+            It is recommended to disable the Wazuh repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
 
-                # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+            .. code-block:: console
+
+              # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+
+          * Elastic:
+
+            It is recommended to disable the Elastic repository to prevent an upgrade to a newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+
+            .. code-block:: console
+
+              # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
