@@ -7,15 +7,10 @@ Upgrading the Wazuh server from 2.x to 3.x
 
 The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x, which implies upgrading from Elastic Stack 5.x to 7.x.
 
-Upgrade the Wazuh manager
--------------------------
+Upgrade the Wazuh server
+------------------------
 
-#. Stop the services:
-
-    .. code-block:: console
-
-      # systemctl stop wazuh-api
-      # systemctl stop wazuh-manager
+To upgrade the Wazuh server choose the the appropriate tab for the desired packages type:
 
 #. Add the new repository for Wazuh 3.x:
 
@@ -81,6 +76,9 @@ Upgrade the Wazuh manager
           # zypper update wazuh-manager wazuh-api
 
 .. note::
+
+  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
+
   After the upgrade, the old alerts will not be visualized in Kibana due to a change in the Wazuh alerts’ template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping. The process is described in the :ref:`Restore the Wazuh alerts from Wazuh 2.x <restore_alerts_2.x_3.x>` section.
 
 Disable the Wazuh repository

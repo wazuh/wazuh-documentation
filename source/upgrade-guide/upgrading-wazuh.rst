@@ -10,6 +10,8 @@ This section describes how to upgrade the Wazuh server, including the Wazuh mana
 Upgrading the Wazuh server
 --------------------------
 
+To upgrade the Wazuh server choose the appropriate tab for the desired package type:
+
 .. tabs::
 
   .. group-tab:: YUM
@@ -84,7 +86,7 @@ Upgrading the Wazuh server
 
       .. code-block:: console
 
-          # zypper update wazuh-manager   
+          # zypper update wazuh-manager
 
 .. note::
   The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
