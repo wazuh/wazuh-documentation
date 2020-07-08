@@ -37,7 +37,7 @@ Next step will be selecting the index that will be used as a data source.
 We can work with any index that we created previously, but generally, we
 will be working with **wazuh-alerts-3.x-\***.
 
-.. image:: ../../../images/kibana-app/custom-dashboard/choose-a-source.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/choose-a-source.png
    :align: center
 
 At this point, a graph will be generated. You can select a lapse of time
@@ -68,24 +68,24 @@ of the rules that have been triggered.
 
 To do so we will have to click on **X-Axis**:
 
-.. image:: ../../../images/kibana-app/custom-dashboard/bucket-x-axis.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-x-axis.png
    :align: center
 
 Select the **Terms** option in the **Select an aggregation** menu:
 
-.. image:: ../../../images/kibana-app/custom-dashboard/bucket-select-an-aggregation-terms.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-select-an-aggregation-terms.png
    :align: center
 
 Now you will be able to select a **Field** to sort by (*e.g.
 rule.level*):
 
-.. image:: ../../../images/kibana-app/custom-dashboard/bucket-term-field.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-term-field.png
    :align: center
 
 And, eventually, you will need to apply the changes to visualize
 them:
 
-.. image:: ../../../images/kibana-app/custom-dashboard/bucket-apply-changes.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-apply-changes.png
    :align: center
 
 Now you will be able to see a chart like this:
@@ -106,7 +106,7 @@ previous section, we can save it by clicking on **Save**.
 
 After that, set a name for it and confirm.
 
-.. image:: ../../../images/kibana-app/custom-dashboard/confirm-save-visualization.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/confirm-save-visualization.png
    :align: center
 
 Creating a Custom Dashboard
@@ -121,7 +121,7 @@ visualization in the **Dashboard** section:
 
 Just have to click on **Create a new dashboard**:
 
-.. image:: ../../../images/kibana-app/custom-dashboard/create-new-dashboard.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/create-new-dashboard.png
    :align: center
 
 And then click on **Add**.\
@@ -134,7 +134,7 @@ Now you can select a visualization to add among the ones you have saved.
 We will choose the bar chart that we created previously and then click
 on **Create new visualization**:
 
-.. image:: ../../../images/kibana-app/custom-dashboard/select-panels-to-add.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/select-panels-to-add.png
    :align: center
 
 You will be able to see the visualization added to the
@@ -160,5 +160,5 @@ by clicking **Save.**
 
 Set its name, description and save it:
 
-.. image:: ../../../images/kibana-app/custom-dashboard/confirm-save-dashboard.png
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/confirm-save-dashboard.png
    :align: center
