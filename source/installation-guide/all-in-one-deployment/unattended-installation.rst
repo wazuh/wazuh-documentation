@@ -44,7 +44,10 @@ After the execution of the script, it will show the following messages to confir
 
   # Elasticsearch installation succeeded.
   # Filebeat installation succeeded.
-  # Waiting for Kibana...
+  # Initializing Kibana (this may take a while)
+  # ##################
+  # Installation finished
+
 
 Once Kibana is accessible, the script will quit.
 
