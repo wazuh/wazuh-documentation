@@ -692,7 +692,9 @@ ul.simple dl dt {
   font-weight: normal;
 }
 
-ul.simple dl dd {
+ul.simple dl dd,
+ol.simple dl dd,
+.simple li > p {
   margin-bottom: 0;
 }
 
@@ -715,6 +717,18 @@ blockquote dl {
 
 ol blockquote {
 	padding-left: 0;
+}
+
+li > blockquote:last-child,
+li > blockquote > div > ul,
+li > blockquote > div > ol,
+blockquote > div > ul > li > p,
+blockquote > div > ol > li > p {
+    margin-bottom: 0;
+}
+
+li > p {
+    margin-bottom: 0.5rem;
 }
 
 .footer-column:not(.white-bullets) ul {
@@ -754,10 +768,6 @@ ol ol, ol ul, ul ol, ul ul {
   padding-left: 1.1rem;
 }
 
-ul ul {
-  list-style-type: circle;
-}
-
 ol ul {
   list-style-type: disc;
 }
@@ -768,6 +778,10 @@ ol ol {
 
 ol.loweralpha {
   list-style-type: lower-latin;
+}
+
+ul ul {
+  list-style-type: circle;
 }
 
 li.toctree-l1 > a {
@@ -1850,7 +1864,8 @@ form [type=submit]:disabled {
   margin-bottom: 0;
 }
 
-.central-page-area main ul li {
+.central-page-area main ul li,
+.central-page-area main ol li {
   padding: 5px 0;
 }
 
