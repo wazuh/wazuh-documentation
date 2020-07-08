@@ -2252,7 +2252,11 @@ label {
 	border-radius: 4px 4px 0 0;
 }
 
-.admonition > p {
+.admonition > p,
+.admonition > .versionadded > p,
+.admonition > .versionchanged > p,
+.admonition > .deprecated > p,
+.admonition > .seealso > p {
   padding: 1rem;
   margin: 0;
 }
