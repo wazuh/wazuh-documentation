@@ -94,20 +94,24 @@ This thread is in charge of synchronizing master's integrity information among a
 
 1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment (i.e. overlapping).
 2. The worker sends the master a JSON file containing the following information:
+
     * Path
     * Modification time
     * MD5 checksum
     * Whether the file is a merged file or not. And if it's merged:
+    
         * The merge type (agent-groups or agent-info).
         * The filename
 
 3. The master compares the received checksums with its own and creates three different groups of files:
+
     * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
     * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-groups files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
-    Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
+   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
+
 4. Once the worker receives the package, it updates the necessary files and then it sends the master the required extra valid files.
 
 If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
