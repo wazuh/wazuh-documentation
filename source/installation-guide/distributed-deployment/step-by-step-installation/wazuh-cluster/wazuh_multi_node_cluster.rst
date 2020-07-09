@@ -217,4 +217,4 @@ An example response should look as follows:
 Next steps
 ----------
 
-The next step consists on :ref:`installing Kibana <kibana>`.
+The next step consists of :ref:`installing Kibana <kibana>`.

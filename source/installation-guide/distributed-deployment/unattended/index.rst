@@ -5,7 +5,7 @@
 Unattended installation
 =======================
 
-The unattended installation method consists on two scripts that will automatize the installation of all the components involved for both, the Wazuh cluster and the Elasticsearch cluster. The following components will be installed:
+The unattended installation method consists of two scripts that will automatize the installation of all the components involved for both, the Wazuh cluster and the Elasticsearch cluster. The following components will be installed:
 
 - **Elasticsearch cluster:** the script will install Open Distro for Elasticsearch. It can be chosen between a single-node or a multi-node installation. Additionally, the script given can install Open Distro for Kibana either on the same Elasticsearch node or on a different one. The installation of Open Distro for Kibana also includes the installation of the Wazuh Kibana plugin.
 
