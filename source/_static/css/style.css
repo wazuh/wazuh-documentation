@@ -721,13 +721,14 @@ ol blockquote {
 
 li > blockquote:last-child,
 li > blockquote > div > ul,
-li > blockquote > div > ol,
-blockquote > div > ul > li > p,
-blockquote > div > ol > li > p {
-    margin-bottom: 0;
+li > blockquote > div > ol {
+  margin-bottom: 0;
 }
 
-li > p {
+blockquote > div > ul > li > p,
+blockquote > div > ol > li > p,
+li > p,
+li li > div[class*='highlight'] {
     margin-bottom: 0.5rem;
 }
 
