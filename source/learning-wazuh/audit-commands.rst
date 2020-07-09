@@ -249,17 +249,17 @@ will use to give us special alerts when executed.
 
 5. Restart the Wazuh manager:
 
-  a. For Systemd:
+    a. For Systemd:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+    b. For SysV Init:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
 
 
@@ -272,7 +272,7 @@ will use to give us special alerts when executed.
         [root@linux-agent ~]# yum -y install tcpdump
         [root@linux-agent ~]# tcpdump --version
 
-6. Search Kibana for ``data.audit.command:tcpdump`` and expand the record,
+7. Search Kibana for ``data.audit.command:tcpdump`` and expand the record,
    where you should see a ``rule.id`` of 100200.
 
 
@@ -320,19 +320,19 @@ alarmed we should be about a given program being run.
 
 4. Restart the Wazuh manager:
 
-  a. For Systemd:
+   a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+   b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
-45 On the monitored linux agent install and run a "red" program (netcat):
+5. On the monitored linux agent install and run a "red" program (netcat):
 
     .. code-block:: console
 
@@ -369,17 +369,17 @@ such an exception.
 
 2. Restart the Wazuh manager:
 
-  a. For Systemd:
+   a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+   b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
 3. In you linux-agent, test the rule by pinging both 8.8.8.8 and 8.8.4.4.
 
@@ -446,13 +446,13 @@ When testing different things, it is recommendable that you reverse the changes 
 
 You would need to delete the line we wrote in the ``<ruleset>`` section of Wazuh manager's configuration, ``ossec.conf``:
 
-  .. code-block:: xml
+.. code-block:: xml
 
       <list>etc/lists/suspicious-programs</list>
 
 In the linux-agent, delete the two lines we added to ``/etc/audit/rules.d/audit.rules``:
 
-  .. code-block:: console
+.. code-block:: console
 
     -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
     -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
@@ -461,11 +461,11 @@ In the linux-agent, delete the two lines we added to ``/etc/audit/rules.d/audit.
 Now you would need to reload the auditd rules and restart the manager for changes to take effect:
 
 
-  .. code-block:: console
+.. code-block:: console
 
      [root@linux-agent centos]# auditctl -R /etc/audit/rules.d/audit.rules
 
 
-  .. code-block:: console
+.. code-block:: console
 
     [root@wazuh-manager centos]# systemctl restart wazuh-manager
