@@ -35,15 +35,15 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     a. For Systemd:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # systemctl stop filebeat
+        # systemctl stop filebeat
 
     b. For SysV Init:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # service filebeat stop
+        # service filebeat stop
 
 2. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
@@ -98,14 +98,13 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
           default: my-custom-alerts-3.x-
 
 
-Note
-
-Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,` and must not start with `_`, `-` or `+`. Also, all the letters must be lowercase. 
-
+    .. note::
+      Index name must not contain the characters ``#``, ``\``, ``/``, ``*``, ``?``, ``"``, ``<``, ``>``, ``|``, ``,`` and must not start with ``_``, ``-`` or ``+``. Also, all the letters must be lowercase.
 
 
 
-7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
+
+6. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
     .. code-block:: yaml
 
@@ -117,29 +116,29 @@ Index name must not contain the characters `#`, `\`, `/`, `*`, `?`, `"`, `<`, `>
 
     a. For Systemd:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # systemctl restart kibana
+        # systemctl restart kibana
 
     b. For SysV Init:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # service kibana restart
+        # service kibana restart
 
-8. Restart the Filebeat service:
+7. Restart the Filebeat service:
 
     a. For Systemd:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # systemctl restart filebeat
+        # systemctl restart filebeat
 
     b. For SysV Init:
 
-    .. code-block:: console
+       .. code-block:: console
 
-      # service filebeat restart
+        # service filebeat restart
 
 If the pattern is not present in Kibana UI, just create a new one using the same name used on the Elasticsearch template, and make sure to use ``@timestamp`` as the Time Filter field name.
 
