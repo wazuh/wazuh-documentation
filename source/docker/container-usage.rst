@@ -40,12 +40,12 @@ Access to containers and services
       docker-compose exec <service name> /bin/bash
 
 
-Where ``service name`` is the name of each service in the ``docker-compose.yml`` file. By default:
+    Where ``service name`` is the name of each service in the ``docker-compose.yml`` file. By default:
 
-- wazuh
-- elasticsearch
-- kibana
-- nginx
+    - wazuh
+    - elasticsearch
+    - kibana
+    - nginx
 
 Then access the Kibana UI through Nginx by hitting `https://localhost <http://localhost>`_ with a web browser if you are in the Docker host. By default, the username "foo" and the password "bar" are used.
 
