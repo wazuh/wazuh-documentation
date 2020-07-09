@@ -8,8 +8,8 @@ The script will perform a health-check verifying that the available system resou
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ will be used to generate the certificates for protecting data in the Elastic Stack.
 
-Installing the Wazuh
---------------------
+Installing Wazuh
+----------------
 
 .. note:: Root user privileges are required to run all the commands described below.
 
