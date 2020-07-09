@@ -405,7 +405,7 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.13.0",
+    "|WAZUH_LATEST|" : "3.13.1",
     "|WAZUH_LATEST_MINOR|" : "3.13",
     "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
     "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
