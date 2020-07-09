@@ -152,17 +152,17 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 
    2.1. We install openssh-server if we do not have it installed.
 
-      - CentOS/RHEL/Fedora
+        - CentOS/RHEL/Fedora
 
-        .. code-block:: console
+          .. code-block:: console
 
-        	  # yum install openssh-server
+          	  # yum install openssh-server
 
-      - Ubuntu/Debian
+        - Ubuntu/Debian
 
-        .. code-block:: console
+          .. code-block:: console
 
-        	  # apt-get install openssh-server
+          	  # apt-get install openssh-server
 
       Starting the service.
 
