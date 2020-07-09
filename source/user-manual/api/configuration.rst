@@ -69,7 +69,7 @@ Configuration endpoints
 
 The API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`Configuration file <api_configuration_file>`.
 
-The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the ``/security/config`` endpoint.
+The security configuration, which contains the ``auth_token_exp_timeout``, ``rbac_mode``, ``max_request_per_minute``, ``block_time`` and ``max_login_attempts`` settings, can only be queried and modified through the ``/security/config`` endpoint or after the first modification with the endpoint, through the security.yaml file.
 
 Get configuration
 ^^^^^^^^^^^^^^^^^
@@ -266,20 +266,20 @@ auth_token_exp_timeout
 +-----------------------+---------------+---------------------------------------------------------+
 
 rbac_mode
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Allowed values | Default value | Description                                                                                                                                                    |
 +================+===============+================================================================================================================================================================+
 | black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-max_n_attempts
-^^^^^^^^^^^^^
-+----------------------------+---------------+------------------------------------------------------------------------------------------------------------------------+
-| Allowed values             | Default value | Description                                                                                                            |
-+============================+===============+========================================================================================================================+
-| Any positive integer (>0). | 5             | Set how many failed access attempts are allowed during the time specified with ``block_time`` before blocking that IP. |
-+----------------------------+---------------+------------------------------------------------------------------------------------------------------------------------+
+max_login_attempts
+^^^^^^^^^^^^^^^^^^
++----------------------------+---------------+-----------------------------------------------------------------------------------------------------------------+
+| Allowed values             | Default value | Description                                                                                                     |
++============================+===============+=================================================================================================================+
+| Any positive integer (>0). | 5             | Set how many access attempts are allowed during the time specified with ``block_time`` before blocking that IP. |
++----------------------------+---------------+-----------------------------------------------------------------------------------------------------------------+
 
 block_time
 ^^^^^^^^^^
