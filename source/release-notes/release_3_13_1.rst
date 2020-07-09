@@ -15,7 +15,7 @@ This section lists the changes in version 3.13.1. More details about these chang
 Wazuh core
 ----------
 
-- Added the settings ``<max_retries>`` and ``<retry_interval>`` to adjust amount of connection retries and the agent failover interval.
+- Added the settings ``<max_retries>`` and ``<retry_interval>`` to adjust the amount of connection retries and the agent failover interval.
 
 Wazuh Kibana app
 ----------------
