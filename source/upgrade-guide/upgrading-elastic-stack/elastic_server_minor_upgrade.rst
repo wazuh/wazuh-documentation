@@ -17,24 +17,24 @@ Prepare the Elastic Stack
 
 #. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
-  * For CentOS/RHEL/Fedora:
+   * For CentOS/RHEL/Fedora:
 
-    .. code-block:: console
+     .. code-block:: console
 
       # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-  * For Debian/Ubuntu:
+   * For Debian/Ubuntu:
 
-    .. code-block:: console
+     .. code-block:: console
 
       # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
       # apt-get update
 
-  * For openSUSE:
+   * For openSUSE:
 
-    .. code-block:: console
+     .. code-block:: console
 
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo      
+      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
 
 Upgrade Elasticsearch
 ---------------------
@@ -213,17 +213,17 @@ Upgrade Kibana
 
     * From URL:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+        # cd /usr/share/kibana/
+        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
     * From the package:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # cd /usr/share/kibana/
-      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+        # cd /usr/share/kibana/
+        # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 #. Update configuration file permissions.
 
