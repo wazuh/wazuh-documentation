@@ -25,7 +25,7 @@ Wazuh Kibana app
 Wazuh API
 ---------
 
-- New validator added to the endpoint ``/sca/:agent_id/checks/:policy_id`` that allows to use filter the SCA checks by ``reason``, ``status`` and ``command``.
+- New validator added to the endpoint ``/sca/:agent_id/checks/:policy_id`` that allows using filter the SCA checks by ``reason``, ``status``, and ``command``.
 
 Wazuh Splunk
 ------------
