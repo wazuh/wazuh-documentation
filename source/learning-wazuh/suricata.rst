@@ -238,6 +238,7 @@ See Suricata NIDS events in Kibana
 1. On each Linux agent, rerun the NIDS-tripping curl command again: ``curl http://testmyids.com``
 
 2. Search Kibana for ``rule.id:86601``.  That is the rule that notices Suricata alerts.  Pick these fields for readability:
+
     - agent.name
     - data.alert.signature
     - data.proto
