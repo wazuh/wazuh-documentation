@@ -23,8 +23,8 @@ Open Distro for Elasticsearch requires the Java Development Kit and other packag
 
 .. _all_in_one_wazuh:
 
-Installing the Wazuh server
----------------------------
+Installing Wazuh
+----------------
 
 The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager and the Wazuh API. The first step to set up Wazuh is to add the Wazuh repository to the server.
 
