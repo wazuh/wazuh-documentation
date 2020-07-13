@@ -258,7 +258,19 @@ After the installation of Elasticsearch, some steps must be done manually. Choot
 
     Once Elasticsearch has been installed, the certificates must be placed on their corresponding server. If the installation was run using the option ``-c``, the Elasticsearch service will be automatically started. On the other hand, the rest of the nodes where the certificates were not created, will not start the service since they need their corresponding certificates to start:
 
-    .. include:: ../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
+    Copy the  ``certs.tar`` file into each Elasticsearch node, except the master node, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+
+    The ``X`` must be replaced with the number used in the certificate name defined for the corresponding Elasticsearch server:
+
+    .. code-block:: console
+
+      # mv ~/certs.tar /etc/elasticsearch/certs/
+      # cd /etc/elasticsearch/certs/
+      # tar -xf certs.tar node-X.pem node-X.key node-X_http.pem node-X_http.key root-ca.pem
+      # mv /etc/elasticsearch/certs/node-X.pem /etc/elasticsearch/certs/elasticsearch.pem
+      # mv /etc/elasticsearch/certs/node-X.key /etc/elasticsearch/certs/elasticsearch.key
+      # mv /etc/elasticsearch/certs/node-X_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
+      # mv /etc/elasticsearch/certs/node-X_http.key /etc/elasticsearch/certs/elasticsearch_http.key
 
     When the certificates have been copied, the Elasticsearch service can be started:
 
@@ -282,12 +294,11 @@ Once the script finishes, Kibana will be ready to use if it was installed on the
 
 #. Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # mv ~/certs.tar /etc/kibana/certs/
-    # cd /etc/kibana/certs/
-    # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
-    
+      # mv ~/certs.tar /etc/kibana/certs/
+      # cd /etc/kibana/certs/
+      # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
 
 #. Enable and start the Kibana service:
 
