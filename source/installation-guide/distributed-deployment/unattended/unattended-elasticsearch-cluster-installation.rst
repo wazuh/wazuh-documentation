@@ -95,7 +95,7 @@ Download the script and the configuration file. After downloading them, configur
         ## Wazuh master configuration
         url: https://<wazuh_master_server_IP>
 
-      The higlighted lines indicates the values that must be replaced. These values are: 
+      The highlighted lines indicates the values that must be replaced. These values are: 
 
         - ``<elasticsearch_ip>``: Elasticsearch IP.
         - ``<kibana_ip>``: Kibana server IP.
@@ -133,7 +133,7 @@ Download the script and the configuration file. After downloading them, configur
 
   .. group-tab:: Multi-node
 
-    **Download de script and the configuration file config.yml**
+    **Download the script and the configuration file config.yml**
 
       .. code-block:: console
 
@@ -197,7 +197,7 @@ Download the script and the configuration file. After downloading them, configur
         ## Wazuh master configuration
         url: https://<wazuh_master_server_IP>   
 
-      The higlighted lines indicates the values that must be replaced. These values are: 
+      The highlighted lines indicates the values that must be replaced. These values are: 
 
         - ``<elasticsearch_ip>``: Elasticsearch IP.
         - ``<node_name>``: Name of the node
@@ -209,7 +209,7 @@ Download the script and the configuration file. After downloading them, configur
 
       There can be added as many Elasticsearch nodes as needed. To generate certificates for them, the ``opendistro_security.nodes_dn`` must be also updated, adding the information of these new certificates. There must be the same number of certificates rows as nodes will be on the installation.
 
-      In case of having more than one Wazuh server, there can be added as much nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      In case of having more than one Wazuh server, there can be added as many nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
 
         .. code-block:: yaml
 
@@ -224,7 +224,7 @@ Download the script and the configuration file. After downloading them, configur
 
         # bash ~/elastic-stack-installation.sh -e -c
 
-      The flag ``-c`` can be added to generate the certificates. This must be done in only one of the ndoes of Elasticsearch.
+      The flag ``-c`` can be added to generate the certificates. This must be done in only one of the nodes of Elasticsearch.
 
       - To install Kibana, run the script with the option ``-k``:
 
@@ -243,7 +243,7 @@ Download the script and the configuration file. After downloading them, configur
 Configure Elasticsearch
 -----------------------
 
-After the installation of Elasticsearch, some steps must be done manually. Choothe the corresponding tab depending on the type of installation:
+After the installation of Elasticsearch, some steps must be done manually. Choose the corresponding tab depending on the type of installation:
 
 .. tabs::
 
@@ -251,7 +251,7 @@ After the installation of Elasticsearch, some steps must be done manually. Choot
 
     Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``/etc/elasticsearch/certs/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
 
-    In case that Kibana were installed in a different server, the certs.tr file should be also copied into its server to extract the :ref:`corresponding certificates <configure_kibana_unattended>`.
+    In case that Kibana was installed in a different server, the certs.tr file should be also copied into its server to extract the :ref:`corresponding certificates <configure_kibana_unattended>`.
 
 
   .. group-tab:: Multi-node
@@ -290,7 +290,7 @@ After the installation of Elasticsearch, some steps must be done manually. Choot
 Configure Kibana
 ----------------
 
-Once the script finishes, Kibana will be ready to use if it was installed on the same server as Elasticsearch. In case of having installed Kibana **on a different server** the following steps must be done:
+Once the script finishes, Kibana will be ready to use it if it was installed on the same server as Elasticsearch. In case of having installed Kibana **on a different server** the following steps must be done:
 
 #. Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
