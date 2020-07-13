@@ -51,7 +51,7 @@ Download the script and the configuration file. After downloading them, configur
 
   .. group-tab:: Single-node
 
-    **Download de script and the configuration file config.yml**
+    **Download the script and the configuration file config.yml**
 
       .. code-block:: console
 
