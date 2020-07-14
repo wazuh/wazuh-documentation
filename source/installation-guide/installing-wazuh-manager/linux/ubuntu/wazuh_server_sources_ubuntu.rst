@@ -14,7 +14,7 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool lsb-release
 
     1.1 **Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
