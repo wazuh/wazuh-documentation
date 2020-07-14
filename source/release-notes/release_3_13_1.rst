@@ -16,11 +16,12 @@ Wazuh core
 ----------
 
 - Added the settings ``<max_retries>`` and ``<retry_interval>`` to adjust the amount of connection retries and the agent failover interval.
+- Fixed ``Modulesd`` crash caused by Vulnerability Detector when OS inventory is disabled for the agent.
 
 Wazuh Kibana app
 ----------------
 
-- Support for Wazuh v3.13.1
+- Support for Wazuh v3.13.1.
 
 Wazuh API
 ---------
@@ -30,5 +31,7 @@ Wazuh API
 Wazuh Splunk
 ------------
 
-- Support for Wazuh v3.13.1
-- Support for Splunk v8.0.4
+- Support for Wazuh v3.13.1.
+- Support for Splunk v8.0.4.
+- Updated references of the field ``vulnerability.reference`` to ``vulnerability.references``.
+- Fixed ``wazuh-monitoring`` indices on Splunk 8.0+ version.
