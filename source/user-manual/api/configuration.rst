@@ -64,12 +64,26 @@ Make sure to restart wazuh-api service after editing the configuration file:
 
     # service wazuh-api restart
 
+Security configuration
+----------------------
+Unlike the other API settings that can be changed in the :ref:`configuration file <api_configuration_file>`, the API security settings are only intended to be modified through an API endpoint (``/security/config``). For more information on each of the settings, please check the :ref:`Security configuration options <api_security_configuration_options>`.
+
+.. code-block:: yaml
+
+    auth_token_exp_timeout: 36000
+    rbac_mode: white
+    max_login_attempts: 5
+    block_time: 300
+    max_request_per_minute: 300
+
+It is not needed to restart the Wazuh API for these changes to take effect. However, for some of them it may be required to request a new JWT token.
+
 Configuration endpoints
 -----------------------
 
 The API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`Configuration file <api_configuration_file>`.
 
-The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the ``/security/config`` endpoint.
+The security configuration can only be queried and modified through the ``/security/config`` endpoint.
 
 Get configuration
 ^^^^^^^^^^^^^^^^^
@@ -250,6 +264,8 @@ cache
 | time       | Any positive integer or real number. | 0.75          | Time in seconds that the cache lasts before expiring.                                       |
 +------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------+
 
+.. _api_security_configuration_options:
+
 Security configuration options
 ------------------------------
 
@@ -268,3 +284,27 @@ rbac_mode
 +================+===============+================================================================================================================================================================+
 | black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+max_login_attempts
+^^^^^^^^^^^^^^^^^^^^^^
++----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values       | Default value | Description                                                                                                                                                    |
++======================+===============+================================================================================================================================================================+
+| Any positive integer.| 5             | Sets a maximum limit for login attempts during a specified ``block_time``.                                                                                     |
++----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+block_time
+^^^^^^^^^^^^^^^^^^^^^^
++----------------------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values       | Default value | Description                                                                                                                                                                                                            |
++======================+===============+========================================================================================================================================================================================================================+
+| Any positive integer.| 300           | Established period of time (in seconds) for doing login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time.|
++----------------------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+max_request_per_minute
+^^^^^^^^^^^^^^^^^^^^^^
++----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values       | Default value | Description                                                                                                                                                    |
++======================+===============+================================================================================================================================================================+
+| Any positive integer.| 300           | Establishes a maximum limit of requests per minute (does not include requests to obtain a token).                                                              |
++----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
