@@ -51,7 +51,7 @@ You can also find a set of default roles and policies, which you can use instead
     - `Cluster`_
         - `cluster:delete_file`_
         - `cluster:read_api_config`_
-        - `cluster:read_config`_
+        - `cluster:read`_
         - `cluster:read_file`_
         - `cluster:restart`_
         - `cluster:status`_
@@ -74,7 +74,7 @@ You can also find a set of default roles and policies, which you can use instead
     - `Manager`_
         - `manager:delete_file`_
         - `manager:read_api_config`_
-        - `manager:read_config`_
+        - `manager:read`_
         - `manager:read_file`_
         - `manager:restart`_
         - `manager:update_api_config`_
@@ -319,8 +319,9 @@ cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /cluster/api/config (`node:id`_)
 
-cluster:read_config
+cluster:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- PUT /agents/node/{node_id}/restart (`node:id`_)
 - GET /cluster/configuration/validation (`node:id`_)
 - GET /cluster/healthcheck (`node:id`_)
 - GET /cluster/local/config (`node:id`_)
@@ -328,6 +329,9 @@ cluster:read_config
 - GET /cluster/nodes (`node:id`_)
 - GET /cluster/{node_id}/configuration (`node:id`_)
 - GET /cluster/{node_id}/configuration/{component}/{configuration} (`node:id`_)
+- GET /cluster/{node_id}/files (`node:id`_)
+- PUT /cluster/{node_id}/files (`node:id`_)
+- DELETE /cluster/{node_id}/files (`node:id`_)
 - GET /cluster/{node_id}/info (`node:id`_)
 - GET /cluster/{node_id}/logs (`node:id`_)
 - GET /cluster/{node_id}/logs/summary (`node:id`_)
@@ -337,12 +341,11 @@ cluster:read_config
 - GET /cluster/{node_id}/stats/remoted (`node:id`_)
 - GET /cluster/{node_id}/stats/weekly (`node:id`_)
 - GET /cluster/{node_id}/status (`node:id`_)
-
+- PUT /cluster/restart (`node:id`_)
 
 cluster:read_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /cluster/{node_id}/files (`node:id:<node>&file:path:<file_path>`)
-- PUT /agents/node/{node_id}/restart (`node:id`_)
 
 cluster:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -424,11 +427,14 @@ manager:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /manager/api/config (`*:*`_)
 
-manager:read_config
+manager:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /manager/configuration (`*:*`_)
 - GET /manager/configuration/validation (`*:*`_)
 - GET /manager/configuration/{component}/{configuration} (`*:*`_)
+- GET /manager/files (`*:*`_)
+- PUT /manager/files (`*:*`_)
+- DELETE /manager/files (`*:*`_)
 - GET /manager/info (`*:*`_)
 - GET /manager/logs (`*:*`_)
 - GET /manager/logs/summary (`*:*`_)
@@ -438,6 +444,7 @@ manager:read_config
 - GET /manager/stats/remoted (`*:*`_)
 - GET /manager/stats/weekly (`*:*`_)
 - GET /manager/status (`*:*`_)
+- PUT /manager/restart (`*:*`_)
 
 manager:read_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -643,7 +650,7 @@ cluster_all
 Provide full access to all cluster/manager related functionalities.
 
 Actions
-    - `cluster:read_config`_
+    - `cluster:read`_
     - `cluster:read_api_config`_
     - `cluster:update_api_config`_
     - `cluster:restart`_
@@ -651,7 +658,7 @@ Actions
     - `cluster:read_file`_
     - `cluster:upload_file`_
     - `cluster:delete_file`_
-    - `manager:read_config`_
+    - `manager:read`_
     - `manager:read_api_config`_
     - `manager:update_api_config`_
     - `manager:delete_file`_
@@ -677,11 +684,11 @@ cluster_read
 Provide read access to all cluster/manager related functionalities.
 
 Actions
-    - `cluster:read_config`_
+    - `cluster:read`_
     - `cluster:read_api_config`_
     - `cluster:status`_
     - `cluster:read_file`_
-    - `manager:read_config`_
+    - `manager:read`_
     - `manager:read_api_config`_
     - `manager:read_file`_
 
