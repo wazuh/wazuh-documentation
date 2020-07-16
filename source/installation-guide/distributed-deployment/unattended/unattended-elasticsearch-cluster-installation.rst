@@ -290,19 +290,57 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
 Configure Kibana
 ----------------
 
-Once the script finishes, Kibana will be ready to use it if it was installed on the same server as Elasticsearch. In case of having installed Kibana **on a different server** the following steps must be done:
+When the script finishes, some steps must be done manually to finish the installation. Choose the corresponding tab depending on the type of installation:
 
-#. Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+.. tabs::
 
-    .. code-block:: console
 
-      # mv ~/certs.tar /etc/kibana/certs/
-      # cd /etc/kibana/certs/
-      # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
+  .. group-tab:: Elasticsearch single-node
 
-#. Enable and start the Kibana service:
+    If Kibana was installed on the same server as Elasticsearch, it will be ready to use once the script finishes. On the other hand, if Kibana was installed on a different host, some steps must be done manually to finish the installation:
 
-  .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+    #. Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+
+        .. code-block:: console
+
+          # mv ~/certs.tar /etc/kibana/certs/
+          # cd /etc/kibana/certs/
+          # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
+
+    #. Enable and start the Kibana service:
+
+      .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+
+
+
+  .. group-tab:: Elasticsearch multi-node
+
+    To finish Kibana's installation, some steps must be done manually. These steps will vary on whether the installation was made on the same server as Elasticsearch or in a different server:
+
+    **Kibana installaed on the same server as Elasticsearch**
+
+      - Copy Kibana's certificates into ``/etc/kibana/certs/`` directory:
+
+      .. code-block:: console
+
+        # mkdir /etc/kibana/certs/
+        # cp /etc/elasticsearch/certs/elasticsearch.pem /etc/kibana/certs/kibana.pem
+        # cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key
+
+    **Kibana installed on a different server from Elasticsearch**
+
+      - Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+
+          .. code-block:: console
+
+            # mv ~/certs.tar /etc/kibana/certs/
+            # cd /etc/kibana/certs/
+            # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
+
+    Once the certificates have been palced, Kibana can be started:
+
+      .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+          
 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
 
