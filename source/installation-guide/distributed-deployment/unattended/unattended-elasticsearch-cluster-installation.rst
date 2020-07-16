@@ -317,7 +317,7 @@ When the script finishes, some steps must be done manually to finish the install
 
     To finish Kibana's installation, some steps must be done manually. These steps will vary on whether the installation was made on the same server as Elasticsearch or in a different server:
 
-    **Kibana installaed on the same server as Elasticsearch**
+    **Kibana installed on the same server as Elasticsearch**
 
       - Copy Kibana's certificates into ``/etc/kibana/certs/`` directory:
 
