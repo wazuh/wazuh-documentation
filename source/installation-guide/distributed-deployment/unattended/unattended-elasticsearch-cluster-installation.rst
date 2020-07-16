@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure a proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section.
+This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section.
 
 Run the script
 --------------
