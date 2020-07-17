@@ -10,6 +10,14 @@
 
     .. code-block:: console
 
-      # echo -e '[wazuh_trash]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/trash/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh_pre.repo
-
+      # cat > /etc/yum.repos.d/elastic.repo << EOF
+      [wazuh_trash]
+      gpgcheck=1
+      gpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=EL-$releasever - Wazuh
+      baseurl=https://packages-dev.wazuh.com/trash/yum/
+      protect=1' | tee /etc/yum.repos.d/wazuh_pre.repo
+      EOF 
+      
 .. End of include file
