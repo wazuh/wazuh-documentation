@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section.
+This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section. This script uses the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificate, but any tool can be used to create them.
 
 Run the script
 --------------
@@ -256,7 +256,7 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
 
   .. group-tab:: Multi-node
 
-    Once Elasticsearch has been installed, the certificates must be placed on their corresponding server. If the installation was run using the option ``-c``, the Elasticsearch service will be automatically started. On the other hand, the rest of the nodes where the certificates were not created, will not start the service since they need their corresponding certificates to start. This script uses the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificate, but any tool can be used to create them.
+    Once Elasticsearch has been installed, the certificates must be placed on their corresponding server. If the installation was run using the option ``-c``, the Elasticsearch service will be automatically started. On the other hand, the rest of the nodes where the certificates were not created, will not start the service since they need their corresponding certificates to start.
 
     Copy the  ``certs.tar`` file into each Elasticsearch node, except the master node, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
 
