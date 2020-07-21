@@ -44,7 +44,7 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
 
 #. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
 
-    You can change the default password using the Wazuh API. To do this, you need to do a request to the following Wazuh API endpoint: ``PUT ​/security​/users​/{username}``
+    You can change the default password using the Wazuh API. To do this, you need to do a request to the following :ref:`Wazuh API endpoint <api_reference>`: ``PUT ​/security​/users​/{username}``
 
     .. note::
       The password for users must have a minimum length of 8 characters and also use at least one uppercase and lowercase letter, a number and a symbol.
