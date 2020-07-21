@@ -12,7 +12,7 @@ By default, the API will bind to port 55000/tcp and use self-signed certificates
 Configuration file
 ------------------
 
-The API configuration can be found inside ``/var/ossec/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>`.
+The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>`.
 
 .. code-block:: yaml
 
@@ -48,7 +48,7 @@ The API configuration can be found inside ``/var/ossec/api/configuration/api.yam
 
 .. warning::
 
-    The master doesn’t send its local API configuration file to the workers. If the configuration file is changed in the master node, it should be updated manually in the workers. Take care of not overwriting the IP and port in the local configuration of each worker.
+    If running a cluster, the master doesn’t send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, it should be updated manually in the workers if so desired. Take care of not overwriting the IP and port in the local configuration of each worker.
 
 Make sure to restart wazuh-api service after editing the configuration file:
 
