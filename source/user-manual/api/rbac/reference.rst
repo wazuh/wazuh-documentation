@@ -291,7 +291,7 @@ agent:restart
 - PUT /agents/restart (`agent:id`_)
 - PUT /agents/node/{node_id}/restart (`agent:id`_)
 - PUT /agents/{agent_id}/restart (`agent:id`_)
-- PUT /groups/{group_id}/restart (`agent:id`_)
+- PUT /agents/group/{group_id}/restart (`agent:id`_)
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
