@@ -274,7 +274,7 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
 
     When the certificates have been copied, the Elasticsearch service can be started:
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
     Once all the nodes on the cluster have been started, run the ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
@@ -309,7 +309,7 @@ When the script finishes, some steps must be done manually to finish the install
 
     #. Enable and start the Kibana service:
 
-      .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+      .. include:: ../../../../_templates/installations/elastic/common/enable_kibana.rst           
 
 
 
@@ -339,7 +339,7 @@ When the script finishes, some steps must be done manually to finish the install
 
     Once the certificates have been palced, Kibana can be started:
 
-      .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst           
+      .. include:: ../../../../_templates/installations/elastic/common/enable_kibana.rst           
           
 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.

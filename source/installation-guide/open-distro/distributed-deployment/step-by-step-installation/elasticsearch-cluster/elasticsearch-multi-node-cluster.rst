@@ -25,7 +25,7 @@ Prerequisites
 
 [*All*] Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
 
-.. include:: ../../../../_templates/installations/elastic/common/before_installation.rst
+.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,14 +38,14 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -54,40 +54,40 @@ Elasticsearch installation
 
 [*All*] Install Open Distro for Elasticsearch:
 
-.. include:: ../../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../../../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [*All*] Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-.. include:: ../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
+.. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch.rst
 
 Elasticsearch roles and users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [*Master*] In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
 
-.. include:: ../../../../_templates/installations/elastic/common/add_roles_and_users.rst
+.. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. [*All*] Remove the demo certificates:
 
-    .. include:: ../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
 #. [*Master*] Generate and deploy the certificates:
 
-    .. include:: ../../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
+    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
 #. [*All except Master*] Configure Elasticsearch certificates:
 
-    .. include:: ../../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
+    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
 #. [*All*] Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 #. [*Master*] Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 

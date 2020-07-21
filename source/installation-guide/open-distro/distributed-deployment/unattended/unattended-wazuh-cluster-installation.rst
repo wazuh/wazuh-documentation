@@ -81,7 +81,7 @@ After the installation of all the components of the node, some steps must be don
   .. group-tab:: Single-node
 
 
-    .. include:: ../../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
+    .. include:: ../../../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
 
 
 
@@ -92,35 +92,35 @@ After the installation of all the components of the node, some steps must be don
 
     **Master node:**
 
-    #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+    #. .. include:: ../../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 
     #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
-    .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+    .. include:: ../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
 
     **Worker node:**
 
-    #. .. include:: ../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+    #. .. include:: ../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
 
     #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
-        .. include:: ../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+        .. include:: ../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
-    #. .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
+    #. .. include:: ../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
     **Certificates deployment**
     
-    .. include:: ../../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
+    .. include:: ../../../../_templates/installations/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
 
 
 
 Enable and start the Filebeat service:
 
-.. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
+.. include:: ../../../../_templates/installations/elastic/common/enable_filebeat.rst
 
 To ensure that Filebeat has been successfully installed, run the following command:
 
