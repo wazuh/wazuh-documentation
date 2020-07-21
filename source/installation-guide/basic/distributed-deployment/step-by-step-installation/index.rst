@@ -1,0 +1,31 @@
+.. Copyright (C) 2020 Wazuh, Inc.
+
+Step-by-step installation
+=========================
+
+The following sections provide information about how to install each involved component. During the Open Distro for Elasticsearch cluster installation, the certificates necessary to securitize the communication will be created, so it is recommended to start by installing Open Distro for Elasticsearch.
+
+Every component described below can be installed in a dedicated host, except Open Distro for Kibana, that can be installed either in a dedicated host or along with Open Distro for Elasticsearch.
+
+- **Elasticsearch cluster**
+    
+    - :ref:`Elasticsearch single-node cluster <basic_elasticsearch_single_node_cluster>`
+    - :ref:`Elasticsearch multi-node cluster <basic_elasticsearch_multi_node_cluster>`
+
+- **Wazuh cluster**
+
+    - :ref:`Wazuh single-node cluster <basic_wazuh_single_node_cluster>`
+    - :ref:`Wazuh multi-node cluster <basic_wazuh_multi_node_cluster>`
+
+- **Kibana**
+
+    - :ref:`Kibana installation <basic_kibana>`
+
+
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+
+    elasticsearch-cluster/index
+    wazuh-cluster/index
+    kibana/index

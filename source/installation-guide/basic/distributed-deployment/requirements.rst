@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _all_in_one_requirements:
+.. _basic_distributed_requirements:
 
 Requirements
 ============
