@@ -4,7 +4,7 @@ Once Elasticsearch is installed it can be configured by downloading and editing 
 
 .. code-block:: console
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/elasticsearch/7.x/elasticsearch.yml
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/elasticsearch/elasticsearch.yml
 
 The first three lines in the ``/etc/elasticsearch/elasticsearch.yml`` file must be edited:
 
