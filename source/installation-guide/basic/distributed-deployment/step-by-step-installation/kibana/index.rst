@@ -104,7 +104,7 @@ Kibana installation and configuration
 
     .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.11.4_7.6.0.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.13.1_7.8.0.zip
 
 #. Enable and start the Kibana service:
 

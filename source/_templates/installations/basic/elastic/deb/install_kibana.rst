@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install kibana=7.6.0
+  # apt-get install kibana=7.8.0
 
 .. End of include file
