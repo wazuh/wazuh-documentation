@@ -45,14 +45,14 @@ Upgrade Wazuh manager
 
     .. code-block:: console
 
-      # yum install wazuh-manager
+      # yum install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|
 
   b) Upgrade the Wazuh manager on Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install wazuh-manager
+      # apt-get install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
 4. Upgrade the API.
 
@@ -60,13 +60,13 @@ Upgrade Wazuh manager
 
     .. code-block:: console
 
-      # yum install wazuh-api
+      # yum install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_API_X86|
 
   b) Upgrade the Wazuh API on Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install wazuh-api
+      # apt-get install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_API_X86|
 
 Upgrade Wazuh agent
 -------------------
@@ -105,14 +105,14 @@ Upgrade Wazuh agent
 
     .. code-block:: console
 
-      # yum install wazuh-agent
+      # yum install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
 
   b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install wazuh-agent
+      # apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
   c) For Windows:
 

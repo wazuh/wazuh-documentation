@@ -47,41 +47,41 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+          WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 * Registration with password and assigning a group:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_GROUP="my-group" apt-get install wazuh-agent
+          WAZUH_AGENT_GROUP="my-group" apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 * Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-          WAZUH_REGISTRATION_CA="rootCA.pem" apt-get install wazuh-agent
+          WAZUH_REGISTRATION_CA="rootCA.pem" apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 * Registration with protocol:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-          WAZUH_PROTOCOL="tcp" apt-get install wazuh-agent
+          WAZUH_PROTOCOL="tcp" apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 * Registration and adding multiple addresses:
 
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-          WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+          WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
 .. code-block:: console
 
      # WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
-          WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
+          WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 .. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`Registration Service with host verification - Agent verification with host validation <host-verification-registration>` section.
