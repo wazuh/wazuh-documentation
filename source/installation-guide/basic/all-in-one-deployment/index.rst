@@ -13,7 +13,7 @@ The following components will be installed:
 
 - Elastic Stack, including Elasticsearch as a single-node cluster, Filebeat, and Kibana including the Wazuh Kibana plugin.
 
-The communication will be encrypted using SSL certificates. The guide will refer to the section explaining how to secure communication between the Wazuh API and the Wazuh Kibana plugin.
+The communication will be encrypted using certificates. The guide will refer to the section explaining how to secure communication between the Wazuh API and the Wazuh Kibana plugin.
 
 To allow the installation process and guarantee the expected performance of the Wazuh components the host must meet the hardware requirements described in the :ref:`requirements <basic_all_in_one_requirements>` section.
 
