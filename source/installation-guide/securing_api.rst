@@ -81,14 +81,14 @@ By default, the communication between the Wazuh Kibana plugin and the Wazuh API 
 
 #. Set maximum number of requests per minute:
 
-    In order to avoid overloading the API, it is possible to establish a maximum number of requests that it can handle per minute. Once exceeded, all other requests (from any user) will be rejected.
+    In order to avoid overloading the API, it is possible to use rate limiting and to establish a maximum number of requests that the API can handle per minute. Once exceeded, all other requests (from any user) will be rejected.
 
     The default number of requests per minute is *300*. To change it, modify the ``max_request_per_minute`` setting by doing a request to the following Wazuh API endpoint: ``PUT ​/security​/config``. There is no need to restart the Wazuh API service for these changes to take effect.
 
-#. Set maximum number login attempts:
+#. Set maximum number of login attempts:
 
-    To avoid brute force attacks, as in the previous point, it is possible to set the number of times that a login attempt can occur from the same IP during a certain period of time. Once said number is exceeded, the IP is blocked during that period of time.
+    To avoid brute force attacks, it is possible to set the number of times that a login attempt can occur from the same IP during a certain period of time. Once said number is exceeded, the IP is blocked for that period of time.
 
-    The default number of login attempts allowed is *5* for each period of time, which by default is *300* seconds. To change those values, modify the ``max_login_attempts`` or the ``block_time`` settings in the following Wazuh API endpoint: ``PUT ​/security​/config``. There is no need to restart the Wazuh API service for these changes to take effect.
+    The default number of login attempts allowed is *5* for each period of time, which by default is *300* seconds. To change those values, modify the ``max_login_attempts`` and/or the ``block_time`` settings using the following Wazuh API endpoint: ``PUT ​/security​/config``. There is no need to restart the Wazuh API service for these changes to take effect.
 
 You can check a complete API configuration guide :doc:`here <../user-manual/api/configuration>`.
