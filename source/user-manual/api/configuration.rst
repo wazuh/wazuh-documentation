@@ -46,6 +46,11 @@ The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.y
         enabled: yes
         time: 0.750
 
+     access:
+        max_login_attempts: 5
+        block_time: 300
+        max_request_per_minute: 300
+
 .. warning::
 
     If running a cluster, the master doesn’t send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, it should be updated manually in the workers if so desired. Take care of not overwriting the IP and port in the local configuration of each worker.
@@ -72,9 +77,6 @@ Unlike regular API configuration settings that can be changed in the :ref:`confi
 
     auth_token_exp_timeout: 36000
     rbac_mode: white
-    max_login_attempts: 5
-    block_time: 300
-    max_request_per_minute: 300
 
 It is not needed to restart the Wazuh API for these changes to take effect. However, for some of them it may be required to request a new JWT token.
 
@@ -83,7 +85,7 @@ Configuration endpoints
 
 The API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`Configuration file <api_configuration_file>`.
 
-The security configuration can only be queried and modified through the ``/security/config`` endpoint.
+The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the ``/security/config`` endpoint.
 
 Get configuration
 ^^^^^^^^^^^^^^^^^
@@ -264,6 +266,18 @@ cache
 | time       | Any positive integer or real number. | 0.75          | Time in seconds that the cache lasts before expiring.                                       |
 +------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------+
 
+access
+^^^^^^^
++------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                       |
++========================+======================+===============+===================================================================================================================================================================================================================================+
+| max_login_attempts     | Any positive integer | 5             | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                       |
++------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period.   |
++------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| max_request_per_minute | Any positive integer | 300           | Establish a maximum number of requests the API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. |
++------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 .. _api_security_configuration_options:
 
 Security configuration options
@@ -284,27 +298,3 @@ rbac_mode
 +================+===============+================================================================================================================================================================+
 | black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-max_login_attempts
-^^^^^^^^^^^^^^^^^^^^^^
-+----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values       | Default value | Description                                                                                                                                                    |
-+======================+===============+================================================================================================================================================================+
-| Any positive integer | 5             | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                    |
-+----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-block_time
-^^^^^^^^^^^^^^^^^^^^^^
-+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values       | Default value | Description                                                                                                                                                                                                                     |
-+======================+===============+=================================================================================================================================================================================================================================+
-| Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period. |
-+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-max_request_per_minute
-^^^^^^^^^^^^^^^^^^^^^^
-+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values       | Default value | Description                                                                                                                                                                                                                       |
-+======================+===============+===================================================================================================================================================================================================================================+
-| Any positive integer | 300           | Establish a maximum number of requests the API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. |
-+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
