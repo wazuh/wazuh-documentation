@@ -73,7 +73,7 @@ Elasticsearch installation and configuration
         .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
-#. .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
+#. .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch_aio.rst
 
 
 Certificates creation and deployment
