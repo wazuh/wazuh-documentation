@@ -6,34 +6,40 @@
 
 Step-by-step installation
 =========================
-This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration.
+This document guides through an installation of the Wazuh server and Elastic stack components in an all-in-one configuration. All the available packages can be checked :ref:`here <packages>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
+
+Prerequisites
+-------------
+Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
+
+.. include:: ../../../_templates/installations/basic/before_installation_all_in_one.rst
 
 .. _basic_all_in_one_elastic:
 
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. 
+
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../_templates/installations/basic/elastic/yum/add_repository.rst
+
+
 
   .. group-tab:: APT
 
 
     .. include:: ../../../_templates/installations/basic/elastic/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
@@ -44,8 +50,6 @@ Adding the Elastic Stack repository
 
 
 
-
-
 Elasticsearch installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -53,17 +57,17 @@ Elasticsearch installation and configuration
 
     .. tabs::
 
-      .. group-tab:: APT
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
-
-
-
       .. group-tab:: Yum
 
 
         .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
+
+
+
+      .. group-tab:: APT
+
+
+        .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
 
 
@@ -79,44 +83,38 @@ Elasticsearch installation and configuration
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The specification file ``/usr/share/elasticsearch/instances.yml`` can be created as follows:
+#. Download the configuration file for creating the certificates:
 
-    .. code-block:: yaml
+    .. code-block:: console
 
-      cat > /usr/share/elasticsearch/instances.yml <<\EOF
-      instances:
-      - name: "elasticsearch"
-        ip:
-        - "10.0.0.2"
-      EOF
-
-    Replace the ``10.0.0.2`` with the host's IP.
-
+        # curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/instances_aio.yml
+    
+    
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+#. The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
 
     .. code-block:: console
 
-      # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
+        # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
-    Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used to extract the file:
-
-    .. code-block:: console
-
-      # unzip ~/certs.zip -d ~/certs
-
-    The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
+#. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used to extract the file:
 
     .. code-block:: console
 
-      # mkdir /etc/elasticsearch/certs/ca -p
-      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
-      # chown -R elasticsearch: /etc/elasticsearch/certs
-      # chmod -R 500 /etc/elasticsearch/certs
-      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-      # rm -rf ~/certs/ ~/certs.zip
+        # unzip ~/certs.zip -d ~/certs
 
+#. The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
+
+    .. code-block:: console
+
+        # mkdir /etc/elasticsearch/certs/ca -p
+        # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
+        # chown -R elasticsearch: /etc/elasticsearch/certs
+        # chmod -R 500 /etc/elasticsearch/certs
+        # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
+        # rm -rf ~/certs/ ~/certs.zip
+   
 #. Enable and start the Elasticsearch service:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
@@ -125,61 +123,34 @@ Certificates creation and deployment
 
     .. include:: ../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
-Kibana installation and configuration
--------------------------------------
+To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` by the password on the previous step for ``elastic`` user:
 
-#. Install the Kibana package:
+.. code-block:: console
+  
+  # curl -XGET https://localhost:9200 -uelastic:<elastic_password> -k
 
-    .. tabs::
+This command should have an output like this:
 
-        .. group-tab:: APT
+.. code-block:: console
+  :class: output
 
-
-            .. include:: ../../../_templates/installations/basic/elastic/deb/install_kibana.rst
-
-
-
-        .. group-tab:: Yum
-
-
-            .. include:: ../../../_templates/installations/basic/elastic/yum/install_kibana.rst
-
-
-
-        .. group-tab:: ZYpp
-
-
-            .. include:: ../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
-
-
-#. Copy the Elasticsearch certificates into the Kibana configuration folder:
-
-    .. include:: ../../../_templates/installations/basic/elastic/common/copy_certificates_kibana_elastic_server.rst
-
-#. Download the Kibana configuration file:
-
-    .. include:: ../../../_templates/installations/basic/elastic/common/configure_kibana_all_in_one.rst
-
-#. Install the Wazuh Kibana plugin:
-
-    The installation of the plugin must be done from the Kibana home directory.
-
-    .. code-block:: console
-
-        # cd /usr/share/kibana
-
-    .. code-block:: console
-
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.13.1_7.8.0.zip
-
-#. Enable and start the Kibana service:
-
-    .. include:: ../../../_templates/installations/basic/elastic/common/enable_kibana.rst
-
-    With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
-
-    .. note:: The Kibana service listens to the default port 5601. The browser address will be: ``https://<kibana_ip>:5601`` replacing <kibana_ip> by the Kibana server IP.
-
+  # {
+    "name" : "elasticsearch",
+    "cluster_name" : "elasticsearch",
+    "cluster_uuid" : "J4wjlf1USzKDMRmxnliFPw",
+    "version" : {
+      "number" : "7.8.0",
+      "build_flavor" : "default",
+      "build_type" : "rpm",
+      "build_hash" : "757314695644ea9a1dc2fecd26d1a43856725e65",
+      "build_date" : "2020-06-14T19:35:50.234439Z",
+      "build_snapshot" : false,
+      "lucene_version" : "8.5.1",
+      "minimum_wire_compatibility_version" : "6.8.0",
+      "minimum_index_compatibility_version" : "6.0.0-beta1"
+    },
+    "tagline" : "You Know, for Search"
+  }
 
 .. _basic_all_in_one_wazuh:
 
@@ -194,46 +165,46 @@ Adding the Wazuh repository
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/deb/add_repository.rst
-
-
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/basic/wazuh/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/add_repository.rst
+    .. include:: ../../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
 
 
 
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package:
+Install the Wazuh manager package:
 
 .. tabs::
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+
 
 
   .. group-tab:: APT
 
 
     .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
 
 
 
@@ -252,17 +223,17 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_api.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
 
 
 
@@ -282,31 +253,6 @@ Installing Filebeat
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. tabs::
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/yum/add_repository.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/zypp/add_repository.rst
-
 
 Filebeat installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -317,17 +263,17 @@ Filebeat installation and configuration
     .. tabs::
 
 
+      .. group-tab:: Yum
+
+
+        .. include:: ../../../_templates/installations/basic/elastic/yum/install_filebeat.rst    
+
+
+
       .. group-tab:: APT
 
 
         .. include:: ../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
-
-
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/yum/install_filebeat.rst
 
 
 
@@ -341,13 +287,14 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/filebeat/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/filebeat/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.13.1/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -357,18 +304,73 @@ Filebeat installation and configuration
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
-    .. include:: ../../../_templates/installations/basic/elastic/common/configure_filebeat.rst
+    .. include:: ../../../_templates/installations/basic/elastic/common/configure_filebeat_aio.rst
 
     To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
+
+#. Copy the certificates into ``/etc/filebeat/certs/``
+
+    .. code-block:: console
+
+      # cp -r /etc/elasticsearch/certs/ca/ /etc/filebeat/certs/
+      # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt
+      # cp /etc/elasticsearch/certs/elasticsearch.key /etc/filebeat/certs/filebeat.key
+      
 
 #. Enable and start the Filebeat service:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Load the Filebeat template:
 
-    .. include:: ../../../_templates/installations/basic/elastic/common/load_filebeat_template.rst
+Kibana installation and configuration
+-------------------------------------
 
+#. Install the Kibana package:
+
+    .. tabs::
+
+        .. group-tab:: Yum
+
+
+            .. include:: ../../../_templates/installations/basic/elastic/yum/install_kibana.rst    
+
+
+
+        .. group-tab:: APT
+
+
+            .. include:: ../../../_templates/installations/basic/elastic/deb/install_kibana.rst
+
+
+
+        .. group-tab:: ZYpp
+
+
+            .. include:: ../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
+
+
+#. Copy the Elasticsearch certificates into the Kibana configuration folder:
+
+    .. include:: ../../../_templates/installations/basic/elastic/common/copy_certificates_kibana_elastic_server.rst
+
+#. Download the Kibana configuration file:
+
+    .. include:: ../../../_templates/installations/basic/elastic/common/configure_kibana_all_in_one.rst
+
+#. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
+
+    .. code-block:: console
+
+        # cd /usr/share/kibana
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.13.1_7.8.0.zip
+
+#. Enable and start the Kibana service:
+
+    .. include:: ../../../_templates/installations/basic/elastic/common/enable_kibana.rst
+
+With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
+
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
 
 Disabling repositories
 ----------------------
@@ -379,17 +381,17 @@ Disabling repositories
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../_templates/installations/basic/wazuh/yum/disabling_repositories.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
 
 
