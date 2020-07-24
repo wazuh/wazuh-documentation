@@ -1,11 +1,5 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-#. Install the certificates deployment dependencies:
-
-    .. code-block:: console
-
-      # yum install zip unzip
-
 #. Import the GPG key:
 
     .. code-block:: console
