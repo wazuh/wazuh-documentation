@@ -18,6 +18,12 @@ Installing Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
+Prerequisites
+-------------
+Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
+
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
+
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -27,21 +33,21 @@ Adding the Elastic Stack repository
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/elastic/deb/add_repository.rst
-
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 
