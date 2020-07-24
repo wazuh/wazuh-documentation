@@ -46,7 +46,7 @@ On your terminal, install the Wazuh manager:
 
   .. code-block:: console
 
-    # apt-get install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|
+    # apt-get install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
 Once the process is completed, you can check the service status with:
 
@@ -85,7 +85,7 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # apt-get install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_API_X86|
+    # apt-get install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_API_X86|
 
 3. Once the process is complete, you can check the service status with:
 
