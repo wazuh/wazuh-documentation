@@ -5,8 +5,9 @@
 Upgrading Elastic Stack from 6.8 to 7.x
 =======================================
 
-Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7 has Java embedded, so unless you decide to use Logstash, Java is not longer required.
+Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7 has Java embedded, so unless you decide to use Logstash, Java is no longer required.
 
+In case of upgrading from a version of Elasticsearch prior to 6.8, visit the :ref:`elastic_server_hard_upgrade` section.
 
 Prepare the Elastic Stack
 -------------------------
@@ -63,7 +64,9 @@ Prepare the Elastic Stack
 Upgrade Elasticsearch
 ---------------------
 
-#. Disable shard allocation
+In case of having previously upgraded from a :ref:`legacy version <elastic_server_hard_upgrade>` (versions prior to 6.8), the steps from ``1`` to ``3`` must be omitted.
+
+#. Disable shard allocation. 
 
     .. code-block:: bash
 
@@ -101,7 +104,7 @@ Upgrade Elasticsearch
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
 
-#. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``).
+#. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added to the configuration of the Elasticsearch master node (``elasticsearch.yml``).
 
     .. code-block:: yaml
 
@@ -284,7 +287,7 @@ Upgrade Kibana
       # systemctl restart kibana
       
 Disabling repositories
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
     * For CentOS/RHEL/Fedora:
 
