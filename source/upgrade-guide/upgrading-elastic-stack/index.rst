@@ -14,15 +14,15 @@ In addition to Elastic Stack components, you will also find the instructions to 
 
     Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_
 
-+----------------------------------------------------------+----------------------------------------------------+
-| Type                                                     | Description                                        |
-+==========================================================+====================================================+
-| :doc:`From 7.x to 7.y <elastic_server_minor_upgrade>`    | How to perform an upgrade from 7.x to 7.y.         |
-+----------------------------------------------------------+----------------------------------------------------+
-| :doc:`From 6.8 to 7.x <elastic_server_rolling_upgrade>`  | How to perform a rolling upgrade from 6.8 to 7.x.  |
-+----------------------------------------------------------+----------------------------------------------------+
-| :doc:`From 6.x to 6.8 <elastic_server_hard_upgrade>`     | How to perform an upgrade from 6.x to 6.8.         |
-+----------------------------------------------------------+----------------------------------------------------+
++-------------------------------------------------------------+---------------------------------------------+
+| Type                                                        | Description                                 |
++=============================================================+=============================================+
+| :doc:`From 7.x to 7.y <elastic_server_minor_upgrade>`       | Perform an upgrade from 7.x to 7.y.         |
++-------------------------------------------------------------+---------------------------------------------+
+| :doc:`From 6.8 to 7.x <elastic_server_rolling_upgrade>`     | Perform a rolling upgrade from 6.8 to 7.x.  |
++-------------------------------------------------------------+---------------------------------------------+
+| :doc:`From a legacy version <elastic_server_hard_upgrade>`  | Perform an upgrade from 6.x to 6.8.         |
++-------------------------------------------------------------+---------------------------------------------+
 
 .. toctree::
    :hidden:

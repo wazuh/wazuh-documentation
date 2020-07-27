@@ -2,8 +2,10 @@
 
 .. _elastic_server_hard_upgrade:
 
-Upgrading Elastic Stack from 6.x to 6.8
-=======================================
+Upgrading Elastic Stack from a legacy version
+=============================================
+
+To upgrade Elasticsearch to the latest version from a version prior to ``6.8.x``, it is needed to first upgrade to Elasticsearch ``6.8.x`` as an intermediate step. Once Elastic Stack is on version ``6.x`` it can be upgraded to the :ref:`latest version <elastic_server_rolling_upgrade>`
 
 Prepare the Elastic Stack
 -------------------------
@@ -78,46 +80,11 @@ Upgrade Elasticsearch
 
       # apt-get install elasticsearch=|ELASTIC_6_LATEST|
 
-5. Restart the service.
 
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl restart elasticsearch
-
-6. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a *_cat/nodes* request:
-
-  .. code-block:: bash
-
-    curl -X GET "localhost:9200/_cat/nodes"
-
-7. Reenable shard allocation.
-
-  .. code-block:: bash
-
-    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-    {
-      "persistent": {
-        "cluster.routing.allocation.enable": null
-      }
-    }
-    '
-
-8. Before upgrading the next node, wait for the cluster to finish shard allocation.
-
-  .. code-block:: bash
-
-    curl -X GET "localhost:9200/_cat/health?v"
-
-9. Repeat it for every Elasticsearch node.
-10. Load the Wazuh template for Elasticsearch:
-
-  .. code-block:: console
-
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/6.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+These steps must be repeated in all the Elasticsearch nodes of the installation.
 
 Upgrade Logstash
-^^^^^^^^^^^^^^^^
+----------------
 
 1. Upgrade the ``logstash`` package:
 
@@ -133,29 +100,6 @@ Upgrade Logstash
 
     # apt-get install logstash=1:|ELASTIC_6_LATEST|-1
 
-2. Download and set the Wazuh configuration for Logstash:
-
-  a) Local configuration:
-
-    .. code-block:: console
-
-      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/logstash/6.x/01-wazuh-local.conf
-      # usermod -a -G ossec logstash
-
-  b) Remote configuration:
-
-    .. code-block:: console
-
-      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/logstash/6.x/01-wazuh-remote.conf
-
-3. Start the Logstash service:
-
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl start logstash.service
 
 Upgrade Filebeat
 ----------------
@@ -174,26 +118,9 @@ Upgrade Filebeat
 
       # apt-get install filebeat=|ELASTIC_6_LATEST|
 
-2. Update the configuration file.
-
-  .. code-block:: console
-
-    # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/6.x/filebeat.yml
-    # chmod go+r /etc/filebeat/filebeat.yml
-
-3. Restart Filebeat.
-
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl restart filebeat
 
 Upgrade Kibana
 --------------
-
-Upgrade Kibana
-^^^^^^^^^^^^^^
 
 1. Upgrade the ``kibana`` package:
 
@@ -225,38 +152,9 @@ Upgrade Kibana
     # cd /usr/share/kibana/
     # sudo -u kibana bin/kibana-plugin remove wazuh
 
-3. Upgrade the Wazuh app:
-
-  * Install from URL:
-
-  .. code-block:: console
-
-    # cd /usr/share/kibana/
-    # rm -rf optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTIC_6_LATEST|.zip
-
-  * Install from the package:
-
-  .. code-block:: console
-
-    # cd /usr/share/kibana/
-    # rm -rf optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_7.6.0.zip
-
-  .. warning::
-
-    The Wazuh app installation process may take several minutes. Please wait patiently.
-
-4. Start the Kibana service:
-
-  .. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl enable kibana.service
-    # systemctl start kibana.service
 
 Disabling repositories
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
     * For CentOS/RHEL/Fedora:
 
@@ -283,3 +181,5 @@ Disabling repositories
       .. code-block:: console
 
         # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+
+Now that the installation has been upgraded to 6.8.x version, it can be upgraded to the latest version available following the steps in the section :ref:`elastic_server_rolling_upgrade`.
