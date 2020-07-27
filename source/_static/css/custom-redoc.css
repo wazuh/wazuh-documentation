@@ -8,7 +8,7 @@ body {
   line-height: 1.4;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close {
   background-color: transparent;
   padding: 5px 10px;
   border: 1px solid transparent;
@@ -17,20 +17,20 @@ redoc[spec-url] .sc-hORach.iXutXb.btn-close {
   width: 40px;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close:focus {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close:focus {
 	border-color: rgba(255, 255, 255, 0.7);
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close .x {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close .x {
   display: block;
   height: 100%;
   width: 100%;
   position: absolute;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::before,
-redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::after,
-redoc[spec-url] .sc-hORach.iXutXb.btn-close::before {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close .x::before,
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close .x::after,
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close::before {
   content: '';
   display: block;
   background-color: #ffffff;
@@ -41,22 +41,22 @@ redoc[spec-url] .sc-hORach.iXutXb.btn-close::before {
   border-bottom: 0;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::before {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close .x::before {
   top: 5px;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close .x::after {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close .x::after {
   top: 19px;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed .x::before {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close.collapsed .x::before {
   -webkit-transform: rotate(0);
           transform: rotate(0);
   width: 17px;
   transition: all ease .4s;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed) .x::before {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close:not(.collapsed) .x::before {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
   width: 21px;
@@ -66,14 +66,14 @@ redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed) .x::before {
   transition: all ease .4s;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed .x::after {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close.collapsed .x::after {
   -webkit-transform: rotate(0);
           transform: rotate(0);
   width: 17px;
   transition: all ease .4s;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed) .x::after {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close:not(.collapsed) .x::after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
   width: 21px;
@@ -83,13 +83,13 @@ redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed) .x::after {
   transition: all ease .4s;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close:not(.collapsed)::before {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close:not(.collapsed)::before {
   opacity: 0;
 	top: 17px;
   transition: all ease .4s;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed::before {
+redoc[spec-url] .sc-bMVAic.llQIcF.btn-close.collapsed::before {
   opacity: 1;
   top: 17px;
   transition: all ease .4s;
@@ -100,7 +100,7 @@ redoc[spec-url] .sc-hORach.iXutXb.btn-close.collapsed::before {
 	/* display:none; */
 }
 
-redoc[spec-url] .sc-hORach.iXutXb {
+redoc[spec-url] .sc-bMVAic.llQIcF {
   top: 6px;
   padding: 10px;
   box-shadow: none;
@@ -109,7 +109,7 @@ redoc[spec-url] .sc-hORach.iXutXb {
 	right: 15px;
 }
 
-redoc[spec-url] .sc-hORach.iXutXb .sc-cLQEGU.bPGAgL {
+redoc[spec-url] .sc-bMVAic.llQIcF .sc-cLQEGU.bPGAgL {
 	color: #00a9e5;
 }
 
@@ -131,15 +131,15 @@ redoc[spec-url] .sc-iRbamj {
   line-height: 1.4;
 }
 
-redoc[spec-url] .sc-epnACN.iYKvkC {
-	padding-left: 10px;
+redoc[spec-url] .sc-epnACN {
+	padding-right: 10px;
 }
 
 redoc[spec-url] code,
 redoc[spec-url] .sc-chPdSV,
-redoc[spec-url] .bMfIUD,
-redoc[spec-url] .dpRRAO,
-redoc[spec-url] .beUper {
+redoc[spec-url] .sc-cHGsZl.sc-jbKcbu,
+redoc[spec-url] .sc-hwwEjo,
+redoc[spec-url] .sc-cHGsZl.sc-jqCOkK {
 	font-family: 'Fira Mono', monospace;
 }
 
@@ -153,7 +153,7 @@ redoc[spec-url] a:visited {
 	color: #00a9e5;
 }
 
-redoc[spec-url] a.jIdpVJ {
+redoc[spec-url] a.sc-hEsumM.jrowNk {
 	border-color: #0094ce;
 	user-select: none;
 }
@@ -197,8 +197,14 @@ redoc[spec-url] h5 {
 	font-family: 'Montserrat', sans-serif;
   font-weight: 500;
 }
+
+redoc[spec-url] .sc-ibxdXY {
+	font-family: 'Open Sans', sans-serif;
+  font-size: .95rem;
+}
+
 redoc[spec-url] .sc-bZQynM.celZWI,
-redoc[spec-url] .kjSShW {
+redoc[spec-url] .sc-GMQeP {
 	background-color: #004057;
 }
 
@@ -206,8 +212,10 @@ redoc[spec-url] .sc-bZQynM.celZWI h3 {
 	color: #ffffff;
 }
 
-redoc[spec-url] .bIbMYr {
-	font-family: 'Montserrat', sans-serif;
+redoc[spec-url] .sc-cHGsZl,
+redoc[spec-url] .beRszf,
+redoc[spec-url] .gsaTRZ > button {
+  font-family: 'Open Sans', sans-serif;
 }
 
 redoc[spec-url] table {
@@ -392,4 +400,9 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
 	#header-redoc .wazuh-logo-link img {
 		max-width: 172px;
   }
+
+	redoc[spec-url] .ddXLZs:not(:last-of-type)::after {
+		left: 40px;
+		width: calc(60% - 80px);
+	}
 }

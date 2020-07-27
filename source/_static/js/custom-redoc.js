@@ -16,7 +16,7 @@ function init() {
         document.querySelector('body').classList.remove('loading');
 
         // Change toggle-menu button
-        const removed = document.querySelector('.sc-cLQEGU.bPGAgL');
+        const removed = document.querySelector('.sc-gqPbQI.imibLw');
         const btn = removed.parentNode;
         const icon = document.createElement('i');
         icon.classList.add('x');
