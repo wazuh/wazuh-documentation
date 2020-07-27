@@ -32,9 +32,35 @@ function init() {
             this.classList.add('collapsed');
           }
         });
+
+        checkMenu(btn);
       }
     }
   };
   redocObserver = new MutationObserver(redocLoaded);
   redocObserver.observe(document.querySelector('redoc[spec-url]'), config);
+}
+
+/**
+* Makes sure that the toggle button for the menu has always the proper state
+* @param {DOMObject} btn Menu toggle button element
+*/
+function checkMenu(btn) {
+  if ( btn ) {
+    let menuButtonObserver = null;
+    const config = {attributes: true};
+    const buttonStatus = function(mutationsList, observer) {
+      for (i = 0; i < mutationsList.length; i++) {
+        if ( mutationsList[i].attributeName == 'open' ) {
+          if ( document.querySelector('redoc[spec-url] .menu-content').hasAttribute('open') ) {
+            btn.classList.remove('collapsed');
+          } else {
+            btn.classList.add('collapsed');
+          }
+        }
+      }
+    };
+    menuButtonObserver = new MutationObserver(buttonStatus);
+    menuButtonObserver.observe(document.querySelector('redoc[spec-url] .menu-content'), config);
+  }
 }
