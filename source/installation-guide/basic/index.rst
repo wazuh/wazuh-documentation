@@ -8,7 +8,7 @@ Installation guide with Elasticsearch Basic License
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh. There are two available types of deployment: :ref:`All-in-one<basic_all_in_one>` and :ref:`Distributed<basic_distributed_index>`. In this guide, `Elasticsearch with basic license <https://www.elastic.co/>`_ will be used. Elasticsearch is formed by two different components, `Elasticsearch-oss` wwhich is fully open-source, and `X-Pack` which is under Elasticsearch license.
+This section aims to guide the user through the process of installing Wazuh. There are two available types of deployment: :ref:`All-in-one<basic_all_in_one>` and :ref:`Distributed<basic_distributed_index>`. In this guide, `Elasticsearch with basic license <https://www.elastic.co/>`_ will be used. Elasticsearch is formed by two different components, `Elasticsearch-oss` wwhich is fully open source, and `X-Pack` which is under Elasticsearch license.
 
 Wazuh components
 ----------------

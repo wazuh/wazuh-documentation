@@ -8,7 +8,7 @@ Installation guide with Open Distro for Elasticsearch
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh. There are two available types of deployment: :ref:`All-in-one<all_in_one>` and :ref:`Distributed<distributed_index>`. In this guide, `Open Distro for Elasticsearch <https://opendistro.github.io/>`_ and Kibana will be used. Open Distro for Elasticsearch is a fully open-source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
+This section aims to guide the user through the process of installing Wazuh. There are two available types of deployment: :ref:`All-in-one<all_in_one>` and :ref:`Distributed<distributed_index>`. In this guide, `Open Distro for Elasticsearch <https://opendistro.github.io/>`_ and Kibana will be used. Open Distro for Elasticsearch is a fully open source and `Apache-2.0-licensed` distribution of both Elasticsearch and Kibana.
 
 Wazuh components
 ----------------
@@ -22,11 +22,11 @@ Individual components
 
 - ``Wazuh API``: this component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web user interface, which is the Wazuh Kibana plugin.
 
-- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch. This guide will install ``Filebeat-oss``, which is fully open-source and `Apache 2.0-licensed`.
+- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch. This guide will install ``Filebeat-oss``, which is fully open source and `Apache 2.0-licensed`.
 
-- ``Elasticsearch``: is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager. This guide will install ``Elasticsearch-oss``, which is fully open-source and `Apache 2.0-licensed`.
+- ``Elasticsearch``: is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager. This guide will install ``Elasticsearch-oss``, which is fully open source and `Apache 2.0-licensed`.
 
-- ``Kibana``: is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data. This guide will install ``Open Distro for Kibana``, which is fully open-source and `Apache 2.0-licensed`.
+- ``Kibana``: is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data. This guide will install ``Open Distro for Kibana``, which is fully open source and `Apache 2.0-licensed`.
 
 - ``Wazuh Kibana plugin``: lets users visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts, and filters using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers and the Wazuh agents configuration, logs, ruleset, groups, and much more.
 
