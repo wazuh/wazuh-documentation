@@ -60,7 +60,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # yum install logstash-7.5.1
+      # yum install logstash-|ELASTICSEARCH_LATEST|
       # systemctl daemon-reload
       # systemctl enable logstash
 
@@ -68,7 +68,7 @@ them to Elasticsearch.
 
     .. code-block:: console
 
-      # apt-get install logstash=1:7.5.1-1
+      # apt-get install logstash=1:|ELASTICSEARCH_LATEST|-1
       # systemctl daemon-reload
       # systemctl enable logstash
 
