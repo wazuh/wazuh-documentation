@@ -10,7 +10,7 @@
 
     .. code-block:: console
 
-      # cat > /etc/yum.repos.d/elastic.repo << EOF
+      # cat > /etc/yum.repos.d/wazuh.repo << EOF
       [wazuh_trash]
       gpgcheck=1
       gpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH
