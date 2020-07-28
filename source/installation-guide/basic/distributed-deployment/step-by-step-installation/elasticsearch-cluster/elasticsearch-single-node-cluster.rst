@@ -30,17 +30,17 @@ Adding the Elastic Stack repository
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
-    
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
@@ -60,17 +60,17 @@ Elasticsearch installation and configuration
 
     .. tabs::
 
-      .. group-tab:: APT
-
-
-        .. include:: ../../../../../_templates/installations/elastic/deb/install_elasticsearch.rst
-
-
-
       .. group-tab:: Yum
 
 
         .. include:: ../../../../../_templates/installations/elastic/yum/install_elasticsearch.rst
+
+
+
+      .. group-tab:: APT
+
+
+        .. include:: ../../../../../_templates/installations/elastic/deb/install_elasticsearch.rst
 
 
 
@@ -106,17 +106,17 @@ Disabling repositories
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/elastic/deb/disabling_repositories.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/elastic/yum/disabling_repositories.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/elastic/deb/disabling_repositories.rst
 
 
 
