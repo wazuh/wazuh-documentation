@@ -21,21 +21,21 @@ Adding the Elastic Stack repository
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/elastic/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 
@@ -49,21 +49,21 @@ Kibana installation and configuration
         .. group-tab:: APT
 
 
-            .. include:: ../../../../../_templates/installations/elastic/deb/install_kibana.rst
+            .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
 
 
 
         .. group-tab:: Yum
 
 
-            .. include:: ../../../../../_templates/installations/elastic/yum/install_kibana.rst
+            .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: ZYpp
 
 
-            .. include:: ../../../../../_templates/installations/elastic/zypp/install_kibana.rst
+            .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
 
 
 #. The next step, involving the certificate placement, may vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
@@ -78,20 +78,20 @@ Kibana installation and configuration
 
             Copy the Elasticsearch certificates:
 
-            .. include:: ../../../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
+            .. include:: ../../../../../_templates/installations/basic/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 
 
         .. tab:: Different Elasticsearch server
 
 
-            .. include:: ../../../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
+            .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_new_kibana_certificates.rst
 
 
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
 
 #. Install the Wazuh Kibana plugin:
@@ -108,7 +108,7 @@ Kibana installation and configuration
 
 #. Enable and start the Kibana service:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_kibana.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
     With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
@@ -117,7 +117,7 @@ Kibana installation and configuration
 Disabling repositories
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: ../../../../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -126,21 +126,21 @@ Disabling repositories
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/elastic/deb/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/elastic/yum/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/elastic/zypp/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 Next steps
