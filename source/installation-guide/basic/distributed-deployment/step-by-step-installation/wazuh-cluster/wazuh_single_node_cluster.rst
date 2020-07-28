@@ -23,17 +23,17 @@ Adding the Wazuh repository
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/add_repository.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/basic/wazuh/yum/add_repository.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/add_repository.rst
 
 
 
@@ -52,17 +52,17 @@ Installing the Wazuh manager
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
 
 
@@ -81,17 +81,17 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_api.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
 
 
 
@@ -117,17 +117,17 @@ Adding the Elastic Stack repository
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
@@ -146,17 +146,17 @@ Filebeat installation and configuration
     .. tabs::
 
 
-      .. group-tab:: APT
-
-
-        .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
-
-
-
       .. group-tab:: Yum
 
 
         .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_filebeat.rst
+
+
+
+      .. group-tab:: APT
+
+
+        .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
 
 
 
@@ -218,17 +218,17 @@ Disabling repositories
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../../../../_templates/installations/basic/wazuh/yum/disabling_repositories.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
 
 
