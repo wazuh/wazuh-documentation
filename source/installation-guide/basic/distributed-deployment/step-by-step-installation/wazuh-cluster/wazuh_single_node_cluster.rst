@@ -26,21 +26,21 @@ Adding the Wazuh repository
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/add_repository.rst
 
 
 
@@ -55,21 +55,21 @@ Installing the Wazuh manager
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
 Installing the Wazuh API
@@ -84,21 +84,21 @@ Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recomme
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/install_wazuh_api.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/install_wazuh_api.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_api.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/install_wazuh_api.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_api.rst
 
 
 .. note::
@@ -120,21 +120,21 @@ Adding the Elastic Stack repository
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/elastic/deb/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/elastic/yum/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 Filebeat installation and configuration
@@ -149,21 +149,21 @@ Filebeat installation and configuration
       .. group-tab:: APT
 
 
-        .. include:: ../../../../../_templates/installations/elastic/deb/install_filebeat.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_filebeat.rst
 
 
 
       .. group-tab:: Yum
 
 
-        .. include:: ../../../../../_templates/installations/elastic/yum/install_filebeat.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_filebeat.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../../../_templates/installations/elastic/zypp/install_filebeat.rst
+        .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_filebeat.rst
 
 
 #. Download the pre-configured Filebeat config file used to forward Wazuh alerts to Elasticsearch:
@@ -186,21 +186,21 @@ Filebeat installation and configuration
 
 #. Edit the file ``/etc/filebeat/filebeat.yml``:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/configure_filebeat.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/configure_filebeat.rst
 
     To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Configure Filebeat certificate:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/copy_certificates_filebeat.rst
 
 #. Enable and start the Filebeat service:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_filebeat.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
 #. Load the Filebeat template:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/load_filebeat_template.rst
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/load_filebeat_template.rst
 
 
 Next steps
@@ -212,7 +212,7 @@ The next step consists of installing Kibana. The guide continues  :ref:`here<bas
 Disabling repositories
 ----------------------
 
-.. include:: ../../../../../_templates/installations/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -221,17 +221,17 @@ Disabling repositories
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/disabling_repositories.rst
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
