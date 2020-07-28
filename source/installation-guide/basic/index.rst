@@ -2,8 +2,8 @@
 
 .. _basic_installation_guide:
 
-Installation guide with Elasticsearch Basic License
-===================================================
+Installing Wazuh with Elasticsearch Basic License
+=================================================
 
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
