@@ -99,35 +99,6 @@ Wazuh server worker nodes
 #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
 
 
-Installing the Wazuh API
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Before starting, note that the Wazuh API has to be installed only in the Wazuh master node and not in the Wazuh worker nodes.
-
-Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent version available for the Operating System being used. This guide uses the 10.x version, but the most recent one can be installed:
-
-
-.. tabs::
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../../../_templates/installations/wazuh/yum/install_wazuh_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/wazuh/deb/install_wazuh_api.rst
-
-
-
-.. note::
-  It is strongly recommended to secure the Wazuh API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password, and more.
-
 .. _basic_wazuh_server_multi_node_filebeat:
 
 Installing Filebeat

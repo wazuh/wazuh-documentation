@@ -68,32 +68,6 @@ Installing the Wazuh manager
 
 
 
-Installing the Wazuh API
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Although the minimum NodeJS version needed for the Wazuh API is 4.6.1, it is recommended to install the most recent version available for the Operating System being used. This guide uses the 10.x version, but the most recent one can be installed.
-
-
-.. tabs::
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_api.rst
-
-
-
-.. note::
-  It is highly recommended to change the default credentials. The following document :ref:`securing_api` explains how to change the default user and password among other useful API security information.
-
 Installing Elasticsearch
 ------------------------
 
