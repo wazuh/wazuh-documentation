@@ -3651,7 +3651,7 @@ pre .gr { color: #a00 } /* Generic.Error */
 pre .gh { color: #999 } /* Generic.Heading */
 pre .gi { color: #000; background-color: #dfd } /* Generic.Inserted */
 pre .gi .x { color: #000; background-color: #afa }
-pre .go { color: #888 } /* Generic.Output */
+pre .go, pre .heredoc, pre .heredoc .gp { color: #888 } /* Generic.Output */
 pre .gp { color: #555 } /* Generic.Prompt */
 pre .gs { font-weight: bold }
 pre .gu { color: purple; font-weight: bold } /* Generic.Subheading */

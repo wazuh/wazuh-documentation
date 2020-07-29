@@ -292,6 +292,9 @@ In a cluster with one node, the number of replicas should be set to zero:
     }
   }'
 
+
+More information about configuring and shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
+
 Reference:
 
   - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/getting-started-concepts.html#getting-started-shards-and-replicas>`_.

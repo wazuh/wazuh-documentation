@@ -89,6 +89,7 @@ Repeat the process for "Launch a Wazuh Server instance" with the following excep
 - Select the General purpose **t2.micro** image
 - Set the *Primary IP* to 172.30.0.30.
 - Leave the *Storage Size* at the default 8GB unless you plan to make extra disk space demands on this instance.
+- Don't forget to expand the *Advanced Details* section and paste the same launch script.
 - Set the *Name* Tag to "Linux Agent".
 
 
@@ -103,6 +104,7 @@ Repeat the process for "Launch a Wazuh Server instance" changing the following:
 - Choose a recommended *Storage Size* of 100GB. As low as 8GB should generally
   be adequate if you are careful with disk space management and don't leave the
   lab running for a long time.
+- Don't forget to expand the *Advanced Details* section and paste the same launch script.
 - Set the *Name* Tag to "Elastic Server".
 
 

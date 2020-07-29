@@ -47,9 +47,10 @@ base_directory
 
 The base directory that will be prefixed to the following options:
 
-- rootkit_files
-- rootkit_trojans
-- systems_audit
+- Check rootkits
+- Check trojans
+- Scan the ``/dev`` directory
+- Check de hidden files using system calls
 
 +-----------------------------+---------------------+
 | **Default value (UNIX)**    | /                   |
@@ -65,11 +66,9 @@ ignore
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
 
 +--------------------+-----------------------------------+
-| **Allowed values** | Any directory or file name.       |
+| **Allowed values** | sregex                            |
 +--------------------+-----------------------------------+
 | **Valid for**      | check_sys, check_dev, check_files |
-+--------------------+-----------------------------------+
-| **Example**        | /etc                              |
 +--------------------+-----------------------------------+
 
 Attributes:
@@ -83,7 +82,7 @@ Attributes:
 .. _reference_ossec_rootcheck_rootkit_files:
 
 rootkit_files
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 Change the location of the rootkit files database.
 
@@ -107,7 +106,7 @@ Change the location of the rootkit trojans database.
 +--------------------+-------------------------------------------+
 
 windows_audit
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 Specifies the path to a Windows audit definition file.
 
@@ -120,7 +119,7 @@ Specifies the path to a Windows audit definition file.
 .. _reference_ossec_rootcheck_audit:
 
 system_audit
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
 Specifies the path to an audit definition file for Unix-like systems.
 
@@ -131,7 +130,7 @@ Specifies the path to an audit definition file for Unix-like systems.
 +--------------------+---------------------------------------------+
 
 windows_apps
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
 Specifies the path to a Windows application definition file.
 
@@ -153,7 +152,7 @@ Specifies the path to a Windows malware definitions file.
 +--------------------+--------------------------------------------+
 
 scanall
-^^^^^^^^^^^^^^^
+^^^^^^^
 
 Tells rootcheck to scan the entire system.  This option may lead to some false positives.
 
@@ -164,10 +163,10 @@ Tells rootcheck to scan the entire system.  This option may lead to some false p
 +--------------------+---------+
 
 readall
-^^^^^^^^^^^^^^^
+^^^^^^^
 
 Allow Rootcheck read all system files and compare the bytes read with files size.
-With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/etc``, ``/boot``
+With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``, ``/usr/bin``, ``/usr/sbin``, ``/dev``, ``/lib``, ``/etc``, ``/root``, ``/var/log``, ``/var/mail``, ``/var/lib``, ``/var/www``, ``/usr/lib``, ``/usr/include``, ``/tmp``, ``/boot``, ``/usr/local``, ``/var/tmp`` and ``/sys``.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -178,7 +177,7 @@ With ``readall`` set to no, only these folders are checked: ``/bin``, ``/sbin``,
 .. _reference_ossec_rootcheck_frequency:
 
 frequency
-^^^^^^^^^^^^^^^
+^^^^^^^^^
 
 Frequency that the rootcheck is going to be executed (in seconds).
 
@@ -189,7 +188,7 @@ Frequency that the rootcheck is going to be executed (in seconds).
 +--------------------+-----------------------------+
 
 disabled
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
 Disables the execution of rootcheck.
 
@@ -200,7 +199,7 @@ Disables the execution of rootcheck.
 +--------------------+---------+
 
 check_dev
-^^^^^^^^^^^^^^^
+^^^^^^^^^
 
 Enable or disable the checking of /dev.
 
@@ -211,7 +210,7 @@ Enable or disable the checking of /dev.
 +--------------------+---------+
 
 check_files
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Enable or disable the checking of files.
 
@@ -222,7 +221,7 @@ Enable or disable the checking of files.
 +--------------------+---------+
 
 check_if
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
 Enable or disable the checking of network interfaces.
 
@@ -233,7 +232,7 @@ Enable or disable the checking of network interfaces.
 +--------------------+---------+
 
 check_pids
-^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 Enable or disable the checking of process ID's.
 
@@ -244,7 +243,7 @@ Enable or disable the checking of process ID's.
 +--------------------+---------+
 
 check_ports
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Enable or disable the checking of network ports.
 
@@ -255,7 +254,7 @@ Enable or disable the checking of network ports.
 +--------------------+---------+
 
 check_sys
-^^^^^^^^^^^^^^^
+^^^^^^^^^
 
 Enable or disable checking for anomalous file system objects.
 
@@ -266,7 +265,7 @@ Enable or disable checking for anomalous file system objects.
 +--------------------+---------+
 
 check_trojans
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 Enable or disable checking for trojans.
 
@@ -288,7 +287,7 @@ Enable or disable the checking of unixaudit.
 +--------------------+---------+
 
 check_winapps
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 Enable or disable the checking of winapps.
 
@@ -299,7 +298,7 @@ Enable or disable the checking of winapps.
 +--------------------+---------+
 
 check_winaudit
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 Enable or disable the checking of winaudit.
 
@@ -321,7 +320,7 @@ Enable or disable checking for Windows malware.
 +--------------------+---------+
 
 skip_nfs
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
 Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD).
 Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
@@ -348,6 +347,7 @@ Default Unix configuration
       <check_pids>yes</check_pids>
       <check_ports>yes</check_ports>
       <check_if>yes</check_if>
+      <ignore type="sregex">^/etc/</ignore>
 
       <!-- Frequency that rootcheck is executed - every 12 hours -->
       <frequency>43200</frequency>

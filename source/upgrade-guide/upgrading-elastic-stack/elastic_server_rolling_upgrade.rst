@@ -100,7 +100,6 @@ Upgrade Elasticsearch
       .. code-block:: console
 
         # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
-        # systemctl restart elasticsearch
 
 #. Starting with Elasticsearch 7.0, master nodes require a configuration setting with the list of the cluster master nodes. The following settings must be added in the configuration of the Elasticsearch master node (``elasticsearch.yml``).
 

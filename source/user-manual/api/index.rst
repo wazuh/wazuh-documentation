@@ -31,4 +31,5 @@ Wazuh API capabilities:
        queries
        configuration
        reference
+       equivalence
        examples

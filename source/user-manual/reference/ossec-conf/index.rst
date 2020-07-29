@@ -5,9 +5,11 @@
 Local configuration (ossec.conf)
 ================================
 
-The ``ossec.conf`` file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. It is located at ``/var/ossec/etc/ossec.conf`` both in the manager and agent on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.  It is recommended that you back up this file before making changes to it, as an error in the configuration can prevent Wazuh services from starting up.
+The ``ossec.conf`` file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. It is located at ``/var/ossec/etc/ossec.conf`` both in the manager and agent on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\ossec.conf``. It is recommended to back up this file before making changes on it. A configuration error may prevent Wazuh services from starting up.
 
-The ``ossec.conf`` file is in XML format and all of its configuration options are nested in their appropriate section of the file.  In this file, the outermost XML tag is ``<ossec_config>``.  Here is an example of the proper location of the *alerts* configuration section:
+The ``ossec.conf`` file is in XML format and all of its configuration options are nested in their appropriate section of the file. In this file, the outermost XML tag is ``<ossec_config>``. There can be more than one ``<ossec_config>`` tag.
+
+Here is an example of the proper location of the *alerts* configuration section:
 
 .. code-block:: xml
 
@@ -19,7 +21,7 @@ The ``ossec.conf`` file is in XML format and all of its configuration options ar
         </alerts>
     </ossec_config>
 
-The ``agent.conf`` file is very similar to ``ossec.conf`` except that it is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
+The ``agent.conf`` file is very similar to ``ossec.conf`` but ``agent.conf`` is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
 
 Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
 
@@ -95,7 +97,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 
-All of the above sections must be located within the top-level ``<ossec_config>`` tag.
+All of the above sections must be located within the top-level ``<ossec_config>`` tag. In case of adding another ``<ossec_config>`` tag, it may override the values set on the previous tag.
 
 
 .. toctree::

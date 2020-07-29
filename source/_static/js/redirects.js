@@ -43,6 +43,8 @@ newUrls['3.12'] = [
   '/amazon/services/supported-services/waf.html',
   '/user-manual/capabilities/file-integrity/fim-synchronization.html',
   '/release-notes/release_3_12_0.html',
+  '/release-notes/release_3_12_1.html',
+  '/release-notes/release_3_12_2.html',
 ];
 
 /* *** RELEASE 3.11 ****/
