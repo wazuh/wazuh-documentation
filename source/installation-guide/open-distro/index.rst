@@ -20,7 +20,7 @@ Individual components
 
 - ``Wazuh manager``: this component is in charge of analyzing the data received from the agents and triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, a configuration not compliant with policy, possible rootkit, etc).
 
-- ``Wazuh API``: this component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web user interface, which is the Wazuh Kibana plugin.
+- ``Wazuh API``: this component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web user interface, which is the Wazuh Kibana plugin. Since `Wazuh 4.0` the Wazuh API is embed in the Wazuh manager.
 
 - ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch. This guide will install ``Filebeat-oss``, which is fully open source and `Apache 2.0-licensed`.
 
