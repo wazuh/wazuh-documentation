@@ -21,6 +21,7 @@ Configuration options for file integrity monitoring:
 - `database`_
 - `directories`_
 - `disabled`_
+- `file_limit`_
 - `frequency`_
 - `ignore`_
 - `max_eps`_
@@ -354,6 +355,48 @@ Example:
 .. code-block:: xml
 
  <disabled>no</disabled>
+
+
+file_limit
+^^^^^^^^^^
+
+.. versionadded:: 3.13
+
+Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+
+.. code-block:: xml
+
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>
+      <enabled>yes</enabled>
+      <entries>100000</entries>
+    </file_limit>
+
+
+**enabled**
+
+.. versionadded:: 3.13
+
+Specifies whether there will be a limit on the number of monitored files or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+
+**entries**
+
+.. versionadded:: 3.13
+
+Specifies the number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
 
 
 .. _reference_ossec_syscheck_frequency:
@@ -760,48 +803,6 @@ Example:
 
  <skip_sys>yes</skip_sys>
 
-
-
-file_limit
-^^^^^^^^^^
-
-.. versionadded:: 3.13
-
-Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
-
-.. code-block:: xml
-
-    <!-- Maximum number of files to be monitored -->
-    <file_limit>
-      <enabled>yes</enabled>
-      <entries>100000</entries>
-    </file_limit>
-
-
-**enabled**
-
-.. versionadded:: 3.13
-
-Specifies whether there will be a limit on the number of monitored files or not.
-
-+--------------------+---------------------------------------+
-| **Default value**  | yes                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
-+--------------------+---------------------------------------+
-
-
-**entries**
-
-.. versionadded:: 3.13
-
-Specifies the number of files to be monitored.
-
-+--------------------+------------------------------------------+
-| **Default value**  | 100000                                   |
-+--------------------+------------------------------------------+
-| **Allowed values** | Integer number between 1 and 2147483647. |
-+--------------------+------------------------------------------+
 
 
 .. _reference_ossec_syscheck_synchronization:
