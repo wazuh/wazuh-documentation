@@ -11,31 +11,14 @@ The script will install Java Development Kit and other packages including ``unzi
 Installing Wazuh
 ----------------
 
-.. note:: Root user privileges are required to run all the commands described below.
+.. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
 
-#. In order to download the script, ``curl`` package must be installed on the system:
 
-    .. tabs::
+Download and run the script:
 
-      .. group-tab:: Yum
+.. code-block:: console
 
-        .. code-block:: console
-
-          # yum install curl
-
-      .. group-tab:: APT
-
-        .. code-block:: console
-
-          # apt install curl
-
- 
-
-#. Download and run the script:
-
-  .. code-block:: console
-
-      # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+    # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-icurl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.shnstallation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
 After the execution of the script, it will show the following messages to confirm that the install was made successfully:
 
