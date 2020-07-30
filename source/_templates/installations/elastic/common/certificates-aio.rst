@@ -11,13 +11,13 @@
 
   .. code-block:: console
 
-    # curl -so /etc/elasticsearch/certs/search-guard-tlstool-1.7.zip https://releases.floragunn.com/search-guard-tlstool/1.7/search-guard-tlstool-1.7.zip
+    # curl -so /etc/elasticsearch/certs/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
 
 * Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``:
 
   .. code-block:: console
 
-    # unzip search-guard-tlstool-1.7.zip -d searchguard
+    # unzip search-guard-tlstool-1.8.zip -d searchguard
 
 * Download the ``search-guard.yml`` configuration file. This file is pre-configured to generate all the necessary certificates:
 
