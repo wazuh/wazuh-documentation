@@ -7,36 +7,18 @@ Elasticsearch & Kibana unattended installation
 
 This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section. This script uses the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificate, but any tool can be used to create them.
 
-Run the script
---------------
 
-.. note:: Root user privileges are required to run all the commands described below.
+.. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
 
-In order to download the script, ``curl`` package must be installed on the system:
-
-.. tabs::
-
-  .. group-tab:: Yum
-
-    .. code-block:: console
-
-        # yum install curl
-
-
-  .. group-tab:: APT
-
-    .. code-block:: console
-
-        # apt install curl
 
 The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separate machines. The available options to run the script are:
 
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                       |
 +===============================+===============================================================================================================+
-| -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch                                                                        |
+| -e / --install-elasticsearch  | Installs Open Distro for Elasticsearch (cannot be used together with option ``-k``)                           |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -k / --install-kibana         | Installs Open Distro for Kibana                                                                               |
+| -k / --install-kibana         | Installs Open Distro for Kibana (cannot be used together with option ``-e``)                                  |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -kip / --kibana-ip            | Indicates the IP of Kibana. It can be set to ``0.0.0.0`` which will bind all the availables IPs               |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -50,6 +32,9 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -h / --help                   | Shows help                                                                                                    |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
+
+Installing Open Distro for Elasticsearch
+----------------------------------------
 
 Download the script and the configuration file. After downloading them, configure the installation and run the script. Choose between single-node or multi-node depending on the type of installation:
 
@@ -67,7 +52,7 @@ Download the script and the configuration file. After downloading them, configur
     **Configure the installation** 
 
       .. code-block:: yaml
-        :emphasize-lines: 4, 14, 27, 28, 31
+        :emphasize-lines: 4, 14
 
         ## Single-node configuration
 
@@ -94,18 +79,9 @@ Download the script and the configuration file. After downloading them, configur
             dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
 
 
-        ## Kibana configuration
-        server.host: "<kibana-ip>"
-        elasticsearch.hosts: https://<elasticsearch-ip>:9200
-
-        ## Wazuh master configuration
-        url: https://<wazuh_master_server_IP>
-
       The highlighted lines indicates the values that must be replaced. These values are: 
 
         - ``<elasticsearch_ip>``: Elasticsearch IP.
-        - ``<kibana_ip>``: Kibana server IP.
-        - ``<wazuh_master_server_IP>``: Wazuh Server IP.
 
       In case of having more than one Wazuh server, there can be added as much nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
 
@@ -124,18 +100,7 @@ Download the script and the configuration file. After downloading them, configur
 
         # bash ~/elastic-stack-installation.sh -e 
 
-      - To install Kibana, run the script with the option ``-k``:
-
-      .. code-block:: console
-
-        # bash ~/elastic-stack-installation.sh -k
-
-      - To install Elasticsearch and Kibana together on the same server, run the script with the options ``-e`` and ``-k``:
-
-      .. code-block:: console
-
-        # bash ~/elastic-stack-installation.sh -e -k      
-
+      
 
   .. group-tab:: Multi-node
 
@@ -230,24 +195,12 @@ Download the script and the configuration file. After downloading them, configur
 
         # bash ~/elastic-stack-installation.sh -e -c
 
-      The flag ``-c`` can be added to generate the certificates. This must be done in only one of the nodes of Elasticsearch.
-
-      - To install Kibana, run the script with the option ``-k``:
-
-      .. code-block:: console
-
-        # bash ~/elastic-stack-installation.sh -k
-
-      - To install Elasticsearch and Kibana together on the same server, run the script with the options ``-e`` and ``-k``:
-
-      .. code-block:: console
-
-        # bash ~/elastic-stack-installation.sh -e -k -c              
+      The flag ``-c`` can be added to generate the certificates. This must be done in only one of the nodes of Elasticsearch.          
 
 
 
-Configure Elasticsearch
------------------------
+Configuring Elasticsearch
+-------------------------
 
 After the installation of Elasticsearch, some steps must be done manually. Choose the corresponding tab depending on the type of installation:
 
@@ -290,11 +243,34 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
       # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>  
 
 
+.. _install_kibana_unattended:
+
+Installing Kibana
+-----------------
+
+Download the script. In case of installing Kibana on the same server as Open Distro for Elasticsearch, this step must me skipped:
+
+.. code-block:: console
+
+  # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/elastic-stack-installation.sh
+
+Run the script:
+
+.. code-block:: console
+
+  # bash elastic-stack-installation.sh -k -kip <kibana_IP> -eip <elasticsearch_IP> -wip <wazuh_IP>
+
+The following values must be replaced:
+
+  - ``kibana_IP``: The IP of Kibana. The value 0.0.0.0 will accept all the available IPs of the host.
+  - ``elasticsearch_IP``: The IP of Elasticsearch. The value 0.0.0.0 will accept all the available IPs of the host.
+  - ``wazuh_IP``: The IP of the Wazuh server.
+  
 
 .. _configure_kibana_unattended:
 
-Configure Kibana
-----------------
+Configuring Kibana
+------------------
 
 When the script finishes, some steps must be done manually to finish the installation. Choose the corresponding tab depending on the type of installation:
 
@@ -324,6 +300,8 @@ When the script finishes, some steps must be done manually to finish the install
     To finish Kibana's installation, some steps must be done manually. These steps will vary on whether the installation was made on the same server as Elasticsearch or in a different server:
 
     **Kibana installed on the same server as Elasticsearch**
+
+      If Kibana is installed on the same node where certificates where created, Kibana will be ready to use as soon as the script finishes. In case of installing on a different node, follow the next steps:
 
       - Copy Kibana's certificates into ``/etc/kibana/certs/`` directory:
 
