@@ -93,7 +93,7 @@ Attributes:
 +                          +                                                                                                                       +
 |                          | Files bigger than this value will not report diff information.                                                        |
 +                          +                                                                                                                       +
-|                          | .. versionadded:: 3.14.0                                                                                              |
+|                          | .. versionadded:: 4.0.0                                                                                              |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 50MB                                                     |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -830,7 +830,7 @@ Set the maximum synchronization message throughput.
 diff
 ^^^^
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
 The diff settings will be configured inside this tag.
 
@@ -852,13 +852,13 @@ The diff settings will be configured inside this tag.
 disk_quota
 """"""""""
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
-This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit again.
+This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
 
 **enabled**
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
 Specifies whether there will be a disk quota limit or not.
 
@@ -870,7 +870,7 @@ Specifies whether there will be a disk quota limit or not.
 
 **limit**
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
 Specifices the limit for the size of the ``queue/diff/local`` folder.
 
@@ -883,13 +883,13 @@ Specifices the limit for the size of the ``queue/diff/local`` folder.
 file_size
 """""""""
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
 This option can be used to limit the size of the file which will report diff information with ``report_changes`` enabled. Files bigger than this limit will not report diff information until the size is smaller than the configured limit again.
 
 **enabled**
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
 Specifies whether there will be a file size limit or not.
 
@@ -901,7 +901,7 @@ Specifies whether there will be a file size limit or not.
 
 **limit**
 
-.. versionadded:: 3.14
+.. versionadded:: 4.0
 
 Specifices the limit for the size of files monitored with ``report_changes``.
 
