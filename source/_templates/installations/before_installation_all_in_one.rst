@@ -64,4 +64,3 @@
 
 .. End of include file
 
-apt-get install curl apt-transport-https unzip wget libcap2-bin
