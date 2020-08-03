@@ -18,7 +18,14 @@ Download and run the script:
 
 .. code-block:: console
 
-    # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-icurl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.shnstallation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+    # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+
+The script will perform an health-check to ensure that the host has enough resources to garantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+
+.. code-block:: console
+
+
+  # bash all-in-one-installation.sh -i    
 
 After the execution of the script, it will show the following messages to confirm that the install was made successfully:
 
@@ -34,12 +41,8 @@ After the execution of the script, it will show the following messages to confir
 
 Once Kibana is accessible, the script will quit.
 
-The script will perform an health-check to ensure that the host has enough resources to garantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
-.. code-block:: console
-
-
-  # bash all-in-one-installation.sh -i
 
 Elasticsearch users and roles
 -----------------------------
@@ -66,8 +69,6 @@ Customizing the installation
 After the installation, the Wazuh API will use the default credentials but it is highly recommended to change them. The following document :ref:`securing_api` explains how to change the default user and password among other useful API security information.
 
 The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. It means that Kibana can be accessed from the outside and will accept all the available IPs of the host.  This value can be changed for a specific IP if needed.
-
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
 
