@@ -112,13 +112,13 @@ An example response should look as follows:
                 "cluster_name" : "elasticsearch",
                 "cluster_uuid" : "O82AgJJTTF2pTOXKPnwQsA",
                 "version" : {
-                  "number" : "7.6.1",
+                  "number" : "7.8.0",
                   "build_flavor" : "oss",
                   "build_type" : "rpm",
                   "build_hash" : "aa751e09be0a5072e8570670309b1f12348f023b",
                   "build_date" : "2020-02-29T00:15:25.529771Z",
                   "build_snapshot" : false,
-                  "lucene_version" : "8.4.0",
+                  "lucene_version" : "8.5.1",
                   "minimum_wire_compatibility_version" : "6.8.0",
                   "minimum_index_compatibility_version" : "6.0.0-beta1"
                 },
