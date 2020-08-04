@@ -24,7 +24,7 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -eip / --elasticsearch-ip     | Indicates the IP of Elasticsearch. It can be set to ``0.0.0.0`` which will bind all the availables IPs        |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -wip / --wazuh-ip             | Indicates the IP of Wazuh                                                                                    |
+| -wip / --wazuh-ip             | Indicates the IP of Wazuh                                                                                     |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -c / --create-certificates    | Generates the certificates for all the nodes indicated on the configuration file (only for multi-node mode)   |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
