@@ -37,7 +37,7 @@ release = version
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
+needs_sphinx = '1.8'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -45,7 +45,7 @@ release = version
 extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
-    'sphinxprettysearchresults',
+    'sphinx_tabs.tabs',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -432,7 +432,7 @@ custom_replacements = {
     "|WAZUH_REVISION_HPUX|" : "1",
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_REVISION_WINDOWS|" : "1",
-}   
+}
 
 # -- Setup -------------------------------------------------------------------
 
@@ -442,18 +442,18 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
-    app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
 
-    app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
-    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
