@@ -51,7 +51,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Configure the installation** 
       
-      Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. If you set it to ``0.0.0.0`` it will bind to all the availables IPs. 
+      Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
       .. code-block:: yaml
         :emphasize-lines: 4, 14
