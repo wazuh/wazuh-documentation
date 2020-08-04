@@ -3032,8 +3032,7 @@ div.highlight pre {
       }
 
       #header-default .right {
-        position: relative;
-        height: auto;
+        height: 73px;
       }
 
       .release-selector-wrapper {
