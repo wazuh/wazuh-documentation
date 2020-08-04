@@ -24,7 +24,7 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -eip / --elasticsearch-ip     | Indicates the IP of Elasticsearch. It can be set to ``0.0.0.0`` which will bind all the availables IPs        |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -wip / --wazuh-ip             | Indicates the IP of Wazuh.                                                                                    |
+| -wip / --wazuh-ip             | Indicates the IP of Wazuh                                                                                    |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -c / --create-certificates    | Generates the certificates for all the nodes indicated on the configuration file (only for multi-node mode)   |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -50,6 +50,8 @@ Download the script and the configuration file. After downloading them, configur
           # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
+      
+      Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. If you set it to ``0.0.0.0`` it will bind to all the availables IPs. 
 
       .. code-block:: yaml
         :emphasize-lines: 4, 14
@@ -78,10 +80,6 @@ Download the script and the configuration file. After downloading them, configur
           - name: filebeat
             dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
 
-
-      The highlighted lines indicates the values that must be replaced. These values are: 
-
-        - ``<elasticsearch_ip>``: Elasticsearch IP.
 
       In case of having more than one Wazuh server, there can be added as much nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
 
@@ -168,7 +166,7 @@ Download the script and the configuration file. After downloading them, configur
         ## Wazuh master configuration
         url: https://<wazuh_master_server_IP>   
 
-      The highlighted lines indicates the values that must be replaced. These values are: 
+      The highlighted lines indicates the values that must be replaced in the ``config.yml``. These values are: 
 
         - ``<elasticsearch_ip>``: Elasticsearch IP.
         - ``<node_name>``: Name of the node
@@ -210,7 +208,7 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
 
     Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``/etc/elasticsearch/certs/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
 
-    In case that Kibana was installed in a different server, the certs.tr file should be also copied into its server to extract the :ref:`corresponding certificates <configure_kibana_unattended>`.
+    In case that Kibana was installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the :ref:`corresponding certificates <configure_kibana_unattended>`.
 
 
   .. group-tab:: Multi-node
