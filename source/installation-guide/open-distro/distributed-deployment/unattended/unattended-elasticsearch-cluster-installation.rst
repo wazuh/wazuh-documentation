@@ -53,6 +53,8 @@ Download the script and the configuration file. After downloading them, configur
       
       Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
+      .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
+
       .. code-block:: yaml
         :emphasize-lines: 4, 14
 
