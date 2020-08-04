@@ -260,8 +260,8 @@ Run the script:
 
 The following values must be replaced:
 
-  - ``kibana_IP``: The IP of Kibana. The value 0.0.0.0 will accept all the available IPs of the host.
-  - ``elasticsearch_IP``: The IP of Elasticsearch. The value 0.0.0.0 will accept all the available IPs of the host.
+  - ``kibana_IP``: The IP of Kibana. 
+  - ``elasticsearch_IP``: The IP of Elasticsearch. 
   - ``wazuh_IP``: The IP of the Wazuh server.
   
 
