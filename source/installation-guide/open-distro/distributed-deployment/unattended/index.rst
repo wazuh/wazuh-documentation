@@ -11,7 +11,7 @@ The unattended installation method consists of two scripts that will automatize 
 
 - **Wazuh cluster:** the script will install the Wazuh manager, the Wazuh API and Filebeat on its OSS version.
 
-It is highly recommended to first install Open Distro for Elasticsearch, since the certificates needed for securitizing the communication are created during its installation. 
+It is highly recommended to first install Open Distro for Elasticsearch, since the certificates needed for securing the communication are created during its installation. 
 
 .. toctree::
     :maxdepth: 1
