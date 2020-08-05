@@ -168,7 +168,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 
 
-#. Download the pre-configured Filebeat config file used to forward the Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 
