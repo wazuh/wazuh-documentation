@@ -214,38 +214,6 @@ Install the Wazuh manager package:
     .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
-Installing the Wazuh API
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
-
-
-.. tabs::
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_api.rst
-
-
-.. note::
-  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
-
 .. _basic_wazuh_server_packages_filebeat:
 
 Installing Filebeat
@@ -321,6 +289,33 @@ Filebeat installation and configuration
 
     .. include:: ../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
+To ensure that Filebeat has been successfully installed, run the following command:
+
+    .. code-block:: console
+
+      # filebeat test output
+
+An example response should look as follows:
+
+.. code-block:: none
+  :class: output
+
+  elasticsearch: https://127.0.0.1:9200...
+    parse url... OK
+    connection...
+      parse host... OK
+      dns lookup... OK
+      addresses: 127.0.0.1
+      dial up... OK
+    TLS...
+      security: server's certificate chain verification is enabled
+      handshake... OK
+      TLS version: TLSv1.3
+      dial up... OK
+    talk to server... OK
+    version: 7.8.0
+   
+
 
 Kibana installation and configuration
 -------------------------------------
@@ -362,7 +357,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/app/kibana/wazuhapp-4.0.0_7.8.1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/app/kibana/wazuhapp-4.0.0_7.8.0.zip
 
 #. Enable and start the Kibana service:
 
