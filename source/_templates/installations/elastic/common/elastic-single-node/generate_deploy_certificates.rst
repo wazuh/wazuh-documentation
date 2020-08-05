@@ -85,7 +85,10 @@
     # tar -cf certs.tar *
     # tar --delete -f certs.tar 'searchguard'
 
+* Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
+
 * Once the certificates have been deployed into their corresponding destination, they can be removed from the Elasticsearch's server:
+
 
   .. code-block:: console
 
