@@ -18,7 +18,7 @@ Subsections
 -----------
 
 - `server`_
-- `auto_enrollment`_
+- `enrollment`_
 
 server
 ^^^^^^
@@ -301,12 +301,12 @@ Sample configuration
       <auto_restart>yes</auto_restart>
     </client>
 
-auto_enrollment
-^^^^^^^^^^^^^^^
+enrollment
+^^^^^^^^^^
 
 .. versionadded:: 4.0
 
-Configures the connection parameters for auto-enrollment agent feature.
+Configures the connection parameters for the agent enrollment.
 
 Options
 -------
@@ -329,7 +329,7 @@ Options
 enabled
 ^^^^^^^
 
-Enables/Disabled agent auto-enrollment.
+Enables/Disables agent enrollment.
 
 +--------------------+----------------------------------+
 | **Default value**  | yes                              |
@@ -488,7 +488,7 @@ Sample configuration
 .. code-block:: xml
 
     <client>
-      <auto_enrollment>
+      <enrollment>
         <enabled>yes</enabled>
         <manager_address>192.168.1.100</manager_address>
         <port>1515</port>
@@ -503,5 +503,5 @@ Sample configuration
         <auto_method>no</auto_method>
         <delay_after_enrollment>20</delay_after_enrollment>
         <use_source_ip>no</use_source_ip>
-      </auto_enrollment>
+      </enrollment>
     </client>
