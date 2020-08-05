@@ -42,13 +42,13 @@
 
                     .. code-block:: console
 
-                        # wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+                        # wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
 
                 Add the repository of AdoptOpenJDK:
 
                     .. code-block:: console
 
-                        # sudo add-apt-repository https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+                        # add-apt-repository https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 
                 Update repository data:
 

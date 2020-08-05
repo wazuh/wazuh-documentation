@@ -9,6 +9,6 @@ Alternatively, you can set the package state to ``hold``, which will stop update
 
 .. code-block:: console
 
-  # echo "wazuh-agent hold" | sudo dpkg --set-selections
+  # echo "wazuh-agent hold" | dpkg --set-selections
 
 .. End of include file
