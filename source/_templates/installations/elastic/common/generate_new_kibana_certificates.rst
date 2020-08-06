@@ -8,7 +8,7 @@ In case of installing Kibana on a separate host where Elasticsearch was installe
   .. code-block:: yaml
 
     - name: kibana
-      dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=ES
+      dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US
 
 * Run the Search Guard’s script to create the certificates:
 

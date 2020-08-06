@@ -84,5 +84,5 @@ When new node certificates are created, they must be added in the Elasticsearch'
         :emphasize-lines: 3
 
         opendistro_security.nodes_dn:
-            - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
             - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
