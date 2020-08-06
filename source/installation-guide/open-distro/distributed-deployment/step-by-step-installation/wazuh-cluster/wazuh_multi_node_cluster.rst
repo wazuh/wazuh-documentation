@@ -130,7 +130,7 @@ Filebeat installation and configuration
 
 
 
-#. Download the pre-configured Filebeat config file used to forward the Wazuh alerts to Elasticsearch:
+#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
 

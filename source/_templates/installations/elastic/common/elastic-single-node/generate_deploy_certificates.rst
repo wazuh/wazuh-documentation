@@ -30,7 +30,7 @@
         # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard.yml
 
 
-      After downloading the configuration file in ``/etc/elasticsearch/certs/searchguard/search-guard.yml``, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. There can be indicated more than one IP, setting one per line:
+      After downloading the configuration file in ``/etc/elasticsearch/certs/searchguard/search-guard.yml``, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
@@ -47,7 +47,7 @@
         # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/searchguard/single-node/search-guard-multi-node.yml
 
 
-      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP in the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml``. There can be indicated more than one IP, setting one per line:
+      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP in the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
@@ -85,7 +85,10 @@
     # tar -cf certs.tar *
     # tar --delete -f certs.tar 'searchguard'
 
+* Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
+
 * Once the certificates have been deployed into their corresponding destination, they can be removed from the Elasticsearch's server:
+
 
   .. code-block:: console
 
