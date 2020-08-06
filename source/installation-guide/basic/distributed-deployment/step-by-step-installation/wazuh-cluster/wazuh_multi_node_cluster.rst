@@ -211,6 +211,7 @@ Filebeat installation and configuration
     .. code-block:: console
 
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.13.1/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
@@ -232,9 +233,6 @@ Filebeat installation and configuration
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Load the Filebeat template:
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/load_filebeat_template.rst
 
 Next steps
 ----------
