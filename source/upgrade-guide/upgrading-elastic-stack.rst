@@ -30,13 +30,13 @@ Preparing Elastic Stack
 
       .. group-tab:: YUM
 
-          * Open Distro for Elasticsearch (if the Wazuh repository is disabled it is necessary to enable it to get the latest packages):
+          * Open Distro for Elasticsearch. If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
 
             .. code-block:: console
 
               # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
 
-          * Elastic (in case of having disabled the repository for Elastic Stack 7.x it can be enabled using):
+          * Elastic. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
             .. code-block:: console
 
@@ -44,13 +44,13 @@ Preparing Elastic Stack
 
       .. group-tab:: APT
 
-          * Open Distro for Elasticsearch (if the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository):
+          * Open Distro for Elasticsearch. If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository:
 
             .. code-block:: console
 
               # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
 
-          * Elastic (in case of having disabled the repository for Elastic Stack 7.x it can be enabled using the command below. This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository):
+          * Elastic. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using the command below. This step is not necessary if the packages are set to a ``hold`` state instead of disabling the repository:
 
             .. code-block:: console
 
@@ -59,13 +59,13 @@ Preparing Elastic Stack
 
       .. group-tab:: ZYpp
 
-          * Open Distro for Elasticsearch (if the Wazuh repository is disabled it is necessary to enable it to get the latest packages):
+          * Open Distro for Elasticsearch. If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
 
             .. code-block:: console
 
               # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-          * Elastic (in case of having disabled the repository for Elastic Stack 7.x it can be enabled using):
+          * Elastic. In case of having disabled the repository for Elastic Stack 7.x it can be enabled using:
 
             .. code-block:: console
 
