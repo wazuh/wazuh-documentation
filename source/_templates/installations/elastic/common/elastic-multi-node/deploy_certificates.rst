@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Copy the  ``certs.tar`` file into each Elasticsearch node, except the master node, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+This guide assumes that the file ``certs.tar`` is placed in ~/ (home user folder).
 
 The ``X`` must be replaced with the number used in the certificate name defined for the corresponding Elasticsearch server:
 
