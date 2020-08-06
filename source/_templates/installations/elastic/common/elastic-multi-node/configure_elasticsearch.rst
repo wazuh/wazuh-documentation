@@ -36,8 +36,8 @@ Besides, the node certificates for each node must be specified under the ``opend
         :emphasize-lines: 4
 
         opendistro_security.nodes_dn:
-            - CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
-            - CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
+            - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
+            - CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
             - CN=<common_name>,OU=<operational_unit>,O=<organization_name>,L=<locality>,C=<country_code>
 
 .. End of include file

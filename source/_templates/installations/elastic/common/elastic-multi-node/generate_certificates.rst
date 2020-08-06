@@ -36,15 +36,15 @@
 
           nodes:
             - name: node-1
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
             ip:
               - <elasticsearch_X_IP>
             - name: node-2
-            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
             ip:
               - <elasticsearch_X_IP>
             - name: node-3
-            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
             ip:
               - <elasticsearch_X_IP>
 
@@ -61,15 +61,15 @@
 
           nodes:
             - name: node-1
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
             ip:
               - <elasticsearch_X_IP>
             - name: node-2
-            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
             ip:
               - <elasticsearch_X_IP>
             - name: node-3
-            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
             ip:
               - <elasticsearch_X_IP>
 
@@ -78,9 +78,9 @@
         .. code-block:: yaml
 
           - name: filebeat-1
-            dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=US
           - name: filebeat-2
-            dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=ES
+            dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US
 
 
   To learn more about how to create and configure the certificates visit the :ref:`Certificates deployment section <user_manual_certificates>`.
