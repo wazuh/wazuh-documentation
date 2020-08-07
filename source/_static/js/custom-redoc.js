@@ -34,6 +34,17 @@ function init() {
         });
 
         checkMenu(btn);
+        document.addEventListener('scroll', function() {
+          const docHeight = document.body.clientHeight;
+          const docWidth = document.body.clientWidth;
+          const botomPos = window.innerHeight+window.scrollY;
+          const menu = document.querySelector('.menu-content');
+          if ( docHeight - 30 <= botomPos && docWidth > 800 ) {
+            menu.classList.add('reached-bottom');
+          } else {
+            menu.classList.remove('reached-bottom');
+          }
+        });
       }
     }
   };

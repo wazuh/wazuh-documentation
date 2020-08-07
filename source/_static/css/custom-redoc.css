@@ -6,6 +6,7 @@ body {
   font-size: 1rem;
   color: #333333;
   line-height: 1.4;
+
 }
 
 redoc[spec-url] .sc-bMVAic.llQIcF.btn-close {
@@ -98,6 +99,11 @@ redoc[spec-url] .sc-bMVAic.llQIcF.btn-close.collapsed::before {
 
 .loading redoc[spec-url] {
 	/* display:none; */
+}
+
+redoc[spec-url] .bmRLPL a {
+	font-size: 0.68rem;
+	text-decoration: none;
 }
 
 redoc[spec-url] .sc-bMVAic.llQIcF {
@@ -322,10 +328,6 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
   color: #ffffff;
 }
 
-#footer-redoc {
-	background-color: #eaeaea;
-}
-
 #footer-redoc #footer-content {
 	background-color: #f4f4f4;
   padding: 15px;
@@ -363,6 +365,36 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
     margin-left: auto;
 		padding: 30px 45px;
 	}
+
+	.redoc-wrap .menu-content.reached-bottom {
+		height: calc(100vh - 52px)!important;
+	}
+
+	.redoc-wrap .menu-content label.active {
+		border-right: 1px solid #eaeaea;
+	}
+
+	body:not(.loading)::before {
+		content: " ";
+		background-color: #eaeaea;
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 260px;
+	}
+
+	.redoc-wrap .api-content {
+		padding-bottom: 79px;
+	}
+
+	footer#footer-redoc {
+    position: relative;
+    height: 0;
+    bottom: 79px;
+    right: 0;
+    left: 0;
+	}
 }
 
 @media (min-width: 1201px){
@@ -370,7 +402,8 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
 		margin-top: 0;
 	}
 
-	.redoc-wrap .menu-content {
+	.redoc-wrap .menu-content,
+	.redoc-wrap .menu-content.reached-bottom	{
 		top: 100px!important;
 		height: calc(100vh - 100px)!important;
 	}
