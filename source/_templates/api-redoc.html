@@ -5,7 +5,7 @@
   <head>
     <title>API reference{{ titlesuffix }}</title>
     <link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
-    <link rel="stylesheet" href="{{ pathto('_static/css/custom-redoc.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/css/custom-redoc.min.css', 1) }}" type="text/css" />
 
     {# FAVICON  and canonical #}
     {%- if favicon %}
@@ -54,6 +54,6 @@
       </div>
     </footer>
     <script src="{{ pathto('_static/js/redoc.standalone.js', 1) }}"></script>
-    <script src="{{ pathto('_static/js/custom-redoc.js', 1) }}"></script>
+    <script src="{{ pathto('_static/js/custom-redoc.min.js', 1) }}"></script>
   </body>
 </html>

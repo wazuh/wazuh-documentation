@@ -352,9 +352,11 @@ def minification(actual_path):
     files = [
         ['css/style','css'],
         ['css/wazuh-icons','css'],
+        ['css/custom-redoc','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
-        ['js/style','js']
+        ['js/style','js'],
+        ['js/custom-redoc','js']
     ]
 
     for file in files:

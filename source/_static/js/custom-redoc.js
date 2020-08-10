@@ -11,11 +11,11 @@ function init() {
       if (mutationsList[i].type === 'childList'
       && mutationsList[i].addedNodes[0]
       && mutationsList[i].addedNodes[0].classList.contains('redoc-wrap')) {
-        // When redoc is finally loaded
-        // Show custom header
+        /* When redoc is finally loaded */
+        /* Show custom header */
         document.querySelector('body').classList.remove('loading');
 
-        // Change toggle-menu button
+        /* Change toggle-menu button */
         const removed = document.querySelector('.sc-gqPbQI.imibLw');
         const btn = removed.parentNode;
         const icon = document.createElement('i');
