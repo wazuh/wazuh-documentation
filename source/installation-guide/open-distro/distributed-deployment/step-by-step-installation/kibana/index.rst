@@ -22,7 +22,7 @@ Before installing Kibana, some extra packages must be installed:
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This step is required only if Kibana will be installed on a separate host where Elasticsearch was installed
+This step is required only if Kibana will be installed on a separate host where Elasticsearch was installed.
 
 .. tabs::
 
