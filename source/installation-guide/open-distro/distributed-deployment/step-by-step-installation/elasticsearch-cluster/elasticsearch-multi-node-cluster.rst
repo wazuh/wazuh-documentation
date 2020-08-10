@@ -164,7 +164,7 @@ Certificates deployment
 
 Once the installation process is done in all the servers of the Elasticsearch cluster, run the security admin script on the **initial node**: 
 
-#. Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
+Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
   .. code-block:: console
 
