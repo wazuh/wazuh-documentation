@@ -9,6 +9,8 @@ package-lock.json
 package.json
 source/_static/css/style.min.css
 source/_static/css/wazuh-icons.min.css
+source/_static/css/custom-redoc.min.css
 source/_static/js/style.min.js
 source/_static/js/version-selector.min.js
 source/_static/js/redirects.min.js
+source/_static/js/custom-redoc.min.js

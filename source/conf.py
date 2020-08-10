@@ -30,9 +30,10 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.12'
+version = '4.0'
 # The full version, including alpha/beta/rc tags
 release = version
+apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/dev-aiohttp-poc/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
 
@@ -171,7 +172,10 @@ html_static_path = ['_static']
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
-#html_additional_pages = {}
+if version >= '4.0':
+    html_additional_pages = {
+        'user-manual/api/reference': 'api-redoc.html',
+    }
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -349,9 +353,11 @@ def minification(actual_path):
     files = [
         ['css/style','css'],
         ['css/wazuh-icons','css'],
+        ['css/custom-redoc','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
-        ['js/style','js']
+        ['js/style','js'],
+        ['js/custom-redoc','js']
     ]
 
     for file in files:
@@ -479,5 +485,6 @@ html_context = {
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
     "github_version": version,
-    "production": production
+    "production": production,
+    "apiURL": apiURL
 }
