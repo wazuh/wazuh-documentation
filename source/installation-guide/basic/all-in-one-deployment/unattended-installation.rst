@@ -30,6 +30,7 @@ After the execution of the script, it will show the following messages to confir
 
 .. code-block:: none
   :class: output
+  :emphasize-lines: 26
 
   # Checking the installation...
   # Elasticsearch installation succeeded.
@@ -62,7 +63,7 @@ After the execution of the script, it will show the following messages to confir
 
 
 
-Once Kibana is accessible, the script will quit.
+Once Kibana is accessible, the script will quit. Save the password for ``elastic`` user since this will be needed to access Kibana.
 
 
 Customizing the installation
