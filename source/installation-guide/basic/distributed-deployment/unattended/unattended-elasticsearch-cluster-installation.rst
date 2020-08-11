@@ -48,8 +48,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
@@ -310,30 +310,34 @@ When the script finishes, some steps must be done manually to finish the install
 
       .. code-block:: console
 
-        # mkdir /etc/kibana/certs/
-        # cp /etc/elasticsearch/certs/elasticsearch.pem /etc/kibana/certs/kibana.pem
+        # cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/
         # cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key
+        # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/kibana/certs/kibana.crt
+        # chown -R kibana:kibana /etc/kibana/
+        # chmod -R 500 /etc/kibana/certs
+        # chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
 
     **Kibana installed on a different server from Elasticsearch**
 
-      - Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+      - Copy the ``certs.zip`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
           .. code-block:: console
 
-            # mv ~/certs.tar /etc/kibana/certs/
-            # cd /etc/kibana/certs/
-            # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
+            # cp ~/certs/ca.crt /etc/kibana/certs/ca
+            # cp ~/certs/kibana/* /etc/kibana/certs/
+            # chown -R kibana: /etc/kibana/certs
+            # chmod -R 500 /etc/kibana/certs
+            # chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
+            # rm -rf ~/certs ~/kibana.zip
 
     Once the certificates have been palced, Kibana can be started:
 
       .. include:: ../../../../_templates/installations/elastic/common/enable_kibana.rst           
           
 
-With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem`` previously created to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
+With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
-.. note:: The Kibana service listens to port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
-
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
 
 With the first access attempt, the Wazuh Kibana plugin may prompt a message that indicates that the Wazuh API is not working. To solve this issue edit the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` and replace the ``url`` value by the Wazuh's server IP in which the Wazuh API is installed:
 
