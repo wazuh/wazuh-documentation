@@ -56,7 +56,7 @@ protocol
 Specifies the protocol to use. It is available for secure connections and syslog events.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
@@ -140,7 +140,7 @@ Example of configuration
     <remote>
       <connection>syslog</connection>
       <port>514</port>
-      <protocol>udp</protocol>
+      <protocol>tcp</protocol>
       <allowed-ips>192.168.1.0/24</allowed-ips>
       <local_ip>192.168.1.5</local_ip>
     </remote>
@@ -148,6 +148,6 @@ Example of configuration
     <remote>
       <connection>secure</connection>
       <port>1514</port>
-      <protocol>udp</protocol>
+      <protocol>tcp</protocol>
       <queue_size>16384</queue_size>
     </remote>
