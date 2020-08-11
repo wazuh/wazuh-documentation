@@ -40,7 +40,7 @@ To configure syscheck, a list of files and directories must be identified. The `
     <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
   </syscheck>
 
-Syscheck can monitor directories/file that contain commas by scaping them.
+Syscheck can monitor directories/files that contain commas by scaping them.
 
 .. code-block:: xml
 
