@@ -46,7 +46,7 @@ Install the Wazuh manager software and confirm it is running:
     # yum -y install wazuh-manager
     # systemctl status wazuh-manager
 
-Configure Wazuh manager to listen for agent connections on tcp instead of udp:
+Configure Wazuh manager to listen for agent connections on tcp instead of udp, if this value is set:
 
   .. code-block:: console
 
