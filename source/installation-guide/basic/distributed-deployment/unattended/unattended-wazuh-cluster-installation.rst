@@ -47,7 +47,7 @@ Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order t
         # bash ~/wazuh-server-installation.sh -ip <elasticsearch_IP> -p <elastic_password>
 
     Values to be replaced:
-    
+
     - ``<elasticsearch_IP>``: The IP of Elasticsearch.
     - ``elastic_user_password``: The password of the user ``elastic`` generated during the Elasticsearch installation.
 
@@ -58,7 +58,11 @@ Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order t
 
         # bash ~/wazuh-server-installation.sh -ip <elasticsearch_IP_1> -ip <elasticsearch_IP_2>
 
-    Replace the ``<elasticsearch_IP_X>`` values by the corresponding Elasticsearch IPs. There must be added as many ``-ip`` tags as nodes needed.
+    Values to be replaced:
+    
+    - ``<elasticsearch_IP_X>``: The IP of Elasticsearch ``node_X``. There must be added as many ``-ip`` tags as nodes needed.
+    - ``elastic_user_password``: The password of the user ``elastic`` generated during the Elasticsearch installation.    
+
 
 
 The script allows the following options:
@@ -67,6 +71,8 @@ The script allows the following options:
 | Options                       | Purpose                                                                                                       |
 +===============================+===============================================================================================================+
 | -ip / --elasticsearch-ip      | Indicates the IP of Elasticsearch. Can be added as many as necessary                                          |
++-------------------------------+---------------------------------------------------------------------------------------------------------------+
+| -p / --elastic-password       | Elastic user password                                                                                         |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -i / --ignore-healthcheck     | Ignores the health-check                                                                                      |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -84,7 +90,7 @@ After the installation of all the components of the node, some steps must be don
   .. group-tab:: Single-node
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/common/copy_certificates_filebeat.rst
+    .. include:: ../../../../_templates/installations/basic/elastic/common/copy_certificates_filebeat_un.rst
 
 
 
@@ -117,7 +123,20 @@ After the installation of all the components of the node, some steps must be don
 
     **Certificates deployment**
     
-    .. include:: ../../../../_templates/installations/basic/elastic/common/copy_certificates_filebeat_wazuh_cluster.rst
+    During the Elasticsearch installation, the ``certs.zip`` file was created. The file must be copied into the Wazuh server host, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+
+    The ``X`` must be replaced with the number used in the certificate name defined for this Wazuh server:
+
+    .. code-block:: console
+
+      # zip -d ~/certs.zip "ca/ca.key"
+      # unzip ~/certs.zip -d ~/certs
+      # cp -R ~/certs/ca/ ~/certs/filebeat-X/* /etc/filebeat/certs/
+      # mv /etc/filebeat/certs/filebeat-X.crt /etc/filebeat/certs/filebeat.crt
+      # mv /etc/filebeat/certs/filebeat-X.key /etc/filebeat/certs/filebeat.key
+      # chmod -R 500 /etc/filebeat/certs
+      # chmod 400 /etc/filebeat/certs/ca/ca.* /etc/filebeat/certs/filebeat.*
+      # rm -rf ~/certs/ ~/certs.zip
 
 
 
@@ -134,19 +153,20 @@ To ensure that Filebeat has been successfully installed, run the following comma
 An example response should look as follows:
 
 .. code-block:: none
-            :class: output
+  :class: output
 
-            elasticsearch: https://<elasticsearch_IP>:9200...
-                parse url... OK
-                connection...
-                parse host... OK
-                dns lookup... OK
-                addresses: <elasticsearch_IP>
-                dial up... OK
-                TLS...
-                security: server's certificate chain verification is enabled
-                handshake... OK
-                TLS version: TLSv1.3
-                dial up... OK
-                talk to server... OK
-                version: 7.8.0
+  elasticsearch: https://172.16.1.40:9200...
+    parse url... OK
+    connection...
+      parse host... OK
+      dns lookup... OK
+      addresses: 172.16.1.40
+      dial up... OK
+    TLS...
+      security: server's certificate chain verification is enabled
+      handshake... OK
+      TLS version: TLSv1.3
+      dial up... OK
+    talk to server... OK
+    version: 7.8.1
+
