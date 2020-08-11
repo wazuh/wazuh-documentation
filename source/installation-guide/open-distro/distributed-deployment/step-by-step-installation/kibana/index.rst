@@ -12,6 +12,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 It is recommended to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
+.. note:: Root user privileges are required to run all the commands described below.
+
 Prerequisites
 ~~~~~~~~~~~~~
 
