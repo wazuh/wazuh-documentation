@@ -8,26 +8,8 @@
                 
                 .. code-block:: console
 
-                    # yum install curl unzip wget libcap
-
-            Add the repository of AdoptOpenJDK:
-
-                .. code-block:: console
-
-                    #  cat <<'EOF' > /etc/yum.repos.d/adoptopenjdk.repo
-                    [AdoptOpenJDK]
-                    name=AdoptOpenJDK
-                    baseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/centos/$releasever/$basearch
-                    enabled=1
-                    gpgcheck=1
-                    gpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
-                    EOF
-
-            Install the AdoptOpenJDK-11 package:
-
-                .. code-block:: console
-
-                    # yum install adoptopenjdk-11-hotspot && export JAVA_HOME=/usr/ 
+                    # yum install curl unzip wget && yum install java-11-openjdk-devel || yum install java-1.8.0-openjdk.x86_64 
+                    # export JAVA_HOME=/usr/ 
 
 
         .. group-tab:: APT
@@ -38,28 +20,32 @@
 
                         # apt install curl apt-transport-https unzip wget software-properties-common
 
-                Import the GPG key for AdoptOpenJDK:
+                Add the repository for Java Development Kit (JDK):
 
-                    .. code-block:: console
-
-                        # wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
-
-                Add the repository of AdoptOpenJDK:
-
-                    .. code-block:: console
-
-                        # add-apt-repository https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-
-                Update repository data:
+                    * For Debian:
 
                         .. code-block:: console
 
-                            # apt update
+                            # echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
 
-                Install the AdoptOpenJDK-11 package:
+
+                    * For Ubuntu and other Debian based OS:
+
+                            .. code-block:: console
+
+                                # add-apt-repository ppa:openjdk-r/ppa
+
+                Update repository data:
 
                     .. code-block:: console
 
-                        # apt install adoptopenjdk-11-hotspot && export JAVA_HOME=/usr/
+                        # apt update
+
+                Install all the required utilities:
+
+                    .. code-block:: console
+
+                        # apt install openjdk-11-jdk && export JAVA_HOME=/usr/    
 
 .. End of include file
+
