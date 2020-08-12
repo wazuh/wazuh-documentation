@@ -10,7 +10,7 @@ This section describes how to upgrade the Wazuh server, including the Wazuh mana
 Upgrading the Wazuh server
 --------------------------
 
-To upgrade the Wazuh server choose the appropriate tab for the desired package type:
+To upgrade the Wazuh server choose the appropriate tab for the desired package manager:
 
 .. tabs::
 
