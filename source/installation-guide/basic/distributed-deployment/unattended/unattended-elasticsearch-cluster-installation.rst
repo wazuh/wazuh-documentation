@@ -53,12 +53,12 @@ Download the script and the configuration file. After downloading them, configur
 
     **Configure the installation** 
       
-      Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
+      Edit the ``~/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
       .. code-block:: yaml
-        :emphasize-lines: 4, 12, 15
+        :emphasize-lines: 4, 12, 15, 18
 
         ## Single-node configuration
 
@@ -75,6 +75,9 @@ Download the script and the configuration file. After downloading them, configur
         - name: "filebeat"
           ip:
           - "<wazuh_server_ip>"  
+        - name: "kibana"
+          ip:
+          - "<kibana_ip>"            
 
 
       In case of having more than one Wazuh servers, there can be specified as many fields as needed:
@@ -83,15 +86,7 @@ Download the script and the configuration file. After downloading them, configur
 
         - name: "filebeat-X"
           ip:
-          -"<wazuh_server_ip_X>" 
-
-      If Kibana is going to be installed on a different server, the following information must be added to the ``config.yml`` file:
-
-      .. code-block:: yaml
-
-        - name: "kibana"
-          ip:
-          -"<kibana_ip>"                
+          - "<wazuh_server_ip_X>"                      
 
 
 
@@ -103,6 +98,36 @@ Download the script and the configuration file. After downloading them, configur
 
         # bash ~/elastic-stack-installation.sh -e 
 
+      After the installation, the script will prompt an output like this:
+
+      .. code-block:: console
+        :class: output
+
+        During the installation of Elasticsearch the passwords for its user were generated. Please take note of them:
+        Changed password for user apm_system
+        PASSWORD apm_system = Xf7bzEhl5fa9h3L0noyl
+
+        Changed password for user kibana_system
+        PASSWORD kibana_system = WyP1F5aCA8DHLwB14zOq
+
+        Changed password for user kibana
+        PASSWORD kibana = WyP1F5aCA8DHLwB14zOq
+
+        Changed password for user logstash_system
+        PASSWORD logstash_system = mA3OOfGjEYBYGB2DZt1Q
+
+        Changed password for user beats_system
+        PASSWORD beats_system = AeOqYqDsQ5CKqGP04eUv
+
+        Changed password for user remote_monitoring_user
+        PASSWORD remote_monitoring_user = DVxxnCyQTcOuv6h7c90H
+
+        Changed password for user elastic
+        PASSWORD elastic = 3SHBeIBKIjSN2CyE62Ls
+
+        Elasticsearch installation finished
+
+
       
 
   .. group-tab:: Multi-node
@@ -111,13 +136,13 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/distributed/templates/config_cluster.yml
 
     **Configure the installation**
 
       .. code-block:: yaml
-        :emphasize-lines: 4, 5, 6, 8, 9, 10, 12, 13, 14, 26, 30, 34, 47, 48, 51
+        :emphasize-lines: 4, 5, 6, 8, 9, 10, 12, 13, 14, 20, 23, 26, 29, 32
 
         ## Multi-node configuration
 
@@ -133,43 +158,24 @@ Download the script and the configuration file. After downloading them, configur
                 - <elasticsearch_ip_node1>
                 - <elasticsearch_ip_node2>
                 - <elasticsearch_ip_node3>
-        opendistro_security.nodes_dn:
-                - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-                - CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
-                - CN=node-3,OU=Docu,O=Wazuh,L=California,C=US     
 
         ## Certificates creation
-        # Nodes certificates
-        nodes:
-          - name: node-1
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_ip_1>
-          - name: node-2
-            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_ip_2>
-          - name: node-3
-            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_ip_3>            
-        # Clients certificates
-        clients:
-          - name: admin
-            dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-            admin: true
-          - name: kibana
-            dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
-          - name: filebeat
-            dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
-
-
-        ## Kibana configuration
-        server.host: "<kibana-ip>"
-        elasticsearch.hosts: https://<elasticsearch-ip>:9200
-
-        ## Wazuh master configuration
-        url: https://<wazuh_master_server_IP>   
+        instances:
+        - name: "elasticsearch-1"
+          ip:
+          - "<elasticsearch_ip-1>"
+        - name: "elasticsearch-2"
+          ip:
+          - "<elasticsearch_ip-2>"
+        - name: "elasticsearch-3"
+          ip:
+          - "<elasticsearch_ip-3>"
+        - name: "filebeat"
+          ip:
+          - "<wazuh_server_ip>" 
+        - name: "kibana"
+          ip:
+          - "<kibana_ip>"              
 
       The highlighted lines indicates the values that must be replaced in the ``config.yml``. These values are: 
 
@@ -177,28 +183,34 @@ Download the script and the configuration file. After downloading them, configur
         - ``<node_name>``: Name of the node
         - ``<elastic_cluster>``: Name of the cluster. This value must be the same in all the involved nodes.
         - ``<master_node_x>``: Name of the node ``X``.
-        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``.
-        - ``<kibana_ip>``: Kibana server IP.
-        - ``<wazuh_master_server_IP>``: Wazuh Server IP.
+        - ``<elasticsearch_ip-X>``: Elasticsearch IP of the node ``X``.
+        - ``<wazuh_server_IP>``: Wazuh Server IP.
+        - ``<kibana_ip>``: The IP of Kibana.
 
-      There can be added as many Elasticsearch nodes as needed. To generate certificates for them, the ``opendistro_security.nodes_dn`` must be also updated, adding the information of these new certificates. There must be the same number of certificates rows as nodes will be on the installation.
+      There can be added as many Elasticsearch nodes as needed. To generate certificates for them, the ``instances`` section must be also updated, adding the information of these new certificates. There must be the same number of certificates rows as nodes will be on the installation.
 
-      In case of having more than one Wazuh server, there can be added as many nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      In case of having more than one Wazuh servers, there can be specified as many fields as needed:
 
-        .. code-block:: yaml
+      .. code-block:: yaml
 
-          - name: filebeat-X
-            dn: CN=filebeat-x,OU=Docu,O=Wazuh,L=California,C=US                
+        - name: "filebeat-X"
+          ip:
+          - "<wazuh_server_ip_X>"                
 
     **Run the script**
 
-      - To install Elasticsearch, run the script with the option ``-e``:
+      - The first node of Elasticsearch will be considered as the initial node, this means that this node will be in charged of creating the certificates that must be distributed through the rest of the involved nodes of the installation. The option ``-c`` is used to generate the certificates:
 
       .. code-block:: console
 
         # bash ~/elastic-stack-installation.sh -e -c
 
-      The flag ``-c`` can be added to generate the certificates. This must be done in only one of the nodes of Elasticsearch.          
+      After the installation, Elasticsearch will start and will prompt an output like this:
+
+      .. code-block: console
+        :class: output
+
+      - The subsequent nodes 
 
 
 
