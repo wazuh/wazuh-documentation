@@ -24,9 +24,9 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 
     Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
+    .. code-block:: console
 
-          # yum upgrade wazuh-manager
+        # yum upgrade wazuh-manager
 
   .. group-tab:: APT
 
@@ -38,10 +38,10 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 
     Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
+    .. code-block:: console
 
-          # apt-get update
-          # apt-get install wazuh-manager
+        # apt-get update
+        # apt-get install wazuh-manager
 
   .. group-tab:: ZYpp
 
@@ -53,9 +53,15 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 
     Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
+    .. code-block:: console
 
-          # zypper update wazuh-manager
+        # zypper update wazuh-manager
+
+After upgrade the Wazuh manager, it is necessary to start the service:
+
+    
+    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
 
 .. note::
   The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
