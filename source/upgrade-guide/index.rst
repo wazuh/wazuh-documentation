@@ -9,7 +9,7 @@ This guide describes the upgrade process of the Wazuh server, Elastic Stack, for
 
 The :ref:`Upgrading from a legacy version <upgrading_wazuh_legacy>` section is for those users who need to upgrade the Wazuh installation from a version prior to 3.0.
 
-In case of having any doubt about operating system compatibility, please check the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app#older-packages>`_.
+In case of having any doubt about operating system compatibility, please check the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 
     .. toctree::
