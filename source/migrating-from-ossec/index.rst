@@ -15,7 +15,7 @@ Unfortunately OSSEC users have not seen lots of new features over the last decad
 
 This is why, back in 2015, Wazuh team decided to fork the project. The result is a much more comprehensive, easy to use, reliable and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments.
 
-Regarding project activity and roadmap, you can find Wazuh code in our `Github repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC).
+Regarding project activity and roadmap, you can find Wazuh code in our `GitHub repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC).
 
 Here is a brief summary of the value we added to the OSSEC project, and good reasons to upgrade your security monitoring infrastructure moving it to Wazuh:
 
