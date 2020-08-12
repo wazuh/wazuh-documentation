@@ -16,7 +16,7 @@ Download the script:
 
 .. code-block:: console
 
-    # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/distributed/wazuh-server-installation.sh 
+  # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/distributed/wazuh-server-installation.sh
     
 
 Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order to connect with them. Choose between single-node or multi-node depending on the type of installation. The following commands assume that the script has been downloaded in the home directory ( ``~/`` ):
