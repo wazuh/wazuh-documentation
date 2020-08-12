@@ -28,7 +28,7 @@
 
       .. code-block:: console
 
-        # update-rc.d elasticsearch defaults 95 10
-        # service elasticsearch start
+        # update-rc.d wazuh-manager defaults 95 10
+        # service wazuh-manager start
 
 .. End of include file
