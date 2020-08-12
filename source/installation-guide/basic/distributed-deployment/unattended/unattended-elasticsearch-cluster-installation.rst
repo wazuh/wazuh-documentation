@@ -58,7 +58,7 @@ Download the script and the configuration file. After downloading them, configur
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
       .. code-block:: yaml
-        :emphasize-lines: 4, 14
+        :emphasize-lines: 4, 12, 15
 
         ## Single-node configuration
 
@@ -68,29 +68,30 @@ Download the script and the configuration file. After downloading them, configur
         cluster.initial_master_nodes: node-1
 
         ## Certificates creation
-        # Nodes certificates
-        nodes:
-          - name: node-1
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_ip>
-        # Clients certificates
-        clients:
-          - name: admin
-            dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-            admin: true
-          - name: kibana
-            dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
-          - name: filebeat
-            dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
+        instances:
+        - name: "elasticsearch"
+          ip:
+          - "<elasticsearch_ip>"
+        - name: "filebeat"
+          ip:
+          - "<wazuh_server_ip>"  
 
 
-      In case of having more than one Wazuh server, there can be added as much nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      In case of having more than one Wazuh servers, there can be specified as many fields as needed:
 
-        .. code-block:: yaml
+      .. code-block:: yaml
 
-          - name: filebeat-X
-            dn: CN=filebeat-x,OU=Docu,O=Wazuh,L=California,C=US          
+        - name: "filebeat-X"
+          ip:
+          -"<wazuh_server_ip_X>" 
+
+      If Kibana is going to be installed on a different server, the following information must be added to the ``config.yml`` file:
+
+      .. code-block:: yaml
+
+        - name: "kibana"
+          ip:
+          -"<kibana_ip>"                
 
 
 
@@ -210,39 +211,33 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
 
   .. group-tab:: Single-node
 
-    Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``/etc/elasticsearch/certs/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
+    Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``/root/certs.zip``. This file must be copied into the :ref:`Wazuh server <basic_unattended_distributed_wazuh>` to extract the certificates needed.
 
-    In case that Kibana was installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the :ref:`corresponding certificates <configure_kibana_unattended>`.
+    In case that Kibana was installed in a different server, the ``certs.zip`` file should be also copied into its server to extract the :ref:`corresponding certificates <basic_configure_kibana_unattended>`.
 
 
   .. group-tab:: Multi-node
 
     Once Elasticsearch has been installed, the certificates must be placed on their corresponding server. If the installation was run using the option ``-c``, the Elasticsearch service will be automatically started. On the other hand, the rest of the nodes where the certificates were not created, will not start the service since they need their corresponding certificates to start.
 
-    Copy the  ``certs.tar`` file into each Elasticsearch node, except the master node, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
+    Copy the  ``certs.zip`` file into each Elasticsearch node, except the master node, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder).
 
     The ``X`` must be replaced with the number used in the certificate name defined for the corresponding Elasticsearch server:
 
     .. code-block:: console
 
-      # mv ~/certs.tar /etc/elasticsearch/certs/
-      # cd /etc/elasticsearch/certs/
-      # tar -xf certs.tar node-X.pem node-X.key node-X_http.pem node-X_http.key root-ca.pem
-      # mv /etc/elasticsearch/certs/node-X.pem /etc/elasticsearch/certs/elasticsearch.pem
-      # mv /etc/elasticsearch/certs/node-X.key /etc/elasticsearch/certs/elasticsearch.key
-      # mv /etc/elasticsearch/certs/node-X_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
-      # mv /etc/elasticsearch/certs/node-X_http.key /etc/elasticsearch/certs/elasticsearch_http.key
+      # unzip ~/certs.zip -d ~/certs
+      # cp -R ~/certs/ca/ ~/certs/elasticsearch-X/* /etc/elasticsearch/certs/
+      # mv /etc/elasticsearch/certs/elasticsearch-X.crt /etc/elasticsearch/certs/elasticsearch.crt
+      # mv /etc/elasticsearch/certs/elasticsearch-X.key /etc/elasticsearch/certs/elasticsearch.key
+      # chown -R elasticsearch: /etc/elasticsearch/certs
+      # chmod -R 500 /etc/elasticsearch/certs
+      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
+      # rm -rf ~/certs/ ~/certs.zip
 
     When the certificates have been copied, the Elasticsearch service can be started:
 
     .. include:: ../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
-
-    Once all the nodes on the cluster have been started, run the ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
-
-    .. code-block:: console
-
-      # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-      # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>  
 
 
 .. _basic_install_kibana_unattended:
@@ -284,13 +279,17 @@ When the script finishes, some steps must be done manually to finish the install
 
     If Kibana was installed on the same server as Elasticsearch, it will be ready to use once the script finishes. On the other hand, if Kibana was installed on a different host, some steps must be done manually to finish the installation:
 
-    #. Copy the ``certs.tar`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+    #. Copy the ``certs.zip`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
         .. code-block:: console
 
-          # mv ~/certs.tar /etc/kibana/certs/
-          # cd /etc/kibana/certs/
-          # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
+          # unzip ~/kibana.zip -d ~/certs
+          # cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/
+          # cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key
+          # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/kibana/certs/kibana.crt
+          # chown -R kibana:kibana /etc/kibana/
+          # chmod -R 500 /etc/kibana/certs
+          # chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
 
     #. Enable and start the Kibana service:
 
@@ -306,29 +305,31 @@ When the script finishes, some steps must be done manually to finish the install
 
       If Kibana is installed on the same node where certificates where created, Kibana will be ready to use as soon as the script finishes. In case of installing on a different node, follow the next steps:
 
-      - Copy Kibana's certificates into ``/etc/kibana/certs/`` directory:
+      - Copy Kibana's certificates into ``/root/certs/`` directory:
 
       .. code-block:: console
-
+  
+        # unzip ~/certs.zip -d ~/certs
         # cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/
         # cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key
         # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/kibana/certs/kibana.crt
         # chown -R kibana:kibana /etc/kibana/
         # chmod -R 500 /etc/kibana/certs
-        # chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
+        # chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*       
 
     **Kibana installed on a different server from Elasticsearch**
 
       - Copy the ``certs.zip`` file from the Elasticsearch’s node into the server where Kibana has been installed. It can be copied using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
-          .. code-block:: console
+      .. code-block:: console
 
-            # cp ~/certs/ca.crt /etc/kibana/certs/ca
-            # cp ~/certs/kibana/* /etc/kibana/certs/
-            # chown -R kibana: /etc/kibana/certs
-            # chmod -R 500 /etc/kibana/certs
-            # chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
-            # rm -rf ~/certs ~/kibana.zip
+        # unzip ~/certs.zip -d ~/certs
+        # cp ~/certs/ca.crt /etc/kibana/certs/ca
+        # cp ~/certs/kibana/* /etc/kibana/certs/
+        # chown -R kibana: /etc/kibana/certs
+        # chmod -R 500 /etc/kibana/certs
+        # chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*
+        # rm -rf ~/certs ~/certs.zip
 
     Once the certificates have been palced, Kibana can be started:
 
