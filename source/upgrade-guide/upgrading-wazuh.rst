@@ -60,7 +60,8 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 After upgrade the Wazuh manager, it is necessary to start the service:
 
     
-    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+.. include:: ../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
 
 
 .. note::
