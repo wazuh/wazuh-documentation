@@ -5,7 +5,7 @@
 Upgrading the Wazuh server
 ==========================
 
-This section describes how to upgrade the Wazuh server, including the Wazuh manager and the Wazuh API, from Wazuh 3.x to Wazuh 3.y, which implies upgrading to the latest compatible version of Elastic Stack.
+This section describes how to upgrade the Wazuh server, including the Wazuh manager and the Wazuh API, from Wazuh 3.x to newer, which implies upgrading to the latest compatible version of Elastic Stack.
 
 Upgrading the Wazuh server
 --------------------------
