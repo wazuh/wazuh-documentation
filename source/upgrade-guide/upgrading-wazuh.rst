@@ -36,14 +36,7 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 
       # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
 
-    * All-in-one deployment and Distributed deployment - Wazuh master node. Upgrade the Wazuh manager and the Wazuh API to the latest version:
-
-      .. code-block:: console
-
-          # apt-get update
-          # apt-get install wazuh-manager wazuh-api
-
-    * Distributed deployment - Wazuh worker node. Upgrade the Wazuh manager to the latest version:
+    Upgrade the Wazuh manager to the latest version:
 
       .. code-block:: console
 
@@ -58,13 +51,7 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 
       # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-    * All-in-one deployment and Distributed deployment - Wazuh master node. Upgrade the Wazuh manager and the Wazuh API to the latest version:
-
-      .. code-block:: console
-
-          # zypper update wazuh-manager wazuh-api
-
-    * Distributed deployment - Wazuh worker node. Upgrade the Wazuh manager to the latest version:
+    Upgrade the Wazuh manager to the latest version:
 
       .. code-block:: console
 
