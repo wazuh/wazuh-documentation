@@ -65,7 +65,7 @@ After upgrade the Wazuh manager, it is necessary to start the service:
 
 
 .. note::
-  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager's configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
+  The configuration file of the Wazuh manager will not be replaced in upgrades if you modified it, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
 
   If Wazuh is run in a multi-node cluster, it is necessary to upgrade all the Wazuh managers to the same version. Otherwise, the Wazuh nodes will not join the cluster.
 
