@@ -10,24 +10,7 @@ This section will explain how to install the Wazuh manager with the Wazuh API, a
 Run the script
 --------------
 
-.. note:: Root user privileges are required to run all the commands described below.
-
-In order to download the script, ``curl`` package must be installed on the system:
-
-.. tabs::
-
-  .. group-tab:: Yum
-
-    .. code-block:: console
-
-        # yum install curl
-
-
-  .. group-tab:: APT
-
-    .. code-block:: console
-
-        # apt install curl
+.. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
 
 Download the script:
 
