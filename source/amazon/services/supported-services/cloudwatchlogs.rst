@@ -13,7 +13,7 @@ AWS CloudWatch Logs
 
 * **Log streams**: Log events are stored in log streams. A log stream represents a sequence of events coming from the application instance or resource being monitored. All log events in a log stream share the same source.
 
-* **Log groups**: Log streams are grouped using log groups. A log group defines a group of log streams that shares retention, monitoring and access control settings.
+* **Log groups**: Log streams are grouped using log groups. A log group defines a group of log streams that share retention, monitoring and access control settings.
 
 
 AWS configuration
