@@ -361,7 +361,7 @@ The AWS Account ID for accessing the service.
 +--------------------+-----------------------------------------------------+
 | **Default value**  | All accounts.                                       |
 +--------------------+-----------------------------------------------------+
-| **Allowed values** | comma-delimited list of 12 digit AWS Account ID     |
+| **Allowed values** | Comma-delimited list of 12 digit AWS Account ID     |
 +--------------------+-----------------------------------------------------+
 
 
