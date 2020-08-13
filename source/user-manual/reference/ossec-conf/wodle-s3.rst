@@ -356,13 +356,13 @@ Service options
 Service\\aws_account_id
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The AWS Account ID for accesing the service.
+The AWS Account ID for accessing the service.
 
-+--------------------+-------------------------------------------+
-| **Default value**  | All accounts.                             |
-+--------------------+-------------------------------------------+
-| **Allowed values** | Comma list of 12 digit AWS Account ID     |
-+--------------------+-------------------------------------------+
++--------------------+-----------------------------------------------------+
+| **Default value**  | All accounts.                                       |
++--------------------+-----------------------------------------------------+
+| **Allowed values** | comma-delimited list of 12 digit AWS Account ID     |
++--------------------+-----------------------------------------------------+
 
 
 Service\\aws_account_alias
