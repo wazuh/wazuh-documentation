@@ -438,7 +438,7 @@ Service\\only_logs_after
 
 .. versionadded:: 4.0.0
 
-A valid date, in YYYY-MMM-DD format, that only logs from after that date will be parsed.  All logs from before that date will be skipped. Only works for CloudWatch Logs service.
+A valid date, in YYYY-MMM-DD format. Only those logs from after that date will be parsed, the logs from before that date will be skipped. Only works for CloudWatch Logs service.
 
 +--------------------+-------------+
 | **Default value**  | 1970-JAN-01 |
