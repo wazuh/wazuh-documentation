@@ -336,7 +336,7 @@ Name of AWS organization. Only works with CloudTrail buckets.
 service type
 ^^^^^^^^^^^^
 
-Defines a service to process. Must have the attribute ``type`` defined. (Supports multiple instances of this option).
+Define a service to process. Must have the attribute ``type`` defined. (Supports multiple instances of this option).
 
 Service options
 ~~~~~~~~~~~~~~~
