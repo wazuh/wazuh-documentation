@@ -464,7 +464,7 @@ Service\\remove_log_streams
 
 .. versionadded:: 4.0.0
 
-Define whether or not to remove the log streams from the log groups after they are read by the wodle. Only works for CloudWatch Logs service.
+Define whether or not to remove the log streams from the log groups after they are read by the module. Only works for CloudWatch Logs service.
 
 +--------------------+---------+
 | **Default value**  | no      |
