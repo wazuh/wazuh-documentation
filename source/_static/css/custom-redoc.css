@@ -142,11 +142,154 @@ redoc[spec-url] .sc-epnACN {
 }
 
 redoc[spec-url] code,
-redoc[spec-url] .sc-chPdSV,
 redoc[spec-url] .sc-cHGsZl.sc-jbKcbu,
-redoc[spec-url] .sc-hwwEjo,
 redoc[spec-url] .sc-cHGsZl.sc-jqCOkK {
 	font-family: 'Fira Mono', monospace;
+}
+
+redoc[spec-url] .sc-chPdSV {
+	font-family: 'Montserrat', sans-serif;
+}
+
+redoc[spec-url] .sc-TOsTZ.fKyGWc {
+	color: #808080;
+}
+
+redoc[spec-url] .sc-kgAjT.hqYVjx {
+	opacity: 0.65;
+}
+
+redoc[spec-url] .sc-ibxdXY.gxJjxJ {
+	background-color: rgba(0, 170, 19, 0.08);
+}
+
+redoc[spec-url] .sc-ibxdXY.gxJjxJ strong,
+redoc[spec-url] .sc-ibxdXY.gxJjxJ svg {
+	color: rgb(0, 170, 19);
+}
+
+redoc[spec-url] .sc-ibxdXY.gxJjxJ svg polygon {
+	fill: rgb(0, 170, 19);
+}
+
+redoc[spec-url] .sc-ibxdXY.dUFXgZ {
+	background-color: rgba(229, 57, 53, 0.06);
+}
+
+redoc[spec-url] .sc-ibxdXY.dUFXgZ strong,
+redoc[spec-url] .sc-ibxdXY.dUFXgZ svg {
+	color: rgb(229, 57, 53);
+}
+
+redoc[spec-url] .sc-ibxdXY.dUFXgZ svg polygon {
+	fill: rgb(229, 57, 53);
+}
+
+redoc[spec-url] button.sc-ibxdXY strong {
+	font-weight: normal;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+redoc[spec-url] .sc-RefOD.cPssWd .sc-gqjmRU.LiUBH {
+	font-weight: bold;
+  color: #333;
+  font-size: 0.8rem;
+  border: none;
+}
+
+redoc[spec-url] .sc-RefOD.cPssWd .sc-gqjmRU.LiUBH > .sc-hSdWYo.hoUoen {
+	font-weight: normal;
+  opacity: .5;
+}
+
+redoc[spec-url] .bMfIUD {
+	background-color: rgba(38, 50, 56, 0.02);
+}
+
+redoc[spec-url] .sc-ksYbfQ.sc-hmzhuo.bGITIP {
+	color: #e53935;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-size: .75rem;
+}
+
+redoc[spec-url] .kGwPhO {
+  width: 100%;
+}
+
+redoc[spec-url] .dOwpAS > .react-tabs__tab-panel,
+redoc[spec-url] .gLTsd {
+	background-color: #222d32;
+}
+
+redoc[spec-url] .react-tabs__tab-list > .react-tabs__tab,
+redoc[spec-url] .react-tabs__tab-list > .tab-success,
+redoc[spec-url] .react-tabs__tab-list > .tab-error,
+redoc[spec-url] .react-tabs__tab-list > .tab-redirect,
+redoc[spec-url] .react-tabs__tab-list > .tab-info {
+	color: #afafaf;
+	font-weight: normal;
+	padding: 3px 10px;
+  border-radius: 3px;
+}
+
+redoc[spec-url] .react-tabs__tab-list > .react-tabs__tab--selected {
+	color: #222d32;
+}
+
+redoc[spec-url] .tab-success:before,
+redoc[spec-url] .tab-error:before,
+redoc[spec-url] .tab-redirect:before,
+redoc[spec-url] .tab-info:before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: -2px;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+}
+
+redoc[spec-url] .tab-success:before {
+  box-shadow: 0 0 3px 0 #00aa13;
+  background-color: #00aa13;
+}
+
+redoc[spec-url] .tab-error:before {
+  box-shadow: 0 0 3px 0 #e53935;
+  background-color: #e53935; }
+
+redoc[spec-url] .tab-redirect:before {
+  box-shadow: 0 0 3px 0 #f1c400;
+  background-color: #f1c400; }
+
+redoc[spec-url] .tab-info:before {
+  box-shadow: 0 0 3px 0 #0033a0;
+  background-color: #0033a0; }
+
+redoc[spec-url] .sc-hwwEjo {
+  font-family: 'Montserrat', sans-serif;
+	font-size: 0.88rem;
+}
+
+redoc[spec-url] .sc-eqIVtm.ecxnvs {
+	display: none;
+}
+
+redoc[spec-url] .sc-gisBJw.gwfZGU {
+	margin-top: 0;
+}
+
+redoc[spec-url] .jCgylq .token.selector,
+redoc[spec-url] .jCgylq .token.attr-name,
+redoc[spec-url] .jCgylq .token.string,
+redoc[spec-url] .jCgylq .token.char,
+redoc[spec-url] .jCgylq .token.builtin,
+redoc[spec-url] .jCgylq .token.inserted {
+    color: #fff;
+    opacity: 0.9;
 }
 
 redoc[spec-url] a:hover,
@@ -168,26 +311,36 @@ redoc[spec-url] .bJNzQd  {
 	border-color: #bfbfbf;
 }
 
+redoc[spec-url] .sc-jtRfpW.bmRLPL {
+	display: none;
+}
+
 redoc[spec-url] .scrollbar-container [role="menuitem"] {
   font-family: 'Open Sans', sans-serif;
 }
 
-redoc[spec-url] .scrollbar-container [role="menuitem"].active {
-	color: #0094ce;
+redoc[spec-url] .scrollbar-container [role="menuitem"].-depth1 {
+  font-family: 'Montserrat', sans-serif;
 }
 
-redoc[spec-url] .scrollbar-container [role="menuitem"].active,
-redoc[spec-url] .scrollbar-container [role="menuitem"]:hover,
-redoc[spec-url] .scrollbar-container [role="menuitem"]:focus {
-	background-color: #f4f4f4;
+redoc[spec-url] .scrollbar-container [role="menuitem"].-depth1.active {
+	color: #333333;
 }
 
-redoc[spec-url] .scrollbar-container > ul > li > [role="menuitem"] {
-  font-size: 1rem;
+redoc[spec-url] .scrollbar-container [role="menuitem"].-depth1 svg {
+	opacity: 0.3;
+}
+
+redoc[spec-url] .scrollbar-container > ul > li > [role="menuitem"].-depth1 {
+  font-size: 0.8rem;
 }
 
 redoc[spec-url] .scrollbar-container li > ul > li > [role="menuitem"] {
-  font-size: 0.88rem;
+  font-size: 0.8rem;
+}
+
+redoc[spec-url] .scrollbar-container [role="menuitem"] > span.operation-type {
+	display: none;
 }
 
 redoc[spec-url] h1,
@@ -201,21 +354,18 @@ redoc[spec-url] h3,
 redoc[spec-url] h4,
 redoc[spec-url] h5 {
 	font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
+	font-weight: normal;
 }
 
 redoc[spec-url] .sc-ibxdXY {
 	font-family: 'Open Sans', sans-serif;
-  font-size: .95rem;
-}
-
-redoc[spec-url] .sc-bZQynM.celZWI,
-redoc[spec-url] .sc-GMQeP {
-	background-color: #00375F;
+  font-size: 0.88rem;
 }
 
 redoc[spec-url] .sc-bZQynM.celZWI h3 {
-	color: #ffffff;
+	color: #afafaf;
+  font-size: 0.81rem;
+  text-transform: uppercase;
 }
 
 redoc[spec-url] .sc-cHGsZl,
@@ -232,7 +382,7 @@ redoc[spec-url] table {
 }
 
 redoc[spec-url] .collapser {
-	background-color: #757A7D;
+	background-color: #263238;
 	height: 1.15em;
 	width: 1.15em;
 	display: inline-flex;
@@ -256,7 +406,25 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
 .redoc-wrap .menu-content {
   top: 52px!important;
   height: calc(100vh - 52px)!important;
-	background-color: #eaeaea;
+	background-color: #fafafa;
+}
+
+.redoc-wrap .menu-content .cziLoD {
+	padding: 10px 0px;
+}
+
+redoc[spec-url] .scrollbar-container [role="menuitem"].active,
+redoc[spec-url] .scrollbar-container [role="menuitem"]:hover,
+redoc[spec-url] .scrollbar-container [role="menuitem"]:focus {
+	background-color: #f0f0f0;
+}
+
+.redoc-wrap .menu-content label[role=menuitem]:hover {
+	color: #0094ce;
+}
+
+.redoc-wrap .menu-content .-depth1 {
+	text-transform: uppercase;
 }
 
 .loading #header-redoc,
@@ -328,12 +496,39 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
   color: #ffffff;
 }
 
+#footer-redoc {
+  background-color: #263238;
+  height: 40px;
+  position: relative;
+  border: 0;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+}
+
 #footer-redoc #footer-content {
 	background-color: #f4f4f4;
   padding: 15px;
   color: #333;
 	font-size: 0.88rem;
   box-sizing: border-box;
+  display: none;
+}
+
+#footer-redoc .powered-by-badge {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25px;
+  height: 40px;
+  background-color: inherit;
+}
+
+#footer-redoc .powered-by-badge a {
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 0.7rem;
 }
 
 @media (max-width: 499px){
@@ -348,35 +543,29 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
 	}
 }
 
-@media (min-width: 768px){
-	redoc[spec-url] p,
-	redoc[spec-url] .sc-iRbamj {
-		font-size: 1rem;
-	}
-
-	redoc[spec-url] .sc-chPdSV {
-		font-size: 0.9rem;
-	}
-}
-
 @media (min-width: 801px){
+
+	#header-redoc {
+		width: 260px;
+	}
+
 	#footer-redoc #footer-content {
     width: calc(100% - 260px);
     margin-left: auto;
 		padding: 30px 45px;
 	}
 
+	.redoc-wrap {
+		margin-top: 0;
+	}
+
 	.redoc-wrap .menu-content.reached-bottom {
 		height: calc(100vh - 52px)!important;
 	}
 
-	.redoc-wrap .menu-content label.active {
-		border-right: 1px solid #eaeaea;
-	}
-
 	body:not(.loading)::before {
 		content: " ";
-		background-color: #eaeaea;
+		background-color: #fafafa;
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -385,15 +574,24 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
 	}
 
 	.redoc-wrap .api-content {
-		padding-bottom: 79px;
+		padding-bottom: 30px;
 	}
 
 	footer#footer-redoc {
     position: relative;
-    height: 0;
-    bottom: 79px;
-    right: 0;
-    left: 0;
+    height: 30px;
+    bottom: 30px;
+		width: calc(100% - 260px);
+		margin-left: auto;
+	}
+
+	#footer-redoc .powered-by-badge {
+		padding: 0 40px;
+		text-align: right;
+	}
+
+	#footer-redoc .powered-by-badge a {
+		font-size: 0.8rem;
 	}
 }
 
@@ -435,7 +633,22 @@ redoc[spec-url] .sc-elJkPf.cxRqCB a {
   }
 
 	redoc[spec-url] .ddXLZs:not(:last-of-type)::after {
-		left: 40px;
-		width: calc(60% - 80px);
+		border-color: #7f7f7f40;
+	}
+
+	footer#footer-redoc {
+		height: 0;
+		background-color: #ffffff;
+	}
+
+	#footer-redoc .powered-by-badge {
+		background-color: #263238;
+    width: 40%;
+    margin-left: auto;
+    box-sizing: border-box;
+	}
+
+	.redoc-wrap .api-content {
+		padding-bottom: 0;
 	}
 }
