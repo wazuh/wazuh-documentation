@@ -129,9 +129,9 @@ Enable and start the Filebeat service:
 
 To ensure that Filebeat has been successfully installed, run the following command:
 
-    .. code-block:: console
+.. code-block:: console
 
-        # filebeat test output
+    # filebeat test output
 
 An example response should look as follows:
 
