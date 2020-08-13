@@ -13,17 +13,33 @@ This document will explain how to install the Elastic Stack components in a mult
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
 
+
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
-The Elasticsearch configuration section has steps that must be done in all the hosts where Elasticsearch will be installed. But some of them only need to be done in the Elasticsearch master node. The labels [*All*] or [*Master*]  at the beginning of the step will indicate whether the steps must be done in all nodes or in a master node. In case of having two or more [*Master*] nodes, the steps must be done in just one of them.
+The installation process for a multi-node cluster will be explained in three parts. The first one refers to the configuration of the initial node, in which the certificates that will be deployed to the subsequent nodes are generated. 
+
+The second part will explain how to configure the remaining nodes of the cluster. Finally, the third part provides instructions for initializing the Elasticsearch cluster and verifying that everything is working properly.  
+
+
+**Initial node**
+****************
+
+The following instructions are meant to be performed on the **first** Elasticsearch node to be configured.  
+
+
+Prerequisites
+~~~~~~~~~~~~~
+
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
+
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[*All*] The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
+The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
 
 .. tabs::
 
@@ -51,7 +67,7 @@ Adding the Elastic Stack repository
 Elasticsearch installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*All*] Install the Elasticsearch package:
+Install the Elasticsearch package:
 
     .. tabs::
 
@@ -76,28 +92,120 @@ Elasticsearch installation and configuration
 
 
 
-#. [*All*] Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch.rst
+.. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_initial_node.rst
+
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. [*Master*] This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
+#.  This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. [*All*] The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
+#. Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.`` This guide will assume that the file will be placed in ~/ (home user folder).
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates.rst
+#.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. 
 
-#. [*All*] Enable and start the Elasticsearch service:
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_initial_node.rst
+
+#. Enable and start the Elasticsearch service:
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
 
-#. [*Master*] Generate credentials for all the Elastic Stack pre-built roles and users:
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
+**Subsequent nodes**
+********************
+
+The following steps **should be executed in each of the subsequent nodes** of the Elasticsearch cluster. 
+
+
+Prerequisites
+~~~~~~~~~~~~~
+
+.. include:: ../../../../../_templates/installations/basic/before_installation_elastic.rst
+
+
+Adding the Elastic Stack repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+
+
+Elasticsearch installation and configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Install the Elasticsearch package:
+
+  .. tabs::
+
+    .. group-tab:: Yum
+
+
+      .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
+
+
+
+    .. group-tab:: APT
+
+
+      .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+
+
+
+    .. group-tab:: ZYpp
+
+
+      .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
+
+
+#. Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+
+.. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
+
+Certificates deployment
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_subsequent_nodes.rst
+
+#.  Enable and start the Elasticsearch service:
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
+
+
+**Initializing the cluster**
+****************************
+
+Once the installation process is done in all the servers of the Elasticsearch cluster, run the following command on the **initial node** to generate credentials for all the Elastic Stack pre-built roles and users: 
+
+.. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
+
 
 Disabling repositories
 ----------------------
