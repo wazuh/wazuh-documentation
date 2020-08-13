@@ -46,15 +46,6 @@ Install the Wazuh manager software and confirm it is running:
     # yum -y install wazuh-manager
     # systemctl status wazuh-manager
 
-Configure Wazuh manager to listen for agent connections on tcp instead of udp, if this value is set:
-
-  .. code-block:: console
-
-    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
-    # sed -i 's/<protocol>udp/<protocol>tcp/' /var/ossec/etc/ossec.conf
-    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
-
-
 Configure Wazuh manager to allow self registration of new agents with authentication:
 
   .. code-block:: console

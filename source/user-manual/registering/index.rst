@@ -13,7 +13,7 @@ The security event data collection from the Wazuh agent requires enabling the co
 The Wazuh manager must know which Wazuh agent is sending the security events and if it is authorized. This step is called Wazuh agent registration and it can be done by using the ``registration service``. Using the port 1515 and TCP protocol, the Wazuh manager will attend the registration request of the Wazuh agent using a TLS connection. The Wazuh agent will obtain an unique
 key, used to encrypt the traffic between them. Once the registration is done, this communication will no longer be used, unless the Wazuh agent needs to be registered into a new Wazuh manager.
 
-After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent. By default, the Wazuh manager will use a communication channel over the port 1514 using UDP protocol, through which The Wazuh Agent will send the collected data.
+After the registration, the Wazuh agent has to be configured to indicate the destination where the collected security events will be sent. By default, the Wazuh manager will use a communication channel over the port 1514 using TCP protocol, through which The Wazuh Agent will send the collected data.
 
 .. note::
 
