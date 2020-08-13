@@ -40,7 +40,7 @@ Wazuh configuration
         </service>
       </wodle>
 
-    Users must specify at least one aws log group from where the logs will be extracted. Multiple regions can be added separated by commas. If no region is specified the module will look for the log group in every region available.
+    Users must specify at least one aws log group from where the logs will be extracted. Multiple regions can be added separated by commas. If no region is specified the module will look for the log group in every available region.
 
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
