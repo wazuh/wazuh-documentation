@@ -7,8 +7,8 @@ Configure the cluster node by editing the following settings in the ``/var/ossec
   <cluster>
       <name>wazuh</name>
       <node_name>worker-node</node_name>
-      <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
       <node_type>worker</node_type>
+      <key>c98b62a9b6169ac5f67dae55ae4a9088</key>      
       <port>1516</port>
       <bind_addr>0.0.0.0</bind_addr>
       <nodes>
@@ -21,9 +21,9 @@ Configure the cluster node by editing the following settings in the ``/var/ossec
 As shown in the example above, the following parameters have to be amended:
 
 +-------------------------------------+----------------------------------------------------------------------------------------------+
-| :ref:`node_type <cluster_node_type>`| Has to be set as ``worker``.                                                                 |
-+-------------------------------------+----------------------------------------------------------------------------------------------+
 | :ref:`node_name <cluster_node_name>`| Each node of the cluster must have a unique name.                                            |
++-------------------------------------+----------------------------------------------------------------------------------------------+
+| :ref:`node_type <cluster_node_type>`| Has to be set as ``worker``.                                                                 |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
 | :ref:`key <cluster_key>`            | The key created previously for the ``master`` node. It has to be the same for all the nodes. |
 +-------------------------------------+----------------------------------------------------------------------------------------------+

@@ -84,6 +84,5 @@
 
       # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
-The ``cert.zip`` must be distributed across all ``instances.yml`` defined servers. This guide will assume that the file will be placed in ~/ (home user folder).
 
 .. End of include file
