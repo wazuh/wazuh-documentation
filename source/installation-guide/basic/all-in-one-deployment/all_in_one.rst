@@ -359,6 +359,12 @@ Kibana installation and configuration
         # cd /usr/share/kibana
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/app/kibana/wazuhapp-4.0.0_7.8.0.zip
 
+#. Link Kibana's socket to privileged port 443:
+
+    .. code-block:: console
+
+      # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+
 #. Enable and start the Kibana service:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/enable_kibana.rst
