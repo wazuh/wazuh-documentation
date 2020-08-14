@@ -35,7 +35,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
     .. code-block:: console
 
-        # curl -u <user>:<password> -X GET "https://localhost:55000/v4/security/user/authenticate"
+        # curl -u <user>:<password> -X GET "https://localhost:55000/security/user/authenticate"
 
     You will get a result similar to the following. Copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
@@ -44,11 +44,30 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         {"token": "<YOUR_JWT_TOKEN>"}
 
+    **Note:** Using the ``raw`` parameter is another way to log in and get the JWT token. With the ``raw`` option, we can get the token in a plain text format, this way, we will be able to export the token to an environment variable and make API requests in an easier way.
+
+    .. code-block:: console
+
+        # curl -u <user>:<password> -X GET "https://localhost:55000/security/user/authenticate?raw=true"
+
+    You will get a result similar to the following.
+
+    .. code-block:: none
+        :class: output
+
+        <YOUR_JWT_TOKEN>
+
+    With this parameter set to ``true``, we can export the token to an environment variable so API requests will be easier to make:
+
+    .. code-block:: console
+
+        # TOKEN=$(curl -u <user>:<password> -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
 2. Send a *request* to confirm that everything is working as expected:
 
     .. code-block:: console
 
-        curl -X GET "https://localhost:55000/v4/" -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
+        # curl -X GET "https://localhost:55000/" -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
     .. code-block:: json
         :class: output
@@ -63,11 +82,17 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
             "timestamp": "2020-05-25T07:05:00+0000"
         }
 
+    Example of an API request using the ``TOKEN`` variable defined before.
+
+    .. code-block:: console
+
+        # curl -X GET -H "Authorization: Bearer $TOKEN" "https://localhost:55000"
+
 Once we are logged in we can run any endpoint following the structure below. Please, do not forget to replace <endpoint> and <YOUR_JWT_TOKEN> with your own values.
 
 .. code-block:: console
 
-    # curl -X <METHOD> "https://localhost:55000/v4/<ENDPOINT>" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 
 Basic concepts
@@ -82,8 +107,8 @@ Here are some of the basic concepts related to making API requests and understan
     +=================================================+====================================================================================================================================================================+
     | ``-X GET/POST/PUT/DELETE``                      | Specifies a custom request method to use when communicating with the HTTP server.                                                                                  |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ``http://localhost:55000/v4/<ENDPOINT>``        | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
-    | ``https://localhost:55000/v4/<ENDPOINT>``       |                                                                                                                                                                    |
+    | ``http://localhost:55000/<ENDPOINT>``           | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
+    | ``https://localhost:55000/<ENDPOINT>``          |                                                                                                                                                                    |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | ``-H  "accept: application/json"``              | Include extra header in the request to set output type to JSON (optional).                                                                                         |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -216,7 +241,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -259,7 +284,7 @@ It can also be helpful to know what rules are available that match a specific cr
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -330,7 +355,7 @@ The API can be used to show information about all monitored files by syscheck. T
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -384,7 +409,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -419,7 +444,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -459,7 +484,7 @@ Some information about the manager can be retrieved using the API. Configuration
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/manager/status?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/manager/status?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -499,7 +524,7 @@ You can even dump the manager's current configuration with the request below (re
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -545,7 +570,7 @@ This enumerates **active** agents:
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&offset=1&limit=1&status=never_connected" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=1&status=never_connected" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -579,7 +604,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/v4/agents?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
+    # curl -X POST "https://localhost:55000/agents?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
 
 .. code-block:: json
     :class: output
