@@ -7,6 +7,52 @@ Rules Syntax
 
 The Wazuh Ruleset combined with any customs rules is used to analyze incoming events and generate alerts when appropriate. The Ruleset is constant expansion and enhancement thanks to the collaborative effort of our developers and our growing community.
 
+Currently, Wazuh supports more than 3k rules that accomplish technologies such:
+
+- Syslog
+- Docker
+- CISCO
+- SonicWall
+- Sendmail
+- Postfix
+- Spamd
+- Imapd
+- MailScanner
+- Microsoft Exchange
+- Courier
+- PIX
+- NetScreen technologies
+- McAfee
+- NextCloud
+- PaloAlto v9.0
+- VirusTotal
+- Suricata
+- MongoDB
+- Jenkins
+- Pluggable Authentication Modules (PAM)
+- Telnet
+- SSH
+- Solaris Basic Security module
+- Asterisk
+- Microsoft Windows DHCP
+- Arpwatch
+- Symantec
+- Trend Micro OSCE (Office Scan)
+- Horde IMP
+- Roundcube
+- Wordpress
+- Compaq Insight Manager (cimserver)
+- Dovecot
+- Vm-pop3d
+- FTP, Proftpd, PureFTP, Vsftpd, Microsoft FTP
+- OwlH Zeek
+- Junos
+- Panda Advanced Protection Service (PAPS)
+- CheckPoint Smart-1 Firewalls
+- MacOS SSH
+- Google Cloud Pub/Sub
+
+
 Our aim is to provide the best guidance possible for anyone who may be looking into developing their own custom rules and remember you can always `contribute <../contribute.html>`_ to our community.
 
 
