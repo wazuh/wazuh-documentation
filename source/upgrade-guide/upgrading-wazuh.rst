@@ -5,7 +5,7 @@
 Upgrading the Wazuh server
 ==========================
 
-This section describes how to upgrade the Wazuh server, including the Wazuh manager and the Wazuh API, from Wazuh 3.x to newer, which implies upgrading to the latest compatible version of Elastic Stack.
+This section describes how to upgrade the Wazuh server, from Wazuh 3.x to newer, which implies upgrading to the latest compatible version of Elastic Stack and Open Distro for Elasticsearch Stack.
 
 Upgrading the Wazuh server
 --------------------------
@@ -100,4 +100,4 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 Next step
 ---------
 
-The next step consists on :ref:`upgrading Elastic Stack <upgrading_elastic_stack>`.
+The next step consists on :ref:`upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>`.
