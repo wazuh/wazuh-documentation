@@ -54,12 +54,6 @@ To upgrade the Wazuh server choose the appropriate tab for the desired package m
 
         # zypper update wazuh-manager
 
-After upgrade the Wazuh manager, it is necessary to start the service:
-
-    
-.. include:: ../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
-
-
 
 .. note::
   The configuration file of the Wazuh manager will not be replaced in upgrades if you modified it, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
