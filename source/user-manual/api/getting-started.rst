@@ -44,7 +44,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         {"token": "<YOUR_JWT_TOKEN>"}
 
-    **Note:** Using the ``raw`` parameter is another way to log in and get the JWT token. With the ``raw`` option, we can get the token in a plain text format, this way, we will be able to export the token to an environment variable and make API requests in an easier way.
+    1.1 **Optional**. Using the ``raw`` parameter is another way to log in and get the JWT token. With the ``raw`` option, we can get the token in a plain text format, this way, we will be able to export the token to an environment variable and make API requests in an easier way.
 
     .. code-block:: console
 

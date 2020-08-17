@@ -138,7 +138,6 @@ Code:
     protocol = 'https'
     host = 'API_IP'
     port = 'API_PORT'
-    version = 'v4'
     user = 'wazuh'
     password = 'wazuh'
 
@@ -156,7 +155,7 @@ Code:
             raise Exception(f"Error obtaining response: {request_result.json()}")
 
     # Variables
-    base_url = f"{protocol}://{host}:{port}/{version}"
+    base_url = f"{protocol}://{host}:{port}"
     login_url = f"{base_url}/security/user/authenticate"
     basic_auth = f"{user}:{password}".encode()
     headers = {'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
@@ -230,12 +229,11 @@ Code:
     $protocol = "https"
     $host_name = "API_IP"
     $port = "API_PORT"
-    $version = "v4"
     $username = "wazuh"
     $password = "wazuh"
 
     # Variables
-    $base_url = $protocol + "://" + $host_name + ":" + $port + "/" + $version
+    $base_url = $protocol + "://" + $host_name + ":" + $port
     $login_url = $base_url + "/security/user/authenticate"
     $endpoint_url = $base_url + $endpoint
     $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
