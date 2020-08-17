@@ -44,6 +44,12 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         <YOUR_JWT_TOKEN>
 
+    Export the token to an environment variable so API requests will be easier to make:
+
+    .. code-block:: console
+
+        # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
     If you set ``raw=false`` or you leave it by default, you will get a result similar to the following. Copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
     .. code-block:: none
