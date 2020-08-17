@@ -160,7 +160,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 Upgrading Filebeat
 ------------------
 
-The following steps needs to be run in the Wazuh server or servers in case of Wazuh cluster. 
+The following steps needs to be run in the Wazuh server or servers in case of Wazuh multi-node cluster. 
 
 
 #. Upgrade Filebeat:
