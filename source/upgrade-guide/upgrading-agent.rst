@@ -7,7 +7,7 @@ Upgrading the Wazuh agent
 
 The following steps show how to upgrade the Wazuh agent from 3.x to latest.  Since Wazuh 3.x, it is possible to upgrade the Wazuh agents remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tools or the Wazuh API. More information about the process can be found in the :ref:`Remote agent upgrade<upgrading-agent>` section.
 
-To perform the upgrade locally, follow the instructions for the Wazuh agent's operating system:
+To perform the upgrade locally, follow the instructions for the operating system of the Wazuh agent:
 
 .. tabs::
 
@@ -104,7 +104,7 @@ To perform the upgrade locally, follow the instructions for the Wazuh agent's op
 
     The Wazuh agent upgrading process for macOS systems requires to download the latest `macOS installer <https://packages.wazuh.com/3.x/osx/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg>`_. There are two ways of using the installer.
 
-    a) Using the GUI. Using the GUI you can perform a simple upgrade. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers:
+    a) Using the GUI will perform a simple upgrade. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers:
 
      .. image:: ../images/installation/macos.png
          :align: left

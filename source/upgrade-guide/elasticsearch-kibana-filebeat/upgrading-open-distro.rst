@@ -102,8 +102,6 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
             # zypper update opendistroforelasticsearch-1.6.0
 
 
-#. Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins (optional).
-
 
 #. Restart the service:
 
