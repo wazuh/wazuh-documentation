@@ -15,10 +15,8 @@ Preparing Elastic Stack
 
 #. Stop the services:
 
-    .. code-block:: console
+    .. include:: ../../_templates/installations/basic/elastic/common/stop_elasticsearch_filebeat.rst
 
-      # systemctl stop filebeat
-      # systemctl stop kibana
 
 #. Enable the Elastic repository:
 
