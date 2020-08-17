@@ -9,7 +9,7 @@
     .. code-block:: console
 
       # systemctl stop filebeat
-      # systemctl stop elasticsearch
+      # systemctl stop kibana
 
 
   .. tab:: SysV Init
@@ -17,6 +17,6 @@
     .. code-block:: console
 
       # service filebeat stop
-      # service elasticsearch stop
+      # service kibana stop
 
 .. End of include file

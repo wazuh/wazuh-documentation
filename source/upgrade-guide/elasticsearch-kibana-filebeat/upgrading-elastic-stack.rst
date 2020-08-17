@@ -15,7 +15,7 @@ Preparing Elastic Stack
 
 #. Stop the services:
 
-    .. include:: ../../_templates/installations/basic/elastic/common/stop_elasticsearch_filebeat.rst
+    .. include:: ../../_templates/installations/basic/elastic/common/stop_kibana_filebeat.rst
 
 
 #. Enable the Elastic repository:
@@ -94,9 +94,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Shut down a single node:
 
-    .. code-block:: console
-
-      # systemctl stop elasticsearch
+    .. include:: ../../_templates/installations/basic/elastic/common/stop_elasticsearch.rst
 
 #. Upgrade the node you shut down:
 
@@ -123,10 +121,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
 #. Restart the service:
 
-    .. code-block:: console
-
-      # systemctl daemon-reload
-      # systemctl restart elasticsearch
+    .. include:: ../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
 
 #. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a ``_cat/nodes`` request:
 
@@ -217,11 +212,7 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
 #. Restart Filebeat:
 
-    .. code-block:: console
-
-      # systemctl daemon-reload
-      # systemctl restart filebeat
-
+    .. include:: ../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
 
 Upgrading Kibana
@@ -349,10 +340,8 @@ Upgrading Kibana
 
 #. Restart Kibana:
 
-    .. code-block:: console
+    .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
-      # systemctl daemon-reload
-      # systemctl restart kibana
 
 Disabling the repository
 ^^^^^^^^^^^^^^^^^^^^^^^^
