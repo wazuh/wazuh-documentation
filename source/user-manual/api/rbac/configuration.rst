@@ -12,7 +12,7 @@ You can modify the RBAC mode (as explained in the :ref:`How it works <api_rbac_h
 
 .. code-block:: console
 
-    # curl -k -X PUT "https://localhost:55000/security/config?pretty=true" -H "Authorization: Bearer $TOKEN" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
+    # curl -k -X PUT "https://localhost:55000/security/config?pretty=true" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
 
 .. code-block:: json
     :class: output
@@ -54,7 +54,7 @@ The request would be as follows:
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
+    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
 
 With this policy, we have established that it is allowed to read information related to agents 001, 002, 003 and 004. We can create more policies to our liking as long as they are not repeated. We may also change this policy at any time to, for example, add new agents.
 
@@ -119,7 +119,7 @@ The request with the information showed above would look like this:
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/roles?pretty=true" -H  "Authorization: Bearer $TOKEN" -d "{\"name\":\"sales-team\",\"rule\":{\"MATCH\":{\"definition\":\"sales-team\"}}}"
+    # curl -k -X POST "https://localhost:55000/security/roles?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"sales-team\",\"rule\":{\"MATCH\":{\"definition\":\"sales-team\"}}}"
 
 The response body would be this. Remember that the ID is needed to link policies to this role.
 
@@ -159,7 +159,7 @@ In our example the *role_id* would be ``8`` (the ID of "sales-team" role) and th
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/roles/8/policies?policy_ids=12&pretty=true" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X POST "https://localhost:55000/security/roles/8/policies?policy_ids=12&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -200,7 +200,7 @@ Following the previous examples, we are going to link the user "sales-member-1" 
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users/sales-member-1/roles?role_ids=8&pretty=true" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X POST "https://localhost:55000/security/users/sales-member-1/roles?role_ids=8&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output

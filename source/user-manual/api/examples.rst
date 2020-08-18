@@ -16,7 +16,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X GET "https://localhost:55000/" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output
@@ -36,7 +36,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X PUT "https://localhost:55000/manager/api/config?pretty=true" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"cache\":{\"enabled\":true,\"time\":0.75}}"
+    # curl -k -X PUT "https://localhost:55000/manager/api/config?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"cache\":{\"enabled\":true,\"time\":0.75}}"
 
 .. code-block:: json
     :class: output
@@ -58,7 +58,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
+    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
 
 .. code-block:: json
     :class: output
@@ -83,7 +83,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
 
 .. code-block:: json
     :class: output

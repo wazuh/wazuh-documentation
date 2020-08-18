@@ -555,11 +555,11 @@ Playing with agents
 
 Here are some commands for working with the agents.
 
-This enumerates **active** agents:
+This enumerates 2 **active** agents:
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=1&status=never_connected" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -568,20 +568,23 @@ This enumerates **active** agents:
       "data": {
         "affected_items": [
           {
-            "node_name": "unknown",
-            "status": "never_connected",
-            "dateAdd": "1970-01-01T00:00:00Z",
-            "registerIP": "any",
+            "node_name": "worker2",
+            "status": "active",
+            "manager": "wazuh-worker2",
+            "version": "Wazuh v3.13.1",
+            "id": "001",
+            "name": "wazuh-agent1"
+          },
+          {
+            "node_name": "worker2",
+            "status": "active",
+            "manager": "wazuh-worker2",
+            "version": "Wazuh v3.13.1",
             "id": "002",
-            "ip": "any",
-            "name": "wazuh-agent2",
-            "group": [
-              "default",
-              "group2"
-            ]
+            "name": "wazuh-agent2"
           }
         ],
-        "total_affected_items": 10,
+        "total_affected_items": 9,
         "total_failed_items": 0,
         "failed_items": []
       },
