@@ -84,6 +84,162 @@ Once we are logged in we can run any endpoint following the structure below. Ple
     # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer $TOKEN"
 
 
+Logging into the API via scripts
+--------------------------------
+
+With these scripts, it will be easier to understand the two ways of logging into the API: using `raw=true` or `raw=false`.
+
+1. Logging in with Python and non-raw token:
+
+.. code-block:: python
+
+    #!/usr/bin/env python3
+
+    import json
+    import requests
+    import urllib3
+    from base64 import b64encode
+
+    # Disable insecure https warnings (for self-signed SSL certificates)
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    # Configuration
+    protocol = 'https'
+    host = 'localhost'
+    port = 55000
+    user = 'wazuh'
+    password = 'wazuh'
+    login_endpoint = 'security/user/authenticate?raw=false'
+
+    login_url = f"{protocol}://{host}:{port}/{login_endpoint}"
+    basic_auth = f"{user}:{password}".encode()
+    login_headers = {'Content-Type': 'application/json',
+                     'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
+
+    print("\n- Getting token ...\n")
+    response = requests.get(login_url, headers=login_headers, verify=False)
+    token = json.loads(response.content.decode())['token']
+
+    # new authorization with the token we got
+    requests_headers = {'Content-Type': 'application/json',
+                        'Authorization': f'Bearer {token}'}
+
+    print("\n- API calls with TOKEN environment variable ...\n")
+
+    print("Getting default information:\n")
+
+    response = requests.get(f"{protocol}://{host}:{port}/?pretty=true", headers=requests_headers, verify=False)
+    print(response.text)
+
+    print("\nGetting /agents/summary/os:\n")
+
+    response = requests.get(f"{protocol}://{host}:{port}/agents/summary/status?pretty=true", headers=requests_headers, verify=False)
+    print(response.text)
+
+    print("\n\nEnd of the script.\n")
+
+With this script, you will get a result similar to the following:
+
+.. code-block:: console
+
+    # root@wazuh-master:/# python3 login_script.py
+
+    - Getting token ...
+
+
+    - API calls with TOKEN environment variable ...
+
+    Getting default information:
+
+    {
+       "title": "Wazuh API REST",
+       "api_version": "4.0.0",
+       "revision": 4000,
+       "license_name": "GPL 2.0",
+       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+       "hostname": "wazuh-master",
+       "timestamp": "2020-08-18T08:35:45+0000"
+    }
+
+    Getting /agents/summary/os:
+
+    {
+       "data": {
+          "active": 9,
+          "disconnected": 2,
+          "never_connected": 2,
+          "pending": 0,
+          "total": 13
+       }
+    }
+
+
+    End of the script.
+
+
+2. Logging in with a bash script and raw token:
+
+.. code-block:: bash
+
+    #!/bin/bash
+
+    echo -e "\n- Getting token...\n"
+
+    TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+    echo -e "\n- API calls with TOKEN environment variable ...\n"
+
+    echo -e "Getting default information:\n"
+
+    curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    echo -e "\n\nGetting /agents/summary/os:\n"
+
+    curl -k -X GET "https://localhost:55000/agents/summary/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    echo -e "\n\nEnd of the script.\n"
+
+With this script, you will get a result similar to the following:
+
+.. code-block:: console
+
+    # root@wazuh-master:/# ./login_script.sh
+
+    - Getting token...
+
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  3059  100  3059    0     0  17089      0 --:--:-- --:--:-- --:--:-- 17089
+
+    - API calls with TOKEN environment variable ...
+
+    Getting default information:
+
+    {
+       "title": "Wazuh API REST",
+       "api_version": "4.0.0",
+       "revision": 4000,
+       "license_name": "GPL 2.0",
+       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+       "hostname": "wazuh-master",
+       "timestamp": "2020-08-18T08:36:56+0000"
+    }
+
+    Getting /agents/summary/os:
+
+    {
+       "data": {
+          "active": 9,
+          "disconnected": 2,
+          "never_connected": 2,
+          "pending": 0,
+          "total": 13
+       }
+    }
+
+    End of the script.
+
+
 Basic concepts
 --------------
 
