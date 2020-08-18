@@ -15,7 +15,7 @@ Download and run the script:
 
 .. code-block:: console
 
-  # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/basic/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+  # curl -so ~/all-in-one-installation.sh https://documentation.wazuh.com/resources/elastic-stack/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
 The script will perform an health-check to ensure that the host has enough resources to garantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
 
