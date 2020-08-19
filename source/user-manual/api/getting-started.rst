@@ -33,17 +33,6 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
 1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
-    .. code-block:: console
-
-        # curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true"
-
-    You will get a result similar to the following.
-
-    .. code-block:: none
-        :class: output
-
-        <YOUR_JWT_TOKEN>
-
     Export the token to an environment variable to use it in authorization header of future API requests:
 
     .. code-block:: console
@@ -119,6 +108,7 @@ The following scripts provide API login examples using default (`false`) or plai
     print("\nLogin request ...\n")
     response = requests.get(login_url, headers=login_headers, verify=False)
     token = json.loads(response.content.decode())['token']
+    print(token)
 
     # New authorization header with the JWT token we got
     requests_headers = {'Content-Type': 'application/json',
@@ -144,12 +134,13 @@ Running the script provides a result similar to the following:
 
     # root@wazuh-master:/# python3 login_script.py
 
-    - Getting token ...
+    Login request ...
 
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNTk3ODI4OTQ3LCJleHAiOjE1OTc4NjQ5NDcsInN1YiI6IndhenVoIiwicmJhY19wb2xpY2llcyI6eyJhZ2VudDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJncm91cDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJhZ2VudDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyIsImFnZW50Omdyb3VwOioiOiJhbGxvdyJ9LCJhZ2VudDpkZWxldGUiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93IiwiYWdlbnQ6Z3JvdXA6KiI6ImFsbG93In0sImFnZW50Om1vZGlmeV9ncm91cCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6cmVzdGFydCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6dXBncmFkZSI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiZ3JvdXA6cmVhZCI6eyJncm91cDppZDoqIjoiYWxsb3cifSwiZ3JvdXA6ZGVsZXRlIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDp1cGRhdGVfY29uZmlnIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDptb2RpZnlfYXNzaWdubWVudHMiOnsiZ3JvdXA6aWQ6KiI6ImFsbG93In0sImFjdGl2ZS1yZXNwb25zZTpjb21tYW5kIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGVfdXNlciI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWRfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJldm9rZSI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWQiOnsicm9sZTppZDoqIjoiYWxsb3ciLCJwb2xpY3k6aWQ6KiI6ImFsbG93IiwidXNlcjppZDoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlIjp7InJvbGU6aWQ6KiI6ImFsbG93IiwicG9saWN5OmlkOioiOiJhbGxvdyIsInVzZXI6aWQ6KiI6ImFsbG93In0sInNlY3VyaXR5OmRlbGV0ZSI6eyJyb2xlOmlkOioiOiJhbGxvdyIsInBvbGljeTppZDoqIjoiYWxsb3ciLCJ1c2VyOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnN0YXR1cyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZCI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9hcGlfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwibWFuYWdlcjp1cGRhdGVfYXBpX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6dXBsb2FkX2ZpbGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOnJlc3RhcnQiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOmRlbGV0ZV9maWxlIjp7Iio6KjoqIjoiYWxsb3ciLCJmaWxlOnBhdGg6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9maWxlIjp7ImZpbGU6cGF0aDoqIjoiYWxsb3cifSwiY2x1c3RlcjpkZWxldGVfZmlsZSI6eyJub2RlOmlkOioiOiJhbGxvdyIsIm5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwZGF0ZV9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVzdGFydCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwbG9hZF9maWxlIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9maWxlIjp7Im5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNpc2NhdDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJkZWNvZGVyczpyZWFkIjp7ImRlY29kZXI6ZmlsZToqIjoiYWxsb3cifSwibGlzdHM6cmVhZCI6eyJsaXN0OnBhdGg6KiI6ImFsbG93In0sInJ1bGVzOnJlYWQiOnsicnVsZTpmaWxlOioiOiJhbGxvdyJ9LCJtaXRyZTpyZWFkIjp7Iio6KjoqIjoiYWxsb3cifSwic2NhOnJlYWQiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NoZWNrOmNsZWFyIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpydW4iOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NvbGxlY3RvcjpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJyYmFjX21vZGUiOiJibGFjayJ9fQ.rcn9j--_sA-Fy47mSc0R5Hts20izTtreB9WPTBILi9g
 
     - API calls with TOKEN environment variable ...
 
-    Getting default information:
+    Getting API information:
 
     {
        "title": "Wazuh API REST",
@@ -158,10 +149,10 @@ Running the script provides a result similar to the following:
        "license_name": "GPL 2.0",
        "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
        "hostname": "wazuh-master",
-       "timestamp": "2020-08-18T08:35:45+0000"
+       "timestamp": "2020-08-19T09:20:02+0000"
     }
 
-    Getting /agents/summary/os:
+    Getting agents status summary:
 
     {
        "data": {
