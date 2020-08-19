@@ -31,7 +31,7 @@ Logging into the API
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
 
-1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format, this way, we will be able to export the token to an environment variable and make API requests in an easier way. Using ``raw=true`` is highly recommended as tokens could be long and difficult to use.
+1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
     .. code-block:: console
 
