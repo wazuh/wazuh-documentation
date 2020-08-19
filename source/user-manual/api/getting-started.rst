@@ -89,7 +89,7 @@ Logging into the API via scripts
 
 The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with Wazuh API.
 
-1. Logging in with Python and non-raw token:
+1. Logging in with Python:
 
 .. code-block:: python
 
