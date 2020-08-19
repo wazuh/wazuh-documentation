@@ -972,6 +972,9 @@ Default Unix configuration
     <!-- File types to ignore -->
     <ignore type="sregex">.log$|.swp$</ignore>
 
+    <!-- Check the file, but never compute the diff -->
+    <nodiff>/etc/ssl/private.key</nodiff>
+
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>
@@ -985,20 +988,6 @@ Default Unix configuration
 
     <!-- Store the database in disk or in memory -->
     <database>disk</database>
-
-    <diff>
-      <disk_quota>
-        <enabled>yes</enabled>
-        <limit>1GB</limit>
-      </disk_quota>
-      <file_size>
-        <enabled>yes</enabled>
-        <limit>50MB</limit>
-      </file_size>
-
-      <!-- Check the file, but never compute the diff -->
-      <nodiff>/etc/ssl/private.key</nodiff>
-    </diff>
 
     <!-- Database synchronization settings -->
     <synchronization>
