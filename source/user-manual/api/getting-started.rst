@@ -109,7 +109,7 @@ The following scripts provide API login examples using default (`false`) or plai
     port = 55000
     user = 'wazuh'
     password = 'wazuh'
-    login_endpoint = 'security/user/authenticate?raw=false'
+    login_endpoint = 'security/user/authenticate'
 
     login_url = f"{protocol}://{host}:{port}/{login_endpoint}"
     basic_auth = f"{user}:{password}".encode()
