@@ -50,7 +50,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
 
-    If you set ``raw=false`` or you leave it by default, you will get a result similar to the following. Copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
+    By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
     .. code-block:: none
         :class: output
