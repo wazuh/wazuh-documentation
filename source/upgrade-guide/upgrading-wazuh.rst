@@ -7,6 +7,9 @@ Upgrading the Wazuh server
 
 This section describes how to upgrade the Wazuh server, from Wazuh 3.x to newest, which implies upgrading to the latest compatible version of Elastic Stack or Open Distro for Elasticsearch Stack. 
 
+.. note::
+  To reduce the downtime of the servers it is recommended to upgrade the master node first
+
 To upgrade the Wazuh server choose the appropriate tab for the desired package manager:
 
 .. tabs::
