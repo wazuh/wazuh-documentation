@@ -116,7 +116,7 @@ The following scripts provide API login examples using default (`false`) or plai
     login_headers = {'Content-Type': 'application/json',
                      'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
 
-    print("\n- Getting token ...\n")
+    print("\nLogin request ...\n")
     response = requests.get(login_url, headers=login_headers, verify=False)
     token = json.loads(response.content.decode())['token']
 
