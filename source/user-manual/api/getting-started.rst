@@ -138,7 +138,7 @@ With these scripts, it will be easier to understand the two ways of logging into
 
     print("\n\nEnd of the script.\n")
 
-With this script, you will get a result similar to the following:
+Running the script provides a result similar to the following:
 
 .. code-block:: console
 
