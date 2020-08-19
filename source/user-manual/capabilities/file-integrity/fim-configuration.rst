@@ -50,8 +50,7 @@ Environment variables can be used to configure syscheck in Linux and Windows.
     <directories check_all="yes">$DIRECTORY</directories>
   </syscheck>
 
-In UNIX based systems, the variable must be added to the file ``/etc/ossec-init.conf`` if wazuh is restarted using systemd.
-If wazuh is restarted using the ``ossec-control`` binary the variable must be owned by the root user.
+On UNIX based systems, the variable must be added to the file ``/etc/ossec-init.conf`` if wazuh is restarted using systemd. On the other hand, if wazuh is restarted using the ``ossec-control`` binary, the variable must be owned by the root user.
 You can specify multiple paths in a variable by separating them using ``:``.
 
 .. code-block:: xml
@@ -60,8 +59,7 @@ You can specify multiple paths in a variable by separating them using ``:``.
     <directories check_all="yes">%CommonProgramFiles%</directories>
   </syscheck>
 
-On Windows, be sure that the variable is a system environment variable.
-A variable can contain multiple paths using ``;`` to separate them.
+On Windows, only system environment variables can be used. You can add multiple directories to the same variable by separating them using ``;``
 
 .. note::
   Wazuh runs as a 32 bit application, so the previous environment variable will be replaced by ``C:\Program Files (x86)\Common Files``. In order to specifically monitor ``C:\Program Files\Common Files``, the associate environment variable is: ``%CommonProgramW6432%``.

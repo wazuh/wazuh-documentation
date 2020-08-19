@@ -54,7 +54,7 @@ Use this option to add or remove directories to be monitored. The directories mu
 
 All files and subdirectories within the noted directories will also be monitored.
 
-Drive letters without directories are valid (``D:``).
+Drive letters without directories are valid. It's possible to configure them by removing the last backslash, for example ``D:``.
 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
