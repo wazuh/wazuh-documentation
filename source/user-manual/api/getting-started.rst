@@ -120,7 +120,7 @@ The following scripts provide API login examples using default (`false`) or plai
     response = requests.get(login_url, headers=login_headers, verify=False)
     token = json.loads(response.content.decode())['token']
 
-    # new authorization with the token we got
+    # New authorization header with the JWT token we got
     requests_headers = {'Content-Type': 'application/json',
                         'Authorization': f'Bearer {token}'}
 
