@@ -4,11 +4,14 @@
 
 Configuration
 =============
-Before modifying RBAC policies, roles and more, it is necessary to log into the API. You can find a detailed guide on how to do it within the :ref:`Getting started <api_getting_started>` section of the API.
+.. note::
+    It is necessary to log into the API before attempting to add or modify any RBAC configuration, such as policies, roles or users. A detailed guide on how to do that can be found within the :ref:`Getting started <api_getting_started>` section of the API.
 
 Set RBAC mode
 -------------
-You can modify the RBAC mode (as explained in the :ref:`How it works <api_rbac_how_it_works>` section). This is a security configuration so it is necessary to use the security endpoint ``/security/config``, specifically the ``PUT`` method. To do so, you can run the following cURL command, replacing your token and the desired mode (white/black).
+As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it's possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done by using the ``PUT /security/config`` endpoint.
+
+Here is an example of how to change RBAC mode using a cURL command. The ``YOUR_JWT_TOKEN`` must be replaced with a valid token (see :ref:`Getting started <api_getting_started>` for more information about logging into the API) and ``DESIRED_RBAC_MODE`` with the mode to enable ("black" or "white"):
 
 .. code-block:: console
 
@@ -21,16 +24,16 @@ You can modify the RBAC mode (as explained in the :ref:`How it works <api_rbac_h
        "message": "Configuration successfully updated"
     }
 
-You can also change other settings (not related to RBAC) such as the duration of the JWT tokens, as well as checking the current configuration using the ``GET`` method or restoring the default configuration using the ``DELETE`` method.
+It is possible to change other non-RBAC settings such as the duration of JWT tokens, as well as check the current configuration using the ``GET /security/config`` endpoint. Additionally, default settings can be restored using the ``DELETE /security/config`` endpoint.
 
-.. note::
+.. warning::
     All tokens are revoked for security reasons when the RBAC mode is changed. It will be necessary to log in and obtain a new token after the change.
 
 Create a new policy
 -------------------
-To create new policies, use the endpoint ``POST /security/policies``.
+**Policies** are used to specify which actions can be taken on the given resources. To create a new policy use the ``POST /security/policies`` endpoint.
 
-Let's assume a use case where we want to grant the Sales-team access to the agents of a certain customer. We are going to create a policy that specifies what actions and on which agents can be carried out. To do this, we would need to add the following block inside the request body of the endpoint mentioned above.
+As an example, in order to grant access to the agents of a given customer to the "Sales-team", a policy that specifies what actions and on which agents those actions can be carried out must be created. The required policy can be defined like the following one:
 
 .. code-block:: json
 
@@ -50,15 +53,13 @@ Let's assume a use case where we want to grant the Sales-team access to the agen
       }
     }
 
-The request would be as follows:
+It is possible to use the ``POST /security/policies`` endpoint to create the desired policy. The API request for this particular example would be as follows:
 
 .. code-block:: console
 
     # curl -X POST "https://localhost:55000/v4/security/policies?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
 
-With this policy, we have established that it is allowed to read information related to agents 001, 002, 003 and 004. We can create more policies to our liking as long as they are not repeated. We may also change this policy at any time to, for example, add new agents.
-
-The response after adding the new policy should be similar to the one below. The highlighted ID should be used later on to assign the policy to the role.
+The API response will be something similar to this. The highlighted ID should be used later on to assign the policy to the role:
 
 .. code-block:: json
     :class: output
@@ -92,13 +93,17 @@ The response after adding the new policy should be similar to the one below. The
       "message": "Policy created correctly"
     }
 
-We can query the policy ID at any time, along with the other information, using the endpoint ``GET /security/policies``. For a complete list of resources and actions, please visit :ref:`RBAC reference <api_rbac_reference>`.
+This will create a policy with permission to read information related to agents ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
+
+.. note::
+    The policy ID, along with the other useful information, can be access at any time using the ``GET /security/policies`` endpoint. For a complete list of resources and actions, please visit :ref:`RBAC reference <api_rbac_reference>` page.
+
 
 Create a new role
 -----------------
-To create new roles, use the endpoint ``POST /security/roles``
+**Roles** are a links between users and policies. Multiple users can be assigned to the same role and a role can have multiple policies linked to it. Roles can be created using the ``POST /security/roles`` endpoint.
 
-The link between users and policies is **roles**. Therefore, for the previous example of the Sales-team, we are going to create a role to which later assign all the members of the team.
+Following the previous "Sales-team" example, the role described below will be created so the "Sales-team" can be assigned to that role later:
 
 .. code-block:: json
     :emphasize-lines: 4,5,6
@@ -113,15 +118,15 @@ The link between users and policies is **roles**. Therefore, for the previous ex
     }
 
 .. note::
-    The highlighted lines are designed for a future feature, still in development. It does not affect the functionality.
+    The highlighted lines are intended for future feature still under development. They currently have no effect.
 
-The request with the information showed above would look like this:
+As before, the creation of that role can be requested using an API endpoint. In this case, the request for the role shown above would look like this:
 
 .. code-block:: console
 
     # curl -X POST "https://localhost:55000/v4/security/roles?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"sales-team\",\"rule\":{\"MATCH\":{\"definition\":\"sales-team\"}}}"
 
-The response body would be this. Remember that the ID is needed to link policies to this role.
+The response body would be similar to this one. It is important to remember the ID as it will be needed to link policies to this role.
 
 .. code-block:: json
     :class: output
@@ -151,11 +156,13 @@ The response body would be this. Remember that the ID is needed to link policies
 
 Assign policies to roles
 ------------------------
-To assign policies to a certain role, use the endpoint ``POST /security/roles/{role_id}/policies``
+To assign **policies** to a certain role use the ``POST /security/roles/{role_id}/policies`` endpoint. The assigment can be done by simply indicating the ID of the **role** and the ID of each policy. Remember that it is possible to a role to have multiple policies assigned and a given policy can be assigned to multiple roles.
 
-To do it, simply indicate the ID of the role and the ID of each policy. There is another parameter called *position*. It is an advanced parameter used to determine the order in which the different policies are applied, as policies might have conflicting permissions. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
+.. note::
+    This endpoint has a parameter called **position** used to determine the order in which the different policies should be applied, as policies might have conflicting permissions. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
 
-In our example the *role_id* would be ``8`` (the ID of "sales-team" role) and the *policy_id* would be ``12`` (the ID of "customer_x_agents" policy). This would be the request:
+
+Following the previous example, the "customer_x_agents" policy could be assigned to the "sales-team" role having the *role_id* (``8``) and the  *policy_id* (``12``). Here is the request:
 
 .. code-block:: console
 
@@ -187,16 +194,16 @@ In our example the *role_id* would be ``8`` (the ID of "sales-team" role) and th
       },
       "message": "All policies were linked to role 8"
     }
-
-We could modify the permissions of the whole group by adding new policies or modifying the existing ones. Thanks to that, we prevent modifying the permissions on each user individually, which would take more time.
+Now it is possible to modify the permissions of the whole "sales-team" group by adding new policies or modifying the existing ones, instead of having to assign each permission for each member of the team individually.
 
 Assign roles to a user
 ----------------------
-To assign roles to a user, use the endpoint ``POST /security/users/{username}/roles``.
+Users can be assigned to one or more roles using the ``POST /security/users/{username}/roles`` endpoint. It is possible to add previously created user to an existing role by specifying the user name and the ID of the role.
 
-To add an already created user to an existing role, it is only necessary to specify the user name and the ID of the role. There is another parameter called *position*. It is an advanced parameter used to determine the order in which the different roles are applied, as roles might have conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
+.. note::
+    This endpoint has a parameter called **position** used to determine the order in which the different roles will be applied, as roles might have conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
 
-Following the previous examples, we are going to link the user "sales-member-1" with the role "sales-team" whose ID is 8. This would be the request:
+Following the previous example, it is possible to assign a new user named "sales-member-1" to the previously created "sales-team" role. This would be the request, having ``8```as the *role_id* of the "sales-team":
 
 .. code-block:: console
 
@@ -222,16 +229,15 @@ Following the previous examples, we are going to link the user "sales-member-1" 
       "message": "All roles were linked to user sales-member-1"
     }
 
-All members assigned to the "sales-team" role could perform the actions established in its policies.
+The user "sales-member-1" now belongs to the "sales-team" role, so it could perform the actions established in its policies from now on.
 
 .. _rbac_priority:
 
 Priority of roles and policies
 ------------------------------
-When the same role have two or more contradictory policies assigned or the same user belong to two or more contradictory roles, some sort of priority is necessary to determine which permissions should ultimately be applied. For example:
+When the same role has two or more contradictory policies assigned or the same user belong to two or more contradictory roles the resulting permission will be determined by the priority of the policies. Let's take a look to the following example:
 
 .. code-block:: yaml
-    :class: output
     :emphasize-lines: 7,13
 
     example_role:
@@ -248,7 +254,23 @@ When the same role have two or more contradictory policies assigned or the same 
                 agent:id:001
             effect: deny
 
-In the example above, the role "example_role" is related to a ``policy0`` which allows agent 001 to be read. It is also related to ``policy1`` which prohibits it, as seen in the highlighted lines. In this situation, the most recently added policy is applied to the role. That is, the one that appears last when listing the policies of a role (``GET /security/roles``). The same happens with the roles of a user. The last role applied to a user is the one that determines the behavior of contradictory policies (``GET /security/users``).
+In this case, the role "example_role" is linked to the ``policy0`` which allows agent ``001`` to be read, but it is also linked to ``policy1``, which prohibits it, as seen in the highlighted lines. In this situation, the most recently added policy is applied to the role. That means the one that appears last when listing the policies of a role using the ``GET /security/roles`` endpoint will be applied and for this example the user won't have permission to read agent ``001``. The same happens if a user is assigned to several roles. The last role applied to a user is the one that determines the behavior in case of contradiction. The ``GET /security/users`` endpoint can be used to list the users and its assigned roles.
 
-When adding a new relationship between a policy and a role or between a role and a user, we can use a ``position`` parameter (starts at zero) to specify the position of the role or policy within the list. Thanks to this, we can add, for example, a new policy that is not in the last position, so that the contradictory actions it may have will not be applied.
+It is possible to specify in which position of the list (starting at 0) a policy or a role is assigned by using the ``position`` parameter when adding a new relationship between a policy and a role or between a role and a user. Thanks to this, it is possible to add a new policy and place it in a different position of the list, so if this new policy contradicts another one that is placed later, the later one will be the policy to have their effects applied. Following this example, if the ``position`` parameter were used when adding the ``policy1`` to ``example_role`` and it were set to ``0``, then ``policy1`` would be added to ``example_role`` in the first position of the list and the user would have access to agent ``001`` as in this case ``policy0`` would be the last policy of the list. Here is the resulting list for this case:
 
+.. code-block:: yaml
+    :emphasize-lines: 7,13
+
+    example_role:
+        policy1:
+            actions:
+                agent:read
+            resources:
+                agent:id:001
+            effect: deny
+        policy0:
+            actions:
+                agent:read
+            resources:
+                agent:id:001
+            effect: allow

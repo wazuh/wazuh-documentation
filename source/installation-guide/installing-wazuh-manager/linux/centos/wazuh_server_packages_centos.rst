@@ -54,9 +54,9 @@ Once the process is complete, you can check the service status with:
 
 .. versionadded:: 4.0.0
 
-The Wazuh API will be installed along the Wazuh manager. You do not need any extra requirement for this.
+The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-You can check the API service status with:
+To check the API service status use the following command:
 
   * For Systemd:
 

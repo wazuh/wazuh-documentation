@@ -5,14 +5,17 @@
 Configuration
 =============
 
-By default, the API will bind to port 55000/tcp and use self-signed certificates. Please review the :ref:`Securing API <securing_api>` section for more information on how to protect it.
+.. note::
+  Please review the :ref:`Securing API <securing_api>` section for more information on how to protect it.
 
 .. _api_configuration_file:
 
 Configuration file
 ------------------
 
-The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. By default, all settings are commented out. To apply a different configuration, uncomment it. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>`.
+The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment the desired line.
+
+Here are all the settings available for the `api.yaml` configuration file. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>` below:
 
 .. code-block:: yaml
 
@@ -53,7 +56,7 @@ The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.y
 
 .. warning::
 
-    If running a cluster, the master doesn’t send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, it should be updated manually in the workers if so desired. Take care of not overwriting the IP and port in the local configuration of each worker.
+    If running a cluster, the master will NOT send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, it should be updated manually in the workers too. Take care of not overwriting the IP and port in the local configuration of each worker.
 
 Make sure to restart wazuh-api service after editing the configuration file:
 
@@ -71,7 +74,7 @@ Make sure to restart wazuh-api service after editing the configuration file:
 
 Security configuration
 ----------------------
-Unlike regular API configuration settings that can be changed in the :ref:`configuration file <api_configuration_file>`, the API security settings are only intended to be modified through an API endpoint (``/security/config``), and they are applied to every API in the cluster, in case there is one configured. For more information on each of the settings, please check the :ref:`Security configuration options <api_security_configuration_options>`.
+Unlike regular API configuration settings that can be changed in the :ref:`configuration file <api_configuration_file>`, the following API security settings are only intended to be modified through an API endpoint (``/security/config``), and they are applied to every API in the cluster, in case there is one configured. For more information on each of the settings, please check the :ref:`Security configuration options <api_security_configuration_options>`.
 
 .. code-block:: yaml
 
