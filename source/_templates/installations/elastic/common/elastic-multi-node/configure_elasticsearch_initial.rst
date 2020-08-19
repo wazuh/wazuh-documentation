@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/elasticsearch/7.x/elasticsearch_cluster.yml
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://documentation.wazuh.com/resources/open-distro/elasticsearch/7.x/elasticsearch_cluster_initial_node.yml
 
 Edit the file ``/etc/elasticsearch/elasticsearch.yml``. By default, the pre-configured template includes 3 nodes, in case of having a different number of nodes, lines must be added or removed accordingly:
 
