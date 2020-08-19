@@ -87,7 +87,7 @@ Once logged in, it is possible to run any endpoint following the structure below
 Logging into the API via scripts
 --------------------------------
 
-With these scripts, it will be easier to understand the two ways of logging into the API: using `raw=true` or `raw=false`.
+The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with Wazuh API.
 
 1. Logging in with Python and non-raw token:
 
