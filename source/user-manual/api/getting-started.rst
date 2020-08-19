@@ -126,7 +126,7 @@ The following scripts provide API login examples using default (`false`) or plai
 
     print("\n- API calls with TOKEN environment variable ...\n")
 
-    print("Getting default information:\n")
+    print("Getting API information:\n")
 
     response = requests.get(f"{protocol}://{host}:{port}/?pretty=true", headers=requests_headers, verify=False)
     print(response.text)
