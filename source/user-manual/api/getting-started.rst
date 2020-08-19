@@ -199,7 +199,7 @@ Running the script provides a result similar to the following:
 
     echo -e "\n\nEnd of the script.\n"
 
-With this script, you will get a result similar to the following:
+Running the script provides a result similar to the following:
 
 .. code-block:: console
 
