@@ -31,13 +31,15 @@ Logging into the API
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
 
-1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``.  If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``.
+1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+
+    Export the token to an environment variable to use it in authorization header of future API requests:
 
     .. code-block:: console
 
-        # curl -u <user>:<password> -X GET "https://localhost:55000/v4/security/user/authenticate"
+        # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
 
-    You will get a result similar to the following. Copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
+    By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
     .. code-block:: none
         :class: output
@@ -48,7 +50,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
     .. code-block:: console
 
-        curl -X GET "https://localhost:55000/v4/" -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
+        # curl -k -X GET "https://localhost:55000/" -H "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
@@ -63,11 +65,170 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
             "timestamp": "2020-05-25T07:05:00+0000"
         }
 
-Once we are logged in we can run any endpoint following the structure below. Please, do not forget to replace <endpoint> and <YOUR_JWT_TOKEN> with your own values.
+
+Once logged in, it is possible to run any endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
 
 .. code-block:: console
 
-    # curl -X <METHOD> "https://localhost:55000/v4/<ENDPOINT>" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer $TOKEN"
+
+
+Logging into the API via scripts
+--------------------------------
+
+The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with Wazuh API.
+
+1. Logging in with Python:
+
+.. code-block:: python
+
+    #!/usr/bin/env python3
+
+    import json
+    import requests
+    import urllib3
+    from base64 import b64encode
+
+    # Disable insecure https warnings (for self-signed SSL certificates)
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    # Configuration
+    protocol = 'https'
+    host = 'localhost'
+    port = 55000
+    user = 'wazuh'
+    password = 'wazuh'
+    login_endpoint = 'security/user/authenticate'
+
+    login_url = f"{protocol}://{host}:{port}/{login_endpoint}"
+    basic_auth = f"{user}:{password}".encode()
+    login_headers = {'Content-Type': 'application/json',
+                     'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
+
+    print("\nLogin request ...\n")
+    response = requests.get(login_url, headers=login_headers, verify=False)
+    token = json.loads(response.content.decode())['token']
+    print(token)
+
+    # New authorization header with the JWT token we got
+    requests_headers = {'Content-Type': 'application/json',
+                        'Authorization': f'Bearer {token}'}
+
+    print("\n- API calls with TOKEN environment variable ...\n")
+
+    print("Getting API information:\n")
+
+    response = requests.get(f"{protocol}://{host}:{port}/?pretty=true", headers=requests_headers, verify=False)
+    print(response.text)
+
+    print("\nGetting agents status summary:\n")
+
+    response = requests.get(f"{protocol}://{host}:{port}/agents/summary/status?pretty=true", headers=requests_headers, verify=False)
+    print(response.text)
+
+    print("\n\nEnd of the script.\n")
+
+Running the script provides a result similar to the following:
+
+.. code-block:: console
+
+    # root@wazuh-master:/# python3 login_script.py
+
+    Login request ...
+
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNTk3ODI4OTQ3LCJleHAiOjE1OTc4NjQ5NDcsInN1YiI6IndhenVoIiwicmJhY19wb2xpY2llcyI6eyJhZ2VudDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJncm91cDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJhZ2VudDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyIsImFnZW50Omdyb3VwOioiOiJhbGxvdyJ9LCJhZ2VudDpkZWxldGUiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93IiwiYWdlbnQ6Z3JvdXA6KiI6ImFsbG93In0sImFnZW50Om1vZGlmeV9ncm91cCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6cmVzdGFydCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6dXBncmFkZSI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiZ3JvdXA6cmVhZCI6eyJncm91cDppZDoqIjoiYWxsb3cifSwiZ3JvdXA6ZGVsZXRlIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDp1cGRhdGVfY29uZmlnIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDptb2RpZnlfYXNzaWdubWVudHMiOnsiZ3JvdXA6aWQ6KiI6ImFsbG93In0sImFjdGl2ZS1yZXNwb25zZTpjb21tYW5kIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGVfdXNlciI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWRfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJldm9rZSI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWQiOnsicm9sZTppZDoqIjoiYWxsb3ciLCJwb2xpY3k6aWQ6KiI6ImFsbG93IiwidXNlcjppZDoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlIjp7InJvbGU6aWQ6KiI6ImFsbG93IiwicG9saWN5OmlkOioiOiJhbGxvdyIsInVzZXI6aWQ6KiI6ImFsbG93In0sInNlY3VyaXR5OmRlbGV0ZSI6eyJyb2xlOmlkOioiOiJhbGxvdyIsInBvbGljeTppZDoqIjoiYWxsb3ciLCJ1c2VyOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnN0YXR1cyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZCI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9hcGlfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwibWFuYWdlcjp1cGRhdGVfYXBpX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6dXBsb2FkX2ZpbGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOnJlc3RhcnQiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOmRlbGV0ZV9maWxlIjp7Iio6KjoqIjoiYWxsb3ciLCJmaWxlOnBhdGg6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9maWxlIjp7ImZpbGU6cGF0aDoqIjoiYWxsb3cifSwiY2x1c3RlcjpkZWxldGVfZmlsZSI6eyJub2RlOmlkOioiOiJhbGxvdyIsIm5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwZGF0ZV9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVzdGFydCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwbG9hZF9maWxlIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9maWxlIjp7Im5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNpc2NhdDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJkZWNvZGVyczpyZWFkIjp7ImRlY29kZXI6ZmlsZToqIjoiYWxsb3cifSwibGlzdHM6cmVhZCI6eyJsaXN0OnBhdGg6KiI6ImFsbG93In0sInJ1bGVzOnJlYWQiOnsicnVsZTpmaWxlOioiOiJhbGxvdyJ9LCJtaXRyZTpyZWFkIjp7Iio6KjoqIjoiYWxsb3cifSwic2NhOnJlYWQiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NoZWNrOmNsZWFyIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpydW4iOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NvbGxlY3RvcjpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJyYmFjX21vZGUiOiJibGFjayJ9fQ.rcn9j--_sA-Fy47mSc0R5Hts20izTtreB9WPTBILi9g
+
+    - API calls with TOKEN environment variable ...
+
+    Getting API information:
+
+    {
+       "title": "Wazuh API REST",
+       "api_version": "4.0.0",
+       "revision": 4000,
+       "license_name": "GPL 2.0",
+       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+       "hostname": "wazuh-master",
+       "timestamp": "2020-08-19T09:20:02+0000"
+    }
+
+    Getting agents status summary:
+
+    {
+       "data": {
+          "active": 9,
+          "disconnected": 2,
+          "never_connected": 2,
+          "pending": 0,
+          "total": 13
+       }
+    }
+
+
+    End of the script.
+
+
+2. Logging in with a bash script and raw token:
+
+.. code-block:: bash
+
+    #!/bin/bash
+
+    echo -e "\n- Getting token...\n"
+
+    TOKEN=$(curl -u wazuh:wazuh -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+    echo -e "\n- API calls with TOKEN environment variable ...\n"
+
+    echo -e "Getting default information:\n"
+
+    curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    echo -e "\n\nGetting /agents/summary/os:\n"
+
+    curl -k -X GET "https://localhost:55000/agents/summary/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+    echo -e "\n\nEnd of the script.\n"
+
+Running the script provides a result similar to the following:
+
+.. code-block:: console
+
+    # root@wazuh-master:/# ./login_script.sh
+
+    - Getting token...
+
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  3059  100  3059    0     0  17089      0 --:--:-- --:--:-- --:--:-- 17089
+
+    - API calls with TOKEN environment variable ...
+
+    Getting default information:
+
+    {
+       "title": "Wazuh API REST",
+       "api_version": "4.0.0",
+       "revision": 4000,
+       "license_name": "GPL 2.0",
+       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+       "hostname": "wazuh-master",
+       "timestamp": "2020-08-18T08:36:56+0000"
+    }
+
+    Getting /agents/summary/os:
+
+    {
+       "data": {
+          "active": 9,
+          "disconnected": 2,
+          "never_connected": 2,
+          "pending": 0,
+          "total": 13
+       }
+    }
+
+    End of the script.
 
 
 Basic concepts
@@ -82,8 +243,8 @@ Here are some of the basic concepts related to making API requests and understan
     +=================================================+====================================================================================================================================================================+
     | ``-X GET/POST/PUT/DELETE``                      | Specifies a custom request method to use when communicating with the HTTP server.                                                                                  |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ``http://localhost:55000/v4/<ENDPOINT>``        | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
-    | ``https://localhost:55000/v4/<ENDPOINT>``       |                                                                                                                                                                    |
+    | ``http://localhost:55000/<ENDPOINT>``           | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
+    | ``https://localhost:55000/<ENDPOINT>``          |                                                                                                                                                                    |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | ``-H  "accept: application/json"``              | Include extra header in the request to set output type to JSON (optional).                                                                                         |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -216,7 +377,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -259,7 +420,7 @@ It can also be helpful to know what rules are available that match a specific cr
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -330,7 +491,7 @@ The API can be used to show information about all monitored files by syscheck. T
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -384,7 +545,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -419,7 +580,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -459,7 +620,7 @@ Some information about the manager can be retrieved using the API. Configuration
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/manager/status?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/manager/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -499,7 +660,7 @@ You can even dump the manager's current configuration with the request below (re
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -541,11 +702,11 @@ Playing with agents
 
 Here are some commands for working with the agents.
 
-This enumerates **active** agents:
+This enumerates 2 **active** agents:
 
 .. code-block:: console
 
-    # curl -X GET "https://localhost:55000/v4/agents?pretty=true&offset=1&limit=1&status=never_connected" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -554,20 +715,23 @@ This enumerates **active** agents:
       "data": {
         "affected_items": [
           {
-            "node_name": "unknown",
-            "status": "never_connected",
-            "dateAdd": "1970-01-01T00:00:00Z",
-            "registerIP": "any",
+            "node_name": "worker2",
+            "status": "active",
+            "manager": "wazuh-worker2",
+            "version": "Wazuh v3.13.1",
+            "id": "001",
+            "name": "wazuh-agent1"
+          },
+          {
+            "node_name": "worker2",
+            "status": "active",
+            "manager": "wazuh-worker2",
+            "version": "Wazuh v3.13.1",
             "id": "002",
-            "ip": "any",
-            "name": "wazuh-agent2",
-            "group": [
-              "default",
-              "group2"
-            ]
+            "name": "wazuh-agent2"
           }
         ],
-        "total_affected_items": 10,
+        "total_affected_items": 9,
         "total_failed_items": 0,
         "failed_items": []
       },
@@ -579,7 +743,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/v4/agents?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
+    # curl -k -X POST "https://localhost:55000/agents?pretty=true" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
 
 .. code-block:: json
     :class: output
