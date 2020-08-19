@@ -44,7 +44,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         <YOUR_JWT_TOKEN>
 
-    Export the token to an environment variable so API requests will be easier to make:
+    Export the token to an environment variable to use it in authorization header of future API requests:
 
     .. code-block:: console
 
