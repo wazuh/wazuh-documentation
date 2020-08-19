@@ -131,7 +131,7 @@ The following scripts provide API login examples using default (`false`) or plai
     response = requests.get(f"{protocol}://{host}:{port}/?pretty=true", headers=requests_headers, verify=False)
     print(response.text)
 
-    print("\nGetting /agents/summary/os:\n")
+    print("\nGetting agents status summary:\n")
 
     response = requests.get(f"{protocol}://{host}:{port}/agents/summary/status?pretty=true", headers=requests_headers, verify=False)
     print(response.text)
