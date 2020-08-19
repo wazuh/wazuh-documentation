@@ -77,7 +77,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
         }
 
 
-Once we are logged in we can run any endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
+Once logged in, it is possible to run any endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
 
 .. code-block:: console
 
