@@ -20,4 +20,14 @@
 
                     # apt install curl apt-transport-https
 
+
+                    
+        .. group-tab:: zypper
+
+            Install all the required utilities:
+
+                .. code-block:: console
+
+                    # zypper install curl                    
+
 .. End of include file

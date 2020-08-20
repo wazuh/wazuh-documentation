@@ -51,5 +51,16 @@
 
                 In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.
 
+        .. group-tab:: Zypper
+
+            Install all the necessary packages for the installation:
+                
+                .. code-block:: console
+
+                    # zypper install curl unzip wget libcap && zypper install java-11-openjdk-devel
+                    # export JAVA_HOME=/usr/ 
+
+            In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.                
+
 .. End of include file
 
