@@ -8,7 +8,7 @@ Upgrading Elastic Stack
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Elastic* distribution. 
 
 .. note::
-  This guide is meant for upgrades from 7.x to 7.y. The upgrade instructions for Elastic Stack in version prior to 7.0 can be found in the :ref:`Upgrading Elastic Stack from a legacy version <upgrading_elastic_stack_legacy>` section.
+  This guide is meant for upgrades from 7.x to 7.y. The upgrade instructions for Elastic Stack versions prior to 7.0 can be found in the :ref:`Upgrading Elastic Stack from a legacy version <upgrading_elastic_stack_legacy>` section.
 
 Preparing Elastic Stack
 -----------------------
@@ -69,7 +69,7 @@ Preparing Elastic Stack
 Upgrading Elasticsearch
 -----------------------
 
-This guide explains how to perform a rolling upgrade, which lets to shut down one node at a time for minimal disruption of service.
+This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.
 The cluster remains available throughout the process.
 
 In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP. If using ``http``, the option ``-k`` must be omitted and if not using user/password authentication, ``-u`` must be omitted.
@@ -219,7 +219,7 @@ Upgrading Kibana
 ----------------
 
 .. warning::
-  Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from the ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from the ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
+  Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
 #. Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to latest:
 

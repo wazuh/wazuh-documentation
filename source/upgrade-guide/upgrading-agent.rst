@@ -5,7 +5,7 @@
 Upgrading the Wazuh agent
 =========================
 
-The following steps show how to upgrade the Wazuh agent from 3.x to latest.  Since Wazuh 3.x, it is possible to upgrade the Wazuh agents remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tools or the Wazuh API. More information about the process can be found in the :ref:`Remote agent upgrade<upgrading-agent>` section.
+The following steps show how to upgrade the Wazuh agent from 3.x to the latest available version. Since Wazuh 3.x, it is possible to upgrade the Wazuh agents remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tools or the Wazuh API. More information about the process can be found in the :ref:`Remote agent upgrade<upgrading-agent>` section.
 
 To perform the upgrade locally, follow the instructions for the operating system of the Wazuh agent:
 
@@ -28,7 +28,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # yum upgrade wazuh-agent
 
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager:
 
         .. code-block:: console
 
@@ -52,7 +52,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # apt-get install wazuh-agent
 
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state:
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state:
 
         .. code-block:: console
 
@@ -76,7 +76,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # zypper update wazuh-agent
 
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or lower version than the Wazuh manager:
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager:
 
         .. code-block:: console
 
@@ -158,7 +158,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control stop
+          # /var/ossec/bin/ossec-control start
 
 
   .. group-tab:: Solaris 10
