@@ -20,4 +20,14 @@
 
                 # apt install elasticsearch-oss opendistroforelasticsearch
 
+
+
+    .. group-tab:: ZYpp
+
+        Install Open Distro for Elasticsearch:
+
+            .. code-block:: console
+
+                # apt install opendistroforelasticsearch
+
 .. End of include file

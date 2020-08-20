@@ -42,6 +42,13 @@ This step is required only if Kibana will be installed on a separate host where 
 
 
 
+  .. group-tab:: Zypp
+
+
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+
+
+
 Kibana installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -60,6 +67,13 @@ Kibana installation and configuration
 
 
             .. include:: ../../../../../_templates/installations/elastic/deb/install_kibana.rst
+
+
+
+        .. group-tab:: Zypp
+
+
+            .. include:: ../../../../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
 

@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # zypper install kibana-7.6.0
+  # zypper install opendistroforelasticsearch-kibana
 
 .. End of include file

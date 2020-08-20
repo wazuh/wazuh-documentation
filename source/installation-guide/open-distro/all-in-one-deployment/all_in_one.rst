@@ -48,6 +48,13 @@ Adding the Wazuh repository
 
 
 
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst    
+
+
+
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,6 +72,13 @@ Installing the Wazuh manager
 
 
     .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 
@@ -168,6 +182,13 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 
 
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../../../_templates/installations/elastic/zypp/install_filebeat.rst
+
+
+
 #. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
 
     .. code-block:: console
@@ -245,6 +266,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 
         .. include:: ../../../_templates/installations/elastic/deb/install_kibana.rst
+
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
 

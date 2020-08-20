@@ -22,7 +22,7 @@
 
 
                     
-        .. group-tab:: zypper
+        .. group-tab:: ZYpp
 
             Install all the required utilities:
 

@@ -51,7 +51,7 @@
 
                 In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.
 
-        .. group-tab:: Zypper
+        .. group-tab:: ZYpp
 
             Install all the necessary packages for the installation:
                 

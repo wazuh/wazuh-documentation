@@ -44,6 +44,13 @@ Adding the Wazuh repository
 
 
 
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+
+
+
 Elasticsearch installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

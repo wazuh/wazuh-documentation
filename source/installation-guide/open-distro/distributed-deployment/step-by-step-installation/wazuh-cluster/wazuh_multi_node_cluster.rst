@@ -47,6 +47,13 @@ This section describes how to add the Wazuh repository. It will be used for the 
 
 
 
+    .. group-tab:: ZYpp
+
+
+      .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+
+
+
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -66,6 +73,13 @@ Install the Wazuh manager package. This step must be applied in all servers that
 
 
     .. include:: ../../../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 
@@ -127,6 +141,13 @@ Filebeat installation and configuration
 
 
         .. include:: ../../../../../_templates/installations/elastic/deb/install_filebeat.rst
+
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../../../../../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
 

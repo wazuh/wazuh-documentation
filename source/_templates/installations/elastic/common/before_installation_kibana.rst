@@ -18,4 +18,13 @@
 
                     # apt install curl apt-transport-https libcap2-bin
 
+        .. group-tab:: ZYpp
+
+            Install all the required utilities:
+
+                .. code-block:: console
+
+                    # zypper install curl
+                    # zypper install libcap-progs $debug || zypper install libcap2
+
 .. End of include file
