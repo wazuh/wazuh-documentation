@@ -15,7 +15,7 @@ With this method, we will tell the system what permissions we want to have. We w
 .. code-block:: console
         :class: output
 
-        curl -k -X POST https://localhost:55000/security/user/authenticate/run_as -H 'authorization: Basic d2F6dWgtd3VpOndhenVoLXd1aQ==' -H 'content-type: application/json' -d '{
+        curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
                 "name": "Initial_auth",
                 "auth": {
                         "name": "Bill",
