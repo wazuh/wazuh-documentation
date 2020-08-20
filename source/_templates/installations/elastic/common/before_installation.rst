@@ -8,8 +8,10 @@
                 
                 .. code-block:: console
 
-                    # yum install curl unzip wget && yum install java-11-openjdk-devel || yum install java-1.8.0-openjdk.x86_64 
+                    # yum install curl unzip wget && yum install java-11-openjdk-devel
                     # export JAVA_HOME=/usr/ 
+
+            In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.
 
 
         .. group-tab:: APT
@@ -46,6 +48,8 @@
                     .. code-block:: console
 
                         # apt install openjdk-11-jdk && export JAVA_HOME=/usr/    
+
+                In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.        
 
 .. End of include file
 
