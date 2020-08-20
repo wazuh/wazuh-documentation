@@ -158,7 +158,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control stop
+          # /var/ossec/bin/ossec-control start
 
 
   .. group-tab:: Solaris 10
