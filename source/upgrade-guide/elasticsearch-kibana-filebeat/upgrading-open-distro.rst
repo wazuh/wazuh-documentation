@@ -7,8 +7,8 @@ Upgrading Open Distro for Elasticsearch
 
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Open Distro for Elasticsearch* distribution. 
 
-Preparing Open Distro Stack
----------------------------
+Preparing Open Distro for Elasticsearch
+---------------------------------------
 
 #. Stop the services:
 
