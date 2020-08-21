@@ -1,0 +1,103 @@
+---
+wazuh_ui_admin:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions:
+  - index_patterns:
+    - "wazuh-*"
+    dls: ""
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "read"
+    - "delete"
+    - "manage"
+    - "index"
+  tenant_permissions: []
+  static: false
+alerting_view_alerts:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions:
+  - index_patterns:
+    - ".opendistro-alerting-alert*"
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "read"
+  tenant_permissions: []
+  static: false
+wazuh_ui_user:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions:
+  - index_patterns:
+    - "wazuh-*"
+    dls: ""
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "read"
+  tenant_permissions: []
+  static: false
+kibana_read_only:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions: []
+  tenant_permissions: []
+  static: false
+security_rest_api_access:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions: []
+  tenant_permissions: []
+  static: false
+alerting_full_access:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions:
+  - index_patterns:
+    - ".opendistro-alerting-config"
+    - ".opendistro-alerting-alert*"
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "crud"
+  tenant_permissions: []
+  static: false
+alerting_crud_alerts:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions:
+  - index_patterns:
+    - ".opendistro-alerting-alert*"
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "crud"
+  tenant_permissions: []
+  static: false
+_meta:
+  type: "roles"
+  config_version: 2
+wazuh_ui:
+  reserved: true
+  hidden: false
+  cluster_permissions: []
+  index_permissions:
+  - index_patterns:
+    - "wazuh-*"
+    - ".wazuh*"
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "indices_all"
+  tenant_permissions: []
+  static: false
