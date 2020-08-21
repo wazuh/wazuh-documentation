@@ -126,7 +126,7 @@ As before, the creation of that role can be requested using an API endpoint. In 
 
     # curl -X POST "https://localhost:55000/v4/security/roles?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"sales-team\",\"rule\":{\"MATCH\":{\"definition\":\"sales-team\"}}}"
 
-The response body would be similar to this one. It is important to remember the ID as it will be needed to link policies to this role.
+The response body would be similar to this one. It is important to remember the role ID as it will be needed to link policies to this role.
 
 .. code-block:: json
     :class: output
