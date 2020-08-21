@@ -198,7 +198,7 @@ Now it is possible to modify the permissions of the whole "sales-team" group by 
 
 Assign roles to a user
 ----------------------
-Users can be assigned to one or more roles using the ``POST /security/users/{username}/roles`` endpoint. It is possible to add previously created user to an existing role by specifying the user name and the ID of the role.
+Users can be assigned to one or more roles using the ``POST /security/users/{username}/roles`` endpoint. It is possible to add previously created users to an existing role by specifying the user name and the ID of the role.
 
 .. note::
     This endpoint has a parameter called **position** used to determine the order in which the different roles will be applied, as roles might have conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
