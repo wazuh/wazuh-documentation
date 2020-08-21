@@ -221,6 +221,10 @@ Example 1
             }]
           }
 
+.. thumbnail:: ../../../images/rbac/example1_rule.png
+    :align: center
+    :width: 100%
+
 - To achieve this, the user uses the following authorization context:
 
 .. code-block:: json
@@ -245,7 +249,11 @@ Example 1
             ]
         }
 
-- TODO
+In this case, we have an OR that contains two operations, the first of which is a FIND$, which will search through the authorization context for the office key whose value is any positive number. This operation will result in False since it is not present in the authorization context.
+
+The second operation is an AND, it has only one operation inside so it could be omitted, in any case if the operation is evaluated as True, our AND operation will be True. We see that the MATCH operation is fulfilled because in the root of our authorization context we have both keys and the values are contained in the values of the authorization context.
+
+Then we have that the initial OR operation will result in True since the AND operation results in True.
 
 Example 2
 ^^^^^^^^^
