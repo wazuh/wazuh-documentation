@@ -5,7 +5,7 @@
 Authorization Context
 =====================
 
-This guide provides the basic information you need to start using the Authorization Context login method.
+This guide provides the basic information needed to start using the Authorization Context login method.
 
 Authorization context login method
 ----------------------------------
@@ -22,6 +22,7 @@ With this method, we will tell the system what permissions we want to have. We w
                         "office": ["20", "21", "30"]
                 }
         }'
+
         {"token": "TOKEN"}
 
 .. thumbnail:: ../../../images/rbac/auth_context_login.png
@@ -47,7 +48,6 @@ A rule is a set of logical and search operations that will be applied to the inc
 To explain each of the operations of the rules, let's use this authorization context as an example. It will be matched to each of the examples:
 
 .. code-block:: json
-        :class: output
 
         {
             "name": "Initial_auth",
@@ -62,10 +62,9 @@ Search operations
 
 The search operations in the rules are used to search in the authorization context for a specific object or string.
 
-- **MATCH**: This operation will search for the structure indicated in the authorization context. It will look for the object inside the MATCH to be contained in the authorization context. It is not necessary to have an **exact match**, i.e. in the following case we try to search for the 'auth' key and within it an 'office' key and the value of this key must contain the value 20:
+- **MATCH**: This operation will search in the authorization context the structure indicated inside MATCH. An **exact match** is not necessary. I.e, in the following case it will try to search for  ``auth`` key and within it, an ``office`` key whose value must contain the number ``20``:
 
 .. code-block:: json
-        :class: output
 
         {
             "MATCH": {
@@ -75,10 +74,9 @@ The search operations in the rules are used to search in the authorization conte
             }
         }
 
-- **MATCH$**: This operation is the same as the previous one with the difference that it is strict in terms of content, that is, it will be evaluated as False even though the clause is contained in a larger set (list) in the authorization context. The previous example would not be evaluated as True since the content of the 'auth' key is not an exact match. To get this rule evaluated as True we would have to change the value 20 to the exact list of values:
+- **MATCH$**: This operation is the same as the previous one with the difference that it is strict in terms of content, that is, it will be evaluated as False even though the clause is contained in a larger set (list) in the authorization context. The previous example would not be evaluated as True since the content of the ``auth`` key is not an exact match. To get this rule evaluated as True, it would be necessary to use the exact list of values:
 
 .. code-block:: json
-        :class: output
 
         {
             "MATCH$": {
@@ -88,10 +86,9 @@ The search operations in the rules are used to search in the authorization conte
             }
         }
 
-- **FIND**: This operation is a recursive MATCH at all levels of the authorization context. In the MATCH case, the structure is searched at the root of the authorization context. In the FIND case, the structure will be searched at all depth levels. In the following example we see how we do not need to specify the key 'auth' because the FIND operation will search the key 'office' for all the authorization context:
+- **FIND**: This operation is a recursive MATCH at all levels of the authorization context. In the MATCH case, the structure is searched at the root of the authorization context. In the FIND case, the structure will be searched at all depth levels. In the following example it is unneeded to specify the key ``auth`` because the FIND operation will search the key ``office`` inside all the authorization context:
 
 .. code-block:: json
-        :class: output
 
         {
             "FIND": {
@@ -99,10 +96,9 @@ The search operations in the rules are used to search in the authorization conte
             }
         }
 
-- **FIND$**: In this case we have a recursive MATCH$ at all depth levels of the authorization context. As with the MATCH$ operation, if we want it to evaluate as True we must include the exact list of values in the 'office' key, the name is optional, it depends on how specific we want to be:
+- **FIND$**: This operation is a recursive MATCH$ at all depth levels of the authorization context. As with the MATCH$ operation, if we want it to be evaluated as True, the exact list of values in the ``office`` key must be included. The ``name`` is optional, it depends on how specific it needs to be:
 
 .. code-block:: json
-        :class: output
 
         {
             "FIND$": {
@@ -114,12 +110,11 @@ The search operations in the rules are used to search in the authorization conte
 Logical operations
 ^^^^^^^^^^^^^^^^^^
 
-As for the logical operations, we have at our disposal three:
+Regarding logical operations, there are three different options:
 
 - **AND**: All clauses encapsulated within this operation must be satisfied for it to be true. Example:
 
 .. code-block:: json
-        :class: output
 
         {
             "AND": [
@@ -141,7 +136,6 @@ As for the logical operations, we have at our disposal three:
 - **OR**: At least one of the clauses encapsulated within this operation must be satisfied for the result to be True. Example:
 
 .. code-block:: json
-        :class: output
 
         {
             "OR": [
@@ -161,10 +155,9 @@ As for the logical operations, we have at our disposal three:
             ]
         }
 
-- **NOT**: For this operation to result in True, the clause encapsulated within it must result in False. Example:
+- **NOT**: For this operation to be True, the clause it encloses must be False. Example:
 
 .. code-block:: json
-        :class: output
 
         {
             "NOT": {
@@ -249,11 +242,11 @@ Example 1
             ]
         }
 
-In this case, we have an OR that contains two operations, the first of which is a FIND$, which will search through the authorization context for the office key whose value is any positive number. This operation will result in False since it is not present in the authorization context.
+In this case, there is an OR that contains two operations. The first one is a FIND$, which will search through the authorization context for the ``office`` key whose value is any positive number. This operation will result in False since it is not present in the authorization context.
 
-The second operation is an AND, it has only one operation inside so it could be omitted, in any case if the operation is evaluated as True, our AND operation will be True. We see that the MATCH operation is fulfilled because in the root of our authorization context we have both keys and the values are contained in the values of the authorization context.
+The second operation is an AND. It has only one operation inside so it could be omitted. In any case if the operation is evaluated as True, the AND operation will be True. The MATCH operation is fulfilled because in the root of the authorization context both keys and the values are contained in the authorization context.
 
-Then we have that the initial OR operation will result in True since the AND operation results in True.
+As a result, the initial OR operation will be True since the AND operation returns True.
 
 Example 2
 ^^^^^^^^^
@@ -324,7 +317,7 @@ Example 2
     :align: center
     :width: 100%
 
-- To achieve this match, the user send the following authorization context:
+- To achieve this match, the user sends the following authorization context:
 
 .. code-block:: json
         :class: output
@@ -370,6 +363,6 @@ Example 2
         }
 
 
-In this case, the first search operation (MATCH) within our most external AND is satisfied since in the authorization context the office 20 appears. The second search operation (FIND) is also satisfied, the regular expressions help to do this.
+In this case, the first search operation (MATCH) within the most external AND is satisfied since in the authorization context the ``"office": "20"`` key-value appears. The second search operation (FIND) is also satisfied, the regular expressions help to do this.
 
-Finally, there is an OR operation, within this operation we have that the first of the search operations (MATCH$) is satisfied because the office is the 20th and the name is Wazuh, both in the root of our authorization context. Since we are inside an OR operation, as soon as one of the clauses is evaluated as true, the OR operation returns true.
+Finally, there is an OR operation. Inside, the first of the search operations (MATCH$) is satisfied because the value of the ``office`` key is ``20`` and the name is ``Wazuh``, both in the root of our authorization context. Since it is inside an OR operation, as soon as one of the clauses is evaluated as true, the OR operation returns true.

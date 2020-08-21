@@ -74,7 +74,7 @@ Once logged in, it is possible to run any endpoint following the structure below
 
 
 .. note::
-  There is another method of authentication, which allows to obtain the permissions in a dynamic way. See :ref:`Authorization Context login method <authorization_context_method>`.
+  There is another method of authentication, which allows obtaining the permissions in a dynamic way. See :ref:`Authorization Context login method <authorization_context_method>`.
 
 
 Logging into the API via scripts
