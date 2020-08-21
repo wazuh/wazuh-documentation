@@ -5,7 +5,7 @@
 Configuration
 =============
 .. note::
-    It is necessary to log into the API before attempting to add or modify any RBAC configuration, such as policies, roles or users. A detailed guide on how to do that can be found within the :ref:`Getting started <api_getting_started>` section of the API.
+    It is necessary to log into the API before attempting to add or modify any RBAC configuration, such as policies, roles or users. A detailed guide on how to log in can be found within the :ref:`Getting started <api_getting_started>` section of the API.
 
 Set RBAC mode
 -------------
