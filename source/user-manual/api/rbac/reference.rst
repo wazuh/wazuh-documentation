@@ -17,7 +17,7 @@ RBAC policies are made up of three elements: **actions**, **resources** and **ef
 
 For example, to obtain the information of one or all agents use the ``GET /agents`` endpoint. This endpoint uses the action ``agent:read`` on the resource ``agent:id``. For example, ``agent:id:001`` (agent 001) or ``agent:id:*`` (all agents). All the existing resources, available actions and the endpoints affected by each one can be found in this reference page.
 
-This reference also contains a set of default roles and policies that can be used instead of having to create new ones.
+This reference also contains a set of default roles and policies that can be immediately used instead of having to create new ones.
 
 `Resources`_
     - `*:*`_
