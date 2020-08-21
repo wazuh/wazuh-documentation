@@ -156,7 +156,7 @@ The response body would be similar to this one. It is important to remember the 
 
 Assign policies to roles
 ------------------------
-To assign **policies** to a certain role use the ``POST /security/roles/{role_id}/policies`` endpoint. The assigment can be done by simply indicating the ID of the **role** and the ID of each policy. Remember that it is possible to a role to have multiple policies assigned and a given policy can be assigned to multiple roles.
+To assign **policies** to a certain role use the ``POST /security/roles/{role_id}/policies`` endpoint. The assigment can be done by simply indicating the ID of the **role** and the ID of each policy. Remember that it is possible for a role to have multiple policies assigned to it. Also a given policy can be assigned to multiple roles.
 
 .. note::
     This endpoint has a parameter called **position** used to determine the order in which the different policies should be applied, as policies might have conflicting permissions. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
