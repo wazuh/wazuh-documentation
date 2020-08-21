@@ -275,7 +275,7 @@ installKibana() {
     else   
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/ui/kibana/wazuhapp-4.0.0_7.8.0_0.0.0.todelete.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.0_0.0.0.todelete.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."

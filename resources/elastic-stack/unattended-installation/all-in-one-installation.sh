@@ -150,7 +150,7 @@ addWazuhrepo() {
     if [ $sys_type == "yum" ] 
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
-        eval "echo -e '[wazuh_trash]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/trash/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh_pre.repo $debug"
+        eval "echo -e '[wazuh_staging]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/staging/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh_pre.repo $debug"
     elif [ $sys_type == "zypper" ] 
     then
         rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH > /dev/null 2>&1
@@ -167,7 +167,7 @@ addWazuhrepo() {
     elif [ $sys_type == "apt-get" ] 
     then
         eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
-        eval "echo "deb https://packages-dev.wazuh.com/trash/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh_trash.list $debug"
+        eval "echo "deb https://packages-dev.wazuh.com/staging/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh_staging.list $debug"
         eval "apt-get update -q $debug"
     fi    
 
@@ -332,7 +332,7 @@ installKibana() {
     else   
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/trash/app/kibana/wazuhapp-4.0.0_7.8.1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/app/kibana/wazuhapp-4.0.0_7.8.1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
