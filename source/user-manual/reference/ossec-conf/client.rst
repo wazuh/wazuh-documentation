@@ -329,7 +329,7 @@ Options
 enabled
 ^^^^^^^
 
-Enables/Disables agent enrollment.
+Enables/disables agent enrollment.
 
 +--------------------+----------------------------------+
 | **Default value**  | yes                              |
@@ -375,7 +375,7 @@ Agent name that will be used for enrollment. Only alphanumeric characters, "-", 
 groups
 ^^^^^^
 
-Groups name to which the agent belong.
+Groups name to which the agent belongs.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | NULL                                        |
@@ -386,7 +386,7 @@ Groups name to which the agent belong.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from agent. If this is not set manager will extract source IP from enrollment messsage.
+Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
@@ -419,7 +419,7 @@ Used for manager verification. If no CA certificate is set server will not be ve
 agent_certificate_path
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Required when agent verification is enabled in manager.
+Required when agent verification is enabled in the manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | NULL                                        |
@@ -430,7 +430,7 @@ Required when agent verification is enabled in manager.
 agent_key_path
 ^^^^^^^^^^^^^^
 
-Required when agent verification is enabled in manager.
+Required when agent verification is enabled in the manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | NULL                                        |
@@ -452,7 +452,7 @@ Required when enrollment is using password verification. The password must match
 auto_method
 ^^^^^^^^^^^
 
-Auto negotiate the most secure common SSL/TLS method with the manager, use "yes" for auto negotiate or "no" for TLS v1.2 only.
+Auto negotiates the most secure common SSL/TLS method with the manager, use "yes" for auto negotiate or "no" for TLS v1.2 only.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | no                                          |
@@ -463,7 +463,7 @@ Auto negotiate the most secure common SSL/TLS method with the manager, use "yes"
 delay_after_enrollment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Time agentd should wait after a successfull registration.
+Time that agentd should wait after a successful registration.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 20                                          |
