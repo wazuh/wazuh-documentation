@@ -16,7 +16,7 @@
       gpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH
       enabled=1
       name=EL-$releasever - Wazuh
-      baseurl=https://packages-dev.wazuh.com/trash/yum/
+      baseurl=https://packages-dev.wazuh.com/staging/yum/
       protect=1' | tee /etc/yum.repos.d/wazuh_pre.repo
       EOF 
       
