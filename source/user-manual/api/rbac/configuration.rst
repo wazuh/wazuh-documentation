@@ -101,7 +101,7 @@ This will create a policy with permission to read information related to agents 
 
 Create a new role
 -----------------
-**Roles** are a links between users and policies. Multiple users can be assigned to the same role and a role can have multiple policies linked to it. Roles can be created using the ``POST /security/roles`` endpoint.
+**Roles** are links between users and policies. Multiple users can be assigned to the same role and a role can have multiple policies linked to it. Roles can be created using the ``POST /security/roles`` endpoint.
 
 Following the previous "Sales-team" example, the role described below will be created so the "Sales-team" can be assigned to that role later:
 
