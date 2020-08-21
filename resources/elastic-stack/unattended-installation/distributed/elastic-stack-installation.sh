@@ -203,7 +203,7 @@ installElasticsearch() {
 
 createCertificates() {
   
-    awk -v RS='' '/## Certificates/' ~/config.yml > /usr/share/elasticsearch/instances.yml
+    awk -v RS='' '/instances/' ~/config.yml > /usr/share/elasticsearch/instances.yml
     eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
     if [  "$?" != 0  ]
     then
