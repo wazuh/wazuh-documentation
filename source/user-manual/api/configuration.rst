@@ -56,7 +56,7 @@ Here are all the settings available for the `api.yaml` configuration file. For m
 
 .. warning::
 
-    If running a cluster, the master will NOT send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, it should be updated manually in the workers too. Take care of not overwriting the IP and port in the local configuration of each worker.
+    If running a cluster, the master will NOT send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, the user should manually update the workers API configuration in order to use the same configuration. Take care of not overwriting the IP and port in the local configuration of each worker.
 
 Make sure to restart wazuh-api service after editing the configuration file:
 
