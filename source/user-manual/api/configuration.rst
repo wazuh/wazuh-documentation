@@ -6,7 +6,7 @@ Configuration
 =============
 
 .. note::
-  Please review the :ref:`Securing API <securing_api>` section for more information on how to protect it.
+  Please review the :ref:`Securing API <securing_api>` section for more information on how to protect the API.
 
 .. _api_configuration_file:
 
