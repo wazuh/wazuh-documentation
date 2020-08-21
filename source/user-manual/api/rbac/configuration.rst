@@ -93,7 +93,7 @@ The API response will be something similar to this. The highlighted ID should be
       "message": "Policy created correctly"
     }
 
-This will create a policy with permission to read information related to agents ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
+This will create a policy with permission to read information related to agents with ids ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
 
 .. note::
     The policy ID, along with the other useful information, can be access at any time using the ``GET /security/policies`` endpoint. For a complete list of resources and actions, please visit :ref:`RBAC reference <api_rbac_reference>` page.
