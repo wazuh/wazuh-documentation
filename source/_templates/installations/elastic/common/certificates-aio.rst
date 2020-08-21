@@ -23,7 +23,7 @@
 
   .. code-block:: console
 
-      # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://documentation.wazuh.com/resources/open-distro/searchguard/search-guard-aio.yml
+      # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/search-guard-aio.yml
 
 * Run the Search Guard's script to create the certificates:
 
