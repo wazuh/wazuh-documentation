@@ -25,7 +25,7 @@ Wazuh API 4.0 introduces several new endpoints and also modifies or removes some
 Equivalence table
 -----------------
 
-As Wazuh API 4.0 introduces several changes to existing endpoints it is important to review those changes in case of migration from API ``3.x`` to ``4.0``.
+Wazuh API 4.0 introduces several changes to existing endpoints. It is therefore important to review those changes when migrating to ``4.0``.
 
 The following tables contain the equivalencies between old API 3.x and API 4.0 endpoints:
 
