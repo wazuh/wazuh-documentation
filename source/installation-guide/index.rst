@@ -20,6 +20,12 @@ Depending on the necessities, the user can choose between `Elasticsearch with ba
 
 .. toctree::
     :maxdepth: 1
+    :hidden:
+
+    requirements
+
+.. toctree::
+    :maxdepth: 1
 
     basic/index
     open-distro/index

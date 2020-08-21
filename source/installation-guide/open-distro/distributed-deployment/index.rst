@@ -20,11 +20,6 @@ To guarantee the expected performance of the Wazuh and Elastic Stack components 
 
 The user can choose between Step-by-step installation, a manual way of carrying out the process, or Unattended installation, an automated way using scripts:
 
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    requirements
 
 .. toctree::
     :maxdepth: 1
