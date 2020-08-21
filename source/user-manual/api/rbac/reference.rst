@@ -31,6 +31,7 @@ You can also find a set of default roles and policies, which you can use instead
     - `rule:file`_
     - `policy:id`_
     - `role:id`_
+    - `rule:id`_
     - `user:id`_
 
 `Actions`_
@@ -227,6 +228,15 @@ role:id
 | **Description** | Reference security role via its id |
 +-----------------+------------------------------------+
 | **Example**     | role:id:1                          |
++-----------------+------------------------------------+
+
+rule:id
+^^^^^^^
+
++-----------------+------------------------------------+
+| **Description** | Reference security rule via its id |
++-----------------+------------------------------------+
+| **Example**     | rule:id:1                          |
 +-----------------+------------------------------------+
 
 user:id
@@ -499,12 +509,15 @@ security:create
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - POST /security/policies (`*:*`_)
 - POST /security/roles (`*:*`_)
+- POST /security/rules (`*:*`_)
 
 security:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - DELETE /security/policies (`policy:id`_)
 - DELETE /security/roles (`role:id`_)
-- DELETE /security/roles/{role_id}/policies (`user:id`_, `policy:id`_)
+- DELETE /security/rules (`rule:id`_)
+- DELETE /security/roles/{role_id}/policies (`role:id`_, `policy:id`_)
+- DELETE /security/roles/{role_id}/rules (`role:id`_, `rule:id`_)
 - DELETE /security/users (`user:id`_)
 - DELETE /security/users/{username}/roles (`user:id`_, `role:id`_)
 
@@ -516,6 +529,7 @@ security:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GET /security/policies (`policy:id`_)
 - GET /security/roles (`role:id`_)
+- GET /security/rules (`rule:id`_)
 - GET /security/users (`user:id`_)
 
 security:revoke
@@ -533,6 +547,7 @@ security:update
 - POST /security/users/{username}/roles (`user:id`_, `role:id`_)
 - PUT /security/policies/{policy_id} (`policy:id`_)
 - PUT /security/roles/{role_id} (`role:id`_)
+- PUT /security/rules/{rule_id} (`rule:id`_)
 - PUT /security/users/{username} (`user:id`_)
 
 
