@@ -60,7 +60,7 @@ Recommended changes to securize Wazuh API
 
 #. Change the default host and port:
 
-    The *host* is set to ``0.0.0.0`` by default, which means Wazuh API will accept any incoming connection. It is possible to restrict this by modifying the API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
+    The *host* is set to ``0.0.0.0`` by default, which means Wazuh API will accept any incoming connection. It is possible to restrict it editting the API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
 
     .. code-block:: console
 
