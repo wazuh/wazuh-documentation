@@ -73,6 +73,10 @@ Once logged in, it is possible to run any endpoint following the structure below
     # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer $TOKEN"
 
 
+.. note::
+  There is another method of authentication, which allows obtaining the permissions in a dynamic way. See :ref:`Authorization Context login method <authorization_context_method>`.
+
+
 Logging into the API via scripts
 --------------------------------
 
