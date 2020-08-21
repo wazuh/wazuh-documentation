@@ -24,7 +24,7 @@ Here is an example of how to change RBAC mode using a cURL command. The ``YOUR_J
        "message": "Configuration successfully updated"
     }
 
-It is possible to change other non-RBAC settings such as the duration of JWT tokens, as well as check the current configuration using the ``GET /security/config`` endpoint. Additionally, default settings can be restored using the ``DELETE /security/config`` endpoint.
+It is possible to change other non-RBAC settings such as the duration of JWT tokens, as well as to check the current configuration using the ``GET /security/config`` endpoint. Additionally, default settings can be restored using the ``DELETE /security/config`` endpoint.
 
 .. warning::
     All tokens are revoked for security reasons when the RBAC mode is changed. It will be necessary to log in and obtain a new token after the change.
