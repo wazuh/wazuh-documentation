@@ -54,7 +54,7 @@ Use this option to add or remove directories to be monitored. The directories mu
 
 All files and subdirectories within the noted directories will also be monitored.
 
-Drive letters without directories are not valid. At a minimum the '.' should be included (``D:\.``).
+Drive letters without directories are valid. It's possible to configure them by removing the last backslash, for example ``D:``.
 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
@@ -64,6 +64,10 @@ There exists a limit in the number of directories that can be written in one lin
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
 | **Allowed values** | Any directory                      |
++                    +                                    +
+|                    | .. versionadded:: 4.0              |
++                    +                                    +
+|                    | Any environment variable           |
 +--------------------+------------------------------------+
 
 Attributes:
@@ -183,7 +187,7 @@ Attributes:
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **restrict**             | Limit checks to files containing the entered string in the file name.                                                 |
 +                          +                                                                                                                       +
-|                          | Any directory or file name (but not a path) is allowed                                                                |
+|                          | Any directory or file path is allowed.                                                                                |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
