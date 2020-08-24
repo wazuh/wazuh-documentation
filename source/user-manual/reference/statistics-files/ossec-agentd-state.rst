@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _ossec_agentd_state_file:
 
@@ -23,8 +23,8 @@ Below there is an example of the content of the file:
 
     # Agent status:
     # - pending:      waiting for get connected.
-    # - connected:    connection established with manager in the last 5 seconds.
-    # - disconnected: connection lost or no ACK received in the last 5 seconds.
+    # - connected:    connection established with manager in the last 10 seconds.
+    # - disconnected: connection lost or no ACK received in the last 60 seconds.
     status='connected'
 
     # Last time a keepalive was sent

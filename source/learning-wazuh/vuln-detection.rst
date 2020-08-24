@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _learning_wazuh_vuln_detection:
 
@@ -89,10 +89,10 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
       <run_on_start>yes</run_on_start>
       <provider name="canonical">
         <enabled>no</enabled>
-        <os>precise</os>
         <os>trusty</os>
         <os>xenial</os>
         <os>bionic</os>
+        <os>focal</os>
         <update_interval>1h</update_interval>
       </provider>
       <provider name="debian">

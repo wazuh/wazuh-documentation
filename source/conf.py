@@ -17,6 +17,7 @@ import os
 import re
 import shlex
 import datetime
+from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -30,7 +31,7 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '3.12'
+version = '3.13'
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -115,6 +116,7 @@ html_theme = 'wazuh_doc_theme'
 # documentation.
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
+    'wazuh_doc_url': 'https://documentation.wazuh.com',
     'globaltoc_depth': 5,
     'includehidden': True,
     'collapse_navigation': False,
@@ -402,19 +404,20 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.12.2",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.12.0",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.12.0",
-    "|WAZUH_LATEST_PUPPET|" : "3.12.0",
-    "|WAZUH_LATEST_OVA|" : "3.12.2",
-    "|WAZUH_LATEST_DOCKER|" : "3.12.0",
-    "|ELASTICSEARCH_LATEST|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.1",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.1",
-    "|SPLUNK_LATEST|" : "8.0.2",
+    "|WAZUH_LATEST|" : "3.13.1",
+    "|WAZUH_LATEST_MINOR|" : "3.13",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
+    "|WAZUH_LATEST_PUPPET|" : "3.12.2",
+    "|WAZUH_LATEST_OVA|" : "3.13.0",
+    "|WAZUH_LATEST_DOCKER|" : "3.12.2",
+    "|ELASTICSEARCH_LATEST|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.7.1",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.2",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.2",
+    "|SPLUNK_LATEST|" : "8.0.4",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
@@ -422,6 +425,12 @@ custom_replacements = {
     "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
     "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_API_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_API_ARMHF|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
@@ -429,9 +438,22 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
     "|WAZUH_REVISION_DEB_API_X86|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_API_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
     "|WAZUH_REVISION_HPUX|" : "1",
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_REVISION_WINDOWS|" : "1",
+    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/3.x/checksums/",
+    "|RPM_AGENT|" : "https://packages.wazuh.com/3.x/yum/wazuh-agent",
+    "|RPM_MANAGER|" : "https://packages.wazuh.com/3.x/yum/wazuh-manager",
+    "|RPM_API|" : "https://packages.wazuh.com/3.x/yum/wazuh-api",
+    "|DEB_AGENT|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
+    "|DEB_MANAGER|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api"
 }
 
 # -- Setup -------------------------------------------------------------------
@@ -458,6 +480,36 @@ def setup(app):
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
+	# List of compiled documents
+    app.connect('html-page-context', collect_compiled_pagename)
+    app.connect('build-finished', creating_file_list)
+
+exclude_doc = ["not_found"]
+list_compiled_html = []
+
+def collect_compiled_pagename(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    if templatename == "page.html" and pagename not in exclude_doc:
+        list_compiled_html.append(context['pagename']+'.html')
+    else:
+        pass
+
+def creating_file_list(app, exception):
+	''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
+	if app.builder.name == 'html':
+		build_path = app.outdir
+		separator = '\n'
+		with open(build_path+'/.doclist', 'w') as doclist_file:
+			list_text = separator.join(list_compiled_html)
+			doclist_file.write(list_text)
+		sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+		sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+		for compiled_html in list_compiled_html:
+			sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
+		sitemap += '</urlset>'
+		with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
+			sitemap_file.write(sitemap)
+
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
@@ -481,3 +533,4 @@ html_context = {
     "github_version": version,
     "production": production
 }
+sphinx_tabs_nowarn = True

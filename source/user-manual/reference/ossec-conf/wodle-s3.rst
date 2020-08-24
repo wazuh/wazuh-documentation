@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wodle_s3:
 
@@ -20,6 +20,9 @@ Configuration options of the AWS-S3 wodle.
 Options
 -------
 
+Main options
+^^^^^^^^^^^^
+
 - `disabled`_
 - `interval`_
 - `access_key`_
@@ -31,15 +34,11 @@ Options
 
 
 +-----------------------+-----------------------------+--------------------+
-| Options               | Allowed values              | Mandatory/Optional |
+| Main options          | Allowed values              | Mandatory/Optional |
 +=======================+=============================+====================+
 | `disabled`_           | yes, no                     | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
 | `bucket`_             | Any valid bucket name       | Deprecated         |
-+-----------------------+-----------------------------+--------------------+
-| `interval`_           | A positive number (seconds) | Mandatory          |
-+-----------------------+-----------------------------+--------------------+
-| `run_on_start`_       | yes, no                     | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
 | `access_key`_         | Alphanumerical key          | Deprecated         |
 +-----------------------+-----------------------------+--------------------+
@@ -51,6 +50,15 @@ Options
 +-----------------------+-----------------------------+--------------------+
 | `bucket type`_        | N/A                         | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
+
+Scheduling options
+^^^^^^^^^^^^^^^^^^
+
+- `run_on_start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
 
 disabled
 ^^^^^^^^
@@ -75,17 +83,6 @@ Name of the S3 bucket from where logs are read.
 +--------------------+-----------------------------+
 | **Allowed values** | Any valid bucket name       |
 +--------------------+-----------------------------+
-
-interval
-^^^^^^^^
-
-Frequency for reading from the S3 bucket.
-
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 10m                                                                                                                                      |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 access_key
 ^^^^^^^^^^
@@ -119,17 +116,6 @@ remove_from_bucket
 .. deprecated::3.6.0
 
 Define if you want to remove logs from your S3 bucket after they are read by the wodle.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-run_on_start
-^^^^^^^^^^^^^
-
-Run evaluation immediately when service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -330,6 +316,80 @@ Name of AWS organization. Only works with CloudTrail buckets.
 +--------------------+----------------------------------------+
 | **Allowed values** | Valid AWS organization name            |
 +--------------------+----------------------------------------+
+
+run_on_start
+^^^^^^^^^^^^
+
+Run evaluation immediately when service is started.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+interval
+^^^^^^^^
+
+Frequency for reading from the S3 bucket.
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 10m                                                                                                                                                  |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), M (months). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+day
+^^^
+
+Day of the month to run the scan.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the month [1..31] |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
+
+wday
+^^^^
+
+Day of the week to run the scan. This option is **not compatible** with the ``day`` option.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the week:         |
+|                    |   - sunday/sun           |
+|                    |   - monday/mon           |
+|                    |   - tuesday/tue          |
+|                    |   - wednesday/wed        |
+|                    |   - thursday/thu         |
+|                    |   - friday/fri           |
+|                    |   - saturday/sat         |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
+time
+^^^^
+
+Time of the day to run the scan. It has to be represented in the format *hh:mm*.
+
++--------------------+-----------------------+
+| **Default value**  | n/a                   |
++--------------------+-----------------------+
+| **Allowed values** | Time of day *[hh:mm]* |
++--------------------+-----------------------+
+
+.. note::
+
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 
 Example of configuration

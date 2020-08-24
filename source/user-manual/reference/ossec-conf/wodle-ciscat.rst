@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wodle_ciscat:
 
@@ -19,8 +19,11 @@ Configuration options of the CIS-CAT wodle.
 .. warning::
     CIS-CAT is not installed by default. It is a proprietary software that you have to obtain for using this module.
 
+Options
+-------
+
 Main options
-------------
+^^^^^^^^^^^^
 
 - `disabled`_
 - `timeout`_
@@ -44,7 +47,7 @@ Main options
 +----------------------+-----------------------------+
 
 Scheduling options
-------------------
+^^^^^^^^^^^^^^^^^^
 
 - `scan-on-start`_
 - `interval`_
@@ -69,8 +72,6 @@ Scheduling options
 
 In the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` section are shown some cases of using these options.
 
-Main options
-------------
 
 disabled
 ^^^^^^^^
@@ -143,8 +144,6 @@ Attributes
 
     The ``path`` attribute can be filled in with the whole path where the benchmark files are located, or with a relative path to the CIS-CAT tool location.
 
-Scheduling options
-------------------
 
 scan-on-start
 ^^^^^^^^^^^^^
@@ -228,7 +227,7 @@ Time of the day to run the scan. It has to be represented in the format *hh:mm*.
 
 .. note::
 
-	When only the ``time`` option is set, the interval value must be a multiple of days. By default, the interval is set to a day.
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 Example of configuration
 ------------------------
