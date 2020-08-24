@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <distributed_requirements>` section. This script uses the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificate, but any tool can be used to create them.
+This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section. This script uses the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificate, but any tool can be used to create them.
 
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.

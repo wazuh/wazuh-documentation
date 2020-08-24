@@ -44,44 +44,25 @@ Clustered components
 
 - ``Multi-node cluster``: this term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh servers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
 
-Supported operating systems
----------------------------
-
-The Wazuh server and Elastic Stack components can be installed in the following Linux operating systems:
-
-- Amazon Linux 1 and 2.
-
-- CentOS 6 or greater.
-
-- Debian 7 or greater.
-
-- Fedora 22 or greater.
-
-- Oracle Linux 6 or greater.
-
-- Red Hat Enterprise Linux 6 or greater.
-
-- Ubuntu 12 or greater.
-
 Types of deployment
 -------------------
 
-The Installation guide is divided into two independent sections, :ref:`All-in-one deployment <all_in_one_index>` and  :ref:`Distributed deployment <distributed_index>`. Each section contains an introduction, which presents the architecture of the deployed environment and explains what steps will be done apart from the components installation. It also provides minimal hardware requirements. The user will choose between two types of installation guides:
+The Installation guide is divided into two independent sections, :ref:`All-in-one deployment <all_in_one_index>` and  :ref:`Distributed deployment <distributed_index>`. according to the chosen configuration. Information about the minimal hardware requirements for the different types of deployments can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installations:
 
-- ``Unattended``: automated installation guide. Requires the initial input of the information needed to accomplish the process using a script.
+- ``Unattended``: automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 
-- ``Step by step``: manual installation guide. Each step has a description which helps to understand the process.
+- ``Step by step``: manual installation. Each step has a description which helps to understand the process.
 
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                   | All-in-one deployment                                                                                                                                    | Distributed deployment                                                                                                                                                                                                     |
 +===================================================+==========================================================================================================================================================+============================================================================================================================================================================================================================+
-| Purpose                                           | Appropriate for testing and small production environments                                                                                                | Ensure the high availability and scalability of all the components                                                                                                                                                         |
+| Purpose                                           | Appropriate for testing and small production environments.                                                                                               | Ensure the high availability and scalability of all the components.                                                                                                                                                        |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| High availability and scalability of the services | Lacks the high availability and scalability of the services as all the components are installed on the same server                                       | Provides the high availability and scalability of the services as all the components are installed on the different servers. Kibana can be installed on the same server as the Elasticsearch node, or on a separate one.   |
+| High availability and scalability of the services | Lacks the high availability and scalability of the services as all the components are installed on the same server.                                      | Provides the high availability and scalability of the services as all the components are installed on the different servers. Kibana can be installed on the same server as the Elasticsearch node, or on a separate one.   |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Hardware requirements                             | Lower costs as requires only one server. The detailed hardware requirements for All-in-one deployment can be found :ref:`here <all_in_one_requirements>` | Higher costs as requires a separate server for each component installed. The detailed hardware requirements for Distributed deployment can be found :ref:`here <distributed_requirements>`                                 |
+| Hardware requirements                             | Lower costs as requires only one server.                                                                                                                 | Higher costs as requires a separate server for each component installed.                                                                                                                                                   |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Security of data transfer                         | Ensures the security of data transfer by providing self-generated certificates                                                                           | Ensures the security of data transfer by providing self-generated certificates                                                                                                                                             |
+| Security of data transfer                         | Ensures the security of data transfer by providing self-generated certificates.                                                                          | Ensures the security of data transfer by providing self-generated certificates.                                                                                                                                            |
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Start deploying Wazuh server and Elastic Stack

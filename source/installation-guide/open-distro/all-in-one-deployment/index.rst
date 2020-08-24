@@ -16,7 +16,7 @@ The following components will be installed:
 The communication will be encrypted using SSL certificates. Those certificates will be generated using the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_. The guide will also refer to the section explaining how to secure communication between the Wazuh API and the Wazuh Kibana plugin.
 Besides, in order to use the Wazuh Kibana plugin properly, the extra Elasticsearch roles and users will be added.
 
-To allow the installation process and guarantee the expected performance of the Wazuh components the host must meet the hardware requirements described in the :ref:`requirements <all_in_one_requirements>` section.
+To guarantee the expected performance of the Wazuh components the host must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
 
 The user can choose between Step-by-step installation, a manual way of carrying out the process, and Unattended installation, an automated way using a script:
 

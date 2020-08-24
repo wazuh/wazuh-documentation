@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <basic_distributed_requirements>` section.
+This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
