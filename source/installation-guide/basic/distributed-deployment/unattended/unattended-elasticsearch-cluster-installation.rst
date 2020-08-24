@@ -210,50 +210,15 @@ Download the script and the configuration file. After downloading them, configur
       .. code-block:: console
         :class: output
 
-        During the installation of Elasticsearch the passwords for its user were generated. Please take note of them:
-        Changed password for user apm_system
-        PASSWORD apm_system = Xf7bzEhl5fa9h3L0noyl
-
-        Changed password for user kibana_system
-        PASSWORD kibana_system = WyP1F5aCA8DHLwB14zOq
-
-        Changed password for user kibana
-        PASSWORD kibana = WyP1F5aCA8DHLwB14zOq
-
-        Changed password for user logstash_system
-        PASSWORD logstash_system = mA3OOfGjEYBYGB2DZt1Q
-
-        Changed password for user beats_system
-        PASSWORD beats_system = AeOqYqDsQ5CKqGP04eUv
-
-        Changed password for user remote_monitoring_user
-        PASSWORD remote_monitoring_user = DVxxnCyQTcOuv6h7c90H
-
-        Changed password for user elastic
-        PASSWORD elastic = 3SHBeIBKIjSN2CyE62Ls
-
+        Elasticsearch started
         Elasticsearch installation finished
+
 
       - In order to install the subsequent nodes, run the script with the option ``-e``:
 
       .. code-block:: console
 
         # bash ~/elastic-stack-installation.sh -e
-
-      After the installation the certificates previously generated on the initial node, must be placed on each subsequent node. This guide assumes that the ``certs.zip`` is placed in ``~/`` (home user directory):
-
-      .. code-block:: console
-
-        # unzip ~/certs.zip -d ~/certs
-        # cp -R ~/certs/ca/ ~/certs/elasticsearch-X/* /etc/elasticsearch/certs/
-        # mv /etc/elasticsearch/certs/elasticsearch-X.crt /etc/elasticsearch/certs/elasticsearch.crt
-        # mv /etc/elasticsearch/certs/elasticsearch-X.key /etc/elasticsearch/certs/elasticsearch.key
-        # chown -R elasticsearch: /etc/elasticsearch/certs
-        # chmod -R 500 /etc/elasticsearch/certs
-        # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-        # rm -rf ~/certs/ ~/certs.zip     
-
-      The ``X`` must be replaced according to the defined data in ``config.yml`` of the initial node.
 
 
 
@@ -293,6 +258,11 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
     When the certificates have been copied, the Elasticsearch service can be started:
 
     .. include:: ../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+
+    
+    After stating all the nodes, run the following commands to generate the passwords.
+
+    .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
 
 .. _basic_install_kibana_unattended:
