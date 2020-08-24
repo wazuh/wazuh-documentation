@@ -22,6 +22,66 @@ Wazuh API 4.0 introduces several new endpoints and also modifies or removes some
     }
 
 
+Migrating users
+-----------------
+
+The API users are not migrated when upgrading Wazuh API from 3.X to 4.0. There are numerous security changes to Wazuh API in 4.0 and it is not advisable.
+However, using the following API calls it is easy to create new users and assign the administrator role to it (substitute <username> and <password>):
+
+**Create new user**
+
+.. code-block:: console
+
+    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"  -H  "Content-Type: application/json" -d "{\"username\":\"<username>\",\"password\":\"<password>\"}"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "id": 3,
+            "username": "<wazuh>",
+            "allow_run_as": false,
+            "roles": []
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "User created correctly"
+    }
+
+**Assign administrator role**
+
+.. code-block:: console
+
+    # curl -k -X POST "https://localhost:55000/security/users/3/roles?role_ids=1" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "id": 3,
+            "username": "<wazuh>",
+            "allow_run_as": false,
+            "roles": [
+              1
+            ]
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All roles were linked to user <wazuh>"
+    }
+
 Equivalence table
 -----------------
 
