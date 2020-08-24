@@ -29,9 +29,9 @@ For more details, see the :ref:`Use Cases <wazuh_api_use_cases>`.
        :maxdepth: 2
 
        getting-started
-       queries
        configuration
-       rbac/index
-       reference
        equivalence
+       rbac/index
+       queries
        examples
+       reference

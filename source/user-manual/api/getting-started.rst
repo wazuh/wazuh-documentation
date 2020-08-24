@@ -39,14 +39,14 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
 
-    By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token that you will find in ``<YOUR_JWT_TOKEN>`` without the quotes.
+    By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
     .. code-block:: none
         :class: output
 
         {"token": "<YOUR_JWT_TOKEN>"}
 
-2. Send a *request* to confirm that everything is working as expected:
+2. Send an *API request* to confirm that everything is working as expected:
 
     .. code-block:: console
 
@@ -66,7 +66,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
         }
 
 
-Once logged in, it is possible to run any endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
+Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
 
 .. code-block:: console
 
@@ -74,7 +74,7 @@ Once logged in, it is possible to run any endpoint following the structure below
 
 
 .. note::
-  There is another method of authentication, which allows obtaining the permissions in a dynamic way. See :ref:`Authorization Context login method <authorization_context_method>`.
+  There is another advanced authentication method, which allows obtaining the permissions in a dynamic way using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
 
 
 Logging into the API via scripts
@@ -120,17 +120,17 @@ The following scripts provide API login examples using default (`false`) or plai
 
     print("\n- API calls with TOKEN environment variable ...\n")
 
-    print("Getting API information:\n")
+    print("Getting API information:")
 
     response = requests.get(f"{protocol}://{host}:{port}/?pretty=true", headers=requests_headers, verify=False)
     print(response.text)
 
-    print("\nGetting agents status summary:\n")
+    print("\nGetting agents status summary:")
 
     response = requests.get(f"{protocol}://{host}:{port}/agents/summary/status?pretty=true", headers=requests_headers, verify=False)
     print(response.text)
 
-    print("\n\nEnd of the script.\n")
+    print("\nEnd of the script.\n")
 
 Running the script provides a result similar to the following:
 
@@ -145,7 +145,6 @@ Running the script provides a result similar to the following:
     - API calls with TOKEN environment variable ...
 
     Getting API information:
-
     {
        "title": "Wazuh API REST",
        "api_version": "4.0.0",
@@ -157,7 +156,6 @@ Running the script provides a result similar to the following:
     }
 
     Getting agents status summary:
-
     {
        "data": {
           "active": 9,
@@ -167,7 +165,6 @@ Running the script provides a result similar to the following:
           "total": 13
        }
     }
-
 
     End of the script.
 
@@ -250,8 +247,6 @@ Here are some of the basic concepts related to making API requests and understan
     | ``http://localhost:55000/<ENDPOINT>``           | The API URL to use if you are running the command on the manager itself. It will be ``http`` or ``https`` depending on whether SSL is activated in the API or not. |
     | ``https://localhost:55000/<ENDPOINT>``          |                                                                                                                                                                    |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ``-H  "accept: application/json"``              | Include extra header in the request to set output type to JSON (optional).                                                                                         |
-    +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include extra header in the request to specify JWT token.                                                                                                          |
     +-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | ``-k``                                          | Suppress SSL certificate errors (only if you use the default self-signed certificates).                                                                            |
@@ -330,25 +325,6 @@ Here are some of the basic concepts related to making API requests and understan
           "message": "Could not send command to any agent"
         }
 
-    - Example response to report a result error (code 400):
-
-    .. code-block:: json
-        :class: output
-
-        {
-          "type": "about:blank",
-          "title": "Wazuh Error",
-          "detail": "Permission denied: Resource type: *:*",
-          "status": 400,
-          "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
-          "code": 4000,
-          "dapi_errors": {
-            "master-node": {
-              "error": "Permission denied: Resource type: *:*"
-            }
-          }
-        }
-
     - Example response to report an unauthorized request (code 401):
 
     .. code-block:: json
@@ -361,9 +337,28 @@ Here are some of the basic concepts related to making API requests and understan
           "status": 401
         }
 
+    - Example response to report a permission denied error (code 403):
+
+    .. code-block:: json
+        :class: output
+
+        {
+          "type": "about:blank",
+          "title": "Wazuh Error",
+          "detail": "Permission denied: Resource type: *:*",
+          "status": 403,
+          "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
+          "code": 4000,
+          "dapi_errors": {
+            "master-node": {
+              "error": "Permission denied: Resource type: *:*"
+            }
+          }
+        }
+
 - Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-- All requests (except ``GET /`` and ``GET /security/user/authenticate``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
+- All requests (except ``GET /``, ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the API configuration file). The API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
