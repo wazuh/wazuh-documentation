@@ -361,16 +361,29 @@ checkNodes() {
 
 ## Health check
 healthCheck() {
+
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
-
-    if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
+    if [ -n "$e"]
     then
-        echo "The system must have at least 4Gb of RAM and 2 CPUs"
-        exit 1;
-    else
-        echo "Starting the installation..."
-    fi
+        if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
+        then
+            echo "The system must have at least 16Gb of RAM and 2 CPUs"
+            exit 1;
+        else
+            echo "Starting the installation..."
+        fi
+    elif [-n "$k"]
+    then
+        if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
+        then
+            echo "The system must have at least 4Gb of RAM and 2 CPUs"
+            exit 1;
+        else
+            echo "Starting the installation..."
+        fi   
+    fi     
+
 }
 
 ## Main
