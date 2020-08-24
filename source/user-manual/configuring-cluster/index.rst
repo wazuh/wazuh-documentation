@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _configuring-cluster:
 
@@ -186,7 +186,7 @@ Deploying a Wazuh cluster
             # systemctl restart wazuh-agent
 
 
-    Let's execute the following command (works on both, worker and master nodes) to check that the agents are correctly connected:
+    Execute the following command on the ``master node`` to verify that the Wazuh agents are correctly connected:
 
         .. code-block:: console
 

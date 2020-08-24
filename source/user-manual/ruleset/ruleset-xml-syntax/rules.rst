@@ -133,9 +133,9 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_status`_     | None.                                                         | The decoded ``status`` must be different.                                                            |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `same_systemname`_      | None.                                                         | The decoded ``systemname`` must be the same.                                                         |
+| `same_system_name`_     | None.                                                         | The decoded ``system_name`` must be the same.                                                        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `different_systemname`_ | None.                                                         | The decoded ``systemname`` must be different.                                                        |
+| `different_system_name`_| None.                                                         | The decoded ``system_name`` must be different.                                                       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_url`_             | None.                                                         | The decoded ``url`` must be the same.                                                                |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -325,7 +325,7 @@ Used as a requisite to trigger the rule. It will check for a match in the conten
 +--------------------+-----------------------------------------------------------------+
 | **name**           | Specifies the name of the field extracted by the decoder.       |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
+| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_      |
 +--------------------+-----------------------------------------------------------------+
 
 Example:
@@ -1376,20 +1376,20 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <different_status />  |
 +--------------------+-----------------------+
 
-same_systemname
-^^^^^^^^^^^^^^^
+same_system_name
+^^^^^^^^^^^^^^^^
 
 Specifies that the decoded system name must be the same.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 .. versionadded:: 3.13.0
 
-+--------------------+---------------------+
-| **Example of use** | <same_systemname /> |
-+--------------------+---------------------+
++--------------------+----------------------+
+| **Example of use** | <same_system_name /> |
++--------------------+----------------------+
 
-different_systemname
-^^^^^^^^^^^^^^^^^^^^
+different_system_name
+^^^^^^^^^^^^^^^^^^^^^
 
 Specifies that the decoded system name must be different.
 This option is used in conjunction with ``frequency`` and ``timeframe``.
@@ -1397,7 +1397,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 .. versionadded:: 3.13.0
 
 +--------------------+---------------------------+
-| **Example of use** | <different_systemname />  |
+| **Example of use** | <different_system_name /> |
 +--------------------+---------------------------+
 
 same_url

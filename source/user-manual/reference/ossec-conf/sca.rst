@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_sec_config_assessment:
 
@@ -18,8 +18,16 @@ This section covers the configuration for the :ref:`manual_sec_config_assessment
 
 Settings to run Security Configuration Assessment scans.
 
+Options
+-------
+
 Main options
-------------
+^^^^^^^^^^^^
+
+- `enabled`_
+- `skip_nfs`_
+- `policies`_
+
 
 +----------------------+-----------------------------+
 | Main options         | Allowed values              |
@@ -32,7 +40,14 @@ Main options
 +----------------------+-----------------------------+
 
 Scheduling options
-------------------
+^^^^^^^^^^^^^^^^^^
+
+- `scan_on_start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
+
 
 +----------------------+-----------------------------+
 | Scheduling options   | Allowed values              |
@@ -64,9 +79,6 @@ Scheduling options
 
 Some examples of usage of these options are included in the
 :doc:`SCA documentation<../../capabilities/sec-config-assessment/index>`.
-
-Main options
-------------
 
 enabled
 ^^^^^^^
@@ -121,8 +133,6 @@ Example
     <policy enabled="no">cis_debian9_L2.yml/policy>
   </policies>
 
-Scheduling options
-------------------
 
 scan_on_start
 ^^^^^^^^^^^^^
@@ -198,7 +208,7 @@ Time of the day to run the scan. It has to be represented in the format *hh:mm*.
 
 .. note::
 
-	When only the ``time`` option is set, the interval value must be a multiple of days. By default, the interval is set to a day.
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 
 Configuration example
