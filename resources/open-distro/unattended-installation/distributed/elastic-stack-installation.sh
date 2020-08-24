@@ -364,7 +364,7 @@ healthCheck() {
 
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
-    if [ -n "$e"]
+    if [ -n "$e" ]
     then
         if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
         then
@@ -373,7 +373,7 @@ healthCheck() {
         else
             echo "Starting the installation..."
         fi
-    elif [-n "$k"]
+    elif [ -n "$k" ]
     then
         if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
         then
