@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _api_getting_started:
 
@@ -755,4 +755,5 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 Conclusion
 ^^^^^^^^^^
-We hope the provided examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
+
+The provided examples should help appreciating the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.

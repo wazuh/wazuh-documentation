@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _monitoring:
 
@@ -11,3 +11,4 @@ Monitoring with Wazuh
    amazon/index
    azure/index
    docker-monitor/index
+   gcp/index
