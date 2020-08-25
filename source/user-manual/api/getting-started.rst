@@ -331,7 +331,6 @@ Here are some of the basic concepts related to making API requests and understan
         :class: output
 
         {
-          "type": "about:blank",
           "title": "Unauthorized",
           "detail": "No authorization token provided",
           "status": 401
@@ -343,7 +342,6 @@ Here are some of the basic concepts related to making API requests and understan
         :class: output
 
         {
-          "type": "about:blank",
           "title": "Wazuh Error",
           "detail": "Permission denied: Resource type: *:*",
           "status": 403,
