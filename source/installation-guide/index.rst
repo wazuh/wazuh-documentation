@@ -18,14 +18,10 @@ Elasticsearch is formed by two different components. The first one is ``Elastics
 
 Depending on the necessities, the user can choose between `Elasticsearch with basic license`, which has some features that are not open source and paid or `Open Distro for Elasticsearch`, which is an open source alternative.
 
+
 .. toctree::
     :maxdepth: 1
-    :hidden:
-
+    
     requirements
-
-.. toctree::
-    :maxdepth: 1
-
     basic/index
     open-distro/index
