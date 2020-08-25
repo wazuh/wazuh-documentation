@@ -57,7 +57,7 @@ It is possible to use the ``POST /security/policies`` endpoint to create the des
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
+    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
 
 The API response will be something similar to this. The highlighted ID should be used later on to assign the policy to the role:
 
@@ -115,7 +115,7 @@ As before, the creation of that role can be requested using an API endpoint. In 
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/security/roles" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -d "{\"name\":\"sales-team\"}"
+    # curl -X POST "https://localhost:55000/security/roles" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"sales-team\"}" -k
 
 The response body would be similar to this one. It is important to remember the role ID as it will be needed to link policies to this role.
 
