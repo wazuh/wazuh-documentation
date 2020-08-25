@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wazuh_agent_sources_hpux:
 
@@ -18,7 +18,7 @@ Installing Wazuh agent
 
       .. code-block:: console
 
-        # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hpux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
+        # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hp-ux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
 
       .. note:: If you can't download the script this way, then you should copy it through the scp utility.
 
@@ -38,7 +38,7 @@ Installing Wazuh agent
 
       .. code-block:: console
 
-        # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh-packages/master/hpux/generate_wazuh_packages.sh --no-check-certificate
+        # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh-packages/master/hp-ux/generate_wazuh_packages.sh --no-check-certificate
 
       .. note:: If you can't download the script this way, then you should copy it through the scp utility.
 
@@ -64,7 +64,7 @@ Installing Wazuh agent
    .. code-block:: console
 
         # cd wazuh-*
-        # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/3.10
+        # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|
         # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
 
 4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
