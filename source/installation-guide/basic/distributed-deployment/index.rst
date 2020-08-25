@@ -16,15 +16,10 @@ The following components will be installed:
 
 The communication will be encrypted using certificates. The guide will also refer to the section explaining how to secure communication between the Wazuh API and the Wazuh Kibana plugin.
 
-To allow the installation process and guarantee the expected performance of the Wazuh components all hosts must meet the hardware requirements described in the :ref:`requirements <basic_distributed_requirements>` section.
+To guarantee the expected performance of the Wazuh components all hosts must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
 
 The user can choose between Step-by-step installation, a manual way of carrying out the process, or Unattended installation, an automated way using scripts:
 
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    requirements
 
 .. toctree::
     :maxdepth: 1
