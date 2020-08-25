@@ -89,11 +89,11 @@ Attributes:
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
-| **diff_size_limit**      | Limit the mazximum size of the file which will report diff information with ``report_changes`` enabled.               |
+| **diff_size_limit**      | Limit the maximum size of the file which will report diff information with ``report_changes`` enabled.                |
 +                          +                                                                                                                       +
 |                          | Files bigger than this value will not report diff information.                                                        |
 +                          +                                                                                                                       +
-|                          | .. versionadded:: 4.0.0                                                                                              |
+|                          | .. versionadded:: 4.0.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 50MB                                                     |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -860,7 +860,7 @@ This option can be used to limit the size of the ``queue/diff/local`` folder whe
 
 .. versionadded:: 4.0
 
-Specifies whether there will be a disk quota limit or not.
+Set the disk quota limit option to enabled or disabled.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -891,7 +891,7 @@ This option can be used to limit the size of the file which will report diff inf
 
 .. versionadded:: 4.0
 
-Specifies whether there will be a file size limit or not.
+Set the size limit of a file to enabled or disabled.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
