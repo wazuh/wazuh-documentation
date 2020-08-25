@@ -3,19 +3,18 @@
 .. tabs::
 
 
-  .. group-tab:: Systemd
+  .. tab:: Systemd
 
 
     .. code-block:: console
 
-      # systemctl start wazuh-api
+      # systemctl stop elasticsearch
 
 
-  .. group-tab:: SysV Init
+  .. tab:: SysV Init
 
     .. code-block:: console
 
-      # service wazuh-api start
+      # service elasticsearch stop
 
 .. End of include file
-
