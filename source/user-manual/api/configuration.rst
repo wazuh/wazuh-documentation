@@ -13,7 +13,7 @@ Configuration
 Configuration file
 ------------------
 
-The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line.
+The API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by defaul. To apply a different configuration, uncomment and edit the desired line. It is also possible to use the ``PUT /cluster/api/config`` of ``PUT /manager/api/config`` API endpoints to change the configuration. Check the :ref:`API reference <api_reference>` for more information about API endpoints.
 
 Here are all the settings available for the `api.yaml` configuration file. For more information on each of the settings, check the :ref:`Configuration options <api_configuration_options>` below:
 
