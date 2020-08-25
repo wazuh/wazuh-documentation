@@ -4,7 +4,7 @@
 .. Migrating from Wazuh API 3.X
 
 Migrating from Wazuh API 3.X
-===========================
+============================
 
 Wazuh API 4.0 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields, instead most responses will have the following structure:
 
@@ -232,7 +232,7 @@ Ciscat
 +-----------------------------------+------------------------------------+------------------------------------+-----------------------------------+
 | Action                            | API 3.x usage                      | API 4.0 usage                      | Changes                           |
 +===================================+====================================+====================================+===================================+
-| Get CIS-CAT results from an agent | ``GET /ciscat/{agent_id}/results`` | ``GET /ciscat/{agent_id}/results`` | No changes. |
+| Get CIS-CAT results from an agent | ``GET /ciscat/{agent_id}/results`` | ``GET /ciscat/{agent_id}/results`` | No changes.                       |
 +-----------------------------------+------------------------------------+------------------------------------+-----------------------------------+
 
 Cluster
@@ -268,7 +268,7 @@ Cluster
 +-----------------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Get node node_id’s stats by week                          | ``GET /cluster/{node_id}/stats/weekly``                       | ``GET /cluster/{node_id}/stats/weekly``                       | Parameter ``hours`` changed to ``averages`` in response body.                                                                                        |
 +-----------------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Get node node_id’s status                                 | ``GET /cluster/{node_id}/status``                             | ``GET /cluster/{node_id}/status``                             | No changes.                                                                                                                    |
+| Get node node_id’s status                                 | ``GET /cluster/{node_id}/status``                             | ``GET /cluster/{node_id}/status``                             | No changes.                                                                                                                                          |
 +-----------------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Get the cluster configuration                             | ``GET /cluster/config``                                       | ``GET /cluster/local/config``                                 | Use the ``cluster/local/config`` endpoint instead. This will get the current configuration of the node receiving the request.                        |
 +-----------------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -553,13 +553,13 @@ Syscheck
 +-------------------------------------+----------------------------------------+----------------------------------------+--------------------------------------------------------------------------------------+
 | Action                              | API 3.x usage                          | API 4.0 usage                          | Changes                                                                              |
 +=====================================+========================================+========================================+======================================================================================+
-| Clear syscheck database of an agent | ``DELETE /syscheck/{agent_id}``        | ``DELETE /syscheck/{agent_id}``        | No changes.                                                    |
+| Clear syscheck database of an agent | ``DELETE /syscheck/{agent_id}``        | ``DELETE /syscheck/{agent_id}``        | No changes.                                                                          |
 +-------------------------------------+----------------------------------------+----------------------------------------+--------------------------------------------------------------------------------------+
-| Get syscheck files                  | ``GET /syscheck/{agent_id}``           | ``GET /syscheck/{agent_id}``           | No changes.                                                    |
+| Get syscheck files                  | ``GET /syscheck/{agent_id}``           | ``GET /syscheck/{agent_id}``           | No changes.                                                                          |
 +-------------------------------------+----------------------------------------+----------------------------------------+--------------------------------------------------------------------------------------+
-| Get last syscheck scan              | ``GET /syscheck/{agent_id}/last_scan`` | ``GET /syscheck/{agent_id}/last_scan`` | No changes.                                                    |
+| Get last syscheck scan              | ``GET /syscheck/{agent_id}/last_scan`` | ``GET /syscheck/{agent_id}/last_scan`` | No changes.                                                                          |
 +-------------------------------------+----------------------------------------+----------------------------------------+--------------------------------------------------------------------------------------+
-| Run syscheck scan in all agents     | ``PUT /syscheck``                      | ``PUT /syscheck``                      | No changes.                                                    |
+| Run syscheck scan in all agents     | ``PUT /syscheck``                      | ``PUT /syscheck``                      | No changes.                                                                          |
 +-------------------------------------+----------------------------------------+----------------------------------------+--------------------------------------------------------------------------------------+
 | Run syscheck scan in an agent       | ``PUT /syscheck/{agent_id}``           | ``PUT /syscheck``                      | Use the ``list_agents`` parameter to indicate which agents must run a syscheck scan. |
 +-------------------------------------+----------------------------------------+----------------------------------------+--------------------------------------------------------------------------------------+
@@ -570,11 +570,11 @@ Syscollector
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
 | Action                                 | API 3.x usage                              | API 4.0 usage                              | Changes                                                                                        |
 +========================================+============================================+============================================+================================================================================================+
-| Get hardware info                      | ``GET /syscollector/{agent_id}/hardware``  | ``GET /syscollector/{agent_id}/hardware``  | No changes.                                                              |
+| Get hardware info                      | ``GET /syscollector/{agent_id}/hardware``  | ``GET /syscollector/{agent_id}/hardware``  | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
-| Get hotfixes info                      | ``GET /syscollector/{agent_id}/hotfixes``  | ``GET /syscollector/{agent_id}/hotfixes``  | No changes.                                                              |
+| Get hotfixes info                      | ``GET /syscollector/{agent_id}/hotfixes``  | ``GET /syscollector/{agent_id}/hotfixes``  | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
-| Get network address info of an agent   | ``GET /syscollector/{agent_id}/netaddr``   | ``GET /syscollector/{agent_id}/netaddr``   | No changes.                                                              |
+| Get network address info of an agent   | ``GET /syscollector/{agent_id}/netaddr``   | ``GET /syscollector/{agent_id}/netaddr``   | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
 |                                        |                                            |                                            | Changed the type of ``mtu`` parameter to integer.                                              |
 |                                        |                                            |                                            |                                                                                                |
@@ -594,11 +594,11 @@ Syscollector
 |                                        |                                            |                                            |                                                                                                |
 |                                        |                                            |                                            | Renamed ``rx_dropped`` parameter in query to ``rx.dropped`` and changed it's type to integer.  |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
-| Get network protocol info of an agent  | ``GET /syscollector/{agent_id}/netproto``  | ``GET /syscollector/{agent_id}/netproto``  | No changes.                                                              |
+| Get network protocol info of an agent  | ``GET /syscollector/{agent_id}/netproto``  | ``GET /syscollector/{agent_id}/netproto``  | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
-| Get os info                            | ``GET /syscollector/{agent_id}/os``        | ``GET /syscollector/{agent_id}/os``        | No changes.                                                              |
+| Get os info                            | ``GET /syscollector/{agent_id}/os``        | ``GET /syscollector/{agent_id}/os``        | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
-| Get packages info                      | ``GET /syscollector/{agent_id}/packages``  | ``GET /syscollector/{agent_id}/packages``  | No changes.                                                              |
+| Get packages info                      | ``GET /syscollector/{agent_id}/packages``  | ``GET /syscollector/{agent_id}/packages``  | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
 |                                        |                                            |                                            | Added ``process`` parameter used to filter by process name.                                    |
 |                                        |                                            |                                            |                                                                                                |
@@ -608,5 +608,5 @@ Syscollector
 |                                        |                                            |                                            |                                                                                                |
 |                                        |                                            |                                            | Renamed ``remote_ip``  parameter to ``remote.ip``.                                             |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+
-| Get processes info                     | ``GET /syscollector/{agent_id}/processes`` | ``GET /syscollector/{agent_id}/processes`` | No changes.                                                              |
+| Get processes info                     | ``GET /syscollector/{agent_id}/processes`` | ``GET /syscollector/{agent_id}/processes`` | No changes.                                                                                    |
 +----------------------------------------+--------------------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------+

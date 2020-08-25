@@ -11,11 +11,11 @@ Set RBAC mode
 -------------
 As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it's possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done by using the ``PUT /security/config`` endpoint.
 
-Here is an example of how to change RBAC mode using a cURL command. The ``YOUR_JWT_TOKEN`` must be replaced with a valid token (see :ref:`Getting started <api_getting_started>` for more information about logging into the API) and ``DESIRED_RBAC_MODE`` with the mode to enable ("black" or "white"):
+Here is an example of how to change RBAC mode using a cURL command. It is recommended to export the token to a variable as explained in Getting started section (see :ref:`Getting started <api_getting_started>` for more information about logging into the API). Replace ``DESIRED_RBAC_MODE`` with the mode to enable ("black" or "white"):
 
 .. code-block:: console
 
-    # curl -k -X PUT "https://localhost:55000/security/config?pretty=true" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
+    # curl -k -X PUT "https://localhost:55000/security/config?pretty=true" -H "Authorization: Bearer $TOKEN" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
 
 .. code-block:: json
     :class: output
@@ -57,7 +57,7 @@ It is possible to use the ``POST /security/policies`` endpoint to create the des
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
+    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
 
 The API response will be something similar to this. The highlighted ID should be used later on to assign the policy to the role:
 
@@ -106,25 +106,16 @@ Create a new role
 Following the previous "Sales-team" example, the role described below will be created so the "Sales-team" can be assigned to that role later on:
 
 .. code-block:: json
-    :emphasize-lines: 4,5,6
 
     {
       "name": "sales-team",
-      "rule": {
-        "MATCH": {
-          "definition": "sales-team"
-        }
-      }
     }
-
-.. note::
-    The highlighted lines are intended for future feature still under development. They currently have no effect.
 
 As before, the creation of that role can be requested using an API endpoint. In this case, the request for the role shown above would look like this:
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/roles?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -d "{\"name\":\"sales-team\",\"rule\":{\"MATCH\":{\"definition\":\"sales-team\"}}}"
+    # curl -X POST "https://localhost:55000/security/roles" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -d "{\"name\":\"sales-team\"}"
 
 The response body would be similar to this one. It is important to remember the role ID as it will be needed to link policies to this role.
 
@@ -138,13 +129,9 @@ The response body would be similar to this one. It is important to remember the 
           {
             "id": 8,
             "name": "sales-team",
-            "rule": {
-              "MATCH": {
-                "definition": "sales-team"
-              }
-            },
             "policies": [],
-            "users": []
+            "users": [],
+            "rules": []
           }
         ],
         "total_affected_items": 1,
@@ -153,6 +140,54 @@ The response body would be similar to this one. It is important to remember the 
       },
       "message": "Role created correctly"
     }
+
+Create a new user
+-------------------
+To create a new user, make a request to ``POST /security/users`` endpoint.
+
+This information needs to be specified in order to create a new user. As an example, its name will be "sales-member-1":
+
+.. code-block:: json
+    :emphasize-lines: 4
+
+    {
+      "username": "sales-member-1",
+      "password": "Sales-Member-1",
+      "allow_run_as": false
+    }
+
+.. code-block:: console
+
+    # curl -X POST "https://localhost:55000/security/users" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"sales-member-1\",\"password\":\"Sales-Member-1\",\"allow_run_as\":false}"
+
+There is a parameter called ``allow_run_as`` on the highlighted line. If set to *true*, roles can be assigned to the user based on the information of an authorization context. Visit this section to find more detailed information about :ref:`Authorization Context <authorization_context_method>`.
+
+The output would look like below:
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [{
+          "id": 101,
+          "username": "sales-member-1",
+          "allow_run_as": false,
+          "roles": []
+        }],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "User created correctly"
+    }
+
+Create a new rule
+-----------------
+To create a new rule, make a request to ``POST /security/rules`` endpoint.
+
+Rules check if their content is inside an auth_context. If so, they assign the roles whose rule is met to the user who entered the auth_context. Only users whose ``allow_run_as`` is ``true`` can use authorization context. Find more information in the :ref:`Authorization Context<authorization_context_method>` section.
+
 
 Assign policies to roles
 ------------------------
@@ -166,7 +201,7 @@ Following the previous example, the "customer_x_agents" policy could be assigned
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/roles/8/policies?policy_ids=12&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X POST "https://localhost:55000/security/roles/8/policies?policy_ids=12&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -177,15 +212,11 @@ Following the previous example, the "customer_x_agents" policy could be assigned
           {
             "id": 8,
             "name": "sales-team",
-            "rule": {
-              "MATCH": {
-                "definition": "sales-team"
-              }
-            },
             "policies": [
               12
             ],
-            "users": []
+            "users": [],
+            "rules": []
           }
         ],
         "total_affected_items": 1,
@@ -194,20 +225,19 @@ Following the previous example, the "customer_x_agents" policy could be assigned
       },
       "message": "All policies were linked to role 8"
     }
+
 Now it is possible to modify the permissions of the whole "sales-team" group by adding new policies or modifying the existing ones, instead of having to assign each permission for each member of the team individually.
 
-Assign roles to a user
-----------------------
-Users can be assigned to one or more roles using the ``POST /security/users/{username}/roles`` endpoint. It is possible to add previously created users to an existing role by specifying the user name and the ID of the role.
 
-.. note::
-    This endpoint has a parameter called **position** used to determine the order in which the different roles will be applied, as roles might have conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
+Assign rules to roles
+------------------------
+To assign **rules** to a certain role, use the ``POST /security/roles/{role_id}/rules`` endpoint. The assigment can be done by simply indicating the ID of the **role** and the ID of each rule. It is possible for a role to have multiple rules assigned to it. Also a given rule can be assigned to multiple roles.
 
-Following the previous example, it is possible to assign a new user named "sales-member-1" to the previously created "sales-team" role. This would be the request, having ``8```as the *role_id* of the "sales-team":
+To assign any rule, it is necessary both the ID of the rule and the ID of the role. For example, the "wui_opendistro_admin" rule which ID is ``2`` to the "sales-team" role having the *role_id* (``8``). Here is the request:
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users/sales-member-1/roles?role_ids=8&pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -X POST "https://localhost:55000/security/roles/8/rules?rule_ids=2" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -216,7 +246,47 @@ Following the previous example, it is possible to assign a new user named "sales
       "data": {
         "affected_items": [
           {
+            "id": 8,
+            "name": "sales-team",
+            "policies": [
+              12
+            ],
+            "users": [],
+            "rules": [
+              2
+            ]
+          }
+        ],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All rules were linked to role 8"
+    }
+
+Assign roles to a user
+----------------------
+Users can be assigned to one or more roles using the ``POST /security/users/{username}/roles`` endpoint. It is possible to add previously created users to an existing role by specifying the user ID and the role ID.
+
+.. note::
+    This endpoint has a parameter called **position** used to determine the order in which the different roles will be applied, as roles might have conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
+
+Following the previous example, it is possible to assign a new user named "sales-member-1" to the previously created "sales-team" role. This would be the request, having ``8```as the *role_id* of the "sales-team":
+
+.. code-block:: console
+
+    # curl -k -X POST "https://localhost:55000/security/users/101/roles?role_ids=8&pretty=true" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+          {
+            "id": 101,
             "username": "sales-member-1",
+            "allow_run_as": false,
             "roles": [
               8
             ]
