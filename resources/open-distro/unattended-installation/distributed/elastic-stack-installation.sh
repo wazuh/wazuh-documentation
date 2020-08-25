@@ -368,7 +368,7 @@ healthCheck() {
     then
         if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
         then
-            echo "The system must have at least 16Gb of RAM and 2 CPUs"
+            echo "The system must have at least 16Gb of RAM and 4 CPUs"
             exit 1;
         else
             echo "Starting the installation..."
@@ -454,7 +454,7 @@ main() {
             then
                 echo "Health-check ignored."    
             else
-                healthCheck           
+                healthCheck e k         
             fi           
             installPrerequisites
             addWazuhrepo   
@@ -480,7 +480,7 @@ main() {
             then
                 echo "Health-check ignored."    
             else
-                healthCheck           
+                healthCheck e k         
             fi               
             installPrerequisites
             addWazuhrepo             
