@@ -5,6 +5,18 @@ $(function() {
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
 
+  /* Change DOMAIN in href */
+  const domainReplacePattern = 'https://DOMAIN';
+  let currentReleasePath = window.location.hostname;
+  if ( window.location.pathname.split('/')[1] === version ) {
+    currentReleasePath += '/'+version;
+  }
+  $('[href^="'+domainReplacePattern+'/"]').each(function() {
+    const oldHref = $(this).attr('href');
+    $(this).attr('href', oldHref.replace(domainReplacePattern, 'https://'+currentReleasePath));
+    $(this).attr('target', '_blank');
+  });
+
   /* List of empty nodes, containing only a toctree */
   const emptyTocNodes = [
     'amazon/configuration/index',
