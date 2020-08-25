@@ -37,6 +37,7 @@ Configuration options for file integrity monitoring:
 - `skip_nfs`_
 - `skip_proc`_
 - `skip_sys`_
+- `file_limit`_
 - `synchronization`_
 - `whodata`_
 - `windows_audit_interval`_
@@ -767,7 +768,7 @@ Example:
 
 
 file_limit
-^^^^^^^^^^
+----------
 
 .. versionadded:: 3.13
 
