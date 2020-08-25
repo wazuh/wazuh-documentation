@@ -31,9 +31,11 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.0'
+
 # The full version, including alpha/beta/rc tags
-release = version
-apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/dev-aiohttp-poc/api/api/spec/spec.yaml'
+# Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
+release = 'develop'
+apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+release+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
 
