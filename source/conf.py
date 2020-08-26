@@ -38,7 +38,7 @@ release = version
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
+needs_sphinx = '1.8'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -46,7 +46,6 @@ release = version
 extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
-    'sphinxprettysearchresults',
     'sphinx_tabs.tabs',
 ]
 
@@ -410,10 +409,10 @@ custom_replacements = {
     "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
     "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
     "|WAZUH_LATEST_PUPPET|" : "3.12.2",
-    "|WAZUH_LATEST_OVA|" : "3.13.0",
+    "|WAZUH_LATEST_OVA|" : "3.13.1",
     "|WAZUH_LATEST_DOCKER|" : "3.12.2",
-    "|ELASTICSEARCH_LATEST|" : "7.8.0",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.7.1",
+    "|ELASTICSEARCH_LATEST|" : "7.9.0",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.2",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.2",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.2",

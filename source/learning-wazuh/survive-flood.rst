@@ -191,7 +191,7 @@ See what happened according to Kibana
     :width: 100%
 
 
-5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
+5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "full_log" and "data.level" for readability.
 
 .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
     :title: Flood
