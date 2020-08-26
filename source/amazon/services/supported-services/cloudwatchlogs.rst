@@ -61,7 +61,7 @@ Wazuh configuration
 
         # service wazuh-manager restart
 
-    * If you're configuring a Wazuh agent:
+    * If you are configuring a Wazuh agent:
 
       a. For Systemd:
 
