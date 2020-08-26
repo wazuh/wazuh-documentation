@@ -8,16 +8,39 @@ Installation guide
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh. There are two available types of installation depending on the version of Elasticsearch used, Elasticsearch with Basic License or Open Distro for Elasticsearch. There are two methods for deploying the Wazuh installation, *All-in-one* and *Distributed*. Down below the different types of installation will be described.
+This section aims to guide the user through the process of installing Wazuh and Elastic Stack or Open Distro for Elasticsearch. 
 
-Elasticsearch is formed by two different components. The first one is ``Elasticsearch-oss``. It has the basic functionalities of Elasticsearch and is fully open source licensed under `Apache 2.0`. It includes functionalities such as searching and analyzing, data visualization and dashboarding, etc. The other component which adds more functionalities to ``Elasticsearch-oss`` is the one that will vary depending on the installation type:
+Elasticsearch flavor
+---------------------
 
-  - **X-Pack**: This component is under Elasticsearch license. Some of its functionalities are free to use but some others are paid. Elasticsearch-oss and X-Pack together form Elasticsearch with basic license.
+The user can select among these two flavors of Elasticsearch the one that better suits their environment.
 
-  - **Open Distro for Elasticsearch**: Is born from the necessity of having a completely open source alternative to X-Pack functionalities. This project is created by Amazon and is under `Apache 2.0` license. With the Open Distro for Elasticsearch installation, the open source packages of Kibana and Filebeat will be also installed.
+- `Elastic Stack <https://www.elastic.co/elastic-stack>`_ includes Elasticsearch, Kibana and Filebeat. In this installation guide the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more. More capabilities are available under a premium license, more information can be found `here <https://www.elastic.co/subscriptions>`_. 
 
-Depending on the necessities, the user can choose between `Elasticsearch with basic license`, which has some features that are not open source and paid or `Open Distro for Elasticsearch`, which is an open source alternative.
+- `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_ is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community driven.
 
+ 
+Type of deployment
+------------------
+
+Two types of deployments can be made: 
+
+- All-in-one deployment: In this case, Wazuh and Elastic Stack or Open Distro for Elasticsearch are installed in the same host, this type of deployment is suitable for testing and small working environments. 
+
+- Distributed deployment: each component is installed in a separate host and can also be installed in a multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.  
+
+Type of installation
+---------------------
+
+Once the desired configuration is selected the user can choose between two types of installations:
+
+- Unattended installation: done using an automated script.
+- Step-by-step installation: a manual way of doing the installation that includes a detailed explanation of every step of the installation process.
+
+Requirements
+------------
+
+This guide also includes a requirements section that includes the supported operating systems and the minimum recommended hardware requirements to guarantee the expected performance.    
 
 .. toctree::
     :maxdepth: 1
