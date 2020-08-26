@@ -94,30 +94,13 @@ Installing Wazuh manager
 
       # service wazuh-manager status
 
-Installing Wazuh API
---------------------
+.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend you add the official repository as this has more recent versions.
+.. versionadded:: 4.0.0
 
-    .. code-block:: console
+The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-      # curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-      # apt-get install -y nodejs
-      # npm config set user 0
-
-  .. note::
-
-    If you are using **Ubuntu 12.04 (Precise)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
-
-    For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
-
-2. Download and execute the installation script:
-
-  .. code-block:: console
-
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v|WAZUH_LATEST|/install_api.sh && bash ./install_api.sh download
-
-3. Once the process is complete, you can check the service status with:
+To check the API service status use the following command:
 
   * For Systemd:
 
@@ -131,7 +114,7 @@ Installing Wazuh API
 
       # service wazuh-api status
 
-.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
+.. note:: Check out the section :doc:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
 
 Installing Filebeat
 -------------------

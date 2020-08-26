@@ -62,32 +62,11 @@ Once the process is completed, you can check the service status with:
 
       # service wazuh-manager status
 
-Installing the Wazuh API
-------------------------
+.. versionadded:: 4.0.0
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
+The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-  .. code-block:: console
-
-    # curl -sL https://deb.nodesource.com/setup_10.x | bash -
-
-  .. note::
-
-      If you are using **Ubuntu 12.04 (Precise)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
-
-  and then, install NodeJS:
-
-  .. code-block:: console
-
-    # apt-get install nodejs
-
-2. Install the Wazuh API. It will update NodeJS if it is required:
-
-  .. code-block:: console
-
-    # apt-get install wazuh-api
-
-3. Once the process is complete, you can check the service status with:
+To check the API service status use the following command:
 
   * For Systemd:
 
@@ -102,11 +81,11 @@ Installing the Wazuh API
       # service wazuh-api status
 
 .. note::
-    Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
+    Check out the section :doc:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
 
-4. (Optional) Disable the Wazuh updates:
+**Optional:** Disable the Wazuh repository.
 
-  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+  It is recommended to disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
