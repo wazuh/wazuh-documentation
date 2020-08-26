@@ -164,18 +164,17 @@ addWazuhrepo() {
 ## Elasticsearch
 installElasticsearch() {
 
-
-    logger "Installing Elasticsearch..."
+    logger "Installing Open Distro for Elasticsearch..."
 
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install elasticsearch -y -q $debug"
-    elif [ $sys_type == "apt-get" ] 
-    then
-        eval "apt-get install elasticsearch -y -q $debug"
+        eval "yum install opendistroforelasticsearch -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch $debug"
+        eval "zypper -n install opendistroforelasticsearch $debug"
+    elif [ $sys_type == "apt-get" ] 
+    then
+        eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q $debug"
     fi
 
     if [  "$?" != 0  ]
