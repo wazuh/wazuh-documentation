@@ -98,4 +98,4 @@ Recommended changes to securize Wazuh API
 
     The default number of login attempts allowed is *5* for each period of time, which by default is *300* seconds. To change those values, modify the ``max_login_attempts`` and/or the ``block_time`` settings using the following Wazuh API endpoint: ``PUT ​/cluster/{node_id}/api`` or change it in ``WAZUH_PATH/api/configuration/api.yaml``. There is no need to restart the Wazuh API service for these changes to take effect.
 
-A complete API configuration guide can be found here: :doc:`here <../user-manual/api/configuration>`.
+A complete API configuration guide can be found here: :ref:`here <../user-manual/api/configuration>`.
