@@ -93,33 +93,33 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 #. Update the ``optimize`` and ``plugins`` directories permissions: 
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # chown -R kibana:kibana /usr/share/kibana/optimize
-    # chown -R kibana:kibana /usr/share/kibana/plugins
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Kibana package:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # yum install kibana-|ELASTICSEARCH_LATEST|
+      # yum install kibana-|ELASTICSEARCH_LATEST|
 
 #. Install the Wazuh app plugin for Kibana:
 
 
-  * Install from URL:
+    * Install from URL:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cd /usr/share/kibana/
-    # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
-  * Install from the package:
+    * Install from the package:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cd /usr/share/kibana/
-    # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+      # cd /usr/share/kibana/
+      # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
   .. note:: The `path` should have *read* permissions for *others*. E.g: The directory `/tmp/` accomplishes this.
 
