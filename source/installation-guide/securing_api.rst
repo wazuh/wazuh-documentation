@@ -5,7 +5,7 @@
 Securing the Wazuh API
 ======================
 
-The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS, which means if the users do not provide their own private key and certificate then Wazuh API will generate its own during the first run. Additionally, ``wazuh`` and ``wazuh-wui`` users are created by default having ``wazuh`` as their password. Because of that, it is very important to secure Wazuh API once it has been installed.
+The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS, which means that if the users do not provide their own private key and certificate then Wazuh API will generate its own during the first run. Additionally, ``wazuh`` and ``wazuh-wui`` users are created by default having ``wazuh`` as their password. Because of that, it is very important to secure Wazuh API once it has been installed.
 
 .. warning::
   It is highly recommended to change the default passwords and to use your own certificate since the one created by the Wazuh API is self-signed.
