@@ -81,13 +81,20 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
 
-1. Install the Kibana package:
+#. Update the ``optimize`` and ``plugins`` directories permissions: 
+
+  .. code-block:: console
+
+    # chown -R kibana:kibana /usr/share/kibana/optimize
+    # chown -R kibana:kibana /usr/share/kibana/plugins
+
+#. Install the Kibana package:
 
   .. code-block:: console
 
     # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
-2. Install the Wazuh app plugin for Kibana:
+#. Install the Wazuh app plugin for Kibana:
 
 
   * Install from URL:
