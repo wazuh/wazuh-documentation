@@ -247,6 +247,7 @@ After the installation of Elasticsearch, some steps must be done manually. Choos
     .. code-block:: console
 
       # unzip ~/certs.zip -d ~/certs
+      # mkdir /etc/elasticsearch/certs/ca -p
       # cp -R ~/certs/ca/ ~/certs/elasticsearch-X/* /etc/elasticsearch/certs/
       # mv /etc/elasticsearch/certs/elasticsearch-X.crt /etc/elasticsearch/certs/elasticsearch.crt
       # mv /etc/elasticsearch/certs/elasticsearch-X.key /etc/elasticsearch/certs/elasticsearch.key
