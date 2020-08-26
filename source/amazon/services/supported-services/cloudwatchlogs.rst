@@ -25,7 +25,7 @@ AWS CloudWatch logs can be accessed by configuring CloudWatch to store them into
 Wazuh configuration
 -------------------
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudWatch Logs:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudWatch Logs:
 
     .. code-block:: xml
 
@@ -45,7 +45,7 @@ Wazuh configuration
     .. note::
       Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
-2. Restart Wazuh in order to apply the changes:
+#. Restart Wazuh in order to apply the changes:
 
     * If you are configuring a Wazuh manager:
 
