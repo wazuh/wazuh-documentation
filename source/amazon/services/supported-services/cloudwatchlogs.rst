@@ -47,7 +47,7 @@ Wazuh configuration
 
 2. Restart Wazuh in order to apply the changes:
 
-    * If you're configuring a Wazuh manager:
+    * If you are configuring a Wazuh manager:
 
       a. For Systemd:
 
