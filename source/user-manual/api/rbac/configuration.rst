@@ -271,7 +271,7 @@ Users can be assigned to one or more roles using the ``POST /security/users/{use
 .. note::
     This endpoint has a parameter called **position** used to determine the order in which the different roles will be applied, as roles might have conflicting policies. For more information, check out the section :ref:`Priority of roles and policies <rbac_priority>`.
 
-Following the previous example, it is possible to assign a new user named "sales-member-1" to the previously created "sales-team" role. This would be the request, having ``8```as the *role_id* of the "sales-team":
+Following the previous example, it is possible to assign a new user named "sales-member-1" to the previously created "sales-team" role. This would be the request, having ``8`` as the *role_id* of the "sales-team":
 
 .. code-block:: console
 
