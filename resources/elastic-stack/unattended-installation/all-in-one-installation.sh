@@ -365,7 +365,7 @@ healthCheck() {
 
     if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
     then
-        echo "The system must have at least 16Gb of RAM and 4 CPUs"
+        echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     else
         echo "Starting the installation..."
