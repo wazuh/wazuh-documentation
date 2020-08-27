@@ -27,7 +27,7 @@ produced to keep us informed about the onset of, escalation of, and recovery fro
 Configure the Wazuh agent client buffer on linux-agent
 ------------------------------------------------------
 
-1. In this lab, we will limit agent log production to 50 events per second (EPS) in order to easily simulate
+#. In this lab, we will limit agent log production to 50 events per second (EPS) in order to easily simulate
    a flooding event. Open ``/var/ossec/etc/ossec.conf`` and find the **<client_buffer>** section,
    and edit within it the  ``<events_per_second>`` value:
 
@@ -54,7 +54,7 @@ Configure the Wazuh agent client buffer on linux-agent
         ``# echo "agent.min_eps=10" >> /var/ossec/etc/local_internal_options.conf``
 
 
-2. Restart the Wazuh agent so the configuration may take effect:
+#. Restart the Wazuh agent so the configuration may take effect:
 
     a. For Systemd:
 
@@ -95,7 +95,7 @@ generic Wazuh rule ``1002`` which has a low severity level (2).  By default,
 Wazuh manager does not record alerts on rules of severity levels less than 3,
 so for this lab we will lower the threshold:
 
-1. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
+#. Edit ``/var/ossec/etc/ossec.conf`` and change ``<log_alert_level>`` from 3 to 1 so that the ``<alerts>``
    section looks like the one below.  Now alerts of all severity levels except level 0 will show up in Kibana.
 
     .. code-block:: xml
@@ -105,7 +105,7 @@ so for this lab we will lower the threshold:
             <email_alert_level>12</email_alert_level>
         </alerts>
 
-2. Restart Wazuh manager.
+#. Restart Wazuh manager.
 
    a. For Systemd:
 
@@ -128,7 +128,7 @@ Generate a log flood on linux-agent
 
       [root@linux-agent centos]#  yum install nmap-ncat
 
-1. Create a script called ``/usr/local/bin/makeflood``, with this content:
+#. Create a script called ``/usr/local/bin/makeflood``, with this content:
 
     .. code-block:: console
 
@@ -155,21 +155,21 @@ Generate a log flood on linux-agent
         The second field causes the location metadata value to be set to "floodtest".
         After that is a log line just like you might see in ``/var/log/messages``.
 
-2. Make the script executable and then run it to generate a rapid flood of **10,000** log entries.
+#. Make the script executable and then run it to generate a rapid flood of **10,000** log entries.
 
     .. code-block:: console
 
         # chmod 700 /usr/local/bin/makeflood
         # makeflood
 
-3. Notice that the periods representing log messages are scrolling across the
+#. Notice that the periods representing log messages are scrolling across the
    screen at a rate well above our 50 EPS limit.
 
 
 See what happened according to Kibana
 -------------------------------------
 
-1. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
+#. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
    Change the scale from "Auto" to "Second".
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
@@ -178,12 +178,12 @@ See what happened according to Kibana
     :width: 100%
 
 
-2. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
+#. Notice that the flooding events only arrived at the Wazuh manager at a rate of 50 EPS,
    our intended limit.  The client buffer EPS limit worked!
 
-3. Notice that only 8,306 hits are reported for a flood.  It appears some of the flooded events were lost.
+#. Notice that only 8,306 hits are reported for a flood.  It appears some of the flooded events were lost.
 
-4. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
+#. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png
     :title: Flood
@@ -191,7 +191,7 @@ See what happened according to Kibana
     :width: 100%
 
 
-5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
+#. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
 
    .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
     :title: Flood
@@ -199,14 +199,14 @@ See what happened according to Kibana
     :width: 100%
 
 
-6. Observe how Wazuh alerts us at various stages of a flooding event so that we
+#. Observe how Wazuh alerts us at various stages of a flooding event so that we
    can know when we need to intervene with an over-logging system that is not
    recovering to a normal state on its own.
 
 Return settings back to normal
 ------------------------------
 
-1. In linux-agent, edit the ``<client_buffer>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
+#. In linux-agent, edit the ``<client_buffer>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
 
     .. code-block:: xml
 
@@ -217,7 +217,7 @@ Return settings back to normal
             <events_per_second>500</events_per_second>
         </client_buffer>
 
-2. Restart the Wazuh agent:
+#. Restart the Wazuh agent:
 
     a. For Systemd:
 
@@ -231,7 +231,7 @@ Return settings back to normal
 
         # service wazuh-agent restart
 
-3. In wazuh-manager, edit the ``<alerts>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
+#. In wazuh-manager, edit the ``<alerts>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
 
    .. code-block:: xml
 
@@ -240,7 +240,7 @@ Return settings back to normal
         <email_alert_level>12</email_alert_level>
     </alerts>
 
-4. Restart the Wazuh manager:
+#. Restart the Wazuh manager:
 
    a. For Systemd:
 

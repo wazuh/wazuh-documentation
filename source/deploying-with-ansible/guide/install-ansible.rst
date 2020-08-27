@@ -36,13 +36,13 @@ Installation on CentOS/RHEL/Fedora
 
 Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distributions, are currently supported. Follow the next steps:
 
-1. Install EPEL repository:
+#. Install EPEL repository:
 
    .. code-block:: console
 
     # yum -y install epel-release
 
-2. Install ansible:
+#. Install ansible:
 
    .. code-block:: console
 
@@ -53,14 +53,14 @@ Installation on Debian/Ubuntu
 
 For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next steps:
 
-1. Install required dependencies:
+#. Install required dependencies:
 
    .. code-block:: console
 
     # apt-get update
     # apt-get install lsb-release software-properties-common
 
-2. Setup ansible repository:
+#. Setup ansible repository:
 
    a. For Ubuntu:
 
@@ -93,7 +93,7 @@ Using SSH key-pairing
 
 Our Ansible server will need to connect to the other systems. Let's see how to make the connection for example with the machine where we will install the Wazuh server. We will have to repeat this procedure for each machine that we want to connect to the Ansible server, as for example the machines of the ELK server and the machines of the Wazuh agents.
 
-1. The first step is to generate the SSH authentication key pair for the Ansible server using the ssh-keygen tool. SSH implements public key authentication using RSA or DSA. Version 1 of the SSH protocol only supports RSA, while version 2 supports both systems.
+#. The first step is to generate the SSH authentication key pair for the Ansible server using the ssh-keygen tool. SSH implements public key authentication using RSA or DSA. Version 1 of the SSH protocol only supports RSA, while version 2 supports both systems.
 
    1.1. Move to the $HOME directory of Ansible server.
 
@@ -148,7 +148,7 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 
      - In addition, the ``/home/ansible/.ssh/`` directory must have the entry permissions at 700 (d r w x - - - - - -), as we can see.
 
-2. Now it is necessary to copy the public key of the Ansible server to the file ~/.ssh/authorized_keys in the $HOME directory of the remote system (Wazuh server in this example).
+#. Now it is necessary to copy the public key of the Ansible server to the file ~/.ssh/authorized_keys in the $HOME directory of the remote system (Wazuh server in this example).
 
    2.1. We install openssh-server if we do not have it installed.
 
@@ -213,7 +213,7 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
         drwx------. 15 centos centos 4,0K sep 12 14:03 ..
 
 
-3. Return to the Ansible server and concatenate the public key to the ``~/.ssh/authorized_keys`` file in the $HOME of Wazuh server using SSH
+#. Return to the Ansible server and concatenate the public key to the ``~/.ssh/authorized_keys`` file in the $HOME of Wazuh server using SSH
 
 
    3.1. From Ansible server.
@@ -238,7 +238,7 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 
         ssh-rsa AAA...60V ansible@ansible
 
-4. Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
+#. Before the public key authentication mechanism can be tested, it is necessary to verify that the SSH server allows it. To do this, open the file ``/etc/ssh/sshd_config`` in Wazuh server.
 
    .. code-block:: console
 
@@ -268,7 +268,7 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 
           # service sshd restart
 
-5. Verify authentication with public key.
+#. Verify authentication with public key.
 
    5.1. From Ansible server.
 
@@ -286,7 +286,7 @@ Our Ansible server will need to connect to the other systems. Let's see how to m
 Test Connection
 ---------------
 
-1. Add hosts to control
+#. Add hosts to control
 
    Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts`` in our Ansible server. Our Wazuh server Ip is ``192.168.0.180`` and the user is ``centos`` in this example. We have to add ``192.168.0.180 ansible_ssh_user=centos``.
 
@@ -345,7 +345,7 @@ Test Connection
     - 192.168.0.181  ansible_ssh_user=ubuntu   **ansible_python_interpreter=/usr/bin/python3**
 
 
-2. This will attempt a connection with the remote hosts using ping module.
+#. This will attempt a connection with the remote hosts using ping module.
 
    .. code-block:: console
 

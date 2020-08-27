@@ -31,7 +31,7 @@ Procedure
 
 Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) along with the default one, ``wazuh-alerts-3.x-*``. Follow these steps:
 
-1. First of all, stop the Filebeat service:
+#. First of all, stop the Filebeat service:
 
     a. For Systemd:
 
@@ -45,13 +45,13 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
         # service filebeat stop
 
-2. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
+#. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
     .. code-block:: console
 
       # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
 
-3. Open the template file and locate this line:
+#. Open the template file and locate this line:
 
     .. code-block:: javascript
 
@@ -67,7 +67,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     The asterisk character (``*``) on the index patterns is important because Filebeat will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh app.
 
-4. Save the modifications and insert the new template into Elasticsearch. This will replace the current template:
+#. Save the modifications and insert the new template into Elasticsearch. This will replace the current template:
 
     .. code-block:: console
 
@@ -81,7 +81,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     .. note::
       ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
-5. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
+#. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
 
     For example, from
 
@@ -104,7 +104,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 
 
-6. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
+#. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
     .. code-block:: yaml
 
@@ -126,7 +126,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
         # service kibana restart
 
-7. Restart the Filebeat service:
+#. Restart the Filebeat service:
 
     a. For Systemd:
 

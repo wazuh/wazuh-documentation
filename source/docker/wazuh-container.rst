@@ -26,13 +26,13 @@ It is recommended to set Docker host preferences to give at least **6GB** memory
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. You need to increase ``max_map_count`` on your Docker host:
+#. You need to increase ``max_map_count`` on your Docker host:
 
     .. code-block:: console
 
       # sysctl -w vm.max_map_count=262144
 
-2. To set this value permanently, update the vm.max_map_count setting in ``/etc/sysctl.conf``. To verify after rebooting, run "sysctl vm.max_map_count".
+#. To set this value permanently, update the vm.max_map_count setting in ``/etc/sysctl.conf``. To verify after rebooting, run "sysctl vm.max_map_count".
 
     .. warning::
 
@@ -41,7 +41,7 @@ Increase max_map_count on your host (Linux)
 Increase max_map_count on your host (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. You need to increase ``max_map_count`` on your Docker host:
+#. You need to increase ``max_map_count`` on your Docker host:
 
     .. code-block:: console
 
@@ -49,7 +49,7 @@ Increase max_map_count on your host (Windows)
       # sysctl -w vm.max_map_count=262144
       # exit
 
-2. To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``:
+#. To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``:
 
   2.1. Open the file ``/var/lib/boot2docker/bootlocal.sh`` for edition:
 
@@ -93,7 +93,7 @@ In Docker for OSX, there is a default memory limit of 2GB, so in order to run `d
 Usage
 -----
 
-1. Get the ``docker-compose.yml`` file to your system:
+#. Get the ``docker-compose.yml`` file to your system:
 
    a) Only the file::
 
@@ -103,7 +103,7 @@ Usage
 
       $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER| --single-branch
 
-2. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
+#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
    a) Foreground::
 
