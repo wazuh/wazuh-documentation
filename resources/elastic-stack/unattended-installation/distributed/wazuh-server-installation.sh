@@ -156,6 +156,7 @@ installWazuh() {
     else
         logger "Done"
     fi  
+    startService "wazuh-manager"
 
 }
 
