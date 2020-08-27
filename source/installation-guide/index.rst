@@ -48,3 +48,4 @@ This guide also includes a requirements section that includes the supported oper
     requirements
     basic/index
     open-distro/index
+    compatibility_matrix/index

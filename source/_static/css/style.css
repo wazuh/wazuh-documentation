@@ -123,6 +123,11 @@ dt {
   padding-bottom: 10px;
 }
 
+.literal-block-wrapper.docutils.container {
+  max-width: 100%;
+  padding: 0;
+}
+
 .no-bullets li::before {
   content: none !important;
 }
@@ -679,13 +684,26 @@ ul, ol {
 	padding-left: 1.7rem;
 }
 
-ul.simple dl dd {
+
+ul.simple li dl,
+ol.simple li dl {
+  margin-bottom: 0;
+}
+
+ul.simple dl dt,
+ol.simple dl dt {
+  font-weight: normal;
+}
+
+ul.simple dl dd,
+ol.simple dl dd,
+.simple li > p {
+
   margin-bottom: 0;
 }
 
 ul.simple dl ul {
   list-style-type: circle;
-  margin-bottom: 0;
 }
 
 blockquote {
@@ -1529,8 +1547,19 @@ footer .contact-info .fa-paper-plane-o {
   font-weight: 400;
 }
 
-.sphinx-tabs .sphinx-menu a.item{
+.sphinx-tabs .sphinx-menu a.item {
   color: #0094ce !important;
+}
+
+.sphinx-tabs .sphinx-menu a.item p,
+table tr p {
+	color: inherit;
+	font-weight: inherit;
+	margin: inherit;
+}
+
+table tr p {
+  margin: 0.3rem 0px 0.3rem 0;
 }
 
 #main-content .sphinx-tabs .menu .item.docutils.container{
@@ -2216,9 +2245,13 @@ label {
 	border-radius: 4px 4px 0 0;
 }
 
-.admonition p {
+.admonition > p {
   padding: 1rem;
   margin: 0;
+}
+
+.admonition li p {
+	margin: 0;
 }
 
 .admonition.note > [class*="highlight-"],
@@ -2254,7 +2287,7 @@ p.admonition-title {
 	padding: 0.25rem 1rem;
 }
 
-p.first.admonition-title::before,
+p.admonition-title::before,
 .no-latest-notice span::before {
   display: inline-block;
   font: normal bold normal 1.1rem/.5 FontAwesome;
@@ -2311,12 +2344,12 @@ p.first.admonition-title::before,
 	color: #ffffff;
 }
 
-.note p.first.admonition-title::before,
-.admonition-generic-admonition p.first.admonition-title::before {
+.note p.admonition-title::before,
+.admonition-generic-admonition p.admonition-title::before {
   content: '\f06a';
 }
 
-.output p.first.admonition-title::before {
+.output p.admonition-title::before {
   content: '\f138';
 }
 
@@ -2372,14 +2405,14 @@ p.first.admonition-title::before,
   margin-right: 1rem;
 }
 
-.error p.first.admonition-title::before,
-.danger p.first.admonition-title::before,
-.hint p.first.admonition-title::before,
-.important p.first.admonition-title::before,
-.tip p.first.admonition-title::before,
-.attention p.first.admonition-title::before,
-.caution p.first.admonition-title::before,
-.warning p.first.admonition-title::before,
+.error p.admonition-title::before,
+.danger p.admonition-title::before,
+.hint p.admonition-title::before,
+.important p.admonition-title::before,
+.tip p.admonition-title::before,
+.attention p.admonition-title::before,
+.caution p.admonition-title::before,
+.warning p.admonition-title::before,
 .no-latest-notice span::before {
   content: '\f071';
 }
@@ -3556,7 +3589,7 @@ pre.literal-block,
 div[class*='highlight'] {
   border: 1px solid #e1e4e5;
   padding: 0px;
-  margin: 1px 0 24px 0
+  margin: 1px 0 24px 0;
 }
 
 div[class*='highlight'] {
@@ -3608,7 +3641,8 @@ div[class*='highlight'] .copy-to-clipboard {
   transition: all 0.2s ease;
 }
 
-div[class*='highlight']:hover .copy-to-clipboard {
+div[class*='highlight']:hover .copy-to-clipboard ,
+div[class*='highlight'] .copy-to-clipboard:focus {
   opacity: 1;
 }
 

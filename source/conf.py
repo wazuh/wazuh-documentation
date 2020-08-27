@@ -13,6 +13,7 @@ import os
 import re
 import shlex
 import datetime
+from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -29,6 +30,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 version = '4.0'
 # The full version, including alpha/beta/rc tags
 release = version
+apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/dev-aiohttp-poc/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
 
@@ -112,6 +114,7 @@ html_theme = 'wazuh_doc_theme'
 # documentation.
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
+    'wazuh_doc_url': 'https://documentation.wazuh.com',
     'globaltoc_depth': 5,
     'includehidden': True,
     'collapse_navigation': False,
@@ -168,7 +171,10 @@ html_static_path = ['_static']
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
-#html_additional_pages = {}
+if version >= '4.0':
+    html_additional_pages = {
+        'user-manual/api/reference': 'api-redoc.html',
+    }
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -346,9 +352,11 @@ def minification(actual_path):
     files = [
         ['css/style','css'],
         ['css/wazuh-icons','css'],
+        ['css/custom-redoc','css'],
         ['js/version-selector','js'],
         ['js/redirects','js'],
-        ['js/style','js']
+        ['js/style','js'],
+        ['js/custom-redoc','js']
     ]
 
     for file in files:
@@ -420,6 +428,12 @@ custom_replacements = {
     "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
     "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_API_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_API_ARMHF|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
@@ -427,10 +441,23 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
     "|WAZUH_REVISION_DEB_API_X86|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_API_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
     "|WAZUH_REVISION_HPUX|" : "1",
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_REVISION_WINDOWS|" : "1",
-}   
+    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/3.x/checksums/",
+    "|RPM_AGENT|" : "https://packages.wazuh.com/3.x/yum/wazuh-agent",
+    "|RPM_MANAGER|" : "https://packages.wazuh.com/3.x/yum/wazuh-manager",
+    "|RPM_API|" : "https://packages.wazuh.com/3.x/yum/wazuh-api",
+    "|DEB_AGENT|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
+    "|DEB_MANAGER|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api"
+}
 
 # -- Setup -------------------------------------------------------------------
 
@@ -440,21 +467,51 @@ def setup(app):
 
     minification(actual_path)
 
-    app.add_stylesheet("css/fontawesome.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/fontawesome.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/fontawesome.min.css")).st_mtime)
-    app.add_stylesheet("css/wazuh-icons.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/wazuh-icons.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/wazuh-icons.css")).st_mtime)
-    app.add_stylesheet("css/style.min.css?ver=%s" % os.stat(
+    app.add_css_file("css/style.min.css?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/css/style.css")).st_mtime)
 
-    app.add_javascript("js/version-selector.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/version-selector.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/version-selector.js")).st_mtime)
-    app.add_javascript("js/style.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/style.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
-    app.add_javascript("js/redirects.min.js?ver=%s" % os.stat(
+    app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
+
+	# List of compiled documents
+    app.connect('html-page-context', collect_compiled_pagename)
+    app.connect('build-finished', creating_file_list)
+
+exclude_doc = ["not_found"]
+list_compiled_html = []
+
+def collect_compiled_pagename(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
+    if templatename == "page.html" and pagename not in exclude_doc:
+        list_compiled_html.append(context['pagename']+'.html')
+    else:
+        pass
+
+def creating_file_list(app, exception):
+	''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
+	if app.builder.name == 'html':
+		build_path = app.outdir
+		separator = '\n'
+		with open(build_path+'/.doclist', 'w') as doclist_file:
+			list_text = separator.join(list_compiled_html)
+			doclist_file.write(list_text)
+		sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+		sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+		for compiled_html in list_compiled_html:
+			sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
+		sitemap += '</urlset>'
+		with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
+			sitemap_file.write(sitemap)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
@@ -477,7 +534,7 @@ html_context = {
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
     "github_version": version,
-    "production": production
+    "production": production,
+    "apiURL": apiURL
 }
-
 sphinx_tabs_nowarn = True
