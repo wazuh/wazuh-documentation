@@ -333,6 +333,8 @@ installKibana() {
     else   
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.1_0.0.0.todelete.zip $debug"
         if [  "$?" != 0  ]
         then
