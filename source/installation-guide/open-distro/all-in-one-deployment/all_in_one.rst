@@ -67,21 +67,21 @@ Installing the Wazuh manager
       .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 #. Enable and start the Wazuh manager service:
