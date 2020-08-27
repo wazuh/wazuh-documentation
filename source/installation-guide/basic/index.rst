@@ -18,31 +18,31 @@ In the Installation guide, definitions are grouped depending on the granularity 
 Individual components
 ^^^^^^^^^^^^^^^^^^^^^
 
-- ``Wazuh manager``: this component is in charge of analyzing the data received from the agents and triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, a configuration not compliant with policy, possible rootkit, etc).
+- ``Wazuh manager``: This component is in charge of analyzing the data received from the agents and triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, a configuration not compliant with policy, possible rootkit, etc).
 
-- ``Wazuh API``: this component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web user interface, which is the Wazuh Kibana plugin. Since `Wazuh 4.0` the Wazuh API is embed in the Wazuh manager.
+- ``Wazuh API``: This component provides an interface to manage and monitor the configuration and deployment status of the Wazuh agents and the Wazuh managers. It is also used by the Wazuh web user interface, which is the Wazuh Kibana plugin. Starting with `Wazuh 4.0` the Wazuh API is embedded in the Wazuh manager.
 
-- ``Filebeat``: is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch.
+- ``Filebeat``: Is a lightweight shipper for forwarding the Wazuh manager alerts to Elasticsearch.
 
-- ``Elasticsearch``: is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager. This guide will install Elasticsearch with basic license.
+- ``Elasticsearch``: Is a highly scalable full-text search and analytics engine. It will store all the alerts sent by the Wazuh manager. This guide will install Elasticsearch with basic license.
 
-- ``Kibana``: is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data.
+- ``Kibana``: Is a data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data.
 
-- ``Wazuh Kibana plugin``: lets users visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts, and filters using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers and the Wazuh agents configuration, logs, ruleset, groups, and much more.
+- ``Wazuh Kibana plugin``: Allows users to visualize and analyze Wazuh alerts stored in Elasticsearch. Provides statistics per Wazuh agent, search alerts, and filters using different visualizations. It integrates with the Wazuh API to retrieve information about the Wazuh managers and the Wazuh agents configuration, logs, ruleset, groups, and much more.
 
 Grouped components
 ^^^^^^^^^^^^^^^^^^
 
-- ``Wazuh server``: collects and analyzes data from deployed Wazuh agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API, and Filebeat.
+- ``Wazuh server``: Collects and analyzes data from deployed Wazuh agents and sends the alerts to Elasticsearch. It runs the Wazuh manager, the Wazuh API, and Filebeat.
 
 - ``Elastic Stack``: Elasticsearch and Kibana can be installed on the same server. Both components working together are called Elastic Stack. It runs Kibana with the Wazuh Kibana plugin.
 
 Clustered components
 ^^^^^^^^^^^^^^^^^^^^
 
-- ``Single-node cluster``: this term is used for referring to those components that act within only one server; without communication with other servers running the same components. A Wazuh single-node cluster is a Wazuh manager server that is not connected to other Wazuh manager nodes. Similar criteria can be applied to Elasticsearch nodes.
+- ``Single-node cluster``: This term is used for referring to those components that act within only one server; without communication with other servers running the same components. A Wazuh single-node cluster is a Wazuh manager server that is not connected to other Wazuh manager nodes. Similar criteria can be applied to Elasticsearch nodes.
 
-- ``Multi-node cluster``: this term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh servers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
+- ``Multi-node cluster``: This term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh servers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
 
 
 Types of deployment
@@ -50,9 +50,9 @@ Types of deployment
 
 The Installation guide is divided into two independent sections, :ref:`All-in-one deployment <basic_all_in_one_index>` and :ref:`Distributed deployment <basic_distributed_index>` according to the chosen configuration. Information about the minimal hardware requirements for the different types of deployments can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installations:
 
-- ``Unattended``: automated installation. Requires the initial input of the information needed to accomplish the process using a script.
+- ``Unattended``: Automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 
-- ``Step by step``: manual installation. Each step has a description which helps to understand the process.
+- ``Step by step``: Manual installation. Each step has a description which helps to understand the process.
 
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                   | All-in-one deployment                                                                                                                                          | Distributed deployment                                                                                                                                                                                                     |

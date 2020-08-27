@@ -190,29 +190,33 @@ Adding the Wazuh repository
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install the Wazuh manager package:
+#. Install the Wazuh manager package:
 
-.. tabs::
+    .. tabs::
 
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+      .. group-tab:: Yum
 
 
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
 
 
 
-  .. group-tab:: ZYpp
+      .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
+
+
+#. Enable and start the Wazuh manager service:
+
+    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 .. _basic_wazuh_server_packages_filebeat:
 
