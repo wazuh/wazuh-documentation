@@ -438,10 +438,10 @@ The following example shows how to configure the necessary components to run the
             <interval>5m</interval>
             <run_on_start>yes</run_on_start>
 
-            <!-- Focal OS vulnerabilities -->
-            <provider name="canonical">
+            <!-- Redhat 7 OS vulnerabilities -->
+            <provider name="redhat">
                 <enabled>yes</enabled>
-                <os>focal</os>
+                <os>7</os>
                 <update_interval>1h</update_interval>
             </provider>
 
