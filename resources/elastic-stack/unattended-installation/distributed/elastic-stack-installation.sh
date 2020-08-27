@@ -207,7 +207,7 @@ createCertificates() {
     eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
     if [  "$?" != 0  ]
     then
-        echo "Error: certificates were no created"
+        echo "Error: certificates were not created"
         exit 1;
     else
         logger "Certificates created"
@@ -338,7 +338,7 @@ initializeKibana() {
 ## Check nodes
 checkNodes() {
 
-    head=$(head -n1 config.yml)
+    head=$(head -n1 ~/config.yml)
     if [ "${head}" == "## Multi-node configuration" ]
     then
         master=1

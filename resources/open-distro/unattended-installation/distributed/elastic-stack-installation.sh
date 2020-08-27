@@ -243,7 +243,7 @@ createCertificates() {
     eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug            "
     if [  "$?" != 0  ]
     then
-        echo "Error: certificates were no created"
+        echo "Error: certificates were not created"
         exit 1;
     else
         logger "Certificates created"
