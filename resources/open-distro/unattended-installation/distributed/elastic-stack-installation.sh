@@ -349,7 +349,7 @@ initializeKibana() {
 
 ## Check nodes
 checkNodes() {
-    head=$(head -n1 config.yml)
+    head=$(head -n1 ~/config.yml)
     if [ "${head}" == "## Multi-node configuration" ]
     then
         master=1
