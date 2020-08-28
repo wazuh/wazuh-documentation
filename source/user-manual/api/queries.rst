@@ -125,7 +125,7 @@ For example, to filter Ubuntu agents with a version higher than 18, the followin
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information is shown"
+       "message": "All selected agents information was returned"
     }
 
 The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 18 but lower than Ubuntu 18.04.4:
@@ -165,7 +165,7 @@ The same field can be used multiple times to get a more accurate result. For exa
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information is shown"
+       "message": "All selected agents information was returned"
     }
 
 An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains *windows* or *centos*.
@@ -194,7 +194,7 @@ An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information is shown"
+       "message": "All selected agents information was returned"
     }
 
 Getting the ubuntu agents with id other than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18, is an example that involves multiple operators at the same time:
@@ -244,5 +244,5 @@ Getting the ubuntu agents with id other than 0 and lower than 4, whose name cont
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information is shown"
+       "message": "All selected agents information was returned"
     }

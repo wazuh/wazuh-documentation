@@ -51,7 +51,7 @@ However, using the following API calls it is easy to create new users and assign
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User created correctly"
+      "message": "User successfully created"
     }
 
 **Assign administrator role**

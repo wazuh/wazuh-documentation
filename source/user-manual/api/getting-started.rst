@@ -284,7 +284,7 @@ Here are some of the basic concepts related to making API requests and understan
             "failed_items": [],
             "total_failed_items": 0
           }
-          "message": "Restart command sent to all shown nodes",
+          "message": "Restart request sent to all specified nodes",
         }
 
     - Example response with errors:
@@ -322,7 +322,7 @@ Here are some of the basic concepts related to making API requests and understan
               }
             ]
           },
-          "message": "Could not send command to any agent"
+          "message": "Restart command was not sent to any agent"
         }
 
     - Example response to report an unauthorized request (code 401):
@@ -409,7 +409,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected rules were shown"
+       "message": "All selected rules were returned"
     }
 
 
@@ -476,7 +476,7 @@ It can also be helpful to know what rules are available that match a specific cr
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All selected rules were shown"
+      "message": "All selected rules were returned"
     }
 
 
@@ -535,7 +535,7 @@ The API can be used to show information about all monitored files by syscheck. T
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent"
+      "message": "FIM findings of the agent were returned"
     }
 
 You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
@@ -572,7 +572,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent"
+      "message": "FIM findings of the agent were returned"
     }
 
 .. code-block:: console
@@ -607,7 +607,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent"
+      "message": "FIM findings of the agent were returned"
     }
 
 Getting information about the manager
@@ -649,7 +649,7 @@ Some information about the manager can be retrieved using the API. Configuration
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Processes status read successfully in specified node"
+      "message": "Processes status successfully read in specified node"
     }
 
 
@@ -690,7 +690,7 @@ You can even dump the manager's current configuration with the request below (re
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Configuration read successfully in specified node"
+      "message": "Configuration successfully read in specified node"
     }
 
 
@@ -732,7 +732,7 @@ This enumerates 2 **active** agents:
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All selected agents information is shown"
+      "message": "All selected agents information was returned"
     }
 
 

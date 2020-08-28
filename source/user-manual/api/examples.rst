@@ -50,7 +50,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "API configuration successfully updated. Some settings may require restarting the API to be applied."
+       "message": "API configuration was successfully updated. Some settings may require restarting the API to be applied."
     }
 
 
@@ -75,7 +75,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User created correctly"
+      "message": "User was successfully created"
     }
 
 
@@ -186,7 +186,7 @@ Code:
             "total_affected_items": 2,
             "total_failed_items": 0
         },
-        "message": "All selected agents information is shown"
+        "message": "All selected agents information was returned"
     }
 
 
