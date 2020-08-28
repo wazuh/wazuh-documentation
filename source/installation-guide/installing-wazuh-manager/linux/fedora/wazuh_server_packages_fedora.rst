@@ -40,7 +40,7 @@ The next step is to install the Wazuh manager on your system:
 
   .. code-block:: console
 
-    # dnf install wazuh-manager
+    # dnf install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|
 
 Once the process is complete, you can check the service status with:
 
@@ -78,7 +78,7 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # dnf install wazuh-api
+    # dnf install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_API_X86|
 
 3. Once the process is complete, you can check the service status with:
 
