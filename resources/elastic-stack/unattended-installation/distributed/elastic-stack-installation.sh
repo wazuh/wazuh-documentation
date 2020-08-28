@@ -107,6 +107,10 @@ installPrerequisites() {
     else
         logger "Done"
     fi   
+    certs=~/certs.zip
+    if [ -f "$certs" ]; then
+        eval "unzip ~/certs.zip config.yml $debug"
+    fi
 
 }
 
@@ -188,9 +192,37 @@ installElasticsearch() {
             echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
         else
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
+            mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
+            sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+            cn=$(awk -v RS='' '/cluster.name:/' ~/config.yml)
+            echo "${cn}" >> /etc/elasticsearch/elasticsearch.yml   
+            mnr="cluster.initial_master_nodes:"
+            rm="-"
+            mn="${mn//$mnr}"
+            mn="${mn//$rm}"
 
-            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "${nh}"
+            shr="discovery.seed_hosts:"
+            sh="${sh//$shr}"
+            sh="${sh//$rm}"
+            echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml   
+            for line in $mn; do
+                    IMN+=(${line})
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+            done
+
+            echo "discovery.seed_hosts:" >> /etc/elasticsearch/elasticsearch.yml   
+            for line in $sh; do
+                    DSH+=(${line})
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+            done
+            for i in "${!IMN[@]}"; do
+            if [[ "${IMN[$i]}" = "${iname}" ]]; then
+                pos="${i}";
+            fi
+            done
+            nip="${DSH[pos]}" 
+            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
 
         fi
         #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
@@ -209,21 +241,41 @@ installElasticsearch() {
         if [ -n "$single" ]
         then
             createCertificates name ip
+        elif [ -n "$c" ]
+        then
+            createCertificates IMN DSH 
         else
             logger "Done"
         fi      
-
+        
+        if [ -n "$single" ]
+        then
+            copyCertificates name
+        else
+            copyCertificates iname
+        fi
+        initializeElastic
         echo "Done"
     fi
 
 }
 
 createCertificates() {
-  
-    echo "instances:" >> /usr/share/elasticsearch/instances.yml
-    echo '- name: "'${name}'"' >> /usr/share/elasticsearch/instances.yml
-    echo '  ip:' >> /usr/share/elasticsearch/instances.yml
-    echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
+    
+    if [ -n "$single" ]
+    then
+        echo "instances:" >> /usr/share/elasticsearch/instances.yml
+        echo '- name: "'${name}'"' >> /usr/share/elasticsearch/instances.yml
+        echo '  ip:' >> /usr/share/elasticsearch/instances.yml
+        echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
+    else 
+        echo "instances:" >> /usr/share/elasticsearch/instances.yml
+        for i in "${!IMN[@]}"; do
+            echo '- name: "'${IMN[i]}'"' >> /usr/share/elasticsearch/instances.yml
+            echo "  ip:" >> /usr/share/elasticsearch/instances.yml
+            echo '  - "'${DSH[i]}'"' >> /usr/share/elasticsearch/instances.yml
+        done
+    fi
     awk -v RS='' '/- name: /' ~/config.yml >> /usr/share/elasticsearch/instances.yml
     eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
     if [  "$?" != 0  ]
@@ -232,6 +284,14 @@ createCertificates() {
         exit 1;
     else
         logger "Certificates created"
+    fi
+
+}
+
+copyCertificates() {
+
+    if [ -n "$single" ]
+    then
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
         eval "cp -R ~/certs/ca/ ~/certs/${name}/* /etc/elasticsearch/certs/ $debug"
@@ -240,7 +300,25 @@ createCertificates() {
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
+    else
+        echo "entro"
+        eval "unzip ~/certs.zip -d ~/certs $debug"
+        eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
+        eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${iname}/${iname}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${iname}/${iname}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
+        eval "chmod -R 500 /etc/elasticsearch/certs $debug"
+        eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
+        if [[ -n "$master" ]] && [[ -n "$c" ]]
+        then
+            eval "zip -u ~/certs.zip config.yml $debug"
+        fi            
     fi
+
+}
+
+initializeElastic() {
 
     logger "Elasticsearch installed."  
 
@@ -411,7 +489,12 @@ main() {
             "-c"|"--create-certificates") 
                 c=1  
                 shift 1
-                ;;                                  
+                ;;       
+            "-n"|"--node-name") 
+                iname=$2  
+                shift
+                shift
+                ;;                                            
             "-k"|"--install-kibana") 
                 k=1          
                 shift 1
@@ -473,10 +556,14 @@ main() {
             installPrerequisites
             addElasticrepo   
             checkNodes         
-            installElasticsearch
+            installElasticsearch iname
             if [ -n "$c" ]
             then
-                createCertificates
+                if [ -z "$iname" ]
+                then
+                    getHelp
+                fi
+                #createCertificates IMN DSH
             fi
         fi
         if [ -n "$k" ]
