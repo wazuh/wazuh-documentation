@@ -176,7 +176,24 @@ installElasticsearch() {
         logger "Configuring Elasticsearch..."
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
 
-        awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
+        if [ -n "$single" ]
+        then
+            nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+            nn=$(awk -v RS='' '/node.name:/' ~/config.yml)
+            nnr="node.name: "
+            name="${nn//$nnr}"
+            nhr="network.host: "
+            ip="${nh//$nhr}"
+            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+        else
+
+            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "${nh}"
+
+        fi
+        #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
@@ -191,7 +208,7 @@ installElasticsearch() {
         # Create certificates
         if [ -n "$single" ]
         then
-            createCertificates
+            createCertificates name ip
         else
             logger "Done"
         fi      
@@ -203,22 +220,23 @@ installElasticsearch() {
 
 createCertificates() {
   
-    awk -v RS='' '/instances/' ~/config.yml > /usr/share/elasticsearch/instances.yml
+    echo "instances:" >> /usr/share/elasticsearch/instances.yml
+    echo '- name: "'${name}'"' >> /usr/share/elasticsearch/instances.yml
+    echo '  ip:' >> /usr/share/elasticsearch/instances.yml
+    echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
+    awk -v RS='' '/- name: /' ~/config.yml >> /usr/share/elasticsearch/instances.yml
     eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
     if [  "$?" != 0  ]
     then
-        echo "Error: certificates were no created"
+        echo "Error: certificates were not created"
         exit 1;
     else
         logger "Certificates created"
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
-        eval "cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/ $debug"
-        if [[ -n "$master" ]] 
-        then
-            eval "mv ~/certs/elasticsearch/elasticsearch.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
-            eval "mv ~/certs/elasticsearch/elasticsearch.key /etc/elasticsearch/certs/elasticsearch.key $debug"
-        fi
+        eval "cp -R ~/certs/ca/ ~/certs/${name}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${name}/${name}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${name}/${name}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
@@ -275,6 +293,8 @@ installKibana() {
     else   
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.1_0.0.0.todelete.zip $debug"
         if [  "$?" != 0  ]
         then
@@ -338,7 +358,7 @@ initializeKibana() {
 ## Check nodes
 checkNodes() {
 
-    head=$(head -n1 config.yml)
+    head=$(head -n1 ~/config.yml)
     if [ "${head}" == "## Multi-node configuration" ]
     then
         master=1
@@ -357,7 +377,7 @@ healthCheck() {
     then
         if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
         then
-            echo "The system must have at least 16Gb of RAM and 4 CPUs"
+            echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."
@@ -366,7 +386,7 @@ healthCheck() {
     then
         if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
         then
-            echo "The system must have at least 4Gb of RAM and 2 CPUs"
+            echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."

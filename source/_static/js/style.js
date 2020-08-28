@@ -1,5 +1,6 @@
 $(function() {
   let loc = location.hash;
+  const version = $('[data-version]').data('version');
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
@@ -27,6 +28,26 @@ $(function() {
     'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
   ];
+
+  /* List of nodes in the toctree that should be open in a new tab */
+  const newTabNodes = [
+    'user-manual/api/reference',
+  ];
+  if ( version >= '4.0') {
+    markTocNodesWithClass(newTabNodes, 'js-new-tab');
+    $('.js-new-tab').attr('target', '_blank');
+
+    /* Links to new tab found within the main content */
+    $('#main-content .reference.internal').each(function() {
+      const linkRef = this;
+      newTabNodes.forEach(function(item) {
+        if (linkRef.href.indexOf(item) !== -1) {
+          $(linkRef).attr('target', '_blank');
+          return;
+        }
+      });
+    });
+  }
 
   /* list of nodes (by title) which will not show their subtree */
   const hideSubtreeNodes = [
@@ -577,7 +598,7 @@ $(function() {
 
     /* Detects every result that is added to the list */
     const addedResult = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'childList') {
           lastResult = $('ul.search li:last-child');
           splitURL = lastResult.children('a').prop('href').split('/');
@@ -595,7 +616,7 @@ $(function() {
 
     /* Checking that the list of search results exists */
     const existsResultList = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search')) {
           const ulSearch = $('ul.search');
 
@@ -611,7 +632,7 @@ $(function() {
 
     /* Replaces the result message */
     const changeResultText = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'attributes') {
           observerResultText.disconnect();
           const totalResults = $('ul.search li').length;

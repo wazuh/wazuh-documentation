@@ -1,5 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
+.. _cluster_agents_connections:
+
 Agents connections
 ======================
 

@@ -198,6 +198,7 @@ installWazuh() {
     else
         logger "Done"
     fi   
+    startService "wazuh-manager"
 
 }
 
@@ -332,6 +333,8 @@ installKibana() {
     else   
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.1_0.0.0.todelete.zip $debug"
         if [  "$?" != 0  ]
         then
@@ -365,7 +368,7 @@ healthCheck() {
 
     if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
     then
-        echo "The system must have at least 16Gb of RAM and 4 CPUs"
+        echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     else
         echo "Starting the installation..."
