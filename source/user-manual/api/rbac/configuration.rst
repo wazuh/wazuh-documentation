@@ -9,7 +9,7 @@ Configuration
 
 Set RBAC mode
 -------------
-As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it's possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done by using the ``PUT /security/config`` endpoint.
+As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it is possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done by using the ``PUT /security/config`` endpoint.
 
 Here is an example of how to change RBAC mode using a cURL command. It is recommended to export the token to a variable as explained in Getting started section (see :ref:`Getting started <api_getting_started>` for more information about logging into the API). Replace ``DESIRED_RBAC_MODE`` with the mode to enable ("black" or "white"):
 

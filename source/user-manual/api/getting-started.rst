@@ -31,7 +31,7 @@ Logging into the API
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
 
-1. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
@@ -46,7 +46,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
         {"token": "<YOUR_JWT_TOKEN>"}
 
-2. Send an *API request* to confirm that everything is working as expected:
+#. Send an *API request* to confirm that everything is working as expected:
 
     .. code-block:: console
 
@@ -82,7 +82,7 @@ Logging into the API via scripts
 
 The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with Wazuh API.
 
-1. Logging in with Python:
+#. Logging in with Python:
 
 .. code-block:: python
 
@@ -169,7 +169,7 @@ Running the script provides a result similar to the following:
     End of the script.
 
 
-2. Logging in with a bash script and raw token:
+#. Logging in with a bash script and raw token:
 
 .. code-block:: bash
 

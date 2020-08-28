@@ -71,7 +71,7 @@ To check the API service status use the following command:
       # service wazuh-api status
 
 .. note::
-    Check out the section :ref:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
+    Check out the section :ref:`RESTful API <api>` for more information on how to set up and use Wazuh API.
 
 **Optional:** Disable the Wazuh repository.
 

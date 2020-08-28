@@ -5,7 +5,7 @@
 Securing the Wazuh API
 ======================
 
-The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS, which means if the users do not provide their own private key and certificate then Wazuh API will generate its own during the first run. Additionally, ``wazuh`` and ``wazuh-wui`` users are created by default having ``wazuh`` as their password. Because of that, it is very important to secure Wazuh API once it has been installed.
+The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS, which means that if the users do not provide their own private key and certificate then Wazuh API will generate its own during the first run. Additionally, ``wazuh`` and ``wazuh-wui`` users are created by default having ``wazuh`` as their password. Because of that, it is very important to secure Wazuh API once it has been installed.
 
 .. warning::
   It is highly recommended to change the default passwords and to use your own certificate since the one created by the Wazuh API is self-signed.
@@ -98,4 +98,4 @@ Recommended changes to securize Wazuh API
 
     The default number of login attempts allowed is *5* for each period of time, which by default is *300* seconds. To change those values, modify the ``max_login_attempts`` and/or the ``block_time`` settings using the following Wazuh API endpoint: ``PUT ​/cluster/{node_id}/api`` or change it in ``WAZUH_PATH/api/configuration/api.yaml``. There is no need to restart the Wazuh API service for these changes to take effect.
 
-A complete API configuration guide can be found here: :ref:`here <../user-manual/api/configuration>`.
+A complete API configuration guide can be found here: :ref:`here <api_configuration>`.
