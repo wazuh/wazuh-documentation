@@ -19,6 +19,46 @@ logger() {
     
 }
 
+startService() {
+
+    if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
+        eval "systemctl daemon-reload $debug"
+        eval "systemctl enable $1.service $debug"
+        eval "systemctl start $1.service $debug"
+        if [  "$?" != 0  ]
+        then
+            echo "${1^} could not be started."
+            exit 1;
+        else
+            echo "${1^} started"
+        fi  
+    elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
+        eval "chkconfig $1 on $debug"
+        eval "service $1 start $debug"
+        eval "/etc/init.d/$1 start $debug"
+        if [  "$?" != 0  ]
+        then
+            echo "${1^} could not be started."
+            exit 1;
+        else
+            echo "${1^} started"
+        fi     
+    elif [ -x /etc/rc.d/init.d/$1 ] ; then
+        eval "/etc/rc.d/init.d/$1 start $debug"
+        if [  "$?" != 0  ]
+        then
+            echo "${1^} could not be started."
+            exit 1;
+        else
+            echo "${1^} started"
+        fi             
+    else
+        echo "Error: ${1^} could not start. No service manager found on the system."
+        exit 1;
+    fi
+
+}
+
 ## Show script usage
 getHelp() {
 
