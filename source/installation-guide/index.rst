@@ -47,4 +47,4 @@ This guide also includes a requirements section that specifies the supported ope
     requirements
     open-distro/index
     basic/index
-    
+    compatibility_matrix/index
