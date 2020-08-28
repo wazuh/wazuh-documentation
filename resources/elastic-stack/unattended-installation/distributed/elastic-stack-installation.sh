@@ -176,7 +176,24 @@ installElasticsearch() {
         logger "Configuring Elasticsearch..."
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
 
-        awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
+        if [ -n "$single" ]
+        then
+            nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+            nn=$(awk -v RS='' '/node.name:/' ~/config.yml)
+            nnr="node.name: "
+            name="${nn//$nnr}"
+            nhr="network.host: "
+            ip="${nh//$nhr}"
+            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+        else
+
+            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "${nh}"
+
+        fi
+        #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
@@ -191,7 +208,7 @@ installElasticsearch() {
         # Create certificates
         if [ -n "$single" ]
         then
-            createCertificates
+            createCertificates name ip
         else
             logger "Done"
         fi      
@@ -203,7 +220,11 @@ installElasticsearch() {
 
 createCertificates() {
   
-    awk -v RS='' '/instances/' ~/config.yml > /usr/share/elasticsearch/instances.yml
+    echo "instances:" >> /usr/share/elasticsearch/instances.yml
+    echo '- name: "'${name}'"' >> /usr/share/elasticsearch/instances.yml
+    echo '  ip:' >> /usr/share/elasticsearch/instances.yml
+    echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
+    awk -v RS='' '/- name: /' ~/config.yml >> /usr/share/elasticsearch/instances.yml
     eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
     if [  "$?" != 0  ]
     then
@@ -213,12 +234,9 @@ createCertificates() {
         logger "Certificates created"
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
-        eval "cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/ $debug"
-        if [[ -n "$master" ]] 
-        then
-            eval "mv ~/certs/elasticsearch/elasticsearch.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
-            eval "mv ~/certs/elasticsearch/elasticsearch.key /etc/elasticsearch/certs/elasticsearch.key $debug"
-        fi
+        eval "cp -R ~/certs/ca/ ~/certs/${name}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${name}/${name}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${name}/${name}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
