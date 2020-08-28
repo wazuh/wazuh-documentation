@@ -102,7 +102,7 @@ Wazuh server worker nodes
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
-#. .. include:: ../../../../../_templates/installations/basic/wazuh/common/restart_wazuh_manager.rst
+#. .. include:: ../../../../../_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
 
 
 .. _wazuh_server_multi_node_filebeat:

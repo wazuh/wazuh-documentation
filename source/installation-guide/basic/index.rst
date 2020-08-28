@@ -8,7 +8,10 @@ Wazuh and Elastic Stack
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh. There are two available types of deployment: :ref:`All-in-one<basic_all_in_one>` and :ref:`Distributed<basic_distributed_index>`. In this guide, `Elasticsearch with basic license <https://www.elastic.co/>`_ will be used. Elasticsearch is formed by two different components, `Elasticsearch-oss` which is fully open source, and `X-Pack` which is under Elasticsearch license.
+This section aims to guide the user through the process of installing Wazuh and `Elastic Stack <https://www.elastic.co/elastic-stack>`_. In this installation guide the basic license option of Elastic Stack will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
+
+One of two types of deployments may be chosen depending on the environment where these components will be installed: :ref:`All-in-one <basic_all_in_one_index>` or a :ref:`Distributed <basic_distributed_index>`.
+
 
 Wazuh components
 ----------------
@@ -52,7 +55,7 @@ The Installation guide is divided into two independent sections, :ref:`All-in-on
 
 - ``Unattended``: Automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 
-- ``Step by step``: Manual installation. Each step has a description which helps to understand the process.
+- ``Step by step``: Manual installation. Includes a detailed description of every step of the installation process.
 
 +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                   | All-in-one deployment                                                                                                                                          | Distributed deployment                                                                                                                                                                                                     |
