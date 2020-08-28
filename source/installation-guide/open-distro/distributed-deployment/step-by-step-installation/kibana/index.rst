@@ -82,6 +82,14 @@ Kibana installation and configuration
     .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
 
 
+#. Update the ``optimize`` and ``plugins`` directories permissions:
+
+    .. code-block:: console
+    
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins    
+
+
 #. Install the Wazuh Kibana plugin:
 
     The installation of the plugin must be done from the Kibana home directory:
