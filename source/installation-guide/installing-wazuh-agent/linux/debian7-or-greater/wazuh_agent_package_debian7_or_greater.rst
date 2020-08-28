@@ -55,7 +55,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent=|WAZUH_LATEST|-|WAZUH_REVISION_APT_AGENT_X86|
+      # WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 
