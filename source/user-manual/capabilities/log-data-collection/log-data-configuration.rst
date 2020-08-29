@@ -58,7 +58,7 @@ Environment variables like ``%WinDir%`` can be used in the location pattern. The
 .. code-block:: xml
 
     <localfile>
-        <location>%WinDir%\System32\LogFiles\W3SVC3\ex%y%m%d.log</location>
+        <location>%SystemDrive%\inetpub\logs\LogFiles\W3SVC1\u_ex%y%m%d.log</location>
         <log_format>iis</log_format>
     </localfile>
 

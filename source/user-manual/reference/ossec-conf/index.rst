@@ -96,6 +96,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`gcp-pubsub <gcp-pubsub>`                                      | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag. In case of adding another ``<ossec_config>`` tag, it may override the values set on the previous tag.
 
@@ -129,6 +131,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    syscheck
    syslog-output
    fluent-forward
+   gcp-pubsub
    wodle-openscap
    wodle-command
    wodle-ciscat

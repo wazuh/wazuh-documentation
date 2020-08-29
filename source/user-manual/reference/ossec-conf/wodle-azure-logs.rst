@@ -208,6 +208,10 @@ Day of the week to run the Azure-Logs. This option is **not compatible** with th
 |                    |   - saturday/sat         |
 +--------------------+--------------------------+
 
+.. note::
+
+	When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
 time
 ^^^^
 
@@ -218,6 +222,10 @@ Time of the day to run the Azure-Logs. It has to be represented in the format *h
 +--------------------+-----------------------+
 | **Allowed values** | Time of day *[hh:mm]* |
 +--------------------+-----------------------+
+
+.. note::
+
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
 
 timeout
 ^^^^^^^

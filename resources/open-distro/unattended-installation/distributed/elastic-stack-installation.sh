@@ -164,18 +164,17 @@ addWazuhrepo() {
 ## Elasticsearch
 installElasticsearch() {
 
-
-    logger "Installing Elasticsearch..."
+    logger "Installing Open Distro for Elasticsearch..."
 
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install elasticsearch -y -q $debug"
-    elif [ $sys_type == "apt-get" ] 
-    then
-        eval "apt-get install elasticsearch -y -q $debug"
+        eval "yum install opendistroforelasticsearch -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch $debug"
+        eval "zypper -n install opendistroforelasticsearch $debug"
+    elif [ $sys_type == "apt-get" ] 
+    then
+        eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -244,7 +243,7 @@ createCertificates() {
     eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug            "
     if [  "$?" != 0  ]
     then
-        echo "Error: certificates were no created"
+        echo "Error: certificates were not created"
         exit 1;
     else
         logger "Certificates created"
@@ -300,6 +299,8 @@ installKibana() {
     else  
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.0_0.0.0.todelete.zip $debug"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
         if [  "$?" != 0  ]
@@ -350,7 +351,7 @@ initializeKibana() {
 
 ## Check nodes
 checkNodes() {
-    head=$(head -n1 config.yml)
+    head=$(head -n1 ~/config.yml)
     if [ "${head}" == "## Multi-node configuration" ]
     then
         master=1
@@ -368,7 +369,7 @@ healthCheck() {
     then
         if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
         then
-            echo "The system must have at least 16Gb of RAM and 4 CPUs"
+            echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."
@@ -377,7 +378,7 @@ healthCheck() {
     then
         if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
         then
-            echo "The system must have at least 4Gb of RAM and 2 CPUs"
+            echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."
