@@ -9,7 +9,7 @@ This section guides through the installation and configuration of the Wazuh serv
 
 The following components will be installed:
 
-- The Wazuh server, including the Wazuh manager as a single-node cluster.
+- The Wazuh server, including the Wazuh manager as a single-node cluster and the Wazuh API.
 
 - Elastic Stack, including Open Distro for Elasticsearch as a single-node cluster, Filebeat, and Kibana including the Wazuh Kibana plugin.
 
