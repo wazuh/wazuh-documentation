@@ -198,7 +198,7 @@ installElasticsearch() {
             cn=$(awk -v RS='' '/cluster.name:/' ~/config.yml)
             echo "${cn}" >> /etc/elasticsearch/elasticsearch.yml   
             mnr="cluster.initial_master_nodes:"
-            rm="-"
+            rm="- "
             mn="${mn//$mnr}"
             mn="${mn//$rm}"
 
@@ -243,7 +243,7 @@ installElasticsearch() {
             createCertificates name ip
         elif [ -n "$c" ]
         then
-            createCertificates IMN DSH 
+            createCertificates IMN DSH pos
         else
             logger "Done"
         fi      
@@ -304,9 +304,9 @@ copyCertificates() {
         echo "entro"
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
-        eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/elasticsearch/certs/ $debug"
-        eval "mv ~/certs/${iname}/${iname}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
-        eval "mv ~/certs/${iname}/${iname}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "cp -R ~/certs/ca/ ~/certs/${IMN[pos]}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${IMN[pos]}/${IMN[pos]}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${IMN[pos]}/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
