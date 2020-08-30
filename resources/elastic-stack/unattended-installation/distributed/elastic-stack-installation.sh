@@ -302,7 +302,6 @@ copyCertificates() {
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
     else
-        echo "entro"
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
         eval "cp -R ~/certs/ca/ ~/certs/${IMN[pos]}/* /etc/elasticsearch/certs/ $debug"
