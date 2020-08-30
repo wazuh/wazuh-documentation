@@ -317,7 +317,7 @@ main() {
         addWazuhrepo
         installWazuh
         installFilebeat           
-        configureFilebeat $ips $password
+        configureFilebeat ips password
     else
         getHelp
     fi
