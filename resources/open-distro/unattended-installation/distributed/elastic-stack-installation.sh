@@ -63,6 +63,7 @@ getHelp() {
    echo "Usage: $0 arguments"
    echo -e "\t-e     | --install-elasticsearch Installs Open Distro for Elasticsearch (cannot be used together with option -k)"
    echo -e "\t-k     | --install-kibana Installs Open Distro for Kibana (cannot be used together with option -e)"
+   echo -e "\t-n     | --node-name Name of the node"   
    echo -e "\t-kip   | --kibana-ip indicates the IP of Kibana. It can be set to 0.0.0.0 which will bind all the availables IPs"
    echo -e "\t-eip   | --elasticsearch-ip Indicates the IP of Elasticsearch. It can be set to 0.0.0.0 which will bind all the availables IPs"
    echo -e "\t-wip   | --wazuh-ip Indicates the IP of Wazuh."
@@ -137,6 +138,10 @@ installPrerequisites() {
     else
         logger "Done"
     fi  
+    certs=~/certs.zip
+    if [ -f "$certs" ]; then
+        eval "unzip ~/certs.zip config.yml $debug"
+    fi    
 
 }
 
@@ -188,7 +193,52 @@ installElasticsearch() {
 
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
         
-        awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml
+        if [ -n "$single" ]
+        then
+            nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+            nn=$(awk -v RS='' '/node.name:/' ~/config.yml)
+            nnr="node.name: "
+            name="${nn//$nnr}"
+            nhr="network.host: "
+            ip="${nh//$nhr}"
+            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+        else
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
+            mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
+            sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+            cn=$(awk -v RS='' '/cluster.name:/' ~/config.yml)
+            echo "${cn}" >> /etc/elasticsearch/elasticsearch.yml   
+            mnr="cluster.initial_master_nodes:"
+            rm="- "
+            mn="${mn//$mnr}"
+            mn="${mn//$rm}"
+
+            shr="discovery.seed_hosts:"
+            sh="${sh//$shr}"
+            sh="${sh//$rm}"
+            echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml   
+            for line in $mn; do
+                    IMN+=(${line})
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+            done
+
+            echo "discovery.seed_hosts:" >> /etc/elasticsearch/elasticsearch.yml   
+            for line in $sh; do
+                    DSH+=(${line})
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+            done
+            for i in "${!IMN[@]}"; do
+            if [[ "${IMN[$i]}" = "${iname}" ]]; then
+                pos="${i}";
+            fi
+            done
+            nip="${DSH[pos]}" 
+            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
+
+        fi        
+        #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml
 
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 $debug"
         eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 $debug"
@@ -219,13 +269,25 @@ installElasticsearch() {
             echo "bootstrap.system_call_filter: false" >> /etc/elasticsearch/elasticsearch.yml
         fi        
 
+        # Create certificates
         if [ -n "$single" ]
         then
-            createCertificates
+            createCertificates name ip
+        elif [ -n "$c" ]
+        then
+            createCertificates IMN DSH pos
         else
             logger "Done"
-        fi
+        fi      
         
+        if [ -n "$single" ]
+        then
+            copyCertificates name
+        else
+            copyCertificates iname
+        fi
+        initializeElastic
+        echo "Done"
     fi
 }
 
@@ -237,21 +299,52 @@ createCertificates() {
     eval "unzip search-guard-tlstool-1.8.zip -d searchguard $debug"
     eval "curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 $debug"
 
-    awk -v RS='' '/## Certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-
+    if [ -n "$single" ]
+    then
+        echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '  - name: "'${name}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '    dn: CN="'${name}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '    ip:' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '      - "'${ip}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+    else 
+        echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        for i in "${!IMN[@]}"; do
+            echo '  - name: "'${IMN[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+            echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+            echo '    ip:' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+            echo '      - "'${DSH[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        done
+    fi
+    awk -v RS='' '/- name: /' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     eval "chmod +x searchguard/tools/sgtlstool.sh $debug"
-    eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug            "
+    eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug"
     if [  "$?" != 0  ]
     then
         echo "Error: certificates were not created"
         exit 1;
     else
         logger "Certificates created"
-        mv /etc/elasticsearch/certs/node-1.pem /etc/elasticsearch/certs/elasticsearch.pem
-        mv /etc/elasticsearch/certs/node-1.key /etc/elasticsearch/certs/elasticsearch.key
-        mv /etc/elasticsearch/certs/node-1_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
-        mv /etc/elasticsearch/certs/node-1_http.key /etc/elasticsearch/certs/elasticsearch_http.key            
+    fi    
+    #awk -v RS='' '/## Certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+}
+
+copyCertificates() {
+
+    if [ -n "$single" ]
+    then
+        eval "mv /etc/elasticsearch/certs/${name}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
+        eval "mv /etc/elasticsearch/certs/${name}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "mv /etc/elasticsearch/certs/${name}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
+        eval "mv /etc/elasticsearch/certs/${name}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"
+    else
+        eval "mv /etc/elasticsearch/certs/${IMN[pos]}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
+        eval "mv /etc/elasticsearch/certs/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
+        eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
+        eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"        
     fi
 
     if [[ -n "$c" ]] || [[ -n "$single" ]]
@@ -259,6 +352,10 @@ createCertificates() {
         tar -cf certs.tar *
         tar --delete -f certs.tar 'searchguard'
     fi
+
+}
+
+initializeElastic() {
 
     logger "Elasticsearch installed."  
 
@@ -280,6 +377,7 @@ createCertificates() {
     fi
 
     logger "Done"
+    exit 0;
 }
 
 ## Kibana
@@ -299,8 +397,6 @@ installKibana() {
     else  
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.0_0.0.0.todelete.zip $debug"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
         if [  "$?" != 0  ]
@@ -460,7 +556,7 @@ main() {
             installPrerequisites
             addWazuhrepo   
             checkNodes         
-            installElasticsearch
+            installElasticsearch iname
             if [ -n "$c" ]
             then
                 createCertificates
