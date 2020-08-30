@@ -235,7 +235,13 @@ installElasticsearch() {
             fi
             done
             nip="${DSH[pos]}" 
-            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
+            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml  
+
+            echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml        
+            for line in $mn; do
+                    IMN+=(${line})
+                    echo '        - CN="'${IMN[line]}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml    
+            done                    
 
         fi        
         #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml
@@ -275,7 +281,7 @@ installElasticsearch() {
             createCertificates name ip
         elif [ -n "$c" ]
         then
-            createCertificates IMN DSH pos
+            createCertificates IMN DSH
         else
             logger "Done"
         fi      
@@ -284,9 +290,9 @@ installElasticsearch() {
         then
             copyCertificates name
         else
-            copyCertificates iname
+            copyCertificates iname pos
         fi
-        initializeElastic
+        initializeElastic nip
         echo "Done"
     fi
 }
@@ -317,7 +323,8 @@ createCertificates() {
             echo '      - "'${DSH[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         done
     fi
-    awk -v RS='' '/- name: /' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+    nano /etc/elasticsearch/certs/searchguard/search-guard.yml
+    awk -v RS='' '/# Clients certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     eval "chmod +x searchguard/tools/sgtlstool.sh $debug"
     eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug"
     if [  "$?" != 0  ]
@@ -364,8 +371,8 @@ initializeElastic() {
     startService "elasticsearch"
     logger "Initializing Elasticsearch..."
 
-    elk=$(awk -F'network.host: ' '{print $2}' ~/config.yml | xargs)
-    until $(curl -XGET https://${elk}:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
+    
+    until $(curl -XGET https://${nip}:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
         echo -ne $char
         sleep 10
     done    
@@ -500,6 +507,11 @@ main() {
                 c=1  
                 shift 1
                 ;;                                  
+            "-n"|"--node-name") 
+                iname=$2  
+                shift
+                shift
+                ;;                     
             "-k"|"--install-kibana") 
                 k=1          
                 shift 1
@@ -557,10 +569,10 @@ main() {
             addWazuhrepo   
             checkNodes         
             installElasticsearch iname
-            if [ -n "$c" ]
-            then
-                createCertificates
-            fi
+            # if [ -n "$c" ]
+            # then
+            #     createCertificates
+            # fi
         fi
         if [ -n "$k" ]
         then
