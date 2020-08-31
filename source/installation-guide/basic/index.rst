@@ -51,7 +51,7 @@ Clustered components
 Deployment types
 ----------------
 
-The Installation guide is divided into two independent sections, :ref:`all-in-one deployment <basic_all_in_one_index>` and :ref:`distributed deployment <basic_distributed_index>` according to the chosen configuration. Information about the minimal hardware requirements for the different types deployments types can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installation:
+The Installation guide is divided into two independent sections, :ref:`all-in-one deployment <basic_all_in_one_index>` and :ref:`distributed deployment <basic_distributed_index>` according to the chosen configuration. Information about the minimal hardware requirements for the different deployments types can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installation:
 
 - ``Unattended``: Automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 

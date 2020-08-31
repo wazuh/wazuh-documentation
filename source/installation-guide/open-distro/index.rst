@@ -46,10 +46,10 @@ Clustered components
 
 - ``Multi-node cluster``: This term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh servers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
 
-Types of deployment
--------------------
+Deployment types
+----------------
 
-The Installation guide is divided into two independent sections, :ref:`all-in-one deployment <all_in_one_index>` and  :ref:`distributed deployment <distributed_index>`. according to the chosen configuration. Information about the minimal hardware requirements for the different types of deployments can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installation:
+The Installation guide is divided into two independent sections, :ref:`all-in-one deployment <all_in_one_index>` and  :ref:`distributed deployment <distributed_index>`. according to the chosen configuration. Information about the minimal hardware requirements for the different deployments types can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installation:
 
 - ``Unattended``: Automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 
