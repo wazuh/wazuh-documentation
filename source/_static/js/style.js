@@ -586,7 +586,6 @@ $(function() {
     let lastResult = null;
     let splitURL = null;
     const configAdd = {childList: true};
-    const configAtt = {attributes: true, attributeOldValue: true};
     let observerResults = null;
     let observerResultList = null;
     let observerResultText = null;
@@ -621,7 +620,7 @@ $(function() {
           observerResultList = new MutationObserver(addedResult);
           observerResultList.observe(ulSearch[0], configAdd);
           observerResultText = new MutationObserver(changeResultText);
-          observerResultText.observe($('#search-results > p')[0], configAtt);
+          observerResultText.observe($('#search-results > p')[0], configAdd);
         }
       }
     };
@@ -629,7 +628,7 @@ $(function() {
     /* Replaces the result message */
     const changeResultText = function(mutationsList, observer) {
       for (i = 0; i < mutationsList.length; i++) {
-        if (mutationsList[i].type === 'attributes') {
+        if (mutationsList[i].type === 'childList') {
           observerResultText.disconnect();
           const totalResults = $('ul.search li').length;
           const excludedResults = $('ul.search li.excluded-search-result').length;
