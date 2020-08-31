@@ -16,7 +16,7 @@ This document will explain how to install the Elastic Stack components in a sing
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, refer to `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. 
 
 Prerequisites
 -------------

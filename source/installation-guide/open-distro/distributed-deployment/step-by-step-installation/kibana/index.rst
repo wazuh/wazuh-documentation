@@ -8,7 +8,7 @@
 Kibana
 ======
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More information can be found at `Kibana site <https://opendistro.github.io/for-elasticsearch-docs/docs/kibana/>`_.
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. 
 
 It is recommended to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
 
@@ -80,6 +80,14 @@ Kibana installation and configuration
 #. Download the Kibana configuration file:
 
     .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
+
+
+#. Update the ``optimize`` and ``plugins`` directories permissions:
+
+    .. code-block:: console
+    
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins    
 
 
 #. Install the Wazuh Kibana plugin:

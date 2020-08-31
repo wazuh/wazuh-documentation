@@ -6,7 +6,7 @@ Unattended installation
 This section will explain how to install Wazuh on a single host by using a script that will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages.
 The script will perform a health-check verifying that the available system resources meet the minimal requirements. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
-The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ will be used to generate the certificates for protecting data in the Elastic Stack.
+The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the Search Guard offline TLS tool will be used to generate the certificates for protecting data in the Elastic Stack.
 
 Installing Wazuh
 ----------------
@@ -20,7 +20,7 @@ Download and run the script:
 
     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-The script will perform an health-check to ensure that the host has enough resources to garantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+The script will perform an health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
 
 .. code-block:: console
 
@@ -55,13 +55,13 @@ In order to use Wazuh Kibana plugin properly, the script adds the following extr
 
 Apart from the extra users, there are three extra roles added. These roles are in charge of giving the right permissions to the users:
 
-- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indices. This user is one of the Open Distro for Elasticsearch `default users <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_ and its purpose is to perform tasks such as making cluster-wide searches, indexing monitoring, or writing in indices.
+- ``wazuh_ui`` gives enough privileges to ``kibanaserver`` user to operate with the Wazuh’s indices. This user is one of the Open Distro for Elasticsearch default users and its purpose is to perform tasks such as making cluster-wide searches, indexing monitoring, or writing in indices.
 
 - ``wazuh_ui_user`` provides ``wazuh_user`` ability to read Wazuh’s indices.
 
 - ``wazuh_ui_admin`` allows ``wazuh_admin`` to perform reading, writing, management, and indexing tasks on the Wazuh indices.
 
-These users and roles are designed to operate along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be run. To learn more about this process, visit the `Open Distro for Elasticsearch documentation <https://opendistro.github.io/for-elasticsearch-docs/docs/security-access-control/users-roles/>`_.
+These users and roles are designed to operate along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script will have to be run. 
 
 Customizing the installation
 ----------------------------
