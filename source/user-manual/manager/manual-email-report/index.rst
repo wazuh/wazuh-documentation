@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _manual_email_report:
 
@@ -41,7 +41,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
       <global>
           <email_notification>yes</email_notification>
           <email_to>me@test.com</email_to>
-          <smtp_server>mail.test.com..</smtp_server>
+          <smtp_server>mail.test.com</smtp_server>
           <email_from>wazuh@test.com</email_from>
       </global>
       ...
