@@ -1,4 +1,6 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
+
+.. _cluster_agents_connections:
 
 Agents connections
 ======================
@@ -115,12 +117,12 @@ Pointing agents to the cluster (Failover mode)
             <server>
                 <address>172.0.0.4</address>
                 <port>1514</port>
-                <protocol>udp</protocol>
+                <protocol>tcp</protocol>
             </server>
             <server>
                 <address>172.0.0.5</address>
                 <port>1514</port>
-                <protocol>udp</protocol>
+                <protocol>tcp</protocol>
             </server>
             <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
             <notify_time>10</notify_time>

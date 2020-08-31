@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wazuh_server_installation:
 
@@ -30,7 +30,7 @@ There are several options for installing the Wazuh server depending on the opera
 +-------------------------------+---------------------------------------------------------------+
 | SUSE                          | :ref:`12 <wazuh_server_suse>`                                 |
 +-------------------------------+---------------------------------------------------------------+
-| Ubuntu                        | :ref:`12.10 or greater <wazuh_server_ubuntu>`                 |
+| Ubuntu                        | :ref:`12.04 or greater <wazuh_server_ubuntu>`                 |
 +-------------------------------+---------------------------------------------------------------+
 
 

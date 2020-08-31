@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _reference_ossec_client:
 
@@ -32,6 +32,8 @@ Server subsection options
 - `address`_
 - :ref:`port <server_port>`
 - :ref:`protocol <server_protocol>`
+- `max_retries`_
+- `retry_interval`_
 
 .. _server_address:
 
@@ -67,10 +69,40 @@ protocol
 Specifies the protocol to use when connecting to the manager.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
+
+.. _server_max_retries:
+
+max_retries
+^^^^^^^^^^^
+
+.. versionadded:: 3.13.1
+
+Number of connection retries.
+
++--------------------+--------------------+
+| **Default value**  | 5                  |
++--------------------+--------------------+
+| **Allowed values** | 1 to 1.000.000.000 |
++--------------------+--------------------+
+
+.. _server_retry_interval:
+
+retry_interval
+^^^^^^^^^^^^^^
+
+.. versionadded:: 3.13.1
+
+Time interval between connection attempts (seconds).
+
++--------------------+--------------------+
+| **Default value**  | 5                  |
++--------------------+--------------------+
+| **Allowed values** | 1 to 1.000.000.000 |
++--------------------+--------------------+
 
 Options
 -------
@@ -146,7 +178,7 @@ protocol
 Specifies the protocol to use when connecting to manager.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
@@ -255,6 +287,8 @@ Sample configuration
         <address>192.168.1.100</address>
         <port>1514</port>
         <protocol>tcp</protocol>
+        <max_retries>5</max_retries>
+        <retry_interval>5</retry_interval>
       </server>
       <server>
         <address>example.hostname</address>
