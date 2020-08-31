@@ -755,5 +755,5 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 Conclusion
 ^^^^^^^^^^
-
 The provided examples should help appreciating the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
+
