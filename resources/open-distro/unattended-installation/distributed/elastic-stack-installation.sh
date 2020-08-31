@@ -139,9 +139,16 @@ installPrerequisites() {
         logger "Done"
     fi  
     certs=~/certs.tar
-    if [ -f "$certs" ]; then
-        eval "tar -xf certs.tar config.yml $debug"
-    fi    
+    conf=~/config.yml
+    if [ ! -f "$conf" ]
+    then
+        if [ -f "$certs" ]; then
+            eval "tar -xf certs.tar config.yml $debug"
+        else
+            echo "No configuration file found."
+            exit 1;
+        fi    
+    fi
 
 }
 
@@ -200,10 +207,13 @@ installElasticsearch() {
             nnr="node.name: "
             name="${nn//$nnr}"
             nhr="network.host: "
-            ip="${nh//$nhr}"
+            nip="${nh//$nhr}"
             echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+
+            echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml        
+            echo '        - CN='$name',OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml             
         else
             echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
             mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
@@ -311,7 +321,7 @@ createCertificates() {
         echo '  - name: "'${name}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo '    dn: CN="'${name}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo '    ip:' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '      - "'${ip}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '      - "'${nip}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     else 
         echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml       
@@ -384,7 +394,7 @@ initializeElastic() {
     if [ -n "$single" ]
     then
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ $debug"
-        eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h ${elk} $debug"
+        eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h ${nip} $debug"
     fi
 
     logger "Done"
@@ -397,9 +407,9 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana $debug"
+        eval "zypper -n install opendistroforelasticsearch-kibana $debug"
     else
-        eval "$sys_type install kibana -y -q $debug"
+        eval "$sys_type install opendistroforelasticsearch-kibana -y -q $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -416,6 +426,10 @@ installKibana() {
             exit 1;
         fi     
         eval "mkdir /etc/kibana/certs $debug"
+        
+        eval "mv ~/certs.tar /etc/kibana/certs/ $debug"
+        eval "cd /etc/kibana/certs/ $debug"
+        eval "tar -xf certs.tar kibana.pem kibana.key root-ca.pem $debug"
 
         echo "server.host: "$kip"" >> /etc/kibana/kibana.yml
         echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
