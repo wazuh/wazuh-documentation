@@ -18,6 +18,7 @@ Subsections
 -----------
 
 - `server`_
+- `enrollment`_
 
 server
 ^^^^^^
@@ -298,4 +299,209 @@ Sample configuration
       <notify_time>30</notify_time>
       <time-reconnect>120</time-reconnect>
       <auto_restart>yes</auto_restart>
+    </client>
+
+enrollment
+^^^^^^^^^^
+
+.. versionadded:: 4.0
+
+Configures the connection parameters for the agent enrollment.
+
+Options
+-------
+
+- `enabled`_
+- `manager_address`_
+- :ref:`port <enrollment_port>`
+- `agent_name`_
+- `groups`_
+- `agent_address`_
+- `ssl_cipher`_
+- `server_ca_path`_
+- `agent_certificate_path`_
+- `agent_key_path`_
+- `authorization_pass`_
+- `auto_method`_
+- `delay_after_enrollment`_
+- `use_source_ip`_
+
+enabled
+^^^^^^^
+
+Enables/disables agent enrollment.
+
++--------------------+----------------------------------+
+| **Default value**  | yes                              |
++--------------------+----------------------------------+
+| **Allowed values** | yes or no                        |
++--------------------+----------------------------------+
+
+manager_address
+^^^^^^^^^^^^^^^
+
+Hostname or IP of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
+
++--------------------+---------------------------------------+
+| **Default value**  | n/a                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | string -  Should be valid IP/Hostname |
++--------------------+---------------------------------------+
+
+.. _enrollment_port:
+
+port
+^^^^
+
+Specifies the port on the manager to send enrollment request.  This must match the associated listening port configured on the Wazuh manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 1515                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any port number from 0 to 65535 is allowed. |
++--------------------+---------------------------------------------+
+
+agent_name
+^^^^^^^^^^
+
+Agent name that will be used for enrollment. Only alphanumeric characters, "-", "_" or "." are allowed, and the minimum length is two characters.
+
++--------------------+---------------------------------------------+
+| **Default value**  | Hostname of the machine.                    |
++--------------------+---------------------------------------------+
+| **Allowed values** | string - Registration name for the agent.   |
++--------------------+---------------------------------------------+
+
+groups
+^^^^^^
+
+Groups name to which the agent belongs.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | string - Name of one or many valid groups.  |
++--------------------+---------------------------------------------+
+
+agent_address
+^^^^^^^^^^^^^
+
+Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
+
++--------------------+---------------------------------------------+
+| **Default value**  | src                                         |
++--------------------+---------------------------------------------+
+| **Allowed values** | string - Valid IP.                          |
++--------------------+---------------------------------------------+
+
+ssl_cipher
+^^^^^^^^^^
+
+Override SSL used ciphers.
+
++--------------------+---------------------------------------------+
+| **Default value**  | DEFAULT_CIPHERS                             |
++--------------------+---------------------------------------------+
+| **Allowed values** | valid ssl ciphers.                          |
++--------------------+---------------------------------------------+
+
+server_ca_path
+^^^^^^^^^^^^^^
+
+Used for manager verification. If no CA certificate is set server will not be verified.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid CA certificate.             |
++--------------------+---------------------------------------------+
+
+agent_certificate_path
+^^^^^^^^^^^^^^^^^^^^^^
+
+Required when agent verification is enabled in the manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid agent certificate file.     |
++--------------------+---------------------------------------------+
+
+agent_key_path
+^^^^^^^^^^^^^^
+
+Required when agent verification is enabled in the manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Path to a valid agent key file.             |
++--------------------+---------------------------------------------+
+
+authorization_pass
+^^^^^^^^^^^^^^^^^^
+
+Required when enrollment is using password verification. The password must match that of the manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | NULL                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Password string.                            |
++--------------------+---------------------------------------------+
+
+auto_method
+^^^^^^^^^^^
+
+Auto negotiates the most secure common SSL/TLS method with the manager, use "yes" for auto negotiate or "no" for TLS v1.2 only.
+
++--------------------+---------------------------------------------+
+| **Default value**  | no                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | yes or no                                   |
++--------------------+---------------------------------------------+
+
+delay_after_enrollment
+^^^^^^^^^^^^^^^^^^^^^^
+
+Time that agentd should wait after a successful registration.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 20                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | number of seconds                           |
++--------------------+---------------------------------------------+
+
+use_source_ip
+^^^^^^^^^^^^^
+
+Force manager to compute IP from agent message.
+
++--------------------+-------------------------------------+
+| **Default value**  | no                                  |
++--------------------+-------------------------------------+
+| **Allowed values** | yes or no                           |
++--------------------+-------------------------------------+
+
+Sample configuration
+--------------------
+
+.. code-block:: xml
+
+    <client>
+      <enrollment>
+        <enabled>yes</enabled>
+        <manager_address>192.168.1.100</manager_address>
+        <port>1515</port>
+        <agent_name>agent</agent_name>
+        <groups>Group1</groups>
+        <agent_address>192.168.0.110</agent_address>
+        <ssl_cipher>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ssl_cipher>
+        <server_ca_path>/path/to/server_ca</server_ca_path>
+        <agent_certificate_path>/path/to/agent.cert</agent_certificate_path>
+        <agent_key_path>/path/to/agent.key</agent_key_path>
+        <authorization_pass>TopSecret</authorization_pass>
+        <auto_method>no</auto_method>
+        <delay_after_enrollment>20</delay_after_enrollment>
+        <use_source_ip>no</use_source_ip>
+      </enrollment>
     </client>
