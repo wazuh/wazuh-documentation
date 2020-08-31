@@ -138,17 +138,16 @@ installPrerequisites() {
     else
         logger "Done"
     fi  
-    certs=~/certs.tar
-    conf=~/config.yml
-    if [ ! -f "$conf" ]
-    then
-        if [ -f "$certs" ]; then
-            eval "tar -xf certs.tar config.yml $debug"
-        else
-            echo "No configuration file found."
-            exit 1;
-        fi    
-    fi
+    
+    # if [ ! -f "~/config.yml" ]
+    # then
+    #     if [ -f "~/certs.tar" ]; then
+    #         eval "tar -xf certs.tar config.yml $debug"
+    #     else
+    #         echo "No configuration file found."
+    #         exit 1;
+    #     fi    
+    # fi
 
 }
 
@@ -433,31 +432,35 @@ installKibana() {
 
         echo "server.host: "$kip"" >> /etc/kibana/kibana.yml
         echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
+        
         logger "Kibana installed."
         
-        checkKibanacerts kc
-        if [ "$kc" -eq "0" ]
-        then
-            exit
-        else
-            initializeKibana
-        fi
+        copyKibanacerts
+        initializeKibana
         echo -e
     fi
 
 }
 
-checkKibanacerts() {
+copyKibanacerts() {
+
     if [[ -f "/etc/elasticsearch/certs/kibana.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana.key" ]]
     then
-        kc=1
+        eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ $debug"
+    elif [ -f "~/certs.tar" ]
+    then
+        eval "mv ~/certs.tar /etc/kibana/certs/ $debug"
+        eval "cd /etc/kibana/certs/ $debug"
+        eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem $debug"
     else
-        kc=0
+        echo "No certificates found. Could not initialize Kibana"
+        exit 1;
     fi
+
 }
 
 initializeKibana() {
-    eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ $debug"
+
     # Start Kibana
     startService "kibana"   
     logger "Initializing Kibana (this may take a while)" 
