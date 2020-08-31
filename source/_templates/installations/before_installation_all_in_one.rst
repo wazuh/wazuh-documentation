@@ -11,7 +11,7 @@
                     # yum install curl unzip wget libcap && yum install java-11-openjdk-devel
                     # export JAVA_HOME=/usr/ 
 
-            In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.
+            In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.
 
 
         .. group-tab:: APT
@@ -49,7 +49,7 @@
 
                     # apt install openjdk-11-jdk && export JAVA_HOME=/usr/    
 
-                In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.
+                In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.
 
         .. group-tab:: ZYpp
 
@@ -60,7 +60,7 @@
                     # zypper install curl unzip wget libcap && zypper install java-11-openjdk-devel
                     # export JAVA_HOME=/usr/ 
 
-            In case JDK 11 is not availabe for the operating system used, alternativaly, `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_ can be used to install the package ``adoptopenjdk-11-hotspot``.                
-
+            In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.    
+            
 .. End of include file
 

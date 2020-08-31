@@ -85,9 +85,9 @@ Wazuh server master node
 #. .. include:: ../../../../../_templates/installations/basic/wazuh/common/configure_wazuh_master_node.rst
 
 
-#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-    .. include:: ../../../../../_templates/installations/basic/wazuh/common/restart_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
 Wazuh server worker nodes
@@ -97,46 +97,13 @@ Wazuh server worker nodes
 #. .. include:: ../../../../../_templates/installations/basic/wazuh/common/configure_wazuh_worker_node.rst
 
 
-#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-    .. include:: ../../../../../_templates/installations/basic/wazuh/common/restart_wazuh_manager.rst
+    .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
 
 #. .. include:: ../../../../../_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
 
-
-Installing the Wazuh API
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Before starting, note that the Wazuh API has to be installed only in the Wazuh master node and not in the Wazuh worker nodes.
-
-Although the minimum NodeJS version needed for Wazuh API is 4.6.1, it is recommended to install the most recent available version for each Operating System. This guide uses the 10.x version, but the most recent one can be installed.
-
-
-.. tabs::
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_api.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/install_wazuh_api.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_api.rst
-
-
-.. note::
-  It is strongly recommended to secure the API. The following document :ref:`securing_api` explains how to enable HTTPS communication, change the default user and password and more.
 
 .. _wazuh_server_multi_node_filebeat:
 
@@ -227,7 +194,6 @@ Filebeat installation and configuration
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/configure_filebeat.rst
 
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Enable and start the Filebeat service:
 

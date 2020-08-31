@@ -21,7 +21,7 @@ Some extra packages are needed for the installation, such us ``curl`` or ``unzip
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. 
+Elasticsearch is a highly scalable full-text search and analytics engine.  
 
 
 Adding the Elastic Stack repository
@@ -92,7 +92,7 @@ Certificates creation and deployment
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-#. The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+#. The certificates can be created using the elasticsearch-certutil tool:
 
     .. code-block:: console
 
@@ -190,29 +190,33 @@ Adding the Wazuh repository
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install the Wazuh manager package:
+#. Install the Wazuh manager package:
 
-.. tabs::
+    .. tabs::
 
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+      .. group-tab:: Yum
 
 
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
 
 
 
-  .. group-tab:: ZYpp
+      .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
 
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
+
+
+#. Enable and start the Wazuh manager service:
+
+    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 .. _basic_wazuh_server_packages_filebeat:
 
@@ -274,7 +278,6 @@ Filebeat installation and configuration
 
     .. include:: ../../../_templates/installations/basic/elastic/common/configure_filebeat_aio.rst
 
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Copy the certificates into ``/etc/filebeat/certs/``
 
@@ -351,6 +354,13 @@ Kibana installation and configuration
 #. Download the Kibana configuration file:
 
     .. include:: ../../../_templates/installations/basic/elastic/common/configure_kibana_all_in_one.rst
+
+#. Update the ``optimize`` and ``plugins`` directories permissions:
+
+    .. code-block:: console
+    
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 

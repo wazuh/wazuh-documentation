@@ -60,34 +60,40 @@ Adding the Wazuh repository
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+#. Install the Wazuh manager package:
+
+    .. tabs::
+
+      .. group-tab:: Yum
 
 
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
-
-
-
-  .. group-tab:: APT
-
-
-    .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
 
 
 
-  .. group-tab:: ZYpp
+      .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
+        .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
+
+
+#. Enable and start the Wazuh manager service:
+
+    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
 
 Installing Elasticsearch
 ------------------------
 
-Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features. For more information, refer to `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch-docs/>`_.
+Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features. 
 
 .. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
 
@@ -281,6 +287,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 #. Download the Kibana configuration file:
 
     .. include:: ../../../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
+
+#. Update the ``optimize`` and ``plugins`` directories permissions:
+
+    .. code-block:: console
+    
+      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
