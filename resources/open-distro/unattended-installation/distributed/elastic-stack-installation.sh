@@ -138,9 +138,9 @@ installPrerequisites() {
     else
         logger "Done"
     fi  
-    certs=~/certs.zip
+    certs=~/certs.tar
     if [ -f "$certs" ]; then
-        eval "unzip ~/certs.zip config.yml $debug"
+        eval "tar -xf certs.tar config.yml $debug"
     fi    
 
 }
@@ -238,10 +238,9 @@ installElasticsearch() {
             echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml  
 
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml        
-            for line in $mn; do
-                    IMN+=(${line})
-                    echo '        - CN="'${IMN[line]}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml    
-            done                    
+            for i in "${!IMN[@]}"; do
+                    echo '        - CN='${IMN[i]}',OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml    
+            done
 
         fi        
         #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml
@@ -315,7 +314,7 @@ createCertificates() {
         echo '      - "'${ip}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     else 
         echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml       
         for i in "${!IMN[@]}"; do
             echo '  - name: "'${IMN[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
             echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
@@ -323,7 +322,6 @@ createCertificates() {
             echo '      - "'${DSH[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         done
     fi
-    nano /etc/elasticsearch/certs/searchguard/search-guard.yml
     awk -v RS='' '/# Clients certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     eval "chmod +x searchguard/tools/sgtlstool.sh $debug"
     eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug"
@@ -347,6 +345,11 @@ copyCertificates() {
         eval "mv /etc/elasticsearch/certs/${name}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"
     else
+        if [ -z "$c" ]
+        then
+            mv ~/certs.tar /etc/elasticsearch/certs
+            tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}.key ${IMN[pos]}_http.pem ${IMN[pos]}_http.key root-ca.pem  
+        fi
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
@@ -356,6 +359,7 @@ copyCertificates() {
 
     if [[ -n "$c" ]] || [[ -n "$single" ]]
     then
+        mv ~/config.yml /etc/elasticsearch/certs/
         tar -cf certs.tar *
         tar --delete -f certs.tar 'searchguard'
     fi
