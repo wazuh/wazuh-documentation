@@ -11,6 +11,8 @@ opendistro_security.ssl.http.enabled: true
 opendistro_security.ssl.http.pemcert_filepath: /etc/elasticsearch/certs/elasticsearch_http.pem
 opendistro_security.ssl.http.pemkey_filepath: /etc/elasticsearch/certs/elasticsearch_http.key
 opendistro_security.ssl.http.pemtrustedcas_filepath: /etc/elasticsearch/certs/root-ca.pem
+opendistro_security.authcz.admin_dn:
+- CN=admin,OU=Docu,O=Wazuh,L=California,C=US
 
 
 opendistro_security.audit.type: internal_elasticsearch
