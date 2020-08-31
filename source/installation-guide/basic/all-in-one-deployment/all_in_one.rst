@@ -21,7 +21,7 @@ Some extra packages are needed for the installation, such us ``curl`` or ``unzip
 Installing Elasticsearch
 ------------------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_. 
+Elasticsearch is a highly scalable full-text search and analytics engine.  
 
 
 Adding the Elastic Stack repository
@@ -92,7 +92,7 @@ Certificates creation and deployment
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-#. The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+#. The certificates can be created using the elasticsearch-certutil tool:
 
     .. code-block:: console
 
@@ -278,7 +278,6 @@ Filebeat installation and configuration
 
     .. include:: ../../../_templates/installations/basic/elastic/common/configure_filebeat_aio.rst
 
-    To learn more, please see  Elasticsearch output `configuration options <https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_configuration_options_11>`_ section.
 
 #. Copy the certificates into ``/etc/filebeat/certs/``
 

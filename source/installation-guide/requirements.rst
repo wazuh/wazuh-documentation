@@ -65,7 +65,7 @@ In order to determine if a Wazuh server requires more resources the following fi
 
 In the ``analysid.state`` file the variable  ``events_dropped`` indicates whether events are being dropped due to lack of resources. Similarly ``ossec-remoted.state`` has the variable ``discarded_count``, that indicates if messages from the agents have been discarded.  These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 
 
-To monitor if the Open Distro for Elasticsearch or the Elastic Stack environment is working properly, there are tools available like `performance analyzer <https://opendistro.github.io/for-elasticsearch-docs/docs/pa/>`_ for Open Distro for Elasticsearch and `cluster monitoring <https://www.elastic.co/guide/en/elasticsearch/reference/7.9/monitor-elasticsearch-cluster.html>`_  for Elastic Stack. 
+To monitor if the Open Distro for Elasticsearch or the Elastic Stack environment is working properly, there are tools available like performance analyzer for Open Distro for Elasticsearch and cluster monitoring for Elastic Stack. 
 
 In case that scaling is needed, the following sections describe how to make a distributed deployment with the selected configuration: :ref:`Wazuh and Open Distro for Elasticsearch <distributed_index>` or :ref:`Wazuh and Elastic Stack  <basic_distributed_index>`.  
 

@@ -15,12 +15,12 @@ Elasticsearch flavor
 
 The user can select among these two flavors of Elasticsearch the one that better suits their environment:
 
-- `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_ is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community driven.
+- Open Distro for Elasticsearch is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community driven.
 
-- `Elastic Stack <https://www.elastic.co/elastic-stack>`_ includes Elasticsearch, Kibana and Filebeat. In this installation guide the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
+- Elastic Stack includes Elasticsearch, Kibana and Filebeat. In this installation guide the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
 
-Type of deployment
-------------------
+Deployment types
+----------------
 
 Two types of deployments can be made: 
 
@@ -31,7 +31,7 @@ Two types of deployments can be made:
 Type of installation
 ---------------------
 
-Once the desired configuration is selected the user can choose between two types of installations:
+Once the desired configuration is selected the user can choose between two types of installation:
 
 - Unattended installation: Done using an automated script.
 - Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.

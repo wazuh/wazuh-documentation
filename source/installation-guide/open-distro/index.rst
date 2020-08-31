@@ -8,9 +8,9 @@ Wazuh and Open Distro for Elasticsearch
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh and `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_  which is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. 
+This section aims to guide the user through the process of installing Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. 
 
-One of two types of deployments may be chosen depending on the environment where these components will be installed: :ref:`All-in-one <all_in_one_index>` or a :ref:`Distributed <distributed_index>`.
+One of two types of deployments may be chosen depending on the environment where these components will be installed: :ref:`all-in-one <all_in_one_index>` or a :ref:`distributed <distributed_index>`.
 
 Wazuh components
 ----------------
@@ -49,7 +49,7 @@ Clustered components
 Types of deployment
 -------------------
 
-The Installation guide is divided into two independent sections, :ref:`All-in-one deployment <all_in_one_index>` and  :ref:`Distributed deployment <distributed_index>`. according to the chosen configuration. Information about the minimal hardware requirements for the different types of deployments can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installations:
+The Installation guide is divided into two independent sections, :ref:`all-in-one deployment <all_in_one_index>` and  :ref:`distributed deployment <distributed_index>`. according to the chosen configuration. Information about the minimal hardware requirements for the different types of deployments can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installation:
 
 - ``Unattended``: Automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 

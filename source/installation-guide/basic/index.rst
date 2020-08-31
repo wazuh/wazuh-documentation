@@ -8,9 +8,9 @@ Wazuh and Elastic Stack
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh and `Elastic Stack <https://www.elastic.co/elastic-stack>`_. In this installation guide the basic license option of Elastic Stack will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
+This section aims to guide the user through the process of installing Wazuh. In this installation guide the basic license option of Elastic Stack will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
 
-One of two types of deployments may be chosen depending on the environment where these components will be installed: :ref:`All-in-one <basic_all_in_one_index>` or a :ref:`Distributed <basic_distributed_index>`.
+One of two types of deployments may be chosen depending on the environment where these components will be installed: :ref:`all-in-one <basic_all_in_one_index>` or a :ref:`distributed <basic_distributed_index>`.
 
 
 Wazuh components
@@ -48,10 +48,10 @@ Clustered components
 - ``Multi-node cluster``: This term is used for referring to those components that are installed in two or more separated servers and that are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh servers installed on them that synchronize their data with each other. The same definition can be applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching. With the multi-node clusters Wazuh infrastructure can scale as much as needed.
 
 
-Types of deployment
--------------------
+Deployment types
+----------------
 
-The Installation guide is divided into two independent sections, :ref:`All-in-one deployment <basic_all_in_one_index>` and :ref:`Distributed deployment <basic_distributed_index>` according to the chosen configuration. Information about the minimal hardware requirements for the different types of deployments can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installations:
+The Installation guide is divided into two independent sections, :ref:`all-in-one deployment <basic_all_in_one_index>` and :ref:`distributed deployment <basic_distributed_index>` according to the chosen configuration. Information about the minimal hardware requirements for the different types deployments types can be found :ref:`here <installation_requirements>`. In each section, the user can choose between two types of installation:
 
 - ``Unattended``: Automated installation. Requires the initial input of the information needed to accomplish the process using a script.
 
