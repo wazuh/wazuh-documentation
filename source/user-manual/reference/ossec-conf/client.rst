@@ -69,7 +69,7 @@ protocol
 Specifies the protocol to use when connecting to the manager.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
@@ -178,7 +178,7 @@ protocol
 Specifies the protocol to use when connecting to manager.
 
 +--------------------+----------+
-| **Default value**  | udp      |
+| **Default value**  | tcp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
