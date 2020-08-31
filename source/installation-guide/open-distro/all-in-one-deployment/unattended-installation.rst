@@ -20,7 +20,7 @@ Download and run the script:
 
     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-The script will perform an health-check to ensure that the host has enough resources to garantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+The script will perform an health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
 
 .. code-block:: console
 
