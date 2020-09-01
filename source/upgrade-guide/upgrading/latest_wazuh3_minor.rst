@@ -32,8 +32,8 @@ c) OpenSUSE:
 
     # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-Upgrade the Wazuh manager and API
-----------------------------------
+Upgrade the Wazuh manager
+-------------------------
 
 a) CentOS/RHEL/Fedora:
 
