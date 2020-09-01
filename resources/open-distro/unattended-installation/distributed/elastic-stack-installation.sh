@@ -75,6 +75,28 @@ getHelp() {
    exit 1 # Exit script after printing help
 }
 
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -n "$e" ]
+    then
+        if [ -f ~/config.yml ]
+        then
+            echo "Configuration file found. Starting the installation..."
+        else
+            if [ -f ~/certs.tar ]
+            then
+                echo "Certificates file found. Starting the installation..."
+                eval "tar -xf certs.tar config.yml $debug"
+            else
+                echo "No configuration file found."
+                exit 1;
+            fi
+        fi
+    fi    
+
+}
+
 
 ## Install the required packages for the installation
 installPrerequisites() {
@@ -138,16 +160,6 @@ installPrerequisites() {
     else
         logger "Done"
     fi  
-    
-    # if [ ! -f "~/config.yml" ]
-    # then
-    #     if [ -f "~/certs.tar" ]; then
-    #         eval "tar -xf certs.tar config.yml $debug"
-    #     else
-    #         echo "No configuration file found."
-    #         exit 1;
-    #     fi    
-    # fi
 
 }
 
@@ -585,7 +597,8 @@ main() {
                 echo "Health-check ignored."    
             else
                 healthCheck e k         
-            fi           
+            fi     
+            checkConfig      
             installPrerequisites
             addWazuhrepo   
             checkNodes         
