@@ -7,7 +7,7 @@
     # mkdir /etc/elasticsearch/certs
     # cd /etc/elasticsearch/certs
 
-* Download the `Search Guard offline TLS tool <https://docs.search-guard.com/latest/offline-tls-tool>`_ to create the certificates:
+* Download the Search Guard offline TLS tool to create the certificates:
 
   .. code-block:: console
 
@@ -29,7 +29,7 @@
 
   .. code-block:: console
 
-    # ./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
+    #  /etc/elasticsearch/certs/searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
 
 
 * Once the certificates have been created, remove the unnecessary files:
