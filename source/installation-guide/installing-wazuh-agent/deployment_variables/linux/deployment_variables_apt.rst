@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _deployment_variables_apt:
 
@@ -17,7 +17,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
 +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_MANAGER_PORT             |  Specifies the manager’s connection port. See :ref:`port <server_port>`.                                                                                                          |
 +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP. See :ref:`protocol <server_protocol>`.                                   |
+|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is TCP. See :ref:`protocol <server_protocol>`.                                   |
 +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_SERVER      |  Specifies the Wazuh registration server, used for the agent registration. See :ref:`agent-auth options  <agent-auth>`.                                                           |
 +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -84,4 +84,4 @@ Examples:
      # WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
           WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
 
-.. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`agent-verification-with-host-validation` section.
+.. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`Registration Service with host verification - Agent verification with host validation <host-verification-registration>` section.

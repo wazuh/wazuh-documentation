@@ -5,6 +5,18 @@ $(function() {
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
 
+  /* Change DOMAIN in href */
+  const domainReplacePattern = 'https://DOMAIN';
+  let currentReleasePath = window.location.hostname;
+  if ( window.location.pathname.split('/')[1] === version ) {
+    currentReleasePath += '/'+version;
+  }
+  $('[href^="'+domainReplacePattern+'/"]').each(function() {
+    const oldHref = $(this).attr('href');
+    $(this).attr('href', oldHref.replace(domainReplacePattern, 'https://'+currentReleasePath));
+    $(this).attr('target', '_blank');
+  });
+
   /* List of empty nodes, containing only a toctree */
   const emptyTocNodes = [
     'amazon/configuration/index',
@@ -586,7 +598,6 @@ $(function() {
     let lastResult = null;
     let splitURL = null;
     const configAdd = {childList: true};
-    const configAtt = {attributes: true, attributeOldValue: true};
     let observerResults = null;
     let observerResultList = null;
     let observerResultText = null;
@@ -594,7 +605,7 @@ $(function() {
 
     /* Detects every result that is added to the list */
     const addedResult = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'childList') {
           lastResult = $('ul.search li:last-child');
           splitURL = lastResult.children('a').prop('href').split('/');
@@ -612,7 +623,7 @@ $(function() {
 
     /* Checking that the list of search results exists */
     const existsResultList = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
+      for (i = 0; i < mutationsList.length; i++) {
         if (mutationsList[i].type === 'childList' && $(mutationsList[i].addedNodes[0]).hasClass('search')) {
           const ulSearch = $('ul.search');
 
@@ -621,15 +632,15 @@ $(function() {
           observerResultList = new MutationObserver(addedResult);
           observerResultList.observe(ulSearch[0], configAdd);
           observerResultText = new MutationObserver(changeResultText);
-          observerResultText.observe($('#search-results > p')[0], configAtt);
+          observerResultText.observe($('#search-results > p')[0], configAdd);
         }
       }
     };
 
     /* Replaces the result message */
     const changeResultText = function(mutationsList, observer) {
-      for (i = 0; i < mutationsList.length - 1; i++) {
-        if (mutationsList[i].type === 'attributes') {
+      for (i = 0; i < mutationsList.length; i++) {
+        if (mutationsList[i].type === 'childList') {
           observerResultText.disconnect();
           const totalResults = $('ul.search li').length;
           const excludedResults = $('ul.search li.excluded-search-result').length;

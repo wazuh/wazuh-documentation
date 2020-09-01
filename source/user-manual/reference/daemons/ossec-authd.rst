@@ -1,11 +1,11 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _ossec-authd:
 
 ossec-authd
 ===========
 
-The ``ossec-authd`` program can automatically add an agent to a Wazuh manager and provide the key to the agent. It's used along with the :ref:`agent-auth` application. The program creates an agent with an IP address of ``any`` instead of using a specific IP address.
+The ``ossec-authd`` program can automatically add a Wazuh agent to a Wazuh manager and provide the key to the agent. It's used along with the ``agent-auth`` application. The program creates an agent with an IP address of ``any`` instead of using a specific IP address.
 
 .. warning::
   By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.

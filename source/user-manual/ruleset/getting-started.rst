@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _ruleset_getting_started:
 
@@ -6,6 +6,52 @@ Getting started
 =================
 
 The default number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by open source contributors. We also create new rules and rootchecks periodically and add them to this repository so they can be used by the user community. Some examples are the new rules for Netscaler and Puppet.
+
+Currently, Wazuh supports more than 3k rules that accomplish technologies such:
+
+- Syslog
+- Docker
+- CISCO
+- SonicWall
+- Sendmail
+- Postfix
+- Spamd
+- Imapd
+- MailScanner
+- Microsoft Exchange
+- Courier
+- PIX
+- NetScreen technologies
+- McAfee
+- NextCloud
+- PaloAlto v9.0
+- VirusTotal
+- Suricata
+- MongoDB
+- Jenkins
+- Pluggable Authentication Modules (PAM)
+- Telnet
+- SSH
+- Solaris Basic Security module
+- Asterisk
+- Microsoft Windows DHCP
+- Arpwatch
+- Symantec
+- Trend Micro OSCE (Office Scan)
+- Horde IMP
+- Roundcube
+- Wordpress
+- Compaq Insight Manager (cimserver)
+- Dovecot
+- Vm-pop3d
+- FTP, Proftpd, PureFTP, Vsftpd, Microsoft FTP
+- OwlH Zeek
+- Junos
+- Panda Advanced Protection Service (PAPS)
+- CheckPoint Smart-1 Firewalls
+- MacOS SSH
+- Google Cloud Pub/Sub
+
 
 GitHub repository
 ------------------
@@ -22,7 +68,7 @@ In the ruleset repository you will find:
 
 Resources
 ^^^^^^^^^
-* Visit our repository to view the rules in detail at `Github Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_
+* Visit our repository to view the rules in detail at `GitHub Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_
 * Find a complete description of the available rules at `Wazuh Ruleset Summary <http://www.wazuh.com/resources/Wazuh_Ruleset.pdf>`_
 
 

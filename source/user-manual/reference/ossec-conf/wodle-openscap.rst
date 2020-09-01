@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _wodle_openscap:
 
@@ -17,27 +17,32 @@ Configuration options of the OpenSCAP wodle.
 Options
 -------
 
+Main options
+^^^^^^^^^^^^
+
 - `disabled`_
 - `timeout`_
-- `interval`_
-- `scan-on-start`_
 - `content`_
 
 
 +----------------------+-----------------------------+
-| Options              | Allowed values              |
+| Main options         | Allowed values              |
 +======================+=============================+
 | `disabled`_          | yes, no                     |
 +----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
 +----------------------+-----------------------------+
-| `interval`_          | A positive number           |
-+----------------------+-----------------------------+
-| `scan-on-start`_     | yes, no                     |
-+----------------------+-----------------------------+
 | `content`_           | N/A                         |
 +----------------------+-----------------------------+
 
+Scheduling options
+^^^^^^^^^^^^^^^^^^
+
+- `scan-on-start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
 
 disabled
 ^^^^^^^^
@@ -60,28 +65,6 @@ Timeout for each evaluation.
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
-
-interval
-^^^^^^^^
-
-Interval between OpenSCAP executions.
-
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-
-scan-on-start
-^^^^^^^^^^^^^
-
-Run evaluation immediately when service is started.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
 
 content
 ^^^^^^^
@@ -113,6 +96,81 @@ Attributes
 +-------------------+-------------------------------------------------------------+
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+
+
+scan-on-start
+^^^^^^^^^^^^^
+
+Run evaluation immediately when service is started.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+interval
+^^^^^^^^
+
+Interval between OpenSCAP executions.
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1d                                                                                                                                                   |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), M (months). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+day
+^^^
+
+Day of the month to run the scan.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the month [1..31] |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
+
+wday
+^^^^
+
+Day of the week to run the scan. This option is **not compatible** with the ``day`` option.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the week:         |
+|                    |   - sunday/sun           |
+|                    |   - monday/mon           |
+|                    |   - tuesday/tue          |
+|                    |   - wednesday/wed        |
+|                    |   - thursday/thu         |
+|                    |   - friday/fri           |
+|                    |   - saturday/sat         |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
+time
+^^^^
+
+Time of the day to run the scan. It has to be represented in the format *hh:mm*.
+
++--------------------+-----------------------+
+| **Default value**  | n/a                   |
++--------------------+-----------------------+
+| **Allowed values** | Time of day *[hh:mm]* |
++--------------------+-----------------------+
+
+.. note::
+
+	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
+
 
 Example of configuration
 ------------------------

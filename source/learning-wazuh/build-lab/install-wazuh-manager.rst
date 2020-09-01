@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _build_lab_install_wazuh_server:
 
@@ -45,15 +45,6 @@ Install the Wazuh manager software and confirm it is running:
 
     # yum -y install wazuh-manager
     # systemctl status wazuh-manager
-
-Configure Wazuh manager to listen for agent connections on tcp instead of udp:
-
-  .. code-block:: console
-
-    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
-    # sed -i 's/<protocol>udp/<protocol>tcp/' /var/ossec/etc/ossec.conf
-    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
-
 
 Configure Wazuh manager to allow self registration of new agents with authentication:
 

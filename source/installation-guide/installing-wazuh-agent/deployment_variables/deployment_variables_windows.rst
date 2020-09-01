@@ -1,4 +1,4 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _deployment_variables_windows:
 
@@ -19,7 +19,7 @@ Below you can find a table describing the variables used by Wazuh installers on 
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_MANAGER_PORT               |  Specifies the managers connection port.                                                                                     |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL                   |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
+|   WAZUH_PROTOCOL                   |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is TCP.                     |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_SERVER        |  Specifies the Authd IP address.                                                                                             |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+

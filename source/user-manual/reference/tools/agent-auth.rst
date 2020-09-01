@@ -1,6 +1,11 @@
-.. Copyright (C) 2019 Wazuh, Inc.
+.. Copyright (C) 2020 Wazuh, Inc.
 
 .. _agent-auth:
+
+.. note::
+
+	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on :ref:`Enrollment section <reference_ossec_client>`.
+
 
 agent-auth
 ==========
