@@ -34,12 +34,11 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
   .. warning::
     By default the network interface type is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
-4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, filebeat, and kibana with the 'systemctl' command. For example:
+4. You can start and stop wazuh-manager, elasticsearch, filebeat, and kibana with the 'systemctl' command. For example:
 
     .. code-block:: console
 
       # systemctl restart wazuh-manager
-      # systemctl restart wazuh-api
       # systemctl stop elasticsearch
       # systemctl start filebeat
       # systemctl status kibana

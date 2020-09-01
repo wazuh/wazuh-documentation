@@ -104,15 +104,15 @@ To check the API service status use the following command:
 
     .. code-block:: console
 
-      # systemctl status wazuh-api
+      # systemctl status wazuh-manager
 
   * For SysV Init:
 
     .. code-block:: console
 
-      # service wazuh-api status
+      # service wazuh-manager status
 
-.. note:: Check out the section :doc:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
+.. note:: Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
 
 Installing Filebeat
 -------------------
@@ -142,7 +142,6 @@ Stop the service:
   .. code-block:: console
 
     # service wazuh-manager stop 2> /dev/null
-    # service wazuh-api stop 2> /dev/null
 
 Stop the daemon:
 

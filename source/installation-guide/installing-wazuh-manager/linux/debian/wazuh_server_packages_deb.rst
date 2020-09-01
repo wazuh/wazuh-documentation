@@ -66,22 +66,8 @@ Once the process is completed, you can check the service status with:
 
 The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-To check the API service status use the following command:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api status
-
 .. note::
-    Check out the section :doc:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
+    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
 
 **Optional:** Disable the Wazuh repository.
 
@@ -97,7 +83,6 @@ To check the API service status use the following command:
   .. code-block:: console
 
     # echo "wazuh-manager hold" | sudo dpkg --set-selections
-    # echo "wazuh-api hold" | sudo dpkg --set-selections
 
 .. _wazuh_server_packages_deb_filebeat:
 
@@ -174,13 +159,13 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 
-      # apt-get remove wazuh-manager wazuh-api
+      # apt-get remove wazuh-manager
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command:
 
     .. code-block:: console
 
-      # apt-get remove --purge wazuh-manager wazuh-api
+      # apt-get remove --purge wazuh-manager
 
 To uninstall filebeat:
 

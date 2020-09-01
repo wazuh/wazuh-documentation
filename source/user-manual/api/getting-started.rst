@@ -10,19 +10,19 @@ This guide provides the basic information you need to start using the Wazuh API.
 Starting and stopping the API
 -----------------------------
 
-The API starts at boot time. To control or check the **wazuh-api** service, use the ``systemctl`` or ``service`` command.
+The Wazuh API will be installed along the Wazuh manager by default and it will start at boot time. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
 **Systemd systems**
 
 .. code-block:: console
 
-    # systemctl start/status/stop/restart wazuh-api
+    # systemctl start/status/stop/restart wazuh-manager
 
 **SysVinit systems**
 
 .. code-block:: console
 
-    # service wazuh-api start/status/stop/restart
+    # service wazuh-manager start/status/stop/restart
 
 .. _api_log_in:
 

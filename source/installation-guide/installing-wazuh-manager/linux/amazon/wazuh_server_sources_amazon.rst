@@ -98,21 +98,7 @@ Installing Wazuh manager
 
 The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-To check the API service status use the following command:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api status
-
-.. note:: Check out the section :ref:`RESTful API <api>` for more information on how to set up and use Wazuh API.
+.. note:: Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
 
 Installing Filebeat
 -------------------
@@ -142,7 +128,6 @@ Stop the service:
   .. code-block:: console
 
     # service wazuh-manager stop 2> /dev/null
-    # service wazuh-api stop 2> /dev/null
 
 Stop the daemon:
 
