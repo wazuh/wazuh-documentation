@@ -83,6 +83,38 @@ getHelp() {
 
 }
 
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -n "$e" ]
+    then
+        if [ -f ~/config.yml ]
+        then
+            echo "Configuration file found. Starting the installation..."
+        else
+            if [ -f ~/certs.zip ]
+            then
+                echo "Certificates file found. Starting the installation..."
+                eval "tar -xf certs.zip config.yml $debug"
+            else
+                echo "No configuration file found."
+                exit 1;
+            fi
+        fi
+    
+    elif [ -n "$k" ]
+    then
+        if [ -e ~/certs/${iname} ]
+        then
+            echo "Certificates file found. Starting the installation..."
+        else
+            echo "No certificates found."
+            exit 1;
+        fi
+    fi   
+
+}
+
 
 ## Install the required packages for the installation
 installPrerequisites() {
@@ -222,6 +254,10 @@ installElasticsearch() {
                 pos="${i}";
             fi
             done
+            if [[ ! " ${IMN[@]} " =~ " ${iname} " ]]; then 
+                echo "The name given does not appear on the configuration file"
+                exit 1;
+            fi              
             nip="${DSH[pos]}" 
             echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
 
@@ -301,6 +337,8 @@ copyCertificates() {
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
+        eval "zip -u ~/certs.zip config.yml $debug"
+        eval "cp ~/config.yml ~/certs/ $debug"        
     else
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
@@ -313,6 +351,7 @@ copyCertificates() {
         if [[ -n "$master" ]] && [[ -n "$c" ]]
         then
             eval "zip -u ~/certs.zip config.yml $debug"
+            eval "cp ~/config.yml ~/certs/ $debug"
         fi            
     fi
 
@@ -540,6 +579,11 @@ main() {
             debug=""
         fi         
 
+        if [[ -z "$iname" ]]  
+        then
+            getHelp
+        fi         
+
         if [ -n "$e" ]
         then
             if [[ -n "$e" ]] && [[ -n "$k" ]]   
@@ -556,15 +600,8 @@ main() {
             installPrerequisites
             addElasticrepo   
             checkNodes         
+            checkConfig iname
             installElasticsearch iname
-            if [ -n "$c" ]
-            then
-                if [ -z "$iname" ]
-                then
-                    getHelp
-                fi
-                #createCertificates IMN DSH
-            fi
         fi
         if [ -n "$k" ]
         then
