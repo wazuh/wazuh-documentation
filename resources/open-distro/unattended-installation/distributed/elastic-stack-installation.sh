@@ -267,7 +267,8 @@ installElasticsearch() {
                 fi
             done
             if [[ ! " ${IMN[@]} " =~ " ${iname} " ]]; then 
-                "The name given does not appear on the configuration file"
+                echo "The name given does not appear on the configuration file"
+                exit 1;
             fi           
             nip="${DSH[pos]}" 
             echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml  
@@ -382,8 +383,8 @@ copyCertificates() {
     else
         if [ -z "$c" ]
         then
-            mv ~/certs.tar /etc/elasticsearch/certs
-            tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}.key ${IMN[pos]}_http.pem ${IMN[pos]}_http.key root-ca.pem  
+            eval "mv ~/certs.tar /etc/elasticsearch/certs $debug"
+            eval "tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}.key ${IMN[pos]}_http.pem ${IMN[pos]}_http.key root-ca.pem $debug"  
         fi
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
