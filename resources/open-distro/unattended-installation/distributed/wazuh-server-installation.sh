@@ -68,6 +68,20 @@ getHelp() {
    exit 1 # Exit script after printing help
 }
 
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -f ~/certs.tar ]
+    then
+        echo "Certificates file found. Starting the installation..."
+        eval "tar -xf certs.tar config.yml $debug"
+    else
+        echo "No certificates file found."
+        exit 1;
+    fi 
+
+}
+
 ## Install the required packages for the installation
 installPrerequisites() {
 
@@ -158,9 +172,20 @@ installFilebeat() {
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.13.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
         eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
         eval "curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
-        mkdir /etc/filebeat/certs
-
+        eval "mkdir /etc/filebeat/certs $debug"
+        eval "cp ~/certs.tar /etc/filebeat/certs/ $debug"
+        eval "cd /etc/filebeat/certs/ $debug"
+        eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem $debug"
+        if [ ${iname} != "filebeat" ]
+        then
+            eval "mv /etc/filebeat/certs/${iname}.pem /etc/filebeat/certs/filebeat.pem $debug"
+            eval "mv /etc/filebeat/certs/${iname}.key /etc/filebeat/certs/filebeat.key $debug"
+        fi        
         logger "Done"
+        echo "Starting Filebeat..."
+        eval "systemctl daemon-reload $debug"
+        eval "systemctl enable filebeat.service $debug"
+        eval "systemctl start filebeat.service $debug"        
     fi        
 }
 
@@ -205,6 +230,11 @@ main() {
                 shift
                 shift
                 ;;
+            "-n"|"--node-name") 
+                iname=$2  
+                shift
+                shift
+                ;;                   
             "-d"|"--debug") 
                 d=1          
                 shift 1
@@ -220,6 +250,10 @@ main() {
         then
             debug=""
         fi
+        if [[ -z "$iname" ]]  
+        then
+            getHelp
+        fi         
         if [ -z "$ips" ]
         then
             getHelp
@@ -234,8 +268,8 @@ main() {
         installPrerequisites
         addWazuhrepo
         installWazuh
-        installFilebeat           
-        configureFilebeat $ips
+        installFilebeat iname        
+        configureFilebeat ips
     else
         getHelp
     fi
