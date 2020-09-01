@@ -4,6 +4,8 @@ $(function() {
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
+  const intervalTime = 5000;
+  let capaInterval = null;
 
   /* Change DOMAIN in href */
   const domainReplacePattern = 'https://DOMAIN';
@@ -510,14 +512,16 @@ $(function() {
     }, 10);
   }
 
-  /* -- Add funcionability for cloud-info --------------------------------------------------------------------------- */
+  /* -- Add functionality for the capabilities in the home page --------------------------------------------- */
 
   if ($(window).outerWidth() < 1200) {
     $('#capabilities .left .topic.active p').not('.topic-title').slideDown(300);
   }
 
   $(window).resize(function() {
+    clearInterval(capaInterval);
     if ($(window).outerWidth() >= 1200) {
+      initCapabilities();
       $('#capabilities .left .topic p').not('.topic-title').css({'display': 'none'});
       if ($('#capabilities .left .topic.active').length > 0) {
         capabilitiesHome($('#capabilities .left .topic.active'));
@@ -525,23 +529,83 @@ $(function() {
         capabilitiesHome($('#capabilities .left .topic').first());
       }
     } else {
+      stopCapabilities();
       $('#capabilities .left .topic.active p').not('.topic-title').css({'display': 'block'});
     }
   });
 
   $('#capabilities .left .topic').click(function() {
-    capabilitiesHome(this);
+    capabilitiesHome(this, true);
   });
 
+  $('.screenshots .carousel').carousel({
+    interval: intervalTime,
+  });
+
+  if ($(window).outerWidth() >= 1200) {
+    initCapabilities();
+  }
+
+  $('.capab .topic, .screenshots .carousel').on('click', function() {
+    $('.carousel').carousel('pause');
+    clearInterval(capaInterval);
+  });
+
+  /**
+   * Initialices part of the functionality of the capability selection in the home page
+   */
+  function initCapabilities() {
+    capaInterval = setInterval(function() {
+      changeCapabilityNext(true);
+    }, intervalTime);
+
+    $('.screenshots .carousel .carousel-control-prev, .screenshots .carousel .carousel-control-next').click(function() {
+      /* Update the selected capability to the correct one only when the slide animation has started */
+      $('.screenshots .carousel').one('slide.bs.carousel', function(carousel) {
+        changeCapabilityTo(carousel.to, false);
+      });
+    });
+  }
+
+  /**
+   * Stops part of the functionality of the capability selection in the home page
+   */
+  function stopCapabilities() {
+    $('.screenshots .carousel .carousel-control-prev, .screenshots .carousel .carousel-control-next').off();
+  }
+
+  /**
+   * Given an index (capaindex), change the active capability.
+   * @param {int} capaindex Index of the capability to be selected
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
+   */
+  function changeCapabilityTo(capaindex, auto) {
+    const topics = $('#capabilities .left .topic');
+    capabilitiesHome(topics.eq(capaindex), auto);
+  }
+
+  /**
+   * Change the active capability to the next one.
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
+   */
+  function changeCapabilityNext(auto) {
+    const topics = $('#capabilities .left .topic');
+    const active = $('#capabilities .left .topic.active');
+    let capaindex = topics.index(active);
+    capaindex = (capaindex+1) % topics.length;
+    capabilitiesHome(topics.eq(capaindex), auto);
+  }
 
   /**
    * Only for main index (documentation's home page).
    * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
    */
-  function capabilitiesHome(ele) {
+  function capabilitiesHome(ele, auto) {
     let eleOther = ele;
     let active = false;
+    const item = $('#capabilities .left .topic').index(ele);
 
     if ($('#page.index').length > 0) {
       if ($(ele).hasClass('active')) {
@@ -551,6 +615,11 @@ $(function() {
       }
       if ($('#capabilities .left .topic.active').length <= 0) {
         eleOther = false;
+      }
+
+      /* Update slider */
+      if ( auto ) {
+        $('.screenshots .carousel').carousel(item);
       }
 
       if ($(window).outerWidth() >= 1200) {
