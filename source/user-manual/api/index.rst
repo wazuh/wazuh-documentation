@@ -11,12 +11,15 @@ Here is a list of the Wazuh API capabilities:
 
 * Agent management
 * Manager control and overview
+* Cluster control and overview
 * Syscheck control and search
 * MITRE attacks and CISCAT overview
 * Ruleset information
-* Access restriction and security
+* Syscollector information
+* Access restriction and security (RBAC)
+* API management (HTTPS, configuration)
+* Users management
 * Statistical information
-* HTTPS and user authentication
 * Error handling
 * Query remote configuration
 
