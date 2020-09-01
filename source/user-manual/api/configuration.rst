@@ -78,7 +78,7 @@ Unlike regular API configuration settings that can be changed in the :ref:`confi
 
 .. code-block:: yaml
 
-    auth_token_exp_timeout: 36000
+    auth_token_exp_timeout: 3600
     rbac_mode: white
 
 It is not needed to restart the Wazuh API for these changes to take effect. However, for some of them it may be required to request a new JWT token.
@@ -291,7 +291,7 @@ auth_token_exp_timeout
 +-----------------------+---------------+---------------------------------------------------------+
 | Allowed values        | Default value | Description                                             |
 +=======================+===============+=========================================================+
-| Any positive integer. | 36000         | Set how many seconds it takes for JWT tokens to expire. |
+| Any positive integer. | 3600          | Set how many seconds it takes for JWT tokens to expire. |
 +-----------------------+---------------+---------------------------------------------------------+
 
 rbac_mode
@@ -299,5 +299,5 @@ rbac_mode
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Allowed values | Default value | Description                                                                                                                                                    |
 +================+===============+================================================================================================================================================================+
-| black,white    | black         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
+| black,white    | white         | Sets the behavior of RBAC. For example, in black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed. |
 +----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
