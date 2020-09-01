@@ -99,6 +99,7 @@ checkConfig() {
         if [ -f /etc/elasticsearch/certs/certs.tar ]
         then
             eval "mv /etc/elasticsearch/certs/certs.tar ~/"
+            echo "Certificates file found. Starting the installation..."
         else
             echo "No certificates found."
             exit 1;
