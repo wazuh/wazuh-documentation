@@ -30,7 +30,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.5.tar.gz | tar zx
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST|.tar.gz | tar zx
 
     .. note:: In the case of not being able to download in this way, you can send this file through the scp utility.
 

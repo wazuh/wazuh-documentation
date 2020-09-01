@@ -47,41 +47,41 @@ Examples:
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP="10.0.0.2" WAZUH_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="aix-agent" && installer -pkg wazuh-agent-3.9.5-1.pkg -target
+          WAZUH_AGENT_NAME="aix-agent" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target
 
 * Registration with password and assigning a group:
 
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_PASSWORD="TopSecret" \
-          WAZUH_GROUP="my-group" && installer -pkg wazuh-agent-3.9.5-1.pkg -target
+          WAZUH_GROUP="my-group" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target
 
 * Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-          WAZUH_CERTIFICATE="rootCA.pem" && installer -pkg wazuh-agent-3.9.5-1.pkg -target
+          WAZUH_CERTIFICATE="rootCA.pem" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target
 
 * Registration with protocol:
 
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-          WAZUH_PROTOCOL="tcp" && installer -pkg wazuh-agent-3.9.5-1.pkg -target
+          WAZUH_PROTOCOL="tcp" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target
 
 * Registration and adding multiple address:
 
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP="10.0.0.2,10.0.0.3" WAZUH_AUTHD_SERVER="10.0.0.2" \
-          WAZUH_AGENT_NAME="aix-agent" && installer -pkg wazuh-agent-3.9.5-1.pkg -target
+          WAZUH_AGENT_NAME="aix-agent" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
 .. code-block:: console
 
      # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" WAZUH_AUTHD_SERVER "10.0.0.2" WAZUH_KEY "/var/ossec/etc/sslagent.key" \
-          WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.5-1.pkg -target
+          WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target
 
 .. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`agent-verification-with-host-validation` section.
