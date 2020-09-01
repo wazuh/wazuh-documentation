@@ -176,11 +176,6 @@ installFilebeat() {
 }
 
 configureFilebeat() {
-    
-    # 
-    # for i in "${!ips[@]}"; do
-    #     echo "  - ${ips[i]}:9200" >> /etc/filebeat/filebeat.yml
-    # done
 
     nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
 
@@ -269,11 +264,7 @@ main() {
         if [[ -z "$iname" ]]  
         then
             getHelp
-        fi         
-        # if [ -z "$ips" ]
-        # then
-        #     getHelp
-        # fi
+        fi
         if [ -n "$i" ]
         then
             echo "Health-check ignored."
@@ -286,7 +277,7 @@ main() {
         addWazuhrepo
         installWazuh
         installFilebeat iname        
-        configureFilebeat ips
+        configureFilebeat
     else
         getHelp
     fi
