@@ -8,10 +8,10 @@ Compatibility matrix
 
 .. Wazuh software can be installed in many operating systems, you can check the compatibility matrix, which indicates what OS and Wazuh versions are compatible with your systems.
 
-Wazuh software can be installed in many operating systems. Moreover, there's also specific compatibility requirements between different Wazuh products. In order to assist you, check the following compatibility matrix.
+Wazuh software can be installed in many operating systems. Moreover, there is also specific compatibility requirements between different Wazuh components. For more information, check the following compatibility matrix.
 
 - `Operating system compatibility`_
-- `Product compatibility`_
+- `Components compatibility`_
 
 Operating system compatibility
 ------------------------------
@@ -19,7 +19,7 @@ Operating system compatibility
 Wazuh manager
 ^^^^^^^^^^^^^
 
-Below it shown the compatibility table for the Wazuh manager.
+Below you may find the compatibility table for the Wazuh manager.
 
 +-----------------------------------+------------------------------------------+
 |                                   |   **Wazuh version**                      |
@@ -96,8 +96,8 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 
 
 
-Product compatibility
----------------------
+Components compatibility
+------------------------
 
 When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent``, ``wazuh-api`` and ``wazuh-app``), there are different compatibility requirements in order to make everything work properly.
 
@@ -120,7 +120,7 @@ The API requires the same ``major.minor`` version as the Wazuh manager in order 
 API and Kibana app
 ^^^^^^^^^^^^^^^^^^
 
-The Wazuh app for Kibana requires compatibility between two different products:
+The Wazuh app for Kibana requires compatibility between two different components:
 
   - With the **Wazuh API**, it requires the same ``major.minor`` version.
   - With the **Elastic Stack**, it's only compatible with the exact same version.
@@ -166,7 +166,7 @@ You can find more information on the `Wazuh app for Kibana repository <https://g
 API and Splunk app
 ^^^^^^^^^^^^^^^^^^
 
-The Splunk app for Wazuh requires compatibility between two different products:
+The Splunk app for Wazuh requires compatibility between two different components:
 
   - With the **Wazuh API**, it requires the same ``major.minor`` version.
   - With **Splunk**, it's only compatible with the exact same version.

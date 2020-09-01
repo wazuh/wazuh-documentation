@@ -31,7 +31,7 @@ The Wazuh server and Open Distro for Elasticsearch or Elastic Stack components c
 All-in-one deployment
 ---------------------
 
-In an All-in-one deployment, Wazuh server and Open Distro for Elasticsearch or Elastic Stack, are installed on the same host. This type of deployment is suitable for testing and small production environments. For a typical environment, this type of configuration is adequate for around 100 agents or less.  
+In an All-in-one deployment, Wazuh server and Open Distro for Elasticsearch or Elastic Stack, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
 
 The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary for this type of deployment due to the requirements of Open Distro for Elasticsearch and Elastic Stack. 
 
