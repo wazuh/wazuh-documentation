@@ -93,7 +93,17 @@ checkConfig() {
                 exit 1;
             fi
         fi
-    fi    
+    
+    elif [ -n "$k" ]
+    then
+        if [ -f /etc/elasticsearch/certs/certs.tar ]
+        then
+            eval "mv /etc/elasticsearch/certs/certs.tar ~/"
+        else
+            echo "No certificates found."
+            exit 1;
+        fi
+    fi   
 
 }
 
@@ -251,10 +261,13 @@ installElasticsearch() {
                     echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
             done
             for i in "${!IMN[@]}"; do
-            if [[ "${IMN[$i]}" = "${iname}" ]]; then
-                pos="${i}";
-            fi
+                if [[ "${IMN[$i]}" = "${iname}" ]]; then
+                    pos="${i}";
+                fi
             done
+            if [[ ! " ${IMN[@]} " =~ " ${iname} " ]]; then 
+                "The name given does not appear on the configuration file"
+            fi           
             nip="${DSH[pos]}" 
             echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml  
 
@@ -583,14 +596,15 @@ main() {
         if [ -n "$d" ]
         then
             debug=""
-        fi         
+        fi  
+
+        if [[ -z "$iname" ]]  
+        then
+            getHelp
+        fi               
 
         if [ -n "$e" ]
-        then
-            if [[ -n "$e" ]] && [[ -n "$k" ]]   
-            then
-                getHelp
-            fi        
+        then     
 
             if [ -n "$i" ]
             then
@@ -601,12 +615,8 @@ main() {
             checkConfig      
             installPrerequisites
             addWazuhrepo   
-            checkNodes         
+            checkNodes                   
             installElasticsearch iname
-            # if [ -n "$c" ]
-            # then
-            #     createCertificates
-            # fi
         fi
         if [ -n "$k" ]
         then
@@ -614,11 +624,14 @@ main() {
             then
                 getHelp
             fi
+            if [[ -z "$e" ]] && [[ -z "$k" ]]   
+            then
+                getHelp
+            fi                    
             if [[ -n "$e" ]] && [[ -n "$k" ]]   
             then
                 getHelp
             fi        
-
             if [ -n "$i" ]
             then
                 echo "Health-check ignored."    
