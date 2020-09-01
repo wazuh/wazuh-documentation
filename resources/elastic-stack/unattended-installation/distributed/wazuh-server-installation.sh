@@ -73,6 +73,31 @@ getHelp() {
 
 }
 
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -f ~/certs.zip ]
+    then
+        if [ $sys_type == "yum" ] 
+        then
+            eval "yum install unzip -y -q $debug"   
+        elif [ $sys_type == "zypper" ] 
+        then
+            eval "zypper -n install unzip $debug"       
+        elif [ $sys_type == "apt-get" ] 
+        then
+            eval "apt-get install unzip -y -q $debug"
+            eval "apt-get update -q $debug"
+        fi    
+        echo "Certificates file found. Starting the installation..."
+        eval "unzip ~/certs.zip config.yml $debug"
+    else
+        echo "No certificates file found."
+        exit 1;
+    fi 
+
+}
+
 ## Install the required packages for the installation
 installPrerequisites() {
 
@@ -233,13 +258,44 @@ installFilebeat() {
 
 configureFilebeat() {
 
-    mkdir /etc/filebeat/certs/ca -p
-    echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml
-    for i in "${!ips[@]}"; do
-        echo "  - ${ips[i]}:9200" >> /etc/filebeat/filebeat.yml
-    done
+    nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+
+    if [ -n "$nh" ]
+    then
+        nhr="network.host: "
+        nip="${nh//$nhr}"
+        echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml  
+        echo "  - ${nip}"  >> /etc/filebeat/filebeat.yml  
+    else
+        echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml  
+        sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+        shr="discovery.seed_hosts:"
+        rm="- "
+        sh="${sh//$shr}"
+        sh="${sh//$rm}"
+        for line in $sh; do
+                echo "  - ${line}" >> /etc/filebeat/filebeat.yml      
+        done        
+    fi
     conf="$(awk '{sub("<elasticsearch_password>", "'"${password}"'")}1' /etc/filebeat/filebeat.yml)"
     echo "$conf" > /etc/filebeat/filebeat.yml  
+
+    eval "mkdir /etc/filebeat/certs/ca -p $debug"
+    eval "zip -d ~/certs.zip ca/ca.key $debug"
+    eval "unzip ~/certs.zip -d ~/certs $debug"
+    eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/filebeat/certs/ $debug"
+    if [ ${iname} != "filebeat" ]
+    then
+        eval "mv /etc/filebeat/certs/${iname}.crt /etc/filebeat/certs/filebeat.crt $debug"
+        eval "mv /etc/filebeat/certs/${iname}.key /etc/filebeat/certs/filebeat.key $debug"
+    fi    
+    eval "chmod -R 500 /etc/filebeat/certs $debug"
+    eval "chmod 400 /etc/filebeat/certs/ca/ca.* /etc/filebeat/certs/filebeat.* $debug"        
+    logger "Done"
+    echo "Starting Filebeat..."
+    eval "systemctl daemon-reload $debug"
+    eval "systemctl enable filebeat.service $debug"
+    eval "systemctl start filebeat.service $debug"       
 
 }
 
@@ -272,11 +328,11 @@ main() {
                 i=1
                 shift
                 ;;            
-            "-ip"|"--elasticsearch-ip")        
-                ips+=($2)
+            "-n"|"--node-name") 
+                iname=$2  
                 shift
                 shift
-                ;;
+                ;;  
             "-p"|"--elastic-password")        
                 password=$2
                 shift
@@ -297,10 +353,10 @@ main() {
         then
             debug=""
         fi
-        if [ -z "$ips" ]
+        if [[ -z "$iname" ]]  
         then
             getHelp
-        fi
+        fi        
         if [ -z "$password" ]
         then
             getHelp
@@ -312,12 +368,13 @@ main() {
         else
             healthCheck
         fi
+        checkConfig
         installPrerequisites
         addElasticrepo
         addWazuhrepo
         installWazuh
-        installFilebeat           
-        configureFilebeat ips password
+        installFilebeat iname        
+        configureFilebeat iname password
     else
         getHelp
     fi
