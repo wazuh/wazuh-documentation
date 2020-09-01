@@ -319,11 +319,11 @@ The results should look like this:
 
 4. You can also use the experimental capabilities of the API to list information
    of all agents in the environment. In order to do so it is necessary to enable
-   this capability by editing the API's configuration file:
+   this capability in ``WAZUH_PATH/configuration/api.yaml``. A complete API configuration
+   guide can be found :ref:`here <api_configuration>`. Experimental capabilities
+   can be also enabled by using the following Wazuh API endpoint:
+   :ref:`PUT /manager/api/config<api_reference>`.
 
-  .. code-block:: console
-
-      [root@wazuh-manager centos]# sed -i 's/config.experimental_features  = false/config.experimental_features  = true/g' /var/ossec/api/configuration/config.js
 
 
 5. Restart the Wazuh API using the Wazuh-manager service:
