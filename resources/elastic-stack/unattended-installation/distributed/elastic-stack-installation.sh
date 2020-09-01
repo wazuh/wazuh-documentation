@@ -216,14 +216,12 @@ installElasticsearch() {
         if [ -n "$single" ]
         then
             nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
-            nn=$(awk -v RS='' '/node.name:/' ~/config.yml)
-            nnr="node.name: "
-            name="${nn//$nnr}"
             nhr="network.host: "
             ip="${nh//$nhr}"
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "cluster.initial_master_nodes: $iname" >> /etc/elasticsearch/elasticsearch.yml    
         else
             echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
             mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
@@ -262,7 +260,6 @@ installElasticsearch() {
             echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
 
         fi
-        #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
@@ -302,7 +299,7 @@ createCertificates() {
     if [ -n "$single" ]
     then
         echo "instances:" >> /usr/share/elasticsearch/instances.yml
-        echo '- name: "'${name}'"' >> /usr/share/elasticsearch/instances.yml
+        echo '- name: "'${iname}'"' >> /usr/share/elasticsearch/instances.yml
         echo '  ip:' >> /usr/share/elasticsearch/instances.yml
         echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
     else 
@@ -331,9 +328,9 @@ copyCertificates() {
     then
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
-        eval "cp -R ~/certs/ca/ ~/certs/${name}/* /etc/elasticsearch/certs/ $debug"
-        eval "mv ~/certs/${name}/${name}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
-        eval "mv ~/certs/${name}/${name}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${iname}/${iname}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${iname}/${iname}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
