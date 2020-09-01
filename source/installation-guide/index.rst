@@ -44,7 +44,7 @@ Clustered components
 
 - ``Multi-node cluster``: This term is used for referring to those components that are installed in two or more separate servers and are configured to act together to provide high availability and load balancing. A Wazuh multi-node cluster consists of two or more servers with Wazuh servers installed on them that synchronize their data with each other. The same definition is applied to Elasticsearch nodes. A multi-node cluster provides high availability, scalability, and load balancing for data indexing and searching. By incorporating additional cluster nodes of Wazuh components, an infrastructure can scale to adapt to the needs of any environment.
 
-Elasticsearch flavor
+Elasticsearch flavors
 ---------------------
 
 The user can select among these two flavors of Elasticsearch the one that better suits their environment:

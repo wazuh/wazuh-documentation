@@ -2,8 +2,8 @@
 
 .. _basic_installation_guide:
 
-Wazuh and Elastic Stack
-=======================
+Wazuh with Elastic Stack
+========================
 
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
