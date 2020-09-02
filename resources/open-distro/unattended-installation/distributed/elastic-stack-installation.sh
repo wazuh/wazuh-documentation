@@ -77,33 +77,24 @@ getHelp() {
 ## Checks if the configuration file or certificates exist
 checkConfig() {
 
-    if [ -n "$e" ]
+    if [ -f ~/config.yml ]
     then
-        if [ -f ~/config.yml ]
+        echo "Configuration file found. Starting the installation..."
+    else
+        if [ -f ~/certs.tar ]
         then
-            echo "Configuration file found. Starting the installation..."
-        else
-            if [ -f ~/certs.tar ]
-            then
-                echo "Certificates file found. Starting the installation..."
-                eval "tar -xf certs.tar config.yml $debug"
-            else
-                echo "No configuration file found."
-                exit 1;
-            fi
-        fi
-    
-    elif [ -n "$k" ]
-    then
-        if [ -f /etc/elasticsearch/certs/certs.tar ]
-        then
-            eval "mv /etc/elasticsearch/certs/certs.tar ~/"
             echo "Certificates file found. Starting the installation..."
+            eval "tar -xf certs.tar config.yml $debug"
+        elif [ -f /etc/elasticsearch/certs/certs.tar ]
+        then
+            eval "mv /etc/elasticsearch/certs/certs.tar ~/ $debug"
+            eval "tar -xf certs.tar config.yml $debug"
+            echo "Certificates file found. Starting the installation..."        
         else
-            echo "No certificates found."
+            echo "No configuration file found."
             exit 1;
         fi
-    fi   
+    fi 
 
 }
 
@@ -395,6 +386,7 @@ copyCertificates() {
         cp ~/config.yml /etc/elasticsearch/certs/
         tar -cf certs.tar *
         tar --delete -f certs.tar 'searchguard'
+        cp /etc/elasticsearch/certs/certs.tar ~/certs.tar
     fi
 
 }
@@ -453,7 +445,7 @@ installKibana() {
         kip=$(grep -A 1 "Kibana-instance" ~/config.yml | tail -1)
         rm="- "
         kip="${kip//$rm}"
-        echo "server.host:"$kip"" >> /etc/kibana/kibana.yml
+        echo 'server.host: "'$kip'"' >> /etc/kibana/kibana.yml
         nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
 
         if [ -n "$nh" ]
@@ -477,9 +469,6 @@ installKibana() {
         eval "mv ~/certs.tar /etc/kibana/certs/ $debug"
         eval "cd /etc/kibana/certs/ $debug"
         eval "tar -xf certs.tar kibana.pem kibana.key root-ca.pem $debug"
-
-        echo "server.host: "$kip"" >> /etc/kibana/kibana.yml
-        echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
         
         logger "Kibana installed."
         
