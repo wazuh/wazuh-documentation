@@ -25,3 +25,7 @@ clients:
     dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
   - name: filebeat
     dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
+
+
+# Kibana-instance
+- <kibana_ip>
