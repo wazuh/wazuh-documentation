@@ -17,7 +17,7 @@ The communication will be encrypted using certificates. The guide will refer to 
 
 To guarantee the expected performance of the Wazuh components the host must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
 
-The user can choose between Step-by-step installation, a manual way of carrying out the process, and Unattended installation, an automated way using a script:
+The user can choose between step-by-step installation, a manual way of carrying out the process, or unattended installation, an automated way using a script:
 
 
 .. toctree::
