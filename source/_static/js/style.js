@@ -1,6 +1,8 @@
 $(function() {
   let loc = location.hash;
   const version = $('[data-version]').data('version');
+  const screenshotMinVersion = '3.13';
+  const simultaneousCapaSlide = compareVersion(version, screenshotMinVersion) >= 0 ? true : false;
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
@@ -521,7 +523,9 @@ $(function() {
   $(window).resize(function() {
     clearInterval(capaInterval);
     if ($(window).outerWidth() >= 1200) {
-      initCapabilities();
+      if (simultaneousCapaSlide) {
+        initCapabilities();
+      }
       $('#capabilities .left .topic p').not('.topic-title').css({'display': 'none'});
       if ($('#capabilities .left .topic.active').length > 0) {
         capabilitiesHome($('#capabilities .left .topic.active'));
@@ -529,27 +533,31 @@ $(function() {
         capabilitiesHome($('#capabilities .left .topic').first());
       }
     } else {
-      stopCapabilities();
+      if (simultaneousCapaSlide) {
+        stopCapabilities();
+      }
       $('#capabilities .left .topic.active p').not('.topic-title').css({'display': 'block'});
     }
   });
 
   $('#capabilities .left .topic').click(function() {
-    capabilitiesHome(this, true);
+    capabilitiesHome(this, simultaneousCapaSlide);
   });
 
-  $('.screenshots .carousel').carousel({
-    interval: intervalTime,
-  });
-
-  if ($(window).outerWidth() >= 1200) {
+  if ($(window).outerWidth() >= 1200 && simultaneousCapaSlide ) {
     initCapabilities();
   }
 
-  $('.capab .topic, .screenshots .carousel').on('click', function() {
-    $('.carousel').carousel('pause');
-    clearInterval(capaInterval);
-  });
+  if ( simultaneousCapaSlide ) {
+    $('.screenshots .carousel').carousel({
+      interval: intervalTime,
+    });
+
+    $('.capab .topic, .screenshots .carousel').on('click', function() {
+      $('.carousel').carousel('pause');
+      clearInterval(capaInterval);
+    });
+  }
 
   /**
    * Initialices part of the functionality of the capability selection in the home page
@@ -1042,4 +1050,40 @@ function replacePromptOnHeredoc(code, heredocs, isConsole = false, isBash = fals
   });
 
   return parsed.join('\n');
+}
+
+/**
+ * Compare the numbers of 2 release versions
+ * @param {string} version1 First version to compare
+ * @param {string} version2 Second version to compare
+ * @return {int} Resulting value:
+ *  * 1 if version1 > version2
+ *  * 0 if version1 = version2
+ *  * -1 if version1 < version2
+ *  * false if the comparation could not be done
+ */
+function compareVersion(version1, version2) {
+  let result = false;
+  if ( typeof(version1) == 'string' && typeof(version2) == 'string') {
+    let v1 = version1.split('.');
+    let v2 = version2.split('.');
+    if ( v1.length >= 2 && v2.length >= 2 ) {
+      v1 = v1.map((x) =>parseInt(x));
+      v2 = v2.map((x) =>parseInt(x));
+      if ( v1[0] > v2[0] ) {
+        result = 1;
+      } else if ( v1[0] < v2[0] ) {
+        result = -1;
+      } else {
+        if ( v1[1] > v2[1] ) {
+          result = 1;
+        } else if ( v1[1] < v2[1] ) {
+          result = -1;
+        } else {
+          result = 0;
+        }
+      }
+    }
+  }
+  return result;
 }
