@@ -179,7 +179,7 @@ The output would look like below:
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User successfully created"
+      "message": "User was successfully created"
     }
 
 Create a new rule
