@@ -392,7 +392,7 @@ copyCertificates() {
 
     if [[ -n "$c" ]] || [[ -n "$single" ]]
     then
-        mv ~/config.yml /etc/elasticsearch/certs/
+        cp ~/config.yml /etc/elasticsearch/certs/
         tar -cf certs.tar *
         tar --delete -f certs.tar 'searchguard'
     fi
