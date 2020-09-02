@@ -1,11 +1,10 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In the installation guide, we described how to install and configure Wazuh and also how to install and configure Elastic Stack for its use with Wazuh. At Wazuh we have complete control of when a new Wazuh version is going to be released, but we don't have control over when a new Elasticsearch version is going to be released.
 
-The current Wazuh Kibana plugin has been tested in Kibana version 7.8.0. Each time a new version of the Elastic Stack is released we conduct a complete set of testing to ensure the correct behavior of our Wazuh Kibana plugin. After testing is done and any necessary adjustments have been performed, we release a new version of the Wazuh Kibana plugin that is compatible with the new Filebeat/Elasticsearch/Kibana version.
+This installation guide describes how to install and configure Wazuh and also how to install and configure Elastic Stack for its use with Wazuh by first configuring their repositories.
 
-If the repository is still enabled when Elastic releases a new version, the new Filebeat version would be installed on your system forcing the upgrade of Elasticsearch and Kibana.  If there is an accidental Filebeat (and consequently Kibana and Elasticsearch) upgrade, it is possible that the Wazuh Kibana plugin could become incompatible.
+With each new release of Wazuh or the Elastic Stack, the development team at Wazuh thoroughly tests the compatibility of each component and performs necessary adjustments before releasing a new Wazuh Kibana plugin.
 
-In order to anticipate and avoid this situation, it is recommended to disable the Elasticsearch repository in the following way:
+We recommend disabling the repositories so that the individual packages will not be updated unintentionally which could potentially lead to having a version of the Elastic Stack for which the Wazuh integration has not been released yet.
 
 .. End of include file
