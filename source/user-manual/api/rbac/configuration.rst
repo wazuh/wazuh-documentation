@@ -90,7 +90,7 @@ The API response will be something similar to this. The highlighted ID should be
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Policy successfully created"
+      "message": "Policy was successfully created"
     }
 
 This will create a policy with permission to read information related to agents with ids ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
