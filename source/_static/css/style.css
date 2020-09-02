@@ -698,7 +698,6 @@ ol.simple dl dt {
 ul.simple dl dd,
 ol.simple dl dd,
 .simple li > p {
-
   margin-bottom: 0;
 }
 
@@ -720,6 +719,19 @@ blockquote dl {
 
 ol blockquote {
 	padding-left: 0;
+}
+
+li > blockquote:last-child,
+li > blockquote > div > ul,
+li > blockquote > div > ol {
+  margin-bottom: 0;
+}
+
+blockquote > div > ul > li > p,
+blockquote > div > ol > li > p,
+li > p,
+li li > div[class*='highlight'] {
+    margin-bottom: 0.5rem;
 }
 
 .footer-column:not(.white-bullets) ul {
@@ -755,17 +767,24 @@ main ol > li > ul {
 }
 
 ol ol, ol ul, ul ol, ul ul {
-  margin-bottom: 1rem;
-  padding-left: 1rem;
+  margin-bottom: 1.1rem;
+  padding-left: 1.1rem;
+}
+
+ol ul {
   list-style-type: disc;
 }
 
-ul ul {
-  list-style-type: circle;
+ol ol {
+  list-style-type: lower-alpha;
 }
 
 ol.loweralpha {
   list-style-type: lower-latin;
+}
+
+ul ul {
+  list-style-type: circle;
 }
 
 li.toctree-l1 > a {
@@ -1899,7 +1918,8 @@ form [type=submit]:disabled {
   margin-bottom: 0;
 }
 
-.central-page-area main ul li {
+.central-page-area main ul li,
+.central-page-area main ol li {
   padding: 5px 0;
 }
 
@@ -2245,7 +2265,11 @@ label {
 	border-radius: 4px 4px 0 0;
 }
 
-.admonition > p {
+.admonition > p,
+.admonition > .versionadded > p,
+.admonition > .versionchanged > p,
+.admonition > .deprecated > p,
+.admonition > .seealso > p {
   padding: 1rem;
   margin: 0;
 }
