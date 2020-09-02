@@ -26,23 +26,23 @@ how easily we can augment existing log records with additional context informati
 Set up Suricata on both elastic-server and linux-agent
 ------------------------------------------------------
 
-- On both agents as root, install Suricata and its dependencies, along with the Emerging Threats Open ruleset.
+On both agents as root, install Suricata and its dependencies, along with the Emerging Threats Open ruleset.
 
-    .. code-block:: console
+.. code-block:: console
 
-            cd /root
-            yum -y install epel-release wget jq
-            curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-stable/repo/epel-7/jasonish-suricata-stable-epel-7.repo
-            yum -y install suricata
-            wget https://rules.emergingthreats.net/open/suricata-4.0/emerging.rules.tar.gz
-            tar zxvf emerging.rules.tar.gz
-            rm /etc/suricata/rules/* -f
-            mv rules/*.rules /etc/suricata/rules/
-            rm -f /etc/suricata/suricata.yaml
-            wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
-            systemctl daemon-reload
-            systemctl enable suricata
-            systemctl start suricata
+    cd /root
+    yum -y install epel-release wget jq
+    curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-stable/repo/epel-7/jasonish-suricata-stable-epel-7.repo
+    yum -y install suricata
+    wget https://rules.emergingthreats.net/open/suricata-4.0/emerging.rules.tar.gz
+    tar zxvf emerging.rules.tar.gz
+    rm /etc/suricata/rules/* -f
+    mv rules/*.rules /etc/suricata/rules/
+    rm -f /etc/suricata/suricata.yaml
+    wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
+    systemctl daemon-reload
+    systemctl enable suricata
+    systemctl start suricata
 
 
 Trigger NIDS alerts on both agents and see the output
@@ -91,7 +91,7 @@ Trigger NIDS alerts on both agents and see the output
             "signature": "GPL ATTACK_RESPONSE id check returned root",
             "category": "Potentially Bad Traffic",
             "severity": 2
-        },
+          },
         "http": {
             "hostname": "testmyids.com",
             "url": "/",
@@ -101,7 +101,7 @@ Trigger NIDS alerts on both agents and see the output
             "protocol": "HTTP/1.1",
             "status": 200,
             "length": 39
-        },
+          },
         "app_proto": "http",
         "flow": {
             "pkts_toserver": 5,
@@ -109,7 +109,7 @@ Trigger NIDS alerts on both agents and see the output
             "bytes_toserver": 415,
             "bytes_toclient": 522,
             "start": "2018-02-09T21:32:12.861163+0000"
-        }
+          }
         }
 
     Not only do we get the basic NIDS alert details, but Suricata also includes http metadata and flow details that can be very helpful for alert assessment.
@@ -128,7 +128,7 @@ Get the Suricata JSON data to Wazuh
 Suricata is configured to write alerts to ``/var/log/suricata/eve.json`` which Wazuh does not monitor by default.  Both of our
 Linux agents need an additional ``<localfile>`` config section like this:
 
-    .. code-block:: xml
+.. code-block:: xml
 
         <localfile>
             <log_format>json</log_format>
@@ -143,26 +143,26 @@ the shared configuration with their local configuration.
 
 1. Add elastic-server and linux-agent to a new agent group called "linux". Go to wazuh-manager and:
 
-    - Create an agent group called "linux" which will cover all shared Linux agent configuration elements.
+   - Create an agent group called "linux" which will cover all shared Linux agent configuration elements.
 
-        .. code-block:: console
+     .. code-block:: console
 
             [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -g linux -q
 
-        .. code-block:: none
+     .. code-block:: none
             :class: output
 
             Group 'linux' created.
 
 
-    - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
+   - List the registered agents on wazuh-manager with the ``manage_agents -l`` command.  Note the id numbers of the Linux agents.
 
-        .. code-block:: none
+     .. code-block:: none
             :class: output
 
             [root@wazuh-manager centos]# /var/ossec/bin/manage_agents -l
 
-        .. code-block:: none
+     .. code-block:: none
             :class: output
 
             Available agents:
@@ -170,22 +170,22 @@ the shared configuration with their local configuration.
             ID: 002, Name: elastic-server, IP: any
             ID: 003, Name: windows-agent, IP: any
 
-    - Add each Linux agent to this new agent group by its ID number:
+   - Add each Linux agent to this new agent group by its ID number:
 
-        .. code-block:: console
+     .. code-block:: console
 
             [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -i 001 -g linux -q
 
-        .. code-block:: none
+     .. code-block:: none
             :class: output
 
             Group 'linux' set to agent '001'.
 
-        .. code-block:: console
+     .. code-block:: console
 
             [root@wazuh-manager centos]# /var/ossec/bin/agent_groups -a -i 002 -g linux -q
 
-        .. code-block:: none
+     .. code-block:: none
             :class: output
 
             Group 'linux' set to agent '002'.
@@ -210,9 +210,6 @@ the shared configuration with their local configuration.
     .. code-block:: none
         :class: output
 
-    .. code-block:: none
-        :class: output
-
         verify-agent-conf: Verifying [/var/ossec/etc/shared/default/agent.conf]
         verify-agent-conf: OK
 
@@ -221,19 +218,19 @@ the shared configuration with their local configuration.
 
 4. Since the config is proven valid, restart Wazuh manager to deploy the new configuration to the agents.
 
-a. For Systemd:
+   a. For Systemd:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-b. For SysV Init:
+   b. For SysV Init:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # service wazuh-manager restart
+        # service wazuh-manager restart
 
-Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
+   Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
 
 See Suricata NIDS events in Kibana
 ----------------------------------
