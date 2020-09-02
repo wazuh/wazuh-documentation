@@ -4,8 +4,6 @@
 
 network.host: <elasticsearch_ip>
 
-node.name: node-1
-
 
 # Clients certificates
 clients:

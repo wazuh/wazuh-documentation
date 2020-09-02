@@ -225,14 +225,12 @@ installElasticsearch() {
         if [ -n "$single" ]
         then
             nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
-            nn=$(awk -v RS='' '/node.name:/' ~/config.yml)
-            nnr="node.name: "
-            name="${nn//$nnr}"
             nhr="network.host: "
             nip="${nh//$nhr}"
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "cluster.initial_master_nodes: $iname" >> /etc/elasticsearch/elasticsearch.yml    
 
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml        
             echo '        - CN='$name',OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml             
