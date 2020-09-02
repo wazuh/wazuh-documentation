@@ -66,7 +66,6 @@ getHelp() {
    echo -e "\t-n     | --node-name Name of the node"   
    echo -e "\t-kip   | --kibana-ip indicates the IP of Kibana. It can be set to 0.0.0.0 which will bind all the availables IPs"
    echo -e "\t-eip   | --elasticsearch-ip Indicates the IP of Elasticsearch. It can be set to 0.0.0.0 which will bind all the availables IPs"
-   echo -e "\t-wip   | --wazuh-ip Indicates the IP of Wazuh."
    echo -e "\t-c     | --create-certificates Generates the certificates for all the indicated nodes"
    echo -e "\t-k     | --install-kibana Install Kibana"
    echo -e "\t-d     | --debug Shows the complete installation output"
@@ -321,7 +320,7 @@ installElasticsearch() {
         
         if [ -n "$single" ]
         then
-            copyCertificates name
+            copyCertificates iname
         else
             copyCertificates iname pos
         fi
@@ -342,8 +341,8 @@ createCertificates() {
     then
         echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '  - name: "'${name}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '    dn: CN="'${name}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '  - name: "'${iname}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo '    dn: CN="'${iname}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo '    ip:' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo '      - "'${nip}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     else 
@@ -373,10 +372,10 @@ copyCertificates() {
 
     if [ -n "$single" ]
     then
-        eval "mv /etc/elasticsearch/certs/${name}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
-        eval "mv /etc/elasticsearch/certs/${name}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
-        eval "mv /etc/elasticsearch/certs/${name}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
-        eval "mv /etc/elasticsearch/certs/${name}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
+        eval "mv /etc/elasticsearch/certs/${iname}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
+        eval "mv /etc/elasticsearch/certs/${iname}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "mv /etc/elasticsearch/certs/${iname}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
+        eval "mv /etc/elasticsearch/certs/${iname}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"
     else
         if [ -z "$c" ]
@@ -453,7 +452,7 @@ installKibana() {
         
         kip=$(grep -A 1 "Kibana-instance" ~/config.yml | tail -1)
         rm="- "
-        kip="${kip//$rm1}"
+        kip="${kip//$rm}"
         echo "server.host:"$kip"" >> /etc/kibana/kibana.yml
         nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
 
@@ -522,6 +521,9 @@ initializeKibana() {
         echo -ne $char
         sleep 10
     done     
+    wip=$(grep -A 1 "Wazuh-master-configuration" ~/config.yml | tail -1)
+    rm="- "
+    wip="${wip//$rm}"    
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
     echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
 
@@ -590,12 +592,7 @@ main() {
             "-k"|"--install-kibana") 
                 k=1          
                 shift 1
-                ;;
-            "-wip"|"--wazuh-ip") 
-                wip=$2          
-                shift
-                shift
-                ;;                                                
+                ;;                                              
             "-i"|"--ignore-healthcheck") 
                 i=1          
                 shift 1
@@ -639,10 +636,6 @@ main() {
         fi
         if [ -n "$k" ]
         then
-            if [ -z "$wip" ]
-            then
-                getHelp
-            fi
             if [[ -z "$e" ]] && [[ -z "$k" ]]   
             then
                 getHelp

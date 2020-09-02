@@ -29,3 +29,6 @@ clients:
 
 # Kibana-instance
 - <kibana_ip>
+
+# Wazuh-master-configuration
+- <wazuh_master_server_IP>
