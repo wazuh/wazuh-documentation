@@ -473,6 +473,12 @@ initializeKibana() {
         sleep 10
     done   
     sleep 10  
+    wip=$(grep -A 2 ${iname} ~/config.yml | tail -1)
+    rw1="- "
+    rw2='"'
+    wip="${wip//$rw1}"
+    wip="${wip//$rw2}"
+
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
     echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
   
@@ -543,17 +549,7 @@ main() {
             "-k"|"--install-kibana") 
                 k=1          
                 shift 1
-                ;;  
-            "-eip"|"--elasticsearch-ip") 
-                eip=$2          
-                shift
-                shift
-                ;;   
-            "-wip"|"--wazuh-ip") 
-                wip=$2          
-                shift
-                shift
-                ;;  
+                ;; 
             "-p"|"--elastic-password") 
                 epassword=$2          
                 shift
@@ -606,7 +602,7 @@ main() {
         fi
         if [ -n "$k" ]
         then
-            if [[ -z "$wip" ]] || [[ -z "$epassword" ]]
+            if [ -z "$epassword" ]
             then
                 getHelp
             fi
