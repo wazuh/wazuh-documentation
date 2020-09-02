@@ -690,7 +690,7 @@ You can even dump the manager's current configuration with the request below (re
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Configuration successfully read in specified node"
+      "message": "Configuration was successfully read in specified node"
     }
 
 
