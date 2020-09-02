@@ -81,7 +81,7 @@
     - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
     - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. These correspond to two Wazuh cluster nodes. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
 
-    Replace the IPs of this example with the corresponding addresses for your environment.
+    Replace the IPs of this example with the corresponding addresses for the environment.
 
     In the following steps, a zip file that contains folders named after the instances defined here will be created. These folders will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 

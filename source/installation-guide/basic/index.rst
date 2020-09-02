@@ -8,7 +8,7 @@ Wazuh with Elastic Stack
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh. In this installation guide the basic license option of Elastic Stack will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more. More information about the Wazuh components, including a brief description of each one, may be found :ref:`here <installation_guide>`.
+This section aims to guide the user through the process of installing Wazuh. In this installation guide, the basic license option of Elastic Stack will be used, this includes everything in the Open Source version under Apache 2.0 license plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more. More information about the Wazuh components, including a brief description of each one, may be found :ref:`here <installation_guide>`.
 
 Deployment types
 ----------------
