@@ -49,24 +49,26 @@ Increase max_map_count on your host (Windows)
   # sysctl -w vm.max_map_count=262144
   # exit
 
-2.1 To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``:
+2. To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``:
 
-.. code-block:: console
+  2.1. Open the file /var/lib/boot2docker/bootlocal.sh for edition:
 
-  $ docker-machine ssh default
-  # vi /var/lib/boot2docker/bootlocal.sh
+     .. code-block:: console
 
-2.2 Add the following line into the profile file::
+      $ docker-machine ssh default
+      # vi /var/lib/boot2docker/bootlocal.sh
 
-  sysctl -w vm.max_map_count=262144
+  2.2. Add the following line into the profile file::
 
-2.3 Make the script runnable:
+    sysctl -w vm.max_map_count=262144
 
-.. code-block:: console
+  2.3. Make the script runnable:
 
-  # chmod +x /var/lib/boot2docker/bootlocal.sh
+     .. code-block:: console
 
-2.4 To verify after rebooting, run "sysctl vm.max_map_count".
+      # chmod +x /var/lib/boot2docker/bootlocal.sh
+
+  2.4. To verify after rebooting, run "sysctl vm.max_map_count".
 
 .. warning::
 
@@ -91,29 +93,29 @@ Usage
 
 #. Get the ``docker-compose.yml`` file to your system:
 
-  a) Only the file::
+   a) Only the file::
 
       $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.8.2_6.7.0/docker-compose.yml
 
-  b) Get the Wazuh repository::
+   b) Get the Wazuh repository::
 
       $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.8.2_6.7.0 --single-branch
 
 #. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
-  a) Foreground::
+   a) Foreground::
 
       $ docker-compose up
 
-  b) Background::
+   b) Background::
 
       $ docker-compose up -d
 
 .. note::
-  - Both wazuh-kibana and wazuh-logstash containers will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticesearch is started. Then the set up process will continue normally.
+  Both wazuh-kibana and wazuh-logstash containers will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticesearch is started. Then the set up process will continue normally.
 
 .. note::
-  - Kibana container can take a few minutes to install Wazuh plugin, this takes place after ``Optimizing and caching browser bundles...`` is printed out.
+  Kibana container can take a few minutes to install Wazuh plugin, this takes place after ``Optimizing and caching browser bundles...`` is printed out.
 
 Exposed ports
 -------------
