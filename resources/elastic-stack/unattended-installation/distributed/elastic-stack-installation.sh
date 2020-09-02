@@ -70,8 +70,6 @@ getHelp() {
    echo -e "\t-e     | --install-elasticsearch Installs Open Distro for Elasticsearch (cannot be used together with option -k)"
    echo -e "\t-k     | --install-kibana Installs Open Distro for Kibana (cannot be used together with option -e)"
    echo -e "\t-n     | --node-name Name of the node"
-   echo -e "\t-kip   | --kibana-ip Indicates the IP of Kibana. It can be set to 0.0.0.0 which will bind all the availables IPs"
-   echo -e "\t-eip   | --elasticsearch-ip Indicates the IP of Elasticsearch. It can be set to 0.0.0.0 which will bind all the availables IPs"
    echo -e "\t-wip   | --wazuh-ip Indicates the IP of Wazuh."
    echo -e "\t-c     | --create-certificates Generates the certificates for all the indicated nodes"
    echo -e "\t-k     | --install-kibana Install Kibana"
@@ -142,7 +140,7 @@ installPrerequisites() {
     fi   
     certs=~/certs.zip
     if [ -f "$certs" ]; then
-        eval "unzip ~/certs.zip config.yml $debug"
+        eval "unzip -o ~/certs.zip config.yml $debug"
     fi
 
 }
@@ -419,17 +417,35 @@ installKibana() {
         conf="$(awk '{sub("<elasticsearch_password>", "'"${epassword}"'")}1' /etc/kibana/kibana.yml)"
         echo "$conf" > /etc/kibana/kibana.yml     
         eval "mkdir /etc/kibana/certs/ca -p"
-        echo "server.host: "$kip"" >> /etc/kibana/kibana.yml
-        echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
+        instance=$(awk -v RS='' '/- name:/' ~/config.yml)
+        kip=$(grep -A 2 ${iname} ~/config.yml | tail -1)
+        rm1="- "
+        rm2='"'
+        kip="${kip//$rm1}"
+        kip="${kip//$rm2}"        
+        echo "server.host:"$kip"" >> /etc/kibana/kibana.yml
+        nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+
+        if [ -n "$nh" ]
+        then
+            nhr="network.host: "
+            eip="${nh//$nhr}"
+            echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
+        else
+            echo "elasticsearch.hosts:" >> /etc/kibana/kibana.yml
+            sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+            shr="discovery.seed_hosts:"
+            rm="- "
+            sh="${sh//$shr}"
+            sh="${sh//$rm}"
+            for line in $sh; do
+                    echo "  - ${line}:9200" >> /etc/kibana/kibana.yml
+            done        
+        fi
         logger "Kibana installed."
         
         checkKibanacerts kc
-        if [[ "$kc" -eq "0" ]] && [[ -n "$single" ]]
-        then
-            exit
-        else
-            initializeKibana password
-        fi
+        initializeKibana iname eip password 
         echo -e            
 
         logger "Done"
@@ -450,12 +466,17 @@ checkKibanacerts() {
 
 initializeKibana() {
     
-    eval "cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/"
-    eval "cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key"
-    eval "cp /etc/elasticsearch/certs/elasticsearch.crt /etc/kibana/certs/kibana.crt"
-    eval "chown -R kibana:kibana /etc/kibana/"
-    eval "chmod -R 500 /etc/kibana/certs"
-    eval "chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*"    
+    eval "mkdir /etc/kibana/certs/ca -p $debug"
+    eval "zip -d ~/certs.zip ca/ca.key $debug"
+    eval "unzip ~/certs.zip -d ~/certs $debug"
+    eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/kibana/certs/ $debug"
+    if [ ${iname} != "kibana" ]
+    then
+        eval "mv /etc/kibana/certs/${iname}.crt /etc/kibana/certs/kibana.crt $debug"
+        eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key $debug"
+    fi    
+    eval "chmod -R 500 /etc/kibana/certs $debug"
+    eval "chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.* $debug"  
     # Start Kibana
     startService "kibana"   
     logger "Initializing Kibana (this may take a while)" 
@@ -534,12 +555,7 @@ main() {
             "-k"|"--install-kibana") 
                 k=1          
                 shift 1
-                ;;
-            "-kip"|"--kibana-ip") 
-                kip=$2          
-                shift
-                shift
-                ;;   
+                ;;  
             "-eip"|"--elasticsearch-ip") 
                 eip=$2          
                 shift
@@ -602,7 +618,7 @@ main() {
         fi
         if [ -n "$k" ]
         then
-            if [[ -z "$kip" ]] || [[ -z "$eip" ]] || [[ -z "$wip" ]] || [[ -z "$epassword" ]]
+            if [[ -z "$wip" ]] || [[ -z "$epassword" ]]
             then
                 getHelp
             fi
@@ -619,7 +635,7 @@ main() {
             fi               
             installPrerequisites
             addElasticrepo             
-            installKibana
+            installKibana iname
         fi
     else
         getHelp
