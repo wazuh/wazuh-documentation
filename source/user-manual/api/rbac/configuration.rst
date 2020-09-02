@@ -21,7 +21,7 @@ Here is an example of how to change RBAC mode using a cURL command. It is recomm
     :class: output
 
     {
-       "message": "Configuration successfully updated"
+       "message": "Configuration was successfully updated"
     }
 
 It is possible to change other non-RBAC settings such as the duration of JWT tokens, as well as to check the current configuration using the ``GET /security/config`` endpoint. Additionally, default settings can be restored using the ``DELETE /security/config`` endpoint.
@@ -90,7 +90,7 @@ The API response will be something similar to this. The highlighted ID should be
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Policy created correctly"
+      "message": "Policy was successfully created"
     }
 
 This will create a policy with permission to read information related to agents with ids ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
@@ -138,7 +138,7 @@ The response body would be similar to this one. It is important to remember the 
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Role created correctly"
+      "message": "Role was successfully created"
     }
 
 Create a new user
@@ -179,7 +179,7 @@ The output would look like below:
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User created correctly"
+      "message": "User was successfully created"
     }
 
 Create a new rule
