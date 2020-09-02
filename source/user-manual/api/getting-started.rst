@@ -284,7 +284,7 @@ Here are some of the basic concepts related to making API requests and understan
             "failed_items": [],
             "total_failed_items": 0
           }
-          "message": "Restart request sent to all specified nodes",
+          "message": "Restart request was sent to all specified nodes",
         }
 
     - Example response with errors:
