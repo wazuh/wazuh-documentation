@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 
-This installation guide describes how to install and configure Wazuh and also how to install and configure Elastic Stack for its use with Wazuh by first configuring their repositories.
+This installation guide describes how to install and configure Wazuh and Elastic Stack by first configuring their repositories.
 
-With each new release of Wazuh or the Elastic Stack, the development team at Wazuh thoroughly tests the compatibility of each component and performs necessary adjustments before releasing a new Wazuh Kibana plugin.
+With each new release of Wazuh or Elastic Stack, the development team at Wazuh thoroughly tests the compatibility of each component and performs necessary adjustments before releasing a new Wazuh Kibana plugin.
 
 We recommend disabling the repositories so that the individual packages will not be updated unintentionally which could potentially lead to having a version of the Elastic Stack for which the Wazuh integration has not been released yet.
 
