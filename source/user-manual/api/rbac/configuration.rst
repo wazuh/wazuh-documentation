@@ -138,7 +138,7 @@ The response body would be similar to this one. It is important to remember the 
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Role successfully created"
+      "message": "Role was successfully created"
     }
 
 Create a new user
