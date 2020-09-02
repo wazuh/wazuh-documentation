@@ -399,11 +399,11 @@ ssl_cipher
 
 Override SSL used ciphers.
 
-+--------------------+---------------------------------------------+
-| **Default value**  | DEFAULT_CIPHERS                             |
-+--------------------+---------------------------------------------+
-| **Allowed values** | valid ssl ciphers.                          |
-+--------------------+---------------------------------------------+
++--------------------+----------------------------------------------------+
+| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
++--------------------+----------------------------------------------------+
+| **Allowed values** | valid ssl ciphers.                                 |
++--------------------+----------------------------------------------------+
 
 server_ca_path
 ^^^^^^^^^^^^^^
@@ -444,7 +444,8 @@ authorization_pass_path
 Required when enrollment is using password verification.
 
 +--------------------+---------------------------------------------+
-| **Default value**  | NULL                                        |
+| **Default value**  | Windows: authd.pass                         |
+|                    | Unix:    /etc/authd.pass                    |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Path to a valid password file               |
 +--------------------+---------------------------------------------+
