@@ -1953,6 +1953,10 @@ a[data-lightbox] img {
 }
 /* Fix lightbox styles end here */
 
+.index .central-page-area #main-content #rst-content {
+  overflow-anchor: none;
+}
+
 .central-page-area #main-content #rst-content {
   min-height: calc(105vh);
   padding: 0 15px;
