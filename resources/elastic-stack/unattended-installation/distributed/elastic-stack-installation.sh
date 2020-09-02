@@ -444,22 +444,10 @@ installKibana() {
         fi
         logger "Kibana installed."
         
-        checkKibanacerts kc
         initializeKibana iname eip password 
         echo -e            
 
         logger "Done"
-    fi
-
-}
-
-checkKibanacerts() {
-
-    if [ -f "/etc/elasticsearch/certs/elasticsearch.key" ]
-    then
-        kc=1
-    else
-        kc=0
     fi
 
 }
