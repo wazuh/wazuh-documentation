@@ -97,7 +97,7 @@ Upgrade the Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.8.2-1.msi /q
+    # wazuh-agent-|WAZUH_LATEST|-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -162,13 +162,13 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.7.1
+    # yum install elasticsearch-|ELASTICSEARCH_LATEST|
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.7.1
+    # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
 
 2. Start the Elasticsearch service:
 
@@ -189,7 +189,7 @@ Upgrade Elasticsearch
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.7.1",
+        "number" : "|ELASTICSEARCH_LATEST|",
         "build_flavor" : "default",
         "build_type" : "rpm",
         "build_hash" : "053779d",
@@ -220,13 +220,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.7.1
+    # yum install logstash-|ELASTICSEARCH_LATEST|
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.7.1-1
+    # apt-get install logstash=1:|ELASTICSEARCH_LATEST|-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -266,13 +266,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.7.1
+    # yum install kibana-|ELASTICSEARCH_LATEST|
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.7.1
+    # apt-get install kibana=|ELASTICSEARCH_LATEST|
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -299,13 +299,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
   b) Without sudo:
 
   .. code-block:: console
 
-    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip' kibana
+    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip' kibana
 
 .. warning::
   The Wazuh app installation process may take several minutes. Please wait patiently.
@@ -327,14 +327,14 @@ Upgrade Filebeat
 
   .. code-block:: console
 
-    # yum install filebeat-6.7.1
+    # yum install filebeat-|ELASTICSEARCH_LATEST|
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update
-    # apt-get install filebeat=6.7.1
+    # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 2. Start the Filebeat service:
 

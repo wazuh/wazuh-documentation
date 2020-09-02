@@ -45,7 +45,7 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # apt-get install wazuh-agent
+    # apt-get install wazuh-agent=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 2. (Optional) Disable the Wazuh updates:
 
