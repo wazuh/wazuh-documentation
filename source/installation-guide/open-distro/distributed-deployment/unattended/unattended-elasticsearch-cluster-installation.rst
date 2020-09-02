@@ -20,9 +20,9 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -k / --install-kibana         | Installs Open Distro for Kibana (cannot be used together with option ``-e``)                                  |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -kip / --kibana-ip            | Indicates the IP of Kibana. It can be set to ``0.0.0.0`` which will bind all the availables IPs               |
+| -kip / --kibana-ip            | Indicates the IP of Kibana. It can be set to ``0.0.0.0`` which will bind all the available IPs                |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
-| -eip / --elasticsearch-ip     | Indicates the IP of Elasticsearch. It can be set to ``0.0.0.0`` which will bind all the availables IPs        |
+| -eip / --elasticsearch-ip     | Indicates the IP of Elasticsearch. It can be set to ``0.0.0.0`` which will bind all the available  IPs        |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -wip / --wazuh-ip             | Indicates the IP of Wazuh                                                                                     |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -168,7 +168,7 @@ Download the script and the configuration file. After downloading them, configur
         ## Wazuh master configuration
         url: https://<wazuh_master_server_IP>   
 
-      The highlighted lines indicates the values that must be replaced in the ``config.yml``. These values are: 
+      The highlighted lines indicate the values that must be replaced in the ``config.yml``. These values are: 
 
         - ``<elasticsearch_ip>``: Elasticsearch IP.
         - ``<node_name>``: Name of the node

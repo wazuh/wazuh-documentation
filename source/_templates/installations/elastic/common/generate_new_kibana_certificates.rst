@@ -14,7 +14,7 @@ In case of installing Kibana on a separate host where Elasticsearch was installe
 
   .. code-block:: console
 
-    # ./searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -crt -t /etc/elasticsearch/certs/
+    # /etc/elasticsearch/certs/searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -crt -t /etc/elasticsearch/certs/
 
 * Add the new certificates to the ``certs.tar`` compressed file:
 
