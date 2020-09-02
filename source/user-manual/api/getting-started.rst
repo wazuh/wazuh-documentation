@@ -649,7 +649,7 @@ Some information about the manager can be retrieved using the API. Configuration
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Processes status successfully read in specified node"
+      "message": "Processes status were successfully read in specified node"
     }
 
 
