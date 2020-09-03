@@ -1,25 +1,29 @@
 $(function() {
   let loc = location.hash;
-  const version = $('[data-version]').data('version');
-  const screenshotMinVersion = '3.13';
-  const simultaneousCapaSlide = compareVersion(version, screenshotMinVersion) >= 0 ? true : false;
+  const version = '' + $('[data-version]').data('version');
+  const minVersionScreenshot = '3.13';
+  const minVersionRedoc = '4.0';
+  const simultaneousCapaSlide = (compareVersion(version, minVersionScreenshot) >= 0);
+  const useApiRedoc = (compareVersion(version, minVersionRedoc) >= 0);
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
   const intervalTime = 5000;
   let capaInterval = null;
 
-  /* Change DOMAIN in href */
-  const domainReplacePattern = 'https://DOMAIN';
-  let currentReleasePath = window.location.hostname;
-  if ( window.location.pathname.split('/')[1] === version ) {
-    currentReleasePath += '/'+version;
+  if ( useApiRedoc ) {
+    /* Change DOMAIN in href */
+    const domainReplacePattern = 'https://DOMAIN';
+    let currentReleasePath = window.location.hostname;
+    if ( window.location.pathname.split('/')[1] === version ) {
+      currentReleasePath += '/'+version;
+    }
+    $('[href^="'+domainReplacePattern+'/"]').each(function() {
+      const oldHref = $(this).attr('href');
+      $(this).attr('href', oldHref.replace(domainReplacePattern, 'https://'+currentReleasePath));
+      $(this).attr('target', '_blank');
+    });
   }
-  $('[href^="'+domainReplacePattern+'/"]').each(function() {
-    const oldHref = $(this).attr('href');
-    $(this).attr('href', oldHref.replace(domainReplacePattern, 'https://'+currentReleasePath));
-    $(this).attr('target', '_blank');
-  });
 
   /* List of empty nodes, containing only a toctree */
   const emptyTocNodes = [
@@ -45,7 +49,7 @@ $(function() {
   const newTabNodes = [
     'user-manual/api/reference',
   ];
-  if ( version >= '4.0') {
+  if ( useApiRedoc ) {
     markTocNodesWithClass(newTabNodes, 'js-new-tab');
     $('.js-new-tab').attr('target', '_blank');
 
