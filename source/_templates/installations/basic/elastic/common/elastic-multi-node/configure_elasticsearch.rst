@@ -31,6 +31,4 @@ Values to be replaced:
 - ``<master_node_X>``: Elasticsearch cluster master-eligible node names. E.g.: ``elastic-master2``.
 - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. E.g.: ``10.0.0.3``.
 
-For more information, please see `important discovery and cluster formation settings <https://www.elastic.co/guide/en/elasticsearch/reference/7.6/discovery-settings.html#discovery-settings>`_.
-
 .. End of include file

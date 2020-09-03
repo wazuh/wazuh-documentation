@@ -78,7 +78,7 @@
 
     In the following steps, a zip file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
-    The certificates can be created using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool:
+    The certificates can be created using the elasticsearch-certutil tool:
 
     .. code-block:: console
 

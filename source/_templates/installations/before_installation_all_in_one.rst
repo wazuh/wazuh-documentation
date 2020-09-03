@@ -8,8 +8,8 @@
                 
                 .. code-block:: console
 
-                    # yum install curl unzip wget libcap && yum install java-11-openjdk-devel
-                    # export JAVA_HOME=/usr/ 
+                    # export JAVA_HOME=/usr/ && yum install curl unzip wget libcap && yum install java-11-openjdk-devel
+                    
 
             In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.
 
@@ -47,7 +47,7 @@
 
                 .. code-block:: console
 
-                    # apt install openjdk-11-jdk && export JAVA_HOME=/usr/    
+                    # export JAVA_HOME=/usr/ && apt install openjdk-11-jdk    
 
                 In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.
 
@@ -57,8 +57,7 @@
                 
                 .. code-block:: console
 
-                    # zypper install curl unzip wget libcap && zypper install java-11-openjdk-devel
-                    # export JAVA_HOME=/usr/ 
+                    # export JAVA_HOME=/usr/ && zypper install curl unzip wget libcap && zypper install java-11-openjdk-devel
 
             In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.    
             

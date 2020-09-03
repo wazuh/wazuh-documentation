@@ -182,8 +182,7 @@ Run the Elasticsearch's ``securityadmin`` script to load the new certificates in
 
   .. code-block:: console
 
-    # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-    # ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
+    # /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
 
 Replace the value ``<elasticsearch_IP>`` by the Elasticsearch installation IP and run the following command to ensure that the installation was made properly:
 
