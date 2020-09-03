@@ -93,7 +93,7 @@ checkConfig() {
             if [ -f ~/certs.zip ]
             then
                 echo "Certificates file found. Starting the installation..."
-                eval "tar -xf certs.zip config.yml $debug"
+                eval "unzip -o ~/certs.zip config.yml $debug"
             else
                 echo "No configuration file found."
                 exit 1;
