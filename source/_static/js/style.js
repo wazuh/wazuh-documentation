@@ -1,8 +1,29 @@
 $(function() {
   let loc = location.hash;
+  const version = '' + $('[data-version]').data('version');
+  const minVersionScreenshot = '3.13';
+  const minVersionRedoc = '4.0';
+  const simultaneousCapaSlide = (compareVersion(version, minVersionScreenshot) >= 0);
+  const useApiRedoc = (compareVersion(version, minVersionRedoc) >= 0);
   const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
+  const intervalTime = 5000;
+  let capaInterval = null;
+
+  if ( useApiRedoc ) {
+    /* Change DOMAIN in href */
+    const domainReplacePattern = 'https://DOMAIN';
+    let currentReleasePath = window.location.hostname;
+    if ( window.location.pathname.split('/')[1] === version ) {
+      currentReleasePath += '/'+version;
+    }
+    $('[href^="'+domainReplacePattern+'/"]').each(function() {
+      const oldHref = $(this).attr('href');
+      $(this).attr('href', oldHref.replace(domainReplacePattern, 'https://'+currentReleasePath));
+      $(this).attr('target', '_blank');
+    });
+  }
 
   /* List of empty nodes, containing only a toctree */
   const emptyTocNodes = [
@@ -23,6 +44,26 @@ $(function() {
     'user-manual/kibana-app/reference/index',
     'user-manual/ruleset/ruleset-xml-syntax/index',
   ];
+
+  /* List of nodes in the toctree that should be open in a new tab */
+  const newTabNodes = [
+    'user-manual/api/reference',
+  ];
+  if ( useApiRedoc ) {
+    markTocNodesWithClass(newTabNodes, 'js-new-tab');
+    $('.js-new-tab').attr('target', '_blank');
+
+    /* Links to new tab found within the main content */
+    $('#main-content .reference.internal').each(function() {
+      const linkRef = this;
+      newTabNodes.forEach(function(item) {
+        if (linkRef.href.indexOf(item) !== -1) {
+          $(linkRef).attr('target', '_blank');
+          return;
+        }
+      });
+    });
+  }
 
   /* list of nodes (by title) which will not show their subtree */
   const hideSubtreeNodes = [
@@ -477,14 +518,18 @@ $(function() {
     }, 10);
   }
 
-  /* -- Add funcionability for cloud-info --------------------------------------------------------------------------- */
+  /* -- Add functionality for the capabilities in the home page --------------------------------------------- */
 
   if ($(window).outerWidth() < 1200) {
     $('#capabilities .left .topic.active p').not('.topic-title').slideDown(300);
   }
 
   $(window).resize(function() {
+    clearInterval(capaInterval);
     if ($(window).outerWidth() >= 1200) {
+      if (simultaneousCapaSlide) {
+        initCapabilities();
+      }
       $('#capabilities .left .topic p').not('.topic-title').css({'display': 'none'});
       if ($('#capabilities .left .topic.active').length > 0) {
         capabilitiesHome($('#capabilities .left .topic.active'));
@@ -492,23 +537,87 @@ $(function() {
         capabilitiesHome($('#capabilities .left .topic').first());
       }
     } else {
+      if (simultaneousCapaSlide) {
+        stopCapabilities();
+      }
       $('#capabilities .left .topic.active p').not('.topic-title').css({'display': 'block'});
     }
   });
 
   $('#capabilities .left .topic').click(function() {
-    capabilitiesHome(this);
+    capabilitiesHome(this, simultaneousCapaSlide);
   });
 
+  if ($(window).outerWidth() >= 1200 && simultaneousCapaSlide ) {
+    initCapabilities();
+  }
+
+  if ( simultaneousCapaSlide ) {
+    $('.screenshots .carousel').carousel({
+      interval: intervalTime,
+    });
+
+    $('.capab .topic, .screenshots .carousel').on('click', function() {
+      $('.carousel').carousel('pause');
+      clearInterval(capaInterval);
+    });
+  }
+
+  /**
+   * Initialices part of the functionality of the capability selection in the home page
+   */
+  function initCapabilities() {
+    capaInterval = setInterval(function() {
+      changeCapabilityNext(true);
+    }, intervalTime);
+
+    $('.screenshots .carousel .carousel-control-prev, .screenshots .carousel .carousel-control-next').click(function() {
+      /* Update the selected capability to the correct one only when the slide animation has started */
+      $('.screenshots .carousel').one('slide.bs.carousel', function(carousel) {
+        changeCapabilityTo(carousel.to, false);
+      });
+    });
+  }
+
+  /**
+   * Stops part of the functionality of the capability selection in the home page
+   */
+  function stopCapabilities() {
+    $('.screenshots .carousel .carousel-control-prev, .screenshots .carousel .carousel-control-next').off();
+  }
+
+  /**
+   * Given an index (capaindex), change the active capability.
+   * @param {int} capaindex Index of the capability to be selected
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
+   */
+  function changeCapabilityTo(capaindex, auto) {
+    const topics = $('#capabilities .left .topic');
+    capabilitiesHome(topics.eq(capaindex), auto);
+  }
+
+  /**
+   * Change the active capability to the next one.
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
+   */
+  function changeCapabilityNext(auto) {
+    const topics = $('#capabilities .left .topic');
+    const active = $('#capabilities .left .topic.active');
+    let capaindex = topics.index(active);
+    capaindex = (capaindex+1) % topics.length;
+    capabilitiesHome(topics.eq(capaindex), auto);
+  }
 
   /**
    * Only for main index (documentation's home page).
    * Functionality of the capabilities section: selects capability, controls the responsive behavior, etc.
    * @param {DOMObject} ele Element containing the capability currently selected (active) or clicked.
+   * @param {boolean} auto Indicates whether the carousel slide must be automatically updated (true) or not (false)
    */
-  function capabilitiesHome(ele) {
+  function capabilitiesHome(ele, auto) {
     let eleOther = ele;
     let active = false;
+    const item = $('#capabilities .left .topic').index(ele);
 
     if ($('#page.index').length > 0) {
       if ($(ele).hasClass('active')) {
@@ -518,6 +627,11 @@ $(function() {
       }
       if ($('#capabilities .left .topic.active').length <= 0) {
         eleOther = false;
+      }
+
+      /* Update slider */
+      if ( auto ) {
+        $('.screenshots .carousel').carousel(item);
       }
 
       if ($(window).outerWidth() >= 1200) {
@@ -940,4 +1054,40 @@ function replacePromptOnHeredoc(code, heredocs, isConsole = false, isBash = fals
   });
 
   return parsed.join('\n');
+}
+
+/**
+ * Compare the numbers of 2 release versions
+ * @param {string} version1 First version to compare
+ * @param {string} version2 Second version to compare
+ * @return {int} Resulting value:
+ *  * 1 if version1 > version2
+ *  * 0 if version1 = version2
+ *  * -1 if version1 < version2
+ *  * false if the comparation could not be done
+ */
+function compareVersion(version1, version2) {
+  let result = false;
+  if ( typeof(version1) == 'string' && typeof(version2) == 'string') {
+    let v1 = version1.split('.');
+    let v2 = version2.split('.');
+    if ( v1.length >= 2 && v2.length >= 2 ) {
+      v1 = v1.map((x) =>parseInt(x));
+      v2 = v2.map((x) =>parseInt(x));
+      if ( v1[0] > v2[0] ) {
+        result = 1;
+      } else if ( v1[0] < v2[0] ) {
+        result = -1;
+      } else {
+        if ( v1[1] > v2[1] ) {
+          result = 1;
+        } else if ( v1[1] < v2[1] ) {
+          result = -1;
+        } else {
+          result = 0;
+        }
+      }
+    }
+  }
+  return result;
 }
