@@ -121,23 +121,66 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 Reference Wazuh puppet
 ----------------------
 
-+-----------------------------------------------------------------+---------------------------------------------+
-| Sections                                                        | Functions                                   |
-+=================================================================+=============================================+
-| :ref:`Wazuh manager class <reference_wazuh_manager_class>`      | :ref:`email_alert <ref_server_email_alert>` |
-|                                                                 |                                             |
-|                                                                 | :ref:`command <ref_server_command>`         |
-|                                                                 |                                             |
-|                                                                 | :ref:`activeresponse <ref_server_ar>`       |
-|                                                                 |                                             |
-|                                                                 | :ref:`addlog <ref_server_addlog>`           |
-+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`addlog <ref_agent_addlog>`            |
-|                                                                 |                                             |
-|                                                                 |                                             |
-+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`ossec_scanpaths configuration <reference_ossec_scanpaths>`|                                             |
-+-----------------------------------------------------------------+---------------------------------------------+
++-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
+| Sections                                                        | Variables                                                       | Functions                                   |
++=================================================================+=================================================================+=============================================+
+| :ref:`Wazuh manager class <reference_wazuh_manager_class>`      | :ref:`Alerts <ref_server_vars_alerts>`                          | :ref:`email_alert <ref_server_email_alert>` |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Authd <ref_server_vars_authd>`                            | :ref:`command <ref_server_command>`         |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Cluster <ref_server_vars_cluster>`                        | :ref:`activeresponse <ref_server_ar>`       |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Global <ref_server_vars_global>`                          | :ref:`addlog <ref_server_addlog>`           |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Localfile <ref_server_vars_localfile>`                    |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Rootcheck <ref_server_vars_rootcheck>`                    |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Syscheck <ref_server_vars_syscheck>`                      |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Syslog output <ref_server_vars_syslog_output>`            |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Vulnerability Detector <ref_server_vars_vuln_detector>`   |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle OpenSCAP <ref_server_vars_wodle_openscap>`          |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle CIS-CAT <ref_server_vars_ciscat>`                   |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle osquery <ref_server_vars_wodle_osquery>`            |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle Syscollector <ref_server_vars_wodle_syscollector>`  |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
++-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
+| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      | :ref:`addlog <ref_agent_addlog>`            |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Agent enrollment <ref_agent_vars_enroll>`                 |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Client settings <ref_agent_vars_client>`                  |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Localfile <ref_agent_vars_localfile>`                     |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Rootcheck <ref_agent_vars_rootcheck>`                     |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`SCA <ref_agent_vars_sca>`                                 |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Syscheck <ref_agent_vars_syscheck>`                       |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle OpenSCAP <ref_agent_vars_wodle_openscap>`           |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle CIS-CAT <ref_agent_vars_wodle_ciscat>`              |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle osquery <ref_agent_vars_wodle_osquery>`             |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Wodle Syscollector <ref_agent_vars_wodle_syscollector>`   |                                             |
+|                                                                 |                                                                 |                                             |
+|                                                                 | :ref:`Misc <ref_agent_vars_misc>`                               |                                             |
+|                                                                 |                                                                 |                                             |
++-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
+| :ref:`ossec_scanpaths configuration <reference_ossec_scanpaths>`|                                                                 |                                             |
++-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
 
 .. topic:: Contents
 
