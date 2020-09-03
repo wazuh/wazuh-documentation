@@ -439,7 +439,7 @@ installKibana() {
             sh="${sh//$shr}"
             sh="${sh//$rm}"
             for line in $sh; do
-                    echo "  - ${line}:9200" >> /etc/kibana/kibana.yml
+                    echo "  - https://${line}:9200" >> /etc/kibana/kibana.yml
             done        
         fi
         logger "Kibana installed."
