@@ -473,7 +473,7 @@ installKibana() {
         logger "Kibana installed."
         
         copyKibanacerts iname
-        initializeKibana
+        initializeKibana eip
         echo -e
     fi
 
