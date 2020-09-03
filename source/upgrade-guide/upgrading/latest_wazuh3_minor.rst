@@ -32,27 +32,27 @@ c) OpenSUSE:
 
     # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
 
-Upgrade the Wazuh manager and API
-----------------------------------
+Upgrade the Wazuh manager
+-------------------------
 
 a) CentOS/RHEL/Fedora:
 
 .. code-block:: console
 
-    # yum upgrade wazuh-manager wazuh-api
+    # yum upgrade wazuh-manager
 
 b) Debian/Ubuntu:
 
 .. code-block:: console
 
     # apt-get update
-    # apt-get install wazuh-manager wazuh-api
+    # apt-get install wazuh-manager
 
 c) OpenSUSE:
 
 .. code-block:: console
 
-    # zypper update wazuh-manager wazuh-api
+    # zypper update wazuh-manager
 
 .. note::
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.

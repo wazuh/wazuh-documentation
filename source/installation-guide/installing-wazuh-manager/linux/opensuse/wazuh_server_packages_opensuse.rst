@@ -57,22 +57,8 @@ Once the process is complete, you can check the service status with:
 
 The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-To check the API service status use the following command:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api status
-
 .. note::
-    Check out the section :doc:`RESTful API <../../../../user-manual/api/index>` for more information on how to set up and use Wazuh API.
+    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
 
 **Optional:** Disable the Wazuh repository.
 
@@ -165,7 +151,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Once you have installed the manager and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
 
 Uninstall
 ---------
@@ -174,7 +160,7 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 
-      # zypper remove wazuh-manager wazuh-api
+      # zypper remove wazuh-manager
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 

@@ -58,19 +58,19 @@ Here are all the settings available for the `api.yaml` configuration file. For m
 
     If running a cluster, the master will NOT send its local API configuration file to the workers. Each node provides its own API, if the configuration file is changed in the master node, the user should manually update the workers API configuration in order to use the same configuration. Take care of not overwriting the IP and port in the local configuration of each worker.
 
-Make sure to restart wazuh-api service after editing the configuration file:
+Make sure to restart the Wazuh API using wazuh-manager service after editing the configuration file:
 
   a. For Systemd:
 
   .. code-block:: console
 
-    # systemctl restart wazuh-api
+    # systemctl restart wazuh-manager
 
   b. For SysV Init:
 
   .. code-block:: console
 
-    # service wazuh-api restart
+    # service wazuh-manager restart
 
 Security configuration
 ----------------------
@@ -121,13 +121,13 @@ To apply changes to different settings, it is necessary to restart each API whos
 
   .. code-block:: console
 
-    # systemctl restart wazuh-api
+    # systemctl restart wazuh-manager
 
   b. For SysV Init:
 
   .. code-block:: console
 
-    # service wazuh-api restart
+    # service wazuh-manager restart
 
 Manually enable https support
 -----------------------------

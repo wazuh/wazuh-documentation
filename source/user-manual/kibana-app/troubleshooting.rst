@@ -48,13 +48,13 @@ If you are using ``systemd``, please check the status as follow:
 
 .. code-block:: console
 
-  # systemctl status wazuh-api
+  # systemctl status wazuh-manager
 
 If you are using ``SysV Init``, please check the status as follow:
 
 .. code-block:: console
 
-  # service wazuh-api status
+  # service wazuh-manager status
 
 If the Wazuh API is running, try to fetch data using the CLI from the Kibana server:
 

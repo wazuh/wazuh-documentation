@@ -35,19 +35,19 @@ Recommended changes to securize Wazuh API
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
 
-    After setting these parameters, it will be necessary to restart the Wazuh API service:
+    After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
 
       * For Systemd:
 
         .. code-block:: console
 
-          # systemctl restart wazuh-api
+          # systemctl restart wazuh-manager
 
       * For SysV Init:
 
         .. code-block:: console
 
-          # service wazuh-api restart
+          # service wazuh-manager restart
 
 #. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
 
@@ -72,19 +72,19 @@ Recommended changes to securize Wazuh API
 
       port: 55000
 
-    After configuring these parameters, it will be necessary to restart the Wazuh API service.
+    After configuring these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service.
 
       * For Systemd:
 
         .. code-block:: console
 
-          # systemctl restart wazuh-api
+          # systemctl restart wazuh-manager
 
       * For SysV Init:
 
         .. code-block:: console
 
-          # service wazuh-api restart
+          # service wazuh-manager restart
 
 #. Set maximum number of requests per minute:
 
