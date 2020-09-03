@@ -695,7 +695,7 @@ $selinux
   `Default false`
 
 $agent_name
-  Configure agent host name of the system
+  Configure agent name.
 
   `Default $::hostname`
 
