@@ -262,7 +262,7 @@ $ossec_rootcheck_check_if
   `Default yes`
 
 $ossec_rootcheck_frequency
-  Frequency that the rootcheck is going to be executed (in seconds).
+  How often the rootcheck scan will run (in seconds).
 
   `Default 36000`
 
@@ -342,7 +342,7 @@ $sca_amazon_skip_nfs
   `Default yes`
 
 $sca_amazon_policies
-  In this section it can be included a list of policy files to run assessments.
+  A list of policies to run assessments can be included in this section.
 
   `Default []`
 
@@ -367,7 +367,7 @@ $sca_rhel_skip_nfs
   `Default yes`
 
 $sca_rhel_policies
-  In this section it can be included a list of policy files to run assessments.
+  A list of policies to run assessments can be included in this section.
 
   `Default []`
 
@@ -392,7 +392,7 @@ $sca_else_skip_nfs
   `Default yes`
 
 $sca_else_policies
-  In this section it can be included a list of policy files to run assessments.
+  A list of policies to run assessments can be included in this section.
 
   `Default []`
 

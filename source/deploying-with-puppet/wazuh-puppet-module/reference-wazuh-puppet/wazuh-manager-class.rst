@@ -280,7 +280,7 @@ $ossec_rootcheck_check_if
   `Default yes`
 
 $ossec_rootcheck_frequency
-  Frequency that the rootcheck is going to be executed (in seconds).
+  How often the rootcheck scan will run (in seconds).
 
   `Default 43200`
 
