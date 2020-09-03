@@ -326,7 +326,7 @@ The results should look like this:
 
 
 
-5. Restart the Wazuh API using the Wazuh-manager service:
+5. Restart the Wazuh API using the ``wazuh-manager`` service:
 
   a. For Systemd:
 

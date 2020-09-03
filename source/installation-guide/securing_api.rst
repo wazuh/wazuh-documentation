@@ -35,7 +35,7 @@ Recommended changes to securize Wazuh API
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
 
-    After setting these parameters, it will be necessary to restart the Wazuh API using the Wazuh-manager service:
+    After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
 
       * For Systemd:
 
@@ -72,7 +72,7 @@ Recommended changes to securize Wazuh API
 
       port: 55000
 
-    After configuring these parameters, it will be necessary to restart the Wazuh API using the Wazuh-manager service.
+    After configuring these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service.
 
       * For Systemd:
 

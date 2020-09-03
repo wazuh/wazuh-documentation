@@ -117,7 +117,7 @@ API and Kibana app
 
 The Wazuh app for Kibana requires compatibility between two different products:
 
-  - With the **Wazuh API**, which comes installed by default. It requires the same ``major.minor`` version.
+  - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With the **Elastic Stack**, it's only compatible with the exact same version.
 
 +-----------------------------------+------------------------------------+
@@ -163,7 +163,7 @@ API and Splunk app
 
 The Splunk app for Wazuh requires compatibility between two different products:
 
-  - With the **Wazuh API**, which comes installed by default. It requires the same ``major.minor`` version.
+  - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With **Splunk**, it's only compatible with the exact same version.
 
 +---------------------------------+---------------------------+
