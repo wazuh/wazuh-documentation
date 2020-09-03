@@ -34,6 +34,15 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.1 ****/
+
+/* Pages added in 4.1 */
+
+newUrls['4.1'] = [
+  '/user-manual/reference/ossec-conf/agent-upgrade.html',
+  '/user-manual/reference/ossec-conf/task-manager.html',
+];
+
 /* *** RELEASE 4.0 ****/
 
 /* Pages added in 4.0 */
