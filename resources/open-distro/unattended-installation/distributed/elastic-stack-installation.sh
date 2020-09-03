@@ -84,11 +84,11 @@ checkConfig() {
         if [ -f ~/certs.tar ]
         then
             echo "Certificates file found. Starting the installation..."
-            eval "tar -xf certs.tar config.yml $debug"
+            eval "tar --overwrite -xf certs.tar config.yml $debug"
         elif [ -f /etc/elasticsearch/certs/certs.tar ]
         then
             eval "mv /etc/elasticsearch/certs/certs.tar ~/ $debug"
-            eval "tar -xf certs.tar config.yml $debug"
+            eval "tar --overwrite -xf certs.tar config.yml $debug"
             echo "Certificates file found. Starting the installation..."        
         else
             echo "No configuration file found."
@@ -433,7 +433,7 @@ installKibana() {
     else  
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.0_0.0.0.todelete.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip $debug"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
         if [  "$?" != 0  ]
         then
@@ -461,12 +461,12 @@ installKibana() {
             sh="${sh//$shr}"
             sh="${sh//$rm}"
             for line in $sh; do
-                    echo "  - ${line}:9200" >> /etc/kibana/kibana.yml
+                    echo "  - https://${line}:9200" >> /etc/kibana/kibana.yml
             done        
         fi        
 
 
-        eval "mv ~/certs.tar /etc/kibana/certs/ $debug"
+        eval "cp ~/certs.tar /etc/kibana/certs/ $debug"
         eval "cd /etc/kibana/certs/ $debug"
         eval "tar -xf certs.tar kibana.pem kibana.key root-ca.pem $debug"
         
@@ -484,9 +484,9 @@ copyKibanacerts() {
     if [[ -f "/etc/elasticsearch/certs/kibana.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana.key" ]]
     then
         eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ $debug"
-    elif [ -f "~/certs.tar" ]
+    elif [ -f ~/certs.tar ]
     then
-        eval "mv ~/certs.tar /etc/kibana/certs/ $debug"
+        eval "cp ~/certs.tar /etc/kibana/certs/ $debug"
         eval "cd /etc/kibana/certs/ $debug"
         eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem $debug"
         if [ ${iname} != "kibana" ]
