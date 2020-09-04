@@ -389,7 +389,7 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to a new
 
           .. code-block:: console
 
-            # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh_trash.list
+            # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
             # apt-get update
 
         .. group-tab:: ZYpp

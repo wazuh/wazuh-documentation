@@ -10,7 +10,7 @@
 
     .. code-block:: console
 
-      # echo "deb https://packages-dev.wazuh.com/staging/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh_trash.list
+      # echo "deb https://packages-dev.wazuh.com/pre-release/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 #. Update the package information:
 

@@ -56,7 +56,7 @@ Preparing Elastic Stack
 
       .. code-block:: console
 
-        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh_trash.list
+        # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
         # apt-get update
 
     .. group-tab:: ZYpp

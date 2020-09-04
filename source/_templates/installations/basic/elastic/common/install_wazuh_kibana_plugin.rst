@@ -8,7 +8,7 @@
 
       .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/app/kibana/wazuhapp-4.0.0_7.8.0.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip
 
 
 
