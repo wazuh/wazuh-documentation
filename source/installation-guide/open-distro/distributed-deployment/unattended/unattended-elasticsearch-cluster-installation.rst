@@ -153,6 +153,7 @@ Download the script and the configuration file. After downloading them, configur
 
       The highlighted lines indicate the values that must be replaced in the ``config.yml``. These values are: 
 
+        - ``<elastic_cluster>``: Name of the cluster. 
         - ``<master_node_x>``: Name of the node ``X``.
         - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``.
         - ``<kibana_ip>``: Kibana server IP.
