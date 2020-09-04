@@ -188,7 +188,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # bash ~/elastic-stack-installation.sh -e -c ``-n <node_name>``
+        # bash ~/elastic-stack-installation.sh -e -c -n <node_name>
 
       After the installation, Elasticsearch will start and will prompt an output like this:
 
@@ -203,7 +203,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # bash ~/elastic-stack-installation.sh -e
+        # bash ~/elastic-stack-installation.sh -e -n <node_name>
 
       After stating all the nodes, run the following commands to generate the passwords.
 
