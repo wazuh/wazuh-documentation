@@ -567,7 +567,7 @@ main() {
                 getHelp
                 ;;                                         
             *)
-                exit 1
+                getHelp
             esac
         done    
 
