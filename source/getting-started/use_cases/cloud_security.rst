@@ -111,7 +111,7 @@ The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to
 
 - :ref:`Blob Storage API <azure_monitoring_activity>`: Logs from Azure services can optionally be pushed to Azure Blob Storage. More specifically, you can configure an Azure service to export logs to a container in a storage account created for that purpose. Then, the Wazuh agent can download those logs via its integration with the Blob Storage API.
 
-- :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD thorugh REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
+- :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
 Here is an example of rules an Azure alert:
 
@@ -158,7 +158,7 @@ More information about how to use Wazuh to monitor Microsoft Azure can be found 
 Google Cloud Platform
 ---------------------
 
-Wazuh is capable of monitoring Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assests.
+Wazuh is capable of monitoring Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
 
 The following example shows an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE):
 

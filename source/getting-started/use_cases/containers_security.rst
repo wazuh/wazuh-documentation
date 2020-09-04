@@ -31,7 +31,7 @@ Example of security alerts at an infrastructure level:
    * - A new container or Pod is created
      - A user runs a command or a shell inside a container
    * - A new application is installed on the Docker host
-     - Vulerabilities are detected on the Docker host
+     - Vulnerabilities are detected on the Docker host
 
 Example of alert when a Docker container is created:
 
