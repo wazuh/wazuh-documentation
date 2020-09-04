@@ -83,8 +83,8 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
     .. code-block:: none
       :class: output
-    
-      docker-compose version 1.23.1, build b02f1306
+
+      docker-compose version 1.26.2
 
     .. note::
 
