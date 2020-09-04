@@ -306,17 +306,6 @@ Enable or disable the Audit tab on *Overview* and *Agents*.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-extensions.oscap
-^^^^^^^^^^^^^^^^
-
-Enable or disable the Open SCAP tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
 extensions.ciscat
 ^^^^^^^^^^^^^^^^^
 
