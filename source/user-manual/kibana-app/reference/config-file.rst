@@ -38,7 +38,6 @@ The configuration file reference is organized by sections:
     - `extensions.pci`_
     - `extensions.gdpr`_
     - `extensions.audit`_
-    - `extensions.oscap`_
     - `extensions.ciscat`_
     - `extensions.aws`_
     - `extensions.virustotal`_
@@ -299,17 +298,6 @@ extensions.audit
 ^^^^^^^^^^^^^^^^
 
 Enable or disable the Audit tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.oscap
-^^^^^^^^^^^^^^^^
-
-Enable or disable the Open SCAP tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | true       |

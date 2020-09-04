@@ -20,12 +20,6 @@ Wazuh is a security detection, visibility, and compliance open source project. I
 
  Additionally, OSSEC HIDS provide a centralized syslog server and an agentless configuration monitoring system that provide security insight into the events and changes on agentless devices such as firewalls, switches, routers, access points, network appliances, etc.
 
-.. topic:: OpenSCAP
-
- `OpenSCAP <https://www.open-scap.org>`_ is an `OVAL <https://oval.mitre.org/>`_ (Open Vulnerability Assessment Language) and `XCCDF <https://scap.nist.gov/specifications/xccdf/>`_ (Extensible Configuration Checklist Description Format) interpreter used to check system configurations and to detect vulnerable applications.
-
- It's a well-known tool designed to check the security compliance and hardening of systems using industry standard security baselines for enterprise environments.
-
 .. topic:: Elastic Stack
 
  `Elastic Stack <https://www.elastic.co>`_ is a software suite (Filebeat, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web front-end that gives a high-level dashboard view of events that allows for advanced analytics and data mining deep into your store of event data.

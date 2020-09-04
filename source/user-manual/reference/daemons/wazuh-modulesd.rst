@@ -18,12 +18,6 @@ The wazuh-modulesd program manages the Wazuh modules described below.
     - Rootcheck detected defects: issue message, first detection date and last alert time.
     - Static core settings: maximum permitted agents or SSL being enabled for Authd.
 
-.. topic:: OpenSCAP wodle
-
-  The OpenSCAP module integrates a SCAP scanner into the Wazuh agents providing security compliance under OpenSCAP policies as well as vulnerability assessments, identification and classification of vulnerabilities.
-
-  The complete documentation on this wodle can be found in the :doc:`OpenSCAP integration <../../capabilities/policy-monitoring/openscap/index>` section.
-
 .. topic:: CIS-CAT wodle
 
   The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh App. See the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` for more information on this functionality.

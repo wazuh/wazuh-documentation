@@ -66,7 +66,6 @@ Regulatory compliance
 * Compliance dashboards for `Splunk <https://www.splunk.com>`_, provided by Wazuh app.
 * Use of `OwlH project <https://www.owlh.net>`_ Suricata mapping for compliance.
 * SHA256 hashes used for file integrity monitoring (in addition to to MD5 and SHA1).
-* Module for integration with `OpenScap <https://www.open-scap.org>`_, used for configuration assessment.
 
 Elastic Stack integration
 +++++++++++++++++++++++++
@@ -90,7 +89,6 @@ Vulnerability detection and configuration assessment
 
 * Dynamic creation of CVE vulnerability databases, gathering data from OVAL repositories.
 * Cross correlation with applications inventory data to detect vulnerable software.
-* Module for integration with `OpenScap <https://www.open-scap.org>`_ allows the user to remotely configured scans.
 * Support for CIS-CAT, by `Center of Internet Security <https://www.cisecurity.org>`_ scanner integration.
 
 How to move to Wazuh
