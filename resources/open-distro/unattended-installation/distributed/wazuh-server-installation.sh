@@ -63,9 +63,24 @@ getHelp() {
    echo "Usage: $0 arguments"
    echo -e "\t-i    | --ignore-healthcheck Ignores the healthcheck"
    echo -e "\t-ip   | --elasticsearch-ip <elasticsearch-ip> Indicates the IP of Elasticsearch. Can be added as many as necessary"
+   echo -e "\t-n     | --node-name Name of the node"
    echo -e "\t-d   | --debug Shows the complete installation output"
    echo -e "\t-h    | --help Shows help"
    exit 1 # Exit script after printing help
+}
+
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -f ~/certs.tar ]
+    then
+        echo "Certificates file found. Starting the installation..."
+        eval "tar -xf certs.tar config.yml $debug"
+    else
+        echo "No certificates file found."
+        exit 1;
+    fi 
+
 }
 
 ## Install the required packages for the installation
@@ -157,19 +172,46 @@ installFilebeat() {
         eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/filebeat.yml --max-time 300 $debug"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.13.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
         eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
-        eval "curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
-        mkdir /etc/filebeat/certs
-
-        logger "Done"
+        eval "curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"       
     fi        
 }
 
 configureFilebeat() {
-    
-    echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml
-    for i in "${!ips[@]}"; do
-        echo "  - ${ips[i]}:9200" >> /etc/filebeat/filebeat.yml
-    done
+
+    nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+
+    if [ -n "$nh" ]
+    then
+        nhr="network.host: "
+        nip="${nh//$nhr}"
+        echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml  
+        echo "  - ${nip}"  >> /etc/filebeat/filebeat.yml  
+    else
+        echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml  
+        sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+        shr="discovery.seed_hosts:"
+        rm="- "
+        sh="${sh//$shr}"
+        sh="${sh//$rm}"
+        for line in $sh; do
+                echo "  - ${line}" >> /etc/filebeat/filebeat.yml      
+        done        
+    fi
+
+    eval "mkdir /etc/filebeat/certs $debug"
+    eval "cp ~/certs.tar /etc/filebeat/certs/ $debug"
+    eval "cd /etc/filebeat/certs/ $debug"
+    eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem $debug"
+    if [ ${iname} != "filebeat" ]
+    then
+        eval "mv /etc/filebeat/certs/${iname}.pem /etc/filebeat/certs/filebeat.pem $debug"
+        eval "mv /etc/filebeat/certs/${iname}.key /etc/filebeat/certs/filebeat.key $debug"
+    fi        
+    logger "Done"
+    echo "Starting Filebeat..."
+    eval "systemctl daemon-reload $debug"
+    eval "systemctl enable filebeat.service $debug"
+    eval "systemctl start filebeat.service $debug"     
 }
 
 ## Health check
@@ -179,7 +221,7 @@ healthCheck() {
 
     if [[ $cores < "4" ]] || [[ $ram_gb < "7700" ]]
     then
-        echo "Your system does not meet the recommended minimum hardware requirements of 8Gb of RAM and 4 . If you want to proceed with the installation use the -i option to ignore these requirements."
+        echo "Your system does not meet the recommended minimum hardware requirements of 8Gb of RAM and 4 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     else
         echo "Starting the installation..."
@@ -199,12 +241,12 @@ main() {
             "-i"|"--ignore-healthcheck")        
                 i=1
                 shift
-                ;;            
-            "-ip"|"--elasticsearch-ip")        
-                ips+=($2)
+                ;;     
+            "-n"|"--node-name") 
+                iname=$2  
                 shift
                 shift
-                ;;
+                ;;                   
             "-d"|"--debug") 
                 d=1          
                 shift 1
@@ -213,14 +255,14 @@ main() {
                 getHelp
                 ;;                
             *)
-                exit 1
+                getHelp
             esac
         done
         if [ -n "$d" ]
         then
             debug=""
         fi
-        if [ -z "$ips" ]
+        if [[ -z "$iname" ]]  
         then
             getHelp
         fi
@@ -231,11 +273,12 @@ main() {
         else
             healthCheck
         fi
+        checkConfig
         installPrerequisites
         addWazuhrepo
         installWazuh
-        installFilebeat           
-        configureFilebeat $ips
+        installFilebeat iname        
+        configureFilebeat
     else
         getHelp
     fi

@@ -69,8 +69,7 @@ getHelp() {
    echo "Usage: $0 arguments"
    echo -e "\t-e     | --install-elasticsearch Installs Open Distro for Elasticsearch (cannot be used together with option -k)"
    echo -e "\t-k     | --install-kibana Installs Open Distro for Kibana (cannot be used together with option -e)"
-   echo -e "\t-kip   | --kibana-ip indicates the IP of Kibana. It can be set to 0.0.0.0 which will bind all the availables IPs"
-   echo -e "\t-eip   | --elasticsearch-ip Indicates the IP of Elasticsearch. It can be set to 0.0.0.0 which will bind all the availables IPs"
+   echo -e "\t-n     | --node-name Name of the node"
    echo -e "\t-wip   | --wazuh-ip Indicates the IP of Wazuh."
    echo -e "\t-c     | --create-certificates Generates the certificates for all the indicated nodes"
    echo -e "\t-k     | --install-kibana Install Kibana"
@@ -79,6 +78,38 @@ getHelp() {
    echo -e "\t-i     | --ignore-health-check Ignores the health-check"
    echo -e "\t-h     | --help Shows help"
    exit 1 # Exit script after printing help
+
+}
+
+## Checks if the configuration file or certificates exist
+checkConfig() {
+
+    if [ -n "$e" ]
+    then
+        if [ -f ~/config.yml ]
+        then
+            echo "Configuration file found. Starting the installation..."
+        else
+            if [ -f ~/certs.zip ]
+            then
+                echo "Certificates file found. Starting the installation..."
+                eval "unzip -o ~/certs.zip config.yml $debug"
+            else
+                echo "No configuration file found."
+                exit 1;
+            fi
+        fi
+    
+    elif [ -n "$k" ]
+    then
+        if [ -e ~/certs/${iname} ]
+        then
+            echo "Certificates file found. Starting the installation..."
+        else
+            echo "No certificates found."
+            exit 1;
+        fi
+    fi   
 
 }
 
@@ -107,6 +138,10 @@ installPrerequisites() {
     else
         logger "Done"
     fi   
+    certs=~/certs.zip
+    if [ -f "$certs" ]; then
+        eval "unzip -o ~/certs.zip config.yml $debug"
+    fi
 
 }
 
@@ -179,21 +214,50 @@ installElasticsearch() {
         if [ -n "$single" ]
         then
             nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
-            nn=$(awk -v RS='' '/node.name:/' ~/config.yml)
-            nnr="node.name: "
-            name="${nn//$nnr}"
             nhr="network.host: "
             ip="${nh//$nhr}"
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
             echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "cluster.initial_master_nodes: $name" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "cluster.initial_master_nodes: $iname" >> /etc/elasticsearch/elasticsearch.yml    
         else
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
+            mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
+            sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+            cn=$(awk -v RS='' '/cluster.name:/' ~/config.yml)
+            echo "${cn}" >> /etc/elasticsearch/elasticsearch.yml   
+            mnr="cluster.initial_master_nodes:"
+            rm="- "
+            mn="${mn//$mnr}"
+            mn="${mn//$rm}"
 
-            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "${nh}"
+            shr="discovery.seed_hosts:"
+            sh="${sh//$shr}"
+            sh="${sh//$rm}"
+            echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml   
+            for line in $mn; do
+                    IMN+=(${line})
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+            done
+
+            echo "discovery.seed_hosts:" >> /etc/elasticsearch/elasticsearch.yml   
+            for line in $sh; do
+                    DSH+=(${line})
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+            done
+            for i in "${!IMN[@]}"; do
+            if [[ "${IMN[$i]}" = "${iname}" ]]; then
+                pos="${i}";
+            fi
+            done
+            if [[ ! " ${IMN[@]} " =~ " ${iname} " ]]; then 
+                echo "The name given does not appear on the configuration file"
+                exit 1;
+            fi              
+            nip="${DSH[pos]}" 
+            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
 
         fi
-        #awk -v RS='' '/## Elasticsearch/' ~/config.yml >> /etc/elasticsearch/elasticsearch.yml    
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
@@ -209,21 +273,41 @@ installElasticsearch() {
         if [ -n "$single" ]
         then
             createCertificates name ip
+        elif [ -n "$c" ]
+        then
+            createCertificates IMN DSH pos
         else
             logger "Done"
         fi      
-
+        
+        if [ -n "$single" ]
+        then
+            copyCertificates name
+        else
+            copyCertificates iname
+        fi
+        initializeElastic
         echo "Done"
     fi
 
 }
 
 createCertificates() {
-  
-    echo "instances:" >> /usr/share/elasticsearch/instances.yml
-    echo '- name: "'${name}'"' >> /usr/share/elasticsearch/instances.yml
-    echo '  ip:' >> /usr/share/elasticsearch/instances.yml
-    echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
+    
+    if [ -n "$single" ]
+    then
+        echo "instances:" >> /usr/share/elasticsearch/instances.yml
+        echo '- name: "'${iname}'"' >> /usr/share/elasticsearch/instances.yml
+        echo '  ip:' >> /usr/share/elasticsearch/instances.yml
+        echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
+    else 
+        echo "instances:" >> /usr/share/elasticsearch/instances.yml
+        for i in "${!IMN[@]}"; do
+            echo '- name: "'${IMN[i]}'"' >> /usr/share/elasticsearch/instances.yml
+            echo "  ip:" >> /usr/share/elasticsearch/instances.yml
+            echo '  - "'${DSH[i]}'"' >> /usr/share/elasticsearch/instances.yml
+        done
+    fi
     awk -v RS='' '/- name: /' ~/config.yml >> /usr/share/elasticsearch/instances.yml
     eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
     if [  "$?" != 0  ]
@@ -232,15 +316,43 @@ createCertificates() {
         exit 1;
     else
         logger "Certificates created"
+    fi
+
+}
+
+copyCertificates() {
+
+    if [ -n "$single" ]
+    then
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
-        eval "cp -R ~/certs/ca/ ~/certs/${name}/* /etc/elasticsearch/certs/ $debug"
-        eval "mv ~/certs/${name}/${name}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
-        eval "mv ~/certs/${name}/${name}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${iname}/${iname}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${iname}/${iname}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
+        eval "zip -u ~/certs.zip config.yml $debug"
+        eval "cp ~/config.yml ~/certs/ $debug"        
+    else
+        eval "unzip ~/certs.zip -d ~/certs $debug"
+        eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
+        eval "cp -R ~/certs/ca/ ~/certs/${IMN[pos]}/* /etc/elasticsearch/certs/ $debug"
+        eval "mv ~/certs/${IMN[pos]}/${IMN[pos]}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
+        eval "mv ~/certs/${IMN[pos]}/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
+        eval "chown -R elasticsearch: /etc/elasticsearch/certs $debug"
+        eval "chmod -R 500 /etc/elasticsearch/certs $debug"
+        eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
+        if [[ -n "$master" ]] && [[ -n "$c" ]]
+        then
+            eval "zip -u ~/certs.zip config.yml $debug"
+            eval "cp ~/config.yml ~/certs/ $debug"
+        fi            
     fi
+
+}
+
+initializeElastic() {
 
     logger "Elasticsearch installed."  
 
@@ -295,7 +407,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/staging/ui/kibana/wazuhapp-4.0.0_7.8.1_0.0.0.todelete.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.1-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -305,17 +417,34 @@ installKibana() {
         conf="$(awk '{sub("<elasticsearch_password>", "'"${epassword}"'")}1' /etc/kibana/kibana.yml)"
         echo "$conf" > /etc/kibana/kibana.yml     
         eval "mkdir /etc/kibana/certs/ca -p"
-        echo "server.host: "$kip"" >> /etc/kibana/kibana.yml
-        echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
+        instance=$(awk -v RS='' '/- name:/' ~/config.yml)
+        kip=$(grep -A 2 ${iname} ~/config.yml | tail -1)
+        rm1="- "
+        rm2='"'
+        kip="${kip//$rm1}"
+        kip="${kip//$rm2}"        
+        echo "server.host:"$kip"" >> /etc/kibana/kibana.yml
+        nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+
+        if [ -n "$nh" ]
+        then
+            nhr="network.host: "
+            eip="${nh//$nhr}"
+            echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
+        else
+            echo "elasticsearch.hosts:" >> /etc/kibana/kibana.yml
+            sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+            shr="discovery.seed_hosts:"
+            rm="- "
+            sh="${sh//$shr}"
+            sh="${sh//$rm}"
+            for line in $sh; do
+                    echo "  - https://${line}:9200" >> /etc/kibana/kibana.yml
+            done        
+        fi
         logger "Kibana installed."
         
-        checkKibanacerts kc
-        if [[ "$kc" -eq "0" ]] && [[ -n "$single" ]]
-        then
-            exit
-        else
-            initializeKibana password
-        fi
+        initializeKibana iname eip password 
         echo -e            
 
         logger "Done"
@@ -323,25 +452,19 @@ installKibana() {
 
 }
 
-checkKibanacerts() {
-
-    if [ -f "/etc/elasticsearch/certs/elasticsearch.key" ]
-    then
-        kc=1
-    else
-        kc=0
-    fi
-
-}
-
 initializeKibana() {
     
-    eval "cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/"
-    eval "cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key"
-    eval "cp /etc/elasticsearch/certs/elasticsearch.crt /etc/kibana/certs/kibana.crt"
-    eval "chown -R kibana:kibana /etc/kibana/"
-    eval "chmod -R 500 /etc/kibana/certs"
-    eval "chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*"    
+    eval "mkdir /etc/kibana/certs/ca -p $debug"
+    eval "zip -d ~/certs.zip ca/ca.key $debug"
+    eval "unzip ~/certs.zip -d ~/certs $debug"
+    eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/kibana/certs/ $debug"
+    if [ ${iname} != "kibana" ]
+    then
+        eval "mv /etc/kibana/certs/${iname}.crt /etc/kibana/certs/kibana.crt $debug"
+        eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key $debug"
+    fi    
+    eval "chmod -R 500 /etc/kibana/certs $debug"
+    eval "chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.* $debug"  
     # Start Kibana
     startService "kibana"   
     logger "Initializing Kibana (this may take a while)" 
@@ -350,6 +473,12 @@ initializeKibana() {
         sleep 10
     done   
     sleep 10  
+    wip=$(grep -A 2 ${iname} ~/config.yml | tail -1)
+    rw1="- "
+    rw2='"'
+    wip="${wip//$rw1}"
+    wip="${wip//$rw2}"
+
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
     echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
   
@@ -377,7 +506,7 @@ healthCheck() {
     then
         if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
         then
-            echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 . If you want to proceed with the installation use the -i option to ignore these requirements."
+            echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."
@@ -386,7 +515,7 @@ healthCheck() {
     then
         if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
         then
-            echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 . If you want to proceed with the installation use the -i option to ignore these requirements."
+            echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."
@@ -411,26 +540,16 @@ main() {
             "-c"|"--create-certificates") 
                 c=1  
                 shift 1
-                ;;                                  
+                ;;       
+            "-n"|"--node-name") 
+                iname=$2  
+                shift
+                shift
+                ;;                                            
             "-k"|"--install-kibana") 
                 k=1          
                 shift 1
-                ;;
-            "-kip"|"--kibana-ip") 
-                kip=$2          
-                shift
-                shift
-                ;;   
-            "-eip"|"--elasticsearch-ip") 
-                eip=$2          
-                shift
-                shift
-                ;;   
-            "-wip"|"--wazuh-ip") 
-                wip=$2          
-                shift
-                shift
-                ;;  
+                ;; 
             "-p"|"--elastic-password") 
                 epassword=$2          
                 shift
@@ -448,13 +567,18 @@ main() {
                 getHelp
                 ;;                                         
             *)
-                exit 1
+                getHelp
             esac
         done    
 
         if [ -n "$d" ]
         then
             debug=""
+        fi         
+
+        if [[ -z "$iname" ]]  
+        then
+            getHelp
         fi         
 
         if [ -n "$e" ]
@@ -473,15 +597,12 @@ main() {
             installPrerequisites
             addElasticrepo   
             checkNodes         
-            installElasticsearch
-            if [ -n "$c" ]
-            then
-                createCertificates
-            fi
+            checkConfig iname
+            installElasticsearch iname
         fi
         if [ -n "$k" ]
         then
-            if [[ -z "$kip" ]] || [[ -z "$eip" ]] || [[ -z "$wip" ]] || [[ -z "$epassword" ]]
+            if [ -z "$epassword" ]
             then
                 getHelp
             fi
@@ -498,7 +619,7 @@ main() {
             fi               
             installPrerequisites
             addElasticrepo             
-            installKibana
+            installKibana iname
         fi
     else
         getHelp
