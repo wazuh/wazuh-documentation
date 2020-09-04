@@ -179,14 +179,11 @@ Reference Wazuh puppet
 |                                                                 | :ref:`Misc <ref_agent_vars_misc>`                               |                                             |
 |                                                                 |                                                                 |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`ossec_scanpaths configuration <reference_ossec_scanpaths>`|                                                                 |                                             |
-+-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
 
 .. topic:: Contents
 
  .. toctree::
     :maxdepth: 1
 
-    reference-wazuh-puppet/ossec-scanpaths
     reference-wazuh-puppet/wazuh-agent-class
     reference-wazuh-puppet/wazuh-manager-class
