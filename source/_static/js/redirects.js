@@ -41,6 +41,7 @@ removedUrls['x.y'] = [
 newUrls['4.1'] = [
   '/user-manual/reference/ossec-conf/agent-upgrade.html',
   '/user-manual/reference/ossec-conf/task-manager.html',
+  '/user-manual/agents/remote-upgrading/upgrade-module.html',
 ];
 
 /* *** RELEASE 4.0 ****/
