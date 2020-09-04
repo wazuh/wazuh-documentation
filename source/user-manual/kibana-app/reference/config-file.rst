@@ -38,7 +38,6 @@ The configuration file reference is organized by sections:
     - `extensions.pci`_
     - `extensions.gdpr`_
     - `extensions.audit`_
-    - `extensions.oscap`_
     - `extensions.ciscat`_
     - `extensions.aws`_
     - `extensions.virustotal`_
