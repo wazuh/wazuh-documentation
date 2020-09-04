@@ -11,13 +11,13 @@
     .. code-block:: console
 
       # cat > /etc/yum.repos.d/wazuh.repo << EOF
-      [wazuh_trash]
+      [wazuh]
       gpgcheck=1
       gpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH
       enabled=1
       name=EL-$releasever - Wazuh
-      baseurl=https://packages-dev.wazuh.com/staging/yum/
-      protect=1' | tee /etc/yum.repos.d/wazuh_pre.repo
+      baseurl=https://packages-dev.wazuh.com/pre-release/yum/
+      protect=1
       EOF 
       
 

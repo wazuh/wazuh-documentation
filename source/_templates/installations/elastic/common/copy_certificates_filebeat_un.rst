@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-During the Elasticsearch installation, the ``certs.tar`` file was created. The file must be copied into the Wazuh server host, for example, using ``scp``. This guide assumes that the file is placed in the root home folder (``~/``):
+During the Elasticsearch installation, the ``certs.tar`` file was created. This guide assumes that a copy of this file has been placed in the root home folder (``~/``):
 
 .. code-block:: console
 

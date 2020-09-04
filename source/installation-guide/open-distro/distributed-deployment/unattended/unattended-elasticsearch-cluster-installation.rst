@@ -172,7 +172,7 @@ Download the script and the configuration file. After downloading them, configur
 
         - ``<elasticsearch_ip>``: Elasticsearch IP.
         - ``<node_name>``: Name of the node
-        - ``<elastic_cluster>``: Name of the cluster. This value must be the same in all the involved nodes.
+        - ``<elastic_cluster>``: Name of the cluster. This field must be the same for all the Elasticsearch nodes.
         - ``<master_node_x>``: Name of the node ``X``.
         - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``.
         - ``<kibana_ip>``: Kibana server IP.

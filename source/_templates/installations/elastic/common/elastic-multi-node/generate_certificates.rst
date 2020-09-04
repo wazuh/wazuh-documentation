@@ -83,7 +83,7 @@
             dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US
 
 
-  To learn more about how to create and configure the certificates visit the :ref:`Certificates deployment section <user_manual_certificates>`.
+  To learn more about how to create and configure the certificates visit the :ref:`certificates deployment section <user_manual_certificates>`.
 
 * Run the Search Guard's script to create the certificates:
 

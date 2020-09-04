@@ -203,7 +203,7 @@ Filebeat installation and configuration
 Next steps
 ----------
 
-The next step consists of installing Kibana. The guide continues  :ref:`here<kibana>`.
+The next step consists of installing Kibana. The guide continues  :ref:`here<basic_kibana>`.
 
 
 Disabling repositories

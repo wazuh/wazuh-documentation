@@ -1,8 +1,8 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-This guide assumes that the file ``certs.tar`` is placed in ~/ (home user folder).
+This guide assumes that the file ``certs.tar`` is placed in ~/ (root home user folder).
 
-The ``X`` must be replaced with the number used in the certificate name defined for the corresponding Elasticsearch server:
+The ``X`` must be replaced with the corresponding node number:
 
 .. code-block:: console
 

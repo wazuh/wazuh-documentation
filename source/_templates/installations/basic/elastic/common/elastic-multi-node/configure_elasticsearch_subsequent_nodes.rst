@@ -24,7 +24,7 @@ Depending on the node type, some parameters may vary between nodes. ``cluster.in
 
 Values to be replaced:
 
-- ``<elasticsearch_ip>``: the host's IP. E.g.: ``10.0.0.2``. The value ``0.0.0.0`` is an acceptable IP address and will bind to all network interfaces.
+- ``<elasticsearch_ip>``: the host's IP. E.g.: ``10.0.0.2``. 
 - ``<node_name>``: The node name, change the ``X`` for your node number. E.g.: ``elasticsearch-2``.
 - ``<elasticsearch_ip_nodeX>`` Elasticsearch cluster master-eligible nodes IP. E.g.: ``10.0.0.3``.
 
