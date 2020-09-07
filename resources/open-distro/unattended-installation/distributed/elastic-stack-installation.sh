@@ -462,7 +462,7 @@ installKibana() {
             sh="${sh//$rm}"
             for line in $sh; do
                     echo "  - https://${line}:9200" >> /etc/kibana/kibana.yml
-            done        
+            done     
         fi        
 
 
@@ -473,7 +473,7 @@ installKibana() {
         logger "Kibana installed."
         
         copyKibanacerts iname
-        initializeKibana eip
+        initializeKibana kip
         echo -e
     fi
 
@@ -506,7 +506,7 @@ initializeKibana() {
     # Start Kibana
     startService "kibana"   
     logger "Initializing Kibana (this may take a while)" 
-    until [[ "$(curl -XGET https://${eip}/status -I -uadmin:admin -k -s --max-time 300 | grep "200 OK")" ]]; do
+    until [[ "$(curl -XGET https://${kip}/status -I -uadmin:admin -k -s --max-time 300 | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
     done     
