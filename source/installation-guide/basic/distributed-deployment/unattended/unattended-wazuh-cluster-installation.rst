@@ -58,7 +58,7 @@ After the installation of all the components of the node, some steps must be don
   .. group-tab:: Single-node
 
 
-    Once the script finishes the installatio, all the components will be ready to use.
+    Once the script finishes the installation, all the components will be ready to use.
 
 
 
