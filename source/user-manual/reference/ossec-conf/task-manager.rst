@@ -12,13 +12,19 @@ task-manager
 		<task-manager>
 		</task-manager>
 
-The task manager module is responsible for managing all the tasks that run on the agents. This module is only available on the manager side, on a stand-alone manager or on a master node in a cluster configuration. This module will be enabled always and cannot be deactivated. This section does not need to be defined but needs to be defined in order to change the default values.
+The task manager module is responsible for managing all the tasks that run on the agents.
+
+This module is only available on the manager side, on a stand-alone manager or on a master node in a cluster configuration.
+
+This configuration section only needs to be defined in order to change the default values.
 
 Options
 -------
 
 - `cleanup_time`_
 - `task_timeout`_
+
+.. note:: This module will be always enabled and cannot be deactivated.
 
 
 cleanup_time

@@ -5,7 +5,10 @@
 Agent upgrade module
 ====================
 
-The agent upgrade module is responsible for carrying out the entire agent upgrade process remotely, both downloading and/or sending the WPK from the manager to the agent as well as sending the response with the result of an upgrade from the agent to the manager.
+The agent upgrade module is responsible for carrying out the entire agent upgrade process remotely:
+
+- On the manager side, it validates, downloads and/or sends the WPK files to the agents.
+- On the agent side, it processes the received commands and sends a notification to the manager after an upgrade process has been accomplished.
 
 The following is a description of how the agent upgrade module works.
 

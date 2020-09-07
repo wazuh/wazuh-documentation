@@ -12,7 +12,12 @@ agent-upgrade
 		<agent-upgrade>
 		</agent-upgrade>
 
-The agent upgrade module is responsible for carrying out the entire agent upgrade process remotely, both downloading and/or sending the WPK from the manager to the agent as well as sending the response with the result of an upgrade from the agent to the manager. In the manager side, this module will be enabled always and cannot be deactivated. This section does not need to be defined but needs to be defined in order to change the default values.
+The agent upgrade module is responsible for carrying out the entire agent upgrade process remotely:
+
+- On the manager side, it validates, downloads and/or sends the WPK files to the agents.
+- On the agent side, it processes the received commands and sends a notification to the manager after an upgrade process has been accomplished.
+
+This configuration section only needs to be defined in order to change the default values.
 
 Options
 -------
@@ -23,6 +28,8 @@ Manager side
 - `chunk_size`_
 - `wpk_repository`_
 
+.. note:: On the manager side, this module will be always enabled and cannot be deactivated.
+
 Agent side
 ^^^^^^^^^^
 
@@ -30,6 +37,8 @@ Agent side
 - `notification_wait_start`_
 - `notification_wait_factor`_
 - `notification_wait_max`_
+
+.. note:: On the agent side, this module can be disabled and doing so will block remote upgrading of that agent.
 
 
 chunk_size
