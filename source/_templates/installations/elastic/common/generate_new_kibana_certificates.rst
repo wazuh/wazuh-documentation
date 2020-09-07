@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-In case of installing Kibana on a separate host where Elasticsearch was installed, new certificates for Kibana should be created. This step must be done on the Elasticsearch master-node where the rest of the certificates were created:
+In case of installing Kibana on a separate host where Elasticsearch was installed, new certificates for Kibana should be created. This step must be done on the Elasticsearch initial node where the rest of the certificates were created:
 
 
 * Modify the ``search-guard.yml`` file placed at ``/etc/elasticsearch/certs/searchguard`` and add the following information at the end of the ``clients`` section:
@@ -22,7 +22,7 @@ In case of installing Kibana on a separate host where Elasticsearch was installe
 
     # tar -rvf certs.tar kibana.pem kibana.key
 
-Once the certificates have been created, they can be removed from the Elasticsearch master node and added to the ``certs.tar`` file, then it must be copied into the Kibana server, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
+Once the certificates have been created, they can be removed from the Elasticsearch initial node and added to the ``certs.tar`` file, then it must be copied into the Kibana server, for example, using ``scp``. This guide assumes that the file is placed in ~/ (home user folder):
 
 .. code-block:: console
 

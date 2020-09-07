@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-It is necessary to create new certificates for the server where Kibana will be installed. This process has to be done in the Elasticsearch master node where the other certificates were created. Once logged in there, the following command has to be used:
+It is necessary to create new certificates for the server where Kibana will be installed. This process has to be done in the Elasticsearch initial node where the other certificates were created. Once logged in there, the following command has to be used:
 
 .. code-block:: console
 

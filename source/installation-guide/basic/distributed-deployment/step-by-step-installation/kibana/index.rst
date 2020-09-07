@@ -17,18 +17,17 @@ Adding the Elastic Stack repository
 
 .. tabs::
 
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+
+
 
   .. group-tab:: APT
 
 
     .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
-
-
-
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
@@ -46,17 +45,17 @@ Kibana installation and configuration
 
     .. tabs::
 
-        .. group-tab:: APT
-
-
-            .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
-
-
-
         .. group-tab:: Yum
 
 
             .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_kibana.rst
+
+
+
+        .. group-tab:: APT
+
+
+            .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
 
 
 
@@ -137,6 +136,12 @@ Disabling repositories
 
 .. tabs::
 
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
+
+
 
   .. group-tab:: APT
 
@@ -145,17 +150,11 @@ Disabling repositories
 
 
 
-  .. group-tab:: Yum
-
-
-    .. include:: ../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
-
-
-
   .. group-tab:: ZYpp
 
 
     .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
+
 
 
 Next steps
