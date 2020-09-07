@@ -419,10 +419,12 @@ def setup(app):
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
     app.add_js_file("js/delete-cache.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/delete-cache.js")).st_mtime)
+    app.add_config_value('custom_replacements', {}, True)
 
 	# List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
     app.connect('build-finished', creating_file_list)
+    app.connect('source-read', customReplacements)
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
@@ -473,4 +475,63 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version,
     "production": production
+}
+
+def customReplacements(app, docname, source):
+    result = source[0]
+    for key in app.config.custom_replacements:
+        result = result.replace(key, app.config.custom_replacements[key])
+    source[0] = result
+
+custom_replacements = {
+    "|WAZUH_LATEST|" : "3.3.1",
+    "|WAZUH_LATEST_MINOR|" : "3.3",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.3.1",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.3.1",
+    "|WAZUH_LATEST_PUPPET|" : "3.3.1",
+    "|WAZUH_LATEST_OVA|" : "3.3.1",
+    "|WAZUH_LATEST_DOCKER|" : "3.3.1",
+    "|ELASTICSEARCH_LATEST|" : "6.2.4",
+    "|ELASTICSEARCH_LATEST_OVA|" : "6.2.4",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "6.2.4",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "6.2.4",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "6.2.4",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "6.2.4",
+    "|SPLUNK_LATEST|" : "7.1.1",
+    "|ELASTIC_6_LATEST|" : "6.2.4",
+    "|WAZUH_REVISION_AIX|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_API_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_API_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_DEB_API_X86|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_API_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
+    "|WAZUH_REVISION_HPUX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_WINDOWS|" : "1",
+    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/3.x/checksums/",
+    "|RPM_AGENT|" : "https://packages.wazuh.com/3.x/yum/wazuh-agent",
+    "|RPM_MANAGER|" : "https://packages.wazuh.com/3.x/yum/wazuh-manager",
+    "|RPM_API|" : "https://packages.wazuh.com/3.x/yum/wazuh-api",
+    "|DEB_AGENT|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
+    "|DEB_MANAGER|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api"
 }

@@ -49,7 +49,7 @@ The next step is to install the Wazuh Manager on your system:
 
   .. code-block:: console
 
-    # yum install wazuh-manager
+    # yum install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_MANAGER_X86|
 
 Once the process is complete, you can check the service status with:
 
@@ -131,7 +131,7 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # yum install wazuh-api
+    # yum install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_API_X86|
 
 4. Once the process is complete, you can check the service status with:
 
