@@ -638,7 +638,8 @@ main() {
                 echo "Health-check ignored."    
             else
                 healthCheck e k         
-            fi               
+            fi  
+            checkConfig              
             installPrerequisites
             addWazuhrepo             
             installKibana iname
