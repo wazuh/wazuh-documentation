@@ -100,7 +100,7 @@ retry_interval
 Time interval between connection attempts (seconds).
 
 +--------------------+--------------------+
-| **Default value**  | 5                  |
+| **Default value**  | 10                 |
 +--------------------+--------------------+
 | **Allowed values** | 1 to 1.000.000.000 |
 +--------------------+--------------------+
