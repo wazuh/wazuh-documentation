@@ -24,7 +24,7 @@
 
                 .. code-block:: console
 
-                    # zypper install zip unzip tar curl                 
+                    # zypper install zip unzip curl                 
    
 
 .. End of include file
