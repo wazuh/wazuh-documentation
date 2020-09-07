@@ -93,13 +93,13 @@ In Docker for OSX, there is a default memory limit of 2GB, so in order to run `d
 Usage
 -----
 
-#. Clone the Wazuh repository to your system:
+1. Cone the Wazuh repository to your system:
 
-.. code-block:: console
+  .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER| --depth=1
+    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER| --depth=1
 
-#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
+2. Start Wazuh and Elastic Stack using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
    a) Foreground::
 
