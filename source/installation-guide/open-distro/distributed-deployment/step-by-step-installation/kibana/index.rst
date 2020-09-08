@@ -109,8 +109,6 @@ Kibana installation and configuration
         .. group-tab:: Same Elasticsearch server
 
 
-            Copy the Elasticsearch certificates:
-
             .. include:: ../../../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
 
 
