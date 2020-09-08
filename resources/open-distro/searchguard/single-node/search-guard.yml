@@ -28,3 +28,5 @@ clients:
     admin: true
   - name: filebeat
     dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
+  - name: kibana
+    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
