@@ -16,14 +16,14 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
-    gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
     enabled=1
     name=Wazuh repository
-    baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
+    baseurl=https://packages.wazuh.com/3.x/yum/5/$basearch/
     protect=1
     EOF
 

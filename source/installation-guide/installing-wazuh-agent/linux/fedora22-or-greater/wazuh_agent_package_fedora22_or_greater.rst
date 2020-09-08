@@ -16,7 +16,7 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
