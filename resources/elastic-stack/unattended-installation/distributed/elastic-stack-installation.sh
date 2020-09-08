@@ -454,7 +454,6 @@ installKibana() {
 
 initializeKibana() {
     
-    eval "mkdir /etc/kibana/certs/ca -p $debug"
     eval "zip -d ~/certs.zip ca/ca.key $debug"
     eval "unzip ~/certs.zip -d ~/certs $debug"
     eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/kibana/certs/ $debug"
