@@ -43,6 +43,6 @@ On your terminal, install the Wazuh agent:
 
 	.. code-block:: console
 
-		# apt-get install wazuh-agent
+		# apt-get install wazuh-agent=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
