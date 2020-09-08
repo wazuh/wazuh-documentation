@@ -70,7 +70,6 @@ getHelp() {
    echo -e "\t-e     | --install-elasticsearch Installs Open Distro for Elasticsearch (cannot be used together with option -k)"
    echo -e "\t-k     | --install-kibana Installs Open Distro for Kibana (cannot be used together with option -e)"
    echo -e "\t-n     | --node-name Name of the node"
-   echo -e "\t-wip   | --wazuh-ip Indicates the IP of Wazuh."
    echo -e "\t-c     | --create-certificates Generates the certificates for all the indicated nodes"
    echo -e "\t-k     | --install-kibana Install Kibana"
    echo -e "\t-p     | --elastic-password Elastic user password"
