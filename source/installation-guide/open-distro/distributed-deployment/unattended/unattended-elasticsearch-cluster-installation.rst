@@ -104,7 +104,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Initial node configuration and installation**
 
-    - Download the script and the configuration file config.yml
+    - Download the script and the configuration file ``config.yml``
 
       .. code-block:: console
 
