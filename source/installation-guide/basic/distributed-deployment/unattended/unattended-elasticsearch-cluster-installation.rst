@@ -125,14 +125,16 @@ Download the script and the configuration file. After downloading them, configur
 
   .. group-tab:: Multi-node
 
-    **Download the script and the configuration file config.yml**
+    **Initial node configuration and installation**
+
+      - Download the script and the configuration file ``config.yml``
 
       .. code-block:: console
 
           # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
           # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
 
-    **Configure the installation**
+    - Configure the installation
 
       .. code-block:: yaml
         :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 21, 24
@@ -182,7 +184,7 @@ Download the script and the configuration file. After downloading them, configur
           ip:
           - "<wazuh_server_ip_X>"                
 
-    **Run the script**
+    - Run the script:
 
       - The first node of Elasticsearch will be considered as the initial node, this means that this node will be in charged of creating the certificates that must be distributed through the rest of the involved nodes of the installation. The option ``-c`` is used to generate the certificates:
 
@@ -199,15 +201,17 @@ Download the script and the configuration file. After downloading them, configur
         Elasticsearch installation finished
 
 
+    **Subsequent nodes installation**
+    
       - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>``:
 
-      .. code-block:: console
+        .. code-block:: console
 
-        # bash ~/elastic-stack-installation.sh -e -n <node_name>
+          # bash ~/elastic-stack-installation.sh -e -n <node_name>
 
-      After stating all the nodes, run the following commands to generate the passwords.
+    After stating all the nodes, run the following commands to generate the passwords.
 
-      .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
+    .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
 
 
 
@@ -228,7 +232,7 @@ Download the script. In case of installing Kibana on the same server as Elastics
 
 .. code-block:: console
 
-  # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
+  # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
 
 Run the script:
 
