@@ -238,11 +238,12 @@ Run the script:
 
 .. code-block:: console
 
-  # bash elastic-stack-installation.sh -k n <node_name>
+  # bash elastic-stack-installation.sh -k n <node_name> -p <elastic_password>
 
 The following values must be replaced:
 
   - ``<node_name>``: Name of the instance.
+  - ``elastic_password``: Password for the user ``elastic`` previously generated during the Elasticsearch installation.
   
 
 .. _basic_configure_kibana_unattended:
