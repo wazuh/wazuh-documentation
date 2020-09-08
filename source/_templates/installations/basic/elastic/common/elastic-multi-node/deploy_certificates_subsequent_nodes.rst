@@ -4,7 +4,7 @@
 .. code-block:: console
 
   # unzip ~/certs.zip -d ~/certs
-  # rm ~/certs/ca/ca.key
+  # rm -f ~/certs/ca/ca.key
   # mkdir /etc/elasticsearch/certs/ca -p
   # cp -R ~/certs/ca/ ~/certs/elasticsearch-X/* /etc/elasticsearch/certs/
   # mv /etc/elasticsearch/certs/elasticsearch-X.crt /etc/elasticsearch/certs/elasticsearch.crt
