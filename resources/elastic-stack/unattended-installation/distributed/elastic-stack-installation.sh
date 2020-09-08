@@ -454,7 +454,7 @@ installKibana() {
 initializeKibana() {
     
     eval "zip -d ~/certs.zip ca/ca.key $debug"
-    eval "unzip ~/certs.zip -d ~/certs $debug"
+    eval "unzip -o ~/certs.zip -d ~/certs $debug"
     eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/kibana/certs/ $debug"
     if [ ${iname} != "kibana" ]
     then
