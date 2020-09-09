@@ -186,7 +186,7 @@ Download the script and the configuration file. After downloading them, configur
 
     - Run the script:
 
-      - The first node of Elasticsearch will be considered as the initial node, this means that this node will be in charged of creating the certificates that must be distributed through the rest of the involved nodes of the installation. The option ``-c`` is used to generate the certificates:
+      The option ``-c`` is used to generate the certificates:
 
       .. code-block:: console
 
