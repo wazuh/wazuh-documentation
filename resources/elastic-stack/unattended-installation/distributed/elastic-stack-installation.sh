@@ -461,6 +461,7 @@ initializeKibana() {
         eval "mv /etc/kibana/certs/${iname}.crt /etc/kibana/certs/kibana.crt $debug"
         eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key $debug"
     fi    
+    eval "chown -R kibana:kibana /etc/kibana/ $debug"
     eval "chmod -R 500 /etc/kibana/certs $debug"
     eval "chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.* $debug"  
     # Start Kibana
