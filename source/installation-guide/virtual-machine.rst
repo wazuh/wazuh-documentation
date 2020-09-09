@@ -7,15 +7,15 @@ We provide a pre-built virtual machine image (OVA), you can directly import usin
 
 .. note::  This VM only run on 64-bit systems and is not recommended to use in production environments. Instead, it can be a useful tool for proof of concepts and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments, where higher performance is required.
 
-1. This virtual appliance, available at https://packages.wazuh.com/vm/wazuh2.1.1_5.6.3.ova, contains the following components:
+1. This virtual appliance, available at https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|.ova, contains the following components:
 
     - CentOS 7
-    - Wazuh 2.1.1-1
-    - RESTful API 2.1.1-1
-    - Elasticsearch 5.6.3
-    - Logstash 5.6.3
-    - Kibana 5.6.3 port "**5601**""
-    - WazuhAPP 2.1.1_5.6.3
+    - Wazuh |WAZUH_LATEST_OVA|-1
+    - RESTful API |WAZUH_LATEST_OVA|-1
+    - Elasticsearch |ELASTICSEARCH_LATEST_OVA|
+    - Logstash |ELASTICSEARCH_LATEST_OVA|
+    - Kibana |ELASTICSEARCH_LATEST_OVA| port "**5601**""
+    - WazuhAPP |WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|
 
 2. Import the OVA in your virtualization platform, and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 

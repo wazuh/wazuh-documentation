@@ -50,7 +50,7 @@ On your terminal, install the Wazuh manager:
 
 	.. code-block:: bash
 
-		$ apt-get install wazuh-manager
+		$ apt-get install wazuh-manager=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
 Once the process is completed, you can check the service status with:
 
@@ -85,7 +85,7 @@ Installing Wazuh API
 
 	.. code-block:: bash
 
-		$ apt-get install wazuh-api
+		$ apt-get install wazuh-api=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_API_X86|
 
 3. Once the process is completed, you can check the service status with:
 
@@ -144,7 +144,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	.. code-block:: bash
 
-		$ apt-get install filebeat=5.6.5
+		$ apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
