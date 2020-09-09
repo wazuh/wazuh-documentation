@@ -47,7 +47,7 @@ The next will install Wazuh manager on your system:
 
   .. code-block:: console
 
-	 # yum install wazuh-manager
+	 # yum install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
 Once the process is completed, you can check the service status with:
 
@@ -124,7 +124,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-	 # yum install wazuh-api
+	 # yum install wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_API_X86|
 
 4. Once the process is completed, you can check the service status with:
 
@@ -175,7 +175,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-	 # yum install filebeat-6.1.0
+	 # yum install filebeat-|ELASTICSEARCH_LATEST|
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
