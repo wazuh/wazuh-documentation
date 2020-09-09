@@ -443,7 +443,7 @@ installKibana() {
         fi
         logger "Kibana installed."
         
-        initializeKibana iname kip password 
+        initializeKibana iname kip epassword 
         echo -e            
 
         logger "Done"
@@ -467,6 +467,8 @@ initializeKibana() {
     # Start Kibana
     startService "kibana"   
     logger "Initializing Kibana (this may take a while)" 
+    rms=" "
+    kip="${kip//$rms}"    
     until [[ "$(curl -XGET https://${kip}/status -I -uelastic:"$epassword" -k -s | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
