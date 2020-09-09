@@ -17,16 +17,20 @@
       - name: "filebeat"
         ip:
         - "10.0.0.3"
+      - name: "kibana"
+        ip:
+        - "10.0.0.4"    
       EOF
 
     Every ``name`` section represents one host in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
     - An ``elasticsearch`` instance with IP ``10.0.0.2``.
     - A ``filebeat`` instance with IP ``10.0.0.3`` corresponding to a single-node Wazuh cluster.
+    - A ``kibana`` instance with IP ``10.0.0.4``. If Kibana will be installed in the same server as Elastisearch, the same IP may be used.  
     
     Replace the IPs of this example with the corresponding addresses for your environment.
 
-   Now a compressed zip file that contains a folder named after each of the instances defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
+    Now a compressed zip file that contains a folder named after each of the instances defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
 
     The certificates can be created using the elasticsearch-certutil tool:
 
@@ -74,13 +78,16 @@
       - name: "filebeat-2"
         ip:
         - "10.0.0.4"
+      - name: "kibana"
+        ip:
+        - "10.0.0.5"  
       EOF
 
     Every ``name`` section corresponds to one host in the Wazuh - Elastic Stack environment. In this example, the file describes:
 
     - An ``elasticsearch`` instance with IP ``10.0.0.2``. It is an Elasticsearch single-node cluster.
     - Two ``filebeat`` instances, the #1 and #2 with their respective IPs ``10.0.0.3`` and ``10.0.0.4``. These correspond to two Wazuh cluster nodes. In case of configuring a Wazuh multi-node cluster with three or more nodes, more ``name`` sections with their respective names and IPs can be defined.
-     
+    - A ``kibana`` instance with IP ``10.0.0.5``. If Kibana will be installed in the same server as Elastisearch, the same IP may be used.   
 
     Replace the IPs of this example with the corresponding addresses for the environment.
 
