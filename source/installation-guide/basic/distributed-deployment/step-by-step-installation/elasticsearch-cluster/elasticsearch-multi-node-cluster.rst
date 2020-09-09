@@ -8,16 +8,15 @@
 Elasticsearch multi-node cluster
 =================================
 
-This document will explain how to install the Elastic Stack components in a multi-node cluster.
+Elasticsearch is a highly scalable full-text search and analytics engine. This document will explain how to install the Elastic Stack components in a multi-node cluster.
+
+For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
 
-
 Installing Elasticsearch
 ------------------------
-
-Elasticsearch is a highly scalable full-text search and analytics engine. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
 The installation process for a multi-node cluster will be explained in three parts. The first one refers to the configuration of the initial node, in which the certificates that will be deployed to the subsequent nodes are generated. 
 
