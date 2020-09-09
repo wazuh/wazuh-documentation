@@ -8,6 +8,7 @@
 This section lists the changes in version 4.0.0. More details about these changes are provided in each component changelog:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.0/CHANGELOG.md>`_
+- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/master/CHANGELOG.md>`_
 
 Highlights
 ----------
@@ -96,3 +97,37 @@ Wazuh ruleset
 -------------
 
 - Changed compliance rules groups and removed ``alert_by_email`` option by default.
+
+Wazuh packages
+--------------
+
+**Added**
+- Added Open Distro for Elasticsearch packages to Wazuh's software repository.
+
+
+**Changed**
+
+- Wazuh services are no longer enabled nor started in a fresh install.
+- Wazuh services will be restarted on upgrade if they were running before upgrading them.
+- Wazuh API and Wazuh Manager services are unified in a single wazuh-manager service.
+- Wazuh app for Splunk and Wazuh plugin for Kibana have been renamed.
+- Wazuh VM now uses Wazuh and Open Distro for Elasticsearch.
+
+
+**Fixed**
+
+- Unit files for systemd are now installed on /usr/lib/systemd/system.
+- Unit files are now correctly upgraded.
+- ossec-init.conf file now shows the build date for any system.
+- Fixed an error setting SCA file permissions on .deb packages.
+- Removed
+- Removed Wazuh API package has been removed. Now, the Wazuh API is embedded into the Wazuh Manager installation.
+- Removed OpenSCAP files and integration.
+
+Wazuh documentation
+-------------------
+
+- Added two different sections in the installation guide to install Wazuh alogn Elastic stack or Open Distro for Elasticsearch.
+- Reorganized the installation guide to choose between all in one deployment or distributed deployment.
+- Added scripts for unattended installations.
+- Reorganized the upgrade guide.
