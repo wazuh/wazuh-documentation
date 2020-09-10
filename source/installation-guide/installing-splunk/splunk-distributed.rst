@@ -127,5 +127,5 @@ Now, restart the Splunk Service:
 
 Next step is installing the :ref:`Wazuh App <splunk_app>` into the search heads instances to start using the services.
 
-- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/|ELASTICSEARCH_LATEST|/Admin/CLIadmincommands>`_ .
-- To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/|ELASTICSEARCH_LATEST|/DistSearch/Whatisdistributedsearch>`_ from the official documentation.
+- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Admin/CLIadmincommands>`_ .
+- To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/DistSearch/Whatisdistributedsearch>`_ from the official documentation.
