@@ -120,7 +120,7 @@ Wazuh server worker nodes
 
 
 
-.. _basic_wazuh_server_multi_node_filebeat:
+.. _wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
 -------------------

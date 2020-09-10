@@ -120,7 +120,7 @@ Wazuh server worker nodes
 #. .. include:: ../../../../../_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
 
 
-.. _wazuh_server_multi_node_filebeat:
+.. _basic_wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
 -------------------
