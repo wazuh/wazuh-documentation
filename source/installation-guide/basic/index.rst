@@ -20,10 +20,10 @@ The Installation guide is divided into two independent sections, all-in-one depl
 - Distributed deployment: Each component is installed in a separate host and can also be installed in a multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments. 
 
 
-Types of installation
+Installation methods
 ---------------------
 
-For each type of deployment, the user can choose between two types of installation:
+For each type of deployment, the user can choose between two installation methods:
 
 - Unattended: Automated installation. Requires the initial input of the information needed to accomplish the installation process using scripts.
 
