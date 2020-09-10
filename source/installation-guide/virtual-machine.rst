@@ -9,15 +9,15 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 .. note:: This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
 
-1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST_OVA|.ova>`_, contains the following components:
+1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|.ova>`_, contains the following components:
 
     - CentOS 7
-    - Wazuh |WAZUH_LATEST|
-    - Wazuh API |WAZUH_LATEST|
+    - Wazuh |WAZUH_LATEST_OVA|
+    - Wazuh API |WAZUH_LATEST_OVA|
     - Elasticsearch |ELASTICSEARCH_LATEST_OVA|
     - Logstash |ELASTICSEARCH_LATEST_OVA|
     - Kibana |ELASTICSEARCH_LATEST_OVA|
-    - Wazuh app |WAZUH_LATEST|-|ELASTICSEARCH_LATEST_OVA|
+    - Wazuh app |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
@@ -41,6 +41,6 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 5. In order to connect to the Kibana web user interface, login with ``https://OVA_IP_ADDRESS`` (where ``OVA_IP_ADDRESS`` is your system IP).
 
-.. note:: You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST_OVA|.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST_OVA|-disk1.vmdk>`_ disk.
+.. note:: You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST_OVA|-disk1.vmdk>`_ disk.
 
 .. note:: If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
