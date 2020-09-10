@@ -99,7 +99,7 @@ Once Elasticsearch is installed it has to be configured by downloading and editi
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
+#.  This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
@@ -238,7 +238,7 @@ Disabling repositories
 Next steps
 ----------
 
-The next step consists on the selection of the Wazuh server installation desired.
+The next step is the installation of the Wazuh server, select the cluster mode: 
 
 - :ref:`Wazuh single-node cluster<basic_wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<basic_wazuh_multi_node_cluster>`

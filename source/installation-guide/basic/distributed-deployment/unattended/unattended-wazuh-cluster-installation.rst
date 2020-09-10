@@ -19,7 +19,7 @@ Download the script:
   # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/wazuh-server-installation.sh
     
 
-Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order to connect with them. Choose between single-node or multi-node depending on the type of installation. The following commands assume that the script has been downloaded in the home directory ( ``~/`` ):
+Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order to connect with them. Choose the cluster mode between single-node or multi-node. The following commands assume that the script has been downloaded in the home directory ( ``~/`` ):
 
 .. code-block:: console
 
@@ -50,7 +50,7 @@ The script allows the following options:
 Configure the installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After the installation of all the components of the node, some steps must be done manually. Choose between single-node or multi-node depending on the type of installation:
+After the installation of all the components of the node, some steps must be done manually. Choose the cluster mode between single-node or multi-node:
 
 .. tabs::
 
