@@ -98,9 +98,12 @@ Wazuh server master node
 
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
 Wazuh server worker nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 #. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
@@ -109,7 +112,12 @@ Wazuh server worker nodes
 
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
 #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
+
 
 
 .. _basic_wazuh_server_multi_node_filebeat:

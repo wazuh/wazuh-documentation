@@ -85,6 +85,11 @@ Installing the Wazuh manager
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst    
+
+
 .. _basic_wazuh_server_single_node_filebeat:
 
 Installing Filebeat

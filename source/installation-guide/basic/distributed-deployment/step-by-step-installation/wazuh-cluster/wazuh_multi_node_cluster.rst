@@ -81,6 +81,7 @@ Installing the Wazuh manager
     .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/install_wazuh_manager.rst
 
 
+
 Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
 
 One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
@@ -96,6 +97,10 @@ Wazuh server master node
 
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
 
 Wazuh server worker nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,6 +113,9 @@ Wazuh server worker nodes
 
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 #. .. include:: ../../../../../_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
 
