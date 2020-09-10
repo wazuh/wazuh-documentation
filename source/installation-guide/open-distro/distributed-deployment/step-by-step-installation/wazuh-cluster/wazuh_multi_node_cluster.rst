@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta:: :description: Learn how to install a Wazuh multi-node cluster
 
 .. _wazuh_multi_node_cluster:
 
