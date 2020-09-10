@@ -17,11 +17,11 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
       * Using CMD: ::
 
-	  wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.msi /q
+	  wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
       * Using PowerShell: ::
 
-	  .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.msi /q
+	  .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
 
     * Deployment:
@@ -30,11 +30,11 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
 	* Using CMD: ::
 
-            wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
+            wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
 	* Using PowerShell: ::
 
-	    .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
+	    .\wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
 
         See the following document for additional automated deployment options: :ref:`deployment variables for Windows <deployment_variables_windows>`.
 
@@ -59,4 +59,4 @@ Uninstall
 
 To uninstall the agent, the original MSI file will be needed to perform the unattended process::
 
-    msiexec.exe /x wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|.msi /qn
+    msiexec.exe /x wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /qn
