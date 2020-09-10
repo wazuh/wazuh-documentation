@@ -103,7 +103,7 @@ Certificates creation and deployment
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.`` This guide will assume that the file will be placed in ~/ (home user folder).
+#. Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.`` This guide will assume that the file will be placed in ~/ (home user folder).
 
 #.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. 
 
