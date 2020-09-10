@@ -28,7 +28,7 @@ Install Splunk Indexer
 
 This component works receiving the data flow streamed by a forwarder and stores it in a Splunk index.
 
-1. Download Splunk v|ELASTICSEARCH_LATEST| package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+1. Download Splunk v|SPLUNK_LATEST| package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
     .. note::
       Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
