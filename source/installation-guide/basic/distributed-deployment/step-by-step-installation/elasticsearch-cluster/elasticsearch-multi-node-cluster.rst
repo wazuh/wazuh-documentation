@@ -8,16 +8,15 @@
 Elasticsearch multi-node cluster
 =================================
 
-This document will explain how to install the Elastic Stack components in a multi-node cluster.
+Elasticsearch is a highly scalable full-text search and analytics engine. This document will explain how to install the Elastic Stack components in a multi-node cluster.
+
+For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
 
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
 
-
 Installing Elasticsearch
 ------------------------
-
-Elasticsearch is a highly scalable full-text search and analytics engine. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
 The installation process for a multi-node cluster will be explained in three parts. The first one refers to the configuration of the initial node, in which the certificates that will be deployed to the subsequent nodes are generated. 
 
@@ -100,15 +99,19 @@ Once Elasticsearch is installed it has to be configured by downloading and editi
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  This step implies the selection of the Wazuh cluster installation type. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
+#.  This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.`` This guide will assume that the file will be placed in ~/ (home user folder).
+#. Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.``. 
 
-#.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. 
+#.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the CA file, the certificate and the key there.  
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_initial_node.rst
+
+
+#. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``. 
+
 
 #. Enable and start the Elasticsearch service:
 
@@ -182,7 +185,7 @@ Elasticsearch installation and configuration
       .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
 
 
-#. Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+ Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
 .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
 
@@ -190,9 +193,11 @@ Certificates deployment
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
+#.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the CA file, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-multi-node/deploy_certificates_subsequent_nodes.rst
+
+#. If Kibana will be installed in this node, keep the certificates file. Otherwise, remove it to increase security ``rm -f ~/certs.zip``.  
 
 #.  Enable and start the Elasticsearch service:
 
@@ -239,7 +244,7 @@ Disabling repositories
 Next steps
 ----------
 
-The next step consists on the selection of the Wazuh server installation desired.
+The next step is the installation of the Wazuh server, select the cluster mode: 
 
 - :ref:`Wazuh single-node cluster<basic_wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<basic_wazuh_multi_node_cluster>`

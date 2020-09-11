@@ -34,7 +34,7 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 Installing Open Distro for Elasticsearch
 ----------------------------------------
 
-Download the script and the configuration file. After downloading them, configure the installation and run the script. Choose between single-node or multi-node depending on the type of installation:
+Download the script and the configuration file. After downloading them, configure the installation and run the script. Choose the cluster mode between single-node or multi-node:
 
 .. tabs::
 

@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta:: :description: Learn how to install a Wazuh multi-node cluster
 
 .. _wazuh_multi_node_cluster:
 
@@ -98,9 +98,12 @@ Wazuh server master node
 
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
 Wazuh server worker nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 #. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
@@ -109,10 +112,15 @@ Wazuh server worker nodes
 
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
 #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
 
 
-.. _basic_wazuh_server_multi_node_filebeat:
+
+.. _wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
 -------------------

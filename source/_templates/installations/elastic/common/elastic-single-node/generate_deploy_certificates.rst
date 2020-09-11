@@ -57,7 +57,7 @@
             ip:
               - <elasticsearch_IP>
 
-      There should be added as many ``filebeat-X`` sections as Wazuh servers will be involved in the installation:
+      There should be as many ``filebeat-X`` sections as Wazuh servers in the installation:
 
         .. code-block:: yaml
 
@@ -65,8 +65,8 @@
             dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=US
           - name: filebeat-2
             dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US
-
-
+ 
+  
   To learn more about how to create and configure the certificates visit the :ref:`Certificates deployment section <user_manual_certificates>`.
 
 * Run the Search Guard's script to create the certificates:
@@ -78,7 +78,7 @@
 
   In case of further certificates deployments, it is highly recommended to keep Search Guard's TLS offline tool and its configuration file ``search-guard.yml`` on the master node.
 
-* Compress all the necessary files to be sent to the rest of the involved parts:
+* Compress all the necessary files to be sent to the all the instances:
 
   .. code-block:: console
 
@@ -87,11 +87,12 @@
 
 * Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-* Once the certificates have been deployed into their corresponding destination, they can be removed from the Elasticsearch's server:
-
+* Remove unnecessary files:
 
   .. code-block:: console
 
     # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat* -f
+
+* If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
 
 .. End of include file

@@ -10,7 +10,8 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch.
 
-Elastic recommends installing Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
+
+.. note:: Root user privileges are required to run all the commands described below.
 
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,27 +66,9 @@ Kibana installation and configuration
             .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
 
 
-#. The next step, involving the certificate placement, may vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
+#. The next step is the certificate placement, this guide assumes that a copy of ``certs.zip`` is placed in the root home folder (~/):
 
-
-    .. tabs::
-
-
-
-        .. tab:: Same Elasticsearch server
-
-
-            Copy the Elasticsearch certificates:
-
-            .. include:: ../../../../../_templates/installations/basic/elastic/common/copy_certificates_kibana_elastic_server.rst
-
-
-
-        .. tab:: Different Elasticsearch server
-
-
-            .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_new_kibana_certificates.rst
-
+    .. include:: ../../../../../_templates/installations/basic/elastic/common/deploy_kibana_certificate.rst
 
 
 #. Download the Kibana configuration file:
@@ -108,9 +91,6 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-
-    .. code-block:: console
-
         # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip
 
 #. Link Kibana's socket to privileged port 443:

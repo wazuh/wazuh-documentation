@@ -60,10 +60,10 @@ Deployment types
 
 - Distributed deployment: Each component is installed in a separate host and can also be installed in a multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.  
 
-Types of installation
+Installation methods
 ---------------------
 
-Once the desired configuration is selected the user can choose between two types of installation:
+Once the desired configuration is selected the user can choose between two installation methods:
 
 - Unattended installation: Uses scripts to automatically install and configure all the components.
 

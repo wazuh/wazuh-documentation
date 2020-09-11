@@ -1,5 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
+
 .. code-block:: console
 
   # unzip ~/certs.zip -d ~/certs
@@ -10,7 +11,16 @@
   # chown -R elasticsearch: /etc/elasticsearch/certs
   # chmod -R 500 /etc/elasticsearch/certs
   # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-  # rm -rf ~/certs/ ~/certs.zip
+  # rm -rf ~/certs 
+
+  
+
+
+
+
+
+
+
 
 
 .. End of include file

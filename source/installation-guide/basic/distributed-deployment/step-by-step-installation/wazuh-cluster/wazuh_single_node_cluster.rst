@@ -85,6 +85,11 @@ Installing the Wazuh manager
     .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
+#. Run the following command to check if the Wazuh manager is active: 
+
+    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst    
+
+
 .. _basic_wazuh_server_single_node_filebeat:
 
 Installing Filebeat
@@ -179,6 +184,32 @@ Filebeat installation and configuration
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
+To ensure that Filebeat has been successfully installed, run the following command:
+
+    .. code-block:: console
+
+      # filebeat test output
+
+An example response should look as follows:
+
+.. code-block:: none
+  :class: output
+
+  elasticsearch: https://127.0.0.1:9200...
+    parse url... OK
+    connection...
+      parse host... OK
+      dns lookup... OK
+      addresses: 127.0.0.1
+      dial up... OK
+    TLS...
+      security: server's certificate chain verification is enabled
+      handshake... OK
+      TLS version: TLSv1.3
+      dial up... OK
+    talk to server... OK
+    version: 7.8.0
+   
 
 Next steps
 ----------
