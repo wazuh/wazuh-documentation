@@ -39,26 +39,7 @@
 
     The resulting file ``certs.zip`` contains a directory for each instance included in ``instances.yml``. Each directory contains a certificate and a private key necessary to secure communications. 
 
-    Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.``
-
-    Extract the generated file: 
-
-    .. code-block:: console
-
-      # unzip ~/certs.zip -d ~/certs
-
-    The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
-
-    .. code-block:: console
-
-      # mkdir /etc/elasticsearch/certs/ca -p
-      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
-      # chown -R elasticsearch: /etc/elasticsearch/certs
-      # chmod -R 500 /etc/elasticsearch/certs
-      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-      # rm -rf ~/certs/ ~/certs.zip
-
-
+   
 
   .. group-tab:: Wazuh multi-node cluster
 
@@ -99,24 +80,5 @@
       # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
     The resulting file ``certs.zip`` contains a directory for each instance included in ``instances.yml``. Each directory contains a certificate and a private key necessary to secure communications. 
-
-    Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.``
-
-    Extract resulting file:
-
-    .. code-block:: console
-
-      # unzip ~/certs.zip -d ~/certs
-
-    The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
-
-    .. code-block:: console
-
-      # mkdir /etc/elasticsearch/certs/ca -p
-      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
-      # chown -R elasticsearch: /etc/elasticsearch/certs
-      # chmod -R 500 /etc/elasticsearch/certs
-      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
-      # rm -rf ~/certs/ ~/certs.zip
 
 .. End of include file

@@ -1,6 +1,5 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
 .. code-block:: console
 
@@ -8,5 +7,6 @@ This guide assumes that a copy of ``certs.tar`` is placed in the root home folde
   # mv ~/certs.tar /etc/kibana/certs/
   # cd /etc/kibana/certs/
   # tar -xf certs.tar kibana.pem kibana.key root-ca.pem
+  # rm -f certs.tar
 
 .. End of include file

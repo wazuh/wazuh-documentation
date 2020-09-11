@@ -87,11 +87,12 @@
 
 * Copy ``certs.tar`` to all the servers of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-* Once the certificates have been deployed into their corresponding destination, they can be removed from the Elasticsearch's server:
-
+* Remove unnecessary files:
 
   .. code-block:: console
 
     # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat* -f
+
+* If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been already copied to all the instances of the distributed deployment, remove it to increase security  ``rm -f certs.tar``.
 
 .. End of include file

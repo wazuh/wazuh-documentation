@@ -10,8 +10,6 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. 
 
-It is recommended to install Kibana on the same server as Elasticsearch, but it is not required. The following Kibana installation may vary depending on whether Kibana will be installed in the same server as Elasticsearch or not.
-
 .. note:: Root user privileges are required to run all the commands described below.
 
 Prerequisites
@@ -99,25 +97,9 @@ Kibana installation and configuration
         # cd /usr/share/kibana
         # sudo -u kibana bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip
 
-#. The next step involves the certificates placement. It will vary depending on whether Kibana will be installed in the same server as Elasticsearch or in a different one:
+#. The next step involves the certificates placement. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
-
-    .. tabs::
-
-
-
-        .. group-tab:: Same Elasticsearch server
-
-
-            .. include:: ../../../../../_templates/installations/elastic/common/copy_certificates_kibana_elastic_server.rst
-
-
-
-        .. group-tab:: Different Elasticsearch server
-
-
-            .. include:: ../../../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
-
+    .. include:: ../../../../../_templates/installations/elastic/common/generate_new_kibana_certificates.rst
 
 
 #. Link Kibana's socket to privileged port 443:

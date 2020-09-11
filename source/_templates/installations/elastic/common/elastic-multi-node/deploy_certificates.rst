@@ -1,8 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-This guide assumes that the file ``certs.tar`` is placed in ~/ (root home user folder).
-
-The ``X`` must be replaced with the corresponding node number:
+* The next step is the certificates placement, replace the ``X`` with the corresponding node number and execute the following commands.  This guide assumes that the file ``certs.tar`` is placed in ~/ (root home user folder).
 
 .. code-block:: console
 
@@ -14,5 +12,13 @@ The ``X`` must be replaced with the corresponding node number:
   # mv /etc/elasticsearch/certs/node-X.key /etc/elasticsearch/certs/elasticsearch.key
   # mv /etc/elasticsearch/certs/node-X_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
   # mv /etc/elasticsearch/certs/node-X_http.key /etc/elasticsearch/certs/elasticsearch_http.key
+
+* Removed unnecessary files:
+
+  .. code-block:: console
+
+    # rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.7.zip filebeat* node-* -f
+
+* If Kibana will be installed in this node, keep the certificates file. Otherwise, remove it to increase security  ``rm -f certs.tar``.
 
 .. End of include file

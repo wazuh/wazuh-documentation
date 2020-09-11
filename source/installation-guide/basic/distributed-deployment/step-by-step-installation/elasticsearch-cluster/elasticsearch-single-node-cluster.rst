@@ -89,6 +89,22 @@ Certificates creation and deployment
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
+#. Copy ``~/certs.zip`` to all the servers of the distributed deployment. This can be done by using, for example,  ``scp.``
+
+#. The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and key there:
+
+    .. code-block:: console
+    
+      # unzip ~/certs.zip -d ~/certs 
+      # mkdir /etc/elasticsearch/certs/ca -p
+      # cp -R ~/certs/ca/ ~/certs/elasticsearch/* /etc/elasticsearch/certs/
+      # chown -R elasticsearch: /etc/elasticsearch/certs
+      # chmod -R 500 /etc/elasticsearch/certs
+      # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
+      # rm -rf ~/certs/
+
+#. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
+
 #. Enable and start the Elasticsearch service:
 
     .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_elasticsearch.rst
