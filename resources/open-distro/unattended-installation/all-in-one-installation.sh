@@ -2,14 +2,11 @@
 ## Check if system is based on yum or apt-get
 char="#"
 debug='> /dev/null 2>&1'
-if [ -n "$(command -v yum)" ] 
-then
+if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ] 
-then
+elif [ -n "$(command -v zypper)" ]; then
     sys_type="zypper"     
-elif [ -n "$(command -v apt-get)" ] 
-then
+elif [ -n "$(command -v apt-get)" ]; then
     sys_type="apt-get"   
 fi
 
@@ -25,8 +22,7 @@ startService() {
         eval "systemctl daemon-reload ${debug}"
         eval "systemctl enable $1.service ${debug}"
         eval "systemctl start $1.service ${debug}"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
         else
@@ -36,8 +32,7 @@ startService() {
         eval "chkconfig $1 on ${debug}"
         eval "service $1 start ${debug}"
         eval "/etc/init.d/$1 start ${debug}"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
         else
@@ -45,8 +40,7 @@ startService() {
         fi     
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
         eval "/etc/rc.d/init.d/$1 start ${debug}"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
         else
@@ -77,15 +71,12 @@ installPrerequisites() {
 
     logger "Installing all necessary utilities for the installation..."
 
-    if [ ${sys_type} == "yum" ]
-    then
+    if [ ${sys_type} == "yum" ]; then
         eval "yum install curl unzip wget libcap -y -q ${debug}"
         eval "yum install java-11-openjdk-devel -y -q ${debug}"
-        if [ "$?" != 0 ]
-        then
+        if [ "$?" != 0 ]; then
             os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
-            if [ -z "${os}" ]
-            then
+            if [ -z "${os}" ]; then
                 os="centos"
             fi
             echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
@@ -94,32 +85,27 @@ installPrerequisites() {
             eval "yum install adoptopenjdk-11-hotspot -y -q ${debug}"
         fi
         export JAVA_HOME=/usr/
-    elif [ ${sys_type} == "zypper" ] 
-    then
+    elif [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install curl unzip wget ${debug}" 
         eval "zypper -n install libcap-progs ${debug} || zypper -n install libcap2 ${debug}"
         eval "zypper -n install java-11-openjdk-devel ${debug}"
-        if [ "$?" != 0 ]
-        then
+        if [ "$?" != 0 ]; then
             eval "zypper ar -f http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/opensuse/15.0/$(uname -m) adoptopenjdk ${debug}" | echo 'a'
             eval "zypper -n install adoptopenjdk-11-hotspot ${debug} "
 
         fi    
         export JAVA_HOME=/usr/    
-    elif [ ${sys_type} == "apt-get" ] 
-    then
+    elif [ ${sys_type} == "apt-get" ]; then
         eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q ${debug}"
 
-        if [ -n "$(command -v add-apt-repository)" ]
-        then
+        if [ -n "$(command -v add-apt-repository)" ]; then
             eval "add-apt-repository ppa:openjdk-r/ppa -y ${debug}"
         else
             echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
         fi
         eval "apt-get update -q ${debug}"
         eval "apt-get install openjdk-11-jdk -y -q ${debug}" 
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             logger "JDK installation falied."
             exit 1;
         fi
@@ -127,8 +113,7 @@ installPrerequisites() {
         
     fi
 
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Prerequisites could not be installed"
         exit 1;
     else
@@ -141,16 +126,13 @@ installPrerequisites() {
 addWazuhrepo() {
     logger "Adding the Wazuh repository..."
 
-    if [ ${sys_type} == "yum" ] 
-    then
+    if [ ${sys_type} == "yum" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/staging/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
-    elif [ ${sys_type} == "zypper" ] 
-    then
+    elif [ ${sys_type} == "zypper" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/staging/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
-    elif [ ${sys_type} == "apt-get" ] 
-    then
+    elif [ ${sys_type} == "apt-get" ]; then
         eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
         eval "echo "deb https://packages-dev.wazuh.com/staging/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
         eval "apt-get update -q ${debug}"
@@ -163,14 +145,12 @@ addWazuhrepo() {
 installWazuh() {
     
     logger "Installing the Wazuh manager..."
-    if [ ${sys_type} == "zypper" ] 
-    then
+    if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install wazuh-manager ${debug}"
     else
         eval "${sys_type} install wazuh-manager -y -q ${debug}"
     fi
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
         exit 1;
     else
@@ -185,19 +165,15 @@ installElasticsearch() {
 
     logger "Installing Open Distro for Elasticsearch..."
 
-    if [ ${sys_type} == "yum" ] 
-    then
+    if [ ${sys_type} == "yum" ]; then
         eval "yum install opendistroforelasticsearch -y -q ${debug}"
-    elif [ ${sys_type} == "zypper" ] 
-    then
+    elif [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch ${debug}"
-    elif [ ${sys_type} == "apt-get" ] 
-    then
+    elif [ ${sys_type} == "apt-get" ]; then
         eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q ${debug}"
     fi
 
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch installation failed"
         exit 1;
     else
@@ -217,8 +193,7 @@ installElasticsearch() {
         eval "curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
         eval "chmod +x searchguard/tools/sgtlstool.sh ${debug}"
         eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "Error: certificates were not created"
             exit 1;
         else
@@ -237,8 +212,7 @@ installElasticsearch() {
         eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
 
         jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
-        if [ "${jv}" == "1.8.0" ]
-        then
+        if [ "${jv}" == "1.8.0" ]; then
             ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
             echo "root hard nproc 4096" >> /etc/security/limits.conf 
             echo "root soft nproc 4096" >> /etc/security/limits.conf 
@@ -268,14 +242,12 @@ installFilebeat() {
     
     logger "Installing Filebeat..."
     
-    if [ ${sys_type} == "zypper" ] 
-    then
+    if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install filebeat ${debug}"
     else
         eval "${sys_type} install filebeat -y -q  ${debug}"
     fi
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
@@ -299,14 +271,12 @@ installFilebeat() {
 installKibana() {
     
     logger "Installing Open Distro for Kibana..."
-    if [ ${sys_type} == "zypper" ] 
-    then
+    if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch-kibana ${debug}"
     else
         eval "${sys_type} install opendistroforelasticsearch-kibana -y -q ${debug}"
     fi
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
         exit 1;
     else    
@@ -315,8 +285,7 @@ installKibana() {
         eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
         eval "cd /usr/share/kibana ${debug}"
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip ${debug}"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
         fi     
@@ -338,8 +307,7 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ ${cores} < "4" ]] || [[ ${ram_gb} < "15700" ]]
-    then
+    if [[ ${cores} < "4" ]] || [[ ${ram_gb} < "15700" ]]; then
         echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     else
@@ -352,16 +320,14 @@ checkInstallation() {
 
     logger "Checking the installation..."
     eval "curl -XGET https://localhost:9200 -uadmin:admin -k --max-time 300 ${debug}"
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
         exit 1;     
     else
         echo "Elasticsearch installation succeeded."
     fi
     eval "filebeat test output ${debug}"
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Filebeat was not successfully installed."
         exit 1;     
     else
@@ -379,8 +345,7 @@ checkInstallation() {
 
 main() {
 
-    if [ -n "$1" ] 
-    then      
+    if [ -n "$1" ]; then      
         while [ -n "$1" ]
         do
             case "$1" in 
@@ -400,13 +365,11 @@ main() {
             esac
         done    
 
-        if [ -n "$d" ]
-        then
+        if [ -n "$d" ]; then
             debug=""
         fi
         
-        if [ -n "$i" ]
-        then
+        if [ -n "$i" ]; then
             echo "Health-check ignored."    
         else
             healthCheck           
