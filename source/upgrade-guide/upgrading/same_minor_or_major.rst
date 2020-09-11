@@ -22,7 +22,7 @@ b) Upgrade on Debian/Ubuntu:
 .. code-block:: console
 
     # apt-get update
-    # apt-get install wazuh-manager-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_MANAGER_X86| wazuh-api-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_API_X86|
+    # apt-get install wazuh-manager wazuh-api
 
 c) Upgrade on OpenSUSE:
 
@@ -45,7 +45,7 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 .. code-block:: console
 
     # apt-get update
-    # apt-get install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
+    # apt-get install wazuh-agent
 
 c) Upgrade the Wazuh agent on OpenSUSE:
 
