@@ -35,10 +35,10 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -e Install all the packages necessaries to build the TAR package
-      -b <branch> Select Git branch. Example v|WAZUH_LATEST|
+      -b <branch> Select Git branch. Example v3.5.0
       -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
       -p <tar_home> Installation path for the package. By default: /var
-      -c,  --checksum Compute the SHA512 checksum of the TAR package.
+      -c, --checksum Compute the SHA512 checksum of the TAR package.
       -d <path_to_depot>, --depot Change the path to depothelper package (by default current path).
       -h Shows this help
 

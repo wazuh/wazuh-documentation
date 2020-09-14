@@ -32,14 +32,13 @@ Execute the ``generate_wazuh_packages.sh`` script to build the package. Here you
  :class: output
 
  Usage: ./generate_wazuh_packages.sh [OPTIONS]
-
+ 
      -b, --branch <branch>               Select Git branch or tag e.g. master.
      -e, --environment                   Install all the packages necessaries to build the pkg package.
      -s, --store  <pkg_directory>        Directory to store the resulting pkg package. By default, an output folder will be created.
      -p, --install-path <pkg_home>       Installation path for the package. By default: /var.
      -c, --checksum                      Compute the SHA512 checksum of the pkg package.
      -h, --help                          Shows this help.
-
 
 Below, you will find an example of how to build a Solaris package.
 

@@ -32,13 +32,16 @@ Execute the ``generate_ova.sh`` script, with the different options you desire.
 .. code-block:: none
   :class: output
 
-  OPTIONS:
-       -b, --build            [Required] Build the OVA and OVF.
-       -v, --version          [Required] Version of wazuh to install on VM.
-       -e, --elastic-version  [Required] Elastic version to download inside VM.
-       -r, --repository       [Required] Status of the packages [stable/unstable]
-       -c, --clean            [Optional] Clean the local machine.
-       -h, --help             [  Util  ] Show this help.
+  Usage: ./generate_ova.sh [OPTIONS]
+  
+    -b, --build            [Required] Build the OVA and OVF.
+    -v, --version          [Required] Version of wazuh to install on VM.
+    -e, --elastic-version  [Required] Elastic version to download inside VM.
+    -r, --repository       [Required] Status of the packages [stable/unstable]
+    -d, --directory        [Optional] Where will be installed manager. Default /var/ossec
+    -s, --store <path>     [Optional] Set the destination absolute path of package.
+    -c, --checksum <path>  [Optional] Generate checksum.
+    -h, --help             [  Util  ] Show this help.
 
 The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.
 

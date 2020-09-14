@@ -34,9 +34,9 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   :class: output
 
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
-
-  Build options:
-      -b, --branch <branch>         [Required] Select Git branch or tag e.g.
+  
+    Build options:
+      -b, --branch <branch>         [Required] Select Git branch or tag e.g. 
       -s, --store-path <path>       [Optional] Set the destination absolute path of package.
       -j, --jobs <number>           [Optional] Number of parallel jobs when compiling.
       -r, --revision <rev>          [Optional] Package revision that append to version e.g. x.x.x-rev
@@ -44,8 +44,8 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       -h, --help                    [  Util  ] Show this help.
       -i, --install-deps            [  Util  ] Install build dependencies (Packages).
       -x, --install-xcode           [  Util  ] Install X-Code and brew. Can't be executed as root.
-
-  Signing options:
+  
+    Signing options:
       --keychain                    [Optional] Keychain where the Certificates are installed.
       --keychain-password           [Optional] Password of the keychain.
       --application-certificate     [Optional] Apple Developer ID certificate name to sign Apps and binaries.
