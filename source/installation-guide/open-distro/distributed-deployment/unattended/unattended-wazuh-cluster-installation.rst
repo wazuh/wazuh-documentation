@@ -20,7 +20,7 @@ Download the script:
     # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
 
-Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order to connect with them. Choose the cluster mode between single-node or multi-node. The following commands assume that the script has been downloaded in the root home directory ( ``~/`` ):
+Choose the cluster mode between single-node or multi-node. The following commands assume that the script has been downloaded in the root home directory ( ``~/`` ):
 
 .. code-block:: console
 
