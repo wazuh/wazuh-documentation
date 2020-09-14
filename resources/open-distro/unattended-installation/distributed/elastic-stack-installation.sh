@@ -82,11 +82,11 @@ checkConfig() {
         if [ -f ~/certs.tar ]
         then
             echo "Certificates file found. Starting the installation..."
-            eval "tar --overwrite -xf certs.tar config.yml $debug"
+            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml $debug"
         elif [ -f /etc/elasticsearch/certs/certs.tar ]
         then
             eval "mv /etc/elasticsearch/certs/certs.tar ~/ $debug"
-            eval "tar --overwrite -xf certs.tar config.yml $debug"
+            eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml $debug"
             echo "Certificates file found. Starting the installation..."        
         else
             echo "No configuration file found."
