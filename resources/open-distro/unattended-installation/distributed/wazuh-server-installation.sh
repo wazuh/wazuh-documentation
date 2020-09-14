@@ -74,7 +74,7 @@ checkConfig() {
     if [ -f ~/certs.tar ]
     then
         echo "Certificates file found. Starting the installation..."
-        eval "tar -xf certs.tar config.yml $debug"
+        eval "tar -C ~/ -xf ~/certs.tar config.yml $debug"
     else
         echo "No certificates file found."
         exit 1;
