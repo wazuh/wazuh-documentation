@@ -58,11 +58,11 @@ Packages List
 .. note::
    In RPM based packages are included CentOS/RHEL 6 or greater, Fedora 22 or greater, SLES 12 and Amazon Linux.
 
-OVA Wazuh |WAZUH_LATEST| + ELK |ELASTICSEARCH_LATEST|
+OVA Wazuh |WAZUH_LATEST| + ELK |ELASTICSEARCH_LATEST_OVA|
 ---------------------------
 
 +--------------+---------+-------------+----------------------------------------------------------------------------------------------+----------------------------------+
 | Distribution | Version |Architecture | Package                                                                                      | MD5 Checksum                     |
 +==============+=========+=============+==============================================================================================+==================================+
-| CentOS 7     |  |WAZUH_LATEST|  |   64bits    | `wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST| <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.ova>`_                     | ef7eb8d9bca92e4b47ea9bfbcb48f0bc |
+| CentOS 7     |  |WAZUH_LATEST|  |   64bits    | `wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST_OVA| <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST|_|ELASTICSEARCH_LATEST_OVA|.ova>`_                     | ef7eb8d9bca92e4b47ea9bfbcb48f0bc |
 +--------------+---------+-------------+----------------------------------------------------------------------------------------------+----------------------------------+
