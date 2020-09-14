@@ -10,7 +10,7 @@
 
     .. code-block:: console
 
-      # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+      # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
 
 #. Add the repository:
 
@@ -19,10 +19,10 @@
       # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
       [wazuh_repo]
       gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+      gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
       enabled=1
       name=Wazuh repository
-      baseurl=https://packages.wazuh.com/4.x/yum/5/$basearch/
+      baseurl=http://packages.wazuh.com/4.x/yum5/$basearch/
       protect=1
       EOF
 
