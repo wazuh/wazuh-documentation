@@ -34,12 +34,12 @@ Install Splunk Enterprise instances
 
 Each instance can be installed on different hosts following the same steps described below:
 
-1. Download Splunk v7.3.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+1. Download Splunk v|SPLUNK_LATEST| package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
     .. note::
       Splunk is not open source software and it requires a registered user and license in order to work. Users can also use a free trial license.
 
-2. Install the Splunk v7.3.0 package:
+2. Install the Splunk v|SPLUNK_LATEST| package:
 
     a) For RPM based distributions:
 
@@ -53,7 +53,7 @@ Each instance can be installed on different hosts following the same steps descr
 
         # dpkg --install splunk-enterprise-package.deb
 
-3. Ensure Splunk v7.3.0 is installed in ``/opt/splunk`` and start the service:
+3. Ensure Splunk v|SPLUNK_LATEST| is installed in ``/opt/splunk`` and start the service:
 
     .. code-block:: console
 
@@ -127,5 +127,5 @@ Now, restart the Splunk Service:
 
 Next step is installing the :ref:`Wazuh App <splunk_app>` into the search heads instances to start using the services.
 
-- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.3.0/Admin/CLIadmincommands>`_ .
-- To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/7.3.0/DistSearch/Whatisdistributedsearch>`_ from the official documentation.
+- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Admin/CLIadmincommands>`_ .
+- To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/DistSearch/Whatisdistributedsearch>`_ from the official documentation.

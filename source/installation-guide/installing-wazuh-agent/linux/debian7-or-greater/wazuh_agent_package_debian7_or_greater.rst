@@ -45,7 +45,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # apt-get install wazuh-agent
+      # apt-get install wazuh-agent=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
@@ -55,7 +55,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent
+      # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent=|WAZUH_LATEST|-|WAZUH_REVISION_DEB_AGENT_X86|
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 

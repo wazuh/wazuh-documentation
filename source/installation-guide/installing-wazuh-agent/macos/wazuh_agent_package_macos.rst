@@ -13,7 +13,7 @@ The macOS agent can be downloaded from :ref:`packages list<packages>`. You can i
 
       .. code-block:: console
 
-        # installer -pkg wazuh-agent-3.9.5-1.pkg -target /
+        # installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
     * Deployment:
 
@@ -21,7 +21,7 @@ The macOS agent can be downloaded from :ref:`packages list<packages>`. You can i
 
       .. code-block:: console
 
-        # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" && installer -pkg wazuh-agent-3.9.5-1.pkg -target /
+        # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
       See the following document for additional automated deployment options :ref:`deployment variables <deployment_variables_macos>`.
 
