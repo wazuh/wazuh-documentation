@@ -2,14 +2,11 @@
 ## Check if system is based on yum or apt-get
 char="#"
 debug='> /dev/null 2>&1'
-if [ -n "$(command -v yum)" ] 
-then
+if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ] 
-then
+elif [ -n "$(command -v zypper)" ]; then
     sys_type="zypper"     
-elif [ -n "$(command -v apt-get)" ] 
-then
+elif [ -n "$(command -v apt-get)" ]; then
     sys_type="apt-get"   
 fi
 
@@ -24,8 +21,7 @@ startService() {
         eval "systemctl daemon-reload $debug"
         eval "systemctl enable $1.service $debug"
         eval "systemctl start $1.service $debug"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
         else
@@ -35,8 +31,7 @@ startService() {
         eval "chkconfig $1 on $debug"
         eval "service $1 start $debug"
         eval "/etc/init.d/$1 start $debug"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
         else
@@ -44,8 +39,7 @@ startService() {
         fi     
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
         eval "/etc/rc.d/init.d/$1 start $debug"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
         else
@@ -75,16 +69,13 @@ getHelp() {
 ## Checks if the configuration file or certificates exist
 checkConfig() {
 
-    if [ -f ~/config.yml ]
-    then
+    if [ -f ~/config.yml ]; then
         echo "Configuration file found. Starting the installation..."
     else
-        if [ -f ~/certs.tar ]
-        then
+        if [ -f ~/certs.tar ]; then
             echo "Certificates file found. Starting the installation..."
             eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml $debug"
-        elif [ -f /etc/elasticsearch/certs/certs.tar ]
-        then
+        elif [ -f /etc/elasticsearch/certs/certs.tar ]; then
             eval "mv /etc/elasticsearch/certs/certs.tar ~/ $debug"
             eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml $debug"
             echo "Certificates file found. Starting the installation..."        
@@ -102,15 +93,12 @@ installPrerequisites() {
 
     logger "Installing all necessary utilities for the installation..."
 
-    if [ $sys_type == "yum" ]
-    then
+    if [ $sys_type == "yum" ]: then
         eval "yum install curl unzip wget libcap -y -q $debug"
         eval "yum install java-11-openjdk-devel -y -q $debug"
-        if [ "$?" != 0 ]
-        then
+        if [ "$?" != 0 ]: then
             os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
-            if [ -z "$os" ]
-            then
+            if [ -z "$os" ]: then
                 os="centos"
             fi
             echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo $debug"
@@ -119,32 +107,27 @@ installPrerequisites() {
             eval "yum install adoptopenjdk-11-hotspot -y -q $debug"
         fi
         export JAVA_HOME=/usr/
-    elif [ $sys_type == "zypper" ] 
-    then
+    elif [ $sys_type == "zypper" ]; then
         eval "zypper -n install curl unzip wget $debug" 
         eval "zypper -n install libcap-progs $debug || zypper -n install libcap2 $debug"
         eval "zypper -n install java-11-openjdk-devel $debug"
-        if [ "$?" != 0 ]
-        then
+        if [ "$?" != 0 ]; then
             eval "zypper ar -f http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/opensuse/15.0/$(uname -m) adoptopenjdk $debug" | echo 'a'
             eval "zypper -n install adoptopenjdk-11-hotspot $debug "
 
         fi    
         export JAVA_HOME=/usr/    
-    elif [ $sys_type == "apt-get" ] 
-    then
+    elif [ $sys_type == "apt-get" ]; then
         eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q $debug"
 
-        if [ -n "$(command -v add-apt-repository)" ]
-        then
+        if [ -n "$(command -v add-apt-repository)" ]; then
             eval "add-apt-repository ppa:openjdk-r/ppa -y $debug"
         else
             echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
         fi
         eval "apt-get update -q $debug"
         eval "apt-get install openjdk-11-jdk -y -q $debug" 
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             logger "JDK installation falied."
             exit 1;
         fi
@@ -152,8 +135,7 @@ installPrerequisites() {
         
     fi
 
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Prerequisites could not be installed"
         exit 1;
     else
@@ -166,16 +148,13 @@ installPrerequisites() {
 addWazuhrepo() {
     logger "Adding the Wazuh repository..."
 
-    if [ $sys_type == "yum" ] 
-    then
+    if [ $sys_type == "yum" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
-    elif [ $sys_type == "zypper" ] 
-    then
+    elif [ $sys_type == "zypper" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo $debug"            
-    elif [ $sys_type == "apt-get" ] 
-    then
+    elif [ $sys_type == "apt-get" ]; then
         eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
         eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
         eval "apt-get update -q $debug"
@@ -188,19 +167,15 @@ installElasticsearch() {
 
     logger "Installing Open Distro for Elasticsearch..."
 
-    if [ $sys_type == "yum" ] 
-    then
+    if [ $sys_type == "yum" ]; then
         eval "yum install opendistroforelasticsearch -y -q $debug"
-    elif [ $sys_type == "zypper" ] 
-    then
+    elif [ $sys_type == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch $debug"
-    elif [ $sys_type == "apt-get" ] 
-    then
+    elif [ $sys_type == "apt-get" ]; then
         eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q $debug"
     fi
 
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch installation failed"
         exit 1;
     else
@@ -210,8 +185,7 @@ installElasticsearch() {
 
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
         
-        if [ -n "$single" ]
-        then
+        if [ -n "$single" ]; then
             nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
             nhr="network.host: "
             nip="${nh//$nhr}"
@@ -286,8 +260,7 @@ installElasticsearch() {
         eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options $debug"
 
         jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
-        if [ "$jv" == "1.8.0" ]
-        then
+        if [ "$jv" == "1.8.0" ]; then
             ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
             echo "root hard nproc 4096" >> /etc/security/limits.conf 
             echo "root soft nproc 4096" >> /etc/security/limits.conf 
@@ -297,18 +270,15 @@ installElasticsearch() {
         fi        
 
         # Create certificates
-        if [ -n "$single" ]
-        then
+        if [ -n "$single" ]; then
             createCertificates name ip
-        elif [ -n "$c" ]
-        then
+        elif [ -n "$c" ]; then
             createCertificates IMN DSH
         else
             logger "Done"
         fi      
         
-        if [ -n "$single" ]
-        then
+        if [ -n "$single" ]; then
             copyCertificates iname
         else
             copyCertificates iname pos
@@ -326,8 +296,7 @@ createCertificates() {
     eval "unzip search-guard-tlstool-1.8.zip -d searchguard $debug"
     eval "curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 $debug"
 
-    if [ -n "$single" ]
-    then
+    if [ -n "$single" ]; then
         echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
         echo '  - name: "'${iname}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
@@ -347,8 +316,7 @@ createCertificates() {
     awk -v RS='' '/# Clients certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
     eval "chmod +x searchguard/tools/sgtlstool.sh $debug"
     eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug"
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: certificates were not created"
         exit 1;
     else
@@ -359,16 +327,14 @@ createCertificates() {
 
 copyCertificates() {
 
-    if [ -n "$single" ]
-    then
+    if [ -n "$single" ]; then
         eval "mv /etc/elasticsearch/certs/${iname}.pem /etc/elasticsearch/certs/elasticsearch.pem $debug"
         eval "mv /etc/elasticsearch/certs/${iname}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "mv /etc/elasticsearch/certs/${iname}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
         eval "mv /etc/elasticsearch/certs/${iname}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"
     else
-        if [ -z "$c" ]
-        then
+        if [ -z "$c" ]; then
             eval "mv ~/certs.tar /etc/elasticsearch/certs $debug"
             eval "tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}.key ${IMN[pos]}_http.pem ${IMN[pos]}_http.key root-ca.pem $debug"  
         fi
@@ -379,8 +345,7 @@ copyCertificates() {
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"        
     fi
 
-    if [[ -n "$c" ]] || [[ -n "$single" ]]
-    then
+    if [[ -n "$c" ]] || [[ -n "$single" ]]; then
         cp ~/config.yml /etc/elasticsearch/certs/
         tar -cf certs.tar *
         tar --delete -f certs.tar 'searchguard'
@@ -404,8 +369,7 @@ initializeElastic() {
         sleep 10
     done    
 
-    if [ -n "$single" ]
-    then
+    if [ -n "$single" ]; then
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ $debug"
         eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h ${nip} $debug"
     fi
@@ -418,14 +382,12 @@ initializeElastic() {
 installKibana() {
      
     logger "Installing Kibana..."
-    if [ $sys_type == "zypper" ] 
-    then
+    if [ $sys_type == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch-kibana $debug"
     else
         eval "$sys_type install opendistroforelasticsearch-kibana -y -q $debug"
     fi
-    if [  "$?" != 0  ]
-    then
+    if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
         exit 1;
     else  
@@ -433,8 +395,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip $debug"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
-        if [  "$?" != 0  ]
-        then
+        if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
         fi     
@@ -446,8 +407,7 @@ installKibana() {
         echo 'server.host: "'$kip'"' >> /etc/kibana/kibana.yml
         nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
 
-        if [ -n "$nh" ]
-        then
+        if [ -n "$nh" ]; then
             nhr="network.host: "
             eip="${nh//$nhr}"
             echo "elasticsearch.hosts: https://"$eip":9200" >> /etc/kibana/kibana.yml
@@ -479,16 +439,13 @@ installKibana() {
 
 copyKibanacerts() {
 
-    if [[ -f "/etc/elasticsearch/certs/kibana.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana.key" ]]
-    then
+    if [[ -f "/etc/elasticsearch/certs/kibana.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana.key" ]]; then
         eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ $debug"
-    elif [ -f ~/certs.tar ]
-    then
+    elif [ -f ~/certs.tar ]; then
         eval "cp ~/certs.tar /etc/kibana/certs/ $debug"
         eval "cd /etc/kibana/certs/ $debug"
         eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem $debug"
-        if [ ${iname} != "kibana" ]
-        then
+        if [ ${iname} != "kibana" ]; then
             eval "mv /etc/kibana/certs/${iname}.pem /etc/kibana/certs/kibana.pem $debug"
             eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key $debug"
         fi            
@@ -519,8 +476,7 @@ initializeKibana() {
 ## Check nodes
 checkNodes() {
     head=$(head -n1 ~/config.yml)
-    if [ "${head}" == "## Multi-node configuration" ]
-    then
+    if [ "${head}" == "## Multi-node configuration" ]; then
         master=1
     else
         single=1
@@ -532,19 +488,15 @@ healthCheck() {
 
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
-    if [ -n "$e" ]
-    then
-        if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
-        then
+    if [ -n "$e" ]; then
+        if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]; then
             echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."
         fi
-    elif [ -n "$k" ]
-    then
-        if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
-        then
+    elif [ -n "$k" ]; then
+        if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]; then
             echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
@@ -558,8 +510,7 @@ healthCheck() {
 
 main() {
 
-    if [ -n "$1" ] 
-    then      
+    if [ -n "$1" ]; then      
         while [ -n "$1" ]
         do
             case "$1" in           
@@ -596,21 +547,17 @@ main() {
             esac
         done    
 
-        if [ -n "$d" ]
-        then
+        if [ -n "$d" ]; then
             debug=""
         fi  
 
-        if [[ -z "$iname" ]]  
-        then
+        if [[ -z "$iname" ]]; then
             getHelp
         fi               
 
-        if [ -n "$e" ]
-        then     
+        if [ -n "$e" ]; then     
 
-            if [ -n "$i" ]
-            then
+            if [ -n "$i" ]; then
                 echo "Health-check ignored."    
             else
                 healthCheck e k         
@@ -621,18 +568,14 @@ main() {
             checkNodes                   
             installElasticsearch iname
         fi
-        if [ -n "$k" ]
-        then
-            if [[ -z "$e" ]] && [[ -z "$k" ]]   
-            then
+        if [ -n "$k" ]; then
+            if [[ -z "$e" ]] && [[ -z "$k" ]]; then
                 getHelp
             fi                    
-            if [[ -n "$e" ]] && [[ -n "$k" ]]   
-            then
+            if [[ -n "$e" ]] && [[ -n "$k" ]]; then
                 getHelp
             fi        
-            if [ -n "$i" ]
-            then
+            if [ -n "$i" ]; then
                 echo "Health-check ignored."    
             else
                 healthCheck e k         
