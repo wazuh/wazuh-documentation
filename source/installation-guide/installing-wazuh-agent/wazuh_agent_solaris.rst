@@ -8,19 +8,19 @@ Solaris agent can be downloaded from our :doc:`packages list<../packages-list/in
 
   a) For Solaris 11 i386::
 
-	pkg install -d wazuh-agent_2.1.0-sol11-i386.p5p wazuh-agent
+	pkg install -d wazuh-agent_|WAZUH_LATEST|-sol11-i386.p5p wazuh-agent
 
   b) For Solaris 10 i386::
 
-	pkgadd -d wazuh-agent_2.1.0-sol10-i386.pkg
+	pkgadd -d wazuh-agent_|WAZUH_LATEST|-sol10-i386.pkg
 
   c) For Solaris 11 sparc::
 
-	pkg install -d wazuh-agent_2.1.0-sol11-sparc.p5p wazuh-agent
+	pkg install -d wazuh-agent_|WAZUH_LATEST|-sol11-sparc.p5p wazuh-agent
 
   d) For Solaris 10 sparc::
 
-	pkgadd -d wazuh-agent_2.1.0-sol10-sparc.pkg
+	pkgadd -d wazuh-agent_|WAZUH_LATEST|-sol10-sparc.pkg
 
 
 .. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
