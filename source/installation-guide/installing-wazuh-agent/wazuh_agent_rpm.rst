@@ -48,6 +48,6 @@ On your terminal, install the Wazuh agent as follows:
 
   .. code-block:: console
 
-	 # yum install wazuh-agent
+	 # yum install wazuh-agent|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
