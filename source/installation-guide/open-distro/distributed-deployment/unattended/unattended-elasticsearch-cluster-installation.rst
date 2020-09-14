@@ -222,7 +222,7 @@ Run the script:
 
 .. code-block:: console
 
-  # bash elastic-stack-installation.sh -k -n <node_name>
+  # bash ~/elastic-stack-installation.sh -k -n <node_name>
 
 The following values must be replaced:
 
