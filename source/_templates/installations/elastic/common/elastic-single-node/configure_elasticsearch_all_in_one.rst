@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Once Elasticsearch is installed it can be configured by downloading the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+Download the configuration file``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
 .. code-block:: console
 
