@@ -9,7 +9,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
 
   a) The command line::
 
-        installer -pkg wazuh-agent-3.8.2-1.pkg -target /
+        installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
   b) The GUI:
 

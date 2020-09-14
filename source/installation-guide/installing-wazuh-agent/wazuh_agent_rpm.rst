@@ -89,13 +89,13 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # yum install wazuh-agent
+      # yum install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
 
   * Using the ``zypper`` package manager:
 
     .. code-block:: console
 
-      # zypper install wazuh-agent
+      # zypper install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
 
 2. (Optional) Disable the Wazuh repository:
 
