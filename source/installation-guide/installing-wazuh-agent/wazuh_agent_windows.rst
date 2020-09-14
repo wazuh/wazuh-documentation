@@ -30,7 +30,7 @@ Using the command line
 
 Run the installer on a command line (the ``/q`` argument is used for unattended installations)::
 
-    wazuh-agent-3.0.0-1.msi /q
+    wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
 
 You can automate the agent registration with authd using the following parameters:
 
@@ -65,6 +65,6 @@ You can automate the agent registration with authd using the following parameter
 
 Usage example::
 
-    wazuh-agent-3.0.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
+    wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
 
 .. note:: Unattended installations must be launched with administrator permissions.
