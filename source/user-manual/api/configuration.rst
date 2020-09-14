@@ -81,7 +81,7 @@ Unlike regular API configuration settings that can be changed in the :ref:`confi
     auth_token_exp_timeout: 3600
     rbac_mode: white
 
-It is not needed to restart the Wazuh API for these changes to take effect. However, for some of them it may be required to request a new JWT token.
+It is needed to restart the Wazuh API for these changes to take effect. For some of them, it may be required to request a new JWT token too.
 
 Configuration endpoints
 -----------------------
@@ -108,14 +108,8 @@ Restore configuration
 - ``DELETE /cluster/api/config``: Restore the default configuration of all (or a list) of the cluster nodes.
 - ``DELETE /security/config``: Restore the default security configuration.
 
-The following settings are hot applied when using the configuration endpoints:
 
-- behind_proxy_server
-- use_only_authd
-- experimental_features
-- cache (``enabled`` and ``time``)
-
-To apply changes to different settings, it is necessary to restart each API whose configuration have changed:
+To apply the changes it is necessary to restart each API whose configuration have changed:
 
   a. For Systemd:
 
