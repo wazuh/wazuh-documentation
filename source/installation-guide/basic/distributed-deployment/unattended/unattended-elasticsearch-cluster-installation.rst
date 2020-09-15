@@ -209,9 +209,12 @@ Download the script and the configuration file. After downloading them, configur
 
           # bash ~/elastic-stack-installation.sh -e -n <node_name>
 
-    After stating all the nodes, run the following commands to generate the passwords.
+    
+    **Cluster initialization**
 
-    .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
+      After stating all the nodes, run the following commands to generate the passwords.
+
+      .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
 
 
 
