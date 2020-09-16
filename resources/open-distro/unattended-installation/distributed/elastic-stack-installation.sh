@@ -93,12 +93,12 @@ installPrerequisites() {
 
     logger "Installing all necessary utilities for the installation..."
 
-    if [ $sys_type == "yum" ]: then
+    if [ $sys_type == "yum" ]; then
         eval "yum install curl unzip wget libcap -y -q $debug"
         eval "yum install java-11-openjdk-devel -y -q $debug"
-        if [ "$?" != 0 ]: then
+        if [ "$?" != 0 ]; then
             os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
-            if [ -z "$os" ]: then
+            if [ -z "$os" ]; then
                 os="centos"
             fi
             echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo $debug"
@@ -292,30 +292,30 @@ createCertificates() {
   
 
     logger "Creating the certificates..."
-    eval "curl -so /etc/elasticsearch/certs/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 $debug"
-    eval "unzip search-guard-tlstool-1.8.zip -d searchguard $debug"
-    eval "curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 $debug"
+    eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 $debug"
+    eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard $debug"
+    eval "curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/search-guard-unattended.yml --max-time 300 $debug"
 
     if [ -n "$single" ]; then
-        echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '  - name: "'${iname}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '    dn: CN="'${iname}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '    ip:' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo '      - "'${nip}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+        echo -e "\n" >> ~/searchguard/search-guard.yml
+        echo "nodes:" >> ~/searchguard/search-guard.yml
+        echo '  - name: "'${iname}'"' >> ~/searchguard/search-guard.yml
+        echo '    dn: CN="'${iname}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
+        echo '    ip:' >> ~/searchguard/search-guard.yml
+        echo '      - "'${nip}'"' >> ~/searchguard/search-guard.yml
     else 
-        echo -e "\n" >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-        echo "nodes:" >> /etc/elasticsearch/certs/searchguard/search-guard.yml       
+        echo -e "\n" >> ~/searchguard/search-guard.yml
+        echo "nodes:" >> ~/searchguard/search-guard.yml       
         for i in "${!IMN[@]}"; do
-            echo '  - name: "'${IMN[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-            echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-            echo '    ip:' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-            echo '      - "'${DSH[i]}'"' >> /etc/elasticsearch/certs/searchguard/search-guard.yml
+            echo '  - name: "'${IMN[i]}'"' >> ~/searchguard/search-guard.yml
+            echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
+            echo '    ip:' >> ~/searchguard/search-guard.yml
+            echo '      - "'${DSH[i]}'"' >> ~/searchguard/search-guard.yml
         done
     fi
-    awk -v RS='' '/# Clients certificates/' ~/config.yml >> /etc/elasticsearch/certs/searchguard/search-guard.yml
-    eval "chmod +x searchguard/tools/sgtlstool.sh $debug"
-    eval "./searchguard/tools/sgtlstool.sh -c ./searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug"
+    awk -v RS='' '/# Clients certificates/' ~/config.yml >> ~/searchguard/search-guard.yml
+    eval "chmod +x ~/searchguard/tools/sgtlstool.sh $debug"
+    eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ $debug"
     if [  "$?" != 0  ]; then
         echo "Error: certificates were not created"
         exit 1;
@@ -342,14 +342,13 @@ copyCertificates() {
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key $debug"
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem $debug"
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.key /etc/elasticsearch/certs/elasticsearch_http.key $debug"            
-        eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml search-guard-tlstool-1.8.zip -f $debug"        
+        eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip -f $debug"        
     fi
 
     if [[ -n "$c" ]] || [[ -n "$single" ]]; then
         cp ~/config.yml /etc/elasticsearch/certs/
-        tar -cf certs.tar *
-        tar --delete -f certs.tar 'searchguard'
-        cp /etc/elasticsearch/certs/certs.tar ~/certs.tar
+        tar -cf /etc/elasticsearch/certs/certs.tar *
+        mv /etc/elasticsearch/certs/certs.tar ~/certs.tar
     fi
 
 }
