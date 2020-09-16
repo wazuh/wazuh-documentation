@@ -47,6 +47,8 @@ Disk space requirements depend on the alerts per seconds (APS) generated. The ex
 | Network devices                                 | 0.5 |    7.6                      |
 +-------------------------------------------------+-----+-----------------------------+
 
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 236 GB.
+
 
 Distributed deployment
 ----------------------
@@ -81,6 +83,7 @@ Regarding the disk space requirements, the amount of data depends on the alerts 
 | Network devices                                 | 0.5 |    0.2                      |           7.4             |
 +-------------------------------------------------+-----+-----------------------------+---------------------------+
 
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server and 6 GB on the Wazuh server. 
 
 Scaling 
 -------
