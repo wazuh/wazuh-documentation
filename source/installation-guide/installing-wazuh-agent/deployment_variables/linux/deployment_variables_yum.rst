@@ -47,7 +47,7 @@ Examples:
 .. code-block:: console
 
      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-          WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agentC
+          WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
 
 * Registration with password and assigning a group:
 

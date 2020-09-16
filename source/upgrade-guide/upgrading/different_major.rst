@@ -46,7 +46,7 @@ Upgrade Wazuh manager
     .. code-block:: console
 
       # yum install wazuh-manager
-      
+
   b) Upgrade the Wazuh manager on Debian/Ubuntu:
 
     .. code-block:: console
