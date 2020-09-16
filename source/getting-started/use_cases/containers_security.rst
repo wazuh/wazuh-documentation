@@ -12,7 +12,7 @@ Infrastructure level
 
 Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes nodes:
 
-- **Integration with Docker engine and Kuberentes APIs:** In this scenario, the Wazuh module for Docker acts as a subscriber. It listens for Docker or Kubernetes events, being able to alert when an anomaly or security incident is detected.
+- **Integration with Docker engine and Kubernetes APIs:** In this scenario, the Wazuh module for Docker acts as a subscriber. It listens for Docker or Kubernetes events, being able to alert when an anomaly or security incident is detected.
 
 - **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :ref:`Wazuh agent <wazuh_agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection and active responses.
 
