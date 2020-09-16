@@ -85,5 +85,7 @@ This installation guide provides instructions to configure the official reposito
     
     requirements
     open-distro/index
-    basic/index
+    elastic-stack/index
+    wazuh-agent/index
     packages-list
+    

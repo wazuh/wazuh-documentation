@@ -98,13 +98,13 @@ Certificates creation and deployment
 
         # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip
 
-#. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. ``unzip`` can be used to extract the file:
+#. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step. 
 
     .. code-block:: console
 
         # unzip ~/certs.zip -d ~/certs
 
-#. The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the certificate authorities, the certificate and the key there:
+#. The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the CA file, the certificate and the key there:
 
     .. code-block:: console
 
@@ -123,7 +123,7 @@ Certificates creation and deployment
 
     .. include:: ../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
-To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` by the password on the previous step for ``elastic`` user:
+To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` by the password generated on the previous step for ``elastic`` user:
 
 .. code-block:: console
   
@@ -326,6 +326,7 @@ An example response should look as follows:
 
 Kibana installation and configuration
 -------------------------------------
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch.
 
 #. Install the Kibana package:
 
@@ -383,7 +384,9 @@ Kibana installation and configuration
 
     .. include:: ../../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
-With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
+
+Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``ca.crt`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+
 
 .. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
 

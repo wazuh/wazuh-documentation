@@ -35,7 +35,20 @@ In an all-in-one deployment, Wazuh server and Open Distro for Elasticsearch or E
 
 The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary for this type of deployment due to the requirements of Open Distro for Elasticsearch and Elastic Stack. 
 
-Regarding the disk space, 100 agents are expected to generate around 200 GB of data in 90 days, but depending on the type of monitored endpoints this can vary greatly.
+Disk space requirements depend on the alerts per seconds (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of endpoint.
+
++-------------------------------------------------+-----+-----------------------------+
+| Monitored endpoints                             | APS |  Storage (GB/90 days)       | 
++=================================================+=====+=============================+
+| Servers                                         | 0.25|    3.8                      |     
++-------------------------------------------------+-----+-----------------------------+
+| Workstations                                    | 0.1 |    1.5                      |                   
++-------------------------------------------------+-----+-----------------------------+       
+| Network devices                                 | 0.5 |    7.6                      |
++-------------------------------------------------+-----+-----------------------------+
+
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 236 GB.
+
 
 Distributed deployment
 ----------------------
@@ -56,7 +69,21 @@ The Wazuh server and the Open Distro for Elasticsearch or Elastic Stack can each
 
 A 64-bit operating system is necessary for Open Distro for Elasticsearch or Elastic Stack.  
 
-Regarding the disk space, 100 agents are expected to generate around 50 GB of data in a Wazuh server and around 150 GB of data in an Open Distro for Elasticsearch or Elasticsearch server in a period of 90 days. Depending on the type of monitored endpoints this quantity can vary greatly.
+Regarding the disk space requirements, the amount of data depends on the alerts per seconds (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on a Wazuh server as well as on an Elasticsearch server depending on the type of monitored endpoints. 
+
+
++-------------------------------------------------+-----+-----------------------------+---------------------------+
+| Monitored endpoints                             | APS | Storage in Wazuh Manager    | Storage in Elasticsearch  |
+|                                                 |     |  (GB/90 days)               |  (GB/90 days)             | 
++=================================================+=====+=============================+===========================+
+| Servers                                         | 0.25|    0.1                      |           3.7             |       
++-------------------------------------------------+-----+-----------------------------+---------------------------+
+| Workstations                                    | 0.1 |    0.04                     |           1.5             |                    
++-------------------------------------------------+-----+-----------------------------+---------------------------+       
+| Network devices                                 | 0.5 |    0.2                      |           7.4             |
++-------------------------------------------------+-----+-----------------------------+---------------------------+
+
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server and 6 GB on the Wazuh server. 
 
 Scaling 
 -------
