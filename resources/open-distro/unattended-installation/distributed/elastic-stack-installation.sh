@@ -195,7 +195,7 @@ installElasticsearch() {
             echo "cluster.initial_master_nodes: $iname" >> /etc/elasticsearch/elasticsearch.yml    
 
             echo "opendistro_security.nodes_dn:" >> /etc/elasticsearch/elasticsearch.yml        
-            echo '        - CN='$name',OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml             
+            echo '        - CN='$iname',OU=Docu,O=Wazuh,L=California,C=US' >> /etc/elasticsearch/elasticsearch.yml             
         else
             echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
             mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
