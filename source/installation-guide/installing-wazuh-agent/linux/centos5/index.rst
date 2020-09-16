@@ -18,5 +18,3 @@ The Wazuh agent is available for CentOS 5, and can be installed via package:
     :maxdepth: 0
 
     wazuh_agent_package_centos5
-
-
