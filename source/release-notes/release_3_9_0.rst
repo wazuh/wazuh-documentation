@@ -24,7 +24,7 @@ Here we can see an example for CentOS/RHEL:
 
 .. code-block:: console
 
-    $ WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent
+    $ WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_YUM_AGENT_X86|
 
 The above example will install, configure and register the agent, making simple the deployment process.
 
