@@ -354,7 +354,7 @@ main() {
                 shift 1
                 ;; 
             "-d"|"--debug") 
-                debug=1          
+                debugEnabled=1          
                 shift 1
                 ;;                                 
             "-h"|"--help")        
@@ -365,11 +365,11 @@ main() {
             esac
         done    
 
-        if [ -n "$debug" ]; then
+        if [ -n "${debugEnabled}" ]; then
             debug=""
         fi
         
-        if [ -n "$ignore" ]; then
+        if [ -n "${ignore}" ]; then
             echo "Health-check ignored."    
         else
             healthCheck           
