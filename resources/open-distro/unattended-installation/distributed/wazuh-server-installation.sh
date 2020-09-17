@@ -20,9 +20,9 @@ logger() {
 startService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
-        eval "systemctl daemon-reload $debug"
-        eval "systemctl enable $1.service $debug"
-        eval "systemctl start $1.service $debug"
+        eval "systemctl daemon-reload ${debug}"
+        eval "systemctl enable $1.service ${debug}"
+        eval "systemctl start $1.service ${debug}"
         if [  "$?" != 0  ]
         then
             echo "${1^} could not be started."
@@ -31,9 +31,9 @@ startService() {
             echo "${1^} started"
         fi  
     elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
-        eval "chkconfig $1 on $debug"
-        eval "service $1 start $debug"
-        eval "/etc/init.d/$1 start $debug"
+        eval "chkconfig $1 on ${debug}"
+        eval "service $1 start ${debug}"
+        eval "/etc/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]
         then
             echo "${1^} could not be started."
@@ -42,7 +42,7 @@ startService() {
             echo "${1^} started"
         fi     
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
-        eval "/etc/rc.d/init.d/$1 start $debug"
+        eval "/etc/rc.d/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]
         then
             echo "${1^} could not be started."
@@ -74,7 +74,7 @@ checkConfig() {
     if [ -f ~/certs.tar ]
     then
         echo "Certificates file found. Starting the installation..."
-        eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml $debug"
+        eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
     else
         echo "No certificates file found."
         exit 1;
@@ -87,22 +87,22 @@ installPrerequisites() {
 
     logger "Installing all necessary utilities for the installation..."
 
-    if [ $sys_type == "yum" ] 
+    if [ ${sys_type} == "yum" ] 
     then
-        eval "yum install curl -y -q $debug"
-    elif [ $sys_type == "zypper" ] 
+        eval "yum install curl -y -q ${debug}"
+    elif [ ${sys_type} == "zypper" ] 
     then
-        eval "zypper -n install curl $debug"        
-    elif [ $sys_type == "apt-get" ] 
+        eval "zypper -n install curl ${debug}"        
+    elif [ ${sys_type} == "apt-get" ] 
     then
         if [ -n "$(command -v add-apt-repository)" ]
         then
-            eval "add-apt-repository ppa:openjdk-r/ppa -y $debug"
+            eval "add-apt-repository ppa:openjdk-r/ppa -y ${debug}"
         else
             echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
         fi
-        eval "apt-get update -q $debug"
-        eval "apt-get install apt-transport-https curl -y -q $debug"
+        eval "apt-get update -q ${debug}"
+        eval "apt-get install apt-transport-https curl -y -q ${debug}"
     fi
 
     logger "Done"
@@ -113,19 +113,19 @@ installPrerequisites() {
 addWazuhrepo() {
     logger "Adding the Wazuh repository..."
 
-    if [ $sys_type == "yum" ] 
+    if [ ${sys_type} == "yum" ] 
     then
-        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
-    elif [ $sys_type == "zypper" ] 
+        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-${releasever} - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
+    elif [ ${sys_type} == "zypper" ] 
     then
-        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo $debug"            
-    elif [ $sys_type == "apt-get" ] 
+        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-${releasever} - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
+    elif [ ${sys_type} == "apt-get" ] 
     then
-        eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
-        eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
-        eval "apt-get update -q $debug"
+        eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
+        eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
+        eval "apt-get update -q ${debug}"
     fi    
 
     logger "Done" 
@@ -135,11 +135,11 @@ addWazuhrepo() {
 installWazuh() {
 
     logger "Installing the Wazuh manager..."
-    if [ $sys_type == "zypper" ] 
+    if [ ${sys_type} == "zypper" ] 
     then
-        eval "zypper -n install wazuh-manager $debug"
+        eval "zypper -n install wazuh-manager ${debug}"
     else
-        eval "$sys_type install wazuh-manager -y -q $debug"
+        eval "${sys_type} install wazuh-manager -y -q ${debug}"
     fi
     if [  "$?" != 0  ]
     then
@@ -157,21 +157,21 @@ installFilebeat() {
     
     logger "Installing Filebeat..."
     
-    if [ $sys_type == "zypper" ] 
+    if [ ${sys_type} == "zypper" ] 
     then
-        eval "zypper -n install filebeat $debug"
+        eval "zypper -n install filebeat ${debug}"
     else
-        eval "$sys_type install filebeat -y -q  $debug"
+        eval "${sys_type} install filebeat -y -q  ${debug}"
     fi
     if [  "$?" != 0  ]
     then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/filebeat.yml --max-time 300 $debug"
-        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.13.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
-        eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
-        eval "curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"       
+        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/filebeat.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.13.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
+        eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
+        eval "curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"       
     fi        
 }
 
@@ -197,20 +197,20 @@ configureFilebeat() {
         done        
     fi
 
-    eval "mkdir /etc/filebeat/certs $debug"
-    eval "cp ~/certs.tar /etc/filebeat/certs/ $debug"
-    eval "cd /etc/filebeat/certs/ $debug"
-    eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem $debug"
+    eval "mkdir /etc/filebeat/certs ${debug}"
+    eval "cp ~/certs.tar /etc/filebeat/certs/ ${debug}"
+    eval "cd /etc/filebeat/certs/ ${debug}"
+    eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem ${debug}"
     if [ ${iname} != "filebeat" ]
     then
-        eval "mv /etc/filebeat/certs/${iname}.pem /etc/filebeat/certs/filebeat.pem $debug"
-        eval "mv /etc/filebeat/certs/${iname}.key /etc/filebeat/certs/filebeat.key $debug"
+        eval "mv /etc/filebeat/certs/${iname}.pem /etc/filebeat/certs/filebeat.pem ${debug}"
+        eval "mv /etc/filebeat/certs/${iname}.key /etc/filebeat/certs/filebeat.key ${debug}"
     fi        
     logger "Done"
     echo "Starting Filebeat..."
-    eval "systemctl daemon-reload $debug"
-    eval "systemctl enable filebeat.service $debug"
-    eval "systemctl start filebeat.service $debug"     
+    eval "systemctl daemon-reload ${debug}"
+    eval "systemctl enable filebeat.service ${debug}"
+    eval "systemctl start filebeat.service ${debug}"     
 }
 
 ## Health check
@@ -218,7 +218,7 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ $cores < "4" ]] || [[ $ram_gb < "7700" ]]
+    if [[ ${cores} < "4" ]] || [[ ${ram_gb} < "7700" ]]
     then
         echo "Your system does not meet the recommended minimum hardware requirements of 8Gb of RAM and 4 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
@@ -238,7 +238,7 @@ main() {
         do
             case "$1" in
             "-i"|"--ignore-healthcheck")        
-                i=1
+                ignore=1
                 shift
                 ;;     
             "-n"|"--node-name") 
@@ -247,7 +247,7 @@ main() {
                 shift
                 ;;                   
             "-d"|"--debug") 
-                d=1          
+                debugEnabled=1          
                 shift 1
                 ;;                 
             "-h"|"--help")        
@@ -257,15 +257,15 @@ main() {
                 getHelp
             esac
         done
-        if [ -n "$d" ]
+        if [ -n "${debugEnabled}" ]
         then
             debug=""
         fi
-        if [[ -z "$iname" ]]  
+        if [[ -z "${iname}" ]]  
         then
             getHelp
         fi
-        if [ -n "$i" ]
+        if [ -n "${iignore}" ]
         then
             echo "Health-check ignored."
 
