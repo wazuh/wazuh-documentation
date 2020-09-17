@@ -12,7 +12,7 @@ Installing the Wazuh server
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
 
-Download installation script:
+Download the installation script:
 
 .. code-block:: console
 
