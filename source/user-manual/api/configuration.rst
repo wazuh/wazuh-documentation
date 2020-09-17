@@ -109,7 +109,7 @@ Restore configuration
 - ``DELETE /security/config``: Restore the default security configuration.
 
 
-To apply the changes it is necessary to restart each API whose configuration have changed:
+To apply the changes it is necessary to restart each API whose configuration has changed:
 
   a. For Systemd:
 
