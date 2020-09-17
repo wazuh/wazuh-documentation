@@ -443,7 +443,7 @@ copyKibanacerts() {
     elif [ -f ~/certs.tar ]; then
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem ${debug}"
+        eval "tar --overwrite -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem ${debug}"
         if [ ${iname} != "kibana" ]; then
             eval "mv /etc/kibana/certs/${iname}.pem /etc/kibana/certs/kibana.pem ${debug}"
             eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key ${debug}"
