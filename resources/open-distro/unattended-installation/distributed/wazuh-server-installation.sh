@@ -265,7 +265,7 @@ main() {
         then
             getHelp
         fi
-        if [ -n "${iignore}" ]
+        if [ -n "${ignore}" ]
         then
             echo "Health-check ignored."
 
