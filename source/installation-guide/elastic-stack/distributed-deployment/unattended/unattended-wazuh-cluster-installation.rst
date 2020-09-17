@@ -7,31 +7,28 @@ Wazuh server unattended installation
 
 This section will explain how to install the Wazuh manager with the Wazuh API, and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
-Run the script
---------------
+Installing the Wazuh server
+---------------------------
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
 
-Download the script:
+Download installation script:
 
 .. code-block:: console
 
   # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/distributed/wazuh-server-installation.sh
     
 
-Filebeat needs to be configured by adding the Elasticsearch nodes IPs in order to connect with them. Choose the cluster mode between single-node or multi-node. The following commands assume that the script has been downloaded in the home directory ( ``~/`` ):
+Replace the following variables and run the installation script: 
+
+- ``<node_name>``: Name of the Wazuh server instance. 
+- ``<elastic_user_password>``: The password of the user ``elastic`` generated during the Elasticsearch installation. 
 
 .. code-block:: console
 
     # bash ~/wazuh-server-installation.sh -n <node_name> -p <elastic_password>
 
-Values to be replaced:
-
-- ``<node_name>``: Name of the Wazuh server instance.
-- ``<elastic_user_password>``: The password of the user ``elastic`` generated during the Elasticsearch installation. 
-
-
-The script allows the following options:
+The installation script allows the following options:
 
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                       |
@@ -46,6 +43,8 @@ The script allows the following options:
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | -h / --help                   | Shows help                                                                                                    |
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
+
+In case of installing a Wazuh server in multiples nodes, repeat this process in every host.  
 
 Configure the installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -65,7 +64,9 @@ After the installation of all the components of the node, some steps must be don
   .. group-tab:: Multi-node
 
 
-    By default, the Wazuh manager is configured to work as a single-node cluster. The following steps will describe how to configure the Wazuh manager as a Wazuh ``master`` or ``worker`` node.
+    The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
+
+    One server has to be chosen as a master, the rest will be workers. So, the section ``Master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Worker node`` must be applied.
 
     **Master node:**
 
