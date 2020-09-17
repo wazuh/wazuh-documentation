@@ -42,3 +42,4 @@ Find more information about how to scale your environments using Splunk Enterpri
     splunk-forwarder
     splunk-reverse-proxy
     splunk-polling
+    automatic_api

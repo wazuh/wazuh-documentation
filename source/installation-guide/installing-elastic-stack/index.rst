@@ -40,5 +40,4 @@ After the installation, find below optional steps you may find interesting:
    protect-installation/index
    transform_logstash
    elastic_tuning
-   automatic_api
    configure-elasticsearch-cluster.rst
