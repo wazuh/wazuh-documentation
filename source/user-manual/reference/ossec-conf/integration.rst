@@ -93,11 +93,11 @@ group
 
 This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available.
 
-+--------------------+-------------------------------------------------+
-| **Default value**  | n/a                                             |
-+--------------------+-------------------------------------------------+
-| **Allowed values** | Any rule group or comma-separated rule groups.  |
-+--------------------+-------------------------------------------------+
++--------------------+------------------------------------------------------------+
+| **Default value**  | n/a                                                        |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | Any rule group or vertical bar-separated rule groups.      |
++--------------------+------------------------------------------------------------+
 
 event_location
 ^^^^^^^^^^^^^^
