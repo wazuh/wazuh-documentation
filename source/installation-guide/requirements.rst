@@ -2,14 +2,32 @@
 
 .. _installation_requirements:
 
-
 Requirements
 ============
+
+This section provides information about the supported operating system as well as minimum hardware requirements for the different Wazuh components. 
+
+Wazuh agent requirements
+------------------------
+
+The Wazuh agent has been developed taking into consideration the need for monitoring a great variety of different endpoints without impacting their performance. It is because of this that the Wazuh agent is supported in the most popular operating systems and only requires around 0.1 GB of RAM. 
+
+Supported operating systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ - Windows
+ - macOS
+ - Linux
+ - Solaris
+ - HP-UX
+ - AIX
+
+Wazuh server requirements
+-------------------------
 
 This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements  for the different types of deployments of Wazuh and Open Distro for Elasticsearch or Elastic Stack.
 
 Supported operating systems
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh server and Open Distro for Elasticsearch or Elastic Stack components can be installed in the following Linux operating systems:
 
@@ -29,7 +47,7 @@ The Wazuh server and Open Distro for Elasticsearch or Elastic Stack components c
 
 
 All-in-one deployment
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 In an all-in-one deployment, Wazuh server and Open Distro for Elasticsearch or Elastic Stack, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
 
@@ -51,7 +69,7 @@ For example for an environment with 80 workstations, 10 servers and 10 networks 
 
 
 Distributed deployment
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 In a distributed deployment, the Wazuh server and Open Distro for Elasticsearch or Elastic Stack are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
 
@@ -86,7 +104,7 @@ Regarding the disk space requirements, the amount of data depends on the alerts 
 For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server and 6 GB on the Wazuh server. 
 
 Scaling 
--------
+^^^^^^^
 
 In order to determine if a Wazuh server requires more resources the following files may be monitored: ``/var/ossec/var/run/ossec-analysisd.state``  and  ``/var/ossec/var/run/ossec-remoted.state`` .
 

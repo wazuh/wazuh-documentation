@@ -34,7 +34,7 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 
 Installing Elasticsearch
-----------------------------------------
+------------------------
 
 Download the script and the configuration file. After downloading them, configure the installation and run the script. Choose the cluster mode between single-node or multi-node:
 
@@ -256,7 +256,9 @@ Configuring Kibana
 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` by the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
+
+  If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh installation to remediate this.
 
 Next steps
 ~~~~~~~~~~
