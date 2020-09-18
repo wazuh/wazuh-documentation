@@ -21,6 +21,8 @@ Configure the cluster node by editing the following settings in the ``/var/ossec
 As shown in the example above, the following parameters have to be edited:
 
 +-------------------------------------+----------------------------------------------------------------------------------------------+
+| :ref:`node_name <cluster_name>`     | Name of the cluster.                                                                         |
++-------------------------------------+----------------------------------------------------------------------------------------------+
 | :ref:`node_name <cluster_node_name>`| Each node of the cluster must have a unique name.                                            |
 +-------------------------------------+----------------------------------------------------------------------------------------------+
 | :ref:`node_type <cluster_node_type>`| Has to be set as ``worker``.                                                                 |
