@@ -22,17 +22,15 @@ The agent upgrade module will receive the upgrade requests from a socket located
 
     {WAZUH_DIR}/queue/tasks/upgrade
 
-The module expects 3 parameters:
+The module expects 2 parameters:
 
-+-------------+----------------------------------------------+-------------------------------------------------------------------+
-| Option      | Values                                       | Description                                                       |
-+=============+==============================================+===================================================================+
-| **command** | upgrade, upgrade_custom                      | Specifies the command to be executed                              |
-+-------------+----------------------------------------------+-------------------------------------------------------------------+
-| **agents**  | Array of int values (id of the agents)       | Specifies the list of agents where the command will be applied    |
-+-------------+----------------------------------------------+-------------------------------------------------------------------+
-| **params**  | List of parameters for the specified command | List of parameters containing information required by the command |
-+-------------+----------------------------------------------+-------------------------------------------------------------------+
++-----------------+------------+----------------------------------------+-------------------------------------------------------------------+
+| Option          | Suboption  | Values                                 | Description                                                       |
++=================+============+========================================+===================================================================+
+| **command**     |            | upgrade, upgrade_custom                | Specifies the command to be executed                              |
++-----------------+------------+----------------------------------------+-------------------------------------------------------------------+
+| **parameters**  | **agents** | Array of int values (id of the agents) | Specifies the list of agents where the command will be applied    |
++-----------------+------------+----------------------------------------+-------------------------------------------------------------------+
 
 1.  **Upgrade parameters**: Command to upgrade agents from a repository.
 
@@ -55,8 +53,8 @@ The module expects 3 parameters:
 
         {
             "command": "upgrade",
-            "agents": [5,6],
-            "params": {
+            "parameters": {
+                "agents": [5,6],
                 "wpk_repo": "packages.wazuh.com/wpk/",
                 "version": "v4.0.0",
                 "use_http": 0,
@@ -83,8 +81,8 @@ The module expects 3 parameters:
 
         {
             "command": "upgrade_custom",
-            "agents": [20,23],
-            "params": {
+            "parameters": {
+                "agents": [20,23],
                 "file_path": "/home/user/agent.wpk",
                 "installer": "custom-upgrade-script.sh"
             }
@@ -102,32 +100,32 @@ The task manager is the one that informs the result of an upgrade task. It will 
 
 .. note:: In case of having a multi-node Wazuh cluster, the task manager only runs on the master node. This request should always go to the master node.
 
-The module expects an array of requests with 3 parameters each one:
+The module expects 3 parameters:
 
-+-------------+-----------------------------+-------------------------------------------------------+
-| Option      | Values                      | Description                                           |
-+=============+=============================+=======================================================+
-| **module**  | api (only value allowed)    | Emmiter of the request                                |
-+-------------+-----------------------------+-------------------------------------------------------+
-| **command** | upgrade_result              | Command to execute on the task manager                |
-+-------------+-----------------------------+-------------------------------------------------------+
-| **agent**   | int value (id of the agent) | Specifies the agent where the command will be applied |
-+-------------+-----------------------------+-------------------------------------------------------+
++-----------------+------------+----------------------------------------------+-------------------------------------------------------------------+
+| Option          | Suboption  | Values                                       | Description                                                       |
++=================+============+==============================================+===================================================================+
+| **origin**      | **module** | api (only value allowed)                     | Emmiter of the request                                            |
++-----------------+------------+----------------------------------------------+-------------------------------------------------------------------+
+| **command**     |            | upgrade, upgrade_custom                      | Specifies the command to be executed                              |
++-----------------+------------+----------------------------------------------+-------------------------------------------------------------------+
+| **parameters**  | **agents** | Array of int values (id of the agents)       | Specifies the list of agents where the command will be applied    |
++-----------------+------------+----------------------------------------------+-------------------------------------------------------------------+
 
 Example message:
 
 .. code-block:: json
     :class: output
 
-    [{
-        "module": "api",
+    {
+        "origin" {
+            "module": "api"
+        },
         "command": "upgrade_result",
-        "agent": 5
-    },{
-        "module": "api",
-        "command": "upgrade_result",
-        "agent": 10
-    }]
+        "parameters": {
+            "agents": [5,10]
+        }
+    }
 
 The response will contain all the information related to the upgrade task stored in the tasks DB:
 
@@ -162,25 +160,31 @@ Example response:
 .. code-block:: json
     :class: output
 
-    [{
+    {
         "error": 0,
-        "data": "Success",
-        "module": "upgrade_module",
-        "command": "upgrade",
-        "agent": 5,
-        "task_id": 15,
-        "create_time": "2020/08/11 00:05:18",
-        "update_time": "0",
-        "status": "Updating"
-    },{
-        "error": 0,
-        "data": "Success",
-        "module": "upgrade_module",
-        "command": "upgrade",
-        "agent": 10,
-        "task_id": 16,
-        "create_time": "2020/08/11 00:05:30",
-        "update_time": "2020/08/11 00:05:52",
-        "status": "Error",
-        "error_msg": "SHA1 verification error"
-    }]
+        "data": [
+            {
+                "error": 0,
+                "data": "Success",
+                "module": "upgrade_module",
+                "command": "upgrade",
+                "agent": 5,
+                "task_id": 15,
+                "create_time": "2020/08/11 00:05:18",
+                "update_time": "0",
+                "status": "Updating"
+            },{
+                "error": 0,
+                "data": "Success",
+                "module": "upgrade_module",
+                "command": "upgrade",
+                "agent": 10,
+                "task_id": 16,
+                "create_time": "2020/08/11 00:05:30",
+                "update_time": "2020/08/11 00:05:52",
+                "status": "Error",
+                "error_msg": "SHA1 verification error"
+            }
+        ],
+        "message": "Success"
+    }

@@ -27,6 +27,7 @@ Manager side
 
 - `chunk_size`_
 - `wpk_repository`_
+- `max_threads`_
 
 .. note:: On the manager side, this module will be always enabled and cannot be deactivated.
 
@@ -67,6 +68,20 @@ Repository where the WPK files will be downloaded.
 +--------------------+--------------------------------------------------+
 | **Required**       | no                                               |
 +--------------------+--------------------------------------------------+
+
+
+max_threads
+^^^^^^^^^^^
+
+Maximum number of threads to process upgrades in paralel. Value 0 means number of CPU cores.
+
++--------------------+-------------------------------+
+| **Default value**  | 8                             |
++--------------------+-------------------------------+
+| **Allowed values** | Any number between 0 and 256  |
++--------------------+-------------------------------+
+| **Required**       | no                            |
++--------------------+-------------------------------+
 
 
 enabled
@@ -135,6 +150,7 @@ Sample Configuration
     <agent-upgrade>
       <chunk_size>16384</chunk_size>
       <wpk_repository>packages.wazuh.com/wpk/</wpk_repository>
+      <max_threads>16</max_threads>
     </agent-upgrade>
 
     <!-- On the agent side -->
