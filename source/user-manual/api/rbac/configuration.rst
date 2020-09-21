@@ -5,13 +5,13 @@
 Configuration
 =============
 .. note::
-    It is necessary to log into the API before attempting to add or modify any RBAC configuration, such as policies, roles or users. A detailed guide on how to log in can be found within the :ref:`Getting started <api_getting_started>` section of the API.
+    It is necessary to log into the Wazuh API before attempting to add or modify any RBAC configuration, such as policies, roles or users. A detailed guide on how to log in can be found within the :ref:`Getting started <api_getting_started>` section of the Wazuh API.
 
 Set RBAC mode
 -------------
 As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it is possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done by using the ``PUT /security/config`` endpoint.
 
-Here is an example of how to change RBAC mode using a cURL command. It is recommended to export the token to a variable as explained in Getting started section (see :ref:`Getting started <api_getting_started>` for more information about logging into the API). Replace ``DESIRED_RBAC_MODE`` with the mode to enable ("black" or "white"):
+Here is an example of how to change RBAC mode using a cURL command. It is recommended to export the token to a variable as explained in Getting started section (see the :ref:`Getting started <api_getting_started>` section for more information about logging into the API). Replace ``DESIRED_RBAC_MODE`` with the mode to enable ("black" or "white"):
 
 .. code-block:: console
 

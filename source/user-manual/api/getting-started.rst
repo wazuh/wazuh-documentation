@@ -26,12 +26,12 @@ The Wazuh API will be installed along the Wazuh manager by default and it will s
 
 .. _api_log_in:
 
-Logging into the API
---------------------
+Logging into the Wazuh API
+--------------------------
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
 
-#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
@@ -77,10 +77,10 @@ Once logged in, it is possible to run any API endpoint following the structure b
   There is another advanced authentication method, which allows obtaining the permissions in a dynamic way using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
 
 
-Logging into the API via scripts
---------------------------------
+Logging into the Wazuh API via scripts
+--------------------------------------
 
-The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with Wazuh API.
+The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with the Wazuh API.
 
 #. Logging in with Python:
 
@@ -257,7 +257,7 @@ Here are some of the basic concepts related to making API requests and understan
     +---------+----------------------+-----------------------------------------------------------------------+
     | Field   | Sub-field            | Description                                                           |
     +=========+======================+=======================================================================+
-    | data    | affected_items       | List with each one of the successfully affected items in the request. |
+    | data    | affected_items       | List with each of the successfully affected items in the request.     |
     |         +----------------------+-----------------------------------------------------------------------+
     |         | total_affected_items | Total number of successfully affected items.                          |
     |         +----------------------+-----------------------------------------------------------------------+
@@ -366,7 +366,7 @@ Here are some of the basic concepts related to making API requests and understan
 Use cases
 ---------
 
-This section will present several use cases to give you a taste for the API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
+This section will present several use cases to give you a taste for the Wazuh API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
 
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^
@@ -614,7 +614,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 Getting information about the manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some information about the manager can be retrieved using the API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
+Some information about the manager can be retrieved using the Wazuh API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
 
 .. code-block:: console
 

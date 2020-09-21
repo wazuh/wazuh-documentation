@@ -10,7 +10,7 @@ Examples
 CURL
 ^^^^
 
-cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the API. Please note that before executing any endpoint, you will need to get a JWT token as explained in :ref:`Getting started <api_log_in>`. Some examples:
+cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, you will need to get a JWT token as explained in :ref:`Getting started <api_log_in>`. Some examples:
 
 **GET**
 
@@ -118,7 +118,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 Python
 ^^^^^^
 
-You can also interact with the API using Python as shown below:
+You can also interact with the Wazuh API using Python as shown below:
 
 Code:
 
@@ -198,7 +198,7 @@ In this example, the script would show us which agents are disconnected with the
 PowerShell
 ^^^^^^^^^^
 
-The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the API and handles the response.
+The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the Wazuh API and handles the response.
 
 Code:
 

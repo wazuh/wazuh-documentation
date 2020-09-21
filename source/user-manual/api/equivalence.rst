@@ -25,7 +25,7 @@ Wazuh API 4.0 introduces several new endpoints and also modifies or removes some
 Migrating users
 -----------------
 
-The API users are not migrated when upgrading Wazuh API from 3.X to 4.0. There are numerous security changes to Wazuh API in 4.0 and it is not advisable.
+The Wazuh API users are not migrated when upgrading the Wazuh API from 3.X to 4.0. There are numerous security changes to the Wazuh API in 4.0 and it is not advisable.
 However, using the following API calls it is easy to create new users and assign the administrator role to it (substitute <username> and <password>):
 
 **Create new user**

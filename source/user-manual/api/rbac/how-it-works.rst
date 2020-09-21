@@ -13,9 +13,9 @@ After configuring RBAC, there will be groups that can only see and do certain ac
 
 Actions, resources and effect
 -----------------------------
-Policies control API permissions using three elements: actions, resources, and effect.
+Policies control the Wazuh API permissions using three elements: actions, resources, and effect.
 
-**Actions** represents a hierarchy of actions that a user may perform. They indicate both the element to which the action belongs and the action itself. The structure they follow looks like the example below, where restarting agent is specified.
+**Actions** represent a hierarchy of actions that a user may perform. They indicate both the element to which the action belongs and the action itself. The structure they follow looks like the example below, where restarting agent is specified.
 
 .. code-block:: console
 
@@ -36,7 +36,7 @@ Policies control API permissions using three elements: actions, resources, and e
 RBAC modes
 ----------
 
-RBAC in Wazuh can be configured in two different and opposite ways: **black** and **white**. The choice of one mode or another determines what will be the behaviour of the created policies. If the parameter ``effect`` of a policy is set to ``allow``, that policy will be allowed in both black and white mode. If the effect is ``deny``, it will be denied in both black and white. Therefore, the RBAC mode only affects those actions that are not specified within each policy.
+RBAC in Wazuh can be configured in two different and opposite ways: **black** and **white**. The choice of one mode or another determines what will the behaviour of the created policies be. If the parameter ``effect`` of a policy is set to ``allow``, that policy will be allowed in both black and white mode. If the effect is ``deny``, it will be denied in both black and white. Therefore, the RBAC mode only affects those actions that are not specified within each policy.
 
-- **White list mode:** everything is forbidden. The administrator configure roles to give permissions.
-- **Black list mode:** everything is allowed. The administrator configure roles to restrict permissions.
+- **White list mode:** everything is forbidden. The administrator configures roles to give permissions.
+- **Black list mode:** everything is allowed. The administrator configures roles to restrict permissions.
