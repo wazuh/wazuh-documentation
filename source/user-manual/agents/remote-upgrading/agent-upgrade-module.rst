@@ -118,7 +118,7 @@ Example message:
     :class: output
 
     {
-        "origin" {
+        "origin": {
             "module": "api"
         },
         "command": "upgrade_result",
