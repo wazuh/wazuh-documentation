@@ -50,7 +50,7 @@ Here are all the settings available for the `api.yaml` configuration file. For m
         time: 0.750
 
      access:
-        max_login_attempts: 5
+        max_login_attempts: 50
         block_time: 300
         max_request_per_minute: 300
 

@@ -331,8 +331,9 @@ Here are some of the basic concepts related to making API requests and understan
         :class: output
 
         {
+          "type": "about:blank",
           "title": "Unauthorized",
-          "detail": "No authorization token provided",
+          "detail": "The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.",
           "status": 401
         }
 

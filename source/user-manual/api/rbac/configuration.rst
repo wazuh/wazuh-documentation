@@ -57,7 +57,7 @@ It is possible to use the ``POST /security/policies`` endpoint to create the des
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}" -k
+    # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}"
 
 The API response will be something similar to this. The highlighted ID should be used later on to assign the policy to the role:
 
@@ -115,7 +115,7 @@ As before, the creation of that role can be requested using an API endpoint. In 
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/security/roles" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"sales-team\"}" -k
+    # curl -k -X POST "https://localhost:55000/security/roles?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"sales-team\"}"
 
 The response body would be similar to this one. It is important to remember the role ID as it will be needed to link policies to this role.
 
@@ -158,7 +158,7 @@ This information needs to be specified in order to create a new user. As an exam
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/security/users" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"sales-member-1\",\"password\":\"Sales-Member-1\",\"allow_run_as\":false}"
+    # curl -k -X POST "https://localhost:55000/security/users?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"sales-member-1\",\"password\":\"Sales-Member-1\",\"allow_run_as\":false}"
 
 There is a parameter called ``allow_run_as`` on the highlighted line. If set to *true*, roles can be assigned to the user based on the information of an authorization context. Visit this section to find more detailed information about :ref:`Authorization Context <authorization_context_method>`.
 
@@ -237,7 +237,7 @@ To assign any rule, it is necessary both the ID of the rule and the ID of the ro
 
 .. code-block:: console
 
-    # curl -X POST "https://localhost:55000/security/roles/8/rules?rule_ids=2" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X POST "https://localhost:55000/security/roles/8/rules?rule_ids=2&pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -305,7 +305,7 @@ The user "sales-member-1" now belongs to the "sales-team" role, so it could perf
 
 Priority of roles and policies
 ------------------------------
-When the same role has two or more contradictory policies assigned or the same user belong to two or more contradictory roles the resulting permission will be determined by the priority of the policies. Let's take a look to the following example:
+When the same role has two or more contradictory policies assigned or the same user belong to two or more contradictory roles, the resulting permission will be determined by the priority of the policies. Let's take a look to the following example:
 
 .. code-block:: yaml
     :emphasize-lines: 7,13

@@ -185,7 +185,7 @@ Advanced examples
 Example 1
 ^^^^^^^^^
 
-- This is the rule that the user want to match:
+- This is the rule that the user wants to match:
 
 .. code-block:: json
         :class: output
@@ -251,7 +251,7 @@ As a result, the initial OR operation will be True since the AND operation retur
 Example 2
 ^^^^^^^^^
 
-- This is the rule that the user want to match:
+- This is the rule that the user wants to match:
 
 .. code-block:: json
         :class: output
