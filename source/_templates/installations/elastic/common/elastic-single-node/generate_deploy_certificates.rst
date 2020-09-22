@@ -13,7 +13,7 @@
 
     # curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
 
-* Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``:
+* Extract the downloaded file. It is assumed that it has been downloaded in ``~/`` (home directory):
 
   .. code-block:: console
 
