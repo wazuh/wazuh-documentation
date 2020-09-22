@@ -13,3 +13,10 @@ jobs:
       uses: './.github/actions/test-build'
     - name: Linting compliance
       uses: './.github/actions/test-lint'
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Linting compliance
+      uses: './.github/actions/test-lint'
