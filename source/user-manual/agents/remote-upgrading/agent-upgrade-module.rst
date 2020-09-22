@@ -34,17 +34,17 @@ The module expects 2 parameters:
 
 1.  **Upgrade parameters**: Command to upgrade agents from a repository.
 
-    +-------------------+--------+----------+------------------------------+----------------------------------------------------------------------------------+
-    | Option            | Values | Required | Default                      | Description                                                                      |
-    +===================+========+==========+==============================+==================================================================================+
-    | **wpk_repo**      | string | no       | ``<wpk_repo>`` configuration | Parameter to override the default WPK repository set by configuration            |
-    +-------------------+--------+----------+------------------------------+----------------------------------------------------------------------------------+
-    | **version**       | vX.Y.Z | no       | Last available version       | Overrides the version of the package that will be downloaded from the repository |
-    +-------------------+--------+----------+------------------------------+----------------------------------------------------------------------------------+
-    | **use_http**      | 0, 1   | no       | 0                            | Wheter retrieve the WPK file over http or https                                  |
-    +-------------------+--------+----------+------------------------------+----------------------------------------------------------------------------------+
-    | **force_upgrade** | 0, 1   | no       | 0                            | Forces the agents to upgrade, ignoring version validations                       |
-    +-------------------+--------+----------+------------------------------+----------------------------------------------------------------------------------+
+    +-----------------+-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
+    | Option          | Suboption         | Values        | Required | Default                      | Description                                                                      |
+    +=================+===================+===============+==========+==============================+==================================================================================+
+    | **parameters**  | **wpk_repo**      | string        | no       | ``<wpk_repo>`` configuration | Parameter to override the default WPK repository set by configuration            |
+    |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
+    |                 | **version**       | vX.Y.Z        | no       | Last available version       | Overrides the version of the package that will be downloaded from the repository |
+    |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
+    |                 | **use_http**      | true, false   | no       | false                        | Wheter retrieve the WPK file over http or https                                  |
+    |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
+    |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring version validations                       |
+    +-----------------+-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
 
     Example message:
 
@@ -57,8 +57,8 @@ The module expects 2 parameters:
                 "agents": [5,6],
                 "wpk_repo": "packages.wazuh.com/wpk/",
                 "version": "v4.0.0",
-                "use_http": 0,
-                "force_upgrade": 0
+                "use_http": false,
+                "force_upgrade": false
             }
         }
 
@@ -66,13 +66,13 @@ The module expects 2 parameters:
 
     .. note:: In case of having a multi-node Wazuh cluster, the custom WPK file has to exist on all nodes in the specified path.
 
-    +---------------+--------+----------+-----------------------------------------------------+----------------------------------------+
-    | Option        | Values | Required | Default                                             | Description                            |
-    +===============+========+==========+=====================================================+========================================+
-    | **file_path** | string | yes      |                                                     | Path to the WPK file that will be sent |
-    +---------------+--------+----------+-----------------------------------------------------+----------------------------------------+
-    | **installer** | string | no       | ``upgrade.sh`` in Linux, ``upgrade.bat`` in Windows | Override the default installer script  |
-    +---------------+--------+----------+-----------------------------------------------------+----------------------------------------+
+    +-----------------+---------------+--------+----------+-----------------------------------------------------+----------------------------------------+
+    | Option          | Suboption     | Values | Required | Default                                             | Description                            |
+    +=================+===============+========+==========+=====================================================+========================================+
+    | **parameters**  | **file_path** | string | yes      |                                                     | Path to the WPK file that will be sent |
+    |                 +---------------+--------+----------+-----------------------------------------------------+----------------------------------------+
+    |                 | **installer** | string | no       | ``upgrade.sh`` in Linux, ``upgrade.bat`` in Windows | Override the default installer script  |
+    +-----------------+---------------+--------+----------+-----------------------------------------------------+----------------------------------------+
 
     Example message:
 
@@ -134,7 +134,19 @@ The response will contain all the information related to the upgrade task stored
 +=================+============================================+==========================================================+
 | **error**       | int value                                  | Error code: 0 when success, a positive number when error |
 +-----------------+--------------------------------------------+----------------------------------------------------------+
-| **data**        | string                                     | String associated to the error code                      |
+| **data**        | array                                      | Array with the responses for each agent                  |
++-----------------+--------------------------------------------+----------------------------------------------------------+
+| **message**     | string                                     | String associated to the error code                      |
++-----------------+--------------------------------------------+----------------------------------------------------------+
+
+The information for each agent will be the following:
+
++-----------------+--------------------------------------------+----------------------------------------------------------+
+| Option          | Values                                     | Description                                              |
++=================+============================================+==========================================================+
+| **error**       | int value                                  | Error code: 0 when success, a positive number when error |
++-----------------+--------------------------------------------+----------------------------------------------------------+
+| **message**     | string                                     | String associated to the error code                      |
 +-----------------+--------------------------------------------+----------------------------------------------------------+
 | **module**      | upgrade_module                             | Emmiter of the task retrieved                            |
 +-----------------+--------------------------------------------+----------------------------------------------------------+
@@ -165,7 +177,7 @@ Example response:
         "data": [
             {
                 "error": 0,
-                "data": "Success",
+                "message": "Success",
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "agent": 5,
@@ -175,7 +187,7 @@ Example response:
                 "status": "Updating"
             },{
                 "error": 0,
-                "data": "Success",
+                "message": "Success",
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "agent": 10,
