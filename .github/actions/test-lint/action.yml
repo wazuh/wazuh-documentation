@@ -1,0 +1,6 @@
+name: lint
+description: lint RST files
+runs:
+  using: docker
+  image: 'Dockerfile'
+  

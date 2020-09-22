@@ -1,0 +1,15 @@
+
+name: CI Wazuh Documentation tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Build tests
+      uses: './.github/actions/test-build'
+    - name: Linting compliance
+      uses: './.github/actions/test-lint'
