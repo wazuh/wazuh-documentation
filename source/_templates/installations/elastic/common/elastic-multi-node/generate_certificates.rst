@@ -11,13 +11,13 @@
 
   .. code-block:: console
 
-    # curl -so /etc/elasticsearch/certs/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
+    # curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip
 
 * Extract the downloaded file. It is assumed that it has been downloaded in ``/etc/elasticsearch/certs``:
 
   .. code-block:: console
 
-    # unzip search-guard-tlstool-1.8.zip -d searchguard
+    # unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard
 
 * Download the ``search-guard.yml`` configuration file. Choose either ``Wazuh single-node cluster`` if there is only one Wazuh server, or ``Wazuh multi-node cluster`` in case of having more than one Wazuh servers:
 
@@ -27,7 +27,7 @@
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/multi-node/search-guard.yml
+        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/multi-node/search-guard.yml
 
 
       After downloading the configuration file in ``/etc/elasticsearch/certs/searchguard/search-guard.yml``, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. More than one IP can be specified (one entry per line):
@@ -52,10 +52,10 @@
 
       .. code-block:: console
 
-        # curl -so /etc/elasticsearch/certs/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/multi-node/search-guard-multi-node.yml
+        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/multi-node/search-guard-multi-node.yml
 
 
-      After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs in the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
+      After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
@@ -89,7 +89,7 @@
 
   .. code-block:: console
 
-    # /etc/elasticsearch/certs/searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
+    # ~/searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
     # mv /etc/elasticsearch/certs/node-1.pem /etc/elasticsearch/certs/elasticsearch.pem
     # mv /etc/elasticsearch/certs/node-1.key /etc/elasticsearch/certs/elasticsearch.key
     # mv /etc/elasticsearch/certs/node-1_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
@@ -101,8 +101,7 @@
 
   .. code-block:: console
 
-    # tar -cf certs.tar *
-    # tar --delete -f certs.tar 'searchguard'
+    # tar -cf /etc/elasticsearch/certs/certs.tar *
 
 * Copy ``certs.tar`` to all the instances of the distributed deployment. This can be done by using, for example, ``scp``. 
 
