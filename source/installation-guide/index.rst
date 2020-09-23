@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _index:
+.. _wazuh_stack_installation_guide:
 
 
 Wazuh Stack installation guide
