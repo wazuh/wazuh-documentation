@@ -53,7 +53,7 @@ Deployment types
 
    In this case, Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
 
-   .. thumbnail:: images/installation/all-in-one.png
+   .. thumbnail:: ../images/installation/all-in-one.png
      :title: Distributed architecture
      :align: center
      :width: 100%
@@ -63,7 +63,7 @@ Deployment types
 
    Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
 
-   .. thumbnail:: images/installation/distributed.png
+   .. thumbnail:: ../images/installation/distributed.png
      :title: Distributed architecture
      :align: center
      :width: 100%
@@ -73,7 +73,7 @@ Deployment types
 
    All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
 
-   .. thumbnail:: images/installation/cloud.png
+   .. thumbnail:: ../images/installation/cloud.png
      :title: Distributed architecture
      :align: center
      :width: 100%
