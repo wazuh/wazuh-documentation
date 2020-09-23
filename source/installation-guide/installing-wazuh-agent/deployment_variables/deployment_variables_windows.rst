@@ -23,7 +23,7 @@ Below you can find a table describing the variables used by Wazuh installers on 
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_SERVER        |  Specifies the Authd IP address.                                                                                             |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_REGISTRATION_PORT          |  Specifies the Authd connection port.                                                                                        |
+|   WAZUH_REGISTRATION_PORT          |  Specifies the Authd connection port. If empty, the value set in ``WAZUH_MANAGER`` will be used.                             |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_PASSWORD      |  Sets the Authd password.                                                                                                    |
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
