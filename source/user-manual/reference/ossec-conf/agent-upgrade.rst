@@ -73,7 +73,7 @@ Repository where the WPK files will be downloaded.
 max_threads
 ^^^^^^^^^^^
 
-Maximum number of threads to process upgrades in paralel. Value 0 means number of CPU cores.
+Maximum number of threads to process upgrades in parallel. Value 0 means number of CPU cores.
 
 +--------------------+-------------------------------+
 | **Default value**  | 8                             |
