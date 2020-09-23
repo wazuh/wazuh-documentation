@@ -41,7 +41,7 @@ After the execution of the script, it will show the following messages to confir
 
 Once Kibana is accessible, the script will quit.
 
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user and password to access Kibana is ``wazuh_user``.
+.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user and password to access Kibana is ``admin``.
 
 
 Elasticsearch users and roles

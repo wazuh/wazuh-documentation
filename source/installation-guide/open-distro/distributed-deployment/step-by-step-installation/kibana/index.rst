@@ -116,7 +116,7 @@ Kibana installation and configuration
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-.. note:: The Kibana service listens to port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the corresponding Kibana server's IP. The default user and password to access Kibana is ``wazuh_user``.
+.. note:: The Kibana service listens to port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the corresponding Kibana server's IP. The default user and password to access Kibana is ``admin``.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
 
