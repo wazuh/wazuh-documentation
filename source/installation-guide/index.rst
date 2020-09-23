@@ -1,10 +1,34 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _index:
+.. _installation_guide:
 
+
+Wazuh Stack installation guide
+==============================
+
+This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
+
+There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Elasticsearch flavor that the user choose.
+A section dedicated to the recommended requirements and another section as an alternative to do the installation using packages instead of repositories.
+
+The following diagram shows a typical installation: 
+
+.. thumbnail:: ../images/getting_started/data_flow.png
+  :align: center
+  :width: 100%
+
+
+Elasticsearch flavors
+---------------------
+
+The user can select among these two flavors of Elasticsearch the one that better suits their environment:
+
+- Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
+
+- Elastic Stack:  In this installation guide, the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
 
 Deployment types
-================
+----------------
 
 .. meta::
   :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
@@ -87,9 +111,27 @@ Deployment types
    </div></div>
    <div class="section" id="available-documentation">
 
+Installation methods
+---------------------
+
+Once the desired configuration is selected the user can choose between two installation methods:
+
+- Unattended installation: Uses scripts to automatically install and configure all the components.
+
+- Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.
+
+Requirements
+------------
+
+This guide also includes a requirements section that specifies the supported operating systems and the minimum recommended hardware specifications to guarantee the expected performance.  
+
+Packages list
+-------------
+
+This installation guide provides instructions to configure the official repositories to do the installations, alternatively, the installation can be done using packages.  A list of all the available packages can be found in the packages list section.  
+
 .. toctree::
-   :titlesonly:
-   :includehidden:
+    :maxdepth: 1
 
     requirements
     open-distro/index
@@ -98,7 +140,8 @@ Deployment types
    
 .. raw:: html
 
-   </div>   
+   </div>  
+ 
 
 
 
