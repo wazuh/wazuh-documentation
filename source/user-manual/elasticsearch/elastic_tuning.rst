@@ -63,10 +63,10 @@ In order to improve security, it is highly recommended to change Elasticsearch's
     .. code-block:: console
 
       # curl -X POST "https://<elasticsearch_ip>:9200/_security/user/<user_name>/_password?pretty" -H 'Content-Type: application/json' -d'
-      {
-        "password" : "<new_password>"
-      }
-      '
+      # {
+      #   "password" : "<new_password>"
+      # }
+      # '
 
     The following values must be replaced:
 
