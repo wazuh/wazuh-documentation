@@ -535,7 +535,7 @@ $(function() {
     let eleOther = ele;
     let active = false;
 
-    if ($('#page.index').length > 0) {
+    if ($('#page').length > 0) {
       if ($(ele).hasClass('active')) {
         active = true;
       } else {
