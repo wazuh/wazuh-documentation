@@ -258,7 +258,7 @@ With the first access to Kibana, the browser shows a warning message stating tha
 
 .. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
 
-  If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh installation to remediate this.
+  If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
 Next steps
 ~~~~~~~~~~

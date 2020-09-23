@@ -19,7 +19,6 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         manager/index
         certificates
         registering/index
-        deployment_variables/deployment_variables
         agents/index
         configuring-cluster/index
         capabilities/index
@@ -28,4 +27,4 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
         kibana-app/index
         reference/index
         elasticsearch/elastic_tuning
-        uninstall
+        uninstall/index

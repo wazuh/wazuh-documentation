@@ -1,14 +1,17 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _installation_guide:
+.. _index:
 
-Installation guide
-==================
 
-.. meta::
-  :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
+Wazuh Stack installation guide
+==============================
 
-This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component can be found in the :ref:`getting started <components>` section. The following diagram shows a typical installation. To learn more about the Wazuh agent installation process, please refer to the :ref:`Wazuh agent deployment <installation_agents>` section.
+This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
+
+There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Elasticsearch flavor that the user choose.
+A section dedicated to the recommended requirements and another section as an alternative to do the installation using packages instead of repositories.
+
+The following diagram shows a typical installation: 
 
 .. thumbnail:: ../images/getting_started/data_flow.png
   :align: center
@@ -29,7 +32,22 @@ Deployment types
 
 - All-in-one deployment: In this case, Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments. 
 
+.. thumbnail:: ../images/installation/all-in-one.png
+  :align: center
+  :width: 100%
+
 - Distributed deployment: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.  
+
+.. thumbnail:: ../images/installation/distributed.png
+  :align: center
+  :width: 100%
+
+- Wazuh Cloud: All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
+
+.. thumbnail:: ../images/installation/cloud.png
+  :align: center
+  :width: 100%
+
 
 Installation methods
 ---------------------
@@ -39,8 +57,6 @@ Once the desired configuration is selected the user can choose between two insta
 - Unattended installation: Uses scripts to automatically install and configure all the components.
 
 - Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.
-
-- Wazuh Cloud platform: As an alternative, Wazuh offers a `cloud solution <https://wazuh.com/cloud/>`_ where the user will be able to use all Wazuh's features without worrying about the installation process
 
 Requirements
 ------------
@@ -52,13 +68,10 @@ Packages list
 
 This installation guide provides instructions to configure the official repositories to do the installations, alternatively, the installation can be done using packages.  A list of all the available packages can be found in the packages list section.  
 
-
 .. toctree::
     :maxdepth: 1
     
     requirements
     open-distro/index
     elastic-stack/index
-    wazuh-agent/index
     packages-list
-    
