@@ -16,39 +16,63 @@ This guide summarizes the relevant configurations that allow for the optimizatio
 Change users' password
 ----------------------
 
-In order to improve security, it is highly recommended to change Elasticsearch's default password. All the initial users for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``.
+In order to improve security, it is highly recommended to change Elasticsearch's default passwords.
 
-To generate a new password, Opendistro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. The utility may need to be given execution permissions:
+.. tabs::
 
-.. code-block:: console
+  .. group-tab:: Open Distro for Elasticsearch
 
-  # cd /usr/share/elasticsearch/plugins/opendistro_security/tools
-  # chmod +x hash.sh
+    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``.
 
-The following example shows how to generate a new hash:
+    To generate a new password, Opendistro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. The utility may need to be given execution permissions:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # ./hash.sh -p <new-password>
+      # cd /usr/share/elasticsearch/plugins/opendistro_security/tools
+      # chmod +x hash.sh
 
-The value ``<new-password>`` must be replaced by the desired password. 
+    The following example shows how to generate a new hash:
 
-The execution of the previous command will retrieve a hash code that must be placed on the hash section for the desired user in  ``internal_users.yml``: 
+    .. code-block:: console
 
-.. code-block:: yaml
-  :emphasize-lines: 2
+      # ./hash.sh -p <new-password>
 
-  user:
-    hash: <new_generated_hash>
+    The value ``<new-password>`` must be replaced by the desired password. 
 
-In order to load the changes made, it is necessary to execute the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``: 
+    The execution of the previous command will retrieve a hash code that must be placed on the hash section for the desired user in  ``internal_users.yml``: 
 
-.. code-block:: console
+    .. code-block:: yaml
+      :emphasize-lines: 2
 
-  # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-  # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
+      user:
+        hash: <new_generated_hash>
 
-The value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch's IP. 
+    In order to load the changes made, it is necessary to execute the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``: 
+
+    .. code-block:: console
+
+      # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+      # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
+
+    The value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch's IP. 
+
+  .. group-tab:: Elasticsearch
+
+    During the installation of Elasticsearch, the passwords were autmatically generated. They can be changed afterwards using API requests:
+
+    .. code-block:: console
+
+      # curl -X POST "https://<elasticsearch_ip>:9200/_security/user/<user_name>/_password?pretty" -H 'Content-Type: application/json' -d'
+      {
+        "password" : "<new_password>"
+      }
+      '
+
+    The following values must be replaced:
+
+      - ``<elasticsearch_ip>``: The IP of the Elasticsearch node.
+      - ``<user_name>``: The name of the user whose password is going to be changed.
+      - ``<new_password>``: The new password that will be asigned to the ``<user_name>`` user.
 
 Memory locking
 --------------
