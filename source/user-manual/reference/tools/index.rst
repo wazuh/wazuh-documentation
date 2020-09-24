@@ -21,6 +21,10 @@ Tools
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 4.0                                                        |                             |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -66,6 +70,7 @@ Tools
     manage_agents
     ossec-control
     ossec-logtest
+    wazuh-logtest
     ossec-makelists
     rootcheck_control
     syscheck_control
