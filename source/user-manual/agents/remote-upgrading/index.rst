@@ -26,4 +26,4 @@ Wazuh provides access to an updated WPK repository for each new release. All ava
 
 Custom repositories may also be added by following the steps described in :doc:`Adding custom repository <./custom-repository>`.
 
-.. note:: Since v4.0.0, the upgrade procedure is performed by the :ref:`Agent upgrade module<agent-upgrade-module>`.
+.. note:: Since v4.1.0, the upgrade procedure is performed by the :ref:`Agent upgrade module<agent-upgrade-module>`.
