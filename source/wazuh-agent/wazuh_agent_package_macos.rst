@@ -32,56 +32,14 @@ The package for macOS is suitable for macOS Sierra or greater. The macOS agent c
 
      Using the GUI you can perform a simple installation without registering and configuring the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers.
 
-     .. thumbnail:: ../../images/installation/macos.png
+     .. thumbnail:: ../images/installation/macos.png
          :align: center
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
 
 Now that the agent is installed, if you did not use the deployment method, you will have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
-Uninstall
----------
 
-To uninstall the agent in macOS:
-
-#. Stop the Wazuh agent service
-
-    .. code-block:: console
-
-      # /Library/Ossec/bin/ossec-control stop
-
-#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file
-
-    .. code-block:: console
-
-      # /bin/rm -r /Library/Ossec
-      # /bin/rm /etc/ossec-init.conf
-
-#. Stop and unload dispatcher
-
-    .. code-block:: console
-
-      # /bin/launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
-
-#. Remove ``launchdaemons`` and ``StartupItems``
-
-    .. code-block:: console
-
-      # /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
-      # /bin/rm -rf /Library/StartupItems/WAZUH
-
-#. Remove User and Groups
-
-    .. code-block:: console
-
-      # /usr/bin/dscl . -delete "/Users/ossec"
-      # /usr/bin/dscl . -delete "/Groups/ossec"
-
-#. Remove from ``pkgutil``
-
-    .. code-block:: console
-
-      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
 
 
 
