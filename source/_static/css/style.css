@@ -1448,6 +1448,30 @@ footer a:focus,
   padding: 0;
 }
 
+#deployment-types.custom-tabs .sphinx-tabs .sphinx-menu {
+  margin-bottom: 2rem;
+  border-bottom: none !important;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5%;
+  text-align: center;
+}
+
+#deployment-types.custom-tabs .sphinx-tabs .sphinx-menu, .ui.tabular.menu {
+  border-bottom: none !important;
+  border-top: 1px;
+}
+
+#deployment-types.custom-tabs .sphinx-tabs .menu .item.docutils.container {
+  border-radius: 5px !important;
+}
+
+#deployment-types.custom-tabs .ui.attached:not(.message)+.ui.attached.segment:not(.top) {
+  padding-top: 2rem;
+  border-radius: .28571429rem;
+  border-bottom: 1px solid;  
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
