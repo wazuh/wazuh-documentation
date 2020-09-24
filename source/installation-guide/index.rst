@@ -13,19 +13,24 @@ A section dedicated to the recommended requirements and another section as an al
 
 The following diagram shows a typical installation: 
 
-.. thumbnail:: ../images/getting_started/data_flow.png
+.. thumbnail:: ../images/installation/Setup.png
   :align: center
   :width: 100%
 
 
-Elasticsearch flavors
----------------------
+Wazuh Stack flavors
+-------------------
 
-The user can select among these two flavors of Elasticsearch the one that better suits their environment:
+The user can select among these two flavors of Wazuh Stack the one that better suits their environment:
 
 - Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
 
 - Elastic Stack:  In this installation guide, the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
+
+.. thumbnail:: ../images/installation/Wazuh_Stack_flavors.png
+  :align: center
+  :width: 100%
+
 
 Deployment types
 ----------------
@@ -39,11 +44,11 @@ Deployment types
 
 .. raw:: html
 
-   <div class="items row">
+   <div class="items columns">
 
 .. raw:: html
 
-   <div class="capab left col-xl-4">
+   <div class="capab left row-xl-4">
       <div class="line"></div>
 
 .. topic:: All in one
@@ -69,7 +74,7 @@ Deployment types
 .. raw:: html
 
    </div>
-   <div class="right col-xl-8">
+   <div class="right row-xl-8">
    <div class="info">
 
 .. topic:: All in one
@@ -109,7 +114,7 @@ Deployment types
    </div>
    </div>
    </div></div>
-   <div class="section" id="available-documentation">
+
 
 Installation methods
 ---------------------
@@ -119,6 +124,11 @@ Once the desired configuration is selected the user can choose between two insta
 - Unattended installation: Uses scripts to automatically install and configure all the components.
 
 - Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.
+
+.. thumbnail:: ../images/installation/Installation_methods_icons.png
+  :align: center
+  :width: 100%
+
 
 Requirements
 ------------
@@ -138,9 +148,7 @@ This installation guide provides instructions to configure the official reposito
     elastic-stack/index
     packages-list
    
-.. raw:: html
 
-   </div>  
  
 
 
