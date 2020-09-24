@@ -1463,12 +1463,13 @@ footer a:focus,
 
 #deployment-types.custom-tabs .sphinx-tabs .menu .item.docutils.container {
   border-radius: 5px !important;
+  border-bottom: 1px solid;
 }
 
 #deployment-types.custom-tabs .ui.attached:not(.message)+.ui.attached.segment:not(.top) {
   padding-top: 2rem;
   border-radius: .28571429rem;
-  border-bottom: 1px solid;  
+  border-top: 1px solid;  
 }
 
 main li.toctree-l1 a {
