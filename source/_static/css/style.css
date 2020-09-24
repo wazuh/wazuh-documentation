@@ -1458,7 +1458,6 @@ footer a:focus,
 }
 
 #deployment-types.custom-tabs .sphinx-tabs .sphinx-menu, .ui.tabular.menu {
-  border-bottom: none !important;
   border-top: 1px;
 }
 
