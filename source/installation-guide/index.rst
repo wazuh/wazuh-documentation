@@ -21,13 +21,13 @@ The following diagram illustrates a typical installation:
   :width: 100%
 
 
-In this page you will find instructions on how to install the Wazuh Stack, the instructions of how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
+In this page you will find instructions on how to install the Wazuh Stack, the instructions on how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
 
 
 Wazuh Stack flavors
 -------------------
 
-The user can select the flavor of Wazuh Stack the one that better suits their environment:
+The user can select the flavor of Wazuh Stack that better suits their environment:
 
 - Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch     enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
 
