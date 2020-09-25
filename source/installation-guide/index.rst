@@ -29,14 +29,41 @@ Wazuh Stack flavors
 
 The user can select the flavor of Wazuh Stack that better suits their environment:
 
-- Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch     enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
+.. raw:: html
 
-- Elastic Stack:  In this installation guide, the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
+  <div class="two-columns" id="stack-flavors">
 
-       
-.. thumbnail:: ../images/installation/Wazuh_Stack_flavors.png
-       :align: center
-       :width: 100%
+.. container:: left-column
+
+  Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch     enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven. 
+
+.. container:: right-column  
+
+  Elastic Stack:  In this installation guide, the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
+
+.. raw:: html
+
+  </div>   
+
+.. raw:: html
+
+  <div class="two-columns" id="flavors-images">
+
+.. container:: left-column
+
+  .. thumbnail:: ../images/installation/Wazuh_Open_Distro.png
+        :align: center
+        :width: 100%  
+
+.. container:: right-column  
+        
+  .. thumbnail:: ../images/installation/Wazuh_Elastic_Stack.png
+        :align: center
+        :width: 100%
+
+.. raw:: html
+
+  </div>        
 
 
 Deployment types

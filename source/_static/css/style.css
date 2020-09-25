@@ -1448,6 +1448,31 @@ footer a:focus,
   padding: 0;
 }
 
+.two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+}
+
+#stack-flavors.two-columns {
+  margin-bottom: 2rem;
+}
+
+#stack-flavors.two-columns .left-column,
+#flavors-images.two-columns .left-column,
+#stack-flavors.two-columns .right-column,
+#flavors-images.two-columns .right-column {
+  padding-left: 0;
+}
+
+#flavors-images.two-columns {
+  align-items: end;
+}
+
+#flavors-images.two-columns img {
+  width: 70% !important;
+}
+
 #deployment-types.custom-tabs .sphinx-tabs .sphinx-menu {
   margin-bottom: 2rem;
   border-bottom: none !important;
