@@ -42,6 +42,8 @@ The user can select the flavor of Wazuh Stack that better suits their environmen
 Deployment types
 ----------------
 
+A brief description of the available deployment types can be found in the following menu. 
+
 .. raw:: html
 
   <div class="custom-tabs" id="deployment-types">
@@ -96,7 +98,7 @@ The requirements section specifies the supported operating systems as well as th
 Packages list
 -------------
 
-This installation guide provides instructions to configure the official repositories to do the installations, alternatively, the installation can be done using packages.  A list of all the available packages can be found in the packages list section.  
+The installation can be done by configuring the official repositories or by downloading and installing the packages packages directly.  A list of all the available packages can be found in the packages list section.
 
 .. toctree::
     :maxdepth: 1
