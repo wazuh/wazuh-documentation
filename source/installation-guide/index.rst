@@ -2,13 +2,16 @@
 
 .. _installation_guide:
 
+.. meta::
+  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+
 
 Wazuh Stack installation guide
 ==============================
 
 This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
 
-There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Elasticsearch flavor that the user choose.
+There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Wazuh Stack flavor that the user choose. 
 A section dedicated to the recommended requirements and another section as an alternative to do the installation using packages instead of repositories.
 
 The following diagram shows a typical installation: 
@@ -18,25 +21,26 @@ The following diagram shows a typical installation:
   :width: 100%
 
 
+This section gives the instructions to install the Wazuh Stack, the instructions of how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
+
+
 Wazuh Stack flavors
 -------------------
 
 The user can select among these two flavors of Wazuh Stack the one that better suits their environment:
 
-- Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
+- Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch     enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
 
 - Elastic Stack:  In this installation guide, the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
 
+       
 .. thumbnail:: ../images/installation/Wazuh_Stack_flavors.png
-  :align: center
-  :width: 100%
+       :align: center
+       :width: 100%
 
 
 Deployment types
 ----------------
-
-.. meta::
-  :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
 .. raw:: html
 
@@ -46,9 +50,9 @@ Deployment types
 
   .. group-tab:: All in one
 
-   In this case, Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
+   Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
 
-   .. thumbnail:: ../images/installation/all-in-one.png
+   .. thumbnail:: ../images/installation/all_in_one.png
      :title: Distributed architecture
      :align: center
      :width: 100%
@@ -86,15 +90,11 @@ Once the desired configuration is selected the user can choose between two insta
 
 - Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.
 
-.. thumbnail:: ../images/installation/Installation_methods_icons.png
-  :align: center
-  :width: 100%
-
 
 Requirements
 ------------
 
-This guide also includes a requirements section that specifies the supported operating systems and the minimum recommended hardware specifications to guarantee the expected performance.  
+The requirements section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Futhermore, information about the expected alerts per second depending on the different types of monitored endpoint can be found, allowing users to calculate the expected storage needed for their environments.  
 
 Packages list
 -------------

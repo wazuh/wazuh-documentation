@@ -7,6 +7,10 @@ All-in-one deployment
 
 This section guides through the installation and configuration of the Wazuh server and Elastic Stack on the same host. This type of deployment is appropriate for testing and small production environments.
 
+   .. thumbnail:: ../../../images/installation/all_in_one_more_details.png
+     :align: center
+     :width: 100%
+
 The following components will be installed:
 
 - The Wazuh server, including the Wazuh manager as a single-node cluster and the Wazuh API.

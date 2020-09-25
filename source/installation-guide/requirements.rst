@@ -5,7 +5,7 @@
 Requirements
 ============
 
-This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements  for the different types of deployments of Wazuh and Open Distro for Elasticsearch or Elastic Stack.
+This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements  for the different types of deployments of  the Wazuh Stack.
 
 Supported operating systems
 ---------------------------
@@ -34,7 +34,7 @@ In an all-in-one deployment, Wazuh server and Open Distro for Elasticsearch or E
 
 The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary for this type of deployment due to the requirements of Open Distro for Elasticsearch and Elastic Stack. 
 
-Disk space requirements depend on the alerts per seconds (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of endpoint.
+Disk space requirements depend on the alerts per seconds (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of monitored endpoint.
 
 +-------------------------------------------------+-----+-----------------------------+
 | Monitored endpoints                             | APS |  Storage (GB/90 days)       | 
