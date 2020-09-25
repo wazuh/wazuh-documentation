@@ -11,23 +11,23 @@ Wazuh Stack installation guide
 
 This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
 
-There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Wazuh Stack flavor that the user choose. 
-A section dedicated to the recommended requirements and another section as an alternative to do the installation using packages instead of repositories.
+There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Wazuh Stack flavor that the user selects. 
+Another section is then dedicated to the recommended requirements and a final section covers how to perform the installation using packages instead of repositories.
 
-The following diagram shows a typical installation: 
+The following diagram illustrates a typical installation: 
 
 .. thumbnail:: ../images/installation/Setup.png
   :align: center
   :width: 100%
 
 
-This section gives the instructions to install the Wazuh Stack, the instructions of how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
+In this page you will find instructions on how to install the Wazuh Stack, the instructions of how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
 
 
 Wazuh Stack flavors
 -------------------
 
-The user can select among these two flavors of Wazuh Stack the one that better suits their environment:
+The user can select the flavor of Wazuh Stack the one that better suits their environment:
 
 - Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch     enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven.
 
@@ -53,7 +53,6 @@ Deployment types
    Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
 
    .. thumbnail:: ../images/installation/all_in_one.png
-     :title: Distributed architecture
      :align: center
      :width: 100%
 
@@ -62,7 +61,6 @@ Deployment types
    Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
 
    .. thumbnail:: ../images/installation/distributed.png
-     :title: Distributed architecture
      :align: center
      :width: 100%
 
@@ -71,7 +69,6 @@ Deployment types
    All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
 
    .. thumbnail:: ../images/installation/cloud.png
-     :title: Distributed architecture
      :align: center
      :width: 100%
   
@@ -86,7 +83,7 @@ Installation methods
 
 Once the desired configuration is selected the user can choose between two installation methods:
 
-- Unattended installation: Uses scripts to automatically install and configure all the components.
+- Unattended installation: Using scripts developed by Wazuh to automatically install and configure all the components.
 
 - Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.
 
@@ -94,7 +91,7 @@ Once the desired configuration is selected the user can choose between two insta
 Requirements
 ------------
 
-The requirements section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Futhermore, information about the expected alerts per second depending on the different types of monitored endpoint can be found, allowing users to calculate the expected storage needed for their environments.  
+The requirements section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Furthermore, information about the expected alerts per second depending on the different types of monitored endpoint can be found, allowing users to calculate the expected data storage needed for their environments.  
 
 Packages list
 -------------
