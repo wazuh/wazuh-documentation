@@ -1480,11 +1480,11 @@ footer a:focus,
 }
 
 .two-columns .left-column {
-  border-right: 1px solid #0094ce;
+  border-right: 1px solid rgba(40, 40, 40, 0.2);
 }
 
 .two-columns .right-column {
-  border-left: 1px solid #0094ce;
+  border-left: 1px solid rgba(40, 40, 40, 0.2);
 }
 
 #deployment-types.custom-tabs .sphinx-tabs .sphinx-menu {
@@ -1492,7 +1492,7 @@ footer a:focus,
   border-bottom: none !important;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5%;
+  grid-gap: 2%;
   text-align: center;
 }
 
