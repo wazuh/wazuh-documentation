@@ -19,13 +19,13 @@ The Solaris Wazuh agent runs on Sparc or Intel architectures. Select the tab acc
 
       .. group-tab:: Solaris 10
 
-        .. include:: ../_templates/installations/wazuh/solaris/install_wazuh_agent_s10_intel.rst
+        .. include:: ../../_templates/installations/wazuh/solaris/install_wazuh_agent_s10_intel.rst
 
 
 
       .. group-tab:: Solaris 11
 
-        .. include:: ../_templates/installations/wazuh/solaris/install_wazuh_agent_s11_intel.rst
+        .. include:: ../../_templates/installations/wazuh/solaris/install_wazuh_agent_s11_intel.rst
 
 
 
@@ -39,13 +39,13 @@ The Solaris Wazuh agent runs on Sparc or Intel architectures. Select the tab acc
 
       .. group-tab:: Solaris 10
 
-        .. include:: ../_templates/installations/wazuh/solaris/install_wazuh_agent_s10_sparc.rst
+        .. include:: ../../_templates/installations/wazuh/solaris/install_wazuh_agent_s10_sparc.rst
 
 
 
       .. group-tab:: Solaris 11
 
-        .. include:: ../_templates/installations/wazuh/solaris/install_wazuh_agent_s11_sparc.rst
+        .. include:: ../../_templates/installations/wazuh/solaris/install_wazuh_agent_s11_sparc.rst
 
 
 
