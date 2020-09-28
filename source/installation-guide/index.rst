@@ -25,38 +25,60 @@ This installation guide will show how to install Wazuh manager along with Open D
 Deployment types
 ----------------
 
-A brief description of the available deployment types can be found in the following menu. 
+There are three different alternatives to deploy a Wazuh installation. Here is a bried explanation about each method:
+
+- **All in one**: Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
+
+- **Distributed**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+
+- **Wazuh Cloud**: All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
 
 .. raw:: html
 
-  <div class="custom-tabs" id="deployment-types">
+   <div class="screenshots" id="deployment-types">
+      <div id="slider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
 
-.. tabs::
+.. thumbnail:: ../images/installation/all_in_one.png
+  :title: All in one deployment
+  :class: d-block w-100
 
-  .. group-tab:: All in one
+.. raw:: html
 
-   Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
+          </div>
 
-   .. thumbnail:: ../images/installation/all_in_one.png
-     :align: center
-     :width: 100%
+          <div class="carousel-item">
 
-  .. group-tab:: Distributed
+.. thumbnail:: ../images/installation/distributed.png
+   :title: Distributed deployment
+   :class: d-block w-100
 
-   Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+.. raw:: html
 
-   .. thumbnail:: ../images/installation/distributed.png
-     :align: center
-     :width: 100%
+          </div>
 
-  .. group-tab:: Wazuh Cloud
+          <div class="carousel-item">
 
-   All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
+.. thumbnail:: ../images/installation/cloud.png
+   :title: Cloud deployment
+   :class: d-block w-100   
 
-   .. thumbnail:: ../images/installation/cloud.png
-     :align: center
-     :width: 100%
-  
+.. raw:: html
+
+          </div>
+
+          <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+
+        </div>
+      </div>
 
 .. raw:: html
 
