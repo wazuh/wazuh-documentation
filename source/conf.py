@@ -35,7 +35,7 @@ apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/dev-aiohttp-poc/api/api/
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
+needs_sphinx = '1.8'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -43,7 +43,6 @@ apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/dev-aiohttp-poc/api/api/
 extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.images',
-    'sphinxprettysearchresults',
     'sphinx_tabs.tabs',
 ]
 
@@ -420,8 +419,9 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.8.0",
-    "|SPLUNK_LATEST|" : "8.0.2",
-    "|ELASTIC_6_LATEST|" : "6.8.7",
+    "|SPLUNK_LATEST|" : "8.0.4",
+    "|ELASTIC_6_LATEST|" : "6.8.8",
+    "|WAZUH_LATEST_AIX|" : "3.13.1",
     "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",

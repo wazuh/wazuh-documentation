@@ -58,13 +58,13 @@ Configure the Wazuh agent client buffer on linux-agent
 
     a. For Systemd:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # systemctl restart wazuh-agent
 
     b. For SysV Init:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # service wazuh-agent restart
 
@@ -107,17 +107,17 @@ so for this lab we will lower the threshold:
 
 2. Restart Wazuh manager.
 
-  a. For Systemd:
+   a. For Systemd:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # systemctl restart wazuh-manager
+        # systemctl restart wazuh-manager
 
-  b. For SysV Init:
+   b. For SysV Init:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # service wazuh-manager restart
+        # service wazuh-manager restart
 
 Generate a log flood on linux-agent
 -----------------------------------
@@ -172,7 +172,7 @@ See what happened according to Kibana
 1. Query Kibana for "firehose".  Click on **[Add]** next to "full_log" for readability.
    Change the scale from "Auto" to "Second".
 
-.. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
+   .. thumbnail:: ../images/learning-wazuh/labs/flood-1.png
     :title: Flood
     :align: center
     :width: 100%
@@ -185,15 +185,15 @@ See what happened according to Kibana
 
 4. Expand one of the "firehose" records and compare the field values to the script you used to produce these records.
 
-.. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png
+   .. thumbnail:: ../images/learning-wazuh/labs/flood-1a.png
     :title: Flood
     :align: center
     :width: 100%
 
 
-5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "rule.description" and "data.level" for readability.
+5. Query Kibana for "agent_flooding".  Click **[Add]** additionally next to "full_log" and "data.level" for readability.
 
-.. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
+   .. thumbnail:: ../images/learning-wazuh/labs/flood-2.png
     :title: Flood
     :align: center
     :width: 100%
@@ -221,19 +221,19 @@ Return settings back to normal
 
     a. For Systemd:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # systemctl restart wazuh-agent
 
     b. For SysV Init:
 
-      .. code-block:: console
+       .. code-block:: console
 
         # service wazuh-agent restart
 
 3. In wazuh-manager, edit the ``<alerts>`` section of ``/var/ossec/etc/ossec.conf`` file back to this:
 
-.. code-block:: xml
+   .. code-block:: xml
 
     <alerts>
         <log_alert_level>3</log_alert_level>
@@ -242,17 +242,17 @@ Return settings back to normal
 
 4. Restart the Wazuh manager:
 
-a. For Systemd:
+   a. For Systemd:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # systemctl restart wazuh-manager
+       # systemctl restart wazuh-manager
 
-b. For SysV Init:
+   b. For SysV Init:
 
-  .. code-block:: console
+      .. code-block:: console
 
-    # service wazuh-manager restart
+       # service wazuh-manager restart
 
 
 Congratulations on completing this lab. You survived the log flood!

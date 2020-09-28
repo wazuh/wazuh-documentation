@@ -70,7 +70,7 @@ Once logged in, it is possible to run any API endpoint following the structure b
 
 .. code-block:: console
 
-    # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000?pretty"
 
 
 .. note::
@@ -231,6 +231,10 @@ Running the script provides a result similar to the following:
 
     End of the script.
 
+ * ``curl``: A command-line tool for sending requests and commands over HTTP and HTTPS.
+ * ``-u foo:bar``: The username and password to authenticate with the API.
+ * ``https://localhost:55000``: The API URL to use if you are running the command on the manager itself.
+ * ``?pretty``: The parameter that makes the JSON output more human-readable.
 
 Basic concepts
 --------------
@@ -374,7 +378,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/rules?rule_ids=1002&pretty=true" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/rules/1002?pretty"
 
 .. code-block:: json
     :class: output
@@ -417,7 +421,7 @@ It can also be helpful to know what rules are available that match a specific cr
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/rules?pretty=true&limit=500&search=failures&group=web&pci_dss=10.6.1" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
 
 .. code-block:: json
     :class: output
@@ -488,7 +492,7 @@ The API can be used to show information about all monitored files by syscheck. T
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&search=.py" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/syscheck/000?event=modified&search=.py&pretty"
 
 .. code-block:: json
     :class: output
@@ -542,42 +546,71 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
 
 .. code-block:: json
     :class: output
 
     {
-      "data": {
-        "affected_items": [
-          {
-            "file": "/sbin/swapon",
-            "perm": "rwxr-xr-x",
-            "sha1": "bc929cb047b79d5c16514f2c553e6b759abfb1b8",
-            "changes": 1,
-            "md5": "085c1161d814a8863562694b3819f6a5",
-            "inode": 14025822,
-            "size": 47184,
-            "uid": "0",
-            "gname": "root",
-            "mtime": "2020-01-08T18:31:23Z",
-            "sha256": "f274025a1e4870301c5678568ab9519152f49d3cb907c01f7c71ff17b1a6e870",
-            "date": "2020-05-25T14:29:44Z",
-            "uname": "root",
-            "type": "file",
-            "gid": "0"
-          }
-        ],
-        "total_affected_items": 1,
-        "total_failed_items": 0,
-        "failed_items": []
-      },
-      "message": "FIM findings of the agent"
+       "error": 0,
+       "data": {
+          "totalItems": 1,
+          "items": [
+             {
+                "sha1": "17f51705df5b61c53ef600fc1fcbe031e4d53c20",
+                "group": "root",
+                "uid": 0,
+                "scanDate": "2018-08-02 16:50:12",
+                "gid": 0,
+                "user": "root",
+                "file": "/sbin/swapon",
+                "modificationDate": "2018-03-15 22:47:34",
+                "octalMode": "100755",
+                "permissions": "-rwxr-xr-x",
+                "md5": "39b88ab3ddfaf00db53e5cf193051351",
+                "inode": 584,
+                "event": "modified",
+                "size": 47184
+             }
+          ]
+       }
     }
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/syscheck/000?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
+
+.. code-block:: json
+    :class: output
+
+    {
+       "error": 0,
+       "data": {
+          "totalItems": 1,
+          "items": [
+             {
+                "sha1": "17f51705df5b61c53ef600fc1fcbe031e4d53c20",
+                "group": "root",
+                "uid": 0,
+                "scanDate": "2018-08-02 16:50:12",
+                "gid": 0,
+                "user": "root",
+                "file": "/sbin/swapon",
+                "modificationDate": "2018-03-15 22:47:34",
+                "octalMode": "100755",
+                "permissions": "-rwxr-xr-x",
+                "md5": "39b88ab3ddfaf00db53e5cf193051351",
+                "inode": 584,
+                "event": "modified",
+                "size": 47184
+             }
+          ]
+       }
+    }
+
+.. code-block:: console
+
+    # curl -u foo:bar "https://localhost:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
 
 .. code-block:: json
     :class: output
@@ -617,7 +650,7 @@ Some information about the manager can be retrieved using the API. Configuration
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/manager/status?pretty=true" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/manager/status?pretty"
 
 .. code-block:: json
     :class: output
@@ -657,7 +690,7 @@ You can even dump the manager's current configuration with the request below (re
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/manager/configuration?pretty=true&section=global" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/manager/configuration?pretty"
 
 .. code-block:: json
     :class: output
@@ -703,7 +736,7 @@ This enumerates 2 **active** agents:
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H  "Authorization: Bearer $TOKEN"
+    # curl -u foo:bar "https://localhost:55000/agents?offset=1&limit=1&status=active&pretty"
 
 .. code-block:: json
     :class: output
@@ -740,7 +773,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/agents?pretty=true" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"name\":\"NewHost\",\"ip\":\"10.0.10.11\"}"
+    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://localhost:55000/agents?pretty"
 
 .. code-block:: json
     :class: output

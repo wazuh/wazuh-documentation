@@ -51,24 +51,26 @@ Increase max_map_count on your host (Windows)
 
 #. To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``:
 
-    .. code-block:: console
+  2.1. Open the file ``/var/lib/boot2docker/bootlocal.sh`` for edition:
+
+     .. code-block:: console
 
       $ docker-machine ssh default
       # vi /var/lib/boot2docker/bootlocal.sh
 
-#. Add the following line into the profile file:
+  2.2 Add the following line into the profile file:
 
-    .. code-block:: console
+     .. code-block:: console
 
       sysctl -w vm.max_map_count=262144
 
-#. Make the script runnable:
+  2.3. Make the script runnable:
 
-    .. code-block:: console
+     .. code-block:: console
 
       # chmod +x /var/lib/boot2docker/bootlocal.sh
 
-#. To verify after rebooting, run "sysctl vm.max_map_count".
+  2.4. To verify after rebooting, run "sysctl vm.max_map_count".
 
     .. warning::
 
@@ -107,7 +109,7 @@ Usage
 
 #. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
-    a) Foreground::
+   a) Foreground::
 
         $ docker-compose up
 
@@ -136,10 +138,10 @@ Where ``service name`` is the name of each service in the ``docker-compose.yml``
 
 
 .. note::
-  - Wazuh-kibana container will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticsearch is started. Then the set up process will continue normally.
+  Wazuh-kibana container will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticsearch is started. Then the set up process will continue normally.
 
 .. note::
-  - Kibana container can take a few minutes to install Wazuh plugin, this takes place after ``Optimizing and caching browser bundles...`` is printed out.
+  Kibana container can take a few minutes to install Wazuh plugin, this takes place after ``Optimizing and caching browser bundles...`` is printed out.
 
 Exposed ports
 -------------

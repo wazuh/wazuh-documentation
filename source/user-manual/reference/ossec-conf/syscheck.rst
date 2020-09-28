@@ -21,6 +21,7 @@ Configuration options for file integrity monitoring:
 - `database`_
 - `directories`_
 - `disabled`_
+- `file_limit`_
 - `frequency`_
 - `ignore`_
 - `max_eps`_
@@ -37,7 +38,6 @@ Configuration options for file integrity monitoring:
 - `skip_nfs`_
 - `skip_proc`_
 - `skip_sys`_
-- `file_limit`_
 - `synchronization`_
 - `whodata`_
 - `windows_audit_interval`_
@@ -166,15 +166,11 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 
-+--------------------+------------------------------------+
-| **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
-+--------------------+------------------------------------+
-| **Allowed values** | Any directory                      |
-+                    +                                    +
-|                    | .. versionadded:: 4.0              |
-+                    +                                    +
-|                    | Any environment variable           |
-+--------------------+------------------------------------+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | The default configuration may vary depending on the operating system. |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any directory                                                         |
++--------------------+-----------------------------------------------------------------------+
 
 Attributes:
 
@@ -293,7 +289,7 @@ Attributes:
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **restrict**             | Limit checks to files containing the entered string in the file name.                                                 |
 +                          +                                                                                                                       +
-|                          | Any directory or file path is allowed.                                                                                |
+|                          | Any directory or file name (but not a path) is allowed.                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -359,6 +355,48 @@ Example:
 .. code-block:: xml
 
  <disabled>no</disabled>
+
+
+file_limit
+^^^^^^^^^^
+
+.. versionadded:: 3.13
+
+Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+
+.. code-block:: xml
+
+    <!-- Maximum number of files to be monitored -->
+    <file_limit>
+      <enabled>yes</enabled>
+      <entries>100000</entries>
+    </file_limit>
+
+
+**enabled**
+
+.. versionadded:: 3.13
+
+Specifies whether there will be a limit on the number of monitored files or not.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+
+**entries**
+
+.. versionadded:: 3.13
+
+Specifies the number of files to be monitored.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
 
 
 .. _reference_ossec_syscheck_frequency:
@@ -445,7 +483,7 @@ List of files to not compute the diff. Introduced as one entry per line. It coul
 | **Allowed values** | Any file name.                                                       |
 +--------------------+----------------------------------------------------------------------+
 
-Attributes:
+Example:
 
 +----------+---------------------------------------------------------------------------------+
 | **type** | This is a simple regex pattern to filter out files to not compute the diff.     |
@@ -765,48 +803,6 @@ Example:
 
  <skip_sys>yes</skip_sys>
 
-
-
-file_limit
-----------
-
-.. versionadded:: 3.13
-
-Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
-
-.. code-block:: xml
-
-    <!-- Maximum number of files to be monitored -->
-    <file_limit>
-      <enabled>yes</enabled>
-      <entries>100000</entries>
-    </file_limit>
-
-
-**enabled**
-
-.. versionadded:: 3.13
-
-Specifies whether there will be a limit on the number of monitored files or not.
-
-+--------------------+---------------------------------------+
-| **Default value**  | yes                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
-+--------------------+---------------------------------------+
-
-
-**entries**
-
-.. versionadded:: 3.13
-
-Specifies the number of files to be monitored.
-
-+--------------------+------------------------------------------+
-| **Default value**  | 100000                                   |
-+--------------------+------------------------------------------+
-| **Allowed values** | Integer number between 1 and 2147483647. |
-+--------------------+------------------------------------------+
 
 
 .. _reference_ossec_syscheck_synchronization:

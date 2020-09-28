@@ -28,7 +28,7 @@ The first step to install the Wazuh agent on a Windows machine is to download th
 
     * Deployment:
 
-        You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``ADDRESS`` and ``AUTHD_SERVER``. The agent will use those values to register and assign a Wazuh manager for forwarding events.
+        You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_REGISTRATION_SERVER`` or ``AUTHD_SERVER``. The agent will use those values to register and assign a Wazuh manager for forwarding events
 
 	* Using CMD: ::
 

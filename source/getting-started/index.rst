@@ -6,24 +6,53 @@ Getting started
 ===============
 
 .. meta::
-  :description: Get started with the Wazuh components and learn how each one is involved.
+  :description: Get started with the Wazuh open source security platform. 
 
-Wazuh is a threat detection, integrity monitoring, incident response and regulatory compliance platform. It is capable of protecting workloads across on-premise, virtualized, containerized and cloud-based environments. Wazuh project is completely free open source, and currently used by thousands of organizations around the world, from small businesses to large enterprises.
+Wazuh is a free and open source platform used for threat prevention, detection, and response. It is capable of protecting workloads across on-premises, virtualized, containerized, and cloud-based environments. Wazuh is widely used by thousands of organizations around the world, from small businesses to large enterprises.
 
-Wazuh platform is composed of two tightly integrated technologies: our easily deployed lightweight agent, and our centralized and intelligent analysis engine, also known as the Wazuh server. Besides, Wazuh has been fully integrated with the Elastic Stack, providing a search engine and data visualization tool that allows users to navigate through their security alerts.
+Wazuh solution consists of an :ref:`endpoint security agent <wazuh_agent>`, deployed to the monitored systems, and a :ref:`management server <wazuh_server>`, which collects and analyzes data gathered by the agents. Besides, Wazuh has been fully integrated with the :ref:`Elastic Stack <elastic_stack>`, providing a search engine and data visualization tool that allows users to navigate through their security alerts.
 
-Wazuh agent runs on most operating systems, including Linux, Windows, macOS, Solaris, AIX and others. It is installed on endpoints, such as laptops, desktops, servers, cloud instances or virtual machines, and provides detection and prevention capabilities, while also collects and streams data to the Wazuh server, where security analysis takes place.
+Community and support
+---------------------
 
-Our centralized components, the Wazuh server and Elastic Stack, have been designed to scale, supporting cluster configurations and providing high-availability and load balancing. These two technologies continually collect, process, analyze, correlate and normalize data received from the agents or from integrations with external sources such as network devices, cloud applications or external APIs.
+.. include:: ../_templates/community.rst
 
-.. topic:: Table of Contents
+Screenshots
+-----------
 
- This document provides an overview of the Wazuh platform components and architecture, and a brief description of some of the most common use cases of the solution.
+.. list-table::
+   :width: 100%
+   :widths: 50 50
+
+   * - .. thumbnail:: ../images/getting_started/screenshot_01_security_analytics.png
+          :title: Security analytics
+     - .. thumbnail:: ../images/getting_started/screenshot_02_intrusion_detection.png
+          :title: Intrusion detection
+   * - .. thumbnail:: ../images/getting_started/screenshot_03_log_data_analysis.png
+          :title: Log data analysis
+     - .. thumbnail:: ../images/getting_started/screenshot_04_file_integrity_monitoring.png
+          :title: File integrity monitoring
+   * - .. thumbnail:: ../images/getting_started/screenshot_05_vulnerability_detection.png
+          :title: Vulnerability detection
+     - .. thumbnail:: ../images/getting_started/screenshot_06_configuration_assessment.png
+          :title: Configuration assessment
+   * - .. thumbnail:: ../images/getting_started/screenshot_07_incident_response.png
+          :title: Incident response
+     - .. thumbnail:: ../images/getting_started/screenshot_08_regulatory_compliance.png
+          :title: Regulatory compliance
+   * - .. thumbnail:: ../images/getting_started/screenshot_09_cloud_security.png
+          :title: Cloud security
+     - .. thumbnail:: ../images/getting_started/screenshot_10_containers_security.png
+          :title: Containers security
+
+Table of contents
+-----------------
+
+This document provides an overview of the Wazuh platform components and architecture. It also includes a brief description of some of the most common use cases of the solution.
 
 .. toctree::
    :maxdepth: 1
 
-   introduction
-   components
+   components/index
    architecture
-   use-cases
+   use_cases/index
