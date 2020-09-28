@@ -2,7 +2,7 @@
 
 .. _other_installation_methods:
 
-Other installation methods
+Other installation options
 ==========================
 
 This section will provide alternative installation configurations to the ones given in the installation guide.
