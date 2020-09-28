@@ -5,7 +5,7 @@
 Requirements
 ============
 
-This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements  for the different types of deployments of  the Wazuh Stack.
+This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements for the different types of deployments of the Wazuh installation.
 
 Supported operating systems
 ---------------------------

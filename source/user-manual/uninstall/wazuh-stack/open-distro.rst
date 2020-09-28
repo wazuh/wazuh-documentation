@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _user_manual_uninstall_wazuh_stack_open_distro:
+.. _user_manual_uninstall_wazuh_installation_open_distro:
 
 Uninstalling Wazuh with Open Distro for Elasticsearch
 =====================================================

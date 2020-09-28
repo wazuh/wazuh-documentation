@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _user_manual_uninstall_wazuh_stack_basic:
+.. _user_manual_uninstall_wazuh_installation_basic:
 
 Uninstalling Wazuh with Elastic Stack
 ======================================

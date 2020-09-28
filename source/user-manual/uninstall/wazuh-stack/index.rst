@@ -1,12 +1,12 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Learn how to uninstall the Wazuh Stack
+.. meta:: :description: Learn how to uninstall the Wazuh installation
 
-.. _uninstalling_wazuh_stack:
+.. _uninstalling_wazuh_installation:
 
 
-Uninstall the Wazuh Stack
-=========================
+Uninstall the Wazuh installation
+================================
                                                            
 
     .. toctree::

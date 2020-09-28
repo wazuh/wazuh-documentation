@@ -7,7 +7,7 @@ Upgrading Elastic Stack from 6.8 to 7.x
 
 This section guides through the upgrade process of Elastic Stack components including Elasticsearch, Filebeat and Kibana for the Elastic distribution.
 
-Coming new in Elastic 7.x, there is an architecture change introduced in the Wazuh Stack. Logstash is no longer required and Filebeat will send the events directly to the Elasticsearch. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
+Coming new in Elastic 7.x, there is an architecture change introduced in the Wazuh installation. Logstash is no longer required and Filebeat will send the events directly to the Elasticsearch. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
 
 
 Preparing the Elastic Stack
