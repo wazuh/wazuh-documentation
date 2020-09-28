@@ -5,7 +5,7 @@
 Getting started
 ===============
 
-This guide provides the basic information you need to start using the Wazuh API.
+This guide provides the basic information needed to start using the Wazuh API.
 
 Starting and stopping the API
 -----------------------------
@@ -66,7 +66,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
         }
 
 
-Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
+Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with the string corresponding to the chosen endpoint. If the environment variable is not going to be used, replace $TOKEN with the JWT token obtained.
 
 .. code-block:: console
 
@@ -357,7 +357,7 @@ Here are some of the basic concepts related to making API requests and understan
 
 - Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-- All requests (except ``GET /``, ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
+- All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the API configuration file). The API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
@@ -366,7 +366,7 @@ Here are some of the basic concepts related to making API requests and understan
 Use cases
 ---------
 
-This section will present several use cases to give you a taste for the Wazuh API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
+This section will present several use cases to give you a taste for the Wazuh API's potential. Details about all possible API requests can be found in the :ref:`reference <api_reference>` section.
 
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^
@@ -414,7 +414,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
     }
 
 
-It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
+It can also be helpful to know which rules matching a specific criteria are available. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
 
 .. code-block:: console
 
@@ -614,7 +614,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 Getting information about the manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some information about the manager can be retrieved using the Wazuh API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
+Some information about the manager can be retrieved using the Wazuh API. Configuration, status, information, logs, etc. The following example retrieves the status of each Wazuh daemon:
 
 .. code-block:: console
 
@@ -756,5 +756,5 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 Conclusion
 ^^^^^^^^^^
-The provided examples should help appreciating the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
+The provided examples should help appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
 

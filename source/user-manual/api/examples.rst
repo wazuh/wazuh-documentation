@@ -10,7 +10,7 @@ Examples
 CURL
 ^^^^
 
-cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, you will need to get a JWT token as explained in :ref:`Getting started <api_log_in>`. Some examples:
+cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, a JWT token will be needed. In the following examples the ``raw`` option has been used in order to obtain to token and save it in an environment variable (``$TOKEN``). For information about getting the JWT token visit :ref:`Getting started <api_log_in>`.
 
 **GET**
 
@@ -118,7 +118,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 Python
 ^^^^^^
 
-You can also interact with the Wazuh API using Python as shown below:
+It is also possible to interact with the Wazuh API using Python as shown below:
 
 Code:
 
@@ -190,7 +190,7 @@ Code:
     }
 
 
-In this example, the script would show us which agents are disconnected with their ID and the time of their last connection. All it does is print the response of the GET request. But it can be modified to do other things with the response obtained. You can also call another endpoint or even make PUT, POST or DELETE requests.
+In this example, the script will show which agents are disconnected with their ID and the time of their last connection. All it does is print the response of the GET request. But it can be modified to do other things with the response obtained. PUT, POST or DELETE requests can also be made. It is possible to call other endpoints, too.
 
 
 .. _api_powershell_label:
@@ -265,4 +265,4 @@ Code:
     @{lastKeepAlive=2020-05-23T12:39:50Z; id=010}}
 
 
-As in the previous case, you can modify this script or work with the response obtained as you like.
+As in the previous case, this script can be modified as the user desires.

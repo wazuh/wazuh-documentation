@@ -141,6 +141,8 @@ The response body would be similar to this one. It is important to remember the 
       "message": "Role was successfully created"
     }
 
+.. _api_rbac_user:
+
 Create a new user
 -------------------
 To create a new user, make a request to ``POST /security/users`` endpoint.
@@ -305,7 +307,7 @@ The user "sales-member-1" now belongs to the "sales-team" role, so it could perf
 
 Priority of roles and policies
 ------------------------------
-When the same role has two or more contradictory policies assigned or the same user belong to two or more contradictory roles, the resulting permission will be determined by the priority of the policies. Let's take a look to the following example:
+When the same role has two or more contradictory policies assigned or the same user belongs to two or more contradictory roles, the resulting permission will be determined by the priority of the policies. Let's take a look to the following example:
 
 .. code-block:: yaml
     :emphasize-lines: 7,13
