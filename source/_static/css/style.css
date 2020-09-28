@@ -1451,26 +1451,40 @@ footer a:focus,
 .two-columns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
-}
-
-#stack-flavors.two-columns {
-  margin-bottom: 2rem;
 }
 
 #stack-flavors.two-columns .left-column,
-#flavors-images.two-columns .left-column,
-#stack-flavors.two-columns .right-column,
-#flavors-images.two-columns .right-column {
+#stack-flavors.two-columns .right-column {
+  padding-bottom: 2rem;
+}
+
+.two-columns .left-column {
+  padding-right: 2rem;
+}
+
+.two-columns .right-column {
+  padding-left: 2rem;
+}
+
+#stack-flavors.two-columns .left-column,
+#flavors-images.two-columns .left-column {
   padding-left: 0;
 }
 
 #flavors-images.two-columns {
-  align-items: end;
+  align-items: start;
 }
 
 #flavors-images.two-columns img {
   width: 70% !important;
+}
+
+.two-columns .left-column {
+  border-right: 1px solid #0094ce;
+}
+
+.two-columns .right-column {
+  border-left: 1px solid #0094ce;
 }
 
 #deployment-types.custom-tabs .sphinx-tabs .sphinx-menu {
