@@ -214,7 +214,7 @@ Download the script and the configuration file. After downloading them, configur
 
       After stating all the nodes, run the following commands to generate the passwords.
 
-      .. include:: ../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
+      .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
 
 
 

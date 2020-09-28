@@ -21,21 +21,21 @@ Adding the Elastic Stack repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 
@@ -49,31 +49,31 @@ Kibana installation and configuration
         .. group-tab:: Yum
 
 
-            .. include:: ../../../../../_templates/installations/basic/elastic/yum/install_kibana.rst
+            .. include:: ../../../../../../_templates/installations/basic/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: APT
 
 
-            .. include:: ../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
+            .. include:: ../../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
 
 
 
         .. group-tab:: ZYpp
 
 
-            .. include:: ../../../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
+            .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
 
 
 #. The next step is the certificate placement, this guide assumes that a copy of ``certs.zip`` is placed in the root home folder (~/):
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/deploy_kibana_certificate.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/common/deploy_kibana_certificate.rst
 
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
 
 #. Update the ``optimize`` and ``plugins`` directories permissions:
@@ -101,7 +101,7 @@ Kibana installation and configuration
 
 #. Enable and start the Kibana service:
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/common/enable_kibana.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
     With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt`` previously created to the Certificate Manager of each browser that will access the Kibana interface.
 
@@ -122,7 +122,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
 Disabling repositories
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: ../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -130,21 +130,21 @@ Disabling repositories
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
+    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 

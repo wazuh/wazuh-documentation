@@ -6,13 +6,10 @@
   :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
 
 
-Wazuh Stack installation guide
-==============================
+Wazuh installation guide
+========================
 
 This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
-
-There are two main sections of this guide devoted to the installation of the Wazuh and Elasticsearch servers, depending on the Wazuh Stack flavor that the user selects. 
-Another section is then dedicated to the recommended requirements and a final section covers how to perform the installation using packages instead of repositories.
 
 The following diagram illustrates a typical installation: 
 
@@ -21,50 +18,9 @@ The following diagram illustrates a typical installation:
   :width: 100%
 
 
-In this page you will find instructions on how to install the Wazuh Stack, the instructions on how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
+The following sections will focus on the installation of the Wazuh components on the server side, the instructions on how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
 
-
-Wazuh Stack flavors
--------------------
-
-The user can select the flavor of Wazuh Stack that better suits their environment:
-
-.. raw:: html
-
-  <div class="two-columns" id="stack-flavors">
-
-.. container:: left-column
-
-  Open Distro for Elasticsearch:  Is an Apache 2.0-licensed distribution of Elasticsearch     enhanced with enterprise security, alerting, SQL support, automated index management, deep performance analysis, among other features. Open Distro for Elasticsearch is 100% open source and community-driven. 
-
-.. container:: right-column  
-
-  Elastic Stack:  In this installation guide, the basic license option will be used, this includes everything in the Open Source under Apache 2.0 version plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more.
-
-.. raw:: html
-
-  </div>   
-
-.. raw:: html
-
-  <div class="two-columns" id="flavors-images">
-
-.. container:: left-column
-
-  .. thumbnail:: ../images/installation/Wazuh_Open_Distro.png
-        :align: center
-        :width: 100%  
-
-.. container:: right-column  
-        
-  .. thumbnail:: ../images/installation/Wazuh_Elastic_Stack.png
-        :align: center
-        :width: 100%
-
-.. raw:: html
-
-  </div>        
-
+This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`alternative installation methods <other_installation_methods>` section.
 
 Deployment types
 ----------------
@@ -132,8 +88,10 @@ The installation can be done by configuring the official repositories or by down
 
     requirements
     open-distro/index
-    elastic-stack/index
+    wazuh-agent/index
     packages-list
+    other-installation-methods/index
+
    
 
  
