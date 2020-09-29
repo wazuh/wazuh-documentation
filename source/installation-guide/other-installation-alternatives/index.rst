@@ -11,7 +11,7 @@ As an alternative to Open Distro for Elasticsearch, the :ref:`Wazuh with Elastic
 
 Wazuh can be also installed along with Splunk. This guide will show how to perform an installation of Wazuh with Splunk as a single instance or a cluster and how to install the Wazuh Splunk app.
 
-In the installation guide, is explained how to install Wazuh from packages. Alternativaly it can be installed using :ref:`sources <_installation_from_sources>`. In this section it is explained how to install both, the Wazuh manager and the Wazuh agent.
+In the installation guide, is explained how to install Wazuh from packages. Alternativaly it can be installed using :ref:`sources <installation_from_sources>`. In this section it is explained how to install both, the Wazuh manager and the Wazuh agent.
 
 .. toctree::
     :maxdepth: 1
