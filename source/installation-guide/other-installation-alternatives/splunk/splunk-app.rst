@@ -7,46 +7,52 @@
 Install Wazuh app for Splunk
 ============================
 
+Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
+
 .. thumbnail:: ../../../images/splunk-app/splunk-app.png
   :title: Splunk app - Overview > Security events tab
   :align: center
   :width: 90%
 
-Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
-
 Installation
 ------------
 
-1. Download the latest Wazuh app for Splunk:
+#. Download the latest Wazuh app for Splunk:
 
     .. code-block:: console
 
       # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/wazuhapp-splunk-|WAZUH_LATEST|_|SPLUNK_LATEST|.tar.gz
 
-2. Install the Wazuh app for Splunk:
+#. Install the Wazuh app for Splunk:
 
-    a. CLI mode:
+    .. tabs::
 
-      .. code-block:: console
 
-        # /opt/splunk/bin/splunk install app SplunkAppForWazuh.tar.gz
+      .. group-tab:: CLI mode
+    
 
-      .. code-block:: console
+        .. code-block:: console
 
-        # /opt/splunk/bin/splunk restart
+          # /opt/splunk/bin/splunk install app SplunkAppForWazuh.tar.gz
+          # /opt/splunk/bin/splunk restart
 
-    b. Web GUI:
 
-      .. code-block:: none
 
-        Apps -> Manage apps -> Install app from file
+      .. group-tab:: Web GUI
 
-3. Open Splunk in your desired browser and click on the Wazuh app icon:
+
+        .. code-block:: none
+
+          Apps -> Manage apps -> Install app from file
+
+
+
+#. Open Splunk in your desired browser and click on the Wazuh app icon:
 
     .. image:: ../../../images/splunk-app/app-icon.png
       :align: center
 
-4. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
+#. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
     By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner if the app can establish a connection.
 
@@ -69,27 +75,31 @@ Installing the Wazuh App in a Splunk cluster
 
 After installing the App following the **Official installation guide** in our **deployer** machine, we follow this steps:
 
-.. code-block:: console
+#. Copy the app into the splunk cluster folder:
 
-  // Copy the app into the splunk cluster folder:
-  # cp -r installation_path/SplunkAppForWazuh /opt/splunk/etc/shcluster/apps
+    .. code-block:: console
 
-  // Create the file that listens the outputs from the Wazuh API:
-  # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
+      # cp -r installation_path/SplunkAppForWazuh /opt/splunk/etc/shcluster/apps
 
-Then, fill the outputs.conf file with the next lines:
+#. Create the file that listens the outputs from the Wazuh API:
 
-.. code-block:: xml
+    .. code-block:: console  
 
-  [indexer_discovery:cluster1]
-  pass4SymmKey = changeme
-  master_uri = https://<master_ip>:<management_port>
+      # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
 
-  [tcpout:cluster1_tcp]
-  indexerDiscovery = cluster1
+#. Fill the outputs.conf file with the following lines:
 
-  [tcpout]
-  defaultGroup = cluster1_tcp
+    .. code-block:: xml
+
+      [indexer_discovery:cluster1]
+      pass4SymmKey = changeme
+      master_uri = https://<master_ip>:<management_port>
+
+      [tcpout:cluster1_tcp]
+      indexerDiscovery = cluster1
+
+      [tcpout]
+      defaultGroup = cluster1_tcp
 
 .. note::
   We use indexerDiscovery to connect to peer nodes. Click `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`_ to check more info about indexerDiscovery.
