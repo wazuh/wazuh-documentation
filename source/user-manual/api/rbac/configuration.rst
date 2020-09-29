@@ -33,7 +33,7 @@ Create a new policy
 -------------------
 **Policies** are used to specify which actions can be taken on the given resources. To create a new policy use the ``POST /security/policies`` endpoint.
 
-As an example, in order to grant access to the agents of a given customer to the "Sales-team", a policy that specifies what actions and on which agents those actions can be carried out must be created. The required policy can be defined like the following one:
+As an example, in order to grant access to the agents of a given customer to the "Sales-team", a policy that specifies what actions and on which agents these actions can be carried out must be created. The required policy can be defined like the following one:
 
 .. code-block:: json
 

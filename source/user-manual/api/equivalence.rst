@@ -1,10 +1,10 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
 
-.. Migrating from Wazuh API 3.X
+.. Migrating from the Wazuh API 3.X
 
-Migrating from Wazuh API 3.X
-============================
+Migrating from the Wazuh API 3.X
+================================
 
 Wazuh API 4.0 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields, most responses will have the following structure instead:
 
@@ -32,7 +32,7 @@ However, using the following API calls it is easy to create new users and assign
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"  -H  "Content-Type: application/json" -d "{\"username\":\"<username>\",\"password\":\"<password>\"}"
+    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN"  -H  "Content-Type: application/json" -d "{\"username\":\"<username>\",\"password\":\"<password>\"}"
 
 .. code-block:: json
     :class: output
@@ -58,7 +58,7 @@ However, using the following API calls it is easy to create new users and assign
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users/3/roles?role_ids=1" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X POST "https://localhost:55000/security/users/3/roles?role_ids=1" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
