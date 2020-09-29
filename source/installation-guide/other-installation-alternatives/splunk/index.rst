@@ -10,18 +10,18 @@ Splunk installation
 
 To learn more about how Splunk works, here is their documentation: `Splunk <https://docs.splunk.com/Documentation>`_
 
-This guide describes the Splunk Enterprise installation process for two different types of multitier server, along with the Splunk forwarder and the Wazuh app for Splunk.
+This guide describes how to install Splunk Enterprise as a single instance or as a multi-instance cluster along with the Splunk forwarder and the Wazuh Splunk app.
 
 - The **single-instance architecture** is recommended for testing and evaluation purposes, or also for small-medium sized environments.
 - The **Splunk Cluster architecture** is recommended to replicate data along different indexes and make distributed searches.
 
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| Installation type                                                      | Description                                                 |
-+========================================================================+=============================================================+
-| :ref:`Single-instance installation <splunk_basic>`                     | Install Splunk using the single-instance architecture.      |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Splunk Cluster installation <splunk_distributed>`                | Install a Cluster with Splunk multi-instance architecture.  |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
++------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Installation type                                                      | Description                                                                                                                                            |
++========================================================================+========================================================================================================================================================+
+| :ref:`Single-instance installation <splunk_basic>`                     | Install Splunk using the single-instance architecture. It is recommended for testing and evaluation purposes, or for small-medium sized environments.  |
++------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Splunk Cluster installation <splunk_distributed>`                | Install a Cluster with Splunk multi-instance architecture. It is recommended to replicate data along different indexes and make distributed searches.  |
++------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Find more information about how to scale your environments using Splunk Enterprise on the `official documentation <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Deploy/Distributedoverview>`_.
 
