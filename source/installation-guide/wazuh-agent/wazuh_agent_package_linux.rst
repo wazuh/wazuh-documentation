@@ -9,8 +9,6 @@ Linux
 
 This document will guide you to install or deploy the Wazuh agent.
 
-If you are using CentOS 5, Red Hat Enterprise Linux 5, Oracle Linux 5 or SUSE 11, you must follow the guide :ref:`Wazuh Agent for Linux legacy<wazuh_agent_package_rpm_legacy>`
-
 .. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository

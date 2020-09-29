@@ -112,7 +112,7 @@ The installation can be done by configuring the official repositories or by down
     open-distro/index
     wazuh-agent/index
     packages-list
-    other-installation-methods/index
+    other-installation-alternatives/index
 
    
 
