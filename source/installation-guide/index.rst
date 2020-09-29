@@ -20,7 +20,7 @@ The following diagram illustrates a typical installation:
 
 The following sections will focus on the installation of the Wazuh components on the server side, the instructions on how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
 
-This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`alternative installation methods <other_installation_methods>` section.
+This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`alternative installation methods <other_installation_alternatives>` section.
 
 Deployment types
 ----------------
