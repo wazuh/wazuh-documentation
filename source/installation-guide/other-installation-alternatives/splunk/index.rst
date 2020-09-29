@@ -1,13 +1,12 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. meta:: :description: Splunk for Wazuh installation guide
-.. _installation_splunk:
-
-Installing Splunk
-=================
-
 .. meta::
   :description: Wazuh can be integrated with Splunk Enterprise to visualize alerts using our app. Learn more about how to install it.
+
+.. _installation_splunk:
+
+Splunk installation
+===================
 
 To learn more about how Splunk works, here is their documentation: `Splunk <https://docs.splunk.com/Documentation>`_
 
