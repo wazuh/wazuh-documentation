@@ -14,13 +14,10 @@ $(function() {
   if ( useApiRedoc ) {
     /* Change DOMAIN in href */
     const domainReplacePattern = 'https://DOMAIN';
-    let currentReleasePath = window.location.hostname;
-    if ( window.location.pathname.split('/')[1] === version ) {
-      currentReleasePath += '/'+version;
-    }
+    const url_root = $('[data-url_root]').data('url_root');
     $('[href^="'+domainReplacePattern+'/"]').each(function() {
       const oldHref = $(this).attr('href');
-      $(this).attr('href', oldHref.replace(domainReplacePattern, 'https://'+currentReleasePath));
+      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', url_root));
       $(this).attr('target', '_blank');
     });
   }
