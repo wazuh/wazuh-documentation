@@ -604,6 +604,7 @@ header .menuweb-bar .menu-item a {
 .deployment-types .item-deployment {
   border: 1px solid;
   border-radius: 3rem;
+  padding: 1rem;
 }
 
 .deployment-types .item-deployment .detailed img {
