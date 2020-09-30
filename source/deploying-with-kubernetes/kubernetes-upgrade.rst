@@ -18,7 +18,6 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     DATA_DIRS[((i++))]="queue/db"
     DATA_DIRS[((i++))]="queue/rootcheck"
     DATA_DIRS[((i++))]="queue/agent-groups"
-    DATA_DIRS[((i++))]="queue/agent-info"
     DATA_DIRS[((i++))]="queue/agents-timestamp"
     DATA_DIRS[((i++))]="queue/agentless"
     DATA_DIRS[((i++))]="queue/cluster"
