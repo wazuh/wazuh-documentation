@@ -14,7 +14,55 @@ This section aims to guide the user through the process of installing Wazuh and 
 Install Wazuh with Open Distro for Elasticsearch
 ------------------------------------------------
 
+.. raw:: html
 
+  <div class="item-deployment" id="aio">
+    <div class="image-container">
+
+.. thumbnail:: ../images/installation/all_in_one_icon.png
+      :align: center        
+
+.. raw:: html  
+
+  </div>
+  <a href="./open-distro/all-in-one-deployment/index.html" >
+    <div class="deployment-text">
+      <h2>All in one deployment</h2>
+      <p>Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.</p>
+    </div></a>
+  </div>
+
+  <div class="item-deployment" id="distributed">
+    <div class="image-container">
+
+.. thumbnail:: ../images/installation/distributed_icon.png
+      :align: center       
+
+.. raw:: html
+
+  </div>
+  <a href="./open-distro/distributed-deployment/index.html">
+    <div class="deployment-text">
+      <h2>Distributed deployment</h2>
+      <p>Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.</p>
+    </div></a>
+  </div>
+
+  <div class="item-deployment" id="cloud">
+    <div class="image-container">
+
+.. thumbnail:: ../images/installation/cloud_icon.png
+      :align: center       
+
+.. raw:: html
+
+  </div>
+  <a href="https://wazuh.com/cloud/">
+    <div class="deployment-text">
+      <h2>Wazuh cloud</h2>
+      <p>All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need.</p>
+    </div></a>
+  </div>    
 
 
 Take Wazuh for a test drive with our ready to use :ref:`OVA <virtual_machine>`.
@@ -23,6 +71,8 @@ This installation guide will show how to install Wazuh manager along with Open D
 
 Install Wazuh agents
 --------------------
+
+
 
 
 Requirements

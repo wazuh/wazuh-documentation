@@ -601,6 +601,23 @@ header .menuweb-bar .menu-item a {
   margin: 1rem auto 2rem auto;
 }
 
+.item-deployment {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  align-items: center;
+  border: 1px solid rgba(40, 40, 40, 0.2);
+  border-radius: 3rem;
+  margin: 2rem auto;
+  width: 85%;
+}
+
+.item-deployment .image-container img.align-center {
+  width: 80% !important;
+  border: none;
+  margin: 0;
+  border-radius: 3rem;
+}
+
 .navigation-buttons {
   border-top: 1px solid rgba(0, 169, 229, 0.2);
 }
