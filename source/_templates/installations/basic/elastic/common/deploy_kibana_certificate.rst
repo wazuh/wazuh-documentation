@@ -5,7 +5,7 @@
   # unzip ~/certs.zip -d ~/certs
   # rm -f ~/certs/ca/ca.key
   # mkdir /etc/kibana/certs/ca -p
-  # cp ~/certs/ca.crt /etc/kibana/certs/ca
+  # cp ~/certs/ca/ca.crt /etc/kibana/certs/ca
   # cp ~/certs/kibana/* /etc/kibana/certs/
   # chown -R kibana: /etc/kibana/certs
   # chmod -R 500 /etc/kibana/certs
