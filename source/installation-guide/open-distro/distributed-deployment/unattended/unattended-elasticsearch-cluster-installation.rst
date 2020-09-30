@@ -238,7 +238,7 @@ These users and roles are designed to operate along with the Wazuh Kibana plugin
 Installing Kibana
 -----------------
 
-Download the script. In case of installing Kibana on the same server as Open Distro for Elasticsearch, this step must me skipped:
+Download the script. In case of installing Kibana on the same server as Open Distro for Elasticsearch, this step must be skipped:
 
 .. code-block:: console
 
