@@ -66,6 +66,76 @@ This installation guide will show how to install Wazuh manager along with Open D
 Install Wazuh agents
 --------------------
 
+.. raw:: html
+
+  <div class="agent-os">
+      <div class="item-agent">
+          <a href="./wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+            <p>Linux</p>
+
+.. image:: ../images/installation/linux.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+                    <p>Windows</p>
+
+.. image:: ../images/installation/windows_icon.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+            <p>macOS</p>        
+
+.. image:: ../images/installation/macOS.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+            <p>AIX</p>        
+
+.. image:: ../images/installation/AIX.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+            <p>HP-UX</p>        
+
+.. image:: ../images/installation/hpux.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+            <p>Solaris</p>        
+
+.. image:: ../images/installation/solaris.png        
+      :align: center
+
+.. raw:: html
+
+          </a>
+      </div>
+  </div>
 
 
 
@@ -77,7 +147,7 @@ The requirements section specifies the supported operating systems as well as th
 Packages list
 -------------
 
-The installation can be done by configuring the official repositories or by downloading and installing the packages packages directly.  A list of all the available packages can be found in the packages list section.
+The installation can be done by configuring the official repositories or by downloading and installing the packages directly.  A list of all the available packages can be found in the packages list section.
 
 .. toctree::
     :maxdepth: 1

@@ -602,7 +602,7 @@ header .menuweb-bar .menu-item a {
 }
 
 .deployment-types .item-deployment {
-  border: 1px solid;
+  border: 1px solid #0094ce;
   border-radius: 3rem;
   padding: 1rem;
 }
@@ -612,6 +612,46 @@ header .menuweb-bar .menu-item a {
   z-index: 99;
   width: 100% !important;
   opacity: 0;  
+}
+
+.agent-os {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 40%;
+  margin: 2rem auto;
+  grid-gap: 2rem;
+}
+
+.agent-os .item-agent {
+  border: 1px solid #0094ce;
+  border-radius: 3rem;
+  padding: 1rem;
+  position: relative;
+}
+
+.agent-os .item-agent p {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+
+.agent-os .item-agent:hover {
+  background: #0094ce;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover p {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover img {
+  opacity: 0;
+  transition: all 0.2s ease;
 }
 
 .content-card {
