@@ -24,7 +24,7 @@ Install Wazuh with Open Distro for Elasticsearch
       :align: center 
       :class: detailed   
 
-.. image:: ../images/installation/all_in_one_c.png
+.. image:: ../images/installation/all_in_one.png
       :align: center   
       :class: front
 
@@ -38,7 +38,7 @@ Install Wazuh with Open Distro for Elasticsearch
       :align: center 
       :class: detailed   
 
-.. image:: ../images/installation/distributed_c.png
+.. image:: ../images/installation/distributed.png
       :align: center   
       :class: front
 
@@ -52,7 +52,7 @@ Install Wazuh with Open Distro for Elasticsearch
       :align: center 
       :class: detailed   
 
-.. image:: ../images/installation/cloud_c.png
+.. image:: ../images/installation/cloud.png
       :align: center   
       :class: front
 
