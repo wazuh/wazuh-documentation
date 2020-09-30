@@ -592,6 +592,27 @@ header .menuweb-bar .menu-item a {
   background-repeat: repeat-x;
 }
 
+.deployment-types {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.deployment-types .item-deployment {
+  border: 1px solid;
+  border-radius: 3rem;
+}
+
+.deployment-types .item-deployment .detailed img {
+  position: absolute;
+  z-index: 99;
+  width: 100% !important;
+  opacity: 0;  
+}
+
 .content-card {
   margin-bottom: 0.5em;
 }
@@ -599,23 +620,6 @@ header .menuweb-bar .menu-item a {
 #carouselWazuhDocu{
   width: 100%;
   margin: 1rem auto 2rem auto;
-}
-
-.item-deployment {
-  display: grid;
-  grid-template-columns: 0.5fr 1.5fr;
-  align-items: center;
-  border: 1px solid rgba(40, 40, 40, 0.2);
-  border-radius: 3rem;
-  margin: 2rem auto;
-  width: 85%;
-}
-
-.item-deployment .image-container img.align-center {
-  width: 80% !important;
-  border: none;
-  margin: 0;
-  border-radius: 3rem;
 }
 
 .navigation-buttons {
