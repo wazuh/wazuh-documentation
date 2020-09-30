@@ -607,6 +607,10 @@ header .menuweb-bar .menu-item a {
   padding: 1rem;
 }
 
+.deployment-types .item-deployment h2 {
+  text-align: center;
+}
+
 .deployment-types .item-deployment .detailed img {
   position: absolute;
   z-index: 99;

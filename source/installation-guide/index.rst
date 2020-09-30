@@ -18,6 +18,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
   <div class="deployment-types">
     <div class="item-deployment" id="aio">
+      <h2>All in one deployment</h2>
 
 .. thumbnail:: ../images/installation/all_in_one.png
       :align: center 
@@ -31,6 +32,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
     </div>
     <div class="item-deployment" id="distributed">
+      <h2>Distributed deployment</h2>    
 
 .. thumbnail:: ../images/installation/distributed.png
       :align: center 
@@ -44,6 +46,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
     </div>
     <div class="item-deployment" id="cloud">
+      <h2>Cloud deployment</h2>    
 
 .. thumbnail:: ../images/installation/cloud.png
       :align: center 
