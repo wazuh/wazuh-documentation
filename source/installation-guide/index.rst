@@ -14,11 +14,19 @@ This section aims to guide the user through the process of installing Wazuh and 
 Install Wazuh with Open Distro for Elasticsearch
 ------------------------------------------------
 
+There are three different alternatives to deploy a Wazuh installation. Here is a bried explanation about each method:
+
+- **All in one**: Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
+
+- **Distributed**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+
+- **Wazuh Cloud**: All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
+
 .. raw:: html
 
   <div class="deployment-types">
     <div class="item-deployment" id="aio">
-      <h2>All in one deployment</h2>
+      <h3>All in one deployment</h3>
 
 .. thumbnail:: ../images/installation/all_in_one.png
       :align: center 
@@ -32,7 +40,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
     </div>
     <div class="item-deployment" id="distributed">
-      <h2>Distributed deployment</h2>    
+      <h3>Distributed deployment</h3>    
 
 .. thumbnail:: ../images/installation/distributed.png
       :align: center 
@@ -46,7 +54,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
     </div>
     <div class="item-deployment" id="cloud">
-      <h2>Cloud deployment</h2>    
+      <h3>Wazuh cloud</h3>    
 
 .. thumbnail:: ../images/installation/cloud.png
       :align: center 

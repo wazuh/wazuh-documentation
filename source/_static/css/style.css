@@ -597,7 +597,6 @@ header .menuweb-bar .menu-item a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 3rem;
-  width: 80%;
   margin: 2rem auto;
 }
 
@@ -607,8 +606,11 @@ header .menuweb-bar .menu-item a {
   padding: 1rem;
 }
 
-.deployment-types .item-deployment h2 {
+.deployment-types .item-deployment h3 {
   text-align: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(40, 40, 40, 0.2);
+  padding: 0.5rem;
 }
 
 .deployment-types .item-deployment .detailed img {
@@ -616,6 +618,7 @@ header .menuweb-bar .menu-item a {
   z-index: 99;
   width: 100% !important;
   opacity: 0;  
+  border: none
 }
 
 .agent-os {
