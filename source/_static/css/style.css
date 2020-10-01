@@ -624,7 +624,6 @@ header .menuweb-bar .menu-item a {
 .agent-os {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 90%;
   margin: 2rem auto;
   grid-gap: 2rem;
 }
