@@ -46,7 +46,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
     </div>
     <div class="item-deployment" id="cloud">
-      <h2>Cloud deployment</h2>    
+      <h2>Wazuh Cloud</h2>    
 
 .. thumbnail:: ../images/installation/cloud.png
       :align: center 
