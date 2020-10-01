@@ -16,7 +16,7 @@ Install Wazuh with Open Distro for Elasticsearch
 
 There are three different alternatives to deploy a Wazuh installation. Here is a brief explanation about each method:
 
-- **All in one**: Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
+- **All in one**: Wazuh with Open Distro for Elasticsearch are installed in the same host, this type of deployment is suitable for testing and small working environments.
 
 - **Distributed**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
 
