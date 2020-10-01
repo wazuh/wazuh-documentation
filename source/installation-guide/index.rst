@@ -11,21 +11,10 @@ Wazuh installation guide
 
 This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
 
-The following diagram illustrates a typical installation: 
+Install Wazuh with Open Distro for Elasticsearch
+------------------------------------------------
 
-.. thumbnail:: ../images/installation/Setup.png
-  :align: center
-  :width: 100%
-
-
-The following sections will focus on the installation of the Wazuh components on the server side, the instructions on how to install the Wazuh agents can be found :ref:`here <installation_agents>`.
-
-This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`alternative installation methods <other_installation_alternatives>` section.
-
-Deployment types
-----------------
-
-There are three different alternatives to deploy a Wazuh installation. Here is a bried explanation about each method:
+There are three different alternatives to deploy a Wazuh installation. Here is a brief explanation about each method:
 
 - **All in one**: Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
 
@@ -35,64 +24,130 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
 
 .. raw:: html
 
-   <div class="screenshots" id="deployment-types">
-      <div id="slider" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
+  <div class="deployment-types">
+    <div class="item-deployment" id="aio">
+      <h3>All in one deployment</h3>
 
 .. thumbnail:: ../images/installation/all_in_one.png
-  :title: All in one deployment
-  :class: d-block w-100
+      :align: center 
+      :class: detailed   
+
+.. image:: ../images/installation/all_in_one_no_title.png
+      :align: center   
+      :class: front
 
 .. raw:: html
 
-          </div>
-
-          <div class="carousel-item">
+    </div>
+    <div class="item-deployment" id="distributed">
+      <h3>Distributed deployment</h3>    
 
 .. thumbnail:: ../images/installation/distributed.png
-   :title: Distributed deployment
-   :class: d-block w-100
+      :align: center 
+      :class: detailed   
+
+.. image:: ../images/installation/distributed_no_title.png
+      :align: center   
+      :class: front
 
 .. raw:: html
 
-          </div>
-
-          <div class="carousel-item">
+    </div>
+    <div class="item-deployment" id="cloud">
+      <h3>Wazuh cloud</h3>    
 
 .. thumbnail:: ../images/installation/cloud.png
-   :title: Cloud deployment
-   :class: d-block w-100   
+      :align: center 
+      :class: detailed   
+
+.. image:: ../images/installation/cloud_no_title.png
+      :align: center   
+      :class: front
 
 .. raw:: html
 
-          </div>
+    </div>        
+  </div>
 
-          <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
 
-        </div>
+Take Wazuh for a test drive with our ready to use :ref:`OVA <virtual_machine>`.
+
+This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly, Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`alternative installation methods <other_installation_alternatives>` section.
+
+Install Wazuh agents
+--------------------
+
+.. raw:: html
+
+  <div class="agent-os">
+      <div class="item-agent">
+          <a href="./wazuh-agent/wazuh_agent_package_linux.html" class="d-flex align-items-center">
+            <p>Linux</p>
+
+.. image:: ../images/installation/linux.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_windows.html" class="d-flex align-items-center">
+                    <p>Windows</p>
+
+.. image:: ../images/installation/windows_icon.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
+            <p>macOS</p>        
+
+.. image:: ../images/installation/macOS.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_aix.html" class="d-flex align-items-center">
+            <p>AIX</p>        
+
+.. image:: ../images/installation/AIX.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_hpux.html" class="d-flex align-items-center">
+            <p>HP-UX</p>        
+
+.. image:: ../images/installation/hpux.png        
+      :align: center
+
+.. raw:: html
+
+        </a>
+    </div>
+    <div class="item-agent">
+        <a href="./wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
+            <p>Solaris</p>        
+
+.. image:: ../images/installation/solaris.png        
+      :align: center
+
+.. raw:: html
+
+          </a>
       </div>
+  </div>
 
-.. raw:: html
-
-   </div>
-
-
-Installation methods
----------------------
-
-Once the desired configuration is selected the user can choose between two installation methods:
-
-- Unattended installation: Using scripts developed by Wazuh to automatically install and configure all the components.
-
-- Step-by-step installation: A manual way of doing the installation that includes a detailed explanation of every step of the installation process.
 
 
 Requirements
@@ -103,7 +158,7 @@ The requirements section specifies the supported operating systems as well as th
 Packages list
 -------------
 
-The installation can be done by configuring the official repositories or by downloading and installing the packages packages directly.  A list of all the available packages can be found in the packages list section.
+The installation can be done by configuring the official repositories or by downloading and installing the packages directly.  A list of all the available packages can be found in the packages list section.
 
 .. toctree::
     :maxdepth: 1
