@@ -14,7 +14,7 @@ This section aims to guide the user through the process of installing Wazuh and 
 Install Wazuh with Open Distro for Elasticsearch
 ------------------------------------------------
 
-There are three different alternatives to deploy a Wazuh installation. Here is a bried explanation about each method:
+There are three different alternatives to deploy a Wazuh installation. Here is a brief explanation about each method:
 
 - **All in one**: Wazuh with Open Distro for Elasticsearch or Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments.
 
@@ -32,7 +32,7 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
       :align: center 
       :class: detailed   
 
-.. image:: ../images/installation/all_in_one.png
+.. image:: ../images/installation/all_in_one_no_title.png
       :align: center   
       :class: front
 
@@ -46,7 +46,7 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
       :align: center 
       :class: detailed   
 
-.. image:: ../images/installation/distributed.png
+.. image:: ../images/installation/distributed_no_title.png
       :align: center   
       :class: front
 
@@ -60,7 +60,7 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
       :align: center 
       :class: detailed   
 
-.. image:: ../images/installation/cloud.png
+.. image:: ../images/installation/cloud_no_title.png
       :align: center   
       :class: front
 
