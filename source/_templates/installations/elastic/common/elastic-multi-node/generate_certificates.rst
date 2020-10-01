@@ -30,7 +30,7 @@
         # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/multi-node/search-guard.yml
 
 
-      After downloading the configuration file in ``/etc/elasticsearch/certs/searchguard/search-guard.yml``, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. More than one IP can be specified (one entry per line):
+      After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
@@ -89,7 +89,7 @@
 
   .. code-block:: console
 
-    # ~/searchguard/tools/sgtlstool.sh -c /etc/elasticsearch/certs/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
+    # ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/
     # mv /etc/elasticsearch/certs/node-1.pem /etc/elasticsearch/certs/elasticsearch.pem
     # mv /etc/elasticsearch/certs/node-1.key /etc/elasticsearch/certs/elasticsearch.key
     # mv /etc/elasticsearch/certs/node-1_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
