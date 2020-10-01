@@ -56,15 +56,15 @@ In a distributed deployment, the Wazuh server and Open Distro for Elasticsearch 
 
 The Wazuh server and the Open Distro for Elasticsearch can each be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Open Distro for Elasticsearch or Elasticsearch, or in a dedicated host. For each node, the minimum hardware recommendations are: 
 
-+-------------------------------------------------+------------+------------+
-| Component                                       | RAM (GB)   | CPU (cores)|
-+=================================================+============+============+
-| Wazuh server                                    |     8      |     4      |
-+-------------------------------------------------+------------+------------+
-| Open Distro for Elasticsearch / Elastic Stack   |     16     |     4      |  
-+-------------------------------------------------+------------+------------+       
-| Kibana                                          |     4      |     2      |                                         
-+-------------------------------------------------+------------+------------+
++--------------------------------+------------+------------+
+| Component                      | RAM (GB)   | CPU (cores)|
++================================+============+============+
+| Wazuh server                   |     8      |     4      |
++--------------------------------+------------+------------+
+| Open Distro for Elasticsearch  |     16     |     4      |  
++--------------------------------+------------+------------+       
+| Kibana                         |     4      |     2      |                                         
++--------------------------------+------------+------------+
 
 A 64-bit operating system is necessary for Open Distro for Elasticsearch.  
 
@@ -91,7 +91,7 @@ In order to determine if a Wazuh server requires more resources the following fi
 
 In the ``analysid.state`` file the variable  ``events_dropped`` indicates whether events are being dropped due to lack of resources. Similarly ``ossec-remoted.state`` has the variable ``discarded_count``, that indicates if messages from the agents have been discarded.  These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 
 
-To monitor if the Open Distro for Elasticsearch or the Elastic Stack environment is working properly, there are tools available like performance analyzer for Open Distro for Elasticsearch and cluster monitoring for Elastic Stack. 
+To monitor if the Open Distro for Elasticsearch environment is working properly, there are tools available like performance analyzer. 
 
 In case that scaling is needed, the following sections describe how to make a distributed deployment of a Wazuh with :ref:`Open Distro for Elasticsearch <distributed_index>` installation.  
 
