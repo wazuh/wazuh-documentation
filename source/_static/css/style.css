@@ -595,7 +595,7 @@ header .menuweb-bar .menu-item a {
 .deployment-types {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   grid-gap: 3rem;
   margin: 2rem auto;
 }
@@ -624,7 +624,7 @@ header .menuweb-bar .menu-item a {
 .agent-os {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 40%;
+  width: 90%;
   margin: 2rem auto;
   grid-gap: 2rem;
 }
@@ -2852,6 +2852,14 @@ div.highlight pre {
 
   #capabilities .right .topic p:not(.topic-title) {
     font-size: 1rem;
+  }
+
+  .deployment-types {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .agent-os {
+    width: 40%;
   }
 
   .edit-repo-wrapper {
