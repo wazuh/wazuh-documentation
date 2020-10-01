@@ -14,9 +14,9 @@ This section aims to guide the user through the process of installing Wazuh and 
 Install Wazuh with Open Distro for Elasticsearch
 ------------------------------------------------
 
-There are three different alternatives to deploy a Wazuh installation. Here is a brief explanation about each method:
+There are three different alternatives to deploy a Wazuh installation. Here is a brief explanation about each deployment type:
 
-- **All in one**: Wazuh with Open Distro for Elasticsearch are installed in the same host, this type of deployment is suitable for testing and small working environments.
+- **All-in-one**: Wazuh with Open Distro for Elasticsearch are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
 
 - **Distributed**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
 
@@ -26,7 +26,7 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
 
   <div class="deployment-types">
     <div class="item-deployment" id="aio">
-      <h3>All in one deployment</h3>
+      <h3>All-in-one deployment</h3>
 
 .. thumbnail:: ../images/installation/all_in_one.png
       :align: center 
@@ -70,12 +70,13 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
   </div>
 
 
-Take Wazuh for a test drive with our ready to use :ref:`OVA <virtual_machine>`.
 
-This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly, Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`alternative installation methods <other_installation_alternatives>` section.
+This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly, Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`other alternative installation <other_installation_alternatives>` section.
 
 Install Wazuh agents
 --------------------
+
+The Wazuh Agent is a single, light-weight monitoring software that can be installed in the majority of Operating Systems providing visibility on the security of that endpoint by collecting critical system and application logs, inventory data and detecting possible anomalies. To install a Wazuh agent select your operating system and follow the installation steps:
 
 .. raw:: html
 
