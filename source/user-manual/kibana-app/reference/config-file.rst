@@ -12,6 +12,7 @@ The configuration file shows the default values for all of the possible options.
 The configuration file reference is organized by sections:
 
 `Basic options`_
+    - `hosts`_
     - `pattern`_
     - `timeout`_
     - `ip.selector`_
@@ -52,6 +53,40 @@ The configuration file reference is organized by sections:
 
 Basic options
 -------------
+
+hosts
+^^^^^
+
+Defines the list of APIs to connect with your Wazuh managers.
+
+.. code-block:: yaml
+
+    hosts:
+        - <id>:
+            url: http(s)://<url>
+            port: <port>
+            user: <username>
+            password: <password>
+
+.. note::
+
+    It is required to specify at least one host.
+
+This is an example of a multi-host configuration:
+
+.. code-block:: yaml
+
+    hosts:
+        - wazuh_prod:
+            url: https://wazuh.com
+            port: 55000
+            user: foo
+            password: secret_password
+        - wazuh_test:
+            url: https://localhost
+            port: 55000
+            user: foo
+            password: bar
 
 pattern
 ^^^^^^^
