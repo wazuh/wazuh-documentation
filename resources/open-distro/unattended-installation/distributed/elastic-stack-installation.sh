@@ -393,11 +393,11 @@ installKibana() {
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 ${debug}"
         eval "cd /usr/share/kibana ${debug}"
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip ${debug}"
-        eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
-        fi     
+        fi 
+        eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"    
         eval "mkdir /etc/kibana/certs ${debug}"
         
         kip=$(grep -A 1 "Kibana-instance" ~/config.yml | tail -1)
