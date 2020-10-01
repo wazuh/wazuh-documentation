@@ -10,7 +10,7 @@ This section aims to provide guidance about the supported operating systems as w
 Supported operating systems
 ---------------------------
 
-The Wazuh server and Open Distro for Elasticsearch or Elastic Stack components can be installed in the following Linux operating systems:
+The Wazuh server and Open Distro for Elasticsearch components can be installed in the following Linux operating systems:
 
 - Amazon Linux 1 and 2.
 
@@ -30,9 +30,9 @@ The Wazuh server and Open Distro for Elasticsearch or Elastic Stack components c
 All-in-one deployment
 ---------------------
 
-In an all-in-one deployment, Wazuh server and Open Distro for Elasticsearch or Elastic Stack, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
+In an all-in-one deployment, Wazuh server and Open Distro for Elasticsearch, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
 
-The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary for this type of deployment due to the requirements of Open Distro for Elasticsearch and Elastic Stack. 
+The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary for this type of deployment due to the requirements of Open Distro for Elasticsearch. 
 
 Disk space requirements depend on the alerts per seconds (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of monitored endpoint.
 
@@ -52,9 +52,9 @@ For example for an environment with 80 workstations, 10 servers and 10 networks 
 Distributed deployment
 ----------------------
 
-In a distributed deployment, the Wazuh server and Open Distro for Elasticsearch or Elastic Stack are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
+In a distributed deployment, the Wazuh server and Open Distro for Elasticsearch are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
 
-The Wazuh server and the Open Distro for Elasticsearch or Elastic Stack can each be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Open Distro for Elasticsearch or Elasticsearch, or in a dedicated host. For each node, the minimum hardware recommendations are: 
+The Wazuh server and the Open Distro for Elasticsearch can each be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Open Distro for Elasticsearch or Elasticsearch, or in a dedicated host. For each node, the minimum hardware recommendations are: 
 
 +-------------------------------------------------+------------+------------+
 | Component                                       | RAM (GB)   | CPU (cores)|
@@ -66,7 +66,7 @@ The Wazuh server and the Open Distro for Elasticsearch or Elastic Stack can each
 | Kibana                                          |     4      |     2      |                                         
 +-------------------------------------------------+------------+------------+
 
-A 64-bit operating system is necessary for Open Distro for Elasticsearch or Elastic Stack.  
+A 64-bit operating system is necessary for Open Distro for Elasticsearch.  
 
 Regarding the disk space requirements, the amount of data depends on the alerts per seconds (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on a Wazuh server as well as on an Elasticsearch server depending on the type of monitored endpoints. 
 
@@ -93,7 +93,7 @@ In the ``analysid.state`` file the variable  ``events_dropped`` indicates whethe
 
 To monitor if the Open Distro for Elasticsearch or the Elastic Stack environment is working properly, there are tools available like performance analyzer for Open Distro for Elasticsearch and cluster monitoring for Elastic Stack. 
 
-In case that scaling is needed, the following sections describe how to make a distributed deployment with the selected configuration: :ref:`Wazuh and Open Distro for Elasticsearch <distributed_index>` or :ref:`Wazuh and Elastic Stack  <basic_distributed_index>`.  
+In case that scaling is needed, the following sections describe how to make a distributed deployment of a Wazuh with :ref:`Open Distro for Elasticsearch <distributed_index>` installation.  
 
 
 
