@@ -2,8 +2,8 @@
 
 .. _od_installation_guide:
 
-Wazuh with Open Distro for Elasticsearch
-========================================
+Wazuh server
+============
 
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
