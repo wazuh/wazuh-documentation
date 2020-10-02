@@ -156,11 +156,6 @@ Requirements
 
 The requirements section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Furthermore, information about the expected alerts per second depending on the different types of monitored endpoint can be found, allowing users to calculate the expected data storage needed for their environments.  
 
-Packages list
--------------
-
-The installation can be done by configuring the official repositories or by downloading and installing the packages directly.  A list of all the available packages can be found in the packages list section.
-
 .. toctree::
     :maxdepth: 1
 
