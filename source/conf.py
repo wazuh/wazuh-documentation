@@ -456,7 +456,14 @@ custom_replacements = {
     "|RPM_API|" : "https://packages.wazuh.com/3.x/yum/wazuh-api",
     "|DEB_AGENT|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
     "|DEB_MANAGER|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
-    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api"
+    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api",
+    # Variables for Elastic's Elasticsearch
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.8.1",
+    "|ELASTICSEARCH_ELK_LATEST_OVA|" : "7.8.1",
+    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.8.0",    
 }
 
 # -- Setup -------------------------------------------------------------------
