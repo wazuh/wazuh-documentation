@@ -17,7 +17,7 @@ Open Distro for Elasticsearch uses four kinds of certificates:
 
 - ``admin``: The admin certificate is a client certificate with special privileges needed for management and security related tasks.
 
-To create the certificates, the template located in the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file was used. This template is preconfigured with the default values, which are recommended to change for security reasons. Those values are:
+To create the certificates, the template located in the ``~/searchguard/search-guard.yml`` file was used. This template is preconfigured with the default values, which are recommended to change for security reasons. Those values are:
 
 - ``CN``: Stands for Common Name. This is an arbirtary name which represents the server name protected by the SSL certificate. The certificate is only valid if the request hostname matches the certificate common name.
 
@@ -38,7 +38,7 @@ These are the default values that are preconfigured in the template downloaded, 
 There can be added even more security improvements, such as the use of a password for the private keys or the creation of intermediate CA certificates. To learn more about this, visit the `Search Guard's offline TLS tool documentation <https://docs.search-guard.com/latest/offline-tls-tool>`_.
 
 The node certificates need the server's IP to be specified, and there can be added as many IPs as necessary.
-To create a node certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``nodes:`` section modifying the required fields on the Elasticsearch's master node:
+To create a node certificate, the following lines should be added to the ``~/searchguard/search-guard.yml`` file in the ``nodes:`` section modifying the required fields on the Elasticsearch's master node:
 
     .. code-block:: yaml
 
@@ -50,7 +50,7 @@ To create a node certificate, the following lines should be added to the ``/etc/
                 - <node_IP_3>
 
 
-As mentioned before, client and admin certificates are very similar, although the admin ones have more privileges. An admin certificate must be in at least one of the Elasticsearch nodes, which will be able to perform administration and security tasks. To create an admin certificate, the following lines should be added to the ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` file in the ``clients:`` section modifying the required fields on the Elasticsearch's master node:
+As mentioned before, client and admin certificates are very similar, although the admin ones have more privileges. An admin certificate must be in at least one of the Elasticsearch nodes, which will be able to perform administration and security tasks. To create an admin certificate, the following lines should be added to the ``~/searchguard/search-guard.yml`` file in the ``clients:`` section modifying the required fields on the Elasticsearch's master node:
 
     .. code-block:: yaml
         :emphasize-lines: 3
@@ -70,7 +70,7 @@ What differs a client certificate from an admin certificate is the ``admin`` tag
 Generate new certificates
 -------------------------
 
-Once the file ``/etc/elasticsearch/certs/searchguard/search-guard.yml`` has been modified, the certificates can be created using the following command:
+Once the file ``~/searchguard/search-guard.yml`` has been modified, the certificates can be created using the following command:
 
     .. code-block:: console
 

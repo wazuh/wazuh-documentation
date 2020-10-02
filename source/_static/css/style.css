@@ -624,14 +624,13 @@ header .menuweb-bar .menu-item a {
 .agent-os {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 90%;
   margin: 2rem auto;
-  grid-gap: 2rem;
+  grid-gap: 1rem;
 }
 
 .agent-os .item-agent {
   border: 1px solid #0094ce;
-  border-radius: 3rem;
+  border-radius: 2em;
   padding: 1rem;
   position: relative;
 }
@@ -659,6 +658,10 @@ header .menuweb-bar .menu-item a {
 .agent-os .item-agent:hover img {
   opacity: 0;
   transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover {
+  border: none;
 }
 
 .content-card {
@@ -2859,7 +2862,7 @@ div.highlight pre {
   }
 
   .agent-os {
-    width: 40%;
+    grid-template-columns: repeat(6, 1fr);
   }
 
   .edit-repo-wrapper {
@@ -3633,6 +3636,10 @@ div.highlight pre {
             border-top-left-radius: 5px;
           }
 
+          .deployment-types .item-deployment h3 {
+            font-size: 18px;
+          }
+
 					#header-default .search_main {
 						margin-left: 345px;
 					}
@@ -3682,7 +3689,12 @@ div.highlight pre {
 		width: 100%;
 		max-width: calc(100% - 316px);
 		flex: none;
-	}
+  }
+  
+  .deployment-types .item-deployment h3 {
+    font-size: 23px;
+  }
+
 }
 
 @media (min-width: 1921px) {
