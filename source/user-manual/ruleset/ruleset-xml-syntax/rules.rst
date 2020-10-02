@@ -245,6 +245,14 @@ Example:
 
 If the rule matches the ``id`` 100200 and the log contains the ``Queue flood!`` phrase in it, rule activates and triggers a level 3 alert.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 regex
 ^^^^^
 
@@ -268,6 +276,14 @@ Example:
     </rule>
 
 If the rule matches the ``ìd`` 100500 and the event contains any valid IP, the rule is triggered and generates a level 3 alert.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 decoded_as
 ^^^^^^^^^^
@@ -341,6 +357,14 @@ Example:
 
 This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 srcip
 ^^^^^
 
@@ -363,6 +387,14 @@ Example:
       </rule>
 
 This rule will trigger when that exact ``scrip`` has been decoded.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 dstip
 ^^^^^
@@ -387,6 +419,13 @@ Example:
 
 This rule will trigger when an ``dstip`` different from ``198.168.41.30`` is detected.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 data
 ^^^^
@@ -422,6 +461,14 @@ Example:
 
 This rule will trigger when the log belongs to ``windows`` category and the decoded field ``extra_data`` is: ``Symantec AntiVirus``
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 user
 ^^^^
 
@@ -445,6 +492,14 @@ Example:
       </rule>
 
 This rule will trigger when the user ``mysql`` successfully logs into the system. Being a System user it should never log in to the system.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 system_name
 ^^^^^^^^^^^^
@@ -481,6 +536,14 @@ Example:
 
 The rule will trigger when the program Syslogd restarted.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 protocol
 ^^^^^^^^
 
@@ -492,6 +555,13 @@ Any string that is decoded into the ``protocol`` field.
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 hostname
 ^^^^^^^^
@@ -515,6 +585,14 @@ Example:
         </rule>
 
 This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 time
 ^^^^
@@ -589,6 +667,14 @@ Example:
 
 This rule will group the logs whose decoded ID is usb.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 url
 ^^^
 
@@ -612,6 +698,14 @@ Example:
       </rule>
 
 This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are nothing to worry about.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 location
 ^^^^^^^^
@@ -678,6 +772,14 @@ Example:
 
 This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 action
 ^^^^^^
 
@@ -700,6 +802,14 @@ Example:
       </rule>
 
 This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning``.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 if_sid
 ^^^^^^
