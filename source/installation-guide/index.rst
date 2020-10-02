@@ -71,7 +71,7 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
 
 
 
-This installation guide will teach you on how to install Wazuh with Open Distro for Elasticsearch, alternatively, Wazuh can be installed with the Elastic Stack components or Splunk. To learn more about this process and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
+This installation guide will teach on how to install Wazuh with Open Distro for Elasticsearch, alternatively, Wazuh can be installed with the Elastic Stack components or Splunk. To learn more about this process and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
 
 If you wish to use packages to perform the installation visit the :ref:`packages list <packages>` section. 
 
