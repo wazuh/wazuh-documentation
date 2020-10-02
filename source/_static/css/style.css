@@ -660,6 +660,10 @@ header .menuweb-bar .menu-item a {
   transition: all 0.2s ease;
 }
 
+.agent-os .item-agent:hover {
+  border: none;
+}
+
 .content-card {
   margin-bottom: 0.5em;
 }
@@ -3690,7 +3694,7 @@ div.highlight pre {
   .deployment-types .item-deployment h3 {
     font-size: 23px;
   }
-    
+
 }
 
 @media (min-width: 1921px) {
