@@ -71,7 +71,7 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
 
 
 
-This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly, Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`other alternative installation <other_installation_alternatives>` section.
+This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly, Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`more alternative installation <more_installation_alternatives>` section.
 
 Install Wazuh agents
 --------------------
@@ -168,7 +168,7 @@ The installation can be done by configuring the official repositories or by down
     open-distro/index
     wazuh-agent/index
     packages-list
-    other-installation-alternatives/index
+    more-installation-alternatives/index
 
    
 

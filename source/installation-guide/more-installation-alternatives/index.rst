@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _other_installation_alternatives:
+.. _more_installation_alternatives:
 
-Other installation alternatives
-===============================
+More installation alternatives
+==============================
 
 This section will provide alternative installation configurations to the ones given in the installation guide.
 
