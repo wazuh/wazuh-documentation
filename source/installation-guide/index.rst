@@ -11,16 +11,16 @@ Wazuh installation guide
 
 This section aims to guide the user through the process of installing Wazuh and its multiple components. A brief explanation about each component and its capabilities can be found in the :ref:`getting started <components>` section. 
 
-Install Wazuh with Open Distro for Elasticsearch
-------------------------------------------------
+Install Wazuh server
+--------------------
 
 There are three different alternatives to deploy a Wazuh installation. Here is a brief explanation about each deployment type:
 
-- **All-in-one**: Wazuh with Open Distro for Elasticsearch are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
+- :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
 
-- **Distributed**: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+- :ref:`Distributed <distributed_index>`: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
 
-- **Wazuh Cloud**: All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. For more information visit `Wazuh Cloud <https://wazuh.com/cloud/>`_.
+- `Wazuh Cloud <https://wazuh.com/cloud/>`_: All components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise's need. 
 
 .. raw:: html
 
@@ -71,7 +71,11 @@ There are three different alternatives to deploy a Wazuh installation. Here is a
 
 
 
-This installation guide will show how to install Wazuh manager along with Open Distro for Elasticsearch, Filebeat-OSS, and Open Distro for Elasticsearch Kibana. Alternativaly, Wazuh can be installed with the Elastic Stack components. To learn more about this process and other installation alternatives, visit the :ref:`more alternative installation <more_installation_alternatives>` section.
+This installation guide will teach you on how to install Wazuh with Open Distro for Elasticsearch, alternatively, Wazuh can be installed with the Elastic Stack components or Splunk. To learn more about this process and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
+
+If you wish to use packages to perform the installation visit the :ref:`packages list <packages>` section. 
+
+
 
 Install Wazuh agents
 --------------------
@@ -154,9 +158,10 @@ The Wazuh Agent is a single, light-weight monitoring software that can be instal
 Requirements
 ------------
 
-The requirements section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Furthermore, information about the expected alerts per second depending on the different types of monitored endpoint can be found, allowing users to calculate the expected data storage needed for their environments.  
+The :ref:`requirements <installation_requirements>`  section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Furthermore, information about the expected alerts per second depending on the different types of monitored endpoint can be found, allowing users to calculate the expected data storage needed for their environments.  
 
 .. toctree::
+    :hidden:
     :maxdepth: 1
 
     requirements
