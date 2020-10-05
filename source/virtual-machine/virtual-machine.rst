@@ -9,7 +9,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 .. note::
 
-  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Multitier server and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
+  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Multitier server and multi-node clusters are usually a better fit for production environments where higher performance is required.
 
 This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZUH_LATEST_OVA|_|ELASTICSEARCH_LATEST_OVA|.ova>`_, contains the following components:
 
@@ -20,11 +20,14 @@ This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZ
     - Open Distro for Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh/wazuh``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and execute the virtual machine.
+First, import the OVA in the virtualization platform and run the virtual machine. The ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh/wazuh``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
 
-The virtual machine is pre-configured to work without modifying any settings of its components. Nevertheless, they can be totally con
+The virtual machine is pre-configured to work without modifying any settings of its components. Nevertheless, all the components can be fully customized. These are the configuration files locations:
 
-Although there is no need to change any Elastic Stack configuration settings, feel free to explore the options. Elasticsearch is installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
+  - Wazuh manager: ``/var/ossec/etc/ossec.conf``
+  - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
+  - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
+  - Open Distro for Kibana: ``/etc/kibana/kibana.yml``
 
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To prevent this situation it is recommended to enable the ``Hardware Clock in UTC Time`` option on the ``System`` tab of the virtual machine's settings.
 
