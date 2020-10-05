@@ -20,7 +20,9 @@ This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZ
     - Open Distro for Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh/wazuh``.
+First, import the OVA in the virtualization platform and run the virtual machine. The ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh/wazuh``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and execute the virtual machine.
+
+The virtual machine is pre-configured to work without modifying any settings of its components. Nevertheless, they can be totally con
 
 Although there is no need to change any Elastic Stack configuration settings, feel free to explore the options. Elasticsearch is installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
 
@@ -36,4 +38,7 @@ In order to connect to the Kibana web user interface, login with ``https://OVA_I
 Upgrading the VM
 ----------------
 
-To update your OVA virtual machine, check :ref:`this article <upgrading_wazuh_server>`. It is also recommended to update the repositories using the command ``yum update``.
+The virtual machine can be upgraded as a tradicional installation:
+
+  - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
+  - :ref:`Upgrading Open Distro for Elasticsearch, Filebeat-OSS and Kibana <upgrading_open_distro>`
