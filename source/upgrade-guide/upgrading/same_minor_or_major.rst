@@ -15,20 +15,20 @@ a) Upgrade on CentOS/RHEL/Fedora:
 
 .. code-block:: console
 
-    # yum upgrade wazuh-manager wazuh-api
+    # yum upgrade wazuh-manager
 
 b) Upgrade on Debian/Ubuntu:
 
 .. code-block:: console
 
     # apt-get update
-    # apt-get install wazuh-manager wazuh-api
+    # apt-get install wazuh-manager
 
 c) Upgrade on OpenSUSE:
 
 .. code-block:: console
 
-    # zypper update wazuh-manager wazuh-api
+    # zypper update wazuh-manager
 
 
 Upgrade the Wazuh agent

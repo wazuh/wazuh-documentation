@@ -46,12 +46,12 @@ Access to services and containers
       # docker-compose exec <service name> /bin/bash
 
 
-Where ``service name`` is the name of each service in the ``docker-compose.yml`` file. By default:
+    Where ``service name`` is the name of each service in the ``docker-compose.yml`` file. By default:
 
-- wazuh
-- elasticsearch
-- kibana
-- nginx
+    - wazuh
+    - elasticsearch
+    - kibana
+    - nginx
 
 
 Wazuh service data volume

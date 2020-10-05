@@ -53,47 +53,16 @@ Once the process is complete, you can check the service status with:
 
         # service wazuh-manager status
 
-Installing the Wazuh API
-------------------------
+.. versionadded:: 4.0.0
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
-
-  .. code-block:: console
-
-    # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
-
-  and then, install NodeJS:
-
-  .. code-block:: console
-
-    # zypper install nodejs
-
-2. Install the Wazuh API. It will update NodeJS if it is required:
-
-  .. code-block:: console
-
-    # zypper install wazuh-api
-
-3. Once the process is complete, you can check the service status with:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api status
+The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
 .. note::
-    Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
+    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
 
-4. (Optional) Disable the Wazuh repository:
+**Optional:** Disable the Wazuh repository.
 
-  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+  It is recommended to disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
@@ -182,7 +151,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Once you have installed the manager and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
 
 Uninstall
 ---------
@@ -191,7 +160,7 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 
-      # zypper remove wazuh-manager wazuh-api
+      # zypper remove wazuh-manager
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
 

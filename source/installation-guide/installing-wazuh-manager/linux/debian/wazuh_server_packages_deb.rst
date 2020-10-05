@@ -62,55 +62,16 @@ Once the process is completed, you can check the service status with:
 
       # service wazuh-manager status
 
-Installing the Wazuh API
-------------------------
+.. versionadded:: 4.0.0
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
-
-  .. code-block:: console
-
-    # curl -sL https://deb.nodesource.com/setup_10.x | bash -
-
-  .. note::
-
-      If you are using **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below:
-
-      .. code-block:: console
-
-        # curl -sL https://deb.nodesource.com/setup_6.x | bash -
-
-  and then, install NodeJS:
-
-  .. code-block:: console
-
-    # apt-get install nodejs
-
-2. Install the Wazuh API. It will update NodeJS if it is required:
-
-  .. code-block:: console
-
-    # apt-get install wazuh-api
-
-3. Once the process is complete, you can check the service status with:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl status wazuh-api
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-api status
+The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
 .. note::
-    Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
+    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
 
-4. (Optional) Disable the Wazuh updates:
+**Optional:** Disable the Wazuh repository.
 
-  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+  It is recommended to disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
@@ -122,7 +83,6 @@ Installing the Wazuh API
   .. code-block:: console
 
     # echo "wazuh-manager hold" | sudo dpkg --set-selections
-    # echo "wazuh-api hold" | sudo dpkg --set-selections
 
 .. _wazuh_server_packages_deb_filebeat:
 
@@ -199,13 +159,13 @@ To uninstall the Wazuh manager and Wazuh API:
 
     .. code-block:: console
 
-      # apt-get remove wazuh-manager wazuh-api
+      # apt-get remove wazuh-manager
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command:
 
     .. code-block:: console
 
-      # apt-get remove --purge wazuh-manager wazuh-api
+      # apt-get remove --purge wazuh-manager
 
 To uninstall filebeat:
 

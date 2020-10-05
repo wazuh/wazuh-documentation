@@ -99,7 +99,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 Product compatibility
 ---------------------
 
-When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent``, ``wazuh-api`` and ``wazuh-app``), there are different compatibility requirements in order to make everything work properly.
+When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent`` and ``wazuh-app``), there are different compatibility requirements in order to make everything work properly.
 
 Manager and agents
 ^^^^^^^^^^^^^^^^^^
@@ -111,18 +111,13 @@ The compatibility between Wazuh agent and Wazuh manager is guaranteed when the W
 
     The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
 
-Manager and API
-^^^^^^^^^^^^^^^
-
-The API requires the same ``major.minor`` version as the Wazuh manager in order to be compatible.
-
 
 API and Kibana app
 ^^^^^^^^^^^^^^^^^^
 
 The Wazuh app for Kibana requires compatibility between two different products:
 
-  - With the **Wazuh API**, it requires the same ``major.minor`` version.
+  - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With the **Elastic Stack**, it's only compatible with the exact same version.
 
 +-----------------------------------+------------------------------------+
@@ -168,7 +163,7 @@ API and Splunk app
 
 The Splunk app for Wazuh requires compatibility between two different products:
 
-  - With the **Wazuh API**, it requires the same ``major.minor`` version.
+  - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With **Splunk**, it's only compatible with the exact same version.
 
 +---------------------------------+---------------------------+

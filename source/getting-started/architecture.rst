@@ -70,17 +70,17 @@ Wazuh
 +---------------+-----------+----------+-----------------------------------------------------------------------+
 | Component     | Port      | Protocol | Purpose                                                               |
 +===============+===========+==========+=======================================================================+
-|               | 1514      | TCP      | Send collected events from agents (when configured for TCP)           |
+|               | 1514      | TCP      | Send collected events from agents (when configured for TCP) - Default |
 +               +-----------+----------+-----------------------------------------------------------------------+
-|               | 1514      | UDP      | Send collected events from agents (when configured for UDP) - Default |
+|               | 1514      | UDP      | Send collected events from agents (when configured for UDP)           |
 +               +-----------+----------+-----------------------------------------------------------------------+
 | Wazuh manager | 1515      | TCP      | Agents registration service                                           |
 +               +-----------+----------+-----------------------------------------------------------------------+
 |               | 1516      | TCP      | Wazuh cluster communications                                          |
 +               +-----------+----------+-----------------------------------------------------------------------+
-|               | 514       | TCP      | Send collected events from syslog (when configured for TCP)           |
+|               | 514       | TCP      | Send collected events from syslog (when configured for TCP) - Default |
 +               +-----------+----------+-----------------------------------------------------------------------+
-|               | 514       | UDP      | Send collected events from syslog (when configured for UDP) - Default |
+|               | 514       | UDP      | Send collected events from syslog (when configured for UDP)           |
 +---------------+-----------+----------+-----------------------------------------------------------------------+
 | Wazuh API     | 55000     | TCP      | Incoming HTTP requests                                                |
 +---------------+-----------+----------+-----------------------------------------------------------------------+

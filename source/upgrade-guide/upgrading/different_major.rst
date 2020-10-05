@@ -14,7 +14,6 @@ Upgrade Wazuh manager
 
   .. code-block:: console
 
-    # systemctl stop wazuh-api
     # systemctl stop wazuh-manager
 
 2. Add the new repository for Wazuh 3.x.
@@ -53,20 +52,6 @@ Upgrade Wazuh manager
 
       # apt-get update
       # apt-get install wazuh-manager
-
-4. Upgrade the API.
-
-  a) Upgrade the Wazuh API on CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # yum install wazuh-api
-
-  b) Upgrade the Wazuh API on Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # apt-get install wazuh-api
 
 Upgrade Wazuh agent
 -------------------
@@ -159,5 +144,4 @@ We recommend that the Wazuh repository be disabled in order to prevent accidenta
     .. code-block:: console
 
       # echo "wazuh-manager hold" | sudo dpkg --set-selections
-      # echo "wazuh-api hold" | sudo dpkg --set-selections
       # echo "wazuh-agent hold" | sudo dpkg --set-selections

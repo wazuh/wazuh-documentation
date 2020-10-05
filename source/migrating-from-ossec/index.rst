@@ -15,7 +15,7 @@ Unfortunately OSSEC users have not seen lots of new features over the last decad
 
 This is why, back in 2015, Wazuh team decided to fork the project. The result is a much more comprehensive, easy to use, reliable and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments.
 
-Regarding project activity and roadmap, you can find Wazuh code in our `Github repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC).
+Regarding project activity and roadmap, you can find Wazuh code in our `GitHub repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC).
 
 Here is a brief summary of the value we added to the OSSEC project, and good reasons to upgrade your security monitoring infrastructure moving it to Wazuh:
 
@@ -66,7 +66,6 @@ Regulatory compliance
 * Compliance dashboards for `Splunk <https://www.splunk.com>`_, provided by Wazuh app.
 * Use of `OwlH project <https://www.owlh.net>`_ Suricata mapping for compliance.
 * SHA256 hashes used for file integrity monitoring (in addition to to MD5 and SHA1).
-* Module for integration with `OpenScap <https://www.open-scap.org>`_, used for configuration assessment.
 
 Elastic Stack integration
 +++++++++++++++++++++++++
@@ -90,7 +89,6 @@ Vulnerability detection and configuration assessment
 
 * Dynamic creation of CVE vulnerability databases, gathering data from OVAL repositories.
 * Cross correlation with applications inventory data to detect vulnerable software.
-* Module for integration with `OpenScap <https://www.open-scap.org>`_ allows the user to remotely configured scans.
 * Support for CIS-CAT, by `Center of Internet Security <https://www.cisecurity.org>`_ scanner integration.
 
 How to move to Wazuh

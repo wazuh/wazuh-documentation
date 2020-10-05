@@ -33,8 +33,6 @@ All agent processes have different purposes and settings. Here is a brief descri
 
 - **Syscheck:** This process performs file integrity monitoring (FIM) and can also monitor registry keys on Windows systems. It is capable of detecting changes in a file's content, ownership and other attributes, as well as noting the creation and deletion of files. While it performs periodic FIM scans by default, it can also be configured to communicate with the operating system kernel to do real-time detection of file changes and to produce a detailed change report (diffs) of text files.
 
-+ **OpenSCAP:** This module uses published `OVAL <https://oval.mitre.org/>`_ (Open Vulnerability Assessment Language) and `XCCDF <https://scap.nist.gov/specifications/xccdf/>`_ (Extensible Configuration Checklist Description Format) baseline security profiles. By periodically scanning a system, it can find vulnerable applications or configurations that do not follow well-known standards, such as those defined in `CIS <https://benchmarks.cisecurity.org/downloads/benchmarks/>`_ (Center for Internet Security) benchmarks.
-
 - **Agent Daemon:** This is the process that receives the data generated or collected by all other agent components. It compresses, encrypts and delivers the data to the server through an authenticated channel. This process runs in an isolated “chroot” (change root) environment, meaning that it has limited access to the monitored system. This improves the overall security of the agent because it is the only process that connects to the network.
 
 Wazuh server

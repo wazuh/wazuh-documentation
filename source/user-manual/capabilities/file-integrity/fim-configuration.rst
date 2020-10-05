@@ -8,7 +8,7 @@ Configuration
 After the installation, the Wazuh manager and the Wazuh agent have defined a :ref:`default syscheck configuration <reference_ossec_syscheck_default_configuration>`, which should be reviewed and adjusted to the particular environment. This section presents configuration examples, helping to learn how to use it in different use cases:
 
 #. `Configuring syscheck - basic usage`_
-#. `Configuring scan time`_
+#. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
 #. `Configuring reporting file changes`_
@@ -40,14 +40,32 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
     <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
   </syscheck>
 
-It is possible to hot-swap the monitored directories. This can be done for Linux, in both the Wazuh agent and the Wazuh manager, by setting the monitoring of symbolic links to directories. To set the refresh interval, use :ref:`syscheck.symlink_scan_interval <ossec_internal_syscheck>` option found in the :ref:`internal configuration <reference_internal_options>`  of the monitored Wazuh agent.
+.. versionadded:: 4.0
 
-Once, the directory path is removed from the syscheck configuration and the Wazuh agent is being restarted, the data from the previously monitored path is no longer stored in the FIM database.
+Environment variables can be used to configure syscheck in Linux and Windows.
 
-Configuring scan time
----------------------
+.. code-block:: xml
 
-By default, syscheck scans when the Wazuh starts, however, this behavior can be changed with the :ref:`scan_on_start <reference_ossec_syscheck_scan_on_start>` option.
+  <syscheck>
+    <directories check_all="yes">$DIRECTORY</directories>
+  </syscheck>
+
+On UNIX based systems, the variable must be added to the file ``/etc/ossec-init.conf`` if Wazuh is restarted using systemd. On the other hand, if Wazuh is restarted using the ``ossec-control`` binary, the variable must be owned by the root user.
+You can specify multiple paths in a variable by separating them using ``:``.
+
+.. code-block:: xml
+
+  <syscheck>
+    <directories check_all="yes">%CommonProgramFiles%</directories>
+  </syscheck>
+
+On Windows, only system environment variables can be used. You can add multiple directories to the same variable by separating them using ``;``
+
+.. note::
+  Wazuh runs as a 32 bit application, so the previous environment variable will be replaced by ``C:\Program Files (x86)\Common Files``. In order to specifically monitor ``C:\Program Files\Common Files``, the associate environment variable is: ``%CommonProgramW6432%``.
+
+Configuring scheduled scans
+---------------------------
 
 For the schedluled scans, syscheck has an option to configure the :ref:`frequency <reference_ossec_syscheck_frequency>` of the system scans. In this example, syscheck is configured to run every 10 hours:
 
