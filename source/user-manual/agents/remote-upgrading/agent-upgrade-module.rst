@@ -22,11 +22,13 @@ The agent upgrade module will receive the upgrade requests from a socket located
 
     {WAZUH_DIR}/queue/tasks/upgrade
 
-The module expects 2 parameters:
+The module expects 3 parameters:
 
 +-----------------+------------+----------------------------------------+-------------------------------------------------------------------+
 | Option          | Suboption  | Values                                 | Description                                                       |
 +=================+============+========================================+===================================================================+
+| **origin**      | **module** | api (only value allowed)               | Emmiter of the request                                            |
++-----------------+------------+----------------------------------------+-------------------------------------------------------------------+
 | **command**     |            | upgrade, upgrade_custom                | Specifies the command to be executed                              |
 +-----------------+------------+----------------------------------------+-------------------------------------------------------------------+
 | **parameters**  | **agents** | Array of int values (id of the agents) | Specifies the list of agents where the command will be applied    |
@@ -52,6 +54,9 @@ The module expects 2 parameters:
         :class: output
 
         {
+            "origin": {
+                "module": "api"
+            },
             "command": "upgrade",
             "parameters": {
                 "agents": [5,6],
@@ -80,6 +85,9 @@ The module expects 2 parameters:
         :class: output
 
         {
+            "origin": {
+                "module": "api"
+            },
             "command": "upgrade_custom",
             "parameters": {
                 "agents": [20,23],
@@ -141,29 +149,31 @@ The response will contain all the information related to the upgrade task stored
 
 The information for each agent will be the following:
 
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| Option          | Values                                     | Description                                              |
-+=================+============================================+==========================================================+
-| **error**       | int value                                  | Error code: 0 when success, a positive number when error |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **message**     | string                                     | String associated to the error code                      |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **module**      | upgrade_module                             | Emmiter of the task retrieved                            |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **command**     | upgrade, upgrade_custom                    | Command executed by the task retrieved                   |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **agent**       | int value (id of the agent)                | Id of the agent where the task retrieved was executed    |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **task_id**     | int value (id of the task)                 | Id of the task retrieved                                 |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **create_time** | timestamp                                  | Creation time of the task retrieved (UTC)                |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **update_time** | timestamp                                  | Last update time of the task retrieved (UTC)             |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **status**      | Updating, Updated, Error, Timeout, Legacy  | Current status of the task retrieved                     |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
-| **error_msg**   | string                                     | String associated to the status when the status is Error |
-+-----------------+--------------------------------------------+----------------------------------------------------------+
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| Option          | Values                                                          | Description                                              |
++=================+=================================================================+==========================================================+
+| **error**       | int value                                                       | Error code: 0 when success, a positive number when error |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **message**     | string                                                          | String associated to the error code                      |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **node**        | string                                                          | Name of the node that executed the task retrieved        |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **module**      | upgrade_module                                                  | Emmiter of the task retrieved                            |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **command**     | upgrade, upgrade_custom                                         | Command executed by the task retrieved                   |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **agent**       | int value (id of the agent)                                     | Id of the agent where the task retrieved was executed    |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **task_id**     | int value (id of the task)                                      | Id of the task retrieved                                 |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **create_time** | timestamp                                                       | Creation time of the task retrieved (UTC)                |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **update_time** | timestamp                                                       | Last update time of the task retrieved (UTC)             |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **status**      | In queue, Updating, Updated, Error, Cancelled, Timeout, Legacy  | Current status of the task retrieved                     |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
+| **error_msg**   | string                                                          | String associated to the status when the status is Error |
++-----------------+-----------------------------------------------------------------+----------------------------------------------------------+
 
 .. note:: The legacy status is used to indicate that the upgrade is to an old version where the agent does not report the result of the task. The result of these tasks must be checked manually.
 
@@ -178,6 +188,7 @@ Example response:
             {
                 "error": 0,
                 "message": "Success",
+                "node": "node01",
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "agent": 5,
@@ -188,6 +199,7 @@ Example response:
             },{
                 "error": 0,
                 "message": "Success",
+                "node": "node02",
                 "module": "upgrade_module",
                 "command": "upgrade",
                 "agent": 10,
