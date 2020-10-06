@@ -4,6 +4,8 @@
 
 .. _all_in_one:
 
+|TEST|
+
 Step-by-step installation
 =========================
 
@@ -150,20 +152,21 @@ An example response should look as follows:
               {
                 "name" : "node-1",
                 "cluster_name" : "elasticsearch",
-                "cluster_uuid" : "O82AgJJTTF2pTOXKPnwQsA",
+                "cluster_uuid" : "2gIeOOeUQh25c2yU0Pd-RQ",
                 "version" : {
-                  "number" : "7.8.0",
+                  "number" : "7.9.1",
                   "build_flavor" : "oss",
                   "build_type" : "rpm",
-                  "build_hash" : "757314695644ea9a1dc2fecd26d1a43856725e65",
-                  "build_date" : "2020-06-14T19:35:50.234439Z",
+                  "build_hash" : "083627f112ba94dffc1232e8b42b73492789ef91",
+                  "build_date" : "2020-09-01T21:22:21.964974Z",
                   "build_snapshot" : false,
-                  "lucene_version" : "8.5.1",
+                  "lucene_version" : "8.6.2",
                   "minimum_wire_compatibility_version" : "6.8.0",
                   "minimum_index_compatibility_version" : "6.0.0-beta1"
                 },
                 "tagline" : "You Know, for Search"
-              }  
+              }
+  
 
 
 .. _wazuh_server_packages_filebeat:
@@ -253,7 +256,7 @@ An example response should look as follows:
                   TLS version: TLSv1.3
                   dial up... OK
                 talk to server... OK
-                version: 7.8.0
+                version: 7.9.1
 
 Installing Kibana
 -----------------

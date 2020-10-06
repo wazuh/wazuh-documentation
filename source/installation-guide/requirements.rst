@@ -32,7 +32,7 @@ All-in-one deployment
 
 In an all-in-one deployment, Wazuh server and Open Distro for Elasticsearch, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
 
-The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary for this type of deployment due to the requirements of Open Distro for Elasticsearch. 
+The minimum hardware specifications recommended are 16 GB of RAM and 4 CPU cores. A 64-bit operating system is necessary. 
 
 Disk space requirements depend on the alerts per second (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of monitored endpoint.
 
@@ -66,7 +66,7 @@ The Wazuh server and the Open Distro for Elasticsearch can each be installed as 
 | Kibana                         |     4      |     2      |                                         
 +--------------------------------+------------+------------+
 
-A 64-bit operating system is necessary for Open Distro for Elasticsearch.  
+A 64-bit operating system is necessary.  
 
 Regarding the disk space requirements, the amount of data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on a Wazuh server as well as on an Elasticsearch server depending on the type of monitored endpoints. 
 
