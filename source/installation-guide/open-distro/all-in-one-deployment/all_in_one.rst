@@ -4,8 +4,6 @@
 
 .. _all_in_one:
 
-|TEST|
-
 Step-by-step installation
 =========================
 
