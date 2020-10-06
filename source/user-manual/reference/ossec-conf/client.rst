@@ -100,7 +100,7 @@ retry_interval
 Time interval between connection attempts (seconds).
 
 +--------------------+--------------------+
-| **Default value**  | 5                  |
+| **Default value**  | 10                 |
 +--------------------+--------------------+
 | **Allowed values** | 1 to 1.000.000.000 |
 +--------------------+--------------------+
@@ -321,7 +321,7 @@ Options
 - `server_ca_path`_
 - `agent_certificate_path`_
 - `agent_key_path`_
-- `authorization_pass`_
+- `authorization_pass_path`_
 - `auto_method`_
 - `delay_after_enrollment`_
 - `use_source_ip`_
@@ -399,11 +399,11 @@ ssl_cipher
 
 Override SSL used ciphers.
 
-+--------------------+---------------------------------------------+
-| **Default value**  | DEFAULT_CIPHERS                             |
-+--------------------+---------------------------------------------+
-| **Allowed values** | valid ssl ciphers.                          |
-+--------------------+---------------------------------------------+
++--------------------+----------------------------------------------------+
+| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
++--------------------+----------------------------------------------------+
+| **Allowed values** | valid ssl ciphers.                                 |
++--------------------+----------------------------------------------------+
 
 server_ca_path
 ^^^^^^^^^^^^^^
@@ -438,15 +438,16 @@ Required when agent verification is enabled in the manager.
 | **Allowed values** | Path to a valid agent key file.             |
 +--------------------+---------------------------------------------+
 
-authorization_pass
-^^^^^^^^^^^^^^^^^^
+authorization_pass_path
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Required when enrollment is using password verification. The password must match that of the manager.
+Required when enrollment is using password verification.
 
 +--------------------+---------------------------------------------+
-| **Default value**  | NULL                                        |
+| **Default value**  | Windows: authd.pass                         |
+|                    | Unix:    /etc/authd.pass                    |
 +--------------------+---------------------------------------------+
-| **Allowed values** | Password string.                            |
+| **Allowed values** | Path to a valid password file               |
 +--------------------+---------------------------------------------+
 
 auto_method
@@ -499,7 +500,7 @@ Sample configuration
         <server_ca_path>/path/to/server_ca</server_ca_path>
         <agent_certificate_path>/path/to/agent.cert</agent_certificate_path>
         <agent_key_path>/path/to/agent.key</agent_key_path>
-        <authorization_pass>TopSecret</authorization_pass>
+        <authorization_pass_path>/path/to/agent.pass</authorization_pass_path>
         <auto_method>no</auto_method>
         <delay_after_enrollment>20</delay_after_enrollment>
         <use_source_ip>no</use_source_ip>
