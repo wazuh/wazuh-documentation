@@ -232,13 +232,13 @@ installFilebeat() {
     
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install filebeat-7.8.1 -y -q  $debug"    
+        eval "yum install filebeat-7.9.1 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.8.1 $debug"
+        eval "zypper -n install filebeat-7.9.1 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.8.1 -y -q  $debug"
+        eval "apt-get install filebeat=7.9.1 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
