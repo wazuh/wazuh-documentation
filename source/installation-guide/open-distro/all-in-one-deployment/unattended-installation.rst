@@ -25,7 +25,7 @@ The script will perform an health-check to ensure that the host has enough resou
 .. code-block:: console
 
 
-  # bash all-in-one-installation.sh -i    
+  # bash ~/all-in-one-installation.sh -i    
 
 After the execution of the script, it will show the following messages to confirm that the install was made successfully:
 
