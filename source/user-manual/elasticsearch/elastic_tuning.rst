@@ -81,7 +81,7 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 In this guide, we will show how to set the *bootstrap.memory_lock* setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
 
-1. Set ``bootstrap.memory_lock``
+#. Set ``bootstrap.memory_lock``
 
   Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
 
@@ -89,7 +89,7 @@ In this guide, we will show how to set the *bootstrap.memory_lock* setting to tr
 
     bootstrap.memory_lock: true
 
-2. Edit the limit of system resources
+#. Edit the limit of system resources
 
   Where to configure systems settings depends on which package and operating system you choose to use for the Elasticsearch installation.
 
@@ -112,7 +112,7 @@ In this guide, we will show how to set the *bootstrap.memory_lock* setting to tr
 
     MAX_LOCKED_MEMORY=unlimited
 
-3. Limit memory
+#. Limit memory
 
   The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
 
@@ -137,7 +137,7 @@ In this guide, we will show how to set the *bootstrap.memory_lock* setting to tr
 
     Ensure that the min (Xms) and max (Xmx) sizes are the same to prevent JVM heap resizing at runtime as this is a very costly process.
 
-4. Restart Elasticsearch
+#. Restart Elasticsearch
 
   a) For Systemd:
 
@@ -227,13 +227,13 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
   If your index has already been created, you will have to `reindex <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ after editing the template.
 
-1. Download the Wazuh Elasticsearch template:
+#. Download the Wazuh Elasticsearch template:
 
   .. code-block:: console
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
-2. Edit the template in order to set one shard with no replicas:
+#. Edit the template in order to set one shard with no replicas:
 
   .. code-block:: console
 
@@ -261,7 +261,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
     We set "order" to "1", otherwise Filebeat will overwrite your template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
 
-3. Load the template:
+#. Load the template:
 
   .. code-block:: console
 
@@ -272,7 +272,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
     { "acknowledged" : true }
 
-4. *Optional*. Confirm your configuration was updated successfully:
+#. *Optional*. Confirm your configuration was updated successfully:
 
   .. code-block:: console
 
