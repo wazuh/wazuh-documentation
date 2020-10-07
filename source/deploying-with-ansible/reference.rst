@@ -34,6 +34,12 @@ Elasticsearch
 
   *Default 127.0.0.1*
 
+**elasticsearch_reachable_host**
+
+  ElasticSearch, ip address to perform test request after install
+
+  *Default 127.0.0.1*
+
 **elasticsearch_jvm_xms**
 
   JVM heap size
@@ -46,23 +52,143 @@ Elasticsearch
 
   *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
 
-**elasticsearch_shards**
 
-  Set number of shards for indices
+.. _wazuh_ansible_reference_opendistro_elasticsearch:
 
-  *Default 5*
+Opendistro for Elasticsearch
+=============================
 
-**elasticsearch_replicas**
+**elasticsearch_cluster_name**
 
-  Set number of shards for indices
+  Name of the ODFE cluster
 
-  *Default 1*
+  *Default wazuh-cluster*
 
-**elasticsearch_install_java**
+**elasticsearch_node_name**
 
-  When it's present will install Oracle Java.
+  Name of the ODFE node
 
-  *Default yes*
+  *Default null*
+
+**elasticsearch_http_port**
+
+  ODFE listening port
+
+  *Default 9200*
+
+**elasticsearch_network_host**
+
+  ODFE, listening ip address
+
+  *Default 127.0.0.1*
+
+**elasticsearch_cluster_nodes**
+
+  ODFE cluster nodes list
+
+  *Default 127.0.0.1*
+
+**single_node**
+
+  ODFE single node deploy
+
+  *Default true*
+
+**elasticsearch_node_master**
+
+  Set the ODFE node as master node
+
+  *Default null*
+
+**elasticsearch_node_data**
+
+  Set the ODFE node as data node
+
+  *Default true*
+
+**elasticsearch_node_ingest**
+
+  Set the ODFE node as ingest node
+
+  *Default true*
+
+**elasticsearch_lower_disk_requirements**
+
+  Enable/Disable Disk-Based Shard allocation
+
+  *Default false*
+
+**local_certs_path**
+
+  Local path where certs will be generated
+
+  *Default ./opendistro/certificates*
+
+**minimum_master_nodes**
+
+  Set minimum master nodes in ODFE cluster
+
+  *Default 2*
+
+**domain_name**
+
+  Configure hostnames for ODFE nodes
+
+*Default wazuh.com*
+
+**elasticsearch_discovery_nodes**
+
+  ODFE cluster discovery nodes list
+
+  *Default 127.0.0.1*
+
+**opendistro_jvm_xms**
+
+  JVM heap size
+
+  *Default null*
+
+**opendistro_version**
+
+  ODFE version to install
+
+  *Default 1.10.1*
+
+**opendistro_custom_user**
+
+  Sets custom ODFE user ID
+
+  *Default wazuh*
+
+**opendistro_admin_password**
+
+  Sets custom ODFE user password
+
+  *Default changeme*
+
+**opendistro_custom_user_role**
+
+  Sets custom ODFE user role
+
+  *Default admin*
+
+**certs_gen_tool_url**
+
+  Certificates generation tool url
+
+  *Default https://wazuh-demo.s3-us-west-1.amazonaws.com/search-guard-tlstool-1.7.zip*
+
+**generate_certs**
+
+  Certificate generation switch
+
+  *Default true*
+
+**perform_installation**
+
+  Enables ODFE installation
+
+  *Default true*
 
 .. _wazuh_ansible_reference_kibana:
 
@@ -117,17 +243,71 @@ Kibana
 
   *Default 9200*
 
-**elasticsearch_shards**
 
-  Set number of shards for indices
+.. _wazuh_ansible_reference_opendistro_kibana:
 
-  *Default 5*
+Opendistro Kibana
+===================
 
-**elasticsearch_replicas**
+**elasticsearch_http_port**
 
-  Set number of shards for indices
+  Elasticsearch-oss node port.
 
-  *Default 1*
+  *Default 9200*
+
+**elasticsearch_network_host**
+
+  IP address or hostname of Elasticsearch-oss node.
+
+  *Default 127.0.0.1*
+
+**kibana_server_host**
+
+  Listening IP address of Kibana-oss.
+
+  *Default 0.0.0.0*
+
+**kibana_server_port**
+
+  Listening port of Kibana-oss.
+
+  *Default 5601*
+
+**elastic_stack_version**
+
+  Version of Kibana-oss to match compatible Wazuh APP
+
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+
+**wazuh_version**
+
+  Wazuh APP compatible version to install
+
+  *Default |WAZUH_LATEST_ANSIBLE|*
+
+**elasticsearch_network_host**
+
+  Ip address or hostname of Elasticsearch node.
+
+  *Default 127.0.0.1*
+
+**elasticsearch_http_port**
+
+  Port of Elasticsearch node.
+
+  *Default 9200*
+
+**opendistro_kibana_user**
+
+  Elasticsearch user to login
+
+  *Default kibanaserver*
+
+**opendistro_kibana_password**
+
+  Elasticsearch password to login
+
+  *Default changeme*
 
 .. _wazuh_ansible_reference_filebeat:
 
@@ -218,6 +398,12 @@ Filebeat
   Verify validity of the server certificate hostname.
 
   *Default false*
+
+.. _wazuh_ansible_reference_filebeat_oss:
+
+Filebeat OSS
+===================
+
 
 .. _wazuh_ansible_reference_manager:
 
