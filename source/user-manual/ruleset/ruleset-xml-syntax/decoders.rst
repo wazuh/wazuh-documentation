@@ -275,6 +275,8 @@ It defines what the parenthesis groups contain and the order in which they were 
 +                    +------------+-------------------------------------------------------+
 |                    | protocol   | Protocol                                              |
 +                    +------------+-------------------------------------------------------+
+|                    | system_name| System name                                           |
++                    +------------+-------------------------------------------------------+
 |                    | id         | Event id                                              |
 +                    +------------+-------------------------------------------------------+
 |                    | url        | Url of the event                                      |
@@ -282,6 +284,8 @@ It defines what the parenthesis groups contain and the order in which they were 
 |                    | action     | Event action (deny, drop, accept, etc)                |
 +                    +------------+-------------------------------------------------------+
 |                    | status     | Event status (success, failure, etc)                  |
++                    +------------+-------------------------------------------------------+
+|                    | data       | Data                                                  |
 +                    +------------+-------------------------------------------------------+
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+
@@ -314,6 +318,8 @@ It is used to designate a decoder as one in which the first time it matches the 
 +                    +------------+-------------------------------------------------------+
 |                    | protocol   | Protocol                                              |
 +                    +------------+-------------------------------------------------------+
+|                    | system_name| System name                                           |
++                    +------------+-------------------------------------------------------+
 |                    | id         | Event id                                              |
 +                    +------------+-------------------------------------------------------+
 |                    | url        | Url of the event                                      |
@@ -321,6 +327,8 @@ It is used to designate a decoder as one in which the first time it matches the 
 |                    | action     | Event action (deny, drop, accept, etc)                |
 +                    +------------+-------------------------------------------------------+
 |                    | status     | Event status (success, failure, etc)                  |
++                    +------------+-------------------------------------------------------+
+|                    | data       | Data                                                  |
 +                    +------------+-------------------------------------------------------+
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+

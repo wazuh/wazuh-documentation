@@ -35,7 +35,11 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `dstip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `extra_data`_           | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
+| `srcport`_              | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a port with a string decoded as ``srcport``.                   |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `dstport`_              | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a port with a string decoded as ``dstport``.                   |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `extra_data`_           | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a extra data with a string decoded as ``extra_data``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `user`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a username with a string decoded as ``user``.                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -51,9 +55,21 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `url`_                  | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will look for a match with the field decoded as ``url``                                           |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `location`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Location identifies the origin of the input.                                                         |
+| `location`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the location obtained in the pre-decoding phase.                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `action`_               | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `protocol`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``protocol`` field.                                              |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `data`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``data`` field.                                                  |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `status`_               | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``status`` field.                                                |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `system_name`_          | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``system_name`` field.                                           |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `srcgeoip`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``srcgeoip`` field.                                              |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `dstgeoip`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``dstgeoip`` field.                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_sid`_               | A rule ID.                                                    | It works similar to parent decoder. It will match if that rule ID has previously matched.            |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -161,8 +177,6 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `check_diff`_           | None.                                                         | Determines when the output of a command changes.                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `group`_                | Any String.                                                   | Add additional groups to the alert.                                                                  |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `status`_               | started, aborted, succeeded, failed, lost, etc.               | Declares the current status of a rule.                                                               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `mitre`_                | See `Mitre table <rules.html#mitre>`_ below.                  | Contains Mitre Technique IDs that fit the rule                                                       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -438,6 +452,14 @@ Any string that is decoded into the ``data`` field.
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
 +--------------------+-----------------------------------------------------------------+
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 extra_data
 ^^^^^^^^^^
 
@@ -485,13 +507,13 @@ Example:
 
   .. code-block:: xml
 
-      <rule id="140101" level="12">
-        <if_group>authentication_success</if_group>
-        <user>mysql</user>
-        <description>System user successfully logged to the system.</description>
-      </rule>
+    <rule id="140101" level="12">
+      <if_group>authentication_success</if_group>
+      <user negate="yes">wazuh|root</user>
+      <description>Unexpected user successfully logged to the system.</description>
+    </rule>
 
-This rule will trigger when the user ``mysql`` successfully logs into the system. Being a System user it should never log in to the system.
+This rule will trigger when a user different from ``root`` or ``wazuh`` successfully login into the system.
 
 The attribute below is optional, it allows to negate the expressions.
 
@@ -511,6 +533,14 @@ Any string that is decoded into the ``system_name`` field.
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 program_name
 ^^^^^^^^^^^^
@@ -548,6 +578,44 @@ protocol
 ^^^^^^^^
 
 Any string that is decoded into the ``protocol`` field.
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
++--------------------+------------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
+srcport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the source port (decoded as ``srcport``).
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
++--------------------+------------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
+dstport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the destination port (decoded as ``dstport``).
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -1532,6 +1600,25 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <different_url />  |
 +--------------------+--------------------+
 
+srcgeoip
+^^^^^^^^
+
+Any string that is decoded into the ``srcgeoip`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 same_srcgeoip
 ^^^^^^^^^^^^^
 
@@ -1568,6 +1655,25 @@ Example:
       </rule>
 
   That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
+
+dstgeoip
+^^^^^^^^
+
+Any string that is decoded into the ``dstgeoip`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 same_dstgeoip
 ^^^^^^^^^^^^^
@@ -1819,6 +1925,13 @@ Example:
         <group>upgrade,upgrade_failure,</group>
       </rule>
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 mitre
 ^^^^^
