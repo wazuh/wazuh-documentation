@@ -283,7 +283,7 @@ Here are some of the basic concepts related to making API requests and understan
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
     | message |                      | Result description.                                                                                            |
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
-    | error   |                      | For HTTP ``200`` responses determines if the response was complete (``0``), partial (``2``) or failed (``1``). |
+    | error   |                      | For HTTP ``200`` responses determines if the response was complete (``0``), failed (``1``) or partial (``2``). |
     |         |                      |                                                                                                                |
     |         |                      | For HTTP ``4xx`` or ``5xx`` responses determines the error code related to the failure.                        |
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
