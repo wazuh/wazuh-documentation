@@ -187,6 +187,11 @@ addElasticrepo() {
 ## Elasticsearch
 installElasticsearch() {
 
+    if [[ -f /etc/elasticsearch/elasticsearch.yml ]]; then
+        echo "Elasticsearch is already installed in this node."
+        exit 1;
+    fi      
+
     logger "Installing Elasticsearch..."
 
     if [ $sys_type == "yum" ] 
@@ -385,6 +390,11 @@ initializeElastic() {
 
 ## Kibana
 installKibana() {
+
+    if [[ -f /etc/kibana/kibana.yml ]]; then
+        echo "Kibana is already installed in this node."
+        exit 1;
+    fi     
     
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ] 
