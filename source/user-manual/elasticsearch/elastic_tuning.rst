@@ -59,7 +59,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
   .. group-tab:: Elastic Stack
 
-    During the installation of Elasticsearch, the passwords were autmatically generated. They can be changed afterwards using API requests:
+    During the installation of Elasticsearch, the passwords were automatically generated. They can be changed afterward using API requests:
 
     .. code-block:: console
 
@@ -73,7 +73,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
       - ``<elasticsearch_ip>``: The IP of the Elasticsearch node.
       - ``<user_name>``: The name of the user whose password is going to be changed.
-      - ``<new_password>``: The new password that will be asigned to the ``<user_name>`` user.
+      - ``<new_password>``: The new password that will be assigned to the ``<user_name>`` user.
 
 Memory locking
 --------------
@@ -119,14 +119,14 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 #. Limit memory:
 
-    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
+    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit memory usage and prevent this situation.
 
     There are two rules to apply when setting the Elasticsearch heap size:
 
       - Use no more than 50% of available RAM.
       - Use no more than 32 GB.
 
-    In addition, it is important to take into account the memory usage of the operating system, services and software that are running on the host.
+    In addition, it is important to take into account the memory usage of the operating system, services, and software that are running on the host.
 
     By default, Elasticsearch is configured with a 1 GB heap. It can be changed via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
 
@@ -203,15 +203,15 @@ Shards and replicas
 
 Elasticsearch provides the ability to split an index into multiple segments called shards. Each shard is, in and of itself, a fully-functional and independent "index" that can be hosted on any node in the cluster. Sharding is important for two primary reasons:
 
-- Horizontally scallation.
+- Horizontally scalation.
 
 - Distribute and parallelize operations across shards, increasing the performance and throughput.
 
-Also, Elasticsearch allows to make one or more copies of the index’s shards into what are called replica shards, or replicas for short. Replication is important for two primary reasons:
+Also, Elasticsearch allows making one or more copies of the index’s shards into what are called replica shards, or replicas for short. Replication is important for two primary reasons:
 
 - Provides high availability in case a shard or node failure.
 
-- Allows to scale out the search volume and throughput, since searches can be executed on all replicas in parallel.
+- Allows to scale out the search volume and throughput since searches can be executed on all replicas in parallel.
 
 .. warning::
 
@@ -225,20 +225,20 @@ As it is not possible to *reshard* (changing the number of shards) without reind
 How many replicas should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here is an example about how a cluster with three nodes and three shards could be set up:
+Here is an example of how a cluster with three nodes and three shards could be set up:
 
 - **No replica:** Each node has one shard. If a node goes down, we will be left with an incomplete index of two shards.
 
 - **One replica:** Each node has one shard and one replica. If a node goes down, there will still be a complete index.
 
-- **Two replicas:** Each node has one shard and two replicas (the full index). With this set up, the cluster can still function even if two nodes go down. This appears to be the best solution, however, it increases the storage requirements.
+- **Two replicas:** Each node has one shard and two replicas (the full index). With this setup, the cluster can still function even if two nodes go down. This appears to be the best solution, however, it increases the storage requirements.
 
 Setting the number of shards and replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The default installation of :ref:`Elasticsearch <installation_guide>` will configure each index with 3 primary shards and no replicas.
 
-To change these settings,the Elasticsearch's template will have to be edited. In the following example, the proper values for shards and replicas are configured in a cluster with only one node.
+To change these settings, the Elasticsearch's template will have to be edited. In the following example, the proper values for shards and replicas are configured in a cluster with only one node.
 
 .. warning::
 
@@ -250,11 +250,7 @@ To change these settings,the Elasticsearch's template will have to be edited. In
 
       # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
-#. Edit the template in order to set one shard with no replicas:
-
-    .. code-block:: console
-
-      # vi w-elastic-template.json
+#. Edit the template ``w-elastic-template.json`` in order to set one shard with no replicas:
 
     .. code-block:: json
       :class: output
@@ -276,7 +272,7 @@ To change these settings,the Elasticsearch's template will have to be edited. In
 
     .. warning::
 
-      The value "order" is setted to "1", otherwise Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
+      The value "order" is set to "1", otherwise Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
 
 #. Load the template:
 
