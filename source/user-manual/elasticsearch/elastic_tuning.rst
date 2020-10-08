@@ -57,7 +57,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
     The value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch's IP. 
 
-  .. group-tab:: Elasticsearch
+  .. group-tab:: Elastic Stack
 
     During the installation of Elasticsearch, the passwords were autmatically generated. They can be changed afterwards using API requests:
 
