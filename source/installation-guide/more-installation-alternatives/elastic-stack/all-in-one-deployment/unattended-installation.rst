@@ -17,14 +17,9 @@ Download and run the script:
 
   # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/elastic-stack/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-The script will perform an health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script:
+The script will perform an health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script.  
 
-.. code-block:: console
-
-
-  # bash all-in-one-installation.sh -i      
-
-After the execution of the script, it will show the following messages to confirm that the install was made successfully:
+After the execution of the script, it will show the following messages to confirm that the installation was successful: 
 
 .. code-block:: none
   :class: output
