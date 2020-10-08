@@ -58,6 +58,7 @@ wazuh_ui_admin:
   hosts: []
   users:
   - "wazuh_admin"
+  - "kibanaserver"
   and_backend_roles: []
 
 wazuh_ui_user:
