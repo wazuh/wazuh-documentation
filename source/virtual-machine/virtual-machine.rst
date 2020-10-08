@@ -5,7 +5,7 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox (where installed) and other OVA compatible virtualization systems.
+Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBoxor other OVA compatible virtualization systems.
 
 .. note::
 
@@ -17,7 +17,7 @@ This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh|WAZ
     - Wazuh manager: |WAZUH_LATEST_OVA|
     - Open Distro for Elasticsearch: |ELASTICSEARCH_LATEST_OVA|
     - Filebeat-OSS: |ELASTICSEARCH_LATEST_OVA|
-    - Open Distro for Kibana: |ELASTICSEARCH_LATEST_OVA|
+    - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
 First, import the OVA in the virtualization platform and run the virtual machine. The ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh/wazuh``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
@@ -27,7 +27,7 @@ All the components included in this virtual image are configured to work out of 
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
   - Open Distro for Elasticsearch: ``/etc/elasticsearch/elasticsearch.yml``
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
-  - Open Distro for Kibana: ``/etc/kibana/kibana.yml``
+  - Kibana: ``/etc/kibana/kibana.yml``
 
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To prevent this situation it is recommended to enable the ``Hardware Clock in UTC Time`` option on the ``System`` tab of the virtual machine's settings.
 
