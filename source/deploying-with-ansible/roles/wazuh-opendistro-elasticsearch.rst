@@ -40,6 +40,6 @@ Next, run the ansible playbook: ::
 
   $ ansible-playbook wazuh-elastic.yml -e@vars-production.yml
 
-The example above will install Elasticsearch and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
+The example above will install ODFE and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
 
 Please review the :ref:`references <wazuh_ansible_reference_opendistro_elasticsearch>` section to see all variables available for this role.

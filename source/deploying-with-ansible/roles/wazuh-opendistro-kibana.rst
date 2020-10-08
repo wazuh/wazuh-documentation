@@ -38,6 +38,6 @@ Next, run the Ansible playbook: ::
 
   $ ansible-playbook wazuh-kibana.yml -e@vars-production.yml
 
-The example above will install Kibana and configure to use ``10.1.1.10`` as Elasticsearch node.
+The example above will install Opendistro Kibana and configure to use ``10.1.1.10`` as Elasticsearch node.
 
 Please review the :ref:`references <wazuh_ansible_reference_opendistro_kibana>` section to see all variables available for this role.
