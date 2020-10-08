@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install elasticsearch=7.8.0
+  # apt-get install elasticsearch=7.9.1
 
 .. End of include file
