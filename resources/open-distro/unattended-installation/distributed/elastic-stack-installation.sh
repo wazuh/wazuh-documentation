@@ -165,6 +165,11 @@ addWazuhrepo() {
 ## Elasticsearch
 installElasticsearch() {
 
+    if [[ -f /etc/elasticsearch/elasticsearch.yml ]]; then
+        echo "Open Distro for Elasticsearch is already installed in this node."
+        exit 1;
+    fi    
+
     logger "Installing Open Distro for Elasticsearch..."
 
     if [ ${sys_type} == "yum" ]; then
@@ -379,6 +384,11 @@ initializeElastic() {
 
 ## Kibana
 installKibana() {
+    
+    if [[ -f /etc/kibana/kibana.yml ]]; then
+        echo "Kibana is already installed in this node."
+        exit 1;
+    fi    
      
     logger "Installing Kibana..."
     if [ ${sys_type} == "zypper" ]; then

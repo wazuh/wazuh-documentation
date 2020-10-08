@@ -154,6 +154,11 @@ installWazuh() {
 
 ## Filebeat
 installFilebeat() {
+
+    if [[ -f /etc/filebeat/filebeat.yml ]]; then
+        echo "Filebeat is already installed in this node."
+        exit 1;
+    fi      
     
     logger "Installing Filebeat..."
     
