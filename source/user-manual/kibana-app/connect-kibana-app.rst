@@ -5,10 +5,30 @@
 Setting up the Wazuh Kibana plugin
 ==================================
 
-Follow these steps to register the Wazuh API with the Wazuh Kibana plugin:
+During the installation process new users and roles were added, this section aims to guide the user on how to assign each user their respective roles. 
 
-1. Open Kibana in your desired web browser. Then, from the left menu, click on the Wazuh Kibana plugin icon.
-2. Open the *Settings* page with the gear icon on the top right corner (the first time you open the plugin, you’ll be automatically redirected to Settings). Fill in the required fields in the form and click *Save*.
-3. Now, the plugin is ready to be used.
+If you want to learn more about the Wazuh Kibana plugin capabilities, go to the :ref:`kibana_features` section.
 
-If you want to learn more about the Wazuh Kibana plugin capabilities, go to the :ref:`kibana_features` section to see useful information about it.
+First, open the Wazuh Kibana plugin menu and select ``Security`` option followed by ``Users``.
+
+        .. thumbnail:: ../../images/kibana-app/security_users.png
+            :align: center
+
+
+Select the ``wazuh_admin`` user:
+
+        .. thumbnail:: ../../images/kibana-app/wazuh_admin.png
+            :align: center
+ 
+
+Assign the ``administrator`` role to this user: 
+
+        .. thumbnail:: ../../images/kibana-app/administrator_role.png
+            :align: center
+
+
+Analogously, select ``wazuh_user`` and assign the ``readonly`` mode: 
+
+        .. thumbnail:: ../../images/kibana-app/readonly_role.png
+            :align: center
+    

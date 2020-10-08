@@ -7,9 +7,9 @@
 Step-by-step installation
 =========================
 
-This document guides through the installation of the Wazuh server and Open Distro for Elasticsearch components in an all-in-one deployment. This deployment type is meant for small production environments and testing purposes. 
+This document guides through the installation of the Wazuh and Open Distro for Elasticsearch components in an all-in-one deployment. This deployment type is meant for small production environments and testing purposes. 
 
-This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :ref:`here <packages>`. 
+This guide provides instructions to configure the official repositories to do the installations, alternatively, the installation can be done using packages. A list of all the available packages can be found :ref:`here <packages>`. 
 
 .. note:: Root user privileges are required to run all the commands described below.
 
@@ -28,7 +28,9 @@ Open Distro for Elasticsearch requires the Java Development Kit and other packag
 Installing Wazuh
 ----------------
 
-The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager and the Wazuh API. The first step to set up Wazuh is to add the Wazuh repository to the server.
+The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API and Filebeat. 
+
+The first step to set up Wazuh is to add the Wazuh repository to the server.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
