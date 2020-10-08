@@ -34,7 +34,7 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
 .. note::
   By default the type of the network interface is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
-In order to connect to the Kibana web user interface, login with ``https://OVA_IP_ADDRESS``.
+In order to connect to the Kibana web user interface, login with ``https://OVA_IP_ADDRESS`` and the user and password are ``admin:admin``.
 
 Once the virtual machine is imported and running, the next step consist on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
 
