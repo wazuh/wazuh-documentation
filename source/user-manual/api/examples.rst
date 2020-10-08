@@ -22,13 +22,16 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
     :class: output
 
     {
-        "title": "Wazuh API",
-        "api_version": "4.0.0",
-        "revision": 4000,
-        "license_name": "GPL 2.0",
-        "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-        "hostname": "wazuh-master",
-        "timestamp": "2020-05-25T07:05:00+0000"
+        "data": {
+            "title": "Wazuh API",
+            "api_version": "4.0.0",
+            "revision": 4000,
+            "license_name": "GPL 2.0",
+            "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+            "hostname": "wazuh-master",
+            "timestamp": "2020-05-25T07:05:00+0000"
+        },
+        "error": 0
     }
 
 
@@ -50,7 +53,8 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "API configuration was successfully updated. Settings require restarting the API to be applied."
+       "message": "API configuration was successfully updated. Settings require restarting the API to be applied.",
+       "error": 0
     }
 
 
@@ -75,7 +79,8 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User was successfully created"
+      "message": "User was successfully created",
+      "error": 0
     }
 
 
@@ -110,7 +115,8 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
           "010"
         ]
       },
-      "message": "All selected groups were deleted"
+      "message": "All selected groups were deleted",
+      "error": 0
     }
 
 .. _api_python-label:
@@ -159,7 +165,7 @@ Code:
     login_url = f"{base_url}/security/user/authenticate"
     basic_auth = f"{user}:{password}".encode()
     headers = {'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
-    headers['Authorization'] = f'Bearer {get_response(login_url, headers)["token"]}'
+    headers['Authorization'] = f'Bearer {get_response(login_url, headers)["data"]["token"]}'
 
     #Request
     response = get_response(base_url + endpoint, headers)
@@ -186,7 +192,8 @@ Code:
             "total_affected_items": 2,
             "total_failed_items": 0
         },
-        "message": "All selected agents information was returned"
+        "message": "All selected agents information was returned",
+        "error": 0
     }
 
 
@@ -243,7 +250,7 @@ Code:
 
     Ignore-SelfSignedCerts
     $token_response = Invoke-RestMethod -Uri $login_url -Headers $headers
-    $headers["Authorization"] = "Bearer " + $token_response.token
+    $headers["Authorization"] = "Bearer " + $token_response.data.token
 
     # Request
     try{

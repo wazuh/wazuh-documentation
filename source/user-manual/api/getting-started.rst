@@ -44,7 +44,12 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
     .. code-block:: none
         :class: output
 
-        {"token": "<YOUR_JWT_TOKEN>"}
+        {
+            "data": {
+                "token": "<YOUR_JWT_TOKEN>"
+            },
+            "error": 0
+        }
 
 #. Send an *API request* to confirm that everything is working as expected:
 
@@ -56,13 +61,16 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
         :class: output
 
         {
-            "title": "Wazuh API",
-            "api_version": "4.0.0",
-            "revision": 4000,
-            "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-            "hostname": "wazuh-master",
-            "timestamp": "2020-05-25T07:05:00+0000"
+            "data": {
+                "title": "Wazuh API",
+                "api_version": "4.0.0",
+                "revision": 4000,
+                "license_name": "GPL 2.0",
+                "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+                "hostname": "wazuh-master",
+                "timestamp": "2020-05-25T07:05:00+0000"
+            },
+            "error": 0
         }
 
 
@@ -111,7 +119,7 @@ The following scripts provide API login examples using default (`false`) or plai
 
     print("\nLogin request ...\n")
     response = requests.get(login_url, headers=login_headers, verify=False)
-    token = json.loads(response.content.decode())['token']
+    token = json.loads(response.content.decode())['data']['token']
     print(token)
 
     # New authorization header with the JWT token we got
@@ -146,13 +154,16 @@ Running the script provides a result similar to the following:
 
     Getting API information:
     {
-       "title": "Wazuh API REST",
-       "api_version": "4.0.0",
-       "revision": 4000,
-       "license_name": "GPL 2.0",
-       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-       "hostname": "wazuh-master",
-       "timestamp": "2020-08-19T09:20:02+0000"
+       "data": {
+          "title": "Wazuh API REST",
+          "api_version": "4.0.0",
+          "revision": 4000,
+          "license_name": "GPL 2.0",
+          "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+          "hostname": "wazuh-master",
+          "timestamp": "2020-08-19T09:20:02+0000"
+       },
+       "error": 0
     }
 
     Getting agents status summary:
@@ -163,7 +174,8 @@ Running the script provides a result similar to the following:
           "never_connected": 2,
           "pending": 0,
           "total": 13
-       }
+       },
+       "error": 0
     }
 
     End of the script.
@@ -208,13 +220,16 @@ Running the script provides a result similar to the following:
     Getting default information:
 
     {
-       "title": "Wazuh API REST",
-       "api_version": "4.0.0",
-       "revision": 4000,
-       "license_name": "GPL 2.0",
-       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-       "hostname": "wazuh-master",
-       "timestamp": "2020-08-18T08:36:56+0000"
+       "data": {
+          "title": "Wazuh API REST",
+          "api_version": "4.0.0",
+          "revision": 4000,
+          "license_name": "GPL 2.0",
+          "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+          "hostname": "wazuh-master",
+          "timestamp": "2020-08-19T09:20:02+0000"
+       },
+       "error": 0
     }
 
     Getting /agents/summary/os:
@@ -226,7 +241,8 @@ Running the script provides a result similar to the following:
           "never_connected": 2,
           "pending": 0,
           "total": 13
-       }
+       },
+       "error": 0
     }
 
     End of the script.
@@ -254,19 +270,23 @@ Here are some of the basic concepts related to making API requests and understan
 
 - All responses are in *JSON format* and most of them follow this structure:
 
-    +---------+----------------------+-----------------------------------------------------------------------+
-    | Field   | Sub-field            | Description                                                           |
-    +=========+======================+=======================================================================+
-    | data    | affected_items       | List with each of the successfully affected items in the request.     |
-    |         +----------------------+-----------------------------------------------------------------------+
-    |         | total_affected_items | Total number of successfully affected items.                          |
-    |         +----------------------+-----------------------------------------------------------------------+
-    |         | total_failed_items   | Total number of failed items.                                         |
-    |         +----------------------+-----------------------------------------------------------------------+
-    |         | failed_items         | List containing each of the failed items in the request.              |
-    +---------+----------------------+-----------------------------------------------------------------------+
-    | message |                      | Result description.                                                   |
-    +---------+----------------------+-----------------------------------------------------------------------+
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | Field   | Optional Sub-fields  | Description                                                                                                    |
+    +=========+======================+================================================================================================================+
+    | data    | affected_items       | List with each of the successfully affected items in the request.                                              |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_affected_items | Total number of successfully affected items.                                                                   |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_failed_items   | Total number of failed items.                                                                                  |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | failed_items         | List containing each of the failed items in the request.                                                       |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | message |                      | Result description.                                                                                            |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | error   |                      | For HTTP ``200`` responses determines if the response was complete (``0``), partial (``2``) or failed (``1``). |
+    |         |                      |                                                                                                                |
+    |         |                      | For HTTP ``4xx`` or ``5xx`` responses determines the error code related to the failure.                        |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
 
 
     - Example response without errors:
@@ -283,8 +303,9 @@ Here are some of the basic concepts related to making API requests and understan
             "total_affected_items": 2,
             "failed_items": [],
             "total_failed_items": 0
-          }
+          },
           "message": "Restart request was sent to all specified nodes",
+          "error": 0
         }
 
     - Example response with errors:
@@ -322,7 +343,45 @@ Here are some of the basic concepts related to making API requests and understan
               }
             ]
           },
-          "message": "Restart command was not sent to any agent"
+          "message": "Restart command was not sent to any agent",
+          "error": 1
+        }
+
+   - Example of partial response:
+
+    .. code-block:: json
+        :class: output
+
+        {
+          "data": {
+            "affected_items": [
+              {
+                "ip": "10.0.0.9",
+                "id": "001",
+                "name": "Carlos",
+                "dateAdd": "2020-10-07T08:14:32Z",
+                "node_name": "unknown",
+                "registerIP": "10.0.0.9",
+                "status": "never_connected"
+              }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 1,
+            "failed_items": [
+              {
+                "error": {
+                  "code": 1701,
+                  "message": "Agent does not exist",
+                  "remediation": "Please, use `GET /agents?select=id,name` to find all available agents"
+                },
+                "id": [
+                  "005"
+                ]
+              }
+            ]
+          },
+          "message": "Some agents information was not returned",
+          "error": 2
         }
 
     - Example response to report an unauthorized request (code 401):
@@ -347,7 +406,7 @@ Here are some of the basic concepts related to making API requests and understan
           "detail": "Permission denied: Resource type: *:*",
           "status": 403,
           "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
-          "code": 4000,
+          "error": 4000,
           "dapi_errors": {
             "master-node": {
               "error": "Permission denied: Resource type: *:*"
@@ -410,7 +469,8 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected rules were returned"
+       "message": "All selected rules were returned",
+       "error": 0
     }
 
 
@@ -477,7 +537,8 @@ It can also be helpful to know which rules matching a specific criteria are avai
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All selected rules were returned"
+      "message": "All selected rules were returned",
+      "error": 0
     }
 
 
@@ -536,7 +597,8 @@ The API can be used to show information about all monitored files by syscheck. T
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent were returned"
+      "message": "FIM findings of the agent were returned",
+      "error": 0
     }
 
 You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
@@ -573,7 +635,8 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent were returned"
+      "message": "FIM findings of the agent were returned",
+      "error": 0
     }
 
 .. code-block:: console
@@ -608,7 +671,8 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent were returned"
+      "message": "FIM findings of the agent were returned",
+      "error": 0
     }
 
 Getting information about the manager
@@ -650,7 +714,8 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Processes status were successfully read in specified node"
+      "message": "Processes status were successfully read in specified node",
+      "error": 0
     }
 
 
@@ -691,7 +756,8 @@ You can even dump the manager's current configuration with the request below (re
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Configuration was successfully read in specified node"
+      "message": "Configuration was successfully read in specified node",
+      "error": 0
     }
 
 
@@ -733,7 +799,8 @@ This enumerates 2 **active** agents:
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All selected agents information was returned"
+      "message": "All selected agents information was returned",
+      "error": 0
     }
 
 
@@ -750,7 +817,8 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
       "data": {
         "id": "013",
         "key": "MDEzIE5ld0hvc3RfMiAxMC4wLjEwLjEyIDkzOTE0MmE4OTQ4YTNlMzA0ZTdiYzVmZTRhN2Q4Y2I1MjgwMWIxNDI4NWMzMzk3N2U5MWU5NGJiMDc4ZDEzNjc="
-      }
+      },
+      "error": 0
     }
 
 
