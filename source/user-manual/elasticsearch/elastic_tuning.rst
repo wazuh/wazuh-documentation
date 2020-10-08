@@ -78,82 +78,93 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 Memory locking
 --------------
 
-Elasticsearch performs poorly when the system is swapping the memory. It is vitally important to the health of your node that none of the JVM is ever swapped out to disk.
+Elasticsearch performs poorly when the system is swapping the memory. It is vitally important to the health of the node that none of the JVM is ever swapped out to disk. The following steps show how to set the ``bootstrap.memory_lock`` setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
 
-In this guide, we will show how to set the *bootstrap.memory_lock* setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
+#. Set ``bootstrap.memory_lock``:
 
-#. Set ``bootstrap.memory_lock``
+    Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
 
-  Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
+    .. code-block:: yaml
 
-  .. code-block:: yaml
+      bootstrap.memory_lock: true
 
-    bootstrap.memory_lock: true
+#. Edit the limit of system resources:
 
-#. Edit the limit of system resources
+    Where to configure systems settings depends on which package and operating system used for the Elasticsearch installation.
 
-  Where to configure systems settings depends on which package and operating system you choose to use for the Elasticsearch installation.
+    .. tabs::
 
-  - In a case where **systemd** is used, system limits need to be specified via systemd. To do this, create the folder executing the command:
+        .. group-tab:: Systemd
 
-  .. code-block:: console
+          In a case where **systemd** is used, system limits need to be specified via systemd. To do this, create the folder executing the command:
 
-    # mkdir -p /etc/systemd/system/elasticsearch.service.d/
+          .. code-block:: console
 
-  Then, in the new directory, add a file called ``elasticsearch.conf`` and specify any changes in that file:
+            # mkdir -p /etc/systemd/system/elasticsearch.service.d/
 
-  .. code-block:: ini
+          Then, in the new directory, add a file called ``elasticsearch.conf`` and specify any changes in that file:
 
-    [Service]
-    LimitMEMLOCK=infinity
+          .. code-block:: ini
 
-  In other cases, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
+            [Service]
+            LimitMEMLOCK=infinity
 
-  .. code-block:: bash
+        .. group-tab:: SysV Init
 
-    MAX_LOCKED_MEMORY=unlimited
+          Edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
-#. Limit memory
+          .. code-block:: bash
 
-  The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
+            MAX_LOCKED_MEMORY=unlimited
 
-  There are two rules to apply when setting the Elasticsearch heap size:
+#. Limit memory:
 
-    - Use no more than 50% of available RAM.
-    - Use no more than 32 GB.
+    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
 
-  In addition, it is important to take into account the memory usage of the operating system, services and software that are running on the host.
+    There are two rules to apply when setting the Elasticsearch heap size:
 
-  By default, Elasticsearch is configured with a 1 GB heap. You can change the heap size via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
+      - Use no more than 50% of available RAM.
+      - Use no more than 32 GB.
 
-  .. code-block:: yaml
+    In addition, it is important to take into account the memory usage of the operating system, services and software that are running on the host.
 
-    # Xms represents the initial size of total heap space
-    # Xmx represents the maximum size of total heap space
+    By default, Elasticsearch is configured with a 1 GB heap. It can be changed via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
 
-    -Xms4g
-    -Xmx4g
+    .. code-block:: yaml
 
-  .. warning::
+      # Xms represents the initial size of total heap space
+      # Xmx represents the maximum size of total heap space
 
-    Ensure that the min (Xms) and max (Xmx) sizes are the same to prevent JVM heap resizing at runtime as this is a very costly process.
+      -Xms4g
+      -Xmx4g
 
-#. Restart Elasticsearch
+    .. warning::
 
-  a) For Systemd:
+      The values min ``(Xms)`` and max ``(Xmx)`` sizes must be the same to prevent JVM heap resizing at runtime as this is a very costly process.
 
-    .. code-block:: console
+#. Restart Elasticsearch:
 
-      # systemctl daemon-reload
-      # systemctl restart elasticsearch
+.. tabs::
 
-  b) For SysV Init:
 
-    .. code-block:: console
+    .. group-tab:: Systemd Systemd
 
-      # service elasticsearch restart
 
-After starting Elasticsearch, you can see whether this setting was successfully applied by checking the value of ``mlockall`` in the output of the next request:
+      .. code-block:: console
+
+        # systemctl daemon-reload
+        # systemctl restart elasticsearch
+
+
+
+    .. group-tab:: Systemd SysV Init
+
+
+      .. code-block:: console
+
+        # service elasticsearch restart
+
+After starting Elasticsearch, run the following request to verify that the setting was successfully changed by checking the value of ``mlockall``:
 
 .. code-block:: console
 
@@ -172,7 +183,12 @@ After starting Elasticsearch, you can see whether this setting was successfully 
       }
     }
 
-If the output of the ``"mlockall"`` field is **false**, the request has failed. You will also find the line *Unable to lock JVM Memory* in the logs (located at ``/var/log/elasticsearch/elasticsearch.log``).
+If the output of the ``"mlockall"`` field is **false**, the request failed.  In addition, the following line will appear in ``/var/log/elasticsearch/elasticsearch.log``:
+
+.. code-block:: none
+  :class: output
+
+  Unable to lock JVM Memory
 
 Reference:
 
@@ -187,126 +203,124 @@ Shards and replicas
 
 Elasticsearch provides the ability to split an index into multiple segments called shards. Each shard is, in and of itself, a fully-functional and independent "index" that can be hosted on any node in the cluster. Sharding is important for two primary reasons:
 
-- you can horizontally split/scale your content volume, and
+- Horizontally scallation.
 
-- you can distribute and parallelize operations across shards which increases performance and throughput.
+- Distribute and parallelize operations across shards, increasing the performance and throughput.
 
-Also, Elasticsearch allows you to make one or more copies of your index’s shards into what are called replica shards, or replicas for short. Replication is important for two primary reasons:
+Also, Elasticsearch allows to make one or more copies of the index’s shards into what are called replica shards, or replicas for short. Replication is important for two primary reasons:
 
-- it provides high availability in case a shard or node fails, and
+- Provides high availability in case a shard or node failure.
 
-- it allows you to scale out your search volume and throughput, since searches can be executed on all replicas in parallel.
+- Allows to scale out the search volume and throughput, since searches can be executed on all replicas in parallel.
 
 .. warning::
 
-  The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may change the number of *replicas* dynamically, however, you cannot change the number of *shards* after-the-fact.
+  The number of shards and replicas can be defined per index at the time the index is created. After the index is created, the number of *replicas* will have to be changed dynamically, however, the number of *shards* after-the-fact cannot be changed.
 
-How many shards should my index have?
+How many shards should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As it is not possible to *reshard* (changing the number of shards) without reindexing, careful consideration should be given to how many shards you will need *before* the first index is created. The number of nodes that you plan in your installation will influence how many shards you should plan for. In general, the most optimal performance will be realized by using the same number of shards as there are nodes. So, a cluster with three nodes should have three shards, while a cluster with one node would only need one shard.
+As it is not possible to *reshard* (changing the number of shards) without reindexing, careful consideration should be given to how many shards will be needed *before* the first index is created. The number of nodes that will be on the installation will influence how many shards should be planned. In general, the most optimal performance will be realized by using the same number of shards as nodes are. So, a cluster with three nodes should have three shards, while a cluster with one node would only need one shard.
 
-How many replicas should my index have?
+How many replicas should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's look at some options for how a cluster with three nodes and three shards could be set up:
+Here is an example about how a cluster with three nodes and three shards could be set up:
 
-- No replica: Each node has one shard. If a node goes down, we will be left with an incomplete index of two shards.
+- **No replica:** Each node has one shard. If a node goes down, we will be left with an incomplete index of two shards.
 
-- One replica: Each node has one shard and one replica. If a node goes down, we will still have a complete index.
+- **One replica:** Each node has one shard and one replica. If a node goes down, there will still be a complete index.
 
-- Two replicas: Each node has one shard and two replicas (the full index). With this set up, the cluster can still function even if two nodes go down. This appears to be the best solution, however, it does increase the storage requirements.
+- **Two replicas:** Each node has one shard and two replicas (the full index). With this set up, the cluster can still function even if two nodes go down. This appears to be the best solution, however, it increases the storage requirements.
 
 Setting the number of shards and replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The default installation of :ref:`Elastic Stack <installation_guide>` will configure each index with five primary shards and one replica.
+The default installation of :ref:`Elasticsearch <installation_guide>` will configure each index with 3 primary shards and no replicas.
 
-If you want to change these settings, you will need to edit the Elasticsearch template. In the following example, the proper values for shards and replicas are configured in a cluster with only one node.
+To change these settings,the Elasticsearch's template will have to be edited. In the following example, the proper values for shards and replicas are configured in a cluster with only one node.
 
 .. warning::
 
-  If your index has already been created, you will have to `reindex <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ after editing the template.
+  If the index has already been created, it must be `reindexed <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ after editing the template.
 
 #. Download the Wazuh Elasticsearch template:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
+      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
 #. Edit the template in order to set one shard with no replicas:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # vi w-elastic-template.json
+      # vi w-elastic-template.json
 
-  .. code-block:: json
-    :class: output
+    .. code-block:: json
+      :class: output
 
-    {
-      "order": 1,
-      "index_patterns": ["wazuh-alerts-3.x-*"],
-      "settings": {
-        "index.refresh_interval": "5s",
-        "index.number_of_shards": "3",
-        "index.number_of_replicas": "0",
-        "index.auto_expand_replicas": "0-1",
-        "index.mapping.total_fields.limit": 2000
-      },
-      "mappings": {
-      "...": "..."
+      {
+        "order": 1,
+        "index_patterns": ["wazuh-alerts-3.x-*"],
+        "settings": {
+          "index.refresh_interval": "5s",
+          "index.number_of_shards": "3",
+          "index.number_of_replicas": "0",
+          "index.auto_expand_replicas": "0-1",
+          "index.mapping.total_fields.limit": 2000
+        },
+        "mappings": {
+        "...": "..."
+        }
       }
-    }
 
-  .. note::
+    .. warning::
 
-    We set "order" to "1", otherwise Filebeat will overwrite your template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
+      The value "order" is setted to "1", otherwise Filebeat will overwrite the existing template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
 
 #. Load the template:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl -X PUT "http://localhost:9200/_template/wazuh-custom" -H 'Content-Type: application/json' -d @w-elastic-template.json
+      # curl -X PUT "http://localhost:9200/_template/wazuh-custom" -H 'Content-Type: application/json' -d @w-elastic-template.json
 
-  .. code-block:: json
-    :class: output
+    .. code-block:: json
+      :class: output
 
-    { "acknowledged" : true }
+      { "acknowledged" : true }
 
-#. *Optional*. Confirm your configuration was updated successfully:
+#. *Optional*. Confirm that the configuration was updated successfully:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
+      # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
 
-  .. code-block:: json
-    :class: output
+    .. code-block:: json
+      :class: output
 
-    {
-      "wazuh-custom" : {
-        "settings" : {
-          "index" : {
-            "mapping" : {
-              "total_fields" : {
-                "limit" : "2000"
-              }
-            },
-            "refresh_interval" : "5s",
-            "number_of_shards" : "3",
-            "auto_expand_replicas" : "0-1",
-            "number_of_replicas" : "1"
+      {
+        "wazuh-custom" : {
+          "settings" : {
+            "index" : {
+              "mapping" : {
+                "total_fields" : {
+                  "limit" : "2000"
+                }
+              },
+              "refresh_interval" : "5s",
+              "number_of_shards" : "3",
+              "auto_expand_replicas" : "0-1",
+              "number_of_replicas" : "1"
+            }
           }
         }
       }
-    }
 
 
 Changing the number of replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of replicas can be changed dynamically using the Elasticsearch API.
-
-In a cluster with one node, the number of replicas should be set to zero:
+The number of replicas can be changed dynamically using the Elasticsearch API. In a cluster with one node, the number of replicas should be set to zero:
 
 .. code-block:: none
 
@@ -316,7 +330,6 @@ In a cluster with one node, the number of replicas should be set to zero:
       "number_of_replicas" : 0
     }
   }'
-
 
 More information about configuring and shards and replicas can be found in the :ref:`Kibana configuration section <kibana_config_file>`.
 
