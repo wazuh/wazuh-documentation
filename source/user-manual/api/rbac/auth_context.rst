@@ -23,7 +23,11 @@ With this method, telling the system what permissions to have is possible. This 
                 }
         }'
 
-        {"token": "TOKEN"}
+        {
+                "data": {
+                        "token": "TOKEN"
+                }
+        }
 
 .. thumbnail:: ../../../images/rbac/auth_context_login.png
     :align: center

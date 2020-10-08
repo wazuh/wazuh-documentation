@@ -21,7 +21,9 @@ Here is an example of how to change RBAC mode using a cURL command. It is recomm
     :class: output
 
     {
-       "message": "Configuration was successfully updated"
+       "message": "Configuration was successfully updated",
+       "error": 0
+
     }
 
 It is possible to change other non-RBAC settings such as the duration of JWT tokens, as well as to check the current configuration using the ``GET /security/config`` endpoint. Additionally, default settings can be restored using the ``DELETE /security/config`` endpoint.
@@ -90,7 +92,8 @@ The API response will be something similar to this. The highlighted ID should be
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Policy was successfully created"
+      "message": "Policy was successfully created",
+      "error": 0
     }
 
 This will create a policy with permission to read information related to agents with ids ``001``, ``002``, ``003`` and ``004``. Additional policies can be created as long as they are not duplicated. Any policy could be modified at any given time if needed, so for example new agents could be added to an existing policy.
@@ -138,7 +141,8 @@ The response body would be similar to this one. It is important to remember the 
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Role was successfully created"
+      "message": "Role was successfully created",
+      "error": 0
     }
 
 .. _api_rbac_user:
@@ -181,7 +185,8 @@ The output would look like below:
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User was successfully created"
+      "message": "User was successfully created",
+      "error": 0
     }
 
 Create a new rule
@@ -225,7 +230,8 @@ Following the previous example, the "customer_x_agents" policy could be assigned
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All policies were linked to role 8"
+      "message": "All policies were linked to role 8",
+      "error": 0
     }
 
 Now it is possible to modify the permissions of the whole "sales-team" group by adding new policies or modifying the existing ones, instead of having to assign each permission for each member of the team individually.
@@ -263,7 +269,8 @@ To assign any rule, it is necessary both the ID of the rule and the ID of the ro
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All rules were linked to role 8"
+      "message": "All rules were linked to role 8",
+      "error": 0
     }
 
 Assign roles to a user
@@ -298,7 +305,8 @@ Following the previous example, it is possible to assign a new user named "sales
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All roles were linked to user sales-member-1"
+      "message": "All roles were linked to user sales-member-1",
+      "error": 0
     }
 
 The user "sales-member-1" now belongs to the "sales-team" role, so it could perform the actions established in its policies from now on.

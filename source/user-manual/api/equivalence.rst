@@ -6,7 +6,7 @@
 Migrating from the Wazuh API 3.X
 ================================
 
-Wazuh API 4.0 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields, most responses will have the following structure instead:
+Wazuh API 4.0 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields. Most responses will have the following structure instead:
 
 .. code-block:: json
     :class: output
@@ -17,8 +17,9 @@ Wazuh API 4.0 introduces several new endpoints and also modifies or removes some
           "total_affected_items": 0,
           "total_failed_items": 0,
           "failed_items": [],
-          "message": ""
-       }
+       },
+       "message": "",
+       "error": 0
     }
 
 
@@ -51,7 +52,8 @@ However, using the following API calls it is easy to create new users and assign
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User was successfully created"
+      "message": "User was successfully created",
+      "error": 0
     }
 
 **Assign administrator role**
@@ -79,7 +81,8 @@ However, using the following API calls it is easy to create new users and assign
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All roles were linked to user <wazuh>"
+      "message": "All roles were linked to user <wazuh>",
+      "error": 0
     }
 
 Equivalence table
