@@ -104,10 +104,12 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
           Then, in the new directory, add a file called ``elasticsearch.conf`` and specify any changes in that file:
 
-          .. code-block:: ini
+          .. code-block:: console
 
+            # cat > /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf << EOF
             [Service]
             LimitMEMLOCK=infinity
+            EOF            
 
         .. group-tab:: SysV Init
 
@@ -119,16 +121,12 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 #. Limit memory:
 
-    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit memory usage and prevent this situation.
-
-    There are two rules to apply when setting the Elasticsearch heap size:
+    The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit memory usage and prevent this situation. There are two rules to apply when setting the Elasticsearch heap size:
 
       - Use no more than 50% of available RAM.
       - Use no more than 32 GB.
 
-    In addition, it is important to take into account the memory usage of the operating system, services, and software that are running on the host.
-
-    By default, Elasticsearch is configured with a 1 GB heap. It can be changed via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
+    In addition, it is important to take into account the memory usage of the operating system, services, and software that are running on the host. By default, Elasticsearch is configured with a 1 GB heap. It can be changed via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
 
     .. code-block:: yaml
 
@@ -289,7 +287,9 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
     .. code-block:: console
 
-      # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
+      # curl "https://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings" -k -u admin:admin
+
+    In case of having changed the admin's user credentials, the ``admin:admin`` must be modified in consequence.
 
     .. code-block:: json
       :class: output
