@@ -55,7 +55,7 @@ $ossec_auth_force_insert
 
 
 $ossec_auth_force_time
-  When forcing to remove old agents with the same name or IP address, this options specifies that the deletion will be performed only if the agent’s keepalive has more than the defined number of seconds.
+  When forcing to remove old agents with the same name or IP address, this options specify that the deletion will be performed only if the agent’s keepalive has more than the defined number of seconds.
 
   `Default 0`
 
@@ -174,7 +174,7 @@ $ossec_emailfrom
   `Default ossec@${domain}`
 
 $ossec_email_maxperhour
-  Global Configuration with maximum number of emails per hour.
+  Global Configuration with the maximum number of emails per hour.
 
   `Default 12`
 
@@ -189,7 +189,7 @@ $ossec_email_idsname
   `Default undef`
 
 $ossec_white_list
-  Allow white listing of IP addresses.
+  Allow white-listing of IP addresses.
 
   `Default []`
 
@@ -765,7 +765,7 @@ $wodle_ciscat_disabled
   `Default yes`
 
 $wodle_ciscat_timeout
-  Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+  Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
   `Default 1800`
 
