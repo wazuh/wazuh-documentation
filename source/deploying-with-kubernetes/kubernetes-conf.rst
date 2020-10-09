@@ -298,7 +298,7 @@ Agents
 
 Wazuh agents are designed to monitor hosts. To start using them:
 
-1. :doc:`Install the agent <../../installation-guide/installing-wazuh-agent/index>`.
+1. :ref:`Install the agent <installation_agents>`.
 
 
 2. Now, register the agent using the :doc:`registration service <../../user-manual/registering/index>`.

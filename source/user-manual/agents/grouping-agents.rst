@@ -34,7 +34,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
+      # curl -u foo:bar -X PUT "https://localhost:55000/agents/002/group/dbms?pretty"
 
    An agent's group assignment can be checked using one of the following commands:
 
@@ -58,7 +58,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -u foo:bar -X GET "http://localhost:55000/agents/groups/dbms?pretty"
+      # curl -u foo:bar -X GET "https://localhost:55000/agents/groups/dbms?pretty"
 
 
 2. Once a group is created, its ``agent.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, the file to be edited is located at ``/var/ossec/etc/shared/dbms/agent.conf`` and each agent belonging to this group will receive this file.
@@ -98,7 +98,7 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 
     .. code-block:: console
 
-        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
+        # curl -u foo:bar -X PUT "https://localhost:55000/agents/001/group/webserver?pretty"
 
     .. code-block:: json
         :class: output
@@ -110,7 +110,7 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 
     .. code-block:: console
 
-        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
+        # curl -u foo:bar -X PUT "https://localhost:55000/agents/001/group/apache?pretty"
 
     .. code-block:: json
         :class: output
@@ -124,7 +124,7 @@ After that, we can ask the **API** about groups which an agent belongs:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
+        # curl -u foo:bar -X GET "https://localhost:55000/agents/001?pretty"
 
     .. code-block:: json
         :emphasize-lines: 6,7,8,9,10
@@ -294,7 +294,7 @@ Finally, to check the synchronization status of the group configuration for a si
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
+        # curl -u foo:bar -X GET "https://localhost:55000/agents/001/group/is_sync?pretty"
 
     .. code-block:: json
         :class: output

@@ -588,6 +588,78 @@ header .menuweb-bar .menu-item a {
   background-repeat: repeat-x;
 }
 
+.deployment-types {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 3rem;
+  margin: 2rem auto;
+}
+
+.deployment-types .item-deployment {
+  border: 1px solid #0094ce;
+  border-radius: 3rem;
+  padding: 1rem;
+}
+
+.deployment-types .item-deployment h3 {
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(40, 40, 40, 0.2);
+  padding: 0.5rem;
+}
+
+.deployment-types .item-deployment .detailed img {
+  position: absolute;
+  z-index: 99;
+  width: 100% !important;
+  opacity: 0;  
+  border: none
+}
+
+.agent-os {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem auto;
+  grid-gap: 1rem;
+}
+
+.agent-os .item-agent {
+  border: 1px solid #0094ce;
+  border-radius: 2em;
+  padding: 1rem;
+  position: relative;
+}
+
+.agent-os .item-agent p {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+
+.agent-os .item-agent:hover {
+  background: #0094ce;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover p {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover img {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover {
+  border: none;
+}
+
 .content-card {
   margin-bottom: 0.5em;
 }
@@ -1460,6 +1532,14 @@ footer a:focus,
 .sphinx-tabs.container {
   max-width: 100%;
   padding: 0;
+}
+
+.screenshots#deployment-types img{
+  border: none;
+}
+
+.screenshots#deployment-types {
+  margin-bottom: 2rem;
 }
 
 main li.toctree-l1 a {
@@ -2773,6 +2853,15 @@ div.highlight pre {
     font-size: 1rem;
   }
 
+  .deployment-types {
+    width: 80%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agent-os {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
   .edit-repo-wrapper {
     position: absolute;
     right: 0;
@@ -3544,6 +3633,10 @@ div.highlight pre {
             border-top-left-radius: 5px;
           }
 
+          .deployment-types .item-deployment h3 {
+            font-size: 18px;
+          }
+
 					#header-default .search_main {
 						margin-left: 345px;
 					}
@@ -3593,7 +3686,12 @@ div.highlight pre {
 		width: 100%;
 		max-width: calc(100% - 316px);
 		flex: none;
-	}
+  }
+  
+  .deployment-types .item-deployment h3 {
+    font-size: 23px;
+  }
+
 }
 
 @media (min-width: 1921px) {

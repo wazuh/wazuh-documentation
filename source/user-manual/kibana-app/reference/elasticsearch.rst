@@ -5,13 +5,13 @@
 Elasticsearch indices
 =====================
 
-Once you've installed the Wazuh app some new indices will be generated in Elasticsearch. Let's see a more in deep view about them.
+Once you've installed the Wazuh Kibana plugin some new indices will be generated in Elasticsearch. Let's see a more in deep view about them.
 The user shouldn't take care about them and shouldn't modify them unless the Wazuh team suggest it.
 
 The ``.wazuh`` index
 --------------------
 
-This index is used by the Wazuh app to store Wazuh API credentials and useful information about the Wazuh manager currently being used.
+This index is used by the Wazuh Kibana plugin to store Wazuh API credentials and useful information about the Wazuh manager currently being used.
 The next document example shows you how we store a Wazuh API entry. This index could grow up if you add more Wazuh API entries.
 
 .. code-block:: json
@@ -42,7 +42,7 @@ The next document example shows you how we store a Wazuh API entry. This index c
 The ``.wazuh-version`` index
 ----------------------------
 
-This index has only one document and it includes useful information and it's being used by internal Wazuh app purposes. It includes information such as your current version or your installation date. The next example shows you how we store that information.
+This index has only one document and it includes useful information and it's being used by internal Wazuh Kibana plugin purposes. It includes information such as your current version or your installation date. The next example shows you how we store that information.
 
 .. code-block:: json
 
@@ -69,7 +69,7 @@ If you want to change the name of these indices with a custom one, you can follo
 The ``wazuh-monitoring-3.x-`` indices
 -------------------------------------
 
-They are auto-generated and they store the Wazuh agents statuses periodically. The Wazuh app is which will send data to Elasticsearch and will create an index per day. This feature can be disabled. You can also adjust the insertion frequency. These indices are mainly used by the ``Agents status`` visualization from the Overview dashboard in the Wazuh app.
+They are auto-generated and they store the Wazuh agents statuses periodically. The Wazuh Kibana plugin is which will send data to Elasticsearch and will create an index per day. This feature can be disabled. You can also adjust the insertion frequency. These indices are mainly used by the ``Agents status`` visualization from the Overview dashboard in the Wazuh Kibana plugin.
 
 More information
 ----------------

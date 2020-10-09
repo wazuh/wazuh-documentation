@@ -5,12 +5,12 @@
 Troubleshooting
 ===============
 
-This section collects common installation or usage problems on the Wazuh app, and some basic steps to solve them.
+This section collects common installation or usage problems on the Wazuh Kibana plugin, and some basic steps to solve them.
 
-"Incorrect Kibana version in plugin [wazuh]" when installing the app
---------------------------------------------------------------------
+"Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
+------------------------------------------------------------------------------------
 
-The Wazuh app has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
+The Wazuh Kibana plugin has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
 
 .. code-block:: javascript
 
@@ -18,7 +18,7 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
     "version": "6.7.2"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
+Your Wazuh Kibana plugin must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
 You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -37,12 +37,12 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
   {"acknowledged":true}
 
 .. warning::
-  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts>`.
+  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
 
 Wazuh API seems to be down
 --------------------------
 
-It means your Wazuh API could be unavailable. Since the Wazuh app needs data from the Wazuh API, it must be available for the Wazuh app.
+It means your Wazuh API could be unavailable. Since the Wazuh Kibana plugin needs data from the Wazuh API, it must be available for the Wazuh Kibana plugin.
 
 If you are using ``systemd``, please check the status as follow:
 
@@ -64,8 +64,8 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 If the *curl* command fails but the Wazuh API is running properly, it means you have a connectivity problem between servers.
 
-I don't see alerts in the Wazuh app
------------------------------------
+I don't see alerts in the Wazuh Kibana plugin
+---------------------------------------------
 
 The first step is to check if there are alerts in Elasticsearch.
 
@@ -86,7 +86,7 @@ There should be two processes reading the ``alerts.json`` file: ``ossec-analysis
 API version mismatch. Expected vX.Y.Z
 -------------------------------------
 
-The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
+The Wazuh Kibana plugin uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an Wazuh Kibana plugin designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
 You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh |WAZUH_LATEST|.
 
@@ -95,7 +95,7 @@ Routes. Error. Cannot read property 'manager' of undefined
 
 This error usually means that you're using Wazuh v2.x with Elastic Stack v6.x, or Wazuh v3.x with Elastic Stack v5.x.
 
-You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_different_major>`.
+You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_wazuh_server_2.x_3.x>`.
 
 .. _kibana_troubleshooting_3_7_0:
 
@@ -121,7 +121,7 @@ As of Elastic Stack 6.4.x, the **date format** causes an error when viewing the 
     "type": "date"
   },
 
-This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_latest_minor>`, the new template will be in use, and the next daily indices will be created using the new date format.
+This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_wazuh_server>`, the new template will be in use, and the next daily indices will be created using the new date format.
 
 However, if you want to fix this problem for the affected indices, there are different options that you can try in order to correct them:
 
@@ -160,7 +160,7 @@ All the technologies we are using have their own logs files, you can check them 
     .. warning::
       By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
-2. Check the Wazuh app log file:
+2. Check the Wazuh Kibana plugin log file:
 
     .. code-block:: console
 

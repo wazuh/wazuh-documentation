@@ -17,8 +17,8 @@ Access to services and containers
 
 #. You may access the Kibana UI at the Docker host's IP address, for example: `https://localhost <http://localhost>`_ if you are in the Docker host. By default, the username "foo" and the password "bar" are used.
 
-.. note::
-   The certificate generated for kibana by default is a self-signed certificate, because of this your browser will warn that it cannot verify its authenticity.
+   .. note::
+     The certificate generated for kibana by default is a self-signed certificate, because of this your browser will warn that it cannot verify its authenticity.
 
 #. Agents may be registered by following the standard registration process and using the Docker host's address as the manager's address. For more information see: :ref:`Registering agents<register_agents>`
 
@@ -57,7 +57,7 @@ Access to services and containers
 Wazuh service data volume
 -------------------------
 
-Wazuh configuration and log files can be configured to exist outside of their container. This will allow these files to persist after containers are removed and to provision custom configuration files to your containers. 
+Wazuh configuration and log files can be configured to exist outside of their container. This will allow these files to persist after containers are removed and to provision custom configuration files to your containers.
 
 To achieve this a volumes section for the wazuh service can be specified in the `docker-compose.yml` file:
 
@@ -84,7 +84,7 @@ Before performing a container upgrade it is recommended this data volume be crea
 Mount storage for Elastic Stack components
 ------------------------------------------
 
-Assembling volumes for the storage of Elastic Stack components is also feasible when deploying with Docker-compose. For example, we have the option of mounting persistent volumes both externally and locally. 
+Assembling volumes for the storage of Elastic Stack components is also feasible when deploying with Docker-compose. For example, we have the option of mounting persistent volumes both externally and locally.
 
 In order to do this we must add the volumes to the elasticsearch service in ``docker-compose.yml``:
 
@@ -97,7 +97,7 @@ In order to do this we must add the volumes to the elasticsearch service in ``do
 	    . . .
 
 
-The container runs Elasticsearch as user elasticsearch using **uid:gid 1000:0**. 
+The container runs Elasticsearch as user elasticsearch using **uid:gid 1000:0**.
 
 If you are bind-mounting a local directory or file, ensure it is readable by this user, while the data and log dirs additionally require write access. You can get more information `here <https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html>`_.
 

@@ -5,9 +5,9 @@
 Configuration file
 ==================
 
-The Wazuh app includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh app in *Settings > Configuration*.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Kibana plugin in *Settings > Configuration*.
 
 The configuration file reference is organized by sections:
 
@@ -100,7 +100,7 @@ Defines if the user is allowed to change the selected index pattern directly fro
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh app. An empty list (the default value) won't ignore any valid index pattern.
+Disable certain index pattern names from being available in index pattern selector from the Wazuh Kibana plugin. An empty list (the default value) won't ignore any valid index pattern.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | []                                          |
@@ -133,7 +133,7 @@ Enable or disable administrator requests to the Wazuh API when using the app. Th
 logs.level
 ^^^^^^^^^^
 
-Set the logging level for the Wazuh App log files.
+Set the logging level for the Wazuh Kibana plugin log files.
 
 +--------------------+------------+
 | **Default value**  | info       |

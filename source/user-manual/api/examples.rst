@@ -199,7 +199,6 @@ Code:
 
 In this example, the script will show which agents are disconnected with their ID and the time of their last connection. All it does is print the response of the GET request. But it can be modified to do other things with the response obtained. PUT, POST or DELETE requests can also be made. It is possible to call other endpoints, too.
 
-
 .. _api_powershell_label:
 
 PowerShell

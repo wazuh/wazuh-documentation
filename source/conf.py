@@ -1,7 +1,3 @@
-from docutils.parsers.rst.directives.admonitions import BaseAdmonition
-from sphinx.util import compat
-compat.make_admonition = BaseAdmonition
-
 # -*- coding: utf-8 -*-
 #
 # Configuration file for the Sphinx documentation builder.
@@ -416,21 +412,23 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.13.1",
-    "|WAZUH_LATEST_MINOR|" : "3.13",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.12.2",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.12.2",
-    "|WAZUH_LATEST_PUPPET|" : "3.12.2",
-    "|WAZUH_LATEST_OVA|" : "3.13.0",
-    "|WAZUH_LATEST_DOCKER|" : "3.12.2",
-    "|ELASTICSEARCH_LATEST|" : "7.8.0",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.7.1",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.6.2",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.6.2",
+    "|CURRENT_MAJOR|" : "4.x",
+    "|WAZUH_LATEST|" : "4.0.0",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.13.1",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.13.1",
+    "|WAZUH_LATEST_PUPPET|" : "3.13.1",
+    "|WAZUH_LATEST_OVA|" : "4.0.0",
+    "|WAZUH_LATEST_DOCKER|" : "3.13.1",
+    "|OPEN_DISTRO_LATEST|" : "1.10.1",
+    "|ELASTICSEARCH_LATEST|" : "7.9.1",
+    "|ELASTICSEARCH_LATEST_OVA|" : "7.8.1",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.8.0",
     "|SPLUNK_LATEST|" : "8.0.4",
     "|ELASTIC_6_LATEST|" : "6.8.8",
+    "|WAZUH_LATEST_AIX|" : "3.13.1",
     "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
@@ -465,7 +463,13 @@ custom_replacements = {
     "|RPM_API|" : "https://packages.wazuh.com/3.x/yum/wazuh-api",
     "|DEB_AGENT|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
     "|DEB_MANAGER|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
-    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api"
+    "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api",
+    # Variables for Elastic's Elasticsearch
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.9.2",
+    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.8.0",
 }
 
 # -- Setup -------------------------------------------------------------------
