@@ -9,3 +9,6 @@ package-lock.json
 package.json
 source/_static/css/*.min.css
 source/_static/js/*.min.js
+!source/_static/js/bootstrap.min.js
+!source/_static/js/popper.min.js
+!source/_static/css/fontawesome.min.css
