@@ -10,7 +10,7 @@ This guide provides the basic information needed to start using the Wazuh API.
 Starting and stopping the API
 -----------------------------
 
-The Wazuh API will be installed along the Wazuh manager by default and it will start at boot time. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
+The Wazuh API will be installed along the Wazuh manager by default. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
 **Systemd systems**
 
@@ -29,9 +29,9 @@ The Wazuh API will be installed along the Wazuh manager by default and it will s
 Logging into the Wazuh API
 --------------------------
 
-Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
+Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
 
-#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
@@ -82,7 +82,7 @@ Once logged in, it is possible to run any API endpoint following the structure b
 
 
 .. note::
-  There is another advanced authentication method, which allows obtaining the permissions in a dynamic way using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
+  There is an advanced authentication method, which allows obtaining the permissions dynamically using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
 
 
 Logging into the Wazuh API via scripts
@@ -148,7 +148,7 @@ Running the script provides a result similar to the following:
 
     Login request ...
 
-    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNTk3ODI4OTQ3LCJleHAiOjE1OTc4NjQ5NDcsInN1YiI6IndhenVoIiwicmJhY19wb2xpY2llcyI6eyJhZ2VudDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJncm91cDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJhZ2VudDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyIsImFnZW50Omdyb3VwOioiOiJhbGxvdyJ9LCJhZ2VudDpkZWxldGUiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93IiwiYWdlbnQ6Z3JvdXA6KiI6ImFsbG93In0sImFnZW50Om1vZGlmeV9ncm91cCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6cmVzdGFydCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6dXBncmFkZSI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiZ3JvdXA6cmVhZCI6eyJncm91cDppZDoqIjoiYWxsb3cifSwiZ3JvdXA6ZGVsZXRlIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDp1cGRhdGVfY29uZmlnIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDptb2RpZnlfYXNzaWdubWVudHMiOnsiZ3JvdXA6aWQ6KiI6ImFsbG93In0sImFjdGl2ZS1yZXNwb25zZTpjb21tYW5kIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGVfdXNlciI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWRfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJldm9rZSI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWQiOnsicm9sZTppZDoqIjoiYWxsb3ciLCJwb2xpY3k6aWQ6KiI6ImFsbG93IiwidXNlcjppZDoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlIjp7InJvbGU6aWQ6KiI6ImFsbG93IiwicG9saWN5OmlkOioiOiJhbGxvdyIsInVzZXI6aWQ6KiI6ImFsbG93In0sInNlY3VyaXR5OmRlbGV0ZSI6eyJyb2xlOmlkOioiOiJhbGxvdyIsInBvbGljeTppZDoqIjoiYWxsb3ciLCJ1c2VyOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnN0YXR1cyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZCI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9hcGlfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwibWFuYWdlcjp1cGRhdGVfYXBpX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6dXBsb2FkX2ZpbGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOnJlc3RhcnQiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOmRlbGV0ZV9maWxlIjp7Iio6KjoqIjoiYWxsb3ciLCJmaWxlOnBhdGg6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9maWxlIjp7ImZpbGU6cGF0aDoqIjoiYWxsb3cifSwiY2x1c3RlcjpkZWxldGVfZmlsZSI6eyJub2RlOmlkOioiOiJhbGxvdyIsIm5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwZGF0ZV9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVzdGFydCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwbG9hZF9maWxlIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9maWxlIjp7Im5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNpc2NhdDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJkZWNvZGVyczpyZWFkIjp7ImRlY29kZXI6ZmlsZToqIjoiYWxsb3cifSwibGlzdHM6cmVhZCI6eyJsaXN0OnBhdGg6KiI6ImFsbG93In0sInJ1bGVzOnJlYWQiOnsicnVsZTpmaWxlOioiOiJhbGxvdyJ9LCJtaXRyZTpyZWFkIjp7Iio6KjoqIjoiYWxsb3cifSwic2NhOnJlYWQiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NoZWNrOmNsZWFyIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpydW4iOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NvbGxlY3RvcjpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJyYmFjX21vZGUiOiJibGFjayJ9fQ.rcn9j--_sA-Fy47mSc0R5Hts20izTtreB9WPTBILi9g
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjAyMjMxNjU2LCJleHAiOjE2MDIyMzUyNTYsInN1YiI6IndhenVoIiwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.V60_otHPaT4NTkrS6SF3GHva0Z9r5p4mqe5Cn0hk4o4
 
     - API calls with TOKEN environment variable ...
 
@@ -169,11 +169,11 @@ Running the script provides a result similar to the following:
     Getting agents status summary:
     {
        "data": {
-          "active": 9,
-          "disconnected": 2,
-          "never_connected": 2,
+          "active": 1,
+          "disconnected": 0,
+          "never_connected": 0,
           "pending": 0,
-          "total": 13
+          "total": 1
        },
        "error": 0
     }
@@ -236,11 +236,11 @@ Running the script provides a result similar to the following:
 
     {
        "data": {
-          "active": 9,
-          "disconnected": 2,
-          "never_connected": 2,
+          "active": 1,
+          "disconnected": 0,
+          "never_connected": 0,
           "pending": 0,
-          "total": 13
+          "total": 1
        },
        "error": 0
     }
@@ -277,9 +277,9 @@ Here are some of the basic concepts related to making API requests and understan
     |         +----------------------+----------------------------------------------------------------------------------------------------------------+
     |         | total_affected_items | Total number of successfully affected items.                                                                   |
     |         +----------------------+----------------------------------------------------------------------------------------------------------------+
-    |         | total_failed_items   | Total number of failed items.                                                                                  |
-    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
     |         | failed_items         | List containing each of the failed items in the request.                                                       |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_failed_items   | Total number of failed items.                                                                                  |
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
     | message |                      | Result description.                                                                                            |
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
@@ -289,7 +289,7 @@ Here are some of the basic concepts related to making API requests and understan
     +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
 
 
-    - Example response without errors:
+    - Example response without errors (HTTP status code 200):
 
     .. code-block:: json
         :class: output
@@ -304,11 +304,11 @@ Here are some of the basic concepts related to making API requests and understan
             "failed_items": [],
             "total_failed_items": 0
           },
-          "message": "Restart request was sent to all specified nodes",
+          "message": "Restart request sent to all specified nodes",
           "error": 0
         }
 
-    - Example response with errors:
+    - Example response with errors (HTTP status code 200):
 
     .. code-block:: json
         :class: output
@@ -347,7 +347,7 @@ Here are some of the basic concepts related to making API requests and understan
           "error": 1
         }
 
-   - Example of partial response:
+   - Example of partial response (HTTP status code 200):
 
     .. code-block:: json
         :class: output
@@ -384,7 +384,7 @@ Here are some of the basic concepts related to making API requests and understan
           "error": 2
         }
 
-    - Example response to report an unauthorized request (code 401):
+    - Example response to report an unauthorized request (HTTP status code 401):
 
     .. code-block:: json
         :class: output
@@ -396,19 +396,18 @@ Here are some of the basic concepts related to making API requests and understan
           "status": 401
         }
 
-    - Example response to report a permission denied error (code 403):
+    - Example response to report a permission denied error (HTTP status code 403):
 
     .. code-block:: json
         :class: output
 
         {
-          "title": "Wazuh Error",
+          "title": "Permission Denied",
           "detail": "Permission denied: Resource type: *:*",
-          "status": 403,
           "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
           "error": 4000,
           "dapi_errors": {
-            "master-node": {
+            "unknown-node": {
               "error": "Permission denied: Resource type: *:*"
             }
           }
