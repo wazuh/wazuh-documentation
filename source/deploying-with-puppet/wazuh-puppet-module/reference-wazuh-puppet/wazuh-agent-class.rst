@@ -149,7 +149,7 @@ $wazuh_register_endpoint
   Specifies the IP address or the hostname of the Wazuh manager to register against.
 
 $ossec_port
-  Specifies the port to send events to on the manager. This must match the associated listening port configured on the Wazuh manager.
+  Specifies the port to send events to the manager. This must match the associated listening port configured on the Wazuh manager.
 
   `Default 1514`
 
@@ -169,7 +169,7 @@ $wazuh_retry_interval
   `Default 5`
 
 $ossec_notify_time
-  Specifies the time in seconds between agent checkins to the manager.
+  Specifies the time in seconds between agent check-ins to the manager.
 
   `Default 10`
 
