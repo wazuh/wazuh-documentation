@@ -51,11 +51,11 @@ Master
 Worker
 ~~~~~~
 
-    Worker nodes are responsible of two main tasks:
+    Worker nodes are responsible of three main tasks:
 
         - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
         - Sending :ref:`agent status updates <agent-info-thread>` to the master.
-
+        - Redirecting agent registration requests to the master.
 
 
 How the cluster works
