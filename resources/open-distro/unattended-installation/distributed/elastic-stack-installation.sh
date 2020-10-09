@@ -562,19 +562,22 @@ main() {
 
         if [[ -z "${iname}" ]]; then
             getHelp
-        fi               
+        fi     
+        
+        if [[ -z "${elastic}" ]] && [[ -z "${kibana}" ]]; then
+            getHelp
+        fi         
+
+        if [[ -n "${elastic}" ]] && [[ -n "${kibana}" ]]; then
+            getHelp
+        fi                     
 
         if [ -n "${elastic}" ]; then
-            if [[ -z "${elastic}" ]] && [[ -z "${kibana}" ]]; then
-                getHelp
-            fi                    
-            if [[ -n "${elastic}" ]] && [[ -n "${kibana}" ]]; then
-                getHelp
-            fi        
+                        
             if [ -n "${ignore}" ]; then
                 echo "Health-check ignored."    
             else
-                healthCheck elastic kibana        
+                healthCheck elastic        
             fi     
             checkConfig      
             installPrerequisites
@@ -583,16 +586,11 @@ main() {
             installElasticsearch iname
         fi
         if [ -n "${kibana}" ]; then
-            if [[ -z "${elastic}" ]] && [[ -z "${kibana}" ]]; then
-                getHelp
-            fi                    
-            if [[ -n "${elastic}" ]] && [[ -n "${kibana}" ]]; then
-                getHelp
-            fi        
+              
             if [ -n "${ignore}" ]; then
                 echo "Health-check ignored."    
             else
-                healthCheck elastic kibana         
+                healthCheck kibana         
             fi  
             checkConfig              
             installPrerequisites
