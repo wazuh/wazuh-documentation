@@ -110,7 +110,7 @@ Restore configuration
 - :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`: Restore the default security configuration.
 
 
-To apply the changes it is necessary to restart each Wazuh API whose configuration has changed (not neccesary for ``/security/config`` endpoints):
+To apply the changes it is necessary to restart each Wazuh API whose configuration has changed (not necesary for ``/security/config`` endpoints):
 
   a. For Systemd:
 

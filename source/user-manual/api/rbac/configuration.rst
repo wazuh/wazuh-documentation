@@ -363,7 +363,7 @@ Use the following Wazuh API endpoint :api-ref:`GET /security/users/me/policies <
             "agent:id:001": "allow"
         },
         "rbac_mode": "white"
-            "roles": [
+            "roles": []
       },
       "message": "Current user processed policies information was returned",
       "error": 0
