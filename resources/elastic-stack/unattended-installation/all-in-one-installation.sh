@@ -372,8 +372,7 @@ healthCheck() {
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
         echo "All the componets have already been installed."
-        exit 1;
-    else        
+        exit 1;    
     else
         echo "Starting the installation..."
     fi
