@@ -256,220 +256,220 @@ Active_response
 ^^^^^^^^^^^^^^^
 active-response:command
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /active-response (`agent:id`_)
+- :api-ref:`PUT /active-response <operation/api.controllers.active_response_controller.run_command>` (`agent:id`_)
 
 
 Agent
 ^^^^^^^^^^^^^^^
 agent:create
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- POST /agents (`*:*`_)
-- POST /agents/insert (`*:*`_)
-- POST /agents/insert/quick (`*:*`_)
+- :api-ref:`POST /agents <operation/api.controllers.agents_controller.add_agent>` (`*:*`_)
+- :api-ref:`POST /agents/insert <operation/api.controllers.agents_controller.insert_agent>` (`*:*`_)
+- :api-ref:`POST /agents/insert/quick <operation/api.controllers.agents_controller.post_new_agent>` (`*:*`_)
 
 agent:delete
 ~~~~~~~~~~~~
-- DELETE /agents (`agent:id`_)
+- :api-ref:`DELETE /agents <operation/api.controllers.agents_controller.delete_agents>` (`agent:id`_)
 
 agent:modify_group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /agents/group (`agent:id`_)
-- PUT /agents/{agent_id}/group/{group_id} (`agent:id`_)
-- DELETE /agents/group (`agent:id`_)
-- DELETE /agents/{agent_id}/group (`agent:id`_)
-- DELETE /agents/{agent_id}/group/{group_id} (`agent:id`_)
-- DELETE /groups (`agent:id`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`agent:id`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`agent:id`_)
+- :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`agent:id`_)
+- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`agent:id`_)
+- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`agent:id`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`agent:id`_)
 
 agent:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /agents (`agent:id`_)
-- GET /agents/no_group (`agent:id`_)
-- GET /agents/outdated (`agent:id`_)
-- GET /agents/stats/distinct (`agent:id`_)
-- GET /agents/summary/os (`agent:id`_)
-- GET /agents/summary/status (`agent:id`_)
-- GET /agents/{agent_id}/config/{component}/{configuration} (`agent:id`_)
-- GET /agents/{agent_id}/group/is_sync (`agent:id`_)
-- GET /agents/{agent_id}/key (`agent:id`_)
-- GET /groups/{group_id}/agents (`agent:id`_)
-- GET /overview/agents (`agent:id`_)
+- :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` (`agent:id`_)
+- :api-ref:`GET /agents/no_group <operation/api.controllers.agents_controller.get_agent_no_group>` (`agent:id`_)
+- :api-ref:`GET /agents/outdated <operation/api.controllers.agents_controller.get_agent_outdated>` (`agent:id`_)
+- :api-ref:`GET /agents/stats/distinct <operation/api.controllers.agents_controller.get_agent_fields>` (`agent:id`_)
+- :api-ref:`GET /agents/summary/os <operation/api.controllers.agents_controller.get_agent_summary_os>` (`agent:id`_)
+- :api-ref:`GET /agents/summary/status <operation/api.controllers.agents_controller.get_agent_summary_status>` (`agent:id`_)
+- :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agents_controller.get_agent_config>` (`agent:id`_)
+- :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agents_controller.get_sync_agent>` (`agent:id`_)
+- :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agents_controller.get_agent_key>` (`agent:id`_)
+- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>` (`agent:id`_)
+- :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_)
 
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /agents/restart (`agent:id`_)
-- PUT /agents/node/{node_id}/restart (`agent:id`_)
-- PUT /agents/{agent_id}/restart (`agent:id`_)
-- PUT /agents/group/{group_id}/restart (`agent:id`_)
+- :api-ref:`PUT /agents/restart <operation/api.controllers.agents_controller.restart_agents>` (`agent:id`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`agent:id`_)
+- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agents_controller.restart_agent>` (`agent:id`_)
+- :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_group>` (`agent:id`_)
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /agents/{agent_id}/upgrade_result (`agent:id`_)
-- PUT /agents/{agent_id}/upgrade (`agent:id`_)
-- PUT /agents/{agent_id}/upgrade_custom (`agent:id`_)
+- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>` (`agent:id`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>` (`agent:id`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agents_controller.put_upgrade_custom_agent>` (`agent:id`_)
 
 
 Ciscat
 ^^^^^^^
 ciscat:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /ciscat/{agent_id}/results (`agent:id`_)
-- GET /experimental/ciscat/results (`agent:id`_)
+- :api-ref:`GET /ciscat/{agent_id}/results <operation/api.controllers.ciscat_controller.get_agents_ciscat_results>` (`agent:id`_)
+- :api-ref:`GET /experimental/ciscat/results <operation/api.controllers.experimental_controller.get_cis_cat_results>` (`agent:id`_)
 
 
 Cluster
 ^^^^^^^
 cluster:delete_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /cluster/{node_id}/files (`node:id<node>`)
-- DELETE /cluster/{node_id}/files (`node:id:<node>&file:path:<file_path>`)
+- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id<node>`)
+- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id:<node>&file:path:<file_path>`)
 
 cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /cluster/api/config (`node:id`_)
+- :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>` (`node:id`_)
 
 cluster:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /agents/node/{node_id}/restart (`node:id`_)
-- GET /cluster/configuration/validation (`node:id`_)
-- GET /cluster/healthcheck (`node:id`_)
-- GET /cluster/local/config (`node:id`_)
-- GET /cluster/local/info (`node:id`_)
-- GET /cluster/nodes (`node:id`_)
-- GET /cluster/{node_id}/configuration (`node:id`_)
-- GET /cluster/{node_id}/configuration/{component}/{configuration} (`node:id`_)
-- GET /cluster/{node_id}/files (`node:id`_)
-- PUT /cluster/{node_id}/files (`node:id`_)
-- DELETE /cluster/{node_id}/files (`node:id`_)
-- GET /cluster/{node_id}/info (`node:id`_)
-- GET /cluster/{node_id}/logs (`node:id`_)
-- GET /cluster/{node_id}/logs/summary (`node:id`_)
-- GET /cluster/{node_id}/stats (`node:id`_)
-- GET /cluster/{node_id}/stats/analysisd (`node:id`_)
-- GET /cluster/{node_id}/stats/hourly (`node:id`_)
-- GET /cluster/{node_id}/stats/remoted (`node:id`_)
-- GET /cluster/{node_id}/stats/weekly (`node:id`_)
-- GET /cluster/{node_id}/status (`node:id`_)
-- PUT /cluster/restart (`node:id`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`node:id`_)
+- :api-ref:`GET /cluster/configuration/validation <operation/api.controllers.cluster_controller.get_conf_validation>` (`node:id`_)
+- :api-ref:`GET /cluster/healthcheck <operation/api.controllers.cluster_controller.get_healthcheck>` (`node:id`_)
+- :api-ref:`GET /cluster/local/config <operation/api.controllers.cluster_controller.get_config>` (`node:id`_)
+- :api-ref:`GET /cluster/local/info <operation/api.controllers.cluster_controller.get_cluster_node>` (`node:id`_)
+- :api-ref:`GET /cluster/nodes <operation/api.controllers.cluster_controller.get_cluster_nodes>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.get_configuration_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/configuration/{component}/{configuration} <operation/api.controllers.cluster_controller.get_node_config>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id`_)
+- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
+- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/info <operation/api.controllers.cluster_controller.get_info_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/logs <operation/api.controllers.cluster_controller.get_log_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/logs/summary <operation/api.controllers.cluster_controller.get_log_summary_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/stats <operation/api.controllers.cluster_controller.get_stats_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/stats/analysisd <operation/api.controllers.cluster_controller.get_stats_analysisd_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/stats/hourly <operation/api.controllers.cluster_controller.get_stats_hourly_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/stats/remoted <operation/api.controllers.cluster_controller.get_stats_remoted_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/stats/weekly <operation/api.controllers.cluster_controller.get_stats_weekly_node>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>` (`node:id`_)
+- :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
 
 cluster:read_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /cluster/{node_id}/files (`node:id:<node>&file:path:<file_path>`)
+- :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id:<node>&file:path:<file_path>`)
 
 cluster:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /cluster/restart (`node:id`_)
+- :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
 
 cluster:status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /cluster/status (`*:*`_)
+- :api-ref:`GET /cluster/status <operation/api.controllers.cluster_controller.get_status>` (`*:*`_)
 
 cluster:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /cluster/api/config (`node:id`_)
-- DELETE /cluster/api/config (`node:id`_)
+- :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config` (`node:id`_)
+- :api-ref:`DELETE /cluster/api/config <operation/api.controllers.cluster_controller.delete_api_config>` (`node:id`_)
 
 cluster:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /cluster/{node_id}/files (`node:id`_)
+- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
 
 
 Decoders
 ^^^^^^^^^^^^^^^
 decoders:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /decoders (`decoder:file`_)
-- GET /decoders/files (`decoder:file`_)
-- GET /decoders/files/{filename}/download (`decoder:file`_)
-- GET /decoders/parents (`decoder:file`_)
+- :api-ref:`GET /decoders <operation/api.controllers.decoders_controller.get_decoders>` (`decoder:file`_)
+- :api-ref:`GET /decoders/files <operation/api.controllers.decoders_controller.get_decoders_files>` (`decoder:file`_)
+- :api-ref:`GET /decoders/files/{filename}/download <operation/api.controllers.decoders_controller.get_download_file>` (`decoder:file`_)
+- :api-ref:`GET /decoders/parents <operation/api.controllers.decoders_controller.get_decoders_parents>` (`decoder:file`_)
 
 Group
 ^^^^^^^^^^^^^^^
 group:create
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- POST /groups (`*:*`_)
+- :api-ref:`POST /groups <operation/api.controllers.agents_controller.post_group>` (`*:*`_)
 
 group:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- DELETE /groups (`group:id`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`group:id`_)
 
 group:modify_assignments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /agents/group (`group:id`_)
-- PUT /agents/{agent_id}/group/{group_id} (`group:id`_)
-- DELETE /agents/group (`group:id`_)
-- DELETE /agents/{agent_id}/group (`group:id`_)
-- DELETE /agents/{agent_id}/group/{group_id} (`group:id`_)
-- DELETE /groups (`group:id`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`group:id`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`group:id`_)
+- :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`group:id`_)
+- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`group:id`_)
+- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`group:id`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`group:id`_)
 
 group:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /groups (`group:id`_)
-- GET /groups/{group_id}/agents (`group:id`_)
-- GET /groups/{group_id}/configuration (`group:id`_)
-- GET /groups/{group_id}/files (`group:id`_)
-- GET /groups/{group_id}/files/{file_name}/json (`group:id`_)
-- GET /groups/{group_id}/files/{file_name}/xml (`group:id`_)
-- GET /overview/agents (`group:id`_)
+- :api-ref:`GET /groups <operation/api.controllers.agents_controller.get_list_group>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/configuration <operation/api.controllers.agents_controller.get_group_config>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files <operation/api.controllers.agents_controller.get_group_files>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files/{file_name}/json <operation/api.controllers.agents_controller.get_group_file_json>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files/{file_name}/xml <operation/api.controllers.agents_controller.get_group_file_xml>` (`group:id`_)
+- :api-ref:`GET /overview/agents <operation/api.controllers.mitre_controller.get_attack>` (`group:id`_)
 
 group:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /groups/{group_id}/configuration (`group:id`_)
+- :api-ref:`PUT /groups/{group_id}/configuration <operation/api.controllers.agents_controller.put_group_config>` (`group:id`_)
 
 
 Lists
 ^^^^^^^^^^^^^^^
 lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /lists (`list:path`_)
-- GET /lists/files (`list:path`_)
+- :api-ref:`GET /lists <operation/api.controllers.lists_controller.get_lists>` (`list:path`_)
+- :api-ref:`GET /lists/files <operation/api.controllers.lists_controller.get_lists_files>` (`list:path`_)
 
 
 Manager
 ^^^^^^^^^^^^^^^
 manager:delete_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /manager/files (`*:*`_)
-- DELETE /manager/files (`file:path`_)
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
+- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`file:path`_)
 
 manager:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /manager/api/config (`*:*`_)
+- :api-ref:`GET /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
 
 manager:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /manager/configuration (`*:*`_)
-- GET /manager/configuration/validation (`*:*`_)
-- GET /manager/configuration/{component}/{configuration} (`*:*`_)
-- GET /manager/files (`*:*`_)
-- PUT /manager/files (`*:*`_)
-- DELETE /manager/files (`*:*`_)
-- GET /manager/info (`*:*`_)
-- GET /manager/logs (`*:*`_)
-- GET /manager/logs/summary (`*:*`_)
-- GET /manager/stats (`*:*`_)
-- GET /manager/stats/analysisd (`*:*`_)
-- GET /manager/stats/hourly (`*:*`_)
-- GET /manager/stats/remoted (`*:*`_)
-- GET /manager/stats/weekly (`*:*`_)
-- GET /manager/status (`*:*`_)
-- PUT /manager/restart (`*:*`_)
+- :api-ref:`GET /manager/configuration <operation/api.controllers.manager_controller.get_configuration>` (`*:*`_)
+- :api-ref:`GET /manager/configuration/validation <operation/api.controllers.manager_controller.get_conf_validation>` (`*:*`_)
+- :api-ref:`GET /manager/configuration/{component}/{configuration} <operation/api.controllers.manager_controller.get_manager_config_ondemand>` (`*:*`_)
+- :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`*:*`_)
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
+- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`*:*`_)
+- :api-ref:`GET /manager/info <operation/api.controllers.manager_controller.get_info>` (`*:*`_)
+- :api-ref:`GET /manager/logs <operation/api.controllers.manager_controller.get_log>` (`*:*`_)
+- :api-ref:`GET /manager/logs/summary <operation/api.controllers.manager_controller.get_log_summary>` (`*:*`_)
+- :api-ref:`GET /manager/stats <operation/api.controllers.manager_controller.get_stats>` (`*:*`_)
+- :api-ref:`GET /manager/stats/analysisd <operation/api.controllers.manager_controller.get_stats_analysisd>` (`*:*`_)
+- :api-ref:`GET /manager/stats/hourly <operation/api.controllers.manager_controller.get_stats_hourly>` (`*:*`_)
+- :api-ref:`GET /manager/stats/remoted <operation/api.controllers.manager_controller.get_stats_remoted>` (`*:*`_)
+- :api-ref:`GET /manager/stats/weekly <operation/api.controllers.manager_controller.get_stats_weekly>` (`*:*`_)
+- :api-ref:`GET /manager/status <operation/api.controllers.manager_controller.get_status>` (`*:*`_)
+- :api-ref:`PUT /manager/restart <operation/api.controllers.manager_controller.put_restart>` (`*:*`_)
 
 manager:read_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /manager/files (`file:path`_)
+- :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`file:path`_)
 
 manager:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /manager/restart (`*:*`_)
+- :api-ref:`PUT /manager/restart <operation/api.controllers.manager_controller.put_restart>` (`*:*`_)
 
 manager:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /manager/api/config (`*:*`_)
-- DELETE /manager/api/config (`*:*`_)
+- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
+- :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>` (`*:*`_)
 
 manager:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /manager/files (`*:*`_)
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 
 
 Mitre
