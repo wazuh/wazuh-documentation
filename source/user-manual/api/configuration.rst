@@ -81,6 +81,9 @@ Unlike regular Wazuh API configuration settings that can be changed in the :ref:
     auth_token_exp_timeout: 3600
     rbac_mode: white
 
+.. warning::
+    All JWT tokens are revoked for security reasons when the security configuration is changed. It will be necessary to log in and obtain a new token after the change.
+
 Configuration endpoints
 -----------------------
 
