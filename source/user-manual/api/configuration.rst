@@ -10,10 +10,10 @@ Configuration
 
 .. _api_configuration_file:
 
-Configuration file
-------------------
+Wazuh API configuration
+-----------------------
 
-The Wazuh API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line. It is also possible to use the ``PUT /cluster/api/config`` or ``PUT /manager/api/config`` API endpoints to change the configuration. Check the :ref:`API reference <api_reference>` for more information about the Wazuh API endpoints.
+The Wazuh API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line. It is also possible to use the :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` API endpoint to change the configuration. Check the :ref:`API reference <api_reference>` for more information about the Wazuh API endpoints.
 
 Here are all the available settings for the ``api.yaml`` configuration file. For more information on each of the settings, check the :ref:`configuration options <api_configuration_options>` below:
 
@@ -56,9 +56,9 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
 
 .. warning::
 
-    If running a cluster, the master will NOT send its local Wazuh API configuration file to the workers. Each node provides its own Wazuh API. If the configuration file is changed in the master node, the user should manually update the workers Wazuh API configuration in order to use the same one. Take care of not overwriting the IP and port in the local configuration of each worker.
+    If running a cluster, the master will NOT send its local Wazuh API configuration file to the workers. Each node provides its own Wazuh API. If the configuration file is changed in the master node, the user should manually update the workers Wazuh API configuration in order to use the same one. Take care of not overwriting the IP and port in the local configuration of each worker. The Wazuh API endpoint :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>` can be used to change any or all of the Wazuh API configuration files in the cluster nodes.
 
-Make sure to restart the Wazuh API using wazuh-manager service after editing the configuration file:
+Make sure to restart the Wazuh API using **wazuh-manager** service after editing the configuration file:
 
   a. For Systemd:
 
@@ -74,42 +74,40 @@ Make sure to restart the Wazuh API using wazuh-manager service after editing the
 
 Security configuration
 ----------------------
-Unlike regular Wazuh API configuration settings that can be changed in the :ref:`configuration file <api_configuration_file>`, the following Wazuh API security settings are only intended to be modified through a Wazuh API endpoint (``/security/config``), and they are applied to every Wazuh API in the cluster, in case there is one configured. For more information on each of the settings, please check the :ref:`security configuration options <api_security_configuration_options>`.
+Unlike regular Wazuh API configuration settings that can be changed in the :ref:`configuration file <api_configuration_file>`, the following Wazuh API security settings are only intended to be modified through a Wazuh API endpoint  (:api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`), and they are applied to every Wazuh API in the cluster, in case there is one configured. For more information on each of the settings, please check the :ref:`security configuration options <api_security_configuration_options>`.
 
 .. code-block:: yaml
 
     auth_token_exp_timeout: 3600
     rbac_mode: white
 
-It is needed to restart the Wazuh API for these changes to take effect. For some of them, it may be required to request a new JWT token too.
-
 Configuration endpoints
 -----------------------
 
 The Wazuh API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`configuration file <api_configuration_file>`.
 
-The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the ``/security/config`` endpoint.
+The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`, :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` and :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` Wazuh API endpoints.
 
 Get configuration
 ^^^^^^^^^^^^^^^^^
-- ``GET /manager/api/config``: Get the complete configuration of the node on which it is run.
-- ``GET /cluster/api/config``: Get the complete configuration of all (or a list) of the cluster nodes.
-- ``GET /security/config``: Get the current security configuration.
+- :api-ref:`GET /manager/api/config <operation/api.controllers.manager_controller.get_api_config>`: Get the complete local Wazuh API configuration.
+- :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>`: Get the complete Wazuh API configuration of all (or a list) of the cluster nodes.
+- :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`: Get the current security configuration.
 
 Modify configuration
 ^^^^^^^^^^^^^^^^^^^^
-- ``PUT /manager/api/config``: Change part of the configuration of the node on which it is run.
-- ``PUT /cluster/api/config``: Change part of the configuration of all (or a list) of the cluster nodes.
-- ``PUT /security/config``: Change the security configuration.
+- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>`: Modify the local Wazuh API configuration.
+- :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`: Modify the Wazuh API configuration of all (or a list) of the cluster nodes.
+- :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Modify the security configuration.
 
 Restore configuration
 ^^^^^^^^^^^^^^^^^^^^^
-- ``DELETE /manager/api/config``: Restore the default configuration of the node on which it is run.
-- ``DELETE /cluster/api/config``: Restore the default configuration of all (or a list) of the cluster nodes.
-- ``DELETE /security/config``: Restore the default security configuration.
+- :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>`: Restore the default local Wazuh API configuration.
+- :api-ref:`DELETE /cluster/api/config <operation/api.controllers.cluster_controller.delete_api_config>`: Restore the default Wazuh API configuration of all (or a list) of the cluster nodes.
+- :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`: Restore the default security configuration.
 
 
-To apply the changes it is necessary to restart each Wazuh API whose configuration has changed:
+To apply the changes it is necessary to restart each Wazuh API whose configuration has changed (not neccesary for ``/security/config`` endpoints):
 
   a. For Systemd:
 
@@ -155,7 +153,7 @@ host
 +--------------------------+---------------+-----------------------------------------------------------------------+
 | Allowed values           | Default value | Description                                                           |
 +==========================+===============+=======================================================================+
-| Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the Wazuh API is installed. |
+| Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the Wazuh API is running.   |
 +--------------------------+---------------+-----------------------------------------------------------------------+
 
 port
@@ -219,7 +217,7 @@ logs
 +------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
 | Sub-fields | Allowed values                                                                         | Default value | Description                                     |
 +============+========================================================================================+===============+=================================================+
-| level      | disabled, info, warning, error, debug, debug2 (each level includes the previous level) | info          | Sets the verbosity level of the Wazuh API logs. |
+| level      | disabled, info, warning, error, debug, debug2 (each level includes the previous level) | info          | Set the verbosity level of the Wazuh API logs.  |
 +------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
 | path       | Any text string                                                                        | logs/api.log  | Path where the Wazuh API logs will be saved.    |
 +------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
@@ -242,25 +240,25 @@ cors
 
 cache
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values                       | Default value | Description                                                                                       |
-+============+======================================+===============+===================================================================================================+
-| enabled    | yes, true, no, false                 | true          | Enable or disable caching for certain Wazuh API responses (currently, all ``/rules`` endpoints)   |
-+------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------------+
-| time       | Any positive integer or real number. | 0.75          | Time in seconds that the cache lasts before expiring.                                             |
-+------------+--------------------------------------+---------------+---------------------------------------------------------------------------------------------------+
++------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values                       | Default value | Description                                                                                                          |
++============+======================================+===============+======================================================================================================================+
+| enabled    | yes, true, no, false                 | true          | Enable or disable caching for certain Wazuh API responses (currently, all :api-ref:`rules endpoints <tag/rules>` )   |
++------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
+| time       | Any positive integer or real number  | 0.75          | Time in seconds that the cache lasts before expiring.                                                                |
++------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
 
 access
 ^^^^^^^
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                             |
-+========================+======================+===============+=========================================================================================================================================================================================================================================+
-| max_login_attempts     | Any positive integer | 5             | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                             |
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period.         |
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| max_request_per_minute | Any positive integer | 300           | Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. |
-+------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                                                             |
++========================+======================+===============+=========================================================================================================================================================================================================================================================================+
+| max_login_attempts     | Any positive integer | 50             | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                            |
++------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period.                                         |
++------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| max_request_per_minute | Any positive integer | 300           | Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked for the remaining of the minute. |
++------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _api_security_configuration_options:
 
@@ -272,13 +270,13 @@ auth_token_exp_timeout
 +-----------------------+---------------+---------------------------------------------------------+
 | Allowed values        | Default value | Description                                             |
 +=======================+===============+=========================================================+
-| Any positive integer. | 3600          | Set how many seconds it takes for JWT tokens to expire. |
+| Any positive integer  | 3600          | Set how many seconds it takes for JWT tokens to expire. |
 +-----------------------+---------------+---------------------------------------------------------+
 
 rbac_mode
 ^^^^^^^^^^^^^^^^^^^^^^
-+----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Allowed values | Default value | Description                                                                                                                                                    |
-+================+===============+================================================================================================================================================================+
-| black,white    | white         | Set the behavior of RBAC. In black mode, policies not included in the list **can be** executed, while in white mode they **cannot** be executed.               |
-+----------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values | Default value | Description                                                                                                                                                                                                                                                                                                                                                           |
++================+===============+=======================================================================================================================================================================================================================================================================================================================================================================+
+| black,white    | white         | Set the behavior of RBAC. By default, everything is allowed in black mode while everything is denied in white mode. Choose the rbac_mode that better suits the desired RBAC infraestructure. In black mode it is very easy to deny a few specific action-resources pairs with just some policies while white mode is more secure and requires building from scratch.  |
++----------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
