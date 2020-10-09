@@ -10,25 +10,28 @@ Examples
 CURL
 ^^^^
 
-cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the API. Please note that before executing any endpoint, you will need to get a JWT token as explained in :ref:`Getting started <api_log_in>`. Some examples:
+cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the Wazuh API. Please note that before executing any endpoint, a JWT token will be needed. In the following examples the ``raw`` option has been used in order to obtain the token and save it in an environment variable (``$TOKEN``). For information about getting the JWT token visit :ref:`Getting started <api_log_in>`.
 
 **GET**
 
 .. code-block:: console
 
-    # curl -k -X GET "https://localhost:55000/" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X GET "https://localhost:55000/" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
 
     {
-        "title": "Wazuh API",
-        "api_version": "4.0.0",
-        "revision": 4000,
-        "license_name": "GPL 2.0",
-        "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-        "hostname": "wazuh-master",
-        "timestamp": "2020-05-25T07:05:00+0000"
+        "data": {
+            "title": "Wazuh API",
+            "api_version": "4.0.0",
+            "revision": 4000,
+            "license_name": "GPL 2.0",
+            "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+            "hostname": "wazuh-master",
+            "timestamp": "2020-05-25T07:05:00+0000"
+        },
+        "error": 0
     }
 
 
@@ -36,7 +39,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X PUT "https://localhost:55000/manager/api/config?pretty=true" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"cache\":{\"enabled\":true,\"time\":0.75}}"
+    # curl -k -X PUT "https://localhost:55000/manager/api/config?pretty=true" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"cache\":{\"enabled\":true,\"time\":0.75}}"
 
 .. code-block:: json
     :class: output
@@ -50,7 +53,8 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "API configuration was successfully updated. Some settings may require restarting the API to be applied."
+       "message": "API configuration was successfully updated. Settings require restarting the API to be applied.",
+       "error": 0
     }
 
 
@@ -58,7 +62,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
+    # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
 
 .. code-block:: json
     :class: output
@@ -75,7 +79,8 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "User was successfully created"
+      "message": "User was successfully created",
+      "error": 0
     }
 
 
@@ -83,7 +88,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&list_groups=all" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&list_groups=all" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -110,7 +115,8 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
           "010"
         ]
       },
-      "message": "All selected groups were deleted"
+      "message": "All selected groups were deleted",
+      "error": 0
     }
 
 .. _api_python-label:
@@ -118,7 +124,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 Python
 ^^^^^^
 
-You can also interact with the API using Python as shown below:
+It is also possible to interact with the Wazuh API using Python as shown below:
 
 Code:
 
@@ -159,7 +165,7 @@ Code:
     login_url = f"{base_url}/security/user/authenticate"
     basic_auth = f"{user}:{password}".encode()
     headers = {'Authorization': f'Basic {b64encode(basic_auth).decode()}'}
-    headers['Authorization'] = f'Bearer {get_response(login_url, headers)["token"]}'
+    headers['Authorization'] = f'Bearer {get_response(login_url, headers)["data"]["token"]}'
 
     #Request
     response = get_response(base_url + endpoint, headers)
@@ -186,11 +192,12 @@ Code:
             "total_affected_items": 2,
             "total_failed_items": 0
         },
-        "message": "All selected agents information was returned"
+        "message": "All selected agents information was returned",
+        "error": 0
     }
 
 
-In this example, the script would show us which agents are disconnected with their ID and the time of their last connection. All it does is print the response of the GET request. But it can be modified to do other things with the response obtained. You can also call another endpoint or even make PUT, POST or DELETE requests.
+In this example, the script will show which agents are disconnected with their ID and the time of their last connection. All it does is print the response of the GET request. But it can be modified to do other things with the response obtained. PUT, POST or DELETE requests can also be made. It is possible to call other endpoints, too.
 
 
 .. _api_powershell_label:
@@ -198,7 +205,7 @@ In this example, the script would show us which agents are disconnected with the
 PowerShell
 ^^^^^^^^^^
 
-The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the API and handles the response.
+The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the Wazuh API and handles the response.
 
 Code:
 
@@ -243,7 +250,7 @@ Code:
 
     Ignore-SelfSignedCerts
     $token_response = Invoke-RestMethod -Uri $login_url -Headers $headers
-    $headers["Authorization"] = "Bearer " + $token_response.token
+    $headers["Authorization"] = "Bearer " + $token_response.data.token
 
     # Request
     try{
@@ -265,4 +272,4 @@ Code:
     @{lastKeepAlive=2020-05-23T12:39:50Z; id=010}}
 
 
-As in the previous case, you can modify this script or work with the response obtained as you like.
+As in the previous case, this script can be modified as the user desires.

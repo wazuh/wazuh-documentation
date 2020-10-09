@@ -10,7 +10,7 @@ This guide provides the basic information needed to start using the Authorizatio
 Authorization context login method
 ----------------------------------
 
-With this method, we will tell the system what permissions we want to have. We will use this method of authentication when we want to get the permissions in a dynamic way. This allows any authorized user to get any permission. To do this we must properly formalize our authorization context. In this case the user-roles relations are not taken in consideration. In order to use this method of authentication, we must first have a user who is allowed to use authorization contexts (Link to the part of the document where this is explained). After that, having created our rules, we will only have to send an authorization context with all the information we want, this will be checked against the rules and finally the permissions associated with them will be granted:
+This authentication method is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without assigning it to any role. To do this, a properly formalization of the authorization context is needed. In this case the user-roles relations are not taken in consideration. In order to use this method of authentication, a user allowed to use authorization context is needed (how to create a user allowed to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally the permissions associated with them will be granted:
 
 .. code-block:: console
         :class: output
@@ -23,7 +23,11 @@ With this method, we will tell the system what permissions we want to have. We w
                 }
         }'
 
-        {"token": "TOKEN"}
+        {
+                "data": {
+                        "token": "TOKEN"
+                }
+        }
 
 .. thumbnail:: ../../../images/rbac/auth_context_login.png
     :align: center
@@ -185,7 +189,7 @@ Advanced examples
 Example 1
 ^^^^^^^^^
 
-- This is the rule that the user want to match:
+- This is the rule that the user wants to match:
 
 .. code-block:: json
         :class: output
@@ -251,7 +255,7 @@ As a result, the initial OR operation will be True since the AND operation retur
 Example 2
 ^^^^^^^^^
 
-- This is the rule that the user want to match:
+- This is the rule that the user wants to match:
 
 .. code-block:: json
         :class: output

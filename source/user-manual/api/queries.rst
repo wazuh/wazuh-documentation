@@ -32,7 +32,7 @@ For example, to filter Ubuntu agents with a version higher than 18, the followin
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -125,14 +125,15 @@ For example, to filter Ubuntu agents with a version higher than 18, the followin
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information was returned"
+       "message": "All selected agents information was returned",
+       "error": 0
     }
 
 The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 18 but lower than Ubuntu 18.04.4:
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -165,14 +166,15 @@ The same field can be used multiple times to get a more accurate result. For exa
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information was returned"
+       "message": "All selected agents information was returned",
+       "error": 0
     }
 
 An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains *windows* or *centos*.
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -194,14 +196,15 @@ An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information was returned"
+       "message": "All selected agents information was returned",
+       "error": 0
     }
 
 Getting the ubuntu agents with id other than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18, is an example that involves multiple operators at the same time:
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer <YOUR_JWT_TOKEN>"
+    # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -244,5 +247,6 @@ Getting the ubuntu agents with id other than 0 and lower than 4, whose name cont
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected agents information was returned"
+       "message": "All selected agents information was returned",
+       "error": 0
     }

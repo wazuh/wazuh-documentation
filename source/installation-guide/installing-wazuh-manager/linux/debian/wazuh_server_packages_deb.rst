@@ -67,7 +67,7 @@ Once the process is completed, you can check the service status with:
 The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
 .. note::
-    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use Wazuh API.
+    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use the Wazuh API.
 
 **Optional:** Disable the Wazuh repository.
 

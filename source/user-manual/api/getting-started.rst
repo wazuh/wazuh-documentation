@@ -5,12 +5,12 @@
 Getting started
 ===============
 
-This guide provides the basic information you need to start using the Wazuh API.
+This guide provides the basic information needed to start using the Wazuh API.
 
 Starting and stopping the API
 -----------------------------
 
-The Wazuh API will be installed along the Wazuh manager by default and it will start at boot time. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
+The Wazuh API will be installed along the Wazuh manager by default. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
 **Systemd systems**
 
@@ -26,12 +26,12 @@ The Wazuh API will be installed along the Wazuh manager by default and it will s
 
 .. _api_log_in:
 
-Logging into the API
---------------------
+Logging into the Wazuh API
+--------------------------
 
-Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in and obtain a token in order to run any endpoint:
+Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
 
-#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (https) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is highly recommended when using cURL commands as tokens could be really long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
@@ -44,7 +44,12 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
     .. code-block:: none
         :class: output
 
-        {"token": "<YOUR_JWT_TOKEN>"}
+        {
+            "data": {
+                "token": "<YOUR_JWT_TOKEN>"
+            },
+            "error": 0
+        }
 
 #. Send an *API request* to confirm that everything is working as expected:
 
@@ -56,17 +61,20 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
         :class: output
 
         {
-            "title": "Wazuh API",
-            "api_version": "4.0.0",
-            "revision": 4000,
-            "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-            "hostname": "wazuh-master",
-            "timestamp": "2020-05-25T07:05:00+0000"
+            "data": {
+                "title": "Wazuh API",
+                "api_version": "4.0.0",
+                "revision": 4000,
+                "license_name": "GPL 2.0",
+                "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+                "hostname": "wazuh-master",
+                "timestamp": "2020-05-25T07:05:00+0000"
+            },
+            "error": 0
         }
 
 
-Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with your own value. In case you are not using the environment variable, replace $TOKEN with your jwt token.
+Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with the string corresponding to the chosen endpoint. If the environment variable is not going to be used, replace $TOKEN with the JWT token obtained.
 
 .. code-block:: console
 
@@ -74,13 +82,13 @@ Once logged in, it is possible to run any API endpoint following the structure b
 
 
 .. note::
-  There is another advanced authentication method, which allows obtaining the permissions in a dynamic way using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
+  There is an advanced authentication method, which allows obtaining the permissions dynamically using a run_as based system. See :ref:`Authorization Context login method <authorization_context_method>`.
 
 
-Logging into the API via scripts
---------------------------------
+Logging into the Wazuh API via scripts
+--------------------------------------
 
-The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with Wazuh API.
+The following scripts provide API login examples using default (`false`) or plain text (`true`) `raw` parameter. They intend to bring the user closer to real use cases with the Wazuh API.
 
 #. Logging in with Python:
 
@@ -111,7 +119,7 @@ The following scripts provide API login examples using default (`false`) or plai
 
     print("\nLogin request ...\n")
     response = requests.get(login_url, headers=login_headers, verify=False)
-    token = json.loads(response.content.decode())['token']
+    token = json.loads(response.content.decode())['data']['token']
     print(token)
 
     # New authorization header with the JWT token we got
@@ -140,30 +148,34 @@ Running the script provides a result similar to the following:
 
     Login request ...
 
-    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNTk3ODI4OTQ3LCJleHAiOjE1OTc4NjQ5NDcsInN1YiI6IndhenVoIiwicmJhY19wb2xpY2llcyI6eyJhZ2VudDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJncm91cDpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJhZ2VudDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyIsImFnZW50Omdyb3VwOioiOiJhbGxvdyJ9LCJhZ2VudDpkZWxldGUiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93IiwiYWdlbnQ6Z3JvdXA6KiI6ImFsbG93In0sImFnZW50Om1vZGlmeV9ncm91cCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6cmVzdGFydCI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiYWdlbnQ6dXBncmFkZSI6eyJhZ2VudDppZDoqIjoiYWxsb3ciLCJhZ2VudDpncm91cDoqIjoiYWxsb3cifSwiZ3JvdXA6cmVhZCI6eyJncm91cDppZDoqIjoiYWxsb3cifSwiZ3JvdXA6ZGVsZXRlIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDp1cGRhdGVfY29uZmlnIjp7Imdyb3VwOmlkOioiOiJhbGxvdyJ9LCJncm91cDptb2RpZnlfYXNzaWdubWVudHMiOnsiZ3JvdXA6aWQ6KiI6ImFsbG93In0sImFjdGl2ZS1yZXNwb25zZTpjb21tYW5kIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJzZWN1cml0eTpjcmVhdGVfdXNlciI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWRfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJldm9rZSI6eyIqOio6KiI6ImFsbG93In0sInNlY3VyaXR5OnJlYWQiOnsicm9sZTppZDoqIjoiYWxsb3ciLCJwb2xpY3k6aWQ6KiI6ImFsbG93IiwidXNlcjppZDoqIjoiYWxsb3cifSwic2VjdXJpdHk6dXBkYXRlIjp7InJvbGU6aWQ6KiI6ImFsbG93IiwicG9saWN5OmlkOioiOiJhbGxvdyIsInVzZXI6aWQ6KiI6ImFsbG93In0sInNlY3VyaXR5OmRlbGV0ZSI6eyJyb2xlOmlkOioiOiJhbGxvdyIsInBvbGljeTppZDoqIjoiYWxsb3ciLCJ1c2VyOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnN0YXR1cyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZCI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9hcGlfY29uZmlnIjp7Iio6KjoqIjoiYWxsb3cifSwibWFuYWdlcjp1cGRhdGVfYXBpX2NvbmZpZyI6eyIqOio6KiI6ImFsbG93In0sIm1hbmFnZXI6dXBsb2FkX2ZpbGUiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOnJlc3RhcnQiOnsiKjoqOioiOiJhbGxvdyJ9LCJtYW5hZ2VyOmRlbGV0ZV9maWxlIjp7Iio6KjoqIjoiYWxsb3ciLCJmaWxlOnBhdGg6KiI6ImFsbG93In0sIm1hbmFnZXI6cmVhZF9maWxlIjp7ImZpbGU6cGF0aDoqIjoiYWxsb3cifSwiY2x1c3RlcjpkZWxldGVfZmlsZSI6eyJub2RlOmlkOioiOiJhbGxvdyIsIm5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwZGF0ZV9hcGlfY29uZmlnIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVzdGFydCI6eyJub2RlOmlkOioiOiJhbGxvdyJ9LCJjbHVzdGVyOnVwbG9hZF9maWxlIjp7Im5vZGU6aWQ6KiI6ImFsbG93In0sImNsdXN0ZXI6cmVhZF9maWxlIjp7Im5vZGU6aWQ6KiZmaWxlOnBhdGg6KiI6ImFsbG93In0sImNpc2NhdDpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJkZWNvZGVyczpyZWFkIjp7ImRlY29kZXI6ZmlsZToqIjoiYWxsb3cifSwibGlzdHM6cmVhZCI6eyJsaXN0OnBhdGg6KiI6ImFsbG93In0sInJ1bGVzOnJlYWQiOnsicnVsZTpmaWxlOioiOiJhbGxvdyJ9LCJtaXRyZTpyZWFkIjp7Iio6KjoqIjoiYWxsb3cifSwic2NhOnJlYWQiOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NoZWNrOmNsZWFyIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJzeXNjaGVjazpydW4iOnsiYWdlbnQ6aWQ6KiI6ImFsbG93In0sInN5c2NvbGxlY3RvcjpyZWFkIjp7ImFnZW50OmlkOioiOiJhbGxvdyJ9LCJyYmFjX21vZGUiOiJibGFjayJ9fQ.rcn9j--_sA-Fy47mSc0R5Hts20izTtreB9WPTBILi9g
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjAyMjMxNjU2LCJleHAiOjE2MDIyMzUyNTYsInN1YiI6IndhenVoIiwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.V60_otHPaT4NTkrS6SF3GHva0Z9r5p4mqe5Cn0hk4o4
 
     - API calls with TOKEN environment variable ...
 
     Getting API information:
     {
-       "title": "Wazuh API REST",
-       "api_version": "4.0.0",
-       "revision": 4000,
-       "license_name": "GPL 2.0",
-       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-       "hostname": "wazuh-master",
-       "timestamp": "2020-08-19T09:20:02+0000"
+       "data": {
+          "title": "Wazuh API REST",
+          "api_version": "4.0.0",
+          "revision": 4000,
+          "license_name": "GPL 2.0",
+          "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+          "hostname": "wazuh-master",
+          "timestamp": "2020-08-19T09:20:02+0000"
+       },
+       "error": 0
     }
 
     Getting agents status summary:
     {
        "data": {
-          "active": 9,
-          "disconnected": 2,
-          "never_connected": 2,
+          "active": 1,
+          "disconnected": 0,
+          "never_connected": 0,
           "pending": 0,
-          "total": 13
-       }
+          "total": 1
+       },
+       "error": 0
     }
 
     End of the script.
@@ -208,25 +220,29 @@ Running the script provides a result similar to the following:
     Getting default information:
 
     {
-       "title": "Wazuh API REST",
-       "api_version": "4.0.0",
-       "revision": 4000,
-       "license_name": "GPL 2.0",
-       "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-       "hostname": "wazuh-master",
-       "timestamp": "2020-08-18T08:36:56+0000"
+       "data": {
+          "title": "Wazuh API REST",
+          "api_version": "4.0.0",
+          "revision": 4000,
+          "license_name": "GPL 2.0",
+          "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
+          "hostname": "wazuh-master",
+          "timestamp": "2020-08-19T09:20:02+0000"
+       },
+       "error": 0
     }
 
     Getting /agents/summary/os:
 
     {
        "data": {
-          "active": 9,
-          "disconnected": 2,
-          "never_connected": 2,
+          "active": 1,
+          "disconnected": 0,
+          "never_connected": 0,
           "pending": 0,
-          "total": 13
-       }
+          "total": 1
+       },
+       "error": 0
     }
 
     End of the script.
@@ -254,22 +270,26 @@ Here are some of the basic concepts related to making API requests and understan
 
 - All responses are in *JSON format* and most of them follow this structure:
 
-    +---------+----------------------+-----------------------------------------------------------------------+
-    | Field   | Sub-field            | Description                                                           |
-    +=========+======================+=======================================================================+
-    | data    | affected_items       | List with each one of the successfully affected items in the request. |
-    |         +----------------------+-----------------------------------------------------------------------+
-    |         | total_affected_items | Total number of successfully affected items.                          |
-    |         +----------------------+-----------------------------------------------------------------------+
-    |         | total_failed_items   | Total number of failed items.                                         |
-    |         +----------------------+-----------------------------------------------------------------------+
-    |         | failed_items         | List containing each of the failed items in the request.              |
-    +---------+----------------------+-----------------------------------------------------------------------+
-    | message |                      | Result description.                                                   |
-    +---------+----------------------+-----------------------------------------------------------------------+
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | Field   | Optional Sub-fields  | Description                                                                                                    |
+    +=========+======================+================================================================================================================+
+    | data    | affected_items       | List with each of the successfully affected items in the request.                                              |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_affected_items | Total number of successfully affected items.                                                                   |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | failed_items         | List containing each of the failed items in the request.                                                       |
+    |         +----------------------+----------------------------------------------------------------------------------------------------------------+
+    |         | total_failed_items   | Total number of failed items.                                                                                  |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | message |                      | Result description.                                                                                            |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
+    | error   |                      | For HTTP ``200`` responses determines if the response was complete (``0``), failed (``1``) or partial (``2``). |
+    |         |                      |                                                                                                                |
+    |         |                      | For HTTP ``4xx`` or ``5xx`` responses determines the error code related to the failure.                        |
+    +---------+----------------------+----------------------------------------------------------------------------------------------------------------+
 
 
-    - Example response without errors:
+    - Example response without errors (HTTP status code 200):
 
     .. code-block:: json
         :class: output
@@ -283,11 +303,12 @@ Here are some of the basic concepts related to making API requests and understan
             "total_affected_items": 2,
             "failed_items": [],
             "total_failed_items": 0
-          }
-          "message": "Restart request was sent to all specified nodes",
+          },
+          "message": "Restart request sent to all specified nodes",
+          "error": 0
         }
 
-    - Example response with errors:
+    - Example response with errors (HTTP status code 200):
 
     .. code-block:: json
         :class: output
@@ -322,33 +343,69 @@ Here are some of the basic concepts related to making API requests and understan
               }
             ]
           },
-          "message": "Restart command was not sent to any agent"
+          "message": "Restart command was not sent to any agent",
+          "error": 1
         }
 
-    - Example response to report an unauthorized request (code 401):
+   - Example of partial response (HTTP status code 200):
+
+    .. code-block:: json
+        :class: output
+
+        {
+          "data": {
+            "affected_items": [
+              {
+                "ip": "10.0.0.9",
+                "id": "001",
+                "name": "Carlos",
+                "dateAdd": "2020-10-07T08:14:32Z",
+                "node_name": "unknown",
+                "registerIP": "10.0.0.9",
+                "status": "never_connected"
+              }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 1,
+            "failed_items": [
+              {
+                "error": {
+                  "code": 1701,
+                  "message": "Agent does not exist",
+                  "remediation": "Please, use `GET /agents?select=id,name` to find all available agents"
+                },
+                "id": [
+                  "005"
+                ]
+              }
+            ]
+          },
+          "message": "Some agents information was not returned",
+          "error": 2
+        }
+
+    - Example response to report an unauthorized request (HTTP status code 401):
 
     .. code-block:: json
         :class: output
 
         {
           "title": "Unauthorized",
-          "detail": "No authorization token provided",
-          "status": 401
+          "detail": "The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.",
         }
 
-    - Example response to report a permission denied error (code 403):
+    - Example response to report a permission denied error (HTTP status code 403):
 
     .. code-block:: json
         :class: output
 
         {
-          "title": "Wazuh Error",
+          "title": "Permission Denied",
           "detail": "Permission denied: Resource type: *:*",
-          "status": 403,
           "remediation": "Please, make sure you have permissions to execute the current request. For more information on how to set up permissions, please visit https://documentation.wazuh.com/current/user-manual/api/rbac/configuration.html",
-          "code": 4000,
+          "error": 4000,
           "dapi_errors": {
-            "master-node": {
+            "unknown-node": {
               "error": "Permission denied: Resource type: *:*"
             }
           }
@@ -356,7 +413,7 @@ Here are some of the basic concepts related to making API requests and understan
 
 - Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-- All requests (except ``GET /``, ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
+- All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the API configuration file). The API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
@@ -365,7 +422,7 @@ Here are some of the basic concepts related to making API requests and understan
 Use cases
 ---------
 
-This section will present several use cases to give you a taste for the API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
+This section will present several use cases to give you a taste for the Wazuh API's potential. Details about all possible API requests can be found in the :ref:`reference <api_reference>` section.
 
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^
@@ -409,11 +466,12 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
           "total_failed_items": 0,
           "failed_items": []
        },
-       "message": "All selected rules were returned"
+       "message": "All selected rules were returned",
+       "error": 0
     }
 
 
-It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
+It can also be helpful to know which rules matching a specific criteria are available. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command below:
 
 .. code-block:: console
 
@@ -476,7 +534,8 @@ It can also be helpful to know what rules are available that match a specific cr
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All selected rules were returned"
+      "message": "All selected rules were returned",
+      "error": 0
     }
 
 
@@ -535,7 +594,8 @@ The API can be used to show information about all monitored files by syscheck. T
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent were returned"
+      "message": "FIM findings of the agent were returned",
+      "error": 0
     }
 
 You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
@@ -572,7 +632,8 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent were returned"
+      "message": "FIM findings of the agent were returned",
+      "error": 0
     }
 
 .. code-block:: console
@@ -607,13 +668,14 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "FIM findings of the agent were returned"
+      "message": "FIM findings of the agent were returned",
+      "error": 0
     }
 
 Getting information about the manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some information about the manager can be retrieved using the API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
+Some information about the manager can be retrieved using the Wazuh API. Configuration, status, information, logs, etc. The following example retrieves the status of each Wazuh daemon:
 
 .. code-block:: console
 
@@ -649,7 +711,8 @@ Some information about the manager can be retrieved using the API. Configuration
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Processes status were successfully read in specified node"
+      "message": "Processes status were successfully read in specified node",
+      "error": 0
     }
 
 
@@ -690,7 +753,8 @@ You can even dump the manager's current configuration with the request below (re
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "Configuration was successfully read in specified node"
+      "message": "Configuration was successfully read in specified node",
+      "error": 0
     }
 
 
@@ -732,7 +796,8 @@ This enumerates 2 **active** agents:
         "total_failed_items": 0,
         "failed_items": []
       },
-      "message": "All selected agents information was returned"
+      "message": "All selected agents information was returned",
+      "error": 0
     }
 
 
@@ -749,11 +814,12 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
       "data": {
         "id": "013",
         "key": "MDEzIE5ld0hvc3RfMiAxMC4wLjEwLjEyIDkzOTE0MmE4OTQ4YTNlMzA0ZTdiYzVmZTRhN2Q4Y2I1MjgwMWIxNDI4NWMzMzk3N2U5MWU5NGJiMDc4ZDEzNjc="
-      }
+      },
+      "error": 0
     }
 
 
 Conclusion
 ^^^^^^^^^^
-The provided examples should help appreciating the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
+The provided examples should help appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
 

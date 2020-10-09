@@ -17,7 +17,7 @@ The request `DELETE /agents <https://documentation.wazuh.com/current/user-manual
     {
         "error": 0,
         "data": {
-            "msg": "All selected agents were removed",
+            "message": "All selected agents were removed",
             "affected_agents": [
                 "005",
                 "006",
