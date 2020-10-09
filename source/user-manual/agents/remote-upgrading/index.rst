@@ -13,7 +13,6 @@ Remote upgrading
         :maxdepth: 2
 
         upgrading-agent
-        agent-upgrade-module
         custom-repository
         create-custom-wpk/create-wpk-key
         install-custom-wpk
@@ -25,5 +24,3 @@ that contains the files needed to upgrade agent to the new version. This securel
 Wazuh provides access to an updated WPK repository for each new release. All available WPK files can be found :doc:`here <./wpk-list>`.
 
 Custom repositories may also be added by following the steps described in :doc:`Adding custom repository <./custom-repository>`.
-
-.. note:: Since v4.1.0, the upgrade procedure is performed by the :ref:`Agent upgrade module<agent-upgrade-module>`.

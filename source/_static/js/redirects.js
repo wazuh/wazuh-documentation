@@ -34,32 +34,7 @@ removedUrls['x.y'] = [
 ];
 */
 
-/* *** RELEASE 4.1 ****/
-
-/* Pages added in 4.1 */
-
-newUrls['4.1'] = [
-  '/user-manual/reference/ossec-conf/agent-upgrade.html',
-  '/user-manual/reference/ossec-conf/task-manager.html',
-  '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
-];
-
-/* *** RELEASE 4.0 ****/
-
-/* Pages added in 4.0 */
-
-newUrls['4.0'] = [
-    '/user-manual/api/rbac/auth_context.html',
-    '/user-manual/api/rbac/configuration.html',
-    '/user-manual/api/rbac/how-it-works.html',
-    '/user-manual/api/rbac/index.html',
-    '/user-manual/api/rbac/reference.html',
-    '/user-manual/api/equivalence.html',
-];
-
 /* *** RELEASE 3.13 ****/
-
-/* Pages added in 3.13 */
 
 newUrls['3.13'] = [
   '/release-notes/release_3_13_1.html',
