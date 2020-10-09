@@ -5,7 +5,7 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBoxor other OVA compatible virtualization systems.
+Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems.
 
 .. note::
 
@@ -41,7 +41,7 @@ Once the virtual machine is imported and running, the next step consist on :ref:
 Upgrading the VM
 ----------------
 
-The virtual machine can be upgraded as a tradicional installation:
+The virtual machine can be upgraded as a traditional installation:
 
   - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
   - :ref:`Upgrading Open Distro for Elasticsearch, Filebeat-OSS and Kibana <upgrading_open_distro>`

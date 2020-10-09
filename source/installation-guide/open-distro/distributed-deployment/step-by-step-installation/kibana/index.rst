@@ -95,7 +95,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.0.0_7.8.0-1.zip
+        # sudo -u kibana bin/kibana-plugin install https://packages-dev.wazuh.com/warehouse/test/4.0/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip
 
 #. The next step involves the certificates placement. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
@@ -131,6 +131,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        user: wazuh
        password: wazuh
 
+Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
 Next steps
 ~~~~~~~~~~

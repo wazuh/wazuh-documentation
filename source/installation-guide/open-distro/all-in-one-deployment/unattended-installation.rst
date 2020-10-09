@@ -69,6 +69,8 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``root-ca.pem``, found in the ``/etc/kibana/certs`` directory, to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
 
+Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
+
 Next steps
 ----------
 

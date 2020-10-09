@@ -16,7 +16,7 @@ The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform
 - Configuration assessments
 - Software inventory
 
-In addition, it communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
+It communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
 The Wazuh agent has been developed taking into consideration the need for monitoring a great variety of different endpoints without impacting their performance. It is because of this that the Wazuh agent is supported in the most popular operating systems and only requires around 0.1 GB of RAM. 
 
