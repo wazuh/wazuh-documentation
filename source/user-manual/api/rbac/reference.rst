@@ -478,118 +478,119 @@ Mitre
 ^^^^^^^^^^^^^^^
 mitre:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /mitre (`*:*`_)
+- :api-ref:`GET /mitre <operation/api.controllers.mitre_controller.get_attack>` (`*:*`_)
 
 Rules
 ^^^^^^^^^^^^^^^
 rules:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /rules (`rule:file`_)
-- GET /rules/files (`rule:file`_)
-- GET /rules/files/{filename}/download (`rule:file`_)
-- GET /rules/groups (`rule:file`_)
-- GET /rules/requirement/{requirement} (`rule:file`_)
+- :api-ref:`GET /rules <operation/api.controllers.rules_controller.get_rules>` (`rule:file`_)
+- :api-ref:`GET /rules/files <operation/api.controllers.rules_controller.get_rules_files>` (`rule:file`_)
+- :api-ref:`GET /rules/files/{filename}/download <operation/api.controllers.rules_controller.get_download_file>` (`rule:file`_)
+- :api-ref:`GET /rules/groups <operation/api.controllers.rules_controller.get_rules_groups>` (`rule:file`_)
+- :api-ref:`GET /rules/requirement/{requirement} <operation/api.controllers.rules_controller.get_rules_requirement>` (`rule:file`_)
 
 
 SCA
 ^^^^^^^^^^^^^^^
 sca:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /sca/{agent_id} (`agent:id`_)
-- GET /sca/{agent_id}/checks/{policy_id} (`agent:id`_)
+- :api-ref:`GET /sca/{agent_id} <operation/api.controllers.sca_controller.get_sca_agent>` (`agent:id`_)
+- :api-ref:`GET /sca/{agent_id}/checks/{policy_id} <operation/api.controllers.sca_controller.get_sca_checks>` (`agent:id`_)
 
 
 Security
 ^^^^^^^^^^^^^^^
 security:create_user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- POST /security/users (`*:*`_)
+- :api-ref:`POST /security/users <operation/api.controllers.security_controller.create_user>` (`*:*`_)
 
 security:create
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- POST /security/policies (`*:*`_)
-- POST /security/roles (`*:*`_)
-- POST /security/rules (`*:*`_)
+- :api-ref:`POST /security/policies <operation/api.controllers.security_controller.add_policy>` (`*:*`_)
+- :api-ref:`POST /security/roles <operation/api.controllers.security_controller.add_role>` (`*:*`_)
+- :api-ref:`POST /security/rules <operation/api.controllers.security_controller.add_rule>` (`*:*`_)
 
 security:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- DELETE /security/policies (`policy:id`_)
-- DELETE /security/roles (`role:id`_)
-- DELETE /security/rules (`rule:id`_)
-- DELETE /security/roles/{role_id}/policies (`role:id`_, `policy:id`_)
-- DELETE /security/roles/{role_id}/rules (`role:id`_, `rule:id`_)
-- DELETE /security/users (`user:id`_)
-- DELETE /security/users/{username}/roles (`user:id`_, `role:id`_)
+- :api-ref:`DELETE /security/policies <operation/api.controllers.security_controller.remove_policies>` (`policy:id`_)
+- :api-ref:`DELETE /security/roles <operation/api.controllers.security_controller.remove_roles>` (`role:id`_)
+- :api-ref:`DELETE /security/rules <operation/api.controllers.security_controller.remove_rules>` (`rule:id`_)
+- :api-ref:`DELETE /security/roles/{role_id}/policies <operation/api.controllers.security_controller.remove_role_policy>` (`role:id`_, `policy:id`_)
+- :api-ref:`DELETE /security/roles/{role_id}/rules <operation/api.controllers.security_controller.remove_role_rule>` (`role:id`_, `rule:id`_)
+- :api-ref:`DELETE /security/users <operation/api.controllers.security_controller.delete_users>` (`user:id`_)
+- :api-ref:`DELETE /security/users/{user_id}/roles <operation/api.controllers.security_controller.remove_user_role>` (`user:id`_, `role:id`_)
 
 security:read_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /security/config (`*:*`_)
+- :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>` (`*:*`_)
 
 security:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /security/policies (`policy:id`_)
-- GET /security/roles (`role:id`_)
-- GET /security/rules (`rule:id`_)
-- GET /security/users (`user:id`_)
+- :api-ref:`GET /security/policies <operation/api.controllers.security_controller.get_policies>` (`policy:id`_)
+- :api-ref:`GET /security/roles <operation/api.controllers.security_controller.get_roles>` (`role:id`_)
+- :api-ref:`GET /security/rules <operation/api.controllers.security_controller.get_rules>` (`rule:id`_)
+- :api-ref:`GET /security/users <operation/api.controllers.security_controller.get_users>` (`user:id`_)
 
 security:revoke
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /security/user/authenticate (`*:*`_)
+- :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` (`*:*`_)
 
 security:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /security/config (`*:*`_)
-- DELETE /security/config (`*:*`_)
+- :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` (`*:*`_)
+- :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` (`*:*`_)
 
 security:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- POST /security/roles/{role_id}/policies (`role:id`_, `policy:id`_)
-- POST /security/users/{username}/roles (`user:id`_, `role:id`_)
-- PUT /security/policies/{policy_id} (`policy:id`_)
-- PUT /security/roles/{role_id} (`role:id`_)
-- PUT /security/rules/{rule_id} (`rule:id`_)
-- PUT /security/users/{username} (`user:id`_)
+- :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` (`role:id`_, `policy:id`_)
+- :api-ref:`POST /security/users/{username}/roles <operation/api.controllers.security_controller.set_user_role>` (`user:id`_, `role:id`_)
+- :api-ref:`POST /security/roles/{role_id}/rules <operation/api.controllers.security_controller.set_role_rule>` (`role:id`_, `rule:id`_)
+- :api-ref:`PUT /security/policies/{policy_id} <operation/api.controllers.security_controller.update_policy>` (`policy:id`_)
+- :api-ref:`PUT /security/roles/{role_id} <operation/api.controllers.security_controller.update_role>` (`role:id`_)
+- :api-ref:`PUT /security/rules/{rule_id} <operation/api.controllers.security_controller.update_role>` (`rule:id`_)
+- :api-ref:`PUT /security/users/{username} <operation/api.controllers.security_controller.update_user>` (`user:id`_)
 
 
 Syscheck
 ^^^^^^^^^^^^^^^
 syscheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- DELETE /experimental/syscheck (`agent:id`_)
-- DELETE /syscheck/{agent_id} (`agent:id`_)
+- :api-ref:`DELETE /experimental/syscheck <operation/api.controllers.experimental_controller.clear_syscheck_database>` (`agent:id`_)
+- :api-ref:`DELETE /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.delete_syscheck_agent>` (`agent:id`_)
 
 syscheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /syscheck/{agent_id} (`agent:id`_)
-- GET /syscheck/{agent_id}/last_scan (`agent:id`_)
+- :api-ref:`GET /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.get_syscheck_agent>` (`agent:id`_)
+- :api-ref:`GET /syscheck/{agent_id}/last_scan <operation/api.controllers.syscheck_controller.get_last_scan_agent>` (`agent:id`_)
 
 syscheck:run
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- PUT /syscheck (`agent:id`_)
+- :api-ref:`PUT /syscheck <operation/api.controllers.syscheck_controller.put_syscheck>` (`agent:id`_)
 
 
 Syscollector
 ^^^^^^^^^^^^^^^
 syscollector:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- GET /experimental/syscollector/hardware (`agent:id`_)
-- GET /experimental/syscollector/hotfixes (`agent:id`_)
-- GET /experimental/syscollector/netaddr (`agent:id`_)
-- GET /experimental/syscollector/netiface (`agent:id`_)
-- GET /experimental/syscollector/netproto (`agent:id`_)
-- GET /experimental/syscollector/os (`agent:id`_)
-- GET /experimental/syscollector/packages (`agent:id`_)
-- GET /experimental/syscollector/ports (`agent:id`_)
-- GET /experimental/syscollector/processes (`agent:id`_)
-- GET /syscollector/{agent_id}/hardware (`agent:id`_)
-- GET /syscollector/{agent_id}/hotfixes (`agent:id`_)
-- GET /syscollector/{agent_id}/netaddr (`agent:id`_)
-- GET /syscollector/{agent_id}/netiface (`agent:id`_)
-- GET /syscollector/{agent_id}/netproto (`agent:id`_)
-- GET /syscollector/{agent_id}/os (`agent:id`_)
-- GET /syscollector/{agent_id}/packages (`agent:id`_)
-- GET /syscollector/{agent_id}/ports (`agent:id`_)
-- GET /syscollector/{agent_id}/processes (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/hardware <operation/api.controllers.experimental_controller.get_hardware_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/hotfixes <operation/api.controllers.experimental_controller.get_hotfixes_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/netaddr <operation/api.controllers.experimental_controller.get_network_address_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/netiface <operation/api.controllers.experimental_controller.get_network_interface_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/netproto <operation/api.controllers.experimental_controller.get_network_protocol_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/os <operation/api.controllers.experimental_controller.get_os_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/packages <operation/api.controllers.experimental_controller.get_packages_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/ports <operation/api.controllers.experimental_controller.get_ports_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/processes <operation/api.controllers.experimental_controller.get_processes_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/hotfixes <operation/api.controllers.syscollector_controller.get_hotfix_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/netaddr <operation/api.controllers.syscollector_controller.get_network_address_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/netiface <operation/api.controllers.syscollector_controller.get_network_interface_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/netproto <operation/api.controllers.syscollector_controller.get_network_protocol_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/os <operation/api.controllers.syscollector_controller.get_os_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>` (`agent:id`_)
+- :api-ref:`GET /syscollector/{agent_id}/processes <operation/api.controllers.syscollector_controller.get_processes_info>` (`agent:id`_)
 
 
 Default policies
