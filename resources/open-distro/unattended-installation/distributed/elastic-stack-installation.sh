@@ -564,12 +564,17 @@ main() {
             getHelp
         fi               
 
-        if [ -n "${elastic}" ]; then     
-
+        if [ -n "${elastic}" ]; then
+            if [[ -z "${elastic}" ]] && [[ -z "${kibana}" ]]; then
+                getHelp
+            fi                    
+            if [[ -n "${elastic}" ]] && [[ -n "${kibana}" ]]; then
+                getHelp
+            fi        
             if [ -n "${ignore}" ]; then
                 echo "Health-check ignored."    
             else
-                healthCheck elastic kibana         
+                healthCheck elastic kibana        
             fi     
             checkConfig      
             installPrerequisites
