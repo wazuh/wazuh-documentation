@@ -266,9 +266,13 @@ The encryption system uses a constant initialization vector and a key:
 
 **Initialization vector**
 
-    8-byte hexadecimal array::
+    8-byte hexadecimal array for Blowfish method::
 
         <IV> = FE DC BA 98 76 54 32 10
+
+    8-byte hexadecimal array for AES method::
+
+        <IV> = FE DC BA 09 87 65 43 21
 
 **Encryption key**
 
