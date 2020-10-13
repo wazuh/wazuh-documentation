@@ -12,8 +12,6 @@ This guide describes how to install the Wazuh agent from source code for Debian 
 Installing Wazuh agent
 ----------------------
 
-.. note:: All the commands described below need to be executed with root user privileges.
-
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
     .. code-block:: console
