@@ -126,3 +126,4 @@ Installing Wazuh agent
 
 Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
 
+If you need to uninstall a Wazuh agent you may follow the instructions in this :ref:`section <uninstalling_wazuh_agents_linux>`.
