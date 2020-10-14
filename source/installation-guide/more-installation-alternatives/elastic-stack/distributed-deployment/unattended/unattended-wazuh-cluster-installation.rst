@@ -88,3 +88,6 @@ After the installation of all the components of the node, some steps must be don
         .. include:: ../../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
     #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
+
+
+To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.

@@ -7,6 +7,8 @@ Uninstalling Wazuh with Open Distro for Elasticsearch
 
 This document will give instructions to uninstall each Wazuh component. 
 
+.. _uninstall_manager:
+
 Uninstall the Wazuh manager
 ---------------------------
 
@@ -32,6 +34,7 @@ Uninstall the Wazuh manager
 
     .. include:: ../../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
+.. _uninstall_filebeat:
 
 Uninstall Filebeat
 ---------------------
@@ -61,6 +64,7 @@ Uninstall Filebeat
     .. include:: ../../../_templates/installations/elastic/deb/uninstall_filebeat.rst
 
 
+.. _uninstall_elasticsearch:
 
 Uninstall Elasticsearch
 -----------------------
@@ -91,6 +95,9 @@ Uninstall Elasticsearch
    
 
 
+
+
+.. _uninstall_kibana:
 
 Uninstall Kibana
 ----------------

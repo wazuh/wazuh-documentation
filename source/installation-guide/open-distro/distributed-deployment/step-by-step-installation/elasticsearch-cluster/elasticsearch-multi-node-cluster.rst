@@ -225,6 +225,8 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 
 
 
+To uninstall Elasticsearch, visit the :ref:`uninstalling section <uninstall_elasticsearch>`.
+
 Next steps
 ----------
 

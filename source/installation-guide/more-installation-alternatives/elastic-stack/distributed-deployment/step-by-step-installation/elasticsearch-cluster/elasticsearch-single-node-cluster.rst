@@ -142,6 +142,8 @@ Disabling repositories
     .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
+To uninstall Elasticsearch, visit the :ref:`uninstalling section <basic_uninstall_elasticsearch>`.
+
 Next steps
 ----------
 

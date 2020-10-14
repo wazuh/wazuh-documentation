@@ -416,3 +416,11 @@ Disabling repositories
   .. group-tab:: ZYpp
 
     .. include:: ../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
+
+
+To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+
+Next steps
+----------
+
+Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.

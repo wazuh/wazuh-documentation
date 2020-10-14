@@ -7,6 +7,8 @@ Uninstalling Wazuh with Elastic Stack
 
 This document will give instructions to uninstall each Wazuh component. 
 
+.. _basic_uninstall_manager:
+
 Uninstall the Wazuh manager
 ---------------------------
 
@@ -32,9 +34,10 @@ Uninstall the Wazuh manager
 
     .. include:: ../../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
+.. _basic_uninstall_filebeat:
 
 Uninstall Filebeat
----------------------
+------------------
 
 
 
@@ -61,6 +64,8 @@ Uninstall Filebeat
     .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
 
 
+
+.. _basic_uninstall_elasticsearch:
 
 Uninstall Elasticsearch
 -----------------------
@@ -91,6 +96,8 @@ Uninstall Elasticsearch
    
 
 
+
+.. _basic_uninstall_kibana:
 
 Uninstall Kibana
 ----------------

@@ -133,6 +133,8 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
+To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
+
 Next steps
 ~~~~~~~~~~
 

@@ -148,6 +148,8 @@ Disabling repositories
 
 
 
+To uninstall Kibana, visit the :ref:`uninstalling section <basic_uninstall_kibana>`.
+
 Next steps
 ~~~~~~~~~~
 
