@@ -59,7 +59,18 @@ newUrls['4.0'] = [
 
 /* *** RELEASE 3.13 ****/
 
-/* Pages added in 3.13 */
+redirections.push(
+  {
+    'target': ['3.12=>3.13', '3.13=>3.12'],
+    '3.12': '/getting-started/components.html',
+    '3.13': '/getting-started/components/index.html',
+  },
+  {
+    'target': ['3.12=>3.13', '3.13=>3.12'],
+    '3.12': '/getting-started/use-cases.html',
+    '3.13': '/getting-started/use_cases/index.html',
+  }
+);
 
 newUrls['3.13'] = [
   '/release-notes/release_3_13_2.html',
