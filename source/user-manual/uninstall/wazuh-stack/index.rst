@@ -5,8 +5,8 @@
 .. _uninstalling_wazuh_installation:
 
 
-Uninstall the Wazuh installation
-================================
+Uninstall Wazuh server
+======================
                                                            
 
     .. toctree::
