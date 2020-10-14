@@ -115,7 +115,7 @@ Wazuh packages
 
 **Fixed**
 
-- Unit files for systemd are now installed on /usr/lib/systemd/system.
+- Unit files for systemd are now installed on ``/usr/lib/systemd/system``.
 - Unit files are now correctly upgraded.
 - ossec-init.conf file now shows the build date for any system.
 - Fixed an error setting SCA file permissions on .deb packages.
