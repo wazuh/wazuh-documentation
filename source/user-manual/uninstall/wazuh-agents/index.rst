@@ -5,8 +5,13 @@
 .. _uninstalling_wazuh_agents:
 
 
+
 Uninstall a Wazuh agent
 =======================
+
+To uninstall a Wazuh agent follow the instructions for your operating system:
+
+.. _uninstalling_wazuh_agents_aix:
 
 AIX
 ---
@@ -18,6 +23,8 @@ To uninstall the agent:
       # rpm -e wazuh-agent
 
 There are files marked as configuration files. Due to this designation, the package manager does not remove those files from the filesystem. The complete file removal action is on user's responsibility. it can be done by removing the folder ``/var/ossec``.
+
+.. _uninstalling_wazuh_agents_linux:
 
 Linux
 -----
@@ -46,6 +53,8 @@ To uninstall the agent:
 
     .. include:: ../../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
 
+
+.. _uninstalling_wazuh_agents_macos:
 
 macOS
 -----
@@ -92,6 +101,8 @@ To uninstall the agent in macOS:
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
 
 
+.. _uninstalling_wazuh_agents_solaris:
+
 Solaris
 -------
 
@@ -108,6 +119,8 @@ Solaris
 
     .. include:: ../../../_templates/installations/wazuh/solaris/uninstall_wazuh_agent_s11.rst
 
+
+.. _uninstalling_wazuh_agents_windows:
 
 Windows
 -------
