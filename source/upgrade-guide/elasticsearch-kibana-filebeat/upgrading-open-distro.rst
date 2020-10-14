@@ -194,7 +194,7 @@ Upgrading Filebeat
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file. This step is only needed for the upgrade of a ``Distributed installation``. In case of having an ``All-in-one`` installation, the file is already configured:
 
