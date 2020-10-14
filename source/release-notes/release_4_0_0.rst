@@ -2,7 +2,7 @@
 
 .. _release_4_0_0:
 
-4.4.0 Release notes
+4.0.0 Release notes
 ===================
 
 This section lists the changes in version 4.0.0. More details about these changes are provided in each component changelog:
