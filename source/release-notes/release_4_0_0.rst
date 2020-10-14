@@ -116,11 +116,13 @@ Wazuh packages
 **Fixed**
 
 - Unit files for systemd are now installed on ``/usr/lib/systemd/system``.
-- Unit files are now correctly upgraded.
-- ossec-init.conf file now shows the build date for any system.
-- Fixed an error setting SCA file permissions on .deb packages.
-- Removed
-- Removed Wazuh API package has been removed. Now, the Wazuh API is embedded into the Wazuh Manager installation.
+- Improved the upgrade of unit files.
+- ``ossec-init.conf`` file now shows the build date for any system.
+- Fixed an error setting SCA file permissions on ``.deb`` packages.
+
+**Removed**
+
+- The Wazuh API package has been removed. Now, the Wazuh API is embedded into the Wazuh Manager installation.
 - Removed OpenSCAP files and integration.
 
 Wazuh documentation
