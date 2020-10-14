@@ -95,6 +95,7 @@ Wazuh ruleset
 -------------
 
 - Changed compliance rules groups and removed ``alert_by_email`` option by default.
+- Let the Ruleset update tool pick up the current version branch by default.
 
 Wazuh packages
 --------------
