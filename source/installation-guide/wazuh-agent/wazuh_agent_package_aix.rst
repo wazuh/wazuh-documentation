@@ -27,3 +27,5 @@ You can download the `AIX installer <https://packages.wazuh.com/3.x/aix/wazuh-ag
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_aix>`.
 
+If you need to uninstall a Wazuh agent you may follow the instructions in this :ref:`section <uninstalling_wazuh_agents_aix>`.
+

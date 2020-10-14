@@ -66,4 +66,5 @@ Finally, remove the publisher:
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
+If you need to uninstall a Wazuh agent you may follow the instructions in this :ref:`section <uninstalling_wazuh_agents_solaris>`.
 
