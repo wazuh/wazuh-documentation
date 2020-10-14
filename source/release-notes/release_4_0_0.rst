@@ -16,15 +16,15 @@ Highlights
 
 - The agent enrollment is now performed on the main daemon initialization. There is no need to request a key using an external CLI anymore. (Agents in ``3.x`` version are still 100% compatible with ``4.x`` version)
 
-- A deploy script has been created to download, install and configure the agent. Unique command to deploy the agents.
+- A deploy script has been created to download, install, and configure the agent. A Unique command to deploy the agents.
 
 - Wazuh API is now embedded in the Wazuh manager. The API comes by default with the Manager installation.
 
 - Wazuh cluster mode enabled by default.
 
-- Wazuh API RBAC: Set up users, roles and policies to manage the access permissions. Wazuh WUI now restricts resources depending on permissions.
+- Wazuh API RBAC: Set up users, roles, and policies to manage the access permissions. Wazuh WUI now restricts resources depending on permissions.
 
-- Wazuh manager and agents will use TCP as default communication protocol.
+- Wazuh manager and agents will use TCP as the default communication protocol.
 
 - The Windows agent MSI installer is now signed using DigiCert instead of GlobalSign. DigiCert is known for being present on more Windows versions including the oldest ones.
 
@@ -38,7 +38,7 @@ Breaking changes
 
 - Wazuh API has been deprecated. The API is now embedded in the Wazuh manager. No wazuh-api package will be installed anymore.
 
-- Wazuh manager and agents are no longer using UDP as default communication protocol. TCP is enabled by default.
+- Wazuh manager and agents are no longer using UDP as the default communication protocol. TCP is enabled by default.
 
 - OpenSCAP policies removed from RPM and DEB packages. Folder present policies in the agent installation will be removed.
 
@@ -53,7 +53,7 @@ Added
 
 - Embedded Wazuh API with Wazuh Manager, there is no need to install Wazuh API.
 
-- Migrated Wazuh API server from nodejs to python.
+- Migrated Wazuh API server from NodeJS to Python.
 
 - Added asynchronous ``aiohttp`` server for the Wazuh API.
 
@@ -63,7 +63,7 @@ Added
 
 - Improved Wazuh API reference documentation based on OpenAPI spec using redoc.
 
-- Added new yaml Wazuh API configuration file.
+- Added a new yaml Wazuh API configuration file.
 
 - Added new endpoints to manage API configuration and deprecated ``configure_api.sh``.
 
@@ -73,7 +73,7 @@ Added
 
 - Added SQLAlchemy ORM based database for RBAC.
 
-- Added new JWT authentication method.
+- Added a new JWT authentication method.
 
 - Wazuh API up and running by default in all nodes for a clustered environment.
 
@@ -81,11 +81,11 @@ Added
 
 - Added tavern and docker based Wazuh API integration tests.
 
-- Added new and unified Wazuh API responses structure.
+- Added new and unified Wazuh API response structure.
 
 - Added new endpoints for Wazuh API users management.
 
-- Added new endpoint to restart agents that belong to a node.
+- Added a new endpoint to restart agents that belong to a node.
 
 - Added and improved ``q`` filter in several endpoints.
 
@@ -101,7 +101,7 @@ Added
 
 - Added improved support for monitoring paths from environment variables.
 
-- Added auto enrollment capability. Agents are now able to request a key from the manager if current key is missing or wrong.
+- Added auto enrollment capability. Agents are now able to request a key from the manager if the current key is missing or wrong.
 
 **Vulnerability Detector**
 
@@ -134,15 +134,15 @@ Changed
 Fixed
 ^^^^^
 
-- Fixed an error with last scan time in syscheck endpoints.
+- Fixed an error with the last scan time in syscheck endpoints.
 
-- Added support for monitoring directories which contain commas.
+- Added support for monitoring directories that contain commas.
 
 - Fixed a bug where configuring a directory to be monitored as realtime and whodata resulted in realtime prevailing.
 
 - Fixed using an incorrect mutex while deleting inotify watches.
 
-- Fixed a bug which could cause multiple FIM threads to request the same temporary file.
+- Fixed a bug that could cause multiple FIM threads to request the same temporary file.
 
 - Fixed a bug where deleting a file permanently in Windows would not trigger an alert.
 
@@ -212,7 +212,7 @@ Changed
 
 - Redesigned the app settings configuration with categories.
 
-- Moved the wazuh-registry file to Kibana optimize folder .
+- Moved the wazuh-registry file to Kibana optimize folder.
 
 
 Fixed
@@ -282,10 +282,19 @@ Removed
 Wazuh documentation
 -------------------
 
-- Added two different sections in the installation guide to install Wazuh alogn Elastic stack or Open Distro for Elasticsearch.
+Added
+^^^^^
+- Added instructions to install Wazuh along with Open Distro.
 
-- Reorganized the installation guide to choose between all in one deployment or distributed deployment.
+- Added script for Wazuh unattended installation.
 
-- Added scripts for unattended installations.
+- Added tabs in the installation guide to ease the installation process.
+
+- Added a more installation alternatives section that provides installation alternatives such as installation Wazuh along with Elastic Stack, Splunk or installing Wazuh from sources.
+
+Changed
+^^^^^^^
+
+- Split the installation guide in All in one installation and distributed deployment.
 
 - Reorganized the upgrade guide.
