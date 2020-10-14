@@ -8,6 +8,7 @@
 This section lists the changes in version 4.0.0. More details about these changes are provided in each component changelog:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.0/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/4.0/CHANGELOG.md`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/master/CHANGELOG.md>`_
 
 Highlights
