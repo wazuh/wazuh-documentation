@@ -129,6 +129,10 @@ This reference also contains a set of default roles and policies that can be imm
     - `readonly`_
     - `users_admin`_
 
+`Default rules`_
+    - `wui_elastic_admin`_
+    - `wui_opendistro_admin`_
+
 Resources
 -----------
 
@@ -273,12 +277,12 @@ agent:delete
 
 agent:modify_group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`agent:id`_)
-- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`agent:id`_)
 - :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`agent:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`agent:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`agent:id`_)
 - :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`agent:id`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`agent:id`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`agent:id`_)
 
 agent:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -296,10 +300,10 @@ agent:read
 
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /agents/restart <operation/api.controllers.agents_controller.restart_agents>` (`agent:id`_)
-- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`agent:id`_)
-- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agents_controller.restart_agent>` (`agent:id`_)
 - :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_group>` (`agent:id`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`agent:id`_)
+- :api-ref:`PUT /agents/restart <operation/api.controllers.agents_controller.restart_agents>` (`agent:id`_)
+- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agents_controller.restart_agent>` (`agent:id`_)
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -320,8 +324,8 @@ Cluster
 ^^^^^^^
 cluster:delete_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id<node>`)
 - :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id:<node>&file:path:<file_path>`)
+- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id<node>`)
 
 cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -329,7 +333,7 @@ cluster:read_api_config
 
 cluster:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`node:id`_)
+- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id`_)
 - :api-ref:`GET /cluster/configuration/validation <operation/api.controllers.cluster_controller.get_conf_validation>` (`node:id`_)
 - :api-ref:`GET /cluster/healthcheck <operation/api.controllers.cluster_controller.get_healthcheck>` (`node:id`_)
 - :api-ref:`GET /cluster/local/config <operation/api.controllers.cluster_controller.get_config>` (`node:id`_)
@@ -338,8 +342,6 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.get_configuration_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration/{component}/{configuration} <operation/api.controllers.cluster_controller.get_node_config>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id`_)
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
-- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/info <operation/api.controllers.cluster_controller.get_info_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs <operation/api.controllers.cluster_controller.get_log_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs/summary <operation/api.controllers.cluster_controller.get_log_summary_node>` (`node:id`_)
@@ -349,7 +351,9 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/stats/remoted <operation/api.controllers.cluster_controller.get_stats_remoted_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/stats/weekly <operation/api.controllers.cluster_controller.get_stats_weekly_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>` (`node:id`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`node:id`_)
 - :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
+- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
 
 cluster:read_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -394,12 +398,12 @@ group:delete
 
 group:modify_assignments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`group:id`_)
-- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`group:id`_)
 - :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`group:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`group:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`group:id`_)
 - :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`group:id`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`group:id`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`group:id`_)
 
 group:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -428,8 +432,8 @@ Manager
 ^^^^^^^^^^^^^^^
 manager:delete_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 - :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`file:path`_)
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 
 manager:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -437,12 +441,11 @@ manager:read_api_config
 
 manager:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`*:*`_)
 - :api-ref:`GET /manager/configuration <operation/api.controllers.manager_controller.get_configuration>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/validation <operation/api.controllers.manager_controller.get_conf_validation>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/{component}/{configuration} <operation/api.controllers.manager_controller.get_manager_config_ondemand>` (`*:*`_)
 - :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`*:*`_)
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
-- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`*:*`_)
 - :api-ref:`GET /manager/info <operation/api.controllers.manager_controller.get_info>` (`*:*`_)
 - :api-ref:`GET /manager/logs <operation/api.controllers.manager_controller.get_log>` (`*:*`_)
 - :api-ref:`GET /manager/logs/summary <operation/api.controllers.manager_controller.get_log_summary>` (`*:*`_)
@@ -452,6 +455,7 @@ manager:read
 - :api-ref:`GET /manager/stats/remoted <operation/api.controllers.manager_controller.get_stats_remoted>` (`*:*`_)
 - :api-ref:`GET /manager/stats/weekly <operation/api.controllers.manager_controller.get_stats_weekly>` (`*:*`_)
 - :api-ref:`GET /manager/status <operation/api.controllers.manager_controller.get_status>` (`*:*`_)
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 - :api-ref:`PUT /manager/restart <operation/api.controllers.manager_controller.put_restart>` (`*:*`_)
 
 manager:read_file
@@ -464,8 +468,8 @@ manager:restart
 
 manager:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
 - :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>` (`*:*`_)
+- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
 
 manager:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -513,9 +517,9 @@ security:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`DELETE /security/policies <operation/api.controllers.security_controller.remove_policies>` (`policy:id`_)
 - :api-ref:`DELETE /security/roles <operation/api.controllers.security_controller.remove_roles>` (`role:id`_)
-- :api-ref:`DELETE /security/rules <operation/api.controllers.security_controller.remove_rules>` (`rule:id`_)
 - :api-ref:`DELETE /security/roles/{role_id}/policies <operation/api.controllers.security_controller.remove_role_policy>` (`role:id`_, `policy:id`_)
 - :api-ref:`DELETE /security/roles/{role_id}/rules <operation/api.controllers.security_controller.remove_role_rule>` (`role:id`_, `rule:id`_)
+- :api-ref:`DELETE /security/rules <operation/api.controllers.security_controller.remove_rules>` (`rule:id`_)
 - :api-ref:`DELETE /security/users <operation/api.controllers.security_controller.delete_users>` (`user:id`_)
 - :api-ref:`DELETE /security/users/{user_id}/roles <operation/api.controllers.security_controller.remove_user_role>` (`user:id`_, `role:id`_)
 
@@ -532,22 +536,22 @@ security:read
 
 security:revoke
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` (`*:*`_)
+- :api-ref:`PUT /security/user/revoke <operation/api.controllers.security_controller.login_user>` (`*:*`_)
 
 security:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` (`*:*`_)
 - :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` (`*:*`_)
+- :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` (`*:*`_)
 
 security:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` (`role:id`_, `policy:id`_)
-- :api-ref:`POST /security/users/{username}/roles <operation/api.controllers.security_controller.set_user_role>` (`user:id`_, `role:id`_)
 - :api-ref:`POST /security/roles/{role_id}/rules <operation/api.controllers.security_controller.set_role_rule>` (`role:id`_, `rule:id`_)
+- :api-ref:`POST /security/users/{user_id}/roles <operation/api.controllers.security_controller.set_user_role>` (`user:id`_, `role:id`_)
 - :api-ref:`PUT /security/policies/{policy_id} <operation/api.controllers.security_controller.update_policy>` (`policy:id`_)
 - :api-ref:`PUT /security/roles/{role_id} <operation/api.controllers.security_controller.update_role>` (`role:id`_)
 - :api-ref:`PUT /security/rules/{rule_id} <operation/api.controllers.security_controller.update_role>` (`rule:id`_)
-- :api-ref:`PUT /security/users/{username} <operation/api.controllers.security_controller.update_user>` (`user:id`_)
+- :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>` (`user:id`_)
 
 
 Syscheck
@@ -612,6 +616,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
     - ``group:id:*``
     - ``*:*:*``
 
@@ -641,6 +646,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
     - ``group:id:*``
 
 Effect
@@ -685,10 +691,6 @@ Resources
     - ``node:id:*``
     - ``node:id:*&file:path:*``
     - ``'*:*:*'``
-    - ``file:path:*``
-    - ``node:id:*``
-    - ``node:id:*&file:path:*``
-    - ``*:*:*``
 
 Effect
     - allow
@@ -704,11 +706,12 @@ Actions
     - `cluster:read_file`_
     - `manager:read`_
     - `manager:read_api_config`_
-    - `manager:read_file`_
 
 Resources
-    - ``agent:id:*``
-    - ``group:id:*``
+    - ``file:path:*``
+    - ``node:id:*``
+    - ``node:id:*&file:path:*``
+    - ``'*:*:*'``
 
 Effect
     - allow
@@ -725,6 +728,20 @@ Resources
 
 Effect
     - allow
+
+lists_read
+^^^^^^^^^^^^^^^
+Allow read all lists paths in the system.
+
+Actions
+    - `lists:read`_
+
+Resources
+    - ``list:path:*``
+
+Effect
+    - allow
+
 
 mitre_read
 ^^^^^^^^^^^^^^^
@@ -752,6 +769,19 @@ Resources
 Effect
     - allow
 
+sca_read
+^^^^^^^^^^^^^^^
+Allow read agent’s sca information.
+
+Actions
+    - `sca:read`_
+
+Resources
+    - ``agent:id:*``
+
+Effect
+    - allow
+
 security_all
 ^^^^^^^^^^^^^^^
 Provide full access to all security related functionalities.
@@ -770,6 +800,7 @@ Resources
     - ``role:id:*``
     - ``policy:id:*``
     - ``user:id:*``
+    - ``rule:id:*``
     - ``*:*:*``
 
 Effect
@@ -793,6 +824,48 @@ Resources
 Effect
     - allow
 
+syscheck_read
+^^^^^^^^^^^^^^^
+Allow read syscheck information.
+
+Actions
+    - `syscheck:read`_
+
+Resources
+    - ``agent:id:*``
+
+Effect
+    - allow
+
+syscheck_all
+^^^^^^^^^^^^^^^
+Allow read, run and clear syscheck information.
+
+Actions
+    - `syscheck:clear`_
+    - `syscheck:read`_
+    - `syscheck:run`_
+
+Resources
+    - ``agent:id:*``
+
+Effect
+    - allow
+
+syscollector_read
+^^^^^^^^^^^^^^^^^^
+Allow read agents information.
+
+Actions
+    - `syscollector:read`_
+
+Resources
+    - ``agent:id:*``
+
+Effect
+    - allow
+
+
 Default roles
 -------------
 administrator
@@ -802,12 +875,20 @@ Administrator role of the system, this role have full access to the system.
 Policies
     - `agents_all`_
     - `agents_commands`_
-    - `security_all`_
-    - `cluster_all`_
     - `ciscat_read`_
+    - `cluster_all`_
     - `decoders_read`_
+    - `lists_read`_
     - `mitre_read`_
     - `rules_read`_
+    - `sca_read`_
+    - `security_all`_
+    - `syscheck_all`_
+    - `syscollector_read`_
+
+Rules
+    - `wui_elastic_admin`_
+    - `wui_opendistro_admin`_
 
 agents_admin
 ^^^^^^^^^^^^
@@ -844,9 +925,15 @@ Read only role, this role can read all the information of the system.
 Policies
     - `agents_read`_
     - `ciscat_read`_
+    - `cluster_read`_
     - `decoders_read`_
+    - `lists_read`_
     - `mitre_read`_
     - `rules_read`_
+    - `sca_read`_
+    - `syscheck_read`_
+    - `syscollector_read`_
+
 
 users_admin
 ^^^^^^^^^^^^
@@ -854,3 +941,25 @@ Users administrator of the system, this role have full access to all users relat
 
 Policies
     - `users_all`_
+
+Default rules
+-------------
+wui_elastic_admin
+^^^^^^^^^^^^^^^^^^^^^
+Administrator permissions for WUI's elastic users.
+
+.. code-block:: yaml
+
+    rule:
+        FIND:
+            username: "elastic"
+
+wui_opendistro_admin
+^^^^^^^^^^^^^^^^^^^^^
+Administrator permissions for WUI's opendistro users.
+
+.. code-block:: yaml
+
+    rule:
+        FIND:
+            user_name: "admin"
