@@ -17,7 +17,7 @@ Download the installation script:
 
 .. code-block:: console
 
-    # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
+    # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
 Run the following command to install the Wazuh manager. Replace ``<node_name>`` by the name of the Wazuh server: 
 

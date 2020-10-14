@@ -27,7 +27,7 @@
 
       .. code-block:: console
 
-        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/single-node/search-guard.yml
+        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/searchguard/single-node/search-guard.yml
 
 
       After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. More than one IP can be specified (one entry per line):
@@ -44,7 +44,7 @@
 
       .. code-block:: console
 
-        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/open-distro/searchguard/single-node/search-guard-multi-node.yml
+        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/searchguard/single-node/search-guard-multi-node.yml
 
 
       After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):

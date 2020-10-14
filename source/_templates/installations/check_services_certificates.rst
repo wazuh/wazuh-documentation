@@ -7,7 +7,7 @@ Check the certificates:
 
 .. code-block:: console
 
-  # curl -sL  https://raw.githubusercontent.com/wazuh/wazuh-documentation/2205-Open_Distro_installation/resources/certificate_checker.sh | bash -
+  # curl -sL  https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/certificate_checker.sh | bash -
 
 Check the Wazuh manager service:
 
