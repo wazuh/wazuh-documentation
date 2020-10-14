@@ -88,7 +88,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&list_groups=all" -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&groups_list=all" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
