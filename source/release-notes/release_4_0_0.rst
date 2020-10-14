@@ -73,8 +73,6 @@ Wazuh Kibana plugin
 
 - Redesigned the app settings configuration with categories
 
-- Redesigned the app Dev Tools
-
 - Moved the wazuh-registry file to Kibana optimize folder 
 
 
@@ -102,6 +100,7 @@ Wazuh packages
 --------------
 
 **Added**
+
 - Added Open Distro for Elasticsearch packages to Wazuh's software repository.
 
 
