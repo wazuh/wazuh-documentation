@@ -2,19 +2,19 @@
 
 .. _kibana_app:
 
-Kibana app
-==========
+Wazuh Kibana plugin
+===================
 
 .. meta::
-  :description: Find information about the Wazuh Kibana app, its different features, configuration reference and how to troubleshoot some of the most common problems.
+  :description: Find information about the Wazuh Kibana plugin, its different features, configuration reference and how to troubleshoot some of the most common problems.
 
-The Wazuh app for Kibana lets you visualize and analyze Wazuh alerts stored in Elasticsearch. You can obtain statistics per agent, search alerts and filter using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
+The Wazuh Kibana plugin lets you visualize and analyze Wazuh alerts stored in Elasticsearch. You can obtain statistics per agent, search alerts and, filter using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
 
-.. note:: Read our `Searching for alerts using the Wazuh app for Kibana <https://wazuh.com/blog/searching-for-alerts-using-the-wazuh-app-for-kibana//>`_ document for more information.
+.. note:: Read our `Searching for alerts using the Wazuh Kibana plugin <https://wazuh.com/blog/searching-for-alerts-using-the-wazuh-app-for-kibana//>`_ document for more information.
 
-To install the app, you can follow our Elastic Stack installation guides (for :ref:`RPM <install_kibana_app_rpm>` or :ref:`Debian <install_kibana_app_deb>` systems).
+To install the plugin, you can follow our :ref:`Elastic Stack installation guides <kibana>`.
 
-This manual describes the configuration process to get it started and the different app features that you can use. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
+This manual describes the configuration process to get it started and the different plugin features that you can use. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
 
 .. topic:: Contents
 

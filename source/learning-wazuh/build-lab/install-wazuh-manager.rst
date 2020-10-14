@@ -46,15 +46,6 @@ Install the Wazuh manager software and confirm it is running:
     # yum -y install wazuh-manager
     # systemctl status wazuh-manager
 
-Configure Wazuh manager to listen for agent connections on tcp instead of udp:
-
-  .. code-block:: console
-
-    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
-    # sed -i 's/<protocol>udp/<protocol>tcp/' /var/ossec/etc/ossec.conf
-    # grep "<protocol>" -B3 -A2 /var/ossec/etc/ossec.conf
-
-
 Configure Wazuh manager to allow self registration of new agents with authentication:
 
   .. code-block:: console
@@ -78,35 +69,12 @@ listener are in place:
       tcp        0      0 0.0.0.0:1514            0.0.0.0:*               LISTEN      14311/ossec-remoted
       tcp        0      0 0.0.0.0:1515            0.0.0.0:*               LISTEN      14263/ossec-authd
 
+.. versionadded:: 4.0.0
 
-Install Wazuh API
------------------
+The Wazuh API will be installed along the Wazuh manager by default. No extra steps or requirements are needed to install it.
 
-The Wazuh API provides an interface to manage and monitor the configuration and deployment status of agents.
-It is mostly used by the Wazuh Kibana plugin, but it is a general-purpose RESTful API that can be used
-from the command line via curl or via custom scripts for interacting with various
-aspects of Wazuh manager.
-
-1. Install wazuh-api package and its dependency nodejs.
-
-  .. code-block:: console
-
-	 # curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
-	 # yum -y install nodejs
-	 # yum -y install wazuh-api
-	 # systemctl status wazuh-api
-
-2. Use the API configurator script to enable SSL and set credentials for API access
-
-  .. code-block:: console
-
-	 # /var/ossec/api/scripts/configure_api.sh
-
-  Press <Enter> during configuration to take defaults, except for these cases:
-
-  - For the three "Enter pass phrase for..." prompts:  specify "keypass" each time.
-  - For "API user", enter "wazuhapiuser".
-  - For "New password", enter "wazuhlab" and then enter it again.
+.. note::
+    Check out the section :ref:`Wazuh API <api>` for more information on how to set up and use the Wazuh API.
 
 
 Install Filebeat
@@ -155,7 +123,7 @@ and archived events to the Elasticsearch service.
 
   .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+    # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 6. Edit and set the specific IP address of your Elasticsearch instance into the Filebeat config:
 

@@ -24,7 +24,6 @@ Configuration options for file integrity monitoring:
 - `frequency`_
 - `ignore`_
 - `max_eps`_
-- `nodiff`_
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
@@ -42,6 +41,7 @@ Configuration options for file integrity monitoring:
 - `whodata`_
 - `windows_audit_interval`_
 - `windows_registry`_
+- `diff`_
 
 
 .. _reference_ossec_syscheck_alert_new_files:
@@ -198,6 +198,16 @@ Attributes:
 |                          | Default value                                              | no                                                       |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
++--------------------------+------------------------------------------------------------+----------------------------------------------------------+
+| **diff_size_limit**      | Limit the maximum size of the file which will report diff information with ``report_changes`` enabled.                |
++                          +                                                                                                                       +
+|                          | Files bigger than this value will not report diff information.                                                        |
++                          +                                                                                                                       +
+|                          | .. versionadded:: 4.0.0                                                                                               |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Default value                                              | 50MB                                                     |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Allowed values                                             | Any positive number followed by KB/MB/GB                 |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_all**            | It modifies the value of all attributes with the prefix ``check_``.                                                   |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -430,35 +440,6 @@ Example:
 .. code-block:: xml
 
  <max_eps>100</max_eps>
-
-
-.. _reference_ossec_syscheck_nodiff:
-
-nodiff
-------
-
-List of files to not compute the diff. Introduced as one entry per line. It could be used for sensitive files like a private key, credentials stored in a file or database configuration to avoid data leaking by sending the file content changes through alerts.
-
-+--------------------+----------------------------------------------------------------------+
-| **Default value**  | The default configuration may vary depending on the operating system.|
-+--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any file name.                                                       |
-+--------------------+----------------------------------------------------------------------+
-
-Attributes:
-
-+----------+---------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files to not compute the diff.     |
-+          +--------------------------------------------+------------------------------------+
-|          | Allowed values                             | sregex                             |
-+----------+--------------------------------------------+------------------------------------+
-
-Example:
-
-.. code-block:: xml
-
- <nodiff>/etc/ssl/private.key</nodiff>
- <nodiff type="sregex">/tmp/test/file$</nodiff>
 
 
 .. _reference_ossec_syscheck_prefilter_cmd:
@@ -906,6 +887,112 @@ Sets the maximum synchronization message throughput.
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
 
+.. _reference_ossec_syscheck_diff:
+
+diff
+^^^^
+
+.. versionadded:: 4.0
+
+The diff settings will be configured inside this tag.
+
+.. code-block:: xml
+
+    <diff>
+      <disk_quota>
+        <enabled>yes</enabled>
+        <limit>1GB</limit>
+      </disk_quota>
+      <file_size>
+        <enabled>yes</enabled>
+        <limit>50MB</limit>
+      </file_size>
+
+      <nodiff>/etc/ssl/private.key</nodiff>
+    </diff>
+
+disk_quota
+""""""""""
+
+.. versionadded:: 4.0
+
+This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
+
+**enabled**
+
+.. versionadded:: 4.0
+
+Set the disk quota limit option to enabled or disabled.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**limit**
+
+.. versionadded:: 4.0
+
+Specifices the limit for the size of the ``queue/diff/local`` folder.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 1GB                                         |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any positive number followed by KB/MB/GB    |
++--------------------------+---------------------------------------+
+
+file_size
+"""""""""
+
+.. versionadded:: 4.0
+
+This option can be used to limit the size of the file which will report diff information with ``report_changes`` enabled. Files bigger than this limit will not report diff information until the size is smaller than the configured limit again.
+
+**enabled**
+
+.. versionadded:: 4.0
+
+Set the size limit of a file to enabled or disabled.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**limit**
+
+.. versionadded:: 4.0
+
+Specifices the limit for the size of files monitored with ``report_changes``.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 50MB                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any positive number followed by KB/MB/GB    |
++--------------------------+---------------------------------------+
+
+.. _reference_ossec_syscheck_nodiff:
+
+nodiff
+""""""
+
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
+
++--------------------+----------------------+
+| **Allowed values** | Any file name.       |
++--------------------+----------------------+
+| **Example**        | /etc/ssl/private.key |
++--------------------+----------------------+
+
+Attributes:
+
++----------+---------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
++          +--------------------------------------------+------------------------------------+
+|          | Allowed values                             | sregex                             |
++----------+--------------------------------------------+------------------------------------+
 
 .. _reference_ossec_syscheck_whodata:
 

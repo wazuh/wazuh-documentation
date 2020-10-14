@@ -38,7 +38,7 @@ The following are good examples of rootcheck rules developed to check the config
     [SSH Configuration - Root login allowed {PCI_DSS: 2.2.4}] [any]
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
-In :ref:`Wazuh <wazuh_server_installation>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**, mapping all rootchecks to their relevant PCI DSS requirement.
+In :ref:`Wazuh <installation_guide>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**, mapping all rootchecks to their relevant PCI DSS requirement.
 
 Use cases
 ---------

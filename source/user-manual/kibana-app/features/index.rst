@@ -2,10 +2,10 @@
 
 .. _kibana_features:
 
-App features
-============
+Wazuh Kibana plugin features
+============================
 
-The Wazuh app for Kibana gives you a quick view of your cluster, agents and alerts. It provides an elegant, easy-to-use UI to interact with the API and the manager, showing the relevant information in a more convenient way. In this section, you can see how to use the app through its different features. Check all of them on the contents list below.
+The Wazuh Kibana plugin gives you a quick view of your cluster, agents and alerts. It provides an elegant, easy-to-use UI to interact with the API and the manager, showing the relevant information in a more convenient way. In this section, you can see how to use the plugin through its different features. Check all of them on the contents list below.
 
 .. topic:: Contents
 

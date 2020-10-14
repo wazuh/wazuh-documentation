@@ -34,9 +34,51 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.0 ****/
+
+/* Pages added in 4.0 */
+
+newUrls['4.0'] = [
+    '/user-manual/api/rbac/auth_context.html',
+    '/user-manual/api/rbac/configuration.html',
+    '/user-manual/api/rbac/how-it-works.html',
+    '/user-manual/api/rbac/index.html',
+    '/user-manual/api/rbac/reference.html',
+    '/user-manual/api/equivalence.html',
+];
+
 /* *** RELEASE 3.13 ****/
 
+redirections.push(
+  {
+    'target': ['3.12=>3.13', '3.13=>3.12'],
+    '3.12': '/getting-started/components.html',
+    '3.13': '/getting-started/components/index.html',
+  },
+  {
+    'target': ['3.12=>3.13', '3.13=>3.12'],
+    '3.12': '/getting-started/use-cases.html',
+    '3.13': '/getting-started/use_cases/index.html',
+  }  
+);
+
 newUrls['3.13'] = [
+  '/release-notes/release_3_13_2.html',
+  '/getting-started/use_cases/index.html',
+  '/getting-started/components/index.html',
+  '/getting-started/components/wazuh_agent.html',
+  '/getting-started/components/wazuh_server.html',
+  '/getting-started/components/elastic_stack.html',
+  '/getting-started/use_cases/log_analysis.html',
+  '/getting-started/use_cases/file_integrity.html',
+  '/getting-started/use_cases/rootkits_detection.html',
+  '/getting-started/use_cases/active_response.html',
+  '/getting-started/use_cases/configuration_assessment.html',
+  '/getting-started/use_cases/system_inventory.html',
+  '/getting-started/use_cases/vulnerability_detection.html',
+  '/getting-started/use_cases/cloud_security.html',
+  '/getting-started/use_cases/containers_security.html',
+  '/getting-started/use_cases/regulatory_compliance.html',
   '/release-notes/release_3_13_1.html',
   '/release-notes/release_3_13_0.html',
   '/gcp/index.html',
@@ -48,6 +90,11 @@ newUrls['3.13'] = [
   '/gcp/supported-services/index.html',
   '/user-manual/reference/ossec-conf/gcp-pubsub.html',
   '/user-manual/ruleset/mitre.html',
+];
+
+removedUrls['3.13'] = [
+  '/getting-started/use-cases.html',
+  '/getting-started/components/index.html',
 ];
 
 /* *** RELEASE 3.12 ****/

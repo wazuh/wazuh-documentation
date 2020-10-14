@@ -33,16 +33,17 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
   :class: output
 
   Usage: ./generate_wpk_package.sh [OPTIONS]
-
+  
       -t,   --target-system <target>              [Required] Select target wpk to build [linux/windows]
-      -b,   --branch <branch>                     [Required] Select Git branch or tag e.g.
+      -b,   --branch <branch>                     [Required] Select Git branch or tag e.g. 
       -d,   --destination <path>                  [Required] Set the destination path of package.
-      -k,   --key-dir <path>                      [Required] Set the WPK key path to sign package.
+      -k,   --key-dir <arch>                      [Required] Set the WPK key path to sign package.
       -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
       -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
       -pd,  --package-directory <directory>       [Required for windows] Package name to pack on wpk.
+      -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
       -o,   --output <name>                       [Required] Name to the output package.
-      -c,   --checksum <path>                     [Optional] Generate checksum
+      -c,   --checksum                            [Optional] Generate checksum
       -h,   --help                                Show this help.
 
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.

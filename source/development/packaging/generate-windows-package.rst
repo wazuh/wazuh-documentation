@@ -41,13 +41,13 @@ image with all the necessary tools to compile and obtain the Windows agent compi
   :class: output
 
   Usage: ./generate_compiled_windows_agent.sh [OPTIONS]
-
-      -b, --branch <branch>     [Required] Select Git branch [${BRANCH}]. By default: master."
-      -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the Windows agent. By default: 4."
-      -r, --revision <rev>      [Optional] Package revision. By default: 1."
-      -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path."
-      -d, --debug               [Optional] Build the binaries with debug symbols. By default: no."
-      -h, --help                Show this help."
+  
+      -b, --branch <branch>     [Required] Select Git branch [master]. By default: master.
+      -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the Windows agent. By default: 4.
+      -r, --revision <rev>      [Optional] Package revision. By default: 1.
+      -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path.
+      -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
+      -h, --help                Show this help.
 
 Below, you will find an example of how to build a compiled Windows agent.
 

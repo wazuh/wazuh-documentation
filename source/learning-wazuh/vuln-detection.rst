@@ -319,26 +319,26 @@ The results should look like this:
 
 4. You can also use the experimental capabilities of the API to list information
    of all agents in the environment. In order to do so it is necessary to enable
-   this capability by editing the API's configuration file:
+   this capability in ``WAZUH_PATH/configuration/api.yaml``. A complete API configuration
+   guide can be found :ref:`here <api_configuration>`. Experimental capabilities
+   can be also enabled by using the following Wazuh API endpoint:
+   :ref:`PUT /manager/api/config<api_reference>`.
 
-  .. code-block:: console
-
-      [root@wazuh-manager centos]# sed -i 's/config.experimental_features  = false/config.experimental_features  = true/g' /var/ossec/api/configuration/config.js
 
 
-5. Restart the Wazuh API service:
+5. Restart the Wazuh API using the ``wazuh-manager`` service:
 
   a. For Systemd:
 
     .. code-block:: console
 
-      # systemctl restart wazuh-api
+      # systemctl restart wazuh-manager
 
   b. For SysV Init:
 
     .. code-block:: console
 
-      # service wazuh-api restart
+      # service wazuh-manager restart
 
 
 6. Let's list the versions of curl on all of our Linux systems:
@@ -417,7 +417,7 @@ The results should look like this:
 
 
 .. note::
-  Take time to read the online documentation about the `Wazuh API <../user-manual/api/index.html>`_. It is a
+  Take time to read the online documentation about the :ref:`Wazuh API <api>` . It is a
   powerful utility that puts all sorts of data, configuration details, and
   state information at your fingertips once you know how to ask for it.
 
