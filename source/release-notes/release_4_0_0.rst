@@ -5,7 +5,7 @@
 4.0.0 Release notes
 ===================
 
-This section lists the changes in version 4.0.0. More details about these changes are provided in each component changelog:
+This section lists the changes in version 4.0.0. More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.0/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.0-7.9/CHANGELOG.md>`_
