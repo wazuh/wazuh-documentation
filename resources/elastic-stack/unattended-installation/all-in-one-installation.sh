@@ -406,6 +406,7 @@ checkInstallation() {
     echo $'\nDuring the installation of Elasticsearch the passwords for its user were generated. Please take note of them:'
     echo "$passwords"
     echo $'\nInstallation finished'
+    disableRepos
     exit 0;
 
 }
@@ -414,16 +415,16 @@ checkInstallation() {
 disableRepos() {
     if [ $sys_type == "yum" ] 
     then
-        eval "sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo $debug"
-        eval "sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo $debug"
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
     elif [ $sys_type == "zypper" ] 
     then
-        eval "sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo $debug"
-        eval "sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo $debug"
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/wazuh.list $debug"
-        eval "sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list $debug"
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/wazuh.list
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list
         eval "apt-get update -q $debug"       
     fi      
 }
@@ -470,7 +471,6 @@ main() {
         installFilebeat password
         installKibana password
         checkInstallation
-        disableRepos 
     else
         healthCheck   
         installPrerequisites
@@ -481,7 +481,6 @@ main() {
         installFilebeat password
         installKibana password
         checkInstallation password
-        disableRepos
     fi 
 
 }
