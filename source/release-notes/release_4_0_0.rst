@@ -200,6 +200,7 @@ Added
 
 - Added new configuration view settings for GCP integration.
 
+- Added logic to change the ``metafields`` configuration of Kibana.
 
 Changed
 ^^^^^^^
@@ -229,6 +230,8 @@ Fixed
 - Reporting fails when agent is pinned and compliance controls are visited.
 
 - Reload rule detail doesn't work properly with the related rules.
+
+- Fix search bar filter in Manage agent of group.
 
 
 Wazuh ruleset
@@ -294,6 +297,8 @@ Added
 
 Changed
 ^^^^^^^
+
+- Reorganized the installation guide to help the user through the whole installation process.
 
 - Split the installation guide in All in one installation and distributed deployment.
 
