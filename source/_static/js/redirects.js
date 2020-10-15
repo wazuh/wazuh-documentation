@@ -277,6 +277,7 @@ newUrls['3.12'] = [
 /* Pages no longer available in 3.12 */
 
 removedUrls['3.12'] = [
+  '/installation-guide/installing-elastic-stack/automatic_api.rst',
   '/user-manual/capabilities/file-integrity/fim-faq.html',
   '/user-manual/registering/using-command-line.html',
   '/user-manual/registering/cli/using-command-line-linux.html',
