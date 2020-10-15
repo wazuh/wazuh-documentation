@@ -14,13 +14,13 @@ This section lists the changes in version 4.0.0. More details about these change
 Highlights
 ----------
 
-- The agent enrollment is now performed on the main daemon initialization. There is no need to request a key using an external CLI anymore. (Agents in ``3.x`` version are still 100% compatible with ``4.x`` version)
+- The agent enrollment is now performed on the main daemon initialization. There is no need to request a key using an external CLI anymore (Agents in ``3.x`` version are still 100% compatible with ``4.x`` version).
 
-- A deploy script has been created to download, install, and configure the agent. A Unique command to deploy the agents.
+- A deploy script has been created to download, install, and configure the agent.
 
-- Wazuh API is now embedded in the Wazuh manager. The API comes by default with the Manager installation.
+- Wazuh API is now embedded in the Wazuh manager.
 
-- Wazuh cluster mode enabled by default.
+- Wazuh cluster mode is now enabled by default.
 
 - Wazuh API RBAC: Set up users, roles, and policies to manage the access permissions. Wazuh WUI now restricts resources depending on permissions.
 
@@ -36,7 +36,7 @@ Breaking changes
 
 - The agent-auth tool starts the deprecation cycle (to be deprecated in v5.0.0).
 
-- Wazuh API has been deprecated. The API is now embedded in the Wazuh manager. No wazuh-api package will be installed anymore.
+- The API is now embedded in the Wazuh manager, no wazuh-api package will be installed anymore.
 
 - Wazuh manager and agents are no longer using UDP as the default communication protocol. TCP is enabled by default.
 
@@ -57,7 +57,7 @@ Added
 
 - Added asynchronous ``aiohttp`` server for the Wazuh API.
 
-- New Wazuh API is approximately 5 times faster on average.
+- The new Wazuh API is approximately 5 times faster on average.
 
 - Added OpenAPI based Wazuh API specification.
 
@@ -101,7 +101,7 @@ Added
 
 - Added improved support for monitoring paths from environment variables.
 
-- Added auto enrollment capability. Agents are now able to request a key from the manager if the current key is missing or wrong.
+- Added auto-enrollment capability. Agents are now able to request a key from the manager if the current key is missing or wrong.
 
 **Vulnerability Detector**
 
@@ -259,7 +259,7 @@ Changed
 
 - Wazuh API and Wazuh Manager services are unified in a single wazuh-manager service.
 
-- Wazuh app for Splunk and Wazuh plugin for Kibana have been renamed.
+- Wazuh app for Splunk and Wazuh plugin for Kibana packages have been renamed.
 
 - Wazuh VM now uses Wazuh and Open Distro for Elasticsearch.
 
@@ -300,6 +300,6 @@ Changed
 
 - Reorganized the installation guide to help the user through the whole installation process.
 
-- Split the installation guide in All in one installation and distributed deployment.
+- Split the installation guide in all-in-one installation and distributed deployment.
 
 - Reorganized the upgrade guide.
