@@ -188,9 +188,9 @@ Added
 
 - Support for Wazuh v4.0.0.
 
-- Support for Kibana v7.9.0.
+- Support for Kibana v7.9.1 and v7.9.2.
 
-- Support for Open Distro 1.8.
+- Support for Open Distro 1.10.1.
 
 - Added a RBAC security layer integrated with Open Distro and X-Pack.
 
