@@ -410,6 +410,24 @@ checkInstallation() {
 
 }
 
+## Disable repositories
+disableRepos() {
+    if [ $sys_type == "yum" ] 
+    then
+        eval 'sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo $debug'
+        eval 'sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo $debug"'
+    elif [ $sys_type == "zypper" ] 
+    then
+        eval 'sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo $debug'
+        eval 'sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo $debug'
+    elif [ $sys_type == "apt-get" ] 
+    then
+        eval 'sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list'
+        eval 'sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list'
+        eval "apt-get update -q $debug"       
+    fi      
+}
+
 main() {
 
     if [ -n "$1" ] 
@@ -451,7 +469,8 @@ main() {
         installElasticsearch
         installFilebeat password
         installKibana password
-        checkInstallation    
+        checkInstallation
+        disableRepos 
     else
         healthCheck   
         installPrerequisites
@@ -462,6 +481,7 @@ main() {
         installFilebeat password
         installKibana password
         checkInstallation password
+        disableRepos
     fi 
 
 }
