@@ -18,7 +18,7 @@ The Wazuh server and Open Distro for Elasticsearch components can be installed i
 
 - Debian 7 or greater.
 
-- Fedora 22 or greater.
+- Fedora 31 or greater.
 
 - Oracle Linux 6 or greater.
 
