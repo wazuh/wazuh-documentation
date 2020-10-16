@@ -2859,7 +2859,15 @@ div.highlight pre {
 
   .deployment-types {
     width: 80%;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 35% 65%
+  }
+
+  .deployment-types #aio .detailed {
+    margin-top: 1.5rem;
+  }  
+
+  .deployment-types #distributed .detailed img {
+    height: 27rem !important;
   }
 
   .agent-os {
