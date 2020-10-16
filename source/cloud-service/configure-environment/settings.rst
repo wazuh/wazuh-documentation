@@ -8,4 +8,11 @@ Settings
 .. meta::
   :description: Learn about environment settings. 
 
-Let's learn about your environment's settings.
+An environment settings can be tweaked in certain ways:
+
+- Name
+
+- Security settings
+
+- Resetting password
+
