@@ -324,8 +324,8 @@ Cluster
 ^^^^^^^
 cluster:delete_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id:<node>&file:path:<file_path>`)
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id<node>`)
+- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id:<node>&file:path:<file_path>`)
+- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
 
 cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -413,7 +413,7 @@ group:read
 - :api-ref:`GET /groups/{group_id}/files <operation/api.controllers.agents_controller.get_group_files>` (`group:id`_)
 - :api-ref:`GET /groups/{group_id}/files/{file_name}/json <operation/api.controllers.agents_controller.get_group_file_json>` (`group:id`_)
 - :api-ref:`GET /groups/{group_id}/files/{file_name}/xml <operation/api.controllers.agents_controller.get_group_file_xml>` (`group:id`_)
-- :api-ref:`GET /overview/agents <operation/api.controllers.mitre_controller.get_attack>` (`group:id`_)
+- :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`group:id`_)
 
 group:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -433,7 +433,7 @@ Manager
 manager:delete_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`file:path`_)
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`file:path`_)
 
 manager:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -536,7 +536,7 @@ security:read
 
 security:revoke
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /security/user/revoke <operation/api.controllers.security_controller.login_user>` (`*:*`_)
+- :api-ref:`PUT /security/user/revoke <operation/api.controllers.security_controller.revoke_all_tokens>` (`*:*`_)
 
 security:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -550,7 +550,7 @@ security:update
 - :api-ref:`POST /security/users/{user_id}/roles <operation/api.controllers.security_controller.set_user_role>` (`user:id`_, `role:id`_)
 - :api-ref:`PUT /security/policies/{policy_id} <operation/api.controllers.security_controller.update_policy>` (`policy:id`_)
 - :api-ref:`PUT /security/roles/{role_id} <operation/api.controllers.security_controller.update_role>` (`role:id`_)
-- :api-ref:`PUT /security/rules/{rule_id} <operation/api.controllers.security_controller.update_role>` (`rule:id`_)
+- :api-ref:`PUT /security/rules/{rule_id} <operation/api.controllers.security_controller.update_rule>` (`rule:id`_)
 - :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>` (`user:id`_)
 
 
