@@ -15,7 +15,8 @@ An environment can be tuned to fit a set of stablished requirements. On this sec
 .. topic:: Contents
 
    .. toctree::
-
+      :maxdepth: 1
+	      
       tier-choice
       settings
       technical-faq

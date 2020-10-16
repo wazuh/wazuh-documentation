@@ -8,7 +8,7 @@ APIs
 .. meta::
   :description: Learn about Cloud APIs
 
-Let's learn about Cloud APIs!
+Wazuh Cloud Service provides an API to work with environments.
 
 .. topic:: Contents
 

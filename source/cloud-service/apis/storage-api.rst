@@ -6,6 +6,8 @@ Storage API
 ===========
 
 .. meta::
-  :description: Learn about your account and billing. 
+  :description: Learn about Storage API. 
 
-Let's learn about account and billing.
+Wazuh Cloud Service provides an API for managing storage access, the Storage API.
+
+
