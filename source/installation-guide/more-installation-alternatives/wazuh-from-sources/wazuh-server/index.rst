@@ -138,5 +138,55 @@ Installing Filebeat
 Filebeat is a data shipping tool that is installed on the Wazuh server to securely forward alerts and archived events to Elasticsearch.Once the Wazuh manager is installed, you may install Filebeat as well as the other Elastic Stack components from `sources <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_ or using :ref:`packages  <packages>`.
 
 
-If you need to uninstall a Wazuh server installed from sources you may follow the instructions in this :ref:`section  <uninstalling_wazuh_server_from_sources>`.
+Uninstall
+~~~~~~~~~
 
+To uninstall Wazuh manager:
+
+    .. code-block:: console
+
+      # OSSEC_INIT="/etc/ossec-init.conf"
+      # . $OSSEC_INIT 2> /dev/null
+
+Stop the service:
+
+  .. code-block:: console
+
+    # service wazuh-manager stop 2> /dev/null
+
+Stop the daemon:
+
+  .. code-block:: console
+
+    # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+
+Remove files and service artifacts:
+
+  .. code-block:: console
+
+    # rm -rf $DIRECTORY $OSSEC_INIT
+
+Delete the service:
+
+  For SysV Init:
+
+    .. code-block:: console
+
+      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
+      # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+
+  For Systemd:
+
+    .. code-block:: console
+
+        # find /etc/systemd/system -name "wazuh*" | xargs rm -f
+        # systemctl daemon-reload
+
+Remove users:
+
+  .. code-block:: console
+
+    # userdel ossec 2> /dev/null
+    # userdel ossecm 2> /dev/null
+    # userdel ossecr 2> /dev/null
+    # groupdel ossec 2> /dev/null
