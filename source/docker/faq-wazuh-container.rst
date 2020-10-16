@@ -8,7 +8,7 @@ FAQ
 How can I tune the Kibana configuration?
 ----------------------------------------
 
-The Kibana default configuration is stored in ``kibana/config/kibana.yml``.::
+The Kibana default configuration is stored in ``kibana/config/kibana.yml``::
 
   kibana:
     image: wazuh/wazuh-kibana
