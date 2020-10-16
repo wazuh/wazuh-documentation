@@ -406,8 +406,27 @@ checkInstallation() {
     echo $'\nDuring the installation of Elasticsearch the passwords for its user were generated. Please take note of them:'
     echo "$passwords"
     echo $'\nInstallation finished'
+    disableRepos
     exit 0;
 
+}
+
+## Disable repositories
+disableRepos() {
+    if [ $sys_type == "yum" ] 
+    then
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+    elif [ $sys_type == "zypper" ] 
+    then
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+    elif [ $sys_type == "apt-get" ] 
+    then
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/wazuh.list
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list
+        eval "apt-get update -q $debug"       
+    fi      
 }
 
 main() {
@@ -451,7 +470,7 @@ main() {
         installElasticsearch
         installFilebeat password
         installKibana password
-        checkInstallation    
+        checkInstallation
     else
         healthCheck   
         installPrerequisites

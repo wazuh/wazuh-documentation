@@ -8,7 +8,9 @@ Uninstalling the Wazuh components
 This document will give instructions to uninstall each Wazuh component. 
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
-        wazuh-stack/index        
-        wazuh-agents/index
+        open-distro       
+        elastic-stack
+
+      

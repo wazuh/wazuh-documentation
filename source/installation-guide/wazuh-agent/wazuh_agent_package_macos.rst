@@ -40,6 +40,52 @@ By default, all agent files can be found at the following location: ``/Library/O
 Now that the agent is installed, if you did not use the deployment method, you will have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
 
+Uninstall
+---------
+
+To uninstall the agent in macOS:
+
+#. Stop the Wazuh agent service
+
+    .. code-block:: console
+
+      # /Library/Ossec/bin/ossec-control stop
+
+#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file
+
+    .. code-block:: console
+
+      # /bin/rm -r /Library/Ossec
+      # /bin/rm /etc/ossec-init.conf
+
+#. Stop and unload dispatcher
+
+    .. code-block:: console
+
+      # /bin/launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
+
+#. Remove ``launchdaemons`` and ``StartupItems``
+
+    .. code-block:: console
+
+      # /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
+      # /bin/rm -rf /Library/StartupItems/WAZUH
+
+#. Remove User and Groups
+
+    .. code-block:: console
+
+      # /usr/bin/dscl . -delete "/Users/ossec"
+      # /usr/bin/dscl . -delete "/Groups/ossec"
+
+#. Remove from ``pkgutil``
+
+    .. code-block:: console
+
+      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
+
+
+
 
 
 

@@ -213,6 +213,8 @@ An example response should look as follows:
                 talk to server... OK
                 version: 7.9.1
 
+To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+
 Next steps
 ----------
 

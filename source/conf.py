@@ -460,7 +460,6 @@ custom_replacements = {
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/3.x/checksums/",
     "|RPM_AGENT|" : "https://packages.wazuh.com/3.x/yum/wazuh-agent",
     "|RPM_MANAGER|" : "https://packages.wazuh.com/3.x/yum/wazuh-manager",
-    "|RPM_API|" : "https://packages.wazuh.com/3.x/yum/wazuh-api",
     "|DEB_AGENT|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
     "|DEB_MANAGER|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/3.x/apt/pool/main/w/wazuh-api/wazuh-api",

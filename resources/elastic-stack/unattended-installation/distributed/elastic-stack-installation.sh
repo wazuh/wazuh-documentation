@@ -384,6 +384,7 @@ initializeElastic() {
         echo "$passwords"
     fi
     echo $'\nElasticsearch installation finished'
+    disableRepos
     exit 0;    
 
 }
@@ -412,6 +413,7 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else   
+        disableRepos
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
@@ -533,6 +535,21 @@ healthCheck() {
         fi   
     fi     
 
+}
+
+## Disable repositories
+disableRepos() {
+    if [ $sys_type == "yum" ] 
+    then
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+    elif [ $sys_type == "zypper" ] 
+    then
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+    elif [ $sys_type == "apt-get" ] 
+    then
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list
+        eval "apt-get update -q $debug"       
+    fi      
 }
 
 ## Main

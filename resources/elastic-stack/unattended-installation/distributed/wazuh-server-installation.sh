@@ -300,7 +300,8 @@ configureFilebeat() {
     echo "Starting Filebeat..."
     eval "systemctl daemon-reload $debug"
     eval "systemctl enable filebeat.service $debug"
-    eval "systemctl start filebeat.service $debug"       
+    eval "systemctl start filebeat.service $debug"  
+    disableRepos     
 
 }
 
@@ -318,6 +319,24 @@ healthCheck() {
         echo "Starting the installation..."
     fi
 
+}
+
+## Disable repositories
+disableRepos() {
+    if [ $sys_type == "yum" ] 
+    then
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+        sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+    elif [ $sys_type == "zypper" ] 
+    then
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+        sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+    elif [ $sys_type == "apt-get" ] 
+    then
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/wazuh.list
+        sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list
+        eval "apt-get update -q $debug"       
+    fi      
 }
 
 ## Main

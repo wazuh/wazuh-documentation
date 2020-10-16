@@ -10,5 +10,6 @@ Wazuh installation from sources
 .. toctree::
     :maxdepth: 1
 
+    wazuh-server/index 
     wazuh-agent/index
-    wazuh-server/index
+   

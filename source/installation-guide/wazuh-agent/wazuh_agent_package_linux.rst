@@ -126,3 +126,32 @@ Installing Wazuh agent
 
 Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
 
+
+Uninstall
+---------
+
+To uninstall the agent:
+
+.. tabs::
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
+
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+
+

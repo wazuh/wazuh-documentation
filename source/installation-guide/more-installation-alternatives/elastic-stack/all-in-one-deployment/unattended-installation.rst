@@ -68,6 +68,8 @@ The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``
 
 With the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This can be accepted by clicking on ``Advanced options`` to add an exception or, for increased security, by importing the ``ca.crt``, found in the ``/etc/kibana/certs/ca`` directory, to the Certificate Manager of each browser that will access the Kibana interface or use a certificate from a trusted authority.
 
+To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+
 Next steps
 ----------
 

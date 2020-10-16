@@ -272,3 +272,11 @@ Disabling repositories
   .. group-tab:: ZYpp
 
     .. include:: ../../../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
+
+
+To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+
+Next steps
+----------
+
+The next step consists of :ref:`installing Kibana <basic_kibana>`.

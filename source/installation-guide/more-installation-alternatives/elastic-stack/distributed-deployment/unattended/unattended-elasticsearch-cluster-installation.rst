@@ -260,6 +260,8 @@ With the first access to Kibana, the browser shows a warning message stating tha
 
   If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
+To uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+
 Next steps
 ~~~~~~~~~~
 
