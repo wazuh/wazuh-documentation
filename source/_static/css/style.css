@@ -627,7 +627,7 @@ header .menuweb-bar .menu-item a {
 .agent-os .item-agent {
   border: 1px solid #0094ce;
   border-radius: 2em;
-  padding: 1rem;
+  padding: 0;
   position: relative;
 }
 
@@ -639,6 +639,10 @@ header .menuweb-bar .menu-item a {
   position: absolute;
   width: 100%;
   opacity: 0;
+}
+
+.agent-os .item-agent img {
+  margin-bottom: 0 !important;
 }
 
 .agent-os .item-agent:hover {
