@@ -631,6 +631,10 @@ header .menuweb-bar .menu-item a {
   position: relative;
 }
 
+.agent-os .item-agent a:hover {
+  border-bottom: none !important;
+}
+
 .agent-os .item-agent p {
   color: white;
   font-weight: bold;
