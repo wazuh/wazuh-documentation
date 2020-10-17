@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Program to build the Wazuh Virtual Machine
-# Wazuh package generator
+# Program to install Wazuh manager along Open Distro for Elasticsearch
 # Copyright (C) 2015-2020, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
