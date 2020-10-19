@@ -320,7 +320,7 @@ Upgrading Kibana
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|.zip
+      # sudo -u bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip
 
 
 #. Update configuration file permissions:
