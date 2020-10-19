@@ -137,10 +137,10 @@ addWazuhrepo() {
 
     if [ ${sys_type} == "yum" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
     elif [ ${sys_type} == "apt-get" ]; then
         eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
         eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
