@@ -2,8 +2,8 @@
 
 .. _upgrading_elastic_stack:
 
-Upgrading Elastic Stack
-=======================
+Upgrading Elastic Stack basic license
+=====================================
 
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Elastic* distribution. 
 
@@ -104,19 +104,19 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # yum install elasticsearch-|ELASTICSEARCH_LATEST|
+            # yum install elasticsearch-|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
+            # apt-get install elasticsearch=|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update elasticsearch-|ELASTICSEARCH_LATEST|
+            # zypper update elasticsearch-|ELASTICSEARCH_ELK_LATEST|
 
 
 #. Restart the service:
@@ -164,19 +164,19 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
         .. code-block:: console
 
-          # yum install filebeat-|ELASTICSEARCH_LATEST|
+          # yum install filebeat-|ELASTICSEARCH_ELK_LATEST|
 
       .. group-tab:: APT
 
         .. code-block:: console
 
-          # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+          # apt-get install filebeat=|ELASTICSEARCH_ELK_LATEST|
 
       .. group-tab:: ZYpp
 
         .. code-block:: console
 
-          # zypper update filebeat-|ELASTICSEARCH_LATEST|
+          # zypper update filebeat-|ELASTICSEARCH_ELK_LATEST|
 
 
 #. Update the configuration file:
@@ -288,19 +288,19 @@ Upgrading Kibana
 
           .. code-block:: console
 
-            # yum install kibana-|ELASTICSEARCH_LATEST|
+            # yum install kibana-|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install kibana=|ELASTICSEARCH_LATEST|
+            # apt-get install kibana=|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update kibana=|ELASTICSEARCH_LATEST|
+            # zypper update kibana=|ELASTICSEARCH_ELK_LATEST|
 
 #. Remove generated bundles:
 
@@ -320,7 +320,7 @@ Upgrading Kibana
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+      # sudo -u bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|.zip
 
 
 #. Update configuration file permissions:
