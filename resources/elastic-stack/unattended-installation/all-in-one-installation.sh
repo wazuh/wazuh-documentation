@@ -375,9 +375,9 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
+    if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
     then
-        echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
+        echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
         echo "All the componets have already been installed."
