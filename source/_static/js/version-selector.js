@@ -97,7 +97,7 @@ jQuery(function($) {
     let selected = -1;
     let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
     const selectVersionCurrent = $('#select-version .current');
-    if (path == 'current' || path == '3.x' ) {
+    if (path == 'current' || path == '4.0' ) {
       path = currentVersion;
     }
     for (let i = 0; i < versions.length; i++) {
@@ -147,7 +147,7 @@ jQuery(function($) {
     page = normalizeUrl(paramDivision[0]);
     param = paramDivision.length == 2 ? ('?'+paramDivision[1]) : '';
 
-    if (path == 'current' || path == '3.x' ) {
+    if (path == 'current' || path == '4.0' ) {
       path = currentVersion;
     }
 
