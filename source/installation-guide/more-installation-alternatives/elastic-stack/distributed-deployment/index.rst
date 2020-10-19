@@ -18,9 +18,7 @@ The following components will be installed:
 - Elastic Stack as a single-node cluster or as a multi-node cluster, and Kibana, including the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
 
 
-The communication will be encrypted using certificates. The guide will also refer to the section explaining how to secure communication between the Wazuh API and the Wazuh Kibana plugin.
-
-To guarantee the expected performance of the Wazuh components all hosts must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
+The communication will be encrypted using certificates. To guarantee the expected performance of the Wazuh components all hosts must meet the hardware requirements described in the :ref:`requirements <installation_requirements>` section.
 
 The user can choose between step-by-step installation, a manual way of carrying out the process, or unattended installation, an automated way using a script:
 

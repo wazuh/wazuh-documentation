@@ -59,7 +59,7 @@ There are two different alternatives to deploy a Wazuh installation. Here is a b
 
 .. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise needs. 
 
-This installation guide will teach you how to install Wazuh with Open Distro for Elasticsearch. Alternatively, Wazuh can be installed with the Elastic Stack components or Splunk. To learn more about this process and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
+This installation guide will teach you how to install Wazuh and Elastic Stack. Alternatively, Wazuh can be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
 
 
 Install Wazuh agents

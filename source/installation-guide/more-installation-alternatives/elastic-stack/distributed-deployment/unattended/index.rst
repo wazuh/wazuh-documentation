@@ -9,7 +9,7 @@ The unattended installation method consists of two scripts that will automatize 
 
 - **Elasticsearch cluster:** the script will install Elasticsearch. It can be chosen between a single-node or a multi-node installation. Additionally, the script given can install Kibana either on the same Elasticsearch node or on a different one. The installation of Kibana also includes the installation of the Wazuh Kibana plugin.
 
-- **Wazuh cluster:** the script will install the Wazuh manager, the Wazuh API and Filebeat on its OSS version.
+- **Wazuh cluster:** the script will install the Wazuh manager and Filebeat.
 
 It is highly recommended to first install Elasticsearch, since the certificates needed for securitizing the communication are created during its installation. 
 
