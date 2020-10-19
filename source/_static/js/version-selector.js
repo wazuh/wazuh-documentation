@@ -1,7 +1,7 @@
 jQuery(function($) {
   /*
   * Wazuh documentation - Version selector script
-  * Copyright (C) 2019 Wazuh, Inc.
+  * Copyright (C) 2020 Wazuh, Inc.
   *
   * EXECUTION FLOW
   * ==============
@@ -55,9 +55,10 @@ jQuery(function($) {
   */
 
   /* Versions main constants */
-  const currentVersion = '3.13';
+  const currentVersion = '4.0';
   const versions = [
-    {name: '3.13 (current)', url: '/'+currentVersion},
+    {name: '4.0 (current)', url: '/'+currentVersion},
+    {name: '3.13', url: '/3.13'},
     {name: '3.12', url: '/3.12'},
     {name: '3.11', url: '/3.11'},
     {name: '3.10', url: '/3.10'},
@@ -96,7 +97,7 @@ jQuery(function($) {
     let selected = -1;
     let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
     const selectVersionCurrent = $('#select-version .current');
-    if (path == 'current' || path == '3.x' ) {
+    if (path == 'current' || path == '4.0' ) {
       path = currentVersion;
     }
     for (let i = 0; i < versions.length; i++) {
@@ -146,7 +147,7 @@ jQuery(function($) {
     page = normalizeUrl(paramDivision[0]);
     param = paramDivision.length == 2 ? ('?'+paramDivision[1]) : '';
 
-    if (path == 'current' || path == '3.x' ) {
+    if (path == 'current' || path == '4.0' ) {
       path = currentVersion;
     }
 
