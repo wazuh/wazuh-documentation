@@ -4,6 +4,7 @@
 .. Migrating from the Wazuh API 3.X
 
 Migrating from the Wazuh API 3.X
+================================
 
 Wazuh API 4.0 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields. Most responses will have the following structure instead:
 

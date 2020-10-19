@@ -2,7 +2,7 @@
 
 .. _api_rbac:
 
-Role-based access control
+Role-Based Access Control
 =========================
 
 .. versionadded:: 4.0.0
