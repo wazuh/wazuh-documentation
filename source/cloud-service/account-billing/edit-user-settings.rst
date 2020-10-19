@@ -10,4 +10,4 @@ Edit user account settings
 
 You can edit some your account settings (mail addresses, passwords).
 
-You can generate API keys
+You can generate API keys.

@@ -32,7 +32,7 @@ We create backup of the alerts generated every 30 minutes to an AWS S3 bucket, a
 What happens if I consume all the data of my tier?
 --------------------------------------------------
 
-Data is rotated, the oldest data will be moved to cold storage (offline).
+Hot storage data is rotated, the oldest data will still be able to be accessed as cold storage.
 
 How do I get SSH access to my environment?
 ------------------------------------------
@@ -44,7 +44,17 @@ Can I send data directly to Elasticsearch (Filebeat, Metricbeat, etc)?
 
 No, all data flow relies on Wazuh agents for security reasons.
 
-Can I move from cold storage (offline) to hot storage (online) data?
---------------------------------------------------------------------
+Can I move from cold storage to hot storage data?
+-------------------------------------------------
 
 It is not possible. However, you may export the data and load it into the snapshots in your environment. 
+
+How can I update my environment?
+--------------------------------
+
+We take care of the updates so your environment will get the latest version of Wazuh and Elastic Stack with no downtime.
+
+Will replica shards consume data of my tier?
+--------------------------------------------
+
+No, data consumption is calculated only from primary shards, so you don't have to worry about replica shards consuming any of your remaining space.

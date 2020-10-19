@@ -10,7 +10,7 @@ Sign Up for a Trial
 
 To experience the benefits of Wazuh Cloud you should start by signing up for a Trial
 
-1- Sign up on wazuh cloud
+1- Sign up on Wazuh cloud
 
 2- Create an environment (name, select tier, region, pricing free for trial)
 

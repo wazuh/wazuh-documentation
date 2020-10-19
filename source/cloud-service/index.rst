@@ -31,6 +31,5 @@ Here you will find about useful topics regarding Wazuh Cloud Service.
    getting-started/index
    configure-environment/index
    account-billing/index
-   about-cloud
    apis/index
    glossary
