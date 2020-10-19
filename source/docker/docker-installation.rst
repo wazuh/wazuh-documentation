@@ -58,7 +58,7 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
     .. code-block:: console
 
-      # curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      # curl -L "https://github.com/docker/compose/releases/download/|DOCKER_COMPOSE_VERSION|/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 2. Grant execution permissions:
 
@@ -84,7 +84,7 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
     .. code-block:: none
       :class: output
 
-      docker-compose version 1.26.2
+      docker-compose version |DOCKER_COMPOSE_VERSION|
 
     .. note::
 

@@ -427,6 +427,7 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.9.1",
     "|OPENDISTRO_LATEST_DOCKER|" : "1.10.1",
+    "|DOCKER_COMPOSE_VERSION|" : "1.27.4",
     "|SPLUNK_LATEST|" : "8.0.4",
     "|ELASTIC_6_LATEST|" : "6.8.8",
     "|WAZUH_LATEST_AIX|" : "3.13.1",
