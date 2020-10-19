@@ -22,4 +22,5 @@ This section will show you the process of installing and configuring the Wazuh d
    docker-installation
    wazuh-container
    container-usage
+   upgrade-scenario
    faq-wazuh-container
