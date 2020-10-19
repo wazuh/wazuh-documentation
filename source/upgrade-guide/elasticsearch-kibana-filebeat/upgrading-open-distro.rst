@@ -2,7 +2,7 @@
 
 .. _upgrading_open_distro:
 
-Upgrading Open distro for Elasticsearch
+Upgrading Open Distro for Elasticsearch
 =======================================
 
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Open Distro for Elasticsearch* distribution. 
