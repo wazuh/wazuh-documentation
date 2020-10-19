@@ -77,7 +77,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # yum install opendistroforelasticsearch-1.6.0
+            # yum install opendistroforelasticsearch
 
 
         .. group-tab:: APT
@@ -99,7 +99,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # zypper update opendistroforelasticsearch-1.6.0
+            # zypper update opendistroforelasticsearch
 
 
 

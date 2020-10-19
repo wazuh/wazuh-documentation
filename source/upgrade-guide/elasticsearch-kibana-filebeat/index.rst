@@ -10,5 +10,6 @@ There are two installation types: Wazuh Elastic stack and Wazuh Open Distro for 
 .. toctree::
     :maxdepth: 1
 
-    upgrading-elastic-stack
     upgrading-open-distro
+    upgrading-elastic-stack
+    
