@@ -260,7 +260,7 @@ Changed
 
 - Wazuh API and Wazuh Manager services are unified in a single wazuh-manager service.
 
-- Wazuh app for Splunk and Wazuh plugin for Kibana packages have been renamed.
+- Wazuh plugin for Kibana packages have been renamed.
 
 - Wazuh VM now uses Wazuh and Open Distro for Elasticsearch.
 
