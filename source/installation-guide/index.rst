@@ -96,7 +96,7 @@ The Wazuh Agent is a single, light-weight monitoring software that can be instal
         <a href="./wazuh-agent/wazuh_agent_package_macos.html" class="d-flex align-items-center">
             <p>macOS</p>        
 
-.. image:: ../images/installation/macOS.png        
+.. image:: ../images/installation/macOS_logo.png        
       :align: center
 
 .. raw:: html
