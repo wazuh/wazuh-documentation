@@ -3,8 +3,8 @@
 .. _upgrade-scenario:
 
 
-Upgrade Scenario
-================
+Upgrade Scenario (3.x to 4.0)
+=============================
 
 This scenario covers the upgrade of a cluster running version 3.13.x or previous to 4.x.
 
