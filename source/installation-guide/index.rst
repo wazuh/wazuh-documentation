@@ -125,7 +125,7 @@ The Wazuh Agent is a single, light-weight monitoring software that can be instal
 
         </a>
     </div>
-    <div class="item-agent">
+    <div class="item-agent" id="solaris-logo">
         <a href="./wazuh-agent/wazuh_agent_package_solaris.html" class="d-flex align-items-center">
             <p>Solaris</p>        
 

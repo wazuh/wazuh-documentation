@@ -631,6 +631,10 @@ header .menuweb-bar .menu-item a {
   position: relative;
 }
 
+.agent-os #solaris-logo img {
+  max-height: 100px;
+}
+
 .agent-os .item-agent a:hover {
   border-bottom: none !important;
 }
