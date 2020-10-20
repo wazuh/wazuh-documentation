@@ -43,7 +43,7 @@ Proceed to rebuild the container with this volume attached: ``docker-compose up 
 
 Copy the content of ``/var/ossec/data`` to ``/migration`` on your Wazuh container:
 
-``docker exec wazuh-docker_wazuh_1 cp -rv /var/ossec/data /migration``
+``docker exec wazuh-docker_wazuh_1 cp -a /var/ossec/data /migration && cp /var/ossec/var/db/global.db /migration/``
 
 You can stop the cluster now: ``docker-compose stop``
 
@@ -60,7 +60,7 @@ Mount the volume on the new 4.0 cluster:
   ...
     volumes:
       ...
-      - migration:/migration
+      - migration:/wazuh-migration
 
   volumes:
     ...
