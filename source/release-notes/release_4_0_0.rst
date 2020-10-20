@@ -222,7 +222,7 @@ Fixed
 
 - Format options in ``wazuh-alerts`` index-pattern are not overwritten now.
 
-- Prevent blank page in detaill agent view.
+- Prevent blank page in detail agent view.
 
 - Navigable agents name in Events.
 
@@ -230,7 +230,7 @@ Fixed
 
 - Reporting fails when agent is pinned and compliance controls are visited.
 
-- Reload rule detail doesn't work properly with the related rules.
+- Reload rule detail does not work properly with the related rules.
 
 - Fix search bar filter in Manage agent of group.
 
