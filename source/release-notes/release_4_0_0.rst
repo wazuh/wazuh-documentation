@@ -19,11 +19,11 @@ Highlights
 
 - A deploy script has been created to download, install, and configure the agent.
 
+- Wazuh API RBAC: Configure users, roles, and policies to manage access permissions. Wazuh WUI now permits granular control over access to resources depending on user roles, this will allow enterprises to manage user accounts that fulfill different functions in the security of the environment.
+
 - Wazuh API is now embedded in the Wazuh manager.
 
 - Wazuh cluster mode is now enabled by default.
-
-- Wazuh API RBAC: Set up users, roles, and policies to manage the access permissions. Wazuh WUI now restricts resources depending on permissions.
 
 - Wazuh manager and agents will use TCP as the default communication protocol.
 
@@ -288,18 +288,18 @@ Wazuh documentation
 
 Added
 ^^^^^
-- Added instructions to install Wazuh along with Open Distro.
+- Added instructions to install Wazuh along with Open Distro for Elasticsearch.
 
-- Added script for Wazuh unattended installation.
+- Added scripts, created by the Wazuh team, that allow the user to install Wazuh and Elastic Stack automatically. 
 
-- Added tabs in the installation guide to ease the installation process.
+- Added tabs in the installation guide to ease the navigation through the different options available.
 
-- Added a more installation alternatives section that provides installation alternatives such as installation Wazuh along with Elastic Stack, Splunk or installing Wazuh from sources.
+- Added a 'More installation alternatives' section that provides instructions on how to install Wazuh along with commercial options like Elastic Stack basic license or Splunk. This section also includes instructions on how to install Wazuh from sources.
 
 Changed
 ^^^^^^^
 
-- Reorganized the installation guide to help the user through the whole installation process.
+- Reorganized the installation guide to help the user through the installation process of Wazuh and Elastic Stack in a single section.
 
 - Split the installation guide in all-in-one installation and distributed deployment.
 
