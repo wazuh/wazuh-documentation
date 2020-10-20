@@ -16,12 +16,14 @@ To upgrade the Wazuh manager choose the appropriate tab for the desired package 
 
   .. group-tab:: YUM
 
-    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
+    .. include:: ../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
+
+    Clean the YUM cache:
 
     .. code-block:: console
 
-        # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
-
+      # yum clean all
+    
     Upgrade the Wazuh manager to the latest version:
 
     .. code-block:: console
@@ -30,11 +32,7 @@ To upgrade the Wazuh manager choose the appropriate tab for the desired package 
 
   .. group-tab:: APT
 
-    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages. This step is not necessary if the packages are set to a ``hold`` state and the repository is enabled:
-
-    .. code-block:: console
-
-      # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+    .. include:: ../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
 
     Upgrade the Wazuh manager to the latest version:
 
@@ -45,11 +43,7 @@ To upgrade the Wazuh manager choose the appropriate tab for the desired package 
 
   .. group-tab:: ZYpp
 
-    If the Wazuh repository is disabled it is necessary to enable it to get the latest packages:
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+    .. include:: ../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
 
     Upgrade the Wazuh manager to the latest version:
 
