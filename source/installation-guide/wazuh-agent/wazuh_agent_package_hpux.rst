@@ -7,7 +7,7 @@
 HP-UX
 =====
 
-You can download the `HP-UX installer <https://packages.wazuh.com/3.x/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_ from our :ref:`packages list<packages>`. The installation steps are:
+You can download the `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_ from our :ref:`packages list<packages>`. The installation steps are:
 
 Create the user and the group OSSEC:
 

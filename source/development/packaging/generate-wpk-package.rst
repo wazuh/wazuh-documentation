@@ -66,7 +66,7 @@ To build a WPK for Windows you need to first download an MSI package of the desi
 
 .. code-block:: console
 
-  # curl -O https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
+  # curl -O https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 Below, you will find an example of Windows WPK package building.
 

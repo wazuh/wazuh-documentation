@@ -49,7 +49,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
         .. code-block:: console
 
-          # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # echo "deb https://packages.wazuh.com/|CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
         Upgrade the Wazuh agent:
 
