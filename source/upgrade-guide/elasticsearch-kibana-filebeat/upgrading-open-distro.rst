@@ -171,7 +171,7 @@ Upgrading Filebeat
           .. code-block:: console
 
             # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-            # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/filebeat/7.x/filebeat_all_in_one.yml
+            # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
             # chmod go+r /etc/filebeat/filebeat.yml
 
         .. group-tab:: Distributed installation
@@ -179,7 +179,7 @@ Upgrading Filebeat
           .. code-block:: console
 
             # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-            # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/new-documentation-templates/extensions/filebeat/7.x/filebeat.yml
+            # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
             # chmod go+r /etc/filebeat/filebeat.yml
 
 
@@ -362,7 +362,7 @@ Upgrading Kibana
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
 
-#. Link Kibana’s socket to priviledged port 443:
+#. Link Kibana’s socket to privileged port 443:
 
     .. code-block:: console
 
@@ -371,6 +371,9 @@ Upgrading Kibana
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
+
+
+.. warning:: In Wazuh version 4.0 the index pattern ``wazuh-alerts-3.x-*``  has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
 
 
 Disabling the repository
