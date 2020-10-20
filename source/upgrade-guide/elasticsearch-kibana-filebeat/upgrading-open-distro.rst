@@ -282,6 +282,16 @@ Upgrading Kibana
                     In case of having more Wazuh API entries, each of them must be added manually.
 
 
+Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file: 
+
+    .. code-block:: console
+
+       - default:
+       url: https://localhost
+       port: 55000
+       user: wazuh-wui
+       password: wazuh-wui
+
 
 #. Remove the Wazuh Kibana plugin:
 
