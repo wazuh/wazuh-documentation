@@ -255,7 +255,7 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
       {
         "order": 1,
-        "index_patterns": ["wazuh-alerts-3.x-*"],
+        "index_patterns": ["wazuh-alerts-4.x-*"],
         "settings": {
           "index.refresh_interval": "5s",
           "index.number_of_shards": "3",
