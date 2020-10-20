@@ -342,6 +342,8 @@ Upgrading Kibana
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
+.. warning:: In Wazuh version 4.0 the index pattern ``wazuh-alerts-3.x-*``  has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+
 
 Disabling the repository
 ^^^^^^^^^^^^^^^^^^^^^^^^
