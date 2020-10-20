@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _cloud_configure_environment_settings:
+.. _cloud_your_environment_settings:
 
 Settings
 ========
@@ -13,6 +13,4 @@ An environment settings can be tweaked in certain ways:
 - Name
 
 - Security settings
-
-- Resetting password
 

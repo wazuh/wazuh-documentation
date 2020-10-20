@@ -8,16 +8,20 @@ Sign Up for a Trial
 .. meta::
   :description: Learn about signing up for a trial. 
 
-To experience the benefits of Wazuh Cloud you should start by signing up for a Trial
+To experience the benefits of Wazuh Cloud, you should start by signing up for a Trial
 
-1- Sign up on Wazuh cloud
+1- Sign up on Wazuh Cloud.
 
-2- Create an environment (name, select tier, region, pricing free for trial)
+2- Create an :ref:`environment <cloud_service_glossary>`.
 
-3- You're all set! Check that your environment was properly created in the list
+2.1- Select a name for the environment.
+
+2.2- Select a :ref:`tier <cloud_service_glossary>`: The amount of data available to check online. This `estimation tool <https://wazuh.com/cloud/#pricing>`_ may be helpful to calculate it.
+
+2.3 - Select your :ref:`region <cloud_service_glossary>`.
+
+3- You're all set! Check that your environment was properly created in the list.
+
+Trial will be free for 14 days, but you may keep using your environment since that moment by adding billing details.
 
 Once the trial has been properly created, next steps will be accessing the Wazuh WUI and registering the first agents.
-
-Trial duration for the created environment is 14 days. Its duration can be extended according to the tier's billing details.
-
-

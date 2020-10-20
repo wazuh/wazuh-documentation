@@ -8,9 +8,7 @@ Add your billing details
 .. meta::
   :description: Learn how to add your billing details. 
 
-In case that using the environment beyond the trial period is desired, adding billing details will be required.
-
-A price estimation can be made by using the `Wazuh Cloud estimation tool <https://wazuh.com/cloud/#pricing>`_
+In order to use environment beyond the trial period, adding billing details will be required.
 
 To add the billing details:
 

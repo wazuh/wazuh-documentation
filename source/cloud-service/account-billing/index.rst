@@ -2,8 +2,8 @@
 
 .. _cloud_account_billing:
 
-Account Billing
-===============
+Account and Billing
+===================
 
 .. meta::
   :description: Learn about your account and billing. 
@@ -20,5 +20,4 @@ Billing details regarding your environment can be accessed and managed through t
       edit-user-settings
       add-billing-details
       update-billing
-      cancel-environment
       billing-faq

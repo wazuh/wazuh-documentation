@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _cloud_account_billing_cancel_environment:
+.. _cloud_your_environment_cancel_environment:
 
-Cancel subscription
-===================
+Cancel environment
+==================
 
 .. meta::
   :description: Learn how to cancel an environment. 

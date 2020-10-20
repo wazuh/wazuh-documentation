@@ -10,4 +10,17 @@ Storage API
 
 Wazuh Cloud Service provides an API for managing storage access, the Storage API.
 
+Generate an API key
+-------------------
+
+From the Wazuh Cloud Console an API key can be generated.
+
+1- Go to **Account** > **API Keys** > **Generate API Key**.
+
+2- Save the API key for its subsequent use. It will not be shown again.
+
+Accessing Cold Storage data
+---------------------------
+
+Storage API grants access to the data that has been rotated from hot online data to cold offline data.
 
