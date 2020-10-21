@@ -334,7 +334,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
 
 
 
