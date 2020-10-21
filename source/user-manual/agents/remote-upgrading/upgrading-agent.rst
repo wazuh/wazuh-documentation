@@ -155,7 +155,7 @@ Multiple agents can be upgraded at the same time using the RESTful API.
               {
                 "message": "Success",
                 "agent": "002",
-                "task_id": 2,
+                "task_id": 1,
                 "node": "worker2",
                 "module": "upgrade_module",
                 "command": "upgrade",
@@ -166,7 +166,7 @@ Multiple agents can be upgraded at the same time using the RESTful API.
               {
                 "message": "Success",
                 "agent": "003",
-                "task_id": 3,
+                "task_id": 2,
                 "node": "worker1",
                 "module": "upgrade_module",
                 "command": "upgrade",
