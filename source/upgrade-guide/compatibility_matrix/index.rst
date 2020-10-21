@@ -32,7 +32,7 @@ Below you may find the compatibility table for the Wazuh manager.
 +-------------------------------------+-------------------------------+------------------------+--------+--------+
 |   Debian Wheezy/7 or newer          | ✓                             | ✓                      |   ✓    |   ✓    |
 +-------------------------------------+-------------------------------+------------------------+--------+--------+
-|   Fedora (>= 22)                    | ✓                             | ✓                      |   ✓    |   ✓    |
+|   Fedora (>= 31)                    | ✓                             | ✓                      |   ✓    |   ✓    |
 +-------------------------------------+-------------------------------+------------------------+--------+--------+
 |   OpenSUSE 42 or newer              | ✓                             | ✓                      |   ✗    |   ✗    |
 +-------------------------------------+-------------------------------+------------------------+--------+--------+
@@ -69,7 +69,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +------------------------------------+-------------------------+------------------------+
 |   Debian Wheezy/7 or newer         |   ✓                     | ✓                      |
 +------------------------------------+-------------------------+------------------------+
-|   Fedora 22 or newer               |   ✓                     | ✓                      |
+|   Fedora 31 or newer               |   ✓                     | ✓                      |
 +------------------------------------+-------------------------+------------------------+
 |   HP-UX 11.31                      |   ✓                     | ✓                      |   
 +------------------------------------+-------------------------+------------------------+
@@ -116,30 +116,28 @@ The compatibility between Wazuh agent and Wazuh manager is guaranteed when the W
     The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
 
 
-API and Kibana app
-^^^^^^^^^^^^^^^^^^
+Wazuh and Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh app for Kibana requires compatibility between two different components:
 
   - With the **Wazuh manager**, it requires the same ``major.minor`` version.
   - With the **Elastic Stack**, it's only compatible with the exact same version.
 
-+-----------------------------------+------------------------------------+
-|                                   |                                    |
-+   **API and Wazuh App version**   +     **Elastic Stack version**      +
-|                                   |                                    |
-+-----------------------------------+------------------------------------+
-|              3.13.2               | 7.8.0, 7.8.1, 7.9.0, 7.9.1, |ELASTICSEARCH_LATEST|  |
-+-----------------------------------+------------------------------------+
-|              3.13.1               | 7.8.0, 7.8.1, 7.9.0, 7.9.1         |
-+-----------------------------------+------------------------------------+
-|              3.13.0               | 7.7.0, 7.7.1, 7.8.0                |
-+-----------------------------------+------------------------------------+
++-----------------------------------+------------------------------------+---------------------------+
+|                                   |                                    |                           |
++   **Wazuh version**               +     **Elastic Stack version**      +  **Open Distro version**  +
+|                                   |                                    |                           |
++-----------------------------------+------------------------------------+---------------------------+
+|              4.0.0                | |ELASTICSEARCH_LATEST|                              | |OPEN_DISTRO_LATEST|                    |
++-----------------------------------+------------------------------------+---------------------------+
+|              4.0.0                | |ELASTICSEARCH_ELK_LATEST|                              |                           |
++-----------------------------------+------------------------------------+---------------------------+
 
 You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
 
-API and Splunk app
-^^^^^^^^^^^^^^^^^^
+Wazuh and Splunk app
+^^^^^^^^^^^^^^^^^^^^
 
 The Splunk app for Wazuh requires compatibility between two different components:
 
