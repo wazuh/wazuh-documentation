@@ -231,7 +231,7 @@ Upgrading Kibana
 .. warning::
   Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
-#. Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to 3.13.x:
+Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to 3.13.x:
 
       .. tabs::
 
@@ -282,7 +282,7 @@ Upgrading Kibana
                     In case of having more Wazuh API entries, each of them must be added manually.
 
 
-Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file: 
+#. Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file: 
 
     .. code-block:: console
 
