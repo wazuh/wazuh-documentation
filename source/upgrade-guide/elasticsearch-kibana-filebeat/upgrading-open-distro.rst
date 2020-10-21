@@ -173,7 +173,7 @@ Upgrading Filebeat
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file. This step is only needed for the upgrade of a ``Distributed installation``. In case of having an ``All-in-one`` installation, the file is already configured:
 
@@ -377,7 +377,7 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to a new
 
           .. code-block:: console
 
-            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh_pre.repo
+            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
         .. group-tab:: APT
 
