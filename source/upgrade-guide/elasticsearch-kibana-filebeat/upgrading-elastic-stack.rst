@@ -183,7 +183,7 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
     .. code-block:: console
 
-      # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+      # cp /etc/filebeat/filebeat.yml <back-up-directory>/filebeat.yml.backup
       # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
       # chmod go+r /etc/filebeat/filebeat.yml
 

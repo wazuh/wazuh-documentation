@@ -170,7 +170,7 @@ Upgrading Filebeat
 
           .. code-block:: console
 
-            # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+            # cp /etc/filebeat/filebeat.yml <back-up-directory>/filebeat.yml.backup
             # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
             # chmod go+r /etc/filebeat/filebeat.yml
 
@@ -178,7 +178,7 @@ Upgrading Filebeat
 
           .. code-block:: console
 
-            # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+            # cp /etc/filebeat/filebeat.yml <back-up-directory>/filebeat.yml.backup
             # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_elastic_cluster.yml
             # chmod go+r /etc/filebeat/filebeat.yml
 
