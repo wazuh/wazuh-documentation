@@ -329,7 +329,7 @@ Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration fil
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip
 
 
 #. Update configuration file permissions:
