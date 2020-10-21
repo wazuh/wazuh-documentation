@@ -15,6 +15,8 @@ The Kibana default configuration is stored in ``kibana/config/kibana.yml``::
     volumes:
       - ./custom_kibana.yml:/usr/share/kibana/config/kibana.yml
 
+Read `here <https://www.elastic.co/guide/en/kibana/current/docker.html>`_ to know more about the variables you can use on this image.
+
 
 How can I tune the Elasticsearch configuration?
 -----------------------------------------------
