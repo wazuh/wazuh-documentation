@@ -179,15 +179,6 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
           # zypper update filebeat-|ELASTICSEARCH_ELK_LATEST|
 
 
-#. Update the configuration file:
-
-    .. code-block:: console
-
-      # cp /etc/filebeat/filebeat.yml <back-up-directory>/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/filebeat/7.x/filebeat.yml
-      # chmod go+r /etc/filebeat/filebeat.yml
-
-
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
