@@ -272,15 +272,17 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
                     In case of having more Wazuh API entries, each of them must be added manually.
 
  
-#. Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file: 
+#. Edit the value ``user`` by ``username`` set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``: 
 
-    .. code-block:: console
+    .. code-block:: yaml
+      :emphasize-lines: 5, 6
 
-       - default:
-       url: https://localhost
-       port: 55000
-       username: wazuh-wui
-       password: wazuh-wui
+      hosts:
+        - default:
+          url: https://localhost
+          port: 55000
+          username: wazuh-wui
+          password: wazuh-wui
 
 #. Remove the Wazuh Kibana plugin:
 
