@@ -33,7 +33,7 @@ Then proceed and attach it to the current cluster by modifying the docker-compos
         - "514:514/udp"
         - "55000:55000"
       volumes:
-        - migration:/migration
+        - migration:/wazuh-migration
 
 
 .. note::
@@ -41,11 +41,11 @@ Then proceed and attach it to the current cluster by modifying the docker-compos
 
 Proceed to rebuild the container with this volume attached: ``docker-compose up -d``
 
-Copy the content of ``/var/ossec/data`` and ``global.db`` to ``/migration`` on your Wazuh container:
+Copy the content of ``/var/ossec/data`` and ``global.db`` to ``/wazuh-migration`` on your Wazuh container:
 
-``docker exec wazuh-docker_wazuh_1 cp -a /var/ossec/data /migration``
+``docker exec wazuh-docker_wazuh_1 cp -a /var/ossec/data /wazuh-migration/``
 
-``docker exec wazuh-docker_wazuh_1 cp /var/ossec/var/db/global.db /migration/``
+``docker exec wazuh-docker_wazuh_1 cp /var/ossec/var/db/global.db /wazuh-migration/``
 
 You can stop the cluster now: ``docker-compose stop``
 
