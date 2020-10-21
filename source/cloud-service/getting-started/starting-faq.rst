@@ -10,6 +10,22 @@ FAQ
 
 While running Cloud Service for the some questions may arise. This list answers some of the most frequently asked ones.
 
+
+- `What is Wazuh Cloud Service?`_
+
+- `Can I try it for free?`_
+
+- `Is it PCI DDS compliant?`_
+
+- `Will I get support?`_
+
+- `Where is Wazuh Cloud Service hosted?`_
+
+- `What is a tier?`_
+
+- `What will happen when I am using all my tier?`_
+  
+  
 What is Wazuh Cloud Service?
 ----------------------------
 
@@ -18,7 +34,7 @@ Wazuh hosted EDR with several security features.
 Can I try it for free?
 ----------------------
 
-You may sign up for a free trial to test an environment.
+You may sign up for a free trial to test an environment. No credit card is required.
 
 Is it PCI DDS compliant?
 ------------------------
@@ -38,11 +54,12 @@ In AWS.
 What is a tier?
 ---------------
 
-A tier is the amount of data you are able to visualize online through your Web User Interface. This data consists of the security messages generated from Wazuh.
+A tier is the total size (in GB) of data from the alerts which are available online through your Web User Interface. This data consists of the security messages generated from Wazuh.
 
 
-What happens when my tier is consumed?
---------------------------------------
+What will happen when I am using all my tier?
+---------------------------------------------
 
-You will not be able to visualize the oldest data online, you will see the most recent amount according to your tier. You will still be able to retrieve your older Wazuh data with no size limits for a year, it will be stored offline.
+You will be able to see the most recent data according to your tier. The older information will be rotated to :ref:`cold storage <cloud_glossary_cold_storage>`, where it will be stored for a year with no size limits and easily accessible.
 
+As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI. When those 100GB of data are being used, the oldest data is rotated (keeping 100GB of data on the WUI), but will be accessible as cold storage.

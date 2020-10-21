@@ -8,9 +8,13 @@ Access Wazuh WUI
 .. meta::
   :description: Learn about how to access Wazuh WUI. 
 		
-Once an environment has been successfully created, an email will be sent containing a Cloud ID and credentials for the created environment. This Cloud ID is remarkable as it is used in every communication with your environment.
+Among the environment credentials received right after its creation you will find its Cloud ID. This Cloud ID is remarkable as it is used in every communication with your environment.
 
-Access the Web User Interface (WUI) through the web browser using the URL included on the previous email, ``https://<cloud_id>cloud.wazuh.com``, replacing ``<cloud_id>`` with its Cloud ID and filling with the adquired credentials.
+Access the Web User Interface (WUI) through the web browser:
+
+``https://<cloud_id>cloud.wazuh.com``
+
+Replacing ``<cloud_id>`` with its Cloud ID and filling with the adquired credentials.
 
 
 Access from Cloud Console
@@ -25,19 +29,3 @@ WUI can also be accessed from the Cloud Console:
 3- Access WUI with your credentials.
 
 4- Use the WUI as normally.
-
-
-Granting WUI access to others
------------------------------
-
-More users can be added to consult the WUI besides the administrator.
-
-1- Log in to your WUI
-
-2- Choose **Security**, **Internal Users**, and **Create internal user**.
-
-3- Provide a username and password. The security plugin automatically hashes the password and stores it.
-
-4- If desired, specify user attributes.
-
-5- Choose **Submit**.

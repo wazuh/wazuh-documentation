@@ -12,7 +12,7 @@ Wazuh Cloud Service is a hosted EDR service which offers threat detection, integ
 
 Besides, Wazuh Cloud Service supports unlimited endpoints, provides professional support, a managed infrastructure, and allows to conveniently monitor your security data.
 
-To get started, sign up for a free trial and follow the first steps:
+To get started, sign up for a free trial and follow the first steps. No credit card is required.
 
 
    .. toctree::

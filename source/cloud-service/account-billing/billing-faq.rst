@@ -10,7 +10,22 @@ Billing FAQ
 
 This list provides answers for some of the Frequently Asked Questions regarding Wazuh Cloud Service billing.
 
+- `Can I estimate how much Wazuh Cloud Service will cost?`_
 
+- `Where can I see a detailed view of my consumption?`_
+
+- `How do I view previous receipts and billing history?`_
+
+- `How can I change who receives receipts and billing notifications?`_
+
+- `What are the available payment methods on Wazuh Cloud Service?`_
+
+- `Who can I contact for more information?`_
+
+- `When is my credit card charged?`_
+
+
+  
 Can I estimate how much Wazuh Cloud Service will cost?
 ------------------------------------------------------
 

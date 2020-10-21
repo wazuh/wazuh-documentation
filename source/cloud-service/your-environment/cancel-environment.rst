@@ -8,6 +8,6 @@ Cancel environment
 .. meta::
   :description: Learn how to cancel an environment. 
 
-In case it is desired to cancel an environment, it can be done under the Cancel option once the desired environment is selected from the environment list.
+Your environment will be automatically renewed monthly. In case you want to stop renewing that environment, this can be done on the Wazuh Cloud Console under the **Cancel** option after selecting it from the environment list.
 
-.. note:: Canceling an environment will cause the loss of the data stored so far and takes effect by the end of the current billing period.
+.. warning:: Canceling an environment will cause the loss of the data stored so far and takes effect by the end of the current billing period.

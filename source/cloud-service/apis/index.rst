@@ -2,15 +2,17 @@
 
 .. _cloud_apis:
 
-APIs
-====
+RESTfulAPI
+==========
 
 .. meta::
-  :description: Learn about Cloud APIs
+  :description: Learn about Wazuh Cloud RESTfulAPI
 
 Wazuh Cloud Service provides an API to work with environments.
 
 .. topic:: Contents
 
    .. toctree::
+      :maxdepth: 1
+		 
       storage-api
