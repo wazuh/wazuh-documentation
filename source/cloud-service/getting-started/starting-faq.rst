@@ -23,7 +23,7 @@ While running Cloud Service for the some questions may arise. This list answers 
 
 - `What is a tier?`_
 
-- `What will happen when I am using all my tier?`_
+- `What will happen when I use all of my tier?`_
   
   
 What is Wazuh Cloud Service?
@@ -49,7 +49,7 @@ Yes, every environment creation includes a standard support 8/5 with 2 healthche
 Where is Wazuh Cloud Service hosted?
 ------------------------------------
 
-In AWS.
+In AWS. This allows us to provide a quality service guaranteed by AWS.
 
 What is a tier?
 ---------------
@@ -57,9 +57,9 @@ What is a tier?
 A tier is the total size (in GB) of data from the alerts which are available online through your Web User Interface. This data consists of the security messages generated from Wazuh.
 
 
-What will happen when I am using all my tier?
+What will happen when I use all of my tier?
 ---------------------------------------------
 
-You will be able to see the most recent data according to your tier. The older information will be rotated to :ref:`cold storage <cloud_glossary_cold_storage>`, where it will be stored for a year with no size limits and easily accessible.
+You will be able to see the most recent data according to your tier. The older information will be removed so the total data matches your tier. You will still be able to access that data as :ref:`cold storage <cloud_glossary_cold_storage>`, where it will be stored for a year with no size limits and will be easily accessible.
 
-As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI. When those 100GB of data are being used, the oldest data is rotated (keeping 100GB of data on the WUI), but will be accessible as cold storage.
+As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB x 10 days = 100GB). When those 100GB of data are being used, the oldest data is rotated (keeping 100GB of data on the WUI), but will be accessible as cold storage.

@@ -22,5 +22,4 @@ From the Wazuh Cloud Console an API key can be generated.
 Accessing Cold Storage data
 ---------------------------
 
-Storage API grants access to the data that has been rotated from hot online data to cold offline data.
-
+Storage API grants access to the data that has been rotated from hot online data to cold offline data. A guide is provided to :ref:`learn how to access cold storage <cloud_your_environment_accessing_cold_storage>`.

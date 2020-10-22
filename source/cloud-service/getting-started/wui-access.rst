@@ -10,6 +10,9 @@ Access Wazuh WUI
 		
 Among the environment credentials received right after its creation you will find its Cloud ID. This Cloud ID is remarkable as it is used in every communication with your environment.
 
+Browser access
+--------------
+
 Access the Web User Interface (WUI) through the web browser:
 
 ``https://<cloud_id>cloud.wazuh.com``

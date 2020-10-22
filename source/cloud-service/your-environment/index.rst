@@ -17,8 +17,9 @@ An environment can be tuned to fit a set of stablished requirements. On this sec
    .. toctree::
       :maxdepth: 1
 	      
-      understanding-storage
       manage-wui-access
+      understanding-storage
+      accessing-cold-storage
       cancel-environment
       send-syslog-data
       agents-without-internet

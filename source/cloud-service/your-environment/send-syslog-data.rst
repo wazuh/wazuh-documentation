@@ -62,7 +62,7 @@ Mind to review your firewall/SeLinux configuration to allow this communication.
 
 5. Restart rsyslog and wazuh agent.
 
-.. code-block::
+.. code-block:: console
 
    # systemctl restart rsyslog
    # systemctl restart wazuh-agent
@@ -76,9 +76,9 @@ Logstash on Windows
 
 2. Configure JRE.
 
-   • Click Start, search for "Edit the system environment variables" and open the system properties applet.
-   • Click the Environment Variables button.
-   • Under System variables click "New".
+   • Click **Start**, search for "**Edit the system environment variables**" and open the system properties applet.
+   • Click the **Environment Variables** button.
+   • Under **System variables** click "**New**".
    • Enter the variable name JAVA_HOME and browse to the JRE install directory and click OK. In the variable value the JRE directory should be displayed. For example, ``C:\Program Files\Java\jre1.8.0_201``.
 
 You may need to reopen your terminal to apply changes
@@ -90,8 +90,13 @@ You may need to reopen your terminal to apply changes
 
 4. Install logstash-input-syslog and logstash-output-file plugins.
 
-   • ``C:\logstash\bin>logstash-plugin install logstash-input-syslog``
-   • ``C:\logstash\bin>logstash-plugin install logstash-output-file``
+.. code-block::
+   
+   C:\logstash\bin>logstash-plugin install logstash-input-syslog
+
+.. code-block::
+   
+   C:\logstash\bin>logstash-plugin install logstash-output-file
 
 If you are using PowerShell remember to type ``.\`` before the executable: ``.\logstash-plugin``
 
@@ -131,10 +136,18 @@ Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to add the following:
 
 8. Restart Logstash.
 
-Run Logstash from the command line: ``C:\logstash\bin\logstash.bat -f C:\logstash\config\logstash.conf``
+Run Logstash from the command line:
+
+.. code-block:: console
+   
+   C:\logstash\bin\logstash.bat -f C:\logstash\config\logstash.conf
 
 And `install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using NSSM or Windows Task Manager.
 
 9. Restart Wazuh Agent.
 
-By running in Powershell: ``Restart-Service OssecSvc``
+By running in Powershell:
+
+.. code-block:: console
+   
+   Restart-Service OssecSvc

@@ -10,6 +10,8 @@ Technical FAQ
 
 While configuring an environment some questions may arise. This list gathers some of the most frequently asked questions about this topic.
 
+- `How can I send data to my environment?`_
+
 - `Is it possible to change the URL to access the environment?`_
 
 - `What happens if I consume all the data of my tier?`_
@@ -29,6 +31,13 @@ While configuring an environment some questions may arise. This list gathers som
 - `Can I send syslog data directly to the environment?`_
 
 - `Can I send data directly to Elasticsearch (Filebeat, Metricbeat, etc)?`_
+
+- `How can I configure email alerts?`_
+
+How can I send data to my environment?
+--------------------------------------
+
+All the communications will be sent through Wazuh agents. This way it is guaranteed that your data will be secure.
   
 Is it possible to change the URL to access the environment?
 -----------------------------------------------------------
@@ -74,6 +83,8 @@ Some aproaches to solve this issue are suggested:
 
 - **Using AWS Private Link:** If your agent is located in your AWS VPC open a ticket requesting your VPC endpoint service name. Then create a new Endpoint pointing to that endpoint service (AWS > VPC > Endpoints). Once it is created Wazuh will approve the connection and notify you when it is ready to use. Then you will be able to register your agent replacing the Wazuh Manager IP with your adquired endpoint's DNS.
 
+Find a more detailed guide in our :ref:`Connect agents without Internet <cloud_your_environment_agents_without_internet>` section.
+  
 Can I send syslog data directly to the environment?
 ---------------------------------------------------
 
@@ -83,9 +94,14 @@ No, it is not possible due to security reasons as that information is plain data
 
 - Use **Logstash on a Windows host** with a Wazuh agent to receive syslog and log to a file and send those logs to the environment.
 
-These methods are explained on the :ref:`Forward syslog events to Wazuh <cloud_your_environment_send_syslog>`_ section.
+These methods are explained on the :ref:`Forward syslog events to Wazuh <cloud_your_environment_send_syslog>` section.
 
 Can I send data directly to Elasticsearch (Filebeat, Metricbeat, etc)?
 ----------------------------------------------------------------------
 
 No, all data flow relies on Wazuh agents for security reasons.
+
+How can I configure email alerts?
+---------------------------------
+
+You can configure email settings to send alerts or reports by email through the WUI. A guide on how to do this can be found on the :ref:`Configure email alerts <cloud_your_environment_configure_email_alerts>` section.
