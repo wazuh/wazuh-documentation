@@ -365,7 +365,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
 
-#. Remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+#. Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
 
     .. code-block:: console
 
