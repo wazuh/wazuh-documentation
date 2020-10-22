@@ -369,7 +369,9 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
     .. code-block:: console
 
-      # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.9.1' -k -admin:admin
+      # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: |ELASTICSEARCH_LATEST|' -k -admin:admin
+
+    If you have a custom index pattern, be sure to replace it accordingly.      
 
 #. Clean the browser's cache and cookies.
 
