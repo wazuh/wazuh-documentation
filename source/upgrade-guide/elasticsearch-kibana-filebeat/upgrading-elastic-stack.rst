@@ -304,11 +304,12 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
             # zypper update kibana=|ELASTICSEARCH_ELK_LATEST|
 
-#. Remove generated bundles:
+#. Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
+      # rm -f /usr/share/kibana/optimize/wazuh/config/wazuh-registry.json
 
 #. Update file permissions. This will prevent errors when generating new bundles or updating the Wazuh Kibana plugin:
 
@@ -344,7 +345,15 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
-.. warning:: In Wazuh version 4.0 the index pattern ``wazuh-alerts-3.x-*``  has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+
+#. Remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+
+    .. code-block:: console
+
+      # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.9.1' -k -uelastic:<elastic_password>
+
+#. Clean the browser's cache and cookies.
+
 
 
 Disabling the repository
