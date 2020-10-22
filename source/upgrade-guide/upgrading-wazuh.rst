@@ -18,38 +18,37 @@ To upgrade the Wazuh manager choose the appropriate tab for the desired package 
 
     .. include:: ../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
 
-    Clean the YUM cache:
+    3. Clean the YUM cache:
 
-    .. code-block:: console
+      .. code-block:: console
 
-      # yum clean all
+        # yum clean all
     
-    Upgrade the Wazuh manager to the latest version:
+    4. Upgrade the Wazuh manager to the latest version:
 
-    .. code-block:: console
+      .. code-block:: console
 
-        # yum upgrade wazuh-manager
+          # yum upgrade wazuh-manager
 
   .. group-tab:: APT
 
     .. include:: ../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
 
-    Upgrade the Wazuh manager to the latest version:
+    4. Upgrade the Wazuh manager to the latest version:
 
-    .. code-block:: console
+      .. code-block:: console
 
-        # apt-get update
-        # apt-get install wazuh-manager
+          # apt-get install wazuh-manager
 
   .. group-tab:: ZYpp
 
     .. include:: ../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
 
-    Upgrade the Wazuh manager to the latest version:
+    3. Upgrade the Wazuh manager to the latest version:
 
-    .. code-block:: console
+      .. code-block:: console
 
-        # zypper update wazuh-manager
+          # zypper update wazuh-manager
 
 
 .. note::
