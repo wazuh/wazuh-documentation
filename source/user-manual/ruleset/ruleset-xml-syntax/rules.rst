@@ -35,7 +35,11 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `dstip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `extra_data`_           | Any String.                                                   | It will compare a string with the string decoded as ``extra_data``.                                  |
+| `srcport`_              | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a port with a string decoded as ``srcport``.                   |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `dstport`_              | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a port with a string decoded as ``dstport``.                   |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `extra_data`_           | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a extra data with a string decoded as ``extra_data``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `user`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a username with a string decoded as ``user``.                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -51,9 +55,21 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `url`_                  | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will look for a match with the field decoded as ``url``                                           |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `location`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Location identifies the origin of the input.                                                         |
+| `location`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the location obtained in the pre-decoding phase.                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `action`_               | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `protocol`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``protocol`` field.                                              |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `data`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``data`` field.                                                  |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `status`_               | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``status`` field.                                                |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `system_name`_          | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``system_name`` field.                                           |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `srcgeoip`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``srcgeoip`` field.                                              |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `dstgeoip`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``dstgeoip`` field.                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_sid`_               | A rule ID.                                                    | It works similar to parent decoder. It will match if that rule ID has previously matched.            |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -162,8 +178,6 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `group`_                | Any String.                                                   | Add additional groups to the alert.                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `status`_               | started, aborted, succeeded, failed, lost, etc.               | Declares the current status of a rule.                                                               |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `mitre`_                | See `Mitre table <rules.html#mitre>`_ below.                  | Contains Mitre Technique IDs that fit the rule                                                       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `var`_                  | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
@@ -245,6 +259,14 @@ Example:
 
 If the rule matches the ``id`` 100200 and the log contains the ``Queue flood!`` phrase in it, rule activates and triggers a level 3 alert.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 regex
 ^^^^^
 
@@ -268,6 +290,14 @@ Example:
     </rule>
 
 If the rule matches the ``ìd`` 100500 and the event contains any valid IP, the rule is triggered and generates a level 3 alert.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 decoded_as
 ^^^^^^^^^^
@@ -341,6 +371,14 @@ Example:
 
 This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 srcip
 ^^^^^
 
@@ -363,6 +401,14 @@ Example:
       </rule>
 
 This rule will trigger when that exact ``scrip`` has been decoded.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 dstip
 ^^^^^
@@ -387,6 +433,13 @@ Example:
 
 This rule will trigger when an ``dstip`` different from ``198.168.41.30`` is detected.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 data
 ^^^^
@@ -398,6 +451,14 @@ Any string that is decoded into the ``data`` field.
 +--------------------+-----------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
 +--------------------+-----------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 extra_data
 ^^^^^^^^^^
@@ -422,6 +483,14 @@ Example:
 
 This rule will trigger when the log belongs to ``windows`` category and the decoded field ``extra_data`` is: ``Symantec AntiVirus``
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 user
 ^^^^
 
@@ -438,13 +507,21 @@ Example:
 
   .. code-block:: xml
 
-      <rule id="140101" level="12">
-        <if_group>authentication_success</if_group>
-        <user>mysql</user>
-        <description>System user successfully logged to the system.</description>
-      </rule>
+    <rule id="140101" level="12">
+      <if_group>authentication_success</if_group>
+      <user negate="yes">wazuh|root</user>
+      <description>Unexpected user successfully logged to the system.</description>
+    </rule>
 
-This rule will trigger when the user ``mysql`` successfully logs into the system. Being a System user it should never log in to the system.
+This rule will trigger when a user different from ``root`` or ``wazuh`` successfully login into the system.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 system_name
 ^^^^^^^^^^^^
@@ -456,6 +533,14 @@ Any string that is decoded into the ``system_name`` field.
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 program_name
 ^^^^^^^^^^^^
@@ -481,6 +566,14 @@ Example:
 
 The rule will trigger when the program Syslogd restarted.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 protocol
 ^^^^^^^^
 
@@ -492,6 +585,51 @@ Any string that is decoded into the ``protocol`` field.
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
+srcport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the source port (decoded as ``srcport``).
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
++--------------------+------------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
+dstport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the destination port (decoded as ``dstport``).
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
++--------------------+------------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 hostname
 ^^^^^^^^
@@ -515,6 +653,14 @@ Example:
         </rule>
 
 This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 time
 ^^^^
@@ -589,6 +735,14 @@ Example:
 
 This rule will group the logs whose decoded ID is usb.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 url
 ^^^
 
@@ -612,6 +766,14 @@ Example:
       </rule>
 
 This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are nothing to worry about.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 location
 ^^^^^^^^
@@ -678,6 +840,14 @@ Example:
 
 This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 action
 ^^^^^^
 
@@ -700,6 +870,14 @@ Example:
       </rule>
 
 This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning``.
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 if_sid
 ^^^^^^
@@ -1422,6 +1600,25 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <different_url />  |
 +--------------------+--------------------+
 
+srcgeoip
+^^^^^^^^
+
+Any string that is decoded into the ``srcgeoip`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
+
 same_srcgeoip
 ^^^^^^^^^^^^^
 
@@ -1458,6 +1655,25 @@ Example:
       </rule>
 
   That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
+
+dstgeoip
+^^^^^^^^
+
+Any string that is decoded into the ``dstgeoip`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 same_dstgeoip
 ^^^^^^^^^^^^^
@@ -1709,6 +1925,13 @@ Example:
         <group>upgrade,upgrade_failure,</group>
       </rule>
 
+The attribute below is optional, it allows to negate the expressions.
+
++--------------------+--------------------+--------------------+
+| Attribute          | Value range        | Default value      |
++====================+====================+====================+
+| **negate**         | yes  or  no        | no                 |
++--------------------+--------------------+--------------------+
 
 mitre
 ^^^^^
