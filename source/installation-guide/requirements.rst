@@ -91,7 +91,7 @@ In the ``analysid.state`` file the variable  ``events_dropped`` indicates whethe
 
 To monitor if the Elastic Stack environment is working properly, there are tools available like performance analyzer. 
 
-In case that scaling is needed, the following sections describe how to make a distributed deployment of :ref:`Wazuh with ELastic Stack <distributed_index>`.   
+In case that scaling is needed, the following sections describe how to make a distributed deployment of :ref:`Wazuh with Elastic Stack <distributed_index>`.
 
 
 
