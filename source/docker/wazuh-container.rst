@@ -190,8 +190,12 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
         - SERVER_SSL_CERTIFICATE=/usr/share/kibana/config/cert.pem
         - SERVER_SSL_KEY=/usr/share/kibana/config/key.pem
       volumes:
-        - ./kibana_od_ssl/cert.pem:/usr/share/kibana/config/cert.pem
-        - ./kibana_od_ssl/key.pem:/usr/share/kibana/config/key.pem
+        - ./production_cluster/kibana_ssl/cert.pem:/usr/share/kibana/config/cert.pem
+        - ./production_cluster/kibana_ssl/key.pem:/usr/share/kibana/config/key.pem
+
+  .. note::
+    We provide an easy way to generate a self signed certificate by running ``bash ./production_cluster/kibana_ssl/generate-self-signed-cert.sh``
+
 
   2.5 Setup SSL on the Nginx load balancer
 
