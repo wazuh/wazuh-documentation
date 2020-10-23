@@ -77,7 +77,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # yum install opendistroforelasticsearch
+            # yum install opendistroforelasticsearch-|OPEN_DISTRO_LATEST|
 
 
         .. group-tab:: APT
@@ -86,20 +86,20 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # apt install elasticsearch-oss
+            # apt install elasticsearch-oss=|ELASTICSEARCH_LATEST|
 
           Upgrade Open Distro for Elasticsearch:
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch
+            # apt install opendistroforelasticsearch-|OPEN_DISTRO_LATEST|
 
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update opendistroforelasticsearch
+            # zypper update opendistroforelasticsearch-|OPEN_DISTRO_LATEST|
 
 
 
@@ -146,20 +146,20 @@ Upgrading Filebeat
 
           .. code-block:: console
 
-            # yum install filebeat
+            # yum install filebeat-|ELASTICSEARCH_LATEST|
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install filebeat
+            # apt-get install filebeat=|ELASTICSEARCH_LATEST|
 
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update filebeat
+            # zypper update filebeat-|ELASTICSEARCH_LATEST|
 
 
 #. Download the alerts template for Elasticsearch:
@@ -289,20 +289,20 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
           .. code-block:: console
 
-            # yum install opendistroforelasticsearch-kibana
+            # yum install opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install opendistroforelasticsearch-kibana
+            # apt-get install opendistroforelasticsearch-kibana=|OPEN_DISTRO_LATEST|
 
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update opendistroforelasticsearch-kibana
+            # zypper update opendistroforelasticsearch-kibana-|OPEN_DISTRO_LATEST|
 
 
 #. Remove generated bundles and the ``wazuh-registry.json`` file:
