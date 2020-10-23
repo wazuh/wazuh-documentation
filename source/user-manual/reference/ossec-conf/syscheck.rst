@@ -890,7 +890,7 @@ Sets the maximum synchronization message throughput.
 .. _reference_ossec_syscheck_diff:
 
 diff
-^^^^
+----
 
 .. versionadded:: 4.0
 

@@ -206,7 +206,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -305,7 +305,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/warehouse/test/4.0/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
 

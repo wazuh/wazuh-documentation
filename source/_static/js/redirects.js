@@ -39,6 +39,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_0.html',
   '/user-manual/api/rbac/auth_context.html',
   '/user-manual/api/rbac/configuration.html',
   '/user-manual/api/rbac/how-it-works.html',
@@ -346,22 +347,22 @@ redirections.push(
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-distributed.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk-distributed.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-forwarder.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk-forwarder.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-forwarder.html',
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-polling.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk-polling.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk-reverse-proxy.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
     },    
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
@@ -681,7 +682,7 @@ redirections.push(
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables.rst',
+      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables.html',
     },
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],

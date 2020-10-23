@@ -91,7 +91,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/warehouse/test/4.0/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -115,8 +115,8 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
     - default:
        url: https://localhost
        port: 55000
-       user: wazuh
-       password: wazuh
+       user: wazuh-wui
+       password: wazuh-wui
 
 
 Disabling repositories

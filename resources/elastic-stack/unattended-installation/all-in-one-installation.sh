@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Program to install Wazuh manager along Open Distro for Elasticsearch
 # Copyright (C) 2015-2020, Wazuh Inc.
 #
@@ -160,7 +159,7 @@ addWazuhrepo() {
     if [ $sys_type == "yum" ] 
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
     elif [ $sys_type == "zypper" ] 
     then
         rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH > /dev/null 2>&1
@@ -170,14 +169,14 @@ addWazuhrepo() {
 		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
 		enabled=1
 		name=Wazuh repository
-		baseurl=https://packages.wazuh.com/3.x/yum/
+		baseurl=https://packages.wazuh.com/4.x/yum/
 		protect=1
 		EOF
     
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "curl -s https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
-        eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
+        eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
+        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
         eval "apt-get update -q $debug"
     fi    
 
@@ -219,13 +218,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install elasticsearch-7.9.1 -y -q $debug"
+        eval "yum install elasticsearch-7.9.2 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.1 -y -q $debug"
+        eval "apt-get install elasticsearch=7.9.2 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.1 $debug"
+        eval "zypper -n install elasticsearch-7.9.2 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -237,8 +236,8 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 $debug"
-        eval "curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/instances_aio.yml --max-time 300 $debug"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 $debug"
+        eval "curl -so /usr/share/elasticsearch/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/instances_aio.yml --max-time 300 $debug"
         eval "/usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --keep-ca-key --out ~/certs.zip $debug"
         eval "unzip ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
@@ -291,20 +290,20 @@ installFilebeat() {
     logger "Installing Filebeat..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install filebeat-7.9.1 -y -q  $debug"    
+        eval "yum install filebeat-7.9.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.9.1 $debug"
+        eval "zypper -n install filebeat-7.9.2 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.9.1 -y -q  $debug"
+        eval "apt-get install filebeat=7.9.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  $debug"
+        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  $debug"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 $debug"
         eval "chmod go+r /etc/filebeat/wazuh-template.json $debug"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module $debug"
@@ -328,24 +327,24 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install kibana-7.9.1 -y -q  $debug"    
+        eval "yum install kibana-7.9.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.1 $debug"
+        eval "zypper -n install kibana-7.9.2 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install kibana=7.9.1 -y -q  $debug"
+        eval "apt-get install kibana=7.9.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
         echo "Error: Kibana installation failed"
         exit 1;
     else   
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/warehouse/test/4.0/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -376,9 +375,9 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
+    if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
     then
-        echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
+        echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
         echo "All the componets have already been installed."

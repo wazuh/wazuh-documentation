@@ -7,7 +7,7 @@
 AIX
 ===
 
-You can download the `AIX installer <https://packages.wazuh.com/3.x/aix/wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ from our :ref:`packages list <packages>`. You can choose installation or a deployment:
+You can download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_ from our :ref:`packages list <packages>`. You can choose installation or a deployment:
 
   a) Installation:
 
