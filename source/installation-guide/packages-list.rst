@@ -17,7 +17,7 @@ This download page contains packages required for the Wazuh installation with th
    - `macOS`_
    - `Solaris`_
    - `Windows`_
-- `Wazuh Kibana plugin and Wazuh Splunk plugin`_
+- `Wazuh Kibana plugin and Wazuh Splunk app`_
 - `Virtual machine`_
 - `Open Distro for Elasticsearch`_
 
@@ -227,8 +227,8 @@ MSU
 |  4.0.0 or greater |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
 +-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Wazuh Kibana plugin and Wazuh Splunk plugin
--------------------------------------------
+Wazuh Kibana plugin and Wazuh Splunk app
+----------------------------------------
 
 +----------------------+---------------------------+---------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Product              |  Kibana Version           | Open Distro Version | Wazuh version | Package                                                                                                                                                                                                                                                     |
