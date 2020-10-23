@@ -8,7 +8,7 @@
 Connect agents without internet
 ===============================
 
-Even if an agent do not has Internet access, we provide different approaches to securely connect your private network to our cloud service:
+Even if an agent doesn't have Internet access, we provide different approaches to securely connect your private network to our cloud service:
 
 - `Using a forwarding proxy`_
 
@@ -92,7 +92,13 @@ To do this:
 
    ``com.amazonaws.vpce.<region>.vpce-svc-<aws-service-id>``
 
-2. Navigate to your AWS Console > VPC > Endpoints
+2. Select your endpoints in AWS:
+   
+   1. Navigate to your AWS Console
+
+   2. Select **VPC**
+
+   3. Select **Endpoints**
 
 3. Create a new Endpoint pointing to the endpoint service mentioned above. (`AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`_)
 

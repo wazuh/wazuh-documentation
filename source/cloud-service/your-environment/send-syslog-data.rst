@@ -5,11 +5,10 @@
 .. meta::
   :description: Learn about your environment
 
-Forward syslog events to Wazuh
-==============================
+Forward syslog events
+=====================
 
-Wazuh agents can run in a wide range of operative systems, but when it is not possible due to software incompabilities or business restricions, you can forward Syslog events to Wazuh Cloud. This is a common use case for network devices such as routers or firewalls.
-
+Wazuh agents can run in a wide range of operative systems, but when it is not possible due to software incompatibilities or business restrictions, you can forward Syslog events to your environment. This is a common use case for network devices such as routers or firewalls.
 
 
 Since every communication with Wazuh Cloud is performed through the Wazuh agent, you will have to configure the agent to forward the Syslog events. To do so, you have several options:
@@ -49,6 +48,8 @@ Mind to review your firewall/SeLinux configuration to allow this communication.
    if $fromhost-ip startswith 'xxx.xxx.xxx.' then /var/log/<file_name.log>
    & ~
 
+Mind replacing onwards ``<file_name.log>`` with the name chosen for this log.
+
 3. Deploy a Wazuh agent on the same host that has rsyslog.
 
 4. Configure the agent to read the syslog output file editing ``/var/ossec/etc/ossec.conf``.
@@ -70,7 +71,7 @@ Mind to review your firewall/SeLinux configuration to allow this communication.
 Logstash on Windows
 ^^^^^^^^^^^^^^^^^^^
    
-- Use **Logstash on a Windows host** with a Wazuh agent to receive syslog and log to a file and send those logs to the environment.
+- Use **Logstash on a Windows host** with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment.
 
 1. Make sure Windows is fully updated and `Java JRE <https://www.java.com/en/download/windows-64bit.jsp>`_ is installed.
 
@@ -118,6 +119,8 @@ Create the following file: ``C:\logstash\config\logstash.conf``
        codec => “line“
      }
    }
+
+Mind replacing onwards ``<file_name.log>`` with the name chosen for this log.
 
 6. Deploy a Wazuh agent on the same host that has Logstash.
    

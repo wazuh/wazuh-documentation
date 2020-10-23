@@ -8,7 +8,7 @@
 Configure email alerts
 ======================
 
-Configure the email settings to send alerts or reports by email through the Wazuh app:
+Configure the email settings to send alerts or reports by email through the environment's WUI:
 
 • Select **Management** tab. Click on the **Configuration** button. Click on the **Edit configuration** option.
 

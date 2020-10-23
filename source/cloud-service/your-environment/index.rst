@@ -10,7 +10,7 @@ Your environment
 
 The environment is the core of Wazuh Cloud Service. It will both work as a hosted EDR to collect security data and allow its visualization.
 
-An environment can be tuned to fit a set of stablished requirements. On this section these tweaks are introduced along with some other concepts related to managing your environment.
+Every environment has its unique requirements. For this purpose, some of the tweaks which can be tuned in an environment are introduced on the following sections along with some other concepts related to managing an environment.
 
 .. topic:: Contents
 

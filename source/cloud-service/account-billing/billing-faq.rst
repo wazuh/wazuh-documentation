@@ -34,37 +34,56 @@ Yes, you can get an estimation of the Wazuh Cloud data tier on the `Wazuh Cloud 
 Where can I see a detailed view of my consumption?
 --------------------------------------------------
 
-Wazuh Cloud Console: Account > Billing
+On your Wazuh Cloud Console:
+
+1. Go to **Account**.
+
+2. Select **Billing**.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
 
-Wazuh Cloud Console: Account > Billing > Invoice section
+On your Wazuh Cloud Console:
+
+1. Go to **Account**.
+
+2. Select **Billing**
+
+3. Check the **Invoices** section.
 
 How can I change who receives receipts and billing notifications?
 -----------------------------------------------------------------
 
-Wazuh Cloud Console: Account > Contacts > Billing contacts section
+On your Wazuh Cloud Console:
+
+1. Go to **Account**.
+
+2. Select **Contacts**.
+
+3. Add or remove contacts from the billing category.
+   
 
 What are the available payment methods on Wazuh Cloud Service?
 --------------------------------------------------------------
 
-<Fill>
+.. TODO: Answer
 
 Who can I contact for more information?
 ---------------------------------------
 
-You can fill the form `here <https://wazuh.com/cloud/>`_.
+For general purpose you can fill the form `here <https://wazuh.com/cloud/>`_.
+
+For info related to your environments address us on the **Help** section of your Wazuh Cloud Console.
 
 When is my credit card charged?
 -------------------------------
 
-<Fill>
+.. TODO: Answer
 
 Can I get a refund?
 -------------------
 
-<Fill>
+.. TODO: Answer
 
 What is included in my paid Wazuh Cloud Service environment?
 ------------------------------------------------------------

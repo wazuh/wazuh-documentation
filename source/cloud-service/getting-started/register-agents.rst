@@ -8,9 +8,9 @@ Register Agents
 .. meta::
   :description: Learn about how to register agents. 
 
-Agent registration is a simple process that takes place after the environment creation and the reception of its credentials.
+Agent registration is a simple process that takes place after the environment creation. It will make your environment ready to start reporting from your endpoints.
 
-1. :ref:`Login into WUI<cloud_getting_started_wui_access>`.
+1. :ref:`Login into your WUI<cloud_getting_started_wui_access>`.
 
 2. Click on **Active agents**.
 
@@ -18,11 +18,11 @@ Agent registration is a simple process that takes place after the environment cr
 
 4. Select the agent's OS.
 
-5. Fill the server address and password with your credentials.
+5. Fill the server address and password fields with your environments' credentials.
 
 6. Copy the generated output and run it on the agent.
 
 
 .. note::
 
-   Note that agents use **TCP** to communicate with your environment. Make sure that your agents are connected to your environments using TCP.
+   Agents use **TCP** to communicate with your environment. Make sure that your agents are connected to your environments using TCP.

@@ -2,23 +2,31 @@
 
 .. _cloud_apis:
 
-RESTfulAPI
-==========
+RESTful API
+===========
 
 .. meta::
   :description: Learn about Wazuh Cloud RESTful API
 
-Wazuh Cloud Service provides a RESTful API to work with environments. This API has the following endpoints:
+Wazuh Cloud Service provides an open source RESTful API that allows for interaction with its environments from a web browser, command line tool like cURL or any script or program able to make web requests. This API has the following endpoints:
 
-- **Storage API:** Get the cold storage data from an environment.
+- **Storage API:** Manage the cold storage data from an environment.
+
+
+Generate an API key
+-------------------
+
+From the Wazuh Cloud Console an API key can be generated.
+
+1- Go to **Account** > **API Keys** > **Generate API Key**.
+
+2- Save the API key for its subsequent use. It will not be shown again.
 
 
 Using the API
 -------------
 
 Use the desired endpoint by making a request to it.
-
-``<curl example>``
 
 .. topic:: Contents
 

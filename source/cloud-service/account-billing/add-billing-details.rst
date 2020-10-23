@@ -10,10 +10,14 @@ Add your billing details
 
 In order to use environment beyond the trial period, adding billing details will be required.
 
-To add the billing details:
+To add the billing details, on your Wazuh Cloud Console:
 
-1- Go to Account > Billing > Add billing information
+1. Go to **Account**.
 
-2- Fill the form
+2. Select **Billing**.
 
-3- Confirm the payment
+3. Select **Add billing information**.
+
+4. Fill the form.
+
+5. Confirm the payment.

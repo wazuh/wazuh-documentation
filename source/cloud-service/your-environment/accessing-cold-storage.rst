@@ -10,7 +10,7 @@ Accessing cold storage
 
 The cold storage is located in an AWS S3 bucket. Using the Wazuh Cloud API, you can generate a temporary AWS token that allows you to download your data using the Amazon S3 REST API.
 
-Next, the process of manually accessing cold storage is going to be described, but a script is provided on the `Automation of the access`_ section to make this configurations automatically. Take a look at the `Filename format`_ section to understand how your information is stored.
+Next, the process of manually accessing cold storage is going to be described, but a script is provided on the `Automation of the access`_ section to make this configuration automatically. Take a look at the `Filename format`_ section to understand how your information is stored.
 
 1. **Authentication**
 

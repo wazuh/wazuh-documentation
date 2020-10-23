@@ -8,16 +8,14 @@ Cloud Service
 .. meta::
   :description: Get started with Wazuh Cloud Service. 
 
-Wazuh Cloud Service documentation.
-
-Introduction
-------------
+Overview
+--------
 
 This section describes what does Wazuh Cloud Service offer and how to manage it.
 
-Getting started section offers a brief introduction to the service, its features and a quick guide on how to use it.
+Getting started section offers a brief introduction to the service, its features, and a quick guide on how to use it.
 
-More information regarding a cloud environment and its billing can be found on the following sections.
+More information regarding a cloud environment and its billing can be found on the subsequent sections.
 
 
 Table of contents

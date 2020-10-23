@@ -47,17 +47,17 @@ It is possible to get a new URL by opening a support ticket, but the previous UR
 What happens if I consume all the data of my tier?
 --------------------------------------------------
 
-Hot (online) storage data is rotated, the oldest data will still be able to be accessed as cold (offline) storage.
+Hot (online) storage data is rotated, the oldest data will still be able to be accessed as cold (offline) storage for a year. Learn more about this on the :ref:`understanding storage<cloud_your_environment_understanding_storage>` section.
 
 Can I move from cold storage (offline) to hot storage (online) data?
 --------------------------------------------------------------------
 
-It is not possible. However, you may export the data and load it into the snapshots in your environment. 
+It is possible to :ref:`download the data as cold storage<cloud_your_environment_accessing_cold_storage>` and load it into the snapshots in your local machines, but rotated data does not return to hot storage on your Wazuh Cloud Service environment. 
 
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-You can easily change the amount of data you are able to visualize on the WUI just by contacting our team. After the demand, our team will take care of it.
+You can easily change the amount of data you are able to visualize on the WUI just by contacting our team on the **Help** section of your Wazuh Cloud Console. After the demand, our team will take care of it.
 
 Will Elasticsearch's replica shards consume data of my tier?
 ------------------------------------------------------------
@@ -67,7 +67,7 @@ No, data consumption is calculated only from primary shards, so you don't have t
 How do I get SSH access to my environment?
 ------------------------------------------
 
-SSH access is not allowed for security reasons. Only Wazuh team is able to access the environment.
+You may manage your environment through the Console and your environment's WUI, SSH access is not allowed for security reasons. Only Wazuh team is able to access the environment.
 
 How can I update my environment?
 --------------------------------
@@ -77,7 +77,7 @@ We take care of the updates so your environment will get the latest version of W
 How can I connect my agents without Internet access to my environment?
 ----------------------------------------------------------------------
 
-Some aproaches to solve this issue are suggested:
+Some aproaches to solve this issue are:
 
 - **Using a forwarding proxy:** Deploy an instance with NGINX in a public subnet with internet access and configure it to send it to to your environment. Then set the Wazuh Manager IP to the NGINX IP when installing Wazuh on that agent.
 
