@@ -195,18 +195,18 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
 
   2.5 Setup SSL on the Nginx load balancer
 
-  SSL certificates for Nginx should be placed at ``./production_cluster/nginx/ssl/``, ``cert.pem`` and ``key.pem``, this is customizable on the nginx config at ``./production_cluster/nginx/nginx.conf``.
+  SSL certificates for Nginx should be placed at ``./production_cluster/nginx/ssl/``, ``cert.pem`` and ``key.pem``, this is customizable on the nginx configuration file at ``./production_cluster/nginx/nginx.conf``.
 
   .. code-block:: yaml
 
-  nginx:
-    ...
-    volumes:
-      - ./production_cluster/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./production_cluster/nginx/ssl:/etc/nginx/ssl:ro
+    nginx:
+      ...
+      volumes:
+        - ./production_cluster/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./production_cluster/nginx/ssl:/etc/nginx/ssl:ro
 
   .. note::
-    It is possible to generate a self signed certificates by running ``bash ./production_cluster/nginx/ssl/generate-self-signed-cert.sh``
+    We provide an easy way to generate a self signed certificate by running ``bash ./production_cluster/nginx/ssl/generate-self-signed-cert.sh``
 
 
 3. Start Wazuh and Elastic Stack using ``docker-compose``:
