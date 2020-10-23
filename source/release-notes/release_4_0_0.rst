@@ -23,8 +23,6 @@ Highlights
 
 - Wazuh API is now embedded in the Wazuh manager.
 
-- Wazuh cluster mode is now enabled by default.
-
 - Wazuh manager and agents will use TCP as the default communication protocol.
 
 - The Windows agent MSI installer is now signed using DigiCert instead of GlobalSign. DigiCert is known for being present on more Windows versions including the oldest ones.
