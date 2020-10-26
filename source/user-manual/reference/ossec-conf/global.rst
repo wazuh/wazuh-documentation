@@ -450,7 +450,7 @@ agents_disconnection_time
 
 .. versionadded:: 4.1.0
 
-This sets the time since the last keepalive of an agent to consider it as disconnected.
+This sets the time after which the manager considers an agent as disconnected since its last keepalive.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 20s                                                                                                                               |
@@ -471,9 +471,8 @@ agents_disconnection_alert_time
 
 .. versionadded:: 4.1.0
 
-This sets the time since an agent is considered disconnected to trigger an alert.
-Like this time is added to the :ref:`agents_disconnection_time<reference_agents_disconnection_time>` parameter, the minimun time frame to produce an alert is 2m and 20s.
-Also consider that the daemon :doc:`monitord<../../reference/daemons/ossec-monitord>` checks the status of the agents evey two minutes, so even when the neccesary time to trigeer the alert has passed, it's neccesary to wait this scan to begin.
+This sets the time after which an alert is generated since an agent was considered as disconnected.
+As this time is after an agent is considered as disconnected, the minimum time frame to produce an alert taking the default values is 2m and 20s.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 2m                                                                                                                                |
