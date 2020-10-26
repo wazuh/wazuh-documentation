@@ -31,7 +31,7 @@ version = '4.0'
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = 'master'
+release = '4.0'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+release+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
