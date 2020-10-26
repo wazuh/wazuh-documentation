@@ -7,8 +7,8 @@ Getting started
 
 This guide provides the basic information needed to start using the Wazuh API.
 
-Starting and stopping the API
------------------------------
+Starting and stopping the Wazuh API
+-----------------------------------
 
 The Wazuh API will be installed along the Wazuh manager by default. To control or check the **wazuh-api** use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
@@ -31,7 +31,7 @@ Logging into the Wazuh API
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`GET /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
 
-#. Use the cURL command to log in, the API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in, the Wazuh API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh`` and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle otherwise. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
@@ -414,8 +414,8 @@ Here are some of the basic concepts related to making API requests and understan
 - Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``GET /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
-- The API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the API configuration file). The API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
-- All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
+- The Wazuh API log is stored on the manager as ``/var/ossec/logs/api.log`` (the path and verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
+- All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
 .. _wazuh_api_use_cases:
 

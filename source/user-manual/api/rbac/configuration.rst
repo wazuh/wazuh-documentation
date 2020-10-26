@@ -52,13 +52,13 @@ As an example, in order to grant access to the agents of a given customer to the
       }
     }
 
-The API request for this particular example would be as follows:
+The Wazuh API request for this particular example would be as follows:
 
 .. code-block:: console
 
     # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}"
 
-The API response will be something similar to this. The highlighted ID should be used later on to assign the policy to the role:
+The Wazuh API response will be something similar to this. The highlighted ID should be used later on to assign the policy to the role:
 
 .. code-block:: json
     :class: output
