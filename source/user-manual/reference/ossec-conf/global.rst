@@ -43,6 +43,8 @@ Options
 - `geoipdb`_
 - `rotate_interval`_
 - `max_output_size`_
+- `agents_disconnection_time`_
+- `agents_disconnection_alert_time`_
 
 alerts_log
 ^^^^^^^^^^
@@ -390,7 +392,7 @@ This option sets the interval between file rotation. The range of possible value
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                      |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days) |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
@@ -441,6 +443,50 @@ Example:
 
   <queue_size>16384</queue_size>
 
+.. _reference_agents_disconnection_time:
+
+agents_disconnection_time
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.1.0
+
+This sets the time since the last keepalive of an agent to consider it as disconnected.
+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 20s                                                                                                                               |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days) |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <agents_disconnection_time>1m</agents_disconnection_time>
+
+.. _reference_agents_disconnection_alert_time:
+
+agents_disconnection_alert_time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.1.0
+
+This sets the time since an agent is considered disconnected to trigger an alert.
+Like this time is added to the :ref:`agents_disconnection_time<reference_agents_disconnection_time>` parameter, the minimun time frame to produce an alert is 2m and 20s.
+Also consider that the daemon :doc:`monitord<../../reference/daemons/ossec-monitord>` checks the status of the agents evey two minutes, so even when the neccesary time to trigeer the alert has passed, it's neccesary to wait this scan to begin.
+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 2m                                                                                                                                |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days) |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
+
 Default configuration
 ---------------------
 
@@ -456,4 +502,6 @@ Default configuration
       <email_from>ossecm@example.wazuh.com</email_from>
       <email_to>recipient@example.wazuh.com</email_to>
       <email_maxperhour>12</email_maxperhour>
+      <agents_disconnection_time>20s</agents_disconnection_time>
+      <agents_disconnection_alert_time>2m</agents_disconnection_alert_time>
     </global>
