@@ -61,7 +61,7 @@ There are two different alternatives to deploy a Wazuh installation. Here is a b
 
 This installation guide will teach you how to install all Wazuh components: the Wazuh agent, the Wazuh manager and Elastic Stack. In the Quickstart section, instructions on how to install Wazuh in an all-in-one deployment using an automated script can be found. The sections Wazuh server and Elastic Stack include detailed instructions to make the corresponding installations in a distributed deployment.    
 
- Alternatively, Wazuh can be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
+Alternatively, Wazuh can be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section. 
 
 
 Install Wazuh agents
