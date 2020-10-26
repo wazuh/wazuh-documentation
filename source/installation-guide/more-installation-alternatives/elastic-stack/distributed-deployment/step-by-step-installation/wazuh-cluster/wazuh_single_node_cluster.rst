@@ -10,19 +10,21 @@ Wazuh single-node cluster
 
 This document will go through the installation of the Wazuh server components in a single-node cluster.
 
+Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <basic_unattended_distributed_wazuh>`.
+
 .. note:: Root user privileges are required to execute all the commands described below.
 
 Prerequisites
 -------------
 
-Before installing the Wazuh servers and Filebeat, some extra packages must be installed:
+Before installing the Wazuh manager and Filebeat, some extra packages must be installed:
 
 .. include:: ../../../../../../_templates/installations/basic/before_installation_elastic.rst
 
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

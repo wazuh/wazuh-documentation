@@ -12,6 +12,8 @@ Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a
 
 This document will explain how to install Elasticsearch in a single-node cluster.
 
+Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
+
 .. note:: Root user privileges are necessary to run all the commands described below.
 
 Installing Elasticsearch
@@ -127,6 +129,7 @@ An example response should look as follows:
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
 To uninstall Elasticsearch, visit the :ref:`uninstalling section <uninstall_elasticsearch>`.
+
 
 Next steps
 ----------

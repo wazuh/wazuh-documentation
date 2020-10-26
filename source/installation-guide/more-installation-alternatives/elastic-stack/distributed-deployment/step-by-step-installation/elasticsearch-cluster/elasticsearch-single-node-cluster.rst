@@ -10,6 +10,8 @@ Elasticsearch single-node cluster
 
 This document will explain how to install the Elastic Stack components in a single-node cluster.
 
+Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <basic_unattended_distributed_elasticsearch>`.
+
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
 

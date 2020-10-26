@@ -1,12 +1,14 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-Unattended installation
-=======================
+Quickstart
+==========
 
 This section will explain how to install Wazuh on a single host by using a script that will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages.
 The script will perform a health-check verifying that the available system resources meet the minimal requirements. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the Search Guard offline TLS tool will be used to generate the certificates for protecting data in the Elastic Stack.
+
+Alternatively, if you wish to do this all-in-one deployment manually, you can find detailed instructions :ref:`here <all_in_one>`. 
 
 Installing Wazuh
 ----------------
@@ -78,6 +80,7 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
 To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+
 
 Next steps
 ----------

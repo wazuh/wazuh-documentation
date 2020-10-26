@@ -10,6 +10,8 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. 
 
+This section will explain how to install Kibana step-by-step. Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
+
 .. note:: Root user privileges are required to run all the commands described below.
 
 Prerequisites
@@ -141,6 +143,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
 To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
+
 
 Next steps
 ~~~~~~~~~~

@@ -12,6 +12,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. This d
 
 For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
 
+Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <basic_unattended_distributed_elasticsearch>`.
+
+
 .. note:: Root user privileges are necessary to execute all the commands described below.
 
 
