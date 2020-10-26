@@ -99,7 +99,7 @@ Demo deployment
 This configuration is provided as-is for testing purposes only, it is designed for maximum ease of use to get you started fast with Wazuh. For real production environments see `Production deployment`_.
 
 
-1. Cone the Wazuh repository to your system:
+1. Clone the Wazuh repository to your system:
 
   .. code-block:: console
 
