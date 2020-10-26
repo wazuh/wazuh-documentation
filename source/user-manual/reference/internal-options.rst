@@ -753,6 +753,8 @@ Remoted
 |                                   | Allowed value | Any integer between 10 and 999999.                           |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |     **remoted.verify_msg_id**     | Description   | Toggle to enable or disable verification of msg id.          |
+|                                   |               | This setting doesn't work with multiple threads              |
+|                                   |               | (worker_pool > 1).                                           |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 0                                                            |
 +                                   +---------------+--------------------------------------------------------------+
