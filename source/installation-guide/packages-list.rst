@@ -17,6 +17,7 @@ This download page contains packages required for the Wazuh installation with th
    - `macOS`_
    - `Solaris`_
    - `Windows`_
+- `MSU`_
 - `Wazuh Kibana plugin and Wazuh Splunk app`_
 - `Virtual machine`_
 - `Open Distro for Elasticsearch`_
