@@ -242,6 +242,8 @@ Tasks executed on the agents
 +-----------------------+------------------------------------+---------------------------------------------------------------+
 | **agent_id**          | Agent identifier                   | 5                                                             |
 +-----------------------+------------------------------------+---------------------------------------------------------------+
+| **node**              | Node that executed the task        | node01                                                        |
++-----------------------+------------------------------------+---------------------------------------------------------------+
 | **module**            | Module that requested the task     | upgrade_module                                                |
 +-----------------------+------------------------------------+---------------------------------------------------------------+
 | **command**           | Command executed                   | upgrade                                                       |
@@ -254,3 +256,20 @@ Tasks executed on the agents
 +-----------------------+------------------------------------+---------------------------------------------------------------+
 | **error_message**     | Optional when the task failed      | Upgrade procedure exited with error code                      |
 +-----------------------+------------------------------------+---------------------------------------------------------------+
+
+
+The possible statuses of a task are the following:
+
+- **Pending**: The task was created but it is not running yet.
+
+- **In progress**: The task is running.
+
+- **Done**: The execution of the task finished successfully.
+
+- **Failed**: The execution of the task finished with error. It should have an error message with more information.
+
+- **Cancelled**: The task was canceled and will not run.
+
+- **Timeout**: The task ran for a long period of time (configurable) and no final result was obtained.
+
+- **Legacy**: The result of the task cannot be known and must be checked manually.
