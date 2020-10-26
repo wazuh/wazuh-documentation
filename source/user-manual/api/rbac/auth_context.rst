@@ -47,7 +47,7 @@ A rule is an element that will be checked against the authorization context prov
 Rule structure
 --------------
 
-A rule is a set of logical and search operations that will be applied to the incoming authorization context. This way, when the API attends an authentication request through an authorization context, all the rules will be checked against the authorization context and the user will be given the roles associated to the rules whose result is affirmative.
+A rule is a set of logical and search operations that will be applied to the incoming authorization context. This way, when the Wazuh API attends an authentication request through an authorization context, all the rules will be checked against the authorization context and the user will be given the roles associated to the rules whose result is affirmative.
 
 To explain each of the operations of the rules, let's use this authorization context as an example. It will be matched to each of the examples:
 

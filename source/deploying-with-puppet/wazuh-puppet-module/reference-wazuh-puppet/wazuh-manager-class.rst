@@ -604,17 +604,17 @@ Wazuh API variables
 -------------------
 
 $wazuh_api_host
-  IP or hostname of the Wazuh manager where the API is installed.
+  IP or hostname of the Wazuh manager where the Wazuh API is running.
 
   `Default 0.0.0.0`
 
 $wazuh_api_port
-  Port where the API will listen.
+  Port where the Wazuh API will listen.
 
   `Default 55000`
 
 $wazuh_api_behind_proxy_server
-  Set this option to “yes” in case the API is running behind a proxy server.
+  Set this option to “yes” in case the Wazuh API is running behind a proxy server.
 
   `Default true`
 
@@ -644,12 +644,12 @@ $wazuh_api_https_ca
   `Default api/configuration/ssl/ca.crt`
 
 $wazuh_api_logs_level
-  Sets the verbosity level of the API logs.
+  Sets the verbosity level of the Wazuh API logs.
 
   `Default info`
 
 $wazuh_api_logs_path
-  Path where to save the API logs.
+  Path where to save the Wazuh API logs.
 
   `Default logs/api.log`
 
@@ -699,7 +699,7 @@ $wazuh_api_access_block_time
   `Default 300`
 
 $wazuh_api_access_max_request_per_minute
-  Establish a maximum number of requests the API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked.
+  Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked.
 
   `Default 300`
 

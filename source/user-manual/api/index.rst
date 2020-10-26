@@ -33,6 +33,7 @@ For more details, see the :ref:`Use Cases <wazuh_api_use_cases>`.
 
        getting-started
        configuration
+       securing_api
        equivalence
        rbac/index
        queries

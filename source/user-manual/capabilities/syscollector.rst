@@ -28,8 +28,8 @@ As mentioned above, the main purpose of this module is to gather the most releva
 
 Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
 
-The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
-with this feature the API can be directly queried about the different scans being able to filter by any desired field.
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the Wazuh API to retrieve the data from the DB. Also the `Dev tools` tab is available,
+with this feature the Wazuh API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages and hotfixes inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
@@ -505,37 +505,38 @@ The current inventory can be consulted in different ways. Let's see an example q
 
   696614220|2018/08/06 02:07:30|deb|wazuh-agent|extra|admin|105546|Wazuh, Inc <support@wazuh.com>||3.5.0-1|amd64|||Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring||0
 
-- By querying the API, which retrieves nested data in JSON format.
+- By querying the Wazuh API endpoint :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>`, which retrieves nested data in JSON format.
 
 .. code-block:: console
 
-  # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+  # curl -k -X GET "https://localhost:55000/syscollector/003/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
   :class: output
 
   {
-   "error": 0,
-   "data": {
-      "totalItems": 1,
-      "items": [
-         {
-            "vendor": "Wazuh, Inc <support@wazuh.com>",
-            "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-            "scan": {
-               "id": 696614220,
-               "time": "2018/08/06 02:07:30"
-            },
-            "section": "admin",
-            "format": "deb",
-            "name": "wazuh-agent",
-            "priority": "extra",
-            "version": "3.5.0-1",
-            "architecture": "amd64",
-            "size": 105546
-         }
-      ]
-   }
+      "data": {
+          "affected_items": [
+              {
+                  "vendor": "Wazuh, Inc <support@wazuh.com>",
+                  "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
+                  "scan": {"id": 696614220, "time": "2018/08/06 02:07:30"},
+                  "section": "admin",
+                  "format": "deb",
+                  "name": "wazuh-agent",
+                  "priority": "extra",
+                  "version": "3.5.0-1",
+                  "architecture": "amd64",
+                  "size": 105546,
+                  "agent_id": "003",
+              }
+          ],
+          "total_affected_items": 1,
+          "total_failed_items": 0,
+          "failed_items": [],
+      },
+      "message": "All specified syscollector information was returned",
+      "error": 0,
   }
 
 Moreover, the same information can be consulted at the Wazuh app, which includes an `Inventory` tab for each agent. For now, there are available OS, hardware and packages inventories at this tab, which looks like the following screenshot:
@@ -545,7 +546,7 @@ Moreover, the same information can be consulted at the Wazuh app, which includes
     :align: center
     :width: 100%
 
-The *Dev tools* tab is also available to query the API directly from the Wazuh app as shown below:
+The *Dev tools* tab is also available to query the Wazuh API directly from the Wazuh app as shown below:
 
 .. thumbnail:: ../../images/manual/devtools-syscollector.png
     :title: Dev tools tab
