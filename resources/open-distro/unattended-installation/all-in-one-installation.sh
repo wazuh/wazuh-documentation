@@ -300,6 +300,7 @@ installKibana() {
         fi     
         eval "mkdir /etc/kibana/certs ${debug}"
         eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ ${debug}"
+        eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
 
         # Start Kibana
