@@ -17,7 +17,7 @@ While starting with Cloud Service some questions may arise. This list answers so
 
 - `Is it PCI DDS compliant?`_
 
-- `Will I get support?`_
+- `How can I get help?`_
 
 - `Where is Wazuh Cloud Service hosted?`_
 
@@ -41,15 +41,15 @@ Is it PCI DDS compliant?
 
 Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. A further detailed explanation can be found `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
 
-Will I get support?
+How can I get help?
 -------------------
 
-Yes, every environment creation includes a standard support 8/5 with 2 healthchecks per year and 8 hours max. response times. Premium service holds a 24/7 support coverage with 4 healthchecks per year and 4 hours max. response times. Contact us anytime through the **Help** section on your Wazuh Cloud Console.
+Contact us anytime through the **Help** section on your Wazuh Cloud Console.
 
 Where is Wazuh Cloud Service hosted?
 ------------------------------------
 
-In AWS. This allows us to provide a quality service guaranteed by Amazon Web Services.
+In AWS. This allows us to provide a quality service guaranteed by Amazon Web Services. We include regions such as  US east, US west, Europe or Asia Pacific.
 
 What is a tier?
 ---------------

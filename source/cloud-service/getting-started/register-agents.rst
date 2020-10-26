@@ -10,7 +10,7 @@ Register Agents
 
 Agent registration is a simple process that takes place after the environment creation. It will make your environment ready to start reporting from your endpoints.
 
-1. :ref:`Login into your WUI<cloud_getting_started_wui_access>`.
+1. :ref:`Log into your WUI<cloud_getting_started_wui_access>`.
 
 2. Click on **Active agents**.
 

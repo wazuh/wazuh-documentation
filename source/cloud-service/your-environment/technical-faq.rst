@@ -34,6 +34,10 @@ While configuring an environment some questions may arise. This list gathers som
 
 - `How can I configure email alerts?`_
 
+- `Can I integrate with my Single Sign-On (SSO) method?`_
+
+- `Do I have access to Wazuh or Elasticsearch API?`_
+
 How can I send data to my environment?
 --------------------------------------
 
@@ -105,3 +109,12 @@ How can I configure email alerts?
 ---------------------------------
 
 You can configure email settings to send alerts or reports by email through the WUI. A guide on how to do this can be found on the :ref:`Configure email alerts <cloud_your_environment_configure_email_alerts>` section.
+
+Can I integrate with my Single Sign-On (SSO) method?
+----------------------------------------------------
+
+Yes, you can access your WUI through your SSO (like Okta or Azure's Active Directories), address us through the **Help** section and we will take care of it.
+
+
+Do I have access to Wazuh or Elasticsearch API?
+-----------------------------------------------
