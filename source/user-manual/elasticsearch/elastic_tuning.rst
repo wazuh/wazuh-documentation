@@ -7,7 +7,6 @@ Elasticsearch tuning
 
 This guide summarizes the relevant configurations that allow for the optimization of Elasticsearch.
 
-- `change_elastic_pass`_
 - `Change users' password`_
 - `Memory locking`_
 - `Shards and replicas`_
