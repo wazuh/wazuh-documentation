@@ -22,14 +22,15 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `match`_                | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will attempt to find a match in the log, deciding if the rule should be triggered.                |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `regex`_                | Any `regex expression <regex.html#regex-os-regex-syntax>`_.   | It does the same as ``match`` but in *regex* instead of *sregex*.                                    |
+| :ref:`regex_rules`      | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | It does the same as ``match`` but in *regex* or *pcre2* instead of *sregex*.                         |
+|                         | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `decoded_as`_           | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `category`_             | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
+| `category`_             | Any `type <decoders.html#type>`_.                             | It will match with logs whose decoder's `type <decoders.html#type>`_ concur.                         |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `field`_                | Name and `sregex <regex.html#sregex-os-match-syntax>`_        | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
-|                         |                                                               | value.                                                                                               |
+| `field`_                | Name and `regex <regex.html#regex-os-regex-syntax>`_ or       | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
+|                         | `pcre2 <regex.html#pcre2-syntax>`_ expression.                | value.                                                                                               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `srcip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -39,11 +40,17 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `dstport`_              | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a port with a string decoded as ``dstport``.                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `data`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``data`` field.                                                  |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `extra_data`_           | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a extra data with a string decoded as ``extra_data``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `user`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It will compare a sregex representing a username with a string decoded as ``user``.                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `system_name`_          | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``system_name`` field.                                           |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `program_name`_         | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the program_name obtained in the pre-decoding phase.                             |
++-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| `protocol`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``protocol`` field.                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `hostname`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | It compares it with the hostname obtained in the pre-decoding phase.                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -59,13 +66,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `action`_               | Any String.                                                   | It will compare it with the field decoded as ``action``.                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `protocol`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``protocol`` field.                                              |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `data`_                 | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``data`` field.                                                  |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `status`_               | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``status`` field.                                                |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `system_name`_          | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``system_name`` field.                                           |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `srcgeoip`_             | Any `sregex <regex.html#sregex-os-match-syntax>`_.            | Any string that is decoded into the ``srcgeoip`` field.                                              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -259,13 +260,22 @@ Example:
 
 If the rule matches the ``id`` 100200 and the log contains the ``Queue flood!`` phrase in it, rule activates and triggers a level 3 alert.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``match`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+.. _regex_rules:
 
 regex
 ^^^^^
@@ -275,7 +285,8 @@ Used as a requisite to trigger the rule, will search for a match in the log even
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_    |
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_ or            |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
 Example:
@@ -291,13 +302,24 @@ Example:
 
 If the rule matches the ``ìd`` 100500 and the event contains any valid IP, the rule is triggered and generates a level 3 alert.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osregex   |    osregex    |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``regex`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 decoded_as
 ^^^^^^^^^^
@@ -326,13 +348,13 @@ category
 ^^^^^^^^
 
 
-Used as a requisite to trigger the rule. It will be triggered if the ``decoder`` included that log in said category. The main categories are: ids, syslog, firewall, web-log, squid or windows.
+Used as a requisite to trigger the rule. It will be triggered if the ``decoder`` included that log in said category.
 
-+--------------------+--------------+
-| **Default Value**  | n/a          |
-+--------------------+--------------+
-| **Allowed values** | Any category |
-+--------------------+--------------+
++--------------------+----------------------------------+
+| **Default Value**  | n/a                              |
++--------------------+----------------------------------+
+| **Allowed values** | Any `type <decoders.html#type>`_ |
++--------------------+----------------------------------+
 
 
 
@@ -352,11 +374,12 @@ field
 
 Used as a requisite to trigger the rule. It will check for a match in the content of a field extracted by the decoder.
 
-+--------------------+-----------------------------------------------------------------+
-| **name**           | Specifies the name of the field extracted by the decoder.       |
-+--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_      |
-+--------------------+-----------------------------------------------------------------+
++--------------------+-----------------------------------------------------------+
+| **name**           | Specifies the name of the field extracted by the decoder. |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_ or        |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.            |
++--------------------+-----------------------------------------------------------+
 
 Example:
 
@@ -371,13 +394,19 @@ Example:
 
 This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osregex   |    osregex    |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
 
 srcip
 ^^^^^
@@ -402,13 +431,20 @@ Example:
 
 This rule will trigger when that exact ``scrip`` has been decoded.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``srcip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 dstip
 ^^^^^
@@ -433,13 +469,72 @@ Example:
 
 This rule will trigger when an ``dstip`` different from ``198.168.41.30`` is detected.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``dstip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+srcport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the source port (decoded as ``srcport``).
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
++--------------------+------------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``srcport`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+dstport
+^^^^^^^
+
+Used as a requisite to trigger the rule. It will check the destination port (decoded as ``dstport``).
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
++--------------------+------------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``dstport`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 data
 ^^^^
@@ -452,13 +547,20 @@ Any string that is decoded into the ``data`` field.
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
 +--------------------+-----------------------------------------------------------------+
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``data`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 extra_data
 ^^^^^^^^^^
@@ -483,13 +585,20 @@ Example:
 
 This rule will trigger when the log belongs to ``windows`` category and the decoded field ``extra_data`` is: ``Symantec AntiVirus``
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``extra_data`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 user
 ^^^^
@@ -515,13 +624,20 @@ Example:
 
 This rule will trigger when a user different from ``root`` or ``wazuh`` successfully login into the system.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``user`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 system_name
 ^^^^^^^^^^^^
@@ -534,13 +650,20 @@ Any string that is decoded into the ``system_name`` field.
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``system_name`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 program_name
 ^^^^^^^^^^^^
@@ -566,13 +689,20 @@ Example:
 
 The rule will trigger when the program Syslogd restarted.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``program_name`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 protocol
 ^^^^^^^^
@@ -585,51 +715,20 @@ Any string that is decoded into the ``protocol`` field.
 | **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
 +--------------------+------------------------------------------------------------------+
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
 
-srcport
-^^^^^^^
+If ``protocol`` label is declared multiple times within the rule, the following rules apply:
 
-Used as a requisite to trigger the rule. It will check the source port (decoded as ``srcport``).
-
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
-
-The attribute below is optional, it allows to negate the expressions.
-
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
-
-dstport
-^^^^^^^
-
-Used as a requisite to trigger the rule. It will check the destination port (decoded as ``dstport``).
-
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_     |
-+--------------------+------------------------------------------------------------------+
-
-The attribute below is optional, it allows to negate the expressions.
-
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 hostname
 ^^^^^^^^
@@ -654,13 +753,20 @@ Example:
 
 This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``hostname`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 time
 ^^^^
@@ -735,13 +841,20 @@ Example:
 
 This rule will group the logs whose decoded ID is usb.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``id`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 url
 ^^^
@@ -767,13 +880,20 @@ Example:
 
 This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are nothing to worry about.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``url`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 location
 ^^^^^^^^
@@ -840,13 +960,20 @@ Example:
 
 This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``location`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 action
 ^^^^^^
@@ -871,13 +998,109 @@ Example:
 
 This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning``.
 
-The attribute below is optional, it allows to negate the expressions.
+The attributes below are optional.
 
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``action`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+status
+^^^^^^
+
+Checks the actual status of an event.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+      <rule id="213" level="7">
+        <if_sid>210</if_sid>
+        <status>aborted</status>
+        <description>Remote upgrade could not be launched. Error: $(error).</description>
+        <group>upgrade,upgrade_failure,</group>
+      </rule>
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``status`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+srcgeoip
+^^^^^^^^
+
+Any string that is decoded into the ``srcgeoip`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``srcgeoip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+dstgeoip
+^^^^^^^^
+
+Any string that is decoded into the ``dstgeoip`` field.
+
++--------------------+-----------------------------------------------------------------+
+| **Default Value**  | n/a                                                             |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
++--------------------+-----------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+
+If ``dstgeoip`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 if_sid
 ^^^^^^
@@ -1600,25 +1823,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 | **Example of use** | <different_url />  |
 +--------------------+--------------------+
 
-srcgeoip
-^^^^^^^^
-
-Any string that is decoded into the ``srcgeoip`` field.
-
-+--------------------+-----------------------------------------------------------------+
-| **Default Value**  | n/a                                                             |
-+--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
-+--------------------+-----------------------------------------------------------------+
-
-The attribute below is optional, it allows to negate the expressions.
-
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
-
 same_srcgeoip
 ^^^^^^^^^^^^^
 
@@ -1656,25 +1860,6 @@ Example:
 
   That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
 
-dstgeoip
-^^^^^^^^
-
-Any string that is decoded into the ``dstgeoip`` field.
-
-+--------------------+-----------------------------------------------------------------+
-| **Default Value**  | n/a                                                             |
-+--------------------+-----------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_    |
-+--------------------+-----------------------------------------------------------------+
-
-The attribute below is optional, it allows to negate the expressions.
-
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
-
 same_dstgeoip
 ^^^^^^^^^^^^^
 
@@ -1702,7 +1887,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 description
 ^^^^^^^^^^^
 
-Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it. This field is required.
+Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -1736,6 +1921,9 @@ Example:
       <options>no_log</options>
     </rule>
 
+If ``description`` label is declared multiple times within the rule, the following rules apply:
+
+- The resulting value is their concatenation.
 
 list
 ^^^^
@@ -1902,36 +2090,6 @@ It's a very useful label to keep the rules ordered.
 +--------------------+------------+
 | **Allowed values** | Any String |
 +--------------------+------------+
-
-status
-^^^^^^
-
-Checks the actual status of an event.
-
-+--------------------+----------------------------------------------+
-| **Default Value**  | n/a                                          |
-+--------------------+----------------------------------------------+
-| **Allowed values** | started, aborted, succeded, failed, lost...  |
-+--------------------+----------------------------------------------+
-
-Example:
-
-  .. code-block:: xml
-
-      <rule id="213" level="7">
-        <if_sid>210</if_sid>
-        <status>aborted</status>
-        <description>Remote upgrade could not be launched. Error: $(error).</description>
-        <group>upgrade,upgrade_failure,</group>
-      </rule>
-
-The attribute below is optional, it allows to negate the expressions.
-
-+--------------------+--------------------+--------------------+
-| Attribute          | Value range        | Default value      |
-+====================+====================+====================+
-| **negate**         | yes  or  no        | no                 |
-+--------------------+--------------------+--------------------+
 
 mitre
 ^^^^^
