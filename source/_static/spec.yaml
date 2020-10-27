@@ -98,7 +98,7 @@ components:
           maximum: 3600
           example: 3600
           format: int32
-        envitonment_id:
+        environment_id:
           type: string
           example: 13245356356
       additionalProperties: false

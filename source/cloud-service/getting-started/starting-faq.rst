@@ -17,6 +17,8 @@ While starting with Cloud Service some questions may arise. This list answers so
 
 - `Is it PCI DDS compliant?`_
 
+- `How can I get support?`_
+
 - `How can I get help?`_
 
 - `Where is Wazuh Cloud Service hosted?`_
@@ -39,7 +41,12 @@ You may :ref:`sign up for a free trial<cloud_getting_started_sign_up>` to test a
 Is it PCI DDS compliant?
 ------------------------
 
-Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. A further detailed explanation can be found `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
+Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. `Contact us <https://wazuh.com/cloud/>`_ if you want to request our AoC. Learn more about this `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
+
+How can I get support?
+----------------------
+
+Every environment will get standard support since the moment billing details are added. This support includes 8/5 coverage, 2 healthchecks per year, 8 hours maximum response times, and support via JIRA. We also offer premium support with 24/7 coverage, 4 healthchecks per year and 4 hours maximum response times. Learn more about this `here <https://wazuh.com/cloud/>`_.
 
 How can I get help?
 -------------------
@@ -49,7 +56,15 @@ Contact us anytime through the **Help** section on your Wazuh Cloud Console.
 Where is Wazuh Cloud Service hosted?
 ------------------------------------
 
-In AWS. This allows us to provide a quality service guaranteed by Amazon Web Services. We include regions such as  US east, US west, Europe or Asia Pacific.
+In AWS. This allows us to provide a quality service guaranteed by Amazon Web Services. We include regions such as:
+
+- US east (N. Virginia, Ohio)
+
+- US west (Oregon)
+
+- Europe (London, Frankfurt)
+
+- Asia Pacific (Singapore).
 
 What is a tier?
 ---------------
