@@ -27,7 +27,7 @@ Highlights
 
 - The Windows agent MSI installer is now signed using DigiCert instead of GlobalSign. DigiCert is known for being present on more Windows versions including the oldest ones.
 
-- FIM implements now a set of settings to control the module temporal files disk usage.
+- IM implements now a set of settings to control the module temporal files disk usage. This means that now we can choose the amount of disk space used by the report change utility. The diff option reports changes in the monitored files, to do so, it creates a compressed copy of the file and checks if it changes. This method may use a lot of disk space. Wazuh 4.0 introduces new capabilities to limit the space used.
 
 
 Breaking changes
