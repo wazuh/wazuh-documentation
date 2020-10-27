@@ -39,6 +39,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_0.html',
   '/user-manual/api/rbac/auth_context.html',
   '/user-manual/api/rbac/configuration.html',
   '/user-manual/api/rbac/how-it-works.html',
@@ -81,7 +82,7 @@ newUrls['4.0'] = [
   '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index.html',
   '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/kibana/index.html',
   '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/index.html',
-  '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/securing_api.html',
+  '/user-manual/api/securing_api.html',
   '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
   '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
   '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/index.html',
@@ -836,7 +837,7 @@ redirections.push(
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/securing_api.html',
-      '4.0':  '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/securing_api.html',
+      '4.0':  '/user-manual/api/securing_api.html',
     }, 
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
