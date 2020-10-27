@@ -28,6 +28,6 @@ To experience the benefits of Wazuh Cloud Service, start by signing up for a Tri
 
 4. A pop-up will show you your environment's credentials, keep them safe as them as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
 
-Trial will be free for 14 days. Once the trial period is over you will need to  :ref:`add your billing details <cloud_account_billing_details>` to keep using your environment. When your billing details are added your environment will keep al the data, agents and configurations that were made during the trial period.
+The free trial duration is 14 days. Once the trial period is over you will need to  :ref:`add your billing details <cloud_account_billing_details>` to keep using your environment. When your billing details are added your environment will keep al the data, agents and configurations that were made during the trial period.
 
 When the trial has been properly created, next steps will be accessing the Wazuh WUI and registering the first agents. Mind to register agents within the five first days of trial or it will be canceled due to inactivity.

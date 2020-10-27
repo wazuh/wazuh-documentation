@@ -1,0 +1,153 @@
+openapi: 3.0.0
+servers:
+- url: https://api.cloud.wazuh.com/v1
+  description: Public Wazuh Cloud API
+info:
+  title: "Public Wazuh Cloud API"
+  description: "Manage your Wazuh Cloud account"
+  version: "1"
+paths:
+  /storage/token:
+    post:
+      tags:
+      - storage
+      summary: "Generate a token to access the cold storage."
+      description: |
+        Wazuh Cloud cold storage is located in AWS S3. This endpoint returns a temporary AWS token
+        to be used in AWS S3 API (s3:ListBucket and s3:GetObject actions).
+      security:
+        - ApiKeyAuth: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestToken"
+
+      x-amazon-apigateway-integration:
+        credentials: arn:aws:iam::242503654864:role/cloud-dev-lambda-api
+        uri:
+          Fn::Join:
+            - ""
+            - - "arn:aws:apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - AppLambdaFunction
+                  - Arn
+              - /invocations
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: aws_proxy
+
+      responses:
+        "200":
+          description: "Successful"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/token"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responsesGenericHttpError"
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responsesGenericHttpError"
+        "415":
+          description: "Unsupported media type"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responsesGenericHttpError"
+        "429":
+          description: "Too many requests"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responsesGenericHttpError"
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responsesGenericHttpError"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: x-api-key
+      in: header
+
+  schemas:
+    RequestToken:
+      type: object
+      required:
+        - environment_id
+      properties:
+        token_expiration:
+          type: integer
+          minimum: 900
+          maximum: 3600
+          example: 3600
+          format: int32
+        envitonment_id:
+          type: string
+          example: 13245356356
+      additionalProperties: false
+
+    token:
+      type: object
+      properties:
+        environment_id:
+          type: string
+          pattern: \S+
+          maxLength: 64
+        credentials:
+          type: object
+          properties:
+            access_key_id:
+              type: string
+              pattern: \S+
+              maxLength: 115
+            secret_acces_key:
+              type: string
+              pattern: \S+
+              maxLength: 115
+            session_token:
+              type: string
+              pattern: \S+
+              maxLength: 113
+            expires_in:
+              type: integer
+              format: int32
+              minimum: 900
+              maximum: 3600
+          additionalProperties: false
+      additionalProperties: false
+      example:
+        environment_id: "0123456789ab"
+        credentials:
+          access_key_id: "mUdT2dBjlHd...Gh7NniyZKR5If"
+          secret_acces_key: "qEzCk63a224...5aB+e4fCDBR0G"
+          session_token: "MRgpt7HIuoA...4o4BXSAcPfUD8"
+          expires_in: 3600
+
+    responsesGenericHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+          pattern: .*
+          maxLength: 4096
+      additionalProperties: false
+      required:
+        - http-status
+        - reason

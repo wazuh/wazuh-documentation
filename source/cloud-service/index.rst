@@ -11,11 +11,11 @@ Cloud Service
 Overview
 --------
 
-This section describes what does Wazuh Cloud Service offer and how to manage it.
+Discover our endpoint security monitoring solution delivered as a service: Wazuh Cloud Service
 
-Getting started section offers a brief introduction to the service, its features, and a quick guide on how to use it.
+Find out what does Wazuh Cloud Service offer and how to manage it.
 
-More information regarding a cloud environment and its billing can be found on the subsequent sections.
+Getting started section offers a brief introduction to the service, its features, and a quick guide on how to use it. Learn more about Cloud environments on the subsequent sections.
 
 
 Table of contents
