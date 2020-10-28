@@ -96,9 +96,17 @@ redoc[spec-url] .sc-bMVAic.llQIcF.btn-close.collapsed::before {
   transition: all ease .4s;
 }
 
-
 .loading redoc[spec-url] {
 	/* display:none; */
+}
+
+redoc[spec-url] .cncswi {
+	padding: 10px 0px 0px;
+}
+
+redoc[spec-url] .cncswi .TPAYK {
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 redoc[spec-url] .bmRLPL a {
@@ -374,7 +382,7 @@ redoc[spec-url] .gsaTRZ > button {
   font-family: 'Open Sans', sans-serif;
 }
 
-redoc[spec-url] table {
+redoc[spec-url] table:not(.security-details) {
   display: block;
   width: 100%;
   overflow-x: auto;
@@ -531,15 +539,41 @@ redoc[spec-url] .scrollbar-container [role="menuitem"]:focus {
 	font-size: 0.7rem;
 }
 
+redoc[spec-url] .TPAYK.api-info {
+	padding-top: 30px;
+}
+
+redoc[spec-url] .WxWXp {
+	line-height: 1.1em;
+}
+
 @media (max-width: 499px){
 	redoc[spec-url] td.sc-kgoBCf.kGwPhO {
     max-width: 290px;
 	}
 }
+
 @media (max-width: 767px){
-	redoc[spec-url] .TPAYK,
+	redoc[spec-url] .TPAYK {
+    padding: 30px 15px;
+	}
+	
+	redoc[spec-url] .eVtsEQ {
+		padding: 0 15px;
+	}
+	
+	redoc[spec-url] .kBiOhJ {
+		margin-top: 1.5em;
+	}
+	
 	redoc[spec-url] .celZWI {
-    padding: 15px;
+		padding: 30px 15px 20px;
+	}
+}
+
+@media (max-width: 75rem){
+	redoc[spec-url] .TPAYK {
+		padding: 20px 40px 40px;
 	}
 }
 
