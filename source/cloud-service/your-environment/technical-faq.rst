@@ -36,7 +36,9 @@ While configuring an environment some questions may arise. This list gathers som
 
 - `Can I integrate with my Single Sign-On (SSO) method?`_
 
-- `Do I have access to Wazuh or Elasticsearch API?`_
+- `Do I have access to Wazuh API?`_
+
+- `Do I have access to or Elasticsearch API?`_
 
 How can I send data to my environment?
 --------------------------------------
@@ -116,5 +118,13 @@ Can I integrate with my Single Sign-On (SSO) method?
 Yes, you can access your WUI through your SSO (like Okta or Azure's Active Directories), address us through the **Help** section and we will take care of it.
 
 
-Do I have access to Wazuh or Elasticsearch API?
------------------------------------------------
+Do I have access to Wazuh API?
+------------------------------
+
+You have access to the Dev tools through your WUI where you can use the API. Wazuh API is not exposed, but you may contact us through the **Help** section to allow Wazuh API access from an specific IP.
+
+
+Do I have access to or Elasticsearch API?
+-----------------------------------------
+
+Elasticsearch API is not accessible by default. In case you want to access it, address us through the **Help** section and we will authorize the connection from a specific IP. Then you will have access to ``GET`` methods of your Elasticsearch API.
