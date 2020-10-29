@@ -543,8 +543,6 @@ It can also be helpful to know which rules matching a specific criteria are avai
 Testing rules and decoders
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-REVISAR ESTO
-
 With the Wazuh API, it is possible to start a wazuh-logtest session or use an already started session and test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
 
 .. code-block:: console
