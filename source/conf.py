@@ -31,7 +31,7 @@ version = '4.0'
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = 'master'
+release = '4.0'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+release+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -425,7 +425,9 @@ custom_replacements = {
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.9.1",
+    "|OPENDISTRO_LATEST_DOCKER|" : "1.10.1",
+    "|DOCKER_COMPOSE_VERSION|" : "1.27.4",
     "|SPLUNK_LATEST|" : "8.0.4",
     "|WAZUH_SPLUNK_LATEST|" : "3.13.2",
     "|ELASTIC_6_LATEST|" : "6.8.8",

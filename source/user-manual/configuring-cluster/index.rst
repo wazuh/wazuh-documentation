@@ -22,10 +22,10 @@ Deploying a Wazuh cluster
 
 .. topic:: Cluster nodes configuration
 
-    The Wazuh cluster is made up by manager type nodes where one of them is the master node and the rest are worker nodes. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
-    Inside the labels ``<cluster>...</cluster>`` are the following configuration values:
+    The Wazuh cluster is made up by manager type nodes. Only one of them will take the master role, the others will take the worker role. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
+    Within the labels ``<cluster>...</cluster>`` the following configuration values can be set:
 
-        - :ref:`name <cluster_name>`: Name that we will assign to the cluster
+        - :ref:`name <cluster_name>`: Name that will be assigned to the cluster
         - :ref:`node_name <cluster_node_name>`: Name of the current node
         - :ref:`key <cluster_key>`: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
 
@@ -36,7 +36,7 @@ Deploying a Wazuh cluster
         - :ref:`node_type <cluster_node_type>`: Set the node type (master/worker)
         - :ref:`port <cluster_port>`: Destination port for cluster communication
         - :ref:`bind_addr <cluster_bind_addr>`: IP where this node is listening to (0.0.0.0 any IP)
-        - :ref:`nodes <cluster_nodes>`: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
+        - :ref:`nodes <cluster_nodes>`: The address of the **master** , it must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
         - :ref:`hidden <cluster_hidden>`: Toggles whether or not to show information about the cluster that generated an alert.
         - :ref:`disabled <cluster_disabled>`: Indicates whether the node will be enabled or not in the cluster.
 
@@ -64,7 +64,7 @@ Deploying a Wazuh cluster
 
             # systemctl restart wazuh-manager
 
-    Now it is time to configure the **worker node**:
+    Now it's time to configure the **worker node**:
 
         .. code-block:: xml
 
@@ -88,7 +88,7 @@ Deploying a Wazuh cluster
 
             # systemctl restart wazuh-manager
 
-    Let's execute the following command (works on both worker and master nodes) to check that everything works correctly:
+    Let's execute the following command (works on both worker and master nodes) to check that everything worked as expected:
 
         .. code-block:: console
 
@@ -100,11 +100,6 @@ Deploying a Wazuh cluster
             NAME           TYPE    VERSION  ADDRESS
             master-node    master  |WAZUH_LATEST|   wazuh-master
             worker01-node  worker  |WAZUH_LATEST|   172.22.0.3
-
-
-    .. warning::
-
-        **All agents must be registered in the master node, even if the agent is going to report to the worker node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be **deleted** by the master node.
 
 
 .. topic:: Forwarder installation
@@ -188,4 +183,4 @@ Deploying a Wazuh cluster
 
     .. note::
 
-        We recommend using a :ref:`load balancer <load_balancer>` for connecting the agents. This way the agents will be able to report to the nodes in a distributed way and it will be the load balancer who assigns which worker they report to. Using this option we can better distribute the load and in case of a fall in some worker node, its agents will **reconnect** to another one.
+        We recommend using a :ref:`load balancer <load_balancer>` for registering and connecting the agents. This way the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to. Using this option we can better distribute the load and in case of a fall in some worker node, its agents will **reconnect** to another one.

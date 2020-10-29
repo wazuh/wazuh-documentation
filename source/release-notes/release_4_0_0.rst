@@ -15,7 +15,7 @@ This section lists the changes in version 4.0.0. More details about these change
 Highlights
 ----------
 
-- The agent enrollment is now performed on the main daemon initialization. There is no need to request a key using an external CLI anymore (Agents in ``3.x`` version are still 100% compatible with ``4.x`` version).
+- The agent enrollment is now performed on the main daemon initialization. There is no need to request a key using an external CLI anymore (Agents in ``3.x`` version are still 100% compatible with ``4.x`` version). Agents are now able to request a key to the manager on their own. This feature will allow the agent request a key if no key was defined on startup. The agent can request a key to Authd when the manager has rejected the connection.
 
 - A deploy script has been created to download, install, and configure the agent.
 
@@ -27,13 +27,13 @@ Highlights
 
 - The Windows agent MSI installer is now signed using DigiCert instead of GlobalSign. DigiCert is known for being present on more Windows versions including the oldest ones.
 
-- FIM implements now a set of settings to control the module temporal files disk usage.
+- FIM implements now a set of settings to control the module temporal files disk usage. This means that now we can choose the amount of disk space used by the report change utility. The diff option reports changes in the monitored files, to do so, it creates a compressed copy of the file and checks if it changes. This method may use a lot of disk space. Wazuh 4.0 introduces new capabilities to limit the space used.
 
 
 Breaking changes
 ----------------
 
-- The agent-auth tool starts the deprecation cycle (to be deprecated in v5.0.0).
+- The agent-auth tool starts the deprecation cycle (to be deprecated in v5.0.0). The agent registration on demand will still be available using CLI.
 
 - The API is now embedded in the Wazuh manager, no wazuh-api package will be installed anymore.
 

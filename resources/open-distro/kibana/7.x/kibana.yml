@@ -1,7 +1,7 @@
 server.host: "<kibana-ip>"
 elasticsearch.hosts: https://<elasticsearch-ip>:9200
 server.port: 443
-elasticsearch.ssl.verificationMode: none
+elasticsearch.ssl.verificationMode: certificate
 elasticsearch.username: kibanaserver
 elasticsearch.password: kibanaserver
 elasticsearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
@@ -10,5 +10,7 @@ opendistro_security.readonly_mode.roles: ["kibana_read_only"]
 server.ssl.enabled: true
 server.ssl.key: "/etc/kibana/certs/kibana.key"
 server.ssl.certificate: "/etc/kibana/certs/kibana.pem"
+elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/root-ca.pem"]
+
 server.defaultRoute: /app/wazuh/
 

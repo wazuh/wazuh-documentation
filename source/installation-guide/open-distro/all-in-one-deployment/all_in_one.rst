@@ -312,6 +312,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
       # mkdir /etc/kibana/certs
+      # cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/
       # mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/
 
 #. Link Kibana's socket to privileged port 443:
@@ -324,9 +325,15 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+#. Access the web interface: 
 
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user and password to access Kibana is ``admin``.
+  .. code-block:: none
+
+      URL: https://<wazuh_server_ip>
+      user: admin
+      password: admin
+
+Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 

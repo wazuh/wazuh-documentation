@@ -6,7 +6,7 @@ Configuration
 =============
 
 .. note::
-  Please review the :ref:`Securing API <securing_api>` section for more information on how to protect the API.
+  Please review the :ref:`Securing API <securing_api>` section for more information on how to protect the Wazuh API.
 
 .. _api_configuration_file:
 
@@ -128,7 +128,7 @@ SSL certificate
 ---------------
 .. note::
 
-    Please note that this whole process is already done automatically when the API is run for the first time.
+    Please note that this whole process is already done automatically when the Wazuh API is run for the first time.
 
 Generate the key and certificate request (the ``openssl`` package is required).
 
@@ -246,7 +246,7 @@ cache
 +------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values                       | Default value | Description                                                                                                          |
 +============+======================================+===============+======================================================================================================================+
-| enabled    | yes, true, no, false                 | true          | Enable or disable caching for certain Wazuh API responses (currently, all :api-ref:`rules endpoints <tag/rules>` )   |
+| enabled    | yes, true, no, false                 | true          | Enable or disable caching for certain Wazuh API responses (currently, all :api-ref:`rules endpoints <tag/Rules>` )   |
 +------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
 | time       | Any positive integer or real number  | 0.75          | Time in seconds that the cache lasts before expiring.                                                                |
 +------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
