@@ -15,7 +15,7 @@ RBAC Reference
 
 RBAC policies are made up of three elements: **actions**, **resources** and **effect**. Each API endpoint involves one or more actions and can be performed on specific resources.
 
-For example, the :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` endpoint is used to obtain the information of one or all agents. This endpoint applies the action ``agent:read`` on the resource ``agent:id``. For example, ``agent:id:001`` (agent 001) or ``agent:id:*`` (all agents). All the existing resources, available actions and the endpoints affected by each one can be found in this reference page.
+For example, the :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` endpoint is used to obtain the information of one or all agents. This endpoint applies the action ``agent:read`` on the resource ``agent:id`` or ``agent:group``. For example, ``agent:id:001`` (agent 001) or ``agent:id:*`` (all agents). All the existing resources, available actions and the endpoints affected by each one can be found in this reference page.
 
 This reference also contains a set of default roles and policies that can be immediately used instead of having to create new ones.
 
@@ -260,7 +260,7 @@ Active_response
 ^^^^^^^^^^^^^^^
 active-response:command
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /active-response <operation/api.controllers.active_response_controller.run_command>` (`agent:id`_)
+- :api-ref:`PUT /active-response <operation/api.controllers.active_response_controller.run_command>` (`agent:id`_, `agent:group`_)
 
 
 Agent
@@ -273,51 +273,51 @@ agent:create
 
 agent:delete
 ~~~~~~~~~~~~
-- :api-ref:`DELETE /agents <operation/api.controllers.agents_controller.delete_agents>` (`agent:id`_)
+- :api-ref:`DELETE /agents <operation/api.controllers.agents_controller.delete_agents>` (`agent:id`_, `agent:group`_)
 
 agent:modify_group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`agent:id`_)
-- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`agent:id`_)
-- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`agent:id`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`agent:id`_)
-- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`agent:id`_)
-- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`agent:id`_)
+- :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`agent:id`_, `agent:group`_)
 
 agent:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` (`agent:id`_)
-- :api-ref:`GET /agents/no_group <operation/api.controllers.agents_controller.get_agent_no_group>` (`agent:id`_)
-- :api-ref:`GET /agents/outdated <operation/api.controllers.agents_controller.get_agent_outdated>` (`agent:id`_)
-- :api-ref:`GET /agents/stats/distinct <operation/api.controllers.agents_controller.get_agent_fields>` (`agent:id`_)
-- :api-ref:`GET /agents/summary/os <operation/api.controllers.agents_controller.get_agent_summary_os>` (`agent:id`_)
-- :api-ref:`GET /agents/summary/status <operation/api.controllers.agents_controller.get_agent_summary_status>` (`agent:id`_)
-- :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agents_controller.get_agent_config>` (`agent:id`_)
-- :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agents_controller.get_sync_agent>` (`agent:id`_)
-- :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agents_controller.get_agent_key>` (`agent:id`_)
-- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>` (`agent:id`_)
-- :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_)
+- :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/no_group <operation/api.controllers.agents_controller.get_agent_no_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/outdated <operation/api.controllers.agents_controller.get_agent_outdated>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/stats/distinct <operation/api.controllers.agents_controller.get_agent_fields>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/summary/os <operation/api.controllers.agents_controller.get_agent_summary_os>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/summary/status <operation/api.controllers.agents_controller.get_agent_summary_status>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agents_controller.get_agent_config>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agents_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agents_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_, `agent:group`_)
 
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_group>` (`agent:id`_)
-- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`agent:id`_)
-- :api-ref:`PUT /agents/restart <operation/api.controllers.agents_controller.restart_agents>` (`agent:id`_)
-- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agents_controller.restart_agent>` (`agent:id`_)
+- :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/restart <operation/api.controllers.agents_controller.restart_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agents_controller.restart_agent>` (`agent:id`_, `agent:group`_)
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>` (`agent:id`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>` (`agent:id`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agents_controller.put_upgrade_custom_agent>` (`agent:id`_)
+- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agents_controller.put_upgrade_custom_agent>` (`agent:id`_, `agent:group`_)
 
 
 Ciscat
 ^^^^^^^
 ciscat:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /ciscat/{agent_id}/results <operation/api.controllers.ciscat_controller.get_agents_ciscat_results>` (`agent:id`_)
-- :api-ref:`GET /experimental/ciscat/results <operation/api.controllers.experimental_controller.get_cis_cat_results>` (`agent:id`_)
+- :api-ref:`GET /ciscat/{agent_id}/results <operation/api.controllers.ciscat_controller.get_agents_ciscat_results>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/ciscat/results <operation/api.controllers.experimental_controller.get_cis_cat_results>` (`agent:id`_, `agent:group`_)
 
 
 Cluster
@@ -497,8 +497,8 @@ SCA
 ^^^^^^^^^^^^^^^
 sca:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /sca/{agent_id} <operation/api.controllers.sca_controller.get_sca_agent>` (`agent:id`_)
-- :api-ref:`GET /sca/{agent_id}/checks/{policy_id} <operation/api.controllers.sca_controller.get_sca_checks>` (`agent:id`_)
+- :api-ref:`GET /sca/{agent_id} <operation/api.controllers.sca_controller.get_sca_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /sca/{agent_id}/checks/{policy_id} <operation/api.controllers.sca_controller.get_sca_checks>` (`agent:id`_, `agent:group`_)
 
 
 Security
@@ -558,41 +558,41 @@ Syscheck
 ^^^^^^^^^^^^^^^
 syscheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /experimental/syscheck <operation/api.controllers.experimental_controller.clear_syscheck_database>` (`agent:id`_)
-- :api-ref:`DELETE /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.delete_syscheck_agent>` (`agent:id`_)
+- :api-ref:`DELETE /experimental/syscheck <operation/api.controllers.experimental_controller.clear_syscheck_database>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.delete_syscheck_agent>` (`agent:id`_, `agent:group`_)
 
 syscheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.get_syscheck_agent>` (`agent:id`_)
-- :api-ref:`GET /syscheck/{agent_id}/last_scan <operation/api.controllers.syscheck_controller.get_last_scan_agent>` (`agent:id`_)
+- :api-ref:`GET /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.get_syscheck_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscheck/{agent_id}/last_scan <operation/api.controllers.syscheck_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
 
 syscheck:run
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /syscheck <operation/api.controllers.syscheck_controller.put_syscheck>` (`agent:id`_)
+- :api-ref:`PUT /syscheck <operation/api.controllers.syscheck_controller.put_syscheck>` (`agent:id`_, `agent:group`_)
 
 
 Syscollector
 ^^^^^^^^^^^^^^^
 syscollector:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /experimental/syscollector/hardware <operation/api.controllers.experimental_controller.get_hardware_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/hotfixes <operation/api.controllers.experimental_controller.get_hotfixes_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/netaddr <operation/api.controllers.experimental_controller.get_network_address_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/netiface <operation/api.controllers.experimental_controller.get_network_interface_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/netproto <operation/api.controllers.experimental_controller.get_network_protocol_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/os <operation/api.controllers.experimental_controller.get_os_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/packages <operation/api.controllers.experimental_controller.get_packages_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/ports <operation/api.controllers.experimental_controller.get_ports_info>` (`agent:id`_)
-- :api-ref:`GET /experimental/syscollector/processes <operation/api.controllers.experimental_controller.get_processes_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/hotfixes <operation/api.controllers.syscollector_controller.get_hotfix_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/netaddr <operation/api.controllers.syscollector_controller.get_network_address_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/netiface <operation/api.controllers.syscollector_controller.get_network_interface_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/netproto <operation/api.controllers.syscollector_controller.get_network_protocol_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/os <operation/api.controllers.syscollector_controller.get_os_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>` (`agent:id`_)
-- :api-ref:`GET /syscollector/{agent_id}/processes <operation/api.controllers.syscollector_controller.get_processes_info>` (`agent:id`_)
+- :api-ref:`GET /experimental/syscollector/hardware <operation/api.controllers.experimental_controller.get_hardware_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/hotfixes <operation/api.controllers.experimental_controller.get_hotfixes_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/netaddr <operation/api.controllers.experimental_controller.get_network_address_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/netiface <operation/api.controllers.experimental_controller.get_network_interface_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/netproto <operation/api.controllers.experimental_controller.get_network_protocol_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/os <operation/api.controllers.experimental_controller.get_os_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/packages <operation/api.controllers.experimental_controller.get_packages_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/ports <operation/api.controllers.experimental_controller.get_ports_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /experimental/syscollector/processes <operation/api.controllers.experimental_controller.get_processes_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/hotfixes <operation/api.controllers.syscollector_controller.get_hotfix_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/netaddr <operation/api.controllers.syscollector_controller.get_network_address_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/netiface <operation/api.controllers.syscollector_controller.get_network_interface_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/netproto <operation/api.controllers.syscollector_controller.get_network_protocol_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/os <operation/api.controllers.syscollector_controller.get_os_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /syscollector/{agent_id}/processes <operation/api.controllers.syscollector_controller.get_processes_info>` (`agent:id`_, `agent:group`_)
 
 
 Default policies
@@ -632,6 +632,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
@@ -661,6 +662,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
@@ -778,6 +780,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
@@ -833,6 +836,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
@@ -848,6 +852,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
@@ -861,6 +866,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
