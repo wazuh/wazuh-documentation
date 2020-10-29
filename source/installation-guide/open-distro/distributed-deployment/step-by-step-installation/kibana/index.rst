@@ -142,10 +142,36 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
-To uninstall Kibana, visit the :ref:`uninstalling section <uninstall_kibana>`.
-
 
 Next steps
-~~~~~~~~~~
+----------
 
 Once the Wazuh environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+
+
+Uninstall Kibana
+----------------
+
+In case you need to uninstall Kibana follow the instructions below: 
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/elastic/zypp/uninstall_kibana.rst   

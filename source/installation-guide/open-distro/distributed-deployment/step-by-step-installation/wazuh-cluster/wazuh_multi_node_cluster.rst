@@ -215,9 +215,70 @@ An example response should look as follows:
                 talk to server... OK
                 version: 7.9.1
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+
 
 Next steps
 ----------
 
 The next step consists of :ref:`installing Kibana <kibana>`.
+
+Uninstall
+---------
+
+In case you need to uninstall the Wazuh server follow the instructions below:  
+
+
+Uninstall the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
+
+
+
+
+Uninstall Filebeat
+~~~~~~~~~~~~~~~~~~
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/elastic/yum/uninstall_filebeat.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/elastic/deb/uninstall_filebeat.rst
+
+
+
+  .. group-tab:: ZYpp  
+
+
+    .. include:: ../../../../../_templates/installations/elastic/deb/uninstall_filebeat.rst

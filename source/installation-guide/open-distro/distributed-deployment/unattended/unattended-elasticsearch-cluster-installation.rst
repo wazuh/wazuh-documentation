@@ -252,9 +252,70 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
-If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ~~~~~~~~~~
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. The Wazuh server installation guide can be found :ref:`here<unattended_distributed_wazuh>`.
+
+Uninstall
+---------
+
+In case you need to uninstall the Elastic Stack components follow the instructions below:  
+
+
+
+Uninstall Elasticsearch
+^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
+
+
+
+
+Uninstall Kibana
+^^^^^^^^^^^^^^^^
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../_templates/installations/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../_templates/installations/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../_templates/installations/elastic/zypp/uninstall_kibana.rst   

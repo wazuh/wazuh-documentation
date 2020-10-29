@@ -340,7 +340,6 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
 
-
 Next steps
 ----------
 
@@ -354,6 +353,7 @@ In case you need to uninstall the Wazuh components follow the instructions below
 
 Uninstall the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 .. tabs::
 
@@ -383,6 +383,7 @@ Uninstall the Wazuh manager
 Uninstall Filebeat
 ~~~~~~~~~~~~~~~~~~
 
+
 .. tabs::
 
 
@@ -411,6 +412,7 @@ Uninstall Filebeat
 Uninstall Elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+
 .. tabs::
 
 
@@ -435,8 +437,10 @@ Uninstall Elasticsearch
 
 
 
+
 Uninstall Kibana
 ~~~~~~~~~~~~~~~~
+
 
 .. tabs::
 

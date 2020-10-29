@@ -128,7 +128,6 @@ An example response should look as follows:
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`. It is also recommended to customize the file ``/etc/elasticsearch/jvm.options`` in order to improve the performance of Elasticsearch. Learn more about this process in the :ref:`Elasticsearch tuning <elastic_tuning>` section.
 
-To uninstall Elasticsearch, visit the :ref:`uninstalling section <uninstall_elasticsearch>`.
 
 
 Next steps
@@ -138,3 +137,32 @@ The next step is the installation of the Wazuh server, select the cluster mode:
 
 - :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`
+
+Uninstall Elasticsearch
+-----------------------
+
+In case you need to uninstall Elasticsearch follow the instructions below: 
+
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
