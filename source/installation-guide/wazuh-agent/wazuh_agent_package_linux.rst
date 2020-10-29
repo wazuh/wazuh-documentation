@@ -97,7 +97,11 @@ Installing Wazuh agent
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 
-#. **(Optional)** Disable the Wazuh updates:
+#. Enable the service
+
+  .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
+
+**(Optional)** Disable the Wazuh updates:
 
     We recommend maintaining the Wazuh manager version greater or equal to the Wazuh agents'. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
