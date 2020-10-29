@@ -44,7 +44,7 @@ You can check how we build our Wazuh docker containers in our `repository <https
 
 **Wazuh master**
 
-This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) and the API are placed here.
+This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) is placed here.
 
 +--------------------------+-------------+
 | Image                    | Controller  |

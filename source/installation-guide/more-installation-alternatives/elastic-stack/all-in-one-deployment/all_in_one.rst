@@ -385,10 +385,17 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. include:: ../../../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``ca.crt`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+#. Access the web interface using the password generated during the Elasticsearch installation process: 
+
+  .. code-block:: none
+
+      URL: https://<wazuh_server_ip>
+      user: elastic
+      password: <PASSWORD_elastic>
 
 
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
+ Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``ca.crt`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+
 
 Disabling repositories
 ----------------------
