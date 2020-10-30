@@ -11,6 +11,44 @@ This document guides through the installation of the Wazuh and Open Distro for E
 
 This guide provides instructions to configure the official repositories to do the installations, alternatively, the installation can be done using packages. A list of all the available packages can be found :ref:`here <packages>`. 
 
+Requirements
+------------
+
+The Wazuh server and Elastic Stack components can be installed in the following Linux operating systems:
+
+- Amazon Linux 1 and 2.
+
+- CentOS 6 or greater.
+
+- Debian 7 or greater.
+
+- Fedora 31 or greater.
+
+- Oracle Linux 6 or greater.
+
+- Red Hat Enterprise Linux 6 or greater.
+
+- Ubuntu 12 or greater.
+
+In an all-in-one deployment, Wazuh server and Elastic Stack, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
+
+The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit operating system is necessary. 
+
+Disk space requirements depend on the alerts per second (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of monitored endpoint.
+
++-------------------------------------------------+-----+-----------------------------+
+| Monitored endpoints                             | APS |  Storage (GB/90 days)       | 
++=================================================+=====+=============================+
+| Servers                                         | 0.25|    3.8                      |     
++-------------------------------------------------+-----+-----------------------------+
+| Workstations                                    | 0.1 |    1.5                      |                   
++-------------------------------------------------+-----+-----------------------------+       
+| Network devices                                 | 0.5 |    7.6                      |
++-------------------------------------------------+-----+-----------------------------+
+
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 236 GB.
+
+
 .. note:: Root user privileges are required to run all the commands described below.
 
 .. _all_in_one_elastic:
