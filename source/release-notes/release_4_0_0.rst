@@ -17,8 +17,6 @@ Highlights
 
 - The agent enrollment is now performed on the main daemon initialization. There is no need to request a key using an external CLI anymore (Agents in ``3.x`` version are still 100% compatible with ``4.x`` version). Agents are now able to request a key to the manager on their own. This feature will allow the agent request a key if no key was defined on startup. The agent can request a key to Authd when the manager has rejected the connection.
 
-- A deploy script has been created to download, install, and configure the agent.
-
 - Wazuh API RBAC: Configure users, roles, and policies to manage access permissions. Wazuh WUI now permits granular control over access to resources depending on user roles, this will allow enterprises to manage user accounts that fulfill different functions in the security of the environment.
 
 - Wazuh API is now embedded in the Wazuh manager.
