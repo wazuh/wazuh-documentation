@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install filebeat-7.9.2
+  # yum install filebeat-7.9.3
 
 .. End of include file
