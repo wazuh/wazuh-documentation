@@ -5,8 +5,8 @@
 .. _elasticsearch_multi_node_cluster:
 
 
-Elasticsearch multi-node cluster
-=================================
+Elasticsearch
+=============
 
 Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
 
