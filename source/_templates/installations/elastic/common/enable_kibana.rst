@@ -9,8 +9,8 @@
     .. code-block:: console
 
       # systemctl daemon-reload
-      # systemctl enable kibana.service
-      # systemctl start kibana.service
+      # systemctl enable kibana
+      # systemctl start kibana
 
 
 

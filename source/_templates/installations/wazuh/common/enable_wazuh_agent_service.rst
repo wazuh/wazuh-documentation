@@ -9,8 +9,8 @@
     .. code-block:: console
 
       # systemctl daemon-reload
-      # systemctl enable wazuh-agent.service
-      # systemctl start wazuh-agent.service
+      # systemctl enable wazuh-agent
+      # systemctl start wazuh-agent
 
 
   .. group-tab:: SysV Init
