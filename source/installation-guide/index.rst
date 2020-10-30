@@ -151,10 +151,10 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     :hidden:
     :maxdepth: 1
 
-    requirements
     open-distro/all-in-one-deployment/unattended-installation
-    open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/index
-    open-distro/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index
+    open-distro/distributed-deployment/step-by-step-installation/elasticsearch-cluster/elasticsearch-multi-node-cluster
+    open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster
+    open-distro/distributed-deployment/step-by-step-installation/kibana/index
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
