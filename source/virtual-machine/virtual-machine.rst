@@ -9,7 +9,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 .. note::
 
-  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Multitier server and multi-node clusters are usually a better fit for production environments where higher performance is required.
+  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concepts and labs. Multitier server and multi-node clusters are usually a better fit for production environments where higher performance is required.
 
 This virtual appliance, available `here <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
 
@@ -34,7 +34,7 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
 .. note::
   By default the type of the network interface is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
-To access the web interface: 
+To access the web interface:
 
   .. code-block:: none
 
@@ -42,7 +42,7 @@ To access the web interface:
       user: admin
       password: admin
 
-Once the virtual machine is imported and running, the next step consist on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
+Once the virtual machine is imported and running, the next step consists on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
 
 Upgrading the VM
 ----------------
