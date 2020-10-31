@@ -43,7 +43,7 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
   By default the type of the network interface is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
 
-Once the virtual machine is imported and running, the next step consist on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
+Once the virtual machine is imported and running, the next step consists on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
 
 Upgrading the VM
 ----------------

@@ -29,3 +29,27 @@ Start the service:
     # sbin/init.d/wazuh-agent start
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document:  :ref:`user manual<register_agents>`.
+
+Uninstall
+---------
+
+To uninstall the agent:
+
+1. Stop the Wazuh agent service
+
+    .. code-block:: console
+
+      # /var/ossec/bin/ossec-control stop
+
+2. Delete ``ossec`` user and group:
+
+    .. code-block:: console
+
+        # groupdel ossec
+        # userdel ossec
+
+3. Remove Wazuh files:
+
+    .. code-block:: console
+
+      # rm -rf /var/ossec
