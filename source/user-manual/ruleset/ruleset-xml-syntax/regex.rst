@@ -111,49 +111,37 @@ PCRE2 syntax
 
 **Perl Compatible Regular Expressions (PCRE)** tries to match Perl syntax and semantics as closely as it can.
 
-It provides features like recursive patterns, named capture, look-ahead and look-behind assertions, non-capturing groups, non-greedy quantifiers, Unicode character properties, extended syntax for characters and character classes, multi-line matching, and many other.
-
-For more details please refer to the `PCRE Syntax documentation <https://www.pcre.org/current/doc/html/pcre2syntax.html>`_.
+It provides features like recursive patterns, look-ahead and look-behind assertions, non-capturing groups, non-greedy quantifiers, extended syntax for characters and character classes, and many other. For more details please refer to the `PCRE Syntax documentation <https://www.pcre.org/current/doc/html/pcre2syntax.html>`_.
 
 .. topic:: Supported expressions
 
-  +-------------+--------------------------------------------------------------+
-  | Expressions | Actions                                                      |
-  +=============+==============================================================+
-  | \.          | Any character except newline                                 |
-  +-------------+--------------------------------------------------------------+  
-  | \\d         | Any decimal digit                                            |
-  +-------------+--------------------------------------------------------------+
-  | \\D         | Any character that is not a decimal digit                    |
-  +-------------+--------------------------------------------------------------+
-  | \\h         | Any horizontal white space character                         |
-  +-------------+--------------------------------------------------------------+
-  | \\H         | Any character that is not a horizontal white space character |
-  +-------------+--------------------------------------------------------------+
-  | \\s         | Any white space character                                    |
-  +-------------+--------------------------------------------------------------+
-  | \\S         | Any character that is not a white space character            |
-  +-------------+--------------------------------------------------------------+
-  | \\v         | Any vertical white space character                           |
-  +-------------+--------------------------------------------------------------+
-  | \\V         | Any character that is not a vertical white space character   |
-  +-------------+--------------------------------------------------------------+
-  | \\w         | Any "word" character                                         |
-  +-------------+--------------------------------------------------------------+
-  | \\W         | Any "non-word" character                                     |
-  +-------------+--------------------------------------------------------------+
+  +-------------+----------------------------------------------------------------------------+
+  | Expressions | Actions                                                                    |
+  +=============+============================================================================+
+  | \.          | Any character except newline                                               |
+  +-------------+----------------------------------------------------------------------------+
+  | \\d         | Any decimal digit, equal to [0-9]                                          |
+  +-------------+----------------------------------------------------------------------------+
+  | \\D         | Any character that is not a decimal digit, equal to [^0-9]                 |
+  +-------------+----------------------------------------------------------------------------+
+  | \\h         | Any horizontal white space character                                       |
+  +-------------+----------------------------------------------------------------------------+
+  | \\H         | Any character that is not a horizontal white space character               |
+  +-------------+----------------------------------------------------------------------------+
+  | \\s         | Any white space character, equal to [\\t\\r\\n\\f]                         |
+  +-------------+----------------------------------------------------------------------------+
+  | \\S         | Any character that is not a white space character, equal to [^\\t\\r\\n\\f]|
+  +-------------+----------------------------------------------------------------------------+
+  | \\w         | Any "word" character                                                       |
+  +-------------+----------------------------------------------------------------------------+
+  | \\W         | Any "non-word" character                                                   |
+  +-------------+----------------------------------------------------------------------------+
 
 .. topic:: Characters escaping
 
   +-------------+------------------------------------------------------+
   | Expressions | Actions                                              |
   +=============+======================================================+
-  | \\a         | Alarm, that is, the BEL character (hex 07)           |
-  +-------------+------------------------------------------------------+
-  | \\cx        | "control-x", where x is any ASCII printing character |
-  +-------------+------------------------------------------------------+
-  | \\e         | Escape (hex 1B)                                      |         
-  +-------------+------------------------------------------------------+
   | \\f         | Form feed (hex 0C)                                   |
   +-------------+------------------------------------------------------+
   | \\n         | Newline (hex 0A)                                     |
