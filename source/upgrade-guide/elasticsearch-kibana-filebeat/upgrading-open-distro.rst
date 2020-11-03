@@ -15,28 +15,87 @@ Preparing Open Distro for Elasticsearch
     .. include:: ../../_templates/installations/basic/elastic/common/stop_kibana_filebeat.rst
 
 
-#. Prepare the repository:
+#. Prepare the repositories. Wazuh now hosts the Open Distro packages. In order to prevent accidental upgrades, it is recommended to disable the Open Distro repository. Besides, if Elastic repository was added, it is also recommended to disable it:
+
+  2.1. Disable the Open Distro for Elasticsearch repository:
 
     .. tabs::
 
       .. group-tab:: YUM
 
-          .. code-block:: console
+        .. code-block:: console
 
-            # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+          # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
 
       .. group-tab:: APT
 
-          .. code-block:: console
+        .. code-block:: console
 
-            # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
-
+          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/opendistroforelasticsearch.list
+          # apt-get update
 
       .. group-tab:: ZYpp
 
+        .. code-block:: console
+
+              # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/opendistroforelasticsearch-artifacts.repo  
+
+  2.2. (Optional) Disable the Elastic Stack basic license repository:
+
+    .. tabs::
+
+      .. group-tab:: YUM
+
+        .. code-block:: console
+
+          # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+
+      .. group-tab:: APT
+
+        .. code-block:: console
+
+          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+          # apt-get update
+
+        Alternatively, the user can set the package state to ``hold``, which will stop updates. It will be still possible to upgrade it manually using ``apt-get install``:
+
+        .. code-block:: console
+
+          # echo "elasticsearch hold" | sudo dpkg --set-selections
+          # echo "filebeat hold" | sudo dpkg --set-selections
+          # echo "kibana hold" | sudo dpkg --set-selections
+
+      .. group-tab:: ZYpp
+
+        .. code-block:: console
+
+              # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
+
+  2.3. Add the Wazuh ``4.x`` repository:
+
+    .. tabs::
+
+      .. group-tab:: YUM
+
+        .. include:: ../../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
+
+        3. Clean the YUM cache:
+
           .. code-block:: console
 
-            # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+            # yum clean all 
+
+      .. group-tab:: APT
+
+        .. include:: ../../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
+
+      
+
+      .. group-tab:: ZYpp
+
+        .. include:: ../../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
+
+
 
 
 Upgrading Elasticsearch
