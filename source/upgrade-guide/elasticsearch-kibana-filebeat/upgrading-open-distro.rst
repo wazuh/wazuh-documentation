@@ -327,10 +327,10 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
       hosts:
         - default:
-          url: https://localhost
-          port: 55000
-          username: wazuh
-          password: wazuh
+            url: https://localhost
+            port: 55000
+            username: wazuh
+            password: wazuh
 
 
 #. Remove the Wazuh Kibana plugin:
