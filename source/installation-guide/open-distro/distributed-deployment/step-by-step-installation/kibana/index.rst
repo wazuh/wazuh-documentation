@@ -135,7 +135,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
     - default:
        url: https://localhost
        port: 55000
-       user: wazuh
+       username: wazuh
        password: wazuh
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 

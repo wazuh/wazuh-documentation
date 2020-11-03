@@ -123,7 +123,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
     - default:
        url: https://localhost
        port: 55000
-       user: wazuh
+       username: wazuh
        password: wazuh
 
 
