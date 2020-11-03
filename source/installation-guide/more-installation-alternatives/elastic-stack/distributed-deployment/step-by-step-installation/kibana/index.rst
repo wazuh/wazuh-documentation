@@ -123,8 +123,8 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
     - default:
        url: https://localhost
        port: 55000
-       user: wazuh-wui
-       password: wazuh-wui
+       user: wazuh
+       password: wazuh
 
 
 Disabling repositories
