@@ -5,7 +5,65 @@
 Wazuh server unattended installation
 ====================================
 
-This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section.
+This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. 
+
+Requirements
+------------
+
+This section aims to provide guidance about the supported operating systems as well as the recommended hardware requirements for a Wazuh server.
+
+Supported operating systems
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Wazuh server can be installed in the following Linux operating systems:
+
+- Amazon Linux 1 and 2.
+
+- CentOS 6 or greater.
+
+- Debian 7 or greater.
+
+- Fedora 31 or greater.
+
+- Oracle Linux 6 or greater.
+
+- Red Hat Enterprise Linux 6 or greater.
+
+- Ubuntu 12 or greater.
+
+
+Hardware requirements
+~~~~~~~~~~~~~~~~~~~~~
+
+The Wazuh server can be installed as a single-node or as multi-node cluster. For each node, the hardware recommendations are: 
+
+                          
++-------------------------+-------------------------+-------------------------------+
+|                         |  Minimum                |   Recommended                 |
++-------------------------+----------+--------------+--------------+----------------+
+| Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
++=========================+==========+==============+==============+================+
+| Wazuh server            |     2    |     2        |      8       |       4        |
++-------------------------+----------+--------------+--------------+----------------+
+
+A 64-bit operating system is required.  
+
+Regarding the disk space requirements, the amount of data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on a Wazuh server depending on the type of monitored endpoints. 
+
+
++-------------------------------------------------+-----+-----------------------------+
+| Monitored endpoints                             | APS | Storage in Wazuh Manager    |
+|                                                 |     |  (GB/90 days)               |
++=================================================+=====+=============================+
+| Servers                                         | 0.25|    0.1                      |       
++-------------------------------------------------+-----+-----------------------------+
+| Workstations                                    | 0.1 |    0.04                     |                 
++-------------------------------------------------+-----+-----------------------------+       
+| Network devices                                 | 0.5 |    0.2                      |
++-------------------------------------------------+-----+-----------------------------+
+
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 6 GB. 
+
 
 Installing the Wazuh server
 ---------------------------

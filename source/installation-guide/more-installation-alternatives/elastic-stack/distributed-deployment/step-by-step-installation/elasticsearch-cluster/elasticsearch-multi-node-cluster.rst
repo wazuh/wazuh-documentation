@@ -12,14 +12,73 @@ Elasticsearch is a highly scalable full-text search and analytics engine. This d
 
 For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
 
-Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <basic_unattended_distributed_elasticsearch>`.
+.. note:: Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <basic_unattended_distributed_elasticsearch>`.
+
+Requirements
+------------
+
+This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements for an Elastic Stack server. 
+
+Supported operating systems
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Elastic Stack components can be installed in the following operating systems:
+
+- Amazon Linux 1 and 2.
+
+- CentOS 6 or greater.
+
+- Debian 8 or greater.
+
+- Oracle Linux 6 or greater.
+
+- Red Hat Enterprise Linux 6 or greater.
+
+- Ubuntu 16 or greater.
+
+- openSUSE Leap 42.
+
+- SLES 12 or greater. 
+
+- Windows Server 2012/R2 or greater. 
 
 
-.. note:: Root user privileges are necessary to execute all the commands described below.
+Hardware requirements
+~~~~~~~~~~~~~~~~~~~~~
+
+Elastic Stack can be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Elasticsearch, or in a dedicated host. For each Elastic Stack node, the hardware recommendations are: 
+
++-------------------------+-------------------------+-------------------------------+
+|                         |  Minimum                |   Recommended                 |
++-------------------------+----------+--------------+--------------+----------------+
+| Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
++=========================+==========+==============+==============+================+
+| Elastic Stack           |     4    |     2        |     16       |       8        |
++-------------------------+----------+--------------+--------------+----------------+
+
+A 64-bit operating system is required.  
+
+Regarding the disk space requirements, the amount of data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on an Elasticsearch server depending on the type of monitored endpoints. 
+
+
++-------------------------------------------------+-----+-----------------------------+
+| Monitored endpoints                             | APS | Storage in Elasticsearch    |
+|                                                 |     |   (GB/90 days)              | 
++=================================================+=====+=============================+
+| Servers                                         | 0.25|           3.7               |       
++-------------------------------------------------+-----+-----------------------------+
+| Workstations                                    | 0.1 |           1.5               |                    
++-------------------------------------------------+-----+-----------------------------+       
+| Network devices                                 | 0.5 |           7.4               |
++-------------------------------------------------+-----+-----------------------------+
+
+For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server.
 
 
 Installing Elasticsearch
 ------------------------
+
+.. note:: Root user privileges are necessary to execute all the commands described below.
 
 The installation process for a multi-node cluster will be explained in three parts. The first one refers to the configuration of the initial node, in which the certificates that will be deployed to the subsequent nodes are generated. 
 
