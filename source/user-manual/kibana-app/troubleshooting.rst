@@ -71,7 +71,7 @@ The first step is to check if there are alerts in Elasticsearch.
 
 .. code-block:: console
 
-  # curl <ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-4.x-*
+  # curl <ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-3.x-*
 
 If you don't see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
 
@@ -93,7 +93,7 @@ You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh
 Routes. Error. Cannot read property 'manager' of undefined
 ----------------------------------------------------------
 
-This error usually means that you're using Wazuh v2.x with Elastic Stack v6.x, or Wazuh v4.x with Elastic Stack v5.x.
+This error usually means that you're using Wazuh v2.x with Elastic Stack v6.x, or Wazuh v3.x with Elastic Stack v5.x.
 
 You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_wazuh_server_2.x_3.x>`.
 
