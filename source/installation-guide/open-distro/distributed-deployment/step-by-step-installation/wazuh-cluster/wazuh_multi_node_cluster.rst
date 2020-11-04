@@ -143,40 +143,53 @@ Install the Wazuh manager package. This step must be applied in all servers that
 
 
 
-Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is configured as a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or as a Wazuh worker node.
-
-One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
+Choose the cluster mode between single-node or multi-node:
 
 
-Wazuh server master node
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+.. tabs::
 
 
-#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
-
-    .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
-
-#. Run the following command to check if the Wazuh manager is active: 
-
-    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
-
-Wazuh server worker nodes
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+  .. group-tab:: Single-node
 
 
-#. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
+    #. Enable and start the Wazuh manager service:
 
-    .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+        .. include:: ../../../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#. Run the following command to check if the Wazuh manager is active: 
+    #. Run the following command to check if the Wazuh manager is active: 
 
-    .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+        .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-#. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
+
+
+  .. group-tab:: Multi-node
+
+
+    The Wazuh manager is installed and configured as a single-node cluster by default. The following sections will describe how to build a Wazuh multi-node cluster by configuring each Wazuh manager as a master or worker node.
+     
+    One server has to be chosen as a master, the rest will be workers. The ``Master node``  configuration must be applied only to the server chosen for this role. For all the other servers, the configuration ``Worker node`` must be applied.
+
+
+    **Master node:**
+
+    #. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+
+
+    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+
+        .. include:: ../../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+
+
+    **Worker node:**
+
+    #. .. include:: ../../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+
+
+    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+
+        .. include:: ../../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+
+    #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
 
