@@ -59,7 +59,7 @@ pattern
 Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
-| **Default value**  | wazuh-alerts-*      |
+| **Default value**  | wazuh-alerts-*          |
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
