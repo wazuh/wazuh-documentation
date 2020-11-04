@@ -59,14 +59,14 @@ The ``.kibana`` index
 
 This index is mainly used by Kibana itself. It's useful to tell Kibana how are the index patterns we are using along other technical details. This index should be similar for any user and it's a bit long to show its content here. Also its content is useless for the user knowledge.
 
-The ``wazuh-alerts-3.x-`` indices
+The ``wazuh-alerts-4.x-`` indices
 ---------------------------------
 
 They are auto-generated and they store the Wazuh alerts. Filebeat will send data to Elasticsearch and will create an index per day.
 
 If you want to change the name of these indices with a custom one, you can follow :ref:`this guide <kibana_configure_indices>`.
 
-The ``wazuh-monitoring-3.x-`` indices
+The ``wazuh-monitoring-4.x-`` indices
 -------------------------------------
 
 They are auto-generated and they store the Wazuh agents statuses periodically. The Wazuh Kibana plugin is which will send data to Elasticsearch and will create an index per day. This feature can be disabled. You can also adjust the insertion frequency. These indices are mainly used by the ``Agents status`` visualization from the Overview dashboard in the Wazuh Kibana plugin.
