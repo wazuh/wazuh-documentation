@@ -49,12 +49,12 @@ Disk space requirements depend on the alerts per second (APS) generated. The exp
 For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 236 GB.
 
 
-.. note:: Root user privileges are required to run all the commands described below.
-
 .. _all_in_one_elastic:
 
 Prerequisites
 -------------
+
+.. note:: Root user privileges are required to run all the commands described below.
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
 
