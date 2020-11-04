@@ -29,7 +29,7 @@ Also, keep in mind that this process **will be restored** after upgrading the Wa
 Procedure
 ---------
 
-Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) along with the default one, ``wazuh-alerts-4.x-*``. Follow these steps:
+Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) along with the default one, ``wazuh-alerts-*``. Follow these steps:
 
 #. First of all, stop the Filebeat service:
 
@@ -55,15 +55,15 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: javascript
 
-      "index_patterns": ["wazuh-alerts-4.x-*"],
+      "index_patterns": ["wazuh-alerts-*"],
 
     Add your custom pattern:
 
     .. code-block:: javascript
 
-      "index_patterns": ["wazuh-alerts-4.x-*", "my-custom-alerts-*"],
+      "index_patterns": ["wazuh-alerts-*", "my-custom-alerts-*"],
 
-    If your template is a custom template and it's still using the ``"template": "wazuh-alerts-4.x-*",`` setting, remove that line, just use ``"index_patterns": ["wazuh-alerts-4.x-*", "my-custom-alerts-*"],``.
+    If your template is a custom template and it's still using the ``"template": "wazuh-alerts-*",`` setting, remove that line, just use ``"index_patterns": ["wazuh-alerts-*", "my-custom-alerts-*"],``.
 
     The asterisk character (``*``) on the index patterns is important because Filebeat will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh Kibana plugin.
 
@@ -88,14 +88,14 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     .. code-block:: yaml
 
         - name: index_prefix
-          default: wazuh-alerts-4.x-
+          default: wazuh-alerts-
 
     To this:
 
     .. code-block:: yaml
 
         - name: index_prefix
-          default: my-custom-alerts-4.x-
+          default: my-custom-alerts-
 
 
     .. note::

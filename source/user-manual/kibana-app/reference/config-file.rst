@@ -59,7 +59,7 @@ pattern
 Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
-| **Default value**  | wazuh-alerts-4.x-*      |
+| **Default value**  | wazuh-alerts-*      |
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
@@ -191,7 +191,7 @@ wazuh.monitoring.pattern
 Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
 
 +--------------------+-------------------------+
-| **Default value**  | wazuh-monitoring-4.x-*  |
+| **Default value**  | wazuh-monitoring-*      |
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
@@ -199,7 +199,7 @@ Default Wazuh monitoring index pattern to use for the app. This setting does not
 wazuh.monitoring.creation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Configure wazuh-monitoring-4.x-* indices custom creation interval.
+Configure wazuh-monitoring-* indices custom creation interval.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | d (daily)                                      |
@@ -395,7 +395,7 @@ Define the number of replicas to use for the ``wazuh-version`` index.
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the number of shards to use for the ``wazuh-monitoring-4.x-*`` indices.
+Define the number of shards to use for the ``wazuh-monitoring-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 2                          |
@@ -406,7 +406,7 @@ Define the number of shards to use for the ``wazuh-monitoring-4.x-*`` indices.
 wazuh.monitoring.replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the number of replicas to use for the ``wazuh-monitoring-4.x-*`` indices.
+Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 0                          |
