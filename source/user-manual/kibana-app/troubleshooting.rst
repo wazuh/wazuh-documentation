@@ -37,7 +37,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
   {"acknowledged":true}
 
 .. warning::
-  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_4.x>`.
+  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
 
 Wazuh API seems to be down
 --------------------------
@@ -95,7 +95,7 @@ Routes. Error. Cannot read property 'manager' of undefined
 
 This error usually means that you're using Wazuh v2.x with Elastic Stack v6.x, or Wazuh v4.x with Elastic Stack v5.x.
 
-You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_wazuh_server_2.x_4.x>`.
+You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_wazuh_server_2.x_3.x>`.
 
 .. _kibana_troubleshooting_3_7_0:
 
