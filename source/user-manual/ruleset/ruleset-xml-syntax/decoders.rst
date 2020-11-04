@@ -194,12 +194,12 @@ If ``program_name`` label is declared multiple times within the decoder, the fol
 
 Example:
 
-Define that the decoder is related with the ``syslogd`` process:
+Define that the decoder is related with the ``test``, ``TEST`` or equivalent (case-insensitive)  process:
 
 .. code-block:: xml
 
-  <decoder name="syslogd_decoder">
-    <program_name>syslogd</program_name>
+  <decoder name="test_decoder">
+    <program_name type="pcre2">(?i)test</program_name>
     ...
   </decoder>
 

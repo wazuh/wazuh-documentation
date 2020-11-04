@@ -528,6 +528,18 @@ Used as a requisite to trigger the rule. It will check the source port (decoded 
 |                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
+Example:
+
+  .. code-block:: xml
+
+      <rule id="100110" level="5">
+          <if_sid>100100<if_sid>
+          <srcport type="pcre2">^5000[0-7]$</srcport>
+          <description>Source port $(srcport) is detected.</description>
+      </rule>
+
+This rule will trigger when ``srcport`` is in the range of 50000 to 50007.
+
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
@@ -1118,11 +1130,11 @@ Example:
 
       <rule id="4502" level="4">
         <if_sid>4500</if_sid>
-        <action>warning</action>
+        <action type="osregex">warning|WARN</action>
         <description>Netscreen warning message.</description>
       </rule>
 
-This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning``.
+This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning`` or ``WARN``.
 
 The attributes below are optional.
 
@@ -1133,7 +1145,7 @@ The attributes below are optional.
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |       n/a     |
+| **type**    | allows to set regular expression type   |   osmatch   |    string     |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
@@ -1142,8 +1154,7 @@ The attributes below are optional.
 
 .. note::
 
-   By default and backward compatibility, ``action`` field try to match any string, 
-   but there is not such ``string`` value for ``type`` attribute.  In order to achieve this ``type`` attribute must be omitted.
+   Use ``type`` attribute only for regular expression match. It must be omitted if ``action`` field try to match a string. 
 
 If ``action`` label is declared multiple times within the rule, the following rules apply:
 
