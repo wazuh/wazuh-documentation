@@ -12,7 +12,7 @@ Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a
 
 This document will explain how to install Elasticsearch in a single-node cluster.
 
-Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
+Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
 
 .. note:: Root user privileges are necessary to run all the commands described below.
 

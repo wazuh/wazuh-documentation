@@ -10,7 +10,7 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. 
 
-.. note:: This section will explain how to install Kibana step-by-step. Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
+.. note:: This section will explain how to install Kibana step-by-step. Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
 
 Prerequisites
 ~~~~~~~~~~~~~

@@ -10,7 +10,7 @@ Wazuh single-node cluster
 
 This document will go through the installation of the Wazuh server components in a single-node cluster.
 
-Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <basic_unattended_distributed_wazuh>`.
+Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <basic_unattended_distributed_wazuh>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 

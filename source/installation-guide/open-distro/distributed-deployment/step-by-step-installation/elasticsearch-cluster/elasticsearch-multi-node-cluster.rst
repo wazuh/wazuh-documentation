@@ -12,7 +12,7 @@ Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a
 
 This document will explain how to install Elasticsearch in a multi-node cluster. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
-.. note:: Alternatively, if you wish to do this installation in a automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
+.. note:: Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
 
 
 
