@@ -317,6 +317,10 @@ createCertificates() {
         echo '    dn: CN="'${iname}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
         echo '    ip:' >> ~/searchguard/search-guard.yml
         echo '      - "'${nip}'"' >> ~/searchguard/search-guard.yml
+        echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
+        echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
+        echo '    ip:' >> ~/searchguard/search-guard.yml
+        echo '      - "'${nip}'"' >> ~/searchguard/search-guard.yml 
     else 
         echo -e "\n" >> ~/searchguard/search-guard.yml
         echo "nodes:" >> ~/searchguard/search-guard.yml       
@@ -326,6 +330,10 @@ createCertificates() {
             echo '    ip:' >> ~/searchguard/search-guard.yml
             echo '      - "'${DSH[i]}'"' >> ~/searchguard/search-guard.yml
         done
+            echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
+            echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
+            echo '    ip:' >> ~/searchguard/search-guard.yml
+            echo '      - "'${DSH[1]}'"' >> ~/searchguard/search-guard.yml        
     fi
     awk -v RS='' '/# Clients certificates/' ~/config.yml >> ~/searchguard/search-guard.yml
     eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
@@ -444,8 +452,9 @@ installKibana() {
 
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar -xf certs.tar kibana.pem kibana.key root-ca.pem ${debug}"
-        
+        eval "tar -xf certs.tar kibana_http.pem kibana_http.key root-ca.pem ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"        
         logger "Kibana installed."
         
         copyKibanacerts iname
@@ -462,10 +471,10 @@ copyKibanacerts() {
     elif [ -f ~/certs.tar ]; then
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar --overwrite -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem ${debug}"
+        eval "tar --overwrite -xf certs.tar ${iname}_http.pem ${iname}_http.key root-ca.pem ${debug}"
         if [ ${iname} != "kibana" ]; then
-            eval "mv /etc/kibana/certs/${iname}.pem /etc/kibana/certs/kibana.pem ${debug}"
-            eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key ${debug}"
+            eval "mv /etc/kibana/certs/${iname}_http.pem /etc/kibana/certs/kibana.pem ${debug}"
+            eval "mv /etc/kibana/certs/${iname}_http.key /etc/kibana/certs/kibana.key ${debug}"
         fi            
     else
         echo "No certificates found. Could not initialize Kibana"
