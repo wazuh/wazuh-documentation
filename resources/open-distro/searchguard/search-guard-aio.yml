@@ -22,6 +22,8 @@ nodes:
       - 127.0.0.1
   - name: kibana
     dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US
+    ip:
+      - 127.0.0.1    
 
 # Clients certificates
 clients:
