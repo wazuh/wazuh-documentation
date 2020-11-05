@@ -30,6 +30,8 @@ nodes:
     dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
     ip:
       - <elasticsearch_3_IP>
+  - name: kibana
+    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US        
 
 # Clients certificates
 clients:
