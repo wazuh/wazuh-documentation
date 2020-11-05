@@ -10,7 +10,7 @@ Elasticsearch
 
 Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
 
-This document will explain how to install Elasticsearch in a multi-node cluster. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
+This document will explain how to install Elasticsearch cluster, the user can select the cluster mode between single-node or multi-node. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
 .. note:: Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
 
@@ -84,6 +84,8 @@ The installation process for a multi-node cluster will be explained in three par
 
 The second part will explain how to configure the remaining nodes of the cluster. Finally, the third part provides instructions for initializing the Elasticsearch cluster and verifying that everything is working properly.  
 
+In case you want to install a single-node cluster, follow the instructions for the master node and select the single-node tabs. After finishing the installation of the master node, proceed to initialize the cluster without installing subsequent nodes. 
+
 .. note:: Root user privileges are necessary to run all the commands described below.
 
 **Initial node**
@@ -138,24 +140,64 @@ Elasticsearch configuration
 
 To configure Elasticsearch download the following file ``/etc/elasticsearch/elasticsearch.yml``:
 
-.. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
+.. tabs::
+
+
+  .. group-tab:: Single-node 
+
+
+    .. include:: ../../../../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+   
+
+
+  .. group-tab:: Multi-node 
+
+
+    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
+
 
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Remove the demo certificates:
+.. tabs::
 
-    .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
-#.  Generate and deploy the certificates:
+  .. group-tab:: Single-node 
 
-    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
-#. Enable and start the Elasticsearch service:
+   #. Remove the demo certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+      .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
 
+   #. Generate and deploy the certificates:
+
+       .. include:: ../../../../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
+
+   #. Enable and start the Elasticsearch service:
+
+       .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+
+
+
+  .. group-tab:: Multi-node 
+
+
+     #. Remove the demo certificates:
+
+        .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+
+     #. Generate and deploy the certificates:
+
+        .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
+
+     #. Enable and start the Elasticsearch service:
+
+        .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+
+
+
+.. note:: In case you want to install a single-node cluster, click :ref:`here <initialize_cluster>` to proceed with the initialization of the cluster. 
 
 **Subsequent nodes**
 ********************
@@ -229,6 +271,8 @@ Certificates deployment
 
     .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
+
+.. _initialize_cluster:
 
 **Initializing the cluster**
 ****************************
