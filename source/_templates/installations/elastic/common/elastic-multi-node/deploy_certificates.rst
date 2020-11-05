@@ -13,7 +13,7 @@
   # mv /etc/elasticsearch/certs/node-X_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem
   # mv /etc/elasticsearch/certs/node-X_http.key /etc/elasticsearch/certs/elasticsearch_http.key
 
-* Removed unnecessary files:
+* Remove unnecessary files:
 
   .. code-block:: console
 

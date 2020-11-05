@@ -105,7 +105,7 @@
 
 * Copy ``certs.tar`` to all the instances of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-* Removed unnecessary files:
+* Remove unnecessary files:
 
   .. code-block:: console
 
