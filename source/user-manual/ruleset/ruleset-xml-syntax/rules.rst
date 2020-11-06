@@ -401,13 +401,23 @@ Used as a requisite to trigger the rule. It will check for a match in the conten
 |                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
-The attributes below are mandatory.
+Below is the list of attributes.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
 |  **name**   | specifies the name of the field         |     n/a     |       n/a     |
 |             | extracted by the decoder.               |             |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **negate**  | allows to negate the regular expression |     no      |       no      |
+|             |                                         +-------------+               |
+|             |                                         |     yes     |               |
++-------------+-----------------------------------------+-------------+---------------+
+| **type**    | allows to set regular expression type   |   osregex   |    osregex    |
+|             |                                         +-------------+               |
+|             |                                         |   osmatch   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
 Example:
@@ -422,22 +432,6 @@ Example:
       </rule>
 
 This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
-
-The attributes below are optional.
-
-+-------------+-----------------------------------------+-------------+---------------+
-| Attribute   |              Description                | Value range | Default value |
-+=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
-|             |                                         +-------------+               |
-|             |                                         |     yes     |               |
-+-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osregex   |    osregex    |
-|             |                                         +-------------+               |
-|             |                                         |   osmatch   |               |
-|             |                                         +-------------+               |
-|             |                                         |   pcre2     |               |
-+-------------+-----------------------------------------+-------------+---------------+
 
 srcip
 ^^^^^
@@ -1154,7 +1148,7 @@ The attributes below are optional.
 
 .. note::
 
-   Use ``type`` attribute only for regular expression match. It must be omitted if ``action`` field try to match a string. 
+   Use ``type`` attribute only for regular expression match. It must be omitted if ``action`` field try to match a string.
 
 If ``action`` label is declared multiple times within the rule, the following rules apply:
 
