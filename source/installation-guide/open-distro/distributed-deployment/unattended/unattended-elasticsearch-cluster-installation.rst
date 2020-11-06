@@ -81,7 +81,7 @@ Download the script and the configuration file. After downloading them, configur
         - <wazuh_master_server_IP>
 
 
-      In case of having more than one Wazuh server, there can be added as much nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      In case of having more than one Wazuh server, there can be added as many nodes as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
 
         .. code-block:: yaml
 

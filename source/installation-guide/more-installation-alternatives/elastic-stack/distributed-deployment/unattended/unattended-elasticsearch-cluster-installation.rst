@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section.
+This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
@@ -202,7 +202,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Subsequent nodes installation**
     
-      - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``). :
+      - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``):
 
         .. code-block:: console
 
