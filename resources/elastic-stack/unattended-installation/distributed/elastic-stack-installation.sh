@@ -9,7 +9,7 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-char="#"
+char="."
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
