@@ -503,6 +503,7 @@ initializeKibana() {
 
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
     echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
+    echo $'\nYou can access the web interface https://'${kip}'. The credentials are elastic:'$epassword''    
   
 }
 

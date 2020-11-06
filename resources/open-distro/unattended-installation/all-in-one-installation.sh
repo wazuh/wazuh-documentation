@@ -353,6 +353,7 @@ checkInstallation() {
         sleep 10
     done    
     echo $'\nInstallation finished'
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:admin'
     exit 0;
 
 }

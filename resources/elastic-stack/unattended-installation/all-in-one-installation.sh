@@ -416,6 +416,7 @@ checkInstallation() {
     echo "$passwords"
     echo $'\nInstallation finished'
     disableRepos
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are elastic:'$password''    
     exit 0;
 
 }
