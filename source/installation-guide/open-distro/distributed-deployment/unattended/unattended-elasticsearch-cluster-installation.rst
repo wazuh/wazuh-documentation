@@ -92,7 +92,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Run the script**
 
-      - To install Elasticsearch, run the script with the option ``-e`` and ``-n <node-name>``. (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``):
+      - To install Elasticsearch, run the script with the option ``-e`` and ``-n <node-name>``:
 
       .. code-block:: console
 
