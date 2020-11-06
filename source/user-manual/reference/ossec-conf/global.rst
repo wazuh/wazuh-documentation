@@ -451,6 +451,7 @@ agents_disconnection_time
 .. versionadded:: 4.1.0
 
 This sets the time after which the manager considers an agent as disconnected since its last keepalive.
+It has to be greater than 20s.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 20s                                                                                                                               |
@@ -471,7 +472,7 @@ agents_disconnection_alert_time
 
 .. versionadded:: 4.1.0
 
-This sets the time after which an alert is generated since an agent was considered as disconnected.
+This sets the time after which an alert is generated since an agent was considered as disconnected. It has to be greater than 2m.
 As this time is after an agent is considered as disconnected, the minimum time frame to produce an alert taking the default values is 2m and 20s.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
