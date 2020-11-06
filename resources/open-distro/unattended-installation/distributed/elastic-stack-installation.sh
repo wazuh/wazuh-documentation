@@ -317,10 +317,6 @@ createCertificates() {
         echo '    dn: CN="'${iname}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
         echo '    ip:' >> ~/searchguard/search-guard.yml
         echo '      - "'${nip}'"' >> ~/searchguard/search-guard.yml
-        echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
-        echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
-        echo '    ip:' >> ~/searchguard/search-guard.yml
-        echo '      - "'${nip}'"' >> ~/searchguard/search-guard.yml 
     else 
         echo -e "\n" >> ~/searchguard/search-guard.yml
         echo "nodes:" >> ~/searchguard/search-guard.yml       
@@ -329,12 +325,15 @@ createCertificates() {
             echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
             echo '    ip:' >> ~/searchguard/search-guard.yml
             echo '      - "'${DSH[i]}'"' >> ~/searchguard/search-guard.yml
-        done
-            echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
-            echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
-            echo '    ip:' >> ~/searchguard/search-guard.yml
-            echo '      - "'${DSH[1]}'"' >> ~/searchguard/search-guard.yml        
+        done      
     fi
+    kip=$(grep -A 1 "Kibana-instance" ~/config.yml | tail -1)
+    rm="- "
+    kip="${kip//$rm}"        
+    echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
+    echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
+    echo '    ip:' >> ~/searchguard/search-guard.yml
+    echo '      - "'${kip}'"' >> ~/searchguard/search-guard.yml      
     awk -v RS='' '/# Clients certificates/' ~/config.yml >> ~/searchguard/search-guard.yml
     eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
     eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
@@ -466,16 +465,18 @@ installKibana() {
 
 copyKibanacerts() {
 
-    if [[ -f "/etc/elasticsearch/certs/kibana.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana.key" ]]; then
-        eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ ${debug}"
+    if [[ -f "/etc/elasticsearch/certs/kibana_http.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana_http.key" ]]; then
+        eval "mv /etc/elasticsearch/certs/kibana_http* /etc/kibana/certs/ ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"          
     elif [ -f ~/certs.tar ]; then
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar --overwrite -xf certs.tar ${iname}_http.pem ${iname}_http.key root-ca.pem ${debug}"
-        if [ ${iname} != "kibana" ]; then
-            eval "mv /etc/kibana/certs/${iname}_http.pem /etc/kibana/certs/kibana.pem ${debug}"
-            eval "mv /etc/kibana/certs/${iname}_http.key /etc/kibana/certs/kibana.key ${debug}"
-        fi            
+        eval "tar --overwrite -xf certs.tar kibana_http.pem kibana_http.key root-ca.pem ${debug}"
+        # if [ ${iname} != "kibana" ]; then
+        #     eval "mv /etc/kibana/certs/${iname}_http.pem /etc/kibana/certs/kibana.pem ${debug}"
+        #     eval "mv /etc/kibana/certs/${iname}_http.key /etc/kibana/certs/kibana.key ${debug}"
+        # fi            
     else
         echo "No certificates found. Could not initialize Kibana"
         exit 1;
