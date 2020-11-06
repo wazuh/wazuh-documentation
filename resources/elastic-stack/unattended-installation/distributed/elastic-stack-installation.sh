@@ -9,7 +9,7 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-char="#"
+char="."
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
@@ -503,6 +503,7 @@ initializeKibana() {
 
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
     echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
+    echo $'\nYou can access the web interface https://'${kip}'. The credentials are elastic:'$epassword''    
   
 }
 
@@ -606,7 +607,12 @@ main() {
             *)
                 getHelp
             esac
-        done    
+        done  
+
+        if [ "$EUID" -ne 0 ]; then
+            echo "This script must be run as root."
+            exit 1;
+        fi          
 
         if [ -n "$d" ]
         then
