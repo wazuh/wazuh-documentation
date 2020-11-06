@@ -358,6 +358,11 @@ checkInstallation() {
 
 main() {
 
+    if [ "$EUID" -ne 0 ]; then
+        echo "This script must be run as root."
+        exit 1;
+    fi    
+
     if [ -n "$1" ]; then      
         while [ -n "$1" ]
         do
