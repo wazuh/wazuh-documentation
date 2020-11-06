@@ -92,7 +92,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Run the script**
 
-      - To install Elasticsearch, run the script with the option ``-e`` and ``-n <node-name>``:
+      - To install Elasticsearch, run the script with the option ``-e`` and ``-n <node-name>``. (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``):
 
       .. code-block:: console
 
@@ -104,14 +104,14 @@ Download the script and the configuration file. After downloading them, configur
 
     **Initial node configuration and installation**
 
-    - Download the script and the configuration file ``config.yml``
+    - Download the script and the configuration file ``config.yml``:
 
       .. code-block:: console
 
           # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
           # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/config_cluster.yml
 
-    - Configure the installation
+    - Configure the installation:
 
       .. code-block:: yaml
         :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 31, 34
@@ -168,7 +168,7 @@ Download the script and the configuration file. After downloading them, configur
         - name: filebeat-X
           dn: CN=filebeat-x,OU=Docu,O=Wazuh,L=California,C=US                
 
-    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>``:
+    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``):
 
       .. code-block:: console
 
@@ -185,7 +185,7 @@ Download the script and the configuration file. After downloading them, configur
         # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
 
 
-    - Run the script:
+    - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``):
 
       .. code-block:: console
 
@@ -228,7 +228,7 @@ Installing Kibana
 
     The following values must be replaced:
 
-      - ``node_name``: Name of the instance.
+      - ``node_name``: Name of the instance (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``). 
 
 #. Access the web interface: 
 
