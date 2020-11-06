@@ -21,7 +21,7 @@ Download the installation script:
 
 Replace the following variables and run the installation script: 
 
-- ``<node_name>``: Name of the Wazuh server instance. 
+- ``<node_name>``: Name of the Wazuh server instance (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``). 
 - ``<elastic_user_password>``: The password of the user ``elastic`` generated during the Elasticsearch installation. 
 
 .. code-block:: console
