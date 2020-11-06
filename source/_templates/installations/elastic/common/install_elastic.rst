@@ -28,6 +28,6 @@
 
             .. code-block:: console
 
-                # apt install opendistroforelasticsearch
+                # zypper install opendistroforelasticsearch
 
 .. End of include file
