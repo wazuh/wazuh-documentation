@@ -20,7 +20,8 @@
 
                     .. code-block:: console
 
-                        # apt install curl apt-transport-https unzip wget libcap2-bin software-properties-common
+                        # apt install curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg2
+
 
                 Add the repository for Java Development Kit (JDK):
 

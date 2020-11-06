@@ -299,7 +299,8 @@ installKibana() {
             exit 1;
         fi     
         eval "mkdir /etc/kibana/certs ${debug}"
-        eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ ${debug}"
+        eval "mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
+        eval "mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"
         eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
 
