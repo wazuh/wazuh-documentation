@@ -44,8 +44,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
@@ -108,8 +108,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/config_cluster.yml
 
     - Configure the installation
 
@@ -182,7 +182,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
+        # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
 
 
     - Run the script:
@@ -206,29 +206,7 @@ Configuring Elasticsearch
 
 Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``~/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
 
-In case that Kibana was installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the :ref:`corresponding certificates <configure_kibana_unattended>`.
-
-Elasticsearch users and roles
------------------------------
-
-In order to use Wazuh Kibana plugin properly, the script adds the following extra Elasticsearch users:
-
-+-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh_user                          | Is created for those users that only need read access to the Wazuh Kibana plugin.                                                                                                                                                                                                        |
-+-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh_admin                         | Is the user recommended for those users that need administrative privileges.                                                                                                                                                                                                             |
-+-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-Also two extra roles are added, these roles are in charge of giving the right permissions to the users:
-
-+-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh_ui_user                       | This role provides ``wazuh_user`` permissions to read the Wazuh’s indices.                                                                                                                                                                                                               | 
-+-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh_ui_admin                      | This role allows ``wazuh_admin`` to perform reading, writing, management and, indexing tasks on the Wazuh indices.                                                                                                                                                                       |
-+-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-These users and roles are designed to operate along with the Wazuh Kibana plugin and they are protected so they cannot be modified from the Kibana’s interface. To modify them or add new users or roles, the ``securityadmin`` script has to be run.
-
+In case Kibana will be installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the corresponding certificates.
 
 
 .. _install_kibana_unattended:
@@ -236,39 +214,45 @@ These users and roles are designed to operate along with the Wazuh Kibana plugin
 Installing Kibana
 -----------------
 
-Download the script. In case of installing Kibana on the same server as Open Distro for Elasticsearch, this step must be skipped:
+#. Download the script. In case of installing Kibana on the same server as Open Distro for Elasticsearch, this step must be skipped:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
+      # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh
 
-Run the script:
+#. Run the script:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # bash ~/elastic-stack-installation.sh -k -n <node_name>
+      # bash ~/elastic-stack-installation.sh -k -n <node_name>
 
-The following values must be replaced:
+    The following values must be replaced:
 
-  - ``node_name``: Name of the instance.
+      - ``node_name``: Name of the instance.
+
+#. Access the web interface: 
+
+    .. code-block:: none
+
+      URL: https://<kibana_ip>
+      user: admin
+      password: admin  
   
+
+Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
+
+.. note:: If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
 .. _configure_kibana_unattended:
 
 Configuring Kibana
 ^^^^^^^^^^^^^^^^^^
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
-
-.. note:: The Kibana service listens to port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user and password to access Kibana is ``admin``.
-
-  If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this. 
-
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
-To uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ~~~~~~~~~~

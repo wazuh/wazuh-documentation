@@ -205,13 +205,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install elasticsearch-7.9.1 -y -q $debug"
+        eval "yum install elasticsearch-7.9.2 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.1 -y -q $debug"
+        eval "apt-get install elasticsearch=7.9.2 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.1 $debug"
+        eval "zypper -n install elasticsearch-7.9.2 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -222,7 +222,7 @@ installElasticsearch() {
         logger "Done"
 
         logger "Configuring Elasticsearch..."
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
 
         if [ -n "$single" ]
         then
@@ -409,13 +409,13 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install kibana-7.9.1 -y -q  $debug"    
+        eval "yum install kibana-7.9.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.1 $debug"
+        eval "zypper -n install kibana-7.9.2 $debug"
     elif [ $sys_type == "apt-get" ] 
         then
-        eval "apt-get install kibana=7.9.1 -y -q  $debug"
+        eval "apt-get install kibana=7.9.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -423,11 +423,11 @@ installKibana() {
         exit 1;
     else   
         disableRepos
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/warehouse/test/4.0/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -526,9 +526,9 @@ healthCheck() {
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
     if [ -n "$e" ]
     then
-        if [[ $cores < "4" ]] || [[ $ram_gb < "15700" ]]
+        if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
         then
-            echo "Your system does not meet the recommended minimum hardware requirements of 16Gb of RAM and 4 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
+            echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
             exit 1;
         else
             echo "Starting the installation..."

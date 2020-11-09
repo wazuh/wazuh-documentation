@@ -44,12 +44,12 @@ You can check how we build our Wazuh docker containers in our `repository <https
 
 **Wazuh master**
 
-This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) and the API are placed here.
+This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) is placed here.
 
 +--------------------------+-------------+
 | Image                    | Controller  |
 +==========================+=============+
-| wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | StatefulSet |
 +--------------------------+-------------+
 
 **Wazuh worker 0 / 1**
@@ -59,7 +59,7 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 +--------------------------+-------------+
 | Image                    | Controller  |
 +==========================+=============+
-| wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | StatefulSet |
 +--------------------------+-------------+
 
 **Elasticsearch**
@@ -69,7 +69,7 @@ Elasticsearch pod, it ingests events received from Filebeat.
 +----------------------------------------+-------------+
 | Image                                  | Controller  |
 +========================================+=============+
-| wazuh/wazuh-elasticsearch:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh-elasticsearch:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | StatefulSet |
 +----------------------------------------+-------------+
 
 **Kibana**
@@ -79,7 +79,7 @@ Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 +---------------------------------+-------------+
 | Image                           | Controller  |
 +=================================+=============+
-| wazuh/wazuh-kibana:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES| | Deployment  |
+| wazuh/wazuh-kibana:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | Deployment  |
 +---------------------------------+-------------+
 
 **Nginx**
@@ -89,7 +89,7 @@ Nginx service used as a reverse proxy for Kibana.
 +---------------------------------+-------------+
 | Image                           | Controller  |
 +=================================+=============+
-| wazuh/wazuh-nginx:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | Deployment  |
+| wazuh/wazuh-nginx:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|   | Deployment  |
 +---------------------------------+-------------+
 
 Services

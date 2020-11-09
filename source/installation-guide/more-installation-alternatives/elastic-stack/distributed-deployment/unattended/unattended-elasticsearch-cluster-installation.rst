@@ -46,8 +46,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
@@ -95,6 +95,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
         :class: output
+        :emphasize-lines: 21
 
         During the installation of Elasticsearch the passwords for its user were generated. Please take note of them:
         Changed password for user apm_system
@@ -131,8 +132,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
 
     - Configure the installation
 
@@ -231,34 +232,41 @@ In case that Kibana was installed in a different server, the ``certs.zip`` file 
 Installing Kibana
 -----------------
 
-Download the script. In case of installing Kibana on the same server as Elasticsearch, this step must me skipped:
+#. Download the script. In case of installing Kibana on the same server as Elasticsearch, this step must me skipped:
 
-.. code-block:: console
+   .. code-block:: console
 
-  # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/develop/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
+     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
 
-Run the script:
+#. Run the script:
 
-.. code-block:: console
+   .. code-block:: console
 
-  # bash elastic-stack-installation.sh -k n <node_name> -p <elastic_password>
+    # bash elastic-stack-installation.sh -k n <node_name> -p <elastic_password>
 
-The following values must be replaced:
+   The following values must be replaced:
 
-  - ``<node_name>``: Name of the instance.
-  - ``elastic_password``: Password for the user ``elastic`` previously generated during the Elasticsearch installation.
-  
+   - ``<node_name>``: Name of the instance.
+   - ``elastic_password``: Password for the user ``elastic`` previously generated during the Elasticsearch installation.
+
+
+#. Access the web interface using the password generated during the Elasticsearch installation process: 
+
+    .. code-block:: none
+
+      URL: https://<kibana_ip>
+      user: elastic
+      password: <PASSWORD_elastic>   
+
+    
+    Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured.   
 
 .. _basic_configure_kibana_unattended:
 
 Configuring Kibana
 ^^^^^^^^^^^^^^^^^^
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured.
-
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
-
-  If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
+If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
 To uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
 

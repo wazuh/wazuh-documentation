@@ -14,7 +14,7 @@ Download the Wazuh agent package
 
   .. code-block:: none
 
-    https://packages.wazuh.com/3.x/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
+    https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi
 
 3. Press <Enter>. In the Warning dialog, click on **[Add]**, on **[Add]** again
    and then on **[Close]**.

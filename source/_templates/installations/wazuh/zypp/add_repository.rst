@@ -13,10 +13,10 @@
       # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
       [wazuh]
       gpgcheck=1
-      gpgkey=https://packages-dev.wazuh.com/key/GPG-KEY-WAZUH
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
       enabled=1
       name=EL-$releasever - Wazuh
-      baseurl=https://packages-dev.wazuh.com/pre-release/yum/
+      baseurl=https://packages.wazuh.com/4.x/yum/
       protect=1
       EOF 
 

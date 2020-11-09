@@ -631,6 +631,10 @@ header .menuweb-bar .menu-item a {
   position: relative;
 }
 
+.agent-os #solaris-logo img {
+  max-height: 100px;
+}
+
 .agent-os .item-agent a:hover {
   border-bottom: none !important;
 }
@@ -2865,10 +2869,6 @@ div.highlight pre {
     width: 80%;
     grid-template-columns: 35% 65%
   }
-
-  .deployment-types #aio .detailed {
-    margin-top: 1.5rem;
-  }  
 
   .deployment-types #distributed .detailed img {
     height: 27rem !important;

@@ -27,7 +27,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
           gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
           enabled=1
           name=Wazuh repository
-          baseurl=https://packages.wazuh.com/3.x/yum/
+          baseurl=https://packages.wazuh.com/4.x/yum/
           protect=1
           EOF
 
@@ -49,7 +49,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
         .. code-block:: console
 
-          # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # echo "deb https://packages.wazuh.com/|CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
         Upgrade the Wazuh agent:
 
@@ -85,7 +85,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
           enabled=1
           autorefresh=1
           name=Wazuh repository
-          baseurl=https://packages.wazuh.com/3.x/yum/
+          baseurl=https://packages.wazuh.com/4.x/yum/
           protect=1
           EOF
 

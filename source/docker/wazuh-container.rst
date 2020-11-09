@@ -93,17 +93,19 @@ In Docker for OSX, there is a default memory limit of 2GB, so in order to run `d
 Usage
 -----
 
-#. Get the ``docker-compose.yml`` file to your system:
+Demo deployment
+^^^^^^^^^^^^^^^
 
-   a) Only the file::
+This configuration is provided as-is for testing purposes only, it is designed for maximum ease of use to get you started fast with Wazuh. For real production environments see `Production deployment`_.
 
-      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER|/docker-compose.yml
 
-   b) Get the Wazuh repository::
+1. Clone the Wazuh repository to your system:
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|ELASTICSEARCH_LATEST_DOCKER| --single-branch
+  .. code-block:: console
 
-#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
+    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|OPENDISTRO_LATEST_DOCKER| --depth=1
+
+2. Start Wazuh and Elastic Stack using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
    a) Foreground::
 
@@ -116,8 +118,113 @@ Usage
 .. note::
   Wazuh-kibana container will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticsearch is started. Then the set up process will continue normally.
 
-.. note::
-  Kibana container can take a few minutes to install Wazuh plugin, this takes place after ``Optimizing and caching browser bundles...`` is printed out.
+
+Production deployment
+^^^^^^^^^^^^^^^^^^^^^
+
+These are the steps to deploy a production grade Wazuh cluster using the "Open Distro for Elasticsearch" Docker images.
+
+
+1. Clone the Wazuh repository to your system:
+
+  .. code-block:: console
+
+    $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_LATEST_DOCKER|_|OPENDISTRO_LATEST_DOCKER| --depth=1
+
+  We'll use ``production-cluster.yml`` as base for this deployment, all code snippets on this section come from this file.
+
+2. Secure traffic by replacing demo certificates
+
+  2.1 Generate certificates for each node of the cluster
+
+    We made a Docker image to automate certificate generation using `SearchGuard TLS Tool <https://docs.search-guard.com/latest/offline-tls-tool>`_, modify the file ``ssl_certs/certs.yml`` and execute the following command to obtain the desired certificates::
+
+      docker-compose -f generate-opendistro-certs.yml run --rm generator
+
+    This will save the certificates into the **ssl_certs** directory as well as the config snippets for each one of the nodes.
+
+  2.2 Setup SSL certificates for Elasticsearch on the directory **ssl_certs**. Check out the section `Docker Security <https://opendistro.github.io/for-elasticsearch-docs/docs/install/docker-security/>`_ from the Open Distro docs.
+
+    .. code-block:: yaml
+
+      - ./ssl_certs/root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
+      - ./ssl_certs/node.key:/usr/share/elasticsearch/config/node.key
+      - ./ssl_certs/node.pem:/usr/share/elasticsearch/config/node.pem
+      - ./elastic_opendistro/custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elastic_opendistro/internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+
+
+  2.3 Use a secure password for the admin user on Elasticsearch
+
+    You have complete freedom to customize users on the Elasticsearch container by mounting your own ``internal_users.yml``::
+
+      - ./elastic_opendistro/internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+
+    It is possible to generate a hash using the same Docker image, type in any password when prompted and replace the hash on ``internal_users.yml``::
+
+      docker run --rm -ti amazon/opendistro-for-elasticsearch:|OPENDISTRO_LATEST_DOCKER| bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh
+
+
+  2.4 Setup SSL certificates for filebeat on the Wazuh container
+
+    .. code-block:: yaml
+
+      environment:
+        - FILEBEAT_SSL_VERIFICATION_MODE=full
+        - SSL_CERTIFICATE_AUTHORITIES=/etc/filebeat/root-ca.pem
+        - SSL_CERTIFICATE=/etc/filebeat/filebeat.pem
+        - SSL_KEY=/etc/filebeat/filebeat.key
+      volumes:
+        - ./ssl_certs/root-ca.pem:/etc/filebeat/root-ca.pem
+        - ./ssl_certs/filebeat.pem:/etc/filebeat/filebeat.pem
+        - ./ssl_certs/filebeat.key:/etc/filebeat/filebeat.key
+
+  2.4 Setup SSL certificates for Kibana
+
+    Copy your own certificate into the ``kibana_od_ssl`` directory and set ``SERVER_SSL_ENABLED`` to **true**:
+
+    .. code-block:: yaml
+
+      environment:
+        - SERVER_SSL_ENABLED=true
+        - SERVER_SSL_CERTIFICATE=/usr/share/kibana/config/cert.pem
+        - SERVER_SSL_KEY=/usr/share/kibana/config/key.pem
+      volumes:
+        - ./production_cluster/kibana_ssl/cert.pem:/usr/share/kibana/config/cert.pem
+        - ./production_cluster/kibana_ssl/key.pem:/usr/share/kibana/config/key.pem
+
+  .. note::
+    We provide an easy way to generate a self signed certificate by running ``bash ./production_cluster/kibana_ssl/generate-self-signed-cert.sh``
+
+
+  2.5 Setup SSL on the Nginx load balancer
+
+  SSL certificates for Nginx should be placed at ``./production_cluster/nginx/ssl/``, ``cert.pem`` and ``key.pem``, this is customizable on the nginx configuration file at ``./production_cluster/nginx/nginx.conf``.
+
+  .. code-block:: yaml
+
+    nginx:
+      ...
+      volumes:
+        - ./production_cluster/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./production_cluster/nginx/ssl:/etc/nginx/ssl:ro
+
+  .. note::
+    We provide an easy way to generate a self signed certificate by running ``bash ./production_cluster/nginx/ssl/generate-self-signed-cert.sh``
+
+
+3. Start Wazuh and Elastic Stack using ``docker-compose``:
+
+   a) Foreground::
+
+      $ docker-compose -f production-cluster.yml up
+
+   b) Background::
+
+      $ docker-compose -f production-cluster.yml up -d
+
+
+
 
 Exposed ports
 -------------
@@ -125,7 +232,7 @@ Exposed ports
 By default, the stack exposes the following ports:
 
 +-----------+-----------------------------+
-| **1514**  | Wazuh UDP                   |
+| **1514**  | Wazuh TCP                   |
 +-----------+-----------------------------+
 | **1515**  | Wazuh TCP                   |
 +-----------+-----------------------------+
@@ -135,9 +242,7 @@ By default, the stack exposes the following ports:
 +-----------+-----------------------------+
 | **9200**  | Elasticsearch HTTP          |
 +-----------+-----------------------------+
-| **80**    | Nginx http                  |
-+-----------+-----------------------------+
-| **443**   | Nginx https                 |
+| **443**   | Kibana HTTPS                |
 +-----------+-----------------------------+
 
 .. note::

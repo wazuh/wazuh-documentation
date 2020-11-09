@@ -7,7 +7,7 @@ Registering the Wazuh agents using the Wazuh API
 
 The Wazuh API allows the Wazuh agent registration by running a single request from any host. This request returns the Wazuh agent's registration key, which must be manually added to the Wazuh agent using ``manage_agents`` utility.
 
-.. note:: Root user privileges are necessary to execute all the commands described below, and the Wazuh API must be accessible from the host on which the API request is executed.
+.. note:: Root user privileges are necessary to execute all the commands described below, and the Wazuh API must be accessible from the host on which the request is executed.
 
 Choose the tab corresponding to the Wazuh agent host operating system:
 
@@ -17,23 +17,23 @@ Choose the tab corresponding to the Wazuh agent host operating system:
   .. group-tab:: Linux/Unix host
 
 
-    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the angle brackets:
+    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agents_controller.add_agent>` and replacing the values in the angle brackets:
 
          .. code-block:: console
 
-           # curl -u <API_username>:<API_password> -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' -H 'Content-Type:application/json' "https://<manager_IP>:55000/agents?pretty"
+           # curl -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' "https://localhost:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
-         The output of the API request returns the registration key:
+         The output of the Wazuh API request returns the registration key:
 
          .. code-block:: none
                 :class: output
 
                 {
-                 "error": 0,
-                 "data": {
-                     "id": "001",
-                     "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
-                 }
+                    "error": 0,
+                    "data": {
+                        "id": "001",
+                        "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+                    },
                 }
 
          More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.
@@ -167,23 +167,23 @@ Choose the tab corresponding to the Wazuh agent host operating system:
   .. group-tab:: MacOS X host
 
 
-    #. Open a terminal in the Wazuh agent host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the API request replacing the values in the brackets:
+    #. Open a terminal in the Wazuh agent's host as a ``root`` user. To add the Wazuh agent to the Wazuh manager and extract the registration key execute the following Wazuh API request :api-ref:`POST /agents <operation/api.controllers.agents_controller.add_agent>` and replacing the values in the angle brackets:
 
          .. code-block:: console
 
-          # curl -u <API_username>:<API_password> -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' -H 'Content-Type:application/json' "https://<manager_IP>:55000/agents?pretty"
+          # curl -k -X POST -d '{"name":"<agent_name>","ip":"<agent_IP>"}' "https://localhost:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
-         The output of the API request returns the registration key:
+         The output of the Wazuh API request returns the registration key:
 
          .. code-block:: none
                 :class: output
 
                 {
-                 "error": 0,
-                 "data": {
-                   "id": "001",
-                   "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
-                 }
+                    "error": 0,
+                    "data": {
+                        "id": "001",
+                        "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+                    },
                 }
 
          More information about API credentials and HTTPS support can be found on :ref:`Wazuh API configuration<api_configuration>`.

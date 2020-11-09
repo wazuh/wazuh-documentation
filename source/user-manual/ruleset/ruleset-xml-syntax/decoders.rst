@@ -22,15 +22,17 @@ There are many options to configure in decoders:
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `accumulate`_          | None                                                          | It allows to track events over multiple log messages.                                           |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `program_name`_        | Any program name                                              | It defines the name of the program associated with the decoder.                                 |
+| `program_name`_        | Any `regex <regex.html#regex-os-regex-syntax>`_,              | It defines the name of the program associated with the decoder.                                 |
+|                        | `sregex <regex.html#sregex-os-match-syntax>`_ or              |                                                                                                 |
+|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `prematch`_            | Any String or `Regular Expression                             | It will look for a match in the log, in case it does, the decoder will be used.                 |
-|                        | <regex.html#regex-os-regex-syntax>`_                          |                                                                                                 |
+| `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | It will look for a match in the log, in case it does, the decoder will be used.                 |
+|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `regex`_               | Any `Regular Expression                                       | The decoder will use this option to find fields of interest and extract them.                   |
-|                        | <regex.html#regex-os-regex-syntax>`_                          |                                                                                                 |
+| :ref:`regex_decoders`  | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | The decoder will use this option to find fields of interest and extract them.                   |
+|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `order`_               | See `order table <decoders.html#order>`_                      | The values that `regex`_ will extract, will be stored in these groups.                          |
+| `order`_               | See `order table <decoders.html#order>`_                      | The values that :ref:`regex_decoders` will extract, will be stored in these groups.             |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `fts`_                 | See `fts table <decoders.html#fts>`_                          | Fist time seen.                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
@@ -46,6 +48,8 @@ There are many options to configure in decoders:
 | `json_array_structure`_| String                                                        | Adds the option of deciding how an array structure from a JSON will be stored.                  |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `var`_                 | Name for the variable.                                        | Defines variables that can be reused inside the same file.                                      |
++------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `type`_                | See `type table <decoders.html#type>`_                        | It will set the type of log that the decoder is going to match.                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 
 How it works
@@ -88,7 +92,7 @@ There is many options to configure the decoders:
 - `accumulate`_
 - `program_name`_
 - `prematch`_
-- `regex`_
+- :ref:`regex_decoders`
 - `order`_
 - `fts`_
 - `ftscomment`_
@@ -166,17 +170,36 @@ It defines the name of the program which the decoder is associated with. The pro
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#sregex-os-match-syntax>`_       |
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,                   |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or                   |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
 +--------------------+--------------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+----------------+---------------+
+| Attribute   |              Description              | Value range    | Default value |
++=============+=======================================+================+===============+
+| **type**    | allows to set regular expression type |   osmatch      |    osmatch    |
+|             |                                       +----------------+               |
+|             |                                       |   osregex      |               |
+|             |                                       +----------------+               |
+|             |                                       |   pcre2        |               |
++-------------+---------------------------------------+----------------+---------------+
+
+If ``program_name`` label is declared multiple times within the decoder, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of ``type`` attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 Example:
 
-Define that the decoder is related with the ``syslogd`` process:
+Define that the decoder is related with the ``test``, ``TEST`` or equivalent (case-insensitive)  process:
 
 .. code-block:: xml
 
-  <decoder name="syslogd_decoder">
-    <program_name>syslogd</program_name>
+  <decoder name="test_decoder">
+    <program_name type="pcre2">(?i)test</program_name>
     ...
   </decoder>
 
@@ -188,18 +211,31 @@ It attempts to find a match within the log for the string defined. It is used as
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_ or                 |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
 +--------------------+--------------------------------------------------------------------+
 
-The attribute below is optional, it allows to discard some of the content of the entry.
+The attributes below are optional.
 
-+--------------------+--------------------+
-| Attribute          | Value              |
-+====================+====================+
-| **offset**         | after_regex        |
-+                    +                    +
-|                    | after_parent       |
-+--------------------+--------------------+
++-------------+----------------------------------------------------+----------------+---------------+
+| Attribute   |              Description                           | Value range    | Default value |
++=============+====================================================+================+===============+
+| **offset**  | allows to discard some of the content of the entry | after_regex    |               |
+|             |                                                    +----------------+               |
+|             |                                                    | after_parent   |               |
++-------------+----------------------------------------------------+----------------+---------------+
+| **type**    | allows to set regular expression type              |   osregex      |    osregex    |
+|             |                                                    +----------------+               |
+|             |                                                    |   pcre2        |               |
++-------------+----------------------------------------------------+----------------+---------------+
+
+If ``prematch`` label is declared multiple times within the decoder, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of ``type`` attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+
+
+.. _regex_decoders:
 
 regex
 ^^^^^
@@ -217,22 +253,32 @@ An example is this regex that matches any numeral:
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#regex-os-regex-syntax>`_         |
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_ or                 |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
 +--------------------+--------------------------------------------------------------------+
 
 When using the ``regex`` label it is mandatory to define an ``order`` label as well. Besides, ``regex`` label requires a ``prematch`` or a ``program_name`` label defined on the same decoder or a ``parent`` with a ``prematch`` or a ``program_name defined`` label defined on it.
 
-The attribute below is optional. It allows to discard some of the content of the entry.
+The attributes below are optional.
 
-+--------------------+--------------------+
-| Attribute          | Value              |
-+====================+====================+
-| **offset**         | after_regex        |
-+                    +                    +
-|                    | after_parent       |
-+                    +                    +
-|                    | after_prematch     |
-+--------------------+--------------------+
++-------------+----------------------------------------------------+----------------+---------------+
+| Attribute   |              Description                           | Value range    | Default value |
++=============+====================================================+================+===============+
+| **offset**  | allows to discard some of the content of the entry | after_regex    |               |
+|             |                                                    +----------------+               |
+|             |                                                    | after_parent   |               |
+|             |                                                    +----------------+               |
+|             |                                                    | after_prematch |               |
++-------------+----------------------------------------------------+----------------+---------------+
+| **type**    | allows to set regular expression type              |   osregex      |    osregex    |
+|             |                                                    +----------------+               |
+|             |                                                    |   pcre2        |               |
++-------------+----------------------------------------------------+----------------+---------------+
+
+If ``regex`` label is declared multiple times within the decoder, the following rules apply:
+
+- The resulting value is their concatenation.
+- The resulting value of ``type`` attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 Example:
 
@@ -275,6 +321,8 @@ It defines what the parenthesis groups contain and the order in which they were 
 +                    +------------+-------------------------------------------------------+
 |                    | protocol   | Protocol                                              |
 +                    +------------+-------------------------------------------------------+
+|                    | system_name| System name                                           |
++                    +------------+-------------------------------------------------------+
 |                    | id         | Event id                                              |
 +                    +------------+-------------------------------------------------------+
 |                    | url        | Url of the event                                      |
@@ -282,6 +330,8 @@ It defines what the parenthesis groups contain and the order in which they were 
 |                    | action     | Event action (deny, drop, accept, etc)                |
 +                    +------------+-------------------------------------------------------+
 |                    | status     | Event status (success, failure, etc)                  |
++                    +------------+-------------------------------------------------------+
+|                    | data       | Data                                                  |
 +                    +------------+-------------------------------------------------------+
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+
@@ -314,6 +364,8 @@ It is used to designate a decoder as one in which the first time it matches the 
 +                    +------------+-------------------------------------------------------+
 |                    | protocol   | Protocol                                              |
 +                    +------------+-------------------------------------------------------+
+|                    | system_name| System name                                           |
++                    +------------+-------------------------------------------------------+
 |                    | id         | Event id                                              |
 +                    +------------+-------------------------------------------------------+
 |                    | url        | Url of the event                                      |
@@ -321,6 +373,8 @@ It is used to designate a decoder as one in which the first time it matches the 
 |                    | action     | Event action (deny, drop, accept, etc)                |
 +                    +------------+-------------------------------------------------------+
 |                    | status     | Event status (success, failure, etc)                  |
++                    +------------+-------------------------------------------------------+
+|                    | data       | Data                                                  |
 +                    +------------+-------------------------------------------------------+
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+
@@ -449,10 +503,32 @@ Example:
       <order>syscall</order>
     </decoder>
 
+.. _type:
+
 type
 ^^^^
 
 It sets the type of log that the decoder is going to match.
+
++--------------------+------------------+
+| **Default Value**  | syslog           |
++--------------------+------------------+
+| **Allowed values** | firewall         |
++                    +------------------+
+|                    | ids              |
++                    +------------------+
+|                    | web-log          |
++                    +------------------+
+|                    | syslog           |
++                    +------------------+
+|                    | squid            |
++                    +------------------+
+|                    | windows          |
++                    +------------------+
+|                    | host-information |
++                    +------------------+
+|                    | ossec            |
++--------------------+------------------+
 
 Example:
 

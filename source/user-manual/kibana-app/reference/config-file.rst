@@ -235,7 +235,7 @@ Enable or disable the template health check when opening the app.
 checks.api
 ^^^^^^^^^^
 
-Enable or disable the API health check when opening the app.
+Enable or disable the Wazuh API health check when opening the app.
 
 +--------------------+------------+
 | **Default value**  | true       |

@@ -9,6 +9,9 @@ The following is a description of the upgrade procedure by means of a use case.
 
 Upgrading an agent remotely can be performed at the command line and through the Wazuh API.
 
+.. warning::
+        It is recommended to use the Wazuh API to upgrade agents if running a Wazuh cluster.
+
 Using the command line
 ----------------------
 
@@ -71,50 +74,34 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 Using the RESTful API
 ----------------------
 
-Multiple agents can be upgraded at the same time using the RESTful API.
-
-1.  List all outdated agents:
+1.  List all outdated agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agents_controller.get_agent_outdated>`:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/outdated?pretty=true"
-
-    .. code-block:: json
-        :class: output
+        # curl -k -X GET "https://localhost:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
         {
-          "data": {
-            "affected_items": [
-              {
-                "name": "wazuh-agent1",
-                "version": "Wazuh v3.13.2",
-                "id": "001"
-              },
-              {
-                "name": "wazuh-agent2",
-                "version": "Wazuh v3.13.2",
-                "id": "002"
-              },
-              {
-                "name": "wazuh-agent3",
-                "version": "Wazuh v3.13.2",
-                "id": "003"
-              }
-            ],
-            "total_affected_items": 3,
-            "total_failed_items": 0,
-            "failed_items": []
-          },
-          "message": "All selected agents information was returned",
-          "error": 0
+            "data": {
+                "affected_items": [
+                    {"version": "Wazuh v3.0.0", "id": "002", "name": "VM_Debian9"},
+                    {"version": "Wazuh v3.0.0", "id": "003", "name": "VM_Debian8"},
+                    {"version": "Wazuh v3.0.0", "id": "009", "name": "VM_WinServ2016"},
+                ],
+                "total_affected_items": 3,
+                "total_failed_items": 0,
+                "failed_items": [],
+            },
+            "message": "All selected agents information was returned",
+            "error": 0,
         }
 
 
-2. Upgrade the agents with IDs 002 and 003:
+2. Upgrade the agent with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>`:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X PUT "http://localhost:55000/agents/upgrade?agents_list=002,003&pretty=true"
+        # curl -k -X PUT "https://localhost:55000/agents/upgrade?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
+
 
     .. code-block:: json
         :class: output
@@ -140,11 +127,11 @@ Multiple agents can be upgraded at the same time using the RESTful API.
         }
 
 
-3. Check the upgrade result:
+3. Check the upgrade result using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>`:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/upgrade_result?agents_list=002,003&pretty=true"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
@@ -184,11 +171,11 @@ Multiple agents can be upgraded at the same time using the RESTful API.
         }
 
 
-4.  Following the upgrade, the agent is automatically restarted.  Check the agent version to ensure it has been properly upgraded follows:
+4.  Following the upgrade, the agents are automatically restarted. Check the agents version to ensure it has been properly upgraded using endpoint :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>`:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents?agents_list=002,003&pretty=true&select=version"
+        # curl -k -X GET "https://localhost:55000/agents?agents_list=002,003&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output

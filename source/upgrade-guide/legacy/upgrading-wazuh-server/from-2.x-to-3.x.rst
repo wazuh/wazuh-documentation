@@ -23,7 +23,7 @@ To upgrade the Wazuh server choose the the appropriate tab for the desired packa
           gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
           enabled=1
           name=Wazuh repository
-          baseurl=https://packages.wazuh.com/3.x/yum/
+          baseurl=https://packages.wazuh.com/4.x/yum/
           protect=1
           EOF
 
@@ -31,7 +31,7 @@ To upgrade the Wazuh server choose the the appropriate tab for the desired packa
 
         .. code-block:: console
 
-          # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # echo "deb https://packages.wazuh.com/|CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
       .. group-tab:: ZYpp
 
@@ -45,7 +45,7 @@ To upgrade the Wazuh server choose the the appropriate tab for the desired packa
           enabled=1
           autorefresh=1
           name=Wazuh repository
-          baseurl=https://packages.wazuh.com/3.x/yum/
+          baseurl=https://packages.wazuh.com/4.x/yum/
           protect=1
           EOF
 

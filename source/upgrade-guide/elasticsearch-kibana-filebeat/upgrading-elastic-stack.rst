@@ -2,8 +2,8 @@
 
 .. _upgrading_elastic_stack:
 
-Upgrading Elastic Stack
-=======================
+Upgrading Elastic Stack basic license
+=====================================
 
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Elastic* distribution. 
 
@@ -50,7 +50,7 @@ Preparing Elastic Stack
 
       .. code-block:: console
 
-        # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh_pre.repo
+        # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
     .. group-tab:: APT
 
@@ -104,19 +104,19 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # yum install elasticsearch-|ELASTICSEARCH_LATEST|
+            # yum install elasticsearch-|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install elasticsearch=|ELASTICSEARCH_LATEST|
+            # apt-get install elasticsearch=|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update elasticsearch-|ELASTICSEARCH_LATEST|
+            # zypper update elasticsearch-|ELASTICSEARCH_ELK_LATEST|
 
 
 #. Restart the service:
@@ -164,28 +164,19 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
         .. code-block:: console
 
-          # yum install filebeat-|ELASTICSEARCH_LATEST|
+          # yum install filebeat-|ELASTICSEARCH_ELK_LATEST|
 
       .. group-tab:: APT
 
         .. code-block:: console
 
-          # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+          # apt-get install filebeat=|ELASTICSEARCH_ELK_LATEST|
 
       .. group-tab:: ZYpp
 
         .. code-block:: console
 
-          # zypper update filebeat-|ELASTICSEARCH_LATEST|
-
-
-#. Update the configuration file:
-
-    .. code-block:: console
-
-      # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
-      # chmod go+r /etc/filebeat/filebeat.yml
+          # zypper update filebeat-|ELASTICSEARCH_ELK_LATEST|
 
 
 #. Download the alerts template for Elasticsearch:
@@ -221,7 +212,7 @@ Upgrading Kibana
 .. warning::
   Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
 
-#. Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to latest:
+Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to latest:
 
       .. tabs::
 
@@ -271,7 +262,18 @@ Upgrading Kibana
 
                     In case of having more Wazuh API entries, each of them must be added manually.
 
+ 
+#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``: 
 
+    .. code-block:: yaml
+      :emphasize-lines: 5, 6
+
+      hosts:
+        - default:
+          url: https://localhost
+          port: 55000
+          username: wazuh-wui
+          password: wazuh-wui
 
 #. Remove the Wazuh Kibana plugin:
 
@@ -288,25 +290,26 @@ Upgrading Kibana
 
           .. code-block:: console
 
-            # yum install kibana-|ELASTICSEARCH_LATEST|
+            # yum install kibana-|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install kibana=|ELASTICSEARCH_LATEST|
+            # apt-get install kibana=|ELASTICSEARCH_ELK_LATEST|
 
         .. group-tab:: ZYpp
 
           .. code-block:: console
 
-            # zypper update kibana=|ELASTICSEARCH_LATEST|
+            # zypper update kibana=|ELASTICSEARCH_ELK_LATEST|
 
-#. Remove generated bundles:
+#. Remove generated bundles and the ``wazuh-registry.json`` file:
 
     .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
+      # rm -f /usr/share/kibana/optimize/wazuh/config/wazuh-registry.json
 
 #. Update file permissions. This will prevent errors when generating new bundles or updating the Wazuh Kibana plugin:
 
@@ -320,7 +323,7 @@ Upgrading Kibana
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u bin/kibana-plugin install https://s3-us-west-1.amazonaws.com/packages-dev.wazuh.com/trash/app/kibana/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip
 
 
 #. Update configuration file permissions:
@@ -341,6 +344,18 @@ Upgrading Kibana
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
+
+
+#. Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+
+    .. code-block:: console
+
+      # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: |ELASTICSEARCH_ELK_LATEST|' -k -uelastic:<elastic_password>
+
+    If you have a custom index pattern, be sure to replace it accordingly.
+
+#. Clean the browser's cache and cookies.
+
 
 
 Disabling the repository

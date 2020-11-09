@@ -149,7 +149,7 @@ Information about the executed scan and report overview
    cis.notchecked: 36
    cis.score: 53%
 
-Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpose to query it by the API. This allows to know about the last scan every time the user wants to.
+Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpose to query it by the Wazuh API. This allows to know about the last scan every time the user wants to.
 
 Information about a specific result
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

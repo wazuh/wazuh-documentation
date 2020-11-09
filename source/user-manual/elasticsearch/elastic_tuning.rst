@@ -7,7 +7,6 @@ Elasticsearch tuning
 
 This guide summarizes the relevant configurations that allow for the optimization of Elasticsearch.
 
-- `change_elastic_pass`_
 - `Change users' password`_
 - `Memory locking`_
 - `Shards and replicas`_
@@ -23,57 +22,62 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
   .. group-tab:: Open Distro for Elasticsearch
 
-    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``.
+    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. To generate a new password, Open Distro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. 
 
-    To generate a new password, Opendistro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. The utility may need to be given execution permissions:
+
+    #. Replace ``<new-password>`` with the chosen new password and generate a hash for it using the ``hash.sh`` utility:
+
+        .. code-block:: console
+
+          # bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p <new-password>
+
+    
+    #. The generated hash must be placed on the hash section for the user whose password you want to change, for example ``admin``,  in ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``: 
+
+        .. code-block:: yaml
+          :emphasize-lines: 2
+
+          admin:
+            hash: "<newly_generated_hash>"
+            reserved: true
+            backend_roles:
+            - "admin"
+            description: "Demo admin user"
+
+
+    #. In order to load the changes made, it is necessary to execute the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<elasticsearch_ip>`` and execute the following commands: 
+
+        .. code-block:: console
+
+          # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+          # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
+
+  
+
+  .. group-tab:: Elastic Stack basic license
+
+    During the installation of Elasticsearch, the passwords for the different users were automatically generated. These passwords can be changed afterwards using API requests. Replace the following variables and execute the corresponding API call: 
+
+      - ``<elasticsearch_ip>``: The IP of the Elasticsearch node.
+      - ``<username>``: The name of the user whose password is going to be changed.
+      - ``<user_password>``: Current user's password. 
+      - ``<new_password>``: The new password that will be assigned to the ``<username>`` user.
 
     .. code-block:: console
-
-      # cd /usr/share/elasticsearch/plugins/opendistro_security/tools
-      # chmod +x hash.sh
-
-    The following example shows how to generate a new hash:
-
-    .. code-block:: console
-
-      # ./hash.sh -p <new-password>
-
-    The value ``<new-password>`` must be replaced by the desired password. 
-
-    The execution of the previous command will retrieve a hash code that must be placed on the hash section for the desired user in  ``internal_users.yml``: 
-
-    .. code-block:: yaml
-      :emphasize-lines: 2
-
-      user:
-        hash: <new_generated_hash>
-
-    In order to load the changes made, it is necessary to execute the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``: 
-
-    .. code-block:: console
-
-      # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-      # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_IP>
-
-    The value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch's IP. 
-
-  .. group-tab:: Elastic Stack
-
-    During the installation of Elasticsearch, the passwords were automatically generated. They can be changed afterward using API requests:
-
-    .. code-block:: console
-
-      # curl -X POST "https://<elasticsearch_ip>:9200/_security/user/<user_name>/_password?pretty" -H 'Content-Type: application/json' -d'
+ 
+      # curl -k -X POST -u <username>:<user_password> "https://<elasticsearch_ip>:9200/_security/user/<username>/_password?pretty" -H 'Content-Type: application/json' -d '
       # {
       #   "password" : "<new_password>"
       # }
       # '
 
-    The following values must be replaced:
+    If the call was successful it returns an empty JSON structure ``{ }``.  
+    
+    .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. 
+    
+  
 
-      - ``<elasticsearch_ip>``: The IP of the Elasticsearch node.
-      - ``<user_name>``: The name of the user whose password is going to be changed.
-      - ``<new_password>``: The new password that will be assigned to the ``<user_name>`` user.
+
 
 Memory locking
 --------------
@@ -255,7 +259,7 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
       {
         "order": 1,
-        "index_patterns": ["wazuh-alerts-3.x-*"],
+        "index_patterns": ["wazuh-alerts-4.x-*"],
         "settings": {
           "index.refresh_interval": "5s",
           "index.number_of_shards": "3",
