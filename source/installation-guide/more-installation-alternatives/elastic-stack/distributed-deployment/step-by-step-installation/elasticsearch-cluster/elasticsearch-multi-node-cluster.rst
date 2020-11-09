@@ -303,8 +303,6 @@ Disabling repositories
     .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
-To uninstall Elasticsearch, visit the :ref:`uninstalling section <basic_uninstall_elasticsearch>`.
-
 Next steps
 ----------
 
@@ -312,4 +310,34 @@ The next step is the installation of the Wazuh server, select the cluster mode:
 
 - :ref:`Wazuh single-node cluster<basic_wazuh_single_node_cluster>`
 - :ref:`Wazuh multi-node cluster<basic_wazuh_multi_node_cluster>`
+
+Uninstall Elasticsearch
+-----------------------
+
+In case you need to uninstall Elasticsearch follow the instructions below:
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/uninstall_elasticsearch.rst
+
+   
 

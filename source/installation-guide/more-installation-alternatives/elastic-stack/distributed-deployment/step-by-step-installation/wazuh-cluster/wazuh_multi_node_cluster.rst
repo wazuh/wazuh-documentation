@@ -300,10 +300,6 @@ An example response should look as follows:
     talk to server... OK
     version: 7.8.0
    
-Next steps
-----------
-
-The next step consists of installing Kibana. The guide continues  :ref:`here<basic_kibana>`.
 
 
 Disabling repositories
@@ -334,9 +330,73 @@ Disabling repositories
     .. include:: ../../../../../../_templates/installations/basic/wazuh/zypp/disabling_repositories.rst
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
-
 Next steps
 ----------
 
-The next step consists of :ref:`installing Kibana <basic_kibana>`.
+The next step consists of installing Kibana. The guide continues  :ref:`here<basic_kibana>`.
+
+
+
+Uninstall
+---------
+
+In case you need to uninstall the Wazuh server follow the instructions below:
+
+
+
+Uninstall the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../../_templates/installations/basic/wazuh/yum/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../../_templates/installations/basic/wazuh/deb/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
+
+
+
+
+Uninstall Filebeat
+~~~~~~~~~~~~~~~~~~
+
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/uninstall_filebeat.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
+
+
+
+  .. group-tab:: ZYpp  
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
+
+

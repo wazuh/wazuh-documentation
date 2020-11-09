@@ -157,9 +157,38 @@ Disabling repositories
 
 
 
-To uninstall Kibana, visit the :ref:`uninstalling section <basic_uninstall_kibana>`.
 
 Next steps
 ~~~~~~~~~~
 
 Once the Wazuh - Elastic Stack environment is ready, a Wazuh agent can be installed in every endpoint to be monitored. The Wazuh installation guide is available for most operating systems and it can be found :ref:`here<installation_agents>`.
+
+
+Uninstall Kibana
+~~~~~~~~~~~~~~~~
+
+
+In case you need to uninstall Kibana follow the instructions below:
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst

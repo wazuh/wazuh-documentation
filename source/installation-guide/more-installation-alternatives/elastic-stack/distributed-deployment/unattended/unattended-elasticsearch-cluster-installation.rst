@@ -334,3 +334,63 @@ Next steps
 ~~~~~~~~~~
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. The Wazuh server installation guide can be found :ref:`here<basic_unattended_distributed_wazuh>`.
+
+Uninstall
+---------
+
+In case you need to uninstall Elasticsearch and Kibana follow the instructions below:
+
+
+Uninstall Elasticsearch
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/uninstall_elasticsearch.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/uninstall_elasticsearch.rst
+
+   
+
+
+Uninstall Kibana
+~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst

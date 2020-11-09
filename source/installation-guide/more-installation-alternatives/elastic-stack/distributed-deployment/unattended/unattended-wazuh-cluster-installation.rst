@@ -148,4 +148,65 @@ After the installation of all the components of the node, some steps must be don
     #. .. include:: ../../../../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+Uninstall
+---------
+
+In case you need to uninstall the Wazuh server follow the instructions below:
+
+
+
+Uninstall the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/yum/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/deb/uninstall_wazuh_manager_api.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
+
+
+
+
+Uninstall Filebeat
+~~~~~~~~~~~~~~~~~~
+
+
+
+.. tabs::
+
+
+  .. group-tab:: Yum
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/yum/uninstall_filebeat.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
+
+
+
+  .. group-tab:: ZYpp  
+
+
+    .. include:: ../../../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
+
