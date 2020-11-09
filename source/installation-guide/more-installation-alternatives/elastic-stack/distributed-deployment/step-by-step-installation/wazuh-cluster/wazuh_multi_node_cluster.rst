@@ -239,11 +239,6 @@ An example response should look as follows:
       dial up... OK
     talk to server... OK
     version: 7.8.0
-   
-Next steps
-----------
-
-The next step consists of installing Kibana. The guide continues  :ref:`here<basic_kibana>`.
 
 
 Disabling repositories
