@@ -80,6 +80,9 @@ Using the RESTful API
 
         # curl -k -X GET "https://localhost:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
+    .. code-block:: json
+        :class: output
+
         {
             "data": {
                 "affected_items": [
