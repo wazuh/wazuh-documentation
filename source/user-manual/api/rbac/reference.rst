@@ -72,6 +72,9 @@ This reference also contains a set of default roles and policies that can be imm
     - `Lists`_
         - `lists:read`_
 
+    - `Logtest`_
+        - `logtest:run`_
+
     - `Manager`_
         - `manager:delete_file`_
         - `manager:read_api_config`_
@@ -426,6 +429,14 @@ lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /lists <operation/api.controllers.lists_controller.get_lists>` (`list:path`_)
 - :api-ref:`GET /lists/files <operation/api.controllers.lists_controller.get_lists_files>` (`list:path`_)
+
+
+Logtest
+^^^^^^^^^^^^^^^
+logtest:run
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /logtest <operation/api.controllers.logtest_controller.run_logtest_tool>` (`*:*`_)
+- :api-ref:`DELETE /logtest/sessions/{token} <operation/api.controllers.logtest_controller.end_logtest_session>` (`*:*`_)
 
 
 Manager
