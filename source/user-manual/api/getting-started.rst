@@ -543,7 +543,7 @@ It can also be helpful to know which rules matching a specific criteria are avai
 Testing rules and decoders
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With the Wazuh API, it is possible to start a wazuh-logtest session or use an already started session and test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
+With the Wazuh API, it is possible to start a **wazuh-logtest** session or use an already started session to test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
 
 .. code-block:: console
 
@@ -885,4 +885,3 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 Conclusion
 ^^^^^^^^^^
 The provided examples should help appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests.
-
