@@ -15,6 +15,7 @@ Here is a list of the Wazuh API capabilities:
 * Syscheck control and search
 * MITRE attacks and CISCAT overview
 * Ruleset information
+* Testing and verification of rules and decoders
 * Syscollector information
 * Access restriction and security (RBAC)
 * API management (HTTPS, configuration)
