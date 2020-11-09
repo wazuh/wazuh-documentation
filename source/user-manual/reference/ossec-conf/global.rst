@@ -451,13 +451,12 @@ agents_disconnection_time
 .. versionadded:: 4.1.0
 
 This sets the time after which the manager considers an agent as disconnected since its last keepalive.
-It has to be greater than 20s.
 
-+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 20s                                                                                                                               |
-+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days) |
-+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
++-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 20s                                                                                                                                                           |
++-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 1s. |
++-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example:
 
@@ -472,14 +471,14 @@ agents_disconnection_alert_time
 
 .. versionadded:: 4.1.0
 
-This sets the time after which an alert is generated since an agent was considered as disconnected. It has to be greater than 2m.
-As this time is after an agent is considered as disconnected, the minimum time frame to produce an alert taking the default values is 2m and 20s.
+This sets the time after which an alert is generated since an agent was considered as disconnected.
+As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 2m and 20s.
 
-+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 2m                                                                                                                                |
-+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days) |
-+-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 2m                                                                                                                                                                                                                                            |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 0s in order to generate an alert as soon as an agent is considered as disconnected. |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example:
 
