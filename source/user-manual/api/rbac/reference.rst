@@ -87,6 +87,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `Rootcheck`_
         - `rootcheck:clear`_
         - `rootcheck:read`_
+        - `rootcheck:run`_
 
     - `Rules`_
         - `rules:read`_
@@ -505,6 +506,10 @@ rootcheck:read
 - :api-ref:`GET /rootcheck/{agent_id} <operation/api.controllers.rootcheck_controller.get_rootcheck_agent>` (`agent:id`_)
 - :api-ref:`GET /rootcheck/{agent_id}/last_scan <operation/api.controllers.rootcheck_controller.get_last_scan_agent>` (`agent:id`_)
 
+rootcheck:run
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rootcheck <operation/api.controllers.rootcheck_controller.put_rootcheck>` (`agent:id`_)
+
 Rules
 ^^^^^^^^^^^^^^^
 rules:read
@@ -591,7 +596,6 @@ syscheck:read
 
 syscheck:run
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /rootcheck <operation/api.controllers.rootcheck_controller.put_rootcheck>` (`agent:id`_)
 - :api-ref:`PUT /syscheck <operation/api.controllers.syscheck_controller.put_syscheck>` (`agent:id`_)
 
 
@@ -800,7 +804,7 @@ Allow read, run and clear rootcheck information.
 Actions
     - `rootcheck:read`_
     - `rootcheck:clear`_
-    - `syscheck:run`_
+    - `rootcheck:run`_
 
 Resources
     - ``agent:id:*``
