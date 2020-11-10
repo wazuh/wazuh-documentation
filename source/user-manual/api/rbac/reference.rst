@@ -512,6 +512,13 @@ sca:read
 - :api-ref:`GET /sca/{agent_id}/checks/{policy_id} <operation/api.controllers.sca_controller.get_sca_checks>` (`agent:id`_)
 
 
+Tasks
+^^^^^^^^^^^^^^^
+tasks:status
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`GET /tasks/status <operation/api.controllers.tasks_controller.get_tasks_status>` (`*:*`_)
+
+
 Security
 ^^^^^^^^^^^^^^^
 security:create_user
@@ -816,6 +823,16 @@ Resources
 
 Effect
     - allow
+
+tasks_status
+^^^^^^^^^^^^^^^
+Allow read tasks status.
+
+Actions
+    - `tasks:status`_
+
+Resources
+    - ``*:*:*``
 
 users_all
 ^^^^^^^^^^^^^^^
