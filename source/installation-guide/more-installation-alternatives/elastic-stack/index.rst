@@ -36,7 +36,8 @@ Start deploying Wazuh server and Elastic Stack
 .. toctree::
     :maxdepth: 1
 
-    all-in-one-deployment/unattended-installation
-    distributed-deployment/step-by-step-installation/wazuh-cluster/index
-    distributed-deployment/step-by-step-installation/elasticsearch-cluster/index
+    quickstart
+    elasticsearch-multi-node-cluster
+    wazuh-multi-node-cluster
+    kibana
     
