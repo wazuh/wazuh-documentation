@@ -510,16 +510,16 @@ Rootcheck
 ^^^^^^^^^^^^^^^
 rootcheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /rootcheck <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_)
+- :api-ref:`DELETE /rootcheck <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_, `agent:group`_)
 
 rootcheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /rootcheck/{agent_id} <operation/api.controllers.rootcheck_controller.get_rootcheck_agent>` (`agent:id`_)
-- :api-ref:`GET /rootcheck/{agent_id}/last_scan <operation/api.controllers.rootcheck_controller.get_last_scan_agent>` (`agent:id`_)
+- :api-ref:`GET /rootcheck/{agent_id} <operation/api.controllers.rootcheck_controller.get_rootcheck_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /rootcheck/{agent_id}/last_scan <operation/api.controllers.rootcheck_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
 
 rootcheck:run
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /rootcheck <operation/api.controllers.rootcheck_controller.put_rootcheck>` (`agent:id`_)
+- :api-ref:`PUT /rootcheck <operation/api.controllers.rootcheck_controller.put_rootcheck>` (`agent:id`_, `agent:group`_)
 
 Rules
 ^^^^^^^^^^^^^^^
