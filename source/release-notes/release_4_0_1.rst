@@ -43,6 +43,11 @@ Fixed
 Wazuh Kibana plugin
 -------------------
 
+Added
+^^^^^
+
+- Support for Wazuh v4.0.1.
+
 Fixed
 ^^^^^
 
