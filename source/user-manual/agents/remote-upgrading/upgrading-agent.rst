@@ -137,7 +137,7 @@ Using the RESTful API
 
     .. code-block:: console
 
-        # curl -k -X GET "http://localhost:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X GET "https://localhost:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
