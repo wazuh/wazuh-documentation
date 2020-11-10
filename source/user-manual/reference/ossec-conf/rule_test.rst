@@ -12,7 +12,7 @@ rule_test
 		<rule_test>
 		</rule_test>
 
-Here is how to configure the wazuh-logtest module. It allows to test rules and decoders from Wazuh API and kibana through Wazuh APP 
+Here is how to configure the wazuh-logtest module. It allows to test rules and decoders from Wazuh API and Kibana through Wazuh app 
 
 Options
 -------
@@ -27,7 +27,7 @@ Options
 enabled
 ^^^^^^^
 
-Determine if logtet is enabled  or disabled
+Enables the module.
 
 +--------------------+------------------------+
 | **Default value**  | yes                    |
@@ -38,20 +38,20 @@ Determine if logtet is enabled  or disabled
 threads
 ^^^^^^^
 
-Number of wazuh-logtest threads
+Number of wazuh-logtest threads.
 
 +--------------------+---------------------------------+
 | **Default value**  | 1                               |
 +--------------------+---------------------------------+
 |                    | a number between 1 and 128,     |
-| **Allowed values** | or auto to create one thread    |
+| **Allowed values** | or `auto` to create one thread  |
 |                    | per CPU                         |
 +--------------------+---------------------------------+
 
 max_sessions
 ^^^^^^^^^^^^
 
-Number of users connected simultaneously
+Max number of users connected simultaneously.
 
 +--------------------+---------------------------------+
 | **Default value**  | 1                               |
@@ -62,7 +62,7 @@ Number of users connected simultaneously
 session_timeout
 ^^^^^^^^^^^^^^^
 
-Time interval in which a client must remain offline to remove the resources associated with their session
+Time required to delete a session and its resources after the last user interaction.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 15m                                         |
