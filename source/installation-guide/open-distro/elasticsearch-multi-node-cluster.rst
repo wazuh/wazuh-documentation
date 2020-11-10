@@ -98,7 +98,7 @@ Prerequisites
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
 
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
+.. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,21 +110,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
 
 
 
@@ -133,7 +133,7 @@ Elasticsearch installation
 
 Install Open Distro for Elasticsearch:
 
-.. include:: ../../../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,14 +146,14 @@ To configure Elasticsearch download the following file ``/etc/elasticsearch/elas
   .. group-tab:: Single-node 
 
 
-    .. include:: ../../../../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
    
 
 
   .. group-tab:: Multi-node 
 
 
-    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
+    .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
 
 
@@ -168,15 +168,15 @@ Certificates creation and deployment
 
    #. Remove the demo certificates:
 
-      .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+      .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
 
    #. Generate and deploy the certificates:
 
-       .. include:: ../../../../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
+       .. include:: ../../_templates/installations/elastic/common/elastic-single-node/generate_deploy_certificates.rst
 
    #. Enable and start the Elasticsearch service:
 
-       .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+       .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 
 
@@ -185,15 +185,15 @@ Certificates creation and deployment
 
      #. Remove the demo certificates:
 
-        .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+        .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
 
      #. Generate and deploy the certificates:
 
-        .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
+        .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/generate_certificates.rst
 
      #. Enable and start the Elasticsearch service:
 
-        .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+        .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 
 
@@ -210,7 +210,7 @@ Prerequisites
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
 
-.. include:: ../../../../../_templates/installations/elastic/common/before_installation.rst
+.. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -222,21 +222,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
 
 
 
@@ -245,7 +245,7 @@ Elasticsearch installation
 
 Install Open Distro for Elasticsearch:
 
-.. include:: ../../../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -253,7 +253,7 @@ Elasticsearch configuration
 To configure Elasticsearch download the following file ``/etc/elasticsearch/elasticsearch.yml``:
 
 
-.. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
+.. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent.rst
 
 
 Certificates deployment
@@ -261,15 +261,15 @@ Certificates deployment
 
 #. Remove the demo certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
 
 #. Configure Elasticsearch certificates:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
+    .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/deploy_certificates.rst
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 
 .. _initialize_cluster:
@@ -347,21 +347,21 @@ In case you need to uninstall Elasticsearch follow the instructions below:
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
 
 
 

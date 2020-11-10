@@ -336,21 +336,21 @@ Uninstall Elasticsearch
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
 
 
 
@@ -365,18 +365,18 @@ Uninstall Kibana
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/elastic/yum/uninstall_kibana.rst
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/elastic/deb/uninstall_kibana.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../_templates/installations/elastic/zypp/uninstall_kibana.rst   
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_kibana.rst   

@@ -58,7 +58,7 @@ Prerequisites
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, ``unzip``, and ``libcap`` that will be used in further steps:
 
-.. include:: ../../../_templates/installations/before_installation_all_in_one.rst
+.. include:: ../../_templates/installations/before_installation_all_in_one.rst
 
 
 .. _all_in_one_wazuh:
@@ -79,21 +79,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst    
+    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst    
 
 
 
@@ -107,30 +107,30 @@ Installing the Wazuh manager
       .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_manager.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_manager.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
 #. Enable and start the Wazuh manager service:
 
-    .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 #. Run the following command to check if the Wazuh manager is active: 
 
-    .. include:: ../../../_templates/installations/wazuh/common/check_wazuh_manager.rst    
+    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst    
 
 
 Installing Elasticsearch
@@ -138,13 +138,13 @@ Installing Elasticsearch
 
 Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features. 
 
-.. include:: ../../../_templates/installations/elastic/common/install_elastic.rst
+.. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
 
 Configuring Elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: ../../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
+.. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch_all_in_one.rst
 
 
 Certificates creation
@@ -152,16 +152,16 @@ Certificates creation
 
 #. Remove the demo certificates:
 
-    .. include:: ../../../_templates/installations/elastic/common/remove_demo_certs.rst
+    .. include:: ../../_templates/installations/elastic/common/remove_demo_certs.rst
 
 
 #. Generate and deploy the certificates:
 
-    .. include:: ../../../_templates/installations/elastic/common/certificates-aio.rst
+    .. include:: ../../_templates/installations/elastic/common/certificates-aio.rst
 
 #. Enable and start the Elasticsearch service:
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 #. Run the Elasticsearch's ``securityadmin`` script to load the new certificates information and start the cluster:
 
@@ -215,21 +215,21 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
       .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/elastic/yum/install_filebeat.rst
+        .. include:: ../../_templates/installations/elastic/yum/install_filebeat.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/elastic/deb/install_filebeat.rst
+        .. include:: ../../_templates/installations/elastic/deb/install_filebeat.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/elastic/zypp/install_filebeat.rst
+        .. include:: ../../_templates/installations/elastic/zypp/install_filebeat.rst
 
 
 
@@ -241,7 +241,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 #. Download the alerts template for Elasticsearch:
 
-    .. include:: ../../../_templates/installations/elastic/common/load_filebeat_template.rst
+    .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
 
 
 #. Download the Wazuh module for Filebeat:
@@ -260,7 +260,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 #. Enable and start the Filebeat service:
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
 
 
 To ensure that Filebeat has been successfully installed, run the following command:
@@ -302,27 +302,27 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
       .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/elastic/yum/install_kibana.rst
+        .. include:: ../../_templates/installations/elastic/yum/install_kibana.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/elastic/deb/install_kibana.rst
+        .. include:: ../../_templates/installations/elastic/deb/install_kibana.rst
 
 
 
       .. group-tab:: ZYpp
 
 
-        .. include:: ../../../_templates/installations/elastic/zypp/install_kibana.rst
+        .. include:: ../../_templates/installations/elastic/zypp/install_kibana.rst
 
 
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
+    .. include:: ../../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
 #. Update the ``optimize`` and ``plugins`` directories permissions:
 
@@ -354,7 +354,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 #. Enable and start the Kibana service:
 
-    .. include:: ../../../_templates/installations/elastic/common/enable_kibana.rst
+    .. include:: ../../_templates/installations/elastic/common/enable_kibana.rst
 
 #. Access the web interface: 
 
@@ -392,21 +392,21 @@ Uninstall the Wazuh manager
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
+    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_manager_api.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
+    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_manager_api.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
 
@@ -421,21 +421,21 @@ Uninstall Filebeat
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/elastic/yum/uninstall_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_filebeat.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/elastic/deb/uninstall_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_filebeat.rst
 
 
 
   .. group-tab:: ZYpp  
 
 
-    .. include:: ../../../_templates/installations/elastic/deb/uninstall_filebeat.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_filebeat.rst
 
 
 
@@ -450,21 +450,21 @@ Uninstall Elasticsearch
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_elasticsearch.rst
 
 
 
@@ -479,18 +479,18 @@ Uninstall Kibana
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/elastic/yum/uninstall_kibana.rst
+    .. include:: ../../_templates/installations/elastic/yum/uninstall_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/elastic/deb/uninstall_kibana.rst
+    .. include:: ../../_templates/installations/elastic/deb/uninstall_kibana.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/elastic/zypp/uninstall_kibana.rst   
+    .. include:: ../../_templates/installations/elastic/zypp/uninstall_kibana.rst   
