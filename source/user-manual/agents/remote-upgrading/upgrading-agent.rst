@@ -102,7 +102,7 @@ Using the RESTful API
         }
 
 
-2. Upgrade the agent with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>`:
+2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>`:
 
     .. code-block:: console
 
@@ -133,11 +133,11 @@ Using the RESTful API
         }
 
 
-3. Check the upgrade result using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>`:
+3. Check the upgrade results using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>`:
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET "http://localhost:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X GET "http://localhost:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output

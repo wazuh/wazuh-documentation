@@ -6,7 +6,7 @@
 Migrating from the Wazuh API 3.X
 ================================
 
-Wazuh API 4.1 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields. Most responses will have the following structure instead:
+Wazuh API v4 introduces several new endpoints and also modifies or removes some of the old ones. The biggest change for all existing endpoints is the new response format. Endpoint responses have been changed according to the new RBAC standard and will no longer have ``items`` and ``totalitems`` fields. Most responses will have the following structure instead:
 
 .. code-block:: json
     :class: output
@@ -26,7 +26,7 @@ Wazuh API 4.1 introduces several new endpoints and also modifies or removes some
 Migrating users
 -----------------
 
-The Wazuh API users are not migrated when upgrading the Wazuh API from 3.X to 4.1. There are numerous security changes to the Wazuh API in 4.1 and it is not advisable.
+The Wazuh API users are not migrated when upgrading the Wazuh API from 3.X to 4.1. There are numerous security changes to the Wazuh API and it is not advisable.
 However, using the following API calls it is easy to create new users and assign the administrator role to it (substitute <username> and <password>):
 
 **Create new user** (:api-ref:`POST /security/users <operation/api.controllers.security_controller.create_user>`)
@@ -88,7 +88,7 @@ However, using the following API calls it is easy to create new users and assign
 Equivalence table
 -----------------
 
-Wazuh API 4.1 introduces several changes to existing endpoints. It is therefore important to review those changes when migrating to ``4.1``.
+Wazuh API v4 introduced several changes to existing endpoints. It is therefore important to review those changes when migrating to ``4.1``.
 
 The following tables contain the equivalencies between old API 3.x and API 4.1 endpoints:
 
