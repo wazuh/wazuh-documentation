@@ -34,6 +34,16 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.1 ****/
+
+/* Pages added in 4.1 */
+
+newUrls['4.1'] = [
+  '/user-manual/reference/ossec-conf/agent-upgrade.html',
+  '/user-manual/reference/ossec-conf/task-manager.html',
+  '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+];
+
 /* *** RELEASE 4.0 ****/
 
 /* Pages added in 4.0 */
@@ -923,7 +933,7 @@ redirections.push(
     'target': ['3.12=>3.13', '3.13=>3.12'],
     '3.12': '/getting-started/use-cases.html',
     '3.13': '/getting-started/use_cases/index.html',
-  }  
+  }
 );
 
 newUrls['3.13'] = [

@@ -47,6 +47,7 @@ Output example:
 .. code-block:: none
     :class: output
 
-    Sending WPK: [=========================] 100%
-    Installation started... Please wait.
-    Agent upgraded successfully
+    Upgrading...
+
+    Upgraded agents:
+        Agent 002 upgraded: Wazuh v3.10.1 -> 4.0.0
