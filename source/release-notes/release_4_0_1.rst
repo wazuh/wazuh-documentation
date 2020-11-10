@@ -8,7 +8,7 @@
 This section lists the changes in version 4.0.1. More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.0.1/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.0.1-7.9.3/CHANGELOG.md>`_
 - `wazuh/ruleset <https://github.com/wazuh/wazuh-ruleset/blob/4.0.1/CHANGELOG.md>`_
 
 Wazuh core
@@ -39,6 +39,17 @@ Fixed
 - Fixed version matching when assigning a feed in the Vulnerability Detector.
 - Prevented unprivileged users from accessing the Wazuh Agent folder in Windows.
 - Fixed a bug that may lead the agent to crash when reading an invalid Logcollector configuration.
+
+Wazuh Kibana plugin
+-------------------
+
+Fixed
+^^^^^
+
+- Fixed icons did not align to the right in ``Modules > Events``
+- Fixed statistics visualizations that did not show data.
+- Fixed error on loading css files.
+- Fixed fixed search filter in the search bar in ``Module/SCA`` that was not working
 
 Wazuh ruleset
 -------------
