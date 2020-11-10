@@ -163,5 +163,5 @@ Example of configuration
       <port>1514</port>
       <protocol>tcp</protocol>
       <queue_size>16384</queue_size>
-      <rids_closing_time>1m</rids_closing_time>
+      <rids_closing_time>5m</rids_closing_time>
     </remote>
