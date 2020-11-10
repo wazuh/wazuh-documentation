@@ -150,21 +150,21 @@ Uninstall the Wazuh manager
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/basic/wazuh/yum/uninstall_wazuh_manager_api.rst
+    .. include:: ../../../_templates/installations/basic/wazuh/yum/uninstall_wazuh_manager_api.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/basic/wazuh/deb/uninstall_wazuh_manager_api.rst
+    .. include:: ../../../_templates/installations/basic/wazuh/deb/uninstall_wazuh_manager_api.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
+    .. include:: ../../../_templates/installations/basic/wazuh/zypp/uninstall_wazuh_manager_api.rst
 
 
 
@@ -180,21 +180,21 @@ Uninstall Filebeat
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/yum/uninstall_filebeat.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/uninstall_filebeat.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
 
 
 
   .. group-tab:: ZYpp  
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_filebeat.rst
 
 
 
@@ -210,21 +210,21 @@ Uninstall Elasticsearch
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/yum/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/deb/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/zypp/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/uninstall_elasticsearch.rst
 
    
 
@@ -238,18 +238,18 @@ Uninstall Kibana
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst

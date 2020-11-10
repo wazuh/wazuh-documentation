@@ -275,7 +275,7 @@ Download the script and the configuration file. After downloading them, configur
 
       After stating all the nodes, run the following commands to generate the passwords.
 
-      .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
+      .. include:: ../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
 
 
 
@@ -351,21 +351,21 @@ Uninstall Elasticsearch
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/yum/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/deb/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_elasticsearch.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/uninstall_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/uninstall_elasticsearch.rst
 
    
 
@@ -379,18 +379,18 @@ Uninstall Kibana
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst

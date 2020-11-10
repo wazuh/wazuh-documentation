@@ -22,21 +22,21 @@ Adding the Elastic Stack repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/add_repository.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/add_repository.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/add_repository.rst
 
 
 
@@ -50,31 +50,31 @@ Kibana installation and configuration
         .. group-tab:: Yum
 
 
-            .. include:: ../../../../../../_templates/installations/basic/elastic/yum/install_kibana.rst
+            .. include:: ../../../_templates/installations/basic/elastic/yum/install_kibana.rst
 
 
 
         .. group-tab:: APT
 
 
-            .. include:: ../../../../../../_templates/installations/basic/elastic/deb/install_kibana.rst
+            .. include:: ../../../_templates/installations/basic/elastic/deb/install_kibana.rst
 
 
 
         .. group-tab:: ZYpp
 
 
-            .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
+            .. include:: ../../../_templates/installations/basic/elastic/zypp/install_kibana.rst
 
 
 #. The next step is the certificate placement, this guide assumes that a copy of ``certs.zip`` is placed in the root home folder (~/):
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/deploy_kibana_certificate.rst
+    .. include:: ../../../_templates/installations/basic/elastic/common/deploy_kibana_certificate.rst
 
 
 #. Download the Kibana configuration file:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/configure_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/common/configure_kibana.rst
 
 
 #. Update the ``optimize`` and ``plugins`` directories permissions:
@@ -102,7 +102,7 @@ Kibana installation and configuration
 
 #. Enable and start the Kibana service:
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/common/enable_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
 
 #. Access the web interface using the password generated during the Elasticsearch installation process: 
@@ -131,7 +131,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
 Disabling repositories
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: ../../../../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
+.. include:: ../../../_templates/installations/basic/elastic/common/disabling_repositories_explanation.rst
 
 
 .. tabs::
@@ -139,21 +139,21 @@ Disabling repositories
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/disabling_repositories.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/disabling_repositories.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/disabling_repositories.rst
 
 
 
@@ -177,18 +177,18 @@ In case you need to uninstall Kibana follow the instructions below:
   .. group-tab:: Yum
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/uninstall_kibana.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/uninstall_kibana.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/uninstall_kibana.rst
