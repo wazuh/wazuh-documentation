@@ -1092,8 +1092,6 @@ How to disable the module
 To disable the Wazuh Database Synchronization Module, the sync directives must be set to 0 in the ``etc/local_internal_options.conf`` file as shown below::
 
     wazuh_database.sync_agents=0
-    wazuh_database.sync_syscheck=0
-    wazuh_database.sync_rootcheck=0
 
 Once these settings have been adjusted, the file must be saved followed by a restart of Wazuh.  With the above settings, the Database Synchronization Module will not be loaded when Wazuh starts.
 
@@ -1101,24 +1099,6 @@ Once these settings have been adjusted, the file must be saved followed by a res
 |   **wazuh_database.sync_agents**              | Description   | Toggles synchronization of agent database with client.keys on or off.               |
 |                                               +---------------+-------------------------------------------------------------------------------------+
 |                                               | Default value | 1                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|  **wazuh_database.sync_syscheck**             | Description   | Toggles synchronization of FIM data with Syscheck database on or off.               |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 0                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_database.sync_rootcheck**             | Description   | Toggles synchronization of policy monitoring data with Rootcheck database on or off.|
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 1                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|    **wazuh_database.full_sync**               | Description   | Toggles full data synchronization on or off.                                        |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 0                                                                                   |
 |                                               +---------------+-------------------------------------------------------------------------------------+
 |                                               | Allowed value | 0, 1                                                                                |
 +-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
