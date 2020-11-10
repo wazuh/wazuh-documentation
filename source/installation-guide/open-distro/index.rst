@@ -36,5 +36,7 @@ Start deploying Wazuh with Open Distro for Elasticsearch
 .. toctree::
     :maxdepth: 2
 
-    all-in-one-deployment/index
-    distributed-deployment/index
+    quickstart
+    elasticsearch-multi-node-cluster
+    wazuh-multi-node-cluster
+    kibana
