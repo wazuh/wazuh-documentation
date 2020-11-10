@@ -115,7 +115,7 @@ installPrerequisites() {
         eval "apt-get update -q ${debug}"
         eval "apt-get install openjdk-11-jdk -y -q ${debug}" 
         if [  "$?" != 0  ]; then
-            logger "JDK installation falied."
+            logger "JDK installation failed."
             exit 1;
         fi
         export JAVA_HOME=/usr/
