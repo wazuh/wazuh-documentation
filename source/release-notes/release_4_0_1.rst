@@ -37,7 +37,7 @@ Fixed
 **Core**
 
 - Fixed version matching when assigning a feed in the Vulnerability Detector.
-- Prevented unprivileged users from accessing the Wazuh Agent folder in Windows.
+- Improved permissions on Windows agent. Users with limited privileges will now be unable to read the contents of the Wazuh agent folder.
 - Fixed a bug that may lead the agent to crash when reading an invalid Logcollector configuration.
 
 Wazuh Kibana plugin
