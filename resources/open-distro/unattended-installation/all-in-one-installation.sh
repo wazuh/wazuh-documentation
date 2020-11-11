@@ -14,15 +14,15 @@ debug='> /dev/null 2>&1'
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
 elif [ -n "$(command -v zypper)" ]; then
-    sys_type="zypper"     
+    sys_type="zypper"
 elif [ -n "$(command -v apt-get)" ]; then
-    sys_type="apt-get"   
+    sys_type="apt-get"
 fi
 
 logger() {
 
     echo $1
-    
+
 }
 
 startService() {
@@ -36,7 +36,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi  
+        fi
     elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
         eval "chkconfig $1 on ${debug}"
         eval "service $1 start ${debug}"
@@ -46,7 +46,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi     
+        fi
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
         eval "/etc/rc.d/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]; then
@@ -54,7 +54,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi             
+        fi
     else
         echo "Error: ${1^} could not start. No service manager found on the system."
         exit 1;
@@ -90,20 +90,20 @@ installPrerequisites() {
             fi
             echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
             conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
-            echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
+            echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo
             eval "yum install adoptopenjdk-11-hotspot -y -q ${debug}"
         fi
         export JAVA_HOME=/usr/
     elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install curl unzip wget ${debug}" 
+        eval "zypper -n install curl unzip wget ${debug}"
         eval "zypper -n install libcap-progs ${debug} || zypper -n install libcap2 ${debug}"
         eval "zypper -n install java-11-openjdk-devel ${debug}"
         if [ "$?" != 0 ]; then
             eval "zypper ar -f http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/opensuse/15.0/$(uname -m) adoptopenjdk ${debug}" | echo 'a'
             eval "zypper -n install adoptopenjdk-11-hotspot ${debug} "
 
-        fi    
-        export JAVA_HOME=/usr/    
+        fi
+        export JAVA_HOME=/usr/
     elif [ ${sys_type} == "apt-get" ]; then
         eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q ${debug}"
 
@@ -113,13 +113,13 @@ installPrerequisites() {
             echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
         fi
         eval "apt-get update -q ${debug}"
-        eval "apt-get install openjdk-11-jdk -y -q ${debug}" 
+        eval "apt-get install openjdk-11-jdk -y -q ${debug}"
         if [  "$?" != 0  ]; then
             logger "JDK installation falied."
             exit 1;
         fi
         export JAVA_HOME=/usr/
-        
+
     fi
 
     if [  "$?" != 0  ]; then
@@ -127,7 +127,7 @@ installPrerequisites() {
         exit 1;
     else
         logger "Done"
-    fi  
+    fi
 
 }
 
@@ -140,19 +140,19 @@ addWazuhrepo() {
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
         eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
         eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
         eval "apt-get update -q ${debug}"
-    fi    
+    fi
 
-    logger "Done" 
+    logger "Done"
 }
 
 ## Wazuh manager
 installWazuh() {
-    
+
     logger "Installing the Wazuh manager..."
     if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install wazuh-manager ${debug}"
@@ -164,7 +164,7 @@ installWazuh() {
         exit 1;
     else
         logger "Done"
-    fi   
+    fi
     startService "wazuh-manager"
 
 }
@@ -207,28 +207,28 @@ installElasticsearch() {
             exit 1;
         else
             logger "Certificates created"
-        fi     
+        fi
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip -f ${debug}"
-        
+
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
         ram=$(( ${ram_gb} / 2 ))
 
         if [ ${ram} -eq "0" ]; then
             ram=1;
-        fi    
+        fi
         eval "sed -i "s/-Xms1g/-Xms${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
         eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
 
         jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
         if [ "${jv}" == "1.8.0" ]; then
             ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
-            echo "root hard nproc 4096" >> /etc/security/limits.conf 
-            echo "root soft nproc 4096" >> /etc/security/limits.conf 
-            echo "elasticsearch hard nproc 4096" >> /etc/security/limits.conf 
-            echo "elasticsearch soft nproc 4096" >> /etc/security/limits.conf 
+            echo "root hard nproc 4096" >> /etc/security/limits.conf
+            echo "root soft nproc 4096" >> /etc/security/limits.conf
+            echo "elasticsearch hard nproc 4096" >> /etc/security/limits.conf
+            echo "elasticsearch soft nproc 4096" >> /etc/security/limits.conf
             echo "bootstrap.system_call_filter: false" >> /etc/elasticsearch/elasticsearch.yml
-        fi      
+        fi
 
         # Start Elasticsearch
         startService "elasticsearch"
@@ -236,7 +236,7 @@ installElasticsearch() {
         until $(curl -XGET https://localhost:9200/ -uadmin:admin -k --max-time 120 --silent --output /dev/null); do
             echo -ne ${char}
             sleep 10
-        done    
+        done
 
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
         eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key ${debug}"
@@ -248,9 +248,9 @@ installElasticsearch() {
 
 ## Filebeat
 installFilebeat() {
-    
+
     logger "Installing Filebeat..."
-    
+
     if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install filebeat ${debug}"
     else
@@ -278,7 +278,7 @@ installFilebeat() {
 
 ## Kibana
 installKibana() {
-    
+
     logger "Installing Open Distro for Kibana..."
     if [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch-kibana ${debug}"
@@ -288,7 +288,7 @@ installKibana() {
     if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
         exit 1;
-    else    
+    else
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
@@ -297,7 +297,7 @@ installKibana() {
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
-        fi     
+        fi
         eval "mkdir /etc/kibana/certs ${debug}"
         eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ ${debug}"
         eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
@@ -317,7 +317,7 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ ${cores} < "2" ]] || [[ ${ram_gb} < "3700" ]]; then
+    if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]; then
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
@@ -335,22 +335,22 @@ checkInstallation() {
     eval "curl -XGET https://localhost:9200 -uadmin:admin -k --max-time 300 ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
-        exit 1;     
+        exit 1;
     else
         echo "Elasticsearch installation succeeded."
     fi
     eval "filebeat test output ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat was not successfully installed."
-        exit 1;     
+        exit 1;
     else
         echo "Filebeat installation succeeded."
-    fi    
+    fi
     logger "Initializing Kibana (this may take a while)"
     until [[ "$(curl -XGET https://localhost/status -I -uadmin:admin -k -s --max-time 300 | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
-    done    
+    done
     echo $'\nInstallation finished'
     exit 0;
 
@@ -358,51 +358,51 @@ checkInstallation() {
 
 main() {
 
-    if [ -n "$1" ]; then      
+    if [ -n "$1" ]; then
         while [ -n "$1" ]
         do
-            case "$1" in 
-            "-i"|"--ignore-healthcheck") 
-                ignore=1          
+            case "$1" in
+            "-i"|"--ignore-healthcheck")
+                ignore=1
                 shift 1
-                ;; 
-            "-d"|"--debug") 
-                debugEnabled=1          
+                ;;
+            "-d"|"--debug")
+                debugEnabled=1
                 shift 1
-                ;;                                 
-            "-h"|"--help")        
+                ;;
+            "-h"|"--help")
                 getHelp
-                ;;                                         
+                ;;
             *)
                 getHelp
             esac
-        done    
+        done
 
         if [ -n "${debugEnabled}" ]; then
             debug=""
         fi
-        
+
         if [ -n "${ignore}" ]; then
-            echo "Health-check ignored."    
+            echo "Health-check ignored."
         else
-            healthCheck           
-        fi             
+            healthCheck
+        fi
         installPrerequisites
         addWazuhrepo
         installWazuh
         installElasticsearch
         installFilebeat
         installKibana
-        checkInstallation    
+        checkInstallation
     else
-        healthCheck   
+        healthCheck
         installPrerequisites
         addWazuhrepo
         installWazuh
         installElasticsearch
         installFilebeat
         installKibana
-        checkInstallation  
+        checkInstallation
     fi
 
 }
