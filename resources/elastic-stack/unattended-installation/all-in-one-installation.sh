@@ -13,15 +13,15 @@ char="#"
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
-if [ -n "$(command -v yum)" ] 
+if [ -n "$(command -v yum)" ]
 then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ] 
+elif [ -n "$(command -v zypper)" ]
 then
-    sys_type="zypper"     
-elif [ -n "$(command -v apt-get)" ] 
+    sys_type="zypper"
+elif [ -n "$(command -v apt-get)" ]
 then
-    sys_type="apt-get"   
+    sys_type="apt-get"
 fi
 
 logger() {
@@ -42,7 +42,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi  
+        fi
     elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
         eval "chkconfig $1 on $debug"
         eval "service $1 start $debug"
@@ -53,7 +53,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi     
+        fi
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
         eval "/etc/rc.d/init.d/$1 start $debug"
         if [  "$?" != 0  ]
@@ -62,7 +62,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi             
+        fi
     else
         echo "Error: ${1^} could not start. No service manager found on the system."
         exit 1;
@@ -88,14 +88,14 @@ installPrerequisites() {
 
     logger "Installing all necessary utilities for the installation..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
-        eval "yum install zip unzip curl libcap -y -q $debug"   
-    elif [ $sys_type == "zypper" ] 
+        eval "yum install zip unzip curl libcap -y -q $debug"
+    elif [ $sys_type == "zypper" ]
     then
         eval "zypper -n install zip unzip curl $debug"
-        eval "zypper -n install libcap-progs $debug || zypper -n install libcap2 $debug"       
-    elif [ $sys_type == "apt-get" ] 
+        eval "zypper -n install libcap-progs $debug || zypper -n install libcap2 $debug"
+    elif [ $sys_type == "apt-get" ]
     then
         eval "apt-get install curl apt-transport-https zip unzip lsb-release libcap2-bin -y -q $debug"
         eval "apt-get update -q $debug"
@@ -107,7 +107,7 @@ installPrerequisites() {
         exit 1;
     else
         logger "Done"
-    fi   
+    fi
 
 }
 
@@ -116,11 +116,11 @@ addElasticrepo() {
 
     logger "Adding the Elasticsearch repository..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
         eval "rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch $debug"
         echo -e '[elasticsearch-7.x]\nname=Elasticsearch repository for 7.x packages\nbaseurl=https://artifacts.elastic.co/packages/7.x/yum\ngpgcheck=1\ngpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch\nenabled=1\nautorefresh=1\ntype=rpm-md' > /etc/yum.repos.d/elastic.repo
-    elif [ $sys_type == "zypper" ] 
+    elif [ $sys_type == "zypper" ]
     then
         rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch > /dev/null 2>&1
 		cat > /etc/zypp/repos.d/elastic.repo <<- EOF
@@ -133,13 +133,13 @@ addElasticrepo() {
         autorefresh=1
         type=rpm-md
 		EOF
-        
-    elif [ $sys_type == "apt-get" ] 
+
+    elif [ $sys_type == "apt-get" ]
     then
         eval "curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch --max-time 300 | apt-key add - $debug"
         echo 'deb https://artifacts.elastic.co/packages/7.x/apt stable main' | eval "tee /etc/apt/sources.list.d/elastic-7.x.list $debug"
         eval "apt-get update -q $debug"
-    fi    
+    fi
 
     if [  "$?" != 0  ]
     then
@@ -147,7 +147,7 @@ addElasticrepo() {
         exit 1;
     else
         logger "Done"
-    fi  
+    fi
 
 }
 
@@ -156,11 +156,11 @@ addWazuhrepo() {
 
     logger "Adding the Wazuh repository..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
         eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
-    elif [ $sys_type == "zypper" ] 
+    elif [ $sys_type == "zypper" ]
     then
         rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH > /dev/null 2>&1
 		cat > /etc/zypp/repos.d/wazuh.repo <<- EOF
@@ -172,13 +172,13 @@ addWazuhrepo() {
 		baseurl=https://packages.wazuh.com/4.x/yum/
 		protect=1
 		EOF
-    
-    elif [ $sys_type == "apt-get" ] 
+
+    elif [ $sys_type == "apt-get" ]
     then
         eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
         eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
         eval "apt-get update -q $debug"
-    fi    
+    fi
 
     if [  "$?" != 0  ]
     then
@@ -186,15 +186,15 @@ addWazuhrepo() {
         exit 1;
     else
         logger "Done"
-    fi  
+    fi
 
 }
 
 ## Wazuh manager
 installWazuh() {
-    
+
     logger "Installing the Wazuh manager..."
-    if [ $sys_type == "zypper" ] 
+    if [ $sys_type == "zypper" ]
     then
         eval "zypper -n install wazuh-manager $debug"
     else
@@ -206,7 +206,7 @@ installWazuh() {
         exit 1;
     else
         logger "Done"
-    fi   
+    fi
     startService "wazuh-manager"
 
 }
@@ -216,13 +216,13 @@ installElasticsearch() {
 
     logger "Installing Elasticsearch..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
         eval "yum install elasticsearch-7.9.2 -y -q $debug"
-    elif [ $sys_type == "apt-get" ] 
+    elif [ $sys_type == "apt-get" ]
     then
         eval "apt-get install elasticsearch=7.9.2 -y -q $debug"
-    elif [ $sys_type == "zypper" ] 
+    elif [ $sys_type == "zypper" ]
     then
         eval "zypper -n install elasticsearch-7.9.2 $debug"
     fi
@@ -251,17 +251,17 @@ installElasticsearch() {
             exit 1;
         else
             logger "Certificates created"
-        fi     
-        
+        fi
+
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
         ram=$(( ${ram_gb} / 2 ))
 
         if [ ${ram} -eq "0" ]; then
             ram=1;
-        fi    
+        fi
         eval "sed -i "s/-Xms1g/-Xms${ram}g/" /etc/elasticsearch/jvm.options $debug"
-        eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options $debug"     
+        eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options $debug"
 
         # Start Elasticsearch
         startService "elasticsearch"
@@ -286,15 +286,15 @@ installElasticsearch() {
 
 ## Filebeat
 installFilebeat() {
-    
+
     logger "Installing Filebeat..."
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
-        eval "yum install filebeat-7.9.2 -y -q  $debug"    
-    elif [ $sys_type == "zypper" ] 
+        eval "yum install filebeat-7.9.2 -y -q  $debug"
+    elif [ $sys_type == "zypper" ]
     then
         eval "zypper -n install filebeat-7.9.2 $debug"
-    elif [ $sys_type == "apt-get" ] 
+    elif [ $sys_type == "apt-get" ]
     then
         eval "apt-get install filebeat=7.9.2 -y -q  $debug"
     fi
@@ -312,7 +312,7 @@ installFilebeat() {
         eval "cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt $debug"
         eval "cp /etc/elasticsearch/certs/elasticsearch.key /etc/filebeat/certs/filebeat.key $debug"
         conf="$(awk '{sub("<elasticsearch_password>", "'"${password}"'")}1' /etc/filebeat/filebeat.yml)"
-        echo "$conf" > /etc/filebeat/filebeat.yml  
+        echo "$conf" > /etc/filebeat/filebeat.yml
         # Start Filebeat
         startService "filebeat"
 
@@ -323,15 +323,15 @@ installFilebeat() {
 
 ## Kibana
 installKibana() {
-    
+
     logger "Installing Kibana..."
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
-        eval "yum install kibana-7.9.2 -y -q  $debug"    
-    elif [ $sys_type == "zypper" ] 
+        eval "yum install kibana-7.9.2 -y -q  $debug"
+    elif [ $sys_type == "zypper" ]
     then
         eval "zypper -n install kibana-7.9.2 $debug"
-    elif [ $sys_type == "apt-get" ] 
+    elif [ $sys_type == "apt-get" ]
     then
         eval "apt-get install kibana=7.9.2 -y -q  $debug"
     fi
@@ -339,7 +339,7 @@ installKibana() {
     then
         echo "Error: Kibana installation failed"
         exit 1;
-    else   
+    else
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
@@ -349,7 +349,7 @@ installKibana() {
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
-        fi     
+        fi
         eval "mkdir /etc/kibana/certs/ca -p"
         eval "cp -R /etc/elasticsearch/certs/ca/ /etc/kibana/certs/"
         eval "cp /etc/elasticsearch/certs/elasticsearch.key /etc/kibana/certs/kibana.key"
@@ -359,7 +359,7 @@ installKibana() {
         eval "chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
         conf="$(awk '{sub("<elasticsearch_password>", "'"${password}"'")}1' /etc/kibana/kibana.yml)"
-        echo "$conf" > /etc/kibana/kibana.yml         
+        echo "$conf" > /etc/kibana/kibana.yml
 
         # Start Kibana
         startService "kibana"
@@ -375,13 +375,13 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
+    if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]
     then
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
         echo "All the componets have already been installed."
-        exit 1;    
+        exit 1;
     else
         echo "Starting the installation..."
     fi
@@ -395,7 +395,7 @@ checkInstallation() {
     if [  "$?" != 0  ]
     then
         echo "Error: Elasticsearch was not successfully installed."
-        exit 1;     
+        exit 1;
     else
         echo "Elasticsearch installation succeeded."
     fi
@@ -403,15 +403,15 @@ checkInstallation() {
     if [  "$?" != 0  ]
     then
         echo "Error: Filebeat was not successfully installed."
-        exit 1;     
+        exit 1;
     else
         echo "Filebeat installation succeeded."
-    fi    
+    fi
     logger "Initializing Kibana (this may take a while)"
     until [[ "$(curl -XGET https://localhost/status -I -uelastic:"$password" -k -s | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
-    done    
+    done
     echo $'\nDuring the installation of Elasticsearch the passwords for its user were generated. Please take note of them:'
     echo "$passwords"
     echo $'\nInstallation finished'
@@ -422,56 +422,56 @@ checkInstallation() {
 
 ## Disable repositories
 disableRepos() {
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
         sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
         sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-    elif [ $sys_type == "zypper" ] 
+    elif [ $sys_type == "zypper" ]
     then
         sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
         sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
-    elif [ $sys_type == "apt-get" ] 
+    elif [ $sys_type == "apt-get" ]
     then
         sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/wazuh.list
         sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list
-        eval "apt-get update -q $debug"       
-    fi      
+        eval "apt-get update -q $debug"
+    fi
 }
 
 main() {
 
-    if [ -n "$1" ] 
-    then      
+    if [ -n "$1" ]
+    then
         while [ -n "$1" ]
         do
-            case "$1" in 
-            "-i"|"--ignore-healthcheck") 
-                i=1          
+            case "$1" in
+            "-i"|"--ignore-healthcheck")
+                i=1
                 shift 1
-                ;; 
-            "-d"|"--debug") 
-                d=1          
+                ;;
+            "-d"|"--debug")
+                d=1
                 shift 1
-                ;;                                 
-            "-h"|"--help")        
+                ;;
+            "-h"|"--help")
                 getHelp
-                ;;                                         
+                ;;
             *)
                 getHelp
             esac
-        done    
+        done
 
         if [ -n "$d" ]
         then
             debug=""
         fi
-        
+
         if [ -n "$i" ]
         then
-            echo "Health-check ignored."    
+            echo "Health-check ignored."
         else
-            healthCheck           
-        fi             
+            healthCheck
+        fi
         installPrerequisites
         addElasticrepo
         addWazuhrepo
@@ -481,7 +481,7 @@ main() {
         installKibana password
         checkInstallation
     else
-        healthCheck   
+        healthCheck
         installPrerequisites
         addElasticrepo
         addWazuhrepo
@@ -490,7 +490,7 @@ main() {
         installFilebeat password
         installKibana password
         checkInstallation password
-    fi 
+    fi
 
 }
 
