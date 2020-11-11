@@ -87,6 +87,11 @@ This reference also contains a set of default roles and policies that can be imm
     - `Mitre`_
         - `mitre:read`_
 
+    - `Rootcheck`_
+        - `rootcheck:clear`_
+        - `rootcheck:read`_
+        - `rootcheck:run`_
+
     - `Rules`_
         - `rules:read`_
 
@@ -119,9 +124,17 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_all`_
     - `cluster_read`_
     - `decoders_read`_
+    - `lists_read`_
+    - `mitre_read`_
+    - `rootcheck_read`_
+    - `rootcheck_all`_
     - `rules_read`_
+    - `sca_read`_
     - `security_all`_
     - `users_all`_
+    - `syscheck_read`_
+    - `syscheck_all`_
+    - `syscollector_read`_
 
 `Default roles`_
     - `administrator`_
@@ -493,6 +506,21 @@ mitre:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /mitre <operation/api.controllers.mitre_controller.get_attack>` (`*:*`_)
 
+Rootcheck
+^^^^^^^^^^^^^^^
+rootcheck:clear
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /rootcheck <operation/api.controllers.rootcheck_controller.delete_rootcheck>` (`agent:id`_, `agent:group`_)
+
+rootcheck:read
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`GET /rootcheck/{agent_id} <operation/api.controllers.rootcheck_controller.get_rootcheck_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /rootcheck/{agent_id}/last_scan <operation/api.controllers.rootcheck_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
+
+rootcheck:run
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rootcheck <operation/api.controllers.rootcheck_controller.put_rootcheck>` (`agent:id`_, `agent:group`_)
+
 Rules
 ^^^^^^^^^^^^^^^
 rules:read
@@ -767,6 +795,36 @@ Resources
 Effect
     - allow
 
+rootcheck_read
+^^^^^^^^^^^^^^^
+Allow read all rootcheck information.
+
+Actions
+    - `rootcheck:read`_
+
+Resources
+    - ``agent:id:*``
+    - ``agent:group:*``
+
+Effect
+    - allow
+
+rootcheck_all
+^^^^^^^^^^^^^^^
+Allow read, run and clear rootcheck information.
+
+Actions
+    - `rootcheck:read`_
+    - `rootcheck:clear`_
+    - `rootcheck:run`_
+
+Resources
+    - ``agent:id:*``
+    - ``agent:group:*``
+
+Effect
+    - allow
+
 rules_read
 ^^^^^^^^^^^^^^^
 Allow read all rule files in the system.
@@ -890,6 +948,7 @@ Policies
     - `cluster_all`_
     - `decoders_read`_
     - `lists_read`_
+    - `rootcheck_all`_
     - `mitre_read`_
     - `rules_read`_
     - `sca_read`_
@@ -939,6 +998,7 @@ Policies
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
+    - `rootcheck_read`_
     - `mitre_read`_
     - `rules_read`_
     - `sca_read`_
