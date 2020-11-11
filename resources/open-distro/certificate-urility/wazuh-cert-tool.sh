@@ -64,7 +64,7 @@ generateCertificateconfiguration() {
     fi
 }
 
-createRootCAcertificate() {
+generateRootCAcertificate() {
 
     eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj '/C=US/ST=GR/L=Granada/OU=Ops/O=Wazuh' -days 3650 ${debug}"
 
@@ -77,21 +77,24 @@ generateAdmincertificate() {
 
 }
 
-generateElasticsearchcertificate() {
+generateElasticsearchcertificates() {
 
-    en=$(awk -v RS='' '/elasticsearch-nodes/' ~/certs/instances.yml)
+    enl=$(awk -v RS='' '/elasticsearch-nodes:/' ~/instances.yml) 
+    rt="# Elasticsearch nodes"
+    ens="${enl//$rt}"
+
     eval "openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config elasticsearch.conf -days 3650 ${debug}"
     eval "openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile elasticsearch.conf -extensions v3_req -days 3650 ${debug}"
     eval "chmod 444 /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
 
 }
 
-generateFilebeatcertificate() {
+generateFilebeatcertificates() {
     eval "openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config filebeat.conf -days 3650 ${debug}"
     eval "openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile filebeat.conf -extensions v3_req -days 3650 ${debug}"
 }
 
-generateKibanacertificate() {
+generateKibanacertificates() {
     eval "openssl req -new -nodes -newkey rsa:2048 -keyout kibana-key.pem -out kibana.csr -config kibana.conf -days 3650 ${debug}"
     eval "openssl x509 -req -in kibana.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out kibana.pem -extfile kibana.conf -extensions v3_req -days 3650 ${debug}"
 }
@@ -107,6 +110,14 @@ main() {
         while [ -n "$1" ]
         do
             case "$1" in 
+            "-a"|"--admin-certificates") 
+                cadmin=1
+                shift 1
+                ;;     
+            "-ca"|"--root-ca-certificate") 
+                ca=1
+                shift 1
+                ;;                           
             "-e"|"--elasticsearch-certificates") 
                 celastic=1
                 shift 1
@@ -115,7 +126,7 @@ main() {
                 cwazuh=1
                 shift 1
                 ;;   
-            "-k"|"--kibana-certificate") 
+            "-k"|"--kibana-certificates") 
                 ckibana=1
                 shift 1
                 ;;                               
@@ -134,14 +145,38 @@ main() {
         if [ -n "${debugEnabled}" ]; then
             debug=""
         fi
-                    
+
+        if [[ -n "${cadmin}" ]]; then
+            generateAdmincertificate
+            echo "Admin certificates created."
+        fi   
+
+        if [[ -n "${ca}" ]]; then
+            generateRootCAcertificate
+            echo "Elasticsearch certificates created."
+        fi                   
+
+        if [[ -n "${celastic}" ]]; then
+            generateElasticsearchcertificates
+            echo "Elasticsearch certificates created."
+        fi     
+
+        if [[ -n "${cwazuh}" ]]; then
+            generateFilebeatcertificates
+            echo "Wazuh server certificates created."
+        fi 
+
+        if [[ -n "${ckibana}" ]]; then
+            generateKibanacertificates
+            echo "Kibana certificates created."
+        fi                     
            
     else
-        createRootCAcertificate
+        generateRootCAcertificate
         generateAdmincertificate
-        generateElasticsearchcertificate
-        generateFilebeatcertificate
-        generateKibanacertificate
+        generateElasticsearchcertificates
+        generateFilebeatcertificates
+        generateKibanacertificates
     fi
 
 }
