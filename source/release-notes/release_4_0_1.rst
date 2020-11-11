@@ -51,9 +51,9 @@ Added
 Fixed
 ^^^^^
 
-- Fixed icons did not align to the right in ``Modules > Events``
+- Fixed icons did not align to the right in ``Modules > Events``.
 - Fixed statistics visualizations that did not show data.
-- Fixed error on loading css files.
+- Fixed error on loading CSS files.
 - Fixed search filter in the search bar in ``Module/SCA`` that was not working.
 
 Wazuh ruleset
