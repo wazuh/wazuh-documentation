@@ -26,7 +26,7 @@ Fixed
 
 **API**
 
-- Added missing ``agent:group`` resource to RBAC catalog. This caused that the Wazuh Kibana plugin could not obtain the correct information from the RBAC catalog.
+- Added missing ``agent:group`` resource to the RBAC catalog. This caused that the Wazuh Kibana plugin could not obtain the correct information from the RBAC catalog.
 - Changed ``limit`` parameter behavior in ``GET sca/{agent_id}/checks/{policy_id}`` endpoint and fixed some information loss when paginating ``wdb``.
 - Fixed an error with ``GET /security/users/me`` when logged in with ``run_as``. This endpoint must return the permissions and information of the user who makes the request. However, when the user was authenticated through ``auth_context``, this endpoint did not return the permissions granted by this method.
 
