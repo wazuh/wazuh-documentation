@@ -804,6 +804,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
@@ -819,6 +820,7 @@ Actions
 
 Resources
     - ``agent:id:*``
+    - ``agent:group:*``
 
 Effect
     - allow
