@@ -446,7 +446,9 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
                 "level": 2,
                 "status": "enabled",
                 "details": {
-                   "match": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
+                   "match": { 
+                      "pattern": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
+                    }
                 },
                 "pci_dss": [],
                 "gpg13": [
