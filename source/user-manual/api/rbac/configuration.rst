@@ -15,7 +15,7 @@ Here is an example of how to change RBAC mode using a cURL command. It is recomm
 
 .. code-block:: console
 
-    # curl -k -X PUT "https://localhost:55000/security/config?pretty=true" -H "Authorization: Bearer $TOKEN" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
+    # curl -k -X PUT "https://localhost:55000/security/config?pretty=true" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"rbac_mode\":\"<DESIRED_RBAC_MODE>\"}"
 
 .. code-block:: json
     :class: output
