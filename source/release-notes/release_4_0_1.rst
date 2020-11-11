@@ -62,4 +62,4 @@ Wazuh ruleset
 Fixed
 ^^^^^
 
-- Removed duplicated Windows rules for ``EventChannel``.  This extra rules were preventing certain events from triggering  alerts.
+- Removed duplicated Windows rules for ``EventChannel``.  These extra rules were preventing certain events from triggering  alerts.
