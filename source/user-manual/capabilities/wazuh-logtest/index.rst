@@ -2,19 +2,15 @@
 
 .. _manual_wazuh_logtest:
 
-Wazuh Logtest
+Wazuh-Logtest
 =============
 
-.. versionadded:: 4.0.0
+.. versionadded:: 4.1.0
 
-The Wazuh-Logtest whole solution incorporates from version 4.0 was designed to replace Ossec-Logtest tool.
-This solution that allows to test and verify rules locally and remotely is part of the analysisd daemon and they share the same rules engine.
+The Wazuh-Logtest whole solution was designed to replace :ref:`ossec-logtest tool <ossec-logtest>`,
+now allowing to test and verify rules and decoders remotely, sharing the rules engine 
+with :ref:`ossec-analysisd <ossec-analysisd>`
 
-
-Wazuh-Logtest allows test rules and decoders:
- 
- * Both locally and remotely from Wazuh API
- * Locally from Wazuh-Logtest binary in the Manager
 
 
 .. topic:: Contents

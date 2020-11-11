@@ -12,7 +12,7 @@ rule_test
 		<rule_test>
 		</rule_test>
 
-Here is how to configure the wazuh-logtest module. It allows to test rules and decoders from Wazuh API and Kibana through Wazuh app 
+Here is how to configure the Wazuh-Logtest solution. It allows to test rules and decoders from Wazuh API and :ref:`wazuh-logtest tool <wazuh-logtest>`
 
 Options
 -------
@@ -38,7 +38,7 @@ Enables the module.
 threads
 ^^^^^^^
 
-Number of wazuh-logtest threads.
+Number of Wazuh-Logtest solution threads.
 
 +--------------------+---------------------------------+
 | **Default value**  | 1                               |
@@ -68,8 +68,8 @@ Time required to delete a session and its resources after the last user interact
 | **Default value**  | 15m                                         |
 +--------------------+---------------------------------------------+
 |                    | A number to represent seconds, to represent |
-| **Allowed values** | the interval in minutes adds m, or h to     |
-|                    | represent the interval in hours.            |
+| **Allowed values** | suffix character indicating a time unit,    |
+|                    | such as, s (seconds), m (minutes), h (hours)|
 +--------------------+---------------------------------------------+
 
 Default configuration

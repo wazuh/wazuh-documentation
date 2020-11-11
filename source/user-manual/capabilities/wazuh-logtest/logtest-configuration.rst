@@ -5,7 +5,7 @@
 Configuration
 =============
 
-Wazuh logetest is a functionality provided by the manager, whose work parameters are configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`rule_test <reference_ossec_rule_test>`.
+Wazuh-Logtest is a functionality provided by the manager, whose work parameters are configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`rule_test <reference_ossec_rule_test>`.
 
 By default, the configuration is:
 
@@ -25,14 +25,16 @@ And it has the following configuration parameters
 +=================+==============================================+================+=================================+
 | enabled         | Determine if logtet is enabled  or disabled  |      yes       | yes/no                          |
 +-----------------+----------------------------------------------+----------------+---------------------------------+
-| threads         | Number of wazuh-logtest threads              |                | a number between 1 and 128,     |
-|                 |                                              |       1        | or auto to create one thread    |
-|                 |                                              |                | per CPU                         |
+| threads         | Number of Wazuh-Logtest threads              |                | a number between 1 and 128,     |
+|                 |                                              |       1        | or ``auto`` to create one       |
+|                 |                                              |                | thread per CPU                  |
 +-----------------+----------------------------------------------+----------------+---------------------------------+
 | max_sessions    | Number of users connected simultaneously     |      64        | A number between 1 and 500      |
 +-----------------+----------------------------------------------+----------------+---------------------------------+
-| session_timeout | Time interval in which a client must remain  |                | A number to represent seconds,  |
-|                 | offline to remove the resources associated   |      15m       | to represent the interval in    |
-|                 | with their session                           |                | minutes adds m, or h to         |
-|                 |                                              |                | represent the interval in hours.|
+| session_timeout | Time interval in which a client must remain  |                | A positive number that should   |
+|                 | offline to remove the resources associated   |      15m       | contain a suffix character      |
+|                 | with their session                           |                | indicating a time unit, such as,|
+|                 |                                              |                | s (seconds), m (minutes),       |
+|                 |                                              |                | h (hours).                      |
+|                 |                                              |                | The max value is 365 days       |
 +-----------------+----------------------------------------------+----------------+---------------------------------+

@@ -5,11 +5,10 @@
 How it works
 ============
 
-Wazuh Logtest is a powerful feature for working with rules. This solution allows the testing and verification of rules 
+Wazuh-Logtest is a powerful feature for working with rules. This solution allows the testing and verification of rules 
 and decoders before putting them into production.
-
 Wazuh-Logtest is based on the use of unique sessions. Each session stores its own rules and decoders loaded.
-There are three use cases to evaluate rules through Wazuh-Logtest:
+There are two use cases to evaluate rules through Wazuh-Logtest:
 
 #. `Use cases: Test log from Wazuh-Logtest Tool`_
 #. `Use cases: Test log from RESTful API`_
@@ -294,7 +293,7 @@ Then the request is send to logtest
             }
         }
 
-As in Wazuh Logtest tool this indicates that rule 5710 level 5 matches and an alert is generated.
+As in :ref:`wazuh-logtest tool <wazuh-logtest>` this indicates that rule 5710 level 5 matches and an alert is generated.
 The messages field gives information that a session was initialized with the ``95375d4c`` token.
 This token should be added to the next requests to keep the session, including its event history, rules and
 docoders loaded. If the token field is not added to the next request, a new session will be initialized, 
