@@ -20,7 +20,15 @@ This virtual appliance, available `here <https://packages.wazuh.com/|CURRENT_MAJ
     - Kibana: |ELASTICSEARCH_LATEST_OVA|
     - Wazuh Kibana plugin: |WAZUH_LATEST_OVA|-|ELASTICSEARCH_LATEST_OVA|
 
-First, import the OVA in the virtualization platform and run the virtual machine. The ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
+First, import the OVA in the virtualization platform and run the virtual machine. The user ``root`` password is ``wazuh`` and the username/password for the Wazuh API is ``wazuh-wui/wazuh-wui``. The `following video <https://www.youtube.com/watch?v=uijZuneDPPk>`_ explains how to import and run the virtual machine.
+
+To access the web interface: 
+
+  .. code-block:: none
+
+      URL: https://<wazuh_server_ip>
+      user: admin
+      password: admin
 
 All the components included in this virtual image are configured to work out of the box without modifying any settings. Nevertheless, all the components can be fully customized. These are the configuration files locations:
 
@@ -34,13 +42,6 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
 .. note::
   By default the type of the network interface is bridge. The VM will try to get an IP address from the network's DHCP server. Alternatively, a static IP address can be set by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
-To access the web interface:
-
-  .. code-block:: none
-
-      URL: https://<wazuh_server_ip>
-      user: admin
-      password: admin
 
 Once the virtual machine is imported and running, the next step consists on :ref:`deploying the Wazuh agents <installation_agents>` on the systems to be monitored.
 

@@ -9,7 +9,7 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-char="#"
+char="."
 debug='> /dev/null 2>&1'
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
@@ -115,7 +115,7 @@ installPrerequisites() {
         eval "apt-get update -q ${debug}"
         eval "apt-get install openjdk-11-jdk -y -q ${debug}"
         if [  "$?" != 0  ]; then
-            logger "JDK installation falied."
+            logger "JDK installation failed."
             exit 1;
         fi
         export JAVA_HOME=/usr/
@@ -293,13 +293,14 @@ installKibana() {
         eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
         fi
         eval "mkdir /etc/kibana/certs ${debug}"
-        eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ ${debug}"
+        eval "mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
+        eval "mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"
         eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
 
@@ -352,13 +353,19 @@ checkInstallation() {
         sleep 10
     done
     echo $'\nInstallation finished'
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:admin'
     exit 0;
 
 }
 
 main() {
 
-    if [ -n "$1" ]; then
+    if [ "$EUID" -ne 0 ]; then
+        echo "This script must be run as root."
+        exit 1;
+    fi    
+
+    if [ -n "$1" ]; then      
         while [ -n "$1" ]
         do
             case "$1" in

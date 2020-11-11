@@ -15,6 +15,12 @@ You can download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/
 
       # rpm -ivh wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
+    Start the service:
+
+    .. code-block:: console
+
+      # startsrc -s wazuh-agent
+
     With this simple installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
   b) Deployment:
@@ -24,6 +30,10 @@ You can download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/
     .. code-block:: console
 
       # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+
+    .. code-block:: console
+
+      # startsrc -s wazuh-agent      
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_aix>`.
 

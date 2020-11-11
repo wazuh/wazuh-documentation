@@ -9,7 +9,7 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-char="#"
+char="."
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
@@ -426,8 +426,8 @@ installKibana() {
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip $debug"
+        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.2-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -502,8 +502,9 @@ initializeKibana() {
     wip="${wip//$rw2}"
 
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
-    echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml
-
+    echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
+    echo $'\nYou can access the web interface https://'${kip}'. The credentials are elastic:'$epassword''    
+  
 }
 
 ## Check nodes
@@ -606,7 +607,12 @@ main() {
             *)
                 getHelp
             esac
-        done
+        done  
+
+        if [ "$EUID" -ne 0 ]; then
+            echo "This script must be run as root."
+            exit 1;
+        fi          
 
         if [ -n "$d" ]
         then

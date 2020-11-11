@@ -9,7 +9,7 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-char="#"
+char="."
 debug='> /dev/null 2>&1'
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
@@ -137,7 +137,7 @@ installPrerequisites() {
         eval "apt-get update -q ${debug}"
         eval "apt-get install openjdk-11-jdk -y -q ${debug}"
         if [  "$?" != 0  ]; then
-            logger "JDK installation falied."
+            logger "JDK installation failed."
             exit 1;
         fi
         export JAVA_HOME=/usr/
@@ -325,8 +325,15 @@ createCertificates() {
             echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
             echo '    ip:' >> ~/searchguard/search-guard.yml
             echo '      - "'${DSH[i]}'"' >> ~/searchguard/search-guard.yml
-        done
+        done      
     fi
+    kip=$(grep -A 1 "Kibana-instance" ~/config.yml | tail -1)
+    rm="- "
+    kip="${kip//$rm}"        
+    echo '  - name: "kibana"' >> ~/searchguard/search-guard.yml
+    echo '    dn: CN="kibana",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
+    echo '    ip:' >> ~/searchguard/search-guard.yml
+    echo '      - "'${kip}'"' >> ~/searchguard/search-guard.yml      
     awk -v RS='' '/# Clients certificates/' ~/config.yml >> ~/searchguard/search-guard.yml
     eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
     eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
@@ -411,7 +418,7 @@ installKibana() {
     else
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
@@ -444,8 +451,9 @@ installKibana() {
 
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar -xf certs.tar kibana.pem kibana.key root-ca.pem ${debug}"
-
+        eval "tar -xf certs.tar kibana_http.pem kibana_http.key root-ca.pem ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"        
         logger "Kibana installed."
 
         copyKibanacerts iname
@@ -457,16 +465,18 @@ installKibana() {
 
 copyKibanacerts() {
 
-    if [[ -f "/etc/elasticsearch/certs/kibana.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana.key" ]]; then
-        eval "mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/ ${debug}"
+    if [[ -f "/etc/elasticsearch/certs/kibana_http.pem" ]] && [[ -f "/etc/elasticsearch/certs/kibana_http.key" ]]; then
+        eval "mv /etc/elasticsearch/certs/kibana_http* /etc/kibana/certs/ ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
+        eval "mv /etc/kibana/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"          
     elif [ -f ~/certs.tar ]; then
         eval "cp ~/certs.tar /etc/kibana/certs/ ${debug}"
         eval "cd /etc/kibana/certs/ ${debug}"
-        eval "tar --overwrite -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem ${debug}"
-        if [ ${iname} != "kibana" ]; then
-            eval "mv /etc/kibana/certs/${iname}.pem /etc/kibana/certs/kibana.pem ${debug}"
-            eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key ${debug}"
-        fi
+        eval "tar --overwrite -xf certs.tar kibana_http.pem kibana_http.key root-ca.pem ${debug}"
+        # if [ ${iname} != "kibana" ]; then
+        #     eval "mv /etc/kibana/certs/${iname}_http.pem /etc/kibana/certs/kibana.pem ${debug}"
+        #     eval "mv /etc/kibana/certs/${iname}_http.key /etc/kibana/certs/kibana.key ${debug}"
+        # fi            
     else
         echo "No certificates found. Could not initialize Kibana"
         exit 1;
@@ -487,7 +497,8 @@ initializeKibana() {
     rm="- "
     wip="${wip//$rm}"
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
-    echo "${conf}" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+    echo "${conf}" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
+    echo $'\nYou can access the web interface https://'${kip}'. The credentials are admin:admin'    
 
 }
 
@@ -564,6 +575,11 @@ main() {
                 getHelp
             esac
         done
+
+        if [ "$EUID" -ne 0 ]; then
+            echo "This script must be run as root."
+            exit 1;
+        fi
 
         if [ -n "${debugEnabled}" ]; then
             debug=""

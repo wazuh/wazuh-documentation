@@ -22,6 +22,12 @@ Unzip the package in ``/``:
 
     # tar -xvf wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
+Start the service:
+
+.. code-block:: console
+
+    # /sbin/init.d/wazuh-agent start
+
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document:  :ref:`user manual<register_agents>`.
 
 Uninstall

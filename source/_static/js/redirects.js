@@ -49,6 +49,7 @@ newUrls['4.1'] = [
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_1.html',
   '/release-notes/release_4_0_0.html',
   '/user-manual/api/rbac/auth_context.html',
   '/user-manual/api/rbac/configuration.html',

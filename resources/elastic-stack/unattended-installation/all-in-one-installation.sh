@@ -9,7 +9,7 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get or zypper
-char="#"
+char="."
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
@@ -344,7 +344,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.2-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -416,6 +416,7 @@ checkInstallation() {
     echo "$passwords"
     echo $'\nInstallation finished'
     disableRepos
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are elastic:'$password''    
     exit 0;
 
 }
@@ -459,7 +460,12 @@ main() {
             *)
                 getHelp
             esac
-        done
+        done 
+
+        if [ "$EUID" -ne 0 ]; then
+            echo "This script must be run as root."
+            exit 1;
+        fi           
 
         if [ -n "$d" ]
         then

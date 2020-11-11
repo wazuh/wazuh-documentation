@@ -45,9 +45,9 @@ For the communication of Wazuh components several services are used. Below is th
 +---------------+---------------+-----------+---------------+----------------------------------------------+
 | Component     | Software      | Port      | Protocol      | Purpose                                      |
 +===============+===============+===========+===============+==============================================+
-|               |               | 1514      | UDP (default) | Agents connection service                    |
+|               |               | 1514      | TCP (default) | Agents connection service                    |
 +               +               +-----------+---------------+----------------------------------------------+
-|               |               | 1514      | TCP           | Agents connection service                    |
+|               |               | 1514      | UDP           | Agents connection service                    |
 +               +               +-----------+---------------+----------------------------------------------+
 |               | Wazuh manager | 1515      | TCP           | Agents registration service                  |
 +               +               +-----------+---------------+----------------------------------------------+

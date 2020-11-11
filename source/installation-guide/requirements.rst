@@ -5,7 +5,7 @@
 Requirements
 ============
 
-This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements for the different types of deployments of the Wazuh installation.
+This section aims to provide guidance about the supported operating systems as well as the recommended hardware requirements for the different types of deployments of the Wazuh installation.
 
 Supported operating systems
 ---------------------------
@@ -32,7 +32,7 @@ All-in-one deployment
 
 In an all-in-one deployment, Wazuh server and Elastic Stack, are installed on the same host. This type of deployment is suitable for testing and small production environments. A typical use case for this type of environment supports around 100 agents.  
 
-The minimum hardware specifications recommended are 4 GB of RAM and 2 CPU cores. A 64-bit operating system is necessary. 
+The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU cores and the recommended are 16 GB of RAM and 8 CPU cores. A 64-bit operating system is necessary. 
 
 Disk space requirements depend on the alerts per second (APS) generated. The expected APS vary greatly depending on the amount and type of monitored endpoints, the following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of monitored endpoint.
 
@@ -54,15 +54,19 @@ Distributed deployment
 
 In a distributed deployment, the Wazuh server and Elastic Stack are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
 
-The Wazuh server and Elastic Stack can each be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Elasticsearch, or in a dedicated host. For each node, the minimum hardware recommendations are: 
+The Wazuh server and Elastic Stack can each be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Elasticsearch, or in a dedicated host. For each node, the hardware recommendations are: 
 
-+--------------------------------+------------+------------+
-| Component                      | RAM (GB)   | CPU (cores)|
-+================================+============+============+
-| Wazuh server                   |     2      |     2      |
-+--------------------------------+------------+------------+
-| Elastic Stack                  |     4      |     2      |  
-+--------------------------------+------------+------------+       
+                          
++-------------------------+-------------------------+-------------------------------+
+|                         |  Minimum                |   Recommended                 |
++-------------------------+----------+--------------+--------------+----------------+
+| Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
++=========================+==========+==============+==============+================+
+| Wazuh server            |     2    |     2        |      8       |       4        |
++-------------------------+----------+--------------+--------------+----------------+
+| Elastic Stack           |     4    |     2        |     16       |       8        |
++-------------------------+----------+--------------+--------------+----------------+
+
 
 A 64-bit operating system is necessary.  
 
