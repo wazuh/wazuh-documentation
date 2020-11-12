@@ -16,9 +16,9 @@ Install Wazuh server
 
 There are two different alternatives to deploy a Wazuh installation. Here is a brief explanation about each deployment type:
 
-- :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
+- All-in-one: All the Wazuh components are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
 
-- :ref:`Distributed <distributed_index>`: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+- Distributed: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
 
 .. raw:: html
 
@@ -142,10 +142,6 @@ The Wazuh Agent is a single, light-weight monitoring software that can be instal
 
 
 
-Requirements
-------------
-
-The :ref:`requirements <installation_requirements>`  section specifies the supported operating systems as well as the minimum recommended hardware specifications to guarantee the expected performance. Furthermore, information about the expected alerts per second depending on the different types of monitored endpoints can be found, allowing users to calculate the expected data storage needed for their environments.  
 
 .. toctree::
     :hidden:
@@ -158,11 +154,6 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
-
-   
-
- 
-
 
 
 

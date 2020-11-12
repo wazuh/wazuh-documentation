@@ -329,10 +329,7 @@ It is highly recommended to change Elasticsearch’s default passwords for the u
 Next steps
 ----------
 
-The next step is the installation of the Wazuh server, select the cluster mode:
-
-- :ref:`Wazuh single-node cluster<wazuh_single_node_cluster>`
-- :ref:`Wazuh multi-node cluster<wazuh_multi_node_cluster>`
+The next step is the installation of the :ref:`Wazuh server <wazuh_multi_node_cluster>`.
 
 Uninstall Elasticsearch
 -----------------------
