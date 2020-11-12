@@ -306,10 +306,8 @@ Disabling repositories
 Next steps
 ----------
 
-The next step is the installation of the Wazuh server, select the cluster mode: 
+The next step is the installation of the :ref:`Wazuh server <basic_wazuh_multi_node_cluster>`.
 
-- :ref:`Wazuh single-node cluster<basic_wazuh_single_node_cluster>`
-- :ref:`Wazuh multi-node cluster<basic_wazuh_multi_node_cluster>`
 
 Uninstall Elasticsearch
 -----------------------
