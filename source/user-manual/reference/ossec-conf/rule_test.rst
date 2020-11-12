@@ -64,13 +64,14 @@ session_timeout
 
 Time required to delete a session and its resources after the last user interaction.
 
-+--------------------+---------------------------------------------+
-| **Default value**  | 15m                                         |
-+--------------------+---------------------------------------------+
-|                    | A number to represent seconds, to represent |
-| **Allowed values** | suffix character indicating a time unit,    |
-|                    | such as, s (seconds), m (minutes), h (hours)|
-+--------------------+---------------------------------------------+
++--------------------+----------------------------------------------+
+| **Default value**  | 15m                                          |
++--------------------+----------------------------------------------+
+|                    | A number to represent seconds, to represent  |
+| **Allowed values** | suffix character indicating a time unit,     |
+|                    | such as, s (seconds), m (minutes), h (hours).|
+|                    | The max value is 365 days                    |
++--------------------+----------------------------------------------+
 
 Default configuration
 ---------------------

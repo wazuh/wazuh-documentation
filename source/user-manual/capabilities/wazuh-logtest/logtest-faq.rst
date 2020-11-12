@@ -33,9 +33,9 @@ The master node processes the request.
 
 What events are recognized by the Wazuh-Logtest solution?
 ---------------------------------------------------------
-Currently Wazuh-Logtest solution check rules and decoders with syslog and json event format
+Currently Wazuh-Logtest solution check rules and decoders with syslog and json event format.
 
 How is the behavior of the firedtimes counter?
 ----------------------------------------------
 The `firedtimes` counter is used to determine if the rule reached the required frequency to generate the alert.
-Unlike :ref:`ossec-analysisd <ossec-analysisd>`, the counter is not reset every hour, it stays throughout the session
+Unlike :ref:`ossec-analysisd <ossec-analysisd>`, the counter is not reset every hour, it stays throughout the session.
