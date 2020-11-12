@@ -66,7 +66,7 @@ generateCertificateconfiguration() {
 
 generateRootCAcertificate() {
 
-    eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj '/C=US/ST=GR/L=Granada/OU=Ops/O=Wazuh' -days 3650 ${debug}"
+    eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj '/OU=Docu/O=Wazuh/L=California/' -days 3650 ${debug}"
 
 }
 
