@@ -1,5 +1,7 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
+:orphan:
+
 .. _unattended_distributed_wazuh:
 
 Wazuh server unattended installation

@@ -1,6 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
+:orphan:
+
 .. _basic_unattended_distributed_elasticsearch:
+
 
 Elasticsearch & Kibana unattended installation
 ==============================================

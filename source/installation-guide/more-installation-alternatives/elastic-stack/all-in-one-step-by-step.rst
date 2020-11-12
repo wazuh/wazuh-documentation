@@ -2,6 +2,8 @@
 
 .. meta:: :description: Learn how to install Wazuh and Elastic Stack on a single host
 
+:orphan:
+
 .. _basic_all_in_one:
 
 Step-by-step installation
