@@ -10,6 +10,16 @@
 
 debug='> /dev/null 2>&1'
 
+readInstances() {
+
+    if [ -f ~/certs/instances.yml ]; then
+        echo "Configuration file found. Creating certificates..."
+    else
+        echo "Error: no configuration file found."
+    fi
+
+}
+
 generateCertificateconfiguration() {
     if [ ${cname} == "admin" ]; then
 
@@ -172,6 +182,7 @@ main() {
         fi                     
            
     else
+        readInstances
         generateRootCAcertificate
         generateAdmincertificate
         generateElasticsearchcertificates
