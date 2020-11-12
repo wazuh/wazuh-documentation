@@ -59,7 +59,9 @@ In order to improve security, it is highly recommended to change Elasticsearch's
           # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
           # ./securityadmin.sh -f <backup-directory>/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
 
-    #. Remove files from your ``<backup-directory>``.      
+    #. Remove files from your ``<backup-directory>``.
+
+    .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``      
 
   
 
