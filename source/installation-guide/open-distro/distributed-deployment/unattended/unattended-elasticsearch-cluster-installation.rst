@@ -193,7 +193,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Cluster initialization**
 
-      Once all the nodes on the cluster have been started, run the ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
+      Once all the nodes on the cluster have been started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
       .. code-block:: console
 
