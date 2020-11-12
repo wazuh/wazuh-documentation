@@ -475,7 +475,7 @@ This sets the time after which an alert is generated since an agent was consider
 As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 2m and 20s.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 2m                                                                                                                                                                                                                                            |
+| **Default value**       | 100s                                                                                                                                                                                                                                          |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 0s in order to generate an alert as soon as an agent is considered as disconnected. |
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -502,5 +502,5 @@ Default configuration
       <email_to>recipient@example.wazuh.com</email_to>
       <email_maxperhour>12</email_maxperhour>
       <agents_disconnection_time>20s</agents_disconnection_time>
-      <agents_disconnection_alert_time>2m</agents_disconnection_alert_time>
+      <agents_disconnection_alert_time>100s</agents_disconnection_alert_time>
     </global>
