@@ -93,6 +93,12 @@ Below there is an example of the content of the file:
     # Hostinfo queue size
     hostinfo_queue_size='16384'
 
+    # Upgrade module message queue
+    upgrade_queue_usage='0.01'
+
+    # Upgrade module message queue size
+    upgrade_queue_size='16384'
+
     # Event queue
     event_queue_usage='0.53'
 

@@ -22,10 +22,13 @@ You have two options to perform this action:
 
     .. code-block:: xml
 
-        <active-response>
-          <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
-          <ca_store>/path/to/certificate</ca_store>
-        </active-response>
+        <agent-upgrade>
+            <ca_verification>
+                <enabled>yes</enabled>
+                <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+                <ca_store>/path/to/certificate</ca_store>
+            </ca_verification>
+        </agent-upgrade>
 
 
 2. Run the upgrade
