@@ -730,6 +730,10 @@ Monitord
 +----------------------------------+---------------+--------------------------------------------------------------------+
 |  **monitord.delete_old_agents**  | Description   | Number of minutes before deleting an old disconnected agent.       |
 |                                  |               |                                                                    |
+|                                  |               | This is a time-lapse after the agent is considered as              |
+|                                  |               | disconnected because of the                                        |
+|                                  |               | :ref:`disconnection time<reference_agents_disconnection_time>`.    |
+|                                  |               |                                                                    |
 |                                  |               | .. versionadded:: 3.8.0                                            |
 +                                  +---------------+--------------------------------------------------------------------+
 |                                  | Default value | 0                                                                  |
