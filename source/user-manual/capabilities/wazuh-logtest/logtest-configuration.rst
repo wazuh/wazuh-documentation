@@ -26,7 +26,7 @@ And it has the following configuration parameters
 | enabled         | Determine if logtet is enabled  or disabled  |      yes       | yes/no                          |
 +-----------------+----------------------------------------------+----------------+---------------------------------+
 | threads         | Number of Wazuh-Logtest threads              |                | a number between 1 and 128,     |
-|                 |                                              |       1        | or ``auto`` to create one       |
+|                 |                                              |       1        | or `auto` to create one         |
 |                 |                                              |                | thread per CPU                  |
 +-----------------+----------------------------------------------+----------------+---------------------------------+
 | max_sessions    | Number of users connected simultaneously     |      64        | A number between 1 and 500      |
