@@ -13,7 +13,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 .. note:: This section will explain how to install Kibana step-by-step. Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
 
 Prerequisites
-~~~~~~~~~~~~~
+-------------
 
 .. note:: Root user privileges are required to run all the commands described below.
 
@@ -22,7 +22,7 @@ Before installing Kibana, some extra packages must be installed:
 .. include:: ../../_templates/installations/elastic/common/before_installation_kibana.rst
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 This step is required only if Kibana will be installed on a separate host where Elasticsearch was installed.
 
@@ -50,7 +50,7 @@ This step is required only if Kibana will be installed on a separate host where 
 
 
 Kibana installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 #. Install the Kibana package:
 

@@ -86,19 +86,19 @@ The second part will explain how to configure the remaining nodes of the cluster
 
 
 **Initial node**
-****************
+~~~~~~~~~~~~~~~~
 
 The following instructions are meant to be performed on the **first** Elasticsearch node to be configured.  
 
 
 Prerequisites
-~~~~~~~~~~~~~
+"""""""""""""
 
 .. include:: ../../../_templates/installations/basic/before_installation_elastic.rst
 
 
 Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""""""""""
 
 The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
 
@@ -126,7 +126,7 @@ The addition of Elastic Stack repository must be done in all Elasticsearch clust
 
 
 Elasticsearch installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""""""""""""""""""""
 
 Install the Elasticsearch package:
 
@@ -159,7 +159,7 @@ Once Elasticsearch is installed it has to be configured by downloading and editi
 
 
 Certificates creation and deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""""""""""""
 
 #.  This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
@@ -181,19 +181,19 @@ Certificates creation and deployment
 
 
 **Subsequent nodes**
-********************
+~~~~~~~~~~~~~~~~~~~~
 
 The following steps **should be executed in each of the subsequent nodes** of the Elasticsearch cluster. 
 
 
 Prerequisites
-~~~~~~~~~~~~~
+"""""""""""""
 
 .. include:: ../../../_templates/installations/basic/before_installation_elastic.rst
 
 
 Adding the Elastic Stack repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""""""""""
 
 The addition of Elastic Stack repository must be done in all Elasticsearch cluster nodes.
 
@@ -221,7 +221,7 @@ The addition of Elastic Stack repository must be done in all Elasticsearch clust
 
 
 Elasticsearch installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""""""""""""""""""""
 
 #. Install the Elasticsearch package:
 
@@ -252,7 +252,7 @@ Elasticsearch installation and configuration
 .. include:: ../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
 
 Certificates deployment
-~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""
 
 
 #.  The next step is to create the directory ``/etc/elasticsearch/certs``, and then copy the CA file, the certificate and the key there. The ``X`` must be replaced according to the defined data in ``instances.yml`` file:
@@ -267,7 +267,7 @@ Certificates deployment
 
 
 **Initializing the cluster**
-****************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once the installation process is done in all the servers of the Elasticsearch cluster, run the following command on the **initial node** to generate credentials for all the Elastic Stack pre-built roles and users: 
 

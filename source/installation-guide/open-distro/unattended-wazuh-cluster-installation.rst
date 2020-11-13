@@ -102,7 +102,7 @@ The installation script allows the following options:
 In case of installing a multi-node Wazuh cluster, repeat this process in every host.  
 
 Configure the installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 After the installation of all the components of the node, some steps must be done manually. Choose the cluster mode between single-node or multi-node:
 

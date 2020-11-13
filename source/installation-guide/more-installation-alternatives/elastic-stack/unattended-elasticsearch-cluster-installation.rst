@@ -16,7 +16,7 @@ Requirements
 This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements for an Elastic Stack server. 
 
 Supported operating systems
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Elastic Stack components can be installed in the following operating systems:
 
@@ -40,7 +40,7 @@ The Elastic Stack components can be installed in the following operating systems
 
 
 Hardware requirements
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 Elastic Stack can be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Elasticsearch, or in a dedicated host. For each Elastic Stack node, the hardware recommendations are: 
 
@@ -109,12 +109,12 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
+          # curl -so ^/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ^/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
-      Edit the ``~/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
+      Edit the ``^/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
@@ -152,7 +152,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # bash ~/elastic-stack-installation.sh -e -n <node_name>
+        # bash ^/elastic-stack-installation.sh -e -n <node_name>
 
       After the installation, the script will prompt an output like this:
 
@@ -195,8 +195,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ^/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ^/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
 
     - Configure the installation
 
@@ -254,7 +254,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # bash ~/elastic-stack-installation.sh -e -c -n <node_name>
+        # bash ^/elastic-stack-installation.sh -e -c -n <node_name>
 
       After the installation, Elasticsearch will start and will prompt an output like this:
 
@@ -271,7 +271,7 @@ Download the script and the configuration file. After downloading them, configur
 
         .. code-block:: console
 
-          # bash ~/elastic-stack-installation.sh -e -n <node_name>
+          # bash ^/elastic-stack-installation.sh -e -n <node_name>
 
     
     **Cluster initialization**
@@ -285,7 +285,7 @@ Download the script and the configuration file. After downloading them, configur
 Configuring Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``~/certs.zip``. This file must be copied into the :ref:`Wazuh server <basic_unattended_distributed_wazuh>` to extract the certificates needed.
+Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``^/certs.zip``. This file must be copied into the :ref:`Wazuh server <basic_unattended_distributed_wazuh>` to extract the certificates needed.
 
 In case that Kibana was installed in a different server, the ``certs.zip`` file should be also copied into its server to extract the :ref:`corresponding certificates <basic_configure_kibana_unattended>`.
 
@@ -299,7 +299,7 @@ Installing Kibana
 
    .. code-block:: console
 
-     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
+     # curl -so ^/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
 
 #. Run the script:
 
@@ -334,7 +334,7 @@ If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugi
 To uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
 
 Next steps
-~~~~~~~~~~
+----------
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. The Wazuh server installation guide can be found :ref:`here<basic_unattended_distributed_wazuh>`.
 
@@ -345,7 +345,7 @@ In case you need to uninstall Elasticsearch and Kibana follow the instructions b
 
 
 Uninstall Elasticsearch
-~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. tabs::
@@ -374,7 +374,7 @@ Uninstall Elasticsearch
 
 
 Uninstall Kibana
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. tabs::
 

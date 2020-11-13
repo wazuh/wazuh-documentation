@@ -16,7 +16,7 @@ Requirements
 This section aims to provide guidance about the supported operating systems as well as the minimum hardware requirements for an Elastic Stack server. 
 
 Supported operating systems
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Elastic Stack components can be installed in the following operating systems:
 
@@ -40,7 +40,7 @@ The Elastic Stack components can be installed in the following operating systems
 
 
 Hardware requirements
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 Elastic Stack can be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Elasticsearch, or in a dedicated host. For each Elastic Stack node, the hardware recommendations are: 
 
@@ -317,7 +317,7 @@ Once Kibana is running it is necessary to assign each user its corresponding rol
 
 
 Next steps
-~~~~~~~~~~
+----------
 
 Once the Elastic Stack environment is ready, the Wazuh server can be installed. The Wazuh server installation guide can be found :ref:`here<unattended_distributed_wazuh>`.
 

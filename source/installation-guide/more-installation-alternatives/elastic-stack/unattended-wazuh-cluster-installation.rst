@@ -15,7 +15,7 @@ Requirements
 This section aims to provide guidance about the supported operating systems as well as the recommended hardware requirements for a Wazuh server.
 
 Supported operating systems
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh server can be installed in the following Linux operating systems:
 
@@ -35,7 +35,7 @@ The Wazuh server can be installed in the following Linux operating systems:
 
 
 Hardware requirements
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh server can be installed as a single-node or as multi-node cluster. For each node, the hardware recommendations are: 
 
@@ -107,7 +107,7 @@ The installation script allows the following options:
 In case of installing a multi-node Wazuh cluster, repeat this process in every host.   
 
 Configure the installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 After the installation of all the components of the node, some steps must be done manually. Choose the cluster mode between single-node or multi-node:
 
@@ -158,7 +158,7 @@ In case you need to uninstall the Wazuh server follow the instructions below:
 
 
 Uninstall the Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
 
@@ -186,7 +186,7 @@ Uninstall the Wazuh manager
 
 
 Uninstall Filebeat
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 
 

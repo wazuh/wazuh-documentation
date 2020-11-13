@@ -89,19 +89,18 @@ In case you want to install a single-node cluster, follow the instructions for t
 .. note:: Root user privileges are necessary to run all the commands described below.
 
 **Initial node**
-****************
-
+~~~~~~~~~~~~~~~~
 The following instructions are meant to be performed on the **first** Elasticsearch node to be configured.  
 
 Prerequisites
-~~~~~~~~~~~~~
+"""""""""""""
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
 
 .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""
 
 
 .. tabs::
@@ -129,14 +128,14 @@ Adding the Wazuh repository
 
 
 Elasticsearch installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""
 
 Install Open Distro for Elasticsearch:
 
 .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""
 
 To configure Elasticsearch download the following file ``/etc/elasticsearch/elasticsearch.yml``:
 
@@ -158,7 +157,7 @@ To configure Elasticsearch download the following file ``/etc/elasticsearch/elas
 
 
 Certificates creation and deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""""""""""""
 
 .. tabs::
 
@@ -200,20 +199,20 @@ Certificates creation and deployment
 .. note:: In case you want to install a single-node cluster, click :ref:`here <initialize_cluster>` to proceed with the initialization of the cluster. 
 
 **Subsequent nodes**
-********************
+~~~~~~~~~~~~~~~~~~~~
 
 The following steps **should be executed in each of the subsequent nodes** of the Elasticsearch cluster. 
 
 
 Prerequisites
-~~~~~~~~~~~~~
+"""""""""""""
 
 Open Distro for Elasticsearch requires the Java Development Kit and other packages installation including ``wget``, ``curl``, and ``unzip`` that will be used in further steps:
 
 .. include:: ../../_templates/installations/elastic/common/before_installation.rst
 
 Adding the Wazuh repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""
 
 
 .. tabs::
@@ -241,14 +240,14 @@ Adding the Wazuh repository
 
 
 Elasticsearch installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""
 
 Install Open Distro for Elasticsearch:
 
 .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
 Elasticsearch configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""
 
 To configure Elasticsearch download the following file ``/etc/elasticsearch/elasticsearch.yml``:
 
@@ -257,7 +256,7 @@ To configure Elasticsearch download the following file ``/etc/elasticsearch/elas
 
 
 Certificates deployment
-~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""
 
 #. Remove the demo certificates:
 
@@ -275,7 +274,7 @@ Certificates deployment
 .. _initialize_cluster:
 
 **Initializing the cluster**
-****************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once the installation process is done in all the servers of the Elasticsearch cluster, run the security admin script on the **initial node**: 
 
