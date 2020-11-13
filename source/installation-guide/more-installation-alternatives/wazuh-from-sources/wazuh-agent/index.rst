@@ -219,6 +219,10 @@ Installing Wazuh agent from sources
 
        $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+      .. code-block:: console
+
+       $ brew install automake autoconf libtool
+
     2. Download and extract the latest version:
 
      .. code-block:: console
