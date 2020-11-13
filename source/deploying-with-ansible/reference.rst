@@ -246,7 +246,7 @@ Wazuh Manager
 
 **wazuh_manager_email_queue_size**
 
-  Configures the :ref:`queue_size<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`queue_size<reference_ossec_remote>` section from ``ossec.conf``.
 
   *Default 131072*
 
@@ -272,28 +272,28 @@ Wazuh Manager
 
 **wazuh_manager_log_level**
 
-  Configures the :ref:`log_alert_level<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`log_alert_level<reference_ossec_alerts>` section from ``ossec.conf``.
 
   *Default 3*
 
 
 **wazuh_manager_email_level**
 
-  Configures the :ref:`email_alert_level<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`email_alert_level<reference_ossec_alerts>` section from ``ossec.conf``.
 
   *Default 12*
 
 
 **wazuh_manager_log_format**
 
-  Configures :ref:`log_format<reference_ossec_global>` inside logging section from ``ossec.conf``.
+  Configures :ref:`log_format<reference_ossec_logging>` inside logging section from ``ossec.conf``.
 
   *Default plain*
 
 
 **wazuh_manager_extra_emails**
 
-  Configures one or more :ref:`email_alerts<reference_ossec_global>` sections from ``ossec.conf``.
+  Configures one or more :ref:`email_alerts<reference_ossec_email_alerts>` sections from ``ossec.conf``.
 
   *Default:*
 
@@ -313,7 +313,7 @@ Wazuh Manager
 
 **wazuh_manager_connection**
 
-  Configures one or more :ref:`remote<reference_ossec_global>` sections from ``ossec.conf``.
+  Configures one or more :ref:`remote<reference_ossec_remote>` sections from ``ossec.conf``.
 
   *Default:*
 
@@ -327,7 +327,7 @@ Wazuh Manager
 
 **wazuh_manager_reports**
 
-  Configures one or more :ref:`reports<reference_ossec_global>` sections from ``ossec.conf``.
+  Configures one or more :ref:`reports<reference_ossec_reports>` sections from ``ossec.conf``.
 
   *Default:*
 
@@ -348,7 +348,7 @@ Wazuh Manager
 
 **wazuh_manager_rootcheck**
 
-  Configures the :ref:`rootcheck<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -359,7 +359,7 @@ Wazuh Manager
 
 **wazuh_manager_openscap**
 
-  Configures the :ref:`wodle<reference_ossec_global>` item named ``open-scap`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
 
   *Default:*
 
@@ -374,7 +374,7 @@ Wazuh Manager
 
 **wazuh_manager_ciscat**
 
-  Configures the :ref:`wodle<reference_ossec_global>` item named ``cis-cat`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
 
   *Default:*
 
@@ -391,7 +391,7 @@ Wazuh Manager
 
 **wazuh_manager_osquery**
 
-  Configures the :ref:`wodle<reference_ossec_global>` item named ``osquery`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
 
   *Default:*
 
@@ -406,7 +406,7 @@ Wazuh Manager
 
 **wazuh_manager_syscollector**
 
-  Configures the :ref:`wodle<reference_ossec_global>` item named ``syscollector`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
 
   *Default:*
 
@@ -425,7 +425,7 @@ Wazuh Manager
 
 **wazuh_manager_monitor_aws**
 
-  Configures the :ref:`wodle<reference_ossec_global>` item named ``aws-s3`` from ``ossec.conf``.
+  Configures the :ref:`wodle<wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
 
   *Default:*
 
@@ -446,7 +446,7 @@ Wazuh Manager
 
 **wazuh_manager_sca**
 
-  Configures the :ref:`sca<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -463,7 +463,7 @@ Wazuh Manager
 
 **wazuh_manager_vulnerability_detector**
 
-  Configures the :ref:`vulnerability-detector<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`vulnerability-detector<vuln_detector>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -501,7 +501,7 @@ Wazuh Manager
 
 **wazuh_manager_syscheck**
 
-  Configures the :ref:`syscheck<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -551,7 +551,7 @@ Wazuh Manager
 
 **wazuh_manager_commands**
 
-  Configures the :ref:`command<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`command<reference_ossec_commands>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -596,7 +596,7 @@ Wazuh Manager
 
 **wazuh_manager_localfiles**
 
-  Configures the :ref:`localfile<reference_ossec_global>` section from ``ossec.conf`` for each platform.
+  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``ossec.conf`` for each platform.
 
   *Default:*
 
@@ -637,7 +637,7 @@ Wazuh Manager
 
 **wazuh_manager_syslog_outputs**
 
-  Configures the :ref:`syslog_output<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`syslog_output<reference_ossec_syslog_output>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -650,7 +650,7 @@ Wazuh Manager
 
 **wazuh_manager_integrations**
 
-  Configures the :ref:`integration<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`integration<reference_ossec_integration>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -670,7 +670,7 @@ Wazuh Manager
 
 **wazuh_manager_labels**
 
-  Configures the :ref:`labels<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`labels<reference_ossec_labels>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -684,7 +684,7 @@ Wazuh Manager
 
 **wazuh_manager_ruleset**
 
-  Configures the :ref:`ruleset<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`ruleset<reference_ossec_rules>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -700,7 +700,7 @@ Wazuh Manager
 
 **wazuh_manager_rule_exclude**
 
-  Configures the :ref:`rule_exclude<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`rule_exclude<reference_ossec_rules>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -712,7 +712,7 @@ Wazuh Manager
 
 **wazuh_manager_authd**
 
-  Configures the :ref:`auth<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`auth<reference_ossec_auth>` section from ``ossec.conf``.
 
   *Default:*
 
@@ -736,7 +736,7 @@ Wazuh Manager
 
 **wazuh_manager_cluster**
 
-  Configures the :ref:`cluster<reference_ossec_global>` section from ``ossec.conf``.
+  Configures the :ref:`cluster<reference_ossec_cluster>` section from ``ossec.conf``.
 
   *Default:*
 
