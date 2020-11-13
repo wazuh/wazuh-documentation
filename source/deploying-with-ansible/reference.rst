@@ -799,7 +799,7 @@ Wazuh Manager
     - foo:$apr1$/axqZYWQ$Xo/nz/IG3PdwV82EnfYKh/
     - bar:$apr1$hXE97ag.$8m0koHByattiGKUKPUgcZ1
 
-.. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
+.. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
 
 **wazuh_manager_config:**
@@ -1061,7 +1061,7 @@ Wazuh Manager
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-.. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
+.. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
 **agentless_creeds:**
 
@@ -1079,7 +1079,7 @@ Wazuh Manager
         arguments: '/bin /etc/ /sbin'
         passwd: qwerty
 
-.. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
+.. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
 
 **authd_pass:**
@@ -1573,7 +1573,7 @@ Wazuh Agent
           command: 'last -n 20'
           frequency: '360'
 
-  .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect authd credentials.
+  .. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect authd credentials.
 
 **authd_pass:**
 
