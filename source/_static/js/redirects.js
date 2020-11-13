@@ -42,6 +42,13 @@ newUrls['4.1'] = [
   '/user-manual/reference/ossec-conf/agent-upgrade.html',
   '/user-manual/reference/ossec-conf/task-manager.html',
   '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+  '/user-manual/reference/tools/wazuh-logtest.html',
+  '/user-manual/reference/ossec-conf/rule_test.html',
+  '/development/wazuh-logtest.html',
+  '/user-manual/capabilities/wazuh-logtest/index.html',
+  '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
 ];
 
 /* *** RELEASE 4.0 ****/

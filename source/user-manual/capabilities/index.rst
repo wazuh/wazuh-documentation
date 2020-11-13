@@ -42,3 +42,4 @@ If you find a problem, error or if you want to ask related questions, please con
     osquery
     agent-key-polling
     fluent-forwarder
+    wazuh-logtest/index
