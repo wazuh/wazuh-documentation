@@ -134,26 +134,17 @@ Kibana
 Filebeat
 ===================
 
+**filebeat_version:**
+
+  Filebeat version to install.
+
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+
 **filebeat_create_config:**
 
   Generate or not Filebeat config.
 
   *Default true*
-
-**filebeat_prospectors:**
-
-  Set filebeat prospectors to fetch data.
-
-  *Example:* ::
-
-    filebeat_prospectors:
-    - input_type: log
-      paths:
-        - "/var/ossec/logs/alerts/alerts.json"
-      document_type: json
-      json.message_key: log
-      json.keys_under_root: true
-      json.overwrite_keys: true
 
 **filebeat_output_elasticsearch_enabled:**
 
@@ -171,10 +162,20 @@ Filebeat
     - "localhost:9200"
     - "10.1.1.10:9200"
 
-**filebeat_enable_logging:**
+**filebeat_ssl_dir:**
 
-  Enable/disable logging.
+  Set the folder containing SSL certs.
 
+  *Default /etc/pki/root*
+
+
+**filebeat_ssl_key_file:**
+
+  Set certificate key filename.
+
+  *Default null*
+
+.. _wazuh_ansible_reference_manager:
   *Default true*
 
 **filebeat_log_level:**
