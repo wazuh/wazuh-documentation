@@ -1163,9 +1163,345 @@ Wazuh Agent
     repo: https://packages.wazuh.com/windows/
     md5: fd9a3ce30cd6f9f553a1bc71e74a6c9f
 
+**wazuh_agent_enrollment**
+
+  Configures the :ref:`enrollment<reference_ossec_client>` section from agent ``ossec.conf``.
+
+  *Example:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_enrollment:
+      enabled: ''
+      manager_address: ''
+      port: 1515
+      agent_name: 'testname'
+      groups: ''
+      agent_address: ''
+      ssl_cipher: HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH
+      server_ca_path: ''
+      agent_certificate_path: ''
+      agent_key_path: ''
+      authorization_pass_path: /var/ossec/etc/authd.pass
+      auto_method: 'no'
+      delay_after_enrollment: 20
+      use_source_ip: 'no'
+
+**wazuh_agent_client_buffer**
+
+  Configures the :ref:`client_buffer<reference_client_buffer>` section from agent ``ossec.conf``.
+
+  .. code-block:: yaml
+
+    wazuh_agent_client_buffer:
+      disable: 'no'
+      queue_size: '5000'
+      events_per_sec: '500'
+
+**wazuh_agent_rootcheck**
+
+  Configures the :ref:`rootcheck<reference_ossec_rootcheck>` section from agent ``ossec.conf``.
+
+  .. code-block:: yaml
+
+    wazuh_agent_rootcheck:
+      frequency: 43200
+
+**wazuh_agent_openscap**
+
+  Configures the :ref:`wodle<wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_openscap:
+      disable: 'yes'
+      timeout: 1800
+      interval: '1d'
+      scan_on_start: 'yes'
+
+
+**wazuh_agent_cis_cat**
+
+  Configures the :ref:`wodle<wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_cis_cat:
+      disable: 'yes'
+      install_java: 'no'
+      timeout: 1800
+      interval: '1d'
+      scan_on_start: 'yes'
+      java_path: 'wodles/java'
+      java_path_win: '\\server\jre\bin\java.exe'
+      ciscat_path: 'wodles/ciscat'
+      ciscat_path_win: 'C:\cis-cat'
+
+
+**wazuh_agent_osquery**
+
+  Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_osquery:
+      disable: 'yes'
+      run_daemon: 'yes'
+      bin_path_win: 'C:\Program Files\osquery\osqueryd'
+      log_path: '/var/log/osquery/osqueryd.results.log'
+      log_path_win: 'C:\Program Files\osquery\log\osqueryd.results.log'
+      config_path: '/etc/osquery/osquery.conf'
+      config_path_win: 'C:\Program Files\osquery\osquery.conf'
+      add_labels: 'yes'
+
+
+**wazuh_agent_syscollector**
+
+  Configures the :ref:`wodle<wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_syscollector:
+      disable: 'no'
+      interval: '1h'
+      scan_on_start: 'yes'
+      hardware: 'yes'
+      os: 'yes'
+      network: 'yes'
+      packages: 'yes'
+      ports_no: 'yes'
+      processes: 'yes'
+
+**wazuh_agent_sca**
+
+  Configures the :ref:`sca<reference_sec_config_assessment>` section from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_sca:
+      enabled: 'yes'
+      scan_on_start: 'yes'
+      interval: '12h'
+      skip_nfs: 'yes'
+      day: ''
+      wday: ''
+      time: ''
+
+**wazuh_agent_syscheck**
+
+  Configures the :ref:`syscheck<reference_ossec_syscheck>` section from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_syscheck:
+      frequency: 43200
+      scan_on_start: 'yes'
+      auto_ignore: 'no'
+      win_audit_interval: 60
+      skip_nfs: 'yes'
+      skip_dev: 'yes'
+      skip_proc: 'yes'
+      skip_sys: 'yes'
+      process_priority: 10
+      max_eps: 100
+      sync_enabled: 'yes'
+      sync_interval: '5m'
+      sync_max_interval: '1h'
+      sync_max_eps: 10
+      ignore:
+        - /etc/mtab
+        - /etc/hosts.deny
+        - /etc/mail/statistics
+        - /etc/random-seed
+        - /etc/random.seed
+        - /etc/adjtime
+        - /etc/httpd/logs
+        - /etc/utmpx
+        - /etc/wtmpx
+        - /etc/cups/certs
+        - /etc/dumpdates
+        - /etc/svc/volatile
+      ignore_linux_type:
+        - '.log$|.swp$'
+      ignore_win:
+        - '.log$|.htm$|.jpg$|.png$|.chm$|.pnf$|.evtx$'
+      no_diff:
+        - /etc/ssl/private.key
+      directories:
+        - dirs: /etc,/usr/bin,/usr/sbin
+          checks: ''
+        - dirs: /bin,/sbin,/boot
+          checks: ''
+      win_directories:
+        - dirs: '%WINDIR%'
+          checks: 'recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$"'
+        - dirs: '%WINDIR%\SysNative'
+          checks: >-
+            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|
+            net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$"
+        - dirs: '%WINDIR%\SysNative\drivers\etc%'
+          checks: 'recursion_level="0"'
+        - dirs: '%WINDIR%\SysNative\wbem'
+          checks: 'recursion_level="0" restrict="WMIC.exe$"'
+        - dirs: '%WINDIR%\SysNative\WindowsPowerShell\v1.0'
+          checks: 'recursion_level="0" restrict="powershell.exe$"'
+        - dirs: '%WINDIR%\SysNative'
+          checks: 'recursion_level="0" restrict="winrm.vbs$"'
+        - dirs: '%WINDIR%\System32'
+          checks: >-
+            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|
+            netsh.exe$|reg.exe$|regedit.exe$|regedt32.exe$|regsvr32.exe$|runas.exe$|sc.exe$|schtasks.exe$|sethc.exe$|subst.exe$"
+        - dirs: '%WINDIR%\System32\drivers\etc'
+          checks: 'recursion_level="0"'
+        - dirs: '%WINDIR%\System32\wbem'
+          checks: 'recursion_level="0" restrict="WMIC.exe$"'
+        - dirs: '%WINDIR%\System32\WindowsPowerShell\v1.0'
+          checks: 'recursion_level="0" restrict="powershell.exe$"'
+        - dirs: '%WINDIR%\System32'
+          checks: 'recursion_level="0" restrict="winrm.vbs$"'
+        - dirs: '%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup'
+          checks: 'realtime="yes"'
+      windows_registry:
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\cmdfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\comfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\exefile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\piffile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\AllFilesystemObjects'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Directory'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Protocols'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Policies'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Security'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services'
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\KnownDLLs'
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\SecurePipeServers\winreg'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\URL'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Active Setup\Installed Components'
+          arch: "both"
+      windows_registry_ignore:
+        - key: 'HKEY_LOCAL_MACHINE\Security\Policy\Secrets'
+        - key: 'HKEY_LOCAL_MACHINE\Security\SAM\Domains\Account\Users'
+        - key: '\Enum$'
+          type: "sregex"
+
+**wazuh_agent_localfiles**
+
+  Configures the :ref:`localfile<reference_ossec_localfile>` section from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_localfiles:
+      debian:
+        - format: 'syslog'
+          location: '/var/log/auth.log'
+        - format: 'syslog'
+          location: '/var/log/syslog'
+        - format: 'syslog'
+          location: '/var/log/dpkg.log'
+        - format: 'syslog'
+          location: '/var/log/kern.log'
+      centos:
+        - format: 'syslog'
+          location: '/var/log/messages'
+        - format: 'syslog'
+          location: '/var/log/secure'
+        - format: 'syslog'
+          location: '/var/log/maillog'
+        - format: 'audit'
+          location: '/var/log/audit/audit.log'
+      linux:
+        - format: 'syslog'
+          location: '/var/ossec/logs/active-responses.log'
+        - format: 'full_command'
+          command: 'last -n 20'
+          frequency: '360'
+        - format: 'command'
+          command: df -P
+          frequency: '360'
+        - format: 'full_command'
+          command: netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d
+          alias: 'netstat listening ports'
+          frequency: '360'
+      windows:
+        - format: 'eventlog'
+          location: 'Application'
+        - format: 'eventchannel'
+          location: 'Security'
+          query: 'Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and EventID != 4656 and EventID != 4658 and EventID != 4663 and EventID != 4660 and EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]'
+        - format: 'eventlog'
+          location: 'System'
+        - format: 'syslog'
+          location: 'active-response\active-responses.log'
+
+**wazuh_agent_labels**
+
+  Configures the :ref:`labels<reference_ossec_labels>` section from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_labels:
+      enable: false
+      list:
+        - key: Env
+          value: Production
+
+**wazuh_agent_active_response**
+
+  Configures the :ref:`active-response<reference_ossec_active_response>` section from ``ossec.conf``.
+
+  *Default:*
+
+  .. code-block:: yaml
+
+    wazuh_agent_active_response:
+      ar_disabled: 'no'
+      ca_store: '/var/ossec/etc/wpk_root.pem'
+      ca_store_win: 'wpk_root.pem'
+      ca_verification: 'yes'
+
+**wazuh_agent_log_format**
+
+  Configures the :ref:`log_format<reference_ossec_logging>` section from ``ossec.conf``.
+
+  *Default: plain*
+
 **wazuh_agent_config:**
 
-  Wazuh Agent related configuration.
+  Wazuh Agent related configuration. This variable is provided for backwards compatibility.
+  Newer deployments should use the newly introduced variables described above.
 
   *Example:*
 
