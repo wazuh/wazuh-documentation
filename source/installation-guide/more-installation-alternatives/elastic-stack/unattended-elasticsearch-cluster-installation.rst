@@ -109,12 +109,12 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ^/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ^/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config.yml
 
     **Configure the installation** 
       
-      Edit the ``^/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
+      Edit the ``~/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
@@ -152,7 +152,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # bash ^/elastic-stack-installation.sh -e -n <node_name>
+        # bash ~/elastic-stack-installation.sh -e -n <node_name>
 
       After the installation, the script will prompt an output like this:
 
@@ -195,8 +195,8 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-          # curl -so ^/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
-          # curl -so ^/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
+          # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh 
+          # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/config_cluster.yml
 
     - Configure the installation
 
@@ -254,7 +254,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
 
-        # bash ^/elastic-stack-installation.sh -e -c -n <node_name>
+        # bash ~/elastic-stack-installation.sh -e -c -n <node_name>
 
       After the installation, Elasticsearch will start and will prompt an output like this:
 
@@ -271,7 +271,7 @@ Download the script and the configuration file. After downloading them, configur
 
         .. code-block:: console
 
-          # bash ^/elastic-stack-installation.sh -e -n <node_name>
+          # bash ~/elastic-stack-installation.sh -e -n <node_name>
 
     
     **Cluster initialization**
@@ -285,7 +285,7 @@ Download the script and the configuration file. After downloading them, configur
 Configuring Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``^/certs.zip``. This file must be copied into the :ref:`Wazuh server <basic_unattended_distributed_wazuh>` to extract the certificates needed.
+Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``~/certs.zip``. This file must be copied into the :ref:`Wazuh server <basic_unattended_distributed_wazuh>` to extract the certificates needed.
 
 In case that Kibana was installed in a different server, the ``certs.zip`` file should be also copied into its server to extract the :ref:`corresponding certificates <basic_configure_kibana_unattended>`.
 
@@ -299,7 +299,7 @@ Installing Kibana
 
    .. code-block:: console
 
-     # curl -so ^/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
+     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
 
 #. Run the script:
 
