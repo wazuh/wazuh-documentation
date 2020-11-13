@@ -305,7 +305,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.1-1.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
 
@@ -313,7 +313,8 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
       # mkdir /etc/kibana/certs
       # cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/
-      # mv /etc/elasticsearch/certs/kibana* /etc/kibana/certs/
+      # mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key
+      # mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem
 
 #. Link Kibana's socket to privileged port 443:
 

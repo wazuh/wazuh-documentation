@@ -20,6 +20,10 @@ nodes:
     dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
     ip: 
       - <elasticsearch_IP>
+  - name: kibana
+    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US     
+    ip:
+      - <kibana_ip>                  
 
 # Clients certificates
 clients:
@@ -27,6 +31,4 @@ clients:
     dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
     admin: true
   - name: filebeat
-    dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
-  - name: kibana
-    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
+    dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US 

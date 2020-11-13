@@ -9,8 +9,8 @@
     .. code-block:: console
 
       # systemctl daemon-reload
-      # systemctl enable filebeat.service
-      # systemctl start filebeat.service
+      # systemctl enable filebeat
+      # systemctl start filebeat
 
 
 

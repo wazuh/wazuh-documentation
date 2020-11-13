@@ -5,7 +5,7 @@
 Wazuh server unattended installation
 ====================================
 
-This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section.
+This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 Installing the Wazuh server
 ---------------------------
@@ -21,7 +21,7 @@ Download the installation script:
 
 Replace the following variables and run the installation script: 
 
-- ``<node_name>``: Name of the Wazuh server instance. 
+- ``<node_name>``: Name of the Wazuh server instance (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``). 
 - ``<elastic_user_password>``: The password of the user ``elastic`` generated during the Elasticsearch installation. 
 
 .. code-block:: console

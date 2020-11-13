@@ -9,8 +9,8 @@
     .. code-block:: console
 
       # systemctl daemon-reload
-      # systemctl enable wazuh-manager
-      # systemctl start wazuh-manager
+      # systemctl enable wazuh-agent
+      # systemctl start wazuh-agent
 
 
   .. group-tab:: SysV Init
@@ -21,14 +21,14 @@
 
       .. code-block:: console
 
-        # chkconfig --add wazuh-manager
-        # service wazuh-manager start
+        # chkconfig --add wazuh-agent
+        # service wazuh-agent start
 
     b) Debian based OS:
 
       .. code-block:: console
 
-        # update-rc.d wazuh-manager defaults 95 10
-        # service wazuh-manager start
+        # update-rc.d wazuh-agent defaults 95 10
+        # service wazuh-agent start
 
 .. End of include file

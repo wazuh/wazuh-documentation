@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section. This script uses the Search Guard offline TLS tool to create the certificates. 
+This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section. This script uses the Search Guard offline TLS tool to create the certificates. 
 
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
@@ -81,7 +81,7 @@ Download the script and the configuration file. After downloading them, configur
         - <wazuh_master_server_IP>
 
 
-      In case of having more than one Wazuh server, there can be added as much nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      In case of having more than one Wazuh server, there can be added as many nodes as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
 
         .. code-block:: yaml
 
@@ -104,14 +104,14 @@ Download the script and the configuration file. After downloading them, configur
 
     **Initial node configuration and installation**
 
-    - Download the script and the configuration file ``config.yml``
+    - Download the script and the configuration file ``config.yml``:
 
       .. code-block:: console
 
           # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
           # curl -so ~/config.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/config_cluster.yml
 
-    - Configure the installation
+    - Configure the installation:
 
       .. code-block:: yaml
         :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 31, 34
@@ -168,7 +168,7 @@ Download the script and the configuration file. After downloading them, configur
         - name: filebeat-X
           dn: CN=filebeat-x,OU=Docu,O=Wazuh,L=California,C=US                
 
-    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>``:
+    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``):
 
       .. code-block:: console
 
@@ -185,7 +185,7 @@ Download the script and the configuration file. After downloading them, configur
         # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
 
 
-    - Run the script:
+    - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``):
 
       .. code-block:: console
 
@@ -228,7 +228,7 @@ Installing Kibana
 
     The following values must be replaced:
 
-      - ``node_name``: Name of the instance.
+      - ``node_name``: Name of the instance (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``). 
 
 #. Access the web interface: 
 

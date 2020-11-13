@@ -5,7 +5,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section.
+This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 
 .. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
@@ -95,6 +95,7 @@ Download the script and the configuration file. After downloading them, configur
 
       .. code-block:: console
         :class: output
+        :emphasize-lines: 21
 
         During the installation of Elasticsearch the passwords for its user were generated. Please take note of them:
         Changed password for user apm_system
@@ -166,13 +167,11 @@ Download the script and the configuration file. After downloading them, configur
 
       The highlighted lines indicate the values that must be replaced in the ``config.yml``. These values are: 
 
-        - ``<elasticsearch_ip>``: Elasticsearch IP.
-        - ``<node_name>``: Name of the node
-        - ``<elastic_cluster>``: Name of the cluster. This field must be the same for all the Elasticsearch nodes.
+        - ``<elastic_cluster>``: Name of the cluster. 
         - ``<master_node_x>``: Name of the node ``X``.
-        - ``<elasticsearch_ip-X>``: Elasticsearch IP of the node ``X``.
-        - ``<wazuh_server_IP>``: Wazuh Server IP.
-        - ``<kibana_ip>``: The IP of Kibana.
+        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``.
+        - ``<kibana_ip>``: Kibana server IP.
+        - ``<wazuh_master_server_IP>``: Wazuh Server IP.
 
       There can be added as many Elasticsearch nodes as needed. To generate certificates for them, the ``instances`` section must be also updated, adding the information of these new certificates. There must be the same number of certificates rows as nodes will be on the installation.
 
@@ -184,7 +183,7 @@ Download the script and the configuration file. After downloading them, configur
           ip:
           - "<wazuh_server_ip_X>"                
 
-    - Run the script:
+    - Run the script with the options ``-e``, ``-c`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``):
 
       The option ``-c`` is used to generate the certificates:
 
@@ -203,7 +202,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Subsequent nodes installation**
     
-      - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>``:
+      - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``):
 
         .. code-block:: console
 
@@ -231,34 +230,41 @@ In case that Kibana was installed in a different server, the ``certs.zip`` file 
 Installing Kibana
 -----------------
 
-Download the script. In case of installing Kibana on the same server as Elasticsearch, this step must me skipped:
+#. Download the script. In case of installing Kibana on the same server as Elasticsearch, this step must me skipped:
 
-.. code-block:: console
+   .. code-block:: console
 
-  # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
+     # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/elastic-stack-installation.sh
 
-Run the script:
+#. Run the script:
 
-.. code-block:: console
+   .. code-block:: console
 
-  # bash elastic-stack-installation.sh -k n <node_name> -p <elastic_password>
+    # bash elastic-stack-installation.sh -k n <node_name> -p <elastic_password>
 
-The following values must be replaced:
+   The following values must be replaced:
 
-  - ``<node_name>``: Name of the instance.
-  - ``elastic_password``: Password for the user ``elastic`` previously generated during the Elasticsearch installation.
-  
+   - ``<node_name>``: Name of the instance (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``). 
+   - ``elastic_password``: Password for the user ``elastic`` previously generated during the Elasticsearch installation.
+
+
+#. Access the web interface using the password generated during the Elasticsearch installation process: 
+
+    .. code-block:: none
+
+      URL: https://<kibana_ip>
+      user: elastic
+      password: <PASSWORD_elastic>   
+
+    
+    Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured.   
 
 .. _basic_configure_kibana_unattended:
 
 Configuring Kibana
 ^^^^^^^^^^^^^^^^^^
 
-Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured.
-
-.. note:: The Kibana service listens to the default port ``443``. The browser address is: ``https://<kibana_ip>`` replacing ``<kibana_ip>`` with the Kibana server IP. The default user is ``elastic`` and the password is the one generated previously.
-
-  If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
+If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
 To uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
 

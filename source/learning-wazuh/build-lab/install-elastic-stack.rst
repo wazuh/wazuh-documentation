@@ -144,7 +144,7 @@ events and archives stored in Elasticsearch. More info at `Kibana
       - wazuhapi:
          url: https://172.30.0.10
          port: 55000
-         user: wazuhapiuser
+         username: wazuhapiuser
          password: wazuhlab
     EOF
 

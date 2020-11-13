@@ -49,8 +49,6 @@ agent_control options for Active Response
 +-------------------+---------------------------------------------------------+
 | **-L**            | List available active responses.                        |
 +-------------------+---------------------------------------------------------+
-| **-m**            | Show the limit of agents that can be added.             |
-+-------------------+---------------------------------------------------------+
 | **-s**            | Change the output to CSV format (comma delimited).      |
 +-------------------+---------------------------------------------------------+
 | **-j**            | Change the output to JSON format.                       |

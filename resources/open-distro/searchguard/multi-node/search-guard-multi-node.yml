@@ -28,6 +28,10 @@ nodes:
     dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
     ip:
       - <elasticsearch_3_IP>
+  - name: kibana
+    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US 
+    ip:
+      - <kibana_ip>           
 
 # Clients certificates
 clients:
@@ -37,6 +41,4 @@ clients:
   - name: filebeat-1
     dn: CN=filebeat-1,OU=Docu,O=Wazuh,L=California,C=US
   - name: filebeat-2
-    dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US  
-  - name: kibana
-    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US       
+    dn: CN=filebeat-2,OU=Docu,O=Wazuh,L=California,C=US     

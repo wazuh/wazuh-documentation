@@ -5,7 +5,7 @@
 Wazuh server unattended installation
 ====================================
 
-This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. For more information, please visit the :ref:`requirements <installation_requirements>` section.
+This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 Installing the Wazuh server
 ---------------------------
@@ -19,7 +19,7 @@ Download the installation script:
 
     # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/wazuh-server-installation.sh 
     
-Run the following command to install the Wazuh manager. Replace ``<node_name>`` by the name of the Wazuh server: 
+Run the following command to install the Wazuh manager. Replace ``<node_name>`` by the name of the Wazuh server (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``filebeat``): 
 
 .. code-block:: console
 

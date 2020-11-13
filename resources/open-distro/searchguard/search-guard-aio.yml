@@ -18,8 +18,12 @@ defaults:
 nodes:
   - name: elasticsearch
     dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-    ip: 
+    ip:
       - 127.0.0.1
+  - name: kibana
+    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US
+    ip:
+      - 127.0.0.1    
 
 # Clients certificates
 clients:
@@ -28,5 +32,3 @@ clients:
     admin: true
   - name: filebeat
     dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
-  - name: kibana
-    dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US
