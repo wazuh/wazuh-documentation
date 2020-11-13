@@ -959,7 +959,7 @@ newUrls['3.13'] = [
 
 removedUrls['3.13'] = [
   '/getting-started/use-cases.html',
-  '/getting-started/components/index.html',
+  '/getting-started/components.html',
 ];
 
 /* *** RELEASE 3.12 ****/
