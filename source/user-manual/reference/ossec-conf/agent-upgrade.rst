@@ -38,6 +38,7 @@ Agent side
 - `notification_wait_start`_
 - `notification_wait_factor`_
 - `notification_wait_max`_
+- `ca_verification`_
 
 .. note:: On the agent side, this module can be disabled and doing so will block remote upgrading of that agent.
 
@@ -140,6 +141,28 @@ Maximum time allowed between successive notifications. Can use second, minute an
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 
 
+ca_verification
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.1.0
+
+Configuration block to specify CA certificates to validate WPK files.
+
++---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                           | This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the manager.  |
+|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  **enabled**              | **Default value**  | yes                                                                                                                                                             |
+|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                           | **Allowed values** | yes, no                                                                                                                                                         |
++---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                           | Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.                                                 |
+|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  **ca_store**             | **Default value**  | wpk_root.pem                                                                                                                                                    |
+|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                           | **Allowed values** | Path to root CA certificate                                                                                                                                     |
++---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 Sample Configuration
 --------------------
 
@@ -159,4 +182,8 @@ Sample Configuration
       <notification_wait_start>60s</notification_wait_start>
       <notification_wait_factor>4</notification_wait_factor>
       <notification_wait_max>2h</notification_wait_max>
+      <ca_verification>
+        <enabled>yes</enabled>
+        <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+      </ca_verification>
     </agent-upgrade>
