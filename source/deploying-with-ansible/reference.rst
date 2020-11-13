@@ -1507,6 +1507,7 @@ Wazuh Agent
 
   .. code-block:: yaml
 
+    wazuh_agent_config:
       log_format: 'plain'
       syscheck:
         frequency: 43200
