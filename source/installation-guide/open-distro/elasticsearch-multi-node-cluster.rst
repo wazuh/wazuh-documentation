@@ -10,7 +10,7 @@ Elasticsearch
 
 Open Distro for Elasticsearch is an open source distribution of Elasticsearch, a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other additional features.
 
-This document will explain how to install Elasticsearch cluster, the user can select the cluster mode between single-node or multi-node. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
+This document will explain how to install an Elasticsearch cluster, the user can select the cluster mode between single-node or multi-node. For resilience in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster.
 
 .. note:: Alternatively, if you wish to do this installation in an automated way, you can find the instructions :ref:`here <unattended_distributed_elasticsearch>`.
 
@@ -60,7 +60,7 @@ Elastic Stack can be installed as a single-node or as multi-node cluster. Kibana
 
 A 64-bit operating system is required.  
 
-Regarding the disk space requirements, the amount of data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on an Elasticsearch server depending on the type of monitored endpoints. 
+Regarding the disk space requirements, the amount of expected data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on an Elasticsearch server depending on the type of monitored endpoints. 
 
 
 +-------------------------------------------------+-----+-----------------------------+

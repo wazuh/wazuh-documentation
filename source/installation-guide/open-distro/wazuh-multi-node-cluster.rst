@@ -175,20 +175,27 @@ Choose the cluster mode between single-node or multi-node:
     #. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 
-    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-        .. include:: ../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+        .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+    #. Run the following command to check if the Wazuh manager is active: 
+
+        .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 
     **Worker node:**
 
     #. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
+    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
 
-    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+        .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-        .. include:: ../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
+    #. Run the following command to check if the Wazuh manager is active: 
 
+        .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+  
     #. .. include:: ../../_templates/installations/wazuh/common/check_wazuh_cluster.rst 
 
 
