@@ -66,7 +66,7 @@ On your Wazuh Cloud Console:
 What are the available payment methods on Wazuh Cloud Service?
 --------------------------------------------------------------
 
-.. TODO: Answer
+Credit or debit card payment is supported. Find supported cards from our certified payment processor `here <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
 
 Who can I contact for more information?
 ---------------------------------------
@@ -78,12 +78,12 @@ For info related to your environments address us on the **Help** section of your
 When is my credit card charged?
 -------------------------------
 
-.. TODO: Answer
+Each environment is charged monthly, according to the environment's beginning date.
 
 Can I get a refund?
 -------------------
 
-.. TODO: Answer
+Charges are non-refundable, but you will if you want to cease using an environment we will not charge for it as soon as it is canceled. For any special considerations regarding a refund, contact us through the **Help** section selecting the **Billing issue** category.
 
 What is included in my paid Wazuh Cloud Service environment?
 ------------------------------------------------------------

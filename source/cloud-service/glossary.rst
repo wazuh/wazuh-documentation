@@ -74,12 +74,12 @@ Data available on the Wazuh WUI. It is formed by all the generated alerts from t
 **Region**
 ^^^^^^^^^^
 
-An environment can be set up in different regions such as US east, US west, Europe or Asia Pacific. A region should be chosen according to user's preferences.
+An environment can be set up in different regions such as US east (N. Virginia, Ohio), US west (Oregon), Europe (London, Frankfurt) or Asia Pacific (Singapore). A region should be chosen according to user's preferences.
 
-**Storage API**
+**RESTful API**
 ^^^^^^^^^^^^^^^
 
-Storage Enpoint from Wazuh Cloud's RESTful API used to access cold storage data. It can be used to retrieve data which is no longer available to check online using the WUI.
+API to interact with Wazuh Cloud Service. E.g. it can be used to access an environment's cold storage by using the Storage Endpoint.
 
 .. _cloud_glossary_tier:
 

@@ -11,9 +11,9 @@ Cloud Service
 Overview
 --------
 
-Discover our endpoint security monitoring solution delivered as a service: Wazuh Cloud Service
+Wazuh is a free and open source platform used for threat prevention, detection, and response. Discover our endpoint security monitoring solution delivered as a service: Wazuh Cloud Service.
 
-Find out what does Wazuh Cloud Service offer and how to manage it.
+Use Wazuh Cloud Service to grant protection for your workloads. Just connect your endpoints to a Wazuh environment, we will set the rest up for you.
 
 Getting started section offers a brief introduction to the service, its features, and a quick guide on how to use it. Learn more about Cloud environments on the subsequent sections.
 

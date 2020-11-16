@@ -41,7 +41,7 @@ You may :ref:`sign up for a free trial<cloud_getting_started_sign_up>` to test a
 Is it PCI DDS compliant?
 ------------------------
 
-Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. `Contact us <https://wazuh.com/cloud/>`_ if you want to request our AoC. Learn more about this `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
+Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. `Contact us <https://wazuh.com/cloud/>`_ if you want to know more about our AoC. Learn more about this `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
 
 How can I get support?
 ----------------------

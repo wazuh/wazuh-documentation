@@ -17,7 +17,6 @@ Billing details regarding your environment can be accessed and managed through t
       :includehidden:
       :maxdepth: 1
 
-      edit-user-settings
       add-billing-details
       update-billing
       billing-faq

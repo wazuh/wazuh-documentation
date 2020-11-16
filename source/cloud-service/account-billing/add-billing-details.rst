@@ -20,4 +20,4 @@ To add the billing details, on your Wazuh Cloud Console:
 
 4. Fill the form.
 
-5. Confirm the payment.
+5. Save the payment method.

@@ -10,9 +10,7 @@ Sign Up for a Trial
 
 To experience the benefits of Wazuh Cloud Service, start by signing up for a Trial
 
-.. TODO: add link to cloud console
-
-1. Sign up on Wazuh Cloud Console.
+1. Sign up on `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
 2. Click on  **Start your free trial** and create an :ref:`environment <cloud_glossary_environment>`.
 
@@ -24,9 +22,7 @@ To experience the benefits of Wazuh Cloud Service, start by signing up for a Tri
 
 3. Click on **View the summary** and confirm.
 
-.. TODO: Confirm how this process will 
-
-4. A pop-up will show you your environment's credentials, keep them safe as them as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
+4. Then, you will get your environment's credentials on a PDF file, keep them safe as them as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
 
 The free trial duration is 14 days. Once the trial period is over you will need to  :ref:`add your billing details <cloud_account_billing_details>` to keep using your environment. When your billing details are added your environment will keep al the data, agents and configurations that were made during the trial period.
 

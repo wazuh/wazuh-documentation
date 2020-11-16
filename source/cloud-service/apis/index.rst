@@ -32,5 +32,4 @@ Use the desired endpoint by making a request to it.
    .. toctree::
       :maxdepth: 1
 		 
-      api-examples
       reference

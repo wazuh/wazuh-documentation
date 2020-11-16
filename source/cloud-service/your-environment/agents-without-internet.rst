@@ -75,10 +75,10 @@ Follow these steps:
    .. code-block::
 
       WAZUH_MANAGER_IP=nginx_ip WAZUH_PROTOCOL="tcp" \
-      WAZUH_PASSWORD="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
-      yum install wazuh-agent-3.13.2-1
+      WAZUH_PASSWORD="xxxx" \
+      yum install wazuh-agent
       
-   On this example, mind replacing ``<cloud_id>`` with your password.
+   On this example, mind replacing ``<xxxx>`` with your actual password.
 
 Using AWS Private Link
 ----------------------
@@ -115,7 +115,7 @@ To do this:
    .. code-block::
 
       WAZUH_MANAGER_IP=vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
-      WAZUH_PASSWORD="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
-      yum install wazuh-agent-3.13.2-1
+      WAZUH_PASSWORD="xxxx" \
+      yum install wazuh-agent
 
-   On this example, mind replacing ``<cloud_id>`` with your password.
+   On this example, mind replacing ``<xxxx>`` with your actual password.

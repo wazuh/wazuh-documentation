@@ -73,7 +73,7 @@ No, data consumption is calculated only from primary shards, so you don't have t
 How do I get SSH access to my environment?
 ------------------------------------------
 
-You may manage your environment through the Console and your environment's WUI, SSH access is not allowed for security reasons. Only Wazuh team is able to access the environment.
+You may manage your environment through the Wazuh Cloud Console and your environment's WUI, SSH access is not allowed for security reasons. Only Wazuh team is able to access the environment.
 
 How can I update my environment?
 --------------------------------
@@ -85,9 +85,9 @@ How can I connect my agents without Internet access to my environment?
 
 Some aproaches to solve this issue are:
 
-- **Using a forwarding proxy:** Deploy an instance with NGINX in a public subnet with internet access and configure it to send it to to your environment. Then set the Wazuh Manager IP to the NGINX IP when installing Wazuh on that agent.
+- **Using a forwarding proxy:** Deploy an instance with NGINX in a public subnet with internet access and configure it to send it to to your environment. Then, set the Wazuh Manager IP to the NGINX IP when installing Wazuh on that agent.
 
-- **Using AWS Private Link:** If your agent is located in your AWS VPC open a ticket requesting your VPC endpoint service name. Then create a new Endpoint pointing to that endpoint service (AWS > VPC > Endpoints). Once it is created Wazuh will approve the connection and notify you when it is ready to use. Then you will be able to register your agent replacing the Wazuh Manager IP with your adquired endpoint's DNS.
+- **Using AWS Private Link:** If your agent is located in your AWS VPC, open a ticket requesting your VPC endpoint service name. Then create a new Endpoint pointing to that endpoint service (AWS > VPC > Endpoints). Once it is created, Wazuh will approve the connection and notify you when it is ready to use. Then, you will be able to register your agent replacing the Wazuh Manager IP with your adquired endpoint's DNS.
 
 Find a more detailed guide in our :ref:`Connect agents without Internet <cloud_your_environment_agents_without_internet>` section.
   
@@ -124,7 +124,7 @@ Do I have access to Wazuh API?
 You have access to the Dev tools through your WUI where you can use the API. Wazuh API is not exposed, but you may contact us through the **Help** section to allow Wazuh API access from an specific IP.
 
 
-Do I have access to or Elasticsearch API?
------------------------------------------
+Do I have access to Elasticsearch API?
+--------------------------------------
 
 Elasticsearch API is not accessible by default. In case you want to access it, address us through the **Help** section and we will authorize the connection from a specific IP. Then you will have access to ``GET`` methods of your Elasticsearch API.
