@@ -2033,6 +2033,10 @@ a[data-lightbox] img {
   margin-bottom: 2em;
 }
 
+.max-width-100 {
+  max-width: 100% !important;
+}
+
 [data-lightbox] {
   max-width: 800px;
   display: block;
