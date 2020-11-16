@@ -21,6 +21,7 @@ readInstances() {
 }
 
 generateCertificateconfiguration() {
+
     if [ ${cname} == "admin" ]; then
 
 		cat > ~/certs/$cname.conf <<- EOF
@@ -76,14 +77,18 @@ generateCertificateconfiguration() {
 
 generateRootCAcertificate() {
 
+    cd ~/certs
     eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj '/OU=Docu/O=Wazuh/L=California/' -days 3650 ${debug}"
 
 }
 
 generateAdmincertificate() {
-
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config csr.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile csr.conf -extensions v3_req -days 3650  ${debug}"
+    
+    cd ~/certs
+    cname="admin"
+    generateCertificateconfiguration
+    eval "openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config admin.conf -days 3650 ${debug}"
+    eval "openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile admin.conf -extensions v3_req -days 3650  ${debug}"
 
 }
 
@@ -100,13 +105,17 @@ generateElasticsearchcertificates() {
 }
 
 generateFilebeatcertificates() {
+
     eval "openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config filebeat.conf -days 3650 ${debug}"
     eval "openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile filebeat.conf -extensions v3_req -days 3650 ${debug}"
+
 }
 
 generateKibanacertificates() {
+
     eval "openssl req -new -nodes -newkey rsa:2048 -keyout kibana-key.pem -out kibana.csr -config kibana.conf -days 3650 ${debug}"
     eval "openssl x509 -req -in kibana.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out kibana.pem -extfile kibana.conf -extensions v3_req -days 3650 ${debug}"
+
 }
 
 main() {
@@ -163,7 +172,7 @@ main() {
 
         if [[ -n "${ca}" ]]; then
             generateRootCAcertificate
-            echo "Elasticsearch certificates created."
+            echo "Authority certificates created."
         fi                   
 
         if [[ -n "${celastic}" ]]; then
