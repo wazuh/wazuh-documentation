@@ -82,13 +82,13 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | Policy                      | Name                                                       | Target OS                     |
     +=============================+============================================================+===============================+
-    | cis_win2012r2               |  CIS benchmark for Windows 2012 R2                         | Windows Server 2012 R2        |
+    | cis_win2012r2               |  CIS Benchmark for Windows 2012 R2                         | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win10_enterprise        |  CIS benchmark for Windows 10 Enterprise (Release 1803)    | Windows 10                    |
+    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise (Release 1803)    | Windows 10                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win2016                 |  CIS benchmark for Windows Server 2016                     | Windows Server 2016           |
+    | cis_win2016                 |  CIS Benchmark for Windows Server 2016                     | Windows Server 2016           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win2019                 |  CIS benchmark for Windows Server 2019 RTM                 | Windows Server 2019           |
+    | cis_win2019                 |  CIS Benchmark for Windows Server 2019 RTM                 | Windows Server 2019           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -106,19 +106,19 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Systems               |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian7                 |  CIS benchmark for Debian/Linux 7                          | Debian 7 / Ubuntu 12          |
+    | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7 / Ubuntu 12          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian8                 |  CIS benchmark for Debian/Linux 8                          | Debian 8 / Ubuntu 14          |
+    | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8 / Ubuntu 14          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian9                 |  CIS benchmark for Debian/Linux 9                          | Debian 9 / Ubuntu 16          |
+    | cis_debian9                 |  CIS Benchmark for Debian/Linux 9                          | Debian 9 / Ubuntu 16          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_debian10                |  CIS benchmark for Debian/Linux 10                         | Debian 10 / Ubuntu 18         |
+    | cis_debian10                |  CIS Benchmark for Debian/Linux 10                         | Debian 10 / Ubuntu 18         |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles11_linux            |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles12_linux            |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_solaris11               |  CIS benchmark for Oracle Solaris 11                       | Solaris 11                    |
+    | cis_solaris11               |  CIS Benchmark for Oracle Solaris 11                       | Solaris 11                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_unix_audit              |  Benchmark for Linux auditing                              | Unix based OS                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -132,9 +132,9 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apache_24               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_mysql5-6_community      |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
+    | cis_mysql5-6_community      |  CIS Benchmark for Oracle MySQL Community Server 5.6       | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_mysql5-6_enterprise     |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
+    | cis_mysql5-6_enterprise     |  CIS Benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sqlserver2012           |  CIS Microsoft SQL Server 2012                             | Microsoft SQL Server 2012     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
