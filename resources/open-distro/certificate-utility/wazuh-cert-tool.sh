@@ -77,18 +77,16 @@ generateCertificateconfiguration() {
 
 generateRootCAcertificate() {
 
-    cd ~/certs
-    eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout root-ca.key -out root-ca.pem -batch -subj '/OU=Docu/O=Wazuh/L=California/' -days 3650 ${debug}"
+    eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout ~/certs/root-ca.key -out ~/certs/root-ca.pem -batch -subj '/OU=Docu/O=Wazuh/L=California/' -days 3650 ${debug}"
 
 }
 
 generateAdmincertificate() {
     
-    cd ~/certs
     cname="admin"
     generateCertificateconfiguration
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout admin-key.pem -out admin.csr -config admin.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out admin.pem -extfile admin.conf -extensions v3_req -days 3650  ${debug}"
+    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/admin-key.pem -out ~/certs/admin.csr -config ~/certs/admin.conf -days 3650 ${debug}"
+    eval "openssl x509 -req -in ~/certs/admin.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/admin.pem -extfile ~/certs/admin.conf -extensions v3_req -days 3650  ${debug}"
 
 }
 
@@ -98,23 +96,31 @@ generateElasticsearchcertificates() {
     rt="# Elasticsearch nodes"
     ens="${enl//$rt}"
 
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout elasticsearch-key.pem -out elasticsearch.csr -config elasticsearch.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in elasticsearch.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out elasticsearch.pem -extfile elasticsearch.conf -extensions v3_req -days 3650 ${debug}"
-    eval "chmod 444 /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
+    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+    eval "openssl x509 -req -in ~/certs/${cname}.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+    eval "chmod 444 /etc/${cname}/certs/${cname}-key.pem ${debug}"
 
 }
 
 generateFilebeatcertificates() {
 
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout filebeat-key.pem -out filebeat.csr -config filebeat.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in filebeat.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out filebeat.pem -extfile filebeat.conf -extensions v3_req -days 3650 ${debug}"
+    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+    eval "openssl x509 -req -in ~/certs/${cname}.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
 
 }
 
 generateKibanacertificates() {
 
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout kibana-key.pem -out kibana.csr -config kibana.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in kibana.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out kibana.pem -extfile kibana.conf -extensions v3_req -days 3650 ${debug}"
+    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+    eval "openssl x509 -req -in ~/certs/${cname}.csr -CA root-ca.pem -CAkey root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+
+}
+
+cleanFiles() {
+
+    eval "rm -rf ~/certs/*.csr ${debug}"
+    eval "rm -rf ~/certs/*.srl ${debug}"
+    eval "rm -rf ~/certs/*.conf ${debug}"
 
 }
 
@@ -197,6 +203,7 @@ main() {
         generateElasticsearchcertificates
         generateFilebeatcertificates
         generateKibanacertificates
+        cleanFiles
     fi
 
 }
