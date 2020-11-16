@@ -30,15 +30,20 @@
         # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/single-node/search-guard.yml
 
 
-      After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP. More than one IP can be specified (one entry per line):
+      After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the values ``<elasticsearch_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
+          # Nodes certificates
           nodes:
             - name: elasticsearch
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_IP>
+              dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_IP>
+            - name: kibana
+              dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US     
+              ip:
+                - <kibana_ip>    
 
     .. group-tab:: Wazuh multi-node cluster
 
@@ -47,15 +52,20 @@
         # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/single-node/search-guard-multi-node.yml
 
 
-      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` with the corresponding Elasticsearch's IP in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
+      After downloading the configuration file, replace the value ``<elasticsearch_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
+          # Nodes certificates
           nodes:
             - name: elasticsearch
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_IP>
+              dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
+              ip: 
+                - <elasticsearch_IP>
+            - name: kibana
+              dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US     
+              ip:
+                - <kibana_ip> 
 
       There should be as many ``filebeat-X`` sections as Wazuh servers in the installation:
 
