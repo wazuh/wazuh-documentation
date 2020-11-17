@@ -30,23 +30,28 @@
         # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/multi-node/search-guard.yml
 
 
-      After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs. More than one IP can be specified (one entry per line):
+      After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the values ``<elasticsearch_X_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
+          # Nodes certificates
           nodes:
             - name: node-1
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_X_IP>
+              dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_1_IP>
             - name: node-2
-            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_X_IP>
+              dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_2_IP>
             - name: node-3
-            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_X_IP>
+              dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_3_IP>
+            - name: kibana
+              dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US      
+              ip:
+                - <kibana_ip>   
 
     .. group-tab:: Wazuh multi-node cluster
 
@@ -55,25 +60,31 @@
         # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/multi-node/search-guard-multi-node.yml
 
 
-      After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` with the corresponding Elasticsearch's IPs in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
+      After downloading the configuration file, replace the values ``<elasticsearch_X_IP>`` and ``<kibana_ip>`` with the corresponding IP addresses in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):
 
         .. code-block:: yaml
 
+          # Nodes certificates
           nodes:
             - name: node-1
-            dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_X_IP>
+              dn: CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_1_IP>
             - name: node-2
-            dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_X_IP>
+              dn: CN=node-2,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_2_IP>
             - name: node-3
-            dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
-            ip:
-              - <elasticsearch_X_IP>
+              dn: CN=node-3,OU=Docu,O=Wazuh,L=California,C=US
+              ip:
+                - <elasticsearch_3_IP>
+            - name: kibana
+              dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US      
+              ip:
+                - <kibana_ip>   
 
-      There should as many ``filebeat-X`` sections as Wazuh servers will be involved in the installation:
+
+      There should as many ``filebeat-X`` sections as Wazuh servers in the installation:
 
         .. code-block:: yaml
 
@@ -105,7 +116,7 @@
 
 * Copy ``certs.tar`` to all the instances of the distributed deployment. This can be done by using, for example, ``scp``. 
 
-* Removed unnecessary files:
+* Remove unnecessary files:
 
   .. code-block:: console
 
