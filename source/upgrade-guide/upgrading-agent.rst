@@ -260,7 +260,7 @@ To perform the upgrade locally, follow the instructions for the operating system
             # /var/ossec/bin/ossec-control start
 
 
-Once the Wazuh agent is upgraded, if it still uses UPD, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:
+Once the Wazuh agent is upgraded, if it still uses UDP, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:
 
 .. code-block:: console
   :emphasize-lines: 6
