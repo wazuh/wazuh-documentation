@@ -337,7 +337,7 @@ copyCertificates() {
 
     if [ -n "$single" ]
     then
-        eval "unzip ~/certs.zip -d ~/certs $debug"
+        eval "unzip -o ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
         eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/elasticsearch/certs/ $debug"
         eval "mv ~/certs/${iname}/${iname}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
@@ -348,7 +348,7 @@ copyCertificates() {
         eval "zip -u ~/certs.zip config.yml $debug"
         eval "cp ~/config.yml ~/certs/ $debug"        
     else
-        eval "unzip ~/certs.zip -d ~/certs $debug"
+        eval "unzip -o ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
         eval "cp -R ~/certs/ca/ ~/certs/${IMN[pos]}/* /etc/elasticsearch/certs/ $debug"
         eval "mv ~/certs/${IMN[pos]}/${IMN[pos]}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
