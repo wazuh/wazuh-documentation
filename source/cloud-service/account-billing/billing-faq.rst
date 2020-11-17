@@ -66,7 +66,7 @@ On your Wazuh Cloud Console:
 What are the available payment methods on Wazuh Cloud Service?
 --------------------------------------------------------------
 
-Credit or debit card payment is supported. Find supported cards from our certified payment processor `here <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
+Credit or debit card payment is supported. Find supported cards from our certified payment processor `in this list <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
 
 Who can I contact for more information?
 ---------------------------------------

@@ -1,9 +1,9 @@
 openapi: 3.0.0
 servers:
 - url: https://api.cloud.wazuh.com/v1
-  description: Public Wazuh Cloud API
+  description: Wazuh Cloud API
 info:
-  title: "Public Wazuh Cloud API"
+  title: Wazuh Cloud API
   description: "Manage your Wazuh Cloud account"
   version: "1"
 paths:
@@ -26,16 +26,14 @@ paths:
               $ref: "#/components/schemas/RequestToken"
 
       x-amazon-apigateway-integration:
-        credentials: arn:aws:iam::242503654864:role/cloud-dev-lambda-api
+        credentials: arn:aws:iam::#{AWS::AccountId}:role/cloud-dev-lambda-api # TODO change role name
         uri:
           Fn::Join:
             - ""
             - - "arn:aws:apigateway:"
               - Ref: AWS::Region
               - :lambda:path/2015-03-31/functions/
-              - Fn::GetAtt:
-                  - AppLambdaFunction
-                  - Arn
+              - Fn::GetAtt: ["AppLambdaFunction", "Arn"]
               - /invocations
         passthroughBehavior: when_no_match
         httpMethod: POST

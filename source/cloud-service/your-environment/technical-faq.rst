@@ -38,7 +38,7 @@ While configuring an environment some questions may arise. This list gathers som
 
 - `Do I have access to Wazuh API?`_
 
-- `Do I have access to or Elasticsearch API?`_
+- `Do I have access to Elasticsearch API?`_
 
 How can I send data to my environment?
 --------------------------------------

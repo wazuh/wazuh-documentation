@@ -22,7 +22,7 @@ Here is list of terms related to Cloud service
 
 - `Region`_
 
-- `Storage API`_
+- `RESTful API`_
   
 - `Tier`_
 
