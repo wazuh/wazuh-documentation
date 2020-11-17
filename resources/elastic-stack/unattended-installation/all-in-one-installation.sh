@@ -218,13 +218,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install elasticsearch-7.9.2 -y -q $debug"
+        eval "yum install elasticsearch-7.9.3 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.2 -y -q $debug"
+        eval "apt-get install elasticsearch=7.9.3 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.2 $debug"
+        eval "zypper -n install elasticsearch-7.9.3 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -290,13 +290,13 @@ installFilebeat() {
     logger "Installing Filebeat..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install filebeat-7.9.2 -y -q  $debug"    
+        eval "yum install filebeat-7.9.3 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.9.2 $debug"
+        eval "zypper -n install filebeat-7.9.3 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.9.2 -y -q  $debug"
+        eval "apt-get install filebeat=7.9.3 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -327,13 +327,13 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install kibana-7.9.2 -y -q  $debug"    
+        eval "yum install kibana-7.9.3 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.2 $debug"
+        eval "zypper -n install kibana-7.9.3 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install kibana=7.9.2 -y -q  $debug"
+        eval "apt-get install kibana=7.9.3 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -344,7 +344,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.2-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.3-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
