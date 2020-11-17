@@ -137,7 +137,7 @@ Install Open Distro for Elasticsearch:
 Elasticsearch configuration
 """""""""""""""""""""""""""
 
-To configure Elasticsearch download the following file ``/etc/elasticsearch/elasticsearch.yml``:
+Select the cluster mode between single-node or multi-node and download the Elasticsearch configuration file ``/etc/elasticsearch/elasticsearch.yml``:
 
 .. tabs::
 
