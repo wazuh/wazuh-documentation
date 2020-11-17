@@ -10,7 +10,7 @@ wazuh-server:
     ip:
       - node-IP      
 
-# Wazuh Kibana node
+# Kibana node
 kibana:
   - name: <node-name>
     ip:
