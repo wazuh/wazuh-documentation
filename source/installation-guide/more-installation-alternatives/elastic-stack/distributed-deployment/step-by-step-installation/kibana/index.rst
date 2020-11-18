@@ -13,6 +13,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 .. note:: Root user privileges are required to run all the commands described below.
 
+Prerequisites
+~~~~~~~~~~~~~
+
+Some extra packages are needed for the installation, such us ``curl`` or ``unzip``, that will be used in further steps: 
+
+.. include:: ../../../../../../_templates/installations/basic/before_installation_elastic.rst
+
+
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
