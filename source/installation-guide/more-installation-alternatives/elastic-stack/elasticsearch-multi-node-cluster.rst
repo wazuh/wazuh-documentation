@@ -131,57 +131,42 @@ Elasticsearch installation and configuration
 
 Install the Elasticsearch package:
 
-    .. tabs::
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
-
-
-
-      .. group-tab:: APT
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
-
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
-
-
-
-Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
-
-
 .. tabs::
 
-
-  .. group-tab:: Single-node 
-
-
-    .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
-   
+  .. group-tab:: Yum
 
 
-  .. group-tab:: Multi-node 
+    .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
 
 
-    .. include:: ../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_initial_node.rst
 
+  .. group-tab:: APT
+
+
+    .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
  
 
-Certificates creation and deployment
-""""""""""""""""""""""""""""""""""""
+Select the cluster mode between single-node or multi-node: 
 
 .. tabs::
 
 
   .. group-tab:: Single-node 
 
+     
+
+     .. include:: ../../../_templates/installations/basic/elastic/common/elastic-single-node/configure_elasticsearch.rst
+     
+     .. raw:: html
+
+        <h4>Certificates creation and deployment</h4>
 
      #. This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
@@ -211,6 +196,13 @@ Certificates creation and deployment
 
   .. group-tab:: Multi-node 
 
+     Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+
+     .. include:: ../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_initial_node.rst
+
+     .. raw:: html
+
+        <h4>Certificates creation and deployment</h4>
 
      #.  This step implies the selection of the Wazuh cluster mode. Choose between ``Wazuh single-node cluster``, if having only one Wazuh server, and ``Wazuh multi-node cluster`` in case of having two or more Wazuh servers.
 
@@ -278,29 +270,30 @@ Elasticsearch installation and configuration
 
 #. Install the Elasticsearch package:
 
-  .. tabs::
+.. tabs::
 
-    .. group-tab:: Yum
-
-
-      .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
+  .. group-tab:: Yum
 
 
-
-    .. group-tab:: APT
-
-
-      .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/yum/install_elasticsearch.rst
 
 
 
-    .. group-tab:: ZYpp
+  .. group-tab:: APT
 
 
-      .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
+    .. include:: ../../../_templates/installations/basic/elastic/deb/install_elasticsearch.rst
 
 
- Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../_templates/installations/basic/elastic/zypp/install_elasticsearch.rst
+
+
+
+Once Elasticsearch is installed it has to be configured by downloading and editing the file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
 .. include:: ../../../_templates/installations/basic/elastic/common/elastic-multi-node/configure_elasticsearch_subsequent_nodes.rst
 
