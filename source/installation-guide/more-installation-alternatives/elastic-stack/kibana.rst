@@ -14,6 +14,12 @@ This section will explain how to install Kibana step-by-step. Alternatively, if 
 
 .. note:: Root user privileges are required to run all the commands described below.
 
+Prerequisites
+~~~~~~~~~~~~~
+
+.. include:: ../../../_templates/installations/basic/before_installation_elastic.rst
+
+
 Adding the Elastic Stack repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
