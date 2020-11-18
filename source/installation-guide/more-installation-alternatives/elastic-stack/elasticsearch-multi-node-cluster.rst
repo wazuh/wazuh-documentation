@@ -78,8 +78,6 @@ For example for an environment with 80 workstations, 10 servers and 10 networks 
 Installing Elasticsearch
 ------------------------
 
-.. note:: Root user privileges are necessary to execute all the commands described below.
-
 The installation process for a multi-node cluster will be explained in three parts. The first one refers to the configuration of the initial node, in which the certificates that will be deployed to the subsequent nodes are generated. 
 
 The second part will explain how to configure the remaining nodes of the cluster. Finally, the third part provides instructions for initializing the Elasticsearch cluster and verifying that everything is working properly.  
