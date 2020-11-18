@@ -31,6 +31,8 @@ Options
 - `age`_
 - `exclude`_
 - `reconnect_time`_
+- `multiline`_
+
 
 location
 ^^^^^^^^
@@ -454,6 +456,47 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 .. note::
 
     This option only applies when the ``log_format`` is ``eventchannel``.
+
+multiline
+^^^^^^^^^
+
++--------------------+------------------------------+
+| **Default value**  | n/a                          |
++--------------------+------------------------------+
+| **Allowed values** | Any `PCRE2 regular expression<../../ruleset/ruleset-xml-syntax/regex.html>`_ |
++--------------------+------------------------------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+--------------+---------------+
+| Attribute   |              Description              | Value range  | Default value |
++=============+=======================================+==============+===============+
+| **match**   | allows to set how regex will handle   |   start      |    start      |
+|             | regex match                           +--------------+               |
+|             |                                       |   end        |               |
+|             |                                       +--------------+               |
+|             |                                       |   all        |               |
++-------------+---------------------------------------+--------------+---------------+
+| **replace** | allows to replace newline character   |   space      |    start      |
+|             | with other one                        +--------------+               |
+|             |                                       |   tab        |               |
+|             |                                       +--------------+               |
+|             |                                       |   none       |               |
++-------------+---------------------------------------+--------------+---------------+
+
+.. note::
+    This option only applies when the ``log_format`` is ``syslog``.
+
+For example, we may want to read a Python traceback output as one single log, replacing newline with spaces
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/my_python_app.log</location>
+      <multiline replace="space">^Traceback</multiline>
+   </localfile>
+
 
 Configuration examples
 ----------------------
