@@ -25,9 +25,7 @@ From the Wazuh Cloud Console an API key can be generated.
 Using the API
 -------------
 
-Use the desired endpoint by making a request to it.
-
-.. topic:: Contents
+Use the desired endpoint by making a request to it. The following reference describes the requests which can be done.
 
    .. toctree::
       :maxdepth: 1
