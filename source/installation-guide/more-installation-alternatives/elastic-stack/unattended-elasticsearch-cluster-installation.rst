@@ -8,7 +8,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. 
+This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. 
 
 Requirements
 ------------

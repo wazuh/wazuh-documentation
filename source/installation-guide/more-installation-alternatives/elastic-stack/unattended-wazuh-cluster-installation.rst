@@ -7,7 +7,7 @@
 Wazuh server unattended installation
 ====================================
 
-This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. 
+This section will explain how to install the Wazuh manager and Filebeat using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. 
 
 Requirements
 ------------
