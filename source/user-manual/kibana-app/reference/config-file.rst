@@ -45,6 +45,7 @@ The configuration file reference is organized by sections:
     - `checks.setup`_
     - `checks.metaFields`_
     - `checks.timeFilter`_
+    - `checks.fields`_
     
 `Extensions`_
     - `extensions.pci`_
@@ -198,11 +199,11 @@ enrollment.dns
 
 Set the variable WAZUH_REGISTRATION_SERVER in agents deployment.
 
-+--------------------+----+
-| **Default value**  | '' |
-+--------------------+----+
-| **Allowed values** | '' |
-+--------------------+----+
++--------------------+--------+
+| **Default value**  | ''     |
++--------------------+--------+
+| **Allowed values** | String |
++--------------------+--------+
 
 Monitoring
 ----------
@@ -267,11 +268,11 @@ cron.prefix
 
 Customize the index prefix of predefined jobs. This change is not retroactive, if you change it new indexes will be created
 
-+--------------------+----------------------+
-| **Default value**  | wazuh                |
-+--------------------+----------------------+
-| **Allowed values** | String. Eg: ["test”] |
-+--------------------+----------------------+
++--------------------+--------------------+
+| **Default value**  | wazuh              |
++--------------------+--------------------+
+| **Allowed values** | String. Eg: "test” |
++--------------------+--------------------+
 
 Statistics
 ----------
@@ -304,11 +305,11 @@ cron.statistics.interval
 
 Define the frequency of task execution using cron schedule expressions.
 
-+--------------------+----------------------------+
-| **Default value**  | 0                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 0 |
-+--------------------+----------------------------+
++--------------------+--------------------------+
+| **Default value**  | 0 * /5 * * * *           |
++--------------------+--------------------------+
+| **Allowed values** | cron schedule expression |
++--------------------+--------------------------+
 
 cron.statistics.index.name
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -379,10 +380,21 @@ Enable or disable the setup health check when opening the app.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
+checks.fields
+^^^^^^^^^^^^^
+
+Enable or disable the known fields health check when opening the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
 checks.metaFields
 ^^^^^^^^^^^^^^^^^
 
-Enable or disable the known metafields health check when opening the app.
+Change Kibana default setting for fields.
 
 +--------------------+------------+
 | **Default value**  | true       |
@@ -560,16 +572,6 @@ Advanced index options
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
-wazuh-version.shards
-^^^^^^^^^^^^^^^^^^^^
-
-Define the number of shards to use for the ``wazuh-version`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
-+--------------------+----------------------------+
 
 wazuh-version.replicas
 ^^^^^^^^^^^^^^^^^^^^^^
