@@ -18,9 +18,9 @@ The configuration file reference is organized by sections:
     - `ip.selector`_
     - `ip.ignore`_
     - `xpack.rbac.enabled`_
-    - `admin`_
     - `logs.level`_
     - `hideManagerAlerts`_
+    - `enrollment.dns`_
 
 `Monitoring`_
     - `wazuh.monitoring.enabled`_
@@ -28,13 +28,24 @@ The configuration file reference is organized by sections:
     - `wazuh.monitoring.pattern`_
     - `wazuh.monitoring.creation`_
 
+`Cron`_
+    - `cron.prefix`_
+
+`Statistics`_
+    - `cron.statistics.status`_
+    - `cron.statistics.apis`_
+    - `cron.statistics.interval`_
+    - `cron.statistics.index.name`_
+    - `cron.statistics.index.creation`_
+
 `Checks`_
     - `checks.pattern`_
     - `checks.template`_
     - `checks.api`_
     - `checks.setup`_
-    - `checks.fields`_
-
+    - `checks.metaFields`_
+    - `checks.timeFilter`_
+    
 `Extensions`_
     - `extensions.pci`_
     - `extensions.gdpr`_
@@ -44,10 +55,13 @@ The configuration file reference is organized by sections:
     - `extensions.virustotal`_
     - `extensions.osquery`_
     - `extensions.docker`_
+    - `extensions.hipaa`_
+    - `extensions.nist`_
+    - `extensions.tsc`_
+    - `extensions.oscap`_
+    - `extensions.gcp`_
 
 `Advanced index options`_
-    - `wazuh-version.shards`_
-    - `wazuh-version.replicas`_
     - `wazuh.monitoring.shards`_
     - `wazuh.monitoring.replicas`_
 
@@ -65,8 +79,9 @@ Defines the list of APIs to connect with your Wazuh managers.
         - <id>:
             url: http(s)://<url>
             port: <port>
-            user: <username>
+            username: <username>
             password: <password>
+            run_as: <true|false>
 
 .. note::
 
@@ -80,13 +95,15 @@ This is an example of a multi-host configuration:
         - wazuh_prod:
             url: https://wazuh.com
             port: 55000
-            user: foo
-            password: secret_password
+            username: wazuh
+            password: wazuh
+            run_as: false
         - wazuh_test:
             url: https://localhost
             port: 55000
-            user: foo
-            password: bar
+            username: wazuh
+            password: wazuh
+            run_as: false
 
 pattern
 ^^^^^^^
@@ -105,7 +122,7 @@ timeout
 Defines the maximum time the app will wait for an API response when making requests to it. It will be ignored if the value is set under 1500 milliseconds.
 
 +--------------------+-------------------------------+
-| **Default value**  | 8000 (milliseconds)           |
+| **Default value**  | 20000 (milliseconds)          |
 +--------------------+-------------------------------+
 | **Allowed values** | Any number starting from 1500 |
 +--------------------+-------------------------------+
@@ -115,11 +132,11 @@ api.selector
 
 Defines if the user is allowed to change the selected API directly from the Wazuh app top menu.
 
-+--------------------+-------------------------------+
-| **Default value**  | false                         |
-+--------------------+-------------------------------+
-| **Allowed values** | true,false                    |
-+--------------------+-------------------------------+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
 
 ip.selector
 ^^^^^^^^^^^
@@ -154,17 +171,6 @@ Enable or disable X-Pack RBAC security capabilities when using the app.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-admin
-^^^^^
-
-Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the :ref:`Dev tools <kibana_dev_tools>` tab.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
 logs.level
 ^^^^^^^^^^
 
@@ -186,6 +192,17 @@ Hide the manager's alerts in the dashboard visualizations.
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
+
+enrollment.dns
+^^^^^^^^^^^^^^
+
+Set the variable WAZUH_REGISTRATION_SERVER in agents deployment.
+
++--------------------+----+
+| **Default value**  | '' |
++--------------------+----+
+| **Allowed values** | '' |
++--------------------+----+
 
 Monitoring
 ----------
@@ -242,6 +259,79 @@ Configure wazuh-monitoring-* indices custom creation interval.
 | **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly) |
 +--------------------+------------------------------------------------+
 
+Cron
+----
+
+cron.prefix
+^^^^^^^^^^^
+
+Customize the index prefix of predefined jobs. This change is not retroactive, if you change it new indexes will be created
+
++--------------------+----------------------+
+| **Default value**  | wazuh                |
++--------------------+----------------------+
+| **Allowed values** | String. Eg: ["test”] |
++--------------------+----------------------+
+
+Statistics
+----------
+
+cron.statistics.status
+^^^^^^^^^^^^^^^^^^^^^^
+
+Custom setting to enable/disable statistics tasks
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+cron.statistics.apis
+^^^^^^^^^^^^^^^^^^^^
+
+Enter the ID of the APIs you want to save data from, leave this empty to run
+the task on all configured APIs
+
++--------------------+----+
+| **Default value**  | [] |
++--------------------+----+
+| **Allowed values** | [] |
++--------------------+----+
+
+cron.statistics.interval
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the frequency of task execution using cron schedule expressions.
+
++--------------------+----------------------------+
+| **Default value**  | 0                          |
++--------------------+----------------------------+
+| **Allowed values** | Any number starting from 0 |
++--------------------+----------------------------+
+
+cron.statistics.index.name
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the name of the index in which the documents are to be saved.
+
++--------------------+------------+
+| **Default value**  | statistics |
++--------------------+------------+
+| **Allowed values** | []         |
++--------------------+------------+
+
+cron.statistics.index.creation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the interval in which the index will be created.
+
++--------------------+------------------------------------------------+
+| **Default value**  | w                                              |
++--------------------+------------------------------------------------+
+| **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly) |
++--------------------+------------------------------------------------+
+
 Checks
 ------
 
@@ -289,10 +379,21 @@ Enable or disable the setup health check when opening the app.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-checks.fields
-^^^^^^^^^^^^^
+checks.metaFields
+^^^^^^^^^^^^^^^^^
 
-Enable or disable the known fields health check when opening the app.
+Enable or disable the known metafields health check when opening the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+checks.timeFilter
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the time filter seting to 24h health check when opening the app.
 
 +--------------------+------------+
 | **Default value**  | true       |
@@ -388,6 +489,61 @@ extensions.docker
 ^^^^^^^^^^^^^^^^^
 
 Enable or disable the Docker listener tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.hipaa
+^^^^^^^^^^^^^^^^
+
+Enable or disable the hipaa listener tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.nist
+^^^^^^^^^^^^^^^
+
+Enable or disable the nist listener tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.tsc
+^^^^^^^^^^^^^^
+
+Enable or disable the tsc listener tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.oscap
+^^^^^^^^^^^^^^^^
+
+Enable or disable the oscap listener tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.gcp
+^^^^^^^^^^^^^^
+
+Enable or disable the gcp listener tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |
