@@ -134,36 +134,21 @@ Install Open Distro for Elasticsearch:
 
 .. include:: ../../_templates/installations/elastic/common/install_elastic.rst
 
-Elasticsearch configuration
-"""""""""""""""""""""""""""
 
-Select the cluster mode between single-node or multi-node and download the Elasticsearch configuration file ``/etc/elasticsearch/elasticsearch.yml``:
+
+Select the cluster mode between single-node or multi-node:
+
 
 .. tabs::
 
 
   .. group-tab:: Single-node 
 
+     .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
 
-    .. include:: ../../_templates/installations/elastic/common/elastic-single-node/configure_elasticsearch.rst
-   
+     .. raw:: html
 
-
-  .. group-tab:: Multi-node 
-
-
-    .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
-
-
-
-Certificates creation and deployment
-""""""""""""""""""""""""""""""""""""
-
-.. tabs::
-
-
-  .. group-tab:: Single-node 
-
+        <h4>Certificates creation and deployment</h4>
 
    #. Remove the demo certificates:
 
@@ -181,6 +166,12 @@ Certificates creation and deployment
 
   .. group-tab:: Multi-node 
 
+
+     .. include:: ../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
+
+     .. raw:: html
+
+          <h4>Certificates creation and deployment</h4>
 
      #. Remove the demo certificates:
 
