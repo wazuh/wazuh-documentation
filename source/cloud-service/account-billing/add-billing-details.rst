@@ -8,7 +8,7 @@ Add your billing details
 .. meta::
   :description: Learn how to add your billing details. 
 
-In order to use environment beyond the trial period, adding billing details will be required.
+In order to use an environment beyond the trial period, adding billing details will be required.
 
 To add the billing details, on your Wazuh Cloud Console:
 

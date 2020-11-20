@@ -8,7 +8,7 @@ Cancel environment
 .. meta::
   :description: Learn how to cancel an environment. 
 
-Your environment will be automatically renewed monthly. In case you want to stop renewing that environment, this can be done on the Wazuh Cloud Console:
+Once you have :ref:`added your billing details <cloud_account_billing_details>`, your environment will be automatically renewed monthly. In case you want to stop renewing that environment, this can be done on the Wazuh Cloud Console:
 
 1. Go to your environment list.
 

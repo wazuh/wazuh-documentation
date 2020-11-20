@@ -17,7 +17,7 @@ Even if an agent doesn't have Internet access, we provide different approaches t
 Using a forwarding proxy
 ------------------------
 
-It is possible to access Wazuh Cloud Service using an NGINX forwarding proxy. Eventually, the resulting environment will have the following structure.
+It is possible to access Wazuh Cloud Service using an NGINX forwarding proxy. Eventually, the resulting environment will have the following structure:
 
 .. thumbnail:: ../../images/cloud-service/nginx-scheme.png
     :align: center
@@ -68,7 +68,7 @@ Follow these steps:
 	
    3. Restart NGINX with: ``systemctl restart nginx``
 
-   4. Register your agent following the instructions but replacing the WAZUH_MANAGER_IP value with the NGINX instance IP.
+   4. Register your agent following the instructions but replacing the *WAZUH_MANAGER_IP* (``nginx_ip``) value with the NGINX instance IP.
 
    Example:
 
@@ -106,7 +106,7 @@ To do this:
 
 4. After the endpoint's creation, Wazuh will approve the connection and notify you when it is ready to use.
 
-5. Once the endpoint has been approved, you can register your agent following the instructions but replacing the ``WAZUH_MANAGER_IP`` value with the endpoint's DNS.
+5. Once the endpoint has been approved, you can register your agent following the instructions but replacing the *WAZUH_MANAGER_IP* (``vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com``) value with the endpoint's DNS.
 
    If your agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service.
 

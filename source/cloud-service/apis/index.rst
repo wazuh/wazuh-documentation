@@ -8,7 +8,7 @@ RESTful API
 .. meta::
   :description: Learn about Wazuh Cloud RESTful API
 
-Wazuh Cloud Service provides an open source RESTful API that allows for interaction with its environments from a web browser, command line tool like cURL or any script or program able to make web requests.
+Wazuh Cloud Service provides a RESTful API that allows interaction with your environments from a command line tool like cURL or any script or program able to make HTTP requests.
 
 .. _cloud_apis_auth:
 

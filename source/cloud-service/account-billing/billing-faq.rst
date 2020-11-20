@@ -10,7 +10,7 @@ Billing FAQ
 
 This list provides answers for some of the Frequently Asked Questions regarding Wazuh Cloud Service billing.
 
-- `Can I estimate how much Wazuh Cloud Service will cost?`_
+- `Can I estimate how much will Wazuh Cloud Service cost?`_
 
 - `Where can I see a detailed view of my consumption?`_
 
@@ -26,7 +26,7 @@ This list provides answers for some of the Frequently Asked Questions regarding 
 
 
   
-Can I estimate how much Wazuh Cloud Service will cost?
+Can I estimate how much will Wazuh Cloud Service cost?
 ------------------------------------------------------
 
 Yes, you can get an estimation of the Wazuh Cloud data tier on the `Wazuh Cloud estimation tool <https://wazuh.com/cloud/#pricing>`_.
@@ -73,7 +73,7 @@ Who can I contact for more information?
 
 For general purpose you can fill the form `here <https://wazuh.com/cloud/>`_.
 
-For info related to your environments address us on the **Help** section of your Wazuh Cloud Console.
+For info related to your environments, address us on the **Help** section of your Wazuh Cloud Console.
 
 When is my credit card charged?
 -------------------------------

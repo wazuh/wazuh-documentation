@@ -10,7 +10,7 @@ Accessing cold storage
 
 The cold storage is located in an AWS S3 bucket. Using the Wazuh Cloud API, you can generate a temporary AWS token that allows you to download your data using the Amazon S3 REST API.
 
-Next, the process of manually accessing cold storage is going to be described, but a script is provided on the `Automation of the access`_ section to make this configuration automatically. Take a look at the `Filename format`_ section to understand how your information is stored.
+Prior to describing the process of manually accessing cold storage, a script is provided on the `Automation of the access`_ section to easily extract it after receiving the AWS token. Take a look at the `Filename format`_ section to understand how your information is stored.
 
 1. **Authentication**
 
@@ -18,7 +18,7 @@ Next, the process of manually accessing cold storage is going to be described, b
 
 2. **Getting AWS token**
 
-Use the /storage/token of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token.
+Use the ``/storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token.
 
 
 3. **Using your AWS credentials**
@@ -41,6 +41,20 @@ Then, test your credentials:
    $ aws --profile wazuh_cloud_storage --region <region> s3 ls cloud-cold-<region>/<cloud_id>/
 
 Mind replacing ``<cloud_id>`` with the environment's Cloud ID and ``<region>`` with your region.
+
+Available regions are:
+
+* North Virginia: ``us-east-1``
+  
+* Ohio: ``us-east-2``
+
+* London: ``eu-west-2``
+
+* Frankfurt: ``eu-central-1``
+
+* Singapore: ``ap-southeast-1``
+
+This values should replace the subsequent uses of the ``<region>`` field.
 
 Filename format
 ---------------
@@ -86,6 +100,6 @@ Example of use:
 
 .. code-block::
 
-   $ wcloud-cold-storage.py --subscription <cloud_id> --private_key /home/cloud/my_key --output_path /home/cloud/data --region <region> --start_date 2020-04-23 --end_date 2020-04-23
+   $ wcloud-cold-storage.py --subscription <cloud_id> --private_key /home/cloud/my_key --output_path /home/cloud/data --region <region> --start_date 2020-04-23 --end_date 2020-04-24
 
 Mind replacing ``<cloud_id>`` with your Cloud ID, ``<region>`` with your region and fitting the rest of the arguments.

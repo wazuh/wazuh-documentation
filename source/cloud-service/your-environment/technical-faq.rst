@@ -43,7 +43,7 @@ While configuring an environment some questions may arise. This list gathers som
 How can I send data to my environment?
 --------------------------------------
 
-All the communications will be sent through Wazuh agents. This way it is guaranteed that your data will be secure.
+All the communications will be sent through Wazuh agents once they register into the environment. This way it is guaranteed that your data will be secure.
   
 Is it possible to change the URL to access the environment?
 -----------------------------------------------------------
@@ -63,7 +63,7 @@ It is possible to :ref:`download the data as cold storage<cloud_your_environment
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-You can easily change the amount of data you are able to visualize on the WUI just by contacting our team on the **Help** section of your Wazuh Cloud Console. After the demand, our team will take care of it.
+You can change the amount of data you are able to visualize on the WUI by contacting our team on the **Help** section of your Wazuh Cloud Console. After the demand, our team will take care of it.
 
 Will Elasticsearch's replica shards consume data of my tier?
 ------------------------------------------------------------
@@ -121,7 +121,7 @@ Yes, you can access your WUI through your SSO (like Okta or Azure's Active Direc
 Do I have access to Wazuh API?
 ------------------------------
 
-You have access to the Dev tools through your WUI where you can use the API. Wazuh API is not exposed, but you may contact us through the **Help** section to allow Wazuh API access from an specific IP.
+You have access to the Dev tools through your WUI where you can use the API. Wazuh API is not exposed, but you may contact us through the **Help** section to allow Wazuh API access from a specific IP.
 
 
 Do I have access to Elasticsearch API?

@@ -10,7 +10,7 @@ Configure email alerts
 
 Configure the email settings to send alerts or reports by email through the environment's WUI:
 
-• Select **Management** tab. Click on the **Configuration** button. Click on the **Edit configuration** option.
+• Select Wazuh App's **Management** tab. Click on the **Configuration** button. Click on the **Edit configuration** option.
 
 • Choose a Wazuh manager from the drop-down box.
 
@@ -31,7 +31,7 @@ The resulting configuration should look like this:
    </global>
 
 
-• Once the changes have been made, **save** the configuration and restart the manager by clicking the manager restart button.
+• Once the changes have been made, **save** the configuration and restart the manager by clicking the restart manager button.
 
 • Repeat this process for all Wazuh managers.
 

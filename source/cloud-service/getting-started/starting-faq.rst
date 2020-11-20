@@ -60,11 +60,9 @@ In AWS. This allows us to provide a quality service guaranteed by Amazon Web Ser
 
 - US east (N. Virginia, Ohio)
 
-- US west (Oregon)
-
 - Europe (London, Frankfurt)
 
-- Asia Pacific (Singapore).
+- Asia Pacific (Singapore)
 
 What is a tier?
 ---------------

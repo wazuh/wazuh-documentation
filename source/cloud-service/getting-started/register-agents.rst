@@ -18,11 +18,11 @@ Agent registration is a simple process that takes place after the environment cr
 
 4. Select the agent's OS.
 
-5. Fill the server address and password fields with your environments' credentials.
+5. Fill the server address and password fields with your environment's credentials.
 
 6. Copy the generated output and run it on the agent.
 
 
 .. note::
 
-   Agents use **TCP** to communicate with your environment. Make sure that your agents are connected to your environments using TCP.
+   Agents use **TCP** to communicate with your environment. Make sure that your agents are connected to your environment using TCP.

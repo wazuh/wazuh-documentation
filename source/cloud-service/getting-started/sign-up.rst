@@ -8,7 +8,7 @@ Sign Up for a Trial
 .. meta::
   :description: Learn about signing up for a trial. 
 
-To experience the benefits of Wazuh Cloud Service, start by signing up for a Trial
+To experience the benefits of Wazuh Cloud Service, start by signing up for a Trial:
 
 1. Sign up on `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 
@@ -24,8 +24,8 @@ To experience the benefits of Wazuh Cloud Service, start by signing up for a Tri
 
 4. Then, you will get your environment's credentials on a PDF file, keep them safe as them as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
 
-The free trial duration is 14 days. Once the trial period is over you will need to  :ref:`add your billing details <cloud_account_billing_details>` to keep using your environment. When your billing details are added your environment will keep al the data, agents and configurations that were made during the trial period.
+The free trial duration is 14 days. Once the trial period is over you will need to  :ref:`add your billing details <cloud_account_billing_details>` to keep using your environment. When your billing details are added your environment will keep all of the data, agents, and configurations that were made during the trial period.
 
-When the trial has been properly created, next steps will be accessing the Wazuh WUI and registering the first agents.
+Once the trial has been properly created, next steps will be accessing the Wazuh WUI and registering the first agents.
 
-.. warning:: Mind to register agents within the five first days of trial or it will be canceled due to inactivity.
+.. warning:: Remember to register agents within the first five days of trial or it will be canceled due to inactivity.

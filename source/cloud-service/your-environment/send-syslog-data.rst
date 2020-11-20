@@ -13,11 +13,11 @@ Wazuh agents can run in a wide range of operative systems, but when it is not po
 
 Since every communication with Wazuh Cloud is performed through the Wazuh agent, you will have to configure the agent to forward the Syslog events. To do so, you have several options:
 
-- `Rsyslog on Linux`_
+- `rsyslog on Linux`_
 
 - `Logstash on Windows`_
 
-Rsyslog on Linux
+rsyslog on Linux
 ^^^^^^^^^^^^^^^^
 
 - Use **rsyslog on a Linux host** with a Wazuh agent to log to a file and send those logs to the environment.
@@ -38,7 +38,7 @@ For UDP:
    $ModLoad imudp
    $UDPServerRun <PORT>
 
-Mind to review your firewall/SeLinux configuration to allow this communication.
+Mind to review your firewall/SELinux configuration to allow this communication.
  
 2. Configure rsyslog to forward events to a file by editing ``/etc/rsyslog.conf``.
 
@@ -48,7 +48,7 @@ Mind to review your firewall/SeLinux configuration to allow this communication.
    if $fromhost-ip startswith 'xxx.xxx.xxx.' then /var/log/<file_name.log>
    & ~
 
-Mind replacing onwards ``<file_name.log>`` with the name chosen for this log.
+Onwards, mind replacing ``<file_name.log>`` with the name chosen for this log.
 
 3. Deploy a Wazuh agent on the same host that has rsyslog.
 
