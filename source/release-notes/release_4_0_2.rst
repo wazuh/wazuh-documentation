@@ -64,7 +64,7 @@ Changed
 ^^^^^^^
 
 - An alerts summary table is now included in PDF reports of all modules. 
-- Run as with no wazuh-wui API user.
+- Authentication with ``run_as`` is now available for other users besides ``wazuh-wui``.
 - A notification is now displayed when no agents have been registered. 
 
 
@@ -72,8 +72,13 @@ Fixed
 ^^^^^
 
 - Manager restart in rule editor did not work with Wazuh cluster enabled.
-- Restore the tables in the agents reports.
-- Issues detected when using RBAC. 
+- Restored the tables in the agents reports.
+- Corrected the subtraction of managers (agent 000) in agent count considering the RBAC permissions of the current user.
 - Changes done via a worker API were overwritten.
-- Default user field in Security Role mapping appropriately provided depending on whether ODFE or X-Pack is installed. 
+- Default user field in Security Role mapping is now provided depending on whether ODFE or X-Pack is installed. 
+
+
+
+
+
 
