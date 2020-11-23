@@ -112,7 +112,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Configure the installation** 
       
-      Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
+      Edit the ``~/config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
@@ -167,7 +167,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Initial node configuration and installation**
 
-    - Download the script and the configuration file ``config.yml``:
+    - Download the script and the configuration file ``~/config.yml``:
 
       .. code-block:: console
 
