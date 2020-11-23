@@ -21,8 +21,8 @@ After the registration, the Wazuh agent has to be configured to indicate the des
 
 .. note::
 
-    - This documentation section can be skipped if the Wazuh agent was deployed using :ref:`Deployment variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`. In those cases, the registration process is different and described in their corresponding sections of the documentation.
-    - If the Wazuh runs in the cluster mode, all the Wazuh agents must be registered in the Wazuh master node, even if the Wazuh agent is going to report to the worker node. After the registration process, the Wazuh agent communication with the Wazuh manager has to be configured as described in the :ref:`agents connections <cluster_agents_connections>` section of the :ref:`deploying the Wazuh cluster <configuring-cluster>` documentation.
+    This documentation section can be skipped if the Wazuh agent was deployed using :ref:`Deployment variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`. In those cases, the registration process is different and described in their corresponding sections of the documentation.
+
 
 .. _simple-registration-service:
 
