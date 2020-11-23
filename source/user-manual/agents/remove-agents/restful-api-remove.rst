@@ -5,7 +5,7 @@
 Remove agents using the Wazuh API
 ----------------------------------
 
-The request :api-ref:`DELETE /agents <operation/api.controllers.agents_controller.delete_agents>` removes the specified agents.
+The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` removes the specified agents.
 
 .. code-block:: console
 
