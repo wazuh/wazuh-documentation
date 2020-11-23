@@ -21,6 +21,8 @@ The next table contains the more relevant information about configuring each ser
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Config <amazon_config>`                    | bucket                | config         | <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>            |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
+| Amazon       | :ref:`ELB <amazon_elb>`                          | bucket                | custom         | <bucket_name>/<prefix>/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>      |
++--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`KMS <amazon_kms>`                          | bucket                | custom         | <bucket_name>/<prefix>/<year>/<month>/<day>                                                 |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Macie <amazon_macie>`                      | bucket                | custom         | <bucket_name>/<prefix>/<year>/<month>/<day>                                                 |
@@ -45,6 +47,7 @@ The next table contains the more relevant information about configuring each ser
     cloudtrail
     vpc
     config
+    elb
     kms
     macie
     trusted-advisor
