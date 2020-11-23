@@ -8,7 +8,7 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. 
+This section will explain how to install Elasticsearch and Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to ensure the proper performance of the installation. 
 
 Requirements
 ------------
@@ -285,7 +285,7 @@ Configuring Elasticsearch
 
 Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``~/certs.zip``. This file must be copied into the :ref:`Wazuh server <basic_unattended_distributed_wazuh>` to extract the certificates needed.
 
-In case that Kibana was installed in a different server, the ``certs.zip`` file should be also copied into its server to extract the :ref:`corresponding certificates <basic_configure_kibana_unattended>`.
+If Kibana will be installed in a different server, the ``certs.zip`` file should be also copied into its server to extract the corresponding certificates.
 
 
 .. _basic_install_kibana_unattended:

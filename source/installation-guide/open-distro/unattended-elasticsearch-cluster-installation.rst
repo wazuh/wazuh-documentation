@@ -162,6 +162,7 @@ Download the script and the configuration file. After downloading them, configur
         # bash ~/elastic-stack-installation.sh -e -n <node_name>
 
       
+      
 
   .. group-tab:: Multi-node
 
@@ -237,6 +238,7 @@ Download the script and the configuration file. After downloading them, configur
 
         # bash ~/elastic-stack-installation.sh -e -c -n <node_name>
 
+
     **Subsequent nodes installation**
 
       During the installation of the Elasticsearch initial node, the certificates were created and placed at ``~/certs.tar``. Before installing the subsequent nodes, this file must be placed on each involved node. After placing the ``certs.tar`` in the subsequent node, the installation can start:
@@ -254,6 +256,7 @@ Download the script and the configuration file. After downloading them, configur
 
         # bash ~/elastic-stack-installation.sh -e -n <node_name>   
 
+
     **Cluster initialization**
 
       Once all the nodes on the cluster have been started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
@@ -269,7 +272,7 @@ Configuring Elasticsearch
 
 Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``~/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
 
-In case Kibana will be installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the corresponding certificates.
+If Kibana will be installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the corresponding certificates.
 
 
 .. _install_kibana_unattended:
