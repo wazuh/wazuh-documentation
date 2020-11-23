@@ -19,7 +19,7 @@ Added
 
 **Core**
 
-- Added macOS Big Sur version detection in the agent.
+- Version detection in the agent for macOS Big Sur.
 
 
 Changed
@@ -35,20 +35,20 @@ Fixed
 
 **API**
 
-- Fixed an error with ``POST /security/roles/{role_id}/rules`` when removing role-rule relationships with admin resources.
-- Fixed a timeout error with ``GET /manager/configuration/validation`` when using it in a slow environment.
+- Error with ``POST /security/roles/{role_id}/rules`` when removing role-rule relationships with admin resources.
+- Timeout error with ``GET /manager/configuration/validation`` when using it in a slow environment.
 
 **Framework**
 
-- Fixed an error with some distributed requests when the cluster configuration is empty.
-- Fixed special characters in default policies.
+- Error with some distributed requests when the cluster configuration is empty.
+- Special characters in default policies.
 
 **Core**
 
-- Fixed a bug in ``Remoted`` that limited the maximum agent number to ``MAX_AGENTS-3`` instead of ``MAX_AGENTS-2``.
-- Fixed an error in the network library when handling disconnected sockets.
-- Fixed an error in FIM when handling temporary files and registry keys exceeding the path size limit.
-- Fixed a bug in FIM that stopped monitoring folders pointed by a symbolic link.
+- Bug in ``Remoted`` that limited the maximum agent number to ``MAX_AGENTS-3`` instead of ``MAX_AGENTS-2``.
+- Error in the network library when handling disconnected sockets.
+- Error in FIM when handling temporary files and registry keys exceeding the path size limit.
+- Bug in FIM that stopped monitoring folders pointed by a symbolic link.
 
 
 
@@ -63,7 +63,7 @@ Added
 Changed
 ^^^^^^^
 
-- An alerts summary table is now included in PDF reports of all modules. 
+- An alert summary table is now included in PDF reports of all modules. 
 - Authentication with ``run_as`` is now available for other users besides ``wazuh-wui``.
 - A notification is now displayed when no agents have been registered. 
 
@@ -71,7 +71,7 @@ Changed
 Fixed
 ^^^^^
 
-- Manager restart in rule editor did not work with Wazuh cluster enabled.
+- Manager restart in rule editor with Wazuh cluster enabled.
 - Restored the tables in the agents reports.
 - Corrected the subtraction of managers (agent 000) in agent count considering the RBAC permissions of the current user.
 - Changes done via a worker API were overwritten.
