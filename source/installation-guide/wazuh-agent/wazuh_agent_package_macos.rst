@@ -39,6 +39,12 @@ By default, all agent files can be found at the following location: ``/Library/O
 
 Now that the agent is installed, if you did not use the deployment method, you will have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
+Finally, start the Wazuh agent:
+
+  .. code-block:: console
+
+    # sudo /Library/Ossec/bin/ossec-control start
+
 
 Uninstall
 ---------
