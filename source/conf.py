@@ -419,7 +419,7 @@ custom_replacements = {
     "|WAZUH_LATEST_PUPPET|" : "4.0.0",
     "|WAZUH_LATEST_OVA|" : "4.0.2",
     "|WAZUH_LATEST_DOCKER|" : "4.0.0",
-    "|OPEN_DISTRO_LATEST|" : "1.10.1",
+    "|OPEN_DISTRO_LATEST|" : "1.11.0",
     "|ELASTICSEARCH_LATEST|" : "7.9.1",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.9.1",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.8.0",
