@@ -1100,6 +1100,8 @@ Wazuh Agent
 **wazuh_managers:**
 
   Set Wazuh Manager servers IP address, protocol, and port to be used by the agent.
+  Regarding which Manager is used for registration, we can optionally indicate which one to use for registration by adding `register` set to `true`.
+  If the `register` option is missing, first Manager on the list will be used for registration.
 
   *Example:*
 
@@ -1111,6 +1113,31 @@ Wazuh Agent
       - address: 192.168.10.15
         port: 1514
         protocol: tcp
+        register: yes
+
+**wazuh_agent_nolog_sensible:**
+
+  This variable indicates if we should add `nolog option <https://docs.ansible.com/ansible/latest/reference_appendices/logging.html>`_ to tasks which output sensible information (like tokens).
+
+  *Default true*
+
+
+**wazuh_agent_api_validate:**
+
+  After registering the agent through the REST API, validate that registration is correct.
+
+  *Default true*
+
+  Multiple profiles can be included, separated by a comma and a space, for example:
+
+
+**wazuh_agent_address:**
+
+  Establish which IP address we want to associate with this agent. It can be an address or "any"
+  This variable will supersede `wazuh_agent_nat`.
+
+  *Default ansible_default_ipv4.address*
+
 
 **wazuh_profile:**
 
