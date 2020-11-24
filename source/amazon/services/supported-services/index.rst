@@ -21,7 +21,11 @@ The next table contains the more relevant information about configuring each ser
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Config <amazon_config>`                    | bucket                | config         | <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>            |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
-| Amazon       | :ref:`ELB <amazon_elb>`                          | bucket                | custom         | <bucket_name>/<prefix>/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>      |
+| Amazon       | :ref:`ALB <amazon_alb>`                          | bucket                | alb            | <bucket_name>/<prefix>/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>      |
++--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
+| Amazon       | :ref:`CLB <amazon_clb>`                          | bucket                | clb            | <bucket_name>/<prefix>/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>      |
++--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
+| Amazon       | :ref:`NLB <amazon_nlb>`                          | bucket                | nlb            | <bucket_name>/<prefix>/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>      |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`KMS <amazon_kms>`                          | bucket                | custom         | <bucket_name>/<prefix>/<year>/<month>/<day>                                                 |
 +--------------+--------------------------------------------------+-----------------------+----------------+---------------------------------------------------------------------------------------------+
@@ -47,7 +51,9 @@ The next table contains the more relevant information about configuring each ser
     cloudtrail
     vpc
     config
-    elb
+    alb
+    clb
+    nlb
     kms
     macie
     trusted-advisor
