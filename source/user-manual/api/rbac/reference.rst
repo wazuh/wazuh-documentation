@@ -440,8 +440,8 @@ Lists
 ^^^^^^^^^^^^^^^
 lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /lists <operation/api.controllers.list_controller.get_lists>` (`list:path`_)
-- :api-ref:`GET /lists/files <operation/api.controllers.list_controller.get_lists_files>` (`list:path`_)
+- :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:path`_)
+- :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:path`_)
 
 
 Logtest

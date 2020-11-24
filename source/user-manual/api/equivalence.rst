@@ -406,19 +406,19 @@ Cache
 :api-ref:`Lists <tag/Lists>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+--------------------------+----------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
-| Action                   | API 3.x usage        | API 4.1 usage                                                                            | Changes                                                                                  |
-+==========================+======================+==========================================================================================+==========================================================================================+
-|                          |                      |                                                                                          | Added ``filename`` parameter in query used to filter by filename.                        |
-|                          |                      |                                                                                          |                                                                                          |
-|                          |                      |                                                                                          | Added ``select`` parameter in query.                                                     |
-| Get all lists            | ``GET /lists``       | :api-ref:`GET /lists <operation/api.controllers.list_controller.get_lists>`              |                                                                                          |
-|                          |                      |                                                                                          | Renamed ``path`` parameter in query to ``relative_dirname``.                             |
-+--------------------------+----------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
-|                          |                      |                                                                                          | Added ``filename`` parameter in query used to filter by filename.                        |
-| Get paths from all lists | ``GET /lists/files`` | :api-ref:`GET /lists/files <operation/api.controllers.list_controller.get_lists_files>`  |                                                                                          |
-|                          |                      |                                                                                          | Added ``relative_dirname`` parameter in query used to filter by relative directory name. |
-+--------------------------+----------------------+------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
++--------------------------+----------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| Action                   | API 3.x usage        | API 4.1 usage                                                                                | Changes                                                                                  |
++==========================+======================+==============================================================================================+==========================================================================================+
+|                          |                      |                                                                                              | Added ``filename`` parameter in query used to filter by filename.                        |
+|                          |                      |                                                                                              |                                                                                          |
+|                          |                      |                                                                                              | Added ``select`` parameter in query.                                                     |
+| Get all lists            | ``GET /lists``       | :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>`              |                                                                                          |
+|                          |                      |                                                                                              | Renamed ``path`` parameter in query to ``relative_dirname``.                             |
++--------------------------+----------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+|                          |                      |                                                                                              | Added ``filename`` parameter in query used to filter by filename.                        |
+| Get paths from all lists | ``GET /lists/files`` | :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>`  |                                                                                          |
+|                          |                      |                                                                                              | Added ``relative_dirname`` parameter in query used to filter by relative directory name. |
++--------------------------+----------------------+----------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
 
 
 :api-ref:`Manager <tag/Manager>`
