@@ -45,10 +45,11 @@ Fixed
 
 **Core**
 
-- Bug in ``Remoted`` that limited the maximum agent number to ``MAX_AGENTS-3`` instead of ``MAX_AGENTS-2``.
+- Bug in Remoted that limited the maximum agent number to ``MAX_AGENTS-3`` instead of ``MAX_AGENTS-2``.
 - Error in the network library when handling disconnected sockets.
 - Error in FIM when handling temporary files and registry keys exceeding the path size limit.
 - Bug in FIM that stopped monitoring folders pointed by a symbolic link.
+- Race condition in FIM that could cause Syscheckd to stop unexpectedly.
 
 
 
@@ -66,6 +67,7 @@ Changed
 - An alert summary table is now included in PDF reports of all modules. 
 - Authentication with ``run_as`` is now available for other users besides ``wazuh-wui``.
 - A notification is now displayed when no agents have been registered. 
+- API security entities between 0 and 99 are now reserved.
 
 
 Fixed
@@ -76,6 +78,7 @@ Fixed
 - Corrected the subtraction of managers (agent 000) in agent count considering the RBAC permissions of the current user.
 - Changes done via a worker API were overwritten.
 - Default user field in Security Role mapping is now provided depending on whether ODFE or X-Pack is installed. 
+- Bug that replaced index-pattern title with its ID during the updating process.
 
 
 
