@@ -22,7 +22,7 @@
       gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
       enabled=1
       name=Wazuh repository
-      baseurl=http://packages.wazuh.com/|CURRENT_MAJOR|/yum/5/$basearch/
+      baseurl=http://packages.wazuh.com/4.x/yum/5/$basearch/
       protect=1
       EOF
 
