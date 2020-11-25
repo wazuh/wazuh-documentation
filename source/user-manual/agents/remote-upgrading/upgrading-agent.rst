@@ -77,7 +77,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
 Using the RESTful API
 ----------------------
 
-1.  List all outdated agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agents_controller.get_agent_outdated>`:
+1.  List all outdated agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`:
 
     .. code-block:: console
 
@@ -102,7 +102,7 @@ Using the RESTful API
         }
 
 
-2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>`:
+2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>`:
 
     .. code-block:: console
 
@@ -133,7 +133,7 @@ Using the RESTful API
         }
 
 
-3. Check the upgrade results using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>`:
+3. Check the upgrade results using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>`:
 
     .. code-block:: console
 
@@ -177,7 +177,7 @@ Using the RESTful API
         }
 
 
-4.  Following the upgrade, the agents are automatically restarted. Check the agents version to ensure it has been properly upgraded using endpoint :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>`:
+4.  Following the upgrade, the agents are automatically restarted. Check the agents version to ensure it has been properly upgraded using endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`:
 
     .. code-block:: console
 
