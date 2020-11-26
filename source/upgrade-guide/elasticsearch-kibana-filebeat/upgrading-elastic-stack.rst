@@ -341,6 +341,14 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
 
+
+#. Link Kibana’s socket to privileged port 443:
+
+    .. code-block:: console
+
+      # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node      
+
+
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
