@@ -7,6 +7,8 @@ Upgrading Open Distro for Elasticsearch
 
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Open Distro for Elasticsearch* distribution. 
 
+.. note:: Root user privileges are required to execute all the commands described below.
+
 Preparing Open Distro for Elasticsearch
 ---------------------------------------
 
