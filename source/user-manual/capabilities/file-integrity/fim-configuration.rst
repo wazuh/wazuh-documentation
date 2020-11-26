@@ -12,6 +12,7 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
 #. `Configuring reporting file changes`_
+#. `Configuring Windows registry`_
 #. `Configuring ignoring files and Windows registry entries`_
 #. `Configuring ignoring files via rules`_
 #. `Configuring the alert severity for the monitored files`_
@@ -177,14 +178,15 @@ An example alert on a new file creation looks as follows:
 Configuring reporting file changes
 ----------------------------------
 
-To report the exact content that has been changed in a text file, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
+To report the exact content that has been changed in a text file or in a Windows registry value, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` or the :ref:`registries <reference_ossec_syscheck_windows_registry>` options. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
 
-In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories:
+In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories, or for all values of a monitored Windows registry:
 
 .. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
+    <windows_registry arch="64bit" report_changes="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
   </syscheck>
 
 .. code-block:: console
@@ -217,6 +219,46 @@ In this example, by enabling the ``report_changes``, the alerts will show the ch
   < Original text
   ---
   > Altered text
+
+.. code-block:: console
+
+  {
+      "type": "event",
+      "data": {
+          "path": "HKEY_LOCAL_MACHINE\\SYSTEM\\Setup",
+          "mode": "scheduled",
+          "type": "modified",
+          "arch": "[x64]",
+          "value_name": "test_value",
+          "timestamp": 1606349371,
+          "attributes": {
+              "type": "registry_value",
+              "value_type": "REG_SZ",
+              "size": 12,
+              "hash_md5": "96c15c2bb2921193bf290df8cd85e2ba",
+              "hash_sha1": "ca527369d9e8c1e081558bd92f90f65c4eb77e21",
+              "hash_sha256": "fe32608c9ef5b6cf7e3f946480253ff76f24f4ec0678f3d0f07f9844cbff9601",
+              "checksum": "56a7cc798b98bcd92a3aa49bfa3943ce3b4f4725"
+          },
+          "changed_attributes": [
+              "size",
+              "md5",
+              "sha1",
+              "sha256"
+          ],
+          "old_attributes": {
+              "type": "registry_value",
+              "value_type": "REG_SZ",
+              "size": 17,
+              "hash_md5": "84b8bc6ddfb8c2032ae2eb44d162369b",
+              "hash_sha1": "c1dab0c0864b6ac9bdd3743a1408d679f1acd823",
+              "hash_sha256": "bf573149b23303cac63c2a359b53760d919770c5d070047e76de42e2184f1046",
+              "checksum": "76538a04f4923b9688e50802e501771cb3c0508f"
+          },
+          "content_changes": "< original content\n---\n> new content\n"
+      }
+  }
+
 
 If some sentive files exist in the monitored with ``report_changes`` path, :ref:`nodiff <reference_ossec_syscheck_nodiff>` option can be used. This option disables computing the diff for the listed files, avoiding data leaking by sending the files content changes through alerts:
 
@@ -256,6 +298,22 @@ In this example, by adding :ref:`nodiff <reference_ossec_syscheck_nodiff>` optio
   - SHA1: 18dfef68273c00fc733e28ce9aa1830f5e8fabd8
   - SHA256: 60c2a08e66f02bacea882f7b437f9c983431d75a686b703661c34e288d36de9dWhat changed:
   <Diff truncated because nodiff option>
+
+
+.. _how_to_fim_registries:
+
+Configuring Windows registry
+----------------------------
+
+To configure the Windows registries, we must create a list of those registries that we want to monitor. In a similar way to the directories, using the label <windows_registry>. We also have many attributes and options to specify, for example, all the basic checks ``CHECK_ALL``, the registry architecture ``arch``, ``report_changes`` to know the value content changes, etc. Here you can found all the attributes and options, :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
+
+.. code-block:: xml
+
+  <syscheck>
+    <windows_registry arch="both" check_all="yes">HKEY_LOCAL_MACHINE\SOFTWARE</windows_registry>
+    <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
+  </syscheck>
+
 
 .. _how_to_fim_ignore:
 
