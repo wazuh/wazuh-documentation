@@ -18,28 +18,29 @@ Preparing Elastic Stack
     .. include:: ../../_templates/installations/basic/elastic/common/stop_kibana_filebeat.rst
 
 
-#. Enable the Elastic repository:
+#. Add the Elastic Stack repository:
 
-    .. tabs::
 
-      .. group-tab:: YUM
+.. tabs::
 
-            .. code-block:: console
+  .. group-tab:: Yum
 
-              # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
 
-      .. group-tab:: APT
+    .. include:: ../../../../_templates/installations/basic/elastic/yum/add_repository.rst
 
-            .. code-block:: console
 
-              # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
-              # apt-get update
 
-      .. group-tab:: ZYpp
+  .. group-tab:: APT
 
-            .. code-block:: console
 
-              # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
+    .. include:: ../../../../_templates/installations/basic/elastic/deb/add_repository.rst
+
+
+
+  .. group-tab:: ZYpp
+
+
+    .. include:: ../../../../_templates/installations/basic/elastic/zypp/add_repository.rst              
 
 
 #. Before the upgrade process it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package. In case of having enabled the Wazuh repository it can be disabled using:
