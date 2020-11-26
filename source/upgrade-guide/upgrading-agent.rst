@@ -11,7 +11,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
 .. tabs::
 
-  .. group-tab:: YUM
+  .. group-tab:: Yum
 
 
     #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package:

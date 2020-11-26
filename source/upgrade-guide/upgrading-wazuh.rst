@@ -14,7 +14,7 @@ To upgrade the Wazuh manager choose the appropriate tab for the desired package 
 
 .. tabs::
 
-  .. group-tab:: YUM
+  .. group-tab:: Yum
 
     .. include:: ../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
 
@@ -63,7 +63,7 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 
 .. tabs::
 
-  .. group-tab:: YUM
+  .. group-tab:: Yum
 
     .. code-block:: console
 

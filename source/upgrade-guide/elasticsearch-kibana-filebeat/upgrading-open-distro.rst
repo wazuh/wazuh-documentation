@@ -21,7 +21,7 @@ Preparing Open Distro for Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. code-block:: console
 
@@ -44,7 +44,7 @@ Preparing Open Distro for Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. code-block:: console
 
@@ -75,7 +75,7 @@ Preparing Open Distro for Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. include:: ../../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
 
@@ -132,7 +132,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -201,7 +201,7 @@ Upgrading Filebeat
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -344,7 +344,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -441,7 +441,7 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to a new
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 

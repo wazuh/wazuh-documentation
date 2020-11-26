@@ -23,7 +23,7 @@ Preparing Elastic Stack
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
 
         .. include:: ../../_templates/installations/basic/elastic/yum/add_repository.rst
@@ -47,7 +47,7 @@ Preparing Elastic Stack
 
   .. tabs::
 
-    .. group-tab:: YUM
+    .. group-tab:: Yum
 
       .. code-block:: console
 
@@ -101,7 +101,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -161,7 +161,7 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. code-block:: console
 
@@ -287,7 +287,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -375,7 +375,7 @@ It is recommended to disable the Elastic repository to prevent an upgrade to a n
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
