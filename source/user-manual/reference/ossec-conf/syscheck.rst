@@ -994,6 +994,27 @@ Attributes:
 |          | Allowed values                             | sregex                             |
 +----------+--------------------------------------------+------------------------------------+
 
+.. _reference_ossec_syscheck_registry_nodiff:
+
+registry_nodiff
+"""""""""""""""
+
+List of values to not compute the diff (one entry per line).
+
++--------------------+----------------------------------------------------+
+| **Allowed values** | Any registry path, with value_name added.          |
++--------------------+----------------------------------------------------+
+| **Example**        | HKEY_LOCAL_MACHINE\SOFTWARE\test_key\value_name    |
++--------------------+----------------------------------------------------+
+
+Attributes:
+
++----------+---------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
++          +--------------------------------------------+------------------------------------+
+|          | Allowed values                             | sregex                             |
++----------+--------------------------------------------+------------------------------------+
+
 .. _reference_ossec_syscheck_whodata:
 
 whodata
@@ -1204,7 +1225,15 @@ Attributes:
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
-| **restrict**             | Limit checks to registries containing the entered string in the registry name.                                        |
+| **restrict_key**         | Limit checks to registries containing the entered sregex in the registry name.                                        |
++                          +                                                                                                                       +
+|                          | Any registry is allowed.                                                                                              |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Default value                                              | N/A                                                      |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Allowed value                                              | sregex                                                   |
++--------------------------+------------------------------------------------------------+----------------------------------------------------------+
+| **restrict_value**       | Limit checks to registry values containing the entered sregex in the value name.                                      |
 +                          +                                                                                                                       +
 |                          | Any registry is allowed.                                                                                              |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1232,8 +1261,10 @@ Example:
 .. code-block:: xml
 
  <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Classes\Protocols</windows_registry>
- <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Policies</windows_registry>
+ <windows_registry arch="both" restrict_value="^some_value_name$">HKEY_LOCAL_MACHINE\Software\Policies</windows_registry>
  <windows_registry tags="services-registry">HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services</windows_registry>
+ <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\test_key</windows_registry>
+ <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
 
 .. note::
 
