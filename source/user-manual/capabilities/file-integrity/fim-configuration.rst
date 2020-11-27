@@ -11,8 +11,8 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
-#. `Configuring reporting file and registry value changes`_
 #. `Configuring Windows registry`_
+#. `Configuring reporting file and registry value changes`_
 #. `Configuring ignoring files and Windows registry entries`_
 #. `Configuring ignoring files via rules`_
 #. `Configuring the alert severity for the monitored files`_
@@ -173,6 +173,21 @@ An example alert on a new file creation looks as follows:
   - SHA256: 092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6
 
 
+.. _how_to_fim_registries:
+
+Configuring Windows registry
+----------------------------
+
+To configure the Windows registries, it is necessary to create a list of those registries to monitor. This is done in a manner similar to how we list directories and files, but using the label ```<windows_registry>``` instead. There are many attributes and options to specify, for example, all the basic checks can be enabled with the ``check_all`` attribute, the registry architecture to monitor can be specified with ``arch``, ``report_changes`` can be used to get information on the changes made to values, etc. A list of all the supported attributes and options can be found here: :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
+
+.. code-block:: xml
+
+  <syscheck>
+    <windows_registry arch="both" check_all="yes">HKEY_LOCAL_MACHINE\SOFTWARE</windows_registry>
+    <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
+  </syscheck>
+
+
 .. _how_to_fim_report_changes:
 
 Configuring reporting file and registry value changes
@@ -298,21 +313,6 @@ In this example, by adding :ref:`nodiff <reference_ossec_syscheck_nodiff>` optio
   - SHA1: 18dfef68273c00fc733e28ce9aa1830f5e8fabd8
   - SHA256: 60c2a08e66f02bacea882f7b437f9c983431d75a686b703661c34e288d36de9dWhat changed:
   <Diff truncated because nodiff option>
-
-
-.. _how_to_fim_registries:
-
-Configuring Windows registry
-----------------------------
-
-To configure the Windows registries, it is necessary to create a list of those registries to monitor. In a similar way to the directories, using the label <windows_registry>. There are many attributes and options to specify, for example, all the basic checks ``CHECK_ALL``, the registry architecture ``arch``, ``report_changes`` to know the value content changes, etc. Here can be found all the attributes and options, :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
-
-.. code-block:: xml
-
-  <syscheck>
-    <windows_registry arch="both" check_all="yes">HKEY_LOCAL_MACHINE\SOFTWARE</windows_registry>
-    <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
-  </syscheck>
 
 
 .. _how_to_fim_ignore:

@@ -1237,7 +1237,9 @@ Attributes:
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_type**           | Check the type of a value. It is used to notify changes in the values of the monitored registry.                      |
 +                          +                                                                                                                       +
-|                          | This is limited to REG_SZ, REG_MULTI_SZ, REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_QWORD.                                  |
+|                          | This is limited to REG_NONE, REG_SZ, REG_EXPAND_SZ, REG_BINARY, REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_LINK,            |
++                          +                                                                                                                       +
+|                          | REG_MULTI_SZ, REG_RESOURCE_LIST, REG_FULL_RESOURCE_DESCRIPTOR, REG_RESOURCE_REQUIREMENTS_LIST, REG_QWORD.             |
 +                          +                                                                                                                       +
 |                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1283,10 +1285,6 @@ Example:
  <windows_registry tags="services-registry">HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services</windows_registry>
  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\test_key</windows_registry>
  <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
-
-.. note::
-
-   New entries will not trigger alerts, only changes to existing entries.
 
 
 .. _reference_ossec_syscheck_default_configuration:
