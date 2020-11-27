@@ -167,7 +167,7 @@ The compressed data is a byte array that must:
 1. Have a size multiple of 8.
 2. Start with one or more ``!``.
 
-So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has asize multiple of 8. ::
+So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has a size multiple of 8. ::
 
     <Padding> = 1..8 "!"
     Length(<Padding> <CData>) = 0 (mod 8)
