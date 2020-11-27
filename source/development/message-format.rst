@@ -168,14 +168,14 @@ The compressed data is a byte array that must:
 So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has asize multiple of 8. ::
 
     <Padding> = 1..8 "!"
-    Length(<Padding> <Block>) = 0 (mod 8)
+    Length(<Padding> <CData>) = 0 (mod 8)
 
 Encrypted data
 ++++++++++++++
 
 The padded data is encrypted using Blowfish::
 
-    <Encrypted> = Blowfish(<Padding> <Block>)
+    <Encrypted> = Blowfish(<Padding> <CData>)
 
 The initialization vector and the encryption key are described in `Encryption system`_.
 
