@@ -11,7 +11,7 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
-#. `Configuring reporting file changes`_
+#. `Configuring reporting file and registry value changes`_
 #. `Configuring Windows registry`_
 #. `Configuring ignoring files and Windows registry entries`_
 #. `Configuring ignoring files via rules`_
@@ -175,12 +175,12 @@ An example alert on a new file creation looks as follows:
 
 .. _how_to_fim_report_changes:
 
-Configuring reporting file changes
-----------------------------------
+Configuring reporting file and registry value changes
+-----------------------------------------------------
 
 To report the exact content that has been changed in a text file or in a Windows registry value, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` or the :ref:`registries <reference_ossec_syscheck_windows_registry>` options. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
 
-In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories, or for all values of a monitored Windows registry:
+In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories or for all values of a monitored Windows registry:
 
 .. code-block:: xml
 
@@ -305,7 +305,7 @@ In this example, by adding :ref:`nodiff <reference_ossec_syscheck_nodiff>` optio
 Configuring Windows registry
 ----------------------------
 
-To configure the Windows registries, we must create a list of those registries that we want to monitor. In a similar way to the directories, using the label <windows_registry>. We also have many attributes and options to specify, for example, all the basic checks ``CHECK_ALL``, the registry architecture ``arch``, ``report_changes`` to know the value content changes, etc. Here you can found all the attributes and options, :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
+To configure the Windows registries, it is necessary to create a list of those registries to monitor. In a similar way to the directories, using the label <windows_registry>. There are many attributes and options to specify, for example, all the basic checks ``CHECK_ALL``, the registry architecture ``arch``, ``report_changes`` to know the value content changes, etc. Here can be found all the attributes and options, :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
 
 .. code-block:: xml
 
