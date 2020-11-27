@@ -21,8 +21,8 @@ Fixed
 **API**
 
 - API timeouts with ``GET /agents`` call in loaded cluster environments.
-- Timeout issue related with ``GET /manager/configuration/validation`` and ``GET /cluster/configuration/validation`` in loaded cluster environments. 
-- Timeout and performance issue related with GET /overview agents request in loaded cluster environments.
+- Timeout issue related with ``GET /manager/configuration/validation`` and ``GET /cluster/configuration/validation`` in big environments. 
+- Timeout and performance issue related with ``GET /overview`` agents request in loaded cluster environments.
 
 
 Wazuh Kibana plugin
