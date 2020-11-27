@@ -413,11 +413,11 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.0.2",
+    "|WAZUH_LATEST|" : "4.0.3",
     "|WAZUH_LATEST_ANSIBLE|" : "4.0.0",
     "|WAZUH_LATEST_KUBERNETES|" : "4.0.0",
     "|WAZUH_LATEST_PUPPET|" : "4.0.0",
-    "|WAZUH_LATEST_OVA|" : "4.0.2",
+    "|WAZUH_LATEST_OVA|" : "4.0.3",
     "|WAZUH_LATEST_DOCKER|" : "4.0.1",
     "|OPEN_DISTRO_LATEST|" : "1.11.0",
     "|ELASTICSEARCH_LATEST|" : "7.9.1",
