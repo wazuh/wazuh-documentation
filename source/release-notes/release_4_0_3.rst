@@ -32,10 +32,3 @@ Added
 ^^^^^
 
 - Support for Wazuh v4.0.3.
-
-
-
-
-
-
-
