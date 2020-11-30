@@ -54,7 +54,7 @@ Download the script and the configuration file. After downloading them, configur
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
       .. code-block:: yaml
-        :emphasize-lines: 5, 20, 23
+        :emphasize-lines: 5, 18, 21
 
         ## Single-node configuration
 
