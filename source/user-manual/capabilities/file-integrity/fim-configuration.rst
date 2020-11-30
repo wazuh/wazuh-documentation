@@ -178,7 +178,7 @@ An example alert on a new file creation looks as follows:
 Configuring Windows registry
 ----------------------------
 
-To configure the Windows registries, it is necessary to create a list of those registries to monitor. This is done in a manner similar to how we list directories and files, but using the label ```<windows_registry>``` instead. There are many attributes and options to specify, for example, all the basic checks can be enabled with the ``check_all`` attribute, the registry architecture to monitor can be specified with ``arch``, ``report_changes`` can be used to get information on the changes made to values, etc. A list of all the supported attributes and options can be found here: :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
+To configure the Windows registries, it is necessary to create a list of those registries to monitor. This is done in a similar manner to how we list directories and files, but using the label ```<windows_registry>``` instead. There are many attributes and options to specify, for example, all the basic checks can be enabled with the ``check_all`` attribute, the registry architecture to monitor can be specified with ``arch``, ``report_changes`` can be used to get information on the changes made to values, and so on. A list of all the supported attributes and options can be found here: :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
 
 .. code-block:: xml
 
