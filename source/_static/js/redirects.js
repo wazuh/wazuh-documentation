@@ -40,7 +40,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.0'] = [
   '/release-notes/release_4_0_3.html',
-  '/release-notes/release_4_0_2.html'
+  '/release-notes/release_4_0_2.html',
   '/release-notes/release_4_0_1.html',
   '/release-notes/release_4_0_0.html',
   '/user-manual/api/rbac/auth_context.html',
