@@ -13,28 +13,44 @@ The Wazuh server collects and analyzes data from deployed agents. It runs the Wa
 Installing Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note:: CMake 2.6.4 is the minimal library version required to build the Wazuh server solution.
+
 .. tabs::
 
 
   .. group-tab:: Yum
 
-    .. code-block:: console
+      .. tabs::
 
-        # yum install make gcc policycoreutils-python automake autoconf libtool
+        .. tab:: CentOS 6/7
+
+          .. code-block:: console
+
+          # yum update
+          # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+          # scl enable devtoolset-7 bash
+
+        .. tab:: CentOS 8
+
+          .. code-block:: console
+
+          # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
+          # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
+
   
   .. group-tab:: APT
 
 
     .. code-block:: console
 
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install python gcc g++ make cmake libc6-dev curl policycoreutils automake autoconf libtool
 
   .. group-tab:: ZYpp
 
 
     .. code-block:: console
 
-        # zypper install make gcc policycoreutils-python automake autoconf libtool
+        # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool
 
 
 

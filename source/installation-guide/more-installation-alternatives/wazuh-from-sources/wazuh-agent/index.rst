@@ -14,23 +14,37 @@ Installing Wazuh agent from sources
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
+    .. note:: CMake 2.6.4 is the minimal library version required to build the Wazuh agent solution.
+
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
        
      .. tabs::
 
-      .. tab:: Yum   
+      .. tab:: Yum
 
-        .. code-block:: console
+        .. tabs::
 
-         # yum install make gcc policycoreutils-python automake autoconf libtool
+          .. tab:: CentOS 6/7
 
+            .. code-block:: console
+
+            # yum update
+            # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+            # scl enable devtoolset-7 bash
+
+          .. tab:: CentOS 8
+
+            .. code-block:: console
+
+            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
+            # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
 
 
       .. tab:: APT
 
         .. code-block:: console
 
-         # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+         # apt-get install python gcc g++ make cmake libc6-dev curl policycoreutils automake autoconf libtool
 
 
 
@@ -38,7 +52,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # zypper install make gcc policycoreutils-python automake autoconf libtool
+         # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool
         
         .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
@@ -146,9 +160,8 @@ Installing Wazuh agent from sources
 
      .. code-block:: console
 
-      # apt-get install gcc-mingw-w64
-      # apt-get install nsis
-      # apt-get install make
+      # apt-get install gcc-mingw-w64 g++-mingw-w64-x86-64 nsis make cmake
+
 
     2. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
@@ -221,7 +234,7 @@ Installing Wazuh agent from sources
 
       .. code-block:: console
 
-       $ brew install automake autoconf libtool
+       $ brew install automake autoconf libtool cmake
 
     2. Download and extract the latest version:
 
@@ -582,13 +595,13 @@ Installing Wazuh agent from sources
 
            .. code-block:: console
 
-            # /opt/csw/bin/pkgutil -y -i git gmake gcc5core
+            # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
         2. Download the latest version.
 
          .. code-block:: console
 
-          # git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
+          # /opt/csw/bin/git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
 
          .. note:: If you can't download the file due to an Open SSL error, then you should copy the directory with the scp utility.
  
@@ -681,13 +694,13 @@ Installing Wazuh agent from sources
 
           .. code-block:: console
 
-            # /opt/csw/bin/pkgutil -y -i git automake gmake autoconf libtool wget curl gcc5core
+            # /opt/csw/bin/pkgutil -y -i git automake gmake cmake autoconf libtool wget curl gcc5core gcc5g++
 
         2. Download the latest version and a necessary file.
 
          .. code-block:: console
 
-           # git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
+           # /opt/csw/bin/git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
            # wget -P wazuh https://raw.githubusercontent.com/wazuh/wazuh-packages/master/solaris/solaris10/solaris10_patch.sh
 
         3. Create an user and group called `ossec` needed for installation.
