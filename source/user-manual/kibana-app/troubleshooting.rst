@@ -20,7 +20,7 @@ The Wazuh Kibana plugin has a file named *package.json*, it includes dependencie
 
 Your Wazuh Kibana plugin must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
 
-You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
+You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
 
 No template found for the selected index pattern
 ------------------------------------------------
