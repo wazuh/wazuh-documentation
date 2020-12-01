@@ -11,6 +11,41 @@ The Wazuh Kibana plugin is available on the left side of the screen, on the Kiba
   :align: center
   :width: 100%
 
+
+
+Security information management
+-------------------------------
+
+- Security events:
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/security-events.png
+  :align: center
+  :width: 100%
+
+- File integrity monitoring: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/integrity-monitoring.png
+  :align: center
+  :width: 100%
+
+
+Regulatory compliance  
+---------------------
+
+- PCI DSS: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/PCI_DSS.png
+  :align: center
+  :width: 100%
+
+
+Discover
+--------
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/discover.png
+  :align: center
+  :width: 100%
+
 .. topic:: Overview
 
     This is the main Wazuh Kibana plugin section. It provides an overall view of your cluster in its *General* section, where you can visualize all the triggered alerts from a specified time range. On the other sections, such as *PCI DSS* or *Vulnerabilities*, you can find more specific dashboards and charts for different Wazuh capabilities. Take a look at the :ref:`user manual <user_manual>` for more information.
