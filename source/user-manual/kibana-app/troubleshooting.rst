@@ -88,7 +88,7 @@ API version mismatch. Expected vX.Y.Z
 
 The Wazuh Kibana plugin uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an Wazuh Kibana plugin designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
-You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh |WAZUH_LATEST|.
+You can't use the 3.7.2 version of Wazuh API with a Wazuh Kibana plugin designed for Wazuh |WAZUH_LATEST|.
 
 Routes. Error. Cannot read property 'manager' of undefined
 ----------------------------------------------------------

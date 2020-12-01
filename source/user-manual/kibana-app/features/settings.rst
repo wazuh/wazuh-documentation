@@ -5,7 +5,7 @@
 Settings
 ========
 
-The *Settings* page allows you to configure and customize your Wazuh app experience. This section is automatically opened the first time you open the app in order to configure your first Wazuh API credentials, so the app can work properly. 
+The *Settings* page allows you to configure and customize your Wazuh Kibana plugin experience. This section is automatically opened the first time you open the Wazuh Kibana plugin in order to configure your first Wazuh API credentials, so the Kibana plugin can work properly. 
 
 API
 ---
@@ -19,7 +19,7 @@ In this section, you can list all your inserted API credentials. The star icon i
 Extensions
 ----------
 
-Wazuh provides multiple integrations and capabilities to monitor and analyze your hosts. If you're using some of them, you can enable multiple extensions on the app to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
+Wazuh provides multiple integrations and capabilities to monitor and analyze your hosts. If you're using some of them, you can enable multiple extensions on the Wazuh Kibana plugin to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
 
 .. thumbnail:: ../../../images/kibana-app/features/settings/extensions.png
   :align: center
@@ -37,7 +37,7 @@ The index pattern functionality is completely described at the :ref:`kibana_inde
 Configuration
 -------------
 
-You can take a quick look to the full Wazuh app configuration file here. The documentation for the ``wazuh.yml`` file can be found on the :ref:`kibana_config_file` section.
+You can take a quick look to the full Wazuh Kibana plugin configuration file here. The documentation for the ``wazuh.yml`` file can be found on the :ref:`kibana_config_file` section.
 
 .. thumbnail:: ../../../images/kibana-app/features/settings/configuration.png
   :align: center
@@ -46,7 +46,7 @@ You can take a quick look to the full Wazuh app configuration file here. The doc
 Logs
 ----
 
-The Wazuh app stores log information on the ``/usr/share/kibana/optimize/wazuh-logs/wazuhapp-plain.log`` file. These logs can be helpful for troubleshooting purposes. The *Logs* section allows you to check the last 20 log messages along with its date and severity level.
+The Wazuh Kibana plugin stores log information on the ``/usr/share/kibana/optimize/wazuh-logs/wazuhapp-plain.log`` file. These logs can be helpful for troubleshooting purposes. The *Logs* section allows you to check the last 20 log messages along with its date and severity level.
 
 .. thumbnail:: ../../../images/kibana-app/features/settings/logs.png
   :align: center
@@ -55,7 +55,7 @@ The Wazuh app stores log information on the ``/usr/share/kibana/optimize/wazuh-l
 About
 -----
 
-This section provides information about your currently installed Wazuh app package, such as version, revision, and installation date. If you want to discover what's new on each app release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
+This section provides information about your currently installed Wazuh Kibana plugin package, such as version, revision, and installation date. If you want to discover what's new on each Wazuh Kibana plugin release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
 
 .. thumbnail:: ../../../images/kibana-app/features/settings/about.png
   :align: center

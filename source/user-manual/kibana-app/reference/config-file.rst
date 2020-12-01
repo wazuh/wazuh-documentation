@@ -56,7 +56,7 @@ Basic options
 pattern
 ^^^^^^^
 
-Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
+Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the Wazuh Kibana plugin will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-alerts-*          |
@@ -67,7 +67,7 @@ Default index pattern to use on the app. If there's no valid index patterns on E
 timeout
 ^^^^^^^
 
-Defines the maximum time the app will wait for an API response when making requests to it. It will be ignored if the value is set under 1500 milliseconds.
+Defines the maximum time the Wazuh Kibana plugin will wait for an API response when making requests to it. It will be ignored if the value is set under 1500 milliseconds.
 
 +--------------------+-------------------------------+
 | **Default value**  | 8000 (milliseconds)           |
@@ -78,7 +78,7 @@ Defines the maximum time the app will wait for an API response when making reque
 api.selector
 ^^^^^^^^^^^^
 
-Defines if the user is allowed to change the selected API directly from the Wazuh app top menu.
+Defines if the user is allowed to change the selected API directly from the Wazuh Wazuh Kibana plugin top menu.
 
 +--------------------+-------------------------------+
 | **Default value**  | false                         |
@@ -160,9 +160,9 @@ wazuh.monitoring.enabled
 
 Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 
-- When the value is set to ``true``, the app will show the *Agents status* visualization and will insert monitoring-related data.
-- When the value is set to ``false``, the app won't show the visualization and won't insert monitoring-related data.
-- When the value is set to ``worker``, the app will show the visualization, but won't insert monitoring-related data.
+- When the value is set to ``true``, the Wazuh Kibana plugin will show the *Agents status* visualization and will insert monitoring-related data.
+- When the value is set to ``false``, the Wazuh Kibana plugin won't show the visualization and won't insert monitoring-related data.
+- When the value is set to ``worker``, the Wazuh Kibana plugin will show the visualization, but won't insert monitoring-related data.
 
 +--------------------+-------------------+
 | **Default value**  | true              |
@@ -188,7 +188,7 @@ Define in seconds the frequency of API requests to get the state of the agents t
 wazuh.monitoring.pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
+Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the Wazuh Kibana plugin to add the new ones.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-monitoring-*      |

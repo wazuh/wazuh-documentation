@@ -5,7 +5,7 @@
 Index pattern selector
 ======================
 
-The Kibana app lets you select a custom index pattern for the *Overview*, *Agents* and *Discover* tabs, used to run search and analytics against. You can create custom index patterns on Kibana, and select them on the app if they're compatible.
+The Wazuh Kibana plugin  lets you select a custom index pattern for the *Overview*, *Agents* and *Discover* tabs, used to run search and analytics against. You can create custom index patterns on Kibana, and select them on the Kibana plugin if they're compatible.
 
 You can select a different index pattern in two ways:
 

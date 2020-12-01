@@ -2,10 +2,10 @@
 
 .. _kibana_app_overview:
 
-App overview
-============
+Wazuh Kibana plugin overview
+============================
 
-The Wazuh app is available on the left side of the screen, on the Kibana sidebar. It's organized in four main sections on the top navigation bar, an indicator for the currently selected API and index pattern, and a button to open the Settings page. This section is a brief description of each of these sections, its features and what the user can do with them.
+The Wazuh Kibana plugin is available on the left side of the screen, on the Kibana sidebar. It's organized in four main sections on the top navigation bar, an indicator for the currently selected API and index pattern, and a button to open the Settings page. This section is a brief description of each of these sections, its features and what the user can do with them.
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/app-navigation.png
   :align: center
@@ -13,7 +13,7 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
 .. topic:: Overview
 
-    This is the main Wazuh app section. It provides an overall view of your cluster in its *General* section, where you can visualize all the triggered alerts from a specified time range. On the other sections, such as *PCI DSS* or *Vulnerabilities*, you can find more specific dashboards and charts for different Wazuh capabilities. Take a look at the :ref:`user manual <user_manual>` for more information.
+    This is the main Wazuh Kibana plugin section. It provides an overall view of your cluster in its *General* section, where you can visualize all the triggered alerts from a specified time range. On the other sections, such as *PCI DSS* or *Vulnerabilities*, you can find more specific dashboards and charts for different Wazuh capabilities. Take a look at the :ref:`user manual <user_manual>` for more information.
 
 .. topic:: Management
 
@@ -49,4 +49,4 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
 .. topic:: Settings
 
-    The *Settings* page allows you to configure and customize your Wazuh app experience. This section is fully described on its own :ref:`section <kibana_settings>` in the documentation.
+    The *Settings* page allows you to configure and customize your Wazuh Kibana plugin experience. This section is fully described on its own :ref:`section <kibana_settings>` in the documentation.

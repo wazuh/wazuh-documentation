@@ -7,7 +7,7 @@ Ruleset
 
 The ruleset is a key part of Wazuh. It's used by the manager to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies or security policy violations. You can read more about it on this :ref:`link <ruleset>`.
 
-The Wazuh app provides a section for the ruleset on the *Management* tab. It's divided in two parts: **Rules**, **Decoders**, and **CDB lists**. You can easily switch between them with the buttons on the right side. The table allows you to navigate through the rules or decoders, and you can use the search bar to filter.
+The Wazuh Kibana plugin provides a section for the ruleset on the *Management* tab. It's divided in two parts: **Rules**, **Decoders**, and **CDB lists**. You can easily switch between them with the buttons on the right side. The table allows you to navigate through the rules or decoders, and you can use the search bar to filter.
 
 A special search syntax can be used on the bar for filtering rules and decoders, similar to the *Lucene* syntax used in Kibana. For example, if you type ``group: audit``, it will create a filter pill under the search bar. You can remove the filter clicking on the `X` icon.
 
