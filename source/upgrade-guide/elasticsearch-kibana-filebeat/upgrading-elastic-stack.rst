@@ -208,6 +208,12 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_filebeat.rst
 
+#. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E output.logstash.enabled=false
+
 
 Upgrading Kibana
 ----------------
