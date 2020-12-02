@@ -20,22 +20,25 @@ Installing Wazuh manager
 
   .. group-tab:: Yum
 
+
       .. tabs::
+
 
         .. tab:: CentOS 6/7
 
           .. code-block:: console
+          
+            # yum update
+            # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+            # scl enable devtoolset-7 bash
 
-          # yum update
-          # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
-          # scl enable devtoolset-7 bash
 
         .. tab:: CentOS 8
 
           .. code-block:: console
 
-          # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-          # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
+            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
+            # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
 
   
   .. group-tab:: APT

@@ -28,16 +28,16 @@ Installing Wazuh agent from sources
 
             .. code-block:: console
 
-            # yum update
-            # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
-            # scl enable devtoolset-7 bash
+              # yum update
+              # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+              # scl enable devtoolset-7 bash
 
           .. tab:: CentOS 8
 
             .. code-block:: console
 
-            # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-            # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
+              # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
+              # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
 
 
       .. tab:: APT
@@ -575,7 +575,7 @@ Installing Wazuh agent from sources
        
         .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
-        1. Install development tools and compilers.
+        1. Install development tools and build the needed compilers.
 
           1.1 Install pkgutil an update it.
 
@@ -590,12 +590,47 @@ Installing Wazuh agent from sources
 
             # /opt/csw/bin/pkgutil -y -i python27
             # ln -sf /opt/csw/bin/python2.7 /usr/bin/python
+            # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
 
           1.3  Install the following tools:
 
            .. code-block:: console
 
             # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
+
+          1.4  Install a gcc version to include all files needed in the next step:
+
+           .. code-block:: console
+
+            # pkg install gcc-45
+
+          1.5  Download and build the gcc/g++ 5.5 compiler:
+
+           .. code-block:: console
+
+            # curl -O https://ftp.gnu.org/gnu/gcc/gcc-5.5.0/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+            # ln -sf gcc-5.5.0 gcc
+            # cd gcc && ./contrib/download_prerequisites
+            # cd .. && mkdir -p gcc-build && cd gcc-build
+            # ../gcc/configure --prefix=/usr/local/gcc-5.5.0 --enable-languages=c,c++ --disable-multilib --disable-libsanitizer --disable-bootstrap --with-ld=/usr/ccs/bin/ld --without-gnu-ld --with-gnu-as --with-as=/opt/csw/bin/gas
+            # gmake
+            # gmake install
+            # export PATH=/usr/local/gcc-5.5.0/bin/:/usr/local/bin/:/usr/bin/:/usr/sbin/:$PATH
+            # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0/
+            # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib/
+            # cd ..
+
+          .. note:: The ``gmake`` step will take several minutes to complete. This is a normal behavior.
+
+          1.6  Install cmake library:
+
+           .. code-block:: console
+
+            # curl -O -L https://github.com/Kitware/CMake/releases/download/v3.18.2/cmake-3.18.2.tar.gz && gtar xzf cmake-3.18.2.tar.gz
+            # ln -sf cmake-3.18.2 cmake
+            # cd cmake && ./bootstrap
+            # gmake
+            # gmake install
 
         2. Download the latest version.
 
