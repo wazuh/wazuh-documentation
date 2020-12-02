@@ -59,7 +59,7 @@ GitHub repository
 In the ruleset repository you will find:
 
 * **New rules, decoders and rootchecks**
-   We update and maintain the out-of-the-box rules provided by OSSEC, both to eliminate false positives and to increase accuracy. In addition, we map the rules to PCI-DSS compliance controls, making it easy to identify when an alert is related to a specific compliance requirement.
+   We update and maintain the out-of-the-box Wazuh ruleset, both to eliminate false positives and to increase accuracy. In addition, we map the rules to PCI-DSS compliance controls, making it easy to identify when an alert is related to a specific compliance requirement.
 
 
 * **Tools**
