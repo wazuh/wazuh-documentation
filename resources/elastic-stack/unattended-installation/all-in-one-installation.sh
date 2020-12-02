@@ -380,7 +380,7 @@ healthCheck() {
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
-        echo "All the componets have already been installed."
+        echo "All the componens have already been installed."
         exit 1;    
     else
         echo "Starting the installation..."
