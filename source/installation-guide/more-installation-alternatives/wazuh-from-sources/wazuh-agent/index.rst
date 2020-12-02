@@ -769,6 +769,8 @@ Installing Wazuh agent from sources
             # cd cmake && ./bootstrap
             # gmake
             # gmake install
+            # PATH="/usr/local/bin/:${PATH}"
+            # export PATH
             # cd ..
 
         2. Download the latest version and a necessary file.
