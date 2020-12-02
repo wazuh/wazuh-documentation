@@ -582,7 +582,8 @@ Installing Wazuh agent from sources
             .. code-block:: console
 
              # pkgadd -d http://get.opencsw.org/now
-             # /opt/csw/bin/pkgutil -y -U
+             # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
+             # pkgutil -y -U
 
           1.2  Install python 2.7
 
@@ -590,13 +591,12 @@ Installing Wazuh agent from sources
 
             # /opt/csw/bin/pkgutil -y -i python27
             # ln -sf /opt/csw/bin/python2.7 /usr/bin/python
-            # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
 
           1.3  Install the following tools:
 
            .. code-block:: console
 
-            # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
+            # pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
           1.4  Install a gcc version to include all files needed in the next step:
 
@@ -631,12 +631,13 @@ Installing Wazuh agent from sources
             # cd cmake && ./bootstrap
             # gmake
             # gmake install
+            # cd ..
 
         2. Download the latest version.
 
          .. code-block:: console
 
-          # /opt/csw/bin/git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
+          # git clone -b v|WAZUH_LATEST| https://github.com/wazuh/wazuh.git
 
          .. note:: If you can't download the file due to an Open SSL error, then you should copy the directory with the scp utility.
  
@@ -723,6 +724,8 @@ Installing Wazuh agent from sources
 
           .. code-block:: console
 
+            # PATH="${PATH}:/usr/sbin:/usr/bin:/usr/sbin/:/opt/csw/gnu/:/usr/sfw/bin/:/opt/csw/bin/"
+            # export PATH
             # pkgadd -d http://get.opencsw.org/now
 
          1.2  Install the following tools:
@@ -730,6 +733,43 @@ Installing Wazuh agent from sources
           .. code-block:: console
 
             # /opt/csw/bin/pkgutil -y -i git automake gmake cmake autoconf libtool wget curl gcc5core gcc5g++
+
+         1.3  Download and build the gcc/g++ 5.5 compiler:
+
+          .. code-block:: console
+
+            # curl -k -O https://ftp.gnu.org/gnu/gcc/gcc-5.5.0/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+            # ln -sf gcc-5.5.0 gcc
+            # cd gcc
+            # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpfr-2.4.2.tar.bz2 && gtar xjf mpfr-2.4.2.tar.bz2 && ln -sf mpfr-2.4.2 mpfr
+            # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-4.3.2.tar.bz2 && gtar xjf gmp-4.3.2.tar.bz2 && ln -sf gmp-4.3.2 gmp
+            # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-0.8.1.tar.gz && gtar xzf mpc-0.8.1.tar.gz && ln -sf mpc-0.8.1 mpc
+            # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.14.tar.bz2 && gtar xjf isl-0.14.tar.bz2 && ln -sf isl-0.14 isl
+            # cd .. && mkdir -p gcc-build && cd gcc-build
+            # ../gcc/configure --prefix=/usr/local/gcc-5.5.0 --enable-languages=c,c++ --disable-multilib --disable-libsanitizer --disable-bootstrap --with-gnu-as --with-as=/opt/csw/bin/gas
+            # gmake
+            # gmake install
+            # echo "export PATH=/usr/local/gcc-5.5.0/bin:${PATH}" >> /etc/profile
+            # PATH="/usr/local/gcc-5.5.0/bin:${PATH}"
+            # export PATH
+            # CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0/
+            # export CPLUS_INCLUDE_PATH
+            # LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib/
+            # export LD_LIBRARY_PATH
+            # cd ..
+
+          .. note:: The ``gmake`` step will take several minutes to complete. This is a normal behavior.
+
+         1.4  Install cmake library:
+
+          .. code-block:: console
+
+            # curl -k -O -L https://github.com/Kitware/CMake/releases/download/v3.18.2/cmake-3.18.2.tar.gz && gtar xzf cmake-3.18.2.tar.gz
+            # ln -sf cmake-3.18.2 cmake
+            # cd cmake && ./bootstrap
+            # gmake
+            # gmake install
+            # cd ..
 
         2. Download the latest version and a necessary file.
 
