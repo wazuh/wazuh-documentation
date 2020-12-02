@@ -43,13 +43,7 @@ will be working with **wazuh-alerts-\***.
 At this point, a graph will be generated. You can select a lapse of time
 to display the information related to that period. Click on the
 following dropdown menu, define it and then update your
-changes.
-
-.. thumbnail:: ../../../images/kibana-app/custom-dashboard/select-lapse-time.png
-   :align: center
-   :width: 100%
-
-This chart can be configured to match your preferences. You can organize
+changes. This chart can be configured to match your preferences. You can organize
 your data using **Metrics** and **Buckets**.
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/metrics-and-buckets.png
@@ -66,31 +60,23 @@ For this example, we will leave the Y-Axis as default (*count*) and we
 will modify the Buckets (*X-Axis*) to sort them according to the level
 of the rules that have been triggered.
 
-To do so we will have to click on **X-Axis**:
+To do so we will have to click on **X-Axis** and them 
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-x-axis.png
    :align: center
 
-Select the **Terms** option in the **Select an aggregation** menu:
-
-.. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-select-an-aggregation-terms.png
-   :align: center
-
-Now you will be able to select a **Field** to sort by (*e.g.
-rule.level*):
+Select the **Terms** option in the **Select an aggregation** menu. Now you will be able to select a **Field** to sort by (*e.g. rule.level*) and, eventually, you will need to apply the changes to visualize them:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-term-field.png
-   :align: center
-
-And, eventually, you will need to apply the changes to visualize
-them:
-
-.. thumbnail:: ../../../images/kibana-app/custom-dashboard/bucket-apply-changes.png
    :align: center
 
 Now you will be able to see a chart like this:
 
 .. thumbnail:: ../../../images/kibana-app/custom-dashboard/horizontal-example-chart.png
+   :align: center
+   :width: 100%
+
+.. thumbnail:: ../../../images/kibana-app/custom-dashboard/map.png
    :align: center
    :width: 100%
 
