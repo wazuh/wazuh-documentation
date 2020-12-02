@@ -32,7 +32,7 @@ a) For RPM-based distributions:
 
 .. code-block:: console
 
-  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+  # yum install make gcc policycoreutils automake autoconf libtool unzip
 
 b) For Debian-based distributions:
 
@@ -98,7 +98,7 @@ For RPM-based distributions:
 
 .. code-block:: console
 
-  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+  # yum install make gcc policycoreutils automake autoconf libtool unzip
 
 For Debian-based distributions:
 

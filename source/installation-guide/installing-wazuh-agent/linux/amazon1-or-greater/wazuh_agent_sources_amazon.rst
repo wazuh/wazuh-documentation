@@ -16,7 +16,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # yum install make gcc policycoreutils-python automake autoconf libtool
+      # yum install make gcc policycoreutils automake autoconf libtool
 
 2. Download and extract the latest version:
 

@@ -133,7 +133,7 @@ NGINX SSL proxy for Splunk (RPM-based distributions)
 
     .. note::
 
-      This assumes that you have ``policycoreutils-python`` installed to manage SELinux. Also that the used port is the default one.
+      This assumes that you have ``policycoreutils`` installed to manage SELinux. Also that the used port is the default one.
 
 
 Enable authentication by htpasswd
