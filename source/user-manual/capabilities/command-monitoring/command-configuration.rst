@@ -120,7 +120,7 @@ And the custom rule to alert when "uptime" is higher than 2::
   <rule id="100101" level="7" ignore="7200">
     <if_sid>530</if_sid>
     <match>ossec: output: 'uptime': </match>
-    <regex>load averages: 2.</regex>
+    <regex>load average: 2.</regex>
     <description>Load average reached 2..</description>
   </rule>
 
