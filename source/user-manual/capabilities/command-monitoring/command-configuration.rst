@@ -124,7 +124,7 @@ If the output changes, the system will generate an alert indicating a network li
 Load average
 ------------
 
-Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like two load average in this example.
+Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like two load averages in this example.
 
 This can be configured in ``agent.conf`` or ``ossec.conf``:
 
@@ -135,7 +135,7 @@ This can be configured in ``agent.conf`` or ``ossec.conf``:
       <command>uptime</command>
   </localfile>
 
-And the custom rule to alert when "uptime" is higher than two load average:
+And the custom rule to alert when "uptime" is higher than two load averages:
 
 .. code-block:: xml
 
