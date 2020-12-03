@@ -56,6 +56,8 @@ newUrls['4.1'] = [
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_3.html',
+  '/release-notes/release_4_0_2.html',
   '/release-notes/release_4_0_1.html',
   '/release-notes/release_4_0_0.html',
   '/user-manual/api/rbac/auth_context.html',
@@ -350,37 +352,37 @@ redirections.push(
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/index.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/index.html'
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-app.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-app.html'
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-basic.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-basic.html'
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-distributed.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-forwarder.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-forwarder.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-polling.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },  
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
       '3.13': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
+      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
     },    
     {
       'target': ['3.13=>4.0', '4.0=>3.13'],
@@ -976,7 +978,7 @@ newUrls['3.13'] = [
 
 removedUrls['3.13'] = [
   '/getting-started/use-cases.html',
-  '/getting-started/components/index.html',
+  '/getting-started/components.html',
 ];
 
 /* *** RELEASE 3.12 ****/

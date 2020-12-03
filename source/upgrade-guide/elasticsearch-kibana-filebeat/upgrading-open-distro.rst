@@ -7,6 +7,8 @@ Upgrading Open Distro for Elasticsearch
 
 This section guides through the upgrade process of Elasticsearch, Filebeat and Kibana for *Open Distro for Elasticsearch* distribution. 
 
+.. note:: Root user privileges are required to execute all the commands described below.
+
 Preparing Open Distro for Elasticsearch
 ---------------------------------------
 
@@ -21,7 +23,7 @@ Preparing Open Distro for Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. code-block:: console
 
@@ -44,7 +46,7 @@ Preparing Open Distro for Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. code-block:: console
 
@@ -75,7 +77,7 @@ Preparing Open Distro for Elasticsearch
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. include:: ../../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
 
@@ -132,7 +134,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -201,7 +203,7 @@ Upgrading Filebeat
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -262,6 +264,12 @@ Upgrading Filebeat
 #. Restart Filebeat:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_filebeat.rst
+
+#. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E output.logstash.enabled=false    
 
 Upgrading Kibana
 ----------------
@@ -344,7 +352,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -387,7 +395,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.1-1.zip
+          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip
 
       .. group-tab:: From the package
 
@@ -441,7 +449,7 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to a new
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 

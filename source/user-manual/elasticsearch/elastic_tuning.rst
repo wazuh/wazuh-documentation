@@ -22,17 +22,24 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
   .. group-tab:: Open Distro for Elasticsearch
 
-    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. To generate a new password, Open Distro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. 
+    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. We will create a backup of the security configuration and modify the resulting ``internal_users.yml`` file to avoid losing custom security configurations.  
 
+    #. Make a backup of your security configuration using the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<elasticsearch_ip>``  and  ``<backup-directory>``  and execute the following commands:
 
-    #. Replace ``<new-password>`` with the chosen new password and generate a hash for it using the ``hash.sh`` utility:
+        .. code-block:: console
+
+          # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
+          # ./securityadmin.sh -backup <backup-directory> -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
+
+    
+    #. To generate a new password hash, Open Distro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<new-password>`` with the chosen new password and generate a hash for it using the ``hash.sh`` utility:
 
         .. code-block:: console
 
           # bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p <new-password>
 
     
-    #. The generated hash must be placed on the hash section for the user whose password you want to change, for example ``admin``,  in ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``: 
+    #. The generated hash must be placed on the hash section for the user whose password you want to change, for example ``admin``,  in ``<backup-directory>/internal_users.yml``: 
 
         .. code-block:: yaml
           :emphasize-lines: 2
@@ -45,12 +52,16 @@ In order to improve security, it is highly recommended to change Elasticsearch's
             description: "Demo admin user"
 
 
-    #. In order to load the changes made, it is necessary to execute the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<elasticsearch_ip>`` and execute the following commands: 
+    #. In order to load the changes made, it is necessary to execute the ``securityadmin`` script to push the modified ``internal_users.yml`` file. Replace ``<elasticsearch_ip>`` and ``<backup-directory>`` and execute the following commands: 
 
         .. code-block:: console
 
           # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
+          # ./securityadmin.sh -f <backup-directory>/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
+
+    #. Remove files from your ``<backup-directory>``.
+
+    .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``      
 
   
 

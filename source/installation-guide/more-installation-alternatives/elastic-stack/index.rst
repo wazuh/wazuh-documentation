@@ -13,7 +13,7 @@ This section aims to guide the user through the process of installing Wazuh. In 
 Deployment types
 ----------------
 
-The Installation guide is divided into two independent sections, all-in-one deployment and distributed deployment according to the chosen configuration. The requirements of the Wazuh and Elastic Stack installation are similiar to the ones described in the :ref:`requirements <installation_requirements>` section.
+The Installation guide is divided into two independent sections, all-in-one deployment and distributed deployment according to the chosen configuration. The requirements of the Wazuh and Elastic Stack installation are similar to the ones described in the :ref:`requirements <installation_requirements>` section.
 
 - All-in-one deployment: In this case, Wazuh and Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments. 
 

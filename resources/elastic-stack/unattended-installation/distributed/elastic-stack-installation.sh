@@ -205,13 +205,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ]
     then
-        eval "yum install elasticsearch-7.9.2 -y -q $debug"
-    elif [ $sys_type == "apt-get" ]
+        eval "yum install elasticsearch-7.9.3 -y -q $debug"
+    elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.2 -y -q $debug"
-    elif [ $sys_type == "zypper" ]
+        eval "apt-get install elasticsearch=7.9.3 -y -q $debug"
+    elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.2 $debug"
+        eval "zypper -n install elasticsearch-7.9.3 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -337,7 +337,7 @@ copyCertificates() {
 
     if [ -n "$single" ]
     then
-        eval "unzip ~/certs.zip -d ~/certs $debug"
+        eval "unzip -o ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
         eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/elasticsearch/certs/ $debug"
         eval "mv ~/certs/${iname}/${iname}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
@@ -348,7 +348,7 @@ copyCertificates() {
         eval "zip -u ~/certs.zip config.yml $debug"
         eval "cp ~/config.yml ~/certs/ $debug"
     else
-        eval "unzip ~/certs.zip -d ~/certs $debug"
+        eval "unzip -o ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
         eval "cp -R ~/certs/ca/ ~/certs/${IMN[pos]}/* /etc/elasticsearch/certs/ $debug"
         eval "mv ~/certs/${IMN[pos]}/${IMN[pos]}.crt /etc/elasticsearch/certs/elasticsearch.crt $debug"
@@ -409,13 +409,13 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ]
     then
-        eval "yum install kibana-7.9.2 -y -q  $debug"
-    elif [ $sys_type == "zypper" ]
+        eval "yum install kibana-7.9.3 -y -q  $debug"    
+    elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.2 $debug"
-    elif [ $sys_type == "apt-get" ]
+        eval "zypper -n install kibana-7.9.3 $debug"
+    elif [ $sys_type == "apt-get" ] 
         then
-        eval "apt-get install kibana=7.9.2 -y -q  $debug"
+        eval "apt-get install kibana=7.9.3 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -427,7 +427,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.2-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
