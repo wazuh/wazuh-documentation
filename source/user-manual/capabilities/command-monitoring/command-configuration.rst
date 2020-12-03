@@ -135,7 +135,7 @@ This can be configured in ``agent.conf`` or ``ossec.conf``:
       <command>uptime</command>
   </localfile>
 
-And the custom rule to alert when "uptime" is higher than two load average:
+And the custom rule to alert when "uptime" is higher than two load averages:
 
 .. code-block:: xml
 
