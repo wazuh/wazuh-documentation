@@ -16,4 +16,4 @@ Once you have :ref:`added your billing details <cloud_account_billing_details>`,
 
 3. Choose **Cancel** option and confirm.
 
-.. warning:: Canceling an environment will cause the loss of the data stored so far and takes effect by the end of the current billing period.
+.. warning:: Canceling an environment will cause the loss of the data stored so far and takes effect by the end of the current billing period. You will be able to benefit from the service until the environment cancellation takes effect.

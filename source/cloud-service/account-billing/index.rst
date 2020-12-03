@@ -2,7 +2,7 @@
 
 .. _cloud_account_billing:
 
-Account and Billing
+Account and billing
 ===================
 
 .. meta::

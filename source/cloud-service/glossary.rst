@@ -67,7 +67,7 @@ The environment is the core of Wazuh Cloud Service. It will both work as a hoste
 **Hot Storage (Online Storage)**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Data available on the Wazuh WUI. It is formed by all the generated alerts from the Wazuh manager. This information is available as soon as Wazuh manager processes it and it will remain available until you reach your tier limit.
+Data available on the Wazuh WUI. It is formed by all the generated alerts from the Wazuh manager. This information is available as soon as Wazuh manager processes it and Elasticsearch indexes it, and it will remain available until you reach your tier limit.
 
 .. _cloud_glossary_region:
 
@@ -86,7 +86,7 @@ API to interact with Wazuh Cloud Service. E.g. it can be used to access an envir
 **Tier**
 ^^^^^^^^
 
-Total size (in GB) of data from the alerts which are available online through the Web User Interface. It matches the definition of :ref:`hot storage <cloud_glossary_hot_storage>`.
+Total size (in GB) of data from the alerts and archives which are available online through the Web User Interface. It matches the definition of :ref:`hot storage <cloud_glossary_hot_storage>`.
 
 **Trial**
 ^^^^^^^^^

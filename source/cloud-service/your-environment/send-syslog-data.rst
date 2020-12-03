@@ -145,7 +145,7 @@ Run Logstash from the command line:
    
    C:\logstash\bin\logstash.bat -f C:\logstash\config\logstash.conf
 
-And `install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using NSSM or Windows Task Manager.
+And `install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
 
 9. Restart Wazuh Agent.
 

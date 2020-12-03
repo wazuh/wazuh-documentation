@@ -40,6 +40,8 @@ While configuring an environment some questions may arise. This list gathers som
 
 - `Do I have access to Elasticsearch API?`_
 
+- `How can I forward my logs to another solution or SOC?`_
+
 How can I send data to my environment?
 --------------------------------------
 
@@ -128,3 +130,9 @@ Do I have access to Elasticsearch API?
 --------------------------------------
 
 Elasticsearch API is not accessible by default. In case you want to access it, address us through the **Help** section and we will authorize the connection from a specific IP. Then you will have access to ``GET`` methods of your Elasticsearch API.
+
+
+How can I forward my logs to another solution or SOC?
+-----------------------------------------------------
+
+You can download your data by :ref:`accessing cold storage<cloud_your_environment_accessing_cold_storage>` or through the Elasticsearch API if access has been authorized. Then, you will be able to push it to other solutions or Security Operations Center (SOC).

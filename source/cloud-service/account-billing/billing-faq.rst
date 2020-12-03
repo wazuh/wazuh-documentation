@@ -83,7 +83,7 @@ Each environment is charged monthly, according to the environment's beginning da
 Can I get a refund?
 -------------------
 
-Charges are non-refundable, but you will if you want to cease using an environment we will not charge for it as soon as it is canceled. For any special considerations regarding a refund, contact us through the **Help** section.
+Charges are non-refundable, but if you want to cease using an environment you can :ref:`cancel your environment <cloud_your_environment_cancel_environment>` anytime and we will not charge you beyond the current billing period. For any special considerations regarding a refund, contact us through the **Help** section.
 
 What is included in my paid Wazuh Cloud Service environment?
 ------------------------------------------------------------

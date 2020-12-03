@@ -68,7 +68,7 @@ Follow these steps:
 	
    3. Restart NGINX with: ``systemctl restart nginx``
 
-   4. Register your agent following the instructions but replacing the *WAZUH_MANAGER_IP* (``nginx_ip``) value with the NGINX instance IP.
+   4. Register your agent :ref:`following the instructions <cloud_getting_started_register_agents>` but replacing the *WAZUH_MANAGER_IP* (``nginx_ip``) value with the NGINX instance IP.
 
    Example:
 
@@ -88,7 +88,7 @@ In case your agents are located in AWS, you can access to our cloud service secu
 
 To do this:
 
-1. Open a ticket requesting your VPC endpoint service name. It has this format:
+1. On your Wazuh Cloud Console **Help** section, contact us requesting your VPC endpoint service name. It has this format:
 
    ``com.amazonaws.vpce.<region>.vpce-svc-<aws-service-id>``
 

@@ -43,6 +43,8 @@ Is it PCI DDS compliant?
 
 Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. `Contact us <https://wazuh.com/cloud/>`_ if you want to know more about our AoC. Learn more about this `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
 
+.. _cloud_getting_started_support:
+
 How can I get support?
 ----------------------
 
@@ -67,7 +69,7 @@ In AWS. This allows us to provide a quality service guaranteed by Amazon Web Ser
 What is a tier?
 ---------------
 
-A tier is the total size (in GB) of data from the alerts which are available online through your Web User Interface. This data consists of the threat inteligence feed generated from Wazuh.
+A tier is the total size (in GB) of data from the alerts and archives which are available online through your Web User Interface. This data consists of the threat inteligence feed generated from Wazuh.
 
 
 What will happen when I use all of my tier?
@@ -75,4 +77,4 @@ What will happen when I use all of my tier?
 
 You will be able to see the most recent data according to your tier. The older information will be removed so the total visible data matches your tier. You will still be able to access older data as :ref:`cold storage <cloud_glossary_cold_storage>`, where it will be stored for a year with no size limits and will be easily accessible.
 
-As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are being used, the oldest data is rotated (keeping 100GB of total data on the WUI), but will remain accessible as cold storage for a year.
+As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI), but will remain accessible as cold storage for a year.
