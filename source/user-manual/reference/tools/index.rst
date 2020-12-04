@@ -26,10 +26,6 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.2                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
@@ -61,7 +57,6 @@ Tools
     wazuh-control
     ossec-logtest
     wazuh-logtest
-    ossec-makelists
     clear_stats
     wazuh-regex
     update_ruleset
