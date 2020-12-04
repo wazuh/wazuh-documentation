@@ -46,7 +46,11 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               | manager                     |
+| ossec-regex                                       | Validates a regex expression                                               | manager                     |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 4.2.0 Use :doc:`wazuh-regex <wazuh-regex>` instead.        |                             |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`update_ruleset <update_ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
 |                                                   |                                                                            |                             |
@@ -82,7 +86,7 @@ Tools
     syscheck_control
     syscheck_update
     clear_stats
-    ossec-regex
+    wazuh-regex
     update_ruleset
     util.sh
     verify-agent-conf
