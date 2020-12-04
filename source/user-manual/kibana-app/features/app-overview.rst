@@ -28,6 +28,21 @@ Security information management
   :align: center
   :width: 100%
 
+Auditing and policy monitory:
+-----------------------------
+
+- Policy monitoring:
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/policy-monitoring.png
+  :align: center
+  :width: 100%
+
+- System auditing: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/system-auditing.png
+  :align: center
+  :width: 100%
+
 
 Regulatory compliance  
 ---------------------
@@ -37,6 +52,48 @@ Regulatory compliance
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/PCI_DSS.png
   :align: center
   :width: 100%
+
+- GPPR: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/GDPR.png
+  :align: center
+  :width: 100%
+
+- NIST 800-53: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/NIST.png
+  :align: center
+  :width: 100%
+
+- HIPPA: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/HIPPA.png
+  :align: center
+  :width: 100%
+
+- TSC: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/TSC.png
+  :align: center
+  :width: 100%
+
+
+
+Threat detection and response  
+-----------------------------
+
+- Vulnerabilities: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/vulnerabilities.png
+  :align: center
+  :width: 100%
+
+- MITRE ATT&CK: 
+
+.. thumbnail:: ../../../images/kibana-app/features/app-overview/MITRE.png
+  :align: center
+  :width: 100%
+
 
 
 Discover

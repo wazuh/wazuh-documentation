@@ -13,7 +13,7 @@ When you're navigating through the *Overview* or *Agents* tabs, you can generate
 
 The generated reports are available on *Management > Reporting*. From there, you can list them, refresh the list to scan for new generated reports, download or delete them. The reports are generated and downloaded in PDF format to your computer.
 
-.. thumbnail:: ../../../images/kibana-app/features/reporting/list-reports.png
+.. thumbnail:: ../../../images/kibana-app/features/reporting/reports-list.png
   :align: center
   :width: 100%
 

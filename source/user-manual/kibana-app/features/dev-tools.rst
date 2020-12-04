@@ -7,6 +7,10 @@ Dev tools
 
 The *Dev tools* tab provides an user interface to interact with the Wazuh API. You can use it to send requests and get a response. This tab uses your currently selected API from :ref:`kibana_settings`. The interface is split into two panes: *editor pane* and *response pane*.
 
+.. thumbnail:: ../../../images/kibana-app/features/dev-tools/dev-tools-menu.png
+  :align: center
+  :width: 100%
+
 .. thumbnail:: ../../../images/kibana-app/features/dev-tools/dev-tools.png
   :align: center
   :width: 100%
