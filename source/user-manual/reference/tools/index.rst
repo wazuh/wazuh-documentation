@@ -8,7 +8,11 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | Tools                                             | Descriptions                                                               | Supported installations     |
 +===================================================+============================================================================+=============================+
-| :doc:`ossec-control <ossec-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
+| ossec-control                                     | Manages the status of Wazuh processes                                      | manager, agent              |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 4.2.0 Use :doc:`wazuh-control <wazuh-control>` instead.    |                             |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-control <wazuh-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -70,7 +74,7 @@ Tools
     agent-auth
     agent_control
     manage_agents
-    ossec-control
+    wazuh-control
     ossec-logtest
     wazuh-logtest
     ossec-makelists
