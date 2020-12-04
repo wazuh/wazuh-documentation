@@ -5,16 +5,16 @@
 Testing decoders and rules
 ===============================
 
-The tool *ossec-logtest* allow us to test how an event is decoded and if an alert is generated.
+The tool *wazuh-logtest* allow us to test how an event is decoded and if an alert is generated.
 
-Run the tool */var/ossec/bin/ossec-logtest* and paste the following log::
+Run the tool */var/ossec/bin/wazuh-logtest* and paste the following log::
 
     Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
 
 
 .. code-block:: console
 
-    $ /var/ossec/bin/ossec-logtest
+    $ /var/ossec/bin/wazuh-logtest
 
 .. code-block:: none
     :class: output
@@ -47,7 +47,7 @@ In addition, you can use the option "-v" to show more information about the rule
 
 .. code-block:: console
 
-    $ /var/ossec/bin/ossec-logtest -v
+    $ /var/ossec/bin/wazuh-logtest -v
 
 .. code-block:: none
     :class: output

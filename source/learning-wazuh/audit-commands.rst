@@ -406,7 +406,7 @@ Observe the order in which our child rules are evaluated
 #. Search Kibana for ``data.audit.command:sleep`` to find the resulting event.
    Copy the ``full_log`` value.
 
-#. Run ``/var/ossec/bin/ossec-logtest -v`` on the Wazuh Manager and paste in
+#. Run ``/var/ossec/bin/wazuh-logtest -v`` on the Wazuh Manager and paste in
    the ``full_log`` value from above.
 
 #. Carefully note the order in which child rules of "80792 - Audit: Command"
@@ -434,7 +434,7 @@ Observe the order in which our child rules are evaluated
 
     Sometimes a new rule never matches anything because of a flaw in its criteria.
     Other times it never matches because it is never even evaluated.  Remember,
-    ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being
+    ``wazuh-logtest -v`` is your friend.  Use it to see if your rule is being
     evaluated at all, and if not, what rule might be overshadowing it.
 
 
