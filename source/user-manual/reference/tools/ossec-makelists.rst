@@ -5,6 +5,8 @@
 ossec-makelists
 ===============
 
+.. deprecated:: 4.2
+
 The ``ossec-makelists`` utility to compile cdb databases.  This will scan :ref:`ossec.conf <reference_ossec_conf>` for database files, check the mtime, and recompile all out of date databases.
 
 

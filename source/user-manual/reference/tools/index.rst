@@ -31,6 +31,8 @@ Tools
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 4.2                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring and system auditing database        | manager                     |
 |                                                   |                                                                            |                             |
