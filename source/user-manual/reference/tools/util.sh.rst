@@ -5,6 +5,8 @@
 util.sh
 =======
 
+.. deprecated:: 4.2
+
 The ``util.sh`` shell script can add a log file to be monitored by wazuh-logcollector.  It can also add a ``full_command`` to check for changes to a website, or for changes to the nameserver of a domain.
 
 A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes/>`_ from Daniel Cid (for 3WoO) introduced this utility.
