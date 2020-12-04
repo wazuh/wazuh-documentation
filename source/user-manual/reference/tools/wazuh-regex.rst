@@ -5,7 +5,7 @@
 wazuh-regex
 ===========
 
-.. versionadded:: 4.2.0
+.. versionadded:: 4.2
 
 The wazuh-regex program is used to validate a regex expression.
 

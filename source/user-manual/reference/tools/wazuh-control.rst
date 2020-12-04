@@ -5,7 +5,7 @@
 wazuh-control
 =============
 
-.. versionadded:: 4.2.0
+.. versionadded:: 4.2
 
 The wazuh-control script is used to start, stop, configure, or check on the status of Wazuh processes. This script can enable or disable client-syslog, database logging, agentless configurations, integration with slack and pagerduty, and debug mode.
 
