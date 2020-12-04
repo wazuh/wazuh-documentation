@@ -32,9 +32,9 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring                                     | manager                     |
+| :doc:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring and system auditing database        | manager                     |
 |                                                   |                                                                            |                             |
-|                                                   | and system auditing database                                               |                             |
+|                                                   | .. deprecated:: 4.2                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the integrity checking database         | manager                     |
 |                                                   |                                                                            |                             |

@@ -5,6 +5,8 @@
 rootcheck_control
 =================
 
+.. deprecated:: 4.2
+
 The ``rootcheck_control`` tool allows for the management of the policy monitoring and system auditing database that is stored on the server side.
 
 Anomalies detected by the rootcheck functionality can be listed, and categorized into resolved and outstanding issues.
