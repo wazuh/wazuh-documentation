@@ -174,6 +174,16 @@ redirections.push(
       '4.1': '/user-manual/reference/statistics-files/ossec-remoted-state.html',
       '4.2': '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
     },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/reference/tools/ossec-control.html',
+      '4.2': '/user-manual/reference/tools/wazuh-control.html',
+    },
+    {
+      'target': ['4.1=>4.2', '4.2=>4.1'],
+      '4.1': '/user-manual/reference/tools/ossec-regex.html',
+      '4.2': '/user-manual/reference/tools/wazuh-regex.html',
+    },
 );
 
 /* *** RELEASE 4.1 ****/
