@@ -56,6 +56,8 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-agentd-state.html',
   '/user-manual/reference/statistics-files/wazuh-analysisd-state.html',
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
+  '/user-manual/reference/tools/wazuh-control.html',
+  '/user-manual/reference/tools/wazuh-regex.html',
 ];
 
 removedUrls['4.2'] = [
@@ -76,6 +78,12 @@ removedUrls['4.2'] = [
   '/user-manual/reference/statistics-files/ossec-agentd-state.html',
   '/user-manual/reference/statistics-files/ossec-analysisd-state.html',
   '/user-manual/reference/statistics-files/ossec-remoted-state.html',
+  '/user-manual/reference/tools/ossec-control.html',
+  '/user-manual/reference/tools/ossec-regex.html',
+  '/user-manual/reference/tools/rootcheck_control.html',
+  '/user-manual/reference/tools/syscheck_control.html',
+  '/user-manual/reference/tools/syscheck_update.html',
+  '/user-manual/reference/tools/util.sh.html',
 ];
 
 redirections.push(

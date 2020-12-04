@@ -8,10 +8,6 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | Tools                                             | Descriptions                                                               | Supported installations     |
 +===================================================+============================================================================+=============================+
-| ossec-control                                     | Manages the status of Wazuh processes                                      | manager, agent              |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.2 Use :doc:`wazuh-control <wazuh-control>` instead.      |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-control <wazuh-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
@@ -34,31 +30,11 @@ Tools
 |                                                   |                                                                            |                             |
 |                                                   | .. deprecated:: 4.2                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring and system auditing database        | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.2                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the integrity checking database         | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 3.7                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 3.7                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| ossec-regex                                       | Validates a regex expression                                               | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.2 Use :doc:`wazuh-regex <wazuh-regex>` instead.          |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`update_ruleset <update_ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.2                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`util.sh <util.sh>`                          | Adds a file to be monitored by wazuh-logcollector                          | manager agent               |
 |                                                   |                                                                            |                             |
 |                                                   | .. deprecated:: 4.2                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -86,13 +62,9 @@ Tools
     ossec-logtest
     wazuh-logtest
     ossec-makelists
-    rootcheck_control
-    syscheck_control
-    syscheck_update
     clear_stats
     wazuh-regex
     update_ruleset
-    util.sh
     verify-agent-conf
     agent_groups
     agent_upgrade
