@@ -18,7 +18,7 @@ The Wazuh-Logtest solution is distributed by different components of the Wazuh e
 
 **wazuh-logtest tool**
 
-     Wazuh-Logtest replacement for :ref:`ossec-logtest tool <ossec-logtest>`.
+     Wazuh-Logtest replacement for ossec-logtest tool.
 
 
 Wazuh API and :ref:`wazuh-logtest tool <wazuh-logtest>` connect to the wazuh-analysisd session manager, this acts as a

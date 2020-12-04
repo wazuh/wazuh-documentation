@@ -20,10 +20,6 @@ Tools
 |                                                   |                                                                            |                             |
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 4.1.0                                                      |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
@@ -55,7 +51,6 @@ Tools
     agent_control
     manage_agents
     wazuh-control
-    ossec-logtest
     wazuh-logtest
     clear_stats
     wazuh-regex
