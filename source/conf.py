@@ -27,11 +27,11 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '4.0'
+version = '4.1'
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.0'
+release = '4.1'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+release+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -413,12 +413,12 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.0.3",
+    "|WAZUH_LATEST|" : "4.1.0",
     "|WAZUH_LATEST_ANSIBLE|" : "4.0.0",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.0.3",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.1.0",
     "|WAZUH_LATEST_PUPPET|" : "4.0.0",
-    "|WAZUH_LATEST_OVA|" : "4.0.3",
-    "|WAZUH_LATEST_DOCKER|" : "4.0.3",
+    "|WAZUH_LATEST_OVA|" : "4.1.0",
+    "|WAZUH_LATEST_DOCKER|" : "4.1.0",
     "|OPEN_DISTRO_LATEST|" : "1.11.0",
     "|ELASTICSEARCH_LATEST|" : "7.9.1",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.9.1",
