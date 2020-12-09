@@ -188,7 +188,7 @@ Wazuh Manager
 
 **wazuh_manager_config_overlay**
 
-  Indicates if role should perform a `hash_behaviour=merge` at role runtime, similar to role-distributedd ansible.cfg.
+  Indicates if role should perform a `hash_behaviour=merge` at role runtime, similar to role-distributed ansible.cfg.
   This provides support for a partially defined *wazuh_manager_config* while also moving on from `deprecated hash_behaviour <https://docs.ansible.com/ansible/latest/reference_appendices/config.html#default-hash-behaviour>`_
 
   *Default true*
