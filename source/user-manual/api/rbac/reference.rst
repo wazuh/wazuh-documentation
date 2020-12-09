@@ -116,6 +116,9 @@ This reference also contains a set of default roles and policies that can be imm
     - `Syscollector`_
         - `syscollector:read`_
 
+    - `Task`_
+        - `task:status`_
+
 `Default policies`_
     - `agents_all`_
     - `agents_commands`_
@@ -135,6 +138,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `syscheck_read`_
     - `syscheck_all`_
     - `syscollector_read`_
+    - `task_status`_
 
 `Default roles`_
     - `administrator`_
@@ -633,6 +637,12 @@ syscollector:read
 - :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /syscollector/{agent_id}/processes <operation/api.controllers.syscollector_controller.get_processes_info>` (`agent:id`_, `agent:group`_)
 
+Task
+^^^^^
+task:status
+~~~~~~~~~~~~~
+- :api-ref:`GET /tasks/status <operation/api.controllers.task_controller.get_tasks_status>` (`*:*`_)
+
 
 Default policies
 ----------------
@@ -940,6 +950,19 @@ Resources
 Effect
     - allow
 
+task_status
+^^^^^^^^^^^^^^^^^^
+Allow read tasks information.
+
+Actions
+    - `task:status`_
+
+Resources
+    - ``*:*:*``
+
+Effect
+    - allow
+
 
 Default roles
 -------------
@@ -961,6 +984,7 @@ Policies
     - `security_all`_
     - `syscheck_all`_
     - `syscollector_read`_
+    - `task_status`_
 
 Rules
     - `wui_elastic_admin`_
