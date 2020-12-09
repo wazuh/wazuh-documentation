@@ -22,6 +22,7 @@ Your Wazuh Kibana plugin must match the installed Kibana version. If the version
 
 You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
 
+
 No template found for the selected index pattern
 ------------------------------------------------
 
@@ -71,7 +72,7 @@ The first step is to check if there are alerts in Elasticsearch.
 
 .. code-block:: console
 
-  # curl <ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-3.x-*
+  # curl https://<ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-* -u <username>:<password> -k
 
 If you don't see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
 
