@@ -31,7 +31,7 @@ Options
 - `age`_
 - `exclude`_
 - `reconnect_time`_
-- `multiline`_
+- `multiline_regex`_
 
 
 location
@@ -302,6 +302,10 @@ Set the format of the log to be read. **field is required**
 |                    |                    | may be multiple timestamps in the final event.                                                   |
 |                    |                    |                                                                                                  |
 |                    |                    | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
+|                    |                    |                                                                                                  |
+|                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
@@ -457,14 +461,17 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 
     This option only applies when the ``log_format`` is ``eventchannel``.
 
-multiline
-^^^^^^^^^
+multiline_regex
+^^^^^^^^^^^^^^^
+.. versionadded:: 4.1.0
 
-+--------------------+------------------------------+
-| **Default value**  | n/a                          |
-+--------------------+------------------------------+
-| **Allowed values** | Any `PCRE2 regular expression<../../ruleset/ruleset-xml-syntax/regex.html>`_ |
-+--------------------+------------------------------+
+This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.
+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                        |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
++--------------------+--------------------------------------------------------------------------------------------+
 
 The attributes below are optional.
 
@@ -477,24 +484,32 @@ The attributes below are optional.
 |             |                                       +--------------+               |
 |             |                                       |   all        |               |
 +-------------+---------------------------------------+--------------+---------------+
-| **replace** | allows to replace newline character   |   space      |    start      |
-|             | with other one                        +--------------+               |
+| **replace** | allows to replace newline character   |   space      |  no-replace   |
+|             | with another one                      +--------------+               |
+|             |                                       |   wspace     |               |
+|             |                                       +--------------+               |
 |             |                                       |   tab        |               |
 |             |                                       +--------------+               |
 |             |                                       |   none       |               |
 +-------------+---------------------------------------+--------------+---------------+
+| **timeout** | allows to set max waiting time in     |   1 to 120   |      3        |
+|             | seconds to receive a new line         |              |               |
++-------------+---------------------------------------+--------------+---------------+
 
 .. note::
-    This option only applies when the ``log_format`` is ``syslog``.
+    This option only applies when the `log_format`_ is ``multi-line-regex``.
 
-For example, we may want to read a Python traceback output as one single log, replacing newline with spaces
+.. note::
+    The value of ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
+
+For example, we may want to read a Python Traceback output as one single log, replacing newline with spaces
 
 .. code-block:: xml
 
   <localfile>
       <log_format>syslog</log_format>
       <location>/var/logs/my_python_app.log</location>
-      <multiline replace="space">^Traceback</multiline>
+      <multiline replace="wspace">^Traceback</multiline>
    </localfile>
 
 
