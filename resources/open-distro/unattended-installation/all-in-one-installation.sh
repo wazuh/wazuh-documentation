@@ -25,6 +25,15 @@ logger() {
     
 }
 
+checkArch() {
+    arch=$(uname -m)
+
+    if [ ${arch} != "x86_64" ]; then
+        echo "Uncompatible system. This script must be run on a 64-bit system."
+        exit 1;
+    fi
+}
+
 startService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
@@ -377,7 +386,9 @@ main() {
     if [ "$EUID" -ne 0 ]; then
         echo "This script must be run as root."
         exit 1;
-    fi    
+    fi   
+
+    checkArch 
 
     if [ -n "$1" ]; then      
         while [ -n "$1" ]
