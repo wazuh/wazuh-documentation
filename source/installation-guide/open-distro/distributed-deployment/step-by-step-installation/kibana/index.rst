@@ -106,7 +106,7 @@ Kibana installation and configuration
 
     .. code-block:: console
 
-        # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
+        # /sbin/setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node
 
 
 #. Enable and start the Kibana service:
