@@ -394,8 +394,8 @@ such an exception.
    exception rule.
 
 
-Test the log to observe which rules is evaluated
-------------------------------------------------
+How to observe correct rules are evaluated
+------------------------------------------
 
 #. On your linux-agent, run a mundane command not listed in our CDB.
 
@@ -409,7 +409,7 @@ Test the log to observe which rules is evaluated
 #. Run ``/var/ossec/bin/wazuh-logtest`` on the Wazuh Manager and paste in
    the ``full_log`` value from above.
 
-#. Note the rule 100200 was evaluated.
+#. Verify rule 100200 matches.
 
 #. Remember that when a rule matches, if it has multiple child rules, they are
    not evaluated in order of ID nor in the order they appear in the rule file.
