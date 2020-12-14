@@ -140,17 +140,33 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
+
 Set it to *no* to collect events generated since Wazuh agent was stopped.
 
-By default, when Wazuh starts it will only read all log content from a given Windows Event Channel since the agent started.
-
-This feature is only compatible with `eventchannel` log format.
+By default, when Wazuh starts it will only read all log content since the agent started.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+--------------+---------------+
+| Attribute   |              Description              | Value range  | Default value |
++=============+=======================================+==============+===============+
+|**max-size** | Allows to skip reading old events     |              |               |
+|             | from the last read if the length of   |  0 to 100MB  |     10KB      |
+|             | them exceeds a certain value in bytes.|              |               |
+|             |                                       |              |               |
+|             | Positive number followed by B, KB     |              |               |
+|             | and MB units are supported            |              |               |
+|             |                                       |              |               |
+|             | .. versionadded:: 4.1.0               |              |               |
++-------------+---------------------------------------+--------------+---------------+
+
+
 
 query
 ^^^^^
@@ -306,6 +322,8 @@ Set the format of the log to be read. **field is required**
 |                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
 |                    |                    |                                                                                                  |
 |                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
+|                    |                    |                                                                                                  |
+|                    |                    | .. versionadded:: 4.1.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
