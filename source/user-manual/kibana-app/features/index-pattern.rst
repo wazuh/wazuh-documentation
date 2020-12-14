@@ -5,19 +5,29 @@
 Index pattern selector
 ======================
 
-The Wazuh Kibana plugin  lets you select a custom index pattern for the *Overview*, *Agents* and *Discover* tabs, used to run search and analytics against. You can create custom index patterns on Kibana, and select them on the Kibana plugin if they're compatible.
 
-You can select a different index pattern in two ways:
+Index patterns can be managed in the Stack Management section on Kibana menu. To create a new index pattern follow the instructions below: 
 
-- On the **Settings > Pattern** page.
-- On the **top menu bar**. This selector is only enabled if you have more than one compatible index pattern.
-
-.. thumbnail:: ../../../images/kibana-app/features/index-pattern/index-pattern-description.png
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/stack_management.png
   :align: center
   :width: 100%
 
-You can open the *Management > Index Patterns* page on the Kibana interface to manage them, and create even more. Make sure to use ``timestamp`` as the *Time Filter field name* to properly order the alerts by creation date.
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/new_index_pattern.png
+  :align: center
+  :width: 100%
 
-.. thumbnail:: ../../../images/kibana-app/features/index-pattern/management-patterns.png
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/new_index_pattern_step1.png
+  :align: center
+  :width: 100%
+
+Make sure to use ``timestamp`` as the *Time field* to properly order the alerts by creation date.
+
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/new_index_pattern_step2.png
+  :align: center
+  :width: 100%
+
+Is more than one compatible index pattern to choose from, a index pattern selector becomes available on the Wazuh Kibana plugin menu:
+
+.. thumbnail:: ../../../images/kibana-app/features/index-pattern/index-pattern-selector.png
   :align: center
   :width: 100%
