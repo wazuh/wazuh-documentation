@@ -494,6 +494,8 @@ def setup(app):
         os.path.join(actual_path, "_static/js/style.js")).st_mtime)
     app.add_js_file("js/redirects.min.js?ver=%s" % os.stat(
         os.path.join(actual_path, "_static/js/redirects.js")).st_mtime)
+    app.add_js_file("js/canonical-urls.min.js?ver=%s" % os.stat(
+        os.path.join(actual_path, "_static/js/canonical-urls.js")).st_mtime)
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
@@ -532,7 +534,8 @@ exclude_patterns = [
     "css/style.css",
     "js/version-selector.js",
     "js/redirects.js",
-    "js/style.js"
+    "js/style.js",
+    "js/canonical-urls.js"
 ]
 
 # -- Additional configuration ------------------------------------------------
