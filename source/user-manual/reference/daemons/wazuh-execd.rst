@@ -1,11 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-execd:
+.. _wazuh-execd:
 
-ossec-execd
+wazuh-execd
 ===========
 
-The ossec-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents.
+.. versionadded:: 4.2
+
+The wazuh-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

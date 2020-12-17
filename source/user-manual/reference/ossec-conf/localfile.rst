@@ -41,7 +41,7 @@ Option to get the location of a log or a group of logs. ``strftime`` format stri
 
 For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
 
-Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``ossec-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
+Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
@@ -346,7 +346,7 @@ Sample of Multi-line log message in original log file:
     Aug 9 14:22:47 hostname log line three
     Aug 9 14:22:47 hostname log line five
 
-Sample Log message as analyzed by ossec-analysisd:
+Sample Log message as analyzed by wazuh-analysisd:
 
 .. code-block:: none
     :class: output

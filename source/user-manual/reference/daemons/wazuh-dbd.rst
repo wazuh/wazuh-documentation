@@ -1,12 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-remoted:
+.. _wazuh-dbd:
 
-ossec-remoted
+wazuh-dbd
 =============
 
-The ossec-remoted program is the server side daemon that communicates with the agents.  It runs as ``ossecr`` and is chrooted to ``/var/ossec`` by default.
+.. versionadded:: 4.2
 
+The ``wazuh-dbd`` program inserts the alert logs into a database.  These alerts can be inserted into either postgresql or mysql.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
@@ -21,7 +22,7 @@ The ossec-remoted program is the server side daemon that communicates with the a
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a specific group.                                                                        |
+| **-g <group>**  | Run as a group.                                                                                 |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
@@ -32,6 +33,4 @@ The ossec-remoted program is the server side daemon that communicates with the a
 |                 | Default value                             | ossecm                                              |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-m**          | Avoid creating shared merged file (read only)                                                   |
 +-----------------+-------------------------------------------------------------------------------------------------+

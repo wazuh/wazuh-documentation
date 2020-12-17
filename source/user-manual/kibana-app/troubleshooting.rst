@@ -81,7 +81,7 @@ Check if Filebeat is reading the ``alerts.json`` file:
 
   # lsof /var/ossec/logs/alerts/alerts.json
 
-There should be two processes reading the ``alerts.json`` file: ``ossec-analysisd`` and ``filebeat``.
+There should be two processes reading the ``alerts.json`` file: ``wazuh-analysisd`` and ``filebeat``.
 
 API version mismatch. Expected vX.Y.Z
 -------------------------------------
