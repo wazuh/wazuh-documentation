@@ -7,7 +7,7 @@ ossec-logtest
 
 .. deprecated:: 4.1.0
 
-The ossec-logtest program is a useful tool when working with Wazuh rules.  This tool allows the testing and verification of rules against provided log examples in a way that simulates the action of ossec-analysisd. This can also assist with writing and debugging custom rules and troubleshooting false positives and negatives.
+The ossec-logtest program is a useful tool when working with Wazuh rules.  This tool allows the testing and verification of rules against provided log examples in a way that simulates the action of wazuh-analysisd. This can also assist with writing and debugging custom rules and troubleshooting false positives and negatives.
 
 +-------------------------------------------+--------------------------------------------------------------------------------+
 | **-a**                                    | Analysis of input lines as though they are live events.                        |
@@ -28,7 +28,7 @@ The ossec-logtest program is a useful tool when working with Wazuh rules.  This 
 +-------------------------------------------+--------------------------------------------------------------------------------+
 | **-t**                                    | Test configuration. This will display file details on the rules to be loaded   |
 |                                           |                                                                                |
-|                                           | by ossec-analysisd, decoders, and lists as they are loaded and the order       |
+|                                           | by wazuh-analysisd, decoders, and lists as they are loaded and the order       |
 |                                           |                                                                                |
 |                                           | they were processed.                                                           |
 +-------------------------------------------+--------------------------------------------------------------------------------+

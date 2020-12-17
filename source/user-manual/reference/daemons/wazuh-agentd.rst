@@ -1,11 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-agentd:
+.. _wazuh-agentd:
 
-ossec-agentd
+wazuh-agentd
 ============
 
-The ossec-agentd program is the client-side daemon that communicates with the server. It runs as user ``ossec``.
+.. versionadded:: 4.2
+
+The wazuh-agentd program is the client-side daemon that communicates with the server. It runs as user ``ossec``.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

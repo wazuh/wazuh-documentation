@@ -9,7 +9,7 @@ The ``rootcheck_control`` tool allows for the management of the policy monitorin
 
 Anomalies detected by the rootcheck functionality can be listed, and categorized into resolved and outstanding issues.
 
-This tool can also display the last time that ossec-rootcheck was run.
+This tool can also display the last time that rootcheck was run.
 
 +----------------------+-------------------------------------------------------+
 | **-h**               | Display the help message.                             |

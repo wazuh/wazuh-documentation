@@ -1,34 +1,40 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-logcollector:
+.. _wazuh-monitord:
 
-ossec-logcollector
-==================
+wazuh-monitord
+==============
 
-The ossec-logcollector program monitors configured files and commands for new log messages.
+.. versionadded:: 4.2
 
-``ossec-logcollector`` is now multi-threaded, achieving an improvement in overall performance. Each of the threads will read the first log that is not already handled by other threads
-and when it finishes reading, it will try to read the next available log (file or command) so that all the threads are always occupied. 
-
-In addition, the interlocking problem that existed in the one-threaded version when it took a long time to read a log while the rest were left unattended, is avoided.
-
-.. warning:: The advantages of the multithreaded logcollector are only available from version 3.6.0 and higher.
-
+The wazuh-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
+| **-D <dir>**    | Chroot to <dir>                                                                                 |
++                 +-------------------------------------------+-----------------------------------------------------+
+|                 | Default value                             | /var/ossec                                          |
++-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a specific group.                                                                        |
+| **-g <group>**  | Run as a group.                                                                                 |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
+| **-n**          | Disable agent monitoring.                                                                       |
++-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
++-----------------+-------------------------------------------------------------------------------------------------+
+| **-u <user>**   | Run as a specific user.                                                                         |
++                 +-------------------------------------------+-----------------------------------------------------+
+|                 | Default value                             | ossecm                                              |
++-----------------+-------------------------------------------+-----------------------------------------------------+
+| **-w <sec>**    | Time in seconds to wait before rotating logs and alerts.                                        |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

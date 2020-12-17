@@ -1,11 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-monitord:
+.. _wazuh-maild:
 
-ossec-monitord
-==============
+wazuh-maild
+=============
 
-The ossec-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
+.. versionadded:: 4.2
+
+The wazuh-maild program sends alerts via email.  It is started by :ref:`ossec-control`.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
@@ -20,11 +22,9 @@ The ossec-monitord program monitors agent connectivity. In addition, it rotates 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a group.                                                                                 |
+| **-g <group>**  | Run as a specific group.                                                                        |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-n**          | Disable agent monitoring.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
 +-----------------+-------------------------------------------------------------------------------------------------+
@@ -32,7 +32,5 @@ The ossec-monitord program monitors agent connectivity. In addition, it rotates 
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | ossecm                                              |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
-| **-w <sec>**    | Time in seconds to wait before rotating logs and alerts.                                        |
-+-----------------+-------------------------------------------------------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

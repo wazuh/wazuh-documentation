@@ -1,11 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-csyslogd:
+.. _wazuh-csyslogd:
 
-ossec-csyslogd
+wazuh-csyslogd
 ==============
 
-The ossec-csyslogd program forwards alerts via syslog.
+.. versionadded:: 4.2
+
+The wazuh-csyslogd program forwards alerts via syslog.
 
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                                               |

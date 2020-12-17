@@ -17,7 +17,7 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **restart** | Restart the Wazuh processes.                                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| **reload**  | Restart all Wazuh processes except ossec-execd.                                                         |
+| **reload**  | Restart all Wazuh processes except wazuh-execd.                                                         |
 |             |                                                                                                         |
 |             | This allows an agent to reload without losing active response status.                                   |
 |             |                                                                                                         |

@@ -5,13 +5,13 @@
 util.sh
 =======
 
-The ``util.sh`` shell script can add a log file to be monitored by ossec-logcollector.  It can also add a ``full_command`` to check for changes to a website, or for changes to the nameserver of a domain.
+The ``util.sh`` shell script can add a log file to be monitored by wazuh-logcollector.  It can also add a ``full_command`` to check for changes to a website, or for changes to the nameserver of a domain.
 
 A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes/>`_ from Daniel Cid (for 3WoO) introduced this utility.
 
 
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **addfile <filename> [<format>]** | Add a log file to be monitored by :ref:`ossec-logcollector <ossec-logcollector>`                                                  |
+| **addfile <filename> [<format>]** | Add a log file to be monitored by :ref:`wazuh-logcollector <wazuh-logcollector>`                                                  |
 |                                   |                                                                                                                                   |
 |                                   | A local file will be added to the :ref:`ossec.conf <reference_ossec_conf>`                                                        |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
