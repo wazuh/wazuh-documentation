@@ -5,10 +5,10 @@
 Change the rules
 ================
 
-The Wazuh Ruleset is maintained by Wazuh, Inc.
+The `Wazuh Ruleset <https://github.com/wazuh/wazuh/ruleset>` is maintained by Wazuh, Inc.
 and is contributed to by the Wazuh community.  These stock rules are located in various files
-in ``/var/ossec/ruleset/rules/`` on the Wazuh manager and should not be edited in that location
-because they are overwritten when you upgrade Wazuh manager.
+in ``/var/ossec/ruleset/rules/`` on the Wazuh Manager and should not be edited in that location
+because they are overwritten when you upgrade it.
 
 Custom changes to the ruleset must be done within files in the  ``/var/ossec/etc/rules/`` folder.
 In order to change a default rule, then the ``overwrite="yes"`` option must be used when declaring the rule.

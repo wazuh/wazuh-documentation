@@ -7,5 +7,5 @@ Update ruleset
 
 .. deprecated:: 4.2
 
-Since the **4.2** version, the manual update of the ruleset from the repository is no longer necessary.
-Every new product revision and version will come with the lastest rules, decoders and rootcheks.
+Since **v4.2**, Wazuh is delivered with the latest ruleset on each release.
+Manual update is no longer necessary nor supported.
