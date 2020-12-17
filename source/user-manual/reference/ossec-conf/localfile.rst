@@ -141,9 +141,9 @@ only-future-events
 ^^^^^^^^^^^^^^^^^^
 
 
-Set it to *no* to collect events generated since Wazuh agent was stopped.
+Set it to *no* to collect events generated since ``ossec-logcollector`` was stopped.
 
-By default, when Wazuh starts it will only read all log content since the agent started.
+By default, when ``ossec-logcollector`` starts it will only read all log content since it was started.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
@@ -157,15 +157,17 @@ The attributes below are optional.
 | Attribute   |              Description              | Value range  | Default value |
 +=============+=======================================+==============+===============+
 |**max-size** | Allows to skip reading old events     |              |               |
-|             | from the last read if the length of   |  0 to 100MB  |     10KB      |
+|             | from the last read if the length of   |  0 to 2GB    |     10MB      |
 |             | them exceeds a certain value in bytes.|              |               |
 |             |                                       |              |               |
-|             | Positive number followed by B, KB     |              |               |
-|             | and MB units are supported            |              |               |
+|             | Positive number followed by B, KB, MB |              |               |
+|             | and GB units are supported            |              |               |
 |             |                                       |              |               |
-|             | .. versionadded:: 4.1.0               |              |               |
+|             | .. versionadded:: 4.2.0               |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
+.. note::
+  If the log rotates while ``ossec-logcollector`` was stopped and ``only-future-events`` was set to ``no``, it will start reading from the beginning of the log. 
 
 
 query
@@ -323,7 +325,7 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
 |                    |                    |                                                                                                  |
-|                    |                    | .. versionadded:: 4.1.0                                                                          |
+|                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
@@ -481,7 +483,7 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 
 multiline_regex
 ^^^^^^^^^^^^^^^
-.. versionadded:: 4.1.0
+.. versionadded:: 4.2.0
 
 This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.
 
@@ -497,20 +499,20 @@ The attributes below are optional.
 | Attribute   |              Description              | Value range  | Default value |
 +=============+=======================================+==============+===============+
 | **match**   | allows to set how regex will handle   |   start      |    start      |
-|             | regex match                           +--------------+               |
+|             | regex match.                          +--------------+               |
 |             |                                       |   end        |               |
 |             |                                       +--------------+               |
 |             |                                       |   all        |               |
 +-------------+---------------------------------------+--------------+---------------+
-| **replace** | allows to replace newline character   |   space      |  no-replace   |
-|             | with another one                      +--------------+               |
+| **replace** | allows to replace or remove           |  no-replace  |  no-replace   |
+|             | end-of-line.                          +--------------+               |
 |             |                                       |   wspace     |               |
 |             |                                       +--------------+               |
 |             |                                       |   tab        |               |
 |             |                                       +--------------+               |
 |             |                                       |   none       |               |
 +-------------+---------------------------------------+--------------+---------------+
-| **timeout** | allows to set max waiting time in     |   1 to 120   |      3        |
+| **timeout** | allows to set max waiting time in     |   1 to 120   |      5        |
 |             | seconds to receive a new line         |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
