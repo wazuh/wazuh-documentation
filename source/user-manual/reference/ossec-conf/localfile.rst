@@ -140,10 +140,10 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-
-Set it to *no* to collect events generated since ``ossec-logcollector`` was stopped.
+It allows to read new log content since ``ossec-logcollector`` was stopped.
 
 By default, when ``ossec-logcollector`` starts it will only read all log content since it was started.
+Set it to no to collect events generated since ``ossec-logcollector`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
@@ -498,13 +498,13 @@ The attributes below are optional.
 +-------------+---------------------------------------+--------------+---------------+
 | Attribute   |              Description              | Value range  | Default value |
 +=============+=======================================+==============+===============+
-| **match**   | allows to set how regex will handle   |   start      |    start      |
+| **match**   | Allows to set how regex will handle   |   start      |    start      |
 |             | regex match.                          +--------------+               |
 |             |                                       |   end        |               |
 |             |                                       +--------------+               |
 |             |                                       |   all        |               |
 +-------------+---------------------------------------+--------------+---------------+
-| **replace** | allows to replace or remove           |  no-replace  |  no-replace   |
+| **replace** | Allows to replace or remove           |  no-replace  |  no-replace   |
 |             | end-of-line.                          +--------------+               |
 |             |                                       |   wspace     |               |
 |             |                                       +--------------+               |
@@ -512,7 +512,7 @@ The attributes below are optional.
 |             |                                       +--------------+               |
 |             |                                       |   none       |               |
 +-------------+---------------------------------------+--------------+---------------+
-| **timeout** | allows to set max waiting time in     |   1 to 120   |      5        |
+| **timeout** | Allows to set max waiting time in     |   1 to 120   |      5        |
 |             | seconds to receive a new line         |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
@@ -521,6 +521,23 @@ The attributes below are optional.
 
 .. note::
     The value of ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
+
+The behavior of the ``match`` attribute is as follows
+
++-------------+-------------------------------------------------------------------------+
+| Match       |                       Description                                       |
++=============+=========================================================================+
+| **start**   | Group as one event the content between two lines that matches the regex.|
+|             |                                                                         |
+|             | The grouped event does not include the last matching line.              |
++-------------+-------------------------------------------------------------------------+
+|  **end**    | Group as one event the content until a line that matches the regex.     |
++-------------+-------------------------------------------------------------------------+
+|  **all**    | Group as one event the content until whole event match the regex.       |
++-------------+-------------------------------------------------------------------------+
+
+.. note::
+    ``start`` and ``end`` value for ``match`` attribute try to match the regex with a single line.
 
 For example, we may want to read a Python Traceback output as one single log, replacing newline with spaces
 
