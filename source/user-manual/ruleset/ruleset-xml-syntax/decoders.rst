@@ -79,23 +79,6 @@ Before making a custom decoder, the first step should always be running the even
 Options
 -------
 
-There is many options to configure the decoders:
-
-- `decoder`_
-- `parent`_
-- `accumulate`_
-- `program_name`_
-- `prematch`_
-- `regex`_
-- `order`_
-- `fts`_
-- `ftscomment`_
-- `plugin_decoder`_
-- `use_own_name`_
-- `json_null_field`_
-- `var`_
-- `type`_
-
 decoder
 ^^^^^^^
 
