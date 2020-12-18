@@ -31,6 +31,8 @@ Options
 - `age`_
 - `exclude`_
 - `reconnect_time`_
+- `multiline_regex`_
+
 
 location
 ^^^^^^^^
@@ -138,17 +140,35 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to *no* to collect events generated since Wazuh agent was stopped.
+It allows to read new log content since ``ossec-logcollector`` was stopped.
 
-By default, when Wazuh starts it will only read all log content from a given Windows Event Channel since the agent started.
-
-This feature is only compatible with `eventchannel` log format.
+By default, when ``ossec-logcollector`` starts it will only read all log content since it was started.
+Set it to no to collect events generated since ``ossec-logcollector`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+--------------+---------------+
+| Attribute   |              Description              | Value range  | Default value |
++=============+=======================================+==============+===============+
+|**max-size** | Allows to skip reading old events     |              |               |
+|             | from the last read if the length of   |  0 to 2GB    |     10MB      |
+|             | them exceeds a certain value in bytes.|              |               |
+|             |                                       |              |               |
+|             | Positive number followed by B, KB, MB |              |               |
+|             | and GB units are supported            |              |               |
+|             |                                       |              |               |
+|             | .. versionadded:: 4.2.0               |              |               |
++-------------+---------------------------------------+--------------+---------------+
+
+.. note::
+  If the log rotates while ``ossec-logcollector`` was stopped and ``only-future-events`` was set to ``no``, it will start reading from the beginning of the log. 
+
 
 query
 ^^^^^
@@ -300,6 +320,12 @@ Set the format of the log to be read. **field is required**
 |                    |                    | may be multiple timestamps in the final event.                                                   |
 |                    |                    |                                                                                                  |
 |                    |                    | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
+|                    |                    |                                                                                                  |
+|                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
+|                    |                    |                                                                                                  |
+|                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
@@ -454,6 +480,75 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 .. note::
 
     This option only applies when the ``log_format`` is ``eventchannel``.
+
+multiline_regex
+^^^^^^^^^^^^^^^
+.. versionadded:: 4.2.0
+
+This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.
+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                        |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
++--------------------+--------------------------------------------------------------------------------------------+
+
+The attributes below are optional.
+
++-------------+---------------------------------------+--------------+---------------+
+| Attribute   |              Description              | Value range  | Default value |
++=============+=======================================+==============+===============+
+| **match**   | Allows to set how regex will handle   |   start      |    start      |
+|             | regex match.                          +--------------+               |
+|             |                                       |   end        |               |
+|             |                                       +--------------+               |
+|             |                                       |   all        |               |
++-------------+---------------------------------------+--------------+---------------+
+| **replace** | Allows to replace or remove           |  no-replace  |  no-replace   |
+|             | end-of-line.                          +--------------+               |
+|             |                                       |   wspace     |               |
+|             |                                       +--------------+               |
+|             |                                       |   tab        |               |
+|             |                                       +--------------+               |
+|             |                                       |   none       |               |
++-------------+---------------------------------------+--------------+---------------+
+| **timeout** | Allows to set max waiting time in     |   1 to 120   |      5        |
+|             | seconds to receive a new line         |              |               |
++-------------+---------------------------------------+--------------+---------------+
+
+.. note::
+    This option only applies when the `log_format`_ is ``multi-line-regex``.
+
+.. note::
+    The value of ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
+
+The behavior of the ``match`` attribute is as follows
+
++-------------+-------------------------------------------------------------------------+
+| Match       |                       Description                                       |
++=============+=========================================================================+
+| **start**   | Group as one event the content between two lines that matches the regex.|
+|             |                                                                         |
+|             | The grouped event does not include the last matching line.              |
++-------------+-------------------------------------------------------------------------+
+|  **end**    | Group as one event the content until a line that matches the regex.     |
++-------------+-------------------------------------------------------------------------+
+|  **all**    | Group as one event the content until whole event match the regex.       |
++-------------+-------------------------------------------------------------------------+
+
+.. note::
+    ``start`` and ``end`` value for ``match`` attribute try to match the regex with a single line.
+
+For example, we may want to read a Python Traceback output as one single log, replacing newline with spaces
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/my_python_app.log</location>
+      <multiline replace="wspace">^Traceback</multiline>
+   </localfile>
+
 
 Configuration examples
 ----------------------
