@@ -2,10 +2,19 @@
 
 .. _kibana_app_overview:
 
-Wazuh Kibana plugin overview
-============================
+Modules
+=======
 
-The Wazuh Kibana plugin is available on the left side of the screen, on the Kibana sidebar. It's organized in four main sections on the top navigation bar, an indicator for the currently selected API and index pattern, and a button to open the Settings page. This section is a brief description of each of these sections, its features and what the user can do with them.
+This section provides access to the Wazuh environment security events monitoring.
+Each subsection shows generated Wazuh alerts grouped by a security events type and organized in dashboards containing easy to analyze charts and tables.
+The Wazuh alerts can be interactively explored on their corresponding :ref:`events <kibana_modules_events>` pages and presented in PDF format :ref:`reports <kibana_reporting>`.
+
+By default, the modules section presents the subsections organized in the following groups:
+
+#. `Security information management`_
+#. `Auditing and Policy Monitoring`_
+#. `Threat detection and response`_
+#. `Regulatory compliance`_
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/app-navigation.png
   :align: center
@@ -22,22 +31,23 @@ Security information management
   :align: center
   :width: 100%
 
-- File integrity monitoring: 
+- :ref:`Integrity monitoring <manual_file_integrity>`: 
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/integrity-monitoring.png
   :align: center
   :width: 100%
 
-Auditing and policy monitory:
------------------------------
+Auditing and Policy Monitoring
+-------------------------------
 
-- Policy monitoring:
+- :ref:`Policy monitoring <manual_policy_monitoring>` helps to verify that the scanned systems are configured according to the user's security policies baseline.
+
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/policy-monitoring.png
   :align: center
   :width: 100%
 
-- System auditing: 
+- :ref:`System auditing <auditing-whodata>` dashboard provides the information from an audit of users' behavior, monitoring commands execution, and alerting on access to critical files.
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/system-auditing.png
   :align: center
@@ -47,31 +57,31 @@ Auditing and policy monitory:
 Regulatory compliance  
 ---------------------
 
-- PCI DSS: 
+- :ref:`PCI DSS <pci_dss>`  Global security standard for entities that process, store or transmit payment cardholder data:
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/PCI_DSS.png
   :align: center
   :width: 100%
 
-- GPPR: 
+- :ref:`GDPR <gdpr>` General Data Protection Regulation sets guidelines for processing of personal data:
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/GDPR.png
   :align: center
   :width: 100%
 
-- NIST 800-53: 
+- **NIST 800-53** National Institute of Standards and Technology Special Publication 800-53 sets guidelines for federal information systems:
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/NIST.png
   :align: center
   :width: 100%
 
-- HIPPA: 
+- **HIPAA** Health Insurance Portability and Accountability Act of 1996 provides data privacy and security provisions for safeguarding medical information:
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/HIPPA.png
   :align: center
   :width: 100%
 
-- TSC: 
+- **TSC**: 
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/TSC.png
   :align: center
@@ -82,63 +92,25 @@ Regulatory compliance
 Threat detection and response  
 -----------------------------
 
-- Vulnerabilities: 
+- :ref:`Vulnerabilities <vulnerability-detection>` dashboard  helps to discover which applications in the monitored environment are affected by well-knows vulnerabilities. 
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/vulnerabilities.png
   :align: center
   :width: 100%
 
-- MITRE ATT&CK: 
+- :ref:`MITRE ATT&CK <mitre>`: 
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/MITRE.png
   :align: center
   :width: 100%
 
+.. _kibana_modules_events: 
 
-
-Discover
+Events
 --------
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/discover.png
   :align: center
   :width: 100%
 
-.. topic:: Overview
 
-    This is the main Wazuh Kibana plugin section. It provides an overall view of your cluster in its *General* section, where you can visualize all the triggered alerts from a specified time range. On the other sections, such as *PCI DSS* or *Vulnerabilities*, you can find more specific dashboards and charts for different Wazuh capabilities. Take a look at the :ref:`user manual <user_manual>` for more information.
-
-.. topic:: Management
-
-    From this section, you can manage the rules and decoders your Wazuh manager is applying, edit local and centralized configurations, check the server logs, download your reports and see the cluster health.
-
-.. topic:: Agents list
-
-    List all your agents in a single page. Get relevant information about them, such as current version, OS, IP, group, and more. You can refine your search using the bar and the filters above the list, or :ref:`download the list <kibana_download_csv>` using the ``Formatted`` button.
-
-.. thumbnail:: ../../../images/kibana-app/features/app-overview/agents-preview.png
-  :align: center
-  :width: 100%
-
-.. topic:: Agent tab
-
-    When clicking on an agent from the list, you can open a tab similar to *Overview*, but tailored to the agent. In addition to this, you can quickly switch to a different agent using the autocomplete search bar on the top right corner. You can check the agent connection status, its alerts, group configuration, hardware information, etc.
-
-.. thumbnail:: ../../../images/kibana-app/features/app-overview/agents.png
-  :align: center
-  :width: 100%
-
-.. topic:: Discover
-
-    You can interactively explore your Wazuh alerts from the *Discover* page. You have access to every alert from your currently selected index pattern. You can submit search queries, filter the search results, and view alerts data. You can also see the number of alerts that match the search query and get field value statistics.
-
-.. thumbnail:: ../../../images/kibana-app/features/app-overview/discover.png
-  :align: center
-  :width: 100%
-
-.. topic:: Dev tools
-
-    The *Dev tools* tab provides an user interface to interact with the Wazuh API. You can use it to send requests and get a response. Click :ref:`here <kibana_dev_tools>` for more details about this section.
-
-.. topic:: Settings
-
-    The *Settings* page allows you to configure and customize your Wazuh Kibana plugin experience. This section is fully described on its own :ref:`section <kibana_settings>` in the documentation.
