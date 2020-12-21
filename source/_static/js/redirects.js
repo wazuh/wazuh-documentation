@@ -49,6 +49,7 @@ newUrls['4.1'] = [
   '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.rst'
 ];
 
 /* *** RELEASE 4.0 ****/
