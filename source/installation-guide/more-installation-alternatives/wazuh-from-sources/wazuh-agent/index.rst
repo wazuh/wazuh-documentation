@@ -37,7 +37,7 @@ Installing Wazuh agent from sources
             .. code-block:: console
 
               # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
-              # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
+              # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.1.el8.x86_64.rpm
 
 
       .. tab:: APT
