@@ -118,7 +118,7 @@ remove_from_bucket
 Define if you want to remove logs from your S3 bucket after they are read by the wodle.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
