@@ -16,6 +16,7 @@ readInstances() {
         echo "Configuration file found. Creating certificates..."
     else
         echo "Error: no configuration file found."
+        exit 1;
     fi
 
 }
