@@ -12,7 +12,7 @@ debug='> /dev/null 2>&1'
 
 readInstances() {
 
-    if [ -f ~/certs/instances.yml ]; then
+    if [ -f ~/instances.yml ]; then
         echo "Configuration file found. Creating certificates..."
     else
         echo "Error: no configuration file found."
