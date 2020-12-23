@@ -361,7 +361,8 @@ def minification(actual_path):
         ['js/version-selector','js'],
         ['js/redirects','js'],
         ['js/style','js'],
-        ['js/custom-redoc','js']
+        ['js/custom-redoc','js'],
+        ['js/canonical-urls','js']
     ]
 
     for file in files:

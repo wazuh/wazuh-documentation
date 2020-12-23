@@ -2,6 +2,7 @@ addCanonicalUrls();
 
 function addCanonicalUrls() {
     var path = location.pathname;
+    var isRemoved = false;
 
     var releases = [
         '3.13', 
@@ -23,17 +24,21 @@ function addCanonicalUrls() {
 
     releases.forEach(release => {
 
-        //Check if URL is available in 4.0    
+        /* Check if current path is removed */
         if(removedUrls[release] && removedUrls[release].includes(path)) {      
-            return;
-        }else{
-            //Replace release in path to be 4.0
-            if(path.includes(release)) {
-                path = path.replace(release, '4.0');
-            }
+            isRemoved = true;
         }
-        
+
     });
+
+    for (var i = 0; i < releases.length; i++) {
+
+        /* Replace with 4.0 release number in path if isn't removed */
+        if (path.indexOf(releases[i]) > -1) {
+            path = isRemoved ? path : path.replace(releases[i], '4.0');
+        }
+
+    }
        
     /* Link rel=canonical tag creation */
     var canonicalTag = !!document.querySelector("link[rel='canonical']") ? document.querySelector("link[rel='canonical']") : document.createElement('link');
