@@ -11,14 +11,13 @@ elasticsearch-nodes:
       - node-IP            
 
 # Wazuh server nodes
-wazuh-server:
+wazuh-servers:
   - name: <node-name-1>
     ip:
       - node-IP   
   - name: <node-name-2>
     ip:
-      - node-IP         
-         
+      - node-IP            
 
 # Kibana node
 kibana:
