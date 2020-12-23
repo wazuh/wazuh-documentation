@@ -8,7 +8,7 @@
 # License (version 2) as published by the FSF - Free Software
 # Foundation.
 
-#debug='> /dev/null 2>&1'
+debug='> /dev/null 2>&1'
 
 readInstances() {
 
@@ -109,6 +109,12 @@ generateAdmincertificate() {
 generateElasticsearchcertificates() {
 
     if [ -n "${single}" ]; then
+        echo "Creating Elasticsearch certificate..."
+    else
+        echo "Creating Elasticsearch certificates..."
+    fi
+
+    if [ -n "${single}" ]; then
         enl=$(awk -v RS='' '/elasticsearch-node:/' ~/instances.yml) 
         rt="# Elasticsearch node"
         rnt="elasticsearch-node:"
@@ -164,6 +170,12 @@ generateElasticsearchcertificates() {
 generateFilebeatcertificates() {
 
     if [ -n "${single}" ]; then
+        echo "Creating Wazuh server certificates..."
+    else
+        echo "Creating Wazuh server certificate..."
+    fi
+
+    if [ -n "${single}" ]; then
         enl=$(awk -v RS='' '/wazuh-server:/' ~/instances.yml) 
         rt="# Wazuh server node"
         rnt="wazuh-server:"
@@ -214,6 +226,8 @@ generateFilebeatcertificates() {
 
 generateKibanacertificates() {
 
+    echo "Creating Kibana certificate..."
+
     enl=$(awk -v RS='' '/kibana:/' ~/instances.yml) 
     rt="# Kibana node"
     rnt="kibana:"
@@ -241,6 +255,7 @@ cleanFiles() {
     eval "rm -rf ~/certs/*.csr ${debug}"
     eval "rm -rf ~/certs/*.srl ${debug}"
     eval "rm -rf ~/certs/*.conf ${debug}"
+    echo "Certificates creation finished. They can be found in ~/certs."
 
 }
 
