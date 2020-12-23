@@ -8,17 +8,27 @@
 # License (version 2) as published by the FSF - Free Software
 # Foundation.
 
-debug='> /dev/null 2>&1'
+#debug='> /dev/null 2>&1'
 
 readInstances() {
 
     if [ -f ~/instances.yml ]; then
         echo "Configuration file found. Creating certificates..."
+        eval "mkdir ~/certs $debug"
     else
         echo "Error: no configuration file found."
         exit 1;
     fi
 
+}
+
+deploymentType() {
+    head=$(head -n1 ~/instances.yml)
+    if [ "${head}" == "# Elasticsearch node" ]; then
+        single=1
+    else
+        multi=1
+    fi    
 }
 
 generateCertificateconfiguration() {
@@ -98,53 +108,107 @@ generateAdmincertificate() {
 
 generateElasticsearchcertificates() {
 
-    enl=$(awk -v RS='' '/elasticsearch-nodes:/' ~/instances.yml) 
-    rt="# Elasticsearch nodes"
-    rnt="elasticsearch-nodes:"
-    rnanme="- name: "
-    rip="    ip:"
-    r="      - "
-    ens="${enl//$rt}"
-    node="${ens//$rnt}"
-    node="${node//$rnanme}"
-    node="${node//$rip}"
-    node="${node//$r}"
-    cip="${node##*$'\n'}"
-    cname="${node//$cip}"
-    cname=$(echo ${cname} | xargs)
-    cip=$(echo ${cip} | xargs)
+    if [ -n "${single}" ]; then
+        enl=$(awk -v RS='' '/elasticsearch-node:/' ~/instances.yml) 
+        rt="# Elasticsearch node"
+        rnt="elasticsearch-node:"
+        rnanme="- name: "
+        rip="    ip:"
+        r="      - "
+        ens="${enl//$rt}"
+        node="${ens//$rnt}"
+        node="${node//$rnanme}"
+        node="${node//$rip}"
+        node="${node//$r}"
+        cip="${node##*$'\n'}"
+        cname="${node//$cip}"
+        cname=$(echo ${cname} | xargs)
+        cip=$(echo ${cip} | xargs)
 
-    generateCertificateconfiguration cname cip
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
-    eval "chmod 444 ~/certs/${cname}-key.pem ${debug}"
+        generateCertificateconfiguration cname cip
+        eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+        eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+        eval "chmod 444 ~/certs/${cname}-key.pem ${debug}"
+    else
+        mn=$(awk -v RS='' '/elasticsearch-nodes:/' ~/instances.yml)
+        rt="# Elasticsearch nodes"
+        mnr="elasticsearch-nodes:"
+        rm="- name: "
+        rmip="ip:"
+        rms="- "
+        mn="${mn//$rt}"
+        mn="${mn//$mnr}"
+        mn="${mn//$rm}"
+        mn="${mn//$rmip}"
+        mn="${mn//$rms}"
+        for line in $mn; do
+                IMN+=(${line})
+        done
+        nodes=$((${#IMN[@]} / 2 ))
+
+
+        i=0
+        while [ ${i} -lt ${#IMN[@]} ]; do
+            cname=${IMN[i]}
+            cip=${IMN[i+1]}
+            generateCertificateconfiguration cname cip
+            eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+            eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+            eval "chmod 444 ~/certs/${cname}-key.pem ${debug}"    
+            i=$(( ${i} + 2 ))
+        done
+    fi
 
 }
 
 generateFilebeatcertificates() {
 
-    enl=$(awk -v RS='' '/wazuh-server:/' ~/instances.yml) 
-    rt="# Wazuh server nodes"
-    rnt="wazuh-server:"
-    rnanme="- name: "
-    rip="    ip:"
-    r="      - "
-    ens="${enl//$rt}"
-    node="${ens//$rnt}"
-    node="${node//$rnanme}"
-    node="${node//$rip}"
-    node="${node//$r}"
-    cip="${node##*$'\n'}"
-    cname="${node//$cip}"
-    cname=$(echo ${cname} | xargs)
-    cip=$(echo ${cip} | xargs)
+    if [ -n "${single}" ]; then
+        enl=$(awk -v RS='' '/wazuh-server:/' ~/instances.yml) 
+        rt="# Wazuh server node"
+        rnt="wazuh-server:"
+        rnanme="- name: "
+        rip="    ip:"
+        r="      - "
+        ens="${enl//$rt}"
+        node="${ens//$rnt}"
+        node="${node//$rnanme}"
+        node="${node//$rip}"
+        node="${node//$r}"
+        cip="${node##*$'\n'}"
+        cname="${node//$cip}"
+        cname=$(echo ${cname} | xargs)
+        cip=$(echo ${cip} | xargs)
 
-    echo $cname
-    echo $cip
-
-    generateCertificateconfiguration cname cip
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+        generateCertificateconfiguration cname cip
+        eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+        eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+    else
+        mn=$(awk -v RS='' '/wazuh-servers:/' ~/instances.yml)
+        rt="# Wazuh server nodes"
+        mnr="wazuh-servers:"
+        rm="- name: "
+        rmip="ip:"
+        rms="- "
+        mn="${mn//$rt}"
+        mn="${mn//$mnr}"
+        mn="${mn//$rm}"
+        mn="${mn//$rmip}"
+        mn="${mn//$rms}"
+        for line in $mn; do
+                IMN+=(${line})
+        done
+        nodes=$((${#IMN[@]} / 2 ))
+        i=0
+        while [ ${i} -lt ${#IMN[@]} ]; do
+            cname=${IMN[i]}
+            cip=${IMN[i+1]}
+            generateCertificateconfiguration cname cip
+            eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
+            eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
+            i=$(( ${i} + 2 ))
+        done
+    fi        
 
 }
 
