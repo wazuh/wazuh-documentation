@@ -8,12 +8,13 @@ Perl-compatible Regular Expressions
 .. versionadded:: 4.1.0
 
 Log collecting and processing is one of the most important features in Wazuh,
-allowing to know the status in real-time of Wazuh agent's operating system and
+allowing to know the status in real-time of Wazuh agent operating system and
 their running applications. Incorporation of PCRE regex support along with
 already existent OSRegex and OSMatch regex will open up a range of possibilities,
-and at the same time enhancing log comprehension and interpretation.
+and at the same time, enchances log comprehension and interpretation.
 
-This section briefly describes the features of this type of regex, its enablement
+
+This section briefly the features of this type of regex, its enablement
 in rules and decoders, and some use cases applied to the default ruleset.
 
 #. `Advantages`_
@@ -34,7 +35,8 @@ In addition to the already known ``*`` and ``+`` quantifiers, PCRE incorporates:
 - ``{n,m}`` try to match between n and m times. Example: ``\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`` will match any IPv4 address.
 
 All quantifiers can be used and combined with groups, expressions and literals.
-Example: ``(\d{1,3}\.?){4}`` it's shorter and equal to ``\d{1,3}\.?\d{1,3}\.?\d{1,3}\.?\d{1,3}.?``
+Example: ``(\d{1,3}\.?){4}`` it is shorter and equivalent to ``\d{1,3}\.?\d{1,3}\.?\d{1,3}\.?\d{1,3}.?``
+
 
 
 Case sensitivity
@@ -82,7 +84,7 @@ Example: The next regex ``\d+[-\/]\d+[-\/]\d+`` will match any datetime despite 
 Configuring PCRE
 ================
 
-Enabling PCRE in certain rules and decoders statements is through the ``type="pcre2"`` attribute,
+PCRE can be enabled in rules and decodes using the ``type="pcre2"`` attribute,
 that also will allow to set other regex like ``type="osregex"`` and ``type="osmatch"`` for
 `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_ 
 respectively depending the case.
@@ -132,13 +134,13 @@ Rules
 Use case: Accurate PAM user alerts
 ==================================
 
-The *Linux Pluggable Authentication Modules(PAM)* is a key component that bring authentication support for applications
+The *Linux Pluggable Authentication Modules(PAM)* is a key component that brings authentication support for applications
 and services in UNIX-like systems, where most of them are case sensitive.
-Currently we might be generating false positives alerts related to usernames,
-i.e users `FOO` and `foo` are treated like they are the same one from rule perspective.
+By default, some false positive alerts related to usernames may be generated,
+i.e users `FOO` and `foo` are not differentiated by the rules.
 This can be avoided by using PCRE case sensitivity, so they are handled as different users.
+The next custom rule generates an alert when `foo` user is logged to the system via ssh.
 
-The next custom rule will generate an alert when `foo` user is logged to the system via ssh.
 
 .. code-block:: xml
 
@@ -171,4 +173,3 @@ ossec-logtest output show the triggered alert
                 Level: '5'
                 Description: 'PAM: Login session opened.'
           **Alert to be generated.
-
