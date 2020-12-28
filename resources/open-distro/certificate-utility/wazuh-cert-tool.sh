@@ -229,6 +229,7 @@ cleanFiles() {
     eval "rm -rf ~/certs/*.csr ${debug}"
     eval "rm -rf ~/certs/*.srl ${debug}"
     eval "rm -rf ~/certs/*.conf ${debug}"
+    eval "rm -rf ~/certs/admin-key-temp.pem ${debug}"
     echo "Certificates creation finished. They can be found in ~/certs."
 
 }
