@@ -2,6 +2,7 @@ addCanonicalUrls();
 
 function addCanonicalUrls() {
     var path = location.pathname;
+    var host = location.host;
     var isRemoved = false;
 
     var releases = [
@@ -30,21 +31,35 @@ function addCanonicalUrls() {
         }
 
     });
+    
+    /* Check if path has redirection */
+    for (let i = 0; i < redirections.length; i++) {
+        let redirection = Object.values(redirections[i]);
+        let release = Object.keys(redirections[i]);
+        
+        for (let j = 0; j < redirection.length; j++) {
+            if (path === redirection[1]) {
+                path = redirection[2];
+                host = host.replace(release[1], release[2]);
+            }
+        }
+
+    }
 
     for (var i = 0; i < releases.length; i++) {
 
         /* Replace with 4.0 release number in path if isn't removed */
-        if (path.indexOf(releases[i]) > -1) {
-            path = isRemoved ? path : path.replace(releases[i], '4.0');
+        if (host.indexOf(releases[i]) > -1) {
+            host = isRemoved ? host : host.replace(releases[i], '4.0');
         }
 
     }
-       
+
     /* Link rel=canonical tag creation */
     var canonicalTag = !!document.querySelector("link[rel='canonical']") ? document.querySelector("link[rel='canonical']") : document.createElement('link');
     canonicalTag.setAttribute('rel', 'canonical');
     
-    canonicalTag.setAttribute('href', location.protocol + '//' + location.host + path);
+    canonicalTag.setAttribute('href', location.protocol + '//' + host + path);
 
     /* Append to head */
     document.head.appendChild(canonicalTag);
