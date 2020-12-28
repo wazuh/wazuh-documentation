@@ -24,10 +24,10 @@ readInstances() {
 
 deploymentType() {
     head=$(head -n1 ~/instances.yml)
-    if [ "${head}" == "# Elasticsearch node" ]; then
-        single=1
-    else
+    if [ "${head}" == "# Elasticsearch nodes" ]; then
         multi=1
+    else
+        single=1
     fi    
 }
 
@@ -44,12 +44,12 @@ generateCertificateconfiguration() {
         x509_extensions = v3_req
         
         [req_distinguished_name]
-        CN = admin
-        OU = Docu
-        O = Wazuh
-        L = California
         C = US
-        
+        L = California
+        O = Wazuh
+        OU = Docu
+        CN = admin
+
         [ v3_req ]
         authorityKeyIdentifier=keyid,issuer
         basicConstraints = CA:FALSE
@@ -67,11 +67,11 @@ generateCertificateconfiguration() {
         x509_extensions = v3_req
         
         [req_distinguished_name]
-        CN = cname
-        OU = Docu
-        O = Wazuh
-        L = California
         C = US
+        L = California
+        O = Wazuh
+        OU = Docu
+        CN = cname
         
         [ v3_req ]
         authorityKeyIdentifier=keyid,issuer
@@ -99,10 +99,10 @@ generateRootCAcertificate() {
 
 generateAdmincertificate() {
     
-    cname="admin"
-    generateCertificateconfiguration cname
-    eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/admin-key.pem -out ~/certs/admin.csr -config ~/certs/admin.conf -days 3650 ${debug}"
-    eval "openssl x509 -req -in ~/certs/admin.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/admin.pem -extfile ~/certs/admin.conf -extensions v3_req -days 3650  ${debug}"
+    eval "openssl genrsa -out ~/certs/admin-key-temp.pem 2048 ${debug}"
+    eval "openssl pkcs8 -inform PEM -outform PEM -in ~/certs/admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out ~/certs/admin-key.pem ${debug}"
+    eval "openssl req -new -key ~/certs/admin-key.pem -out ~/certs/admin.csr -batch -subj '/C=US/L=California/O=Wazuh/OU=Docu/CN=admin' ${debug}"
+    eval "openssl x509 -req -in ~/certs/admin.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -sha256 -out ~/certs/admin.pem ${debug}"
 
 }
 
@@ -333,6 +333,7 @@ main() {
            
     else
         readInstances
+        deploymentType
         generateRootCAcertificate
         generateAdmincertificate
         generateElasticsearchcertificates
