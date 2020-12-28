@@ -33,32 +33,7 @@ deploymentType() {
 
 generateCertificateconfiguration() {
 
-    if [[ $cname == "admin" ]]; then
-
-		cat > ~/certs/${cname}.conf <<- EOF
-        [ req ]
-        prompt = no
-        default_bits = 2048
-        default_md = sha256
-        distinguished_name = req_distinguished_name
-        x509_extensions = v3_req
-        
-        [req_distinguished_name]
-        C = US
-        L = California
-        O = Wazuh
-        OU = Docu
-        CN = admin
-
-        [ v3_req ]
-        authorityKeyIdentifier=keyid,issuer
-        basicConstraints = CA:FALSE
-        keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-		EOF
-
-    else
-    
-		cat > ~/certs/${cname}.conf <<- EOF
+    cat > ~/certs/${cname}.conf <<- EOF
         [ req ]
         prompt = no
         default_bits = 2048
@@ -81,14 +56,13 @@ generateCertificateconfiguration() {
         
         [alt_names]
         IP.1 = cip
-		EOF
+	EOF
 
-        conf="$(awk '{sub("CN = cname", "CN = '${cname}'")}1' ~/certs/$cname.conf)"
-        echo "${conf}" > ~/certs/$cname.conf
-        conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
-        echo "${conf}" > ~/certs/$cname.conf       
+    conf="$(awk '{sub("CN = cname", "CN = '${cname}'")}1' ~/certs/$cname.conf)"
+    echo "${conf}" > ~/certs/$cname.conf
+    conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
+    echo "${conf}" > ~/certs/$cname.conf       
 
-    fi
 }
 
 generateRootCAcertificate() {
@@ -170,9 +144,9 @@ generateElasticsearchcertificates() {
 generateFilebeatcertificates() {
 
     if [ -n "${single}" ]; then
-        echo "Creating Wazuh server certificates..."
-    else
         echo "Creating Wazuh server certificate..."
+    else
+        echo "Creating Wazuh server certificates..."
     fi
 
     if [ -n "${single}" ]; then
