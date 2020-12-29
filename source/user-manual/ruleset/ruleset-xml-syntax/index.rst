@@ -13,4 +13,5 @@ Ruleset XML syntax
        decoders
        rules
        regex
+       pcre2
        sibling-decoders
