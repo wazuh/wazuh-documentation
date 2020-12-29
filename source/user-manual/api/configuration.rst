@@ -81,27 +81,6 @@ Make sure to restart the Wazuh API using **wazuh-manager** service after editing
 
     # service wazuh-manager restart
 
-
-Remote commands configuration
-------------------------------
-Allow or deny the execution of remote commands through the API. When this option is disabled it is not possible to upload **ossec.conf** files with the <command> option inside the :ref:`localfile tag <reference_ossec_localfile>` as well as the :ref:`wodle "command" option <wodle_command>`.
-It is possible to add a list of exceptions in order to upload those commands through the API.
-
-.. code-block:: yaml
-
-    remote_commands:
-        localfile:
-           enabled: yes
-           exceptions: []
-
-        wodle_command:
-           enabled: yes
-           exceptions: []
-
-.. warning::
-    These settings cannot be reset to factory status via the endpoint :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` or :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`. These will keep its value before the reset.
-
-
 Security configuration
 ----------------------
 Unlike regular Wazuh API configuration settings that can be changed in the :ref:`configuration file <api_configuration_file>`, the following Wazuh API security settings are only intended to be modified through a Wazuh API endpoint  (:api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`), and they are applied to every Wazuh API in the cluster, in case there is one configured. For more information on each of the settings, please check the :ref:`security configuration options <api_security_configuration_options>`.
@@ -189,6 +168,9 @@ host
 | Any valid IP or hostname | 0.0.0.0       | IP or hostname of the Wazuh manager where the Wazuh API is running.   |
 +--------------------------+---------------+-----------------------------------------------------------------------+
 
+.. warning::
+    The host settings cannot be changed using the Wazuh API configuration endpoints :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` or :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`. Instead, access to the Wazuh API host and changing ``{WAZUH_PATH}/api/configuration/api.yaml`` is required to ensure access to the Wazuh API is maintained.
+
 port
 ^^^^^^^^^^^^^^^^^^^^^^
 +-------------------------------+---------------+---------------------------------------+
@@ -196,6 +178,9 @@ port
 +===============================+===============+=======================================+
 | Any value between 1 and 65535 | 55000         | Port where the Wazuh API will listen. |
 +-------------------------------+---------------+---------------------------------------+
+
+.. warning::
+    The port settings cannot be changed using the Wazuh API configuration endpoints :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` or :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`. Instead, access to the Wazuh API host and changing ``{WAZUH_PATH}/api/configuration/api.yaml`` is required to ensure access to the Wazuh API is maintained.
 
 behind_proxy_server
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -221,6 +206,9 @@ drop_privileges
 | yes, true, no, false | true          | Run wazuh-api process as ossec user |
 +----------------------+---------------+-------------------------------------+
 
+.. warning::
+    The drop_privileges settings cannot be changed using the Wazuh API configuration endpoints :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` or :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`. Instead, access to the Wazuh API host and changing ``{WAZUH_PATH}/api/configuration/api.yaml`` is required to ensure access to the Wazuh API is maintained.
+
 experimental_features
 ^^^^^^^^^^^^^^^^^^^^^^
 +----------------------+---------------+-----------------------------------+
@@ -244,6 +232,9 @@ https
 +------------+----------------------+----------------------------------+-------------------------------------------------------------------+
 | ca         | Any text string      | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
 +------------+----------------------+----------------------------------+-------------------------------------------------------------------+
+
+.. warning::
+    The https settings cannot be changed using the Wazuh API configuration endpoints :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` or :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`. Instead, access to the Wazuh API host and changing ``{WAZUH_PATH}/api/configuration/api.yaml`` is required to ensure access to the Wazuh API is maintained.
 
 logs
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -286,7 +277,7 @@ access
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                                                             |
 +========================+======================+===============+=========================================================================================================================================================================================================================================================================+
-| max_login_attempts     | Any positive integer | 50             | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                            |
+| max_login_attempts     | Any positive integer | 50            | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                             |
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period.                                         |
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -295,13 +286,16 @@ access
 
 remote_commands (localfile and wodle "command")
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------------+---------------+---------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value | Description                                                   |
-+============+======================+===============+===============================================================+
-| enabled    | yes, true, no, false | true          | Enable or disable upload remote commands through the API      |
-+------------+----------------------+---------------+---------------------------------------------------------------+
-| exceptions | command list         | None          | Set a list of commands allowed to be uploaded through the API |
-+------------+----------------------+---------------+---------------------------------------------------------------+
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
++============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
+| enabled    | yes, true, no, false | true          | Enable or disable uploading configurations with remote commands through the Wazuh API. When this option is disabled it is not possible to upload **ossec.conf** files with the  :ref:`<command> <command>` option inside the :ref:`localfile tag <reference_ossec_localfile>` as well as the :ref:`wodle "command" option <wodle_command>`. |
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| exceptions | command list         | [ ]           | Set a list of commands allowed to be uploaded through the API. These exceptions could always be uploaded independently of the value of the enabled config                                                                                                                                                                                   |
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. warning::
+    The remote_commands settings cannot be changed or reset to factory status using the Wazuh API configuration endpoints :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` or :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`. Instead, access to the Wazuh API and changing ``{WAZUH_PATH}/api/configuration/api.yaml`` is required for security reasons.
 
 .. _api_security_configuration_options:
 
