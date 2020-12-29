@@ -89,6 +89,8 @@ Below we have some Windows wildcard examples.
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
   * The maximum amount of files monitored at same time is limited to 200.
 
+.. _command:
+
 command
 ^^^^^^^
 
