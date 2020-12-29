@@ -124,7 +124,8 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. topic:: File Integrity Monitoring
    :class: fim
 
-   Wazuh monitors the file system, identifying changes in content, permissions, ownership, and attributes of files that you need to keep an eye on. In addition, it natively identifies users and applications used to create or modify files.
+   Wazuh monitors the file system, identifying changes in content, permissions, ownership and attributes of files that need attention. It also natively identifies users and applications used to create or modify files.
+
 
    File integrity monitoring capabilities can be used in combination with threat intelligence to identify threats or compromised hosts. In addition, several regulatory compliance standards, such as PCI DSS, require it.
 
