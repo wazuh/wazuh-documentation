@@ -25,6 +25,15 @@ logger() {
     
 }
 
+checkArch() {
+    arch=$(uname -m)
+
+    if [ ${arch} != "x86_64" ]; then
+        echo "Uncompatible system. This script must be run on a 64-bit system."
+        exit 1;
+    fi
+}
+
 startService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
@@ -88,9 +97,23 @@ installPrerequisites() {
             if [ -z "${os}" ]; then
                 os="centos"
             fi
-            echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-            conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
-            echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
+            lv=$(cat /etc/os-release | grep  'PRETTY_NAME="')
+            rm="PRETTY_NAME="
+            rmc='"'
+            ral="Amazon Linux "
+            lv="${lv//$rm}"
+            lv="${lv//$rmc}"
+            lv="${lv//$ral}"
+            lv=$(echo "$lv" | awk '{print $1;}')
+            if [ ${lv} == "2" ]; then
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/2/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+            elif [ ${lv} == "AMI" ]; then
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/1/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+            else
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+                conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
+                echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
+            fi
             eval "yum install adoptopenjdk-11-hotspot -y -q ${debug}"
         fi
         export JAVA_HOME=/usr/
@@ -115,7 +138,7 @@ installPrerequisites() {
         eval "apt-get update -q ${debug}"
         eval "apt-get install openjdk-11-jdk -y -q ${debug}" 
         if [  "$?" != 0  ]; then
-            logger "JDK installation falied."
+            logger "JDK installation failed."
             exit 1;
         fi
         export JAVA_HOME=/usr/
@@ -293,7 +316,7 @@ installKibana() {
         eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
@@ -318,11 +341,11 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ ${cores} < "2" ]] || [[ ${ram_gb} < "3700" ]]; then
+    if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]; then
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
-        echo "All the componets have already been installed."
+        echo "All the componens have already been installed."
         exit 1;
     else
         echo "Starting the installation..."
@@ -363,7 +386,9 @@ main() {
     if [ "$EUID" -ne 0 ]; then
         echo "This script must be run as root."
         exit 1;
-    fi    
+    fi   
+
+    checkArch 
 
     if [ -n "$1" ]; then      
         while [ -n "$1" ]

@@ -61,7 +61,7 @@ Installing the Wazuh manager
 .. tabs::
 
 
-  .. group-tab:: Ym
+  .. group-tab:: Yum
 
 
     .. include:: ../../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst

@@ -30,6 +30,15 @@ logger() {
 
 }
 
+checkArch() {
+    arch=$(uname -m)
+
+    if [ ${arch} != "x86_64" ]; then
+        echo "Uncompatible system. This script must be run on a 64-bit system."
+        exit 1;
+    fi
+}
+
 startService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
@@ -218,13 +227,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install elasticsearch-7.9.2 -y -q $debug"
+        eval "yum install elasticsearch-7.9.3 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.2 -y -q $debug"
+        eval "apt-get install elasticsearch=7.9.3 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.2 $debug"
+        eval "zypper -n install elasticsearch-7.9.3 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -290,13 +299,13 @@ installFilebeat() {
     logger "Installing Filebeat..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install filebeat-7.9.2 -y -q  $debug"    
+        eval "yum install filebeat-7.9.3 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.9.2 $debug"
+        eval "zypper -n install filebeat-7.9.3 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.9.2 -y -q  $debug"
+        eval "apt-get install filebeat=7.9.3 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -327,13 +336,13 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install kibana-7.9.2 -y -q  $debug"    
+        eval "yum install kibana-7.9.3 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.2 $debug"
+        eval "zypper -n install kibana-7.9.3 $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install kibana=7.9.2 -y -q  $debug"
+        eval "apt-get install kibana=7.9.3 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -344,7 +353,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.0_7.9.2-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
@@ -375,12 +384,12 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ $cores < "2" ]] || [[ $ram_gb < "3700" ]]
+    if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]
     then
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [[ -f /etc/elasticsearch/elasticsearch.yml ]] && [[ -f /etc/kibana/kibana.yml ]] && [[ -f /etc/filebeat/filebeat.yml ]]; then
-        echo "All the componets have already been installed."
+        echo "All the componens have already been installed."
         exit 1;    
     else
         echo "Starting the installation..."
@@ -465,7 +474,9 @@ main() {
         if [ "$EUID" -ne 0 ]; then
             echo "This script must be run as root."
             exit 1;
-        fi           
+        fi       
+
+        checkArch    
 
         if [ -n "$d" ]
         then

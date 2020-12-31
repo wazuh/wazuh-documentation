@@ -26,6 +26,15 @@ logger() {
     echo $1
 }
 
+checkArch() {
+    arch=$(uname -m)
+
+    if [ ${arch} != "x86_64" ]; then
+        echo "Uncompatible system. This script must be run on a 64-bit system."
+        exit 1;
+    fi
+}
+
 startService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
@@ -232,7 +241,7 @@ healthCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
 
-    if [[ ${cores} < "2" ]] || [[ ${ram_gb} < "3700" ]]
+    if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]
     then
         echo "Your system does not meet the recommended minimum hardware requirements of 2Gb of RAM and 2 CPU cores . If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
@@ -276,6 +285,8 @@ main() {
             echo "This script must be run as root."
             exit 1;
         fi
+
+        checkArch
                 
         if [ -n "${debugEnabled}" ]
         then
