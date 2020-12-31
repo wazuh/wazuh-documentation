@@ -187,7 +187,7 @@ Added
 
 - Support for Wazuh v4.0.0.
 
-- Support for Kibana v7.9.1 and v7.9.2.
+- Support for Kibana v7.9.1 and v7.9.3.
 
 - Support for Open Distro 1.10.1.
 
