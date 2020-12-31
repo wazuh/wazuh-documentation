@@ -1,0 +1,17 @@
+# Elasticsearch node
+elasticsearch-node:
+  - name: <node-name>
+    ip:
+      - node-IP
+
+# Wazuh server node
+wazuh-server:
+  - name: <node-name>
+    ip:
+      - node-IP      
+
+# Kibana node
+kibana:
+  - name: <node-name>
+    ip:
+      - node-IP        

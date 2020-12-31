@@ -39,12 +39,12 @@ The first step to setting up the manager is to add the Wazuh repository:
 Install and set up Wazuh server
 --------------------------------
 
-Install the Wazuh manager software and confirm it is running:
+Install the Wazuh manager software and start its service:
 
   .. code-block:: console
 
     # yum -y install wazuh-manager
-    # systemctl status wazuh-manager
+    # systemctl start wazuh-manager
 
 Configure Wazuh manager to allow self registration of new agents with authentication:
 

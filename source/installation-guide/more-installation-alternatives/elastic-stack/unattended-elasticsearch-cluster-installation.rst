@@ -246,7 +246,7 @@ Download the script and the configuration file. After downloading them, configur
           ip:
           - "<wazuh_server_ip_X>"                
 
-    - Run the script  with the options ``-e``, ``-c`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``):
+    - Run the script with the options ``-e``, ``-c`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``):
 
       The option ``-c`` is used to generate the certificates:
 

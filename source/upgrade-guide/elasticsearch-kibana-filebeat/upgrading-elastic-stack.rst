@@ -10,6 +10,8 @@ This section guides through the upgrade process of Elasticsearch, Filebeat and K
 .. note::
   This guide is meant for upgrades from 7.x to 7.y. The upgrade instructions for Elastic Stack versions prior to 7.0 can be found in the :ref:`Upgrading Elastic Stack from a legacy version <upgrading_elastic_stack_legacy>` section.
 
+.. note:: Root user privileges are required to execute all the commands described below.
+
 Preparing Elastic Stack
 -----------------------
 
@@ -18,35 +20,36 @@ Preparing Elastic Stack
     .. include:: ../../_templates/installations/basic/elastic/common/stop_kibana_filebeat.rst
 
 
-#. Enable the Elastic repository:
+#. Add the Elastic Stack repository:
+
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
-            .. code-block:: console
 
-              # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/elastic.repo
+        .. include:: ../../_templates/installations/basic/elastic/yum/add_repository.rst
+
+
 
       .. group-tab:: APT
 
-            .. code-block:: console
 
-              # sed -i "s/#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
-              # apt-get update
+        .. include:: ../../_templates/installations/basic/elastic/deb/add_repository.rst
+
+
 
       .. group-tab:: ZYpp
 
-            .. code-block:: console
 
-              # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/elastic.repo
+         .. include:: ../../_templates/installations/basic/elastic/zypp/add_repository.rst              
 
 
 #. Before the upgrade process it is important to ensure that the Wazuh repository is disabled, as it contains Filebeat packages used by Open Distro for Elasticsearch distribution, which might be accidentally installed instead of the Elastic package. In case of having enabled the Wazuh repository it can be disabled using:
 
   .. tabs::
 
-    .. group-tab:: YUM
+    .. group-tab:: Yum
 
       .. code-block:: console
 
@@ -100,7 +103,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -160,7 +163,7 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 
     .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
         .. code-block:: console
 
@@ -204,6 +207,12 @@ The following steps needs to be run in the Wazuh server or servers in case of Wa
 #. Restart Filebeat:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_filebeat.rst
+
+#. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
+
+  .. code-block:: console
+
+    # filebeat setup --index-management -E output.logstash.enabled=false
 
 
 Upgrading Kibana
@@ -263,7 +272,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
                     In case of having more Wazuh API entries, each of them must be added manually.
 
  
-#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``: 
+#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh`` in the file ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``: 
 
     .. code-block:: yaml
       :emphasize-lines: 5, 6
@@ -286,7 +295,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 
@@ -341,6 +350,14 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
       NODE_OPTIONS="--max_old_space_size=2048"
       EOF
 
+
+#. Link Kibana’s socket to privileged port 443:
+
+    .. code-block:: console
+
+      # setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node      
+
+
 #. Restart Kibana:
 
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
@@ -366,7 +383,7 @@ It is recommended to disable the Elastic repository to prevent an upgrade to a n
 
       .. tabs::
 
-        .. group-tab:: YUM
+        .. group-tab:: Yum
 
           .. code-block:: console
 

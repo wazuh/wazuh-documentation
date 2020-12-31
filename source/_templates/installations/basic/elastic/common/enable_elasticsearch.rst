@@ -9,8 +9,8 @@
     .. code-block:: console
 
       # systemctl daemon-reload
-      # systemctl enable elasticsearch.service
-      # systemctl start elasticsearch.service
+      # systemctl enable elasticsearch
+      # systemctl start elasticsearch
 
 
 
