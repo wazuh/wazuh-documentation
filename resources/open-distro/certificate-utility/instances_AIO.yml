@@ -1,0 +1,17 @@
+# Elasticsearch node
+elasticsearch-node:
+  - name: node-1
+    ip:
+      - 127.0.0.1
+
+# Wazuh server node
+wazuh-server:
+  - name: filebeat
+    ip:
+      - 127.0.0.1      
+
+# Kibana node
+kibana:
+  - name: kibana
+    ip:
+      - 127.0.0.1        
