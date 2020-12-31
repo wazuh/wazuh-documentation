@@ -42,6 +42,10 @@ Configuration options for file integrity monitoring:
 - `windows_audit_interval`_
 - `windows_registry`_
 - `diff`_
+- `rt_delay`_
+- `default_max_depth`_
+- `file_max_size`_
+- `symlink_scan_interval`_
 
 
 .. _reference_ossec_syscheck_alert_new_files:
@@ -1015,6 +1019,95 @@ Attributes:
 |          | Allowed values                             | sregex                             |
 +----------+--------------------------------------------+------------------------------------+
 
+
+.. _reference_ossec_syscheck_rt_delay:
+
+rt_delay
+--------
+
+.. versionadded:: 4.2.0
+
+Specifies the delay (ms) when dispatching real-time modifications to avoid triggering alerts on some temporary files (like vim edits).
+
++--------------------+-----------------------------+
+| **Default value**  | 5                           |
++--------------------+-----------------------------+
+| **Allowed values** | Any number from 0 to 1000   |
++--------------------+-----------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <rt_delay>5</rt_delay>
+
+
+.. _reference_ossec_syscheck_default_max_depth:
+
+default_max_depth
+-----------------
+
+.. versionadded:: 4.2.0
+
+Specifies the maximum level of recursivity allowed.
+
++--------------------+-----------------------------+
+| **Default value**  | 256                         |
++--------------------+-----------------------------+
+| **Allowed values** | Any number from 1 to 320    |
++--------------------+-----------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <default_max_depth>256</default_max_depth>
+
+
+.. _reference_ossec_syscheck_file_max_size:
+
+file_max_size
+-------------
+
+.. versionadded:: 4.2.0
+
+Maximum file size (MB) for calculating integrity hashes. If the value is 0, this filter will be disabled.
+
++--------------------+-----------------------------+
+| **Default value**  | 1024                        |
++--------------------+-----------------------------+
+| **Allowed values** | Any number from 0 to 4095   |
++--------------------+-----------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <file_max_size>256</file_max_size>
+
+
+.. _reference_ossec_syscheck_symlink_scan_interval:
+
+symlink_scan_interval
+---------------------
+
+.. versionadded:: 4.2.0
+
+Specifies the interval (seconds) of the scan that checks if any configured symbolic link has been changed.
+
++--------------------+------------------------------+
+| **Default value**  | 600                          |
++--------------------+------------------------------+
+| **Allowed values** | Any number from 1 to 2592000 |
++--------------------+------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <symlink_scan_interval>600</symlink_scan_interval>
+
+
 .. _reference_ossec_syscheck_whodata:
 
 whodata
@@ -1031,6 +1124,7 @@ The Whodata options will be configured inside this tag.
         <restart_audit>yes</restart_audit>
         <audit_key>auditkey1,auditkey2</audit_key>
         <startup_healthcheck>yes</startup_healthcheck>
+        <max_audit_entries>256</max_audit_entries>
     </whodata>
 
 
@@ -1079,6 +1173,19 @@ Allows to disable the Audit health check during the Whodata engine starting. Thi
 .. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
 For more information, please read :ref:`auditing who-data <auditing-whodata>`
+
+
+**max_audit_entries**
+
+.. versionadded:: 4.2.0
+
+Allows to set the maximum number of audit entries. This option is only available for **Linux systems with Audit**.
+
++--------------------+-----------------------------+
+| **Default value**  | 256                         |
++--------------------+-----------------------------+
+| **Allowed values** | Any number from 1 to 320    |
++--------------------+-----------------------------+
 
 
 .. _reference_ossec_syscheck_windows_audit_interval:

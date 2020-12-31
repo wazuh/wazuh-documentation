@@ -976,6 +976,9 @@ Remoted
 Syscheck
 --------
 
+.. warning::
+  Since Wazuh 4.2.0, all the internal options except for the ``debug`` level have been moved to the regular configuration (ossec.conf).
+
 +--------------------------------------+---------------+--------------------------------------------------------------------------------+
 |    **syscheck.sleep**                | Description   | Number of seconds to sleep after reading syscheck.sleep_after number of files. |
 |                                      |               |                                                                                |
@@ -996,6 +999,7 @@ Syscheck
 | **syscheck.rt_delay**                | Description   | Time in milliseconds for delay between alerts in real-time.                    |
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.4.0                                                        |
+|                                      |               | .. deprecated:: 4.2.0                                                          |
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Default value | 10                                                                             |
 +                                      +---------------+--------------------------------------------------------------------------------+
@@ -1005,6 +1009,7 @@ Syscheck
 |                                      |               | in realtime and whodata mode.                                                  |
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.4.0                                                        |
+|                                      |               | .. deprecated:: 4.2.0                                                          |
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Default value | 256                                                                            |
 +                                      +---------------+--------------------------------------------------------------------------------+
@@ -1013,6 +1018,7 @@ Syscheck
 | **syscheck.default_max_depth**       | Description   | Maximum level of recursion allowed while reading directories.                  |
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.5.0                                                        |
+|                                      |               | .. deprecated:: 4.2.0                                                          |
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Default value | 256                                                                            |
 +                                      +---------------+--------------------------------------------------------------------------------+
@@ -1021,6 +1027,7 @@ Syscheck
 | **syscheck.symlink_scan_interval**   | Description   | Check interval of the symbolic links configured in the directories section.    |
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.9.0                                                        |
+|                                      |               | .. deprecated:: 4.2.0                                                          |
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Default value | 600                                                                            |
 +                                      +---------------+--------------------------------------------------------------------------------+
