@@ -54,7 +54,7 @@ Installing Wazuh
 
    .. code-block:: console
 
-     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3074_installation_guide_new_structure/resources/elastic-stack/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
    This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script.  
 

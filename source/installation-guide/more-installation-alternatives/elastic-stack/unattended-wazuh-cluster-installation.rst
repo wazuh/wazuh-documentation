@@ -76,7 +76,7 @@ Download the installation script:
 
 .. code-block:: console
 
-  # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/wazuh-server-installation.sh
+  # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3074_installation_guide_new_structure/resources/elastic-stack/unattended-installation/distributed/wazuh-server-installation.sh
     
 
 Replace the following variables and run the installation script: 
