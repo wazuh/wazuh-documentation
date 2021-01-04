@@ -24,7 +24,7 @@ Sign up for a trial to experience the benefits of Wazuh Cloud Service:
 
 3. Click on **View the summary** and confirm.
 
-4. Then, you will get your environment's credentials on a PDF file, keep them safe as them as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
+4. Then, you will get your environment's credentials on a PDF file, keep them safe as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
 
 The free trial duration is 14 days. :ref:`Add your billing details <cloud_account_billing_details>` before the trial period is over to keep using your environment. When your billing details are added your environment will keep all of the data, agents, and configurations that were made during the trial period.
 

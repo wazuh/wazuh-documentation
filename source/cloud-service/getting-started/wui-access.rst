@@ -17,4 +17,4 @@ Access the Web User Interface (WUI) through the web browser:
 
 ``https://<cloud_id>.cloud.wazuh.com``
 
-Replacing in that URL ``<cloud_id>`` with your Cloud ID. Then, log in filling with the WUI credentials.
+Please, replace in that URL ``<cloud_id>`` with your Cloud ID. Then, log in filling with the WUI credentials.

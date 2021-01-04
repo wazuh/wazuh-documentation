@@ -67,7 +67,7 @@ The environment is the core of Wazuh Cloud Service. It will both work as a hoste
 **Hot Storage (Online Storage)**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Data available on the Wazuh WUI. It is formed by all the generated alerts from the Wazuh manager. This information is available as soon as Wazuh manager processes it and Elasticsearch indexes it, and it will remain available until you reach your tier limit.
+Data available on the Wazuh WUI. It is formed by all the generated alerts from the Wazuh manager. This information is available as soon as Wazuh manager processes it and Elasticsearch indexes it, and it will remain available until you reach your tier limit. More precisely, this storage is calculated using the primary shards of Elasticsearch indices.
 
 .. _cloud_glossary_region:
 
@@ -91,7 +91,7 @@ Total size (in GB) of data from the alerts and archives which are available onli
 **Trial**
 ^^^^^^^^^
 
-14-day period when you can try out Wazuh Cloud Service for free. Any tier is allowed. The resulting :ref:`environment <cloud_glossary_environment>` can keep being used beyond the trial period by adding your billing details.
+14-day period when you can try out Wazuh Cloud Service for free. Any tier is allowed. The trialing :ref:`environment <cloud_glossary_environment>`, along with all the data collected until that moment, can keep being used by adding your billing details before the trial period is over.
 
 **Web User Interface (WUI)**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
