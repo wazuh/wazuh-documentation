@@ -134,7 +134,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Wazuh agents pull software inventory data and send this information to the server, where it is correlated with continuously updated CVE (Common Vulnerabilities and Exposure) databases, in order to identify well-known vulnerable software.
 
-   Automated vulnerability assessment helps you find the weak spots in your critical assets and take corrective action before attackers exploit them to sabotage your business or steal confidential data.
+   Automated vulnerability assessment helps the user to identify the weak spots of their critical assets and take action before being exploited by attackers.
 
 .. topic:: Configuration Assessment
    :class: config
@@ -155,7 +155,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Wazuh provides some of the necessary security controls to become compliant with industry standards and regulations. These features, combined with its scalability and multi-platform support help organizations meet technical compliance requirements.
 
-   Wazuh is widely used by payment processing companies and financial institutions to meet PCI DSS (Payment Card Industry Data Security Standard) requirements. Its web user interface provides reports and dashboards that can help with this and other regulations (e.g. GPG13 or GDPR).
+   Wazuh is widely used by payment processing companies and financial institutions to meet PCI DSS (Payment Card Industry Data Security Standard) requirements. Its web user interface provides reports and dashboards that can help with this and other regulations such as GDPR, NIST 800-53, GPG13, TSC SOC2 and HIPAA. 
 
 .. topic:: Intrusion Detection
    :class: intrusion
@@ -167,14 +167,14 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. topic:: Cloud Security Monitoring
    :class: cloud
 
-   Wazuh helps monitoring cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers, such as Amazon AWS, Azure or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
+   Wazuh helps monitor cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers like Amazon AWS, Azure or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
 
-   In addition, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
+   Furthermore, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
 .. topic:: Containers Security
    :class: docker
 
-   Wazuh provides security visibility into your Docker hosts and containers, monitoring their behavior and detecting threats, vulnerabilities and anomalies. The Wazuh agent has native integration with the Docker engine allowing users to monitor images, volumes, network settings, and running containers.
+   Wazuh provides security visibility into hosts and Docker containers, monitoring their behavior and detecting threats, vulnerabilities and anomalies. The Wazuh agent has a native integration with the Docker engine that allows users to monitor images, volumes, network configurations and running containers.
 
    Wazuh continuously collects and analyzes detailed runtime information. For example, alerting for containers running in privileged mode, vulnerable applications, a shell running in a container, changes to persistent volumes or images, and other possible threats.
 
