@@ -29,7 +29,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
         .. code-block:: console
 
           # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -backup <backup-directory> -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
+          # ./securityadmin.sh -backup <backup-directory> -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h <elasticsearch_ip>
 
     
     #. To generate a new password hash, Open Distro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<new-password>`` with the chosen new password and generate a hash for it using the ``hash.sh`` utility:
@@ -57,7 +57,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
         .. code-block:: console
 
           # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -f <backup-directory>/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -h <elasticsearch_ip>
+          # ./securityadmin.sh -f <backup-directory>/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h <elasticsearch_ip>
 
     #. Remove files from your ``<backup-directory>``.
 

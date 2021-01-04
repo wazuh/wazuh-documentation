@@ -17,17 +17,17 @@ Adding the Wazuh repository
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
@@ -47,17 +47,17 @@ Installing Wazuh agent
       .. tabs::
 
 
-        .. group-tab:: APT
-
-
-          .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_agent.rst
-
-
-
         .. group-tab:: Yum
 
 
           .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_agent.rst
+
+
+
+        .. group-tab:: APT
+
+
+          .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_agent.rst
 
 
 
@@ -76,13 +76,6 @@ Installing Wazuh agent
       .. tabs::
 
 
-        .. group-tab:: APT
-
-
-          .. include:: ../../_templates/installations/wazuh/deb/deploy_wazuh_agent.rst
-
-
-
         .. group-tab:: Yum
 
 
@@ -90,10 +83,18 @@ Installing Wazuh agent
 
 
 
+        .. group-tab:: APT
+
+
+          .. include:: ../../_templates/installations/wazuh/deb/deploy_wazuh_agent.rst
+
+
+
         .. group-tab:: ZYpp
 
 
           .. include:: ../../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
+
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 
@@ -108,17 +109,17 @@ Installing Wazuh agent
     .. tabs::
 
 
-      .. group-tab:: APT
-
-
-        .. include:: ../../_templates/installations/wazuh/deb/disabling_repository.rst
-
-
-
       .. group-tab:: Yum
 
 
         .. include:: ../../_templates/installations/wazuh/yum/disabling_repository.rst
+
+
+
+      .. group-tab:: APT
+
+
+        .. include:: ../../_templates/installations/wazuh/deb/disabling_repository.rst
 
 
 
@@ -139,17 +140,17 @@ To uninstall the agent:
 .. tabs::
 
 
-  .. group-tab:: APT
-
-
-    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
-
-
-
   .. group-tab:: Yum
 
 
     .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
+
+
+
+  .. group-tab:: APT
+
+
+    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
 
 
 
