@@ -167,7 +167,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. topic:: Cloud Security Monitoring
    :class: cloud
 
-   Wazuh helps monitor cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers like Amazon AWS, Azure or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
+   Wazuh helps monitor cloud infrastructure at an API level, using integration modules that are able to pull security data from well known cloud providers like Amazon AWS, Azure, or Google Cloud. In addition, Wazuh provides rules to assess the configuration of your cloud environment, easily spotting weaknesses.
 
    Furthermore, Wazuh light-weight and multi-platform agents are commonly used to monitor cloud environments at the instance level.
 
