@@ -30,7 +30,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
   Wazuh is used to collect, aggregate, index and analyze security data, helping organizations detect intrusions, threats and behavioral anomalies.
 
-  As cyber threats are becoming more sophisticated, real-time monitoring and security analysis are needed for fast threat detection and remediation. That is why our light-weight agent provides the necessary monitoring and response capabilities, while our server component provides the security intelligence and performs data analysis.
+  As cyber threats become more sophisticated, real-time monitoring and security analysis are essential to quickly detect and remediate threats. For this reason, our lightweight agent provides the necessary monitoring and response capabilities, while our server component provides the security intelligence and performs the data analysis.
 
 .. topic:: Intrusion Detection
   :class: intrusion
