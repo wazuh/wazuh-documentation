@@ -155,7 +155,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Wazuh provides some of the necessary security controls to become compliant with industry standards and regulations. These features, combined with its scalability and multi-platform support help organizations meet technical compliance requirements.
 
-   Wazuh is widely used by payment processing companies and financial institutions to meet PCI DSS (Payment Card Industry Data Security Standard) requirements. Its web user interface provides reports and dashboards that can help with this and other regulations such as GDPR, NIST 800-53, GPG13, TSC SOC2 and HIPAA. 
+   Wazuh is widely used by payment processing companies and financial institutions to meet PCI DSS (Payment Card Industry Data Security Standard) requirements. Its web user interface provides reports and dashboards that can help with this and other regulations such as GDPR, NIST 800-53, GPG13, TSC SOC2, and HIPAA. 
 
 .. topic:: Intrusion Detection
    :class: intrusion
@@ -332,4 +332,3 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. raw:: html
 
    </div>
-
