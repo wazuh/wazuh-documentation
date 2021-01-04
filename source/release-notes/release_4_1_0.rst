@@ -24,9 +24,10 @@ Added
 ^^^^^
 
 **Core**
+
 - Allow negation of expressions in rules.
-- Support for PCRE2 regular expressions in rules and decoders.
-- Added new ruleset test module. Allow testing and verification of rules and decoders using Wazuh User Interface.
+- Support for ``PCRE2`` regular expressions in rules and decoders.
+- Added new ruleset test module. Allow testing and verification of rules and decoders using Wazuh user interface.
 - Added new upgrade module. WPK upgrade feature has been moved to this module, which offers support for cluster architecture and simultaneous upgrades.
 - Added new task module. This module stores and manages all the tasks that are executed in the agents or managers.
 - Let the time interval to detect that an agent got disconnected configurable. Deprecate parameter ``DISCON_TIME``.
@@ -34,6 +35,7 @@ Added
 - Added the capability to perform FIM on values in the Windows Registry.
 
 **API**
+
 - Added endpoints to query and manage Rootcheck data.
 - Added new endpoint to check status of tasks.
 - Added new endpoints to run the logtest tool and delete a logtest session.
@@ -42,9 +44,11 @@ Added
 - Added new config option to disable uploading configurations containing remote commands.
 
 **AWS module**
+
 - Added support for AWS load balancers (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
 
 **Framework**
+
 - Added new framework modules to use the logtest tool.
 - Improved ``q`` parameter on rules, decoders and cdb-lists modules to allow multiple nested fields.
 
@@ -52,19 +56,22 @@ Changed
 ^^^^^^^
 
 **Core**
+
 -Removed the limit of agents that a manager can support.
-    -Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
-    -Designed new mechanism to close RIDS files when agents are disconnected.
+-Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
+-Designed new mechanism to close RIDS files when agents are disconnected.
 -Moved CA configuration section to verify WPK signatures from active-response section to agent-upgrade section.
 -Changed error message to debug when multiple daemons attempt to remove an agent simultaneously
 -Changed error message to warning when the agent fails to reach a module.
 
 **API**
+
 - Changed the status parameter behavior in the ``DELETE /agents`` endpoint to enhance security.
 - Changed upgrade endpoints to accept a list of agents, maximum 100 agents per request.
 - Improved input validation regexes for ``names`` and ``array_names``.
 
 **Framework**
+
 - Refactored framework to work with new upgrade module.
 - Refactored agent upgrade CLI to work with new ugprade module. It distributes petitions in a clustered environment.
 - Changed rule and decoder details structure to support PCRE2.
@@ -75,6 +82,7 @@ Fixed
 ^^^^^
 
 **Core**
+
 - Fixed error in Analysisd when getting the ossec group ID.
 - Prevented FIM from reporting configuration error when setting patterns that match no files.
 - Fixed the array parsing when building JSON alerts.
@@ -91,9 +99,11 @@ Fixed
 - Fixed the purge of the Redhat vulnerabilities database before updating it.
 
 **API**
+
 - Fixed an error with ``/groups/{group_id}/config`` endpoints (GET and PUT) when using complex ``localfile`` configurations.
 
 **Framework**
+
 - Fixed a ``cluster_control`` bug that caused an error message when running ``wazuh-clusterd`` in foreground.
 - Fixed a bug with ``add_manual``(agents) function when ``authd`` is disabled.
 
@@ -105,7 +115,7 @@ Wazuh ruleset
 
 Added
 ^^^^^
-- Let the Ruleset update tool to bypass the version check with the force option.
+- Let the ruleset update tool to bypass the version check with the force option.
 - Added new AWS Config-History rules to make it more granular by including every item status supported.
 - Several hundred new SCA policies added for various operating systems
 
