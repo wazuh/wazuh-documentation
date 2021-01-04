@@ -174,7 +174,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. topic:: Containers Security
    :class: docker
 
-   Wazuh provides security visibility into hosts and Docker containers, monitoring their behavior and detecting threats, vulnerabilities and anomalies. The Wazuh agent has a native integration with the Docker engine that allows users to monitor images, volumes, network configurations and running containers.
+   Wazuh provides security visibility into hosts and Docker containers, monitoring their behavior and detecting threats, vulnerabilities, and anomalies. The Wazuh agent has native integration with the Docker engine that allows users to monitor images, volumes, network configurations, and running containers.
 
    Wazuh continuously collects and analyzes detailed runtime information. For example, alerting for containers running in privileged mode, vulnerable applications, a shell running in a container, changes to persistent volumes or images, and other possible threats.
 
