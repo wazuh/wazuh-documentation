@@ -119,7 +119,7 @@ Wazuh is a free and open source platform for threat detection, security monitori
 
    Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage.
 
-   Wazuh rules help the user to notice application or system errors, misconfigurations, attempted and/or successful malicious activities, policy violations and other security and operational issues.
+   Wazuh rules help the user to notice application or system errors, misconfigurations, attempted and/or successful malicious activities, policy violations, and other security and operational issues.
 
 .. topic:: File Integrity Monitoring
    :class: fim
@@ -332,5 +332,4 @@ Wazuh is a free and open source platform for threat detection, security monitori
 .. raw:: html
 
    </div>
-
 
