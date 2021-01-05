@@ -113,7 +113,7 @@ The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to
 
 - :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
-Here is an example of rules an Azure alert:
+Here is an example of a rule that Azure alerts.
 
 .. code-block:: json
   :emphasize-lines: 14,16
