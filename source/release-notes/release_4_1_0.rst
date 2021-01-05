@@ -36,20 +36,20 @@ Added
 
 **API**
 
-- Added endpoints to query and manage rootcheck data.
-- Added a new endpoint to check the status of tasks.
-- Added new endpoints to run the logtest tool and delete a logtest session.
-- Added debug2 mode for API log and improved debug mode.
+- Added endpoints to query and manage ``rootcheck`` data.
+- Added a new endpoint to check the status of a task.
+- Added new endpoints to run the ``logtest`` tool and delete a ``logtest`` session.
+- Added ``debug2`` mode for API log and improved debug mode.
 - Added missing secure headers for API responses.
 - Added a new configuration option to disable uploading configurations containing remote commands.
 
 **AWS module**
 
-- Added support for AWS load balancers (Application Load Balancer, Classic Load Balancer, and Network Load Balancer).
+- Added support for AWS load balancers: Application Load Balancer, Classic Load Balancer, and Network Load Balancer.
 
 **Framework**
 
-- Added new framework modules to use the logtest tool.
+- Added new framework modules to use the ``logtest`` tool.
 - Improved ``q`` parameter on rules, decoders, and ``cdb-lists`` modules to allow multiple nested fields.
 
 Changed
@@ -57,12 +57,12 @@ Changed
 
 **Core**
 
--Removed the limit of agents that a manager can support.
--Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
--Designed a new mechanism to close RIDS files when agents are disconnected.
--Moved CA configuration section to verify WPK signatures from active-response section to agent-upgrade section.
--Changed error message to debug when multiple daemons attempt to remove an agent simultaneously
--Changed error message to warn when the agent fails to reach a module.
+- Removed the limit of agents that a manager can support.
+- Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
+- Designed a new mechanism to close RIDS files when agents are disconnected.
+- Moved CA configuration section to verify WPK signatures from active- response section to agent- upgrade section.
+- Changed error message to debug when multiple daemons attempt to remove an agent simultaneously
+- Changed error message to warn when the agent fails to reach a module.
 
 **API**
 
