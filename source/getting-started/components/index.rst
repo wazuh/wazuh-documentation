@@ -13,7 +13,7 @@ The Wazuh platform provides features to protect your cloud, container, and serve
 
 In addition to agent-based monitoring capabilities, the Wazuh platform can monitor agent-less devices such as firewalls, switches, routers or network IDS, among others. For example, a system log data can be collected via Syslog, and its configuration can be monitored through periodic probing of its data (e.g. via SSH or through an API).
 
-The diagram below represents the Wazuh components and data flow, showing the three main components of the solution: the :ref:`Wazuh agent <wazuh_agent>`, the :ref:`Wazuh server <wazuh_server>`, and the :ref:`Elastic Stack <elastic_stack>`.
+The diagram below represents the Wazuh components and data flow. It shows the three main components of the solution, which are the :ref:`Wazuh agent <wazuh_agent>`, the :ref:`Wazuh server <wazuh_server>`, and the :ref:`Elastic Stack <elastic_stack>`.
 
 .. image:: ../../images/getting_started/data_flow.png
     :alt: Data flow
