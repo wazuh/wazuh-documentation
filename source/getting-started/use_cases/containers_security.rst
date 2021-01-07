@@ -5,7 +5,7 @@
 Containers security monitoring
 ==============================
 
-Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh is capable of protecting container workloads at two different levels:
+Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh protects container workloads at two different levels:
 
 Infrastructure level
 --------------------
