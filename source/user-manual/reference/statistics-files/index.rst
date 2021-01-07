@@ -16,7 +16,9 @@ Manager statistical files:
   * `wazuh-remoted.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-remoted-state.html>`_ - It shows information about the `remote daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-remoted.html>`_
   * `wazuh-analysisd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-analysisd-state.html>`_ - It shows information about the `analysis daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-analysisd.html>`_.
 
+Manager and Agents statistical files:
 
+  * `wazuh-logcollector.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-logcollector-state.html>`_ - It shows information about `logcollector daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-logcollector.html>`_
 
 .. topic:: Contents
 
@@ -26,3 +28,4 @@ Manager statistical files:
       wazuh-agentd-state
       wazuh-remoted-state
       wazuh-analysisd-state
+      wazuh-logcollector-state
