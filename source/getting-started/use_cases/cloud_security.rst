@@ -158,7 +158,7 @@ More information about how to use Wazuh to monitor Microsoft Azure can be found 
 Google Cloud Platform
 ---------------------
 
-Wazuh monitors Google cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
+Wazuh monitors Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
 
 The following example shows an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE):
 
