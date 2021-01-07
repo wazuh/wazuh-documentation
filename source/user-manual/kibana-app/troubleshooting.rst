@@ -10,17 +10,36 @@ This section collects common installation or usage problems on the Wazuh Kibana 
 "Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
 ------------------------------------------------------------------------------------
 
-The Wazuh Kibana plugin has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
+Wazuh Kibana plugin must be installed in the correct version, which depends both on the Kibana and the Wazuh version.
 
-.. code-block:: javascript
+Kibana version can be checked by executing the following command:
 
-  "kibana": {
-    "version": "6.7.2"
-  },
+.. code-block:: console
 
-Your Wazuh Kibana plugin must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
+ # cat /usr/share/kibana/package.json | grep version
 
-You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
+An example output of the command looks as follows:
+
+.. code-block:: console
+  :class: output
+
+  "version": "7.9.1",
+
+
+The Wazuh version can be checked by executing the following command:
+
+.. code-block:: console
+
+ # cat /var/ossec/etc/ossec-init.conf | grep VERSION
+
+An example output of the command looks as follows:
+
+.. code-block:: console
+  :class: output
+
+  VERSION="v4.0.3"
+
+Using the Kibana version and the Wazuh version, the correct plugin can be found in the Wazuh `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 
 No template found for the selected index pattern
@@ -30,7 +49,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <user>:<password> -k
 
 .. code-block:: json
   :class: output
@@ -68,9 +87,16 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 .. code-block:: console
 
-  # curl api_user:api_pass@api_url:55000/version
+  # curl -k -X GET "https://<api_url>:55000/" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X GET 'https://<api_url>:55000/security/user/authenticate?raw=true')"
 
-If the *curl* command fails but the Wazuh API is running properly, it means you have a connectivity problem between servers.
+.. code-block:: console
+  :class: output
+  
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  100   265  100   265    0     0    798      0 --:--:-- --:--:-- --:--:--   798
+  {"data": {"title": "Wazuh API REST", "api_version": "4.0.3", "revision": 40010, "license_name": "GPL 2.0", "license_url": "https://github.com/wazuh/wazuh/blob/4.0/LICENSE", "hostname": "manager", "timestamp": "2020-12-22T12:19:20+0000"},
+
 
 I don't see alerts in the Wazuh Kibana plugin
 ---------------------------------------------
