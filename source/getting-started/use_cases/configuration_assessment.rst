@@ -5,7 +5,7 @@
 Configuration assessment
 ========================
 
-Automated Security Configuration Assessment (SCA) is an essential capability to improve the enterprise security posture, and to reduce its attack surface. The Wazuh SCA module helps maintain a standard configuration through the monitored endpoints. This is done via pre-defined checks based on Center of Internet Security (CIS) hardening guides.
+Automated Security Configuration Assessment (SCA) is an essential capability to improve the enterprise security posture and to reduce its attack surface. The Wazuh SCA module helps maintain a standard configuration through the monitored endpoints. This is done via pre-defined checks based on the Center of Internet Security (CIS) hardening guides.
 
 When the SCA module is enabled, the :ref:`Wazuh agent <wazuh_agent>` performs scans periodically, reporting misconfigurations in the monitored system. Those scans assess the configuration of the system by means of policy files, which contain a set of checks to be run. For example, an SCA check could inspect the filesystem configuration, look for the presence of a software update or security patch, see that the local firewall is enabled, identify unnecessary running services, or verify the users' password policy.
 
