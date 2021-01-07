@@ -13,6 +13,7 @@ import os
 import re
 import shlex
 import datetime
+import time
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -28,6 +29,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.0'
+latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
@@ -176,10 +178,13 @@ html_static_path = ['_static']
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
+html_additional_pages = {}
+
 if version >= '4.0':
-    html_additional_pages = {
-        'user-manual/api/reference': 'api-redoc.html',
-    }
+    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
+
+if latest_release == True:
+    html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -352,6 +357,11 @@ todo_include_todos = False
 
 # -- Minify ------------------------------------------------------------------
 
+extra_assets = [
+    'css/style-redirect.css',
+    'js/moved-content.js'
+]
+
 def minification(actual_path):
 
     files = [
@@ -363,6 +373,10 @@ def minification(actual_path):
         ['js/style','js'],
         ['js/custom-redoc','js']
     ]
+    
+    if latest_release == True:
+        for asset in extra_assets:
+            files.append(asset.split('.'))
 
     for file in files:
 
@@ -500,11 +514,24 @@ def setup(app):
 
 	# List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
-    app.connect('build-finished', creating_file_list)
+    app.connect('build-finished', finish_and_clean)
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
 
+def finish_and_clean(app, exception):
+    ''' Performs the final tasks after the compilation '''
+    
+    # Create additional files such as the `.doclist` and the sitemap
+    creating_file_list(app, exception)
+    
+    # Remove extra minified files
+    # TODO: 
+    for asset in extra_assets:
+        mini_asset = '.min.'.join(asset.split('.'))
+        if os.path.exists(app.srcdir + '/_static/' + mini_asset):
+            os.remove(app.srcdir + '/_static/' + mini_asset)
+    
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
     if templatename == "page.html" and pagename not in exclude_doc:
@@ -513,28 +540,30 @@ def collect_compiled_pagename(app, pagename, templatename, context, doctree):
         pass
 
 def creating_file_list(app, exception):
-	''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
-	if app.builder.name == 'html':
-		build_path = app.outdir
-		separator = '\n'
-		with open(build_path+'/.doclist', 'w') as doclist_file:
-			list_text = separator.join(list_compiled_html)
-			doclist_file.write(list_text)
-		sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
-		sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
-		for compiled_html in list_compiled_html:
-			sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
-		sitemap += '</urlset>'
-		with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
-			sitemap_file.write(sitemap)
+    ''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
+    if app.builder.name == 'html':
+        build_path = app.outdir
+        separator = '\n'
+        with open(build_path+'/.doclist', 'w') as doclist_file:
+            list_text = separator.join(list_compiled_html)
+            doclist_file.write(list_text)
+            sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+            sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+            for compiled_html in list_compiled_html:
+                sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
+                sitemap += '</urlset>'
+                with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
+                    sitemap_file.write(sitemap)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
-    "js/version-selector.js",
+    "css/style-redirect.css",
     "js/redirects.js",
-    "js/style.js"
+    "js/style.js",
 ]
+
+exclude_patterns = exclude_patterns + extra_assets
 
 # -- Additional configuration ------------------------------------------------
 
@@ -550,6 +579,7 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version,
     "production": production,
-    "apiURL": apiURL
+    "apiURL": apiURL,
+    "compilation_ts": str(time.time())
 }
 sphinx_tabs_nowarn = True
