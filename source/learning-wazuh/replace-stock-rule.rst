@@ -125,7 +125,7 @@ Using the Command Line Interface
 
 7. Save your changes to ``local_rules.xml``.
 
-8. Run ``ossec-logtest`` to test your customized rule and paste in this event that should trigger it:
+8. Run ``wazuh-logtest`` to test your customized rule and paste in this event that should trigger it:
 
     .. code-block:: none
         :class: output
@@ -145,6 +145,6 @@ Using the Command Line Interface
 
 .. note::
     The Wazuh manager only reads in the rules when started or restarted, so any real events like above
-    would not be affected by your customized rule until you restart Wazuh manager.  The ``ossec-logtest``
+    would not be affected by your customized rule until you restart Wazuh manager.  The ``wazuh-logtest``
     tool does not require Wazuh manager to be restarted to notice your latest rule changes, which provides
     you with a convenient way to test your rule changes before making them take effect on real events.

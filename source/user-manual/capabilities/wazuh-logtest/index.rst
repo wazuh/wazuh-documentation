@@ -7,7 +7,7 @@ Wazuh-Logtest
 
 .. versionadded:: 4.1.0
 
-The Wazuh-Logtest whole solution was designed to replace :ref:`ossec-logtest tool <ossec-logtest>`,
+The Wazuh-Logtest whole solution was designed to replace ossec-logtest,
 now allowing to test and verify rules and decoders remotely, sharing the rules engine
 with :ref:`wazuh-analysisd <wazuh-analysisd>`
 

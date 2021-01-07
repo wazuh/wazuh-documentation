@@ -7,7 +7,7 @@ wazuh-syscheckd
 
 .. versionadded:: 4.2
 
-The wazuh-syscheckd program checks configured files for changes to the checksums, permissions and ownership.  It is run using ossec-control.
+The wazuh-syscheckd program checks configured files for changes to the checksums, permissions and ownership.  It is run using wazuh-control.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

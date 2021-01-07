@@ -1,11 +1,13 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-control:
+.. _wazuh-control:
 
-ossec-control
+wazuh-control
 =============
 
-The ossec-control script is used to start, stop, configure, or check on the status of Wazuh processes. This script can enable or disable client-syslog, database logging, agentless configurations, integration with slack and pagerduty, and debug mode.
+.. versionadded:: 4.2
+
+The wazuh-control script is used to start, stop, configure, check on the status of Wazuh processes and enable the debug mode.
 
 .. note::
     We recommend to use the ``systemctl`` or ``service`` commands (depending on your OS) to **start**, **stop** or **restart** the Wazuh service. This will avoid inconsistencies between the *service* status and the *processes* status.

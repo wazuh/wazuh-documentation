@@ -1,17 +1,19 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _ossec-regex:
+.. _wazuh-regex:
 
-ossec-regex
+wazuh-regex
 ===========
 
-The ossec-regex program is used to validate a regex expression.
+.. versionadded:: 4.2
+
+The wazuh-regex program is used to validate a regex expression.
 
 The pattern should be enclosed in single quotes to help prevent any unintended interactions with the shell.
 
-The syntax for ossec-regex is as follows:
+The syntax for wazuh-regex is as follows:
 
-``/var/ossec/bin/ossec-regex '<pattern>'``
+``/var/ossec/bin/wazuh-regex '<pattern>'``
 
 It then reads strings from stdin and outputs matches to stdout.
 

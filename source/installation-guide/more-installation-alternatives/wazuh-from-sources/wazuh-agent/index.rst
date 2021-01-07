@@ -103,7 +103,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $DIRECTORY/bin/wazuh-control stop 2> /dev/null
 
     Remove files and service artifacts:
 
@@ -117,7 +117,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
+      # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
       # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
 
     For Systemd:
@@ -282,7 +282,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $DIRECTORY/bin/wazuh-control stop 2> /dev/null
 
     Remove files and service artifacts:
 
@@ -401,7 +401,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $DIRECTORY/bin/wazuh-control stop 2> /dev/null
 
     Remove files and service artifacts:
 
@@ -523,7 +523,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $DIRECTORY/bin/wazuh-control stop 2> /dev/null
 
     Remove files and service artifacts:
 
@@ -641,7 +641,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+         # $DIRECTORY/bin/wazuh-control stop 2> /dev/null
 
         Remove files and service artifacts:
 
@@ -777,7 +777,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+         # $DIRECTORY/bin/wazuh-control stop 2> /dev/null
 
         Remove files and service artifacts:
 
