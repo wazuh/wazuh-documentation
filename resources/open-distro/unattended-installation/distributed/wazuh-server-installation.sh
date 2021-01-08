@@ -92,7 +92,7 @@ checkConfig() {
     if [ -f ~/certs.tar ]
     then
         echo "Certificates file found. Starting the installation..."
-        eval "tar --overwrite -C ~/ -xf ~/certs.tar config.yml ${debug}"
+        eval "tar -xf ~/certs.tar ${debug}"
     else
         echo "No certificates file found."
         exit 1;
@@ -200,7 +200,7 @@ installFilebeat() {
 
 configureFilebeat() {
 
-    nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
+    nh=$(awk -v RS='' '/network.host:/' ~/certs/config.yml)
 
     if [ -n "$nh" ]
     then
@@ -210,7 +210,7 @@ configureFilebeat() {
         echo "  - ${nip}"  >> /etc/filebeat/filebeat.yml  
     else
         echo "output.elasticsearch.hosts:" >> /etc/filebeat/filebeat.yml  
-        sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
+        sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/certs/config.yml)
         shr="discovery.seed_hosts:"
         rm="- "
         sh="${sh//$shr}"
@@ -221,13 +221,13 @@ configureFilebeat() {
     fi
 
     eval "mkdir /etc/filebeat/certs ${debug}"
-    eval "cp ~/certs.tar /etc/filebeat/certs/ ${debug}"
-    eval "cd /etc/filebeat/certs/ ${debug}"
-    eval "tar -xf certs.tar ${iname}.pem ${iname}.key root-ca.pem ${debug}"
+    eval "cp ~/certs.tar /etc/filebeat/ ${debug}"
+    eval "cd /etc/filebeat/ ${debug}"
+    eval "tar -xf certs.tar certs/${iname}.pem certs/${iname}-key.pem certs/root-ca.pem ${debug}"
     if [ ${iname} != "filebeat" ]
     then
         eval "mv /etc/filebeat/certs/${iname}.pem /etc/filebeat/certs/filebeat.pem ${debug}"
-        eval "mv /etc/filebeat/certs/${iname}.key /etc/filebeat/certs/filebeat.key ${debug}"
+        eval "mv /etc/filebeat/certs/${iname}-key.pem /etc/filebeat/certs/filebeat-key.pem ${debug}"
     fi        
     logger "Done"
     echo "Starting Filebeat..."
