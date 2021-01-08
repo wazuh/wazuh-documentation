@@ -14,15 +14,14 @@ discovery.seed_hosts:
         - <elasticsearch_ip_node2>
         - <elasticsearch_ip_node3>
 
-## Certificates creation
-          
-# Clients certificates
-clients:
-  - name: admin
-    dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-    admin: true
-  - name: filebeat
-    dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
+# Wazuh server nodes
+wazuh-servers:
+  - name: <node-name-1>
+    ip:
+      - node-IP   
+  - name: <node-name-2>
+    ip:
+      - node-IP  
 
 
 # Kibana-instance
