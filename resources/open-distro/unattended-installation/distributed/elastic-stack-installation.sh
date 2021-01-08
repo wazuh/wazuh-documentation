@@ -340,8 +340,8 @@ createCertificates() {
         r="network.host: "
         eip="${reip//$r}"
 
-        rwip=$(awk -v RS='' '/# Wazuh-master-configuration/' ~/config.yml) 
-        r="# Wazuh-master-configuration"
+        rwip=$(awk -v RS='' '/# Wazuh-server/' ~/config.yml) 
+        r="# Wazuh-server"
         r2="- "
         wip="${rwip//$r}"
         wip="${wip//$r2}"
@@ -528,7 +528,7 @@ initializeKibana() {
         echo -ne ${char}
         sleep 10
     done     
-    wip=$(grep -A 1 "Wazuh-master-configuration" ~/config.yml | tail -1)
+    wip=$(grep -A 1 "Wazuh-server" ~/config.yml | tail -1)
     rm="- "
     wip="${wip//$rm}"    
     conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
