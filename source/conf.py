@@ -544,15 +544,19 @@ def creating_file_list(app, exception):
     if app.builder.name == 'html':
         build_path = app.outdir
         separator = '\n'
+        sitemap_version = version
+        if latest_release == True:
+            sitemap_version = 'current'
+      
         with open(build_path+'/.doclist', 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
             doclist_file.write(list_text)
             sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
             sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
             for compiled_html in list_compiled_html:
-                sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
+                sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + compiled_html) + '</loc></url>' + separator
                 sitemap += '</urlset>'
-                with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
+                with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:
                     sitemap_file.write(sitemap)
 
 exclude_patterns = [
