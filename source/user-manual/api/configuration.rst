@@ -13,7 +13,7 @@ Configuration
 Wazuh API configuration
 -----------------------
 
-The Wazuh API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line. It is also possible to use the :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` API endpoint to change the configuration. Check the :ref:`API reference <api_reference>` for more information about the Wazuh API endpoints.
+The Wazuh API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line.
 
 Here are all the available settings for the ``api.yaml`` configuration file. For more information on each of the settings, check the :ref:`configuration options <api_configuration_options>` below:
 
@@ -56,7 +56,7 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
 
 .. warning::
 
-    If running a cluster, the master will NOT send its local Wazuh API configuration file to the workers. Each node provides its own Wazuh API. If the configuration file is changed in the master node, the user should manually update the workers Wazuh API configuration in order to use the same one. Take care of not overwriting the IP and port in the local configuration of each worker. The Wazuh API endpoint :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>` can be used to change any or all of the Wazuh API configuration files in the cluster nodes.
+    If running a cluster, the master will NOT send its local Wazuh API configuration file to the workers. Each node provides its own Wazuh API. If the configuration file is changed in the master node, the user should manually update the workers Wazuh API configuration in order to use the same one. Take care of not overwriting the IP and port in the local configuration of each worker.
 
 Make sure to restart the Wazuh API using **wazuh-manager** service after editing the configuration file:
 
@@ -87,7 +87,7 @@ Unlike regular Wazuh API configuration settings that can be changed in the :ref:
 Configuration endpoints
 -----------------------
 
-The Wazuh API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`configuration file <api_configuration_file>`.
+The Wazuh API has several endpoints that allow querying its current configuration. The API configuration can only be modified by accessing the ``api.yaml`` file described in the section :ref:`configuration file <api_configuration_file>`.
 
 The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`, :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` and :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` Wazuh API endpoints.
 
@@ -99,30 +99,11 @@ Get configuration
 
 Modify configuration
 ^^^^^^^^^^^^^^^^^^^^
-- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>`: Modify the local Wazuh API configuration.
-- :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`: Modify the Wazuh API configuration of all (or a list) of the cluster nodes.
 - :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Modify the security configuration.
 
 Restore configuration
 ^^^^^^^^^^^^^^^^^^^^^
-- :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>`: Restore the default local Wazuh API configuration.
-- :api-ref:`DELETE /cluster/api/config <operation/api.controllers.cluster_controller.delete_api_config>`: Restore the default Wazuh API configuration of all (or a list) of the cluster nodes.
 - :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`: Restore the default security configuration.
-
-
-To apply the changes it is necessary to restart each Wazuh API whose configuration has changed (not necesary for ``/security/config`` endpoints):
-
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
 
 SSL certificate
 ---------------
