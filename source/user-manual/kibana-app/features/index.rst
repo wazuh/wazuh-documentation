@@ -20,5 +20,4 @@ The Wazuh Kibana plugin gives you a quick view of your cluster, agents and alert
         settings
         reporting
         index-pattern
-        download-csv
-        query-configuration
+
