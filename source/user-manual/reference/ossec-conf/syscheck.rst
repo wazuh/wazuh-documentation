@@ -991,8 +991,8 @@ Example:
 
 .. _reference_ossec_syscheck_default_configuration:
 
-Defaut syscheck configuration:
-------------------------------
+Default syscheck configuration:
+-------------------------------
 
 
 
