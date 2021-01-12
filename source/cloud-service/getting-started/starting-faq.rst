@@ -15,6 +15,8 @@ While starting with Cloud Service some questions may arise. This list answers so
 
 - `Can I try it for free?`_
 
+- `Will I be charged when my trial is over?`_
+  
 - `Is it PCI DDS compliant?`_
 
 - `How can I get support?`_
@@ -26,7 +28,10 @@ While starting with Cloud Service some questions may arise. This list answers so
 - `What is a tier?`_
 
 - `What will happen when I use all of my tier?`_
-  
+
+- `Can I cancel at any time?`_  
+
+- `What if I have more questions?`_
   
 What is Wazuh Cloud Service?
 ----------------------------
@@ -37,6 +42,12 @@ Can I try it for free?
 ----------------------
 
 You may :ref:`sign up for a free trial<cloud_getting_started_sign_up>` to test an environment. No credit card is required.
+
+Will I be charged when my trial is over?
+----------------------------------------
+
+No. No credit card is required for your trial, so you will only be charged if you decide to keep using our service beyond the trial period.
+
 
 Is it PCI DDS compliant?
 ------------------------
@@ -78,3 +89,13 @@ What will happen when I use all of my tier?
 You will be able to see the most recent data according to your tier. The older information will be removed so the total visible data matches your tier. You will still be able to access older data as :ref:`cold storage <cloud_glossary_cold_storage>`, where it will be stored for a year with no size limits and will be easily accessible.
 
 As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI), but will remain accessible as cold storage for a year.
+
+Can I cancel at any time?
+-------------------------
+
+Sure. You can cancel at any time with no penalty. You will be able to keep using our service until the end of the current period and won't be charged afterwards.
+
+What if I have more questions?
+------------------------------
+
+We would be happy to answer them. Do you have questions regarding the service? Fill the form `here <https://wazuh.com/cloud/>`_. Already using or testing our service? Address us through the **Help** section on your Wazuh Cloud Console.

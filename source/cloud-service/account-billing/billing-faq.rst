@@ -24,7 +24,6 @@ This list provides answers for some of the Frequently Asked Questions regarding 
 
 - `When is my credit card charged?`_
 
-
   
 Can I estimate how much will Wazuh Cloud Service cost?
 ------------------------------------------------------
@@ -61,7 +60,6 @@ On your Wazuh Cloud Console:
 2. Select **Contacts**.
 
 3. Add or remove contacts from the billing category.
-   
 
 What are the available payment methods on Wazuh Cloud Service?
 --------------------------------------------------------------
