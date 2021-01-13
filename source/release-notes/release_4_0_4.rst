@@ -19,8 +19,8 @@ Added
 
 **API**
 
-- Secure headers for API responses.
-- New configuration option to disable uploading configurations containing remote commands. 
+- Missing secure headers for API responses to fulfill the OWASP recommendations.
+- New option to disable uploading configurations containing remote commands. 
 
 Changed 
 ^^^^^^^
