@@ -88,7 +88,7 @@ Unlike regular Wazuh API configuration settings that can be changed in the :ref:
 
 .. code-block:: yaml
 
-    auth_token_exp_timeout: 3600
+    auth_token_exp_timeout: 900
     rbac_mode: white
 
 .. warning::
@@ -276,7 +276,7 @@ auth_token_exp_timeout
 +-----------------------+---------------+---------------------------------------------------------+
 | Allowed values        | Default value | Description                                             |
 +=======================+===============+=========================================================+
-| Any positive integer  | 3600          | Set how many seconds it takes for JWT tokens to expire. |
+| Any positive integer  | 900           | Set how many seconds it takes for JWT tokens to expire. |
 +-----------------------+---------------+---------------------------------------------------------+
 
 rbac_mode
