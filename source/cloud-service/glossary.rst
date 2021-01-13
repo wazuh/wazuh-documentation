@@ -67,7 +67,7 @@ The environment is the core of Wazuh Cloud Service. It will both work as a hoste
 **Hot Storage (Online Storage)**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Data available on the Wazuh WUI. It is formed by all the generated alerts from the Wazuh manager. This information is available as soon as Wazuh manager processes it and Elasticsearch indexes it, and it will remain available until you reach your tier limit. More precisely, this storage is calculated using the primary shards of Elasticsearch indices.
+Data available on the Wazuh WUI. It is formed by all the generated alerts from the Wazuh manager. This information is available as soon as Wazuh manager processes it and Elasticsearch indexes it, and it will remain available until you reach your tier limit. More precisely, this storage is calculated using the primary shards of ``wazuh-*`` indices in Elasticsearch.
 
 .. _cloud_glossary_region:
 
