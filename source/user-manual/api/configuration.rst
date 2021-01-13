@@ -33,7 +33,7 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         cert: "api/configuration/ssl/server.crt"
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
-        tls_protocol: "TLSv1.2"
+        ssl_cipher: "TLSv1.2"
 
      logs:
         level: "info"
@@ -215,7 +215,7 @@ https
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 | ca           | Any text string              | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
-| tls_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | TLS protocol to allow. Its value is not case sensitive.           |
+| ssl_cipher   | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL cipher to allow. Its value is not case sensitive.             |
 +--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 
 logs
