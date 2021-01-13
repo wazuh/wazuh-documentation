@@ -118,6 +118,23 @@ Check if Filebeat is reading the ``alerts.json`` file:
 There should be two processes reading the ``alerts.json`` file: ``ossec-analysisd`` and ``filebeat``.
 
 
+Could not connect to API with id: default: 3003 - Missing param: API USERNAME
+-----------------------------------------------------------------------------
+
+Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file. For example, the configuration can be: 
+
+.. code-block:: console
+   
+   hosts:
+    - production:
+        url: https://172.16.1.2
+        port: 55000
+        username: wazuh
+        password: wazuh
+        run_as: false
+
+
+
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
