@@ -46,6 +46,7 @@ Configuration options for file integrity monitoring:
 - `default_max_depth`_
 - `file_max_size`_
 - `symlink_scan_interval`_
+- `max_fd_win_rt`_
 
 
 .. _reference_ossec_syscheck_alert_new_files:
@@ -1027,7 +1028,7 @@ rt_delay
 
 .. versionadded:: 4.2.0
 
-Specifies the delay (ms) when dispatching real-time modifications to avoid triggering alerts on some temporary files (like vim edits).
+Specifies the delay in milliseconds when dispatching realtime modifications to avoid triggering alerts on temporary files.
 
 +--------------------+-----------------------------+
 | **Default value**  | 5                           |
@@ -1071,7 +1072,7 @@ file_max_size
 
 .. versionadded:: 4.2.0
 
-Maximum file size (MB) for calculating integrity hashes. If the value is 0, this filter will be disabled.
+Specifies a size limit in megabytes for files to have their integrity hashes computed, files bigger than this configuration won't be hashed. Setting this value to 0 will stop hashing of files.
 
 +--------------------+-----------------------------+
 | **Default value**  | 1024                        |
@@ -1093,7 +1094,7 @@ symlink_scan_interval
 
 .. versionadded:: 4.2.0
 
-Specifies the interval (seconds) of the scan that checks if any configured symbolic link has been changed.
+Specifies an interval in seconds for configured symbolic links to be checked for a change in their target directory.
 
 +--------------------+------------------------------+
 | **Default value**  | 600                          |
@@ -1208,6 +1209,28 @@ Example:
 .. code-block:: xml
 
  <windows_audit_interval>300</windows_audit_interval>
+
+
+.. _reference_ossec_syscheck_max_fd_win_rt:
+
+max_fd_win_rt
+-------------
+
+.. versionadded:: 4.2.0
+
+Sets the maximum number of directories that can be configured for realtime monitoring in Windows systems.
+
++--------------------+------------------------------------+
+| **Default value**  | 256 seconds                        |
++--------------------+------------------------------------+
+| **Allowed values** | Any number from 1 to 1024          |
++--------------------+------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <max_fd_win_rt>256</max_fd_win_rt>
 
 
 .. _reference_ossec_syscheck_windows_registry:
