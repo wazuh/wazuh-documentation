@@ -21,6 +21,7 @@ Added
 
 - Missing secure headers for API responses to fulfill the OWASP recommendations.
 - New option to disable uploading configurations containing remote commands. 
+- New option to choose the SSL ciphers. Default value TLSv1.2.
 
 Changed 
 ^^^^^^^
@@ -28,6 +29,7 @@ Changed
 **API**
 
 - Deprecated endpoints to restore and update API configuration file.
+- Default expiration time of the JWT token set to 15 minutes.
 
 Fixed
 ^^^^^
