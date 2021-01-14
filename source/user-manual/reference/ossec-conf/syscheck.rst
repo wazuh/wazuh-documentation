@@ -166,6 +166,9 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 
+In Linux systems, it is possible to use wildcards when defining entries. These will be expanded according to the same rules followed by the shell.
+
+
 +--------------------+------------------------------------+
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
