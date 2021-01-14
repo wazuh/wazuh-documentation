@@ -28,7 +28,7 @@ Changed
 
 **API**
 
-- Restore and update API endpoints deprecated. 
+- Restore and update API endpoints have been deprecated. 
 - JWT token expiration time set to 15 minutes.
 
 
