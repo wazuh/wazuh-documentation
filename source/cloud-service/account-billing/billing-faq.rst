@@ -8,7 +8,7 @@ Billing FAQ
 .. meta::
   :description: Some Frequently Asked Questions about billing. 
 
-This list provides answers for some of the Frequently Asked Questions regarding Wazuh Cloud Service billing.
+This list provides answers for some of the most Frequently Asked Questions regarding Wazuh Cloud Service billing.
 
 - `Can I estimate how much will Wazuh Cloud Service cost?`_
 
@@ -69,7 +69,7 @@ Credit or debit card payment is supported. Find supported cards from our certifi
 Who can I contact for more information?
 ---------------------------------------
 
-For general purpose you can fill the form `here <https://wazuh.com/cloud/>`_.
+For general purpose inquiries you can fill the form `here <https://wazuh.com/cloud/>`_.
 
 For info related to your environments, address us on the **Help** section of your Wazuh Cloud Console.
 

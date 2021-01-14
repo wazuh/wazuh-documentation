@@ -45,12 +45,12 @@ While configuring an environment some questions may arise. This list gathers som
 How can I send data to my environment?
 --------------------------------------
 
-All the communications will be sent through Wazuh agents once they register into the environment. This way it is guaranteed that your data will be secure.
+All the communications will be sent through Wazuh agents once they are registered into the environment. This way it is guaranteed that your data will be secure.
   
 Is it possible to change the URL to access the environment?
 -----------------------------------------------------------
 
-It is possible to get a new URL by opening a support ticket, but the previous URL will kept too. Besides, it is possible to use a custom DNS pointing to the URL we provide.
+It is possible to get a new URL by opening a support ticket, but the previous URL will be kept too. Besides, it is possible to use a custom DNS pointing to the URL we provide.
 
 What happens if I consume all the data of my tier?
 --------------------------------------------------
