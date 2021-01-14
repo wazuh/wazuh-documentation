@@ -28,19 +28,20 @@ Changed
 
 **API**
 
-- Deprecated endpoints to restore and update API configuration file.
-- Default expiration time of the JWT token set to 15 minutes.
+- Restore and update API endpoints deprecated. 
+- JWT token expiration time set to 15 minutes.
+
 
 Fixed
 ^^^^^
 
 **API**
 
-- Spec regexes for paths used in /manager/files and /cluster/{node_id}/files endpoints.
+- Input validators for /manager/files and /cluster/{node_id}/files endpoints.
 
 **Framework**
 
-- Bug with add_manual(agents) function when authd is disabled.
+- Bug with client.keys file handling when adding agents without authd.
 
 **Core**
 
