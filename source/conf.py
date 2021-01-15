@@ -526,7 +526,6 @@ def finish_and_clean(app, exception):
     creating_file_list(app, exception)
     
     # Remove extra minified files
-    # TODO: 
     for asset in extra_assets:
         mini_asset = '.min.'.join(asset.split('.'))
         if os.path.exists(app.srcdir + '/_static/' + mini_asset):
@@ -540,7 +539,7 @@ def collect_compiled_pagename(app, pagename, templatename, context, doctree):
         pass
 
 def creating_file_list(app, exception):
-    ''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
+    ''' Creates the files containing the path to every html file that was compiled. These files are the `.doclist` and the release sitemap. '''
     if app.builder.name == 'html':
         build_path = app.outdir
         separator = '\n'
