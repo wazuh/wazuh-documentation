@@ -29,7 +29,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.0'
-latest_release = True
+is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
@@ -183,7 +183,7 @@ html_additional_pages = {}
 if version >= '4.0':
     html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
 
-if latest_release == True:
+if is_latest_release == True:
     html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
@@ -374,7 +374,7 @@ def minification(actual_path):
         ['js/custom-redoc','js']
     ]
     
-    if latest_release == True:
+    if is_latest_release == True:
         for asset in extra_assets:
             files.append(asset.split('.'))
 
@@ -545,26 +545,32 @@ def creating_file_list(app, exception):
         build_path = app.outdir
         separator = '\n'
         sitemap_version = version
-        if latest_release == True:
+        if is_latest_release == True:
             sitemap_version = 'current'
+            
+        # Create the release sitemap content
+        sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+        sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+        for compiled_html in list_compiled_html:
+            sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + compiled_html) + '</loc></url>' + separator
+        # Close sitemap content    
+        sitemap += '</urlset>'
       
+        # Create .doclist file
         with open(build_path+'/.doclist', 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
             doclist_file.write(list_text)
-            sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
-            sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
-            for compiled_html in list_compiled_html:
-                sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + compiled_html) + '</loc></url>' + separator
-                sitemap += '</urlset>'
-                with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:
-                    sitemap_file.write(sitemap)
+        
+        # Create release sitemap file
+        with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:
+            sitemap_file.write(sitemap)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
     "css/style.css",
-    "css/style-redirect.css",
+    "js/version-selector.js",
     "js/redirects.js",
-    "js/style.js",
+    "js/style.js"
 ]
 
 exclude_patterns = exclude_patterns + extra_assets
