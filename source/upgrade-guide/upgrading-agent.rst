@@ -13,17 +13,36 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: Yum
 
+    #. Import the GPG key:
 
-    #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
+       .. code-block:: console
 
-        .. code-block:: console
+        # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-          # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+    #. Add the repository:
+
+       .. code-block:: console
+
+         # cat > /etc/yum.repos.d/wazuh.repo << EOF
+         [wazuh]
+         gpgcheck=1
+         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         enabled=1
+         name=EL-$releasever - Wazuh
+         baseurl=https://packages.wazuh.com/4.x/yum/
+         protect=1
+         EOF 
+
+    #. Clean the YUM cache:
+
+       .. code-block:: console
+
+         # yum clean all  
 
 
     #. Upgrade the Wazuh agent to the latest version:
 
-        .. code-block:: console
+       .. code-block:: console
 
           # yum upgrade wazuh-agent
 
@@ -37,11 +56,17 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: APT
 
-    #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package. Skip this step if the package is set to a ``hold`` state instead of disabling the repository:
+    #. Install the GPG key:
 
-        .. code-block:: console
+       .. code-block:: console
 
-          # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+
+    #. Add the repository:
+
+       .. code-block:: console
+
+         # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 
     #. Upgrade the Wazuh agent to the latest version:
@@ -62,11 +87,25 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: ZYpp
 
-    #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
+    #. Import the GPG key:
 
-        .. code-block:: console
+       .. code-block:: console
 
-          # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+         # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+    #. Add the repository:
+
+       .. code-block:: console
+
+         # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+         [wazuh]
+         gpgcheck=1
+         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         enabled=1
+         name=EL-$releasever - Wazuh
+         baseurl=https://packages.wazuh.com/4.x/yum/
+         protect=1
+         EOF 
 
 
     #. Upgrade the Wazuh agent to the latest version:
