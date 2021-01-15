@@ -13,6 +13,7 @@ import os
 import re
 import shlex
 import datetime
+import time
 from requests.utils import requote_uri
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -28,6 +29,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.0'
+is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
@@ -154,7 +156,7 @@ html_static_path = ['_static']
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
-#html_extra_path = []
+# html_extra_path = []
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -176,10 +178,13 @@ html_static_path = ['_static']
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
+html_additional_pages = {}
+
 if version >= '4.0':
-    html_additional_pages = {
-        'user-manual/api/reference': 'api-redoc.html',
-    }
+    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
+    
+if is_latest_release == True:
+    html_additional_pages['guide'] = 'guide.html'
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -352,6 +357,11 @@ todo_include_todos = False
 
 # -- Minify ------------------------------------------------------------------
 
+extra_assets = [
+    'guide-assets/guide.css',
+    'guide-assets/guide.js'
+]
+
 def minification(actual_path):
 
     files = [
@@ -364,6 +374,10 @@ def minification(actual_path):
         ['js/custom-redoc','js']
     ]
 
+    if is_latest_release == True:
+        for asset in extra_assets:
+            files.append(asset.split('.'))
+            
     for file in files:
 
         path_end = actual_path+'/_static/'
@@ -498,12 +512,37 @@ def setup(app):
     app.add_config_value('custom_replacements', {}, True)
     app.connect('source-read', customReplacements)
 
-	# List of compiled documents
+    # List of compiled documents
     app.connect('html-page-context', collect_compiled_pagename)
-    app.connect('build-finished', creating_file_list)
+    app.connect('build-finished', finish_and_clean)
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
+
+def finish_and_clean(app, exception):
+    ''' Performs the final tasks after the compilation '''
+
+    # Create additional files such as the `.doclist` and the sitemap
+    creating_file_list(app, exception)
+
+    # Remove extra minified files
+    for asset in extra_assets:
+        mini_asset = '.min.'.join(asset.split('.'))
+        if os.path.exists(app.srcdir + '/_static/' + mini_asset):
+            os.remove(app.srcdir + '/_static/' + mini_asset)
+
+    # Manage the guide-assets
+    file_names = os.listdir(app.outdir + '/_static/guide-assets')
+    if is_latest_release == True:
+        # Move the folder 'guide-assets' to the root folder defined as outdir
+        os.mkdir(app.outdir + '/guide-assets')
+        for file_name in file_names:
+            os.rename(app.outdir + '/_static/guide-assets/' + file_name, app.outdir + '/guide-assets/' + file_name,)
+    else:
+        # Remove the folder 'guide-assets'
+        for file_name in file_names:
+            os.remove(app.outdir + '/_static/guide-assets/' + file_name)
+        os.rmdir(app.outdir + '/_static/guide-assets')
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
@@ -536,6 +575,8 @@ exclude_patterns = [
     "js/style.js"
 ]
 
+exclude_patterns = exclude_patterns + extra_assets
+
 # -- Additional configuration ------------------------------------------------
 
 if (tags.has("production")):
@@ -550,6 +591,8 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version,
     "production": production,
-    "apiURL": apiURL
+    "apiURL": apiURL,
+    "compilation_ts": str(time.time()),
+    "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True
