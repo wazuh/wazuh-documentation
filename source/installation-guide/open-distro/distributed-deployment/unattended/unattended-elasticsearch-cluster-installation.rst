@@ -136,9 +136,7 @@ Download the script and the configuration file. After downloading them, configur
         clients:
           - name: admin
             dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-            admin: true
-          - name: kibana
-            dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
+            admin: true  
           - name: filebeat
             dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
 
