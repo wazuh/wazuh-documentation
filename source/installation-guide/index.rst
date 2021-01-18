@@ -14,7 +14,7 @@ This section aims to guide the user through the process of installing Wazuh and 
 Install Wazuh server
 --------------------
 
-There are two different alternatives to deploy a Wazuh installation. Here is a brief explanation about each deployment type:
+There are two different alternatives to deploy a Wazuh installation: 
 
 - :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
 
