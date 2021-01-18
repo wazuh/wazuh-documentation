@@ -40,8 +40,6 @@ Added
 - Added a new endpoint to check the status of a task.
 - Added new endpoints to run the ``logtest`` tool and delete a ``logtest`` session.
 - Added ``debug2`` mode for API log and improved debug mode.
-- Added missing secure headers for API responses.
-- Added a new configuration option to disable uploading configurations containing remote commands.
 
 **AWS module**
 
@@ -96,7 +94,7 @@ Fixed
 - Fixed a race condition in Remoted that might create agent-group files with wrong permissions.
 - Fixed a warning log in Wazuh DB when upgrading the global database.
 - Fixed a bug in FIM on Windows that caused false positives due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
-- Fixed the purge of the Redhat vulnerabilities database before updating it.
+
 
 **API**
 
@@ -105,7 +103,7 @@ Fixed
 **Framework**
 
 - Fixed a ``cluster_control`` bug that caused an error message when running ``wazuh-clusterd`` in foreground.
-- Fixed a bug with ``add_manual``(agents) function when ``authd`` is disabled.
+
 
 Wazuh Kibana plugin
 -------------------
