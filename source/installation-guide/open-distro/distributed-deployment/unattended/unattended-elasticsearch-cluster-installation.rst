@@ -112,7 +112,7 @@ Download the script and the configuration file. After downloading them, configur
     - Configure the installation:
 
       .. code-block:: yaml
-        :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 31, 34
+        :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 29, 32
 
         ## Multi-node configuration
 
