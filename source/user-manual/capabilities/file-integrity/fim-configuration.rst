@@ -41,30 +41,6 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
     <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
   </syscheck>
 
-.. versionadded:: 4.0
-
-Environment variables can be used to configure syscheck in Linux and Windows.
-
-.. code-block:: xml
-
-  <syscheck>
-    <directories check_all="yes">$DIRECTORY</directories>
-  </syscheck>
-
-On UNIX based systems, the variable must be owned by the root user. Use the ``wazuh-control`` binary to restart Wazuh instead of systemd.
-You can specify multiple paths in a variable by separating them using ``:``.
-
-.. code-block:: xml
-
-  <syscheck>
-    <directories check_all="yes">%CommonProgramFiles%</directories>
-  </syscheck>
-
-On Windows, only system environment variables can be used. You can add multiple directories to the same variable by separating them using ``;``
-
-.. note::
-  Wazuh runs as a 32 bit application, so the previous environment variable will be replaced by ``C:\Program Files (x86)\Common Files``. In order to specifically monitor ``C:\Program Files\Common Files``, the associate environment variable is: ``%CommonProgramW6432%``.
-
 Configuring scheduled scans
 ---------------------------
 
