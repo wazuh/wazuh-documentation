@@ -12,6 +12,8 @@ The wazuh-control script is used to start, stop, configure, check on the status 
 .. note::
     We recommend to use the ``systemctl`` or ``service`` commands (depending on your OS) to **start**, **stop** or **restart** the Wazuh service. This will avoid inconsistencies between the *service* status and the *processes* status.
 
+The ``-j`` option is used for enabling JSON output format, but only in Wazuh server installations.
+
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **start**   | Start the Wazuh processes.                                                                              |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -26,6 +28,10 @@ The wazuh-control script is used to start, stop, configure, check on the status 
 |             | This option is not available on a local Wazuh installation.                                             |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **status**  | Determine which Wazuh processes are running.                                                            |
++-------------+---------------------------------------------------------------------------------------------------------+
+| **info**    | Prints the installation type, beside the Wazuh Version and Revision, in NAME="value" pairs              |
++-------------+-----------------+---------------+-----------------------------------------------------------------------+
+| **info**    |    [-v -r -t]   | Only one option at the time, prints only the value of: Version, Revision or Type      |
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+
 | **enable**  |  debug          | Run all Wazuh daemons in debug mode.                                                  |
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+
