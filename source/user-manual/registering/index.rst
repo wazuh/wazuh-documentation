@@ -149,7 +149,7 @@ There are also other easy registration methods. The choice depends on the partic
 
 To learn more about the Wazuh agent registration process, please read the :ref:`registering Wazuh agents - additional information <registering_agent_theory>`.
 
-In case of problems during registration, visit the :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>` page to find out a solutions.
+In case of problems during registration, visit the :ref:`registering Wazuh agents - troubleshooting <registering-agents-troubleshooting>` page to find a solution.
 
 .. toctree::
     :maxdepth: 2
