@@ -101,7 +101,7 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 Components compatibility
 ------------------------
 
-When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent`` and ``wazuh-app``), there are different compatibility requirements in order to make everything work properly.
+When using the full stack of Wazuh software (that means, ``wazuh-manager``, ``wazuh-agent`` and ``wazuh-WUI``), there are different compatibility requirements in order to make everything work properly.
 
 Manager and agents
 ^^^^^^^^^^^^^^^^^^
