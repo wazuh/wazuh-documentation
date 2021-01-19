@@ -113,6 +113,31 @@ Fixed
 Wazuh Kibana plugin
 -------------------
 
+Added
+^^^^^
+- Label to indicate that the wui_ rules only apply to the wazuh-wui API user. 
+- Modified agent registration adding groups and architecture. 
+
+
+Changed
+^^^^^^^
+- Support new fields of Windows Registry at FIM inventory panel.
+
+Fixed
+^^^^^
+- Wazuh menu and agent menu for Solaris agents.
+- Wrong shards and replicas for statistics indices and also fixed wrong prefix for monitoring indices.
+- Top bar overlayed over expanded visualizations. 
+- Empty inventory data in Solaris agents.
+- Wrong parameters in the dev-tools autocomplete section.
+- Wrong permissions on edit CDB list.
+- Add the metafields when refreshing the index pattern.
+- Error toast is showing about Elasticsearch users for environments without security.
+- Error about Handler.error in Role Mapping.
+- Fixed message in reserved users actions.
+- Error 500 on Export formatted CDB list.
+- Double tooltip for the wui rules label.  
+
 Wazuh ruleset
 -------------
 
