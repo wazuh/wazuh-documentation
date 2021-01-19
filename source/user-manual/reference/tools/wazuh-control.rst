@@ -29,9 +29,9 @@ The ``-j`` option is used for enabling JSON output format, but only in Wazuh ser
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **status**  | Determine which Wazuh processes are running.                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| **info**    | Prints Wazuh installation type, version, and revision in environment variables format.                  |
+| **info**    | Prints the Wazuh installation type, version, and revision in environment variables format.              |
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+
-| **info**    |    [-v -r -t]   | Only one option at the time, prints only the value of: version, revision or type.     |
+| **info**    |    [-v -r -t]   | Only one option at the time, prints the value of: version, revision or type.          |
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+
 | **enable**  |  debug          | Run all Wazuh daemons in debug mode.                                                  |
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+
