@@ -141,7 +141,7 @@ Filebeat is a data shipping tool that is installed on the Wazuh server to secure
 Uninstall
 ~~~~~~~~~
 
-To uninstall Wazuh manager, set the right installation path for ``WAZUH_HOME``:
+To uninstall Wazuh manager, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -159,7 +159,7 @@ Stop the daemon:
 
     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-Remove installation folder:
+Remove the installation folder and all its content:
 
   .. code-block:: console
 

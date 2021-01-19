@@ -86,7 +86,7 @@ Installing Wazuh agent from sources
 
        <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set the right installation path for ``WAZUH_HOME``:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -104,7 +104,7 @@ Installing Wazuh agent from sources
 
      # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove installation folder:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
@@ -264,7 +264,7 @@ Installing Wazuh agent from sources
 
         <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set the right installation path for ``WAZUH_HOME``:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -282,7 +282,7 @@ Installing Wazuh agent from sources
 
      # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove installation folder:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
@@ -382,7 +382,7 @@ Installing Wazuh agent from sources
 
         <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set the right installation path for ``WAZUH_HOME``:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -400,7 +400,7 @@ Installing Wazuh agent from sources
 
      # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove installation folder:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
@@ -503,7 +503,7 @@ Installing Wazuh agent from sources
 
        <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent, set the right installation path for ``WAZUH_HOME``:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
@@ -521,7 +521,7 @@ Installing Wazuh agent from sources
 
      # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove installation folder:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
@@ -620,7 +620,7 @@ Installing Wazuh agent from sources
 
            <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set the right installation path for ``WAZUH_HOME``:
+        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
         .. code-block:: console
 
@@ -638,7 +638,7 @@ Installing Wazuh agent from sources
 
          # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-        Remove installation folder:
+        Remove the installation folder and all its content:
 
         .. code-block:: console
 
@@ -755,7 +755,7 @@ Installing Wazuh agent from sources
 
            <h2>Uninstall</h2>
 
-        To uninstall Wazuh agent, set the right installation path for ``WAZUH_HOME``:
+        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
         .. code-block:: console
 
@@ -773,7 +773,7 @@ Installing Wazuh agent from sources
 
          # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-        Remove installation folder:
+        Remove the installation folder and all its content:
 
         .. code-block:: console
 
