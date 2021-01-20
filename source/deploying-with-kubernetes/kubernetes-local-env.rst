@@ -17,7 +17,7 @@ Pre-requisites
 Resource Requirements
 ---------------------
 
-To deploy the local-env variant the Kubernetes cluster should have at least the following resources available:
+To deploy the local-env variant the Kubernetes cluster should have at least the following resources **available**:
 
     - 2 CPU units
     - 3 Gi of memory
