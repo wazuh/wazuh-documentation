@@ -537,19 +537,18 @@ def finish_and_clean(app, exception):
             os.remove(app.srcdir + '/_static/' + mini_asset)
 
     # Manage the guide-assets
-    file_names = os.listdir(app.outdir + '/_static/guide-assets')
-    if is_latest_release == True:
-        # Move the folder 'guide-assets' to the root folder defined as outdir
-        os.mkdir(app.outdir + '/guide-assets')
-        for file_name in file_names:
-            os.rename(app.outdir + '/_static/guide-assets/' + file_name, app.outdir + '/guide-assets/' + file_name,)
-    else:
-        # Remove the folder 'guide-assets'
-        for file_name in file_names:
-            os.remove(app.outdir + '/_static/guide-assets/' + file_name)
-        os.rmdir(app.outdir + '/_static/guide-assets')
-
-
+    if os.path.isdir(app.outdir + '/_static/guide-assets'):
+        file_names = os.listdir(app.outdir + '/_static/guide-assets')
+        if is_latest_release == True:
+            # Move the folder 'guide-assets' to the root folder defined as outdir
+            os.mkdir(app.outdir + '/guide-assets')
+            for file_name in file_names:
+                os.rename(app.outdir + '/_static/guide-assets/' + file_name, app.outdir + '/guide-assets/' + file_name,)
+        else:
+            # Remove the folder 'guide-assets'
+            for file_name in file_names:
+                os.remove(app.outdir + '/_static/guide-assets/' + file_name)
+            os.rmdir(app.outdir + '/_static/guide-assets')
 
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
