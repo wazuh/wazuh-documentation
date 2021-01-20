@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Program to install Wazuh manager along Open Distro for Elasticsearch
-# Copyright (C) 2015-2020, Wazuh Inc.
+# Copyright (C) 2015-2021, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
