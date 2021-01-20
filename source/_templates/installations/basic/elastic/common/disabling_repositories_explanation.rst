@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 
 This installation guide describes how to install and configure Wazuh and Elastic Stack by first configuring their repositories.
