@@ -232,19 +232,6 @@ We can check the status of our new services in our Wazuh server.
 	   Loaded: loaded (/etc/systemd/system/wazuh-manager.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:52 CEST; 35min ago
 
-- Wazuh API.
-
-.. code-block:: console
-
-	[root@localhost centos]# systemctl status wazuh-api
-
-.. code-block:: none
-	:class: output
-
-	● wazuh-api.service - Wazuh API daemon
-	   Loaded: loaded (/etc/systemd/system/wazuh-api.service; enabled; vendor preset: disabled)
-	   Active: active (running) since jue 2018-09-13 12:36:54 CEST; 36min ago
-
 - Filebeat.
 
 .. code-block:: none
