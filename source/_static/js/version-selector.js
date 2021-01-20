@@ -82,10 +82,24 @@ jQuery(function($) {
   checkLatestDocs();
 
   /* Creates the correct links to all the releases */
-  addVersions();
+  const documentHistory = addVersions();
   $(window).on('hashchange', function() {
     addVersions();
   });
+
+  /* Get proper path for the canonical */
+  const documentInReleases = Object.keys(documentHistory);
+  let canonicalRelease = documentInReleases[documentInReleases.length-1];
+  const canonicalPath = documentHistory[canonicalRelease];
+  if ( canonicalRelease == currentVersion ) {
+    canonicalRelease = 'current';
+  }
+
+  /* Link rel=canonical tag based on the selector */
+  const canonicalTag = !!document.querySelector('link[rel=\'canonical\']') ? document.querySelector('link[rel=\'canonical\']') : document.createElement('link');
+  canonicalTag.setAttribute('rel', 'canonical');
+  canonicalTag.setAttribute('href', document.location.protocol + '//' + document.location.host + '/' + canonicalRelease + canonicalPath);
+  document.head.appendChild(canonicalTag);
 
   /* Initialize the tooltip of bootstrap */
   $('#select-version [data-toggle="tooltip"]').tooltip();
@@ -95,7 +109,11 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     let selected = -1;
-    let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
+    let path = document.location.pathname;
+    if ( path == '/') {
+      path = '/index.html';
+    }
+    path = path.replace(/\/{2,}/, '/').split('/')[1];
     const selectVersionCurrent = $('#select-version .current');
     if (path == 'current' || path == '4.0' ) {
       path = currentVersion;
@@ -105,7 +123,11 @@ jQuery(function($) {
         selected = i;
       }
     }
-    selectVersionCurrent.html(versions[selected].name);
+    if ( versions[selected] ) {
+      selectVersionCurrent.html(versions[selected].name);
+    } else {
+      selectVersionCurrent.html(DOCUMENTATION_OPTIONS.VERSION);
+    }
   }
 
   /**
@@ -123,13 +145,19 @@ jQuery(function($) {
     }
 
     /* Updates link to the latest version with the correct path (documentation's home) */
-    page = document.location.pathname.split('/'+thisVersion)[1];
+    page = document.location.pathname;
+    if ( page == '/') {
+      page = '/index.html';
+    } else {
+      page = document.location.pathname.split('/'+thisVersion)[1];
+    }
     const link = document.querySelector('.link-latest');
     link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
   }
 
   /**
    * Adds the available versions to the version selector.
+   * @return {Object} Object with the URL history for the current path
    */
   function addVersions() {
     let ele = '';
@@ -147,10 +175,6 @@ jQuery(function($) {
     page = normalizeUrl(paramDivision[0]);
     param = paramDivision.length == 2 ? ('?'+paramDivision[1]) : '';
 
-    if (path == 'current' || path == '4.0' ) {
-      path = currentVersion;
-    }
-
     /* Creates the links to others versions */
     let href;
     let tooltip;
@@ -158,6 +182,19 @@ jQuery(function($) {
     let versionsClean = versions.map(function(i) {
       return (i.name).split(' (current)')[0];
     });
+
+    /* Fix for local */
+    if ( versionsClean.indexOf(path) == -1 && (path.length > 5 || path.length == 0) ) {
+      page = '/' + path + page;
+      path = DOCUMENTATION_OPTIONS.VERSION;
+    }
+    if ( page == '/' ) {
+      page = '/index.html';
+    }
+
+    if (path == 'current' || path == '4.0' ) {
+      path = currentVersion;
+    }
 
     /* Normalize URLs in arrays */
     for (let i = 0; i < versionsClean.length; i++) {
@@ -201,6 +238,7 @@ jQuery(function($) {
       }
     }
     selectVersionUl.html(ele);
+    return redirHistory;
   }
 
   /**
