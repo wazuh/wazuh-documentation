@@ -186,7 +186,8 @@ if version >= '4.0':
     }
     
 if is_latest_release == True:
-        html_additional_pages['guide'] = 'guide.html'
+    html_additional_pages['guide'] = 'guide.html'
+    html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -361,7 +362,9 @@ todo_include_todos = False
 
 extra_assets = [
     'guide-assets/guide.css',
-    'guide-assets/guide.js'
+    'guide-assets/guide.js',
+    'css/style-redirect.css',
+    'js/moved-content.js'
 ]
 
 def minification(actual_path):
@@ -554,22 +557,33 @@ def collect_compiled_pagename(app, pagename, templatename, context, doctree):
         list_compiled_html.append(context['pagename']+'.html')
     else:
         pass
-
+        
 def creating_file_list(app, exception):
-	''' Creates a files containing the path to every html file that was compiled. This files are `.doclist` and the sitemap. '''
-	if app.builder.name == 'html':
-		build_path = app.outdir
-		separator = '\n'
-		with open(build_path+'/.doclist', 'w') as doclist_file:
-			list_text = separator.join(list_compiled_html)
-			doclist_file.write(list_text)
-		sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
-		sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
-		for compiled_html in list_compiled_html:
-			sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + version + '/' + compiled_html) + '</loc></url>' + separator
-		sitemap += '</urlset>'
-		with open(build_path+'/'+version+'-sitemap.xml', 'w') as sitemap_file:
-			sitemap_file.write(sitemap)
+    ''' Creates the files containing the path to every html file that was compiled. These files are the `.doclist` and the release sitemap. '''
+    if app.builder.name == 'html':
+        build_path = app.outdir
+        separator = '\n'
+        sitemap_version = version
+        if is_latest_release == True:
+            sitemap_version = 'current'
+            
+        # Create the release sitemap content
+        sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
+        sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
+        
+        for compiled_html in list_compiled_html:
+            sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + compiled_html) + '</loc></url>' + separator
+        # Close sitemap content    
+        sitemap += '</urlset>'
+        
+        # Create .doclist file
+        with open(build_path+'/.doclist', 'w') as doclist_file:
+            list_text = separator.join(list_compiled_html)
+            doclist_file.write(list_text)
+
+        # Create release sitemap file
+        with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:
+            sitemap_file.write(sitemap)
 
 exclude_patterns = [
     "css/wazuh-icons.css",
