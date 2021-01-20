@@ -99,7 +99,7 @@ By using the kustomization file on the ``eks`` variant we can now deploy the who
 
 **Accessing Kibana**
 
-To access the Kibana interface within you locally deployed cluster you can use port-forward:
+To access the Kibana interface you can use port-forward:
 
 
     .. code-block:: console
