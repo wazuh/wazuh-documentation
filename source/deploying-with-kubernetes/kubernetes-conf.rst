@@ -136,7 +136,7 @@ Deploy
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
     3.1. Setup SSL certificates
