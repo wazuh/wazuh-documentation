@@ -55,9 +55,10 @@ jQuery(function($) {
   */
 
   /* Versions main constants */
-  const currentVersion = '4.0';
+  const currentVersion = '4.1';
   const versions = [
-    {name: '4.0 (current)', url: '/'+currentVersion},
+    {name: '4.1 (current)', url: '/current'},
+    {name: '4.0', url: '/4.0'},
     {name: '3.13', url: '/3.13'},
     {name: '3.12', url: '/3.12'},
     {name: '3.11', url: '/3.11'},
@@ -109,17 +110,13 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     let selected = -1;
-    let path = document.location.pathname;
-    if ( path == '/') {
-      path = '/index.html';
-    }
-    path = path.replace(/\/{2,}/, '/').split('/')[1];
+    let thisVersion = DOCUMENTATION_OPTIONS.VERSION;
     const selectVersionCurrent = $('#select-version .current');
-    if (path == 'current' || path == '4.0' ) {
-      path = currentVersion;
+    if ( thisVersion == currentVersion ) {
+      thisVersion = 'current';
     }
     for (let i = 0; i < versions.length; i++) {
-      if ( versions[i].url == '/' + path ) {
+      if ( versions[i].url.indexOf('/' + thisVersion) > -1 ) {
         selected = i;
       }
     }
@@ -136,21 +133,27 @@ jQuery(function($) {
     * and the array of versions (in this script) to be updated.
     */
   function checkLatestDocs() {
-    const thisVersion = document.querySelector('.no-latest-notice').getAttribute('data-version');
-    const latestVersion = versions[0].url.replace('/', '');
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
+    let latestVersion = currentVersion;
     let page = '';
     if ( thisVersion !== latestVersion ) {
       const pageID = document.querySelector('#page');
       pageID.classList.add('no-latest-docs');
+    } else {
+      latestVersion = 'current';
     }
 
-    /* Updates link to the latest version with the correct path (documentation's home) */
+    /* Updates link to the latest version with the correct path */
     page = document.location.pathname;
-    if ( page == '/') {
-      page = '/index.html';
-    } else {
-      page = document.location.pathname.split('/'+thisVersion)[1];
+    if ( page[page.length-1] == '/') {
+      page = page+'index.html';
     }
+    if ( page.indexOf(thisVersion) != -1 ) {
+      page = page.split('/'+thisVersion)[1];
+    } else if ( page.indexOf('current') != -1 ) {
+      page = page.split('/current')[1];
+    }
+
     const link = document.querySelector('.link-latest');
     link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
   }
@@ -162,7 +165,7 @@ jQuery(function($) {
   function addVersions() {
     let ele = '';
     const selectVersionUl = $('#select-version .dropdown-menu');
-    let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
     let fullUrl = window.location.href;
     let page = '';
     let paramDivision = [];
@@ -170,7 +173,16 @@ jQuery(function($) {
     if (fullUrl == null) {
       fullUrl = document.URL; /* Firefox fix */
     }
-    page = fullUrl.split('/'+path)[1];
+
+    page = fullUrl.split(document.location.host)[1];
+    if ( page[page.length-1] == '/' ) {
+      page = page+'index.html';
+    }
+    if ( page.indexOf(thisVersion) != -1 ) {
+      page = page.split('/'+thisVersion)[1];
+    } else if ( page.indexOf('current') != -1 ) {
+      page = page.split('/current')[1];
+    }
     paramDivision = page.split('?');
     page = normalizeUrl(paramDivision[0]);
     param = paramDivision.length == 2 ? ('?'+paramDivision[1]) : '';
@@ -182,19 +194,6 @@ jQuery(function($) {
     let versionsClean = versions.map(function(i) {
       return (i.name).split(' (current)')[0];
     });
-
-    /* Fix for local */
-    if ( versionsClean.indexOf(path) == -1 && (path.length > 5 || path.length == 0) ) {
-      page = '/' + path + page;
-      path = DOCUMENTATION_OPTIONS.VERSION;
-    }
-    if ( page == '/' ) {
-      page = '/index.html';
-    }
-
-    if (path == 'current' || path == '4.0' ) {
-      path = currentVersion;
-    }
 
     /* Normalize URLs in arrays */
     for (let i = 0; i < versionsClean.length; i++) {
@@ -219,7 +218,7 @@ jQuery(function($) {
     }
 
     /* Get the redirection history */
-    const redirHistory = getRedirectionHistory(versionsClean, path, page, newUrls, redirections, removedUrls);
+    const redirHistory = getRedirectionHistory(versionsClean, thisVersion, page, newUrls, redirections, removedUrls);
     versionsClean = versionsClean.reverse();
 
     /* Print the correct links in the selector */
@@ -228,7 +227,11 @@ jQuery(function($) {
       tooltip = '';
       ver = versionsClean[i];
       if ( redirHistory[ver] != null && redirHistory[ver].length ) {
-        href = '/'+ver+redirHistory[ver]+param;
+        if ( ver == currentVersion ) {
+          href = '/current'+redirHistory[ver]+param;
+        } else {
+          href = '/'+ver+redirHistory[ver]+param;
+        }
       } else {
         tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
       }
