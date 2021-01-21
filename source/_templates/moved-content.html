@@ -4,10 +4,11 @@
 <html lang="{{ language }}">
   <head>
     <title>{{ pagetitle + titlesuffix }}</title>
+    <meta name="robots" content="noindex">
     <link rel="stylesheet" id="google-fonts-css" href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400" type="text/css" media="all">
     <link rel="stylesheet" href="{{ pathto('_static/css/style-redirect.min.css?ver=' + compilation_ts, 1) }}" type="text/css" />
 
-    {# FAVICON  and canonical #}
+    {# FAVICON #}
     {%- if favicon %}
       <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
     {%- endif %}
