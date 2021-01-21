@@ -922,7 +922,7 @@ li.toctree-l5 > a {
 	border-top: 1px solid rgba(59, 59, 59, 0.08);
 }
 
-#globaltoc li:last-child {
+#globaltoc :not(#link-to-guide) li:last-child {
 	border-bottom: 1px solid rgba(59, 59, 59, 0.0);
 }
 
@@ -3195,7 +3195,7 @@ div.highlight pre {
         padding-right: 15px;
       }
 
-      #globaltoc > nav > ul {
+      #globaltoc > nav > ul:not(#link-to-guide) {
         border-bottom: 1px solid rgba(59, 59, 59, 0.08);
       }
 
@@ -3212,7 +3212,7 @@ div.highlight pre {
         padding-right: 0;
       }
 
-      .index #globaltoc > nav > ul {
+      .index #globaltoc > nav > ul:not(#link-to-guide) {
         border-bottom: 1px solid transparent;
       }
 
