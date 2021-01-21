@@ -30,11 +30,11 @@ Added
 
 **Core**
 
-- Allow negation of expressions in rules.
+- Negation logic for rules.
 - Support for ``PCRE2`` regular expressions in rules and decoders.
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
 - New **upgrade module** which offers simultaneous agent upgrades over single node or cluster architecture. WPK upgrade feature has been moved to this module. 
-- New **task module** that stores and manages all the upgrade tasks that are executed in the agents or managers. 
+- New **task module** that stores and manages all the upgrade tasks executed in the agents or managers. 
 - Let the time interval to detect that an agent got disconnected configurable. Deprecate parameter ``DISCON_TIME``.
 - Vulnerability Detector support for macOS. 
 - Capability to perform FIM on values in the Windows Registry.
@@ -42,7 +42,7 @@ Added
 **API**
 
 - New endpoints to query and manage ``rootcheck`` data.
-- New endpoint to check the status of tasks.
+- New endpoint to check task status. 
 - New endpoints to run the ``logtest`` tool and delete a ``logtest`` session.
 - ``debug2`` mode for API log and improved debug mode.
 
@@ -60,17 +60,19 @@ Changed
 
 **Core**
 
-- Removed the limit of agents that a manager can support.
+- Removed limit on the number of agents that a manager can support.
 - Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
 - New mechanism to close RIDS files when agents are disconnected.
 - Moved CA configuration section to verify WPK signatures from  the``active-response`` section to the ``agent-upgrade section``.
-- Error message to debug when multiple daemons attempt to remove an agent simultaneously
-- Error message to warn when the agent fails to reach a module.
+- The tool ossec-logtest is deprecated in favor of wazuh-logtest which uses a new testing service integrated in Analysisd.
+- Modified error message to debug when multiple daemons attempt to remove an agent simultaneously.
+- Replaced error message with a warning when the agent fails to reach a module. 
+
 
 **API**
 
 - The status parameter behavior in the ``DELETE /agents`` endpoint to enhance security.
-- Upgrade endpoints to accept a list of agents. 100 agents per request as maximum.
+- Upgraded endpoints to accept a list of agents, maximum 100 agents per request.
 - Improved input validation regexes for ``names`` and ``array_names``.
 
 **Framework**
@@ -78,8 +80,8 @@ Changed
 - Refactored framework to work with the new upgrade module.
 - Refactored agent upgrade CLI to work with the new upgrade module. It distributes petitions in a clustered environment.
 - Rule and decoder details structure to support PCRE2.
-- Access to agent status.
-- Improved AWS Config integration to avoid performance issues by removing alert fields with variables such as Instance ID in its name.
+- Refactor framework to adapt agent status changes in wazuh.db. 
+- Improved performance of AWS Config integration by removing alert fields with variables such as Instance ID in its name.
 
 Fixed
 ^^^^^
@@ -87,7 +89,7 @@ Fixed
 **Core**
 
 - Error in ``analysisd`` when getting the ossec group ID.
-- Prevented FIM from reporting configuration error when setting patterns that match no files.
+- Prevented FIM from reporting configuration error when patterns in settings match no files.
 - The array parsing when building JSON alerts.
 - Added Firefox ESR to the CPE helper to distinguish it from Firefox when looking for vulnerabilities.
 - The evaluation of packages from external sources with the official vendor feeds in Vulnerability Detector.
@@ -98,7 +100,7 @@ Fixed
 - A zombie process leak in ``modulesd`` when using commands without a timeout.
 - A race condition in Remoted that might create agent-group files with wrong permissions.
 - A warning log in Wazuh DB when upgrading the global database.
-- A bug in FIM on Windows that caused false positives due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
+- Fixed a bug in FIM on Windows that caused false positive due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
 
 
 **API**
