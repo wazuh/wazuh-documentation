@@ -45,6 +45,7 @@ Recommended changes to securize Wazuh API
           # systemctl restart wazuh-manager
 
       * For SysV Init:
+
         .. code-block:: console
 
           # service wazuh-manager restart
