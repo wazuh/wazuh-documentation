@@ -126,6 +126,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
+    - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_read`_
     - `rootcheck_all`_
@@ -787,6 +788,18 @@ Resources
 Effect
     - allow
 
+logtest_all
+^^^^^^^^^^^^^^^
+Provide access to all logtest related functionalities.
+
+Actions
+    - `logtest:run`_
+
+Resources
+    - ``*:*:*``
+
+Effect
+    - allow
 
 mitre_read
 ^^^^^^^^^^^^^^^
@@ -971,8 +984,9 @@ Policies
     - `cluster_all`_
     - `decoders_read`_
     - `lists_read`_
-    - `rootcheck_all`_
+    - `logtest_all`_
     - `mitre_read`_
+    - `rootcheck_all`_
     - `rules_read`_
     - `sca_read`_
     - `security_all`_
@@ -1022,8 +1036,8 @@ Policies
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
-    - `rootcheck_read`_
     - `mitre_read`_
+    - `rootcheck_read`_
     - `rules_read`_
     - `sca_read`_
     - `syscheck_read`_
