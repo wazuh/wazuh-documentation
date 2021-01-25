@@ -84,16 +84,16 @@ Regarding the disk space requirements, the amount of data depends on the alerts 
 | Network devices                                 | 0.5 |    0.2                      |           7.4             |
 +-------------------------------------------------+-----+-----------------------------+---------------------------+
 
-For example for an environment with 80 workstations, 10 servers and 10 networks devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server and 6 GB on the Wazuh server. 
+For example, for an environment with 80 workstations, 10 servers and 10 network devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server and 6 GB on the Wazuh server. 
 
 Scaling 
 -------
 
-In order to determine if a Wazuh server requires more resources the following files may be monitored: ``/var/ossec/var/run/ossec-analysisd.state``  and  ``/var/ossec/var/run/ossec-remoted.state`` .
+In order to determine if a Wazuh server requires more resources, the following files may be monitored: ``/var/ossec/var/run/ossec-analysisd.state``  and  ``/var/ossec/var/run/ossec-remoted.state`` .
 
-In the ``analysid.state`` file the variable  ``events_dropped`` indicates whether events are being dropped due to lack of resources. Similarly ``ossec-remoted.state`` has the variable ``discarded_count``, that indicates if messages from the agents have been discarded.  These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 
+In the ``analysid.state`` file the variable  ``events_dropped`` indicates whether events are being dropped due to lack of resources. Similarly, ``ossec-remoted.state`` has the variable ``discarded_count``, that indicates if messages from the agents have been discarded.  These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 
 
-To monitor if the Elastic Stack environment is working properly, there are tools available like performance analyzer. 
+To monitor if the Elastic Stack environment is working properly, tools such as the performance analyzer are available.
 
 In case that scaling is needed, the following sections describe how to make a distributed deployment of :ref:`Wazuh with Elastic Stack <distributed_index>`.
 
