@@ -16,6 +16,7 @@ This section summarizes the most important features of each Wazuh release.
         :maxdepth: 2
         
         release_4_1_0
+        release_4_0_4
         release_4_0_3 
         release_4_0_2
         release_4_0_1

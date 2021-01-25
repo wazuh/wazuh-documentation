@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _unattended_distributed_elasticsearch:
 
@@ -112,7 +112,7 @@ Download the script and the configuration file. After downloading them, configur
     - Configure the installation:
 
       .. code-block:: yaml
-        :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 31, 34
+        :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 29, 32
 
         ## Multi-node configuration
 
@@ -136,9 +136,7 @@ Download the script and the configuration file. After downloading them, configur
         clients:
           - name: admin
             dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-            admin: true
-          - name: kibana
-            dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
+            admin: true  
           - name: filebeat
             dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
 

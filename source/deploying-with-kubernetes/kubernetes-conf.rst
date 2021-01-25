@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kubernetes_conf:
 
@@ -136,7 +136,7 @@ Deploy
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
     3.1. Setup SSL certificates

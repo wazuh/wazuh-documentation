@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_ossec_syscheck:
 
@@ -1289,8 +1289,8 @@ Example:
 
 .. _reference_ossec_syscheck_default_configuration:
 
-Defaut syscheck configuration:
-------------------------------
+Default syscheck configuration:
+-------------------------------
 
 
 
