@@ -92,6 +92,8 @@ This reference also contains a set of default roles and policies that can be imm
 
     - `Rules`_
         - `rules:read`_
+        - `rules:update`_
+        - `rules:delete`_
 
     - `SCA`_
         - `sca:read`_
@@ -200,38 +202,38 @@ node:id
 `file:path`
 ^^^^^^^^^^^^^
 
-+-----------------+----------------------------------+
-| **Description** | Reference file via its path      |
-+-----------------+----------------------------------+
-| **Example**     | file:path:etc/rules/new_rule.xml |
-+-----------------+----------------------------------+
++-----------------+-------------------------------------------+
+| **Description** | Reference file via its relative path      |
++-----------------+-------------------------------------------+
+| **Example**     | file:path:etc/rules/new_rule.xml          |
++-----------------+-------------------------------------------+
 
 decoder:file
 ^^^^^^^^^^^^
 
-+-----------------+--------------------------------------+
-| **Description** | Reference decoder file via its path  |
-+-----------------+--------------------------------------+
-| **Example**     | decoder:file:0005-wazuh_decoders.xml |
-+-----------------+--------------------------------------+
++-----------------+-----------------------------------------+
+| **Description** | Reference decoder file via its filename |
++-----------------+-----------------------------------------+
+| **Example**     | decoder:file:0005-wazuh_decoders.xml    |
++-----------------+-----------------------------------------+
 
 list:path
 ^^^^^^^^^^
 
-+-----------------+----------------------------------+
-| **Description** | Reference list file via its path |
-+-----------------+----------------------------------+
-| **Example**     | list:path:etc/lists/audit-keys   |
-+-----------------+----------------------------------+
++-----------------+-------------------------------------------+
+| **Description** | Reference list file via its relative path |
++-----------------+-------------------------------------------+
+| **Example**     | list:path:etc/lists/audit-keys            |
++-----------------+-------------------------------------------+
 
 rule:file
 ^^^^^^^^^^
 
-+-----------------+---------------------------------------+
-| **Description** | Reference rule file via its path      |
-+-----------------+---------------------------------------+
-| **Example**     | rule:file:0610-win-ms_logs_rules.xml  |
-+-----------------+---------------------------------------+
++-----------------+-------------------------------------------+
+| **Description** | Reference rule file via its filename      |
++-----------------+-------------------------------------------+
+| **Example**     | rule:file:0610-win-ms_logs_rules.xml      |
++-----------------+-------------------------------------------+
 
 policy:id
 ^^^^^^^^^
@@ -528,9 +530,17 @@ rules:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /rules <operation/api.controllers.rule_controller.get_rules>` (`rule:file`_)
 - :api-ref:`GET /rules/files <operation/api.controllers.rule_controller.get_rules_files>` (`rule:file`_)
-- :api-ref:`GET /rules/files/{filename}/download <operation/api.controllers.rule_controller.get_download_file>` (`rule:file`_)
+- :api-ref:`GET /rules/files/{filename} <operation/api.controllers.rule_controller.get_rule_file>` (`rule:file`_)
 - :api-ref:`GET /rules/groups <operation/api.controllers.rule_controller.get_rules_groups>` (`rule:file`_)
 - :api-ref:`GET /rules/requirement/{requirement} <operation/api.controllers.rule_controller.get_rules_requirement>` (`rule:file`_)
+
+rules:update
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.upload_rule_file>` (`rule:file`_)
+
+rules:delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_rule_file>` (`rule:file`_)
 
 
 SCA
