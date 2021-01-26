@@ -24,7 +24,7 @@ Configuration options for file integrity monitoring:
 - `frequency`_
 - `ignore`_
 - `max_eps`_
-- `max_fps`_
+- `max_files_per_second`_
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
@@ -443,14 +443,14 @@ Example:
  <max_eps>100</max_eps>
 
 
-.. _reference_ossec_syscheck_max_fps:
+.. _reference_ossec_syscheck_max_files_per_second:
 
-max_fps
--------
+max_files_per_second
+--------------------
 
-.. versionadded:: 4.1.1
+.. versionadded:: 4.2.0
 
-Sets the maximum number of files scanned per second. It only applies to the scheduled scan. If this option is set to 0, there will be no limit on the number of files scanned per second.
+Sets the maximum number of files scanned per second. If this option is set to 0, there will be no limit on the number of files scanned per second.
 
 +--------------------+---------------------------------------------------------+
 | **Default value**  | 0                                                       |
@@ -462,7 +462,7 @@ Example:
 
 .. code-block:: xml
 
- <max_fps>100</max_fps>
+ <max_files_per_second>100</max_files_per_second>
 
 
 .. _reference_ossec_syscheck_prefilter_cmd:
