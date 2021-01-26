@@ -132,7 +132,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `mitre_read`_
     - `rootcheck_read`_
     - `rootcheck_all`_
-    - `rules_read`_
+    - `rules_all`_
     - `sca_read`_
     - `security_all`_
     - `users_all`_
@@ -774,7 +774,7 @@ Effect
 
 decoders_read
 ^^^^^^^^^^^^^^^
-Allow read all decoder files in the system.
+Allow reading all decoder files in the system.
 
 Actions
     - `decoders:read`_
@@ -787,7 +787,7 @@ Effect
 
 lists_read
 ^^^^^^^^^^^^^^^
-Allow read all lists paths in the system.
+Allow reading all list paths in the system.
 
 Actions
     - `lists:read`_
@@ -813,7 +813,7 @@ Effect
 
 mitre_read
 ^^^^^^^^^^^^^^^
-Allow read MITRE database information.
+Allow reading MITRE database information.
 
 Actions
     - `mitre:read`_
@@ -826,7 +826,7 @@ Effect
 
 rootcheck_read
 ^^^^^^^^^^^^^^^
-Allow read all rootcheck information.
+Allow reading all rootcheck information.
 
 Actions
     - `rootcheck:read`_
@@ -840,7 +840,7 @@ Effect
 
 rootcheck_all
 ^^^^^^^^^^^^^^^
-Allow read, run and clear rootcheck information.
+Allow reading, running and clearing rootcheck information.
 
 Actions
     - `rootcheck:read`_
@@ -856,7 +856,22 @@ Effect
 
 rules_read
 ^^^^^^^^^^^^^^^
-Allow read all rule files in the system.
+Allow reading all rule files in the system.
+
+Actions
+    - `rules:read`_
+    - `rules:update`_
+    - `rules:delete`_
+
+Resources
+    - ``rules:file:*``
+
+Effect
+    - allow
+
+rules_all
+^^^^^^^^^^^^^^^
+Allow managing all rule files in the system.
 
 Actions
     - `rules:read`_
@@ -869,7 +884,7 @@ Effect
 
 sca_read
 ^^^^^^^^^^^^^^^
-Allow read agent’s sca information.
+Allow reading agent’s sca information.
 
 Actions
     - `sca:read`_
@@ -925,7 +940,7 @@ Effect
 
 syscheck_read
 ^^^^^^^^^^^^^^^
-Allow read syscheck information.
+Allow reading syscheck information.
 
 Actions
     - `syscheck:read`_
@@ -939,7 +954,7 @@ Effect
 
 syscheck_all
 ^^^^^^^^^^^^^^^
-Allow read, run and clear syscheck information.
+Allow reading, running and clearing syscheck information.
 
 Actions
     - `syscheck:clear`_
@@ -955,7 +970,7 @@ Effect
 
 syscollector_read
 ^^^^^^^^^^^^^^^^^^
-Allow read agents information.
+Allow reading agents information.
 
 Actions
     - `syscollector:read`_
@@ -969,7 +984,7 @@ Effect
 
 task_status
 ^^^^^^^^^^^^^^^^^^
-Allow read tasks information.
+Allow reading tasks information.
 
 Actions
     - `task:status`_
@@ -997,7 +1012,7 @@ Policies
     - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_all`_
-    - `rules_read`_
+    - `rules_all`_
     - `sca_read`_
     - `security_all`_
     - `syscheck_all`_
