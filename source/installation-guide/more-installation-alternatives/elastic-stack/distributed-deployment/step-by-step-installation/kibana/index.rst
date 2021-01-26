@@ -133,6 +133,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        port: 55000
        username: wazuh
        password: wazuh
+       run_as: false
 
 
 Disabling repositories

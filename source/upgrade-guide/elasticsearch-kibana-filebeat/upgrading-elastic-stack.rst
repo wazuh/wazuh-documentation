@@ -283,6 +283,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
             port: 55000
             username: wazuh
             password: wazuh
+            run_as: false
 
 #. Remove the Wazuh Kibana plugin:
 
