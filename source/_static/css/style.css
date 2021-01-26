@@ -556,36 +556,33 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .right .screenshots .carousel-control-prev {
   position: absolute !important;
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.15)),to(rgba(0,0,0,0.0001)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.15) 0),color-stop(rgba(0,0,0,0.0001) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.0001) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.0001) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
 }
 
 #capabilities .right .screenshots .carousel-control-prev:hover {
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.2)),to(rgba(0,0,0,0.0001)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.2) 0),color-stop(rgba(0,0,0,0.0001) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.0001) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.0001) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
 }
 
 #capabilities .right .screenshots .carousel-control-next {
   position: absolute !important;
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.0001)),to(rgba(0,0,0,0.15)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.0001) 0),color-stop(rgba(0,0,0,0.15) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.15) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.15) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
 }
 
 #capabilities .right .screenshots .carousel-control-next:hover {
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.0001)),to(rgba(0,0,0,0.2)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.0001) 0),color-stop(rgba(0,0,0,0.2) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.2) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.2) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
+}
+
+#capabilities .carousel-control-prev .fas, 
+#capabilities .carousel-control-next .fas {
+  color: rgba(59, 59, 59, 0.4);
+  font-size: 2rem;
+}
+
+#capabilities .carousel-control-prev:hover .fas, 
+#capabilities .carousel-control-prev:focus .fas, 
+#capabilities .carousel-control-next:hover .fas,
+#capabilities .carousel-control-next:focus .fas {
+  color: rgba(59, 59, 59, 0.8);
 }
 
 .deployment-types {
