@@ -568,23 +568,30 @@ header .menuweb-bar .menu-item a {
   background-image: none;
 }
 
-#capabilities .right .screenshots .carousel-control-next:hover {
-  background-image: none;
-}
-
 #capabilities .carousel-control-prev .fas, 
 #capabilities .carousel-control-next .fas {
-  color: rgba(59, 59, 59, 0.4);
+  color: #333;
   font-size: 2rem;
 }
 
-#capabilities .carousel-control-prev:hover .fas, 
-#capabilities .carousel-control-prev:focus-visible .fas, 
-#capabilities .carousel-control-prev:-moz-focusring .fas, 
-#capabilities .carousel-control-next:hover .fas,
-#capabilities .carousel-control-next:focus-visible .fas,
-#capabilities .carousel-control-next:-moz-focusring .fas {
-  color: rgba(59, 59, 59, 0.8);
+#capabilities .carousel-control-next,
+#capabilities .carousel-control-prev {
+	opacity: 0.1;
+}
+
+#capabilities .screenshots .carousel-control-next:focus, 
+#capabilities .screenshots .carousel-control-next:hover, 
+#capabilities .screenshots .carousel-control-prev:focus, 
+#capabilities .screenshots .carousel-control-prev:hover {
+  background-image: none;
+  opacity: 1;
+}
+
+#capabilities .screenshots #slider:hover .carousel-control-prev, 
+#capabilities .screenshots #slider:focus .carousel-control-prev,
+#capabilities .screenshots #slider:hover .carousel-control-next, 
+#capabilities .screenshots #slider:focus .carousel-control-next {
+  opacity: 0.4;
 }
 
 .deployment-types {
