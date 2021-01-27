@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. Section marks used on this document:
 .. h0 ======================================
@@ -15,7 +15,7 @@ RBAC Reference
 
 RBAC policies are made up of three elements: **actions**, **resources** and **effect**. Each API endpoint involves one or more actions and can be performed on specific resources.
 
-For example, the :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` endpoint is used to obtain the information of one or all agents. This endpoint applies the action ``agent:read`` on the resource ``agent:id`` or ``agent:group``. For example, ``agent:id:001`` (agent 001) or ``agent:id:*`` (all agents). All the existing resources, available actions and the endpoints affected by each one can be found in this reference page.
+For example, the :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` endpoint is used to obtain the information of one or all agents. This endpoint applies the action ``agent:read`` on the resource ``agent:id`` or ``agent:group``. For example, ``agent:id:001`` (agent 001) or ``agent:id:*`` (all agents). All the existing resources, available actions and the endpoints affected by each one can be found in this reference page.
 
 This reference also contains a set of default roles and policies that can be immediately used instead of having to create new ones.
 
@@ -56,7 +56,6 @@ This reference also contains a set of default roles and policies that can be imm
         - `cluster:read_file`_
         - `cluster:restart`_
         - `cluster:status`_
-        - `cluster:update_api_config`_
         - `cluster:upload_file`_
 
     - `Decoders`_
@@ -81,7 +80,6 @@ This reference also contains a set of default roles and policies that can be imm
         - `manager:read`_
         - `manager:read_file`_
         - `manager:restart`_
-        - `manager:update_api_config`_
         - `manager:upload_file`_
 
     - `Mitre`_
@@ -116,6 +114,9 @@ This reference also contains a set of default roles and policies that can be imm
     - `Syscollector`_
         - `syscollector:read`_
 
+    - `Task`_
+        - `task:status`_
+
 `Default policies`_
     - `agents_all`_
     - `agents_commands`_
@@ -125,6 +126,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
+    - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_read`_
     - `rootcheck_all`_
@@ -135,6 +137,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `syscheck_read`_
     - `syscheck_all`_
     - `syscollector_read`_
+    - `task_status`_
 
 `Default roles`_
     - `administrator`_
@@ -283,49 +286,49 @@ Agent
 ^^^^^^^^^^^^^^^
 agent:create
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`POST /agents <operation/api.controllers.agent_controller.add_agent>` (`*:*`_)
-- :api-ref:`POST /agents/insert <operation/api.controllers.agent_controller.insert_agent>` (`*:*`_)
-- :api-ref:`POST /agents/insert/quick <operation/api.controllers.agent_controller.post_new_agent>` (`*:*`_)
+- :api-ref:`POST /agents <operation/api.controllers.agents_controller.add_agent>` (`*:*`_)
+- :api-ref:`POST /agents/insert <operation/api.controllers.agents_controller.insert_agent>` (`*:*`_)
+- :api-ref:`POST /agents/insert/quick <operation/api.controllers.agents_controller.post_new_agent>` (`*:*`_)
 
 agent:delete
 ~~~~~~~~~~~~
-- :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /agents <operation/api.controllers.agents_controller.delete_agents>` (`agent:id`_, `agent:group`_)
 
 agent:modify_group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /agents/group <operation/api.controllers.agent_controller.delete_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agent_controller.delete_single_agent_multiple_groups>` (`agent:id`_, `agent:group`_)
-- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.delete_single_agent_single_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`agent:id`_, `agent:group`_)
 
 agent:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/no_group <operation/api.controllers.agent_controller.get_agent_no_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/stats/distinct <operation/api.controllers.agent_controller.get_agent_fields>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/summary/os <operation/api.controllers.agent_controller.get_agent_summary_os>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/summary/status <operation/api.controllers.agent_controller.get_agent_summary_status>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agent_controller.get_agent_config>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents <operation/api.controllers.agents_controller.get_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/no_group <operation/api.controllers.agents_controller.get_agent_no_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/outdated <operation/api.controllers.agents_controller.get_agent_outdated>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/stats/distinct <operation/api.controllers.agents_controller.get_agent_fields>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/summary/os <operation/api.controllers.agents_controller.get_agent_summary_os>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/summary/status <operation/api.controllers.agents_controller.get_agent_summary_status>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agents_controller.get_agent_config>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agents_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agents_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_, `agent:group`_)
 
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_node>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/restart <operation/api.controllers.agent_controller.restart_agents>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agent_controller.restart_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/group/{group_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/restart <operation/api.controllers.agents_controller.restart_agents>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/restart <operation/api.controllers.agents_controller.restart_agent>` (`agent:id`_, `agent:group`_)
 
 agent:upgrade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agent_controller.put_upgrade_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/upgrade_result <operation/api.controllers.agents_controller.get_agent_upgrade>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade <operation/api.controllers.agents_controller.put_upgrade_agent>` (`agent:id`_, `agent:group`_)
+- :api-ref:`PUT /agents/{agent_id}/upgrade_custom <operation/api.controllers.agents_controller.put_upgrade_custom_agent>` (`agent:id`_, `agent:group`_)
 
 
 Ciscat
@@ -367,7 +370,7 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/stats/remoted <operation/api.controllers.cluster_controller.get_stats_remoted_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/stats/weekly <operation/api.controllers.cluster_controller.get_stats_weekly_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>` (`node:id`_)
-- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_node>` (`node:id`_)
+- :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agents_controller.restart_agents_by_node>` (`node:id`_)
 - :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
 - :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
 
@@ -385,8 +388,7 @@ cluster:status
 
 cluster:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config` (`node:id`_)
-- :api-ref:`DELETE /cluster/api/config <operation/api.controllers.cluster_controller.delete_api_config>` (`node:id`_)
+- .. deprecated:: 4.0.4
 
 cluster:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -397,51 +399,51 @@ Decoders
 ^^^^^^^^^^^^^^^
 decoders:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /decoders <operation/api.controllers.decoder_controller.get_decoders>` (`decoder:file`_)
-- :api-ref:`GET /decoders/files <operation/api.controllers.decoder_controller.get_decoders_files>` (`decoder:file`_)
-- :api-ref:`GET /decoders/files/{filename}/download <operation/api.controllers.decoder_controller.get_download_file>` (`decoder:file`_)
-- :api-ref:`GET /decoders/parents <operation/api.controllers.decoder_controller.get_decoders_parents>` (`decoder:file`_)
+- :api-ref:`GET /decoders <operation/api.controllers.decoders_controller.get_decoders>` (`decoder:file`_)
+- :api-ref:`GET /decoders/files <operation/api.controllers.decoders_controller.get_decoders_files>` (`decoder:file`_)
+- :api-ref:`GET /decoders/files/{filename}/download <operation/api.controllers.decoders_controller.get_download_file>` (`decoder:file`_)
+- :api-ref:`GET /decoders/parents <operation/api.controllers.decoders_controller.get_decoders_parents>` (`decoder:file`_)
 
 Group
 ^^^^^^^^^^^^^^^
 group:create
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`POST /groups <operation/api.controllers.agent_controller.post_group>` (`*:*`_)
+- :api-ref:`POST /groups <operation/api.controllers.agents_controller.post_group>` (`*:*`_)
 
 group:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`group:id`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`group:id`_)
 
 group:modify_assignments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /agents/group <operation/api.controllers.agent_controller.delete_multiple_agent_single_group>` (`group:id`_)
-- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agent_controller.delete_single_agent_multiple_groups>` (`group:id`_)
-- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.delete_single_agent_single_group>` (`group:id`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`group:id`_)
-- :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>` (`group:id`_)
-- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>` (`group:id`_)
+- :api-ref:`DELETE /agents/group <operation/api.controllers.agents_controller.delete_multiple_agent_single_group>` (`group:id`_)
+- :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agents_controller.delete_single_agent_multiple_groups>` (`group:id`_)
+- :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.delete_single_agent_single_group>` (`group:id`_)
+- :api-ref:`DELETE /groups <operation/api.controllers.agents_controller.delete_groups>` (`group:id`_)
+- :api-ref:`PUT /agents/group <operation/api.controllers.agents_controller.put_multiple_agent_single_group>` (`group:id`_)
+- :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agents_controller.put_agent_single_group>` (`group:id`_)
 
 group:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /groups <operation/api.controllers.agent_controller.get_list_group>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/configuration <operation/api.controllers.agent_controller.get_group_config>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files <operation/api.controllers.agent_controller.get_group_files>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files/{file_name}/json <operation/api.controllers.agent_controller.get_group_file_json>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files/{file_name}/xml <operation/api.controllers.agent_controller.get_group_file_xml>` (`group:id`_)
+- :api-ref:`GET /groups <operation/api.controllers.agents_controller.get_list_group>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agents_controller.get_agents_in_group>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/configuration <operation/api.controllers.agents_controller.get_group_config>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files <operation/api.controllers.agents_controller.get_group_files>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files/{file_name}/json <operation/api.controllers.agents_controller.get_group_file_json>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files/{file_name}/xml <operation/api.controllers.agents_controller.get_group_file_xml>` (`group:id`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`group:id`_)
 
 group:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /groups/{group_id}/configuration <operation/api.controllers.agent_controller.put_group_config>` (`group:id`_)
+- :api-ref:`PUT /groups/{group_id}/configuration <operation/api.controllers.agents_controller.put_group_config>` (`group:id`_)
 
 
 Lists
 ^^^^^^^^^^^^^^^
 lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:path`_)
-- :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:path`_)
+- :api-ref:`GET /lists <operation/api.controllers.cdb_lists_controller.get_lists>` (`list:path`_)
+- :api-ref:`GET /lists/files <operation/api.controllers.cdb_lists_controller.get_lists_files>` (`list:path`_)
 
 
 Logtest
@@ -492,8 +494,7 @@ manager:restart
 
 manager:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>` (`*:*`_)
-- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
+- .. deprecated:: 4.0.4
 
 manager:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -525,11 +526,11 @@ Rules
 ^^^^^^^^^^^^^^^
 rules:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /rules <operation/api.controllers.rule_controller.get_rules>` (`rule:file`_)
-- :api-ref:`GET /rules/files <operation/api.controllers.rule_controller.get_rules_files>` (`rule:file`_)
-- :api-ref:`GET /rules/files/{filename}/download <operation/api.controllers.rule_controller.get_download_file>` (`rule:file`_)
-- :api-ref:`GET /rules/groups <operation/api.controllers.rule_controller.get_rules_groups>` (`rule:file`_)
-- :api-ref:`GET /rules/requirement/{requirement} <operation/api.controllers.rule_controller.get_rules_requirement>` (`rule:file`_)
+- :api-ref:`GET /rules <operation/api.controllers.rules_controller.get_rules>` (`rule:file`_)
+- :api-ref:`GET /rules/files <operation/api.controllers.rules_controller.get_rules_files>` (`rule:file`_)
+- :api-ref:`GET /rules/files/{filename}/download <operation/api.controllers.rules_controller.get_download_file>` (`rule:file`_)
+- :api-ref:`GET /rules/groups <operation/api.controllers.rules_controller.get_rules_groups>` (`rule:file`_)
+- :api-ref:`GET /rules/requirement/{requirement} <operation/api.controllers.rules_controller.get_rules_requirement>` (`rule:file`_)
 
 
 SCA
@@ -633,6 +634,12 @@ syscollector:read
 - :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /syscollector/{agent_id}/processes <operation/api.controllers.syscollector_controller.get_processes_info>` (`agent:id`_, `agent:group`_)
 
+Task
+^^^^^
+task:status
+~~~~~~~~~~~~~
+- :api-ref:`GET /tasks/status <operation/api.controllers.task_controller.get_tasks_status>` (`*:*`_)
+
 
 Default policies
 ----------------
@@ -713,7 +720,6 @@ Provide full access to all cluster/manager related functionalities.
 Actions
     - `cluster:read`_
     - `cluster:read_api_config`_
-    - `cluster:update_api_config`_
     - `cluster:restart`_
     - `cluster:status`_
     - `cluster:read_file`_
@@ -721,7 +727,6 @@ Actions
     - `cluster:delete_file`_
     - `manager:read`_
     - `manager:read_api_config`_
-    - `manager:update_api_config`_
     - `manager:delete_file`_
     - `manager:read_file`_
     - `manager:upload_file`_
@@ -783,6 +788,18 @@ Resources
 Effect
     - allow
 
+logtest_all
+^^^^^^^^^^^^^^^
+Provide access to all logtest related functionalities.
+
+Actions
+    - `logtest:run`_
+
+Resources
+    - ``*:*:*``
+
+Effect
+    - allow
 
 mitre_read
 ^^^^^^^^^^^^^^^
@@ -940,6 +957,19 @@ Resources
 Effect
     - allow
 
+task_status
+^^^^^^^^^^^^^^^^^^
+Allow read tasks information.
+
+Actions
+    - `task:status`_
+
+Resources
+    - ``*:*:*``
+
+Effect
+    - allow
+
 
 Default roles
 -------------
@@ -954,13 +984,15 @@ Policies
     - `cluster_all`_
     - `decoders_read`_
     - `lists_read`_
-    - `rootcheck_all`_
+    - `logtest_all`_
     - `mitre_read`_
+    - `rootcheck_all`_
     - `rules_read`_
     - `sca_read`_
     - `security_all`_
     - `syscheck_all`_
     - `syscollector_read`_
+    - `task_status`_
 
 Rules
     - `wui_elastic_admin`_
@@ -1004,8 +1036,8 @@ Policies
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
-    - `rootcheck_read`_
     - `mitre_read`_
+    - `rootcheck_read`_
     - `rules_read`_
     - `sca_read`_
     - `syscheck_read`_
@@ -1014,13 +1046,17 @@ Policies
 
 users_admin
 ^^^^^^^^^^^^
-Users administrator of the system, this role have full access to all users related functionalities.
+Users administrator of the system, this role provides full access to all users related functionalities.
 
 Policies
     - `users_all`_
 
 Default rules
 -------------
+.. warning::
+
+    Run_as permissions through these mapping rules can only be obtained with ``wazuh-wui`` user. These rules will never match an authorization context for any other Wazuh API user.
+
 wui_elastic_admin
 ^^^^^^^^^^^^^^^^^^^^^
 Administrator permissions for WUI's elastic users.

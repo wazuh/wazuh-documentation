@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _api_examples:
 
@@ -32,29 +32,6 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
             "timestamp": "2020-05-25T07:05:00+0000"
         },
         "error": 0
-    }
-
-
-**PUT**
-
-.. code-block:: console
-
-    # curl -k -X PUT "https://localhost:55000/manager/api/config?pretty=true" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"cache\":{\"enabled\":true,\"time\":0.75}}"
-
-.. code-block:: json
-    :class: output
-
-    {
-       "data": {
-          "affected_items": [
-             "master-node"
-          ],
-          "total_affected_items": 1,
-          "total_failed_items": 0,
-          "failed_items": []
-       },
-       "message": "API configuration was successfully updated. Settings require restarting the API to be applied.",
-       "error": 0
     }
 
 

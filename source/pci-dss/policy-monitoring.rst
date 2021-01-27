@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _pci_dss_policy_monitoring:
 
@@ -10,7 +10,7 @@ The rootcheck module can be used to enforce and monitor your security policy. Th
 There are several PCI DSS requirements to verify that systems are properly hardened. An example would be:
 
   | **2.2**: Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards.
-  | Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).
+  | Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), National Institute of Standards Technology (NIST).
   |
 
 Wazuh includes out-of-the-box, CIS baselines for Debian and Red Hat.  Other baselines could be created for other systems or applications as well, just by adding the corresponding rootcheck file:

@@ -201,6 +201,7 @@ newUrls['4.1'] = [
   '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html'
 ];
 
 /* *** RELEASE 4.0 ****/
@@ -208,6 +209,7 @@ newUrls['4.1'] = [
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_4.html',
   '/release-notes/release_4_0_3.html',
   '/release-notes/release_4_0_2.html',
   '/release-notes/release_4_0_1.html',

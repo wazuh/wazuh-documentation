@@ -1,11 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _containers_security:
 
 Containers security monitoring
 ==============================
 
-Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh is capable of protecting container workloads at two different levels:
+Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh protects container workloads at two different levels:
 
 Infrastructure level
 --------------------

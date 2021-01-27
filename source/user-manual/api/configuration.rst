@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _api_configuration:
 
@@ -13,7 +13,7 @@ Configuration
 Wazuh API configuration
 -----------------------
 
-The Wazuh API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line. It is also possible to use the :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>` API endpoint to change the configuration. Check the :ref:`API reference <api_reference>` for more information about the Wazuh API endpoints.
+The Wazuh API configuration can be found inside ``{WAZUH_PATH}/api/configuration/api.yaml``. All settings are commented out by default. To apply a different configuration, uncomment and edit the desired line.
 
 Here are all the available settings for the ``api.yaml`` configuration file. For more information on each of the settings, check the :ref:`configuration options <api_configuration_options>` below:
 
@@ -33,6 +33,7 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         cert: "api/configuration/ssl/server.crt"
         use_ca: False
         ca: "api/configuration/ssl/ca.crt"
+        ssl_cipher: "TLSv1.2"
 
      logs:
         level: "info"
@@ -54,9 +55,18 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         block_time: 300
         max_request_per_minute: 300
 
+     remote_commands:
+        localfile:
+           enabled: yes
+           exceptions: []
+
+       wodle_command:
+          enabled: yes
+          exceptions: []
+
 .. warning::
 
-    If running a cluster, the master will NOT send its local Wazuh API configuration file to the workers. Each node provides its own Wazuh API. If the configuration file is changed in the master node, the user should manually update the workers Wazuh API configuration in order to use the same one. Take care of not overwriting the IP and port in the local configuration of each worker. The Wazuh API endpoint :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>` can be used to change any or all of the Wazuh API configuration files in the cluster nodes.
+    If running a cluster, the master will NOT send its local Wazuh API configuration file to the workers. Each node provides its own Wazuh API. If the configuration file is changed in the master node, the user should manually update the workers Wazuh API configuration in order to use the same one. Be sure to not overwrite the IP and port in the local configuration of each worker.
 
 Make sure to restart the Wazuh API using **wazuh-manager** service after editing the configuration file:
 
@@ -78,7 +88,7 @@ Unlike regular Wazuh API configuration settings that can be changed in the :ref:
 
 .. code-block:: yaml
 
-    auth_token_exp_timeout: 3600
+    auth_token_exp_timeout: 900
     rbac_mode: white
 
 .. warning::
@@ -87,7 +97,7 @@ Unlike regular Wazuh API configuration settings that can be changed in the :ref:
 Configuration endpoints
 -----------------------
 
-The Wazuh API has multiple endpoints that allow both querying and modifying part of its configuration. Those settings that could break access (such as IP, port, etc.) cannot be changed through the endpoints, so the only way to modify them is by accessing the ``api.yaml`` file described in the section :ref:`configuration file <api_configuration_file>`.
+The Wazuh API has several endpoints that allow querying its current configuration. The API configuration can only be modified by accessing the ``api.yaml`` file described in the section :ref:`configuration file <api_configuration_file>`.
 
 The security configuration, which contains the ``auth_token_exp_timeout`` and ``rbac_mode`` settings, can only be queried and modified through the :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`, :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` and :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` Wazuh API endpoints.
 
@@ -99,30 +109,11 @@ Get configuration
 
 Modify configuration
 ^^^^^^^^^^^^^^^^^^^^
-- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>`: Modify the local Wazuh API configuration.
-- :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config>`: Modify the Wazuh API configuration of all (or a list) of the cluster nodes.
 - :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Modify the security configuration.
 
 Restore configuration
 ^^^^^^^^^^^^^^^^^^^^^
-- :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>`: Restore the default local Wazuh API configuration.
-- :api-ref:`DELETE /cluster/api/config <operation/api.controllers.cluster_controller.delete_api_config>`: Restore the default Wazuh API configuration of all (or a list) of the cluster nodes.
 - :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`: Restore the default security configuration.
-
-
-To apply the changes it is necessary to restart each Wazuh API whose configuration has changed (not necesary for ``/security/config`` endpoints):
-
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
 
 SSL certificate
 ---------------
@@ -201,19 +192,21 @@ experimental_features
 
 https
 ^^^^^^^^^^^^^^^^^^^^^^
-+------------+----------------------+----------------------------------+-------------------------------------------------------------------+
-| Sub-fields | Allowed values       | Default value                    | Description                                                       |
-+============+======================+==================================+===================================================================+
-| enabled    | yes, true, no, false | true                             | Enable or disable SSL (https) in the Wazuh API.                   |
-+------------+----------------------+----------------------------------+-------------------------------------------------------------------+
-| key        | Any text string      | api/configuration/ssl/server.key | Path of the file with the private key.                            |
-+------------+----------------------+----------------------------------+-------------------------------------------------------------------+
-| cert       | Any text string      | api/configuration/ssl/server.crt | Path to the file with the certificate.                            |
-+------------+----------------------+----------------------------------+-------------------------------------------------------------------+
-| use_ca     | yes, true, no, false | false                            | Whether to use a certificate from a Certificate Authority or not. |
-+------------+----------------------+----------------------------------+-------------------------------------------------------------------+
-| ca         | Any text string      | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
-+------------+----------------------+----------------------------------+-------------------------------------------------------------------+
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| Sub-fields   | Allowed values               | Default value                    | Description                                                       |
++==============+==============================+==================================+===================================================================+
+| enabled      | yes, true, no, false         | true                             | Enable or disable SSL (https) in the Wazuh API.                   |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| key          | Any text string              | api/configuration/ssl/server.key | Path of the file with the private key.                            |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| cert         | Any text string              | api/configuration/ssl/server.crt | Path to the file with the certificate.                            |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| use_ca       | yes, true, no, false         | false                            | Whether to use a certificate from a Certificate Authority or not. |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| ca           | Any text string              | api/configuration/ssl/ca.crt     | Path to the certificate of the Certificate Authority (CA).        |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
+| ssl_cipher   | TLS, TLSv1, TLSv1.1, TLSv1.2 | TLSv1.2                          | SSL cipher to allow. Its value is not case sensitive.             |
++--------------+------------------------------+----------------------------------+-------------------------------------------------------------------+
 
 logs
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -256,12 +249,22 @@ access
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                                                             |
 +========================+======================+===============+=========================================================================================================================================================================================================================================================================+
-| max_login_attempts     | Any positive integer | 50             | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                            |
+| max_login_attempts     | Any positive integer | 50            | Set a maximum number of login attempts during a specified ``block_time`` number of seconds.                                                                                                                                                                             |
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | block_time             | Any positive integer | 300           | Established period of time (in seconds) to attempt login requests. If the established number of requests (``max_login_attempts``) is exceeded within this time limit, the IP is blocked until the end of the block time period.                                         |
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | max_request_per_minute | Any positive integer | 300           | Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked for the remaining of the minute. |
 +------------------------+----------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+remote_commands (localfile and wodle "command")
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
++============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
+| enabled    | yes, true, no, false | true          | Enable or disable uploading configurations with remote commands through the Wazuh API. When this option is disabled it is not possible to upload **ossec.conf** files with the <command> option inside the :ref:`localfile tag <reference_ossec_localfile>` as well as the :ref:`wodle "command" option <wodle_command>`.                   |
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| exceptions | command list         | [ ]           | Set a list of commands allowed to be uploaded through the API. These exceptions could always be uploaded independently of the value of the enabled config                                                                                                                                                                                   |
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _api_security_configuration_options:
 
@@ -273,7 +276,7 @@ auth_token_exp_timeout
 +-----------------------+---------------+---------------------------------------------------------+
 | Allowed values        | Default value | Description                                             |
 +=======================+===============+=========================================================+
-| Any positive integer  | 3600          | Set how many seconds it takes for JWT tokens to expire. |
+| Any positive integer  | 900           | Set how many seconds it takes for JWT tokens to expire. |
 +-----------------------+---------------+---------------------------------------------------------+
 
 rbac_mode

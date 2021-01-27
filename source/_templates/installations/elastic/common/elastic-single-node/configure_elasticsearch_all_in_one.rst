@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 

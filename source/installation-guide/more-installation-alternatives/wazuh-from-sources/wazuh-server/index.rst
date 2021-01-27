@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Wazuh manager sources installation
 
@@ -20,7 +20,7 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-        # yum install make gcc policycoreutils-python automake autoconf libtool
+        # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
   
   .. group-tab:: APT
 
