@@ -556,36 +556,126 @@ header .menuweb-bar .menu-item a {
 
 #capabilities .right .screenshots .carousel-control-prev {
   position: absolute !important;
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.15)),to(rgba(0,0,0,0.0001)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.15) 0),color-stop(rgba(0,0,0,0.0001) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.0001) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.0001) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
 }
 
 #capabilities .right .screenshots .carousel-control-prev:hover {
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.2)),to(rgba(0,0,0,0.0001)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.2) 0),color-stop(rgba(0,0,0,0.0001) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.0001) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.0001) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
 }
 
 #capabilities .right .screenshots .carousel-control-next {
   position: absolute !important;
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.0001)),to(rgba(0,0,0,0.15)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.0001) 0),color-stop(rgba(0,0,0,0.15) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.15) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.15) 100%);
-  background-repeat: repeat-x;
+  background-image: none;
 }
 
-#capabilities .right .screenshots .carousel-control-next:hover {
-  background-image: -webkit-gradient(linear,0 top,100% top,from(rgba(0,0,0,0.0001)),to(rgba(0,0,0,0.2)));
-  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0.0001) 0),color-stop(rgba(0,0,0,0.2) 100%));
-  background-image: -moz-linear-gradient(left,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.2) 100%);
-  background-image: linear-gradient(to right,rgba(0,0,0,0.0001) 0,rgba(0,0,0,0.2) 100%);
-  background-repeat: repeat-x;
+#capabilities .carousel-control-prev .fas, 
+#capabilities .carousel-control-next .fas {
+  color: #333;
+  font-size: 2rem;
+}
+
+#capabilities .carousel-control-next,
+#capabilities .carousel-control-prev {
+	opacity: 0.1;
+}
+
+#capabilities .screenshots .carousel-control-next:focus, 
+#capabilities .screenshots .carousel-control-next:hover, 
+#capabilities .screenshots .carousel-control-prev:focus, 
+#capabilities .screenshots .carousel-control-prev:hover {
+  background-image: none;
+  opacity: 1;
+}
+
+#capabilities .screenshots #slider:hover .carousel-control-prev, 
+#capabilities .screenshots #slider:focus .carousel-control-prev,
+#capabilities .screenshots #slider:hover .carousel-control-next, 
+#capabilities .screenshots #slider:focus .carousel-control-next {
+  opacity: 0.4;
+}
+
+.deployment-types {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 3rem;
+  margin: 2rem auto;
+}
+
+.deployment-types .item-deployment {
+  border: 1px solid #0094ce;
+  border-radius: 3rem;
+  padding: 1rem;
+}
+
+.deployment-types .item-deployment h3 {
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(40, 40, 40, 0.2);
+  padding: 0.5rem;
+}
+
+.deployment-types .item-deployment .detailed img {
+  position: absolute;
+  z-index: 99;
+  width: 100% !important;
+  opacity: 0;  
+  border: none
+}
+
+.agent-os {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem auto;
+  grid-gap: 1rem;
+}
+
+.agent-os .item-agent {
+  border: 1px solid #0094ce;
+  border-radius: 2em;
+  padding: 0;
+  position: relative;
+}
+
+.agent-os #solaris-logo img {
+  max-height: 100px;
+}
+
+.agent-os .item-agent a:hover {
+  border-bottom: none !important;
+}
+
+.agent-os .item-agent p {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+
+.agent-os .item-agent img {
+  margin-bottom: 0 !important;
+}
+
+.agent-os .item-agent:hover {
+  background: #0094ce;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover p {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover img {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover {
+  border: none;
 }
 
 .content-card {
@@ -1462,6 +1552,14 @@ footer a:focus,
   padding: 0;
 }
 
+.screenshots#deployment-types img{
+  border: none;
+}
+
+.screenshots#deployment-types {
+  margin-bottom: 2rem;
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
@@ -2298,7 +2396,7 @@ label {
 	background-color: #e8e8e8;
 }
 
-.admonition ul, .admonition ol {
+.admonition ul, .admonition ol {
   padding-top: 1rem;
   padding-right: 1rem;
   padding-bottom: 0;
@@ -2771,6 +2869,19 @@ div.highlight pre {
 
   #capabilities .right .topic p:not(.topic-title) {
     font-size: 1rem;
+  }
+
+  .deployment-types {
+    width: 80%;
+    grid-template-columns: 35% 65%
+  }
+
+  .deployment-types #distributed .detailed img {
+    height: 27rem !important;
+  }
+
+  .agent-os {
+    grid-template-columns: repeat(6, 1fr);
   }
 
   .edit-repo-wrapper {
@@ -3544,6 +3655,10 @@ div.highlight pre {
             border-top-left-radius: 5px;
           }
 
+          .deployment-types .item-deployment h3 {
+            font-size: 18px;
+          }
+
 					#header-default .search_main {
 						margin-left: 345px;
 					}
@@ -3593,7 +3708,12 @@ div.highlight pre {
 		width: 100%;
 		max-width: calc(100% - 316px);
 		flex: none;
-	}
+  }
+  
+  .deployment-types .item-deployment h3 {
+    font-size: 23px;
+  }
+
 }
 
 @media (min-width: 1921px) {
