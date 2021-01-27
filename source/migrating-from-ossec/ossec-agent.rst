@@ -83,7 +83,7 @@ There have been some syntax changes, and new settings, incorporated to ``ossec.c
 
 .. code-block:: xml
 
-   <ossec_config>
+   <wazuh_config>
      <client>
        <server-ip>MANAGER_IP</server-ip>
 

@@ -9,14 +9,14 @@ Before you check the agent's connection with the manager, first ensure the agent
 
 .. code-block:: xml
 
-  <ossec_config>
+  <wazuh_config>
     <client>
       <server>
         <address>10.0.0.10</address>
         <protocol>tcp</protocol>
       </server>
     </client>
-  </ossec_config>
+  </wazuh_config>
 
 This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need restart the Agent:
 
