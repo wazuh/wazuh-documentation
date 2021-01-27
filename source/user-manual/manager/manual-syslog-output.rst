@@ -14,7 +14,7 @@ Syslog output is configured in the ``ossec.conf`` file. All of the available opt
 
 ::
 
-  <ossec_config>
+  <wazuh_config>
     <syslog_output>
       <level>9</level>
       <server>192.168.1.241</server>
@@ -23,7 +23,7 @@ Syslog output is configured in the ``ossec.conf`` file. All of the available opt
     <syslog_output>
       <server>192.168.1.240</server>
     </syslog_output>
-  </ossec_config>
+  </wazuh_config>
 
 The above configuration will send alerts to ``192.168.1.240`` and, if the alert level is higher than 9, also to ``192.168.1.241``.
 

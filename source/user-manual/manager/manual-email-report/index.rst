@@ -37,7 +37,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
 
 .. code-block:: xml
 
-  <ossec_config>
+  <wazuh_config>
       <global>
           <email_notification>yes</email_notification>
           <email_to>me@test.com</email_to>
@@ -45,7 +45,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
           <email_from>wazuh@test.com</email_from>
       </global>
       ...
-  </ossec_config>
+  </wazuh_config>
 
 To see all of the available email configuration options, go to the :ref:`global section <reference_ossec_global>`.
 
@@ -53,12 +53,12 @@ Once the above has been configured, the ``email_alert_level`` needs to be set to
 
 .. code-block:: xml
 
-  <ossec_config>
+  <wazuh_config>
     <alerts>
         <email_alert_level>10</email_alert_level>
     </alerts>
     ...
-  </ossec_config>
+  </wazuh_config>
 
 This example will set the minimum level to 10. For more information, see the :ref:`alerts section <reference_ossec_alerts>`.
 
@@ -156,7 +156,7 @@ This example shows the email alerts capabilities. Email alerts can be sent to mu
 
 .. code-block:: xml
 
- <ossec_config>
+ <wazuh_config>
    <email_alerts>
        <email_to>alice@test.com</email_to>
        <event_location>server1|server2</event_location>
@@ -173,7 +173,7 @@ This example shows the email alerts capabilities. Email alerts can be sent to mu
        <email_to>david@test.com</email_to>
        <level>12</level>
    </email_alerts>
-  </ossec_config>
+  </wazuh_config>
 
 This configuration will send:
 

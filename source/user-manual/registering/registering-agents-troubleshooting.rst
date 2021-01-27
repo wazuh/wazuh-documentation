@@ -40,7 +40,7 @@ By default, the Wazuh manager attaches the Wazuh agent to the visible IP of the 
 
    .. code-block:: xml
 
-    <ossec_config>
+    <wazuh_config>
       ...
       <auth>
         ...
@@ -48,7 +48,7 @@ By default, the Wazuh manager attaches the Wazuh agent to the visible IP of the 
         ...
       </auth>
       ...
-    </ossec_config>
+    </wazuh_config>
 
    Restart the wazuh manager:
 
