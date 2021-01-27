@@ -18,7 +18,7 @@ Manager statistical files:
 
 Manager and Agents statistical files:
 
-  * `wazuh-logcollector.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-logcollector-state.html>`_ - It shows information about `logcollector daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-logcollector.html>`_
+  * :ref:`wazuh-logcollector.state <wazuh_logcollector_state_file>` - It shows information about :ref:`logcollector daemon <wazuh-logcollector>`.
 
 .. topic:: Contents
 

@@ -629,12 +629,15 @@ Logcollector
 |                                          | Allowed value | Any integer between 1 and 172800                                           |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 | **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
+|                                          |               |                                                                            |
+|                                          |               | .. versionadded:: 4.2                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 5                                                                          |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed values| 0: Disable statistics generation                                           |
+|                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
+|                                          |               | to be available through the API                                            |
 +                                          +               +----------------------------------------------------------------------------+
-|                                          |               | Any other integer between 1 and 86400                                      |
+|                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
