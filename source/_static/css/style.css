@@ -579,9 +579,11 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities .carousel-control-prev:hover .fas, 
-#capabilities .carousel-control-prev:focus .fas, 
+#capabilities .carousel-control-prev:focus-visible .fas, 
+#capabilities .carousel-control-prev:-moz-focusring .fas, 
 #capabilities .carousel-control-next:hover .fas,
-#capabilities .carousel-control-next:focus .fas {
+#capabilities .carousel-control-next:focus-visible .fas,
+#capabilities .carousel-control-next:-moz-focusring .fas {
   color: rgba(59, 59, 59, 0.8);
 }
 
