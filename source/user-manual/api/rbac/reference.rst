@@ -315,6 +315,7 @@ agent:read
 - :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/stats/{component} <operation/api.controllers.agent_controller.get_component_stats>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_, `agent:group`_)
 
 agent:restart
