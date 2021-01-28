@@ -536,7 +536,7 @@ rules:read
 
 rules:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.upload_rule_file>` (`rule:file`_)
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.upload_rule_file>` (`*:*`_)
 
 rules:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
