@@ -85,6 +85,7 @@ getHelp() {
 
 ## Download all the necessary packages
 downloadPackages() {
+    logger "Downloading packages..."
     mkdir ~/wazuh-packages
     if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then    
         eval "curl -so ~/wazuh-packages/wazuh-manager-4.0.0-1.x86_64.rpm https://packages.wazuh.com/4.x/yum/wazuh-manager-4.0.4-1.x86_64.rpm --max-time 300 ${debug}"
@@ -118,105 +119,22 @@ downloadPackages() {
         eval "curl -so ~/wazuh-packages/opendistroforelasticsearch-kibana-1.11.0.deb https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-1.11.0.deb --max-time 300 ${debug}"
     fi
     eval "curl -so ~/wazuh-packages/wazuh_kibana-4.0.4_7.9.1-1.zip https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip --max-time 300 ${debug}"
-}
 
-## Install the required packages for the installation
-installPrerequisites() {
-
-    logger "Installing all necessary utilities for the installation..."
-
-    if [ ${sys_type} == "yum" ]; then
-        eval "yum install curl unzip wget libcap -y -q ${debug}"
-        eval "yum install java-11-openjdk-devel -y -q ${debug}"
-        if [ "$?" != 0 ]; then
-            os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
-            if [ -z "${os}" ]; then
-                os="centos"
-            fi
-            lv=$(cat /etc/os-release | grep  'PRETTY_NAME="')
-            rm="PRETTY_NAME="
-            rmc='"'
-            ral="Amazon Linux "
-            lv="${lv//$rm}"
-            lv="${lv//$rmc}"
-            lv="${lv//$ral}"
-            lv=$(echo "$lv" | awk '{print $1;}')
-            if [ ${lv} == "2" ]; then
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/2/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-            elif [ ${lv} == "AMI" ]; then
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/1/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-            else
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-                conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
-                echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
-            fi
-            eval "yum install adoptopenjdk-11-hotspot -y -q ${debug}"
-        fi
-        export JAVA_HOME=/usr/
-    elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install curl unzip wget ${debug}" 
-        eval "zypper -n install libcap-progs ${debug} || zypper -n install libcap2 ${debug}"
-        eval "zypper -n install java-11-openjdk-devel ${debug}"
-        if [ "$?" != 0 ]; then
-            eval "zypper ar -f http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/opensuse/15.0/$(uname -m) adoptopenjdk ${debug}" | echo 'a'
-            eval "zypper -n install adoptopenjdk-11-hotspot ${debug} "
-
-        fi    
-        export JAVA_HOME=/usr/    
-    elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q ${debug}"
-
-        if [ -n "$(command -v add-apt-repository)" ]; then
-            eval "add-apt-repository ppa:openjdk-r/ppa -y ${debug}"
-        else
-            echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
-        fi
-        eval "apt-get update -q ${debug}"
-        eval "apt-get install openjdk-11-jdk -y -q ${debug}" 
-        if [  "$?" != 0  ]; then
-            logger "JDK installation failed."
-            exit 1;
-        fi
-        export JAVA_HOME=/usr/
-        
-    fi
-
-    if [  "$?" != 0  ]; then
-        echo "Error: Prerequisites could not be installed"
-        exit 1;
-    else
-        logger "Done"
-    fi  
-
-}
-
-## Add the Wazuh repository
-addWazuhrepo() {
-    logger "Adding the Wazuh repository..."
-
-    if [ ${sys_type} == "yum" ]; then
-        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo ${debug}"
-    elif [ ${sys_type} == "zypper" ]; then
-        eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH ${debug}"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/zypp/repos.d/wazuh.repo ${debug}"            
-    elif [ ${sys_type} == "apt-get" ]; then
-        eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - ${debug}"
-        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list ${debug}"
-        eval "apt-get update -q ${debug}"
-    fi    
-
-    logger "Done" 
+    logger "Downloading configuration files..."
+    eval "curl -so ~/wazuh-packages/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
+    eval "curl -so ~/wazuh-packages/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
+    eval "curl -so ~/wazuh-packages/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
+    eval "curl -so ~/wazuh-packages/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"    
 }
 
 ## Wazuh manager
 installWazuh() {
     
     logger "Installing the Wazuh manager..."
-    if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install wazuh-manager ${debug}"
-    else
-        eval "${sys_type} install wazuh-manager -y -q ${debug}"
+    if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then  
+        eval "rpm -i  ~/wazuh-packages/wazuh-manager-4.0.0-1.x86_64.rpm ${debug}"
+    elif [ ${sys_type} == "apt-get" ]; then
+        eval "apt install ~/wazuh-packages/wazuh-manager_4.0.4-1_arm64.deb ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
@@ -233,12 +151,14 @@ installElasticsearch() {
 
     logger "Installing Open Distro for Elasticsearch..."
 
-    if [ ${sys_type} == "yum" ]; then
-        eval "yum install opendistroforelasticsearch -y -q ${debug}"
-    elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch ${debug}"
+    if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then  
+        eval "rpm -i  ~/wazuh-packages/opendistro-* ${debug}"
+        eval "rpm -i  ~/wazuh-packages/elasticsearch-oss-* ${debug}"
+        eval "rpm -i  ~/wazuh-packages/opendistroforelasticsearch-* ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q ${debug}"
+        eval "apt install ~/wazuh-packages/opendistro-* ${debug}"
+        eval "apt install ~/wazuh-packages/elasticsearch-oss- ${debug}"
+        eval "apt install ~/wazuh-packages/opendistroforelasticsearch_* ${debug}"
     fi
 
     if [  "$?" != 0  ]; then
@@ -249,10 +169,11 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
+        mv ~/wazuh-packages/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+        mv ~/wazuh-packages/securityconfig/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
+        mv ~/wazuh-packages/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
+        mv ~/wazuh-packages/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
