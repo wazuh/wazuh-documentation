@@ -56,6 +56,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-agentd-state.html',
   '/user-manual/reference/statistics-files/wazuh-analysisd-state.html',
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
+  '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
   '/user-manual/reference/tools/wazuh-regex.html',
 ];
