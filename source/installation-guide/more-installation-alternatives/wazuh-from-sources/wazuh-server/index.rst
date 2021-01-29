@@ -38,9 +38,9 @@ Installing Wazuh manager
 
 
 
-**Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
+**Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps`` will download an already built and installed portable version of CPython. Otherwise, running ``make deps`` along the ``PYTHON_SOURCE`` flag enabled will download the CPython sources.
 
-To install the build dependencies of CPython, follow these steps:
+To install the dependencies needed to compile and build the CPython, follow these steps:
 
 .. tabs::
 
