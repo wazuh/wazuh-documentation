@@ -14,11 +14,11 @@ This section lists the changes in version 4.1.0. More details about these change
 Highlights
 ----------
 
-- Support for PCRE2 regular expressions in rules and decoders. 
+- Added support for PCRE2 regular expressions in rules and decoders. 
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
 - New **upgrade module** which offers simultaneous agent upgrades over single node or cluster architecture. WPK upgrade feature has been moved to this module. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
-- Support for AWS load balancers (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
+- Added support for AWS load balancers: Application Load Balancer, Classic Load Balancer, and Network Load Balancer.
 - Removed limit on the number of agents that a manager can support.
 - Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent. 
 
@@ -100,8 +100,8 @@ Fixed
 - A zombie process leak in ``modulesd`` when using commands without a timeout.
 - A race condition in Remoted that might create agent-group files with wrong permissions.
 - A warning log in Wazuh DB when upgrading the global database.
-- Fixed a bug in FIM on Windows that caused false positive due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
-
+- A bug in FIM on Windows that caused false positive due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
+- A condition race hazard in Authd that may prevent the daemon from updating client.keys after adding an agent.
 
 **API**
 
