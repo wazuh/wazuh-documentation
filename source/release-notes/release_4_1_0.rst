@@ -118,12 +118,16 @@ Wazuh Kibana plugin
 Added
 ^^^^^
 - Label to indicate that the wui_ rules only apply to the wazuh-wui API user. 
+- Each user can only view their own reports. 
+- Wazuh data directory moved from optimize to data Kibana directory.
+- Adapt the app to the new Kibana platform.
 - Modified agent registration adding groups and architecture. 
 
 
 Changed
 ^^^^^^^
 - Support new fields of Windows Registry at FIM inventory panel.
+- Replaced wazuh Wazuh API user by wazuh-wui in the default configuration. 
 
 Fixed
 ^^^^^
@@ -138,7 +142,11 @@ Fixed
 - Error about Handler.error in Role Mapping.
 - Fixed message in reserved users actions.
 - Error 500 on Export formatted CDB list.
-- Double tooltip for the wui rules label.  
+- Double tooltip for the wui rules label.
+- Create index pattern even if there are not available indices. 
+- Report creation dates set to 1970-01-01T00:00:00.000Z.
+- A bug for missing commands in Ubuntu/Debian and Centos.
+- A bug that show an hour before in /security-events/dashboard. 
 
 Wazuh ruleset
 -------------
