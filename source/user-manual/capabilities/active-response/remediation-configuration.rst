@@ -18,20 +18,20 @@ Basic usage
 
 An active response is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
 
-In this example, the ``restart-ossec`` command is configured to use the ``restart-ossec.sh`` script with no data element.  The active response is configured to initiate the ``restart-ossec`` command on the local host when the rule with ID 10005 fires.  This is a *Stateless* response as no timeout parameter is defined.
+In this example, the ``restart-wazuh`` command is configured to use the ``restart-wazuh.sh`` script with no data element.  The active response is configured to initiate the ``restart-wazuh`` command on the local host when the rule with ID 10005 fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
   <command>
-    <name>restart-ossec</name>
-    <executable>restart-ossec.sh</executable>
+    <name>restart-wazuh</name>
+    <executable>restart-wazuh.sh</executable>
     <expect></expect>
   </command>
 
 Active response::
 
   <active-response>
-    <command>restart-ossec</command>
+    <command>restart-wazuh</command>
     <location>local</location>
     <rules_id>10005</rules_id>
   </active-response>

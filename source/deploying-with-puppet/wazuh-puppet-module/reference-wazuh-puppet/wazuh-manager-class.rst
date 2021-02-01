@@ -936,7 +936,7 @@ $command_name
   Human readable name for wazuh::activeresponse usage.
 
 $command_executable
-  Name of the executable. OSSEC comes preloaded with disable-account.sh, host-deny.sh, ipfw.sh, pf.sh, route-null.sh, firewall-drop.sh, ipfw_mac.sh, ossec-tweeter.sh, restart-ossec.sh.
+  Name of the executable. OSSEC comes preloaded with disable-account.sh, host-deny.sh, ipfw.sh, pf.sh, route-null.sh, firewall-drop.sh, ipfw_mac.sh, ossec-tweeter.sh, restart-wazuh.sh.
 
 $command_expect
   `Default srcip`
@@ -954,7 +954,7 @@ $active_response_name
 
 $active_response_disabled
   Toggles the active-response capability on and off.
-  
+
 $active_response_command
   Links the active-response to the command.
 

@@ -99,7 +99,7 @@ Wazuh is pre-configured with the following scripts for Linux:
 +--------------------------+---------------------------------------------------------------+
 | pf.sh                    | Firewall-drop response script created for pf                  |
 +--------------------------+---------------------------------------------------------------+
-| restart-ossec.sh         | Automatically restarts Wazuh when ossec.conf has been changed |
+| restart-wazuh.sh         | Automatically restarts Wazuh when ossec.conf has been changed |
 +--------------------------+---------------------------------------------------------------+
 | route-null.sh            | Adds an IP to null route                                      |
 +--------------------------+---------------------------------------------------------------+
@@ -111,7 +111,7 @@ The following pre-configured scripts are for Windows:
 +==========================+===============================================================+
 | netsh.cmd                | Blocks an ip using netsh                                      |
 +--------------------------+---------------------------------------------------------------+
-| restart-ossec.cmd        | Restarts ossec agent                                          |
+| restart-wazuh.cmd        | Restarts ossec agent                                          |
 +--------------------------+---------------------------------------------------------------+
 | route-null.cmd           | Adds an IP to null route                                      |
 +--------------------------+---------------------------------------------------------------+
