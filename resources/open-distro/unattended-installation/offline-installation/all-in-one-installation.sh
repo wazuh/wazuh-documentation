@@ -87,6 +87,8 @@ getHelp() {
 downloadPackages() {
     logger "Downloading packages..."
     mkdir ~/wazuh-packages
+    cd ~/wazuh-packages
+    PACKAGES=$(pwd)
     if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then    
         eval "curl -so ~/wazuh-packages/wazuh-manager-4.0.0-1.x86_64.rpm https://packages.wazuh.com/4.x/yum/wazuh-manager-4.0.4-1.x86_64.rpm --max-time 300 ${debug}"
         eval "curl -so ~/wazuh-packages/opendistroforelasticsearch-1.11.0.rpm https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-1.11.0.rpm --max-time 300 ${debug}"
@@ -103,7 +105,7 @@ downloadPackages() {
         eval "curl -so ~/wazuh-packages/filebeat-oss-7.9.1-x86_64.rpm https://packages.wazuh.com/4.x/yum/filebeat-oss-7.9.1-x86_64.rpm --max-time 300 ${debug}"
         eval "curl -so ~/wazuh-packages/opendistroforelasticsearch-kibana-1.11.0.rpm https://packages.wazuh.com/4.x/yum/opendistroforelasticsearch-kibana-1.11.0.rpm --max-time 300 ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "curl -so ~/wazuh-packages/wazuh-manager_4.0.4-1_arm64.deb https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager_4.0.4-1_arm64.deb --max-time 300 ${debug}"
+        eval "curl -so ~/wazuh-packages/wazuh-manager_4.0.4-1_amd64.deb https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager_4.0.4-1_amd64.deb --max-time 300 ${debug}"
         eval "curl -so ~/wazuh-packages/opendistroforelasticsearch_1.11.0-1_amd64.deb https://packages.wazuh.com/4.x/apt/pool/main/o/opendistroforelasticsearch/opendistroforelasticsearch_1.11.0-1_amd64.deb --max-time 300 ${debug}"
         eval "curl -so ~/wazuh-packages/elasticsearch-oss-7.9.1-amd64.deb https://packages.wazuh.com/4.x/apt/pool/main/e/elasticsearch-oss/elasticsearch-oss-7.9.1-amd64.deb --max-time 300 ${debug}"
         eval "curl -so ~/wazuh-packages/opendistro-sql_1.11.0.0-1_amd64.deb https://packages.wazuh.com/4.x/apt/pool/main/o/opendistro-sql/opendistro-sql_1.11.0.0-1_amd64.deb --max-time 300 ${debug}"
@@ -124,7 +126,15 @@ downloadPackages() {
     eval "curl -so ~/wazuh-packages/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
     eval "curl -so ~/wazuh-packages/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
     eval "curl -so ~/wazuh-packages/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
-    eval "curl -so ~/wazuh-packages/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"    
+    eval "curl -so ~/wazuh-packages/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"  
+    eval "curl -so ~/wazuh-packages/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
+    eval "unzip ~/wazuh-packages/search-guard-tlstool-1.8.zip -d ~/wazuh-packages/searchguard ${debug}"
+    eval "curl -so ~/wazuh-packages/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"  
+    eval "curl -so ~/wazuh-packages/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
+    eval "curl -so ~/wazuh-packages/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
+    eval "curl -so ~/wazuh-packages/wazuh-filebeat-0.1.tar.gz https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 ${debug}" 
+    eval "curl -so ~/wazuh-packages/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
+    eval "curl -so ~/wazuh-packages/wazuh_kibana-4.0.4_7.9.1-1.zip https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip --max-time 300 ${debug}"
 }
 
 ## Wazuh manager
@@ -132,9 +142,9 @@ installWazuh() {
     
     logger "Installing the Wazuh manager..."
     if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then  
-        eval "rpm -i  ~/wazuh-packages/wazuh-manager-4.0.0-1.x86_64.rpm ${debug}"
+        eval "yum install  -y ~/wazuh-packages/wazuh-manager-4.0.0-1.x86_64.rpm ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt install ~/wazuh-packages/wazuh-manager_4.0.4-1_arm64.deb ${debug}"
+        eval "apt install -y ~/wazuh-packages/wazuh-manager_4.0.4-1_amd64.deb ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
@@ -152,13 +162,13 @@ installElasticsearch() {
     logger "Installing Open Distro for Elasticsearch..."
 
     if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then  
-        eval "rpm -i  ~/wazuh-packages/opendistro-* ${debug}"
-        eval "rpm -i  ~/wazuh-packages/elasticsearch-oss-* ${debug}"
-        eval "rpm -i  ~/wazuh-packages/opendistroforelasticsearch-* ${debug}"
+        eval "yum install -y  ~/wazuh-packages/elasticsearch-oss-* ${debug}"
+        eval "yum install -y ~/wazuh-packages/opendistro-* ${debug}"
+        eval "yum install -y ~/wazuh-packages/opendistroforelasticsearch-1* ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt install ~/wazuh-packages/opendistro-* ${debug}"
-        eval "apt install ~/wazuh-packages/elasticsearch-oss- ${debug}"
-        eval "apt install ~/wazuh-packages/opendistroforelasticsearch_* ${debug}"
+        eval "apt install -y ~/wazuh-packages/elasticsearch-oss-* ${debug}"
+        eval "apt install -y ~/wazuh-packages/opendistro-* ${debug}"
+        eval "apt install -y ~/wazuh-packages/opendistroforelasticsearch_* ${debug}"
     fi
 
     if [  "$?" != 0  ]; then
@@ -170,16 +180,15 @@ installElasticsearch() {
         logger "Configuring Elasticsearch..."
 
         mv ~/wazuh-packages/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
-        mv ~/wazuh-packages/securityconfig/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
+        mv ~/wazuh-packages/roles.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
         mv ~/wazuh-packages/roles_mapping.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
         mv ~/wazuh-packages/internal_users.yml /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
 
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
-        eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
-        eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard ${debug}"
-        eval "curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
+        mv ~/wazuh-packages/searchguard ~/searchguard
+        mv ~/wazuh-packages/searchguard/search-guard.yml ~/searchguard/
         eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
         eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
         if [  "$?" != 0  ]; then
@@ -231,19 +240,20 @@ installFilebeat() {
     
     logger "Installing Filebeat..."
     
-    if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install filebeat ${debug}"
-    else
-        eval "${sys_type} install filebeat -y -q  ${debug}"
+    if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then  
+        eval "yum install -y  ~/wazuh-packages/filebeat-oss* ${debug}"
+    elif [ ${sys_type} == "apt-get" ]; then
+        eval "apt install -y ~/wazuh-packages/filebeat-oss* ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
-        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
+        mv ~/wazuh-packages/filebeat.yml /etc/filebeat/
+        mv ~/wazuh-packages/wazuh-template.json /etc/filebeat/
+        
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
-        eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
+        eval "tar -xvz -C /usr/share/filebeat/module -f ~/wazuh-packages/wazuh-filebeat-0.1.tar.gz ${debug}"
         eval "mkdir /etc/filebeat/certs ${debug}"
         eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
         eval "mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/ ${debug}"
@@ -260,20 +270,20 @@ installFilebeat() {
 installKibana() {
     
     logger "Installing Open Distro for Kibana..."
-    if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch-kibana ${debug}"
-    else
-        eval "${sys_type} install opendistroforelasticsearch-kibana -y -q ${debug}"
+    if [ ${sys_type} == "yum" ] || [ ${sys_type} == "zypper" ]; then  
+        eval "yum install -y  ~/wazuh-packages/opendistroforelasticsearch-kibana* ${debug}"
+    elif [ ${sys_type} == "apt-get" ]; then
+        eval "apt install -y ~/wazuh-packages/opendistroforelasticsearch-kibana* ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
         exit 1;
     else    
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
+        mv ~/wazuh-packages/kibana.yml /etc/kibana/
         eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana bin/kibana-plugin install file:///$PACKAGES/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
@@ -383,8 +393,6 @@ main() {
         if [ -n "${packages}" ]; then
             downloadPackages           
         fi                     
-        installPrerequisites
-        addWazuhrepo
         installWazuh
         installElasticsearch
         installFilebeat
@@ -392,8 +400,6 @@ main() {
         checkInstallation    
     else
         healthCheck   
-        installPrerequisites
-        addWazuhrepo
         installWazuh
         installElasticsearch
         installFilebeat
