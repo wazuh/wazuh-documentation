@@ -14,13 +14,13 @@ This section lists the changes in version 4.1.0. More details about these change
 Highlights
 ----------
 
-- Support for PCRE2 regular expressions in rules and decoders. 
+- Support for PCRE2 regular expressions in rules and decoders has been added.
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
-- New **upgrade module** which offers simultaneous agent upgrades over single node or cluster architecture. WPK upgrade feature has been moved to this module. 
+- New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. The WPK upgrade functionality has been moved to this module. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
 - Support for AWS load balancers (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
-- Removed limit on the number of agents that a manager can support.
-- Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent. 
+- Removed the limit on the number of agents a manager can support.
+- Migration of rootcheck results to Wazuh DB in order to delete the files with the results of each agent.
 
 Wazuh core
 ----------
@@ -33,8 +33,8 @@ Added
 - Negation logic for rules.
 - Support for ``PCRE2`` regular expressions in rules and decoders.
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
-- New **upgrade module** which offers simultaneous agent upgrades over single node or cluster architecture. WPK upgrade feature has been moved to this module. 
-- New **task module** that stores and manages all the upgrade tasks executed in the agents or managers. 
+- New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. WPK upgrade functionality has been moved to this module.
+- New **task module** that collects and manages all the upgrade tasks executed in the agents or managers. 
 - Let the time interval to detect that an agent got disconnected configurable. Deprecate parameter ``DISCON_TIME``.
 - Vulnerability Detector support for macOS. 
 - Capability to perform FIM on values in the Windows Registry.
@@ -63,10 +63,10 @@ Changed
 - Removed limit on the number of agents that a manager can support.
 - Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
 - New mechanism to close RIDS files when agents are disconnected.
-- Moved CA configuration section to verify WPK signatures from  the``active-response`` section to the ``agent-upgrade section``.
-- The tool ossec-logtest is deprecated in favor of wazuh-logtest which uses a new testing service integrated in Analysisd.
-- Modified error message to debug when multiple daemons attempt to remove an agent simultaneously.
-- Replaced error message with a warning when the agent fails to reach a module. 
+- Moved CA configuration section to verify WPK signatures from  the ``active-response`` section to the ``agent-upgrade section``.
+- The ossec-logtest tool is deprecated and replaced by wazuh-logtest, which uses a new testing service integrated in Analysisd.
+- Modified the error message to debug when multiple daemons attempt to remove an agent simultaneously.
+- Replaced the error message with a warning when the agent fails to reach a module. 
 
 
 **API**
@@ -81,14 +81,14 @@ Changed
 - Refactored agent upgrade CLI to work with the new upgrade module. It distributes petitions in a clustered environment.
 - Rule and decoder details structure to support PCRE2.
 - Refactor framework to adapt agent status changes in wazuh.db. 
-- Improved performance of AWS Config integration by removing alert fields with variables such as Instance ID in its name.
+- Improved the performance of AWS Config integration by removing alert fields with variables such as Instance ID in its name.
 
 Fixed
 ^^^^^
 
 **Core**
 
-- Error in ``analysisd`` when getting the ossec group ID.
+- An error in ``analysisd`` when getting the ossec group ID.
 - Prevented FIM from reporting configuration error when patterns in settings match no files.
 - The array parsing when building JSON alerts.
 - Added Firefox ESR to the CPE helper to distinguish it from Firefox when looking for vulnerabilities.
@@ -97,10 +97,10 @@ Fixed
 - The validation of hotfixes gathered by Syscollector.
 - The reading of the Linux OS version when ``/etc/os-release`` does not provide it.
 - A false positive when comparing the minor target of CentOS packages in Vulnerability Detector.
-- A zombie process leak in ``modulesd`` when using commands without a timeout.
+- A zombie process leaks in ``modulesd`` when using commands without a timeout.
 - A race condition in Remoted that might create agent-group files with wrong permissions.
 - A warning log in Wazuh DB when upgrading the global database.
-- Fixed a bug in FIM on Windows that caused false positive due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
+- Fixed a bug in FIM on Windows that caused false positives due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
 
 
 **API**
@@ -117,7 +117,7 @@ Wazuh Kibana plugin
 
 Added
 ^^^^^
-- Label to indicate that the wui_ rules only apply to the wazuh-wui API user. 
+- A label to indicate that the wui_ rules only apply to the wazuh-wui API user. 
 - Modified agent registration adding groups and architecture. 
 
 
@@ -134,7 +134,7 @@ Fixed
 - Wrong parameters in the dev-tools autocomplete section.
 - Wrong permissions on edit CDB list.
 - Add the metafields when refreshing the index pattern.
-- Error toast is showing about Elasticsearch users for environments without security.
+- An error toast is displayed on Elasticsearch users for non-secure environments.
 - Error about Handler.error in Role Mapping.
 - Fixed message in reserved users actions.
 - Error 500 on Export formatted CDB list.
