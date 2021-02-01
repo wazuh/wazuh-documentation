@@ -9,12 +9,15 @@ The **statistics files** are documents that show real-time information about the
 
 Agents statistical files:
 
-  *  `wazuh-agentd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-agentd-state.html>`_ - It shows number of generated events, last connection, agent status and some other useful information about the agent.
+  * :ref:`wazuh-agentd.state <wazuh_agentd_state_file>` - It shows the amount of events generated,
+    last connection date and agent status, among other useful information related to the agent.
 
 Manager statistical files:
 
-  * `wazuh-remoted.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-remoted-state.html>`_ - It shows information about the `remote daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-remoted.html>`_
-  * `wazuh-analysisd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-analysisd-state.html>`_ - It shows information about the `analysis daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-analysisd.html>`_.
+  * :ref:`wazuh-remoted.state <wazuh_remoted_state_file>` - It shows information
+    about the :ref:`remote daemon <wazuh-remoted>`
+  * :ref:`wazuh-analysisd.state <wazuh_analysisd_state_file>` - It shows information
+    about the :ref:`analysis daemon <wazuh-analysisd>`.
 
 
 
