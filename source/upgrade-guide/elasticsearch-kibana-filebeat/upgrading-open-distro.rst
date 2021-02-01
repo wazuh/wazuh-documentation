@@ -328,7 +328,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
                     In case of having more Wazuh API entries, each of them must be added manually.
 
 
-#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh`` in the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml``: 
+#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml``: 
 
     .. code-block:: yaml
       :emphasize-lines: 5, 6
