@@ -40,7 +40,7 @@ Install manager via Puppet
 
 The manager is configured by installing the ``wazuh::manager`` class, and optionally using:
 
- - ``wazuh::command``: to define active response command (like ``firewall-drop.sh``).
+ - ``wazuh::command``: to define active response command (like ``firewall-drop``).
  - ``wazuh::activeresponse``: to link rules to active response commands.
  - ``wazuh::addlog``: to define additional log files to monitor.
 
@@ -70,8 +70,7 @@ Here is an example of a manifest ``wazuh-manager.pp``
 
       wazuh::command { 'firewallblock':
         command_name       => 'firewall-drop',
-        command_executable => 'firewall-drop.sh',
-        command_expect     => 'srcip'
+        command_executable => 'firewall-drop'
       }
 
       wazuh::activeresponse { 'blockWebattack':
