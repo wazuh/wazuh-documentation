@@ -11,7 +11,7 @@ FAQ
 
 Can I use a custom script for active responses?
 -----------------------------------------------
-Yes. You can create your own script and configure a command and active response to refer to it. Keep in mind that, since version v4.2, execd passes the full alert to the script via **STDIN** within a json object and each script is responsible for extracting the information necessary for its execution.
+Yes. You can create your own script and configure a :ref:`command <reference_ossec_commands>` and :ref:`active response <reference_ossec_active_response>` to refer to it. Keep in mind that, since version v4.2, the full alert is passed to the AR via **STDIN** within a json object and each AR is responsible for extracting the information necessary for its execution.
 The json message format is as follows:
 
 .. code-block:: xml
@@ -25,17 +25,16 @@ The json message format is as follows:
     "command":"add/delete",
     "parameters":{
         "extra_args":[],
-        "alert":{ //full alert json
-        },
+        "alert":{ // full alert json },
         "program":"program-name"
     }
   }
 
-The script can be done in whatever language you are comfortable with, but it should at least be able to read through STDIN, parse the read json object, and extract the necessary information for its execution.
+The AR can be done in whatever language you are comfortable with, but it should at least be able to read through STDIN, parse the read json object, and extract the necessary information for its execution.
 
-Here is an example of the message that is passed to the firewall-drop script:
+Here is an example of the message that is passed to the ``firewall-drop`` AR:
 
-.. code-block:: xml
+.. code-block:: json
 
   {
     "version":1,
