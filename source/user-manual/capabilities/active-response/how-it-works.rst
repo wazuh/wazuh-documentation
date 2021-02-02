@@ -86,8 +86,6 @@ Wazuh is pre-configured with the following scripts for Linux:
 +--------------------------+---------------------------------------------------------------+
 | ip-customblock           | Custom OSSEC block, easily modifiable for custom response     |
 +--------------------------+---------------------------------------------------------------+
-| ipfw_mac                 | Firewall-drop response script created for the Mac OS          |
-+--------------------------+---------------------------------------------------------------+
 | ipfw                     | Firewall-drop response script created for ipfw                |
 +--------------------------+---------------------------------------------------------------+
 | npf                      | Firewall-drop response script created for npf                 |

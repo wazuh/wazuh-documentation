@@ -38,7 +38,7 @@ Active response::
 Windows automatic remediation
 -----------------------------
 
-In this example, the ``win_rout-null`` command is configured to use the ``route-null.exe`` script.  The active response is configured to initiate the ``win_rout-null`` command on the local host when the rule has a higher alert level than 7.  This is a *Stateful* response with a timeout set at 900 seconds.
+In this example, the ``win_route-null`` command is configured to use the ``route-null.exe`` script.  The active response is configured to initiate the ``win_route-null`` command on the local host when the rule has a higher alert level than 7.  This is a *Stateful* response with a timeout set at 900 seconds.
 
 Command::
 

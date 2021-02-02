@@ -936,7 +936,7 @@ $command_name
   Human readable name for wazuh::activeresponse usage.
 
 $command_executable
-  Name of the executable. WAZUH comes preloaded with disable-account, host-deny, ipfw, pf, route-null, firewall-drop, ipfw_mac, wazuh-slack, restart-wazuh.
+  Name of the executable. WAZUH comes preloaded with disable-account, host-deny, ipfw, pf, route-null, firewall-drop, wazuh-slack, restart-wazuh.
 
 $timeout_allowed
   `Default true`
