@@ -77,12 +77,6 @@ To configure Elasticsearch download the following file ``/etc/elasticsearch/elas
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
-Elasticsearch roles and users
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
-
-.. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
