@@ -57,7 +57,7 @@ There are two different alternatives to deploy a Wazuh installation:
 
 
 
-.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS certified SaaS solution and maintained by our team. With the Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise's needs.
+.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS certified SaaS solution and maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
 This installation guide will teach you how to install all Wazuh components: the Wazuh agent, the Wazuh manager and Elastic Stack. Alternatively, Wazuh can be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section.
 
@@ -154,7 +154,6 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
-
 
 
 
