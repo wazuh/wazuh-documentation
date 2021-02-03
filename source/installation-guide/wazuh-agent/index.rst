@@ -38,7 +38,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 | :ref:`Windows installer <wazuh_agent_package_windows>`   | Install Wazuh agents on Windows.                                      |
 +----------------------------------------------------------+-----------------------------------------------------------------------+
 
-Each operating system installer document describes how to deploy the agent using the deployment variables, which facilitates the task of deploying, logging and configuring the agent in a single command.  Check the complete guide in the :ref:`deployment variables page <deployment_variables>`.
+Each operating system installer document describes how to deploy the agent using the deployment variables, which facilitates the task of deploying, logging and configuring the agent in a single command. Check the complete guide in the :ref:`deployment variables page <deployment_variables>`.
 
 If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment may be easier using automation tools such as :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM or :ref:`Ansible <wazuh_ansible_guide>`.
 
