@@ -5,7 +5,7 @@
 Upgrading the Wazuh agent
 =========================
 
-The following steps show how to upgrade the Wazuh agent from 3.x to the latest available version. Since Wazuh 3.x, it is possible to upgrade the Wazuh agents remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tools or the Wazuh API. More information about the process can be found in the :ref:`Remote agent upgrade<upgrading-agent>` section.
+The following steps show how to upgrade the Wazuh agent to the latest available version. Since Wazuh 3.x, it is possible to upgrade the Wazuh agents either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool or the Wazuh API. More information about the process can be found in the :ref:`Remote agent upgrade<upgrading-agent>` section.
 
 To perform the upgrade locally, follow the instructions for the operating system of the Wazuh agent:
 
