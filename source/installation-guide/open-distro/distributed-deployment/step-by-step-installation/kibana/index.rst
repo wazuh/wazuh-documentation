@@ -80,12 +80,12 @@ Kibana installation and configuration
     .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
 
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the /usr/share/kibana/data directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins    
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana/data
 
 
 #. Install the Wazuh Kibana plugin:
@@ -95,7 +95,8 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.0_7.9.1-1.zip
+        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+        
 
 #. The next step involves the certificates placement. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
