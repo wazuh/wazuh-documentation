@@ -287,7 +287,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
-#. Create the /usr/share/kibana/data directory:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     

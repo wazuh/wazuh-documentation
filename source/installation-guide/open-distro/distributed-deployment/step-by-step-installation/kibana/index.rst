@@ -80,7 +80,7 @@ Kibana installation and configuration
     .. include:: ../../../../../_templates/installations/elastic/common/configure_kibana.rst
 
 
-#. Create the /usr/share/kibana/data directory:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
