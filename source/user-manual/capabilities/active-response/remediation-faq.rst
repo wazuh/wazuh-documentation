@@ -21,7 +21,7 @@ The json message format is as follows:
     "origin":{
         "name":"worker01",
         "module":"wazuh-execd"
-        },
+    },
     "command":"add/delete",
     "parameters":{
         "extra_args":[],
@@ -41,7 +41,7 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
     "origin":{
         "name":"worker01",
         "module":"wazuh-execd"
-        },
+    },
     "command":"add",
     "parameters":{
         "extra_args":[],
@@ -55,7 +55,7 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
                     "id":["T1068","T1190"],
                     "tactic":["Privilege Escalation","Initial Access"],
                     "technique":["Exploitation for Privilege Escalation","Exploit Public-Facing Application"]
-                    },
+                },
                 "info":"CVE-2014-6271https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271",
                 "firedtimes":2,
                 "mail":true,
@@ -64,7 +64,7 @@ Here is an example of the message that is passed to the ``firewall-drop`` AR:
                 "gdpr":["IV_35.7.d"],
                 "nist_800_53":["SI.4"],
                 "tsc":["CC6.1","CC6.8","CC7.2","CC7.3"]
-                },
+            },
             "agent":{
                 "id":"000",
                 "name":"ubuntu-bionic"

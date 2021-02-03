@@ -114,7 +114,7 @@ Command::
 
   <command>
     <name>host-deny</name>
-    <executable>host-deny.sh</executable>
+    <executable>host-deny</executable>
     <timeout_allowed>yes</timeout_allowed>
   </command>
 
