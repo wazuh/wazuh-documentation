@@ -252,7 +252,7 @@ installElasticsearch() {
             echo "elasticsearch soft nproc 4096" >> /etc/security/limits.conf 
             echo "bootstrap.system_call_filter: false" >> /etc/elasticsearch/elasticsearch.yml
         fi      
-
+        eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
         echo "Initializing Elasticsearch..."
@@ -263,8 +263,8 @@ installElasticsearch() {
 
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
         eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key ${debug}"
-
         echo "Done"
+        
     fi
 
 }
