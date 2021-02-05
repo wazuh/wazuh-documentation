@@ -11,12 +11,20 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='> /dev/null 2>&1'
+WAZUH_VER="4.0.4"
+WAZUH_REV="1"
+ELK_VER="7.9.1"
+OD_VER="1.11.0"
+OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
+    sep="-"
 elif [ -n "$(command -v zypper)" ]; then
-    sys_type="zypper"     
+    sys_type="zypper"   
+    sep="-"  
 elif [ -n "$(command -v apt-get)" ]; then
     sys_type="apt-get"   
+    sep="="
 fi
 
 logger() {
@@ -178,9 +186,9 @@ installWazuh() {
     
     logger "Installing the Wazuh manager..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install wazuh-manager ${debug}"
+        eval "zypper -n install wazuh-manager=${WAZUH_VER}-${WAZUH_REV} ${debug}"
     else
-        eval "${sys_type} install wazuh-manager -y -q ${debug}"
+        eval "${sys_type} install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
@@ -198,11 +206,11 @@ installElasticsearch() {
     logger "Installing Open Distro for Elasticsearch..."
 
     if [ ${sys_type} == "yum" ]; then
-        eval "yum install opendistroforelasticsearch -y -q ${debug}"
+        eval "yum install opendistroforelasticsearch-${OD_VER}-${OD_REV} -y -q ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch ${debug}"
+        eval "zypper -n install opendistroforelasticsearch=${OD_VER}-${OD_REV} ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q ${debug}"
+        eval "apt-get install elasticsearch-oss opendistroforelasticsearch=${OD_VER}-${OD_REV} -y -q ${debug}"
     fi
 
     if [  "$?" != 0  ]; then
@@ -275,9 +283,9 @@ installFilebeat() {
     logger "Installing Filebeat..."
     
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install filebeat ${debug}"
+        eval "zypper -n install filebeat=${ELK_VER} ${debug}"
     else
-        eval "${sys_type} install filebeat -y -q  ${debug}"
+        eval "${sys_type} install filebeat${sep}${ELK_VER} -y -q  ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat installation failed"
@@ -304,9 +312,9 @@ installKibana() {
     
     logger "Installing Open Distro for Kibana..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch-kibana ${debug}"
+        eval "zypper -n install opendistroforelasticsearch-kibana=${OD_VER} ${debug}"
     else
-        eval "${sys_type} install opendistroforelasticsearch-kibana -y -q ${debug}"
+        eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
