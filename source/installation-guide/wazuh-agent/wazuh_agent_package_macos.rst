@@ -57,12 +57,11 @@ To uninstall the agent in macOS:
 
       # /Library/Ossec/bin/wazuh-control stop
 
-#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file
+#. Remove the ``/Library/Ossec/`` folder
 
     .. code-block:: console
 
       # /bin/rm -r /Library/Ossec
-      # /bin/rm /etc/ossec-init.conf
 
 #. Stop and unload dispatcher
 
@@ -89,9 +88,3 @@ To uninstall the agent in macOS:
     .. code-block:: console
 
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-
-
-
-
-
-
