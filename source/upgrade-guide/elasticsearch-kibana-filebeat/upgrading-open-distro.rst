@@ -100,6 +100,8 @@ Preparing Open Distro for Elasticsearch
 
 
 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
+
 Upgrading Elasticsearch
 -----------------------
 
@@ -339,6 +341,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
             port: 55000
             username: wazuh
             password: wazuh
+            run_as: false
 
 
 #. Remove the Wazuh Kibana plugin:
