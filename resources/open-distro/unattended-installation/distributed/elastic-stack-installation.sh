@@ -18,10 +18,13 @@ OD_VER="1.11.0"
 OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
+    sep="-"
 elif [ -n "$(command -v zypper)" ]; then
-    sys_type="zypper"     
+    sys_type="zypper"   
+    sep="-"  
 elif [ -n "$(command -v apt-get)" ]; then
     sys_type="apt-get"   
+    sep="="
 fi
 
 ## Prints information

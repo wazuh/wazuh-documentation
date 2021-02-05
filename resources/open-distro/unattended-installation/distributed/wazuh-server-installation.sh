@@ -16,15 +16,15 @@ WAZUH_REV="1"
 ELK_VER="7.9.1"
 OD_VER="1.11.0"
 OD_REV="1"
-if [ -n "$(command -v yum)" ] 
-then
+if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ] 
-then
-    sys_type="zypper"     
-elif [ -n "$(command -v apt-get)" ] 
-then
+    sep="-"
+elif [ -n "$(command -v zypper)" ]; then
+    sys_type="zypper"   
+    sep="-"  
+elif [ -n "$(command -v apt-get)" ]; then
     sys_type="apt-get"   
+    sep="="
 fi
 
 logger() {
