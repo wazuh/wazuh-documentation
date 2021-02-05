@@ -9,8 +9,13 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-ips=()
+char="."
 debug='> /dev/null 2>&1'
+WAZUH_VER="4.0.4"
+WAZUH_REV="1"
+ELK_VER="7.9.1"
+OD_VER="1.11.0"
+OD_REV="1"
 if [ -n "$(command -v yum)" ] 
 then
     sys_type="yum"
@@ -153,11 +158,10 @@ addWazuhrepo() {
 installWazuh() {
 
     logger "Installing the Wazuh manager..."
-    if [ ${sys_type} == "zypper" ] 
-    then
-        eval "zypper -n install wazuh-manager ${debug}"
+    if [ ${sys_type} == "zypper" ]; then
+        eval "zypper -n install wazuh-manager=${WAZUH_VER}-${WAZUH_REV} ${debug}"
     else
-        eval "${sys_type} install wazuh-manager -y -q ${debug}"
+        eval "${sys_type} install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]
     then
@@ -180,11 +184,10 @@ installFilebeat() {
     
     logger "Installing Filebeat..."
     
-    if [ ${sys_type} == "zypper" ] 
-    then
-        eval "zypper -n install filebeat ${debug}"
+    if [ ${sys_type} == "zypper" ]; then
+        eval "zypper -n install filebeat=${ELK_VER} ${debug}"
     else
-        eval "${sys_type} install filebeat -y -q  ${debug}"
+        eval "${sys_type} install filebeat${sep}${ELK_VER} -y -q  ${debug}"
     fi
     if [  "$?" != 0  ]
     then
