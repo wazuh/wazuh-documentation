@@ -56,6 +56,7 @@ newUrls['4.2'] = [
   '/user-manual/reference/statistics-files/wazuh-agentd-state.html',
   '/user-manual/reference/statistics-files/wazuh-analysisd-state.html',
   '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
+  '/user-manual/reference/statistics-files/wazuh-logcollector-state.html',
   '/user-manual/reference/tools/wazuh-control.html',
   '/user-manual/reference/tools/wazuh-regex.html',
 ];
@@ -201,6 +202,7 @@ newUrls['4.1'] = [
   '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
   '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html'
 ];
 
 /* *** RELEASE 4.0 ****/
@@ -208,6 +210,7 @@ newUrls['4.1'] = [
 /* Pages added in 4.0 */
 
 newUrls['4.0'] = [
+  '/release-notes/release_4_0_4.html',
   '/release-notes/release_4_0_3.html',
   '/release-notes/release_4_0_2.html',
   '/release-notes/release_4_0_1.html',

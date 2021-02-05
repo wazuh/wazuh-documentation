@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_internal_options:
 
@@ -627,6 +627,17 @@ Logcollector
 |                                          | Default value | 86400                                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 1 and 172800                                           |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
+| **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
+|                                          |               |                                                                            |
+|                                          |               | .. versionadded:: 4.2                                                      |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 5                                                                          |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
+|                                          |               | to be available through the API                                            |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild

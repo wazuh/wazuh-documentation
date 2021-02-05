@@ -1,13 +1,13 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _rootkits_detection:
 
 Rootkits detection
 ==================
 
-The :ref:`Wazuh agent <wazuh_agent>` periodically scans the monitored system to detect rootkits both at the kernel and the user space level. This type of malware usually replaces or changes existing operating system components, in order to alter the behavior of the system. Rootkits can hide other processes, files, and network connections.
+The :ref:`Wazuh agent <wazuh_agent>` periodically scans the monitored system to detect rootkits both at the kernel and the user space level. This kind of malware usually replaces or changes the components of the existing operating system, in order to alter the system behavior. Rootkits can hide other processes, files, and network connections.
 
-Wazuh uses different detection mechanisms to look for system anomalies or well-known intrusions. This is done periodically by the *Rootcheck* component:
+Wazuh uses different detection mechanisms to search for system anomalies or well-known intrusions. The *Rootcheck* component does this periodically:
 
 +-------------------------------+---------------------------------+---------+-------------+
 | Action                        | Detection mechanism             | Binary  | System call |
@@ -69,4 +69,4 @@ Below is an example of an alert generated when a hidden process is found. In thi
     "timestamp": "2020-07-12T18:07:00-0800"
   }
 
-More information about how does Wazuh detect rootkits can be found at the :ref:`user manual <manual_anomaly_detection>`.
+More information on how Wazuh detects rootkits can be found at the :ref:`user manual <manual_anomaly_detection>`.

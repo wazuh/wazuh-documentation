@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _api_getting_started:
 
@@ -235,14 +235,16 @@ Running the script provides a result similar to the following:
     Getting /agents/summary/os:
 
     {
-       "data": {
-          "active": 1,
-          "disconnected": 0,
-          "never_connected": 0,
-          "pending": 0,
-          "total": 1
-       },
-       "error": 0
+        "data": {
+            "affected_items": [
+                "windows"
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+        },
+        "message": "Showing the operative system of all specified agents",
+        "error": 0
     }
 
     End of the script.
