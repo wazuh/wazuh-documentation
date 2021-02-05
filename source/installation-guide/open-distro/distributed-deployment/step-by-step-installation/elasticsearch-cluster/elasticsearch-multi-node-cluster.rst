@@ -93,6 +93,7 @@ Certificates creation and deployment
 
     .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
@@ -144,6 +145,7 @@ Install Open Distro for Elasticsearch:
 
 .. include:: ../../../../../_templates/installations/elastic/common/install_elastic.rst
 
+
 Elasticsearch configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -169,6 +171,9 @@ Certificates deployment
     .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
+
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
+
 
 **Initializing the cluster**
 ****************************
