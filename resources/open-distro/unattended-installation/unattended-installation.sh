@@ -10,7 +10,7 @@
 
 ## Check if system is based on yum or apt-get
 char="."
-debug='> /dev/null 2>&1'
+debug='>> /var/log/wazuh-unattended-installation.log 2>&1'
 WAZUH_VER="4.0.4"
 WAZUH_REV="1"
 ELK_VER="7.9.1"
