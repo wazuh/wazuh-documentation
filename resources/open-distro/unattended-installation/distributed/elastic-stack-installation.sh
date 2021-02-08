@@ -366,14 +366,41 @@ createCertificates() {
         echo -e "\n" >> ~/instances.yml
 
     else 
-        echo -e "\n" >> ~/searchguard/search-guard.yml
-        echo "nodes:" >> ~/searchguard/search-guard.yml       
+      
         for i in "${!IMN[@]}"; do
-            echo '  - name: "'${IMN[i]}'"' >> ~/searchguard/search-guard.yml
-            echo '    dn: CN="'${IMN[i]}'",OU=Docu,O=Wazuh,L=California,C=US' >> ~/searchguard/search-guard.yml
-            echo '    ip:' >> ~/searchguard/search-guard.yml
-            echo '      - "'${DSH[i]}'"' >> ~/searchguard/search-guard.yml
-        done      
+            echo "# Elasticsearch nodes" >> ~/instances.yml
+            echo "elasticsearch-nodes:" >> ~/instances.yml
+            echo "  - name: ${IMN[i]}" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "      - ${DSH[i]}" >> ~/instances.yml
+        done  
+        echo -e "\n" >> ~/instances.yml        
+        mn=$(awk -v RS='' '/wazuh-servers:/' ~/instances.yml)
+        rt="# Wazuh server nodes"
+        mnr="wazuh-servers:"
+        rm="- name: "
+        rmip="ip:"
+        rms="- "
+        mn="${mn//$rt}"
+        mn="${mn//$mnr}"
+        mn="${mn//$rm}"
+        mn="${mn//$rmip}"
+        mn="${mn//$rms}"
+        for line in $mn; do
+                WSN+=(${line})
+        done
+        nodes=$((${#WSN[@]} / 2 ))
+        i=0
+        echo "# Wazuh server nodes" >> ~/instances.yml
+        echo "wazuh-servers:" >> ~/instances.yml        
+        while [ ${i} -lt ${#WSN[@]} ]; do
+            wname=${WSN[i]}
+            wsip=${WSN[i+1]}
+            echo "    - name: ${wname}" >> ~/instances.yml
+            echo "    ip:" >> ~/instances.yml
+            echo "      - ${wsip}" >> ~/instances.yml              
+        done
+        echo -e "\n" >> ~/instances.yml        
     fi
 
     echo "# Kibana node" >> ~/instances.yml
@@ -396,20 +423,17 @@ copyCertificates() {
     if [ -n "${single}" ]; then
         eval "mv ~/certs/${iname}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
         eval "mv ~/certs/${iname}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"
-        cp ~/certs/root-ca.pem /etc/elasticsearch/certs/
-        cp ~/certs/root-ca.key /etc/elasticsearch/certs/
-        cp ~/certs/admin.pem /etc/elasticsearch/certs/
-        cp ~/certs/admin-key.pem /etc/elasticsearch/certs/
+        eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
+        eval "cp ~/certs/root-ca.key /etc/elasticsearch/certs/ ${debug}"
+        eval "cp ~/certs/admin.pem /etc/elasticsearch/certs/ ${debug}"
+        eval "cp ~/certs/admin-key.pem /etc/elasticsearch/certs/ ${debug}"
     else
         if [ -z "${certificates}" ]; then
             eval "mv ~/certs.tar /etc/elasticsearch/certs ${debug}"
-            eval "tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}.key ${IMN[pos]}_http.pem ${IMN[pos]}_http.key root-ca.pem ${debug}"  
+            eval "tar -xf certs.tar ${IMN[pos]}.pem ${IMN[pos]}-key.pem root-ca.pem ${debug}"  
         fi
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}.pem /etc/elasticsearch/certs/elasticsearch.pem ${debug}"
-        eval "mv /etc/elasticsearch/certs/${IMN[pos]}.key /etc/elasticsearch/certs/elasticsearch.key ${debug}"
-        eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.pem /etc/elasticsearch/certs/elasticsearch_http.pem ${debug}"
-        eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.key /etc/elasticsearch/certs/elasticsearch_http.key ${debug}"            
-        eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip -f ${debug}"        
+        eval "mv /etc/elasticsearch/certs/${IMN[pos]}-key.pem /etc/elasticsearch/certs/elasticsearch-key.pem ${debug}"        
     fi
 
     if [[ -n "${certificates}" ]] || [[ -n "${single}" ]]; then
