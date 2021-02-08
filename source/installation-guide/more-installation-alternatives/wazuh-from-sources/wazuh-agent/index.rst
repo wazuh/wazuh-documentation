@@ -14,7 +14,7 @@ Installing Wazuh agent from sources
 
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
-    .. note:: CMake 2.6.4 is the minimal library version required to build the Wazuh agent solution.
+    .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
        
@@ -29,22 +29,47 @@ Installing Wazuh agent from sources
             .. code-block:: console
 
               # yum update
-              # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+              # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
               # scl enable devtoolset-7 bash
+
+            CMake 3.18 installation
+
+            .. code-block:: console
+
+              # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+              # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+              # make -j$(nproc) && make install
 
           .. tab:: CentOS 8
 
             .. code-block:: console
 
-              # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
+              # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
               # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.1.el8.x86_64.rpm
+
+            CMake 3.18 installation
+
+            .. code-block:: console
+
+              # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+              # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+              # make -j$(nproc) && make install
 
 
       .. tab:: APT
 
         .. code-block:: console
 
-         # apt-get install python gcc g++ make cmake libc6-dev curl policycoreutils automake autoconf libtool
+         # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+
+
+        CMake 3.18 installation
+
+        .. code-block:: console
+
+          # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+          # make -j$(nproc) && make install
 
 
 
@@ -52,16 +77,23 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool
-        
+         # zypper install make gcc gcc-c++ policycoreutils-python automake autoconf libtool
+
+        CMake 3.18 installation
+
+        .. code-block:: console
+
+          # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+          # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+          # make -j$(nproc) && make install
+
         .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
         .. code-block:: console
 
          # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss 
 
- 
-      
+
 
     2. Download and extract the latest version:
 

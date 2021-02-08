@@ -13,7 +13,7 @@ The Wazuh server collects and analyzes data from deployed agents. It runs the Wa
 Installing Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note:: CMake 2.6.4 is the minimal library version required to build the Wazuh server solution.
+.. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh server solution.
 
 .. tabs::
 
@@ -27,10 +27,19 @@ Installing Wazuh manager
         .. tab:: CentOS 6/7
 
           .. code-block:: console
-          
+
             # yum update
-            # yum install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
+            # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl devtoolset-7
             # scl enable devtoolset-7 bash
+
+
+          CMake 3.18 installation
+
+          .. code-block:: console
+
+            # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+            # make -j$(nproc) && make install
 
 
         .. tab:: CentOS 8
@@ -40,13 +49,31 @@ Installing Wazuh manager
             # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool
             # rpm -i http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libstdc++-static-8.3.1-5.el8.0.2.x86_64.rpm
 
-  
+
+          CMake 3.18 installation
+
+          .. code-block:: console
+
+            # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+            # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+            # make -j$(nproc) && make install
+
+
   .. group-tab:: APT
 
 
     .. code-block:: console
 
-      # apt-get install python gcc g++ make cmake libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool
+
+
+    CMake 3.18 installation
+
+    .. code-block:: console
+
+      # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+      # make -j$(nproc) && make install
 
   .. group-tab:: ZYpp
 
@@ -55,6 +82,13 @@ Installing Wazuh manager
 
         # zypper install make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool
 
+    CMake 3.18 installation
+
+    .. code-block:: console
+
+      # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+      # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+      # make -j$(nproc) && make install
 
 
 **Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
