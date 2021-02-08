@@ -362,12 +362,12 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../../_templates/installations/basic/elastic/common/configure_kibana_all_in_one.rst
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
