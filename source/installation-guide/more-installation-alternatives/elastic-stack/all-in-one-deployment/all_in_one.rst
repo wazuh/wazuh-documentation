@@ -134,23 +134,25 @@ This command should have an output like this:
 .. code-block:: console
   :class: output
 
-  # {
+  {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "J4wjlf1USzKDMRmxnliFPw",
+    "cluster_uuid" : "LTTJx4wGTmONK4pkD0IclA",
     "version" : {
-      "number" : "7.8.0",
+    "number" : "7.10.0",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "757314695644ea9a1dc2fecd26d1a43856725e65",
-      "build_date" : "2020-06-14T19:35:50.234439Z",
+      "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
+      "build_date" : "2020-11-09T21:30:33.964949Z",
       "build_snapshot" : false,
-      "lucene_version" : "8.5.1",
+      "lucene_version" : "8.7.0",
       "minimum_wire_compatibility_version" : "6.8.0",
       "minimum_index_compatibility_version" : "6.0.0-beta1"
     },
     "tagline" : "You Know, for Search"
   }
+
+
 
 .. _basic_all_in_one_wazuh:
 
