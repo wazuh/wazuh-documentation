@@ -198,10 +198,10 @@ For example:
 .. code-block:: xml
 
    <rule id="502" level="3">
-     <if_sid>500</if_sid>
+     <if_sid>200</if_sid>
      <options>alert_by_email</options>
-     <match>Ossec started</match>
-     <description>Ossec server started.</description>
+     <match>Wazuh started</match>
+     <description>Wazuh server started.</description>
    </rule>
 
 This configuration will send an email every time rule 502 is triggered regardless of what the minimum level is set to.

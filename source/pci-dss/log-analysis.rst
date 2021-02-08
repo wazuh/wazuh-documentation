@@ -15,7 +15,7 @@ These controls require us to log invalid logical access attempts, multiple inval
 
 The syntax used for rule tagging is **pci_dss_** followed by the number of the requirement (e.g., **pci_dss_10.2.4** and **pci_dss_10.2.5**).
 
-Here are some examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
+Here are some examples of Wazuh rules tagged for PCI requirements 10.2.4 and 10.2.5:
 
 .. code-block:: xml
 
