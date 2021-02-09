@@ -1,5 +1,4 @@
 $(function() {
-  let loc = location.hash;
   const version = '' + $('[data-version]').data('version');
   const minVersionScreenshot = '3.13';
   const minVersionRedoc = '4.0';
@@ -14,10 +13,10 @@ $(function() {
   if ( useApiRedoc ) {
     /* Change DOMAIN in href */
     const domainReplacePattern = 'https://DOMAIN';
-    const url_root = $('[data-url_root]').data('url_root');
+    const urlRoot = DOCUMENTATION_OPTIONS.VERSION;
     $('[href^="'+domainReplacePattern+'/"]').each(function() {
       const oldHref = $(this).attr('href');
-      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', url_root));
+      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', urlRoot));
       $(this).attr('target', '_blank');
     });
   }
@@ -726,8 +725,11 @@ $(function() {
    * If .no-latest-notice is not visible, the margin is zero
    */
   function adjustLightboxHeight() {
-    noLatestHeight = document.querySelector('.no-latest-notice').offsetHeight;
-    $('#lightbox').css('margin-top', noLatestHeight);
+    const noLatestElement = $('.no-latest-notice');
+    if ( noLatestElement.length > 0) {
+      const noLatestHeight = noLatestElement[0].offsetHeight;
+      $('#lightbox').css('margin-top', noLatestHeight);
+    }
   }
 
   /* Restore overflow when pressing key 'Esc' */
@@ -889,6 +891,11 @@ $(function() {
     e.stopPropagation();
     return false;
   });
+
+  /* Add image for the pages with deprecated content -------------------------------------------*/
+  if ( $('.dropdown-menu li a:first-of-type').hasClass('disable') ) {
+    $('#rst-content').addClass('deprecated-content');
+  }
 });
 
 /**
