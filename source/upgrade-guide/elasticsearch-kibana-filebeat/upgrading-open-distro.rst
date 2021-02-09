@@ -278,30 +278,41 @@ Upgrading Kibana
 ----------------
 
 .. warning::
-  Since Wazuh 3.12.0 release, regardless of the Elastic Stack version, the location of the Wazuh Kibana plugin configuration file has been moved from ``/usr/share/kibana/plugins/wazuh/wazuh.yml``, for the version 3.11.x, and from ``/usr/share/kibana/plugins/wazuh/config.yml``, for the version 3.10.x or older, to ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``.
+  The location of the Wazuh Kibana plugin configuration file has been moved to ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
 
-Copy the Wazuh Kibana plugin configuration file to its new location. This step is not needed for upgrades from 3.12.x to 3.13.x:
+#. Copy the Wazuh Kibana plugin configuration file to its new location:
 
       .. tabs::
 
-          .. group-tab:: For upgrades from 3.11.x to 3.13.x
+          
+          .. group-tab:: For upgrades from 3.12.x or newer
+
+              Create the new directory and copy the Wazuh Kibana plugin configuration file. This step is not necessary for upgrades from Wazuh 4.0.4 and Elasticsearch 7.10.0. 
+
+                .. code-block:: console
+
+                  # mkdir -p /usr/share/kibana/data/
+                  # cp /usr/share/kibana/optimize/wazuh/config/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
+
+
+          .. group-tab:: For upgrades from 3.11.x
 
               Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
                 .. code-block:: console
 
-                  # mkdir -p /usr/share/kibana/optimize/wazuh/config
+                  # mkdir -p /usr/share/kibana/data/
                   # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
 
-          .. group-tab:: For upgrades from 3.10.x or older to 3.13.x
+          .. group-tab:: For upgrades from 3.10.x or older
 
 
               Create the new directory and copy the Wazuh Kibana plugin configuration file:
 
                     .. code-block:: console
 
-                      # mkdir -p /usr/share/kibana/optimize/wazuh/config
+                      # mkdir -p /usr/share/kibana/data/
                       # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
 
 
@@ -313,8 +324,9 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
                         - <id>:
                            url: http(s)://<api_url>
                            port: <api_port>
-                           user: <api_user>
+                           username: <api_user>
                            password: <api_password>
+                           run_as: false
 
                     The following values need to be replaced:
 
@@ -386,7 +398,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
     .. code-block:: console
 
-      # chown -R kibana:kibana /usr/share/kibana/optimize
+      # chown -R kibana:kibana /usr/share/kibana/data
       # chown -R kibana:kibana /usr/share/kibana/plugins
 
 #. Install the Wazuh Kibana plugin:
@@ -398,14 +410,14 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.0_7.9.1-1.zip
+          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
 
       .. group-tab:: From the package
 
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
 
 
 
@@ -413,8 +425,8 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
 
     .. code-block:: console
 
-      # sudo chown kibana:kibana /usr/share/kibana/optimize/wazuh/config/wazuh.yml
-      # sudo chmod 600 /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+      # sudo chown kibana:kibana /usr/share/kibana/data/wazuh/config/wazuh.yml
+      # sudo chmod 600 /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 #. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
 
