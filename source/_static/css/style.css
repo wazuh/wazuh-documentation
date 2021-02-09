@@ -2390,7 +2390,7 @@ label {
 	background-color: #e8e8e8;
 }
 
-.admonition ul, .admonition ol {
+.admonition ul, .admonition ol {
   padding-top: 1rem;
   padding-right: 1rem;
   padding-bottom: 0;
@@ -2859,7 +2859,42 @@ div.highlight pre {
   display: none;
 }
 
+#rst-content {
+  position:relative;
+} 
+
+#rst-content:after {
+  content: "";
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  -webkit-transition: opacity 0.6s ease-in-out;
+  -moz-transition: opacity 0.6s ease-in-out;
+  -o-transition: opacity 0.6s ease-in-out;
+} 
+
+#rst-content.deprecated-content:after {
+  background: url(../img/deprecated-pic.png) no-repeat;
+  background-size: contain;
+  opacity: 1;
+	height: auto;
+  padding-bottom: 54%;
+  margin-bottom: 30px;
+  width: 100%;
+  position: relative;
+	display: block;
+  max-width: 960px;
+	background-position: center;
+}
+
 @media (min-width:576px){
+	
+	/* #rst-content:before { */
+		/* width: calc(100% - 30px); */
+		/* max-width: 400px; */
+		/* height: 100%; */
+		/* margin: 0 auto; */
+		/* background-position: 0 280px; */
+	/* }  */
 
   #capabilities .right .topic p:not(.topic-title) {
     font-size: 1rem;
@@ -3689,6 +3724,11 @@ div.highlight pre {
 }
 
 @media (min-width: 1440px) {
+	
+	#rst-content.deprecated-content:after {
+		height: 540px;
+		padding-bottom: 0;
+	}
 
 	#capabilities .left .topic .topic-title {
 		font-size: 1.1rem;

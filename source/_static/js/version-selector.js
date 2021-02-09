@@ -13,43 +13,43 @@ jQuery(function($) {
   * 2. FUNC: Adds the current version to the selector button
   *    - checkCurrentVersion()
   *
-  * 3. FUNC: Adds the notice "Latest version
-  *    - checkLatestDocs()
-  *
-  * 4. FUNC: Creates the correct links to all the releases
+  * 3. FUNC: Creates the correct links to all the releases
   *    - addVersions()
   *
-  *    | 5. FUNC: Normalize a given URL so it comply with a standard format
+  *    | 3.1. FUNC: Normalize a given URL so it comply with a standard format
   *    |    - normalizeUrl()
   *    |
-  *    | 6. FUNC: Get the redirection history
+  *    | 3.2. FUNC: Get the redirection history
   *    |    - getRedirectionHistory()
   *
-  *         | 7. FUNC: Get the release key number
+  *         | 3.2.1. FUNC: Get the release key number
   *         |    - getReleaseNum()
   *         |
-  *         | 8. FUNC: Return redirections about a URL
+  *         | 3.2.2. FUNC: Return redirections about a URL
   *         |    - getInfoRedirectUrl()
   *         |
-  *         | 9. FUNC: Get the logic of the redirects
+  *         | 3.2.3. FUNC: Get the logic of the redirects
   *         |    - getLogicRedirects()
   *         |
-  *         | 10. FUNC: Find the all the URLs
+  *         | 3.2.4. FUNC: Find the all the URLs
   *         |    - fillUrls()
   *
-  *              | 11. FUNC: Find the following URL
+  *              | 3.2.4.1. FUNC: Find the following URL
   *              |    - findNextUrl()
   *              |
-  *              | 12. FUNC: Find the previous URL
+  *              | 3.2.4.2. FUNC: Find the previous URL
   *              |    - findPrevUrl()
   *
-  *         | 13. FUNC: Return the release when a URL is new
+  *         | 3.2.5. FUNC: Return the release when a URL is new
   *         |    - getInfoNewsUrl()
   *         |
-  *         | 14. FUNC: Return the release when a URL was removed
+  *         | 3.2.6. FUNC: Return the release when a URL was removed
   *         |    - getInfoRemovedUrl()
   *
-  * 15. FUNC: Initialize the tooltip of bootstrap
+  * 4. FUNC: Adds the notice "Latest version
+  *    - checkLatestDocs()
+  *
+  * 5. FUNC: Initialize the tooltip of bootstrap
   *    - tooltip()
   *
   */
@@ -79,14 +79,14 @@ jQuery(function($) {
   /* Adds the current version to the selector button */
   checkCurrentVersion();
 
-  /* Adds the notice "Latest version" */
-  checkLatestDocs();
-
   /* Creates the correct links to all the releases */
-  const documentHistory = addVersions();
+  let documentHistory = addVersions();
   $(window).on('hashchange', function() {
-    addVersions();
+    documentHistory = addVersions();
   });
+
+  /* Adds the notice "Latest version" */
+  checkLatestDocs(documentHistory);
 
   /* Get proper path for the canonical */
   const documentInReleases = Object.keys(documentHistory);
@@ -131,31 +131,33 @@ jQuery(function($) {
     * Shows a warning message to the user if current doc version is not the latest version.
     * Note: For this to work, it requires the documentation version variable (in file conf.py)
     * and the array of versions (in this script) to be updated.
+		* @param {Object} redirHistory Javascript object containing the corresponding path of the current page in every release.
     */
-  function checkLatestDocs() {
+  function checkLatestDocs(redirHistory) {
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    let latestVersion = currentVersion;
+    const latestVersion = currentVersion;
     let page = '';
     if ( thisVersion !== latestVersion ) {
-      const pageID = document.querySelector('#page');
-      pageID.classList.add('no-latest-docs');
-    } else {
-      latestVersion = 'current';
-    }
+      const pageElement = document.querySelector('#page');
+      pageElement.classList.add('no-latest-docs');
+      /* Updates link to the latest version with the correct path */
+      page = document.location.pathname;
+      if ( page[page.length-1] == '/') {
+        page = page+'index.html';
+      }
+      if ( page.indexOf(thisVersion) != -1 ) {
+        page = page.split('/'+thisVersion)[1];
+      } else if ( page.indexOf('current') != -1 ) {
+        page = page.split('/current')[1];
+      }
 
-    /* Updates link to the latest version with the correct path */
-    page = document.location.pathname;
-    if ( page[page.length-1] == '/') {
-      page = page+'index.html';
+      const link = document.querySelector('.link-latest');
+			let targetURL = 'https://' + window.location.hostname + '/current';
+			if ( documentHistory.hasOwnProperty(latestVersion) ) {
+				targetURL = targetURL + redirHistory[latestVersion];
+			}
+      link.setAttribute('href', targetURL);
     }
-    if ( page.indexOf(thisVersion) != -1 ) {
-      page = page.split('/'+thisVersion)[1];
-    } else if ( page.indexOf('current') != -1 ) {
-      page = page.split('/current')[1];
-    }
-
-    const link = document.querySelector('.link-latest');
-    link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
   }
 
   /**
