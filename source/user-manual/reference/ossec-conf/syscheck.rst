@@ -455,7 +455,7 @@ Sets the maximum number of files scanned per second. If this option is set to 0,
 +--------------------+---------------------------------------------------------+
 | **Default value**  | 0                                                       |
 +--------------------+---------------------------------------------------------+
-| **Allowed values** | Integer positive number. 0 mean no limit.               |
+| **Allowed values** | Integer positive number. 0 means no limit.              |
 +--------------------+---------------------------------------------------------+
 
 Example:
