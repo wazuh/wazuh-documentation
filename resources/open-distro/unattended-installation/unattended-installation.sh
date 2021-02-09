@@ -33,6 +33,10 @@ logger() {
     
 }
 
+rollBack() {
+
+}
+
 checkArch() {
     arch=$(uname -m)
 
@@ -340,6 +344,49 @@ installKibana() {
 
         logger "Done"
     fi
+
+}
+
+checkInstalled() {
+    
+    if [ "${sys_type}" == "yum" ]; then
+        wazuhinstalled=$(yum list installed 2>/dev/null | grep wazuh-manager)
+    elif [ "${sys_type}" == "zypper" ]; then
+        wazuhinstalled=$(zypper packages --installed | grep wazuh-manager | grep i+)
+    elif [ "${sys_type}" == "apt-get" ]; then
+        wazuhinstalled=$(apt list --installed  2>/dev/null | grep wazuh-manager)
+    fi    
+
+    if [ -n "${wazuhinstalled}" ]; then
+        echo "hola"
+        echo $wazuhinstalled
+    fi
+
+    if [ "${sys_type}" == "yum" ]; then
+        odinstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch)
+    elif [ "${sys_type}" == "zypper" ]; then
+        odinstalled=$(zypper packages --installed | grep opendistroforelasticsearch | grep i+ | grep noarch)
+    elif [ "${sys_type}" == "apt-get" ]; then
+        odinstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch)
+    fi 
+
+    if [ -n "${odinstalled}" ]; then
+        echo "hola"
+        echo $odinstalled
+    fi
+
+    if [ "${sys_type}" == "yum" ]; then
+        kibanainstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch-kibana)
+    elif [ "${sys_type}" == "zypper" ]; then
+        kibanainstalled=$(zypper packages --installed | grep opendistroforelasticsearch-kibana | grep i+)
+    elif [ "${sys_type}" == "apt-get" ]; then
+        kibanainstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch-kibana)
+    fi 
+
+    if [ -n "${kibanainstalled}" ]; then
+        echo "hola"
+        echo $kibanainstalled
+    fi    
 
 }
 
