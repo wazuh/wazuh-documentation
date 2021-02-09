@@ -358,7 +358,11 @@ checkInstalled() {
     fi    
 
     if [ -n "${wazuhinstalled}" ]; then
-        echo $wazuhinstalled
+        if [ ${sys_type} == "zypper" ]; then
+            wazuhversion=$(echo ${wazuhinstalled} | awk '{print $11}')
+        else
+            wazuhversion=$(echo ${wazuhinstalled} | awk '{print $2}')
+        fi    
     fi
 
     if [ "${sys_type}" == "yum" ]; then
@@ -370,7 +374,11 @@ checkInstalled() {
     fi 
 
     if [ -n "${odinstalled}" ]; then
-        echo $odinstalled
+        if [ ${sys_type} == "zypper" ]; then
+            odversion=$(echo ${odinstalled} | awk '{print $11}')
+        else
+            odversion=$(echo ${odinstalled} | awk '{print $2}')
+        fi  
     fi
 
     if [ "${sys_type}" == "yum" ]; then
@@ -382,7 +390,11 @@ checkInstalled() {
     fi 
 
     if [ -n "${kibanainstalled}" ]; then
-        echo $kibanainstalled
+        if [ ${sys_type} == "zypper" ]; then
+            kibanaversion=$(echo ${kibanainstalled} | awk '{print $11}')
+        else
+            kibanaversion=$(echo ${kibanainstalled} | awk '{print $2}')
+        fi  
     fi    
 
 }
