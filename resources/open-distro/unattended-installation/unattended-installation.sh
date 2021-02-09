@@ -358,7 +358,6 @@ checkInstalled() {
     fi    
 
     if [ -n "${wazuhinstalled}" ]; then
-        echo "hola"
         echo $wazuhinstalled
     fi
 
@@ -371,7 +370,6 @@ checkInstalled() {
     fi 
 
     if [ -n "${odinstalled}" ]; then
-        echo "hola"
         echo $odinstalled
     fi
 
@@ -384,7 +382,6 @@ checkInstalled() {
     fi 
 
     if [ -n "${kibanainstalled}" ]; then
-        echo "hola"
         echo $kibanainstalled
     fi    
 
