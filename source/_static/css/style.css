@@ -588,6 +588,90 @@ header .menuweb-bar .menu-item a {
   background-repeat: repeat-x;
 }
 
+.deployment-types {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 3rem;
+  margin: 2rem auto;
+}
+
+.deployment-types .item-deployment {
+  border: 1px solid #0094ce;
+  border-radius: 3rem;
+  padding: 1rem;
+}
+
+.deployment-types .item-deployment h3 {
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(40, 40, 40, 0.2);
+  padding: 0.5rem;
+}
+
+.deployment-types .item-deployment .detailed img {
+  position: absolute;
+  z-index: 99;
+  width: 100% !important;
+  opacity: 0;  
+  border: none
+}
+
+.agent-os {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem auto;
+  grid-gap: 1rem;
+}
+
+.agent-os .item-agent {
+  border: 1px solid #0094ce;
+  border-radius: 2em;
+  padding: 0;
+  position: relative;
+}
+
+.agent-os #solaris-logo img {
+  max-height: 100px;
+}
+
+.agent-os .item-agent a:hover {
+  border-bottom: none !important;
+}
+
+.agent-os .item-agent p {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+
+.agent-os .item-agent img {
+  margin-bottom: 0 !important;
+}
+
+.agent-os .item-agent:hover {
+  background: #0094ce;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover p {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover img {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.agent-os .item-agent:hover {
+  border: none;
+}
+
 .content-card {
   margin-bottom: 0.5em;
 }
@@ -922,7 +1006,7 @@ li.toctree-l5 > a {
 	border-top: 1px solid rgba(59, 59, 59, 0.08);
 }
 
-#globaltoc li:last-child {
+#globaltoc :not(#link-to-guide) li:last-child {
 	border-bottom: 1px solid rgba(59, 59, 59, 0.0);
 }
 
@@ -1462,6 +1546,14 @@ footer a:focus,
   padding: 0;
 }
 
+.screenshots#deployment-types img{
+  border: none;
+}
+
+.screenshots#deployment-types {
+  margin-bottom: 2rem;
+}
+
 main li.toctree-l1 a {
   color: #0094ce;
 }
@@ -1968,6 +2060,10 @@ a[data-lightbox] img {
 }
 /* Fix lightbox styles end here */
 
+.index .central-page-area #main-content #rst-content {
+  overflow-anchor: none;
+}
+
 .central-page-area #main-content #rst-content {
   min-height: calc(105vh);
   padding: 0 15px;
@@ -2294,7 +2390,7 @@ label {
 	background-color: #e8e8e8;
 }
 
-.admonition ul, .admonition ol {
+.admonition ul, .admonition ol {
   padding-top: 1rem;
   padding-right: 1rem;
   padding-bottom: 0;
@@ -2763,10 +2859,58 @@ div.highlight pre {
   display: none;
 }
 
+#rst-content {
+  position:relative;
+} 
+
+#rst-content:after {
+  content: "";
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  -webkit-transition: opacity 0.6s ease-in-out;
+  -moz-transition: opacity 0.6s ease-in-out;
+  -o-transition: opacity 0.6s ease-in-out;
+} 
+
+#rst-content.deprecated-content:after {
+  background: url(../img/deprecated-pic.png) no-repeat;
+  background-size: contain;
+  opacity: 1;
+	height: auto;
+  padding-bottom: 54%;
+  margin-bottom: 30px;
+  width: 100%;
+  position: relative;
+	display: block;
+  max-width: 960px;
+	background-position: center;
+}
+
 @media (min-width:576px){
+	
+	/* #rst-content:before { */
+		/* width: calc(100% - 30px); */
+		/* max-width: 400px; */
+		/* height: 100%; */
+		/* margin: 0 auto; */
+		/* background-position: 0 280px; */
+	/* }  */
 
   #capabilities .right .topic p:not(.topic-title) {
     font-size: 1rem;
+  }
+
+  .deployment-types {
+    width: 80%;
+    grid-template-columns: 35% 65%
+  }
+
+  .deployment-types #distributed .detailed img {
+    height: 27rem !important;
+  }
+
+  .agent-os {
+    grid-template-columns: repeat(6, 1fr);
   }
 
   .edit-repo-wrapper {
@@ -3195,7 +3339,7 @@ div.highlight pre {
         padding-right: 15px;
       }
 
-      #globaltoc > nav > ul {
+      #globaltoc > nav > ul:not(#link-to-guide) {
         border-bottom: 1px solid rgba(59, 59, 59, 0.08);
       }
 
@@ -3212,7 +3356,7 @@ div.highlight pre {
         padding-right: 0;
       }
 
-      .index #globaltoc > nav > ul {
+      .index #globaltoc > nav > ul:not(#link-to-guide) {
         border-bottom: 1px solid transparent;
       }
 
@@ -3540,6 +3684,10 @@ div.highlight pre {
             border-top-left-radius: 5px;
           }
 
+          .deployment-types .item-deployment h3 {
+            font-size: 18px;
+          }
+
 					#header-default .search_main {
 						margin-left: 345px;
 					}
@@ -3576,6 +3724,11 @@ div.highlight pre {
 }
 
 @media (min-width: 1440px) {
+	
+	#rst-content.deprecated-content:after {
+		height: 540px;
+		padding-bottom: 0;
+	}
 
 	#capabilities .left .topic .topic-title {
 		font-size: 1.1rem;
@@ -3589,7 +3742,12 @@ div.highlight pre {
 		width: 100%;
 		max-width: calc(100% - 316px);
 		flex: none;
-	}
+  }
+  
+  .deployment-types .item-deployment h3 {
+    font-size: 23px;
+  }
+
 }
 
 @media (min-width: 1921px) {
