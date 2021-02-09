@@ -60,6 +60,8 @@ This reference also contains a set of default roles and policies that can be imm
 
     - `Decoders`_
         - `decoders:read`_
+        - `decoders:update`_
+        - `decoders:delete`_
 
     - `Group`_
         - `group:create`_
@@ -126,7 +128,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `ciscat_read`_
     - `cluster_all`_
     - `cluster_read`_
-    - `decoders_read`_
+    - `decoders_all`_
     - `lists_read`_
     - `logtest_all`_
     - `mitre_read`_
@@ -199,7 +201,7 @@ node:id
 | **Example**     | node:id:worker1                    |
 +-----------------+------------------------------------+
 
-`file:path`
+file:path
 ^^^^^^^^^^^^^
 
 +-----------------+-------------------------------------------+
@@ -403,8 +405,16 @@ decoders:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /decoders <operation/api.controllers.decoder_controller.get_decoders>` (`decoder:file`_)
 - :api-ref:`GET /decoders/files <operation/api.controllers.decoder_controller.get_decoders_files>` (`decoder:file`_)
-- :api-ref:`GET /decoders/files/{filename}/download <operation/api.controllers.decoder_controller.get_download_file>` (`decoder:file`_)
+- :api-ref:`GET /decoders/files/{filename} <operation/api.controllers.decoder_controller.get_file>` (`decoder:file`_)
 - :api-ref:`GET /decoders/parents <operation/api.controllers.decoder_controller.get_decoders_parents>` (`decoder:file`_)
+
+decoders:update
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /decoders/files/{filename} <operation/api.controllers.decoder_controller.put_file>` (`*:*`_)
+
+decoders:delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /decoders/files/{filename} <operation/api.controllers.decoder_controller.delete_file>` (`decoder:file`_)
 
 Group
 ^^^^^^^^^^^^^^^
@@ -530,17 +540,17 @@ rules:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /rules <operation/api.controllers.rule_controller.get_rules>` (`rule:file`_)
 - :api-ref:`GET /rules/files <operation/api.controllers.rule_controller.get_rules_files>` (`rule:file`_)
-- :api-ref:`GET /rules/files/{filename} <operation/api.controllers.rule_controller.get_rule_file>` (`rule:file`_)
+- :api-ref:`GET /rules/files/{filename} <operation/api.controllers.rule_controller.get_file>` (`rule:file`_)
 - :api-ref:`GET /rules/groups <operation/api.controllers.rule_controller.get_rules_groups>` (`rule:file`_)
 - :api-ref:`GET /rules/requirement/{requirement} <operation/api.controllers.rule_controller.get_rules_requirement>` (`rule:file`_)
 
 rules:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.upload_rule_file>` (`*:*`_)
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.put_file>` (`*:*`_)
 
 rules:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_rule_file>` (`rule:file`_)
+- :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_file>` (`rule:file`_)
 
 
 SCA
@@ -785,6 +795,22 @@ Resources
 Effect
     - allow
 
+decoders_all
+^^^^^^^^^^^^^^^
+Allow managing all decoder files in the system.
+
+Actions
+    - `decoders:read`_
+    - `decoders:update`_
+    - `decoders:delete`_
+
+Resources
+    - ``decoder:file:*``
+    - ``*:*:*``
+
+Effect
+    - allow
+
 lists_read
 ^^^^^^^^^^^^^^^
 Allow reading all list paths in the system.
@@ -860,8 +886,6 @@ Allow reading all rule files in the system.
 
 Actions
     - `rules:read`_
-    - `rules:update`_
-    - `rules:delete`_
 
 Resources
     - ``rules:file:*``
@@ -875,9 +899,12 @@ Allow managing all rule files in the system.
 
 Actions
     - `rules:read`_
+    - `rules:update`_
+    - `rules:delete`_
 
 Resources
     - ``rules:file:*``
+    - ``*:*:*``
 
 Effect
     - allow
@@ -1007,7 +1034,7 @@ Policies
     - `agents_commands`_
     - `ciscat_read`_
     - `cluster_all`_
-    - `decoders_read`_
+    - `decoders_all`_
     - `lists_read`_
     - `logtest_all`_
     - `mitre_read`_
