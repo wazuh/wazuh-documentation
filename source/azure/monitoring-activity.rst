@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _azure_monitoring_activity:
 
@@ -126,7 +126,7 @@ Next will see the options we have to configure for the Wazuh integration.
 5. azure-logs configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.1 - Proceed to configure the ``azure-logs`` wodle in the Wazuh manager. We will use the data that we took previously as the **key and ID of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace ID**. Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we add a representative ``tag`` and we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
+5.1 - Proceed to configure the ``azure-logs`` wodle in the Wazuh manager. We will use the data that we took previously as the **key and ID of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace ID**. Through the following configuration, Wazuh is ready to search for any `query <https://dev.loganalytics.io/documentation/overview>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we add a representative ``tag`` and we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
 
 .. note:: When we choose to use a file for authentication, its content must be ``field = value``. For example:
 

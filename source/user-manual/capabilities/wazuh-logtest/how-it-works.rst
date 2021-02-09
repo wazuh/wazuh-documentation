@@ -70,7 +70,7 @@ The output of Wazuh-logtest from the above record is as follows:
                     tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
             **Alert to be generated.
 
-As in Ossec-Logtest this indicates that rule 5710 level 5 matches and an alert is generated.
+This indicates that rule 5710 level 5 matches and an alert is generated.
 If the log is pasted 8 times, in the filtering phase (rules) the 'firedtime' counter will increase until it reaches 8.
 Then rule 5712 matches level 10 is triggered by the frequency of rule 5710 and an alert is generated:
 

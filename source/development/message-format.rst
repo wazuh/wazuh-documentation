@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _message-format:
 
@@ -167,17 +167,17 @@ The compressed data is a byte array that must:
 1. Have a size multiple of 8.
 2. Start with one or more ``!``.
 
-So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has asize multiple of 8. ::
+So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting of appending both ``<Padding>`` and ``<CData>`` has a size multiple of 8. ::
 
     <Padding> = 1..8 "!"
-    Length(<Padding> <Block>) = 0 (mod 8)
+    Length(<Padding> <CData>) = 0 (mod 8)
 
 Encrypted data
 ++++++++++++++
 
 The padded data is encrypted using AES::
 
-    <Encrypted> = AES(<Padding> <Block>)
+    <Encrypted> = AES(<Padding> <CData>)
 
 The initialization vector and the encryption key are described in `Encryption system`_.
 

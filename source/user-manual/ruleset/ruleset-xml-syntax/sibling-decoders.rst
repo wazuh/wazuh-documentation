@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _sibling_decoders:
 
@@ -63,7 +63,7 @@ A simple decoder may be:
     <order>type,srcuser,action,dstuser</order>
   </decoder>
 
-Using `/var/ossec/bin/ossec-logtest` we get:
+Using `/var/ossec/bin/wazuh-logtest` we get:
 
 .. code-block:: none
   :class: output

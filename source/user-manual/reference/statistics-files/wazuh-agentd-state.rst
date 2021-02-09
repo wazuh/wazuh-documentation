@@ -1,11 +1,13 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec_agentd_state_file:
+.. _wazuh_agentd_state_file:
 
-ossec-agentd.state
+wazuh-agentd.state
 ==================
 
-The statistical file for **ossec-agentd** is located at ``/var/ossec/var/run/ossec-agentd.state``.
+.. versionadded:: 4.2
+
+The statistical file for **wazuh-agentd** is located at ``/var/ossec/var/run/wazuh-agentd.state``.
 
 This file provides information about the agent as the number of generated events, last connection, agent status and some other useful information.
 
@@ -19,7 +21,7 @@ Below there is an example of the content of the file:
 
 .. code-block:: pkgconfig
 
-    # State file for ossec-agentd
+    # State file for wazuh-agentd
 
     # Agent status:
     # - pending:      waiting for get connected.

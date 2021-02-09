@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Wazuh manager sources installation
 
@@ -194,12 +194,11 @@ Filebeat is a data shipping tool that is installed on the Wazuh server to secure
 Uninstall
 ~~~~~~~~~
 
-To uninstall Wazuh manager:
+To uninstall Wazuh manager, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
-      # OSSEC_INIT="/etc/ossec-init.conf"
-      # . $OSSEC_INIT 2> /dev/null
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
 Stop the service:
 
@@ -211,13 +210,13 @@ Stop the daemon:
 
   .. code-block:: console
 
-    # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+    # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-Remove files and service artifacts:
+Remove the installation folder and all its content:
 
   .. code-block:: console
 
-    # rm -rf $DIRECTORY $OSSEC_INIT
+    # rm -rf $WAZUH_HOME
 
 Delete the service:
 
@@ -225,7 +224,7 @@ Delete the service:
 
     .. code-block:: console
 
-      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
+      # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
       # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
 
   For Systemd:

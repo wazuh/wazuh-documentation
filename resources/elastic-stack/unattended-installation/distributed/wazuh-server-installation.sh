@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Program to install Wazuh server
-# Copyright (C) 2015-2020, Wazuh Inc.
+# Copyright (C) 2015-2021, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -26,6 +26,15 @@ logger() {
 
     echo $1
 
+}
+
+checkArch() {
+    arch=$(uname -m)
+
+    if [ ${arch} != "x86_64" ]; then
+        echo "Uncompatible system. This script must be run on a 64-bit system."
+        exit 1;
+    fi
 }
 
 startService() {
@@ -246,13 +255,13 @@ installFilebeat() {
 
     if [ $sys_type == "yum" ]
     then
-        eval "yum install filebeat-7.9.2 -y -q  $debug"
-    elif [ $sys_type == "zypper" ]
+        eval "yum install filebeat-7.9.3 -y -q  $debug"    
+    elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.9.2 $debug"
-    elif [ $sys_type == "apt-get" ]
+        eval "zypper -n install filebeat-7.9.3 $debug"
+    elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.9.2 -y -q  $debug"
+        eval "apt-get install filebeat=7.9.3 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -385,7 +394,10 @@ main() {
         if [ "$EUID" -ne 0 ]; then
             echo "This script must be run as root."
             exit 1;
-        fi        
+        fi 
+
+        checkArch
+               
         if [ -n "$d" ]
         then
             debug=""

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _upgrading_wazuh_agent:
 
@@ -11,19 +11,38 @@ To perform the upgrade locally, follow the instructions for the operating system
 
 .. tabs::
 
-  .. group-tab:: YUM
+  .. group-tab:: Yum
 
+    #. Import the GPG key:
 
-    #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
+       .. code-block:: console
 
-        .. code-block:: console
+        # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-          # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+    #. Add the repository:
+
+       .. code-block:: console
+
+         # cat > /etc/yum.repos.d/wazuh.repo << EOF
+         [wazuh]
+         gpgcheck=1
+         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         enabled=1
+         name=EL-$releasever - Wazuh
+         baseurl=https://packages.wazuh.com/4.x/yum/
+         protect=1
+         EOF 
+
+    #. Clean the YUM cache:
+
+       .. code-block:: console
+
+         # yum clean all  
 
 
     #. Upgrade the Wazuh agent to the latest version:
 
-        .. code-block:: console
+       .. code-block:: console
 
           # yum upgrade wazuh-agent
 
@@ -37,11 +56,17 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: APT
 
-    #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package. Skip this step if the package is set to a ``hold`` state instead of disabling the repository:
+    #. Install the GPG key:
 
-        .. code-block:: console
+       .. code-block:: console
 
-          # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+
+    #. Add the repository:
+
+       .. code-block:: console
+
+         # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 
     #. Upgrade the Wazuh agent to the latest version:
@@ -62,11 +87,25 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: ZYpp
 
-    #. If the Wazuh repository is disabled it is necessary to enable it to get the latest package:
+    #. Import the GPG key:
 
-        .. code-block:: console
+       .. code-block:: console
 
-          # sed -i "s/^enabled=0/enabled=1/" /etc/zypp/repos.d/wazuh.repo
+         # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+    #. Add the repository:
+
+       .. code-block:: console
+
+         # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+         [wazuh]
+         gpgcheck=1
+         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         enabled=1
+         name=EL-$releasever - Wazuh
+         baseurl=https://packages.wazuh.com/4.x/yum/
+         protect=1
+         EOF 
 
 
     #. Upgrade the Wazuh agent to the latest version:
@@ -136,7 +175,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control stop
+          # /var/ossec/bin/wazuh-control stop
 
     
     #. After that, upgrade the Wazuh agent. Choose one option depending on the host architecture:
@@ -158,7 +197,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control start
+          # /var/ossec/bin/wazuh-control start
 
 
   .. group-tab:: Solaris 10
@@ -169,7 +208,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control stop
+          # /var/ossec/bin/wazuh-control stop
 
 
     #. Backup the ``ossec.conf`` configuration file:
@@ -214,7 +253,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control start
+          # /var/ossec/bin/wazuh-control start
 
 
   .. group-tab:: HP-UX
@@ -225,7 +264,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
           .. code-block:: console
 
-            # /var/ossec/bin/ossec-control stop
+            # /var/ossec/bin/wazuh-control stop
 
 
       #. Backup the ``ossec.conf`` configuration file:
@@ -257,10 +296,10 @@ To perform the upgrade locally, follow the instructions for the operating system
 
           .. code-block:: console
 
-            # /var/ossec/bin/ossec-control start
+            # /var/ossec/bin/wazuh-control start
 
 
-Once the Wazuh agent is upgraded, if it still uses UPD, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:
+Once the Wazuh agent is upgraded, if it still uses UDP, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:
 
 .. code-block:: console
   :emphasize-lines: 6

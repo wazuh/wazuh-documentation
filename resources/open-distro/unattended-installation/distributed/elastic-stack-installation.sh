@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Program toinstall Open Distro for Elasticsearch and Kibana
-# Copyright (C) 2015-2020, Wazuh Inc.
+# Copyright (C) 2015-2021, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -22,6 +22,15 @@ fi
 ## Prints information
 logger() {
     echo $1
+}
+
+checkArch() {
+    arch=$(uname -m)
+
+    if [ ${arch} != "x86_64" ]; then
+        echo "Uncompatible system. This script must be run on a 64-bit system."
+        exit 1;
+    fi
 }
 
 startService() {
@@ -107,12 +116,26 @@ installPrerequisites() {
         eval "yum install java-11-openjdk-devel -y -q ${debug}"
         if [ "$?" != 0 ]; then
             os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
-            if [ -z "$os" ]; then
+            if [ -z "${os}" ]; then
                 os="centos"
             fi
-            echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-            conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
-            echo "${conf}" > /etc/yum.repos.d/adoptopenjdk.repo
+            lv=$(cat /etc/os-release | grep  'PRETTY_NAME="')
+            rm="PRETTY_NAME="
+            rmc='"'
+            ral="Amazon Linux "
+            lv="${lv//$rm}"
+            lv="${lv//$rmc}"
+            lv="${lv//$ral}"
+            lv=$(echo "$lv" | awk '{print $1;}')
+            if [ ${lv} == "2" ]; then
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/2/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+            elif [ ${lv} == "AMI" ]; then
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/1/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+            else
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+                conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
+                echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
+            fi
             eval "yum install adoptopenjdk-11-hotspot -y -q ${debug}"
         fi
         export JAVA_HOME=/usr/
@@ -418,7 +441,7 @@ installKibana() {
     else
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.1_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
@@ -580,6 +603,8 @@ main() {
             echo "This script must be run as root."
             exit 1;
         fi
+
+        checkArch
 
         if [ -n "${debugEnabled}" ]; then
             debug=""

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _pci_dss_policy_monitoring:
 
@@ -10,7 +10,7 @@ The rootcheck module can be used to enforce and monitor your security policy. Th
 There are several PCI DSS requirements to verify that systems are properly hardened. An example would be:
 
   | **2.2**: Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards.
-  | Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).
+  | Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), National Institute of Standards Technology (NIST).
   |
 
 Wazuh includes out-of-the-box, CIS baselines for Debian and Red Hat.  Other baselines could be created for other systems or applications as well, just by adding the corresponding rootcheck file:
@@ -69,7 +69,7 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
     :class: output
 
     2016 Jan 29 12:58:02 manager->rootcheck Ending rootcheck scan.
-    2016 Jan 29 13:07:18 manager->ossec-monitord ossec: Ossec started.
+    2016 Jan 29 13:07:18 manager->wazuh-monitord ossec: Ossec started.
     2016 Jan 29 13:08:34 manager->rootcheck Starting rootcheck scan.
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 3 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 4 .

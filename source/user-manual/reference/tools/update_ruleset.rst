@@ -1,9 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _update_ruleset:
 
 update_ruleset
 =================
+
+.. deprecated:: 4.2
 
 The ``update-ruleset`` script updates decoders, rules and rootchecks.
 

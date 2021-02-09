@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kibana_troubleshooting:
 
@@ -81,7 +81,7 @@ Check if Filebeat is reading the ``alerts.json`` file:
 
   # lsof /var/ossec/logs/alerts/alerts.json
 
-There should be two processes reading the ``alerts.json`` file: ``ossec-analysisd`` and ``filebeat``.
+There should be two processes reading the ``alerts.json`` file: ``wazuh-analysisd`` and ``filebeat``.
 
 API version mismatch. Expected vX.Y.Z
 -------------------------------------

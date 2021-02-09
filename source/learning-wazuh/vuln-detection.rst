@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _learning_wazuh_vuln_detection:
 
@@ -315,9 +315,7 @@ The result should look like this:
 4. You can also use the experimental capabilities of the API to list information
    of all agents in the environment. In order to do so it is necessary to enable
    this capability in ``WAZUH_PATH/configuration/api.yaml``. A complete API configuration
-   guide can be found :ref:`here <api_configuration>`. Experimental capabilities
-   can be also enabled by using the following Wazuh API endpoint:
-   :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.put_api_config>`.
+   guide can be found :ref:`here <api_configuration>`.
 
 
 

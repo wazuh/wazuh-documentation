@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kubernetes_conf:
 
@@ -46,51 +46,41 @@ You can check how we build our Wazuh docker containers in our `repository <https
 
 This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) is placed here.
 
-+--------------------------+-------------+
-| Image                    | Controller  |
-+==========================+=============+
-| wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | StatefulSet |
-+--------------------------+-------------+
++-------------------------------+-------------+
+| Image                         | Controller  |
++===============================+=============+
+| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
++-------------------------------+-------------+
 
 **Wazuh worker 0 / 1**
 
 These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
 
-+--------------------------+-------------+
-| Image                    | Controller  |
-+==========================+=============+
-| wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | StatefulSet |
-+--------------------------+-------------+
++-------------------------------+-------------+
+| Image                         | Controller  |
++===============================+=============+
+| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
++-------------------------------+-------------+
 
 **Elasticsearch**
 
 Elasticsearch pod, it ingests events received from Filebeat.
 
-+----------------------------------------+-------------+
-| Image                                  | Controller  |
-+========================================+=============+
-| wazuh/wazuh-elasticsearch:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | StatefulSet |
-+----------------------------------------+-------------+
++--------------------------------------------+-------------+
+| Image                                      | Controller  |
++============================================+=============+
+| amazon/opendistro-for-elasticsearch:|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
++--------------------------------------------+-------------+
 
 **Kibana**
 
 Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 
-+---------------------------------+-------------+
-| Image                           | Controller  |
-+=================================+=============+
-| wazuh/wazuh-kibana:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|  | Deployment  |
-+---------------------------------+-------------+
-
-**Nginx**
-
-Nginx service used as a reverse proxy for Kibana.
-
-+---------------------------------+-------------+
-| Image                           | Controller  |
-+=================================+=============+
-| wazuh/wazuh-nginx:|WAZUH_LATEST_KUBERNETES|_|ELASTICSEARCH_LATEST_KUBERNETES|   | Deployment  |
-+---------------------------------+-------------+
++--------------------------------------+-------------+
+| Image                                | Controller  |
++======================================+=============+
+| wazuh/wazuh-kibana-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | Deployment  |
++--------------------------------------+-------------+
 
 Services
 ^^^^^^^^
@@ -103,8 +93,6 @@ Services
 | wazuh-elasticsearch  | Communication for Elasticsearch nodes.                                              |
 +----------------------+-------------------------------------------------------------------------------------+
 | elasticsearch        | Elasticsearch service. Used by Kibana and Filebeat.                                 |
-+----------------------+-------------------------------------------------------------------------------------+
-| wazuh-nginx          | Service for HTTPS access to Kibana.                                                 |
 +----------------------+-------------------------------------------------------------------------------------+
 | kibana               | Kibana service. The UI for Elasticsearch.                                           |
 +----------------------+-------------------------------------------------------------------------------------+
@@ -148,54 +136,48 @@ Deploy
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
-    3.1. Wazuh namespace and StorageClass
+    3.1. Setup SSL certificates
 
-        The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our *StatefulSet* applications.
+        You can generate self-signed certificates for the ODFE cluster using the script at ``certs/odfe_cluster/generate_certs.sh`` or provide your own.
 
-        .. code-block:: console
-
-            $ kubectl apply -f base/wazuh-ns.yaml
-            $ kubectl apply -f base/aws-gp2-storage-class.yaml
-
-    3.2. Deploy Elasticsearch
+        Since Kibana has HTTPS enabled it will require its own certificates, these may be generated with:
 
         .. code-block:: console
 
-            $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-svc.yaml
-            $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-api-svc.yaml
-            $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
+            $ openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
 
-    3.3. Deploy Kibana and Nginx
+        The required certificates are imported via secretGenerator on the `kustomization.yml` file:
 
-        In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
+        .. code-block:: yaml
+
+            secretGenerator:
+            - name: odfe-ssl-certs
+                files:
+                - certs/odfe_cluster/root-ca.pem
+                - certs/odfe_cluster/node.pem
+                - certs/odfe_cluster/node-key.pem
+                - certs/odfe_cluster/kibana.pem
+                - certs/odfe_cluster/kibana-key.pem
+                - certs/odfe_cluster/admin.pem
+                - certs/odfe_cluster/admin-key.pem
+                - certs/odfe_cluster/filebeat.pem
+                - certs/odfe_cluster/filebeat-key.pem
+            - name: kibana-certs
+                files:
+                - certs/kibana_http/cert.pem
+                - certs/kibana_http/key.pem
+
+    3.2. Apply all manifests using kustomize
+
+        By using the kustomization.yml we can now deploy the whole cluster in a single command.
 
         .. code-block:: console
 
-            $ kubectl apply -f elastic_stack/kibana/kibana-svc.yaml
-            $ kubectl apply -f elastic_stack/kibana/nginx-svc.yaml
+            $ kubectl apply -k .
 
-            $ kubectl apply -f elastic_stack/kibana/kibana-deploy.yaml
-            $ kubectl apply -f elastic_stack/kibana/nginx-deploy.yaml
-
-
-4. Deploy Wazuh
-
-    .. code-block:: console
-
-        $ kubectl apply -f wazuh_managers/wazuh-master-svc.yaml
-        $ kubectl apply -f wazuh_managers/wazuh-cluster-svc.yaml
-        $ kubectl apply -f wazuh_managers/wazuh-workers-svc.yaml
-
-        $ kubectl apply -f wazuh_managers/wazuh-master-conf.yaml
-        $ kubectl apply -f wazuh_managers/wazuh-worker-0-conf.yaml
-        $ kubectl apply -f wazuh_managers/wazuh-worker-1-conf.yaml
-
-        $ kubectl apply -f wazuh_managers/wazuh-master-sts.yaml
-        $ kubectl apply -f wazuh_managers/wazuh-worker-0-sts.yaml
-        $ kubectl apply -f wazuh_managers/wazuh-worker-1-sts.yaml
 
 Verifying the deployment
 ------------------------
@@ -226,7 +208,6 @@ Verifying the deployment
         wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
         wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
         wazuh-elasticsearch   ClusterIP      None             <none>             9300/TCP                         12m
-        wazuh-nginx           LoadBalancer   xxx.yy.zzz.223   internal-a3b1...   80:31831/TCP,443:30974/TCP       11m
         wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
 
 **Deployments**
@@ -240,7 +221,6 @@ Verifying the deployment
 
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
         wazuh-kibana     1         1         1            1           11m
-        wazuh-nginx      1         1         1            1           11m
 
 **Statefulset**
 
@@ -251,11 +231,10 @@ Verifying the deployment
     .. code-block:: none
         :class: output
 
-        NAME                     DESIRED   CURRENT   AGE
-        wazuh-elasticsearch      1         1         13m
-        wazuh-manager-master     1         1         9m
-        wazuh-manager-worker-0   1         1         9m
-        wazuh-manager-worker-1   1         1         9m
+        NAME                   READY   AGE
+        wazuh-elasticsearch    3/3     15m
+        wazuh-manager-master   1/1     15m
+        wazuh-manager-worker   2/2     15m
 
 **Pods**
 
@@ -288,7 +267,7 @@ Verifying the deployment
         :class: output
 
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
-        wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
+        kibana                LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-kibana
 
 .. note::
     `AWS route 53 <https://aws.amazon.com/route53/?nc1=h_ls>`_ can be used to create a DNS that points to the load balancer and make it accessible through that DNS.
@@ -307,4 +286,4 @@ Wazuh agents are designed to monitor hosts. To start using them:
 3. Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and changing the ``MANAGER_IP`` for the external IP of the service pointing to port 1514 or for the DNS provided by *AWS Route 53* if you are using it.
 
 
-4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
+4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.

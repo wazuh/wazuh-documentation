@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install a Wazuh multi-node cluster
 
@@ -61,7 +61,7 @@ Installing the Wazuh manager
 .. tabs::
 
 
-  .. group-tab:: Ym
+  .. group-tab:: Yum
 
 
     .. include:: ../../../../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst

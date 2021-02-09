@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _basic_unattended_distributed_elasticsearch:
 
@@ -211,7 +211,7 @@ Download the script and the configuration file. After downloading them, configur
     
     **Cluster initialization**
 
-      After stating all the nodes, run the following commands to generate the passwords.
+      Once the installation process is done in all the servers of the Elasticsearch cluster, run the following command on the **initial node** to generate credentials for all the Elastic Stack pre-built roles and users:
 
       .. include:: ../../../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst        
 

@@ -1,18 +1,20 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-agentd:
+.. _wazuh-remoted:
 
-ossec-agentd
-============
+wazuh-remoted
+=============
 
-The ossec-agentd program is the client-side daemon that communicates with the server. It runs as user ``ossec``.
+.. versionadded:: 4.2
+
+The wazuh-remoted program is the server side daemon that communicates with the agents.  It runs as ``ossecr`` and is chrooted to ``/var/ossec`` by default.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
-| **-D <dir>**    | Chroot to <dir>. **Deprecated since v3.12.0.**                                                  |
+| **-D <dir>**    | Chroot to <dir>                                                                                 |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec                                          |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
@@ -20,7 +22,7 @@ The ossec-agentd program is the client-side daemon that communicates with the se
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a group.                                                                                 |
+| **-g <group>**  | Run as a specific group.                                                                        |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
@@ -31,4 +33,6 @@ The ossec-agentd program is the client-side daemon that communicates with the se
 |                 | Default value                             | ossecm                                              |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
++-----------------+-------------------------------------------------------------------------------------------------+
+| **-m**          | Avoid creating shared merged file (read only)                                                   |
 +-----------------+-------------------------------------------------------------------------------------------------+

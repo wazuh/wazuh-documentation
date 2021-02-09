@@ -1,11 +1,13 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-monitord:
+.. _wazuh-monitord:
 
-ossec-monitord
+wazuh-monitord
 ==============
 
-The ossec-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
+.. versionadded:: 4.2
+
+The wazuh-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

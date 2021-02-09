@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Wazuh agent sources installation
 
@@ -17,7 +17,7 @@ Installing Wazuh agent from sources
     .. note:: CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
     1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
-       
+
      .. tabs::
 
       .. tab:: Yum
@@ -91,7 +91,8 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss 
+         # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
+
 
 
 
@@ -131,13 +132,12 @@ Installing Wazuh agent from sources
     .. raw:: html
 
        <h2>Uninstall</h2>
-    
-    To uninstall Wazuh agent:
+
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
-      # OSSEC_INIT="/etc/ossec-init.conf"
-      # . $OSSEC_INIT 2> /dev/null
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
     Stop the service:
 
@@ -149,13 +149,13 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove files and service artifacts:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
-     # rm -rf $DIRECTORY $OSSEC_INIT
+     # rm -rf $WAZUH_HOME
 
     Delete the service:
 
@@ -163,7 +163,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-      # [ -f /etc/rc.local ] && sed -i'' '/ossec-control start/d' /etc/rc.local
+      # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
       # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
 
     For Systemd:
@@ -181,13 +181,13 @@ Installing Wazuh agent from sources
      # userdel ossecm 2> /dev/null
      # userdel ossecr 2> /dev/null
      # groupdel ossec 2> /dev/null
- 
-      
-  
+
+
+
   .. group-tab:: Windows
 
     .. note:: The following procedure has been tested on Ubuntu 16.04 and other Debian based distributions and may work with other Debian/Ubuntu versions as well.
- 
+
     1. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
      .. code-block:: console
@@ -249,8 +249,8 @@ Installing Wazuh agent from sources
         <h2>Uninstall</h2>
 
     To uninstall the agent, the original MSI file will be needed to perform the unattended process:
-    
-    .. code-block:: console 
+
+    .. code-block:: console
 
       msiexec.exe /x wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /qn
 
@@ -310,12 +310,11 @@ Installing Wazuh agent from sources
 
         <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
-      # OSSEC_INIT="/etc/ossec-init.conf"
-      # . $OSSEC_INIT 2> /dev/null
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
     Stop the service:
 
@@ -327,13 +326,13 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove files and service artifacts:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
-     # rm -rf $DIRECTORY $OSSEC_INIT
+     # rm -rf $WAZUH_HOME
 
     Delete the service:
 
@@ -349,7 +348,7 @@ Installing Wazuh agent from sources
      # dscl . -delete "/Users/ossecm" > /dev/null 2>&1
      # dscl . -delete "/Users/ossecr" > /dev/null 2>&1
      # dscl . -delete "/Groups/ossec" > /dev/null 2>&1
-    
+
 
 
 
@@ -429,12 +428,11 @@ Installing Wazuh agent from sources
 
         <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
-      # OSSEC_INIT="/etc/ossec-init.conf"
-      # . $OSSEC_INIT 2> /dev/null
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
     Stop the service:
 
@@ -446,13 +444,13 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove files and service artifacts:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
-     # rm -rf $DIRECTORY $OSSEC_INIT
+     # rm -rf $WAZUH_HOME
 
     Delete the service:
 
@@ -476,7 +474,7 @@ Installing Wazuh agent from sources
     .. note:: All the commands described below need to be executed with root user privileges. Since Wazuh 3.5 it is necessary to have internet connection when following this process.
 
     1. Install development tools and compilers.
-   
+
      1.1 Download the ``depothelper-2.10-hppa_32-11.31.depot`` file.
 
       .. code-block:: console
@@ -527,7 +525,7 @@ Installing Wazuh agent from sources
      .. code-block:: console
 
         # cd wazuh-*
-        # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|
+        # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/4.0/
         # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -549,14 +547,13 @@ Installing Wazuh agent from sources
 
     .. raw:: html
 
-       <h2>Uninstall</h2> 
+       <h2>Uninstall</h2>
 
-    To uninstall Wazuh agent:
+    To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
     .. code-block:: console
 
-      # OSSEC_INIT="/etc/ossec-init.conf"
-      # . $OSSEC_INIT 2> /dev/null
+      # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
     Stop the service:
 
@@ -568,13 +565,13 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+     # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-    Remove files and service artifacts:
+    Remove the installation folder and all its content:
 
     .. code-block:: console
 
-     # rm -rf $DIRECTORY $OSSEC_INIT
+     # rm -rf $WAZUH_HOME
 
     Delete the service:
 
@@ -737,14 +734,13 @@ Installing Wazuh agent from sources
 
         .. raw:: html
 
-           <h2>Uninstall</h2> 
-        
-        To uninstall Wazuh agent:
+           <h2>Uninstall</h2>
+
+        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
         .. code-block:: console
 
-         # OSSEC_INIT="/etc/ossec-init.conf"
-         # . $OSSEC_INIT 2> /dev/null
+         # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
         Stop the service:
 
@@ -756,13 +752,13 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+         # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-        Remove files and service artifacts:
+        Remove the installation folder and all its content:
 
         .. code-block:: console
 
-         # rm -rf $DIRECTORY $OSSEC_INIT
+         # rm -rf $WAZUH_HOME
 
         Delete the service:
 
@@ -880,14 +876,13 @@ Installing Wazuh agent from sources
 
         .. raw:: html
 
-           <h2>Uninstall</h2> 
-        
-        To uninstall Wazuh agent:
+           <h2>Uninstall</h2>
+
+        To uninstall Wazuh agent, set WAZUH_HOME with the current installation path:
 
         .. code-block:: console
 
-         # OSSEC_INIT="/etc/ossec-init.conf"
-         # . $OSSEC_INIT 2> /dev/null
+         # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
         Stop the service:
 
@@ -899,13 +894,13 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # $DIRECTORY/bin/ossec-control stop 2> /dev/null
+         # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-        Remove files and service artifacts:
+        Remove the installation folder and all its content:
 
         .. code-block:: console
 
-         # rm -rf $DIRECTORY $OSSEC_INIT
+         # rm -rf $WAZUH_HOME
 
         Delete the service:
 

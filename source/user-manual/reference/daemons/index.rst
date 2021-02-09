@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _daemons:
 
@@ -8,31 +8,31 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | Daemons                                           | Descriptions                                                    | Supported installations     |
 +===================================================+=================================================================+=============================+
-| :doc:`ossec-agentd <ossec-agentd>`                | Client side daemon that communicates with the server.           | agent                       |
+| :doc:`wazuh-agentd <wazuh-agentd>`                | Client side daemon that communicates with the server.           | agent                       |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-agentlessd <ossec-agentlessd>`        | Runs integrity checking on systems where no agent is installed  | manager                     |
+| :doc:`wazuh-agentlessd <wazuh-agentlessd>`        | Runs integrity checking on systems where no agent is installed  | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-analysisd <ossec-analysisd>`          | Receives log messages and compares them to the rules            | manager                     |
+| :doc:`wazuh-analysisd <wazuh-analysisd>`          | Receives log messages and compares them to the rules            | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-authd <ossec-authd>`                  | Adds agents to the Wazuh manager                                | manager                     |
+| :doc:`wazuh-authd <wazuh-authd>`                  | Adds agents to the Wazuh manager                                | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-csyslogd <ossec-csyslogd>`            | Forwards Wazuh alerts via syslog                                | manager                     |
+| :doc:`wazuh-csyslogd <wazuh-csyslogd>`            | Forwards Wazuh alerts via syslog                                | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-dbd <ossec-dbd>`                      | Inserts alert logs into a database                              | manager                     |
+| :doc:`wazuh-dbd <wazuh-dbd>`                      | Inserts alert logs into a database                              | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-execd <ossec-execd>`                  | Executes active responses                                       | manager, agent              |
+| :doc:`wazuh-execd <wazuh-execd>`                  | Executes active responses                                       | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-logcollector <ossec-logcollector>`    | Monitors configured files and commands for new log messages     | manager, agent              |
+| :doc:`wazuh-logcollector <wazuh-logcollector>`    | Monitors configured files and commands for new log messages     | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-maild <ossec-maild>`                  | Sends Wazuh alerts via email                                    | manager                     |
+| :doc:`wazuh-maild <wazuh-maild>`                  | Sends Wazuh alerts via email                                    | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-monitord <ossec-monitord>`            | Monitors agent connectivity and compresses log files            | manager                     |
+| :doc:`wazuh-monitord <wazuh-monitord>`            | Monitors agent connectivity and compresses log files            | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-remoted <ossec-remoted>`              | Communicates with agents                                        | manager                     |
+| :doc:`wazuh-remoted <wazuh-remoted>`              | Communicates with agents                                        | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-reportd <ossec-reportd>`              | Creates reports from Wazuh alerts                               | manager                     |
+| :doc:`wazuh-reportd <wazuh-reportd>`              | Creates reports from Wazuh alerts                               | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-syscheckd <ossec-syscheckd>`          | Checks configured files for security changes                    | manager, agent              |
+| :doc:`wazuh-syscheckd <wazuh-syscheckd>`          | Checks configured files for security changes                    | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-clusterd <clusterd>`                  | Manages the Wazuh cluster manager                               | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
@@ -40,7 +40,7 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-db <wazuh-db>`                        | Manages the Wazuh database                                      | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`ossec-integratord <ossec-integratord>`      | Allows Wazuh to connect to external APIs and alerting tools     | manager                     |
+| :doc:`wazuh-integratord <wazuh-integratord>`      | Allows Wazuh to connect to external APIs and alerting tools     | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 
 
@@ -48,20 +48,20 @@ Daemons
     :hidden:
     :maxdepth: 1
 
-    ossec-agentd
-    ossec-agentlessd
-    ossec-analysisd
-    ossec-authd
-    ossec-csyslogd
-    ossec-dbd
-    ossec-execd
-    ossec-logcollector
-    ossec-maild
-    ossec-monitord
-    ossec-remoted
-    ossec-reportd
-    ossec-syscheckd
+    wazuh-agentd
+    wazuh-agentlessd
+    wazuh-analysisd
+    wazuh-authd
+    wazuh-csyslogd
+    wazuh-dbd
+    wazuh-execd
+    wazuh-logcollector
+    wazuh-maild
+    wazuh-monitord
+    wazuh-remoted
+    wazuh-reportd
+    wazuh-syscheckd
     clusterd
     wazuh-modulesd
     wazuh-db
-    ossec-integratord
+    wazuh-integratord

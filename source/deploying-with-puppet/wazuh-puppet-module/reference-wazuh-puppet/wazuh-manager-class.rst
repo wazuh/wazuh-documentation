@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_wazuh_manager_class:
 
@@ -699,7 +699,7 @@ $wazuh_api_access_max_request_per_minute
   `Default 300`
 
 $wazuh_api_use_only_authd
-  Forces the use of ossec-authd when registering and removing agents.
+  Forces the use of wazuh-authd when registering and removing agents.
 
   `Default false`
 
@@ -936,10 +936,7 @@ $command_name
   Human readable name for wazuh::activeresponse usage.
 
 $command_executable
-  Name of the executable. OSSEC comes preloaded with disable-account.sh, host-deny.sh, ipfw.sh, pf.sh, route-null.sh, firewall-drop.sh, ipfw_mac.sh, ossec-tweeter.sh, restart-ossec.sh.
-
-$command_expect
-  `Default srcip`
+  Name of the executable. WAZUH comes preloaded with disable-account, host-deny, ipfw, pf, route-null, firewall-drop, wazuh-slack, restart-wazuh.
 
 $timeout_allowed
   `Default true`
@@ -954,7 +951,7 @@ $active_response_name
 
 $active_response_disabled
   Toggles the active-response capability on and off.
-  
+
 $active_response_command
   Links the active-response to the command.
 

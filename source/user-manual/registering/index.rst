@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _register_agents:
 
@@ -21,8 +21,8 @@ After the registration, the Wazuh agent has to be configured to indicate the des
 
 .. note::
 
-    - This documentation section can be skipped if the Wazuh agent was deployed using :ref:`Deployment variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`. In those cases, the registration process is different and described in their corresponding sections of the documentation.
-    - If the Wazuh runs in the cluster mode, all the Wazuh agents must be registered in the Wazuh master node, even if the Wazuh agent is going to report to the worker node. After the registration process, the Wazuh agent communication with the Wazuh manager has to be configured as described in the :ref:`agents connections <cluster_agents_connections>` section of the :ref:`deploying the Wazuh cluster <configuring-cluster>` documentation.
+    This documentation section can be skipped if the Wazuh agent was deployed using :ref:`Deployment variables <deployment_variables>`, :ref:`Deployed with Ansible <wazuh_ansible>` or :ref:`Deployed with Puppet <wazuh_puppet>`. In those cases, the registration process is different and described in their corresponding sections of the documentation.
+
 
 .. _simple-registration-service:
 
@@ -72,12 +72,22 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
 
 
     #. To register the Wazuh agent, run the ``agent-auth.exe`` utility, using the Wazuh manager's IP address:
+    
+      .. tabs::
+
+       .. group-tab:: Powershell
 
          .. code-block:: console
 
-           # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <manager_IP>
+          # &'C:\Program Files (x86)\ossec-agent\agent-auth.exe' -m <manager_IP> 
 
-         .. include:: ../../_templates/registrations/common/set_agent_name.rst
+       .. group-tab:: Windows cmd
+
+         .. code-block:: console
+
+          # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <manager_IP>
+
+      .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
     #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.

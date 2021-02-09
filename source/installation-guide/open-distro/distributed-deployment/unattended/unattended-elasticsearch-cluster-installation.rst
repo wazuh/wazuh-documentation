@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _unattended_distributed_elasticsearch:
 
@@ -54,7 +54,7 @@ Download the script and the configuration file. After downloading them, configur
       .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
       .. code-block:: yaml
-        :emphasize-lines: 5, 20, 23
+        :emphasize-lines: 5, 18, 21
 
         ## Single-node configuration
 
@@ -67,9 +67,7 @@ Download the script and the configuration file. After downloading them, configur
         clients:
           - name: admin
             dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-            admin: true
-          - name: kibana
-            dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
+            admin: true 
           - name: filebeat
             dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
 
@@ -114,7 +112,7 @@ Download the script and the configuration file. After downloading them, configur
     - Configure the installation:
 
       .. code-block:: yaml
-        :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 31, 34
+        :emphasize-lines: 5, 8, 9, 10, 13, 14, 15, 29, 32
 
         ## Multi-node configuration
 
@@ -138,9 +136,7 @@ Download the script and the configuration file. After downloading them, configur
         clients:
           - name: admin
             dn: CN=admin,OU=Docu,O=Wazuh,L=California,C=US
-            admin: true
-          - name: kibana
-            dn: CN=kibana,OU=Docu,O=Wazuh,L=California,C=US    
+            admin: true  
           - name: filebeat
             dn: CN=filebeat,OU=Docu,O=Wazuh,L=California,C=US
 
@@ -193,7 +189,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Cluster initialization**
 
-      Once all the nodes on the cluster have been started, run the ``securityadmin`` script to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
+      Once all the nodes on the cluster have been started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
       .. code-block:: console
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _ruleset_custom:
 
@@ -43,7 +43,7 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
   </rule>
 
 
-We can check if it works by using ``/var/ossec/bin/ossec-logtest``:
+We can check if it works by using ``/var/ossec/bin/wazuh-logtest``:
 
 .. code-block:: none
   :class: output

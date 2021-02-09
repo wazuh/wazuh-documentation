@@ -1,9 +1,9 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 Unattended installation
 =======================
 
-This section will explain how to install Wazuh on a single host by using a script that will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages.
+This part of the documentation explains how to install Wazuh on a single host by using a script that will automatically detect whether the operating system uses ``rpm`` or ``deb`` packages.
 The script will perform a health-check verifying that the available system resources meet the minimal requirements. For more information, please visit the :ref:`requirements <installation_requirements>` section.
 
 The script will install Java Development Kit and other packages including ``unzip`` and ``libcap`` required by Open Distro for Elasticsearch. Besides, the Search Guard offline TLS tool will be used to generate the certificates for protecting data in the Elastic Stack.
@@ -16,45 +16,44 @@ Installing Wazuh
 
 #. Download and run the script:
 
-   .. code-block:: console
+  .. code-block:: console
 
     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script.
+  The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script.
 
-   After the execution of the script, it will show the following messages to confirm that the installation was successful:
+  After the execution of the script, it will show the following messages to confirm that the installation was successful:
 
-   .. code-block:: none
-     :class: output
-     
-     Starting the installation...
-     Installing all necessary utilities for the installation...
-     Done
-     Adding the Wazuh repository...
-     Done
-     Installing the Wazuh manager...
-     Done
-     Wazuh-manager started
-     Installing Open Distro for Elasticsearch...
-     Done
-     Configuring Elasticsearch...
-     Certificates created
-     Elasticsearch started
-     Initializing Elasticsearch...
-     Done
-     Installing Filebeat...
-     Filebeat started
-     Done
-     Installing Open Distro for Kibana...
-     Kibana started
-     Done
-     Checking the installation...
-     Elasticsearch installation succeeded.
-     Filebeat installation succeeded.
-     Initializing Kibana (this may take a while)
-     ########
-     Installation finished
+  .. code-block:: none
+    :class: output
 
+    Starting the installation...
+    Installing all necessary utilities for the installation...
+    Done
+    Adding the Wazuh repository...
+    Done
+    Installing the Wazuh manager...
+    Done
+    Wazuh-manager started
+    Installing Open Distro for Elasticsearch...
+    Done
+    Configuring Elasticsearch...
+    Certificates created
+    Elasticsearch started
+    Initializing Elasticsearch...
+    Done
+    Installing Filebeat...
+    Filebeat started
+    Done
+    Installing Open Distro for Kibana...
+    Kibana started
+    Done
+    Checking the installation...
+    Elasticsearch installation succeeded.
+    Filebeat installation succeeded.
+    Initializing Kibana (this may take a while)
+    ########
+    Installation finished
 
 #. Access the web interface: 
 

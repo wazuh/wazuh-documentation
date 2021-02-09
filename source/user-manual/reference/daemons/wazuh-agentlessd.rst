@@ -1,34 +1,30 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-logcollector:
+.. _wazuh-agentlessd:
 
-ossec-logcollector
-==================
+wazuh-agentlessd
+================
 
-The ossec-logcollector program monitors configured files and commands for new log messages.
+.. versionadded:: 4.2
 
-``ossec-logcollector`` is now multi-threaded, achieving an improvement in overall performance. Each of the threads will read the first log that is not already handled by other threads
-and when it finishes reading, it will try to read the next available log (file or command) so that all the threads are always occupied. 
-
-In addition, the interlocking problem that existed in the one-threaded version when it took a long time to read a log while the rest were left unattended, is avoided.
-
-.. warning:: The advantages of the multithreaded logcollector are only available from version 3.6.0 and higher.
-
+The wazuh-agentlessd program allows integrity checks to be run on systems without an agent installed.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Run using <config> as the configuration file.                                                   |
-+                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec/etc/ossec.conf                           |
-+-----------------+-------------------------------------------+-----------------------------------------------------+
+| **-c <config>** | Read the configuration from file <config>                                                       |
++-----------------+-------------------------------------------------------------------------------------------------+
+| **-D <dir>**    | Chroot to <dir>                                                                                 |
++-----------------+-------------------------------------------------------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a specific group.                                                                        |
+| **-g <group>**  | Run as a group.                                                                                 |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
++-----------------+-------------------------------------------------------------------------------------------------+
+| **-u <user>**   | Run as a specific user.                                                                         |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

@@ -1,11 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _cloud_security:
 
 Cloud security monitoring
 =========================
 
-The Wazuh security platform provides threat detection, configuration compliance, and continuous monitoring for multicloud and hybrid environments. It is capable of protecting cloud workloads by monitoring the infrastructure at two different levels:
+The Wazuh security platform provides threat detection, configuration compliance, and continuous monitoring for multicloud and hybrid environments. It protects cloud workloads by monitoring the infrastructure at two different levels:
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
@@ -14,9 +14,9 @@ The Wazuh security platform provides threat detection, configuration compliance,
 Amazon Web Services
 -------------------
 
-On top of its endpoint monitoring capabilities, the :ref:`Wazuh agent <wazuh_agent>` provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
+The :ref:`Wazuh agent <wazuh_agent>` also provides a module to monitor and secure your AWS cloud infrastructure. This module collects AWS services log data from S3 buckets, and forwards collected log messages to the :ref:`Wazuh server <wazuh_server>`, where events are analyzed using out-of-the-box Wazuh rules for AWS. 
 
-The list below describes the AWS services that Wazuh is capable of monitoring:
+The following list describes the AWS services that Wazuh is capable of monitoring:
 
 - :ref:`Amazon Guardduty <amazon_guardduty>`: threat detection service that continuously monitors for malicious activity and unauthorized behavior to protect your AWS accounts, workloads, and data stored in Amazon S3.
 
@@ -26,9 +26,9 @@ The list below describes the AWS services that Wazuh is capable of monitoring:
 
 - :ref:`Amazon Macie <amazon_macie>`: fully managed data security and data privacy service. It automatically detects unencrypted S3 buckets, publicly accessible buckets, and buckets shared with external AWS accounts.
 
-- :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define.
+- :ref:`Amazon Virtual Private Cloud (VPC) <amazon_vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network define by the user.
 
-- :ref:`AWS Config <amazon_config>`: service used to assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired ones.
+- :ref:`AWS Config <amazon_config>`: assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records the AWS resource configurations enabling automation of the evaluation of recorded configurations against the desired ones.
 
 - :ref:`AWS Cloudtrail <amazon_cloudtrail>`: enables governance, compliance, operational auditing, and risk auditing of your AWS account. With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure.
 
@@ -100,20 +100,20 @@ Example of AWS dashboard:
    :align: center
    :width: 100%
 
-More information about how does Wazuh monitor AWS can be found at our :ref:`documentation <amazon>`.
+More information on how Wazuh monitors AWS can be found at our :ref:`documentation <amazon>`.
 
 Microsoft Azure
 ---------------
 
-The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs. More specifically, it is capable of pulling data from the following services:
+The :ref:`Wazuh agent <wazuh_agent>` module for Microsoft Azure makes it easy to pull Azure platform logs.  In particular, it is designed to obtain data from the following services:
 
 - :ref:`Log Analytics API <azure_monitoring_activity>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs that are collected by the Azure monitor service.
 
-- :ref:`Blob Storage API <azure_monitoring_activity>`: Logs from Azure services can optionally be pushed to Azure Blob Storage. More specifically, you can configure an Azure service to export logs to a container in a storage account created for that purpose. Then, the Wazuh agent can download those logs via its integration with the Blob Storage API.
+- :ref:`Blob Storage API <azure_monitoring_activity>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterwards, the Wazuh agent will download those logs via its integration with the Blob Storage API.
 
 - :ref:`Active Directory Graph API <azure_monitoring_services>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g. creation of a new user, update of a user's properties, disable of a user's account, etc.)
 
-Here is an example of rules an Azure alert:
+Here is an example of a rule that Azure alerts.
 
 .. code-block:: json
   :emphasize-lines: 14,16
@@ -158,7 +158,7 @@ More information about how to use Wazuh to monitor Microsoft Azure can be found 
 Google Cloud Platform
 ---------------------
 
-Wazuh is capable of monitoring Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
+Wazuh monitors Google Cloud services by pulling events from the Google Pub/Sub messaging service, which is used as a middleware for events ingestion and delivery. This integration helps detect threats targeting your Google Cloud assets.
 
 The following example shows an alert generated when a known bad actor (a source IP address with low reputation) tries to get a list of Pods running in Google Kubernetes Engine (GKE):
 
@@ -224,4 +224,4 @@ The following example shows an alert generated when a known bad actor (a source 
     "timestamp": "2020-08-17T17:09:25.832+0000"
   }
 
-More information about how to use Wazuh to monitor Google Cloud Platform can be found at our :ref:`documentation <gcp>`. 
+More information on how to use Wazuh to monitor the Google cloud platform can be found in our :ref:`documentation <gcp>`. 

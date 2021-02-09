@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh agent on macOS
 
@@ -15,7 +15,7 @@ The package for macOS is suitable for macOS Sierra or greater. The macOS agent c
 
       .. code-block:: console
 
-        # installer -pkg wazuh-agent-3.11.3-1.pkg -target /
+        # installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
     * Deployment:
 
@@ -23,7 +23,7 @@ The package for macOS is suitable for macOS Sierra or greater. The macOS agent c
 
       .. code-block:: console
 
-        # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-3.11.3-1.pkg -target /
+        # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_OSX|.pkg -target /
 
       See the following document for additional automated deployment options :ref:`deployment variables <deployment_variables_macos>`.
 
@@ -39,6 +39,12 @@ By default, all agent files can be found at the following location: ``/Library/O
 
 Now that the agent is installed, if you did not use the deployment method, you will have to register and configure the agent to communicate with the manager. For more information about this process, please visit :ref:`user manual<register_agents>`.
 
+Finally, start the Wazuh agent:
+
+  .. code-block:: console
+
+    # sudo /Library/Ossec/bin/wazuh-control start
+
 
 Uninstall
 ---------
@@ -49,14 +55,13 @@ To uninstall the agent in macOS:
 
     .. code-block:: console
 
-      # /Library/Ossec/bin/ossec-control stop
+      # /Library/Ossec/bin/wazuh-control stop
 
-#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file
+#. Remove the ``/Library/Ossec/`` folder
 
     .. code-block:: console
 
       # /bin/rm -r /Library/Ossec
-      # /bin/rm /etc/ossec-init.conf
 
 #. Stop and unload dispatcher
 
@@ -83,9 +88,3 @@ To uninstall the agent in macOS:
     .. code-block:: console
 
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-
-
-
-
-
-
