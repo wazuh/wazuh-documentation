@@ -57,6 +57,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `cluster:restart`_
         - `cluster:status`_
         - `cluster:upload_file`_
+        - `cluster:update_config`_
 
     - `Decoders`_
         - `decoders:read`_
@@ -83,6 +84,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `manager:read_file`_
         - `manager:restart`_
         - `manager:upload_file`_
+        - `manager:update_config`_
 
     - `Mitre`_
         - `mitre:read`_
@@ -398,6 +400,9 @@ cluster:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
 
+cluster:update_config
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.update_configuration>` (`node:id`_)
 
 Decoders
 ^^^^^^^^^^^^^^^
@@ -522,6 +527,9 @@ manager:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 
+manager:update_config
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.update_configuration>` (`*:*`_)
 
 Mitre
 ^^^^^^^^^^^^^^^
@@ -754,12 +762,14 @@ Actions
     - `cluster:status`_
     - `cluster:read_file`_
     - `cluster:upload_file`_
+    - `cluster:update_config`_
     - `cluster:delete_file`_
     - `manager:read`_
     - `manager:read_api_config`_
     - `manager:delete_file`_
     - `manager:read_file`_
     - `manager:upload_file`_
+    - `manager:update_config`_
     - `manager:restart`_
 
 Resources
