@@ -43,13 +43,21 @@ rollBack() {
         elif [ "${sys_type}" == "apt-get" ]; then
             zypper -n remove wazuh-manager
         fi 
-
         rm -rf /var/ossec/
-        
     fi
 
     if [ -n "${odinstalled}" ]; then
-        echo "Wazuh installed"
+        if [ "${sys_type}" == "yum" ]; then
+            yum remove opendistroforelasticsearch -y
+        elif [ "${sys_type}" == "zypper" ]; then
+            apt remove --purge opendistroforelasticsearch -y
+        elif [ "${sys_type}" == "apt-get" ]; then
+            zypper -n remove opendistroforelasticsearch
+        fi 
+        rm -rf /var/lib/elasticsearch/
+        rm -rf /usr/share/elasticsearch/
+        rm -rf /var/lib/elasticsearch/
+        rm -rf /etc/elasticsearch/
     fi
 
     if [ -n "${filebeat}" ]; then
