@@ -248,6 +248,8 @@ installWazuh() {
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
+        rollBack
+        echo "Cleaning the installation..."
         exit 1;
     else
         logger "Done"
@@ -271,6 +273,8 @@ installElasticsearch() {
 
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch installation failed"
+        rollBack
+        echo "Cleaning the installation..."
         exit 1;
     else
         logger "Done"
@@ -291,6 +295,8 @@ installElasticsearch() {
         eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: certificates were not created"
+            rollBack
+            echo "Cleaning the installation..."
             exit 1;
         else
             logger "Certificates created"
@@ -345,6 +351,8 @@ installFilebeat() {
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat installation failed"
+        rollBack
+        echo "Cleaning the installation..."
         exit 1;
     else
         eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
@@ -373,6 +381,8 @@ installKibana() {
         eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y ${debug}"
     fi
     if [  "$?" != 0  ]; then
+        rollBack
+        echo "Cleaning the installation..."
         echo "Error: Kibana installation failed"
         exit 1;
     else    
@@ -383,6 +393,8 @@ installKibana() {
         eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
+            rollBack
+            echo "Cleaning the installation..."
             exit 1;
         fi     
         eval "mkdir /etc/kibana/certs ${debug}"
@@ -479,6 +491,8 @@ checkInstallation() {
     eval "curl -XGET https://localhost:9200 -uadmin:admin -k --max-time 300 ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
+        rollBack
+        echo "Cleaning the installation..."
         exit 1;     
     else
         echo "Elasticsearch installation succeeded."
@@ -486,6 +500,8 @@ checkInstallation() {
     eval "filebeat test output ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat was not successfully installed."
+        rollBack
+        echo "Cleaning the installation..."
         exit 1;     
     else
         echo "Filebeat installation succeeded."
