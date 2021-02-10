@@ -221,6 +221,7 @@ Upgrading Kibana
 .. warning::
   The location of the Wazuh Kibana plugin configuration file has been moved to ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
 
+
 #. Copy the Wazuh Kibana plugin configuration file to its new location:
 
       .. tabs::
@@ -232,7 +233,7 @@ Upgrading Kibana
 
                 .. code-block:: console
 
-                  # mkdir -p /usr/share/kibana/data/
+                  # mkdir -p /usr/share/kibana/data/wazuh/config/
                   # cp /usr/share/kibana/optimize/wazuh/config/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
@@ -242,7 +243,7 @@ Upgrading Kibana
 
                 .. code-block:: console
 
-                  # mkdir -p /usr/share/kibana/data/
+                  # mkdir -p /usr/share/kibana/data/wazuh/config/
                   # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
@@ -253,11 +254,11 @@ Upgrading Kibana
 
                     .. code-block:: console
 
-                      # mkdir -p /usr/share/kibana/data/
+                      # mkdir -p /usr/share/kibana/data/wazuh/config/
                       # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
-              Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
+              Edit the ``/usr/share/kibana/data/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
 
                     .. code-block:: yaml
 
