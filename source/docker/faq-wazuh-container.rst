@@ -81,7 +81,7 @@ How can I send emails on a Docker deployment?
 
 Wazuh expects an SMTP relay in the config, usually on a VM you can install it on the same host (as described on this `blog post <https://wazuh.com/blog/how-to-send-email-notifications-with-wazuh/>`_), but in a container environment an individual service is recommended.
 
-The role of a SMTP relay is to forward the mail notifications from Wazuh to a valid mail server, in this example we're accepting unauthenticated mail from the manager and forwarding it to the SMTP service by using valid credentials.
+The role of an SMTP relay is to forward the mail notifications from Wazuh to a valid mail server, in this example we are accepting unauthenticated mail from the manager and forwarding it to the SMTP service by using valid credentials.
 
 You may use a docker image for SMTP relay as the following example:
 
