@@ -117,7 +117,7 @@ Installing Wazuh agent from sources
     .. code-block:: console
 
       # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
-      # find /etc/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+      # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
     For Systemd:
 
@@ -410,7 +410,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # find /etc/rc.d -name "*wazuh" | xargs rm -f
+     # find /etc/rc.d -name "*wazuh*" | xargs rm -f
 
     Remove users:
 
@@ -531,7 +531,7 @@ Installing Wazuh agent from sources
 
     .. code-block:: console
 
-     # find /sbin/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+     # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
     Remove users:
 
@@ -648,7 +648,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # find /sbin/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+         # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
         Remove users:
 
@@ -783,7 +783,7 @@ Installing Wazuh agent from sources
 
         .. code-block:: console
 
-         # find /sbin/{init.d,rc*.d} -name "*wazuh" | xargs rm -f
+         # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
         Remove users:
 
