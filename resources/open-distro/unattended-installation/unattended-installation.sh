@@ -49,6 +49,8 @@ rollBack() {
     if [ -n "${odinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
             yum remove opendistroforelasticsearch -y
+            yum remove elasticsearch*
+            yum remove opendistro-* -y
         elif [ "${sys_type}" == "zypper" ]; then
             apt remove --purge opendistroforelasticsearch -y
         elif [ "${sys_type}" == "apt-get" ]; then
@@ -71,10 +73,18 @@ rollBack() {
         rm -rf /usr/share/filebeat/
         rm -rf /etc/filebeat/
     fi
-    fi
 
     if [ -n "${kibanainstalled}" ]; then
-        echo "Wazuh installed"
+        if [ "${sys_type}" == "yum" ]; then
+            yum remove opendistroforelasticsearch-kibana -y
+        elif [ "${sys_type}" == "zypper" ]; then
+            apt remove --purge opendistroforelasticsearch-kibana -y
+        elif [ "${sys_type}" == "apt-get" ]; then
+            zypper -n remove opendistroforelasticsearch-kibana
+        fi 
+        rm -rf /var/lib/kibana/
+        rm -rf /usr/share/kibana/
+        rm -rf /etc/kibana/
     fi
 
 }
