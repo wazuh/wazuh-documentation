@@ -90,7 +90,7 @@ We are using `eeacms/postfix <https://hub.docker.com/r/eeacms/postfix>`_ but the
   .. code-block:: yaml
 
     postfix:
-      image: eeacms/postfix:2.10-3.7
+      image: eeacms/postfix:2.10-3.6
       hostname: wazuh-smtp
       restart: unless-stopped
       environment:
@@ -105,7 +105,7 @@ You could also use a third party service like Sendgrid:
   .. code-block:: yaml
 
     postfix:
-      image: eeacms/postfix:2.10-3.7
+      image: eeacms/postfix:2.10-3.6
       hostname: wazuh-smtp
       restart: unless-stopped
       environment:
