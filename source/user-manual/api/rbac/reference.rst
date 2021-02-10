@@ -456,16 +456,16 @@ lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:file`_)
 - :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:file`_)
-- :api-ref:`GET /lists/files/{filename} <operation/api.controllers.cdb_list_controller.get_list_file>` (`list:file`_)
+- :api-ref:`GET /lists/files/{filename} <operation/api.controllers.cdb_list_controller.get_file>` (`list:file`_)
 
 lists:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_list_file>` (`list:file`_)
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`list:file`_)
 
 lists:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /lists/files/{filename} <operation/api.controllers.cdb_list_controller.delete_list_file>` (`list:file`_)
-- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_list_file>` (`list:file`_)
+- :api-ref:`DELETE /lists/files/{filename} <operation/api.controllers.cdb_list_controller.delete_file>` (`list:file`_)
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`list:file`_)
 
 
 Logtest
