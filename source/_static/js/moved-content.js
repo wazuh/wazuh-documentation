@@ -44,9 +44,10 @@ document.location = finalUrl;
 function getRedirectionUrl(domain, path, anchor, listOfReleases) {
   const notFoundUrl = domain + '/not_found.html';
   let finalPath = '';
-  let removed;
-  let created;
+  let removed = false;
+  let created = false;
   let relatedRedirect;
+  const excludePaths = [];
 
   path = '/'+path;
   if ( path[path.length-1] == '/' ) {
@@ -54,6 +55,7 @@ function getRedirectionUrl(domain, path, anchor, listOfReleases) {
   }
   finalPath = path;
   tempPath = path;
+  excludePaths.push(path);
 
   while (tempPath.length > 0) {
     finalPath = tempPath;
@@ -62,7 +64,9 @@ function getRedirectionUrl(domain, path, anchor, listOfReleases) {
 
     /* Is the path in newUrls? */
     Object.keys(newUrls).forEach((release) => {
-      if (newUrls[release].indexOf(finalPath) > -1 ) {
+      let newInRelease = newUrls[release];
+      newInRelease = newInRelease.map((docpath) => docpath[docpath.length-1] == '/' ? docpath + 'index.html' : docpath );
+      if (newInRelease.indexOf(finalPath) > -1 ) {
         created = release;
       }
     });
@@ -70,23 +74,25 @@ function getRedirectionUrl(domain, path, anchor, listOfReleases) {
       finalPath = notFoundUrl;
     } else {
       /* Get related redirections and pick the most recent */
-      relatedRedirect = getRelatedNewestRedirections(redirections, finalPath, created, anchor);
+      relatedRedirect = getRelatedNewestRedirections(redirections, finalPath, created, anchor, excludePaths);
 
       if (relatedRedirect.length > 0) {
         /* Get target URL of the most recent redirection */
         relatedRedirect = relatedRedirect[relatedRedirect.length-1];
         created = relatedRedirect['created'];
         tempPath = relatedRedirect['path'];
+        excludePaths.push(tempPath);
       }
     }
   }
-
   if ( created !== false ) {
     /* Is the final path in removedUrls? */
     removed = false;
     Object.keys(removedUrls).forEach((release) => {
       if ( compareReleases(release, created) > 0 ) {
-        if (removedUrls[release].indexOf(finalPath) > -1 ) {
+        let removedInRelease = removedUrls[release];
+        removedInRelease = removedInRelease.map((docpath) => docpath[docpath.length-1] == '/' ? docpath + 'index.html' : docpath );
+        if (removedInRelease.indexOf(finalPath) > -1 ) {
           removed = release;
         }
       }
@@ -103,15 +109,16 @@ function getRedirectionUrl(domain, path, anchor, listOfReleases) {
 }
 
 /**
-* Given a path and a minimum release for said path, retrives all redirections
-* related to that path ocurring from the minimum release on
+* Given a path and a minimum release for said path, retrieves all redirections
+* related to that path occurring from the minimum release on
 * @param {string} redir array of redirections
 * @param {string} currentPath the original path
 * @param {string} created minimum release to consider for the redirections (when the path was created)
 * @param {string} anchor anchor of the original path if any
+* @param {array} excluded list of path to be ignored as a result (they were checked before)
 * @return {array} List of all the related redirection happening after the minimum release
 */
-function getRelatedNewestRedirections(redir, currentPath, created, anchor) {
+function getRelatedNewestRedirections(redir, currentPath, created, anchor, excluded) {
   const relatedTargets = [];
   let anchorfound = false;
 
@@ -145,7 +152,7 @@ function getRelatedNewestRedirections(redir, currentPath, created, anchor) {
       }
     }
 
-    if ( validRedir ) {
+    if ( validRedir && !excluded.includes(redirObject[validRedir]) ) {
       relatedTargets.push(
           {
             'created': validRedir,
