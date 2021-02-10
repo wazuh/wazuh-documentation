@@ -56,12 +56,21 @@ rollBack() {
         fi 
         rm -rf /var/lib/elasticsearch/
         rm -rf /usr/share/elasticsearch/
-        rm -rf /var/lib/elasticsearch/
         rm -rf /etc/elasticsearch/
     fi
 
     if [ -n "${filebeat}" ]; then
-        echo "Wazuh installed"
+        if [ "${sys_type}" == "yum" ]; then
+            yum remove filebeat -y
+        elif [ "${sys_type}" == "zypper" ]; then
+            apt remove --purge filebeat -y
+        elif [ "${sys_type}" == "apt-get" ]; then
+            zypper -n remove filebeat
+        fi 
+        rm -rf /var/lib/filebeat/
+        rm -rf /usr/share/filebeat/
+        rm -rf /etc/filebeat/
+    fi
     fi
 
     if [ -n "${kibanainstalled}" ]; then
