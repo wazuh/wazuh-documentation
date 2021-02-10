@@ -112,12 +112,51 @@ Fixed
 - A ``cluster_control`` bug that caused an error message when running ``wazuh-clusterd`` in foreground.
 
 
+
+Wazuh Kibana plugin - Revision 4101
+-----------------------------------
+
+Added
+^^^^^
+- Check the max buckets by default in health check and increase them. 
+- Added a prompt warning in role mapping if run_as is false or he is not allowed to use it by API. 
+
+Changed
+^^^^^^^
+- Support new fields of Windows Registry at FIM inventory panel.
+- Added on FIM Inventory Windows Registry registry_key and registry_value items from syscheck.
+- Uncheck agents after an action in agents groups management.
+- Unsaved rule files when edit or create a rule with invalid content.
+
+Fixed
+^^^^^
+- Server error Invalid token specified: Cannot read property 'replace' of undefined.
+- Show empty files rules and decoders.
+- Wrong hover texts in CDB lists actions.
+- Access to forbidden agents information when exporting agents list.
+- The decoder detail view is not displayed.
+- The complex search using the Wazuh API query filter in search bars.
+- Validation to check userPermissions are not ready yet.
+- Clear visualizations manager list when switching tabs. Fixes PDF reports filters.
+- Strange box shadow in Export popup panel in Management > Groups.
+- Wrong command on alert when data folder does not exist.
+- Agents table OS field sorting: Changes agents table field os_name to os.name,os.version to make it sortable. 
+- Diff parsed datetime between agent detail and agents table.
+- Allow access to Agents section with agent:group action permission.
+- Filters does not work on modals with search bar.
+- Wrong package name in deploy new agent.
+- Number agents not show on pie onMouseEvent.
+- Fixed off Kibana Query Language in search bar of Controls/Inventory modules.
+- Number of agents do not show on the pie chart tooltip in agents preview.
+
+
+
 Wazuh Kibana plugin
 -------------------
 
 Added
 ^^^^^
-- A label to indicate that the wui_ rules only apply to the wazuh-wui API user. 
+- A label to indicate that the `wui_` rules only apply to the wazuh-wui API user. 
 - Each user can only view their own reports. 
 - Wazuh data directory moved from optimize to data Kibana directory.
 - Adapt the app to the new Kibana platform.
