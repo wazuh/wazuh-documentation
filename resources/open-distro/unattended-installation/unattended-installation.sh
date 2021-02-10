@@ -87,6 +87,16 @@ rollBack() {
         rm -rf /etc/kibana/
     fi
 
+    if [ -n "${javainstalled}" ]; then
+        if [ "${sys_type}" == "yum" ]; then
+            yum remove java-11-openjdk.x86_64 -y
+        elif [ "${sys_type}" == "zypper" ]; then
+            apt remove --purge openjdk-11-jdk -y
+        elif [ "${sys_type}" == "apt-get" ]; then
+            zypper -n remove java-11-openjdk-devel
+        fi 
+    fi    
+
 }
 
 checkArch() {
