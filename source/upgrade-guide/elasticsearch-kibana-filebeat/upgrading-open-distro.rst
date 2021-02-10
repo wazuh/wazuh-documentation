@@ -302,7 +302,7 @@ Upgrading Kibana
                 .. code-block:: console
 
                   # mkdir -p /usr/share/kibana/data/
-                  # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+                  # cp /usr/share/kibana/plugins/wazuh/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
           .. group-tab:: For upgrades from 3.10.x or older
@@ -313,7 +313,7 @@ Upgrading Kibana
                     .. code-block:: console
 
                       # mkdir -p /usr/share/kibana/data/
-                      # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/optimize/wazuh/config/wazuh.yml
+                      # cp /usr/share/kibana/plugins/wazuh/config.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
               Edit the ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml`` configuration file and add to the end of the file the following default structure to define an Wazuh API entry:
