@@ -27,7 +27,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `node:id`_
     - `file:path`_
     - `decoder:file`_
-    - `list:path`_
+    - `list:file`_
     - `rule:file`_
     - `policy:id`_
     - `role:id`_
@@ -219,14 +219,14 @@ decoder:file
 | **Example**     | decoder:file:0005-wazuh_decoders.xml    |
 +-----------------+-----------------------------------------+
 
-list:path
+list:file
 ^^^^^^^^^^
 
-+-----------------+-------------------------------------------+
-| **Description** | Reference list file via its relative path |
-+-----------------+-------------------------------------------+
-| **Example**     | list:path:etc/lists/audit-keys            |
-+-----------------+-------------------------------------------+
++-----------------+--------------------------------------+
+| **Description** | Reference list file via its filename |
++-----------------+--------------------------------------+
+| **Example**     | list:file:audit-keys                 |
++-----------------+--------------------------------------+
 
 rule:file
 ^^^^^^^^^^
@@ -454,8 +454,18 @@ Lists
 ^^^^^^^^^^^^^^^
 lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:path`_)
-- :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:path`_)
+- :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:file`_)
+- :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:file`_)
+- :api-ref:`GET /lists/files/{filename} <operation/api.controllers.cdb_list_controller.get_file>` (`list:file`_)
+
+lists:update
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`*:*`_)
+
+lists:delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /lists/files/{filename} <operation/api.controllers.cdb_list_controller.delete_file>` (`list:file`_)
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`*:*`_)
 
 
 Logtest
@@ -808,6 +818,19 @@ Resources
     - ``decoder:file:*``
     - ``*:*:*``
 
+lists_all
+^^^^^^^^^^^^^^^
+Allow managing all CDB lists files in the system.
+
+Actions
+    - `lists:read`_
+    - `lists:delete`_
+    - `lists:update`_
+
+Resources
+    - ``list:file:*``
+    - ``'*:*:*'``
+
 Effect
     - allow
 
@@ -819,7 +842,7 @@ Actions
     - `lists:read`_
 
 Resources
-    - ``list:path:*``
+    - ``list:file:*``
 
 Effect
     - allow
@@ -1035,7 +1058,7 @@ Policies
     - `ciscat_read`_
     - `cluster_all`_
     - `decoders_all`_
-    - `lists_read`_
+    - `lists_all`_
     - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_all`_
