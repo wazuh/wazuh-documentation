@@ -460,12 +460,12 @@ lists:read
 
 lists:update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`list:file`_)
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`*:*`_)
 
 lists:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`DELETE /lists/files/{filename} <operation/api.controllers.cdb_list_controller.delete_file>` (`list:file`_)
-- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`list:file`_)
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`*:*`_)
 
 
 Logtest
