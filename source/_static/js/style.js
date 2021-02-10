@@ -893,9 +893,11 @@ $(function() {
   });
 
   /* Add image for the pages with deprecated content -------------------------------------------*/
-  if ( $('.dropdown-menu li a:first-of-type').hasClass('disable') ) {
-    $('#rst-content').addClass('deprecated-content');
-  }
+  $('.dropdown-menu li a').each(function() {
+    if ( $(this).text().indexOf(DOCUMENTATION_OPTIONS.VERSION) != -1 && $(this).hasClass('disable') ) {
+      $('#rst-content').addClass('deprecated-content');
+    }
+  });
 });
 
 /**
