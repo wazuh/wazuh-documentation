@@ -34,6 +34,31 @@ logger() {
 }
 
 rollBack() {
+    checkInstalled
+    if [ -n "${wazuhinstalled}" ]; then
+        if [ "${sys_type}" == "yum" ]; then
+            yum remove wazuh-manager -y
+        elif [ "${sys_type}" == "zypper" ]; then
+            apt remove --purge wazuh-manager -y
+        elif [ "${sys_type}" == "apt-get" ]; then
+            zypper -n remove wazuh-manager
+        fi 
+
+        rm -rf /var/ossec/
+        
+    fi
+
+    if [ -n "${odinstalled}" ]; then
+        echo "Wazuh installed"
+    fi
+
+    if [ -n "${filebeat}" ]; then
+        echo "Wazuh installed"
+    fi
+
+    if [ -n "${kibanainstalled}" ]; then
+        echo "Wazuh installed"
+    fi
 
 }
 
@@ -397,6 +422,13 @@ checkInstalled() {
         fi  
     fi    
 
+}
+
+overwrite() {
+    checkInstalled
+    if [ -n "${wazuhinstalled}" ]; then
+        echo "Wazuh installed"
+    fi
 }
 
 ## Health check
