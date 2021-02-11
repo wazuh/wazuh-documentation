@@ -471,21 +471,9 @@ checkInstalled() {
         fi  
     fi 
 
-    if [ "${sys_type}" == "yum" ]; then
-        javainstalled=$(yum list installed 2>/dev/null | grep java-11-openjdk.x86_64)
-    elif [ "${sys_type}" == "zypper" ]; then
-        javainstalled=$(zypper packages --installed | grep openjdk | grep i+)
-    elif [ "${sys_type}" == "apt-get" ]; then
-        javainstalled=$(apt list --installed  2>/dev/null | grep openjdk-11-jdk/)
-    fi    
-
-    if [ -n "${javainstalled}" ]; then
-        if [ ${sys_type} == "zypper" ]; then
-            javaversion=$(echo ${javainstalled} | awk '{print $7}')
-        else
-            javaversion=$(echo ${javainstalled} | awk '{print $2}')
-        fi    
-    fi       
+    if [ -n "$(command -v java)" ]; then
+        javainstalled="1"
+    fi      
 
 }
 
