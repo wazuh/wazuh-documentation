@@ -89,11 +89,11 @@ rollBack() {
 
     if [ -n "${javainstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove java-11-openjdk.x86_64 -y
+            yum remove java-11*
         elif [ "${sys_type}" == "zypper" ]; then
-            apt remove --purge openjdk-11-jdk -y
+            apt remove --purge openjdk-11-j* -y
         elif [ "${sys_type}" == "apt-get" ]; then
-            zypper -n remove java-11-openjdk-devel
+            zypper -n remove java-11*
         fi 
     fi    
 
