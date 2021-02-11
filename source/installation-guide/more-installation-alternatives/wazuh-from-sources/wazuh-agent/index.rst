@@ -39,6 +39,7 @@ Installing Wazuh agent from sources
               # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
+              # cd .. && rm -rf cmake-*
 
           .. tab:: CentOS 8
 
@@ -54,6 +55,7 @@ Installing Wazuh agent from sources
               # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
               # cd cmake-3.18.3 && ./bootstrap --no-system-curl
               # make -j$(nproc) && make install
+              # cd .. && rm -rf cmake-*
 
 
       .. tab:: APT
@@ -70,6 +72,7 @@ Installing Wazuh agent from sources
           # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
+          # cd .. && rm -rf cmake-*
 
 
 
@@ -86,6 +89,7 @@ Installing Wazuh agent from sources
           # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
           # cd cmake-3.18.3 && ./bootstrap --no-system-curl
           # make -j$(nproc) && make install
+          # cd .. && rm -rf cmake-*
 
         .. note:: For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
@@ -642,7 +646,8 @@ Installing Wazuh agent from sources
             # export CPLUS_INCLUDE_PATH
             # LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib/
             # export LD_LIBRARY_PATH
-            # cd ..
+            # cd .. && rm -rf gcc-build && rm -rf gcc-5.5.0.tar.gz
+            # rm -rf mpfr-2.4.2.tar.bz2 && rm -rf gmp-4.3.2.tar.bz2 && rm -rf mpc-0.8.1.tar.gz && rm -rf isl-0.14.tar.bz2
 
           .. note:: The ``gmake`` step will take several minutes to complete. This is a normal behavior.
 
@@ -657,7 +662,7 @@ Installing Wazuh agent from sources
             # gmake install
             # PATH="/usr/local/bin/:${PATH}"
             # export PATH
-            # cd ..
+            # cd .. && rm -rf cmake-*
 
         2. Download the latest version and a necessary file.
 
@@ -836,7 +841,7 @@ Installing Wazuh agent from sources
             # cd cmake && ./bootstrap
             # gmake
             # gmake install
-            # cd ..
+            # cd .. && rm -rf cmake-*
 
         2. Download the latest version.
 

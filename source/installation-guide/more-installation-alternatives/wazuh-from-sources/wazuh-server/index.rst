@@ -40,6 +40,7 @@ Installing Wazuh manager
             # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
             # cd cmake-3.18.3 && ./bootstrap --no-system-curl
             # make -j$(nproc) && make install
+            # cd .. && rm -rf cmake-*
 
 
         .. tab:: CentOS 8
@@ -57,6 +58,7 @@ Installing Wazuh manager
             # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
             # cd cmake-3.18.3 && ./bootstrap --no-system-curl
             # make -j$(nproc) && make install
+            # cd .. && rm -rf cmake-*
 
 
   .. group-tab:: APT
@@ -74,6 +76,7 @@ Installing Wazuh manager
       # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
       # cd cmake-3.18.3 && ./bootstrap --no-system-curl
       # make -j$(nproc) && make install
+      # cd .. && rm -rf cmake-*
 
   .. group-tab:: ZYpp
 
@@ -89,6 +92,7 @@ Installing Wazuh manager
       # curl -OL http://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
       # cd cmake-3.18.3 && ./bootstrap --no-system-curl
       # make -j$(nproc) && make install
+      # cd .. && rm -rf cmake-*
 
 
 **Optional**. Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
