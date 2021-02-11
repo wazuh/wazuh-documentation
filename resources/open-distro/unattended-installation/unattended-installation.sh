@@ -61,7 +61,7 @@ rollBack() {
         rm -rf /etc/elasticsearch/
     fi
 
-    if [ -n "${filebeat}" ]; then
+    if [ -n "${filebeatinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
             yum remove filebeat -y
         elif [ "${sys_type}" == "zypper" ]; then
@@ -95,7 +95,7 @@ rollBack() {
         elif [ "${sys_type}" == "apt-get" ]; then
             zypper -n remove java-11*
         fi 
-    fi    
+    fi  
 
 }
 
@@ -490,7 +490,11 @@ checkInstalled() {
     if [ -n "$(command -v java)" ]; then
         javainstalled="1"
         javaversion="$(java --version | head -1 | awk '{print $2}')"
-    fi      
+    fi  
+
+    if [ -n "${wazuhinstalled}" ] || [ -n "${odinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
+        echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
+    fi         
 
 }
 
