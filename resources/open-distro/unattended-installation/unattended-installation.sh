@@ -456,6 +456,22 @@ checkInstalled() {
     fi
 
     if [ "${sys_type}" == "yum" ]; then
+        filebeatinstalled=$(yum list installed 2>/dev/null | grep filebeat)
+    elif [ "${sys_type}" == "zypper" ]; then
+        filebeatinstalled=$(zypper packages --installed | grep filebeat | grep i+ | grep noarch)
+    elif [ "${sys_type}" == "apt-get" ]; then
+        filebeatinstalled=$(apt list --installed  2>/dev/null | grep filebeat)
+    fi 
+
+    if [ -n "${filebeatinstalled}" ]; then
+        if [ ${sys_type} == "zypper" ]; then
+            filebeatversion=$(echo ${filebeatinstalled} | awk '{print $11}')
+        else
+            filebeatversion=$(echo ${filebeatinstalled} | awk '{print $2}')
+        fi  
+    fi    
+
+    if [ "${sys_type}" == "yum" ]; then
         kibanainstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch-kibana)
     elif [ "${sys_type}" == "zypper" ]; then
         kibanainstalled=$(zypper packages --installed | grep opendistroforelasticsearch-kibana | grep i+)
@@ -480,9 +496,22 @@ checkInstalled() {
 
 overwrite() {
     checkInstalled
+    rollBack
+    addWazuhrepo
     if [ -n "${wazuhinstalled}" ]; then
-        echo "Wazuh installed"
+        installWazuh
     fi
+    if [ -n "${odinstalled}" ]; then
+        installJava
+        installElasticsearch
+    fi    
+    if [ -n "${filebeatinstalled}" ]; then
+        installFilebeat
+    fi
+    if [ -n "${kibanainstalled}" ]; then
+        installKibana
+    fi    
+    checkInstallation     
 }
 
 ## Health check
