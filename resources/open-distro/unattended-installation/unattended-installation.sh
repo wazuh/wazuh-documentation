@@ -473,6 +473,8 @@ checkInstalled() {
 
     if [ -n "$(command -v java)" ]; then
         javainstalled="1"
+        javaversion="$(java --version | head -1 awk '{print $2}')"
+        echo $javaversion
     fi      
 
 }
