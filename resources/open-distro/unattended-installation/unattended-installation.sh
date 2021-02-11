@@ -518,15 +518,23 @@ overwrite() {
     checkInstallation     
 }
 
-## Health check
-healthCheck() {
+networkCheck() {
+    connection=$(curl -I https://packages.wazuh.com/ -s | grep 200 | awk '{print $2}')
+}
 
+specsCheck() {
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
+}
+
+## Health check
+healthCheck() {
 
     if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]; then
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
+    elif [ ${connection} != "200" ]; then
+        echo "Error. No internet connection. To perform an offline installation, please run this script with the option -d/--download-packages in a computer with internet access, copy the packages.tar file generated on this computer and run again this script."
     else
         echo "Starting the installation..."
     fi
