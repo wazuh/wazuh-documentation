@@ -192,7 +192,7 @@ Installing Wazuh agent from sources
 
      .. code-block:: console
 
-      # apt-get install gcc-mingw-w64 g++-mingw-w64-x86-64 nsis make cmake
+      # apt-get install gcc-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 nsis make cmake
 
 
     2. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
