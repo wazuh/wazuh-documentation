@@ -25,7 +25,6 @@ This reference also contains a set of default roles and policies that can be imm
     - `agent:id`_
     - `group:id`_
     - `node:id`_
-    - `file:path`_
     - `decoder:file`_
     - `list:file`_
     - `rule:file`_
@@ -50,13 +49,10 @@ This reference also contains a set of default roles and policies that can be imm
         - `ciscat:read`_
 
     - `Cluster`_
-        - `cluster:delete_file`_
         - `cluster:read_api_config`_
         - `cluster:read`_
-        - `cluster:read_file`_
         - `cluster:restart`_
         - `cluster:status`_
-        - `cluster:upload_file`_
         - `cluster:update_config`_
 
     - `Decoders`_
@@ -78,12 +74,9 @@ This reference also contains a set of default roles and policies that can be imm
         - `logtest:run`_
 
     - `Manager`_
-        - `manager:delete_file`_
         - `manager:read_api_config`_
         - `manager:read`_
-        - `manager:read_file`_
         - `manager:restart`_
-        - `manager:upload_file`_
         - `manager:update_config`_
 
     - `Mitre`_
@@ -202,15 +195,6 @@ node:id
 +-----------------+------------------------------------+
 | **Example**     | node:id:worker1                    |
 +-----------------+------------------------------------+
-
-file:path
-^^^^^^^^^^^^^
-
-+-----------------+-------------------------------------------+
-| **Description** | Reference file via its relative path      |
-+-----------------+-------------------------------------------+
-| **Example**     | file:path:etc/rules/new_rule.xml          |
-+-----------------+-------------------------------------------+
 
 decoder:file
 ^^^^^^^^^^^^
@@ -347,18 +331,12 @@ ciscat:read
 
 Cluster
 ^^^^^^^
-cluster:delete_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id:<node>&file:path:<file_path>`)
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
-
 cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>` (`node:id`_)
 
 cluster:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id`_)
 - :api-ref:`GET /cluster/configuration/validation <operation/api.controllers.cluster_controller.get_conf_validation>` (`node:id`_)
 - :api-ref:`GET /cluster/healthcheck <operation/api.controllers.cluster_controller.get_healthcheck>` (`node:id`_)
 - :api-ref:`GET /cluster/local/config <operation/api.controllers.cluster_controller.get_config>` (`node:id`_)
@@ -366,7 +344,6 @@ cluster:read
 - :api-ref:`GET /cluster/nodes <operation/api.controllers.cluster_controller.get_cluster_nodes>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.get_configuration_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration/{component}/{configuration} <operation/api.controllers.cluster_controller.get_node_config>` (`node:id`_)
-- :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/info <operation/api.controllers.cluster_controller.get_info_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs <operation/api.controllers.cluster_controller.get_log_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs/summary <operation/api.controllers.cluster_controller.get_log_summary_node>` (`node:id`_)
@@ -378,11 +355,6 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>` (`node:id`_)
 - :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_node>` (`node:id`_)
 - :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
-
-cluster:read_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id:<node>&file:path:<file_path>`)
 
 cluster:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -395,10 +367,6 @@ cluster:status
 cluster:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - .. deprecated:: 4.0.4
-
-cluster:upload_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
 
 cluster:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -483,22 +451,15 @@ logtest:run
 
 Manager
 ^^^^^^^^^^^^^^^
-manager:delete_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`file:path`_)
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`file:path`_)
-
 manager:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
 
 manager:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`*:*`_)
 - :api-ref:`GET /manager/configuration <operation/api.controllers.manager_controller.get_configuration>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/validation <operation/api.controllers.manager_controller.get_conf_validation>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/{component}/{configuration} <operation/api.controllers.manager_controller.get_manager_config_ondemand>` (`*:*`_)
-- :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`*:*`_)
 - :api-ref:`GET /manager/info <operation/api.controllers.manager_controller.get_info>` (`*:*`_)
 - :api-ref:`GET /manager/logs <operation/api.controllers.manager_controller.get_log>` (`*:*`_)
 - :api-ref:`GET /manager/logs/summary <operation/api.controllers.manager_controller.get_log_summary>` (`*:*`_)
@@ -508,12 +469,7 @@ manager:read
 - :api-ref:`GET /manager/stats/remoted <operation/api.controllers.manager_controller.get_stats_remoted>` (`*:*`_)
 - :api-ref:`GET /manager/stats/weekly <operation/api.controllers.manager_controller.get_stats_weekly>` (`*:*`_)
 - :api-ref:`GET /manager/status <operation/api.controllers.manager_controller.get_status>` (`*:*`_)
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 - :api-ref:`PUT /manager/restart <operation/api.controllers.manager_controller.put_restart>` (`*:*`_)
-
-manager:read_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`file:path`_)
 
 manager:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -523,13 +479,9 @@ manager:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - .. deprecated:: 4.0.4
 
-manager:upload_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
-
 manager:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.update_configuration>` (`*:*`_)
+- :api-ref:`PUT /manager/configuration <operation/api.controllers.manager_controller.update_configuration>` (`*:*`_)
 
 Mitre
 ^^^^^^^^^^^^^^^
@@ -760,22 +712,14 @@ Actions
     - `cluster:read_api_config`_
     - `cluster:restart`_
     - `cluster:status`_
-    - `cluster:read_file`_
-    - `cluster:upload_file`_
     - `cluster:update_config`_
-    - `cluster:delete_file`_
     - `manager:read`_
     - `manager:read_api_config`_
-    - `manager:delete_file`_
-    - `manager:read_file`_
-    - `manager:upload_file`_
     - `manager:update_config`_
     - `manager:restart`_
 
 Resources
-    - ``file:path:*``
     - ``node:id:*``
-    - ``node:id:*&file:path:*``
     - ``'*:*:*'``
 
 Effect
@@ -789,14 +733,11 @@ Actions
     - `cluster:read`_
     - `cluster:read_api_config`_
     - `cluster:status`_
-    - `cluster:read_file`_
     - `manager:read`_
     - `manager:read_api_config`_
 
 Resources
-    - ``file:path:*``
     - ``node:id:*``
-    - ``node:id:*&file:path:*``
     - ``'*:*:*'``
 
 Effect
