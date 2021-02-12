@@ -14,11 +14,11 @@ This section aims to guide the user through the process of installing Wazuh and 
 Install Wazuh server
 --------------------
 
-There are two different alternatives to deploy a Wazuh installation. Here is a brief explanation about each deployment type:
+There are two different alternatives to deploy a Wazuh installation: 
 
-- :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed in the same host, this type of deployment is suitable for testing and small working environments. If you want to test Wazuh, you can download our ready to use :ref:`OVA <virtual_machine>`.
+- :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed in the same host. This type of deployment is appropriate for testing and small working environments. If you want to test Wazuh, you can download our ready-to-use :ref:`OVA <virtual_machine>`.
 
-- :ref:`Distributed <distributed_index>`: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments.
+- :ref:`Distributed <distributed_index>`: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
 
 .. raw:: html
 
@@ -57,7 +57,7 @@ There are two different alternatives to deploy a Wazuh installation. Here is a b
 
 
 
-.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted in our PCI-DSS certified SaaS solution and maintained by our team. With Wazuh cloud no dedicated hardware is required and everything is ready to use. This service offers a flexible infrastructure to match your enterprise needs.
+.. note:: Wazuh also offers the `Wazuh Cloud <https://wazuh.com/cloud/>`_, where all components are hosted on our PCI-DSS certified SaaS solution and maintained by our team. With the Wazuh cloud, no dedicated hardware is required and everything is ready to use. This service offers a highly flexible infrastructure to match your enterprise needs.
 
 This installation guide will teach you how to install all Wazuh components: the Wazuh agent, the Wazuh manager and Elastic Stack. Alternatively, Wazuh can be installed with commercial options like Elastic Stack basic license or Splunk. To learn more about these options and other installation alternatives, visit the :ref:`more installation alternatives <more_installation_alternatives>` section.
 
@@ -65,7 +65,7 @@ This installation guide will teach you how to install all Wazuh components: the 
 Install Wazuh agents
 --------------------
 
-The Wazuh Agent is a single, light-weight monitoring software that can be installed in the majority of Operating Systems providing visibility on the security of that endpoint by collecting critical system and application logs, inventory data and detecting possible anomalies. To install a Wazuh agent select your operating system and follow the installation steps:
+The Wazuh Agent is a single, light-weight monitoring software that  that runs on most operating systems and provides visibility into the security of that endpoint by collecting critical system and application records, inventory data and detecting potential anomalies. To install a Wazuh agent, select your operating system and follow the installation steps:
 
 .. raw:: html
 
@@ -154,7 +154,6 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
-
 
 
 

@@ -197,6 +197,8 @@ Download the script and the configuration file. After downloading them, configur
            
     
 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is removed during the installation since it may have a negative impact on system resources. 
+
 Configuring Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
