@@ -29,6 +29,8 @@ $(function() {
     'deployment',
     'development/index',
     'docker-monitor/index',
+    'installation-guide/elasticsearch-cluster/index',
+    'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
@@ -39,6 +41,8 @@ $(function() {
     'user-manual/agents/listing/index',
     'user-manual/kibana-app/reference/index',
     'user-manual/ruleset/ruleset-xml-syntax/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
+    'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
   ];
 
   /* List of nodes in the toctree that should be open in a new tab */
@@ -127,10 +131,7 @@ $(function() {
    */
   function checkScroll() {
     const scrollTop = $(document).scrollTop();
-    let headerHeight = 100;
-    if ($('#page').hasClass('no-latest-docs')) {
-      headerHeight += parseInt($('.no-latest-notice').outerHeight());
-    }
+    const headerHeight = parseInt($('#header').outerHeight());
     if (scrollTop >= headerHeight) {
       $('body').addClass('scrolled');
     } else {
@@ -140,7 +141,7 @@ $(function() {
 
   /* -- Menu scroll -------------------------------------------------------------------------------*/
 
-  const navbarTop = 100;
+  let navbarTop = parseInt($('#header').outerHeight());
   let noticeHeight = 0;
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
@@ -152,7 +153,6 @@ $(function() {
   let eventScroll;
 
   heightNavbar();
-  headerSticky();
 
   setTimeout(function() {
     if ($('#page').hasClass('no-latest-docs')) {
@@ -277,7 +277,6 @@ $(function() {
     navHeight = parseInt($('#globaltoc').outerHeight());
     /* Update height of navbar */
     heightNavbar();
-    headerSticky();
   });
 
   $('.navbar-toggler').on('click', function(e) {
@@ -292,16 +291,18 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
+    noticeHeight = parseInt($('.no-latest-notice').outerHeight());
     if ($(window).width() >= 992) {
-      if (documentScroll <= navbarTop) {
-        $('#navbar').css({'padding-top': (noticeHeight + navbarTop - documentScroll) + 'px'});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + documentScroll + 'px)'});
+      if (!$('body').hasClass('scrolled')) {
+        navbarTop = parseInt($('#header').outerHeight());
+        $('#navbar').css({'padding-top': (navbarTop - documentScroll) + 'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + (parseInt($('#navbar .search_main').outerHeight()) + parseInt($('#header').outerHeight())) + 'px + ' + documentScroll + 'px)', 'padding-top': 0});
       } else {
-        $('#navbar').css({'padding-top': noticeHeight});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + navbarTop + 'px)'});
+        $('#navbar').css({'padding-top': parseInt($('.no-latest-notice').outerHeight())+'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + noticeHeight + 'px - ' + parseInt($('#header-sticky').outerHeight()) + 'px)', 'padding-top': 0});
       }
-      $('#navbar-globaltoc').css({'padding-top': 0});
     } else {
+      navbarTop = parseInt($('#header-sticky').outerHeight());
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 100) + 'px'});
@@ -309,18 +310,6 @@ $(function() {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 52) + 'px'});
       }
-    }
-  }
-
-  /**
-   * Changes the "top" value of sticky header
-   */
-  function headerSticky() {
-    const documentScroll = $(window).scrollTop();
-    if (documentScroll >= (noticeHeight + 100)) {
-      $('#header-sticky').css({'top': noticeHeight});
-    } else {
-      $('#header-sticky').css({'top': '-52px'});
     }
   }
 
