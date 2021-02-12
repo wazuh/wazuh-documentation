@@ -196,7 +196,7 @@
             {% if current_version %}
               {%- set nav_version = current_version %}
             {% endif %}
-            {% if nav_version %}
+            {% if nav_version and not is_latest_release %}
             <div class="no-latest-notice-wrapper">
               <div class="no-latest-notice" data-version="{{ nav_version }}">
                 <div class="no-latest-icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
