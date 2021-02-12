@@ -19,7 +19,7 @@ Highlights
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
 - New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
-- Support for AWS load balancers (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
+- Support for AWS load balancer logs (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
 - Removed the limit on the number of agents a manager can support.
 - Migration of rootcheck results to Wazuh DB in order to delete the files with the results of each agent.
 - Support for Open Distro for Elasticsearch 1.12.0. 
@@ -75,7 +75,7 @@ Changed
 **API**
 
 - The status parameter behavior in the ``DELETE /agents`` endpoint to enhance security.
-- Upgraded endpoints to accept a list of agents, maximum 100 agents per request.
+- Allow agent upgrade endpoints to accept a list of agents, maximum 100 agents per request.
 - Improved input validation regexes for ``names`` and ``array_names``.
 
 **Framework**
@@ -83,7 +83,7 @@ Changed
 - Refactored framework to work with the new upgrade module.
 - Refactored agent upgrade CLI to work with the new upgrade module. It distributes petitions in a clustered environment.
 - Rule and decoder details structure to support PCRE2.
-- Refactor framework to adapt agent status changes in wazuh.db. 
+- Refactored framework to adapt agent status changes in wazuh.db. 
 - Improved the performance of AWS Config integration by removing alert fields with variables such as Instance ID in its name.
 
 Fixed
@@ -103,7 +103,7 @@ Fixed
 - A zombie process leaks in ``modulesd`` when using commands without a timeout.
 - A race condition in Remoted that might create agent-group files with wrong permissions.
 - A warning log in Wazuh DB when upgrading the global database.
-- Fixed a bug in FIM on Windows that caused false positives due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
+- A bug in FIM on Windows that caused false positives due to changes in the host timezone or the daylight saving time when monitoring files in a FAT32 filesystem.
 
 
 **API**
@@ -121,7 +121,7 @@ Wazuh Kibana plugin
 Added
 ^^^^^
 - Check the Kibana max buckets config by default in health-check and increase them. 
-- A warning in the role mapping section if the run_as setting is disable. 
+- A warning in the role mapping section if the ``run_as`` setting is disabled.
 - A label to indicate that the `wui_` rules only apply to the wazuh-wui API user. 
 
 Changed
@@ -132,15 +132,15 @@ Changed
 - Support on FIM Inventory Windows Registry for the new scheme with registry_key and registry_value from syscheck.
 - Uncheck agents after an action in agents groups management.
 - Unsave rule files when editing or creating a rule with invalid content.
-- Replaced Wazuh API user by wazuh-wui in the default configuration.
+- Replaced Wazuh API user with wazuh-wui in the default configuration.
 - Add agent id to the reports name in Agent Inventory and Modules.
-- Allow access to Agents section with agent:group action permission.
+- Allow access to Agents section with ``agent:group`` resource permission.
 
 
 Fixed
 ^^^^^
 - Server error Invalid token specified: Cannot read property 'replace' of undefined.
-- Show empty files rules and decoders.
+- Show empty rules and decoders files.
 - Wrong hover texts in CDB list actions.
 - Access to forbidden agents information when exporting agents list. 
 - The complex search using the Wazuh API query filter in search bars.
