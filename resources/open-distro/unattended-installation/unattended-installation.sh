@@ -16,6 +16,7 @@ WAZUH_REV="1"
 ELK_VER="7.9.1"
 OD_VER="1.11.0"
 OD_REV="1"
+ow=""
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
     sep="-"
@@ -34,7 +35,6 @@ logger() {
 }
 
 rollBack() {
-    checkInstalled
     if [ -n "${wazuhinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
             yum remove wazuh-manager -y
@@ -49,7 +49,7 @@ rollBack() {
     if [ -n "${elasticinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
             yum remove opendistroforelasticsearch -y
-            yum remove elasticsearch*
+            yum remove elasticsearch* -y
             yum remove opendistro-* -y
         elif [ "${sys_type}" == "zypper" ]; then
             apt remove --purge opendistroforelasticsearch -y
@@ -89,7 +89,7 @@ rollBack() {
 
     if [ -n "${javainstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove java-11*
+            yum remove java-11* -y
         elif [ "${sys_type}" == "zypper" ]; then
             apt remove --purge openjdk-11-j* -y
         elif [ "${sys_type}" == "apt-get" ]; then
@@ -157,14 +157,33 @@ getHelp() {
 
 }
 
-
 ## Install the required packages for the installation
 installPrerequisites() {
-
     logger "Installing all necessary utilities for the installation..."
 
     if [ ${sys_type} == "yum" ]; then
         eval "yum install curl unzip wget libcap -y ${debug}"
+    elif [ ${sys_type} == "zypper" ]; then
+        eval "zypper -n install curl unzip wget ${debug}"         
+        eval "zypper -n install libcap-progs ${debug} || zypper -n install libcap2 ${debug}"
+    elif [ ${sys_type} == "apt-get" ]; then
+        eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y ${debug}"        
+    fi
+
+    if [  "$?" != 0  ]; then
+        echo "Error: Prerequisites could not be installed"
+        exit 1;
+    else
+        logger "Done"
+    fi          
+}
+
+## Install the required packages for the installation
+installJava() {
+
+    logger "Installing Java Development Kit..."
+
+    if [ ${sys_type} == "yum" ]; then
         eval "yum install java-11-openjdk-devel -y ${debug}"
         if [ "$?" != 0 ]; then
             os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
@@ -192,8 +211,6 @@ installPrerequisites() {
         fi
         export JAVA_HOME=/usr/
     elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install curl unzip wget ${debug}" 
-        eval "zypper -n install libcap-progs ${debug} || zypper -n install libcap2 ${debug}"
         eval "zypper -n install java-11-openjdk-devel ${debug}"
         if [ "$?" != 0 ]; then
             eval "zypper ar -f http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/opensuse/15.0/$(uname -m) adoptopenjdk ${debug}" | echo 'a'
@@ -202,8 +219,6 @@ installPrerequisites() {
         fi    
         export JAVA_HOME=/usr/    
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y ${debug}"
-
         if [ -n "$(command -v add-apt-repository)" ]; then
             eval "add-apt-repository ppa:openjdk-r/ppa -y ${debug}"
         else
@@ -504,13 +519,16 @@ checkInstalled() {
 
     if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
         echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
-        exit 1;
+        # if [ -n "${ow}" ]; then
+             overwrite
+        # else
+        #     exit 1;
+        # fi
     fi         
 
 }
 
-overwrite() {
-    checkInstalled
+overwrite() {    
     rollBack
     addWazuhrepo
     if [ -n "${wazuhinstalled}" ]; then
@@ -531,21 +549,26 @@ overwrite() {
 
 networkCheck() {
     connection=$(curl -I https://packages.wazuh.com/ -s | grep 200 | awk '{print $2}')
+    if [ ${connection} != "200" ]; then
+        echo "Error. No internet connection. To perform an offline installation, please run this script with the option -d/--download-packages in a computer with internet access, copy the wazuh-packages.tar file generated on this computer and run again this script."
+        exit 1;
+    fi
 }
 
 specsCheck() {
+
     cores=$(cat /proc/cpuinfo | grep processor | wc -l)
     ram_gb=$(free -m | awk '/^Mem:/{print $2}')
+    
 }
 
 ## Health check
 healthCheck() {
 
+    specsCheck
     if [ ${cores} -lt 2 ] || [ ${ram_gb} -lt 3700 ]; then
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
-    elif [ ${connection} != "200" ]; then
-        echo "Error. No internet connection. To perform an offline installation, please run this script with the option -d/--download-packages in a computer with internet access, copy the wazuh-packages.tar file generated on this computer and run again this script."
     else
         echo "Starting the installation..."
     fi
@@ -591,7 +614,8 @@ main() {
         exit 1;
     fi   
 
-    checkArch 
+    checkArch
+    checkInstalled 
 
     if [ -n "$1" ]; then      
         while [ -n "$1" ]
@@ -604,7 +628,10 @@ main() {
             "-v"|"--verbose") 
                 verbose=1          
                 shift 1
-                ;;                                 
+                ;; 
+            "-o"|"--overwrite")  
+                ow=1      
+                ;;                                                
             "-h"|"--help")        
                 getHelp
                 ;;                                         
@@ -623,6 +650,7 @@ main() {
             healthCheck           
         fi             
         installPrerequisites
+        installJava
         addWazuhrepo
         installWazuh
         installElasticsearch
@@ -632,6 +660,7 @@ main() {
     else
         healthCheck   
         installPrerequisites
+        installJava
         addWazuhrepo
         installWazuh
         installElasticsearch
