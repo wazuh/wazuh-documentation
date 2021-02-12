@@ -153,6 +153,9 @@
             <div id="globaltoc" class="globaltoc" role="navigation" aria-label="main navigation">
 
               <nav>
+                {% if is_latest_release %}
+                <ul id="link-to-guide"><li class="toctree-l1"><a class="reference internal" href="../{{pathto('guide.html', 1) }}">Documentation index guide</a></li></ul>
+                {% endif %}
                 {% block menu %}
                 {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
                 {% if toctree %}
@@ -188,6 +191,21 @@
           </div>
           {% endif %}
 
+          {%- block latest %}
+            {%- set nav_version = version %}
+            {% if current_version %}
+              {%- set nav_version = current_version %}
+            {% endif %}
+            {% if nav_version %}
+            <div class="no-latest-notice-wrapper">
+              <div class="no-latest-notice" data-version="{{ nav_version }}">
+                <div class="no-latest-icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="no-latest-text-wrapper"><span class="font-weight-bold d-none d-sm-inline-block">Warning:</span> This is the documentation for Wazuh {{ nav_version }}. Check out the docs for <a class="link-latest font-weight-bold" href="#">the latest version of Wazuh</a>!</div>
+              </div>
+            </div>
+            {% endif %}
+          {% endblock latest %}
+          
           {# Main content #}
           <main role="main">
             {% block body %} {% endblock %}
