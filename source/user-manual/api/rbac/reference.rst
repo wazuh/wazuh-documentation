@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. Section marks used on this document:
 .. h0 ======================================
@@ -56,7 +56,6 @@ This reference also contains a set of default roles and policies that can be imm
         - `cluster:read_file`_
         - `cluster:restart`_
         - `cluster:status`_
-        - `cluster:update_api_config`_
         - `cluster:upload_file`_
 
     - `Decoders`_
@@ -81,7 +80,6 @@ This reference also contains a set of default roles and policies that can be imm
         - `manager:read`_
         - `manager:read_file`_
         - `manager:restart`_
-        - `manager:update_api_config`_
         - `manager:upload_file`_
 
     - `Mitre`_
@@ -128,6 +126,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
+    - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_read`_
     - `rootcheck_all`_
@@ -389,8 +388,7 @@ cluster:status
 
 cluster:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /cluster/api/config <operation/api.controllers.cluster_controller.put_api_config` (`node:id`_)
-- :api-ref:`DELETE /cluster/api/config <operation/api.controllers.cluster_controller.delete_api_config>` (`node:id`_)
+- .. deprecated:: 4.0.4
 
 cluster:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -496,8 +494,7 @@ manager:restart
 
 manager:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /manager/api/config <operation/api.controllers.manager_controller.delete_api_config>` (`*:*`_)
-- :api-ref:`PUT /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
+- .. deprecated:: 4.0.4
 
 manager:upload_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -723,7 +720,6 @@ Provide full access to all cluster/manager related functionalities.
 Actions
     - `cluster:read`_
     - `cluster:read_api_config`_
-    - `cluster:update_api_config`_
     - `cluster:restart`_
     - `cluster:status`_
     - `cluster:read_file`_
@@ -731,7 +727,6 @@ Actions
     - `cluster:delete_file`_
     - `manager:read`_
     - `manager:read_api_config`_
-    - `manager:update_api_config`_
     - `manager:delete_file`_
     - `manager:read_file`_
     - `manager:upload_file`_
@@ -793,6 +788,18 @@ Resources
 Effect
     - allow
 
+logtest_all
+^^^^^^^^^^^^^^^
+Provide access to all logtest related functionalities.
+
+Actions
+    - `logtest:run`_
+
+Resources
+    - ``*:*:*``
+
+Effect
+    - allow
 
 mitre_read
 ^^^^^^^^^^^^^^^
@@ -977,8 +984,9 @@ Policies
     - `cluster_all`_
     - `decoders_read`_
     - `lists_read`_
-    - `rootcheck_all`_
+    - `logtest_all`_
     - `mitre_read`_
+    - `rootcheck_all`_
     - `rules_read`_
     - `sca_read`_
     - `security_all`_
@@ -1028,8 +1036,8 @@ Policies
     - `cluster_read`_
     - `decoders_read`_
     - `lists_read`_
-    - `rootcheck_read`_
     - `mitre_read`_
+    - `rootcheck_read`_
     - `rules_read`_
     - `sca_read`_
     - `syscheck_read`_
@@ -1038,13 +1046,17 @@ Policies
 
 users_admin
 ^^^^^^^^^^^^
-Users administrator of the system, this role have full access to all users related functionalities.
+Users administrator of the system, this role provides full access to all users related functionalities.
 
 Policies
     - `users_all`_
 
 Default rules
 -------------
+.. warning::
+
+    Run_as permissions through these mapping rules can only be obtained with ``wazuh-wui`` user. These rules will never match an authorization context for any other Wazuh API user.
+
 wui_elastic_admin
 ^^^^^^^^^^^^^^^^^^^^^
 Administrator permissions for WUI's elastic users.

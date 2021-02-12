@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _upgrading_elastic_stack:
 
@@ -283,6 +283,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
             port: 55000
             username: wazuh
             password: wazuh
+            run_as: false
 
 #. Remove the Wazuh Kibana plugin:
 
@@ -332,7 +333,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
     .. code-block:: console
 
       # cd /usr/share/kibana/
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.3-1.zip
 
 
 #. Update configuration file permissions:

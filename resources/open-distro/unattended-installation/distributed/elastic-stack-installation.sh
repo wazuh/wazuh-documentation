@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Program toinstall Open Distro for Elasticsearch and Kibana
-# Copyright (C) 2015-2020, Wazuh Inc.
+# Copyright (C) 2015-2021, Wazuh Inc.
 #
 # This program is a free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public
@@ -11,12 +11,20 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='> /dev/null 2>&1'
+WAZUH_VER="4.1.0"
+WAZUH_REV="1"
+ELK_VER="7.10.0"
+OD_VER="1.12.0"
+OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
+    sep="-"
 elif [ -n "$(command -v zypper)" ]; then
-    sys_type="zypper"
+    sys_type="zypper"   
+    sep="-"  
 elif [ -n "$(command -v apt-get)" ]; then
-    sys_type="apt-get"
+    sys_type="apt-get"   
+    sep="="
 fi
 
 ## Prints information
@@ -205,11 +213,11 @@ installElasticsearch() {
     logger "Installing Open Distro for Elasticsearch..."
 
     if [ ${sys_type} == "yum" ]; then
-        eval "yum install opendistroforelasticsearch -y -q ${debug}"
+        eval "yum install opendistroforelasticsearch-${OD_VER}-${OD_REV} -y -q ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch ${debug}"
+        eval "zypper -n install opendistroforelasticsearch=${OD_VER}-${OD_REV} ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q ${debug}"
+        eval "apt-get install elasticsearch-oss opendistroforelasticsearch=${OD_VER}-${OD_REV} -y -q ${debug}"
     fi
 
     if [  "$?" != 0  ]; then
@@ -388,7 +396,7 @@ copyCertificates() {
         eval "mv /etc/elasticsearch/certs/${IMN[pos]}_http.key /etc/elasticsearch/certs/elasticsearch_http.key ${debug}"
         eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip -f ${debug}"
     fi
-
+    eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer ${debug}"
     if [[ -n "${certificates}" ]] || [[ -n "${single}" ]]; then
         cp ~/config.yml /etc/elasticsearch/certs/
         tar -cf /etc/elasticsearch/certs/certs.tar *
@@ -431,9 +439,9 @@ installKibana() {
 
     logger "Installing Kibana..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch-kibana ${debug}"
+        eval "zypper -n install opendistroforelasticsearch-kibana=${OD_VER} ${debug}"
     else
-        eval "${sys_type} install opendistroforelasticsearch-kibana -y -q ${debug}"
+        eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
@@ -441,7 +449,7 @@ installKibana() {
     else
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;

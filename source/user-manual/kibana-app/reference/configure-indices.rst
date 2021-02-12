@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kibana_configure_indices:
 
@@ -140,7 +140,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
         # service filebeat restart
 
-If the pattern is not present in Kibana UI, just create a new one using the same name used on the Elasticsearch template, and make sure to use ``@timestamp`` as the Time Filter field name.
+If the pattern is not present in Kibana UI, you may create a new one using the same name used on the Elasticsearch template, and make sure to use ``timestamp`` as the Time Filter field name.
 
 You can also open the :ref:`Pattern <kibana_index_pattern>` section on the Wazuh Kibana plugin, and make sure that the new one is selected.
 

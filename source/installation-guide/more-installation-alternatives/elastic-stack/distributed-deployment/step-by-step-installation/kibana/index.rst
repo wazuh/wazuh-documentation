@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
@@ -99,7 +99,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.3-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.3-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -133,6 +133,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        port: 55000
        username: wazuh
        password: wazuh
+       run_as: false
 
 
 Disabling repositories

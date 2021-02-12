@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _upgrading_open_distro:
 
@@ -100,6 +100,8 @@ Preparing Open Distro for Elasticsearch
 
 
 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
+
 Upgrading Elasticsearch
 -----------------------
 
@@ -153,7 +155,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch-|OPEN_DISTRO_LATEST|
+            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|
 
 
         .. group-tab:: ZYpp
@@ -339,6 +341,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
             port: 55000
             username: wazuh
             password: wazuh
+            run_as: false
 
 
 #. Remove the Wazuh Kibana plugin:
@@ -395,7 +398,7 @@ Copy the Wazuh Kibana plugin configuration file to its new location. This step i
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip
+          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip
 
       .. group-tab:: From the package
 

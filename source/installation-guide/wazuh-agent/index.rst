@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh agent
 
@@ -7,7 +7,7 @@
 Wazuh agent
 ===========
 
-The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
+The Wazuh agent is multi-platform and runs on the hosts that the user wants to monitor. It provides the following capabilities:
 
 - Log and data collection
 - File integrity monitoring
@@ -16,11 +16,11 @@ The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform
 - Configuration assessments
 - Software inventory
 
-It communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
+The Wazuh agent communicates with Wazuh's manager, sending data in near real time through an encrypted and authenticated channel.
 
-The Wazuh agent has been developed taking into consideration the need for monitoring a great variety of different endpoints without impacting their performance. It is because of this that the Wazuh agent is supported in the most popular operating systems and only requires around 0.1 GB of RAM. 
+The Wazuh agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. Therefore, the Wazuh agent is supported on the most popular operating systems and only requires about 0.1 GB of RAM.
 
-There are several options to install a Wazuh agent, depending on the operating system and whether you wish to build from source or not. Consult the table below and choose how to proceed for a given agent:
+There are several options to install a Wazuh agent, depending on the operating system and whether you would like to build from source or not. Check the following table and choose how to proceed for a given agent:
 
 +----------------------------------------------------------+-----------------------------------------------------------------------+
 | Operating system                                         | Description                                                           |
@@ -38,11 +38,11 @@ There are several options to install a Wazuh agent, depending on the operating s
 | :ref:`Windows installer <wazuh_agent_package_windows>`   | Install Wazuh agents on Windows.                                      |
 +----------------------------------------------------------+-----------------------------------------------------------------------+
 
-In each OS installer document, it is described how to deploy the agent using the deployment variables, which facilitates the task of deployment, registration, and configuration of the agent in a single command. The complete guide: :ref:`Deployment variables <deployment_variables>`.
+Each operating system installer document describes how to deploy the agent using the deployment variables, which facilitates the task of deploying, logging and configuring the agent in a single command. Check the complete guide in the :ref:`deployment variables page <deployment_variables>`.
 
-On the other hand, deploying agents to a large number of servers or endpoints can be easier using automation tools like :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM or :ref:`Ansible <wazuh_ansible_guide>`. Consider exploring these options if you are deploying Wazuh in a large environment.
+If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment may be easier using automation tools such as :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM or :ref:`Ansible <wazuh_ansible_guide>`.
 
-.. note:: The compatibility between Wazuh agent and Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
+.. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager has a newer or equal version than the Wazuh agent.
 
 .. rst-class:: d-none
 

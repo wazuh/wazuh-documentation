@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
@@ -95,7 +95,7 @@ Kibana installation and configuration
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.3_7.9.1-1.zip
+        # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip
 
 #. The next step involves the certificates placement. This guide assumes that a copy of ``certs.tar`` is placed in the root home folder (~/):
 
@@ -137,6 +137,7 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
        port: 55000
        username: wazuh
        password: wazuh
+       run_as: false
 
 Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
