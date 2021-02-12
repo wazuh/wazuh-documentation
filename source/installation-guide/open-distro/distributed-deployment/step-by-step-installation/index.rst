@@ -5,7 +5,7 @@ Step-by-step installation
 
 The following sections provide information about how to install each involved component. During the Open Distro for Elasticsearch cluster installation, the certificates necessary to secure the communication will be created, so it is recommended to start by installing Open Distro for Elasticsearch.
 
-For a distributed deployment each of the following components will be installed on their dedicated server, except for Kibana, that may optionally be installed on the same server as an Elasticsearch node.
+For a distributed deployment, each of the following components will be installed on their dedicated server, except for Kibana, which can optionally be installed on the same server as an Elasticsearch node.
 
 
 - **Elasticsearch cluster**
