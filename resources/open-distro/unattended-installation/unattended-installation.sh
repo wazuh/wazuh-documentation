@@ -46,7 +46,7 @@ rollBack() {
         rm -rf /var/ossec/
     fi
 
-    if [ -n "${odinstalled}" ]; then
+    if [ -n "${elasticinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
             yum remove opendistroforelasticsearch -y
             yum remove elasticsearch*
@@ -421,6 +421,16 @@ installKibana() {
 
 }
 
+checkFlavour() {
+    if [ -n "$elasticinstalled" ]; then
+        flavour=$(grep 'opendistro' /etc/elasticsearch/elasticsearch.yml)
+    fi
+
+    if [ -n "$flavour" ]; then
+        echo "OD"
+    fi
+}
+
 checkInstalled() {
     
     if [ "${sys_type}" == "yum" ]; then
@@ -440,18 +450,18 @@ checkInstalled() {
     fi
 
     if [ "${sys_type}" == "yum" ]; then
-        odinstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch)
+        elasticinstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch)
     elif [ "${sys_type}" == "zypper" ]; then
-        odinstalled=$(zypper packages --installed | grep opendistroforelasticsearch | grep i+ | grep noarch)
+        elasticinstalled=$(zypper packages --installed | grep opendistroforelasticsearch | grep i+ | grep noarch)
     elif [ "${sys_type}" == "apt-get" ]; then
-        odinstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch)
+        elasticinstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch)
     fi 
 
-    if [ -n "${odinstalled}" ]; then
+    if [ -n "${elasticinstalled}" ]; then
         if [ ${sys_type} == "zypper" ]; then
-            odversion=$(echo ${odinstalled} | awk '{print $11}')
+            odversion=$(echo ${elasticinstalled} | awk '{print $11}')
         else
-            odversion=$(echo ${odinstalled} | awk '{print $2}')
+            odversion=$(echo ${elasticinstalled} | awk '{print $2}')
         fi  
     fi
 
@@ -492,8 +502,9 @@ checkInstalled() {
         javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
 
-    if [ -n "${wazuhinstalled}" ] || [ -n "${odinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
+    if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
         echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
+        exit 1;
     fi         
 
 }
@@ -505,7 +516,7 @@ overwrite() {
     if [ -n "${wazuhinstalled}" ]; then
         installWazuh
     fi
-    if [ -n "${odinstalled}" ]; then
+    if [ -n "${elasticinstalled}" ]; then
         installJava
         installElasticsearch
     fi    
