@@ -14,13 +14,16 @@ This section lists the changes in version 4.1.0. More details about these change
 Highlights
 ----------
 
+
 - Support for PCRE2 regular expressions in rules and decoders has been added.
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
-- New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. The WPK upgrade functionality has been moved to this module. 
+- New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
 - Support for AWS load balancers (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
 - Removed the limit on the number of agents a manager can support.
 - Migration of rootcheck results to Wazuh DB in order to delete the files with the results of each agent.
+- Support for Open Distro for Elasticsearch 1.12.0. 
+- Support for Elastic Stack basic license 7.10.0 and 7.10.2. 
 
 Wazuh core
 ----------
@@ -112,89 +115,56 @@ Fixed
 - A ``cluster_control`` bug that caused an error message when running ``wazuh-clusterd`` in foreground.
 
 
-
-Wazuh Kibana plugin - Revision 4101
------------------------------------
-
-Added
-^^^^^
-- Check the max buckets by default in health check and increase them. 
-- Added a prompt warning in role mapping if run_as is false or he is not allowed to use it by API. 
-
-Changed
-^^^^^^^
-- Support new fields of Windows Registry at FIM inventory panel.
-- Added on FIM Inventory Windows Registry registry_key and registry_value items from syscheck.
-- Uncheck agents after an action in agents groups management.
-- Unsaved rule files when edit or create a rule with invalid content.
-
-Fixed
-^^^^^
-- Server error Invalid token specified: Cannot read property 'replace' of undefined.
-- Show empty files rules and decoders.
-- Wrong hover texts in CDB lists actions.
-- Access to forbidden agents information when exporting agents list.
-- The decoder detail view is not displayed.
-- The complex search using the Wazuh API query filter in search bars.
-- Validation to check userPermissions are not ready yet.
-- Clear visualizations manager list when switching tabs. Fixes PDF reports filters.
-- Strange box shadow in Export popup panel in Management > Groups.
-- Wrong command on alert when data folder does not exist.
-- Agents table OS field sorting: Changes agents table field os_name to os.name,os.version to make it sortable. 
-- Diff parsed datetime between agent detail and agents table.
-- Allow access to Agents section with agent:group action permission.
-- Filters does not work on modals with search bar.
-- Wrong package name in deploy new agent.
-- Number agents not show on pie onMouseEvent.
-- Fixed off Kibana Query Language in search bar of Controls/Inventory modules.
-- Number of agents do not show on the pie chart tooltip in agents preview.
-
-
-
 Wazuh Kibana plugin
 -------------------
 
 Added
 ^^^^^
+- Check the Kibana max buckets config by default in health-check and increase them. 
+- A warning in the role mapping section if the run_as setting is disable. 
 - A label to indicate that the `wui_` rules only apply to the wazuh-wui API user. 
-- Each user can only view their own reports. 
-- Wazuh data directory moved from optimize to data Kibana directory.
-- Adapt the app to the new Kibana platform.
-- Modified agent registration adding groups and architecture. 
-
 
 Changed
 ^^^^^^^
-- Support new fields of Windows Registry at FIM inventory panel.
-- Replaced wazuh Wazuh API user by wazuh-wui in the default configuration. 
+
+- Adapted the Wazuh Kibana plugin to the new Kibana platform.
+- Wazuh config directory moved from optimize to data Kibana directory.
+- Support on FIM Inventory Windows Registry for the new scheme with registry_key and registry_value from syscheck.
+- Uncheck agents after an action in agents groups management.
+- Unsave rule files when editing or creating a rule with invalid content.
+- Replaced Wazuh API user by wazuh-wui in the default configuration.
+- Add agent id to the reports name in Agent Inventory and Modules.
+- Allow access to Agents section with agent:group action permission.
+
 
 Fixed
 ^^^^^
-- Wazuh menu and agent menu for Solaris agents.
-- Wrong shards and replicas for statistics indices and also fixed wrong prefix for monitoring indices.
-- Top bar overlayed over expanded visualizations. 
-- Empty inventory data in Solaris agents.
-- Wrong parameters in the dev-tools autocomplete section.
-- Wrong permissions on edit CDB list.
-- Add the metafields when refreshing the index pattern.
-- An error toast is displayed on Elasticsearch users for non-secure environments.
-- Error about Handler.error in Role Mapping.
-- Fixed message in reserved users actions.
-- Error 500 on Export formatted CDB list.
-- Double tooltip for the wui rules label.
-- Create an index pattern even if there are not available indices. 
-- Report creation dates set to 1970-01-01T00:00:00.000Z.
-- A bug for missing commands in Ubuntu/Debian and Centos.
-- A bug that shows an hour before in ``/security-events/dashboard``. 
+- Server error Invalid token specified: Cannot read property 'replace' of undefined.
+- Show empty files rules and decoders.
+- Wrong hover texts in CDB list actions.
+- Access to forbidden agents information when exporting agents list. 
+- The complex search using the Wazuh API query filter in search bars.
+- Validation to check if userPermissions are not ready yet.             
+- Agents table OS field sorting: Changed agents table field os_name to os.name,os.version to make it sortable.
+- Different parsed datetime between agent detail and agents overview table.
+- Fixed the tooltip of the pie chart in agents preview is not displayed the for all value #2890
+- Menu crash when Solaris agents are selected. 
+- Report's creation dates set to 1970-01-01T00:00:00.000Z in some OS. 
+- Missing commands for Ubuntu/Debian and CentOS on the Deploy new agent section. 
+- Different hour displayed on Alerts List section in some dashboards. 
+- Permissions to access agents when policy agent:read is set.
+- SCA permissions for agents views and dashboards.
+- Settings of statistics indices creation.
+
 
 Wazuh ruleset
 -------------
 
 Added
 ^^^^^
-- Let the ruleset update tool to bypass the version check with the force option.
+- The ruleset update tool is now able to bypass the version check with the force option.
 - New AWS Config-History rules to make it more granular by including every item status supported.
-- Several hundred new SCA policies added for various operating systems.
+- Several hundred new SCA policies for various operating systems.
 
 Changed
 ^^^^^^^
