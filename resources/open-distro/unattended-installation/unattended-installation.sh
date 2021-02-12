@@ -59,6 +59,8 @@ rollBack() {
         rm -rf /var/lib/elasticsearch/
         rm -rf /usr/share/elasticsearch/
         rm -rf /etc/elasticsearch/
+        rm -rf ~/search-guard-tlstool-1.8.zip
+        rm -rf ~/searchguard
     fi
 
     if [ -n "${filebeatinstalled}" ]; then
