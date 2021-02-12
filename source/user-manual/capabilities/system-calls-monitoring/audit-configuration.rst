@@ -78,7 +78,7 @@ Editing ossec.conf
 ~~~~~~~~~~~~~~~~~~
 Wazuh must be aware of the events detected by Audit. So, it is needs to be configured to read the audit log file:
 
-.. code-block: xml
+.. code-block:: xml
 
     <localfile>
       <log_format>audit</log_format>

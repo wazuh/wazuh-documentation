@@ -247,11 +247,11 @@ Wazuh is a free and open source platform for threat detection, security monitori
           </div>
 
           <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="fas fa-angle-left" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
           <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="fas fa-angle-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
 
