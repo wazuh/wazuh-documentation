@@ -17,11 +17,11 @@ Highlights
 
 - Support for PCRE2 regular expressions in rules and decoders has been added.
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
-- New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. 
+- New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
-- Support for AWS load balancer logs (Application Load Balancer, Classic Load Balancer and Network Load Balancer).
+- Support for AWS load balancer logs (Application Load Balancer, Classic Load Balancer, and Network Load Balancer).
 - Removed the limit on the number of agents a manager can support.
-- Migration of rootcheck results to Wazuh DB in order to delete the files with the results of each agent.
+- Migration of rootcheck results to Wazuh DB to delete the files with the results of each agent.
 - Support for Open Distro for Elasticsearch 1.12.0. 
 - Support for Elastic Stack basic license 7.10.0 and 7.10.2. 
 
@@ -36,7 +36,7 @@ Added
 - Negation logic for rules.
 - Support for ``PCRE2`` regular expressions in rules and decoders.
 - New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
-- New **upgrade module** that provides simultaneous agent upgrades in single node or cluster architecture. WPK upgrade functionality has been moved to this module.
+- New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture. WPK upgrade functionality has been moved to this module.
 - New **task module** that collects and manages all the upgrade tasks executed in the agents or managers. 
 - Let the time interval to detect that an agent got disconnected configurable. Deprecate parameter ``DISCON_TIME``.
 - Vulnerability Detector support for macOS. 
@@ -66,7 +66,7 @@ Changed
 - Removed limit on the number of agents that a manager can support.
 - Migration of rootcheck results to Wazuh DB to remove the files with the results of each agent.
 - New mechanism to close RIDS files when agents are disconnected.
-- Moved CA configuration section to verify WPK signatures from  the ``active-response`` section to the ``agent-upgrade section``.
+- Moved CA configuration section to verify WPK signatures from the ``active-response`` section to the ``agent-upgrade section``.
 - The ossec-logtest tool is deprecated and replaced by wazuh-logtest, which uses a new testing service integrated in Analysisd.
 - Modified the error message to debug when multiple daemons attempt to remove an agent simultaneously.
 - Replaced the error message with a warning when the agent fails to reach a module. 
@@ -83,7 +83,7 @@ Changed
 - Refactored framework to work with the new upgrade module.
 - Refactored agent upgrade CLI to work with the new upgrade module. It distributes petitions in a clustered environment.
 - Rule and decoder details structure to support PCRE2.
-- Refactored framework to adapt agent status changes in wazuh.db. 
+- Refactored framework to adapt agent status changes in ``wazuh.db``. 
 - Improved the performance of AWS Config integration by removing alert fields with variables such as Instance ID in its name.
 
 Fixed
@@ -122,19 +122,19 @@ Added
 ^^^^^
 - Check the Kibana max buckets config by default in health-check and increase them. 
 - A warning in the role mapping section if the ``run_as`` setting is disabled.
-- A label to indicate that the `wui_` rules only apply to the wazuh-wui API user. 
+- A label to indicate that the ``wui_`` rules only apply to the ``wazuh-wui`` API user. 
 
 Changed
 ^^^^^^^
 
 - Adapted the Wazuh Kibana plugin to the new Kibana platform.
-- Wazuh config directory moved from optimize to data Kibana directory.
+- Wazuh config directory moved from ``/usr/share/kibana/optimize`` to ``/usr/share/kibana/data`` Kibana directory.
 - Support on FIM Inventory Windows Registry for the new scheme with registry_key and registry_value from syscheck.
 - Uncheck agents after an action in agents groups management.
 - Unsave rule files when editing or creating a rule with invalid content.
-- Replaced Wazuh API user with wazuh-wui in the default configuration.
+- Replaced Wazuh API user with ``wazuh-wui`` in the default configuration.
 - Add agent id to the reports name in Agent Inventory and Modules.
-- Allow access to Agents section with ``agent:group`` resource permission.
+- Allow access to the Agents section with ``agent:group`` resource permission.
 
 
 Fixed
@@ -144,14 +144,14 @@ Fixed
 - Wrong hover texts in CDB list actions.
 - Access to forbidden agents information when exporting agents list. 
 - The complex search using the Wazuh API query filter in search bars.
-- Validation to check if userPermissions are not ready yet.             
-- Agents table OS field sorting: Changed agents table field os_name to os.name,os.version to make it sortable.
-- Different parsed datetime between agent detail and agents overview table.
+- Validation to check if ``userPermissions`` are not ready yet.             
+- Agents table OS field sorting: Changed agents table field ``os_name`` to ``os.name,os.version`` to make it sortable.
+- Different parsed ``datetime`` between agent detail and agents overview table.
 - Fixed the tooltip of the pie chart in agents preview is not displayed the for all value #2890
 - Menu crash when Solaris agents are selected. 
 - Report's creation dates set to 1970-01-01T00:00:00.000Z in some OS. 
 - Missing commands for Ubuntu/Debian and CentOS on the Deploy new agent section. 
-- Different hour displayed on Alerts List section in some dashboards. 
+- Different hours displayed on Alerts List section in some dashboards. 
 - Permissions to access agents when policy agent:read is set.
 - SCA permissions for agents views and dashboards.
 - Settings of statistics indices creation.
