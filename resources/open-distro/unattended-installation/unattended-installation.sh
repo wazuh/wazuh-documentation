@@ -545,7 +545,7 @@ healthCheck() {
         echo "Your system does not meet the recommended minimum hardware requirements of 4Gb of RAM and 2 CPU cores. If you want to proceed with the installation use the -i option to ignore these requirements."
         exit 1;
     elif [ ${connection} != "200" ]; then
-        echo "Error. No internet connection. To perform an offline installation, please run this script with the option -d/--download-packages in a computer with internet access, copy the packages.tar file generated on this computer and run again this script."
+        echo "Error. No internet connection. To perform an offline installation, please run this script with the option -d/--download-packages in a computer with internet access, copy the wazuh-packages.tar file generated on this computer and run again this script."
     else
         echo "Starting the installation..."
     fi
