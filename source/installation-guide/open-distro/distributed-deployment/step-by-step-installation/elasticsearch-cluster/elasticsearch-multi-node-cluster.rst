@@ -77,12 +77,6 @@ To configure Elasticsearch download the following file ``/etc/elasticsearch/elas
 
 .. include:: ../../../../../_templates/installations/elastic/common/elastic-multi-node/configure_elasticsearch_initial.rst
 
-Elasticsearch roles and users
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
-
-.. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,6 +92,8 @@ Certificates creation and deployment
 #. Enable and start the Elasticsearch service:
 
     .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
+
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
@@ -174,6 +170,7 @@ Certificates deployment
 
     .. include:: ../../../../../_templates/installations/elastic/common/enable_elasticsearch.rst
 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
 
@@ -203,15 +200,15 @@ An example response should look as follows:
               {
                 "name" : "node-1",
                 "cluster_name" : "elasticsearch",
-                "cluster_uuid" : "2gIeOOeUQh25c2yU0Pd-RQ",
+                "cluster_uuid" : "J4EAfzd7R4KZv-31jBAuNA",
                 "version" : {
-                  "number" : "7.9.1",
+                  "number" : "7.10.0",
                   "build_flavor" : "oss",
                   "build_type" : "rpm",
-                  "build_hash" : "083627f112ba94dffc1232e8b42b73492789ef91",
-                  "build_date" : "2020-09-01T21:22:21.964974Z",
+                  "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
+                  "build_date" : "2020-11-09T21:30:33.964949Z",
                   "build_snapshot" : false,
-                  "lucene_version" : "8.6.2",
+                  "lucene_version" : "8.7.0",
                   "minimum_wire_compatibility_version" : "6.8.0",
                   "minimum_index_compatibility_version" : "6.0.0-beta1"
                 },
