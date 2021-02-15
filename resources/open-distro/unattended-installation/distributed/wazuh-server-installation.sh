@@ -159,7 +159,7 @@ installWazuh() {
 
     logger "Installing the Wazuh manager..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install wazuh-manager=${WAZUH_VER}-${WAZUH_REV} ${debug}"
+        eval "zypper -n install wazuh-manager-${WAZUH_VER}-${WAZUH_REV} ${debug}"
     else
         eval "${sys_type} install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q ${debug}"
     fi
@@ -185,7 +185,7 @@ installFilebeat() {
     logger "Installing Filebeat..."
     
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install filebeat=${ELK_VER} ${debug}"
+        eval "zypper -n install filebeat-${ELK_VER} ${debug}"
     else
         eval "${sys_type} install filebeat${sep}${ELK_VER} -y -q  ${debug}"
     fi

@@ -215,7 +215,7 @@ installElasticsearch() {
     if [ ${sys_type} == "yum" ]; then
         eval "yum install opendistroforelasticsearch-${OD_VER}-${OD_REV} -y -q ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch=${OD_VER}-${OD_REV} ${debug}"
+        eval "zypper -n install opendistroforelasticsearch-${OD_VER}-${OD_REV} ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
         eval "apt-get install elasticsearch-oss opendistroforelasticsearch=${OD_VER}-${OD_REV} -y -q ${debug}"
     fi
@@ -439,7 +439,7 @@ installKibana() {
      
     logger "Installing Kibana..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch-kibana=${OD_VER} ${debug}"
+        eval "zypper -n install opendistroforelasticsearch-kibana-${OD_VER} ${debug}"
     else
         eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y -q ${debug}"
     fi
