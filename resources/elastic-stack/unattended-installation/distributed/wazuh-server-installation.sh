@@ -11,6 +11,21 @@
 ## Check if system is based on yum or apt-get
 ips=()
 debug='> /dev/null 2>&1'
+WAZUH_VER="4.0.4"
+WAZUH_REV="1"
+ELK_VER="7.9.3"
+OD_VER="1.11.0"
+OD_REV="1"
+if [ -n "$(command -v yum)" ]; then
+    sys_type="yum"
+    sep="-"
+elif [ -n "$(command -v zypper)" ]; then
+    sys_type="zypper"   
+    sep="-"  
+elif [ -n "$(command -v apt-get)" ]; then
+    sys_type="apt-get"   
+    sep="="
+fi
 if [ -n "$(command -v yum)" ] 
 then
     sys_type="yum"
@@ -255,13 +270,13 @@ installFilebeat() {
     
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install filebeat-7.9.3 -y -q  $debug"    
+        eval "yum install filebeat--${ELK_VER} -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat-7.9.3 $debug"
+        eval "zypper -n install filebeat--${ELK_VER} $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=7.9.3 -y -q  $debug"
+        eval "apt-get install filebeat=-${ELK_VER} -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
