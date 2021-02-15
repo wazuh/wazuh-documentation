@@ -527,22 +527,23 @@ list_compiled_html = []
 
 def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
-
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
-
     # Remove extra minified files
     for asset in extra_assets:
         mini_asset = '.min.'.join(asset.split('.'))
         if os.path.exists(app.srcdir + '/_static/' + mini_asset):
             os.remove(app.srcdir + '/_static/' + mini_asset)
-
     # Manage the guide-assets
     if os.path.isdir(app.outdir + '/_static/guide-assets'):
         file_names = os.listdir(app.outdir + '/_static/guide-assets')
         if is_latest_release == True:
             # Move the folder 'guide-assets' to the root folder defined as outdir
-            os.mkdir(app.outdir + '/guide-assets')
+            if os.path.isdir(app.outdir + '/guide-assets'):
+                for file_name in os.listdir(app.outdir + '/guide-assets'):
+                    os.remove(app.outdir + '/guide-assets/' + file_name)
+            else:
+                os.mkdir(app.outdir + '/guide-assets')
             for file_name in file_names:
                 os.rename(app.outdir + '/_static/guide-assets/' + file_name, app.outdir + '/guide-assets/' + file_name,)
         else:
