@@ -34,6 +34,25 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.1 ****/
+
+/* Pages added in 4.1 */
+
+newUrls['4.1'] = [
+  '/release-notes/release_4_1_0.html',
+  '/user-manual/reference/ossec-conf/agent-upgrade.html',
+  '/user-manual/reference/ossec-conf/task-manager.html',
+  '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+  '/user-manual/reference/tools/wazuh-logtest.html',
+  '/user-manual/reference/ossec-conf/rule_test.html',
+  '/development/wazuh-logtest.html',
+  '/user-manual/capabilities/wazuh-logtest/index.html',
+  '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/ruleset/ruleset-xml-syntax/pcre2.html'
+];
+
 /* *** RELEASE 4.0 ****/
 
 /* Pages added in 4.0 */
@@ -932,7 +951,7 @@ redirections.push(
     'target': ['3.12=>3.13', '3.13=>3.12'],
     '3.12': '/getting-started/use-cases.html',
     '3.13': '/getting-started/use_cases/index.html',
-  }  
+  }
 );
 
 newUrls['3.13'] = [
