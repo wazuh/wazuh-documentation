@@ -482,7 +482,7 @@ Installing Wazuh agent from sources
      .. code-block:: console
 
         # cd wazuh-*
-        # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/4.0/
+        # /usr/local/bin/gmake -C src deps RESOURCES_URL=https://packages.wazuh.com/deps/|WAZUH_LATEST_MINOR|/
         # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no DISABLE_SHARED=yes
 
     4. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:

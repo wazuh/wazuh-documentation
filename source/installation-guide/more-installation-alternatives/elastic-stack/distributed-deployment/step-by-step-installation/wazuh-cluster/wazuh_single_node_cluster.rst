@@ -156,13 +156,13 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/filebeat/7.x/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_LATEST_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
