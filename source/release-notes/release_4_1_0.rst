@@ -14,7 +14,7 @@ This section lists the changes in version 4.1.0. More details about these change
 Highlights
 ----------
 
-- Support for regular expression negation and PCRE2 format in rules and decoders has been added. 
+- Added support for regular expressions negation and PCRE2 format in rules and decoders. 
 - New **ruleset test module** managed by the analysis daemon allowing testing sessions of rules and decoders.
 - New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
