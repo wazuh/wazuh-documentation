@@ -205,9 +205,9 @@ installWazuh() {
     logger "Installing the Wazuh manager..."
     if [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install wazuh-manager $debug"
+        eval "zypper -n install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} $debug"
     else
-        eval "$sys_type install wazuh-manager -y -q $debug"
+        eval "$sys_type install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q $debug"
     fi
     if [  "$?" != 0  ]
     then
