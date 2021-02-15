@@ -8,7 +8,7 @@
 
             .. code-block:: console
 
-                # yum install opendistroforelasticsearch
+                # yum install opendistroforelasticsearch-1.11.0-1
 
 
 
@@ -18,7 +18,7 @@
 
             .. code-block:: console
 
-                # apt install elasticsearch-oss opendistroforelasticsearch
+                # apt install elasticsearch-oss opendistroforelasticsearch=1.11.0-1
 
 
 
@@ -28,6 +28,6 @@
 
             .. code-block:: console
 
-                # zypper install opendistroforelasticsearch
+                # zypper install opendistroforelasticsearch-1.11.0-1
 
 .. End of include file
