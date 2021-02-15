@@ -287,7 +287,7 @@ Upgrading Kibana
           
           .. group-tab:: For upgrades from 3.12.x or newer
 
-              Create the new directory and copy the Wazuh Kibana plugin configuration file. This step is not necessary for upgrades from Wazuh 4.0.4 and Elasticsearch 7.10.0. 
+              Create the new directory and copy the Wazuh Kibana plugin configuration file.
 
                 .. code-block:: console
 
