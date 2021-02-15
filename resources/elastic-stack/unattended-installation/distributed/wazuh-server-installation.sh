@@ -14,8 +14,6 @@ debug='> /dev/null 2>&1'
 WAZUH_VER="4.0.4"
 WAZUH_REV="1"
 ELK_VER="7.9.3"
-OD_VER="1.11.0"
-OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
     sep="-"

@@ -16,8 +16,6 @@ passwords=""
 WAZUH_VER="4.0.4"
 WAZUH_REV="1"
 ELK_VER="7.9.3"
-OD_VER="1.11.0"
-OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
     sep="-"
@@ -358,7 +356,7 @@ installKibana() {
         eval "cd /usr/share/kibana $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_${ELK_VER}-1.zip $debug"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-${WAZUH_VER}_${ELK_VER}-1.zip $debug"
         if [  "$?" != 0  ]
         then
             echo "Error: Wazuh Kibana plugin could not be installed."
