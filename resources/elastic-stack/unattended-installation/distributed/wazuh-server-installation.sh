@@ -24,16 +24,6 @@ elif [ -n "$(command -v apt-get)" ]; then
     sys_type="apt-get"   
     sep="="
 fi
-if [ -n "$(command -v yum)" ] 
-then
-    sys_type="yum"
-elif [ -n "$(command -v zypper)" ] 
-then
-    sys_type="zypper"     
-elif [ -n "$(command -v apt-get)" ] 
-then
-    sys_type="apt-get"   
-fi
 
 logger() {
 
@@ -268,13 +258,13 @@ installFilebeat() {
     
     if [ $sys_type == "yum" ] 
     then
-        eval "yum install filebeat--${ELK_VER} -y -q  $debug"    
+        eval "yum install filebeat-${ELK_VER} -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install filebeat--${ELK_VER} $debug"
+        eval "zypper -n install filebeat-${ELK_VER} $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install filebeat=-${ELK_VER} -y -q  $debug"
+        eval "apt-get install filebeat=${ELK_VER} -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
