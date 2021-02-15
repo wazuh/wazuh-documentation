@@ -14,14 +14,13 @@ This section lists the changes in version 4.1.0. More details about these change
 Highlights
 ----------
 
-
-- Support for PCRE2 regular expressions in rules and decoders has been added.
-- New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
+- Support for regular expression negation and PCRE2 format in rules and decoders has been added. 
+- New **ruleset test module** managed by the analysis daemon allowing testing sessions of rules and decoders.
 - New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture. 
 - The Vulnerability Detector now supports macOS agents. These agents must be updated to 4.1 to scan vulnerabilities.
 - Support for AWS load balancer logs (Application Load Balancer, Classic Load Balancer, and Network Load Balancer).
 - Removed the limit on the number of agents a manager can support.
-- Migration of rootcheck results to Wazuh DB to delete the files with the results of each agent.
+- New endpoints to query and manage Rootcheck data.
 - Support for Open Distro for Elasticsearch 1.12.0. 
 - Support for Elastic Stack basic license 7.10.0 and 7.10.2. 
 
@@ -35,7 +34,7 @@ Added
 
 - Negation logic for rules.
 - Support for ``PCRE2`` regular expressions in rules and decoders.
-- New **ruleset test module** to enable testing and verification of rules via the Wazuh User Interface. 
+- New **ruleset test module** managed by the analysis daemon allowing testing sessions of rules and decoders.
 - New **upgrade module** that provides simultaneous agent upgrades in a single node or cluster architecture. WPK upgrade functionality has been moved to this module.
 - New **task module** that collects and manages all the upgrade tasks executed in the agents or managers. 
 - Let the time interval to detect that an agent got disconnected configurable. Deprecate parameter ``DISCON_TIME``.
@@ -51,7 +50,7 @@ Added
 
 **AWS module**
 
-- Support for AWS load balancers: Application Load Balancer, Classic Load Balancer, and Network Load Balancer.
+- Support for AWS load balancers logs: Application Load Balancer, Classic Load Balancer, and Network Load Balancer.
 
 **Framework**
 
@@ -135,6 +134,7 @@ Changed
 - Replaced Wazuh API user with ``wazuh-wui`` in the default configuration.
 - Add agent id to the reports name in Agent Inventory and Modules.
 - Allow access to the Agents section with ``agent:group`` resource permission.
+- Added vulnerabilities module for macOS agents. 
 
 
 Fixed
@@ -147,14 +147,14 @@ Fixed
 - Validation to check if ``userPermissions`` are not ready yet.             
 - Agents table OS field sorting: Changed agents table field ``os_name`` to ``os.name,os.version`` to make it sortable.
 - Different parsed ``datetime`` between agent detail and agents overview table.
-- Fixed the tooltip of the pie chart in agents preview is not displayed the for all value #2890
+- An error with the agents status pie chart tooltip that did not displayed the number of agents on the first hover.   
 - Menu crash when Solaris agents are selected. 
 - Report's creation dates set to 1970-01-01T00:00:00.000Z in some OS. 
 - Missing commands for Ubuntu/Debian and CentOS on the Deploy new agent section. 
 - Different hours displayed on Alerts List section in some dashboards. 
 - Permissions to access agents when policy agent:read is set.
 - SCA permissions for agents views and dashboards.
-- Settings of statistics indices creation.
+- Settings of statistics indices creation that did not work properly. 
 
 
 Wazuh ruleset
