@@ -147,7 +147,7 @@ Fixed
 - Validation to check if ``userPermissions`` are not ready yet.             
 - Agents table OS field sorting: Changed agents table field ``os_name`` to ``os.name,os.version`` to make it sortable.
 - Different parsed ``datetime`` between agent detail and agents overview table.
-- An error with the agents status pie chart tooltip that did not displayed the number of agents on the first hover.   
+- An error with the agents status pie chart tooltip that did not display the number of agents on the first hover.   
 - Menu crash when Solaris agents are selected. 
 - Report's creation dates set to 1970-01-01T00:00:00.000Z in some OS. 
 - Missing commands for Ubuntu/Debian and CentOS on the Deploy new agent section. 
