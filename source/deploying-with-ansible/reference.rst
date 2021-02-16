@@ -753,7 +753,6 @@ Wazuh Manager
     wazuh_manager_api:
       bind_addr: 0.0.0.0
       port: 55000
-      behind_proxy_server: no
       https: yes
       https_key: "api/configuration/ssl/server.key"
       https_cert: "api/configuration/ssl/server.crt"
