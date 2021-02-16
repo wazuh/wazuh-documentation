@@ -100,7 +100,7 @@ Preparing Open Distro for Elasticsearch
 
 
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
+ 
 
 Upgrading Elasticsearch
 -----------------------
@@ -196,6 +196,9 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
       curl -X GET "https://127.0.0.1:9200/_cat/health?v" -u <username>:<password> -k
 
 #. Repeat the steps for every Elasticsearch node.
+
+
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards.
 
 
 Upgrading Filebeat
