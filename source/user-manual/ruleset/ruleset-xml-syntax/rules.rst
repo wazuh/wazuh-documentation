@@ -449,7 +449,7 @@ Example:
   .. code-block:: xml
 
       <rule id="100105" level="8">
-          <if_sid>100100<if_sid>
+          <if_sid>100100</if_sid>
           <srcip>10.25.23.12</srcip>
           <description>Forbidden srcip has been detected.</description>
       </rule>
@@ -487,7 +487,7 @@ Example:
   .. code-block:: xml
 
       <rule id="100110" level="5">
-          <if_sid>100100<if_sid>
+          <if_sid>100100</if_sid>
           <dstip>!198.168.41.30</dstip>
           <description>A different dstip has been detected.</description>
       </rule>
@@ -527,7 +527,7 @@ Example:
   .. code-block:: xml
 
       <rule id="100110" level="5">
-          <if_sid>100100<if_sid>
+          <if_sid>100100</if_sid>
           <srcport type="pcre2">^5000[0-7]$</srcport>
           <description>Source port $(srcport) is detected.</description>
       </rule>
