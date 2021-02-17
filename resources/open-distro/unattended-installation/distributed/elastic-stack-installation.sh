@@ -303,7 +303,6 @@ installElasticsearch() {
 
         jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
         if [ "$jv" == "1.8.0" ]; then
-            ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
             echo "root hard nproc 4096" >> /etc/security/limits.conf
             echo "root soft nproc 4096" >> /etc/security/limits.conf
             echo "elasticsearch hard nproc 4096" >> /etc/security/limits.conf
