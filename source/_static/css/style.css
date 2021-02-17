@@ -1087,6 +1087,10 @@ li.toctree-l5 > a {
   content: '\f077';
 }
 
+#globaltoc > nav {
+  margin-top: 100px;
+}
+
 #globaltoc > nav > ul .show > ul > li:not(.show){
   max-height: 80px;
   opacity: 1;
@@ -3475,6 +3479,10 @@ div.highlight pre {
   #welcome-to-wazuh .topic p.topic-title + p{
     padding-right: 15px;
   }
+
+  #globaltoc > nav {
+    margin-top: 0px;
+  } 
   
   #globaltoc > nav > ul:not(#link-to-guide) {
     border-bottom: 1px solid rgba(59, 59, 59, 0.08);
