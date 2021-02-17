@@ -343,7 +343,7 @@ Upgrading Kibana
                     In case of having more Wazuh API entries, each of them must be added manually.
 
 
-#. Replace the value ``user`` by ``username`` and set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml``: 
+#. **(For upgrades from 3.x versions)** Replace the value ``user`` by ``username`` and set the username and password as ``wazuh-wui`` in the file ``/usr/share/kibana/data/wazuh/config/wazuh.yml``: 
 
     .. code-block:: yaml
       :emphasize-lines: 5, 6
@@ -447,7 +447,7 @@ Upgrading Kibana
     .. include:: ../../_templates/installations/basic/elastic/common/enable_kibana.rst
 
 
-#. Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
+#. **(For upgrades from 3.x versions)** Once Kibana is accesible, remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.0 it has been replaced by ``wazuh-alerts-*`` , it is necessary to remove the old pattern in order for the new one to take its place.
 
     .. code-block:: console
 
