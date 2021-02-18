@@ -19,6 +19,7 @@ Added
 ^^^^^
 
 **External dependencies**
+
 - Added cython (0.29.21) library to Python dependencies.
 - Added xmltodict (0.12.0) library to Python dependencies.
 
@@ -27,6 +28,7 @@ Changed
 ^^^^^^^
 
 **External dependencies**
+
 - Upgraded Python version from 3.8.2 to 3.8.6.
 - Upgraded Cryptography python library from 3.2.1 to 3.3.2.
 - Upgraded cffi python library from 1.14.0 to 1.14.4.
@@ -71,6 +73,3 @@ Changed
 
 Fixed
 ^^^^^
-
-
-
