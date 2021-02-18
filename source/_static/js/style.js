@@ -90,9 +90,7 @@ $(function() {
 
   hideSubtree(hideSubtreeNodes);
 
-  $(window).on('hashchange', function() {
-    correctScrollTo(spaceBeforeAnchor);
-  });
+  correctScrollTo(spaceBeforeAnchor);
 
   /* Turn all tables in responsive table */
   reponsiveTables();
