@@ -187,7 +187,6 @@ if version >= '4.0':
     }
     
 if is_latest_release == True:
-    html_additional_pages['guide'] = 'guide.html'
     html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
