@@ -291,14 +291,15 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
-    noticeHeight = parseInt($('.no-latest-notice').outerHeight());
+    const noticeElement = $('.no-latest-notice');
+    noticeHeight = noticeElement.length == 0 ? 0 : parseInt(noticeElement.outerHeight());
     if ($(window).width() >= 992) {
       if (!$('body').hasClass('scrolled')) {
         navbarTop = parseInt($('#header').outerHeight());
         $('#navbar').css({'padding-top': (navbarTop - documentScroll) + 'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + (parseInt($('#navbar .search_main').outerHeight()) + parseInt($('#header').outerHeight())) + 'px + ' + documentScroll + 'px)', 'padding-top': 0});
       } else {
-        $('#navbar').css({'padding-top': parseInt($('.no-latest-notice').outerHeight())+'px'});
+        $('#navbar').css({'padding-top': noticeHeight +'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + noticeHeight + 'px - ' + parseInt($('#header-sticky').outerHeight()) + 'px)', 'padding-top': 0});
       }
     } else {
