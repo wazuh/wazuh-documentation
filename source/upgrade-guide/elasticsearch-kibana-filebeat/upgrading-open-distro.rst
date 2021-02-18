@@ -155,7 +155,7 @@ In the commands below ``127.0.0.1`` IP address is used. If Elasticsearch is boun
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|
+            # apt install opendistro-alerting=1.11.0.1-1 opendistro-anomaly-detection=1.11.0.0-1 opendistro-index-management=1.11.0.0-1 opendistro-job-scheduler=1.11.0.0-1 opendistro-knn=1.11.0.0-1 opendistro-knnlib=1.11.0.0 opendistro-performance-analyzer=1.11.0.0-1 opendistro-security=1.11.0.0-0 opendistro-sql=1.11.0.0-1 opendistroforelasticsearch=1.11.0-1
 
 
         .. group-tab:: ZYpp
