@@ -30,6 +30,12 @@ To enable a policy file that's outside the default folder, add a line like
 
     <policy>/some/custom/policy/folder/policy_file_to_enable.yml</policy>
 
+You can also specify a relative path, based on the Wazuh installation directory.
+
+.. code-block:: xml
+
+    <policy>folder/policy_file_to_enable.yml</policy>
+
 to the **policies section** of the **SCA** module.
 
 There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
@@ -60,7 +66,7 @@ to the ``default`` group, which is used here as an example:
 #. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``ossec``.
 
 
-#. Add the configuration block to the Wazuh manager's ``/var/ossec/etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
+#. Add the configuration block to the Wazuh manager's ``etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
 
      .. code-block:: xml
 
@@ -68,7 +74,7 @@ to the ``default`` group, which is used here as an example:
             <!-- Shared agent configuration here -->
             <sca>
                 <policies>
-                    <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
+                    <policy>etc/shared/your_policy_file.yml</policy>
                 </policies>
             </sca>
         </agent_config>

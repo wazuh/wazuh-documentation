@@ -123,14 +123,16 @@ Attributes
 .. note::
   Since Wazuh v3.10.0, although this section is missing, the Wazuh Agent will run scans for every policy (.yaml or .yml files) present in their ruleset folder.
 
+.. warning::
+  Since Wazuh v4.2.0, when using a relative path, it will be based on the Wazuh installation path.
+
 Example
 
 .. code-block:: xml
 
   <policies>
-    <policy>cis_debian9_L1.yml</policy>
-    <policy>sca_unix_audit.yml</policy>
-    <policy enabled="no">cis_debian9_L2.yml/policy>
+    <policy>etc/shared/cis_debian10.yml</policy>
+    <policy>etc/shared/sca_unix_audit.yml</policy>
   </policies>
 
 
@@ -223,9 +225,9 @@ Configuration example
         <skip_nfs>yes</skip_nfs>
 
         <policies>
-          <policy>cis_debian9_L1.yml</policy>
-          <policy>sca_unix_audit.yml</policy>
-          <policy enabled="no">cis_debian9_L2.yml/policy>
+          <policy>etc/shared/cis_debian9_L1.yml</policy>
+          <policy>etc/shared/sca_unix_audit.yml</policy>
+          <policy enabled="no">etc/shared/cis_debian9_L2.yml/policy>
           <policy>/my/custom/policy/path/my_policy.yaml</policy>
         </policies>
       </sca>

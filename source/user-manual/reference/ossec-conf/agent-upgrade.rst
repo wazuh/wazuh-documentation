@@ -184,6 +184,6 @@ Sample Configuration
       <notification_wait_max>2h</notification_wait_max>
       <ca_verification>
         <enabled>yes</enabled>
-        <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+        <ca_store>etc/wpk_root.pem</ca_store>
       </ca_verification>
     </agent-upgrade>
