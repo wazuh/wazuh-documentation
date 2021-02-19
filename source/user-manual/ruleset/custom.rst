@@ -49,22 +49,23 @@ We can check if it works by using ``/var/ossec/bin/wazuh-logtest``:
   :class: output
 
   **Phase 1: Completed pre-decoding.
-       full event: 'Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100''
-       hostname: 'MyHost'
-       program_name: 'example'
-       log: 'User 'admin' logged from '192.168.1.100''
+          full event: 'Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100''
+          timestamp: 'Dec 25 20:45:02'
+          hostname: 'MyHost'
+          program_name: 'example'
 
   **Phase 2: Completed decoding.
-       decoder: 'example'
-       dstuser: 'admin'
-       srcip: '192.168.1.100'
+          name: 'example'
+          dstuser: 'admin'
+          srcip: '192.168.1.100'
 
   **Phase 3: Completed filtering (rules).
-       Rule id: '100010'
-       Level: '0'
-       Description: 'User logged'
-
-
+          id: '100010'
+          level: '0'
+          description: 'User logged'
+          groups: '['local', 'syslog', 'sshd']'
+          firedtimes: '1'
+          mail: 'False'
 
 Changing an existing rule
 ---------------------------

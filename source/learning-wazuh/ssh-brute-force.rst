@@ -244,32 +244,43 @@ On wazuh-manager, run the wazuh-logtest command and then paste in the above line
 .. code-block:: none
 
     [root@wazuh-manager centos]# /var/ossec/bin/wazuh-logtest
-    
+
 You should see an analysis of the event and the resulting rule **5710** match like this:
 
 .. code-block:: none
     :class: output
 
-    2019/10/16 15:55:14 ossec-testrule: INFO: Started (pid: 11223).
-    ossec-testrule: Type one log per line.
+    Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
 
     **Phase 1: Completed pre-decoding.
-           full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
-           timestamp: 'Oct 15 21:07:56'
-           hostname: 'linux-agent'
-           program_name: 'sshd'
-           log: 'Invalid user blimey from 18.18.18.18 port 48928'
+            full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
+            timestamp: 'Oct 15 21:07:56'
+            hostname: 'linux-agent'
+            program_name: 'sshd'
 
     **Phase 2: Completed decoding.
-           decoder: 'sshd'
-           srcuser: 'blimey'
-           srcip: '18.18.18.18'
-           srcport: '48928'
+            name: 'sshd'
+            parent: 'sshd'
+            srcip: '18.18.18.18'
+            srcport: '48928'
+            srcuser: 'blimey'
 
     **Phase 3: Completed filtering (rules).
-           Rule id: '5710'
-           Level: '5'
-           Description: 'sshd: Attempt to login using a non-existent user'
+            id: '5710'
+            level: '5'
+            description: 'sshd: Attempt to login using a non-existent user'
+            groups: '['syslog', 'sshd', 'invalid_login', 'authentication_failed']'
+            firedtimes: '1'
+            gdpr: '['IV_35.7.d', 'IV_32.2']'
+            gpg13: '['7.1']'
+            hipaa: '['164.312.b']'
+            mail: 'False'
+            mitre.id: '['T1110']'
+            mitre.tactic: '['Credential Access']'
+            mitre.technique: '['Brute Force']'
+            nist_800_53: '['AU.14', 'AC.7', 'AU.6']'
+            pci_dss: '['10.2.4', '10.2.5', '10.6.1']'
+            tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
     **Alert to be generated.
 
 .. note::
@@ -284,22 +295,34 @@ Paste that log record in a number of times.  On the 8th time, you should see a r
     :class: output
 
     **Phase 1: Completed pre-decoding.
-           full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
-           timestamp: 'Oct 15 21:07:56'
-           hostname: 'linux-agent'
-           program_name: 'sshd'
-           log: 'Invalid user blimey from 18.18.18.18 port 48928'
+            full event: 'Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
+            timestamp: 'Oct 15 21:07:56'
+            hostname: 'linux-agent'
+            program_name: 'sshd'
 
     **Phase 2: Completed decoding.
-           decoder: 'sshd'
-           srcuser: 'blimey'
-           srcip: '18.18.18.18'
-           srcport: '48928'
+            name: 'sshd'
+            parent: 'sshd'
+            srcip: '18.18.18.18'
+            srcport: '48928'
+            srcuser: 'blimey'
 
     **Phase 3: Completed filtering (rules).
-           Rule id: '5712'
-           Level: '10'
-           Description: 'sshd: brute force trying to get access to the system.'
+            id: '5712'
+            level: '10'
+            description: 'sshd: brute force trying to get access to the system.'
+            groups: '['syslog', 'sshd', 'authentication_failures']'
+            firedtimes: '1'
+            frequency: '8'
+            gdpr: '['IV_35.7.d', 'IV_32.2']'
+            hipaa: '['164.312.b']'
+            mail: 'False'
+            mitre.id: '['T1110']'
+            mitre.tactic: '['Credential Access']'
+            mitre.technique: '['Brute Force']'
+            nist_800_53: '['SI.4', 'AU.14', 'AC.7']'
+            pci_dss: '['11.4', '10.2.4', '10.2.5']'
+            tsc: '['CC6.1', 'CC6.8', 'CC7.2', 'CC7.3']'
     **Alert to be generated.
 
 Press Control+C to exit wazuh-logtest.
