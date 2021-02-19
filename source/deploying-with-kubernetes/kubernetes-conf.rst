@@ -49,7 +49,7 @@ This pod contains the master node of the Wazuh cluster. The master node centrali
 +-------------------------------+-------------+
 | Image                         | Controller  |
 +===============================+=============+
-| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|        | StatefulSet |
 +-------------------------------+-------------+
 
 **Wazuh worker 0 / 1**
@@ -59,7 +59,7 @@ These pods contain a worker node of the Wazuh cluster. They will receive the age
 +-------------------------------+-------------+
 | Image                         | Controller  |
 +===============================+=============+
-| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | StatefulSet |
+| wazuh/wazuh-odfe:|WAZUH_LATEST_KUBERNETES|        | StatefulSet |
 +-------------------------------+-------------+
 
 **Elasticsearch**
@@ -79,7 +79,7 @@ Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 +--------------------------------------+-------------+
 | Image                                | Controller  |
 +======================================+=============+
-| wazuh/wazuh-kibana-odfe:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| | Deployment  |
+| wazuh/wazuh-kibana-odfe:|WAZUH_LATEST_KUBERNETES|        | Deployment  |
 +--------------------------------------+-------------+
 
 Services
@@ -136,7 +136,7 @@ Deploy
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES| --depth=1
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
     3.1. Setup SSL certificates

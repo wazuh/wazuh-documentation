@@ -42,7 +42,7 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|_|OPENDISTRO_LATEST_KUBERNETES|'
+      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|'
 
 
 Apply the new configuration
