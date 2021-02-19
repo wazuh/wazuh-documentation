@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _release_4_1_1:
 
@@ -54,7 +54,7 @@ Fixed
 
 **Core**
 
-- A bug in Windows agent that did not honor the buffer's EPS limit.
+- A bug in the Windows agent that did not respect the buffer EPS limit.
 - A bug in Integratord that might lose alerts from Analysisd due to a race condition.
 
 
