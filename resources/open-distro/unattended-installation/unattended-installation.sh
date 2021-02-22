@@ -39,9 +39,9 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             yum remove wazuh-manager -y
         elif [ "${sys_type}" == "zypper" ]; then
-            apt remove --purge wazuh-manager -y
+            zypper -n remove wazuh-manager -y
         elif [ "${sys_type}" == "apt-get" ]; then
-            zypper -n remove wazuh-manager
+            apt remove --purge wazuh-manager
         fi 
         rm -rf /var/ossec/
     fi
@@ -52,9 +52,9 @@ rollBack() {
             yum remove elasticsearch* -y
             yum remove opendistro-* -y
         elif [ "${sys_type}" == "zypper" ]; then
-            apt remove --purge opendistroforelasticsearch -y
+            zypper -n remove opendistroforelasticsearch -y
         elif [ "${sys_type}" == "apt-get" ]; then
-            zypper -n remove opendistroforelasticsearch
+            apt remove --purge opendistroforelasticsearch
         fi 
         rm -rf /var/lib/elasticsearch/
         rm -rf /usr/share/elasticsearch/
@@ -67,9 +67,9 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             yum remove filebeat -y
         elif [ "${sys_type}" == "zypper" ]; then
-            apt remove --purge filebeat -y
+            zypper -n remove filebeat -y
         elif [ "${sys_type}" == "apt-get" ]; then
-            zypper -n remove filebeat
+            apt remove --purge filebeat
         fi 
         rm -rf /var/lib/filebeat/
         rm -rf /usr/share/filebeat/
@@ -80,9 +80,9 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             yum remove opendistroforelasticsearch-kibana -y
         elif [ "${sys_type}" == "zypper" ]; then
-            apt remove --purge opendistroforelasticsearch-kibana -y
+            zypper -n remove opendistroforelasticsearch-kibana -y
         elif [ "${sys_type}" == "apt-get" ]; then
-            zypper -n remove opendistroforelasticsearch-kibana
+            apt remove --purge opendistroforelasticsearch-kibana
         fi 
         rm -rf /var/lib/kibana/
         rm -rf /usr/share/kibana/
@@ -93,9 +93,9 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             yum remove java-11* -y
         elif [ "${sys_type}" == "zypper" ]; then
-            apt remove --purge openjdk-11-j* -y
+            zypper -n remove openjdk-11-j* -y
         elif [ "${sys_type}" == "apt-get" ]; then
-            zypper -n remove java-11*
+            apt remove --purge java-11*
         fi 
     fi  
 
@@ -152,6 +152,18 @@ getHelp() {
 
    echo ""
    echo "Usage: $0 arguments"
+   echo -e "\t-w   | --install-wazuh Installs the Wazuh manager"
+   echo -e "\t-e   | --install-elasticsearch Installs Elasticsearch"
+   echo -e "\t-f   | --install-filebeat Installs Filebeat"
+   echo -e "\t-k   | --install-kibana Install Kibana"
+   echo -e "\t-b   | --basic Installs Elasticsearch basic license components"
+   echo -e "\t-c   | --create-certificates Creates the certificates for the installation. Only needed in Elasticsearch distributed installations"
+   echo -e "\t-m   | --migrate Migrates the installation from Elastic basic license to Open Distro for Elasticsearch"
+   echo -e "\t-u   | --upgrade Upgrades the installation to the latest version available"
+   echo -e "\t-o   | --overwrite Overwrite the existing installation"
+   echo -e "\t-r   | --uninstall Remove the installation"
+   echo -e "\t-p   | --download-packages Downloads all the necessary packages to perform an offline installation"
+   echo -e "\t-a   | --architecture Indicates the architecture of the packages to be downloaded. Must be used with '-p'"
    echo -e "\t-v   | --verbose Shows the complete installation output"
    echo -e "\t-i   | --ignore-health-check Ignores the health-check"
    echo -e "\t-h   | --help Shows help"
@@ -517,14 +529,14 @@ checkInstalled() {
         javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
 
-    if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
-        echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
-        # if [ -n "${ow}" ]; then
-             overwrite
-        # else
-        #     exit 1;
-        # fi
-    fi         
+    # if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
+    #     echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
+    #     # if [ -n "${ow}" ]; then
+    #          overwrite
+    #     # else
+    #     #     exit 1;
+    #     # fi
+    # fi         
 
 }
 
