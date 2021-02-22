@@ -528,7 +528,6 @@ checkInstalled() {
         javainstalled="1"
         javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
-    echo "CHECK INSTALLED"
     if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
         if [ -n "${ow}" ]; then
              overwrite
