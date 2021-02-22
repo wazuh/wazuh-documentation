@@ -528,7 +528,7 @@ checkInstalled() {
         javainstalled="1"
         javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
-
+    echo "CHECK INSTALLED"
     if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
         if [ -n "${ow}" ]; then
              overwrite
@@ -541,7 +541,6 @@ checkInstalled() {
 }
 
 overwrite() {  
-
     rollBack
     addWazuhrepo
     if [ -n "${wazuhinstalled}" ]; then
@@ -642,7 +641,8 @@ main() {
                 shift 1
                 ;; 
             "-o"|"--overwrite")  
-                ow=1      
+                ow=1 
+                shift 1     
                 ;;                                                
             "-h"|"--help")        
                 getHelp
@@ -661,7 +661,7 @@ main() {
         else
             healthCheck           
         fi   
-        checkInstalled           
+        checkInstalled ow           
         installPrerequisites
         installJava
         addWazuhrepo
@@ -671,6 +671,7 @@ main() {
         installKibana
         checkInstallation    
     else
+        checkInstalled ow  
         healthCheck   
         installPrerequisites
         installJava
