@@ -529,18 +529,19 @@ checkInstalled() {
         javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
 
-    # if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
-    #     echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
-    #     # if [ -n "${ow}" ]; then
-    #          overwrite
-    #     # else
-    #     #     exit 1;
-    #     # fi
-    # fi         
+    if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
+        if [ -n "${ow}" ]; then
+             overwrite
+        else
+            echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
+            exit 1;
+        fi
+    fi             
 
 }
 
-overwrite() {    
+overwrite() {  
+
     rollBack
     addWazuhrepo
     if [ -n "${wazuhinstalled}" ]; then
@@ -627,7 +628,6 @@ main() {
     fi   
 
     checkArch
-    checkInstalled 
 
     if [ -n "$1" ]; then      
         while [ -n "$1" ]
@@ -660,7 +660,8 @@ main() {
             echo "Health-check ignored."    
         else
             healthCheck           
-        fi             
+        fi   
+        checkInstalled           
         installPrerequisites
         installJava
         addWazuhrepo
