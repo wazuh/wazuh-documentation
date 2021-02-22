@@ -37,65 +37,65 @@ logger() {
 rollBack() {
     if [ -n "${wazuhinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove wazuh-manager -y
+            eval "yum remove wazuh-manager -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            zypper -n remove wazuh-manager -y
+            eval "zypper -n remove wazuh-manager -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            apt remove --purge wazuh-manager
+            eval "apt remove --purge wazuh-manager ${debug}"
         fi 
-        rm -rf /var/ossec/
+        eval "rm -rf /var/ossec/ ${debug}"
     fi
 
     if [ -n "${elasticinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove opendistroforelasticsearch -y
-            yum remove elasticsearch* -y
-            yum remove opendistro-* -y
+            eval "yum remove opendistroforelasticsearch -y ${debug}"
+            eval "yum remove elasticsearch* -y ${debug}"
+            eval "yum remove opendistro-* -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            zypper -n remove opendistroforelasticsearch -y
+            eval "zypper -n remove opendistroforelasticsearch -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            apt remove --purge opendistroforelasticsearch
+            eval "apt remove --purge opendistroforelasticsearch ${debug}"
         fi 
-        rm -rf /var/lib/elasticsearch/
-        rm -rf /usr/share/elasticsearch/
-        rm -rf /etc/elasticsearch/
-        rm -rf ~/search-guard-tlstool-1.8.zip
-        rm -rf ~/searchguard
+        eval "rm -rf /var/lib/elasticsearch/ ${debug}"
+        eval "rm -rf /usr/share/elasticsearch/ ${debug}"
+        eval "rm -rf /etc/elasticsearch/ ${debug}"
+        eval "rm -rf ~/search-guard-tlstool-1.8.zip ${debug}"
+        eval "rm -rf ~/searchguard ${debug}"
     fi
 
     if [ -n "${filebeatinstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove filebeat -y
+            eval "yum remove filebeat -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            zypper -n remove filebeat -y
+            eval "zypper -n remove filebeat -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            apt remove --purge filebeat
+            eval "apt remove --purge filebeat ${debug}"
         fi 
-        rm -rf /var/lib/filebeat/
-        rm -rf /usr/share/filebeat/
-        rm -rf /etc/filebeat/
+        eval "rm -rf /var/lib/filebeat/ ${debug}"
+        eval "rm -rf /usr/share/filebeat/ ${debug}"
+        eval "rm -rf /etc/filebeat/ ${debug}"
     fi
 
     if [ -n "${kibanainstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove opendistroforelasticsearch-kibana -y
+            eval "yum remove opendistroforelasticsearch-kibana -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            zypper -n remove opendistroforelasticsearch-kibana -y
+            eval "zypper -n remove opendistroforelasticsearch-kibana -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            apt remove --purge opendistroforelasticsearch-kibana
+            eval "apt remove --purge opendistroforelasticsearch-kibana ${debug}"
         fi 
-        rm -rf /var/lib/kibana/
-        rm -rf /usr/share/kibana/
-        rm -rf /etc/kibana/
+        eval "rm -rf /var/lib/kibana/ ${debug}"
+        eval "rm -rf /usr/share/kibana/ ${debug}"
+        eval "rm -rf /etc/kibana/ ${debug}"
     fi
 
     if [ -n "${javainstalled}" ]; then
         if [ "${sys_type}" == "yum" ]; then
-            yum remove java-11* -y
+            eval "yum remove java-11* -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            zypper -n remove openjdk-11-j* -y
+            eval "zypper -n remove openjdk-11-j* -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            apt remove --purge java-11*
+            eval "apt remove --purge java-11* ${debug}"
         fi 
     fi  
 
