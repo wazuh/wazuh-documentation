@@ -106,6 +106,7 @@ installPrerequisites() {
         eval "zypper -n install libcap-progs $debug || zypper -n install libcap2 $debug"
     elif [ $sys_type == "apt-get" ]
     then
+        eval "apt-get update -q $debug"
         eval "apt-get install curl apt-transport-https zip unzip lsb-release libcap2-bin -y -q $debug"
         eval "apt-get update -q $debug"
     fi
