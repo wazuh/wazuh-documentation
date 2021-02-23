@@ -91,7 +91,10 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
         <if_sid>5700</if_sid>
         <match>illegal user|invalid user</match>
         <description>sshd: Attempt to login using a non-existent user</description>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
+        <mitre>
+          <id>T1110</id>
+        </mitre>
+        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
 3. Paste the code into ``/var/ossec/etc/rules/local_rules.xml``, modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
@@ -102,7 +105,10 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
         <if_sid>5700</if_sid>
         <match>illegal user|invalid user</match>
         <description>sshd: Attempt to login using a non-existent user</description>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
+        <mitre>
+          <id>T1110</id>
+        </mitre>
+        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
 

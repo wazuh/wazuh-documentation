@@ -67,6 +67,17 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
         "level": 5,
         "description": "sshd: Attempt to login using a non-existent user",
         "id": "5710",
+        "mitre":{
+          "id":[
+              "T1110"
+          ],
+          "tactic":[
+              "Credential Access"
+          ],
+          "technique":[
+              "Brute Force"
+          ]
+        },
         "firedtimes": 7,
         "mail": false,
         "groups": [
@@ -94,6 +105,12 @@ Here is a beautified example of the JSON record in ``alerts.json`` that correspo
           "AU.14",
           "AC.7",
           "AU.6"
+        ],
+        "tsc":[
+          "CC6.1",
+          "CC6.8",
+          "CC7.2",
+          "CC7.3"
         ]
       },
       "agent": {
@@ -173,7 +190,10 @@ To better understand this alert, let's look up rule **5710** (from the ``rule.id
         <if_sid>5700</if_sid>
         <match>illegal user|invalid user</match>
         <description>sshd: Attempt to login using a non-existent user</description>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
+        <mitre>
+          <id>T1110</id>
+        </mitre>
+        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
 The rule **5710** looks for matching text "*illegal user*" or "*invalid user*" to appear in
@@ -210,8 +230,11 @@ Let's look into this new rule **5712** and see why was it triggered.
         <if_matched_sid>5710</if_matched_sid>
         <description>sshd: brute force trying to get access to </description>
         <description>the system.</description>
+        <mitre>
+          <id>T1110</id>
+        </mitre>
         <same_source_ip />
-        <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_AU.14,nist_800_53_AC.7,</group>
+        <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
 The rule **5712** is a special kind of child rule to rule **5710**.
