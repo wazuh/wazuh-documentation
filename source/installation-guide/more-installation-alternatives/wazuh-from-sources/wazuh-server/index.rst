@@ -38,9 +38,9 @@ Installing Wazuh manager
 
 
 
-**Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps`` will download an already built and installed portable version of CPython. Otherwise, running ``make deps`` along the ``PYTHON_SOURCE`` flag enabled will download the CPython sources.
+**Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
-To install the dependencies needed to compile and build the CPython, follow these steps:
+To install the required dependencies to build the python interpreter, follow these steps:
 
 .. tabs::
 

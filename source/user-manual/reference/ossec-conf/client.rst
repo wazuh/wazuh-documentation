@@ -416,6 +416,9 @@ Used for manager verification. If no CA certificate is set server will not be ve
 | **Allowed values** | Path to a valid CA certificate.             |
 +--------------------+---------------------------------------------+
 
+.. note::
+  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+
 agent_certificate_path
 ^^^^^^^^^^^^^^^^^^^^^^
 

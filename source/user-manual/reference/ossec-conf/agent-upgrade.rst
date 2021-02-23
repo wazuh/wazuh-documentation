@@ -157,9 +157,9 @@ Configuration block to specify CA certificates to validate WPK files.
 +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.                                                 |
 |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  **ca_store**             | **Default value**  | wpk_root.pem                                                                                                                                                    |
+|  **ca_store**             | **Default value**  | etc/wpk_root.pem                                                                                                                                                |
 |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | **Allowed values** | Path to root CA certificate                                                                                                                                     |
+|                           | **Allowed values** | Path to root CA certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.                                      |
 +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 

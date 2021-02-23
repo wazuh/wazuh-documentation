@@ -24,19 +24,17 @@ ruleset folder:
     The contents of the aforementioned **default ruleset folders are neither kept across installations nor updates**.
     If you wish to modify or add new policies, place then under an alternative folder.
 
-To enable a policy file that's outside the default folder, add a line like
+To enable a policy file that's outside the Wazuh installation folder, add a line like
 
 .. code-block:: xml
 
     <policy>/some/custom/policy/folder/policy_file_to_enable.yml</policy>
 
-You can also specify a relative path, based on the Wazuh installation directory.
+You can also specify a relative path to the Wazuh installation directory.
 
 .. code-block:: xml
 
-    <policy>folder/policy_file_to_enable.yml</policy>
-
-to the **policies section** of the **SCA** module.
+    <policy>etc/shared/policy_file_to_enable.yml</policy>
 
 There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
@@ -44,7 +42,7 @@ the `ossec.conf` by adding a line such as
 
 .. code-block:: xml
 
-    <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
+    <policy enabled="no">etc/shared/policy_file_to_disable.yml</policy>
 
 to the **policies section** of the **SCA** module.
 

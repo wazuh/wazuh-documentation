@@ -125,10 +125,10 @@ If this file does not exist, a **random password** will be generated.
 ssl_agent_ca
 ^^^^^^^^^^^^
 
-Specifies the path to the CA certificate used to verify clients. If you specify a relative path it will use the installation path. Although you can also use a full path.
+Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
 +--------------------+---------------------+
-| **Allowed values** | A path              |
+| **Allowed values** | Any valid path      |
 +--------------------+---------------------+
 
 ssl_verify_host
@@ -145,23 +145,23 @@ Toggles source host verification on and off when a CA certificate is specified. 
 ssl_manager_cert
 ^^^^^^^^^^^^^^^^
 
-Specifies the path to the server SSL certificate. If you specify a relative path it will use the installation path. Although you can also use a full path.
+Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
 +--------------------+--------------------------------+
 | **Default value**  | etc/sslmanager.cert            |
 +--------------------+--------------------------------+
-| **Allowed values** | A path                         |
+| **Allowed values** | Any valid path                 |
 +--------------------+--------------------------------+
 
 ssl_manager_key
 ^^^^^^^^^^^^^^^
 
-Specifies the path to the server's SSL key. If you specify a relative path it will use the installation path. Although you can also use a full path.
+Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
 +--------------------+--------------------------------+
 | **Default value**  | etc/sslmanager.key             |
 +--------------------+--------------------------------+
-| **Allowed values** | A path                         |
+| **Allowed values** | Any valid path                 |
 +--------------------+--------------------------------+
 
 ssl_auto_negotiate
