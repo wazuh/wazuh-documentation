@@ -41,7 +41,7 @@ rollBack() {
         elif [ "${sys_type}" == "zypper" ]; then
             eval "zypper -n remove wazuh-manager -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge wazuh-manager ${debug}"
+            eval "apt remove --purge wazuh-manager -y ${debug}"
         fi 
         eval "rm -rf /var/ossec/ ${debug}"
     fi
@@ -54,7 +54,7 @@ rollBack() {
         elif [ "${sys_type}" == "zypper" ]; then
             eval "zypper -n remove opendistroforelasticsearch -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge opendistroforelasticsearch ${debug}"
+            eval "apt remove --purge opendistroforelasticsearch -y ${debug}"
         fi 
         eval "rm -rf /var/lib/elasticsearch/ ${debug}"
         eval "rm -rf /usr/share/elasticsearch/ ${debug}"
@@ -69,7 +69,7 @@ rollBack() {
         elif [ "${sys_type}" == "zypper" ]; then
             eval "zypper -n remove filebeat -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge filebeat ${debug}"
+            eval "apt remove --purge filebeat -y ${debug}"
         fi 
         eval "rm -rf /var/lib/filebeat/ ${debug}"
         eval "rm -rf /usr/share/filebeat/ ${debug}"
@@ -82,7 +82,7 @@ rollBack() {
         elif [ "${sys_type}" == "zypper" ]; then
             eval "zypper -n remove opendistroforelasticsearch-kibana -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge opendistroforelasticsearch-kibana ${debug}"
+            eval "apt remove --purge opendistroforelasticsearch-kibana -y ${debug}"
         fi 
         eval "rm -rf /var/lib/kibana/ ${debug}"
         eval "rm -rf /usr/share/kibana/ ${debug}"
@@ -95,7 +95,7 @@ rollBack() {
         elif [ "${sys_type}" == "zypper" ]; then
             eval "zypper -n remove openjdk-11-j* -y ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge java-11* ${debug}"
+            eval "apt remove --purge java-11* -y ${debug}"
         fi 
     fi  
 
@@ -308,7 +308,7 @@ installElasticsearch() {
     elif [ ${sys_type} == "zypper" ]; then
         eval "zypper -n install opendistroforelasticsearch=${OD_VER}-${OD_REV} ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install elasticsearch-oss opendistroforelasticsearch=${OD_VER}-${OD_REV} -y ${debug}"
+        eval "apt install elasticsearch-oss=7.9.1 opendistro-alerting=1.11.0.1-1 opendistro-anomaly-detection=1.11.0.0-1 opendistro-index-management=1.11.0.0-1 opendistro-job-scheduler=1.11.0.0-1 opendistro-knn=1.11.0.0-1 opendistro-knnlib=1.11.0.0 opendistro-performance-analyzer=1.11.0.0-1 opendistro-security=1.11.0.0-0 opendistro-sql=1.11.0.0-1 opendistroforelasticsearch=1.11.0-1 -y ${debug}"
     fi
 
     if [  "$?" != 0  ]; then
