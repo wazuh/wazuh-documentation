@@ -39,7 +39,7 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove wazuh-manager -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove wazuh-manager -y ${debug}"
+            eval "zypper -n remove wazuh-manager ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
             eval "apt remove --purge wazuh-manager -y ${debug}"
         fi 
@@ -52,7 +52,7 @@ rollBack() {
             eval "yum remove elasticsearch* -y ${debug}"
             eval "yum remove opendistro-* -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove opendistroforelasticsearch -y ${debug}"
+            eval "zypper -n remove opendistroforelasticsearch ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
             eval "apt remove --purge opendistroforelasticsearch -y ${debug}"
         fi 
@@ -67,7 +67,7 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove filebeat -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove filebeat -y ${debug}"
+            eval "zypper -n remove filebeat ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
             eval "apt remove --purge filebeat -y ${debug}"
         fi 
@@ -80,7 +80,7 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove opendistroforelasticsearch-kibana -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove opendistroforelasticsearch-kibana -y ${debug}"
+            eval "zypper -n remove opendistroforelasticsearch-kibana ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
             eval "apt remove --purge opendistroforelasticsearch-kibana -y ${debug}"
         fi 
@@ -93,9 +93,9 @@ rollBack() {
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove java-11* -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove openjdk-11-j* -y ${debug}"
+            eval "zypper -n remove java-11* ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge java-11* -y ${debug}"
+            eval "apt remove --purge openjdk-11-j* -y ${debug}"
         fi 
     fi  
 
