@@ -657,10 +657,11 @@ main() {
         
         if [ -n "${ignore}" ]; then
             echo "Health-check ignored."    
+            checkInstalled ow
         else
+            checkInstalled ow
             healthCheck           
-        fi   
-        checkInstalled ow           
+        fi            
         installPrerequisites
         installJava
         addWazuhrepo
