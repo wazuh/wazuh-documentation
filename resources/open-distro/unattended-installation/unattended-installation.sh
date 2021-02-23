@@ -542,6 +542,7 @@ checkInstalled() {
 overwrite() {  
     rollBack
     addWazuhrepo
+    installPrerequisites
     if [ -n "${wazuhinstalled}" ]; then
         installWazuh
     fi
