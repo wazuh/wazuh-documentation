@@ -41,6 +41,10 @@ The output of Wazuh-logtest from the above record is as follows:
     .. code-block:: none
         :class: output
 
+            Type one log per line
+
+            Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
+
             **Phase 1: Completed pre-decoding.
                     full event: 'Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
                     timestamp: 'Oct 15 21:07:00'

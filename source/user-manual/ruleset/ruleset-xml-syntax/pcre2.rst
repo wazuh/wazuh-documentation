@@ -157,6 +157,8 @@ wazuh-logtest output show the triggered alert
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
     Dec  1 11:27:21 ip-10-0-0-220 sshd(pam_unix)[17365]: session opened for user foo by (uid=508)
 
     **Phase 1: Completed pre-decoding.

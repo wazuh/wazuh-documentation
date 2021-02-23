@@ -48,6 +48,10 @@ We can check if it works by using ``/var/ossec/bin/wazuh-logtest``:
 .. code-block:: none
   :class: output
 
+  Type one log per line
+
+  Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100'
+
   **Phase 1: Completed pre-decoding.
           full event: 'Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100''
           timestamp: 'Dec 25 20:45:02'

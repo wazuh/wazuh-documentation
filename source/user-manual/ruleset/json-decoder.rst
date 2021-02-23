@@ -89,6 +89,10 @@ The output of *wazuh-logtest* from the above JSON record is as follows:
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
+    {"timestamp":"2016-05-02T17:46:48.515262+0000","flow_id":1234,"in_iface":"eth0","event_type":"alert","src_ip":"16.10.10.10","src_port":5555,"dest_ip":"16.10.10.11","dest_port":80,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2019236,"rev":3,"signature":"ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number","category":"Attempted Administrator Privilege Gain","severity":1},"payload":"21YW5kXBtgdW5zIGRlcHJY2F0QgYWI","payload_printable":"this_is_an_example","stream":0,"host":"suricata.com"}
+
     **Phase 1: Completed pre-decoding.
 
     **Phase 2: Completed decoding.
@@ -150,6 +154,10 @@ The JSON decoder will extract the fields contained in the JSON event as dynamic 
 
 .. code-block:: none
     :class: output
+
+    Type one log per line
+
+    2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}
 
     **Phase 1: Completed pre-decoding.
             full event: '2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}'
@@ -224,6 +232,10 @@ The output of the *wazuh-logtest* tool shows the decoded fields by the JSON deco
 
 .. code-block:: none
     :class: output
+
+    Type one log per line
+
+    2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
 
     **Phase 1: Completed pre-decoding.
             full event: '2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'

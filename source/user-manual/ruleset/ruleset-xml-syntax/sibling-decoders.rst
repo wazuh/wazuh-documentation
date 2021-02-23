@@ -68,6 +68,10 @@ Using `/var/ossec/bin/wazuh-logtest` we get:
 .. code-block:: none
   :class: output
 
+  Type one log per line
+
+  Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
+
   **Phase 1: Completed pre-decoding.
           full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
           timestamp: 'Apr 12 14:31:38'
@@ -123,6 +127,8 @@ Both messages are now correctly decoded.
 
 .. code-block:: none
   :class: output
+
+  Type one log per line
 
   Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
 

@@ -64,6 +64,10 @@ To understand the inner workings of a decoder, it will be easier through example
 .. code-block:: none
   :class: output
 
+  Type one log per line
+
+  Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
+
   **Phase 1: Completed pre-decoding.
           full event: 'Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33'
           timestamp: 'Apr 14 19:28:21'

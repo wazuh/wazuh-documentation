@@ -250,6 +250,8 @@ You should see an analysis of the event and the resulting rule **5710** match li
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
     Oct 15 21:07:56 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928
 
     **Phase 1: Completed pre-decoding.

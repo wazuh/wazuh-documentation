@@ -19,6 +19,8 @@ Run the tool */var/ossec/bin/wazuh-logtest* and paste the following log::
 .. code-block:: none
     :class: output
 
+    Type one log per line
+
     Mar  8 22:39:13 ip-10-0-0-10 sshd[2742]: Accepted publickey for root from 73.189.131.56 port 57516
 
     **Phase 1: Completed pre-decoding.
