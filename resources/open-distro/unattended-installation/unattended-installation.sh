@@ -36,6 +36,7 @@ logger() {
 
 rollBack() {
     if [ -n "${wazuhinstalled}" ]; then
+        echo "Removing the Wazuh manager..."
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove wazuh-manager -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
@@ -47,6 +48,7 @@ rollBack() {
     fi
 
     if [ -n "${elasticinstalled}" ]; then
+        echo "Removing Elasticsearch..."
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove opendistroforelasticsearch -y ${debug}"
             eval "yum remove elasticsearch* -y ${debug}"
@@ -64,6 +66,7 @@ rollBack() {
     fi
 
     if [ -n "${filebeatinstalled}" ]; then
+        echo "Removing Filebeat..."
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove filebeat -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
@@ -77,6 +80,7 @@ rollBack() {
     fi
 
     if [ -n "${kibanainstalled}" ]; then
+        echo "Removing Kibana..."
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove opendistroforelasticsearch-kibana -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
@@ -90,6 +94,7 @@ rollBack() {
     fi
 
     if [ -n "${javainstalled}" ]; then
+        echo "Removing Java Developent Kit..."
         if [ "${sys_type}" == "yum" ]; then
             eval "yum remove java-11* -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
