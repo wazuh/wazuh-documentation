@@ -105,7 +105,7 @@ Available flags
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Allowed values   | 1, yes, YES, y, Y                                                                                   |
 +-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
-| **INSTALLDIR**        | Wazuh's installation path. Mandatory when compiling the Python interpreter from sources using PYTHON_SOURCE flag.			 |
+| **INSTALLDIR**        | Wazuh's installation path. Mandatory when compiling the python interpreter from sources using ``PYTHON_SOURCE``.       |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Default value    | n/a                                                                                                 |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
@@ -171,7 +171,7 @@ Available flags
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Allowed values   | 1, yes, YES, y, Y                                                                                   |
 +-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
-| **PYTHON_SOURCE**     | Used along the ``deps`` target. Downloads the sources needed to manually compile the Python interpreter.               |
+| **PYTHON_SOURCE**     | Used along the ``deps`` target. Downloads the sources needed to build the python interpreter.                          |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Default value    | n/a                                                                                                 |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
@@ -183,8 +183,7 @@ Available flags
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Allowed values   | 1, yes, YES, y, Y                                                                                   |
 +-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
-| **OPTIMIZE_CPYTHON**  | When INSTALLDIR points to a directory other than default, the python interpreter is rebuilt. Enable this flag to       |
-|                       | optimize the process.                                                                                                  |
+| **OPTIMIZE_CPYTHON**  | Enable this flag to optimize the python interpreter build, which is performed when used ``PYTHON_SOURCE``.             |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Default value    | n/a                                                                                                 |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
