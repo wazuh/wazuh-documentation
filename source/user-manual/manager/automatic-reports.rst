@@ -8,13 +8,13 @@ Daily reports are summaries of the alerts that were triggered each day. You can 
 
 .. code-block:: xml
 
- <ossec_config>
+ <wazuh_config>
    <reports>
        <category>syscheck</category>
        <title>Daily report: File changes</title>
        <email_to>example@test.com</email_to>
    </reports>
- </ossec_config>
+ </wazuh_config>
 
 The above configuration will send a daily report of all :ref:`syscheck <manual_file_integrity>` alerts to ``example@test.com``.
 
@@ -24,13 +24,13 @@ For example:
 
 .. code-block:: xml
 
- <ossec_config>
+ <wazuh_config>
    <reports>
        <level>10</level>
        <title>Daily report: Alerts with level higher than 10</title>
        <email_to>example@test.com</email_to>
    </reports>
- </ossec_config>
+ </wazuh_config>
 
 The above configuration will send a report with all rules that fired with a level higher than 10.
 

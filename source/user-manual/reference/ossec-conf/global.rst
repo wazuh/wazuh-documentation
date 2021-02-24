@@ -498,7 +498,7 @@ Default configuration
       <logall_json>no</logall_json>
       <email_notification>yes</email_notification>
       <smtp_server>smtp.example.wazuh.com</smtp_server>
-      <email_from>ossecm@example.wazuh.com</email_from>
+      <email_from>wazuh@example.wazuh.com</email_from>
       <email_to>recipient@example.wazuh.com</email_to>
       <email_maxperhour>12</email_maxperhour>
       <agents_disconnection_time>20s</agents_disconnection_time>
