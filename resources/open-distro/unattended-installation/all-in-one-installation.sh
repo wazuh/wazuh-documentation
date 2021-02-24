@@ -11,7 +11,7 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='> /dev/null 2>&1'
-WAZUH_VER="4.1.0"
+WAZUH_VER="4.1.1"
 WAZUH_REV="1"
 ELK_VER="7.10.0"
 OD_VER="1.12.0"
@@ -101,7 +101,7 @@ installPrerequisites() {
         eval "yum install curl unzip wget libcap -y -q ${debug}"
         eval "yum install java-11-openjdk-devel -y -q ${debug}"
         if [ "$?" != 0 ]; then
-            os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
+            os=$(cat /etc/os-release | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
             if [ -z "${os}" ]; then
                 os="centos"
             fi
@@ -117,8 +117,12 @@ installPrerequisites() {
                 echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/2/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
             elif [ ${lv} == "AMI" ]; then
                 echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/1/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+            elif [ ${os} == "rhel" ]; then
+                wget https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.10%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
+                tar xzf OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
+                export PATH=$PWD/jdk-11.0.10+9/bin:$PATH
             else
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
                 conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
                 echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
             fi
@@ -136,6 +140,7 @@ installPrerequisites() {
         fi
         export JAVA_HOME=/usr/
     elif [ ${sys_type} == "apt-get" ]; then
+        eval "apt-get update -q ${debug}"
         eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q ${debug}"
 
         if [ -n "$(command -v add-apt-repository)" ]; then
@@ -320,7 +325,7 @@ installKibana() {
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.0_7.10.0-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.1_7.10.0-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
