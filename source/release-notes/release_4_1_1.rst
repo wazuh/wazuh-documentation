@@ -46,7 +46,7 @@ Fixed
 - An error with the RBAC permissions in the ``GET /groups`` endpoint. 
 - A bug with Windows registries when parsing backslashes. 
 - An error with the RBAC permissions when assigning multiple ``agent:group`` resources to a policy. 
-- An error with search parameter when using special characters.
+- An error with search parameters when using special characters.
 
 **AWS Module**
 
@@ -55,7 +55,7 @@ Fixed
 **Framework**
 
 - A race condition bug when using RBAC ``expand_group`` function.
-- Migration process to overwrite default RBAC policies.
+- The migration process to overwrite default RBAC policies.
 
 **Core**
 
@@ -90,14 +90,14 @@ Changed
 Fixed
 ^^^^^
 - A login error when AWS Elasticsearch and ODFE are used.
-- An error message that was displayed when changing a group configuration although the user had the right permissions.
+- An error message that was displayed when changing a group configuration even when the user had the right permissions.
 - Disabled switch visual edit button when JSON content is empty in Role Mapping.
 - Disappearing menu and blank content when an unsupported agent (OS) is selected.
 - Forcing a non-numeric filter value in a number type field applying a filter in the search bar of dashboards and events.
 - Wrong number of alerts that were shown in Security Events.
 - Search using uncommon characters in Management groups of agents.
 - The SCA policy stats that did not refresh.
-- Loading of AWS index fields even when no AWS alerts were found.
+- AWS index fields loading even when no AWS alerts were found.
 - Date fields format in FIM and SCA modules.
 - Recurrent error message in Manage agents when the user has no permissions.
 - An issue that prevented from editing empty rules and decoders files that already existed in the Wazuh manager.
