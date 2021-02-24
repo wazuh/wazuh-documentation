@@ -75,20 +75,20 @@ Changed
 Fixed
 ^^^^^
 - A login error when AWS Elasticsearch and ODFE are used.
-- An error message is displayed when changing a group's configuration although the user has the right permissions
-- Fix disabled switch visual edit button when JSON content is empty in Role Mapping
-- Fixed several issues when an unsupported agent (SO) is selected
-- Fixed forcing a non-numeric filter value in a number type field applying a filter in the search bar of dashboards and events
-- Fixed a wrong number of alerts is showed in Security Events
-- Fixed searching with uncommon characters in Management groups of agents
-- Replace generic ``statusCode`` error message with a better message
-- Fix the SCA policy stats didn't refresh
-- Fixed loading of AWS index fields even when no AWS alerts were found
-- Fix some date fields format in FIM and SCA modules
-- Fix a non-stop error in Manage agents when the user has no permissions
-- Can't edit empty rules and decoders files that already exist in the Wazuh manager
-- Support for alerts index pattern with different ID and name
-- Fix the unpin button in the selection modal of agents in the menu
-- Fix properly log out of Wazuh API when logging out of the application (only for OpenDistro)
-- Fixed missing ``&&`` from macOS agent deployment command
-- Fix prompt permissions on Framework of Mitre and Inventory of Integrity monitoring.
+- An error message that was displayed when changing a group configuration although the user had the right permissions.
+- Disabled switch visual edit button when JSON content is empty in Role Mapping.
+- Dissapearing menu and blank content when an unsupported agent (OS) is selected.
+- Fixed forcing a non-numeric filter value in a number type field applying a filter in the search bar of dashboards and events.
+- Fixed a wrong number of alerts is showed in Security Events.
+- Fixed searching with uncommon characters in Management groups of agents.
+- Replace generic ``statusCode`` error message with a better message.
+- Fix the SCA policy stats didn't refresh.
+- Fixed loading of AWS index fields even when no AWS alerts were found.
+- Fix some date fields format in FIM and SCA modules.
+- Fix a non-stop error in Manage agents when the user has no permissions.
+- Can't edit empty rules and decoders files that already exist in the Wazuh manager.
+- Support for alerts index pattern with different ID and name.
+- Fix the unpin button in the selection modal of agents in the menu.
+- Fix properly log out of Wazuh API when logging out of the application in Open Distro.
+- Missing ``&&`` in macOS agent deployment command.
+- Prompt permissions on Mitre > Framework and Integrity monitoring > Inventory.
