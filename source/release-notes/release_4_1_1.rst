@@ -33,6 +33,10 @@ Changed
 - Upgraded Cryptography python library from 3.2.1 to 3.3.2.
 - Upgraded cffi python library from 1.14.0 to 1.14.4.
 
+**API**
+
+- Added raw parameter to ``GET /manager/configuration`` and ``GET cluster/{node_id}/configuration`` endpoints to load ``ossec.conf`` in XML format. 
+
 
 Fixed
 ^^^^^
@@ -50,13 +54,23 @@ Fixed
 
 **Framework**
 
-- A race condition bug when using RBAC expand_group function.
+- A race condition bug when using RBAC ``expand_group`` function.
+- Migration process to overwrite default RBAC policies.
 
 **Core**
 
 - A bug in the Windows agent that did not respect the buffer EPS limit.
 - A bug in Integratord that might lose alerts from Analysisd due to a race condition.
+- Silenced the error message when the Syslog forwarder reads an alert with no rule object. 
+- A memory leak in Vulnerability Detector when updating NVD feeds.
+ Prevented FIM from raising false positives about group name changes due to a thread unsafe function.
 
+Removed
+^^^^^^^
+
+**API**
+
+- Deprecated ``/manager/files`` and ``/cluster/{node_id}/files`` endpoints.
 
 
 Wazuh Kibana plugin
