@@ -1029,6 +1029,7 @@ li.toctree-l5 > a {
 #navbar-globaltoc {
   height: calc(100vh - 165px); /* 40px search + 100px buttons + 25px padding = 165px */
   visibility: visible;
+  overflow-x: hidden;
 }
  
 #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
@@ -1036,7 +1037,6 @@ li.toctree-l5 > a {
   left: 0;
   background-color: #f8f8f8;
   overflow-y: auto;
-  overflow-x: hidden;
   position: absolute;
   z-index: 2;
 }
@@ -3741,7 +3741,7 @@ div.highlight pre {
   .side-scroll {
     position: -webkit-sticky;
     position: sticky;
-    overflow: hidden;
+    overflow-y: auto;
     height: 100%;
     flex-direction: column;
     padding-right: 15px;

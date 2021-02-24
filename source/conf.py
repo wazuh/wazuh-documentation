@@ -185,9 +185,8 @@ if version >= '4.0':
     html_additional_pages = {
         'user-manual/api/reference': 'api-redoc.html',
     }
-    
+
 if is_latest_release == True:
-    html_additional_pages['guide'] = 'guide.html'
     html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
@@ -436,20 +435,20 @@ custom_replacements = {
     "|WAZUH_LATEST|" : "4.1.1",
     "|WAZUH_LATEST_MINOR|": "4.1",
     "|WAZUH_LATEST_ANSIBLE|" : "4.0.4",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.0.4",
+    "|WAZUH_LATEST_KUBERNETES|" : "4.1.0",
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
     "|WAZUH_LATEST_OVA|" : "4.1.1",
-    "|WAZUH_LATEST_DOCKER|" : "4.0.4",
+    "|WAZUH_LATEST_DOCKER|" : "4.1.0",
     "|OPEN_DISTRO_LATEST|" : "1.12.0",
     "|ELASTICSEARCH_LATEST|" : "7.10.0",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.0",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.8.0",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.9.1",
-    "|OPENDISTRO_LATEST_DOCKER|" : "1.11.0",
-    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.11.0",
-    "|DOCKER_COMPOSE_VERSION|" : "1.27.4",
+    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
+    "|OPENDISTRO_LATEST_DOCKER|" : "1.12.0",
+    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.12.0",
+    "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
     "|SPLUNK_LATEST|" : "8.0.4",
     "|WAZUH_SPLUNK_LATEST|" : "3.13.2",
     "|ELASTIC_6_LATEST|" : "6.8.8",
@@ -559,7 +558,7 @@ def collect_compiled_pagename(app, pagename, templatename, context, doctree):
         list_compiled_html.append(context['pagename']+'.html')
     else:
         pass
-        
+
 def creating_file_list(app, exception):
     ''' Creates the files containing the path to every html file that was compiled. These files are the `.doclist` and the release sitemap. '''
     if app.builder.name == 'html':
@@ -568,16 +567,16 @@ def creating_file_list(app, exception):
         sitemap_version = version
         if is_latest_release == True:
             sitemap_version = 'current'
-            
+
         # Create the release sitemap content
         sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
         sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
-        
+
         for compiled_html in list_compiled_html:
             sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + compiled_html) + '</loc></url>' + separator
-        # Close sitemap content    
+        # Close sitemap content
         sitemap += '</urlset>'
-        
+
         # Create .doclist file
         with open(build_path+'/.doclist', 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
