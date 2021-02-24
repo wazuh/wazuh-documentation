@@ -9,6 +9,13 @@
 # Foundation.
 
 VERBOSE='> /dev/null 2>&1'
+if [ -n "$(command -v yum)" ]; then
+    SYS_TYPE="yum"
+elif [ -n "$(command -v zypper)" ]; then
+    SYS_TYPE="zypper"   
+elif [ -n "$(command -v apt-get)" ]; then
+    SYS_TYPE="apt-get"   
+fi
 
 ## Checks if the script is run with enough privileges
 
@@ -42,29 +49,73 @@ getNetworkHost() {
 ## Checks if Open Distro for Elasticsearch is installed
 
 checkInstalled() {
+    
+    if [ "${SYS_TYPE}" == "yum" ]; then
+        elasticinstalled=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch)
+    elif [ "${SYS_TYPE}" == "zypper" ]; then
+        elasticinstalled=$(zypper packages --installed | grep opendistroforelasticsearch | grep i+ | grep noarch)
+    elif [ "${SYS_TYPE}" == "apt-get" ]; then
+        elasticinstalled=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch)
+    fi 
+
+    if [ -z "${elasticinstalled}" ]; then
+        echo "Error: Open Distro is not installed on the system."
+        exit 1;
+    fi
 
 }
 
 ## Creates a backup of the existing insternal_users.yml
 
 createBackUp() {
+    
+    echo "Creating backup..."
+    eval "mkdir /usr/share/elasticsearch/backup ${VERBOSE}"
+    eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
+    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} > /dev/null 2>&1"
+    if [  "$?" != 0  ]; then
+        echo "Error: The backup could not be created."
+        exit 1;
+    fi
+    echo "Backup created"
 
 }
 
 ## Generates the hash for the new password
 
 generateHash() {
+    
+    echo "Generating hash"
+    eval "bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING > hash.file ${VERBOSE}"
+    HASH="\"$(cat hash.file)\""
+    if [  "$?" != 0  ]; then
+        echo "Error: Hash generation failed."
+        exit 1;
+    fi    
+    echo "Hash generated"
 
 }
 
 ## Changes the password for the indicated user
 
 changePassword() {
+    
+    awk -v new="$HASH" 'prev=="'${USER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
 
 }
 
 ## Runs the Security Admin script to load the changes
 runSecurityAdmin() {
+    
+    echo "Loading changes..."
+    eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
+    eval "./securityadmin.sh -f /usr/share/elasticsearch/backup/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} > /dev/null 2>&1"
+    if [  "$?" != 0  ]; then
+        echo "Error: Could not load the changes."
+        exit 1;
+    fi    
+    eval "rm -rf /usr/share/elasticsearch/backup/ ${VERBOSE}"
+    echo "Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
 
 }
 
@@ -100,8 +151,20 @@ main() {
             esac
         done
 
+        if [[ -n "${USER}" ]] && [[ -z "${PASSWORD}" ]]; then
+            getHelp
+        fi
+        
+        if [[ -z "${USER}" ]] && [[ -n "${PASSWORD}" ]]; then
+            getHelp
+        fi   
+
+        if [[ -z "${USER}" ]] && [[ -z "${PASSWORD}" ]] && [[ -z "${CHANGEALL}" ]]; then
+            getHelp
+        fi             
+
         if [ -n "${VERBOSE}" ]; then
-            debug=""
+            VERBOSE=""
         fi
 
         checkInstalled
@@ -110,6 +173,11 @@ main() {
         generateHash
         changePassword
         runSecurityAdmin
+
+    else
+
+        getHelp        
+
     fi
 
 }
