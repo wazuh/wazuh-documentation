@@ -63,7 +63,7 @@ Fixed
 - A bug in Integratord that might lose alerts from Analysisd due to a race condition.
 - Silenced the error message when the Syslog forwarder reads an alert with no rule object. 
 - A memory leak in Vulnerability Detector when updating NVD feeds.
- Prevented FIM from raising false positives about group name changes due to a thread unsafe function.
+- Prevented FIM from raising false positives about group name changes due to a thread unsafe function.
 
 Removed
 ^^^^^^^
@@ -92,9 +92,9 @@ Fixed
 - A login error when AWS Elasticsearch and ODFE are used.
 - An error message that was displayed when changing a group configuration although the user had the right permissions.
 - Disabled switch visual edit button when JSON content is empty in Role Mapping.
-- Dissapearing menu and blank content when an unsupported agent (OS) is selected.
+- Disappearing menu and blank content when an unsupported agent (OS) is selected.
 - Forcing a non-numeric filter value in a number type field applying a filter in the search bar of dashboards and events.
-- Wrong number of alerts that was shown in Security Events.
+- Wrong number of alerts that were shown in Security Events.
 - Search using uncommon characters in Management groups of agents.
 - The SCA policy stats that did not refresh.
 - Loading of AWS index fields even when no AWS alerts were found.
