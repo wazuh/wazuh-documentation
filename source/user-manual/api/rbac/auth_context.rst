@@ -10,7 +10,9 @@ This guide provides the basic information needed to start using the Authorizatio
 Authorization context login method
 ----------------------------------
 
-This authentication method is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without assigning it to any role. To do this, a properly formalization of the authorization context is needed. In this case the user-roles relations are not taken in consideration. In order to use this method of authentication, a user allowed to use authorization context is needed (how to create a user allowed to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally the permissions associated with them will be granted:
+This authentication method is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without assigning it to any role. To do this, a properly formalization of the authorization context is needed. In this case the user-roles relations are not taken in consideration.
+
+In order to use this method of authentication, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally the permissions associated with them will be granted:
 
 .. code-block:: console
         :class: output
