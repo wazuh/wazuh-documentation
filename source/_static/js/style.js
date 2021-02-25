@@ -4,7 +4,6 @@ $(function() {
   const minVersionRedoc = '4.0';
   const simultaneousCapaSlide = (compareVersion(version, minVersionScreenshot) >= 0);
   const useApiRedoc = (compareVersion(version, minVersionRedoc) >= 0);
-  const spaceBeforeAnchor = 60;
   /* List of folders that will be excluded from search */
   const excludedSearchFolders = ['release-notes'];
   const intervalTime = 5000;
@@ -76,8 +75,12 @@ $(function() {
   markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
   checkScroll();
   if (document.location.hash) {
-    correctScrollTo(spaceBeforeAnchor);
+    correctScrollTo(document.location.hash);
   }
+  $('.headerlink').on('click', function(e) {
+    e.preventDefault();
+    correctScrollTo($(e.target).attr('href'));
+  });
 
   /* Finds all nodes that contains subtrees within the globaltoc and appends a toggle button to them */
   $('.globaltoc .toctree-l1 a').each(function(e) {
@@ -89,8 +92,8 @@ $(function() {
 
   hideSubtree(hideSubtreeNodes);
 
-  $(window).on('hashchange', function() {
-    correctScrollTo(spaceBeforeAnchor);
+  $(window).on('hashchange', function(e) {
+    correctScrollTo(document.location.hash);
   });
 
   /* Turn all tables in responsive table */
@@ -109,7 +112,7 @@ $(function() {
 
   /* Page scroll event -------------------------------------------------------*/
   $('#btn-scroll').on('click', function() {
-    $('html, body').animate({scrollTop: 0}, 'slow');
+    $('html, body').animate({scrollTop: 0}, 'smooth');
     return false;
   });
 
@@ -291,14 +294,15 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
-    noticeHeight = parseInt($('.no-latest-notice').outerHeight());
+    const noticeElement = $('.no-latest-notice');
+    noticeHeight = noticeElement.length == 0 ? 0 : parseInt(noticeElement.outerHeight());
     if ($(window).width() >= 992) {
       if (!$('body').hasClass('scrolled')) {
         navbarTop = parseInt($('#header').outerHeight());
         $('#navbar').css({'padding-top': (navbarTop - documentScroll) + 'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + (parseInt($('#navbar .search_main').outerHeight()) + parseInt($('#header').outerHeight())) + 'px + ' + documentScroll + 'px)', 'padding-top': 0});
       } else {
-        $('#navbar').css({'padding-top': parseInt($('.no-latest-notice').outerHeight())+'px'});
+        $('#navbar').css({'padding-top': noticeHeight +'px'});
         $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + noticeHeight + 'px - ' + parseInt($('#header-sticky').outerHeight()) + 'px)', 'padding-top': 0});
       }
     } else {
@@ -417,16 +421,26 @@ $(function() {
 
   /**
    * Corrects the scrolling movement so the element to which the page is being scrolled appears correctly in the screen,
-   * having in mind the fixed top bar and the no-latest-notice if present.
-   * @param {int} spaceBeforeAnchor Space required between the target element and the top of the window.
+   * having in mind the top bar and the no-latest-notice if present.
+   * @param {int} targetAnchor Selector of the element in the head of the section where the scroll should stop.
    */
-  function correctScrollTo(spaceBeforeAnchor) {
-    if ($('#page').hasClass('no-latest-docs')) {
-      spaceBeforeAnchor = spaceBeforeAnchor + 40;
+  function correctScrollTo(targetAnchor) {
+    let spaceBeforeAnchor = 0;
+    if ( $(targetAnchor).length > 0 ) {
+      setTimeout(function() {
+        spaceBeforeAnchor = parseInt($('#header').outerHeight());
+        if ($('#page').hasClass('no-latest-docs')) {
+          if ($(window).outerWidth() >= 992) {
+            /* The height of the .no-latest-notice may vary for wide screens
+            but here we are using a fixed value (50px) for now */
+            spaceBeforeAnchor = spaceBeforeAnchor + 50;
+          } else {
+            spaceBeforeAnchor = spaceBeforeAnchor + parseInt($('.no-latest-notice').outerHeight());
+          }
+        }
+        window.scrollTo(window.scrollX, $(targetAnchor).offset().top - spaceBeforeAnchor, 'smooth');
+      }, 100);
     }
-    setTimeout(function() {
-      window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
-    }, 10);
   }
 
   /* -- Add functionality for the capabilities in the home page --------------------------------------------- */
