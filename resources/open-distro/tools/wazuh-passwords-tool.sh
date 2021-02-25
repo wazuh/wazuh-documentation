@@ -114,9 +114,8 @@ generateHash() {
         for i in "${!PASSWORDS[@]}"
         do
             NHASH=$(bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORDS[i]} | grep -v WARNING)
-            HASHES+=NHASH
+            HASHES+=(${NHASH})
         done
-        # HASHES="\"$(cat hash.file)\""
     else
         echo "Generating hash"
         eval "bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING > hash.file ${VERBOSE}"
