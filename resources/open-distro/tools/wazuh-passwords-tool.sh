@@ -69,11 +69,7 @@ checkInstalled() {
 
 readUsers() {
     SUSERS=$(grep -B 1 hash: /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml | grep -v hash: | grep -v "-" | awk '{ print substr( $0, 1, length($0)-1 ) }')
-    USERS=($SUSERS)
-    for i in "${!USERS[@]}"
-    do
-        echo "${USERS[i]}"
-    done    
+    USERS=($SUSERS)  
 }
 
 ## Creates a backup of the existing insternal_users.yml
@@ -113,14 +109,24 @@ generatePassword() {
 
 generateHash() {
     
-    echo "Generating hash"
-    eval "bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING > hash.file ${VERBOSE}"
-    HASH="\"$(cat hash.file)\""
-    if [  "$?" != 0  ]; then
-        echo "Error: Hash generation failed."
-        exit 1;
-    fi    
-    echo "Hash generated"
+    if [ -n "${CHANGEALL}" ]; then
+        echo "Generating hashes"
+        for i in "${!PASSWORDS[@]}"
+        do
+            NHASH=$(bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORDS[i]} | grep -v WARNING)
+            HASHES+=NHASH
+        done
+        # HASHES="\"$(cat hash.file)\""
+    else
+        echo "Generating hash"
+        eval "bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING > hash.file ${VERBOSE}"
+        HASH="\"$(cat hash.file)\""
+        if [  "$?" != 0  ]; then
+            echo "Error: Hash generation failed."
+            exit 1;
+        fi    
+        echo "Hash generated"
+    fi
 
 }
 
@@ -128,7 +134,15 @@ generateHash() {
 
 changePassword() {
     
-    awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
+    if [ -n "${CHANGEALL}" ]; then
+        for i in "${!PASSWORDS[@]}"
+        do
+           awk -v new=${HASHES[i]} 'prev=="'${USERS[i]}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
+        done
+    else
+        
+        awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
+    fi
 
 }
 
@@ -153,10 +167,12 @@ runSecurityAdmin() {
         
         for i in "${!USERS[@]}"
         do
-            echo ${USERS[i]}
+            echo ""
             echo "The password for ${USERS[i]} is ${PASSWORDS[i]}"
         done
+        echo ""
         echo "Passwords changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
+        echo ""
     fi 
 
 }
