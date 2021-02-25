@@ -32,7 +32,7 @@ getHelp() {
    echo "Usage: $0 arguments"
    echo -e "\t-a     | --change-all Changes all the Open Distro user passwords and prints them on screen"
    echo -e "\t-u     | --user Indicates the name of the user whose password will be changed"
-   echo -e "\t-p     | --Password Indicate the new user password"
+   echo -e "\t-p     | --Password Indicates the new user password"
    echo -e "\t-v     | --verbose Shows the complete script execution output"
    echo -e "\t-h     | --help Shows help"
    exit 1 # Exit script after printing help
