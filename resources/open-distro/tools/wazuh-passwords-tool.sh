@@ -65,6 +65,17 @@ checkInstalled() {
 
 }
 
+## Reads all the users present in internal_users.yml
+
+readUsers() {
+    SUSERS=$(grep -B 1 hash: /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml | grep -v hash: | grep -v "-" | awk '{ print substr( $0, 1, length($0)-1 ) }')
+    USERS=($SUSERS)
+    for i in "${!USERS[@]}"
+    do
+        echo "${USERS[i]}"
+    done    
+}
+
 ## Creates a backup of the existing insternal_users.yml
 
 createBackUp() {
@@ -78,22 +89,22 @@ createBackUp() {
         exit 1;
     fi
     echo "Backup created"
-
+    
 }
 
-## Generate randompassword
+## Generate random password
 
 generatePassword() {
     echo "Generating random password"
-    if [ -n "${USER}" ]; then
+    if [ -n "${NUSER}" ]; then
         PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
     else
-        NUSERS=$(grep -o -c hash: /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml)
-        < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;
+        USERS=$(grep -o -c hash: /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml)
 
-        for ((i=1; i<=${NUSERS}; i++)); do
-            echo "password '${i}'"
-            < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;
+        for i in "${!USERS[@]}"; do
+            PASS=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
+            echo $PASS
+            PASSWORDS+=(${PASS})
         done
     fi
 }
@@ -117,7 +128,7 @@ generateHash() {
 
 changePassword() {
     
-    awk -v new="$HASH" 'prev=="'${USER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
+    awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
 
 }
 
@@ -132,11 +143,21 @@ runSecurityAdmin() {
         exit 1;
     fi    
     eval "rm -rf /usr/share/elasticsearch/backup/ ${VERBOSE}"
-    echo "Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
 
-    if [ -n ${AUTOPASS} ]; then
-        echo $'\nThe password for user '${USER}' is '${PASSWORD}''
+    if [[ -n "${NUSER}" ]] && [[ -n ${AUTOPASS} ]]; then
+        echo $'\nThe password for user '${NUSER}' is '${PASSWORD}''
+        echo "Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
     fi
+
+    if [ -n "${CHANGEALL}" ]; then
+        
+        for i in "${!USERS[@]}"
+        do
+            echo ${USERS[i]}
+            echo "The password for ${USERS[i]} is ${PASSWORDS[i]}"
+        done
+        echo "Passwords changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
+    fi 
 
 }
 
@@ -155,7 +176,7 @@ main() {
                 shift 1
                 ;;                
             "-u"|"--user")
-                USER=$2
+                NUSER=$2
                 shift
                 shift
                 ;;
@@ -172,16 +193,21 @@ main() {
             esac
         done
 
-        if [[ -n "${USER}" ]] && [[ -z "${PASSWORD}" ]]; then
+        if [[ -n "${NUSER}" ]] && [[ -z "${PASSWORD}" ]]; then
             AUTOPASS=1
             generatePassword
         fi
+
+        if [ -n "${CHANGEALL}" ]; then
+            readUsers
+            generatePassword
+        fi        
         
-        if [[ -z "${USER}" ]] && [[ -n "${PASSWORD}" ]]; then
+        if [[ -z "${NUSER}" ]] && [[ -n "${PASSWORD}" ]]; then
             getHelp
         fi   
 
-        if [[ -z "${USER}" ]] && [[ -z "${PASSWORD}" ]] && [[ -z "${CHANGEALL}" ]]; then
+        if [[ -z "${NUSER}" ]] && [[ -z "${PASSWORD}" ]] && [[ -z "${CHANGEALL}" ]]; then
             getHelp
         fi             
 
