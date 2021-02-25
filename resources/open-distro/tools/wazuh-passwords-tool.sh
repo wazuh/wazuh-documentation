@@ -96,17 +96,17 @@ createBackUp() {
 
 generatePassword() {
     echo "Generating random password"
+
     if [ -n "${NUSER}" ]; then
         PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
     else
-        USERS=$(grep -o -c hash: /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml)
-
+    
         for i in "${!USERS[@]}"; do
             PASS=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
-            echo $PASS
             PASSWORDS+=(${PASS})
         done
     fi
+ 
 }
 
 ## Generates the hash for the new password
