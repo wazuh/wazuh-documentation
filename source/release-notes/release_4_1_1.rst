@@ -82,9 +82,9 @@ Added
 
 Changed
 ^^^^^^^
-- Added toast with refresh button when new fields are loaded in dashboard
+- Added toast with refresh button when new fields are loaded in dashboard.
 - Migrated the Wazuh API endpoints for manager and cluster files and their corresponding RBAC.
-- Enhanced generic ``statusCode`` error message to be more user friendly
+- Enhanced generic ``statusCode`` error message to be more user friendly.
 
 Fixed
 ^^^^^
