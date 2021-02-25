@@ -84,8 +84,8 @@ Added
 Changed
 ^^^^^^^
 - Added toast with refresh button when new fields are loaded in dashboard
-- Migrated manager and cluster files of the Wazuh API endpoints and their corresponding RBAC.
-- Replaced generic ``statusCode`` error message.
+- Migrated the Wazuh API endpoints for manager and cluster files and their corresponding RBAC.
+- Enhanced generic statusCode error message to be more user friendly
 
 Fixed
 ^^^^^
@@ -103,6 +103,6 @@ Fixed
 - An issue that prevented from editing empty rules and decoders files that already existed in the Wazuh manager.
 - Support for alerts index pattern with different IDs and names.
 - The unpin button in the selection modal of agents in the menu.
-- Close Wazuh API session when logging out.
+- Close Wazuh API session when logging out from UI.
 - Missing ``&&`` in macOS agent deployment command.
 - Prompt permissions on Mitre > Framework and Integrity monitoring > Inventory.
