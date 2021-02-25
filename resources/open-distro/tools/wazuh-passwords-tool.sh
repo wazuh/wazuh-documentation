@@ -81,6 +81,23 @@ createBackUp() {
 
 }
 
+## Generate randompassword
+
+generatePassword() {
+    echo "Generating random password"
+    if [ -n "${USER}" ]; then
+        PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
+    else
+        NUSERS=$(grep -o -c hash: /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml)
+        < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;
+
+        for ((i=1; i<=${NUSERS}; i++)); do
+            echo "password '${i}'"
+            < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;
+        done
+    fi
+}
+
 ## Generates the hash for the new password
 
 generateHash() {
@@ -117,6 +134,10 @@ runSecurityAdmin() {
     eval "rm -rf /usr/share/elasticsearch/backup/ ${VERBOSE}"
     echo "Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
 
+    if [ -n ${AUTOPASS} ]; then
+        echo $'\nThe password for user '${USER}' is '${PASSWORD}''
+    fi
+
 }
 
 main() {   
@@ -152,7 +173,8 @@ main() {
         done
 
         if [[ -n "${USER}" ]] && [[ -z "${PASSWORD}" ]]; then
-            getHelp
+            AUTOPASS=1
+            generatePassword
         fi
         
         if [[ -z "${USER}" ]] && [[ -n "${PASSWORD}" ]]; then
