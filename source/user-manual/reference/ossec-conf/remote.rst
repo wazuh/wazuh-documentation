@@ -117,7 +117,9 @@ Whether the local IP address is IPv6
 
 .. note::
 
-  Currently it's not possible to set both *local_ip* and *ipv6*
+  At the moment it's not possible to set both *local_ip* and *ipv6*.
+
+  IPv6 is not available for secure connections.
 
 queue_size
 ^^^^^^^^^^^^
@@ -161,7 +163,7 @@ Example of configuration
     <remote>
       <connection>secure</connection>
       <port>1514</port>
-      <protocol>tcp</protocol>
+      <protocol>tcp,udp</protocol>
       <queue_size>16384</queue_size>
       <rids_closing_time>5m</rids_closing_time>
     </remote>
