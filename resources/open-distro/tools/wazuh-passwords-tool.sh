@@ -111,7 +111,7 @@ generatePassword() {
         echo "Generating random password"
         PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
     else
-        echo "Generating random password"
+        echo "Generating random passwords"
         for i in "${!USERS[@]}"; do
             PASS=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
             PASSWORDS+=(${PASS})
@@ -140,8 +140,7 @@ generateHash() {
         echo "Hashes generated"
     else
         echo "Generating hash"
-        eval "bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING > hash.file ${VERBOSE}"
-        HASH="\"$(cat hash.file)\""
+        HASH=$(bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING)
         if [  "$?" != 0  ]; then
             echo "Error: Hash generation failed."
             exit 1;
@@ -161,7 +160,6 @@ changePassword() {
            awk -v new=${HASHES[i]} 'prev=="'${USERS[i]}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
         done
     else
-        
         awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
     fi
 
@@ -235,12 +233,28 @@ main() {
             VERBOSE=""
         fi 
 
-        checkInstalled 
+        checkInstalled   
+
+        if [[ -n "${NUSER}" ]] && [[ -n "${CHANGEALL}" ]]; then
+            getHelp
+        fi 
+
+        if [[ -n "${PASSWORD}" ]] && [[ -n "${CHANGEALL}" ]]; then
+            getHelp
+        fi         
+
+        if [[ -z "${NUSER}" ]] && [[ -n "${PASSWORD}" ]]; then
+            getHelp
+        fi   
+
+        if [[ -z "${NUSER}" ]] && [[ -z "${PASSWORD}" ]] && [[ -z "${CHANGEALL}" ]]; then
+            getHelp
+        fi 
 
         if [ -n "${NUSER}" ]; then
             readUsers
             checkUser
-        fi              
+        fi          
 
         if [[ -n "${NUSER}" ]] && [[ -z "${PASSWORD}" ]]; then
             AUTOPASS=1
@@ -250,15 +264,7 @@ main() {
         if [ -n "${CHANGEALL}" ]; then
             readUsers
             generatePassword
-        fi        
-        
-        if [[ -z "${NUSER}" ]] && [[ -n "${PASSWORD}" ]]; then
-            getHelp
-        fi   
-
-        if [[ -z "${NUSER}" ]] && [[ -z "${PASSWORD}" ]] && [[ -z "${CHANGEALL}" ]]; then
-            getHelp
-        fi             
+        fi                    
 
         getNetworkHost
         createBackUp
