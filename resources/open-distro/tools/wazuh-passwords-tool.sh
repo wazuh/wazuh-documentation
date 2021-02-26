@@ -183,6 +183,10 @@ runSecurityAdmin() {
         echo "Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
     fi
 
+    if [[ -n "${NUSER}" ]] && [[ -z ${AUTOPASS} ]]; then
+        echo "Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services."
+    fi    
+
     if [ -n "${CHANGEALL}" ]; then
         
         for i in "${!USERS[@]}"
