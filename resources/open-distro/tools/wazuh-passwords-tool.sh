@@ -206,7 +206,7 @@ main() {
         do
             case "$1" in
             "-v"|"--verbose")
-                VERBOSE=1
+                VERBOSEENABLED=1
                 shift 1
                 ;;
             "-a"|"--change-all")
@@ -231,7 +231,7 @@ main() {
             esac
         done
 
-        if [ -n "${VERBOSE}" ]; then
+        if [ -n "${VERBOSEENABLED}" ]; then
             VERBOSE=""
         fi 
 
