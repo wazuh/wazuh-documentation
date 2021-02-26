@@ -16,19 +16,41 @@ This guide summarizes the relevant configurations that allow for the optimizatio
 Change users' password
 ----------------------
 
-In order to improve security, it is highly recommended to change Elasticsearch default passwords.
+In order to improve security, it is highly recommended to change Elasticsearch's default passwords.
 
 .. tabs::
 
   .. group-tab:: Open Distro for Elasticsearch
 
-    To ease the process of changing the password, you can use the following script:
+    The following scripts allows changin the password for a given user. In this example it is used the user ``admin``:
 
-    .. code-block:: console
+    - Download the script:
     
-      # curl -so wazuh-passwords-tool.sh curl -so ~/passwords.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3426-Password_change_tool/resources/open-distro/tools/wazuh-passwords-tool.sh
+      .. code-block:: console
+      
+        # curl -so wazuh-passwords-tool.sh curl -so ~/passwords.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3426-Password_change_tool/resources/open-distro/tools/wazuh-passwords-tool.sh
 
-    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. The available options to run the script are:
+    - Run the script:
+
+      .. code-block:: console
+      
+        # bash wazuh-passwords-tool.sh -u admin -p mypassword
+
+    This is the output of the script:
+
+      .. code-block:: none
+        :class: output 
+
+        Creating backup...
+        Backup created
+        Generating hash
+        Hash generated
+        Loading changes...
+        Done
+        Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+
+
+    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. All the available options to run the script are:
 
     +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
     | Options                     | Purpose                                                                                                                      |
@@ -44,7 +66,42 @@ In order to improve security, it is highly recommended to change Elasticsearch d
     | -h / --help                 | Shows help                                                                                                                   |
     +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
 
+    To generate and change passwords for all users, run the script with the ``-a`` option:
 
+    - Run the script:
+
+      .. code-block:: console
+      
+        # bash wazuh-passwords-tool.sh -a
+
+    This is the output of the script:
+
+      .. code-block:: none
+        :class: output 
+
+        Generating random passwords
+        Done
+        Creating backup...
+        Backup created
+        Generating hashes
+        Hashes generated
+        Loading changes...
+        Done
+
+        The password for admin is Re6dEMVUcB_c6rEDf_C_nkBCZkwFKtZL
+
+        The password for kibanaserver is 4KLxLHor69cq2i1jFXmSUjBTVjG2yhU9
+
+        The password for kibanaro is zCd-SrihVwzfRxj5qPrwlSgmZJP9RsMA
+
+        The password for logstash is OmbPImuV5fv11R6XYAG92cUjaDy9PkdH
+
+        The password for readall is F2vglVGFJHXohwqEW5G4Tfjsiz-qqkTU
+
+        The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
+
+        Passwords changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+  
 
     .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
 
