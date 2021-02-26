@@ -22,7 +22,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
   .. group-tab:: Open Distro for Elasticsearch
 
-    The following scripts allows changin the password for a given user. In this example it is used the user ``admin``:
+    The following script allows changing the password for a given user. In this example it is used the user ``admin``:
 
     - Download the script:
     
@@ -47,7 +47,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
         Hash generated
         Loading changes...
         Done
-        Password changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+        Password changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
 
 
     The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. All the available options to run the script are:
