@@ -307,6 +307,7 @@ agent:read
 - :api-ref:`GET /agents/summary/os <operation/api.controllers.agent_controller.get_agent_summary_os>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/summary/status <operation/api.controllers.agent_controller.get_agent_summary_status>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agent_controller.get_agent_config>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/cve <operation/api.controllers.agent_controller.get_agent_cve>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
