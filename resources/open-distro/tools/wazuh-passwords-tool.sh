@@ -32,7 +32,7 @@ getHelp() {
    echo "Usage: $0 arguments"
    echo -e "\t-a     | --change-all Changes all the Open Distro user passwords and prints them on screen"
    echo -e "\t-u     | --user Indicates the name of the user whose password will be changed"
-   echo -e "\t-p     | --Password Indicates the new user password"
+   echo -e "\t-p     | --Password Indicates the new password"
    echo -e "\t-v     | --verbose Shows the complete script execution output"
    echo -e "\t-h     | --help Shows help"
    exit 1 # Exit script after printing help
@@ -72,6 +72,21 @@ readUsers() {
     USERS=($SUSERS)  
 }
 
+checkUser() {
+
+    for i in "${!USERS[@]}"; do
+        if [ ${USERS[i]} == $NUSER ]; then
+            EXISTS=1
+        fi
+    done
+
+    if [ -z "${EXISTS}" ]; then
+        echo "Error: The given user does not exist"
+        exit 1;
+    fi
+
+}
+
 ## Creates a backup of the existing insternal_users.yml
 
 createBackUp() {
@@ -79,9 +94,9 @@ createBackUp() {
     echo "Creating backup..."
     eval "mkdir /usr/share/elasticsearch/backup ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} > /dev/null 2>&1"
+    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
-        echo "Error: The backup could not be created."
+        echo "Error: The backup could not be created"
         exit 1;
     fi
     echo "Backup created"
@@ -91,17 +106,23 @@ createBackUp() {
 ## Generate random password
 
 generatePassword() {
-    echo "Generating random password"
 
     if [ -n "${NUSER}" ]; then
+        echo "Generating random password"
         PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
     else
-    
+        echo "Generating random password"
         for i in "${!USERS[@]}"; do
             PASS=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)
             PASSWORDS+=(${PASS})
         done
     fi
+
+        if [  "$?" != 0  ]; then
+        echo "Error: The password has not been generated"
+        exit 1;
+    fi
+    echo "Done"
  
 }
 
@@ -116,6 +137,7 @@ generateHash() {
             NHASH=$(bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORDS[i]} | grep -v WARNING)
             HASHES+=(${NHASH})
         done
+        echo "Hashes generated"
     else
         echo "Generating hash"
         eval "bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p ${PASSWORD} | grep -v WARNING > hash.file ${VERBOSE}"
@@ -150,12 +172,13 @@ runSecurityAdmin() {
     
     echo "Loading changes..."
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -f /usr/share/elasticsearch/backup/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} > /dev/null 2>&1"
+    eval "./securityadmin.sh -f /usr/share/elasticsearch/backup/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
     fi    
     eval "rm -rf /usr/share/elasticsearch/backup/ ${VERBOSE}"
+    echo "Done"
 
     if [[ -n "${NUSER}" ]] && [[ -n ${AUTOPASS} ]]; then
         echo $'\nThe password for user '${NUSER}' is '${PASSWORD}''
@@ -210,7 +233,14 @@ main() {
 
         if [ -n "${VERBOSE}" ]; then
             VERBOSE=""
-        fi        
+        fi 
+
+        checkInstalled 
+
+        if [ -n "${NUSER}" ]; then
+            readUsers
+            checkUser
+        fi              
 
         if [[ -n "${NUSER}" ]] && [[ -z "${PASSWORD}" ]]; then
             AUTOPASS=1
@@ -230,7 +260,6 @@ main() {
             getHelp
         fi             
 
-        checkInstalled
         getNetworkHost
         createBackUp
         generateHash
