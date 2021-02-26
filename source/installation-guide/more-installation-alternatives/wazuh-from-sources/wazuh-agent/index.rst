@@ -167,7 +167,7 @@ Installing Wazuh agent from sources
 
      .. code-block:: console
 
-      # make deps
+      # make deps TARGET=winagent
       # make TARGET=winagent
 
      The following output will appear at the end of the building process:
