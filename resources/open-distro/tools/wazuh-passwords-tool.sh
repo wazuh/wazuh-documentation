@@ -208,6 +208,10 @@ main() {
             esac
         done
 
+        if [ -n "${VERBOSE}" ]; then
+            VERBOSE=""
+        fi        
+
         if [[ -n "${NUSER}" ]] && [[ -z "${PASSWORD}" ]]; then
             AUTOPASS=1
             generatePassword
@@ -225,10 +229,6 @@ main() {
         if [[ -z "${NUSER}" ]] && [[ -z "${PASSWORD}" ]] && [[ -z "${CHANGEALL}" ]]; then
             getHelp
         fi             
-
-        if [ -n "${VERBOSE}" ]; then
-            VERBOSE=""
-        fi
 
         checkInstalled
         getNetworkHost
