@@ -28,7 +28,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
     
       .. code-block:: console
       
-        # curl -so wazuh-passwords-tool.sh curl -so ~/passwords.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3426-Password_change_tool/resources/open-distro/tools/wazuh-passwords-tool.sh
+        # curl -so wazuh-passwords-tool.sh curl -so ~/passwords.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/tools/wazuh-passwords-tool.sh
 
     - Run the script:
 
