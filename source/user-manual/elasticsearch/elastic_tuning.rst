@@ -16,52 +16,37 @@ This guide summarizes the relevant configurations that allow for the optimizatio
 Change users' password
 ----------------------
 
-In order to improve security, it is highly recommended to change Elasticsearch's default passwords.
+In order to improve security, it is highly recommended to change Elasticsearch default passwords.
 
 .. tabs::
 
   .. group-tab:: Open Distro for Elasticsearch
 
-    All the initial users and roles for Open Distro for Elasticsearch are located in the file ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml``. We will create a backup of the security configuration and modify the resulting ``internal_users.yml`` file to avoid losing custom security configurations.  
+    To ease the process of changing the password, you can use the following script:
 
-    #. Make a backup of your security configuration using the ``securityadmin`` script placed at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<elasticsearch_ip>``  and  ``<backup-directory>``  and execute the following commands:
-
-        .. code-block:: console
-
-          # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -backup <backup-directory> -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h <elasticsearch_ip>
-
+    .. code-block:: console
     
-    #. To generate a new password hash, Open Distro for Elasticsearch offers an utility called ``hash.sh`` located at ``/usr/share/elasticsearch/plugins/opendistro_security/tools``. Replace ``<new-password>`` with the chosen new password and generate a hash for it using the ``hash.sh`` utility:
+      # curl -so wazuh-passwords-tool.sh curl -so ~/passwords.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3426-Password_change_tool/resources/open-distro/tools/wazuh-passwords-tool.sh
 
-        .. code-block:: console
+    The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. The available options to run the script are:
 
-          # bash /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p <new-password>
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | Options                     | Purpose                                                                                                                      |
+    +=============================+==============================================================================================================================+
+    | -a / --change-all           | Generates random passwords, changes all the Open Distro user passwords and prints them on screen                             |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | -p / --password <password>  | Indicates the new password, must be used with option ``-u``                                                                  |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+    
+    | -u / --user <user>          | Indicates the name of the user whose password will be changed. If no password specified it will generate a random one        |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | -v / --verbose              | Shows the complete script execution output                                                                                   |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+    | -h / --help                 | Shows help                                                                                                                   |
+    +-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
 
-    
-    #. The generated hash must be placed on the hash section for the user whose password you want to change, for example ``admin``,  in ``<backup-directory>/internal_users.yml``: 
-
-        .. code-block:: yaml
-          :emphasize-lines: 2
-
-          admin:
-            hash: "<newly_generated_hash>"
-            reserved: true
-            backend_roles:
-            - "admin"
-            description: "Demo admin user"
 
 
-    #. In order to load the changes made, it is necessary to execute the ``securityadmin`` script to push the modified ``internal_users.yml`` file. Replace ``<elasticsearch_ip>`` and ``<backup-directory>`` and execute the following commands: 
-
-        .. code-block:: console
-
-          # cd /usr/share/elasticsearch/plugins/opendistro_security/tools/
-          # ./securityadmin.sh -f <backup-directory>/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h <elasticsearch_ip>
-
-    #. Remove files from your ``<backup-directory>``.
-
-    .. note:: The password may need to be updated in ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``      
+    .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
 
   
 
