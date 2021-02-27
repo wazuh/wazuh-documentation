@@ -100,7 +100,7 @@ In order to improve security, it is highly recommended to change Elasticsearch's
 
         The password for snapshotrestore is rd35bCchP3Uf-0w77VCEJzHF7WEP3fNw
 
-        Passwords changed. Renember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
+        Passwords changed. Remember to update the password in /etc/filebeat/filebeat.yml and /etc/kibana/kibana.yml if necessary and restart the services.
   
 
     .. note:: The password may need to be updated in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
