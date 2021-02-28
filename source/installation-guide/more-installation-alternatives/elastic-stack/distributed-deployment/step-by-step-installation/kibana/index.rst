@@ -129,11 +129,11 @@ With the first access attempt, the Wazuh Kibana plugin may prompt a message that
 
   hosts:
     - default:
-       url: https://localhost
-       port: 55000
-       username: wazuh-wui
-       password: wazuh-wui
-       run_as: false
+        url: https://localhost
+        port: 55000
+        username: wazuh-wui
+        password: wazuh-wui
+        run_as: false
 
 
 Disabling repositories
