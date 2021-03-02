@@ -76,7 +76,7 @@ rollBack() {
         elif [ "${sys_type}" == "zypper" ]; then
             eval "zypper -n remove opendistroforelasticsearch ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge opendistroforelasticsearch -y ${debug}"
+            eval "apt remove --purge opendistroforelasticsearch elasticsearch* opendistro-* -y ${debug}"
         fi 
         eval "rm -rf /var/lib/elasticsearch/ ${debug}"
         eval "rm -rf /usr/share/elasticsearch/ ${debug}"
