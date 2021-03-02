@@ -74,7 +74,7 @@ rollBack() {
             eval "yum remove elasticsearch* -y ${debug}"
             eval "yum remove opendistro-* -y ${debug}"
         elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove opendistroforelasticsearch ${debug}"
+            eval "zypper -n remove opendistroforelasticsearch elasticsearch* opendistro-* ${debug}"
         elif [ "${sys_type}" == "apt-get" ]; then
             eval "apt remove --purge opendistroforelasticsearch elasticsearch* opendistro-* -y ${debug}"
         fi 
@@ -543,6 +543,9 @@ checkInstalled() {
     if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
         if [ -n "${ow}" ]; then
              overwrite
+        
+        elif [ -n "${uninstall}" ]; then
+            echo "Removing the installed items"
         else
             echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
             exit 1;
@@ -653,7 +656,11 @@ main() {
             "-o"|"--overwrite")  
                 ow=1 
                 shift 1     
-                ;;                                                
+                ;;  
+            "-r"|"--uninstall")  
+                uninstall=1 
+                shift 1     
+                ;;                                                              
             "-h"|"--help")        
                 getHelp
                 ;;                                         
@@ -665,6 +672,12 @@ main() {
         if [ -n "${verbose}" ]; then
             debug=""
         fi
+
+        if [ -n "${uninstall}" ]; then
+            checkInstalled
+            rollBack
+            exit 0;
+        fi        
         
         if [ -n "${ignore}" ]; then
             echo "Health-check ignored."    
