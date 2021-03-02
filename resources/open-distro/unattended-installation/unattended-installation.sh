@@ -48,6 +48,25 @@ rollBack() {
         eval "rm -rf /var/ossec/ ${debug}"
     fi
 
+    if [ -n "${javainstalled}" ]; then
+        echo "Removing Java Developent Kit..."
+        if [ "${sys_type}" == "yum" ]; then
+            eval "yum remove java-11* -y ${debug}"
+        elif [ "${sys_type}" == "zypper" ]; then
+            eval "zypper -n remove java-11* ${debug}"
+        elif [ "${sys_type}" == "apt-get" ]; then
+            eval "apt remove --purge openjdk-11-j* -y ${debug}"
+        fi 
+
+        if [ "${sys_type}" == "yum" ]; then
+            eval "yum clean all -y ${debug}"
+        elif [ "${sys_type}" == "zypper" ]; then
+            eval "zypper -n packages --orphaned ${debug}"
+        elif [ "${sys_type}" == "apt-get" ]; then
+            eval "apt autoremove -y ${debug}"
+        fi         
+    fi      
+
     if [ -n "${elasticinstalled}" ]; then
         echo "Removing Elasticsearch..."
         if [ "${sys_type}" == "yum" ]; then
@@ -94,34 +113,17 @@ rollBack() {
         eval "rm -rf /etc/kibana/ ${debug}"
     fi
 
-    if [ -n "${javainstalled}" ]; then
-        echo "Removing Java Developent Kit..."
-        if [ "${sys_type}" == "yum" ]; then
-            eval "yum remove java-11* -y ${debug}"
-        elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove java-11* ${debug}"
-        elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge openjdk-11-j* -y ${debug}"
-        fi 
-
-        if [ "${sys_type}" == "yum" ]; then
-            eval "yum clean all -y ${debug}"
-        elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n packages --orphaned ${debug}"
-        elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt autoremove -y ${debug}"
-        fi         
-    fi  
-
 }
 
 checkArch() {
+
     arch=$(uname -m)
 
     if [ ${arch} != "x86_64" ]; then
         echo "Uncompatible system. This script must be run on a 64-bit system."
         exit 1;
     fi
+    
 }
 
 startService() {
