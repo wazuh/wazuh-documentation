@@ -35,6 +35,7 @@ logger() {
 }
 
 rollBack() {
+    echo "Cleaning the installation" 
     if [ -n "${wazuhinstalled}" ]; then
         echo "Removing the Wazuh manager..."
         if [ "${sys_type}" == "yum" ]; then
@@ -102,6 +103,14 @@ rollBack() {
         elif [ "${sys_type}" == "apt-get" ]; then
             eval "apt remove --purge openjdk-11-j* -y ${debug}"
         fi 
+
+        if [ "${sys_type}" == "yum" ]; then
+            eval "yum clean all -y ${debug}"
+        elif [ "${sys_type}" == "zypper" ]; then
+            eval "zypper -n packages --orphaned ${debug}"
+        elif [ "${sys_type}" == "apt-get" ]; then
+            eval "apt autoremove -y ${debug}"
+        fi         
     fi  
 
 }
@@ -294,7 +303,6 @@ installWazuh() {
     if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
         rollBack
-        echo "Cleaning the installation..."
         exit 1;
     else
         logger "Done"
@@ -319,7 +327,6 @@ installElasticsearch() {
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch installation failed"
         rollBack
-        echo "Cleaning the installation..."
         exit 1;
     else
         logger "Done"
@@ -338,7 +345,7 @@ installElasticsearch() {
         if [  "$?" != 0  ]; then
             echo "Error: certificates were not created"
             rollBack
-            echo "Cleaning the installation..."
+
             exit 1;
         else
             logger "Certificates created"
@@ -394,7 +401,6 @@ installFilebeat() {
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat installation failed"
         rollBack
-        echo "Cleaning the installation..."
         exit 1;
     else
         eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
@@ -424,7 +430,6 @@ installKibana() {
     fi
     if [  "$?" != 0  ]; then
         rollBack
-        echo "Cleaning the installation..."
         echo "Error: Kibana installation failed"
         exit 1;
     else    
@@ -436,7 +441,7 @@ installKibana() {
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             rollBack
-            echo "Cleaning the installation..."
+
             exit 1;
         fi     
         eval "mkdir /etc/kibana/certs ${debug}"
@@ -599,7 +604,6 @@ checkInstallation() {
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
         rollBack
-        echo "Cleaning the installation..."
         exit 1;     
     else
         echo "Elasticsearch installation succeeded."
@@ -608,7 +612,6 @@ checkInstallation() {
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat was not successfully installed."
         rollBack
-        echo "Cleaning the installation..."
         exit 1;     
     else
         echo "Filebeat installation succeeded."
