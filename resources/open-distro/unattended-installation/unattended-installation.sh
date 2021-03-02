@@ -35,7 +35,10 @@ logger() {
 }
 
 rollBack() {
-    echo "Cleaning the installation" 
+    if [ -z "${uninstall}" ]; then
+        echo "Cleaning the installation" 
+    fi
+    
     if [ -n "${wazuhinstalled}" ]; then
         echo "Removing the Wazuh manager..."
         if [ "${sys_type}" == "yum" ]; then
@@ -540,12 +543,19 @@ checkInstalled() {
         javainstalled="1"
         javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
+
+    if [ -z "${wazuhinstalled}" ] || [ -z "${elasticinstalled}" ] || [ -z "${filebeatinstalled}" ] || [ -z "${kibanainstalled}" ] && [ -n "${uninstall}" ]; then 
+        echo "Error: No Wazuh components were found on the system."
+        exit 1;        
+    fi
+
     if [ -n "${wazuhinstalled}" ] || [ -n "${elasticinstalled}" ] || [ -n "${filebeatinstalled}" ] || [ -n "${kibanainstalled}" ]; then 
         if [ -n "${ow}" ]; then
              overwrite
         
         elif [ -n "${uninstall}" ]; then
             echo "Removing the installed items"
+            rollBack
         else
             echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
             exit 1;
@@ -675,7 +685,6 @@ main() {
 
         if [ -n "${uninstall}" ]; then
             checkInstalled
-            rollBack
             exit 0;
         fi        
         
