@@ -438,7 +438,7 @@ custom_replacements = {
     "|WAZUH_LATEST_KUBERNETES|" : "4.1.0",
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
     "|WAZUH_LATEST_OVA|" : "4.1.1",
-    "|WAZUH_LATEST_DOCKER|" : "4.1.0",
+    "|WAZUH_LATEST_DOCKER|" : "4.1.1",
     "|OPEN_DISTRO_LATEST|" : "1.12.0",
     "|ELASTICSEARCH_LATEST|" : "7.10.0",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.0",
