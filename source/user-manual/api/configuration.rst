@@ -179,7 +179,7 @@ drop_privileges
 +----------------------+---------------+-------------------------------------+
 | Allowed values       | Default value | Description                         |
 +======================+===============+=====================================+
-| yes, true, no, false | true          | Run wazuh-api process as ossec user |
+| yes, true, no, false | true          | Run wazuh-api process as wazuh user |
 +----------------------+---------------+-------------------------------------+
 
 experimental_features

@@ -242,7 +242,5 @@ Remove users:
 
   .. code-block:: console
 
-    # userdel ossec 2> /dev/null
-    # userdel ossecm 2> /dev/null
-    # userdel ossecr 2> /dev/null
-    # groupdel ossec 2> /dev/null
+    # userdel wazuh 2> /dev/null
+    # groupdel wazuh 2> /dev/null

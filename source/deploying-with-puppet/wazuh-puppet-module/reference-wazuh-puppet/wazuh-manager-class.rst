@@ -704,7 +704,7 @@ $wazuh_api_use_only_authd
   `Default false`
 
 $wazuh_api_drop_privileges
-  Run wazuh-api process as ossec user
+  Run wazuh-api process as wazuh user
 
   `Default true`
 

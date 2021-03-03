@@ -57,7 +57,7 @@ to the ``default`` group, which is used here as an example:
 
         # echo "sca.remote_commands=1" >> /var/ossec/etc/local_internal_options.conf
 
-#. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``ossec``.
+#. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``wazuh``.
 
 
 #. Add the configuration block to the Wazuh manager's ``/var/ossec/etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
