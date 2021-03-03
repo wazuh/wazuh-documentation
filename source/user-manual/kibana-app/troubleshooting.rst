@@ -109,6 +109,30 @@ The first step is to check if there are alerts in Elasticsearch.
 
 If you don't see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
 
+To ensure that Filebeat is correctly configured, run the following command:
+
+.. code-block:: console
+
+  # filebeat test output
+
+.. code-block:: none
+          :class: output
+
+          elasticsearch: https://127.0.0.1:9200...
+            parse url... OK
+            connection...
+              parse host... OK
+              dns lookup... OK
+              addresses: 127.0.0.1
+              dial up... OK
+            TLS...
+              security: server's certificate chain verification is enabled
+              handshake... OK
+              TLS version: TLSv1.3
+              dial up... OK
+            talk to server... OK
+            version: 7.10.0
+
 Check if Filebeat is reading the ``alerts.json`` file:
 
 .. code-block:: console
