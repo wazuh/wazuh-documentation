@@ -86,9 +86,17 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 .. code-block:: console
 
-  # curl api_user:api_pass@api_url:55000/version
+  # curl -k -X GET "https://<api_url>:55000/" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X GET 'https://<api_url>:55000/security/user/authenticate?raw=true')"
 
-If the *curl* command fails but the Wazuh API is running properly, it means you have a connectivity problem between servers.
+.. code-block:: console
+  :class: output
+
+    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+    100   271  100   271    0     0    879      0 --:--:-- --:--:-- --:--:--   882
+    {"data": {"title": "Wazuh API REST", "api_version": "4.1.1", "revision": 40110, "license_name": "GPL 2.0", "license_url": "https://github.com/wazuh/wazuh/blob/4.1/LICENSE", "hostname": "localhost.localdomain", "timestamp": "2021-03-03T10:01:18+0000"}, "error": 0}
+
+
 
 I don't see alerts in the Wazuh Kibana plugin
 ---------------------------------------------
