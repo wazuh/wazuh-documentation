@@ -73,9 +73,7 @@ Customizing the installation
 The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and will accept all the available IPs of the host.  This value can be changed for a specific IP if needed.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
-
-Once Kibana is running, it is necessary to assign each user their corresponding role. To learn more, visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
-
+ 
 To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
