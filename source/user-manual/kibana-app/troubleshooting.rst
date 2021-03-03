@@ -10,17 +10,36 @@ This section collects common installation or usage problems on the Wazuh Kibana 
 "Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
 ------------------------------------------------------------------------------------
 
-The Wazuh Kibana plugin has a file named *package.json*, it includes dependencies along more information. One of them is the Kibana version:
+Wazuh Kibana plugin must be installed in the correct version, which depends both on the Kibana and the Wazuh version.
 
-.. code-block:: javascript
+Kibana version can be checked by executing the following command:
 
-  "kibana": {
-    "version": "6.7.2"
-  },
+.. code-block:: console
 
-Your Wazuh Kibana plugin must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.2`` then your installed Kibana version must be ``6.7.2``.
+ # cat /usr/share/kibana/package.json | grep version
 
-You can check our `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#older-packages>`_ to learn more about product compatibility between Wazuh and the Elastic Stack.
+An example output of the command looks as follows:
+
+.. code-block:: console
+  :class: output
+
+  "version": "7.10.0",
+
+
+The Wazuh version can be checked by executing the following command:
+
+.. code-block:: console
+
+ # cat /var/ossec/etc/ossec-init.conf | grep VERSION
+
+An example output of the command looks as follows:
+
+.. code-block:: console
+  :class: output
+
+  VERSION="v4.1.1"
+
+Using the Kibana version and the Wazuh version, the correct plugin can be found in the Wazuh `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 No template found for the selected index pattern
 ------------------------------------------------
