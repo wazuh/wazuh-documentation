@@ -48,7 +48,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <user>:<password> -k
 
 .. code-block:: json
   :class: output
@@ -63,17 +63,24 @@ Wazuh API seems to be down
 
 It means your Wazuh API could be unavailable. Since the Wazuh Kibana plugin needs data from the Wazuh API, it must be available for the Wazuh Kibana plugin.
 
-If you are using ``systemd``, please check the status as follow:
+.. tabs::
 
-.. code-block:: console
 
-  # systemctl status wazuh-manager
+  .. group-tab:: Systemd
 
-If you are using ``SysV Init``, please check the status as follow:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # service wazuh-manager status
+      # systemctl status wazuh-manager
+
+
+
+  .. group-tab:: SysV init
+
+    .. code-block:: console
+
+      # service wazuh-manager status
+
 
 If the Wazuh API is running, try to fetch data using the CLI from the Kibana server:
 
