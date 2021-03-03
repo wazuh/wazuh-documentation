@@ -107,7 +107,12 @@ The first step is to check if there are alerts in Elasticsearch.
 
   # curl https://<ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-* -u <username>:<password> -k
 
-If you don't see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
+.. code-block:: none
+    :class: output
+
+     green open wazuh-alerts-4.x-2021.03.03 xwFPX7nFQxGy-O5aBA3LFQ 3 0 340 0 672.6kb 672.6kb
+
+If you do not see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
 
 To ensure that Filebeat is correctly configured, run the following command:
 
