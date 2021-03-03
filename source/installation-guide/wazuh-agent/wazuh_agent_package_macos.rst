@@ -80,8 +80,8 @@ To uninstall the agent in macOS:
 
     .. code-block:: console
 
-      # /usr/bin/dscl . -delete "/Users/ossec"
-      # /usr/bin/dscl . -delete "/Groups/ossec"
+      # /usr/bin/dscl . -delete "/Users/wazuh"
+      # /usr/bin/dscl . -delete "/Groups/wazuh"
 
 #. Remove from ``pkgutil``
 
