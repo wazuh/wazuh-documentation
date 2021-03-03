@@ -16,44 +16,44 @@ Installing Wazuh
 
 #. Download and run the script:
 
-  .. code-block:: console
+   .. code-block:: console
 
     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-  The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
+   The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
-  After the execution of the script, it will show the following messages to confirm that the installation was successful:
+   After the execution of the script, it will show the following messages to confirm that the installation was successful:
 
-  .. code-block:: none
-    :class: output
+   .. code-block:: none
+      :class: output
 
-    Starting the installation...
-    Installing all necessary utilities for the installation...
-    Done
-    Adding the Wazuh repository...
-    Done
-    Installing the Wazuh manager...
-    Done
-    Wazuh-manager started
-    Installing Open Distro for Elasticsearch...
-    Done
-    Configuring Elasticsearch...
-    Certificates created
-    Elasticsearch started
-    Initializing Elasticsearch...
-    Done
-    Installing Filebeat...
-    Filebeat started
-    Done
-    Installing Open Distro for Kibana...
-    Kibana started
-    Done
-    Checking the installation...
-    Elasticsearch installation succeeded.
-    Filebeat installation succeeded.
-    Initializing Kibana (this may take a while)
-    ########
-    Installation finished
+      Starting the installation...
+      Installing all necessary utilities for the installation...
+      Done
+      Adding the Wazuh repository...
+      Done
+      Installing the Wazuh manager...
+      Done
+      Wazuh-manager started
+      Installing Open Distro for Elasticsearch...
+      Done
+      Configuring Elasticsearch...
+      Certificates created
+      Elasticsearch started
+      Initializing Elasticsearch...
+      Done
+      Installing Filebeat...
+      Filebeat started
+      Done
+      Installing Open Distro for Kibana...
+      Kibana started
+      Done
+      Checking the installation...
+      Elasticsearch installation succeeded.
+      Filebeat installation succeeded.
+      Initializing Kibana (this may take a while)
+      ########
+      Installation finished
 
 #. Access the web interface: 
 
