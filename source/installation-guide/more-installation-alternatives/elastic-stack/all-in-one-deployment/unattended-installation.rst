@@ -17,7 +17,7 @@ Installing Wazuh
 
      # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script.  
+   The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. This can be skipped adding the option ``-i`` or ``--ignore-healthcheck`` when running the script.  
 
    After the execution of the script, it will show the following messages to confirm that the installation was successful. Save the password for the ``elastic`` user since this will be needed to access Kibana:
 
