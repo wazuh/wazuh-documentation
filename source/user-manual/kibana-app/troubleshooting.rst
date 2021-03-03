@@ -138,13 +138,6 @@ To ensure that Filebeat is correctly configured, run the following command:
             talk to server... OK
             version: 7.10.0
 
-Check if Filebeat is reading the ``alerts.json`` file:
-
-.. code-block:: console
-
-  # lsof /var/ossec/logs/alerts/alerts.json
-
-There should be two processes reading the ``alerts.json`` file: ``ossec-analysisd`` and ``filebeat``.
 
 
 Could not connect to API with id: default: 3003 - Missing param: API USERNAME
