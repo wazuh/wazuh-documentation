@@ -105,7 +105,7 @@ The first step is to check if there are alerts in Elasticsearch.
 
 .. code-block:: console
 
-  # curl <ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-3.x-*
+  # curl https://<ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-* -u <username>:<password> -k
 
 If you don't see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
 
