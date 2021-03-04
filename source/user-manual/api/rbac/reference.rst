@@ -25,9 +25,8 @@ This reference also contains a set of default roles and policies that can be imm
     - `agent:id`_
     - `group:id`_
     - `node:id`_
-    - `file:path`_
     - `decoder:file`_
-    - `list:path`_
+    - `list:file`_
     - `rule:file`_
     - `policy:id`_
     - `role:id`_
@@ -50,16 +49,16 @@ This reference also contains a set of default roles and policies that can be imm
         - `ciscat:read`_
 
     - `Cluster`_
-        - `cluster:delete_file`_
         - `cluster:read_api_config`_
         - `cluster:read`_
-        - `cluster:read_file`_
         - `cluster:restart`_
         - `cluster:status`_
-        - `cluster:upload_file`_
+        - `cluster:update_config`_
 
     - `Decoders`_
         - `decoders:read`_
+        - `decoders:update`_
+        - `decoders:delete`_
 
     - `Group`_
         - `group:create`_
@@ -75,12 +74,10 @@ This reference also contains a set of default roles and policies that can be imm
         - `logtest:run`_
 
     - `Manager`_
-        - `manager:delete_file`_
         - `manager:read_api_config`_
         - `manager:read`_
-        - `manager:read_file`_
         - `manager:restart`_
-        - `manager:upload_file`_
+        - `manager:update_config`_
 
     - `Mitre`_
         - `mitre:read`_
@@ -92,6 +89,8 @@ This reference also contains a set of default roles and policies that can be imm
 
     - `Rules`_
         - `rules:read`_
+        - `rules:update`_
+        - `rules:delete`_
 
     - `SCA`_
         - `sca:read`_
@@ -124,13 +123,13 @@ This reference also contains a set of default roles and policies that can be imm
     - `ciscat_read`_
     - `cluster_all`_
     - `cluster_read`_
-    - `decoders_read`_
+    - `decoders_all`_
     - `lists_read`_
     - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_read`_
     - `rootcheck_all`_
-    - `rules_read`_
+    - `rules_all`_
     - `sca_read`_
     - `security_all`_
     - `users_all`_
@@ -197,41 +196,32 @@ node:id
 | **Example**     | node:id:worker1                    |
 +-----------------+------------------------------------+
 
-`file:path`
-^^^^^^^^^^^^^
-
-+-----------------+----------------------------------+
-| **Description** | Reference file via its path      |
-+-----------------+----------------------------------+
-| **Example**     | file:path:etc/rules/new_rule.xml |
-+-----------------+----------------------------------+
-
 decoder:file
 ^^^^^^^^^^^^
 
-+-----------------+--------------------------------------+
-| **Description** | Reference decoder file via its path  |
-+-----------------+--------------------------------------+
-| **Example**     | decoder:file:0005-wazuh_decoders.xml |
-+-----------------+--------------------------------------+
++-----------------+-----------------------------------------+
+| **Description** | Reference decoder file via its filename |
++-----------------+-----------------------------------------+
+| **Example**     | decoder:file:0005-wazuh_decoders.xml    |
++-----------------+-----------------------------------------+
 
-list:path
+list:file
 ^^^^^^^^^^
 
-+-----------------+----------------------------------+
-| **Description** | Reference list file via its path |
-+-----------------+----------------------------------+
-| **Example**     | list:path:etc/lists/audit-keys   |
-+-----------------+----------------------------------+
++-----------------+--------------------------------------+
+| **Description** | Reference list file via its filename |
++-----------------+--------------------------------------+
+| **Example**     | list:file:audit-keys                 |
++-----------------+--------------------------------------+
 
 rule:file
 ^^^^^^^^^^
 
-+-----------------+---------------------------------------+
-| **Description** | Reference rule file via its path      |
-+-----------------+---------------------------------------+
-| **Example**     | rule:file:0610-win-ms_logs_rules.xml  |
-+-----------------+---------------------------------------+
++-----------------+-------------------------------------------+
+| **Description** | Reference rule file via its filename      |
++-----------------+-------------------------------------------+
+| **Example**     | rule:file:0610-win-ms_logs_rules.xml      |
++-----------------+-------------------------------------------+
 
 policy:id
 ^^^^^^^^^
@@ -342,18 +332,12 @@ ciscat:read
 
 Cluster
 ^^^^^^^
-cluster:delete_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id:<node>&file:path:<file_path>`)
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
-
 cluster:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>` (`node:id`_)
 
 cluster:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /cluster/{node_id}/files <operation/api.controllers.cluster_controller.delete_files_node>` (`node:id`_)
 - :api-ref:`GET /cluster/configuration/validation <operation/api.controllers.cluster_controller.get_conf_validation>` (`node:id`_)
 - :api-ref:`GET /cluster/healthcheck <operation/api.controllers.cluster_controller.get_healthcheck>` (`node:id`_)
 - :api-ref:`GET /cluster/local/config <operation/api.controllers.cluster_controller.get_config>` (`node:id`_)
@@ -361,7 +345,6 @@ cluster:read
 - :api-ref:`GET /cluster/nodes <operation/api.controllers.cluster_controller.get_cluster_nodes>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.get_configuration_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration/{component}/{configuration} <operation/api.controllers.cluster_controller.get_node_config>` (`node:id`_)
-- :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/info <operation/api.controllers.cluster_controller.get_info_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs <operation/api.controllers.cluster_controller.get_log_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs/summary <operation/api.controllers.cluster_controller.get_log_summary_node>` (`node:id`_)
@@ -373,11 +356,6 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>` (`node:id`_)
 - :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_node>` (`node:id`_)
 - :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
-
-cluster:read_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /cluster/{node_id}/files <operation/api.controllers.cluster_controller.get_files_node>` (`node:id:<node>&file:path:<file_path>`)
 
 cluster:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -391,10 +369,9 @@ cluster:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - .. deprecated:: 4.0.4
 
-cluster:upload_file
+cluster:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /cluster/{node_id}/files <operation/api.controllers.cluster_controller.put_files_node>` (`node:id`_)
-
+- :api-ref:`PUT /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.update_configuration>` (`node:id`_)
 
 Decoders
 ^^^^^^^^^^^^^^^
@@ -402,8 +379,16 @@ decoders:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /decoders <operation/api.controllers.decoder_controller.get_decoders>` (`decoder:file`_)
 - :api-ref:`GET /decoders/files <operation/api.controllers.decoder_controller.get_decoders_files>` (`decoder:file`_)
-- :api-ref:`GET /decoders/files/{filename}/download <operation/api.controllers.decoder_controller.get_download_file>` (`decoder:file`_)
+- :api-ref:`GET /decoders/files/{filename} <operation/api.controllers.decoder_controller.get_file>` (`decoder:file`_)
 - :api-ref:`GET /decoders/parents <operation/api.controllers.decoder_controller.get_decoders_parents>` (`decoder:file`_)
+
+decoders:update
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /decoders/files/{filename} <operation/api.controllers.decoder_controller.put_file>` (`*:*`_)
+
+decoders:delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /decoders/files/{filename} <operation/api.controllers.decoder_controller.delete_file>` (`decoder:file`_)
 
 Group
 ^^^^^^^^^^^^^^^
@@ -443,8 +428,18 @@ Lists
 ^^^^^^^^^^^^^^^
 lists:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:path`_)
-- :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:path`_)
+- :api-ref:`GET /lists <operation/api.controllers.cdb_list_controller.get_lists>` (`list:file`_)
+- :api-ref:`GET /lists/files <operation/api.controllers.cdb_list_controller.get_lists_files>` (`list:file`_)
+- :api-ref:`GET /lists/files/{filename} <operation/api.controllers.cdb_list_controller.get_file>` (`list:file`_)
+
+lists:update
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`*:*`_)
+
+lists:delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /lists/files/{filename} <operation/api.controllers.cdb_list_controller.delete_file>` (`list:file`_)
+- :api-ref:`PUT /lists/files/{filename} <operation/api.controllers.cdb_list_controller.put_file>` (`*:*`_)
 
 
 Logtest
@@ -457,22 +452,15 @@ logtest:run
 
 Manager
 ^^^^^^^^^^^^^^^
-manager:delete_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`file:path`_)
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`file:path`_)
-
 manager:read_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /manager/api/config <operation/api.controllers.manager_controller.get_api_config>` (`*:*`_)
 
 manager:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`DELETE /manager/files <operation/api.controllers.manager_controller.delete_files>` (`*:*`_)
 - :api-ref:`GET /manager/configuration <operation/api.controllers.manager_controller.get_configuration>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/validation <operation/api.controllers.manager_controller.get_conf_validation>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/{component}/{configuration} <operation/api.controllers.manager_controller.get_manager_config_ondemand>` (`*:*`_)
-- :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`*:*`_)
 - :api-ref:`GET /manager/info <operation/api.controllers.manager_controller.get_info>` (`*:*`_)
 - :api-ref:`GET /manager/logs <operation/api.controllers.manager_controller.get_log>` (`*:*`_)
 - :api-ref:`GET /manager/logs/summary <operation/api.controllers.manager_controller.get_log_summary>` (`*:*`_)
@@ -482,12 +470,7 @@ manager:read
 - :api-ref:`GET /manager/stats/remoted <operation/api.controllers.manager_controller.get_stats_remoted>` (`*:*`_)
 - :api-ref:`GET /manager/stats/weekly <operation/api.controllers.manager_controller.get_stats_weekly>` (`*:*`_)
 - :api-ref:`GET /manager/status <operation/api.controllers.manager_controller.get_status>` (`*:*`_)
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
 - :api-ref:`PUT /manager/restart <operation/api.controllers.manager_controller.put_restart>` (`*:*`_)
-
-manager:read_file
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /manager/files <operation/api.controllers.manager_controller.get_files>` (`file:path`_)
 
 manager:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -497,10 +480,9 @@ manager:update_api_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - .. deprecated:: 4.0.4
 
-manager:upload_file
+manager:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /manager/files <operation/api.controllers.manager_controller.put_files>` (`*:*`_)
-
+- :api-ref:`PUT /manager/configuration <operation/api.controllers.manager_controller.update_configuration>` (`*:*`_)
 
 Mitre
 ^^^^^^^^^^^^^^^
@@ -529,9 +511,17 @@ rules:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /rules <operation/api.controllers.rule_controller.get_rules>` (`rule:file`_)
 - :api-ref:`GET /rules/files <operation/api.controllers.rule_controller.get_rules_files>` (`rule:file`_)
-- :api-ref:`GET /rules/files/{filename}/download <operation/api.controllers.rule_controller.get_download_file>` (`rule:file`_)
+- :api-ref:`GET /rules/files/{filename} <operation/api.controllers.rule_controller.get_file>` (`rule:file`_)
 - :api-ref:`GET /rules/groups <operation/api.controllers.rule_controller.get_rules_groups>` (`rule:file`_)
 - :api-ref:`GET /rules/requirement/{requirement} <operation/api.controllers.rule_controller.get_rules_requirement>` (`rule:file`_)
+
+rules:update
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.put_file>` (`*:*`_)
+
+rules:delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_file>` (`rule:file`_)
 
 
 SCA
@@ -723,20 +713,14 @@ Actions
     - `cluster:read_api_config`_
     - `cluster:restart`_
     - `cluster:status`_
-    - `cluster:read_file`_
-    - `cluster:upload_file`_
-    - `cluster:delete_file`_
+    - `cluster:update_config`_
     - `manager:read`_
     - `manager:read_api_config`_
-    - `manager:delete_file`_
-    - `manager:read_file`_
-    - `manager:upload_file`_
+    - `manager:update_config`_
     - `manager:restart`_
 
 Resources
-    - ``file:path:*``
     - ``node:id:*``
-    - ``node:id:*&file:path:*``
     - ``'*:*:*'``
 
 Effect
@@ -750,14 +734,11 @@ Actions
     - `cluster:read`_
     - `cluster:read_api_config`_
     - `cluster:status`_
-    - `cluster:read_file`_
     - `manager:read`_
     - `manager:read_api_config`_
 
 Resources
-    - ``file:path:*``
     - ``node:id:*``
-    - ``node:id:*&file:path:*``
     - ``'*:*:*'``
 
 Effect
@@ -765,7 +746,7 @@ Effect
 
 decoders_read
 ^^^^^^^^^^^^^^^
-Allow read all decoder files in the system.
+Allow reading all decoder files in the system.
 
 Actions
     - `decoders:read`_
@@ -776,15 +757,44 @@ Resources
 Effect
     - allow
 
+decoders_all
+^^^^^^^^^^^^^^^
+Allow managing all decoder files in the system.
+
+Actions
+    - `decoders:read`_
+    - `decoders:update`_
+    - `decoders:delete`_
+
+Resources
+    - ``decoder:file:*``
+    - ``*:*:*``
+
+lists_all
+^^^^^^^^^^^^^^^
+Allow managing all CDB lists files in the system.
+
+Actions
+    - `lists:read`_
+    - `lists:delete`_
+    - `lists:update`_
+
+Resources
+    - ``list:file:*``
+    - ``'*:*:*'``
+
+Effect
+    - allow
+
 lists_read
 ^^^^^^^^^^^^^^^
-Allow read all lists paths in the system.
+Allow reading all list paths in the system.
 
 Actions
     - `lists:read`_
 
 Resources
-    - ``list:path:*``
+    - ``list:file:*``
 
 Effect
     - allow
@@ -804,7 +814,7 @@ Effect
 
 mitre_read
 ^^^^^^^^^^^^^^^
-Allow read MITRE database information.
+Allow reading MITRE database information.
 
 Actions
     - `mitre:read`_
@@ -817,7 +827,7 @@ Effect
 
 rootcheck_read
 ^^^^^^^^^^^^^^^
-Allow read all rootcheck information.
+Allow reading all rootcheck information.
 
 Actions
     - `rootcheck:read`_
@@ -831,7 +841,7 @@ Effect
 
 rootcheck_all
 ^^^^^^^^^^^^^^^
-Allow read, run and clear rootcheck information.
+Allow reading, running and clearing rootcheck information.
 
 Actions
     - `rootcheck:read`_
@@ -847,7 +857,7 @@ Effect
 
 rules_read
 ^^^^^^^^^^^^^^^
-Allow read all rule files in the system.
+Allow reading all rule files in the system.
 
 Actions
     - `rules:read`_
@@ -858,9 +868,25 @@ Resources
 Effect
     - allow
 
+rules_all
+^^^^^^^^^^^^^^^
+Allow managing all rule files in the system.
+
+Actions
+    - `rules:read`_
+    - `rules:update`_
+    - `rules:delete`_
+
+Resources
+    - ``rules:file:*``
+    - ``*:*:*``
+
+Effect
+    - allow
+
 sca_read
 ^^^^^^^^^^^^^^^
-Allow read agent’s sca information.
+Allow reading agent’s sca information.
 
 Actions
     - `sca:read`_
@@ -916,7 +942,7 @@ Effect
 
 syscheck_read
 ^^^^^^^^^^^^^^^
-Allow read syscheck information.
+Allow reading syscheck information.
 
 Actions
     - `syscheck:read`_
@@ -930,7 +956,7 @@ Effect
 
 syscheck_all
 ^^^^^^^^^^^^^^^
-Allow read, run and clear syscheck information.
+Allow reading, running and clearing syscheck information.
 
 Actions
     - `syscheck:clear`_
@@ -946,7 +972,7 @@ Effect
 
 syscollector_read
 ^^^^^^^^^^^^^^^^^^
-Allow read agents information.
+Allow reading agents information.
 
 Actions
     - `syscollector:read`_
@@ -960,7 +986,7 @@ Effect
 
 task_status
 ^^^^^^^^^^^^^^^^^^
-Allow read tasks information.
+Allow reading tasks information.
 
 Actions
     - `task:status`_
@@ -983,12 +1009,12 @@ Policies
     - `agents_commands`_
     - `ciscat_read`_
     - `cluster_all`_
-    - `decoders_read`_
-    - `lists_read`_
+    - `decoders_all`_
+    - `lists_all`_
     - `logtest_all`_
     - `mitre_read`_
     - `rootcheck_all`_
-    - `rules_read`_
+    - `rules_all`_
     - `sca_read`_
     - `security_all`_
     - `syscheck_all`_

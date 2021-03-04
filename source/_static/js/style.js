@@ -77,7 +77,7 @@ $(function() {
   if (document.location.hash) {
     correctScrollTo(document.location.hash);
   }
-  $('.headerlink').on('click', function(e) {
+  $('.headerlink').on('click', function(e){
     e.preventDefault();
     correctScrollTo($(e.target).attr('href'));
   });
