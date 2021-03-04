@@ -55,6 +55,17 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
   {"acknowledged":true}
 
+If this error happens after an **upgrade from a 3.x version** the solution is to remove the wazuh-alerts-3.x-* index pattern. Since Wazuh 4.x, the index pattern has been replaced by wazuh-alerts-* , it is necessary to remove the old pattern in order for the new one to take its place.
+
+.. code-block:: console
+   
+   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.2' -k -uelastic:<elastic_password>
+
+
+If you have a custom index pattern, be sure to replace it accordingly.
+
+**Very important:** Clean the browser’s cache and cookies.
+
 .. warning::
   Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
 
