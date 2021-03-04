@@ -434,7 +434,7 @@ custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.1.1",
     "|WAZUH_LATEST_MINOR|": "4.1",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.0.4",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.1.1",
     "|WAZUH_LATEST_KUBERNETES|" : "4.1.0",
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
     "|WAZUH_LATEST_OVA|" : "4.1.1",
