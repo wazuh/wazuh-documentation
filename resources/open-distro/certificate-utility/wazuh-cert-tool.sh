@@ -9,6 +9,12 @@
 # Foundation.
 
 debug='> /dev/null 2>&1'
+ELASTICINSTANCES="elasticsearch-node:"
+FILEBEATINSTANCES="wazuh-server:"
+KIBANAINSTANCES="kibana:"
+ELASTICHEAD='# Elasticsearch node'
+FILEBEATHEAD='# Wazuh server node'
+KIBANAHEAD='# Kibana node'
 
 readInstances() {
 
@@ -19,6 +25,87 @@ readInstances() {
         echo "Error: no configuration file found."
         exit 1;
     fi
+
+    readFile
+
+}
+
+readFile() {
+
+    IFS=$'\r\n' GLOBIGNORE='*' command eval  'INSTANCES=($(cat instances.yml))'
+    LENGTH=0
+    for i in "${!INSTANCES[@]}"; do
+    if [[ "${INSTANCES[$i]}" == "${ELASTICINSTANCES}" ]]; then
+        ELASTICLIMITT=${i}
+    fi
+        if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+        ELASTICLIMIB=${i}
+    fi
+
+    if [[ "${INSTANCES[$i]}" == "${FILEBEATINSTANCES}" ]]; then
+        FILEBEATLIMITT=${i}
+    fi
+    
+    if [[ "${INSTANCES[$i]}" == "${KIBANAINSTANCES}" ]]; then
+        FILEBEATLIMIB=${i}
+    fi  
+        ((LENGTH++))
+    done
+
+    ## Read Elasticsearch nodes
+    counter=${ELASTICLIMITT}
+    i=0
+    while [ "${counter}" -le "${ELASTICLIMIB}" ]
+    do
+        if  [ "${INSTANCES[counter]}" !=  "${ELASTICINSTANCES}" ] && [ "${INSTANCES[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${INSTANCES[counter]}" !=  "${FILEBEATHEAD}" ] && [ "${INSTANCES[counter]}" !=  "    ip:" ]; then
+            ELASTICNODES[i]+="$(echo "${INSTANCES[counter]}" | tr -d '\011\012\013\014\015\040')"
+            ((i++))
+        fi    
+
+        ((counter++))
+    done
+
+    ## Read Filebeat nodes
+    counter=${FILEBEATLIMITT}
+    i=0
+    while [ "${counter}" -le "${FILEBEATLIMIB}" ]
+    do
+        if  [ "${INSTANCES[counter]}" !=  "${FILEBEATINSTANCES}" ] && [ "${INSTANCES[counter]}" !=  "${KIBANAINSTANCES}" ] && [ "${INSTANCES[counter]}" !=  "${KIBANAHEAD}" ] && [ "${INSTANCES[counter]}" !=  "    ip:" ]; then
+            FILEBEATNODES[i]+="$(echo "${INSTANCES[counter]}" | tr -d '\011\012\013\014\015\040')"
+            ((i++))
+        fi    
+
+        ((counter++))
+    done
+
+    ## Read Kibana nodes
+    counter=${FILEBEATLIMIB}
+    i=0
+    while [ "${counter}" -le "${#INSTANCES[@]}" ]
+    do
+        if  [ "${INSTANCES[counter]}" !=  "${KIBANAINSTANCES}" ]  && [ "${INSTANCES[counter]}" !=  "${KIBANAHEAD}" ] && [ "${INSTANCES[counter]}" !=  "    ip:" ]; then
+            KIBANANODES[i]+="$(echo "${INSTANCES[counter]}" | tr -d '\011\012\013\014\015\040')"
+            echo "${KIBANANODES[i]}"
+            ((i++))
+        fi    
+
+        ((counter++))    
+    done
+
+    echo "ELASTIC NODES"
+    for i in "${!ELASTICNODES[@]}"; do
+    echo "$i. ${ELASTICNODES[i]}"
+    done
+
+    echo "FILEBEAT NODES"
+    for i in "${!FILEBEATNODES[@]}"; do
+    echo "$i. ${FILEBEATNODES[i]}"
+    done
+
+    echo "KIBANA NODES"
+    for i in "${!KIBANANODES[@]}"; do
+    echo "$i. ${KIBANANODES[i]}"
+    done
 
 }
 
