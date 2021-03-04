@@ -124,19 +124,22 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_all`_
     - `cluster_read`_
     - `decoders_all`_
+    - `decoders_read`_
+    - `lists_all`_
     - `lists_read`_
     - `logtest_all`_
     - `mitre_read`_
-    - `rootcheck_read`_
     - `rootcheck_all`_
+    - `rootcheck_read`_
     - `rules_all`_
+    - `rules_read`_
     - `sca_read`_
     - `security_all`_
-    - `users_all`_
-    - `syscheck_read`_
     - `syscheck_all`_
+    - `syscheck_read`_
     - `syscollector_read`_
     - `task_status`_
+    - `users_all`_
 
 `Default roles`_
     - `administrator`_
