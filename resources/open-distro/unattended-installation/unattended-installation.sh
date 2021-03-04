@@ -369,7 +369,6 @@ installElasticsearch() {
 
         jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
         if [ "${jv}" == "1.8.0" ]; then
-            ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
             echo "root hard nproc 4096" >> /etc/security/limits.conf 
             echo "root soft nproc 4096" >> /etc/security/limits.conf 
             echo "elasticsearch hard nproc 4096" >> /etc/security/limits.conf 
@@ -463,12 +462,12 @@ installKibana() {
 
 }
 
-checkFlavour() {
+checkFlavor() {
     if [ -n "$elasticinstalled" ]; then
-        flavour=$(grep 'opendistro' /etc/elasticsearch/elasticsearch.yml)
+        flavor=$(grep 'opendistro' /etc/elasticsearch/elasticsearch.yml)
     fi
 
-    if [ -n "$flavour" ]; then
+    if [ -n "$flavor" ]; then
         echo "OD"
     fi
 }
