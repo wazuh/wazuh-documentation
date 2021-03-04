@@ -170,7 +170,7 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
-All the technologies we are using have their own logs files, you can check them and look for error and warning messages.
+All the components we are using have their own logs files, you can check them and look for error and warning messages.
 
 1. Check the Elastic Stack log files:
 
