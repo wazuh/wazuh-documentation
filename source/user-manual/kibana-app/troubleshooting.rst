@@ -167,9 +167,10 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         run_as: false
 
 
-App page goes blank
--------------------
-Sometimes after and upgrade could happen that after loading the app page goes blank, this is due to some problem with the cache memory of the browser. 
+Wazuh Kibana plugin page goes blank
+-----------------------------------
+
+Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. The is due to some issues with the cache memory of the browser.
 
 .. thumbnail:: ../../images/kibana-app/troubleshooting/page_goes_blank.png
     :title: Page goes blank
@@ -177,13 +178,13 @@ Sometimes after and upgrade could happen that after loading the app page goes bl
     :width: 100%
 
 
-To fix that you need to:
+To fix this you need to:
 
 1. **Open the browser DevTools:** Right-click on any element of the page and select Inspect.
 
 2. **Go to the application tab:** On the left you should see a section called ``Clear storage``  and click on ``Clear site data``.
 
-After following this two steps a refresh of the page is needed.
+After following these two steps, refresh the page.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
@@ -194,7 +195,7 @@ All the components we use have their own log files, you can check them and look 
 
     .. code-block:: console
 
-      # cat /var/log/elasticsearch/elasticsearch.log | grep -i -E "error|warn"
+      # cat /var/log/elasticsearch/<elasticsearch-cluster-name>.log | grep -i -E "error|warn"
       # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
 
     .. note::
