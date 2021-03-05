@@ -55,7 +55,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
   {"acknowledged":true}
 
-If this error occurs after an **upgrade from a 3.x version** the solution is to remove the wazuh-alerts-3.x-* index pattern. Since Wazuh 4.x, the index pattern is wazuh-alerts-*, and you need to remove the old pattern for the new one to take its place.
+If this error occurs after an **upgrade from a 3.x version** the solution is to remove the ``wazuh-alerts-3.x-*`` index pattern. Since Wazuh 4.x, the index pattern is ``wazuh-alerts-*``, and you need to remove the old pattern for the new one to take its place.
 
 .. code-block:: console
    
@@ -66,8 +66,6 @@ If you have a custom index pattern, make sure to replace it accordingly.
 
 **Very important:** Clean the browser’s cache and cookies.
 
-.. warning::
-  Indices with an incorrect template need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
 
 Wazuh API seems to be down
 --------------------------
