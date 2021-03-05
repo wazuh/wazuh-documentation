@@ -167,6 +167,24 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         run_as: false
 
 
+App page goes blank
+-------------------
+Sometimes after and upgrade could happen that after loading the app page goes blank, this is due to some problem with the cache memory of the browser. 
+
+.. thumbnail:: ../../images/kibana-app/troubleshooting/page_goes_blank.png
+    :title: Page goes blank
+    :align: left
+    :width: 100%
+
+
+To fix that you need to:
+
+1. **Open the browser DevTools:** Right-click on any element of the page and select Inspect.
+
+2. **Go to the application tab:** On the left you should see a section called ``Clear storage``  and click on ``Clear site data``.
+
+After following this two steps a refresh of the page is needed.
+
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
