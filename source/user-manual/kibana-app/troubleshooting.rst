@@ -189,12 +189,10 @@ All the components we use have their own log files, you can check them and look 
 
     .. code-block:: console
 
-      # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
+      # cat /usr/share/kibana/data/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
 
 3. Check the Wazuh manager log file:
 
     .. code-block:: console
 
       # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
-
-You can also open a new thread in our `Google mailing list <https://groups.google.com/group/wazuh>`_, or a new issue in our `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_.
