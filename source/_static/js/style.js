@@ -74,13 +74,6 @@ $(function() {
 
   markTocNodesWithClass(emptyTocNodes, 'empty-toc-node');
   checkScroll();
-  if (document.location.hash) {
-    correctScrollTo(document.location.hash);
-  }
-  $('.headerlink').on('click', function(e){
-    e.preventDefault();
-    correctScrollTo($(e.target).attr('href'));
-  });
 
   /* Finds all nodes that contains subtrees within the globaltoc and appends a toggle button to them */
   $('.globaltoc .toctree-l1 a').each(function(e) {
@@ -91,10 +84,6 @@ $(function() {
   });
 
   hideSubtree(hideSubtreeNodes);
-
-  $(window).on('hashchange', function(e) {
-    correctScrollTo(document.location.hash);
-  });
 
   /* Turn all tables in responsive table */
   reponsiveTables();
@@ -418,30 +407,6 @@ $(function() {
     reponsiveTables();
     checkScroll();
   });
-
-  /**
-   * Corrects the scrolling movement so the element to which the page is being scrolled appears correctly in the screen,
-   * having in mind the top bar and the no-latest-notice if present.
-   * @param {int} targetAnchor Selector of the element in the head of the section where the scroll should stop.
-   */
-  function correctScrollTo(targetAnchor) {
-    let spaceBeforeAnchor = 0;
-    if ( $(targetAnchor).length > 0 ) {
-      setTimeout(function() {
-        spaceBeforeAnchor = parseInt($('#header').outerHeight());
-        if ($('#page').hasClass('no-latest-docs')) {
-          if ($(window).outerWidth() >= 992) {
-            /* The height of the .no-latest-notice may vary for wide screens
-            but here we are using a fixed value (50px) for now */
-            spaceBeforeAnchor = spaceBeforeAnchor + 50;
-          } else {
-            spaceBeforeAnchor = spaceBeforeAnchor + parseInt($('.no-latest-notice').outerHeight());
-          }
-        }
-        window.scrollTo(window.scrollX, $(targetAnchor).offset().top - spaceBeforeAnchor, 'smooth');
-      }, 100);
-    }
-  }
 
   /* -- Add functionality for the capabilities in the home page --------------------------------------------- */
 
