@@ -24,7 +24,7 @@ Changed
 
 - API logs showing request parameters and body will be generated with API log level info instead of debug.
 
-**External dependencies:**
+**External dependencies**
 
 - Upgraded aiohttp version from 3.6.2 to 3.7.4.
 
