@@ -5,12 +5,12 @@
 Troubleshooting
 ===============
 
-This section collects common installation or usage problems on the Wazuh Kibana plugin, and some basic steps to solve them.
+This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
 
 "Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
 ------------------------------------------------------------------------------------
 
-Wazuh Kibana plugin must be installed in the correct version, which depends both on the Kibana and the Wazuh version.
+To install the Wazuh Kibana plugin successfully, it needs to be compatible with the Kibana and Wazuh versions.
 
 Kibana version can be checked by executing the following command:
 
@@ -39,7 +39,7 @@ An example output of the command looks as follows:
 
   VERSION="v4.1.1"
 
-Using the Kibana version and the Wazuh version, the correct plugin can be found in the Wazuh `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
+Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 No template found for the selected index pattern
 ------------------------------------------------
@@ -55,24 +55,24 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
   {"acknowledged":true}
 
-If this error happens after an **upgrade from a 3.x version** the solution is to remove the wazuh-alerts-3.x-* index pattern. Since Wazuh 4.x, the index pattern has been replaced by wazuh-alerts-* , it is necessary to remove the old pattern in order for the new one to take its place.
+If this error occurs after an **upgrade from a 3.x version** the solution is to remove the wazuh-alerts-3.x-* index pattern. Since Wazuh 4.x, the index pattern is wazuh-alerts-*, and you need to remove the old pattern for the new one to take its place.
 
 .. code-block:: console
    
    # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.2' -k -uelastic:<elastic_password>
 
 
-If you have a custom index pattern, be sure to replace it accordingly.
+If you have a custom index pattern, make sure to replace it accordingly.
 
 **Very important:** Clean the browser’s cache and cookies.
 
 .. warning::
-  Indices with the wrong template will need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
+  Indices with an incorrect template need to be reindexed. You can follow our :ref:`reindexation guide <restore_alerts_2.x_3.x>`.
 
 Wazuh API seems to be down
 --------------------------
 
-It means your Wazuh API could be unavailable. Since the Wazuh Kibana plugin needs data from the Wazuh API, it must be available for the Wazuh Kibana plugin.
+This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check is the service is active: 
 
 .. tabs::
 
@@ -170,7 +170,7 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
-All the components we are using have their own logs files, you can check them and look for error and warning messages.
+All the components we use have their own log files, you can check them and look for error and warning messages.
 
 1. Check the Elastic Stack log files:
 
@@ -183,7 +183,7 @@ All the components we are using have their own logs files, you can check them an
       The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
 
     .. warning::
-      By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
+      By default, Kibana doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
 
 2. Check the Wazuh Kibana plugin log file:
 
