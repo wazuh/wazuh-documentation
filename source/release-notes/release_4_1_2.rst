@@ -49,7 +49,7 @@ Fixed
 ^^^^^
 
 - Fix SCA policy detail showing name and check results about another policy.
-- Fixed that alerts table is empty when switching pinned agents.
+- Fix that alerts table is empty when switching pinned agents.
 - Creating a role mapping before the existing ones are loaded, the page bursts.
 - Fix pagination in SCA checks table when expand some row.
 - Fix manager is shown in suggestions in Agents section.
