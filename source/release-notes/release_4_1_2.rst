@@ -17,23 +17,23 @@ Wazuh core
 Changed
 ^^^^^^^
 
-- The default value of the agent disconnection time option has been increased to 10 minutes.
-- The warning log from Remoted about sending messages to disconnected agents has been changed to level-1 debug log.
+- Agent status management is improved and its default value is configurable if required. Now, the default value of the ``agents_disconnection_time`` is set to 10 minutes, preventing false-positives alerts of disconnected agents.
+- In Remoted, the warning log of messages sent to disconnected agents is now changed to level-1 debug log.
 
 **API**
 
-- API logs showing request parameters and body will be generated with API log level info instead of debug.
+- API logs showing request parameters and body are now generated with an improved API log level ``info`` instead of log level ``debug``.
 
 **External dependencies**
 
-- Upgraded aiohttp version from 3.6.2 to 3.7.4.
+- ``aiohttp`` is upgraded from 3.6.2 to 3.7.4.
 
 Fixed
 ^^^^^
-- Fix a bug in the unit tests that randomly caused false failures.
-- Fixed a bug in the Analysisd configuration that did not apply the setting json_null_fields.
-- Fixed the checking of the option ipv6 in Remoted.
-- Fixed the checking of the option rids_closing_time in Remoted.
+- Issue with unit tests that randomly caused false failures is fixed.
+- Analysisd configuration now applies the ``json_null_fields`` setting successfully.
+- In Remoted, the ``ipv6`` option checking ignores invalid values correctly.
+- Issue with ``rids_closing_time`` option checking in Remoted is now fixed.
 
 
 Wazuh Kibana plugin
@@ -42,18 +42,18 @@ Wazuh Kibana plugin
 Added
 ^^^^^
 
-- Refactor of some prompts.
-- Add run_as setting to example host configuration in Add new API view.
+- Some prompts are refactored and improved.
+- ``run_as`` setting is now added to example host configuration in Add new API view. 
 
 Fixed
 ^^^^^
 
-- Fix SCA policy detail showing name and check results about another policy.
-- Fix that alerts table is empty when switching pinned agents.
-- Creating a role mapping before the existing ones are loaded, the page bursts.
-- Fix pagination in SCA checks table when expand some row.
-- Fix manager is shown in suggestions in Agents section.
-- Fix disabled loading on inventory when request fail.
-- Fix restarting selected cluster instead of all of them.
-- Fix pinned agents don't trigger a new filtered query.
-- Overlay Wazuh menu when Kibana menu is opened or docked.
+- SCA policy detail no longer shows name and check results of another policy.
+- Alerts are now correctly displayed in the alerts table when switching pinned agents.
+- In Role mapping, issue with data loading and Create Role mapping button is now fixed. 
+- Pagination in SCA checks table when expanding a row now works correctly.
+- Agent table shows suggestions with manager information.
+- Loading of inventory is now disabled when a request fails.
+- Single nodes can be restarted using optional ``node-name`` parameter in cluster restart requests.
+- Pinned agents successfully trigger new filtered queries.
+- Issue with overlay of Wazuh menu when Kibana menu is opened or docked is now fixed.
