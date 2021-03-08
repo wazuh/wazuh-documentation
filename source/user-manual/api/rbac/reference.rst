@@ -69,6 +69,8 @@ This reference also contains a set of default roles and policies that can be imm
 
     - `Lists`_
         - `lists:read`_
+        - `lists:update`_
+        - `lists:delete`_
 
     - `Logtest`_
         - `logtest:run`_
