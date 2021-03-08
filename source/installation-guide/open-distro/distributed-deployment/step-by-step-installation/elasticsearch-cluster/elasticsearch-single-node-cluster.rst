@@ -65,6 +65,13 @@ Elasticsearch configuration
 
 .. _certs_creation:
 
+Elasticsearch roles and users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to use the Wazuh Kibana plugin properly, it is necessary to add the extra roles and users:
+
+.. include:: ../../../../../_templates/installations/elastic/common/add_roles_and_users.rst
+
 Certificates creation and deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
