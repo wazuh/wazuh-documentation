@@ -54,7 +54,7 @@ Fixed
 - Alerts are now correctly displayed in the alerts table when switching pinned agents.
 - In Role mapping, issue with data loading and Create Role mapping button is now fixed. 
 - Pagination in SCA checks table when expanding a row now works correctly.
-- Issue with agent table showing suggestions with manager information.
+- Issue with agent table showing suggestions with manager information is now fixed.
 - Loading of inventory is now disabled when a request fails.
 - Single nodes can be restarted using optional ``node-name`` parameter in cluster restart requests.
 - Pinned agents successfully trigger new filtered queries.
