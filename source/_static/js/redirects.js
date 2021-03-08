@@ -39,6 +39,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.1 */
 
 newUrls['4.1'] = [
+  '/release-notes/release_4_1_2.html',
   '/release-notes/release_4_1_1.html',
   '/release-notes/release_4_1_0.html',
   '/user-manual/reference/ossec-conf/agent-upgrade.html',
