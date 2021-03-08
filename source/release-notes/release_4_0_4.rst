@@ -38,6 +38,7 @@ Fixed
 **API**
 
 - Input validators for /manager/files and /cluster/{node_id}/files endpoints.
+- Fixed a path traversal flaw (`CVE-2021-26814 <https://nvd.nist.gov/vuln/detail/CVE-2021-26814>`_) affecting 4.0.0 to 4.0.3 at ``/manager/files`` and ``/cluster/{node_id}/files`` endpoints.
 
 **Framework**
 
