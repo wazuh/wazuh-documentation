@@ -27,6 +27,18 @@ The Solaris Wazuh agent runs on Sparc or Intel architectures. Select the tab acc
 
         .. include:: ../../_templates/installations/wazuh/solaris/install_wazuh_agent_s11_intel.rst
 
+        After creating the repository install the package:
+
+        .. code-block:: console
+
+              # pkg install --accept wazuh-agent
+
+        Finally, remove the publisher:
+
+        .. code-block:: console
+
+              # pkg unset-publisher wazuh
+
 
 
 
@@ -48,21 +60,19 @@ The Solaris Wazuh agent runs on Sparc or Intel architectures. Select the tab acc
         .. include:: ../../_templates/installations/wazuh/solaris/install_wazuh_agent_s11_sparc.rst
 
 
+        After creating the repository install the package:
+
+        .. code-block:: console
+
+              # pkg install --accept wazuh-agent
+
+        Finally, remove the publisher:
+
+        .. code-block:: console
+
+              # pkg unset-publisher wazuh
 
 
-
-
-After creating the repository install the package:
-
-  .. code-block:: console
-
-      # pkg install --accept wazuh-agent
-
-Finally, remove the publisher:
-
-  .. code-block:: console
-
-      # pkg unset-publisher wazuh
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
