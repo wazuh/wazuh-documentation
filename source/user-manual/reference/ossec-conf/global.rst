@@ -460,7 +460,7 @@ This sets the time after which the manager considers an agent as disconnected si
 
 .. warning::
 
-  This setting should always be greater than the :ref:`notify-time <notify_time>` configured in the agents. This allows them to always notify the manager before it would consider them disconnected.
+  This setting should always be greater than :ref:`notify-time <notify_time>` configured in the agents. This allows them to always notify the manager before it would consider them disconnected.
 
 Example:
 

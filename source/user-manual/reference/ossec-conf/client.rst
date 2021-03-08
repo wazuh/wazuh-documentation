@@ -213,7 +213,7 @@ Specifies the time in seconds between agent checkins to the manager.  More frequ
 
 .. warning::
 
-  This setting should always be lower than the :ref:`disconnection time <reference_agents_disconnection_time>` configured for the agents in the manager. This allows them to always notify the manager before it would consider them disconnected.
+  This setting should always be lower than :ref:`disconnection time <reference_agents_disconnection_time>` configured for the agents in the manager. This allows them to always notify the manager before it would consider them disconnected.
 
 .. _time_reconnect:
 
