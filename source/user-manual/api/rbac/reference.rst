@@ -118,6 +118,9 @@ This reference also contains a set of default roles and policies that can be imm
     - `Task`_
         - `task:status`_
 
+    - `Vulnerability`_
+        - `vulnerability:read`_
+
 `Default policies`_
     - `agents_all`_
     - `agents_commands`_
@@ -142,6 +145,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `syscollector_read`_
     - `task_status`_
     - `users_all`_
+    - `vulnerability_read`_
 
 `Default roles`_
     - `administrator`_
@@ -307,7 +311,6 @@ agent:read
 - :api-ref:`GET /agents/summary/os <operation/api.controllers.agent_controller.get_agent_summary_os>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/summary/status <operation/api.controllers.agent_controller.get_agent_summary_status>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agent_controller.get_agent_config>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /agents/{agent_id}/cve <operation/api.controllers.agent_controller.get_agent_cve>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
@@ -636,6 +639,13 @@ Task
 task:status
 ~~~~~~~~~~~~~
 - :api-ref:`GET /tasks/status <operation/api.controllers.task_controller.get_tasks_status>` (`*:*`_)
+
+Vulnerability
+^^^^^^^^^^^^^^^
+vulnerability:read
+~~~~~~~~~~~~~~~~~~
+- :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
+
 
 
 Default policies
@@ -1039,6 +1049,19 @@ Provide full access to all users related functionalities.
         - user:id:*
       effect: allow
 
+vulnerability_read
+^^^^^^^^^^^^^^^^^^
+Allow reading agents' vulnerabilities information.
+
+.. code-block:: yaml
+
+    vulnerability:
+      actions:
+        - vulnerability:read
+      resources:
+        - agent:id:*
+      effect: allow
+
 
 Default roles
 -------------
@@ -1062,6 +1085,7 @@ Policies
     - `syscheck_all`_
     - `syscollector_read`_
     - `task_status`_
+    - `vulnerability_read`_
 
 Rules
     - `wui_elastic_admin`_
@@ -1111,6 +1135,7 @@ Policies
     - `sca_read`_
     - `syscheck_read`_
     - `syscollector_read`_
+    - `vulnerability_read`_
 
 
 users_admin
