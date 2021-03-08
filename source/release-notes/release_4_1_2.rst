@@ -41,11 +41,11 @@ Fixed
 Wazuh Kibana plugin
 -------------------
 
-Added
-^^^^^
+Changed
+^^^^^^^
 
-- Some prompts are refactored and improved.
-- ``run_as`` setting is now added to example host configuration in Add new API view. 
+- Some empty state messages have been improved.
+- The example host configuration in Add new API section now includes the setting ``run_as``.  
 
 Fixed
 ^^^^^
