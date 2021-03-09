@@ -185,9 +185,9 @@ The output would look like below:
       "error": 0
     }
 
-Enable run_as
--------------
-By default, new users will not be able to authenticate using an authorization context. To enable this option, it is necessary to give permission to the user. To do this, make a request to :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>`.
+Edit allow_run_as
+-----------------
+By default, new users will not be able to authenticate using an authorization context. To enable this option, it is necessary to enable the ``allow_run_as`` parameter for the user. To do this, make a request to :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>`.
 
 .. code-block:: console
 
