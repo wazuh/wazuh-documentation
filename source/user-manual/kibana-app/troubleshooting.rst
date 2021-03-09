@@ -48,7 +48,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <user>:<password> -k
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "https://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @- -u <elasticsearch_user>:<elasticsearch_password> -k
 
 .. code-block:: json
   :class: output
@@ -59,7 +59,7 @@ If this error occurs after an **upgrade from a 3.x version** the solution is to 
 
 .. code-block:: console
    
-   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.2' -k -uelastic:<elastic_password>
+   # curl 'https://<kibana_ip>:<kibana_port>/api/saved_objects/index-pattern/wazuh-alerts-3.x-*' -X DELETE  -H 'Content-Type: application/json' -H 'kbn-version: 7.10.0' -k -u <elasticsearch_user>:<elasticsearch_password>
 
 
 If you have a custom index pattern, make sure to replace it accordingly.
@@ -114,7 +114,7 @@ The first step is to check if there are alerts in Elasticsearch.
 
 .. code-block:: console
 
-  # curl https://<ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-* -u <username>:<password> -k
+  # curl https://<ELASTICSEARCH_IP>:9200/_cat/indices/wazuh-alerts-* -u <elasticsearch_user>:<elasticsearch_password> -k
 
 .. code-block:: none
     :class: output
