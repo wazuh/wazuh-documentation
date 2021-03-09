@@ -90,7 +90,7 @@ Time during which vulnerabilities that have already been alerted will be ignored
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: In a partial scan new packages are scanned, but only a full scan removes the CVEs related to old packages that aren't present any more.
+.. note:: In a partial scan new packages are scanned, but only a full scan removes the CVEs related to old packages that are not present anymore.
 
 
 provider
