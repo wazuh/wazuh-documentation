@@ -1,4 +1,4 @@
 .. code-block:: console
 
-  # apt-get remove --purge splunk-enterprise-package.rpm
+  # yum remove splunk-enterprise-package.rpm
   
