@@ -12,5 +12,6 @@ This document will give instructions to uninstall each Wazuh component.
 
         open-distro       
         elastic-stack
+        splunk
 
       
