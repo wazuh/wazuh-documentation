@@ -40,6 +40,5 @@ Find more information about how to scale your environments using Splunk Enterpri
     splunk-basic
     splunk-distributed
     splunk-app
-    splunk-forwarder
     splunk-reverse-proxy
     splunk-polling
