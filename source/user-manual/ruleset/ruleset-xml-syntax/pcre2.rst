@@ -44,7 +44,7 @@ Case sensitivity
 
 Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_ 
 that are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
-Example: `post` will match ``(?i)POST|GET|PUT`` regex but no ``POST|GET|PUT``.
+Example: `post` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
 
 Groups within groups
 --------------------
