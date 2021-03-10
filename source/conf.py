@@ -434,15 +434,15 @@ custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
     "|WAZUH_LATEST|" : "4.1.2",
     "|WAZUH_LATEST_MINOR|": "4.1",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.0.4",
+    "|WAZUH_LATEST_ANSIBLE|" : "4.1.2",
     "|WAZUH_LATEST_KUBERNETES|" : "4.1.1",
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
     "|WAZUH_LATEST_OVA|" : "4.1.2",
-    "|WAZUH_LATEST_DOCKER|" : "4.1.1",
+    "|WAZUH_LATEST_DOCKER|" : "4.1.2",
     "|OPEN_DISTRO_LATEST|" : "1.12.0",
     "|ELASTICSEARCH_LATEST|" : "7.10.0",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.0",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.8.0",
+    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.0",
     "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_PUPPET|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
@@ -488,10 +488,10 @@ custom_replacements = {
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
     "|ELASTICSEARCH_ELK_LATEST|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.0",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
-    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.8.0",
+    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.0",
 }
 
 # -- Setup -------------------------------------------------------------------
