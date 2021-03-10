@@ -59,6 +59,6 @@ Uninstall Splunk
   .. group-tab:: ZYpp  
 
 
-    .. include:: ../../_templates/installations/wazuh/deb/uninstall_splunk.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_splunk.rst
 
 
