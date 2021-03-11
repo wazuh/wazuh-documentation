@@ -26,7 +26,8 @@ Besides, Wazuh rules include mapping with MITRE ATT&CK framework, which is used 
     <id>AH01276</id>
     <description>Apache: Attempt to access forbidden directory index.</description>
     <mitre>
-      <id>T1190</id>
+      <techniqueID>T1190</techniqueID>
+      <tacticID>TA0001</tacticID>
     </mitre>
     <group>access_denied,pci_dss_6.5.8,pci_dss_10.2.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_SA.11,nist_800_53_AU.14,nist_800_53_AC.7,tsc_CC6.6,tsc_CC7.1,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
   </rule>
