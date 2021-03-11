@@ -79,7 +79,7 @@ Install the Wazuh manager package:
         .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
-Choode the corresponding tab to configure the installation as a single-node or multi-node clustes: 
+Choose the corresponding tab to configure the installation as a single-node or multi-node clustes: 
 
 .. tabs::
 
