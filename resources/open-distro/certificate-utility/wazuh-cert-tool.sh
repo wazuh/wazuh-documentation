@@ -165,6 +165,13 @@ generateElasticsearchcertificates() {
     while [ ${i} -lt ${#ELASTICNODES[@]} ]; do
         cname=${ELASTICNODES[i]}
         cip=${ELASTICNODES[i+1]}
+        rname="-name:"
+        cname="${cname//$rname}"
+        rip="-"
+        cip="${cip//$rip}"
+        cname=$(echo ${cname} | xargs)
+        cip=$(echo ${cip} | xargs)
+        
         generateCertificateconfiguration cname cip
         eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
         eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
@@ -182,6 +189,13 @@ generateFilebeatcertificates() {
     while [ ${i} -lt ${#FILEBEATNODES[@]} ]; do
         cname=${FILEBEATNODES[i]}
         cip=${FILEBEATNODES[i+1]}
+        rname="-name:"
+        cname="${cname//$rname}"
+        rip="-"
+        cip="${cip//$rip}"
+        cname=$(echo ${cname} | xargs)
+        cip=$(echo ${cip} | xargs)
+
         generateCertificateconfiguration cname cip
         eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
         eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
@@ -198,6 +212,13 @@ generateKibanacertificates() {
     while [ ${i} -lt ${#KIBANANODES[@]} ]; do
         cname=${KIBANANODES[i]}
         cip=${KIBANANODES[i+1]}
+        rname="-name:"
+        cname="${cname//$rname}"
+        rip="-"
+        cip="${cip//$rip}"
+        cname=$(echo ${cname} | xargs)
+        cip=$(echo ${cip} | xargs)
+
         generateCertificateconfiguration cname cip
         eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
         eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
