@@ -172,7 +172,7 @@ Deploy
 
     3.2. Apply all manifests using kustomize
 
-        We are using the overlay feature of `Kustomize <https://https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>`_ to create two variants: ``eks`` and ``local-env``, in this guide we're using ``eks``. (For a deployment on a local environment check the guide :ref:`Deployment on local environment <kubernetes_local_env>`)
+        We are using the overlay feature of `Kustomize <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>`_ to create two variants: ``eks`` and ``local-env``, in this guide we're using ``eks``. (For a deployment on a local environment check the guide :ref:`Deployment on local environment <kubernetes_local_env>`)
 
         You can adjust resources for the cluster on ``envs/eks/``, you can tune cpu, memory as well as storage for persistent volumes of each of the cluster objects.
 
