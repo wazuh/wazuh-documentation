@@ -1,11 +1,11 @@
-# Elasticsearch node
-elasticsearch-node:
+# Elasticsearch nodes
+elasticsearch-nodes:
   - name: <node-name>
     ip:
       - node-IP
 
-# Wazuh server node
-wazuh-server:
+# Wazuh server nodes
+wazuh-servers:
   - name: <node-name>
     ip:
       - node-IP      
