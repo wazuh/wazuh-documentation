@@ -89,22 +89,6 @@ readFile() {
         ((counter++))    
     done
 
-    echo "ELASTIC NODES"
-    for i in "${!ELASTICNODES[@]}"; do
-    echo "$i. ${ELASTICNODES[i]}"
-    done
-
-    echo "FILEBEAT NODES"
-    for i in "${!FILEBEATNODES[@]}"; do
-    echo "$i. ${FILEBEATNODES[i]}"
-    done
-
-    echo "KIBANA NODES"
-    for i in "${!KIBANANODES[@]}"; do
-    echo "$i. ${KIBANANODES[i]}"
-    done
-
-
 }
 
 
@@ -171,7 +155,7 @@ generateElasticsearchcertificates() {
         cip="${cip//$rip}"
         cname=$(echo ${cname} | xargs)
         cip=$(echo ${cip} | xargs)
-        
+
         generateCertificateconfiguration cname cip
         eval "openssl req -new -nodes -newkey rsa:2048 -keyout ~/certs/${cname}-key.pem -out ~/certs/${cname}.csr -config ~/certs/${cname}.conf -days 3650 ${debug}"
         eval "openssl x509 -req -in ~/certs/${cname}.csr -CA ~/certs/root-ca.pem -CAkey ~/certs/root-ca.key -CAcreateserial -out ~/certs/${cname}.pem -extfile ~/certs/${cname}.conf -extensions v3_req -days 3650 ${debug}"
