@@ -2,7 +2,7 @@
 
 .. _regex_pcre2:
 
-Perl-compatible Regular Expressions 
+Perl-compatible Regular Expressions
 ***********************************
 
 .. versionadded:: 4.1.0
@@ -42,7 +42,7 @@ Example: ``(\d{1,3}\.?){4}`` it is shorter and equivalent to ``\d{1,3}\.?\d{1,3}
 Case sensitivity
 ----------------
 
-Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_ 
+Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_
 that are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
 Example: `post` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
 
@@ -86,7 +86,7 @@ Configuring PCRE
 
 PCRE can be enabled in rules and decodes using the ``type="pcre2"`` attribute,
 that also will allow to set other regex like ``type="osregex"`` and ``type="osmatch"`` for
-`OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_ 
+`OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_
 respectively depending the case.
 
 Decoders
@@ -120,8 +120,8 @@ Using PCRE in a decoder it is possible to extract the user, email and email doma
 Rules
 -----
 
-- **Options**: `OSRegex <regex.html#regex-os-regex-syntax>`_, `OSMatch <regex.html#regex-os-regex-syntax>`_ 
-- **Static fields**: 
+- **Options**: `OSRegex <regex.html#regex-os-regex-syntax>`_, `OSMatch <regex.html#regex-os-regex-syntax>`_
+- **Static fields**:
   `action <rules.html#action>`_,
   `extra_data <rules.html#extra-data>`_, `hostname <rules.html#hostname>`_, `id <rules.html#id>`_,
   `location <rules.html#location>`_, `match <rules.html#match>`_, `program_name <rules.html#program-name>`_,
@@ -152,24 +152,32 @@ The next custom rule generates an alert when `foo` user is logged to the system 
 
 
 
-ossec-logtest output show the triggered alert
+wazuh-logtest output show the triggered alert
 
-    .. code-block:: none
-        :class: output
-                  
-          Dec  1 11:27:21 ip-10-0-0-220 sshd(pam_unix)[17365]: session opened for user foo by (uid=508)
-          **Phase 1: Completed pre-decoding.
-                full event: 'Dec  1 11:27:21 ip-10-0-0-220 sshd(pam_unix)[17365]: session opened for user foo by (uid=508)'
-                timestamp: 'Dec  1 11:27:21'
-                hostname: 'ip-10-0-0-220'
-                program_name: 'sshd(pam_unix)'
-                log: 'session opened for user foo by (uid=508)'
-          **Phase 2: Completed decoding.
-                decoder: 'pam'
-                dstuser: 'foo'
-                uid: '508'
-          **Phase 3: Completed filtering (rules).
-                Rule id: '100002'
-                Level: '5'
-                Description: 'PAM: Login session opened.'
-          **Alert to be generated.
+.. code-block:: none
+    :class: output
+
+    Type one log per line
+
+    Dec  1 11:27:21 ip-10-0-0-220 sshd(pam_unix)[17365]: session opened for user foo by (uid=508)
+
+    **Phase 1: Completed pre-decoding.
+            full event: 'Dec  1 11:27:21 ip-10-0-0-220 sshd(pam_unix)[17365]: session opened for user foo by (uid=508)'
+            timestamp: 'Dec  1 11:27:21'
+            hostname: 'ip-10-0-0-220'
+            program_name: 'sshd(pam_unix)'
+
+    **Phase 2: Completed decoding.
+            name: 'pam'
+            parent: 'pam'
+            dstuser: 'foo'
+            uid: '508'
+
+    **Phase 3: Completed filtering (rules).
+            id: '100002'
+            level: '5'
+            description: 'foo user logged in.'
+            groups: '['local', 'syslog', 'sshd']'
+            firedtimes: '1'
+            mail: 'False'
+    **Alert to be generated.
