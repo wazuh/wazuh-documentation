@@ -70,7 +70,7 @@ If you have a custom index pattern, make sure to replace it accordingly.
 Wazuh API seems to be down
 --------------------------
 
-This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check is the service is active: 
+This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check if the service is active: 
 
 .. tabs::
 
