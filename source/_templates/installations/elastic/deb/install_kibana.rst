@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # apt-get install opendistroforelasticsearch-kibana=1.11.0-1
+  # apt-get install opendistroforelasticsearch-kibana=1.11.0
 
 .. End of include file
