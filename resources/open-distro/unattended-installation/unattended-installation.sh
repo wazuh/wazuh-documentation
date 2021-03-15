@@ -11,10 +11,10 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='>> /var/log/wazuh-unattended-installation.log 2>&1'
-WAZUH_VER="4.0.4"
+WAZUH_VER="4.1.2"
 WAZUH_REV="1"
-ELK_VER="7.9.1"
-OD_VER="1.11.0"
+ELK_VER="7.10.0"
+OD_VER="1.12.0"
 OD_REV="1"
 ow=""
 if [ -n "$(command -v yum)" ]; then
@@ -437,11 +437,11 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else    
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
-        eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
-        eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
+        eval "mkdir /usr/share/kibana/data ${debug}"
+        eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.2_7.10.0-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             rollBack
