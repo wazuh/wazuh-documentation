@@ -3,7 +3,7 @@ node.name: node-1
 cluster.initial_master_nodes: node-1
 
 opendistro_security.ssl.transport.pemcert_filepath: /etc/elasticsearch/certs/elasticsearch.pem
-opendistro_security.ssl.transport.pemkey_filepath: /etc/elasticsearch/certs/elasticsearch.key
+opendistro_security.ssl.transport.pemkey_filepath: /etc/elasticsearch/certs/elasticsearch-key.pem
 opendistro_security.ssl.transport.pemtrustedcas_filepath: /etc/elasticsearch/certs/root-ca.pem
 opendistro_security.ssl.transport.enforce_hostname_verification: false
 opendistro_security.ssl.transport.resolve_hostname: false
