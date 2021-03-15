@@ -16,11 +16,11 @@ You can change the IP address used to listen the service with the following conf
 
 ::
 
-  <ossec_config>
+  <wazuh_config>
     <remote>
       <local_ip>10.0.0.10</local_ip>
     </remote>
-  </ossec_config>
+  </wazuh_config>
 
 This will set the manager to listen on IP address to 10.0.0.10.
 

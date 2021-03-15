@@ -34,7 +34,7 @@ these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.con
 
     .. code-block:: xml
 
-        <ossec_config>
+        <wazuh_config>
             <localfile>
                 <log_format>apache</log_format>
                 <location>/var/log/nginx/access.log</location>
@@ -44,7 +44,7 @@ these ``<localfile>`` sections present in the agent's ``/var/ossec/etc/ossec.con
                 <log_format>apache</log_format>
                 <location>/var/log/nginx/error.log</location>
             </localfile>
-        </ossec_config>
+        </wazuh_config>
 
 Restart the wazuh agent service for this change to take effect:
 

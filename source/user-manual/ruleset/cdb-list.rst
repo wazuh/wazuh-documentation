@@ -53,7 +53,7 @@ Each list must be defined in the ``ossec.conf`` file using the following syntax:
 
 .. code-block:: xml
 
-  <ossec_config>
+  <wazuh_config>
     <ruleset>
       <list>etc/lists/list-IP</list>
 

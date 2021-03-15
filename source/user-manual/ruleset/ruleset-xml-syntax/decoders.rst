@@ -117,11 +117,11 @@ The attributes listed below define a decoder.
 
 Example:
 
-Set name of decoder to *ossec*:
+Set name of decoder to *wazuh*:
 
 .. code-block:: xml
 
-    <decoder name="ossec">
+    <decoder name="wazuh">
       ...
     </decoder>
 
@@ -417,7 +417,7 @@ Use a specific plugin decoder to decode the incoming fields. It is useful for pa
 +                    +--------------------------------------------------------------------+
 |                    | SonicWall_Decoder                                                  |
 +                    +--------------------------------------------------------------------+
-|                    | OSSECAlert_Decoder                                                 |
+|                    | WazuhAlert_Decoder                                                 |
 +                    +--------------------------------------------------------------------+
 |                    | JSON_Decoder                                                       |
 +--------------------+--------------------------------------------------------------------+
@@ -529,7 +529,7 @@ It sets the type of log that the decoder is going to match.
 +                    +------------------+
 |                    | host-information |
 +                    +------------------+
-|                    | ossec            |
+|                    | wazuh            |
 +--------------------+------------------+
 
 Example:

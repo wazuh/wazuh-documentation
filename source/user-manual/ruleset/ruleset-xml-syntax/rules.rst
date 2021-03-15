@@ -177,7 +177,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `description`_          | Any String.                                                   | Provides a human-readable description to explain what is the purpose of the rule. Please, use this   |
 |                         |                                                               | field when creating custom rules.                                                                    |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `list`_                 | Path to the CDB file.                                         | Perform a CDB lookup using an ossec list.                                                            |
+| `list`_                 | Path to the CDB file.                                         | Perform a CDB lookup using a list.                                                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `info`_                 | Any String.                                                   | Extra information using certain attributes.                                                          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -223,7 +223,7 @@ rule
 +               +----------------+----------------------------------------------------------------------------------------+
 |               | Allowed values | Any number from 1 to 999999                                                            |
 +---------------+----------------+----------------------------------------------------------------------------------------+
-| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                    |
+| **overwrite** | Definition     | Used to supersede a Wazuh rule with local changes.                                     |
 +               +----------------+----------------------------------------------------------------------------------------+
 |               | Allowed values | yes, no                                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
@@ -2094,12 +2094,12 @@ If ``description`` label is declared multiple times within the rule, the followi
 list
 ^^^^
 
-Perform a CDB lookup using an ossec list.  This is a fast on-disk database which will always find keys within two seeks of the file.
+Perform a CDB lookup using a list. This is a fast on-disk database which will always find keys within two seeks of the file.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                                                                |
 +--------------------+--------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory. Must also be included in the ossec.conf file. |
+| **Allowed values** | Path to the CDB file to be used for lookup from the Wazuh directory. Must also be included in the ossec.conf file. |
 +--------------------+--------------------------------------------------------------------------------------------------------------------+
 
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
@@ -2223,7 +2223,7 @@ Example:
 
       <rule id="534" level="1">
         <if_sid>530</if_sid>
-        <match>ossec: output: 'w'</match>
+        <match>wazuh: output: 'w'</match>
         <check_diff />
         <options>no_log</options>
         <description>List of logged in users. It will not be alerted by default.</description>
@@ -2310,7 +2310,7 @@ Example:
           <if_sid>550</if_sid>
           <field name="file">^$joe_folder</field>
           <description>A Joe's file was modified.</description>
-          <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+          <group>wazuh,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
         </rule>
 
     </group>

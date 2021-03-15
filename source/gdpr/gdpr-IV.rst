@@ -244,7 +244,7 @@ A basic configuration could be:
 
 .. code-block:: xml
 
-	<ossec_config>
+	<wazuh_config>
 	    <global>
 	        <email_notification>yes</email_notification>
 	        <email_to>data_protection_officer@test.com</email_to>
@@ -252,7 +252,7 @@ A basic configuration could be:
 	        <email_from>wazuh@test.com</email_from>
 	    </global>
 	    ...
-	</ossec_config>
+	</wazuh_config>
 
 
 Chapter IV, Article 35, Head 1

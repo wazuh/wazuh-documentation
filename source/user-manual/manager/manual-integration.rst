@@ -10,7 +10,7 @@ The **Integrator** daemon allows Wazuh to connect to external APIs and alerting 
 Configuration
 -------------
 
-The integrations are configured on the ``ossec.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<ossec_config>* section:
+The integrations are configured on the ``ossec.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<wazuh_config>* section:
 
 .. code-block:: xml
 

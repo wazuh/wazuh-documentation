@@ -169,7 +169,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: Solaris 11
 
-    The Wazuh agent upgrading process for Solaris 11 systems requires to download the latest `Solaris 11 i386 installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/11/wazuh-agent_v|WAZUH_LATEST|-sol11-i386.pkg>`_ or `Solaris 11 sparc installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/11/wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.pkg>`_ depending on the Solaris 11 host architecture. 
+    The Wazuh agent upgrading process for Solaris 11 systems requires to download the latest `Solaris 11 i386 installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/11/wazuh-agent_v|WAZUH_LATEST|-sol11-i386.pkg>`_ or `Solaris 11 sparc installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/11/wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.pkg>`_ depending on the Solaris 11 host architecture.
 
     #. Stop the Wazuh agent:
 
@@ -177,23 +177,23 @@ To perform the upgrade locally, follow the instructions for the operating system
 
           # /var/ossec/bin/wazuh-control stop
 
-    
+
     #. After that, upgrade the Wazuh agent. Choose one option depending on the host architecture:
 
         * Solaris 11 i386:
 
             .. code-block:: console
-              
+
               # pkg install -g wazuh-agent_v|WAZUH_LATEST|-sol11-i386.pkg wazuh-agent
 
         * Solaris 11 sparc:
 
             .. code-block:: console
-              
+
               # pkg install -g wazuh-agent_v|WAZUH_LATEST|-sol11-sparc.pkg wazuh-agent
 
 
-    #. Start the Wazuh agent: 
+    #. Start the Wazuh agent:
 
         .. code-block:: console
 
@@ -202,7 +202,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: Solaris 10
 
-    The Wazuh agent upgrading process for Solaris 10 systems requires to download the latest `Solaris 10 i386 installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/10/wazuh-agent_v|WAZUH_LATEST|-sol10-i386.pkg>`_ or `Solaris 10 sparc installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/10/wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg>`_ depending on the Solaris 10 host architecture. 
+    The Wazuh agent upgrading process for Solaris 10 systems requires to download the latest `Solaris 10 i386 installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/i386/10/wazuh-agent_v|WAZUH_LATEST|-sol10-i386.pkg>`_ or `Solaris 10 sparc installer <https://packages.wazuh.com/|CURRENT_MAJOR|/solaris/sparc/10/wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg>`_ depending on the Solaris 10 host architecture.
 
     #. Stop the Wazuh agent:
 
@@ -231,13 +231,13 @@ To perform the upgrade locally, follow the instructions for the operating system
         * Solaris 10 i386:
 
             .. code-block:: console
-              
+
               # pkgadd -d wazuh-agent_v|WAZUH_LATEST|-sol10-i386.pkg wazuh-agent
 
         * Solaris 10 sparc:
 
             .. code-block:: console
-              
+
               # pkgadd -d wazuh-agent_v|WAZUH_LATEST|-sol10-sparc.pkg wazuh-agent
 
 
@@ -249,7 +249,7 @@ To perform the upgrade locally, follow the instructions for the operating system
           # chown root:ossec /var/ossec/etc/ossec.conf
 
 
-    #. Start the wazuh-agent: 
+    #. Start the wazuh-agent:
 
         .. code-block:: console
 
@@ -258,7 +258,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
   .. group-tab:: HP-UX
 
-      The Wazuh agent upgrading process for HP-UX systems requires to download the latest `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+      The Wazuh agent upgrading process for HP-UX systems requires to download the latest `HP-UX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/hp-ux/wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_.
 
       #. Stop the Wazuh agent:
 
@@ -292,7 +292,7 @@ To perform the upgrade locally, follow the instructions for the operating system
             # chown root:ossec /var/ossec/etc/client.keys
 
 
-      #. Start the wazuh-agent: 
+      #. Start the wazuh-agent:
 
           .. code-block:: console
 
@@ -304,11 +304,10 @@ Once the Wazuh agent is upgraded, if it still uses UDP, which was the default pr
 .. code-block:: console
   :emphasize-lines: 6
 
-  <ossec_config>
+  <wazuh_config>
     <client>
       <server>
         <address>172.16.1.17</address>
         <port>1514</port>
         <protocol>udp</protocol>
       </server>
-
