@@ -20,3 +20,4 @@ This section contains technical documentation for developers.
         makefile
         wazuh-cluster
         packaging/index
+        wazuh-logtest

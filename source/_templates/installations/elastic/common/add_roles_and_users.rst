@@ -2,16 +2,16 @@
 
 .. code-block:: console
 
-  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles.yml
-  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles_mapping.yml
-  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/internal_users.yml
+  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/roles.yml
+  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/roles_mapping.yml
+  # curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/internal_users.yml
 
 The commands above add the following Wazuh users in Kibana: 
 
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh_user                          | Created for users who need read-only access to the Wazuh Kibana plugin. Kibana plugin.                                                                                                                                                                                                   |
+| wazuh_user                          | Created for users who need read-only access to the Wazuh Kibana plugin.                                                                                                                                                                                                                  |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| wazuh_admin                         | Recommended user for users who need administrative privileges. privileges.                                                                                                                                                                                                               |
+| wazuh_admin                         | Recommended user for users who need administrative privileges.                                                                                                                                                                                                                           |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Two additional roles are added, whose function is to give the appropriate permissions to users:

@@ -13,15 +13,15 @@ char="."
 debug='> /dev/null 2>&1'
 password=""
 passwords=""
-if [ -n "$(command -v yum)" ] 
+if [ -n "$(command -v yum)" ]
 then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ] 
+elif [ -n "$(command -v zypper)" ]
 then
-    sys_type="zypper"     
-elif [ -n "$(command -v apt-get)" ] 
+    sys_type="zypper"
+elif [ -n "$(command -v apt-get)" ]
 then
-    sys_type="apt-get"   
+    sys_type="apt-get"
 fi
 
 ## Prints information
@@ -52,7 +52,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi  
+        fi
     elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
         eval "chkconfig $1 on $debug"
         eval "service $1 start $debug"
@@ -63,7 +63,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi     
+        fi
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
         eval "/etc/rc.d/init.d/$1 start $debug"
         if [  "$?" != 0  ]
@@ -72,7 +72,7 @@ startService() {
             exit 1;
         else
             echo "${1^} started"
-        fi             
+        fi
     else
         echo "Error: ${1^} could not start. No service manager found on the system."
         exit 1;
@@ -116,7 +116,7 @@ checkConfig() {
                 exit 1;
             fi
         fi
-    
+
     elif [ -n "$k" ]
     then
         if [ -e ~/certs/${iname} ]
@@ -126,7 +126,7 @@ checkConfig() {
             echo "No certificates found."
             exit 1;
         fi
-    fi   
+    fi
 
 }
 
@@ -136,14 +136,15 @@ installPrerequisites() {
 
     logger "Installing all necessary utilities for the installation..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
-        eval "yum install zip unzip curl -y -q $debug"   
-    elif [ $sys_type == "zypper" ] 
+        eval "yum install zip unzip curl -y -q $debug"
+    elif [ $sys_type == "zypper" ]
     then
-        eval "zypper -n install zip unzip curl $debug"       
-    elif [ $sys_type == "apt-get" ] 
+        eval "zypper -n install zip unzip curl $debug"
+    elif [ $sys_type == "apt-get" ]
     then
+        eval "apt-get update -q $debug"
         eval "apt-get install curl apt-transport-https zip unzip lsb-release libcap2-bin -y -q $debug"
         eval "apt-get update -q $debug"
     fi
@@ -154,7 +155,7 @@ installPrerequisites() {
         exit 1;
     else
         logger "Done"
-    fi   
+    fi
     certs=~/certs.zip
     if [ -f "$certs" ]; then
         eval "unzip -o ~/certs.zip config.yml $debug"
@@ -167,11 +168,11 @@ addElasticrepo() {
 
     logger "Adding the Elasticsearch repository..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
         eval "rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch $debug"
         echo -e '[elasticsearch-7.x]\nname=Elasticsearch repository for 7.x packages\nbaseurl=https://artifacts.elastic.co/packages/7.x/yum\ngpgcheck=1\ngpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch\nenabled=1\nautorefresh=1\ntype=rpm-md' > /etc/yum.repos.d/elastic.repo
-    elif [ $sys_type == "zypper" ] 
+    elif [ $sys_type == "zypper" ]
     then
         rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch > /dev/null 2>&1
 		cat > /etc/zypp/repos.d/elastic.repo <<- EOF
@@ -184,13 +185,13 @@ addElasticrepo() {
         autorefresh=1
         type=rpm-md
 		EOF
-        
-    elif [ $sys_type == "apt-get" ] 
+
+    elif [ $sys_type == "apt-get" ]
     then
         eval "curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch --max-time 300 | apt-key add - $debug"
         echo 'deb https://artifacts.elastic.co/packages/7.x/apt stable main' | eval "tee /etc/apt/sources.list.d/elastic-7.x.list $debug"
         eval "apt-get update -q $debug"
-    fi    
+    fi
 
     if [  "$?" != 0  ]
     then
@@ -198,7 +199,7 @@ addElasticrepo() {
         exit 1;
     else
         logger "Done"
-    fi  
+    fi
 
 }
 
@@ -208,19 +209,19 @@ installElasticsearch() {
     if [[ -f /etc/elasticsearch/elasticsearch.yml ]]; then
         echo "Elasticsearch is already installed in this node."
         exit 1;
-    fi      
+    fi
 
     logger "Installing Elasticsearch..."
 
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
-        eval "yum install elasticsearch-7.9.3 -y -q $debug"
+        eval "yum install elasticsearch-7.10.2 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.3 -y -q $debug"
+        eval "apt-get install elasticsearch=7.10.2 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.3 $debug"
+        eval "zypper -n install elasticsearch-7.10.2 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -231,23 +232,23 @@ installElasticsearch() {
         logger "Done"
 
         logger "Configuring Elasticsearch..."
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
 
         if [ -n "$single" ]
         then
             nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
             nhr="network.host: "
             ip="${nh//$nhr}"
-            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml    
-            echo "cluster.initial_master_nodes: $iname" >> /etc/elasticsearch/elasticsearch.yml    
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml
+            echo "${nn}" >> /etc/elasticsearch/elasticsearch.yml
+            echo "${nh}" >> /etc/elasticsearch/elasticsearch.yml
+            echo "cluster.initial_master_nodes: $iname" >> /etc/elasticsearch/elasticsearch.yml
         else
-            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml   
+            echo "node.name: ${iname}" >> /etc/elasticsearch/elasticsearch.yml
             mn=$(awk -v RS='' '/cluster.initial_master_nodes:/' ~/config.yml)
             sh=$(awk -v RS='' '/discovery.seed_hosts:/' ~/config.yml)
             cn=$(awk -v RS='' '/cluster.name:/' ~/config.yml)
-            echo "${cn}" >> /etc/elasticsearch/elasticsearch.yml   
+            echo "${cn}" >> /etc/elasticsearch/elasticsearch.yml
             mnr="cluster.initial_master_nodes:"
             rm="- "
             mn="${mn//$mnr}"
@@ -256,40 +257,40 @@ installElasticsearch() {
             shr="discovery.seed_hosts:"
             sh="${sh//$shr}"
             sh="${sh//$rm}"
-            echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml   
+            echo "cluster.initial_master_nodes:" >> /etc/elasticsearch/elasticsearch.yml
             for line in $mn; do
                     IMN+=(${line})
-                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml
             done
 
-            echo "discovery.seed_hosts:" >> /etc/elasticsearch/elasticsearch.yml   
+            echo "discovery.seed_hosts:" >> /etc/elasticsearch/elasticsearch.yml
             for line in $sh; do
                     DSH+=(${line})
-                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml    
+                    echo '        - "'${line}'"' >> /etc/elasticsearch/elasticsearch.yml
             done
             for i in "${!IMN[@]}"; do
             if [[ "${IMN[$i]}" = "${iname}" ]]; then
                 pos="${i}";
             fi
             done
-            if [[ ! " ${IMN[@]} " =~ " ${iname} " ]]; then 
+            if [[ ! " ${IMN[@]} " =~ " ${iname} " ]]; then
                 echo "The name given does not appear on the configuration file"
                 exit 1;
-            fi              
-            nip="${DSH[pos]}" 
-            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml               
+            fi
+            nip="${DSH[pos]}"
+            echo "network.host: ${nip}" >> /etc/elasticsearch/elasticsearch.yml
 
         fi
-        
+
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
         ram=$(( ${ram_gb} / 2 ))
 
         if [ ${ram} -eq "0" ]; then
             ram=1;
-        fi    
+        fi
         eval "sed -i "s/-Xms1g/-Xms${ram}g/" /etc/elasticsearch/jvm.options $debug"
-        eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options $debug"     
+        eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options $debug"
 
         # Create certificates
         if [ -n "$single" ]
@@ -300,8 +301,8 @@ installElasticsearch() {
             createCertificates IMN DSH pos
         else
             logger "Done"
-        fi      
-        
+        fi
+
         if [ -n "$single" ]
         then
             copyCertificates name
@@ -315,14 +316,14 @@ installElasticsearch() {
 }
 
 createCertificates() {
-    
+
     if [ -n "$single" ]
     then
         echo "instances:" >> /usr/share/elasticsearch/instances.yml
         echo '- name: "'${iname}'"' >> /usr/share/elasticsearch/instances.yml
         echo '  ip:' >> /usr/share/elasticsearch/instances.yml
         echo '  - "'${ip}'"' >> /usr/share/elasticsearch/instances.yml
-    else 
+    else
         echo "instances:" >> /usr/share/elasticsearch/instances.yml
         for i in "${!IMN[@]}"; do
             echo '- name: "'${IMN[i]}'"' >> /usr/share/elasticsearch/instances.yml
@@ -355,7 +356,7 @@ copyCertificates() {
         eval "chmod -R 500 /etc/elasticsearch/certs $debug"
         eval "chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.* $debug"
         eval "zip -u ~/certs.zip config.yml $debug"
-        eval "cp ~/config.yml ~/certs/ $debug"        
+        eval "cp ~/config.yml ~/certs/ $debug"
     else
         eval "unzip -o ~/certs.zip -d ~/certs $debug"
         eval "mkdir /etc/elasticsearch/certs/ca -p $debug"
@@ -369,14 +370,14 @@ copyCertificates() {
         then
             eval "zip -u ~/certs.zip config.yml $debug"
             eval "cp ~/config.yml ~/certs/ $debug"
-        fi            
+        fi
     fi
 
 }
 
 initializeElastic() {
 
-    logger "Elasticsearch installed."  
+    logger "Elasticsearch installed."
 
     # Start Elasticsearch
     startService "elasticsearch"
@@ -403,7 +404,7 @@ initializeElastic() {
     fi
     echo $'\nElasticsearch installation finished'
     disableRepos
-    exit 0;    
+    exit 0;
 
 }
 
@@ -413,45 +414,44 @@ installKibana() {
     if [[ -f /etc/kibana/kibana.yml ]]; then
         echo "Kibana is already installed in this node."
         exit 1;
-    fi     
-    
+    fi
+
     logger "Installing Kibana..."
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
-        eval "yum install kibana-7.9.3 -y -q  $debug"    
+        eval "yum install kibana-7.10.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.3 $debug"
+        eval "zypper -n install kibana-7.10.2 $debug"
     elif [ $sys_type == "apt-get" ] 
         then
-        eval "apt-get install kibana=7.9.3 -y -q  $debug"
+        eval "apt-get install kibana=7.10.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
         echo "Error: Kibana installation failed"
         exit 1;
-    else   
+    else
         disableRepos
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
-        eval "cd /usr/share/kibana $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.3-1.zip $debug"
-        if [  "$?" != 0  ]
-        then
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
+        eval "mkdir /usr/share/kibana/data ${debug}"
+        eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
+        eval "cd /usr/share/kibana ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.2_7.10.2-1.zip ${debug}"
+        if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
-        fi     
+        fi
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
         conf="$(awk '{sub("<elasticsearch_password>", "'"${epassword}"'")}1' /etc/kibana/kibana.yml)"
-        echo "$conf" > /etc/kibana/kibana.yml     
+        echo "$conf" > /etc/kibana/kibana.yml
         eval "mkdir /etc/kibana/certs/ca -p"
         instance=$(awk -v RS='' '/- name:/' ~/config.yml)
         kip=$(grep -A 2 ${iname} ~/config.yml | tail -1)
         rm1="- "
         rm2='"'
         kip="${kip//$rm1}"
-        kip="${kip//$rm2}"        
+        kip="${kip//$rm2}"
         echo "server.host:"$kip"" >> /etc/kibana/kibana.yml
         nh=$(awk -v RS='' '/network.host:/' ~/config.yml)
 
@@ -469,12 +469,12 @@ installKibana() {
             sh="${sh//$rm}"
             for line in $sh; do
                     echo "  - https://${line}:9200" >> /etc/kibana/kibana.yml
-            done        
+            done
         fi
         logger "Kibana installed."
-        
-        initializeKibana iname kip epassword 
-        echo -e            
+
+        initializeKibana iname kip epassword
+        echo -e
 
         logger "Done"
     fi
@@ -482,7 +482,7 @@ installKibana() {
 }
 
 initializeKibana() {
-    
+
     eval "zip -d ~/certs.zip ca/ca.key $debug"
     eval "unzip -o ~/certs.zip -d ~/certs $debug"
     eval "cp -R ~/certs/ca/ ~/certs/${iname}/* /etc/kibana/certs/ $debug"
@@ -490,28 +490,28 @@ initializeKibana() {
     then
         eval "mv /etc/kibana/certs/${iname}.crt /etc/kibana/certs/kibana.crt $debug"
         eval "mv /etc/kibana/certs/${iname}.key /etc/kibana/certs/kibana.key $debug"
-    fi    
+    fi
     eval "chown -R kibana:kibana /etc/kibana/ $debug"
     eval "chmod -R 500 /etc/kibana/certs $debug"
-    eval "chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.* $debug"  
+    eval "chmod 400 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.* $debug"
     # Start Kibana
-    startService "kibana"   
-    logger "Initializing Kibana (this may take a while)" 
+    startService "kibana"
+    logger "Initializing Kibana (this may take a while)"
     rms=" "
-    kip="${kip//$rms}"    
+    kip="${kip//$rms}"
     until [[ "$(curl -XGET https://${kip}/status -I -uelastic:"$epassword" -k -s | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
-    done   
-    sleep 10  
+    done
+    sleep 10
     wip=$(grep -A 2 ${iname} ~/config.yml | tail -1)
     rw1="- "
     rw2='"'
     wip="${wip//$rw1}"
     wip="${wip//$rw2}"
 
-    conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
-    echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
+    conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
+    echo "$conf" > /usr/share/kibana/data/wazuh/config/wazuh.yml  
     echo $'\nYou can access the web interface https://'${kip}'. The credentials are elastic:'$epassword''    
   
 }
@@ -525,7 +525,7 @@ checkNodes() {
         master=1
     else
         single=1
-    fi   
+    fi
 
 }
 
@@ -551,68 +551,68 @@ healthCheck() {
             exit 1;
         else
             echo "Starting the installation..."
-        fi   
-    fi     
+        fi
+    fi
 
 }
 
 ## Disable repositories
 disableRepos() {
-    if [ $sys_type == "yum" ] 
+    if [ $sys_type == "yum" ]
     then
         sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-    elif [ $sys_type == "zypper" ] 
+    elif [ $sys_type == "zypper" ]
     then
         sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/elastic.repo
-    elif [ $sys_type == "apt-get" ] 
+    elif [ $sys_type == "apt-get" ]
     then
         sed -i 's/^deb/#deb/' /etc/apt/sources.list.d/elastic-7.x.list
-        eval "apt-get update -q $debug"       
-    fi      
+        eval "apt-get update -q $debug"
+    fi
 }
 
 ## Main
 
 main() {
 
-    if [ -n "$1" ] 
-    then      
+    if [ -n "$1" ]
+    then
         while [ -n "$1" ]
         do
-            case "$1" in           
-            "-e"|"--install-elasticsearch")        
+            case "$1" in
+            "-e"|"--install-elasticsearch")
                 e=1
                 shift 1
-                ;;      
-            "-c"|"--create-certificates") 
-                c=1  
+                ;;
+            "-c"|"--create-certificates")
+                c=1
                 shift 1
-                ;;       
-            "-n"|"--node-name") 
-                iname=$2  
+                ;;
+            "-n"|"--node-name")
+                iname=$2
                 shift
                 shift
-                ;;                                            
-            "-k"|"--install-kibana") 
-                k=1          
+                ;;
+            "-k"|"--install-kibana")
+                k=1
                 shift 1
-                ;; 
-            "-p"|"--elastic-password") 
-                epassword=$2          
+                ;;
+            "-p"|"--elastic-password")
+                epassword=$2
                 shift
                 shift
-                ;;                                                              
-            "-i"|"--ignore-healthcheck") 
-                i=1          
+                ;;
+            "-i"|"--ignore-healthcheck")
+                i=1
                 shift 1
-                ;; 
-            "-d"|"--debug") 
-                d=1          
+                ;;
+            "-d"|"--debug")
+                d=1
                 shift 1
-                ;;                                 
-            "-h"|"--help")        
+                ;;
+            "-h"|"--help")
                 getHelp
-                ;;                                         
+                ;;
             *)
                 getHelp
             esac
@@ -628,29 +628,29 @@ main() {
         if [ -n "$d" ]
         then
             debug=""
-        fi         
+        fi
 
-        if [[ -z "$iname" ]]  
+        if [[ -z "$iname" ]]
         then
             getHelp
-        fi         
+        fi
 
         if [ -n "$e" ]
         then
-            if [[ -n "$e" ]] && [[ -n "$k" ]]   
+            if [[ -n "$e" ]] && [[ -n "$k" ]]
             then
                 getHelp
-            fi        
+            fi
 
             if [ -n "$i" ]
             then
-                echo "Health-check ignored."    
+                echo "Health-check ignored."
             else
-                healthCheck e k        
-            fi           
+                healthCheck e k
+            fi
             installPrerequisites
-            addElasticrepo   
-            checkNodes         
+            addElasticrepo
+            checkNodes
             checkConfig iname
             installElasticsearch iname
         fi
@@ -660,19 +660,19 @@ main() {
             then
                 getHelp
             fi
-            if [[ -n "$e" ]] && [[ -n "$k" ]]   
+            if [[ -n "$e" ]] && [[ -n "$k" ]]
             then
                 getHelp
-            fi        
+            fi
 
             if [ -n "$i" ]
             then
-                echo "Health-check ignored."    
+                echo "Health-check ignored."
             else
-                healthCheck e k         
-            fi               
+                healthCheck e k
+            fi
             installPrerequisites
-            addElasticrepo             
+            addElasticrepo
             installKibana iname
         fi
     else

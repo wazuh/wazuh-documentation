@@ -16,44 +16,44 @@ Installing Wazuh
 
 #. Download and run the script:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
+     # curl -so ~/all-in-one-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/all-in-one-installation.sh && bash ~/all-in-one-installation.sh
 
-  The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
+   The script will perform a health-check to ensure that the host has enough resources to guarantee the proper performance. To skip this step, add the ``-i`` or ``--ignore-healthcheck`` option when running the script.
 
-  After the execution of the script, it will show the following messages to confirm that the installation was successful:
+   After the execution of the script, it will show the following messages to confirm that the installation was successful:
 
-  .. code-block:: none
-    :class: output
+   .. code-block:: none
+     :class: output
 
-    Starting the installation...
-    Installing all necessary utilities for the installation...
-    Done
-    Adding the Wazuh repository...
-    Done
-    Installing the Wazuh manager...
-    Done
-    Wazuh-manager started
-    Installing Open Distro for Elasticsearch...
-    Done
-    Configuring Elasticsearch...
-    Certificates created
-    Elasticsearch started
-    Initializing Elasticsearch...
-    Done
-    Installing Filebeat...
-    Filebeat started
-    Done
-    Installing Open Distro for Kibana...
-    Kibana started
-    Done
-    Checking the installation...
-    Elasticsearch installation succeeded.
-    Filebeat installation succeeded.
-    Initializing Kibana (this may take a while)
-    ########
-    Installation finished
+     Starting the installation...
+     Installing all necessary utilities for the installation...
+     Done
+     Adding the Wazuh repository...
+     Done
+     Installing the Wazuh manager...
+     Done
+     Wazuh-manager started
+     Installing Open Distro for Elasticsearch...
+     Done
+     Configuring Elasticsearch...
+     Certificates created
+     Elasticsearch started
+     Initializing Elasticsearch...
+     Done
+     Installing Filebeat...
+     Filebeat started
+     Done
+     Installing Open Distro for Kibana...
+     Kibana started
+     Done
+     Checking the installation...
+     Elasticsearch installation succeeded.
+     Filebeat installation succeeded.
+     Initializing Kibana (this may take a while)
+     ########
+     Installation finished
 
 #. Access the web interface: 
 
@@ -73,9 +73,7 @@ Customizing the installation
 The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and will accept all the available IPs of the host.  This value can be changed for a specific IP if needed.
 
 It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
-
-Once Kibana is running, it is necessary to assign each user their corresponding role. To learn more, visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
-
+ 
 To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps

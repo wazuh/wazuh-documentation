@@ -70,11 +70,6 @@ $ossec_auth_use_password
 
   `Default no`
 
-$ossec_auth_limit_maxagents
-  Toggles whether or not to operate based on the maximum number of agents.
-
-  `Default yes`
-
 $ossec_auth_ciphers
   Sets the list of ciphers for network communication using SSL.
 

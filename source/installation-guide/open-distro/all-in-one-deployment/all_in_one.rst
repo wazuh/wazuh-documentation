@@ -115,7 +115,6 @@ In order to use the Wazuh Kibana plugin properly, it is necessary to add the ext
 
 .. include:: ../../../_templates/installations/elastic/common/add_roles_and_users.rst
 
-
 Certificates creation
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -152,24 +151,23 @@ An example response should look as follows:
               {
                 "name" : "node-1",
                 "cluster_name" : "elasticsearch",
-                "cluster_uuid" : "2gIeOOeUQh25c2yU0Pd-RQ",
+                "cluster_uuid" : "J4EAfzd7R4KZv-31jBAuNA",
                 "version" : {
-                  "number" : "7.9.1",
+                  "number" : "7.10.0",
                   "build_flavor" : "oss",
                   "build_type" : "rpm",
-                  "build_hash" : "083627f112ba94dffc1232e8b42b73492789ef91",
-                  "build_date" : "2020-09-01T21:22:21.964974Z",
+                  "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
+                  "build_date" : "2020-11-09T21:30:33.964949Z",
                   "build_snapshot" : false,
-                  "lucene_version" : "8.6.2",
+                  "lucene_version" : "8.7.0",
                   "minimum_wire_compatibility_version" : "6.8.0",
                   "minimum_index_compatibility_version" : "6.0.0-beta1"
                 },
                 "tagline" : "You Know, for Search"
               }
+
   
-
 .. note:: The Open Distro for Elasticsearch performance analyzer plugin is installed by default and can have a negative impact on system resources. We recommend removing it with the following command ``/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer``. Please be sure to restart the Elasticsearch service afterwards. 
-
 
 .. _wazuh_server_packages_filebeat:
 
@@ -208,7 +206,7 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
@@ -258,7 +256,7 @@ An example response should look as follows:
                   TLS version: TLSv1.3
                   dial up... OK
                 talk to server... OK
-                version: 7.9.1
+                version: 7.10.0
 
 Installing Kibana
 -----------------
@@ -295,19 +293,19 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     .. include:: ../../../_templates/installations/elastic/common/configure_kibana_all_in_one.rst
 
-#. Update the ``optimize`` and ``plugins`` directories permissions:
+#. Create the ``/usr/share/kibana/data`` directory:
 
     .. code-block:: console
     
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
+      # mkdir /usr/share/kibana/data
+      # chown -R kibana:kibana /usr/share/kibana/data
 
 #. Install the Wazuh Kibana plugin. The installation of the plugin must be done from the Kibana home directory as follows:
 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/|CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
 
 #. Copy the Elasticsearch certificates into ``/etc/kibana/certs``:
 
