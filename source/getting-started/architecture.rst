@@ -75,18 +75,18 @@ Both alerts and non-alert events are stored in files on the Wazuh server, in add
 
   root@wazuh-manager:/var/ossec/logs/archives/2020/Jan# ls -l
   total 176
-  -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
-  -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
-  -rw-r----- 1 ossec ossec 176221 Jan  2 00:00 ossec-archive-01.log.gz
-  -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-01.log.sum
-  -rw-r----- 1 ossec ossec 224320 Jan  2 00:00 ossec-archive-02.json.gz
-  -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-02.json.sum
-  -rw-r----- 1 ossec ossec 151642 Jan  2 00:00 ossec-archive-02.log.gz
-  -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-02.log.sum
-  -rw-r----- 1 ossec ossec 315251 Jan  2 00:00 ossec-archive-03.json.gz
-  -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-03.json.sum
-  -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
-  -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
+  -rw-r----- 1 wazuh wazuh 234350 Jan  2 00:00 ossec-archive-01.json.gz
+  -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-01.json.sum
+  -rw-r----- 1 wazuh wazuh 176221 Jan  2 00:00 ossec-archive-01.log.gz
+  -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-01.log.sum
+  -rw-r----- 1 wazuh wazuh 224320 Jan  2 00:00 ossec-archive-02.json.gz
+  -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-02.json.sum
+  -rw-r----- 1 wazuh wazuh 151642 Jan  2 00:00 ossec-archive-02.log.gz
+  -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-02.log.sum
+  -rw-r----- 1 wazuh wazuh 315251 Jan  2 00:00 ossec-archive-03.json.gz
+  -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-03.json.sum
+  -rw-r----- 1 wazuh wazuh 156296 Jan  2 00:00 ossec-archive-03.log.gz
+  -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-03.log.sum
 
 Rotation and backups of archive files are recommended according to the storage capacity of the :ref:`Wazuh server <wazuh_server>`. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the server (e.g., last year or last three months).
 
