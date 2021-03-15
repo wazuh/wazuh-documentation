@@ -1249,11 +1249,12 @@ aside.help {
   font-size: 1.4rem;
 }
 
-.index a.headerlink {
-  content: none;
+.index h1 a.headerlink,
+.index h1:hover a.headerlink {
+  display: none;
 }
 
-:not(.index) a.headerlink {
+a.headerlink {
   min-height: 1.5rem;
   color: transparent;
   -webkit-user-select: none;
@@ -1262,7 +1263,7 @@ aside.help {
   user-select: none;
   font-size: 1rem;
   vertical-align: middle;
-  display: none;
+  display: inline-block;
 }
 
 a.headerlink:before {
@@ -1296,6 +1297,7 @@ h5:active > a.headerlink,
 h6:hover > a.headerlink,
 h6:active > a.headerlink {
   display: inline-block;
+  opacity: 1;
 }
 
 .index h3:hover > a.headerlink,
@@ -2992,6 +2994,16 @@ div.highlight pre {
   background-position: center;
 }
 
+.section {
+  padding-top: 60px;
+  margin-top: -60px;
+}
+
+.no-latest-docs .section {
+  padding-top: 140px;
+  margin-top: -140px;
+}
+
 @media (min-width:576px){
   
   #capabilities .right .topic p:not(.topic-title) {
@@ -3273,6 +3285,15 @@ div.highlight pre {
   
   #page.no-latest-docs {
     padding-top: 0;
+  }
+  
+  a.headerlink {
+    opacity: 0;
+  }
+  
+  .no-latest-docs .section {
+    padding-top: 110px;
+    margin-top: -110px;
   }
 
   .no-latest-notice-wrapper {
