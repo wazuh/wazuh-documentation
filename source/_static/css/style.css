@@ -187,7 +187,6 @@ dt {
 .no-latest-notice .no-latest-icon-wrapper {
   color: #ffb600;
   padding: 0;
-  background-color: #fff;
   height: 100%;
   display: flex;
   align-items: center;
@@ -203,11 +202,7 @@ dt {
 
 .no-latest-docs .no-latest-notice {
   display: flex;
-  justify-content: flex-start;
-}
-
-.no-latest-notice .link-latest {
-  color: #333;
+  justify-content: center;
 }
 
 #header {
@@ -3303,17 +3298,16 @@ div.highlight pre {
   .no-latest-notice {
     position: relative;
     border: 1px solid #ffb600;
+    border-radius: 12px;
     margin: 35px 0 15px 0;
     height: auto;
     align-items: stretch;
-    width: fit-content;
-    width: -moz-fit-content;
+    width: 100%;
+    padding: 0 10px;
   }
   
   .no-latest-notice .no-latest-icon-wrapper {
     padding: 7px;
-    background-color: #ffb600;
-    color: #fff;
     min-width: 35px;
     height: auto;
     padding: 10px;
@@ -3321,12 +3315,13 @@ div.highlight pre {
   
   .no-latest-notice .no-latest-text-wrapper {
     font-size: 1.07rem;
-    padding: 15px;
+    padding: 15px 10px;
   }
   
   .scrolled .no-latest-notice {
     margin: 0;
     border: 1px solid #fff;
+    border-radius: 0;
     position: fixed;
     top: 0;
     width: 100%;
@@ -3926,6 +3921,10 @@ div.highlight pre {
 }
 
 @media (min-width: 1440px) {
+  
+  .no-latest-notice .no-latest-text-wrapper {
+    padding: 15px 15px 15px 5px;
+  }
   
   #rst-content.deprecated-content:after {
     height: 540px;
