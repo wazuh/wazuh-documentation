@@ -340,13 +340,33 @@ installElasticsearch() {
 
         eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
+
+        ## Create certificates
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
-        eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
-        eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard ${debug}"
-        eval "curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
-        eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
-        eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
+        eval "curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
+        ## eval "curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/instances.yml --max-time 300 ${debug}"
+
+		cat > ~/instances.yml <<- EOF
+        # Elasticsearch nodes
+        elasticsearch-nodes:
+        - name: elasticsearch
+            ip:
+            - 127.0.0.1
+
+        # Wazuh server nodes
+        wazuh-servers:
+        - name: filebeat
+            ip:
+            - 127.0.0.1      
+
+        # Kibana node
+        kibana:
+        - name: kibana
+            ip:
+            - 127.0.0.1        
+		EOF       
+        
         if [  "$?" != 0  ]; then
             echo "Error: certificates were not created"
             rollBack
@@ -355,7 +375,9 @@ installElasticsearch() {
         else
             logger "Certificates created"
         fi     
-        eval "rm /etc/elasticsearch/certs/client-certificates.readme /etc/elasticsearch/certs/elasticsearch_elasticsearch_config_snippet.yml ~/search-guard-tlstool-1.8.zip -f ${debug}"
+        cp ~/certs/elasticsearch* /etc/elasticsearch/certs/
+        cp ~/certs/root-ca.pem /etc/elasticsearch/certs/
+        cp ~/certs/admin* /etc/elasticsearch/certs/
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
