@@ -13,8 +13,8 @@ Create the user and the group OSSEC:
 
 .. code-block:: console
 
-    # groupadd wazuh
-    # useradd -G wazuh wazuh
+    # groupadd ossec
+    # useradd -G ossec ossec
 
 Unzip the package in ``/``:
 
@@ -41,12 +41,12 @@ To uninstall the agent:
 
       # /var/ossec/bin/wazuh-control stop
 
-2. Delete ``wazuh`` user and group:
+2. Delete ``ossec`` user and group:
 
     .. code-block:: console
 
-        # groupdel wazuh
-        # userdel wazuh
+        # groupdel ossec
+        # userdel ossec
 
 3. Remove Wazuh files:
 
