@@ -338,7 +338,7 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/elasticsearch/7.x/elasticsearch.yml --max-time 300 ${debug}"
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
 
         ## Create certificates
@@ -347,26 +347,26 @@ installElasticsearch() {
         eval "curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
         ## eval "curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/instances.yml --max-time 300 ${debug}"
 
-		cat > ~/instances.yml <<- EOF
-        # Elasticsearch nodes
-        elasticsearch-nodes:
-        - name: elasticsearch
-            ip:
-            - 127.0.0.1
+        echo "# Elasticsearch nodes" >> ~/instances.yml
+        echo "elasticsearch-nodes:" >> ~/instances.yml
+        echo "- name: elasticsearch" >> ~/instances.yml
+        echo "    ip:" >> ~/instances.yml
+        echo "    - 127.0.0.1" >> ~/instances.yml
 
-        # Wazuh server nodes
-        wazuh-servers:
-        - name: filebeat
-            ip:
-            - 127.0.0.1      
+        echo "# Wazuh server nodes" >> ~/instances.yml
+        echo "wazuh-servers:" >> ~/instances.yml
+        echo "- name: filebeat" >> ~/instances.yml
+        echo "    ip:" >> ~/instances.yml
+        echo "    - 127.0.0.1" >> ~/instances.yml
 
-        # Kibana node
-        kibana:
-        - name: kibana
-            ip:
-            - 127.0.0.1        
-		EOF       
-        
+        echo "# Kibana node"  >> ~/instances.yml
+        echo "kibana:"  >> ~/instances.yml
+        echo "- name: kibana" >> ~/instances.yml
+        echo "    ip:" >> ~/instances.yml
+        echo "    - 127.0.0.1" >> ~/instances.yml
+
+        bash ~/wazuh-cert-tool.sh
+
         if [  "$?" != 0  ]; then
             echo "Error: certificates were not created"
             rollBack
@@ -407,7 +407,7 @@ installElasticsearch() {
         done    
 
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
-        eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key ${debug}"
+        eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
         echo "Done"
         
     fi
@@ -429,13 +429,13 @@ installFilebeat() {
         rollBack
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
+        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
         eval "mkdir /etc/filebeat/certs ${debug}"
-        eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
-        eval "mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/ ${debug}"
+        eval "cp ~/certs/root-ca.pem /etc/filebeat/certs/ ${debug}"
+        eval "cp ~/certs/filebeat* /etc/filebeat/certs/ ${debug}"
 
         # Start Filebeat
         startService "filebeat"
@@ -459,7 +459,7 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else    
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
@@ -471,9 +471,8 @@ installKibana() {
             exit 1;
         fi     
         eval "mkdir /etc/kibana/certs ${debug}"
-        eval "mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key ${debug}"
-        eval "mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem ${debug}"
-        eval "cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
+        eval "cp ~/certs/kibana* /etc/kibana/certs/ ${debug}"
+        eval "cp ~/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
 
         # Start Kibana
