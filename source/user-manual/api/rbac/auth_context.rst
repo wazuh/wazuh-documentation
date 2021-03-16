@@ -12,7 +12,7 @@ Authorization context login method
 
 This authentication method is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without it being assigned to any role. To do this, a proper formalization of the authorization context is needed. In this case, the user-roles relations are not taken into consideration.
 
-In order to use this authentication method, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally the permissions associated with them will be granted:
+In order to use this authentication method, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally, the permissions associated with them will be granted:
 
 .. code-block:: console
         :class: output
