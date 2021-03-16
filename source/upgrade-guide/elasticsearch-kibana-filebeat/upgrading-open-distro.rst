@@ -292,7 +292,7 @@ Upgrading Kibana
                 .. code-block:: console
 
                   # mkdir -p /usr/share/kibana/data/wazuh/config/
-                  # cp /usr/share/kibana/data/wazuh/config/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
+                  # cp /usr/share/kibana/optimize/wazuh/config/wazuh.yml /usr/share/kibana/data/wazuh/config/wazuh.yml
 
 
           .. group-tab:: For upgrades from 3.11.x
