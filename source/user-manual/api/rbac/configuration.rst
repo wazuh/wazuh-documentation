@@ -193,7 +193,7 @@ By default, new users will not be able to authenticate using an authorization co
 
     # curl -k -X PUT "https://localhost:55000/security/users/{user_id}/run_as?allow_run_as=true" -H  "Authorization: Bearer $TOKEN"
 
-The output would look like below:
+The output should look like this:
 
 .. code-block:: json
     :class: output
