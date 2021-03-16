@@ -35,6 +35,7 @@ Create a new policy
 As an example, in order to grant access to the agents of a given customer to the "Sales-team", a policy that specifies what actions and on which agents these actions can be carried out must be created. The required policy can be defined like the following one:
 
 .. code-block:: json
+    :class: output
 
     {
       "name": "customer_x_agents",
@@ -151,7 +152,6 @@ To create a new user, make a request to :api-ref:`POST /security/users <operatio
 This information needs to be specified in order to create a new user. As an example, its name will be "sales-member-1":
 
 .. code-block:: json
-    :emphasize-lines: 4
 
     {
       "username": "sales-member-1",
