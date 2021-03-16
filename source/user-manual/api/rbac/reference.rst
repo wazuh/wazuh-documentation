@@ -101,6 +101,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `security:create_user`_
         - `security:create`_
         - `security:delete`_
+        - `security:edit_run_as`_
         - `security:read_config`_
         - `security:read`_
         - `security:revoke`_
@@ -563,6 +564,10 @@ security:delete
 - :api-ref:`DELETE /security/users <operation/api.controllers.security_controller.delete_users>` (`user:id`_)
 - :api-ref:`DELETE /security/users/{user_id}/roles <operation/api.controllers.security_controller.remove_user_role>` (`user:id`_, `role:id`_)
 
+security:edit_run_as
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>` (`*:*`_)
+
 security:read_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>` (`*:*`_)
@@ -955,6 +960,7 @@ Provide full access to all security related functionalities.
       actions:
         - security:create
         - security:create_user
+        - security:edit_run_as
         - security:read_config
         - security:update_config
         - security:revoke
@@ -1036,6 +1042,7 @@ Provide full access to all users related functionalities.
     resourceless:
       actions:
         - security:create_user
+        - security:edit_run_as
         - security:revoke
       resources:
         - '*:*:*'
@@ -1047,6 +1054,19 @@ Provide full access to all users related functionalities.
         - security:delete
       resources:
         - user:id:*
+      effect: allow
+
+users_modify_run_as
+^^^^^^^^^^^^^^^^^^^
+Provides the capability to modify the users' run_as parameter.
+
+.. code-block:: yaml
+
+    flag:
+      actions:
+        - security:edit_run_as
+      resources:
+        - '*:*:*'
       effect: allow
 
 vulnerability_read
