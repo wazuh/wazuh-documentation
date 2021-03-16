@@ -22,7 +22,7 @@ Options
 - `enabled`_
 - `interval`_
 - `run_on_start`_
-- `ignore_time`_
+- `min_full_scan_interval`_
 - `provider`_
 
 +---------------------------+-----------------------------+
@@ -34,7 +34,7 @@ Options
 +---------------------------+-----------------------------+
 | `run_on_start`_           | yes, no                     |
 +---------------------------+-----------------------------+
-| `ignore_time`_            | A positive number (seconds) |
+| `min_full_scan_interval`_ | A positive number (seconds) |
 +---------------------------+-----------------------------+
 | `provider`_               | A valid vulnerability vendor|
 +---------------------------+-----------------------------+
@@ -77,12 +77,12 @@ Runs updates and vulnerabilities scans immediately when service is started.
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
-.. _vuln_det_ignore_time:
+.. _vuln_det_min_full_scan_interval:
 
-ignore_time
-^^^^^^^^^^^^
+min_full_scan_interval
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Time during which vulnerabilities that have already been alerted will be ignored. When this time hasn't passed yet, only :ref:`partial scans <vuln_det_scan_types>` will be performed.
+Time during which a full scan will not be performed even if the CVEs database is updated. When this time has passed, only a :ref:`full scan <vuln_det_scan_types>` will be performed if the CVEs database has changed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
@@ -272,7 +272,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
     <vulnerability-detector>
         <enabled>no</enabled>
         <interval>5m</interval>
-        <ignore_time>6h</ignore_time>
+        <min_full_scan_interval>6h</min_full_scan_interval>
         <run_on_start>yes</run_on_start>
 
         <!-- Ubuntu OS vulnerabilities -->
