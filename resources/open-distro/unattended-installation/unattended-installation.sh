@@ -378,9 +378,9 @@ installElasticsearch() {
         else
             logger "Certificates created"
         fi     
-        cp ~/certs/elasticsearch* /etc/elasticsearch/certs/
-        cp ~/certs/root-ca.pem /etc/elasticsearch/certs/
-        cp ~/certs/admin* /etc/elasticsearch/certs/
+        eval "cp ~/certs/elasticsearch* /etc/elasticsearch/certs/ ${debug}"
+        eval "cp ~/certs/root-ca.pem /etc/elasticsearch/certs/ ${debug}"
+        eval "cp ~/certs/admin* /etc/elasticsearch/certs/ ${debug}"
         
         # Configure JVM options for Elasticsearch
         ram_gb=$(free -g | awk '/^Mem:/{print $2}')
@@ -476,9 +476,9 @@ installKibana() {
         eval "mkdir /etc/kibana/certs ${debug}"
         eval "cp ~/certs/kibana* /etc/kibana/certs/ ${debug}"
         eval "cp ~/certs/root-ca.pem /etc/kibana/certs/ ${debug}"
-        chown -R kibana:kibana /etc/kibana/
-        chmod -R 500 /etc/kibana/certs
-        chmod 440 /etc/kibana/certs/kibana*        
+        eval "chown -R kibana:kibana /etc/kibana/ ${debug}"
+        eval "chmod -R 500 /etc/kibana/certs ${debug}"
+        eval "chmod 440 /etc/kibana/certs/kibana* ${debug}"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node ${debug}"
 
         # Start Kibana
