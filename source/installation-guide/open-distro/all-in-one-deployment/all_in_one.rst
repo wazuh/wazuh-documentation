@@ -224,8 +224,8 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
     .. code-block:: console
 
       # mkdir /etc/filebeat/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/filebeat/certs/
-      # mv /etc/elasticsearch/certs/filebeat* /etc/filebeat/certs/
+      # cp ~/certs/root-ca.pem /etc/filebeat/certs/
+      # cp ~/certs/filebeat* /etc/filebeat/certs/
 
 #. Enable and start the Filebeat service:
 
@@ -312,9 +312,11 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
       # mkdir /etc/kibana/certs
-      # cp /etc/elasticsearch/certs/root-ca.pem /etc/kibana/certs/
-      # mv /etc/elasticsearch/certs/kibana_http.key /etc/kibana/certs/kibana.key
-      # mv /etc/elasticsearch/certs/kibana_http.pem /etc/kibana/certs/kibana.pem
+      # cp ~/certs/kibana* /etc/kibana/certs/
+      # cp ~/certs/root-ca.pem /etc/kibana/certs/
+      # chown -R kibana:kibana /etc/kibana/
+      # chmod -R 500 /etc/kibana/certs
+      # chmod 440 /etc/kibana/certs/kibana*  
 
 #. Link Kibana's socket to privileged port 443:
 

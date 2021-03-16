@@ -5,7 +5,6 @@
   .. code-block:: console
 
     # mkdir /etc/elasticsearch/certs
-    # cd /etc/elasticsearch/certs
 
 * Download the Wazuh certificates tool and the configuration file:
 
@@ -19,5 +18,13 @@
   .. code-block:: console
 
     #  bash ~/wazuh-cert-tool.sh
+
+* Copy the certificates into the Elasticsearch location
+
+  .. code-block:: console
+
+    # cp ~/certs/elasticsearch* /etc/elasticsearch/certs/
+    # cp ~/certs/root-ca.pem /etc/elasticsearch/certs/
+    # cp ~/certs/admin* /etc/elasticsearch/certs/
 
 .. End of include file
