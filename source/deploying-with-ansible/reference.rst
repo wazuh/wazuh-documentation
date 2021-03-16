@@ -472,7 +472,7 @@ Wazuh Manager
     wazuh_manager_vulnerability_detector:
       enabled: 'no'
       interval: '5m'
-      ignore_time: '6h'
+      min_full_scan_interval: '6h'
       run_on_start: 'yes'
       providers:
         - enabled: 'no'
