@@ -94,7 +94,7 @@ createBackUp() {
     echo "Creating backup..."
     eval "mkdir /usr/share/elasticsearch/backup ${VERBOSE}"
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} ${VERBOSE}"
+    eval "./securityadmin.sh -backup /usr/share/elasticsearch/backup -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: The backup could not be created"
         exit 1;
@@ -170,7 +170,7 @@ runSecurityAdmin() {
     
     echo "Loading changes..."
     eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -f /usr/share/elasticsearch/backup/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key -icl -h ${IP} ${VERBOSE}"
+    eval "./securityadmin.sh -f /usr/share/elasticsearch/backup/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl -h ${IP} ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
