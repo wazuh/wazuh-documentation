@@ -608,11 +608,6 @@ $wazuh_api_port
 
   `Default 55000`
 
-$wazuh_api_behind_proxy_server
-  Set this option to “yes” in case the Wazuh API is running behind a proxy server.
-
-  `Default true`
-
 $wazuh_api_https_enabled
   Enable or disable SSL (https) in the Wazuh API.
 
@@ -936,10 +931,7 @@ $command_name
   Human readable name for wazuh::activeresponse usage.
 
 $command_executable
-  Name of the executable. OSSEC comes preloaded with disable-account.sh, host-deny.sh, ipfw.sh, pf.sh, route-null.sh, firewall-drop.sh, ipfw_mac.sh, ossec-tweeter.sh, restart-ossec.sh.
-
-$command_expect
-  `Default srcip`
+  Name of the executable. WAZUH comes preloaded with disable-account, host-deny, ipfw, pf, route-null, firewall-drop, wazuh-slack, restart-wazuh.
 
 $timeout_allowed
   `Default true`

@@ -144,6 +144,7 @@ installPrerequisites() {
         eval "zypper -n install zip unzip curl $debug"
     elif [ $sys_type == "apt-get" ]
     then
+        eval "apt-get update -q $debug"
         eval "apt-get install curl apt-transport-https zip unzip lsb-release libcap2-bin -y -q $debug"
         eval "apt-get update -q $debug"
     fi
@@ -214,13 +215,13 @@ installElasticsearch() {
 
     if [ $sys_type == "yum" ]
     then
-        eval "yum install elasticsearch-7.9.3 -y -q $debug"
+        eval "yum install elasticsearch-7.10.2 -y -q $debug"
     elif [ $sys_type == "apt-get" ] 
     then
-        eval "apt-get install elasticsearch=7.9.3 -y -q $debug"
+        eval "apt-get install elasticsearch=7.10.2 -y -q $debug"
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install elasticsearch-7.9.3 $debug"
+        eval "zypper -n install elasticsearch-7.10.2 $debug"
     fi
 
     if [  "$?" != 0  ]
@@ -231,7 +232,7 @@ installElasticsearch() {
         logger "Done"
 
         logger "Configuring Elasticsearch..."
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/unattended-installation/distributed/templates/elasticsearch_unattended.yml --max-time 300 $debug"
 
         if [ -n "$single" ]
         then
@@ -418,13 +419,13 @@ installKibana() {
     logger "Installing Kibana..."
     if [ $sys_type == "yum" ]
     then
-        eval "yum install kibana-7.9.3 -y -q  $debug"    
+        eval "yum install kibana-7.10.2 -y -q  $debug"    
     elif [ $sys_type == "zypper" ] 
     then
-        eval "zypper -n install kibana-7.9.3 $debug"
+        eval "zypper -n install kibana-7.10.2 $debug"
     elif [ $sys_type == "apt-get" ] 
         then
-        eval "apt-get install kibana=7.9.3 -y -q  $debug"
+        eval "apt-get install kibana=7.10.2 -y -q  $debug"
     fi
     if [  "$?" != 0  ]
     then
@@ -432,13 +433,12 @@ installKibana() {
         exit 1;
     else
         disableRepos
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
-        eval "cd /usr/share/kibana $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/optimize $debug"
-        eval "chown -R kibana:kibana /usr/share/kibana/plugins $debug"        
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.3-1.zip $debug"
-        if [  "$?" != 0  ]
-        then
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/unattended-installation/distributed/templates/kibana_unattended.yml --max-time 300 $debug"
+        eval "mkdir /usr/share/kibana/data ${debug}"
+        eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
+        eval "cd /usr/share/kibana ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.2_7.10.2-1.zip ${debug}"
+        if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
         fi
@@ -510,8 +510,8 @@ initializeKibana() {
     wip="${wip//$rw1}"
     wip="${wip//$rw2}"
 
-    conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/optimize/wazuh/config/wazuh.yml)"
-    echo "$conf" > /usr/share/kibana/optimize/wazuh/config/wazuh.yml  
+    conf="$(awk '{sub("url: https://localhost", "url: https://'"${wip}"'")}1' /usr/share/kibana/data/wazuh/config/wazuh.yml)"
+    echo "$conf" > /usr/share/kibana/data/wazuh/config/wazuh.yml  
     echo $'\nYou can access the web interface https://'${kip}'. The credentials are elastic:'$epassword''    
   
 }

@@ -9,17 +9,22 @@
 # Foundation.
 
 ## Check if system is based on yum or apt-get
-ips=()
+char="."
 debug='> /dev/null 2>&1'
-if [ -n "$(command -v yum)" ]
-then
+WAZUH_VER="4.1.2"
+WAZUH_REV="1"
+ELK_VER="7.10.0"
+OD_VER="1.12.0"
+OD_REV="1"
+if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
-elif [ -n "$(command -v zypper)" ]
-then
-    sys_type="zypper"
-elif [ -n "$(command -v apt-get)" ]
-then
-    sys_type="apt-get"
+    sep="-"
+elif [ -n "$(command -v zypper)" ]; then
+    sys_type="zypper"   
+    sep="-"  
+elif [ -n "$(command -v apt-get)" ]; then
+    sys_type="apt-get"   
+    sep="="
 fi
 
 logger() {
@@ -153,11 +158,10 @@ addWazuhrepo() {
 installWazuh() {
 
     logger "Installing the Wazuh manager..."
-    if [ ${sys_type} == "zypper" ]
-    then
-        eval "zypper -n install wazuh-manager ${debug}"
+    if [ ${sys_type} == "zypper" ]; then
+        eval "zypper -n install wazuh-manager-${WAZUH_VER}-${WAZUH_REV} ${debug}"
     else
-        eval "${sys_type} install wazuh-manager -y -q ${debug}"
+        eval "${sys_type} install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]
     then
@@ -179,20 +183,19 @@ installFilebeat() {
     fi
 
     logger "Installing Filebeat..."
-
-    if [ ${sys_type} == "zypper" ]
-    then
-        eval "zypper -n install filebeat ${debug}"
+    
+    if [ ${sys_type} == "zypper" ]; then
+        eval "zypper -n install filebeat-${ELK_VER} ${debug}"
     else
-        eval "${sys_type} install filebeat -y -q  ${debug}"
+        eval "${sys_type} install filebeat${sep}${ELK_VER} -y -q  ${debug}"
     fi
     if [  "$?" != 0  ]
     then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/unattended-installation/distributed/templates/filebeat.yml --max-time 300 ${debug}"
-        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
+        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/unattended-installation/distributed/templates/filebeat.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
     fi

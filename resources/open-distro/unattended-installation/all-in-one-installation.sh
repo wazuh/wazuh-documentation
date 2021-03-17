@@ -11,12 +11,20 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='> /dev/null 2>&1'
+WAZUH_VER="4.1.2"
+WAZUH_REV="1"
+ELK_VER="7.10.0"
+OD_VER="1.12.0"
+OD_REV="1"
 if [ -n "$(command -v yum)" ]; then
     sys_type="yum"
+    sep="-"
 elif [ -n "$(command -v zypper)" ]; then
-    sys_type="zypper"
+    sys_type="zypper"   
+    sep="-"  
 elif [ -n "$(command -v apt-get)" ]; then
-    sys_type="apt-get"
+    sys_type="apt-get"   
+    sep="="
 fi
 
 logger() {
@@ -93,7 +101,7 @@ installPrerequisites() {
         eval "yum install curl unzip wget libcap -y -q ${debug}"
         eval "yum install java-11-openjdk-devel -y -q ${debug}"
         if [ "$?" != 0 ]; then
-            os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
+            os=$(cat /etc/os-release | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
             if [ -z "${os}" ]; then
                 os="centos"
             fi
@@ -109,8 +117,12 @@ installPrerequisites() {
                 echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/2/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
             elif [ ${lv} == "AMI" ]; then
                 echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/1/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+            elif [ ${os} == "rhel" ]; then
+                wget https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.10%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
+                tar xzf OpenJDK11U-jdk_x64_linux_hotspot_11.0.10_9.tar.gz
+                export PATH=$PWD/jdk-11.0.10+9/bin:$PATH
             else
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
+                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
                 conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
                 echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
             fi
@@ -128,6 +140,7 @@ installPrerequisites() {
         fi
         export JAVA_HOME=/usr/
     elif [ ${sys_type} == "apt-get" ]; then
+        eval "apt-get update -q ${debug}"
         eval "apt-get install apt-transport-https curl unzip wget libcap2-bin -y -q ${debug}"
 
         if [ -n "$(command -v add-apt-repository)" ]; then
@@ -178,9 +191,9 @@ installWazuh() {
 
     logger "Installing the Wazuh manager..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install wazuh-manager ${debug}"
+        eval "zypper -n install wazuh-manager-${WAZUH_VER}-${WAZUH_REV} ${debug}"
     else
-        eval "${sys_type} install wazuh-manager -y -q ${debug}"
+        eval "${sys_type} install wazuh-manager${sep}${WAZUH_VER}-${WAZUH_REV} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Wazuh installation failed"
@@ -198,11 +211,11 @@ installElasticsearch() {
     logger "Installing Open Distro for Elasticsearch..."
 
     if [ ${sys_type} == "yum" ]; then
-        eval "yum install opendistroforelasticsearch -y -q ${debug}"
+        eval "yum install opendistroforelasticsearch-${OD_VER}-${OD_REV} -y -q ${debug}"
     elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch ${debug}"
+        eval "zypper -n install opendistroforelasticsearch-${OD_VER}-${OD_REV} ${debug}"
     elif [ ${sys_type} == "apt-get" ]; then
-        eval "apt-get install elasticsearch-oss opendistroforelasticsearch -y -q ${debug}"
+        eval "apt-get install elasticsearch-oss opendistroforelasticsearch=${OD_VER}-${OD_REV} -y -q ${debug}"
     fi
 
     if [  "$?" != 0  ]; then
@@ -213,16 +226,16 @@ installElasticsearch() {
 
         logger "Configuring Elasticsearch..."
 
-        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
-        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
+        eval "curl -so /etc/elasticsearch/elasticsearch.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/roles.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/roles_mapping.yml --max-time 300 ${debug}"
+        eval "curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/elasticsearch/roles/internal_users.yml --max-time 300 ${debug}"
         eval "rm /etc/elasticsearch/esnode-key.pem /etc/elasticsearch/esnode.pem /etc/elasticsearch/kirk-key.pem /etc/elasticsearch/kirk.pem /etc/elasticsearch/root-ca.pem -f ${debug}"
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
         eval "curl -so ~/search-guard-tlstool-1.8.zip https://maven.search-guard.com/search-guard-tlstool/1.8/search-guard-tlstool-1.8.zip --max-time 300 ${debug}"
         eval "unzip ~/search-guard-tlstool-1.8.zip -d ~/searchguard ${debug}"
-        eval "curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
+        eval "curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/search-guard-aio.yml --max-time 300 ${debug}"
         eval "chmod +x ~/searchguard/tools/sgtlstool.sh ${debug}"
         eval "bash ~/searchguard/tools/sgtlstool.sh -c ~/searchguard/search-guard.yml -ca -crt -t /etc/elasticsearch/certs/ ${debug}"
         if [  "$?" != 0  ]; then
@@ -245,14 +258,13 @@ installElasticsearch() {
 
         jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
         if [ "${jv}" == "1.8.0" ]; then
-            ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
             echo "root hard nproc 4096" >> /etc/security/limits.conf
             echo "root soft nproc 4096" >> /etc/security/limits.conf
             echo "elasticsearch hard nproc 4096" >> /etc/security/limits.conf
             echo "elasticsearch soft nproc 4096" >> /etc/security/limits.conf
             echo "bootstrap.system_call_filter: false" >> /etc/elasticsearch/elasticsearch.yml
-        fi
-
+        fi      
+        eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
         echo "Initializing Elasticsearch..."
@@ -263,8 +275,8 @@ installElasticsearch() {
 
         eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
         eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin.key ${debug}"
-
         echo "Done"
+        
     fi
 
 }
@@ -275,16 +287,16 @@ installFilebeat() {
     logger "Installing Filebeat..."
 
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install filebeat ${debug}"
+        eval "zypper -n install filebeat-${ELK_VER} ${debug}"
     else
-        eval "${sys_type} install filebeat -y -q  ${debug}"
+        eval "${sys_type} install filebeat${sep}${ELK_VER} -y -q  ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Filebeat installation failed"
         exit 1;
     else
-        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
-        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
+        eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/filebeat/7.x/filebeat_all_in_one.yml --max-time 300  ${debug}"
+        eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.1/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
         eval "curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz --max-time 300 | tar -xvz -C /usr/share/filebeat/module ${debug}"
         eval "mkdir /etc/filebeat/certs ${debug}"
@@ -304,19 +316,19 @@ installKibana() {
 
     logger "Installing Open Distro for Kibana..."
     if [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install opendistroforelasticsearch-kibana ${debug}"
+        eval "zypper -n install opendistroforelasticsearch-kibana-${OD_VER} ${debug}"
     else
-        eval "${sys_type} install opendistroforelasticsearch-kibana -y -q ${debug}"
+        eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y -q ${debug}"
     fi
     if [  "$?" != 0  ]; then
         echo "Error: Kibana installation failed"
         exit 1;
     else
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
-        eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
-        eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/kibana/7.x/kibana_all_in_one.yml --max-time 300 ${debug}"
+        eval "mkdir /usr/share/kibana/data ${debug}"
+        eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.2_7.10.0-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
