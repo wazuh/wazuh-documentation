@@ -96,7 +96,7 @@ Now, to create and configure the *indexes.conf* file, execute the following *com
 
 .. code-block:: console
 
-  # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.10/extensions/splunk/peer-indexes.conf
+  # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
 This is the content of that file:
 

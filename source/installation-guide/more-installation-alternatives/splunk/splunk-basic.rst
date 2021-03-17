@@ -55,13 +55,13 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
       .. code-block:: console
 
-        # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_SPLUNK_LATEST|/extensions/splunk/peer-indexes.conf
+        # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
 
     b) Create ``ìnputs.conf``:
 
       .. code-block:: console
 
-        # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_SPLUNK_LATEST|/extensions/splunk/peer-inputs.conf
+        # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/indexer/inputs.conf
 
 4. Ensure Splunk v|SPLUNK_LATEST| is installed in ``/opt/splunk`` and start the service:
 

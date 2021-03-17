@@ -54,7 +54,9 @@ Installation
 
 #. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
-    By default, the Wazuh API port is ``55000``. The default username and password is ``foo:bar``. It is possible to check the connection by pressing the *Check connection* button on each Wazuh API entry. A successful message appears on the bottom right corner if the connection is established.
+    By default, the Wazuh API port is ``55000``. The default username and password is ``wazuh:wazuh``. 
+    
+    Once added the API, it is possible to check the connection by pressing the *Check connection* button on each Wazuh API entry. A successful message appears on the bottom right corner if the connection is established.
 
     .. note::
       You can get more information about how to set up the credentials at :ref:`securing_api`.
@@ -63,20 +65,6 @@ Installation
       :title: App initial configuration
       :align: center
       :width: 100%
-
-    If you want to add the ``Wazuh API credentials`` more quickly (for instance, for deployment purposes) you can execute the following command:
-
-    .. code-block:: console
-
-      # curl -X POST "http://<SPLUNK_IP>:<SPLUNK_PORT>/en-US/custom/SplunkAppForWazuh/manager/add_api?url=<WAZUH_API_URL>&portapi=<WAZUH_API_PORT>&userapi=<WAZUH_API_USERNAME>&passapi=<WAZUH_API_PASSWORD>"
-
-    Note the following:
-
-    - ``<SPLUNK_IP>`` is the ``hostname or IP address`` of the Splunk instance where the Wazuh app for Splunk was installed.
-
-    - ``<SPLUNK_PORT>`` is the ``port`` of the Splunk instance where the Wazuh app for Splunk was installed. By default, it is 8000.
-
-    - ``<WAZUH_API_URL>``, ``<WAZUH_API_PORT>``, ``<WAZUH_API_USERNAME>`` and ``<WAZUH_API_PASSWORD>`` represent the ``Wazuh API credentials`` to be stored on the Wazuh app for Splunk. Keep in mind that the Wazuh API URL must include ``http://`` or ``https://``, depending on the current configuration.
 
 When the Wazuh app for Splunk is installed, the next step consists on installing and configuring :ref:`Splunk forwarder <splunk_forwarder>`.
 

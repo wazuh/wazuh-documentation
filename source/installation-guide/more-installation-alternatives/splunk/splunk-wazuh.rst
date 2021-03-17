@@ -186,13 +186,13 @@ This section explains how to configure the Splunk Forwarder to send alerts to th
 
             .. code-block:: console
 
-                # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_SPLUNK_LATEST|/extensions/splunk/props.conf
+                # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/forwarder/props.conf
 
         #. Download and insert the ``inputs.conf`` template:
 
             .. code-block:: console
 
-                # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_SPLUNK_LATEST|/extensions/splunk/inputs.conf
+                # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_LATEST|-|SPLUNK_LATEST|/setup/forwarder/inputs.conf
 
         #. Set the Wazuh manager hostname:
 
