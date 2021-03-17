@@ -1,4 +1,4 @@
-server.host: "<kibana-ip>"
+server.host: 0.0.0.0
 elasticsearch.hosts: https://<elasticsearch-ip>:9200
 server.port: 443
 elasticsearch.ssl.verificationMode: certificate
