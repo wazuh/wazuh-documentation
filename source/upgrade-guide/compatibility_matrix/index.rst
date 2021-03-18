@@ -122,10 +122,8 @@ The Wazuh app for Kibana requires compatibility between two different components
   - With the **Elastic Stack**, it is only compatible with the exact same version.
 
 +-----------------------------------+------------------------------------+---------------------------+
-|                                   |                                    |                           |
-+   **Wazuh version**               +     **Elastic Stack version**      +  **Open Distro version**  +
-|                                   |                                    |                           |
-+-----------------------------------+------------------------------------+---------------------------+
+|     Wazuh version                 |       Elastic Stack version        |    Open Distro version    |
++===================================+====================================+===========================+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                              | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                              |                           |
@@ -142,10 +140,8 @@ The Splunk app for Wazuh requires compatibility between two different components
   - With **Splunk**, it is only compatible with the exact same version.
 
 +---------------------------------+---------------------------+
-|                                 |                           |
-+ **API and Splunk App version**  +    **Splunk version**     +
-|                                 |                           |
-+---------------------------------+---------------------------+
+| API and Splunk App version      |    Splunk version         |       
++=================================+===========================+
 |              4.0.4              |     8.0.4, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
 
