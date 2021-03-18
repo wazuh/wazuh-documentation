@@ -82,7 +82,7 @@ Runs updates and vulnerabilities scans immediately when service is started.
 min_full_scan_interval
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Time during which a full scan will not be performed even if the CVEs database is updated. When this time has passed, a :ref:`full scan <vuln_det_scan_types>` will be performed only if the CVEs database has changed.
+The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :ref:`full scan <vuln_det_scan_types>` will be performed only if the CVEs database has changed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
