@@ -299,7 +299,3 @@ This section explains how to configure the Splunk Forwarder to send alerts to th
 
 To uninstall Wazuh and the Splunk forwarder, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_splunk>`.
 
-Next steps
-----------
-
-The next step consists of :ref:`installing Kibana <kibana>`.
