@@ -7,7 +7,7 @@
 Customize agents status indexation
 ==================================
 
-The Wazuh app for Splunk has the ability to collect and index agents' status data periodically. This information is stored on a separate index called ``wazuh-monitoring-3x``. It comes enabled by default, but it's possible to disable it or adjust the polling frequency.
+The Wazuh app for Splunk has the ability to collect and index agents' status data periodically. This information is stored on a separate index called ``wazuh-monitoring``. It comes enabled by default, but it's possible to disable it or adjust the polling frequency.
 
 .. warning::
   At this moment, this feature only works when Splunk is installed using the :ref:`single-instance <splunk_basic>` mode.
@@ -19,7 +19,7 @@ To do this, open the inputs file located at ``/opt/splunk/etc/apps/SplunkAppForW
 
   [script:///opt/splunk/etc/apps/SplunkAppForWazuh/bin/get_agents_status.py]
   disabled = false
-  index = wazuh-monitoring-3x
+  index = wazuh-monitoring
   interval = 0 * * * *
   sourcetype = _json
 

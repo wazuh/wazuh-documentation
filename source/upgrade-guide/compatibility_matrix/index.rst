@@ -146,6 +146,8 @@ The Splunk app for Wazuh requires compatibility between two different components
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
 +---------------------------------+---------------------------+
+|              4.0.4              |     8.0.4, |SPLUNK_LATEST|          |
++---------------------------------+---------------------------+
 |              3.13.2             |     7.3.5, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
 |              3.13.1             |     7.3.5, |SPLUNK_LATEST|          |
