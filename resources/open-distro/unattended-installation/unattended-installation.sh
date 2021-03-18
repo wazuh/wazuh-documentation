@@ -638,6 +638,11 @@ healthCheck() {
 
 }
 
+changePasswords() {
+    eval "curl -so ~/wazuh-passwords-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/wazuh-passwords-tool.sh --max-time 300 ${debug}"
+    eval "bash ~/wazuh-passwords-tool.sh -a ${debug}"    
+}
+
 checkInstallation() {
 
     logger "Checking the installation..."
@@ -664,6 +669,7 @@ checkInstallation() {
     done    
     echo $'\nInstallation finished'
     echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:admin'
+
     exit 0;
 
 }
