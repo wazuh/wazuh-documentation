@@ -23,7 +23,7 @@ To compile the code with ``make``, the working directory must be where the ``MAK
   # make <OPTIONS>
 
 .. note::
-      By default, the ``make deps`` command will download the necessary pre-compiled dependencies for manager and agent nodes. In case it is a Windows agent node, it is necessary to indicate ``TARGET=winagent`` additionally.
+      By default, the ``make deps`` command will download the necessary pre-compiled dependencies for manager nodes. To download the dependencies of the agent type nodes, it is necessary to indicate ``TARGET=agent`` or ``TARGET=winagent`` in case it is a Windows agent.
 
 .. note::
       To download the external dependencies without pre-compiled files, the ``make deps`` command will need to be executed with the ``EXTERNAL_SRC_ONLY=yes`` flag. The external dependencies will be built as part of the Wazuh compilation process.
