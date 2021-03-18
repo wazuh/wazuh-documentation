@@ -49,26 +49,7 @@ rollBack() {
             eval "apt remove --purge wazuh-manager -y ${debug}"
         fi 
         eval "rm -rf /var/ossec/ ${debug}"
-    fi
-
-    if [ -n "${javainstalled}" ]; then
-        echo "Removing Java Developent Kit..."
-        if [ "${sys_type}" == "yum" ]; then
-            eval "yum remove java-11* -y ${debug}"
-        elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n remove java-11* ${debug}"
-        elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt remove --purge openjdk-11-j* -y ${debug}"
-        fi 
-
-        if [ "${sys_type}" == "yum" ]; then
-            eval "yum clean all -y ${debug}"
-        elif [ "${sys_type}" == "zypper" ]; then
-            eval "zypper -n packages --orphaned ${debug}"
-        elif [ "${sys_type}" == "apt-get" ]; then
-            eval "apt autoremove -y ${debug}"
-        fi         
-    fi      
+    fi     
 
     if [ -n "${elasticinstalled}" ]; then
         echo "Removing Elasticsearch..."
@@ -212,70 +193,6 @@ installPrerequisites() {
     fi          
 }
 
-## Install the required packages for the installation
-installJava() {
-
-    logger "Installing Java Development Kit..."
-
-    if [ ${sys_type} == "yum" ]; then
-        eval "yum install java-11-openjdk-devel -y ${debug}"
-        if [ "$?" != 0 ]; then
-            os=$(cat /etc/os-release > /dev/null 2>&1 | awk -F"ID=" '/ID=/{print $2; exit}' | tr -d \")
-            if [ -z "${os}" ]; then
-                os="centos"
-            fi
-            lv=$(cat /etc/os-release | grep  'PRETTY_NAME="')
-            rm="PRETTY_NAME="
-            rmc='"'
-            ral="Amazon Linux "
-            lv="${lv//$rm}"
-            lv="${lv//$rmc}"
-            lv="${lv//$ral}"
-            lv=$(echo "$lv" | awk '{print $1;}')
-            if [ ${lv} == "2" ]; then
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/2/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-            elif [ ${lv} == "AMI" ]; then
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=https://adoptopenjdk.jfrog.io/artifactory/rpm/amazonlinux/1/x86_64\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-            else
-                echo -e '[AdoptOpenJDK] \nname=AdoptOpenJDK \nbaseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/system-ver/$releasever/$basearch\nenabled=1\ngpgcheck=1\ngpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public' | eval "tee /etc/yum.repos.d/adoptopenjdk.repo ${debug}"
-                conf="$(awk '{sub("system-ver", "'"${os}"'")}1' /etc/yum.repos.d/adoptopenjdk.repo)"
-                echo "$conf" > /etc/yum.repos.d/adoptopenjdk.repo 
-            fi
-            eval "yum install adoptopenjdk-11-hotspot -y ${debug}"
-        fi
-        export JAVA_HOME=/usr/
-    elif [ ${sys_type} == "zypper" ]; then
-        eval "zypper -n install java-11-openjdk-devel ${debug}"
-        if [ "$?" != 0 ]; then
-            eval "zypper ar -f http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/opensuse/15.0/$(uname -m) adoptopenjdk ${debug}" | echo 'a'
-            eval "zypper -n install adoptopenjdk-11-hotspot ${debug} "
-
-        fi    
-        export JAVA_HOME=/usr/    
-    elif [ ${sys_type} == "apt-get" ]; then
-        if [ -n "$(command -v add-apt-repository)" ]; then
-            eval "add-apt-repository ppa:openjdk-r/ppa -y ${debug}"
-        else
-            echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
-        fi
-        eval "apt-get update -q ${debug}"
-        eval "apt-get install openjdk-11-jdk -y ${debug}" 
-        if [  "$?" != 0  ]; then
-            logger "JDK installation failed."
-            exit 1;
-        fi
-        export JAVA_HOME=/usr/
-        
-    fi
-
-    if [  "$?" != 0  ]; then
-        echo "Error: Prerequisites could not be installed"
-        exit 1;
-    else
-        logger "Done"
-    fi  
-
-}
 
 ## Add the Wazuh repository
 addWazuhrepo() {
@@ -368,6 +285,7 @@ installElasticsearch() {
         echo "    ip:" >> ~/instances.yml
         echo "    - 127.0.0.1" >> ~/instances.yml
 
+        export JAVA_HOME=/usr/share/elasticsearch/jdk/
         bash ~/wazuh-cert-tool.sh
 
         if [  "$?" != 0  ]; then
@@ -391,15 +309,7 @@ installElasticsearch() {
         fi    
         eval "sed -i "s/-Xms1g/-Xms${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
         eval "sed -i "s/-Xmx1g/-Xmx${ram}g/" /etc/elasticsearch/jvm.options ${debug}"
-
-        jv=$(java -version 2>&1 | grep -o -m1 '1.8.0' )
-        if [ "${jv}" == "1.8.0" ]; then
-            echo "root hard nproc 4096" >> /etc/security/limits.conf 
-            echo "root soft nproc 4096" >> /etc/security/limits.conf 
-            echo "elasticsearch hard nproc 4096" >> /etc/security/limits.conf 
-            echo "elasticsearch soft nproc 4096" >> /etc/security/limits.conf 
-            echo "bootstrap.system_call_filter: false" >> /etc/elasticsearch/elasticsearch.yml
-        fi      
+     
         eval "/usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_performance_analyzer ${debug}"
         # Start Elasticsearch
         startService "elasticsearch"
@@ -563,11 +473,6 @@ checkInstalled() {
         else
             kibanaversion=$(echo ${kibanainstalled} | awk '{print $2}')
         fi  
-    fi 
-
-    if [ -n "$(command -v java)" ]; then
-        javainstalled="1"
-        javaversion="$(java --version | head -1 | awk '{print $2}')"
     fi  
 
     if [ -z "${wazuhinstalled}" ] || [ -z "${elasticinstalled}" ] || [ -z "${filebeatinstalled}" ] || [ -z "${kibanainstalled}" ] && [ -n "${uninstall}" ]; then 
@@ -598,7 +503,6 @@ overwrite() {
         installWazuh
     fi
     if [ -n "${elasticinstalled}" ]; then
-        installJava
         installElasticsearch
     fi    
     if [ -n "${filebeatinstalled}" ]; then
@@ -728,7 +632,6 @@ main() {
             healthCheck           
         fi            
         installPrerequisites
-        installJava
         addWazuhrepo
         installWazuh
         installElasticsearch
@@ -739,7 +642,6 @@ main() {
         checkInstalled ow  
         healthCheck   
         installPrerequisites
-        installJava
         addWazuhrepo
         installWazuh
         installElasticsearch
