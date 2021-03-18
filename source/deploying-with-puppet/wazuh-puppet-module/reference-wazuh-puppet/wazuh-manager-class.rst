@@ -492,7 +492,7 @@ $vulnerability_detector_interval
   `Default 5m`
 
 $vulnerability_detector_min_full_scan_interval
-  Time interval which a full scan will be triggered if vulnerability database is updated with new CVEs information.
+  Time interval in which a full scan will be triggered if vulnerability database is updated with new CVEs information.
 
   `Default 6h`
 
