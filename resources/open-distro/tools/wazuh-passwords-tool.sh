@@ -158,9 +158,23 @@ changePassword() {
         for i in "${!PASSWORDS[@]}"
         do
            awk -v new=${HASHES[i]} 'prev=="'${USERS[i]}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
+
+            if [ "${USERS[i]}" == "admin" ]; then
+                adminpass=${PASSWORDS[i]}
+            elif [ "${USERS[i]}" == "admin" ]; then
+                kibanaserverpass=${PASSWORDS[i]}
+            fi
+
         done
     else
         awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
+
+        if [ "${USERS[i]}" == "admin" ]; then
+            adminpass=${PASSWORD}
+        elif [ "${USERS[i]}" == "admin" ]; then
+            kibanaserverpass=${PASSWORD}
+        fi
+
     fi
     
     if [ "${NUSER}" == "admin" ] || [ "${NUSER}" == "kibanaserver" ] || [ -n "${CHANGEALL}" ]; then
