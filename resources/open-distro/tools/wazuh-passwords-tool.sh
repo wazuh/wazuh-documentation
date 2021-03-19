@@ -162,6 +162,35 @@ changePassword() {
     else
         awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
     fi
+    
+    if [ "${NUSER}" == "admin" ] || [ "${NUSER}" == "kibanaserver" ] || [ -n "${CHANGEALL}" ]; then
+
+        if [ "${sys_type}" == "yum" ]; then
+            hasfilebeat=$(yum list installed 2>/dev/null | grep filebeat)
+        elif [ "${sys_type}" == "zypper" ]; then
+            hasfilebeat=$(zypper packages --installed | grep filebeat | grep i+ | grep noarch)
+        elif [ "${sys_type}" == "apt-get" ]; then
+            hasfilebeat=$(apt list --installed  2>/dev/null | grep filebeat)
+        fi 
+
+        if [ "${sys_type}" == "yum" ]; then
+            haskibana=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch-kibana)
+        elif [ "${sys_type}" == "zypper" ]; then
+            haskibana=$(zypper packages --installed | grep opendistroforelasticsearch-kibana | grep i+)
+        elif [ "${sys_type}" == "apt-get" ]; then
+            haskibana=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch-kibana)
+        fi     
+
+        if [ -n "${hasfilebeat}" ]; then
+        conf="$(awk '{sub("  password: admin", "  password: '${adminpass}'")}1' /etc/filebeat/filebeat.yml)"
+        echo "${conf}" > /etc/filebeat/filebeat.yml  
+        fi 
+
+        if [ -n "${haskibana}" ]; then
+            conf="$(awk '{sub("elasticsearch.password: kibanaserver", "elasticsearch.password: '${kibanaserverpass}'")}1' /etc/kibana/kibana.yml)"
+            echo "${conf}" > /etc/kibana/kibana.yml 
+        fi         
+    fi
 
 }
 
