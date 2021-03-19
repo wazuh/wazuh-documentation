@@ -239,13 +239,13 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 force_reconnect_interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done independently if a checkin attempt failed to get a response from the manager.
+Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
 
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 0s (disabled)                                                                                                                      |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 0s (disabled)                                                                                                                                    |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days), or w (weeks). |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _ip_update_interval:
 
