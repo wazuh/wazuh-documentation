@@ -21,7 +21,7 @@ This release includes new features or enhancements.
 
 **External dependencies:**
 
-- `#7943 <https://github.com/wazuh/wazuh/pull/7943>`_ Upgraded Python version from 3.8.6 to 3.9.2 and several Python dependencies. 
+- `#7943 <https://github.com/wazuh/wazuh/pull/7943>`_ Python is upgraded from 3.8.6 to 3.9.2. This upgrading includes several Phyton dependencies to be compatible with the latest stable version. 
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -33,8 +33,8 @@ This release resolves known issues.
 ======================================================  =============
 Reference                                                Resolution
 ======================================================  =============
-`#7870 <https://github.com/wazuh/wazuh/pull/7870>`_     Fixed an error in FIM when getting the files' modification time on Windows due to wrong permission flags.
-`#7873 <https://github.com/wazuh/wazuh/pull/7873>`_     Fixed a bug in Wazuh DB that truncated the output of the agents' status query towards the cluster.
+`#7870 <https://github.com/wazuh/wazuh/pull/7870>`_     In File Integrity Monitoring, the issue with files' modification time on Windows is fixed. Now, the CreateFile function works correctly and includes all the necessary permissions to examine a file when it is opened by another application.
+`#7873 <https://github.com/wazuh/wazuh/pull/7873>`_     Issue when requesting a ``sync-agent-info-get`` query to a cluster is now fixed and the response output of the agents' status query works correctly.
 ======================================================  =============
 
 **API** 
@@ -42,7 +42,7 @@ Reference                                                Resolution
 ======================================================  =============
 Reference                                                Resolution
 ======================================================  =============
-`#7906 <https://github.com/wazuh/wazuh/pull/7906>`_     Fixed validation for absolute and relative paths.
+`#7906 <https://github.com/wazuh/wazuh/pull/7906>`_     Validation for absolute and relative paths is modified to avoid inconsistencies. These changes in the ``validator.py`` module improve security verifications of paths.
 ======================================================  =============
 
 Wazuh Kibana plugin
@@ -53,10 +53,10 @@ What's new
 
 This release includes new features or enhancements. 
 
-- `#2985 <https://github.com/wazuh/wazuh-kibana-app/pull/2985>`_ Creation of index pattern after the default one is changes in Settings. 
-- `#3039 <https://github.com/wazuh/wazuh-kibana-app/pull/3039>`_ Added node name of agent list and detail.  
-- `#3041 <https://github.com/wazuh/wazuh-kibana-app/pull/3041>`_ Added loading view while the user is logging to prevent permissions prompts.  
-- `#3047 <https://github.com/wazuh/wazuh-kibana-app/pull/3047>`_ Change all dates labels to Kibana formatting time zone. 
+- `#2985 <https://github.com/wazuh/wazuh-kibana-app/pull/2985>`_ In the Settings module, you can now create and configure a new index pattern after changing the default one. This improves user experience when retrieving data from indices for queries and visualizations. 
+- `#3039 <https://github.com/wazuh/wazuh-kibana-app/pull/3039>`_ In the Agents module, the node name information is now detailed in the agents’ list and in the agent information section. With this enhancement, you can better visualize the cluster node to which each agent is responding.  
+- `#3041 <https://github.com/wazuh/wazuh-kibana-app/pull/3041>`_ A new loading view is displayed when the user is logging some tabs. This improves user experience since permission prompts are no longer shown while updating a tab.  
+- `#3047 <https://github.com/wazuh/wazuh-kibana-app/pull/3047>`_ All date labels are changed to Kibana formatting time zone for consistency.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -66,10 +66,11 @@ This release resolves known issues.
 ==============================================================    =============
 Reference                                                         Resolution
 ==============================================================    =============
-`#3028 <https://github.com/wazuh/wazuh-kibana-app/pull/3028>`_    Fixed unexpected behaviour in Roles mapping
-`#3049 <https://github.com/wazuh/wazuh-kibana-app/pull/3049>`_    Improve toast message when selecting a default API
-`#3057 <https://github.com/wazuh/wazuh-kibana-app/pull/3057>`_    Fix rule filter is no applied when you click on a rule id in other module.
-`#3062 <https://github.com/wazuh/wazuh-kibana-app/pull/3062>`_    Fixed bug changing master node configuration
-`#3063 <https://github.com/wazuh/wazuh-kibana-app/pull/3063>`_    Improved validation and prevention for caching bundles in client side
-`#3084 <https://github.com/wazuh/wazuh-kibana-app/pull/3084>`_    Rollback of invalid rule configuration file
+`#3028 <https://github.com/wazuh/wazuh-kibana-app/pull/3028>`_    In Role mapping, the issue that caused unnecessary operators to be added when editing the role mapping is now fixed and no longer affects usability.
+`#3049 <https://github.com/wazuh/wazuh-kibana-app/pull/3049>`_    When selecting a default API, the toast message is cleaner and shows the API host ID.
+`#3057 <https://github.com/wazuh/wazuh-kibana-app/pull/3057>`_    Issue with rule filter not applied when selecting a Rule ID in another module is now fixed. Now, the selected Rule ID is correctly applied throughout all modules.
+`#3062 <https://github.com/wazuh/wazuh-kibana-app/pull/3062>`_    Issue with changing master node configuration is now fixed. Now, the Wazuh API connection checking is completed successfully and no longer triggers an error when changing the configuration of the master node.
+`#3063 <https://github.com/wazuh/wazuh-kibana-app/pull/3063>`_    Issue with Wazuh crashing after reloading due to caching bundles is now fixed. Improved validations now prevent this issue from reoccurring.
+`#3086 <https://github.com/wazuh/wazuh-kibana-app/pull/3086>`_    Some errors in the Events table are now fixed. Action buttons of the rule.mitre.tactic column are repositioned correctly and Event links work after you add, remove, or move a column.
+`#3084 <https://github.com/wazuh/wazuh-kibana-app/pull/3084>`_    Invalid rule configuration file error has been fixed. The file saving method is updated and prevents rules with invalid configuration files from being saved incorrectly.
 ==============================================================    =============
