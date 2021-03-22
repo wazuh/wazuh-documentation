@@ -33,8 +33,8 @@ This release resolves known issues.
 ======================================================  =============
 Reference                                                Resolution
 ======================================================  =============
-`#7870 <https://github.com/wazuh/wazuh/pull/7870>`_     In File Integrity Monitoring, the issue with files' modification time on Windows is fixed. Now, the CreateFile function works correctly and includes all the necessary permissions to examine a file when it is opened by another application.
-`#7873 <https://github.com/wazuh/wazuh/pull/7873>`_     Issue when requesting a ``sync-agent-info-get`` query to a cluster is now fixed and the response output of the agents' status query works correctly.
+`#7870 <https://github.com/wazuh/wazuh/pull/7870>`_     In File Integrity Monitoring, the issue with files’ modification time on Windows is fixed. That prevents the agent from producing this error: ``ERROR: (6716): Could not open handle for 'c:\test\untitled spreadsheet.xlsx'. Error code: 32``
+`#7873 <https://github.com/wazuh/wazuh/pull/7873>`_     Fixed an issue in Wazuh DB that truncated the output of the agents' status query towards the cluster.
 ======================================================  =============
 
 **API** 
