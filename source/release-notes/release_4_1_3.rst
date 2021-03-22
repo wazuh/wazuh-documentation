@@ -57,6 +57,9 @@ This release includes new features or enhancements.
 - `#3039 <https://github.com/wazuh/wazuh-kibana-app/pull/3039>`_ In the Agents module, the node name information is now detailed in the agents' list and in the agent information section. With this enhancement, you can better visualize the cluster node to which each agent is reporting.  
 - `#3041 <https://github.com/wazuh/wazuh-kibana-app/pull/3041>`_ A new loading view is displayed when the user is logging some tabs. This improves user experience since permission prompts are no longer shown while updating a tab.  
 - `#3047 <https://github.com/wazuh/wazuh-kibana-app/pull/3047>`_ All date labels are changed to Kibana formatting time zone for consistency.
+- `#3048 <https://github.com/wazuh/wazuh-kibana-app/pull/3048>`_ Custom messages are now added for each possible ``run_as setup``. This improves the warning messages whenever ``run_as`` is not allowed.
+- `#3049 <https://github.com/wazuh/wazuh-kibana-app/pull/3049>`_ When selecting a default API, the toast message is cleaner and shows the API host ID.
+
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -67,10 +70,10 @@ This release resolves known issues.
 Reference                                                         Description
 ==============================================================    =============
 `#3028 <https://github.com/wazuh/wazuh-kibana-app/pull/3028>`_    In Role mapping, the issue that caused unnecessary operators to be added when editing the role mapping is now fixed and no longer affects usability.
-`#3049 <https://github.com/wazuh/wazuh-kibana-app/pull/3049>`_    When selecting a default API, the toast message is cleaner and shows the API host ID.
 `#3057 <https://github.com/wazuh/wazuh-kibana-app/pull/3057>`_    Issue with rule filter not applied when selecting a Rule ID in another module is now fixed. Now, the selected Rule ID is correctly applied throughout all modules.
 `#3062 <https://github.com/wazuh/wazuh-kibana-app/pull/3062>`_    Issue with changing master node configuration is now fixed. Now, the Wazuh API connection checking is completed successfully and no longer triggers an error when changing the configuration of the master node.
 `#3063 <https://github.com/wazuh/wazuh-kibana-app/pull/3063>`_    Issue with Wazuh crashing after reloading due to caching bundles is now fixed. Improved validations now prevent this issue from reoccurring.
+`#3066 <https://github.com/wazuh/wazuh-kibana-app/pull/3066>`_    Wrong variable declaration for macOS agents is now fixed.
 `#3084 <https://github.com/wazuh/wazuh-kibana-app/pull/3084>`_    Improved error handling when an invalid rule is configured. The file saving algorithm now prevents files with incorrect configurations from being saved.
 `#3086 <https://github.com/wazuh/wazuh-kibana-app/pull/3086>`_    Some errors in the Events table are now fixed. Action buttons of the ``rule.mitre.tactic`` column are repositioned correctly and Event links work after you add, remove, or move a column.
 ==============================================================    =============
