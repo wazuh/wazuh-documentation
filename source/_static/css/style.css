@@ -3298,7 +3298,7 @@ div.highlight pre {
   .no-latest-notice {
     position: relative;
     border: 1px solid #ffb600;
-    border-radius: 12px;
+		border-radius: 12px;
     margin: 35px 0 15px 0;
     height: auto;
     align-items: stretch;
