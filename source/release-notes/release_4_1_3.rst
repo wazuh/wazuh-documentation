@@ -31,16 +31,16 @@ This release resolves known issues.
 **Core**
 
 ======================================================  =============
-Reference                                                Resolution
+Reference                                                Description
 ======================================================  =============
-`#7870 <https://github.com/wazuh/wazuh/pull/7870>`_     In File Integrity Monitoring, the issue with files’ modification time on Windows is fixed. That prevents the agent from producing this error: ``ERROR: (6716): Could not open handle for 'c:\test\untitled spreadsheet.xlsx'. Error code: 32``
-`#7873 <https://github.com/wazuh/wazuh/pull/7873>`_     Fixed an issue in Wazuh DB that truncated the output of the agents' status query towards the cluster.
+`#7870 <https://github.com/wazuh/wazuh/pull/7870>`_     In File Integrity Monitoring, the issue with files' modification time on Windows is fixed. That prevents the agent from producing this error: ``ERROR: (6716): Could not open handle for 'c:\test\untitled spreadsheet.xlsx'. Error code: 32``
+`#7873 <https://github.com/wazuh/wazuh/pull/7873>`_     Issue in Wazuh DB that truncated the output of the agents' status query towards the cluster is fixed.
 ======================================================  =============
 
 **API** 
 
 ======================================================  =============
-Reference                                                Resolution
+Reference                                                Description
 ======================================================  =============
 `#7906 <https://github.com/wazuh/wazuh/pull/7906>`_     Validation for absolute and relative paths is modified to avoid inconsistencies. These changes in the ``validator.py`` module improve security verifications of paths.
 ======================================================  =============
@@ -54,7 +54,7 @@ What's new
 This release includes new features or enhancements. 
 
 - `#2985 <https://github.com/wazuh/wazuh-kibana-app/pull/2985>`_ In the Settings module, you can now create and configure a new index pattern after changing the default one. This improves user experience when retrieving data from indices for queries and visualizations. 
-- `#3039 <https://github.com/wazuh/wazuh-kibana-app/pull/3039>`_ In the Agents module, the node name information is now detailed in the agents’ list and in the agent information section. With this enhancement, you can better visualize the cluster node to which each agent is reporting.  
+- `#3039 <https://github.com/wazuh/wazuh-kibana-app/pull/3039>`_ In the Agents module, the node name information is now detailed in the agents' list and in the agent information section. With this enhancement, you can better visualize the cluster node to which each agent is reporting.  
 - `#3041 <https://github.com/wazuh/wazuh-kibana-app/pull/3041>`_ A new loading view is displayed when the user is logging some tabs. This improves user experience since permission prompts are no longer shown while updating a tab.  
 - `#3047 <https://github.com/wazuh/wazuh-kibana-app/pull/3047>`_ All date labels are changed to Kibana formatting time zone for consistency.
 
@@ -64,7 +64,7 @@ Resolved issues
 This release resolves known issues. 
 
 ==============================================================    =============
-Reference                                                         Resolution
+Reference                                                         Description
 ==============================================================    =============
 `#3028 <https://github.com/wazuh/wazuh-kibana-app/pull/3028>`_    In Role mapping, the issue that caused unnecessary operators to be added when editing the role mapping is now fixed and no longer affects usability.
 `#3049 <https://github.com/wazuh/wazuh-kibana-app/pull/3049>`_    When selecting a default API, the toast message is cleaner and shows the API host ID.
