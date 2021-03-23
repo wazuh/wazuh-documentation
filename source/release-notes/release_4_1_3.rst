@@ -21,7 +21,7 @@ This release includes new features or enhancements.
 
 **External dependencies:**
 
-- `#7943 <https://github.com/wazuh/wazuh/pull/7943>`_ Python is upgraded from 3.8.6 to 3.9.2. This upgrading includes several Phyton dependencies to be compatible with the latest stable version. 
+- `#7943 <https://github.com/wazuh/wazuh/pull/7943>`_ Python is upgraded from 3.8.6 to 3.9.2. This upgrading includes several Python dependencies to be compatible with the latest stable version. 
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -57,7 +57,7 @@ This release includes new features or enhancements.
 - `#3039 <https://github.com/wazuh/wazuh-kibana-app/pull/3039>`_ In the Agents module, the node name information is now detailed in the agents' list and in the agent information section. With this enhancement, you can better visualize the cluster node to which each agent is reporting.  
 - `#3041 <https://github.com/wazuh/wazuh-kibana-app/pull/3041>`_ A new loading view is displayed when the user is logging some tabs. This improves user experience since permission prompts are no longer shown while updating a tab.  
 - `#3047 <https://github.com/wazuh/wazuh-kibana-app/pull/3047>`_ All date labels are changed to Kibana formatting time zone for consistency.
-- `#3048 <https://github.com/wazuh/wazuh-kibana-app/pull/3048>`_ Custom messages are now added for each possible ``run_as setup``. This improves the warning messages whenever ``run_as`` is not allowed.
+- `#3048 <https://github.com/wazuh/wazuh-kibana-app/pull/3048>`_ Custom messages are now added for each possible ``run_as`` setup. This improves the warning messages whenever ``run_as`` is not allowed.
 - `#3049 <https://github.com/wazuh/wazuh-kibana-app/pull/3049>`_ When selecting a default API, the toast message is cleaner and shows the API host ID.
 
 
