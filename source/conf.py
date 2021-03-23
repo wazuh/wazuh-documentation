@@ -34,7 +34,7 @@ is_latest_release = True
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
 release = '4.1'
-api_tag = 'v4.1.2'
+api_tag = 'v4.1.3'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -432,12 +432,12 @@ def customReplacements(app, docname, source):
 
 custom_replacements = {
     "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.1.2",
+    "|WAZUH_LATEST|" : "4.1.3",
     "|WAZUH_LATEST_MINOR|": "4.1",
     "|WAZUH_LATEST_ANSIBLE|" : "4.1.2",
     "|WAZUH_LATEST_KUBERNETES|" : "4.1.1",
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
-    "|WAZUH_LATEST_OVA|" : "4.1.2",
+    "|WAZUH_LATEST_OVA|" : "4.1.3",
     "|WAZUH_LATEST_DOCKER|" : "4.1.2",
     "|OPEN_DISTRO_LATEST|" : "1.12.0",
     "|ELASTICSEARCH_LATEST|" : "7.10.0",
