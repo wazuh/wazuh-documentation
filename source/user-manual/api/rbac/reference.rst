@@ -42,6 +42,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `agent:delete`_
         - `agent:modify_group`_
         - `agent:read`_
+        - `agent:reconnect`_
         - `agent:restart`_
         - `agent:upgrade`_
 
@@ -317,6 +318,10 @@ agent:read
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/stats/{component} <operation/api.controllers.agent_controller.get_component_stats>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`agent:id`_, `agent:group`_)
+
+agent:reconnect
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /agents/reconnect <operation/api.controllers.agent_controller.reconnect_agents>` (`agent:id`_, `agent:group`_)
 
 agent:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -673,6 +678,7 @@ Grant full access to all agents related functionalities.
         - agent:read
         - agent:delete
         - agent:modify_group
+        - agent:reconnect
         - agent:restart
         - agent:upgrade
       resources:
