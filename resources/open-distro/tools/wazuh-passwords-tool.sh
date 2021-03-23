@@ -161,7 +161,7 @@ changePassword() {
 
             if [ "${USERS[i]}" == "admin" ]; then
                 adminpass=${PASSWORDS[i]}
-            elif [ "${USERS[i]}" == "admin" ]; then
+            elif [ "${USERS[i]}" == "kibanaserver" ]; then
                 kibanaserverpass=${PASSWORDS[i]}
             fi
 
@@ -171,7 +171,7 @@ changePassword() {
 
         if [ "${USERS[i]}" == "admin" ]; then
             adminpass=${PASSWORD}
-        elif [ "${USERS[i]}" == "admin" ]; then
+        elif [ "${USERS[i]}" == "kibanaserver" ]; then
             kibanaserverpass=${PASSWORD}
         fi
 
@@ -179,19 +179,19 @@ changePassword() {
     
     if [ "${NUSER}" == "admin" ] || [ "${NUSER}" == "kibanaserver" ] || [ -n "${CHANGEALL}" ]; then
 
-        if [ "${sys_type}" == "yum" ]; then
+        if [ "${SYS_TYPE}" == "yum" ]; then
             hasfilebeat=$(yum list installed 2>/dev/null | grep filebeat)
-        elif [ "${sys_type}" == "zypper" ]; then
+        elif [ "${SYS_TYPE}" == "zypper" ]; then
             hasfilebeat=$(zypper packages --installed | grep filebeat | grep i+ | grep noarch)
-        elif [ "${sys_type}" == "apt-get" ]; then
+        elif [ "${SYS_TYPE}" == "apt-get" ]; then
             hasfilebeat=$(apt list --installed  2>/dev/null | grep filebeat)
         fi 
 
-        if [ "${sys_type}" == "yum" ]; then
+        if [ "${SYS_TYPE}" == "yum" ]; then
             haskibana=$(yum list installed 2>/dev/null | grep opendistroforelasticsearch-kibana)
-        elif [ "${sys_type}" == "zypper" ]; then
+        elif [ "${SYS_TYPE}" == "zypper" ]; then
             haskibana=$(zypper packages --installed | grep opendistroforelasticsearch-kibana | grep i+)
-        elif [ "${sys_type}" == "apt-get" ]; then
+        elif [ "${SYS_TYPE}" == "apt-get" ]; then
             haskibana=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch-kibana)
         fi     
 
@@ -276,6 +276,8 @@ main() {
             esac
         done
 
+        export JAVA_HOME=/usr/share/elasticsearch/jdk/
+        
         if [ -n "${VERBOSEENABLED}" ]; then
             VERBOSE=""
         fi 
