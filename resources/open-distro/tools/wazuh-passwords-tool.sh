@@ -26,6 +26,39 @@ checkRoot() {
     fi 
 }
 
+restartService() {
+
+    if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
+        eval "systemctl restart $1.service ${debug}"
+        if [  "$?" != 0  ]; then
+            echo "${1^} could not be started."
+            exit 1;
+        else
+            echo "${1^} started"
+        fi  
+    elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
+        eval "/etc/init.d/$1 restart ${debug}"
+        if [  "$?" != 0  ]; then
+            echo "${1^} could not be started."
+            exit 1;
+        else
+            echo "${1^} started"
+        fi     
+    elif [ -x /etc/rc.d/init.d/$1 ] ; then
+        eval "/etc/rc.d/init.d/$1 restart ${debug}"
+        if [  "$?" != 0  ]; then
+            echo "${1^} could not be started."
+            exit 1;
+        else
+            echo "${1^} started"
+        fi             
+    else
+        echo "Error: ${1^} could not start. No service manager found on the system."
+        exit 1;
+    fi
+
+}
+
 ## Shows script usage
 getHelp() {
    echo ""
@@ -169,9 +202,9 @@ changePassword() {
     else
         awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
 
-        if [ "${USERS[i]}" == "admin" ]; then
+        if [ "${NUSER}" == "admin" ]; then
             adminpass=${PASSWORD}
-        elif [ "${USERS[i]}" == "kibanaserver" ]; then
+        elif [ "${NUSER}" == "kibanaserver" ]; then
             kibanaserverpass=${PASSWORD}
         fi
 
@@ -196,13 +229,15 @@ changePassword() {
         fi     
 
         if [ -n "${hasfilebeat}" ]; then
-        conf="$(awk '{sub("  password: admin", "  password: '${adminpass}'")}1' /etc/filebeat/filebeat.yml)"
-        echo "${conf}" > /etc/filebeat/filebeat.yml  
+            conf="$(awk '{sub("  password: admin", "  password: '${adminpass}'")}1' /etc/filebeat/filebeat.yml)"
+            echo "${conf}" > /etc/filebeat/filebeat.yml  
+            restartService "filebeat"
         fi 
 
         if [ -n "${haskibana}" ]; then
             conf="$(awk '{sub("elasticsearch.password: kibanaserver", "elasticsearch.password: '${kibanaserverpass}'")}1' /etc/kibana/kibana.yml)"
             echo "${conf}" > /etc/kibana/kibana.yml 
+            restartService "kibana"
         fi         
     fi
 
