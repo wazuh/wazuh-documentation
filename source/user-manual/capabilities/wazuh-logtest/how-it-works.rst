@@ -131,7 +131,7 @@ For the use of Wazuh-Logtest from the API there are 2 endpoints detailed below:
 ``PUT /logtest`` accept the following list of parameters as a RequestBody:
 
     * **token**: alphanumeric string.
-    * **log_format**: syslog or json.   VERIFICARRRR
+    * **log_format**: syslog or json.
     * **location**: path string.
     * **event**: string
 
