@@ -228,14 +228,22 @@ changePassword() {
             haskibana=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch-kibana)
         fi     
 
+        adminold=$(grep "password:" /etc/filebeat/filebeat.yml )
+        ra="  password: "
+        adminold="${adminold//$ra}"
+
+        kibanaserold=$(grep "password:" /etc/kibana/kibana.yml )
+        rk="elasticsearch.password: "
+        kibanaserold="${kibanaserold//$rk}"        
+
         if [ -n "${hasfilebeat}" ]; then
-            conf="$(awk '{sub("  password: admin", "  password: '${adminpass}'")}1' /etc/filebeat/filebeat.yml)"
+            conf="$(awk '{sub("  password: '${adminold}'", "  password: '${adminpass}'")}1' /etc/filebeat/filebeat.yml)"
             echo "${conf}" > /etc/filebeat/filebeat.yml  
             restartService "filebeat"
         fi 
 
         if [ -n "${haskibana}" ]; then
-            conf="$(awk '{sub("elasticsearch.password: kibanaserver", "elasticsearch.password: '${kibanaserverpass}'")}1' /etc/kibana/kibana.yml)"
+            conf="$(awk '{sub("elasticsearch.password: '${kibanaserold}'", "elasticsearch.password: '${kibanaserverpass}'")}1' /etc/kibana/kibana.yml)"
             echo "${conf}" > /etc/kibana/kibana.yml 
             restartService "kibana"
         fi         
@@ -247,8 +255,9 @@ changePassword() {
 runSecurityAdmin() {
     
     echo "Loading changes..."
-    eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
-    eval "./securityadmin.sh -f /usr/share/elasticsearch/backup/internal_users.yml -t internalusers -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem -icl -h ${IP} ${VERBOSE}"
+    eval "cp /usr/share/elasticsearch/backup/* /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ ${debug}"
+    eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
+    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
