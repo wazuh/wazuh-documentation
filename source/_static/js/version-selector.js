@@ -55,9 +55,10 @@ jQuery(function($) {
   */
 
   /* Versions main constants */
-  const currentVersion = '4.1';
+  const currentVersion = '4.2';
   const versions = [
-    {name: '4.1 (current)', url: '/current'},
+    {name: '4.2 (current)', url: '/current'},
+    {name: '4.1', url: '/4.1'},
     {name: '4.0', url: '/4.0'},
     {name: '3.13', url: '/3.13'},
     {name: '3.12', url: '/3.12'},
