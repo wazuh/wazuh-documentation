@@ -19,6 +19,8 @@ Resolved issues
 
 This release resolves known issues. 
 
+**Cluster**
+
 ======================================================  =============
 Reference                                                Description
 ======================================================  =============
