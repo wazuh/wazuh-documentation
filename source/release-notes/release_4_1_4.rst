@@ -1,4 +1,4 @@
-.. Copyright (C>`_ 2021 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _release_4_1_4:
 
