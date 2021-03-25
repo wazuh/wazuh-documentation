@@ -175,7 +175,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control stop
+          # /var/ossec/bin/wazuh-control stop
 
     
     #. After that, upgrade the Wazuh agent. Choose one option depending on the host architecture:
@@ -197,7 +197,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control start
+          # /var/ossec/bin/wazuh-control start
 
 
   .. group-tab:: Solaris 10
@@ -208,7 +208,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control stop
+          # /var/ossec/bin/wazuh-control stop
 
 
     #. Backup the ``ossec.conf`` configuration file:
@@ -253,7 +253,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
         .. code-block:: console
 
-          # /var/ossec/bin/ossec-control start
+          # /var/ossec/bin/wazuh-control start
 
 
   .. group-tab:: HP-UX
@@ -264,7 +264,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
           .. code-block:: console
 
-            # /var/ossec/bin/ossec-control stop
+            # /var/ossec/bin/wazuh-control stop
 
 
       #. Backup the ``ossec.conf`` configuration file:
@@ -296,7 +296,7 @@ To perform the upgrade locally, follow the instructions for the operating system
 
           .. code-block:: console
 
-            # /var/ossec/bin/ossec-control start
+            # /var/ossec/bin/wazuh-control start
 
 
 Once the Wazuh agent is upgraded, if it still uses UDP, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:

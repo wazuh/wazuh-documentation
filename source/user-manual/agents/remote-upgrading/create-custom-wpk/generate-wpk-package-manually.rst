@@ -85,7 +85,7 @@ Compile the WPK package using your SSL certificate and key:
 
 .. code-block:: console
 
-  # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
@@ -129,7 +129,7 @@ Compile the WPK package using the MSI package and, your SSL certificate and key:
 
 .. code-block:: console
 
-  # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
 
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.

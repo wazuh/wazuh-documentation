@@ -37,12 +37,12 @@ The minimum requirements for this type of deployment are 4 GB of RAM and 2 CPU c
 Disk space requirements depend on the alerts per second (APS) generated. The expected APS vary significantly depending on the amount and type of monitored endpoints. The following table provides an estimate of the storage per agent needed for 90 days of alerts depending on the type of monitored endpoint.
 
 +-------------------------------------------------+-----+-----------------------------+
-| Monitored endpoints                             | APS |  Storage (GB/90 days)       | 
+| Monitored endpoints                             | APS |  Storage (GB/90 days)       |
 +=================================================+=====+=============================+
-| Servers                                         | 0.25|    3.8                      |     
+| Servers                                         | 0.25|    3.8                      |
 +-------------------------------------------------+-----+-----------------------------+
-| Workstations                                    | 0.1 |    1.5                      |                   
-+-------------------------------------------------+-----+-----------------------------+       
+| Workstations                                    | 0.1 |    1.5                      |
++-------------------------------------------------+-----+-----------------------------+
 | Network devices                                 | 0.5 |    7.6                      |
 +-------------------------------------------------+-----+-----------------------------+
 
@@ -54,9 +54,7 @@ Distributed deployment
 
 In a distributed deployment, both the Wazuh server and Elastic Stack are installed on separate hosts. This configuration is recommended for production environments as it provides the high availability and scalability of the services. 
 
-The Wazuh server and Elastic Stack can each be installed as a single-node or as multi-node cluster. Kibana can either be installed in the same node as Elasticsearch, or in a dedicated host. For each node, the hardware recommendations are: 
 
-                          
 +-------------------------+-------------------------+-------------------------------+
 |                         |  Minimum                |   Recommended                 |
 +-------------------------+----------+--------------+--------------+----------------+
@@ -68,25 +66,25 @@ The Wazuh server and Elastic Stack can each be installed as a single-node or as 
 +-------------------------+----------+--------------+--------------+----------------+
 
 
-A 64-bit operating system is necessary.  
+A 64-bit operating system is necessary.
 
-Regarding the disk space requirements, the amount of data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on a Wazuh server as well as on an Elasticsearch server depending on the type of monitored endpoints. 
+Regarding the disk space requirements, the amount of data depends on the alerts per second (APS) generated. The following table shows an estimate of disk space per agent needed to store 90 days of alerts on a Wazuh server as well as on an Elasticsearch server depending on the type of monitored endpoints.
 
 
 +-------------------------------------------------+-----+-----------------------------+---------------------------+
 | Monitored endpoints                             | APS | Storage in Wazuh Manager    | Storage in Elasticsearch  |
-|                                                 |     |  (GB/90 days)               |  (GB/90 days)             | 
+|                                                 |     |  (GB/90 days)               |  (GB/90 days)             |
 +=================================================+=====+=============================+===========================+
-| Servers                                         | 0.25|    0.1                      |           3.7             |       
+| Servers                                         | 0.25|    0.1                      |           3.7             |
 +-------------------------------------------------+-----+-----------------------------+---------------------------+
-| Workstations                                    | 0.1 |    0.04                     |           1.5             |                    
-+-------------------------------------------------+-----+-----------------------------+---------------------------+       
+| Workstations                                    | 0.1 |    0.04                     |           1.5             |
++-------------------------------------------------+-----+-----------------------------+---------------------------+
 | Network devices                                 | 0.5 |    0.2                      |           7.4             |
 +-------------------------------------------------+-----+-----------------------------+---------------------------+
 
 For example, for an environment with 80 workstations, 10 servers and 10 network devices the storage needed for 90 days of alerts would be around 230 GB on the Elasticsearch server and 6 GB on the Wazuh server. 
 
-Scaling 
+Scaling
 -------
 
 In order to determine if a Wazuh server requires more resources, the following files may be monitored: ``/var/ossec/var/run/ossec-analysisd.state``  and  ``/var/ossec/var/run/ossec-remoted.state`` .

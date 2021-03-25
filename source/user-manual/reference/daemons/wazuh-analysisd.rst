@@ -1,11 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-analysisd:
+.. _wazuh-analysisd:
 
-ossec-analysisd
+wazuh-analysisd
 ===============
 
-The ``ossec-analysisd`` program receives the log messages and compares them to the rules. It then creates an alert when a log message matches an applicable rule.
+.. versionadded:: 4.2
+
+The ``wazuh-analysisd`` program receives the log messages and compares them to the rules. It then creates an alert when a log message matches an applicable rule.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
@@ -27,7 +29,7 @@ The ``ossec-analysisd`` program receives the log messages and compares them to t
 | **-V**          | Display the version and license information.                                                    |
 +-----------------+-------------------------------------------------------------------------------------------------+
 
-.. _ossec-analysisd-structure:
+.. _wazuh-analysisd-structure:
 
 Daemon multithreaded internal structure
 ---------------------------------------

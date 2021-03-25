@@ -187,7 +187,6 @@ dt {
 .no-latest-notice .no-latest-icon-wrapper {
   color: #ffb600;
   padding: 0;
-  background-color: #fff;
   height: 100%;
   display: flex;
   align-items: center;
@@ -203,11 +202,7 @@ dt {
 
 .no-latest-docs .no-latest-notice {
   display: flex;
-  justify-content: flex-start;
-}
-
-.no-latest-notice .link-latest {
-  color: #333;
+  justify-content: center;
 }
 
 #header {
@@ -1249,11 +1244,12 @@ aside.help {
   font-size: 1.4rem;
 }
 
-.index a.headerlink {
-  content: none;
+.index h1 a.headerlink,
+.index h1:hover a.headerlink {
+  display: none;
 }
 
-:not(.index) a.headerlink {
+a.headerlink {
   min-height: 1.5rem;
   color: transparent;
   -webkit-user-select: none;
@@ -1262,7 +1258,7 @@ aside.help {
   user-select: none;
   font-size: 1rem;
   vertical-align: middle;
-  display: none;
+  display: inline-block;
 }
 
 a.headerlink:before {
@@ -1296,6 +1292,7 @@ h5:active > a.headerlink,
 h6:hover > a.headerlink,
 h6:active > a.headerlink {
   display: inline-block;
+  opacity: 1;
 }
 
 .index h3:hover > a.headerlink,
@@ -2992,6 +2989,16 @@ div.highlight pre {
   background-position: center;
 }
 
+.section {
+  padding-top: 60px;
+  margin-top: -60px;
+}
+
+.no-latest-docs .section {
+  padding-top: 140px;
+  margin-top: -140px;
+}
+
 @media (min-width:576px){
   
   #capabilities .right .topic p:not(.topic-title) {
@@ -3274,6 +3281,15 @@ div.highlight pre {
   #page.no-latest-docs {
     padding-top: 0;
   }
+  
+  a.headerlink {
+    opacity: 0;
+  }
+  
+  .no-latest-docs .section {
+    padding-top: 110px;
+    margin-top: -110px;
+  }
 
   .no-latest-notice-wrapper {
     min-height: 80px;
@@ -3282,17 +3298,16 @@ div.highlight pre {
   .no-latest-notice {
     position: relative;
     border: 1px solid #ffb600;
+		border-radius: 12px;
     margin: 35px 0 15px 0;
     height: auto;
     align-items: stretch;
-    width: fit-content;
-    width: -moz-fit-content;
+    width: 100%;
+    padding: 0 10px;
   }
   
   .no-latest-notice .no-latest-icon-wrapper {
     padding: 7px;
-    background-color: #ffb600;
-    color: #fff;
     min-width: 35px;
     height: auto;
     padding: 10px;
@@ -3300,12 +3315,13 @@ div.highlight pre {
   
   .no-latest-notice .no-latest-text-wrapper {
     font-size: 1.07rem;
-    padding: 15px;
+    padding: 15px 10px;
   }
   
   .scrolled .no-latest-notice {
     margin: 0;
     border: 1px solid #fff;
+    border-radius: 0;
     position: fixed;
     top: 0;
     width: 100%;
@@ -3905,6 +3921,10 @@ div.highlight pre {
 }
 
 @media (min-width: 1440px) {
+  
+  .no-latest-notice .no-latest-text-wrapper {
+    padding: 15px 15px 15px 5px;
+  }
   
   #rst-content.deprecated-content:after {
     height: 540px;

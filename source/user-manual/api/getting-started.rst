@@ -235,14 +235,16 @@ Running the script provides a result similar to the following:
     Getting /agents/summary/os:
 
     {
-       "data": {
-          "active": 1,
-          "disconnected": 0,
-          "never_connected": 0,
-          "pending": 0,
-          "total": 1
-       },
-       "error": 0
+        "data": {
+            "affected_items": [
+                "windows"
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+        },
+        "message": "Showing the operative system of all specified agents",
+        "error": 0
     }
 
     End of the script.
@@ -446,7 +448,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
                 "level": 2,
                 "status": "enabled",
                 "details": {
-                   "match": { 
+                   "match": {
                       "pattern": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
                     }
                 },
@@ -753,19 +755,19 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
       "data": {
         "affected_items": [
           {
-            "ossec-agentlessd": "running",
-            "ossec-analysisd": "running",
-            "ossec-authd": "running",
-            "ossec-csyslogd": "running",
-            "ossec-dbd": "stopped",
-            "ossec-monitord": "running",
-            "ossec-execd": "running",
-            "ossec-integratord": "running",
-            "ossec-logcollector": "running",
-            "ossec-maild": "running",
-            "ossec-remoted": "running",
-            "ossec-reportd": "stopped",
-            "ossec-syscheckd": "running",
+            "wazuh-agentlessd": "running",
+            "wazuh-analysisd": "running",
+            "wazuh-authd": "running",
+            "wazuh-csyslogd": "running",
+            "wazuh-dbd": "stopped",
+            "wazuh-monitord": "running",
+            "wazuh-execd": "running",
+            "wazuh-integratord": "running",
+            "wazuh-logcollector": "running",
+            "wazuh-maild": "running",
+            "wazuh-remoted": "running",
+            "wazuh-reportd": "stopped",
+            "wazuh-syscheckd": "running",
             "wazuh-clusterd": "running",
             "wazuh-modulesd": "running",
             "wazuh-db": "running",

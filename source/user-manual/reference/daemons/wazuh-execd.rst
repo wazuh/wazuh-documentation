@@ -1,20 +1,18 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-maild:
+.. _wazuh-execd:
 
-ossec-maild
-=============
+wazuh-execd
+===========
 
-The ossec-maild program sends alerts via email.  It is started by :ref:`ossec-control`.
+.. versionadded:: 4.2
+
+The wazuh-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
-+-----------------+-------------------------------------------+-----------------------------------------------------+
-| **-D <dir>**    | Chroot to <dir>                                                                                 |
-+                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec                                          |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+
@@ -26,9 +24,5 @@ The ossec-maild program sends alerts via email.  It is started by :ref:`ossec-co
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-u <user>**   | Run as a specific user.                                                                         |
-+                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | ossecm                                              |
-+-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

@@ -42,7 +42,7 @@ You can also check to see if an agent connected correctly by verifying if the TC
 
 .. code-block:: console
 
-  # netstat -vatunp|grep ossec-agentd
+  # netstat -vatunp|grep wazuh-agentd
 
 The result should match the agent and manager IP addresses.
 

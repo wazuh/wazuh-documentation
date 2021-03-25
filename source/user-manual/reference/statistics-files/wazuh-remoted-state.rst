@@ -1,11 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec_remoted_state_file:
+.. _wazuh_remoted_state_file:
 
-ossec-remoted.state
+wazuh-remoted.state
 ===================
 
-The statistical file for **ossec-remoted** is located at ``/var/ossec/var/run/ossec-remoted.state``.
+.. versionadded:: 4.2
+
+The statistical file for **wazuh-remoted** is located at ``/var/ossec/var/run/wazuh-remoted.state``.
 
 This file provides information about the remote daemon as the queue size, discarded messages, number of remote connections and other useful information.
 
@@ -15,7 +17,7 @@ Below there is an example of the content of the file:
 
 .. code-block:: pkgconfig
 
-    # State file for ossec-remoted
+    # State file for wazuh-remoted
     # Updated every 5 seconds.
 
     # Queue size

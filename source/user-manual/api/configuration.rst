@@ -21,7 +21,6 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
 
      host: 0.0.0.0
      port: 55000
-     behind_proxy_server: no
 
      use_only_authd: no
      drop_privileges: yes
@@ -158,20 +157,12 @@ port
 | Any value between 1 and 65535 | 55000         | Port where the Wazuh API will listen. |
 +-------------------------------+---------------+---------------------------------------+
 
-behind_proxy_server
-^^^^^^^^^^^^^^^^^^^^^^
-+----------------------+---------------+----------------------------------------------------------------------------------+
-| Allowed values       | Default value | Description                                                                      |
-+======================+===============+==================================================================================+
-| yes, true, no, false | true          | Set this option to "yes" in case the Wazuh API is running behind a proxy server. |
-+----------------------+---------------+----------------------------------------------------------------------------------+
-
 use_only_authd
 ^^^^^^^^^^^^^^^^^^^^^^
 +----------------------+---------------+--------------------------------------------------------------------+
 | Allowed values       | Default value | Description                                                        |
 +======================+===============+====================================================================+
-| yes, true, no, false | false         | Force the use of ossec-authd when registering and removing agents. |
+| yes, true, no, false | false         | Force the use of wazuh-authd when registering and removing agents. |
 +----------------------+---------------+--------------------------------------------------------------------+
 
 drop_privileges

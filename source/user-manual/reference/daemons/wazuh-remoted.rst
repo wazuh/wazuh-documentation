@@ -1,12 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-remoted:
+.. _wazuh-remoted:
 
-ossec-remoted
+wazuh-remoted
 =============
 
-The ossec-remoted program is the server side daemon that communicates with the agents.  It runs as ``ossecr`` and is chrooted to ``/var/ossec`` by default.
+.. versionadded:: 4.2
 
+The wazuh-remoted program is the server side daemon that communicates with the agents.  It runs as ``ossecr`` and is chrooted to ``/var/ossec`` by default.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

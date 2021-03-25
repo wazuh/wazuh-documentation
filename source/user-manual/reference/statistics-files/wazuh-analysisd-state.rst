@@ -1,11 +1,13 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec_analysisd_state_file:
+.. _wazuh_analysisd_state_file:
 
-ossec-analysisd.state
+wazuh-analysisd.state
 =====================
 
-The statistical file for **ossec-analysisd** is located at ``/var/ossec/var/run/ossec-analysisd.state``.
+.. versionadded:: 4.2
+
+The statistical file for **wazuh-analysisd** is located at ``/var/ossec/var/run/wazuh-analysisd.state``.
 
 It can be useful when benchmarking our Wazuh manager analysis engine in high loaded environments.
 
@@ -15,7 +17,7 @@ Below there is an example of the content of the file:
 
 .. code-block:: pkgconfig
 
-    # State file for ossec-analysisd
+    # State file for wazuh-analysisd
 
     # Total events decoded
     total_events_decoded='184'

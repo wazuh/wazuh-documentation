@@ -1,14 +1,16 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-.. _ossec-reportd:
+.. _wazuh-reportd:
 
-ossec-reportd
+wazuh-reportd
 ==============
 
-The ossec-reportd program creates reports from Wazuh alerts.  It accepts alerts on ``stdin`` and outputs a report on ``stderr``.
+.. versionadded:: 4.2
+
+The wazuh-reportd program creates reports from Wazuh alerts.  It accepts alerts on ``stdin`` and outputs a report on ``stderr``.
 
 .. note::
-  Since the ossec-reportd daemon outputs to ``stderr``, some utilities like ``less`` will not work if the output is not redirected.  To do this, end the ossec-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. Following this redirect, ``more`` or ``less`` can be used with ease.
+  Since the wazuh-reportd daemon outputs to ``stderr``, some utilities like ``less`` will not work if the output is not redirected.  To do this, end the wazuh-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. Following this redirect, ``more`` or ``less`` can be used with ease.
 
 +-------------------------+-------------------------------------------------------------------------------------------------+
 | **-D <dir>**            | Chroot to <dir> .                                                                               |
@@ -41,12 +43,6 @@ The ossec-reportd program creates reports from Wazuh alerts.  It accepts alerts 
 +-------------------------+-------------------------------------------------------------------------------------------------+
 | **-s**                  | Show the alerts related to the summary.                                                         |
 +-------------------------+-------------------------------------------------------------------------------------------------+
-| **-S <source>**         | Set report source.                                                                              |
-+                         +---------------------------------------------------------+---------------------------------------+
-|                         | Allowed values                                          | log                                   |
-+                         +                                                         +---------------------------------------+
-|                         |                                                         | json                                  |
-+-------------------------+---------------------------------------------------------+---------------------------------------+
 | **-t**                  | Test configuration.                                                                             |
 +-------------------------+-------------------------------------------------------------------------------------------------+
 | **-u <user>**           | User to run as (default: ossec).                                                                |

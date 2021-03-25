@@ -23,7 +23,10 @@ To compile the code with ``make``, the working directory must be where the ``MAK
   # make <OPTIONS>
 
 .. note::
-      By default, the ``make deps`` command will download the necessary dependencies for manager nodes. To download the dependencies of the agent type nodes, it is necessary to indicate ``TARGET=agent`` or ``TARGET=winagent`` in case it is a Windows agent.
+      By default, the ``make deps`` command will download the necessary pre-compiled dependencies for manager nodes. To download the dependencies of the agent type nodes, it is necessary to indicate ``TARGET=agent`` or ``TARGET=winagent`` in case it is a Windows agent.
+
+.. note::
+      To download the external dependencies without pre-compiled files, the ``make deps`` command will need to be executed with the ``EXTERNAL_SRC_ONLY=yes`` flag. The external dependencies will be built as part of the Wazuh compilation process.
 
 After compiling the source code, now you can execute the installation script:
 
@@ -80,7 +83,13 @@ There are other targets used to get information about the Makefile, but they won
 Available flags
 ^^^^^^^^^^^^^^^
 
-+-----------------------+------------------------------------------------------------------------------------------------------------------------+
++-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
+| **EXTERNAL_SRC_ONLY** | Along with ``make deps`` command, this will download external libraries sources without pre-compiled files             |
+|                       +------------------+-----------------------------------------------------------------------------------------------------+
+|                       | Default value    | n/a                                                                                                 |
+|                       +------------------+-----------------------------------------------------------------------------------------------------+
+|                       | Allowed values   | 1, yes, YES, y, Y                                                                                   |
++-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
 | **TARGET**            | Defines the type of installation to build.                                                                             |
 |                       |                                                                                                                        |
 |                       | The most common are ``server`` to compile a manager, and ``agent/winagent``                                            |
@@ -102,7 +111,7 @@ Available flags
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Allowed values   | 1, yes, YES, y, Y                                                                                   |
 +-----------------------+------------------+-----------------------------------------------------------------------------------------------------+
-| **DEBUGAD**           | Enables extra debugging logging in ``ossec-analysisd``.                                                                |
+| **DEBUGAD**           | Enables extra debugging logging in ``wazuh-analysisd``.                                                                |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
 |                       | Default value    | n/a                                                                                                 |
 |                       +------------------+-----------------------------------------------------------------------------------------------------+
