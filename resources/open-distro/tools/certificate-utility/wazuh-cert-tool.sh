@@ -120,9 +120,18 @@ generateCertificateconfiguration() {
 	EOF
 
     conf="$(awk '{sub("CN = cname", "CN = '${cname}'")}1' ~/certs/$cname.conf)"
-    echo "${conf}" > ~/certs/$cname.conf
-    conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
-    echo "${conf}" > ~/certs/$cname.conf       
+    echo "${conf}" > ~/certs/$cname.conf    
+
+    isIP=$(echo "${ip}" | grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$")
+    isDNS=$(echo ${ip} | grep -P "^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$" )
+
+    if [[ -n "${isIP}" ]]; then
+        conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
+        echo "${conf}" > ~/certs/$cname.conf    
+    elif [[ -n "${isDNS}" ]]; then
+        conf="$(awk '{sub("IP.1 = cip", "DNS.1 = '${cip}'")}1' ~/certs/$cname.conf)"
+        echo "${conf}" > ~/certs/$cname.conf    
+    fi   
 
 }
 
