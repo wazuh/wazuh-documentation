@@ -130,7 +130,10 @@ generateCertificateconfiguration() {
         echo "${conf}" > ~/certs/$cname.conf    
     elif [[ -n "${isDNS}" ]]; then
         conf="$(awk '{sub("IP.1 = cip", "DNS.1 = '${cip}'")}1' ~/certs/$cname.conf)"
-        echo "${conf}" > ~/certs/$cname.conf    
+        echo "${conf}" > ~/certs/$cname.conf 
+    else
+        echo "Error. The given information does not match with an IP or a DNS"  
+        exit 1; 
     fi   
 
 }
