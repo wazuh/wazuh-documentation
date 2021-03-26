@@ -41,7 +41,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
 
     By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
-    .. code-block:: none
+    .. code-block:: json
         :class: output
 
         {

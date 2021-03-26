@@ -10,20 +10,22 @@ This guide provides the basic information needed to start using the Authorizatio
 Authorization context login method
 ----------------------------------
 
-This authentication method is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without it being assigned to any role. To do this, a proper formalization of the authorization context is needed. In this case, the user-roles relations are not taken into consideration.
+This authentication method (:api-ref:`GET /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`) is used to obtain the permissions dynamically. It allows any authorized user to possibly obtain any desired permissions without it being assigned to any role. To do this, a proper formalization of the authorization context is needed. In this case, the user-roles relations are not taken into consideration.
 
 In order to use this authentication method, a user allowed to use authorization context is needed (how to create and allow a user to use authorization context information :ref:`here <api_rbac_user>`). After that, and having created the necessary security rules, an authorization context with all the required information must be sent, it will be checked against the security rules and finally, the permissions associated with them will be granted:
 
 .. code-block:: console
-        :class: output
 
-        curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
+        # curl -k -u <user>:<password> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
                 "name": "Initial_auth",
                 "auth": {
                         "name": "Bill",
                         "office": ["20", "21", "30"]
                 }
         }'
+
+.. code-block:: json
+        :class: output
 
         {
                 "data": {
@@ -227,7 +229,6 @@ Example 1
 - To achieve this, the user uses the following authorization context:
 
 .. code-block:: json
-        :class: output
 
         {
             "name": "Eleventh_auth",
@@ -326,7 +327,6 @@ Example 2
 - To achieve this match, the user sends the following authorization context:
 
 .. code-block:: json
-        :class: output
 
         {
             "name": "First_example",
