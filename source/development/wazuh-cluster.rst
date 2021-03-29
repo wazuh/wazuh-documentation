@@ -409,13 +409,16 @@ The cluster has lots of different components working together: a network protoco
 .. code-block:: none
     :class: output
 
-    2019/04/10 15:34:28 wazuh-clusterd: INFO: [Worker worker-1] [Agent info] Waiting to receive zip file from worker
-    2019/04/10 15:34:28 wazuh-clusterd: INFO: [Worker worker-1] [Agent info] Analyzing worker files: Received 1 files to check.
-    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Waiting to receive zip file from worker
-    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Analyzing worker integrity: Received 12 files to check.
-    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Analyzing worker integrity: Files checked. There are no KO files.
-    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Finished integrity synchronization.
-    2019/04/10 15:34:32 wazuh-clusterd: INFO: [Cluster] [D API] Receiving request: /agents from worker-1 (73994)
+    2021/03/29 07:05:26 INFO: [Worker worker1] [Integrity check] Starting. Received metadata of 12 files.
+    2021/03/29 07:05:26 INFO: [Worker worker1] [Integrity check] Finished in 0.016s. Sync required.
+    2021/03/29 07:05:26 INFO: [Worker worker1] [Integrity sync] Starting.
+    2021/03/29 07:05:26 INFO: [Worker worker1] [Integrity sync] Files to create in worker: 0 | Files to update in worker: 0 | Files to delete in worker: 1 | Files to receive: 0
+    2021/03/29 07:05:26 INFO: [Worker worker1] [Integrity sync] Finished in 0.015838s.
+    2021/03/29 07:05:27 INFO: [Master] [Local integrity] Starting.
+    2021/03/29 07:05:27 INFO: [Master] [Local integrity] Finished in 0.013s. Calculated metadata of 11 files.
+    2021/03/29 07:05:27 INFO: [Worker worker1] [Agent-info sync] Starting.
+    2021/03/29 07:05:27 INFO: [Worker worker1] [Agent-info sync] Finished in 0.001s (0 chunks received).
+    2021/03/29 07:05:31 INFO: [Master] [D API] Receiving request: check_user_master from worker1 (237771)
 
 When there is an error in the cluster, it will be logged under the ``ERROR:`` tag. That means a good healthcheck to do when there is a problem in the cluster is the following:
 
