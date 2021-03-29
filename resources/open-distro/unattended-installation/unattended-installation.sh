@@ -265,7 +265,6 @@ installElasticsearch() {
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
         eval "curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
-        ## eval "curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/instances.yml --max-time 300 ${debug}"
 
         echo "# Elasticsearch nodes" >> ~/instances.yml
         echo "elasticsearch-nodes:" >> ~/instances.yml
@@ -544,13 +543,22 @@ healthCheck() {
 
 changePasswords() {
     eval "curl -so ~/wazuh-passwords-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/wazuh-passwords-tool.sh --max-time 300 ${debug}"
-    eval "bash ~/wazuh-passwords-tool.sh -a ${debug}"    
+    if [ -n "${verbose}" ]; then
+        bash ~/wazuh-passwords-tool.sh -a -v
+    else
+         bash ~/wazuh-passwords-tool.sh -a
+    fi     
 }
 
 checkInstallation() {
 
+    changePasswords
+    adminpass=$(grep "password:" /etc/filebeat/filebeat.yml )
+    ra="  password: "
+    adminpass="${adminpass//$ra}"
+    echo "PASSWORD: ${adminpass}"
     logger "Checking the installation..."
-    eval "curl -XGET https://localhost:9200 -uadmin:admin -k --max-time 300 ${debug}"
+    eval "curl -XGET https://localhost:9200 -uadmin:${adminpass} -k --max-time 300 ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
         rollBack
@@ -567,12 +575,12 @@ checkInstallation() {
         echo "Filebeat installation succeeded."
     fi    
     logger "Initializing Kibana (this may take a while)"
-    until [[ "$(curl -XGET https://localhost/status -I -uadmin:admin -k -s --max-time 300 | grep "200 OK")" ]]; do
+    until [[ "$(curl -XGET https://localhost/status -I -uadmin:${adminpass} -k -s --max-time 300 | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
     done    
     echo $'\nInstallation finished'
-    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:admin'
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:'${adminpass}''
 
     exit 0;
 
