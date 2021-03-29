@@ -118,6 +118,7 @@ startService() {
         eval "systemctl start $1.service ${debug}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
+            rollBack
             exit 1;
         else
             echo "${1^} started"
@@ -128,6 +129,7 @@ startService() {
         eval "/etc/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
+            rollBack
             exit 1;
         else
             echo "${1^} started"
@@ -136,6 +138,7 @@ startService() {
         eval "/etc/rc.d/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
+            rollBack
             exit 1;
         else
             echo "${1^} started"
