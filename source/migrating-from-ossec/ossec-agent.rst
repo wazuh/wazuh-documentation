@@ -74,7 +74,7 @@ Now we will restore the following files:
 
 .. code-block:: bash
 
-   $ cp -p /var/ossec_backup/etc/agent.conf /var/ossec/etc/agent.conf.orig
+   $ cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
    $ cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
