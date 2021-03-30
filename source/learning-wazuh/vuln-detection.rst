@@ -107,6 +107,11 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
         <update_from_year>2010</update_from_year>
         <update_interval>1h</update_interval>
       </provider>
+      <provider name="arch">
+        <enabled>no</enabled>
+        <os>rolling</os>
+        <update_interval>1h</update_interval>
+      </provider>
       <provider name="nvd">
         <enabled>yes</enabled>
         <update_from_year>2010</update_from_year>

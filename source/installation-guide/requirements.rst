@@ -24,6 +24,8 @@ The Wazuh server and Elastic Stack components can be installed in the following 
 
 - Red Hat Enterprise Linux 6 or greater.
 
+- Arch Linux rolling release.
+
 - Ubuntu 12 or greater.
 
 

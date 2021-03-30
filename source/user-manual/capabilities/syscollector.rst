@@ -127,7 +127,7 @@ Packages
 
 .. versionadded:: 3.2.0
 
-The current packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb` or `rpm` types.
+The current packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb`, `pacman` or `rpm` types.
 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | Field            | Description                            | Example                                           | Available         |
@@ -144,11 +144,11 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **section**      | Section of the package                 | kernel                                            | deb/rpm/pkg       |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **size**         | Size of the installed package in bytes | 14                                                | deb/rpm           |
+| **size**         | Size of the installed package in bytes | 14                                                | deb/rpm/pacman    |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **vendor**       | Vendor name                            | Ubuntu Kernel Team                                | deb/rpm/win       |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **install_time** | Date when the package was installed    | 2018/02/08 18:45:48                               | rpm/win           |
+| **install_time** | Date when the package was installed    | 2018/02/08 18:45:48                               | rpm/pacman/win    |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **version**      | Version of the package                 | 4.4.0.130.136                                     | All               |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
@@ -158,7 +158,7 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **source**       | Source of the package                  | linux-meta                                        | deb/rpm/pkg       |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-| **description**  | Description of the package             | Generic Linux kernel headers                      | deb/rpm/pkg       |
+| **description**  | Description of the package             | Generic Linux kernel headers                      | deb/rpm/pacman/pkg|
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **location**     | Location of the package                | C:\\Program Files\\VMware\\VMware Tools\\         | win/pkg           |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
