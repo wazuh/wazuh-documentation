@@ -14,7 +14,7 @@ The ossec-logtest program is a useful tool when working with Wazuh rules.  This 
 +-------------------------------------------+--------------------------------------------------------------------------------+
 | **-c <config>**                           | Run using ``config`` as the configuration file.                                |
 +                                           +-----------------------------------+--------------------------------------------+
-|                                           | Default Value                     | /var/ossec/etc/ossec.conf                  |
+|                                           | Default Value                     | /var/ossec/etc/manager.conf                |
 +-------------------------------------------+-----------------------------------+--------------------------------------------+
 | **-D <dir>**                              | Specifies the chroot before it completes loading all rules,decoders,           |
 |                                           |                                                                                |

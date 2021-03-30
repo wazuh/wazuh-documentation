@@ -5,12 +5,12 @@
 ossec-syscheckd
 ===============
 
-The ossec-syscheckd program checks configured files for changes to the checksums, permissions and ownership.  It is run using ossec-control.
+The ossec-syscheckd program checks configured files for changes to the checksums, permissions and ownership. It is run using ossec-control.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec/etc/ossec.conf                           |
+|                 | Default value                             | /var/ossec/etc/manager.conf                         |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+

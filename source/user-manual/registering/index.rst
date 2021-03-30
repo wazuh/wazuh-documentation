@@ -49,7 +49,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
          .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/ossec.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent’s configuration file placed at ``/var/ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -90,7 +90,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
       .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\ossec.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``C:\Program Files (x86)\ossec-agent\agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 
@@ -120,7 +120,7 @@ To register the Wazuh agent, choose the tab corresponding to the Wazuh agent's h
          .. include:: ../../_templates/registrations/common/set_agent_name.rst
 
 
-    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/ossec.conf``.
+    #. To enable the communication with the Wazuh manager, edit the Wazuh agent's configuration file placed at ``/Library/Ossec/etc/agent.conf``.
 
          .. include:: ../../_templates/registrations/common/client_server_section.rst
 

@@ -94,7 +94,7 @@ Below are the files that would be found in this folder on an agent assigned to t
 |        └── win_malware_rcl.txt                      |                                                     |
 +-----------------------------------------------------+-----------------------------------------------------+
 
-The proper syntax of ``agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
+The proper syntax of ``shared/agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
 
 agent.conf
 ----------
@@ -232,7 +232,7 @@ The following is an example of how a centralized configuration can be done.
 
     By default, the agent restarts by itself automatically when it receives a new shared configuration.
 
-    If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index>`), the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
+    If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index_agent>`), the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
 
     .. code-block:: console
 
@@ -246,11 +246,11 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``shared/agent.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``agent.conf`` file is read before the shared ``shared/agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
 For example:
 
-Let's say we have this configuration in the ``ossec.conf`` file:
+Let's say we have this configuration in the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -267,7 +267,7 @@ Let's say we have this configuration in the ``ossec.conf`` file:
     </policies>
   </sca>
 
-and this configuration in the ``agent.conf`` file.
+and this configuration in the ``shared/agent.conf`` file.
 
 .. code-block:: xml
 
@@ -280,7 +280,7 @@ and this configuration in the ``agent.conf`` file.
   </sca>
 
 The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
-In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
+In other words, the configuration located at ``shared/agent.conf`` will overwrite the one of the ``agent.conf``.
 
 How to ignore shared configuration
 ----------------------------------

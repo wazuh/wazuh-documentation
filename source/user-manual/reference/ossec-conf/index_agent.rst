@@ -1,0 +1,102 @@
+.. Copyright (C) 2020 Wazuh, Inc.
+
+.. _reference_client_conf:
+
+Agent configuration (agent.conf)
+================================
+
+The ``agent.conf`` file is the main configuration file on the Wazuh agent. It is located at ``/var/ossec/etc/agent.conf`` on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\agent.conf``. It is recommended to back up this file before making changes on it. A configuration error may prevent Wazuh services from starting up.
+
+The ``agent.conf`` file is in XML format and all of its configuration options are nested in their appropriate section of the file. In this file, the outermost XML tag is ``<wazuh_config>``. There can be more than one ``<wazuh_config>`` tag.
+
+Here is an example of the proper location of the *active-response* configuration section:
+
+.. code-block:: xml
+
+    <wazuh_config>
+        <active-response>
+            <!--
+            active-response options here
+            -->
+        </active-response>
+    </wazuh_config>
+
+The ``shared/agent.conf`` file is very similar to ``agent.conf``, but ``shared/agent.conf`` is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
+
+Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
+
++---------------------------------------------------------------------+------------------------+
+| Configuration sections                                              | Supported installations|
++=====================================================================+========================+
+| :doc:`active-response <active-response>`                            | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`agent-upgrade <agent-upgrade>`                                | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`client <client>`                                              | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`client_buffer <client_buffer>`                                | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`fluent-forward <fluent-forward>`                              | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`labels  <labels>`                                             | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`localfile <localfile>`                                        | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`logging <logging>`                                            | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`rootcheck <rootcheck>`                                        | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`sca <sca>`                                                    | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`socket <socket>`                                              | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`syscheck <syscheck>`                                          | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="aws-s3" <wodle-s3>`                               | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="command" <wodle-command>`                         | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="docker-listener" <wodle-docker>`                  | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="open-scap" <wodle-openscap>`                      | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="osquery" <wodle-osquery>`                         | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="syscollector" <wodle-syscollector>`               | agent                  |
++---------------------------------------------------------------------+------------------------+
+| :doc:`gcp-pubsub <gcp-pubsub>`                                      | agent                  |
++---------------------------------------------------------------------+------------------------+
+
+All of the above sections must be located within the top-level ``<wazuh_config>`` tag. In case of adding another ``<wazuh_config>`` tag, it may override the values set on the previous tag.
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+
+   active-response
+   agent-upgrade
+   client
+   client_buffer
+   labels
+   localfile
+   logging
+   rootcheck
+   sca
+   socket
+   syscheck
+   fluent-forward
+   wodle-agent-key-polling
+   wodle-s3
+   wodle-azure-logs
+   wodle-ciscat
+   wodle-command
+   wodle-docker
+   wodle-openscap
+   wodle-osquery
+   wodle-syscollector
+   gcp-pubsub
+   verifying-configuration

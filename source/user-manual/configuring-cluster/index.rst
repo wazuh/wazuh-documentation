@@ -22,7 +22,7 @@ Deploying a Wazuh cluster
 
 .. topic:: Cluster nodes configuration
 
-    The Wazuh cluster is made up by manager type nodes. Only one of them will take the master role, the others will take the worker role. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values.
+    The Wazuh cluster is made up by manager type nodes. Only one of them will take the master role, the others will take the worker role. For both node types, the configuration file ``/var/ossec/etc/manager.conf`` contains the cluster configuration values.
     Within the labels ``<cluster>...</cluster>`` the following configuration values can be set:
 
         - :ref:`name <cluster_name>`: Name that will be assigned to the cluster
@@ -132,7 +132,7 @@ Deploying a Wazuh cluster
 .. topic:: Pointing agents to the cluster nodes
 
     Finally, the configuration of the agents has to be modified in order to report to the cluster.
-    In this case the agent 001 will report to the worker01-node node. To achieve this we must modify the information contained in the labels ``<client><server>`` in the file ``/var/ossec/etc/ossec.conf``, where we will place the IP of the node we want to report to, in our case it would look like this:
+    In this case the agent 001 will report to the worker01-node node. To achieve this we must modify the information contained in the labels ``<client><server>`` in the file ``/var/ossec/etc/agent.conf``, where we will place the IP of the node we want to report to, in our case it would look like this:
 
         .. code-block:: xml
 

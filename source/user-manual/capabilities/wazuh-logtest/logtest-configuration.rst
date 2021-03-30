@@ -5,7 +5,7 @@
 Configuration
 =============
 
-Wazuh-Logtest is a functionality provided by the manager, whose work parameters are configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`rule_test <reference_ossec_rule_test>`.
+Wazuh-Logtest is a functionality provided by the manager, whose work parameters are configured in the :ref:`manager.conf <reference_manager_conf>` file in the section :ref:`rule_test <reference_ossec_rule_test>`.
 
 By default, the configuration is:
 

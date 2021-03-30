@@ -13,11 +13,11 @@ A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **addfile <filename> [<format>]** | Add a log file to be monitored by :ref:`ossec-logcollector <ossec-logcollector>`                                                  |
 |                                   |                                                                                                                                   |
-|                                   | A local file will be added to the :ref:`ossec.conf <reference_ossec_conf>`                                                        |
+|                                   | A local file will be added to the :ref:`agent.conf <reference_client_conf>`                                                       |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **addsite <domain>**              | Monitor a website for changes.                                                                                                    |
 |                                   |                                                                                                                                   |
-|                                   | A ``full_command`` will be added to the :ref:`ossec.conf <reference_ossec_conf>` using lynx to dump the initial page.             |
+|                                   | A ``full_command`` will be added to the :ref:`agent.conf <reference_client_conf>` using lynx to dump the initial page.            |
 |                                   |                                                                                                                                   |
 |                                   | A rule can be written to monitor this output for changes.                                                                         |
 |                                   |                                                                                                                                   |
@@ -25,7 +25,7 @@ A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **adddns <domain>**               | Monitor the nameserver of a domain for changes.                                                                                   |
 |                                   |                                                                                                                                   |
-|                                   | A ``full_command`` will be added to the :ref:`ossec.conf <reference_ossec_conf>` using the host command.                          |
+|                                   | A ``full_command`` will be added to the :ref:`agent.conf <reference_client_conf>` using the host command.                         |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 .. note::

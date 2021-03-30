@@ -15,7 +15,7 @@ Configuration
 Basic usage
 -----------
 
-Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_ossec_conf>`. It can be also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can be also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
 
 Monitor running Windows processes
 ---------------------------------
@@ -67,7 +67,7 @@ Disk space utilization
 
 The ``df`` command helps here to check the available disk space for file systems.
 
-This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
+This can be configured in either the ``shared/agent.conf`` file or the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -96,7 +96,7 @@ Check if the output changed
 
 In this case, the Linux "netstat" command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
 
-This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
+This can be configured in either the ``shared/agent.conf`` file or the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -126,7 +126,7 @@ Load average
 
 Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like two load averages in this example.
 
-This can be configured in ``agent.conf`` or ``ossec.conf``:
+This can be configured in ``shared/agent.conf`` or ``agent.conf``:
 
 .. code-block:: xml
 

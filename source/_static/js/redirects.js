@@ -34,6 +34,11 @@ removedUrls['x.y'] = [
 ];
 */
 
+newUrls['5.0'] = [
+  '/user-manual/reference/ossec-conf/index_agent.html',
+  '/user-manual/reference/ossec-conf/index_manager.html',
+];
+
 /* *** RELEASE 4.1 ****/
 
 /* Pages added in 4.1 */

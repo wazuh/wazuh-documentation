@@ -5,13 +5,13 @@
 ossec-makelists
 ===============
 
-The ``ossec-makelists`` utility to compile cdb databases.  This will scan :ref:`ossec.conf <reference_ossec_conf>` for database files, check the mtime, and recompile all out of date databases.
+The ``ossec-makelists`` utility to compile cdb databases.  This will scan :ref:`manager.conf <reference_manager_conf>` for database files, check the mtime, and recompile all out of date databases.
 
 
 +-----------------+-------------------------------------------------------------------------------------+
 | **-c <config>** | Run with configuration file of ``config``.                                          |
 +                 +-------------------------------------+-----------------------------------------------+
-|                 | Default Value                       | /var/ossec/etc/ossec.conf                     |
+|                 | Default Value                       | /var/ossec/etc/manager.conf                   |
 +-----------------+-------------------------------------+-----------------------------------------------+
 | **-D <dir>**    | Directory to chroot into.                                                           |
 +                 +-------------------------------------+-----------------------------------------------+

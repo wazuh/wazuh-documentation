@@ -34,7 +34,7 @@ to the **policies section** of the **SCA** module.
 
 There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
-the `ossec.conf` by adding a line such as
+the `agent.conf` by adding a line such as
 
 .. code-block:: xml
 

@@ -16,7 +16,7 @@ In this section are listed the different options for the configuration of daily 
 
 .. note::
 
-  Any number of ``<reports>`` blocks can be declared in the same ``ossec.conf`` file.
+  Any number of ``<reports>`` blocks can be declared in the same ``manager.conf`` file.
 
 Options
 -------

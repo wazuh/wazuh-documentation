@@ -10,7 +10,7 @@ Each event collected by the Wazuh agent is transmitted to the Wazuh Manager. The
 Configuration
 -------------
 
-The alert level threshold is configured in the ``ossec.conf`` file using the ``<alerts>`` XML tag. The available options for this are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
+The alert level threshold is configured in the ``manager.conf`` file using the ``<alerts>`` XML tag. The available options for this are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
 
 .. code-block:: xml
 
@@ -22,7 +22,7 @@ The alert level threshold is configured in the ``ossec.conf`` file using the ``<
 
 This will set the minimum severity level that will trigger alerts that will be stored in the ``alerts.log`` and/or the ``alerts.json`` file(s).
 
-When any value is changed in the ``ossec.conf`` file, the service must be restarted before the changes will take effect.
+When any value is changed in the ``manager.conf`` file, the service must be restarted before the changes will take effect.
 
 a. For Systemd:
 

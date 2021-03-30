@@ -92,7 +92,7 @@ Example:
 
 .. note::
 
-   This option only can be activated from the agent side, on its own ``ossec.conf``.
+   This option only can be activated from the agent side, on its own ``agent.conf``.
 
 
 .. _reference_ossec_syscheck_auto_ignore:
@@ -468,7 +468,7 @@ Example:
 
 .. note::
 
-  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
+  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *manager.conf*.
 
 
 .. _reference_ossec_syscheck_process_priority:
