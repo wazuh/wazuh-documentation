@@ -35,23 +35,23 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 +                  +-------------+-----------------------------------------------------------------------------------------+
 |                  | **Default** | 1515                                                                                    |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
-| **-P**           | Enable shared password authentication, at /var/ossec/etc/authd.pass or random.                        |
+| **-P**           | Enable shared password authentication, at ``etc/authd.pass`` or random.                               |
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-c <ciphers>** | SSL cipher list. The format of this parameter is described in `SSL ciphers`_.                         |
 +                  +-------------+-----------------------------------------------------------------------------------------+
 |                  | **Default** | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH                                      |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
-| **-v <path>**    | Full path to CA certificate used to verify clients.                                                   |
+| **-v <path>**    | Path to CA certificate used to verify clients.                                                        |
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-s**           | Used with -v, enable source host verification.                                                        |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-x <path>**    | Full path to server certificate.                                                                      |
+| **-x <path>**    | Path to server certificate.                                                                           |
 +                  +-------------+-----------------------------------------------------------------------------------------+
-|                  | **Default** | /var/ossec/etc/sslmanager.cert.                                                         |
+|                  | **Default** | etc/sslmanager.cert.                                                                    |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
-| **-k <path>**    | Full path to server key.                                                                              |
+| **-k <path>**    | Path to server key.                                                                                   |
 +                  +-------------+-----------------------------------------------------------------------------------------+
-|                  | **Default** | /var/ossec/etc/sslmanager.key.                                                          |
+|                  | **Default** | etc/sslmanager.key.                                                                     |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
 | **-a**           | Auto negotiate the most secure common SSL/TLS method with the client.                                 |
 +                  +-------------+-----------------------------------------------------------------------------------------+
@@ -59,5 +59,8 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 +------------------+-------------+-----------------------------------------------------------------------------------------+
 | **-L**           | Force insertion even though agent limit has been reached.                                             |
 +------------------+-------------------------------------------------------------------------------------------------------+
+
+.. note::
+  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html
