@@ -71,6 +71,27 @@ startService() {
 
 }
 
+checkPrerequisites() {
+    
+    if [ -z "$(command -v curl)" ]; then
+        echo "Error: curl was not found in the system."
+        exit 1;
+    fi
+    if [ -z "$(command -v unzip)" ]; then
+        echo "Error: unzip was not found in the system."
+        exit 1;
+    fi    
+    if [ -z "$(command -v wget)" ]; then
+        echo "Error: wget was not found in the system."
+        exit 1;
+    fi 
+    if [ -z "$(command -v setcap)" ]; then
+        echo "Error: libcap was not found in the system."
+        exit 1;
+    fi     
+
+}
+
 ## Show script usage
 getHelp() {
 
@@ -280,10 +301,11 @@ installKibana() {
         exit 1;
     else    
         mv ~/wazuh-packages/kibana.yml /etc/kibana/
+        mv ~/wazuh-packages/wazuh_kibana-4.0.4_7.9.1-1.zip /usr/share/kibana/plugins
         eval "chown -R kibana:kibana /usr/share/kibana/optimize ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/plugins ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana bin/kibana-plugin install file:///$PACKAGES/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
+        eval "sudo -u kibana bin/kibana-plugin install file:///usr/share/kibana/plugins/wazuh_kibana-4.0.4_7.9.1-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
