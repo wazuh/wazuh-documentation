@@ -123,7 +123,7 @@ And the osquery module must be enabled for the agents where the osquery is runni
 
   <wodle name="osquery"/>
 
-To their ``/var/ossec/etc/ossec.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>`
+To their ``/var/ossec/etc/agent.conf`` file or through :doc:`centralized configuration <../reference/centralized-configuration>`
 
 .. note::
   More options may be specified as shown in the  :doc:`osquery configuration reference <../reference/ossec-conf/wodle-osquery>`

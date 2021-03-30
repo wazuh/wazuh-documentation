@@ -22,7 +22,7 @@ Each active response specifies where its associated command will be executed: on
 Active response configuration
 -----------------------------
 
-Active responses are configured in the manager by modifying the :ref:`ossec.conf <reference_ossec_conf>` file as follows:
+Active responses are configured in the manager by modifying the :ref:`manager.conf <reference_ossec_conf>` file as follows:
 
 1. Create a command
 
@@ -99,7 +99,7 @@ Wazuh is pre-configured with the following scripts for Linux:
 +--------------------------+---------------------------------------------------------------+
 | pf.sh                    | Firewall-drop response script created for pf                  |
 +--------------------------+---------------------------------------------------------------+
-| restart-ossec.sh         | Automatically restarts Wazuh when ossec.conf has been changed |
+| restart-ossec.sh         | Automatically restarts Wazuh when agent.conf has been changed |
 +--------------------------+---------------------------------------------------------------+
 | route-null.sh            | Adds an IP to null route                                      |
 +--------------------------+---------------------------------------------------------------+

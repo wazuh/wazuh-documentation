@@ -202,7 +202,7 @@ Once your role is created, just paste it on the bucket configuration:
 IAM roles for EC2 instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``ossec.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``agent.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
 
 This is an example configuration:
 
@@ -223,7 +223,7 @@ If you're using a single AWS account for all your buckets this could be the most
 Insert the credentials into the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Another available option to set up credentials is writing them right into the Wazuh configuration file (``/var/ossec/etc/ossec.conf``), inside of the ``<bucket>`` block on the module configuration.
+Another available option to set up credentials is writing them right into the Wazuh configuration file (``/var/ossec/etc/agent.conf``), inside of the ``<bucket>`` block on the module configuration.
 
 This is an example configuration:
 

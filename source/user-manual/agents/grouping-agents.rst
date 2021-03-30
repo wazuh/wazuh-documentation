@@ -7,7 +7,7 @@ Grouping agents
 
 .. versionadded:: 3.0.0
 
-There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
+There are two methods for configuring registered agents. They can either be configured locally with the :doc:`agent.conf <../reference/ossec-conf/index>` file or remotely using
 the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process.
 
 .. note:: Read the `Agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration//>`_ document for more information.

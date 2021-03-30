@@ -25,7 +25,7 @@ AWS CloudWatch logs can be accessed by configuring CloudWatch to store them into
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudWatch Logs:
+#. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following configuration block to enable the integration with CloudWatch Logs:
 
     .. code-block:: xml
 

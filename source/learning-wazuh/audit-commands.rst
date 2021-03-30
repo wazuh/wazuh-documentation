@@ -207,7 +207,7 @@ will use to give us special alerts when executed.
         tcpdump:
         ping:
 
-#. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration in ``/var/ossec/etc/ossec.conf``:
+#. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration in ``/var/ossec/etc/manager.conf``:
 
     .. code-block:: xml
 
@@ -444,7 +444,7 @@ Remember to set your settings back to normal
 
 When testing different things, it is recommendable that you reverse the changes to keep your testing Lab clean. So new tests don't interfere with previous ones.
 
-You would need to delete the line we wrote in the ``<ruleset>`` section of Wazuh manager's configuration, ``ossec.conf``:
+You would need to delete the line we wrote in the ``<ruleset>`` section of Wazuh manager's configuration, ``manager.conf``:
 
 .. code-block:: xml
 

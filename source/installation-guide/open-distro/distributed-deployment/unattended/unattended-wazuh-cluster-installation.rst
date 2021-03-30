@@ -69,7 +69,7 @@ After the installation of all the components of the node, some steps must be don
     #. .. include:: ../../../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
 
 
-    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+    #. Once the ``/var/ossec/etc/manager.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
         .. include:: ../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 
@@ -79,7 +79,7 @@ After the installation of all the components of the node, some steps must be don
     #. .. include:: ../../../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
 
 
-    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
+    #. Once the ``/var/ossec/etc/manager.conf`` configuration file is edited, the Wazuh manager needs to be restarted:
 
         .. include:: ../../../../_templates/installations/wazuh/common/restart_wazuh_manager.rst
 

@@ -15,7 +15,7 @@ Configuration
 ^^^^^^^^^^^^^
 
 To enable the Whodata feature, the SACL of the directory to be monitored must be properly configured. Wazuh automatically performs this task when 
-the tag ``whodata="yes"`` is declared within the ``directories`` statement in the ``ossec.conf`` file:
+the tag ``whodata="yes"`` is declared within the ``directories`` statement in the ``agent.conf`` file:
 
 .. code-block:: xml
 

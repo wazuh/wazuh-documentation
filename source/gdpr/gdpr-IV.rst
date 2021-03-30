@@ -25,7 +25,7 @@ We can use rootcheck to monitor security policies. The first thing to do is to e
 
 .. code-block:: console
 
-	root@agent:/home/agent# cat /var/ossec/etc/ossec.conf | grep system_audit_ssh -B 4 -A 2
+	root@agent:/home/agent# cat /var/ossec/etc/agent.conf | grep system_audit_ssh -B 4 -A 2
 
 .. code-block:: xml
 	:class: output
