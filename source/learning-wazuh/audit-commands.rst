@@ -207,7 +207,7 @@ will use to give us special alerts when executed.
         tcpdump:
         ping:
 
-#. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration in ``/var/ossec/etc/manager.conf``:
+#. On wazuh-manager, add this to the ``<ruleset>`` section of configuration in ``/var/ossec/etc/manager.conf``:
 
     .. code-block:: xml
 
