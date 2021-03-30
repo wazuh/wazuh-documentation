@@ -244,58 +244,58 @@ This section explains how to configure the Splunk Forwarder to send alerts to th
 
         .. code-block:: console
 
-        # touch /opt/splunkforwarder/etc/system/local/inputs.conf
+            # touch /opt/splunkforwarder/etc/system/local/inputs.conf
 
         .. code-block:: xml
 
-        [monitor:///var/ossec/logs/alerts/alerts.json]
-        disabled = 0
-        host = MANAGER_HOSTNAME
-        index = wazuh
-        sourcetype = wazuh
+            [monitor:///var/ossec/logs/alerts/alerts.json]
+            disabled = 0
+            host = MANAGER_HOSTNAME
+            index = wazuh
+            sourcetype = wazuh
 
         Now, following with the **outputs.conf**:
 
         .. code-block:: console
 
-        # touch /opt/splunkforwarder/etc/system/local/outputs.conf
+            # touch /opt/splunkforwarder/etc/system/local/outputs.conf
 
         And paste this inside:
 
         .. code-block:: xml
 
-        [indexer_discovery:cluster1]
-        pass4SymmKey = changeme
-        master_uri = https://<master_ip>:<port>
+            [indexer_discovery:cluster1]
+            pass4SymmKey = changeme
+            master_uri = https://<master_ip>:<port>
 
-        [tcpout:cluster1_tcp]
-        indexerDiscovery = cluster1
+            [tcpout:cluster1_tcp]
+            indexerDiscovery = cluster1
 
-        [tcpout]
-        defaultGroup = cluster1_tcp
+            [tcpout]
+            defaultGroup = cluster1_tcp
 
         For the last one, the **props.conf**, follow the same procedure:
 
         .. code-block:: console
 
-        # touch /opt/splunkforwarder/etc/system/local/props.conf
+            # touch /opt/splunkforwarder/etc/system/local/props.conf
 
         .. code-block:: xml
 
-        [wazuh]
-        DATETIME_CONFIG =
-        INDEXED_EXTRACTIONS = json
-        KV_MODE = none
-        NO_BINARY_CHECK = true
-        category = Application
-        disabled = false
-        pulldown_type = true
+            [wazuh]
+            DATETIME_CONFIG =
+            INDEXED_EXTRACTIONS = json
+            KV_MODE = none
+            NO_BINARY_CHECK = true
+            category = Application
+            disabled = false
+            pulldown_type = true
 
         To save all the changes, restart splunk:
 
         .. code-block:: console
 
-        # /opt/splunkforwarder/bin/splunk restart
+            # /opt/splunkforwarder/bin/splunk restart
 
 .. To uninstall Wazuh and the Splunk forwarder, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_splunk>`.
 
