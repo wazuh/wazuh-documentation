@@ -35,9 +35,10 @@ logger() {
 }
 
 rollBack() {
+
     if [ -z "${uninstall}" ]; then
         echo "Cleaning the installation" 
-    fi
+    fi   
     
     if [ -n "${wazuhinstalled}" ]; then
         echo "Removing the Wazuh manager..."
@@ -230,6 +231,7 @@ installWazuh() {
         rollBack
         exit 1;
     else
+        wazuhinstalled="1"
         logger "Done"
     fi   
     startService "wazuh-manager"
@@ -254,6 +256,7 @@ installElasticsearch() {
         rollBack
         exit 1;
     else
+        elasticinstalled="1"
         logger "Done"
 
         logger "Configuring Elasticsearch..."
@@ -344,6 +347,7 @@ installFilebeat() {
         rollBack
         exit 1;
     else
+        filebeatinstalled="1"
         eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/filebeat/7.x/filebeat.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
@@ -374,6 +378,7 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else    
+        kibanainstalled="1"
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/kibana/7.x/kibana.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
@@ -493,7 +498,7 @@ checkInstalled() {
             echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
             exit 1;
         fi
-    fi             
+    fi          
 
 }
 
@@ -637,9 +642,9 @@ main() {
         
         if [ -n "${ignore}" ]; then
             echo "Health-check ignored."    
-            checkInstalled ow
+            checkInstalled
         else
-            checkInstalled ow
+            checkInstalled
             healthCheck           
         fi            
         installPrerequisites
@@ -650,7 +655,7 @@ main() {
         installKibana
         checkInstallation    
     else
-        checkInstalled ow  
+        checkInstalled  
         healthCheck   
         installPrerequisites
         addWazuhrepo
