@@ -101,6 +101,7 @@ This reference also contains a set of default roles and policies that can be imm
         - `security:create_user`_
         - `security:create`_
         - `security:delete`_
+        - `security:edit_run_as`_
         - `security:read_config`_
         - `security:read`_
         - `security:revoke`_
@@ -117,6 +118,9 @@ This reference also contains a set of default roles and policies that can be imm
 
     - `Task`_
         - `task:status`_
+
+    - `Vulnerability`_
+        - `vulnerability:read`_
 
 `Default policies`_
     - `agents_all`_
@@ -142,6 +146,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `syscollector_read`_
     - `task_status`_
     - `users_all`_
+    - `vulnerability_read`_
 
 `Default roles`_
     - `administrator`_
@@ -559,6 +564,10 @@ security:delete
 - :api-ref:`DELETE /security/users <operation/api.controllers.security_controller.delete_users>` (`user:id`_)
 - :api-ref:`DELETE /security/users/{user_id}/roles <operation/api.controllers.security_controller.remove_user_role>` (`user:id`_, `role:id`_)
 
+security:edit_run_as
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>` (`*:*`_)
+
 security:read_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>` (`*:*`_)
@@ -635,6 +644,13 @@ Task
 task:status
 ~~~~~~~~~~~~~
 - :api-ref:`GET /tasks/status <operation/api.controllers.task_controller.get_tasks_status>` (`*:*`_)
+
+Vulnerability
+^^^^^^^^^^^^^^^
+vulnerability:read
+~~~~~~~~~~~~~~~~~~
+- :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
+
 
 
 Default policies
@@ -944,6 +960,7 @@ Provide full access to all security related functionalities.
       actions:
         - security:create
         - security:create_user
+        - security:edit_run_as
         - security:read_config
         - security:update_config
         - security:revoke
@@ -1025,6 +1042,7 @@ Provide full access to all users related functionalities.
     resourceless:
       actions:
         - security:create_user
+        - security:edit_run_as
         - security:revoke
       resources:
         - '*:*:*'
@@ -1036,6 +1054,32 @@ Provide full access to all users related functionalities.
         - security:delete
       resources:
         - user:id:*
+      effect: allow
+
+users_modify_run_as
+^^^^^^^^^^^^^^^^^^^
+Provides the capability to modify the users' run_as parameter.
+
+.. code-block:: yaml
+
+    flag:
+      actions:
+        - security:edit_run_as
+      resources:
+        - '*:*:*'
+      effect: allow
+
+vulnerability_read
+^^^^^^^^^^^^^^^^^^
+Allow reading agents' vulnerabilities information.
+
+.. code-block:: yaml
+
+    vulnerability:
+      actions:
+        - vulnerability:read
+      resources:
+        - agent:id:*
       effect: allow
 
 
@@ -1061,6 +1105,7 @@ Policies
     - `syscheck_all`_
     - `syscollector_read`_
     - `task_status`_
+    - `vulnerability_read`_
 
 Rules
     - `wui_elastic_admin`_
@@ -1110,6 +1155,7 @@ Policies
     - `sca_read`_
     - `syscheck_read`_
     - `syscollector_read`_
+    - `vulnerability_read`_
 
 
 users_admin
