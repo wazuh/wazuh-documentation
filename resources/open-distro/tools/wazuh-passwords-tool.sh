@@ -29,7 +29,7 @@ checkRoot() {
 restartService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
-        eval "systemctl restart $1.service ${debug}"
+        eval "systemctl restart $1.service ${VERBOSE}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
@@ -37,7 +37,7 @@ restartService() {
             echo "${1^} started"
         fi  
     elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
-        eval "/etc/init.d/$1 restart ${debug}"
+        eval "/etc/init.d/$1 restart ${VERBOSE}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
@@ -45,7 +45,7 @@ restartService() {
             echo "${1^} started"
         fi     
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
-        eval "/etc/rc.d/init.d/$1 restart ${debug}"
+        eval "/etc/rc.d/init.d/$1 restart ${VERBOSE}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
@@ -255,9 +255,9 @@ changePassword() {
 runSecurityAdmin() {
     
     echo "Loading changes..."
-    eval "cp /usr/share/elasticsearch/backup/* /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ ${debug}"
-    eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${debug}"
-    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${debug}"
+    eval "cp /usr/share/elasticsearch/backup/* /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ ${VERBOSE}"
+    eval "cd /usr/share/elasticsearch/plugins/opendistro_security/tools/ ${VERBOSE}"
+    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/elasticsearch/certs/root-ca.pem -cert /etc/elasticsearch/certs/admin.pem -key /etc/elasticsearch/certs/admin-key.pem ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
