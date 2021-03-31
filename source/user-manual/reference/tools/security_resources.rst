@@ -7,27 +7,15 @@ security_resources
 
 .. versionadded:: 4.2.0
 
-The **security_resources** tool allows managing **protected RBAC resources** and accessing to restricted functionality.
+The **security_resources** tool allows managing **protected RBAC resources** and accessing to restricted functionality. For more information about the different RBAC resource types, please visit the :ref:`How it works <how-it-works>` section.
 
 Manage protected RBAC resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-  Protected RBAC resources can only be managed with this CLI. Not even the Wazuh API with administrator permissions will be able to do that.
-
-There are 3 different types of RBAC resources:
-
-#. **Default**
-    They are created on start and cannot be modified or deleted.
-
-#. **Protected**
-    Protected resources created with the CLI. They act as ``default`` but they are created by a user.
-
-#. **User**
-    User created resources. They can be managed as long as the user has permissions to do so.
+  As explained in the :ref:`How it works <api_rbac_how_it_works>` section, a protected RBAC resource can only be managed with this CLI. Not even the Wazuh API with administrator permissions will be able to modify or delete it.
 
 Using the CLI with the desired option, all the RBAC resources can be created, modified, deleted, linked or unlinked. These are the options:
-
 
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Description**                            | **Short command** | **Long command**           | **Example**                                                                                                                |
@@ -40,13 +28,13 @@ Using the CLI with the desired option, all the RBAC resources can be created, mo
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
 | Add a new security rule                    | ``-aru``          | ``--add-rule``             | ``-aru '{"name": "RULE_NAME", "rule": {"MATCH": {"sample": "yes"}}}'``                                                     |
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
-| Update a protected user                    | ``-uu``           | ``--update-user``          | ``-uu '{"username": "USERNAME", "password": "PASSWORD", "allow_run_as": TRUE/FALSE}'``                                     |
+| Update a protected user                    | ``-uu``           | ``--update-user``          | ``-uu USER_ID '{"username": "USERNAME", "password": "PASSWORD", "allow_run_as": TRUE/FALSE}'``                                     |
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
-| Update a protected role                    | ``-ur``           | ``--update-role``          | ``-ur '{"name": "ROLE_NAME"}'``                                                                                            |
+| Update a protected role                    | ``-ur``           | ``--update-role``          | ``-ur ROLE_ID '{"name": "ROLE_NAME"}'``                                                                                            |
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
-| Update a protected policy                  | ``-up``           | ``--update-policy``        | ``-up '{"name": "POLICY_NAME", "policy": {"actions": ["agent:read"], "resources": ["agent:id:001"], "effect": "allow"}}'`` |
+| Update a protected policy                  | ``-up``           | ``--update-policy``        | ``-up POLICY_ID '{"name": "POLICY_NAME", "policy": {"actions": ["agent:read"], "resources": ["agent:id:001"], "effect": "allow"}}'`` |
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
-| Update a protected security rule           | ``-uru``          | ``--update-rule``          | ``-uru '{"name": "RULE_NAME", "rule": {"MATCH": {"sample": "yes"}}}'``                                                     |
+| Update a protected security rule           | ``-uru``          | ``--update-rule``          | ``-uru RULE_ID '{"name": "RULE_NAME", "rule": {"MATCH": {"sample": "yes"}}}'``                                                     |
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
 | Remove a protected user                    | ``-ru``           | ``--remove-user``          | ``-ru [USER_IDs]``                                                                                                         |
 +--------------------------------------------+-------------------+----------------------------+----------------------------------------------------------------------------------------------------------------------------+
