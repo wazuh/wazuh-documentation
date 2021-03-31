@@ -115,6 +115,7 @@ Options
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
+- `force_reconnect_interval`_
 - `ip_update_interval`_
 - `local_ip`_
 - `disable-active-response`_
@@ -232,6 +233,21 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 
 .. warning::
 	Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash.  This is an unfortunate legacy naming inconsistency that is easy to mix up.
+
+  .. _force_reconnect_interval:
+
+force_reconnect_interval
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.3.0
+
+Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
+
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 0s (disabled)                                                                                                                                    |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days), or w (weeks). |
++--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _ip_update_interval:
 
