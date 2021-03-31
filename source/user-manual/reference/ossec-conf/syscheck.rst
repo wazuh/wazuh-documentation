@@ -468,7 +468,7 @@ Example:
 
 .. note::
 
-  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *manager.conf*.
+  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *agent.conf*.
 
 
 .. _reference_ossec_syscheck_process_priority:

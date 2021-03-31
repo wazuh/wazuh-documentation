@@ -37,7 +37,7 @@ each agent when an alert is triggered:
 - Network MAC.
 - Date of installation (hidden).
 
-To include these labels in alerts from a specific agent, the following configuration must be inserted into the ``manager.conf`` file:
+To include these labels in alerts from a specific agent, the following configuration must be inserted into the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -76,7 +76,7 @@ When an alert is fired for an agent with the above configuration applied from th
     network.ip: 172.17.0.0
     network.mac: 02:42:ac:11:00:02
     Rule: 550 (level 7) -> 'Integrity checksum changed.'
-    Integrity checksum changed for: '/var/ossec/etc/manager.conf'
+    Integrity checksum changed for: '/var/ossec/etc/agent.conf'
     Size changed from '3663' to '3664'
     Old md5sum was: '98b351df146410f174a967d726f9965e'
     New md5sum is : '7f4f5846dcaa0013a91bd6d3ac4a1915'

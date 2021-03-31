@@ -10,7 +10,7 @@ The ossec-syscheckd program checks configured files for changes to the checksums
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec/etc/manager.conf                         |
+|                 | Default value                             | /var/ossec/etc/agent.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------------------+

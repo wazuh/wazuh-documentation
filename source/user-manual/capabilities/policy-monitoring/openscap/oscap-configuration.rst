@@ -17,7 +17,7 @@ Configuration
 Basic usage
 ------------------------------------------------------------------
 
-To configure the options for OpenSCAP go to :ref:`agent.conf <reference_agent_conf>`, or for more details about specific options, see the :ref:`OpenSCAP section <wodle_openscap>`.
+To configure the options for OpenSCAP go to :ref:`agent.conf <reference_client_conf>`, or for more details about specific options, see the :ref:`OpenSCAP section <wodle_openscap>`.
 
 In this example, we configure Wazuh to run OpenSCAP each day, with a timeout of 30 minutes. ::
 
@@ -41,7 +41,7 @@ This section describes how to evaluate the Payment Card Industry Data Security S
 
 Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
-Modify the ``agent.conf`` file in the agent side to apply the desired profile:
+Modify the ``agent.conf`` file to apply the desired profile:
 
 .. code-block:: xml
 
@@ -129,7 +129,7 @@ The Red Hat Security Response Team provides OVAL definitions for all vulnerabili
 
 Each agent must be properly identified in order to know which policy and profile to execute. To do this, configure ``<config-profile>`` with the desired identifier.
 
-Modify the ``agent.conf`` file in the agent side to apply the desired profile:
+Modify the ``agent.conf`` file to apply the desired profile:
 
 .. code-block:: xml
 

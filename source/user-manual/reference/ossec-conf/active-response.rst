@@ -161,14 +161,16 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 +--------------------+-----------------------------+
 
 .. warning::
-    This option must be configured directly in the **agent.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
+    This option must be configured in the **agent.conf** file in the agent, and also in the **manager.conf** file in manager side, even when using a manager/agent setup with centralized configuration of other settings via **shared/agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration
 --------------------
 
+manager.conf
+
 .. code-block:: xml
 
-    <!-- On the manager side -->
+    <!-- On the manager.conf file -->
 
     <active-response>
       <disabled>no</disabled>
@@ -180,7 +182,12 @@ Sample Configuration
       <timeout>1</timeout>
     </active-response>
 
-    <!-- On the agent side -->
+
+agent.conf 
+
+.. code-block:: xml
+
+    <!-- On the agent.conf file in the agent side -->
     <active-response>
       <disabled>no</disabled>
       <repeated_offenders>1,5,10</repeated_offenders>
