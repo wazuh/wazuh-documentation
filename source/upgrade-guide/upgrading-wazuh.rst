@@ -1,18 +1,18 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _upgrading_wazuh_server:
 
 Upgrading the Wazuh manager
 ===========================
 
-This section describes how to upgrade the Wazuh manager, from Wazuh 3.x to the latest available version, which includes upgrading to the latest compatible version of Open Distro for Elasticsearch or Elastic Stack basic licence. 
+This section describes how to upgrade the Wazuh manager to the latest available version, which includes upgrading to the latest compatible version of Open Distro for Elasticsearch or Elastic Stack basic licence. 
 
 .. note::
-  To reduce the downtime of the servers it is recommended to upgrade the master node first
+  In order to reduce server downtime, it is recommended to update the master node first
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-To upgrade the Wazuh manager choose the appropriate tab for the desired package manager:
+To upgrade the Wazuh manager, choose the appropriate tab for the desired package manager:
 
 .. tabs::
 
@@ -54,9 +54,9 @@ To upgrade the Wazuh manager choose the appropriate tab for the desired package 
 
 
 .. note::
-  The configuration file of the Wazuh manager will not be replaced in upgrades if you modified it, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
+  The configuration file of the Wazuh manager will not be replaced in the updates if it has been modified, so the settings of the new capabilities will have to be added manually. More information can be found at the :ref:`User manual <user_manual>`.
 
-  If Wazuh is run in a multi-node cluster, it is necessary to upgrade all the Wazuh managers to the same version. Otherwise, the Wazuh nodes will not join the cluster.
+  If Wazuh runs in a multi-node cluster, it is necessary to update all Wazuh managers to the same version. Otherwise, Wazuh nodes will not join the cluster.
 
 Disabling the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -95,4 +95,4 @@ It is recommended to disable the Wazuh repository in order to avoid undesired up
 Next step
 ---------
 
-The next step consists on :ref:`upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>`.
+:ref:`Upgrading Elasticsearch, Kibana and Filebeat<upgrade_elasticsearch_filebeat_kibana>`.

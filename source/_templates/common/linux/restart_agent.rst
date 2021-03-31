@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. tabs::
 
@@ -18,7 +18,7 @@
 
   .. code-block:: console
 
-   # /var/ossec/bin/ossec-control restart
+   # /var/ossec/bin/wazuh-control restart
 
 
 .. End of include file

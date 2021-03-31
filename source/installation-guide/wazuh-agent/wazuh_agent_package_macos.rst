@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh agent on macOS
 
@@ -43,7 +43,7 @@ Finally, start the Wazuh agent:
 
   .. code-block:: console
 
-    # sudo /Library/Ossec/bin/ossec-control start
+    # sudo /Library/Ossec/bin/wazuh-control start
 
 
 Uninstall
@@ -55,14 +55,13 @@ To uninstall the agent in macOS:
 
     .. code-block:: console
 
-      # /Library/Ossec/bin/ossec-control stop
+      # /Library/Ossec/bin/wazuh-control stop
 
-#. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file
+#. Remove the ``/Library/Ossec/`` folder
 
     .. code-block:: console
 
       # /bin/rm -r /Library/Ossec
-      # /bin/rm /etc/ossec-init.conf
 
 #. Stop and unload dispatcher
 
@@ -89,9 +88,3 @@ To uninstall the agent in macOS:
     .. code-block:: console
 
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _basic_installation_guide:
 
@@ -8,16 +8,16 @@ Wazuh with Elastic Stack basic license
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section aims to guide the user through the process of installing Wazuh. In this installation guide, the basic license option of Elastic Stack will be used, this includes everything in the Open Source version under Apache 2.0 license plus some extra capabilities like core Elastic Stack Security features, Kibana alerting and more. More information about the Wazuh components, including a brief description of each one, may be found :ref:`here <installation_guide>`.
+This section aims to guide the user through the installation process of Wazuh. This installation guide will use the Elastic Stack basic license option, which contains everything included in the open source version under the Apache 2.0 license, plus some additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. More information about the Wazuh components, including a brief description of each one, can be found at our :ref:`here <installation_guide>`.
 
 Deployment types
 ----------------
 
-The Installation guide is divided into two independent sections, all-in-one deployment and distributed deployment according to the chosen configuration. The requirements of the Wazuh and Elastic Stack installation are similar to the ones described in the :ref:`requirements <installation_requirements>` section.
+The installation guide is divided into two independent sections: all-in-one deployment and distributed deployment, according to the chosen configuration. The installation requirements for Wazuh and Elastic Stack are similar to those described in the :ref:`requirements <installation_requirements>` section.
 
-- All-in-one deployment: In this case, Wazuh and Elastic Stack are installed in the same host, this type of deployment is suitable for testing and small working environments. 
+- All-in-one deployment: Wazuh and Elastic Stack are installed in the same host. This type of deployment is appropriate for testing and small working environments. 
 
-- Distributed deployment: Each component is installed in a separate host and can also be installed in a multi-node cluster. This type of deployment allows the high availability and scalability of the product and is suitable for large working environments. 
+- Distributed deployment: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
 
 
 Installation methods
@@ -25,9 +25,9 @@ Installation methods
 
 For each type of deployment, the user can choose between two installation methods:
 
-- Unattended: Automated installation. Requires the initial input of the information needed to accomplish the installation process using scripts.
+- Unattended: Automated installation. It requires the initial input of the necessary information to perform the installation process through scripts.
 
-- Step by step: Manual installation. Includes a detailed description of every step of the installation process.
+- Step by step: Manual installation. Includes a detailed description of each step of the installation process.
 
 
 Start deploying Wazuh server and Elastic Stack

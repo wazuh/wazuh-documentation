@@ -7,7 +7,7 @@ wazuh-logtest
 
 .. versionadded:: 4.1.0
 
-`wazuh-logtest` tool allows the testing and verification of rules against provided log examples inside a sandbox in `ossec-analysisd`. Helpful when writing and debugging custom rules and decoders, troubleshooting false positives and negatives.
+`wazuh-logtest` tool allows the testing and verification of rules against provided log examples inside a sandbox in `wazuh-analysisd`. Helpful when writing and debugging custom rules and decoders, troubleshooting false positives and negatives.
 
 +-------------------------------------------+--------------------------------------------------------------------------------+
 | **-d**                                    | Run as a Print debug output to the terminal.                                   |
@@ -20,7 +20,9 @@ wazuh-logtest
 |                                           |                                                                                |
 |                                           | Only one log line should be supplied for this to be useful.                    |
 +-------------------------------------------+--------------------------------------------------------------------------------+
+| **-l <location>**                         | Set custom location.                                                           |
++-------------------------------------------+--------------------------------------------------------------------------------+
 | **-V**                                    | Display the version and license information for Wazuh and wazuh-logtest.       |
 +-------------------------------------------+--------------------------------------------------------------------------------+
-| **-q**                                    | Quiet excecution.                                                              |
+| **-q**                                    | Quiet execution.                                                               |
 +-------------------------------------------+--------------------------------------------------------------------------------+

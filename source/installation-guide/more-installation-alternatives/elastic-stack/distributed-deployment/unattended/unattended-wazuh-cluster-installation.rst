@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _basic_unattended_distributed_wazuh:
 
@@ -16,7 +16,7 @@ Download the installation script:
 
 .. code-block:: console
 
-  # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/elastic-stack/unattended-installation/distributed/wazuh-server-installation.sh
+  # curl -so ~/wazuh-server-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/elastic-stack/unattended-installation/distributed/wazuh-server-installation.sh
     
 
 Replace the following variables and run the installation script: 

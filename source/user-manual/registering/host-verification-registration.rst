@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _host-verification-registration:
 
@@ -206,7 +206,7 @@ There are two options to register the Wazuh agent using host verification. Pleas
 
       .. code-block:: console
 
-       # /Library/Ossec/bin/ossec-control restart
+       # /Library/Ossec/bin/wazuh-control restart
 
      The Wazuh agent registration can be adjusted by using different :ref:`agent-auth` options.
 

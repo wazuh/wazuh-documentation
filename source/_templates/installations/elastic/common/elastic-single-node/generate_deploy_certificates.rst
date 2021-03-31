@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 * Move to the installation location and create the certificates directory:
 
@@ -27,7 +27,7 @@
 
       .. code-block:: console
 
-        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/single-node/search-guard.yml
+        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/single-node/search-guard.yml
 
 
       After downloading the configuration file in ``~/searchguard/search-guard.yml``, replace the values ``<elasticsearch_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses. More than one IP can be specified (one entry per line):
@@ -49,7 +49,7 @@
 
       .. code-block:: console
 
-        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.0/resources/open-distro/searchguard/single-node/search-guard-multi-node.yml
+        # curl -so ~/searchguard/search-guard.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/searchguard/single-node/search-guard-multi-node.yml
 
 
       After downloading the configuration file, replace the value ``<elasticsearch_IP>`` and ``<kibana_ip>``  with the corresponding IP addresses in the file ``~/searchguard/search-guard.yml``. More than one IP can be specified (one entry per line):

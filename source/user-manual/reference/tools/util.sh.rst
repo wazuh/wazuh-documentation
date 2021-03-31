@@ -11,7 +11,7 @@ A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes
 
 
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **addfile <filename> [<format>]** | Add a log file to be monitored by :ref:`ossec-logcollector <ossec-logcollector>`                                                  |
+| **addfile <filename> [<format>]** | Add a log file to be monitored by :ref:`ossec-logcollector <wazuh-logcollector>`                                                  |
 |                                   |                                                                                                                                   |
 |                                   | A local file will be added to the :ref:`agent.conf <reference_client_conf>`                                                       |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
