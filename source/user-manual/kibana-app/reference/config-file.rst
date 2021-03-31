@@ -1,11 +1,11 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _kibana_config_file:
 
 Configuration file
 ==================
 
-The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/optimize/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh Kibana plugin includes a configuration file (located at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh Kibana plugin in *Settings > Configuration*.
 

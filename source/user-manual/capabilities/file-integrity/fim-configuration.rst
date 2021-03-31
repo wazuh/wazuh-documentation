@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _fim-examples:
 
@@ -11,7 +11,8 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
-#. `Configuring reporting file changes`_
+#. `Configuring Windows registry`_
+#. `Configuring reporting file and registry value changes`_
 #. `Configuring ignoring files and Windows registry entries`_
 #. `Configuring ignoring files via rules`_
 #. `Configuring the alert severity for the monitored files`_
@@ -39,30 +40,6 @@ By default, syscheck scans selected directories, whose list depends on the :ref:
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
     <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
   </syscheck>
-
-.. versionadded:: 4.0
-
-Environment variables can be used to configure syscheck in Linux and Windows.
-
-.. code-block:: xml
-
-  <syscheck>
-    <directories check_all="yes">$DIRECTORY</directories>
-  </syscheck>
-
-On UNIX based systems, the variable must be added to the file ``/etc/ossec-init.conf`` if Wazuh is restarted using systemd. On the other hand, if Wazuh is restarted using the ``ossec-control`` binary, the variable must be owned by the root user.
-You can specify multiple paths in a variable by separating them using ``:``.
-
-.. code-block:: xml
-
-  <syscheck>
-    <directories check_all="yes">%CommonProgramFiles%</directories>
-  </syscheck>
-
-On Windows, only system environment variables can be used. You can add multiple directories to the same variable by separating them using ``;``
-
-.. note::
-  Wazuh runs as a 32 bit application, so the previous environment variable will be replaced by ``C:\Program Files (x86)\Common Files``. In order to specifically monitor ``C:\Program Files\Common Files``, the associate environment variable is: ``%CommonProgramW6432%``.
 
 Configuring scheduled scans
 ---------------------------
@@ -172,19 +149,35 @@ An example alert on a new file creation looks as follows:
   - SHA256: 092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6
 
 
+.. _how_to_fim_registries:
+
+Configuring Windows registry
+----------------------------
+
+To configure the Windows registries, it is necessary to create a list of those registries to monitor. This is done in a similar manner to how we list directories and files, but using the label ```<windows_registry>``` instead. There are many attributes and options to specify, for example, all the basic checks can be enabled with the ``check_all`` attribute, the registry architecture to monitor can be specified with ``arch``, ``report_changes`` can be used to get information on the changes made to values, and so on. A list of all the supported attributes and options can be found here: :ref:`Windows registries <reference_ossec_syscheck_windows_registry>`.
+
+.. code-block:: xml
+
+  <syscheck>
+    <windows_registry arch="both" check_all="yes">HKEY_LOCAL_MACHINE\SOFTWARE</windows_registry>
+    <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
+  </syscheck>
+
+
 .. _how_to_fim_report_changes:
 
-Configuring reporting file changes
-----------------------------------
+Configuring reporting file and registry value changes
+-----------------------------------------------------
 
-To report the exact content that has been changed in a text file, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
+To report the exact content that has been changed in a text file or in a Windows registry value, syscheck can be configured with the ``report_changes`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` or the :ref:`registries <reference_ossec_syscheck_windows_registry>` options. ``Report_changes`` should be used with caution as Wazuh copies every single monitored file to a private location.
 
-In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories:
+In this example, by enabling the ``report_changes``, the alerts will show the changed content for all the text files in a listed directory and its subdirectories or for all values of a monitored Windows registry:
 
 .. code-block:: xml
 
   <syscheck>
     <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
+    <windows_registry arch="64bit" report_changes="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
   </syscheck>
 
 .. code-block:: console
@@ -217,6 +210,46 @@ In this example, by enabling the ``report_changes``, the alerts will show the ch
   < Original text
   ---
   > Altered text
+
+.. code-block:: console
+
+  {
+      "type": "event",
+      "data": {
+          "path": "HKEY_LOCAL_MACHINE\\SYSTEM\\Setup",
+          "mode": "scheduled",
+          "type": "modified",
+          "arch": "[x64]",
+          "value_name": "test_value",
+          "timestamp": 1606349371,
+          "attributes": {
+              "type": "registry_value",
+              "value_type": "REG_SZ",
+              "size": 12,
+              "hash_md5": "96c15c2bb2921193bf290df8cd85e2ba",
+              "hash_sha1": "ca527369d9e8c1e081558bd92f90f65c4eb77e21",
+              "hash_sha256": "fe32608c9ef5b6cf7e3f946480253ff76f24f4ec0678f3d0f07f9844cbff9601",
+              "checksum": "56a7cc798b98bcd92a3aa49bfa3943ce3b4f4725"
+          },
+          "changed_attributes": [
+              "size",
+              "md5",
+              "sha1",
+              "sha256"
+          ],
+          "old_attributes": {
+              "type": "registry_value",
+              "value_type": "REG_SZ",
+              "size": 17,
+              "hash_md5": "84b8bc6ddfb8c2032ae2eb44d162369b",
+              "hash_sha1": "c1dab0c0864b6ac9bdd3743a1408d679f1acd823",
+              "hash_sha256": "bf573149b23303cac63c2a359b53760d919770c5d070047e76de42e2184f1046",
+              "checksum": "76538a04f4923b9688e50802e501771cb3c0508f"
+          },
+          "content_changes": "< original content\n---\n> new content\n"
+      }
+  }
+
 
 If some sentive files exist in the monitored with ``report_changes`` path, :ref:`nodiff <reference_ossec_syscheck_nodiff>` option can be used. This option disables computing the diff for the listed files, avoiding data leaking by sending the files content changes through alerts:
 
@@ -256,6 +289,7 @@ In this example, by adding :ref:`nodiff <reference_ossec_syscheck_nodiff>` optio
   - SHA1: 18dfef68273c00fc733e28ce9aa1830f5e8fabd8
   - SHA256: 60c2a08e66f02bacea882f7b437f9c983431d75a686b703661c34e288d36de9dWhat changed:
   <Diff truncated because nodiff option>
+
 
 .. _how_to_fim_ignore:
 

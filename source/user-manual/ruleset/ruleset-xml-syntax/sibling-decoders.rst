@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _sibling_decoders:
 
@@ -63,24 +63,27 @@ A simple decoder may be:
     <order>type,srcuser,action,dstuser</order>
   </decoder>
 
-Using `/var/ossec/bin/ossec-logtest` we get:
+Using `/var/ossec/bin/wazuh-logtest` we get:
 
 .. code-block:: none
   :class: output
 
+  Type one log per line
+
+  Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
+
   **Phase 1: Completed pre-decoding.
-  full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
-  timestamp: 'Apr 12 14:31:38'
-  hostname: 'hostname1'
-  program_name: 'securityapp'
-  log: 'INFO: srcuser="Bob" action="called" dstusr="Alice"'
+          full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
+          timestamp: 'Apr 12 14:31:38'
+          hostname: 'hostname1'
+          program_name: 'securityapp'
 
   **Phase 2: Completed decoding.
-  decoder: 'securityapp'
-  type: 'INFO'
-  srcuser: 'Bob'
-  action: 'called'
-  dstuser: 'Alice'
+          name: 'securityapp'
+          action: 'called'
+          dstuser: 'Alice'
+          srcuser: 'Bob'
+          type: 'INFO'
 
 However, if the log source then provides this message:
 
@@ -125,36 +128,34 @@ Both messages are now correctly decoded.
 .. code-block:: none
   :class: output
 
-  ossec-testrule: Type one log per line.
+  Type one log per line
 
   Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
 
   **Phase 1: Completed pre-decoding.
-  full event: 'Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
-  timestamp: 'Dec 28 01:35:18'
-  hostname: 'hostname1'
-  program_name: 'securityapp'
-  log: 'INFO: srcuser="Bob" action="called" dstusr="Alice"'
+          full event: 'Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
+          timestamp: 'Dec 28 01:35:18'
+          hostname: 'hostname1'
+          program_name: 'securityapp'
 
   **Phase 2: Completed decoding.
-  decoder: 'securityapp'
-  type: 'INFO'
-  srcuser: 'Bob'
-  action: 'called'
-  dstuser: 'Alice'
+          name: 'securityapp'
+          action: 'called'
+          dstuser: 'Alice'
+          srcuser: 'Bob'
+          type: 'INFO'
 
 
   Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"
 
   **Phase 1: Completed pre-decoding.
-  full event: 'Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"'
-  timestamp: 'Apr 01 19:21:24'
-  hostname: 'hostname2'
-  program_name: 'securityapp'
-  log: 'INFO: action="logged on" srcuser="Bob"'
+          full event: 'Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"'
+          timestamp: 'Apr 01 19:21:24'
+          hostname: 'hostname2'
+          program_name: 'securityapp'
 
   **Phase 2: Completed decoding.
-  decoder: 'securityapp'
-  type: 'INFO'
-  srcuser: 'Bob'
-  action: 'logged on'
+          name: 'securityapp'
+          action: 'logged on'
+          srcuser: 'Bob'
+          type: 'INFO'

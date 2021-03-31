@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 * The next step is the certificates placement, replace the ``X`` with the corresponding node number and execute the following commands.  This guide assumes that the file ``certs.tar`` is placed in ~/ (root home user folder).
 

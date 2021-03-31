@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _gdpr:
 
@@ -8,20 +8,20 @@ Using Wazuh for GDPR
 .. meta::
   :description: Learn about the GDPR compliance and how Wazuh helps you to implement it.
 
-The European Union's **General Data Protection Regulation (GDPR)** has been drawn up to agree on data privacy legislation across Europe, with its main focus on providing data protection for all citizens in the European Union.
+The **General Data Protection Regulation** of the European Union (GDPR) has been drawn up in order to agree on data privacy legislation throughout Europe, focusing mainly on the protection of the data of all citizens of the European Union.
 
-To this end, it seeks to enhance the privacy of such data and to reform the way in which EU organizations approach data privacy.
+For that purpose, this regulation seeks to improve the privacy of such data and reform the way in which European Union organizations approach data privacy.
 
 * Wazuh for GDPR White Paper `(PDF) <https://wazuh.com/resources/Wazuh_GDPR_White_Paper.pdf>`_
 
 Introduction
 ------------
 
-Wazuh takes advantage of its file integrity monitoring and access control capabilities coupled with a new tagging in Wazuh ruleset. Rules in compliance with a specific GDPR technical requirement have a tag describing it.
+Wazuh uses its file integrity control and access control capabilities, along with a new tagging in the Wazuh ruleset. Rules that meet a specific GDPR technical requirement of the GDPR have a label that identifies them.
 
-The syntax used for rule tagging is **gdpr_** followed by the chapter, article and, where appropriate, the section and paragraph to which the requirement belongs. (e.g. gdpr_II_5.1.f).
+The syntax used for rule tagging is **gdpr_** followed by the chapter, the article and, if applicable, the section and paragraph to which the requirement belongs. (e.g. gdpr_II_5.1.f).
 
-GDPR formal requirements content are out of the technical scope and therefore are not considered in this document.
+GDPR formal requirements content is outside the technical scope and, therefore, is not covered in this document.
 
 Contents
 --------

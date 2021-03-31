@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _api_rbac_configuration:
 
@@ -151,17 +151,15 @@ To create a new user, make a request to :api-ref:`POST /security/users <operatio
 This information needs to be specified in order to create a new user. As an example, its name will be "sales-member-1":
 
 .. code-block:: json
-    :emphasize-lines: 4
 
     {
       "username": "sales-member-1",
-      "password": "Sales-Member-1",
-      "allow_run_as": false
+      "password": "Sales-Member-1"
     }
 
 .. code-block:: console
 
-    # curl -k -X POST "https://localhost:55000/security/users?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"sales-member-1\",\"password\":\"Sales-Member-1\",\"allow_run_as\":false}"
+    # curl -k -X POST "https://localhost:55000/security/users?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"sales-member-1\",\"password\":\"Sales-Member-1\"}"
 
 There is a parameter called ``allow_run_as`` on the highlighted line. If set to *true*, roles can be assigned to the user based on the information of an authorization context. Visit this section to find more detailed information about :ref:`Authorization Context <authorization_context_method>`.
 
@@ -183,6 +181,35 @@ The output would look like below:
         "failed_items": []
       },
       "message": "User was successfully created",
+      "error": 0
+    }
+
+Edit allow_run_as
+-----------------
+By default, new users will not be able to authenticate using an authorization context. To enable this option, it is necessary to enable the ``allow_run_as`` parameter for the user. To do this, make a request to :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>`.
+
+.. code-block:: console
+
+    # curl -k -X PUT "https://localhost:55000/security/users/{user_id}/run_as?allow_run_as=true" -H  "Authorization: Bearer $TOKEN"
+
+The output should look like this:
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [{
+          "id": 101,
+          "username": "sales-member-1",
+          "allow_run_as": true,
+          "roles": []
+        }],
+        "total_affected_items": 1,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "Parameter allow_run_as has been enabled for the user",
       "error": 0
     }
 
@@ -292,7 +319,7 @@ Following the previous example, it is possible to assign a new user named "sales
           {
             "id": 101,
             "username": "sales-member-1",
-            "allow_run_as": false,
+            "allow_run_as": true,
             "roles": [
               100
             ]

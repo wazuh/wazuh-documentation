@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _regex_syntax:
 
@@ -85,6 +85,8 @@ This library is designed to be simple while still supporting the most common reg
   - ``.`` matches a literal dot, whereas ``\.`` matches any character
   - ``\s`` matches only an ASCII space (32), not other whitespace like tab
   - there is no syntax to match a literal caret, asterisk or plus (although ``\p`` will match asterisk or plus, along with some other characters)
+
+.. _os_sregex_syntax:
 
 Sregex (OS_Match) syntax
 -----------------------------

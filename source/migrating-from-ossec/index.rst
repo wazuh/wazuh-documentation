@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _upgrading_ossec:
 
@@ -11,9 +11,9 @@ Migrating from OSSEC
 Why it's time to migrate
 ------------------------
 
-Unfortunately OSSEC users have not seen lots of new features over the last decade. The project has been in maintenance mode for a long time and very little development work has been done. There is no active roadmap and last releases consist mostly in bug fixes reported by occasional contributors.
+Unfortunately, OSSEC users have not seen lots of new features over the last decade. The project has been in maintenance mode for a long time and very little development work has been done. There is no active roadmap and the last releases consist mostly of bug fixes reported by occasional contributors.
 
-This is why, back in 2015, Wazuh team decided to fork the project. The result is a much more comprehensive, easy to use, reliable and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments.
+This is why, back in 2015, the Wazuh team decided to fork the project. The result is a much more comprehensive, easy-to-use, reliable, and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments.
 
 Regarding project activity and roadmap, you can find Wazuh code in our `GitHub repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC).
 
@@ -23,10 +23,10 @@ Scalability and reliability
 +++++++++++++++++++++++++++
 
 * Cluster support for managers to scale horizontally.
-* Support for Puppet, Chef, Ansible and Docker deployments.
+* Support for Puppet, Chef, Ansible, and Docker deployments.
 * TCP support for agent-manager communications.
 * Anti-flooding feature to prevent large burst of events from being lost or negatively impact network performance.
-* AES encryption used for agent-manager communications (instead of Blowfish).
+* AES encryption is used for agent-manager communications (instead of Blowfish).
 * Multi-thread support for manager processes, dramatically increasing their performance.
 
 Installation and configuration management
@@ -35,7 +35,7 @@ Installation and configuration management
 * MSI signed package for Windows systems, with auto registration and configuration support.
 * Unified RPM and Deb Linux packages.
 * Support for AIX, Solaris, Mac OS X and HP-UX.
-* RESTful API for status monitoring, querying and configuration management.
+* RESTful API for status monitoring, querying, and configuration management.
 * Ability to upgrade agents from the managers.
 * Improved centralized configuration management using agent groups.
 
@@ -65,7 +65,7 @@ Regulatory compliance
 * Compliance dashboards for `Elastic Stack <https://www.elastic.co>`_, provided by Wazuh Kibana plugin.
 * Compliance dashboards for `Splunk <https://www.splunk.com>`_, provided by Wazuh app.
 * Use of `OwlH project <https://www.owlh.net>`_ Suricata mapping for compliance.
-* SHA256 hashes used for file integrity monitoring (in addition to to MD5 and SHA1).
+* SHA256 hashes used for file integrity monitoring (in addition to MD5 and SHA1).
 
 Elastic Stack integration
 +++++++++++++++++++++++++
@@ -73,7 +73,7 @@ Elastic Stack integration
 * Provides the ability to index and query data.
 * Data enrichment using GeoIP Elasticsearch module.
 * Kibana plugin used to visualize data (integrated using Wazuh REStful API).
-* Web user interface pre-configured extensions, adapting it to your use cases.
+* Web user interface pre-configured extensions, adapting them to your use cases.
 
 Incident response
 +++++++++++++++++
@@ -106,7 +106,7 @@ The following guides describe how to migrate your existing OSSEC installation to
 The migration of Elastic stack, in the case that you already have it installed, is beyond the scope of Wazuh documentation. We recommend you visit our guides for :ref:`Installing Elastic Stack <elasticsearch_cluster>`.
 
 .. note::
-    OSSEC agents are compatible with Wazuh server. You can even have different versions of Wazuh and OSSEC agents reporting to a centralized Wazuh server. Having said that, it is recommended to keep both server and agents updated to the latest version. For interactive help, our `mailing list <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
+    OSSEC agents are compatible with the Wazuh server. You can even have different versions of Wazuh and OSSEC agents reporting to a centralized Wazuh server. Having said that, it is recommended to keep both server and agents updated to the latest version. For interactive help, our `mailing list <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
 
 .. toctree::
    :hidden:

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _reference_wazuh_agent_class:
 
@@ -63,77 +63,77 @@ Agent enrollment variables
 --------------------------
 
 $wazuh_enrollment_enabled
-  Sets timeouts in minutes for repeat offenders.
+  Enables/disables agent enrollment.
 
   `Default undef`
 
 $wazuh_enrollment_manager_address
-  Sets timeouts in minutes for repeat offenders.
+  Hostname or IP of the manager where the agent will be enrolled.
 
   `Default undef`
 
 $wazuh_enrollment_port
-  Sets timeouts in minutes for repeat offenders.
+  Specifies the port on the manager to send enrollment request.
 
   `Default undef`
 
 $wazuh_enrollment_agent_name
-  Sets timeouts in minutes for repeat offenders.
+  Agent name that will be used for enrollment.
 
   `Default undef`
 
 $wazuh_enrollment_groups
-  Sets timeouts in minutes for repeat offenders.
+  Groups name to which the agent belongs.
 
   `Default undef`
 
 $wazuh_enrollment_agent_address
-  Sets timeouts in minutes for repeat offenders.
+  Force IP address from the agent. If this is not set manager will extract source IP from enrollment message.
 
   `Default undef`
 
 $wazuh_enrollment_ssl_cipher
-  Sets timeouts in minutes for repeat offenders.
+  Override SSL used ciphers.
 
   `Default undef`
 
 $wazuh_enrollment_server_ca_path
-  Sets timeouts in minutes for repeat offenders.
+  Used for manager verification. If no CA certificate is set server will not be verified.
 
   `Default undef`
 
 $wazuh_enrollment_agent_cert_path
-  Sets timeouts in minutes for repeat offenders.
+  Required when agent verification is enabled in the manager.
 
   `Default undef`
 
 $wazuh_enrollment_agent_key_path
-  Sets timeouts in minutes for repeat offenders.
+  Required when agent verification is enabled in the manager.
 
   `Default undef`
 
 $wazuh_enrollment_auth_pass
-  Sets timeouts in minutes for repeat offenders.
+  Enrollment password.
 
   `Default undef`
 
 $wazuh_enrollment_auth_pass_path
-  Sets timeouts in minutes for repeat offenders.
+  Required when enrollment is using password verification.
 
   `Default '/var/ossec/etc/authd.pass'`
 
 $wazuh_enrollment_auto_method
-  Sets timeouts in minutes for repeat offenders.
+  Auto negotiates the most secure common SSL/TLS method with the manager, use “yes” for auto negotiate or “no” for TLS v1.2 only.
 
   `Default undef`
 
 $wazuh_delay_after_enrollment
-  Sets timeouts in minutes for repeat offenders.
+  Time that agentd should wait after a successful registration.
 
   `Default undef`
 
 $wazuh_enrollment_use_source_ip
-  Sets timeouts in minutes for repeat offenders.
+  Force manager to compute IP from agent message.
 
   `Default undef`
 
@@ -274,12 +274,12 @@ $ossec_rootcheck_ignore_list
 $ossec_rootcheck_rootkit_files
   Change the location of the rootkit files database.
 
-  `Default '/var/ossec/etc/shared/rootkit_files.txt'`
+  `Default 'etc/shared/rootkit_files.txt'`
 
 $ossec_rootcheck_rootkit_trojans
   Change the location of the rootkit trojans database.
 
-  `Default '/var/ossec/etc/shared/rootkit_trojans.txt'`
+  `Default 'etc/shared/rootkit_trojans.txt'`
 
 $ossec_rootcheck_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.

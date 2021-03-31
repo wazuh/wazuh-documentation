@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh agent on HP-UX
 
@@ -39,7 +39,7 @@ To uninstall the agent:
 
     .. code-block:: console
 
-      # /var/ossec/bin/ossec-control stop
+      # /var/ossec/bin/wazuh-control stop
 
 2. Delete ``ossec`` user and group:
 

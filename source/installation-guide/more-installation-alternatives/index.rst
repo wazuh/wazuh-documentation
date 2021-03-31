@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _more_installation_alternatives:
 
@@ -17,5 +17,5 @@ In the installation guide, is explained how to install Wazuh from packages. Alte
     :maxdepth: 1
 
     elastic-stack/index
-    Wazuh with Splunk <https://documentation.wazuh.com/3.13/installation-guide/installing-splunk/index.html> 
+    splunk/index
     wazuh-from-sources/index

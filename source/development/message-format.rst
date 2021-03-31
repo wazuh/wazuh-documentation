@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. _message-format:
 
@@ -48,7 +48,7 @@ The string in *log* is the input for decoders defined in XML format or plugin de
 Standard OSSEC event
 --------------------
 
-OSSEC events are transmitted between software components of the same machine, using the local datagram socket at ``/var/ossec/queue/ossec/queue``. For instance:
+OSSEC events are transmitted between software components of the same machine, using the local datagram socket at ``/var/ossec/queue/sockets/queue``. For instance:
 
 - Log events from *Logcollector* to *Agent daemon*.
 - File integrity monitoring events from *Syscheck* to *Agent daemon*.

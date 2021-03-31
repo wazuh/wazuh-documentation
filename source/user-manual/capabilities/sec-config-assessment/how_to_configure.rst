@@ -24,13 +24,17 @@ ruleset folder:
     The contents of the aforementioned **default ruleset folders are neither kept across installations nor updates**.
     If you wish to modify or add new policies, place then under an alternative folder.
 
-To enable a policy file that's outside the default folder, add a line like
+To enable a policy file that's outside the Wazuh installation folder, add a line like
 
 .. code-block:: xml
 
     <policy>/some/custom/policy/folder/policy_file_to_enable.yml</policy>
 
-to the **policies section** of the **SCA** module.
+You can also specify a relative path to the Wazuh installation directory.
+
+.. code-block:: xml
+
+    <policy>etc/shared/policy_file_to_enable.yml</policy>
 
 There are two ways to disable policies, the simplest one is by renaming the policy file by adding ``.disabled``
 (or anything different from `.yaml` or `.yml`) after their YAML extension. The second is to disable them from
@@ -38,7 +42,7 @@ the `ossec.conf` by adding a line such as
 
 .. code-block:: xml
 
-    <policy enabled="no">/var/ossec/etc/shared/policy_file_to_disable.yml</policy>
+    <policy enabled="no">etc/shared/policy_file_to_disable.yml</policy>
 
 to the **policies section** of the **SCA** module.
 
@@ -60,7 +64,7 @@ to the ``default`` group, which is used here as an example:
 #. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``ossec``.
 
 
-#. Add the configuration block to the Wazuh manager's ``/var/ossec/etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
+#. Add the configuration block to the Wazuh manager's ``etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
 
      .. code-block:: xml
 
@@ -68,7 +72,7 @@ to the ``default`` group, which is used here as an example:
             <!-- Shared agent configuration here -->
             <sca>
                 <policies>
-                    <policy>/var/ossec/etc/shared/your_policy_file.yml</policy>
+                    <policy>etc/shared/your_policy_file.yml</policy>
                 </policies>
             </sca>
         </agent_config>

@@ -1,7 +1,7 @@
 jQuery(function($) {
   /*
   * Wazuh documentation - Version selector script
-  * Copyright (C) 2020 Wazuh, Inc.
+  * Copyright (C) 2021 Wazuh, Inc.
   *
   * EXECUTION FLOW
   * ==============
@@ -13,51 +13,52 @@ jQuery(function($) {
   * 2. FUNC: Adds the current version to the selector button
   *    - checkCurrentVersion()
   *
-  * 3. FUNC: Adds the notice "Latest version
-  *    - checkLatestDocs()
-  *
-  * 4. FUNC: Creates the correct links to all the releases
+  * 3. FUNC: Creates the correct links to all the releases
   *    - addVersions()
   *
-  *    | 5. FUNC: Normalize a given URL so it comply with a standard format
+  *    | 3.1. FUNC: Normalize a given URL so it comply with a standard format
   *    |    - normalizeUrl()
   *    |
-  *    | 6. FUNC: Get the redirection history
+  *    | 3.2. FUNC: Get the redirection history
   *    |    - getRedirectionHistory()
   *
-  *         | 7. FUNC: Get the release key number
+  *         | 3.2.1. FUNC: Get the release key number
   *         |    - getReleaseNum()
   *         |
-  *         | 8. FUNC: Return redirections about a URL
+  *         | 3.2.2. FUNC: Return redirections about a URL
   *         |    - getInfoRedirectUrl()
   *         |
-  *         | 9. FUNC: Get the logic of the redirects
+  *         | 3.2.3. FUNC: Get the logic of the redirects
   *         |    - getLogicRedirects()
   *         |
-  *         | 10. FUNC: Find the all the URLs
+  *         | 3.2.4. FUNC: Find the all the URLs
   *         |    - fillUrls()
   *
-  *              | 11. FUNC: Find the following URL
+  *              | 3.2.4.1. FUNC: Find the following URL
   *              |    - findNextUrl()
   *              |
-  *              | 12. FUNC: Find the previous URL
+  *              | 3.2.4.2. FUNC: Find the previous URL
   *              |    - findPrevUrl()
   *
-  *         | 13. FUNC: Return the release when a URL is new
+  *         | 3.2.5. FUNC: Return the release when a URL is new
   *         |    - getInfoNewsUrl()
   *         |
-  *         | 14. FUNC: Return the release when a URL was removed
+  *         | 3.2.6. FUNC: Return the release when a URL was removed
   *         |    - getInfoRemovedUrl()
   *
-  * 15. FUNC: Initialize the tooltip of bootstrap
+  * 4. FUNC: Adds the notice "Latest version
+  *    - checkLatestDocs()
+  *
+  * 5. FUNC: Initialize the tooltip of bootstrap
   *    - tooltip()
   *
   */
 
   /* Versions main constants */
-  const currentVersion = '4.0';
+  const currentVersion = '4.1';
   const versions = [
-    {name: '4.0 (current)', url: '/'+currentVersion},
+    {name: '4.1 (current)', url: '/current'},
+    {name: '4.0', url: '/4.0'},
     {name: '3.13', url: '/3.13'},
     {name: '3.12', url: '/3.12'},
     {name: '3.11', url: '/3.11'},
@@ -78,14 +79,28 @@ jQuery(function($) {
   /* Adds the current version to the selector button */
   checkCurrentVersion();
 
-  /* Adds the notice "Latest version" */
-  checkLatestDocs();
-
   /* Creates the correct links to all the releases */
-  addVersions();
+  let documentHistory = addVersions();
   $(window).on('hashchange', function() {
-    addVersions();
+    documentHistory = addVersions();
   });
+
+  /* Adds the notice "Latest version" */
+  checkLatestDocs(documentHistory);
+
+  /* Get proper path for the canonical */
+  const documentInReleases = Object.keys(documentHistory);
+  let canonicalRelease = documentInReleases[documentInReleases.length-1];
+  const canonicalPath = documentHistory[canonicalRelease];
+  if ( canonicalRelease == currentVersion ) {
+    canonicalRelease = 'current';
+  }
+
+  /* Link rel=canonical tag based on the selector */
+  const canonicalTag = !!document.querySelector('link[rel=\'canonical\']') ? document.querySelector('link[rel=\'canonical\']') : document.createElement('link');
+  canonicalTag.setAttribute('rel', 'canonical');
+  canonicalTag.setAttribute('href', document.location.protocol + '//' + document.location.host + '/' + canonicalRelease + canonicalPath);
+  document.head.appendChild(canonicalTag);
 
   /* Initialize the tooltip of bootstrap */
   $('#select-version [data-toggle="tooltip"]').tooltip();
@@ -95,46 +110,64 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     let selected = -1;
-    let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
+    let thisVersion = DOCUMENTATION_OPTIONS.VERSION;
     const selectVersionCurrent = $('#select-version .current');
-    if (path == 'current' || path == '4.0' ) {
-      path = currentVersion;
+    if ( thisVersion == currentVersion ) {
+      thisVersion = 'current';
     }
     for (let i = 0; i < versions.length; i++) {
-      if ( versions[i].url == '/' + path ) {
+      if ( versions[i].url.indexOf('/' + thisVersion) > -1 ) {
         selected = i;
       }
     }
-    selectVersionCurrent.html(versions[selected].name);
+    if ( versions[selected] ) {
+      selectVersionCurrent.html(versions[selected].name);
+    } else {
+      selectVersionCurrent.html(DOCUMENTATION_OPTIONS.VERSION);
+    }
   }
 
   /**
     * Shows a warning message to the user if current doc version is not the latest version.
     * Note: For this to work, it requires the documentation version variable (in file conf.py)
     * and the array of versions (in this script) to be updated.
+		* @param {Object} redirHistory Javascript object containing the corresponding path of the current page in every release.
     */
-  function checkLatestDocs() {
-    const thisVersion = document.querySelector('.no-latest-notice').getAttribute('data-version');
-    const latestVersion = versions[0].url.replace('/', '');
+  function checkLatestDocs(redirHistory) {
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
+    const latestVersion = currentVersion;
     let page = '';
     if ( thisVersion !== latestVersion ) {
-      const pageID = document.querySelector('#page');
-      pageID.classList.add('no-latest-docs');
-    }
+      const pageElement = document.querySelector('#page');
+      pageElement.classList.add('no-latest-docs');
+      /* Updates link to the latest version with the correct path */
+      page = document.location.pathname;
+      if ( page[page.length-1] == '/') {
+        page = page+'index.html';
+      }
+      if ( page.indexOf(thisVersion) != -1 ) {
+        page = page.split('/'+thisVersion)[1];
+      } else if ( page.indexOf('current') != -1 ) {
+        page = page.split('/current')[1];
+      }
 
-    /* Updates link to the latest version with the correct path (documentation's home) */
-    page = document.location.pathname.split('/'+thisVersion)[1];
-    const link = document.querySelector('.link-latest');
-    link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
+      const link = document.querySelector('.link-latest');
+			let targetURL = 'https://' + window.location.hostname + '/current';
+			if ( documentHistory.hasOwnProperty(latestVersion) ) {
+				targetURL = targetURL + redirHistory[latestVersion];
+			}
+      link.setAttribute('href', targetURL);
+    }
   }
 
   /**
    * Adds the available versions to the version selector.
+   * @return {Object} Object with the URL history for the current path
    */
   function addVersions() {
     let ele = '';
     const selectVersionUl = $('#select-version .dropdown-menu');
-    let path = document.location.pathname.replace(/\/{2,}/, '/').split('/')[1];
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
     let fullUrl = window.location.href;
     let page = '';
     let paramDivision = [];
@@ -142,14 +175,19 @@ jQuery(function($) {
     if (fullUrl == null) {
       fullUrl = document.URL; /* Firefox fix */
     }
-    page = fullUrl.split('/'+path)[1];
+
+    page = fullUrl.split(document.location.host)[1];
+    if ( page[page.length-1] == '/' ) {
+      page = page+'index.html';
+    }
+    if ( page.indexOf(thisVersion) != -1 ) {
+      page = page.split('/'+thisVersion)[1];
+    } else if ( page.indexOf('current') != -1 ) {
+      page = page.split('/current')[1];
+    }
     paramDivision = page.split('?');
     page = normalizeUrl(paramDivision[0]);
     param = paramDivision.length == 2 ? ('?'+paramDivision[1]) : '';
-
-    if (path == 'current' || path == '4.0' ) {
-      path = currentVersion;
-    }
 
     /* Creates the links to others versions */
     let href;
@@ -182,7 +220,7 @@ jQuery(function($) {
     }
 
     /* Get the redirection history */
-    const redirHistory = getRedirectionHistory(versionsClean, path, page, newUrls, redirections, removedUrls);
+    const redirHistory = getRedirectionHistory(versionsClean, thisVersion, page, newUrls, redirections, removedUrls);
     versionsClean = versionsClean.reverse();
 
     /* Print the correct links in the selector */
@@ -191,7 +229,11 @@ jQuery(function($) {
       tooltip = '';
       ver = versionsClean[i];
       if ( redirHistory[ver] != null && redirHistory[ver].length ) {
-        href = '/'+ver+redirHistory[ver]+param;
+        if ( ver == currentVersion ) {
+          href = '/current'+redirHistory[ver]+param;
+        } else {
+          href = '/'+ver+redirHistory[ver]+param;
+        }
       } else {
         tooltip = 'class="disable" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + versions[i].name +'"';
       }
@@ -201,6 +243,7 @@ jQuery(function($) {
       }
     }
     selectVersionUl.html(ele);
+    return redirHistory;
   }
 
   /**
