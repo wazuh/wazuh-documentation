@@ -554,7 +554,8 @@ changePasswords() {
     if [ -n "${verbose}" ]; then
         bash ~/wazuh-passwords-tool.sh -a -v
     else
-         bash ~/wazuh-passwords-tool.sh -a
+        VERBOSE='> /dev/null 2>&1'
+        bash ~/wazuh-passwords-tool.sh -a
     fi     
 }
 
