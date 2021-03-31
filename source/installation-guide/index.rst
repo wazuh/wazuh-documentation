@@ -13,7 +13,9 @@ You can easily install Wazuh and get the most out of our security solution by fo
 
 - Installation of the Wazuh server (Wazuh manager and Filebeat)
 - Installation of Elasticsearch, Kibana, and Wazuh Kibana plugin
-- Installation of Wazuh agents
+- Installation of the Wazuh agent
+  
+To learn more about the Wazuh components, check the :ref:`getting started <components>` section. 
 
 Wazuh server installation
 -------------------------
@@ -162,9 +164,4 @@ Check the :ref:`requirements <installation_requirements>` section for informatio
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
-
-
-
-
-
 
