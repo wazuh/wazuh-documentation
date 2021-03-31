@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _reference_ossec_logging:
+.. _reference_ossec_logging_agent:
 
 logging
 =======
@@ -24,7 +24,7 @@ log_format
 
 Specifies the log format between JSON output (.json) or plain text (.log). It also can be set to output both formats at the same time, when both are formats are entered, separated by a comma.
 
-Depending on the given format, the output file will be ``/var/ossec/logs/ossec.log``, ``/var/ossec/logs/ossec.json`` or both of them.
+Depending on the given format configured on ``agent.conf`` file, the output file will be ``/var/ossec/logs/ossec.log``, ``/var/ossec/logs/ossec.json`` or both of them.
 
 +--------------------+----------------+
 | **Default value**  | plain          |

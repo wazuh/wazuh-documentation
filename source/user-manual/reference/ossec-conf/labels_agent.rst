@@ -1,6 +1,6 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _reference_ossec_labels:
+.. _reference_ossec_labels_agent:
 
 labels
 ======
@@ -12,14 +12,12 @@ labels
 	    <labels>
 	    </labels>
 
-The labels section of ``agent.conf`` or ``manager.conf``, allows additional user-defined information about agents to be included in alerts. When email notifications are enabled, this additional data is also contained in the email alerts without any further configuration.
+The labels section of ``agent.conf``, allows additional user-defined information about agents to be included in alerts. When email notifications are enabled, this additional data is also contained in the email alerts without any further configuration.
 
 Options
 -------
 
 - `label`_
-
-.. _reference_ossec_labels_label:
 
 label
 ^^^^^

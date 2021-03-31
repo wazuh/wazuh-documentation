@@ -1,9 +1,9 @@
 .. Copyright (C) 2020 Wazuh, Inc.
 
-.. _reference_ossec_active_response:
+.. _reference_ossec_active_response_manager:
 
-active-response
-===============
+active-response (Manager)
+=========================
 
 .. topic:: XML section name
 
@@ -14,14 +14,12 @@ active-response
 
 In the active response configuration section, an existing command is bound to one or more rules or rule types along with additional criteria for when to execute the command. There is no limit to the number of active responses that can be used, however, each active response must be configured in its own separate ``<active-response>`` section.
 
+.. note:: It is also necessary include active-response configuration in the agent side, check :ref:`here <reference_ossec_active_response_agent>`.
+
 Options
 -------
 
 - `disabled`_
-
-Manager side
-^^^^^^^^^^^^
-
 - `command`_
 - `location`_
 - `agent_id`_
@@ -30,15 +28,10 @@ Manager side
 - `rules_id`_
 - `timeout`_
 
-Agent side
-^^^^^^^^^^
-
-- `repeated_offenders`_
-
 disabled
 ^^^^^^^^
 
-Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``manager.conf`` file will disable active-response on the manager and all agents.
+Toggles the active-response capability on and off. Setting this option to ``yes`` on ``manager.conf`` file will disable active-response on the manager and all agents.
 
 .. note::
 
@@ -149,24 +142,11 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 +--------------------+-----------------------------+
 
 
-repeated_offenders
-^^^^^^^^^^^^^^^^^^
-
-Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries.
-
-+--------------------+-----------------------------+
-| **Default value**  | n/a                         |
-+--------------------+-----------------------------+
-| **Allowed values** | A positive number (minutes) |
-+--------------------+-----------------------------+
-
 .. warning::
-    This option must be configured in the **agent.conf** file in the agent, and also in the **manager.conf** file in manager side, even when using a manager/agent setup with centralized configuration of other settings via **shared/agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
+    This option must be configured in the **manager.conf** file, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration
 --------------------
-
-manager.conf
 
 .. code-block:: xml
 
@@ -180,15 +160,4 @@ manager.conf
       <level>10</level>
       <rules_group>sshd,|pci_dss_11.4,</rules_group>
       <timeout>1</timeout>
-    </active-response>
-
-
-agent.conf 
-
-.. code-block:: xml
-
-    <!-- On the agent.conf file in the agent side -->
-    <active-response>
-      <disabled>no</disabled>
-      <repeated_offenders>1,5,10</repeated_offenders>
     </active-response>

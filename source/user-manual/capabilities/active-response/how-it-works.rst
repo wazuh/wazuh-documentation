@@ -62,7 +62,7 @@ Active responses are configured in the manager by modifying the :ref:`manager.co
 	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 .. note::
-	More information about active response options: :ref:`Active response <reference_ossec_active_response>`
+	More information about active response options: :ref:`Active response <reference_ossec_active_response_manager>`
 
 
 The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.

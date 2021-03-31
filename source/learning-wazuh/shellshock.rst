@@ -150,7 +150,7 @@ Each command has a descriptive ``<name>`` by which it will be referred to in the
 will be passed along to the script (like **srcip** or **username**).  Lastly, if
 ``<timeout_allowed>`` is set to **yes**, then the command is considered stateful
 and can be reversed after an amount of time specified in a specific ``<active-response>``
-section (see :ref:`timeout <reference_ossec_active_response>`).  For more details
+section (see :ref:`timeout <reference_ossec_active_response_manager>`).  For more details
 about configuring active response, see the Wazuh user manual.
 
 

@@ -31,9 +31,9 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | Configuration sections                                              |
 +=====================================================================+
-| :doc:`active-response <active-response>`                            |
+| :doc:`active-response <active-response_agent>`                      |
 +---------------------------------------------------------------------+
-| :doc:`agent-upgrade <agent-upgrade>`                                |
+| :doc:`agent-upgrade <agent-upgrade_agent>`                          |
 +---------------------------------------------------------------------+
 | :doc:`client <client>`                                              |
 +---------------------------------------------------------------------+
@@ -41,11 +41,11 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+
 | :doc:`fluent-forward <fluent-forward>`                              |
 +---------------------------------------------------------------------+
-| :doc:`labels  <labels>`                                             |
+| :doc:`labels  <labels_agent>`                                       |
 +---------------------------------------------------------------------+
 | :doc:`localfile <localfile>`                                        |
 +---------------------------------------------------------------------+
-| :doc:`logging <logging>`                                            |
+| :doc:`logging <logging_agent>`                                      |
 +---------------------------------------------------------------------+
 | :doc:`rootcheck <rootcheck>`                                        |
 +---------------------------------------------------------------------+
@@ -80,13 +80,13 @@ All of the above sections must be located within the top-level ``<wazuh_config>`
    :maxdepth: 1
 
 
-   active-response
-   agent-upgrade
+   active-response_agent
+   agent-upgrade_agent
    client
    client_buffer
-   labels
+   labels_agent
    localfile
-   logging
+   logging_agent
    rootcheck
    sca
    socket
