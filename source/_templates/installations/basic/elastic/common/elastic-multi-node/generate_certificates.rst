@@ -34,7 +34,7 @@
 
     - Three ``elasticsearch`` instances, #1, #2 and #3 with their respective IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. All belong to three Elasticsearch cluster nodes. In case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respective names and IPs.
 
-    - A ``kibana`` instance with IP ``10.0.0.6``. If Kibana will be installed in the same server as Elastisearch, the same IP may be used.
+    - A ``kibana`` instance with IP ``10.0.0.6``. If Kibana will be installed in the same server as Elasticsearch, the same IP may be used.
   
     Replace the IPs with the corresponding addresses for each instance in your environment.
 
@@ -83,7 +83,7 @@
 
     - Three instances ``elasticsearch``, #1, #2 and #3 with their respective IPs ``10.0.0.2``, ``10.0.0.3`` and ``10.0.0.4``. They belong to three Elasticsearch cluster nodes. In the case of configuring an Elasticsearch multi-node cluster with four or more nodes, more ``name`` sections can be defined with their respective names and IPs.
 
-    - A ``kibana`` instance with IP ``10.0.0.7``. If Kibana will be installed in the same server as Elastisearch, the same IP may be used.   
+    - A ``kibana`` instance with IP ``10.0.0.7``. If Kibana will be installed in the same server as Elasticsearch, the same IP may be used.   
 
     Replace the IPs with the corresponding addresses for each instance in your environment.
 
