@@ -9,13 +9,8 @@
 Installation guide
 ==================
 
-You can easily install Wazuh and get the most out of our security solution by following the installation workflow.
-
-- Installation of the Wazuh server (Wazuh manager and Filebeat)
-- Installation of Elasticsearch, Kibana, and Wazuh Kibana plugin
-- Installation of the Wazuh agent
-  
-To learn more about the Wazuh components, check the :ref:`getting started <components>` section. 
+Install Wazuh and its multiple components by following the installation workflow that best suits your enterprise needs.
+To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
 Wazuh server installation
 -------------------------
@@ -23,7 +18,7 @@ Wazuh server installation
 Wazuh allows you to adapt the installation process according to your enterprise needs. You can choose between two different alternatives for deploying a Wazuh installation:
 
 - :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed on the same host. This type of deployment is appropriate for testing and small working environments.
- 
+
       .. note:: If you want to test Wazuh, you can download our ready-to-use :ref:`OVA <virtual_machine>`.
 
 - :ref:`Distributed <distributed_index>`: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
