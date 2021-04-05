@@ -5,8 +5,8 @@
 .. _wazuh_single_node_cluster:
 
 
-Wazuh server
-============
+Wazuh manager
+=============
 
 This document will go through the installation of the Wazuh server components and Filebeat in a Wazuh single-node cluster.
 
@@ -19,8 +19,8 @@ Before installing the Wazuh server and Filebeat, some extra packages must be ins
 
 .. include:: ../../_templates/installations/elastic/common/before_installation_kibana_filebeat.rst
 
-Installing the Wazuh server
----------------------------
+Installing the Wazuh manager
+----------------------------
 
 The Wazuh server collects and analyzes data from the deployed Wazuh agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. The first step to set up Wazuh is adding the Wazuh's repository to the server, alternatively, all the available packages can be found :ref:`here <packages>`. 
 
