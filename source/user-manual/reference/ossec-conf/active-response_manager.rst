@@ -14,7 +14,7 @@ active-response (Manager)
 
 In the active response configuration section, an existing command is bound to one or more rules or rule types along with additional criteria for when to execute the command. There is no limit to the number of active responses that can be used, however, each active response must be configured in its own separate ``<active-response>`` section.
 
-.. note:: It is also necessary include active-response configuration in the agent side, check :ref:`here <reference_ossec_active_response_agent>`.
+.. note:: It is also necessary to include active-response configuration in the agent side, check :ref:`here <reference_ossec_active_response_agent>`.
 
 Options
 -------
@@ -141,9 +141,6 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
-
-.. warning::
-    This option must be configured in the **manager.conf** file, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration
 --------------------

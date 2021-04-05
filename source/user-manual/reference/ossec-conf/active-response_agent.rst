@@ -12,9 +12,9 @@ active-response (Agent)
 		<active-response>
 		</active-response>
 
-In the active response configuration section, an existing command is bound to one or more rules or rule types along with additional criteria for when to execute the command. There is no limit to the number of active responses that can be used, however, each active response must be configured in its own separate ``<active-response>`` section.
+In the active response configuration section each active response must be configured in its own separate ``<active-response>`` section.
 
-.. note:: It is also necessary include active-response configuration in the manager side, check :ref:`here <reference_ossec_active_response_manager>`.
+.. note:: It is also necessary to include active-response configuration in the manager side, check :ref:`here <reference_ossec_active_response_manager>`.
 
 Options
 -------

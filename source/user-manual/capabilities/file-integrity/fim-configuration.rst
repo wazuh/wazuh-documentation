@@ -21,7 +21,7 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring where the database is to be stored`_
 #. `Configuring synchronization`_
 
-Syscheck component is configured both in the Wazuh manager's and in the Wazuh agent's :ref:`agent.conf <reference_client_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`shared/agent.conf <reference_agent_conf>` file.
+Syscheck component is configured in Wazuh agent's :ref:`agent.conf <reference_client_conf>` file. This capability can be also configured remotely using centralized configuration and the :ref:`shared/agent.conf <reference_agent_conf>` file.
 The list of all syscheck configuration options is available in the :ref:`syscheck <reference_ossec_syscheck>` section.
 
 Configuring syscheck - basic usage

@@ -94,7 +94,7 @@ Wazuh is pre-configured with the following scripts for Linux:
 +--------------------------+-----------------------------------------------------------------+
 | pf                       | Firewall-drop response script created for pf                    |
 +--------------------------+-----------------------------------------------------------------+
-| restart-wazuh            | Automatically restarts Wazuh when manager.conf has been changed |
+| restart-wazuh            | Automatically restarts Wazuh when agent.conf has been changed   |
 +--------------------------+-----------------------------------------------------------------+
 | route-null               | Adds an IP to null route                                        |
 +--------------------------+-----------------------------------------------------------------+

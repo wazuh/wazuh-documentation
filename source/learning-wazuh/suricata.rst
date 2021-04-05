@@ -190,7 +190,7 @@ the shared configuration with their local configuration.
 
             Group 'linux' set to agent '002'.
 
-#. Put our Suricata-specific Wazuh agent config into the shared agent.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
+#. Put our Suricata-specific Wazuh agent config into the shared/agent.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
 
     .. code-block:: xml
 

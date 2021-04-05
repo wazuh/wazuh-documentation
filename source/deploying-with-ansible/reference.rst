@@ -348,7 +348,7 @@ Wazuh Manager
 
 **wazuh_manager_vulnerability_detector**
 
-  Configures the :ref:`vulnerability-detector<vuln_detector>` section from ``agent.conf``.
+  Configures the :ref:`vulnerability-detector<vuln_detector>` section from ``manager.conf``.
 
   *Default:*
 
@@ -657,67 +657,8 @@ Wazuh Manager
           srcip: null
           user: null
           showlogs: null
-      syscheck:
-        frequency: 43200
-        scan_on_start: 'yes'
-        auto_ignore: 'no'
-        alert_new_files: 'yes'
-        ignore:
-          - /etc/mtab
-          - /etc/mnttab
-          - /etc/hosts.deny
-          - /etc/mail/statistics
-          - /etc/random-seed
-          - /etc/random.seed
-          - /etc/adjtime
-          - /etc/httpd/logs
-          - /etc/utmpx
-          - /etc/wtmpx
-          - /etc/cups/certs
-          - /etc/dumpdates
-          - /etc/svc/volatile
-        no_diff:
-          - /etc/ssl/private.key
-        directories:
-          - dirs: /etc,/usr/bin,/usr/sbin
-            checks: 'check_all="yes"'
-          - dirs: /bin,/sbin
-            checks: 'check_all="yes"'
-      rootcheck:
-        frequency: 43200
-      openscap:
-        disable: 'no'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-      cis_cat:
-        disable: 'yes'
-        install_java: 'yes'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-        java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-        ciscat_path: '/var/ossec/wodles/ciscat'
-        content:
-          - type: 'xccdf'
-            path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
-            profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
       log_level: 1
       email_level: 12
-      localfiles:
-        - format: 'syslog'
-          location: '/var/log/messages'
-        - format: 'syslog'
-          location: '/var/log/secure'
-        - format: 'command'
-          command: 'df -P'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'netstat -tln | grep -v 127.0.0.1 | sort'
-          frequency: '360'
-        - format: 'full_command'
-          command: 'last -n 20'
-          frequency: '360'
       globals:
         - '127.0.0.1'
         - '192.168.2.1'
@@ -1360,15 +1301,3 @@ Wazuh Agent
         - format: 'full_command'
           command: 'last -n 20'
           frequency: '360'
-
-  .. warning:: We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect authd credentials.
-
-**authd_pass:**
-
-  Wazuh authd credentials for agent registration.
-
-  *Example:*
-
-  .. code-block:: yaml
-
-    authd_pass: foobar

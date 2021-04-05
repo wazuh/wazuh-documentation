@@ -39,7 +39,6 @@ newUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/index_manager.html',
   '/user-manual/reference/ossec-conf/active-response_agent.html',
   '/user-manual/reference/ossec-conf/active-response_manager.html',
-  '/user-manual/reference/ossec-conf/active-response_agent.html',
   '/user-manual/reference/ossec-conf/agent-upgrade_manager.html',
   '/user-manual/reference/ossec-conf/agent-upgrade_agent.html',
   '/user-manual/reference/ossec-conf/labels_manager.html',
