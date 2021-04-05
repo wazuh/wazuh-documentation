@@ -15,7 +15,7 @@ Configuration
 Basic usage
 -----------
 
-Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can be also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`agent.conf <reference_client_conf>`. It can be also be centrally configured in :ref:`shared/agent.conf<reference_agent_conf>`.
 
 Monitor running Windows processes
 ---------------------------------
@@ -151,7 +151,7 @@ Detect USB Storage
 
 Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry by adding the following to the group's ``agent.conf``:
+Configure your agent to monitor the USBSTOR registry entry by adding the following to the group's ``shared/agent.conf``:
 
 .. code-block:: xml
 

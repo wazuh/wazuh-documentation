@@ -12,8 +12,6 @@ active-response (Agent)
 		<active-response>
 		</active-response>
 
-In the active response configuration section each active response must be configured in its own separate ``<active-response>`` section.
-
 .. note:: It is also necessary to include active-response configuration in the manager side, check :ref:`here <reference_ossec_active_response_manager>`.
 
 Options
