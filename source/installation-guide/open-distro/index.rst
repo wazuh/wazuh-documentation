@@ -8,18 +8,22 @@ Wazuh server
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-This section provides the user with the necessary information to perform the installation of Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 licensed distribution of Elasticsearch enhanced with enterprise security, alerts, SQL support, automated index management, or deep performance analysis, among other features. Find out more about Wazuh components by visiting our :ref:`here <installation_guide>`.
+The Wazuh server analyzes data received from the agents, processing it through decoders and rules, and using threat intelligence to look for well-known IOCs. The server is also used to manage the agents, configuring and upgrading them remotely when necessary.
 
-Deployment types
-----------------
+You can install Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 licensed distribution of Elasticsearch enhanced with enterprise security, alerts, SQL support, automated index management, or deep performance analysis, among other features.
 
-The installation guide is divided into two independent sections: all-in-one deployment and distributed deployment, according to the chosen configuration. 
+To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
-Information on the minimum hardware requirements for the different types of deployment is provided in the :ref:`here <installation_requirements>`.
+Wazuh server installation
+-------------------------
 
-- All-in-one deployment: Wazuh and Open Distro for Elasticsearch are installed in the same host. This type of deployment is appropriate for testing and small working environments.  
+Wazuh allows you to adapt the installation process according to your enterprise needs. You can choose between two independent alternatives for deploying a Wazuh installation: 
 
-- Distributed deployment: Each component is installed in a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
+.. note:: For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section.
+
+- All-in-one deployment: Wazuh and Open Distro for Elasticsearch are installed on the same host. This type of deployment is appropriate for testing and small working environments. 
+
+- Distributed deployment: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
 
 
 Installation methods
@@ -27,9 +31,9 @@ Installation methods
 
 For each type of deployment, the user can choose between two installation methods:
 
-- Unattended: Automated installation. It requires the initial input of the necessary information to perform the installation process through scripts.
+- Unattended: This is an automated installation that requires the initial input of the necessary information to perform the installation process through scripts.
 
-- Step by step: Manual installation. Includes a detailed description of each step of the installation process.
+- Step by step: This is a manual installation that includes a detailed description of each step of the installation process.
 
 
 Start deploying Wazuh with Open Distro for Elasticsearch
