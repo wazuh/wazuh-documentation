@@ -30,7 +30,7 @@ Example with notepad.exe as the important process to monitor:
       # Logcollector - Whether or not to accept remote commands from the manager
       logcollector.remote_commands=1
 
-2. Define the command in the group's **agent.conf** file to list running processes.
+2. Define the command in the group's **shared/agent.conf** file to list running processes.
 
     .. code-block:: xml
 

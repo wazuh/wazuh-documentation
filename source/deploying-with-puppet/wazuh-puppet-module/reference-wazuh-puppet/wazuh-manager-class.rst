@@ -901,7 +901,7 @@ $local_rules_template
   `Default wazuh/local_rules.xml.erb`
 
 $shared_agent_template
-  Enable the configuration to deploy through agent.conf
+  Enable the configuration to deploy through shared/agent.conf
 
   `Default wazuh/ossec_shared_agent.conf.erb`
 

@@ -78,8 +78,8 @@ In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/os
 
 - Events per second: This is the maximum rate at which events will be pulled from the agent's buffer and transmitted to its manager. The default is a generous 500 EPS, but this should be set with consideration of the capacity of the network and the number of agents a manager is serving.
 
-This configuration is also available in :doc:`Centralized configuration <../reference/centralized-configuration>` which means it can be set in ``agent.conf`` with the aim of configuring agents' bucket options from the manager side. When an agent is configured by ``agent.conf``, that configuration overrides its own local configuration.
-To allow the agent to have final say about a minimum number of EPS it will be allowed to transmit, regardless of the EPS limit configured at the manager level via agent.conf, another variable called ``agent.min_eps`` can be set in the agent's :doc:`Internal configuration <../reference/internal-options>`.
+This configuration is also available in :doc:`Centralized configuration <../reference/centralized-configuration>` which means it can be set in ``shared/agent.conf`` with the aim of configuring agents' bucket options from the manager side. When an agent is configured by ``shared/agent.conf``, that configuration overrides its own local configuration.
+To allow the agent to have final say about a minimum number of EPS it will be allowed to transmit, regardless of the EPS limit configured at the manager level via shared/agent.conf, another variable called ``agent.min_eps`` can be set in the agent's :doc:`Internal configuration <../reference/internal-options>`.
 
 Threshold configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^

@@ -199,7 +199,7 @@ $client_buffer_events_per_second
   `Default 500`
 
 $ossec_config_profiles
-  Specify the agent.conf profile(s) to be used by the agent.
+  Specify the shared/agent.conf profile(s) to be used by the agent.
 
 .. _ref_agent_vars_localfile:
 
