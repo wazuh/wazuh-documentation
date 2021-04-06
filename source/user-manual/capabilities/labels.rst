@@ -49,7 +49,7 @@ To include these labels in alerts from a specific agent, the following configura
           <label key="installation" hidden="yes">January 1st, 2017</label>
         </labels>
 
-To set the labels at the manager level, the following configuration would be added to the ``/shared/agent.conf`` file:
+To set the labels at the manager level, the following configuration would be added to the ``shared/agent.conf`` file:
 
 .. code-block:: xml
 

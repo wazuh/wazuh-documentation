@@ -230,7 +230,7 @@ the shared configuration with their local configuration.
 
         # service wazuh-manager restart
 
-   Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
+   Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/default/agent.conf``.
 
 See Suricata NIDS events in Kibana
 ----------------------------------

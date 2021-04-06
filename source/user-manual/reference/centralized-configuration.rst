@@ -305,14 +305,14 @@ The ``files.yml`` has the following structure as shown in the following example:
     groups:
         my_group_1:
             files:
-                agent.conf: https://example.com/shared/agent.conf
+                shared/agent.conf: https://example.com/shared/agent.conf
                 rootcheck.txt: https://example.com/rootcheck.txt
                 merged.mg: https://example.com/merged.mg
             poll: 15
 
         my_group_2:
             files:
-                agent.conf: https://example.com/shared/agent.conf
+                shared/agent.conf: https://example.com/shared/agent.conf
             poll: 200
 
     agents:
