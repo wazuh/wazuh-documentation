@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+
+.. _quickstart:
+
 Quickstart
 ==========
 

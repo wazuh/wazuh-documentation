@@ -2,7 +2,7 @@
 
 .. meta:: :description: Learn how to install Opendistro for using Wazuh
 
-.. _elasticsearch_single_node_cluster:
+.. _wazuh_indexer:
 
 
 Wazuh indexer
