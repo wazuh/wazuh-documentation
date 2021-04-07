@@ -98,6 +98,10 @@ rollBack() {
         eval "rm -rf /etc/kibana/ ${debug}"
     fi
 
+    if [ -z "${uninstall}" ]; then    
+        echo "Installation cleaned. Check the /var/log/wazuh-unattended-installation.log file to learn more about the issue."
+    fi
+
 }
 
 checkArch() {
@@ -374,8 +378,8 @@ installKibana() {
         eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y ${debug}"
     fi
     if [  "$?" != 0  ]; then
-        rollBack
         echo "Error: Kibana installation failed"
+        rollBack
         exit 1;
     else    
         kibanainstalled="1"
