@@ -13,7 +13,7 @@ Central components
   :align: center
   :width: 100%
 
-  This section will guide you through a step-by-step process of installing Wazuh central components, for an unattended installation see the :ref:`quickstart <quickstart>` section. 
+This section will guide you through a step-by-step process of installing Wazuh central components, for an unattended installation see the :ref:`quickstart <quickstart>` section. 
 
 - :ref:`Wazuh indexer <wazuh_indexer>`: A highly scalable, full-text search and analytics engine. Wazuh indexer is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
@@ -23,7 +23,11 @@ Central components
 
 - :ref:`Wazuh WUI <wazuh_wui>`: A flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, regulatory compliance (e.g. PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. This interface is also used to manage Wazuh configuration and to monitor its status.
 
-To learn more about each component and its capabilities visit the :ref:`getting started <components>` section.
+To learn more about each component and its capabilities visit the :ref:`getting started <components>` section. The following diagram shows a distributed architecture: 
+
+.. thumbnail:: ../../images/installation/distributed_installation.png
+  :align: center
+  :width: 100%
 
 Follow the instructions in each section to complete your Wazuh central components installation. In each section you will find different configurations options to suit your needs. 
 
