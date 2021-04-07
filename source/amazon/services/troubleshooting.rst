@@ -14,7 +14,7 @@ The below information is intended to assist in troubleshooting issues.
 Testing the integration
 -----------------------
 
-After configuring the module successfully users can expect to see the following log messages in their agent log file: ``/var/ossec/logs/ossec.log``
+After configuring the module successfully users can expect to see the following log messages in their agent log file: ``/var/ossec/logs/wazuh.log``
 
 #. Module starting:
 
@@ -36,9 +36,9 @@ After configuring the module successfully users can expect to see the following 
 Common errors
 -------------
 
-#. Errors in ``ossec.log``
+#. Errors in ``wazuh.log``
 
-    When an error occurs when trying to collect and parse logs for an AWS service, the ``ossec.log`` will output an error such as below:
+    When an error occurs when trying to collect and parse logs for an AWS service, the ``wazuh.log`` will output an error such as below:
 
     The number is the AWS Account ID provided for the CloudTrail, and the name in the parenthesis is the AWS Account Alias (if provided).
 
@@ -86,7 +86,7 @@ Common errors
 
 #. Debugging configuration:
 
-    If users are unable to determine the issues from the ``ossec.log``, users can run the modules in debug mode.  With Wazuh running, stop the moduled
+    If users are unable to determine the issues from the ``wazuh.log``, users can run the modules in debug mode.  With Wazuh running, stop the moduled
 
     .. code-block:: console
 
