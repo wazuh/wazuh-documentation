@@ -603,6 +603,7 @@ main() {
     fi   
 
     checkArch
+    touch /var/log/wazuh-unattended-installation.log
 
     if [ -n "$1" ]; then      
         while [ -n "$1" ]
@@ -633,7 +634,7 @@ main() {
         done    
 
         if [ -n "${verbose}" ]; then
-            debug=""
+            debug='>> /var/log/wazuh-unattended-installation.log'
         fi
 
         if [ -n "${uninstall}" ]; then
