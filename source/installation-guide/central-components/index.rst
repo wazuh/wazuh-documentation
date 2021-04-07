@@ -9,7 +9,11 @@
 Central components
 ==================
 
-This section will guide you through a step-by-step process of installing Wazuh central components, for an unattended installation see the :ref:`quickstart <quickstart>` section. 
+.. thumbnail:: ../../images/installation/installation_workflow.png
+  :align: center
+  :width: 100%
+
+  This section will guide you through a step-by-step process of installing Wazuh central components, for an unattended installation see the :ref:`quickstart <quickstart>` section. 
 
 - :ref:`Wazuh indexer <wazuh_indexer>`: A highly scalable, full-text search and analytics engine. Wazuh indexer is distributed, meaning the data indices are divided into shards and each shard can have zero or more replicas. Wazuh uses different indices for alerts data, raw events, and status monitoring information.
 
