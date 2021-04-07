@@ -35,9 +35,10 @@ logger() {
 }
 
 rollBack() {
+
     if [ -z "${uninstall}" ]; then
         echo "Cleaning the installation" 
-    fi
+    fi   
     
     if [ -n "${wazuhinstalled}" ]; then
         echo "Removing the Wazuh manager..."
@@ -97,6 +98,10 @@ rollBack() {
         eval "rm -rf /etc/kibana/ ${debug}"
     fi
 
+    if [ -z "${uninstall}" ]; then    
+        echo "Installation cleaned. Check the /var/log/wazuh-unattended-installation.log file to learn more about the issue."
+    fi
+
 }
 
 checkArch() {
@@ -118,6 +123,7 @@ startService() {
         eval "systemctl start $1.service ${debug}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
+            rollBack
             exit 1;
         else
             echo "${1^} started"
@@ -128,6 +134,7 @@ startService() {
         eval "/etc/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
+            rollBack
             exit 1;
         else
             echo "${1^} started"
@@ -136,6 +143,7 @@ startService() {
         eval "/etc/rc.d/init.d/$1 start ${debug}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
+            rollBack
             exit 1;
         else
             echo "${1^} started"
@@ -227,6 +235,7 @@ installWazuh() {
         rollBack
         exit 1;
     else
+        wazuhinstalled="1"
         logger "Done"
     fi   
     startService "wazuh-manager"
@@ -251,6 +260,7 @@ installElasticsearch() {
         rollBack
         exit 1;
     else
+        elasticinstalled="1"
         logger "Done"
 
         logger "Configuring Elasticsearch..."
@@ -265,7 +275,6 @@ installElasticsearch() {
         eval "mkdir /etc/elasticsearch/certs ${debug}"
         eval "cd /etc/elasticsearch/certs ${debug}"
         eval "curl -so ~/wazuh-cert-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/wazuh-cert-tool.sh --max-time 300 ${debug}"
-        ## eval "curl -so ~/instances.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/certificate-utility/instances.yml --max-time 300 ${debug}"
 
         echo "# Elasticsearch nodes" >> ~/instances.yml
         echo "elasticsearch-nodes:" >> ~/instances.yml
@@ -342,6 +351,7 @@ installFilebeat() {
         rollBack
         exit 1;
     else
+        filebeatinstalled="1"
         eval "curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/filebeat/7.x/filebeat.yml --max-time 300  ${debug}"
         eval "curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.0/extensions/elasticsearch/7.x/wazuh-template.json --max-time 300 ${debug}"
         eval "chmod go+r /etc/filebeat/wazuh-template.json ${debug}"
@@ -368,10 +378,11 @@ installKibana() {
         eval "${sys_type} install opendistroforelasticsearch-kibana${sep}${OD_VER} -y ${debug}"
     fi
     if [  "$?" != 0  ]; then
-        rollBack
         echo "Error: Kibana installation failed"
+        rollBack
         exit 1;
     else    
+        kibanainstalled="1"
         eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/kibana/7.x/kibana.yml --max-time 300 ${debug}"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
@@ -491,7 +502,7 @@ checkInstalled() {
             echo "All the Wazuh componets were found on this host. If you want to overwrite the current installation, run this script back using the option -o/--overwrite. NOTE: This will erase all the existing configuration and data."
             exit 1;
         fi
-    fi             
+    fi          
 
 }
 
@@ -544,13 +555,23 @@ healthCheck() {
 
 changePasswords() {
     eval "curl -so ~/wazuh-passwords-tool.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/3364-Unattended_improvements/resources/open-distro/tools/wazuh-passwords-tool.sh --max-time 300 ${debug}"
-    eval "bash ~/wazuh-passwords-tool.sh -a ${debug}"    
+    if [ -n "${verbose}" ]; then
+        bash ~/wazuh-passwords-tool.sh -a -v
+    else
+        VERBOSE='> /dev/null 2>&1'
+        bash ~/wazuh-passwords-tool.sh -a
+    fi     
 }
 
 checkInstallation() {
 
+    changePasswords
+    adminpass=$(grep "password:" /etc/filebeat/filebeat.yml )
+    ra="  password: "
+    adminpass="${adminpass//$ra}"
+    echo "PASSWORD: ${adminpass}"
     logger "Checking the installation..."
-    eval "curl -XGET https://localhost:9200 -uadmin:admin -k --max-time 300 ${debug}"
+    eval "curl -XGET https://localhost:9200 -uadmin:${adminpass} -k --max-time 300 ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
         rollBack
@@ -567,12 +588,12 @@ checkInstallation() {
         echo "Filebeat installation succeeded."
     fi    
     logger "Initializing Kibana (this may take a while)"
-    until [[ "$(curl -XGET https://localhost/status -I -uadmin:admin -k -s --max-time 300 | grep "200 OK")" ]]; do
+    until [[ "$(curl -XGET https://localhost/status -I -uadmin:${adminpass} -k -s --max-time 300 | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
     done    
     echo $'\nInstallation finished'
-    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:admin'
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:'${adminpass}''
 
     exit 0;
 
@@ -586,6 +607,7 @@ main() {
     fi   
 
     checkArch
+    touch /var/log/wazuh-unattended-installation.log
 
     if [ -n "$1" ]; then      
         while [ -n "$1" ]
@@ -616,7 +638,7 @@ main() {
         done    
 
         if [ -n "${verbose}" ]; then
-            debug=""
+            debug='>> /var/log/wazuh-unattended-installation.log'
         fi
 
         if [ -n "${uninstall}" ]; then
@@ -626,9 +648,9 @@ main() {
         
         if [ -n "${ignore}" ]; then
             echo "Health-check ignored."    
-            checkInstalled ow
+            checkInstalled
         else
-            checkInstalled ow
+            checkInstalled
             healthCheck           
         fi            
         installPrerequisites
@@ -639,7 +661,7 @@ main() {
         installKibana
         checkInstallation    
     else
-        checkInstalled ow  
+        checkInstalled  
         healthCheck   
         installPrerequisites
         addWazuhrepo

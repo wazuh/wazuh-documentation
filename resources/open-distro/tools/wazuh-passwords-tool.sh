@@ -31,7 +31,7 @@ checkRoot() {
 restartService() {
 
     if [ -n "$(ps -e | egrep ^\ *1\ .*systemd$)" ]; then
-        eval "systemctl restart $1.service ${debug}"
+        eval "systemctl restart $1.service ${VERBOSE}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
@@ -39,7 +39,7 @@ restartService() {
             echo "${1^} started"
         fi  
     elif [ -n "$(ps -e | egrep ^\ *1\ .*init$)" ]; then
-        eval "/etc/init.d/$1 restart ${debug}"
+        eval "/etc/init.d/$1 restart ${VERBOSE}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
@@ -47,7 +47,7 @@ restartService() {
             echo "${1^} started"
         fi     
     elif [ -x /etc/rc.d/init.d/$1 ] ; then
-        eval "/etc/rc.d/init.d/$1 restart ${debug}"
+        eval "/etc/rc.d/init.d/$1 restart ${VERBOSE}"
         if [  "$?" != 0  ]; then
             echo "${1^} could not be started."
             exit 1;
@@ -272,9 +272,9 @@ changePassword() {
 runSecurityAdmin() {
     
     echo "Loading changes..."
-    eval "cp /usr/share/${SERVICE_NAME}/backup/* /usr/share/${SERVICE_NAME}/plugins/opendistro_security/securityconfig/ ${debug}"
-    eval "cd /usr/share/${SERVICE_NAME}/plugins/opendistro_security/tools/ ${debug}"
-    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/${SERVICE_NAME}/certs/root-ca.pem -cert /etc/${SERVICE_NAME}/certs/admin.pem -key /etc/${SERVICE_NAME}/certs/admin-key.pem ${debug}"
+    eval "cp /usr/share/${SERVICE_NAME}/backup/* /usr/share/${SERVICE_NAME}/plugins/opendistro_security/securityconfig/ ${VERBOSE}"
+    eval "cd /usr/share/${SERVICE_NAME}/plugins/opendistro_security/tools/ ${VERBOSE}"
+    eval "./securityadmin.sh -cd ../securityconfig/ -nhnv -cacert /etc/${SERVICE_NAME}/certs/root-ca.pem -cert /etc/${SERVICE_NAME}/certs/admin.pem -key /etc/${SERVICE_NAME}/certs/admin-key.pem ${VERBOSE}"
     if [  "$?" != 0  ]; then
         echo "Error: Could not load the changes."
         exit 1;
