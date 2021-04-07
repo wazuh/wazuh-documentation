@@ -9,16 +9,16 @@ cluster.initial_master_nodes:
 #         - <elasticsearch_ip_node2>
 #         - <elasticsearch_ip_node3>
 
-cluster.name: wazuh-cluster
+cluster.name: indexer-cluster
 
-opendistro_security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/elasticsearch.pem
-opendistro_security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/elasticsearch-key.pem
+opendistro_security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
+opendistro_security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
 opendistro_security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
 opendistro_security.ssl.transport.enforce_hostname_verification: false
 opendistro_security.ssl.transport.resolve_hostname: false
 opendistro_security.ssl.http.enabled: true
-opendistro_security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/elasticsearch.pem
-opendistro_security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/elasticsearch-key.pem
+opendistro_security.ssl.http.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
+opendistro_security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
 opendistro_security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
 opendistro_security.nodes_dn:
 - CN=node-1,OU=Docu,O=Wazuh,L=California,C=US
