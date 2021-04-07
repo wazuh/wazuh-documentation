@@ -20,7 +20,6 @@ This section aims to guide the user through the process of installing Wazuh and 
 - Wazuh WUI: A flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, regulatory compliance (e.g. PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. This interface is also used to manage Wazuh configuration and to monitor its status.
 
 .. toctree::
-    :hidden:
     :maxdepth: 1
 
     wazuh-indexer
