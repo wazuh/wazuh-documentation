@@ -333,7 +333,7 @@ Here we can distinct the two main blocks: ``groups`` and ``agents``.
 
     This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
 
-    The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
+    The information about the parsing is shown on the ``/var/ossec/logs/wazuh.log`` file. For example:
 
     - Parsing is successful:
 

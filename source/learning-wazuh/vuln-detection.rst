@@ -145,7 +145,7 @@ Look at the logs
 
 The ``vulnerability-detector`` module generates logs on the manager, and ``syscollector`` does as well on the manager and agents.
 
-Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an agent:
+Try ``grep syscollector: /var/ossec/logs/wazuh.log`` on the manager and on an agent:
 
   .. code-block:: none
       :class: output
@@ -154,11 +154,11 @@ Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an ag
       2019/11/14 19:21:22 wazuh-modulesd:syscollector: INFO: Starting evaluation.
       2019/11/14 19:21:29 wazuh-modulesd:syscollector: INFO: Evaluation finished.
 
-and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager
+and try ``grep vulnerability-detector: /var/ossec/logs/wazuh.log`` on the manager
 
   .. code-block:: none
 
-      [root@wazuh-manager ~]# grep vulnerability-detector: /var/ossec/logs/ossec.log
+      [root@wazuh-manager ~]# grep vulnerability-detector: /var/ossec/logs/wazuh.log
 
   .. code-block:: none
       :class: output

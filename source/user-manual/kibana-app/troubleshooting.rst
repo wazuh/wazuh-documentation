@@ -212,4 +212,4 @@ All the components we use have their own log files, you can check them and look 
 
     .. code-block:: console
 
-      # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
+      # cat /var/ossec/logs/wazuh.log | grep -i -E "error|warn"
