@@ -689,7 +689,7 @@ $wazuh_api_access_block_time
   `Default 300`
 
 $wazuh_api_access_max_request_per_minute
-  Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked.
+  Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. This feature can be disabled by setting its value to 0.
 
   `Default 300`
 

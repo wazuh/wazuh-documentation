@@ -93,6 +93,8 @@ Recommended changes to securize Wazuh API
 
     The default number of requests per minute is *300*. To change it, modify the ``max_request_per_minute`` setting in ``WAZUH_PATH/api/configuration/api.yaml``.
 
+    .. note:: To disable this feature, set its value to 0.
+
 #. Set maximum number of login attempts:
 
     To avoid brute force attacks, it is possible to set the number of times that a login attempt can occur from the same IP during a certain period of time. Once said number is exceeded, the IP will be blocked for that period of time.
