@@ -38,36 +38,36 @@ alerting_full_access:
       allowed_actions:
         - crud 
 
-wazuh_ui_user:
-  reserved: true
-  hidden: false
-  cluster_permissions: []
-  index_permissions:
-  - index_patterns:
-    - "wazuh-*"
-    dls: ""
-    fls: []
-    masked_fields: []
-    allowed_actions:
-    - "read"
-  tenant_permissions: []
-  static: false        
+# wazuh_ui_user:
+#   reserved: true
+#   hidden: false
+#   cluster_permissions: []
+#   index_permissions:
+#   - index_patterns:
+#     - "wazuh-*"
+#     dls: ""
+#     fls: []
+#     masked_fields: []
+#     allowed_actions:
+#     - "read"
+#   tenant_permissions: []
+#   static: false        
 
-wazuh_ui_admin:
-  reserved: true
-  hidden: false
-  cluster_permissions: []
-  index_permissions:
-  - index_patterns:
-    - "wazuh-*"
-    dls: ""
-    fls: []
-    masked_fields: []
-    allowed_actions:
-    - "read"
-    - "delete"
-    - "manage"
-    - "index"
-  tenant_permissions: []
-  static: false  
+# wazuh_ui_admin:
+#   reserved: true
+#   hidden: false
+#   cluster_permissions: []
+#   index_permissions:
+#   - index_patterns:
+#     - "wazuh-*"
+#     dls: ""
+#     fls: []
+#     masked_fields: []
+#     allowed_actions:
+#     - "read"
+#     - "delete"
+#     - "manage"
+#     - "index"
+#   tenant_permissions: []
+#   static: false  
   
