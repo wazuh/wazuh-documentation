@@ -569,7 +569,6 @@ checkInstallation() {
     adminpass=$(grep "password:" /etc/filebeat/filebeat.yml )
     ra="  password: "
     adminpass="${adminpass//$ra}"
-    echo "PASSWORD: ${adminpass}"
     logger "Checking the installation..."
     eval "curl -XGET https://localhost:9200 -uadmin:${adminpass} -k --max-time 300 ${debug}"
     if [  "$?" != 0  ]; then
