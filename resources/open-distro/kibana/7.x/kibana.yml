@@ -2,8 +2,8 @@ server.host: 0.0.0.0
 elasticsearch.hosts: https://127.0.0.1:9200
 server.port: 443
 elasticsearch.ssl.verificationMode: certificate
-elasticsearch.username: kibanaserver
-elasticsearch.password: kibanaserver
+elasticsearch.username: wazuh
+elasticsearch.password: wazuh
 elasticsearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
 opendistro_security.multitenancy.enabled: false
 opendistro_security.readonly_mode.roles: ["kibana_read_only"]

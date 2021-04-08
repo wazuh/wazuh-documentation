@@ -6,8 +6,8 @@ output.elasticsearch.hosts:
 
 output.elasticsearch:
   protocol: https
-  username: admin
-  password: admin
+  username: wazuh
+  password: wazuh
   ssl.certificate_authorities:
     - /etc/filebeat/certs/root-ca.pem
   ssl.certificate: "/etc/filebeat/certs/filebeat.pem"
