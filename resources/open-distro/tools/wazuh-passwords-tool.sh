@@ -192,25 +192,21 @@ changePassword() {
         do
            awk -v new=${HASHES[i]} 'prev=="'${USERS[i]}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
 
-            if [ "${USERS[i]}" == "admin" ]; then
-                adminpass=${PASSWORDS[i]}
-            elif [ "${USERS[i]}" == "kibanaserver" ]; then
-                kibanaserverpass=${PASSWORDS[i]}
+            if [ "${USERS[i]}" == "wazuh" ]; then
+                wazuhpass=${PASSWORDS[i]}
             fi
 
         done
     else
         awk -v new="$HASH" 'prev=="'${NUSER}':"{sub(/\042.*/,""); $0=$0 new} {prev=$1} 1' /usr/share/elasticsearch/backup/internal_users.yml > internal_users.yml_tmp && mv -f internal_users.yml_tmp /usr/share/elasticsearch/backup/internal_users.yml
 
-        if [ "${NUSER}" == "admin" ]; then
-            adminpass=${PASSWORD}
-        elif [ "${NUSER}" == "kibanaserver" ]; then
-            kibanaserverpass=${PASSWORD}
+        if [ "${NUSER}" == "wazuh" ]; then
+            wazuhpass=${PASSWORD}
         fi
 
     fi
     
-    if [ "${NUSER}" == "admin" ] || [ "${NUSER}" == "kibanaserver" ] || [ -n "${CHANGEALL}" ]; then
+    if [ "${NUSER}" == "wazuh" ] || [ -n "${CHANGEALL}" ]; then
 
         if [ "${SYS_TYPE}" == "yum" ]; then
             hasfilebeat=$(yum list installed 2>/dev/null | grep filebeat)
@@ -228,22 +224,22 @@ changePassword() {
             haskibana=$(apt list --installed  2>/dev/null | grep opendistroforelasticsearch-kibana)
         fi     
 
-        adminold=$(grep "password:" /etc/filebeat/filebeat.yml )
+        wazuhold=$(grep "password:" /etc/filebeat/filebeat.yml )
         ra="  password: "
-        adminold="${adminold//$ra}"
+        wazuhold="${wazuhold//$ra}"
 
-        kibanaserold=$(grep "password:" /etc/kibana/kibana.yml )
+        wazuhkibold=$(grep "password:" /etc/kibana/kibana.yml )
         rk="elasticsearch.password: "
-        kibanaserold="${kibanaserold//$rk}"        
+        wazuhkibold="${wazuhkibold//$rk}"        
 
         if [ -n "${hasfilebeat}" ]; then
-            conf="$(awk '{sub("  password: '${adminold}'", "  password: '${adminpass}'")}1' /etc/filebeat/filebeat.yml)"
+            conf="$(awk '{sub("  password: '${adminold}'", "  password: '${wazuhpass}'")}1' /etc/filebeat/filebeat.yml)"
             echo "${conf}" > /etc/filebeat/filebeat.yml  
             restartService "filebeat"
         fi 
 
         if [ -n "${haskibana}" ]; then
-            conf="$(awk '{sub("elasticsearch.password: '${kibanaserold}'", "elasticsearch.password: '${kibanaserverpass}'")}1' /etc/kibana/kibana.yml)"
+            conf="$(awk '{sub("elasticsearch.password: '${wazuhkibold}'", "elasticsearch.password: '${wazuhpass}'")}1' /etc/kibana/kibana.yml)"
             echo "${conf}" > /etc/kibana/kibana.yml 
             restartService "kibana"
         fi         
