@@ -233,7 +233,7 @@ changePassword() {
         wazuhkibold="${wazuhkibold//$rk}"        
 
         if [ -n "${hasfilebeat}" ]; then
-            conf="$(awk '{sub("  password: '${adminold}'", "  password: '${wazuhpass}'")}1' /etc/filebeat/filebeat.yml)"
+            conf="$(awk '{sub("  password: '${wazuhold}'", "  password: '${wazuhpass}'")}1' /etc/filebeat/filebeat.yml)"
             echo "${conf}" > /etc/filebeat/filebeat.yml  
             restartService "filebeat"
         fi 
