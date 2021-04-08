@@ -15,7 +15,7 @@ A special search syntax can be used on the bar for filtering rules and decoders,
   :align: center
   :width: 100%
 
-When the user clicks on a rule or decoder, it will open a detail view, where you can find the complete information. In the different sections you can find :ref:`PCI DSS <pci_dss>` or :ref:`GDPR <gdpr>` requirements, :ref:`groups <reference_agent_conf>`, regular expressions, and other details. The user can click on some elements to activate a filter on the previous list.
+When the user clicks on a rule or decoder, it will open a detail view, where you can find the complete information. In the different sections you can find :ref:`PCI DSS <pci_dss>` or :ref:`GDPR <gdpr>` requirements, :ref:`groups <reference_shared_conf>`, regular expressions, and other details. The user can click on some elements to activate a filter on the previous list.
 
 At the bottom of the page, there's a table of related rules or decoders that are defined on the same file.
 
