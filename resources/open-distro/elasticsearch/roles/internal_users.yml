@@ -17,6 +17,13 @@ admin:
   - "admin"
   description: "Demo admin user"
 
+wazuh:
+  hash: "$2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG"
+  reserved: true
+  backend_roles:
+  - "admin"
+  description: "Wazuh admin user"  
+
 kibanaserver:
   hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
   reserved: true
