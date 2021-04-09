@@ -566,11 +566,11 @@ changePasswords() {
 checkInstallation() {
 
     changePasswords
-    adminpass=$(grep "password:" /etc/filebeat/filebeat.yml )
+    wazuhpass=$(grep "password:" /etc/filebeat/filebeat.yml )
     ra="  password: "
-    adminpass="${adminpass//$ra}"
+    wazuhpass="${wazuhpass//$ra}"
     logger "Checking the installation..."
-    eval "curl -XGET https://localhost:9200 -uadmin:${adminpass} -k --max-time 300 ${debug}"
+    eval "curl -XGET https://localhost:9200 -uwazuh:${wazuhpass} -k --max-time 300 ${debug}"
     if [  "$?" != 0  ]; then
         echo "Error: Elasticsearch was not successfully installed."
         rollBack
@@ -587,12 +587,12 @@ checkInstallation() {
         echo "Filebeat installation succeeded."
     fi    
     logger "Initializing Kibana (this may take a while)"
-    until [[ "$(curl -XGET https://localhost/status -I -uadmin:${adminpass} -k -s --max-time 300 | grep "200 OK")" ]]; do
+    until [[ "$(curl -XGET https://localhost/status -I -uwazuh:${wazuhpass} -k -s --max-time 300 | grep "200 OK")" ]]; do
         echo -ne $char
         sleep 10
     done    
     echo $'\nInstallation finished'
-    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are admin:'${adminpass}''
+    echo $'\nYou can access the web interface https://<kibana_ip>. The credentials are wazuh:'${wazuhpass}''
 
     exit 0;
 
