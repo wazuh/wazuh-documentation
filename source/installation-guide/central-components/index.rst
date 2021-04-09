@@ -11,8 +11,6 @@ Central components
 
 Install Wazuh and its central components by following a step-by-step process that includes configuration options to suit your needs. If you want to proceed with an unattended installation, see the :ref:`quickstart <quickstart>` section.
 
-Wazuh central components installation workflow:
-
 .. thumbnail:: ../../images/installation/installation_workflow.png
   :align: center
   :width: 100%
@@ -25,9 +23,7 @@ Wazuh central components installation workflow:
 
 - :ref:`Wazuh WUI <wazuh_wui>`: A flexible and intuitive web interface for mining, analyzing, and visualizing data. It includes out-of-the-box dashboards for security events, regulatory compliance (e.g. PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. This interface is also used to manage Wazuh configuration and to monitor its status.
 
-Wazuh distributed architecture:
-
-.. thumbnail:: ../../images/installation/distributed_installation.png
+.. thumbnail:: ../../images/installation/distributed_deployment.png
   :align: center
   :width: 100%
 
