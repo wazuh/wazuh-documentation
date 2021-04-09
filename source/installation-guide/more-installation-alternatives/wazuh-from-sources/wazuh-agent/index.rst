@@ -97,7 +97,13 @@ Installing Wazuh agent from sources
 
          # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
 
+      .. tab:: Pacman
 
+        .. code-block:: console
+
+         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base \
+          perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs \
+          base-devel inetutils cmake
 
 
     2. Download and extract the latest version:

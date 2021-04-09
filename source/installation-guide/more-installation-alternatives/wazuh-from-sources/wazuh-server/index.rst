@@ -94,6 +94,15 @@ Installing Wazuh manager
       # make -j$(nproc) && make install
       # cd .. && rm -rf cmake-*
 
+  .. group-tab:: Pacman
+
+
+    .. code-block:: console
+
+        # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base \
+        perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs \
+        base-devel inetutils cmake
+
 
 **Optional**. Install the following dependencies **only when compiling the CPython from sources**. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
