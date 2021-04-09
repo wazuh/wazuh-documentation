@@ -31,7 +31,7 @@ Wazuh distributed architecture:
   :align: center
   :width: 100%
 
-Follow the installation workflow to complete the Wazuh central components installation. If you have already installed the Wazuh central components and want to deploy the agents, see the :ref:`Wazuh agent <wazuh_agent>` section.
+Follow the installation workflow to complete the Wazuh central components installation. If you have already installed the Wazuh central components and want to deploy the agents, see the :ref:`Wazuh agent <installation_agents>` section.
 
 .. toctree::
   :hidden:
