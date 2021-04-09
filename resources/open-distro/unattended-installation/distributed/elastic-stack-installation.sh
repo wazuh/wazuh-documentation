@@ -11,7 +11,7 @@
 ## Check if system is based on yum or apt-get
 char="."
 debug='> /dev/null 2>&1'
-WAZUH_VER="4.1.3"
+WAZUH_VER="4.1.4"
 WAZUH_REV="1"
 ELK_VER="7.10.0"
 OD_VER="1.12.0"
@@ -451,7 +451,7 @@ installKibana() {
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.3_7.10.0-1.zip ${debug}"
+        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.1.4_7.10.0-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;

@@ -831,8 +831,8 @@ Wazuh Manager
         use_password: 'no'
         ssl_agent_ca: null
         ssl_verify_host: 'no'
-        ssl_manager_cert: '/var/ossec/etc/sslmanager.cert'
-        ssl_manager_key: '/var/ossec/etc/sslmanager.key'
+        ssl_manager_cert: 'etc/sslmanager.cert'
+        ssl_manager_key: 'etc/sslmanager.key'
         ssl_auto_negotiate: 'no'
       email_notification: 'no'
       mail_to:

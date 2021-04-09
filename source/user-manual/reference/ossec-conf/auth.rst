@@ -125,10 +125,10 @@ If this file does not exist, a **random password** will be generated.
 ssl_agent_ca
 ^^^^^^^^^^^^
 
-Specifies the full path to the CA certificate used to verify clients.
+Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
 +--------------------+---------------------+
-| **Allowed values** | A full path         |
+| **Allowed values** | Any valid path      |
 +--------------------+---------------------+
 
 ssl_verify_host
@@ -145,23 +145,23 @@ Toggles source host verification on and off when a CA certificate is specified. 
 ssl_manager_cert
 ^^^^^^^^^^^^^^^^
 
-Specifies the full path to the server SSL certificate.
+Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
 +--------------------+--------------------------------+
-| **Default value**  | /var/ossec/etc/sslmanager.cert |
+| **Default value**  | etc/sslmanager.cert            |
 +--------------------+--------------------------------+
-| **Allowed values** | A full path                    |
+| **Allowed values** | Any valid path                 |
 +--------------------+--------------------------------+
 
 ssl_manager_key
 ^^^^^^^^^^^^^^^
 
-Specifies the full path to the server's SSL key.
+Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory, or a full path.
 
 +--------------------+--------------------------------+
-| **Default value**  | /var/ossec/etc/sslmanager.key  |
+| **Default value**  | etc/sslmanager.key             |
 +--------------------+--------------------------------+
-| **Allowed values** | A full path                    |
+| **Allowed values** | Any valid path                 |
 +--------------------+--------------------------------+
 
 ssl_auto_negotiate
@@ -208,7 +208,7 @@ Default configuration
     <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
     <!-- <ssl_agent_ca></ssl_agent_ca> -->
     <ssl_verify_host>no</ssl_verify_host>
-    <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
-    <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
+    <ssl_manager_cert>etc/sslmanager.cert</ssl_manager_cert>
+    <ssl_manager_key>etc/sslmanager.key</ssl_manager_key>
     <ssl_auto_negotiate>no</ssl_auto_negotiate>
   </auth>

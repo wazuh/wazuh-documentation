@@ -144,8 +144,8 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
               <frequency>300</frequency>
 
-              <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-              <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+              <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
+              <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
               <skip_nfs>yes</skip_nfs>
             </rootcheck>
 

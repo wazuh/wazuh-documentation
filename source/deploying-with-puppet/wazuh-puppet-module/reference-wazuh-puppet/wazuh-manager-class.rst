@@ -287,12 +287,12 @@ $ossec_rootcheck_ignore_list
 $ossec_rootcheck_rootkit_files
   Change the location of the rootkit files database.
 
-  `Default '/var/ossec/etc/shared/rootkit_files.txt'`
+  `Default 'etc/shared/rootkit_files.txt'`
 
 $ossec_rootcheck_rootkit_trojans
   Change the location of the rootkit trojans database.
 
-  `Default '/var/ossec/etc/shared/rootkit_trojans.txt'`
+  `Default 'etc/shared/rootkit_trojans.txt'`
 
 $ossec_rootcheck_skip_nfs
   Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
