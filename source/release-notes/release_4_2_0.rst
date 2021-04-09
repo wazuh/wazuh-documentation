@@ -27,7 +27,7 @@ This release includes new features or enhancements.
 - `#7239 <https://github.com/wazuh/wazuh/pull/7239>`_ Wazuh provides enhanced state information by adding statistical data queries to the agent.
 - `#7307 <https://github.com/wazuh/wazuh/pull/7307>`_ Quoting in commands to group arguments in the command wodle and SCA checks are allowed. Before this enhancement, the system parsed quoted substrings into the same argument but double-quotes were kept. Now, scapes and double-quotes are allowed in command lines so that you can handle arguments in command calls. 
 - `#7408 <https://github.com/wazuh/wazuh/pull/7408>`_ Agent's IP detection improvement: agents running on Solaris now send their IP to the manager. 
-- `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``<ip_update_interval>`` option is added to set how often the agent refreshes its IP address.
+- `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
 - `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh Logtest. 
 - `#7731 <https://github.com/wazuh/wazuh/issues/7731>`_ Vulnerability detection improvement: new vulnerability detector reports are added to the Wazuh DB so you can know which CVE affect an agent.
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons have been renamed to a unified standard. 
