@@ -150,8 +150,7 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     :maxdepth: 1
 
     quickstart
-    central-components/index
-    wazuh-agent/index
+    wazuh-components/index
     packages-list
 
 
