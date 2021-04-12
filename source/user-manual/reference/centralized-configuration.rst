@@ -250,7 +250,7 @@ It's important to understand which configuration file takes precedence between `
 
 For example:
 
-Let's say we have this configuration in the ``shared.conf`` file:
+Let's say we have this configuration in the ``agent.conf`` file:
 
 .. code-block:: xml
 
