@@ -1,6 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
-Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
+Run the following command to download the configuration file ``/etc/elasticsearch/elasticsearch.yml``:
 
 .. code-block:: console
 
