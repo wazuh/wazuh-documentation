@@ -11,10 +11,10 @@ The script installs Java Development Kit and other packages, including ``unzip``
 Installing Wazuh
 ----------------
 
-.. note:: Root user privileges are required to run all the commands and the ``curl`` package is used to download the script. 
+.. note:: Root user privileges are required to run all the commands. The ``curl`` package is used to download the script. 
 
 
-#. Run the script:
+#. Run the following command:
 
    .. code-block:: console
 
@@ -73,6 +73,8 @@ Customizing the installation
 The Kibana configuration found at the ``/etc/kibana/kibana.yml`` file has the ``server.host`` parameter set to ``0.0.0.0``. This means that Kibana can be accessed from the outside and accepts all the available IPs of the host.  This value can be changed for a specific IP if needed.
 
 It is highly recommended to change Elasticsearch default passwords for the users' found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. For more information on Elasticsearch configuration and passwords, check the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
+
+To uninstall all the components of the all-in-one installation, see the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
  
 Next steps
 ----------
