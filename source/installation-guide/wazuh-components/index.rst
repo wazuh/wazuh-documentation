@@ -11,7 +11,7 @@ Wazuh components
 
 Install Wazuh and its components by following a step-by-step process that includes configuration options to suit your needs. If you want to proceed with an unattended installation, see the :ref:`quickstart <quickstart>` section.
 
-.. thumbnail:: ../../images/installation/installation_workflow.png
+.. thumbnail:: ../../images/installation/wazuh_components_installation_workflow.png
   :align: center
   :width: 100%
 
