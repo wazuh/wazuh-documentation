@@ -500,10 +500,10 @@ manager:update_config
 - :api-ref:`PUT /manager/configuration <operation/api.controllers.manager_controller.update_configuration>` (`*:*`_)
 
 Mitre
-^^^^^^^^^^^^^^^
+^^^^^^
 mitre:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /mitre <operation/api.controllers.mitre_controller.get_attack>` (`*:*`_)
+- :api-ref:`GET /mitre/metadata <operation/api.controllers.mitre_controller.get_metadata>` (`*:*`_)
 
 Rootcheck
 ^^^^^^^^^^^^^^^
