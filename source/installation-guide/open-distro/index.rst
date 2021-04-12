@@ -10,21 +10,19 @@ Wazuh server
 
 The Wazuh server analyzes data received from the agents, processing it through decoders and rules, and using threat intelligence to look for well-known IOCs. The server is also used to manage the agents, configuring and upgrading them remotely when necessary.
 
-You can install Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 licensed distribution of Elasticsearch enhanced with enterprise security, alerts, SQL support, automated index management, or deep performance analysis, among other features.
+Install Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 licensed distribution of Elasticsearch enhanced with enterprise security, alerts, SQL support, automated index management, or deep performance analysis, among other features. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
-To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
+Deployment types
+----------------
 
-Wazuh server installation
--------------------------
+Wazuh allows you to adapt the deployment process according to your enterprise needs. You can choose between two alternatives for deploying a Wazuh installation.
 
-Wazuh allows you to adapt the installation process according to your enterprise needs. You can choose between two independent alternatives for deploying a Wazuh installation: 
-
-.. note:: For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section.
+For information on the minimum hardware requirements for the different types of deployment, check the :ref:`Requirements <installation_requirements>` section. 
 
 - All-in-one deployment: Wazuh and Open Distro for Elasticsearch are installed on the same host. This type of deployment is appropriate for testing and small working environments. 
 
 - Distributed deployment: Each component is installed on a separate host as a single-node or multi-node cluster. This type of deployment allows high availability and scalability of the product and is convenient for large working environments.
-
+  
 
 Installation methods
 ---------------------
