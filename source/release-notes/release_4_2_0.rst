@@ -30,23 +30,21 @@ This release includes new features or enhancements.
 - `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
 - `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh Logtest. 
 - `#7731 <https://github.com/wazuh/wazuh/issues/7731>`_ Vulnerability detection improvement: new vulnerability detector reports are added to the Wazuh DB so you can know which CVE affect an agent.
-- `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons have been renamed to a unified standard. 
-- `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs have been renamed to a unified standard. 
-- `#6920 <https://github.com/wazuh/wazuh/pull/6920>`_ Wazuh internal directories have been renamed to a unified standard. 
-- `#6759 <https://github.com/wazuh/wazuh/pull/6759>`_ Prevent a condition in FIM that may lead to a memory error. 
-- `#6828 <https://github.com/wazuh/wazuh/pull/6828>`_ Let FIM switch to real-time mode for directories where who-data is not available (Audit in immutable mode). 
-- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ Changed the Active Response protocol to receive messages in JSON format that include the full alert. 
-- `#7264 <https://github.com/wazuh/wazuh/pull/7264>`_ Changed references to the product name in logs. 
-- `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ Remoted now supports both TCP and UDP protocols simultaneously. 
-- `#7595 <https://github.com/wazuh/wazuh/pull/7595>`_ Improved the unit tests for the os_net library. 
-- `#6999 <https://github.com/wazuh/wazuh/pull/6999>`_ FIM now removes the audit rules when their corresponding symbolic links change their target. 
-- `#7797 <https://github.com/wazuh/wazuh/pull/7797>`_ Compilation from sources now downloads the external dependencies prebuilt. 
-- `#7807 <https://github.com/wazuh/wazuh/pull/7807>`_ Added the old implementation of Logtest as `wazuh-logtest-legacy`. 
-- `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Improved the performance of Analysisd when running on multi-core hosts. 
-- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report the manager when they stop. That allows the manager to log an alert and immediately set their state to "disconnected". 
-- `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building is now independent from the installation directory. 
-- `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ The embedded python interpreter is provided in a preinstalled, portable package. 
-- `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh resources are now accessed by a relative path to the installation directory.
+- `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons are now renamed to follow the Wazuh unified standard. 
+- `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs and related tools are now renamed to follow Wazuh unified standard.
+- `#6920 <https://github.com/wazuh/wazuh/pull/6920>`_ Wazuh internal directories are now renamed to follow Wazuh unified standard. 
+- `#6759 <https://github.com/wazuh/wazuh/pull/6759>`_ FIM improvement prevents a condition that might lead to memory error. 
+- `#6828 <https://github.com/wazuh/wazuh/pull/6828>`_ FIM now switches from audit in immutable mode to real-time mode for directories where who-data is not available. 
+- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ Active Response protocol changed to receive messages in JSON format that now include the full alert.
+- `#7264 <https://github.com/wazuh/wazuh/pull/7264>`_ References in logs are now changed to include Wazuh product name. 
+- `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ Remoted now supports both TCP and UDP protocols simultaneously.
+- `#7595 <https://github.com/wazuh/wazuh/pull/7595>`_ Unit tests for the ``os_net`` library are now improved in functionality and purpose consistency.
+- `#6999 <https://github.com/wazuh/wazuh/pull/6999>`_ FIM now removes the audit rules when their corresponding symbolic links change their target.
+- `#7797 <https://github.com/wazuh/wazuh/pull/7797>`_ Compilation from sources now downloads the prebuilt external dependencies. This improvement helps to consume fewer resources and eliminates overhead. 
+- `#7807 <https://github.com/wazuh/wazuh/pull/7807>`_ The old implementation of Logtest is restored and renamed as ``wazuh-logtest-legacy``, improving functionality.
+- `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to Analysisd when running on multi-core hosts.
+- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. That allows the manager to log an alert and immediately set their state to **disconnected**.
+- `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building process is now independent of the installation directory. With this improvement, the embedded Python interpreter is now provided in a preinstalled, portable package, and the Wazuh resources are now accessed via a relative path to the installation directory.
 - `#7175 <https://github.com/wazuh/wazuh/pull/7175>`_ File /etc/ossec-init.conf does not exist anymore. 
 - `#7398 <https://github.com/wazuh/wazuh/issues/7398>`_ Unused files have been removed from the repository, including TAP tests. 
 
