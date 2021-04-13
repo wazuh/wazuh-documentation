@@ -71,7 +71,7 @@ This release includes new features or enhancements.
 
 **Ruleset**
   
-- `#7100 <https://github.com/wazuh/wazuh/pull/7100>`_ Added support for UFW firewall to decoders. 
+- `#7100 <https://github.com/wazuh/wazuh/pull/7100>`_ Wazuh now provides decoder support for UFW (Uncomplicated Firewall) and its log format. This improvement ensures the correct processing of Ubuntu’s default firewall logs. 
 - `#6867 <https://github.com/wazuh/wazuh/pull/6867>`_ The ruleset was normalized according to the Wazuh standard. 
 - `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ Added CIS policy "Ensure XD/NX support is enabled" back for SCA. 
 
