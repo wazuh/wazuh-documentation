@@ -13,7 +13,7 @@ Manage protected RBAC resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-  As explained in the :ref:`How it works <api_rbac_how_it_works>` section, a protected RBAC resource can only be managed with this CLI. Not even the Wazuh API with administrator permissions will be able to modify or delete it.
+  As explained in the :ref:`How it works <how-it-works>` section, a protected RBAC resource can only be managed with this CLI. Not even the Wazuh API with administrator permissions will be able to modify or delete it.
 
 Using the CLI with the desired option, all the RBAC resources can be created, modified, deleted, linked or unlinked. These are the options:
 
