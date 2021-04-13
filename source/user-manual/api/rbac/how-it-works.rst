@@ -48,7 +48,7 @@ Every RBAC resource (policies, roles, rules and users) can be classified regardi
 
 - **User resources:** A regular RBAC resource created using the Wazuh API. It is NOT protected and can be modified or removed using the Wazuh API by any user as long as it belongs to the appropriate RBAC Role. Check :ref:`RBAC reference <api_rbac_reference>` to learn more about the actions required to create RBAC resources.
 
-- **Protected resources:** A regular RBAC resource. It is protected so it cannot be modified or removed using the Wazuh API even if the user has the appropriate RBAC role. It must be manually created, updated or removed by using the :ref:`security_resources <security_resources>` tool instead.
+- **Protected resources:** A special RBAC resource. It is protected so it cannot be modified or removed using the Wazuh API even if the user has the appropriate RBAC role. It must be manually created, updated or removed by using the :ref:`security_resources <security_resources>` tool instead.
 
 - **Default resources:** A default Wazuh RBAC resource. It cannot be modified or removed by any user. The default resources are managed by Wazuh and could be added, updated or removed in different Wazuh releases. Neither the Wazuh API nor the CLI tool are able to update or remove the default resources. However, they can be used by the user as any other resource. As an example, it is possible to create a custom Role and assign to it a default policy.
 
