@@ -55,11 +55,11 @@ This release includes new features or enhancements.
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
 - `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes. 
-- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Removed ruleset version from `GET /cluster/{node_id}/info` and `GET /manager/info` as it was deprecated. 
-- `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ Changed the `POST /groups` endpoint to specify the group name in a JSON body instead of in a query parameter. 
-- `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ Changed the `PUT /active-response` endpoint function to create messages with the new JSON format. 
+- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is removed was deprecated and removed.
+- `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
+- `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ New parameters added to `DELETE /agents` endpoint and `older_than` field removed from response. 
-- `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Changed login security controller to avoid errors in Restful API reference links. 
+- `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Removed the `allow_run_as` parameter from endpoints `POST /security/users` and `PUT /security/users/{user_id}`. 
 - `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ Removed `behind_proxy_server` option from configuration.
   
