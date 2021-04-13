@@ -21,3 +21,4 @@ This section contains technical documentation for developers.
         wazuh-cluster
         packaging/index
         wazuh-logtest
+        rbac-database-integrity

@@ -17,5 +17,4 @@ Role-based access control (RBAC) adds the capability to control access to differ
         how-it-works
         configuration
         auth_context
-        rbac-database-integrity
         reference
