@@ -53,10 +53,10 @@ This release includes new features or enhancements.
 
 **API**
   
-- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Added new endpoint to get agent stats from different components. 
-- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Added new endpoint to modify users' allow_run_as flag. 
-- `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Added new endpoint to get vulnerabilities that affect an agent.
-- `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ Added API configuration validator. 
+- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Wazuh adds a new endpoint to get agents’ logcollector statistics from different components. 
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s allow_run_as flag, allowing you to enable or disable the parameter.
+- `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
+- `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes. 
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Removed ruleset version from `GET /cluster/{node_id}/info` and `GET /manager/info` as it was deprecated. 
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ Changed the `POST /groups` endpoint to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ Changed the `PUT /active-response` endpoint function to create messages with the new JSON format. 
