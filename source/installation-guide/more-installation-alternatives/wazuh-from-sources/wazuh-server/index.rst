@@ -115,9 +115,9 @@ To install the required dependencies to build the python interpreter, follow the
 
     .. code-block:: console
 
-        # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+        # sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
         # apt-get update
-        # apt-get build-dep python3.5 -y
+        # apt-get build-dep python3.9 -y
 
 
   .. group-tab:: ZYpp
@@ -148,7 +148,7 @@ To install the required dependencies to build the python interpreter, follow the
       # cd wazuh-*
       # ./install.sh
 
-    If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+    If you have previously compiled for another platform or **you want to install Wazuh in a custom path**, you must clean the build using the Makefile in ``src``:
 
     .. code-block:: console
 
