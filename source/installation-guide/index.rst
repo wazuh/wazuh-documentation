@@ -9,7 +9,7 @@
 Installation guide
 ==================
 
-Install Wazuh and its multiple components by following the installation workflow that best suits your enterprise needs.
+Install Wazuh and its multiple components by following the installation workflow that best suits your needs.
 To learn more about each component and its capabilities, check the :ref:`Components <components>` section. 
 
 Wazuh server installation
