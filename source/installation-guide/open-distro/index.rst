@@ -8,7 +8,6 @@ Wazuh server
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
-The Wazuh server analyzes data received from the agents, processing it through decoders and rules, and using threat intelligence to look for well-known IOCs. The server is also used to manage the agents, configuring and upgrading them remotely when necessary.
 
 Install Wazuh with Open Distro for Elasticsearch, which is an Apache 2.0 licensed distribution of Elasticsearch enhanced with enterprise security, alerts, SQL support, automated index management, or deep performance analysis, among other features. To learn more about each component and its capabilities, check the :ref:`Components <components>` section.
 
