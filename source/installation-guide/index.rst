@@ -15,7 +15,7 @@ To learn more about each component and its capabilities, check the :ref:`Compone
 Wazuh server installation
 -------------------------
 
-Wazuh allows you to adapt the deployment process according to your enterprise environments. You can choose between two different alternatives for deploying a Wazuh installation:
+Wazuh allows you to adapt the deployment process according to your enterprise needs. You can choose between two different alternatives for deploying a Wazuh installation:
 
 - :ref:`All-in-one <all_in_one_index>`: All the Wazuh components are installed on the same host. This type of deployment is appropriate for testing and small working environments. If you want to test Wazuh, you can download our ready-to-use :ref:`OVA <virtual_machine>`.
 
@@ -153,4 +153,3 @@ Check the :ref:`requirements <installation_requirements>` section for informatio
     wazuh-agent/index
     packages-list
     more-installation-alternatives/index
-
