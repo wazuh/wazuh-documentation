@@ -74,8 +74,8 @@ This release includes new features or enhancements.
 - `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ CIS policy **Ensure XD/NX support is enabled** is restored for SCA.
 
 
-Fixed
-^^^^^
+Resolved issues
+^^^^^^^^^^^^^^^
 
 This release resolves known issues. 
 
@@ -84,7 +84,7 @@ This release resolves known issues.
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#6736 <https://github.com/wazuh/wazuh/pull/6736>`_               Improved memory usage when creating cluster messages. 
+`#6736 <https://github.com/wazuh/wazuh/pull/6736>`_               Memory usage is now optimized and improved when creating cluster messages.
 ==============================================================    =============
 
 **Core**
