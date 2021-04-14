@@ -45,8 +45,8 @@ This release includes new features or enhancements.
 - `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to Analysisd when running on multi-core hosts.
 - `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. That allows the manager to log an alert and immediately set their state to **disconnected**.
 - `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building process is now independent of the installation directory. With this improvement, the embedded Python interpreter is now provided in a preinstalled, portable package, and the Wazuh resources are now accessed via a relative path to the installation directory.
-- `#7175 <https://github.com/wazuh/wazuh/pull/7175>`_ File /etc/ossec-init.conf does not exist anymore. 
-- `#7398 <https://github.com/wazuh/wazuh/issues/7398>`_ Unused files have been removed from the repository, including TAP tests. 
+- `#7175 <https://github.com/wazuh/wazuh/pull/7175>`_ The ``/etc/ossec-init.conf`` file no longer exists. 
+- `#7398 <https://github.com/wazuh/wazuh/issues/7398>`_ Unused files are removed from the repository, including TAP tests.
 
 
 **API**
@@ -60,8 +60,8 @@ This release includes new features or enhancements.
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ ``DELETE /agents`` endpoint improvements: new parameters are added to the endpoint and the ``older_than`` field is now removed from the response. 
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
-- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Removed the `allow_run_as` parameter from endpoints `POST /security/users` and `PUT /security/users/{user_id}`. 
-- `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ Removed `behind_proxy_server` option from configuration.
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints ``POST /security/users`` and ``PUT /security/users/{user_id}``.
+- `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ The ``behind_proxy_server`` option is now removed from configuration.
   
 **Framework**
 
