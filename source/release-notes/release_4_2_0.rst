@@ -54,18 +54,21 @@ This release includes new features or enhancements.
 - `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Wazuh adds a new endpoint to get agents’ logcollector statistics from different components. 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
-- `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes. 
+- `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes.
+- `#8115 <https://github.com/wazuh/wazuh/pull/8115>`_ Wazuh adds the capability that allows you to disable the  ``max_request_per_minute`` API configuration option by setting its value to ``0``.
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is deprecated and removed.
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ ``DELETE /agents`` endpoint improvements: new parameters are added to the endpoint and the ``older_than`` field is now removed from the response. 
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
+- `#8123 <https://github.com/wazuh/wazuh/pull/8123>`_ The ``PUT /agents/group/{group_id}/restart`` response format is now improved when there are no agents assigned to the group.
+- `#8149 <https://github.com/wazuh/wazuh/pull/8149>`_ Agent keys used when adding agents through the Wazuh API are now obscured in the API log.
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints ``POST /security/users`` and ``PUT /security/users/{user_id}``.
 - `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ The ``behind_proxy_server`` option is now removed from configuration.
   
 **Framework**
 
-- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ ``update_ruleset`` script is now deprecated.
+- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ ``update_ruleset`` script is now deprecated and removed.
 
 **Ruleset**
   
