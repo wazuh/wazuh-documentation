@@ -55,7 +55,7 @@ This release includes new features or enhancements.
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
 - `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes. 
-- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is removed was deprecated and removed.
+- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is deprecated and removed.
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ ``DELETE /agents`` endpoint improvements: new parameters are added to the endpoint and the ``older_than`` field is now removed from the response. 
@@ -65,13 +65,13 @@ This release includes new features or enhancements.
   
 **Framework**
 
-- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Deprecated `update_ruleset` script.
+- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ ``update_ruleset`` script is now deprecated.
 
 **Ruleset**
   
-- `#7100 <https://github.com/wazuh/wazuh/pull/7100>`_ Wazuh now provides decoder support for UFW (Uncomplicated Firewall) and its log format. This improvement ensures the correct processing of Ubuntu’s default firewall logs. 
-- `#6867 <https://github.com/wazuh/wazuh/pull/6867>`_ The ruleset was normalized according to the Wazuh standard. 
-- `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ Added CIS policy "Ensure XD/NX support is enabled" back for SCA. 
+- `#7100 <https://github.com/wazuh/wazuh/pull/7100>`_ Wazuh now provides decoder support for UFW (Uncomplicated Firewall) and its log format. This improvement ensures the correct processing of Ubuntu default firewall logs. 
+- `#6867 <https://github.com/wazuh/wazuh/pull/6867>`_ The ruleset is updated and normalized to follow the Wazuh unified standard.
+- `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ CIS policy **Ensure XD/NX support is enabled** is restored for SCA.
 
 
 Fixed
