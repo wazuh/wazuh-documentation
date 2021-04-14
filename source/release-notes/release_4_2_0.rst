@@ -58,7 +58,7 @@ This release includes new features or enhancements.
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is removed was deprecated and removed.
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
-- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ New parameters added to `DELETE /agents` endpoint and `older_than` field removed from response. 
+- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ ``DELETE /agents`` endpoint improvements: new parameters are added to the endpoint and the ``older_than`` field is now removed from the response. 
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Removed the `allow_run_as` parameter from endpoints `POST /security/users` and `PUT /security/users/{user_id}`. 
 - `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ Removed `behind_proxy_server` option from configuration.
