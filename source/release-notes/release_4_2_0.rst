@@ -147,17 +147,89 @@ Reference                                                         Description
 ==============================================================    =============
 
 
-
 Wazuh Kibana plugin
 -------------------
+
+This release includes new features or enhancements. 
+
+Highlights
+^^^^^^^^^^
+
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Added Ruleset Test section under Tools menu, and on Edit Rules/Decoders as a tool.
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Moved Dev Tools inside of Tools menu as Api Console.
+- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Added Agent Stats section.
+- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Added vulnerabilities inventory that affect to an agent.
+ 
+What's new
+^^^^^^^^^^
+
+- `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ Added page size options in Security events, explore agents table. 
+- `#3051 <https://github.com/wazuh/wazuh-kibana-app/pull/3051>`_ Added a reminder to restart cluster or manager after import a file in Rules, Decoders or CDB Lists
+- `#3061 <https://github.com/wazuh/wazuh-kibana-app/issues/3061>`_ Added logtest PUT example on API Console
+- `#3109 <https://github.com/wazuh/wazuh-kibana-app/pull/3109>`_ Added retry button to check api again in health check.
+- `#3111 <https://github.com/wazuh/wazuh-kibana-app/pull/3111>`_ Added wazuh-statistics template and a new mapping for these indices.
+- `#3126 <https://github.com/wazuh/wazuh-kibana-app/pull/3126>`_ Added link to documentation "Checking connection with Manager" in deploy new agent.
+- `#2892 <https://github.com/wazuh/wazuh-kibana-app/issues/2892>`_ Changed position of Top users on Integrity Monitoring Top 5 user.
+- `#3080 <https://github.com/wazuh/wazuh-kibana-app/pull/3080>`_ Changed user allow_run_as way of editing.
+- `#3046 <https://github.com/wazuh/wazuh-kibana-app/pull/3046>`_ Rename some ossec references to Wazuh.
+
+Resolved issues
+^^^^^^^^^^^^^^^
+
+This release resolves known issues. 
+
+**Kibana plugin**
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#3088 <https://github.com/wazuh/wazuh-kibana-app/pull/3088>`_    Filter only authorized agents in Agents stats and Visualizations
+`#3095 <https://github.com/wazuh/wazuh-kibana-app/pull/3095>`_    Fixed missing pending status suggestion for agents. 
+`#3097 <https://github.com/wazuh/wazuh-kibana-app/pull/3097>`_    Index pattern setting not used for choosing from existing patterns. 
+`#3108 <https://github.com/wazuh/wazuh-kibana-app/pull/3108>`_    Fixed space character missing on deployment command if UDP is configured
+`#3110 <https://github.com/wazuh/wazuh-kibana-app/pull/3110>`_    Fixed statistics visualizations when a node is selected 
+`#3114 <https://github.com/wazuh/wazuh-kibana-app/pull/3114>`_    Fixed Flyout date filter also changes main date filter
+`#3118 <https://github.com/wazuh/wazuh-kibana-app/pull/3118>`_    Fixed name for "TCP sessions" visualization and average metric is now a sum
+`#3120 <https://github.com/wazuh/wazuh-kibana-app/pull/3120>`_    Filter only authorized agents in Events and Security Alerts table
+`#3122 <https://github.com/wazuh/wazuh-kibana-app/pull/3122>`_    Fixed Last keep alive label is outside the panel
+`#3128 <https://github.com/wazuh/wazuh-kibana-app/pull/3128>`_    Fixed app redirect to Settings section after the health check
+`#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Fixed the plugin logo path in Kibana menu when use server.basePath setting
+`#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Fixed deprecated endpoint for create agent groups
+`#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Fixed check for TCP protocol in deploy new agent       
+==============================================================    =============
+
+
+Splunk Enterprise 8.2.1
+------------------------
 
 What's new
 ^^^^^^^^^^
 
 This release includes new features or enhancements. 
 
+- `#2021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_ Added error toast in search handler when the connection with forwarder fails
+- `#1024 <https://github.com/wazuh/wazuh-splunk/pull/1024>`_ Changed query to show alert evolution on Discover
+- `#1066 <https://github.com/wazuh/wazuh-splunk/pull/1066>`_ Added link to agent view in Group Agents table
+- `#1052 <https://github.com/wazuh/wazuh-splunk/pull/1052>`_ Support for Python3 compatibility, deleted deprecated Python2
+- `#1058 <https://github.com/wazuh/wazuh-splunk/pull/1058>`_ Applied latest Wazuh API changes to create group request
 
 Resolved issues
 ^^^^^^^^^^^^^^^
 
 This release resolves known issues. 
+
+**Splunk**
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#944 <https://github.com/wazuh/wazuh-splunk/issues/944>`_        Apply Wazuh tools name changing from ossect to wazuh
+`#945 <https://github.com/wazuh/wazuh-splunk/issues/945>`_        Apply Wazuh daemons name changing from ossec to wazuh
+`#1020 <https://github.com/wazuh/wazuh-splunk/pull/1020>`_        Fixed token cache duration
+`#1042 <https://github.com/wazuh/wazuh-splunk/pull/1042>`_        Fixed issue with dynamic columns width for agents PDF report
+`#1045 <https://github.com/wazuh/wazuh-splunk/pull/1045>`_        Fixed blocked app when there isn't connected with the API
+`#1046 <https://github.com/wazuh/wazuh-splunk/pull/1046>`_        Fixed success toast saving agent configuration file with bad style
+`#1059 <https://github.com/wazuh/wazuh-splunk/pull/1059>`_        Minor style fixes
+`#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        Added new error handle to Alerts Configuration views
+`#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Fixed uncontrolled message error when add api fails
+==============================================================    =============
