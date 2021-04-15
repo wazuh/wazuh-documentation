@@ -128,12 +128,12 @@ Reference                                                         Description
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#7587 <https://github.com/wazuh/wazuh/pull/7587>`_               Fixed wrong API messages returned when getting agents' upgrade results. 
-`#7709 <https://github.com/wazuh/wazuh/pull/7709>`_               Fixed wrong `user` string in API logs when receiving responses with status codes 308 or 404. 
-`#7867 <https://github.com/wazuh/wazuh/pull/7867>`_               Fixed API errors when cluster is disabled and node_type is worker. 
-`#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               Fixed redundant paths and duplicated tests in API integration test mapping script. 
-`#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               Fixed an API integration test case failing in test_rbac_white_all and added a test case for the enable/disable run_as endpoint.
-`#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               
+`#7587 <https://github.com/wazuh/wazuh/pull/7587>`_               API messages when getting agents’ upgrade results are fixed and improved.
+`#7709 <https://github.com/wazuh/wazuh/pull/7709>`_               Issue with wrong user strings in API logs is fixed when receiving responses with status codes 308 or 404.
+`#7867 <https://github.com/wazuh/wazuh/pull/7867>`_               New variable added fixes API errors when ``cluster`` is ``disabled`` and ``node_type`` is ``worker``.
+`#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               API integration test mapping script is now updated, fixing redundant paths and duplicated tests.
+`#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               API integration test case ``test_rbac_white_all`` no longer fails and a new test case for the enable/disable ``run_as`` endpoint is added for improved consistency.
+`#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               Issue with thread race condition when adding or deleting agents without ``authd``  is now fixed.
 ==============================================================    =============
 
 **Ruleset**
@@ -141,9 +141,9 @@ Reference                                                         Description
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#7837 <https://github.com/wazuh/wazuh/pull/7837>`_               Fixed usb-storage-attached regex pattern to support blank spaces. 
-`#7645 <https://github.com/wazuh/wazuh/pull/7645>`_               Fixed SCA checks for RHEL7 and CentOS 7. Thanks to J. Daniel Medeiros (@jdmedeiros). 
-`#8111 <https://github.com/wazuh/wazuh/pull/8111>`_                
+`#7837 <https://github.com/wazuh/wazuh/pull/7837>`_               ``usb-storage-attached`` regex pattern is now improved to support blank spaces.
+`#7645 <https://github.com/wazuh/wazuh/pull/7645>`_               SCA checks for RHEL 7 and CentOS 7 are now fixed. 
+`#8111 <https://github.com/wazuh/wazuh/pull/8111>`_               Match criteria for AWS WAF rules are now fixed and improved. 
 ==============================================================    =============
 
 
