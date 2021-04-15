@@ -122,14 +122,11 @@ The Wazuh app for Kibana requires compatibility between two different components
   - With the **Elastic Stack**, it is only compatible with the exact same version.
 
 +-----------------------------------+------------------------------------+---------------------------+
-|                                   |                                    |                           |
-+   **Wazuh version**               +     **Elastic Stack version**      +  **Open Distro version**  +
-|                                   |                                    |                           |
+|        Wazuh version              |      Elastic Stack version         |   Open Distro version     |
 +-----------------------------------+------------------------------------+---------------------------+
 |              |WAZUH_LATEST|                | |ELASTICSEARCH_LATEST|                             | |OPEN_DISTRO_LATEST|                    |
 +-----------------------------------+------------------------------------+---------------------------+
-|              |WAZUH_LATEST|                | |ELASTICSEARCH_ELK_LATEST|                             |                           |
-+-----------------------------------+------------------------------------+---------------------------+
+
 
 You can find more information on the `Wazuh app for Kibana repository <https://github.com/wazuh/wazuh-kibana-app#installation>`_, where you can check a more detailed compatibility matrix between the Wazuh app and Elastic Stack versions.
 
@@ -142,9 +139,7 @@ The Splunk app for Wazuh requires compatibility between two different components
   - With **Splunk**, it is only compatible with the exact same version.
 
 +---------------------------------+---------------------------+
-|                                 |                           |
-+ **Splunk App version**          +    **Splunk version**     +
-|                                 |                           |
+| Splunk App version              |       Splunk version      |
 +---------------------------------+---------------------------+
 |              4.1.4              |     8.0.4, |SPLUNK_LATEST|          |
 +---------------------------------+---------------------------+
