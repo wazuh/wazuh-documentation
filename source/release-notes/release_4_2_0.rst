@@ -23,12 +23,12 @@ This release includes new features or enhancements.
 - `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_ Wazuh has now added support for bookmarks in ``logcollector``. This allows you to follow the log file from the last read line where the agent stopped. 
 - `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_ Wazuh collects multi-line logs with a variable number of lines in ``logcollector``. This improved support is especially useful when dealing with logs such as Java Stack Trace, since the number of lines in the log no longer needs to be held constant for every event type.
 - `#6830 <https://github.com/wazuh/wazuh/pull/6830>`_ A new option is added that lets you limit the maximum number of files read per second for File Integrity Monitoring (FIM) scan. Now, you now have more FIM control by allowing you to set the limit of the amount of data analyzed during a scheduled scan.
-- `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_ Wazuh adds statistics file to Logcollector. In addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time. This data is generated and updated every ``logcollector.state_interval`` and can be accessed at any moment. 
+- `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_ Wazuh adds statistics file to logcollector. In addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time. This data is generated and updated every ``logcollector.state_interval`` and can be accessed at any moment. 
 - `#7239 <https://github.com/wazuh/wazuh/pull/7239>`_ Wazuh provides enhanced state information by adding statistical data queries to the agent.
 - `#7307 <https://github.com/wazuh/wazuh/pull/7307>`_ Quoting in commands to group arguments in the command wodle and SCA checks are allowed. Before this enhancement, the system parsed quoted substrings into the same argument but double-quotes were kept. Now, scapes and double-quotes are allowed in command lines so that you can handle arguments in command calls. 
 - `#7408 <https://github.com/wazuh/wazuh/pull/7408>`_ Agent's IP detection improvement: agents running on Solaris now send their IP to the manager. 
 - `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
-- `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh Logtest. 
+- `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh logtest. 
 - `#7731 <https://github.com/wazuh/wazuh/issues/7731>`_ Vulnerability detection improvement: new vulnerability detector reports are added to the Wazuh DB so you can know which CVE affect an agent.
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons are now renamed to follow the Wazuh unified standard. 
 - `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs and related tools are now renamed to follow Wazuh unified standard.
@@ -41,9 +41,9 @@ This release includes new features or enhancements.
 - `#7595 <https://github.com/wazuh/wazuh/pull/7595>`_ Unit tests for the ``os_net`` library are now improved in functionality and purpose consistency.
 - `#6999 <https://github.com/wazuh/wazuh/pull/6999>`_ FIM now removes the audit rules when their corresponding symbolic links change their target.
 - `#7797 <https://github.com/wazuh/wazuh/pull/7797>`_ Compilation from sources now downloads the prebuilt external dependencies. This improvement helps to consume fewer resources and eliminates overhead. 
-- `#7807 <https://github.com/wazuh/wazuh/pull/7807>`_ The old implementation of Logtest is restored and renamed as ``wazuh-logtest-legacy``, improving functionality.
-- `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to Analysisd when running on multi-core hosts.
-- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. That allows the manager to log an alert and immediately set their state to **disconnected**.
+- `#7807 <https://github.com/wazuh/wazuh/pull/7807>`_ The old implementation of logtest is restored and renamed as ``wazuh-logtest-legacy``, improving functionality.
+- `#7974 <https://github.com/wazuh/wazuh/pull/7974>`_ Wazuh adds performance improvements to analysisd when running on multi-core hosts.
+- `#8021 <https://github.com/wazuh/wazuh/pull/8021>`_ Agents now report to the manager when they stopped. That allows the manager to log an alert and immediately set their state to "disconnected".
 - `#7327 <https://github.com/wazuh/wazuh/pull/7327>`_ Wazuh building process is now independent of the installation directory. With this improvement, the embedded Python interpreter is now provided in a preinstalled, portable package, and the Wazuh resources are now accessed via a relative path to the installation directory.
 - `#7175 <https://github.com/wazuh/wazuh/pull/7175>`_ The ``/etc/ossec-init.conf`` file no longer exists. 
 - `#7398 <https://github.com/wazuh/wazuh/issues/7398>`_ Unused files are removed from the repository, including TAP tests.
@@ -74,7 +74,7 @@ This release includes new features or enhancements.
   
 - `#7100 <https://github.com/wazuh/wazuh/pull/7100>`_ Wazuh now provides decoder support for UFW (Uncomplicated Firewall) and its log format. This improvement ensures the correct processing of Ubuntu default firewall logs. 
 - `#6867 <https://github.com/wazuh/wazuh/pull/6867>`_ The ruleset is updated and normalized to follow the Wazuh unified standard.
-- `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ CIS policy **Ensure XD/NX support is enabled** is restored for SCA.
+- `#7316 <https://github.com/wazuh/wazuh/pull/7316>`_ CIS policy "Ensure XD/NX support is enabled" is restored for SCA.
 
 
 Resolved issues
@@ -97,7 +97,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#6934 <https://github.com/wazuh/wazuh/pull/6934>`_               Fixed a bug in FIM when setting scan_time to "12am" or "12pm". 
 `#6802 <https://github.com/wazuh/wazuh/pull/6802>`_               Fixed a bug in FIM that produced wrong alerts when the file limit was reached. 
-`#7105 <https://github.com/wazuh/wazuh/pull/7105>`_               Fixed a bug in Analysisd that reserved the static decoder field name "command" but never used it. 
+`#7105 <https://github.com/wazuh/wazuh/pull/7105>`_               Fixed a bug in analysisd that reserved the static decoder field name "command" but never used it. 
 `#7073 <https://github.com/wazuh/wazuh/pull/7073>`_               Fixed evaluation of fields in the tag `<description>` of rules. 
 `#6789 <https://github.com/wazuh/wazuh/pull/6789>`_               Fixed bugs in FIM that caused symbolic links to not work correctly. 
 `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_               Fixed path validation in FIM configuration. 
@@ -113,7 +113,7 @@ Reference                                                         Description
 `#7782 <https://github.com/wazuh/wazuh/pull/7782>`_               Fixed a stack overflow in the XML parser by limiting 1024 levels of recursion.
 `#7795 <https://github.com/wazuh/wazuh/pull/7795>`_               Prevented Vulnerability Detector from scanning all the agents in the master node that are connected to another worker. 
 `#7858 <https://github.com/wazuh/wazuh/pull/7858>`_               Fixed an issue in the database sync module that left dangling agent group files. 
-`#7919 <https://github.com/wazuh/wazuh/pull/7919>`_               Fixed memory leaks in the regex parser in Analysisd. 
+`#7919 <https://github.com/wazuh/wazuh/pull/7919>`_               Fixed memory leaks in the regex parser in analysisd. 
 `#7905 <https://github.com/wazuh/wazuh/pull/7905>`_               Fixed a typo in the initial value for the hotfix scan ID in the agents' database schema. 
 `#8003 <https://github.com/wazuh/wazuh/pull/8003>`_               Fixed a segmentation fault in Vulnerability Detector when parsing an unsupported package version format. 
 `#7990 <https://github.com/wazuh/wazuh/pull/7990>`_               Fixed false positives in FIM when the inode of multiple files change, due to file inode collisions in the engine database. 
