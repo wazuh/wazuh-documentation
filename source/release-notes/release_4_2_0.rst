@@ -95,30 +95,32 @@ Reference                                                         Description
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#6934 <https://github.com/wazuh/wazuh/pull/6934>`_               Fixed a bug in FIM when setting scan_time to "12am" or "12pm". 
-`#6802 <https://github.com/wazuh/wazuh/pull/6802>`_               Fixed a bug in FIM that produced wrong alerts when the file limit was reached. 
-`#7105 <https://github.com/wazuh/wazuh/pull/7105>`_               Fixed a bug in analysisd that reserved the static decoder field name "command" but never used it. 
-`#7073 <https://github.com/wazuh/wazuh/pull/7073>`_               Fixed evaluation of fields in the tag `<description>` of rules. 
-`#6789 <https://github.com/wazuh/wazuh/pull/6789>`_               Fixed bugs in FIM that caused symbolic links to not work correctly. 
-`#7018 <https://github.com/wazuh/wazuh/pull/7018>`_               Fixed path validation in FIM configuration. 
-`#7018 <https://github.com/wazuh/wazuh/pull/7018>`_               Fixed a bug in the "ignore" option on FIM where realtive paths were not resolved. 
-`#7268 <https://github.com/wazuh/wazuh/pull/7268>`_               Fixed a bug in FIM that wrongly detected that the file limit had been reached. 
-`#7265 <https://github.com/wazuh/wazuh/pull/7265>`_               Fixed a bug in FIM that did not produce alerts when a domain user deleted a file. 
-`#7359 <https://github.com/wazuh/wazuh/pull/7359>`_               Fixed Windows agent compilation with GCC 10. 
-`#7332 <https://github.com/wazuh/wazuh/pull/7332>`_               Fixed a bug in FIM that caused to wrongly expand environment variables. 
-`#7476 <https://github.com/wazuh/wazuh/pull/7476>`_               Fixed the inclusion of the rule description in archives when matched a rule that would not produce an alert. 
-`#7495 <https://github.com/wazuh/wazuh/pull/7495>`_               Fixed a bug in the regex parser that did not accept empty strings. 
-`#7414 <https://github.com/wazuh/wazuh/pull/7414>`_               Fixed a bug in FIM that did not report deleted files set with real-time in agents on Solaris. 
-`#7633 <https://github.com/wazuh/wazuh/pull/7633>`_               Fixed a bug in Remoted that wrongly included the priority header in syslog when using TCP. 
-`#7782 <https://github.com/wazuh/wazuh/pull/7782>`_               Fixed a stack overflow in the XML parser by limiting 1024 levels of recursion.
-`#7795 <https://github.com/wazuh/wazuh/pull/7795>`_               Prevented Vulnerability Detector from scanning all the agents in the master node that are connected to another worker. 
-`#7858 <https://github.com/wazuh/wazuh/pull/7858>`_               Fixed an issue in the database sync module that left dangling agent group files. 
-`#7919 <https://github.com/wazuh/wazuh/pull/7919>`_               Fixed memory leaks in the regex parser in analysisd. 
-`#7905 <https://github.com/wazuh/wazuh/pull/7905>`_               Fixed a typo in the initial value for the hotfix scan ID in the agents' database schema. 
-`#8003 <https://github.com/wazuh/wazuh/pull/8003>`_               Fixed a segmentation fault in Vulnerability Detector when parsing an unsupported package version format. 
-`#7990 <https://github.com/wazuh/wazuh/pull/7990>`_               Fixed false positives in FIM when the inode of multiple files change, due to file inode collisions in the engine database. 
-`#6932 <https://github.com/wazuh/wazuh/pull/6932>`_               Fixed the error handling when wildcarded Redhat feeds are not found. 
-`#7862 <https://github.com/wazuh/wazuh/pull/7862>`_               Fixed the `equals` comparator for OVAL feeds in Vulnerability Detector. 
+`#6934 <https://github.com/wazuh/wazuh/pull/6934>`_               In FIM, setting ``scan_time`` to *12am* or *12pm* now works correctly. 
+`#6802 <https://github.com/wazuh/wazuh/pull/6802>`_               In FIM, reaching the file limit no longer creates wrong alerts for events triggered in a monitored folder. Now, a new SQLite query fetches the information of all the files in a specific order.
+`#7105 <https://github.com/wazuh/wazuh/pull/7105>`_               Issue in analysisd that reserved the static decoder field name ``command`` but it was not evaluated is resolved. From now on, it is always treated as a dynamic decoder field.
+`#7073 <https://github.com/wazuh/wazuh/pull/7073>`_               The evaluation of fields in the ``description`` tag of roles now works correctly.
+`#6789 <https://github.com/wazuh/wazuh/pull/6789>`_               In FIM, errors that caused symbolic links not to work correctly are now fixed.
+`#7018 <https://github.com/wazuh/wazuh/pull/7018>`_               Path validation in FIM configuration is now fixed. Now, the process to validate and format a path from configuration is performed correctly.
+`#7018 <https://github.com/wazuh/wazuh/pull/7018>`_               Issue with “ignore” option in FIM where relative paths are not resolved is now fixed.
+`#7268 <https://github.com/wazuh/wazuh/pull/7268>`_               Issue in FIM that wrongly detected that the file limit was reached is now fixed and ``nodes_count`` database variable is checked correctly.
+`#7265 <https://github.com/wazuh/wazuh/pull/7265>`_               Alerts are now successfully generated in FIM when a domain user deletes a file.  
+`#7359 <https://github.com/wazuh/wazuh/pull/7359>`_               Windows agent compilation with GCC 10 is now performed successfully.
+`#7332 <https://github.com/wazuh/wazuh/pull/7332>`_               Errors in FIM when expanding environment variables are now fixed. 
+`#7476 <https://github.com/wazuh/wazuh/pull/7476>`_               Rule descriptions are now included in archives when the input event matches a rule, regardless of whether an alert was triggered or not.
+`#7495 <https://github.com/wazuh/wazuh/pull/7495>`_               Issue with Regex parser is fixed and now accepts empty strings.
+`#7414 <https://github.com/wazuh/wazuh/pull/7414>`_               In FIM, issue with ``delete`` events with real-time is now fixed. Now, deleted files in agents running on Solaris generate alerts and are correctly reported.
+`#7633 <https://github.com/wazuh/wazuh/pull/7633>`_               In Remoted, the priority header is no longer included incorrectly in syslog when using TCP.
+`#7782 <https://github.com/wazuh/wazuh/pull/7782>`_               Stack overflow issue in the XML parsing is now fixed by limiting the levels of recursion to 1024.
+`#7795 <https://github.com/wazuh/wazuh/pull/7795>`_               Vulnerability Detector now correctly skips scanning all the agents in the master node that are connected to another worker.
+`#7858 <https://github.com/wazuh/wazuh/pull/7858>`_               Wazuh database synchronization module now correctly cleans dangling agent group files.
+`#7919 <https://github.com/wazuh/wazuh/pull/7919>`_               In analysisd, Regex parser issue with memory leaks is now fixed.
+`#7905 <https://github.com/wazuh/wazuh/pull/7905>`_               A typo is fixed in the initial value for the hotfix scan ID in the agents' database schema.
+`#8003 <https://github.com/wazuh/wazuh/pull/8003>`_               Segmentation fault issue is fixed in Vulnerability Detector when parsing an unsupported package version format.
+`#7990 <https://github.com/wazuh/wazuh/pull/7990>`_               In FIM, false positives were triggered due to file ``inode`` collisions in the engine database. This issue is now fixed and FIM works properly when the ``inode`` of multiple files is changed.
+`#6932 <https://github.com/wazuh/wazuh/pull/6932>`_               Issue with error handling when wildcarded RHEL feeds are not found is now fixed. 
+`#7862 <https://github.com/wazuh/wazuh/pull/7862>`_               The ``equals`` comparator is fixed for OVAL feeds in Vulnerability Detector. Now, equal versions in the OVAL scan are successfully compared.
+`#8098 <https://github.com/wazuh/wazuh/pull/8098>`_               In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crash during synchronization of registries.
+`#8151 <https://github.com/wazuh/wazuh/pull/8151>`_               A starving hazard issue in Wazuh DB is fixed and there are no longer risks of incoming requests being stalled during database commitment.
 ==============================================================    =============
 
 **API**
@@ -130,7 +132,8 @@ Reference                                                         Description
 `#7709 <https://github.com/wazuh/wazuh/pull/7709>`_               Fixed wrong `user` string in API logs when receiving responses with status codes 308 or 404. 
 `#7867 <https://github.com/wazuh/wazuh/pull/7867>`_               Fixed API errors when cluster is disabled and node_type is worker. 
 `#7798 <https://github.com/wazuh/wazuh/pull/7798>`_               Fixed redundant paths and duplicated tests in API integration test mapping script. 
-`8014 <https://github.com/wazuh/wazuh/pull/8014>`_                Fixed an API integration test case failing in test_rbac_white_all and added a test case for the enable/disable run_as endpoint.
+`#8014 <https://github.com/wazuh/wazuh/pull/8014>`_               Fixed an API integration test case failing in test_rbac_white_all and added a test case for the enable/disable run_as endpoint.
+`#8148 <https://github.com/wazuh/wazuh/pull/8148>`_               
 ==============================================================    =============
 
 **Ruleset**
@@ -138,8 +141,9 @@ Reference                                                         Description
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#7837 <https://github.com/wazuh/wazuh/issues/7837>`_             Fixed usb-storage-attached regex pattern to support blank spaces. 
+`#7837 <https://github.com/wazuh/wazuh/pull/7837>`_               Fixed usb-storage-attached regex pattern to support blank spaces. 
 `#7645 <https://github.com/wazuh/wazuh/pull/7645>`_               Fixed SCA checks for RHEL7 and CentOS 7. Thanks to J. Daniel Medeiros (@jdmedeiros). 
+`#8111 <https://github.com/wazuh/wazuh/pull/8111>`_                
 ==============================================================    =============
 
 
