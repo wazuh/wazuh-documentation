@@ -145,7 +145,7 @@ To ensure that Filebeat is correctly configured, run the following command:
               TLS version: TLSv1.3
               dial up... OK
             talk to server... OK
-            version: 7.10.0
+            version: 7.10.2
 
 
 
