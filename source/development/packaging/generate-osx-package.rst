@@ -44,6 +44,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       -h, --help                    [  Util  ] Show this help.
       -i, --install-deps            [  Util  ] Install build dependencies (Packages).
       -x, --install-xcode           [  Util  ] Install X-Code and brew. Can't be executed as root.
+      -v, --verbose                 [  Util  ] Show additional information during the package generation.
   
     Signing options:
       --keychain                    [Optional] Keychain where the Certificates are installed.
