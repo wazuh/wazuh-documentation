@@ -137,13 +137,13 @@ This command should have an output like this:
   {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "LTTJx4wGTmONK4pkD0IclA",
+    "cluster_uuid" : "g7ewMp52T3OOFkU0WFKieQ",
     "version" : {
-    "number" : "7.10.0",
+      "number" : "7.11.2",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
-      "build_date" : "2020-11-09T21:30:33.964949Z",
+      "build_hash" : "3e5a16cfec50876d20ea77b075070932c6464c7d",
+      "build_date" : "2021-03-06T05:54:38.141101Z",
       "build_snapshot" : false,
       "lucene_version" : "8.7.0",
       "minimum_wire_compatibility_version" : "6.8.0",
@@ -151,8 +151,6 @@ This command should have an output like this:
     },
     "tagline" : "You Know, for Search"
   }
-
-
 
 .. _basic_all_in_one_wazuh:
 
