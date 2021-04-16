@@ -440,7 +440,7 @@ custom_replacements = {
     "|WAZUH_LATEST_PUPPET|" : "4.0.4",
     "|WAZUH_LATEST_OVA|" : "4.2.0",
     "|WAZUH_LATEST_DOCKER|" : "4.1.2",
-    "|OPEN_DISTRO_LATEST|" : "1.13.0",
+    "|OPEN_DISTRO_LATEST|" : "1.13.2",
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
     "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.0",
