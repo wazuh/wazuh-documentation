@@ -129,6 +129,8 @@ generateCertificateconfiguration() {
         conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
         echo "${conf}" > ~/certs/$cname.conf    
     elif [[ -n "${isDNS}" ]]; then
+        conf="$(awk '{sub("CN = cname", "CN =  '${cip}'")}1' ~/certs/$cname.conf)"
+        echo "${conf}" > ~/certs/$cname.conf     
         conf="$(awk '{sub("IP.1 = cip", "DNS.1 = '${cip}'")}1' ~/certs/$cname.conf)"
         echo "${conf}" > ~/certs/$cname.conf 
     else
