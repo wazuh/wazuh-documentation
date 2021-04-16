@@ -64,7 +64,7 @@ to the ``default`` group, which is used here as an example:
 #. Place a new policy file in the Wazuh manager's ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``ossec``.
 
 
-#. Add the configuration block to the Wazuh manager's ``etc/shared/default/agent.conf`` file to push the new policy file to the Wazuh agent:
+#. Add the configuration block to the Wazuh manager's ``etc/shared/default/shared.conf`` file to push the new policy file to the Wazuh agent:
 
      .. code-block:: xml
 

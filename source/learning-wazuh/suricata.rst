@@ -190,7 +190,7 @@ the shared configuration with their local configuration.
 
             Group 'linux' set to agent '002'.
 
-#. Put our Suricata-specific Wazuh agent config into the shared/agent.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/agent.conf``.  Make it look like this:
+#. Put our Suricata-specific Wazuh agent config into the shared.conf file belonging to the "linux" agent group.  In wazuh-manager, edit this file: ``/var/ossec/etc/shared/linux/shared.conf``.  Make it look like this:
 
     .. code-block:: xml
 
@@ -210,10 +210,10 @@ the shared configuration with their local configuration.
     .. code-block:: none
         :class: output
 
-        verify-agent-conf: Verifying [/var/ossec/etc/shared/default/agent.conf]
+        verify-agent-conf: Verifying [/var/ossec/etc/shared/default/shared.conf]
         verify-agent-conf: OK
 
-        verify-agent-conf: Verifying [/var/ossec/etc/shared/linux/agent.conf]
+        verify-agent-conf: Verifying [/var/ossec/etc/shared/linux/shared.conf]
         verify-agent-conf: OK
 
 #. Since the config is proven valid, restart Wazuh manager to deploy the new configuration to the agents.
@@ -230,7 +230,7 @@ the shared configuration with their local configuration.
 
         # service wazuh-manager restart
 
-   Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/default/agent.conf``.
+   Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/default/shared.conf``.
 
 See Suricata NIDS events in Kibana
 ----------------------------------

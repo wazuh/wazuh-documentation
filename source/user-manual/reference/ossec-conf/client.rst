@@ -190,7 +190,7 @@ Specifies the protocol to use when connecting to manager.
 config-profile
 ^^^^^^^^^^^^^^
 
-Specifies the ``agent.conf`` profile(s) to be used by the agent.
+Specifies the ``shared.conf`` profile(s) to be used by the agent.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | n/a                                                                  |
@@ -203,7 +203,7 @@ Specifies the ``agent.conf`` profile(s) to be used by the agent.
 notify_time
 ^^^^^^^^^^^
 
-Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``agent.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
+Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``shared.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
 
 +--------------------+-----------------------------+
 | **Default value**  | 10                          |

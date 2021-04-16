@@ -23,7 +23,7 @@ Agents have the ability to run commands pushed from the manager (via the files i
 Configure a command to monitor
 ------------------------------
 
-The commands to run and monitor can be configured in the local the :ref:`agent.conf <reference_client_conf>` file of individual agents, however, the ideal location for this configuration is in the appropriate configuration section of the :ref:`shared/agent.conf <reference_agent_conf>` file on the manager.
+The commands to run and monitor can be configured in the local the :ref:`agent.conf <reference_client_conf>` file of individual agents, however, the ideal location for this configuration is in the appropriate configuration section of the :ref:`shared.conf <reference_shared_conf>` file on the manager.
 
 Example::
 

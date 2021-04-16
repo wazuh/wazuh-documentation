@@ -100,7 +100,7 @@ Examples
     :class: output
 
     Files for group 'debian':
-      shared/agent.conf         [ab73af41699f13fdd81903b5f23d8d00]
+      shared.conf               [ab73af41699f13fdd81903b5f23d8d00]
       rootkit_trojans.txt       [76d8be9b97d8eae4c239e530ee7e71c8]
       merged.mg                 [4437654d67c9c4ac2e46cf5f73e04518]
       cis_debian_linux_rcl.txt  [38cc9b168dc24576daa76f4502575a4f]
