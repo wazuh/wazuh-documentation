@@ -10,6 +10,22 @@ This section lists the changes in version 4.2.0. More details about these change
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.2-7.10.2/CHANGELOG.md>`_
 
+Highlights
+----------
+
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool:
+Wazuh improves user experience by adding a new Ruleset Test feature under the Tools section of the Wazuh plugin menú. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the Ruleset Test window open while you navigate through the page to edit or create a ruleset file.
+
+The new Ruleset Test tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
+
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
+To improve user experience and access to Wazuh tools. The Dev Tools feature is renamed as API Console and it is now found, together with the new Ruleset Test feature, inside the new Tool section under the Wazuh plugin menu.
+
+- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ New Agent Stats section:
+Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking Stats in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
+
+- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
+Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added Inventory tab in the Vulnerabilities module allows you to visualize information, such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
 Wazuh core
 ----------
@@ -152,17 +168,13 @@ Wazuh Kibana plugin
 
 This release includes new features or enhancements. 
 
-Highlights
+What's new
 ^^^^^^^^^^
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Added Ruleset Test section under Tools menu, and on Edit Rules/Decoders as a tool.
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Moved Dev Tools inside of Tools menu as Api Console.
 - `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Added Agent Stats section.
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Added vulnerabilities inventory that affect to an agent.
- 
-What's new
-^^^^^^^^^^
-
 - `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ Added page size options in Security events, explore agents table. 
 - `#3051 <https://github.com/wazuh/wazuh-kibana-app/pull/3051>`_ Added a reminder to restart cluster or manager after import a file in Rules, Decoders or CDB Lists
 - `#3061 <https://github.com/wazuh/wazuh-kibana-app/issues/3061>`_ Added logtest PUT example on API Console
