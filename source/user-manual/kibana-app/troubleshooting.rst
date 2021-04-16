@@ -23,7 +23,7 @@ An example output of the command looks as follows:
 .. code-block:: console
   :class: output
 
-  "version": "7.10.0",
+  "version": "7.10.2",
 
 
 The Wazuh version can be checked by executing the following command:
