@@ -516,6 +516,8 @@ Cache
 +--------------------------------------------------+------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------+
 | Get MITRE techniques information from database   | ``GET /mitre``                     | :api-ref:`GET /mitre/techniques <operation/api.controllers.mitre_controller.get_techniques>` | Added new endpoints to get MITRE information. |
 +--------------------------------------------------+------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------+
+| Get MITRE groups information from database       | ``GET /mitre``                     | :api-ref:`GET /mitre/groups <operation/api.controllers.mitre_controller.get_groups>`         | Added new endpoints to get MITRE information. |
++--------------------------------------------------+------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------+
 
 
 :api-ref:`Rootcheck <tag/Rootcheck>`
