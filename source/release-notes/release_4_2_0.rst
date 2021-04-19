@@ -252,6 +252,7 @@ Reference                                                         Description
 `#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Issue with the Wazuh logo path in Kibana menu when ``server.basePath`` setting is used is now fixed.
 `#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Issue with deprecated endpoint for creating agent groups is now fixed.
 `#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Issue with checking process for TCP protocol in Deploy a new agent section is now fixed.
+`#3181 <https://github.com/wazuh/wazuh-kibana-app/pull/3181>`_    Issue with RBAC with agent group permissions is now fixed. Now when authorized agents are specified by their group instead of their IDs, you can successfully access the Security configuration assessment module, the Integrity monitoring module, and the Configuration window on the Agents page. 
 ==============================================================    =============
 
 
@@ -263,11 +264,11 @@ What's new
 
 This release includes new features or enhancements. 
 
-- `#2021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_ Added error toast in search handler when the connection with forwarder fails
-- `#1024 <https://github.com/wazuh/wazuh-splunk/pull/1024>`_ Changed query to show alert evolution on Discover
-- `#1066 <https://github.com/wazuh/wazuh-splunk/pull/1066>`_ Added link to agent view in Group Agents table
-- `#1052 <https://github.com/wazuh/wazuh-splunk/pull/1052>`_ Support for Python3 compatibility, deleted deprecated Python2
-- `#1058 <https://github.com/wazuh/wazuh-splunk/pull/1058>`_ Applied latest Wazuh API changes to create group request
+- `#1021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_ Issue with error toast message in search handler when the connection with forwarder fails is now fixed.
+- `#1024 <https://github.com/wazuh/wazuh-splunk/pull/1024>`_ In Discover view, the search query is changed to show the alert’s evolution.
+- `#1066 <https://github.com/wazuh/wazuh-splunk/pull/1066>`_ In the Agents window of the Groups page, a new link is added to the result table to access Agent view.
+- `#1052 <https://github.com/wazuh/wazuh-splunk/pull/1052>`_ Wazuh is now compatible with Python3. Python2 is now deprecated and removed.
+- `#1058 <https://github.com/wazuh/wazuh-splunk/pull/1058>`_ The create group ``POST`` request is adapted to the latest Wazuh API changes.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -279,13 +280,13 @@ This release resolves known issues.
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#944 <https://github.com/wazuh/wazuh-splunk/issues/944>`_        Apply Wazuh tools name changing from ossect to wazuh
-`#945 <https://github.com/wazuh/wazuh-splunk/issues/945>`_        Apply Wazuh daemons name changing from ossec to wazuh
-`#1020 <https://github.com/wazuh/wazuh-splunk/pull/1020>`_        Fixed token cache duration
-`#1042 <https://github.com/wazuh/wazuh-splunk/pull/1042>`_        Fixed issue with dynamic columns width for agents PDF report
-`#1045 <https://github.com/wazuh/wazuh-splunk/pull/1045>`_        Fixed blocked app when there isn't connected with the API
-`#1046 <https://github.com/wazuh/wazuh-splunk/pull/1046>`_        Fixed success toast saving agent configuration file with bad style
-`#1059 <https://github.com/wazuh/wazuh-splunk/pull/1059>`_        Minor style fixes
-`#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        Added new error handle to Alerts Configuration views
-`#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Fixed uncontrolled message error when add api fails
+`#944 <https://github.com/wazuh/wazuh-splunk/issues/944>`_        Wazuh tools are now renamed to follow Wazuh unified standard. ``ossec-control`` is now ``wazuh-control`` and ``ossec-regex`` is now renamed as ``wazuh-regex``.
+`#945 <https://github.com/wazuh/wazuh-splunk/issues/945>`_        Wazuh daemons are now renamed to follow Wazuh unified standard.
+`#1020 <https://github.com/wazuh/wazuh-splunk/pull/1020>`_        Issue with token cache duration is now fixed.
+`#1042 <https://github.com/wazuh/wazuh-splunk/pull/1042>`_        Issue with dynamic columns width for agents PDF report is now fixed. 
+`#1045 <https://github.com/wazuh/wazuh-splunk/pull/1045>`_        Issue with the app not loading when it is not connected to the API is now fixed and information is displayed correctly. 
+`#1046 <https://github.com/wazuh/wazuh-splunk/pull/1046>`_        Styling issue with success toast message for saving agent configuration is now fixed.
+`#1059 <https://github.com/wazuh/wazuh-splunk/pull/1059>`_        Minor styling issue is now fixed and Export button on the Export Result window now works correctly when you hover over it.
+`#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        New error handler message is now added to the Alerts window of the Configuration page.
+`#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Error message when adding an API fails is now fixed and its content text is shown correctly.
 ==============================================================    =============
