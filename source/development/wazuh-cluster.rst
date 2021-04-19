@@ -122,10 +122,12 @@ Agent info
 
 This thread is in charge of synchronizing the agent's last keepalives and OS information with the master. The communication here is also started by the worker and it has the following stages:
 
-1. The worker obtains, from its database, the information of agents that are not synchronized in the master node. After that, they are marked as synced.
-2. The worker sends, using ``sendsync`` protocol, chunks with the information of the desynchronized agents directly to the master's database.
+1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment.
+2. The worker asks to its local :ref:`wazuh-db <wazuh-db>` service for the information of agents marked as not synchronized.
+3. The worker sends the master a JSON string containing the information retrieved from wazuh-db.
+4. The master sends the received information to its local wazuh-db service, where it is updated.
 
-If there is an error during the update process of one of the chunks in the master's database, the worker is informed. In this case, it will retry sending the chunk up to three times if a time limit is not exceeded.
+If there is an error during the update process of one of the chunks in the master's database, the worker is notified.
 
 File integrity thread
 ~~~~~~~~~~~~~~~~~~~~~
@@ -224,12 +226,12 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_i_w_m_p``, | Master      | None                  | - Ask permission to start synchronization protocol. Message characters define the action to do: |
-| ``sync_e_w_m_p``  |             |                       | - I (integrity), E (extra valid).                                                               |
-|                   |             |                       | - W (worker), M (master), P (permission).                                                       |
+| ``sync_e_w_m_p``, |             |                       | - I (integrity), E (extra valid), A (agent-info).                                               |
+| ``sync_a_w_m_p``  |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sync_i_w_m``,   | Master      | None                  | - Start synchronization protocol. Message characters define the action to do:                   |
-| ``sync_e_w_m``    |             |                       | - I (integrity), E (extra valid).                                                               |
-|                   |             |                       | - W (worker), M (master).                                                                       |
+| ``sync_i_w_m``,   | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
+| ``sync_e_w_m``,   |             | - String ID<str>      | - I (integrity), E (extra valid), A (agent-info).                                               |
+| ``sync_a_w_m``    |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_i_w_m_e``, | Master      | None                  | - End synchronization protocol. Message characters define the action to do:                     |
 | ``sync_e_w_m_e``  |             |                       | - I (integrity), E (extra valid).                                                               |
@@ -239,46 +241,43 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 | ``sync_e_w_m_r``  |             |                       | - I (integrity), E (extra valid).                                                               |
 |                   |             |                       | - W (worker), M (master), R(error).                                                             |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sync_a_w_m_s``  | Master      | None                  | - Notify that the process of obtaining information has started.                                 |
-|                   |             |                       | - A (agent-info).                                                                               |
-|                   |             |                       | - W (worker), M (master), S (start).                                                            |
-+-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sync_a_w_m_e``  | Master      | None                  | - Notify that the process of obtaining information has ended.                                   |
-|                   |             |                       | - A (agent-info).                                                                               |
-|                   |             |                       | - W (worker), M (master), E(end).                                                               |
-+-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sendsync``      | Master      | Arguments<Dict>       | Receive a message from a worker node destined for the specified daemon of the master node.      |
+| ``sendsync``      | Master      | - Arguments<Dict>     | Receive a message from a worker node destined for the specified daemon of the master node.      |
 |                   |             |                       |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sendsync_res``  | Worker      | Request ID<str>,      | Notify the ``sendsync`` response is available.                                                  |
-|                   |             | String ID<str>        |                                                                                                 |
+| ``sendsync_res``  | Worker      | - Request ID<str>     | Notify the ``sendsync`` response is available.                                                  |
+|                   |             | - String ID<str>      |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``sendsync_err``  | Both        | Local client ID<str>, | Notify errors in the ``sendsync`` communication.                                                |
-|                   |             | Error message<str>    |                                                                                                 |
+| ``sendsync_err``  | Both        | - Local client ID<str>| Notify errors in the ``sendsync`` communication.                                                |
+|                   |             | - Error message<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``get_nodes``     | Master      | Arguments<Dict>       | Request sent from ``cluster_control -l`` from worker nodes.                                     |
+| ``get_nodes``     | Master      | - Arguments<Dict>     | Request sent from ``cluster_control -l`` from worker nodes.                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``get_health``    | Master      | Arguments<Dict>       | Request sent from ``cluster_control -i`` from worker nodes.                                     |
+| ``get_health``    | Master      | - Arguments<Dict>     | Request sent from ``cluster_control -i`` from worker nodes.                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi_cluster``  | Master      | Arguments<Dict>       | Receive an API call related to cluster information: Get nodes information or healthcheck.       |
+| ``dapi_cluster``  | Master      | - Arguments<Dict>     | Receive an API call related to cluster information: Get nodes information or healthcheck.       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi``          | Both        | Sender node<str>,     | Receive a distributed API request. If the API call has been forwarded multiple times,           |
-|                   |             | Arguments<Dict>       | the sender node contains multiple names separated by a ``*`` character.                         |
+| ``dapi``          | Both        | - Sender node<str>    | Receive a distributed API request. If the API call has been forwarded multiple times,           |
+|                   |             | - Arguments<Dict>     | the sender node contains multiple names separated by a ``*`` character.                         |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi_res``      | Both        | Request ID<str>,      | Receive a distributed API response from a previously forwarded request.                         |
-|                   |             | String ID<str>        | Responses are sent using send long strings protocol so this request only needs the string ID.   |
+| ``dapi_res``      | Both        | - Request ID<str>     | Receive a distributed API response from a previously forwarded request.                         |
+|                   |             | - String ID<str>      | Responses are sent using send long strings protocol so this request only needs the string ID.   |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi_err``      | Both        | Local client ID<str>, | Receive an error related to a previously requested distributed API request.                     |
-|                   |             | Error message<str>    |                                                                                                 |
+| ``dapi_err``      | Both        | - Local client ID<str>| Receive an error related to a previously requested distributed API request.                     |
+|                   |             | - Error message<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_m_c_ok``   | Worker      | None                  | Master verifies that worker integrity is correct.                                               |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_m_c``      | Worker      | None                  | Master will send the worker integrity files to update.                                          |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_m_c_e``    | Worker      | - Error msg<str> or   | Master has finished sending integrity files.                                                    |
-|                   |             | - Task name<str>,     | The files were received in task *Task name* previously created by the worker in ``sync_m_c``.   |
+|                   |             |   Task name<str>      | The files were received in task *Task name* previously created by the worker in ``sync_m_c``.   |
 |                   |             | - Filename<str>       | If master had issues sending/processing/receiving worker integrity an error message will be     |
 |                   |             |                       | sent instead of the task name and filename.                                                     |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``sync_m_a_e``    | Worker      | - Arguments<Dict>     | Master has finished updating agent-info. Number of updated chunks and chunks with               |
+|                   |             |                       | errors (if any) will be sent.                                                                   |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``sync_m_a_err``  | Worker      | - Error msg<str>      | Notify an error during agent-info synchronization.                                              |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 
 
