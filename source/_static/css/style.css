@@ -788,6 +788,12 @@ header .menuweb-bar .menu-item a {
   border: none;
 }
 
+.images-rn-420 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;  
+}
+
 .content-card {
   margin-bottom: 0.5em;
 }

@@ -42,6 +42,10 @@ Wazuh adds a new Stats section that improves the visibility you have over agents
 
 Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added Inventory tab in the Vulnerabilities module allows you to visualize information, such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
+.. raw:: html
+
+    <div class="images-rn-420">
+
 .. thumbnail::  ../images/release-notes/4.2.0/ruleset-test.png 
       :align: center
 
@@ -59,6 +63,10 @@ Wazuh now provides you with enhanced insight into the CVE that are affecting an 
 
 .. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
       :align: center
+
+.. raw:: html
+
+    </div>      
 
 Wazuh core
 ----------
