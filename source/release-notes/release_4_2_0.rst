@@ -15,6 +15,29 @@ Highlights
 
 **Core**
 
+- `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_, `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_, `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_  Logcollector improvements:
+
+Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading from a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
+
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Improvements on agent’s CVE inventory report visibility:
+
+Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
+
+- `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ TCP and UDP ports support:
+
+Remoted now supports listening to a TCP and UDP port simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and log’s sending, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
+
+- `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh unified standard improvements:
+
+The names of daemons and tools for the Wazuh product are now renamed and unified to achieve consistency and uniformity, according to the new Wazuh standards.
+
+
+- `#nnnn <xxxx>`_ Stability enhancements on Wazuh features:
+
+Wazuh new fixes provide stability to several features of the solution, including analysisd, File integrity monitoring, Remoted, and Vulnerability detector. These changes improve user experience throughout the product.
+
+
+
 **API**
 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Endpoint for ``allow_run_as`` parameter configuration:
