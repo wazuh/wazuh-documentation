@@ -17,10 +17,21 @@ Highlights
 
 **API**
 
-- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
-- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints ``POST /security/users`` and ``PUT /security/users/{user_id}``.
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Endpoint for ``allow_run_as`` parameter configuration:
+  
+The ``allow_run_as`` parameter to create and update API users is now removed from endpoints. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter when creating a user.
 
+- `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ CVE data endpoint integration:
 
+Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent and get enhanced insight into the CVE, giving you easy easy access to data, such as package name, package version, package architecture, and the CVE ID that affects said package. 
+
+- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Endpoint for logcollector stats:
+
+Wazuh adds a new endpoint to get agents’ logcollector statistics from different components, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files can bring this information using their own socket interface and fetch the data from a remote component.  
+ 
+- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ Improved ``DELETE /agents`` endpoint:
+
+The DELETE/agents query now integrates new parameters that allow you to customize selection and to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response. 
 
 **Wazuh Kibana plugin**
 
@@ -108,11 +119,11 @@ This release includes new features or enhancements.
 - `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is deprecated and removed.
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
-- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ ``DELETE /agents`` endpoint improvements: new parameters are added to the endpoint and the ``older_than`` field is now removed from the response. 
+- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ The DELETE/agents query no integrates new parameters that allow you to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response.
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
 - `#8123 <https://github.com/wazuh/wazuh/pull/8123>`_ The ``PUT /agents/group/{group_id}/restart`` response format is now improved when there are no agents assigned to the group.
 - `#8149 <https://github.com/wazuh/wazuh/pull/8149>`_ Agent keys used when adding agents through the Wazuh API are now obscured in the API log.
-- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints ``POST /security/users`` and ``PUT /security/users/{user_id}``.
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter to create and update API users is now removed from endpoints.
 - `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ The ``behind_proxy_server`` option is now removed from configuration.
   
 **Framework**
