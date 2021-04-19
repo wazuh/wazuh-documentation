@@ -506,6 +506,7 @@ mitre:read
 - :api-ref:`GET /mitre/metadata <operation/api.controllers.mitre_controller.get_metadata>` (`*:*`_)
 - :api-ref:`GET /mitre/tactics <operation/api.controllers.mitre_controller.get_tactics>` (`*:*`_)
 - :api-ref:`GET /mitre/techniques <operation/api.controllers.mitre_controller.get_techniques>` (`*:*`_)
+- :api-ref:`GET /mitre/groups <operation/api.controllers.mitre_controller.get_groups>` (`*:*`_)
 
 Rootcheck
 ^^^^^^^^^^^^^^^
