@@ -508,6 +508,7 @@ mitre:read
 - :api-ref:`GET /mitre/techniques <operation/api.controllers.mitre_controller.get_techniques>` (`*:*`_)
 - :api-ref:`GET /mitre/groups <operation/api.controllers.mitre_controller.get_groups>` (`*:*`_)
 - :api-ref:`GET /mitre/mitigations <operation/api.controllers.mitre_controller.get_mitigations>` (`*:*`_)
+- :api-ref:`GET /mitre/software <operation/api.controllers.mitre_controller.get_software>` (`*:*`_)
 
 Rootcheck
 ^^^^^^^^^^^^^^^
