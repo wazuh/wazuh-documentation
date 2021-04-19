@@ -198,26 +198,25 @@ Replace the value ``<elasticsearch_IP>`` by the Elasticsearch installation IP an
 An example response should look as follows:
 
 .. code-block:: none
-             :class: output
+    :class: output
 
-              {
-                "name" : "node-1",
-                "cluster_name" : "elasticsearch",
-                "cluster_uuid" : "J4EAfzd7R4KZv-31jBAuNA",
-                "version" : {
-                  "number" : "7.10.0",
-                  "build_flavor" : "oss",
-                  "build_type" : "rpm",
-                  "build_hash" : "51e9d6f22758d0374a0f3f5c6e8f3a7997850f96",
-                  "build_date" : "2020-11-09T21:30:33.964949Z",
-                  "build_snapshot" : false,
-                  "lucene_version" : "8.7.0",
-                  "minimum_wire_compatibility_version" : "6.8.0",
-                  "minimum_index_compatibility_version" : "6.0.0-beta1"
-                },
-                "tagline" : "You Know, for Search"
-              }
-
+    {
+      "name" : "node-1",
+      "cluster_name" : "elasticsearch",
+      "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
+      "version" : {
+        "number" : "7.10.2",
+        "build_flavor" : "oss",
+        "build_type" : "rpm",
+        "build_hash" : "747e1cc71def077253878a59143c1f785afa92b9",
+        "build_date" : "2021-01-13T00:42:12.435326Z",
+        "build_snapshot" : false,
+        "lucene_version" : "8.7.0",
+        "minimum_wire_compatibility_version" : "6.8.0",
+        "minimum_index_compatibility_version" : "6.0.0-beta1"
+      },
+      "tagline" : "You Know, for Search"
+    }
 
 To verify the nodes that are connected to the cluster, replace ``<elasticsearch_ip>``  and run the following command: 
 
