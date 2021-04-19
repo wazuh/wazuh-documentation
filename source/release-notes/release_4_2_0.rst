@@ -13,6 +13,15 @@ This section lists the changes in version 4.2.0. More details about these change
 Highlights
 ----------
 
+**Core**
+
+**API**
+
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints ``POST /security/users`` and ``PUT /security/users/{user_id}``.
+
+
+
 **Wazuh Kibana plugin**
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool:
@@ -32,6 +41,24 @@ Wazuh adds a new Stats section that improves the visibility you have over agents
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
 
 Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added Inventory tab in the Vulnerabilities module allows you to visualize information, such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
+
+.. thumbnail::  ../images/release-notes/4.2.0/ruleset-test.png 
+      :align: center
+
+.. thumbnail::  ../images/release-notes/4.2.0/rules_ruleset_test.png
+      :align: center
+
+.. thumbnail::  ../images/release-notes/4.2.0/new-menu.png
+      :align: center
+
+.. thumbnail::  ../images/release-notes/4.2.0/new_stats_access.png
+      :align: center
+
+.. thumbnail::  ../images/release-notes/4.2.0/agent_stats_section.png
+      :align: center
+
+.. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
+      :align: center
 
 Wazuh core
 ----------
