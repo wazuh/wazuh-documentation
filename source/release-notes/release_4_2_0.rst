@@ -13,18 +13,24 @@ This section lists the changes in version 4.2.0. More details about these change
 Highlights
 ----------
 
+**Wazuh Kibana plugin**
+
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool:
+
 Wazuh improves user experience by adding a new Ruleset Test feature under the Tools section of the Wazuh plugin menú. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the Ruleset Test window open while you navigate through the page to edit or create a ruleset file.
 
 The new Ruleset Test tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
+
 To improve user experience and access to Wazuh tools. The Dev Tools feature is renamed as API Console and it is now found, together with the new Ruleset Test feature, inside the new Tool section under the Wazuh plugin menu.
 
 - `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ New Agent Stats section:
+
 Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking Stats in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
 
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
+
 Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added Inventory tab in the Vulnerabilities module allows you to visualize information, such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
 Wazuh core
@@ -171,43 +177,43 @@ This release includes new features or enhancements.
 What's new
 ^^^^^^^^^^
 
-- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Added Ruleset Test section under Tools menu, and on Edit Rules/Decoders as a tool.
-- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Moved Dev Tools inside of Tools menu as Api Console.
-- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Added Agent Stats section.
-- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Added vulnerabilities inventory that affect to an agent.
-- `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ Added page size options in Security events, explore agents table. 
-- `#3051 <https://github.com/wazuh/wazuh-kibana-app/pull/3051>`_ Added a reminder to restart cluster or manager after import a file in Rules, Decoders or CDB Lists
-- `#3061 <https://github.com/wazuh/wazuh-kibana-app/issues/3061>`_ Added logtest PUT example on API Console
-- `#3109 <https://github.com/wazuh/wazuh-kibana-app/pull/3109>`_ Added retry button to check api again in health check.
-- `#3111 <https://github.com/wazuh/wazuh-kibana-app/pull/3111>`_ Added wazuh-statistics template and a new mapping for these indices.
-- `#3126 <https://github.com/wazuh/wazuh-kibana-app/pull/3126>`_ Added link to documentation "Checking connection with Manager" in deploy new agent.
-- `#2892 <https://github.com/wazuh/wazuh-kibana-app/issues/2892>`_ Changed position of Top users on Integrity Monitoring Top 5 user.
-- `#3080 <https://github.com/wazuh/wazuh-kibana-app/pull/3080>`_ Changed user allow_run_as way of editing.
-- `#3046 <https://github.com/wazuh/wazuh-kibana-app/pull/3046>`_ Rename some ossec references to Wazuh.
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool is added under the Tools menu and in the action bar of the Edit Rules and Edit Decoders sections. You can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Dev Tools feature is now moved under the new Tools menu and it is renamed as API Console.
+- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Wazuh adds a new Stats section on the Agent data overview page that allows you to see agent’s information retrieved by ``/agents/{agent_id}/stats/logcollector`` API endpoint.
+- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ New vulnerability inventory is now added to the Vulnerability module, allowing you to see data on the CVE that affect your monitored agents.
+- `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ In the Security events module, the Rows per page option of the Explore agent section is now configurable. 
+- `#3051 <https://github.com/wazuh/wazuh-kibana-app/pull/3051>`_ New reminder message and restart button are now displayed in the Rules, Decoders, and CDB lists sections of the management menu for you to restart the cluster or management after importing a file.
+- `#3061 <https://github.com/wazuh/wazuh-kibana-app/issues/3061>`_ The API Console section of the Tools menu now includes a logtest ``PUT`` sample for you to have as a reference.
+- `#3109 <https://github.com/wazuh/wazuh-kibana-app/pull/3109>`_ A new button is added for you to recheck API connection during a health check.
+- `#3111 <https://github.com/wazuh/wazuh-kibana-app/pull/3111>`_ Wazuh adds a new ``wazuh-statistics`` template and new mapping for the indices.
+- `#3126 <https://github.com/wazuh/wazuh-kibana-app/pull/3126>`_ When you deploy a new agent, a new link to the Wazuh documentation is added under the "Start the agent" step of the process for you to check if the connection to the manager is successful after adding a new agent. 
+- `#2892 <https://github.com/wazuh/wazuh-kibana-app/issues/2892>`_ In the Integrity monitoring module, the Top 5 users result table is now changed to improve user experience.
+- `#3080 <https://github.com/wazuh/wazuh-kibana-app/pull/3080>`_ The editing process of the  ``allow_run_as`` user property is now adapted to the new ``PUT /security/users/{user_id}/run_as`` endpoint.
+- `#3046 <https://github.com/wazuh/wazuh-kibana-app/pull/3046>`_ Some ossec references are now renamed to follow Wazuh unified standard.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
 
 This release resolves known issues. 
 
-**Kibana plugin**
+**Wazuh Kibana plugin**
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#3088 <https://github.com/wazuh/wazuh-kibana-app/pull/3088>`_    Filter only authorized agents in Agents stats and Visualizations
-`#3095 <https://github.com/wazuh/wazuh-kibana-app/pull/3095>`_    Fixed missing pending status suggestion for agents. 
-`#3097 <https://github.com/wazuh/wazuh-kibana-app/pull/3097>`_    Index pattern setting not used for choosing from existing patterns. 
-`#3108 <https://github.com/wazuh/wazuh-kibana-app/pull/3108>`_    Fixed space character missing on deployment command if UDP is configured
-`#3110 <https://github.com/wazuh/wazuh-kibana-app/pull/3110>`_    Fixed statistics visualizations when a node is selected 
-`#3114 <https://github.com/wazuh/wazuh-kibana-app/pull/3114>`_    Fixed Flyout date filter also changes main date filter
-`#3118 <https://github.com/wazuh/wazuh-kibana-app/pull/3118>`_    Fixed name for "TCP sessions" visualization and average metric is now a sum
-`#3120 <https://github.com/wazuh/wazuh-kibana-app/pull/3120>`_    Filter only authorized agents in Events and Security Alerts table
-`#3122 <https://github.com/wazuh/wazuh-kibana-app/pull/3122>`_    Fixed Last keep alive label is outside the panel
-`#3128 <https://github.com/wazuh/wazuh-kibana-app/pull/3128>`_    Fixed app redirect to Settings section after the health check
-`#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Fixed the plugin logo path in Kibana menu when use server.basePath setting
-`#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Fixed deprecated endpoint for create agent groups
-`#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Fixed check for TCP protocol in deploy new agent       
+`#3088 <https://github.com/wazuh/wazuh-kibana-app/pull/3088>`_    Only authorized agents are shown in the Agents stats and Visualizations dashboard.
+`#3095 <https://github.com/wazuh/wazuh-kibana-app/pull/3095>`_    ``Pending`` status option for agents is now included on the Agents overview page.
+`#3097 <https://github.com/wazuh/wazuh-kibana-app/pull/3097>`_    Index patter setting is now applied when choosing from existing patterns.
+`#3108 <https://github.com/wazuh/wazuh-kibana-app/pull/3108>`_    Issue with space character missing on the deployment command when UDP is configured is now fixed. 
+`#3110 <https://github.com/wazuh/wazuh-kibana-app/pull/3110>`_    When a node is selected in the Analysis engine section of the Statistic page, you can now correctly see the statistics of the selected node.
+`#3114 <https://github.com/wazuh/wazuh-kibana-app/pull/3114>`_    When selecting a MITRE technique in the MITRE ATTACK module, the changed date filter of the flyout window no longer modifies the main date filter as well.
+`#3118 <https://github.com/wazuh/wazuh-kibana-app/pull/3118>`_    Issue with the name of the TCP sessions visualization is now fixed and the average metric is now changed to total TCP sessions.
+`#3120 <https://github.com/wazuh/wazuh-kibana-app/pull/3120>`_    Only authorized agents are now shown on the Events and Security alerts tables. 
+`#3122 <https://github.com/wazuh/wazuh-kibana-app/pull/3122>`_    In the Agents module, ``Last keep alive`` data is now displayed correctly within the panel.
+`#3128 <https://github.com/wazuh/wazuh-kibana-app/pull/3128>`_    Wazuh Kibana plugin no longer redirects to the Settings page instead of the Overview page after a health check.
+`#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Issue with the Wazuh logo path in Kibana menu when ``server.basePath`` setting is used is now fixed.
+`#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Issue with deprecated endpoint for creating agent groups is now fixed.
+`#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Issue with checking process for TCP protocol in Deploy a new agent section is now fixed.
 ==============================================================    =============
 
 
