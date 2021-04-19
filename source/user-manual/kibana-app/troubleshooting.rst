@@ -30,14 +30,14 @@ The Wazuh version can be checked by executing the following command:
 
 .. code-block:: console
 
- # cat /var/ossec/etc/ossec-init.conf | grep VERSION
+ # /var/ossec/bin/wazuh-control info | grep WAZUH_VERSION
 
 An example output of the command looks as follows:
 
 .. code-block:: console
   :class: output
 
-  VERSION="v4.1.1"
+  WAZUH_VERSION="v4.2.0"
 
 Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
