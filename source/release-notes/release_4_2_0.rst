@@ -31,7 +31,7 @@ Wazuh adds a new endpoint to get agents’ logcollector statistics from differen
  
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ Improved ``DELETE /agents`` endpoint:
 
-The DELETE/agents query now integrates new parameters that allow you to customize selection and to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response. 
+The ``DELETE/agents`` query now integrates new parameters that allow you to customize selection and to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response. 
 
 **Wazuh Kibana plugin**
 
