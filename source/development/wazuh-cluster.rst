@@ -230,7 +230,7 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 | ``sync_a_w_m_p``  |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_i_w_m``,   | Master      | - None or             | - Start synchronization protocol. Message characters define the action to do:                   |
-| ``sync_e_w_m``,   |             | - String ID<str>      | - I (integrity), E (extra valid), A (agent-info).                                               |
+| ``sync_e_w_m``,   |             |   String ID<str>      | - I (integrity), E (extra valid), A (agent-info).                                               |
 | ``sync_a_w_m``    |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sync_i_w_m_e``, | Master      | None                  | - End synchronization protocol. Message characters define the action to do:                     |
