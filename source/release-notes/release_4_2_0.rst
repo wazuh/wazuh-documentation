@@ -228,6 +228,7 @@ Reference                                                                       
 `#7862 <https://github.com/wazuh/wazuh/pull/7862>`_                                                                  The ``equals`` comparator is fixed for OVAL feeds in Vulnerability Detector. Now, equal versions in the OVAL scan are successfully compared.
 `#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8098>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crash during synchronization of registries.
 `#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh DB is fixed and there are no longer risks of incoming requests being stalled during database commitment.
+`#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the keystore in writing mode when closing RIDs.
 =================================================================================================================    =============
 
 **API**
