@@ -790,8 +790,9 @@ header .menuweb-bar .menu-item a {
 
 .images-rn-420 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;  
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center; 
+  grid-gap: 5%; 
 }
 
 .content-card {
