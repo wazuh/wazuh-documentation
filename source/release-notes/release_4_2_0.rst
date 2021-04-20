@@ -15,6 +15,29 @@ Highlights
 
 **Core**
 
+- `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_, `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_, `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_  Logcollector improvements:
+
+Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading from a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
+
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Improvements on agent’s CVE inventory report visibility:
+
+Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
+
+- `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ TCP and UDP ports support:
+
+Remoted now supports listening to a TCP and UDP port simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and log’s sending, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
+
+- `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh unified standard improvements:
+
+The names of daemons and tools for the Wazuh product are now renamed and unified to achieve consistency and uniformity, according to the new Wazuh standards.
+
+
+- `#nnnn <xxxx>`_ Stability enhancements on Wazuh features:
+
+Wazuh new fixes provide stability to several features of the solution, including analysisd, File integrity monitoring, Remoted, and Vulnerability detector. These changes improve user experience throughout the product.
+
+
+
 **API**
 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Endpoint for ``allow_run_as`` parameter configuration:
@@ -260,6 +283,7 @@ Reference                                                         Description
 `#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Issue with the Wazuh logo path in Kibana menu when ``server.basePath`` setting is used is now fixed.
 `#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Issue with deprecated endpoint for creating agent groups is now fixed.
 `#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Issue with checking process for TCP protocol in Deploy a new agent section is now fixed.
+`#3181 <https://github.com/wazuh/wazuh-kibana-app/pull/3181>`_    Issue with RBAC with agent group permissions is now fixed. Now when authorized agents are specified by their group instead of their IDs, you can successfully access the Security configuration assessment module, the Integrity monitoring module, and the Configuration window on the Agents page. 
 ==============================================================    =============
 
 
@@ -271,11 +295,11 @@ What's new
 
 This release includes new features or enhancements. 
 
-- `#2021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_ Added error toast in search handler when the connection with forwarder fails
-- `#1024 <https://github.com/wazuh/wazuh-splunk/pull/1024>`_ Changed query to show alert evolution on Discover
-- `#1066 <https://github.com/wazuh/wazuh-splunk/pull/1066>`_ Added link to agent view in Group Agents table
-- `#1052 <https://github.com/wazuh/wazuh-splunk/pull/1052>`_ Support for Python3 compatibility, deleted deprecated Python2
-- `#1058 <https://github.com/wazuh/wazuh-splunk/pull/1058>`_ Applied latest Wazuh API changes to create group request
+- `#1021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_ Issue with error toast message in search handler when the connection with forwarder fails is now fixed.
+- `#1024 <https://github.com/wazuh/wazuh-splunk/pull/1024>`_ In Discover view, the search query is changed to show the alert’s evolution.
+- `#1066 <https://github.com/wazuh/wazuh-splunk/pull/1066>`_ In the Agents window of the Groups page, a new link is added to the result table to access Agent view.
+- `#1052 <https://github.com/wazuh/wazuh-splunk/pull/1052>`_ Wazuh is now compatible with Python3. Python2 is now deprecated and removed.
+- `#1058 <https://github.com/wazuh/wazuh-splunk/pull/1058>`_ The create group ``POST`` request is adapted to the latest Wazuh API changes.
 
 Resolved issues
 ^^^^^^^^^^^^^^^
@@ -287,13 +311,13 @@ This release resolves known issues.
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#944 <https://github.com/wazuh/wazuh-splunk/issues/944>`_        Apply Wazuh tools name changing from ossect to wazuh
-`#945 <https://github.com/wazuh/wazuh-splunk/issues/945>`_        Apply Wazuh daemons name changing from ossec to wazuh
-`#1020 <https://github.com/wazuh/wazuh-splunk/pull/1020>`_        Fixed token cache duration
-`#1042 <https://github.com/wazuh/wazuh-splunk/pull/1042>`_        Fixed issue with dynamic columns width for agents PDF report
-`#1045 <https://github.com/wazuh/wazuh-splunk/pull/1045>`_        Fixed blocked app when there isn't connected with the API
-`#1046 <https://github.com/wazuh/wazuh-splunk/pull/1046>`_        Fixed success toast saving agent configuration file with bad style
-`#1059 <https://github.com/wazuh/wazuh-splunk/pull/1059>`_        Minor style fixes
-`#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        Added new error handle to Alerts Configuration views
-`#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Fixed uncontrolled message error when add api fails
+`#944 <https://github.com/wazuh/wazuh-splunk/issues/944>`_        Wazuh tools are now renamed to follow Wazuh unified standard. ``ossec-control`` is now ``wazuh-control`` and ``ossec-regex`` is now renamed as ``wazuh-regex``.
+`#945 <https://github.com/wazuh/wazuh-splunk/issues/945>`_        Wazuh daemons are now renamed to follow Wazuh unified standard.
+`#1020 <https://github.com/wazuh/wazuh-splunk/pull/1020>`_        Issue with token cache duration is now fixed.
+`#1042 <https://github.com/wazuh/wazuh-splunk/pull/1042>`_        Issue with dynamic columns width for agents PDF report is now fixed. 
+`#1045 <https://github.com/wazuh/wazuh-splunk/pull/1045>`_        Issue with the app not loading when it is not connected to the API is now fixed and information is displayed correctly. 
+`#1046 <https://github.com/wazuh/wazuh-splunk/pull/1046>`_        Styling issue with success toast message for saving agent configuration is now fixed.
+`#1059 <https://github.com/wazuh/wazuh-splunk/pull/1059>`_        Minor styling issue is now fixed and Export button on the Export Result window now works correctly when you hover over it.
+`#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        New error handler message is now added to the Alerts window of the Configuration page.
+`#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Error message when adding an API fails is now fixed and its content text is shown correctly.
 ==============================================================    =============
