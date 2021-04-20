@@ -149,11 +149,10 @@ The :ref:`requirements <installation_requirements>`  section specifies the suppo
     :hidden:
     :maxdepth: 1
 
-    requirements
-    open-distro/index
-    wazuh-agent/index
+    quickstart
+    wazuh-components/index
     packages-list
-    more-installation-alternatives/index
+
 
 
 
