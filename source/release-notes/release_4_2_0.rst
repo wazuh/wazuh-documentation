@@ -5,12 +5,8 @@
 4.2.0 Release notes
 ===================
 
-This section lists the changes in version 4.2.0. More details about these changes are provided in the changelog of each component:
+This section lists the changes in version 4.2.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.2/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.2-7.10/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/4.2-8.1/CHANGELOG.md>`_
-  
 
 Highlights
 ----------
@@ -21,7 +17,7 @@ Highlights
 
 Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading from a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
 
-- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Improvements on agent’s CVE inventory report visibility:
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Visibility improvements on agent’s CVE inventory report:
 
 Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
 
@@ -34,7 +30,7 @@ Remoted now supports listening to a TCP and UDP port simultaneously. This new su
 The names of daemons and tools for the Wazuh product are now renamed and unified to achieve consistency and uniformity, according to the new Wazuh standards.
 
 
-- `#nnnn <xxxx>`_ Stability enhancements on Wazuh features:
+- `#7105 <https://github.com/wazuh/wazuh/pull/7105>`_, `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_, `#7268 <https://github.com/wazuh/wazuh/pull/7268>`_, `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_, `#7795 <https://github.com/wazuh/wazuh/pull/7795>`_ Stability enhancements on Wazuh features:
 
 Wazuh new fixes provide stability to several features of the solution, including analysisd, File integrity monitoring, Remoted, and Vulnerability detector. These changes improve user experience throughout the product.
 
@@ -48,11 +44,11 @@ The ``allow_run_as`` parameter to create and update API users is now removed fro
 
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ CVE data endpoint integration:
 
-Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent and get enhanced insight into the CVE, giving you easy easy access to data, such as package name, package version, package architecture, and the CVE ID that affects said package. 
+Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent and get enhanced insight into the CVE, giving you easy access to data, such as package name, package version, package architecture, and the CVE ID that affects said package. 
 
 - `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Endpoint for logcollector stats:
 
-Wazuh adds a new endpoint to get agents’ logcollector statistics from different components, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files can bring this information using their own socket interface and fetch the data from a remote component.  
+Wazuh adds a new endpoint to get agents’ logcollector statistics from different components, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files bring this information using their own socket interface and fetch the data from a remote component.  
  
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ Improved ``DELETE /agents`` endpoint:
 
@@ -163,10 +159,10 @@ This release includes new features or enhancements.
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
 - `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes.
 - `#8115 <https://github.com/wazuh/wazuh/pull/8115>`_ Wazuh adds the capability that allows you to disable the  ``max_request_per_minute`` API configuration option by setting its value to ``0``.
-- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset version for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` is deprecated and removed.
+- `#6904 <https://github.com/wazuh/wazuh/issues/6904>`_ Ruleset versions for ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` are deprecated and removed.
 - `#6909 <https://github.com/wazuh/wazuh/pull/6909>`_ ``POST /groups`` endpoint is now changed to specify the group name in a JSON body instead of in a query parameter. 
 - `#7312 <https://github.com/wazuh/wazuh/pull/7312>`_ ``PUT /active-response`` endpoint function is now changed to create messages with new JSON format. 
-- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ The DELETE/agents query no integrates new parameters that allow you to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response.
+- `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ The ``DELETE/agents`` query no integrates new parameters that allow you to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response.
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
 - `#8123 <https://github.com/wazuh/wazuh/pull/8123>`_ The ``PUT /agents/group/{group_id}/restart`` response format is now improved when there are no agents assigned to the group.
 - `#8149 <https://github.com/wazuh/wazuh/pull/8149>`_ Agent keys used when adding agents through the Wazuh API are now obscured in the API log.
@@ -204,7 +200,7 @@ Reference                                                                       
 =================================================================================================================    =============
 `#6934 <https://github.com/wazuh/wazuh/pull/6934>`_                                                                  In FIM, setting ``scan_time`` to *12am* or *12pm* now works correctly. 
 `#6802 <https://github.com/wazuh/wazuh/pull/6802>`_                                                                  In FIM, reaching the file limit no longer creates wrong alerts for events triggered in a monitored folder. Now, a new SQLite query fetches the information of all the files in a specific order.
-`#7105 <https://github.com/wazuh/wazuh/pull/7105>`_                                                                  Issue in analysisd that reserved the static decoder field name ``command`` but it was not evaluated is resolved. From now on, it is always treated as a dynamic decoder field.
+`#7105 <https://github.com/wazuh/wazuh/pull/7105>`_                                                                  Issue in analysisd that reserved the static decoder field name ``command`` but was not evaluated is resolved. From now on, it is always treated as a dynamic decoder field.
 `#7073 <https://github.com/wazuh/wazuh/pull/7073>`_                                                                  The evaluation of fields in the ``description`` tag of roles now works correctly.
 `#6789 <https://github.com/wazuh/wazuh/pull/6789>`_                                                                  In FIM, errors that caused symbolic links not to work correctly are now fixed.
 `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_                                                                  Path validation in FIM configuration is now fixed. Now, the process to validate and format a path from configuration is performed correctly.
@@ -214,19 +210,19 @@ Reference                                                                       
 `#7359 <https://github.com/wazuh/wazuh/pull/7359>`_                                                                  Windows agent compilation with GCC 10 is now performed successfully.
 `#7332 <https://github.com/wazuh/wazuh/pull/7332>`_                                                                  Errors in FIM when expanding environment variables are now fixed. 
 `#7476 <https://github.com/wazuh/wazuh/pull/7476>`_                                                                  Rule descriptions are now included in archives when the input event matches a rule, regardless of whether an alert was triggered or not.
-`#7495 <https://github.com/wazuh/wazuh/pull/7495>`_                                                                  Issue with Regex parser is fixed and now accepts empty strings.
+`#7495 <https://github.com/wazuh/wazuh/pull/7495>`_                                                                  Issue with regex parser is fixed and now accepts empty strings.
 `#7414 <https://github.com/wazuh/wazuh/pull/7414>`_                                                                  In FIM, issue with ``delete`` events with real-time is now fixed. Now, deleted files in agents running on Solaris generate alerts and are correctly reported.
 `#7633 <https://github.com/wazuh/wazuh/pull/7633>`_                                                                  In Remoted, the priority header is no longer included incorrectly in syslog when using TCP.
 `#7782 <https://github.com/wazuh/wazuh/pull/7782>`_                                                                  Stack overflow issue in the XML parsing is now fixed by limiting the levels of recursion to 1024.
 `#7795 <https://github.com/wazuh/wazuh/pull/7795>`_                                                                  Vulnerability Detector now correctly skips scanning all the agents in the master node that are connected to another worker.
 `#7858 <https://github.com/wazuh/wazuh/pull/7858>`_                                                                  Wazuh database synchronization module now correctly cleans dangling agent group files.
-`#7919 <https://github.com/wazuh/wazuh/pull/7919>`_                                                                  In analysisd, Regex parser issue with memory leaks is now fixed.
+`#7919 <https://github.com/wazuh/wazuh/pull/7919>`_                                                                  In analysisd, regex parser issue with memory leaks is now fixed.
 `#7905 <https://github.com/wazuh/wazuh/pull/7905>`_                                                                  A typo is fixed in the initial value for the hotfix scan ID in the agents' database schema.
 `#8003 <https://github.com/wazuh/wazuh/pull/8003>`_                                                                  Segmentation fault issue is fixed in Vulnerability Detector when parsing an unsupported package version format.
 `#7990 <https://github.com/wazuh/wazuh/pull/7990>`_                                                                  In FIM, false positives were triggered due to file ``inode`` collisions in the engine database. This issue is now fixed and FIM works properly when the ``inode`` of multiple files is changed.
 `#6932 <https://github.com/wazuh/wazuh/pull/6932>`_                                                                  Issue with error handling when wildcarded RHEL feeds are not found is now fixed. 
 `#7862 <https://github.com/wazuh/wazuh/pull/7862>`_                                                                  The ``equals`` comparator is fixed for OVAL feeds in Vulnerability Detector. Now, equal versions in the OVAL scan are successfully compared.
-`#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8098>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crash during synchronization of registries.
+`#8098 <https://github.com/wazuh/wazuh/pull/8098>`_ `#8143 <https://github.com/wazuh/wazuh/pull/8143>`_              In FIM, an issue that caused a Windows agent to crash when synchronizing a Windows Registry value that starts with a colon ``:`` is now resolved. ``winagent`` no longer crash during synchronization of registries.
 `#8151 <https://github.com/wazuh/wazuh/pull/8151>`_                                                                  A starving hazard issue in Wazuh DB is fixed and there are no longer risks of incoming requests being stalled during database commitment.
 `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_                                                                  Issue with race condition in Remoted that, under certain circumstances, crashes when closing RID files is now fixed. Now, Remoted locks the keystore in writing mode when closing RIDs.
 =================================================================================================================    =============
@@ -267,7 +263,7 @@ What's new
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Dev Tools feature is now moved under the new Tools menu and it is renamed as API Console.
 - `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ Wazuh adds a new Stats section on the Agent data overview page that allows you to see agent’s information retrieved by ``/agents/{agent_id}/stats/logcollector`` API endpoint.
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ New vulnerability inventory is now added to the Vulnerability module, allowing you to see data on the CVE that affect your monitored agents.
-- `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ In the Security events module, the Rows per page option of the Explore agent section is now configurable. 
+- `#2925 <https://github.com/wazuh/wazuh-kibana-app/issues/2925>`_ In the Security events module, the "Rows per page" option of the Explore agent section is now configurable. 
 - `#3051 <https://github.com/wazuh/wazuh-kibana-app/pull/3051>`_ New reminder message and restart button are now displayed in the Rules, Decoders, and CDB lists sections of the management menu for you to restart the cluster or management after importing a file.
 - `#3061 <https://github.com/wazuh/wazuh-kibana-app/issues/3061>`_ The API Console section of the Tools menu now includes a logtest ``PUT`` sample for you to have as a reference.
 - `#3109 <https://github.com/wazuh/wazuh-kibana-app/pull/3109>`_ A new button is added for you to recheck API connection during a health check.
@@ -297,10 +293,10 @@ Reference                                                         Description
 `#3120 <https://github.com/wazuh/wazuh-kibana-app/pull/3120>`_    Only authorized agents are now shown on the Events and Security alerts tables. 
 `#3122 <https://github.com/wazuh/wazuh-kibana-app/pull/3122>`_    In the Agents module, ``Last keep alive`` data is now displayed correctly within the panel.
 `#3128 <https://github.com/wazuh/wazuh-kibana-app/pull/3128>`_    Wazuh Kibana plugin no longer redirects to the Settings page instead of the Overview page after a health check.
-`#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Issue with the Wazuh logo path in Kibana menu when ``server.basePath`` setting is used is now fixed.
+`#3144 <https://github.com/wazuh/wazuh-kibana-app/pull/3144>`_    Issue with the Wazuh logo path in the Kibana menu when ``server.basePath`` setting is used is now fixed.
 `#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Issue with deprecated endpoint for creating agent groups is now fixed.
 `#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Issue with checking process for TCP protocol in Deploy a new agent section is now fixed.
-`#3181 <https://github.com/wazuh/wazuh-kibana-app/pull/3181>`_    Issue with RBAC with agent group permissions is now fixed. Now when authorized agents are specified by their group instead of their IDs, you can successfully access the Security configuration assessment module, the Integrity monitoring module, and the Configuration window on the Agents page. 
+`#3181 <https://github.com/wazuh/wazuh-kibana-app/pull/3181>`_    Issue with RBAC with agent group permissions is fixed. Now, when authorized agents are specified by their group instead of their IDs, you can successfully access the Security configuration assessment module, the Integrity monitoring module, and the Configuration window on the Agents page. 
 ==============================================================    =============
 
 
@@ -338,3 +334,10 @@ Reference                                                         Description
 `#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        New error handler message is now added to the Alerts window of the Configuration page.
 `#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Error message when adding an API fails is now fixed and its content text is shown correctly.
 ==============================================================    =============
+
+
+More details about these changes are provided in the changelog of each component:
+
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.2-7.10/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/4.2-8.1/CHANGELOG.md>`_
