@@ -66,20 +66,9 @@ Wazuh improves user experience by adding a new Ruleset Test feature under the To
 
 The new Ruleset Test tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 
-- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
-
-To improve user experience and access to Wazuh tools. The Dev Tools feature is renamed as API Console and it is now found, together with the new Ruleset Test feature, inside the new Tool section under the Wazuh plugin menu.
-
-- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ New Agent Stats section:
-
-Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking Stats in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
-
-- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
-
-Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added Inventory tab in the Vulnerabilities module allows you to visualize information, such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
-
 .. raw:: html
-
+    
+    <div class="images-rn-420-container">
     <div class="images-rn-420">
 
 .. thumbnail::  ../images/release-notes/4.2.0/ruleset-test.png 
@@ -88,8 +77,24 @@ Wazuh now provides you with enhanced insight into the CVE that are affecting an 
 .. thumbnail::  ../images/release-notes/4.2.0/rules_ruleset_test.png
       :align: center
 
+.. raw:: html
+
+    </div>      
+
+- `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
+
+To improve user experience and access to Wazuh tools. The Dev Tools feature is renamed as API Console and it is now found, together with the new Ruleset Test feature, inside the new Tool section under the Wazuh plugin menu.
+
 .. thumbnail::  ../images/release-notes/4.2.0/new-menu.png
       :align: center
+
+- `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ New Agent Stats section:
+
+Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking Stats in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
+
+.. raw:: html
+
+    <div class="images-rn-420">
 
 .. thumbnail::  ../images/release-notes/4.2.0/new_stats_access.png
       :align: center
@@ -97,8 +102,16 @@ Wazuh now provides you with enhanced insight into the CVE that are affecting an 
 .. thumbnail::  ../images/release-notes/4.2.0/agent_stats_section.png
       :align: center
 
+.. raw:: html
+
+    </div>
+
+- `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
+
+Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added Inventory tab in the Vulnerabilities module allows you to visualize information, such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
+
 .. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
-      :align: center
+      :align: center  
 
 .. raw:: html
 
@@ -122,7 +135,7 @@ This release includes new features or enhancements.
 - `#7408 <https://github.com/wazuh/wazuh/pull/7408>`_ Agent's IP detection improvement: agents running on Solaris now send their IP to the manager. 
 - `#7444 <https://github.com/wazuh/wazuh/pull/7444>`_ New ``ip_update_interval`` option is added to set how often the agent refreshes its IP address.
 - `#7661 <https://github.com/wazuh/wazuh/issues/7661>`_ New support is added for testing location information in Wazuh logtest. 
-- `#7731 <https://github.com/wazuh/wazuh/issues/7731>`_ Vulnerability detection improvement: new vulnerability detector reports are added to the Wazuh DB so you can know which CVE affect an agent.
+- `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Vulnerability detection improvement: new vulnerability detector reports are added to the Wazuh DB so you can know which CVE affect an agent.
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh daemons are now renamed to follow the Wazuh unified standard. 
 - `#6903 <https://github.com/wazuh/wazuh/pull/6903>`_ Wazuh CLIs and related tools are now renamed to follow Wazuh unified standard.
 - `#6920 <https://github.com/wazuh/wazuh/pull/6920>`_ Wazuh internal directories are now renamed to follow Wazuh unified standard. 
