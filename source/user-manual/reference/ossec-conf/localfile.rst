@@ -41,7 +41,7 @@ Option to get the location of a log or a group of logs. ``strftime`` format stri
 
 For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
 
-Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
+Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-modulesd`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
@@ -142,10 +142,10 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-It allows to read new log content since ``ossec-logcollector`` was stopped.
+It allows to read new log content since ``wazuh-modulesd`` was stopped.
 
-By default, when ``ossec-logcollector`` starts it will only read all log content since it was started.
-Set it to no to collect events generated since ``ossec-logcollector`` was stopped.
+By default, when ``wazuh-modulesd`` starts it will only read all log content since it was started.
+Set it to no to collect events generated since ``wazuh-modulesd`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
@@ -169,7 +169,7 @@ The attributes below are optional.
 +-------------+---------------------------------------+--------------+---------------+
 
 .. note::
-  If the log rotates while ``ossec-logcollector`` was stopped and ``only-future-events`` was set to ``no``, it will start reading from the beginning of the log. 
+  If the log rotates while ``wazuh-modulesd`` was stopped and ``only-future-events`` was set to ``no``, it will start reading from the beginning of the log. 
 
 
 query

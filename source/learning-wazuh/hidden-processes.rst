@@ -37,7 +37,7 @@ Wazuh a very effective Linux rootkit detection application by looking for genera
 
     .. code-block:: console
 
-        # echo "syscheck.debug=2" > /var/ossec/etc/local_internal_options.conf
+        # echo "wazuh_modules.debug=2" > /var/ossec/etc/local_internal_options.conf
         # echo "agent.debug=2" >> /var/ossec/etc/local_internal_options.conf
         # echo "rootcheck.sleep=0" >> /var/ossec/etc/local_internal_options.conf
         # echo "syscheck.sleep=0" >> /var/ossec/etc/local_internal_options.conf
