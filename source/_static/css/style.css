@@ -788,11 +788,16 @@ header .menuweb-bar .menu-item a {
   border: none;
 }
 
+.images-rn-420-container img {
+  border: 0.4rem solid #eaeaea !important;
+}
+
 .images-rn-420 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center; 
-  grid-gap: 5%; 
+  grid-gap: 2%; 
+  margin-bottom: 2%;
 }
 
 .content-card {
