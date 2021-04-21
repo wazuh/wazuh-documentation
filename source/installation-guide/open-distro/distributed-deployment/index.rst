@@ -20,7 +20,7 @@ The following components will be installed:
 
 The communication is encrypted using SSL certificates. These certificates are generated using the Search Guard offline TLS tool.
 
-Also, to use the Wazuh Kibana plugin correctly, the extra Elasticsearch roles and user sare added.
+Also, to use the Wazuh Kibana plugin correctly, the extra Elasticsearch roles and users are added.
 
 To guarantee the expected performance of the Wazuh and Elastic Stack components, all hosts must meet the hardware requirements described in the :ref:`Requirements <installation_requirements>` section.
 
