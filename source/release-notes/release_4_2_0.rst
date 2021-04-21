@@ -88,19 +88,11 @@ To improve user experience and access to Wazuh tools. The Dev Tools feature is r
 
 Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking Stats in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
 
-.. raw:: html
-
-    <div class="images-rn-420">
-
 .. thumbnail::  ../images/release-notes/4.2.0/new_stats_access.png
       :align: center
 
 .. thumbnail::  ../images/release-notes/4.2.0/agent_stats_section.png
       :align: center
-
-.. raw:: html
-
-    </div>
 
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
 
