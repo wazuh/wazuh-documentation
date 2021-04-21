@@ -2,13 +2,13 @@
 
 .. _cloud_getting_started_starting_faq:
 
-FAQ
-===
+Getting started FAQ
+===================
 
 .. meta::
   :description: Learn about some FAQ while getting started. 
 
-While starting with Cloud Service some questions may arise. This list answers some of the most frequently asked ones.
+While starting with Cloud Service some questions may arise. This list answers some of the most frequently questions about getting Wazuh Cloud Service ready for the first time.
 
 
 - `What is Wazuh Cloud Service?`_
@@ -36,12 +36,13 @@ While starting with Cloud Service some questions may arise. This list answers so
 What is Wazuh Cloud Service?
 ----------------------------
 
-Wazuh hosted EDR Service. It is Wazuh Cloud platform for threat detection, integrity monitoring, incidence response and regulatory compliance. Supports unlimited endpoints, provides a managed infrastructure, threat intelligence feed, and includes professional support.
+Wazuh Cloud Service hosts and manages all the Wazuh components in one platform. Just connect your endpoints to the cloud environment and we will set the rest up for you. Wazuh is a solution for Security Information and Event Management (SIEM) and Endpoint Detection and Response (EDR).
 
 Can I try it for free?
 ----------------------
 
-You may :ref:`sign up for a free trial<cloud_getting_started_sign_up>` to test an environment. No credit card is required.
+Yes, you can :ref:`sign up for a 14-day free trial<cloud_getting_started_sign_up>`. The trial starts the moment you create an environment. No credit card is required.
+
 
 Will I be charged when my trial is over?
 ----------------------------------------
@@ -59,7 +60,7 @@ Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Prov
 How can I get support?
 ----------------------
 
-Every environment will get standard support since the moment billing details are added. This support includes 8/5 coverage, 2 healthchecks per year, 8 hours maximum response times, and support via JIRA. We also offer premium support with 24/7 coverage, 4 healthchecks per year and 4 hours maximum response times. Learn more about this `here <https://wazuh.com/cloud/>`_.
+Every environment includes support after the first payment. Learn more about this `here <https://wazuh.com/cloud/>`_.
 
 How can I get help?
 -------------------
@@ -69,26 +70,20 @@ Contact us anytime through the **Help** section on your Wazuh Cloud Console.
 Where is Wazuh Cloud Service hosted?
 ------------------------------------
 
-In AWS. This allows us to provide a quality service guaranteed by Amazon Web Services. We include regions such as:
-
-- US east (N. Virginia, Ohio)
-
-- Europe (London, Frankfurt)
-
-- Asia Pacific (Singapore)
+We host our Wazuh Cloud on Amazon Web Services (AWS). New regions get added all the time.
 
 What is a tier?
 ---------------
 
-A tier is the total size (in GB) of data from the alerts and archives which are available online through your Web User Interface. This data consists of the threat inteligence feed generated from Wazuh.
+See :ref:`tier <cloud_glossary_tier>`.
 
 
 What will happen when I use all of my tier?
 ---------------------------------------------
 
-You will be able to see the most recent data according to your tier. The older information will be removed so the total visible data matches your tier. You will still be able to access older data as :ref:`cold storage <cloud_glossary_cold_storage>`, where it will be stored for a year with no size limits and will be easily accessible.
+When the tier is reached, oldest events disappear from your index. Events removed from your index are still available in cold storage. 
 
-As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI), but will remain accessible as cold storage for a year.
+As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI), but will remain accessible from the cold storage.
 
 Can I cancel at any time?
 -------------------------

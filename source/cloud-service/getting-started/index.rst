@@ -12,7 +12,7 @@ Using Wazuh Cloud Service is the easier and faster way to take advantage of all 
 
 An environment contains all the Wazuh components ready to use in one place. Installing the Wazuh manager and the Elastic Stack, making decisions about scalability and high availability, or updating each component is no longer needed. Just connect your endpoints to the environment and we will set the rest up for you.
 
-To get started with your first environment, sign up for a free trial and follow the first steps. No credit card is required.
+To get started with your first environment, sign up for a free trial. No credit card is required.
 
 .. topic:: Contents
 	   

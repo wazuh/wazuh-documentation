@@ -8,19 +8,16 @@ Register agents
 .. meta::
   :description: Learn about how to register agents. 
 
-After the environment creation you can start registering agents. Then, your environment will start reporting from your endpoints.
+To start using Wazuh, you need to install a Wazuh agent in your endpoint and register it in your environment. Just follow the next steps:
 
-1. :ref:`Log into your WUI<cloud_getting_started_wui_access>`.
+1. :ref:`Log into your Wazuh WUI<cloud_getting_started_wui_access>`.
 
-2. Click on **Active agents**.
+2. Click on **Wazuh** > **Agents**.
 
 3. Click on **Deploy new agent**.
 
-4. Select the agent's OS.
-
-5. Copy the generated output and run it on the agent.
-
+4. Follow the steps described in your Wazuh WUI.
 
 .. note::
 
-   Agents must use **TCP** to communicate with your environment. Make sure that your agents are connected to your environment using TCP.
+   Agents must use **TCP** to communicate with your environment.
