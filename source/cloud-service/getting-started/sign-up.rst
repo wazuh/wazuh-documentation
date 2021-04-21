@@ -8,11 +8,26 @@ Sign up for a trial
 .. meta::
   :description: Learn about signing up for a trial. 
 
-Sign up for a trial to experience the benefits of Wazuh Cloud Service:
+Follow the next steps to create your trial environment.
 
-1. Sign up on `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
+Sign up
+-------
 
-2. Click on  **Start your free trial** and create an :ref:`environment <cloud_glossary_environment>`.
+To sign up, all you need is an email address:
+
+1. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
+2. Enter your email address and password, or sign up with a Google account. Make sure you’ve read through our terms of service.
+
+You are ready to create your first :ref:`environment <cloud_glossary_environment>`.
+
+Create trial environment
+------------------------
+
+To get up and running with your environment quickly:
+
+1. From the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_, click **Start your free trial**.
+
+2. Configure your environment:
 
    1. Select a name for the environment.
 
@@ -24,10 +39,6 @@ Sign up for a trial to experience the benefits of Wazuh Cloud Service:
 
 3. Click on **View the summary** and confirm.
 
-4. Then, you will get your environment's credentials on a PDF file, keep them safe as they will be used in later interactions with your environment (Agent registration and report, and WUI access).
+4. Your environment should be listed in the Environment section soon.
 
-The free trial duration is 14 days. :ref:`Add your billing details <cloud_account_billing_details>` before the trial period is over to keep using your environment. When your billing details are added your environment will keep all of the data, agents, and configurations that were made during the trial period.
-
-Once the trial has been created, next steps will be accessing the Wazuh WUI and registering the first agents.
-
-.. warning:: Remember to register agents within the first five days of trial or it will be canceled due to inactivity.
+Once the environment is ready, next steps will be accessing the Wazuh WUI and registering the first agents.

@@ -8,14 +8,9 @@ Cloud Service
 .. meta::
   :description: Get started with Wazuh Cloud Service. 
 
-Overview
---------
+Wazuh Cloud Service provides a solution for *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR), all in one platform.
 
-Wazuh is a free and open source platform used for threat prevention, detection, and response. Discover our endpoint security monitoring solution delivered as a service: Wazuh Cloud Service.
-
-Use Wazuh Cloud Service to grant protection for your workloads. Just connect your endpoints to a Wazuh environment, we will set the rest up for you.
-
-Getting started section offers a brief introduction to the service, its features, and a quick guide on how to use it. Learn more about Wazuh Cloud environments on the subsequent sections.
+Getting started section offers a brief introduction to the service, its features, and a quick guide on how to use it. Learn more about Wazuh Cloud Service in the below sections.
 
 
 Table of contents
