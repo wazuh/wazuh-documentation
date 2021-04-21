@@ -18,7 +18,7 @@ Follow the instructions to configure the official repositories to perform instal
 Prerequisites
 -------------
 
-To perform the following tasks, Open Distro for Elasticsearch requires the Java Development Kit as well as the installation of other packages, such as ``wget``, ``curl``, ``unzip``, and ``libcap``.
+Java Development Kit is installed as it is required by Open Distro for Elasticsearch.  To perform the following tasks, install ``wget``, ``curl``, ``unzip``, and ``libcap`` packages:
 
 .. include:: ../../../_templates/installations/before_installation_all_in_one.rst
 
