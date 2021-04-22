@@ -177,7 +177,9 @@ The attributes below are optional.
 query
 ^^^^^
 
-Filter ``eventchannel`` events that Wazuh will process by using an *XPATH* query following the event schema.
+This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ``ULS`` logs that Wazuh will process. 
+
+To filter *Windows* ``eventchannel`` events *XPATH* format is used to conform the queries following the event schema.
 
 Example:
 
@@ -189,11 +191,43 @@ Example:
     <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
   </localfile>
 
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                              |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+To filter *macOS* ``ULS`` logs *Predicates* format is used to conform the queries following the event schema.
+
+Example:
+
+.. code-block:: xml
+
+  <localfile>
+    <location>oslog</location>
+    <log_format>oslog</log_format>
+    <query type="log,trace" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
+  </localfile>
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                                |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | - Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
+|                    | - Any ULS Predicate, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`                                           |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+
+The attributes below are only valid for macOS ULS and are optional.
+
++-------------+---------------------------------------+--------------+----------------+
+| Attribute   |              Description              | Value range  | Default value  |
++=============+=======================================+==============+================+
+|  **level**  | Indicates the level of verbosity,     |   default    |    debug       |
+|             | `default` is the less verbose and     +--------------+                |
+|             | `debug` is the most verbose.          |   info       |                |
+|             |                                       +--------------+                |
+|             |                                       |   debug      |                |
++-------------+---------------------------------------+--------------+----------------+
+|  **type**   | Limits the type of logs that are      |  activity    |    all         |
+|             | intended to be acquired.              +--------------+                |
+|             |                                       |   log        |                |
+|             |                                       +--------------+                |
+|             |                                       |   trace      |                |
++-------------+---------------------------------------+--------------+----------------+
+
 
 label
 ^^^^^
