@@ -172,7 +172,7 @@ For the previous example, rule 5715 is matched:
 
 .. note::
 
-  For more information, see the :ref:`Wazuh Ruleset <how-to-collect-macoslogs>`
+  For more information, see the :ref:`Wazuh Ruleset <ruleset>`
 
 Alert
 -----

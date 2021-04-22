@@ -11,6 +11,7 @@ The ULS centralizes the management and storage of the logs across all the system
 
 In order to gather the logs, Wazuh uses the CLI `log` tool which provides an interesting interface for log collection in a filtered way, since all the ULS logs pass through this single system. This parameters let the user configure the ``level`` of messages to be gathered, filter by the log ``type`` and even use a very specific ``predicate`` to filter the logs given its more specific charasteristics.
 
+
 Monitor the macOS ULS Logs with Wazuh
 -------------------------------------
 
@@ -26,9 +27,27 @@ Wazuh interfaces with the ``log stream`` tool to acquire the logs from the macOS
 
 In order to filter the system logs, it is necessesary, but not mandatory, to use the ``query`` label. This label allows to set different filtering aspects such as:
 
-- ``type`` : Limits the type of logs that are intended to be acquired (activity; log and/or trace). Multiple values are allowed.
-- ``level`` : Indicates the level of verbosity. Includes events at, and below, the given level value (default; info or debug). Only one value is allowed.
+- ``type`` : Limits the type of logs that are intended to be acquired (``activity`` ; ``log`` **and/or** ``trace``). Multiple values are allowed.
+- ``level`` : Indicates the level of verbosity. Includes events at, and below, the given level value (``default`` ; ``info`` **or** ``debug``). For more information about the predicates, see `ULS Logs Levels`_.
 - ``<query>process == "sshd" OR message CONTAINS "invalid"</query>`` : The query is used directly as the ULS predicate, which is used to filter the logs. Notice that these are not exactly SQL queries since they have specific operators. For more information about the predicates, see `ULS Predicates`_.
+
+.. warning::
+    Be sure to be as restrictive as possible when filtering the logs. MacOS ULS produces a lot of data that might exceed the processing capacity and some logs of interest could be lost.
+
+
+ULS Logs Levels
+---------------
+
+Any log in the ULS is tagged with one of the following levels:
+
+- ``Fault`` : These are very descriptive messages and are always stored on the disk. These logs are always displayed (included at any ``level``).
+- ``Error`` : Similar to ``Fault``. These logs are always displayed (included at any ``level``).
+- ``Default`` : These logs are stored on the disk. These logs are always displayed (included at any ``level``).
+- ``Info`` : These logs are only stored on the RAM, unless they are configured to be saved to disk. These logs are displayed when ``info`` or ``debug`` level is set.
+- ``Debug`` : These messages are usually useful for developers and are not stored by default. These logs are only displayed when the ``debug`` level is set.
+
+When filtering with the ``level`` label, **only one** of the options (``default`` ; ``info`` **or** ``debug``) can be set. If this option is omited, then the ``default`` value is used.
+
 
 ULS Predicates
 --------------
@@ -89,4 +108,6 @@ String comparisons are by default case and diacritic sensitive. You can modify a
 - ``MATCHES`` : The left hand expression equals the right hand expression using a regex-style comparison according to ICU v3 (for more details see the `ICU User Guide for Regular Expressions <https://presstige.io/p/Regular-Expressions-ICU-User-Guide-0eff0feb3f9f4cceb4428c00c5662e97/>`_).
 - ``IN`` : Equivalent to an SQL IN operation, the left-hand side must appear in the collection specified by the right-hand side. For example, ``category IN { 'APBonjourCache', 'cas', 'client' }``.
 
-For more information about predicates, see Apple's Developers: `Predicate Programming Guide <https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html/>`_. 
+.. note::
+    For more information about predicates, see Apple's Developers: `Predicate Programming Guide <https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html>`_. 
+
