@@ -2,7 +2,7 @@
 
 .. meta::
   :description: The Wazuh Syscollector module is in charge of collecting system information and store it into an SQLite database for each agent on the manager side.
-  
+
 .. _syscollector:
 
 System inventory
@@ -442,7 +442,7 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version. 
+.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
