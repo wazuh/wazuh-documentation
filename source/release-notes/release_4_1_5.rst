@@ -9,6 +9,7 @@ This section lists the changes in version 4.1.5. More details about these change
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/4.1-7.10/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/4.1-8.1/CHANGELOG.md>`_
 
 
 Wazuh core
@@ -17,21 +18,17 @@ Wazuh core
 Resolved issues
 ^^^^^^^^^^^^^^^
 
-This release resolves known issues. 
-
-======================================================  =============
-Reference                                                Description
-======================================================  =============
-`#NNNN <https://github.com/wazuh/wazuh/pull/NNNN>`_     Do not insert CPE nor CVE if data parsing was incorrect (empty structure)
-======================================================  =============
+=============================================================================================  =============
+Reference                                                                                      Description
+=============================================================================================  =============
+`4cbd1e8 <https://github.com/wazuh/wazuh/commit/4cbd1e85eeee0eb0d8247fa7228f590a9dd24153>`_    Issue is fixed in Vulnerability Detector that made ``modulesd`` crash while updating the NVD feed due to a missing CPE entry.
+=============================================================================================  =============
 
 Wazuh Kibana plugin
 -------------------
 
 What's new
 ^^^^^^^^^^
-
-This release includes new features or enhancements. 
 
 - Wazuh Kibana plugin is now compatible with Wazuh 4.1.5.
 
@@ -41,7 +38,5 @@ Wazuh Splunk app
 
 What's new
 ^^^^^^^^^^
-
-This release includes new features or enhancements. 
 
 - Wazuh Splunk app is now compatible with Wazuh 4.1.5.
