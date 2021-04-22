@@ -151,6 +151,7 @@ Bucket options
 - `bucket\\aws_profile`_
 - `bucket\\iam_role_arn`_
 - `bucket\\path`_
+- `bucket\\path_suffix`_
 - `bucket\\only_logs_after`_
 - `bucket\\regions`_
 
@@ -174,6 +175,8 @@ Bucket options
 | `bucket\\iam_role_arn`_          | IAM role ARN                                   | Optional                                      |
 +----------------------------------+------------------------------------------------+-----------------------------------------------+
 | `bucket\\path`_                  | Prefix for S3 bucket key                       | Optional                                      |
++----------------------------------+------------------------------------------------+-----------------------------------------------+
+| `bucket\\path_suffix`_           | Suffix for S3 bucket key                       | Optional                                      |
 +----------------------------------+------------------------------------------------+-----------------------------------------------+
 | `bucket\\only_logs_after`_       | Date (YYYY-MMM-DDD, for example 2018-AUG-21)   | Optional                                      |
 +----------------------------------+------------------------------------------------+-----------------------------------------------+
@@ -278,6 +281,17 @@ bucket\\path
 ^^^^^^^^^^^^
 
 If defined, the path or prefix for the bucket.
+
++--------------------+---------------+
+| **Default value**  | N/A           |
++--------------------+---------------+
+| **Allowed values** | Valid path    |
++--------------------+---------------+
+
+bucket\\path_suffix
+^^^^^^^^^^^^^^^^^^^
+
+If defined, the suffix for the bucket. Only works with buckets which contain the folder named AWSLogs (Cloudtrail, VPC and Macie).
 
 +--------------------+---------------+
 | **Default value**  | N/A           |
