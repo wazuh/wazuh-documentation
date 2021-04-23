@@ -90,9 +90,6 @@ The time during which a full scan will not be performed even if the database of 
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-.. note:: In a partial scan new packages are scanned, but only a full scan removes the CVEs related to old packages that are not present anymore.
-
-
 provider
 ^^^^^^^^
 
