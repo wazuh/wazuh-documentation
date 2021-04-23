@@ -32,7 +32,7 @@ Follow these steps:
 
 3. Configure NGINX.
 
-   1. Add the following lines to the http section in your NGINX configuration, located in ``/etc/nginx/nginx.conf``
+   1. Add the following lines to the HTTP section in your NGINX configuration, located in ``/etc/nginx/nginx.conf``
 
 
    .. code-block::
@@ -66,7 +66,7 @@ Follow these steps:
 
    Please, mind replacing ``<cloud_id>`` with the environment's Cloud ID.
 	
-   3. Restart NGINX with: ``systemctl restart nginx``
+   3. Restart NGINX with ``systemctl restart nginx``
 
    4. Register your agent :ref:`following the instructions <cloud_getting_started_register_agents>` but replacing the *WAZUH_MANAGER_IP* (``nginx_ip``) value with the NGINX instance IP.
 
@@ -78,7 +78,7 @@ Follow these steps:
       WAZUH_PASSWORD="xxxx" \
       yum install wazuh-agent
       
-   On this example, mind replacing ``<xxxx>`` with your actual password.
+   In this example, mind replacing ``<xxxx>`` with your actual password.
 
 Using AWS Private Link
 ----------------------
@@ -118,4 +118,4 @@ To do this:
       WAZUH_PASSWORD="xxxx" \
       yum install wazuh-agent
 
-   On this example, mind replacing ``<xxxx>`` with your actual password.
+   In this example, mind replacing ``<xxxx>`` with your actual password.

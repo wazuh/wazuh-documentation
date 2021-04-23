@@ -22,5 +22,6 @@ Learn more about Wazuh Cloud Service in the below sections.
    getting-started/index
    your-environment/index
    account-billing/index
+   cold-storage/index
    apis/index
    glossary

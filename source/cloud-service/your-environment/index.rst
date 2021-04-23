@@ -14,9 +14,8 @@ The information in this section covers:
       :maxdepth: 1
 	      
       manage-wui-access
-      understanding-storage
-      accessing-cold-storage
       cancel-environment
+      monitor-environment-usage
       send-syslog-data
       agents-without-internet
       configure-email
