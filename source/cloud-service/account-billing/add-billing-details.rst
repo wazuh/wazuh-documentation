@@ -8,16 +8,24 @@ Add your billing details
 .. meta::
   :description: Learn how to add your billing details. 
 
-In order to use an environment beyond the trial period, adding billing details will be required.
+In order to use an environment beyond the trial period, you need to add a credit card to your account. Your credit card information is sent securely to our billing provider and stored with them.
 
-To add the billing details, on your Wazuh Cloud Console:
+.. note::
 
-1. Go to **Account**.
+  A trial environment is converted to a paid environment when the trial expires. If you don't add your credit card before the expiration date, your environment will be deleted. Make sure to add your credit card before the end of the trial period.
 
-2. Select **Billing**.
+To add the billing details:
 
-3. Select **Add billing information**.
+1. Log in to the Wazuh Cloud Console.
 
-4. Fill the form.
+2. Go to **Account**.
 
-5. Save the payment method.
+3. Select **Billing**.
+
+4. In Payment method, select **Add billing information**.
+
+5. Fill the form with your billing details.
+
+6. Save the payment method.
+
+If you want, you can stop new charges by canceling your environments.

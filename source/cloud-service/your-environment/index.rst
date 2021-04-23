@@ -8,13 +8,9 @@
 Your environment
 ================
 
-The environment is the core of Wazuh Cloud Service. It will both work as a hosted EDR to collect security data and allow its visualization.
+The information in this section covers:
 
-Every user has its unique requirements. For this purpose, some of the tweaks which can be tuned in an environment are introduced on the following sections along with some other concepts that will be helpful to understand and manage an environment.
-
-.. topic:: Contents
-
-   .. toctree::
+.. toctree::
       :maxdepth: 1
 	      
       manage-wui-access

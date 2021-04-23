@@ -8,27 +8,13 @@ Update billing and operational contacts
 .. meta::
   :description: Learn about how update billing and operational contacts. 
 
+You can specify operational and billing contacts in addition to the primary email address of your account. 
 
-Update Billing
---------------
+.. note::
+  
+  Operational and billing contacts only receive notifications, they can’t log in to Wazuh Cloud Console. To log in to the Wazuh Cloud Console, you must use the primary email address for your account.
 
-After they were set for the first time, billing details can be changed anytime.
-
-Simply, on your Wazuh Cloud Console:
-
-1. Go to **Account**
-
-2. Select **Billing**
-
-3. Select **Edit** on the Billing details section.
-
-
-Change contacts
----------------
-
-It is possible to customize who receives emails from the environment among the members of an organization. The categories for those emails include billing and operational emails.
-
-To change who receives these emails in a organization, on your Wazuh Cloud Console:
+To update billing and operational contacts:
 
 1. Go to **Account**.
 
@@ -36,3 +22,4 @@ To change who receives these emails in a organization, on your Wazuh Cloud Conso
 
 3. Add or remove contacts from the desired category.
 
+Multiple email addresses can be specified for each category. They become effective immediately and no further confirmation of the email addresses is required.

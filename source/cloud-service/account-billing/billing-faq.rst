@@ -8,60 +8,58 @@ Billing FAQ
 .. meta::
   :description: Some Frequently Asked Questions about billing. 
 
-This list provides answers for some of the most Frequently Asked Questions regarding Wazuh Cloud Service billing.
+This list provides answers for some of the most Frequently Asked Questions regarding Wazuh Cloud billing.
 
-- `Can I estimate how much will Wazuh Cloud Service cost?`_
+- `Can I estimate how much will Wazuh Cloud cost?`_
 
-- `Where can I see a detailed view of my consumption?`_
+- `When is my credit card charged?`_
+
+- `Is my credit card information safe?`_
+
+- `Where can I see the next payment for an environment?`_
 
 - `How do I view previous receipts and billing history?`_
 
 - `How can I change who receives receipts and billing notifications?`_
 
-- `What are the available payment methods on Wazuh Cloud Service?`_
+- `What are the available payment methods on Wazuh Cloud?`_
 
 - `Who can I contact for more information?`_
 
-- `When is my credit card charged?`_
 
   
-Can I estimate how much will Wazuh Cloud Service cost?
+Can I estimate how much will Wazuh Cloud cost?
 ------------------------------------------------------
 
-Yes, you can get an estimation of the Wazuh Cloud data tier on the `Wazuh Cloud estimation tool <https://wazuh.com/cloud/#pricing>`_.
+Yes, since you will be charged monthly per environment, you just need to review your current environments to estimate how much Wazuh Cloud will cost.
 
-Where can I see a detailed view of my consumption?
---------------------------------------------------
+When is my credit card charged?
+-------------------------------
 
-On your Wazuh Cloud Console:
+Each environment is charged monthly, according to the environment's beginning date.
 
-1. Go to **Account**.
+Is my credit card information safe?
+-----------------------------------
 
-2. Select **Billing**.
+Your credit card information is sent securely to our billing provider (`Stripe <https://stripe.com>`_)  and stored with them.
+
+Where can I see the next payment for an environment?
+----------------------------------------------------
+
+Details about the next billing of the current environments are described in the Wazuh Cloud Console: *Accounts > Summary > Current billing cycle*.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
 
-On your Wazuh Cloud Console:
-
-1. Go to **Account**.
-
-2. Select **Billing**
-
-3. Check the **Invoices** section.
+See :ref:`billing history <cloud_billing_history>`.
 
 How can I change who receives receipts and billing notifications?
 -----------------------------------------------------------------
 
-On your Wazuh Cloud Console:
+See :ref:`Update billing and operational contacts <cloud_account_billing_update_billing>`.
 
-1. Go to **Account**.
 
-2. Select **Contacts**.
-
-3. Add or remove contacts from the billing category.
-
-What are the available payment methods on Wazuh Cloud Service?
+What are the available payment methods on Wazuh Cloud?
 --------------------------------------------------------------
 
 Credit or debit card payment is supported. Find supported cards from our certified payment processor `in this list <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
@@ -69,14 +67,9 @@ Credit or debit card payment is supported. Find supported cards from our certifi
 Who can I contact for more information?
 ---------------------------------------
 
-For general purpose inquiries you can fill the form `here <https://wazuh.com/cloud/>`_.
+For general purpose inquiries, you can fill the form `here <https://wazuh.com/cloud/>`_.
 
-For info related to your environments, address us on the **Help** section of your Wazuh Cloud Console.
-
-When is my credit card charged?
--------------------------------
-
-Each environment is charged monthly, according to the environment's beginning date.
+For info related to your environments, address us in the **Help** section of your Wazuh Cloud Console.
 
 Can I get a refund?
 -------------------
@@ -86,5 +79,5 @@ Charges are non-refundable, but if you want to cease using an environment you ca
 What is included in my paid Wazuh Cloud Service environment?
 ------------------------------------------------------------
 
-A fully set-up Wazuh cluster according to your tier and a standard or premium support service.
+A full set-up Wazuh cluster according to your tier and a standard or premium support service.
 

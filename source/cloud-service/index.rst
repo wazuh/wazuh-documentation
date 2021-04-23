@@ -8,7 +8,9 @@ Cloud Service
 .. meta::
   :description: Get started with Wazuh Cloud Service. 
 
-Wazuh Cloud Service provides a solution for *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR), all in one platform.
+
+Wazuh Cloud Service hosts and manages all the Wazuh components providing a solution for *Security Information and Event Management* (SIEM) and *Endpoint Detection and Response* (EDR) in one platform.
+
 
 Learn more about Wazuh Cloud Service in the below sections.
 

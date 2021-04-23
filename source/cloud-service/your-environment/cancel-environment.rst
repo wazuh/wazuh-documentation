@@ -2,7 +2,7 @@
 
 .. _cloud_your_environment_cancel_environment:
 
-Cancel environment
+Cancellation
 ==================
 
 .. meta::

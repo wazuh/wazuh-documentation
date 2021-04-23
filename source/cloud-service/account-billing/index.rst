@@ -8,15 +8,16 @@ Account and billing
 .. meta::
   :description: Learn about your account and billing. 
 
-Billing details regarding your environment can be accessed and managed through the Wazuh Cloud Console. This section describes some of the actions you can make in relation to your account.
-
-.. topic:: Contents
+This section describes the actions you can perform in your account using the Wazuh Cloud Console.
 
    .. toctree::
       :titlesonly:
       :includehidden:
       :maxdepth: 1
 
+      user-settings
       add-billing-details
+      billing-history
       update-billing
+      stop-charges
       billing-faq
