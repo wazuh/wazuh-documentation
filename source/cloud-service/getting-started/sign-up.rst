@@ -31,7 +31,7 @@ To get up and running with your environment quickly:
 
    1. Give your environment a name.
 
-   2. Choose a :ref:`tier <cloud_glossary_tier>`: The tier is the size in bytes of the indexed events. When the tier is reached, oldest events disappear from your index. Events removed from your index are still available in cold storage. This `estimation tool <https://wazuh.com/cloud/#pricing>`_ may be helpful to calculate it.
+   2. Choose a :ref:`tier <cloud_glossary_tier>`: The tier is the size in bytes of the indexed events. When the tier is reached, the oldest events disappear from your index. Events removed from your index are still available in cold storage. This `estimation tool <https://wazuh.com/cloud/#pricing>`_ may be helpful to calculate it.
    
    .. note:: During the 14-day trial period, the tier will be limited to 100GB. Then, after your first payment, the full tier will be unlocked. If all you want to do is try out Wazuh, the trial includes more than enough to get you started.
 
@@ -43,4 +43,4 @@ To get up and running with your environment quickly:
 
 4. Your environment should be listed in the *Environments* section soon.
 
-Once the environment is ready, next steps will be accessing the Wazuh WUI and registering the first agents.
+Once the environment is ready, the next steps will be accessing the Wazuh WUI and registering the first agents.

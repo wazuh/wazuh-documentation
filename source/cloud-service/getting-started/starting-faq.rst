@@ -8,7 +8,7 @@ Getting started FAQ
 .. meta::
   :description: Learn about some FAQ while getting started. 
 
-While starting with Cloud Service some questions may arise. This list answers some of the most frequently questions about getting Wazuh Cloud Service ready for the first time.
+While starting with Cloud Service some questions may arise. This list answers some of the most frequent questions about getting Wazuh Cloud Service ready for the first time.
 
 
 - `What is Wazuh Cloud Service?`_
@@ -27,7 +27,7 @@ While starting with Cloud Service some questions may arise. This list answers so
 
 - `What is a tier?`_
 
-- `What will happen when I use all of my tier?`_
+- `What will happen when I use my full tier?`_
 
 - `Can I cancel at any time?`_  
 
@@ -53,14 +53,14 @@ No. No credit card is required for your trial, so you will only be charged if yo
 Is it PCI DDS compliant?
 ------------------------
 
-Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant. The validation was provided by a QSA (Qualified Security Assessor) firm qualified by the PCI Security Standards Council to validate an entity’s adherence to PCI DSS. `Contact us <https://wazuh.com/cloud/>`_ if you want to know more about our AoC. Learn more about this `in our blog <https://wazuh.com/blog/wazuh-cloud-platform-achieves-pci-dss-compliance/>`_.
+Yes. Our Wazuh Cloud platform has been validated as PCI DSS Level 1 Service Provider compliant.
 
 .. _cloud_getting_started_support:
 
 How can I get support?
 ----------------------
 
-Every environment includes support after the first payment. Learn more about this `here <https://wazuh.com/cloud/>`_.
+Every environment includes support after the first payment.
 
 How can I get help?
 -------------------
@@ -78,17 +78,17 @@ What is a tier?
 See :ref:`tier <cloud_glossary_tier>`.
 
 
-What will happen when I use all of my tier?
----------------------------------------------
+What will happen when I use my full tier?
+-----------------------------------------
 
-When the tier is reached, oldest events disappear from your index. Events removed from your index are still available in cold storage. 
+When the tier is reached, the oldest events disappear from your index. Events removed from your index are still available in cold storage. 
 
-As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI), but will remain accessible from the cold storage.
+As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI) but will remain accessible from the cold storage.
 
 Can I cancel at any time?
 -------------------------
 
-Sure. You can cancel at any time with no penalty. You will be able to keep using our service until the end of the current period and won't be charged afterwards.
+Sure. You can cancel at any time with no penalty. You will be able to keep using our service until the end of the current period and won't be charged afterward.
 
 What if I have more questions?
 ------------------------------
