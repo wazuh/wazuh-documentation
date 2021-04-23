@@ -93,6 +93,9 @@ Below we have some Windows wildcard examples.
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
   * The maximum amount of files monitored at same time is limited to 1000.
 
+.. warning::
+  * If using ``oslog`` as ``log_format``, then ``location`` must be set to ``oslog`` as well.
+
 .. _command:
 
 command
@@ -177,9 +180,9 @@ The attributes below are optional.
 query
 ^^^^^
 
-This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ``ULS`` logs that Wazuh will process. 
+This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS (``oslog``) logs that Wazuh will process. 
 
-To filter *Windows* ``eventchannel`` events *XPATH* format is used to conform the queries following the event schema.
+To filter *Windows* ``eventchannel`` events, *XPATH* format is used to make the queries following the event schema.
 
 Example:
 
@@ -191,7 +194,7 @@ Example:
     <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
   </localfile>
 
-To filter *macOS* ``ULS`` logs *Predicates* format is used to conform the queries following the event schema.
+To filter *macOS* ULS (``oslog``) logs, *Predicates* format is used to make the queries.
 
 Example:
 
@@ -203,19 +206,20 @@ Example:
     <query type="log,trace" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
   </localfile>
 
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                                |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | - Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
-|                    | - Any ULS Predicate, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`                                           |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                                                       |
++--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Windows eventchannel | XPATH query format, follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
+|                    +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+|                    | macOS ULS (oslog)    | Predicate query format, see :ref:`How to collect macOS ULS (oslog) logs <how-to-collect-macoslogs>`                                |
++--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-The attributes below are only valid for macOS ULS and are optional.
+The attributes below are optional and only valid for macOS ULS (``oslog``).
 
 +-------------+---------------------------------------+--------------+----------------+
 | Attribute   |              Description              | Value range  | Default value  |
 +=============+=======================================+==============+================+
-|  **level**  | Indicates the level of verbosity,     |   default    |    debug       |
+|  **level**  | Indicates the level of verbosity,     |   default    |    default     |
 |             | `default` is the less verbose and     +--------------+                |
 |             | `debug` is the most verbose.          |   info       |                |
 |             |                                       +--------------+                |
@@ -325,6 +329,13 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | oslog              | Used for macOS ULS logs, returns the logs in syslog format.                                      |
+|                    |                    |                                                                                                  |
+|                    |                    | Monitors all the logs that match the query filter.                                               |
+|                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
+|                    |                    |                                                                                                  |
+|                    |                    | .. versionadded:: 4.3.0                                                                          |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
 |                    |                    | This format chains consecutive logs with the same ID into a single event.                        |
@@ -365,6 +376,10 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
+
+.. warning::
+
+    Only one configuration block with ``log_format`` set as ``oslog`` is allowed.
 
 .. warning::
 
@@ -628,3 +643,14 @@ Windows configuration:
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
       <reconnect_time>10s</reconnect_time>
     </localfile>
+
+MacOS configuration:
+
+.. code-block:: xml
+
+  <!-- For monitoring macOS ULS Logs -->
+  <localfile>
+    <location>oslog</location>
+    <log_format>oslog</log_format>
+    <query type="trace,log,activity" level="info">process == "sshd" OR message CONTAINS "invalid"</query>
+  </localfile>
