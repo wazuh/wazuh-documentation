@@ -152,6 +152,8 @@ This command should have an output like this:
     "tagline" : "You Know, for Search"
   }
 
+
+
 .. _basic_all_in_one_wazuh:
 
 Installing Wazuh server

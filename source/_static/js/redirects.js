@@ -194,6 +194,7 @@ redirections.push(
 /* Pages added in 4.1 */
 
 newUrls['4.1'] = [
+  '/release-notes/release_4_1_5.html',
   '/release-notes/release_4_1_4.html',
   '/release-notes/release_4_1_3.html',
   '/release-notes/release_4_1_2.html',
