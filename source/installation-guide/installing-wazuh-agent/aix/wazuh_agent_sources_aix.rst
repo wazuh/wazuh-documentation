@@ -43,7 +43,7 @@ Installing Wazuh agent
 
      .. code-block:: console
 
-        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_LATEST| && gunzip -c wazuh.tar.gz | tar -xvf -
+        # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_LATEST_AIX|  && gunzip -c wazuh.tar.gz | tar -xvf -
 
      .. note:: If you can't download the repository this way, then you should copy it through the scp utility.
 
