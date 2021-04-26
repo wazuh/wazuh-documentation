@@ -103,7 +103,14 @@ Wazuh now provides you with enhanced insight into the CVE that are affecting an 
 
 .. raw:: html
 
-    </div>      
+    </div> 
+    
+
+Breaking changes
+----------------
+
+- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ The Active Response capability now sends information to the active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous scripts present in the ``active-response/bin`` directories are now deleted as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5.
+
 
 Wazuh core
 ----------
