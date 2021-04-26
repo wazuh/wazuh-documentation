@@ -16,7 +16,7 @@ You can download the `Solaris10 installer (i386 architecture) <https://packages.
 
     .. code-block:: console
 
-      # pkgadd -d wazuh-agent_v|WAZUH_LATEST_SPARC| -sol10-sparc.pkg
+      # pkgadd -d wazuh-agent_v|WAZUH_LATEST_SPARC|-sol10-sparc.pkg
 
 Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :ref:`user manual<register_agents>`.
 
