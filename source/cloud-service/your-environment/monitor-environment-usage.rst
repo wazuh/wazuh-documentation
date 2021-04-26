@@ -2,8 +2,8 @@
 
 .. _cloud_your_environment_monitor_usage:
 
-Monitor your environment usage
-==============================
+Monitor usage
+=============
 
 .. meta::
   :description: Learn how to monitor your environment usage.

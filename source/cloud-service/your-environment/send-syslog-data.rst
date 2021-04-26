@@ -10,8 +10,7 @@ Forward syslog events
 
 Wazuh agents can run in a wide range of operative systems, but when it is not possible due to software incompatibilities or business restrictions, you can forward Syslog events to your environment. This is a common use case for network devices such as routers or firewalls.
 
-
-Since every communication with Wazuh Cloud is performed through the Wazuh agent, you will have to configure the agent to forward the Syslog events. To do so, you have several options:
+Since every communication with you environment is performed through the Wazuh agent, you will have to configure the agent to forward the Syslog events. To do so, you have several options:
 
 - `rsyslog on Linux`_
 
@@ -20,7 +19,7 @@ Since every communication with Wazuh Cloud is performed through the Wazuh agent,
 rsyslog on Linux
 ^^^^^^^^^^^^^^^^
 
-- Use **rsyslog on a Linux host** with a Wazuh agent to log to a file and send those logs to the environment.
+Use **rsyslog on a Linux host** with a Wazuh agent to log to a file and send those logs to the environment.
 
 1. Configure rsyslog to receive syslog events. Enable the TCP or UDP settings by editing ``/etc/rsyslog.conf``.
 
@@ -71,7 +70,7 @@ Onwards, mind replacing ``<file_name.log>`` with the name chosen for this log.
 Logstash on Windows
 ^^^^^^^^^^^^^^^^^^^
    
-- Use **Logstash on a Windows host** with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment.
+Use **Logstash on a Windows host** with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment.
 
 1. Make sure Windows is fully updated and `Java JRE <https://www.java.com/en/download/windows-64bit.jsp>`_ is installed.
 
@@ -80,9 +79,8 @@ Logstash on Windows
    • Click **Start**, search for "**Edit the system environment variables**" and open the system properties applet.
    • Click the **Environment Variables** button.
    • Under **System variables** click "**New**".
-   • Enter the variable name JAVA_HOME and browse to the JRE install directory and click OK. In the variable value the JRE directory should be displayed. For example, ``C:\Program Files\Java\jre1.8.0_201``.
-
-You may need to reopen your terminal to apply changes
+   • Enter the variable name JAVA_HOME and browse to the JRE install directory and click OK. In the variable value, the JRE directory should be displayed. For example, ``C:\Program Files\Java\jre1.8.0_201``.
+   • You may need to reopen your terminal to apply changes
 
 3. Install Logstash.
 

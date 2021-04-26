@@ -5,10 +5,10 @@
 .. meta::
   :description: Learn about connecting agents without internet to your environment
 
-Connect agents without internet
+Agents without Internet access
 ===============================
 
-Even if an agent doesn't have Internet access, we provide different approaches to securely connect your private network to our cloud service:
+Even if an agent doesn't have Internet access, we provide different approaches to securely connect your private network to your environment:
 
 - `Using a forwarding proxy`_
 
@@ -17,14 +17,14 @@ Even if an agent doesn't have Internet access, we provide different approaches t
 Using a forwarding proxy
 ------------------------
 
-It is possible to access Wazuh Cloud Service using an NGINX forwarding proxy. Eventually, the resulting environment will have the following structure:
+It is possible to access your environment using an NGINX forwarding proxy:
 
 .. thumbnail:: ../../images/cloud-service/nginx-scheme.png
     :align: center
     :width: 100%
 
 
-Follow these steps:
+To achieve this configuration, follow these steps:
 
 1. Deploy a new instance in a public subnet with internet access.
 

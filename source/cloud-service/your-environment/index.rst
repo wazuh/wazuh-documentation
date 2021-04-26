@@ -13,7 +13,7 @@ The information in this section covers:
 .. toctree::
       :maxdepth: 1
 	      
-      manage-wui-access
+      manage-auth
       cancel-environment
       monitor-environment-usage
       send-syslog-data

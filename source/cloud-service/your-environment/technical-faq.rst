@@ -91,7 +91,7 @@ No, all the communications will be performed through Wazuh agents.
 Can I integrate with my Single Sign-On (SSO) method (LDAP, Okta, Active Directories)?
 ----------------------------------------------------------------------------------------
 
-Yes, you can access to the Wazuh WUI of your environment through your SSO. Address us through the **Help** section and we will take care of it.
+Yes, you can access the Wazuh WUI of your environment through your SSO. Address us through the **Help** section and we will take care of it.
 
 
 Do I have access to Wazuh API?
