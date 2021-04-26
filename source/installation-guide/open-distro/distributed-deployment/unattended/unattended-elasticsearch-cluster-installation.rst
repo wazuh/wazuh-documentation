@@ -254,7 +254,7 @@ It is highly recommended to change the default passwords of Elasticsearch for th
 
 Once Kibana is running it is necessary to assign the corresponding role to each user. To learn more, see the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
-If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>` section.
+If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
 Next steps
 ~~~~~~~~~~
