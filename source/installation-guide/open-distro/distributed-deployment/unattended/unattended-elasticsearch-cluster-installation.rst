@@ -5,13 +5,15 @@
 Elasticsearch & Kibana unattended installation
 ==============================================
 
-This section will explain how to install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script will perform a health check to verify that the system has enough resources to achieve an optimal performance. For more information, please visit the :ref:`requirements <installation_requirements>` section. This script uses the Search Guard offline TLS tool to create the certificates. 
+You can install Open Distro for Elasticsearch and Open Distro for Kibana using an automated script. This script performs a health check to verify that the system has enough resources to achieve optimal performance. For the installation, the script uses the Search Guard offline TLS tool to create the certificates.
+
+For more information on system resources, see the :ref:`requirements <installation_requirements>` section.
 
 
-.. note:: Root user privileges are required to run all the commands described below. To download the script the package ``curl`` will be used.
+.. note:: Root user privileges are required to run all the commands. To download the script, the package ``curl`` is used.
 
 
-The script allows installing both Elasticsearch and Kibana. They can be installed either together or in separate machines. The available options to run the script are:
+The script allows installing both Elasticsearch and Kibana. They can be installed either together or on separate machines. There are options available for you to use when running the script:
 
 +-------------------------------+---------------------------------------------------------------------------------------------------------------+
 | Options                       | Purpose                                                                                                       |
@@ -34,7 +36,9 @@ The script allows installing both Elasticsearch and Kibana. They can be installe
 Installing Open Distro for Elasticsearch
 ----------------------------------------
 
-Download the script and the configuration file. After downloading them, configure the installation and run the script. Choose the cluster mode between single-node or multi-node:
+To install Open Distro for Elasticsearch, you need to choose the cluster mode first and follow the installation process. 
+
+Choose the cluster mode between single-node or multi-node:
 
 .. tabs::
 
@@ -51,7 +55,7 @@ Download the script and the configuration file. After downloading them, configur
       
       Edit the ``config.yml`` file to specify the IP you want the Elasticsearch service to bind to. 
 
-      .. note:: In order to create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
+      .. note:: To create valid certificates for the communication between the various components of Wazuh and the Elastic Stack, external IPs must be used.
 
       .. code-block:: yaml
         :emphasize-lines: 5, 18, 21
@@ -79,7 +83,7 @@ Download the script and the configuration file. After downloading them, configur
         - <wazuh_master_server_IP>
 
 
-      In case of having more than one Wazuh server, there can be added as many nodes as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      If you have more than one Wazuh server, you can add as many nodes as needed by changing the ``name`` of the certificate and the ``CN`` value. You need to make these changes in the ``Clients certificates`` section: 
 
         .. code-block:: yaml
 
@@ -90,7 +94,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Run the script**
 
-      - To install Elasticsearch, run the script with the option ``-e`` and ``-n <node-name>``:
+      - To install Elasticsearch, run the script with the options ``-e`` and ``-n <node-name>``:
 
       .. code-block:: console
 
@@ -149,22 +153,22 @@ Download the script and the configuration file. After downloading them, configur
 
       The highlighted lines indicate the values that must be replaced in the ``config.yml``. These values are: 
 
-        - ``<elastic_cluster>``: Name of the cluster. 
-        - ``<master_node_x>``: Name of the node ``X``.
-        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``.
-        - ``<kibana_ip>``: Kibana server IP.
-        - ``<wazuh_master_server_IP>``: Wazuh Server IP.
+        - ``<elastic_cluster>``: Name of the cluster 
+        - ``<master_node_x>``: Name of the node ``X``
+        - ``<elasticsearch_ip_nodeX>``: Elasticsearch IP of the node ``X``
+        - ``<kibana_ip>``: Kibana server IP
+        - ``<wazuh_master_server_IP>``: Wazuh Server IP
 
-      There can be added as many Elasticsearch nodes as needed. To generate certificates for them, the ``opendistro_security.nodes_dn`` must be also updated, adding the information of these new certificates. There must be the same number of certificates rows as nodes will be on the installation.
+      You can add as many Elasticsearch nodes as needed. To generate certificates for them, the ``opendistro_security.nodes_dn`` must be also updated, adding the information of the new certificates. There must be the same number of certificates rows as nodes are on the installation.
 
-      In case of having more than one Wazuh server, there can be added as many nodes for their certificates creation as needed, changing the ``name`` of the certificate and the ``CN`` value. This should be indicated on the ``Clients certificates`` section: 
+      If you have more than one Wazuh server, you can add as many nodes as needed and certificates are created for each of them. To do this, change the ``name`` of the certificate and the ``CN`` value in the ``Clients certificates`` section: 
 
       .. code-block:: yaml
 
         - name: filebeat-X
           dn: CN=filebeat-x,OU=Docu,O=Wazuh,L=California,C=US                
 
-    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``):
+    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``:
 
       .. code-block:: console
 
@@ -172,7 +176,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Subsequent nodes installation**
 
-      During the installation of the Elasticsearch initial node, the certificates were created and placed at ``~/certs.tar``. Before installing the subsequent nodes, this file must be placed on each involved node. After placing the ``certs.tar`` in the subsequent node, the installation can start:
+      During the installation of the Elasticsearch initial node, the certificates are created and placed at ``~/certs.tar``. Before installing the subsequent nodes, this file must be placed on each involved node. After placing the ``certs.tar`` in the subsequent node, the installation can start:
 
     - Download the script:
 
@@ -181,7 +185,7 @@ Download the script and the configuration file. After downloading them, configur
         # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
 
 
-    - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>`` (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``):
+    - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``:
 
       .. code-block:: console
 
@@ -189,7 +193,7 @@ Download the script and the configuration file. After downloading them, configur
 
     **Cluster initialization**
 
-      Once all the nodes on the cluster have been started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
+      Once all the nodes on the cluster are started, run the ``securityadmin`` script  on the **initial node** to load the new certificates information and start the cluster. To run this command, the value ``<elasticsearch_IP>`` must be replaced by the Elasticsearch installation IP:
 
       .. code-block:: console
 
@@ -197,14 +201,14 @@ Download the script and the configuration file. After downloading them, configur
            
     
 
-.. note:: The Open Distro for Elasticsearch performance analyzer plugin is removed during the installation since it may have a negative impact on system resources. 
+.. note:: The Open Distro for Elasticsearch performance analyzer plugin is removed during the installation to prevent any negative impact on system resources. 
 
 Configuring Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once Elasticsearch is installed, the script will start the services automatically. The certificates will be placed at ``~/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
+Once Elasticsearch is installed, the script starts the services automatically. The certificates are placed at ``~/certs.tar``. This file must be copied into the :ref:`Wazuh server <unattended_distributed_wazuh>` to extract the certificates needed.
 
-In case Kibana will be installed in a different server, the ``certs.tar`` file should be also copied into its server to extract the corresponding certificates.
+In case Kibana is installed on a different server, the ``certs.tar`` file should be also copied into the Wazuh server to extract the corresponding certificates.
 
 
 .. _install_kibana_unattended:
@@ -212,7 +216,7 @@ In case Kibana will be installed in a different server, the ``certs.tar`` file s
 Installing Kibana
 -----------------
 
-#. Download the script. In case of installing Kibana on the same server as Open Distro for Elasticsearch, this step must be skipped:
+#. Download the script. Skip this step if you have Kibana installed on the same server as Open Distro for Elasticsearch:
 
     .. code-block:: console
 
@@ -226,7 +230,7 @@ Installing Kibana
 
     The following values must be replaced:
 
-      - ``node_name``: Name of the instance (this name must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``). 
+      - ``node_name``: Name of the instance. This name must be the same used in ``config.yml`` for the certificate creation, e.g. ``kibana``. 
 
 #. Access the web interface: 
 
@@ -239,20 +243,20 @@ Installing Kibana
 
 Upon the first access to Kibana, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or,  for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser.  Alternatively, a certificate from a trusted authority can be configured. 
 
-.. note:: If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin will indicate that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
+.. note:: If Kibana is accessed before installing the Wazuh server, the Wazuh Kibana plugin indicates that it cannot establish a connection with the Wazuh API. Proceed with the Wazuh server installation to remediate this.
 
 .. _configure_kibana_unattended:
 
 Configuring Kibana
 ^^^^^^^^^^^^^^^^^^
 
-It is highly recommended to change Elasticsearch’s default passwords for the users found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. More information about this process can be found :ref:`here <change_elastic_pass>`.
+It is highly recommended to change the default passwords of Elasticsearch for the users' passwords found at the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. For more information about this process, see the :ref:`Elasticsearch tuning <change_elastic_pass>` section.
 
-Once Kibana is running it is necessary to assign each user its corresponding role. To learn more visit the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
+Once Kibana is running it is necessary to assign the corresponding role to each user. To learn more, see the :ref:`Setting up the Wazuh Kibana plugin <connect_kibana_app>` section. 
 
-If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+If you need to uninstall Elasticsearch and Kibana, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>` section.
 
 Next steps
 ~~~~~~~~~~
 
-Once the Elastic Stack environment is ready, the Wazuh server can be installed. The Wazuh server installation guide can be found :ref:`here<unattended_distributed_wazuh>`.
+Once the Elastic Stack environment is ready, the Wazuh server can be installed. To do this, follow the steps described in the :ref:`Wazuh server <unattended_distributed_wazuh>` section of the installation guide.
