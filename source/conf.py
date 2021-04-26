@@ -418,7 +418,7 @@ custom_replacements = {
     "|WAZUH_LATEST_ANSIBLE|" : "3.13.1",
     "|WAZUH_LATEST_KUBERNETES|" : "3.13.1",
     "|WAZUH_LATEST_PUPPET|" : "3.13.1",
-    "|WAZUH_LATEST_OVA|" : "3.13.3",
+    "|WAZUH_LATEST_OVA|" : "3.13.2",
     "|WAZUH_LATEST_DOCKER|" : "3.13.1",
     "|ELASTICSEARCH_LATEST|" : "7.9.2",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.9.1",
