@@ -43,7 +43,7 @@ Finally, start the Wazuh agent:
 
   .. code-block:: console
 
-    # sudo /Library/Ossec/bin/ossec-control start
+    # sudo /Library/Ossec/bin/wazuh-control start
 
 
 Uninstall
@@ -55,7 +55,7 @@ To uninstall the agent in macOS:
 
     .. code-block:: console
 
-      # /Library/Ossec/bin/ossec-control stop
+      # /Library/Ossec/bin/wazuh-control stop
 
 #. Remove the ``/Library/Ossec/`` folder and ``ossec-init.conf`` file
 

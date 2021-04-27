@@ -51,7 +51,7 @@ Environment variables can be used to configure syscheck in Linux and Windows.
     <directories check_all="yes">$DIRECTORY</directories>
   </syscheck>
 
-On UNIX based systems, the variable must be added to the file ``/etc/ossec-init.conf`` if Wazuh is restarted using systemd. On the other hand, if Wazuh is restarted using the ``ossec-control`` binary, the variable must be owned by the root user.
+On UNIX based systems, the variable must be added to the file ``/etc/ossec-init.conf`` if Wazuh is restarted using systemd. On the other hand, if Wazuh is restarted using the ``wazuh-control`` binary, the variable must be owned by the root user.
 You can specify multiple paths in a variable by separating them using ``:``.
 
 .. code-block:: xml

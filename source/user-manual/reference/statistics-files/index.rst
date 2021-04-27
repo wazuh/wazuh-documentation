@@ -9,12 +9,12 @@ The **statistics files** are documents that show real-time information about the
 
 Agents statistical files:
 
-  *  `ossec-agentd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/ossec-agentd-state.html>`_ - It shows number of generated events, last connection, agent status and some other useful information about the agent.
- 
-Manager statistical files: 
+  *  `wazuh-agentd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-agentd-state.html>`_ - It shows number of generated events, last connection, agent status and some other useful information about the agent.
 
-  * `ossec-remoted.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/ossec-remoted-state.html>`_ - It shows information about the `remote daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-remoted.html>`_
-  * `ossec-analysisd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/ossec-analysisd-state.html>`_ - It shows information about the `analysis daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html>`_.
+Manager statistical files:
+
+  * `wazuh-remoted.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-remoted-state.html>`_ - It shows information about the `remote daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-remoted.html>`_
+  * `wazuh-analysisd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-analysisd-state.html>`_ - It shows information about the `analysis daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-analysisd.html>`_.
 
 
 
@@ -23,6 +23,6 @@ Manager statistical files:
   .. toctree::
       :maxdepth: 1
 
-      ossec-agentd-state
-      ossec-remoted-state
-      ossec-analysisd-state
+      wazuh-agentd-state
+      wazuh-remoted-state
+      wazuh-analysisd-state

@@ -79,7 +79,7 @@ At the beginning of the example is the full log of an event. The log firstly goe
 
 Afterwards, the decoder will begin the extraction of information from the log that is left. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
 
-Before making a custom decoder, the first step should always be running the event log through :ref:`ossec-logtest <ossec-logtest>` to know where to start.
+Before making a custom decoder, the first step should always be running the event log through :ref:`wazuh-logtest <wazuh-logtest>` to know where to start.
 
 
 Options

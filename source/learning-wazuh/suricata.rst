@@ -271,7 +271,7 @@ Observe how Wazuh decodes Suricata events
         {"timestamp":"2018-02-09T21:32:13.120749+0000","flow_id":659410948727787,"in_iface":"eth0","event_type":"alert","src_ip":"82.165.177.154","src_port":80,"dest_ip":"172.30.0.30","dest_port":45504,"proto":"TCP","alert":{"action":"allowed","gid":1,"signature_id":2100498,"rev":7,"signature":"GPL ATTACK_RESPONSE id check returned root","category":"Potentially Bad Traffic","severity":2},"http":{"hostname":"testmyids.com","url":"/","http_user_agent":"curl/7.29.0","http_content_type":"text/html","http_method":"GET","protocol":"HTTP/1.1","status":200,"length":39},"app_proto":"http","flow":{"pkts_toserver":5,"pkts_toclient":4,"bytes_toserver":415,"bytes_toclient":522,"start":"2018-02-09T21:32:12.861163+0000"}}
 
 
-#. Run ``ossec-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
+#. Run ``wazuh-logtest`` on wazuh-manager and paste in the copied Suricata alert record, observing how it is analyzed:
 
     .. code-block:: none
         :class: output

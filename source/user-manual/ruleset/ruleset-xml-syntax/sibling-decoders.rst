@@ -63,7 +63,7 @@ A simple decoder may be:
     <order>type,srcuser,action,dstuser</order>
   </decoder>
 
-Using `/var/ossec/bin/ossec-logtest` we get:
+Using `/var/ossec/bin/wazuh-logtest` we get:
 
 .. code-block:: none
   :class: output

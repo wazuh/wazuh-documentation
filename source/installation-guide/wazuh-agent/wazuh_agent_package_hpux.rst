@@ -39,7 +39,7 @@ To uninstall the agent:
 
     .. code-block:: console
 
-      # /var/ossec/bin/ossec-control stop
+      # /var/ossec/bin/wazuh-control stop
 
 2. Delete ``ossec`` user and group:
 

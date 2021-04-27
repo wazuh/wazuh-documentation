@@ -84,7 +84,7 @@ The following example shows how the rules contained in the file ``0470-suricata_
    ...
 
 
-The output of *ossec-logtest* from the above JSON record is as follows:
+The output of *wazuh-logtest* from the above JSON record is as follows:
 
 .. code-block:: none
     :class: output
@@ -147,7 +147,7 @@ The decoder declaration using that new feature would be the following:
         <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
     </decoder>
 
-The JSON decoder will extract the fields contained in the JSON event as dynamic fields, taking into account from the end of the prematch text. The output of the *ossec-logtest* is the following:
+The JSON decoder will extract the fields contained in the JSON event as dynamic fields, taking into account from the end of the prematch text. The output of the *wazuh-logtest* is the following:
 
 .. code-block:: none
     :class: output
@@ -178,7 +178,7 @@ In addition, we could define a rule for these raw events decoded:
         <description>Raw JSON event</description>
     </rule>
 
-Finally, the result retrieved by *ossec-logtest* would be:
+Finally, the result retrieved by *wazuh-logtest* would be:
 
 .. code-block:: none
     :class: output
@@ -216,7 +216,7 @@ We can set several children decoders from a parent specifying a plugin decoder a
         <order>email.domain</order>
     </decoder>
 
-The output of the *ossec-logtest* tool shows the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
+The output of the *wazuh-logtest* tool shows the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
 
 .. code-block:: none
     :class: output

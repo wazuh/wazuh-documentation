@@ -69,8 +69,8 @@ accounting for the new syscheck monitoring of your two test directories:
     .. code-block:: none
         :class: output
 
-        2019/10/20 08:21:53 ossec-agent: INFO: Monitoring directory: 'c:/apple', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | realtime | report_changes | mtime | inode | attributes'.
-        2019/10/20 08:21:53 ossec-agent: INFO: Monitoring directory: 'c:/orange', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | mtime | inode | attributes'.
+        2019/10/20 08:21:53 wazuh-agent: INFO: Monitoring directory: 'c:/apple', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | realtime | report_changes | mtime | inode | attributes'.
+        2019/10/20 08:21:53 wazuh-agent: INFO: Monitoring directory: 'c:/orange', with options perm | size | owner | group | md5sum | sha1sum | sha256sum | mtime | inode | attributes'.
 
 
 Testing FIM

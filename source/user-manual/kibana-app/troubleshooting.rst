@@ -107,8 +107,12 @@ If the Wazuh API is running, try to fetch data using the CLI from the Kibana ser
 
 
 
+<<<<<<< HEAD
 I do not see alerts in the Wazuh Kibana plugin
 ----------------------------------------------
+=======
+There should be two processes reading the ``alerts.json`` file: ``wazuh-analysisd`` and ``filebeat``.
+>>>>>>> 3034-cloud-console-docs
 
 The first step is to check if there are alerts in Elasticsearch.
 

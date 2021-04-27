@@ -699,7 +699,7 @@ $wazuh_api_access_max_request_per_minute
   `Default 300`
 
 $wazuh_api_use_only_authd
-  Forces the use of ossec-authd when registering and removing agents.
+  Forces the use of wazuh-authd when registering and removing agents.
 
   `Default false`
 
@@ -954,7 +954,7 @@ $active_response_name
 
 $active_response_disabled
   Toggles the active-response capability on and off.
-  
+
 $active_response_command
   Links the active-response to the command.
 

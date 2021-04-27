@@ -447,7 +447,7 @@ DBD
 ---
 
 +----------------------------+---------------+--------------------------------------------------------------------------+
-| **dbd.reconnect_attempts** | Description   | Number of times ossec-dbd will attempt to reconnect to the database.     |
+| **dbd.reconnect_attempts** | Description   | Number of times wazuh-dbd will attempt to reconnect to the database.     |
 +                            +---------------+--------------------------------------------------------------------------+
 |                            | Default value | 10                                                                       |
 +                            +---------------+--------------------------------------------------------------------------+

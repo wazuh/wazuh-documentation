@@ -171,7 +171,7 @@ use_only_authd
 +----------------------+---------------+--------------------------------------------------------------------+
 | Allowed values       | Default value | Description                                                        |
 +======================+===============+====================================================================+
-| yes, true, no, false | false         | Force the use of ossec-authd when registering and removing agents. |
+| yes, true, no, false | false         | Force the use of wazuh-authd when registering and removing agents. |
 +----------------------+---------------+--------------------------------------------------------------------+
 
 drop_privileges
