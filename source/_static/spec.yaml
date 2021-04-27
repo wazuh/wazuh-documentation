@@ -1,20 +1,19 @@
 openapi: 3.0.0
 servers:
-- url: https://api.cloud.wazuh.com/v1
-  description: Wazuh Cloud API
+  - url: https://api.cloud.wazuh.com/v1
+    description: Wazuh Cloud API
 info:
   title: Wazuh Cloud API
-  description: "Manage your Wazuh Cloud account"
+  description: "Manage your Wazuh Cloud account."
   version: "1"
 paths:
   /storage/token:
     post:
       tags:
-      - storage
+        - storage
       summary: "Generate a token to access the cold storage."
       description: |
-        Wazuh Cloud cold storage is located in AWS S3. This endpoint returns a temporary AWS token
-        to be used in AWS S3 API (s3:ListBucket and s3:GetObject actions).
+        Generate an AWS token that grants permission (s3:ListBucket and s3:GetObject actions) on the AWS S3 bucket of your environment.
       security:
         - ApiKeyAuth: []
 
@@ -24,20 +23,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RequestToken"
-
-      x-amazon-apigateway-integration:
-        credentials: arn:aws:iam::#{AWS::AccountId}:role/cloud-dev-lambda-api # TODO change role name
-        uri:
-          Fn::Join:
-            - ""
-            - - "arn:aws:apigateway:"
-              - Ref: AWS::Region
-              - :lambda:path/2015-03-31/functions/
-              - Fn::GetAtt: ["AppLambdaFunction", "Arn"]
-              - /invocations
-        passthroughBehavior: when_no_match
-        httpMethod: POST
-        type: aws_proxy
 
       responses:
         "200":
@@ -98,7 +83,7 @@ components:
           format: int32
         environment_id:
           type: string
-          example: 13245356356
+          example: "13245356356"
       additionalProperties: false
 
     token:
@@ -115,7 +100,7 @@ components:
               type: string
               pattern: \S+
               maxLength: 115
-            secret_acces_key:
+            secret_access_key:
               type: string
               pattern: \S+
               maxLength: 115
@@ -133,19 +118,20 @@ components:
       example:
         environment_id: "0123456789ab"
         credentials:
-          access_key_id: "mUdT2dBjlHd...Gh7NniyZKR5If"
-          secret_acces_key: "qEzCk63a224...5aB+e4fCDBR0G"
-          session_token: "MRgpt7HIuoA...4o4BXSAcPfUD8"
+          access_key_id: "mUdT2dBjlHd...Gh7Ni1yZKR5If"
+          secret_access_key: "qEzCk63a224...5aB+e4fC1BR0G"
+          session_token: "MRg3t7HIuoA...4o4BXSAcPfUD8"
           expires_in: 3600
 
     responsesGenericHttpError:
       type: object
+      additionalProperties: false
       properties:
         message:
           type: string
-          pattern: .*
-          maxLength: 4096
-      additionalProperties: false
-      required:
-        - http-status
-        - reason
+          example: "Resource error."
+          description: A human readable brief message about the type of error
+        code:
+          type: number
+          example: 400
+          description: HTTP status code of the response
