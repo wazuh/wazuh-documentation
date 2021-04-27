@@ -11,7 +11,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
   This VM only runs on 64-bit systems and is not recommended for use in production environments. It is a useful tool for proof-of-concepts and labs. Multi-tier servers and multi-node clusters are generally more suitable for production environments where higher performance is required.
 
-This virtual appliance, available `here <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
+This virtual appliance, available `in this link <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|_|OPEN_DISTRO_LATEST|.ova>`_, contains the following components:
 
     - CentOS 7
     - Wazuh manager: |WAZUH_LATEST_OVA|
