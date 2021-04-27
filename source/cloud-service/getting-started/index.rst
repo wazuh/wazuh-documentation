@@ -8,7 +8,7 @@ Getting started
 .. meta::
   :description: Learn how to get started with Wazuh Cloud Service
 
-Using Wazuh Cloud Service is the easier and faster way to take advantage of all the power that Wazuh offers. Prevent, detect and respond to attacks in real-time, now. 
+Using Wazuh Cloud is the easiest way to take advantage of all the power that Wazuh offers. 
 
 An environment contains all the Wazuh components ready to use in one place. Installing the Wazuh manager and the Elastic Stack, making decisions about scalability and high availability, or updating each component is no longer needed. Just connect your endpoints to the environment and we will set the rest up for you.
 

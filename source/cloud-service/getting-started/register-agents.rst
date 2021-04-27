@@ -8,7 +8,9 @@ Register agents
 .. meta::
   :description: Learn about how to register agents. 
 
-To start using Wazuh, you need to install a Wazuh agent in your endpoint and register it in your environment. Just follow the next steps:
+To start using Wazuh, you need to install a Wazuh agent in your endpoint and register it in your environment. 
+
+To register an agent, follow the next steps:
 
 1. :ref:`Log into your Wazuh WUI<cloud_getting_started_wui_access>`.
 

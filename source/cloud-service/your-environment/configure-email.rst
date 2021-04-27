@@ -12,7 +12,7 @@ Wazuh can be :ref:`configured to send email alerts <manual_email_report>` to one
 
 This configuration requires an SMTP. You can use your own SMTP or the Wazuh Cloud SMTP.
 
-.. note:
+.. note::
 
   In case your SMTP requires authentication, please open a ticket to configure it.
 

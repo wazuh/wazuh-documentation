@@ -25,9 +25,9 @@ Both files are delivered to cold storage as soon they are rotated and compressed
 
 There is no limit on the amount of data stored in the cold storage, but the time limit is one year. After that year, the data is removed.
 
-  .. note::
-  
-    Files with ``.log`` extension are never sent to cold storage.
+.. note::
+
+  Files with ``.log`` extension are never sent to cold storage.
 
 Wazuh configuration
 -------------------

@@ -16,7 +16,7 @@ Sign up
 To sign up, all you need is an email address:
 
 1. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
-2. Enter your email address and password, or sign up with a Google account. Make sure you’ve read through our terms of service.
+2. Enter your email address and password, or sign up with a Google account.
 
 You are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 

@@ -9,9 +9,7 @@ Cold storage
 ======================
 
 The information in this section covers:
-
-.. topic:: Contents
-	   
+   
    .. toctree::
       :maxdepth: 1
 

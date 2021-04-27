@@ -18,4 +18,4 @@ To see your billing history:
 
 .. note::
   
-  Details about the next billing of the current environments are described in Accounts > Summary > Current billing cycle.
+  Details about the next billing of the current environments are described in the `Accounts > Summary > Current billing cycle` page.

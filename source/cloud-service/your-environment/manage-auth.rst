@@ -42,7 +42,7 @@ As an example, follow the next step to create an internal user with read access:
 
    - **Tenant permissions:** ``global_tenant`` select "Read only" option.
 
-6. Now, assign (map) the role to the appropriate user. Go to the **Security** > **Roles** page. Select the role and click on **Mapped users**, then **Manage mapping**.
+6. Now, map the role to the appropriate user. Go to the **Security** > **Roles** page. Select the role and click on **Mapped users**, then **Manage mapping**.
 
 7. Add the user you created on the previous steps and click on **Map** to confirm the action.
 
@@ -59,8 +59,6 @@ As an example, follow the next step to create an internal user with read access:
    - Add a new rule with the **User field** ``role`` and set **Value** to the name you assigned to Kibana's role from previous steps.
 
 Now, your new user is able to access the Wazuh WUI as read-only user. To add more read-only users, you can skip the role creation part and map it to the already existing read-only role.
-
-Additionally, to achieve granular access, it is possible to define specific roles and policies. Then, add users to the new roles to grant specific permissions. Use :ref:`RBAC documentation<api_rbac>` for this purpose.
 
 Integrating with external user management systems
 -------------------------------------------------

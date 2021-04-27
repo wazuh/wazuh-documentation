@@ -11,7 +11,7 @@ Getting started FAQ
 While starting with Cloud Service some questions may arise. This list answers some of the most frequent questions about getting Wazuh Cloud Service ready for the first time.
 
 
-- `What is Wazuh Cloud Service?`_
+- `What is Wazuh Cloud?`_
 
 - `Can I try it for free?`_
 
@@ -23,7 +23,7 @@ While starting with Cloud Service some questions may arise. This list answers so
 
 - `How can I get help?`_
 
-- `Where is Wazuh Cloud Service hosted?`_
+- `Where is Wazuh Cloud hosted?`_
 
 - `What is a tier?`_
 
@@ -33,10 +33,10 @@ While starting with Cloud Service some questions may arise. This list answers so
 
 - `What if I have more questions?`_
   
-What is Wazuh Cloud Service?
-----------------------------
+What is Wazuh Cloud?
+--------------------
 
-Wazuh Cloud Service hosts and manages all the Wazuh components in one platform. Just connect your endpoints to the cloud environment and we will set the rest up for you. Wazuh is a solution for Security Information and Event Management (SIEM) and Endpoint Detection and Response (EDR).
+Wazuh Cloud hosts and manages all the Wazuh components in one platform. Just connect your endpoints to the cloud environment and we will set the rest up for you. Wazuh is a solution for Security Information and Event Management (SIEM) and Endpoint Detection and Response (EDR).
 
 Can I try it for free?
 ----------------------
@@ -67,10 +67,10 @@ How can I get help?
 
 Contact us anytime through the **Help** section on your Wazuh Cloud Console.
 
-Where is Wazuh Cloud Service hosted?
-------------------------------------
+Where is Wazuh Cloud hosted?
+----------------------------
 
-We host our Wazuh Cloud on Amazon Web Services (AWS). New regions get added all the time.
+Wazuh Cloud is hosted on Amazon Web Services (AWS).
 
 What is a tier?
 ---------------
@@ -81,16 +81,14 @@ See :ref:`tier <cloud_glossary_tier>`.
 What will happen when I use my full tier?
 -----------------------------------------
 
-When the tier is reached, the oldest events disappear from your index. Events removed from your index are still available in cold storage. 
-
-As an example: A user with a 100GB tier that is generating 10GB of alerts per day, will be able to search and visualize the alerts of the last 10 days in the Wazuh WUI (10GB/day x 10 days = 100GB). When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data on the WUI) but will remain accessible from the cold storage.
+When the tier is reached, the oldest events disappear from your index. Events removed from your index are still available in cold storage. Learn more about :ref:`cold storage <cloud_your_environment_accessing_cold_storage>`.
 
 Can I cancel at any time?
 -------------------------
 
-Sure. You can cancel at any time with no penalty. You will be able to keep using our service until the end of the current period and won't be charged afterward.
+Yes, you can cancel at any time with no penalty. You will be able to keep using your environment until the end of the current period and won't be charged afterward.
 
 What if I have more questions?
 ------------------------------
 
-We would be happy to answer them. Do you have questions regarding the service? Fill the form `here <https://wazuh.com/cloud/>`_. Already using or testing our service? Address us through the **Help** section on your Wazuh Cloud Console.
+Fill `this form <https://wazuh.com/cloud/>`_ or address us through the **Help** section on the Wazuh Cloud Console.

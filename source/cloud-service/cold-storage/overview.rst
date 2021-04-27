@@ -12,9 +12,9 @@ Wazuh ingests the events sent by the agents and indexes them in order to make th
 
 As an example:
 
-- An environment with a 100GB tier has 5 agents connected.
-- Each agent generates 1GB per day.
-- Wazuh will ingest 5GB per day (5 agents x 1GB/day = 5GB)
+- An environment with a tier of 100GB has 50 agents connected.
+- Each agent generates 100MB per day.
+- Wazuh will ingest 5GB per day (50 agents x 100MB/day = 5000MB = 5GB)
 - Assuming that 20% of the events will generate an alert, Wazuh will index 1GB per day (20% 5GB = 1GB).
-- In this case, the hot storage will contain 100 days (100GB / 1GB/day = 100 days)
+- In this case, the hot storage will contain 100 days (100GB / 1GB/day = 100 days).
 - When those 100GB of data are exceeded, the oldest data is rotated (keeping 100GB of total data in the hot storage), but will remain accessible as cold storage.

@@ -10,8 +10,6 @@ Billing FAQ
 
 This list provides answers for some of the most Frequently Asked Questions regarding Wazuh Cloud billing.
 
-- `Can I estimate how much will Wazuh Cloud cost?`_
-
 - `When is my credit card charged?`_
 
 - `Is my credit card information safe?`_
@@ -26,12 +24,9 @@ This list provides answers for some of the most Frequently Asked Questions regar
 
 - `Who can I contact for more information?`_
 
+- `Can I get a refund?`_
 
-  
-Can I estimate how much will Wazuh Cloud cost?
-------------------------------------------------------
-
-Yes, since you will be charged monthly per environment, you just need to review your current environments to estimate how much Wazuh Cloud will cost.
+- `What is included in my Wazuh Cloud environment?`_
 
 When is my credit card charged?
 -------------------------------
@@ -67,17 +62,15 @@ Credit or debit card payment is supported. Find supported cards from our certifi
 Who can I contact for more information?
 ---------------------------------------
 
-For general purpose inquiries, you can fill the form `here <https://wazuh.com/cloud/>`_.
-
-For info related to your environments, address us in the **Help** section of your Wazuh Cloud Console.
+Address us in the **Help** section of the Wazuh Cloud Console.
 
 Can I get a refund?
 -------------------
 
 Charges are non-refundable, but if you want to cease using an environment you can :ref:`cancel your environment <cloud_your_environment_cancel_environment>` anytime and we will not charge you beyond the current billing period. For any special considerations regarding a refund, contact us through the **Help** section.
 
-What is included in my paid Wazuh Cloud Service environment?
-------------------------------------------------------------
+What is included in my Wazuh Cloud environment?
+-----------------------------------------------
 
-A full set-up Wazuh cluster according to your tier and a standard or premium support service.
+A full set-up of Wazuh according to your tier and a standard or premium support service.
 
