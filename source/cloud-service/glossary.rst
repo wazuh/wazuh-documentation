@@ -82,5 +82,3 @@ A RESTful API to interact with Wazuh Cloud. E.g. it can be used to access an env
 ^^^^^^^^
 
 The tier is the size limitation, in bytes, of the hot storage. When the tier is reached, the oldest events disappear from your index. Events removed from your index are still available in cold storage. This `estimation tool <https://wazuh.com/cloud/#pricing>`_ may help you to select your tier.
-
-.. _cloud_glossary_wui:
