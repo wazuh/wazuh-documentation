@@ -185,7 +185,7 @@ Choose the cluster mode between single-node or multi-node:
         # curl -so ~/elastic-stack-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/unattended-installation/distributed/elastic-stack-installation.sh 
 
 
-    - In order to install the subsequent nodes, run the script with the option ``-e`` and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``:
+    - In order to install the subsequent nodes, run the script with the options ``-e`` and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_x``:
 
       .. code-block:: console
 
