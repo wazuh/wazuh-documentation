@@ -168,7 +168,7 @@ Choose the cluster mode between single-node or multi-node:
         - name: filebeat-X
           dn: CN=filebeat-x,OU=Docu,O=Wazuh,L=California,C=US                
 
-    - To install Elasticsearch, run the script with the option ``-e``, ``-c``, and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``:
+    - To install Elasticsearch, run the script with the options ``-e``, ``-c``, and ``-n <node_name>``. The name of the node must be the same used in ``config.yml`` for the certificate creation, e.g. ``master_node_1``:
 
       .. code-block:: console
 
