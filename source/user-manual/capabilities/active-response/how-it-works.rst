@@ -69,7 +69,7 @@ The active response log can be viewed at ``/var/ossec/logs/active-responses.log`
 Default Active response scripts
 -------------------------------
 
-Wazuh is pre-configured with the following scripts for Linux:
+Wazuh is preconfigured with the following scripts for Linux, located at ``/var/ossec/active-response/bin``. Click each script name to see its source code.
 
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | Script name                                                                                                                           |                          Description                          |
