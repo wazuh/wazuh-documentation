@@ -235,7 +235,7 @@ Wazuh Manager
 
   Configures the :ref:`email_from<reference_ossec_global>` section from ``ossec.conf``.
 
-  *Default ossecm@example.wazuh.com*
+  *Default wazuh@example.wazuh.com*
 
 
 **wazuh_manager_email_maxperhour**
