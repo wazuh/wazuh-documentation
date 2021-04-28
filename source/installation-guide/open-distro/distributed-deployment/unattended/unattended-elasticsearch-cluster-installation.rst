@@ -216,7 +216,7 @@ In case Kibana is installed on a different server, the ``certs.tar`` file should
 Installing Kibana
 -----------------
 
-#. Download the script. Skip this step if you have Kibana installed on the same server as Open Distro for Elasticsearch:
+#. Download the script. Skip this step if you are installing Kibana on the same server as Open Distro for Elasticsearch:
 
     .. code-block:: console
 
