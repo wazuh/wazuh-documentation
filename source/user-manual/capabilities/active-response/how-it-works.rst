@@ -28,10 +28,8 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 
 	In order to configure an active response, a **command** must be defined that will initiate a certain script in response to a trigger.
 
-	To configure the active response, define the name of a command using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script.
-
-	Custom scripts that have the ability to receive parameters from the command line may also be used for an **active response**.
-
+	To configure the active response, define the name of a command using the pattern below and then reference the script to be initiated. 
+	
 	Example::
 
 		<command>
