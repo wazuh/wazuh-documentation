@@ -1114,6 +1114,7 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',
   '/getting-started/components/index.html',

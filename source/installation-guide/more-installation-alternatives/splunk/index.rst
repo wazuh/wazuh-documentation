@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
   :description: Wazuh can be integrated with Splunk Enterprise to visualize alerts using our app. Learn more about how to install it.
