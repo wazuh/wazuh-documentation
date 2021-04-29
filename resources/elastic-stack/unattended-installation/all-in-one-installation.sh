@@ -291,7 +291,6 @@ installElasticsearch() {
             echo -ne $char
             sleep 10
         done
-        echo ${kpassword}
         echo "Done"
     fi
 
