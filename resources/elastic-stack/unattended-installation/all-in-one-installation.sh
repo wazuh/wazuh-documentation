@@ -169,7 +169,7 @@ addWazuhrepo() {
     if [ $sys_type == "yum" ]
     then
         eval "rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH $debug"
-        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
+        eval "echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-dev.wazuh.com/pre-release/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo $debug"
     elif [ $sys_type == "zypper" ]
     then
         rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH > /dev/null 2>&1
@@ -179,14 +179,14 @@ addWazuhrepo() {
 		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
 		enabled=1
 		name=Wazuh repository
-		baseurl=https://packages.wazuh.com/4.x/yum/
+		baseurl=https://packages-dev.wazuh.com/pre-release/yum/
 		protect=1
 		EOF
 
     elif [ $sys_type == "apt-get" ]
     then
         eval "curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH --max-time 300 | apt-key add - $debug"
-        eval "echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
+        eval "echo "deb https://packages-dev.wazuh.com/pre-release/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list $debug"
         eval "apt-get update -q $debug"
     fi
 
@@ -284,11 +284,14 @@ installElasticsearch() {
         echo $'\nGenerating passwords...'
         passwords=$(/usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto -b)
         password=$(echo $passwords | awk 'NF{print $NF; exit}')
+        rm="kibana_system = "
+        kpassword=$(echo $passwords | grep -oP  "kibana_system = [^ ]*")
+        kpassword="${kpassword//$rm}"
         until $(curl -XGET https://localhost:9200/ -elastic:"$password" -k --max-time 120 --silent --output /dev/null); do
             echo -ne $char
             sleep 10
         done
-
+        echo ${kpassword}
         echo "Done"
     fi
 
@@ -350,11 +353,11 @@ installKibana() {
         echo "Error: Kibana installation failed"
         exit 1;
     else
-        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
+        eval "curl -so /etc/kibana/kibana.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/3685_update_elasticsearch_version/resources/elastic-stack/kibana/7.x/kibana_all_in_one.yml --max-time 300 $debug"
         eval "mkdir /usr/share/kibana/data ${debug}"
         eval "chown -R kibana:kibana /usr/share/kibana/ ${debug}"
         eval "cd /usr/share/kibana ${debug}"
-        eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip ${debug}"
+       eval "sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages-dev.wazuh.com/pre-release/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip ${debug}"
         if [  "$?" != 0  ]; then
             echo "Error: Wazuh Kibana plugin could not be installed."
             exit 1;
@@ -367,7 +370,7 @@ installKibana() {
         eval "chmod -R 500 /etc/kibana/certs"
         eval "chmod 440 /etc/kibana/certs/ca/ca.* /etc/kibana/certs/kibana.*"
         eval "setcap 'cap_net_bind_service=+ep' /usr/share/kibana/node/bin/node $debug"
-        conf="$(awk '{sub("<elasticsearch_password>", "'"${password}"'")}1' /etc/kibana/kibana.yml)"
+        conf="$(awk '{sub("<kibana_system_password>", "'"${kpassword}"'")}1' /etc/kibana/kibana.yml)"
         echo "$conf" > /etc/kibana/kibana.yml
 
         # Start Kibana
