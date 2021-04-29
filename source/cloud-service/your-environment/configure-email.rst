@@ -27,3 +27,4 @@ The Wazuh Cloud SMTP is limited to 100 emails per hour (regardless of **<email_m
      ...
    </global>
 
+When using the Wazuh Cloud SMTP, the ``email_from`` must be `no-reply@wazuh.com`.

@@ -85,7 +85,7 @@ See our guide to :ref:`connecting agents without Internet access<cloud_your_envi
 Can I send syslog data directly to the environment?
 ---------------------------------------------------
 
-No, it is not possible due to security reasons as that information is plain data. However, you have several options explained on the :ref:`Forward syslog events to Wazuh <cloud_your_environment_send_syslog>` section.
+No, all the communications will be performed through Wazuh agents. Check out our guide about :ref:`how to forward syslog events to Wazuh Cloud <cloud_your_environment_send_syslog>`.
 
 Can I send data directly to the Elasticsearch of my environment?
 ----------------------------------------------------------------------

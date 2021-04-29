@@ -32,6 +32,6 @@ There is no limit on the amount of data stored in the cold storage, but the time
 Wazuh configuration
 -------------------
 
-Data corresponding to Wazuh configuration such us ``/var/ossec/etc`` or ``/var/ossec/api/configuration`` is compressed and backed up once a day.
+Data corresponding to Wazuh configuration such as ``/var/ossec/etc`` or ``/var/ossec/api/configuration`` is compressed and backed up once a day.
 
 Configuration backup is stored in cold storage for up to 30 days, after which it is deleted.
