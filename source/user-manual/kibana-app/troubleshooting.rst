@@ -168,7 +168,7 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
 Wazuh Kibana plugin page goes blank
 -----------------------------------
 
-Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. The is due to some issues with the cache memory of the browser.
+Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. This is due to some issues with the cache memory of the browser.
 
 .. thumbnail:: ../../images/kibana-app/troubleshooting/page_goes_blank.png
     :title: Page goes blank
