@@ -34,12 +34,19 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* Pages added in 4.3 */
+
+newUrls['4.3'] = [
+  '/github/index.html',
+  '/github/monitoring-github-activity.html',
+  '/user-manual/reference/ossec-conf/github-module.html',
+];
+
 /* *** RELEASE 4.2 ****/
 
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
-  '/github/index.html',
   '/user-manual/capabilities/active-response/custom-active-response.html',
   '/user-manual/reference/daemons/wazuh-agentd.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
