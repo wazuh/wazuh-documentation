@@ -4,9 +4,9 @@
 
   .. group-tab:: Chromium browser
 
-    #. Open the web browser and press F12 to access the **DevTools” pane.
+    #. Open the web browser and press F12 to access the **DevTools** pane.
 
-    #. Click the **Network** tab and then check the ``Disable cache`` option.
+    #. Click the **Network** tab and then check the **Disable cache** option.
 
       .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_chromium.png
         :title: Disable cache Chromium
@@ -15,9 +15,9 @@
 
   .. group-tab:: Firefox browser
 
-    #. Open your browser and press F12 to access the **DevTools” pane.
+    #. Open your browser and press F12 to access the **DevTools**  pane.
 
-    #. Click the **Network** tab and then check the ``Disable cache`` option.
+    #. Click the **Network** tab and then check the **Disable cache** option.
 
       .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_firefox.png
         :title: Disable cache Firefox
@@ -26,19 +26,19 @@
 
   .. group-tab:: Safari browser
 
-    #. Enable the **develop** tools: 
+    #. To enable the **Develop** tools, follow these steps: 
       
-      #. Select the ``Safari`` menu, then choose ``Preferences``.
+      #. Go to the Safari settings gear icon and click **Preferences**.
     
-      #. Select the ``Advanced`` tab and check the ``Show Develop menu in menu bar`` option.
+      #. Click the **Advanced** tab to open the pane and check the **Show Develop menu in menu bar** option.
 
-      #. Close the Preferences window.
+      #. Close the **Preferences** window.
 
-      #. If you don’t have the Menu Bar enabled, select the settings gear, then choose ``Show Menu Bar``.
+      #. Check if the browser’s menu bar is enabled. If not, go to the Safari settings gear icon and click **Show Menu Bar**.
 
-    #. Open the **web inspector**: open the ``Develop`` menu, then choose ``Show Web Inspector``.
+    #. Click the **Develop** tab on the menu bar and click **Show Web Inspector** to open the web inspector pane.
 
-    #. Go to the **network** tab: check the ``Ignore cache when loading resources`` option.
+    #. Click the **Network** tab and then check the **Ignore cache when loading resources** option.
 
       .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_safari.png
         :title: Disable cache Safari
@@ -46,6 +46,6 @@
         :width: 100%
 
 
-After following these steps, refresh the page. Now you can close the ``browser DevTools``.
+After following these steps, refresh the page and close the browser.
 
 .. End of include file
