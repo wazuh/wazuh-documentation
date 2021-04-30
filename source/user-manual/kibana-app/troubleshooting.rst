@@ -178,11 +178,21 @@ Sometimes, after an upgrade, the Wazuh Kibana plugin page goes blank. This is du
 
 To fix this you need to:
 
-1. **Open the browser DevTools:** Right-click on any element of the page and select Inspect.
+  .. include:: ../../_templates/common/clear_cache.rst
 
-2. **Go to the application tab:** On the left you should see a section called ``Clear storage``  and click on ``Clear site data``.
+"Conflict with the Wazuh app version" error is displayed
+--------------------------------------------------------
 
-After following these two steps, refresh the page.
+Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. This is due to some issues with the cache memory of the browser.
+
+.. thumbnail:: ../../images/kibana-app/troubleshooting/conflict_wazuh_app_version.png
+    :title: Conflict wazuh app version
+    :align: left
+    :width: 100%
+
+To fix this you need to:
+
+  .. include:: ../../_templates/common/clear_cache.rst
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
