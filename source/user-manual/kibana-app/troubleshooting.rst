@@ -183,7 +183,7 @@ To fix this you need to:
 "Conflict with the Wazuh app version" error is displayed
 --------------------------------------------------------
 
-Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. The is due to some issues with the cache memory of the browser.
+Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with the Wazuh app version" error. This is due to some issues with the cache memory of the browser.
 
 .. thumbnail:: ../../images/kibana-app/troubleshooting/conflict_wazuh_app_version.png
     :title: Conflict wazuh app version
