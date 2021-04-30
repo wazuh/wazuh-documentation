@@ -6,7 +6,6 @@
 
     #. Open the web browser and press F12 to access the **DevTools” pane.
 
-
     #. Click the **Network** tab and then check the ``Disable cache`` option.
 
       .. thumbnail:: ../../images/kibana-app/troubleshooting/disable_cache_chromium.png
@@ -17,7 +16,6 @@
   .. group-tab:: Firefox browser
 
     #. Open your browser and press F12 to access the **DevTools” pane.
-
 
     #. Click the **Network** tab and then check the ``Disable cache`` option.
 
