@@ -69,7 +69,6 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
     :class: output
 
     2016 Jan 29 12:58:02 manager->rootcheck Ending rootcheck scan.
-    2016 Jan 29 13:07:18 manager->wazuh-monitord ossec: Ossec started.
     2016 Jan 29 13:08:34 manager->rootcheck Starting rootcheck scan.
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 3 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 4 .

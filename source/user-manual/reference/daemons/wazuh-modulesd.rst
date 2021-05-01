@@ -58,6 +58,11 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The task manager module creates, updates and manages all the tasks performed on the agents.
 
+.. topic:: Monitor module
+
+  The monitor module, looks at agent connectivity, In addition, it rotates and compresses iternal logs daily or when they reach a certain configurable size.
+  As well, within this module works the ability to send daily and automatic reports, based on specific alerts captured or more general alerts.
+
 wazuh-modulesd options
 ----------------------
 

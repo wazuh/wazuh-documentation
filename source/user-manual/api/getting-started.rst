@@ -760,7 +760,6 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
             "wazuh-authd": "running",
             "wazuh-csyslogd": "running",
             "wazuh-dbd": "stopped",
-            "wazuh-monitord": "running",
             "wazuh-execd": "running",
             "wazuh-integratord": "running",
             "wazuh-logcollector": "running",

@@ -26,8 +26,6 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-maild <wazuh-maild>`                  | Sends Wazuh alerts via email                                    | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`wazuh-monitord <wazuh-monitord>`            | Monitors agent connectivity and compresses log files            | manager                     |
-+---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-remoted <wazuh-remoted>`              | Communicates with agents                                        | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-reportd <wazuh-reportd>`              | Creates reports from Wazuh alerts                               | manager                     |
@@ -57,7 +55,6 @@ Daemons
     wazuh-execd
     wazuh-logcollector
     wazuh-maild
-    wazuh-monitord
     wazuh-remoted
     wazuh-reportd
     wazuh-syscheckd

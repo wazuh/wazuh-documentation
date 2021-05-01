@@ -34,6 +34,13 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 5.0 ****/
+
+/* Pages added in 5.0*/
+removedUrls['4.2'] = [
+  '/user-manual/reference/daemons/wazuh-monitord.html',
+];
+
 /* *** RELEASE 4.2 ****/
 
 /* Pages added in 4.2 */
