@@ -11,6 +11,8 @@ Monitor usage
 To see your environment usage:
 
 1. Log in to the Wazuh Cloud Console.
-2. Go to Environments and select your environment.
-3. Click on Metrics.
+2. Go to **Environments** and select your environment.
+3. Click on **Metrics**.
+   
+  Metrics and environment usage data are displayed on the Metrics tab.
 
