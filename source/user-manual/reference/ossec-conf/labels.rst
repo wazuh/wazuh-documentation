@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about Wazuh local configuration and the labels section. Find out more about them and see a configuration example.
+
 .. _reference_ossec_labels:
 
 labels
