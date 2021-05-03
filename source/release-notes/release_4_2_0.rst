@@ -40,7 +40,7 @@ Wazuh new fixes provide stability to several features of the solution, including
 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Endpoint for ``allow_run_as`` parameter configuration:
   
-The ``allow_run_as`` parameter to create and update API users is now removed from endpoints. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter when creating a user.
+The ``allow_run_as`` parameter is now removed from endpoints to create and update API users. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter when creating a user.
 
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ CVE data endpoint integration:
 
@@ -109,9 +109,8 @@ Wazuh now provides you with enhanced insight into the CVE that are affecting an 
 Breaking changes
 ----------------
 
-- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ The Active Response capability now sends information to the active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous scripts present in the ``active-response/bin`` directories are now deleted as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5.
-
-
+- `#7317 <https://github.com/wazuh/wazuh/pull/7317>`_ The Active Response capability now sends information to the active response executables via ``stdin`` instead of in-line arguments. Any custom active response script developed for previous versions of Wazuh needs to be adapted to accept the event information. Previous default scripts present in the ``active-response/bin`` directories are now replaced as part of the agent upgrade process. The Wazuh manager continues to send in-line arguments to Wazuh agents up to version 4.1.5. New rules are included to match the new active response logs.
+ 
 Wazuh core
 ----------
 
@@ -165,7 +164,7 @@ This release includes new features or enhancements.
 - `#7909 <https://github.com/wazuh/wazuh/pull/7909>`_ Login security controller is improved to avoid errors in Restful API reference links. 
 - `#8123 <https://github.com/wazuh/wazuh/pull/8123>`_ The ``PUT /agents/group/{group_id}/restart`` response format is now improved when there are no agents assigned to the group.
 - `#8149 <https://github.com/wazuh/wazuh/pull/8149>`_ Agent keys used when adding agents through the Wazuh API are now obscured in the API log.
-- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter to create and update API users is now removed from endpoints.
+- `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ The ``allow_run_as`` parameter is now removed from endpoints to create and update API users.
 - `#7006 <https://github.com/wazuh/wazuh/issues/7006>`_ The ``behind_proxy_server`` option is now removed from configuration.
   
 **Framework**
