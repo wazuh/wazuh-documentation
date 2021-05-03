@@ -306,7 +306,6 @@ What's new
 
 This release includes new features or enhancements. 
 
-- `#1021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_ Issue with error toast message in search handler when the connection with forwarder fails is now fixed.
 - `#1024 <https://github.com/wazuh/wazuh-splunk/pull/1024>`_ In Discover view, the search query is changed to show the alert’s evolution.
 - `#1066 <https://github.com/wazuh/wazuh-splunk/pull/1066>`_ In the Agents window of the Groups page, a new link is added to the result table to access Agent view.
 - `#1052 <https://github.com/wazuh/wazuh-splunk/pull/1052>`_ Wazuh is now compatible with Python3. Python2 is now deprecated and removed.
@@ -331,6 +330,7 @@ Reference                                                         Description
 `#1059 <https://github.com/wazuh/wazuh-splunk/pull/1059>`_        Minor styling issue is now fixed and **Export** button on the Export Results window now works correctly when you hover over it.
 `#1063 <https://github.com/wazuh/wazuh-splunk/pull/1063>`_        New error handler message is now added to the Alerts window of the Configuration page.
 `#1069 <https://github.com/wazuh/wazuh-splunk/pull/1069>`_        Error message when adding an API fails is now fixed and its content text is shown correctly.
+`#1021 <https://github.com/wazuh/wazuh-splunk/pull/1021>`_        Issue with error toast message in search handler when the connection with forwarder fails is now fixed.
 ==============================================================    =============
 
 
