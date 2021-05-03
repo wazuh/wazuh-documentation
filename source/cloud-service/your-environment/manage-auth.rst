@@ -12,53 +12,56 @@ You can use the native support for managing and authenticating users, or integra
 
 .. note::
    
-   You cannot log in to the Wazuh WUI of your environment with your Wazuh Cloud account. Use the default credentials or any users you created in Wazuh WUI already.
+   You cannot log in to Wazuh WUI of your environment with your Wazuh Cloud account. To log in to Wazuh WUI, use the default credentials you downloaded from the Wazuh Cloud Console page or the credentials of any user you already created in Wazuh WUI.
   
 
 Native support for users and roles
 ----------------------------------
 
-In the Wazuh WUI, you can add users, create roles, and mapping roles to users.
+The cloud-delivered visualization WUI allows you to add users, create roles, and mapping roles to users.
 
-As an example, follow the next step to create an internal user with read access:
+Follow the these steps to create an internal user with read access as an example:
 
 1. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
-2. Go to the **Security** > **Internal users** page.
+2. Click the Kibaba menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
 
-3. Click **Create internal user**. Fill the form and click on **Create** to create a user.
+3. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to create a user.
 
 4. Go to the **Security** > **Roles** page.
 
-5. Click **Create role**. Fill in the form to create the role. For a simple read-only user create it with the following specifications:
+5. Click **Create role**, complete the empty fields, and then click **Create** to complete the task. 
+   
+   For a read-only user, use the following specifications to create it.
 
-   - **Name:** Fill it with the desired name.
+   - Name: Assign a name to the role.
      
-   - **Cluster permissions:** ``cluster_composite_ops_ro``
+   - Cluster permissions: ``cluster_composite_ops_ro``
 
-   - **Index:** ``*``
+   - Index: ``*``
 
-   - **Index permissions:** ``read``
+   - Index permissions: ``read``
 
-   - **Tenant permissions:** ``global_tenant`` select "Read only" option.
+   - Tenant permissions: ``global_tenant`` and select the **Read only** option.
 
-6. Now, map the role to the appropriate user. Go to the **Security** > **Roles** page. Select the role and click on **Mapped users**, then **Manage mapping**.
+6. To map the role to the appropriate user, follow these steps:
+   
+   #. Go to the **Security** > **Roles** page and click the name of the role selected to open the window.
+   #. Select the **Mapped users** tab and click **Manage mapping**.
+   #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
-7. Add the user you created on the previous steps and click on **Map** to confirm the action.
+7. To map the user with Wazuh, follow these steps:
+   
+   #. Go to the Wazuh Kibana plugin, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click on **Create role mapping** and complete the empty fields with the following parameters:
+   
+      - Role mapping name: Assign a name to the role mapping.
+      - Roles: Select ``readonly`` role.
+      - Internal users: Select the internal user created previously.
+   #. Click **Add a new rule** with the User field role and set Value to the name you assigned to the Kibana role from previous steps.
+   #. Click **Save role mapping** to save and map the user with Wazuh.
 
-8. Finally, we need to map the user with Wazuh. Go to the **Wazuh** > **Security** > **Roles mapping** page.
-
-9. Click on **Create role mapping**. Use the following parameters:
-
-   - **Name:** Fill it with the desired name.
-
-   - **Roles:** Select ``readonly`` role.
-
-   - **Internal users:** Select the internal user created previously.
-
-   - Add a new rule with the **User field** ``role`` and set **Value** to the name you assigned to Kibana's role from previous steps.
-
-Now, your new user is able to access the Wazuh WUI as read-only user. To add more read-only users, you can skip the role creation part and map it to the already existing read-only role.
+Now, your new user is able to access the Wazuh WUI as read-only user. To add more read-only users, you can skip the role creation task and map them to the already existing read-only role.
 
 Integrating with external user management systems
 -------------------------------------------------
