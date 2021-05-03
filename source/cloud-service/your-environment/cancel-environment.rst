@@ -11,12 +11,13 @@ Cancellation
 To cancel your environment:
 
   1. Log in to the Wazuh Cloud Console.
-  2. Go to Environments and select your environment.
-  3. Click on Cancel environment.
-  4. The environment will be removed at the end of the billing cycle.
+  2. Go to **Environments** and select your environment.
+  3. Click on **Cancel environment**.
+   
+  The environment is removed at the end of the billing cycle.
 
 .. warning::
 
-  The cancellation cannot be undone and all data will be completely deleted.
+  The cancellation cannot be undone and all data is completely deleted after performing this action.
 
 
