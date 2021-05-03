@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.
+
 .. Section marks used on this document:
 .. h0 ======================================
 .. h1 --------------------------------------
