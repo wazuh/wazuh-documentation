@@ -137,13 +137,13 @@ This command should have an output like this:
   {
     "name" : "elasticsearch",
     "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "g7ewMp52T3OOFkU0WFKieQ",
+    "cluster_uuid" : "ymKkb0s3QsqTQxUW_5p0Sw",
     "version" : {
       "number" : "7.10.2",
       "build_flavor" : "default",
       "build_type" : "rpm",
-      "build_hash" : "3e5a16cfec50876d20ea77b075070932c6464c7d",
-      "build_date" : "2021-03-06T05:54:38.141101Z",
+      "build_hash" : "747e1cc71def077253878a59143c1f785afa92b9",
+      "build_date" : "2021-01-13T00:42:12.435326Z",
       "build_snapshot" : false,
       "lucene_version" : "8.7.0",
       "minimum_wire_compatibility_version" : "6.8.0",
