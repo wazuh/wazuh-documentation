@@ -15,24 +15,24 @@ Highlights
 
 - `#3368 <https://github.com/wazuh/wazuh/issues/3368>`_, `#5652 <https://github.com/wazuh/wazuh/issues/5652>`_, `#7109 <https://github.com/wazuh/wazuh/pull/7109>`_  Logcollector improvements:
 
-Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
+       Logcollector is now enhanced with several new features. Wazuh adds logcollector support for bookmarks, which allows you to continue reading a log file from the last read line where the agent stopped, improving efficiency and productivity. The multi-line log support through regex lets you collect multi-line logs with a variable number of lines. Wazuh also generates a statistics file report during ``wazuh-logcollector`` lifetime. This means that, in addition to the alternative of accessing metrics via API queries, you now have the option to access this information from a file stored in an agent, according to a configurable time.
 
 - `#7731 <https://github.com/wazuh/wazuh/pull/7731>`_ Visibility improvements on agent’s CVE inventory report:
 
-Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
+      Wazuh now generates CVE inventory reports that provide you with insight into vulnerabilities that affect an agent. With this added feature, this information is now queried through the RESTful API and displayed in the user interface. This visibility improvement allows you to assess vulnerabilities affecting your monitored agents and take quick corrective action if needed.
 
 - `#7541 <https://github.com/wazuh/wazuh/pull/7541>`_ TCP and UDP ports support:
 
-Remoted now supports listening to a TCP and UDP port simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and logging, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
+      Remoted now supports listening to a TCP and UDP port simultaneously. This new support of both protocols provides several enhanced features related to manager active check, agent connection and logging, active response, API requests, JSON formatting, and more. This new supportability also provides enhancements related to centralized configuration since now agents can be configured remotely by using the ``agent.conf`` file.
 
 - `#6912 <https://github.com/wazuh/wazuh/pull/6912>`_ Wazuh unified standard improvements:
 
-The names of daemons and tools for the Wazuh product are now renamed and unified to achieve consistency and uniformity, according to the new Wazuh standards.
+      The names of daemons and tools for the Wazuh product are now renamed and unified to achieve consistency and uniformity, according to the new Wazuh standards.
 
 
 - `#7105 <https://github.com/wazuh/wazuh/pull/7105>`_, `#7018 <https://github.com/wazuh/wazuh/pull/7018>`_, `#7268 <https://github.com/wazuh/wazuh/pull/7268>`_, `#8224 <https://github.com/wazuh/wazuh/pull/8224>`_, `#7795 <https://github.com/wazuh/wazuh/pull/7795>`_ Stability enhancements on Wazuh features:
 
-Wazuh new fixes provide stability to several features of the solution, including analysisd, File integrity monitoring, Remoted, and Vulnerability detector. These changes improve user experience throughout the product.
+      Wazuh new fixes provide stability to several features of the solution, including analysisd, File integrity monitoring, Remoted, and Vulnerability detector. These changes improve user experience throughout the product.
 
 
 
@@ -40,27 +40,27 @@ Wazuh new fixes provide stability to several features of the solution, including
 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Endpoint for ``allow_run_as`` parameter configuration:
   
-The ``allow_run_as`` parameter is now removed from endpoints to create and update API users. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter when creating a user.
+      The ``allow_run_as`` parameter is now removed from endpoints to create and update API users. Now, Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter when creating a user.
 
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ CVE data endpoint integration:
 
-Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent and get enhanced insight into the CVE, giving you easy access to data such as package name, package version, package architecture, and the CVE ID that affects said package. 
+      Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent and get enhanced insight into the CVE, giving you easy access to data such as package name, package version, package architecture, and the CVE ID that affects said package. 
 
 - `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Endpoint for logcollector stats:
 
-Wazuh adds a new endpoint to get agents’ logcollector statistics from different components, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files bring this information using their own socket interface and fetch the data from a remote component.  
+      Wazuh adds a new endpoint to get agents’ logcollector statistics from different components, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files bring this information using their own socket interface and fetch the data from a remote component.  
  
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ Improved ``DELETE /agents`` endpoint:
 
-The ``DELETE/agents`` query now integrates new parameters that allow you to customize selection and to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response. 
+      The ``DELETE/agents`` query now integrates new parameters that allow you to customize selection and to easily remove agents that belong to a group. With this improvement, the ``older_than`` field is also removed from the response. 
 
 **Wazuh Kibana plugin**
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ New Ruleset Test tool:
 
-Wazuh improves user experience by adding a new **Ruleset Test** feature under the Tools section of the Wazuh plugin menu. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the **Ruleset Test** window open while you navigate through the page to edit or create a ruleset file.
+      Wazuh improves user experience by adding a new **Ruleset Test** feature under the Tools section of the Wazuh plugin menu. This feature is also included as a tool in the action bar of both the Edit Rules and Edit Decoders sections, allowing you to keep the **Ruleset Test** window open while you navigate through the page to edit or create a ruleset file.
 
-The new **Ruleset Test** tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
+      The new **Ruleset Test** tool also integrates an input box for reading sample logs and an output box that allows you to visualize the test results. With this enhancement, you can now test sample logs directly on the Wazuh user interface and see how the ruleset reacts to specific log messages.
 
 .. raw:: html
     
@@ -79,14 +79,14 @@ The new **Ruleset Test** tool also integrates an input box for reading sample lo
 
 - `#1434 <https://github.com/wazuh/wazuh-kibana-app/issues/1434>`_ Tools menu improvements:
 
-To improve user experience and access to Wazuh tools. The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh plugin menu.
+      To improve user experience and access to Wazuh tools. The **Dev Tools** feature is renamed as **API Console** and it is now found, together with the new **Ruleset Test** feature, inside the new Tool section under the Wazuh plugin menu.
 
 .. thumbnail::  ../images/release-notes/4.2.0/new-menu.png
       :align: center
 
 - `#3056 <https://github.com/wazuh/wazuh-kibana-app/pull/3056>`_ New Agent Stats section:
 
-Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking **Stats** in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
+      Wazuh adds a new Stats section that improves the visibility you have over agents’ statistics. You can access this feature by clicking **Stats** in the action ribbon on the Agent data overview page. This improvement allows you to visualize information fetched by the new API endpoint ``/agents/{agent_id}/stats/logcollector`` in the Wazuh user interface.
 
 .. thumbnail::  ../images/release-notes/4.2.0/new_stats_access.png
       :align: center
@@ -96,7 +96,7 @@ Wazuh adds a new Stats section that improves the visibility you have over agents
 
 - `#3069 <https://github.com/wazuh/wazuh-kibana-app/pull/3069>`_ Agent’s new vulnerability inventory:
 
-Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
+      Wazuh now provides you with enhanced insight into the CVE that are affecting an agent. The newly added **Inventory** tab in the Vulnerabilities module allows you to visualize information such as package name, package version, package architecture, and the CVE ID that affects the package, and more. You can also access the vulnerability data flyout to expand on the specifics of each vulnerability entry detailed in the Inventory.   
 
 .. thumbnail::  ../images/release-notes/4.2.0/vuln_inventory_detail.png
       :align: center  
