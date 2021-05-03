@@ -203,7 +203,7 @@ An example response should look as follows:
     {
       "name" : "node-1",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "tWYgqpgdRz6fGN8gH11flw",
+      "cluster_uuid" : "7QEblHhaQqWmVZXkGmrvzg",
       "version" : {
         "number" : "7.10.2",
         "build_flavor" : "oss",
@@ -217,6 +217,7 @@ An example response should look as follows:
       },
       "tagline" : "You Know, for Search"
     }
+  
 
 To verify the nodes that are connected to the cluster, replace ``<elasticsearch_ip>``  and run the following command: 
 
