@@ -106,7 +106,7 @@ Sample configuration
     <command>
       <name>custom_command</name>
       <executable>custom_script</executable>
-      <extra_args>-arg1 --arg2 arg3 ; cat /etc/passwd</extra_args>
+      <extra_args>arg1 arg2 arg3</extra_args>
       <timeout_allowed>yes</timeout_allowed>
     </command>
 
