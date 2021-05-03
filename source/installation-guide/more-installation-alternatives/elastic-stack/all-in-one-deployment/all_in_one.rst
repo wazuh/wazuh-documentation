@@ -139,7 +139,7 @@ This command should have an output like this:
     "cluster_name" : "elasticsearch",
     "cluster_uuid" : "g7ewMp52T3OOFkU0WFKieQ",
     "version" : {
-      "number" : "7.11.2",
+      "number" : "7.10.2",
       "build_flavor" : "default",
       "build_type" : "rpm",
       "build_hash" : "3e5a16cfec50876d20ea77b075070932c6464c7d",
@@ -374,7 +374,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.11.2-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.2.0_7.10.2-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 

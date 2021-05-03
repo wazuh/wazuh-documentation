@@ -488,7 +488,7 @@ custom_replacements = {
     "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
     # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.11.2",
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.10.2",
     "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.0",
     "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.8.0",
     "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.8.0",
