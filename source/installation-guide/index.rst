@@ -150,6 +150,7 @@ Check the :ref:`requirements <installation_requirements>` section for informatio
 
     quickstart
     wazuh-components/index
+    wazuh-agent/index
     packages-list
 
 
