@@ -32,7 +32,7 @@ The package for macOS is suitable for macOS Sierra or greater. The macOS agent c
 
      Using the GUI you can perform a simple installation without registering and configuring the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers.
 
-     .. thumbnail:: ../../../images/installation/macos.png
+     .. thumbnail:: ../../images/installation/macos.png
          :align: center
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.

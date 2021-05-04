@@ -20,21 +20,21 @@ Adding the Wazuh repository
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/add_repository.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
 
 
 Installing Wazuh agent
@@ -50,21 +50,21 @@ Installing Wazuh agent
         .. group-tab:: Yum
 
 
-          .. include:: ../../../_templates/installations/wazuh/yum/install_wazuh_agent.rst
+          .. include:: ../../_templates/installations/wazuh/yum/install_wazuh_agent.rst
 
 
 
         .. group-tab:: APT
 
 
-          .. include:: ../../../_templates/installations/wazuh/deb/install_wazuh_agent.rst
+          .. include:: ../../_templates/installations/wazuh/deb/install_wazuh_agent.rst
 
 
 
         .. group-tab:: ZYpp
 
 
-          .. include:: ../../../_templates/installations/wazuh/zypp/install_wazuh_agent.rst
+          .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_agent.rst
 
 
       Once the agent is installed, the next step is to register it and configure it to communicate with the manager. For more information on this process, visit the :ref:`user manual<register_agents>` section.
@@ -79,28 +79,28 @@ Installing Wazuh agent
         .. group-tab:: Yum
 
 
-          .. include:: ../../../_templates/installations/wazuh/yum/deploy_wazuh_agent.rst
+          .. include:: ../../_templates/installations/wazuh/yum/deploy_wazuh_agent.rst
 
 
 
         .. group-tab:: APT
 
 
-          .. include:: ../../../_templates/installations/wazuh/deb/deploy_wazuh_agent.rst
+          .. include:: ../../_templates/installations/wazuh/deb/deploy_wazuh_agent.rst
 
 
 
         .. group-tab:: ZYpp
 
 
-          .. include:: ../../../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
+          .. include:: ../../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
 
 
     See the following document for additional deployment options: :ref:`deployment variables <deployment_variables_apt>`.
 
 #. Enable the service
 
-  .. include:: ../../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
+  .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
 **(Optional)** Disable Wazuh updates:
 
@@ -112,20 +112,20 @@ The version of the Wazuh manager is recommended to be greater than or equal to t
       .. group-tab:: Yum
 
 
-        .. include:: ../../../_templates/installations/wazuh/yum/disabling_repository.rst
+        .. include:: ../../_templates/installations/wazuh/yum/disabling_repository.rst
 
 
 
       .. group-tab:: APT
 
 
-        .. include:: ../../../_templates/installations/wazuh/deb/disabling_repository.rst
+        .. include:: ../../_templates/installations/wazuh/deb/disabling_repository.rst
 
 
 
       .. group-tab:: ZYpp
 
-        .. include:: ../../../_templates/installations/wazuh/zypp/disabling_repository.rst
+        .. include:: ../../_templates/installations/wazuh/zypp/disabling_repository.rst
 
 
 
@@ -143,20 +143,20 @@ To uninstall the agent:
   .. group-tab:: Yum
 
 
-    .. include:: ../../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
+    .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
 
 
 
   .. group-tab:: APT
 
 
-    .. include:: ../../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
+    .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
 
 
 
   .. group-tab:: ZYpp
 
 
-    .. include:: ../../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+    .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
 
 
