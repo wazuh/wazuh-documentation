@@ -111,6 +111,12 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager, scroll down to t
         <enabled>no</enabled>
         <update_interval>1h</update_interval>
       </provider>
+      <provider name="alas">
+        <enabled>no</enabled>
+        <os>amazon-linux</os>
+        <os>amazon-linux-2</os>
+        <update_interval>1h</update_interval>
+      </provider>
       <provider name="nvd">
         <enabled>yes</enabled>
         <update_from_year>2010</update_from_year>
