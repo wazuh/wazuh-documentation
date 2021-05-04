@@ -8,13 +8,12 @@ Technical FAQ
 .. meta::
   :description: Learn about some technical FAQ. 
 
-This frequently-asked-questions list answers some of your more common questions about configuring Wazuh Cloud environments.
 
 - `How can I send data to my environment?`_
 
 - `Is it possible to change the URL to access the environment?`_
 
-- `What will happen when I use my full tier?`_
+- `What happens if the tier limit is reached?`_
 
 - `Can I move data from cold to hot storage?`_
 
@@ -23,8 +22,6 @@ This frequently-asked-questions list answers some of your more common questions 
 - `How do I get SSH access to my environment?`_
 
 - `How can I update my environment?`_
-
-- `How can I connect my agents without Internet access to my environment?`_
 
 - `Can I send syslog data directly to the environment?`_
 
@@ -45,27 +42,27 @@ This frequently-asked-questions list answers some of your more common questions 
 How can I send data to my environment?
 --------------------------------------
 
-All the communications will be performed through Wazuh agents once they are registered into the environment.
+All the communications are performed through Wazuh agents once they are registered into the environment.
   
 Is it possible to change the URL to access the environment?
 -----------------------------------------------------------
 
-It is possible to get a new URL by opening a support ticket, but the previous URL will be kept too.
+It is possible to get a new URL by opening a support ticket through the **Help** section on the Wazuh Cloud Console, but the previous URL is also kept.
 
-What will happen when I use my full tier?
------------------------------------------
+What happens if the tier limit is reached?
+------------------------------------------
 
-When the tier is reached, the oldest events disappear from your index. Events removed from your index are still available in cold storage.
+When the tier limit is reached, the oldest events are removed from your index and placed in cold storage for you to access them. To learn more about data logging and storage, see the :ref:`cold storage <cloud_your_environment_accessing_cold_storage>` section.
 
 Can I move data from cold to hot storage?
 -----------------------------------------
 
-It is possible to download the data from the cold storage and re-index it into your local environments but, at this moment, it is not possible to re-index it in your cloud environment.
+It is possible to download the data from the cold storage and reindex it into your local environments but, at this moment, it is not possible to reindex it in your cloud environment.
 
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-You can upgrade or downgrade the tier by contacting our team on the **Help** section of your Wazuh Cloud Console.
+You can upgrade or downgrade the tier by contacting the Wazuh team on the **Help** section of your Wazuh Cloud Console.
 
 How do I get SSH access to my environment?
 ------------------------------------------
@@ -75,55 +72,50 @@ SSH access is not allowed for security reasons. Environments are managed from th
 How can I update my environment?
 --------------------------------
 
-We take care of the updates so your environment will get the latest version of Wazuh with no downtime.
-
-How can I connect my agents without Internet access to my environment?
-----------------------------------------------------------------------
-
-See our guide to :ref:`connecting agents without Internet access<cloud_your_environment_agents_without_internet>`.
-  
+Wazuh takes care of the updates so your environment gets the latest version of Wazuh with no downtime.
+ 
 Can I send syslog data directly to the environment?
 ---------------------------------------------------
 
-No, it is not possible due to security reasons as that information is plain data. However, you have several options explained on the :ref:`Forward syslog events to Wazuh <cloud_your_environment_send_syslog>` section.
+No, it is not possible due to security reasons as that information is plain data. However, you have several alternative options. For more information on how to forward syslog events to your environment, see the :ref:`Forward syslog events <cloud_your_environment_send_syslog>` section.
 
 Can I send data directly to the Elasticsearch of my environment?
 ----------------------------------------------------------------------
 
-No, all the communications will be performed through Wazuh agents.
+No, all the communications are performed through Wazuh agents.
 
 Can I integrate with my Single Sign-On (SSO) method (LDAP, Okta, Active Directories)?
 ----------------------------------------------------------------------------------------
 
-Yes, you can access the Wazuh WUI of your environment through your SSO tool. Address us through the **Help** section and we will take care of it.
+Yes, you can access the Wazuh WUI of your environment through your SSO tool. To perform this action, you need to contact the Wazuh team through the **Help** section of your Wazuh Cloud Console.
 
 
 Do I have access to Wazuh API?
 ------------------------------
 
-You have access to the Dev tools through your Wazuh WUI where you can use the API. Wazuh API is not exposed, but you may contact us through the **Help** section to allow Wazuh API access from a specific IP address.
+You have access to the **Dev tools** through your Wazuh WUI where you can use the API. Wazuh API is not exposed, but you can contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to allow Wazuh API access from a specific IP address.
 
 
 Do I have access to Elasticsearch API?
 --------------------------------------
 
-Elasticsearch API is not accessible by default. In case you want to access it, address us through the **Help** section and we will authorize the connection from a specific IP address. Then you will have access to ``GET`` methods of the Elasticsearch API.
+Elasticsearch API is not accessible by default. If you want to access it, contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to authorize the connection from a specific IP address. After authorization is granted, you have access to ``GET`` methods of the Elasticsearch API.
 
 
 How can I forward my logs to another solution or SOC?
 -----------------------------------------------------
 
-You can download your data from cold storage. Then, you will be able to push it to other solutions or Security Operations Center (SOC).
+You can download your data from cold storage. Then, you can push it to other solutions or Security Operations Center (SOC).
 
 Is my environment shared with other customers?
 ----------------------------------------------
 
-No, your environment is isolated from other customers. That means you are the only customer using the Wazuh components of your environment.
+No, your environment is isolated from other customers. That means that your account is the only one with access to the Wazuh components of the environment.
 
 What are the available regions?
 -------------------------------
 
-Available regions are:
+Available regions:
 
 * North Virginia: ``us-east-1``
   
@@ -134,3 +126,5 @@ Available regions are:
 * Frankfurt: ``eu-central-1``
 
 * Singapore: ``ap-southeast-1``
+
+When selecting a region to host your environment, if you are not sure what is the best option, select one that is the closest to your location since this typically reduces latency for indexing and search requests.
