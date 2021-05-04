@@ -78,7 +78,8 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
    #. On the Advanced tab pane, click **Environment Variables...**.
    #. Under **System variables**, click **New...**.
    #. Enter the variable name JAVA_HOME and browse to the JRE install directory, then click **OK** to confirm the action. In the variable value, the JRE directory should be displayed. For example, ``C:\Program Files\Java\jre1.8.0_201``.
-   You might need to reopen your terminal to apply changes.
+   
+      You might need to reopen your terminal to apply changes.
 
 2. Install Logstash.
 
