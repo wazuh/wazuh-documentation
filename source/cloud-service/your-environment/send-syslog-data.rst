@@ -70,7 +70,7 @@ To perform the following steps, make sure to replace ``<file_name.log>`` with th
 Logstash on Windows
 ^^^^^^^^^^^^^^^^^^^
    
-Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment. To perform this action sucessfully, make sure Windows is fully updated and `Java JRE <https://www.java.com/en/download/windows-64bit.jsp>`_ is installed.
+Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a file, and send those logs to the environment. To perform this action sucessfully, make sure that Windows is fully updated and `Java JRE <https://www.java.com/en/download/windows-64bit.jsp>`_ is installed.
 
 1. Configure JRE.
 
