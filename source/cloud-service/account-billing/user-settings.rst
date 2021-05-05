@@ -8,7 +8,7 @@ Edit user settings
 .. meta::
   :description: Change your user settings.
 
-  You can edit your account setting preferences such as email address and password from the Wazuh Cloud Console. You can also enable multi-factor authentication to increase security, and see login method alternatives.
+You can edit your account setting preferences such as email address and password from the Wazuh Cloud Console. You can also enable multi-factor authentication to increase security, and see login method alternatives.
 
 
 Update your email address
