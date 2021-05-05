@@ -15,7 +15,7 @@ This document will go through the installation of the Wazuh manager.
 Installing the Wazuh manager
 ----------------------------
 
-The Wazuh server collects and analyzes data from the deployed Wazuh agents. The first step to set up Wazuh is adding the Wazuh's repository to the server, alternatively, all the available packages can be found :ref:`here <packages>`. 
+The Wazuh manager collects and analyzes data from the deployed Wazuh agents. The first step to set up Wazuh is adding the Wazuh's repository to the server, alternatively, all the available packages can be found :ref:`here <packages>`. 
 
 Adding the Wazuh repository
 ---------------------------
@@ -82,76 +82,18 @@ Installing the Wazuh manager
 
 .. _wazuh_server_single_node_filebeat:
 
-Installing Wazuh forwarder
---------------------------
+Configure the Wazuh forwarder
+-----------------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
-
-
-Filebeat installation and configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-#. Install the Filebeat package:
-
-    .. tabs::
-
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../../_templates/installations/elastic/yum/install_filebeat.rst
-
-
-
-      .. group-tab:: APT
-
-
-        .. include:: ../../_templates/installations/elastic/deb/install_filebeat.rst
-
-
-
-      .. group-tab:: ZYpp
-
-
-        .. include:: ../../_templates/installations/elastic/zypp/install_filebeat.rst
-
-
-
-#. Download the pre-configured Filebeat configuration file used to forward the Wazuh alerts to Elasticsearch:
-
-    .. code-block:: console
-
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/open-distro/filebeat/7.x/filebeat.yml
-
-#. Download the alerts template for Elasticsearch:
-
-    .. include:: ../../_templates/installations/elastic/common/load_filebeat_template.rst
-
-
-#. Download the Wazuh module for Filebeat:
-
-    .. code-block:: console
-
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
-
-#. Edit the file ``/etc/filebeat/filebeat.yml``:
+#. Edit the file ``/usr/share/wazuh-manager/filebeat/filebeat.yml``:
 
     .. include:: ../../_templates/installations/elastic/common/configure_filebeat.rst
 
-#. Configure Filebeat certificates:
-
-    .. include:: ../../_templates/installations/elastic/common/copy_certificates_filebeat.rst
-
-#. Enable and start the Filebeat service:
-
-    .. include:: ../../_templates/installations/elastic/common/enable_filebeat.rst
-
-To ensure that Filebeat has been successfully installed, run the following command:
+To ensure that the Wazuh forwarder has been successfully installed and configured, run the following command:
 
     .. code-block:: console
 
-      # filebeat test output
+      # /usr/share/wazuh-manager/filebeat test output
 
 An example response should look as follows:
 
@@ -173,7 +115,7 @@ An example response should look as follows:
                 talk to server... OK
                 version: 7.10.0
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
+To uninstall the Wazuh manager, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_open_distro>`.
 
 Next steps
 ----------
