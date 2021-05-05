@@ -31,8 +31,8 @@ Sign up
 
 To sign up, all you need is an email address:
 
-1. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
-2. Enter your email address and password, or sign up with a Google account.
+#. Go to our `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ page.
+#. Enter your email address and password, or sign up with a Google account.
 
 You are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 
@@ -41,9 +41,9 @@ Create environment
 
 Follow these steps to quickly set up and run your environment:
 
-1. From the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_, click **Start your free trial**.
+#. From the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_, click **Start your free trial**.
 
-2. Configure your environment:
+#. Configure your environment:
 
    1. Give your environment a name.
 
@@ -55,7 +55,7 @@ Follow these steps to quickly set up and run your environment:
 
    2. Choose the support plan that best suits your needs. 
 
-3. Click **View the summary** and then click **Create** to build your environment. This process might take a moment.
+#. Click **View the summary** and then click **Create** to build your environment. This process might take a moment.
 
 Once the environment is ready, you can access the Wazuh WUI and register the agents.
 
@@ -71,10 +71,10 @@ The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you h
 
 Follow these steps to access Wazuh WUI:
 
-1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
-2. On the **Environments** page, select the environment you want to access.
-3. Click **Open Wazuh** to open Wazuh WUI:
-4. Choose from one of these methods to log in:
+#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
+#. On the **Environments** page, select the environment you want to access.
+#. Click **Open Wazuh** to open Wazuh WUI:
+#. Choose from one of these methods to log in:
   
   - Log in with the default credentials. You can download them by clicking **Default credentials** on the Environments page. Then, use the `Wazuh WUI - Username` and `Wazuh WUI - Password` to log in.
   - If Single sign-on (SSO) is enabled, use your own account.
@@ -96,13 +96,13 @@ To start using Wazuh, you need to install a Wazuh agent on your endpoint and reg
 
 To register an agent, follow these steps:
 
-1. Log into the Wazuh WUI.
+#. Log into the Wazuh WUI.
 
-2. Click **Wazuh** and then **Agents**.
+#. Click **Wazuh** and then **Agents**.
 
-3. Click **Deploy a new agent**.
+#. Click **Deploy a new agent**.
 
-4. Follow the steps described in Wazuh WUI.
+#. Follow the steps described in Wazuh WUI.
 
 .. note::
 
@@ -115,4 +115,7 @@ If you have any doubt about the Wazuh cloud, please visit the :ref:`Cloud servic
       :hidden:
       :maxdepth: 1
 
+      Sign up for a trial <https://documentation.wazuh.com/current/cloud-service/getting-started/index.html#cloud_getting_started_sign_up>
+      Access Wazuh WUI <https://documentation.wazuh.com/current/cloud-service/getting-started/index.html#cloud_getting_started_wui_access>
+      Register agents <https://documentation.wazuh.com/current/cloud-service/getting-started/index.html#register-agents>
       starting-faq
