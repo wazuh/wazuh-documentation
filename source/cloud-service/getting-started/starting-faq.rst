@@ -3,7 +3,7 @@
 .. _cloud_getting_started_starting_faq:
 
 Cloud service FAQ
-===================
+=================
 
 .. meta::
   :description: Learn about some FAQ while getting started. 
