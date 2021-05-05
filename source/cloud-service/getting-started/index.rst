@@ -67,7 +67,7 @@ Access Wazuh WUI
 .. meta::
   :description: Learn about how to access Wazuh WUI. 
 
-The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to the tools for mining and visualizing events, giving you comprehensive insight into your monitored systems.
+The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to the tools for mining and visualizing events, giving you a comprehensive insight into your monitored systems.
 
 Follow these steps to access Wazuh WUI:
 
