@@ -80,7 +80,7 @@ Follow these steps to access Wazuh WUI:
   - If Single sign-on (SSO) is enabled, use your own account.
   - You can also log in with any user you already created in Wazuh WUI already.
 
-It is highly recommended for security reasons to change the default password and crate your own users. 
+It is highly recommended for security reasons to change the default password and create your own users. 
 
 .. note:: You can access the Wazuh WUI directly using the URL ``https://<cloud_id>.cloud.wazuh.com``, where ``<cloud_id>`` is your Cloud ID.
 
