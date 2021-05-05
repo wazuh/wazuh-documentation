@@ -57,7 +57,7 @@ To enable multi-factor authentication:
   If your device is lost or stolen, contact support.
 
 Configure your login method
-------------------------
+---------------------------
 
 You can log in to your Wazuh Cloud Console using password-based login or Google Sign-In.
 
