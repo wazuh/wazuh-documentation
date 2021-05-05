@@ -37,6 +37,5 @@ Follow the installation workflow to complete the Wazuh components installation. 
   :maxdepth: 1
 
   wazuh-indexer
-  wazuh-server
+  wazuh-manager
   wazuh-wui
-  wazuh-agent/index
