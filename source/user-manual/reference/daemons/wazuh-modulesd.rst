@@ -60,8 +60,8 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Monitor module
 
-  The monitor module, looks at agent connectivity, In addition, it rotates and compresses iternal logs daily or when they reach a certain configurable size.
-  As well, within this module works the ability to send daily and automatic reports, based on specific alerts captured or more general alerts.
+  The monitor module, looks at agent connectivity, In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
+  Also, this module is responsible to send daily and automatic reports based on general/specific alerts captured.
 
 wazuh-modulesd options
 ----------------------
