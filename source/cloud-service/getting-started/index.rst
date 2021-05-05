@@ -47,7 +47,7 @@ Follow these steps to quickly set up and run your environment:
 
    1. Give your environment a name.
 
-   2. Choose a :ref:`tier <cloud_glossary_tier>` to define the size in bytes of the indexed events. You can use this `estimation tool <https://wazuh.com/cloud/#pricing>`_ to calcultate the Wazuh Cloud data tier.
+   2. Choose a :ref:`tier <cloud_glossary_tier>` to define the size in bytes of the indexed events. You can use this `estimation tool <https://wazuh.com/cloud/#pricing>`_ to calculate the Wazuh Cloud data tier.
    
    .. note:: During the 14-day trial period, the tier limit is of 100GB. Then, after your first payment, the full tier becomes unlocked. If all you want to do is try out Wazuh, the trial includes more than enough to get you started.
 
