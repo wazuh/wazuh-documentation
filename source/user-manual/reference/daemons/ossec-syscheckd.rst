@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Find out more about how to configure the syscheckd daemon with Wazuh.
 
 .. _ossec-syscheckd:
 
