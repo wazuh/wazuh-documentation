@@ -1,4 +1,6 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+.. meta::
+  :description: Check out this use case on how to update an agent remotely with Wazuh.
 
 .. _upgrading-agent:
 
