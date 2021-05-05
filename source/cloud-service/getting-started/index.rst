@@ -8,11 +8,11 @@
 Getting started
 ===============
 
-To get started with Wazuh Cloud you need to set up an environment. This is an automated process in which installing the Wazuh components, defining scalability, and updating the solution do not require any manual configuration. 
+To get started with Wazuh Cloud you need to create a Wazuh Cloud account and set up the environment that contains all the Wazuh components ready for you to use. Creating an environment is a streamlined process in which installing the Wazuh components, defining scalability, and updating the solution is all handled by Wazuh. 
+To start using Wazuh Cloud, you need to access the Wazuh WUI and simply deploy the Wazuh agent to your endpoints.
 
-Wazuh provides a free trial for you to create a cloud environment and access the Wazuh solution and its capabilities.
+Wazuh provides a free trial that allows you to create a cloud environment and access the Wazuh solution and its capabilities.
 
-To learn how to create and manage a Wazuh Cloud account, see the sections below.
 
 .. _cloud_getting_started_sign_up:
 
