@@ -31,7 +31,7 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
   :class: output
 
   Usage: ./generate_debian_package.sh [OPTIONS]
-  
+
       -b, --branch <branch>      [Required] Select Git branch []. By default: master.
       -t, --target <target>      [Required] Target package to build: manager or agent.
       -a, --architecture <arch>  [Optional] Target architecture of the package [amd64/i386/ppc64le/arm64/armhf].
@@ -45,6 +45,7 @@ Execute the ``generate_debian_package.sh`` script, with the different options yo
       --sources <path>           [Optional] Absolute path containing Wazuh source code. This option will use local source code instead of downloading it from GitHub.
       --packages-branch <branch> [Optional] Select Git branch or tag from wazuh-packages repository. e.g master.
       --dev                      [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
+      --future                   [Optional] Build test future package x.30.0 Used for development purposes.
       -h, --help                Show this help.
 
 Below, you will find some examples of how to build a DEB package.
