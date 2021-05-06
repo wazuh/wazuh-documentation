@@ -31,7 +31,7 @@ Execute the ``generate_rpm_package.sh`` script, with the different options you d
   :class: output
 
   Usage: ./generate_rpm_package.sh [OPTIONS]
-  
+
       -b, --branch <branch>        [Required] Select Git branch or tag e.g. master
       -t, --target <target>        [Required] Target package to build [manager/api/agent].
       -a, --architecture <arch>    [Optional] Target architecture of the package [x86_64/i386/ppc64le/aarch64/armv7hl].
@@ -42,11 +42,12 @@ Execute the ``generate_rpm_package.sh`` script, with the different options you d
       -p, --path <path>            [Optional] Installation path for the package. By default: /var/ossec.
       -d, --debug                  [Optional] Build the binaries with debug symbols and create debuginfo packages. By default: no.
       -c, --checksum <path>        [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
-      --dont-build-docker      [Optional] Locally built docker image will be used instead of generating a new one.
+      --dont-build-docker          [Optional] Locally built docker image will be used instead of generating a new one.
       --sources <path>             [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub.
       --packages-branch <branch>   [Optional] Select Git branch or tag from wazuh-packages repository. e.g master
       --dev                        [Optional] Use the SPECS files stored in the host instead of downloading them from GitHub.
       --src                        [Optional] Generate the source package in the destination directory.
+      --future                     [Optional] Build test future package x.30.0 Used for development purposes.
       -h, --help                   Show this help.
 
 Below, you will find some examples of how to build an RPM package.
