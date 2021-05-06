@@ -144,8 +144,8 @@ only-future-events
 
 It allows to read new log content since ``wazuh-logcollector`` was stopped.
 
-By default, when ``wazuh-logcollector`` starts it will only read all log content since it was started.
-Set it to no to collect events generated since ``wazuh-logcollector`` was stopped.
+By default, when ``wazuh-logcollector`` is started it reads the logs generated since that moment.
+Set it to ``no`` to collect events generated since ``wazuh-logcollector`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
