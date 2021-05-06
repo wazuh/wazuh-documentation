@@ -142,10 +142,10 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-It allows to read new log content since ``ossec-logcollector`` was stopped.
+It allows to read new log content since ``wazuh-logcollector`` was stopped.
 
-By default, when ``ossec-logcollector`` starts it will only read all log content since it was started.
-Set it to no to collect events generated since ``ossec-logcollector`` was stopped.
+By default, when ``wazuh-logcollector`` is started it reads the logs generated since that moment.
+Set it to ``no`` to collect events generated since ``wazuh-logcollector`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
@@ -169,7 +169,7 @@ The attributes below are optional.
 +-------------+---------------------------------------+--------------+---------------+
 
 .. note::
-  If the log rotates while ``ossec-logcollector`` was stopped and ``only-future-events`` was set to ``no``, it will start reading from the beginning of the log. 
+  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
 
 
 query
