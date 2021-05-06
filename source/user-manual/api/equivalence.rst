@@ -512,7 +512,9 @@ Cache
 +--------------------------------------------------+------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------+
 | Action                                           | API 3.x usage                      | API 4.3 usage                                                                                | Changes                                       |
 +==================================================+====================================+==============================================================================================+===============================================+
-| Get MITRE techniques information from database   | ``GET /mitre``                     | :api-ref:`GET /mitre/techniques <operation/api.controllers.mitre_controller.get_techniques>` | Added new endpoints to get MITRE information. |
+|                                                  |                                    | :api-ref:`GET /mitre/techniques <operation/api.controllers.mitre_controller.get_techniques>` |                                               |
+| Get MITRE information from database              | ``GET /mitre``                     |                                                                                              | Added new endpoints to get MITRE information. |
+|                                                  |                                    | :api-ref:`GET /mitre/tactics <operation/api.controllers.mitre_controller.get_tactics>`       |                                               |
 +--------------------------------------------------+------------------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------+
 
 
