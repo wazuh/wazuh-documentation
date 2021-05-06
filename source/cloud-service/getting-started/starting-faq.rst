@@ -79,4 +79,4 @@ Yes, you can cancel at any time with no penalty. You can keep using your environ
 How can I get help?
 -------------------
 
-You can contact the Wazuh team anytime through the Help section on your Wazuh Cloud Console. You can also fill out `this form <https://wazuh.com/cloud/#subscription>`_ to get help from the Wazuh team.
+You can contact the Wazuh team anytime through the **Help** section on your Wazuh Cloud Console. You can also fill out `this form <https://wazuh.com/cloud/#subscription>`_ to get help from the Wazuh team.
