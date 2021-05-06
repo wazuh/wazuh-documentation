@@ -34,10 +34,12 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -b, --branch <branch>               Select Git branch or tag e.g. |WAZUH_LATEST_MINOR|
+      -r, --revision <revision>           Define package revision text/number. By default: 1
       -e, --environment                   Install all the packages necessaries to build the RPM package
       -s, --store  <rpm_directory>        Directory to store the resulting RPM package. By default: /tmp/build
       -p, --install-path <rpm_home>       Installation path for the package. By default: /var
       -c, --checksum <path>               Compute the SHA512 checksum of the RPM package.
+      --chroot                            Create a chroot jail to build the package in /usr/pkg
       -h, --help                          Shows this help
 
 First, install the needed dependencies:
