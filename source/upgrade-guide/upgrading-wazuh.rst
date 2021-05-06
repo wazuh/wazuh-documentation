@@ -12,45 +12,104 @@ This section describes how to upgrade the Wazuh manager to the latest available 
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
-To upgrade the Wazuh manager, choose the appropriate tab for the desired package manager:
 
-.. tabs::
+#. Add the Wazuh repository:
 
-  .. group-tab:: Yum
 
-    .. include:: ../_templates/installations/basic/wazuh/yum/add_repository_aio.rst
+    .. tabs::
 
-    3. Clean the YUM cache:
 
-      .. code-block:: console
+      .. group-tab:: Yum
 
-        # yum clean all
+
+        .. include:: ../_templates/installations/wazuh/yum/add_repository.rst
+
+
+
+      .. group-tab:: APT
+
+
+        .. include:: ../_templates/installations/wazuh/deb/add_repository.rst
+
+
+
+      .. group-tab:: ZYpp
+
+
+        .. include:: ../_templates/installations/wazuh/zypp/add_repository.rst    
+
+
+#. Stop the Wazuh manager:
+
+    .. tabs::
+
+ 
+      .. group-tab:: Systemd
+
+
+        .. code-block:: console
+
+          # systemctl stop wazuh-manager
+
+
+      .. group-tab:: SysV Init
+
+        .. code-block:: console
+
+          # service wazuh-manager stop
+
+
+#. Upgrade the Wazuh manager to the latest version:
+
+
+    .. tabs::
+
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum upgrade wazuh-manager
+
+
+
+      .. group-tab:: APT
+
+
+          .. code-block:: console
+
+              # apt-get install wazuh-manager
+
+
+
+      .. group-tab:: ZYpp
+
+
+          .. code-block:: console
+
+              # zypper update wazuh-manager
     
-    4. Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
+#. Restart the Wazuh manager:
+    
+   .. include:: ../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-          # yum upgrade wazuh-manager
 
-  .. group-tab:: APT
 
-    .. include:: ../_templates/installations/basic/wazuh/deb/add_repository_aio.rst
 
-    4. Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
+             
 
-          # apt-get install wazuh-manager
 
-  .. group-tab:: ZYpp
 
-    .. include:: ../_templates/installations/basic/wazuh/zypp/add_repository_aio.rst
 
-    3. Upgrade the Wazuh manager to the latest version:
 
-      .. code-block:: console
 
-          # zypper update wazuh-manager
+
+
+
+
+
 
 
 .. note::
