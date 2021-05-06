@@ -94,7 +94,7 @@ Below we have some Windows wildcard examples.
   * The maximum amount of files monitored at same time is limited to 1000.
 
 .. warning::
-  * If using ``oslog`` as ``log_format``, then ``location`` must be set to ``oslog`` as well.
+  * If using ``macos`` as ``log_format``, then ``location`` must be set to ``macos`` as well.
 
 .. _command:
 
@@ -180,7 +180,7 @@ The attributes below are optional.
 query
 ^^^^^
 
-This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS (``oslog``) logs that Wazuh will process. 
+This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process. 
 
 To filter *Windows* ``eventchannel`` events, *XPATH* format is used to make the queries following the event schema.
 
@@ -194,15 +194,15 @@ Example:
     <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
   </localfile>
 
-To filter *macOS* ULS (``oslog``) logs, *Predicates* format is used to make the queries.
+To filter *macOS* ULS logs (``macos``), *Predicates* format is used to make the queries.
 
 Example:
 
 .. code-block:: xml
 
   <localfile>
-    <location>oslog</location>
-    <log_format>oslog</log_format>
+    <location>macos</location>
+    <log_format>macos</log_format>
     <query type="log,trace" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
   </localfile>
 
@@ -211,10 +211,10 @@ Example:
 +--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | Windows eventchannel | XPATH query format, follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
 |                    +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-|                    | macOS ULS (oslog)    | Predicate query format, see :ref:`How to collect macOS ULS (oslog) logs <how-to-collect-macoslogs>`                                |
+|                    | macOS ULS            | Predicate query format, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`                                        |
 +--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-The attributes below are optional and only valid for macOS ULS (``oslog``).
+The attributes below are optional and only valid for macOS ULS (``macos``).
 
 +-------------+---------------------------------------+--------------+----------------+
 | Attribute   |              Description              | Value range  | Default value  |
@@ -329,7 +329,7 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | oslog              | Used for macOS ULS logs, returns the logs in syslog format.                                      |
+|                    | macos              | Used for macOS ULS logs, returns the logs in syslog format.                                      |
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
@@ -379,7 +379,7 @@ Set the format of the log to be read. **field is required**
 
 .. warning::
 
-    Only one configuration block with ``log_format`` set as ``oslog`` is allowed.
+    Only one configuration block with ``log_format`` set as ``macos`` is allowed.
 
 .. warning::
 
@@ -650,7 +650,7 @@ MacOS configuration:
 
   <!-- For monitoring macOS ULS Logs -->
   <localfile>
-    <location>oslog</location>
-    <log_format>oslog</log_format>
+    <location>macos</location>
+    <log_format>macos</log_format>
     <query type="trace,log,activity" level="info">process == "sshd" OR message CONTAINS "invalid"</query>
   </localfile>

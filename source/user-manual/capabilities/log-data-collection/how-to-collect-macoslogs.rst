@@ -22,8 +22,8 @@ Wazuh interfaces with the ``log stream`` tool to acquire the logs from the macOS
   .. code-block:: xml
 
     <localfile>
-      <location>oslog</location>
-      <log_format>oslog</log_format>
+      <location>macos</location>
+      <log_format>macos</log_format>
       <query type="activity,trace" level="info">process == "sshd" OR message CONTAINS "invalid"</query>
     </localfile>
 

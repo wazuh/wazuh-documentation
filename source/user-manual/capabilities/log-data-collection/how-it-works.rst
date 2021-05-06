@@ -74,8 +74,8 @@ Wazuh can monitor logs from the macOS Unified Logging System.
   .. code-block:: xml
 
     <localfile>
-      <location>oslog</location>
-      <log_format>oslog</log_format>
+      <location>macos</location>
+      <log_format>macos</log_format>
       <query type="log,activity" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
     </localfile>
 
