@@ -8,8 +8,6 @@ Billing FAQ
 .. meta::
   :description: Some Frequently Asked Questions about billing. 
 
-
-
 - `When is my credit card charged?`_
 
 - `Is my credit card information safe?`_
