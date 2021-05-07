@@ -20,7 +20,7 @@ Native support for users and roles
 
 The cloud-delivered visualization WUI allows you to add users, create roles, and mapping roles to users.
 
-Follow the these steps to create an internal user with read access as an example:
+Follow these steps to create an internal user with read access as an example:
 
 1. :ref:`Log into your WUI<cloud_getting_started_wui_access>` as administrator.
 
