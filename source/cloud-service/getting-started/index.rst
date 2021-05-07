@@ -8,10 +8,8 @@
 Getting started
 ===============
 
-To get started with Wazuh Cloud you need to create a Wazuh Cloud account and set up the environment that contains all the Wazuh components ready for you to use. Creating an environment is a streamlined process in which installing the Wazuh components, defining scalability, and updating the solution is all handled by Wazuh. 
+To get started with Wazuh Cloud, you need to create a Wazuh Cloud account and set up the environment that contains all the Wazuh components ready for you to use. Creating an environment is a streamlined process in which installing the Wazuh components, defining scalability, and updating the solution is all handled by Wazuh. 
 To start using Wazuh Cloud, you need to access the Wazuh WUI and simply deploy the Wazuh agent to your endpoints.
-
-Wazuh provides a free trial that allows you to create a cloud environment and access the Wazuh solution and its capabilities.
 
 
 .. _cloud_getting_started_sign_up:
@@ -109,7 +107,7 @@ To register an agent, follow these steps:
    Agents must use **TCP** to communicate with your environment.
   
 
-If you have any doubt about the Wazuh cloud, please visit the :ref:`Cloud service FAQ <cloud_getting_started_starting_faq>`.
+If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ <cloud_getting_started_starting_faq>`.
 	   
    .. toctree::
       :hidden:
