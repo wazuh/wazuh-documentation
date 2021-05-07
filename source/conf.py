@@ -477,7 +477,7 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
     "|WAZUH_REVISION_HPUX|" : "1",
-    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "2",
     "|WAZUH_REVISION_WINDOWS|" : "1",
     "|WAZUH_REVISION_AIX|" : "1",
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
