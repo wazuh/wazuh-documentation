@@ -36,12 +36,9 @@ The Personal Access Tokens (PATs) are an alternative to using passwords for auth
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Next will see the options we have to configure for the Wazuh integration.
+Next, we will see the options we have to configure for the Wazuh integration.
 
-github configuration
-^^^^^^^^^^^^^^^^^^^^
-
-Proceed to configure the ``github`` module in the Wazuh manager. We will use the data that we took previously as the **organization name and the PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub Audit-log. In this case, we will search only the type of ``git`` events with an interval of ``10m``. Those logs will be only those that were created after the Wazuh modules were started and that does not run on start:
+Proceed to configure the ``github`` module in the Wazuh manager. We will use the data that we took previously as the **organization name** and the **PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub audit-log. In this case, we will search only the type of ``git`` events within an interval of ``10m``. Those logs will be only those that were created after the module was started:
 
 .. code-block:: xml
 
@@ -56,14 +53,11 @@ Proceed to configure the ``github`` module in the Wazuh manager. We will use the
             <api_token>insert_personal_access_token</api_token>
         </api_auth>
         <api_parameters>
-            <event_type>all</event_type>
+            <event_type>git</event_type>
         </api_parameters>
     </github>
 
-You can see the module reference :ref:`here <github-module>`.
-
-GitHub Audit Log use case
--------------------------
+Module reference can be found :ref:`here <github-module>`.
 
 Using the configuration mentioned above, we will see an example of monitoring GitHub activity.
 

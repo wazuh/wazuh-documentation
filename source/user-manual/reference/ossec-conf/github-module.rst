@@ -7,6 +7,10 @@ github
 
 .. versionadded:: 4.3.0
 
+.. note::
+
+    This module only works on Windows, Linux and MacOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
+
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -61,7 +65,7 @@ enabled
 Enabled the GitHub wodle.
 
 +--------------------+-----------------------------+
-| **Default value**  | no                          |
+| **Default value**  | yes                         |
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
@@ -80,9 +84,9 @@ Run evaluation immediately when service is started.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to no to collect events generated since Wazuh manager was stopped.
+Set it to **no** to collect events generated since Wazuh manager was stopped.
 
-By default, when Wazuh starts it will only read all log content from GitHub since the manager started.
+By default, when Wazuh starts it will read all log content from GitHub.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -104,7 +108,7 @@ Interval between Wazuh wodle executions.
 time_delay
 ^^^^^^^^^^
 
-Each scan will monitor until that time_delay backwards, by default it is 1 second.
+Each scan will monitor until that delay backwards, by default it is 1 second.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1s                                                                                                                                      |
@@ -142,7 +146,7 @@ Name of your organization in GitHub.
 api_auth\\api_token
 ^^^^^^^^^^^^^^^^^^^
 
-You should create a personal access token to authenticate with the GitHub API.
+Personal access token to authenticate with the GitHub API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -194,8 +198,8 @@ Example of configuration
         <time_delay>1s</time_delay>
         <only_future_events>no</only_future_events>
         <api_auth>
-            <org_name>insert_organization_name</org_name>
-            <api_token>insert_personal_access_token</api_token>
+            <org_name>dummy</org_name>
+            <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
         </api_auth>
         <api_parameters>
             <event_type>all</event_type>
@@ -214,12 +218,12 @@ Example of multiple organizations
         <time_delay>10s</time_delay>
         <only_future_events>yes</only_future_events>
         <api_auth>
-            <org_name>insert_organization_name_1</org_name>
-            <api_token>insert_personal_access_token_1</api_token>
+            <org_name>dummy1</org_name>
+            <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
         </api_auth>
         <api_auth>
-            <org_name>insert_organization_name_2</org_name>
-            <api_token>insert_personal_access_token_2</api_token>
+            <org_name>dummy2</org_name>
+            <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
         </api_auth>
         <api_parameters>
             <event_type>git</event_type>
