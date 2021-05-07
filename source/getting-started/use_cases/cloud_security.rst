@@ -259,13 +259,16 @@ The following example shows an alert generated when GitHub creates a Dependabot 
         "name":"json"
     },
     "data": {
-        "action":"repository_vulnerability_alert.create",
-        "actor":"member_name",
-        "@timestamp":"1619031743300.000000",
-        "org":"org_name",
-        "created_at":"1619031743300.000000",
-        "user":"User",
-        "_document_id":"9Z1pUC7N0GBf4ZzZFQEXpA"
+        "github": {
+            "action":"repository_vulnerability_alert.create",
+            "actor":"member_name",
+            "@timestamp":"1619031743300.000000",
+            "org":"org_name",
+            "created_at":"1619031743300.000000",
+            "user":"User",
+            "_document_id":"9Z1pUC7N0GBf4ZzZFQEXpA",
+            "source":"github"
+        }
     },
     "location":"github"
   }

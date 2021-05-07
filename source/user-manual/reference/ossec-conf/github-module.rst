@@ -84,12 +84,12 @@ Run evaluation immediately when service is started.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-Set it to **no** to collect events generated since Wazuh manager was stopped.
+Set it to **yes** to collect events generated since Wazuh manager was started.
 
-By default, when Wazuh starts it will read all log content from GitHub.
+By default, when Wazuh starts it will only read all log content from GitHub since the manager started.
 
 +--------------------+---------+
-| **Default value**  | no      |
+| **Default value**  | yes     |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -196,7 +196,7 @@ Example of configuration
         <run_on_start>yes</run_on_start>
         <interval>10m</interval>
         <time_delay>1s</time_delay>
-        <only_future_events>no</only_future_events>
+        <only_future_events>yes</only_future_events>
         <api_auth>
             <org_name>dummy</org_name>
             <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
@@ -216,7 +216,7 @@ Example of multiple organizations
         <run_on_start>yes</run_on_start>
         <interval>1h</interval>
         <time_delay>10s</time_delay>
-        <only_future_events>yes</only_future_events>
+        <only_future_events>no</only_future_events>
         <api_auth>
             <org_name>dummy1</org_name>
             <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
