@@ -9,7 +9,7 @@ The Wazuh security platform provides threat detection, configuration compliance,
 
 - **Endpoint level**: monitoring cloud instances or virtual machines using the lightweight :ref:`Wazuh security agent <wazuh_agent>`.
 
-- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure and Google Cloud Platform are supported.
+- **Cloud infrastructure level**: monitoring cloud services and activity by collecting and analyzing data from the provider API. Amazon AWS, Microsoft Azure, Google Cloud Platform and GitHub are supported.
 
 Amazon Web Services
 -------------------
@@ -225,3 +225,52 @@ The following example shows an alert generated when a known bad actor (a source 
   }
 
 More information on how to use Wazuh to monitor the Google cloud platform can be found in our :ref:`documentation <gcp>`. 
+
+GitHub
+------
+
+Wazuh monitors GitHub by extracting events from audit logs, which is used as a middleware for event ingestion and delivery. This integration helps detect threats targeting your GitHub organizations.
+
+The following example shows an alert generated when GitHub creates a Dependabot alert for a repository that uses a vulnerable dependency:
+
+.. code-block:: json
+  :emphasize-lines: 4,23
+  :class: output
+
+  {
+    "timestamp":"2021-04-29T16:40:33.955+0000",
+    "rule": {
+        "level":12,
+        "description":"GitHub Repository vulnerability alert create.",
+        "id":"91362",
+        "firedtimes":8,
+        "mail":false,
+        "groups": ["git_repository_vulnerability_alert"]
+    },
+    "agent": {
+        "id":"000",
+        "name":"ubuntu"
+    },
+    "manager": {
+        "name":"ubuntu-bionic"
+    },
+    "id":"1619714433.146108",
+    "decoder": {
+        "name":"json"
+    },
+    "data": {
+        "github": {
+            "action":"repository_vulnerability_alert.create",
+            "actor":"member_name",
+            "@timestamp":"1619031743300.000000",
+            "org":"org_name",
+            "created_at":"1619031743300.000000",
+            "user":"User",
+            "_document_id":"9Z1pUC7N0GBf4ZzZFQEXpA",
+            "source":"github"
+        }
+    },
+    "location":"github"
+  }
+
+More information on how to use Wazuh to monitor GitHub can be found in our :ref:`documentation <github>`.
