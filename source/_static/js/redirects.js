@@ -66,6 +66,7 @@ newUrls['4.2'] = [
   '/cloud-service/account-billing/update-billing.html',
   '/cloud-service/apis/index.html',
   '/cloud-service/apis/reference.html',
+  '/cloud-service/cold-storage/index.html',
   '/cloud-service/getting-started/index.html',
   '/cloud-service/getting-started/starting-faq.html',
   '/cloud-service/your-environment/index.html',
