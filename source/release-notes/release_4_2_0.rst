@@ -46,9 +46,9 @@ Highlights
 
       Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent and get enhanced insight into the CVE, giving you easy access to data such as package name, package version, package architecture, and the CVE ID that affects said package. 
 
-- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Endpoint for logcollector stats:
+- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Endpoint for logcollector statistics:
 
-      Wazuh adds a new endpoint to get agents’ logcollector statistics from different components, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files bring this information using their own socket interface and fetch the data from a remote component.  
+      Wazuh adds a new endpoint to get statistics from different components such as logcollector, allowing you to retrieve information from both managers and agents. With this enhancement, Wazuh components that generate statistics files bring this information using their own socket interface and fetch the data from a remote component.        
  
 - `#6366 <https://github.com/wazuh/wazuh/issues/6366>`_ Improved ``DELETE /agents`` endpoint:
 
@@ -152,7 +152,7 @@ This release includes new features or enhancements.
 
 **API**
   
-- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Wazuh adds a new endpoint to get agents’ logcollector statistics from different components. 
+- `#7200 <https://github.com/wazuh/wazuh/pull/7200>`_ Wazuh adds a new endpoint to get agent statistics from different components. 
 - `#7588 <https://github.com/wazuh/wazuh/pull/7588>`_ Wazuh adds a new endpoint to modify the user’s ``allow_run_as`` flag, allowing you to enable or disable the parameter.
 - `#7647 <https://github.com/wazuh/wazuh/pull/7647>`_ Wazuh adds a new endpoint to get CVE data on affected agents. With this new endpoint, you can query the vulnerability data of any agent.
 - `#7803 <https://github.com/wazuh/wazuh/pull/7803>`_ A new API configuration validator is now added to improve validation checking processes.
