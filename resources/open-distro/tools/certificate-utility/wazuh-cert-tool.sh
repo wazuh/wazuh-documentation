@@ -32,7 +32,7 @@ readInstances() {
 
 readFile() {
 
-    IFS=$'\r\n' GLOBIGNORE='*' command eval  'INSTANCES=($(cat instances.yml))'
+    IFS=$'\r\n' GLOBIGNORE='*' command eval  'INSTANCES=($(cat ~/instances.yml))'
     for i in "${!INSTANCES[@]}"; do
     if [[ "${INSTANCES[$i]}" == "${ELASTICINSTANCES}" ]]; then
         ELASTICLIMITT=${i}
@@ -120,9 +120,23 @@ generateCertificateconfiguration() {
 	EOF
 
     conf="$(awk '{sub("CN = cname", "CN = '${cname}'")}1' ~/certs/$cname.conf)"
-    echo "${conf}" > ~/certs/$cname.conf
-    conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
-    echo "${conf}" > ~/certs/$cname.conf       
+    echo "${conf}" > ~/certs/$cname.conf    
+
+    isIP=$(echo "${cip}" | grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$")
+    isDNS=$(echo ${cip} | grep -P "^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$" )
+
+    if [[ -n "${isIP}" ]]; then
+        conf="$(awk '{sub("IP.1 = cip", "IP.1 = '${cip}'")}1' ~/certs/$cname.conf)"
+        echo "${conf}" > ~/certs/$cname.conf    
+    elif [[ -n "${isDNS}" ]]; then
+        conf="$(awk '{sub("CN = cname", "CN =  '${cip}'")}1' ~/certs/$cname.conf)"
+        echo "${conf}" > ~/certs/$cname.conf     
+        conf="$(awk '{sub("IP.1 = cip", "DNS.1 = '${cip}'")}1' ~/certs/$cname.conf)"
+        echo "${conf}" > ~/certs/$cname.conf 
+    else
+        echo "Error. The given information does not match with an IP or a DNS"  
+        exit 1; 
+    fi   
 
 }
 
