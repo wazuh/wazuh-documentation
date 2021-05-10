@@ -34,22 +34,22 @@ Each environment is charged monthly, according to the environment's beginning da
 Is my credit card information safe?
 -----------------------------------
 
-Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_),  for safe storage.
+Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_,  for safe storage.
 
 Where can I see the next payment for an environment?
 ----------------------------------------------------
 
-Details about the next billing of the current environments are described in the Wazuh Cloud Console: *Accounts > Summary > Current billing cycle*.
+See the :ref:`See your billing cycle and history <cloud_billing_history>` section to get details about the next billing of the current environments.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
 
-See :ref:`billing history <cloud_billing_history>`.
+See the :ref:`See your billing cycle and history <cloud_billing_history>` section to learn how to download the overview of all invoices issued for your account.
 
 How can I configure who receives receipts and billing notifications?
 --------------------------------------------------------------------
 
-See :ref:`Update billing and operational contacts <cloud_account_billing_update_billing>`.
+See the :ref:`Update billing and operational contacts <cloud_account_billing_update_billing>` section to learn how to configure who receives receipts and billing notifications .
 
 
 What are the available payment methods on Wazuh Cloud?
