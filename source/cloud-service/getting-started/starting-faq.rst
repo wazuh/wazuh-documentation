@@ -22,6 +22,8 @@ Cloud service FAQ
 
 - `Where is Wazuh Cloud hosted?`_
 
+- `What is a tier?`_
+
 - `What happens if the tier limit is reached?`_
 
 - `Can I cancel at any time?`_  
@@ -65,6 +67,10 @@ Where is Wazuh Cloud hosted?
 
 Wazuh Cloud is hosted on Amazon Web Services (AWS).
 
+What is a tier?
+---------------
+
+See :ref:`tier <cloud_glossary_tier>` in the Glossary section.
 
 What happens if the tier limit is reached?
 ------------------------------------------
