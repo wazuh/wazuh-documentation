@@ -1,7 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about Wazuh local configuration and the labels section. Find out more about them and see a configuration example.
+  :description: Get to know more about the labels section of the OSSEC local configuration in this section of the Wazuh documentation. 
+
 
 .. _reference_ossec_labels:
 
