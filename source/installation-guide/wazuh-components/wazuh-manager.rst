@@ -12,13 +12,13 @@ This document will go through the installation of the Wazuh manager.
 
 .. note:: Root user privileges are required to run all the commands described below.
 
-Installing the Wazuh manager
-----------------------------
+Installing and configuring the Wazuh manager
+--------------------------------------------
 
 The Wazuh manager collects and analyzes data from the deployed Wazuh agents. The first step to set up Wazuh is adding the Wazuh's repository to the server, alternatively, all the available packages can be found :ref:`here <packages>`. 
 
 Adding the Wazuh repository
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
 
@@ -45,9 +45,9 @@ Adding the Wazuh repository
 
 
 Installing the Wazuh manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install the Wazuh manager package:
+Install the Wazuh manager package:
 
     .. tabs::
 
@@ -72,18 +72,62 @@ Installing the Wazuh manager
         .. include:: ../../_templates/installations/wazuh/zypp/install_wazuh_manager.rst
 
 
-#. Enable and start the Wazuh manager service:
+Choose the corresponding tab depending on the type of deployment:
 
-    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+.. tabs::
 
-#. Run the following command to check if the Wazuh manager is active: 
+  .. group-tab:: Single-node
 
-    .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+    Enable and start the Wazuh manager service:
+
+      .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+    Run the following command to check if the Wazuh manager is active: 
+
+      .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst      
+
+
+
+  .. group-tab:: Multi-node
+
+    Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is configured as a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or as a Wazuh worker node.
+
+    One server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` must be applied once, in the server chosen for this role. For all the other servers, the section ``Wazuh server worker node`` must be applied.
+
+    **Wazuh server master node**
+
+    #. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_master_node.rst
+
+
+    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
+
+        .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+    #. Run the following command to check if the Wazuh manager is active: 
+
+        .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
+    **Wazuh server worker nodes**
+
+    #. .. include:: ../../_templates/installations/wazuh/common/configure_wazuh_worker_node.rst
+
+
+    #. Once the ``/var/ossec/etc/ossec.conf`` configuration file is edited, enable and start the Wazuh manager service:
+
+        .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+    #. Run the following command to check if the Wazuh manager is active: 
+
+        .. include:: ../../_templates/installations/wazuh/common/check_wazuh_manager.rst
+
+    #. .. include:: ../../_templates/installations/wazuh/common/check_wazuh_cluster.rst
+
+
 
 .. _wazuh_server_single_node_filebeat:
 
 Configure the Wazuh forwarder
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Edit the file ``/usr/share/wazuh-manager/filebeat/filebeat.yml``:
 
