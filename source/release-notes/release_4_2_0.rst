@@ -295,6 +295,7 @@ Reference                                                         Description
 `#3152 <https://github.com/wazuh/wazuh-kibana-app/pull/3152>`_    Issue with deprecated endpoint for creating agent groups is now fixed.
 `#3163 <https://github.com/wazuh/wazuh-kibana-app/pull/3163>`_    Issue with checking process for TCP protocol in **Deploy a new agent** window is now fixed.
 `#3181 <https://github.com/wazuh/wazuh-kibana-app/pull/3181>`_    Issue with RBAC with agent group permissions is fixed. Now, when authorized agents are specified by their group instead of their IDs, you can successfully access the Security configuration assessment module, the Integrity monitoring module, and the Configuration window on the Agents page. 
+`#3232 <https://github.com/wazuh/wazuh-kibana-app/pull/3232>`_    The index pattern is now successfully created when performing the health check, preventing an API-conflict error during this process.
 ==============================================================    =============
 
 
