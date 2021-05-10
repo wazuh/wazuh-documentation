@@ -20,7 +20,6 @@ readInstances() {
 
     if [ -f ~/instances.yml ]; then
         echo "Configuration file found. Creating certificates..."
-        eval "mkdir ~/certs $debug"
     else
         echo "Error: no configuration file found."
         exit 1;
@@ -141,7 +140,7 @@ generateCertificateconfiguration() {
 }
 
 generateRootCAcertificate() {
-
+    echo "entro"
     eval "openssl req -x509 -new -nodes -newkey rsa:2048 -keyout ~/certs/root-ca.key -out ~/certs/root-ca.pem -batch -subj '/OU=Docu/O=Wazuh/L=California/' -days 3650 ${debug}"
 
 }
@@ -278,6 +277,8 @@ main() {
             esac
         done    
 
+        eval "mkdir ~/certs $debug"
+        
         if [ -n "${debugEnabled}" ]; then
             debug=""           
         fi
